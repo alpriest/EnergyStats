@@ -16,19 +16,19 @@ struct ReportViewModel: Sendable {
     init(from networkReport: ReportResponse) {
         currentSolarPower = networkReport.currentValue(for: .generation)
         currentBatteryLevel = networkReport.currentValue(for: .feedin)
-        gridImport = [PowerTime(date: Date(timeIntervalSince1970: 1662475043), value: 1.0),
-                      PowerTime(date: Date(timeIntervalSince1970: 1662475143), value: 1.3),
-                      PowerTime(date: Date(timeIntervalSince1970: 1662475243), value: 1.4),
-                      PowerTime(date: Date(timeIntervalSince1970: 1662475343), value: 1.2),
-                      PowerTime(date: Date(timeIntervalSince1970: 1662475443), value: 0.8),
-                      PowerTime(date: Date(timeIntervalSince1970: 1662475543), value: 0.4)
+        gridImport = [PowerTime(date: Date(timeIntervalSince1970: 1662415043), value: 1.0),
+                      PowerTime(date: Date(timeIntervalSince1970: 1662425143), value: 1.3),
+                      PowerTime(date: Date(timeIntervalSince1970: 1662435243), value: 1.4),
+                      PowerTime(date: Date(timeIntervalSince1970: 1662445343), value: 1.2),
+                      PowerTime(date: Date(timeIntervalSince1970: 1662455443), value: 0.8),
+                      PowerTime(date: Date(timeIntervalSince1970: 1662465543), value: 0.4)
         ]
-        gridExport = [PowerTime(date: Date(timeIntervalSince1970: 1662475043), value: 1.0),
-                      PowerTime(date: Date(timeIntervalSince1970: 1662475143), value: 1.3),
-                      PowerTime(date: Date(timeIntervalSince1970: 1662475243), value: 1.4),
-                      PowerTime(date: Date(timeIntervalSince1970: 1662475343), value: 1.2),
-                      PowerTime(date: Date(timeIntervalSince1970: 1662475443), value: 0.8),
-                      PowerTime(date: Date(timeIntervalSince1970: 1662475543), value: 0.4)
+        gridExport = [PowerTime(date: Date(timeIntervalSince1970: 1662415043), value: 1.0),
+                      PowerTime(date: Date(timeIntervalSince1970: 1662425143), value: 1.3),
+                      PowerTime(date: Date(timeIntervalSince1970: 1662435243), value: 1.4),
+                      PowerTime(date: Date(timeIntervalSince1970: 1662445343), value: 1.2),
+                      PowerTime(date: Date(timeIntervalSince1970: 1662455443), value: 0.8),
+                      PowerTime(date: Date(timeIntervalSince1970: 1662465543), value: 0.4)
         ]
     }
 }

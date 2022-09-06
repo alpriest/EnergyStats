@@ -11,7 +11,7 @@ struct ContentView: View {
     @ObservedObject var viewModel: ContentViewModel
 
     var body: some View {
-        VStack {
+        VStack(spacing: 44) {
             HStack {
                 if let report = viewModel.report {
                     VStack {
@@ -45,6 +45,7 @@ struct ContentView: View {
                     }
                 }
             }
+            .frame(height: 200)
 
             Spacer()
 

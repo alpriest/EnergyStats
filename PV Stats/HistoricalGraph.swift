@@ -20,6 +20,17 @@ struct HistoricalGraph: View {
                 )
             }
         }
+        .chartXAxis {
+            AxisMarks(values: .stride(by: .hour, count: 4)) { value in
+                if let date = value.as(Date.self) {
+                    AxisValueLabel {
+                        Text(date.formatted(.dateTime.hour()))
+                            .font(.system(size: 6))
+                            .fontWeight(date.currentHour() == Date().currentHour() ? .bold : .regular)
+                    }
+                }
+            }
+        }
     }
 }
 
