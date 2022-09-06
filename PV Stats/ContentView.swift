@@ -8,19 +8,52 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var viewModel: ContentViewModel
+
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            if let report = viewModel.report {
+                VStack {
+                    PowerGraph(current: report.currentSolarPower, maximum: 4.0)
+                    Text("Solar generation kWh")
+                        .font(.caption2)
+                }
+            }
+
+            if let battery = viewModel.battery {
+                VStack {
+                    CircularProgressView(progress: battery.chargeLevel)
+                    Text("Battery level")
+                }
+            }
+
+            Spacer()
+
+            HStack {
+                Text("Last updated ")
+                Text(viewModel.lastUpdated)
+            }
         }
         .padding()
+        .onAppear {
+            Task {
+                try await viewModel.fetch()
+            }
+        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(viewModel: ContentViewModel(MockNetworking()))
+    }
+}
+
+class MockNetworking: Networking {
+    func fetch() async throws -> (ReportResponse, BatteryResponse) {
+        let report = ReportResponse(result: [.init(variable: HistoryVariableKey.feedin(), data: [.init(index: 14, value: 1.5)])])
+        let battery = BatteryResponse(errno: 0, result: .init(soc: 56))
+
+        return (report, battery)
     }
 }

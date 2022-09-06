@@ -11,6 +11,16 @@
 		4140145028C70B3200EA5BA1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140144F28C70B3200EA5BA1 /* ContentView.swift */; };
 		4140145228C70B3200EA5BA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4140145128C70B3200EA5BA1 /* Assets.xcassets */; };
 		4140145528C70B3200EA5BA1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4140145428C70B3200EA5BA1 /* Preview Assets.xcassets */; };
+		4140145C28C70B4A00EA5BA1 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140145B28C70B4A00EA5BA1 /* ContentViewModel.swift */; };
+		4140145E28C70D1400EA5BA1 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140145D28C70D1400EA5BA1 /* Config.swift */; };
+		4140146028C70D4700EA5BA1 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140145F28C70D4700EA5BA1 /* Networking.swift */; };
+		4140146228C7146300EA5BA1 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146128C7146300EA5BA1 /* Auth.swift */; };
+		4140146528C714C000EA5BA1 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146428C714C000EA5BA1 /* Report.swift */; };
+		4140146928C7374400EA5BA1 /* ReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146828C7374400EA5BA1 /* ReportViewModel.swift */; };
+		4140146B28C7589800EA5BA1 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146A28C7589800EA5BA1 /* CircularProgressView.swift */; };
+		4140146D28C75C3B00EA5BA1 /* PowerGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146C28C75C3B00EA5BA1 /* PowerGraph.swift */; };
+		4140146F28C77A3100EA5BA1 /* BatteryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146E28C77A3100EA5BA1 /* BatteryResponse.swift */; };
+		4140147128C77AAA00EA5BA1 /* BatteryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140147028C77AAA00EA5BA1 /* BatteryViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +29,16 @@
 		4140144F28C70B3200EA5BA1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4140145128C70B3200EA5BA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4140145428C70B3200EA5BA1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		4140145B28C70B4A00EA5BA1 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		4140145D28C70D1400EA5BA1 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		4140145F28C70D4700EA5BA1 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		4140146128C7146300EA5BA1 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
+		4140146428C714C000EA5BA1 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
+		4140146828C7374400EA5BA1 /* ReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewModel.swift; sourceTree = "<group>"; };
+		4140146A28C7589800EA5BA1 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
+		4140146C28C75C3B00EA5BA1 /* PowerGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerGraph.swift; sourceTree = "<group>"; };
+		4140146E28C77A3100EA5BA1 /* BatteryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryResponse.swift; sourceTree = "<group>"; };
+		4140147028C77AAA00EA5BA1 /* BatteryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,10 +71,17 @@
 		4140144C28C70B3200EA5BA1 /* PV Stats */ = {
 			isa = PBXGroup;
 			children = (
-				4140144D28C70B3200EA5BA1 /* PV_StatsApp.swift */,
-				4140144F28C70B3200EA5BA1 /* ContentView.swift */,
 				4140145128C70B3200EA5BA1 /* Assets.xcassets */,
+				4140146A28C7589800EA5BA1 /* CircularProgressView.swift */,
+				4140145D28C70D1400EA5BA1 /* Config.swift */,
+				4140144F28C70B3200EA5BA1 /* ContentView.swift */,
+				4140145B28C70B4A00EA5BA1 /* ContentViewModel.swift */,
+				4140146728C7373A00EA5BA1 /* Models */,
+				4140145F28C70D4700EA5BA1 /* Networking.swift */,
+				4140146328C7146B00EA5BA1 /* NetworkModels */,
 				4140145328C70B3200EA5BA1 /* Preview Content */,
+				4140144D28C70B3200EA5BA1 /* PV_StatsApp.swift */,
+				4140146C28C75C3B00EA5BA1 /* PowerGraph.swift */,
 			);
 			path = "PV Stats";
 			sourceTree = "<group>";
@@ -65,6 +92,25 @@
 				4140145428C70B3200EA5BA1 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		4140146328C7146B00EA5BA1 /* NetworkModels */ = {
+			isa = PBXGroup;
+			children = (
+				4140146128C7146300EA5BA1 /* Auth.swift */,
+				4140146428C714C000EA5BA1 /* Report.swift */,
+				4140146E28C77A3100EA5BA1 /* BatteryResponse.swift */,
+			);
+			path = NetworkModels;
+			sourceTree = "<group>";
+		};
+		4140146728C7373A00EA5BA1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4140146828C7374400EA5BA1 /* ReportViewModel.swift */,
+				4140147028C77AAA00EA5BA1 /* BatteryViewModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,7 +184,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				4140145028C70B3200EA5BA1 /* ContentView.swift in Sources */,
+				4140146B28C7589800EA5BA1 /* CircularProgressView.swift in Sources */,
+				4140146028C70D4700EA5BA1 /* Networking.swift in Sources */,
+				4140146528C714C000EA5BA1 /* Report.swift in Sources */,
+				4140146D28C75C3B00EA5BA1 /* PowerGraph.swift in Sources */,
+				4140146928C7374400EA5BA1 /* ReportViewModel.swift in Sources */,
+				4140145E28C70D1400EA5BA1 /* Config.swift in Sources */,
 				4140144E28C70B3200EA5BA1 /* PV_StatsApp.swift in Sources */,
+				4140147128C77AAA00EA5BA1 /* BatteryViewModel.swift in Sources */,
+				4140145C28C70B4A00EA5BA1 /* ContentViewModel.swift in Sources */,
+				4140146228C7146300EA5BA1 /* Auth.swift in Sources */,
+				4140146F28C77A3100EA5BA1 /* BatteryResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
