@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BatteryViewModel {
+struct BatteryViewModel: Sendable {
     let chargeLevel: Double
 
     init(from batteryResponse: BatteryResponse) {

@@ -12,33 +12,53 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
-            if let report = viewModel.report {
-                VStack {
-                    PowerGraph(current: report.currentSolarPower, maximum: 4.0)
-                    Text("Solar generation kWh")
-                        .font(.caption2)
+            HStack {
+                if let report = viewModel.report {
+                    VStack {
+                        PowerGraph(current: report.currentSolarPower, maximum: 4.0)
+                        Text("Solar generation kWh")
+                            .font(.caption2)
+                    }
+                }
+
+                if let battery = viewModel.battery {
+                    VStack {
+                        CircularProgressView(progress: battery.chargeLevel)
+                        Text("Battery")
+                            .font(.caption2)
+                    }
                 }
             }
 
-            if let battery = viewModel.battery {
-                VStack {
-                    CircularProgressView(progress: battery.chargeLevel)
-                    Text("Battery level")
+            HStack {
+                if let report = viewModel.report {
+                    VStack {
+                        HistoricalGraph(data: report.gridImport)
+                        Text("Grid import kWh")
+                            .font(.caption2)
+                    }
+
+                    VStack {
+                        HistoricalGraph(data: report.gridExport)
+                        Text("Grid export kWh")
+                            .font(.caption2)
+                    }
                 }
             }
 
             Spacer()
 
             HStack {
-                Text("Last updated ")
+                Text("Last updated")
                 Text(viewModel.lastUpdated)
             }
         }
         .padding()
         .onAppear {
-            Task {
-                try await viewModel.fetch()
-            }
+            viewModel.start()
+        }
+        .onDisappear {
+            viewModel.stop()
         }
     }
 }
@@ -50,10 +70,11 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 class MockNetworking: Networking {
-    func fetch() async throws -> (ReportResponse, BatteryResponse) {
-        let report = ReportResponse(result: [.init(variable: HistoryVariableKey.feedin(), data: [.init(index: 14, value: 1.5)])])
-        let battery = BatteryResponse(errno: 0, result: .init(soc: 56))
+    func fetchReport() async throws -> ReportResponse {
+        ReportResponse(result: [.init(variable: HistoryVariableKey.feedin(), data: [.init(index: 14, value: 1.5)])])
+    }
 
-        return (report, battery)
+    func fetchBattery() async throws -> BatteryResponse {
+        BatteryResponse(errno: 0, result: .init(soc: 56))
     }
 }

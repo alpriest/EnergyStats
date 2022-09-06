@@ -14,7 +14,8 @@ extension URL {
 }
 
 protocol Networking {
-    func fetch() async throws -> (ReportResponse, BatteryResponse)
+    func fetchReport() async throws -> ReportResponse
+    func fetchBattery() async throws -> BatteryResponse
 }
 
 class Network: Networking {
@@ -45,18 +46,7 @@ class Network: Networking {
         }
     }
 
-    func fetch() async throws -> (ReportResponse, BatteryResponse) {
-        if token == nil {
-            token = try await fetchToken()
-        }
-
-        async let report = await fetchReport()
-        async let battery = try await fetchBattery()
-
-        return try await (report, battery)
-    }
-
-    private func fetchReport() async throws -> ReportResponse {
+    func fetchReport() async throws -> ReportResponse {
         if token == nil {
             token = try await fetchToken()
         }
@@ -70,7 +60,7 @@ class Network: Networking {
         return try JSONDecoder().decode(ReportResponse.self, from: data)
     }
 
-    private func fetchBattery() async throws -> BatteryResponse {
+    func fetchBattery() async throws -> BatteryResponse {
         if token == nil {
             token = try await fetchToken()
         }

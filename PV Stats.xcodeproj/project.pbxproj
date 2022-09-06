@@ -21,6 +21,7 @@
 		4140146D28C75C3B00EA5BA1 /* PowerGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146C28C75C3B00EA5BA1 /* PowerGraph.swift */; };
 		4140146F28C77A3100EA5BA1 /* BatteryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146E28C77A3100EA5BA1 /* BatteryResponse.swift */; };
 		4140147128C77AAA00EA5BA1 /* BatteryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140147028C77AAA00EA5BA1 /* BatteryViewModel.swift */; };
+		41543A1F28C79588004B193C /* HistoricalGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41543A1E28C79588004B193C /* HistoricalGraph.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		4140146C28C75C3B00EA5BA1 /* PowerGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerGraph.swift; sourceTree = "<group>"; };
 		4140146E28C77A3100EA5BA1 /* BatteryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryResponse.swift; sourceTree = "<group>"; };
 		4140147028C77AAA00EA5BA1 /* BatteryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryViewModel.swift; sourceTree = "<group>"; };
+		41543A1E28C79588004B193C /* HistoricalGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalGraph.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 				4140145328C70B3200EA5BA1 /* Preview Content */,
 				4140144D28C70B3200EA5BA1 /* PV_StatsApp.swift */,
 				4140146C28C75C3B00EA5BA1 /* PowerGraph.swift */,
+				41543A1E28C79588004B193C /* HistoricalGraph.swift */,
 			);
 			path = "PV Stats";
 			sourceTree = "<group>";
@@ -195,6 +198,7 @@
 				4140145C28C70B4A00EA5BA1 /* ContentViewModel.swift in Sources */,
 				4140146228C7146300EA5BA1 /* Auth.swift in Sources */,
 				4140146F28C77A3100EA5BA1 /* BatteryResponse.swift in Sources */,
+				41543A1F28C79588004B193C /* HistoricalGraph.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
