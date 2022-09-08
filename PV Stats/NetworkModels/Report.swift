@@ -19,12 +19,12 @@ struct ReportRequest: Encodable {
         let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: Date())
         self.queryDate = QueryDate(year: dateComponents.year!, month: dateComponents.month!, day: dateComponents.day!)
     }
+}
 
-    struct QueryDate: Encodable {
-        let year: Int
-        let month: Int
-        let day: Int
-    }
+struct QueryDate: Encodable {
+    let year: Int
+    let month: Int
+    let day: Int
 }
 
 struct ReportResponse: Decodable {

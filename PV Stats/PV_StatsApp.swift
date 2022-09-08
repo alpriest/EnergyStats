@@ -11,7 +11,7 @@ import SwiftUI
 struct PV_StatsApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView(viewModel: ContentViewModel(Network()))
+            ContentView(networking: Network())
         }
     }
 }

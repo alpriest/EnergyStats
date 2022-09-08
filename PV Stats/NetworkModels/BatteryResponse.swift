@@ -13,5 +13,6 @@ struct BatteryResponse: Decodable {
 
     struct BatteryResult: Decodable {
         let soc: Int
+        let power: Double
     }
 }

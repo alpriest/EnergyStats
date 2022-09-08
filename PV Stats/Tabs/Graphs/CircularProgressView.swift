@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CircularProgressView: View {
     let progress: CGFloat
+    let subtitle: String?
 
     var body: some View {
         ZStack {
@@ -23,8 +24,16 @@ struct CircularProgressView: View {
                 .rotationEffect(.degrees(-90))
                 .shadow(radius: 2)
 
-            Text("\(String(format: "%0.0f", progress * 100))%")
-                .font(.largeTitle)
+            if let subtitle = subtitle {
+                VStack {
+                    Text("\(String(format: "%0.0f", progress * 100))%")
+                        .font(.largeTitle)
+
+                    Text(subtitle)
+                        .font(.caption)
+                        .foregroundColor(.red)
+                }
+            }
 
         }
         .frame(width: 200, height: 200)
@@ -35,6 +44,6 @@ struct CircularProgressView: View {
 
 struct CircularProgressView_Previews: PreviewProvider {
     static var previews: some View {
-        CircularProgressView(progress: 0.25)
+        CircularProgressView(progress: 0.25, subtitle: "+0.11kW")
     }
 }

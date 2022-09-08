@@ -10,15 +10,17 @@ import Foundation
 extension URL {
     static var auth = URL(string: "https://www.foxesscloud.com/c/v0/user/login")!
     static var report = URL(string: "https://www.foxesscloud.com/c/v0/device/history/report")!
+    static var raw = URL(string: "https://www.foxesscloud.com/c/v0/device/history/raw")!
     static var battery = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/info?id=03274209-486c-4ea3-9c28-159f25ee84cb")!
 }
 
 protocol Networking {
     func fetchReport() async throws -> ReportResponse
     func fetchBattery() async throws -> BatteryResponse
+    func fetchRaw() async throws -> RawResponse
 }
 
-class Network: Networking {
+class Network: Networking, ObservableObject {
     enum NetworkError: Error {
         case badCredentials
         case unknown
@@ -70,6 +72,20 @@ class Network: Networking {
 
         let (data, _) = try await URLSession.shared.data(for: request)
         return try JSONDecoder().decode(BatteryResponse.self, from: data)
+    }
+
+    func fetchRaw() async throws -> RawResponse {
+        if token == nil {
+            token = try await fetchToken()
+        }
+
+        var request = URLRequest(url: URL.raw)
+        request.httpMethod = "POST"
+        request.httpBody = try! JSONEncoder().encode(RawRequest(deviceID: Config.deviceID))
+        addHeaders(to: &request)
+
+        let (data, _) = try await URLSession.shared.data(for: request)
+        return try JSONDecoder().decode(RawResponse.self, from: data)
     }
 
     private func addHeaders(to request: inout URLRequest) {
