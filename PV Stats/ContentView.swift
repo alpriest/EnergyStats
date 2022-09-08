@@ -9,10 +9,18 @@ import SwiftUI
 
 struct ContentView: View {
     let networking: Networking
+    private let summaryViewModel: SummaryTabViewModel
+    private let graphViewModel: GraphTabViewModel
+
+    init(networking: Networking) {
+        self.networking = networking
+        summaryViewModel = SummaryTabViewModel(networking)
+        graphViewModel = GraphTabViewModel(networking)
+    }
 
     var body: some View {
         TabView {
-            SummaryTabView(viewModel: SummaryTabViewModel(networking))
+            SummaryTabView(viewModel: summaryViewModel)
                 .tabItem {
                     VStack {
                         Image(systemName: "arrow.up.arrow.down")
@@ -20,7 +28,7 @@ struct ContentView: View {
                     }
                 }
 
-            GraphTabView(viewModel: GraphTabViewModel(networking))
+            GraphTabView(viewModel: graphViewModel)
                 .tabItem {
                     VStack {
                         Image(systemName: "lines.measurement.horizontal")

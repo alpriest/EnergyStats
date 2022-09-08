@@ -16,9 +16,8 @@ class MockNetworking: Network {
         BatteryResponse(errno: 0, result: .init(soc: 56, power: 0.27))
     }
 
-    override func fetchRaw() async throws -> RawResponse {
-
-        RawResponse(errno: 0, result: [makeData("generationPower"), makeData("feedInPower"), makeData("gridConsumptionPower"), makeData("batChargePower"), makeData("batDischargePower"), makeData("pvPower")])
+    override func fetchRaw(variables: [String]) async throws -> RawResponse {
+        RawResponse(errno: 0, result: variables.map(makeData))
     }
 
     private func makeData(_ title: String) -> RawResponse.ReportVariable {

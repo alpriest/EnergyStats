@@ -17,7 +17,7 @@ extension URL {
 protocol Networking {
     func fetchReport() async throws -> ReportResponse
     func fetchBattery() async throws -> BatteryResponse
-    func fetchRaw() async throws -> RawResponse
+    func fetchRaw(variables: [String]) async throws -> RawResponse
 }
 
 class Network: Networking, ObservableObject {
@@ -74,14 +74,14 @@ class Network: Networking, ObservableObject {
         return try JSONDecoder().decode(BatteryResponse.self, from: data)
     }
 
-    func fetchRaw() async throws -> RawResponse {
+    func fetchRaw(variables: [String]) async throws -> RawResponse {
         if token == nil {
             token = try await fetchToken()
         }
 
         var request = URLRequest(url: URL.raw)
         request.httpMethod = "POST"
-        request.httpBody = try! JSONEncoder().encode(RawRequest(deviceID: Config.deviceID))
+        request.httpBody = try! JSONEncoder().encode(RawRequest(deviceID: Config.deviceID, variables: variables))
         addHeaders(to: &request)
 
         let (data, _) = try await URLSession.shared.data(for: request)

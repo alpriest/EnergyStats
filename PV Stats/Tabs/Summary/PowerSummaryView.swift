@@ -36,9 +36,10 @@ struct PowerSummaryView: View {
             HStack {
                 VStack {
                     PowerFlowView(amount: viewModel.battery)
-                    Image(systemName: "minus.plus.batteryblock.fill")
+                        .frame(height: 150)
+                    Image(systemName: "house.fill")
                         .font(.system(size: 48))
-
+                        .frame(width: 45, height: 45)
                     Text(viewModel.batteryStateOfCharge, format: .percent)
                 }
                 .frame(width: powerViewWidth)
@@ -48,16 +49,19 @@ struct PowerSummaryView: View {
 
                 VStack {
                     PowerFlowView(amount: viewModel.home)
+                        .frame(height: 150)
                     Image(systemName: "house.fill")
                         .font(.system(size: 48))
+                        .frame(width: 45, height: 45)
                     Text(" ")
                 }
                 .frame(width: powerViewWidth)
 
                 Spacer()
 
-                VStack(spacing: 0) {
+                VStack {
                     PowerFlowView(amount: viewModel.grid)
+                        .frame(height: 150)
                     PylonView()
                         .frame(width: 45, height: 45)
                     Text(" ")

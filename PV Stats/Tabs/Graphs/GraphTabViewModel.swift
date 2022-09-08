@@ -6,10 +6,19 @@
 //
 
 import Foundation
+import SwiftUI
 
 class GraphTabViewModel: ObservableObject {
     private var networking: Networking
+    private var rawData: [GraphValue] = [] {
+        didSet {
+            data = rawData
+        }
+    }
+
     @Published var data: [GraphValue] = []
+    private(set) var variables = ["feedinPower", "generationPower", "gridConsumptionPower", "batChargePower", "pvPower"]
+    private var hiddenVariables: Set<String> = .init()
 
     init(_ networking: Networking) {
         self.networking = networking
@@ -17,16 +26,46 @@ class GraphTabViewModel: ObservableObject {
 
     func start() {
         Task {
-            let raw = try await networking.fetchRaw()
+            let raw = try await networking.fetchRaw(variables: variables)
 
             let data: [GraphValue] = raw.result.flatMap { reportVariable in
                 reportVariable.data.compactMap {
-                    return GraphValue(date: $0.time, value: $0.value, variable: reportVariable.variable)
+                    GraphValue(date: $0.time, value: $0.value, variable: reportVariable.variable)
                 }
             }
 
-            await MainActor.run { self.data = data }
+            await MainActor.run { self.rawData = data }
         }
+    }
+
+    func toggle(_ series: String) {
+        if hiddenVariables.contains(series) {
+            if hiddenVariables.count > 1 {
+                hiddenVariables.remove(series)
+            }
+        } else {
+            hiddenVariables.insert(series)
+        }
+
+        data = rawData.filter { !hiddenVariables.contains($0.variable) }
+    }
+
+    func isEnabled(_ series: String) -> Bool {
+        !hiddenVariables.contains(series)
+    }
+
+    func color(for series: String) -> Color {
+        let hash = abs(series.hash)
+        let colorNum = hash % (256 * 256 * 256)
+        let red = colorNum >> 16
+        let green = (colorNum & 0x00FF00) >> 8
+        let blue = (colorNum & 0x0000FF)
+
+        return Color(red: CGFloat(red)/255.0, green: CGFloat(green)/255.0, blue: CGFloat(blue)/255.0)
+    }
+
+    var series: [String] {
+        Array(Dictionary(grouping: data, by: { $0.variable }).keys.sorted(by: { $0 < $1 }))
     }
 }
 

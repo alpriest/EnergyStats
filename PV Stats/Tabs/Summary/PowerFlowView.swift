@@ -14,14 +14,13 @@ struct PowerFlowView: View {
         ZStack(alignment: .center) {
             if isFlowing {
                 Line()
-                    .stroke(Color.black, lineWidth: 2)
+                    .stroke(Color("lines"), lineWidth: 4)
             } else {
                 ZStack {
                     DirectionalArrow(direction: amount > 0 ? .down : .up, animationDuration: animationDuration)
 
                     Text("\(String(format: "%0.3f", amount))kW")
-                        .background(Color.white)
-                        .font(.caption)
+                        .font(.footnote)
                 }
             }
         }

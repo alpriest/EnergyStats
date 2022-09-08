@@ -9,12 +9,13 @@ import Foundation
 
 struct RawRequest: Encodable {
     let deviceID: String
-    let variables = ["feedinPower", "generationPower", "gridConsumptionPower", "batChargePower", "batDischargePower", "pvPower", "loadsPower"]
+    let variables: [String]
     let timespan = "day"
     let beginDate : QueryDate
 
-    internal init(deviceID: String) {
+    internal init(deviceID: String, variables: [String]) {
         self.deviceID = deviceID
+        self.variables = variables
 
         let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: Date())
         self.beginDate = QueryDate(year: dateComponents.year!, month: dateComponents.month!, day: dateComponents.day!)

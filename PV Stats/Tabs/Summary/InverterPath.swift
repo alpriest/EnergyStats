@@ -29,6 +29,7 @@ struct InverterView: View {
     var body: some View {
         InverterPath()
             .stroke(lineWidth: 2)
+            .foregroundColor(Color("lines"))
     }
 }
 

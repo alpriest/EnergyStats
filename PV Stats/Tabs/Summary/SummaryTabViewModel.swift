@@ -24,7 +24,7 @@ class SummaryTabViewModel: ObservableObject {
         } onCompletion: {
             Task { await MainActor.run { self.updateState = "Updating..." } }
             self.loadData()
-//            self.startTimer()
+            self.startTimer()
         }
     }
 
@@ -34,21 +34,16 @@ class SummaryTabViewModel: ObservableObject {
 
     func loadData() {
         Task {
-            do {
-                let historical = HistoricalViewModel(raw: try await self.network.fetchRaw())
-                let battery = BatteryViewModel(from: try await self.network.fetchBattery())
-                let summary = PowerFlowViewModel(solar: historical.currentSolarPower,
-                                                 battery: battery.chargePower,
-                                                 home: historical.currentHomeConsumption,
-                                                 grid: historical.currentGridExport,
-                                                 batteryStateOfCharge: battery.chargeLevel)
+            let historical = HistoricalViewModel(raw: try await self.network.fetchRaw(variables: ["feedinPower", "generationPower", "gridConsumptionPower", "batChargePower", "batDischargePower", "pvPower", "loadsPower"]))
+            let battery = BatteryViewModel(from: try await self.network.fetchBattery())
+            let summary = PowerFlowViewModel(solar: historical.currentSolarPower,
+                                             battery: battery.chargePower,
+                                             home: historical.currentHomeConsumption,
+                                             grid: historical.currentGridExport,
+                                             batteryStateOfCharge: battery.chargeLevel)
 
-                await MainActor.run {
-                    self.summary = summary
-                    self.updateState = "done"
-                }
-            } catch {
-                print(error)
+            await MainActor.run {
+                self.summary = summary
             }
         }
     }

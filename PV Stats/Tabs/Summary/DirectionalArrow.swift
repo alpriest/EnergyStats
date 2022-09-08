@@ -19,7 +19,7 @@ struct Line: Shape {
 struct DirectionalArrow: View {
     @State var phase: CGFloat = 0
     private let totalPhase: CGFloat = 20
-    private let lineWidth: CGFloat = 2
+    private let lineWidth: CGFloat = 4
     let direction: Direction
     let animationDuration: Double
 
@@ -37,7 +37,7 @@ struct DirectionalArrow: View {
                 Animation.linear(duration: animationDuration)
                     .repeatForever(autoreverses: false),
                 value: phase)
-            .foregroundColor(Color.black)
+            .foregroundColor(Color("lines"))
             .onAppear {
                 switch direction {
                 case .down:

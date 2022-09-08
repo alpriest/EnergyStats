@@ -47,5 +47,6 @@ struct SummaryTabView: View {
 struct SummaryTabView_Previews: PreviewProvider {
     static var previews: some View {
         SummaryTabView(viewModel: SummaryTabViewModel(MockNetworking()))
+            .preferredColorScheme(.dark)
     }
 }

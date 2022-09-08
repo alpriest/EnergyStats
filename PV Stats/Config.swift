@@ -18,7 +18,7 @@ enum Config {
     }
 }
 
-private extension String {
+extension String {
     func md5() -> String? {
         let digest = Insecure.MD5.hash(data: data(using: .utf8) ?? Data())
 
