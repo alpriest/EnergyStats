@@ -40,9 +40,7 @@ class GraphTabViewModel: ObservableObject {
 
     func toggle(_ series: String) {
         if hiddenVariables.contains(series) {
-            if hiddenVariables.count > 1 {
-                hiddenVariables.remove(series)
-            }
+            hiddenVariables.remove(series)
         } else {
             hiddenVariables.insert(series)
         }

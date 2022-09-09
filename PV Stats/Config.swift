@@ -10,7 +10,7 @@ import CryptoKit
 
 enum Config {
     static let username = "alpriest"
-    private static let password = "WANgntHAvniY!kV9cqLPT9Ac6rSi08"
+    private static let password = "WANgntHAvniY!kV9cqLPT9Ac6rSi08" // todo: move to user defaults and prompt
     static let deviceID = "03274209-486c-4ea3-9c28-159f25ee84cb"
 
     static var hashedPassword: String {

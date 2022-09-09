@@ -58,8 +58,7 @@ class Network: Networking, ObservableObject {
         request.httpBody = try! JSONEncoder().encode(ReportRequest(deviceID: Config.deviceID))
         addHeaders(to: &request)
 
-        let (data, _) = try await URLSession.shared.data(for: request)
-        return try JSONDecoder().decode(ReportResponse.self, from: data)
+        return try await fetch(request)
     }
 
     func fetchBattery() async throws -> BatteryResponse {
@@ -70,8 +69,7 @@ class Network: Networking, ObservableObject {
         var request = URLRequest(url: URL.battery)
         addHeaders(to: &request)
 
-        let (data, _) = try await URLSession.shared.data(for: request)
-        return try JSONDecoder().decode(BatteryResponse.self, from: data)
+        return try await fetch(request)
     }
 
     func fetchRaw(variables: [String]) async throws -> RawResponse {
@@ -84,8 +82,25 @@ class Network: Networking, ObservableObject {
         request.httpBody = try! JSONEncoder().encode(RawRequest(deviceID: Config.deviceID, variables: variables))
         addHeaders(to: &request)
 
-        let (data, _) = try await URLSession.shared.data(for: request)
-        return try JSONDecoder().decode(RawResponse.self, from: data)
+        return try await fetch(request)
+    }
+
+    private func fetch<T: Decodable>(_ request: URLRequest, retry: Bool = false) async throws -> T {
+        if token == nil {
+            token = try await fetchToken()
+        }
+
+        do {
+            let (data, _) = try await URLSession.shared.data(for: request)
+            return try JSONDecoder().decode(T.self, from: data)
+        } catch {
+            if !retry {
+                token = try await fetchToken()
+                return try await fetch(request, retry: true)
+            } else {
+                throw error
+            }
+        }
     }
 
     private func addHeaders(to request: inout URLRequest) {
