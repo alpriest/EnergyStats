@@ -11,20 +11,28 @@ class SummaryTabViewModel: ObservableObject {
     private let network: Networking
     private let timer = CountdownTimer()
     @MainActor @Published private(set) var lastUpdated: String = Date().small()
-    @MainActor @Published private(set) var summary: PowerFlowViewModel?
     @MainActor @Published private(set) var updateState: String = "Updating..."
+    @MainActor @Published private(set) var state: State = .unloaded
+
+    enum State {
+        case unloaded
+        case loaded(PowerFlowViewModel)
+        case failed(String)
+    }
     
     init(_ network: Networking) {
         self.network = network
     }
     
     func startTimer() {
-        timer.start(totalTicks: 5) { ticksRemaining in
+        timer.start(totalTicks: 30) { ticksRemaining in
             Task { await MainActor.run { self.updateState = "Next update in \(ticksRemaining)s" } }
         } onCompletion: {
             Task { await MainActor.run { self.updateState = "Updating..." } }
-            self.loadData()
-            self.startTimer()
+            Task {
+                await self.loadData()
+                self.startTimer()
+            }
         }
     }
 
@@ -32,8 +40,9 @@ class SummaryTabViewModel: ObservableObject {
         timer.stop()
     }
 
-    func loadData() {
-        Task {
+    @MainActor
+    func loadData() async {
+        do {
             let historical = HistoricalViewModel(raw: try await self.network.fetchRaw(variables: ["feedinPower", "generationPower", "gridConsumptionPower", "batChargePower", "batDischargePower", "pvPower", "loadsPower"]))
             let battery = BatteryViewModel(from: try await self.network.fetchBattery())
             let summary = PowerFlowViewModel(solar: historical.currentSolarPower,
@@ -42,9 +51,10 @@ class SummaryTabViewModel: ObservableObject {
                                              grid: historical.currentGridExport,
                                              batteryStateOfCharge: battery.chargeLevel)
 
-            await MainActor.run {
-                self.summary = summary
-            }
+            self.state = .loaded(PowerFlowViewModel(solar: 0, battery: 0, home: 0, grid: 0, batteryStateOfCharge: 0))
+            self.state = .loaded(summary)
+        } catch {
+            self.state = .failed(error.localizedDescription)
         }
     }
 }

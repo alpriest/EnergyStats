@@ -16,7 +16,7 @@ struct Line: Shape {
     }
 }
 
-struct DirectionalArrow: View {
+ struct DirectionalArrow: View {
     @State var phase: CGFloat = 0
     private let totalPhase: CGFloat = 20
     private let lineWidth: CGFloat = 4
@@ -34,8 +34,7 @@ struct DirectionalArrow: View {
                 style: strokeStyle
             )
             .animation(
-                Animation.linear(duration: animationDuration)
-                    .repeatForever(autoreverses: false),
+                .linear(duration: animationDuration).repeatForever(autoreverses: false),
                 value: phase)
             .foregroundColor(Color("lines"))
             .onAppear {
@@ -54,13 +53,69 @@ struct DirectionalArrow: View {
             dash: [totalPhase / 2.0],
             dashPhase: phase)
     }
-}
+ }
+
+//struct DirectionalArrow: View {
+//    @State var yOffset: Double = 0
+//    @State private var timer: Timer?
+//    let direction: Direction
+//    let animationDuration: Double
+//
+//        enum Direction {
+//            case down
+//            case up
+//        }
+//
+//    var body: some View {
+//        GeometryReader { reader in
+//            Color.clear
+//                .background(
+//                    Line()
+//                        .stroke(style: StrokeStyle(lineWidth: 4.0, dash: [5], dashPhase: 0))
+//                        .frame(height: reader.size.height * 3.0)
+//                        .foregroundColor(Color.black)
+//                        .offset(y: yOffset)
+//                        .onAppear {
+//                            timer?.invalidate()
+//                            setupTimer()
+//                        }
+//                        .onChange(of: animationDuration) { newValue in
+//                            timer?.invalidate()
+//                            setupTimer()
+//                        }
+//                        .onChange(of: yOffset) { newValue in
+//                            switch direction {
+//                            case .down:
+//                                if yOffset >= reader.size.height {
+//                                    yOffset = 0
+//                                }
+//                            case .up:
+//                                if yOffset <= 0 {
+//                                    yOffset = reader.size.height
+//                                }
+//                            }
+//                        }
+//                ).clipped()
+//        }
+//    }
+//
+//    func setupTimer() {
+//        timer = Timer.scheduledTimer(withTimeInterval: animationDuration / 100, repeats: true) { _ in
+//            switch direction {
+//            case .down:
+//                yOffset += 1
+//            case .up:
+//                yOffset -= 1
+//            }
+//        }
+//    }
+//}
 
 struct DirectionalArrow_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            DirectionalArrow(direction: .up, animationDuration: 1.0)
-                .frame(width: 200, height: 200)
+            DirectionalArrow(direction: .up, animationDuration: 1.5)
+                .frame(width: 100, height: 300)
                 .background(Color.red)
         }
     }

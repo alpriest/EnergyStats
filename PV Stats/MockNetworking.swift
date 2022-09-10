@@ -8,8 +8,19 @@
 import Foundation
 
 class MockNetworking: Network {
+    private let throwOnCall: Bool
+
+    init(throwOnCall: Bool = false) {
+        self.throwOnCall = throwOnCall
+        super.init()
+    }
+
     override func fetchReport() async throws -> ReportResponse {
-        ReportResponse(result: [.init(variable: "feedin", data: [.init(index: 14, value: 1.5)])])
+        if throwOnCall {
+            throw NetworkError.unknown
+        }
+
+        return ReportResponse(result: [.init(variable: "feedin", data: [.init(index: 14, value: 1.5)])])
     }
 
     override func fetchBattery() async throws -> BatteryResponse {
@@ -17,7 +28,10 @@ class MockNetworking: Network {
     }
 
     override func fetchRaw(variables: [String]) async throws -> RawResponse {
-        RawResponse(errno: 0, result: variables.map(makeData))
+        if throwOnCall {
+            throw NetworkError.unknown
+        }
+        return RawResponse(errno: 0, result: variables.map(makeData))
     }
 
     private func makeData(_ title: String) -> RawResponse.ReportVariable {

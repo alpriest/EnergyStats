@@ -17,6 +17,7 @@ struct PowerFlowViewModel {
 
 struct PowerSummaryView: View {
     @State private var contentSize: CGSize = .zero
+    @State private var lastUpdated = Date()
     let viewModel: PowerFlowViewModel
     private let powerViewWidth: CGFloat = 70
 
@@ -36,8 +37,7 @@ struct PowerSummaryView: View {
             HStack {
                 VStack {
                     PowerFlowView(amount: viewModel.battery)
-                        .frame(height: 150)
-                    Image(systemName: "house.fill")
+                    Image(systemName: "minus.plus.batteryblock.fill")
                         .font(.system(size: 48))
                         .frame(width: 45, height: 45)
                     Text(viewModel.batteryStateOfCharge, format: .percent)
@@ -49,7 +49,6 @@ struct PowerSummaryView: View {
 
                 VStack {
                     PowerFlowView(amount: viewModel.home)
-                        .frame(height: 150)
                     Image(systemName: "house.fill")
                         .font(.system(size: 48))
                         .frame(width: 45, height: 45)
@@ -61,7 +60,6 @@ struct PowerSummaryView: View {
 
                 VStack {
                     PowerFlowView(amount: viewModel.grid)
-                        .frame(height: 150)
                     PylonView()
                         .frame(width: 45, height: 45)
                     Text(" ")
@@ -75,6 +73,6 @@ struct PowerSummaryView: View {
 
 struct PowerSummaryView_Previews: PreviewProvider {
     static var previews: some View {
-        PowerSummaryView(viewModel: PowerFlowViewModel(solar: 1.5, battery: -0.01, home: 1.5, grid: 0.71, batteryStateOfCharge: 0.99))
+        PowerSummaryView(viewModel: PowerFlowViewModel(solar: 2.5, battery: -0.01, home: 1.5, grid: 0.71, batteryStateOfCharge: 0.99))
     }
 }

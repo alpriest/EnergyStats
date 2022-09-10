@@ -15,10 +15,6 @@ struct InverterPath: Shape {
             path.move(to: CGPoint(x: 0, y: rect.height / 2.0))
             path.addLine(to: CGPoint(x: rect.width, y: rect.height / 2.0))
             path.move(to: CGPoint(x: rect.width, y: rect.height / 2.0))
-
-            path.addRect(CGRect(x: 0, y: rect.midY - halfJoinSize, width: joinSize, height: joinSize))
-            path.addRect(CGRect(x: rect.width - joinSize, y: rect.midY - halfJoinSize, width: joinSize, height: joinSize))
-            path.addRect(CGRect(x: rect.midX - halfJoinSize, y: rect.midY - halfJoinSize, width: joinSize, height: joinSize))
         }
     }
 
@@ -28,7 +24,7 @@ struct InverterPath: Shape {
 struct InverterView: View {
     var body: some View {
         InverterPath()
-            .stroke(lineWidth: 2)
+            .stroke(lineWidth: 4)
             .foregroundColor(Color("lines"))
     }
 }

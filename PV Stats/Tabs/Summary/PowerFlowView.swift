@@ -17,17 +17,22 @@ struct PowerFlowView: View {
                     .stroke(Color("lines"), lineWidth: 4)
             } else {
                 ZStack {
-                    DirectionalArrow(direction: amount > 0 ? .down : .up, animationDuration: animationDuration)
+                    if amount > 0 {
+                        DirectionalArrow(direction: .down, animationDuration: animationDuration)
+                    } else {
+                        DirectionalArrow(direction: .up, animationDuration: animationDuration)
+                    }
 
                     Text("\(String(format: "%0.3f", amount))kW")
                         .font(.footnote)
+                        .bold()
                 }
             }
         }
     }
 
     var animationDuration: Double {
-        max(0.3, 2.5 - amount)
+        max(0.4, 2.5 - abs(amount))
     }
 
     var isFlowing: Bool {
@@ -42,6 +47,9 @@ struct PowerFlowView_Previews: PreviewProvider {
                 .background(Color.red)
 
             PowerFlowView(amount: 0)
+                .background(Color.red)
+
+            PowerFlowView(amount: -4.5)
                 .background(Color.red)
         }
     }
