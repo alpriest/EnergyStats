@@ -1,6 +1,6 @@
 //
 //  Credentials.swift
-//  PV Stats
+//  Energy Stats
 //
 //  Created by Alistair Priest on 10/09/2022.
 //

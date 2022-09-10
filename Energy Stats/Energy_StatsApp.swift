@@ -1,6 +1,6 @@
 //
-//  PV_StatsApp.swift
-//  PV Stats
+//  Energy_StatsApp.swift
+//  Energy Stats
 //
 //  Created by Alistair Priest on 06/09/2022.
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct PV_StatsApp: App {
+struct Energy_StatsApp: App {
     @ObservedObject var credentials = Credentials()
 
     var body: some Scene {

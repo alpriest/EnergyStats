@@ -1,6 +1,6 @@
 //
 //  SummaryTabView.swift
-//  PV Stats
+//  Energy Stats
 //
 //  Created by Alistair Priest on 08/09/2022.
 //

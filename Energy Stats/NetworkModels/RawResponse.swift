@@ -1,6 +1,6 @@
 //
 //  RawResponse.swift
-//  PV Stats
+//  Energy Stats
 //
 //  Created by Alistair Priest on 07/09/2022.
 //
