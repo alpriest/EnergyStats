@@ -13,8 +13,10 @@
 		4107446728CA22B3006D5D7D /* InverterPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446628CA22B3006D5D7D /* InverterPath.swift */; };
 		4107446928CA42D2006D5D7D /* PylonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446828CA42D2006D5D7D /* PylonView.swift */; };
 		4107446C28CA57A9006D5D7D /* SummaryTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446B28CA57A9006D5D7D /* SummaryTabView.swift */; };
+		41339C7228CC7B7B0062B976 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41339C7128CC7B7B0062B976 /* LoginView.swift */; };
+		41339C7428CC7BA50062B976 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41339C7328CC7BA50062B976 /* Credentials.swift */; };
 		4140144E28C70B3200EA5BA1 /* PV_StatsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140144D28C70B3200EA5BA1 /* PV_StatsApp.swift */; };
-		4140145028C70B3200EA5BA1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140144F28C70B3200EA5BA1 /* ContentView.swift */; };
+		4140145028C70B3200EA5BA1 /* TabbedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140144F28C70B3200EA5BA1 /* TabbedView.swift */; };
 		4140145228C70B3200EA5BA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4140145128C70B3200EA5BA1 /* Assets.xcassets */; };
 		4140145528C70B3200EA5BA1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4140145428C70B3200EA5BA1 /* Preview Assets.xcassets */; };
 		4140145C28C70B4A00EA5BA1 /* SummaryTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140145B28C70B4A00EA5BA1 /* SummaryTabViewModel.swift */; };
@@ -41,9 +43,11 @@
 		4107446628CA22B3006D5D7D /* InverterPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterPath.swift; sourceTree = "<group>"; };
 		4107446828CA42D2006D5D7D /* PylonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PylonView.swift; sourceTree = "<group>"; };
 		4107446B28CA57A9006D5D7D /* SummaryTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTabView.swift; sourceTree = "<group>"; };
+		41339C7128CC7B7B0062B976 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		41339C7328CC7BA50062B976 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		4140144A28C70B3200EA5BA1 /* PV Stats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PV Stats.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4140144D28C70B3200EA5BA1 /* PV_StatsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PV_StatsApp.swift; sourceTree = "<group>"; };
-		4140144F28C70B3200EA5BA1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		4140144F28C70B3200EA5BA1 /* TabbedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbedView.swift; sourceTree = "<group>"; };
 		4140145128C70B3200EA5BA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4140145428C70B3200EA5BA1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4140145B28C70B4A00EA5BA1 /* SummaryTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTabViewModel.swift; sourceTree = "<group>"; };
@@ -105,7 +109,7 @@
 				4107446A28CA57A1006D5D7D /* Tabs */,
 				4140145128C70B3200EA5BA1 /* Assets.xcassets */,
 				4140145D28C70D1400EA5BA1 /* Config.swift */,
-				4140144F28C70B3200EA5BA1 /* ContentView.swift */,
+				4140144F28C70B3200EA5BA1 /* TabbedView.swift */,
 				4140144D28C70B3200EA5BA1 /* PV_StatsApp.swift */,
 				4140146728C7373A00EA5BA1 /* Models */,
 				4140145F28C70D4700EA5BA1 /* Networking.swift */,
@@ -113,6 +117,8 @@
 				4140145328C70B3200EA5BA1 /* Preview Content */,
 				41A25D4028CA6E0000315714 /* MockNetworking.swift */,
 				41A25D4228CA706700315714 /* CountdownTimer.swift */,
+				41339C7128CC7B7B0062B976 /* LoginView.swift */,
+				41339C7328CC7BA50062B976 /* Credentials.swift */,
 			);
 			path = "PV Stats";
 			sourceTree = "<group>";
@@ -241,11 +247,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				4107446C28CA57A9006D5D7D /* SummaryTabView.swift in Sources */,
-				4140145028C70B3200EA5BA1 /* ContentView.swift in Sources */,
+				4140145028C70B3200EA5BA1 /* TabbedView.swift in Sources */,
+				41339C7428CC7BA50062B976 /* Credentials.swift in Sources */,
 				41A25D4328CA706700315714 /* CountdownTimer.swift in Sources */,
 				4140146B28C7589800EA5BA1 /* CircularProgressView.swift in Sources */,
 				4140146028C70D4700EA5BA1 /* Networking.swift in Sources */,
 				4140146528C714C000EA5BA1 /* Report.swift in Sources */,
+				41339C7228CC7B7B0062B976 /* LoginView.swift in Sources */,
 				41A25D3D28CA5CDF00315714 /* GraphTabView.swift in Sources */,
 				4140146D28C75C3B00EA5BA1 /* PowerGraph.swift in Sources */,
 				4140146928C7374400EA5BA1 /* HistoricalViewModel.swift in Sources */,

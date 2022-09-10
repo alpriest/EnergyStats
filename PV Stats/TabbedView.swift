@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  TabbedView.swift
 //  PV Stats
 //
 //  Created by Alistair Priest on 06/09/2022.
@@ -7,13 +7,15 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct TabbedView: View {
     let networking: Networking
+    let credentials: Credentials
     private let summaryViewModel: SummaryTabViewModel
     private let graphViewModel: GraphTabViewModel
 
-    init(networking: Networking) {
+    init(networking: Networking, credentials: Credentials) {
         self.networking = networking
+        self.credentials = credentials
         summaryViewModel = SummaryTabViewModel(networking)
         graphViewModel = GraphTabViewModel(networking)
     }
@@ -28,7 +30,7 @@ struct ContentView: View {
                     }
                 }
 
-            GraphTabView(viewModel: graphViewModel)
+            GraphTabView(viewModel: graphViewModel, credentials: credentials)
                 .tabItem {
                     VStack {
                         Image(systemName: "lines.measurement.horizontal")
@@ -41,7 +43,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(networking: MockNetworking())
+        TabbedView(networking: MockNetworking(), credentials: Credentials())
             .previewInterfaceOrientation(.landscapeLeft)
     }
 }

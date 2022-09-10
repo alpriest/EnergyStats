@@ -49,7 +49,7 @@ struct SummaryTabView: View {
     private var backgroundGradient: some View {
         switch viewModel.state {
         case .loaded:
-            return LinearGradient(colors: [Color.yellow.opacity(0.5), Color.clear], startPoint: UnitPoint(x: 0, y: 0.0), endPoint: UnitPoint(x: 0, y: 0.7)).edgesIgnoringSafeArea(.all)
+            return LinearGradient(colors: [Color("Sunny"), Color.clear], startPoint: UnitPoint(x: 0, y: 0.0), endPoint: UnitPoint(x: 0, y: 0.7)).edgesIgnoringSafeArea(.all)
         case .failed:
             return LinearGradient(colors: [Color.red.opacity(0.7), Color.clear], startPoint: UnitPoint(x: 0, y: 0.0), endPoint: UnitPoint(x: 0, y: 0.7)).edgesIgnoringSafeArea(.all)
         case .unloaded:
@@ -60,6 +60,6 @@ struct SummaryTabView: View {
 
 struct SummaryTabView_Previews: PreviewProvider {
     static var previews: some View {
-        SummaryTabView(viewModel: SummaryTabViewModel(MockNetworking(throwOnCall: true)))
+        SummaryTabView(viewModel: SummaryTabViewModel(MockNetworking()))
     }
 }

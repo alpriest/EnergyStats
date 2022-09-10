@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct PV_StatsApp: App {
+    @ObservedObject var credentials = Credentials()
+
     var body: some Scene {
         WindowGroup {
-            ContentView(networking: Network())
+            if credentials.hasCredentials {
+                TabbedView(networking: Network(credentials: credentials), credentials: credentials)
+            } else {
+                LoginView(credentials: credentials)
+            }
         }
     }
 }

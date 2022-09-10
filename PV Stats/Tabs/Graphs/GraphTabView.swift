@@ -10,6 +10,7 @@ import SwiftUI
 
 struct GraphTabView: View {
     @ObservedObject var viewModel: GraphTabViewModel
+    let credentials: Credentials
 
     var body: some View {
         VStack {
@@ -38,6 +39,12 @@ struct GraphTabView: View {
                     }
                 }
             }
+
+            Button("logout") {
+                credentials.username = nil
+                credentials.password = nil
+                credentials.hasCredentials = false
+            }
         }
         .padding()
         .onAppear {
@@ -48,6 +55,6 @@ struct GraphTabView: View {
 
 struct GraphTabView_Previews: PreviewProvider {
     static var previews: some View {
-        GraphTabView(viewModel: GraphTabViewModel(MockNetworking()))
+        GraphTabView(viewModel: GraphTabViewModel(MockNetworking()), credentials: Credentials())
     }
 }

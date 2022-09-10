@@ -12,7 +12,7 @@ class MockNetworking: Network {
 
     init(throwOnCall: Bool = false) {
         self.throwOnCall = throwOnCall
-        super.init()
+        super.init(credentials: Credentials())
     }
 
     override func fetchReport() async throws -> ReportResponse {

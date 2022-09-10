@@ -27,11 +27,18 @@ class Network: Networking, ObservableObject {
     }
 
     var token: String?
+    let credentials: Credentials
+
+    init(credentials: Credentials) {
+        self.credentials = credentials
+    }
 
     func fetchToken() async throws -> String {
+        guard let hashedPassword = credentials.hashedPassword, let username = credentials.username else { throw NetworkError.badCredentials }
+
         var request = URLRequest(url: URL.auth)
         request.httpMethod = "POST"
-        request.httpBody = try! JSONEncoder().encode(AuthRequest(user: Config.username, password: Config.hashedPassword))
+        request.httpBody = try! JSONEncoder().encode(AuthRequest(user: username, password: hashedPassword))
         addHeaders(to: &request)
 
         let (data, _) = try await URLSession.shared.data(for: request)
