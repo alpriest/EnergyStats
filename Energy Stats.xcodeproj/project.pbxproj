@@ -45,7 +45,7 @@
 		4107446B28CA57A9006D5D7D /* SummaryTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTabView.swift; sourceTree = "<group>"; };
 		41339C7128CC7B7B0062B976 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		41339C7328CC7BA50062B976 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
-		4140144A28C70B3200EA5BA1 /* PV Stats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PV Stats.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4140144A28C70B3200EA5BA1 /* Energy Stats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Energy Stats.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4140144D28C70B3200EA5BA1 /* PV_StatsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PV_StatsApp.swift; sourceTree = "<group>"; };
 		4140144F28C70B3200EA5BA1 /* TabbedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbedView.swift; sourceTree = "<group>"; };
 		4140145128C70B3200EA5BA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -90,7 +90,7 @@
 		4140144128C70B3200EA5BA1 = {
 			isa = PBXGroup;
 			children = (
-				4140144C28C70B3200EA5BA1 /* PV Stats */,
+				4140144C28C70B3200EA5BA1 /* Energy Stats */,
 				4140144B28C70B3200EA5BA1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -98,12 +98,12 @@
 		4140144B28C70B3200EA5BA1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4140144A28C70B3200EA5BA1 /* PV Stats.app */,
+				4140144A28C70B3200EA5BA1 /* Energy Stats.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4140144C28C70B3200EA5BA1 /* PV Stats */ = {
+		4140144C28C70B3200EA5BA1 /* Energy Stats */ = {
 			isa = PBXGroup;
 			children = (
 				4107446A28CA57A1006D5D7D /* Tabs */,
@@ -120,7 +120,7 @@
 				41339C7128CC7B7B0062B976 /* LoginView.swift */,
 				41339C7328CC7BA50062B976 /* Credentials.swift */,
 			);
-			path = "PV Stats";
+			path = "Energy Stats";
 			sourceTree = "<group>";
 		};
 		4140145328C70B3200EA5BA1 /* Preview Content */ = {
@@ -179,9 +179,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4140144928C70B3200EA5BA1 /* PV Stats */ = {
+		4140144928C70B3200EA5BA1 /* Energy Stats */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4140145828C70B3200EA5BA1 /* Build configuration list for PBXNativeTarget "PV Stats" */;
+			buildConfigurationList = 4140145828C70B3200EA5BA1 /* Build configuration list for PBXNativeTarget "Energy Stats" */;
 			buildPhases = (
 				4140144628C70B3200EA5BA1 /* Sources */,
 				4140144728C70B3200EA5BA1 /* Frameworks */,
@@ -191,9 +191,9 @@
 			);
 			dependencies = (
 			);
-			name = "PV Stats";
+			name = "Energy Stats";
 			productName = "PV Stats";
-			productReference = 4140144A28C70B3200EA5BA1 /* PV Stats.app */;
+			productReference = 4140144A28C70B3200EA5BA1 /* Energy Stats.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -211,7 +211,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4140144528C70B3200EA5BA1 /* Build configuration list for PBXProject "PV Stats" */;
+			buildConfigurationList = 4140144528C70B3200EA5BA1 /* Build configuration list for PBXProject "Energy Stats" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -224,7 +224,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4140144928C70B3200EA5BA1 /* PV Stats */,
+				4140144928C70B3200EA5BA1 /* Energy Stats */,
 			);
 		};
 /* End PBXProject section */
@@ -412,7 +412,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.alpriest.PV-Stats";
+				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -441,7 +441,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.alpriest.PV-Stats";
+				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -452,7 +452,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4140144528C70B3200EA5BA1 /* Build configuration list for PBXProject "PV Stats" */ = {
+		4140144528C70B3200EA5BA1 /* Build configuration list for PBXProject "Energy Stats" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4140145628C70B3200EA5BA1 /* Debug */,
@@ -461,7 +461,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4140145828C70B3200EA5BA1 /* Build configuration list for PBXNativeTarget "PV Stats" */ = {
+		4140145828C70B3200EA5BA1 /* Build configuration list for PBXNativeTarget "Energy Stats" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4140145928C70B3200EA5BA1 /* Debug */,
