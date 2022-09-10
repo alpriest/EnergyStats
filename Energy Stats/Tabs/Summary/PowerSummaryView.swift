@@ -1,22 +1,22 @@
 //
 //  PowerSummaryView.swift
-//  PV Stats
+//  Energy Stats
 //
 //  Created by Alistair Priest on 08/09/2022.
 //
 
 import SwiftUI
 
-struct PowerFlowViewModel {
-    let solar: Double
-    let battery: Double
-    let home: Double
-    let grid: Double
-    let batteryStateOfCharge: Double
+struct BatterySizePreferenceKey: PreferenceKey {
+    static var defaultValue: CGSize = .zero
+
+    static func reduce(value: inout CGSize, nextValue: () -> CGSize) {
+        defaultValue = nextValue()
+    }
 }
 
 struct PowerSummaryView: View {
-    @State private var contentSize: CGSize = .zero
+    @State private var iconFooterSize: CGSize = .zero
     @State private var lastUpdated = Date()
     let viewModel: PowerFlowViewModel
     private let powerViewWidth: CGFloat = 70
@@ -40,7 +40,18 @@ struct PowerSummaryView: View {
                     Image(systemName: "minus.plus.batteryblock.fill")
                         .font(.system(size: 48))
                         .frame(width: 45, height: 45)
-                    Text(viewModel.batteryStateOfCharge, format: .percent)
+                    VStack {
+                        Text(viewModel.batteryStateOfCharge, format: .percent)
+                        Text(viewModel.batteryExtra)
+                            .multilineTextAlignment(.center)
+                            .font(.caption)
+                    }
+                    .background(GeometryReader { reader in
+                        Color.clear.preference(key: BatterySizePreferenceKey.self, value: reader.size)
+                            .onPreferenceChange(BatterySizePreferenceKey.self) { size in
+                                iconFooterSize = size
+                            }
+                    })
                 }
                 .frame(width: powerViewWidth)
                 .padding(.leading, 14)
@@ -52,7 +63,7 @@ struct PowerSummaryView: View {
                     Image(systemName: "house.fill")
                         .font(.system(size: 48))
                         .frame(width: 45, height: 45)
-                    Text(" ")
+                    Color.clear.frame(width: iconFooterSize.width, height: iconFooterSize.height)
                 }
                 .frame(width: powerViewWidth)
 
@@ -62,7 +73,7 @@ struct PowerSummaryView: View {
                     PowerFlowView(amount: viewModel.grid)
                     PylonView()
                         .frame(width: 45, height: 45)
-                    Text(" ")
+                    Color.clear.frame(width: iconFooterSize.width, height: iconFooterSize.height)
                 }
                 .frame(width: powerViewWidth)
                 .padding(.trailing, 14)

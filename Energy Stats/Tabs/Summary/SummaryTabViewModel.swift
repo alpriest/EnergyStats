@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class SummaryTabViewModel: ObservableObject {
     private let network: Networking
@@ -22,20 +23,25 @@ class SummaryTabViewModel: ObservableObject {
     
     init(_ network: Networking) {
         self.network = network
+
+        NotificationCenter.default.addObserver(self, selector: #selector(stopTimer), name: UIApplication.willResignActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(startTimer), name: UIApplication.didBecomeActiveNotification, object: nil)
     }
-    
+
+    @objc
     func startTimer() {
         timer.start(totalTicks: 30) { ticksRemaining in
             Task { await MainActor.run { self.updateState = "Next update in \(ticksRemaining)s" } }
         } onCompletion: {
-            Task { await MainActor.run { self.updateState = "Updating..." } }
             Task {
+                await MainActor.run { self.updateState = "Updating..." }
                 await self.loadData()
                 self.startTimer()
             }
         }
     }
 
+    @objc
     func stopTimer() {
         timer.stop()
     }
