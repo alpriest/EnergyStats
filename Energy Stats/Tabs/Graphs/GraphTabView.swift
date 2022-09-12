@@ -27,7 +27,7 @@ struct GraphTabView: View {
                     series: .value("Title", $0.variable.title),
                     stacking: .unstacked
                 )
-                .interpolationMethod(.catmullRom(alpha: 0.5))
+//                .interpolationMethod(.catmullRom(alpha: 0.5))
                 .foregroundStyle($0.variable.colour)
             }
             .chartPlotStyle { content in
@@ -77,7 +77,7 @@ struct GraphTabView: View {
                                     .frame(width: 15, height: 15)
 
                                 OptionalView(viewModel.total(of: viewModel.variables[index].type)) {
-                                    Text($0, format: .number)
+                                    Text(String(format: "%0.2f", $0))
                                 }
 
                                 VStack(alignment: .leading) {

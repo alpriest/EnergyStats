@@ -13,9 +13,9 @@ struct RawRequest: Encodable {
     let timespan = "day"
     let beginDate : QueryDate
 
-    internal init(deviceID: String, variables: [String]) {
+    internal init(deviceID: String, variables: [VariableType]) {
         self.deviceID = deviceID
-        self.variables = variables
+        self.variables = variables.map { $0.rawTitle }
 
         let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: Date())
         self.beginDate = QueryDate(year: dateComponents.year!, month: dateComponents.month!, day: dateComponents.day!)

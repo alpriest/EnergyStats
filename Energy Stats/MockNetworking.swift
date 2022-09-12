@@ -15,7 +15,7 @@ class MockNetworking: Network {
         super.init(credentials: Credentials())
     }
 
-    override func fetchReport() async throws -> ReportResponse {
+    override func fetchReport(variables: [VariableType]) async throws -> ReportResponse {
         if throwOnCall {
             throw NetworkError.unknown
         }
@@ -27,7 +27,7 @@ class MockNetworking: Network {
         BatteryResponse(errno: 0, result: .init(soc: 56, power: 0.27))
     }
 
-    override func fetchRaw(variables: [String]) async throws -> RawResponse {
+    override func fetchRaw(variables: [VariableType]) async throws -> RawResponse {
         if throwOnCall {
             throw NetworkError.unknown
         }

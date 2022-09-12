@@ -10,11 +10,12 @@ import Foundation
 struct ReportRequest: Encodable {
     let deviceID: String
     let reportType = "day"
-    let variables = ["feedin", "generation", "gridConsumption", "chargeEnergyToTal", "dischargeEnergyToTal", "loads", "pvPower"]
+    let variables: [String]
     let queryDate: QueryDate
 
-    internal init(deviceID: String) {
+    internal init(deviceID: String, variables: [VariableType]) {
         self.deviceID = deviceID
+        self.variables = variables.map { $0.reportTitle }
 
         let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: Date())
         self.queryDate = QueryDate(year: dateComponents.year!, month: dateComponents.month!, day: dateComponents.day!)

@@ -15,9 +15,9 @@ extension URL {
 }
 
 protocol Networking {
-    func fetchReport() async throws -> ReportResponse
+    func fetchReport(variables: [VariableType]) async throws -> ReportResponse
     func fetchBattery() async throws -> BatteryResponse
-    func fetchRaw(variables: [String]) async throws -> RawResponse
+    func fetchRaw(variables: [VariableType]) async throws -> RawResponse
 }
 
 class Network: Networking, ObservableObject {
@@ -55,14 +55,14 @@ class Network: Networking, ObservableObject {
         }
     }
 
-    func fetchReport() async throws -> ReportResponse {
+    func fetchReport(variables: [VariableType]) async throws -> ReportResponse {
         if token == nil {
             token = try await fetchToken()
         }
 
         var request = URLRequest(url: URL.report)
         request.httpMethod = "POST"
-        request.httpBody = try! JSONEncoder().encode(ReportRequest(deviceID: Config.deviceID))
+        request.httpBody = try! JSONEncoder().encode(ReportRequest(deviceID: Config.deviceID, variables: variables))
         addHeaders(to: &request)
 
         return try await fetch(request)
@@ -79,7 +79,7 @@ class Network: Networking, ObservableObject {
         return try await fetch(request)
     }
 
-    func fetchRaw(variables: [String]) async throws -> RawResponse {
+    func fetchRaw(variables: [VariableType]) async throws -> RawResponse {
         if token == nil {
             token = try await fetchToken()
         }

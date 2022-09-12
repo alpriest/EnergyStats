@@ -49,7 +49,7 @@ class SummaryTabViewModel: ObservableObject {
     @MainActor
     func loadData() async {
         do {
-            let historical = HistoricalViewModel(raw: try await self.network.fetchRaw(variables: ["feedinPower", "generationPower", "gridConsumptionPower", "batChargePower", "batDischargePower", "pvPower", "loadsPower"]))
+            let historical = HistoricalViewModel(raw: try await self.network.fetchRaw(variables: [.feedinPower, .gridConsumptionPower, .pvPower, .loadsPower]))
             let battery = BatteryViewModel(from: try await self.network.fetchBattery())
             let summary = PowerFlowViewModel(solar: historical.currentSolarPower,
                                              battery: battery.chargePower,
