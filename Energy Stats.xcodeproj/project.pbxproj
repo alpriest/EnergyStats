@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		41028F9528CDD7A300FB70FD /* OptionalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41028F9428CDD7A300FB70FD /* OptionalView.swift */; };
 		4107446128C9EF6B006D5D7D /* PowerSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446028C9EF6B006D5D7D /* PowerSummaryView.swift */; };
 		4107446328CA1C5D006D5D7D /* PowerFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446228CA1C5D006D5D7D /* PowerFlowView.swift */; };
 		4107446528CA1D76006D5D7D /* DirectionalArrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446428CA1D76006D5D7D /* DirectionalArrow.swift */; };
@@ -33,6 +34,7 @@
 		41A25D3F28CA5CFB00315714 /* GraphTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A25D3E28CA5CFB00315714 /* GraphTabViewModel.swift */; };
 		41A25D4128CA6E0000315714 /* MockNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A25D4028CA6E0000315714 /* MockNetworking.swift */; };
 		41A25D4328CA706700315714 /* CountdownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A25D4228CA706700315714 /* CountdownTimer.swift */; };
+		41AED86A28CDCD94009C6517 /* raw.json in Resources */ = {isa = PBXBuildFile; fileRef = 41AED86928CDCD94009C6517 /* raw.json */; };
 		41D7B12428C86E4000E14144 /* RawResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D7B12328C86E4000E14144 /* RawResponse.swift */; };
 		41EDDF6C28CD2A630092C662 /* PowerFlowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EDDF6B28CD2A630092C662 /* PowerFlowViewModel.swift */; };
 		41EDDF7428CD2ED30092C662 /* Energy_StatsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EDDF7328CD2ED30092C662 /* Energy_StatsTests.swift */; };
@@ -49,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		41028F9428CDD7A300FB70FD /* OptionalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalView.swift; sourceTree = "<group>"; };
 		4107446028C9EF6B006D5D7D /* PowerSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerSummaryView.swift; sourceTree = "<group>"; };
 		4107446228CA1C5D006D5D7D /* PowerFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerFlowView.swift; sourceTree = "<group>"; };
 		4107446428CA1D76006D5D7D /* DirectionalArrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionalArrow.swift; sourceTree = "<group>"; };
@@ -76,6 +79,7 @@
 		41A25D3E28CA5CFB00315714 /* GraphTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTabViewModel.swift; sourceTree = "<group>"; };
 		41A25D4028CA6E0000315714 /* MockNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworking.swift; sourceTree = "<group>"; };
 		41A25D4228CA706700315714 /* CountdownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimer.swift; sourceTree = "<group>"; };
+		41AED86928CDCD94009C6517 /* raw.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = raw.json; sourceTree = "<group>"; };
 		41D7B12328C86E4000E14144 /* RawResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawResponse.swift; sourceTree = "<group>"; };
 		41EDDF6B28CD2A630092C662 /* PowerFlowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerFlowViewModel.swift; sourceTree = "<group>"; };
 		41EDDF7128CD2ED30092C662 /* Energy StatsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Energy StatsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -143,6 +147,7 @@
 				41A25D4228CA706700315714 /* CountdownTimer.swift */,
 				41339C7128CC7B7B0062B976 /* LoginView.swift */,
 				41339C7328CC7BA50062B976 /* Credentials.swift */,
+				41028F9428CDD7A300FB70FD /* OptionalView.swift */,
 			);
 			path = "Energy Stats";
 			sourceTree = "<group>";
@@ -151,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				4140145428C70B3200EA5BA1 /* Preview Assets.xcassets */,
+				41AED86928CDCD94009C6517 /* raw.json */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -292,6 +298,7 @@
 			files = (
 				4140145528C70B3200EA5BA1 /* Preview Assets.xcassets in Resources */,
 				4140145228C70B3200EA5BA1 /* Assets.xcassets in Resources */,
+				41AED86A28CDCD94009C6517 /* raw.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,6 +322,7 @@
 				41A25D4328CA706700315714 /* CountdownTimer.swift in Sources */,
 				4140146B28C7589800EA5BA1 /* CircularProgressView.swift in Sources */,
 				4140146028C70D4700EA5BA1 /* Networking.swift in Sources */,
+				41028F9528CDD7A300FB70FD /* OptionalView.swift in Sources */,
 				41EDDF6C28CD2A630092C662 /* PowerFlowViewModel.swift in Sources */,
 				4140146528C714C000EA5BA1 /* Report.swift in Sources */,
 				41339C7228CC7B7B0062B976 /* LoginView.swift in Sources */,

@@ -14,7 +14,7 @@ struct HistoricalViewModel: Sendable {
 
     init(raw: RawResponse) {
         currentSolarPower = raw.currentValue(for: "pvPower")
-        currentGridExport = raw.currentValue(for: "feedinPower")
+        currentGridExport = raw.currentValue(for: "feedinPower") - raw.currentValue(for: "gridConsumptionPower")
         currentHomeConsumption = raw.currentValue(for: "loadsPower")
     }
 }

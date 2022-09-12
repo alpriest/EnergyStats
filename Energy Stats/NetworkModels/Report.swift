@@ -10,7 +10,7 @@ import Foundation
 struct ReportRequest: Encodable {
     let deviceID: String
     let reportType = "day"
-    let variables = ["feedin", "generation", "gridConsumption", "chargeEnergyToTal", "dischargeEnergyToTal", "loads"]
+    let variables = ["feedin", "generation", "gridConsumption", "chargeEnergyToTal", "dischargeEnergyToTal", "loads", "pvPower"]
     let queryDate: QueryDate
 
     internal init(deviceID: String) {

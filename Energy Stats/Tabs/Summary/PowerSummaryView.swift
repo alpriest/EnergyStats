@@ -42,9 +42,11 @@ struct PowerSummaryView: View {
                         .frame(width: 45, height: 45)
                     VStack {
                         Text(viewModel.batteryStateOfCharge, format: .percent)
-                        Text(viewModel.batteryExtra)
-                            .multilineTextAlignment(.center)
-                            .font(.caption)
+                        OptionalView(viewModel.batteryExtra) {
+                            Text($0)
+                                .multilineTextAlignment(.center)
+                                .font(.caption)
+                        }
                     }
                     .background(GeometryReader { reader in
                         Color.clear.preference(key: BatterySizePreferenceKey.self, value: reader.size)

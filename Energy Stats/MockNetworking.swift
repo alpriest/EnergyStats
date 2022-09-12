@@ -31,7 +31,16 @@ class MockNetworking: Network {
         if throwOnCall {
             throw NetworkError.unknown
         }
-        return RawResponse(errno: 0, result: variables.map(makeData))
+
+        return try JSONDecoder().decode(RawResponse.self, from: rawData())
+    }
+
+    private func rawData() throws -> Data {
+        guard let url = Bundle(for: type(of: self)).url(forResource: "raw", withExtension: "json") else {
+            return Data()
+        }
+
+        return try Data(contentsOf: url)
     }
 
     private func makeData(_ title: String) -> RawResponse.ReportVariable {
