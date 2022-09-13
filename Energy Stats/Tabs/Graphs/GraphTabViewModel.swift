@@ -19,6 +19,10 @@ struct GraphVariable: Identifiable, Equatable {
     }
 }
 
+struct ValuesAtTime {
+    let values: [GraphValue]
+}
+
 class GraphTabViewModel: ObservableObject {
     private var networking: Networking
     private var rawData: [GraphValue] = [] {
@@ -37,20 +41,19 @@ class GraphTabViewModel: ObservableObject {
 
     func start() {
         Task {
-            let raw = try await networking.fetchRaw(variables: variables.map { $0.type })
             let report = try await networking.fetchReport(variables: variables.map { $0.type })
+            report.result.forEach {
+                guard let variable = VariableType(fromReport: $0.variable) else { return }
 
+                totals[variable] = $0.data.map { abs($0.value) }.reduce(0.0, +)
+            }
+
+            let raw = try await networking.fetchRaw(variables: variables.map { $0.type })
             let data: [GraphValue] = raw.result.flatMap { reportVariable in
                 reportVariable.data.compactMap {
                     guard let variable = VariableType(rawValue: reportVariable.variable) else { return nil }
                     return GraphValue(date: $0.time, value: $0.value, variable: variable)
                 }
-            }
-
-            report.result.forEach {
-                guard let variable = VariableType(fromReport: $0.variable) else { return }
-
-                totals[variable] = $0.data.map { abs($0.value) }.reduce(0.0, +)
             }
 
             await MainActor.run { self.rawData = data }
@@ -67,6 +70,11 @@ class GraphTabViewModel: ObservableObject {
 
         return totals[type]
     }
+
+    func data(at date: Date) -> ValuesAtTime? {
+        let result = ValuesAtTime(values: rawData.filter { $0.date == date })
+        return result
+    }
 }
 
 struct GraphValue: Identifiable {
@@ -74,5 +82,5 @@ struct GraphValue: Identifiable {
     let value: Double
     let variable: VariableType
 
-    var id: Date { date }
+    var id: String { "\(date.iso8601())_\(variable.title)" }
 }

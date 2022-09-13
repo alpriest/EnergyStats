@@ -16,7 +16,7 @@ struct BatteryViewModel: Sendable {
         chargeLevel = Double(batteryResponse.result.soc) / 100.0
 
         let powerAsCharge = 0 - batteryResponse.result.power
-        chargePowerTitle = "\(powerAsCharge > 0 ? "Charging " : "Supplying ")\(String(format: "%0.2f", powerAsCharge))kW"
+        chargePowerTitle = "\(powerAsCharge > 0 ? "Charging " : "Supplying ")\(powerAsCharge.kW())"
         chargePower = powerAsCharge
     }
 }

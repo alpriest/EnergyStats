@@ -12,14 +12,11 @@ struct GraphTabView: View {
     @ObservedObject var viewModel: GraphTabViewModel
     let credentials: Credentials
     @State private var selectedDate: Date?
-    @State private var location: String?
+    @GestureState var isDetectingPress = true
+    @State private var valuesAtTime: ValuesAtTime?
 
     var body: some View {
         VStack {
-            OptionalView(selectedDate) {
-                Text($0.small())
-            }
-
             Chart(viewModel.data) {
                 AreaMark(
                     x: .value("Time", $0.date, unit: .minute),
@@ -27,7 +24,6 @@ struct GraphTabView: View {
                     series: .value("Title", $0.variable.title),
                     stacking: .unstacked
                 )
-//                .interpolationMethod(.catmullRom(alpha: 0.5))
                 .foregroundStyle($0.variable.colour)
             }
             .chartPlotStyle { content in
@@ -36,19 +32,24 @@ struct GraphTabView: View {
             .chartOverlay { chartProxy in
                 GeometryReader { geometryProxy in
                     Rectangle().fill(.clear).contentShape(Rectangle())
-                        .gesture(SpatialTapGesture()
-                            .onEnded { value in
-                                let xLocation = value.location.x - geometryProxy[chartProxy.plotAreaFrame].origin.x
-                                location = String(describing: xLocation)
+                        .gesture(DragGesture()
+                            .updating($isDetectingPress) { currentState, _, _ in
+                                let xLocation = currentState.location.x - geometryProxy[chartProxy.plotAreaFrame].origin.x
 
                                 if let plotElement: Date = chartProxy.value(atX: xLocation) {
-                                    selectedDate = plotElement
-                                    if let day = viewModel.data.first(where: {
-                                        Calendar.current.isDate($0.date, equalTo: plotElement, toGranularity: .minute)
+                                    if let day = viewModel.data.sorted(by: { lhs, rhs in
+                                        lhs.date < rhs.date
+                                    }).first(where: {
+                                        $0.date > plotElement
                                     }) {
-                                        selectedDate = day.date
+                                        selectedDate = plotElement
+                                        valuesAtTime = viewModel.data(at: day.date)
                                     }
                                 }
+                            }
+                            .onEnded { _ in
+                                valuesAtTime = nil
+                                selectedDate = nil
                             }
                         )
                 }
@@ -67,6 +68,17 @@ struct GraphTabView: View {
                 }
             }
 
+            Color.clear.overlay(OptionalView(valuesAtTime) { valuesAtTime in
+                VStack {
+                    ForEach(valuesAtTime.values, id: \.id) { graphValue in
+                        HStack {
+                            Text(graphValue.variable.title)
+                            Text(graphValue.value.kW())
+                        }
+                    }
+                }
+            }).frame(height: 150)
+
             VStack(alignment: .leading) {
                 List(viewModel.variables.indices, id: \.self) { index in
                     HStack {
@@ -77,7 +89,7 @@ struct GraphTabView: View {
                                     .frame(width: 15, height: 15)
 
                                 OptionalView(viewModel.total(of: viewModel.variables[index].type)) {
-                                    Text(String(format: "%0.2f", $0))
+                                    Text($0.kW())
                                 }
 
                                 VStack(alignment: .leading) {

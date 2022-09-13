@@ -45,7 +45,8 @@ extension Date {
         return formatter.string(from: self)
     }
 
-    static func todayAt(hour: Int) -> Date {
-        Calendar.current.date(bySetting: .hour, value: hour - 1, of: Date())!
+    func iso8601() -> String {
+        let formatter = ISO8601DateFormatter()
+        return formatter.string(from: self)
     }
 }

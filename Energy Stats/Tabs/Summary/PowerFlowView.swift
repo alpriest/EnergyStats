@@ -23,7 +23,7 @@ struct PowerFlowView: View {
                         DirectionalArrow(direction: .up, animationDuration: animationDuration)
                     }
 
-                    Text("\(String(format: "%0.3f", amount))kW")
+                    Text(amount.kW())
                         .font(.footnote)
                         .bold()
                 }
