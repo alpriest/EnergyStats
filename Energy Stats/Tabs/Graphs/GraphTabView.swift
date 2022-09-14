@@ -17,6 +17,12 @@ struct GraphTabView: View {
 
     var body: some View {
         VStack {
+            Picker("Hours", selection: $viewModel.hours) {
+                Text("6").tag(6)
+                Text("12").tag(12)
+                Text("24").tag(24)
+            }.pickerStyle(.segmented)
+
             Chart(viewModel.data) {
                 AreaMark(
                     x: .value("Time", $0.date, unit: .minute),
@@ -29,6 +35,24 @@ struct GraphTabView: View {
             .chartPlotStyle { content in
                 content.background(Color.gray.gradient.opacity(0.2))
             }
+            .chartXAxis(content: {
+                AxisMarks(values: .stride(by: .hour)) { value in
+                    if value.index % 4 == 0, let date = value.as(Date.self) {
+                        AxisValueLabel(centered: true) {
+                            Text(date.formatted(.dateTime.hour()))
+                        }
+                    }
+                }
+            })
+            .chartYAxis(content: {
+                AxisMarks { value in
+                    if let amount = value.as(Double.self) {
+                        AxisValueLabel {
+                            Text(amount.kW())
+                        }
+                    }
+                }
+            })
             .chartOverlay { chartProxy in
                 GeometryReader { geometryProxy in
                     Rectangle().fill(.clear).contentShape(Rectangle())
@@ -46,10 +70,6 @@ struct GraphTabView: View {
                                         valuesAtTime = viewModel.data(at: day.date)
                                     }
                                 }
-                            }
-                            .onEnded { _ in
-                                valuesAtTime = nil
-                                selectedDate = nil
                             }
                         )
                 }
@@ -70,6 +90,7 @@ struct GraphTabView: View {
 
             Color.clear.overlay(OptionalView(valuesAtTime) { valuesAtTime in
                 VStack {
+                    OptionalView(selectedDate) { Text($0.small()) }
                     ForEach(valuesAtTime.values, id: \.id) { graphValue in
                         HStack {
                             Text(graphValue.variable.title)
@@ -83,20 +104,21 @@ struct GraphTabView: View {
                 List(viewModel.variables.indices, id: \.self) { index in
                     HStack {
                         Toggle(isOn: $viewModel.variables[index].enabled) {
-                            HStack {
+                            HStack(alignment: .top) {
                                 Circle()
                                     .foregroundColor(viewModel.variables[index].type.colour)
                                     .frame(width: 15, height: 15)
-
-                                OptionalView(viewModel.total(of: viewModel.variables[index].type)) {
-                                    Text($0.kW())
-                                }
+                                    .padding(.top, 5)
 
                                 VStack(alignment: .leading) {
                                     Text(viewModel.variables[index].type.title)
                                     Text(viewModel.variables[index].type.description)
-                                        .font(.system(size: 8))
+                                        .font(.system(size: 10))
                                         .foregroundColor(.gray)
+                                }
+
+                                OptionalView(viewModel.total(of: viewModel.variables[index].type)) {
+                                    Text($0.kW())
                                 }
                             }
                         }
@@ -108,7 +130,6 @@ struct GraphTabView: View {
             }.onChange(of: viewModel.variables) { _ in
                 viewModel.refresh()
             }
-            .font(.caption)
 
             Button("logout") {
                 credentials.username = nil

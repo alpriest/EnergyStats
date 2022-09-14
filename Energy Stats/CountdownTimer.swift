@@ -16,6 +16,7 @@ class CountdownTimer: ObservableObject {
     }
 
     func start(totalTicks: Int, onTick: @escaping (Int) -> Void, onCompletion: @escaping () -> Void) {
+        stop()
         ticksRemaining = totalTicks
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
             guard let self = self else { return }
@@ -34,6 +35,7 @@ class CountdownTimer: ObservableObject {
 
     func stop() {
         timer?.invalidate()
+        timer = nil
         ticksRemaining = 0
     }
 }

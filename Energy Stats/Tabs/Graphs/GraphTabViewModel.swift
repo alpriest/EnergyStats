@@ -34,6 +34,9 @@ class GraphTabViewModel: ObservableObject {
 
     @Published var data: [GraphValue] = []
     @Published var variables: [GraphVariable] = [GraphVariable(.feedinPower), GraphVariable(.gridConsumptionPower), GraphVariable(.generationPower), GraphVariable(.batChargePower), GraphVariable(.pvPower)]
+    @Published var hours = 6 { didSet {
+        refresh()
+    }}
 
     init(_ networking: Networking) {
         self.networking = networking
@@ -49,20 +52,27 @@ class GraphTabViewModel: ObservableObject {
             }
 
             let raw = try await networking.fetchRaw(variables: variables.map { $0.type })
-            let data: [GraphValue] = raw.result.flatMap { reportVariable in
+            let rawData: [GraphValue] = raw.result.flatMap { reportVariable in
                 reportVariable.data.compactMap {
                     guard let variable = VariableType(rawValue: reportVariable.variable) else { return nil }
                     return GraphValue(date: $0.time, value: $0.value, variable: variable)
                 }
             }
 
-            await MainActor.run { self.rawData = data }
+            await MainActor.run {
+                self.rawData = rawData
+                self.refresh()
+            }
         }
     }
 
     func refresh() {
-        let hiddenVariables = variables.filter { $0.enabled == false }.map { $0.type }
-        data = rawData.filter { !hiddenVariables.contains($0.variable) }
+        let hiddenVariableTypes = variables.filter { $0.enabled == false }.map { $0.type }
+        let oldest = Date().addingTimeInterval(0 - (3600 * Double(hours)))
+
+        data = rawData
+            .filter { $0.date > oldest }
+            .filter { !hiddenVariableTypes.contains($0.variable) }
     }
 
     func total(of type: VariableType) -> Double? {

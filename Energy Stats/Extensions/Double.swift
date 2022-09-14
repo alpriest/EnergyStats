@@ -9,6 +9,10 @@ import Foundation
 
 extension Double {
     func kW() -> String {
-        String(format: "%0.2fkW", self)
+        let places = 2
+        let divisor = pow(10.0, Double(places))
+        let divided = (self * divisor).rounded() / divisor
+
+        return String(format: "%0.2fkW", divided)
     }
 }

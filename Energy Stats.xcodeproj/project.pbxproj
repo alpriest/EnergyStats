@@ -62,6 +62,7 @@
 		4107446628CA22B3006D5D7D /* InverterPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterPath.swift; sourceTree = "<group>"; };
 		4107446828CA42D2006D5D7D /* PylonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PylonView.swift; sourceTree = "<group>"; };
 		4107446B28CA57A9006D5D7D /* SummaryTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTabView.swift; sourceTree = "<group>"; };
+		412E3C7D28D2519B004A0DCF /* Energy-Stats-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Energy-Stats-Info.plist"; sourceTree = SOURCE_ROOT; };
 		41339C7128CC7B7B0062B976 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		41339C7328CC7BA50062B976 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		4140144A28C70B3200EA5BA1 /* Energy Stats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Energy Stats.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -146,6 +147,7 @@
 		4140144C28C70B3200EA5BA1 /* Energy Stats */ = {
 			isa = PBXGroup;
 			children = (
+				412E3C7D28D2519B004A0DCF /* Energy-Stats-Info.plist */,
 				4106A92E28D05EC10009DA28 /* Extensions */,
 				4107446A28CA57A1006D5D7D /* Tabs */,
 				4140145128C70B3200EA5BA1 /* Assets.xcassets */,
@@ -501,11 +503,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Energy Stats/Preview Content\"";
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Energy-Stats-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -533,11 +536,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Energy Stats/Preview Content\"";
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Energy-Stats-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

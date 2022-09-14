@@ -32,7 +32,17 @@ class MockNetworking: Network {
             throw NetworkError.unknown
         }
 
-        return try JSONDecoder().decode(RawResponse.self, from: rawData())
+        let response = try JSONDecoder().decode(RawResponse.self, from: rawData())
+
+        return RawResponse(errno: response.errno, result: response.result.map {
+            RawResponse.ReportVariable(variable: $0.variable, data: $0.data.map {
+                let thenComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: $0.time)
+
+                let date = Calendar.current.date(bySettingHour: thenComponents.hour ?? 0, minute: thenComponents.minute ?? 0, second: thenComponents.second ?? 0, of: Date())
+
+                return .init(time: date ?? $0.time, value: $0.value)
+            })
+        })
     }
 
     private func rawData() throws -> Data {
