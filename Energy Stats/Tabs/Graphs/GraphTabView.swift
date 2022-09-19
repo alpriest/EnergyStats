@@ -10,7 +10,6 @@ import SwiftUI
 
 struct GraphTabView: View {
     @ObservedObject var viewModel: GraphTabViewModel
-    let credentials: KeychainStore
     @State private var selectedDate: Date?
     @GestureState var isDetectingPress = true
     @State private var valuesAtTime: ValuesAtTime?
@@ -37,7 +36,7 @@ struct GraphTabView: View {
             }
             .chartXAxis(content: {
                 AxisMarks(values: .stride(by: .hour)) { value in
-                    if value.index % 3 == 0, let date = value.as(Date.self) {
+                    if value.index % 2 == 0, let date = value.as(Date.self) {
                         AxisValueLabel(centered: true) {
                             Text(date.formatted(.dateTime.hour()))
                         }
@@ -100,27 +99,34 @@ struct GraphTabView: View {
                 }
             }).frame(height: 150)
 
+            Spacer()
+
             VStack(alignment: .leading) {
-                List(viewModel.variables.indices, id: \.self) { index in
+                List(viewModel.variables, id: \.self) { variable in
                     HStack {
-                        Toggle(isOn: $viewModel.variables[index].enabled) {
+                        Button(action: { viewModel.toggle(visibilityOf: variable) }) {
                             HStack(alignment: .top) {
                                 Circle()
-                                    .foregroundColor(viewModel.variables[index].type.colour)
+                                    .foregroundColor(variable.type.colour)
                                     .frame(width: 15, height: 15)
                                     .padding(.top, 5)
 
                                 VStack(alignment: .leading) {
-                                    Text(viewModel.variables[index].type.title)
-                                    Text(viewModel.variables[index].type.description)
+                                    Text(variable.type.title)
+                                    Text(variable.type.description)
                                         .font(.system(size: 10))
                                         .foregroundColor(.gray)
                                 }
+                                .opacity(variable.enabled ? 1.0 : 0.5)
+
+                                Spacer()
+
+                                OptionalView(viewModel.total(of: variable.type)) {
+                                    Text($0.kW())
+                                }
                             }
                         }
-                        OptionalView(viewModel.total(of: viewModel.variables[index].type)) {
-                            Text($0.kW())
-                        }
+                        .buttonStyle(.plain)
                     }
                     .listRowBackground(Color.white.opacity(0.5))
                     .listRowSeparator(.hidden)
@@ -131,17 +137,8 @@ struct GraphTabView: View {
             }.onChange(of: viewModel.variables) { _ in
                 viewModel.refresh()
             }
-
-            Button("logout") {
-                credentials.logout()
-            }.buttonStyle(.bordered)
         }
         .padding()
-        .background(Image("sunny-day")
-            .resizable()
-            .ignoresSafeArea()
-            .aspectRatio(contentMode: .fill)
-            .opacity(0.5))
         .onAppear {
             viewModel.start()
         }
@@ -150,6 +147,6 @@ struct GraphTabView: View {
 
 struct GraphTabView_Previews: PreviewProvider {
     static var previews: some View {
-        GraphTabView(viewModel: GraphTabViewModel(MockNetworking()), credentials: KeychainStore())
+        GraphTabView(viewModel: GraphTabViewModel(MockNetworking()))
     }
 }

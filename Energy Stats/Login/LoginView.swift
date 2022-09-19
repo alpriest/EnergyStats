@@ -29,7 +29,7 @@ struct LoginView: View {
                 .autocorrectionDisabled()
 
             Button("Let's go") {
-                loginManager.login(username: username, password: password)
+                Task { await loginManager.login(username: username, password: password) }
             }
             .padding()
             .buttonStyle(.borderedProminent)

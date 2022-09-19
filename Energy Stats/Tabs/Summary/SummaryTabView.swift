@@ -34,7 +34,6 @@ struct SummaryTabView: View {
                 Spacer()
             }
             .foregroundColor(.gray)
-            .background(Color.red)
         }
         .padding()
         .background(backgroundGradient)

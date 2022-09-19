@@ -18,31 +18,39 @@ class LoginManager: ObservableObject {
     private let networking: Networking
     private let store: KeychainStore
     private var cancellables = Set<AnyCancellable>()
-    @Published var state = State.idle
+    @MainActor @Published var state = State.idle
+    @MainActor @Published var isLoggedIn: Bool = false
 
     init(networking: Networking, store: KeychainStore) {
         self.networking = networking
         self.store = store
 
-        self.store.$hasCredentials.sink { [weak self] hasCredentials in
-            self?.isLoggedIn = hasCredentials
-        }.store(in: &cancellables)
+        self.store.$hasCredentials
+            .sink { hasCredentials in
+                Task { await MainActor.run { [weak self] in
+                    self?.isLoggedIn = hasCredentials
+                }}
+            }.store(in: &cancellables)
     }
 
-    @Published var isLoggedIn: Bool = false
+    func login(username: String, password: String) async {
+        do {
+            try store.store(username: username, password: password)
+            try await networking.verifyCredentials()
+        } catch let error as Network.NetworkError {
+            store.logout()
 
-    func login(username: String, password: String) {
-        Task {
-            do {
-                try await networking.verifyCredentials()
-                try store.store(username: username, password: password)
-            } catch let error as Network.NetworkError {
+            await MainActor.run {
                 switch error {
                 case .badCredentials:
                     self.state = .error("Wrong credentials, try again")
                 case .unknown:
                     self.state = .error("Could not login. Check your internet connnection")
                 }
+            }
+        } catch {
+            await MainActor.run {
+                self.state = .error("Could not login. Check your internet connnection \(error)")
             }
         }
     }

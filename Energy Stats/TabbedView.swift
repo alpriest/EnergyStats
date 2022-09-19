@@ -30,15 +30,22 @@ struct TabbedView: View {
                     }
                 }
 
-            GraphTabView(viewModel: graphViewModel, credentials: credentials)
+            GraphTabView(viewModel: graphViewModel)
                 .tabItem {
                     VStack {
                         Image(systemName: "lines.measurement.horizontal")
                         Text("Graphs")
                     }
                 }
+
+            SettingsTabView(credentials: credentials)
+                .tabItem {
+                    VStack {
+                        Image(systemName: "gearshape")
+                        Text("Settings")
+                    }
+                }
         }
-        .tint(Color.red)
         .edgesIgnoringSafeArea(.all)
     }
 }

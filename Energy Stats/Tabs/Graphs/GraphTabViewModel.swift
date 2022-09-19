@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct GraphVariable: Identifiable, Equatable {
+struct GraphVariable: Identifiable, Equatable, Hashable {
     let type: VariableType
     var enabled = true
     var id: String { type.title }
@@ -30,6 +30,7 @@ class GraphTabViewModel: ObservableObject {
             data = rawData
         }
     }
+
     private var totals: [VariableType: Double] = [:]
 
     @Published var data: [GraphValue] = []
@@ -82,8 +83,21 @@ class GraphTabViewModel: ObservableObject {
     }
 
     func data(at date: Date) -> ValuesAtTime? {
-        let result = ValuesAtTime(values: rawData.filter { $0.date == date })
+        let visibleVariableTypes = variables.filter { $0.enabled }.map { $0.type }
+        let result = ValuesAtTime(values: rawData.filter { $0.date == date && visibleVariableTypes.contains($0.variable) })
         return result
+    }
+
+    func toggle(visibilityOf variable: GraphVariable) {
+        variables = variables.map {
+            if $0.type == variable.type {
+                var modified = $0
+                modified.enabled.toggle()
+                return modified
+            } else {
+                return $0
+            }
+        }
     }
 }
 
