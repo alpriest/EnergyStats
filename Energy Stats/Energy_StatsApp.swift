@@ -9,15 +9,17 @@ import SwiftUI
 
 @main
 struct Energy_StatsApp: App {
-    @ObservedObject var credentials = Credentials()
-
     var body: some Scene {
-        WindowGroup {
-            if credentials.hasCredentials {
-                TabbedView(networking: Network(credentials: credentials), credentials: credentials)
-            } else {
-                LoginView(credentials: credentials)
-            }
+        let keychainStore = KeychainStore()
+        let network = Network(credentials: keychainStore)
+        let loginManager = LoginManager(networking: network, store: keychainStore)
+
+        return WindowGroup {
+            ContentView(
+                loginManager: loginManager,
+                network: network,
+                credentials: keychainStore
+            )
         }
     }
 }

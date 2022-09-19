@@ -22,20 +22,22 @@ struct PowerFlowViewModel {
 class BatteryCalculator {
     private let capacitykW: Double
     private let formatter = RelativeDateTimeFormatter()
+    private let minimumSOC: Double
 
-    init(capacitykW: Double) {
+    init(capacitykW: Double, minimumSOC: Double = 0.2) {
         self.capacitykW = capacitykW
+        self.minimumSOC = minimumSOC
     }
 
     var minimumCharge: Double {
-        capacitykW * 0.2
+        capacitykW * minimumSOC
     }
 
     func batteryRemaining(batteryChargePowerkWH: Double, batteryStartOfCharge: Double) -> String? {
         let currentEstimatedCharge = capacitykW * batteryStartOfCharge
 
         if batteryChargePowerkWH > 0 { // battery charging
-            if batteryStartOfCharge >= 99 { return nil }
+            if batteryStartOfCharge >= 98.99 { return nil }
 
             let capacityRemaining = capacitykW - currentEstimatedCharge
             let minsToFullCharge = (capacityRemaining / batteryChargePowerkWH) * 60 * 60
@@ -43,6 +45,7 @@ class BatteryCalculator {
 
             return "Full \(duration)"
         } else { // battery emptying
+            if batteryStartOfCharge <= (minimumSOC * 1.01) { return nil }
             let chargeRemaining = currentEstimatedCharge - minimumCharge
             let minsUntilEmpty = (chargeRemaining / abs(batteryChargePowerkWH)) * 60 * 60
             let duration = formatter.localizedString(fromTimeInterval: minsUntilEmpty)

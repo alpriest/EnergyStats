@@ -10,7 +10,7 @@ import SwiftUI
 
 struct GraphTabView: View {
     @ObservedObject var viewModel: GraphTabViewModel
-    let credentials: Credentials
+    let credentials: KeychainStore
     @State private var selectedDate: Date?
     @GestureState var isDetectingPress = true
     @State private var valuesAtTime: ValuesAtTime?
@@ -37,7 +37,7 @@ struct GraphTabView: View {
             }
             .chartXAxis(content: {
                 AxisMarks(values: .stride(by: .hour)) { value in
-                    if value.index % 4 == 0, let date = value.as(Date.self) {
+                    if value.index % 3 == 0, let date = value.as(Date.self) {
                         AxisValueLabel(centered: true) {
                             Text(date.formatted(.dateTime.hour()))
                         }
@@ -116,28 +116,32 @@ struct GraphTabView: View {
                                         .font(.system(size: 10))
                                         .foregroundColor(.gray)
                                 }
-
-                                OptionalView(viewModel.total(of: viewModel.variables[index].type)) {
-                                    Text($0.kW())
-                                }
                             }
                         }
+                        OptionalView(viewModel.total(of: viewModel.variables[index].type)) {
+                            Text($0.kW())
+                        }
                     }
+                    .listRowBackground(Color.white.opacity(0.5))
                     .listRowSeparator(.hidden)
                 }
                 .scrollDisabled(true)
                 .listStyle(.plain)
+                .scrollContentBackground(.hidden)
             }.onChange(of: viewModel.variables) { _ in
                 viewModel.refresh()
             }
 
             Button("logout") {
-                credentials.username = nil
-                credentials.password = nil
-                credentials.hasCredentials = false
+                credentials.logout()
             }.buttonStyle(.bordered)
         }
         .padding()
+        .background(Image("sunny-day")
+            .resizable()
+            .ignoresSafeArea()
+            .aspectRatio(contentMode: .fill)
+            .opacity(0.5))
         .onAppear {
             viewModel.start()
         }
@@ -146,6 +150,6 @@ struct GraphTabView: View {
 
 struct GraphTabView_Previews: PreviewProvider {
     static var previews: some View {
-        GraphTabView(viewModel: GraphTabViewModel(MockNetworking()), credentials: Credentials())
+        GraphTabView(viewModel: GraphTabViewModel(MockNetworking()), credentials: KeychainStore())
     }
 }

@@ -10,7 +10,7 @@ import SwiftUI
 struct LoginView: View {
     @State private var username: String = ""
     @State private var password: String = ""
-    let credentials: Credentials
+    @ObservedObject var loginManager: LoginManager
 
     var body: some View {
         VStack {
@@ -29,18 +29,27 @@ struct LoginView: View {
                 .autocorrectionDisabled()
 
             Button("Let's go") {
-                credentials.username = username
-                credentials.password = password
-                credentials.hasCredentials = true
+                loginManager.login(username: username, password: password)
             }
             .padding()
             .buttonStyle(.borderedProminent)
+
+            switch loginManager.state {
+            case .idle:
+                EmptyView()
+            case .busy:
+                ProgressView()
+                    .progressViewStyle(.circular)
+            case .error(let reason):
+                Text(reason)
+            }
+
         }.padding()
     }
 }
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(credentials: Credentials())
+        LoginView(loginManager: LoginManager(networking: MockNetworking(), store: KeychainStore()))
     }
 }

@@ -46,6 +46,7 @@ struct PowerSummaryView: View {
                             Text($0)
                                 .multilineTextAlignment(.center)
                                 .font(.caption)
+                                .opacity(0.8)
                         }
                     }
                     .background(GeometryReader { reader in
@@ -56,7 +57,6 @@ struct PowerSummaryView: View {
                     })
                 }
                 .frame(width: powerViewWidth)
-                .padding(.leading, 14)
 
                 Spacer()
 
@@ -78,8 +78,8 @@ struct PowerSummaryView: View {
                     Color.clear.frame(width: iconFooterSize.width, height: iconFooterSize.height)
                 }
                 .frame(width: powerViewWidth)
-                .padding(.trailing, 14)
             }
+            .padding(.horizontal, 14)
         }
     }
 }

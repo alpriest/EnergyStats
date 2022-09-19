@@ -20,30 +20,31 @@ class SummaryTabViewModel: ObservableObject {
         case loaded(PowerFlowViewModel)
         case failed(String)
     }
-    
+
     init(_ network: Networking) {
         self.network = network
 
-        NotificationCenter.default.addObserver(self, selector: #selector(stopTimer), name: UIApplication.willResignActiveNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(startTimer), name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.willResignActiveNotification), name: UIApplication.willResignActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
     }
 
-    @objc
     func startTimer() {
-        timer.start(totalTicks: 30) { ticksRemaining in
+        self.timer.start(totalTicks: 30) { ticksRemaining in
             Task { await MainActor.run { self.updateState = "Next update in \(ticksRemaining)s" } }
         } onCompletion: {
             Task {
                 await MainActor.run { self.updateState = "Updating..." }
                 await self.loadData()
-                self.startTimer()
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.startTimer()
+                }
             }
         }
     }
 
-    @objc
     func stopTimer() {
-        timer.stop()
+        self.timer.stop()
     }
 
     @MainActor
@@ -59,8 +60,19 @@ class SummaryTabViewModel: ObservableObject {
 
             self.state = .loaded(PowerFlowViewModel(solar: 0, battery: 0, home: 0, grid: 0, batteryStateOfCharge: 0))
             self.state = .loaded(summary)
+            self.updateState = " "
         } catch {
-            self.state = .failed(error.localizedDescription)
+            self.state = .failed(String(describing: error))
         }
+    }
+
+    @objc func didBecomeActiveNotification() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.startTimer()
+        }
+    }
+
+    @objc func willResignActiveNotification() {
+        self.stopTimer()
     }
 }

@@ -9,11 +9,11 @@ import SwiftUI
 
 struct TabbedView: View {
     let networking: Networking
-    let credentials: Credentials
+    let credentials: KeychainStore
     private let summaryViewModel: SummaryTabViewModel
     private let graphViewModel: GraphTabViewModel
 
-    init(networking: Networking, credentials: Credentials) {
+    init(networking: Networking, credentials: KeychainStore) {
         self.networking = networking
         self.credentials = credentials
         summaryViewModel = SummaryTabViewModel(networking)
@@ -38,12 +38,13 @@ struct TabbedView: View {
                     }
                 }
         }
+        .tint(Color.red)
+        .edgesIgnoringSafeArea(.all)
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct TabbedView_Previews: PreviewProvider {
     static var previews: some View {
-        TabbedView(networking: MockNetworking(), credentials: Credentials())
-            .previewInterfaceOrientation(.landscapeLeft)
+        TabbedView(networking: MockNetworking(), credentials: KeychainStore())
     }
 }

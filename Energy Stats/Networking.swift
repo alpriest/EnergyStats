@@ -11,10 +11,11 @@ extension URL {
     static var auth = URL(string: "https://www.foxesscloud.com/c/v0/user/login")!
     static var report = URL(string: "https://www.foxesscloud.com/c/v0/device/history/report")!
     static var raw = URL(string: "https://www.foxesscloud.com/c/v0/device/history/raw")!
-    static var battery = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/info?id=03274209-486c-4ea3-9c28-159f25ee84cb")!
+    static var battery = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/info?id=03274209-486c-4ea3-9c28-159f25ee84cb")! // TODO: Battery ID
 }
 
 protocol Networking {
+    func verifyCredentials() async throws
     func fetchReport(variables: [VariableType]) async throws -> ReportResponse
     func fetchBattery() async throws -> BatteryResponse
     func fetchRaw(variables: [VariableType]) async throws -> RawResponse
@@ -27,14 +28,18 @@ class Network: Networking, ObservableObject {
     }
 
     var token: String?
-    let credentials: Credentials
+    let credentials: KeychainStore
 
-    init(credentials: Credentials) {
+    init(credentials: KeychainStore) {
         self.credentials = credentials
     }
 
+    func verifyCredentials() async throws {
+        _ = try await fetchToken()
+    }
+
     func fetchToken() async throws -> String {
-        guard let hashedPassword = credentials.hashedPassword, let username = credentials.username else { throw NetworkError.badCredentials }
+        guard let hashedPassword = credentials.getPassword(), let username = credentials.getUsername() else { throw NetworkError.badCredentials }
 
         var request = URLRequest(url: URL.auth)
         request.httpMethod = "POST"

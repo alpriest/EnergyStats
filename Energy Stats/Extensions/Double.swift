@@ -15,4 +15,18 @@ extension Double {
 
         return String(format: "%0.2fkW", divided)
     }
+
+    func rounded(decimalPlaces: Int) -> Double {
+        let power = pow(10, Double(decimalPlaces))
+        return (self * power).rounded() / power
+    }
+
+    func percent() -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .percent
+        formatter.minimumIntegerDigits = 1
+        formatter.maximumIntegerDigits = 3
+        formatter.maximumFractionDigits = 2
+        return formatter.string(from: NSNumber(value: self))!
+    }
 }

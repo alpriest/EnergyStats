@@ -36,7 +36,7 @@ struct PowerFlowView: View {
     }
 
     var isFlowing: Bool {
-        fabs(amount) == 0.0
+        amount.rounded(decimalPlaces: 2) == 0.0
     }
 }
 
@@ -46,7 +46,7 @@ struct PowerFlowView_Previews: PreviewProvider {
             PowerFlowView(amount: 2.0)
                 .background(Color.red)
 
-            PowerFlowView(amount: 0)
+            PowerFlowView(amount: 0.001)
                 .background(Color.red)
 
             PowerFlowView(amount: -4.5)

@@ -9,17 +9,16 @@ import SwiftUI
 
 struct SummaryTabView: View {
     @ObservedObject var viewModel: SummaryTabViewModel
+    @State private var nextUpdate = " "
 
     var body: some View {
         VStack {
             switch viewModel.state {
             case let .loaded(summary):
                 VStack {
-                    VStack {
-                        PowerSummaryView(viewModel: summary)
-                    }
-                    .padding()
+                    PowerSummaryView(viewModel: summary)
                 }
+                .padding()
             case let .failed(reason):
                 Text(reason)
                     .multilineTextAlignment(.center)
@@ -31,9 +30,11 @@ struct SummaryTabView: View {
 
             HStack {
                 Spacer()
-                Text(viewModel.updateState)
+                Text(nextUpdate)
                 Spacer()
-            }.foregroundColor(.gray)
+            }
+            .foregroundColor(.gray)
+            .background(Color.red)
         }
         .padding()
         .background(backgroundGradient)
@@ -43,6 +44,11 @@ struct SummaryTabView: View {
         }
         .onDisappear {
             viewModel.stopTimer()
+        }
+        .onChange(of: viewModel.updateState) { newValue in
+            withAnimation {
+                nextUpdate = newValue
+            }
         }
     }
 
