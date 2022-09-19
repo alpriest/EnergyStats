@@ -54,6 +54,8 @@ class KeychainStore: ObservableObject {
             throw KeychainError()
         }
 
+        logout()
+
         let keychainItemQuery = [
             kSecValueData: hashed.data(using: .utf8)!,
             kSecAttrAccount: username,

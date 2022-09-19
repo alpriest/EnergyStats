@@ -9,14 +9,39 @@ import SwiftUI
 
 struct SettingsTabView: View {
     let credentials: KeychainStore
+    @State private var minSOC = 0.2
+    @State private var capacity = "2600"
 
     var body: some View {
         VStack(spacing: 44) {
-            Text("You are logged in as \(credentials.getUsername() ?? "")")
+            Form {
+                Section(content: {
+                    HStack {
+                        Text("Min SOC")
+                        HStack {
+                            Slider(value: $minSOC, in: 0 ... 1, step: 0.1)
+                            Text(minSOC, format: .percent)
+                        }
+                    }
 
-            Button("logout") {
-                credentials.logout()
-            }.buttonStyle(.bordered)
+                    HStack {
+                        Text("kWh capacity")
+                        TextField("kWh", text: $capacity)
+                            .keyboardType(.numberPad)
+                    }
+                }, header: {
+                    Text("Battery")
+                })
+
+                Section {
+                    VStack {
+                        Text("You are logged in as \(credentials.getUsername() ?? "")")
+                        Button("logout") {
+                            credentials.logout()
+                        }.buttonStyle(.bordered)
+                    }.frame(maxWidth: .infinity)
+                }
+            }
         }
     }
 }
