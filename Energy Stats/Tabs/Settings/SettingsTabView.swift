@@ -25,9 +25,12 @@ struct SettingsTabView: View {
                     }
 
                     HStack {
-                        Text("kWh capacity")
+                        Text("Capacity")
+                        Spacer()
                         TextField("kWh", text: $capacity)
+                            .multilineTextAlignment(.trailing)
                             .keyboardType(.numberPad)
+                        Text("kWh")
                     }
                 }, header: {
                     Text("Battery")
@@ -42,6 +45,13 @@ struct SettingsTabView: View {
                     }.frame(maxWidth: .infinity)
                 }
             }
+        }.onChange(of: minSOC) { newValue in
+            Config.shared.minSOC = String(describing: newValue)
+        }.onChange(of: capacity) { newValue in
+            Config.shared.batteryCapacity = String(describing: newValue)
+        }.onAppear {
+            minSOC = Config.shared.minSOC.asDouble() ?? 0.2
+            capacity = Config.shared.batteryCapacity ?? "2600"
         }
     }
 }

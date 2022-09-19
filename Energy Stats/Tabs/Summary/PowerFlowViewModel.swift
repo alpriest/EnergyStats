@@ -15,7 +15,10 @@ struct PowerFlowViewModel {
     let batteryStateOfCharge: Double
 
     var batteryExtra: String? {
-        BatteryCalculator(capacitykW: 7.8).batteryRemaining(batteryChargePowerkWH: battery, batteryStartOfCharge: batteryStateOfCharge)
+        let capacity = Config.shared.batteryCapacity.asDouble() ?? 7800
+        let minSOC = Config.shared.minSOC.asDouble() ?? 0.2
+
+        return BatteryCalculator(capacitykW: capacity, minimumSOC: minSOC).batteryRemaining(batteryChargePowerkWH: battery, batteryStateOfCharge: batteryStateOfCharge)
     }
 }
 
@@ -24,7 +27,7 @@ class BatteryCalculator {
     private let formatter = RelativeDateTimeFormatter()
     private let minimumSOC: Double
 
-    init(capacitykW: Double, minimumSOC: Double = 0.2) {
+    init(capacitykW: Double, minimumSOC: Double) {
         self.capacitykW = capacitykW
         self.minimumSOC = minimumSOC
     }
@@ -33,24 +36,32 @@ class BatteryCalculator {
         capacitykW * minimumSOC
     }
 
-    func batteryRemaining(batteryChargePowerkWH: Double, batteryStartOfCharge: Double) -> String? {
-        let currentEstimatedCharge = capacitykW * batteryStartOfCharge
+    func batteryRemaining(batteryChargePowerkWH: Double, batteryStateOfCharge: Double) -> String? {
+        let currentEstimatedCharge = capacitykW * batteryStateOfCharge
 
         if batteryChargePowerkWH > 0 { // battery charging
-            if batteryStartOfCharge >= 98.99 { return nil }
+            if batteryStateOfCharge >= 98.99 { return nil }
 
             let capacityRemaining = capacitykW - currentEstimatedCharge
-            let minsToFullCharge = (capacityRemaining / batteryChargePowerkWH) * 60 * 60
+            let minsToFullCharge = (capacityRemaining / (batteryChargePowerkWH * 1000.0)) * 60 * 60
             let duration = formatter.localizedString(fromTimeInterval: minsToFullCharge)
 
             return "Full \(duration)"
         } else { // battery emptying
-            if batteryStartOfCharge <= (minimumSOC * 1.01) { return nil }
+            if batteryStateOfCharge <= (minimumSOC * 1.04) { return nil }
             let chargeRemaining = currentEstimatedCharge - minimumCharge
-            let minsUntilEmpty = (chargeRemaining / abs(batteryChargePowerkWH)) * 60 * 60
+            let minsUntilEmpty = (chargeRemaining / abs(batteryChargePowerkWH * 1000.0)) * 60 * 60
             let duration = formatter.localizedString(fromTimeInterval: minsUntilEmpty)
 
             return "Empty \(duration)"
         }
+    }
+}
+
+extension Optional where Wrapped == String {
+    func asDouble() -> Double? {
+        guard let self = self else { return nil }
+
+        return Double(self)
     }
 }

@@ -8,8 +8,17 @@
 import Foundation
 import CryptoKit
 
-enum Config {
+class Config {
     static let deviceID = "03274209-486c-4ea3-9c28-159f25ee84cb" // todo: fetch and store on login
+    static var shared: Config {
+        Config()
+    }
+
+    @UserDefaultsStored(key: "minSOC")
+    var minSOC: String?
+
+    @UserDefaultsStored(key: "batteryCapacity")
+    var batteryCapacity: String?
 }
 
 extension String {
@@ -19,5 +28,19 @@ extension String {
         return digest.map {
             String(format: "%02hhx", $0)
         }.joined()
+    }
+}
+
+@propertyWrapper
+struct UserDefaultsStored {
+    var key: String
+
+    var wrappedValue: String? {
+        get {
+            UserDefaults.standard.string(forKey: key)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: key)
+        }
     }
 }
