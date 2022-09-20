@@ -60,9 +60,7 @@ struct GraphTabView: View {
                                 let xLocation = currentState.location.x - geometryProxy[chartProxy.plotAreaFrame].origin.x
 
                                 if let plotElement: Date = chartProxy.value(atX: xLocation) {
-                                    if let day = viewModel.data.sorted(by: { lhs, rhs in
-                                        lhs.date < rhs.date
-                                    }).first(where: {
+                                    if let day = viewModel.data.first(where: {
                                         $0.date > plotElement
                                     }) {
                                         selectedDate = plotElement
@@ -80,7 +78,7 @@ struct GraphTabView: View {
                        let location = elementLocation - geometryReader[chartProxy.plotAreaFrame].origin.x
                     {
                         RoundedRectangle(cornerRadius: 6, style: .continuous)
-                            .fill(Color.yellow)
+                            .fill(Color.black)
                             .frame(width: 2, height: chartProxy.plotAreaSize.height)
                             .offset(x: location)
                     }

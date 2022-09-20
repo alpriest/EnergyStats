@@ -11,40 +11,42 @@ struct SettingsTabView: View {
     let credentials: KeychainStore
     @State private var minSOC = 0.2
     @State private var capacity = "2600"
+    @FocusState private var minSOCIsFocused: Bool
 
     var body: some View {
-        VStack(spacing: 44) {
-            Form {
-                Section(content: {
+        Form {
+            Section(content: {
+                HStack {
+                    Text("Min SOC")
                     HStack {
-                        Text("Min SOC")
-                        HStack {
-                            Slider(value: $minSOC, in: 0 ... 1, step: 0.1)
-                            Text(minSOC, format: .percent)
-                        }
+                        Slider(value: $minSOC, in: 0 ... 1, step: 0.1)
+                        Text(minSOC, format: .percent)
                     }
-
-                    HStack {
-                        Text("Capacity")
-                        Spacer()
-                        TextField("kWh", text: $capacity)
-                            .multilineTextAlignment(.trailing)
-                            .keyboardType(.numberPad)
-                        Text("kWh")
-                    }
-                }, header: {
-                    Text("Battery")
-                })
-
-                Section {
-                    VStack {
-                        Text("You are logged in as \(credentials.getUsername() ?? "")")
-                        Button("logout") {
-                            credentials.logout()
-                        }.buttonStyle(.bordered)
-                    }.frame(maxWidth: .infinity)
                 }
+
+                HStack {
+                    Text("Capacity")
+                    Spacer()
+                    TextField("kW", text: $capacity)
+                        .multilineTextAlignment(.trailing)
+                        .keyboardType(.numberPad)
+                        .focused($minSOCIsFocused)
+                    Text("kW")
+                }
+            }, header: {
+                Text("Battery")
+            })
+
+            Section {
+                VStack {
+                    Text("You are logged in as \(credentials.getUsername() ?? "")")
+                    Button("logout") {
+                        credentials.logout()
+                    }.buttonStyle(.bordered)
+                }.frame(maxWidth: .infinity)
             }
+        }.onTapGesture {
+            minSOCIsFocused = false
         }.onChange(of: minSOC) { newValue in
             Config.shared.minSOC = String(describing: newValue)
         }.onChange(of: capacity) { newValue in

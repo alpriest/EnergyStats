@@ -74,6 +74,9 @@ class GraphTabViewModel: ObservableObject {
         data = rawData
             .filter { $0.date > oldest }
             .filter { !hiddenVariableTypes.contains($0.variable) }
+            .sorted(by: { lhs, rhs in
+                lhs.date < rhs.date
+            })
     }
 
     func total(of type: VariableType) -> Double? {
