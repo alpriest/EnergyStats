@@ -33,9 +33,18 @@ class GraphTabViewModel: ObservableObject {
 
     private var totals: [VariableType: Double] = [:]
 
+    @Published var stride = 1
     @Published var data: [GraphValue] = []
     @Published var variables: [GraphVariable] = [GraphVariable(.feedinPower), GraphVariable(.gridConsumptionPower), GraphVariable(.generationPower), GraphVariable(.batChargePower), GraphVariable(.pvPower)]
     @Published var hours = 6 { didSet {
+        switch hours {
+        case 6:
+            stride = 1
+        case 12:
+            stride = 2
+        default:
+            stride = 3
+        }
         refresh()
     }}
 

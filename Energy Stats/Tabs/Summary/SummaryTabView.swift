@@ -38,8 +38,7 @@ struct SummaryTabView: View {
         .padding()
         .background(backgroundGradient)
         .task {
-            await viewModel.loadData()
-            viewModel.startTimer()
+            await viewModel.timerFired()
         }
         .onDisappear {
             viewModel.stopTimer()

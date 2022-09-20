@@ -32,13 +32,14 @@ struct GraphTabView: View {
                 .foregroundStyle($0.variable.colour)
             }
             .chartPlotStyle { content in
-                content.background(Color.gray.gradient.opacity(0.2))
+                content.background(Color.gray.gradient.opacity(0.1))
             }
             .chartXAxis(content: {
                 AxisMarks(values: .stride(by: .hour)) { value in
-                    if value.index % 2 == 0, let date = value.as(Date.self) {
-                        AxisValueLabel(centered: true) {
-                            Text(date.formatted(.dateTime.hour()))
+                    if value.index % viewModel.stride == 0, let date = value.as(Date.self) {
+                        AxisTick(centered: false)
+                        AxisValueLabel(centered: false) {
+                            Text(date.militaryTime())
                         }
                     }
                 }
@@ -69,9 +70,23 @@ struct GraphTabView: View {
                                 }
                             }
                         )
+                        .gesture(SpatialTapGesture()
+                            .onEnded { value in
+                                let xLocation = value.location.x - geometryProxy[chartProxy.plotAreaFrame].origin.x
+
+                                if let plotElement: Date = chartProxy.value(atX: xLocation) {
+                                    if let day = viewModel.data.first(where: {
+                                        $0.date > plotElement
+                                    }) {
+                                        selectedDate = plotElement
+                                        valuesAtTime = viewModel.data(at: day.date)
+                                    }
+                                }
+                            }
+                        )
                 }
             }
-            .chartBackground { chartProxy in
+            .chartOverlay { chartProxy in
                 GeometryReader { geometryReader in
                     if let date = selectedDate,
                        let elementLocation = chartProxy.position(forX: date),
@@ -126,7 +141,6 @@ struct GraphTabView: View {
                         }
                         .buttonStyle(.plain)
                     }
-                    .listRowBackground(Color.white.opacity(0.5))
                     .listRowSeparator(.hidden)
                 }
                 .scrollDisabled(true)

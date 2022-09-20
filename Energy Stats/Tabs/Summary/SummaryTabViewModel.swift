@@ -33,14 +33,20 @@ class SummaryTabViewModel: ObservableObject {
             Task { await MainActor.run { self.updateState = "Next update in \(ticksRemaining)s" } }
         } onCompletion: {
             Task {
-                await MainActor.run { self.updateState = "Updating..." }
-                await self.loadData()
-
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    self.startTimer()
-                }
+                await self.timerFired()
             }
         }
+    }
+
+    func timerFired() async {
+        self.stopTimer()
+        await MainActor.run { self.updateState = "Updating..." }
+        await self.loadData()
+        do {
+            try await Task.sleep(nanoseconds: 1_000_000_000)
+        } catch {}
+
+        self.startTimer()
     }
 
     func stopTimer() {
@@ -67,9 +73,7 @@ class SummaryTabViewModel: ObservableObject {
     }
 
     @objc func didBecomeActiveNotification() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.startTimer()
-        }
+        Task { await self.timerFired() }
     }
 
     @objc func willResignActiveNotification() {
