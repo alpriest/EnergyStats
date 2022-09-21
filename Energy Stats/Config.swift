@@ -5,11 +5,10 @@
 //  Created by Alistair Priest on 06/09/2022.
 //
 
-import Foundation
 import CryptoKit
+import Foundation
 
 class Config {
-    static let deviceID = "03274209-486c-4ea3-9c28-159f25ee84cb" // todo: fetch and store on login
     static var shared: Config {
         Config()
     }
@@ -19,6 +18,27 @@ class Config {
 
     @UserDefaultsStored(key: "batteryCapacity")
     var batteryCapacity: String?
+
+    @UserDefaultsStored(key: "deviceID")
+    var deviceID: String?
+
+    var hasBattery: Bool {
+        get {
+            UserDefaults.standard.bool(forKey: "hasBattery")
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "hasBattery")
+        }
+    }
+
+    var hasPV: Bool {
+        get {
+            UserDefaults.standard.bool(forKey: "hasPV")
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "hasPV")
+        }
+    }
 }
 
 extension String {

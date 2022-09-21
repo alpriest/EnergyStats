@@ -10,7 +10,7 @@ import SwiftUI
 struct LoginView: View {
     @State private var username: String = ""
     @State private var password: String = ""
-    @ObservedObject var loginManager: LoginManager
+    @ObservedObject var loginManager: UserManager
 
     var body: some View {
         VStack {
@@ -50,6 +50,6 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(loginManager: LoginManager(networking: MockNetworking(), store: KeychainStore()))
+        LoginView(loginManager: UserManager(networking: MockNetworking(), store: KeychainStore()))
     }
 }

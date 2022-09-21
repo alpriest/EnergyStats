@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-class LoginManager: ObservableObject {
+class UserManager: ObservableObject {
     enum State {
         case idle
         case busy
@@ -16,6 +16,7 @@ class LoginManager: ObservableObject {
     }
 
     private let networking: Networking
+    private let configManager: ConfigManager
     private let store: KeychainStore
     private var cancellables = Set<AnyCancellable>()
     @MainActor @Published var state = State.idle
@@ -24,6 +25,7 @@ class LoginManager: ObservableObject {
     init(networking: Networking, store: KeychainStore) {
         self.networking = networking
         self.store = store
+        self.configManager = ConfigManager(networking: networking)
 
         self.store.$hasCredentials
             .sink { hasCredentials in
@@ -33,15 +35,28 @@ class LoginManager: ObservableObject {
             }.store(in: &cancellables)
     }
 
+    func getUsername() -> String? {
+        store.getUsername()
+    }
+
     func login(username: String, password: String) async {
         do {
+            guard let hashedPassword = password.md5() else {
+                await MainActor.run {
+                    state = .error("Could not hash password")
+                }
+                return
+            }
+            try await networking.verifyCredentials(username: username, hashedPassword: hashedPassword)
             try store.store(username: username, password: password)
-            try await networking.verifyCredentials()
+            try await configManager.findDevice()
         } catch let error as Network.NetworkError {
             store.logout()
 
             await MainActor.run {
                 switch error {
+                case .invalidConfiguration(let reason):
+                    self.state = .error("Invalid configuration - \(reason)")
                 case .badCredentials:
                     self.state = .error("Wrong credentials, try again")
                 case .unknown:
@@ -53,5 +68,34 @@ class LoginManager: ObservableObject {
                 self.state = .error("Could not login. Check your internet connnection \(error)")
             }
         }
+    }
+
+    func logout() {
+        store.logout()
+        Config.shared.deviceID = nil
+        Config.shared.hasPV = false
+        Config.shared.hasBattery = false
+    }
+}
+
+class ConfigManager {
+    let networking: Networking
+
+    struct NoDeviceFoundError: Error {}
+
+    init(networking: Networking) {
+        self.networking = networking
+    }
+
+    func findDevice() async throws {
+        let devices = try await networking.fetchDeviceList()
+
+        guard let device = devices.result.devices.first else {
+            throw NoDeviceFoundError()
+        }
+
+        Config.shared.deviceID = device.deviceID
+        Config.shared.hasBattery = device.hasBattery
+        Config.shared.hasPV = device.hasPV
     }
 }

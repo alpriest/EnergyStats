@@ -14,7 +14,7 @@ class KeychainStore: ObservableObject {
     @Published var hasCredentials = false
 
     init() {
-        self.hasCredentials = getUsername() != nil && getPassword() != nil
+        updateHasCredentials()
     }
 
     private var query: CFDictionary {
@@ -66,10 +66,16 @@ class KeychainStore: ObservableObject {
         if SecItemAdd(keychainItemQuery, nil) != 0 {
             throw KeychainError()
         }
+
+        updateHasCredentials()
     }
 
     func logout() {
         SecItemDelete(query)
-        hasCredentials = false
+        updateHasCredentials()
+    }
+
+    private func updateHasCredentials() {
+        self.hasCredentials = getUsername() != nil && getPassword() != nil
     }
 }

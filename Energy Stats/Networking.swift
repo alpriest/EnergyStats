@@ -12,17 +12,20 @@ extension URL {
     static var report = URL(string: "https://www.foxesscloud.com/c/v0/device/history/report")!
     static var raw = URL(string: "https://www.foxesscloud.com/c/v0/device/history/raw")!
     static var battery = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/info?id=03274209-486c-4ea3-9c28-159f25ee84cb")! // TODO: Battery ID
+    static var deviceList = URL(string: "https://www.foxesscloud.com/c/v0/device/list")!
 }
 
 protocol Networking {
-    func verifyCredentials() async throws
+    func verifyCredentials(username: String, hashedPassword: String) async throws
     func fetchReport(variables: [VariableType]) async throws -> ReportResponse
     func fetchBattery() async throws -> BatteryResponse
     func fetchRaw(variables: [VariableType]) async throws -> RawResponse
+    func fetchDeviceList() async throws -> DeviceListResponse
 }
 
 class Network: Networking, ObservableObject {
     enum NetworkError: Error {
+        case invalidConfiguration(String)
         case badCredentials
         case unknown
     }
@@ -34,12 +37,13 @@ class Network: Networking, ObservableObject {
         self.credentials = credentials
     }
 
-    func verifyCredentials() async throws {
-        _ = try await fetchToken()
+    func verifyCredentials(username: String, hashedPassword: String) async throws {
+        _ = try await fetchToken(username: username, hashedPassword: hashedPassword)
     }
 
-    func fetchToken() async throws -> String {
-        guard let hashedPassword = credentials.getPassword(), let username = credentials.getUsername() else { throw NetworkError.badCredentials }
+    func fetchToken(username: String? = nil, hashedPassword: String? = nil) async throws -> String {
+        guard let hashedPassword = hashedPassword ?? credentials.getPassword(),
+              let username = username ?? credentials.getUsername() else { throw NetworkError.badCredentials }
 
         var request = URLRequest(url: URL.auth)
         request.httpMethod = "POST"
@@ -61,13 +65,15 @@ class Network: Networking, ObservableObject {
     }
 
     func fetchReport(variables: [VariableType]) async throws -> ReportResponse {
+        guard let deviceID = Config.shared.deviceID else { throw NetworkError.invalidConfiguration("deviceID missing") }
+
         if token == nil {
             token = try await fetchToken()
         }
 
         var request = URLRequest(url: URL.report)
         request.httpMethod = "POST"
-        request.httpBody = try! JSONEncoder().encode(ReportRequest(deviceID: Config.deviceID, variables: variables))
+        request.httpBody = try! JSONEncoder().encode(ReportRequest(deviceID: deviceID, variables: variables))
         addHeaders(to: &request)
 
         return try await fetch(request)
@@ -85,13 +91,28 @@ class Network: Networking, ObservableObject {
     }
 
     func fetchRaw(variables: [VariableType]) async throws -> RawResponse {
+        guard let deviceID = Config.shared.deviceID else { throw NetworkError.invalidConfiguration("deviceID missing") }
+
         if token == nil {
             token = try await fetchToken()
         }
 
         var request = URLRequest(url: URL.raw)
         request.httpMethod = "POST"
-        request.httpBody = try! JSONEncoder().encode(RawRequest(deviceID: Config.deviceID, variables: variables))
+        request.httpBody = try! JSONEncoder().encode(RawRequest(deviceID: deviceID, variables: variables))
+        addHeaders(to: &request)
+
+        return try await fetch(request)
+    }
+
+    func fetchDeviceList() async throws -> DeviceListResponse {
+        if token == nil {
+            token = try await fetchToken()
+        }
+
+        var request = URLRequest(url: URL.deviceList)
+        request.httpMethod = "POST"
+        request.httpBody = try! JSONEncoder().encode(DeviceListRequest())
         addHeaders(to: &request)
 
         return try await fetch(request)

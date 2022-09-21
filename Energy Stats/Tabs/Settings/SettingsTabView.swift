@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SettingsTabView: View {
-    let credentials: KeychainStore
+    let userManager: UserManager
     @State private var minSOC = 0.2
     @State private var capacity = "2600"
     @FocusState private var minSOCIsFocused: Bool
@@ -39,9 +39,9 @@ struct SettingsTabView: View {
 
             Section {
                 VStack {
-                    Text("You are logged in as \(credentials.getUsername() ?? "")")
+                    Text("You are logged in as \(userManager.getUsername() ?? "")")
                     Button("logout") {
-                        credentials.logout()
+                        userManager.logout()
                     }.buttonStyle(.bordered)
                 }.frame(maxWidth: .infinity)
             }
@@ -60,6 +60,6 @@ struct SettingsTabView: View {
 
 struct SettingsTabView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsTabView(credentials: KeychainStore())
+        SettingsTabView(userManager: UserManager(networking: MockNetworking(), store: KeychainStore()))
     }
 }

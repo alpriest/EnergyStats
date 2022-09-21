@@ -9,13 +9,13 @@ import SwiftUI
 
 struct TabbedView: View {
     let networking: Networking
-    let credentials: KeychainStore
+    let userManager: UserManager
     private let summaryViewModel: SummaryTabViewModel
     private let graphViewModel: GraphTabViewModel
 
-    init(networking: Networking, credentials: KeychainStore) {
+    init(networking: Networking, userManager: UserManager) {
         self.networking = networking
-        self.credentials = credentials
+        self.userManager = userManager
         summaryViewModel = SummaryTabViewModel(networking)
         graphViewModel = GraphTabViewModel(networking)
     }
@@ -38,7 +38,7 @@ struct TabbedView: View {
                     }
                 }
 
-            SettingsTabView(credentials: credentials)
+            SettingsTabView(userManager: userManager)
                 .tabItem {
                     VStack {
                         Image(systemName: "gearshape")
@@ -52,6 +52,6 @@ struct TabbedView: View {
 
 struct TabbedView_Previews: PreviewProvider {
     static var previews: some View {
-        TabbedView(networking: MockNetworking(), credentials: KeychainStore())
+        TabbedView(networking: MockNetworking(), userManager: UserManager(networking: MockNetworking(), store: KeychainStore()))
     }
 }

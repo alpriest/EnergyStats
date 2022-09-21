@@ -12,7 +12,7 @@ struct Energy_StatsApp: App {
     var body: some Scene {
         let keychainStore = KeychainStore()
         let network = Network(credentials: keychainStore)
-        let loginManager = LoginManager(networking: network, store: keychainStore)
+        let loginManager = UserManager(networking: network, store: keychainStore)
 
         return WindowGroup {
             ContentView(
