@@ -44,6 +44,10 @@
 		41D6496C28DB321600A24B41 /* DeviceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D6496B28DB321600A24B41 /* DeviceList.swift */; };
 		41D7B12428C86E4000E14144 /* Raw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D7B12328C86E4000E14144 /* Raw.swift */; };
 		41E1DFDF28D87781001235B9 /* SettingsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E1DFDE28D87781001235B9 /* SettingsTabView.swift */; };
+		41E4B30E28DB7511003F7F47 /* BatteryCapacityCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E4B30D28DB7511003F7F47 /* BatteryCapacityCalculator.swift */; };
+		41E4B31028DB7666003F7F47 /* BatteryPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E4B30F28DB7666003F7F47 /* BatteryPowerView.swift */; };
+		41E4B31328DB77A3003F7F47 /* HomePowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E4B31228DB77A3003F7F47 /* HomePowerView.swift */; };
+		41E4B31528DB77E8003F7F47 /* GridPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E4B31428DB77E8003F7F47 /* GridPowerView.swift */; };
 		41EDDF6C28CD2A630092C662 /* PowerFlowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EDDF6B28CD2A630092C662 /* PowerFlowViewModel.swift */; };
 		41EDDF7428CD2ED30092C662 /* Energy_StatsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EDDF7328CD2ED30092C662 /* Energy_StatsTests.swift */; };
 /* End PBXBuildFile section */
@@ -98,6 +102,10 @@
 		41D6496B28DB321600A24B41 /* DeviceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceList.swift; sourceTree = "<group>"; };
 		41D7B12328C86E4000E14144 /* Raw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Raw.swift; sourceTree = "<group>"; };
 		41E1DFDE28D87781001235B9 /* SettingsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabView.swift; sourceTree = "<group>"; };
+		41E4B30D28DB7511003F7F47 /* BatteryCapacityCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryCapacityCalculator.swift; sourceTree = "<group>"; };
+		41E4B30F28DB7666003F7F47 /* BatteryPowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryPowerView.swift; sourceTree = "<group>"; };
+		41E4B31228DB77A3003F7F47 /* HomePowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePowerView.swift; sourceTree = "<group>"; };
+		41E4B31428DB77E8003F7F47 /* GridPowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPowerView.swift; sourceTree = "<group>"; };
 		41EDDF6B28CD2A630092C662 /* PowerFlowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerFlowViewModel.swift; sourceTree = "<group>"; };
 		41EDDF7128CD2ED30092C662 /* Energy StatsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Energy StatsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		41EDDF7328CD2ED30092C662 /* Energy_StatsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Energy_StatsTests.swift; sourceTree = "<group>"; };
@@ -162,23 +170,20 @@
 		4140144C28C70B3200EA5BA1 /* Energy Stats */ = {
 			isa = PBXGroup;
 			children = (
-				412E3C7D28D2519B004A0DCF /* Energy-Stats-Info.plist */,
-				4106A92E28D05EC10009DA28 /* Extensions */,
-				4107446A28CA57A1006D5D7D /* Tabs */,
 				4140145128C70B3200EA5BA1 /* Assets.xcassets */,
 				4140145D28C70D1400EA5BA1 /* Config.swift */,
-				4140144F28C70B3200EA5BA1 /* TabbedView.swift */,
-				4140144D28C70B3200EA5BA1 /* Energy_StatsApp.swift */,
-				4140146728C7373A00EA5BA1 /* Models */,
-				4140145F28C70D4700EA5BA1 /* Networking.swift */,
-				4140146328C7146B00EA5BA1 /* NetworkModels */,
-				4140145328C70B3200EA5BA1 /* Preview Content */,
-				41A25D4028CA6E0000315714 /* MockNetworking.swift */,
-				41A25D4228CA706700315714 /* CountdownTimer.swift */,
-				4141B1FE28D86C5B00B60157 /* Login */,
-				41028F9428CDD7A300FB70FD /* OptionalView.swift */,
-				4106A92C28CFCD960009DA28 /* VariableType.swift */,
 				4141B20128D871B900B60157 /* ContentView.swift */,
+				41A25D4228CA706700315714 /* CountdownTimer.swift */,
+				4140144D28C70B3200EA5BA1 /* Energy_StatsApp.swift */,
+				412E3C7D28D2519B004A0DCF /* Energy-Stats-Info.plist */,
+				4106A92E28D05EC10009DA28 /* Extensions */,
+				4141B1FE28D86C5B00B60157 /* Login */,
+				4140146728C7373A00EA5BA1 /* Models */,
+				41E4B30C28DB670C003F7F47 /* Network */,
+				41028F9428CDD7A300FB70FD /* OptionalView.swift */,
+				4140145328C70B3200EA5BA1 /* Preview Content */,
+				4140144F28C70B3200EA5BA1 /* TabbedView.swift */,
+				4107446A28CA57A1006D5D7D /* Tabs */,
 			);
 			path = "Energy Stats";
 			sourceTree = "<group>";
@@ -186,6 +191,7 @@
 		4140145328C70B3200EA5BA1 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				41A25D4028CA6E0000315714 /* MockNetworking.swift */,
 				4140145428C70B3200EA5BA1 /* Preview Assets.xcassets */,
 				41AED86928CDCD94009C6517 /* raw.json */,
 			);
@@ -207,8 +213,7 @@
 		4140146728C7373A00EA5BA1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				4140146828C7374400EA5BA1 /* HistoricalViewModel.swift */,
-				4140147028C77AAA00EA5BA1 /* BatteryViewModel.swift */,
+				4106A92C28CFCD960009DA28 /* VariableType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -226,6 +231,8 @@
 		41A25D3A28CA5CB700315714 /* Summary */ = {
 			isa = PBXGroup;
 			children = (
+				4140146828C7374400EA5BA1 /* HistoricalViewModel.swift */,
+				4140147028C77AAA00EA5BA1 /* BatteryViewModel.swift */,
 				4107446B28CA57A9006D5D7D /* SummaryTabView.swift */,
 				4140145B28C70B4A00EA5BA1 /* SummaryTabViewModel.swift */,
 				4107446028C9EF6B006D5D7D /* PowerSummaryView.swift */,
@@ -234,6 +241,8 @@
 				4107446628CA22B3006D5D7D /* InverterPath.swift */,
 				4107446828CA42D2006D5D7D /* PylonView.swift */,
 				41EDDF6B28CD2A630092C662 /* PowerFlowViewModel.swift */,
+				41E4B30D28DB7511003F7F47 /* BatteryCapacityCalculator.swift */,
+				41E4B31128DB7799003F7F47 /* Power Views */,
 			);
 			path = Summary;
 			sourceTree = "<group>";
@@ -255,6 +264,25 @@
 				41E1DFDE28D87781001235B9 /* SettingsTabView.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		41E4B30C28DB670C003F7F47 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				4140146328C7146B00EA5BA1 /* NetworkModels */,
+				4140145F28C70D4700EA5BA1 /* Networking.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		41E4B31128DB7799003F7F47 /* Power Views */ = {
+			isa = PBXGroup;
+			children = (
+				41E4B30F28DB7666003F7F47 /* BatteryPowerView.swift */,
+				41E4B31228DB77A3003F7F47 /* HomePowerView.swift */,
+				41E4B31428DB77E8003F7F47 /* GridPowerView.swift */,
+			);
+			path = "Power Views";
 			sourceTree = "<group>";
 		};
 		41EDDF7228CD2ED30092C662 /* Energy StatsTests */ = {
@@ -378,15 +406,19 @@
 				41EDDF6C28CD2A630092C662 /* PowerFlowViewModel.swift in Sources */,
 				4140146528C714C000EA5BA1 /* Report.swift in Sources */,
 				41339C7228CC7B7B0062B976 /* LoginView.swift in Sources */,
+				41E4B31528DB77E8003F7F47 /* GridPowerView.swift in Sources */,
 				4141B20228D871B900B60157 /* ContentView.swift in Sources */,
+				41E4B31328DB77A3003F7F47 /* HomePowerView.swift in Sources */,
 				41A25D3D28CA5CDF00315714 /* GraphTabView.swift in Sources */,
 				4140146D28C75C3B00EA5BA1 /* PowerGraph.swift in Sources */,
 				4140146928C7374400EA5BA1 /* HistoricalViewModel.swift in Sources */,
 				4140145E28C70D1400EA5BA1 /* Config.swift in Sources */,
 				41A25D4128CA6E0000315714 /* MockNetworking.swift in Sources */,
+				41E4B31028DB7666003F7F47 /* BatteryPowerView.swift in Sources */,
 				4140144E28C70B3200EA5BA1 /* Energy_StatsApp.swift in Sources */,
 				4140147128C77AAA00EA5BA1 /* BatteryViewModel.swift in Sources */,
 				4106A92D28CFCD960009DA28 /* VariableType.swift in Sources */,
+				41E4B30E28DB7511003F7F47 /* BatteryCapacityCalculator.swift in Sources */,
 				41D7B12428C86E4000E14144 /* Raw.swift in Sources */,
 				4140145C28C70B4A00EA5BA1 /* SummaryTabViewModel.swift in Sources */,
 				4140146228C7146300EA5BA1 /* Auth.swift in Sources */,

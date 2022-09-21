@@ -30,3 +30,11 @@ extension Double {
         return formatter.string(from: NSNumber(value: self))!
     }
 }
+
+extension Optional where Wrapped == String {
+    func asDouble() -> Double? {
+        guard let self = self else { return nil }
+
+        return Double(self)
+    }
+}

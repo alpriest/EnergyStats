@@ -17,8 +17,7 @@ struct Energy_StatsApp: App {
         return WindowGroup {
             ContentView(
                 loginManager: loginManager,
-                network: network,
-                credentials: keychainStore
+                network: network
             )
         }
     }

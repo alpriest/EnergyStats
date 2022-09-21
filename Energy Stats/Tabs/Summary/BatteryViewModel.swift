@@ -8,6 +8,7 @@
 import Foundation
 
 struct BatteryViewModel: Sendable {
+    let hasBattery: Bool
     let chargeLevel: Double
     let chargePower: Double
 
@@ -16,5 +17,18 @@ struct BatteryViewModel: Sendable {
 
         let powerAsCharge = 0 - batteryResponse.result.power
         chargePower = powerAsCharge
+        hasBattery = true
+    }
+
+    init() {
+        hasBattery = false
+        chargeLevel = 0
+        chargePower = 0
+    }
+}
+
+extension BatteryViewModel {
+    static var noBattery: BatteryViewModel {
+        BatteryViewModel()
     }
 }

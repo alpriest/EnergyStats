@@ -11,7 +11,7 @@ extension URL {
     static var auth = URL(string: "https://www.foxesscloud.com/c/v0/user/login")!
     static var report = URL(string: "https://www.foxesscloud.com/c/v0/device/history/report")!
     static var raw = URL(string: "https://www.foxesscloud.com/c/v0/device/history/raw")!
-    static var battery = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/info?id=03274209-486c-4ea3-9c28-159f25ee84cb")! // TODO: Battery ID
+    static var battery = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/info")!
     static var deviceList = URL(string: "https://www.foxesscloud.com/c/v0/device/list")!
 }
 
@@ -80,11 +80,15 @@ class Network: Networking, ObservableObject {
     }
 
     func fetchBattery() async throws -> BatteryResponse {
+        guard let deviceID = Config.shared.deviceID else { throw NetworkError.invalidConfiguration("deviceID missing") }
+        guard Config.shared.hasBattery else { throw NetworkError.invalidConfiguration("No battery") }
+
         if token == nil {
             token = try await fetchToken()
         }
 
         var request = URLRequest(url: URL.battery)
+        request.url?.append(queryItems: [Foundation.URLQueryItem(name: "id", value: deviceID)])
         addHeaders(to: &request)
 
         return try await fetch(request)

@@ -41,6 +41,10 @@ class UserManager: ObservableObject {
 
     func login(username: String, password: String) async {
         do {
+            await MainActor.run {
+                state = .busy
+            }
+
             guard let hashedPassword = password.md5() else {
                 await MainActor.run {
                     state = .error("Could not hash password")

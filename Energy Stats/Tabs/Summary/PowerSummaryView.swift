@@ -35,49 +35,19 @@ struct PowerSummaryView: View {
                 .padding(.horizontal, 14 + powerViewWidth / 2 - 2)
 
             HStack {
-                VStack {
-                    PowerFlowView(amount: viewModel.battery)
-                    Image(systemName: "minus.plus.batteryblock.fill")
-                        .font(.system(size: 48))
-                        .frame(width: 45, height: 45)
-                    VStack {
-                        Text(viewModel.batteryStateOfCharge, format: .percent)
-                        OptionalView(viewModel.batteryExtra) {
-                            Text($0)
-                                .multilineTextAlignment(.center)
-                                .font(.caption)
-                                .opacity(0.8)
-                        }
-                    }
-                    .background(GeometryReader { reader in
-                        Color.clear.preference(key: BatterySizePreferenceKey.self, value: reader.size)
-                            .onPreferenceChange(BatterySizePreferenceKey.self) { size in
-                                iconFooterSize = size
-                            }
-                    })
-                }
-                .frame(width: powerViewWidth)
+                BatteryPowerView(viewModel: viewModel, iconFooterSize: $iconFooterSize)
+                    .frame(width: powerViewWidth)
+                    .opacity(viewModel.hasBattery ? 1.0 : 0.5)
 
                 Spacer()
 
-                VStack {
-                    PowerFlowView(amount: viewModel.home)
-                    Image(systemName: "house.fill")
-                        .font(.system(size: 48))
-                        .frame(width: 45, height: 45)
-                    Color.clear.frame(width: iconFooterSize.width, height: iconFooterSize.height)
-                }
-                .frame(width: powerViewWidth)
+                HomePowerView(amount: viewModel.home, iconFooterSize: iconFooterSize)
+                    .frame(width: powerViewWidth)
 
                 Spacer()
 
-                VStack {
-                    PowerFlowView(amount: viewModel.grid)
-                    PylonView()
-                        .frame(width: 45, height: 45)
-                    Color.clear.frame(width: iconFooterSize.width, height: iconFooterSize.height)
-                }
-                .frame(width: powerViewWidth)
+                GridPowerView(amount: viewModel.grid, iconFooterSize: iconFooterSize)
+                    .frame(width: powerViewWidth)
             }
             .padding(.horizontal, 14)
         }
@@ -86,6 +56,12 @@ struct PowerSummaryView: View {
 
 struct PowerSummaryView_Previews: PreviewProvider {
     static var previews: some View {
-        PowerSummaryView(viewModel: PowerFlowViewModel(solar: 2.5, battery: -0.01, home: 1.5, grid: 0.71, batteryStateOfCharge: 0.99))
+        PowerSummaryView(viewModel: PowerFlowViewModel.any())
+    }
+}
+
+extension PowerFlowViewModel {
+    static func any() -> PowerFlowViewModel {
+        .init(solar: 2.5, battery: -0.01, home: 1.5, grid: 0.71, batteryStateOfCharge: 0.99, hasBattery: true)
     }
 }

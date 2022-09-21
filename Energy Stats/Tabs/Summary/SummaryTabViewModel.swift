@@ -42,10 +42,7 @@ class SummaryTabViewModel: ObservableObject {
         self.stopTimer()
         await MainActor.run { self.updateState = "Updating..." }
         await self.loadData()
-        do {
-            try await Task.sleep(nanoseconds: 1_000_000_000)
-        } catch {}
-
+        await sleep()
         self.startTimer()
     }
 
@@ -57,14 +54,15 @@ class SummaryTabViewModel: ObservableObject {
     func loadData() async {
         do {
             let historical = HistoricalViewModel(raw: try await self.network.fetchRaw(variables: [.feedinPower, .gridConsumptionPower, .pvPower, .loadsPower]))
-            let battery = BatteryViewModel(from: try await self.network.fetchBattery())
+            let battery = Config.shared.hasBattery ? BatteryViewModel(from: try await self.network.fetchBattery()) : BatteryViewModel.noBattery
             let summary = PowerFlowViewModel(solar: historical.currentSolarPower,
                                              battery: battery.chargePower,
                                              home: historical.currentHomeConsumption,
                                              grid: historical.currentGridExport,
-                                             batteryStateOfCharge: battery.chargeLevel)
+                                             batteryStateOfCharge: battery.chargeLevel,
+                                             hasBattery: battery.hasBattery)
 
-            self.state = .loaded(PowerFlowViewModel(solar: 0, battery: 0, home: 0, grid: 0, batteryStateOfCharge: 0))
+            self.state = .loaded(PowerFlowViewModel(solar: 0, battery: 0, home: 0, grid: 0, batteryStateOfCharge: 0, hasBattery: false))
             self.state = .loaded(summary)
             self.updateState = " "
         } catch {
@@ -78,5 +76,11 @@ class SummaryTabViewModel: ObservableObject {
 
     @objc func willResignActiveNotification() {
         self.stopTimer()
+    }
+
+    func sleep() async {
+        do {
+            try await Task.sleep(nanoseconds: 1_000_000_000)
+        } catch {}
     }
 }

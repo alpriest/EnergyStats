@@ -10,7 +10,6 @@ import SwiftUI
 struct ContentView: View {
     @ObservedObject var loginManager: UserManager
     let network: Network
-    let credentials: KeychainStore
 
     var body: some View {
         if loginManager.isLoggedIn {
@@ -25,8 +24,7 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView(
             loginManager: UserManager(networking: MockNetworking(), store: KeychainStore()),
-            network: MockNetworking(),
-            credentials: KeychainStore()
+            network: MockNetworking()
         )
     }
 }
