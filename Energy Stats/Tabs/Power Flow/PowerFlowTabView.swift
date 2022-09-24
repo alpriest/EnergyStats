@@ -7,16 +7,15 @@
 
 import SwiftUI
 
-struct SummaryTabView: View {
-    @ObservedObject var viewModel: SummaryTabViewModel
-    @State private var nextUpdate = " "
+struct PowerFlowTabView: View {
+    @ObservedObject var viewModel: PowerFlowTabViewModel
 
     var body: some View {
         VStack {
             switch viewModel.state {
             case let .loaded(summary):
                 VStack {
-                    PowerSummaryView(viewModel: summary)
+                    HomePowerFlowView(viewModel: summary)
                 }
                 .padding()
             case let .failed(reason):
@@ -30,7 +29,7 @@ struct SummaryTabView: View {
 
             HStack {
                 Spacer()
-                Text(nextUpdate)
+                Text(viewModel.updateState)
                 Spacer()
             }
             .foregroundColor(.gray)
@@ -41,12 +40,7 @@ struct SummaryTabView: View {
             await viewModel.timerFired()
         }
         .onDisappear {
-            viewModel.stopTimer()
-        }
-        .onChange(of: viewModel.updateState) { newValue in
-            withAnimation {
-                nextUpdate = newValue
-            }
+            Task { await viewModel.stopTimer() }
         }
     }
 
@@ -64,6 +58,6 @@ struct SummaryTabView: View {
 
 struct SummaryTabView_Previews: PreviewProvider {
     static var previews: some View {
-        SummaryTabView(viewModel: SummaryTabViewModel(MockNetworking()))
+        PowerFlowTabView(viewModel: PowerFlowTabViewModel(MockNetworking()))
     }
 }

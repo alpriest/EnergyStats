@@ -1,6 +1,4 @@
-{
-  "errno": 0,
-  "result": [
+[
     {
       "variable": "feedinPower",
       "unit": "kW",
@@ -4046,4 +4044,3 @@
       ]
     }
   ]
-}

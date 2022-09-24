@@ -1,5 +1,5 @@
 //
-//  ContentViewModel.swift
+//  PowerFlowViewModel.swift
 //  Energy Stats
 //
 //  Created by Alistair Priest on 06/09/2022.
@@ -8,16 +8,18 @@
 import Foundation
 import UIKit
 
-class SummaryTabViewModel: ObservableObject {
+class PowerFlowTabViewModel: ObservableObject {
     private let network: Networking
     private let timer = CountdownTimer()
+    private var timer2: Timer?
     @MainActor @Published private(set) var lastUpdated: String = Date().small()
     @MainActor @Published private(set) var updateState: String = "Updating..."
     @MainActor @Published private(set) var state: State = .unloaded
+    private(set) var isLoading = false
 
-    enum State {
+    enum State: Equatable {
         case unloaded
-        case loaded(PowerFlowViewModel)
+        case loaded(HomePowerFlowViewModel)
         case failed(String)
     }
 
@@ -28,9 +30,9 @@ class SummaryTabViewModel: ObservableObject {
         NotificationCenter.default.addObserver(self, selector: #selector(self.didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
     }
 
-    func startTimer() {
-        self.timer.start(totalTicks: 30) { ticksRemaining in
-            Task { await MainActor.run { self.updateState = "Next update in \(ticksRemaining)s" } }
+    func startTimer() async {
+        await self.timer.start(totalTicks: 30) { ticksRemaining in
+            Task { @MainActor in self.updateState = "Next update in \(ticksRemaining)s" }
         } onCompletion: {
             Task {
                 await self.timerFired()
@@ -39,30 +41,34 @@ class SummaryTabViewModel: ObservableObject {
     }
 
     func timerFired() async {
-        self.stopTimer()
-        await MainActor.run { self.updateState = "Updating..." }
+        guard self.isLoading == false else { return }
+
+        self.isLoading = true
+        defer { isLoading = false }
+
         await self.loadData()
-        await sleep()
-        self.startTimer()
+        await self.startTimer()
     }
 
-    func stopTimer() {
-        self.timer.stop()
+    func stopTimer() async {
+        await self.timer.stop()
     }
 
     @MainActor
     func loadData() async {
         do {
-            let historical = HistoricalViewModel(raw: try await self.network.fetchRaw(variables: [.feedinPower, .gridConsumptionPower, .pvPower, .loadsPower]))
+            await MainActor.run { self.updateState = "Updating..." }
+            await self.network.ensureTokenValid()
+            let historical = HistoricalViewModel(raws: try await self.network.fetchRaw(variables: [.feedinPower, .gridConsumptionPower, .pvPower, .loadsPower]))
             let battery = Config.shared.hasBattery ? BatteryViewModel(from: try await self.network.fetchBattery()) : BatteryViewModel.noBattery
-            let summary = PowerFlowViewModel(solar: historical.currentSolarPower,
-                                             battery: battery.chargePower,
-                                             home: historical.currentHomeConsumption,
-                                             grid: historical.currentGridExport,
-                                             batteryStateOfCharge: battery.chargeLevel,
-                                             hasBattery: battery.hasBattery)
+            let summary = HomePowerFlowViewModel(solar: historical.currentSolarPower,
+                                                 battery: battery.chargePower,
+                                                 home: historical.currentHomeConsumption,
+                                                 grid: historical.currentGridExport,
+                                                 batteryStateOfCharge: battery.chargeLevel,
+                                                 hasBattery: battery.hasBattery)
 
-            self.state = .loaded(PowerFlowViewModel(solar: 0, battery: 0, home: 0, grid: 0, batteryStateOfCharge: 0, hasBattery: false))
+            self.state = .loaded(HomePowerFlowViewModel(solar: 0, battery: 0, home: 0, grid: 0, batteryStateOfCharge: 0, hasBattery: false))
             self.state = .loaded(summary)
             self.updateState = " "
         } catch {
@@ -75,7 +81,7 @@ class SummaryTabViewModel: ObservableObject {
     }
 
     @objc func willResignActiveNotification() {
-        self.stopTimer()
+        Task { await self.stopTimer() }
     }
 
     func sleep() async {

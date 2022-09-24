@@ -15,10 +15,10 @@ struct BatterySizePreferenceKey: PreferenceKey {
     }
 }
 
-struct PowerSummaryView: View {
+struct HomePowerFlowView: View {
     @State private var iconFooterSize: CGSize = .zero
     @State private var lastUpdated = Date()
-    let viewModel: PowerFlowViewModel
+    let viewModel: HomePowerFlowViewModel
     private let powerViewWidth: CGFloat = 70
 
     var body: some View {
@@ -56,12 +56,12 @@ struct PowerSummaryView: View {
 
 struct PowerSummaryView_Previews: PreviewProvider {
     static var previews: some View {
-        PowerSummaryView(viewModel: PowerFlowViewModel.any())
+        HomePowerFlowView(viewModel: HomePowerFlowViewModel.any())
     }
 }
 
-extension PowerFlowViewModel {
-    static func any() -> PowerFlowViewModel {
+extension HomePowerFlowViewModel {
+    static func any() -> HomePowerFlowViewModel {
         .init(solar: 2.5, battery: -0.01, home: 1.5, grid: 0.71, batteryStateOfCharge: 0.99, hasBattery: true)
     }
 }

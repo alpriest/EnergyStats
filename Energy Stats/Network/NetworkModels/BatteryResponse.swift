@@ -8,11 +8,6 @@
 import Foundation
 
 struct BatteryResponse: Decodable {
-    let errno: Int
-    let result: BatteryResult
-
-    struct BatteryResult: Decodable {
-        let soc: Int
-        let power: Double
-    }
+    let soc: Int
+    let power: Double
 }

@@ -29,12 +29,8 @@ struct QueryDate: Encodable {
 }
 
 struct ReportResponse: Decodable {
-    let result: [ReportVariable]
-
-    struct ReportVariable: Decodable {
-        let variable: String
-        let data: [ReportData]
-    }
+    let variable: String
+    let data: [ReportData]
 
     struct ReportData: Decodable {
         let index: Int

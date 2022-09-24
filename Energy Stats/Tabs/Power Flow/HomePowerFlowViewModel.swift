@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PowerFlowViewModel {
+struct HomePowerFlowViewModel: Equatable {
     let solar: Double
     let battery: Double
     let home: Double

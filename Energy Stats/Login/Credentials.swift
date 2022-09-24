@@ -8,8 +8,13 @@
 import Foundation
 
 class KeychainStore: ObservableObject {
-    struct KeychainError: Error {}
-    private let server = "energystats"
+    struct KeychainError: Error {
+        init(_ code: OSStatus? = nil) {
+            self.code = code
+        }
+
+        let code: OSStatus?
+    }
 
     @Published var hasCredentials = false
 
@@ -17,36 +22,12 @@ class KeychainStore: ObservableObject {
         updateHasCredentials()
     }
 
-    private var query: CFDictionary {
-        [
-            kSecAttrServer: server,
-            kSecClass: kSecClassInternetPassword,
-            kSecReturnAttributes: true,
-            kSecReturnData: true
-        ] as CFDictionary
-    }
-
     func getUsername() -> String? {
-        var result: AnyObject?
-        let status = SecItemCopyMatching(query, &result)
-        guard status == 0 else { return nil }
-
-        guard let dict = result as? NSDictionary else { return nil }
-        guard let username = dict[kSecAttrAccount] as? String else { return nil }
-
-        return username
+        get(tag: "username")
     }
 
     func getPassword() -> String? {
-        var result: AnyObject?
-        let status = SecItemCopyMatching(query, &result)
-        guard status == 0 else { return nil }
-
-        guard let dict = result as? NSDictionary else { return nil }
-        guard let passwordData = dict[kSecValueData] as? Data else { return nil }
-        let password = String(data: passwordData, encoding: .utf8)
-
-        return password
+        get(tag: "password")
     }
 
     func store(username: String, password: String) throws {
@@ -56,26 +37,68 @@ class KeychainStore: ObservableObject {
 
         logout()
 
-        let keychainItemQuery = [
-            kSecValueData: hashed.data(using: .utf8)!,
-            kSecAttrAccount: username,
-            kSecAttrServer: server,
-            kSecClass: kSecClassInternetPassword
-        ] as CFDictionary
-
-        if SecItemAdd(keychainItemQuery, nil) != 0 {
-            throw KeychainError()
-        }
+        try set(tag: "password", value: hashed)
+        try set(tag: "username", value: username)
 
         updateHasCredentials()
     }
 
+    func store(token: String?) throws {
+        SecItemDelete(makeQuery(tag: "token"))
+
+        try set(tag: "token", value: token)
+    }
+
+    func getToken() -> String? {
+        get(tag: "token")
+    }
+
     func logout() {
-        SecItemDelete(query)
+        SecItemDelete(makeQuery(tag: "username"))
+        SecItemDelete(makeQuery(tag: "password"))
         updateHasCredentials()
     }
 
     private func updateHasCredentials() {
         self.hasCredentials = getUsername() != nil && getPassword() != nil
+    }
+
+    private func get(tag: String) -> String? {
+        var result: AnyObject?
+        let status = SecItemCopyMatching(makeQuery(tag: tag), &result)
+        guard status == 0 else { return nil }
+
+        guard let dict = result as? NSDictionary else { return nil }
+        guard let data = dict[kSecValueData] as? Data else { return nil }
+        let decoded = String(data: data, encoding: .utf8)
+
+        return decoded
+    }
+
+    private func makeQuery(tag: String) -> CFDictionary {
+        [
+            kSecAttrApplicationTag: tag,
+            kSecClass: kSecClassKey,
+            kSecReturnAttributes: true,
+            kSecReturnData: true
+        ] as CFDictionary
+    }
+
+    private func set(tag: String, value: String?) throws {
+        SecItemDelete(makeQuery(tag: tag))
+
+        if let value {
+            let keychainItemQuery = [
+                kSecAttrApplicationTag: tag,
+                kSecValueData: value.data(using: .utf8)!,
+                kSecClass: kSecClassKey
+            ] as CFDictionary
+
+            let result = SecItemAdd(keychainItemQuery, nil)
+            if result != 0 {
+                print("AWP", "Could not store \(tag) because \(result)")
+                throw KeychainError(result)
+            }
+        }
     }
 }

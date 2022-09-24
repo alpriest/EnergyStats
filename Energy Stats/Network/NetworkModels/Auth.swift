@@ -13,14 +13,5 @@ struct AuthRequest: Encodable {
 }
 
 struct AuthResponse: Decodable {
-    let result: AuthResult?
-    let errno: Int?
-
-    struct AuthResult: Decodable {
-        let token: String
-    }
-
-    var hasFailed: Bool {
-        errno == 41807
-    }
+    let token: String
 }

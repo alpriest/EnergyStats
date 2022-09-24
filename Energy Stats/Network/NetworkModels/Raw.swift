@@ -11,7 +11,7 @@ struct RawRequest: Encodable {
     let deviceID: String
     let variables: [String]
     let timespan = "day"
-    let beginDate : QueryDate
+    let beginDate: QueryDate
 
     internal init(deviceID: String, variables: [VariableType]) {
         self.deviceID = deviceID
@@ -23,13 +23,8 @@ struct RawRequest: Encodable {
 }
 
 struct RawResponse: Decodable {
-    let errno: Int
-    let result: [ReportVariable]
-
-    struct ReportVariable: Decodable {
-        let variable: String
-        let data: [ReportData]
-    }
+    let variable: String
+    let data: [ReportData]
 
     struct ReportData: Decodable {
         let time: Date

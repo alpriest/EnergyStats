@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BatteryPowerView: View {
-    let viewModel: PowerFlowViewModel
+    let viewModel: HomePowerFlowViewModel
     @Binding var iconFooterSize: CGSize
 
     var body: some View {
@@ -38,6 +38,6 @@ struct BatteryPowerView: View {
 
 struct BatteryPowerView_Previews: PreviewProvider {
     static var previews: some View {
-        BatteryPowerView(viewModel: PowerFlowViewModel.any(), iconFooterSize: .constant(CGSize.zero))
+        BatteryPowerView(viewModel: HomePowerFlowViewModel.any(), iconFooterSize: .constant(CGSize.zero))
     }
 }

@@ -54,15 +54,15 @@ class GraphTabViewModel: ObservableObject {
 
     func start() {
         Task {
-            let report = try await networking.fetchReport(variables: variables.map { $0.type })
-            report.result.forEach {
+            let reports = try await networking.fetchReport(variables: variables.map { $0.type })
+            reports.forEach {
                 guard let variable = VariableType(fromReport: $0.variable) else { return }
 
                 totals[variable] = $0.data.map { abs($0.value) }.reduce(0.0, +)
             }
 
             let raw = try await networking.fetchRaw(variables: variables.map { $0.type })
-            let rawData: [GraphValue] = raw.result.flatMap { reportVariable in
+            let rawData: [GraphValue] = raw.flatMap { reportVariable in
                 reportVariable.data.compactMap {
                     guard let variable = VariableType(rawValue: reportVariable.variable) else { return nil }
                     return GraphValue(date: $0.time, value: $0.value, variable: variable)
@@ -119,4 +119,18 @@ struct GraphValue: Identifiable {
     let variable: VariableType
 
     var id: String { "\(date.iso8601())_\(variable.title)" }
+
+    init(date: Date, value: Double, variable: VariableType) {
+        self.date = date
+        self.value = value.floored(variable)
+        self.variable = variable
+    }
+}
+
+private extension Double {
+    func floored(_ variable: VariableType) -> Double {
+        guard variable == .pvPower else { return self }
+
+        return max(0, self)
+    }
 }

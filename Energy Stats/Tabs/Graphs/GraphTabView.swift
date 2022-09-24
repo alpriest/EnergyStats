@@ -92,9 +92,9 @@ struct GraphTabView: View {
                        let elementLocation = chartProxy.position(forX: date),
                        let location = elementLocation - geometryReader[chartProxy.plotAreaFrame].origin.x
                     {
-                        RoundedRectangle(cornerRadius: 6, style: .continuous)
+                        Rectangle()
                             .fill(Color.black)
-                            .frame(width: 2, height: chartProxy.plotAreaSize.height)
+                            .frame(width: 1, height: chartProxy.plotAreaSize.height)
                             .offset(x: location)
                     }
                 }

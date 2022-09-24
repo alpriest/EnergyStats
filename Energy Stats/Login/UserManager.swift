@@ -63,7 +63,7 @@ class UserManager: ObservableObject {
                     self.state = .error("Invalid configuration - \(reason)")
                 case .badCredentials:
                     self.state = .error("Wrong credentials, try again")
-                case .unknown:
+                default:
                     self.state = .error("Could not login. Check your internet connnection")
                 }
             }
@@ -92,9 +92,9 @@ class ConfigManager {
     }
 
     func findDevice() async throws {
-        let devices = try await networking.fetchDeviceList()
+        let deviceList = try await networking.fetchDeviceList()
 
-        guard let device = devices.result.devices.first else {
+        guard let device = deviceList.devices.first else {
             throw NoDeviceFoundError()
         }
 

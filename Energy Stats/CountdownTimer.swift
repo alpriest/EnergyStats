@@ -7,14 +7,15 @@
 
 import Foundation
 
-class CountdownTimer: ObservableObject {
+class CountdownTimer {
     private var ticksRemaining: Int = 0
-    private var timer: Timer?
+    @MainActor private var timer: Timer?
 
     deinit {
         timer?.invalidate()
     }
 
+    @MainActor
     func start(totalTicks: Int, onTick: @escaping (Int) -> Void, onCompletion: @escaping () -> Void) {
         stop()
         ticksRemaining = totalTicks
@@ -33,6 +34,7 @@ class CountdownTimer: ObservableObject {
         }
     }
 
+    @MainActor
     func stop() {
         timer?.invalidate()
         timer = nil

@@ -13,9 +13,9 @@ struct BatteryViewModel: Sendable {
     let chargePower: Double
 
     init(from batteryResponse: BatteryResponse) {
-        chargeLevel = Double(batteryResponse.result.soc) / 100.0
+        chargeLevel = Double(batteryResponse.soc) / 100.0
 
-        let powerAsCharge = 0 - batteryResponse.result.power
+        let powerAsCharge = 0 - batteryResponse.power
         chargePower = powerAsCharge
         hasBattery = true
     }

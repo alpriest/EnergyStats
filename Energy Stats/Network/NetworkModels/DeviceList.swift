@@ -23,16 +23,11 @@ struct DeviceListRequest: Encodable {
     }
 }
 
-struct DeviceListResponse: Decodable {
-    let errno: Int
-    let result: PagedDevices
-
-    struct PagedDevices: Decodable {
-        let currentPage: Int
-        let pageSize: Int
-        let total: Int
-        let devices: [Device]
-    }
+struct PagedDeviceListResponse: Decodable {
+    let currentPage: Int
+    let pageSize: Int
+    let total: Int
+    let devices: [Device]
 
     struct Device: Decodable {
         let deviceID: String

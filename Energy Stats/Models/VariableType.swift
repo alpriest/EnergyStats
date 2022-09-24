@@ -43,7 +43,7 @@ enum VariableType: String, RawRepresentable {
         case .generationPower:
             fallthrough
         case .loadsPower:
-            return "Power coming through the inverter"
+            return "PV / Battery power coming through the inverter"
         case .gridConsumptionPower:
             return "Power coming from the grid"
         case .batChargePower:
@@ -56,13 +56,13 @@ enum VariableType: String, RawRepresentable {
     var title: String {
         switch self {
         case .feedinPower:
-            return "Grid export"
+            return "Exported to grid"
         case .generationPower:
             fallthrough
         case .loadsPower:
             return "Generation Power"
         case .gridConsumptionPower:
-            return "Grid import"
+            return "Imported from grid"
         case .batChargePower:
             return "Battery Charge Power"
         case .pvPower:

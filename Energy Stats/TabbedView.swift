@@ -10,19 +10,19 @@ import SwiftUI
 struct TabbedView: View {
     let networking: Networking
     let userManager: UserManager
-    private let summaryViewModel: SummaryTabViewModel
-    private let graphViewModel: GraphTabViewModel
+    @StateObject var summaryViewModel: PowerFlowTabViewModel
+    @StateObject var graphViewModel: GraphTabViewModel
 
     init(networking: Networking, userManager: UserManager) {
         self.networking = networking
         self.userManager = userManager
-        summaryViewModel = SummaryTabViewModel(networking)
-        graphViewModel = GraphTabViewModel(networking)
+        _summaryViewModel = .init(wrappedValue: PowerFlowTabViewModel(networking))
+        _graphViewModel = .init(wrappedValue: GraphTabViewModel(networking))
     }
 
     var body: some View {
         TabView {
-            SummaryTabView(viewModel: summaryViewModel)
+            PowerFlowTabView(viewModel: summaryViewModel)
                 .tabItem {
                     VStack {
                         Image(systemName: "arrow.up.arrow.down")
