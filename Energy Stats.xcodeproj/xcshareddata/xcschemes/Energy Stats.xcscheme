@@ -30,7 +30,7 @@
       codeCoverageEnabled = "YES">
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "TESTING=1"
+            argument = "-TESTING=1"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

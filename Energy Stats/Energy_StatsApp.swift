@@ -15,7 +15,7 @@ struct Energy_StatsApp: App {
         let loginManager = UserManager(networking: network, store: keychainStore)
 
         return WindowGroup {
-            if UserDefaults.standard.bool(forKey: "TESTING") {
+            if isRunningTests() {
                 Text("Tests")
             } else {
                 ContentView(
@@ -24,5 +24,9 @@ struct Energy_StatsApp: App {
                 )
             }
         }
+    }
+
+    func isRunningTests() -> Bool {
+        CommandLine.arguments.contains("-TESTING=1")
     }
 }

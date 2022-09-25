@@ -50,6 +50,7 @@
 		41B6910528E047DD0058126E /* report-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B6910428E047DD0058126E /* report-success.json */; };
 		41B6910728E0B5F30058126E /* trylater.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B6910628E0B5F30058126E /* trylater.json */; };
 		41B6910928E0BA340058126E /* badtoken.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B6910828E0BA340058126E /* badtoken.json */; };
+		41B6910B28E0CD370058126E /* battery-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B6910A28E0CD370058126E /* battery-success.json */; };
 		41D6496C28DB321600A24B41 /* DeviceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D6496B28DB321600A24B41 /* DeviceList.swift */; };
 		41D7B12428C86E4000E14144 /* Raw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D7B12328C86E4000E14144 /* Raw.swift */; };
 		41E1DFDF28D87781001235B9 /* SettingsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E1DFDE28D87781001235B9 /* SettingsTabView.swift */; };
@@ -115,6 +116,7 @@
 		41B6910428E047DD0058126E /* report-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "report-success.json"; sourceTree = "<group>"; };
 		41B6910628E0B5F30058126E /* trylater.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = trylater.json; sourceTree = "<group>"; };
 		41B6910828E0BA340058126E /* badtoken.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = badtoken.json; sourceTree = "<group>"; };
+		41B6910A28E0CD370058126E /* battery-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "battery-success.json"; sourceTree = "<group>"; };
 		41D6496B28DB321600A24B41 /* DeviceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceList.swift; sourceTree = "<group>"; };
 		41D7B12328C86E4000E14144 /* Raw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Raw.swift; sourceTree = "<group>"; };
 		41E1DFDE28D87781001235B9 /* SettingsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabView.swift; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 		41B690FA28E041E00058126E /* Responses */ = {
 			isa = PBXGroup;
 			children = (
+				41B6910A28E0CD370058126E /* battery-success.json */,
 				41B6910828E0BA340058126E /* badtoken.json */,
 				41B6910628E0B5F30058126E /* trylater.json */,
 				41B6910428E047DD0058126E /* report-success.json */,
@@ -439,6 +442,7 @@
 				41B6910528E047DD0058126E /* report-success.json in Resources */,
 				41B690FE28E042560058126E /* login-success.json in Resources */,
 				41B6910928E0BA340058126E /* badtoken.json in Resources */,
+				41B6910B28E0CD370058126E /* battery-success.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

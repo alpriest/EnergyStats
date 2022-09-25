@@ -53,6 +53,18 @@ final class NetworkTests: XCTestCase {
         XCTAssertEqual(report.count, 5)
     }
 
+    func test_fetchBattery_returns_data_on_success() async throws {
+        stub(condition: isHost("www.foxesscloud.com")) { _ in
+            let stubPath = OHPathForFile("battery-success.json", type(of: self))
+            return fixture(filePath: stubPath!, headers: ["Content-Type": "application/json"])
+        }
+
+        let report = try await sut.fetchBattery()
+
+        XCTAssertEqual(report.power, -1.065)
+        XCTAssertEqual(report.soc, 23)
+    }
+
     func test_fetchReport_throws_when_offline() async {
         stub(condition: isHost("www.foxesscloud.com")) { _ in
             let notConnectedError = NSError(domain: NSURLErrorDomain, code: URLError.notConnectedToInternet.rawValue)
@@ -108,7 +120,7 @@ final class NetworkTests: XCTestCase {
 private class MockKeychainStore: KeychainStore {
     var username: String?
     var password: String?
-    var storedToken: String?
+    var token: String?
 
     override func getUsername() -> String? {
         username
@@ -119,7 +131,11 @@ private class MockKeychainStore: KeychainStore {
     }
 
     override func store(token: String?) throws {
-        storedToken = token
+        self.token = token
+    }
+
+    override func getToken() -> String? {
+        token
     }
 
     override func store(username: String, password: String) throws {
