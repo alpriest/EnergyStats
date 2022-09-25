@@ -69,7 +69,7 @@ final class NetworkTests: XCTestCase {
 
     func test_fetchReport_returns_tryLater() async {
         stub(condition: isHost("www.foxesscloud.com")) { _ in
-            let stubPath = OHPathForFile("report-trylater.json", type(of: self))
+            let stubPath = OHPathForFile("trylater.json", type(of: self))
             return fixture(filePath: stubPath!, headers: ["Content-Type": "application/json"])
         }
 
@@ -79,6 +79,29 @@ final class NetworkTests: XCTestCase {
         } catch {
             XCTFail()
         }
+    }
+
+    func test_fetchReport_withInvalidToken_requestsToken_andRetriesOriginalFetch() async throws {
+        var callCount = 0
+        keychainStore.username = "bob"
+        keychainStore.password = "secret"
+
+        stub(condition: isHost("www.foxesscloud.com")) { _ in
+            callCount += 1
+            print("AWP", callCount)
+            if callCount == 1 {
+                let stubPath = OHPathForFile("badtoken.json", type(of: self))
+                return fixture(filePath: stubPath!, headers: ["Content-Type": "application/json"])
+            } else if callCount == 2 {
+                let stubPath = OHPathForFile("login-success.json", type(of: self))
+                return fixture(filePath: stubPath!, headers: ["Content-Type": "application/json"])
+            } else {
+                let stubPath = OHPathForFile("report-success.json", type(of: self))
+                return fixture(filePath: stubPath!, headers: ["Content-Type": "application/json"])
+            }
+        }
+
+        _ = try await sut.fetchReport(variables: [.feedinPower, .gridConsumptionPower, .generationPower, .batChargePower, .pvPower])
     }
 }
 

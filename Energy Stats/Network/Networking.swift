@@ -74,7 +74,7 @@ class Network: Networking, ObservableObject {
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(AuthRequest(user: username, password: hashedPassword))
 
-        let response: AuthResponse = try await fetch(request)
+        let response: AuthResponse = try await fetch(request, retry: false)
 
         return response.token
     }
