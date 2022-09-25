@@ -65,6 +65,29 @@ final class NetworkTests: XCTestCase {
         XCTAssertEqual(report.soc, 23)
     }
 
+    func test_fetchRaw_returns_data_on_success() async throws {
+        stub(condition: isHost("www.foxesscloud.com")) { _ in
+            let stubPath = OHPathForFile("raw-success.json", type(of: self))
+            return fixture(filePath: stubPath!, headers: ["Content-Type": "application/json"])
+        }
+
+        let report = try await sut.fetchRaw(variables: [.feedinPower, .gridConsumptionPower, .pvPower, .loadsPower])
+
+        XCTAssertEqual(report.count, 4)
+    }
+
+    func test_fetchDeviceList_returns_data_on_success() async throws {
+        stub(condition: isHost("www.foxesscloud.com")) { _ in
+            let stubPath = OHPathForFile("devicelist-success.json", type(of: self))
+            return fixture(filePath: stubPath!, headers: ["Content-Type": "application/json"])
+        }
+
+        let report = try await sut.fetchDeviceList()
+
+        XCTAssertEqual(report.devices.first?.hasBattery, true)
+        XCTAssertEqual(report.devices.first?.deviceID, "03274209-486c-4ea3-9c28-159f25ee84cb")
+    }
+
     func test_fetchReport_throws_when_offline() async {
         stub(condition: isHost("www.foxesscloud.com")) { _ in
             let notConnectedError = NSError(domain: NSURLErrorDomain, code: URLError.notConnectedToInternet.rawValue)

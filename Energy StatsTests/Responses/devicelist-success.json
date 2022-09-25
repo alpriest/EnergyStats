@@ -1,0 +1,29 @@
+{
+  "errno": 0,
+  "result": {
+    "currentPage": 1,
+    "pageSize": 1,
+    "total": 1,
+    "devices": [
+      {
+        "deviceID": "03274209-486c-4ea3-9c28-159f25ee84cb",
+        "deviceSN": "66BH3720228D004",
+        "moduleSN": "669W2EFF22FA815",
+        "plantName": "Alistair Priest",
+        "deviceType": "H1-3.7-E",
+        "country": "United Kingdom (the)",
+        "countryCode": "",
+        "feedinDate": "2022-02-22 21:46:27 GMT+0000",
+        "status": 1,
+        "power": 0.252,
+        "generationToday": 4.399999999999977,
+        "generationTotal": 517.9,
+        "productType": "H",
+        "flowType": 2,
+        "hasBattery": true,
+        "hasPV": true,
+        "dataLatestUploadDate": "2022-09-25 18:50:50 BST+0100"
+      }
+    ]
+  }
+}

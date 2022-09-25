@@ -1,0 +1,13 @@
+{
+  "errno": 0,
+  "result": {
+    "status": 1,
+    "soc": 23,
+    "volt": 159.2,
+    "current": -6.5,
+    "power": -1.065,
+    "residual": 1860,
+    "temperature": 19.3,
+    "timestamp": ""
+  }
+}
