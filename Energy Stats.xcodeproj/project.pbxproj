@@ -47,6 +47,7 @@
 		41B690FD28E042560058126E /* login-failure.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B690FB28E042560058126E /* login-failure.json */; };
 		41B690FE28E042560058126E /* login-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B690FC28E042560058126E /* login-success.json */; };
 		41B6910128E043A10058126E /* OHHTTPStubs in Frameworks */ = {isa = PBXBuildFile; productRef = 41B6910028E043A10058126E /* OHHTTPStubs */; };
+		41B6910528E047DD0058126E /* report-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B6910428E047DD0058126E /* report-success.json */; };
 		41D6496C28DB321600A24B41 /* DeviceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D6496B28DB321600A24B41 /* DeviceList.swift */; };
 		41D7B12428C86E4000E14144 /* Raw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D7B12328C86E4000E14144 /* Raw.swift */; };
 		41E1DFDF28D87781001235B9 /* SettingsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E1DFDE28D87781001235B9 /* SettingsTabView.swift */; };
@@ -109,6 +110,7 @@
 		41B690F528E03EA70058126E /* NetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTests.swift; sourceTree = "<group>"; };
 		41B690FB28E042560058126E /* login-failure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "login-failure.json"; sourceTree = "<group>"; };
 		41B690FC28E042560058126E /* login-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "login-success.json"; sourceTree = "<group>"; };
+		41B6910428E047DD0058126E /* report-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "report-success.json"; sourceTree = "<group>"; };
 		41D6496B28DB321600A24B41 /* DeviceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceList.swift; sourceTree = "<group>"; };
 		41D7B12328C86E4000E14144 /* Raw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Raw.swift; sourceTree = "<group>"; };
 		41E1DFDE28D87781001235B9 /* SettingsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabView.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 		41B690FA28E041E00058126E /* Responses */ = {
 			isa = PBXGroup;
 			children = (
+				41B6910428E047DD0058126E /* report-success.json */,
 				41B690FB28E042560058126E /* login-failure.json */,
 				41B690FC28E042560058126E /* login-success.json */,
 			);
@@ -426,6 +429,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				41B690FD28E042560058126E /* login-failure.json in Resources */,
+				41B6910528E047DD0058126E /* report-success.json in Resources */,
 				41B690FE28E042560058126E /* login-success.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

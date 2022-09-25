@@ -32,6 +32,7 @@ enum NetworkError: Error {
     case serverFail(Int)
     case invalidToken
     case tryLater
+    case offline
 }
 
 class Network: Networking, ObservableObject {
@@ -122,7 +123,9 @@ class Network: Networking, ObservableObject {
 
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
-            guard let statusCode = (response as? HTTPURLResponse)?.statusCode else { throw NetworkError.unknown }
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {
+                throw NetworkError.unknown
+            }
 
             guard 200 ... 300 ~= statusCode else { throw NetworkError.invalidResponse(statusCode) }
 
@@ -148,6 +151,12 @@ class Network: Networking, ObservableObject {
                 token = try await fetchLoginToken()
                 return try await fetch(request, retry: false)
             default:
+                throw error
+            }
+        } catch let error as NSError {
+            if error.domain == NSURLErrorDomain && error.code == URLError.notConnectedToInternet.rawValue {
+                throw NetworkError.offline
+            } else {
                 throw error
             }
         }

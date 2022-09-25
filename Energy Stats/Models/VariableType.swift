@@ -30,7 +30,7 @@ enum VariableType: String, RawRepresentable {
         case .batChargePower:
             return "batCharge"
         case .pvPower:
-            return "chargeEnergyToTal"
+            return "chargeEnergyToTal" // This may be wrong. Doesn't match the values in the Fox app
         case .loadsPower:
             return "loads"
         }
