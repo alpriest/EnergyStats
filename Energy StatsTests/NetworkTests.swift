@@ -53,7 +53,7 @@ final class NetworkTests: XCTestCase {
         XCTAssertEqual(report.count, 5)
     }
 
-    func test_fetchReport_throws_when_offline() async throws {
+    func test_fetchReport_throws_when_offline() async {
         stub(condition: isHost("www.foxesscloud.com")) { _ in
             let notConnectedError = NSError(domain: NSURLErrorDomain, code: URLError.notConnectedToInternet.rawValue)
             return HTTPStubsResponse(error: notConnectedError)
@@ -61,8 +61,22 @@ final class NetworkTests: XCTestCase {
 
         do {
             _ = try await sut.fetchReport(variables: [.feedinPower, .gridConsumptionPower, .generationPower, .batChargePower, .pvPower])
-        } catch NetworkError.offline { }
-        catch {
+        } catch NetworkError.offline {
+        } catch {
+            XCTFail()
+        }
+    }
+
+    func test_fetchReport_returns_tryLater() async {
+        stub(condition: isHost("www.foxesscloud.com")) { _ in
+            let stubPath = OHPathForFile("report-trylater.json", type(of: self))
+            return fixture(filePath: stubPath!, headers: ["Content-Type": "application/json"])
+        }
+
+        do {
+            _ = try await sut.fetchReport(variables: [.feedinPower, .gridConsumptionPower, .generationPower, .batChargePower, .pvPower])
+        } catch NetworkError.tryLater {
+        } catch {
             XCTFail()
         }
     }
