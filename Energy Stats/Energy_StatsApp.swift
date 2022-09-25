@@ -15,10 +15,14 @@ struct Energy_StatsApp: App {
         let loginManager = UserManager(networking: network, store: keychainStore)
 
         return WindowGroup {
-            ContentView(
-                loginManager: loginManager,
-                network: network
-            )
+            if UserDefaults.standard.bool(forKey: "TESTING") {
+                Text("Tests")
+            } else {
+                ContentView(
+                    loginManager: loginManager,
+                    network: network
+                )
+            }
         }
     }
 }

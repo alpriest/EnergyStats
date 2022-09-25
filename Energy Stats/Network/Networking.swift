@@ -24,18 +24,18 @@ protocol Networking {
     func fetchDeviceList() async throws -> PagedDeviceListResponse
 }
 
-class Network: Networking, ObservableObject {
-    enum NetworkError: Error {
-        case invalidResponse(Int?)
-        case invalidConfiguration(String)
-        case badCredentials
-        case unknown
-        case serverFail(Int)
-        case invalidToken
-        case tryLater
-    }
+enum NetworkError: Error {
+    case invalidResponse(Int?)
+    case invalidConfiguration(String)
+    case badCredentials
+    case unknown
+    case serverFail(Int)
+    case invalidToken
+    case tryLater
+}
 
-    var token: String? {
+class Network: Networking, ObservableObject {
+    private var token: String? {
         get { credentials.getToken() }
         set {
             do { try credentials.store(token: newValue) }
@@ -50,13 +50,13 @@ class Network: Networking, ObservableObject {
     }
 
     func verifyCredentials(username: String, hashedPassword: String) async throws {
-        _ = try await fetchToken(username: username, hashedPassword: hashedPassword)
+        _ = try await fetchLoginToken(username: username, hashedPassword: hashedPassword)
     }
 
     func ensureTokenValid() async {
         do {
             if token == nil {
-                token = try await fetchToken()
+                token = try await fetchLoginToken()
             } else {
                 _ = try await fetchDeviceList()
             }
@@ -65,7 +65,7 @@ class Network: Networking, ObservableObject {
         }
     }
 
-    func fetchToken(username: String? = nil, hashedPassword: String? = nil) async throws -> String {
+    func fetchLoginToken(username: String? = nil, hashedPassword: String? = nil) async throws -> String {
         guard let hashedPassword = hashedPassword ?? credentials.getPassword(),
               let username = username ?? credentials.getUsername() else { throw NetworkError.badCredentials }
 
@@ -145,7 +145,7 @@ class Network: Networking, ObservableObject {
             switch error {
             case .invalidToken where retry:
                 token = nil
-                token = try await fetchToken()
+                token = try await fetchLoginToken()
                 return try await fetch(request, retry: false)
             default:
                 throw error

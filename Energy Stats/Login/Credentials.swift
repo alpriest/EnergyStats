@@ -58,12 +58,14 @@ class KeychainStore: ObservableObject {
         SecItemDelete(makeQuery(tag: "password"))
         updateHasCredentials()
     }
+}
 
-    private func updateHasCredentials() {
-        self.hasCredentials = getUsername() != nil && getPassword() != nil
+private extension KeychainStore {
+    func updateHasCredentials() {
+        hasCredentials = getUsername() != nil && getPassword() != nil
     }
 
-    private func get(tag: String) -> String? {
+    func get(tag: String) -> String? {
         var result: AnyObject?
         let status = SecItemCopyMatching(makeQuery(tag: tag), &result)
         guard status == 0 else { return nil }
@@ -75,7 +77,7 @@ class KeychainStore: ObservableObject {
         return decoded
     }
 
-    private func makeQuery(tag: String) -> CFDictionary {
+    func makeQuery(tag: String) -> CFDictionary {
         [
             kSecAttrApplicationTag: tag,
             kSecClass: kSecClassKey,
@@ -84,7 +86,7 @@ class KeychainStore: ObservableObject {
         ] as CFDictionary
     }
 
-    private func set(tag: String, value: String?) throws {
+    func set(tag: String, value: String?) throws {
         SecItemDelete(makeQuery(tag: tag))
 
         if let value {

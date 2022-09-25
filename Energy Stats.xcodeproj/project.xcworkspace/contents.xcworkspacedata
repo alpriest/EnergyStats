@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:/Users/alpriest/Developer/PV Stats/Energy Stats.xcodeproj">
+      location = "self:">
    </FileRef>
 </Workspace>

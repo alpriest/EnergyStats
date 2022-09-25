@@ -42,6 +42,11 @@
 		41A25D4328CA706700315714 /* CountdownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A25D4228CA706700315714 /* CountdownTimer.swift */; };
 		41AED86A28CDCD94009C6517 /* raw.json in Resources */ = {isa = PBXBuildFile; fileRef = 41AED86928CDCD94009C6517 /* raw.json */; };
 		41B690F428DF5C390058126E /* NetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B690F328DF5C390058126E /* NetworkResponse.swift */; };
+		41B690F628E03EA70058126E /* NetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B690F528E03EA70058126E /* NetworkTests.swift */; };
+		41B690F928E040060058126E /* OHHTTPStubsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 41B690F828E040060058126E /* OHHTTPStubsSwift */; };
+		41B690FD28E042560058126E /* login-failure.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B690FB28E042560058126E /* login-failure.json */; };
+		41B690FE28E042560058126E /* login-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B690FC28E042560058126E /* login-success.json */; };
+		41B6910128E043A10058126E /* OHHTTPStubs in Frameworks */ = {isa = PBXBuildFile; productRef = 41B6910028E043A10058126E /* OHHTTPStubs */; };
 		41D6496C28DB321600A24B41 /* DeviceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D6496B28DB321600A24B41 /* DeviceList.swift */; };
 		41D7B12428C86E4000E14144 /* Raw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D7B12328C86E4000E14144 /* Raw.swift */; };
 		41E1DFDF28D87781001235B9 /* SettingsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E1DFDE28D87781001235B9 /* SettingsTabView.swift */; };
@@ -101,6 +106,9 @@
 		41A25D4228CA706700315714 /* CountdownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimer.swift; sourceTree = "<group>"; };
 		41AED86928CDCD94009C6517 /* raw.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = raw.json; sourceTree = "<group>"; };
 		41B690F328DF5C390058126E /* NetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponse.swift; sourceTree = "<group>"; };
+		41B690F528E03EA70058126E /* NetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTests.swift; sourceTree = "<group>"; };
+		41B690FB28E042560058126E /* login-failure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "login-failure.json"; sourceTree = "<group>"; };
+		41B690FC28E042560058126E /* login-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "login-success.json"; sourceTree = "<group>"; };
 		41D6496B28DB321600A24B41 /* DeviceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceList.swift; sourceTree = "<group>"; };
 		41D7B12328C86E4000E14144 /* Raw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Raw.swift; sourceTree = "<group>"; };
 		41E1DFDE28D87781001235B9 /* SettingsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabView.swift; sourceTree = "<group>"; };
@@ -118,6 +126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41B6910128E043A10058126E /* OHHTTPStubs in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +134,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41B690F928E040060058126E /* OHHTTPStubsSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,6 +167,7 @@
 				4140144C28C70B3200EA5BA1 /* Energy Stats */,
 				41EDDF7228CD2ED30092C662 /* Energy StatsTests */,
 				4140144B28C70B3200EA5BA1 /* Products */,
+				41B690FF28E043A10058126E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -261,6 +272,22 @@
 			path = Graphs;
 			sourceTree = "<group>";
 		};
+		41B690FA28E041E00058126E /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				41B690FB28E042560058126E /* login-failure.json */,
+				41B690FC28E042560058126E /* login-success.json */,
+			);
+			path = Responses;
+			sourceTree = "<group>";
+		};
+		41B690FF28E043A10058126E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		41E1DFDD28D87778001235B9 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -291,7 +318,9 @@
 		41EDDF7228CD2ED30092C662 /* Energy StatsTests */ = {
 			isa = PBXGroup;
 			children = (
+				41B690FA28E041E00058126E /* Responses */,
 				41EDDF7328CD2ED30092C662 /* Energy_StatsTests.swift */,
+				41B690F528E03EA70058126E /* NetworkTests.swift */,
 			);
 			path = "Energy StatsTests";
 			sourceTree = "<group>";
@@ -312,6 +341,9 @@
 			dependencies = (
 			);
 			name = "Energy Stats";
+			packageProductDependencies = (
+				41B6910028E043A10058126E /* OHHTTPStubs */,
+			);
 			productName = "PV Stats";
 			productReference = 4140144A28C70B3200EA5BA1 /* Energy Stats.app */;
 			productType = "com.apple.product-type.application";
@@ -330,6 +362,9 @@
 				41EDDF7628CD2ED30092C662 /* PBXTargetDependency */,
 			);
 			name = "Energy StatsTests";
+			packageProductDependencies = (
+				41B690F828E040060058126E /* OHHTTPStubsSwift */,
+			);
 			productName = "Energy StatsTests";
 			productReference = 41EDDF7128CD2ED30092C662 /* Energy StatsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -362,6 +397,9 @@
 				Base,
 			);
 			mainGroup = 4140144128C70B3200EA5BA1;
+			packageReferences = (
+				41B690F728E040060058126E /* XCRemoteSwiftPackageReference "OHHTTPStubs" */,
+			);
 			productRefGroup = 4140144B28C70B3200EA5BA1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -387,6 +425,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41B690FD28E042560058126E /* login-failure.json in Resources */,
+				41B690FE28E042560058126E /* login-success.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +485,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				41EDDF7428CD2ED30092C662 /* Energy_StatsTests.swift in Sources */,
+				41B690F628E03EA70058126E /* NetworkTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -706,6 +747,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		41B690F728E040060058126E /* XCRemoteSwiftPackageReference "OHHTTPStubs" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AliSoftware/OHHTTPStubs";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		41B690F828E040060058126E /* OHHTTPStubsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 41B690F728E040060058126E /* XCRemoteSwiftPackageReference "OHHTTPStubs" */;
+			productName = OHHTTPStubsSwift;
+		};
+		41B6910028E043A10058126E /* OHHTTPStubs */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 41B690F728E040060058126E /* XCRemoteSwiftPackageReference "OHHTTPStubs" */;
+			productName = OHHTTPStubs;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4140144228C70B3200EA5BA1 /* Project object */;
 }
