@@ -40,10 +40,3 @@ extension XCTestCase {
         }
     }
 }
-
-extension Array {
-    subscript(safe index: Index) -> Element? {
-        guard indices ~= index else { return nil }
-        return self[index]
-    }
-}

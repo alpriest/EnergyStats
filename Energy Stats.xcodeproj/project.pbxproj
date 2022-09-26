@@ -23,6 +23,7 @@
 		4127910628E1FC1D00D5F993 /* MockNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127910528E1FC1D00D5F993 /* MockNetworking.swift */; };
 		4127910828E23D0A00D5F993 /* MockConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127910728E23D0A00D5F993 /* MockConfig.swift */; };
 		4127910B28E241E700D5F993 /* XCTestCase+OHHTTPStubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127910A28E241E700D5F993 /* XCTestCase+OHHTTPStubs.swift */; };
+		4127910D28E2442100D5F993 /* Array+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127910C28E2442100D5F993 /* Array+Safe.swift */; };
 		4128E4BF28DA507000C1D698 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4128E4BE28DA507000C1D698 /* Notifications.swift */; };
 		4128E4C128DA5F6600C1D698 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4128E4C028DA5F6600C1D698 /* Date.swift */; };
 		41339C7228CC7B7B0062B976 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41339C7128CC7B7B0062B976 /* LoginView.swift */; };
@@ -96,6 +97,7 @@
 		4127910528E1FC1D00D5F993 /* MockNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworking.swift; sourceTree = "<group>"; };
 		4127910728E23D0A00D5F993 /* MockConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockConfig.swift; sourceTree = "<group>"; };
 		4127910A28E241E700D5F993 /* XCTestCase+OHHTTPStubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+OHHTTPStubs.swift"; sourceTree = "<group>"; };
+		4127910C28E2442100D5F993 /* Array+Safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Safe.swift"; sourceTree = "<group>"; };
 		4128E4BE28DA507000C1D698 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		4128E4C028DA5F6600C1D698 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		412E3C7D28D2519B004A0DCF /* Energy-Stats-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Energy-Stats-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -200,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				4127910A28E241E700D5F993 /* XCTestCase+OHHTTPStubs.swift */,
+				4127910C28E2442100D5F993 /* Array+Safe.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -547,6 +550,7 @@
 				4127910228E1FBD300D5F993 /* MockKeychainStore.swift in Sources */,
 				4127910B28E241E700D5F993 /* XCTestCase+OHHTTPStubs.swift in Sources */,
 				4127910628E1FC1D00D5F993 /* MockNetworking.swift in Sources */,
+				4127910D28E2442100D5F993 /* Array+Safe.swift in Sources */,
 				4127910828E23D0A00D5F993 /* MockConfig.swift in Sources */,
 				41EDDF7428CD2ED30092C662 /* Energy_StatsTests.swift in Sources */,
 				41B690F628E03EA70058126E /* NetworkTests.swift in Sources */,
