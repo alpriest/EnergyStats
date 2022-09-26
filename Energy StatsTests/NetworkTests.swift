@@ -6,8 +6,6 @@
 //
 
 @testable import Energy_Stats
-import OHHTTPStubs
-import OHHTTPStubsSwift
 import XCTest
 
 final class NetworkTests: XCTestCase {
@@ -22,19 +20,13 @@ final class NetworkTests: XCTestCase {
     }
 
     func test_verifyCredentials_does_not_throw_on_success() async throws {
-        stub(condition: isHost("www.foxesscloud.com")) { _ in
-            let stubPath = OHPathForFile("login-success.json", type(of: self))
-            return fixture(filePath: stubPath!, headers: ["Content-Type": "application/json"])
-        }
+        stubHTTPResponse(with: "login-success.json")
 
         try await sut.verifyCredentials(username: "bob", hashedPassword: "secret")
     }
 
     func test_verifyCredentials_throws_on_failure() async throws {
-        stub(condition: isHost("www.foxesscloud.com")) { _ in
-            let stubPath = OHPathForFile("login-failure.json", type(of: self))
-            return fixture(filePath: stubPath!, headers: ["Content-Type": "application/json"])
-        }
+        stubHTTPResponse(with: "login-failure.json")
 
         do {
             try await sut.verifyCredentials(username: "bob", hashedPassword: "secret")
@@ -48,11 +40,7 @@ final class NetworkTests: XCTestCase {
         keychainStore.token = nil
         keychainStore.username = "bob"
         keychainStore.password = "secret"
-
-        stub(condition: isHost("www.foxesscloud.com")) { _ in
-            let stubPath = OHPathForFile("login-success.json", type(of: self))
-            return fixture(filePath: stubPath!, headers: ["Content-Type": "application/json"])
-        }
+        stubHTTPResponse(with: "login-success.json")
 
         await sut.ensureTokenValid()
 
@@ -61,11 +49,7 @@ final class NetworkTests: XCTestCase {
 
     func test_ensureTokenValid_fetches_device_list_if_token_present() async throws {
         keychainStore.token = "token"
-
-        stub(condition: isHost("www.foxesscloud.com")) { _ in
-            let stubPath = OHPathForFile("devicelist-success.json", type(of: self))
-            return fixture(filePath: stubPath!, headers: ["Content-Type": "application/json"])
-        }
+        stubHTTPResponse(with: "devicelist-success.json")
 
         await sut.ensureTokenValid()
 
@@ -74,10 +58,7 @@ final class NetworkTests: XCTestCase {
 
     func test_fetchReport_returns_data_on_success() async throws {
         config.configureAsLoggedIn()
-        stub(condition: isHost("www.foxesscloud.com")) { _ in
-            let stubPath = OHPathForFile("report-success.json", type(of: self))
-            return fixture(filePath: stubPath!, headers: ["Content-Type": "application/json"])
-        }
+        stubHTTPResponse(with: "report-success.json")
 
         let report = try await sut.fetchReport(variables: [.feedinPower, .gridConsumptionPower, .generationPower, .batChargePower, .pvPower])
 
@@ -86,10 +67,7 @@ final class NetworkTests: XCTestCase {
 
     func test_fetchBattery_returns_data_on_success() async throws {
         config.configureAsLoggedIn()
-        stub(condition: isHost("www.foxesscloud.com")) { _ in
-            let stubPath = OHPathForFile("battery-success.json", type(of: self))
-            return fixture(filePath: stubPath!, headers: ["Content-Type": "application/json"])
-        }
+        stubHTTPResponse(with: "battery-success.json")
 
         let report = try await sut.fetchBattery()
 
@@ -99,10 +77,7 @@ final class NetworkTests: XCTestCase {
 
     func test_fetchRaw_returns_data_on_success() async throws {
         config.configureAsLoggedIn()
-        stub(condition: isHost("www.foxesscloud.com")) { _ in
-            let stubPath = OHPathForFile("raw-success.json", type(of: self))
-            return fixture(filePath: stubPath!, headers: ["Content-Type": "application/json"])
-        }
+        stubHTTPResponse(with: "raw-success.json")
 
         let report = try await sut.fetchRaw(variables: [.feedinPower, .gridConsumptionPower, .pvPower, .loadsPower])
 
@@ -110,10 +85,7 @@ final class NetworkTests: XCTestCase {
     }
 
     func test_fetchDeviceList_returns_data_on_success() async throws {
-        stub(condition: isHost("www.foxesscloud.com")) { _ in
-            let stubPath = OHPathForFile("devicelist-success.json", type(of: self))
-            return fixture(filePath: stubPath!, headers: ["Content-Type": "application/json"])
-        }
+        stubHTTPResponse(with: "devicelist-success.json")
 
         let report = try await sut.fetchDeviceList()
 
@@ -123,11 +95,8 @@ final class NetworkTests: XCTestCase {
 
     func test_fetchReport_throws_when_offline() async {
         config.configureAsLoggedIn()
-        stub(condition: isHost("www.foxesscloud.com")) { _ in
-            let notConnectedError = NSError(domain: NSURLErrorDomain, code: URLError.notConnectedToInternet.rawValue)
-            return HTTPStubsResponse(error: notConnectedError)
-        }
-
+        stubOffline()
+        
         do {
             _ = try await sut.fetchReport(variables: [.feedinPower, .gridConsumptionPower, .generationPower, .batChargePower, .pvPower])
         } catch NetworkError.offline {
@@ -138,10 +107,7 @@ final class NetworkTests: XCTestCase {
 
     func test_fetchReport_returns_tryLater() async {
         config.configureAsLoggedIn()
-        stub(condition: isHost("www.foxesscloud.com")) { _ in
-            let stubPath = OHPathForFile("trylater.json", type(of: self))
-            return fixture(filePath: stubPath!, headers: ["Content-Type": "application/json"])
-        }
+        stubHTTPResponse(with: "trylater.json")
 
         do {
             _ = try await sut.fetchReport(variables: [.feedinPower, .gridConsumptionPower, .generationPower, .batChargePower, .pvPower])
@@ -153,24 +119,9 @@ final class NetworkTests: XCTestCase {
 
     func test_fetchReport_withInvalidToken_requestsToken_andRetriesOriginalFetch() async throws {
         config.configureAsLoggedIn()
-        var callCount = 0
         keychainStore.username = "bob"
         keychainStore.password = "secret"
-
-        stub(condition: isHost("www.foxesscloud.com")) { _ in
-            callCount += 1
-            print("AWP", callCount)
-            if callCount == 1 {
-                let stubPath = OHPathForFile("badtoken.json", type(of: self))
-                return fixture(filePath: stubPath!, headers: ["Content-Type": "application/json"])
-            } else if callCount == 2 {
-                let stubPath = OHPathForFile("login-success.json", type(of: self))
-                return fixture(filePath: stubPath!, headers: ["Content-Type": "application/json"])
-            } else {
-                let stubPath = OHPathForFile("report-success.json", type(of: self))
-                return fixture(filePath: stubPath!, headers: ["Content-Type": "application/json"])
-            }
-        }
+        stubHTTPResponses(with: ["badtoken.json", "login-success.json", "report-success.json"])
 
         _ = try await sut.fetchReport(variables: [.feedinPower, .gridConsumptionPower, .generationPower, .batChargePower, .pvPower])
     }
