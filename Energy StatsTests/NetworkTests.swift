@@ -42,6 +42,34 @@ final class NetworkTests: XCTestCase {
         }
     }
 
+    func test_ensureTokenValid_fetches_new_token_if_none() async throws {
+        keychainStore.token = nil
+        keychainStore.username = "bob"
+        keychainStore.password = "secret"
+
+        stub(condition: isHost("www.foxesscloud.com")) { _ in
+            let stubPath = OHPathForFile("login-success.json", type(of: self))
+            return fixture(filePath: stubPath!, headers: ["Content-Type": "application/json"])
+        }
+
+        await sut.ensureTokenValid()
+
+        XCTAssertNotNil(keychainStore.token)
+    }
+
+    func test_ensureTokenValid_fetches_device_list_if_token_present() async throws {
+        keychainStore.token = "token"
+
+        stub(condition: isHost("www.foxesscloud.com")) { _ in
+            let stubPath = OHPathForFile("devicelist-success.json", type(of: self))
+            return fixture(filePath: stubPath!, headers: ["Content-Type": "application/json"])
+        }
+
+        await sut.ensureTokenValid()
+
+        XCTAssertNotNil(keychainStore.token)
+    }
+
     func test_fetchReport_returns_data_on_success() async throws {
         stub(condition: isHost("www.foxesscloud.com")) { _ in
             let stubPath = OHPathForFile("report-success.json", type(of: self))
