@@ -16,16 +16,18 @@ class UserManager: ObservableObject {
     }
 
     private let networking: Networking
+    private var config: Config
     private let configManager: ConfigManager
     private let store: KeychainStore
     private var cancellables = Set<AnyCancellable>()
     @MainActor @Published var state = State.idle
     @MainActor @Published var isLoggedIn: Bool = false
 
-    init(networking: Networking, store: KeychainStore) {
+    init(networking: Networking, store: KeychainStore, config: Config) {
         self.networking = networking
         self.store = store
-        self.configManager = ConfigManager(networking: networking)
+        self.config = config
+        self.configManager = ConfigManager(networking: networking, config: config)
 
         self.store.$hasCredentials
             .sink { hasCredentials in
@@ -76,19 +78,21 @@ class UserManager: ObservableObject {
 
     func logout() {
         store.logout()
-        Config.shared.deviceID = nil
-        Config.shared.hasPV = false
-        Config.shared.hasBattery = false
+        config.deviceID = nil
+        config.hasPV = false
+        config.hasBattery = false
     }
 }
 
 class ConfigManager {
-    let networking: Networking
+    private let networking: Networking
+    private var config: Config
 
     struct NoDeviceFoundError: Error {}
 
-    init(networking: Networking) {
+    init(networking: Networking, config: Config) {
         self.networking = networking
+        self.config = config
     }
 
     func findDevice() async throws {
@@ -98,8 +102,8 @@ class ConfigManager {
             throw NoDeviceFoundError()
         }
 
-        Config.shared.deviceID = device.deviceID
-        Config.shared.hasBattery = device.hasBattery
-        Config.shared.hasPV = device.hasPV
+        config.deviceID = device.deviceID
+        config.hasBattery = device.hasBattery
+        config.hasPV = device.hasPV
     }
 }

@@ -8,15 +8,17 @@
 import SwiftUI
 
 struct TabbedView: View {
+    let config: Config
     let networking: Networking
     let userManager: UserManager
     @StateObject var summaryViewModel: PowerFlowTabViewModel
     @StateObject var graphViewModel: GraphTabViewModel
 
-    init(networking: Networking, userManager: UserManager) {
+    init(networking: Networking, userManager: UserManager, config: Config) {
         self.networking = networking
         self.userManager = userManager
-        _summaryViewModel = .init(wrappedValue: PowerFlowTabViewModel(networking))
+        self.config = config
+        _summaryViewModel = .init(wrappedValue: PowerFlowTabViewModel(networking, config: config))
         _graphViewModel = .init(wrappedValue: GraphTabViewModel(networking))
     }
 
@@ -38,7 +40,7 @@ struct TabbedView: View {
                     }
                 }
 
-            SettingsTabView(userManager: userManager)
+            SettingsTabView(userManager: userManager, config: config)
                 .tabItem {
                     VStack {
                         Image(systemName: "gearshape")
@@ -52,6 +54,6 @@ struct TabbedView: View {
 
 struct TabbedView_Previews: PreviewProvider {
     static var previews: some View {
-        TabbedView(networking: MockNetworking(), userManager: UserManager(networking: MockNetworking(), store: KeychainStore()))
+        TabbedView(networking: MockNetworking(), userManager: UserManager(networking: MockNetworking(), store: KeychainStore(), config: MockConfig()), config: MockConfig())
     }
 }

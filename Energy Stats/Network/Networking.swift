@@ -44,10 +44,12 @@ class Network: Networking, ObservableObject {
         }
     }
 
-    let credentials: KeychainStore
+    private let credentials: KeychainStore
+    private let config: Config
 
-    init(credentials: KeychainStore) {
+    init(credentials: KeychainStore, config: Config) {
         self.credentials = credentials
+        self.config = config
     }
 
     func verifyCredentials(username: String, hashedPassword: String) async throws {
@@ -80,7 +82,7 @@ class Network: Networking, ObservableObject {
     }
 
     func fetchReport(variables: [VariableType]) async throws -> [ReportResponse] {
-        guard let deviceID = Config.shared.deviceID else { throw NetworkError.invalidConfiguration("deviceID missing") }
+        guard let deviceID = config.deviceID else { throw NetworkError.invalidConfiguration("deviceID missing") }
 
         var request = URLRequest(url: URL.report)
         request.httpMethod = "POST"
@@ -90,8 +92,8 @@ class Network: Networking, ObservableObject {
     }
 
     func fetchBattery() async throws -> BatteryResponse {
-        guard let deviceID = Config.shared.deviceID else { throw NetworkError.invalidConfiguration("deviceID missing") }
-        guard Config.shared.hasBattery else { throw NetworkError.invalidConfiguration("No battery") }
+        guard let deviceID = config.deviceID else { throw NetworkError.invalidConfiguration("deviceID missing") }
+        guard config.hasBattery else { throw NetworkError.invalidConfiguration("No battery") }
 
         var request = URLRequest(url: URL.battery)
         request.url?.append(queryItems: [Foundation.URLQueryItem(name: "id", value: deviceID)])
@@ -100,7 +102,7 @@ class Network: Networking, ObservableObject {
     }
 
     func fetchRaw(variables: [VariableType]) async throws -> [RawResponse] {
-        guard let deviceID = Config.shared.deviceID else { throw NetworkError.invalidConfiguration("deviceID missing") }
+        guard let deviceID = config.deviceID else { throw NetworkError.invalidConfiguration("deviceID missing") }
 
         var request = URLRequest(url: URL.raw)
         request.httpMethod = "POST"

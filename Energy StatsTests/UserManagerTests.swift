@@ -14,11 +14,13 @@ final class UserManagerTests: XCTestCase {
     private var sut: UserManager!
     private var keychainStore: MockKeychainStore!
     private var networking: MockNetworking!
+    private var config: MockConfig!
 
     override func setUp() {
         keychainStore = MockKeychainStore()
         networking = MockNetworking()
-        sut = UserManager(networking: networking, store: keychainStore)
+        config = MockConfig()
+        sut = UserManager(networking: networking, store: keychainStore, config: config)
     }
 
     func test_IsLoggedIn_SetsOnInitialisation() {
@@ -42,5 +44,23 @@ final class UserManagerTests: XCTestCase {
         keychainStore.username = "bob"
 
         XCTAssertEqual(sut.getUsername(), "bob")
+    }
+
+    func test_logout_clears_store() {
+        sut.logout()
+
+        XCTAssertTrue(keychainStore.logoutCalled)
+    }
+
+    func test_logout_clears_config() {
+        config.deviceID = "device"
+        config.hasPV = true
+        config.hasBattery = true
+
+        sut.logout()
+
+        XCTAssertNil(config.deviceID)
+        XCTAssertFalse(config.hasPV)
+        XCTAssertFalse(config.hasBattery)
     }
 }

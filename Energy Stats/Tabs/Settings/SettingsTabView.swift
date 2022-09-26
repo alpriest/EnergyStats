@@ -9,9 +9,15 @@ import SwiftUI
 
 struct SettingsTabView: View {
     let userManager: UserManager
+    @State private var config: Config
     @State private var minSOC = 0.2
     @State private var capacity = "2600"
     @FocusState private var minSOCIsFocused: Bool
+
+    init(userManager: UserManager, config: Config) {
+        self.userManager = userManager
+        self._config = .init(wrappedValue: config)
+    }
 
     var body: some View {
         Form {
@@ -48,18 +54,18 @@ struct SettingsTabView: View {
         }.onTapGesture {
             minSOCIsFocused = false
         }.onChange(of: minSOC) { newValue in
-            Config.shared.minSOC = String(describing: newValue)
+            config.minSOC = String(describing: newValue)
         }.onChange(of: capacity) { newValue in
-            Config.shared.batteryCapacity = String(describing: newValue)
+            config.batteryCapacity = String(describing: newValue)
         }.onAppear {
-            minSOC = Config.shared.minSOC.asDouble() ?? 0.2
-            capacity = Config.shared.batteryCapacity ?? "2600"
+            minSOC = config.minSOC.asDouble() ?? 0.2
+            capacity = config.batteryCapacity ?? "2600"
         }
     }
 }
 
 struct SettingsTabView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsTabView(userManager: UserManager(networking: MockNetworking(), store: KeychainStore()))
+        SettingsTabView(userManager: UserManager(networking: MockNetworking(), store: KeychainStore(), config: MockConfig()), config: MockConfig())
     }
 }

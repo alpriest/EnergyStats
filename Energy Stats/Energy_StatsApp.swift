@@ -11,8 +11,9 @@ import SwiftUI
 struct Energy_StatsApp: App {
     var body: some Scene {
         let keychainStore = KeychainStore()
-        let network = Network(credentials: keychainStore)
-        let loginManager = UserManager(networking: network, store: keychainStore)
+        let config = UserDefaultsConfig()
+        let network = Network(credentials: keychainStore, config: config)
+        let loginManager = UserManager(networking: network, store: keychainStore, config: config)
 
         return WindowGroup {
             if isRunningTests() {
@@ -20,7 +21,8 @@ struct Energy_StatsApp: App {
             } else {
                 ContentView(
                     loginManager: loginManager,
-                    network: network
+                    network: network,
+                    config: config
                 )
             }
         }

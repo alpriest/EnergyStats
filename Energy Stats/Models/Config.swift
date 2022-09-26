@@ -7,11 +7,15 @@
 
 import Foundation
 
-class Config {
-    static var shared: Config {
-        Config()
-    }
+protocol Config {
+    var minSOC: String? { get set }
+    var batteryCapacity: String? { get set }
+    var deviceID: String? { get set }
+    var hasBattery: Bool { get set }
+    var hasPV: Bool { get set }
+}
 
+class UserDefaultsConfig: Config {
     @UserDefaultsStoredString(key: "minSOC")
     var minSOC: String?
 

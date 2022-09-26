@@ -12,7 +12,7 @@ class MockNetworking: Network {
 
     init(throwOnCall: Bool = false) {
         self.throwOnCall = throwOnCall
-        super.init(credentials: KeychainStore())
+        super.init(credentials: KeychainStore(), config: MockConfig())
     }
 
     override func fetchReport(variables: [VariableType]) async throws -> [ReportResponse] {
@@ -53,4 +53,12 @@ class MockNetworking: Network {
 
         return try Data(contentsOf: url)
     }
+}
+
+class MockConfig: Config {
+    var minSOC: String?
+    var batteryCapacity: String?
+    var deviceID: String?
+    var hasBattery: Bool = true
+    var hasPV: Bool = true
 }

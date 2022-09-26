@@ -12,6 +12,7 @@ class MockKeychainStore: KeychainStore {
     var username: String?
     var password: String?
     var token: String?
+    var logoutCalled = false
 
     override func getUsername() -> String? {
         username
@@ -32,5 +33,9 @@ class MockKeychainStore: KeychainStore {
     override func store(username: String, password: String) throws {
         self.username = username
         self.password = password
+    }
+
+    override func logout() {
+        logoutCalled = true
     }
 }

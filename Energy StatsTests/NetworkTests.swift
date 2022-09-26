@@ -13,10 +13,12 @@ import XCTest
 final class NetworkTests: XCTestCase {
     private var sut: Networking!
     private var keychainStore: MockKeychainStore!
+    private var config: MockConfig!
 
     override func setUp() {
         keychainStore = MockKeychainStore()
-        sut = Network(credentials: keychainStore)
+        config = MockConfig()
+        sut = Network(credentials: keychainStore, config: config)
     }
 
     func test_verifyCredentials_does_not_throw_on_success() async throws {
@@ -71,6 +73,7 @@ final class NetworkTests: XCTestCase {
     }
 
     func test_fetchReport_returns_data_on_success() async throws {
+        config.configureAsLoggedIn()
         stub(condition: isHost("www.foxesscloud.com")) { _ in
             let stubPath = OHPathForFile("report-success.json", type(of: self))
             return fixture(filePath: stubPath!, headers: ["Content-Type": "application/json"])
@@ -82,6 +85,7 @@ final class NetworkTests: XCTestCase {
     }
 
     func test_fetchBattery_returns_data_on_success() async throws {
+        config.configureAsLoggedIn()
         stub(condition: isHost("www.foxesscloud.com")) { _ in
             let stubPath = OHPathForFile("battery-success.json", type(of: self))
             return fixture(filePath: stubPath!, headers: ["Content-Type": "application/json"])
@@ -94,6 +98,7 @@ final class NetworkTests: XCTestCase {
     }
 
     func test_fetchRaw_returns_data_on_success() async throws {
+        config.configureAsLoggedIn()
         stub(condition: isHost("www.foxesscloud.com")) { _ in
             let stubPath = OHPathForFile("raw-success.json", type(of: self))
             return fixture(filePath: stubPath!, headers: ["Content-Type": "application/json"])
@@ -117,6 +122,7 @@ final class NetworkTests: XCTestCase {
     }
 
     func test_fetchReport_throws_when_offline() async {
+        config.configureAsLoggedIn()
         stub(condition: isHost("www.foxesscloud.com")) { _ in
             let notConnectedError = NSError(domain: NSURLErrorDomain, code: URLError.notConnectedToInternet.rawValue)
             return HTTPStubsResponse(error: notConnectedError)
@@ -131,6 +137,7 @@ final class NetworkTests: XCTestCase {
     }
 
     func test_fetchReport_returns_tryLater() async {
+        config.configureAsLoggedIn()
         stub(condition: isHost("www.foxesscloud.com")) { _ in
             let stubPath = OHPathForFile("trylater.json", type(of: self))
             return fixture(filePath: stubPath!, headers: ["Content-Type": "application/json"])
@@ -145,6 +152,7 @@ final class NetworkTests: XCTestCase {
     }
 
     func test_fetchReport_withInvalidToken_requestsToken_andRetriesOriginalFetch() async throws {
+        config.configureAsLoggedIn()
         var callCount = 0
         keychainStore.username = "bob"
         keychainStore.password = "secret"
@@ -168,3 +176,10 @@ final class NetworkTests: XCTestCase {
     }
 }
 
+extension MockConfig {
+    func configureAsLoggedIn() {
+        deviceID = "device"
+        hasPV = true
+        hasBattery = true
+    }
+}
