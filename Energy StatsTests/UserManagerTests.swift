@@ -11,12 +11,19 @@ import Combine
 
 @MainActor
 final class UserManagerTests: XCTestCase {
+    private var sut: UserManager!
+    private var keychainStore: MockKeychainStore!
+    private var networking: MockNetworking!
+
+    override func setUp() {
+        keychainStore = MockKeychainStore()
+        networking = MockNetworking()
+        sut = UserManager(networking: networking, store: keychainStore)
+    }
+
     func test_IsLoggedIn_SetsOnInitialisation() {
         var expectation: XCTestExpectation? = self.expectation(description: #function)
-        let keychainStore = MockKeychainStore()
         keychainStore.hasCredentials = true
-
-        let sut = UserManager(networking: MockNetworking(), store: keychainStore)
 
         sut.$isLoggedIn
             .receive(subscriber: Subscribers.Sink(receiveCompletion: { _ in
@@ -29,5 +36,11 @@ final class UserManagerTests: XCTestCase {
 
         wait(for: [expectation!], timeout: 1.0)
         XCTAssertTrue(sut.isLoggedIn)
+    }
+
+    func test_returns_username_from_keychain() {
+        keychainStore.username = "bob"
+
+        XCTAssertEqual(sut.getUsername(), "bob")
     }
 }
