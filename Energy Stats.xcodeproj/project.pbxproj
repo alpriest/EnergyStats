@@ -16,6 +16,11 @@
 		4107446728CA22B3006D5D7D /* InverterPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446628CA22B3006D5D7D /* InverterPath.swift */; };
 		4107446928CA42D2006D5D7D /* PylonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446828CA42D2006D5D7D /* PylonView.swift */; };
 		4107446C28CA57A9006D5D7D /* PowerFlowTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446B28CA57A9006D5D7D /* PowerFlowTabView.swift */; };
+		412790FD28E1FAF700D5F993 /* String+MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412790FC28E1FAF700D5F993 /* String+MD5.swift */; };
+		412790FF28E1FB9200D5F993 /* UserManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412790FE28E1FB9200D5F993 /* UserManagerTests.swift */; };
+		4127910228E1FBD300D5F993 /* MockKeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127910128E1FBD300D5F993 /* MockKeychainStore.swift */; };
+		4127910428E1FC0200D5F993 /* MockNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A25D4028CA6E0000315714 /* MockNetworking.swift */; };
+		4127910628E1FC1D00D5F993 /* MockNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127910528E1FC1D00D5F993 /* MockNetworking.swift */; };
 		4128E4BF28DA507000C1D698 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4128E4BE28DA507000C1D698 /* Notifications.swift */; };
 		4128E4C128DA5F6600C1D698 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4128E4C028DA5F6600C1D698 /* Date.swift */; };
 		41339C7228CC7B7B0062B976 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41339C7128CC7B7B0062B976 /* LoginView.swift */; };
@@ -38,7 +43,6 @@
 		4141B20228D871B900B60157 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141B20128D871B900B60157 /* ContentView.swift */; };
 		41A25D3D28CA5CDF00315714 /* GraphTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A25D3C28CA5CDF00315714 /* GraphTabView.swift */; };
 		41A25D3F28CA5CFB00315714 /* GraphTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A25D3E28CA5CFB00315714 /* GraphTabViewModel.swift */; };
-		41A25D4128CA6E0000315714 /* MockNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A25D4028CA6E0000315714 /* MockNetworking.swift */; };
 		41A25D4328CA706700315714 /* CountdownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A25D4228CA706700315714 /* CountdownTimer.swift */; };
 		41AED86A28CDCD94009C6517 /* raw.json in Resources */ = {isa = PBXBuildFile; fileRef = 41AED86928CDCD94009C6517 /* raw.json */; };
 		41B690F428DF5C390058126E /* NetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B690F328DF5C390058126E /* NetworkResponse.swift */; };
@@ -84,6 +88,10 @@
 		4107446628CA22B3006D5D7D /* InverterPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterPath.swift; sourceTree = "<group>"; };
 		4107446828CA42D2006D5D7D /* PylonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PylonView.swift; sourceTree = "<group>"; };
 		4107446B28CA57A9006D5D7D /* PowerFlowTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerFlowTabView.swift; sourceTree = "<group>"; };
+		412790FC28E1FAF700D5F993 /* String+MD5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+MD5.swift"; sourceTree = "<group>"; };
+		412790FE28E1FB9200D5F993 /* UserManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManagerTests.swift; sourceTree = "<group>"; };
+		4127910128E1FBD300D5F993 /* MockKeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockKeychainStore.swift; sourceTree = "<group>"; };
+		4127910528E1FC1D00D5F993 /* MockNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworking.swift; sourceTree = "<group>"; };
 		4128E4BE28DA507000C1D698 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		4128E4C028DA5F6600C1D698 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		412E3C7D28D2519B004A0DCF /* Energy-Stats-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Energy-Stats-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -159,6 +167,7 @@
 				4106A92F28D05EC90009DA28 /* Double.swift */,
 				4128E4BE28DA507000C1D698 /* Notifications.swift */,
 				4128E4C028DA5F6600C1D698 /* Date.swift */,
+				412790FC28E1FAF700D5F993 /* String+MD5.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -171,6 +180,15 @@
 				41A25D3A28CA5CB700315714 /* Power Flow */,
 			);
 			path = Tabs;
+			sourceTree = "<group>";
+		};
+		4127910028E1FBCC00D5F993 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				4127910128E1FBD300D5F993 /* MockKeychainStore.swift */,
+				4127910528E1FC1D00D5F993 /* MockNetworking.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		4140144128C70B3200EA5BA1 = {
@@ -196,7 +214,6 @@
 			isa = PBXGroup;
 			children = (
 				4140145128C70B3200EA5BA1 /* Assets.xcassets */,
-				4140145D28C70D1400EA5BA1 /* Config.swift */,
 				4141B20128D871B900B60157 /* ContentView.swift */,
 				41A25D4228CA706700315714 /* CountdownTimer.swift */,
 				4140144D28C70B3200EA5BA1 /* Energy_StatsApp.swift */,
@@ -239,6 +256,7 @@
 		4140146728C7373A00EA5BA1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4140145D28C70D1400EA5BA1 /* Config.swift */,
 				4106A92C28CFCD960009DA28 /* VariableType.swift */,
 			);
 			path = Models;
@@ -336,9 +354,11 @@
 		41EDDF7228CD2ED30092C662 /* Energy StatsTests */ = {
 			isa = PBXGroup;
 			children = (
+				4127910028E1FBCC00D5F993 /* Mocks */,
 				41B690FA28E041E00058126E /* Responses */,
 				41EDDF7328CD2ED30092C662 /* Energy_StatsTests.swift */,
 				41B690F528E03EA70058126E /* NetworkTests.swift */,
+				412790FE28E1FB9200D5F993 /* UserManagerTests.swift */,
 			);
 			path = "Energy StatsTests";
 			sourceTree = "<group>";
@@ -481,7 +501,6 @@
 				4140146D28C75C3B00EA5BA1 /* PowerGraph.swift in Sources */,
 				4140146928C7374400EA5BA1 /* HistoricalViewModel.swift in Sources */,
 				4140145E28C70D1400EA5BA1 /* Config.swift in Sources */,
-				41A25D4128CA6E0000315714 /* MockNetworking.swift in Sources */,
 				41E4B31028DB7666003F7F47 /* BatteryPowerView.swift in Sources */,
 				4140144E28C70B3200EA5BA1 /* Energy_StatsApp.swift in Sources */,
 				4140147128C77AAA00EA5BA1 /* BatteryViewModel.swift in Sources */,
@@ -495,11 +514,13 @@
 				4128E4BF28DA507000C1D698 /* Notifications.swift in Sources */,
 				4107446528CA1D76006D5D7D /* DirectionalArrow.swift in Sources */,
 				41E1DFDF28D87781001235B9 /* SettingsTabView.swift in Sources */,
+				4127910428E1FC0200D5F993 /* MockNetworking.swift in Sources */,
 				4107446328CA1C5D006D5D7D /* PowerFlowView.swift in Sources */,
 				41A25D3F28CA5CFB00315714 /* GraphTabViewModel.swift in Sources */,
 				4107446128C9EF6B006D5D7D /* HomePowerFlowView.swift in Sources */,
 				4107446928CA42D2006D5D7D /* PylonView.swift in Sources */,
 				4106A93028D05EC90009DA28 /* Double.swift in Sources */,
+				412790FD28E1FAF700D5F993 /* String+MD5.swift in Sources */,
 				4107446728CA22B3006D5D7D /* InverterPath.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -508,6 +529,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				412790FF28E1FB9200D5F993 /* UserManagerTests.swift in Sources */,
+				4127910228E1FBD300D5F993 /* MockKeychainStore.swift in Sources */,
+				4127910628E1FC1D00D5F993 /* MockNetworking.swift in Sources */,
 				41EDDF7428CD2ED30092C662 /* Energy_StatsTests.swift in Sources */,
 				41B690F628E03EA70058126E /* NetworkTests.swift in Sources */,
 			);

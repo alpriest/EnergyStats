@@ -1,5 +1,5 @@
 //
-//  LoginManager.swift
+//  UserManager.swift
 //  Energy Stats
 //
 //  Created by Alistair Priest on 19/09/2022.
