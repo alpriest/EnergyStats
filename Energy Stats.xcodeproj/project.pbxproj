@@ -24,10 +24,12 @@
 		4127910828E23D0A00D5F993 /* MockConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127910728E23D0A00D5F993 /* MockConfig.swift */; };
 		4127910B28E241E700D5F993 /* XCTestCase+OHHTTPStubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127910A28E241E700D5F993 /* XCTestCase+OHHTTPStubs.swift */; };
 		4127910D28E2442100D5F993 /* Array+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127910C28E2442100D5F993 /* Array+Safe.swift */; };
+		4127911028E38EFB00D5F993 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 4127910F28E38EFB00D5F993 /* SnapshotTesting */; };
+		4127911228E38F1400D5F993 /* LoginViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127911128E38F1400D5F993 /* LoginViewTests.swift */; };
 		4128E4BF28DA507000C1D698 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4128E4BE28DA507000C1D698 /* Notifications.swift */; };
 		4128E4C128DA5F6600C1D698 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4128E4C028DA5F6600C1D698 /* Date.swift */; };
 		41339C7228CC7B7B0062B976 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41339C7128CC7B7B0062B976 /* LoginView.swift */; };
-		41339C7428CC7BA50062B976 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41339C7328CC7BA50062B976 /* Credentials.swift */; };
+		41339C7428CC7BA50062B976 /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41339C7328CC7BA50062B976 /* KeychainStore.swift */; };
 		4140144E28C70B3200EA5BA1 /* Energy_StatsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140144D28C70B3200EA5BA1 /* Energy_StatsApp.swift */; };
 		4140145028C70B3200EA5BA1 /* TabbedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140144F28C70B3200EA5BA1 /* TabbedView.swift */; };
 		4140145228C70B3200EA5BA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4140145128C70B3200EA5BA1 /* Assets.xcassets */; };
@@ -98,11 +100,12 @@
 		4127910728E23D0A00D5F993 /* MockConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockConfig.swift; sourceTree = "<group>"; };
 		4127910A28E241E700D5F993 /* XCTestCase+OHHTTPStubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+OHHTTPStubs.swift"; sourceTree = "<group>"; };
 		4127910C28E2442100D5F993 /* Array+Safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Safe.swift"; sourceTree = "<group>"; };
+		4127911128E38F1400D5F993 /* LoginViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewTests.swift; sourceTree = "<group>"; };
 		4128E4BE28DA507000C1D698 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		4128E4C028DA5F6600C1D698 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		412E3C7D28D2519B004A0DCF /* Energy-Stats-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Energy-Stats-Info.plist"; sourceTree = SOURCE_ROOT; };
 		41339C7128CC7B7B0062B976 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		41339C7328CC7BA50062B976 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
+		41339C7328CC7BA50062B976 /* KeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStore.swift; sourceTree = "<group>"; };
 		4140144A28C70B3200EA5BA1 /* Energy Stats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Energy Stats.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4140144D28C70B3200EA5BA1 /* Energy_StatsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Energy_StatsApp.swift; sourceTree = "<group>"; };
 		4140144F28C70B3200EA5BA1 /* TabbedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbedView.swift; sourceTree = "<group>"; };
@@ -161,6 +164,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				41B690F928E040060058126E /* OHHTTPStubsSwift in Frameworks */,
+				4127911028E38EFB00D5F993 /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,7 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				41339C7128CC7B7B0062B976 /* LoginView.swift */,
-				41339C7328CC7BA50062B976 /* Credentials.swift */,
+				41339C7328CC7BA50062B976 /* KeychainStore.swift */,
 				4141B1FF28D86C7200B60157 /* UserManager.swift */,
 			);
 			path = Login;
@@ -376,6 +380,7 @@
 				41EDDF7328CD2ED30092C662 /* Energy_StatsTests.swift */,
 				41B690F528E03EA70058126E /* NetworkTests.swift */,
 				412790FE28E1FB9200D5F993 /* UserManagerTests.swift */,
+				4127911128E38F1400D5F993 /* LoginViewTests.swift */,
 			);
 			path = "Energy StatsTests";
 			sourceTree = "<group>";
@@ -419,6 +424,7 @@
 			name = "Energy StatsTests";
 			packageProductDependencies = (
 				41B690F828E040060058126E /* OHHTTPStubsSwift */,
+				4127910F28E38EFB00D5F993 /* SnapshotTesting */,
 			);
 			productName = "Energy StatsTests";
 			productReference = 41EDDF7128CD2ED30092C662 /* Energy StatsTests.xctest */;
@@ -454,6 +460,7 @@
 			mainGroup = 4140144128C70B3200EA5BA1;
 			packageReferences = (
 				41B690F728E040060058126E /* XCRemoteSwiftPackageReference "OHHTTPStubs" */,
+				4127910E28E38EFB00D5F993 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 			);
 			productRefGroup = 4140144B28C70B3200EA5BA1 /* Products */;
 			projectDirPath = "";
@@ -501,7 +508,7 @@
 				4107446C28CA57A9006D5D7D /* PowerFlowTabView.swift in Sources */,
 				41B690F428DF5C390058126E /* NetworkResponse.swift in Sources */,
 				4140145028C70B3200EA5BA1 /* TabbedView.swift in Sources */,
-				41339C7428CC7BA50062B976 /* Credentials.swift in Sources */,
+				41339C7428CC7BA50062B976 /* KeychainStore.swift in Sources */,
 				41A25D4328CA706700315714 /* CountdownTimer.swift in Sources */,
 				41D6496C28DB321600A24B41 /* DeviceList.swift in Sources */,
 				4140146B28C7589800EA5BA1 /* CircularProgressView.swift in Sources */,
@@ -547,6 +554,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				412790FF28E1FB9200D5F993 /* UserManagerTests.swift in Sources */,
+				4127911228E38F1400D5F993 /* LoginViewTests.swift in Sources */,
 				4127910228E1FBD300D5F993 /* MockKeychainStore.swift in Sources */,
 				4127910B28E241E700D5F993 /* XCTestCase+OHHTTPStubs.swift in Sources */,
 				4127910628E1FC1D00D5F993 /* MockNetworking.swift in Sources */,
@@ -817,6 +825,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		4127910E28E38EFB00D5F993 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		41B690F728E040060058126E /* XCRemoteSwiftPackageReference "OHHTTPStubs" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AliSoftware/OHHTTPStubs";
@@ -828,6 +844,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		4127910F28E38EFB00D5F993 /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4127910E28E38EFB00D5F993 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
+		};
 		41B690F828E040060058126E /* OHHTTPStubsSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 41B690F728E040060058126E /* XCRemoteSwiftPackageReference "OHHTTPStubs" */;
