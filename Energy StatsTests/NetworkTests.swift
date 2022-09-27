@@ -20,13 +20,13 @@ final class NetworkTests: XCTestCase {
     }
 
     func test_verifyCredentials_does_not_throw_on_success() async throws {
-        stubHTTPResponse(with: "login-success.json")
+        stubHTTPResponse(with: .loginSuccess)
 
         try await sut.verifyCredentials(username: "bob", hashedPassword: "secret")
     }
 
     func test_verifyCredentials_throws_on_failure() async throws {
-        stubHTTPResponse(with: "login-failure.json")
+        stubHTTPResponse(with: .loginFailure)
 
         do {
             try await sut.verifyCredentials(username: "bob", hashedPassword: "secret")
@@ -40,7 +40,7 @@ final class NetworkTests: XCTestCase {
         keychainStore.token = nil
         keychainStore.username = "bob"
         keychainStore.hashedPassword = "secrethash"
-        stubHTTPResponse(with: "login-success.json")
+        stubHTTPResponse(with: .loginSuccess)
 
         await sut.ensureTokenValid()
 
@@ -49,7 +49,7 @@ final class NetworkTests: XCTestCase {
 
     func test_ensureTokenValid_fetches_device_list_if_token_present() async throws {
         keychainStore.token = "token"
-        stubHTTPResponse(with: "devicelist-success.json")
+        stubHTTPResponse(with: .deviceListSuccess)
 
         await sut.ensureTokenValid()
 
@@ -58,7 +58,7 @@ final class NetworkTests: XCTestCase {
 
     func test_fetchReport_returns_data_on_success() async throws {
         config.configureAsLoggedIn()
-        stubHTTPResponse(with: "report-success.json")
+        stubHTTPResponse(with: .reportSuccess)
 
         let report = try await sut.fetchReport(variables: [.feedinPower, .gridConsumptionPower, .generationPower, .batChargePower, .pvPower])
 
@@ -67,7 +67,7 @@ final class NetworkTests: XCTestCase {
 
     func test_fetchBattery_returns_data_on_success() async throws {
         config.configureAsLoggedIn()
-        stubHTTPResponse(with: "battery-success.json")
+        stubHTTPResponse(with: .batterySuccess)
 
         let report = try await sut.fetchBattery()
 
@@ -77,7 +77,7 @@ final class NetworkTests: XCTestCase {
 
     func test_fetchRaw_returns_data_on_success() async throws {
         config.configureAsLoggedIn()
-        stubHTTPResponse(with: "raw-success.json")
+        stubHTTPResponse(with: .rawSuccess)
 
         let report = try await sut.fetchRaw(variables: [.feedinPower, .gridConsumptionPower, .pvPower, .loadsPower])
 
@@ -85,7 +85,7 @@ final class NetworkTests: XCTestCase {
     }
 
     func test_fetchDeviceList_returns_data_on_success() async throws {
-        stubHTTPResponse(with: "devicelist-success.json")
+        stubHTTPResponse(with: .deviceListSuccess)
 
         let report = try await sut.fetchDeviceList()
 
@@ -107,7 +107,7 @@ final class NetworkTests: XCTestCase {
 
     func test_fetchReport_returns_tryLater() async {
         config.configureAsLoggedIn()
-        stubHTTPResponse(with: "trylater.json")
+        stubHTTPResponse(with: .tryLaterFailure)
 
         do {
             _ = try await sut.fetchReport(variables: [.feedinPower, .gridConsumptionPower, .generationPower, .batChargePower, .pvPower])
@@ -121,7 +121,7 @@ final class NetworkTests: XCTestCase {
         config.configureAsLoggedIn()
         keychainStore.username = "bob"
         keychainStore.hashedPassword = "secrethash"
-        stubHTTPResponses(with: ["badtoken.json", "login-success.json", "report-success.json"])
+        stubHTTPResponses(with: [.badTokenFailure, .loginSuccess, .reportSuccess])
 
         _ = try await sut.fetchReport(variables: [.feedinPower, .gridConsumptionPower, .generationPower, .batChargePower, .pvPower])
     }

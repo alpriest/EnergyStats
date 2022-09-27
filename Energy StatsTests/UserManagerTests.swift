@@ -66,7 +66,7 @@ final class UserManagerTests: XCTestCase {
 
     func test_login_success() async {
         let received = ValueReceiver(sut.$state)
-        stubHTTPResponses(with: ["login-success.json", "devicelist-success.json"])
+        stubHTTPResponses(with: [.loginSuccess, .deviceListSuccess])
 
         await sut.login(username: "bob", password: "password")
 
@@ -77,7 +77,7 @@ final class UserManagerTests: XCTestCase {
 
     func test_login_performs_logout_when_devicelist_fails() async {
         let received = ValueReceiver(sut.$state)
-        stubHTTPResponses(with: ["login-success.json", "trylater.json"])
+        stubHTTPResponses(with: [.loginSuccess, .tryLaterFailure])
 
         await sut.login(username: "bob", password: "password")
 
@@ -87,7 +87,7 @@ final class UserManagerTests: XCTestCase {
 
     func test_login_with_bad_credentials_shows_error() async {
         let received = ValueReceiver(sut.$state)
-        stubHTTPResponses(with: ["login-failure.json"])
+        stubHTTPResponses(with: [.loginFailure])
 
         await sut.login(username: "bob", password: "wrongpassword")
 
