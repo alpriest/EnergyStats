@@ -94,6 +94,7 @@ final class UserManagerTests: XCTestCase {
         XCTAssertEqual(received.values, [.idle, .busy, .error("Wrong credentials, try again")])
         XCTAssertNil(keychainStore.username)
         XCTAssertNil(keychainStore.hashedPassword)
+        XCTAssertTrue(keychainStore.logoutCalled)
     }
 
     func test_login_when_offline_shows_error() async {
@@ -105,6 +106,7 @@ final class UserManagerTests: XCTestCase {
         XCTAssertEqual(received.values, [.idle, .busy, .error("Could not login. Check your internet connnection")])
         XCTAssertNil(keychainStore.username)
         XCTAssertNil(keychainStore.hashedPassword)
+        XCTAssertTrue(keychainStore.logoutCalled)
     }
 }
 
