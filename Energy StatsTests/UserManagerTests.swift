@@ -75,13 +75,34 @@ final class UserManagerTests: XCTestCase {
         XCTAssertEqual(keychainStore.hashedPassword, "password".md5()!)
     }
 
-    func test_login_with_bad_credentials() async {
+    func test_login_performs_logout_when_devicelist_fails() async {
+        let received = ValueReceiver(sut.$state)
+        stubHTTPResponses(with: ["login-success.json", "trylater.json"])
+
+        await sut.login(username: "bob", password: "password")
+
+        XCTAssertEqual(received.values, [.idle, .busy, .error("Could not login. Check your internet connnection")])
+        XCTAssertTrue(keychainStore.logoutCalled)
+    }
+
+    func test_login_with_bad_credentials_shows_error() async {
         let received = ValueReceiver(sut.$state)
         stubHTTPResponses(with: ["login-failure.json"])
 
         await sut.login(username: "bob", password: "wrongpassword")
 
         XCTAssertEqual(received.values, [.idle, .busy, .error("Wrong credentials, try again")])
+        XCTAssertNil(keychainStore.username)
+        XCTAssertNil(keychainStore.hashedPassword)
+    }
+
+    func test_login_when_offline_shows_error() async {
+        let received = ValueReceiver(sut.$state)
+        stubOffline()
+
+        await sut.login(username: "bob", password: "wrongpassword")
+
+        XCTAssertEqual(received.values, [.idle, .busy, .error("Could not login. Check your internet connnection")])
         XCTAssertNil(keychainStore.username)
         XCTAssertNil(keychainStore.hashedPassword)
     }

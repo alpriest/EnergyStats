@@ -51,12 +51,10 @@ class UserManager: ObservableObject {
             try store.store(username: username, hashedPassword: hashedPassword)
             try await configManager.findDevice()
         } catch let error as NetworkError {
-            store.logout()
+            logout()
 
             await MainActor.run {
                 switch error {
-                case .invalidConfiguration(let reason):
-                    self.state = .error("Invalid configuration - \(reason)")
                 case .badCredentials:
                     self.state = .error("Wrong credentials, try again")
                 default:
