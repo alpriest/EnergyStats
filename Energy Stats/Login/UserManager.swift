@@ -9,7 +9,7 @@ import Combine
 import Foundation
 
 class UserManager: ObservableObject {
-    enum State {
+    enum State: Equatable {
         case idle
         case busy
         case error(String)
@@ -43,9 +43,7 @@ class UserManager: ObservableObject {
 
     func login(username: String, password: String) async {
         do {
-            await MainActor.run {
-                state = .busy
-            }
+            await MainActor.run { state = .busy }
 
             guard let hashedPassword = password.md5() else {
                 await MainActor.run {
@@ -54,7 +52,7 @@ class UserManager: ObservableObject {
                 return
             }
             try await networking.verifyCredentials(username: username, hashedPassword: hashedPassword)
-            try store.store(username: username, password: password)
+            try store.store(username: username, hashedPassword: hashedPassword)
             try await configManager.findDevice()
         } catch let error as NetworkError {
             store.logout()

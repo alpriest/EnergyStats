@@ -39,7 +39,7 @@ final class NetworkTests: XCTestCase {
     func test_ensureTokenValid_fetches_new_token_if_none() async throws {
         keychainStore.token = nil
         keychainStore.username = "bob"
-        keychainStore.password = "secret"
+        keychainStore.hashedPassword = "secrethash"
         stubHTTPResponse(with: "login-success.json")
 
         await sut.ensureTokenValid()
@@ -120,7 +120,7 @@ final class NetworkTests: XCTestCase {
     func test_fetchReport_withInvalidToken_requestsToken_andRetriesOriginalFetch() async throws {
         config.configureAsLoggedIn()
         keychainStore.username = "bob"
-        keychainStore.password = "secret"
+        keychainStore.hashedPassword = "secrethash"
         stubHTTPResponses(with: ["badtoken.json", "login-success.json", "report-success.json"])
 
         _ = try await sut.fetchReport(variables: [.feedinPower, .gridConsumptionPower, .generationPower, .batChargePower, .pvPower])

@@ -26,18 +26,14 @@ class KeychainStore: ObservableObject {
         get(tag: "username")
     }
 
-    func getPassword() -> String? {
+    func getHashedPassword() -> String? {
         get(tag: "password")
     }
 
-    func store(username: String, password: String) throws {
-        guard let hashed = password.md5() else {
-            throw KeychainError()
-        }
-
+    func store(username: String, hashedPassword: String) throws {
         logout()
 
-        try set(tag: "password", value: hashed)
+        try set(tag: "password", value: hashedPassword)
         try set(tag: "username", value: username)
 
         updateHasCredentials()
@@ -62,7 +58,7 @@ class KeychainStore: ObservableObject {
 
 private extension KeychainStore {
     func updateHasCredentials() {
-        hasCredentials = getUsername() != nil && getPassword() != nil
+        hasCredentials = getUsername() != nil && getHashedPassword() != nil
     }
 
     func get(tag: String) -> String? {

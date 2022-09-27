@@ -69,7 +69,7 @@ class Network: Networking, ObservableObject {
     }
 
     func fetchLoginToken(username: String? = nil, hashedPassword: String? = nil) async throws -> String {
-        guard let hashedPassword = hashedPassword ?? credentials.getPassword(),
+        guard let hashedPassword = hashedPassword ?? credentials.getHashedPassword(),
               let username = username ?? credentials.getUsername() else { throw NetworkError.badCredentials }
 
         var request = URLRequest(url: URL.auth)

@@ -5,9 +5,9 @@
 //  Created by Alistair Priest on 26/09/2022.
 //
 
-import XCTest
-@testable import Energy_Stats
 import Combine
+@testable import Energy_Stats
+import XCTest
 
 @MainActor
 final class UserManagerTests: XCTestCase {
@@ -62,5 +62,29 @@ final class UserManagerTests: XCTestCase {
         XCTAssertNil(config.deviceID)
         XCTAssertFalse(config.hasPV)
         XCTAssertFalse(config.hasBattery)
+    }
+
+    func test_login_sets_busy_state() async {
+        let received = ValueReceiver(sut.$state)
+        stubHTTPResponses(with: ["login-success.json", "devicelist-success.json"])
+
+        await sut.login(username: "bob", password: "password")
+
+        XCTAssertEqual(received.values, [.idle, .busy])
+        XCTAssertEqual(keychainStore.username, "bob")
+        XCTAssertEqual(keychainStore.hashedPassword, "password".md5()!)
+    }
+}
+
+class ValueReceiver<T> {
+    var values: [T] = []
+    var cancellable: AnyCancellable?
+
+    init(_ publisher: Published<T>.Publisher) {
+        cancellable = publisher
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { self.values.append($0) }
+            )
     }
 }

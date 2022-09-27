@@ -10,7 +10,7 @@ import Foundation
 
 class MockKeychainStore: KeychainStore {
     var username: String?
-    var password: String?
+    var hashedPassword: String?
     var token: String?
     var logoutCalled = false
 
@@ -18,8 +18,8 @@ class MockKeychainStore: KeychainStore {
         username
     }
 
-    override func getPassword() -> String? {
-        password
+    override func getHashedPassword() -> String? {
+        hashedPassword
     }
 
     override func store(token: String?) throws {
@@ -30,9 +30,9 @@ class MockKeychainStore: KeychainStore {
         token
     }
 
-    override func store(username: String, password: String) throws {
+    override func store(username: String, hashedPassword: String) throws {
         self.username = username
-        self.password = password
+        self.hashedPassword = hashedPassword
     }
 
     override func logout() {
