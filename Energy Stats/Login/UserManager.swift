@@ -45,12 +45,8 @@ class UserManager: ObservableObject {
         do {
             await MainActor.run { state = .busy }
 
-            guard let hashedPassword = password.md5() else {
-                await MainActor.run {
-                    state = .error("Could not hash password")
-                }
-                return
-            }
+            guard let hashedPassword = password.md5() else { throw NSError(domain: "md5", code: 0) }
+
             try await networking.verifyCredentials(username: username, hashedPassword: hashedPassword)
             try store.store(username: username, hashedPassword: hashedPassword)
             try await configManager.findDevice()

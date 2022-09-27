@@ -64,7 +64,7 @@ final class UserManagerTests: XCTestCase {
         XCTAssertFalse(config.hasBattery)
     }
 
-    func test_login_sets_busy_state() async {
+    func test_login_success() async {
         let received = ValueReceiver(sut.$state)
         stubHTTPResponses(with: ["login-success.json", "devicelist-success.json"])
 
@@ -73,6 +73,17 @@ final class UserManagerTests: XCTestCase {
         XCTAssertEqual(received.values, [.idle, .busy])
         XCTAssertEqual(keychainStore.username, "bob")
         XCTAssertEqual(keychainStore.hashedPassword, "password".md5()!)
+    }
+
+    func test_login_with_bad_credentials() async {
+        let received = ValueReceiver(sut.$state)
+        stubHTTPResponses(with: ["login-failure.json"])
+
+        await sut.login(username: "bob", password: "wrongpassword")
+
+        XCTAssertEqual(received.values, [.idle, .busy, .error("Wrong credentials, try again")])
+        XCTAssertNil(keychainStore.username)
+        XCTAssertNil(keychainStore.hashedPassword)
     }
 }
 
