@@ -13,13 +13,13 @@ import XCTest
 final class UserManagerTests: XCTestCase {
     private var sut: UserManager!
     private var keychainStore: MockKeychainStore!
-    private var networking: MockNetworking!
+    private var networking: Network!
     private var config: MockConfig!
 
     override func setUp() {
         keychainStore = MockKeychainStore()
-        networking = MockNetworking()
         config = MockConfig()
+        networking = Network(credentials: keychainStore, config: config)
         sut = UserManager(networking: networking, store: keychainStore, config: config)
     }
 

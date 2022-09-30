@@ -16,6 +16,18 @@ class MockNetworking: Network {
         super.init(credentials: KeychainStore(), config: MockConfig())
     }
 
+    override func verifyCredentials(username: String, hashedPassword: String) async throws {
+        if throwOnCall {
+            throw NetworkError.badCredentials
+        }
+    }
+
+    override func fetchDeviceList() async throws -> PagedDeviceListResponse {
+        PagedDeviceListResponse(currentPage: 1, pageSize: 1, total: 1, devices: [
+            PagedDeviceListResponse.Device(deviceID: "abcdef", hasBattery: true, hasPV: true)
+        ])
+    }
+
     override func fetchReport(variables: [VariableType]) async throws -> [ReportResponse] {
         if throwOnCall {
             throw NetworkError.unknown
