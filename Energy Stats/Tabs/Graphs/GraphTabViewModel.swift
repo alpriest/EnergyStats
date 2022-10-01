@@ -32,6 +32,7 @@ class GraphTabViewModel: ObservableObject {
     }
 
     private var totals: [VariableType: Double] = [:]
+    private let dateProvider: () -> Date
 
     @Published var stride = 1
     @Published var data: [GraphValue] = []
@@ -49,8 +50,9 @@ class GraphTabViewModel: ObservableObject {
     }}
     @Published var errorMessage: String? = nil
 
-    init(_ networking: Networking) {
+    init(_ networking: Networking, _ dateProvider: @escaping () -> Date = { Date() }) {
         self.networking = networking
+        self.dateProvider = dateProvider
     }
 
     func start() async {
@@ -81,7 +83,7 @@ class GraphTabViewModel: ObservableObject {
 
     func refresh() {
         let hiddenVariableTypes = variables.filter { $0.enabled == false }.map { $0.type }
-        let oldest = Date().addingTimeInterval(0 - (3600 * Double(hours)))
+        let oldest = dateProvider().addingTimeInterval(0 - (3600 * Double(hours)))
 
         data = rawData
             .filter { $0.date > oldest }
