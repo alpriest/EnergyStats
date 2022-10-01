@@ -16,6 +16,7 @@
 		4107446728CA22B3006D5D7D /* InverterPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446628CA22B3006D5D7D /* InverterPath.swift */; };
 		4107446928CA42D2006D5D7D /* PylonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446828CA42D2006D5D7D /* PylonView.swift */; };
 		4107446C28CA57A9006D5D7D /* PowerFlowTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446B28CA57A9006D5D7D /* PowerFlowTabView.swift */; };
+		4110065B28E890E40018C3DF /* GraphTabViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4110065A28E890E40018C3DF /* GraphTabViewModelTests.swift */; };
 		412790FD28E1FAF700D5F993 /* String+MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412790FC28E1FAF700D5F993 /* String+MD5.swift */; };
 		412790FF28E1FB9200D5F993 /* UserManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412790FE28E1FB9200D5F993 /* UserManagerTests.swift */; };
 		4127910228E1FBD300D5F993 /* MockKeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127910128E1FBD300D5F993 /* MockKeychainStore.swift */; };
@@ -40,8 +41,6 @@
 		4140146228C7146300EA5BA1 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146128C7146300EA5BA1 /* Auth.swift */; };
 		4140146528C714C000EA5BA1 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146428C714C000EA5BA1 /* Report.swift */; };
 		4140146928C7374400EA5BA1 /* HistoricalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146828C7374400EA5BA1 /* HistoricalViewModel.swift */; };
-		4140146B28C7589800EA5BA1 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146A28C7589800EA5BA1 /* CircularProgressView.swift */; };
-		4140146D28C75C3B00EA5BA1 /* PowerGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146C28C75C3B00EA5BA1 /* PowerGraph.swift */; };
 		4140146F28C77A3100EA5BA1 /* BatteryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146E28C77A3100EA5BA1 /* BatteryResponse.swift */; };
 		4140147128C77AAA00EA5BA1 /* BatteryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140147028C77AAA00EA5BA1 /* BatteryViewModel.swift */; };
 		4141B20028D86C7200B60157 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141B1FF28D86C7200B60157 /* UserManager.swift */; };
@@ -93,6 +92,7 @@
 		4107446628CA22B3006D5D7D /* InverterPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterPath.swift; sourceTree = "<group>"; };
 		4107446828CA42D2006D5D7D /* PylonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PylonView.swift; sourceTree = "<group>"; };
 		4107446B28CA57A9006D5D7D /* PowerFlowTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerFlowTabView.swift; sourceTree = "<group>"; };
+		4110065A28E890E40018C3DF /* GraphTabViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTabViewModelTests.swift; sourceTree = "<group>"; };
 		412790FC28E1FAF700D5F993 /* String+MD5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+MD5.swift"; sourceTree = "<group>"; };
 		412790FE28E1FB9200D5F993 /* UserManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManagerTests.swift; sourceTree = "<group>"; };
 		4127910128E1FBD300D5F993 /* MockKeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockKeychainStore.swift; sourceTree = "<group>"; };
@@ -117,8 +117,6 @@
 		4140146128C7146300EA5BA1 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		4140146428C714C000EA5BA1 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		4140146828C7374400EA5BA1 /* HistoricalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalViewModel.swift; sourceTree = "<group>"; };
-		4140146A28C7589800EA5BA1 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
-		4140146C28C75C3B00EA5BA1 /* PowerGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerGraph.swift; sourceTree = "<group>"; };
 		4140146E28C77A3100EA5BA1 /* BatteryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryResponse.swift; sourceTree = "<group>"; };
 		4140147028C77AAA00EA5BA1 /* BatteryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryViewModel.swift; sourceTree = "<group>"; };
 		4141B1FF28D86C7200B60157 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
@@ -188,6 +186,14 @@
 				41E1DFDD28D87778001235B9 /* Settings */,
 				41A25D3B28CA5CBD00315714 /* Graphs */,
 				41A25D3A28CA5CB700315714 /* Power Flow */,
+			);
+			path = Tabs;
+			sourceTree = "<group>";
+		};
+		4110065928E890D50018C3DF /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				4110065A28E890E40018C3DF /* GraphTabViewModelTests.swift */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -314,8 +320,6 @@
 		41A25D3B28CA5CBD00315714 /* Graphs */ = {
 			isa = PBXGroup;
 			children = (
-				4140146A28C7589800EA5BA1 /* CircularProgressView.swift */,
-				4140146C28C75C3B00EA5BA1 /* PowerGraph.swift */,
 				41A25D3C28CA5CDF00315714 /* GraphTabView.swift */,
 				41A25D3E28CA5CFB00315714 /* GraphTabViewModel.swift */,
 			);
@@ -374,13 +378,14 @@
 		41EDDF7228CD2ED30092C662 /* Energy StatsTests */ = {
 			isa = PBXGroup;
 			children = (
-				4127910928E241D900D5F993 /* Extensions */,
-				4127910028E1FBCC00D5F993 /* Mocks */,
-				41B690FA28E041E00058126E /* Responses */,
 				41EDDF7328CD2ED30092C662 /* Energy_StatsTests.swift */,
-				41B690F528E03EA70058126E /* NetworkTests.swift */,
-				412790FE28E1FB9200D5F993 /* UserManagerTests.swift */,
+				4127910928E241D900D5F993 /* Extensions */,
 				4127911128E38F1400D5F993 /* LoginViewTests.swift */,
+				4127910028E1FBCC00D5F993 /* Mocks */,
+				41B690F528E03EA70058126E /* NetworkTests.swift */,
+				41B690FA28E041E00058126E /* Responses */,
+				4110065928E890D50018C3DF /* Tabs */,
+				412790FE28E1FB9200D5F993 /* UserManagerTests.swift */,
 			);
 			path = "Energy StatsTests";
 			sourceTree = "<group>";
@@ -511,7 +516,6 @@
 				41339C7428CC7BA50062B976 /* KeychainStore.swift in Sources */,
 				41A25D4328CA706700315714 /* CountdownTimer.swift in Sources */,
 				41D6496C28DB321600A24B41 /* DeviceList.swift in Sources */,
-				4140146B28C7589800EA5BA1 /* CircularProgressView.swift in Sources */,
 				4141B20028D86C7200B60157 /* UserManager.swift in Sources */,
 				4140146028C70D4700EA5BA1 /* Networking.swift in Sources */,
 				41028F9528CDD7A300FB70FD /* OptionalView.swift in Sources */,
@@ -522,7 +526,6 @@
 				4141B20228D871B900B60157 /* ContentView.swift in Sources */,
 				41E4B31328DB77A3003F7F47 /* HomePowerView.swift in Sources */,
 				41A25D3D28CA5CDF00315714 /* GraphTabView.swift in Sources */,
-				4140146D28C75C3B00EA5BA1 /* PowerGraph.swift in Sources */,
 				4140146928C7374400EA5BA1 /* HistoricalViewModel.swift in Sources */,
 				4140145E28C70D1400EA5BA1 /* Config.swift in Sources */,
 				41E4B31028DB7666003F7F47 /* BatteryPowerView.swift in Sources */,
@@ -558,6 +561,7 @@
 				4127910228E1FBD300D5F993 /* MockKeychainStore.swift in Sources */,
 				4127910B28E241E700D5F993 /* XCTestCase+OHHTTPStubs.swift in Sources */,
 				4127910628E1FC1D00D5F993 /* MockNetworking.swift in Sources */,
+				4110065B28E890E40018C3DF /* GraphTabViewModelTests.swift in Sources */,
 				4127910D28E2442100D5F993 /* Array+Safe.swift in Sources */,
 				4127910828E23D0A00D5F993 /* MockConfig.swift in Sources */,
 				41EDDF7428CD2ED30092C662 /* Energy_StatsTests.swift in Sources */,

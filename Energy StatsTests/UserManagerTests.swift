@@ -81,7 +81,7 @@ final class UserManagerTests: XCTestCase {
 
         await sut.login(username: "bob", password: "password")
 
-        XCTAssertEqual(received.values, [.idle, .busy, .error("Could not login. Check your internet connnection")])
+        XCTAssertEqual(received.values, [.idle, .busy, .error("Could not login. Check your internet connection")])
         XCTAssertTrue(keychainStore.logoutCalled)
     }
 
@@ -103,7 +103,7 @@ final class UserManagerTests: XCTestCase {
 
         await sut.login(username: "bob", password: "wrongpassword")
 
-        XCTAssertEqual(received.values, [.idle, .busy, .error("Could not login. Check your internet connnection")])
+        XCTAssertEqual(received.values, [.idle, .busy, .error("Could not login. Check your internet connection")])
         XCTAssertNil(keychainStore.username)
         XCTAssertNil(keychainStore.hashedPassword)
         XCTAssertTrue(keychainStore.logoutCalled)

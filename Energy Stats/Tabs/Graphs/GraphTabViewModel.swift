@@ -47,13 +47,14 @@ class GraphTabViewModel: ObservableObject {
         }
         refresh()
     }}
+    @Published var errorMessage: String? = nil
 
     init(_ networking: Networking) {
         self.networking = networking
     }
 
-    func start() {
-        Task {
+    func start() async {
+        do {
             let reports = try await networking.fetchReport(variables: variables.map { $0.type })
             reports.forEach {
                 guard let variable = VariableType(fromReport: $0.variable) else { return }
@@ -73,6 +74,8 @@ class GraphTabViewModel: ObservableObject {
                 self.rawData = rawData
                 self.refresh()
             }
+        } catch {
+            self.errorMessage = "Could not load, check your connection"
         }
     }
 

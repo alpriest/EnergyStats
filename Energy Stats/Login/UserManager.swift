@@ -58,12 +58,12 @@ class UserManager: ObservableObject {
                 case .badCredentials:
                     self.state = .error("Wrong credentials, try again")
                 default:
-                    self.state = .error("Could not login. Check your internet connnection")
+                    self.state = .error("Could not login. Check your internet connection")
                 }
             }
         } catch {
             await MainActor.run {
-                self.state = .error("Could not login. Check your internet connnection \(error)")
+                self.state = .error("Could not login. Check your internet connection \(error)")
             }
         }
     }

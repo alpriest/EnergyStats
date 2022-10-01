@@ -16,6 +16,10 @@ struct GraphTabView: View {
 
     var body: some View {
         VStack {
+            OptionalView(viewModel.errorMessage) {
+                Text($0)
+            }
+
             Picker("Hours", selection: $viewModel.hours) {
                 Text("6").tag(6)
                 Text("12").tag(12)
@@ -151,8 +155,8 @@ struct GraphTabView: View {
             }
         }
         .padding()
-        .onAppear {
-            viewModel.start()
+        .task {
+            await viewModel.start()
         }
     }
 }
