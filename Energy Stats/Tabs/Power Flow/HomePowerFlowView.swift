@@ -33,6 +33,7 @@ struct HomePowerFlowView: View {
             InverterView()
                 .frame(height: 2)
                 .padding(.horizontal, 14 + powerViewWidth / 2 - 2)
+                .padding(.vertical, 1)
 
             HStack {
                 BatteryPowerView(viewModel: viewModel, iconFooterSize: $iconFooterSize)

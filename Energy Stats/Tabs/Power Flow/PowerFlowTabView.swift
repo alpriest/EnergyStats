@@ -30,8 +30,10 @@ struct PowerFlowTabView: View {
             HStack {
                 Spacer()
                 Text(viewModel.updateState)
+                    .monospacedDigit()
                 Spacer()
             }
+            .font(.caption)
             .foregroundColor(.gray)
         }
         .padding()
@@ -47,11 +49,11 @@ struct PowerFlowTabView: View {
     private var backgroundGradient: some View {
         switch viewModel.state {
         case .loaded:
-            return LinearGradient(colors: [Color("Sunny"), Color.clear], startPoint: UnitPoint(x: 0, y: 0.0), endPoint: UnitPoint(x: 0, y: 0.7)).edgesIgnoringSafeArea(.all)
+            return LinearGradient(colors: [Color("Sunny"), Color.clear], startPoint: UnitPoint(x: -0.6, y: 0.0), endPoint: UnitPoint(x: 0, y: 0.5)).edgesIgnoringSafeArea(.all)
         case .failed:
-            return LinearGradient(colors: [Color.red.opacity(0.7), Color.clear], startPoint: UnitPoint(x: 0, y: 0.0), endPoint: UnitPoint(x: 0, y: 0.7)).edgesIgnoringSafeArea(.all)
+            return LinearGradient(colors: [Color.red.opacity(0.7), Color.clear], startPoint: UnitPoint(x: -1.0, y: 0.0), endPoint: UnitPoint(x: 0, y: 0.7)).edgesIgnoringSafeArea(.all)
         case .unloaded:
-            return LinearGradient(colors: [Color.white.opacity(0.5), Color.clear], startPoint: UnitPoint(x: 0, y: 0.0), endPoint: UnitPoint(x: 0, y: 0.7)).edgesIgnoringSafeArea(.all)
+            return LinearGradient(colors: [Color.white.opacity(0.5), Color.clear], startPoint: UnitPoint(x: -1.0, y: 0.0), endPoint: UnitPoint(x: 0, y: 0.7)).edgesIgnoringSafeArea(.all)
         }
     }
 }

@@ -249,6 +249,7 @@
 				4140146728C7373A00EA5BA1 /* Models */,
 				41E4B30C28DB670C003F7F47 /* Network */,
 				41028F9428CDD7A300FB70FD /* OptionalView.swift */,
+				41A25D4028CA6E0000315714 /* MockNetworking.swift */,
 				4140145328C70B3200EA5BA1 /* Preview Content */,
 				4140144F28C70B3200EA5BA1 /* TabbedView.swift */,
 				4107446A28CA57A1006D5D7D /* Tabs */,
@@ -259,7 +260,6 @@
 		4140145328C70B3200EA5BA1 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				41A25D4028CA6E0000315714 /* MockNetworking.swift */,
 				4140145428C70B3200EA5BA1 /* Preview Assets.xcassets */,
 				41AED86928CDCD94009C6517 /* raw.json */,
 			);
