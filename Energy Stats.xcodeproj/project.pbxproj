@@ -17,6 +17,7 @@
 		4107446928CA42D2006D5D7D /* PylonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446828CA42D2006D5D7D /* PylonView.swift */; };
 		4107446C28CA57A9006D5D7D /* PowerFlowTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446B28CA57A9006D5D7D /* PowerFlowTabView.swift */; };
 		4110065B28E890E40018C3DF /* GraphTabViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4110065A28E890E40018C3DF /* GraphTabViewModelTests.swift */; };
+		4127690228EC865000D5A094 /* EnergyAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127690128EC865000D5A094 /* EnergyAmountView.swift */; };
 		412790FD28E1FAF700D5F993 /* String+MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412790FC28E1FAF700D5F993 /* String+MD5.swift */; };
 		412790FF28E1FB9200D5F993 /* UserManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412790FE28E1FB9200D5F993 /* UserManagerTests.swift */; };
 		4127910228E1FBD300D5F993 /* MockKeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127910128E1FBD300D5F993 /* MockKeychainStore.swift */; };
@@ -93,6 +94,7 @@
 		4107446828CA42D2006D5D7D /* PylonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PylonView.swift; sourceTree = "<group>"; };
 		4107446B28CA57A9006D5D7D /* PowerFlowTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerFlowTabView.swift; sourceTree = "<group>"; };
 		4110065A28E890E40018C3DF /* GraphTabViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTabViewModelTests.swift; sourceTree = "<group>"; };
+		4127690128EC865000D5A094 /* EnergyAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnergyAmountView.swift; sourceTree = "<group>"; };
 		412790FC28E1FAF700D5F993 /* String+MD5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+MD5.swift"; sourceTree = "<group>"; };
 		412790FE28E1FB9200D5F993 /* UserManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManagerTests.swift; sourceTree = "<group>"; };
 		4127910128E1FBD300D5F993 /* MockKeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockKeychainStore.swift; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 				4140145B28C70B4A00EA5BA1 /* PowerFlowTabViewModel.swift */,
 				4107446228CA1C5D006D5D7D /* PowerFlowView.swift */,
 				4107446828CA42D2006D5D7D /* PylonView.swift */,
+				4127690128EC865000D5A094 /* EnergyAmountView.swift */,
 			);
 			path = "Power Flow";
 			sourceTree = "<group>";
@@ -512,6 +515,7 @@
 			files = (
 				4107446C28CA57A9006D5D7D /* PowerFlowTabView.swift in Sources */,
 				41B690F428DF5C390058126E /* NetworkResponse.swift in Sources */,
+				4127690228EC865000D5A094 /* EnergyAmountView.swift in Sources */,
 				4140145028C70B3200EA5BA1 /* TabbedView.swift in Sources */,
 				41339C7428CC7BA50062B976 /* KeychainStore.swift in Sources */,
 				41A25D4328CA706700315714 /* CountdownTimer.swift in Sources */,

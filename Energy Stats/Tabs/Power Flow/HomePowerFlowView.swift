@@ -36,7 +36,7 @@ struct HomePowerFlowView: View {
                 .padding(.vertical, 1)
 
             HStack {
-                BatteryPowerView(viewModel: viewModel, iconFooterSize: $iconFooterSize)
+                BatteryPowerView(viewModel: BatteryPowerViewModel(config: viewModel.config, batteryStateOfCharge: viewModel.batteryStateOfCharge, battery: viewModel.battery), iconFooterSize: $iconFooterSize)
                     .frame(width: powerViewWidth)
                     .opacity(viewModel.hasBattery ? 1.0 : 0.5)
 

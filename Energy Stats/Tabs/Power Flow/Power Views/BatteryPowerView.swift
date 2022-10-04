@@ -7,9 +7,32 @@
 
 import SwiftUI
 
+struct BatteryPowerViewModel {
+    let batteryStateOfCharge: Double
+    let battery: Double
+    private let calculator: BatteryCapacityCalculator
+
+    init(config: Config, batteryStateOfCharge: Double, battery: Double) {
+        self.batteryStateOfCharge = batteryStateOfCharge
+        self.battery = battery
+
+        calculator = BatteryCapacityCalculator(capacitykW: config.batteryCapacity.asDouble() ?? 7800,
+                                               minimumSOC: config.minSOC.asDouble() ?? 0.2)
+    }
+
+    var batteryExtra: String? {
+        calculator.batteryPercentageRemaining(batteryChargePowerkWH: battery, batteryStateOfCharge: batteryStateOfCharge)
+    }
+
+    var batteryCapacity: String {
+        calculator.currentEstimatedChargeAmountkWH(batteryStateOfCharge: batteryStateOfCharge).kW()
+    }
+}
+
 struct BatteryPowerView: View {
-    let viewModel: HomePowerFlowViewModel
+    let viewModel: BatteryPowerViewModel
     @Binding var iconFooterSize: CGSize
+    @State private var percentage = true
 
     var body: some View {
         VStack {
@@ -19,7 +42,16 @@ struct BatteryPowerView: View {
                 .background(Color(.systemBackground))
                 .frame(width: 45, height: 45)
             VStack {
-                Text(viewModel.batteryStateOfCharge, format: .percent)
+                Group {
+                    if percentage {
+                        Text(viewModel.batteryStateOfCharge, format: .percent)
+                    } else {
+                        Text(viewModel.batteryCapacity)
+                    }
+                }.onTapGesture {
+                    percentage.toggle()
+                }
+
                 OptionalView(viewModel.batteryExtra) {
                     Text($0)
                         .multilineTextAlignment(.center)
@@ -39,6 +71,12 @@ struct BatteryPowerView: View {
 
 struct BatteryPowerView_Previews: PreviewProvider {
     static var previews: some View {
-        BatteryPowerView(viewModel: HomePowerFlowViewModel.any(), iconFooterSize: .constant(CGSize.zero))
+        BatteryPowerView(viewModel: BatteryPowerViewModel.any(), iconFooterSize: .constant(CGSize.zero))
+    }
+}
+
+extension BatteryPowerViewModel {
+    static func any() -> BatteryPowerViewModel {
+        .init(config: MockConfig(), batteryStateOfCharge: 0.99, battery: -0.01)
     }
 }

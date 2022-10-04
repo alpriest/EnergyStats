@@ -21,7 +21,9 @@ class BatteryCapacityCalculator {
         capacitykW * minimumSOC
     }
 
-    func batteryRemaining(batteryChargePowerkWH: Double, batteryStateOfCharge: Double) -> String? {
+    func batteryPercentageRemaining(batteryChargePowerkWH: Double, batteryStateOfCharge: Double) -> String? {
+        guard batteryChargePowerkWH > 0 else { return nil }
+        
         let currentEstimatedCharge = capacitykW * batteryStateOfCharge
 
         if batteryChargePowerkWH > 0 { // battery charging
@@ -40,5 +42,9 @@ class BatteryCapacityCalculator {
 
             return "Empty \(duration)"
         }
+    }
+
+    func currentEstimatedChargeAmountkWH(batteryStateOfCharge: Double) -> Double {
+        (capacitykW * batteryStateOfCharge) / 1000.0
     }
 }

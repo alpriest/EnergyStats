@@ -16,6 +16,12 @@ extension Double {
         return String(format: "%0.2fkW", divided)
     }
 
+    func w() -> String {
+        let divided = (self * 1000.0).rounded()
+
+        return String(format: "%0.0fW", divided)
+    }
+
     func rounded(decimalPlaces: Int) -> Double {
         let power = pow(10, Double(decimalPlaces))
         return (self * power).rounded() / power

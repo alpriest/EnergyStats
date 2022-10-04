@@ -20,7 +20,7 @@ struct HomePowerFlowViewModel: Equatable {
         let capacity = config.batteryCapacity.asDouble() ?? 7800
         let minSOC = config.minSOC.asDouble() ?? 0.2
 
-        return BatteryCapacityCalculator(capacitykW: capacity, minimumSOC: minSOC).batteryRemaining(batteryChargePowerkWH: battery, batteryStateOfCharge: batteryStateOfCharge)
+        return BatteryCapacityCalculator(capacitykW: capacity, minimumSOC: minSOC).batteryPercentageRemaining(batteryChargePowerkWH: battery, batteryStateOfCharge: batteryStateOfCharge)
     }
 
     static func ==(lhs: HomePowerFlowViewModel, rhs: HomePowerFlowViewModel) -> Bool {

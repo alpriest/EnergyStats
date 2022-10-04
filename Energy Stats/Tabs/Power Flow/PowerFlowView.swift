@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PowerFlowView: View {
     let amount: Double
+    @State private var divisor = 1.0
 
     var body: some View {
         ZStack(alignment: .center) {
@@ -23,9 +24,16 @@ struct PowerFlowView: View {
                         DirectionalArrow(direction: .up, animationDuration: animationDuration)
                     }
 
-                    Text(amount.kW())
+                    EnergyAmountView(amount: amount)
                         .font(.footnote)
                         .bold()
+                        .onTapGesture {
+                            if divisor == 1.0 {
+                                divisor = 1000.0
+                            } else {
+                                divisor = 1.0
+                            }
+                        }
                 }
             }
         }
