@@ -33,9 +33,7 @@ struct Line: Shape {
             .stroke(
                 style: strokeStyle
             )
-            .animation(
-                .linear(duration: animationDuration).repeatForever(autoreverses: false),
-                value: phase)
+            .animation(.linear(duration: animationDuration).repeatForever(autoreverses: false), value: phase)
             .foregroundColor(Color("lines"))
             .onAppear {
                 switch direction {
@@ -58,6 +56,7 @@ struct Line: Shape {
 //struct DirectionalArrow: View {
 //    @State var yOffset: Double = 0
 //    @State private var timer: Timer?
+//    private let totalPhase: CGFloat = 20
 //    let direction: Direction
 //    let animationDuration: Double
 //
@@ -71,9 +70,9 @@ struct Line: Shape {
 //            Color.clear
 //                .background(
 //                    Line()
-//                        .stroke(style: StrokeStyle(lineWidth: 4.0, dash: [5], dashPhase: 0))
+//                        .stroke(style: StrokeStyle(lineWidth: 4.0, dash: [totalPhase / 2.0], dashPhase: 0))
 //                        .frame(height: reader.size.height * 3.0)
-//                        .foregroundColor(Color.black)
+//                        .foregroundColor(Color("lines"))
 //                        .offset(y: yOffset)
 //                        .onAppear {
 //                            timer?.invalidate()
@@ -100,7 +99,7 @@ struct Line: Shape {
 //    }
 //
 //    func setupTimer() {
-//        timer = Timer.scheduledTimer(withTimeInterval: animationDuration / 100, repeats: true) { _ in
+//        timer = Timer.scheduledTimer(withTimeInterval: animationDuration / 20, repeats: true) { _ in
 //            switch direction {
 //            case .down:
 //                yOffset += 1
@@ -113,7 +112,11 @@ struct Line: Shape {
 
 struct DirectionalArrow_Previews: PreviewProvider {
     static var previews: some View {
-        VStack {
+        HStack {
+//            DirectionalArrow(direction: .up, animationDuration: 1.5)
+//                .frame(width: 100, height: 300)
+//                .background(Color.red)
+
             DirectionalArrow(direction: .up, animationDuration: 1.5)
                 .frame(width: 100, height: 300)
                 .background(Color.red)

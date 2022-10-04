@@ -16,6 +16,7 @@ struct BatteryPowerView: View {
             PowerFlowView(amount: viewModel.battery)
             Image(systemName: "minus.plus.batteryblock.fill")
                 .font(.system(size: 48))
+                .background(Color(.systemBackground))
                 .frame(width: 45, height: 45)
             VStack {
                 Text(viewModel.batteryStateOfCharge, format: .percent)
@@ -23,7 +24,7 @@ struct BatteryPowerView: View {
                     Text($0)
                         .multilineTextAlignment(.center)
                         .font(.caption)
-                        .opacity(0.8)
+                        .foregroundColor(Color.gray)
                 }
             }
             .background(GeometryReader { reader in

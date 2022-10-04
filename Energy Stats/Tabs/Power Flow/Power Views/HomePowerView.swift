@@ -16,6 +16,7 @@ struct HomePowerView: View {
             PowerFlowView(amount: amount)
             Image(systemName: "house.fill")
                 .font(.system(size: 48))
+                .background(Color(.systemBackground))
                 .frame(width: 45, height: 45)
             Color.clear.frame(width: iconFooterSize.width, height: iconFooterSize.height)
         }
@@ -25,5 +26,6 @@ struct HomePowerView: View {
 struct HomePowerView_Previews: PreviewProvider {
     static var previews: some View {
         HomePowerView(amount: 1.05, iconFooterSize: CGSize(width: 32, height: 32))
+            .frame(width: 50, height: 220)
     }
 }
