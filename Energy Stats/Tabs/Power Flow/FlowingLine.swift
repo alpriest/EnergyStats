@@ -16,7 +16,7 @@ struct Line: Shape {
     }
 }
 
- struct DirectionalArrow: View {
+struct FlowingLine: View {
     @State var phase: CGFloat = 0
     private let totalPhase: CGFloat = 20
     private let lineWidth: CGFloat = 4
@@ -49,11 +49,12 @@ struct Line: Shape {
         StrokeStyle(
             lineWidth: lineWidth,
             dash: [totalPhase / 2.0],
-            dashPhase: phase)
+            dashPhase: phase
+        )
     }
- }
+}
 
-//struct DirectionalArrow: View {
+// struct DirectionalArrow: View {
 //    @State var yOffset: Double = 0
 //    @State private var timer: Timer?
 //    private let totalPhase: CGFloat = 20
@@ -108,7 +109,7 @@ struct Line: Shape {
 //            }
 //        }
 //    }
-//}
+// }
 
 struct DirectionalArrow_Previews: PreviewProvider {
     static var previews: some View {
@@ -117,7 +118,7 @@ struct DirectionalArrow_Previews: PreviewProvider {
 //                .frame(width: 100, height: 300)
 //                .background(Color.red)
 
-            DirectionalArrow(direction: .up, animationDuration: 1.5)
+            FlowingLine(direction: .up, animationDuration: 1.5)
                 .frame(width: 100, height: 300)
                 .background(Color.red)
         }

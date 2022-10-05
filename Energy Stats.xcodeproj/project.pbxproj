@@ -12,7 +12,7 @@
 		4106A93028D05EC90009DA28 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4106A92F28D05EC90009DA28 /* Double.swift */; };
 		4107446128C9EF6B006D5D7D /* HomePowerFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446028C9EF6B006D5D7D /* HomePowerFlowView.swift */; };
 		4107446328CA1C5D006D5D7D /* PowerFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446228CA1C5D006D5D7D /* PowerFlowView.swift */; };
-		4107446528CA1D76006D5D7D /* DirectionalArrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446428CA1D76006D5D7D /* DirectionalArrow.swift */; };
+		4107446528CA1D76006D5D7D /* FlowingLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446428CA1D76006D5D7D /* FlowingLine.swift */; };
 		4107446728CA22B3006D5D7D /* InverterPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446628CA22B3006D5D7D /* InverterPath.swift */; };
 		4107446928CA42D2006D5D7D /* PylonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446828CA42D2006D5D7D /* PylonView.swift */; };
 		4107446C28CA57A9006D5D7D /* PowerFlowTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446B28CA57A9006D5D7D /* PowerFlowTabView.swift */; };
@@ -89,7 +89,7 @@
 		4106A92F28D05EC90009DA28 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		4107446028C9EF6B006D5D7D /* HomePowerFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePowerFlowView.swift; sourceTree = "<group>"; };
 		4107446228CA1C5D006D5D7D /* PowerFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerFlowView.swift; sourceTree = "<group>"; };
-		4107446428CA1D76006D5D7D /* DirectionalArrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionalArrow.swift; sourceTree = "<group>"; };
+		4107446428CA1D76006D5D7D /* FlowingLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowingLine.swift; sourceTree = "<group>"; };
 		4107446628CA22B3006D5D7D /* InverterPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterPath.swift; sourceTree = "<group>"; };
 		4107446828CA42D2006D5D7D /* PylonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PylonView.swift; sourceTree = "<group>"; };
 		4107446B28CA57A9006D5D7D /* PowerFlowTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerFlowTabView.swift; sourceTree = "<group>"; };
@@ -305,7 +305,7 @@
 			children = (
 				41E4B30D28DB7511003F7F47 /* BatteryCapacityCalculator.swift */,
 				4140147028C77AAA00EA5BA1 /* BatteryViewModel.swift */,
-				4107446428CA1D76006D5D7D /* DirectionalArrow.swift */,
+				4107446428CA1D76006D5D7D /* FlowingLine.swift */,
 				4140146828C7374400EA5BA1 /* HistoricalViewModel.swift */,
 				4107446028C9EF6B006D5D7D /* HomePowerFlowView.swift */,
 				41EDDF6B28CD2A630092C662 /* HomePowerFlowViewModel.swift */,
@@ -543,7 +543,7 @@
 				4128E4C128DA5F6600C1D698 /* Date.swift in Sources */,
 				4140146F28C77A3100EA5BA1 /* BatteryResponse.swift in Sources */,
 				4128E4BF28DA507000C1D698 /* Notifications.swift in Sources */,
-				4107446528CA1D76006D5D7D /* DirectionalArrow.swift in Sources */,
+				4107446528CA1D76006D5D7D /* FlowingLine.swift in Sources */,
 				41E1DFDF28D87781001235B9 /* SettingsTabView.swift in Sources */,
 				4127910428E1FC0200D5F993 /* MockNetworking.swift in Sources */,
 				4107446328CA1C5D006D5D7D /* PowerFlowView.swift in Sources */,

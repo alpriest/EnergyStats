@@ -41,9 +41,10 @@ class UserManager: ObservableObject {
         store.getUsername()
     }
 
+    @MainActor
     func login(username: String, password: String) async {
         do {
-            await MainActor.run { state = .busy }
+            state = .busy
 
             guard let hashedPassword = password.md5() else { throw NSError(domain: "md5", code: 0) }
 
@@ -53,13 +54,11 @@ class UserManager: ObservableObject {
         } catch let error as NetworkError {
             logout()
 
-            await MainActor.run {
-                switch error {
-                case .badCredentials:
-                    self.state = .error("Wrong credentials, try again")
-                default:
-                    self.state = .error("Could not login. Check your internet connection")
-                }
+            switch error {
+            case .badCredentials:
+                self.state = .error("Wrong credentials, try again")
+            default:
+                self.state = .error("Could not login. Check your internet connection")
             }
         } catch {
             await MainActor.run {
@@ -68,11 +67,13 @@ class UserManager: ObservableObject {
         }
     }
 
+    @MainActor
     func logout() {
         store.logout()
         config.deviceID = nil
         config.hasPV = false
         config.hasBattery = false
+        state = .idle
     }
 }
 

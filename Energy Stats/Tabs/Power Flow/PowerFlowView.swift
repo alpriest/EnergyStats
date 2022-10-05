@@ -19,9 +19,9 @@ struct PowerFlowView: View {
             } else {
                 ZStack {
                     if amount > 0 {
-                        DirectionalArrow(direction: .down, animationDuration: animationDuration)
+                        FlowingLine(direction: .down, animationDuration: animationDuration)
                     } else {
-                        DirectionalArrow(direction: .up, animationDuration: animationDuration)
+                        FlowingLine(direction: .up, animationDuration: animationDuration)
                     }
 
                     EnergyAmountView(amount: amount)
