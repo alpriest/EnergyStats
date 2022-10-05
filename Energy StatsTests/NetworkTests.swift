@@ -42,7 +42,7 @@ final class NetworkTests: XCTestCase {
         keychainStore.hashedPassword = "secrethash"
         stubHTTPResponse(with: .loginSuccess)
 
-        await sut.ensureTokenValid()
+        await sut.ensureHasToken()
 
         XCTAssertNotNil(keychainStore.token)
     }
@@ -51,7 +51,7 @@ final class NetworkTests: XCTestCase {
         keychainStore.token = "token"
         stubHTTPResponse(with: .deviceListSuccess)
 
-        await sut.ensureTokenValid()
+        await sut.ensureHasToken()
 
         XCTAssertNotNil(keychainStore.token)
     }

@@ -8,12 +8,17 @@
 import SwiftUI
 
 struct PowerFlowView: View {
-    let amount: Double
-    @State private var divisor = 1.0
+    private let amount: Double
+    private let animationDuration: Double
+
+    init(amount: Double) {
+        self.amount = amount
+        animationDuration = max(0.4, 2.5 - abs(amount))
+    }
 
     var body: some View {
         ZStack(alignment: .center) {
-            if isFlowing {
+            if isNotFlowing {
                 Line()
                     .stroke(Color("lines"), lineWidth: 4)
             } else {
@@ -27,38 +32,53 @@ struct PowerFlowView: View {
                     EnergyAmountView(amount: amount)
                         .font(.footnote)
                         .bold()
-                        .onTapGesture {
-                            if divisor == 1.0 {
-                                divisor = 1000.0
-                            } else {
-                                divisor = 1.0
-                            }
-                        }
                 }
             }
         }
     }
 
-    var animationDuration: Double {
-        max(0.4, 2.5 - abs(amount))
-    }
-
-    var isFlowing: Bool {
+    var isNotFlowing: Bool {
         amount.rounded(decimalPlaces: 2) == 0.0
     }
 }
 
 struct PowerFlowView_Previews: PreviewProvider {
     static var previews: some View {
-        HStack {
-            PowerFlowView(amount: 2.0)
-                .background(Color.red)
+        AdjustableView()
+    }
+}
 
-            PowerFlowView(amount: 0.001)
-                .background(Color.red)
+struct AdjustableView: View {
+    @State private var amount: Double = 2.0
+    @State private var visible = true
 
-            PowerFlowView(amount: -4.5)
-                .background(Color.red)
+    var body: some View {
+        VStack {
+            Color.clear.overlay(
+                Group {
+                    if visible {
+                        PowerFlowView(amount: amount)
+                    }
+                }
+            ).frame(height: 100)
+
+            Slider(value: $amount, in: 0 ... 5.0, step: 0.1, label: {
+                Text("kWH")
+            }, onEditingChanged: { _ in
+                visible.toggle()
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                    visible.toggle()
+                }
+            })
+
+            Text(amount, format: .number)
+
+            Button {
+                visible.toggle()
+            } label: {
+                Text("Toggle")
+            }
         }
     }
 }

@@ -16,7 +16,7 @@ extension URL {
 }
 
 protocol Networking {
-    func ensureTokenValid() async
+    func ensureHasToken() async
     func verifyCredentials(username: String, hashedPassword: String) async throws
     func fetchReport(variables: [VariableType]) async throws -> [ReportResponse]
     func fetchBattery() async throws -> BatteryResponse
@@ -56,12 +56,10 @@ class Network: Networking, ObservableObject {
         _ = try await fetchLoginToken(username: username, hashedPassword: hashedPassword)
     }
 
-    func ensureTokenValid() async {
+    func ensureHasToken() async {
         do {
             if token == nil {
                 token = try await fetchLoginToken()
-            } else {
-                _ = try await fetchDeviceList()
             }
         } catch {
             // TODO:

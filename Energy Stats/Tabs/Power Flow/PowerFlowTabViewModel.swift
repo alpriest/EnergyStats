@@ -16,6 +16,7 @@ class PowerFlowTabViewModel: ObservableObject {
     @MainActor @Published private(set) var updateState: String = "Updating..."
     @MainActor @Published private(set) var state: State = .unloaded
     private(set) var isLoading = false
+    private let secondsBetweenRefresh = 30
 
     enum State: Equatable {
         case unloaded
@@ -32,7 +33,7 @@ class PowerFlowTabViewModel: ObservableObject {
     }
 
     func startTimer() async {
-        await self.timer.start(totalTicks: 30) { ticksRemaining in
+        await self.timer.start(totalTicks: secondsBetweenRefresh) { ticksRemaining in
             Task { @MainActor in self.updateState = "Next update in \(ticksRemaining)s" }
         } onCompletion: {
             Task {
@@ -59,7 +60,7 @@ class PowerFlowTabViewModel: ObservableObject {
     func loadData() async {
         do {
             await MainActor.run { self.updateState = "Updating..." }
-            await self.network.ensureTokenValid()
+            await self.network.ensureHasToken()
             let historical = HistoricalViewModel(raws: try await self.network.fetchRaw(variables: [.feedinPower, .gridConsumptionPower, .pvPower, .loadsPower]))
             let battery = config.hasBattery ? BatteryViewModel(from: try await self.network.fetchBattery()) : BatteryViewModel.noBattery
             let summary = HomePowerFlowViewModel(config: config,
@@ -71,6 +72,7 @@ class PowerFlowTabViewModel: ObservableObject {
                                                  hasBattery: battery.hasBattery)
 
             self.state = .loaded(HomePowerFlowViewModel(config: config, solar: 0, battery: 0, home: 0, grid: 0, batteryStateOfCharge: 0, hasBattery: false))
+            try await Task.sleep(nanoseconds: 1000)
             self.state = .loaded(summary)
             self.updateState = " "
         } catch {
