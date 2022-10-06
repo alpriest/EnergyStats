@@ -13,7 +13,8 @@ struct PowerFlowView: View {
 
     init(amount: Double) {
         self.amount = amount
-        animationDuration = max(0.4, 2.5 - abs(amount))
+
+        animationDuration = max(0.4, 2.7 - abs(amount))
     }
 
     var body: some View {
