@@ -22,7 +22,7 @@ class BatteryCapacityCalculator {
     }
 
     func batteryPercentageRemaining(batteryChargePowerkWH: Double, batteryStateOfCharge: Double) -> String? {
-        guard batteryChargePowerkWH > 0 else { return nil }
+        guard abs(batteryChargePowerkWH) > 0 else { return nil }
         
         let currentEstimatedCharge = capacitykW * batteryStateOfCharge
 
