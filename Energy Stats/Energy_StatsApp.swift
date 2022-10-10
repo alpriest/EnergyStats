@@ -12,7 +12,8 @@ struct Energy_StatsApp: App {
     var body: some Scene {
         let keychainStore = KeychainStore()
         let config = UserDefaultsConfig()
-        let network = Network(credentials: keychainStore, config: config)
+        let network = NetworkFacade(network: Network(credentials: keychainStore, config: config),
+                                    config: config)
         let loginManager = UserManager(networking: network, store: keychainStore, config: config)
 
         return WindowGroup {

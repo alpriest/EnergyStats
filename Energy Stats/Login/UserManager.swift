@@ -43,6 +43,15 @@ class UserManager: ObservableObject {
 
     @MainActor
     func login(username: String, password: String) async {
+        if username == "demo" && password == "user" {
+            config.isDemoUser = true
+            config.hasBattery = true
+            do { try store.store(username: "demo", hashedPassword: "user") } catch {
+                self.state = .error("Could not login as demo user")
+            }
+            return
+        }
+
         do {
             state = .busy
 

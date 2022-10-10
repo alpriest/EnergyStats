@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var loginManager: UserManager
-    let network: Network
+    let network: Networking
     let config: Config
 
     var body: some View {

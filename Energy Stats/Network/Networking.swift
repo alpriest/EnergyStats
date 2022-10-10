@@ -35,7 +35,7 @@ enum NetworkError: Error {
     case offline
 }
 
-class Network: Networking, ObservableObject {
+class Network: Networking {
     private var token: String? {
         get { credentials.getToken() }
         set {
@@ -116,8 +116,10 @@ class Network: Networking, ObservableObject {
 
         return try await fetch(request)
     }
+}
 
-    private func fetch<T: Decodable>(_ request: URLRequest, retry: Bool = true) async throws -> T {
+private extension Network {
+    func fetch<T: Decodable>(_ request: URLRequest, retry: Bool = true) async throws -> T {
         var request = request
         addHeaders(to: &request)
 
@@ -154,7 +156,7 @@ class Network: Networking, ObservableObject {
                 throw error
             }
         } catch let error as NSError {
-            if error.domain == NSURLErrorDomain && error.code == URLError.notConnectedToInternet.rawValue {
+            if error.domain == NSURLErrorDomain, error.code == URLError.notConnectedToInternet.rawValue {
                 throw NetworkError.offline
             } else {
                 throw error
@@ -162,7 +164,7 @@ class Network: Networking, ObservableObject {
         }
     }
 
-    private func addHeaders(to request: inout URLRequest) {
+    func addHeaders(to request: inout URLRequest) {
         request.setValue(token, forHTTPHeaderField: "token")
         request.setValue(UserAgent.random(), forHTTPHeaderField: "User-Agent")
         request.setValue("application/json, text/plain, */*", forHTTPHeaderField: "Accept")

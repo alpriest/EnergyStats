@@ -12,6 +12,7 @@ class MockConfig: Config {
     var minSOC: String?
     var batteryCapacity: String?
     var deviceID: String?
-    var hasBattery: Bool = false
+    var hasBattery: Bool = true
     var hasPV: Bool = false
+    var isDemoUser: Bool = false
 }

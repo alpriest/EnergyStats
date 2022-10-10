@@ -61,4 +61,5 @@ class MockConfig: Config {
     var deviceID: String?
     var hasBattery: Bool = true
     var hasPV: Bool = true
+    var isDemoUser: Bool = false
 }

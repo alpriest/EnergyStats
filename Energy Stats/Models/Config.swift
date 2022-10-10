@@ -13,6 +13,7 @@ protocol Config {
     var deviceID: String? { get set }
     var hasBattery: Bool { get set }
     var hasPV: Bool { get set }
+    var isDemoUser: Bool { get set }
 }
 
 class UserDefaultsConfig: Config {
@@ -30,6 +31,9 @@ class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredBool(key: "hasPV")
     var hasPV: Bool
+
+    @UserDefaultsStoredBool(key: "isDemoUser")
+    var isDemoUser: Bool
 }
 
 @propertyWrapper
