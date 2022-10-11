@@ -65,6 +65,7 @@ class UserManager: ObservableObject {
             case .badCredentials:
                 self.state = .error("Wrong credentials, try again")
             default:
+                print(error)
                 self.state = .error("Could not login. Check your internet connection")
             }
         } catch {
@@ -100,15 +101,24 @@ class ConfigManager {
             throw NoDeviceFoundError()
         }
 
+        config.deviceSN = device.deviceSN
         config.deviceID = device.deviceID
         config.hasBattery = device.hasBattery
         config.hasPV = device.hasPV
+
+        if device.hasBattery {
+            let battery = try await networking.fetchBattery()
+            let batterySettings = try await networking.fetchBatterySettings()
+            config.batteryCapacity = String(Int(battery.residual / (Double(battery.soc) / 100.0)))
+            config.minSOC = String(Double(batterySettings.minSoc) / 100.0)
+        }
     }
 
     func logout() {
         config.deviceID = nil
         config.hasPV = false
         config.hasBattery = false
+        config.isDemoUser = false
     }
 
     var minSOC: Double { Double(config.minSOC ?? "0.2") ?? 0.0 }

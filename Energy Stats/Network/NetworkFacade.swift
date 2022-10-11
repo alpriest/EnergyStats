@@ -50,12 +50,12 @@ class NetworkFacade: Networking {
         return try await network.fetchBattery()
     }
 
-    func fetchBatterySOC() async throws -> BatterySOCResponse {
+    func fetchBatterySettings() async throws -> BatterySettingsResponse {
         if config.isDemoUser {
-            return try await fakeNetwork.fetchBatterySOC()
+            return try await fakeNetwork.fetchBatterySettings()
         }
 
-        return try await network.fetchBatterySOC()
+        return try await network.fetchBatterySettings()
     }
 
     func fetchRaw(variables: [VariableType]) async throws -> [RawResponse] {

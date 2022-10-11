@@ -22,8 +22,8 @@ class MockNetworking: Networking {
         // Assume mock credentials are valid
     }
 
-    func fetchBatterySOC() async throws -> BatterySOCResponse {
-        BatterySOCResponse(minSoc: 20)
+    func fetchBatterySettings() async throws -> BatterySettingsResponse {
+        BatterySettingsResponse(minSoc: 20)
     }
 
     func fetchDeviceList() async throws -> PagedDeviceListResponse {
@@ -41,7 +41,7 @@ class MockNetworking: Networking {
     }
 
     func fetchBattery() async throws -> BatteryResponse {
-        BatteryResponse(soc: 56, power: 0.27, residual: 2420)
+        BatteryResponse(power: 0.27, soc: 20, residual: 2420)
     }
 
     func fetchRaw(variables: [VariableType]) async throws -> [RawResponse] {

@@ -19,8 +19,8 @@ class MockNetworking: Networking {
         // Assume valid
     }
 
-    func fetchBatterySOC() async throws -> BatterySOCResponse {
-        BatterySOCResponse(minSoc: 20)
+    func fetchBatterySOC() async throws -> BatterySettingsResponse {
+        BatterySettingsResponse(minSoc: 20)
     }
 
     func verifyCredentials(username: String, hashedPassword: String) async throws {

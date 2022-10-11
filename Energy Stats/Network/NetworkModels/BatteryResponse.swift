@@ -8,11 +8,11 @@
 import Foundation
 
 struct BatteryResponse: Decodable {
-    let soc: Int
     let power: Double
+    let soc: Int
     let residual: Double
 }
 
-struct BatterySOCResponse: Decodable {
+struct BatterySettingsResponse: Decodable {
     let minSoc: Int
 }

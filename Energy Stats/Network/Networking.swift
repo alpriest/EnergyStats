@@ -21,7 +21,7 @@ protocol Networking {
     func verifyCredentials(username: String, hashedPassword: String) async throws
     func fetchReport(variables: [VariableType]) async throws -> [ReportResponse]
     func fetchBattery() async throws -> BatteryResponse
-    func fetchBatterySOC() async throws -> BatterySOCResponse
+    func fetchBatterySettings() async throws -> BatterySettingsResponse
     func fetchRaw(variables: [VariableType]) async throws -> [RawResponse]
     func fetchDeviceList() async throws -> PagedDeviceListResponse
 }
@@ -101,22 +101,12 @@ class Network: Networking {
         return try await fetch(request)
     }
 
-    func fetchBatterySOC() async throws -> BatterySOCResponse {
+    func fetchBatterySettings() async throws -> BatterySettingsResponse {
         guard let deviceSN = config.deviceSN else { throw NetworkError.invalidConfiguration("deviceSN missing") }
         guard config.hasBattery else { throw NetworkError.invalidConfiguration("No battery") }
 
         var request = URLRequest(url: URL.soc)
         request.url?.append(queryItems: [Foundation.URLQueryItem(name: "sn", value: deviceSN)])
-
-        return try await fetch(request)
-    }
-
-    func fetchBatterySOC() async throws -> BatteryResponse {
-        guard let deviceID = config.deviceID else { throw NetworkError.invalidConfiguration("deviceID missing") }
-        guard config.hasBattery else { throw NetworkError.invalidConfiguration("No battery") }
-
-        var request = URLRequest(url: URL.battery)
-        request.url?.append(queryItems: [Foundation.URLQueryItem(name: "id", value: deviceID)])
 
         return try await fetch(request)
     }

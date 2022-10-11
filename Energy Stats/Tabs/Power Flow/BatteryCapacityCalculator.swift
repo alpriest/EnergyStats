@@ -35,7 +35,7 @@ class BatteryCapacityCalculator {
 
             return "Full \(duration)"
         } else { // battery emptying
-            if batteryStateOfCharge <= (minimumSOC * 1.03) { return nil }
+            if batteryStateOfCharge <= (minimumSOC * 1.02) { return nil }
             let chargeRemaining = currentEstimatedCharge - minimumCharge
             let minsUntilEmpty = (chargeRemaining / abs(batteryChargePowerkWH * 1000.0)) * 60 * 60
             let duration = formatter.localizedString(fromTimeInterval: minsUntilEmpty)
