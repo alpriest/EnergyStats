@@ -10,4 +10,9 @@ import Foundation
 struct BatteryResponse: Decodable {
     let soc: Int
     let power: Double
+    let residual: Double
+}
+
+struct BatterySOCResponse: Decodable {
+    let minSoc: Int
 }

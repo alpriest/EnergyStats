@@ -10,11 +10,11 @@ import SwiftUI
 struct ContentView: View {
     @ObservedObject var loginManager: UserManager
     let network: Networking
-    let config: Config
+    let configManager: ConfigManager
 
     var body: some View {
         if loginManager.isLoggedIn {
-            TabbedView(networking: network, userManager: loginManager, config: config)
+            TabbedView(networking: network, userManager: loginManager, configManager: configManager)
         } else {
             LoginView(loginManager: loginManager)
         }
@@ -24,9 +24,9 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView(
-            loginManager: UserManager(networking: MockNetworking(), store: KeychainStore(), config: MockConfig()),
+            loginManager: UserManager(networking: MockNetworking(), store: KeychainStore(), configManager: MockConfigManager()),
             network: MockNetworking(),
-            config: MockConfig()
+            configManager: MockConfigManager()
         )
     }
 }

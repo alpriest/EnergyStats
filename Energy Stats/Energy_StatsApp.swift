@@ -14,7 +14,8 @@ struct Energy_StatsApp: App {
         let config = UserDefaultsConfig()
         let network = NetworkFacade(network: Network(credentials: keychainStore, config: config),
                                     config: config)
-        let loginManager = UserManager(networking: network, store: keychainStore, config: config)
+        let configManager = ConfigManager(networking: network, config: config)
+        let loginManager = UserManager(networking: network, store: keychainStore, configManager: configManager)
 
         return WindowGroup {
             if isRunningTests() {
@@ -23,7 +24,7 @@ struct Energy_StatsApp: App {
                 ContentView(
                     loginManager: loginManager,
                     network: network,
-                    config: config
+                    configManager: configManager
                 )
             }
         }

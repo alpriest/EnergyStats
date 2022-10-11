@@ -8,7 +8,7 @@
 import Foundation
 
 struct HomePowerFlowViewModel: Equatable {
-    let config: Config
+    let configManager: ConfigManager
     let solar: Double
     let battery: Double
     let home: Double
@@ -17,10 +17,7 @@ struct HomePowerFlowViewModel: Equatable {
     let hasBattery: Bool
 
     var batteryExtra: String? {
-        let capacity = config.batteryCapacity.asDouble() ?? 7800
-        let minSOC = config.minSOC.asDouble() ?? 0.2
-
-        return BatteryCapacityCalculator(capacitykW: capacity, minimumSOC: minSOC).batteryPercentageRemaining(batteryChargePowerkWH: battery, batteryStateOfCharge: batteryStateOfCharge)
+        return BatteryCapacityCalculator(capacitykW: configManager.batteryCapacity, minimumSOC: configManager.minSOC).batteryPercentageRemaining(batteryChargePowerkWH: battery, batteryStateOfCharge: batteryStateOfCharge)
     }
 
     static func ==(lhs: HomePowerFlowViewModel, rhs: HomePowerFlowViewModel) -> Bool {
@@ -30,5 +27,11 @@ struct HomePowerFlowViewModel: Equatable {
         lhs.grid == rhs.grid &&
         lhs.batteryStateOfCharge == rhs.batteryStateOfCharge &&
         lhs.hasBattery == rhs.hasBattery
+    }
+}
+
+extension HomePowerFlowViewModel {
+    static func empty(configManager: ConfigManager) -> Self {
+        .init(configManager: configManager, solar: 0, battery: 0, home: 0, grid: 0, batteryStateOfCharge: 0, hasBattery: false)
     }
 }

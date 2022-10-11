@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct TabbedView: View {
-    let config: Config
+    let configManager: ConfigManager
     let networking: Networking
     let userManager: UserManager
     @StateObject var summaryViewModel: PowerFlowTabViewModel
     @StateObject var graphViewModel: GraphTabViewModel
 
-    init(networking: Networking, userManager: UserManager, config: Config) {
+    init(networking: Networking, userManager: UserManager, configManager: ConfigManager) {
         self.networking = networking
         self.userManager = userManager
-        self.config = config
-        _summaryViewModel = .init(wrappedValue: PowerFlowTabViewModel(networking, config: config))
+        self.configManager = configManager
+        _summaryViewModel = .init(wrappedValue: PowerFlowTabViewModel(networking, configManager: configManager))
         _graphViewModel = .init(wrappedValue: GraphTabViewModel(networking))
     }
 
@@ -40,7 +40,7 @@ struct TabbedView: View {
                     }
                 }
 
-            SettingsTabView(userManager: userManager, config: config)
+            SettingsTabView(userManager: userManager, configManager: configManager)
                 .tabItem {
                     VStack {
                         Image(systemName: "gearshape")
@@ -54,6 +54,6 @@ struct TabbedView: View {
 
 struct TabbedView_Previews: PreviewProvider {
     static var previews: some View {
-        TabbedView(networking: MockNetworking(), userManager: UserManager(networking: MockNetworking(), store: KeychainStore(), config: MockConfig()), config: MockConfig())
+        TabbedView(networking: MockNetworking(), userManager: UserManager(networking: MockNetworking(), store: KeychainStore(), configManager: MockConfigManager()), configManager: MockConfigManager())
     }
 }

@@ -11,6 +11,7 @@ protocol Config {
     var minSOC: String? { get set }
     var batteryCapacity: String? { get set }
     var deviceID: String? { get set }
+    var deviceSN: String? { get set }
     var hasBattery: Bool { get set }
     var hasPV: Bool { get set }
     var isDemoUser: Bool { get set }
@@ -25,6 +26,9 @@ class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredString(key: "deviceID")
     var deviceID: String?
+
+    @UserDefaultsStoredString(key: "deviceSN")
+    var deviceSN: String?
 
     @UserDefaultsStoredBool(key: "hasBattery")
     var hasBattery: Bool

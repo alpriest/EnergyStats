@@ -5,30 +5,37 @@
 //  Created by Alistair Priest on 26/09/2022.
 //
 
-import Foundation
 @testable import Energy_Stats
+import Foundation
 
-class MockNetworking: Network {
+class MockNetworking: Networking {
     private let throwOnCall: Bool
 
     init(throwOnCall: Bool = false) {
         self.throwOnCall = throwOnCall
-        super.init(credentials: KeychainStore(), config: MockConfig())
     }
 
-    override func verifyCredentials(username: String, hashedPassword: String) async throws {
+    func ensureHasToken() async {
+        // Assume valid
+    }
+
+    func fetchBatterySOC() async throws -> BatterySOCResponse {
+        BatterySOCResponse(minSoc: 20)
+    }
+
+    func verifyCredentials(username: String, hashedPassword: String) async throws {
         if throwOnCall {
             throw NetworkError.badCredentials
         }
     }
 
-    override func fetchDeviceList() async throws -> PagedDeviceListResponse {
+    func fetchDeviceList() async throws -> PagedDeviceListResponse {
         PagedDeviceListResponse(currentPage: 1, pageSize: 1, total: 1, devices: [
-            PagedDeviceListResponse.Device(deviceID: "abcdef", hasBattery: true, hasPV: true)
+            PagedDeviceListResponse.Device(deviceID: "abcdef", deviceSN: "123123", hasBattery: true, hasPV: true)
         ])
     }
 
-    override func fetchReport(variables: [VariableType]) async throws -> [ReportResponse] {
+    func fetchReport(variables: [VariableType]) async throws -> [ReportResponse] {
         if throwOnCall {
             throw NetworkError.unknown
         }
@@ -36,11 +43,11 @@ class MockNetworking: Network {
         return [ReportResponse(variable: "feedin", data: [.init(index: 14, value: 1.5)])]
     }
 
-    override func fetchBattery() async throws -> BatteryResponse {
-        BatteryResponse(soc: 56, power: 0.27)
+    func fetchBattery() async throws -> BatteryResponse {
+        BatteryResponse(soc: 56, power: 0.27, residual: 2200)
     }
 
-    override func fetchRaw(variables: [VariableType]) async throws -> [RawResponse] {
+    func fetchRaw(variables: [VariableType]) async throws -> [RawResponse] {
         if throwOnCall {
             throw NetworkError.unknown
         }

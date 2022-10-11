@@ -10,7 +10,7 @@ import UIKit
 
 class PowerFlowTabViewModel: ObservableObject {
     private let network: Networking
-    private var config: Config
+    private var configManager: ConfigManager
     private let timer = CountdownTimer()
     @MainActor @Published private(set) var lastUpdated: String = Date().small()
     @MainActor @Published private(set) var updateState: String = "Updating..."
@@ -24,9 +24,9 @@ class PowerFlowTabViewModel: ObservableObject {
         case failed(String)
     }
 
-    init(_ network: Networking, config: Config) {
+    init(_ network: Networking, configManager: ConfigManager) {
         self.network = network
-        self.config = config
+        self.configManager = configManager
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.willResignActiveNotification), name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
@@ -62,8 +62,8 @@ class PowerFlowTabViewModel: ObservableObject {
             await MainActor.run { self.updateState = "Updating..." }
             await self.network.ensureHasToken()
             let historical = HistoricalViewModel(raws: try await self.network.fetchRaw(variables: [.feedinPower, .gridConsumptionPower, .pvPower, .loadsPower]))
-            let battery = config.hasBattery ? BatteryViewModel(from: try await self.network.fetchBattery()) : BatteryViewModel.noBattery
-            let summary = HomePowerFlowViewModel(config: config,
+            let battery = configManager.hasBattery ? BatteryViewModel(from: try await self.network.fetchBattery()) : BatteryViewModel.noBattery
+            let summary = HomePowerFlowViewModel(configManager: configManager,
                                                  solar: historical.currentSolarPower,
                                                  battery: battery.chargePower,
                                                  home: historical.currentHomeConsumption,
@@ -71,7 +71,7 @@ class PowerFlowTabViewModel: ObservableObject {
                                                  batteryStateOfCharge: battery.chargeLevel,
                                                  hasBattery: battery.hasBattery)
 
-            self.state = .loaded(HomePowerFlowViewModel(config: config, solar: 0, battery: 0, home: 0, grid: 0, batteryStateOfCharge: 0, hasBattery: false))
+            self.state = .loaded(.empty(configManager: configManager)) // refreshes the moving line
             try await Task.sleep(nanoseconds: 1000)
             self.state = .loaded(summary)
             self.updateState = " "

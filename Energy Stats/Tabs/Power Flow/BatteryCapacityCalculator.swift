@@ -12,8 +12,8 @@ class BatteryCapacityCalculator {
     private let formatter = RelativeDateTimeFormatter()
     private let minimumSOC: Double
 
-    init(capacitykW: Double, minimumSOC: Double) {
-        self.capacitykW = capacitykW
+    init(capacitykW: Int, minimumSOC: Double) {
+        self.capacitykW = Double(capacitykW)
         self.minimumSOC = minimumSOC
     }
 

@@ -13,7 +13,7 @@ import SwiftUI
 @MainActor
 final class LoginViewTests: XCTestCase {
     func test_when_user_arrives() {
-        let sut = LoginView(loginManager: UserManager(networking: MockNetworking(), store: MockKeychainStore(), config: MockConfig()))
+        let sut = LoginView(loginManager: UserManager(networking: MockNetworking(), store: MockKeychainStore(), configManager: MockConfigManager()))
         let view = UIHostingController(rootView: sut)
 
         assertSnapshot(matching: view, as: .image(on: .iPhone13Pro))
@@ -21,7 +21,7 @@ final class LoginViewTests: XCTestCase {
 
     func test_with_wrong_credentials() async {
         let networking = MockNetworking(throwOnCall: true)
-        let userManager = UserManager(networking: networking, store: MockKeychainStore(), config: MockConfig())
+        let userManager = UserManager(networking: networking, store: MockKeychainStore(), configManager: MockConfigManager())
         let sut = LoginView(loginManager: userManager)
         let view = UIHostingController(rootView: sut)
 

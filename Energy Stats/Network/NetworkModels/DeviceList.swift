@@ -31,6 +31,7 @@ struct PagedDeviceListResponse: Decodable {
 
     struct Device: Decodable {
         let deviceID: String
+        let deviceSN: String
         let hasBattery: Bool
         let hasPV: Bool
     }

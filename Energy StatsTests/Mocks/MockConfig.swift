@@ -9,6 +9,7 @@ import Foundation
 @testable import Energy_Stats
 
 class MockConfig: Config {
+    var deviceSN: String?
     var minSOC: String?
     var batteryCapacity: String?
     var deviceID: String?

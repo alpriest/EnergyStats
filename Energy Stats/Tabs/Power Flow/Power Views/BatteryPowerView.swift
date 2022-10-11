@@ -12,12 +12,12 @@ struct BatteryPowerViewModel {
     let battery: Double
     private let calculator: BatteryCapacityCalculator
 
-    init(config: Config, batteryStateOfCharge: Double, battery: Double) {
+    init(configManager: ConfigManager, batteryStateOfCharge: Double, battery: Double) {
         self.batteryStateOfCharge = batteryStateOfCharge
         self.battery = battery
 
-        calculator = BatteryCapacityCalculator(capacitykW: config.batteryCapacity.asDouble() ?? 7800,
-                                               minimumSOC: config.minSOC.asDouble() ?? 0.2)
+        calculator = BatteryCapacityCalculator(capacitykW: configManager.batteryCapacity,
+                                               minimumSOC: configManager.minSOC)
     }
 
     var batteryExtra: String? {
@@ -77,6 +77,6 @@ struct BatteryPowerView_Previews: PreviewProvider {
 
 extension BatteryPowerViewModel {
     static func any() -> BatteryPowerViewModel {
-        .init(config: MockConfig(), batteryStateOfCharge: 0.99, battery: -0.01)
+        .init(configManager: MockConfigManager(), batteryStateOfCharge: 0.99, battery: -0.01)
     }
 }

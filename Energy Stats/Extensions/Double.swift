@@ -37,10 +37,8 @@ extension Double {
     }
 }
 
-extension Optional where Wrapped == String {
+extension String {
     func asDouble() -> Double? {
-        guard let self = self else { return nil }
-
-        return Double(self)
+        Double(self)
     }
 }

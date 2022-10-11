@@ -16,18 +16,16 @@ class UserManager: ObservableObject {
     }
 
     private let networking: Networking
-    private var config: Config
     private let configManager: ConfigManager
     private let store: KeychainStore
     private var cancellables = Set<AnyCancellable>()
     @MainActor @Published var state = State.idle
     @MainActor @Published var isLoggedIn: Bool = false
 
-    init(networking: Networking, store: KeychainStore, config: Config) {
+    init(networking: Networking, store: KeychainStore, configManager: ConfigManager) {
         self.networking = networking
         self.store = store
-        self.config = config
-        self.configManager = ConfigManager(networking: networking, config: config)
+        self.configManager = configManager
 
         self.store.$hasCredentials
             .sink { hasCredentials in
@@ -44,8 +42,8 @@ class UserManager: ObservableObject {
     @MainActor
     func login(username: String, password: String) async {
         if username == "demo" && password == "user" {
-            config.isDemoUser = true
-            config.hasBattery = true
+            configManager.isDemoUser = true
+            configManager.hasBattery = true
             do { try store.store(username: "demo", hashedPassword: "user") } catch {
                 self.state = .error("Could not login as demo user")
             }
@@ -79,9 +77,7 @@ class UserManager: ObservableObject {
     @MainActor
     func logout() {
         store.logout()
-        config.deviceID = nil
-        config.hasPV = false
-        config.hasBattery = false
+        configManager.logout()
         state = .idle
     }
 }
@@ -107,5 +103,31 @@ class ConfigManager {
         config.deviceID = device.deviceID
         config.hasBattery = device.hasBattery
         config.hasPV = device.hasPV
+    }
+
+    func logout() {
+        config.deviceID = nil
+        config.hasPV = false
+        config.hasBattery = false
+    }
+
+    var minSOC: Double { Double(config.minSOC ?? "0.2") ?? 0.0 }
+
+    var batteryCapacity: Int { Int(config.batteryCapacity ?? "2600") ?? 2600 }
+
+    var deviceID: String? { config.deviceID }
+
+    var deviceSN: String? { config.deviceSN }
+
+    var hasBattery: Bool {
+        get { config.hasBattery }
+        set { config.hasBattery = newValue }
+    }
+
+    var hasPV: Bool { config.hasPV }
+
+    var isDemoUser: Bool {
+        get { config.isDemoUser }
+        set { config.isDemoUser = newValue }
     }
 }

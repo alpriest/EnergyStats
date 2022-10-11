@@ -36,7 +36,7 @@ struct HomePowerFlowView: View {
                 .padding(.vertical, 1)
 
             HStack {
-                BatteryPowerView(viewModel: BatteryPowerViewModel(config: viewModel.config, batteryStateOfCharge: viewModel.batteryStateOfCharge, battery: viewModel.battery), iconFooterSize: $iconFooterSize)
+                BatteryPowerView(viewModel: BatteryPowerViewModel(configManager: viewModel.configManager, batteryStateOfCharge: viewModel.batteryStateOfCharge, battery: viewModel.battery), iconFooterSize: $iconFooterSize)
                     .frame(width: powerViewWidth)
                     .opacity(viewModel.hasBattery ? 1.0 : 0.5)
 
@@ -63,6 +63,6 @@ struct PowerSummaryView_Previews: PreviewProvider {
 
 extension HomePowerFlowViewModel {
     static func any() -> HomePowerFlowViewModel {
-        .init(config: MockConfig(), solar: 2.5, battery: -0.01, home: 1.5, grid: 0.71, batteryStateOfCharge: 0.99, hasBattery: true)
+        .init(configManager: MockConfigManager(), solar: 2.5, battery: -0.01, home: 1.5, grid: 0.71, batteryStateOfCharge: 0.99, hasBattery: true)
     }
 }

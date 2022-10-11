@@ -9,14 +9,11 @@ import SwiftUI
 
 struct SettingsTabView: View {
     let userManager: UserManager
-    @State private var config: Config
-    @State private var minSOC = 0.2
-    @State private var capacity = "2600"
-    @FocusState private var minSOCIsFocused: Bool
+    private let configManager: ConfigManager
 
-    init(userManager: UserManager, config: Config) {
+    init(userManager: UserManager, configManager: ConfigManager) {
         self.userManager = userManager
-        self._config = .init(wrappedValue: config)
+        self.configManager = configManager
     }
 
     var body: some View {
@@ -24,19 +21,14 @@ struct SettingsTabView: View {
             Section(content: {
                 HStack {
                     Text("Min SOC")
-                    HStack {
-                        Slider(value: $minSOC, in: 0 ... 1, step: 0.1)
-                        Text(minSOC, format: .percent)
-                    }
+                    Spacer()
+                    Text(configManager.minSOC, format: .percent)
                 }
 
                 HStack {
                     Text("Capacity")
                     Spacer()
-                    TextField("kW", text: $capacity)
-                        .multilineTextAlignment(.trailing)
-                        .keyboardType(.numberPad)
-                        .focused($minSOCIsFocused)
+                    Text(configManager.batteryCapacity, format: .number)
                     Text("kW")
                 }
             }, header: {
@@ -51,21 +43,12 @@ struct SettingsTabView: View {
                     }.buttonStyle(.bordered)
                 }.frame(maxWidth: .infinity)
             }
-        }.onTapGesture {
-            minSOCIsFocused = false
-        }.onChange(of: minSOC) { newValue in
-            config.minSOC = String(describing: newValue)
-        }.onChange(of: capacity) { newValue in
-            config.batteryCapacity = String(describing: newValue)
-        }.onAppear {
-            minSOC = config.minSOC.asDouble() ?? 0.2
-            capacity = config.batteryCapacity ?? "2600"
         }
     }
 }
 
 struct SettingsTabView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsTabView(userManager: UserManager(networking: MockNetworking(), store: KeychainStore(), config: MockConfig()), config: MockConfig())
+        SettingsTabView(userManager: UserManager(networking: MockNetworking(), store: KeychainStore(), configManager: MockConfigManager()), configManager: MockConfigManager())
     }
 }

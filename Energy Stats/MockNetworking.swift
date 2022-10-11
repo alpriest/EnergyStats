@@ -7,15 +7,32 @@
 
 import Foundation
 
-class MockNetworking: Network {
+class MockNetworking: Networking {
     private let throwOnCall: Bool
 
     init(throwOnCall: Bool = false) {
         self.throwOnCall = throwOnCall
-        super.init(credentials: KeychainStore(), config: MockConfig())
     }
 
-    override func fetchReport(variables: [VariableType]) async throws -> [ReportResponse] {
+    func ensureHasToken() async {
+        // Do nothing
+    }
+
+    func verifyCredentials(username: String, hashedPassword: String) async throws {
+        // Assume mock credentials are valid
+    }
+
+    func fetchBatterySOC() async throws -> BatterySOCResponse {
+        BatterySOCResponse(minSoc: 20)
+    }
+
+    func fetchDeviceList() async throws -> PagedDeviceListResponse {
+        PagedDeviceListResponse(currentPage: 1, pageSize: 1, total: 1, devices: [
+            PagedDeviceListResponse.Device(deviceID: "abcdef", deviceSN: "123123", hasBattery: true, hasPV: true)
+        ])
+    }
+
+    func fetchReport(variables: [VariableType]) async throws -> [ReportResponse] {
         if throwOnCall {
             throw NetworkError.unknown
         }
@@ -23,11 +40,11 @@ class MockNetworking: Network {
         return [ReportResponse(variable: "feedin", data: [.init(index: 14, value: 1.5)])]
     }
 
-    override func fetchBattery() async throws -> BatteryResponse {
-        BatteryResponse(soc: 56, power: 0.27)
+    func fetchBattery() async throws -> BatteryResponse {
+        BatteryResponse(soc: 56, power: 0.27, residual: 2420)
     }
 
-    override func fetchRaw(variables: [VariableType]) async throws -> [RawResponse] {
+    func fetchRaw(variables: [VariableType]) async throws -> [RawResponse] {
         if throwOnCall {
             throw NetworkError.unknown
         }
@@ -56,10 +73,17 @@ class MockNetworking: Network {
 }
 
 class MockConfig: Config {
-    var minSOC: String?
     var batteryCapacity: String?
+    var minSOC: String?
     var deviceID: String?
+    var deviceSN: String?
     var hasBattery: Bool = true
     var hasPV: Bool = true
     var isDemoUser: Bool = false
+}
+
+class MockConfigManager: ConfigManager {
+    convenience init() {
+        self.init(networking: MockNetworking(), config: MockConfig())
+    }
 }
