@@ -14,8 +14,9 @@ struct LoginView: View {
 
     var body: some View {
         VStack {
-            Text("Enter your details")
-                .font(.title)
+            Text("Enter your FoxESS Cloud details")
+                .multilineTextAlignment(.center)
+                .font(.headline)
                 .padding()
 
             TextField("Username", text: $username)
