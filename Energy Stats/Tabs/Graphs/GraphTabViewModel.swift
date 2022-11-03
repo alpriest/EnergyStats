@@ -73,6 +73,7 @@ class GraphTabViewModel: ObservableObject {
             }
 
             await MainActor.run {
+                self.errorMessage = nil
                 self.rawData = rawData
                 self.refresh()
             }

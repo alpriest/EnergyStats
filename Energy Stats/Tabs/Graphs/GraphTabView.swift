@@ -21,9 +21,9 @@ struct GraphTabView: View {
             }
 
             Picker("Hours", selection: $viewModel.hours) {
-                Text("6").tag(6)
-                Text("12").tag(12)
-                Text("24").tag(24)
+                Text("6h").tag(6)
+                Text("12h").tag(12)
+                Text("24h").tag(24)
             }.pickerStyle(.segmented)
 
             Chart(viewModel.data) {
@@ -57,6 +57,7 @@ struct GraphTabView: View {
                     }
                 }
             })
+            .chartYScale(domain: 0 ... 4)
             .chartOverlay { chartProxy in
                 GeometryReader { geometryProxy in
                     Rectangle().fill(.clear).contentShape(Rectangle())
@@ -106,17 +107,20 @@ struct GraphTabView: View {
 
             Color.clear.overlay(OptionalView(valuesAtTime) { valuesAtTime in
                 VStack {
-                    OptionalView(selectedDate) { Text($0.small()) }
+                    OptionalView(selectedDate) {
+                        Text($0.small())
+                    }
+
                     ForEach(valuesAtTime.values, id: \.id) { graphValue in
-                        HStack {
+                        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
                             Text(graphValue.variable.title)
                             Text(graphValue.value.kW())
                         }
                     }
                 }
-            }).frame(height: 150)
-
-            Spacer()
+            })
+            .frame(height: 150)
+            .font(.caption)
 
             VStack(alignment: .leading) {
                 List(viewModel.variables, id: \.self) { variable in
@@ -134,7 +138,6 @@ struct GraphTabView: View {
                                         .font(.system(size: 10))
                                         .foregroundColor(.gray)
                                 }
-                                .opacity(variable.enabled ? 1.0 : 0.5)
 
                                 Spacer()
 
@@ -142,6 +145,7 @@ struct GraphTabView: View {
                                     Text($0.kW())
                                 }
                             }
+                            .opacity(variable.enabled ? 1.0 : 0.5)
                         }
                         .buttonStyle(.plain)
                     }
