@@ -71,7 +71,7 @@ class MockNetworking: Networking {
     }
 
     private func rawData() throws -> Data {
-        guard let url = Bundle(for: type(of: self)).url(forResource: "raw", withExtension: "json") else {
+        guard let url = Bundle(for: type(of: self)).url(forResource: "raw-success", withExtension: "json") else {
             return Data()
         }
 

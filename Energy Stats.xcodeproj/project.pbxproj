@@ -49,6 +49,8 @@
 		41777F1528F49C61009944FF /* NetworkFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41777F1428F49C61009944FF /* NetworkFacade.swift */; };
 		418EEEB52916843A006A8290 /* View+If.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418EEEB42916843A006A8290 /* View+If.swift */; };
 		41923E3C2916B8A800D1A8C5 /* battery-soc-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41923E3B2916B8A800D1A8C5 /* battery-soc-success.json */; };
+		41923E3E2916BC6F00D1A8C5 /* UsageGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41923E3D2916BC6F00D1A8C5 /* UsageGraphView.swift */; };
+		41923E422916BECC00D1A8C5 /* GraphTabViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41923E412916BECC00D1A8C5 /* GraphTabViewTests.swift */; };
 		41A25D3D28CA5CDF00315714 /* GraphTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A25D3C28CA5CDF00315714 /* GraphTabView.swift */; };
 		41A25D3F28CA5CFB00315714 /* GraphTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A25D3E28CA5CFB00315714 /* GraphTabViewModel.swift */; };
 		41A25D4328CA706700315714 /* CountdownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A25D4228CA706700315714 /* CountdownTimer.swift */; };
@@ -129,6 +131,8 @@
 		41777F1428F49C61009944FF /* NetworkFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFacade.swift; sourceTree = "<group>"; };
 		418EEEB42916843A006A8290 /* View+If.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+If.swift"; sourceTree = "<group>"; };
 		41923E3B2916B8A800D1A8C5 /* battery-soc-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "battery-soc-success.json"; sourceTree = "<group>"; };
+		41923E3D2916BC6F00D1A8C5 /* UsageGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageGraphView.swift; sourceTree = "<group>"; };
+		41923E412916BECC00D1A8C5 /* GraphTabViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTabViewTests.swift; sourceTree = "<group>"; };
 		41A25D3C28CA5CDF00315714 /* GraphTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTabView.swift; sourceTree = "<group>"; };
 		41A25D3E28CA5CFB00315714 /* GraphTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTabViewModel.swift; sourceTree = "<group>"; };
 		41A25D4028CA6E0000315714 /* MockNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworking.swift; sourceTree = "<group>"; };
@@ -203,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				4110065A28E890E40018C3DF /* GraphTabViewModelTests.swift */,
+				41923E412916BECC00D1A8C5 /* GraphTabViewTests.swift */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -332,6 +337,7 @@
 			children = (
 				41A25D3C28CA5CDF00315714 /* GraphTabView.swift */,
 				41A25D3E28CA5CFB00315714 /* GraphTabViewModel.swift */,
+				41923E3D2916BC6F00D1A8C5 /* UsageGraphView.swift */,
 			);
 			path = Graphs;
 			sourceTree = "<group>";
@@ -563,6 +569,7 @@
 				4107446928CA42D2006D5D7D /* PylonView.swift in Sources */,
 				41777F1528F49C61009944FF /* NetworkFacade.swift in Sources */,
 				4106A93028D05EC90009DA28 /* Double.swift in Sources */,
+				41923E3E2916BC6F00D1A8C5 /* UsageGraphView.swift in Sources */,
 				412790FD28E1FAF700D5F993 /* String+MD5.swift in Sources */,
 				4107446728CA22B3006D5D7D /* InverterPath.swift in Sources */,
 			);
@@ -573,6 +580,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				412790FF28E1FB9200D5F993 /* UserManagerTests.swift in Sources */,
+				41923E422916BECC00D1A8C5 /* GraphTabViewTests.swift in Sources */,
 				4127911228E38F1400D5F993 /* LoginViewTests.swift in Sources */,
 				4127910228E1FBD300D5F993 /* MockKeychainStore.swift in Sources */,
 				4127910B28E241E700D5F993 /* XCTestCase+OHHTTPStubs.swift in Sources */,

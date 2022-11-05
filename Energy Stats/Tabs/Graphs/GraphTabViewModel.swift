@@ -100,7 +100,7 @@ class GraphTabViewModel: ObservableObject {
         return totals[type]
     }
 
-    func data(at date: Date) -> ValuesAtTime? {
+    func data(at date: Date) -> ValuesAtTime {
         let visibleVariableTypes = variables.filter { $0.enabled }.map { $0.type }
         let result = ValuesAtTime(values: rawData.filter { $0.date == date && visibleVariableTypes.contains($0.variable) })
         return result
