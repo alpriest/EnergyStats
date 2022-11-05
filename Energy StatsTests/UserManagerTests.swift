@@ -25,7 +25,7 @@ final class UserManagerTests: XCTestCase {
         sut = UserManager(networking: networking, store: keychainStore, configManager: configManager)
     }
 
-    func test_IsLoggedIn_SetsOnInitialisation() {
+    func test_isLoggedIn_SetsOnInitialisation() {
         var expectation: XCTestExpectation? = self.expectation(description: #function)
         keychainStore.hasCredentials = true
 
@@ -68,13 +68,17 @@ final class UserManagerTests: XCTestCase {
 
     func test_login_success() async {
         let received = ValueReceiver(sut.$state)
-        stubHTTPResponses(with: [.loginSuccess, .deviceListSuccess])
+        stubHTTPResponses(with: [.loginSuccess, .deviceListSuccess, .batterySuccess, .batterySocSuccess])
 
         await sut.login(username: "bob", password: "password")
 
         XCTAssertEqual(received.values, [.idle, .busy])
         XCTAssertEqual(keychainStore.username, "bob")
         XCTAssertEqual(keychainStore.hashedPassword, "password".md5()!)
+        XCTAssertEqual(config.deviceID, "12345678-0000-0000-1234-aaaabbbbcccc")
+        XCTAssertEqual(config.deviceSN, "1234567890")
+        XCTAssertTrue(config.hasPV)
+        XCTAssertTrue(config.hasBattery)
     }
 
     func test_login_performs_logout_when_devicelist_fails() async {

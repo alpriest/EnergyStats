@@ -13,7 +13,7 @@ extension URL {
     static var raw = URL(string: "https://www.foxesscloud.com/c/v0/device/history/raw")!
     static var battery = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/info")!
     static var deviceList = URL(string: "https://www.foxesscloud.com/c/v0/device/list")!
-    static var soc = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/soc/get")! //?sn=66BH3720228D004
+    static var soc = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/soc/get")!
 }
 
 protocol Networking {

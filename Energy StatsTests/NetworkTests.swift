@@ -90,7 +90,7 @@ final class NetworkTests: XCTestCase {
         let report = try await sut.fetchDeviceList()
 
         XCTAssertEqual(report.devices.first?.hasBattery, true)
-        XCTAssertEqual(report.devices.first?.deviceID, "03274209-486c-4ea3-9c28-159f25ee84cb")
+        XCTAssertEqual(report.devices.first?.deviceID, "12345678-0000-0000-1234-aaaabbbbcccc")
     }
 
     func test_fetchReport_throws_when_offline() async {

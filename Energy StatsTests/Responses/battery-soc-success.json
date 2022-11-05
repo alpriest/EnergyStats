@@ -1,0 +1,9 @@
+{
+  "errno": 0,
+  "result": {
+    "minSoc": 20,
+    "minSocTip": "",
+    "minGridSoc": 20,
+    "minGridSocTip": ""
+  }
+}

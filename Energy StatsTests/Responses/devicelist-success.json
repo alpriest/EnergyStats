@@ -6,10 +6,10 @@
     "total": 1,
     "devices": [
       {
-        "deviceID": "03274209-486c-4ea3-9c28-159f25ee84cb",
-        "deviceSN": "66BH3720228D004",
-        "moduleSN": "669W2EFF22FA815",
-        "plantName": "Alistair Priest",
+        "deviceID": "12345678-0000-0000-1234-aaaabbbbcccc",
+        "deviceSN": "1234567890",
+        "moduleSN": "9990008881",
+        "plantName": "Dummy User",
         "deviceType": "H1-3.7-E",
         "country": "United Kingdom (the)",
         "countryCode": "",
