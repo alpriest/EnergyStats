@@ -47,6 +47,9 @@ struct TabbedView: View {
                         Text("Settings")
                     }
                 }
+                .if(configManager.isDemoUser) {
+                    $0.badge("demo")
+                }
         }
         .edgesIgnoringSafeArea(.all)
     }

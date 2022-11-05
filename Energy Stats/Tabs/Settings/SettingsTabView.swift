@@ -33,16 +33,29 @@ struct SettingsTabView: View {
                 }
             }, header: {
                 Text("Battery")
+            }, footer: {
+                Text("These values are automatically calculated from your installation. If your battery is below min SOC then the total capacity calculation will be incorrect.")
             })
 
-            Section {
+            Section(content: {
                 VStack {
                     Text("You are logged in as \(userManager.getUsername() ?? "")")
                     Button("logout") {
                         userManager.logout()
                     }.buttonStyle(.bordered)
                 }.frame(maxWidth: .infinity)
-            }
+            }, footer: {
+                VStack {
+                    HStack {
+                        Image(systemName: "envelope")
+                        Button("Get in touch with us") {
+                            UIApplication.shared.open(URL(string: "mailto:energystatsapp@gmail.com")!)
+                        }
+                    }
+                }
+                .padding(.top, 88)
+                .frame(maxWidth: .infinity)
+            })
         }
     }
 }

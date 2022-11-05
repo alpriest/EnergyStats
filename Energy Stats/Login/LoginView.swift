@@ -29,11 +29,19 @@ struct LoginView: View {
                 .autocapitalization(.none)
                 .autocorrectionDisabled()
 
-            Button("Let's go") {
-                Task { await loginManager.login(username: username, password: password) }
+            HStack {
+                Button("Try demo") {
+                    Task { await loginManager.login(username: "demo", password: "user") }
+                }
+                .padding()
+                .buttonStyle(.bordered)
+
+                Button("Log me in") {
+                    Task { await loginManager.login(username: username, password: password) }
+                }
+                .padding()
+                .buttonStyle(.borderedProminent)
             }
-            .padding()
-            .buttonStyle(.borderedProminent)
 
             switch loginManager.state {
             case .idle:

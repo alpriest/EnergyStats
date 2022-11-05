@@ -21,6 +21,10 @@ struct PowerFlowTabView: View {
             case let .failed(reason):
                 Text(reason)
                     .multilineTextAlignment(.center)
+
+                Button("Retry") {
+                    Task { await viewModel.timerFired() }
+                }
             case .unloaded:
                 Text("Loading...")
             }
