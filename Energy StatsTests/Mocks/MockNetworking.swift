@@ -61,9 +61,9 @@ class MockNetworking: Networking {
 
         return result.map {
             RawResponse(variable: $0.variable, data: $0.data.map {
-                let thenComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: $0.time)
+                let components = Calendar.current.dateComponents([.hour, .minute, .second], from: $0.time)
 
-                let date = Calendar.current.date(bySettingHour: thenComponents.hour ?? 0, minute: thenComponents.minute ?? 0, second: thenComponents.second ?? 0, of: Date())
+                let date = Calendar.current.date(bySettingHour: components.hour ?? 0, minute: components.minute ?? 0, second: components.second ?? 0, of: Date())
 
                 return RawResponse.ReportData(time: date ?? $0.time, value: $0.value)
             })

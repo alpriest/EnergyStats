@@ -36,9 +36,3 @@ extension Double {
         return formatter.string(from: NSNumber(value: self))!
     }
 }
-
-extension String {
-    func asDouble() -> Double? {
-        Double(self)
-    }
-}

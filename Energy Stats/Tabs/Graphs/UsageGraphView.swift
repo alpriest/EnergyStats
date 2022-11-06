@@ -29,7 +29,7 @@ struct UsageGraphView: View {
         }
         .chartXAxis(content: {
             AxisMarks(values: .stride(by: .hour)) { value in
-                if value.index % viewModel.stride == 0, let date = value.as(Date.self) {
+                if (value.index == 0) || (value.index % viewModel.stride == 0), let date = value.as(Date.self) {
                     AxisTick(centered: false)
                     AxisValueLabel(centered: false) {
                         Text(date.militaryTime())

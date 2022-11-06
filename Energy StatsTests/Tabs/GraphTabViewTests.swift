@@ -17,6 +17,7 @@ final class GraphTabViewTests: XCTestCase {
         await viewModel.start()
         let sut = GraphTabView(viewModel: viewModel)
         let view = UIHostingController(rootView: sut)
+
         assertSnapshot(matching: view, as: .image(on: .iPhone13Pro))
     }
 
