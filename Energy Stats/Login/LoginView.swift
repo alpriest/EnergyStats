@@ -59,6 +59,6 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(loginManager: UserManager(networking: MockNetworking(), store: KeychainStore(), configManager: MockConfigManager()))
+        LoginView(loginManager: UserManager(networking: DemoNetworking(), store: KeychainStore(), configManager: MockConfigManager()))
     }
 }

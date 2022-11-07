@@ -1,5 +1,5 @@
 //
-//  MockNetworking.swift
+//  DemoNetworking.swift
 //  Energy Stats
 //
 //  Created by Alistair Priest on 08/09/2022.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MockNetworking: Networking {
+class DemoNetworking: Networking {
     private let throwOnCall: Bool
 
     init(throwOnCall: Bool = false) {
@@ -84,6 +84,6 @@ class MockConfig: Config {
 
 class MockConfigManager: ConfigManager {
     convenience init() {
-        self.init(networking: MockNetworking(), config: MockConfig())
+        self.init(networking: DemoNetworking(), config: MockConfig())
     }
 }

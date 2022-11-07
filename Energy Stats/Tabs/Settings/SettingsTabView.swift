@@ -62,6 +62,6 @@ struct SettingsTabView: View {
 
 struct SettingsTabView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsTabView(userManager: UserManager(networking: MockNetworking(), store: KeychainStore(), configManager: MockConfigManager()), configManager: MockConfigManager())
+        SettingsTabView(userManager: UserManager(networking: DemoNetworking(), store: KeychainStore(), configManager: MockConfigManager()), configManager: MockConfigManager())
     }
 }

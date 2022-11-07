@@ -24,8 +24,8 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView(
-            loginManager: UserManager(networking: MockNetworking(), store: KeychainStore(), configManager: MockConfigManager()),
-            network: MockNetworking(),
+            loginManager: UserManager(networking: DemoNetworking(), store: KeychainStore(), configManager: MockConfigManager()),
+            network: DemoNetworking(),
             configManager: MockConfigManager()
         )
     }

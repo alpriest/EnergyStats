@@ -64,6 +64,6 @@ struct PowerFlowTabView: View {
 
 struct SummaryTabView_Previews: PreviewProvider {
     static var previews: some View {
-        PowerFlowTabView(viewModel: PowerFlowTabViewModel(MockNetworking(), configManager: MockConfigManager()))
+        PowerFlowTabView(viewModel: PowerFlowTabViewModel(DemoNetworking(), configManager: MockConfigManager()))
     }
 }

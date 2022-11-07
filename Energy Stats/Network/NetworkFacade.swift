@@ -14,7 +14,7 @@ class NetworkFacade: Networking {
 
     init(network: Networking, config: Config) {
         self.network = network
-        self.fakeNetwork = MockNetworking()
+        self.fakeNetwork = DemoNetworking()
         self.config = config
     }
 

@@ -57,6 +57,6 @@ struct TabbedView: View {
 
 struct TabbedView_Previews: PreviewProvider {
     static var previews: some View {
-        TabbedView(networking: MockNetworking(), userManager: UserManager(networking: MockNetworking(), store: KeychainStore(), configManager: MockConfigManager()), configManager: MockConfigManager())
+        TabbedView(networking: DemoNetworking(), userManager: UserManager(networking: DemoNetworking(), store: KeychainStore(), configManager: MockConfigManager()), configManager: MockConfigManager())
     }
 }

@@ -10,9 +10,11 @@ import Foundation
 
 class MockNetworking: Networking {
     private let throwOnCall: Bool
+    private let dateProvider: () -> Date
 
-    init(throwOnCall: Bool = false) {
+    init(throwOnCall: Bool = false, dateProvider: @escaping () -> Date = { Date() }) {
         self.throwOnCall = throwOnCall
+        self.dateProvider = dateProvider
     }
 
     func ensureHasToken() async {
@@ -63,7 +65,7 @@ class MockNetworking: Networking {
             RawResponse(variable: $0.variable, data: $0.data.map {
                 let components = Calendar.current.dateComponents([.hour, .minute, .second], from: $0.time)
 
-                let date = Calendar.current.date(bySettingHour: components.hour ?? 0, minute: components.minute ?? 0, second: components.second ?? 0, of: Date())
+                let date = Calendar.current.date(bySettingHour: components.hour ?? 0, minute: components.minute ?? 0, second: components.second ?? 0, of: dateProvider())
 
                 return RawResponse.ReportData(time: date ?? $0.time, value: $0.value)
             })

@@ -34,9 +34,9 @@ class GraphTabViewModel: ObservableObject {
     private var totals: [VariableType: Double] = [:]
     private let dateProvider: () -> Date
 
-    @Published var stride = 1
-    @Published var data: [GraphValue] = []
-    @Published var variables: [GraphVariable] = [GraphVariable(.feedinPower), GraphVariable(.gridConsumptionPower), GraphVariable(.generationPower), GraphVariable(.batChargePower), GraphVariable(.pvPower)]
+    @Published private(set) var stride = 1
+    @Published private(set) var data: [GraphValue] = []
+    @Published private(set) var variables: [GraphVariable] = [GraphVariable(.feedinPower), GraphVariable(.gridConsumptionPower), GraphVariable(.generationPower), GraphVariable(.batChargePower), GraphVariable(.pvPower)]
     @Published var hours = 6 { didSet {
         switch hours {
         case 6:
@@ -48,7 +48,7 @@ class GraphTabViewModel: ObservableObject {
         }
         refresh()
     }}
-    @Published var errorMessage: String? = nil
+    @Published private(set) var errorMessage: String? = nil
 
     init(_ networking: Networking, _ dateProvider: @escaping () -> Date = { Date() }) {
         self.networking = networking
