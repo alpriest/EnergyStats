@@ -61,17 +61,17 @@ class PowerFlowTabViewModel: ObservableObject {
         do {
             await MainActor.run { self.updateState = "Updating..." }
             await self.network.ensureHasToken()
-            let historical = HistoricalViewModel(raws: try await self.network.fetchRaw(variables: [.feedinPower, .gridConsumptionPower, .pvPower, .loadsPower]))
+            let raw = HistoricalViewModel(raws: try await self.network.fetchRaw(variables: [.feedinPower, .gridConsumptionPower, .generationPower, .loadsPower, .batChargePower, .batDischargePower]))
             let battery = configManager.hasBattery ? BatteryViewModel(from: try await self.network.fetchBattery()) : BatteryViewModel.noBattery
             let summary = HomePowerFlowViewModel(configManager: configManager,
-                                                 solar: historical.currentSolarPower,
+                                                 solar: raw.currentSolarPower,
                                                  battery: battery.chargePower,
-                                                 home: historical.currentHomeConsumption,
-                                                 grid: historical.currentGridExport,
+                                                 home: raw.currentHomeConsumption,
+                                                 grid: raw.currentGridExport,
                                                  batteryStateOfCharge: battery.chargeLevel,
                                                  hasBattery: battery.hasBattery)
 
-            self.state = .loaded(.empty(configManager: configManager)) // refreshes the moving line
+            self.state = .loaded(.empty(configManager: configManager)) // refreshes the marching ants line
             try await Task.sleep(nanoseconds: 1000)
             self.state = .loaded(summary)
             self.updateState = " "

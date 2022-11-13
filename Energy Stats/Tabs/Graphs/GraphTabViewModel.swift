@@ -9,11 +9,11 @@ import Foundation
 import SwiftUI
 
 struct GraphVariable: Identifiable, Equatable, Hashable {
-    let type: VariableType
+    let type: RawVariable
     var enabled = true
     var id: String { type.title }
 
-    init(_ type: VariableType, enabled: Bool = true) {
+    init(_ type: RawVariable, enabled: Bool = true) {
         self.type = type
         self.enabled = enabled
     }
@@ -31,12 +31,12 @@ class GraphTabViewModel: ObservableObject {
         }
     }
 
-    private var totals: [VariableType: Double] = [:]
+//    private var totals: [VariableType: Double] = [:]
     private let dateProvider: () -> Date
 
     @Published private(set) var stride = 1
     @Published private(set) var data: [GraphValue] = []
-    @Published private(set) var variables: [GraphVariable] = [GraphVariable(.feedinPower), GraphVariable(.gridConsumptionPower), GraphVariable(.generationPower), GraphVariable(.batChargePower), GraphVariable(.pvPower)]
+    @Published private(set) var graphVariables: [GraphVariable] = [GraphVariable(.feedinPower), GraphVariable(.gridConsumptionPower), GraphVariable(.generationPower), GraphVariable(.batChargePower), GraphVariable(.batDischargePower)]
     @Published var hours = 6 { didSet {
         switch hours {
         case 6:
@@ -57,17 +57,17 @@ class GraphTabViewModel: ObservableObject {
 
     func start() async {
         do {
-            let reports = try await networking.fetchReport(variables: variables.map { $0.type })
-            reports.forEach {
-                guard let variable = VariableType(fromReport: $0.variable) else { return }
+//            let reports = try await networking.fetchReport(variables: variables.filter { $0.type != .batChargePower }.map { $0.type })
+//            reports.forEach {
+//                guard let variable = VariableType(fromReport: $0.variable) else { return }
+//
+//                totals[variable] = $0.data.map { abs($0.value) }.reduce(0.0, +)
+//            }
 
-                totals[variable] = $0.data.map { abs($0.value) }.reduce(0.0, +)
-            }
-
-            let raw = try await networking.fetchRaw(variables: variables.map { $0.type })
+            let raw = try await networking.fetchRaw(variables: graphVariables.map { $0.type })
             let rawData: [GraphValue] = raw.flatMap { reportVariable in
                 reportVariable.data.compactMap {
-                    guard let variable = VariableType(rawValue: reportVariable.variable) else { return nil }
+                    guard let variable = RawVariable(rawValue: reportVariable.variable) else { return nil }
                     return GraphValue(date: $0.time, value: $0.value, variable: variable)
                 }
             }
@@ -83,7 +83,7 @@ class GraphTabViewModel: ObservableObject {
     }
 
     func refresh() {
-        let hiddenVariableTypes = variables.filter { $0.enabled == false }.map { $0.type }
+        let hiddenVariableTypes = graphVariables.filter { $0.enabled == false }.map { $0.type }
         let oldest = dateProvider().addingTimeInterval(0 - (3600 * Double(hours)))
 
         data = rawData
@@ -95,19 +95,19 @@ class GraphTabViewModel: ObservableObject {
     }
 
     func total(of type: VariableType) -> Double? {
-        guard totals.keys.contains(type) else { return nil }
-
-        return totals[type]
+//        guard totals.keys.contains(type) else { return nil }
+//        return totals[type]
+        nil
     }
 
     func data(at date: Date) -> ValuesAtTime {
-        let visibleVariableTypes = variables.filter { $0.enabled }.map { $0.type }
+        let visibleVariableTypes = graphVariables.filter { $0.enabled }.map { $0.type }
         let result = ValuesAtTime(values: rawData.filter { $0.date == date && visibleVariableTypes.contains($0.variable) })
         return result
     }
 
     func toggle(visibilityOf variable: GraphVariable) {
-        variables = variables.map {
+        graphVariables = graphVariables.map {
             if $0.type == variable.type {
                 var modified = $0
                 modified.enabled.toggle()
@@ -122,11 +122,11 @@ class GraphTabViewModel: ObservableObject {
 struct GraphValue: Identifiable {
     let date: Date
     let value: Double
-    let variable: VariableType
+    let variable: RawVariable
 
     var id: String { "\(date.iso8601())_\(variable.title)" }
 
-    init(date: Date, value: Double, variable: VariableType) {
+    init(date: Date, value: Double, variable: RawVariable) {
         self.date = date
         self.value = value.floored(variable)
         self.variable = variable
@@ -134,9 +134,7 @@ struct GraphValue: Identifiable {
 }
 
 private extension Double {
-    func floored(_ variable: VariableType) -> Double {
-        guard variable == .pvPower else { return self }
-
-        return max(0, self)
+    func floored(_ variable: RawVariable) -> Double {
+        max(0, self)
     }
 }

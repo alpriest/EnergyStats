@@ -22,7 +22,7 @@ protocol Networking {
     func fetchReport(variables: [VariableType]) async throws -> [ReportResponse]
     func fetchBattery() async throws -> BatteryResponse
     func fetchBatterySettings() async throws -> BatterySettingsResponse
-    func fetchRaw(variables: [VariableType]) async throws -> [RawResponse]
+    func fetchRaw(variables: [RawVariable]) async throws -> [RawResponse]
     func fetchDeviceList() async throws -> PagedDeviceListResponse
 }
 
@@ -111,7 +111,7 @@ class Network: Networking {
         return try await fetch(request)
     }
 
-    func fetchRaw(variables: [VariableType]) async throws -> [RawResponse] {
+    func fetchRaw(variables: [RawVariable]) async throws -> [RawResponse] {
         guard let deviceID = config.deviceID else { throw NetworkError.invalidConfiguration("deviceID missing") }
 
         var request = URLRequest(url: URL.raw)

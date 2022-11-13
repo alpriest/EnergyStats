@@ -47,7 +47,7 @@ struct GraphTabView: View {
             .font(.caption)
 
             VStack(alignment: .leading) {
-                List(viewModel.variables, id: \.self) { variable in
+                List(viewModel.graphVariables, id: \.self) { variable in
                     HStack {
                         Button(action: { viewModel.toggle(visibilityOf: variable) }) {
                             HStack(alignment: .top) {
@@ -65,9 +65,9 @@ struct GraphTabView: View {
 
                                 Spacer()
 
-                                OptionalView(viewModel.total(of: variable.type)) {
-                                    Text($0.kW())
-                                }
+//                                OptionalView(viewModel.total(of: variable.type)) {
+//                                    Text($0.kW())
+//                                }
                             }
                             .opacity(variable.enabled ? 1.0 : 0.5)
                         }
@@ -78,7 +78,7 @@ struct GraphTabView: View {
                 .scrollDisabled(true)
                 .listStyle(.plain)
                 .scrollContentBackground(.hidden)
-            }.onChange(of: viewModel.variables) { _ in
+            }.onChange(of: viewModel.graphVariables) { _ in
                 viewModel.refresh()
             }
         }

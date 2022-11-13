@@ -44,7 +44,7 @@ class DemoNetworking: Networking {
         BatteryResponse(power: 0.27, soc: 20, residual: 2420)
     }
 
-    func fetchRaw(variables: [VariableType]) async throws -> [RawResponse] {
+    func fetchRaw(variables: [RawVariable]) async throws -> [RawResponse] {
         if throwOnCall {
             throw NetworkError.unknown
         }
