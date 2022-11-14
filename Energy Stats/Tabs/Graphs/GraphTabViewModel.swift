@@ -36,7 +36,7 @@ class GraphTabViewModel: ObservableObject {
 
     @Published private(set) var stride = 1
     @Published private(set) var data: [GraphValue] = []
-    @Published private(set) var graphVariables: [GraphVariable] = [GraphVariable(.feedinPower), GraphVariable(.gridConsumptionPower), GraphVariable(.generationPower), GraphVariable(.batChargePower), GraphVariable(.batDischargePower)]
+    @Published private(set) var graphVariables: [GraphVariable] = [GraphVariable(.generationPower), GraphVariable(.feedinPower), GraphVariable(.batChargePower), GraphVariable(.batDischargePower), GraphVariable(.gridConsumptionPower)]
     @Published var hours = 6 { didSet {
         switch hours {
         case 6:
@@ -128,7 +128,7 @@ struct GraphValue: Identifiable {
 
     init(date: Date, value: Double, variable: RawVariable) {
         self.date = date
-        self.value = value.floored(variable)
+        self.value = value
         self.variable = variable
     }
 }

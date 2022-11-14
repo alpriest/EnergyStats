@@ -46,7 +46,6 @@ struct UsageGraphView: View {
                 }
             }
         })
-        .chartYScale(domain: 0 ... 4)
         .chartOverlay { chartProxy in
             GeometryReader { geometryProxy in
                 Rectangle().fill(.clear).contentShape(Rectangle())
