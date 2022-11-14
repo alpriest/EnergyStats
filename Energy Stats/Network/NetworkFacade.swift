@@ -34,7 +34,7 @@ class NetworkFacade: Networking {
         try await network.verifyCredentials(username: username, hashedPassword: hashedPassword)
     }
 
-    func fetchReport(variables: [VariableType]) async throws -> [ReportResponse] {
+    func fetchReport(variables: [ReportVariable]) async throws -> [ReportResponse] {
         if config.isDemoUser {
             return try await fakeNetwork.fetchReport(variables: variables)
         }

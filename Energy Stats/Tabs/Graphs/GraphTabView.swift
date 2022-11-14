@@ -65,9 +65,9 @@ struct GraphTabView: View {
 
                                 Spacer()
 
-//                                OptionalView(viewModel.total(of: variable.type)) {
-//                                    Text($0.kW())
-//                                }
+                                OptionalView(viewModel.total(of: variable.type)) {
+                                    Text($0.kW())
+                                }
                             }
                             .opacity(variable.enabled ? 1.0 : 0.5)
                         }

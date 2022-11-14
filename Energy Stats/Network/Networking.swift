@@ -19,7 +19,7 @@ extension URL {
 protocol Networking {
     func ensureHasToken() async
     func verifyCredentials(username: String, hashedPassword: String) async throws
-    func fetchReport(variables: [VariableType]) async throws -> [ReportResponse]
+    func fetchReport(variables: [ReportVariable]) async throws -> [ReportResponse]
     func fetchBattery() async throws -> BatteryResponse
     func fetchBatterySettings() async throws -> BatterySettingsResponse
     func fetchRaw(variables: [RawVariable]) async throws -> [RawResponse]
@@ -81,7 +81,7 @@ class Network: Networking {
         return response.token
     }
 
-    func fetchReport(variables: [VariableType]) async throws -> [ReportResponse] {
+    func fetchReport(variables: [ReportVariable]) async throws -> [ReportResponse] {
         guard let deviceID = config.deviceID else { throw NetworkError.invalidConfiguration("deviceID missing") }
 
         var request = URLRequest(url: URL.report)

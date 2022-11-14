@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		41028F9528CDD7A300FB70FD /* OptionalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41028F9428CDD7A300FB70FD /* OptionalView.swift */; };
-		4106A92D28CFCD960009DA28 /* VariableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4106A92C28CFCD960009DA28 /* VariableType.swift */; };
+		4103F8302922BFBA00567B1C /* ReportVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4103F82F2922BFBA00567B1C /* ReportVariable.swift */; };
+		4106A92D28CFCD960009DA28 /* RawVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4106A92C28CFCD960009DA28 /* RawVariable.swift */; };
 		4106A93028D05EC90009DA28 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4106A92F28D05EC90009DA28 /* Double.swift */; };
 		4107446128C9EF6B006D5D7D /* HomePowerFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446028C9EF6B006D5D7D /* HomePowerFlowView.swift */; };
 		4107446328CA1C5D006D5D7D /* PowerFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446228CA1C5D006D5D7D /* PowerFlowView.swift */; };
@@ -89,7 +90,8 @@
 
 /* Begin PBXFileReference section */
 		41028F9428CDD7A300FB70FD /* OptionalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalView.swift; sourceTree = "<group>"; };
-		4106A92C28CFCD960009DA28 /* VariableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableType.swift; sourceTree = "<group>"; };
+		4103F82F2922BFBA00567B1C /* ReportVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportVariable.swift; sourceTree = "<group>"; };
+		4106A92C28CFCD960009DA28 /* RawVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawVariable.swift; sourceTree = "<group>"; };
 		4106A92F28D05EC90009DA28 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		4107446028C9EF6B006D5D7D /* HomePowerFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePowerFlowView.swift; sourceTree = "<group>"; };
 		4107446228CA1C5D006D5D7D /* PowerFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerFlowView.swift; sourceTree = "<group>"; };
@@ -302,7 +304,8 @@
 			isa = PBXGroup;
 			children = (
 				4140145D28C70D1400EA5BA1 /* Config.swift */,
-				4106A92C28CFCD960009DA28 /* VariableType.swift */,
+				4106A92C28CFCD960009DA28 /* RawVariable.swift */,
+				4103F82F2922BFBA00567B1C /* ReportVariable.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -557,12 +560,13 @@
 				41E4B31028DB7666003F7F47 /* BatteryPowerView.swift in Sources */,
 				4140144E28C70B3200EA5BA1 /* Energy_StatsApp.swift in Sources */,
 				4140147128C77AAA00EA5BA1 /* BatteryViewModel.swift in Sources */,
-				4106A92D28CFCD960009DA28 /* VariableType.swift in Sources */,
+				4106A92D28CFCD960009DA28 /* RawVariable.swift in Sources */,
 				41E4B30E28DB7511003F7F47 /* BatteryCapacityCalculator.swift in Sources */,
 				41D7B12428C86E4000E14144 /* Raw.swift in Sources */,
 				4140145C28C70B4A00EA5BA1 /* PowerFlowTabViewModel.swift in Sources */,
 				4140146228C7146300EA5BA1 /* Auth.swift in Sources */,
 				4128E4C128DA5F6600C1D698 /* Date.swift in Sources */,
+				4103F8302922BFBA00567B1C /* ReportVariable.swift in Sources */,
 				4140146F28C77A3100EA5BA1 /* BatteryResponse.swift in Sources */,
 				4107446528CA1D76006D5D7D /* FlowingLine.swift in Sources */,
 				41E1DFDF28D87781001235B9 /* SettingsTabView.swift in Sources */,
@@ -743,7 +747,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -776,7 +780,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -796,7 +800,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.alpriest.Energy-StatsTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -814,7 +818,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.alpriest.Energy-StatsTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;

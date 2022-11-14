@@ -31,7 +31,7 @@ class GraphTabViewModel: ObservableObject {
         }
     }
 
-//    private var totals: [VariableType: Double] = [:]
+    private var totals: [ReportVariable: Double] = [:]
     private let dateProvider: () -> Date
 
     @Published private(set) var stride = 1
@@ -57,12 +57,14 @@ class GraphTabViewModel: ObservableObject {
 
     func start() async {
         do {
-//            let reports = try await networking.fetchReport(variables: variables.filter { $0.type != .batChargePower }.map { $0.type })
-//            reports.forEach {
-//                guard let variable = VariableType(fromReport: $0.variable) else { return }
-//
-//                totals[variable] = $0.data.map { abs($0.value) }.reduce(0.0, +)
-//            }
+            let reportVariables = graphVariables.compactMap { $0.type.reportVariable }
+            let reports = try await networking.fetchReport(variables: reportVariables)
+            reports.forEach {
+                guard let variable = ReportVariable(rawValue: $0.variable) else { return }
+
+                totals[variable] = 0
+                totals[variable] = $0.data.map { abs($0.value) }.reduce(0.0, +)
+            }
 
             let raw = try await networking.fetchRaw(variables: graphVariables.map { $0.type })
             let rawData: [GraphValue] = raw.flatMap { reportVariable in
@@ -94,10 +96,11 @@ class GraphTabViewModel: ObservableObject {
             })
     }
 
-    func total(of type: VariableType) -> Double? {
-//        guard totals.keys.contains(type) else { return nil }
-//        return totals[type]
-        nil
+    func total(of type: RawVariable) -> Double? {
+        guard let reportVariable = type.reportVariable else { return nil }
+        guard totals.keys.contains(reportVariable) else { return nil }
+
+        return totals[reportVariable]
     }
 
     func data(at date: Date) -> ValuesAtTime {

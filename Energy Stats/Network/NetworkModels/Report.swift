@@ -13,9 +13,9 @@ struct ReportRequest: Encodable {
     let variables: [String]
     let queryDate: QueryDate
 
-    internal init(deviceID: String, variables: [VariableType]) {
+    internal init(deviceID: String, variables: [ReportVariable]) {
         self.deviceID = deviceID
-        self.variables = variables.map { $0.reportTitle }
+        self.variables = variables.map { $0.networkTitle }
 
         let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: Date())
         self.queryDate = QueryDate(year: dateComponents.year!, month: dateComponents.month!, day: dateComponents.day!)
