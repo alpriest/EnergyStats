@@ -1,4 +1,4 @@
-    This project is not endorsed by, directly affiliated with, maintained, authorized, or sponsored by FoxESS
+> This project is not endorsed by, directly affiliated with, maintained, authorized, or sponsored by FoxESS
 
 # EnergyStats
 [![BuyMeCoffee][buymecoffeebadge]][buymecoffee]
