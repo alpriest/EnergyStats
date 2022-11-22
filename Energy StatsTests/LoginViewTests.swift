@@ -5,10 +5,10 @@
 //  Created by Alistair Priest on 27/09/2022.
 //
 
-import XCTest
-import SnapshotTesting
 @testable import Energy_Stats
+import SnapshotTesting
 import SwiftUI
+import XCTest
 
 @MainActor
 final class LoginViewTests: XCTestCase {

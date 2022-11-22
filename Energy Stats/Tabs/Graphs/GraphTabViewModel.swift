@@ -25,7 +25,7 @@ class GraphTabViewModel: ObservableObject {
 
     @Published private(set) var stride = 3
     @Published private(set) var data: [GraphValue] = []
-    @Published private(set) var graphVariables: [GraphVariable] = [GraphVariable(.generationPower), GraphVariable(.feedinPower), GraphVariable(RawVariable.batChargePower), GraphVariable(.batDischargePower), GraphVariable(.gridConsumptionPower)]
+    @Published private(set) var graphVariables: [GraphVariable] = [GraphVariable(.generationPower), GraphVariable(RawVariable.batChargePower), GraphVariable(.batDischargePower), GraphVariable(.feedinPower), GraphVariable(.gridConsumptionPower)]
     @Published var hours = 24 { didSet {
         switch hours {
         case 6:
@@ -74,7 +74,9 @@ class GraphTabViewModel: ObservableObject {
                 self.refresh()
             }
         } catch {
-            self.errorMessage = "Could not load, check your connection"
+            await MainActor.run {
+                self.errorMessage = "Could not load, check your connection"
+            }
         }
     }
 

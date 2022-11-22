@@ -37,7 +37,7 @@ class MockNetworking: Networking {
         ])
     }
 
-    func fetchReport(variables: [VariableType]) async throws -> [ReportResponse] {
+    func fetchReport(variables: [ReportVariable], queryDate: QueryDate) async throws -> [ReportResponse] {
         if throwOnCall {
             throw NetworkError.unknown
         }
@@ -53,7 +53,7 @@ class MockNetworking: Networking {
         BatteryResponse(power: 0.27, soc: 56, residual: 2200)
     }
 
-    func fetchRaw(variables: [VariableType]) async throws -> [RawResponse] {
+    func fetchRaw(variables: [RawVariable]) async throws -> [RawResponse] {
         if throwOnCall {
             throw NetworkError.unknown
         }

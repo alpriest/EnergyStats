@@ -5,15 +5,15 @@
 //  Created by Alistair Priest on 05/11/2022.
 //
 
-import XCTest
-import SwiftUI
-import SnapshotTesting
 @testable import Energy_Stats
+import SnapshotTesting
+import SwiftUI
+import XCTest
 
 @MainActor
 final class GraphTabViewTests: XCTestCase {
     func test_when_user_arrives() async {
-        let viewModel = GraphTabViewModel(MockNetworking(throwOnCall: false, dateProvider: { Date(timeIntervalSince1970: 1664127352) }), { Date(timeIntervalSince1970: 1664127352) })
+        let viewModel = GraphTabViewModel(MockNetworking(throwOnCall: false, dateProvider: { Date(timeIntervalSince1970: 1664127352) })) { Date(timeIntervalSince1970: 1664127352) }
         let sut = GraphTabView(viewModel: viewModel)
         let view = UIHostingController(rootView: sut)
         await viewModel.start()
