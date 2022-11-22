@@ -1,0 +1,510 @@
+{
+  "errno": 0,
+  "result": [
+    {
+      "variable": "generation",
+      "data": [
+        {
+          "index": 1,
+          "value": 0
+        },
+        {
+          "index": 2,
+          "value": 0
+        },
+        {
+          "index": 3,
+          "value": 0
+        },
+        {
+          "index": 4,
+          "value": 0
+        },
+        {
+          "index": 5,
+          "value": 0
+        },
+        {
+          "index": 6,
+          "value": 0
+        },
+        {
+          "index": 7,
+          "value": 0
+        },
+        {
+          "index": 8,
+          "value": 0
+        },
+        {
+          "index": 9,
+          "value": 0
+        },
+        {
+          "index": 10,
+          "value": 0
+        },
+        {
+          "index": 11,
+          "value": 0
+        },
+        {
+          "index": 12,
+          "value": 0
+        },
+        {
+          "index": 13,
+          "value": 0
+        },
+        {
+          "index": 14,
+          "value": 0
+        },
+        {
+          "index": 15,
+          "value": 0
+        },
+        {
+          "index": 16,
+          "value": 0.39999999999997726
+        },
+        {
+          "index": 17,
+          "value": 0.2999999999999545
+        },
+        {
+          "index": 18,
+          "value": 1
+        },
+        {
+          "index": 19,
+          "value": 0.20000000000004547
+        },
+        {
+          "index": 20,
+          "value": 0
+        },
+        {
+          "index": 21,
+          "value": 0
+        },
+        {
+          "index": 22,
+          "value": 0
+        },
+        {
+          "index": 23,
+          "value": 0
+        },
+        {
+          "index": 24,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "variable": "feedIn",
+      "data": [
+        {
+          "index": 1,
+          "value": 0
+        },
+        {
+          "index": 2,
+          "value": 0
+        },
+        {
+          "index": 3,
+          "value": 0
+        },
+        {
+          "index": 4,
+          "value": 0
+        },
+        {
+          "index": 5,
+          "value": 0
+        },
+        {
+          "index": 6,
+          "value": 0
+        },
+        {
+          "index": 7,
+          "value": 0
+        },
+        {
+          "index": 8,
+          "value": 0
+        },
+        {
+          "index": 9,
+          "value": 0
+        },
+        {
+          "index": 10,
+          "value": 0
+        },
+        {
+          "index": 11,
+          "value": 0
+        },
+        {
+          "index": 12,
+          "value": 0
+        },
+        {
+          "index": 13,
+          "value": 0
+        },
+        {
+          "index": 14,
+          "value": 0
+        },
+        {
+          "index": 15,
+          "value": 0
+        },
+        {
+          "index": 16,
+          "value": 0
+        },
+        {
+          "index": 17,
+          "value": 0
+        },
+        {
+          "index": 18,
+          "value": 0
+        },
+        {
+          "index": 19,
+          "value": 0
+        },
+        {
+          "index": 20,
+          "value": 0
+        },
+        {
+          "index": 21,
+          "value": 0
+        },
+        {
+          "index": 22,
+          "value": 0
+        },
+        {
+          "index": 23,
+          "value": 0
+        },
+        {
+          "index": 24,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "variable": "chargeEnergyToTal",
+      "data": [
+        {
+          "index": 1,
+          "value": 0
+        },
+        {
+          "index": 2,
+          "value": 0
+        },
+        {
+          "index": 3,
+          "value": 0
+        },
+        {
+          "index": 4,
+          "value": 0
+        },
+        {
+          "index": 5,
+          "value": 0
+        },
+        {
+          "index": 6,
+          "value": 0
+        },
+        {
+          "index": 7,
+          "value": 0
+        },
+        {
+          "index": 8,
+          "value": 0.5999999999999659
+        },
+        {
+          "index": 9,
+          "value": 0.5
+        },
+        {
+          "index": 10,
+          "value": 0.5
+        },
+        {
+          "index": 11,
+          "value": 0.5
+        },
+        {
+          "index": 12,
+          "value": 0.5
+        },
+        {
+          "index": 13,
+          "value": 0.5
+        },
+        {
+          "index": 14,
+          "value": 0.5
+        },
+        {
+          "index": 15,
+          "value": 0.5
+        },
+        {
+          "index": 16,
+          "value": 0
+        },
+        {
+          "index": 17,
+          "value": 0
+        },
+        {
+          "index": 18,
+          "value": 0
+        },
+        {
+          "index": 19,
+          "value": 0
+        },
+        {
+          "index": 20,
+          "value": 0
+        },
+        {
+          "index": 21,
+          "value": 0
+        },
+        {
+          "index": 22,
+          "value": 0
+        },
+        {
+          "index": 23,
+          "value": 0
+        },
+        {
+          "index": 24,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "variable": "dischargeEnergyToTal",
+      "data": [
+        {
+          "index": 1,
+          "value": 0
+        },
+        {
+          "index": 2,
+          "value": 0
+        },
+        {
+          "index": 3,
+          "value": 0
+        },
+        {
+          "index": 4,
+          "value": 0
+        },
+        {
+          "index": 5,
+          "value": 0
+        },
+        {
+          "index": 6,
+          "value": 0
+        },
+        {
+          "index": 7,
+          "value": 0
+        },
+        {
+          "index": 8,
+          "value": 0
+        },
+        {
+          "index": 9,
+          "value": 0
+        },
+        {
+          "index": 10,
+          "value": 0
+        },
+        {
+          "index": 11,
+          "value": 0
+        },
+        {
+          "index": 12,
+          "value": 0
+        },
+        {
+          "index": 13,
+          "value": 0
+        },
+        {
+          "index": 14,
+          "value": 0
+        },
+        {
+          "index": 15,
+          "value": 0
+        },
+        {
+          "index": 16,
+          "value": 0.39999999999997726
+        },
+        {
+          "index": 17,
+          "value": 0.39999999999997726
+        },
+        {
+          "index": 18,
+          "value": 1.1000000000000227
+        },
+        {
+          "index": 19,
+          "value": 0.30000000000001137
+        },
+        {
+          "index": 20,
+          "value": 0
+        },
+        {
+          "index": 21,
+          "value": 0
+        },
+        {
+          "index": 22,
+          "value": 0
+        },
+        {
+          "index": 23,
+          "value": 0
+        },
+        {
+          "index": 24,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "variable": "gridConsumption",
+      "data": [
+        {
+          "index": 1,
+          "value": 0.10000000000002274
+        },
+        {
+          "index": 2,
+          "value": 0.19999999999998863
+        },
+        {
+          "index": 3,
+          "value": 0.19999999999998863
+        },
+        {
+          "index": 4,
+          "value": 0.10000000000002274
+        },
+        {
+          "index": 5,
+          "value": 0.0999999999999659
+        },
+        {
+          "index": 6,
+          "value": 0.0999999999999659
+        },
+        {
+          "index": 7,
+          "value": 0.19999999999998863
+        },
+        {
+          "index": 8,
+          "value": 1.8000000000000114
+        },
+        {
+          "index": 9,
+          "value": 0.6999999999999886
+        },
+        {
+          "index": 10,
+          "value": 0.9000000000000341
+        },
+        {
+          "index": 11,
+          "value": 0.39999999999997726
+        },
+        {
+          "index": 12,
+          "value": 0.19999999999998863
+        },
+        {
+          "index": 13,
+          "value": 0.19999999999998863
+        },
+        {
+          "index": 14,
+          "value": 0.4000000000000341
+        },
+        {
+          "index": 15,
+          "value": 2.1000000000000227
+        },
+        {
+          "index": 16,
+          "value": 0.10000000000002274
+        },
+        {
+          "index": 17,
+          "value": 0
+        },
+        {
+          "index": 18,
+          "value": 0
+        },
+        {
+          "index": 19,
+          "value": 0
+        },
+        {
+          "index": 20,
+          "value": 0
+        },
+        {
+          "index": 21,
+          "value": 0
+        },
+        {
+          "index": 22,
+          "value": 0
+        },
+        {
+          "index": 23,
+          "value": 0
+        },
+        {
+          "index": 24,
+          "value": 0
+        }
+      ]
+    }
+  ]
+}

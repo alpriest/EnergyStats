@@ -77,6 +77,7 @@
 		41E4B31528DB77E8003F7F47 /* GridPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E4B31428DB77E8003F7F47 /* GridPowerView.swift */; };
 		41EDDF6C28CD2A630092C662 /* HomePowerFlowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EDDF6B28CD2A630092C662 /* HomePowerFlowViewModel.swift */; };
 		41EDDF7428CD2ED30092C662 /* Energy_StatsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EDDF7328CD2ED30092C662 /* Energy_StatsTests.swift */; };
+		41F8D8F7292D7650005E2D18 /* report.json in Resources */ = {isa = PBXBuildFile; fileRef = 41F8D8F6292D7650005E2D18 /* report.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -160,6 +161,7 @@
 		41EDDF6B28CD2A630092C662 /* HomePowerFlowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePowerFlowViewModel.swift; sourceTree = "<group>"; };
 		41EDDF7128CD2ED30092C662 /* Energy StatsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Energy StatsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		41EDDF7328CD2ED30092C662 /* Energy_StatsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Energy_StatsTests.swift; sourceTree = "<group>"; };
+		41F8D8F6292D7650005E2D18 /* report.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = report.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +237,7 @@
 		413745072919022C00D351F1 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				41F8D8F6292D7650005E2D18 /* report.json */,
 				41AED86928CDCD94009C6517 /* raw.json */,
 				41A25D4028CA6E0000315714 /* DemoNetworking.swift */,
 			);
@@ -514,6 +517,7 @@
 				4140145528C70B3200EA5BA1 /* Preview Assets.xcassets in Resources */,
 				4140145228C70B3200EA5BA1 /* Assets.xcassets in Resources */,
 				41AED86A28CDCD94009C6517 /* raw.json in Resources */,
+				41F8D8F7292D7650005E2D18 /* report.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
