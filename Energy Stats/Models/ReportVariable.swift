@@ -5,20 +5,20 @@
 //  Created by Alistair Priest on 14/11/2022.
 //
 
-import Foundation
+import SwiftUI
 
 enum ReportVariable: String, RawRepresentable {
     case feedIn
     case generation
     case gridConsumption
-    case chargeEnergyTotal
-    case dischargeEnergyTotal
+    case chargeEnergyToTal
+    case dischargeEnergyToTal
 
     var networkTitle: String {
         switch self {
-        case .chargeEnergyTotal:
+        case .chargeEnergyToTal:
             return "chargeEnergyToTal"
-        case .dischargeEnergyTotal:
+        case .dischargeEnergyToTal:
             return "dischargeEnergyToTal"
         default:
             return self.rawValue
@@ -34,11 +34,56 @@ enum ReportVariable: String, RawRepresentable {
         case "gridConsumption":
             self = .gridConsumption
         case "chargeEnergyToTal":
-            self = .chargeEnergyTotal
+            self = .chargeEnergyToTal
         case "dischargeEnergyToTal":
-            self = .dischargeEnergyTotal
+            self = .dischargeEnergyToTal
         default:
             return nil
+        }
+    }
+
+    var title: String {
+        switch self {
+        case .generation:
+            return "Output power"
+        case .feedIn:
+            return "Feed-in power"
+        case .chargeEnergyToTal:
+            return "Charge power"
+        case .dischargeEnergyToTal:
+            return "Discharge power"
+        case .gridConsumption:
+            return "Grid consumption power"
+        }
+    }
+
+    var description: String {
+        switch self {
+        case .generation:
+            return "PV / Battery power coming through the inverter"
+        case .feedIn:
+            return "Power being sent to the grid"
+        case .chargeEnergyToTal:
+            return "Power charging the battery"
+        case .dischargeEnergyToTal:
+            return "Power discharging from the battery"
+        case .gridConsumption:
+            return "Power coming from the grid"
+        }
+    }
+
+    var colour: Color {
+        switch self {
+        case .chargeEnergyToTal:
+            return .green.opacity(0.8)
+        case .dischargeEnergyToTal:
+            return .red.opacity(0.5)
+        case .generation:
+            return .yellow.opacity(0.8)
+        case .gridConsumption:
+            return .red.opacity(0.8)
+        case .feedIn:
+            return .mint.opacity(0.8)
         }
     }
 }

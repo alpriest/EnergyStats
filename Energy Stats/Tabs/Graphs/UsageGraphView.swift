@@ -15,9 +15,9 @@ struct UsageGraphView: View {
     @Binding var valuesAtTime: ValuesAtTime?
 
     var body: some View {
-        Chart(viewModel.data) {
+        Chart(viewModel.data, id: \.variable.title) {
             AreaMark(
-                x: .value("Time", $0.date, unit: .minute),
+                x: .value("hour", $0.date),
                 y: .value("kW", $0.value),
                 series: .value("Title", $0.variable.title),
                 stacking: .unstacked
@@ -25,7 +25,7 @@ struct UsageGraphView: View {
             .foregroundStyle($0.variable.colour)
         }
         .chartPlotStyle { content in
-            content.background(Color.gray.gradient.opacity(0.1))
+            content.background(Color.gray.gradient.opacity(0.02))
         }
         .chartXAxis(content: {
             AxisMarks(values: .stride(by: .hour)) { value in
@@ -86,7 +86,7 @@ struct UsageGraphView: View {
                    let location = elementLocation - geometryReader[chartProxy.plotAreaFrame].origin.x
                 {
                     Rectangle()
-                        .fill(Color.black)
+                        .fill(Color("lines"))
                         .frame(width: 1, height: chartProxy.plotAreaSize.height)
                         .offset(x: location)
                 }

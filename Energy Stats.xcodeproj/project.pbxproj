@@ -44,6 +44,7 @@
 		4140146928C7374400EA5BA1 /* HistoricalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146828C7374400EA5BA1 /* HistoricalViewModel.swift */; };
 		4140146F28C77A3100EA5BA1 /* BatteryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146E28C77A3100EA5BA1 /* BatteryResponse.swift */; };
 		4140147128C77AAA00EA5BA1 /* BatteryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140147028C77AAA00EA5BA1 /* BatteryViewModel.swift */; };
+		4140ECDA292D58D300992DD8 /* GraphVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140ECD9292D58D300992DD8 /* GraphVariable.swift */; };
 		4141B20028D86C7200B60157 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141B1FF28D86C7200B60157 /* UserManager.swift */; };
 		4141B20228D871B900B60157 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141B20128D871B900B60157 /* ContentView.swift */; };
 		41777F1528F49C61009944FF /* NetworkFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41777F1428F49C61009944FF /* NetworkFacade.swift */; };
@@ -126,6 +127,7 @@
 		4140146828C7374400EA5BA1 /* HistoricalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalViewModel.swift; sourceTree = "<group>"; };
 		4140146E28C77A3100EA5BA1 /* BatteryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryResponse.swift; sourceTree = "<group>"; };
 		4140147028C77AAA00EA5BA1 /* BatteryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryViewModel.swift; sourceTree = "<group>"; };
+		4140ECD9292D58D300992DD8 /* GraphVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphVariable.swift; sourceTree = "<group>"; };
 		4141B1FF28D86C7200B60157 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		4141B20128D871B900B60157 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		41777F1428F49C61009944FF /* NetworkFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFacade.swift; sourceTree = "<group>"; };
@@ -346,6 +348,7 @@
 				41A25D3C28CA5CDF00315714 /* GraphTabView.swift */,
 				41A25D3E28CA5CFB00315714 /* GraphTabViewModel.swift */,
 				41923E3D2916BC6F00D1A8C5 /* UsageGraphView.swift */,
+				4140ECD9292D58D300992DD8 /* GraphVariable.swift */,
 			);
 			path = Graphs;
 			sourceTree = "<group>";
@@ -555,6 +558,7 @@
 				4141B20228D871B900B60157 /* ContentView.swift in Sources */,
 				41E4B31328DB77A3003F7F47 /* HomePowerView.swift in Sources */,
 				41A25D3D28CA5CDF00315714 /* GraphTabView.swift in Sources */,
+				4140ECDA292D58D300992DD8 /* GraphVariable.swift in Sources */,
 				4140146928C7374400EA5BA1 /* HistoricalViewModel.swift in Sources */,
 				4140145E28C70D1400EA5BA1 /* Config.swift in Sources */,
 				41E4B31028DB7666003F7F47 /* BatteryPowerView.swift in Sources */,

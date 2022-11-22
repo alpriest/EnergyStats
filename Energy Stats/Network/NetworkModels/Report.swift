@@ -13,12 +13,10 @@ struct ReportRequest: Encodable {
     let variables: [String]
     let queryDate: QueryDate
 
-    internal init(deviceID: String, variables: [ReportVariable]) {
+    internal init(deviceID: String, variables: [ReportVariable], queryDate: QueryDate) {
         self.deviceID = deviceID
         self.variables = variables.map { $0.networkTitle }
-
-        let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: Date())
-        self.queryDate = QueryDate(year: dateComponents.year!, month: dateComponents.month!, day: dateComponents.day!)
+        self.queryDate = queryDate
     }
 }
 
@@ -26,6 +24,11 @@ struct QueryDate: Encodable {
     let year: Int
     let month: Int
     let day: Int
+
+    static func current() -> QueryDate {
+        let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: Date())
+        return QueryDate(year: dateComponents.year!, month: dateComponents.month!, day: dateComponents.day!)
+    }
 }
 
 struct ReportResponse: Decodable {

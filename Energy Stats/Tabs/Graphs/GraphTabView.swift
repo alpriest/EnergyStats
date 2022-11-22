@@ -65,7 +65,7 @@ struct GraphTabView: View {
 
                                 Spacer()
 
-                                OptionalView(viewModel.total(of: variable.type)) {
+                                OptionalView(viewModel.total(of: variable.type.reportVariable)) {
                                     Text($0.kW())
                                 }
                             }

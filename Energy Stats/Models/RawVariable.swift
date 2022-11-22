@@ -22,9 +22,9 @@ enum RawVariable: String, RawRepresentable {
         case .feedinPower:
             return .feedIn
         case .batChargePower:
-            return .chargeEnergyTotal
+            return .chargeEnergyToTal
         case .batDischargePower:
-            return .dischargeEnergyTotal
+            return .dischargeEnergyToTal
         case .gridConsumptionPower:
             return .gridConsumption
         case .loadsPower:

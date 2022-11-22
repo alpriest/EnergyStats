@@ -34,12 +34,12 @@ class NetworkFacade: Networking {
         try await network.verifyCredentials(username: username, hashedPassword: hashedPassword)
     }
 
-    func fetchReport(variables: [ReportVariable]) async throws -> [ReportResponse] {
+    func fetchReport(variables: [ReportVariable], queryDate: QueryDate) async throws -> [ReportResponse] {
         if config.isDemoUser {
-            return try await fakeNetwork.fetchReport(variables: variables)
+            return try await fakeNetwork.fetchReport(variables: variables, queryDate: queryDate)
         }
 
-        return try await network.fetchReport(variables: variables)
+        return try await network.fetchReport(variables: variables, queryDate: queryDate)
     }
 
     func fetchBattery() async throws -> BatteryResponse {

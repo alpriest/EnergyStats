@@ -32,7 +32,7 @@ class DemoNetworking: Networking {
         ])
     }
 
-    func fetchReport(variables: [ReportVariable]) async throws -> [ReportResponse] {
+    func fetchReport(variables: [ReportVariable], queryDate: QueryDate) async throws -> [ReportResponse] {
         if throwOnCall {
             throw NetworkError.unknown
         }
