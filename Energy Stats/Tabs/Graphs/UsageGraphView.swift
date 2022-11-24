@@ -54,11 +54,11 @@ struct UsageGraphView: View {
                             let xLocation = currentState.location.x - geometryProxy[chartProxy.plotAreaFrame].origin.x
 
                             if let plotElement = chartProxy.value(atX: xLocation, as: Date.self) {
-                                if let day = viewModel.data.first(where: {
+                                if let graphValue = viewModel.data.first(where: {
                                     $0.date > plotElement
-                                }), selectedDate != plotElement {
-                                    selectedDate = plotElement
-                                    valuesAtTime = viewModel.data(at: day.date)
+                                }), selectedDate != graphValue.date {
+                                    selectedDate = graphValue.date
+                                    valuesAtTime = viewModel.data(at: graphValue.date)
                                 }
                             }
                         }
@@ -68,11 +68,11 @@ struct UsageGraphView: View {
                             let xLocation = value.location.x - geometryProxy[chartProxy.plotAreaFrame].origin.x
 
                             if let plotElement = chartProxy.value(atX: xLocation, as: Date.self) {
-                                if let day = viewModel.data.first(where: {
+                                if let graphValue = viewModel.data.first(where: {
                                     $0.date > plotElement
                                 }) {
-                                    selectedDate = plotElement
-                                    valuesAtTime = viewModel.data(at: day.date)
+                                    selectedDate = graphValue.date
+                                    valuesAtTime = viewModel.data(at: graphValue.date)
                                 }
                             }
                         }

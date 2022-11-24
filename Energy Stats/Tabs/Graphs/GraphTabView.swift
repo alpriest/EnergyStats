@@ -39,6 +39,7 @@ struct GraphTabView: View {
                         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
                             Text(graphValue.variable.title)
                             Text(graphValue.value.kW())
+                                .monospacedDigit()
                         }
                     }
                 }

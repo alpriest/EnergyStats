@@ -13,6 +13,7 @@ struct ValuesAtTime {
 }
 
 class GraphTabViewModel: ObservableObject {
+    private let haptic = UIImpactFeedbackGenerator()
     private var networking: Networking
     private var rawData: [GraphValue] = [] {
         didSet {
@@ -42,6 +43,7 @@ class GraphTabViewModel: ObservableObject {
     init(_ networking: Networking, _ dateProvider: @escaping () -> Date = { Date() }) {
         self.networking = networking
         self.dateProvider = dateProvider
+        haptic.prepare()
     }
 
     func start() async {
@@ -91,8 +93,13 @@ class GraphTabViewModel: ObservableObject {
                 lhs.date < rhs.date
             })
 
+        max = refreshedData.max(by: { lhs, rhs in
+            lhs.value < rhs.value
+        })
         data = refreshedData
     }
+
+    var max: GraphValue?
 
     func total(of type: ReportVariable?) -> Double? {
         guard let type = type else { return nil }
@@ -103,7 +110,13 @@ class GraphTabViewModel: ObservableObject {
 
     func data(at date: Date) -> ValuesAtTime {
         let visibleVariableTypes = graphVariables.filter { $0.enabled }.map { $0.type }
-        return ValuesAtTime(values: rawData.filter { $0.date == date && visibleVariableTypes.contains($0.variable) })
+        let result = ValuesAtTime(values: rawData.filter { $0.date == date && visibleVariableTypes.contains($0.variable) })
+
+        if let maxDate = max?.date, date == maxDate {
+            haptic.impactOccurred()
+        }
+
+        return result
     }
 
     func toggle(visibilityOf variable: GraphVariable) {
