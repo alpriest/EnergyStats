@@ -18,30 +18,31 @@ struct PowerFlowTabView: View {
                     HomePowerFlowView(viewModel: summary)
                 }
                 .padding()
-            case let .failed(reason):
-                Text(reason)
-                    .multilineTextAlignment(.center)
 
-                Button("Retry") {
-                    Task { await viewModel.timerFired() }
-                }
-            case .unloaded:
-                Text("Loading...")
-            }
-
-            Spacer()
-
-            HStack {
                 Spacer()
+
                 Text(viewModel.updateState)
                     .monospacedDigit()
+                    .font(.caption)
+                    .foregroundColor(.gray)
+            case let .failed(reason):
+                Spacer()
+                ErrorAlertView(retry: {
+                    Task { await viewModel.timerFired() }
+                }, details: reason)
+                Spacer()
+            case .unloaded:
+                Spacer()
+                HStack(spacing: 6) {
+                    ProgressView()
+                    Text("Loading...")
+                }
                 Spacer()
             }
-            .font(.caption)
-            .foregroundColor(.gray)
         }
+        .frame(maxWidth: .infinity)
         .padding()
-        .background(backgroundGradient)
+        .background(backgroundGradient.edgesIgnoringSafeArea(.all))
         .task {
             await viewModel.timerFired()
         }
@@ -53,11 +54,11 @@ struct PowerFlowTabView: View {
     private var backgroundGradient: some View {
         switch viewModel.state {
         case .loaded:
-            return LinearGradient(colors: [Color("Sunny"), Color.clear], startPoint: UnitPoint(x: -0.6, y: 0.0), endPoint: UnitPoint(x: 0, y: 0.5)).edgesIgnoringSafeArea(.all)
+            return LinearGradient(colors: [Color("Sunny"), Color.clear], startPoint: UnitPoint(x: -0.6, y: 0.0), endPoint: UnitPoint(x: 0, y: 0.5))
         case .failed:
-            return LinearGradient(colors: [Color.red.opacity(0.7), Color.clear], startPoint: UnitPoint(x: -1.0, y: 0.0), endPoint: UnitPoint(x: 0, y: 0.7)).edgesIgnoringSafeArea(.all)
+            return LinearGradient(colors: [Color.red.opacity(0.7), Color.clear], startPoint: UnitPoint(x: -1.0, y: 0.0), endPoint: UnitPoint(x: 0, y: 0.7))
         case .unloaded:
-            return LinearGradient(colors: [Color.white.opacity(0.5), Color.clear], startPoint: UnitPoint(x: -1.0, y: 0.0), endPoint: UnitPoint(x: 0, y: 0.7)).edgesIgnoringSafeArea(.all)
+            return LinearGradient(colors: [Color.white.opacity(0.5), Color.clear], startPoint: UnitPoint(x: -1.0, y: 0.0), endPoint: UnitPoint(x: 0, y: 0.7))
         }
     }
 }

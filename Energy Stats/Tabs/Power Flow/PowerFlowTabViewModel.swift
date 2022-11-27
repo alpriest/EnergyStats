@@ -16,7 +16,7 @@ class PowerFlowTabViewModel: ObservableObject {
     @MainActor @Published private(set) var updateState: String = "Updating..."
     @MainActor @Published private(set) var state: State = .unloaded
     private(set) var isLoading = false
-    private let secondsBetweenRefresh = 30
+    private let secondsBetweenRefresh = 60
 
     enum State: Equatable {
         case unloaded
@@ -59,6 +59,10 @@ class PowerFlowTabViewModel: ObservableObject {
     @MainActor
     func loadData() async {
         do {
+            if case .failed = state {
+                state = .unloaded
+            }
+
             await MainActor.run { self.updateState = "Updating..." }
             await self.network.ensureHasToken()
             let raw = HistoricalViewModel(raws: try await self.network.fetchRaw(variables: [.feedinPower, .gridConsumptionPower, .generationPower, .loadsPower, .batChargePower, .batDischargePower]))
@@ -76,7 +80,7 @@ class PowerFlowTabViewModel: ObservableObject {
             self.state = .loaded(summary)
             self.updateState = " "
         } catch {
-            self.state = .failed(String(describing: error))
+            self.state = .failed(error.localizedDescription)
         }
     }
 
