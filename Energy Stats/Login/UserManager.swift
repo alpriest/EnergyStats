@@ -56,8 +56,9 @@ class UserManager: ObservableObject {
             guard let hashedPassword = password.md5() else { throw NSError(domain: "md5", code: 0) }
 
             try await networking.verifyCredentials(username: username, hashedPassword: hashedPassword)
-            try store.store(username: username, hashedPassword: hashedPassword)
+            try store.store(username: username, hashedPassword: hashedPassword, updateHasCredentials: false)
             try await configManager.findDevice()
+            store.updateHasCredentials()
         } catch let error as NetworkError {
             logout()
 
@@ -116,6 +117,7 @@ class ConfigManager {
 
     func logout() {
         config.deviceID = nil
+        config.deviceSN = nil
         config.hasPV = false
         config.hasBattery = false
         config.isDemoUser = false

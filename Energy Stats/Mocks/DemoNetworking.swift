@@ -22,6 +22,10 @@ class DemoNetworking: Networking {
         // Assume mock credentials are valid
     }
 
+    func fetchBattery() async throws -> BatteryResponse {
+        BatteryResponse(power: 0.27, soc: 20, residual: 2420)
+    }
+
     func fetchBatterySettings() async throws -> BatterySettingsResponse {
         BatterySettingsResponse(minSoc: 20)
     }
@@ -38,10 +42,6 @@ class DemoNetworking: Networking {
         }
 
         return [ReportResponse(variable: "feedin", data: [.init(index: 14, value: 1.5)])]
-    }
-
-    func fetchBattery() async throws -> BatteryResponse {
-        BatteryResponse(power: 0.27, soc: 20, residual: 2420)
     }
 
     func fetchRaw(variables: [RawVariable]) async throws -> [RawResponse] {

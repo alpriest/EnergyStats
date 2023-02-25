@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct InverterPath: Shape {
-    private let joinSize: Double = 3
-
     func path(in rect: CGRect) -> Path {
         Path { path in
             path.move(to: CGPoint(x: 0, y: rect.height / 2.0))
@@ -17,8 +15,6 @@ struct InverterPath: Shape {
             path.move(to: CGPoint(x: rect.width, y: rect.height / 2.0))
         }
     }
-
-    private var halfJoinSize: Double { joinSize / 2.0 }
 }
 
 struct InverterView: View {

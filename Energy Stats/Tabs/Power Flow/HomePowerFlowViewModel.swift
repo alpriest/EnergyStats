@@ -16,10 +16,6 @@ struct HomePowerFlowViewModel: Equatable {
     let batteryStateOfCharge: Double
     let hasBattery: Bool
 
-    var batteryExtra: String? {
-        return BatteryCapacityCalculator(capacitykW: configManager.batteryCapacity, minimumSOC: configManager.minSOC).batteryPercentageRemaining(batteryChargePowerkWH: battery, batteryStateOfCharge: batteryStateOfCharge)
-    }
-
     static func ==(lhs: HomePowerFlowViewModel, rhs: HomePowerFlowViewModel) -> Bool {
         lhs.solar == rhs.solar &&
         lhs.battery == rhs.battery &&

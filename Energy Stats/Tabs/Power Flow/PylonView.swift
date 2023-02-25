@@ -23,15 +23,19 @@ struct PylonShape: Shape {
             path.addLine(to: rightLegTop)
             path.addLine(to: rightLegBottom)
 
+            // highest bar
             path.move(to: CGPoint(x: hSize * 1, y: vSize * 2.5))
             path.addLine(to: CGPoint(x: hSize * 9, y: vSize * 2.5))
 
+            // middle bar bar
             path.move(to: CGPoint(x: 0, y: vSize * 5))
             path.addLine(to: CGPoint(x: rect.maxX, y: vSize * 5))
 
+            // cross
             path.move(to: leftLegBottom)
             path.addLine(to: CGPoint(x: hSize * 6.9, y: vSize * 5))
 
+            // cross
             path.move(to: rightLegBottom)
             path.addLine(to: CGPoint(x: hSize * 3.1, y: vSize * 5))
         }

@@ -191,7 +191,7 @@ private extension Network {
                 throw NetworkError.invalidToken
             } else if networkResponse.errno == 41807 {
                 throw NetworkError.badCredentials
-            } else if networkResponse.errno == 40401 {
+            } else if networkResponse.errno == 40401 {  
                 throw NetworkError.tryLater
             }
 

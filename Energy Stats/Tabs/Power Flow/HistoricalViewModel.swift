@@ -34,11 +34,6 @@ extension Array where Element == RawResponse {
 }
 
 extension Date {
-    func currentHour() -> Int? {
-        let components = Calendar.current.dateComponents([.hour], from: self)
-        return components.hour
-    }
-
     func small() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM d, HH:mm:ss"

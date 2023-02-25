@@ -20,6 +20,8 @@ struct EnergyAmountView: View {
                     Text(amount.w())
                 }
             }
+            .padding(1)
+            .background(Color(uiColor: UIColor.systemBackground))
         ).onTapGesture {
             asKW.toggle()
         }

@@ -30,13 +30,15 @@ class KeychainStore: ObservableObject {
         get(tag: "password")
     }
 
-    func store(username: String, hashedPassword: String) throws {
+    func store(username: String, hashedPassword: String, updateHasCredentials: Bool = true) throws {
         logout()
 
         try set(tag: "password", value: hashedPassword)
         try set(tag: "username", value: username)
 
-        updateHasCredentials()
+        if updateHasCredentials {
+            self.updateHasCredentials()
+        }
     }
 
     func store(token: String?) throws {
@@ -54,13 +56,13 @@ class KeychainStore: ObservableObject {
         SecItemDelete(makeQuery(tag: "password"))
         updateHasCredentials()
     }
-}
 
-private extension KeychainStore {
     func updateHasCredentials() {
         hasCredentials = getUsername() != nil && getHashedPassword() != nil
     }
+}
 
+private extension KeychainStore {
     func get(tag: String) -> String? {
         var result: AnyObject?
         let status = SecItemCopyMatching(makeQuery(tag: tag), &result)
