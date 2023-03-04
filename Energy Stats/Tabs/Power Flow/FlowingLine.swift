@@ -22,6 +22,7 @@ struct FlowingLine: View {
     private let lineWidth: CGFloat = 4
     let direction: Direction
     let animationDuration: Double
+    let color: Color
 
     enum Direction {
         case down
@@ -34,7 +35,7 @@ struct FlowingLine: View {
                 style: strokeStyle
             )
             .animation(.linear(duration: animationDuration).repeatForever(autoreverses: false), value: phase)
-            .foregroundColor(Color("lines"))
+            .foregroundColor(color)
             .onAppear {
                 switch direction {
                 case .down:
@@ -114,11 +115,7 @@ struct FlowingLine: View {
 struct DirectionalArrow_Previews: PreviewProvider {
     static var previews: some View {
         HStack {
-//            DirectionalArrow(direction: .up, animationDuration: 1.5)
-//                .frame(width: 100, height: 300)
-//                .background(Color.red)
-
-            FlowingLine(direction: .up, animationDuration: 1.5)
+            FlowingLine(direction: .up, animationDuration: 1.5, color: .red)
                 .frame(width: 100, height: 300)
                 .background(Color.red)
         }

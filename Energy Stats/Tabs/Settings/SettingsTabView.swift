@@ -7,14 +7,34 @@
 
 import SwiftUI
 
-struct SettingsTabView: View {
-    let userManager: UserManager
-    private let configManager: ConfigManager
-
-    init(userManager: UserManager, configManager: ConfigManager) {
-        self.userManager = userManager
-        self.configManager = configManager
+class SettingsTabViewModel: ObservableObject {
+    @Published var useColouredLines: Bool {
+        didSet {
+            config.useColouredLines = useColouredLines
+        }
     }
+
+    private var config: ConfigManaging
+    private let userManager: UserManager
+
+    init(userManager: UserManager, config: ConfigManaging) {
+        self.userManager = userManager
+        self.config = config
+        useColouredLines = config.useColouredLines
+    }
+
+    var minSOC: Double { config.minSOC }
+    var batteryCapacity: Int { config.batteryCapacity }
+    var username: String { userManager.getUsername() ?? "" }
+
+    @MainActor
+    func logout() {
+        userManager.logout()
+    }
+}
+
+struct SettingsTabView: View {
+    @ObservedObject var viewModel: SettingsTabViewModel
 
     var body: some View {
         Form {
@@ -22,13 +42,13 @@ struct SettingsTabView: View {
                 HStack {
                     Text("Min SOC")
                     Spacer()
-                    Text(configManager.minSOC, format: .percent)
+                    Text(viewModel.minSOC, format: .percent)
                 }
 
                 HStack {
                     Text("Capacity")
                     Spacer()
-                    Text(configManager.batteryCapacity, format: .number)
+                    Text(viewModel.batteryCapacity, format: .number)
                     Text("kW")
                 }
             }, header: {
@@ -38,10 +58,18 @@ struct SettingsTabView: View {
             })
 
             Section(content: {
+                HStack {
+                    Toggle(isOn: $viewModel.useColouredLines) {
+                        Text("Use coloured flow lines")
+                    }
+                }
+            })
+
+            Section(content: {
                 VStack {
-                    Text("You are logged in as \(userManager.getUsername() ?? "")")
+                    Text("You are logged in as \(viewModel.username)")
                     Button("logout") {
-                        userManager.logout()
+                        viewModel.logout()
                     }.buttonStyle(.bordered)
                 }.frame(maxWidth: .infinity)
             }, footer: {
@@ -62,6 +90,9 @@ struct SettingsTabView: View {
 
 struct SettingsTabView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsTabView(userManager: UserManager(networking: DemoNetworking(), store: KeychainStore(), configManager: MockConfigManager()), configManager: MockConfigManager())
+        SettingsTabView(viewModel: SettingsTabViewModel(
+            userManager: UserManager(networking: DemoNetworking(), store: KeychainStore(), configManager: MockConfigManager()),
+            config: MockConfigManager())
+        )
     }
 }

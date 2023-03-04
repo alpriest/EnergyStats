@@ -5,17 +5,19 @@
 //  Created by Alistair Priest on 08/09/2022.
 //
 
+import Combine
 import SwiftUI
 
 struct PowerFlowTabView: View {
     @ObservedObject var viewModel: PowerFlowTabViewModel
+    let appTheme: LatestAppTheme
 
     var body: some View {
         VStack {
             switch viewModel.state {
             case let .loaded(summary):
                 VStack {
-                    HomePowerFlowView(viewModel: summary)
+                    HomePowerFlowView(viewModel: summary, appTheme: appTheme)
                 }
                 .padding()
 
@@ -65,6 +67,7 @@ struct PowerFlowTabView: View {
 
 struct SummaryTabView_Previews: PreviewProvider {
     static var previews: some View {
-        PowerFlowTabView(viewModel: PowerFlowTabViewModel(DemoNetworking(), configManager: MockConfigManager()))
+        PowerFlowTabView(viewModel: PowerFlowTabViewModel(DemoNetworking(), configManager: MockConfigManager()),
+                         appTheme: CurrentValueSubject(AppTheme(useColouredLines: true, showBatteryTemperature: true)))
     }
 }

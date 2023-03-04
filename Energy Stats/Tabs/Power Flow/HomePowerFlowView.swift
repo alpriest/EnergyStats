@@ -5,6 +5,7 @@
 //  Created by Alistair Priest on 08/09/2022.
 //
 
+import Combine
 import SwiftUI
 
 struct BatterySizePreferenceKey: PreferenceKey {
@@ -20,13 +21,14 @@ struct HomePowerFlowView: View {
     @State private var lastUpdated = Date()
     let viewModel: HomePowerFlowViewModel
     private let powerViewWidth: CGFloat = 70
+    let appTheme: LatestAppTheme
 
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
             VStack {
                 Image(systemName: "sun.max.fill")
                     .font(.system(size: 48))
-                PowerFlowView(amount: viewModel.solar)
+                PowerFlowView(amount: viewModel.solar, appTheme: appTheme)
             }
             .frame(width: powerViewWidth)
 
@@ -36,18 +38,18 @@ struct HomePowerFlowView: View {
                 .padding(.vertical, 1)
 
             HStack {
-                BatteryPowerView(viewModel: BatteryPowerViewModel(configManager: viewModel.configManager, batteryStateOfCharge: viewModel.batteryStateOfCharge, battery: viewModel.battery), iconFooterSize: $iconFooterSize)
+                BatteryPowerView(viewModel: BatteryPowerViewModel(configManager: viewModel.configManager, batteryStateOfCharge: viewModel.batteryStateOfCharge, battery: viewModel.battery), iconFooterSize: $iconFooterSize, appTheme: appTheme)
                     .frame(width: powerViewWidth)
                     .opacity(viewModel.hasBattery ? 1.0 : 0.5)
 
                 Spacer()
 
-                HomePowerView(amount: viewModel.home, iconFooterSize: iconFooterSize)
+                HomePowerView(amount: viewModel.home, iconFooterSize: iconFooterSize, appTheme: appTheme)
                     .frame(width: powerViewWidth)
 
                 Spacer()
 
-                GridPowerView(amount: viewModel.grid, iconFooterSize: iconFooterSize)
+                GridPowerView(amount: viewModel.grid, iconFooterSize: iconFooterSize, appTheme: appTheme)
                     .frame(width: powerViewWidth)
             }
             .padding(.horizontal, 14)
@@ -57,7 +59,7 @@ struct HomePowerFlowView: View {
 
 struct PowerSummaryView_Previews: PreviewProvider {
     static var previews: some View {
-        HomePowerFlowView(viewModel: HomePowerFlowViewModel.any())
+        HomePowerFlowView(viewModel: HomePowerFlowViewModel.any(), appTheme: CurrentValueSubject(AppTheme(useColouredLines: true, showBatteryTemperature: true)))
     }
 }
 

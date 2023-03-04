@@ -41,11 +41,11 @@ class UserManager: ObservableObject {
 
     @MainActor
     func login(username: String, password: String) async {
-        if username == "demo" && password == "user" {
+        if username == "demo", password == "user" {
             configManager.isDemoUser = true
             configManager.hasBattery = true
             do { try store.store(username: "demo", hashedPassword: "user") } catch {
-                self.state = .error("Could not login as demo user")
+                state = .error("Could not login as demo user")
             }
             return
         }
@@ -84,15 +84,43 @@ class UserManager: ObservableObject {
     }
 }
 
-class ConfigManager {
+struct AppTheme {
+    var useColouredLines: Bool
+    var showBatteryTemperature: Bool
+}
+
+typealias LatestAppTheme = CurrentValueSubject<AppTheme, Never>
+
+protocol ConfigManaging {
+    func findDevice() async throws
+    func logout()
+    var minSOC: Double { get }
+    var batteryCapacity: Int { get }
+    var deviceID: String? { get }
+    var deviceSN: String? { get }
+    var hasBattery: Bool { get set }
+    var hasPV: Bool { get }
+    var isDemoUser: Bool { get set }
+    var useColouredLines: Bool { get set }
+    var appTheme: LatestAppTheme { get }
+}
+
+class ConfigManager: ConfigManaging {
     private let networking: Networking
     private var config: Config
+    var appTheme: CurrentValueSubject<AppTheme, Never>
 
     struct NoDeviceFoundError: Error {}
 
     init(networking: Networking, config: Config) {
         self.networking = networking
         self.config = config
+        appTheme = CurrentValueSubject(
+            AppTheme(
+                useColouredLines: config.useColouredLines,
+                showBatteryTemperature: false
+            )
+        )
     }
 
     func findDevice() async throws {
@@ -140,6 +168,27 @@ class ConfigManager {
 
     var isDemoUser: Bool {
         get { config.isDemoUser }
-        set { config.isDemoUser = newValue }
+        set {
+            config.isDemoUser = newValue
+            appTheme.send(
+                AppTheme(
+                    useColouredLines: config.useColouredLines,
+                    showBatteryTemperature: false
+                )
+            )
+        }
+    }
+
+    var useColouredLines: Bool {
+        get { config.useColouredLines }
+        set {
+            config.useColouredLines = newValue
+            appTheme.send(
+                AppTheme(
+                    useColouredLines: config.useColouredLines,
+                    showBatteryTemperature: false
+                )
+            )
+        }
     }
 }

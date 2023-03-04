@@ -24,7 +24,7 @@ struct TabbedView: View {
 
     var body: some View {
         TabView {
-            PowerFlowTabView(viewModel: summaryViewModel)
+            PowerFlowTabView(viewModel: summaryViewModel, appTheme: configManager.appTheme)
                 .tabItem {
                     VStack {
                         Image(systemName: "arrow.up.arrow.down")
@@ -40,7 +40,7 @@ struct TabbedView: View {
                     }
                 }
 
-            SettingsTabView(userManager: userManager, configManager: configManager)
+            SettingsTabView(viewModel: SettingsTabViewModel(userManager: userManager, config: configManager))
                 .tabItem {
                     VStack {
                         Image(systemName: "gearshape")

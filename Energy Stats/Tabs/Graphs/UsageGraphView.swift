@@ -86,7 +86,7 @@ struct UsageGraphView: View {
                    let location = elementLocation - geometryReader[chartProxy.plotAreaFrame].origin.x
                 {
                     Rectangle()
-                        .fill(Color("lines"))
+                        .fill(Color("lines_notflowing"))
                         .frame(width: 1, height: chartProxy.plotAreaSize.height)
                         .offset(x: location)
                 }

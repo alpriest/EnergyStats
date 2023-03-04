@@ -5,6 +5,7 @@
 //  Created by Alistair Priest on 21/09/2022.
 //
 
+import Combine
 import SwiftUI
 
 struct BatteryPowerViewModel {
@@ -33,10 +34,11 @@ struct BatteryPowerView: View {
     let viewModel: BatteryPowerViewModel
     @Binding var iconFooterSize: CGSize
     @State private var percentage = true
+    let appTheme: LatestAppTheme
 
     var body: some View {
         VStack {
-            PowerFlowView(amount: viewModel.battery)
+            PowerFlowView(amount: viewModel.battery, appTheme: appTheme)
             Image(systemName: "minus.plus.batteryblock.fill")
                 .font(.system(size: 48))
                 .background(Color(.systemBackground))
@@ -71,7 +73,8 @@ struct BatteryPowerView: View {
 
 struct BatteryPowerView_Previews: PreviewProvider {
     static var previews: some View {
-        BatteryPowerView(viewModel: BatteryPowerViewModel.any(), iconFooterSize: .constant(CGSize.zero))
+        BatteryPowerView(viewModel: BatteryPowerViewModel.any(), iconFooterSize: .constant(CGSize.zero),
+                         appTheme: CurrentValueSubject(AppTheme(useColouredLines: true, showBatteryTemperature: true)))
     }
 }
 

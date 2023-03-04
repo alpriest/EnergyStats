@@ -80,6 +80,7 @@ class MockConfig: Config {
     var hasBattery: Bool = true
     var hasPV: Bool = true
     var isDemoUser: Bool = false
+    var useColouredLines: Bool = true
 }
 
 class MockConfigManager: ConfigManager {

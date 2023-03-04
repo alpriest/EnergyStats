@@ -21,7 +21,7 @@ struct InverterView: View {
     var body: some View {
         InverterPath()
             .stroke(lineWidth: 4)
-            .foregroundColor(Color("lines"))
+            .foregroundColor(Color("lines_notflowing"))
     }
 }
 
