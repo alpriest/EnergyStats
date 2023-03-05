@@ -11,25 +11,23 @@ struct HistoricalViewModel: Sendable {
     let currentSolarPower: Double
     let currentGridExport: Double
     let currentHomeConsumption: Double
+    let lastUpdate: Date
 
     init(raws: [RawResponse]) {
         currentSolarPower = max(0, raws.currentValue(for: RawVariable.batChargePower) - raws.currentValue(for: RawVariable.batDischargePower) - raws.currentValue(for: RawVariable.gridConsumptionPower) + raws.currentValue(for: RawVariable.loadsPower) + raws.currentValue(for: RawVariable.feedinPower))
         currentGridExport = raws.currentValue(for: RawVariable.feedinPower) - raws.currentValue(for: RawVariable.gridConsumptionPower)
         currentHomeConsumption = raws.currentValue(for: RawVariable.gridConsumptionPower) + raws.currentValue(for: RawVariable.generationPower)
+        lastUpdate = raws.current(for: .gridConsumptionPower)?.time ?? Date()
     }
 }
 
 extension Array where Element == RawResponse {
+    func current(for key: RawVariable) -> RawResponse.ReportData? {
+        self.first(where: { $0.variable == key.rawValue })?.data.last
+    }
+
     func currentValue(for key: RawVariable) -> Double {
-        let value: Double
-
-        if let variable = self.first(where: { $0.variable == key.rawValue }) {
-            value = variable.data.last?.value ?? 0.0
-        } else {
-            value = 0.0
-        }
-
-        return value
+        self.current(for: key)?.value ?? 0.0
     }
 }
 

@@ -26,6 +26,12 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
+    @Published var refreshFrequency: RefreshFrequency {
+        didSet {
+            config.refreshFrequency = refreshFrequency
+        }
+    }
+
     private var config: ConfigManaging
     private let userManager: UserManager
 
@@ -35,6 +41,7 @@ class SettingsTabViewModel: ObservableObject {
         showColouredLines = config.showColouredLines
         batteryCapacity = String(describing: config.batteryCapacity)
         showBatteryTemperature = config.showBatteryTemperature
+        refreshFrequency = config.refreshFrequency
     }
 
     var minSOC: Double { config.minSOC }

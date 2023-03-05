@@ -104,6 +104,7 @@ protocol ConfigManaging {
     var isDemoUser: Bool { get set }
     var showColouredLines: Bool { get set }
     var showBatteryTemperature: Bool { get set }
+    var refreshFrequency: RefreshFrequency { get set }
     var appTheme: LatestAppTheme { get }
 }
 
@@ -214,5 +215,10 @@ class ConfigManager: ConfigManaging {
                 )
             )
         }
+    }
+
+    var refreshFrequency: RefreshFrequency {
+        get { RefreshFrequency(rawValue: config.refreshFrequency) ?? .AUTO }
+        set { config.refreshFrequency = newValue.rawValue }
     }
 }

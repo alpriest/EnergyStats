@@ -17,6 +17,7 @@ protocol Config {
     var isDemoUser: Bool { get set }
     var showColouredLines: Bool { get set }
     var showBatteryTemperature: Bool { get set }
+    var refreshFrequency: Int { get set }
 }
 
 class UserDefaultsConfig: Config {
@@ -46,6 +47,23 @@ class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredBool(key: "showBatteryTemperature")
     var showBatteryTemperature: Bool
+
+    @UserDefaultsStoredInt(key: "refreshFrequency")
+    var refreshFrequency: Int
+}
+
+@propertyWrapper
+struct UserDefaultsStoredInt {
+    var key: String
+
+    var wrappedValue: Int {
+        get {
+            UserDefaults.standard.integer(forKey: key)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: key)
+        }
+    }
 }
 
 @propertyWrapper

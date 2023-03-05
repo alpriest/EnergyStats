@@ -16,7 +16,7 @@ class PowerFlowTabViewModel: ObservableObject {
     @MainActor @Published private(set) var updateState: String = "Updating..."
     @MainActor @Published private(set) var state: State = .unloaded
     private(set) var isLoading = false
-    private let secondsBetweenRefresh = 60
+    private var totalTicks = 60
 
     enum State: Equatable {
         case unloaded
@@ -33,7 +33,7 @@ class PowerFlowTabViewModel: ObservableObject {
     }
 
     func startTimer() async {
-        await self.timer.start(totalTicks: secondsBetweenRefresh) { ticksRemaining in
+        await self.timer.start(totalTicks: totalTicks) { ticksRemaining in
             Task { @MainActor in self.updateState = "Next update in \(ticksRemaining)s" }
         } onCompletion: {
             Task {
@@ -65,23 +65,36 @@ class PowerFlowTabViewModel: ObservableObject {
 
             await MainActor.run { self.updateState = "Updating..." }
             await self.network.ensureHasToken()
-            let raw = HistoricalViewModel(raws: try await self.network.fetchRaw(variables: [.feedinPower, .gridConsumptionPower, .generationPower, .loadsPower, .batChargePower, .batDischargePower]))
+            let raws = try await self.network.fetchRaw(variables: [.feedinPower, .gridConsumptionPower, .generationPower, .loadsPower, .batChargePower, .batDischargePower])
+            let historicalViewModel = HistoricalViewModel(raws: raws)
             let battery = configManager.hasBattery ? BatteryViewModel(from: try await self.network.fetchBattery()) : BatteryViewModel.noBattery
             let summary = HomePowerFlowViewModel(configManager: configManager,
-                                                 solar: raw.currentSolarPower,
+                                                 solar: historicalViewModel.currentSolarPower,
                                                  battery: battery.chargePower,
-                                                 home: raw.currentHomeConsumption,
-                                                 grid: raw.currentGridExport,
+                                                 home: historicalViewModel.currentHomeConsumption,
+                                                 grid: historicalViewModel.currentGridExport,
                                                  batteryStateOfCharge: battery.chargeLevel,
                                                  hasBattery: battery.hasBattery,
                                                  batteryTemperature: battery.temperature)
 
-            self.state = .loaded(.empty(configManager: configManager)) // refreshes the marching ants line
+            self.state = .loaded(.empty(configManager: configManager)) // refreshes the marching ants line speed
             try await Task.sleep(nanoseconds: 1000)
             self.state = .loaded(summary)
+            self.calculateTicks(historicalViewModel: historicalViewModel)
             self.updateState = " "
         } catch {
             self.state = .failed(error.localizedDescription)
+        }
+    }
+
+    func calculateTicks(historicalViewModel: HistoricalViewModel) {
+        switch configManager.refreshFrequency {
+        case .ONE_MINUTE:
+            self.totalTicks = 60
+        case .FIVE_MINUTES:
+            self.totalTicks = 300
+        case .AUTO:
+            self.totalTicks = Int(300 - (Date().timeIntervalSince(historicalViewModel.lastUpdate)) + 10)
         }
     }
 
