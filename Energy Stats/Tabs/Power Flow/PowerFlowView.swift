@@ -12,10 +12,12 @@ struct PowerFlowView: View {
     private let amount: Double
     private let animationDuration: Double
     private let appTheme: LatestAppTheme
+    private let useColouredLines: Bool
 
-    init(amount: Double, appTheme: LatestAppTheme) {
+    init(amount: Double, appTheme: LatestAppTheme, useColouredLines: Bool) {
         self.amount = amount
         self.appTheme = appTheme
+        self.useColouredLines = useColouredLines
 
         animationDuration = max(0.4, 2.7 - abs(amount))
     }
@@ -42,7 +44,7 @@ struct PowerFlowView: View {
     }
 
     var lineColor: Color {
-        if isFlowing && appTheme.value.useColouredLines {
+        if isFlowing && appTheme.value.useColouredLines && useColouredLines {
             if amount > 0 {
                 return Color("lines_positive")
             } else {
@@ -73,7 +75,7 @@ struct PowerFlowView_Previews: PreviewProvider {
                 Color.clear.overlay(
                     Group {
                         if visible {
-                            PowerFlowView(amount: amount, appTheme: CurrentValueSubject(AppTheme(useColouredLines: true, showBatteryTemperature: true)))
+                            PowerFlowView(amount: amount, appTheme: CurrentValueSubject(AppTheme(useColouredLines: true, showBatteryTemperature: true)), useColouredLines: true)
                         }
                     }
                 ).frame(height: 100)

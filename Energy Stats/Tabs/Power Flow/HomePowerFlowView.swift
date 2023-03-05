@@ -28,7 +28,7 @@ struct HomePowerFlowView: View {
             VStack {
                 Image(systemName: "sun.max.fill")
                     .font(.system(size: 48))
-                PowerFlowView(amount: viewModel.solar, appTheme: appTheme)
+                PowerFlowView(amount: viewModel.solar, appTheme: appTheme, useColouredLines: false)
             }
             .frame(width: powerViewWidth)
 

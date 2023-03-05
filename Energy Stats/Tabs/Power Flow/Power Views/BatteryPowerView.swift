@@ -17,7 +17,7 @@ struct BatteryPowerViewModel {
         self.batteryStateOfCharge = batteryStateOfCharge
         self.battery = battery
 
-        calculator = BatteryCapacityCalculator(capacitykW: configManager.batteryCapacity,
+        calculator = BatteryCapacityCalculator(capacitykW: configManager.batteryCapacityKW,
                                                minimumSOC: configManager.minSOC)
     }
 
@@ -38,7 +38,7 @@ struct BatteryPowerView: View {
 
     var body: some View {
         VStack {
-            PowerFlowView(amount: viewModel.battery, appTheme: appTheme)
+            PowerFlowView(amount: viewModel.battery, appTheme: appTheme, useColouredLines: true)
             Image(systemName: "minus.plus.batteryblock.fill")
                 .font(.system(size: 48))
                 .background(Color(.systemBackground))

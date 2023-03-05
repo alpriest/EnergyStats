@@ -15,7 +15,7 @@ struct HomePowerView: View {
 
     var body: some View {
         VStack {
-            PowerFlowView(amount: amount, appTheme: appTheme)
+            PowerFlowView(amount: amount, appTheme: appTheme, useColouredLines: false)
             Image(systemName: "house.fill")
                 .font(.system(size: 48))
                 .background(Color(.systemBackground))

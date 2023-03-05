@@ -95,7 +95,8 @@ protocol ConfigManaging {
     func findDevice() async throws
     func logout()
     var minSOC: Double { get }
-    var batteryCapacity: Int { get }
+    var batteryCapacity: String { get set }
+    var batteryCapacityKW: Int { get }
     var deviceID: String? { get }
     var deviceSN: String? { get }
     var hasBattery: Bool { get set }
@@ -153,7 +154,16 @@ class ConfigManager: ConfigManaging {
 
     var minSOC: Double { Double(config.minSOC ?? "0.2") ?? 0.0 }
 
-    var batteryCapacity: Int { Int(config.batteryCapacity ?? "2600") ?? 2600 }
+    var batteryCapacity: String {
+        get { config.batteryCapacity ?? "2600" }
+        set {
+            config.batteryCapacity = newValue
+        }
+    }
+
+    var batteryCapacityKW: Int {
+        Int(batteryCapacity) ?? 0
+    }
 
     var deviceID: String? { config.deviceID }
 
