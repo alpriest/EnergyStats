@@ -15,19 +15,21 @@ struct HomePowerFlowViewModel: Equatable {
     let grid: Double
     let batteryStateOfCharge: Double
     let hasBattery: Bool
+    let batteryTemperature: Double
 
     static func ==(lhs: HomePowerFlowViewModel, rhs: HomePowerFlowViewModel) -> Bool {
         lhs.solar == rhs.solar &&
-        lhs.battery == rhs.battery &&
-        lhs.home == rhs.home &&
-        lhs.grid == rhs.grid &&
-        lhs.batteryStateOfCharge == rhs.batteryStateOfCharge &&
-        lhs.hasBattery == rhs.hasBattery
+            lhs.battery == rhs.battery &&
+            lhs.home == rhs.home &&
+            lhs.grid == rhs.grid &&
+            lhs.batteryStateOfCharge == rhs.batteryStateOfCharge &&
+            lhs.hasBattery == rhs.hasBattery &&
+            lhs.batteryTemperature == rhs.batteryTemperature
     }
 }
 
 extension HomePowerFlowViewModel {
     static func empty(configManager: ConfigManager) -> Self {
-        .init(configManager: configManager, solar: 0, battery: 0, home: 0, grid: 0, batteryStateOfCharge: 0, hasBattery: false)
+        .init(configManager: configManager, solar: 0, battery: 0, home: 0, grid: 0, batteryStateOfCharge: 0, hasBattery: false, batteryTemperature: 15.6)
     }
 }

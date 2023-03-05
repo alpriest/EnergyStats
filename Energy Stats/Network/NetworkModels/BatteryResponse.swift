@@ -11,6 +11,7 @@ struct BatteryResponse: Decodable {
     let power: Double
     let soc: Int
     let residual: Double
+    let temperature: Double
 }
 
 struct BatterySettingsResponse: Decodable {

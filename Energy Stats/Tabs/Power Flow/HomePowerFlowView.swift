@@ -28,7 +28,7 @@ struct HomePowerFlowView: View {
             VStack {
                 Image(systemName: "sun.max.fill")
                     .font(.system(size: 48))
-                PowerFlowView(amount: viewModel.solar, appTheme: appTheme, useColouredLines: false)
+                PowerFlowView(amount: viewModel.solar, appTheme: appTheme, showColouredLines: false)
             }
             .frame(width: powerViewWidth)
 
@@ -38,7 +38,7 @@ struct HomePowerFlowView: View {
                 .padding(.vertical, 1)
 
             HStack {
-                BatteryPowerView(viewModel: BatteryPowerViewModel(configManager: viewModel.configManager, batteryStateOfCharge: viewModel.batteryStateOfCharge, battery: viewModel.battery), iconFooterSize: $iconFooterSize, appTheme: appTheme)
+                BatteryPowerView(viewModel: BatteryPowerViewModel(configManager: viewModel.configManager, batteryStateOfCharge: viewModel.batteryStateOfCharge, battery: viewModel.battery, temperature: viewModel.batteryTemperature), iconFooterSize: $iconFooterSize, appTheme: appTheme)
                     .frame(width: powerViewWidth)
                     .opacity(viewModel.hasBattery ? 1.0 : 0.5)
 
@@ -59,12 +59,12 @@ struct HomePowerFlowView: View {
 
 struct PowerSummaryView_Previews: PreviewProvider {
     static var previews: some View {
-        HomePowerFlowView(viewModel: HomePowerFlowViewModel.any(), appTheme: CurrentValueSubject(AppTheme(useColouredLines: true, showBatteryTemperature: true)))
+        HomePowerFlowView(viewModel: HomePowerFlowViewModel.any(), appTheme: CurrentValueSubject(AppTheme(showColouredLines: true, showBatteryTemperature: true)))
     }
 }
 
 extension HomePowerFlowViewModel {
     static func any() -> HomePowerFlowViewModel {
-        .init(configManager: MockConfigManager(), solar: 2.5, battery: -0.01, home: 1.5, grid: 0.71, batteryStateOfCharge: 0.99, hasBattery: true)
+        .init(configManager: MockConfigManager(), solar: 2.5, battery: -0.01, home: 1.5, grid: 0.71, batteryStateOfCharge: 0.99, hasBattery: true, batteryTemperature: 15.6)
     }
 }

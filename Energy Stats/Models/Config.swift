@@ -15,7 +15,8 @@ protocol Config {
     var hasBattery: Bool { get set }
     var hasPV: Bool { get set }
     var isDemoUser: Bool { get set }
-    var useColouredLines: Bool { get set }
+    var showColouredLines: Bool { get set }
+    var showBatteryTemperature: Bool { get set }
 }
 
 class UserDefaultsConfig: Config {
@@ -40,8 +41,11 @@ class UserDefaultsConfig: Config {
     @UserDefaultsStoredBool(key: "isDemoUser")
     var isDemoUser: Bool
 
-    @UserDefaultsStoredBool(key: "useColouredLines")
-    var useColouredLines: Bool
+    @UserDefaultsStoredBool(key: "showColouredLines")
+    var showColouredLines: Bool
+
+    @UserDefaultsStoredBool(key: "showBatteryTemperature")
+    var showBatteryTemperature: Bool
 }
 
 @propertyWrapper

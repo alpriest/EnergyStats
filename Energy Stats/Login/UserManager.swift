@@ -85,7 +85,7 @@ class UserManager: ObservableObject {
 }
 
 struct AppTheme {
-    var useColouredLines: Bool
+    var showColouredLines: Bool
     var showBatteryTemperature: Bool
 }
 
@@ -102,7 +102,8 @@ protocol ConfigManaging {
     var hasBattery: Bool { get set }
     var hasPV: Bool { get }
     var isDemoUser: Bool { get set }
-    var useColouredLines: Bool { get set }
+    var showColouredLines: Bool { get set }
+    var showBatteryTemperature: Bool { get set }
     var appTheme: LatestAppTheme { get }
 }
 
@@ -118,8 +119,8 @@ class ConfigManager: ConfigManaging {
         self.config = config
         appTheme = CurrentValueSubject(
             AppTheme(
-                useColouredLines: config.useColouredLines,
-                showBatteryTemperature: false
+                showColouredLines: config.showColouredLines,
+                showBatteryTemperature: config.showBatteryTemperature
             )
         )
     }
@@ -182,21 +183,34 @@ class ConfigManager: ConfigManaging {
             config.isDemoUser = newValue
             appTheme.send(
                 AppTheme(
-                    useColouredLines: config.useColouredLines,
-                    showBatteryTemperature: false
+                    showColouredLines: config.showColouredLines,
+                    showBatteryTemperature: config.showBatteryTemperature
                 )
             )
         }
     }
 
-    var useColouredLines: Bool {
-        get { config.useColouredLines }
+    var showColouredLines: Bool {
+        get { config.showColouredLines }
         set {
-            config.useColouredLines = newValue
+            config.showColouredLines = newValue
             appTheme.send(
                 AppTheme(
-                    useColouredLines: config.useColouredLines,
-                    showBatteryTemperature: false
+                    showColouredLines: config.showColouredLines,
+                    showBatteryTemperature: config.showBatteryTemperature
+                )
+            )
+        }
+    }
+
+    var showBatteryTemperature: Bool {
+        get { config.showBatteryTemperature }
+        set {
+            config.showBatteryTemperature = newValue
+            appTheme.send(
+                AppTheme(
+                    showColouredLines: config.showColouredLines,
+                    showBatteryTemperature: config.showBatteryTemperature
                 )
             )
         }

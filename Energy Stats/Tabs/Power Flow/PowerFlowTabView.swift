@@ -68,6 +68,6 @@ struct PowerFlowTabView: View {
 struct SummaryTabView_Previews: PreviewProvider {
     static var previews: some View {
         PowerFlowTabView(viewModel: PowerFlowTabViewModel(DemoNetworking(), configManager: MockConfigManager()),
-                         appTheme: CurrentValueSubject(AppTheme(useColouredLines: true, showBatteryTemperature: true)))
+                         appTheme: CurrentValueSubject(AppTheme(showColouredLines: true, showBatteryTemperature: true)))
     }
 }

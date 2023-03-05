@@ -23,7 +23,7 @@ class DemoNetworking: Networking {
     }
 
     func fetchBattery() async throws -> BatteryResponse {
-        BatteryResponse(power: 0.27, soc: 20, residual: 2420)
+        BatteryResponse(power: 0.27, soc: 20, residual: 2420, temperature: 15.6)
     }
 
     func fetchBatterySettings() async throws -> BatterySettingsResponse {
@@ -80,7 +80,8 @@ class MockConfig: Config {
     var hasBattery: Bool = true
     var hasPV: Bool = true
     var isDemoUser: Bool = false
-    var useColouredLines: Bool = true
+    var showColouredLines: Bool = true
+    var showBatteryTemperature: Bool = true
 }
 
 class MockConfigManager: ConfigManager {

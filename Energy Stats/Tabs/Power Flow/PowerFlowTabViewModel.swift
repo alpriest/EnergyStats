@@ -73,7 +73,8 @@ class PowerFlowTabViewModel: ObservableObject {
                                                  home: raw.currentHomeConsumption,
                                                  grid: raw.currentGridExport,
                                                  batteryStateOfCharge: battery.chargeLevel,
-                                                 hasBattery: battery.hasBattery)
+                                                 hasBattery: battery.hasBattery,
+                                                 batteryTemperature: battery.temperature)
 
             self.state = .loaded(.empty(configManager: configManager)) // refreshes the marching ants line
             try await Task.sleep(nanoseconds: 1000)

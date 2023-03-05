@@ -9,13 +9,15 @@ import Combine
 import SwiftUI
 
 struct BatteryPowerViewModel {
-    let batteryStateOfCharge: Double
-    let battery: Double
+    private(set) var batteryStateOfCharge: Double
+    private(set) var battery: Double
     private let calculator: BatteryCapacityCalculator
+    private(set) var temperature: Double
 
-    init(configManager: ConfigManager, batteryStateOfCharge: Double, battery: Double) {
+    init(configManager: ConfigManager, batteryStateOfCharge: Double, battery: Double, temperature: Double) {
         self.batteryStateOfCharge = batteryStateOfCharge
         self.battery = battery
+        self.temperature = temperature
 
         calculator = BatteryCapacityCalculator(capacitykW: configManager.batteryCapacityKW,
                                                minimumSOC: configManager.minSOC)
@@ -38,7 +40,7 @@ struct BatteryPowerView: View {
 
     var body: some View {
         VStack {
-            PowerFlowView(amount: viewModel.battery, appTheme: appTheme, useColouredLines: true)
+            PowerFlowView(amount: viewModel.battery, appTheme: appTheme, showColouredLines: true)
             Image(systemName: "minus.plus.batteryblock.fill")
                 .font(.system(size: 48))
                 .background(Color(.systemBackground))
@@ -52,6 +54,10 @@ struct BatteryPowerView: View {
                     }
                 }.onTapGesture {
                     percentage.toggle()
+                }
+
+                if appTheme.value.showBatteryTemperature {
+                    Text(viewModel.temperature, format: .number) + Text("°C")
                 }
 
                 OptionalView(viewModel.batteryExtra) {
@@ -74,12 +80,12 @@ struct BatteryPowerView: View {
 struct BatteryPowerView_Previews: PreviewProvider {
     static var previews: some View {
         BatteryPowerView(viewModel: BatteryPowerViewModel.any(), iconFooterSize: .constant(CGSize.zero),
-                         appTheme: CurrentValueSubject(AppTheme(useColouredLines: true, showBatteryTemperature: true)))
+                         appTheme: CurrentValueSubject(AppTheme(showColouredLines: true, showBatteryTemperature: true)))
     }
 }
 
 extension BatteryPowerViewModel {
     static func any() -> BatteryPowerViewModel {
-        .init(configManager: MockConfigManager(), batteryStateOfCharge: 0.99, battery: -0.01)
+        .init(configManager: MockConfigManager(), batteryStateOfCharge: 0.99, battery: -0.01, temperature: 15.6)
     }
 }

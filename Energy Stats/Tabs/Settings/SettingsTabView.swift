@@ -62,11 +62,11 @@ struct SettingsTabView: View {
             })
 
             Section(content: {
-                Toggle(isOn: $viewModel.useColouredLines) {
+                Toggle(isOn: $viewModel.showColouredLines) {
                     Text("Show coloured flow lines")
                 }
 
-                Toggle(isOn: $viewModel.useColouredLines) {
+                Toggle(isOn: $viewModel.showBatteryTemperature) {
                     Text("Show battery temperature")
                 }
             })

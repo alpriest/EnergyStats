@@ -8,9 +8,9 @@
 import SwiftUI
 
 class SettingsTabViewModel: ObservableObject {
-    @Published var useColouredLines: Bool {
+    @Published var showColouredLines: Bool {
         didSet {
-            config.useColouredLines = useColouredLines
+            config.showColouredLines = showColouredLines
         }
     }
 
@@ -20,14 +20,21 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
+    @Published var showBatteryTemperature: Bool {
+        didSet {
+            config.showBatteryTemperature = showBatteryTemperature
+        }
+    }
+
     private var config: ConfigManaging
     private let userManager: UserManager
 
     init(userManager: UserManager, config: ConfigManaging) {
         self.userManager = userManager
         self.config = config
-        useColouredLines = config.useColouredLines
+        showColouredLines = config.showColouredLines
         batteryCapacity = String(describing: config.batteryCapacity)
+        showBatteryTemperature = config.showBatteryTemperature
     }
 
     var minSOC: Double { config.minSOC }
