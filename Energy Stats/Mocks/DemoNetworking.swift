@@ -80,7 +80,7 @@ class MockConfig: Config {
     var deviceSN: String?
     var hasBattery: Bool = true
     var hasPV: Bool = true
-    var isDemoUser: Bool = false
+    var isDemoUser: Bool = true
     var showColouredLines: Bool = true
     var showBatteryTemperature: Bool = true
     var refreshFrequency: Int = 0
