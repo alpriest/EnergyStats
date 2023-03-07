@@ -8,12 +8,6 @@
 import Foundation
 
 protocol Config {
-    var minSOC: String? { get set }
-    var batteryCapacity: String? { get set }
-    var deviceID: String? { get set }
-    var deviceSN: String? { get set }
-    var hasBattery: Bool { get set }
-    var hasPV: Bool { get set }
     var isDemoUser: Bool { get set }
     var showColouredLines: Bool { get set }
     var showBatteryTemperature: Bool { get set }
@@ -24,24 +18,6 @@ protocol Config {
 }
 
 class UserDefaultsConfig: Config {
-    @UserDefaultsStoredString(key: "minSOC")
-    var minSOC: String?
-
-    @UserDefaultsStoredString(key: "batteryCapacity")
-    var batteryCapacity: String?
-
-    @UserDefaultsStoredString(key: "deviceID")
-    var deviceID: String?
-
-    @UserDefaultsStoredString(key: "deviceSN")
-    var deviceSN: String?
-
-    @UserDefaultsStoredBool(key: "hasBattery")
-    var hasBattery: Bool
-
-    @UserDefaultsStoredBool(key: "hasPV")
-    var hasPV: Bool
-
     @UserDefaultsStoredBool(key: "isDemoUser")
     var isDemoUser: Bool
 

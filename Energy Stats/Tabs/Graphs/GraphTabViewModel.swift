@@ -14,7 +14,7 @@ struct ValuesAtTime {
 
 class GraphTabViewModel: ObservableObject {
     private let haptic = UIImpactFeedbackGenerator()
-    private var networking: Networking
+    private let networking: Networking
     private var rawData: [GraphValue] = [] {
         didSet {
             data = rawData
@@ -39,20 +39,24 @@ class GraphTabViewModel: ObservableObject {
         refresh()
     }}
     @Published private(set) var errorMessage: String? = nil
+    private let configManager: ConfigManaging
 
-    init(_ networking: Networking, _ dateProvider: @escaping () -> Date = { Date() }) {
+    init(_ networking: Networking, configManager: ConfigManaging, _ dateProvider: @escaping () -> Date = { Date() }) {
         self.networking = networking
+        self.configManager = configManager
         self.dateProvider = dateProvider
         haptic.prepare()
     }
 
     func start() async {
+        guard let currentDevice = configManager.currentDevice else { return }
+
         do {
             let rawVariables = graphVariables.compactMap { $0.type }
             let reportVariables = rawVariables.compactMap { $0.reportVariable }
             let queryDate = QueryDate.current()
 
-            let raw = try await networking.fetchRaw(variables: rawVariables)
+            let raw = try await networking.fetchRaw(deviceID: currentDevice.deviceID, variables: rawVariables)
             let rawData: [GraphValue] = raw.flatMap { response -> [GraphValue] in
                 guard let rawVariable = RawVariable(rawValue: response.variable) else { return [] }
 
@@ -61,7 +65,7 @@ class GraphTabViewModel: ObservableObject {
                 }
             }
 
-            let reports = try await networking.fetchReport(variables: reportVariables, queryDate: queryDate)
+            let reports = try await networking.fetchReport(deviceID: currentDevice.deviceID, variables: reportVariables, queryDate: queryDate)
             rawVariables.forEach { rawVariable in
                 guard let reportVariable = rawVariable.reportVariable else { return }
                 guard let response = reports.first(where: { $0.variable == reportVariable.rawValue }) else { return }

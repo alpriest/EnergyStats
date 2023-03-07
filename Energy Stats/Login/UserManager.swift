@@ -43,7 +43,6 @@ class UserManager: ObservableObject {
     func login(username: String, password: String) async {
         if username == "demo", password == "user" {
             configManager.isDemoUser = true
-            configManager.hasBattery = true
             do { try store.store(username: "demo", hashedPassword: "user") } catch {
                 state = .error("Could not login as demo user")
             }
@@ -57,7 +56,7 @@ class UserManager: ObservableObject {
 
             try await networking.verifyCredentials(username: username, hashedPassword: hashedPassword)
             try store.store(username: username, hashedPassword: hashedPassword, updateHasCredentials: false)
-            try await configManager.findDevice()
+            try await configManager.findDevices()
             store.updateHasCredentials()
         } catch let error as NetworkError {
             logout()
@@ -94,15 +93,11 @@ struct AppTheme {
 typealias LatestAppTheme = CurrentValueSubject<AppTheme, Never>
 
 protocol ConfigManaging {
-    func findDevice() async throws
+    func findDevices() async throws
     func logout()
     var minSOC: Double { get }
     var batteryCapacity: String { get set }
     var batteryCapacityKW: Int { get }
-    var deviceID: String? { get }
-    var deviceSN: String? { get }
-    var hasBattery: Bool { get set }
-    var hasPV: Bool { get }
     var isDemoUser: Bool { get set }
     var showColouredLines: Bool { get set }
     var showBatteryTemperature: Bool { get set }
@@ -110,7 +105,8 @@ protocol ConfigManaging {
     var appTheme: LatestAppTheme { get }
     var decimalPlaces: Int { get set }
     var showSunnyBackground: Bool { get set }
-    var devices: DeviceList? { get set }
+    var devices: [Device]? { get set }
+    var currentDevice: Device? { get }
 }
 
 class ConfigManager: ConfigManaging {
@@ -133,57 +129,64 @@ class ConfigManager: ConfigManaging {
         )
     }
 
-    func findDevice() async throws {
+    func findDevices() async throws {
         let deviceList = try await networking.fetchDeviceList()
 
-        guard let device = deviceList.devices.first else {
+        guard deviceList.devices.count > 0 else {
             throw NoDeviceFoundError()
         }
 
-        config.deviceSN = device.deviceSN
-        config.deviceID = device.deviceID
-        config.hasBattery = device.hasBattery
-        config.hasPV = device.hasPV
+        devices = try await deviceList.devices.asyncMap { device in
+            let batteryCapacity: String?
+            let minSOC: String?
 
-        if device.hasBattery {
-            let battery = try await networking.fetchBattery()
-            let batterySettings = try await networking.fetchBatterySettings()
-            config.batteryCapacity = String(Int(battery.residual / (Double(battery.soc) / 100.0)))
-            config.minSOC = String(Double(batterySettings.minSoc) / 100.0)
+            if device.hasBattery {
+                let battery = try await networking.fetchBattery(deviceID: device.deviceID)
+                let batterySettings = try await networking.fetchBatterySettings(deviceSN: device.deviceSN)
+                batteryCapacity = String(Int(battery.residual / (Double(battery.soc) / 100.0)))
+                minSOC = String(Double(batterySettings.minSoc) / 100.0)
+            } else {
+                batteryCapacity = nil
+                minSOC = nil
+            }
+
+            return Device(
+                plantName: device.plantName,
+                deviceID: device.deviceID,
+                deviceSN: device.deviceSN,
+                hasPV: device.hasPV,
+                battery: Device.Battery(capacity: batteryCapacity, minSOC: minSOC)
+            )
         }
     }
 
     func logout() {
-        config.deviceID = nil
-        config.deviceSN = nil
-        config.hasPV = false
-        config.hasBattery = false
+        config.devices = nil
         config.isDemoUser = false
     }
 
-    var minSOC: Double { Double(config.minSOC ?? "0.2") ?? 0.0 }
+    var minSOC: Double { Double(currentDevice?.battery?.minSOC ?? "0.2") ?? 0.0 }
 
     var batteryCapacity: String {
-        get { config.batteryCapacity ?? "2600" }
+        get { currentDevice?.battery?.capacity ?? "2600" }
         set {
-            config.batteryCapacity = newValue
+            devices = devices?.map {
+                if $0.deviceID == currentDevice?.deviceID, let battery = $0.battery {
+                    return Device(plantName: $0.plantName, deviceID: $0.deviceID, deviceSN: $0.deviceSN, hasPV: $0.hasPV, battery: Device.Battery(capacity: newValue, minSOC: battery.minSOC))
+                } else {
+                    return $0
+                }
+            }
         }
     }
 
     var batteryCapacityKW: Int {
-        Int(batteryCapacity) ?? 0
+        Int(currentDevice?.battery?.capacity ?? "0") ?? 0
     }
 
-    var deviceID: String? { config.deviceID }
-
-    var deviceSN: String? { config.deviceSN }
-
-    var hasBattery: Bool {
-        get { config.hasBattery }
-        set { config.hasBattery = newValue }
+    var currentDevice: Device? {
+        devices?.first // TODO make this user selectable
     }
-
-    var hasPV: Bool { config.hasPV }
 
     var isDemoUser: Bool {
         get { config.isDemoUser }
@@ -265,11 +268,11 @@ class ConfigManager: ConfigManaging {
         }
     }
 
-    var devices: DeviceList? {
+    var devices: [Device]? {
         get {
             guard let deviceListData = config.devices else { return nil }
             do {
-                return try JSONDecoder().decode(DeviceList.self, from: deviceListData)
+                return try JSONDecoder().decode([Device].self, from: deviceListData)
             } catch {
                 return nil
             }

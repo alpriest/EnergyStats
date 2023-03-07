@@ -97,7 +97,7 @@ struct UsageGraphView: View {
 
 struct UsageGraphView_Previews: PreviewProvider {
     static var previews: some View {
-        let model = GraphTabViewModel(DemoNetworking())
+        let model = GraphTabViewModel(DemoNetworking(), configManager: MockConfigManager())
         return UsageGraphView(
             viewModel: model,
             selectedDate: .constant(nil),

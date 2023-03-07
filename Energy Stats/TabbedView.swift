@@ -19,7 +19,7 @@ struct TabbedView: View {
         self.userManager = userManager
         self.configManager = configManager
         _summaryViewModel = .init(wrappedValue: PowerFlowTabViewModel(networking, configManager: configManager))
-        _graphViewModel = .init(wrappedValue: GraphTabViewModel(networking))
+        _graphViewModel = .init(wrappedValue: GraphTabViewModel(networking, configManager: configManager))
     }
 
     var body: some View {

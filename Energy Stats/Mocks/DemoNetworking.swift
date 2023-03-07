@@ -22,21 +22,22 @@ class DemoNetworking: Networking {
         // Assume mock credentials are valid
     }
 
-    func fetchBattery() async throws -> BatteryResponse {
+    func fetchBattery(deviceID: String) async throws -> BatteryResponse {
         BatteryResponse(power: 0.27, soc: 20, residual: 2420, temperature: 15.6)
     }
 
-    func fetchBatterySettings() async throws -> BatterySettingsResponse {
+    func fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse {
         BatterySettingsResponse(minSoc: 20)
     }
 
     func fetchDeviceList() async throws -> PagedDeviceListResponse {
         PagedDeviceListResponse(currentPage: 1, pageSize: 1, total: 1, devices: [
-            PagedDeviceListResponse.Device(deviceID: "abcdef", deviceSN: "123123", hasBattery: true, hasPV: true)
+            PagedDeviceListResponse.Device(plantName: "demo-device-1", deviceID: "abcdef1", deviceSN: "1234", hasBattery: true, hasPV: true),
+            PagedDeviceListResponse.Device(plantName: "demo-device-2", deviceID: "abcdef2", deviceSN: "5678", hasBattery: true, hasPV: true)
         ])
     }
 
-    func fetchReport(variables: [ReportVariable], queryDate: QueryDate) async throws -> [ReportResponse] {
+    func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate) async throws -> [ReportResponse] {
         if throwOnCall {
             throw NetworkError.unknown
         }
@@ -44,7 +45,7 @@ class DemoNetworking: Networking {
         return [ReportResponse(variable: "feedin", data: [.init(index: 14, value: 1.5)])]
     }
 
-    func fetchRaw(variables: [RawVariable]) async throws -> [RawResponse] {
+    func fetchRaw(deviceID: String, variables: [RawVariable]) async throws -> [RawResponse] {
         if throwOnCall {
             throw NetworkError.unknown
         }

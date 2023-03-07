@@ -30,6 +30,7 @@ struct PagedDeviceListResponse: Decodable {
     let devices: [Device]
 
     struct Device: Decodable {
+        let plantName: String
         let deviceID: String
         let deviceSN: String
         let hasBattery: Bool
@@ -42,8 +43,14 @@ struct DeviceList: Codable {
 }
 
 struct Device: Codable {
+    let plantName: String
     let deviceID: String
     let deviceSN: String
-    let hasBattery: Bool
     let hasPV: Bool
+    let battery: Battery?
+
+    struct Battery: Codable {
+        let capacity: String?
+        let minSOC: String?
+    }
 }

@@ -19,10 +19,10 @@ extension URL {
 protocol Networking {
     func ensureHasToken() async
     func verifyCredentials(username: String, hashedPassword: String) async throws
-    func fetchReport(variables: [ReportVariable], queryDate: QueryDate) async throws -> [ReportResponse]
-    func fetchBattery() async throws -> BatteryResponse
-    func fetchBatterySettings() async throws -> BatterySettingsResponse
-    func fetchRaw(variables: [RawVariable]) async throws -> [RawResponse]
+    func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate) async throws -> [ReportResponse]
+    func fetchBattery(deviceID: String) async throws -> BatteryResponse
+    func fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse
+    func fetchRaw(deviceID: String, variables: [RawVariable]) async throws -> [RawResponse]
     func fetchDeviceList() async throws -> PagedDeviceListResponse
 }
 
@@ -123,9 +123,7 @@ class Network: Networking {
         return response.token
     }
 
-    func fetchReport(variables: [ReportVariable], queryDate: QueryDate) async throws -> [ReportResponse] {
-        guard let deviceID = config.deviceID else { throw NetworkError.invalidConfiguration("deviceID missing") }
-
+    func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate) async throws -> [ReportResponse] {
         var request = URLRequest(url: URL.report)
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(ReportRequest(deviceID: deviceID, variables: variables, queryDate: queryDate))
@@ -133,29 +131,21 @@ class Network: Networking {
         return try await fetch(request)
     }
 
-    func fetchBattery() async throws -> BatteryResponse {
-        guard let deviceID = config.deviceID else { throw NetworkError.invalidConfiguration("deviceID missing") }
-        guard config.hasBattery else { throw NetworkError.invalidConfiguration("No battery") }
-
+    func fetchBattery(deviceID: String) async throws -> BatteryResponse {
         var request = URLRequest(url: URL.battery)
         request.url?.append(queryItems: [Foundation.URLQueryItem(name: "id", value: deviceID)])
 
         return try await fetch(request)
     }
 
-    func fetchBatterySettings() async throws -> BatterySettingsResponse {
-        guard let deviceSN = config.deviceSN else { throw NetworkError.invalidConfiguration("deviceSN missing") }
-        guard config.hasBattery else { throw NetworkError.invalidConfiguration("No battery") }
-
+    func fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse {
         var request = URLRequest(url: URL.soc)
         request.url?.append(queryItems: [Foundation.URLQueryItem(name: "sn", value: deviceSN)])
 
         return try await fetch(request)
     }
 
-    func fetchRaw(variables: [RawVariable]) async throws -> [RawResponse] {
-        guard let deviceID = config.deviceID else { throw NetworkError.invalidConfiguration("deviceID missing") }
-
+    func fetchRaw(deviceID: String, variables: [RawVariable]) async throws -> [RawResponse] {
         var request = URLRequest(url: URL.raw)
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(RawRequest(deviceID: deviceID, variables: variables))

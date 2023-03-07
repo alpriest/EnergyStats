@@ -92,6 +92,6 @@ struct GraphTabView: View {
 
 struct GraphTabView_Previews: PreviewProvider {
     static var previews: some View {
-        GraphTabView(viewModel: GraphTabViewModel(DemoNetworking()))
+        GraphTabView(viewModel: GraphTabViewModel(DemoNetworking(), configManager: MockConfigManager()))
     }
 }

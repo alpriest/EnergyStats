@@ -18,6 +18,7 @@
 		4107446928CA42D2006D5D7D /* PylonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446828CA42D2006D5D7D /* PylonView.swift */; };
 		4107446C28CA57A9006D5D7D /* PowerFlowTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446B28CA57A9006D5D7D /* PowerFlowTabView.swift */; };
 		4110065B28E890E40018C3DF /* GraphTabViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4110065A28E890E40018C3DF /* GraphTabViewModelTests.swift */; };
+		4111333629B7D61200972935 /* Sequence+aysnc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4111333529B7D61200972935 /* Sequence+aysnc.swift */; };
 		4127690228EC865000D5A094 /* EnergyAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127690128EC865000D5A094 /* EnergyAmountView.swift */; };
 		412790FD28E1FAF700D5F993 /* String+MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412790FC28E1FAF700D5F993 /* String+MD5.swift */; };
 		412790FF28E1FB9200D5F993 /* UserManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412790FE28E1FB9200D5F993 /* UserManagerTests.swift */; };
@@ -113,6 +114,7 @@
 		4107446828CA42D2006D5D7D /* PylonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PylonView.swift; sourceTree = "<group>"; };
 		4107446B28CA57A9006D5D7D /* PowerFlowTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerFlowTabView.swift; sourceTree = "<group>"; };
 		4110065A28E890E40018C3DF /* GraphTabViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTabViewModelTests.swift; sourceTree = "<group>"; };
+		4111333529B7D61200972935 /* Sequence+aysnc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+aysnc.swift"; sourceTree = "<group>"; };
 		4127690128EC865000D5A094 /* EnergyAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnergyAmountView.swift; sourceTree = "<group>"; };
 		412790FC28E1FAF700D5F993 /* String+MD5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+MD5.swift"; sourceTree = "<group>"; };
 		412790FE28E1FB9200D5F993 /* UserManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManagerTests.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				4128E4C028DA5F6600C1D698 /* Date.swift */,
 				412790FC28E1FAF700D5F993 /* String+MD5.swift */,
 				418EEEB42916843A006A8290 /* View+If.swift */,
+				4111333529B7D61200972935 /* Sequence+aysnc.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -651,6 +654,7 @@
 				41A25D3F28CA5CFB00315714 /* GraphTabViewModel.swift in Sources */,
 				4107446128C9EF6B006D5D7D /* HomePowerFlowView.swift in Sources */,
 				4107446928CA42D2006D5D7D /* PylonView.swift in Sources */,
+				4111333629B7D61200972935 /* Sequence+aysnc.swift in Sources */,
 				41777F1528F49C61009944FF /* NetworkFacade.swift in Sources */,
 				4106A93028D05EC90009DA28 /* Double.swift in Sources */,
 				41923E3E2916BC6F00D1A8C5 /* UsageGraphView.swift in Sources */,

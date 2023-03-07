@@ -34,36 +34,36 @@ class NetworkFacade: Networking {
         try await network.verifyCredentials(username: username, hashedPassword: hashedPassword)
     }
 
-    func fetchReport(variables: [ReportVariable], queryDate: QueryDate) async throws -> [ReportResponse] {
+    func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate) async throws -> [ReportResponse] {
         if config.isDemoUser {
-            return try await fakeNetwork.fetchReport(variables: variables, queryDate: queryDate)
+            return try await fakeNetwork.fetchReport(deviceID: deviceID, variables: variables, queryDate: queryDate)
         }
 
-        return try await network.fetchReport(variables: variables, queryDate: queryDate)
+        return try await network.fetchReport(deviceID: deviceID, variables: variables, queryDate: queryDate)
     }
 
-    func fetchBattery() async throws -> BatteryResponse {
+    func fetchBattery(deviceID: String) async throws -> BatteryResponse {
         if config.isDemoUser {
-            return try await fakeNetwork.fetchBattery()
+            return try await fakeNetwork.fetchBattery(deviceID: deviceID)
         }
 
-        return try await network.fetchBattery()
+        return try await network.fetchBattery(deviceID: deviceID)
     }
 
-    func fetchBatterySettings() async throws -> BatterySettingsResponse {
+    func fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse {
         if config.isDemoUser {
-            return try await fakeNetwork.fetchBatterySettings()
+            return try await fakeNetwork.fetchBatterySettings(deviceSN: deviceSN)
         }
 
-        return try await network.fetchBatterySettings()
+        return try await network.fetchBatterySettings(deviceSN: deviceSN)
     }
 
-    func fetchRaw(variables: [RawVariable]) async throws -> [RawResponse] {
+    func fetchRaw(deviceID: String, variables: [RawVariable]) async throws -> [RawResponse] {
         if config.isDemoUser {
-            return try await fakeNetwork.fetchRaw(variables: variables)
+            return try await fakeNetwork.fetchRaw(deviceID: deviceID, variables: variables)
         }
 
-        return try await network.fetchRaw(variables: variables)
+        return try await network.fetchRaw(deviceID: deviceID, variables: variables)
     }
 
     func fetchDeviceList() async throws -> PagedDeviceListResponse {

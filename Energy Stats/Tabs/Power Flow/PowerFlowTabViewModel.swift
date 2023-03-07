@@ -33,7 +33,7 @@ class PowerFlowTabViewModel: ObservableObject {
     }
 
     func startTimer() async {
-        await self.timer.start(totalTicks: totalTicks) { ticksRemaining in
+        await self.timer.start(totalTicks: self.totalTicks) { ticksRemaining in
             Task { @MainActor in self.updateState = "Next update in \(ticksRemaining)s" }
         } onCompletion: {
             Task {
@@ -59,15 +59,25 @@ class PowerFlowTabViewModel: ObservableObject {
     @MainActor
     func loadData() async {
         do {
-            if case .failed = state {
+            if configManager.currentDevice == nil {
+                try await self.configManager.findDevices()
+            }
+
+            guard let currentDevice = configManager.currentDevice else {
+                self.state = .failed("No devices found. Please logout and try logging in again.")
+                return
+            }
+
+            if case .failed = self.state {
                 state = .unloaded
             }
 
             await MainActor.run { self.updateState = "Updating..." }
             await self.network.ensureHasToken()
-            let raws = try await self.network.fetchRaw(variables: [.feedinPower, .gridConsumptionPower, .generationPower, .loadsPower, .batChargePower, .batDischargePower])
+
+            let raws = try await self.network.fetchRaw(deviceID: currentDevice.deviceID, variables: [.feedinPower, .gridConsumptionPower, .generationPower, .loadsPower, .batChargePower, .batDischargePower])
             let historicalViewModel = HistoricalViewModel(raws: raws)
-            let battery = configManager.hasBattery ? BatteryViewModel(from: try await self.network.fetchBattery()) : BatteryViewModel.noBattery
+            let battery = currentDevice.battery != nil ? BatteryViewModel(from: try await self.network.fetchBattery(deviceID: currentDevice.deviceID)) : .noBattery
             let summary = HomePowerFlowViewModel(configManager: configManager,
                                                  solar: historicalViewModel.currentSolarPower,
                                                  battery: battery.chargePower,
@@ -77,7 +87,7 @@ class PowerFlowTabViewModel: ObservableObject {
                                                  hasBattery: battery.hasBattery,
                                                  batteryTemperature: battery.temperature)
 
-            self.state = .loaded(.empty(configManager: configManager)) // refreshes the marching ants line speed
+            self.state = .loaded(.empty(configManager: self.configManager)) // refreshes the marching ants line speed
             try await Task.sleep(nanoseconds: 1000)
             self.state = .loaded(summary)
             self.calculateTicks(historicalViewModel: historicalViewModel)
@@ -88,13 +98,17 @@ class PowerFlowTabViewModel: ObservableObject {
     }
 
     func calculateTicks(historicalViewModel: HistoricalViewModel) {
-        switch configManager.refreshFrequency {
+        switch self.configManager.refreshFrequency {
         case .ONE_MINUTE:
             self.totalTicks = 60
         case .FIVE_MINUTES:
             self.totalTicks = 300
         case .AUTO:
-            self.totalTicks = Int(300 - (Date().timeIntervalSince(historicalViewModel.lastUpdate)) + 10)
+            if self.configManager.isDemoUser {
+                self.totalTicks = 300
+            } else {
+                self.totalTicks = Int(300 - (Date().timeIntervalSince(historicalViewModel.lastUpdate)) + 10)
+            }
         }
     }
 
