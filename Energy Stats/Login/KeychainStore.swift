@@ -88,15 +88,22 @@ private extension KeychainStore {
         SecItemDelete(makeQuery(tag: tag))
 
         if let value {
+            try set(tag: tag, data: value.data(using: .utf8))
+        }
+    }
+
+    func set(tag: String, data: Data?) throws {
+        SecItemDelete(makeQuery(tag: tag))
+
+        if let data {
             let keychainItemQuery = [
                 kSecAttrApplicationTag: tag,
-                kSecValueData: value.data(using: .utf8)!,
+                kSecValueData: data,
                 kSecClass: kSecClassKey
             ] as CFDictionary
 
             let result = SecItemAdd(keychainItemQuery, nil)
             if result != 0 {
-                print("AWP", "Could not store \(tag) because \(result)")
                 throw KeychainError(result)
             }
         }

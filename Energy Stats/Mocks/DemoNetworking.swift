@@ -85,6 +85,7 @@ class MockConfig: Config {
     var refreshFrequency: Int = 0
     var decimalPlaces: Int = 3
     var showSunnyBackground: Bool = true
+    var devices: Data?
 }
 
 class MockConfigManager: ConfigManager {

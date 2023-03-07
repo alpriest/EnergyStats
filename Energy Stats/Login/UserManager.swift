@@ -110,6 +110,7 @@ protocol ConfigManaging {
     var appTheme: LatestAppTheme { get }
     var decimalPlaces: Int { get set }
     var showSunnyBackground: Bool { get set }
+    var devices: DeviceList? { get set }
 }
 
 class ConfigManager: ConfigManaging {
@@ -261,6 +262,28 @@ class ConfigManager: ConfigManaging {
                     decimalPlaces: decimalPlaces
                 )
             )
+        }
+    }
+
+    var devices: DeviceList? {
+        get {
+            guard let deviceListData = config.devices else { return nil }
+            do {
+                return try JSONDecoder().decode(DeviceList.self, from: deviceListData)
+            } catch {
+                return nil
+            }
+        }
+        set {
+            if let newValue {
+                do {
+                    config.devices = try JSONEncoder().encode(newValue)
+                } catch {
+                    print("AWP", "Failed to encode device list 💥")
+                }
+            } else {
+                config.devices = nil
+            }
         }
     }
 }

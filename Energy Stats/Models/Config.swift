@@ -20,6 +20,7 @@ protocol Config {
     var refreshFrequency: Int { get set }
     var decimalPlaces: Int { get set }
     var showSunnyBackground: Bool { get set }
+    var devices: Data? { get set }
 }
 
 class UserDefaultsConfig: Config {
@@ -58,6 +59,9 @@ class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredBool(key: "showSunnyBackground", defaultValue: true)
     var showSunnyBackground: Bool
+
+    @UserDefaultsStoredData(key: "devices")
+    var devices: Data?
 }
 
 @propertyWrapper
@@ -97,6 +101,20 @@ struct UserDefaultsStoredBool {
     var wrappedValue: Bool {
         get {
             (UserDefaults.standard.object(forKey: key) as? Bool) ?? defaultValue
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: key)
+        }
+    }
+}
+
+@propertyWrapper
+struct UserDefaultsStoredData {
+    var key: String
+
+    var wrappedValue: Data? {
+        get {
+            UserDefaults.standard.data(forKey: key)
         }
         set {
             UserDefaults.standard.set(newValue, forKey: key)
