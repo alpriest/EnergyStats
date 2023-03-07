@@ -50,7 +50,7 @@ class MockNetworking: Networking {
     }
 
     func fetchBattery() async throws -> BatteryResponse {
-        BatteryResponse(power: 0.27, soc: 56, residual: 2200)
+        BatteryResponse(power: 0.27, soc: 56, residual: 2200, temperature: 13.6)
     }
 
     func fetchRaw(variables: [RawVariable]) async throws -> [RawResponse] {

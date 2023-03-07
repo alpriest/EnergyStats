@@ -16,4 +16,9 @@ class MockConfig: Config {
     var hasBattery: Bool = true
     var hasPV: Bool = false
     var isDemoUser: Bool = false
+    var showColouredLines: Bool = true
+    var showBatteryTemperature: Bool = true
+    var refreshFrequency: Int = 0
+    var decimalPlaces: Int = 2
+    var showSunnyBackground: Bool = true
 }

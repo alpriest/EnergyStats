@@ -30,7 +30,7 @@ class MockKeychainStore: KeychainStore {
         token
     }
 
-    override func store(username: String, hashedPassword: String) throws {
+    override func store(username: String, hashedPassword: String, updateHasCredentials: Bool = true) throws {
         self.username = username
         self.hashedPassword = hashedPassword
     }

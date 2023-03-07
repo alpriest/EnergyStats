@@ -73,6 +73,8 @@
 		41D6496C28DB321600A24B41 /* DeviceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D6496B28DB321600A24B41 /* DeviceList.swift */; };
 		41D7B12428C86E4000E14144 /* Raw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D7B12328C86E4000E14144 /* Raw.swift */; };
 		41E1DFDF28D87781001235B9 /* SettingsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E1DFDE28D87781001235B9 /* SettingsTabView.swift */; };
+		41E299CD29B7260D001F017B /* Energy_Stats_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E299CC29B7260D001F017B /* Energy_Stats_UITests.swift */; };
+		41E299CF29B7260D001F017B /* Energy_Stats_UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E299CE29B7260D001F017B /* Energy_Stats_UITestsLaunchTests.swift */; };
 		41E4B30E28DB7511003F7F47 /* BatteryCapacityCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E4B30D28DB7511003F7F47 /* BatteryCapacityCalculator.swift */; };
 		41E4B31028DB7666003F7F47 /* BatteryPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E4B30F28DB7666003F7F47 /* BatteryPowerView.swift */; };
 		41E4B31328DB77A3003F7F47 /* HomePowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E4B31228DB77A3003F7F47 /* HomePowerView.swift */; };
@@ -83,6 +85,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		41E299D029B7260D001F017B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4140144228C70B3200EA5BA1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4140144928C70B3200EA5BA1;
+			remoteInfo = "Energy Stats";
+		};
 		41EDDF7528CD2ED30092C662 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4140144228C70B3200EA5BA1 /* Project object */;
@@ -158,6 +167,9 @@
 		41D6496B28DB321600A24B41 /* DeviceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceList.swift; sourceTree = "<group>"; };
 		41D7B12328C86E4000E14144 /* Raw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Raw.swift; sourceTree = "<group>"; };
 		41E1DFDE28D87781001235B9 /* SettingsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabView.swift; sourceTree = "<group>"; };
+		41E299CA29B7260D001F017B /* Energy Stats UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Energy Stats UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		41E299CC29B7260D001F017B /* Energy_Stats_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Energy_Stats_UITests.swift; sourceTree = "<group>"; };
+		41E299CE29B7260D001F017B /* Energy_Stats_UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Energy_Stats_UITestsLaunchTests.swift; sourceTree = "<group>"; };
 		41E4B30D28DB7511003F7F47 /* BatteryCapacityCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryCapacityCalculator.swift; sourceTree = "<group>"; };
 		41E4B30F28DB7666003F7F47 /* BatteryPowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryPowerView.swift; sourceTree = "<group>"; };
 		41E4B31228DB77A3003F7F47 /* HomePowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePowerView.swift; sourceTree = "<group>"; };
@@ -174,6 +186,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				41B6910128E043A10058126E /* OHHTTPStubs in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		41E299C729B7260D001F017B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,6 +272,7 @@
 			children = (
 				4140144C28C70B3200EA5BA1 /* Energy Stats */,
 				41EDDF7228CD2ED30092C662 /* Energy StatsTests */,
+				41E299CB29B7260D001F017B /* Energy Stats UITests */,
 				4140144B28C70B3200EA5BA1 /* Products */,
 				41B690FF28E043A10058126E /* Frameworks */,
 			);
@@ -263,6 +283,7 @@
 			children = (
 				4140144A28C70B3200EA5BA1 /* Energy Stats.app */,
 				41EDDF7128CD2ED30092C662 /* Energy StatsTests.xctest */,
+				41E299CA29B7260D001F017B /* Energy Stats UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -393,6 +414,15 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		41E299CB29B7260D001F017B /* Energy Stats UITests */ = {
+			isa = PBXGroup;
+			children = (
+				41E299CC29B7260D001F017B /* Energy_Stats_UITests.swift */,
+				41E299CE29B7260D001F017B /* Energy_Stats_UITestsLaunchTests.swift */,
+			);
+			path = "Energy Stats UITests";
+			sourceTree = "<group>";
+		};
 		41E4B30C28DB670C003F7F47 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -451,6 +481,24 @@
 			productReference = 4140144A28C70B3200EA5BA1 /* Energy Stats.app */;
 			productType = "com.apple.product-type.application";
 		};
+		41E299C929B7260D001F017B /* Energy Stats UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 41E299D229B7260D001F017B /* Build configuration list for PBXNativeTarget "Energy Stats UITests" */;
+			buildPhases = (
+				41E299C629B7260D001F017B /* Sources */,
+				41E299C729B7260D001F017B /* Frameworks */,
+				41E299C829B7260D001F017B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				41E299D129B7260D001F017B /* PBXTargetDependency */,
+			);
+			name = "Energy Stats UITests";
+			productName = "Energy Stats UITests";
+			productReference = 41E299CA29B7260D001F017B /* Energy Stats UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		41EDDF7028CD2ED30092C662 /* Energy StatsTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 41EDDF7728CD2ED30092C662 /* Build configuration list for PBXNativeTarget "Energy StatsTests" */;
@@ -480,11 +528,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1400;
+				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1400;
 				TargetAttributes = {
 					4140144928C70B3200EA5BA1 = {
 						CreatedOnToolsVersion = 14.0;
+					};
+					41E299C929B7260D001F017B = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 4140144928C70B3200EA5BA1;
 					};
 					41EDDF7028CD2ED30092C662 = {
 						CreatedOnToolsVersion = 14.0;
@@ -511,6 +563,7 @@
 			targets = (
 				4140144928C70B3200EA5BA1 /* Energy Stats */,
 				41EDDF7028CD2ED30092C662 /* Energy StatsTests */,
+				41E299C929B7260D001F017B /* Energy Stats UITests */,
 			);
 		};
 /* End PBXProject section */
@@ -524,6 +577,13 @@
 				4140145228C70B3200EA5BA1 /* Assets.xcassets in Resources */,
 				41AED86A28CDCD94009C6517 /* raw.json in Resources */,
 				41F8D8F7292D7650005E2D18 /* report.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		41E299C829B7260D001F017B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -599,6 +659,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		41E299C629B7260D001F017B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				41E299CF29B7260D001F017B /* Energy_Stats_UITestsLaunchTests.swift in Sources */,
+				41E299CD29B7260D001F017B /* Energy_Stats_UITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		41EDDF6D28CD2ED30092C662 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -620,6 +689,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		41E299D129B7260D001F017B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4140144928C70B3200EA5BA1 /* Energy Stats */;
+			targetProxy = 41E299D029B7260D001F017B /* PBXContainerItemProxy */;
+		};
 		41EDDF7628CD2ED30092C662 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 4140144928C70B3200EA5BA1 /* Energy Stats */;
@@ -748,7 +822,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Energy Stats/Preview Content\"";
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				ENABLE_PREVIEWS = YES;
@@ -763,7 +837,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -781,7 +855,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Energy Stats/Preview Content\"";
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				ENABLE_PREVIEWS = YES;
@@ -796,7 +870,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -805,6 +879,42 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		41E299D329B7260D001F017B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 885RLNNNK2;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.alpriest.Energy-Stats-UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Energy Stats";
+			};
+			name = Debug;
+		};
+		41E299D429B7260D001F017B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 885RLNNNK2;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.alpriest.Energy-Stats-UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Energy Stats";
 			};
 			name = Release;
 		};
@@ -861,6 +971,15 @@
 			buildConfigurations = (
 				4140145928C70B3200EA5BA1 /* Debug */,
 				4140145A28C70B3200EA5BA1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		41E299D229B7260D001F017B /* Build configuration list for PBXNativeTarget "Energy Stats UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				41E299D329B7260D001F017B /* Debug */,
+				41E299D429B7260D001F017B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

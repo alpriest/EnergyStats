@@ -33,6 +33,7 @@ struct LoginView: View {
                 Button("Try demo") {
                     Task { await loginManager.login(username: "demo", password: "user") }
                 }
+                .accessibilityIdentifier("try_demo")
                 .padding()
                 .buttonStyle(.bordered)
 

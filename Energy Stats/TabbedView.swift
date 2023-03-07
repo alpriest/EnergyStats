@@ -30,6 +30,7 @@ struct TabbedView: View {
                         Image(systemName: "arrow.up.arrow.down")
                         Text("Power flow")
                     }
+                    .accessibilityIdentifier("power_flow_tab")
                 }
 
             GraphTabView(viewModel: graphViewModel)
@@ -38,6 +39,7 @@ struct TabbedView: View {
                         Image(systemName: "lines.measurement.horizontal")
                         Text("Graphs")
                     }
+                    .accessibilityIdentifier("graph_tab")
                 }
 
             SettingsTabView(viewModel: SettingsTabViewModel(userManager: userManager, config: configManager))
@@ -46,6 +48,7 @@ struct TabbedView: View {
                         Image(systemName: "gearshape")
                         Text("Settings")
                     }
+                    .accessibilityIdentifier("settings_tab")
                 }
                 .if(configManager.isDemoUser) {
                     $0.badge("demo")
