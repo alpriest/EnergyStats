@@ -38,7 +38,7 @@ struct GraphTabView: View {
                     ForEach(valuesAtTime.values, id: \.id) { graphValue in
                         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
                             Text(graphValue.variable.title)
-                            Text(graphValue.value.kW())
+                            Text(graphValue.value.kW(2))
                                 .monospacedDigit()
                         }
                     }
@@ -67,7 +67,7 @@ struct GraphTabView: View {
                                 Spacer()
 
                                 OptionalView(viewModel.total(of: variable.type.reportVariable)) {
-                                    Text($0.kW())
+                                    Text($0.kW(2))
                                 }
                             }
                             .opacity(variable.enabled ? 1.0 : 0.5)

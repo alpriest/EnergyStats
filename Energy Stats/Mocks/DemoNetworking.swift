@@ -83,6 +83,8 @@ class MockConfig: Config {
     var showColouredLines: Bool = true
     var showBatteryTemperature: Bool = true
     var refreshFrequency: Int = 0
+    var decimalPlaces: Int = 3
+    var showSunnyBackground: Bool = true
 }
 
 class MockConfigManager: ConfigManager {

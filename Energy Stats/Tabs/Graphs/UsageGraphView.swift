@@ -41,7 +41,7 @@ struct UsageGraphView: View {
             AxisMarks { value in
                 if let amount = value.as(Double.self) {
                     AxisValueLabel {
-                        Text(amount.kW())
+                        Text(amount.kW(2))
                     }
                 }
             }

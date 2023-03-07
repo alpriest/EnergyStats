@@ -27,8 +27,8 @@ struct BatteryPowerViewModel {
         calculator.batteryPercentageRemaining(batteryChargePowerkWH: battery, batteryStateOfCharge: batteryStateOfCharge)
     }
 
-    var batteryCapacity: String {
-        calculator.currentEstimatedChargeAmountkWH(batteryStateOfCharge: batteryStateOfCharge).kW()
+    var batteryCapacity: Double {
+        calculator.currentEstimatedChargeAmountkWH(batteryStateOfCharge: batteryStateOfCharge)
     }
 }
 
@@ -50,7 +50,7 @@ struct BatteryPowerView: View {
                     if percentage {
                         Text(viewModel.batteryStateOfCharge, format: .percent)
                     } else {
-                        Text(viewModel.batteryCapacity)
+                        Text(viewModel.batteryCapacity.kW(appTheme.value.decimalPlaces))
                     }
                 }.onTapGesture {
                     percentage.toggle()
@@ -80,7 +80,7 @@ struct BatteryPowerView: View {
 struct BatteryPowerView_Previews: PreviewProvider {
     static var previews: some View {
         BatteryPowerView(viewModel: BatteryPowerViewModel.any(), iconFooterSize: .constant(CGSize.zero),
-                         appTheme: CurrentValueSubject(AppTheme(showColouredLines: true, showBatteryTemperature: true)))
+                         appTheme: CurrentValueSubject(AppTheme.mock()))
     }
 }
 

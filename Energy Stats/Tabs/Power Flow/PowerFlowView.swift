@@ -32,7 +32,7 @@ struct PowerFlowView: View {
                         FlowingLine(direction: .up, animationDuration: animationDuration, color: lineColor)
                     }
 
-                    EnergyAmountView(amount: amount)
+                    EnergyAmountView(amount: amount, decimalPlaces: appTheme.value.decimalPlaces)
                         .font(.footnote)
                         .bold()
                 }
@@ -75,7 +75,7 @@ struct PowerFlowView_Previews: PreviewProvider {
                 Color.clear.overlay(
                     Group {
                         if visible {
-                            PowerFlowView(amount: amount, appTheme: CurrentValueSubject(AppTheme(showColouredLines: true, showBatteryTemperature: true)), showColouredLines: true)
+                            PowerFlowView(amount: amount, appTheme: CurrentValueSubject(AppTheme.mock()), showColouredLines: true)
                         }
                     }
                 ).frame(height: 100)

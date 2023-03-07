@@ -59,12 +59,23 @@ struct HomePowerFlowView: View {
 
 struct PowerSummaryView_Previews: PreviewProvider {
     static var previews: some View {
-        HomePowerFlowView(viewModel: HomePowerFlowViewModel.any(), appTheme: CurrentValueSubject(AppTheme(showColouredLines: true, showBatteryTemperature: true)))
+        HomePowerFlowView(viewModel: HomePowerFlowViewModel.any(), appTheme: CurrentValueSubject(AppTheme.mock()))
     }
 }
 
 extension HomePowerFlowViewModel {
     static func any() -> HomePowerFlowViewModel {
         .init(configManager: MockConfigManager(), solar: 2.5, battery: -0.01, home: 1.5, grid: 0.71, batteryStateOfCharge: 0.99, hasBattery: true, batteryTemperature: 15.6)
+    }
+}
+
+extension AppTheme {
+    static func mock() -> AppTheme {
+        AppTheme(
+            showColouredLines: true,
+            showBatteryTemperature: true,
+            showSunnyBackground: true,
+            decimalPlaces: 2
+        )
     }
 }

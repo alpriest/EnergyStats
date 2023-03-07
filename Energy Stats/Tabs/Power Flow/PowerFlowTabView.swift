@@ -44,12 +44,21 @@ struct PowerFlowTabView: View {
         }
         .frame(maxWidth: .infinity)
         .padding()
-        .background(backgroundGradient.edgesIgnoringSafeArea(.all))
+        .background(background().edgesIgnoringSafeArea(.all))
         .task {
             await viewModel.timerFired()
         }
         .onDisappear {
             Task { await viewModel.stopTimer() }
+        }
+    }
+
+    @ViewBuilder func background() -> some View {
+        switch appTheme.value.showSunnyBackground {
+        case true:
+            backgroundGradient
+        case false:
+            Color.clear
         }
     }
 
@@ -68,6 +77,6 @@ struct PowerFlowTabView: View {
 struct SummaryTabView_Previews: PreviewProvider {
     static var previews: some View {
         PowerFlowTabView(viewModel: PowerFlowTabViewModel(DemoNetworking(), configManager: MockConfigManager()),
-                         appTheme: CurrentValueSubject(AppTheme(showColouredLines: true, showBatteryTemperature: true)))
+                         appTheme: CurrentValueSubject(AppTheme.mock()))
     }
 }

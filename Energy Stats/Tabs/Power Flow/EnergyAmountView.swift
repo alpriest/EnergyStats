@@ -9,13 +9,14 @@ import SwiftUI
 
 struct EnergyAmountView: View {
     let amount: Double
+    let decimalPlaces: Int
     @State private var asKW = true
 
     var body: some View {
         Color.clear.overlay(
             Group {
                 if asKW {
-                    Text(amount.kW())
+                    Text(amount.kW(decimalPlaces))
                 } else {
                     Text(amount.w())
                 }
@@ -30,6 +31,6 @@ struct EnergyAmountView: View {
 
 struct EnergyAmountView_Previews: PreviewProvider {
     static var previews: some View {
-        EnergyAmountView(amount: 0.310)
+        EnergyAmountView(amount: 0.310, decimalPlaces: 3)
     }
 }

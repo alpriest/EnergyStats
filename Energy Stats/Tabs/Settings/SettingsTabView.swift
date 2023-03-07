@@ -77,6 +77,19 @@ struct SettingsTabView: View {
                     Toggle(isOn: $viewModel.showBatteryTemperature) {
                         Text("Show battery temperature")
                     }
+
+                    Toggle(isOn: $viewModel.showSunnyBackground) {
+                        Text("Show sunny background")
+                    }
+
+                    HStack {
+                        Text("Decimal places").padding(.trailing)
+                        Spacer()
+                        Picker("Decimal places", selection: $viewModel.decimalPlaces) {
+                            Text("2").tag(2)
+                            Text("3").tag(3)
+                        }.pickerStyle(.segmented)
+                    }
                 },
                 header: {
                     Text("Display")
@@ -93,7 +106,7 @@ struct SettingsTabView: View {
                 }, header: {
                     Text("Refresh frequency")
                 }, footer: {
-                    Text("Fox data is updated every 5 minutes. Auto attempts to synchronise fetches just after the data feed uploads to reduce server load.")
+                    Text("FoxESS Cloud data is updated every 5 minutes. Auto attempts to synchronise fetches just after the data feed uploads to minimise server load.")
                 })
 
             Section(

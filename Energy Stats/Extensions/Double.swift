@@ -8,12 +8,11 @@
 import Foundation
 
 extension Double {
-    func kW() -> String {
-        let places = 3
+    func kW(_ places: Int) -> String {
         let divisor = pow(10.0, Double(places))
         let divided = (self * divisor).rounded() / divisor
 
-        return String(format: "%0.3fkW", divided)
+        return String(format: "%0.\(places)fkW", divided)
     }
 
     func w() -> String {

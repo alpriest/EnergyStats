@@ -87,6 +87,8 @@ class UserManager: ObservableObject {
 struct AppTheme {
     var showColouredLines: Bool
     var showBatteryTemperature: Bool
+    var showSunnyBackground: Bool
+    var decimalPlaces: Int
 }
 
 typealias LatestAppTheme = CurrentValueSubject<AppTheme, Never>
@@ -106,6 +108,8 @@ protocol ConfigManaging {
     var showBatteryTemperature: Bool { get set }
     var refreshFrequency: RefreshFrequency { get set }
     var appTheme: LatestAppTheme { get }
+    var decimalPlaces: Int { get set }
+    var showSunnyBackground: Bool { get set }
 }
 
 class ConfigManager: ConfigManaging {
@@ -121,7 +125,9 @@ class ConfigManager: ConfigManaging {
         appTheme = CurrentValueSubject(
             AppTheme(
                 showColouredLines: config.showColouredLines,
-                showBatteryTemperature: config.showBatteryTemperature
+                showBatteryTemperature: config.showBatteryTemperature,
+                showSunnyBackground: config.showSunnyBackground,
+                decimalPlaces: config.decimalPlaces
             )
         )
     }
@@ -185,7 +191,9 @@ class ConfigManager: ConfigManaging {
             appTheme.send(
                 AppTheme(
                     showColouredLines: config.showColouredLines,
-                    showBatteryTemperature: config.showBatteryTemperature
+                    showBatteryTemperature: config.showBatteryTemperature,
+                    showSunnyBackground: showSunnyBackground,
+                    decimalPlaces: decimalPlaces
                 )
             )
         }
@@ -198,7 +206,9 @@ class ConfigManager: ConfigManaging {
             appTheme.send(
                 AppTheme(
                     showColouredLines: config.showColouredLines,
-                    showBatteryTemperature: config.showBatteryTemperature
+                    showBatteryTemperature: config.showBatteryTemperature,
+                    showSunnyBackground: showSunnyBackground,
+                    decimalPlaces: decimalPlaces
                 )
             )
         }
@@ -211,7 +221,9 @@ class ConfigManager: ConfigManaging {
             appTheme.send(
                 AppTheme(
                     showColouredLines: config.showColouredLines,
-                    showBatteryTemperature: config.showBatteryTemperature
+                    showBatteryTemperature: config.showBatteryTemperature,
+                    showSunnyBackground: showSunnyBackground,
+                    decimalPlaces: decimalPlaces
                 )
             )
         }
@@ -220,5 +232,35 @@ class ConfigManager: ConfigManaging {
     var refreshFrequency: RefreshFrequency {
         get { RefreshFrequency(rawValue: config.refreshFrequency) ?? .AUTO }
         set { config.refreshFrequency = newValue.rawValue }
+    }
+
+    var showSunnyBackground: Bool {
+        get { config.showSunnyBackground }
+        set {
+            config.showSunnyBackground = newValue
+            appTheme.send(
+                AppTheme(
+                    showColouredLines: config.showColouredLines,
+                    showBatteryTemperature: config.showBatteryTemperature,
+                    showSunnyBackground: showSunnyBackground,
+                    decimalPlaces: decimalPlaces
+                )
+            )
+        }
+    }
+
+    var decimalPlaces: Int {
+        get { config.decimalPlaces }
+        set {
+            config.decimalPlaces = newValue
+            appTheme.send(
+                AppTheme(
+                    showColouredLines: config.showColouredLines,
+                    showBatteryTemperature: config.showBatteryTemperature,
+                    showSunnyBackground: showSunnyBackground,
+                    decimalPlaces: decimalPlaces
+                )
+            )
+        }
     }
 }

@@ -27,6 +27,6 @@ struct GridPowerView: View {
 struct GridPowerView_Previews: PreviewProvider {
     static var previews: some View {
         GridPowerView(amount: 0.4, iconFooterSize: CGSize(width: 32, height: 32),
-                      appTheme: CurrentValueSubject(AppTheme(showColouredLines: true, showBatteryTemperature: true)))
+                      appTheme: CurrentValueSubject(AppTheme.mock()))
     }
 }

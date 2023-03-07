@@ -32,6 +32,18 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
+    @Published var decimalPlaces: Int = 2 {
+        didSet {
+            config.decimalPlaces = decimalPlaces
+        }
+    }
+
+    @Published var showSunnyBackground: Bool {
+        didSet {
+            config.showSunnyBackground = showSunnyBackground
+        }
+    }
+
     private var config: ConfigManaging
     private let userManager: UserManager
 
@@ -42,6 +54,8 @@ class SettingsTabViewModel: ObservableObject {
         batteryCapacity = String(describing: config.batteryCapacity)
         showBatteryTemperature = config.showBatteryTemperature
         refreshFrequency = config.refreshFrequency
+        decimalPlaces = config.decimalPlaces
+        showSunnyBackground = config.showSunnyBackground
     }
 
     var minSOC: Double { config.minSOC }

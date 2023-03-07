@@ -18,6 +18,8 @@ protocol Config {
     var showColouredLines: Bool { get set }
     var showBatteryTemperature: Bool { get set }
     var refreshFrequency: Int { get set }
+    var decimalPlaces: Int { get set }
+    var showSunnyBackground: Bool { get set }
 }
 
 class UserDefaultsConfig: Config {
@@ -42,7 +44,7 @@ class UserDefaultsConfig: Config {
     @UserDefaultsStoredBool(key: "isDemoUser")
     var isDemoUser: Bool
 
-    @UserDefaultsStoredBool(key: "showColouredLines")
+    @UserDefaultsStoredBool(key: "showColouredLines", defaultValue: true)
     var showColouredLines: Bool
 
     @UserDefaultsStoredBool(key: "showBatteryTemperature")
@@ -50,15 +52,22 @@ class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredInt(key: "refreshFrequency")
     var refreshFrequency: Int
+
+    @UserDefaultsStoredInt(key: "decimalPlaces", defaultValue: 3)
+    var decimalPlaces: Int
+
+    @UserDefaultsStoredBool(key: "showSunnyBackground", defaultValue: true)
+    var showSunnyBackground: Bool
 }
 
 @propertyWrapper
 struct UserDefaultsStoredInt {
     var key: String
+    var defaultValue: Int = 0
 
     var wrappedValue: Int {
         get {
-            UserDefaults.standard.integer(forKey: key)
+            (UserDefaults.standard.object(forKey: key) as? Int) ?? defaultValue
         }
         set {
             UserDefaults.standard.set(newValue, forKey: key)
@@ -83,10 +92,11 @@ struct UserDefaultsStoredString {
 @propertyWrapper
 struct UserDefaultsStoredBool {
     var key: String
+    var defaultValue: Bool = false
 
     var wrappedValue: Bool {
         get {
-            UserDefaults.standard.bool(forKey: key)
+            (UserDefaults.standard.object(forKey: key) as? Bool) ?? defaultValue
         }
         set {
             UserDefaults.standard.set(newValue, forKey: key)
