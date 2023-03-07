@@ -19,6 +19,7 @@ final class Energy_Stats_UITestsLaunchTests: XCTestCase {
 
     func test_takeScreenshots() throws {
         let app = XCUIApplication()
+        setupSnapshot(app)
         app.launch()
 
         if app.buttons["try_demo"].exists {
@@ -27,23 +28,14 @@ final class Energy_Stats_UITestsLaunchTests: XCTestCase {
 
         app.buttons["power_flow_tab"].tap()
 
-        let attachment = XCTAttachment(screenshot: app.screenshot())
-        attachment.name = "power_flow"
-        attachment.lifetime = .keepAlways
-        add(attachment)
+        snapshot("power_flow_tab")
 
         app.buttons["settings_tab"].tap()
 
-        let attachment2 = XCTAttachment(screenshot: app.screenshot())
-        attachment2.name = "settings_tab"
-        attachment2.lifetime = .keepAlways
-        add(attachment2)
+        snapshot("settings_tab")
 
         app.buttons["graph_tab"].tap()
 
-        let attachment3 = XCTAttachment(screenshot: app.screenshot())
-        attachment3.name = "graph_tab"
-        attachment3.lifetime = .keepAlways
-        add(attachment3)
+        snapshot("graph_tab")
     }
 }
