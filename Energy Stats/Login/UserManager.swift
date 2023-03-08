@@ -107,6 +107,7 @@ protocol ConfigManaging {
     var showSunnyBackground: Bool { get set }
     var devices: [Device]? { get set }
     var currentDevice: Device? { get }
+    var selectedDeviceID: String? { get set }
 }
 
 class ConfigManager: ConfigManaging {
@@ -158,9 +159,11 @@ class ConfigManager: ConfigManaging {
                 battery: Device.Battery(capacity: batteryCapacity, minSOC: minSOC)
             )
         }
+        selectedDeviceID = devices?.first?.deviceID
     }
 
     func logout() {
+        config.selectedDeviceID = nil
         config.devices = nil
         config.isDemoUser = false
     }
@@ -185,7 +188,12 @@ class ConfigManager: ConfigManaging {
     }
 
     var currentDevice: Device? {
-        devices?.first // TODO make this user selectable
+        devices?.first(where: { $0.deviceID == selectedDeviceID }) ?? devices?.first
+    }
+
+    var selectedDeviceID: String? {
+        get { config.selectedDeviceID }
+        set { config.selectedDeviceID = newValue }
     }
 
     var isDemoUser: Bool {

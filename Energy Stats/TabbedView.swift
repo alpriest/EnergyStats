@@ -13,6 +13,7 @@ struct TabbedView: View {
     let userManager: UserManager
     @StateObject var summaryViewModel: PowerFlowTabViewModel
     @StateObject var graphViewModel: GraphTabViewModel
+    @StateObject var settingsTabViewModel: SettingsTabViewModel
 
     init(networking: Networking, userManager: UserManager, configManager: ConfigManager) {
         self.networking = networking
@@ -20,6 +21,7 @@ struct TabbedView: View {
         self.configManager = configManager
         _summaryViewModel = .init(wrappedValue: PowerFlowTabViewModel(networking, configManager: configManager))
         _graphViewModel = .init(wrappedValue: GraphTabViewModel(networking, configManager: configManager))
+        _settingsTabViewModel = .init(wrappedValue: SettingsTabViewModel(userManager: userManager, config: configManager))
     }
 
     var body: some View {
@@ -42,7 +44,7 @@ struct TabbedView: View {
                     .accessibilityIdentifier("graph_tab")
                 }
 
-            SettingsTabView(viewModel: SettingsTabViewModel(userManager: userManager, config: configManager))
+            SettingsTabView(viewModel: settingsTabViewModel)
                 .tabItem {
                     VStack {
                         Image(systemName: "gearshape")

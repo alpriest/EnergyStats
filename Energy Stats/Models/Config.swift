@@ -15,6 +15,7 @@ protocol Config {
     var decimalPlaces: Int { get set }
     var showSunnyBackground: Bool { get set }
     var devices: Data? { get set }
+    var selectedDeviceID: String? { get set }
 }
 
 class UserDefaultsConfig: Config {
@@ -38,6 +39,9 @@ class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredData(key: "devices")
     var devices: Data?
+
+    @UserDefaultsStoredString(key: "selectedDeviceID")
+    var selectedDeviceID: String?
 }
 
 @propertyWrapper

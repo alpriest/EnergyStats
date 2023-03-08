@@ -9,19 +9,21 @@ import SwiftUI
 
 struct InverterChoiceView: View {
     @ObservedObject var viewModel: SettingsTabViewModel
-    @State private var device: Device?
 
     var body: some View {
         if viewModel.devices.count > 1 {
             Section(
                 content: {
-                    Picker("Device to show", selection: $device) {
+                    Picker("", selection: $viewModel.selectedDeviceID) {
                         ForEach(viewModel.devices, id: \.deviceID) { device in
-                            Text(device.deviceID).tag(device.deviceID)
+                            Text(device.deviceID)
+                                .tag(device.deviceID)
                         }
                     }
+                    .pickerStyle(.menu)
+                    .labelsHidden()
                 },
-                header: { Text("Inverter") },
+                header: { Text("Device") },
                 footer: { Text("Selected device and related battery information will be displayed on the main page") }
             )
         }

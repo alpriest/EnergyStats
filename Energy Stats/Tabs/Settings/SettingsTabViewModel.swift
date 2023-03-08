@@ -44,6 +44,12 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
+    @Published var selectedDeviceID: String {
+        didSet {
+            config.selectedDeviceID = selectedDeviceID
+        }
+    }
+
     private var config: ConfigManaging
     private let userManager: UserManager
 
@@ -56,6 +62,7 @@ class SettingsTabViewModel: ObservableObject {
         refreshFrequency = config.refreshFrequency
         decimalPlaces = config.decimalPlaces
         showSunnyBackground = config.showSunnyBackground
+        selectedDeviceID = config.selectedDeviceID ?? ""
     }
 
     var minSOC: Double { config.minSOC }
