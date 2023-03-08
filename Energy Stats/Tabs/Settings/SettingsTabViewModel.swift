@@ -60,6 +60,7 @@ class SettingsTabViewModel: ObservableObject {
 
     var minSOC: Double { config.minSOC }
     var username: String { userManager.getUsername() ?? "" }
+    var devices: [Device] { config.devices ?? [] }
 
     @MainActor
     func logout() {

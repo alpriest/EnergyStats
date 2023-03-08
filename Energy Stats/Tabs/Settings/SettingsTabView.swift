@@ -15,58 +15,11 @@ enum RefreshFrequency: Int {
 
 struct SettingsTabView: View {
     @ObservedObject var viewModel: SettingsTabViewModel
-    @State private var isEditingCapacity = false
-    @FocusState private var focused
 
     var body: some View {
         Form {
-            Section(
-                content: {
-                    HStack {
-                        Text("Min SOC")
-                        Spacer()
-                        Text(viewModel.minSOC, format: .percent)
-                    }
-
-                    HStack(alignment: .top) {
-                        Text("Capacity")
-                        Spacer()
-                        HStack(alignment: .top) {
-                            if isEditingCapacity {
-                                VStack(alignment: .trailing) {
-                                    TextField("Capacity", text: $viewModel.batteryCapacity)
-                                        .multilineTextAlignment(.trailing)
-                                        .focused($focused)
-
-                                    HStack {
-                                        Button("OK") {
-                                            isEditingCapacity = false
-                                            focused = false
-                                        }.buttonStyle(.bordered)
-                                        Button("Cancel") {
-                                            isEditingCapacity = false
-                                            focused = false
-                                        }.buttonStyle(.bordered)
-                                    }
-                                }
-                            } else {
-                                Text(viewModel.batteryCapacity)
-                                    .onTapGesture {
-                                        focused = true
-                                        isEditingCapacity = true
-                                    }
-                            }
-                            Text(" kW")
-                        }
-                    }
-                }, header: {
-                    Text("Battery")
-                }, footer: {
-                    Text("Calculated as ") +
-                        Text("residual / (Min SOC / 100)").italic() +
-                        Text(" where residual is estimated by your installation and may not be accurate. Tap the capacity above to enter a manual value.\n\n") +
-                        Text("Empty/full battery durations are estimates based on calculated capacity, assume that solar conditions and battery charge rates remain constant.")
-                })
+            InverterChoiceView(viewModel: viewModel)
+            BatterySettingsView(viewModel: viewModel)
 
             Section(
                 content: {

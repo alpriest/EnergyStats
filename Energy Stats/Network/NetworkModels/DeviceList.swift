@@ -42,14 +42,14 @@ struct DeviceList: Codable {
     let devices: [Device]
 }
 
-struct Device: Codable {
+struct Device: Codable, Hashable {
     let plantName: String
     let deviceID: String
     let deviceSN: String
     let hasPV: Bool
     let battery: Battery?
 
-    struct Battery: Codable {
+    struct Battery: Codable, Hashable {
         let capacity: String?
         let minSOC: String?
     }

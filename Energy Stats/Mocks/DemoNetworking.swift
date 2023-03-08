@@ -92,5 +92,16 @@ class MockConfig: Config {
 class MockConfigManager: ConfigManager {
     convenience init() {
         self.init(networking: DemoNetworking(), config: MockConfig())
+        Task { try await findDevices() }
+    }
+
+    override var devices: [Device]? {
+        get {
+            [
+                Device(plantName: "demo-device-1", deviceID: "abcdef1", deviceSN: "1234", hasPV: true, battery: nil),
+                Device(plantName: "demo-device-2", deviceID: "abcdef2", deviceSN: "5678", hasPV: true, battery: nil)
+            ]
+        }
+        set {}
     }
 }
