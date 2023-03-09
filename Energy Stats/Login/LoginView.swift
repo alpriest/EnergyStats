@@ -44,15 +44,18 @@ struct LoginView: View {
                 .buttonStyle(.borderedProminent)
             }
 
-            switch loginManager.state {
-            case .idle:
-                EmptyView()
-            case .busy:
-                ProgressView()
-                    .progressViewStyle(.circular)
-            case .error(let reason):
-                Text(reason)
-            }
+            Group {
+                switch loginManager.state {
+                case .idle:
+                    Color.clear.frame(height: 50)
+                case .busy:
+                    ProgressView()
+                        .progressViewStyle(.circular)
+                        .frame(height: 50)
+                case .error(let reason):
+                    Text(reason)
+                }
+            }.frame(minHeight: 50)
 
         }.padding()
     }
