@@ -156,7 +156,7 @@ class ConfigManager: ConfigManaging {
                 deviceID: device.deviceID,
                 deviceSN: device.deviceSN,
                 hasPV: device.hasPV,
-                battery: Device.Battery(capacity: batteryCapacity, minSOC: minSOC)
+                battery: device.hasBattery ? Device.Battery(capacity: batteryCapacity, minSOC: minSOC) : nil
             )
         }
         selectedDeviceID = devices?.first?.deviceID

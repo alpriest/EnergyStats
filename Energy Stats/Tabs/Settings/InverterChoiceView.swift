@@ -23,7 +23,7 @@ struct InverterChoiceView: View {
                     .pickerStyle(.menu)
                     .labelsHidden()
                 },
-                header: { Text("Device") },
+                header: { Text("Device selection") },
                 footer: { Text("Selected device and related battery information will be displayed on the main page") }
             )
         }
