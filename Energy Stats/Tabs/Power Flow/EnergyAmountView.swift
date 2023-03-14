@@ -10,6 +10,8 @@ import SwiftUI
 struct EnergyAmountView: View {
     let amount: Double
     let decimalPlaces: Int
+    let backgroundColor: Color
+    let textColor: Color
     @State private var asKW = true
 
     var body: some View {
@@ -21,8 +23,10 @@ struct EnergyAmountView: View {
                     Text(amount.w())
                 }
             }
-            .padding(1)
-            .background(Color(uiColor: UIColor.systemBackground))
+            .padding(3)
+            .background(backgroundColor)
+            .foregroundColor(textColor)
+            .cornerRadius(3)
         ).onTapGesture {
             asKW.toggle()
         }
@@ -31,6 +35,6 @@ struct EnergyAmountView: View {
 
 struct EnergyAmountView_Previews: PreviewProvider {
     static var previews: some View {
-        EnergyAmountView(amount: 0.310, decimalPlaces: 3)
+        EnergyAmountView(amount: 0.310, decimalPlaces: 3, backgroundColor: .red, textColor: .black)
     }
 }

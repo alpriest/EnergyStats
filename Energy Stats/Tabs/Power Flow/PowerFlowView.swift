@@ -32,7 +32,7 @@ struct PowerFlowView: View {
                         FlowingLine(direction: .up, animationDuration: animationDuration, color: lineColor)
                     }
 
-                    EnergyAmountView(amount: amount, decimalPlaces: appTheme.value.decimalPlaces)
+                    EnergyAmountView(amount: amount, decimalPlaces: appTheme.value.decimalPlaces, backgroundColor: lineColor, textColor: textColor)
                         .font(.footnote)
                         .bold()
                 }
@@ -52,6 +52,18 @@ struct PowerFlowView: View {
             }
         } else {
             return Color("lines_notflowing")
+        }
+    }
+
+    var textColor: Color {
+        if isFlowing && appTheme.value.showColouredLines && showColouredLines {
+            if amount > 0 {
+                return Color("text_positive")
+            } else {
+                return Color("text_negative")
+            }
+        } else {
+            return Color("text_notflowing")
         }
     }
 

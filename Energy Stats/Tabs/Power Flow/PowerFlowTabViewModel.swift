@@ -8,6 +8,19 @@
 import Foundation
 import UIKit
 
+class PreciseDateTimeFormatter {
+    static func localizedString(from seconds: Int) -> String {
+        switch seconds {
+        case 0 ..< 60:
+            return "\(seconds)s"
+        default:
+            let minutes = seconds / 60
+            let remainder = seconds % 60
+            return "\(minutes)m \(remainder)s"
+        }
+    }
+}
+
 class PowerFlowTabViewModel: ObservableObject {
     private let network: Networking
     private var configManager: ConfigManager
@@ -34,7 +47,9 @@ class PowerFlowTabViewModel: ObservableObject {
 
     func startTimer() async {
         await self.timer.start(totalTicks: self.totalTicks) { ticksRemaining in
-            Task { @MainActor in self.updateState = "Next update in \(ticksRemaining)s" }
+            Task { @MainActor in
+                self.updateState = "Next update in \(PreciseDateTimeFormatter.localizedString(from: ticksRemaining))"
+            }
         } onCompletion: {
             Task {
                 await self.timerFired()

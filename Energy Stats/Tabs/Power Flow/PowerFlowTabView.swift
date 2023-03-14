@@ -1,5 +1,5 @@
 //
-//  SummaryTabView.swift
+//  PowerFlowTabView.swift
 //  Energy Stats
 //
 //  Created by Alistair Priest on 08/09/2022.
@@ -74,7 +74,7 @@ struct PowerFlowTabView: View {
     }
 }
 
-struct SummaryTabView_Previews: PreviewProvider {
+struct PowerFlowTabView_Previews: PreviewProvider {
     static var previews: some View {
         PowerFlowTabView(viewModel: PowerFlowTabViewModel(DemoNetworking(), configManager: MockConfigManager()),
                          appTheme: CurrentValueSubject(AppTheme.mock()))

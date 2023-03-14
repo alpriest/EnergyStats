@@ -23,7 +23,7 @@ class DemoNetworking: Networking {
     }
 
     func fetchBattery(deviceID: String) async throws -> BatteryResponse {
-        BatteryResponse(power: 0.27, soc: 20, residual: 2420, temperature: 15.6)
+        BatteryResponse(power: 0.28, soc: 76, residual: 7550, temperature: 17.3)
     }
 
     func fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse {
