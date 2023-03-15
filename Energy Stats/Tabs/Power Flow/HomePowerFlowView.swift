@@ -75,7 +75,8 @@ extension AppTheme {
             showColouredLines: true,
             showBatteryTemperature: true,
             showSunnyBackground: true,
-            decimalPlaces: 2
+            decimalPlaces: 2,
+            showBatteryEstimate: true
         )
     }
 }

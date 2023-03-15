@@ -74,6 +74,7 @@ class DemoNetworking: Networking {
 }
 
 class MockConfig: Config {
+    var showBatteryEstimate: Bool = true
     var batteryCapacity: String?
     var minSOC: String?
     var deviceID: String?

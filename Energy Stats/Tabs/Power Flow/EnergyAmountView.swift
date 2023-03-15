@@ -24,6 +24,7 @@ struct EnergyAmountView: View {
                 }
             }
             .padding(3)
+            .padding(.horizontal, 4)
             .background(backgroundColor)
             .foregroundColor(textColor)
             .cornerRadius(3)

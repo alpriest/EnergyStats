@@ -88,6 +88,23 @@ struct AppTheme {
     var showBatteryTemperature: Bool
     var showSunnyBackground: Bool
     var decimalPlaces: Int
+    var showBatteryEstimate: Bool
+
+    func update(
+        showColouredLines: Bool? = nil,
+        showBatteryTemperature: Bool? = nil,
+        showSunnyBackground: Bool? = nil,
+        decimalPlaces: Int? = nil,
+        showBatteryEstimate: Bool? = nil
+    ) -> AppTheme {
+        AppTheme(
+            showColouredLines: showColouredLines ?? self.showColouredLines,
+            showBatteryTemperature: showBatteryTemperature ?? self.showBatteryTemperature,
+            showSunnyBackground: showSunnyBackground ?? self.showSunnyBackground,
+            decimalPlaces: decimalPlaces ?? self.decimalPlaces,
+            showBatteryEstimate: showBatteryEstimate ?? self.showBatteryEstimate
+        )
+    }
 }
 
 typealias LatestAppTheme = CurrentValueSubject<AppTheme, Never>
@@ -101,6 +118,7 @@ protocol ConfigManaging {
     var isDemoUser: Bool { get set }
     var showColouredLines: Bool { get set }
     var showBatteryTemperature: Bool { get set }
+    var showBatteryEstimate: Bool { get set }
     var refreshFrequency: RefreshFrequency { get set }
     var appTheme: LatestAppTheme { get }
     var decimalPlaces: Int { get set }
@@ -125,7 +143,8 @@ class ConfigManager: ConfigManaging {
                 showColouredLines: config.showColouredLines,
                 showBatteryTemperature: config.showBatteryTemperature,
                 showSunnyBackground: config.showSunnyBackground,
-                decimalPlaces: config.decimalPlaces
+                decimalPlaces: config.decimalPlaces,
+                showBatteryEstimate: config.showBatteryEstimate
             )
         )
     }
@@ -200,14 +219,6 @@ class ConfigManager: ConfigManaging {
         get { config.isDemoUser }
         set {
             config.isDemoUser = newValue
-            appTheme.send(
-                AppTheme(
-                    showColouredLines: config.showColouredLines,
-                    showBatteryTemperature: config.showBatteryTemperature,
-                    showSunnyBackground: showSunnyBackground,
-                    decimalPlaces: decimalPlaces
-                )
-            )
         }
     }
 
@@ -215,14 +226,9 @@ class ConfigManager: ConfigManaging {
         get { config.showColouredLines }
         set {
             config.showColouredLines = newValue
-            appTheme.send(
-                AppTheme(
-                    showColouredLines: config.showColouredLines,
-                    showBatteryTemperature: config.showBatteryTemperature,
-                    showSunnyBackground: showSunnyBackground,
-                    decimalPlaces: decimalPlaces
-                )
-            )
+            appTheme.send(appTheme.value.update(
+                showColouredLines: config.showColouredLines
+            ))
         }
     }
 
@@ -230,14 +236,19 @@ class ConfigManager: ConfigManaging {
         get { config.showBatteryTemperature }
         set {
             config.showBatteryTemperature = newValue
-            appTheme.send(
-                AppTheme(
-                    showColouredLines: config.showColouredLines,
-                    showBatteryTemperature: config.showBatteryTemperature,
-                    showSunnyBackground: showSunnyBackground,
-                    decimalPlaces: decimalPlaces
-                )
-            )
+            appTheme.send(appTheme.value.update(
+                showBatteryTemperature: config.showBatteryTemperature
+            ))
+        }
+    }
+
+    var showBatteryEstimate: Bool {
+        get { config.showBatteryEstimate }
+        set {
+            config.showBatteryEstimate = newValue
+            appTheme.send(appTheme.value.update(
+                showBatteryEstimate: config.showBatteryEstimate
+            ))
         }
     }
 
@@ -250,14 +261,9 @@ class ConfigManager: ConfigManaging {
         get { config.showSunnyBackground }
         set {
             config.showSunnyBackground = newValue
-            appTheme.send(
-                AppTheme(
-                    showColouredLines: config.showColouredLines,
-                    showBatteryTemperature: config.showBatteryTemperature,
-                    showSunnyBackground: showSunnyBackground,
-                    decimalPlaces: decimalPlaces
-                )
-            )
+            appTheme.send(appTheme.value.update(
+                showSunnyBackground: config.showSunnyBackground
+            ))
         }
     }
 
@@ -265,14 +271,9 @@ class ConfigManager: ConfigManaging {
         get { config.decimalPlaces }
         set {
             config.decimalPlaces = newValue
-            appTheme.send(
-                AppTheme(
-                    showColouredLines: config.showColouredLines,
-                    showBatteryTemperature: config.showBatteryTemperature,
-                    showSunnyBackground: showSunnyBackground,
-                    decimalPlaces: decimalPlaces
-                )
-            )
+            appTheme.send(appTheme.value.update(
+                decimalPlaces: config.decimalPlaces
+            ))
         }
     }
 

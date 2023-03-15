@@ -60,11 +60,13 @@ struct BatteryPowerView: View {
                     Text(viewModel.temperature, format: .number) + Text("°C")
                 }
 
-                OptionalView(viewModel.batteryExtra) {
-                    Text($0)
-                        .multilineTextAlignment(.center)
-                        .font(.caption)
-                        .foregroundColor(Color.gray)
+                if appTheme.value.showBatteryEstimate {
+                    OptionalView(viewModel.batteryExtra) {
+                        Text($0)
+                            .multilineTextAlignment(.center)
+                            .font(.caption)
+                            .foregroundColor(Color.gray)
+                    }
                 }
             }
             .background(GeometryReader { reader in

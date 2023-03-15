@@ -26,6 +26,12 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
+    @Published var showBatteryEstimate: Bool {
+        didSet {
+            config.showBatteryEstimate = showBatteryEstimate
+        }
+    }
+
     @Published var refreshFrequency: RefreshFrequency {
         didSet {
             config.refreshFrequency = refreshFrequency
@@ -63,6 +69,7 @@ class SettingsTabViewModel: ObservableObject {
         decimalPlaces = config.decimalPlaces
         showSunnyBackground = config.showSunnyBackground
         selectedDeviceID = config.selectedDeviceID ?? ""
+        showBatteryEstimate = config.showBatteryEstimate
     }
 
     var minSOC: Double { config.minSOC }

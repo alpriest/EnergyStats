@@ -11,6 +11,7 @@ protocol Config {
     var isDemoUser: Bool { get set }
     var showColouredLines: Bool { get set }
     var showBatteryTemperature: Bool { get set }
+    var showBatteryEstimate: Bool { get set }
     var refreshFrequency: Int { get set }
     var decimalPlaces: Int { get set }
     var showSunnyBackground: Bool { get set }
@@ -27,6 +28,9 @@ class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredBool(key: "showBatteryTemperature")
     var showBatteryTemperature: Bool
+
+    @UserDefaultsStoredBool(key: "showBatteryEstimate")
+    var showBatteryEstimate: Bool
 
     @UserDefaultsStoredInt(key: "refreshFrequency")
     var refreshFrequency: Int
