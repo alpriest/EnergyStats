@@ -25,12 +25,8 @@ struct HomePowerFlowView: View {
 
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
-            VStack {
-                Image(systemName: "sun.max.fill")
-                    .font(.system(size: 48))
-                PowerFlowView(amount: viewModel.solar, appTheme: appTheme, showColouredLines: false)
-            }
-            .frame(width: powerViewWidth)
+            SolarPowerView(appTheme: appTheme, solar: viewModel.solar)
+                .frame(width: powerViewWidth)
 
             InverterView()
                 .frame(height: 2)
