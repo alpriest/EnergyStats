@@ -53,11 +53,6 @@ struct SolarPowerView: View {
                 glowing = false
                 sunColor = .black
             }
-
-            // solar = 0, black
-            // solar = 1, yellow
-            // solar = 2, orange + glow
-            // solar = 3+, red + glow
         }
     }
 

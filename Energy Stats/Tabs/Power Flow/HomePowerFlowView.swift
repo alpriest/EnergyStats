@@ -20,7 +20,7 @@ struct HomePowerFlowView: View {
     @State private var iconFooterSize: CGSize = .zero
     @State private var lastUpdated = Date()
     let viewModel: HomePowerFlowViewModel
-    private let powerViewWidth: CGFloat = 70
+    private let powerViewWidth: CGFloat = 80
     let appTheme: LatestAppTheme
 
     var body: some View {
@@ -71,7 +71,7 @@ extension AppTheme {
             showColouredLines: true,
             showBatteryTemperature: true,
             showSunnyBackground: true,
-            decimalPlaces: 2,
+            decimalPlaces: 3,
             showBatteryEstimate: true
         )
     }
