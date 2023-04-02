@@ -83,34 +83,9 @@ class UserManager: ObservableObject {
     }
 }
 
-struct AppTheme {
-    var showColouredLines: Bool
-    var showBatteryTemperature: Bool
-    var showSunnyBackground: Bool
-    var decimalPlaces: Int
-    var showBatteryEstimate: Bool
-
-    func update(
-        showColouredLines: Bool? = nil,
-        showBatteryTemperature: Bool? = nil,
-        showSunnyBackground: Bool? = nil,
-        decimalPlaces: Int? = nil,
-        showBatteryEstimate: Bool? = nil
-    ) -> AppTheme {
-        AppTheme(
-            showColouredLines: showColouredLines ?? self.showColouredLines,
-            showBatteryTemperature: showBatteryTemperature ?? self.showBatteryTemperature,
-            showSunnyBackground: showSunnyBackground ?? self.showSunnyBackground,
-            decimalPlaces: decimalPlaces ?? self.decimalPlaces,
-            showBatteryEstimate: showBatteryEstimate ?? self.showBatteryEstimate
-        )
-    }
-}
-
-typealias LatestAppTheme = CurrentValueSubject<AppTheme, Never>
-
 protocol ConfigManaging {
     func findDevices() async throws
+    func fetchFirmwareVersions() async throws -> DeviceFirmwareVersion
     func logout()
     var minSOC: Double { get }
     var batteryCapacity: String { get set }
@@ -179,6 +154,17 @@ class ConfigManager: ConfigManaging {
             )
         }
         selectedDeviceID = devices?.first?.deviceID
+    }
+
+    func fetchFirmwareVersions() async throws -> DeviceFirmwareVersion {
+        guard let deviceID = config.selectedDeviceID else { throw NoDeviceFoundError() }
+
+        let response = try await networking.fetchAddressBook(deviceID: deviceID)
+        return DeviceFirmwareVersion(
+            master: response.softVersion.master,
+            slave: response.softVersion.slave,
+            manager: response.softVersion.manager
+        )
     }
 
     func logout() {

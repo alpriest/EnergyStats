@@ -73,4 +73,12 @@ class NetworkFacade: Networking {
 
         return try await network.fetchDeviceList()
     }
+
+    func fetchAddressBook(deviceID: String) async throws -> AddressBookResponse {
+        if config.isDemoUser {
+            return try await fakeNetwork.fetchAddressBook(deviceID: deviceID)
+        }
+
+        return try await network.fetchAddressBook(deviceID: deviceID)
+    }
 }

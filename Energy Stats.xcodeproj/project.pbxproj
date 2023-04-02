@@ -17,6 +17,7 @@
 		4107446728CA22B3006D5D7D /* InverterPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446628CA22B3006D5D7D /* InverterPath.swift */; };
 		4107446928CA42D2006D5D7D /* PylonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446828CA42D2006D5D7D /* PylonView.swift */; };
 		4107446C28CA57A9006D5D7D /* PowerFlowTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446B28CA57A9006D5D7D /* PowerFlowTabView.swift */; };
+		410AA38829D96F6D00CD107C /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410AA38729D96F6D00CD107C /* AppTheme.swift */; };
 		4110065B28E890E40018C3DF /* GraphTabViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4110065A28E890E40018C3DF /* GraphTabViewModelTests.swift */; };
 		4111333629B7D61200972935 /* Sequence+aysnc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4111333529B7D61200972935 /* Sequence+aysnc.swift */; };
 		4127690228EC865000D5A094 /* EnergyAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127690128EC865000D5A094 /* EnergyAmountView.swift */; };
@@ -51,6 +52,10 @@
 		4141B20028D86C7200B60157 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141B1FF28D86C7200B60157 /* UserManager.swift */; };
 		4141B20228D871B900B60157 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141B20128D871B900B60157 /* ContentView.swift */; };
 		414BF82829B4918300E2EB51 /* SettingsTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */; };
+		41626CCC29D95E37003FEB00 /* AddressBookResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41626CCB29D95E37003FEB00 /* AddressBookResponse.swift */; };
+		41626CCE29D95E9C003FEB00 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41626CCD29D95E9C003FEB00 /* NetworkError.swift */; };
+		41626CD029D969E9003FEB00 /* InverterFirmwareVersionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41626CCF29D969E9003FEB00 /* InverterFirmwareVersionsView.swift */; };
+		41626CD229D96AD9003FEB00 /* DeviceFirmwareVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41626CD129D96AD9003FEB00 /* DeviceFirmwareVersion.swift */; };
 		41777F1528F49C61009944FF /* NetworkFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41777F1428F49C61009944FF /* NetworkFacade.swift */; };
 		418EEEB52916843A006A8290 /* View+If.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418EEEB42916843A006A8290 /* View+If.swift */; };
 		41923E3C2916B8A800D1A8C5 /* battery-soc-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41923E3B2916B8A800D1A8C5 /* battery-soc-success.json */; };
@@ -116,6 +121,7 @@
 		4107446628CA22B3006D5D7D /* InverterPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterPath.swift; sourceTree = "<group>"; };
 		4107446828CA42D2006D5D7D /* PylonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PylonView.swift; sourceTree = "<group>"; };
 		4107446B28CA57A9006D5D7D /* PowerFlowTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerFlowTabView.swift; sourceTree = "<group>"; };
+		410AA38729D96F6D00CD107C /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		4110065A28E890E40018C3DF /* GraphTabViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTabViewModelTests.swift; sourceTree = "<group>"; };
 		4111333529B7D61200972935 /* Sequence+aysnc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+aysnc.swift"; sourceTree = "<group>"; };
 		4127690128EC865000D5A094 /* EnergyAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnergyAmountView.swift; sourceTree = "<group>"; };
@@ -150,6 +156,10 @@
 		4141B1FF28D86C7200B60157 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		4141B20128D871B900B60157 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabViewModel.swift; sourceTree = "<group>"; };
+		41626CCB29D95E37003FEB00 /* AddressBookResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressBookResponse.swift; sourceTree = "<group>"; };
+		41626CCD29D95E9C003FEB00 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		41626CCF29D969E9003FEB00 /* InverterFirmwareVersionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterFirmwareVersionsView.swift; sourceTree = "<group>"; };
+		41626CD129D96AD9003FEB00 /* DeviceFirmwareVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceFirmwareVersion.swift; sourceTree = "<group>"; };
 		41777F1428F49C61009944FF /* NetworkFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFacade.swift; sourceTree = "<group>"; };
 		418EEEB42916843A006A8290 /* View+If.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+If.swift"; sourceTree = "<group>"; };
 		41923E3B2916B8A800D1A8C5 /* battery-soc-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "battery-soc-success.json"; sourceTree = "<group>"; };
@@ -336,6 +346,7 @@
 				41D7B12328C86E4000E14144 /* Raw.swift */,
 				41D6496B28DB321600A24B41 /* DeviceList.swift */,
 				41B690F328DF5C390058126E /* NetworkResponse.swift */,
+				41626CCB29D95E37003FEB00 /* AddressBookResponse.swift */,
 			);
 			path = NetworkModels;
 			sourceTree = "<group>";
@@ -346,6 +357,7 @@
 				4140145D28C70D1400EA5BA1 /* Config.swift */,
 				4106A92C28CFCD960009DA28 /* RawVariable.swift */,
 				4103F82F2922BFBA00567B1C /* ReportVariable.swift */,
+				41626CD129D96AD9003FEB00 /* DeviceFirmwareVersion.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -356,6 +368,7 @@
 				41339C7128CC7B7B0062B976 /* LoginView.swift */,
 				41339C7328CC7BA50062B976 /* KeychainStore.swift */,
 				4141B1FF28D86C7200B60157 /* UserManager.swift */,
+				410AA38729D96F6D00CD107C /* AppTheme.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -421,6 +434,7 @@
 				414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */,
 				4130364829B86F66006B5CE9 /* BatterySettingsView.swift */,
 				4130364A29B8BE7F006B5CE9 /* InverterChoiceView.swift */,
+				41626CCF29D969E9003FEB00 /* InverterFirmwareVersionsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -440,6 +454,7 @@
 				4140146328C7146B00EA5BA1 /* NetworkModels */,
 				4140145F28C70D4700EA5BA1 /* Networking.swift */,
 				41777F1428F49C61009944FF /* NetworkFacade.swift */,
+				41626CCD29D95E9C003FEB00 /* NetworkError.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -637,6 +652,8 @@
 				41EDDF6C28CD2A630092C662 /* HomePowerFlowViewModel.swift in Sources */,
 				4140146528C714C000EA5BA1 /* Report.swift in Sources */,
 				41339C7228CC7B7B0062B976 /* LoginView.swift in Sources */,
+				41626CD029D969E9003FEB00 /* InverterFirmwareVersionsView.swift in Sources */,
+				41626CCC29D95E37003FEB00 /* AddressBookResponse.swift in Sources */,
 				41E4B31528DB77E8003F7F47 /* GridPowerView.swift in Sources */,
 				4130364929B86F66006B5CE9 /* BatterySettingsView.swift in Sources */,
 				4141B20228D871B900B60157 /* ContentView.swift in Sources */,
@@ -649,10 +666,12 @@
 				41E4B31028DB7666003F7F47 /* BatteryPowerView.swift in Sources */,
 				4140144E28C70B3200EA5BA1 /* Energy_StatsApp.swift in Sources */,
 				4140147128C77AAA00EA5BA1 /* BatteryViewModel.swift in Sources */,
+				41626CD229D96AD9003FEB00 /* DeviceFirmwareVersion.swift in Sources */,
 				4130364B29B8BE7F006B5CE9 /* InverterChoiceView.swift in Sources */,
 				4106A92D28CFCD960009DA28 /* RawVariable.swift in Sources */,
 				41E4B30E28DB7511003F7F47 /* BatteryCapacityCalculator.swift in Sources */,
 				41D7B12428C86E4000E14144 /* Raw.swift in Sources */,
+				410AA38829D96F6D00CD107C /* AppTheme.swift in Sources */,
 				4140145C28C70B4A00EA5BA1 /* PowerFlowTabViewModel.swift in Sources */,
 				4140146228C7146300EA5BA1 /* Auth.swift in Sources */,
 				4128E4C128DA5F6600C1D698 /* Date.swift in Sources */,
@@ -670,6 +689,7 @@
 				41777F1528F49C61009944FF /* NetworkFacade.swift in Sources */,
 				4106A93028D05EC90009DA28 /* Double.swift in Sources */,
 				41923E3E2916BC6F00D1A8C5 /* UsageGraphView.swift in Sources */,
+				41626CCE29D95E9C003FEB00 /* NetworkError.swift in Sources */,
 				412790FD28E1FAF700D5F993 /* String+MD5.swift in Sources */,
 				4107446728CA22B3006D5D7D /* InverterPath.swift in Sources */,
 			);

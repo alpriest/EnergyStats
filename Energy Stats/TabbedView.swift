@@ -44,7 +44,7 @@ struct TabbedView: View {
                     .accessibilityIdentifier("graph_tab")
                 }
 
-            SettingsTabView(viewModel: settingsTabViewModel)
+            SettingsTabView(viewModel: settingsTabViewModel, configManager: configManager)
                 .tabItem {
                     VStack {
                         Image(systemName: "gearshape")

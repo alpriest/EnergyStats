@@ -14,6 +14,7 @@ extension URL {
     static var battery = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/info")!
     static var deviceList = URL(string: "https://www.foxesscloud.com/c/v0/device/list")!
     static var soc = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/soc/get")!
+    static var addressBook = URL(string: "https://www.foxesscloud.com/c/v0/device/addressbook")!  // ?deviceID = XXX
 }
 
 protocol Networking {
@@ -24,59 +25,7 @@ protocol Networking {
     func fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse
     func fetchRaw(deviceID: String, variables: [RawVariable]) async throws -> [RawResponse]
     func fetchDeviceList() async throws -> PagedDeviceListResponse
-}
-
-enum NetworkError: LocalizedError, CustomStringConvertible {
-    case invalidResponse(_ url: URL?, _ responseCode: Int?)
-    case invalidConfiguration(_ reason: String)
-    case badCredentials
-    case unknown
-    case invalidToken
-    case tryLater
-    case offline
-
-    var description: String {
-        let builder = PartBuilder()
-
-        switch self {
-        case .invalidResponse(let url, let responseCode):
-            builder.append("Network Error")
-            builder.append("Could not fetch from", url)
-            builder.append("Response code", responseCode)
-        case .invalidConfiguration(let reason):
-            builder.append("Invalid configuration", reason)
-        case .badCredentials:
-            builder.append("Bad credentials")
-        case .unknown:
-            builder.append("Unknown network error")
-        case .invalidToken:
-            builder.append("Invalid token. Please logout and login again.")
-        case .tryLater:
-            builder.append("You've hit the server rate limit. Please try later.")
-        case .offline:
-            builder.append("Servers are offline")
-        }
-
-        return builder.formatted()
-    }
-
-    private class PartBuilder {
-        private var parts = [String]()
-
-        func append(_ part: String) {
-            parts.append(part)
-        }
-
-        func append<T>(_ prefix: String, _ part: T?) {
-            guard let part = part else { return }
-
-            parts.append("\(prefix) \(part)")
-        }
-
-        func formatted() -> String {
-            parts.joined(separator: "\n\n")
-        }
-    }
+    func fetchAddressBook(deviceID: String) async throws -> AddressBookResponse
 }
 
 class Network: Networking {
@@ -157,6 +106,13 @@ class Network: Networking {
         var request = URLRequest(url: URL.deviceList)
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(DeviceListRequest())
+
+        return try await fetch(request)
+    }
+
+    func fetchAddressBook(deviceID: String) async throws -> AddressBookResponse {
+        var request = URLRequest(url: URL.addressBook)
+        request.url?.append(queryItems: [URLQueryItem(name: "deviceID", value: deviceID)])
 
         return try await fetch(request)
     }

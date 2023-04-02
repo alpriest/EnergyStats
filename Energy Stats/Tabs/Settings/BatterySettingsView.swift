@@ -49,7 +49,7 @@ struct BatterySettingsView: View {
                                     isEditingCapacity = true
                                 }
                         }
-                        Text(" kW")
+                        Text(" W")
                     }
                 }
             }, header: {

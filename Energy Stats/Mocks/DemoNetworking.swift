@@ -64,6 +64,10 @@ class DemoNetworking: Networking {
         }
     }
 
+    func fetchAddressBook(deviceID: String) async throws -> AddressBookResponse {
+        AddressBookResponse(softVersion: AddressBookResponse.SoftwareVersion(master: "1.54", slave: "1.02", manager: "1.57"))
+    }
+
     private func rawData() throws -> Data {
         guard let url = Bundle(for: type(of: self)).url(forResource: "raw", withExtension: "json") else {
             return Data()

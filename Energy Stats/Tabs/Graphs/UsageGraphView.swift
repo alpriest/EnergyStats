@@ -82,9 +82,10 @@ struct UsageGraphView: View {
         .chartOverlay { chartProxy in
             GeometryReader { geometryReader in
                 if let date = selectedDate,
-                   let elementLocation = chartProxy.position(forX: date),
-                   let location = elementLocation - geometryReader[chartProxy.plotAreaFrame].origin.x
+                   let elementLocation = chartProxy.position(forX: date)
                 {
+                    let location = elementLocation - geometryReader[chartProxy.plotAreaFrame].origin.x
+                    
                     Rectangle()
                         .fill(Color("lines_notflowing"))
                         .frame(width: 1, height: chartProxy.plotAreaSize.height)

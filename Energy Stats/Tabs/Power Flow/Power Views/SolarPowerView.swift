@@ -40,10 +40,10 @@ struct SolarPowerView: View {
             switch solar {
             case 1 ..< 2:
                 glowing = false
-                sunColor = .yellow
+                sunColor = Color("Sun")
             case 2 ..< 3:
                 glowing = true
-                glowColor = .yellow
+                glowColor = Color("Sun")
                 sunColor = .orange
             case 3 ..< 500:
                 glowing = true
@@ -51,16 +51,8 @@ struct SolarPowerView: View {
                 sunColor = .red
             default:
                 glowing = false
-                sunColor = .black
+                sunColor = Color("Sun_Zero")
             }
-        }
-    }
-
-    private var foregroundColor: Color {
-        if solar > 0 {
-            return Color.yellow
-        } else {
-            return Color.black
         }
     }
 }

@@ -15,10 +15,11 @@ enum RefreshFrequency: Int {
 
 struct SettingsTabView: View {
     @ObservedObject var viewModel: SettingsTabViewModel
+    let configManager: ConfigManaging
 
     var body: some View {
         Form {
-            InverterChoiceView(viewModel: viewModel)
+            InverterChoiceView(viewModel: viewModel, configManager: configManager as! ConfigManager)
             BatterySettingsView(viewModel: viewModel)
 
             Section(
@@ -92,9 +93,10 @@ struct SettingsTabView: View {
 
 struct SettingsTabView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsTabView(viewModel: SettingsTabViewModel(
-            userManager: UserManager(networking: DemoNetworking(), store: KeychainStore(), configManager: MockConfigManager()),
-            config: MockConfigManager())
-        )
+        SettingsTabView(
+            viewModel: SettingsTabViewModel(
+                userManager: UserManager(networking: DemoNetworking(), store: KeychainStore(), configManager: MockConfigManager()),
+                config: MockConfigManager()),
+            configManager: MockConfigManager())
     }
 }
