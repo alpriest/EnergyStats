@@ -37,7 +37,7 @@ struct GraphTabView: View {
 
                     ForEach(valuesAtTime.values, id: \.id) { graphValue in
                         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
-                            Text(graphValue.variable.title)
+                            Text(graphValue.variable.title(as: .snapshot))
                             Text(graphValue.value.kW(2))
                                 .monospacedDigit()
                         }
@@ -58,7 +58,7 @@ struct GraphTabView: View {
                                     .padding(.top, 5)
 
                                 VStack(alignment: .leading) {
-                                    Text(variable.type.title)
+                                    Text(variable.type.title(as: .total))
                                     Text(variable.type.description)
                                         .font(.system(size: 10))
                                         .foregroundColor(.gray)
@@ -67,7 +67,7 @@ struct GraphTabView: View {
                                 Spacer()
 
                                 OptionalView(viewModel.total(of: variable.type.reportVariable)) {
-                                    Text($0.kW(2))
+                                    Text($0.kWh(2))
                                 }
                             }
                             .opacity(variable.enabled ? 1.0 : 0.5)

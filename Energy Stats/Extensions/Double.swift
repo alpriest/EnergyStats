@@ -15,6 +15,13 @@ extension Double {
         return String(format: "%0.\(places)fkW", divided)
     }
 
+    func kWh(_ places: Int) -> String {
+        let divisor = pow(10.0, Double(places))
+        let divided = (self * divisor).rounded() / divisor
+
+        return String(format: "%0.\(places)fkWh", divided)
+    }
+
     func w() -> String {
         let divided = (self * 1000.0).rounded()
 

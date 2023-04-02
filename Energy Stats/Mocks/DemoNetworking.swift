@@ -42,7 +42,10 @@ class DemoNetworking: Networking {
             throw NetworkError.unknown
         }
 
-        return [ReportResponse(variable: "feedin", data: [.init(index: 14, value: 1.5)])]
+        let response = try JSONDecoder().decode(NetworkResponse<[ReportResponse]>.self, from: reportData())
+        guard let result = response.result else { throw NetworkError.invalidToken }
+
+        return result
     }
 
     func fetchRaw(deviceID: String, variables: [RawVariable]) async throws -> [RawResponse] {
@@ -70,6 +73,14 @@ class DemoNetworking: Networking {
 
     private func rawData() throws -> Data {
         guard let url = Bundle(for: type(of: self)).url(forResource: "raw", withExtension: "json") else {
+            return Data()
+        }
+
+        return try Data(contentsOf: url)
+    }
+
+    private func reportData() throws -> Data {
+        guard let url = Bundle(for: type(of: self)).url(forResource: "report", withExtension: "json") else {
             return Data()
         }
 

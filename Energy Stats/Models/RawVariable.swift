@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+enum ValueUsage: String {
+    case snapshot = "power"
+    case total = "energy"
+}
+
 enum RawVariable: String, RawRepresentable {
     case generationPower
     case feedinPower
@@ -32,20 +37,20 @@ enum RawVariable: String, RawRepresentable {
         }
     }
 
-    var title: String {
+    func title(as usage: ValueUsage) -> String {
         switch self {
         case .generationPower:
-            return "Output power"
+            return "Output " + usage.rawValue
         case .feedinPower:
-            return "Feed-in power"
+            return "Feed-in " + usage.rawValue
         case .batChargePower:
-            return "Charge power"
+            return "Charge " + usage.rawValue
         case .batDischargePower:
-            return "Discharge power"
+            return "Discharge " + usage.rawValue
         case .gridConsumptionPower:
-            return "Grid consumption power"
+            return "Grid consumption " + usage.rawValue
         case .loadsPower:
-            return "Loads power"
+            return "Loads " + usage.rawValue
         }
     }
 

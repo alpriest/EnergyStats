@@ -10,7 +10,7 @@ import Foundation
 struct GraphVariable: Identifiable, Equatable, Hashable {
     let type: RawVariable
     var enabled = true
-    var id: String { type.title }
+    var id: String { type.title(as: .snapshot) }
 
     init(_ type: RawVariable, enabled: Bool = true) {
         self.type = type

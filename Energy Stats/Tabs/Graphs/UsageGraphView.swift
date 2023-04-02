@@ -15,11 +15,11 @@ struct UsageGraphView: View {
     @Binding var valuesAtTime: ValuesAtTime?
 
     var body: some View {
-        Chart(viewModel.data, id: \.variable.title) {
+        Chart(viewModel.data, id: \.variable.networkTitle) {
             AreaMark(
                 x: .value("hour", $0.date),
                 y: .value("kW", $0.value),
-                series: .value("Title", $0.variable.title),
+                series: .value("Title", $0.variable.title(as: .snapshot)),
                 stacking: .unstacked
             )
             .foregroundStyle($0.variable.colour)
