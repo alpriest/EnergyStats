@@ -8,6 +8,30 @@
 import Combine
 import SwiftUI
 
+struct SunView: View {
+    let glowing: Bool
+    let glowColor: Color
+    let sunColor: Color
+
+    var body: some View {
+        ZStack(alignment: .center) {
+            Circle()
+                .foregroundColor(sunColor)
+                .frame(width: 23, height: 23)
+                .glow(active: glowing, color: glowColor)
+
+            ForEach(Array(stride(from: 0.0, to: .pi * 2, by: .pi / 4)), id: \.self) {
+                RoundedRectangle(cornerRadius: 2.0)
+                    .foregroundColor(sunColor)
+                    .frame(width: 9, height: 4)
+                    .offset(x: -20)
+                    .rotationEffect(.degrees(($0 * 180) / .pi))
+                    .glow(active: glowing, color: glowColor)
+            }
+        }
+    }
+}
+
 struct SolarPowerView: View {
     let appTheme: LatestAppTheme
     let solar: Double
@@ -17,22 +41,8 @@ struct SolarPowerView: View {
 
     var body: some View {
         VStack {
-            ZStack(alignment: .center) {
-                Circle()
-                    .foregroundColor(sunColor)
-                    .frame(width: 23, height: 23)
-                    .glow(active: glowing, color: glowColor)
-
-                ForEach(Array(stride(from: 0.0, to: .pi * 2, by: .pi / 4)), id: \.self) {
-                    RoundedRectangle(cornerRadius: 2.0)
-                        .foregroundColor(sunColor)
-                        .frame(width: 9, height: 4)
-                        .offset(x: -20)
-                        .rotationEffect(.degrees(($0 * 180) / .pi))
-                        .glow(active: glowing, color: glowColor)
-                }
-            }
-            .frame(width: 40, height: 40)
+            SunView(glowing: glowing, glowColor: glowColor, sunColor: sunColor)
+                .frame(width: 40, height: 40)
 
             PowerFlowView(amount: solar, appTheme: appTheme, showColouredLines: false)
         }
