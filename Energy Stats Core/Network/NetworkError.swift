@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum NetworkError: LocalizedError, CustomStringConvertible {
+public enum NetworkError: LocalizedError, CustomStringConvertible {
     case invalidResponse(_ url: URL?, _ responseCode: Int?)
     case invalidConfiguration(_ reason: String)
     case badCredentials
@@ -16,7 +16,7 @@ enum NetworkError: LocalizedError, CustomStringConvertible {
     case tryLater
     case offline
 
-    var description: String {
+    public var description: String {
         let builder = PartBuilder()
 
         switch self {
@@ -39,6 +39,10 @@ enum NetworkError: LocalizedError, CustomStringConvertible {
         }
 
         return builder.formatted()
+    }
+
+    public var errorDescription: String? {
+        description
     }
 
     private class PartBuilder {

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Energy_Stats_Core
 
 struct GraphVariable: Identifiable, Equatable, Hashable {
     let type: RawVariable

@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-enum ValueUsage: String {
+public enum ValueUsage: String {
     case snapshot = "power"
     case total = "energy"
 }
 
-enum RawVariable: String, RawRepresentable {
+public enum RawVariable: String, RawRepresentable {
     case generationPower
     case feedinPower
     case batChargePower
@@ -20,7 +20,7 @@ enum RawVariable: String, RawRepresentable {
     case gridConsumptionPower
     case loadsPower
 
-    var reportVariable: ReportVariable? {
+    public var reportVariable: ReportVariable? {
         switch self {
         case .generationPower:
             return .generation
@@ -37,7 +37,7 @@ enum RawVariable: String, RawRepresentable {
         }
     }
 
-    func title(as usage: ValueUsage) -> String {
+    public func title(as usage: ValueUsage) -> String {
         switch self {
         case .generationPower:
             return "Output " + usage.rawValue
@@ -54,11 +54,11 @@ enum RawVariable: String, RawRepresentable {
         }
     }
 
-    var networkTitle: String {
+    public var networkTitle: String {
         self.rawValue
     }
 
-    var colour: Color {
+    public var colour: Color {
         switch self {
         case .batChargePower:
             return .green.opacity(0.8)
@@ -75,7 +75,7 @@ enum RawVariable: String, RawRepresentable {
         }
     }
 
-    var description: String {
+    public var description: String {
         switch self {
         case .generationPower:
             return "PV / Battery power coming through the inverter"

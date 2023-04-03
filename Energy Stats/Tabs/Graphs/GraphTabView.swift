@@ -7,6 +7,7 @@
 
 import Charts
 import SwiftUI
+import Energy_Stats_Core
 
 struct GraphTabView: View {
     @ObservedObject var viewModel: GraphTabViewModel
@@ -92,6 +93,6 @@ struct GraphTabView: View {
 
 struct GraphTabView_Previews: PreviewProvider {
     static var previews: some View {
-        GraphTabView(viewModel: GraphTabViewModel(DemoNetworking(), configManager: MockConfigManager()))
+        GraphTabView(viewModel: GraphTabViewModel(DemoNetworking(), configManager: PreviewConfigManager()))
     }
 }

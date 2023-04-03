@@ -20,23 +20,23 @@ struct ReportRequest: Encodable {
     }
 }
 
-struct QueryDate: Encodable {
+public struct QueryDate: Encodable {
     let year: Int
     let month: Int
     let day: Int
 
-    static func current() -> QueryDate {
+    public static func current() -> QueryDate {
         let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: Date())
         return QueryDate(year: dateComponents.year!, month: dateComponents.month!, day: dateComponents.day!)
     }
 }
 
-struct ReportResponse: Decodable {
-    let variable: String
-    let data: [ReportData]
+public struct ReportResponse: Decodable {
+    public let variable: String
+    public let data: [ReportData]
 
-    struct ReportData: Decodable {
-        let index: Int
-        let value: Double
+    public struct ReportData: Decodable {
+        public let index: Int
+        public let value: Double
     }
 }

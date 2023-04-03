@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Energy_Stats_Core
 
 class InverterFirmwareVersionsViewModel: ObservableObject {
     private let config: ConfigManaging
@@ -67,7 +68,7 @@ struct InverterFirmwareVersionsView: View {
 struct InverterFirmwareVersionsView_Previews: PreviewProvider {
     static var previews: some View {
         Form {
-            InverterFirmwareVersionsView(viewModel: InverterFirmwareVersionsViewModel(config: MockConfigManager()))
+            InverterFirmwareVersionsView(viewModel: InverterFirmwareVersionsViewModel(config: PreviewConfigManager()))
         }
     }
 }

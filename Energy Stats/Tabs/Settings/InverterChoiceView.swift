@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Energy_Stats_Core
 
 struct InverterChoiceView: View {
     @ObservedObject var viewModel: SettingsTabViewModel
@@ -36,12 +37,12 @@ struct InverterChoiceView: View {
 struct InverterChoiceView_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = SettingsTabViewModel(
-            userManager: UserManager(networking: DemoNetworking(), store: KeychainStore(), configManager: MockConfigManager()),
-            config: MockConfigManager()
+            userManager: UserManager(networking: DemoNetworking(), store: KeychainStore(), configManager: PreviewConfigManager()),
+            config: PreviewConfigManager()
         )
 
         return Form {
-            InverterChoiceView(viewModel: viewModel, configManager: MockConfigManager())
+            InverterChoiceView(viewModel: viewModel, configManager: PreviewConfigManager())
         }
     }
 }

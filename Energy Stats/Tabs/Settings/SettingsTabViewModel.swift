@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Energy_Stats_Core
 
 class SettingsTabViewModel: ObservableObject {
     @Published var showColouredLines: Bool {

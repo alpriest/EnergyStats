@@ -7,7 +7,7 @@
 
 import Foundation
 
-class KeychainStore: ObservableObject {
+public class KeychainStore: ObservableObject {
     struct KeychainError: Error {
         init(_ code: OSStatus? = nil) {
             self.code = code
@@ -16,13 +16,13 @@ class KeychainStore: ObservableObject {
         let code: OSStatus?
     }
 
-    @Published var hasCredentials = false
+    @Published public var hasCredentials = false
 
-    init() {
+    public init() {
         updateHasCredentials()
     }
 
-    func getUsername() -> String? {
+    public func getUsername() -> String? {
         get(tag: "username")
     }
 
@@ -30,7 +30,7 @@ class KeychainStore: ObservableObject {
         get(tag: "password")
     }
 
-    func store(username: String, hashedPassword: String, updateHasCredentials: Bool = true) throws {
+    public func store(username: String, hashedPassword: String, updateHasCredentials: Bool = true) throws {
         logout()
 
         try set(tag: "password", value: hashedPassword)
@@ -51,13 +51,13 @@ class KeychainStore: ObservableObject {
         get(tag: "token")
     }
 
-    func logout() {
+    public func logout() {
         SecItemDelete(makeQuery(tag: "username"))
         SecItemDelete(makeQuery(tag: "password"))
         updateHasCredentials()
     }
 
-    func updateHasCredentials() {
+    public func updateHasCredentials() {
         hasCredentials = getUsername() != nil && getHashedPassword() != nil
     }
 }

@@ -17,7 +17,7 @@ extension URL {
     static var addressBook = URL(string: "https://www.foxesscloud.com/c/v0/device/addressbook")!
 }
 
-protocol Networking {
+public protocol Networking {
     func ensureHasToken() async
     func verifyCredentials(username: String, hashedPassword: String) async throws
     func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate) async throws -> [ReportResponse]
@@ -28,7 +28,7 @@ protocol Networking {
     func fetchAddressBook(deviceID: String) async throws -> AddressBookResponse
 }
 
-class Network: Networking {
+public class Network: Networking {
     private var token: String? {
         get { credentials.getToken() }
         set {
@@ -40,16 +40,16 @@ class Network: Networking {
     private let credentials: KeychainStore
     private let config: Config
 
-    init(credentials: KeychainStore, config: Config) {
+    public init(credentials: KeychainStore, config: Config) {
         self.credentials = credentials
         self.config = config
     }
 
-    func verifyCredentials(username: String, hashedPassword: String) async throws {
+    public func verifyCredentials(username: String, hashedPassword: String) async throws {
         _ = try await fetchLoginToken(username: username, hashedPassword: hashedPassword)
     }
 
-    func ensureHasToken() async {
+    public func ensureHasToken() async {
         do {
             if token == nil {
                 token = try await fetchLoginToken()
@@ -59,7 +59,7 @@ class Network: Networking {
         }
     }
 
-    func fetchLoginToken(username: String? = nil, hashedPassword: String? = nil) async throws -> String {
+    private func fetchLoginToken(username: String? = nil, hashedPassword: String? = nil) async throws -> String {
         guard let hashedPassword = hashedPassword ?? credentials.getHashedPassword(),
               let username = username ?? credentials.getUsername() else { throw NetworkError.badCredentials }
 
@@ -72,7 +72,7 @@ class Network: Networking {
         return response.token
     }
 
-    func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate) async throws -> [ReportResponse] {
+    public func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate) async throws -> [ReportResponse] {
         var request = URLRequest(url: URL.report)
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(ReportRequest(deviceID: deviceID, variables: variables, queryDate: queryDate))
@@ -80,21 +80,21 @@ class Network: Networking {
         return try await fetch(request)
     }
 
-    func fetchBattery(deviceID: String) async throws -> BatteryResponse {
+    public func fetchBattery(deviceID: String) async throws -> BatteryResponse {
         var request = URLRequest(url: URL.battery)
         request.url?.append(queryItems: [Foundation.URLQueryItem(name: "id", value: deviceID)])
 
         return try await fetch(request)
     }
 
-    func fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse {
+    public func fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse {
         var request = URLRequest(url: URL.soc)
         request.url?.append(queryItems: [Foundation.URLQueryItem(name: "sn", value: deviceSN)])
 
         return try await fetch(request)
     }
 
-    func fetchRaw(deviceID: String, variables: [RawVariable]) async throws -> [RawResponse] {
+    public func fetchRaw(deviceID: String, variables: [RawVariable]) async throws -> [RawResponse] {
         var request = URLRequest(url: URL.raw)
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(RawRequest(deviceID: deviceID, variables: variables))
@@ -102,7 +102,7 @@ class Network: Networking {
         return try await fetch(request)
     }
 
-    func fetchDeviceList() async throws -> PagedDeviceListResponse {
+    public func fetchDeviceList() async throws -> PagedDeviceListResponse {
         var request = URLRequest(url: URL.deviceList)
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(DeviceListRequest())
@@ -110,7 +110,7 @@ class Network: Networking {
         return try await fetch(request)
     }
 
-    func fetchAddressBook(deviceID: String) async throws -> AddressBookResponse {
+    public func fetchAddressBook(deviceID: String) async throws -> AddressBookResponse {
         var request = URLRequest(url: URL.addressBook)
         request.url?.append(queryItems: [URLQueryItem(name: "deviceID", value: deviceID)])
 

@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol Config {
+public protocol Config {
     var isDemoUser: Bool { get set }
     var showColouredLines: Bool { get set }
     var showBatteryTemperature: Bool { get set }
@@ -19,41 +19,43 @@ protocol Config {
     var selectedDeviceID: String? { get set }
 }
 
-class UserDefaultsConfig: Config {
+public class UserDefaultsConfig: Config {
+    public init() {}
+
     @UserDefaultsStoredBool(key: "isDemoUser")
-    var isDemoUser: Bool
+    public var isDemoUser: Bool
 
     @UserDefaultsStoredBool(key: "showColouredLines", defaultValue: true)
-    var showColouredLines: Bool
+    public var showColouredLines: Bool
 
     @UserDefaultsStoredBool(key: "showBatteryTemperature")
-    var showBatteryTemperature: Bool
+    public var showBatteryTemperature: Bool
 
     @UserDefaultsStoredBool(key: "showBatteryEstimate")
-    var showBatteryEstimate: Bool
+    public var showBatteryEstimate: Bool
 
     @UserDefaultsStoredInt(key: "refreshFrequency")
-    var refreshFrequency: Int
+    public var refreshFrequency: Int
 
     @UserDefaultsStoredInt(key: "decimalPlaces", defaultValue: 3)
-    var decimalPlaces: Int
+    public var decimalPlaces: Int
 
     @UserDefaultsStoredBool(key: "showSunnyBackground", defaultValue: true)
-    var showSunnyBackground: Bool
+    public var showSunnyBackground: Bool
 
     @UserDefaultsStoredData(key: "devices")
-    var devices: Data?
+    public var devices: Data?
 
     @UserDefaultsStoredString(key: "selectedDeviceID")
-    var selectedDeviceID: String?
+    public var selectedDeviceID: String?
 }
 
 @propertyWrapper
-struct UserDefaultsStoredInt {
+public struct UserDefaultsStoredInt {
     var key: String
     var defaultValue: Int = 0
 
-    var wrappedValue: Int {
+    public var wrappedValue: Int {
         get {
             (UserDefaults.standard.object(forKey: key) as? Int) ?? defaultValue
         }
@@ -64,10 +66,10 @@ struct UserDefaultsStoredInt {
 }
 
 @propertyWrapper
-struct UserDefaultsStoredString {
+public struct UserDefaultsStoredString {
     var key: String
 
-    var wrappedValue: String? {
+    public var wrappedValue: String? {
         get {
             UserDefaults.standard.string(forKey: key)
         }
@@ -78,11 +80,11 @@ struct UserDefaultsStoredString {
 }
 
 @propertyWrapper
-struct UserDefaultsStoredBool {
+public struct UserDefaultsStoredBool {
     var key: String
     var defaultValue: Bool = false
 
-    var wrappedValue: Bool {
+    public var wrappedValue: Bool {
         get {
             (UserDefaults.standard.object(forKey: key) as? Bool) ?? defaultValue
         }
@@ -93,10 +95,10 @@ struct UserDefaultsStoredBool {
 }
 
 @propertyWrapper
-struct UserDefaultsStoredData {
+public struct UserDefaultsStoredData {
     var key: String
 
-    var wrappedValue: Data? {
+    public var wrappedValue: Data? {
         get {
             UserDefaults.standard.data(forKey: key)
         }

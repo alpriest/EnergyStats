@@ -7,6 +7,7 @@
 
 import Combine
 import SwiftUI
+import Energy_Stats_Core
 
 struct PowerFlowTabView: View {
     @ObservedObject var viewModel: PowerFlowTabViewModel
@@ -73,7 +74,7 @@ struct PowerFlowTabView: View {
 
 struct PowerFlowTabView_Previews: PreviewProvider {
     static var previews: some View {
-        PowerFlowTabView(viewModel: PowerFlowTabViewModel(DemoNetworking(), configManager: MockConfigManager()),
+        PowerFlowTabView(viewModel: PowerFlowTabViewModel(DemoNetworking(), configManager: PreviewConfigManager()),
                          appTheme: CurrentValueSubject(AppTheme.mock()))
     }
 }

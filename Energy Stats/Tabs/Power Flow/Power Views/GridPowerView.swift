@@ -7,6 +7,7 @@
 
 import Combine
 import SwiftUI
+import Energy_Stats_Core
 
 struct GridPowerView: View {
     let amount: Double

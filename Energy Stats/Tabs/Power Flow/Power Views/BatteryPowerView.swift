@@ -7,6 +7,7 @@
 
 import Combine
 import SwiftUI
+import Energy_Stats_Core
 
 struct BatteryPowerViewModel {
     private(set) var batteryStateOfCharge: Double
@@ -88,6 +89,6 @@ struct BatteryPowerView_Previews: PreviewProvider {
 
 extension BatteryPowerViewModel {
     static func any() -> BatteryPowerViewModel {
-        .init(configManager: MockConfigManager(), batteryStateOfCharge: 0.99, battery: -0.01, temperature: 15.6)
+        .init(configManager: PreviewConfigManager(), batteryStateOfCharge: 0.99, battery: -0.01, temperature: 15.6)
     }
 }

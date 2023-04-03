@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Energy_Stats_Core
 
 struct BatterySettingsView: View {
     @ObservedObject var viewModel: SettingsTabViewModel
@@ -66,8 +67,8 @@ struct BatterySettingsView_Previews: PreviewProvider {
     static var previews: some View {
         Form {
             BatterySettingsView(viewModel: SettingsTabViewModel(
-                userManager: UserManager(networking: DemoNetworking(), store: KeychainStore(), configManager: MockConfigManager()),
-                config: MockConfigManager())
+                userManager: UserManager(networking: DemoNetworking(), store: KeychainStore(), configManager: PreviewConfigManager()),
+                config: PreviewConfigManager())
             )
         }
     }

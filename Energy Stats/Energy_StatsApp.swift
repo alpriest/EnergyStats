@@ -5,6 +5,7 @@
 //  Created by Alistair Priest on 06/09/2022.
 //
 
+import Energy_Stats_Core
 import SwiftUI
 
 @main

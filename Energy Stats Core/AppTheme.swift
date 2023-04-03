@@ -8,14 +8,22 @@
 import Foundation
 import Combine
 
-struct AppTheme {
-    var showColouredLines: Bool
-    var showBatteryTemperature: Bool
-    var showSunnyBackground: Bool
-    var decimalPlaces: Int
-    var showBatteryEstimate: Bool
+public struct AppTheme {
+    public var showColouredLines: Bool
+    public var showBatteryTemperature: Bool
+    public var showSunnyBackground: Bool
+    public var decimalPlaces: Int
+    public var showBatteryEstimate: Bool
 
-    func update(
+    public init(showColouredLines: Bool, showBatteryTemperature: Bool, showSunnyBackground: Bool, decimalPlaces: Int, showBatteryEstimate: Bool) {
+        self.showColouredLines = showColouredLines
+        self.showBatteryTemperature = showBatteryTemperature
+        self.showSunnyBackground = showSunnyBackground
+        self.decimalPlaces = decimalPlaces
+        self.showBatteryEstimate = showBatteryEstimate
+    }
+
+    public func update(
         showColouredLines: Bool? = nil,
         showBatteryTemperature: Bool? = nil,
         showSunnyBackground: Bool? = nil,
@@ -32,4 +40,4 @@ struct AppTheme {
     }
 }
 
-typealias LatestAppTheme = CurrentValueSubject<AppTheme, Never>
+public typealias LatestAppTheme = CurrentValueSubject<AppTheme, Never>

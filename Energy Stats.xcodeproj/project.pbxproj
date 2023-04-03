@@ -8,23 +8,39 @@
 
 /* Begin PBXBuildFile section */
 		41028F9528CDD7A300FB70FD /* OptionalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41028F9428CDD7A300FB70FD /* OptionalView.swift */; };
-		4103F8302922BFBA00567B1C /* ReportVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4103F82F2922BFBA00567B1C /* ReportVariable.swift */; };
-		4106A92D28CFCD960009DA28 /* RawVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4106A92C28CFCD960009DA28 /* RawVariable.swift */; };
+		4103D1CE29DB6C43001B0BC8 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4103D1CD29DB6C43001B0BC8 /* ContentViewModel.swift */; };
+		4103D1CF29DB6C4D001B0BC8 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146128C7146300EA5BA1 /* Auth.swift */; };
+		4103D1D029DB6C51001B0BC8 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146428C714C000EA5BA1 /* Report.swift */; };
+		4103D1D129DB6C51001B0BC8 /* Raw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D7B12328C86E4000E14144 /* Raw.swift */; };
+		4103D1D229DB6C51001B0BC8 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41626CCD29D95E9C003FEB00 /* NetworkError.swift */; };
+		4103D1D329DB6C51001B0BC8 /* BatteryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146E28C77A3100EA5BA1 /* BatteryResponse.swift */; };
+		4103D1D429DB6C51001B0BC8 /* DeviceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D6496B28DB321600A24B41 /* DeviceList.swift */; };
+		4103D1D529DB6C51001B0BC8 /* NetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B690F328DF5C390058126E /* NetworkResponse.swift */; };
+		4103D1D629DB6C51001B0BC8 /* AddressBookResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41626CCB29D95E37003FEB00 /* AddressBookResponse.swift */; };
+		4103D1D729DB6C51001B0BC8 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140145F28C70D4700EA5BA1 /* Networking.swift */; };
+		4103D1D829DB6C51001B0BC8 /* NetworkFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41777F1428F49C61009944FF /* NetworkFacade.swift */; };
+		4103D1D929DB6C6D001B0BC8 /* ReportVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4103F82F2922BFBA00567B1C /* ReportVariable.swift */; };
+		4103D1DA29DB6C6D001B0BC8 /* DeviceFirmwareVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41626CD129D96AD9003FEB00 /* DeviceFirmwareVersion.swift */; };
+		4103D1DB29DB6C6D001B0BC8 /* RawVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4106A92C28CFCD960009DA28 /* RawVariable.swift */; };
+		4103D1DC29DB6C6D001B0BC8 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140145D28C70D1400EA5BA1 /* Config.swift */; };
+		4103D1DD29DB6C8C001B0BC8 /* report.json in Resources */ = {isa = PBXBuildFile; fileRef = 41F8D8F6292D7650005E2D18 /* report.json */; };
+		4103D1DE29DB6C8C001B0BC8 /* raw.json in Resources */ = {isa = PBXBuildFile; fileRef = 41AED86928CDCD94009C6517 /* raw.json */; };
+		4103D1DF29DB6C8C001B0BC8 /* DemoNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A25D4028CA6E0000315714 /* DemoNetworking.swift */; };
+		4103D1E229DB6CD7001B0BC8 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4103D1E029DB6CB9001B0BC8 /* ConfigManager.swift */; };
+		4103D1E329DB6D03001B0BC8 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410AA38729D96F6D00CD107C /* AppTheme.swift */; };
+		4103D1E429DB6D12001B0BC8 /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41339C7328CC7BA50062B976 /* KeychainStore.swift */; };
+		4103D1E529DB6D29001B0BC8 /* Sequence+aysnc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4111333529B7D61200972935 /* Sequence+aysnc.swift */; };
 		4106A93028D05EC90009DA28 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4106A92F28D05EC90009DA28 /* Double.swift */; };
 		4107446128C9EF6B006D5D7D /* HomePowerFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446028C9EF6B006D5D7D /* HomePowerFlowView.swift */; };
 		4107446328CA1C5D006D5D7D /* PowerFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446228CA1C5D006D5D7D /* PowerFlowView.swift */; };
 		4107446528CA1D76006D5D7D /* FlowingLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446428CA1D76006D5D7D /* FlowingLine.swift */; };
 		4107446728CA22B3006D5D7D /* InverterPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446628CA22B3006D5D7D /* InverterPath.swift */; };
-		4107446928CA42D2006D5D7D /* PylonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446828CA42D2006D5D7D /* PylonView.swift */; };
 		4107446C28CA57A9006D5D7D /* PowerFlowTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446B28CA57A9006D5D7D /* PowerFlowTabView.swift */; };
-		410AA38829D96F6D00CD107C /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410AA38729D96F6D00CD107C /* AppTheme.swift */; };
 		4110065B28E890E40018C3DF /* GraphTabViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4110065A28E890E40018C3DF /* GraphTabViewModelTests.swift */; };
-		4111333629B7D61200972935 /* Sequence+aysnc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4111333529B7D61200972935 /* Sequence+aysnc.swift */; };
 		4127690228EC865000D5A094 /* EnergyAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127690128EC865000D5A094 /* EnergyAmountView.swift */; };
 		412790FD28E1FAF700D5F993 /* String+MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412790FC28E1FAF700D5F993 /* String+MD5.swift */; };
 		412790FF28E1FB9200D5F993 /* UserManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412790FE28E1FB9200D5F993 /* UserManagerTests.swift */; };
 		4127910228E1FBD300D5F993 /* MockKeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127910128E1FBD300D5F993 /* MockKeychainStore.swift */; };
-		4127910428E1FC0200D5F993 /* DemoNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A25D4028CA6E0000315714 /* DemoNetworking.swift */; };
 		4127910628E1FC1D00D5F993 /* MockNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127910528E1FC1D00D5F993 /* MockNetworking.swift */; };
 		4127910828E23D0A00D5F993 /* MockConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127910728E23D0A00D5F993 /* MockConfig.swift */; };
 		4127910B28E241E700D5F993 /* XCTestCase+OHHTTPStubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127910A28E241E700D5F993 /* XCTestCase+OHHTTPStubs.swift */; };
@@ -35,28 +51,18 @@
 		4130364929B86F66006B5CE9 /* BatterySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4130364829B86F66006B5CE9 /* BatterySettingsView.swift */; };
 		4130364B29B8BE7F006B5CE9 /* InverterChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4130364A29B8BE7F006B5CE9 /* InverterChoiceView.swift */; };
 		41339C7228CC7B7B0062B976 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41339C7128CC7B7B0062B976 /* LoginView.swift */; };
-		41339C7428CC7BA50062B976 /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41339C7328CC7BA50062B976 /* KeychainStore.swift */; };
 		4140144E28C70B3200EA5BA1 /* Energy_StatsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140144D28C70B3200EA5BA1 /* Energy_StatsApp.swift */; };
 		4140145028C70B3200EA5BA1 /* TabbedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140144F28C70B3200EA5BA1 /* TabbedView.swift */; };
 		4140145228C70B3200EA5BA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4140145128C70B3200EA5BA1 /* Assets.xcassets */; };
 		4140145528C70B3200EA5BA1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4140145428C70B3200EA5BA1 /* Preview Assets.xcassets */; };
 		4140145C28C70B4A00EA5BA1 /* PowerFlowTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140145B28C70B4A00EA5BA1 /* PowerFlowTabViewModel.swift */; };
-		4140145E28C70D1400EA5BA1 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140145D28C70D1400EA5BA1 /* Config.swift */; };
-		4140146028C70D4700EA5BA1 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140145F28C70D4700EA5BA1 /* Networking.swift */; };
-		4140146228C7146300EA5BA1 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146128C7146300EA5BA1 /* Auth.swift */; };
-		4140146528C714C000EA5BA1 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146428C714C000EA5BA1 /* Report.swift */; };
 		4140146928C7374400EA5BA1 /* HistoricalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146828C7374400EA5BA1 /* HistoricalViewModel.swift */; };
-		4140146F28C77A3100EA5BA1 /* BatteryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146E28C77A3100EA5BA1 /* BatteryResponse.swift */; };
 		4140147128C77AAA00EA5BA1 /* BatteryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140147028C77AAA00EA5BA1 /* BatteryViewModel.swift */; };
 		4140ECDA292D58D300992DD8 /* GraphVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140ECD9292D58D300992DD8 /* GraphVariable.swift */; };
 		4141B20028D86C7200B60157 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141B1FF28D86C7200B60157 /* UserManager.swift */; };
 		4141B20228D871B900B60157 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141B20128D871B900B60157 /* ContentView.swift */; };
 		414BF82829B4918300E2EB51 /* SettingsTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */; };
-		41626CCC29D95E37003FEB00 /* AddressBookResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41626CCB29D95E37003FEB00 /* AddressBookResponse.swift */; };
-		41626CCE29D95E9C003FEB00 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41626CCD29D95E9C003FEB00 /* NetworkError.swift */; };
 		41626CD029D969E9003FEB00 /* InverterFirmwareVersionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41626CCF29D969E9003FEB00 /* InverterFirmwareVersionsView.swift */; };
-		41626CD229D96AD9003FEB00 /* DeviceFirmwareVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41626CD129D96AD9003FEB00 /* DeviceFirmwareVersion.swift */; };
-		41777F1528F49C61009944FF /* NetworkFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41777F1428F49C61009944FF /* NetworkFacade.swift */; };
 		418EEEB52916843A006A8290 /* View+If.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418EEEB42916843A006A8290 /* View+If.swift */; };
 		41923E3C2916B8A800D1A8C5 /* battery-soc-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41923E3B2916B8A800D1A8C5 /* battery-soc-success.json */; };
 		41923E3E2916BC6F00D1A8C5 /* UsageGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41923E3D2916BC6F00D1A8C5 /* UsageGraphView.swift */; };
@@ -76,8 +82,6 @@
 		41A95BA129DB3F7E00A35169 /* PylonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A95BA029DB3F7E00A35169 /* PylonView.swift */; };
 		41A95BAC29DB401400A35169 /* Energy_Stats_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; };
 		41A95BAD29DB401400A35169 /* Energy_Stats_Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		41AED86A28CDCD94009C6517 /* raw.json in Resources */ = {isa = PBXBuildFile; fileRef = 41AED86928CDCD94009C6517 /* raw.json */; };
-		41B690F428DF5C390058126E /* NetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B690F328DF5C390058126E /* NetworkResponse.swift */; };
 		41B690F628E03EA70058126E /* NetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B690F528E03EA70058126E /* NetworkTests.swift */; };
 		41B690F928E040060058126E /* OHHTTPStubsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 41B690F828E040060058126E /* OHHTTPStubsSwift */; };
 		41B690FD28E042560058126E /* login-failure.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B690FB28E042560058126E /* login-failure.json */; };
@@ -89,8 +93,6 @@
 		41B6910B28E0CD370058126E /* battery-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B6910A28E0CD370058126E /* battery-success.json */; };
 		41B6910D28E0CD8F0058126E /* raw-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B6910C28E0CD8F0058126E /* raw-success.json */; };
 		41B6910F28E0CDFC0058126E /* devicelist-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B6910E28E0CDFC0058126E /* devicelist-success.json */; };
-		41D6496C28DB321600A24B41 /* DeviceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D6496B28DB321600A24B41 /* DeviceList.swift */; };
-		41D7B12428C86E4000E14144 /* Raw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D7B12328C86E4000E14144 /* Raw.swift */; };
 		41DD7F3A29C5B8940072CDE8 /* SolarPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD7F3929C5B8940072CDE8 /* SolarPowerView.swift */; };
 		41E1DFDF28D87781001235B9 /* SettingsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E1DFDE28D87781001235B9 /* SettingsTabView.swift */; };
 		41E299CF29B7260D001F017B /* Energy_Stats_UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E299CE29B7260D001F017B /* Energy_Stats_UITestsLaunchTests.swift */; };
@@ -101,7 +103,6 @@
 		41E4B31528DB77E8003F7F47 /* GridPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E4B31428DB77E8003F7F47 /* GridPowerView.swift */; };
 		41EDDF6C28CD2A630092C662 /* HomePowerFlowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EDDF6B28CD2A630092C662 /* HomePowerFlowViewModel.swift */; };
 		41EDDF7428CD2ED30092C662 /* Energy_StatsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EDDF7328CD2ED30092C662 /* Energy_StatsTests.swift */; };
-		41F8D8F7292D7650005E2D18 /* report.json in Resources */ = {isa = PBXBuildFile; fileRef = 41F8D8F6292D7650005E2D18 /* report.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -180,6 +181,8 @@
 
 /* Begin PBXFileReference section */
 		41028F9428CDD7A300FB70FD /* OptionalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalView.swift; sourceTree = "<group>"; };
+		4103D1CD29DB6C43001B0BC8 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		4103D1E029DB6CB9001B0BC8 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
 		4103F82F2922BFBA00567B1C /* ReportVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportVariable.swift; sourceTree = "<group>"; };
 		4106A92C28CFCD960009DA28 /* RawVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawVariable.swift; sourceTree = "<group>"; };
 		4106A92F28D05EC90009DA28 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
@@ -187,7 +190,6 @@
 		4107446228CA1C5D006D5D7D /* PowerFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerFlowView.swift; sourceTree = "<group>"; };
 		4107446428CA1D76006D5D7D /* FlowingLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowingLine.swift; sourceTree = "<group>"; };
 		4107446628CA22B3006D5D7D /* InverterPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterPath.swift; sourceTree = "<group>"; };
-		4107446828CA42D2006D5D7D /* PylonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PylonView.swift; sourceTree = "<group>"; };
 		4107446B28CA57A9006D5D7D /* PowerFlowTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerFlowTabView.swift; sourceTree = "<group>"; };
 		410AA38729D96F6D00CD107C /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		4110065A28E890E40018C3DF /* GraphTabViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTabViewModelTests.swift; sourceTree = "<group>"; };
@@ -318,14 +320,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4103D1E629DB6D2C001B0BC8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4111333529B7D61200972935 /* Sequence+aysnc.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		4106A92E28D05EC10009DA28 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				41028F9428CDD7A300FB70FD /* OptionalView.swift */,
 				4106A92F28D05EC90009DA28 /* Double.swift */,
 				4128E4C028DA5F6600C1D698 /* Date.swift */,
 				412790FC28E1FAF700D5F993 /* String+MD5.swift */,
 				418EEEB42916843A006A8290 /* View+If.swift */,
-				4111333529B7D61200972935 /* Sequence+aysnc.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -410,13 +420,9 @@
 				4141B20128D871B900B60157 /* ContentView.swift */,
 				41A25D4228CA706700315714 /* CountdownTimer.swift */,
 				4140144D28C70B3200EA5BA1 /* Energy_StatsApp.swift */,
-				41028F9428CDD7A300FB70FD /* OptionalView.swift */,
 				412E3C7D28D2519B004A0DCF /* Energy-Stats-Info.plist */,
 				4106A92E28D05EC10009DA28 /* Extensions */,
 				4141B1FE28D86C5B00B60157 /* Login */,
-				4140146728C7373A00EA5BA1 /* Models */,
-				41E4B30C28DB670C003F7F47 /* Network */,
-				413745072919022C00D351F1 /* Mocks */,
 				4140145328C70B3200EA5BA1 /* Preview Content */,
 				4140144F28C70B3200EA5BA1 /* TabbedView.swift */,
 				4107446A28CA57A1006D5D7D /* Tabs */,
@@ -462,9 +468,7 @@
 			isa = PBXGroup;
 			children = (
 				41339C7128CC7B7B0062B976 /* LoginView.swift */,
-				41339C7328CC7BA50062B976 /* KeychainStore.swift */,
 				4141B1FF28D86C7200B60157 /* UserManager.swift */,
-				410AA38729D96F6D00CD107C /* AppTheme.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -483,7 +487,6 @@
 				4107446B28CA57A9006D5D7D /* PowerFlowTabView.swift */,
 				4140145B28C70B4A00EA5BA1 /* PowerFlowTabViewModel.swift */,
 				4107446228CA1C5D006D5D7D /* PowerFlowView.swift */,
-				4107446828CA42D2006D5D7D /* PylonView.swift */,
 				4127690128EC865000D5A094 /* EnergyAmountView.swift */,
 			);
 			path = "Power Flow";
@@ -507,6 +510,7 @@
 				41A95B8129DB2F0900A35169 /* ContentView.swift */,
 				41A95B8329DB2F0A00A35169 /* Assets.xcassets */,
 				41A95B8529DB2F0A00A35169 /* Preview Content */,
+				4103D1CD29DB6C43001B0BC8 /* ContentViewModel.swift */,
 			);
 			path = "Energy Stats Watch App Watch App";
 			sourceTree = "<group>";
@@ -523,6 +527,13 @@
 			isa = PBXGroup;
 			children = (
 				41A95B9629DB3F6A00A35169 /* Energy_Stats_Core.h */,
+				410AA38729D96F6D00CD107C /* AppTheme.swift */,
+				4103D1E029DB6CB9001B0BC8 /* ConfigManager.swift */,
+				41339C7328CC7BA50062B976 /* KeychainStore.swift */,
+				4103D1E629DB6D2C001B0BC8 /* Extensions */,
+				4140146728C7373A00EA5BA1 /* Models */,
+				413745072919022C00D351F1 /* Mocks */,
+				41E4B30C28DB670C003F7F47 /* Network */,
 				41A95BA029DB3F7E00A35169 /* PylonView.swift */,
 			);
 			path = "Energy Stats Core";
@@ -787,8 +798,6 @@
 			files = (
 				4140145528C70B3200EA5BA1 /* Preview Assets.xcassets in Resources */,
 				4140145228C70B3200EA5BA1 /* Assets.xcassets in Resources */,
-				41AED86A28CDCD94009C6517 /* raw.json in Resources */,
-				41F8D8F7292D7650005E2D18 /* report.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -805,6 +814,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4103D1DE29DB6C8C001B0BC8 /* raw.json in Resources */,
+				4103D1DD29DB6C8C001B0BC8 /* report.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -839,22 +850,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				4107446C28CA57A9006D5D7D /* PowerFlowTabView.swift in Sources */,
-				41B690F428DF5C390058126E /* NetworkResponse.swift in Sources */,
 				4127690228EC865000D5A094 /* EnergyAmountView.swift in Sources */,
 				418EEEB52916843A006A8290 /* View+If.swift in Sources */,
 				4140145028C70B3200EA5BA1 /* TabbedView.swift in Sources */,
-				41339C7428CC7BA50062B976 /* KeychainStore.swift in Sources */,
 				41A25D4328CA706700315714 /* CountdownTimer.swift in Sources */,
-				41D6496C28DB321600A24B41 /* DeviceList.swift in Sources */,
 				4141B20028D86C7200B60157 /* UserManager.swift in Sources */,
-				4140146028C70D4700EA5BA1 /* Networking.swift in Sources */,
 				41028F9528CDD7A300FB70FD /* OptionalView.swift in Sources */,
 				419CCB542933BABF00882649 /* ErrorAlertView.swift in Sources */,
 				41EDDF6C28CD2A630092C662 /* HomePowerFlowViewModel.swift in Sources */,
-				4140146528C714C000EA5BA1 /* Report.swift in Sources */,
 				41339C7228CC7B7B0062B976 /* LoginView.swift in Sources */,
 				41626CD029D969E9003FEB00 /* InverterFirmwareVersionsView.swift in Sources */,
-				41626CCC29D95E37003FEB00 /* AddressBookResponse.swift in Sources */,
 				41E4B31528DB77E8003F7F47 /* GridPowerView.swift in Sources */,
 				4130364929B86F66006B5CE9 /* BatterySettingsView.swift in Sources */,
 				4141B20228D871B900B60157 /* ContentView.swift in Sources */,
@@ -863,34 +868,21 @@
 				41A25D3D28CA5CDF00315714 /* GraphTabView.swift in Sources */,
 				4140ECDA292D58D300992DD8 /* GraphVariable.swift in Sources */,
 				4140146928C7374400EA5BA1 /* HistoricalViewModel.swift in Sources */,
-				4140145E28C70D1400EA5BA1 /* Config.swift in Sources */,
 				41E4B31028DB7666003F7F47 /* BatteryPowerView.swift in Sources */,
 				4140144E28C70B3200EA5BA1 /* Energy_StatsApp.swift in Sources */,
 				4140147128C77AAA00EA5BA1 /* BatteryViewModel.swift in Sources */,
-				41626CD229D96AD9003FEB00 /* DeviceFirmwareVersion.swift in Sources */,
 				4130364B29B8BE7F006B5CE9 /* InverterChoiceView.swift in Sources */,
-				4106A92D28CFCD960009DA28 /* RawVariable.swift in Sources */,
 				41E4B30E28DB7511003F7F47 /* BatteryCapacityCalculator.swift in Sources */,
-				41D7B12428C86E4000E14144 /* Raw.swift in Sources */,
-				410AA38829D96F6D00CD107C /* AppTheme.swift in Sources */,
 				4140145C28C70B4A00EA5BA1 /* PowerFlowTabViewModel.swift in Sources */,
-				4140146228C7146300EA5BA1 /* Auth.swift in Sources */,
 				4128E4C128DA5F6600C1D698 /* Date.swift in Sources */,
 				41DD7F3A29C5B8940072CDE8 /* SolarPowerView.swift in Sources */,
-				4103F8302922BFBA00567B1C /* ReportVariable.swift in Sources */,
-				4140146F28C77A3100EA5BA1 /* BatteryResponse.swift in Sources */,
 				4107446528CA1D76006D5D7D /* FlowingLine.swift in Sources */,
 				41E1DFDF28D87781001235B9 /* SettingsTabView.swift in Sources */,
-				4127910428E1FC0200D5F993 /* DemoNetworking.swift in Sources */,
 				4107446328CA1C5D006D5D7D /* PowerFlowView.swift in Sources */,
 				41A25D3F28CA5CFB00315714 /* GraphTabViewModel.swift in Sources */,
 				4107446128C9EF6B006D5D7D /* HomePowerFlowView.swift in Sources */,
-				4107446928CA42D2006D5D7D /* PylonView.swift in Sources */,
-				4111333629B7D61200972935 /* Sequence+aysnc.swift in Sources */,
-				41777F1528F49C61009944FF /* NetworkFacade.swift in Sources */,
 				4106A93028D05EC90009DA28 /* Double.swift in Sources */,
 				41923E3E2916BC6F00D1A8C5 /* UsageGraphView.swift in Sources */,
-				41626CCE29D95E9C003FEB00 /* NetworkError.swift in Sources */,
 				412790FD28E1FAF700D5F993 /* String+MD5.swift in Sources */,
 				4107446728CA22B3006D5D7D /* InverterPath.swift in Sources */,
 			);
@@ -902,6 +894,7 @@
 			files = (
 				41A95B8229DB2F0900A35169 /* ContentView.swift in Sources */,
 				41A95B8029DB2F0900A35169 /* Energy_Stats_Watch_AppApp.swift in Sources */,
+				4103D1CE29DB6C43001B0BC8 /* ContentViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -909,7 +902,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4103D1D629DB6C51001B0BC8 /* AddressBookResponse.swift in Sources */,
+				4103D1D729DB6C51001B0BC8 /* Networking.swift in Sources */,
+				4103D1DC29DB6C6D001B0BC8 /* Config.swift in Sources */,
+				4103D1E329DB6D03001B0BC8 /* AppTheme.swift in Sources */,
+				4103D1DB29DB6C6D001B0BC8 /* RawVariable.swift in Sources */,
+				4103D1E529DB6D29001B0BC8 /* Sequence+aysnc.swift in Sources */,
+				4103D1DA29DB6C6D001B0BC8 /* DeviceFirmwareVersion.swift in Sources */,
 				41A95BA129DB3F7E00A35169 /* PylonView.swift in Sources */,
+				4103D1D529DB6C51001B0BC8 /* NetworkResponse.swift in Sources */,
+				4103D1CF29DB6C4D001B0BC8 /* Auth.swift in Sources */,
+				4103D1D929DB6C6D001B0BC8 /* ReportVariable.swift in Sources */,
+				4103D1D129DB6C51001B0BC8 /* Raw.swift in Sources */,
+				4103D1D829DB6C51001B0BC8 /* NetworkFacade.swift in Sources */,
+				4103D1D029DB6C51001B0BC8 /* Report.swift in Sources */,
+				4103D1E229DB6CD7001B0BC8 /* ConfigManager.swift in Sources */,
+				4103D1E429DB6D12001B0BC8 /* KeychainStore.swift in Sources */,
+				4103D1DF29DB6C8C001B0BC8 /* DemoNetworking.swift in Sources */,
+				4103D1D329DB6C51001B0BC8 /* BatteryResponse.swift in Sources */,
+				4103D1D229DB6C51001B0BC8 /* NetworkError.swift in Sources */,
+				4103D1D429DB6C51001B0BC8 /* DeviceList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1228,7 +1240,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
@@ -1272,7 +1284,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",

@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Energy_Stats_Core
 
 struct ValuesAtTime {
     let values: [GraphValue]

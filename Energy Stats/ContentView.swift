@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Energy_Stats_Core
 
 struct ContentView: View {
     @ObservedObject var loginManager: UserManager
@@ -24,9 +25,9 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView(
-            loginManager: UserManager(networking: DemoNetworking(), store: KeychainStore(), configManager: MockConfigManager()),
+            loginManager: UserManager(networking: DemoNetworking(), store: KeychainStore(), configManager: PreviewConfigManager()),
             network: DemoNetworking(),
-            configManager: MockConfigManager()
+            configManager: PreviewConfigManager()
         )
     }
 }

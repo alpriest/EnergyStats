@@ -6,12 +6,7 @@
 //
 
 import SwiftUI
-
-enum RefreshFrequency: Int {
-    case AUTO = 0
-    case ONE_MINUTE = 1
-    case FIVE_MINUTES = 5
-}
+import Energy_Stats_Core
 
 struct SettingsTabView: View {
     @ObservedObject var viewModel: SettingsTabViewModel
@@ -19,7 +14,7 @@ struct SettingsTabView: View {
 
     var body: some View {
         Form {
-            InverterChoiceView(viewModel: viewModel, configManager: configManager as! ConfigManager)
+            InverterChoiceView(viewModel: viewModel, configManager: configManager)
             BatterySettingsView(viewModel: viewModel)
 
             Section(
@@ -79,7 +74,7 @@ struct SettingsTabView: View {
                     VStack {
                         HStack {
                             Image(systemName: "envelope")
-                            Button("Get in touch with us") {
+                            Button("Get in touch") {
                                 UIApplication.shared.open(URL(string: "mailto:energystatsapp@gmail.com")!)
                             }
                         }
@@ -95,8 +90,8 @@ struct SettingsTabView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsTabView(
             viewModel: SettingsTabViewModel(
-                userManager: UserManager(networking: DemoNetworking(), store: KeychainStore(), configManager: MockConfigManager()),
-                config: MockConfigManager()),
-            configManager: MockConfigManager())
+                userManager: UserManager(networking: DemoNetworking(), store: KeychainStore(), configManager: PreviewConfigManager()),
+                config: PreviewConfigManager()),
+            configManager: PreviewConfigManager())
     }
 }

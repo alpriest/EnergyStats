@@ -7,37 +7,37 @@
 
 import Foundation
 
-class DemoNetworking: Networking {
+public class DemoNetworking: Networking {
     private let throwOnCall: Bool
 
-    init(throwOnCall: Bool = false) {
+    public init(throwOnCall: Bool = false) {
         self.throwOnCall = throwOnCall
     }
 
-    func ensureHasToken() async {
+    public func ensureHasToken() async {
         // Do nothing
     }
 
-    func verifyCredentials(username: String, hashedPassword: String) async throws {
+    public func verifyCredentials(username: String, hashedPassword: String) async throws {
         // Assume mock credentials are valid
     }
 
-    func fetchBattery(deviceID: String) async throws -> BatteryResponse {
+    public func fetchBattery(deviceID: String) async throws -> BatteryResponse {
         BatteryResponse(power: 0.28, soc: 76, residual: 7550, temperature: 17.3)
     }
 
-    func fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse {
+    public func fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse {
         BatterySettingsResponse(minSoc: 20)
     }
 
-    func fetchDeviceList() async throws -> PagedDeviceListResponse {
+    public func fetchDeviceList() async throws -> PagedDeviceListResponse {
         PagedDeviceListResponse(currentPage: 1, pageSize: 1, total: 1, devices: [
             PagedDeviceListResponse.Device(plantName: "demo-device-1", deviceID: "abcdef1abcdef1abcdef1", deviceSN: "1234", hasBattery: true, hasPV: true),
             PagedDeviceListResponse.Device(plantName: "demo-device-2", deviceID: "abcdef2abcdef2abcdef2", deviceSN: "5678", hasBattery: true, hasPV: true)
         ])
     }
 
-    func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate) async throws -> [ReportResponse] {
+    public func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate) async throws -> [ReportResponse] {
         if throwOnCall {
             throw NetworkError.unknown
         }
@@ -48,7 +48,7 @@ class DemoNetworking: Networking {
         return result
     }
 
-    func fetchRaw(deviceID: String, variables: [RawVariable]) async throws -> [RawResponse] {
+    public func fetchRaw(deviceID: String, variables: [RawVariable]) async throws -> [RawResponse] {
         if throwOnCall {
             throw NetworkError.unknown
         }
@@ -67,7 +67,7 @@ class DemoNetworking: Networking {
         }
     }
 
-    func fetchAddressBook(deviceID: String) async throws -> AddressBookResponse {
+    public func fetchAddressBook(deviceID: String) async throws -> AddressBookResponse {
         AddressBookResponse(softVersion: AddressBookResponse.SoftwareVersion(master: "1.54", slave: "1.02", manager: "1.57"))
     }
 
@@ -88,31 +88,33 @@ class DemoNetworking: Networking {
     }
 }
 
-class MockConfig: Config {
-    var showBatteryEstimate: Bool = true
-    var batteryCapacity: String?
-    var minSOC: String?
-    var deviceID: String?
-    var deviceSN: String?
-    var hasBattery: Bool = true
-    var hasPV: Bool = true
-    var isDemoUser: Bool = true
-    var showColouredLines: Bool = true
-    var showBatteryTemperature: Bool = true
-    var refreshFrequency: Int = 0
-    var decimalPlaces: Int = 3
-    var showSunnyBackground: Bool = true
-    var devices: Data?
-    var selectedDeviceID: String?
+public class MockConfig: Config {
+    public init() {}
+
+    public var showBatteryEstimate: Bool = true
+    public var batteryCapacity: String?
+    public var minSOC: String?
+    public var deviceID: String?
+    public var deviceSN: String?
+    public var hasBattery: Bool = true
+    public var hasPV: Bool = true
+    public var isDemoUser: Bool = true
+    public var showColouredLines: Bool = true
+    public var showBatteryTemperature: Bool = true
+    public var refreshFrequency: Int = 0
+    public var decimalPlaces: Int = 3
+    public var showSunnyBackground: Bool = true
+    public var devices: Data?
+    public var selectedDeviceID: String?
 }
 
-class MockConfigManager: ConfigManager {
-    convenience init() {
+public class PreviewConfigManager: ConfigManager {
+    public convenience init() {
         self.init(networking: DemoNetworking(), config: MockConfig())
         Task { try await findDevices() }
     }
 
-    override var devices: [Device]? {
+    public override var devices: [Device]? {
         get {
             [
                 Device(plantName: "demo-device-1", deviceID: "03274209-486c-4ea3-9c28-159f25ee84cb", deviceSN: "1234", hasPV: true, battery: nil),

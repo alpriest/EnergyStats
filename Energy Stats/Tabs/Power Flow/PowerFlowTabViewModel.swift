@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Energy_Stats_Core
 
 class PreciseDateTimeFormatter {
     static func localizedString(from seconds: Int) -> String {

@@ -7,6 +7,7 @@
 
 import Combine
 import SwiftUI
+import Energy_Stats_Core
 
 struct BatterySizePreferenceKey: PreferenceKey {
     static var defaultValue: CGSize = .zero
@@ -61,7 +62,7 @@ struct PowerSummaryView_Previews: PreviewProvider {
 
 extension HomePowerFlowViewModel {
     static func any() -> HomePowerFlowViewModel {
-        .init(configManager: MockConfigManager(), solar: 2.5, battery: -0.01, home: 1.5, grid: 0.71, batteryStateOfCharge: 0.99, hasBattery: true, batteryTemperature: 15.6)
+        .init(configManager: PreviewConfigManager(), solar: 2.5, battery: -0.01, home: 1.5, grid: 0.71, batteryStateOfCharge: 0.99, hasBattery: true, batteryTemperature: 15.6)
     }
 }
 

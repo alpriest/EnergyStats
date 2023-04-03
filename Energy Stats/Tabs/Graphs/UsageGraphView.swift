@@ -7,6 +7,7 @@
 
 import Charts
 import SwiftUI
+import Energy_Stats_Core
 
 struct UsageGraphView: View {
     @ObservedObject var viewModel: GraphTabViewModel
@@ -98,7 +99,7 @@ struct UsageGraphView: View {
 
 struct UsageGraphView_Previews: PreviewProvider {
     static var previews: some View {
-        let model = GraphTabViewModel(DemoNetworking(), configManager: MockConfigManager())
+        let model = GraphTabViewModel(DemoNetworking(), configManager: PreviewConfigManager())
         return UsageGraphView(
             viewModel: model,
             selectedDate: .constant(nil),

@@ -23,7 +23,7 @@ struct DeviceListRequest: Encodable {
     }
 }
 
-struct PagedDeviceListResponse: Decodable {
+public struct PagedDeviceListResponse: Decodable {
     let currentPage: Int
     let pageSize: Int
     let total: Int
@@ -42,14 +42,14 @@ struct DeviceList: Codable {
     let devices: [Device]
 }
 
-struct Device: Codable, Hashable {
-    let plantName: String
-    let deviceID: String
-    let deviceSN: String
-    let hasPV: Bool
-    let battery: Battery?
+public struct Device: Codable, Hashable {
+    public let plantName: String
+    public let deviceID: String
+    public let deviceSN: String
+    public let hasPV: Bool
+    public let battery: Battery?
 
-    struct Battery: Codable, Hashable {
+    public struct Battery: Codable, Hashable {
         let capacity: String?
         let minSOC: String?
     }

@@ -22,20 +22,20 @@ struct RawRequest: Encodable {
     }
 }
 
-struct RawResponse: Decodable {
-    let variable: String
-    let data: [ReportData]
+public struct RawResponse: Decodable {
+    public let variable: String
+    public let data: [ReportData]
 
-    struct ReportData: Decodable {
-        let time: Date
-        let value: Double
+    public struct ReportData: Decodable {
+        public let time: Date
+        public let value: Double
 
         enum CodingKeys: CodingKey {
             case time
             case value
         }
 
-        init(from decoder: Decoder) throws {
+        public init(from decoder: Decoder) throws {
             let container: KeyedDecodingContainer<RawResponse.ReportData.CodingKeys> = try decoder.container(keyedBy: RawResponse.ReportData.CodingKeys.self)
             let timeString = try container.decode(String.self, forKey: RawResponse.ReportData.CodingKeys.time)
             self.time = try Date(timeString, strategy: FoxEssCloudParseStrategy())

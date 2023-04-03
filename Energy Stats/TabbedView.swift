@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Energy_Stats_Core
 
 struct TabbedView: View {
     let configManager: ConfigManager
@@ -62,6 +63,6 @@ struct TabbedView: View {
 
 struct TabbedView_Previews: PreviewProvider {
     static var previews: some View {
-        TabbedView(networking: DemoNetworking(), userManager: UserManager(networking: DemoNetworking(), store: KeychainStore(), configManager: MockConfigManager()), configManager: MockConfigManager())
+        TabbedView(networking: DemoNetworking(), userManager: UserManager(networking: DemoNetworking(), store: KeychainStore(), configManager: PreviewConfigManager()), configManager: PreviewConfigManager())
     }
 }
