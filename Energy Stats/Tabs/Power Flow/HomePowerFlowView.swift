@@ -6,8 +6,8 @@
 //
 
 import Combine
-import SwiftUI
 import Energy_Stats_Core
+import SwiftUI
 
 struct BatterySizePreferenceKey: PreferenceKey {
     static var defaultValue: CGSize = .zero
@@ -20,6 +20,7 @@ struct BatterySizePreferenceKey: PreferenceKey {
 struct HomePowerFlowView: View {
     @State private var iconFooterSize: CGSize = .zero
     @State private var lastUpdated = Date()
+    let configManager: ConfigManaging
     let viewModel: HomePowerFlowViewModel
     private let powerViewWidth: CGFloat = 80
     let appTheme: LatestAppTheme
@@ -35,7 +36,7 @@ struct HomePowerFlowView: View {
                 .padding(.vertical, 1)
 
             HStack {
-                BatteryPowerView(viewModel: BatteryPowerViewModel(configManager: viewModel.configManager, batteryStateOfCharge: viewModel.batteryStateOfCharge, battery: viewModel.battery, temperature: viewModel.batteryTemperature), iconFooterSize: $iconFooterSize, appTheme: appTheme)
+                BatteryPowerView(viewModel: BatteryPowerViewModel(configManager: configManager as! ConfigManager, batteryStateOfCharge: viewModel.batteryStateOfCharge, battery: viewModel.battery, temperature: viewModel.batteryTemperature), iconFooterSize: $iconFooterSize, appTheme: appTheme)
                     .frame(width: powerViewWidth)
                     .opacity(viewModel.hasBattery ? 1.0 : 0.5)
 
@@ -56,13 +57,15 @@ struct HomePowerFlowView: View {
 
 struct PowerSummaryView_Previews: PreviewProvider {
     static var previews: some View {
-        HomePowerFlowView(viewModel: HomePowerFlowViewModel.any(), appTheme: CurrentValueSubject(AppTheme.mock()))
+        HomePowerFlowView(configManager: PreviewConfigManager(),
+                          viewModel: HomePowerFlowViewModel.any(),
+                          appTheme: CurrentValueSubject(AppTheme.mock()))
     }
 }
 
 extension HomePowerFlowViewModel {
     static func any() -> HomePowerFlowViewModel {
-        .init(configManager: PreviewConfigManager(), solar: 2.5, battery: -0.01, home: 1.5, grid: 0.71, batteryStateOfCharge: 0.99, hasBattery: true, batteryTemperature: 15.6)
+        .init(solar: 2.5, battery: -0.01, home: 1.5, grid: 0.71, batteryStateOfCharge: 0.99, hasBattery: true, batteryTemperature: 15.6)
     }
 }
 

@@ -6,15 +6,14 @@
 //
 
 import Foundation
-import Energy_Stats_Core
 
-struct BatteryViewModel: Sendable {
-    let hasBattery: Bool
-    let chargeLevel: Double
-    let chargePower: Double
-    let temperature: Double
+public struct BatteryViewModel: Sendable {
+    public let hasBattery: Bool
+    public let chargeLevel: Double
+    public let chargePower: Double
+    public let temperature: Double
 
-    init(from battery: BatteryResponse) {
+    public init(from battery: BatteryResponse) {
         chargeLevel = Double(battery.soc) / 100.0
 
         let powerAsCharge = 0 - battery.power
@@ -23,7 +22,7 @@ struct BatteryViewModel: Sendable {
         temperature = battery.temperature
     }
 
-    init() {
+    public init() {
         hasBattery = false
         chargeLevel = 0
         chargePower = 0
@@ -32,7 +31,7 @@ struct BatteryViewModel: Sendable {
 }
 
 extension BatteryViewModel {
-    static var noBattery: BatteryViewModel {
+    public static var noBattery: BatteryViewModel {
         BatteryViewModel()
     }
 }

@@ -15,7 +15,7 @@ struct BatteryPowerViewModel {
     private let calculator: BatteryCapacityCalculator
     private(set) var temperature: Double
 
-    init(configManager: ConfigManager, batteryStateOfCharge: Double, battery: Double, temperature: Double) {
+    init(configManager: ConfigManaging, batteryStateOfCharge: Double, battery: Double, temperature: Double) {
         self.batteryStateOfCharge = batteryStateOfCharge
         self.battery = battery
         self.temperature = temperature

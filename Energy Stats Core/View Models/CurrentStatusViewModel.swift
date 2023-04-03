@@ -6,15 +6,14 @@
 //
 
 import Foundation
-import Energy_Stats_Core
 
-struct HistoricalViewModel: Sendable {
-    let currentSolarPower: Double
-    let currentGridExport: Double
-    let currentHomeConsumption: Double
-    let lastUpdate: Date
+public struct CurrentStatusViewModel: Sendable {
+    public let currentSolarPower: Double
+    public let currentGridExport: Double
+    public let currentHomeConsumption: Double
+    public let lastUpdate: Date
 
-    init(raws: [RawResponse]) {
+    public init(raws: [RawResponse]) {
         currentSolarPower = max(0, raws.currentValue(for: RawVariable.batChargePower) - raws.currentValue(for: RawVariable.batDischargePower) - raws.currentValue(for: RawVariable.gridConsumptionPower) + raws.currentValue(for: RawVariable.loadsPower) + raws.currentValue(for: RawVariable.feedinPower))
         currentGridExport = raws.currentValue(for: RawVariable.feedinPower) - raws.currentValue(for: RawVariable.gridConsumptionPower)
         currentHomeConsumption = raws.currentValue(for: RawVariable.gridConsumptionPower) + raws.currentValue(for: RawVariable.generationPower) - raws.currentValue(for: RawVariable.feedinPower)
@@ -33,13 +32,13 @@ extension Array where Element == RawResponse {
 }
 
 extension Date {
-    func small() -> String {
+    public func small() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM d, HH:mm:ss"
         return formatter.string(from: self)
     }
 
-    func iso8601() -> String {
+    public func iso8601() -> String {
         let formatter = ISO8601DateFormatter()
         return formatter.string(from: self)
     }

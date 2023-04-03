@@ -6,15 +6,21 @@
 //
 
 import SwiftUI
+import Energy_Stats_Core
 
 @main
 struct Energy_Stats_Watch_App_Watch_AppApp: App {
     var body: some Scene {
+        let keychainStore = KeychainStore()
+        let config = UserDefaultsConfig()
+        let network = NetworkFacade(network: Network(credentials: keychainStore, config: config),
+                                    config: config)
+        let configManager = ConfigManager(networking: network, config: config)
+
         WindowGroup {
-            ContentView(solar: 1.5,
-                        grid: 0.5,
-                        batteryAvailableCapacity: 0.97,
-                        batteryMessage: "Empty in 19 hours")
+            ContentView(
+                viewModel: ContentViewModel(network, configManager: configManager)
+            )
         }
     }
 }

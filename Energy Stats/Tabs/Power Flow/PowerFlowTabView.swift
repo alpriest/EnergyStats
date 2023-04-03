@@ -17,7 +17,7 @@ struct PowerFlowTabView: View {
         VStack {
             switch viewModel.state {
             case let .loaded(summary):
-                HomePowerFlowView(viewModel: summary, appTheme: appTheme)
+                HomePowerFlowView(configManager: viewModel.configManager, viewModel: summary, appTheme: appTheme)
 
                 Spacer()
 

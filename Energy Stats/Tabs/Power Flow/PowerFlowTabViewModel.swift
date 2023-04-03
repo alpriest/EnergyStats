@@ -9,22 +9,9 @@ import Foundation
 import UIKit
 import Energy_Stats_Core
 
-class PreciseDateTimeFormatter {
-    static func localizedString(from seconds: Int) -> String {
-        switch seconds {
-        case 0 ..< 60:
-            return "\(seconds)s"
-        default:
-            let minutes = seconds / 60
-            let remainder = seconds % 60
-            return "\(minutes)m \(remainder)s"
-        }
-    }
-}
-
 class PowerFlowTabViewModel: ObservableObject {
     private let network: Networking
-    private var configManager: ConfigManager
+    private(set) var configManager: ConfigManaging
     private let timer = CountdownTimer()
     @MainActor @Published private(set) var lastUpdated: String = Date().small()
     @MainActor @Published private(set) var updateState: String = "Updating..."
@@ -92,28 +79,27 @@ class PowerFlowTabViewModel: ObservableObject {
             await self.network.ensureHasToken()
 
             let raws = try await self.network.fetchRaw(deviceID: currentDevice.deviceID, variables: [.feedinPower, .gridConsumptionPower, .generationPower, .loadsPower, .batChargePower, .batDischargePower])
-            let historicalViewModel = HistoricalViewModel(raws: raws)
+            let currentViewModel = CurrentStatusViewModel(raws: raws)
             let battery = currentDevice.battery != nil ? BatteryViewModel(from: try await self.network.fetchBattery(deviceID: currentDevice.deviceID)) : .noBattery
-            let summary = HomePowerFlowViewModel(configManager: configManager,
-                                                 solar: historicalViewModel.currentSolarPower,
+            let summary = HomePowerFlowViewModel(solar: currentViewModel.currentSolarPower,
                                                  battery: battery.chargePower,
-                                                 home: historicalViewModel.currentHomeConsumption,
-                                                 grid: historicalViewModel.currentGridExport,
+                                                 home: currentViewModel.currentHomeConsumption,
+                                                 grid: currentViewModel.currentGridExport,
                                                  batteryStateOfCharge: battery.chargeLevel,
                                                  hasBattery: battery.hasBattery,
                                                  batteryTemperature: battery.temperature)
 
-            self.state = .loaded(.empty(configManager: self.configManager)) // refreshes the marching ants line speed
+            self.state = .loaded(.empty()) // refreshes the marching ants line speed
             try await Task.sleep(nanoseconds: 1000)
             self.state = .loaded(summary)
-            self.calculateTicks(historicalViewModel: historicalViewModel)
+            self.calculateTicks(historicalViewModel: currentViewModel)
             self.updateState = " "
         } catch {
             self.state = .failed(error.localizedDescription)
         }
     }
 
-    func calculateTicks(historicalViewModel: HistoricalViewModel) {
+    func calculateTicks(historicalViewModel: CurrentStatusViewModel) {
         switch self.configManager.refreshFrequency {
         case .ONE_MINUTE:
             self.totalTicks = 60
