@@ -5,8 +5,8 @@
 //  Created by Alistair Priest on 08/03/2023.
 //
 
-import SwiftUI
 import Energy_Stats_Core
+import SwiftUI
 
 struct BatterySettingsView: View {
     @ObservedObject var viewModel: SettingsTabViewModel
@@ -17,7 +17,7 @@ struct BatterySettingsView: View {
         Section(
             content: {
                 HStack {
-                    Text("Min SOC")
+                    Text("Min battery charge (SOC)")
                     Spacer()
                     Text(viewModel.minSOC, format: .percent)
                 }
@@ -53,6 +53,7 @@ struct BatterySettingsView: View {
                         Text(" W")
                     }
                 }
+
             }, header: {
                 Text("Battery")
             }, footer: {
