@@ -22,7 +22,7 @@ class BatteryCapacityCalculator {
         capacityW * minimumSOC
     }
 
-    func batteryPercentageRemaining(batteryChargePowerkWH: Double, batteryStateOfCharge: Double) -> String? {
+    func batteryChargeStatusDescription(batteryChargePowerkWH: Double, batteryStateOfCharge: Double) -> String? {
         guard abs(batteryChargePowerkWH) > 0 else { return nil }
         
         let currentEstimatedCharge = capacityW * batteryStateOfCharge
@@ -46,20 +46,20 @@ class BatteryCapacityCalculator {
     }
 
     func currentEstimatedChargeAmountW(batteryStateOfCharge: Double, includeUnusableCapacity: Bool = true) -> Double {
-        ((capacityW * batteryStateOfCharge) - (includeUnusableCapacity ? 0 : minimumCharge))
-    }
-
-    func effectiveBatteryCapacityW(includeUnusableCapacity: Bool = true) -> Double {
-        capacityW - (includeUnusableCapacity ? 0 : minimumCharge)
+        (capacityW * batteryStateOfCharge) - (includeUnusableCapacity ? 0 : minimumCharge)
     }
 
     func effectiveBatteryStateOfCharge(batteryStateOfCharge: Double, includeUnusableCapacity: Bool = true) -> Double {
-        guard batteryStateOfCharge >= percentageConsideredFull else { return 0.99 }
+        guard batteryStateOfCharge <= percentageConsideredFull else { return 0.99 }
 
         let effectiveBatteryCapacity = effectiveBatteryCapacityW(includeUnusableCapacity: includeUnusableCapacity)
-        let effectiveEstimatedStoredCharge = currentEstimatedChargeAmountW(batteryStateOfCharge: batteryStateOfCharge,
-                                                                           includeUnusableCapacity: includeUnusableCapacity)
+        let actualEstimatedStoredCharge = capacityW * batteryStateOfCharge
+        let effectiveEstimatedStoredCharge = actualEstimatedStoredCharge - (includeUnusableCapacity ? 0 : minimumCharge)
 
         return effectiveEstimatedStoredCharge / effectiveBatteryCapacity
+    }
+
+    private func effectiveBatteryCapacityW(includeUnusableCapacity: Bool = true) -> Double {
+        capacityW - (includeUnusableCapacity ? 0 : minimumCharge)
     }
 }

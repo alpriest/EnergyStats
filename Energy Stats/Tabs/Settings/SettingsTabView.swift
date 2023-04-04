@@ -32,11 +32,11 @@ struct SettingsTabView: View {
                     }
 
                     Toggle(isOn: $viewModel.showUsableBatteryOnly) {
-                        Text("Show usable battery % only")
+                        Text("Show usable battery only")
                     }
 
                     Toggle(isOn: $viewModel.showSunnyBackground) {
-                        Text("Show sunny background")
+                        Text("Show sunshine background")
                     }
 
                     HStack {
@@ -50,6 +50,9 @@ struct SettingsTabView: View {
                 },
                 header: {
                     Text("Display")
+                },
+                footer: {
+                    Text("Show usable battery deducts the Min SOC amount from the battery charge level and percentage. ")
                 })
 
             Section(
@@ -63,8 +66,8 @@ struct SettingsTabView: View {
                 }, header: {
                     Text("Refresh frequency")
                 }, footer: {
-                    Text("FoxESS Cloud data is updated every 5 minutes. Auto attempts to synchronise fetches just after the data feed uploads to minimise server load.")
-                })
+                    Text("FoxESS Cloud data is updated every 5 minutes. 'Auto' attempts to synchronise data fetches just after the data is uploaded from your inverter to minimise server load.")
+                 })
 
             Section(
                 content: {

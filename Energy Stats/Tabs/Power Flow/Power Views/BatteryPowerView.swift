@@ -27,7 +27,7 @@ struct BatteryPowerViewModel {
     }
 
     var batteryExtra: String? {
-        calculator.batteryPercentageRemaining(
+        calculator.batteryChargeStatusDescription(
             batteryChargePowerkWH: batteryChargekWH,
             batteryStateOfCharge: batteryStateOfCharge
         )
@@ -35,7 +35,7 @@ struct BatteryPowerViewModel {
 
     var batteryStoredChargekW: Double {
         calculator.currentEstimatedChargeAmountW(
-            batteryStateOfCharge: batteryStateOfCharge,
+            batteryStateOfCharge: actualBatteryStateOfCharge,
             includeUnusableCapacity: !configManager.showUsableBatteryOnly
         ) / 1000.0
     }

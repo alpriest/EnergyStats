@@ -10,43 +10,43 @@ import XCTest
 
 final class BatteryCapacityCalculatorTests: XCTestCase {
     func test_returnsBatteryPercentageRemaining_IncludingUnusableMinSOC() {
-        let sut = BatteryCapacityCalculator(capacitykW: 10000, minimumSOC: 0.2, includeUnusableCapacity: true)
+        let sut = BatteryCapacityCalculator(capacityW: 10000, minimumSOC: 0.2)
 
-        let result = sut.batteryPercentageRemaining(
+        let result = sut.batteryChargeStatusDescription(
             batteryChargePowerkWH: 1.0,
             batteryStateOfCharge: 0.5
         )
 
-        let charge = sut.currentEstimatedChargeAmountkW(batteryStateOfCharge: 0.5)
+        let charge = sut.currentEstimatedChargeAmountW(batteryStateOfCharge: 0.5, includeUnusableCapacity: true)
 
-        XCTAssertEqual(charge, 5.0)
+        XCTAssertEqual(charge, 5000)
         XCTAssertEqual(result, "Full in 5 hours")
     }
 
     func test_returnsBatteryPercentageRemaining_ExcludingUnusableMinSOC() {
-        let sut = BatteryCapacityCalculator(capacitykW: 10000, minimumSOC: 0.2, includeUnusableCapacity: false)
+        let sut = BatteryCapacityCalculator(capacityW: 10000, minimumSOC: 0.2)
 
-        let result = sut.batteryPercentageRemaining(
+        let result = sut.batteryChargeStatusDescription(
             batteryChargePowerkWH: 1.0,
             batteryStateOfCharge: 0.5
         )
 
-        let charge = sut.currentEstimatedChargeAmountkW(batteryStateOfCharge: 0.5)
+        let charge = sut.currentEstimatedChargeAmountW(batteryStateOfCharge: 0.5, includeUnusableCapacity: false)
 
-        XCTAssertEqual(charge, 3.0)
+        XCTAssertEqual(charge, 3000)
         XCTAssertEqual(result, "Full in 5 hours")
     }
 
     func test_CalculatesRemainingTimeUntilFull() {
-        let sut = BatteryCapacityCalculator(capacitykW: 8000, minimumSOC: 0.2)
-        let result = sut.batteryPercentageRemaining(batteryChargePowerkWH: 1.0, batteryStateOfCharge: 0.50)
+        let sut = BatteryCapacityCalculator(capacityW: 8000, minimumSOC: 0.2)
+        let result = sut.batteryChargeStatusDescription(batteryChargePowerkWH: 1.0, batteryStateOfCharge: 0.50)
 
         XCTAssertEqual(result, "Full in 4 hours")
     }
 
     func test_CalculatesRemainingTimeUntilEmpty() {
-        let sut = BatteryCapacityCalculator(capacitykW: 8000, minimumSOC: 0.2)
-        let result = sut.batteryPercentageRemaining(batteryChargePowerkWH: -1.0, batteryStateOfCharge: 0.50)
+        let sut = BatteryCapacityCalculator(capacityW: 8000, minimumSOC: 0.2)
+        let result = sut.batteryChargeStatusDescription(batteryChargePowerkWH: -1.0, batteryStateOfCharge: 0.50)
 
         XCTAssertEqual(result, "Empty in 2 hours")
     }
