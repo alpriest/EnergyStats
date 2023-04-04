@@ -9,6 +9,7 @@
 import SnapshotTesting
 import SwiftUI
 import XCTest
+import Energy_Stats_Core
 
 @MainActor
 final class LoginViewTests: XCTestCase {

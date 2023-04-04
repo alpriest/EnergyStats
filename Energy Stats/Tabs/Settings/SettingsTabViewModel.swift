@@ -57,6 +57,12 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
+    @Published var showUsableBatteryOnly: Bool {
+        didSet {
+            config.showUsableBatteryOnly = showUsableBatteryOnly
+        }
+    }
+
     private var config: ConfigManaging
     private let userManager: UserManager
 
@@ -71,6 +77,7 @@ class SettingsTabViewModel: ObservableObject {
         showSunnyBackground = config.showSunnyBackground
         selectedDeviceID = config.selectedDeviceID ?? ""
         showBatteryEstimate = config.showBatteryEstimate
+        showUsableBatteryOnly = config.showUsableBatteryOnly
     }
 
     var minSOC: Double { config.minSOC }

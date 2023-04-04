@@ -6,30 +6,42 @@
 //
 
 import Combine
-import SwiftUI
 import Energy_Stats_Core
+import SwiftUI
 
 struct BatteryPowerViewModel {
-    private(set) var batteryStateOfCharge: Double
-    private(set) var battery: Double
+    private let actualBatteryStateOfCharge: Double
+    private(set) var batteryChargekWH: Double
     private let calculator: BatteryCapacityCalculator
     private(set) var temperature: Double
+    private let configManager: ConfigManaging
 
-    init(configManager: ConfigManaging, batteryStateOfCharge: Double, battery: Double, temperature: Double) {
-        self.batteryStateOfCharge = batteryStateOfCharge
-        self.battery = battery
+    init(configManager: ConfigManaging, batteryStateOfCharge: Double, batteryChargekWH: Double, temperature: Double) {
+        self.actualBatteryStateOfCharge = batteryStateOfCharge
+        self.batteryChargekWH = batteryChargekWH
         self.temperature = temperature
+        self.configManager = configManager
 
-        calculator = BatteryCapacityCalculator(capacitykW: configManager.batteryCapacityKW,
+        calculator = BatteryCapacityCalculator(capacityW: configManager.batteryCapacityW,
                                                minimumSOC: configManager.minSOC)
     }
 
     var batteryExtra: String? {
-        calculator.batteryPercentageRemaining(batteryChargePowerkWH: battery, batteryStateOfCharge: batteryStateOfCharge)
+        calculator.batteryPercentageRemaining(
+            batteryChargePowerkWH: batteryChargekWH,
+            batteryStateOfCharge: batteryStateOfCharge
+        )
     }
 
-    var batteryCapacity: Double {
-        calculator.currentEstimatedChargeAmountkWH(batteryStateOfCharge: batteryStateOfCharge)
+    var batteryStoredChargekW: Double {
+        calculator.currentEstimatedChargeAmountW(
+            batteryStateOfCharge: batteryStateOfCharge,
+            includeUnusableCapacity: !configManager.showUsableBatteryOnly
+        ) / 1000.0
+    }
+
+    var batteryStateOfCharge: Double {
+        calculator.effectiveBatteryStateOfCharge(batteryStateOfCharge: actualBatteryStateOfCharge, includeUnusableCapacity: !configManager.showUsableBatteryOnly)
     }
 }
 
@@ -41,7 +53,7 @@ struct BatteryPowerView: View {
 
     var body: some View {
         VStack {
-            PowerFlowView(amount: viewModel.battery, appTheme: appTheme, showColouredLines: true)
+            PowerFlowView(amount: viewModel.batteryChargekWH, appTheme: appTheme, showColouredLines: true)
             Image(systemName: "minus.plus.batteryblock.fill")
                 .font(.system(size: 48))
                 .background(Color(.systemBackground))
@@ -51,7 +63,7 @@ struct BatteryPowerView: View {
                     if percentage {
                         Text(viewModel.batteryStateOfCharge, format: .percent)
                     } else {
-                        Text(viewModel.batteryCapacity.kW(appTheme.value.decimalPlaces))
+                        Text(viewModel.batteryStoredChargekW.kW(appTheme.value.decimalPlaces))
                     }
                 }.onTapGesture {
                     percentage.toggle()
@@ -89,6 +101,6 @@ struct BatteryPowerView_Previews: PreviewProvider {
 
 extension BatteryPowerViewModel {
     static func any() -> BatteryPowerViewModel {
-        .init(configManager: PreviewConfigManager(), batteryStateOfCharge: 0.99, battery: -0.01, temperature: 15.6)
+        .init(configManager: PreviewConfigManager(), batteryStateOfCharge: 0.99, batteryChargekWH: -0.01, temperature: 15.6)
     }
 }

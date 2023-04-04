@@ -7,18 +7,17 @@
 
 import Foundation
 @testable import Energy_Stats
+import Energy_Stats_Core
 
 class MockConfig: Config {
-    var deviceSN: String?
-    var minSOC: String?
-    var batteryCapacity: String?
-    var deviceID: String?
-    var hasBattery: Bool = true
-    var hasPV: Bool = false
     var isDemoUser: Bool = false
     var showColouredLines: Bool = true
     var showBatteryTemperature: Bool = true
     var refreshFrequency: Int = 0
     var decimalPlaces: Int = 2
     var showSunnyBackground: Bool = true
+    var showUsableBatteryOnly: Bool = false
+    var showBatteryEstimate: Bool = false
+    var devices: Data? = nil
+    var selectedDeviceID: String? = nil
 }

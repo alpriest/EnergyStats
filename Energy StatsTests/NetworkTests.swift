@@ -7,6 +7,7 @@
 
 @testable import Energy_Stats
 import XCTest
+@testable import Energy_Stats_Core
 
 final class NetworkTests: XCTestCase {
     private var sut: Networking!
@@ -60,7 +61,7 @@ final class NetworkTests: XCTestCase {
         config.configureAsLoggedIn()
         stubHTTPResponse(with: .reportSuccess)
 
-        let report = try await sut.fetchReport(variables: [.feedIn, .gridConsumption, .generation, .chargeEnergyToTal, .dischargeEnergyToTal], queryDate: QueryDate.any())
+        let report = try await sut.fetchReport(deviceID: "any", variables: [.feedIn, .gridConsumption, .generation, .chargeEnergyToTal, .dischargeEnergyToTal], queryDate: QueryDate.any())
 
         XCTAssertEqual(report.count, 5)
     }
@@ -69,7 +70,7 @@ final class NetworkTests: XCTestCase {
         config.configureAsLoggedIn()
         stubHTTPResponse(with: .batterySuccess)
 
-        let report = try await sut.fetchBattery()
+        let report = try await sut.fetchBattery(deviceID: "any")
 
         XCTAssertEqual(report.power, -1.065)
         XCTAssertEqual(report.soc, 23)
@@ -79,7 +80,7 @@ final class NetworkTests: XCTestCase {
         config.configureAsLoggedIn()
         stubHTTPResponse(with: .rawSuccess)
 
-        let raw = try await sut.fetchRaw(variables: [.feedinPower, .gridConsumptionPower, .batChargePower, .batDischargePower, .generationPower])
+        let raw = try await sut.fetchRaw(deviceID: "1", variables: [.feedinPower, .gridConsumptionPower, .batChargePower, .batDischargePower, .generationPower])
 
         XCTAssertEqual(raw.count, 5)
     }
@@ -98,7 +99,7 @@ final class NetworkTests: XCTestCase {
         stubOffline()
         
         do {
-            _ = try await sut.fetchReport(variables: [.feedIn, .gridConsumption, .generation, .chargeEnergyToTal], queryDate: QueryDate.any())
+            _ = try await sut.fetchReport(deviceID: "!", variables: [.feedIn, .gridConsumption, .generation, .chargeEnergyToTal], queryDate: QueryDate.any())
         } catch NetworkError.offline {
         } catch {
             XCTFail()
@@ -110,7 +111,7 @@ final class NetworkTests: XCTestCase {
         stubHTTPResponse(with: .tryLaterFailure)
 
         do {
-            _ = try await sut.fetchReport(variables: [.feedIn, .gridConsumption, .generation, .chargeEnergyToTal], queryDate: QueryDate.any())
+            _ = try await sut.fetchReport(deviceID: "1", variables: [.feedIn, .gridConsumption, .generation, .chargeEnergyToTal], queryDate: QueryDate.any())
         } catch NetworkError.tryLater {
         } catch {
             XCTFail()
@@ -123,15 +124,13 @@ final class NetworkTests: XCTestCase {
         keychainStore.hashedPassword = "secrethash"
         stubHTTPResponses(with: [.badTokenFailure, .loginSuccess, .reportSuccess])
 
-        _ = try await sut.fetchReport(variables: [.feedIn, .gridConsumption, .generation, .chargeEnergyToTal], queryDate: QueryDate.any())
+        _ = try await sut.fetchReport(deviceID: "1", variables: [.feedIn, .gridConsumption, .generation, .chargeEnergyToTal], queryDate: QueryDate.any())
     }
 }
 
 extension MockConfig {
     func configureAsLoggedIn() {
-        deviceID = "device"
-        hasPV = true
-        hasBattery = true
+        selectedDeviceID = "1"
     }
 }
 

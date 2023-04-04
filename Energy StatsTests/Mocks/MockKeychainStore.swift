@@ -5,37 +5,52 @@
 //  Created by Alistair Priest on 26/09/2022.
 //
 
-import Foundation
 @testable import Energy_Stats
+import Energy_Stats_Core
+import Foundation
+import Combine
 
-class MockKeychainStore: KeychainStore {
+class MockKeychainStore: KeychainStoring {
     var username: String?
     var hashedPassword: String?
     var token: String?
     var logoutCalled = false
 
-    override func getUsername() -> String? {
+    func getUsername() -> String? {
         username
     }
 
-    override func getHashedPassword() -> String? {
+    func getHashedPassword() -> String? {
         hashedPassword
     }
 
-    override func store(token: String?) throws {
+    func store(token: String?) throws {
         self.token = token
     }
 
-    override func getToken() -> String? {
+    func getToken() -> String? {
         token
     }
 
-    override func store(username: String, hashedPassword: String, updateHasCredentials: Bool = true) throws {
+    func store(username: String, hashedPassword: String, updateHasCredentials: Bool = true) throws {
         self.username = username
         self.hashedPassword = hashedPassword
     }
 
-    override func logout() {
+    func logout() {
         logoutCalled = true
+    }
+
+    func updateHasCredentials() {}
+
+    let hasCredentialsSubject = CurrentValueSubject<Bool, Never>(false)
+    let hasCredentials: AnyPublisher<Bool, Never>
+
+    init() {
+        hasCredentials = hasCredentialsSubject.eraseToAnyPublisher()
+    }
+
+    func updateHasCredentials(value: Bool) {
+        hasCredentialsSubject.send(value)
     }
 }

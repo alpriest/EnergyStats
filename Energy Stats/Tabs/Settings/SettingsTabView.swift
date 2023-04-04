@@ -31,6 +31,10 @@ struct SettingsTabView: View {
                         Text("Show battery full/empty estimate")
                     }
 
+                    Toggle(isOn: $viewModel.showUsableBatteryOnly) {
+                        Text("Show usable battery % only")
+                    }
+
                     Toggle(isOn: $viewModel.showSunnyBackground) {
                         Text("Show sunny background")
                     }

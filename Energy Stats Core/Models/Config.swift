@@ -17,6 +17,7 @@ public protocol Config {
     var showSunnyBackground: Bool { get set }
     var devices: Data? { get set }
     var selectedDeviceID: String? { get set }
+    var showUsableBatteryOnly: Bool { get set }
 }
 
 public class UserDefaultsConfig: Config {
@@ -42,6 +43,9 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredBool(key: "showSunnyBackground", defaultValue: true)
     public var showSunnyBackground: Bool
+
+    @UserDefaultsStoredBool(key: "showUsableBatteryOnly", defaultValue: false)
+    public var showUsableBatteryOnly: Bool
 
     @UserDefaultsStoredData(key: "devices")
     public var devices: Data?

@@ -37,10 +37,10 @@ public class Network: Networking {
         }
     }
 
-    private let credentials: KeychainStore
+    private let credentials: KeychainStoring
     private let config: Config
 
-    public init(credentials: KeychainStore, config: Config) {
+    public init(credentials: KeychainStoring, config: Config) {
         self.credentials = credentials
         self.config = config
     }

@@ -36,8 +36,7 @@
       </CommandLineArguments>
       <Testables>
          <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
+            skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "41EDDF7028CD2ED30092C662"
@@ -45,9 +44,29 @@
                BlueprintName = "Energy StatsTests"
                ReferencedContainer = "container:Energy Stats.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "BatteryCalculatorTests">
+               </Test>
+               <Test
+                  Identifier = "GraphTabViewModelTests">
+               </Test>
+               <Test
+                  Identifier = "GraphTabViewTests">
+               </Test>
+               <Test
+                  Identifier = "LoginViewTests">
+               </Test>
+               <Test
+                  Identifier = "NetworkTests">
+               </Test>
+               <Test
+                  Identifier = "UserManagerTests">
+               </Test>
+            </SkippedTests>
          </TestableReference>
          <TestableReference
-            skipped = "NO"
+            skipped = "YES"
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"

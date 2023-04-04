@@ -8,36 +8,13 @@
 import SwiftUI
 import Energy_Stats_Core
 
-class InverterFirmwareVersionsViewModel: ObservableObject {
-    private let config: ConfigManaging
-    @Published var version: DeviceFirmwareVersion?
-
-    init(config: ConfigManaging) {
-        self.config = config
-    }
-
-    func load() {
-        Task {
-            do {
-                let result = try await config.fetchFirmwareVersions()
-
-                await MainActor.run {
-                    self.version = result
-                }
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-    }
-}
-
 struct InverterFirmwareVersionsView: View {
-    @ObservedObject var viewModel: InverterFirmwareVersionsViewModel
+    let config: ConfigManaging
 
     var body: some View {
         Section(
             content: {
-                if let version = viewModel.version {
+                if let version = config.firmwareVersions {
                     HStack {
                         Text("Manager: ") +
                             Text(version.manager)
@@ -61,14 +38,13 @@ struct InverterFirmwareVersionsView: View {
                 }
             }
         )
-        .task { viewModel.load() }
     }
 }
 
 struct InverterFirmwareVersionsView_Previews: PreviewProvider {
     static var previews: some View {
         Form {
-            InverterFirmwareVersionsView(viewModel: InverterFirmwareVersionsViewModel(config: PreviewConfigManager()))
+            InverterFirmwareVersionsView(config: PreviewConfigManager())
         }
     }
 }

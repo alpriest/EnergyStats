@@ -16,15 +16,16 @@ public enum RefreshFrequency: Int {
 
 public protocol ConfigManaging {
     func findDevices() async throws
-    func fetchFirmwareVersions() async throws -> DeviceFirmwareVersion
+    func fetchFirmwareVersions() async throws
     func logout()
     var minSOC: Double { get }
     var batteryCapacity: String { get set }
-    var batteryCapacityKW: Int { get }
+    var batteryCapacityW: Int { get }
     var isDemoUser: Bool { get set }
     var showColouredLines: Bool { get set }
     var showBatteryTemperature: Bool { get set }
     var showBatteryEstimate: Bool { get set }
+    var showUsableBatteryOnly: Bool { get set }
     var refreshFrequency: RefreshFrequency { get set }
     var appTheme: LatestAppTheme { get }
     var decimalPlaces: Int { get set }
@@ -32,6 +33,7 @@ public protocol ConfigManaging {
     var devices: [Device]? { get set }
     var currentDevice: Device? { get }
     var selectedDeviceID: String? { get set }
+    var firmwareVersions: DeviceFirmwareVersion? { get }
 }
 
 public class ConfigManager: ConfigManaging {
@@ -50,7 +52,8 @@ public class ConfigManager: ConfigManaging {
                 showBatteryTemperature: config.showBatteryTemperature,
                 showSunnyBackground: config.showSunnyBackground,
                 decimalPlaces: config.decimalPlaces,
-                showBatteryEstimate: config.showBatteryEstimate
+                showBatteryEstimate: config.showBatteryEstimate,
+                showUsableBatteryOnly: config.showUsableBatteryOnly
             )
         )
     }
@@ -87,11 +90,11 @@ public class ConfigManager: ConfigManaging {
         selectedDeviceID = devices?.first?.deviceID
     }
 
-    public func fetchFirmwareVersions() async throws -> DeviceFirmwareVersion {
+    public func fetchFirmwareVersions() async throws {
         guard let deviceID = config.selectedDeviceID else { throw NoDeviceFoundError() }
 
         let response = try await networking.fetchAddressBook(deviceID: deviceID)
-        return DeviceFirmwareVersion(
+        firmwareVersions = DeviceFirmwareVersion(
             master: response.softVersion.master,
             slave: response.softVersion.slave,
             manager: response.softVersion.manager
@@ -103,6 +106,8 @@ public class ConfigManager: ConfigManaging {
         config.devices = nil
         config.isDemoUser = false
     }
+
+    public private(set) var firmwareVersions: DeviceFirmwareVersion? = nil
 
     public var minSOC: Double { Double(currentDevice?.battery?.minSOC ?? "0.2") ?? 0.0 }
 
@@ -119,7 +124,7 @@ public class ConfigManager: ConfigManaging {
         }
     }
 
-    public var batteryCapacityKW: Int {
+    public var batteryCapacityW: Int {
         Int(currentDevice?.battery?.capacity ?? "0") ?? 0
     }
 
@@ -165,6 +170,16 @@ public class ConfigManager: ConfigManaging {
             config.showBatteryEstimate = newValue
             appTheme.send(appTheme.value.update(
                 showBatteryEstimate: config.showBatteryEstimate
+            ))
+        }
+    }
+
+    public var showUsableBatteryOnly: Bool {
+        get { config.showUsableBatteryOnly }
+        set {
+            config.showUsableBatteryOnly = newValue
+            appTheme.send(appTheme.value.update(
+                showUsableBatteryOnly: config.showUsableBatteryOnly
             ))
         }
     }

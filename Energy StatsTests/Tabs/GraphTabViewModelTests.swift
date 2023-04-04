@@ -7,6 +7,7 @@
 
 @testable import Energy_Stats
 import XCTest
+import Energy_Stats_Core
 
 @MainActor
 final class GraphTabViewModelTests: XCTestCase {
@@ -16,9 +17,8 @@ final class GraphTabViewModelTests: XCTestCase {
 
     override func setUp() {
         config = MockConfig()
-        config.deviceID = "device1"
         networking = Network(credentials: MockKeychainStore(), config: config)
-        sut = GraphTabViewModel(networking, { Date(timeIntervalSince1970: 1669146973) })
+        sut = GraphTabViewModel(networking, configManager: ConfigManager(networking: networking, config: config), { Date(timeIntervalSince1970: 1669146973) })
     }
 
     func test_initial_values() {

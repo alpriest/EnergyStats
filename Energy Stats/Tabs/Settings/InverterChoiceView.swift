@@ -30,7 +30,7 @@ struct InverterChoiceView: View {
             )
         }
 
-        InverterFirmwareVersionsView(viewModel: InverterFirmwareVersionsViewModel(config: configManager))
+        InverterFirmwareVersionsView(config: configManager)
     }
 }
 

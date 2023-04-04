@@ -6,8 +6,34 @@
 //
 
 import Foundation
+import Combine
 
-public class KeychainStore: ObservableObject {
+public struct KeychainError: Error {
+    init(_ code: OSStatus? = nil) {
+        self.code = code
+    }
+
+    let code: OSStatus?
+}
+
+public protocol KeychainStoring {
+    func getUsername() -> String?
+    func getHashedPassword() -> String?
+    func store(username: String, hashedPassword: String, updateHasCredentials: Bool) throws
+    func store(token: String?) throws
+    func logout()
+    func updateHasCredentials()
+    func getToken() -> String?
+    var hasCredentials: AnyPublisher<Bool, Never> { get }
+}
+
+public extension KeychainStoring {
+    func store(username: String, hashedPassword: String) throws {
+        try store(username: username, hashedPassword: hashedPassword, updateHasCredentials: true)
+    }
+}
+
+public class KeychainStore: KeychainStoring, ObservableObject {
     struct KeychainError: Error {
         init(_ code: OSStatus? = nil) {
             self.code = code
@@ -16,9 +42,11 @@ public class KeychainStore: ObservableObject {
         let code: OSStatus?
     }
 
-    @Published public var hasCredentials = false
+    private let hasCredentialsSubject = CurrentValueSubject<Bool, Never>(false)
+    public var hasCredentials: AnyPublisher<Bool, Never>
 
     public init() {
+        hasCredentials = hasCredentialsSubject.eraseToAnyPublisher()
         updateHasCredentials()
     }
 
@@ -26,7 +54,7 @@ public class KeychainStore: ObservableObject {
         get(tag: "username")
     }
 
-    func getHashedPassword() -> String? {
+    public func getHashedPassword() -> String? {
         get(tag: "password")
     }
 
@@ -41,13 +69,13 @@ public class KeychainStore: ObservableObject {
         }
     }
 
-    func store(token: String?) throws {
+    public func store(token: String?) throws {
         SecItemDelete(makeQuery(tag: "token"))
 
         try set(tag: "token", value: token)
     }
 
-    func getToken() -> String? {
+    public func getToken() -> String? {
         get(tag: "token")
     }
 
@@ -58,7 +86,7 @@ public class KeychainStore: ObservableObject {
     }
 
     public func updateHasCredentials() {
-        hasCredentials = getUsername() != nil && getHashedPassword() != nil
+        hasCredentialsSubject.send(getUsername() != nil && getHashedPassword() != nil)
     }
 }
 

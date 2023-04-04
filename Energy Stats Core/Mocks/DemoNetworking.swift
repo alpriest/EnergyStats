@@ -106,6 +106,7 @@ public class MockConfig: Config {
     public var showSunnyBackground: Bool = true
     public var devices: Data?
     public var selectedDeviceID: String?
+    public var showUsableBatteryOnly: Bool = false
 }
 
 public class PreviewConfigManager: ConfigManager {

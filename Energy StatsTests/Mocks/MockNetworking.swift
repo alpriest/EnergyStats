@@ -7,6 +7,7 @@
 
 @testable import Energy_Stats
 import Foundation
+@testable import Energy_Stats_Core
 
 class MockNetworking: Networking {
     private let throwOnCall: Bool
@@ -33,11 +34,11 @@ class MockNetworking: Networking {
 
     func fetchDeviceList() async throws -> PagedDeviceListResponse {
         PagedDeviceListResponse(currentPage: 1, pageSize: 1, total: 1, devices: [
-            PagedDeviceListResponse.Device(deviceID: "abcdef", deviceSN: "123123", hasBattery: true, hasPV: true)
+            PagedDeviceListResponse.Device(plantName: "plant1", deviceID: "abcdef", deviceSN: "123123", hasBattery: true, hasPV: true)
         ])
     }
 
-    func fetchReport(variables: [ReportVariable], queryDate: QueryDate) async throws -> [ReportResponse] {
+    func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate) async throws -> [ReportResponse] {
         if throwOnCall {
             throw NetworkError.unknown
         }
@@ -45,15 +46,15 @@ class MockNetworking: Networking {
         return [ReportResponse(variable: "feedin", data: [.init(index: 14, value: 1.5)])]
     }
 
-    func fetchBatterySettings() async throws -> BatterySettingsResponse {
+    func fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse {
         BatterySettingsResponse(minSoc: 20)
     }
 
-    func fetchBattery() async throws -> BatteryResponse {
+    func fetchBattery(deviceID: String) async throws -> BatteryResponse {
         BatteryResponse(power: 0.27, soc: 56, residual: 2200, temperature: 13.6)
     }
 
-    func fetchRaw(variables: [RawVariable]) async throws -> [RawResponse] {
+    func fetchRaw(deviceID: String, variables: [RawVariable]) async throws -> [RawResponse] {
         if throwOnCall {
             throw NetworkError.unknown
         }
@@ -70,6 +71,10 @@ class MockNetworking: Networking {
                 return RawResponse.ReportData(time: date ?? $0.time, value: $0.value)
             })
         }
+    }
+
+    func fetchAddressBook(deviceID: String) async throws -> AddressBookResponse {
+        AddressBookResponse(softVersion: AddressBookResponse.SoftwareVersion(master: "1", slave: "2", manager: "3"))
     }
 
     private func rawData() throws -> Data {

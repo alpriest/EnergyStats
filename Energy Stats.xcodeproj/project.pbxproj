@@ -36,6 +36,7 @@
 		4107446528CA1D76006D5D7D /* FlowingLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446428CA1D76006D5D7D /* FlowingLine.swift */; };
 		4107446728CA22B3006D5D7D /* InverterPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446628CA22B3006D5D7D /* InverterPath.swift */; };
 		4107446C28CA57A9006D5D7D /* PowerFlowTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446B28CA57A9006D5D7D /* PowerFlowTabView.swift */; };
+		41075D6029DC392E007F897A /* BatteryCapacityCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41075D5F29DC392E007F897A /* BatteryCapacityCalculatorTests.swift */; };
 		410913FD29DB78EF00133CC5 /* PreciseDateTimeFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410913FC29DB78EF00133CC5 /* PreciseDateTimeFormatter.swift */; };
 		410913FE29DB791200133CC5 /* CountdownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A25D4228CA706700315714 /* CountdownTimer.swift */; };
 		410913FF29DB7A2700133CC5 /* CurrentStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146828C7374400EA5BA1 /* CurrentStatusViewModel.swift */; };
@@ -103,10 +104,16 @@
 		41E4B31028DB7666003F7F47 /* BatteryPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E4B30F28DB7666003F7F47 /* BatteryPowerView.swift */; };
 		41E4B31328DB77A3003F7F47 /* HomePowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E4B31228DB77A3003F7F47 /* HomePowerView.swift */; };
 		41E4B31528DB77E8003F7F47 /* GridPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E4B31428DB77E8003F7F47 /* GridPowerView.swift */; };
-		41EDDF7428CD2ED30092C662 /* Energy_StatsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EDDF7328CD2ED30092C662 /* Energy_StatsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		41075D6129DC40BA007F897A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4140144228C70B3200EA5BA1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 41A95B7C29DB2F0900A35169;
+			remoteInfo = "Energy Stats Watch App Watch App";
+		};
 		41A95B8829DB2F0A00A35169 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4140144228C70B3200EA5BA1 /* Project object */;
@@ -192,6 +199,7 @@
 		4107446428CA1D76006D5D7D /* FlowingLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowingLine.swift; sourceTree = "<group>"; };
 		4107446628CA22B3006D5D7D /* InverterPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterPath.swift; sourceTree = "<group>"; };
 		4107446B28CA57A9006D5D7D /* PowerFlowTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerFlowTabView.swift; sourceTree = "<group>"; };
+		41075D5F29DC392E007F897A /* BatteryCapacityCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryCapacityCalculatorTests.swift; sourceTree = "<group>"; };
 		410913FC29DB78EF00133CC5 /* PreciseDateTimeFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreciseDateTimeFormatter.swift; sourceTree = "<group>"; };
 		410AA38729D96F6D00CD107C /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		4110065A28E890E40018C3DF /* GraphTabViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTabViewModelTests.swift; sourceTree = "<group>"; };
@@ -274,7 +282,6 @@
 		41E4B31428DB77E8003F7F47 /* GridPowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPowerView.swift; sourceTree = "<group>"; };
 		41EDDF6B28CD2A630092C662 /* HomePowerFlowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePowerFlowViewModel.swift; sourceTree = "<group>"; };
 		41EDDF7128CD2ED30092C662 /* Energy StatsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Energy StatsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		41EDDF7328CD2ED30092C662 /* Energy_StatsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Energy_StatsTests.swift; sourceTree = "<group>"; };
 		41F8D8F6292D7650005E2D18 /* report.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = report.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -367,6 +374,7 @@
 			children = (
 				4110065A28E890E40018C3DF /* GraphTabViewModelTests.swift */,
 				41923E412916BECC00D1A8C5 /* GraphTabViewTests.swift */,
+				41075D5F29DC392E007F897A /* BatteryCapacityCalculatorTests.swift */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -619,7 +627,6 @@
 		41EDDF7228CD2ED30092C662 /* Energy StatsTests */ = {
 			isa = PBXGroup;
 			children = (
-				41EDDF7328CD2ED30092C662 /* Energy_StatsTests.swift */,
 				4127910928E241D900D5F993 /* Extensions */,
 				4127911128E38F1400D5F993 /* LoginViewTests.swift */,
 				4127910028E1FBCC00D5F993 /* Mocks */,
@@ -736,6 +743,7 @@
 			);
 			dependencies = (
 				41EDDF7628CD2ED30092C662 /* PBXTargetDependency */,
+				41075D6229DC40BA007F897A /* PBXTargetDependency */,
 			);
 			name = "Energy StatsTests";
 			packageProductDependencies = (
@@ -951,6 +959,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				412790FF28E1FB9200D5F993 /* UserManagerTests.swift in Sources */,
+				41075D6029DC392E007F897A /* BatteryCapacityCalculatorTests.swift in Sources */,
 				41923E422916BECC00D1A8C5 /* GraphTabViewTests.swift in Sources */,
 				4127911228E38F1400D5F993 /* LoginViewTests.swift in Sources */,
 				4127910228E1FBD300D5F993 /* MockKeychainStore.swift in Sources */,
@@ -959,7 +968,6 @@
 				4110065B28E890E40018C3DF /* GraphTabViewModelTests.swift in Sources */,
 				4127910D28E2442100D5F993 /* Array+Safe.swift in Sources */,
 				4127910828E23D0A00D5F993 /* MockConfig.swift in Sources */,
-				41EDDF7428CD2ED30092C662 /* Energy_StatsTests.swift in Sources */,
 				41B690F628E03EA70058126E /* NetworkTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -967,6 +975,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		41075D6229DC40BA007F897A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 41A95B7C29DB2F0900A35169 /* Energy Stats Watch App Watch App */;
+			targetProxy = 41075D6129DC40BA007F897A /* PBXContainerItemProxy */;
+		};
 		41A95B8929DB2F0A00A35169 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 41A95B7C29DB2F0900A35169 /* Energy Stats Watch App Watch App */;

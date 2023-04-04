@@ -8,6 +8,7 @@
 import Combine
 @testable import Energy_Stats
 import XCTest
+import Energy_Stats_Core
 
 @MainActor
 final class UserManagerTests: XCTestCase {
@@ -27,7 +28,7 @@ final class UserManagerTests: XCTestCase {
 
     func test_isLoggedIn_SetsOnInitialisation() {
         var expectation: XCTestExpectation? = self.expectation(description: #function)
-        keychainStore.hasCredentials = true
+        keychainStore.updateHasCredentials(value: true)
 
         sut.$isLoggedIn
             .receive(subscriber: Subscribers.Sink(receiveCompletion: { _ in
@@ -55,15 +56,11 @@ final class UserManagerTests: XCTestCase {
     }
 
     func test_logout_clears_config() {
-        config.deviceID = "device"
-        config.hasPV = true
-        config.hasBattery = true
+        config.selectedDeviceID = "device"
 
         sut.logout()
 
-        XCTAssertNil(config.deviceID)
-        XCTAssertFalse(config.hasPV)
-        XCTAssertFalse(config.hasBattery)
+        XCTAssertNil(config.selectedDeviceID)
     }
 
     func test_login_success() async {
@@ -75,10 +72,8 @@ final class UserManagerTests: XCTestCase {
         XCTAssertEqual(received.values, [.idle, .busy])
         XCTAssertEqual(keychainStore.username, "bob")
         XCTAssertEqual(keychainStore.hashedPassword, "password".md5()!)
-        XCTAssertEqual(config.deviceID, "12345678-0000-0000-1234-aaaabbbbcccc")
-        XCTAssertEqual(config.deviceSN, "1234567890")
-        XCTAssertTrue(config.hasPV)
-        XCTAssertTrue(config.hasBattery)
+        XCTAssertEqual(config.selectedDeviceID, "12345678-0000-0000-1234-aaaabbbbcccc")
+        XCTAssertNotNil(config.devices)
     }
 
     func test_login_performs_logout_when_devicelist_fails() async {

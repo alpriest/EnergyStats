@@ -18,17 +18,17 @@ class UserManager: ObservableObject {
 
     private let networking: Networking
     private let configManager: ConfigManager
-    private let store: KeychainStore
+    private let store: KeychainStoring
     private var cancellables = Set<AnyCancellable>()
     @MainActor @Published var state = State.idle
     @MainActor @Published var isLoggedIn: Bool = false
 
-    init(networking: Networking, store: KeychainStore, configManager: ConfigManager) {
+    init(networking: Networking, store: KeychainStoring, configManager: ConfigManager) {
         self.networking = networking
         self.store = store
         self.configManager = configManager
 
-        self.store.$hasCredentials
+        self.store.hasCredentials
             .sink { hasCredentials in
                 Task { await MainActor.run { [weak self] in
                     self?.isLoggedIn = hasCredentials

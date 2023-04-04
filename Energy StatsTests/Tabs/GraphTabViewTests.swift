@@ -9,11 +9,16 @@
 import SnapshotTesting
 import SwiftUI
 import XCTest
+import Energy_Stats_Core
 
 @MainActor
 final class GraphTabViewTests: XCTestCase {
     func test_when_user_arrives() async {
-        let viewModel = GraphTabViewModel(MockNetworking(throwOnCall: false, dateProvider: { Date(timeIntervalSince1970: 1664127352) })) { Date(timeIntervalSince1970: 1664127352) }
+        let networking = MockNetworking(throwOnCall: false, dateProvider: { Date(timeIntervalSince1970: 1664127352) })
+        let viewModel = GraphTabViewModel(
+            networking,
+            configManager: ConfigManager(networking: networking, config: MockConfig())
+        ) { Date(timeIntervalSince1970: 1664127352) }
         let sut = GraphTabView(viewModel: viewModel)
         let view = UIHostingController(rootView: sut)
         await viewModel.start()
@@ -23,7 +28,9 @@ final class GraphTabViewTests: XCTestCase {
     }
 
     func test_with_network_failure() async {
-        let viewModel = GraphTabViewModel(MockNetworking(throwOnCall: true))
+        let networking = MockNetworking(throwOnCall: true)
+        let viewModel = GraphTabViewModel(MockNetworking(throwOnCall: true),
+                                          configManager: ConfigManager(networking: networking, config: MockConfig()))
         await viewModel.start()
         let sut = GraphTabView(viewModel: viewModel)
         let view = UIHostingController(rootView: sut)
