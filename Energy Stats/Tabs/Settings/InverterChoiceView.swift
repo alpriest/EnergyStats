@@ -10,7 +10,6 @@ import Energy_Stats_Core
 
 struct InverterChoiceView: View {
     @ObservedObject var viewModel: SettingsTabViewModel
-    let configManager: ConfigManaging
 
     var body: some View {
         if viewModel.devices.count > 1 {
@@ -29,8 +28,6 @@ struct InverterChoiceView: View {
                 footer: { Text("Selected device and related battery information will be displayed on the main page") }
             )
         }
-
-        InverterFirmwareVersionsView(config: configManager)
     }
 }
 
@@ -42,7 +39,7 @@ struct InverterChoiceView_Previews: PreviewProvider {
         )
 
         return Form {
-            InverterChoiceView(viewModel: viewModel, configManager: PreviewConfigManager())
+            InverterChoiceView(viewModel: viewModel)
         }
     }
 }

@@ -22,7 +22,14 @@ struct InverterFirmwareVersionsView: View {
                             Text(version.slave)
                         Text("Master: ") +
                             Text(version.master)
-                    }
+                    }.contextMenu {
+                        Button(action: {
+                            UIPasteboard.general.string = "Manager: \(version.manager) Slave: \(version.slave) Master: \(version.master)"
+                        }) {
+                            Text("Copy to clipboard")
+                            Image(systemName: "doc.on.doc")
+                        }
+                     }
                 }
             },
             header: { Text("Firmware Versions") },

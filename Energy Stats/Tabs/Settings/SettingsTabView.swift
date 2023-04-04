@@ -14,7 +14,8 @@ struct SettingsTabView: View {
 
     var body: some View {
         Form {
-            InverterChoiceView(viewModel: viewModel, configManager: configManager)
+            InverterChoiceView(viewModel: viewModel)
+            InverterFirmwareVersionsView(config: configManager)
             BatterySettingsView(viewModel: viewModel)
 
             Section(
@@ -52,7 +53,7 @@ struct SettingsTabView: View {
                     Text("Display")
                 },
                 footer: {
-                    Text("Show usable battery deducts the Min SOC amount from the battery charge level and percentage. ")
+                    Text("'Show usable battery' deducts the Min SOC amount from the battery charge level and percentage. Due to inaccuracies in the way battery levels are measured this may result in occasionally showing a negative amount remaining.")
                 })
 
             Section(
