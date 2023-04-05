@@ -31,11 +31,11 @@ public struct QueryDate: Encodable {
     }
 }
 
-public struct ReportResponse: Decodable {
+public struct ReportResponse: Decodable, Hashable {
     public let variable: String
     public let data: [ReportData]
 
-    public struct ReportData: Decodable {
+    public struct ReportData: Decodable, Hashable {
         public let index: Int
         public let value: Double
     }

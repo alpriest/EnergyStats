@@ -22,11 +22,11 @@ struct RawRequest: Encodable {
     }
 }
 
-public struct RawResponse: Decodable {
+public struct RawResponse: Decodable, Hashable {
     public let variable: String
     public let data: [ReportData]
 
-    public struct ReportData: Decodable {
+    public struct ReportData: Decodable, Hashable {
         public let time: Date
         public let value: Double
 

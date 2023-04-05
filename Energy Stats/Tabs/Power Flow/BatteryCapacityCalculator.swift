@@ -52,14 +52,7 @@ class BatteryCapacityCalculator {
     func effectiveBatteryStateOfCharge(batteryStateOfCharge: Double, includeUnusableCapacity: Bool = true) -> Double {
         guard batteryStateOfCharge <= percentageConsideredFull else { return 0.99 }
 
-        let effectiveBatteryCapacity = effectiveBatteryCapacityW(includeUnusableCapacity: includeUnusableCapacity)
-        let actualEstimatedStoredCharge = capacityW * batteryStateOfCharge
-        let effectiveEstimatedStoredCharge = actualEstimatedStoredCharge - (includeUnusableCapacity ? 0 : minimumCharge)
-
-        return max(effectiveEstimatedStoredCharge / effectiveBatteryCapacity, 0)
-    }
-
-    private func effectiveBatteryCapacityW(includeUnusableCapacity: Bool = true) -> Double {
-        capacityW - (includeUnusableCapacity ? 0 : minimumCharge)
+        let deduction = includeUnusableCapacity ? 0 : minimumSOC
+        return ((batteryStateOfCharge - deduction) / (1 - deduction)).rounded(decimalPlaces: 2)
     }
 }

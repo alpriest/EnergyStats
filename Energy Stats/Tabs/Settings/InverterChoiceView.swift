@@ -15,7 +15,7 @@ struct InverterChoiceView: View {
         if viewModel.devices.count > 1 {
             Section(
                 content: {
-                    Picker("", selection: $viewModel.selectedDeviceID) {
+                    Picker("Inverter", selection: $viewModel.selectedDeviceID) {
                         ForEach(viewModel.devices, id: \.deviceID) { device in
                             Text(device.deviceID)
                                 .tag(device.deviceID)
