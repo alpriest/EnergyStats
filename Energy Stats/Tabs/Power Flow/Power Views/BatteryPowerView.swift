@@ -29,7 +29,7 @@ struct BatteryPowerViewModel {
     var batteryExtra: String? {
         calculator.batteryChargeStatusDescription(
             batteryChargePowerkWH: batteryChargekWH,
-            batteryStateOfCharge: batteryStateOfCharge
+            batteryStateOfCharge: actualBatteryStateOfCharge
         )
     }
 
