@@ -5,9 +5,9 @@
 //  Created by Alistair Priest on 08/09/2022.
 //
 
+import Energy_Stats_Core
 import Foundation
 import SwiftUI
-import Energy_Stats_Core
 
 struct ValuesAtTime {
     let values: [GraphValue]
@@ -40,6 +40,7 @@ class GraphTabViewModel: ObservableObject {
         refresh()
     }}
     @Published private(set) var errorMessage: String? = nil
+    @Published private(set) var yScale = -0.5 ... 5.0
     private let configManager: ConfigManaging
 
     init(_ networking: Networking, configManager: ConfigManaging, _ dateProvider: @escaping () -> Date = { Date() }) {
@@ -102,6 +103,10 @@ class GraphTabViewModel: ObservableObject {
             lhs.value < rhs.value
         })
         data = refreshedData
+
+        let scaleMin = ((refreshedData.min(by: { lhs, rhs in lhs.value > rhs.value })?.value) ?? 0) - 0.5
+        let scaleMax = ((max?.value) ?? 0) + 0.5
+        yScale = scaleMin ... scaleMax
     }
 
     var max: GraphValue?

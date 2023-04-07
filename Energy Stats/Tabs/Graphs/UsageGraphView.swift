@@ -14,6 +14,8 @@ struct UsageGraphView: View {
     @GestureState var isDetectingPress = true
     @Binding var selectedDate: Date?
     @Binding var valuesAtTime: ValuesAtTime?
+    let min: Double = -0.5
+    let max: Double = 5
 
     var body: some View {
         Chart(viewModel.data, id: \.variable.networkTitle) {
@@ -28,6 +30,7 @@ struct UsageGraphView: View {
         .chartPlotStyle { content in
             content.background(Color.gray.gradient.opacity(0.02))
         }
+        .chartYScale(domain: min...max)
         .chartXAxis(content: {
             AxisMarks(values: .stride(by: .hour)) { value in
                 if (value.index == 0) || (value.index % viewModel.stride == 0), let date = value.as(Date.self) {
