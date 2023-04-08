@@ -13,18 +13,23 @@ struct RawResponseDebugView: View {
 
     var body: some View {
         ScrollView {
-            ForEach(network.rawResponse, id: \.self) { response in
-                VStack(alignment: .leading) {
-                    Text(response.variable)
+            if let response = network.rawResponse {
+                Text("Last fetched ") +
+                Text(response.time, formatter: DateFormatter.forDebug())
 
-                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
-                        ForEach(response.data, id: \.self) {
-                            Text($0.time, format: .dateTime)
-                            Text($0.value, format: .number)
+                ForEach(response.data, id: \.self) { response in
+                    VStack(alignment: .leading) {
+                        Text(response.variable)
+
+                        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
+                            ForEach(response.data, id: \.self) {
+                                Text($0.time, format: .dateTime)
+                                Text($0.value, format: .number)
+                            }
                         }
                     }
-                }
-            }.padding()
+                }.padding()
+            }
         }
         .navigationTitle("Raw")
         .toolbar {
@@ -35,13 +40,13 @@ struct RawResponseDebugView: View {
     }
 
     private var asText: String {
-        network.rawResponse.flatMap { response in
+        network.rawResponse?.data.flatMap { response in
             [response.variable] +
             response.data.map {
                 return """
                        Time: \($0.time) Value: \($0.value)
                        """
             }
-        }.joined(separator: "\n")
+        }.joined(separator: "\n") ?? ""
     }
 }

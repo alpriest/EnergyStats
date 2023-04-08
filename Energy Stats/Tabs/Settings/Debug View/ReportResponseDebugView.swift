@@ -13,18 +13,25 @@ struct ReportResponseDebugView: View {
 
     var body: some View {
         ScrollView {
-            ForEach(network.reportResponse, id: \.self) { response in
-                VStack(alignment: .leading) {
-                    Text(response.variable)
+            if let response = network.reportResponse {
+                Text("Last fetched ") +
+                Text(response.time, formatter: DateFormatter.forDebug())
 
-                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
-                        ForEach(response.data, id: \.self) {
-                            Text($0.index, format: .number)
-                            Text($0.value, format: .number)
+                ForEach(response.data, id: \.self) { response in
+                    VStack(alignment: .leading) {
+                        Text(response.variable)
+
+                        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
+                            ForEach(response.data, id: \.self) {
+                                Text($0.index, format: .number)
+                                Text($0.value, format: .number)
+                            }
                         }
                     }
-                }
-            }.padding()
+                }.padding()
+            } else {
+                Text("Report is only fetched and cached on the graph view. Click that page to load report data")
+            }
         }
         .navigationTitle("Report")
         .toolbar {
@@ -35,14 +42,14 @@ struct ReportResponseDebugView: View {
     }
 
     private var asText: String {
-        network.reportResponse.flatMap { response in
+        network.reportResponse?.data.flatMap { response in
             [response.variable] +
-            response.data.map {
-                return """
-                       Time: \($0.index) Value: \($0.value)
-                       """
-            }
-        }.joined(separator: "\n")
+                response.data.map {
+                    """
+                    Time: \($0.index) Value: \($0.value)
+                    """
+                }
+        }.joined(separator: "\n") ?? ""
     }
 }
 

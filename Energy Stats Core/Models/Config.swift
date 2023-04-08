@@ -18,6 +18,7 @@ public protocol Config {
     var devices: Data? { get set }
     var selectedDeviceID: String? { get set }
     var showUsableBatteryOnly: Bool { get set }
+    var showInW: Bool { get set }
 }
 
 public class UserDefaultsConfig: Config {
@@ -52,6 +53,9 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredString(key: "selectedDeviceID")
     public var selectedDeviceID: String?
+
+    @UserDefaultsStoredBool(key: "showInW", defaultValue: true)
+    public var showInW: Bool
 }
 
 @propertyWrapper

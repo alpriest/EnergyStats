@@ -34,6 +34,7 @@ public protocol ConfigManaging {
     var currentDevice: Device? { get }
     var selectedDeviceID: String? { get set }
     var firmwareVersions: DeviceFirmwareVersion? { get }
+    var showInW: Bool { get set }
 }
 
 public class ConfigManager: ConfigManaging {
@@ -53,7 +54,8 @@ public class ConfigManager: ConfigManaging {
                 showSunnyBackground: config.showSunnyBackground,
                 decimalPlaces: config.decimalPlaces,
                 showBatteryEstimate: config.showBatteryEstimate,
-                showUsableBatteryOnly: config.showUsableBatteryOnly
+                showUsableBatteryOnly: config.showUsableBatteryOnly,
+                showInW: config.showInW
             )
         )
     }
@@ -205,6 +207,16 @@ public class ConfigManager: ConfigManaging {
             config.decimalPlaces = newValue
             appTheme.send(appTheme.value.update(
                 decimalPlaces: config.decimalPlaces
+            ))
+        }
+    }
+
+    public var showInW: Bool {
+        get { config.showInW }
+        set {
+            config.showInW = newValue
+            appTheme.send(appTheme.value.update(
+                showInW: config.showInW
             ))
         }
     }

@@ -13,8 +13,11 @@ struct DeviceListDebugView: View {
 
     var body: some View {
         ScrollView {
-            if let deviceList = network.deviceListResponse {
-                ForEach(deviceList.devices, id: \.self) { device in
+            if let response = network.deviceListResponse {
+                Text("Last fetched ") +
+                Text(response.time, formatter: DateFormatter.forDebug())
+
+                ForEach(response.data.devices, id: \.self) { device in
                     LazyVGrid(
                         columns: [GridItem(.flexible()), GridItem(.flexible())],
                         alignment: .leading)
@@ -51,7 +54,7 @@ struct DeviceListDebugView: View {
     private var asText: String {
         guard let deviceList = network.deviceListResponse else { return "" }
 
-        return deviceList.devices.map { device in
+        return deviceList.data.devices.map { device in
             """
             Plantname: \(device.plantName)
             DeviceID: \(device.deviceID)

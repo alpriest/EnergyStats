@@ -49,6 +49,10 @@ struct SettingsTabView: View {
                                 Text("3").tag(3)
                             }.pickerStyle(.segmented)
                         }
+
+                        Toggle(isOn: $viewModel.showInW) {
+                            Text("Show values in Watts")
+                        }
                     },
                     header: {
                         Text("Display")

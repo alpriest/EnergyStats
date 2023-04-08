@@ -33,7 +33,7 @@ struct PowerFlowView: View {
                         FlowingLine(direction: .up, animationDuration: animationDuration, color: lineColor)
                     }
 
-                    EnergyAmountView(amount: amount, decimalPlaces: appTheme.value.decimalPlaces, backgroundColor: lineColor, textColor: textColor)
+                    EnergyAmountView(amount: amount, decimalPlaces: appTheme.value.decimalPlaces, backgroundColor: lineColor, textColor: textColor, appTheme: appTheme)
                         .font(.footnote)
                         .bold()
                 }

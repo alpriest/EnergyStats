@@ -13,19 +13,22 @@ struct BatteryDebugView: View {
 
     var body: some View {
         ScrollView {
-            if let batteryResponse = network.batteryResponse {
+            if let response = network.batteryResponse {
+                Text("Last fetched ") +
+                Text(response.time, formatter: DateFormatter.forDebug())
+
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
                     Text("Power")
-                    Text(batteryResponse.power, format: .number)
+                    Text(response.data.power, format: .number)
 
                     Text("Residual")
-                    Text(batteryResponse.residual, format: .number)
+                    Text(response.data.residual, format: .number)
 
                     Text("SOC")
-                    Text(batteryResponse.soc, format: .number)
+                    Text(response.data.soc, format: .number)
 
                     Text("Temperature")
-                    Text(batteryResponse.temperature, format: .number)
+                    Text(response.data.temperature, format: .number)
                 }
             }
         }
@@ -41,10 +44,10 @@ struct BatteryDebugView: View {
         guard let batteryResponse = network.batteryResponse else { return "" }
 
         return """
-        Power: \(batteryResponse.power)
-        Residual: \(batteryResponse.residual)
-        SOC: \(batteryResponse.soc)
-        Temperature: \(batteryResponse.temperature)
+        Power: \(batteryResponse.data.power)
+        Residual: \(batteryResponse.data.residual)
+        SOC: \(batteryResponse.data.soc)
+        Temperature: \(batteryResponse.data.temperature)
         """
     }
 }

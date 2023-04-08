@@ -107,6 +107,7 @@ public class MockConfig: Config {
     public var devices: Data?
     public var selectedDeviceID: String?
     public var showUsableBatteryOnly: Bool = false
+    public var showInW: Bool = false
 }
 
 public class PreviewConfigManager: ConfigManager {

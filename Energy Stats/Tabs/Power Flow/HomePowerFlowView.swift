@@ -77,7 +77,8 @@ extension AppTheme {
             showSunnyBackground: true,
             decimalPlaces: 3,
             showBatteryEstimate: true,
-            showUsableBatteryOnly: false
+            showUsableBatteryOnly: false,
+            showInW: false
         )
     }
 }

@@ -5,8 +5,8 @@
 //  Created by Alistair Priest on 05/03/2023.
 //
 
-import SwiftUI
 import Energy_Stats_Core
+import SwiftUI
 
 class SettingsTabViewModel: ObservableObject {
     @Published var showColouredLines: Bool {
@@ -63,6 +63,12 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
+    @Published var showInW: Bool {
+        didSet {
+            config.showInW = showInW
+        }
+    }
+
     private var config: ConfigManaging
     private let userManager: UserManager
 
@@ -78,6 +84,7 @@ class SettingsTabViewModel: ObservableObject {
         selectedDeviceID = config.selectedDeviceID ?? ""
         showBatteryEstimate = config.showBatteryEstimate
         showUsableBatteryOnly = config.showUsableBatteryOnly
+        showInW = config.showInW
     }
 
     var minSOC: Double { config.minSOC }

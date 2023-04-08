@@ -43,3 +43,11 @@ extension Date {
         return formatter.string(from: self)
     }
 }
+
+extension DateFormatter {
+    public static func forDebug() -> DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d, HH:mm:ss"
+        return formatter
+    }
+}

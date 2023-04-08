@@ -15,14 +15,16 @@ public struct AppTheme {
     public var decimalPlaces: Int
     public var showBatteryEstimate: Bool
     public var showUsableBatteryOnly: Bool
+    public var showInW: Bool
 
-    public init(showColouredLines: Bool, showBatteryTemperature: Bool, showSunnyBackground: Bool, decimalPlaces: Int, showBatteryEstimate: Bool, showUsableBatteryOnly: Bool) {
+    public init(showColouredLines: Bool, showBatteryTemperature: Bool, showSunnyBackground: Bool, decimalPlaces: Int, showBatteryEstimate: Bool, showUsableBatteryOnly: Bool, showInW: Bool) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
         self.showSunnyBackground = showSunnyBackground
         self.decimalPlaces = decimalPlaces
         self.showBatteryEstimate = showBatteryEstimate
         self.showUsableBatteryOnly = showUsableBatteryOnly
+        self.showInW = showInW
     }
 
     public func update(
@@ -31,7 +33,8 @@ public struct AppTheme {
         showSunnyBackground: Bool? = nil,
         decimalPlaces: Int? = nil,
         showBatteryEstimate: Bool? = nil,
-        showUsableBatteryOnly: Bool? = nil
+        showUsableBatteryOnly: Bool? = nil,
+        showInW: Bool? = nil
     ) -> AppTheme {
         AppTheme(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -39,7 +42,8 @@ public struct AppTheme {
             showSunnyBackground: showSunnyBackground ?? self.showSunnyBackground,
             decimalPlaces: decimalPlaces ?? self.decimalPlaces,
             showBatteryEstimate: showBatteryEstimate ?? self.showBatteryEstimate,
-            showUsableBatteryOnly: showUsableBatteryOnly ?? self.showUsableBatteryOnly
+            showUsableBatteryOnly: showUsableBatteryOnly ?? self.showUsableBatteryOnly,
+            showInW: showInW ?? self.showInW
         )
     }
 }
