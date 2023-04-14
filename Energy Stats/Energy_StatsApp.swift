@@ -13,8 +13,9 @@ struct Energy_StatsApp: App {
     var body: some Scene {
         let keychainStore = KeychainStore()
         let config = UserDefaultsConfig()
-        let network = InMemoryLoggingNetworkingDecorator(inner: NetworkFacade(network: Network(credentials: keychainStore, config: config),
-                                                                              config: config))
+        let store = InMemoryLoggingNetworkStore()
+        let network = NetworkFacade(network: Network(credentials: keychainStore, config: config, store: store),
+                                    config: config)
         let configManager = ConfigManager(networking: network, config: config)
         let loginManager = UserManager(networking: network, store: keychainStore, configManager: configManager)
         Task { try await configManager.fetchFirmwareVersions() }
@@ -27,7 +28,8 @@ struct Energy_StatsApp: App {
                     loginManager: loginManager,
                     network: network,
                     configManager: configManager
-                ).environmentObject(network)
+                )
+                .environmentObject(store)
             }
         }
     }

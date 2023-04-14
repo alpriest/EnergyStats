@@ -9,22 +9,38 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct DebugDataView: View {
-    @EnvironmentObject var network: InMemoryLoggingNetworkingDecorator
+    @EnvironmentObject var network: InMemoryLoggingNetworkStore
 
     var body: some View {
         Form {
             Section(content: {
                 NavigationLink("Raw") {
-                    RawResponseDebugView()
+                    ResponseDebugView<[RawResponse]>(
+                        title: "Raw",
+                        missing: "Data is fetched and cached on the power flow view.",
+                        mapper: { $0.rawResponse }
+                    )
                 }
                 NavigationLink("Report") {
-                    ReportResponseDebugView()
+                    ResponseDebugView<[ReportResponse]>(
+                        title: "Report",
+                        missing: "Data is only fetched and cached on the graph view. Click that page to load report data",
+                        mapper: { $0.reportResponse }
+                    )
                 }
                 NavigationLink("Battery") {
-                    BatteryDebugView()
+                    ResponseDebugView<BatteryResponse>(
+                        title: "Battery",
+                        missing: "Data is fetched and cached on the power flow view.",
+                        mapper: { $0.batteryResponse }
+                    )
                 }
                 NavigationLink("Device List") {
-                    DeviceListDebugView()
+                    ResponseDebugView<PagedDeviceListResponse>(
+                        title: "Battery",
+                        missing: "Device list is only fetched and recached on login, logout to see the data response.",
+                        mapper: { $0.deviceListResponse }
+                    )
                 }
             }, footer: {
                 Text("Having problems? View the most recent data logs above to help and diagnose issues")
@@ -34,19 +50,22 @@ struct DebugDataView: View {
     }
 }
 
+#if DEBUG
 struct DebugDataView_Previews: PreviewProvider {
     static var previews: some View {
-        let network = InMemoryLoggingNetworkingDecorator(inner: DemoNetworking())
+        let network = DemoNetworking()
+        let store = InMemoryLoggingNetworkStore()
         Task {
-            _ = try await network.fetchRaw(deviceID: "123", variables: [.batChargePower])
-            _ = try await network.fetchReport(deviceID: "123", variables: [.chargeEnergyToTal], queryDate: .current())
-            _ = try await network.fetchBattery(deviceID: "123")
-            _ = try await network.fetchDeviceList()
+            store.rawResponse = NetworkOperation(description: "fetchRaw", value: try await network.fetchRaw(deviceID: "123", variables: [.batChargePower]), raw: "test".data(using: .utf8)!)
+            store.reportResponse = NetworkOperation(description: "fetchReport", value: try await network.fetchReport(deviceID: "123", variables: [.chargeEnergyToTal], queryDate: .current()), raw: "test".data(using: .utf8)!)
+            store.batteryResponse = NetworkOperation(description: "fetchBattery", value: try await network.fetchBattery(deviceID: "123"), raw: "test".data(using: .utf8)!)
+            store.deviceListResponse = NetworkOperation(description: "fetchDeviceList", value: try await network.fetchDeviceList(), raw: "test".data(using: .utf8)!)
         }
 
         return NavigationView {
             DebugDataView()
         }
-        .environmentObject(network)
+        .environmentObject(store)
     }
 }
+#endif

@@ -39,10 +39,12 @@ public class Network: Networking {
 
     private let credentials: KeychainStoring
     private let config: Config
+    private let store: InMemoryLoggingNetworkStore
 
-    public init(credentials: KeychainStoring, config: Config) {
+    public init(credentials: KeychainStoring, config: Config, store: InMemoryLoggingNetworkStore) {
         self.credentials = credentials
         self.config = config
+        self.store = store
     }
 
     public func verifyCredentials(username: String, hashedPassword: String) async throws {
@@ -67,9 +69,8 @@ public class Network: Networking {
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(AuthRequest(user: username, password: hashedPassword))
 
-        let response: AuthResponse = try await fetch(request, retry: false)
-
-        return response.token
+        let response: (AuthResponse, _) = try await fetch(request, retry: false)
+        return response.0.token
     }
 
     public func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate) async throws -> [ReportResponse] {
@@ -77,21 +78,27 @@ public class Network: Networking {
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(ReportRequest(deviceID: deviceID, variables: variables, queryDate: queryDate))
 
-        return try await fetch(request)
+        let result: ([ReportResponse], Data) = try await fetch(request)
+        store.reportResponse = NetworkOperation(description: "fetchReport", value: result.0, raw: result.1)
+        return result.0
     }
 
     public func fetchBattery(deviceID: String) async throws -> BatteryResponse {
         var request = URLRequest(url: URL.battery)
         request.url?.append(queryItems: [Foundation.URLQueryItem(name: "id", value: deviceID)])
 
-        return try await fetch(request)
+        let result: (BatteryResponse, Data) = try await fetch(request)
+        store.batteryResponse = NetworkOperation(description: "fetchBattery", value: result.0, raw: result.1)
+        return result.0
     }
 
     public func fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse {
         var request = URLRequest(url: URL.soc)
         request.url?.append(queryItems: [Foundation.URLQueryItem(name: "sn", value: deviceSN)])
 
-        return try await fetch(request)
+        let result: (BatterySettingsResponse, Data) = try await fetch(request)
+        store.batterySettingsResponse = NetworkOperation(description: "fetchBatterySettings", value: result.0, raw: result.1)
+        return result.0
     }
 
     public func fetchRaw(deviceID: String, variables: [RawVariable]) async throws -> [RawResponse] {
@@ -99,7 +106,9 @@ public class Network: Networking {
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(RawRequest(deviceID: deviceID, variables: variables))
 
-        return try await fetch(request)
+        let result: ([RawResponse], Data) = try await fetch(request)
+        store.rawResponse = NetworkOperation(description: "fetchRaw", value: result.0, raw: result.1)
+        return result.0
     }
 
     public func fetchDeviceList() async throws -> PagedDeviceListResponse {
@@ -107,19 +116,23 @@ public class Network: Networking {
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(DeviceListRequest())
 
-        return try await fetch(request)
+        let result: (PagedDeviceListResponse, Data) = try await fetch(request)
+        store.deviceListResponse = NetworkOperation(description: "fetchDeviceList", value: result.0, raw: result.1)
+        return result.0
     }
 
     public func fetchAddressBook(deviceID: String) async throws -> AddressBookResponse {
         var request = URLRequest(url: URL.addressBook)
         request.url?.append(queryItems: [URLQueryItem(name: "deviceID", value: deviceID)])
 
-        return try await fetch(request)
+        let result: (AddressBookResponse, Data) = try await fetch(request)
+        store.addressBookResponse = NetworkOperation(description: "fetchAddressBookResponse", value: result.0, raw: result.1)
+        return result.0
     }
 }
 
 private extension Network {
-    func fetch<T: Decodable>(_ request: URLRequest, retry: Bool = true) async throws -> T {
+    func fetch<T: Decodable>(_ request: URLRequest, retry: Bool = true) async throws -> (T, Data) {
         var request = request
         addHeaders(to: &request)
 
@@ -142,7 +155,7 @@ private extension Network {
             }
 
             if let result = networkResponse.result {
-                return result
+                return (result, data)
             }
 
             throw NetworkError.invalidResponse(request.url, statusCode)
