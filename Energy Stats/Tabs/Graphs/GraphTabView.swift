@@ -15,22 +15,22 @@ struct GraphTabView: View {
     @State private var selectedDate: Date?
 
     var body: some View {
-        ScrollView {
-            VStack {
-                OptionalView(viewModel.errorMessage) {
-                    Text($0)
-                }
+        VStack {
+            OptionalView(viewModel.errorMessage) {
+                Text($0)
+            }
 
-                Picker("Hours", selection: $viewModel.hours) {
-                    Text("6h").tag(6)
-                    Text("12h").tag(12)
-                    Text("24h").tag(24)
-                }.pickerStyle(.segmented)
+            Picker("Hours", selection: $viewModel.hours) {
+                Text("6h").tag(6)
+                Text("12h").tag(12)
+                Text("24h").tag(24)
+            }.pickerStyle(.segmented)
 
+            ScrollView {
                 UsageGraphView(viewModel: viewModel,
                                selectedDate: $selectedDate,
                                valuesAtTime: $valuesAtTime)
-                .frame(height: 250)
+                    .frame(height: 250)
 
                 if let valuesAtTime {
                     ZStack(alignment: .topTrailing) {
@@ -93,8 +93,8 @@ struct GraphTabView: View {
                     viewModel.refresh()
                 }
             }
-            .padding()
         }
+        .padding()
         .task {
             await viewModel.start()
         }
@@ -104,5 +104,6 @@ struct GraphTabView: View {
 struct GraphTabView_Previews: PreviewProvider {
     static var previews: some View {
         GraphTabView(viewModel: GraphTabViewModel(DemoNetworking(), configManager: PreviewConfigManager()))
+            .previewDevice("iPhone 13 Mini")
     }
 }

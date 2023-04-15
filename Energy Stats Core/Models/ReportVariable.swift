@@ -60,7 +60,7 @@ public enum ReportVariable: String, RawRepresentable {
     public var description: String {
         switch self {
         case .generation:
-            return "PV / Battery power coming through the inverter"
+            return "Solar / Battery power coming through the inverter"
         case .feedIn:
             return "Power being sent to the grid"
         case .chargeEnergyToTal:

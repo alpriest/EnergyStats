@@ -85,18 +85,32 @@ struct SettingsTabView: View {
                             Text("You are logged in as \(viewModel.username)")
                             Button("logout") {
                                 viewModel.logout()
-                            }.buttonStyle(.bordered) 
+                            }.buttonStyle(.bordered)
                         }.frame(maxWidth: .infinity)
                     }, footer: {
-                        VStack {
+                        HStack {
+                            Button(action: {
+                                let url = URL(string: "itms-apps://itunes.apple.com/app/id1644492526?action=write-review")!
+                                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                            }, label: {
+                                Image(systemName: "medal")
+                                Text("Rate this app")
+                                    .multilineTextAlignment(.center)
+                            })
+
+                            Spacer()
+
                             HStack {
-                                Image(systemName: "envelope")
-                                Button("Get in touch") {
+                                Button(action: {
                                     UIApplication.shared.open(URL(string: "mailto:energystatsapp@gmail.com")!)
-                                }
+                                }, label: {
+                                    Image(systemName: "envelope")
+                                    Text("Get in touch")
+                                })
                             }
                         }
                         .padding(.top, 88)
+                        .padding(.bottom, 44)
                         .frame(maxWidth: .infinity)
                     })
             }
