@@ -16,6 +16,8 @@ public enum ReportVariable: String, RawRepresentable {
 
     public var networkTitle: String {
         switch self {
+        case .feedIn:
+            return "feedin"
         case .chargeEnergyToTal:
             return "chargeEnergyToTal"
         case .dischargeEnergyToTal:
@@ -27,10 +29,10 @@ public enum ReportVariable: String, RawRepresentable {
 
     public init?(rawValue: String) {
         switch rawValue {
-        case "feedin":
-            self = .feedIn
         case "generation":
             self = .generation
+        case "feedin":
+            self = .feedIn
         case "gridConsumption":
             self = .gridConsumption
         case "chargeEnergyToTal":
@@ -74,16 +76,16 @@ public enum ReportVariable: String, RawRepresentable {
 
     public var colour: Color {
         switch self {
+        case .generation:
+            return .yellow.opacity(0.8)
+        case .feedIn:
+            return .mint.opacity(0.8)
         case .chargeEnergyToTal:
             return .green.opacity(0.8)
         case .dischargeEnergyToTal:
             return .red.opacity(0.5)
-        case .generation:
-            return .yellow.opacity(0.8)
         case .gridConsumption:
             return .red.opacity(0.8)
-        case .feedIn:
-            return .mint.opacity(0.8)
         }
     }
 }
