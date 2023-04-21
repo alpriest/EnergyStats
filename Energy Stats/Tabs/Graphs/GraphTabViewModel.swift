@@ -108,7 +108,7 @@ class GraphTabViewModel: ObservableObject {
         })
         data = refreshedData
 
-        let scaleMin = ((refreshedData.min(by: { lhs, rhs in lhs.value > rhs.value })?.value) ?? 0) - 0.5
+        let scaleMin = ((refreshedData.min(by: { lhs, rhs in lhs.value < rhs.value })?.value) ?? 0) - 0.5
         let scaleMax = ((max?.value) ?? 0) + 0.5
         yScale = scaleMin ... scaleMax
     }

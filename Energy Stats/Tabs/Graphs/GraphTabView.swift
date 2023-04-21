@@ -29,13 +29,13 @@ struct GraphHeaderView: View {
                 Text("24h").tag(24)
             }.pickerStyle(.segmented)
 
-            Image(systemName: "calendar")
-                .frame(width: 44)
-                .onTapGesture {
-                    withAnimation {
-                        datePickerVisible.toggle()
-                    }
-                }
+//            Image(systemName: "calendar")
+//                .frame(width: 44)
+//                .onTapGesture {
+//                    withAnimation {
+//                        datePickerVisible.toggle()
+//                    }
+//                }
         }
 
         if datePickerVisible {

@@ -30,7 +30,7 @@ struct UsageGraphView: View {
         .chartPlotStyle { content in
             content.background(Color.gray.gradient.opacity(0.02))
         }
-        .chartYScale(domain: min...max)
+        .chartYScale(domain: viewModel.yScale)
         .chartXAxis(content: {
             AxisMarks(values: .stride(by: .hour)) { value in
                 if (value.index == 0) || (value.index % viewModel.stride == 0), let date = value.as(Date.self) {
