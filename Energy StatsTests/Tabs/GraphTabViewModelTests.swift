@@ -32,14 +32,14 @@ final class GraphTabViewModelTests: XCTestCase {
     func test_fetches_data_on_start() async {
         stubHTTPResponses(with: [.rawSuccess, .reportSuccess, .rawSuccess])
 
-        await sut.start()
+        await sut.load()
 
         XCTAssertEqual(sut.data.count, 1130)
     }
 
     func test_filters_when_hour_selected() async {
         stubHTTPResponses(with: [.rawSuccess, .reportSuccess, .rawSuccess])
-        await sut.start()
+        await sut.load()
 
         sut.hours = 12
 

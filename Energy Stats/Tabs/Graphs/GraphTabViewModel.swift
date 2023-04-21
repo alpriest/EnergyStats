@@ -41,6 +41,11 @@ class GraphTabViewModel: ObservableObject {
     }}
     @Published private(set) var errorMessage: String? = nil
     @Published private(set) var yScale = -0.5 ... 5.0
+    @Published var queryDate = QueryDate.current() {
+        didSet {
+            Task { await load() }
+        }
+    }
     private let configManager: ConfigManaging
 
     init(_ networking: Networking, configManager: ConfigManaging, _ dateProvider: @escaping () -> Date = { Date() }) {
@@ -50,15 +55,14 @@ class GraphTabViewModel: ObservableObject {
         haptic.prepare()
     }
 
-    func start() async {
+    func load() async {
         guard let currentDevice = configManager.currentDevice else { return }
 
         do {
             let rawVariables = graphVariables.compactMap { $0.type }
             let reportVariables = rawVariables.compactMap { $0.reportVariable }
-            let queryDate = QueryDate.current()
 
-            let raw = try await networking.fetchRaw(deviceID: currentDevice.deviceID, variables: rawVariables)
+            let raw = try await networking.fetchRaw(deviceID: currentDevice.deviceID, variables: rawVariables, queryDate: queryDate)
             let rawData: [GraphValue] = raw.flatMap { response -> [GraphValue] in
                 guard let rawVariable = RawVariable(rawValue: response.variable) else { return [] }
 

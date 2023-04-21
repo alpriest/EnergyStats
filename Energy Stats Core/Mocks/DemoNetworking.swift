@@ -48,7 +48,7 @@ public class DemoNetworking: Networking {
         return result
     }
 
-    public func fetchRaw(deviceID: String, variables: [RawVariable]) async throws -> [RawResponse] {
+    public func fetchRaw(deviceID: String, variables: [RawVariable], queryDate: QueryDate) async throws -> [RawResponse] {
         if throwOnCall {
             throw NetworkError.unknown
         }

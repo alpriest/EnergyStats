@@ -21,7 +21,7 @@ final class GraphTabViewTests: XCTestCase {
         ) { Date(timeIntervalSince1970: 1664127352) }
         let sut = GraphTabView(viewModel: viewModel)
         let view = UIHostingController(rootView: sut)
-        await viewModel.start()
+        await viewModel.load()
         viewModel.hours = 6
 
         assertSnapshot(matching: view, as: .image(on: .iPhone13Pro))
@@ -31,7 +31,7 @@ final class GraphTabViewTests: XCTestCase {
         let networking = MockNetworking(throwOnCall: true)
         let viewModel = GraphTabViewModel(MockNetworking(throwOnCall: true),
                                           configManager: ConfigManager(networking: networking, config: MockConfig()))
-        await viewModel.start()
+        await viewModel.load()
         let sut = GraphTabView(viewModel: viewModel)
         let view = UIHostingController(rootView: sut)
 

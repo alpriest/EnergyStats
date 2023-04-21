@@ -26,8 +26,22 @@ public struct QueryDate: Encodable {
     let day: Int
 
     public static func current() -> QueryDate {
-        let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: Date())
-        return QueryDate(year: dateComponents.year!, month: dateComponents.month!, day: dateComponents.day!)
+        QueryDate(from: Date())
+    }
+
+    public init(year: Int, month: Int, day: Int) {
+        self.year = year
+        self.month = month
+        self.day = day
+    }
+
+    public init(from date: Date) {
+        let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: date)
+        self.init(year: dateComponents.year!, month: dateComponents.month!, day: dateComponents.day!)
+    }
+
+    public func asDate() -> Date? {
+        DateComponents(calendar: Calendar.current, year: year, month: month, day: day).date
     }
 }
 

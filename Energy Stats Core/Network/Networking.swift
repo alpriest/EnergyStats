@@ -23,7 +23,7 @@ public protocol Networking {
     func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate) async throws -> [ReportResponse]
     func fetchBattery(deviceID: String) async throws -> BatteryResponse
     func fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse
-    func fetchRaw(deviceID: String, variables: [RawVariable]) async throws -> [RawResponse]
+    func fetchRaw(deviceID: String, variables: [RawVariable], queryDate: QueryDate) async throws -> [RawResponse]
     func fetchDeviceList() async throws -> PagedDeviceListResponse
     func fetchAddressBook(deviceID: String) async throws -> AddressBookResponse
 }
@@ -101,10 +101,10 @@ public class Network: Networking {
         return result.0
     }
 
-    public func fetchRaw(deviceID: String, variables: [RawVariable]) async throws -> [RawResponse] {
+    public func fetchRaw(deviceID: String, variables: [RawVariable], queryDate: QueryDate) async throws -> [RawResponse] {
         var request = URLRequest(url: URL.raw)
         request.httpMethod = "POST"
-        request.httpBody = try! JSONEncoder().encode(RawRequest(deviceID: deviceID, variables: variables))
+        request.httpBody = try! JSONEncoder().encode(RawRequest(deviceID: deviceID, variables: variables, queryDate: queryDate))
 
         let result: ([RawResponse], Data) = try await fetch(request)
         store.rawResponse = NetworkOperation(description: "fetchRaw", value: result.0, raw: result.1)

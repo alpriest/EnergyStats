@@ -56,7 +56,7 @@ struct DebugDataView_Previews: PreviewProvider {
         let network = DemoNetworking()
         let store = InMemoryLoggingNetworkStore()
         Task {
-            store.rawResponse = NetworkOperation(description: "fetchRaw", value: try await network.fetchRaw(deviceID: "123", variables: [.batChargePower]), raw: "test".data(using: .utf8)!)
+            store.rawResponse = NetworkOperation(description: "fetchRaw", value: try await network.fetchRaw(deviceID: "123", variables: [.batChargePower], queryDate: .current()), raw: "test".data(using: .utf8)!)
             store.reportResponse = NetworkOperation(description: "fetchReport", value: try await network.fetchReport(deviceID: "123", variables: [.chargeEnergyToTal], queryDate: .current()), raw: "test".data(using: .utf8)!)
             store.batteryResponse = NetworkOperation(description: "fetchBattery", value: try await network.fetchBattery(deviceID: "123"), raw: "test".data(using: .utf8)!)
             store.deviceListResponse = NetworkOperation(description: "fetchDeviceList", value: try await network.fetchDeviceList(), raw: "test".data(using: .utf8)!)

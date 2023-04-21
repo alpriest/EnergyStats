@@ -58,12 +58,12 @@ public class NetworkFacade: Networking {
         return try await network.fetchBatterySettings(deviceSN: deviceSN)
     }
 
-    public func fetchRaw(deviceID: String, variables: [RawVariable]) async throws -> [RawResponse] {
+    public func fetchRaw(deviceID: String, variables: [RawVariable], queryDate: QueryDate) async throws -> [RawResponse] {
         if config.isDemoUser {
-            return try await fakeNetwork.fetchRaw(deviceID: deviceID, variables: variables)
+            return try await fakeNetwork.fetchRaw(deviceID: deviceID, variables: variables, queryDate: queryDate)
         }
 
-        return try await network.fetchRaw(deviceID: deviceID, variables: variables)
+        return try await network.fetchRaw(deviceID: deviceID, variables: variables, queryDate: queryDate)
     }
 
     public func fetchDeviceList() async throws -> PagedDeviceListResponse {
