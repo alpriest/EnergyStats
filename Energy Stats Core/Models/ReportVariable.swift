@@ -27,7 +27,7 @@ public enum ReportVariable: String, RawRepresentable {
 
     public init?(rawValue: String) {
         switch rawValue {
-        case "feedIn":
+        case "feedin":
             self = .feedIn
         case "generation":
             self = .generation

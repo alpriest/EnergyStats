@@ -110,6 +110,9 @@ class PowerFlowTabViewModel: ObservableObject {
                 self.totalTicks = 300
             } else {
                 self.totalTicks = Int(300 - (Date().timeIntervalSince(historicalViewModel.lastUpdate)) + 10)
+                if totalTicks <= 0 {
+                    totalTicks = 300
+                }
             }
         }
     }

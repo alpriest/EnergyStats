@@ -103,7 +103,7 @@
       ]
     },
     {
-      "variable": "feedIn",
+      "variable": "feedin",
       "data": [
         {
           "index": 1,
