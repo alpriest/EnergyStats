@@ -44,21 +44,9 @@ struct LoginView: View {
                 .padding()
                 .buttonStyle(.borderedProminent)
             }
-
-            Group {
-                switch loginManager.state {
-                case .idle:
-                    Color.clear.frame(height: 50)
-                case .busy:
-                    ProgressView()
-                        .progressViewStyle(.circular)
-                        .frame(height: 50)
-                case .error(let reason):
-                    Text(reason)
-                }
-            }.frame(minHeight: 50)
-
-        }.padding()
+        }
+        .padding()
+        .loadable($loginManager.state)
     }
 }
 

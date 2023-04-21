@@ -33,9 +33,9 @@ struct PowerFlowTabView: View {
                 Spacer()
             case .unloaded:
                 Spacer()
-                HStack(spacing: 6) {
-                    ProgressView()
+                HStack(spacing: 8) {
                     Text("Loading...")
+                    ProgressView()
                 }
                 Spacer()
             }

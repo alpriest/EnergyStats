@@ -10,17 +10,11 @@ import Foundation
 import Energy_Stats_Core
 
 class UserManager: ObservableObject {
-    enum State: Equatable {
-        case idle
-        case busy
-        case error(String)
-    }
-
     private let networking: Networking
     private let configManager: ConfigManager
     private let store: KeychainStoring
     private var cancellables = Set<AnyCancellable>()
-    @MainActor @Published var state = State.idle
+    @MainActor @Published var state = LoadState.inactive
     @MainActor @Published var isLoggedIn: Bool = false
 
     init(networking: Networking, store: KeychainStoring, configManager: ConfigManager) {
@@ -51,7 +45,7 @@ class UserManager: ObservableObject {
         }
 
         do {
-            state = .busy
+            state = .active("Logging in...")
 
             guard let hashedPassword = password.md5() else { throw NSError(domain: "md5", code: 0) }
 
@@ -80,6 +74,6 @@ class UserManager: ObservableObject {
     func logout() {
         store.logout()
         configManager.logout()
-        state = .idle
+        state = .inactive
     }
 }

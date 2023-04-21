@@ -13,6 +13,11 @@ struct ValuesAtTime {
     let values: [GraphValue]
 }
 
+enum GraphDisplayMode {
+    case today(_ hours: Int)
+    case historic(_ date: Date)
+}
+
 class GraphTabViewModel: ObservableObject {
     private let haptic = UIImpactFeedbackGenerator()
     private let networking: Networking
@@ -24,28 +29,51 @@ class GraphTabViewModel: ObservableObject {
 
     private var totals: [ReportVariable: Double] = [:]
     private let dateProvider: () -> Date
+    @Published var state = LoadState.inactive
 
     @Published private(set) var stride = 3
     @Published private(set) var data: [GraphValue] = []
     @Published private(set) var graphVariables: [GraphVariable] = [GraphVariable(.generationPower), GraphVariable(RawVariable.batChargePower), GraphVariable(.batDischargePower), GraphVariable(.feedinPower), GraphVariable(.gridConsumptionPower)]
-    @Published var hours = 24 { didSet {
-        switch hours {
-        case 6:
-            stride = 1
-        case 12:
-            stride = 2
-        default:
-            stride = 3
-        }
-        refresh()
-    }}
-    @Published private(set) var errorMessage: String? = nil
     @Published private(set) var yScale = -0.5 ... 5.0
-    @Published var queryDate = QueryDate.current() {
+    private var queryDate = QueryDate.current()
+    private var hours: Int = 24
+
+    @Published var displayMode = GraphDisplayMode.today(24) {
         didSet {
-            Task { await load() }
+            switch displayMode {
+            case .today(let hours):
+                let previousHours = self.hours
+                switch hours {
+                case 6:
+                    stride = 1
+                case 12:
+                    stride = 2
+                default:
+                    stride = 3
+                }
+
+                if queryDate != QueryDate(from: dateProvider()) {
+                    queryDate = QueryDate(from: dateProvider())
+                    Task { @MainActor in
+                        await load()
+                    }
+                }
+                if hours != previousHours {
+                    self.hours = hours
+                    refresh()
+                }
+            case .historic(let date):
+                if queryDate != QueryDate(from: date) {
+                    queryDate = QueryDate(from: date)
+                    stride = 24
+                    Task { @MainActor in
+                        await load()
+                    }
+                }
+            }
         }
     }
+
     private let configManager: ConfigManaging
 
     init(_ networking: Networking, configManager: ConfigManaging, _ dateProvider: @escaping () -> Date = { Date() }) {
@@ -57,6 +85,10 @@ class GraphTabViewModel: ObservableObject {
 
     func load() async {
         guard let currentDevice = configManager.currentDevice else { return }
+
+        Task { @MainActor in
+            state = .active("Loading")
+        }
 
         do {
             let rawVariables = graphVariables.compactMap { $0.type }
@@ -81,24 +113,30 @@ class GraphTabViewModel: ObservableObject {
             }
 
             await MainActor.run {
-                self.errorMessage = nil
                 self.rawData = rawData
                 self.refresh()
+                self.state = .inactive
             }
         } catch {
             await MainActor.run {
-                self.errorMessage = "Could not load, check your connection"
+                self.state = .error("Could not load, check your connection")
             }
         }
     }
 
     func refresh() {
         let hiddenVariableTypes = graphVariables.filter { $0.enabled == false }.map { $0.type }
-        let oldest = dateProvider().addingTimeInterval(0 - (3600 * Double(hours)))
 
         let refreshedData = rawData
             .filter { !hiddenVariableTypes.contains($0.variable) }
-            .filter { $0.date > oldest }
+            .filter { value in
+                if case .today(let hours) = displayMode {
+                    let oldest = dateProvider().addingTimeInterval(0 - (3600 * Double(hours)))
+                    return value.date > oldest
+                } else {
+                    return true
+                }
+            }
             .sorted(by: { lhs, rhs in
                 lhs.date < rhs.date
             })

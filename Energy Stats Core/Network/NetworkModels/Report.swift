@@ -45,6 +45,8 @@ public struct QueryDate: Encodable {
     }
 }
 
+extension QueryDate: Equatable {}
+
 public struct ReportResponse: Decodable, Hashable {
     public let variable: String
     public let data: [ReportData]

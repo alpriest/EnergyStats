@@ -6,16 +6,14 @@
 //
 
 import Charts
-import SwiftUI
 import Energy_Stats_Core
+import SwiftUI
 
 struct UsageGraphView: View {
     @ObservedObject var viewModel: GraphTabViewModel
     @GestureState var isDetectingPress = true
     @Binding var selectedDate: Date?
     @Binding var valuesAtTime: ValuesAtTime?
-    let min: Double = -0.5
-    let max: Double = 5
 
     var body: some View {
         Chart(viewModel.data, id: \.variable.networkTitle) {
@@ -89,7 +87,7 @@ struct UsageGraphView: View {
                    let elementLocation = chartProxy.position(forX: date)
                 {
                     let location = elementLocation - geometryReader[chartProxy.plotAreaFrame].origin.x
-                    
+
                     Rectangle()
                         .fill(Color("lines_notflowing"))
                         .frame(width: 1, height: chartProxy.plotAreaSize.height)
@@ -103,6 +101,7 @@ struct UsageGraphView: View {
 struct UsageGraphView_Previews: PreviewProvider {
     static var previews: some View {
         let model = GraphTabViewModel(DemoNetworking(), configManager: PreviewConfigManager())
+        Task { await model.load() }
         return UsageGraphView(
             viewModel: model,
             selectedDate: .constant(nil),
