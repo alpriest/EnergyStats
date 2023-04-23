@@ -10,6 +10,7 @@ import Foundation
 import Energy_Stats_Core
 
 class MockConfig: Config {
+    var showInW: Bool = false
     var isDemoUser: Bool = false
     var showColouredLines: Bool = true
     var showBatteryTemperature: Bool = true

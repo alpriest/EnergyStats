@@ -25,11 +25,11 @@ struct PowerFlowTabView: View {
                     .monospacedDigit()
                     .font(.caption)
                     .foregroundColor(.gray)
-            case let .failed(reason):
+            case let .failed(error, reason):
                 Spacer()
-                ErrorAlertView(retry: {
+                ErrorAlertView(cause: error, message: reason) {
                     Task { await viewModel.timerFired() }
-                }, details: reason)
+                }
                 Spacer()
             case .unloaded:
                 Spacer()

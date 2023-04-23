@@ -21,7 +21,7 @@ final class UserManagerTests: XCTestCase {
     override func setUp() {
         keychainStore = MockKeychainStore()
         config = MockConfig()
-        networking = Network(credentials: keychainStore, config: config)
+        networking = Network(credentials: keychainStore, config: config, store: InMemoryLoggingNetworkStore())
         configManager = PreviewConfigManager(networking: networking, config: config)
         sut = UserManager(networking: networking, store: keychainStore, configManager: configManager)
     }
@@ -69,7 +69,7 @@ final class UserManagerTests: XCTestCase {
 
         await sut.login(username: "bob", password: "password")
 
-        XCTAssertEqual(received.values, [.idle, .busy])
+        XCTAssertEqual(received.values, [.inactive, .active("Loading...")])
         XCTAssertEqual(keychainStore.username, "bob")
         XCTAssertEqual(keychainStore.hashedPassword, "password".md5()!)
         XCTAssertEqual(config.selectedDeviceID, "12345678-0000-0000-1234-aaaabbbbcccc")
@@ -82,7 +82,7 @@ final class UserManagerTests: XCTestCase {
 
         await sut.login(username: "bob", password: "password")
 
-        XCTAssertEqual(received.values, [.idle, .busy, .idle, .error("Could not login. Check your internet connection")])
+        XCTAssertEqual(received.values, [.inactive, .active("Loading..."), .inactive, .error(nil, "Could not login. Check your internet connection")])
         XCTAssertTrue(keychainStore.logoutCalled)
     }
 
@@ -92,7 +92,7 @@ final class UserManagerTests: XCTestCase {
 
         await sut.login(username: "bob", password: "wrongpassword")
 
-        XCTAssertEqual(received.values, [.idle, .busy, .idle, .error("Wrong credentials, try again")])
+        XCTAssertEqual(received.values, [.inactive, .active("Loading..."), .inactive, .error(nil, "Wrong credentials, try again")])
         XCTAssertNil(keychainStore.username)
         XCTAssertNil(keychainStore.hashedPassword)
         XCTAssertTrue(keychainStore.logoutCalled)
@@ -104,7 +104,7 @@ final class UserManagerTests: XCTestCase {
 
         await sut.login(username: "bob", password: "wrongpassword")
 
-        XCTAssertEqual(received.values, [.idle, .busy, .idle, .error("Could not login. Check your internet connection")])
+        XCTAssertEqual(received.values, [.inactive, .active("Loading..."), .inactive, .error(nil, "Could not login. Check your internet connection")])
         XCTAssertNil(keychainStore.username)
         XCTAssertNil(keychainStore.hashedPassword)
         XCTAssertTrue(keychainStore.logoutCalled)

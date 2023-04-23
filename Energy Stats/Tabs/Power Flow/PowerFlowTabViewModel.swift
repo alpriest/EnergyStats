@@ -22,7 +22,20 @@ class PowerFlowTabViewModel: ObservableObject {
     enum State: Equatable {
         case unloaded
         case loaded(HomePowerFlowViewModel)
-        case failed(String)
+        case failed(Error?, String)
+
+        static func ==(lhs: State, rhs: State) -> Bool {
+            switch (lhs, rhs) {
+            case (.unloaded, .unloaded):
+                return true
+            case (.loaded, .loaded):
+                return true
+            case (.failed, .failed):
+                return true
+            default:
+                return false
+            }
+        }
     }
 
     init(_ network: Networking, configManager: ConfigManager) {
@@ -67,7 +80,7 @@ class PowerFlowTabViewModel: ObservableObject {
             }
 
             guard let currentDevice = configManager.currentDevice else {
-                self.state = .failed("No devices found. Please logout and try logging in again.")
+                self.state = .failed(nil, "No devices found. Please logout and try logging in again.")
                 return
             }
 
@@ -95,7 +108,8 @@ class PowerFlowTabViewModel: ObservableObject {
             self.calculateTicks(historicalViewModel: currentViewModel)
             self.updateState = " "
         } catch {
-            self.state = .failed(error.localizedDescription)
+            await stopTimer()
+            self.state = .failed(error, error.localizedDescription)
         }
     }
 

@@ -22,7 +22,7 @@ final class GraphTabViewTests: XCTestCase {
         let sut = GraphTabView(viewModel: viewModel)
         let view = UIHostingController(rootView: sut)
         await viewModel.load()
-        viewModel.hours = 6
+        viewModel.displayMode = .today(6)
 
         assertSnapshot(matching: view, as: .image(on: .iPhone13Pro))
     }

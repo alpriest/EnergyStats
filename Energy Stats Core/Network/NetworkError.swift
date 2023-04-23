@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum NetworkError: LocalizedError, CustomStringConvertible {
+public enum NetworkError: LocalizedError, CustomStringConvertible, Equatable {
     case invalidResponse(_ url: URL?, _ responseCode: Int?)
     case invalidConfiguration(_ reason: String)
     case badCredentials
@@ -15,6 +15,7 @@ public enum NetworkError: LocalizedError, CustomStringConvertible {
     case invalidToken
     case tryLater
     case offline
+    case maintenanceMode
 
     public var description: String {
         let builder = PartBuilder()
@@ -35,7 +36,9 @@ public enum NetworkError: LocalizedError, CustomStringConvertible {
         case .tryLater:
             builder.append("You've hit the server rate limit. Please try later.")
         case .offline:
-            builder.append("Servers are offline")
+            builder.append("You appear to be offline. Please check your connection.")
+        case .maintenanceMode:
+            builder.append("Fox servers are offline. Please try later.")
         }
 
         return builder.formatted()

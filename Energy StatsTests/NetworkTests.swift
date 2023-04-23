@@ -17,7 +17,7 @@ final class NetworkTests: XCTestCase {
     override func setUp() {
         keychainStore = MockKeychainStore()
         config = MockConfig()
-        sut = Network(credentials: keychainStore, config: config)
+        sut = Network(credentials: keychainStore, config: config, store: InMemoryLoggingNetworkStore())
     }
 
     func test_verifyCredentials_does_not_throw_on_success() async throws {
@@ -80,7 +80,7 @@ final class NetworkTests: XCTestCase {
         config.configureAsLoggedIn()
         stubHTTPResponse(with: .rawSuccess)
 
-        let raw = try await sut.fetchRaw(deviceID: "1", variables: [.feedinPower, .gridConsumptionPower, .batChargePower, .batDischargePower, .generationPower])
+        let raw = try await sut.fetchRaw(deviceID: "1", variables: [.feedinPower, .gridConsumptionPower, .batChargePower, .batDischargePower, .generationPower], queryDate: .any())
 
         XCTAssertEqual(raw.count, 5)
     }

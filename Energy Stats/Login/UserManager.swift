@@ -6,8 +6,8 @@
 //
 
 import Combine
-import Foundation
 import Energy_Stats_Core
+import Foundation
 
 class UserManager: ObservableObject {
     private let networking: Networking
@@ -38,8 +38,10 @@ class UserManager: ObservableObject {
     func login(username: String, password: String) async {
         if username == "demo", password == "user" {
             configManager.isDemoUser = true
-            do { try store.store(username: "demo", hashedPassword: "user") } catch {
-                state = .error("Could not login as demo user")
+            do {
+                try store.store(username: "demo", hashedPassword: "user")
+            } catch let error {
+                state = .error(error, "Could not login as demo user")
             }
             return
         }
@@ -58,14 +60,13 @@ class UserManager: ObservableObject {
 
             switch error {
             case .badCredentials:
-                self.state = .error("Wrong credentials, try again")
+                self.state = .error(error, "Wrong credentials, try again")
             default:
-                print(error)
-                self.state = .error("Could not login. Check your internet connection")
+                self.state = .error(error, "Could not login. Check your internet connection")
             }
         } catch {
             await MainActor.run {
-                self.state = .error("Could not login. Check your internet connection \(error)")
+                self.state = .error(error, "Could not login. Check your internet connection \(error)")
             }
         }
     }

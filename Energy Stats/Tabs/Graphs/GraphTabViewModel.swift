@@ -13,7 +13,7 @@ struct ValuesAtTime {
     let values: [GraphValue]
 }
 
-enum GraphDisplayMode {
+enum GraphDisplayMode: Equatable {
     case today(_ hours: Int)
     case historic(_ date: Date)
 }
@@ -117,9 +117,9 @@ class GraphTabViewModel: ObservableObject {
                 self.refresh()
                 self.state = .inactive
             }
-        } catch {
+        } catch let error {
             await MainActor.run {
-                self.state = .error("Could not load, check your connection")
+                self.state = .error(error, "Could not load, check your connection")
             }
         }
     }

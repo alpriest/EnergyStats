@@ -7,14 +7,28 @@
 
 import SwiftUI
 
-enum LoadState {
+enum LoadState: Equatable {
     case inactive
     case active(String)
-    case error(String)
+    case error(Error?, String)
+
+    static func ==(lhs: LoadState, rhs: LoadState) -> Bool {
+        switch (lhs, rhs) {
+        case (.inactive, .inactive):
+            return true
+        case (.active, .active):
+            return true
+        case (.error, .error):
+            return true
+        default:
+            return true
+        }
+    }
 }
 
 struct LoadStateView: ViewModifier {
     @Binding var loadState: LoadState
+    let retry: () -> Void
 
     func body(content: Content) -> some View {
         switch loadState {
@@ -23,8 +37,8 @@ struct LoadStateView: ViewModifier {
                 Text(message)
                 ProgressView()
             }
-        case .error(let reason):
-            Text(reason)
+        case .error(let error, let reason):
+            ErrorAlertView(cause: error, message: reason, retry: retry)
         case .inactive:
             content
         }
@@ -32,17 +46,17 @@ struct LoadStateView: ViewModifier {
 }
 
 extension View {
-    func loadable(_ state: Binding<LoadState>) -> some View {
-        modifier(LoadStateView(loadState: state))
+    func loadable(_ state: Binding<LoadState>, retry: @escaping () -> Void) -> some View {
+        modifier(LoadStateView(loadState: state, retry: retry))
     }
 }
 
 struct LoadState_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            Text("Hello").loadable(.constant(.active("Loading")))
-            Text("Hello").loadable(.constant(.error("Something went wrong")))
-            Text("Hello").loadable(.constant(.inactive))
+            Text("Hello").loadable(.constant(.active("Loading")), retry: {})
+            Text("Hello").loadable(.constant(.error(nil, "Something went wrong")), retry: {})
+            Text("Hello").loadable(.constant(.inactive), retry: {})
         }
     }
 }

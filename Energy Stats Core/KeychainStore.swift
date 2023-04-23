@@ -5,8 +5,8 @@
 //  Created by Alistair Priest on 10/09/2022.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 public struct KeychainError: Error {
     init(_ code: OSStatus? = nil) {
@@ -109,7 +109,7 @@ private extension KeychainStore {
             kSecClass: kSecClassKey,
             kSecReturnAttributes: true,
             kSecReturnData: true
-        ] as CFDictionary
+        ] as [CFString: Any] as CFDictionary
     }
 
     func set(tag: String, value: String?) throws {
@@ -128,7 +128,7 @@ private extension KeychainStore {
                 kSecAttrApplicationTag: tag,
                 kSecValueData: data,
                 kSecClass: kSecClassKey
-            ] as CFDictionary
+            ] as [CFString: Any] as CFDictionary
 
             let result = SecItemAdd(keychainItemQuery, nil)
             if result != 0 {

@@ -54,7 +54,7 @@ class MockNetworking: Networking {
         BatteryResponse(power: 0.27, soc: 56, residual: 2200, temperature: 13.6)
     }
 
-    func fetchRaw(deviceID: String, variables: [RawVariable]) async throws -> [RawResponse] {
+    func fetchRaw(deviceID: String, variables: [RawVariable], queryDate: Energy_Stats_Core.QueryDate) async throws -> [RawResponse] {
         if throwOnCall {
             throw NetworkError.unknown
         }
