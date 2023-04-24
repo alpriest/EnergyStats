@@ -56,7 +56,6 @@ struct BatteryPowerView: View {
             PowerFlowView(amount: viewModel.batteryChargekWH, appTheme: appTheme, showColouredLines: true)
             Image(systemName: "minus.plus.batteryblock.fill")
                 .font(.system(size: 48))
-                .background(Color(.systemBackground))
                 .frame(width: 45, height: 45)
             VStack {
                 Group {

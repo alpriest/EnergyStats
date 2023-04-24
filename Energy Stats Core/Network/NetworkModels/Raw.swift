@@ -50,12 +50,21 @@ public struct RawResponse: Decodable, Hashable {
 struct FoxEssCloudParseStrategy: ParseStrategy {
     struct ParseFailure: Error {
         let value: String
+
+        public var description: String {
+            "Could not parse date \(value)"
+        }
+
+        public var errorDescription: String? {
+            description
+        }
     }
 
     func parse(_ value: String) throws -> Date {
         let value = value.removing(charactersIn: .letters)
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
 
         if let result = formatter.date(from: value) {
             return result

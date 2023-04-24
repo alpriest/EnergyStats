@@ -47,7 +47,7 @@ struct LoginView: View {
         }
         .padding()
         .loadable($loginManager.state) {
-            Task { await loginManager.login(username: username, password: password) }
+            loginManager.state = .inactive
         }
     }
 }
