@@ -38,7 +38,7 @@ struct LoadStateView: ViewModifier {
                 ProgressView()
             }
         case .error(let error, let reason):
-            ErrorAlertView(cause: error, message: reason, retry: retry)
+            ErrorAlertView(cause: error, message: reason , retry: retry)
         case .inactive:
             content
         }
@@ -58,5 +58,6 @@ struct LoadState_Previews: PreviewProvider {
             Text("Hello").loadable(.constant(.error(nil, "Something went wrong")), retry: {})
             Text("Hello").loadable(.constant(.inactive), retry: {})
         }
+        .environment(\.locale, .init(identifier: "de"))
     }
 }

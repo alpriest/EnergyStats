@@ -1,0 +1,18 @@
+/* 
+  Localizable.strings
+  Energy Stats
+
+  Created by Alistair Priest on 26/04/2023.
+  
+*/
+"Loading" = "Loading...";
+"Could not load. Check your internet connection" = "Could not load. Check your internet connection";
+"Could not login. Check your internet connection" = "Could not login. Check your internet connection";
+"Could not login as demo user" = "Could not login as demo user";
+"Wrong credentials, try again" = "Wrong credentials, try again";
+"Empty" = "Empty";
+"Full" = "Full";
+"Next update in" = "Next update in";
+"Settings" = "Settings";
+"Graphs" = "Graphs";
+"Power flow" = "Power flow";

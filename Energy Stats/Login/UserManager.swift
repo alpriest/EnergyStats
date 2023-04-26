@@ -41,13 +41,13 @@ class UserManager: ObservableObject {
             do {
                 try store.store(username: "demo", hashedPassword: "user")
             } catch let error {
-                state = .error(error, "Could not login as demo user")
+                state = .error(error, String(key: .couldNotLogin))
             }
             return
         }
 
         do {
-            state = .active("Logging in...")
+            state = .active(String(key: .loading))
 
             guard let hashedPassword = password.md5() else { throw NSError(domain: "md5", code: 0) }
 
@@ -60,13 +60,13 @@ class UserManager: ObservableObject {
 
             switch error {
             case .badCredentials:
-                self.state = .error(error, "Wrong credentials, try again")
+                self.state = .error(error, String(key: .wrongCredentials))
             default:
-                self.state = .error(error, "Could not login. Check your internet connection")
+                self.state = .error(error, String(key: .couldNotLogin))
             }
         } catch {
             await MainActor.run {
-                self.state = .error(error, "Could not login. Check your internet connection \(error)")
+                self.state = .error(error, String(key: .couldNotLogin))
             }
         }
     }

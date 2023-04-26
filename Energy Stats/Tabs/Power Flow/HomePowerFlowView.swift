@@ -60,6 +60,7 @@ struct PowerSummaryView_Previews: PreviewProvider {
         HomePowerFlowView(configManager: PreviewConfigManager(),
                           viewModel: HomePowerFlowViewModel.any(),
                           appTheme: CurrentValueSubject(AppTheme.mock()))
+            .environment(\.locale, .init(identifier: "de"))
     }
 }
 

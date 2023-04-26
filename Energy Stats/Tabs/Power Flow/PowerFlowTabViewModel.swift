@@ -49,7 +49,7 @@ class PowerFlowTabViewModel: ObservableObject {
     func startTimer() async {
         await self.timer.start(totalTicks: self.totalTicks) { ticksRemaining in
             Task { @MainActor in
-                self.updateState = "Next update in \(PreciseDateTimeFormatter.localizedString(from: ticksRemaining))"
+                self.updateState = String(key: .nextUpdateIn) + " \(PreciseDateTimeFormatter.localizedString(from: ticksRemaining))"
             }
         } onCompletion: {
             Task {

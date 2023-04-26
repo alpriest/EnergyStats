@@ -1,0 +1,18 @@
+/* 
+  Localizable.strings
+  Energy Stats
+
+  Created by Alistair Priest on 26/04/2023.
+  
+*/
+"Loading" = "Laden...";
+"Could not load. Check your internet connection" = "Konnte nicht geladen werden. Prüfe deine Internetverbindung";
+"Could not login. Check your internet connection" = "Anmeldung nicht möglich. Prüfe deine Internetverbindung";
+"Could not login as demo user" = "Prüfe deine Internetverbindung";
+"Wrong credentials, try again" = "Falsche Anmeldedaten, versuchen Sie es erneut";
+"Empty" = "Leer";
+"Full" = "Voll";
+"Next update in" = "Nächstes Update in";
+"Settings" = "Einstellungen";
+"Graphs" = "Schaubilder";
+"Power flow" = "Leistungsfluss";
