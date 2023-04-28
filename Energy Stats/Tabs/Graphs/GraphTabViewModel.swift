@@ -106,7 +106,7 @@ class GraphTabViewModel: ObservableObject {
             let reports = try await networking.fetchReport(deviceID: currentDevice.deviceID, variables: reportVariables, queryDate: queryDate)
             rawVariables.forEach { rawVariable in
                 guard let reportVariable = rawVariable.reportVariable else { return }
-                guard let response = reports.first(where: { $0.variable == reportVariable.networkTitle }) else { return }
+                guard let response = reports.first(where: { $0.variable.lowercased() == reportVariable.networkTitle.lowercased() }) else { return }
 
                 totals[reportVariable] = 0
                 totals[reportVariable] = response.data.map { abs($0.value) }.reduce(0.0, +)

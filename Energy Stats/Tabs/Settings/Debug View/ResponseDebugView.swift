@@ -14,6 +14,15 @@ struct ResponseDebugView<T: Decodable>: View {
     let missing: String
     let mapper: (InMemoryLoggingNetworkStore) -> NetworkOperation<T>?
 
+    struct Line: Identifiable {
+        let id = UUID()
+        let text: String
+
+        init(text: String.SubSequence) {
+            self.text = String(text)
+        }
+    }
+
     var body: some View {
         VStack {
             if let response = mapper(network) {
@@ -22,9 +31,13 @@ struct ResponseDebugView<T: Decodable>: View {
                     .padding(.bottom)
 
                 ScrollView {
-                    Text(asText)
-                        .font(.custom("Courier", size: 12.0))
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                    LazyVStack(alignment: .leading) {
+                        ForEach(lines) { line in
+                            Text(line.text)
+                        }
+                    }
+                    .font(.custom("Courier", size: 12.0))
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
             } else {
                 Text(missing)
@@ -43,6 +56,10 @@ struct ResponseDebugView<T: Decodable>: View {
 
         return data.formattedJSON()
     }
+
+    private var lines: [Line] {
+        asText.split(separator: "\n").map(Line.init)
+    }
 }
 
 struct ResponseDebugView_Previews: PreviewProvider {
@@ -55,7 +72,7 @@ struct ResponseDebugView_Previews: PreviewProvider {
 
         return ResponseDebugView<[ReportResponse]>(
             title: "Report",
-            missing: "Data is only fetched and cached on the graph view. Click that page to load report data",
+            missing: "Data is only fetched and cached on the graph view.\nClick that page to load report data",
             mapper: { $0.reportResponse }
         )
         .environmentObject(store)

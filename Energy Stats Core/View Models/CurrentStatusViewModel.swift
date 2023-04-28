@@ -23,7 +23,7 @@ public struct CurrentStatusViewModel: Sendable {
 
 extension Array where Element == RawResponse {
     func current(for key: RawVariable) -> RawResponse.ReportData? {
-        self.first(where: { $0.variable == key.rawValue })?.data.last
+        self.first(where: { $0.variable.lowercased() == key.rawValue.lowercased() })?.data.last
     }
 
     func currentValue(for key: RawVariable) -> Double {
