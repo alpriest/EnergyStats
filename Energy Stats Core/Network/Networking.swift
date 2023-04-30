@@ -84,7 +84,7 @@ public class Network: Networking {
     }
 
     public func fetchBattery(deviceID: String) async throws -> BatteryResponse {
-        let request = append(queryItems: [URLQueryItem(name: "deviceID", value: deviceID)], to: URL.battery)
+        let request = append(queryItems: [URLQueryItem(name: "id", value: deviceID)], to: URL.battery)
 
         let result: (BatteryResponse, Data) = try await fetch(request)
         store.batteryResponse = NetworkOperation(description: "fetchBattery", value: result.0, raw: result.1)
