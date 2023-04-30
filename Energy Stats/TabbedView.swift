@@ -5,8 +5,8 @@
 //  Created by Alistair Priest on 06/09/2022.
 //
 
-import SwiftUI
 import Energy_Stats_Core
+import SwiftUI
 
 struct TabbedView: View {
     let configManager: ConfigManager
@@ -36,14 +36,16 @@ struct TabbedView: View {
                     .accessibilityIdentifier("power_flow_tab")
                 }
 
-            GraphTabView(viewModel: graphViewModel)
-                .tabItem {
-                    VStack {
-                        Image(systemName: "lines.measurement.horizontal")
-                        Text("Graphs")
+            if #available(iOS 16.0, *) {
+                GraphTabView(viewModel: graphViewModel)
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "lines.measurement.horizontal")
+                            Text("Graphs")
+                        }
+                        .accessibilityIdentifier("graph_tab")
                     }
-                    .accessibilityIdentifier("graph_tab")
-                }
+            }
 
             SettingsTabView(viewModel: settingsTabViewModel, configManager: configManager)
                 .tabItem {

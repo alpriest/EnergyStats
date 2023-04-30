@@ -34,8 +34,7 @@ struct PowerFlowView: View {
                     }
 
                     EnergyAmountView(amount: amount, decimalPlaces: appTheme.value.decimalPlaces, backgroundColor: lineColor, textColor: textColor, appTheme: appTheme)
-                        .font(.footnote)
-                        .bold()
+                        .font(Font.energyAmount)
                 }
             } else {
                 Line()

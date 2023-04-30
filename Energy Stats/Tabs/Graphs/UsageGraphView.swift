@@ -9,6 +9,7 @@ import Charts
 import Energy_Stats_Core
 import SwiftUI
 
+@available(iOS 16.0, *)
 struct UsageGraphView: View {
     @ObservedObject var viewModel: GraphTabViewModel
     @GestureState var isDetectingPress = true
@@ -98,6 +99,7 @@ struct UsageGraphView: View {
     }
 }
 
+@available(iOS 16.0, *)
 struct UsageGraphView_Previews: PreviewProvider {
     static var previews: some View {
         let model = GraphTabViewModel(DemoNetworking(), configManager: PreviewConfigManager())

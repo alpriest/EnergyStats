@@ -84,8 +84,7 @@ public class Network: Networking {
     }
 
     public func fetchBattery(deviceID: String) async throws -> BatteryResponse {
-        var request = URLRequest(url: URL.battery)
-        request.url?.append(queryItems: [Foundation.URLQueryItem(name: "id", value: deviceID)])
+        let request = append(queryItems: [URLQueryItem(name: "deviceID", value: deviceID)], to: URL.battery)
 
         let result: (BatteryResponse, Data) = try await fetch(request)
         store.batteryResponse = NetworkOperation(description: "fetchBattery", value: result.0, raw: result.1)
@@ -93,8 +92,7 @@ public class Network: Networking {
     }
 
     public func fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse {
-        var request = URLRequest(url: URL.soc)
-        request.url?.append(queryItems: [Foundation.URLQueryItem(name: "sn", value: deviceSN)])
+        let request = append(queryItems: [URLQueryItem(name: "sn", value: deviceSN)], to: URL.soc)
 
         let result: (BatterySettingsResponse, Data) = try await fetch(request)
         store.batterySettingsResponse = NetworkOperation(description: "fetchBatterySettings", value: result.0, raw: result.1)
@@ -122,8 +120,7 @@ public class Network: Networking {
     }
 
     public func fetchAddressBook(deviceID: String) async throws -> AddressBookResponse {
-        var request = URLRequest(url: URL.addressBook)
-        request.url?.append(queryItems: [URLQueryItem(name: "deviceID", value: deviceID)])
+        let request = append(queryItems: [URLQueryItem(name: "deviceID", value: deviceID)], to: URL.addressBook)
 
         let result: (AddressBookResponse, Data) = try await fetch(request)
         store.addressBookResponse = NetworkOperation(description: "fetchAddressBookResponse", value: result.0, raw: result.1)
@@ -132,6 +129,16 @@ public class Network: Networking {
 }
 
 private extension Network {
+    func append(queryItems: [URLQueryItem], to url: URL) -> URLRequest {
+        let request: URLRequest
+
+        var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
+        components?.queryItems = queryItems
+        request = URLRequest(url: components!.url!)
+
+        return request
+    }
+
     func fetch<T: Decodable>(_ request: URLRequest, retry: Bool = true) async throws -> (T, Data) {
         var request = request
         addHeaders(to: &request)
@@ -150,7 +157,7 @@ private extension Network {
                 throw NetworkError.invalidToken
             } else if networkResponse.errno == 41807 {
                 throw NetworkError.badCredentials
-            } else if networkResponse.errno == 40401 {  
+            } else if networkResponse.errno == 40401 {
                 throw NetworkError.tryLater
             } else if networkResponse.errno == 30000 {
                 throw NetworkError.maintenanceMode

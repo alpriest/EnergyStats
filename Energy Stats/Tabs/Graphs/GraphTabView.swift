@@ -9,6 +9,7 @@ import Charts
 import Energy_Stats_Core
 import SwiftUI
 
+@available(iOS 16.0, *)
 struct GraphTabView: View {
     @ObservedObject var viewModel: GraphTabViewModel
     @State private var valuesAtTime: ValuesAtTime?
@@ -98,6 +99,7 @@ struct GraphTabView: View {
     }
 }
 
+@available(iOS 16.0, *)
 struct GraphTabView_Previews: PreviewProvider {
     static var previews: some View {
         GraphTabView(viewModel: GraphTabViewModel(DemoNetworking(), configManager: PreviewConfigManager()))
