@@ -18,7 +18,6 @@ struct Energy_StatsApp: App {
                                     config: config)
         let configManager = ConfigManager(networking: network, config: config)
         let loginManager = UserManager(networking: network, store: keychainStore, configManager: configManager)
-        Task { try await configManager.fetchFirmwareVersions() }
 
         return WindowGroup {
             if isRunningTests() {

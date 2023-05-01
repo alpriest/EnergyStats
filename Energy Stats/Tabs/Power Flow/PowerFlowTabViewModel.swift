@@ -91,7 +91,13 @@ class PowerFlowTabViewModel: ObservableObject {
             await MainActor.run { self.updateState = "Updating..." }
             await self.network.ensureHasToken()
 
-            let raws = try await self.network.fetchRaw(deviceID: currentDevice.deviceID, variables: [.feedinPower, .gridConsumptionPower, .generationPower, .loadsPower, .batChargePower, .batDischargePower], queryDate: .current())
+            let graphVariables = [configManager.variables.named("feedinPower"),
+                                  configManager.variables.named("gridConsumptionPower"),
+                                  configManager.variables.named("generationPower"),
+                                  configManager.variables.named("loadsPower"),
+                                  configManager.variables.named("batChargePower"),
+                                  configManager.variables.named("batDischargePower")].compactMap { $0 }
+            let raws = try await self.network.fetchRaw(deviceID: currentDevice.deviceID, variables: graphVariables, queryDate: .current())
             let currentViewModel = CurrentStatusViewModel(raws: raws)
             let battery = currentDevice.battery != nil ? BatteryViewModel(from: try await self.network.fetchBattery(deviceID: currentDevice.deviceID)) : .noBattery
             let summary = HomePowerFlowViewModel(solar: currentViewModel.currentSolarPower,

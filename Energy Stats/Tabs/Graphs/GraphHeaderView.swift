@@ -14,9 +14,11 @@ struct GraphHeaderView: View {
     @State private var datePickerVisible = false
     @State private var candidateQueryDate = Date()
     @State private var dateChoice: String = "today"
+    @Binding var showingVariables: Bool
 
-    init(displayMode: Binding<GraphDisplayMode>) {
+    init(displayMode: Binding<GraphDisplayMode>, showingVariables: Binding<Bool>) {
         self._displayMode = displayMode
+        self._showingVariables = showingVariables
 
         switch displayMode.wrappedValue {
         case .today(let hours):
@@ -55,23 +57,33 @@ struct GraphHeaderView: View {
             } else {
                 HStack {
                     Button {
+                        showingVariables.toggle()
+                    } label: {
+                        Image(systemName: "checklist")
+                            .padding(.horizontal)
+                    }.buttonStyle(.bordered)
+
+                    Spacer()
+
+                    DatePicker("Choose date", selection: $candidateQueryDate, displayedComponents: .date)
+                        .datePickerStyle(.compact)
+                        .frame(height: 23)
+                        .labelsHidden()
+
+                    Button {
                         candidateQueryDate = candidateQueryDate.addingTimeInterval(-86400)
                     } label: {
                         Image(systemName: "chevron.left")
-                            .frame(width: 44)
+                            .padding(.horizontal)
                     }.buttonStyle(.bordered)
 
                     Button {
                         candidateQueryDate = candidateQueryDate.addingTimeInterval(86400)
                     } label: {
                         Image(systemName: "chevron.right")
-                            .frame(width: 44)
+                            .padding(.horizontal)
                     }.buttonStyle(.bordered)
 
-                    DatePicker("Choose date", selection: $candidateQueryDate, displayedComponents: .date)
-                        .datePickerStyle(.compact)
-                        .frame(height: 23)
-                        .labelsHidden()
                 }
                 .onChange(of: candidateQueryDate) { newValue in
                     displayMode = .historic(newValue)
@@ -83,8 +95,9 @@ struct GraphHeaderView: View {
 
 struct GraphHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        HStack {
-            GraphHeaderView(displayMode: .constant(.today(6)))
+        VStack {
+            GraphHeaderView(displayMode: .constant(.today(6)), showingVariables: .constant(false))
+            Spacer()
         }
     }
 }

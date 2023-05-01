@@ -14,19 +14,19 @@ public struct CurrentStatusViewModel: Sendable {
     public let lastUpdate: Date
 
     public init(raws: [RawResponse]) {
-        currentSolarPower = max(0, raws.currentValue(for: RawVariable.batChargePower) - raws.currentValue(for: RawVariable.batDischargePower) - raws.currentValue(for: RawVariable.gridConsumptionPower) + raws.currentValue(for: RawVariable.loadsPower) + raws.currentValue(for: RawVariable.feedinPower))
-        currentGridExport = raws.currentValue(for: RawVariable.feedinPower) - raws.currentValue(for: RawVariable.gridConsumptionPower)
-        currentHomeConsumption = raws.currentValue(for: RawVariable.gridConsumptionPower) + raws.currentValue(for: RawVariable.generationPower) - raws.currentValue(for: RawVariable.feedinPower)
-        lastUpdate = raws.current(for: .gridConsumptionPower)?.time ?? Date()
+        currentSolarPower = max(0, raws.currentValue(for: "batChargePower") - raws.currentValue(for: "batDischargePower") - raws.currentValue(for: "gridConsumptionPower") + raws.currentValue(for: "loadsPower") + raws.currentValue(for: "feedinPower"))
+        currentGridExport = raws.currentValue(for: "feedinPower") - raws.currentValue(for: "gridConsumptionPower")
+        currentHomeConsumption = raws.currentValue(for: "gridConsumptionPower") + raws.currentValue(for: "generationPower") - raws.currentValue(for: "feedinPower")
+        lastUpdate = raws.current(for: "gridConsumptionPower")?.time ?? Date()
     }
 }
 
 extension Array where Element == RawResponse {
-    func current(for key: RawVariable) -> RawResponse.ReportData? {
-        self.first(where: { $0.variable.lowercased() == key.rawValue.lowercased() })?.data.last
+    func current(for key: String) -> RawResponse.ReportData? {
+        self.first(where: { $0.variable.lowercased() == key.lowercased() })?.data.last
     }
 
-    func currentValue(for key: RawVariable) -> Double {
+    func currentValue(for key: String) -> Double {
         self.current(for: key)?.value ?? 0.0
     }
 }

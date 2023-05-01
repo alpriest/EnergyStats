@@ -1,14 +1,14 @@
 //
 //  String+MD5.swift
-//  Energy Stats
+//  Energy Stats Core
 //
-//  Created by Alistair Priest on 26/09/2022.
+//  Created by Alistair Priest on 01/05/2023.
 //
 
 import Foundation
 import CryptoKit
 
-extension String {
+public extension String {
     func md5() -> String? {
         let digest = Insecure.MD5.hash(data: data(using: .utf8) ?? Data())
 

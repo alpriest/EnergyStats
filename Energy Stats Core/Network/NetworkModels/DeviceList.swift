@@ -8,7 +8,7 @@
 import Foundation
 
 struct DeviceListRequest: Encodable {
-    let pageSize = 1
+    let pageSize = 10
     let currentPage = 1
     let total = 0
     let condition = Condition()

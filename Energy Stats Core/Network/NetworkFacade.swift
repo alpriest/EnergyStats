@@ -81,4 +81,12 @@ public class NetworkFacade: Networking {
 
         return try await network.fetchAddressBook(deviceID: deviceID)
     }
+
+    public func fetchVariables(deviceID: String) async throws -> [RawVariable] {
+        if config.isDemoUser {
+            return try await fakeNetwork.fetchVariables(deviceID: deviceID)
+        }
+
+        return try await network.fetchVariables(deviceID: deviceID)
+    }
 }

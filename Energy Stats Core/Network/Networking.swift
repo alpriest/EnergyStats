@@ -15,6 +15,7 @@ extension URL {
     static var deviceList = URL(string: "https://www.foxesscloud.com/c/v0/device/list")!
     static var soc = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/soc/get")!
     static var addressBook = URL(string: "https://www.foxesscloud.com/c/v0/device/addressbook")!
+    static var variables = URL(string: "https://www.foxesscloud.com/c/v1/device/variables")!
 }
 
 public protocol Networking {
@@ -26,6 +27,7 @@ public protocol Networking {
     func fetchRaw(deviceID: String, variables: [RawVariable], queryDate: QueryDate) async throws -> [RawResponse]
     func fetchDeviceList() async throws -> PagedDeviceListResponse
     func fetchAddressBook(deviceID: String) async throws -> AddressBookResponse
+    func fetchVariables(deviceID: String) async throws -> [RawVariable]
 }
 
 public class Network: Networking {
@@ -125,6 +127,14 @@ public class Network: Networking {
         let result: (AddressBookResponse, Data) = try await fetch(request)
         store.addressBookResponse = NetworkOperation(description: "fetchAddressBookResponse", value: result.0, raw: result.1)
         return result.0
+    }
+
+    public func fetchVariables(deviceID: String) async throws -> [RawVariable] {
+        let request = append(queryItems: [URLQueryItem(name: "deviceID", value: deviceID)], to: URL.variables)
+
+        let result: (VariablesResponse, Data) = try await fetch(request)
+        store.variables = NetworkOperation(description: "fetchVariables", value: result.0, raw: result.1)
+        return result.0.variables
     }
 }
 

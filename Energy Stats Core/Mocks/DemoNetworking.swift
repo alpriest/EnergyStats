@@ -31,7 +31,7 @@ public class DemoNetworking: Networking {
     }
 
     public func fetchDeviceList() async throws -> PagedDeviceListResponse {
-        PagedDeviceListResponse(currentPage: 1, pageSize: 1, total: 1, devices: [
+        PagedDeviceListResponse(currentPage: 1, pageSize: 10, total: 1, devices: [
             PagedDeviceListResponse.Device(plantName: "demo-device-1", deviceID: "abcdef1abcdef1abcdef1", deviceSN: "1234", hasBattery: true, hasPV: true),
             PagedDeviceListResponse.Device(plantName: "demo-device-2", deviceID: "abcdef2abcdef2abcdef2", deviceSN: "5678", hasBattery: true, hasPV: true)
         ])
@@ -69,6 +69,18 @@ public class DemoNetworking: Networking {
 
     public func fetchAddressBook(deviceID: String) async throws -> AddressBookResponse {
         AddressBookResponse(softVersion: AddressBookResponse.SoftwareVersion(master: "1.54", slave: "1.02", manager: "1.57"))
+    }
+
+    public func fetchVariables(deviceID: String) async throws -> [RawVariable] {
+        [
+            RawVariable(name: "PV1Volt", variable: "pv1Volt", unit: "V"),
+            RawVariable(name: "PV1Current", variable: "pv1Current", unit: "A"),
+            RawVariable(name: "PV1Power", variable: "pv1Power", unit: "kW"),
+            RawVariable(name: "PVPower", variable: "pvPower", unit: "kW"),
+            RawVariable(name: "PV2Volt", variable: "pv2Volt", unit: "V"),
+            RawVariable(name: "PV2Current", variable: "pv2Current", unit: "A"),
+            RawVariable(name: "PV2Power", variable: "pv2Power", unit: "kW")
+        ]
     }
 
     private func rawData() throws -> Data {

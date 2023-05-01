@@ -14,11 +14,12 @@ struct GraphTabView: View {
     @ObservedObject var viewModel: GraphTabViewModel
     @State private var valuesAtTime: ValuesAtTime?
     @State private var selectedDate: Date?
+    @State private var showingVariables: Bool = false
 
     var body: some View {
         Group {
             VStack {
-                GraphHeaderView(displayMode: $viewModel.displayMode)
+                GraphHeaderView(displayMode: $viewModel.displayMode, showingVariables: $showingVariables)
 
                 ScrollView {
                     UsageGraphView(viewModel: viewModel,
@@ -53,32 +54,34 @@ struct GraphTabView: View {
 
                     VStack(alignment: .leading) {
                         ForEach(viewModel.graphVariables, id: \.self) { variable in
-                            HStack {
-                                Button(action: { viewModel.toggle(visibilityOf: variable) }) {
-                                    HStack(alignment: .top) {
-                                        Circle()
-                                            .foregroundColor(variable.type.colour)
-                                            .frame(width: 15, height: 15)
-                                            .padding(.top, 5)
+                            if variable.isSelected {
+                                HStack {
+                                    Button(action: { viewModel.toggle(visibilityOf: variable) }) {
+                                        HStack(alignment: .top) {
+                                            Circle()
+                                                .foregroundColor(variable.type.colour)
+                                                .frame(width: 15, height: 15)
+                                                .padding(.top, 5)
 
-                                        VStack(alignment: .leading) {
-                                            Text(variable.type.title(as: .total))
-                                            Text(variable.type.description)
-                                                .font(.system(size: 10))
-                                                .foregroundColor(.gray)
+                                            VStack(alignment: .leading) {
+                                                Text(variable.type.title(as: .total))
+                                                Text(variable.type.description)
+                                                    .font(.system(size: 10))
+                                                    .foregroundColor(.gray)
+                                            }
+
+                                            Spacer()
+
+                                            OptionalView(viewModel.total(of: variable.type.reportVariable)) {
+                                                Text($0.kWh(2))
+                                            }
                                         }
-
-                                        Spacer()
-
-                                        OptionalView(viewModel.total(of: variable.type.reportVariable)) {
-                                            Text($0.kWh(2))
-                                        }
+                                        .opacity(variable.enabled ? 1.0 : 0.5)
                                     }
-                                    .opacity(variable.enabled ? 1.0 : 0.5)
+                                    .buttonStyle(.plain)
                                 }
-                                .buttonStyle(.plain)
+                                .listRowSeparator(.hidden)
                             }
-                            .listRowSeparator(.hidden)
                         }
                         .scrollDisabled(true)
                         .listStyle(.plain)
@@ -90,6 +93,9 @@ struct GraphTabView: View {
                 }
             }
             .padding()
+        }
+        .sheet(isPresented: $showingVariables) {
+            GraphVariableChooserView(variables: $viewModel.graphVariables)
         }
         .task {
             Task {

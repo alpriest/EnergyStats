@@ -17,6 +17,7 @@ public enum RefreshFrequency: Int {
 public protocol ConfigManaging {
     func findDevices() async throws
     func fetchFirmwareVersions() async throws
+    func fetchVariables() async throws
     func logout()
     var minSOC: Double { get }
     var batteryCapacity: String { get set }
@@ -35,12 +36,14 @@ public protocol ConfigManaging {
     var selectedDeviceID: String? { get set }
     var firmwareVersions: DeviceFirmwareVersion? { get }
     var showInW: Bool { get set }
+    var variables: [RawVariable] { get }
 }
 
 public class ConfigManager: ConfigManaging {
     private let networking: Networking
     private var config: Config
     public var appTheme: CurrentValueSubject<AppTheme, Never>
+    public private(set) var variables: [RawVariable] = []
 
     struct NoDeviceFoundError: Error {}
 
@@ -101,6 +104,12 @@ public class ConfigManager: ConfigManaging {
             slave: response.softVersion.slave,
             manager: response.softVersion.manager
         )
+    }
+
+    public func fetchVariables() async throws {
+        guard let deviceID = config.selectedDeviceID else { throw NoDeviceFoundError() }
+
+        variables = try await networking.fetchVariables(deviceID: deviceID)
     }
 
     public func logout() {
