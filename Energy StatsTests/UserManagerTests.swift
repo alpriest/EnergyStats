@@ -65,7 +65,7 @@ final class UserManagerTests: XCTestCase {
 
     func test_login_success() async {
         let received = ValueReceiver(sut.$state)
-        stubHTTPResponses(with: [.loginSuccess, .deviceListSuccess, .batterySuccess, .batterySocSuccess])
+        stubHTTPResponses(with: [.loginSuccess, .deviceListSuccess, .batterySuccess, .batterySocSuccess, .firmwareVersionSuccess, .variablesSuccess])
 
         await sut.login(username: "bob", password: "password")
 

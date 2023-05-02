@@ -43,6 +43,8 @@ extension XCTestCase {
 
 enum FoxEssHTTPResponse: String {
     case deviceListSuccess = "devicelist-success.json"
+    case firmwareVersionSuccess = "firmware-version-success.json"
+    case variablesSuccess = "variables-success.json"
     case rawSuccess = "raw-success.json"
     case batterySuccess = "battery-success.json"
     case batterySocSuccess = "battery-soc-success.json"

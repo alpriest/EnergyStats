@@ -163,7 +163,7 @@ private extension Network {
 
             let networkResponse: NetworkResponse<T> = try JSONDecoder().decode(NetworkResponse<T>.self, from: data)
 
-            if [41808, 41809, 41810].contains(networkResponse.errno) { // 41808 41810 ?
+            if [41808, 41809, 41810].contains(networkResponse.errno) {
                 throw NetworkError.invalidToken
             } else if networkResponse.errno == 41807 {
                 throw NetworkError.badCredentials

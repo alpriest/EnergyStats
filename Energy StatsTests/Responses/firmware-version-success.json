@@ -1,0 +1,23 @@
+{
+  "errno": 0,
+  "result": {
+    "deviceSN": "66BH3720228D004",
+    "plantName": "Alistair Priest",
+    "moduleSN": "669W2EFF22FA815",
+    "deviceType": "H1-3.7-E",
+    "status": 1,
+    "country": "United Kingdom",
+    "countryCode": "GB",
+    "city": "Cheshire ",
+    "address": "15 Limefield Avenue, Lymm",
+    "feedinDate": "2022-02-22 21:46:27 GMT+0000",
+    "hardwareVersion": "",
+    "softVersion": {
+      "master": "1.54",
+      "slave": "1.02",
+      "manager": "1.57",
+      "afci": ""
+    },
+    "protocolVersion": "H1.12.00"
+  }
+}

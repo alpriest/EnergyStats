@@ -17,19 +17,17 @@ struct UsageGraphView: View {
     @Binding var valuesAtTime: ValuesAtTime?
 
     var body: some View {
-        Chart(viewModel.data, id: \.variable.networkTitle) {
-            AreaMark(
+        Chart(viewModel.data, id: \.variable.variable) {
+            LineMark(
                 x: .value("hour", $0.date),
-                y: .value("kW", $0.value),
-                series: .value("Title", $0.variable.title(as: .snapshot)),
-                stacking: .unstacked
+                y: .value("", $0.value),
+                series: .value("Title", $0.variable.title(as: .snapshot))
             )
             .foregroundStyle($0.variable.colour)
         }
         .chartPlotStyle { content in
             content.background(Color.gray.gradient.opacity(0.02))
         }
-        .chartYScale(domain: viewModel.yScale)
         .chartXAxis(content: {
             AxisMarks(values: .stride(by: .hour)) { value in
                 if (value.index == 0) || (value.index % viewModel.stride == 0), let date = value.as(Date.self) {
@@ -44,7 +42,7 @@ struct UsageGraphView: View {
             AxisMarks { value in
                 if let amount = value.as(Double.self) {
                     AxisValueLabel {
-                        Text(amount.kW(2))
+                        Text(amount, format: .number)
                     }
                 }
             }

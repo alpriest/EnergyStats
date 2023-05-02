@@ -1,13 +1,13 @@
 //
 //  Double.swift
-//  Energy Stats
+//  Energy Stats Core
 //
-//  Created by Alistair Priest on 13/09/2022.
+//  Created by Alistair Priest on 02/05/2023.
 //
 
 import Foundation
 
-extension Double {
+public extension Double {
     func kW(_ places: Int) -> String {
         let divisor = pow(10.0, Double(places))
         let divided = (self * divisor).rounded() / divisor

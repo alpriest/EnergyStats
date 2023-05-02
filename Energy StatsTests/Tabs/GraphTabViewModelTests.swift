@@ -15,17 +15,20 @@ final class GraphTabViewModelTests: XCTestCase {
     var networking: Networking!
     var config: MockConfig!
 
-    override func setUp() {
+    override func setUp() async throws {
         config = MockConfig()
-        networking = Network(credentials: MockKeychainStore(), config: config, store: InMemoryLoggingNetworkStore())
-        sut = GraphTabViewModel(networking, configManager: ConfigManager(networking: networking, config: config), { Date(timeIntervalSince1970: 1669146973) })
+        networking = MockNetworking()
+        let configManager = ConfigManager(networking: networking, config: config)
+        sut = GraphTabViewModel(networking, configManager: configManager, { Date(timeIntervalSince1970: 1669146973) })
+
+        try await configManager.findDevices()
     }
 
     func test_initial_values() {
         XCTAssertEqual(sut.data.count, 0)
         XCTAssertEqual(sut.displayMode, .today(24))
         XCTAssertEqual(sut.stride, 3)
-        XCTAssertEqual(sut.graphVariables, [GraphVariable(.generationPower), GraphVariable(RawVariable.batChargePower), GraphVariable(.batDischargePower), GraphVariable(.feedinPower), GraphVariable(.gridConsumptionPower)])
+        XCTAssertEqual(sut.graphVariables, [])
     }
 
     func test_fetches_data_on_start() async {

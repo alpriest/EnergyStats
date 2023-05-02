@@ -15,7 +15,7 @@ struct RawRequest: Encodable {
 
     internal init(deviceID: String, variables: [RawVariable], queryDate: QueryDate) {
         self.deviceID = deviceID
-        self.variables = variables.map { $0.networkTitle }
+        self.variables = variables.map { $0.variable }
         self.beginDate = queryDate
     }
 }

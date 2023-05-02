@@ -9,6 +9,6 @@ import SwiftUI
 
 extension Font {
     static var energyAmount: Font {
-        Font.system(size: 12, weight: .bold)
+        Font.system(size: 14, weight: .bold)
     }
 }

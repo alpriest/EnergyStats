@@ -13,16 +13,20 @@ import Energy_Stats_Core
 
 @MainActor
 final class GraphTabViewTests: XCTestCase {
-    func test_when_user_arrives() async {
+    func test_when_user_arrives() async throws {
         let networking = MockNetworking(throwOnCall: false, dateProvider: { Date(timeIntervalSince1970: 1664127352) })
+        let configManager = ConfigManager(networking: networking, config: MockConfig())
+        try await configManager.findDevices()
+        try await configManager.fetchVariables()
         let viewModel = GraphTabViewModel(
             networking,
-            configManager: ConfigManager(networking: networking, config: MockConfig())
+            configManager: configManager
         ) { Date(timeIntervalSince1970: 1664127352) }
+
         let sut = GraphTabView(viewModel: viewModel)
         let view = UIHostingController(rootView: sut)
+
         await viewModel.load()
-        viewModel.displayMode = .today(6)
 
         assertSnapshot(matching: view, as: .image(on: .iPhone13Pro))
     }

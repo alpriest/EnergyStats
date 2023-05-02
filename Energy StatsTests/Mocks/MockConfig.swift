@@ -20,5 +20,5 @@ class MockConfig: Config {
     var showUsableBatteryOnly: Bool = false
     var showBatteryEstimate: Bool = false
     var devices: Data? = nil
-    var selectedDeviceID: String? = nil
+    var selectedDeviceID: String? = "1234"
 }

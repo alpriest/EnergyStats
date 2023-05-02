@@ -29,7 +29,6 @@
 		4103D1E329DB6D03001B0BC8 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410AA38729D96F6D00CD107C /* AppTheme.swift */; };
 		4103D1E429DB6D12001B0BC8 /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41339C7328CC7BA50062B976 /* KeychainStore.swift */; };
 		4103D1E529DB6D29001B0BC8 /* Sequence+aysnc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4111333529B7D61200972935 /* Sequence+aysnc.swift */; };
-		4106A93028D05EC90009DA28 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4106A92F28D05EC90009DA28 /* Double.swift */; };
 		4107446128C9EF6B006D5D7D /* HomePowerFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446028C9EF6B006D5D7D /* HomePowerFlowView.swift */; };
 		4107446328CA1C5D006D5D7D /* PowerFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446228CA1C5D006D5D7D /* PowerFlowView.swift */; };
 		4107446528CA1D76006D5D7D /* FlowingLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446428CA1D76006D5D7D /* FlowingLine.swift */; };
@@ -77,6 +76,11 @@
 		4171854429FFCF9500D18CDD /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171854329FFCF9500D18CDD /* Color+Hex.swift */; };
 		417185462A004FA900D18CDD /* VariablesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417185452A004FA900D18CDD /* VariablesResponse.swift */; };
 		417185482A0051CA00D18CDD /* GraphVariableChooserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417185472A0051CA00D18CDD /* GraphVariableChooserView.swift */; };
+		4171854A2A01006000D18CDD /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417185492A01006000D18CDD /* Double.swift */; };
+		4171854C2A01033700D18CDD /* GraphVariablesToggles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171854B2A01033700D18CDD /* GraphVariablesToggles.swift */; };
+		4171854E2A010B6300D18CDD /* GraphVariableChooserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171854D2A010B6300D18CDD /* GraphVariableChooserViewModel.swift */; };
+		417185502A01188300D18CDD /* firmware-version-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 4171854F2A01188300D18CDD /* firmware-version-success.json */; };
+		417185522A0119F300D18CDD /* variables-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 417185512A0119F300D18CDD /* variables-success.json */; };
 		418EEEB52916843A006A8290 /* View+If.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418EEEB42916843A006A8290 /* View+If.swift */; };
 		41923E3C2916B8A800D1A8C5 /* battery-soc-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41923E3B2916B8A800D1A8C5 /* battery-soc-success.json */; };
 		41923E3E2916BC6F00D1A8C5 /* UsageGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41923E3D2916BC6F00D1A8C5 /* UsageGraphView.swift */; };
@@ -165,7 +169,6 @@
 		4103D1E029DB6CB9001B0BC8 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
 		4103F82F2922BFBA00567B1C /* ReportVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportVariable.swift; sourceTree = "<group>"; };
 		4106A92C28CFCD960009DA28 /* RawVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawVariable.swift; sourceTree = "<group>"; };
-		4106A92F28D05EC90009DA28 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		4107446028C9EF6B006D5D7D /* HomePowerFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePowerFlowView.swift; sourceTree = "<group>"; };
 		4107446228CA1C5D006D5D7D /* PowerFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerFlowView.swift; sourceTree = "<group>"; };
 		4107446428CA1D76006D5D7D /* FlowingLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowingLine.swift; sourceTree = "<group>"; };
@@ -223,6 +226,11 @@
 		4171854329FFCF9500D18CDD /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
 		417185452A004FA900D18CDD /* VariablesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariablesResponse.swift; sourceTree = "<group>"; };
 		417185472A0051CA00D18CDD /* GraphVariableChooserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphVariableChooserView.swift; sourceTree = "<group>"; };
+		417185492A01006000D18CDD /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
+		4171854B2A01033700D18CDD /* GraphVariablesToggles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphVariablesToggles.swift; sourceTree = "<group>"; };
+		4171854D2A010B6300D18CDD /* GraphVariableChooserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphVariableChooserViewModel.swift; sourceTree = "<group>"; };
+		4171854F2A01188300D18CDD /* firmware-version-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "firmware-version-success.json"; sourceTree = "<group>"; };
+		417185512A0119F300D18CDD /* variables-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "variables-success.json"; sourceTree = "<group>"; };
 		41777F1428F49C61009944FF /* NetworkFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFacade.swift; sourceTree = "<group>"; };
 		418EEEB42916843A006A8290 /* View+If.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+If.swift"; sourceTree = "<group>"; };
 		41923E3B2916B8A800D1A8C5 /* battery-soc-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "battery-soc-success.json"; sourceTree = "<group>"; };
@@ -314,6 +322,7 @@
 				4111333529B7D61200972935 /* Sequence+aysnc.swift */,
 				4171854129FFCF2500D18CDD /* String+MD5.swift */,
 				4171854329FFCF9500D18CDD /* Color+Hex.swift */,
+				417185492A01006000D18CDD /* Double.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -322,7 +331,6 @@
 			isa = PBXGroup;
 			children = (
 				41028F9428CDD7A300FB70FD /* OptionalView.swift */,
-				4106A92F28D05EC90009DA28 /* Double.swift */,
 				4128E4C028DA5F6600C1D698 /* Date.swift */,
 				418EEEB42916843A006A8290 /* View+If.swift */,
 				416318BD29DDD80E00C2C285 /* View+Copy.swift */,
@@ -512,6 +520,8 @@
 				4140ECD9292D58D300992DD8 /* GraphVariable.swift */,
 				417153E329F2BCD700639A7B /* GraphHeaderView.swift */,
 				417185472A0051CA00D18CDD /* GraphVariableChooserView.swift */,
+				4171854B2A01033700D18CDD /* GraphVariablesToggles.swift */,
+				4171854D2A010B6300D18CDD /* GraphVariableChooserViewModel.swift */,
 			);
 			path = Graphs;
 			sourceTree = "<group>";
@@ -558,15 +568,17 @@
 		41B690FA28E041E00058126E /* Responses */ = {
 			isa = PBXGroup;
 			children = (
-				41923E3B2916B8A800D1A8C5 /* battery-soc-success.json */,
-				41B6910E28E0CDFC0058126E /* devicelist-success.json */,
-				41B6910C28E0CD8F0058126E /* raw-success.json */,
-				41B6910A28E0CD370058126E /* battery-success.json */,
 				41B6910828E0BA340058126E /* badtoken.json */,
-				41B6910628E0B5F30058126E /* trylater.json */,
-				41B6910428E047DD0058126E /* report-success.json */,
+				41923E3B2916B8A800D1A8C5 /* battery-soc-success.json */,
+				41B6910A28E0CD370058126E /* battery-success.json */,
+				41B6910E28E0CDFC0058126E /* devicelist-success.json */,
+				4171854F2A01188300D18CDD /* firmware-version-success.json */,
 				41B690FB28E042560058126E /* login-failure.json */,
 				41B690FC28E042560058126E /* login-success.json */,
+				41B6910C28E0CD8F0058126E /* raw-success.json */,
+				41B6910428E047DD0058126E /* report-success.json */,
+				41B6910628E0B5F30058126E /* trylater.json */,
+				417185512A0119F300D18CDD /* variables-success.json */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -825,6 +837,8 @@
 				41B6910D28E0CD8F0058126E /* raw-success.json in Resources */,
 				41B6910528E047DD0058126E /* report-success.json in Resources */,
 				41B690FE28E042560058126E /* login-success.json in Resources */,
+				417185522A0119F300D18CDD /* variables-success.json in Resources */,
+				417185502A01188300D18CDD /* firmware-version-success.json in Resources */,
 				41B6910928E0BA340058126E /* badtoken.json in Resources */,
 				41B6910B28E0CD370058126E /* battery-success.json in Resources */,
 			);
@@ -846,6 +860,7 @@
 				419CCB542933BABF00882649 /* ErrorAlertView.swift in Sources */,
 				41339C7228CC7B7B0062B976 /* LoginView.swift in Sources */,
 				41626CD029D969E9003FEB00 /* InverterFirmwareVersionsView.swift in Sources */,
+				4171854C2A01033700D18CDD /* GraphVariablesToggles.swift in Sources */,
 				417185482A0051CA00D18CDD /* GraphVariableChooserView.swift in Sources */,
 				41E4B31528DB77E8003F7F47 /* GridPowerView.swift in Sources */,
 				417153E429F2BCD700639A7B /* GraphHeaderView.swift in Sources */,
@@ -862,6 +877,7 @@
 				4140ECDA292D58D300992DD8 /* GraphVariable.swift in Sources */,
 				41E4B31028DB7666003F7F47 /* BatteryPowerView.swift in Sources */,
 				4140144E28C70B3200EA5BA1 /* Energy_StatsApp.swift in Sources */,
+				4171854E2A010B6300D18CDD /* GraphVariableChooserViewModel.swift in Sources */,
 				417153E629F2BD3300639A7B /* LoadState.swift in Sources */,
 				4130364B29B8BE7F006B5CE9 /* InverterChoiceView.swift in Sources */,
 				41E4B30E28DB7511003F7F47 /* BatteryCapacityCalculator.swift in Sources */,
@@ -873,7 +889,6 @@
 				4107446328CA1C5D006D5D7D /* PowerFlowView.swift in Sources */,
 				41A25D3F28CA5CFB00315714 /* GraphTabViewModel.swift in Sources */,
 				4107446128C9EF6B006D5D7D /* HomePowerFlowView.swift in Sources */,
-				4106A93028D05EC90009DA28 /* Double.swift in Sources */,
 				41923E3E2916BC6F00D1A8C5 /* UsageGraphView.swift in Sources */,
 				416318BE29DDD80E00C2C285 /* View+Copy.swift in Sources */,
 				4107446728CA22B3006D5D7D /* InverterPath.swift in Sources */,
@@ -912,6 +927,7 @@
 				4103D1D329DB6C51001B0BC8 /* BatteryResponse.swift in Sources */,
 				4103D1D229DB6C51001B0BC8 /* NetworkError.swift in Sources */,
 				4103D1D429DB6C51001B0BC8 /* DeviceList.swift in Sources */,
+				4171854A2A01006000D18CDD /* Double.swift in Sources */,
 				416318B729DDD2E100C2C285 /* InMemoryLoggingNetworkingDecorator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1115,7 +1131,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.17;
+				MARKETING_VERSION = 1.18;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1150,7 +1166,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.17;
+				MARKETING_VERSION = 1.18;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1297,6 +1313,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.alpriest.Energy-StatsTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1315,6 +1332,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.alpriest.Energy-StatsTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";

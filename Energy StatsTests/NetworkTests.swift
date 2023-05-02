@@ -6,8 +6,8 @@
 //
 
 @testable import Energy_Stats
-import XCTest
 @testable import Energy_Stats_Core
+import XCTest
 
 final class NetworkTests: XCTestCase {
     private var sut: Networking!
@@ -80,7 +80,12 @@ final class NetworkTests: XCTestCase {
         config.configureAsLoggedIn()
         stubHTTPResponse(with: .rawSuccess)
 
-        let raw = try await sut.fetchRaw(deviceID: "1", variables: [.feedinPower, .gridConsumptionPower, .batChargePower, .batDischargePower, .generationPower], queryDate: .any())
+        let raw = try await sut.fetchRaw(deviceID: "1", variables: [
+            RawVariable(name: "feedinPower", variable: "feedinPower", unit: "kWH"),
+            RawVariable(name: "gridConsumptionPower", variable: "gridConsumptionPower", unit: "kWH"),
+            RawVariable(name: "batChargePower", variable: "batChargePower", unit: "kWH"),
+            RawVariable(name: "batDischargePower", variable: "batDischargePower", unit: "kWH"),
+            RawVariable(name: "generationPower", variable: "generationPower", unit: "kWH")], queryDate: .any())
 
         XCTAssertEqual(raw.count, 5)
     }
@@ -97,7 +102,7 @@ final class NetworkTests: XCTestCase {
     func test_fetchReport_throws_when_offline() async {
         config.configureAsLoggedIn()
         stubOffline()
-        
+
         do {
             _ = try await sut.fetchReport(deviceID: "!", variables: [.feedIn, .gridConsumption, .generation, .chargeEnergyToTal], queryDate: QueryDate.any())
         } catch NetworkError.offline {

@@ -127,14 +127,4 @@ public class PreviewConfigManager: ConfigManager {
         self.init(networking: DemoNetworking(), config: MockConfig())
         Task { try await findDevices() }
     }
-
-    public override var devices: [Device]? {
-        get {
-            [
-                Device(plantName: "demo-device-1", deviceID: "03274209-486c-4ea3-9c28-159f25ee84cb", deviceSN: "1234", hasPV: true, battery: nil),
-                Device(plantName: "demo-device-2", deviceID: "03274209-486c-4ea3-9c28-662625ee84cb", deviceSN: "5678", hasPV: true, battery: nil)
-            ]
-        }
-        set {}
-    }
 }

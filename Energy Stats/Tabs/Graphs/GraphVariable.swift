@@ -5,8 +5,8 @@
 //  Created by Alistair Priest on 22/11/2022.
 //
 
-import Foundation
 import Energy_Stats_Core
+import Foundation
 
 struct GraphVariable: Identifiable, Equatable, Hashable {
     let type: RawVariable
@@ -25,6 +25,11 @@ struct GraphVariable: Identifiable, Equatable, Hashable {
 
         self.init(type, isSelected: isSelected, enabled: enabled)
     }
+
+    mutating func setSelected(_ selected: Bool) {
+        isSelected = selected
+        enabled = true
+    }
 }
 
 struct GraphValue: Identifiable {
@@ -38,5 +43,14 @@ struct GraphValue: Identifiable {
         self.date = date
         self.value = value
         self.variable = variable
+    }
+
+    func formatted() -> String {
+        switch variable.unit {
+        case "kW":
+            return value.kW(2)
+        default:
+            return "\(value) \(variable.unit)"
+        }
     }
 }

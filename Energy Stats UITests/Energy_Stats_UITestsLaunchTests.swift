@@ -37,5 +37,8 @@ final class Energy_Stats_UITestsLaunchTests: XCTestCase {
         app.buttons["graph_tab"].tap()
 
         snapshot("graph_tab")
+
+        app.buttons["past"].tap()
+        app.buttons["variable_chooser"].tap()
     }
 }

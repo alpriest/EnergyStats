@@ -31,8 +31,13 @@ struct GraphHeaderView: View {
     var body: some View {
         VStack {
             Picker("Choose", selection: $dateChoice) {
-                Text("Past").tag("past")
-                Text("Today").tag("today")
+                Text("Past")
+                    .tag("past")
+                    .accessibilityIdentifier("past")
+
+                Text("Today")
+                    .tag("today")
+                    .accessibilityIdentifier("today")
             }
             .pickerStyle(.segmented)
             .onChange(of: dateChoice, perform: { choice in
@@ -61,7 +66,9 @@ struct GraphHeaderView: View {
                     } label: {
                         Image(systemName: "checklist")
                             .padding(.horizontal)
-                    }.buttonStyle(.bordered)
+                    }
+                    .buttonStyle(.bordered)
+                    .accessibilityIdentifier("variable_chooser")
 
                     Spacer()
 
@@ -83,7 +90,6 @@ struct GraphHeaderView: View {
                         Image(systemName: "chevron.right")
                             .padding(.horizontal)
                     }.buttonStyle(.bordered)
-
                 }
                 .onChange(of: candidateQueryDate) { newValue in
                     displayMode = .historic(newValue)

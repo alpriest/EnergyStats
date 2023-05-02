@@ -49,10 +49,6 @@ public extension RawVariable {
         }
     }
 
-    var networkTitle: String {
-        self.variable
-    }
-
     var colour: Color {
         switch self.variable {
         case "batChargePower":

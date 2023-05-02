@@ -1,0 +1,323 @@
+{
+  "errno": 0,
+  "result": {
+    "deviceType": "",
+    "variables": [
+      {
+        "name": "PV1Volt",
+        "variable": "pv1Volt",
+        "unit": "V"
+      },
+      {
+        "name": "PV1Current",
+        "variable": "pv1Current",
+        "unit": "A"
+      },
+      {
+        "name": "PV1Power",
+        "variable": "pv1Power",
+        "unit": "kW"
+      },
+      {
+        "name": "PVPower",
+        "variable": "pvPower",
+        "unit": "kW"
+      },
+      {
+        "name": "PV2Volt",
+        "variable": "pv2Volt",
+        "unit": "V"
+      },
+      {
+        "name": "PV2Current",
+        "variable": "pv2Current",
+        "unit": "A"
+      },
+      {
+        "name": "PV2Power",
+        "variable": "pv2Power",
+        "unit": "kW"
+      },
+      {
+        "name": "PV3Volt",
+        "variable": "pv3Volt",
+        "unit": "V"
+      },
+      {
+        "name": "PV3Current",
+        "variable": "pv3Current",
+        "unit": "A"
+      },
+      {
+        "name": "PV3Power",
+        "variable": "pv3Power",
+        "unit": "kW"
+      },
+      {
+        "name": "PV4Volt",
+        "variable": "pv4Volt",
+        "unit": "V"
+      },
+      {
+        "name": "PV4Current",
+        "variable": "pv4Current",
+        "unit": "A"
+      },
+      {
+        "name": "PV4Power",
+        "variable": "pv4Power",
+        "unit": "kW"
+      },
+      {
+        "name": "EPSPower",
+        "variable": "epsPower",
+        "unit": "kW"
+      },
+      {
+        "name": "EPS-RCurrent",
+        "variable": "epsCurrentR",
+        "unit": "A"
+      },
+      {
+        "name": "EPS-RVolt",
+        "variable": "epsVoltR",
+        "unit": "V"
+      },
+      {
+        "name": "EPS-RPower",
+        "variable": "epsPowerR",
+        "unit": "kW"
+      },
+      {
+        "name": "EPS-SCurrent",
+        "variable": "epsCurrentS",
+        "unit": "A"
+      },
+      {
+        "name": "EPS-SVolt",
+        "variable": "epsVoltS",
+        "unit": "V"
+      },
+      {
+        "name": "EPS-SPower",
+        "variable": "epsPowerS",
+        "unit": "kW"
+      },
+      {
+        "name": "EPS-TCurrent",
+        "variable": "epsCurrentT",
+        "unit": "A"
+      },
+      {
+        "name": "EPS-TVolt",
+        "variable": "epsVoltT",
+        "unit": "V"
+      },
+      {
+        "name": "EPS-TPower",
+        "variable": "epsPowerT",
+        "unit": "kW"
+      },
+      {
+        "name": "RCurrent",
+        "variable": "RCurrent",
+        "unit": "A"
+      },
+      {
+        "name": "RVolt",
+        "variable": "RVolt",
+        "unit": "V"
+      },
+      {
+        "name": "RFreq",
+        "variable": "RFreq",
+        "unit": "Hz"
+      },
+      {
+        "name": "RPower",
+        "variable": "RPower",
+        "unit": "kW"
+      },
+      {
+        "name": "SCurrent",
+        "variable": "SCurrent",
+        "unit": "A"
+      },
+      {
+        "name": "SVolt",
+        "variable": "SVolt",
+        "unit": "V"
+      },
+      {
+        "name": "SFreq",
+        "variable": "SFreq",
+        "unit": "Hz"
+      },
+      {
+        "name": "SPower",
+        "variable": "SPower",
+        "unit": "kW"
+      },
+      {
+        "name": "TCurrent",
+        "variable": "TCurrent",
+        "unit": "A"
+      },
+      {
+        "name": "TVolt",
+        "variable": "TVolt",
+        "unit": "V"
+      },
+      {
+        "name": "TFreq",
+        "variable": "TFreq",
+        "unit": "Hz"
+      },
+      {
+        "name": "TPower",
+        "variable": "TPower",
+        "unit": "kW"
+      },
+      {
+        "name": "AmbientTemperature",
+        "variable": "ambientTemperation",
+        "unit": "℃"
+      },
+      {
+        "name": "BoostTemperature",
+        "variable": "boostTemperation",
+        "unit": "℃"
+      },
+      {
+        "name": "InvTemperation",
+        "variable": "invTemperation",
+        "unit": "℃"
+      },
+      {
+        "name": "ChargeTemperature",
+        "variable": "chargeTemperature",
+        "unit": "℃"
+      },
+      {
+        "name": "batTemperature",
+        "variable": "batTemperature",
+        "unit": "℃"
+      },
+      {
+        "name": "DSPTemperature",
+        "variable": "dspTemperature",
+        "unit": "℃"
+      },
+      {
+        "name": "Load Power",
+        "variable": "loadsPower",
+        "unit": "kW"
+      },
+      {
+        "name": "LoadsRPower",
+        "variable": "loadsPowerR",
+        "unit": "kW"
+      },
+      {
+        "name": "LoadsSPower",
+        "variable": "loadsPowerS",
+        "unit": "kW"
+      },
+      {
+        "name": "LoadsTPower",
+        "variable": "loadsPowerT",
+        "unit": "kW"
+      },
+      {
+        "name": "Output Power",
+        "variable": "generationPower",
+        "unit": "kW"
+      },
+      {
+        "name": "Feed-in Power",
+        "variable": "feedinPower",
+        "unit": "kW"
+      },
+      {
+        "name": "GridConsumption Power",
+        "variable": "gridConsumptionPower",
+        "unit": "kW"
+      },
+      {
+        "name": "InvBatVolt",
+        "variable": "invBatVolt",
+        "unit": "V"
+      },
+      {
+        "name": "InvBatCurrent",
+        "variable": "invBatCurrent",
+        "unit": "A"
+      },
+      {
+        "name": "invBatPower",
+        "variable": "invBatPower",
+        "unit": "kW"
+      },
+      {
+        "name": "Charge Power",
+        "variable": "batChargePower",
+        "unit": "kW"
+      },
+      {
+        "name": "Discharge Power",
+        "variable": "batDischargePower",
+        "unit": "kW"
+      },
+      {
+        "name": "BatVolt",
+        "variable": "batVolt",
+        "unit": "V"
+      },
+      {
+        "name": "BatCurrent",
+        "variable": "batCurrent",
+        "unit": "A"
+      },
+      {
+        "name": "MeterPower",
+        "variable": "meterPower",
+        "unit": "kW"
+      },
+      {
+        "name": "Meter2Power",
+        "variable": "meterPower2",
+        "unit": "kW"
+      },
+      {
+        "name": "MeterRPower",
+        "variable": "meterPowerR",
+        "unit": "kW"
+      },
+      {
+        "name": "MeterSPower",
+        "variable": "meterPowerS",
+        "unit": "kW"
+      },
+      {
+        "name": "MeterTPower",
+        "variable": "meterPowerT",
+        "unit": "kW"
+      },
+      {
+        "name": "SoC",
+        "variable": "SoC",
+        "unit": "%"
+      },
+      {
+        "name": "ReactivePower",
+        "variable": "ReactivePower",
+        "unit": "kVar"
+      },
+      {
+        "name": "PowerFactor",
+        "variable": "PowerFactor",
+        "unit": ""
+      }
+    ]
+  }
+}

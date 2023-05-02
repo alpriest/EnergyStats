@@ -76,65 +76,24 @@ class GraphTabViewModel: ObservableObject {
 
     private let configManager: ConfigManaging
 
+    static let DefaultGraphVariables = ["generationPower",
+                                        "batChargePower",
+                                        "batDischargePower",
+                                        "feedinPower",
+                                        "gridConsumptionPower"]
+
     init(_ networking: Networking, configManager: ConfigManaging, _ dateProvider: @escaping () -> Date = { Date() }) {
         self.networking = networking
         self.configManager = configManager
         self.dateProvider = dateProvider
         haptic.prepare()
 
-        let defaultVariables = ["generationPower",
-            "batChargePower",
-            "batDischargePower",
-            "feedinPower",
-            "gridConsumptionPower"]
-
         graphVariables = configManager.variables.compactMap { variable -> GraphVariable? in
             guard let variable = configManager.variables.named(variable.variable) else { return nil }
 
-            return GraphVariable(variable, isSelected: defaultVariables.contains(variable.variable), enabled: defaultVariables.contains(variable.variable))
+            return GraphVariable(variable, isSelected: Self.DefaultGraphVariables.contains(variable.variable), enabled: Self.DefaultGraphVariables.contains(variable.variable))
         }
     }
-
-//    func loadHistory() async {
-//        guard let currentDevice = configManager.currentDevice else { return }
-//
-//        Task { @MainActor in
-//            state = .active(String(localized: "Loading"))
-//        }
-//
-//        do {
-//            let rawVariables = graphVariables.compactMap { $0.type }
-//            let reportVariables = rawVariables.compactMap { $0.reportVariable }
-//
-//            let raw = try await networking.fetchRaw(deviceID: currentDevice.deviceID, variables: rawVariables, queryDate: queryDate)
-//            let rawData: [GraphValue] = raw.flatMap { response -> [GraphValue] in
-//                guard let rawVariable = RawVariable(rawValue: response.variable) else { return [] }
-//
-//                return response.data.compactMap {
-//                    GraphValue(date: $0.time, queryDate: queryDate, value: $0.value, variable: rawVariable)
-//                }
-//            }
-//
-//            let reports = try await networking.fetchReport(deviceID: currentDevice.deviceID, variables: reportVariables, queryDate: queryDate)
-//            rawVariables.forEach { rawVariable in
-//                guard let reportVariable = rawVariable.reportVariable else { return }
-//                guard let response = reports.first(where: { $0.variable.lowercased() == reportVariable.networkTitle.lowercased() }) else { return }
-//
-//                totals[reportVariable] = 0
-//                totals[reportVariable] = response.data.map { abs($0.value) }.reduce(0.0, +)
-//            }
-//
-//            await MainActor.run {
-//                self.rawData = rawData
-//                self.refresh()
-//                self.state = .inactive
-//            }
-//        } catch {
-//            await MainActor.run {
-//                self.state = .error(error, "Could not load, check your connection")
-//            }
-//        }
-//    }
 
     func load() async {
         guard let currentDevice = configManager.currentDevice else { return }
@@ -235,4 +194,16 @@ class GraphTabViewModel: ObservableObject {
             }
         }
     }
+
+    func set(graphVariables: [GraphVariable]) {
+        self.graphVariables = graphVariables
+        Task { await load() }
+    }
+
+    var axisType: AxisUnit = .consistent("kW")
+}
+
+enum AxisUnit {
+    case mixed
+    case consistent(String)
 }

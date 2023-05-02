@@ -10,6 +10,16 @@ import Foundation
 @testable import Energy_Stats_Core
 
 class MockNetworking: Networking {
+    func fetchVariables(deviceID: String) async throws -> [RawVariable] {
+        [
+            RawVariable(name: "Output Power", variable: "generationPower", unit: "kW"),
+            RawVariable(name: "Feed-in Power", variable: "feedinPower", unit: "kW"),
+            RawVariable(name: "Charge Power", variable: "batChargePower", unit: "kW"),
+            RawVariable(name: "Discharge Power", variable: "batDischargePower", unit: "kW"),
+            RawVariable(name: "GridConsumption Power", variable: "gridConsumptionPower", unit: "kW")
+        ]
+    }
+
     private let throwOnCall: Bool
     private let dateProvider: () -> Date
 
