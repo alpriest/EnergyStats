@@ -17,7 +17,8 @@ final class Energy_Stats_UITestsLaunchTests: XCTestCase {
         continueAfterFailure = false
     }
 
-    func test_takeScreenshots() throws {
+    @MainActor
+    func test_takeScreenshots() async throws {
         let app = XCUIApplication()
         setupSnapshot(app)
         app.launch()
@@ -40,5 +41,7 @@ final class Energy_Stats_UITestsLaunchTests: XCTestCase {
 
         app.buttons["past"].tap()
         app.buttons["variable_chooser"].tap()
+
+        snapshot("choose_variable")
     }
 }

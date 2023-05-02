@@ -72,15 +72,18 @@ public class DemoNetworking: Networking {
     }
 
     public func fetchVariables(deviceID: String) async throws -> [RawVariable] {
-        [
-            RawVariable(name: "PV1Volt", variable: "pv1Volt", unit: "V"),
-            RawVariable(name: "PV1Current", variable: "pv1Current", unit: "A"),
-            RawVariable(name: "PV1Power", variable: "pv1Power", unit: "kW"),
-            RawVariable(name: "PVPower", variable: "pvPower", unit: "kW"),
-            RawVariable(name: "PV2Volt", variable: "pv2Volt", unit: "V"),
-            RawVariable(name: "PV2Current", variable: "pv2Current", unit: "A"),
-            RawVariable(name: "PV2Power", variable: "pv2Power", unit: "kW")
-        ]
+        let response = try JSONDecoder().decode(NetworkResponse<VariablesResponse>.self, from: variablesData())
+        guard let result = response.result else { throw NetworkError.invalidToken }
+
+        return result.variables
+    }
+
+    private func variablesData() throws -> Data {
+        guard let url = Bundle(for: type(of: self)).url(forResource: "variables", withExtension: "json") else {
+            return Data()
+        }
+
+        return try Data(contentsOf: url)
     }
 
     private func rawData() throws -> Data {

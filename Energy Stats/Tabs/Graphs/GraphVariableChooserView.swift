@@ -21,7 +21,7 @@ struct GraphVariableChooserView: View {
                     Button("Temperatures") { viewModel.chooseTemperatureVariables() }
                     Button("None") { viewModel.select(just: []) }
                 } header: {
-                    Text("Popular")
+                    Text("Predefined selections")
                 }
 
                 Section {
@@ -71,8 +71,7 @@ struct GraphVariableChooserView: View {
                     }
 
                     Text("Note that not all variables contain values")
-                        .foregroundColor(.white)
-                }.background(.black)
+                }
             }
         }
     }
