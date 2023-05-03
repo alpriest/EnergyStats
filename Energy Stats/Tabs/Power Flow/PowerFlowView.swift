@@ -6,8 +6,8 @@
 //
 
 import Combine
-import SwiftUI
 import Energy_Stats_Core
+import SwiftUI
 
 struct PowerFlowView: View {
     private let amount: Double
@@ -40,7 +40,7 @@ struct PowerFlowView: View {
                 Line()
                     .stroke(lineColor, lineWidth: 4)
             }
-        }
+        }.clipped()
     }
 
     var lineColor: Color {
