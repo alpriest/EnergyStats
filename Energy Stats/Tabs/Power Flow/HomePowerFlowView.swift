@@ -22,7 +22,7 @@ struct HomePowerFlowView: View {
     @State private var lastUpdated = Date()
     let configManager: ConfigManaging
     let viewModel: HomePowerFlowViewModel
-    private let powerViewWidth: CGFloat = 90
+    private let powerViewWidth: CGFloat = 100
     let appTheme: LatestAppTheme
 
     var body: some View {
