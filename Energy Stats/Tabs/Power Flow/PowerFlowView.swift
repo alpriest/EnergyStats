@@ -33,8 +33,10 @@ struct PowerFlowView: View {
                         FlowingLine(direction: .up, animationDuration: animationDuration, color: lineColor)
                     }
 
-                    EnergyAmountView(amount: amount, decimalPlaces: appTheme.value.decimalPlaces, backgroundColor: lineColor, textColor: textColor, appTheme: appTheme)
-                        .font(Font.energyAmount)
+                    VStack {
+                        EnergyAmountView(amount: amount, decimalPlaces: appTheme.value.decimalPlaces, backgroundColor: lineColor, textColor: textColor, appTheme: appTheme)
+                            .font(.body.bold())
+                    }
                 }
             } else {
                 Line()

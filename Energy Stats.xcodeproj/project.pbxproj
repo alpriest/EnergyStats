@@ -71,7 +71,6 @@
 		417153E429F2BCD700639A7B /* GraphHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417153E329F2BCD700639A7B /* GraphHeaderView.swift */; };
 		417153E629F2BD3300639A7B /* LoadState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417153E529F2BD3300639A7B /* LoadState.swift */; };
 		417153E829F2D80C00639A7B /* Date+compare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417153E729F2D80C00639A7B /* Date+compare.swift */; };
-		4171853E29FE557600D18CDD /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171853D29FE557600D18CDD /* Styles.swift */; };
 		4171854229FFCF2500D18CDD /* String+MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171854129FFCF2500D18CDD /* String+MD5.swift */; };
 		4171854429FFCF9500D18CDD /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171854329FFCF9500D18CDD /* Color+Hex.swift */; };
 		417185462A004FA900D18CDD /* VariablesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417185452A004FA900D18CDD /* VariablesResponse.swift */; };
@@ -222,7 +221,6 @@
 		417153E329F2BCD700639A7B /* GraphHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphHeaderView.swift; sourceTree = "<group>"; };
 		417153E529F2BD3300639A7B /* LoadState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadState.swift; sourceTree = "<group>"; };
 		417153E729F2D80C00639A7B /* Date+compare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+compare.swift"; sourceTree = "<group>"; };
-		4171853D29FE557600D18CDD /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 		4171854129FFCF2500D18CDD /* String+MD5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+MD5.swift"; sourceTree = "<group>"; };
 		4171854329FFCF9500D18CDD /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
 		417185452A004FA900D18CDD /* VariablesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariablesResponse.swift; sourceTree = "<group>"; };
@@ -338,7 +336,6 @@
 				416318BD29DDD80E00C2C285 /* View+Copy.swift */,
 				417153E729F2D80C00639A7B /* Date+compare.swift */,
 				41C0B43329F96D3600CA9462 /* LocalizedString.swift */,
-				4171853D29FE557600D18CDD /* Styles.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -868,7 +865,6 @@
 				417185482A0051CA00D18CDD /* GraphVariableChooserView.swift in Sources */,
 				41E4B31528DB77E8003F7F47 /* GridPowerView.swift in Sources */,
 				417153E429F2BCD700639A7B /* GraphHeaderView.swift in Sources */,
-				4171853E29FE557600D18CDD /* Styles.swift in Sources */,
 				4130364929B86F66006B5CE9 /* BatterySettingsView.swift in Sources */,
 				4141B20228D871B900B60157 /* ContentView.swift in Sources */,
 				417153E829F2D80C00639A7B /* Date+compare.swift in Sources */,
@@ -1135,7 +1131,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.18;
+				MARKETING_VERSION = 1.19;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1170,7 +1166,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.18;
+				MARKETING_VERSION = 1.19;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
