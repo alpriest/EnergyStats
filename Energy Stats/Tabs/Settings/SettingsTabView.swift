@@ -122,7 +122,7 @@ struct SettingsTabView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsTabView(
             viewModel: SettingsTabViewModel(
-                userManager: UserManager(networking: DemoNetworking(), store: KeychainStore(), configManager: PreviewConfigManager()),
+                userManager: .preview(),
                 config: PreviewConfigManager()),
             configManager: PreviewConfigManager())
     }

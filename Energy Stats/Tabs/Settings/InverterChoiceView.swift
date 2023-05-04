@@ -17,7 +17,7 @@ struct InverterChoiceView: View {
                 content: {
                     Picker("Inverter", selection: $viewModel.selectedDeviceID) {
                         ForEach(viewModel.devices, id: \.deviceID) { device in
-                            Text(device.deviceID)
+                            Text(device.deviceDisplayName)
                                 .tag(device.deviceID)
                         }
                     }
@@ -34,7 +34,7 @@ struct InverterChoiceView: View {
 struct InverterChoiceView_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = SettingsTabViewModel(
-            userManager: UserManager(networking: DemoNetworking(), store: KeychainStore(), configManager: PreviewConfigManager()),
+            userManager: .preview(),
             config: PreviewConfigManager()
         )
 

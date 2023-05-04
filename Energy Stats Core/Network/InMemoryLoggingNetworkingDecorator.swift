@@ -17,6 +17,16 @@ public class InMemoryLoggingNetworkStore: ObservableObject {
     public var variables: NetworkOperation<VariablesResponse>?
 
     public init() {}
+
+    public func logout() {
+        reportResponse = nil
+        batteryResponse = nil
+        batterySettingsResponse = nil
+        rawResponse = nil
+        deviceListResponse = nil
+        addressBookResponse = nil
+        variables = nil
+    }
 }
 
 public struct NetworkOperation<T: Decodable> {

@@ -68,7 +68,7 @@ struct BatterySettingsView_Previews: PreviewProvider {
     static var previews: some View {
         Form {
             BatterySettingsView(viewModel: SettingsTabViewModel(
-                userManager: UserManager(networking: DemoNetworking(), store: KeychainStore(), configManager: PreviewConfigManager()),
+                userManager: .preview(),
                 config: PreviewConfigManager())
             )
         }

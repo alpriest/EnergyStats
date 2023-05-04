@@ -19,6 +19,7 @@ struct ContentView: View {
             do {
                 try await configManager.fetchFirmwareVersions()
                 try await configManager.fetchVariables()
+
                 Task { @MainActor in
                     state = .inactive
                 }
@@ -44,7 +45,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView(
-            loginManager: UserManager(networking: DemoNetworking(), store: KeychainStore(), configManager: PreviewConfigManager()),
+            loginManager: .preview(),
             network: DemoNetworking(),
             configManager: PreviewConfigManager()
         )

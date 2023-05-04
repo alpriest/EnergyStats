@@ -17,7 +17,7 @@ struct Energy_StatsApp: App {
         let network = NetworkFacade(network: Network(credentials: keychainStore, config: config, store: store),
                                     config: config)
         let configManager = ConfigManager(networking: network, config: config)
-        let loginManager = UserManager(networking: network, store: keychainStore, configManager: configManager)
+        let loginManager = UserManager(networking: network, store: keychainStore, configManager: configManager, networkCache: store)
 
         return WindowGroup {
             if isRunningTests() {

@@ -37,9 +37,16 @@ struct DebugDataView: View {
                 }
                 NavigationLink("Device List") {
                     ResponseDebugView<PagedDeviceListResponse>(
-                        title: "Battery",
+                        title: "Device List",
                         missing: "Device list is only fetched and recached on login, logout to see the data response.",
                         mapper: { $0.deviceListResponse }
+                    )
+                }
+                NavigationLink("Firmware Versions") {
+                    ResponseDebugView<AddressBookResponse>(
+                        title: "Firmware Versions",
+                        missing: "Device list is only fetched and recached on login, logout to see the data response.",
+                        mapper: { $0.addressBookResponse }
                     )
                 }
             }, footer: {

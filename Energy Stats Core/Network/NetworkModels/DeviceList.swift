@@ -35,6 +35,7 @@ public struct PagedDeviceListResponse: Decodable, Hashable {
         public let deviceSN: String
         public let hasBattery: Bool
         public let hasPV: Bool
+        public let deviceType: String
     }
 }
 
@@ -42,15 +43,22 @@ struct DeviceList: Codable {
     let devices: [Device]
 }
 
-public struct Device: Codable, Hashable {
+public struct Device: Codable, Hashable, Identifiable {
     public let plantName: String
     public let deviceID: String
     public let deviceSN: String
     public let hasPV: Bool
     public let battery: Battery?
+    public let deviceType: String?
 
     public struct Battery: Codable, Hashable {
         let capacity: String?
         let minSOC: String?
+    }
+
+    public var id: String { deviceID }
+
+    public var deviceDisplayName: String {
+        deviceType ?? "\(deviceID) Re-login to update"
     }
 }

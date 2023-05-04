@@ -30,10 +30,11 @@ struct HomePowerFlowView: View {
             SolarPowerView(appTheme: appTheme, solar: viewModel.solar)
                 .frame(width: powerViewWidth)
 
-            InverterView()
+            InverterView(viewModel: InverterViewModel(configManager: configManager))
                 .frame(height: 2)
                 .padding(.horizontal, 14 + powerViewWidth / 2 - 2)
                 .padding(.vertical, 1)
+                .zIndex(1)
 
             HStack {
                 BatteryPowerView(viewModel: BatteryPowerViewModel(configManager: configManager, batteryStateOfCharge: viewModel.batteryStateOfCharge, batteryChargekWH: viewModel.battery, temperature: viewModel.batteryTemperature), iconFooterSize: $iconFooterSize, appTheme: appTheme)

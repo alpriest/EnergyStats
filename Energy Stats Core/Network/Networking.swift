@@ -50,7 +50,7 @@ public class Network: Networking {
     }
 
     public func verifyCredentials(username: String, hashedPassword: String) async throws {
-        _ = try await fetchLoginToken(username: username, hashedPassword: hashedPassword)
+        token = try await fetchLoginToken(username: username, hashedPassword: hashedPassword)
     }
 
     public func ensureHasToken() async {

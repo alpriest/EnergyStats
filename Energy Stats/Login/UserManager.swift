@@ -14,13 +14,15 @@ class UserManager: ObservableObject {
     private let configManager: ConfigManager
     private let store: KeychainStoring
     private var cancellables = Set<AnyCancellable>()
+    private let networkCache: InMemoryLoggingNetworkStore
     @MainActor @Published var state = LoadState.inactive
     @MainActor @Published var isLoggedIn: Bool = false
 
-    init(networking: Networking, store: KeychainStoring, configManager: ConfigManager) {
+    init(networking: Networking, store: KeychainStoring, configManager: ConfigManager, networkCache: InMemoryLoggingNetworkStore) {
         self.networking = networking
         self.store = store
         self.configManager = configManager
+        self.networkCache = networkCache
 
         self.store.hasCredentials
             .sink { hasCredentials in
@@ -77,6 +79,7 @@ class UserManager: ObservableObject {
     func logout() {
         store.logout()
         configManager.logout()
+        networkCache.logout()
         state = .inactive
     }
 }

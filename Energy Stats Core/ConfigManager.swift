@@ -14,11 +14,16 @@ public enum RefreshFrequency: Int {
     case FIVE_MINUTES = 5
 }
 
+public extension Notification.Name {
+    static let deviceChanged = Notification.Name(rawValue: "DeviceChanged")
+}
+
 public protocol ConfigManaging {
     func findDevices() async throws
     func fetchFirmwareVersions() async throws
     func fetchVariables() async throws
     func logout()
+    func select(device: Device)
     var minSOC: Double { get }
     var batteryCapacity: String { get set }
     var batteryCapacityW: Int { get }
@@ -89,7 +94,8 @@ public class ConfigManager: ConfigManaging {
                 deviceID: device.deviceID,
                 deviceSN: device.deviceSN,
                 hasPV: device.hasPV,
-                battery: device.hasBattery ? Device.Battery(capacity: batteryCapacity, minSOC: minSOC) : nil
+                battery: device.hasBattery ? Device.Battery(capacity: batteryCapacity, minSOC: minSOC) : nil,
+                deviceType: device.deviceType
             )
         }
         selectedDeviceID = devices?.first?.deviceID
@@ -118,6 +124,11 @@ public class ConfigManager: ConfigManaging {
         config.isDemoUser = false
     }
 
+    public func select(device: Device) {
+        selectedDeviceID = device.deviceID
+        NotificationCenter.default.post(name: .deviceChanged, object: nil)
+    }
+
     public private(set) var firmwareVersions: DeviceFirmwareVersion? = nil
 
     public var minSOC: Double { Double(currentDevice?.battery?.minSOC ?? "0.2") ?? 0.0 }
@@ -127,7 +138,14 @@ public class ConfigManager: ConfigManaging {
         set {
             devices = devices?.map {
                 if $0.deviceID == currentDevice?.deviceID, let battery = $0.battery {
-                    return Device(plantName: $0.plantName, deviceID: $0.deviceID, deviceSN: $0.deviceSN, hasPV: $0.hasPV, battery: Device.Battery(capacity: newValue, minSOC: battery.minSOC))
+                    return Device(
+                        plantName: $0.plantName,
+                        deviceID: $0.deviceID,
+                        deviceSN: $0.deviceSN,
+                        hasPV: $0.hasPV,
+                        battery: Device.Battery(capacity: newValue, minSOC: battery.minSOC),
+                        deviceType: $0.deviceType
+                    )
                 } else {
                     return $0
                 }

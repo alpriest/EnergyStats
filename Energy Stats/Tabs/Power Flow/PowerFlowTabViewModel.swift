@@ -5,9 +5,9 @@
 //  Created by Alistair Priest on 06/09/2022.
 //
 
+import Energy_Stats_Core
 import Foundation
 import UIKit
-import Energy_Stats_Core
 
 class PowerFlowTabViewModel: ObservableObject {
     private let network: Networking
@@ -44,6 +44,7 @@ class PowerFlowTabViewModel: ObservableObject {
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.willResignActiveNotification), name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.deviceChanged), name: .deviceChanged, object: nil)
     }
 
     func startTimer() async {
@@ -61,6 +62,7 @@ class PowerFlowTabViewModel: ObservableObject {
     func timerFired() async {
         guard self.isLoading == false else { return }
 
+        await self.timer.stop()
         self.isLoading = true
         defer { isLoading = false }
 
@@ -75,7 +77,7 @@ class PowerFlowTabViewModel: ObservableObject {
     @MainActor
     func loadData() async {
         do {
-            if configManager.currentDevice == nil {
+            if self.configManager.currentDevice == nil {
                 try await self.configManager.findDevices()
             }
 
@@ -92,14 +94,14 @@ class PowerFlowTabViewModel: ObservableObject {
             await self.network.ensureHasToken()
 
             let graphVariables = [configManager.variables.named("feedinPower"),
-                                  configManager.variables.named("gridConsumptionPower"),
-                                  configManager.variables.named("generationPower"),
-                                  configManager.variables.named("loadsPower"),
-                                  configManager.variables.named("batChargePower"),
-                                  configManager.variables.named("batDischargePower")].compactMap { $0 }
+                                  self.configManager.variables.named("gridConsumptionPower"),
+                                  self.configManager.variables.named("generationPower"),
+                                  self.configManager.variables.named("loadsPower"),
+                                  self.configManager.variables.named("batChargePower"),
+                                  self.configManager.variables.named("batDischargePower")].compactMap { $0 }
             let raws = try await self.network.fetchRaw(deviceID: currentDevice.deviceID, variables: graphVariables, queryDate: .current())
             let currentViewModel = CurrentStatusViewModel(raws: raws)
-            let battery = currentDevice.battery != nil ? BatteryViewModel(from: try await self.network.fetchBattery(deviceID: currentDevice.deviceID)) : .noBattery
+            let battery = try currentDevice.battery != nil ? BatteryViewModel(from: await self.network.fetchBattery(deviceID: currentDevice.deviceID)) : .noBattery
             let summary = HomePowerFlowViewModel(solar: currentViewModel.currentSolarPower,
                                                  battery: battery.chargePower,
                                                  home: currentViewModel.currentHomeConsumption,
@@ -114,7 +116,7 @@ class PowerFlowTabViewModel: ObservableObject {
             self.calculateTicks(historicalViewModel: currentViewModel)
             self.updateState = " "
         } catch {
-            await stopTimer()
+            await self.stopTimer()
             self.state = .failed(error, error.localizedDescription)
         }
     }
@@ -130,19 +132,28 @@ class PowerFlowTabViewModel: ObservableObject {
                 self.totalTicks = 300
             } else {
                 self.totalTicks = Int(300 - (Date().timeIntervalSince(historicalViewModel.lastUpdate)) + 10)
-                if totalTicks <= 0 {
-                    totalTicks = 300
+                if self.totalTicks <= 0 {
+                    self.totalTicks = 300
                 }
             }
         }
     }
 
-    @objc func didBecomeActiveNotification() {
+    @objc
+    func didBecomeActiveNotification() {
         Task { await self.timerFired() }
     }
 
-    @objc func willResignActiveNotification() {
+    @objc
+    func willResignActiveNotification() {
         Task { await self.stopTimer() }
+    }
+
+    @objc
+    func deviceChanged() {
+        Task { @MainActor in
+            await self.timerFired()
+        }
     }
 
     func sleep() async {
