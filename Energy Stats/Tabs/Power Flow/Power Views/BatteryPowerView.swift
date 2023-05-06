@@ -17,7 +17,7 @@ struct BatteryPowerViewModel {
     private let configManager: ConfigManaging
 
     init(configManager: ConfigManaging, batteryStateOfCharge: Double, batteryChargekWH: Double, temperature: Double) {
-        self.actualBatteryStateOfCharge = batteryStateOfCharge
+        actualBatteryStateOfCharge = batteryStateOfCharge
         self.batteryChargekWH = batteryChargekWH
         self.temperature = temperature
         self.configManager = configManager
@@ -42,6 +42,10 @@ struct BatteryPowerViewModel {
 
     var batteryStateOfCharge: Double {
         calculator.effectiveBatteryStateOfCharge(batteryStateOfCharge: actualBatteryStateOfCharge, includeUnusableCapacity: !configManager.showUsableBatteryOnly)
+    }
+
+    var hasBattery: Bool {
+        configManager.hasBattery
     }
 }
 

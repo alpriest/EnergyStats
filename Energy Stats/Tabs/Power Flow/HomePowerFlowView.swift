@@ -37,11 +37,12 @@ struct HomePowerFlowView: View {
                 .zIndex(1)
 
             HStack {
-                BatteryPowerView(viewModel: BatteryPowerViewModel(configManager: configManager, batteryStateOfCharge: viewModel.batteryStateOfCharge, batteryChargekWH: viewModel.battery, temperature: viewModel.batteryTemperature), iconFooterSize: $iconFooterSize, appTheme: appTheme)
-                    .frame(width: powerViewWidth)
-                    .opacity(viewModel.hasBattery ? 1.0 : 0.5)
+                if viewModel.hasBattery {
+                    BatteryPowerView(viewModel: BatteryPowerViewModel(configManager: configManager, batteryStateOfCharge: viewModel.batteryStateOfCharge, batteryChargekWH: viewModel.battery, temperature: viewModel.batteryTemperature), iconFooterSize: $iconFooterSize, appTheme: appTheme)
+                        .frame(width: powerViewWidth)
 
-                Spacer()
+                    Spacer()
+                }
 
                 HomePowerView(amount: viewModel.home, iconFooterSize: iconFooterSize, appTheme: appTheme)
                     .frame(width: powerViewWidth)

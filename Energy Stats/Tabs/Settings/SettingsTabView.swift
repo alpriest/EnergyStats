@@ -17,7 +17,10 @@ struct SettingsTabView: View {
             Form {
                 InverterChoiceView(viewModel: InverterChoiceViewModel(configManager: configManager))
                 InverterFirmwareVersionsView(config: configManager)
-                BatterySettingsView(viewModel: viewModel)
+
+                if viewModel.hasBattery {
+                    BatterySettingsView(viewModel: viewModel)
+                }
 
                 Section(
                     content: {
@@ -118,6 +121,7 @@ struct SettingsTabView: View {
     }
 }
 
+#if DEBUG
 struct SettingsTabView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsTabView(
@@ -127,3 +131,4 @@ struct SettingsTabView_Previews: PreviewProvider {
             configManager: PreviewConfigManager())
     }
 }
+#endif

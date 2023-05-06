@@ -42,6 +42,7 @@ public protocol ConfigManaging {
     var showInW: Bool { get set }
     var variables: [RawVariable] { get }
     var currentDevice: CurrentValueSubject<Device?, Never> { get }
+    var hasBattery: Bool { get }
 }
 
 public class ConfigManager: ConfigManaging {
@@ -161,6 +162,10 @@ public class ConfigManager: ConfigManaging {
                 }
             }
         }
+    }
+
+    public var hasBattery: Bool {
+        currentDevice.value?.battery != nil
     }
 
     public var batteryCapacityW: Int {

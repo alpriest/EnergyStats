@@ -64,6 +64,8 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
+    @Published var hasBattery: Bool
+
     private var config: ConfigManaging
     private let userManager: UserManager
     private var cancellables = Set<AnyCancellable>()
@@ -81,6 +83,7 @@ class SettingsTabViewModel: ObservableObject {
         showInW = config.showInW
         minSOC = config.minSOC
         batteryCapacity = String(describing: config.batteryCapacity)
+        hasBattery = config.hasBattery
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }
@@ -88,6 +91,7 @@ class SettingsTabViewModel: ObservableObject {
             Task { @MainActor in
                 self.minSOC = config.minSOC
                 self.batteryCapacity = String(describing: config.batteryCapacity)
+                self.hasBattery = config.hasBattery
             }
         }.store(in: &cancellables)
     }

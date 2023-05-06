@@ -64,6 +64,7 @@ struct BatterySettingsView: View {
     }
 }
 
+#if DEBUG
 struct BatterySettingsView_Previews: PreviewProvider {
     static var previews: some View {
         Form {
@@ -74,3 +75,4 @@ struct BatterySettingsView_Previews: PreviewProvider {
         }
     }
 }
+#endif

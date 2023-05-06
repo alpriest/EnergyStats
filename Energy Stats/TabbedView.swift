@@ -63,8 +63,10 @@ struct TabbedView: View {
     }
 }
 
+#if DEBUG
 struct TabbedView_Previews: PreviewProvider {
     static var previews: some View {
         TabbedView(networking: DemoNetworking(), userManager:.preview(), configManager: PreviewConfigManager())
     }
 }
+#endif
