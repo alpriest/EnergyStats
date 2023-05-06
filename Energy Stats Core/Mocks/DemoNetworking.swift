@@ -23,17 +23,27 @@ public class DemoNetworking: Networking {
     }
 
     public func fetchBattery(deviceID: String) async throws -> BatteryResponse {
-        BatteryResponse(power: 0.28, soc: 76, residual: 7550, temperature: 17.3)
+        switch deviceID {
+        case "f3000-deviceid":
+            return BatteryResponse(power: 0.28, soc: 76, residual: 7550, temperature: 17.3)
+        default:
+            return BatteryResponse(power: 0.78, soc: 46, residual: 17510, temperature: 19.3)
+        }
     }
 
     public func fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse {
-        BatterySettingsResponse(minSoc: 20)
+        switch deviceSN {
+        case "1234":
+            return BatterySettingsResponse(minSoc: 20)
+        default:
+            return BatterySettingsResponse(minSoc: 15)
+        }
     }
 
     public func fetchDeviceList() async throws -> PagedDeviceListResponse {
         PagedDeviceListResponse(currentPage: 1, pageSize: 10, total: 1, devices: [
-            PagedDeviceListResponse.Device(plantName: "demo-device-1", deviceID: "abcdef1abcdef1abcdef1", deviceSN: "1234", hasBattery: true, hasPV: true, deviceType: "F3000"),
-            PagedDeviceListResponse.Device(plantName: "demo-device-2", deviceID: "abcdef2abcdef2abcdef2", deviceSN: "5678", hasBattery: true, hasPV: true, deviceType: "H1-3.7-E")
+            PagedDeviceListResponse.Device(plantName: "demo-device-1", deviceID: "f3000-deviceid", deviceSN: "1234", hasBattery: true, hasPV: true, deviceType: "F3000"),
+            PagedDeviceListResponse.Device(plantName: "demo-device-2", deviceID: "h1-deviceid", deviceSN: "5678", hasBattery: true, hasPV: true, deviceType: "H1-3.7-E")
         ])
     }
 
@@ -128,6 +138,6 @@ public class MockConfig: Config {
 public class PreviewConfigManager: ConfigManager {
     public convenience init() {
         self.init(networking: DemoNetworking(), config: MockConfig())
-        Task { try await findDevices() }
+        Task { try await fetchDevices() }
     }
 }

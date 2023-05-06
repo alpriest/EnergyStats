@@ -16,7 +16,7 @@ final class GraphTabViewTests: XCTestCase {
     func test_when_user_arrives() async throws {
         let networking = MockNetworking(throwOnCall: false, dateProvider: { Date(timeIntervalSince1970: 1664127352) })
         let configManager = ConfigManager(networking: networking, config: MockConfig())
-        try await configManager.findDevices()
+        try await configManager.fetchDevices()
         try await configManager.fetchVariables()
         let viewModel = GraphTabViewModel(
             networking,

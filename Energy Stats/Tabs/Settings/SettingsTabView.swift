@@ -15,7 +15,7 @@ struct SettingsTabView: View {
     var body: some View {
         NavigationView {
             Form {
-                InverterChoiceView(viewModel: viewModel)
+                InverterChoiceView(viewModel: InverterChoiceViewModel(configManager: configManager))
                 InverterFirmwareVersionsView(config: configManager)
                 BatterySettingsView(viewModel: viewModel)
 

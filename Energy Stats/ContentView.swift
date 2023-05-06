@@ -23,6 +23,11 @@ struct ContentView: View {
                 Task { @MainActor in
                     state = .inactive
                 }
+            } catch let error as ConfigManager.NoDeviceFoundError {
+                loginManager.logout()
+                Task { @MainActor in
+                    state = .error(error, String(key: .dataFetchError))
+                }
             } catch let error {
                 Task { @MainActor in
                     state = .error(error, String(key: .couldNotLogin))
@@ -37,7 +42,7 @@ struct ContentView: View {
                 .loadable($state, retry: fetchConfig)
                 .task { fetchConfig() }
         } else {
-            LoginView(loginManager: loginManager)
+            LoginView(userManager: loginManager)
         }
     }
 }

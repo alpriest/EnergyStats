@@ -21,7 +21,7 @@ final class GraphTabViewModelTests: XCTestCase {
         let configManager = ConfigManager(networking: networking, config: config)
         sut = GraphTabViewModel(networking, configManager: configManager, { Date(timeIntervalSince1970: 1669146973) })
 
-        try await configManager.findDevices()
+        try await configManager.fetchDevices()
     }
 
     func test_initial_values() {

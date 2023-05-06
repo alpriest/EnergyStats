@@ -5,11 +5,29 @@
 //  Created by Alistair Priest on 08/03/2023.
 //
 
-import SwiftUI
 import Energy_Stats_Core
+import SwiftUI
+
+class InverterChoiceViewModel: ObservableObject {
+    @Published var selectedDeviceID: String {
+        didSet {
+            configManager.select(device: devices.first(where: { $0.deviceID == selectedDeviceID }))
+        }
+    }
+
+    @Published var devices: [Device]
+
+    private let configManager: ConfigManaging
+
+    init(configManager: ConfigManaging) {
+        self.configManager = configManager
+        self.selectedDeviceID = configManager.selectedDeviceID ?? ""
+        self.devices = configManager.devices ?? []
+    }
+}
 
 struct InverterChoiceView: View {
-    @ObservedObject var viewModel: SettingsTabViewModel
+    @ObservedObject var viewModel: InverterChoiceViewModel
 
     var body: some View {
         if viewModel.devices.count > 1 {
@@ -21,8 +39,6 @@ struct InverterChoiceView: View {
                                 .tag(device.deviceID)
                         }
                     }
-                    .pickerStyle(.menu)
-                    .labelsHidden()
                 },
                 header: { Text("Device selection") },
                 footer: { Text("Selected device and related battery information will be displayed on the main page") }
@@ -33,9 +49,8 @@ struct InverterChoiceView: View {
 
 struct InverterChoiceView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = SettingsTabViewModel(
-            userManager: .preview(),
-            config: PreviewConfigManager()
+        let viewModel = InverterChoiceViewModel(
+            configManager: PreviewConfigManager()
         )
 
         return Form {

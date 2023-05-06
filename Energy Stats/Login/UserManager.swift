@@ -38,24 +38,18 @@ class UserManager: ObservableObject {
 
     @MainActor
     func login(username: String, password: String) async {
-        if username == "demo", password == "user" {
-            configManager.isDemoUser = true
-            do {
-                try store.store(username: "demo", hashedPassword: "user")
-            } catch let error {
-                state = .error(error, String(key: .couldNotLogin))
-            }
-            return
-        }
-
         do {
             state = .active(String(key: .loading))
-
             guard let hashedPassword = password.md5() else { throw NSError(domain: "md5", code: 0) }
 
-            try await networking.verifyCredentials(username: username, hashedPassword: hashedPassword)
+            if username == "demo", password == "user" {
+                configManager.isDemoUser = true
+            } else {
+                try await networking.verifyCredentials(username: username, hashedPassword: hashedPassword)
+            }
+
             try store.store(username: username, hashedPassword: hashedPassword, updateHasCredentials: false)
-            try await configManager.findDevices()
+            try await configManager.fetchDevices()
             try await configManager.fetchFirmwareVersions()
             try await configManager.fetchVariables()
             store.updateHasCredentials()

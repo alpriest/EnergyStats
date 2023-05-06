@@ -5,6 +5,7 @@
 //  Created by Alistair Priest on 06/09/2022.
 //
 
+import Combine
 import Energy_Stats_Core
 import Foundation
 import UIKit
@@ -18,6 +19,7 @@ class PowerFlowTabViewModel: ObservableObject {
     @MainActor @Published private(set) var state: State = .unloaded
     private(set) var isLoading = false
     private var totalTicks = 60
+    private var cancellable: AnyCancellable?
 
     enum State: Equatable {
         case unloaded
@@ -44,7 +46,6 @@ class PowerFlowTabViewModel: ObservableObject {
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.willResignActiveNotification), name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.deviceChanged), name: .deviceChanged, object: nil)
     }
 
     func startTimer() async {
@@ -60,6 +61,8 @@ class PowerFlowTabViewModel: ObservableObject {
     }
 
     func timerFired() async {
+        addDeviceChangeObserver()
+
         guard self.isLoading == false else { return }
 
         await self.timer.stop()
@@ -70,6 +73,14 @@ class PowerFlowTabViewModel: ObservableObject {
         await self.startTimer()
     }
 
+    func addDeviceChangeObserver() {
+        guard cancellable == nil else { return }
+
+        cancellable = configManager.currentDevice.sink { _ in
+            Task { await self.timerFired() }
+        }
+    }
+
     func stopTimer() async {
         await self.timer.stop()
     }
@@ -77,11 +88,11 @@ class PowerFlowTabViewModel: ObservableObject {
     @MainActor
     func loadData() async {
         do {
-            if self.configManager.currentDevice == nil {
-                try await self.configManager.findDevices()
+            if self.configManager.currentDevice.value == nil {
+                try await self.configManager.fetchDevices()
             }
 
-            guard let currentDevice = configManager.currentDevice else {
+            guard let currentDevice = configManager.currentDevice.value else {
                 self.state = .failed(nil, "No devices found. Please logout and try logging in again.")
                 return
             }

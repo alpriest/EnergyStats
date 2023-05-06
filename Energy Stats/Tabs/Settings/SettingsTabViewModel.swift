@@ -5,6 +5,7 @@
 //  Created by Alistair Priest on 05/03/2023.
 //
 
+import Combine
 import Energy_Stats_Core
 import SwiftUI
 
@@ -51,12 +52,6 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
-    @Published var selectedDeviceID: String {
-        didSet {
-            config.selectedDeviceID = selectedDeviceID
-        }
-    }
-
     @Published var showUsableBatteryOnly: Bool {
         didSet {
             config.showUsableBatteryOnly = showUsableBatteryOnly
@@ -71,25 +66,34 @@ class SettingsTabViewModel: ObservableObject {
 
     private var config: ConfigManaging
     private let userManager: UserManager
+    private var cancellables = Set<AnyCancellable>()
 
     init(userManager: UserManager, config: ConfigManaging) {
         self.userManager = userManager
         self.config = config
         showColouredLines = config.showColouredLines
-        batteryCapacity = String(describing: config.batteryCapacity)
         showBatteryTemperature = config.showBatteryTemperature
         refreshFrequency = config.refreshFrequency
         decimalPlaces = config.decimalPlaces
         showSunnyBackground = config.showSunnyBackground
-        selectedDeviceID = config.selectedDeviceID ?? ""
         showBatteryEstimate = config.showBatteryEstimate
         showUsableBatteryOnly = config.showUsableBatteryOnly
         showInW = config.showInW
+        minSOC = config.minSOC
+        batteryCapacity = String(describing: config.batteryCapacity)
+
+        config.currentDevice.sink { [weak self] _ in
+            guard let self else { return }
+
+            Task { @MainActor in
+                self.minSOC = config.minSOC
+                self.batteryCapacity = String(describing: config.batteryCapacity)
+            }
+        }.store(in: &cancellables)
     }
 
-    var minSOC: Double { config.minSOC }
+    @Published var minSOC: Double
     var username: String { userManager.getUsername() ?? "" }
-    var devices: [Device] { config.devices ?? [] }
 
     @MainActor
     func logout() {

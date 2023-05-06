@@ -15,6 +15,7 @@ struct LocalizedString {
         case empty = "Empty"
         case full = "Full"
         case nextUpdateIn = "Next update in"
+        case dataFetchError = "Something went wrong and no device was found. Please try logging in again."
     }
 }
 

@@ -52,7 +52,7 @@ class InverterViewModel: ObservableObject {
     }
 
     var deviceType: String {
-        configManager.currentDevice?.deviceType ?? ""
+        configManager.currentDevice.value?.deviceType ?? ""
     }
 }
 

@@ -48,11 +48,15 @@ struct ErrorAlertView: View {
                 }.buttonStyle(.bordered)
             }
             .frame(height: 200)
-            .alert(message, isPresented: $errorShowing) {
+            .alert(detailedMessage, isPresented: $errorShowing) {
                 Button("OK") {}
             }
             .onAppear { ripple = true }
         }
+    }
+
+    var detailedMessage: String {
+        "\(message)\n\n\(cause?.localizedDescription ?? "")"
     }
 
     var inlineMessage: String {

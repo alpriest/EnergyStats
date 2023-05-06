@@ -11,7 +11,7 @@ import Energy_Stats_Core
 struct LoginView: View {
     @State private var username: String = ""
     @State private var password: String = ""
-    @ObservedObject var loginManager: UserManager
+    @ObservedObject var userManager: UserManager
 
     var body: some View {
         VStack {
@@ -32,28 +32,33 @@ struct LoginView: View {
 
             HStack {
                 Button("Try demo") {
-                    Task { await loginManager.login(username: "demo", password: "user") }
+                    Task { await userManager.login(username: "demo", password: "user") }
                 }
                 .accessibilityIdentifier("try_demo")
                 .padding()
                 .buttonStyle(.bordered)
 
                 Button("Log me in") {
-                    Task { await loginManager.login(username: username, password: password) }
+                    Task { await userManager.login(username: username, password: password) }
                 }
+                .disabled(loginDisabled)
                 .padding()
                 .buttonStyle(.borderedProminent)
             }
         }
         .padding()
-        .loadable($loginManager.state) {
-            loginManager.state = .inactive
+        .loadable($userManager.state) {
+            userManager.state = .inactive
         }
+    }
+
+    var loginDisabled: Bool {
+        username.isEmpty || password.isEmpty
     }
 }
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(loginManager: .preview())
+        LoginView(userManager: .preview())
     }
 }

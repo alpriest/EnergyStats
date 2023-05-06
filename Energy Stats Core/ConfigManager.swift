@@ -19,11 +19,11 @@ public extension Notification.Name {
 }
 
 public protocol ConfigManaging {
-    func findDevices() async throws
+    func fetchDevices() async throws
     func fetchFirmwareVersions() async throws
     func fetchVariables() async throws
     func logout()
-    func select(device: Device)
+    func select(device: Device?)
     var minSOC: Double { get }
     var batteryCapacity: String { get set }
     var batteryCapacityW: Int { get }
@@ -37,20 +37,21 @@ public protocol ConfigManaging {
     var decimalPlaces: Int { get set }
     var showSunnyBackground: Bool { get set }
     var devices: [Device]? { get set }
-    var currentDevice: Device? { get }
-    var selectedDeviceID: String? { get set }
+    var selectedDeviceID: String? { get }
     var firmwareVersions: DeviceFirmwareVersion? { get }
     var showInW: Bool { get set }
     var variables: [RawVariable] { get }
+    var currentDevice: CurrentValueSubject<Device?, Never> { get }
 }
 
 public class ConfigManager: ConfigManaging {
     private let networking: Networking
     private var config: Config
     public var appTheme: CurrentValueSubject<AppTheme, Never>
+    public var currentDevice = CurrentValueSubject<Device?, Never>(nil)
     public private(set) var variables: [RawVariable] = []
 
-    struct NoDeviceFoundError: Error {}
+    public struct NoDeviceFoundError: Error {}
 
     public init(networking: Networking, config: Config) {
         self.networking = networking
@@ -68,25 +69,32 @@ public class ConfigManager: ConfigManaging {
         )
     }
 
-    public func findDevices() async throws {
+    public func fetchDevices() async throws {
         let deviceList = try await networking.fetchDeviceList()
 
         guard deviceList.devices.count > 0 else {
             throw NoDeviceFoundError()
         }
 
-        devices = try await deviceList.devices.asyncMap { device in
+        let newDevices = try await deviceList.devices.asyncMap { device in
             let batteryCapacity: String?
             let minSOC: String?
+            let deviceBattery: Device.Battery?
 
             if device.hasBattery {
                 let battery = try await networking.fetchBattery(deviceID: device.deviceID)
                 let batterySettings = try await networking.fetchBatterySettings(deviceSN: device.deviceSN)
-                batteryCapacity = String(Int(battery.residual / (Double(battery.soc) / 100.0)))
+                if battery.soc > 0 {
+                    batteryCapacity = String(Int(battery.residual / (Double(battery.soc) / 100.0)))
+                } else {
+                    batteryCapacity = "0"
+                }
                 minSOC = String(Double(batterySettings.minSoc) / 100.0)
+                deviceBattery = Device.Battery(capacity: batteryCapacity, minSOC: minSOC)
             } else {
                 batteryCapacity = nil
                 minSOC = nil
+                deviceBattery = nil
             }
 
             return Device(
@@ -94,11 +102,12 @@ public class ConfigManager: ConfigManaging {
                 deviceID: device.deviceID,
                 deviceSN: device.deviceSN,
                 hasPV: device.hasPV,
-                battery: device.hasBattery ? Device.Battery(capacity: batteryCapacity, minSOC: minSOC) : nil,
+                battery: deviceBattery,
                 deviceType: device.deviceType
             )
         }
-        selectedDeviceID = devices?.first?.deviceID
+        devices = newDevices
+        select(device: devices?.first)
     }
 
     public func fetchFirmwareVersions() async throws {
@@ -124,20 +133,21 @@ public class ConfigManager: ConfigManaging {
         config.isDemoUser = false
     }
 
-    public func select(device: Device) {
+    public func select(device: Device?) {
+        guard let device else { return }
+
         selectedDeviceID = device.deviceID
-        NotificationCenter.default.post(name: .deviceChanged, object: nil)
     }
 
     public private(set) var firmwareVersions: DeviceFirmwareVersion? = nil
 
-    public var minSOC: Double { Double(currentDevice?.battery?.minSOC ?? "0.2") ?? 0.0 }
+    public var minSOC: Double { Double(currentDevice.value?.battery?.minSOC ?? "0.2") ?? 0.0 }
 
     public var batteryCapacity: String {
-        get { currentDevice?.battery?.capacity ?? "2600" }
+        get { currentDevice.value?.battery?.capacity ?? "2600" }
         set {
             devices = devices?.map {
-                if $0.deviceID == currentDevice?.deviceID, let battery = $0.battery {
+                if $0.deviceID == currentDevice.value?.deviceID, let battery = $0.battery {
                     return Device(
                         plantName: $0.plantName,
                         deviceID: $0.deviceID,
@@ -154,16 +164,15 @@ public class ConfigManager: ConfigManaging {
     }
 
     public var batteryCapacityW: Int {
-        Int(currentDevice?.battery?.capacity ?? "0") ?? 0
-    }
-
-    public var currentDevice: Device? {
-        devices?.first(where: { $0.deviceID == selectedDeviceID }) ?? devices?.first
+        Int(currentDevice.value?.battery?.capacity ?? "0") ?? 0
     }
 
     public var selectedDeviceID: String? {
         get { config.selectedDeviceID }
-        set { config.selectedDeviceID = newValue }
+        set {
+            config.selectedDeviceID = newValue
+            currentDevice.send(devices?.first(where: { $0.deviceID == selectedDeviceID }) ?? devices?.first)
+        }
     }
 
     public var isDemoUser: Bool {
