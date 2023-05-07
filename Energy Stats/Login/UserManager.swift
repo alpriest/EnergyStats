@@ -25,11 +25,8 @@ class UserManager: ObservableObject {
         self.networkCache = networkCache
 
         self.store.hasCredentials
-            .sink { hasCredentials in
-                Task { await MainActor.run { [weak self] in
-                    self?.isLoggedIn = hasCredentials
-                }}
-            }.store(in: &cancellables)
+            .assign(to: \.isLoggedIn, on: self)
+            .store(in: &cancellables)
     }
 
     func getUsername() -> String? {

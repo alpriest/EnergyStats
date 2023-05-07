@@ -21,9 +21,10 @@ final class UserManagerTests: XCTestCase {
     override func setUp() {
         keychainStore = MockKeychainStore()
         config = MockConfig()
-        networking = Network(credentials: keychainStore, config: config, store: InMemoryLoggingNetworkStore())
+        let cache = InMemoryLoggingNetworkStore()
+        networking = Network(credentials: keychainStore, config: config, store: cache)
         configManager = PreviewConfigManager(networking: networking, config: config)
-        sut = UserManager(networking: networking, store: keychainStore, configManager: configManager)
+        sut = UserManager(networking: networking, store: keychainStore, configManager: configManager, networkCache: cache)
     }
 
     func test_isLoggedIn_SetsOnInitialisation() {

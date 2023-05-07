@@ -5,6 +5,7 @@
 //  Created by Alistair Priest on 08/09/2022.
 //
 
+import Combine
 import Energy_Stats_Core
 import Foundation
 import SwiftUI
@@ -81,6 +82,7 @@ class GraphTabViewModel: ObservableObject {
                                         "batDischargePower",
                                         "feedinPower",
                                         "gridConsumptionPower"]
+    private var cancellable: AnyCancellable?
 
     init(_ networking: Networking, configManager: ConfigManaging, _ dateProvider: @escaping () -> Date = { Date() }) {
         self.networking = networking
@@ -88,11 +90,16 @@ class GraphTabViewModel: ObservableObject {
         self.dateProvider = dateProvider
         haptic.prepare()
 
-        graphVariables = configManager.variables.compactMap { variable -> GraphVariable? in
-            guard let variable = configManager.variables.named(variable.variable) else { return nil }
+        cancellable = configManager.currentDevice
+            .map { device in
+                device?.variables.compactMap { variable -> GraphVariable? in
+                    guard let variable = configManager.variables.named(variable.variable) else { return nil }
 
-            return GraphVariable(variable, isSelected: Self.DefaultGraphVariables.contains(variable.variable), enabled: Self.DefaultGraphVariables.contains(variable.variable))
-        }
+                    return GraphVariable(variable, isSelected: Self.DefaultGraphVariables.contains(variable.variable), enabled: Self.DefaultGraphVariables.contains(variable.variable))
+                } ?? []
+            }
+            .receive(on: RunLoop.main)
+            .assign(to: \.graphVariables, on: self)
     }
 
     func load() async {
