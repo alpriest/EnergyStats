@@ -91,30 +91,34 @@ struct SettingsTabView: View {
                             }.buttonStyle(.bordered)
                         }.frame(maxWidth: .infinity)
                     }, footer: {
-                        HStack {
-                            Button(action: {
-                                let url = URL(string: "itms-apps://itunes.apple.com/app/id1644492526?action=write-review")!
-                                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                            }, label: {
-                                Image(systemName: "medal")
-                                Text("Rate this app")
-                                    .multilineTextAlignment(.center)
-                            })
-
-                            Spacer()
-
+                        VStack {
                             HStack {
                                 Button(action: {
-                                    UIApplication.shared.open(URL(string: "mailto:energystatsapp@gmail.com")!)
+                                    let url = URL(string: "itms-apps://itunes.apple.com/app/id1644492526?action=write-review")!
+                                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
                                 }, label: {
-                                    Image(systemName: "envelope")
-                                    Text("Get in touch")
+                                    Image(systemName: "medal")
+                                    Text("Rate this app")
+                                        .multilineTextAlignment(.center)
                                 })
+
+                                Spacer()
+
+                                HStack {
+                                    Button(action: {
+                                        UIApplication.shared.open(URL(string: "mailto:energystatsapp@gmail.com")!)
+                                    }, label: {
+                                        Image(systemName: "envelope")
+                                        Text("Get in touch")
+                                    })
+                                }
                             }
+                            .padding(.top, 88)
+                            .padding(.bottom, 44)
+                            .frame(maxWidth: .infinity)
+
+                            Text("Version ") + Text(viewModel.appVersion)
                         }
-                        .padding(.top, 88)
-                        .padding(.bottom, 44)
-                        .frame(maxWidth: .infinity)
                     })
             }
         }.navigationViewStyle(StackNavigationViewStyle())

@@ -106,4 +106,9 @@ class SettingsTabViewModel: ObservableObject {
     func logout() {
         userManager.logout()
     }
+
+    var appVersion: String {
+        let dictionary = Bundle.main.infoDictionary!
+        return dictionary["CFBundleShortVersionString"] as! String
+    }
 }

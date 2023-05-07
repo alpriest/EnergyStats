@@ -48,6 +48,7 @@ struct InverterFirmwareVersionsView: View {
     }
 }
 
+#if DEBUG
 struct InverterFirmwareVersionsView_Previews: PreviewProvider {
     static var previews: some View {
         Form {
@@ -58,3 +59,4 @@ struct InverterFirmwareVersionsView_Previews: PreviewProvider {
         }
     }
 }
+#endif
