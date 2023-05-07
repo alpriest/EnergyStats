@@ -17,8 +17,9 @@ struct ContentView: View {
     func fetchConfig() {
         Task {
             do {
-                try await configManager.fetchFirmwareVersions()
-                try await configManager.fetchVariables()
+                if configManager.devices?.first(where: { $0.firmware == nil }) != nil {
+                    try await configManager.fetchDevices()
+                }
 
                 Task { @MainActor in
                     state = .inactive

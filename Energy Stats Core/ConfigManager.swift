@@ -20,8 +20,6 @@ public extension Notification.Name {
 
 public protocol ConfigManaging {
     func fetchDevices() async throws
-    func fetchFirmwareVersions() async throws
-    func fetchVariables() async throws
     func logout()
     func select(device: Device?)
     var minSOC: Double { get }
@@ -50,7 +48,6 @@ public class ConfigManager: ConfigManaging {
     private var config: Config
     public var appTheme: CurrentValueSubject<AppTheme, Never>
     public var currentDevice = CurrentValueSubject<Device?, Never>(nil)
-    public private(set) var variables: [RawVariable] = []
 
     public struct NoDeviceFoundError: Error {}
 
@@ -68,6 +65,7 @@ public class ConfigManager: ConfigManaging {
                 showInW: config.showInW
             )
         )
+        self.selectedDeviceID = self.selectedDeviceID
     }
 
     public func fetchDevices() async throws {
@@ -81,6 +79,9 @@ public class ConfigManager: ConfigManaging {
             let batteryCapacity: String?
             let minSOC: String?
             let deviceBattery: Device.Battery?
+
+            let firmware = try await networking.fetchAddressBook(deviceID: device.deviceID)
+            let variables = try await networking.fetchVariables(deviceID: device.deviceID)
 
             if device.hasBattery {
                 let battery = try await networking.fetchBattery(deviceID: device.deviceID)
@@ -104,28 +105,17 @@ public class ConfigManager: ConfigManaging {
                 deviceSN: device.deviceSN,
                 hasPV: device.hasPV,
                 battery: deviceBattery,
-                deviceType: device.deviceType
+                deviceType: device.deviceType,
+                firmware: DeviceFirmwareVersion(
+                    master: firmware.softVersion.master,
+                    slave: firmware.softVersion.slave,
+                    manager: firmware.softVersion.manager
+                ),
+                variables: variables
             )
         }
         devices = newDevices
         select(device: devices?.first)
-    }
-
-    public func fetchFirmwareVersions() async throws {
-        guard let deviceID = config.selectedDeviceID else { throw NoDeviceFoundError() }
-
-        let response = try await networking.fetchAddressBook(deviceID: deviceID)
-        firmwareVersions = DeviceFirmwareVersion(
-            master: response.softVersion.master,
-            slave: response.softVersion.slave,
-            manager: response.softVersion.manager
-        )
-    }
-
-    public func fetchVariables() async throws {
-        guard let deviceID = config.selectedDeviceID else { throw NoDeviceFoundError() }
-
-        variables = try await networking.fetchVariables(deviceID: deviceID)
     }
 
     public func logout() {
@@ -140,9 +130,15 @@ public class ConfigManager: ConfigManaging {
         selectedDeviceID = device.deviceID
     }
 
-    public private(set) var firmwareVersions: DeviceFirmwareVersion? = nil
+    public var firmwareVersions: DeviceFirmwareVersion? {
+        currentDevice.value?.firmware
+    }
 
     public var minSOC: Double { Double(currentDevice.value?.battery?.minSOC ?? "0.2") ?? 0.0 }
+
+    public var variables: [RawVariable] {
+        currentDevice.value?.variables ?? []
+    }
 
     public var batteryCapacity: String {
         get { currentDevice.value?.battery?.capacity ?? "2600" }
@@ -155,7 +151,9 @@ public class ConfigManager: ConfigManaging {
                         deviceSN: $0.deviceSN,
                         hasPV: $0.hasPV,
                         battery: Device.Battery(capacity: newValue, minSOC: battery.minSOC),
-                        deviceType: $0.deviceType
+                        deviceType: $0.deviceType,
+                        firmware: $0.firmware,
+                        variables: $0.variables
                     )
                 } else {
                     return $0

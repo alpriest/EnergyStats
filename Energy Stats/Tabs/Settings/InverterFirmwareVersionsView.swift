@@ -5,16 +5,16 @@
 //  Created by Alistair Priest on 02/04/2023.
 //
 
-import SwiftUI
 import Energy_Stats_Core
+import SwiftUI
 
 struct InverterFirmwareVersionsView: View {
-    let config: ConfigManaging
+    @ObservedObject var viewModel: SettingsTabViewModel
 
     var body: some View {
         Section(
             content: {
-                if let version = config.firmwareVersions {
+                if let version = viewModel.firmwareVersions {
                     HStack {
                         Text("Manager: ") +
                             Text(version.manager)
@@ -29,16 +29,16 @@ struct InverterFirmwareVersionsView: View {
                             Text("Copy to clipboard")
                             Image(systemName: "doc.on.doc")
                         }
-                     }
+                    }
                 }
             },
             header: { Text("Firmware Versions") },
             footer: {
                 VStack(alignment: .leading) {
                     Text("Find out more about firmware versions from the ") +
-                    Text("foxesscommunity.com")
+                        Text("foxesscommunity.com")
                         .foregroundColor(Color.blue) +
-                    Text(" website")
+                        Text(" website")
                 }
                 .onTapGesture {
                     UIApplication.shared.open(URL(string: "https://foxesscommunity.com/viewforum.php?f=29")!)
@@ -51,7 +51,10 @@ struct InverterFirmwareVersionsView: View {
 struct InverterFirmwareVersionsView_Previews: PreviewProvider {
     static var previews: some View {
         Form {
-            InverterFirmwareVersionsView(config: PreviewConfigManager())
+            InverterFirmwareVersionsView(viewModel: SettingsTabViewModel(
+                userManager: .preview(),
+                config: PreviewConfigManager()
+            ))
         }
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct DeviceFirmwareVersion {
+public struct DeviceFirmwareVersion: Codable, Equatable, Hashable {
     public let master: String
     public let slave: String
     public let manager: String

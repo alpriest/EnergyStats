@@ -50,6 +50,8 @@ public struct Device: Codable, Hashable, Identifiable {
     public let hasPV: Bool
     public let battery: Battery?
     public let deviceType: String?
+    public let firmware: DeviceFirmwareVersion?
+    public let variables: [RawVariable]
 
     public struct Battery: Codable, Hashable {
         let capacity: String?

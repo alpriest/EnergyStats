@@ -65,6 +65,7 @@ class SettingsTabViewModel: ObservableObject {
     }
 
     @Published var hasBattery: Bool
+    @Published var firmwareVersions: DeviceFirmwareVersion?
 
     private var config: ConfigManaging
     private let userManager: UserManager
@@ -84,6 +85,7 @@ class SettingsTabViewModel: ObservableObject {
         minSOC = config.minSOC
         batteryCapacity = String(describing: config.batteryCapacity)
         hasBattery = config.hasBattery
+        firmwareVersions = config.firmwareVersions
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }
@@ -92,6 +94,7 @@ class SettingsTabViewModel: ObservableObject {
                 self.minSOC = config.minSOC
                 self.batteryCapacity = String(describing: config.batteryCapacity)
                 self.hasBattery = config.hasBattery
+                self.firmwareVersions = config.firmwareVersions
             }
         }.store(in: &cancellables)
     }

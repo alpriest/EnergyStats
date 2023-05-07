@@ -16,7 +16,7 @@ struct SettingsTabView: View {
         NavigationView {
             Form {
                 InverterChoiceView(viewModel: InverterChoiceViewModel(configManager: configManager))
-                InverterFirmwareVersionsView(config: configManager)
+                InverterFirmwareVersionsView(viewModel: viewModel)
 
                 if viewModel.hasBattery {
                     BatterySettingsView(viewModel: viewModel)

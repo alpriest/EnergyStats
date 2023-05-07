@@ -43,9 +43,9 @@ struct PowerFlowTabView: View {
         .frame(maxWidth: .infinity)
         .padding()
         .background(background().edgesIgnoringSafeArea(.all))
-        .task {
-            await viewModel.timerFired()
-        }
+//        .task {
+//            await viewModel.timerFired()
+//        }
         .onDisappear {
             Task { await viewModel.stopTimer() }
         }

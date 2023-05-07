@@ -50,8 +50,6 @@ class UserManager: ObservableObject {
 
             try store.store(username: username, hashedPassword: hashedPassword, updateHasCredentials: false)
             try await configManager.fetchDevices()
-            try await configManager.fetchFirmwareVersions()
-            try await configManager.fetchVariables()
             store.updateHasCredentials()
         } catch let error as NetworkError {
             logout()

@@ -92,7 +92,7 @@ public extension RawVariable {
     }
 }
 
-public struct RawVariable: Decodable, Equatable, Hashable {
+public struct RawVariable: Codable, Equatable, Hashable {
     public let name: String
     public let variable: String
     public let unit: String

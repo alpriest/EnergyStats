@@ -46,6 +46,8 @@ class PowerFlowTabViewModel: ObservableObject {
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.willResignActiveNotification), name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
+
+        addDeviceChangeObserver()
     }
 
     func startTimer() async {
@@ -61,8 +63,6 @@ class PowerFlowTabViewModel: ObservableObject {
     }
 
     func timerFired() async {
-        addDeviceChangeObserver()
-
         guard self.isLoading == false else { return }
 
         await self.timer.stop()
