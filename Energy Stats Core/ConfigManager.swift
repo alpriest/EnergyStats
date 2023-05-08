@@ -22,6 +22,7 @@ public protocol ConfigManaging {
     func fetchDevices() async throws
     func logout()
     func select(device: Device?)
+    func refreshFirmwareVersions() async throws
     var minSOC: Double { get }
     var batteryCapacity: String { get set }
     var batteryCapacityW: Int { get }
@@ -80,7 +81,7 @@ public class ConfigManager: ConfigManaging {
             let minSOC: String?
             let deviceBattery: Device.Battery?
 
-            let firmware = try await networking.fetchAddressBook(deviceID: device.deviceID)
+            let firmware = try await fetchFirmwareVersions(deviceID: device.deviceID)
             let variables = try await networking.fetchVariables(deviceID: device.deviceID)
 
             if device.hasBattery {
@@ -106,16 +107,42 @@ public class ConfigManager: ConfigManaging {
                 hasPV: device.hasPV,
                 battery: deviceBattery,
                 deviceType: device.deviceType,
-                firmware: DeviceFirmwareVersion(
-                    master: firmware.softVersion.master,
-                    slave: firmware.softVersion.slave,
-                    manager: firmware.softVersion.manager
-                ),
+                firmware: firmware,
                 variables: variables
             )
         }
         devices = newDevices
         select(device: devices?.first)
+    }
+
+    private func fetchFirmwareVersions(deviceID: String) async throws -> DeviceFirmwareVersion {
+        let firmware = try await networking.fetchAddressBook(deviceID: deviceID)
+
+        return DeviceFirmwareVersion(
+            master: firmware.softVersion.master,
+            slave: firmware.softVersion.slave,
+            manager: firmware.softVersion.manager
+        )
+    }
+
+    public func refreshFirmwareVersions() async throws {
+        devices = try await devices?.asyncMap { [weak self] in
+            let firmware = try await self?.fetchFirmwareVersions(deviceID: $0.deviceID)
+            if firmware != $0.firmware {
+                return Device(
+                    plantName: $0.plantName,
+                    deviceID: $0.deviceID,
+                    deviceSN: $0.deviceSN,
+                    hasPV: $0.hasPV,
+                    battery: $0.battery,
+                    deviceType: $0.deviceType,
+                    firmware: firmware,
+                    variables: $0.variables
+                )
+            } else {
+                return $0
+            }
+        }
     }
 
     public func logout() {

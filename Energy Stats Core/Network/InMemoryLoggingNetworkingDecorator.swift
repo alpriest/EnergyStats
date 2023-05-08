@@ -15,6 +15,7 @@ public class InMemoryLoggingNetworkStore: ObservableObject {
     public var deviceListResponse: NetworkOperation<PagedDeviceListResponse>?
     public var addressBookResponse: NetworkOperation<AddressBookResponse>?
     public var variables: NetworkOperation<VariablesResponse>?
+    public var earnings: NetworkOperation<EarningsResponse>?
 
     public init() {}
 
@@ -26,6 +27,7 @@ public class InMemoryLoggingNetworkStore: ObservableObject {
         deviceListResponse = nil
         addressBookResponse = nil
         variables = nil
+        earnings = nil
     }
 }
 

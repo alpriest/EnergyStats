@@ -89,4 +89,12 @@ public class NetworkFacade: Networking {
 
         return try await network.fetchVariables(deviceID: deviceID)
     }
+
+    public func fetchEarnings(deviceID: String) async throws -> EarningsResponse {
+        if config.isDemoUser {
+            return try await fakeNetwork.fetchEarnings(deviceID: deviceID)
+        }
+
+        return try await network.fetchEarnings(deviceID: deviceID)
+    }
 }

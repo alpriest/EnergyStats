@@ -1,0 +1,24 @@
+{
+  "errno": 0,
+  "result": {
+    "currency": "GBP(￡)",
+    "power": 0.187,
+    "today": {
+      "generation": 8.700000000000045,
+      "earnings": 1.0440000000000054
+    },
+    "month": {
+      "generation": 125.70000000000005,
+      "earnings": 15.084000000000005
+    },
+    "year": {
+      "generation": 229.5,
+      "earnings": 27.54
+    },
+    "cumulate": {
+      "generation": 2017.7,
+      "earnings": 242.124
+    },
+    "systemCapacity": 241172.48
+  }
+}

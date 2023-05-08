@@ -27,8 +27,8 @@ struct HomePowerFlowView: View {
 
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
-            SolarPowerView(appTheme: appTheme, solar: viewModel.solar)
-                .frame(width: powerViewWidth)
+            SolarPowerView(appTheme: appTheme, viewModel: SolarPowerViewModel(solar: viewModel.solar, generation: viewModel.todaysGeneration))
+                .frame(width: powerViewWidth * 2)
 
             InverterView(viewModel: InverterViewModel(configManager: configManager))
                 .frame(height: 2)
@@ -68,7 +68,7 @@ struct PowerSummaryView_Previews: PreviewProvider {
 
 extension HomePowerFlowViewModel {
     static func any() -> HomePowerFlowViewModel {
-        .init(solar: 2.5, battery: -0.01, home: 1.5, grid: 0.71, batteryStateOfCharge: 0.99, hasBattery: true, batteryTemperature: 15.6)
+        .init(solar: 2.5, battery: -0.01, home: 1.5, grid: 0.71, batteryStateOfCharge: 0.99, hasBattery: true, batteryTemperature: 15.6, todaysGeneration: 8.5)
     }
 }
 

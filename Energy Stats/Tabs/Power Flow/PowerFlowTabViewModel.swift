@@ -104,6 +104,7 @@ class PowerFlowTabViewModel: ObservableObject {
             await MainActor.run { self.updateState = "Updating..." }
             await self.network.ensureHasToken()
 
+            let earnings = try await self.network.fetchEarnings(deviceID: currentDevice.deviceID)
             let graphVariables = [configManager.variables.named("feedinPower"),
                                   self.configManager.variables.named("gridConsumptionPower"),
                                   self.configManager.variables.named("generationPower"),
@@ -119,7 +120,8 @@ class PowerFlowTabViewModel: ObservableObject {
                                                  grid: currentViewModel.currentGridExport,
                                                  batteryStateOfCharge: battery.chargeLevel,
                                                  hasBattery: battery.hasBattery,
-                                                 batteryTemperature: battery.temperature)
+                                                 batteryTemperature: battery.temperature,
+                                                 todaysGeneration: earnings.today.generation)
 
             self.state = .loaded(.empty()) // refreshes the marching ants line speed
             try await Task.sleep(nanoseconds: 1000)

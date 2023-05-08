@@ -52,7 +52,8 @@ public class DemoNetworking: Networking {
             throw NetworkError.unknown
         }
 
-        let response = try JSONDecoder().decode(NetworkResponse<[ReportResponse]>.self, from: reportData())
+        let data = try data(filename: "report")
+        let response = try JSONDecoder().decode(NetworkResponse<[ReportResponse]>.self, from: data)
         guard let result = response.result else { throw NetworkError.invalidToken }
 
         return result
@@ -63,7 +64,8 @@ public class DemoNetworking: Networking {
             throw NetworkError.unknown
         }
 
-        let response = try JSONDecoder().decode(NetworkResponse<[RawResponse]>.self, from: rawData())
+        let data = try data(filename: "raw-\(deviceID)")
+        let response = try JSONDecoder().decode(NetworkResponse<[RawResponse]>.self, from: data)
         guard let result = response.result else { throw NetworkError.invalidToken }
 
         return result.map {
@@ -82,30 +84,23 @@ public class DemoNetworking: Networking {
     }
 
     public func fetchVariables(deviceID: String) async throws -> [RawVariable] {
-        let response = try JSONDecoder().decode(NetworkResponse<VariablesResponse>.self, from: variablesData())
+        let data = try data(filename: "variables")
+        let response = try JSONDecoder().decode(NetworkResponse<VariablesResponse>.self, from: data)
         guard let result = response.result else { throw NetworkError.invalidToken }
 
         return result.variables
     }
 
-    private func variablesData() throws -> Data {
-        guard let url = Bundle(for: type(of: self)).url(forResource: "variables", withExtension: "json") else {
-            return Data()
-        }
+    public func fetchEarnings(deviceID: String) async throws -> EarningsResponse {
+        let data = try data(filename: "earnings")
+        let response = try JSONDecoder().decode(NetworkResponse<EarningsResponse>.self, from: data)
+        guard let result = response.result else { throw NetworkError.invalidToken }
 
-        return try Data(contentsOf: url)
+        return result
     }
 
-    private func rawData() throws -> Data {
-        guard let url = Bundle(for: type(of: self)).url(forResource: "raw", withExtension: "json") else {
-            return Data()
-        }
-
-        return try Data(contentsOf: url)
-    }
-
-    private func reportData() throws -> Data {
-        guard let url = Bundle(for: type(of: self)).url(forResource: "report", withExtension: "json") else {
+    private func data(filename: String) throws -> Data {
+        guard let url = Bundle(for: type(of: self)).url(forResource: filename, withExtension: "json") else {
             return Data()
         }
 

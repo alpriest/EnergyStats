@@ -19,6 +19,8 @@ struct ContentView: View {
             do {
                 if configManager.devices?.first(where: { $0.firmware == nil }) != nil {
                     try await configManager.fetchDevices()
+                } else {
+                    Task { try await configManager.refreshFirmwareVersions() }
                 }
 
                 Task { @MainActor in

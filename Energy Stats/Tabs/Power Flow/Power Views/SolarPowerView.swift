@@ -9,58 +9,46 @@ import Combine
 import Energy_Stats_Core
 import SwiftUI
 
-struct SunView: View {
-    var solar: Double
-    let glowing: Bool
-    let glowColor: Color
-    let sunColor: Color
-
-    var body: some View {
-        ZStack(alignment: .center) {
-            Circle()
-                .foregroundColor(sunColor)
-                .frame(width: 23, height: 23)
-                .glow(active: glowing, color: glowColor)
-
-            ForEach(Array(stride(from: 0.0, to: .pi * 2, by: .pi / 4)), id: \.self) {
-                RoundedRectangle(cornerRadius: 2.0)
-                    .foregroundColor(sunColor)
-                    .frame(width: 9, height: 4)
-                    .offset(x: -20)
-                    .rotationEffect(.degrees(($0 * 180) / .pi))
-                    .glow(active: glowing, color: glowColor)
-            }
-        }
-    }
+struct SolarPowerViewModel {
+    let solar: Double
+    let generation: Double
 }
 
 struct SolarPowerView: View {
-    let appTheme: LatestAppTheme
-    let solar: Double
+    private let appTheme: LatestAppTheme
+    private let viewModel: SolarPowerViewModel
 
-    init(appTheme: LatestAppTheme, solar: Double) {
+    init(appTheme: LatestAppTheme, viewModel: SolarPowerViewModel) {
         self.appTheme = appTheme
-        self.solar = solar
+        self.viewModel = viewModel
     }
 
     var body: some View {
         VStack {
-            switch solar {
+            Group {
+                if appTheme.value.showInW {
+                    Text("Yield today " + viewModel.generation.w())
+                } else {
+                    Text("Yield today " + viewModel.generation.kW(appTheme.value.decimalPlaces))
+                }
+            }
+
+            switch viewModel.solar {
             case 1 ..< 2:
-                SunView(solar: solar, glowing: false, glowColor: .clear, sunColor: Color("Sun"))
+                SunView(solar: viewModel.solar, glowing: false, glowColor: .clear, sunColor: Color("Sun"))
                     .frame(width: 40, height: 40)
             case 2 ..< 3:
-                SunView(solar: solar, glowing: true, glowColor: Color("Sun"), sunColor: .orange)
+                SunView(solar: viewModel.solar, glowing: true, glowColor: Color("Sun"), sunColor: .orange)
                     .frame(width: 40, height: 40)
             case 3 ..< 500:
-                SunView(solar: solar, glowing: true, glowColor: .orange, sunColor: .red)
+                SunView(solar: viewModel.solar, glowing: true, glowColor: .orange, sunColor: .red)
                     .frame(width: 40, height: 40)
             default:
-                SunView(solar: solar, glowing: false, glowColor: .clear, sunColor: Color("Sun_Zero"))
+                SunView(solar: viewModel.solar, glowing: false, glowColor: .clear, sunColor: Color("Sun_Zero"))
                     .frame(width: 40, height: 40)
             }
 
-            PowerFlowView(amount: solar, appTheme: appTheme, showColouredLines: false)
+            PowerFlowView(amount: viewModel.solar, appTheme: appTheme, showColouredLines: false)
         }
     }
 }
@@ -73,23 +61,23 @@ struct SolarPowerView_Previews: PreviewProvider {
             HStack {
                 SolarPowerView(
                     appTheme: CurrentValueSubject(AppTheme.mock()),
-                    solar: 0
+                    viewModel: SolarPowerViewModel(solar: 0, generation: 0)
                 )
                 SolarPowerView(
                     appTheme: CurrentValueSubject(AppTheme.mock()),
-                    solar: 0.5
+                    viewModel: SolarPowerViewModel(solar: 0.5, generation: 1.5)
                 )
                 SolarPowerView(
                     appTheme: CurrentValueSubject(AppTheme.mock()),
-                    solar: 1.5
+                    viewModel: SolarPowerViewModel(solar: 1.5, generation: 1.5)
                 )
                 SolarPowerView(
                     appTheme: CurrentValueSubject(AppTheme.mock()),
-                    solar: 2.5
+                    viewModel: SolarPowerViewModel(solar: 2.5, generation: 4.5)
                 )
                 SolarPowerView(
                     appTheme: CurrentValueSubject(AppTheme.mock()),
-                    solar: 3.5
+                    viewModel: SolarPowerViewModel(solar: 3.5, generation: 9.5)
                 )
             }
         }
@@ -103,7 +91,7 @@ struct SolarPowerView_Previews: PreviewProvider {
         var body: some View {
             VStack {
                 Color.clear.overlay(
-                    SolarPowerView(appTheme: CurrentValueSubject(AppTheme.mock()), solar: amount)
+                    SolarPowerView(appTheme: CurrentValueSubject(AppTheme.mock()), viewModel: SolarPowerViewModel(solar: amount, generation: 8.5))
                 ).frame(height: 100)
 
                 Slider(value: $amount, in: 0 ... 5.0, step: 0.1, label: {

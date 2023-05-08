@@ -23,7 +23,7 @@
 		4103D1DB29DB6C6D001B0BC8 /* RawVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4106A92C28CFCD960009DA28 /* RawVariable.swift */; };
 		4103D1DC29DB6C6D001B0BC8 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140145D28C70D1400EA5BA1 /* Config.swift */; };
 		4103D1DD29DB6C8C001B0BC8 /* report.json in Resources */ = {isa = PBXBuildFile; fileRef = 41F8D8F6292D7650005E2D18 /* report.json */; };
-		4103D1DE29DB6C8C001B0BC8 /* raw.json in Resources */ = {isa = PBXBuildFile; fileRef = 41AED86928CDCD94009C6517 /* raw.json */; };
+		4103D1DE29DB6C8C001B0BC8 /* raw-f3000-deviceid.json in Resources */ = {isa = PBXBuildFile; fileRef = 41AED86928CDCD94009C6517 /* raw-f3000-deviceid.json */; };
 		4103D1DF29DB6C8C001B0BC8 /* DemoNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A25D4028CA6E0000315714 /* DemoNetworking.swift */; };
 		4103D1E229DB6CD7001B0BC8 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4103D1E029DB6CB9001B0BC8 /* ConfigManager.swift */; };
 		4103D1E329DB6D03001B0BC8 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410AA38729D96F6D00CD107C /* AppTheme.swift */; };
@@ -64,6 +64,10 @@
 		4141B20228D871B900B60157 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141B20128D871B900B60157 /* ContentView.swift */; };
 		414BF82829B4918300E2EB51 /* SettingsTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */; };
 		41626CD029D969E9003FEB00 /* InverterFirmwareVersionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41626CCF29D969E9003FEB00 /* InverterFirmwareVersionsView.swift */; };
+		4162BC2A2A08E33600DFEDC1 /* raw-h1-deviceid.json in Resources */ = {isa = PBXBuildFile; fileRef = 4162BC292A08E33600DFEDC1 /* raw-h1-deviceid.json */; };
+		4162BC2C2A09772C00DFEDC1 /* earnings.json in Resources */ = {isa = PBXBuildFile; fileRef = 4162BC2B2A09772C00DFEDC1 /* earnings.json */; };
+		4162BC2E2A09773D00DFEDC1 /* EarningsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4162BC2D2A09773D00DFEDC1 /* EarningsResponse.swift */; };
+		4162BC302A097C1300DFEDC1 /* SunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4162BC2F2A097C1300DFEDC1 /* SunView.swift */; };
 		416318B729DDD2E100C2C285 /* InMemoryLoggingNetworkingDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416318B629DDD2E100C2C285 /* InMemoryLoggingNetworkingDecorator.swift */; };
 		416318B929DDD44C00C2C285 /* DebugDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416318B829DDD44C00C2C285 /* DebugDataView.swift */; };
 		416318BE29DDD80E00C2C285 /* View+Copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416318BD29DDD80E00C2C285 /* View+Copy.swift */; };
@@ -215,6 +219,10 @@
 		41626CCD29D95E9C003FEB00 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		41626CCF29D969E9003FEB00 /* InverterFirmwareVersionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterFirmwareVersionsView.swift; sourceTree = "<group>"; };
 		41626CD129D96AD9003FEB00 /* DeviceFirmwareVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceFirmwareVersion.swift; sourceTree = "<group>"; };
+		4162BC292A08E33600DFEDC1 /* raw-h1-deviceid.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "raw-h1-deviceid.json"; sourceTree = "<group>"; };
+		4162BC2B2A09772C00DFEDC1 /* earnings.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = earnings.json; sourceTree = "<group>"; };
+		4162BC2D2A09773D00DFEDC1 /* EarningsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarningsResponse.swift; sourceTree = "<group>"; };
+		4162BC2F2A097C1300DFEDC1 /* SunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunView.swift; sourceTree = "<group>"; };
 		416318B629DDD2E100C2C285 /* InMemoryLoggingNetworkingDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryLoggingNetworkingDecorator.swift; sourceTree = "<group>"; };
 		416318B829DDD44C00C2C285 /* DebugDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugDataView.swift; sourceTree = "<group>"; };
 		416318BD29DDD80E00C2C285 /* View+Copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Copy.swift"; sourceTree = "<group>"; };
@@ -248,7 +256,7 @@
 		41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Energy_Stats_Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		41A95B9629DB3F6A00A35169 /* Energy_Stats_Core.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Energy_Stats_Core.h; sourceTree = "<group>"; };
 		41A95BA029DB3F7E00A35169 /* PylonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PylonView.swift; sourceTree = "<group>"; };
-		41AED86928CDCD94009C6517 /* raw.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = raw.json; sourceTree = "<group>"; };
+		41AED86928CDCD94009C6517 /* raw-f3000-deviceid.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "raw-f3000-deviceid.json"; sourceTree = "<group>"; };
 		41B690F328DF5C390058126E /* NetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponse.swift; sourceTree = "<group>"; };
 		41B690F528E03EA70058126E /* NetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTests.swift; sourceTree = "<group>"; };
 		41B690FB28E042560058126E /* login-failure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "login-failure.json"; sourceTree = "<group>"; };
@@ -396,8 +404,10 @@
 			children = (
 				41FDAD4F2A01604F00EDACF3 /* variables.json */,
 				41F8D8F6292D7650005E2D18 /* report.json */,
-				41AED86928CDCD94009C6517 /* raw.json */,
+				41AED86928CDCD94009C6517 /* raw-f3000-deviceid.json */,
+				4162BC292A08E33600DFEDC1 /* raw-h1-deviceid.json */,
 				41A25D4028CA6E0000315714 /* DemoNetworking.swift */,
+				4162BC2B2A09772C00DFEDC1 /* earnings.json */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -465,6 +475,7 @@
 				41B690F328DF5C390058126E /* NetworkResponse.swift */,
 				41626CCB29D95E37003FEB00 /* AddressBookResponse.swift */,
 				417185452A004FA900D18CDD /* VariablesResponse.swift */,
+				4162BC2D2A09773D00DFEDC1 /* EarningsResponse.swift */,
 			);
 			path = NetworkModels;
 			sourceTree = "<group>";
@@ -634,6 +645,7 @@
 				41E4B31228DB77A3003F7F47 /* HomePowerView.swift */,
 				41E4B31428DB77E8003F7F47 /* GridPowerView.swift */,
 				41DD7F3929C5B8940072CDE8 /* SolarPowerView.swift */,
+				4162BC2F2A097C1300DFEDC1 /* SunView.swift */,
 			);
 			path = "Power Views";
 			sourceTree = "<group>";
@@ -817,7 +829,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4103D1DE29DB6C8C001B0BC8 /* raw.json in Resources */,
+				4162BC2C2A09772C00DFEDC1 /* earnings.json in Resources */,
+				4103D1DE29DB6C8C001B0BC8 /* raw-f3000-deviceid.json in Resources */,
+				4162BC2A2A08E33600DFEDC1 /* raw-h1-deviceid.json in Resources */,
 				41FDAD502A01604F00EDACF3 /* variables.json in Resources */,
 				4103D1DD29DB6C8C001B0BC8 /* report.json in Resources */,
 			);
@@ -874,6 +888,7 @@
 				41C0B43429F96D3600CA9462 /* LocalizedString.swift in Sources */,
 				416318C029DDD82800C2C285 /* ResponseDebugView.swift in Sources */,
 				414BF82829B4918300E2EB51 /* SettingsTabViewModel.swift in Sources */,
+				4162BC302A097C1300DFEDC1 /* SunView.swift in Sources */,
 				416318B929DDD44C00C2C285 /* DebugDataView.swift in Sources */,
 				41E4B31328DB77A3003F7F47 /* HomePowerView.swift in Sources */,
 				41A25D3D28CA5CDF00315714 /* GraphTabView.swift in Sources */,
@@ -912,6 +927,7 @@
 				4103D1DB29DB6C6D001B0BC8 /* RawVariable.swift in Sources */,
 				4103D1E529DB6D29001B0BC8 /* Sequence+aysnc.swift in Sources */,
 				4103D1DA29DB6C6D001B0BC8 /* DeviceFirmwareVersion.swift in Sources */,
+				4162BC2E2A09773D00DFEDC1 /* EarningsResponse.swift in Sources */,
 				41A95BA129DB3F7E00A35169 /* PylonView.swift in Sources */,
 				4103D1D529DB6C51001B0BC8 /* NetworkResponse.swift in Sources */,
 				410913FD29DB78EF00133CC5 /* PreciseDateTimeFormatter.swift in Sources */,
