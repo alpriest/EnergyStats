@@ -12,7 +12,7 @@ import Energy_Stats_Core
 struct HomePowerView: View {
     let amount: Double
     let iconFooterSize: CGSize
-    let appTheme: LatestAppTheme
+    let appTheme: AppTheme
 
     var body: some View {
         VStack {
@@ -28,7 +28,7 @@ struct HomePowerView: View {
 struct HomePowerView_Previews: PreviewProvider {
     static var previews: some View {
         HomePowerView(amount: 1.05, iconFooterSize: CGSize(width: 32, height: 32),
-                      appTheme: CurrentValueSubject(AppTheme.mock()))
+                      appTheme: AppTheme.mock())
             .frame(width: 50, height: 220)
     }
 }

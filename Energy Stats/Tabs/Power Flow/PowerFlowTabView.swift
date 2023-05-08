@@ -11,7 +11,7 @@ import Energy_Stats_Core
 
 struct PowerFlowTabView: View {
     @ObservedObject var viewModel: PowerFlowTabViewModel
-    let appTheme: LatestAppTheme
+    let appTheme: AppTheme
 
     var body: some View {
         VStack {
@@ -43,13 +43,13 @@ struct PowerFlowTabView: View {
         .frame(maxWidth: .infinity)
         .padding()
         .background(background().edgesIgnoringSafeArea(.all))
-        .onDisappear {
-            Task { await viewModel.stopTimer() }
+        .onAppear {
+            viewModel.viewAppeared()
         }
     }
 
     @ViewBuilder func background() -> some View {
-        switch appTheme.value.showSunnyBackground {
+        switch appTheme.showSunnyBackground {
         case true:
             backgroundGradient
         case false:
@@ -72,6 +72,6 @@ struct PowerFlowTabView: View {
 struct PowerFlowTabView_Previews: PreviewProvider {
     static var previews: some View {
         PowerFlowTabView(viewModel: PowerFlowTabViewModel(DemoNetworking(), configManager: PreviewConfigManager()),
-                         appTheme: CurrentValueSubject(AppTheme.mock()))
+                         appTheme: AppTheme.mock())
     }
 }

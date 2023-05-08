@@ -47,7 +47,7 @@ class PowerFlowTabViewModel: ObservableObject {
         NotificationCenter.default.addObserver(self, selector: #selector(self.willResignActiveNotification), name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
 
-        addDeviceChangeObserver()
+        self.addDeviceChangeObserver()
     }
 
     func startTimer() async {
@@ -62,6 +62,15 @@ class PowerFlowTabViewModel: ObservableObject {
         }
     }
 
+    func viewAppeared() {
+        Task { @MainActor [weak self] in
+            guard let self else { return }
+            if self.timer.isTicking == false {
+                await self.timerFired()
+            }
+        }
+    }
+
     func timerFired() async {
         guard self.isLoading == false else { return }
 
@@ -71,13 +80,19 @@ class PowerFlowTabViewModel: ObservableObject {
 
         await self.loadData()
         await self.startTimer()
+
+        self.addDeviceChangeObserver()
     }
 
     func addDeviceChangeObserver() {
-        guard cancellable == nil else { return }
+        guard self.cancellable == nil else { return }
 
-        cancellable = configManager.currentDevice.sink { _ in
-            Task { await self.timerFired() }
+        self.cancellable = self.configManager.currentDevice.sink { device in
+            guard device != nil else { return }
+
+            Task {
+                await self.timerFired()
+            }
         }
     }
 

@@ -27,7 +27,7 @@ struct TabbedView: View {
 
     var body: some View {
         TabView {
-            PowerFlowTabView(viewModel: summaryViewModel, appTheme: configManager.appTheme)
+            PowerFlowTabView(viewModel: summaryViewModel, appTheme: configManager.appTheme.value)
                 .tabItem {
                     VStack {
                         Image(systemName: "arrow.up.arrow.down")

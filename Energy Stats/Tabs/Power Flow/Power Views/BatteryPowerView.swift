@@ -53,7 +53,7 @@ struct BatteryPowerView: View {
     let viewModel: BatteryPowerViewModel
     @Binding var iconFooterSize: CGSize
     @State private var percentage = true
-    let appTheme: LatestAppTheme
+    let appTheme: AppTheme
 
     var body: some View {
         VStack {
@@ -66,17 +66,17 @@ struct BatteryPowerView: View {
                     if percentage {
                         Text(viewModel.batteryStateOfCharge, format: .percent)
                     } else {
-                        Text(viewModel.batteryStoredChargekW.kW(appTheme.value.decimalPlaces))
+                        Text(viewModel.batteryStoredChargekW.kW(appTheme.decimalPlaces))
                     }
                 }.onTapGesture {
                     percentage.toggle()
                 }
 
-                if appTheme.value.showBatteryTemperature {
+                if appTheme.showBatteryTemperature {
                     Text(viewModel.temperature, format: .number) + Text("°C")
                 }
 
-                if appTheme.value.showBatteryEstimate {
+                if appTheme.showBatteryEstimate {
                     OptionalView(viewModel.batteryExtra) {
                         Text($0)
                             .multilineTextAlignment(.center)
@@ -98,7 +98,7 @@ struct BatteryPowerView: View {
 struct BatteryPowerView_Previews: PreviewProvider {
     static var previews: some View {
         BatteryPowerView(viewModel: BatteryPowerViewModel.any(), iconFooterSize: .constant(CGSize.zero),
-                         appTheme: CurrentValueSubject(AppTheme.mock()))
+                         appTheme: AppTheme.mock())
     }
 }
 

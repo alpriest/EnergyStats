@@ -12,10 +12,10 @@ import SwiftUI
 struct PowerFlowView: View {
     private let amount: Double
     private let animationDuration: Double
-    private let appTheme: LatestAppTheme
+    private let appTheme: AppTheme
     private let showColouredLines: Bool
 
-    init(amount: Double, appTheme: LatestAppTheme, showColouredLines: Bool) {
+    init(amount: Double, appTheme: AppTheme, showColouredLines: Bool) {
         self.amount = amount
         self.appTheme = appTheme
         self.showColouredLines = showColouredLines
@@ -34,7 +34,7 @@ struct PowerFlowView: View {
                     }
 
                     VStack {
-                        EnergyAmountView(amount: amount, decimalPlaces: appTheme.value.decimalPlaces, backgroundColor: lineColor, textColor: textColor, appTheme: appTheme)
+                        EnergyAmountView(amount: amount, decimalPlaces: appTheme.decimalPlaces, backgroundColor: lineColor, textColor: textColor, appTheme: appTheme)
                             .font(.body.bold())
                     }
                 }
@@ -46,7 +46,7 @@ struct PowerFlowView: View {
     }
 
     var lineColor: Color {
-        if isFlowing && appTheme.value.showColouredLines && showColouredLines {
+        if isFlowing && appTheme.showColouredLines && showColouredLines {
             if amount > 0 {
                 return Color("lines_positive")
             } else {
@@ -58,7 +58,7 @@ struct PowerFlowView: View {
     }
 
     var textColor: Color {
-        if isFlowing && appTheme.value.showColouredLines && showColouredLines {
+        if isFlowing && appTheme.showColouredLines && showColouredLines {
             if amount > 0 {
                 return Color("text_positive")
             } else {
@@ -89,7 +89,7 @@ struct PowerFlowView_Previews: PreviewProvider {
                 Color.clear.overlay(
                     Group {
                         if visible {
-                            PowerFlowView(amount: amount, appTheme: CurrentValueSubject(AppTheme.mock()), showColouredLines: true)
+                            PowerFlowView(amount: amount, appTheme: AppTheme.mock(), showColouredLines: true)
                         }
                     }
                 ).frame(height: 100)

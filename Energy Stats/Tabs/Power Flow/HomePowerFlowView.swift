@@ -23,7 +23,7 @@ struct HomePowerFlowView: View {
     let configManager: ConfigManaging
     let viewModel: HomePowerFlowViewModel
     private let powerViewWidth: CGFloat = 100
-    let appTheme: LatestAppTheme
+    let appTheme: AppTheme
 
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
@@ -61,7 +61,7 @@ struct PowerSummaryView_Previews: PreviewProvider {
     static var previews: some View {
         HomePowerFlowView(configManager: PreviewConfigManager(),
                           viewModel: HomePowerFlowViewModel.any(),
-                          appTheme: CurrentValueSubject(AppTheme.mock()))
+                          appTheme: AppTheme.mock())
             .environment(\.locale, .init(identifier: "de"))
     }
 }

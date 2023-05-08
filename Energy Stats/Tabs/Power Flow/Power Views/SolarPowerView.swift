@@ -15,10 +15,10 @@ struct SolarPowerViewModel {
 }
 
 struct SolarPowerView: View {
-    private let appTheme: LatestAppTheme
+    private let appTheme: AppTheme
     private let viewModel: SolarPowerViewModel
 
-    init(appTheme: LatestAppTheme, viewModel: SolarPowerViewModel) {
+    init(appTheme: AppTheme, viewModel: SolarPowerViewModel) {
         self.appTheme = appTheme
         self.viewModel = viewModel
     }
@@ -26,10 +26,10 @@ struct SolarPowerView: View {
     var body: some View {
         VStack {
             Group {
-                if appTheme.value.showInW {
+                if appTheme.showInW {
                     Text("Yield today " + viewModel.generation.w())
                 } else {
-                    Text("Yield today " + viewModel.generation.kW(appTheme.value.decimalPlaces))
+                    Text("Yield today " + viewModel.generation.kW(appTheme.decimalPlaces))
                 }
             }
 
@@ -60,23 +60,23 @@ struct SolarPowerView_Previews: PreviewProvider {
 
             HStack {
                 SolarPowerView(
-                    appTheme: CurrentValueSubject(AppTheme.mock()),
+                    appTheme: AppTheme.mock(),
                     viewModel: SolarPowerViewModel(solar: 0, generation: 0)
                 )
                 SolarPowerView(
-                    appTheme: CurrentValueSubject(AppTheme.mock()),
+                    appTheme: AppTheme.mock(),
                     viewModel: SolarPowerViewModel(solar: 0.5, generation: 1.5)
                 )
                 SolarPowerView(
-                    appTheme: CurrentValueSubject(AppTheme.mock()),
+                    appTheme: AppTheme.mock(),
                     viewModel: SolarPowerViewModel(solar: 1.5, generation: 1.5)
                 )
                 SolarPowerView(
-                    appTheme: CurrentValueSubject(AppTheme.mock()),
+                    appTheme: AppTheme.mock(),
                     viewModel: SolarPowerViewModel(solar: 2.5, generation: 4.5)
                 )
                 SolarPowerView(
-                    appTheme: CurrentValueSubject(AppTheme.mock()),
+                    appTheme: AppTheme.mock(),
                     viewModel: SolarPowerViewModel(solar: 3.5, generation: 9.5)
                 )
             }
@@ -91,7 +91,7 @@ struct SolarPowerView_Previews: PreviewProvider {
         var body: some View {
             VStack {
                 Color.clear.overlay(
-                    SolarPowerView(appTheme: CurrentValueSubject(AppTheme.mock()), viewModel: SolarPowerViewModel(solar: amount, generation: 8.5))
+                    SolarPowerView(appTheme: AppTheme.mock(), viewModel: SolarPowerViewModel(solar: amount, generation: 8.5))
                 ).frame(height: 100)
 
                 Slider(value: $amount, in: 0 ... 5.0, step: 0.1, label: {

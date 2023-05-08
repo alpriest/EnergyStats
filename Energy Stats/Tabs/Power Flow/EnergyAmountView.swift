@@ -14,12 +14,12 @@ struct EnergyAmountView: View {
     let decimalPlaces: Int
     let backgroundColor: Color
     let textColor: Color
-    let appTheme: LatestAppTheme
+    let appTheme: AppTheme
 
     var body: some View {
         Color.clear.overlay(
             Group {
-                if appTheme.value.showInW {
+                if appTheme.showInW {
                     Text(amount.w())
                 } else {
                     Text(amount.kW(decimalPlaces))
@@ -36,6 +36,6 @@ struct EnergyAmountView: View {
 
 struct EnergyAmountView_Previews: PreviewProvider {
     static var previews: some View {
-        EnergyAmountView(amount: 0.310, decimalPlaces: 3, backgroundColor: .red, textColor: .black, appTheme: CurrentValueSubject(AppTheme.mock()))
+        EnergyAmountView(amount: 0.310, decimalPlaces: 3, backgroundColor: .red, textColor: .black, appTheme: AppTheme.mock())
     }
 }

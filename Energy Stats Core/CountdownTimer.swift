@@ -42,4 +42,9 @@ public class CountdownTimer {
         timer = nil
         ticksRemaining = 0
     }
+
+    @MainActor
+    public var isTicking: Bool {
+        ticksRemaining > 0 && timer != nil
+    }
 }

@@ -12,7 +12,7 @@ import Energy_Stats_Core
 struct GridPowerView: View {
     let amount: Double
     let iconFooterSize: CGSize
-    let appTheme: LatestAppTheme
+    let appTheme: AppTheme
 
     var body: some View {
         VStack {
@@ -27,6 +27,6 @@ struct GridPowerView: View {
 struct GridPowerView_Previews: PreviewProvider {
     static var previews: some View {
         GridPowerView(amount: 0.4, iconFooterSize: CGSize(width: 32, height: 32),
-                      appTheme: CurrentValueSubject(AppTheme.mock()))
+                      appTheme: AppTheme.mock())
     }
 }
