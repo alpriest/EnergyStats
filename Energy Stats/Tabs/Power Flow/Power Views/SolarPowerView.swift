@@ -25,13 +25,7 @@ struct SolarPowerView: View {
 
     var body: some View {
         VStack {
-            Group {
-                if appTheme.showInW {
-                    Text("Yield today " + viewModel.generation.w())
-                } else {
-                    Text("Yield today " + viewModel.generation.kW(appTheme.decimalPlaces))
-                }
-            }
+            Text("Yield today " + (appTheme.showInW ? viewModel.generation.w() : viewModel.generation.kW(appTheme.decimalPlaces)))
 
             switch viewModel.solar {
             case 1 ..< 2:
