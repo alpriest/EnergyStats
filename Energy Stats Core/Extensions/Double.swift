@@ -28,6 +28,12 @@ public extension Double {
         return String(format: "%0.0fW", divided)
     }
 
+    func wh() -> String {
+        let divided = (self * 1000.0).rounded()
+
+        return String(format: "%0.0fWh", divided)
+    }
+
     func rounded(decimalPlaces: Int) -> Double {
         let power = pow(10, Double(decimalPlaces))
         return (self * power).rounded() / power
