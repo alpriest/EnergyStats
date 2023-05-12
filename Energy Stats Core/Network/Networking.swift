@@ -16,7 +16,7 @@ extension URL {
     static var soc = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/soc/get")!
     static var addressBook = URL(string: "https://www.foxesscloud.com/c/v0/device/addressbook")!
     static var variables = URL(string: "https://www.foxesscloud.com/c/v1/device/variables")!
-    static var earnings = URL(string: "https://www.foxesscloud.com/c/v0/device/earnings")! // ?deviceID=
+    static var earnings = URL(string: "https://www.foxesscloud.com/c/v0/device/earnings")!
 }
 
 public protocol Networking {

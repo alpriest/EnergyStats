@@ -128,6 +128,7 @@ public class MockConfig: Config {
     public var selectedDeviceID: String?
     public var showUsableBatteryOnly: Bool = false
     public var showInW: Bool = false
+    public var showTotalYield: Bool = false
 }
 
 public class PreviewConfigManager: ConfigManager {

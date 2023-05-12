@@ -16,6 +16,12 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
+    @Published var showTotalYield: Bool {
+        didSet {
+            config.showTotalYield = showTotalYield
+        }
+    }
+
     @Published var batteryCapacity: String {
         didSet {
             config.batteryCapacity = batteryCapacity
@@ -86,6 +92,7 @@ class SettingsTabViewModel: ObservableObject {
         batteryCapacity = String(describing: config.batteryCapacity)
         hasBattery = config.hasBattery
         firmwareVersions = config.firmwareVersions
+        showTotalYield = config.showTotalYield
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }

@@ -19,6 +19,7 @@ public protocol Config {
     var selectedDeviceID: String? { get set }
     var showUsableBatteryOnly: Bool { get set }
     var showInW: Bool { get set }
+    var showTotalYield: Bool { get set }
 }
 
 public class UserDefaultsConfig: Config {
@@ -47,6 +48,9 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredBool(key: "showUsableBatteryOnly", defaultValue: false)
     public var showUsableBatteryOnly: Bool
+
+    @UserDefaultsStoredBool(key: "showTotalYield", defaultValue: true)
+    public var showTotalYield: Bool
 
     @UserDefaultsStoredData(key: "devices")
     public var devices: Data?

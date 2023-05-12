@@ -81,7 +81,8 @@ extension AppTheme {
             decimalPlaces: 3,
             showBatteryEstimate: true,
             showUsableBatteryOnly: false,
-            showInW: false
+            showInW: false,
+            showTotalYield: false
         )
     }
 }

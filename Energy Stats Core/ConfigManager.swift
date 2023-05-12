@@ -31,6 +31,7 @@ public protocol ConfigManaging {
     var showBatteryTemperature: Bool { get set }
     var showBatteryEstimate: Bool { get set }
     var showUsableBatteryOnly: Bool { get set }
+    var showTotalYield: Bool { get set }
     var refreshFrequency: RefreshFrequency { get set }
     var appTheme: LatestAppTheme { get }
     var decimalPlaces: Int { get set }
@@ -63,7 +64,8 @@ public class ConfigManager: ConfigManaging {
                 decimalPlaces: config.decimalPlaces,
                 showBatteryEstimate: config.showBatteryEstimate,
                 showUsableBatteryOnly: config.showUsableBatteryOnly,
-                showInW: config.showInW
+                showInW: config.showInW,
+                showTotalYield: config.showTotalYield
             )
         )
         self.selectedDeviceID = self.selectedDeviceID
@@ -248,6 +250,16 @@ public class ConfigManager: ConfigManaging {
             config.showUsableBatteryOnly = newValue
             appTheme.send(appTheme.value.update(
                 showUsableBatteryOnly: config.showUsableBatteryOnly
+            ))
+        }
+    }
+
+    public var showTotalYield: Bool {
+        get { config.showTotalYield }
+        set {
+            config.showTotalYield = newValue
+            appTheme.send(appTheme.value.update(
+                showTotalYield: config.showTotalYield
             ))
         }
     }

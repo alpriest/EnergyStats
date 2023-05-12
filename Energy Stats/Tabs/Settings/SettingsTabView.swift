@@ -28,6 +28,10 @@ struct SettingsTabView: View {
                             Text("Show coloured flow lines")
                         }
 
+                        Toggle(isOn: $viewModel.showTotalYield) {
+                            Text("Show total yield")
+                        }
+
                         Toggle(isOn: $viewModel.showBatteryTemperature) {
                             Text("Show battery temperature")
                         }
