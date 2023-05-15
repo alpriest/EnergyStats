@@ -84,6 +84,8 @@
 		4171854E2A010B6300D18CDD /* GraphVariableChooserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171854D2A010B6300D18CDD /* GraphVariableChooserViewModel.swift */; };
 		417185502A01188300D18CDD /* firmware-version-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 4171854F2A01188300D18CDD /* firmware-version-success.json */; };
 		417185522A0119F300D18CDD /* variables-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 417185512A0119F300D18CDD /* variables-success.json */; };
+		417AA21A2A12454A0073CD34 /* StatsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AA2192A12454A0073CD34 /* StatsTabView.swift */; };
+		417AA21D2A1245C00073CD34 /* StatsTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AA21C2A1245C00073CD34 /* StatsTabViewModel.swift */; };
 		418EEEB52916843A006A8290 /* View+If.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418EEEB42916843A006A8290 /* View+If.swift */; };
 		41923E3C2916B8A800D1A8C5 /* battery-soc-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41923E3B2916B8A800D1A8C5 /* battery-soc-success.json */; };
 		41923E3E2916BC6F00D1A8C5 /* UsageGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41923E3D2916BC6F00D1A8C5 /* UsageGraphView.swift */; };
@@ -240,6 +242,8 @@
 		4171854F2A01188300D18CDD /* firmware-version-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "firmware-version-success.json"; sourceTree = "<group>"; };
 		417185512A0119F300D18CDD /* variables-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "variables-success.json"; sourceTree = "<group>"; };
 		41777F1428F49C61009944FF /* NetworkFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFacade.swift; sourceTree = "<group>"; };
+		417AA2192A12454A0073CD34 /* StatsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTabView.swift; sourceTree = "<group>"; };
+		417AA21C2A1245C00073CD34 /* StatsTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTabViewModel.swift; sourceTree = "<group>"; };
 		418EEEB42916843A006A8290 /* View+If.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+If.swift"; sourceTree = "<group>"; };
 		41923E3B2916B8A800D1A8C5 /* battery-soc-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "battery-soc-success.json"; sourceTree = "<group>"; };
 		41923E3D2916BC6F00D1A8C5 /* UsageGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageGraphView.swift; sourceTree = "<group>"; };
@@ -356,6 +360,7 @@
 				41E1DFDD28D87778001235B9 /* Settings */,
 				41A25D3B28CA5CBD00315714 /* Graphs */,
 				41A25D3A28CA5CB700315714 /* Power Flow */,
+				417AA21B2A1245AE0073CD34 /* Stats */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -507,6 +512,15 @@
 				416318BF29DDD82800C2C285 /* ResponseDebugView.swift */,
 			);
 			path = "Debug View";
+			sourceTree = "<group>";
+		};
+		417AA21B2A1245AE0073CD34 /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				417AA2192A12454A0073CD34 /* StatsTabView.swift */,
+				417AA21C2A1245C00073CD34 /* StatsTabViewModel.swift */,
+			);
+			path = Stats;
 			sourceTree = "<group>";
 		};
 		41A25D3A28CA5CB700315714 /* Power Flow */ = {
@@ -882,6 +896,7 @@
 				417185482A0051CA00D18CDD /* GraphVariableChooserView.swift in Sources */,
 				41E4B31528DB77E8003F7F47 /* GridPowerView.swift in Sources */,
 				417153E429F2BCD700639A7B /* GraphHeaderView.swift in Sources */,
+				417AA21A2A12454A0073CD34 /* StatsTabView.swift in Sources */,
 				4130364929B86F66006B5CE9 /* BatterySettingsView.swift in Sources */,
 				4141B20228D871B900B60157 /* ContentView.swift in Sources */,
 				417153E829F2D80C00639A7B /* Date+compare.swift in Sources */,
@@ -904,6 +919,7 @@
 				4128E4C128DA5F6600C1D698 /* Date.swift in Sources */,
 				41DD7F3A29C5B8940072CDE8 /* SolarPowerView.swift in Sources */,
 				4107446528CA1D76006D5D7D /* FlowingLine.swift in Sources */,
+				417AA21D2A1245C00073CD34 /* StatsTabViewModel.swift in Sources */,
 				41E1DFDF28D87781001235B9 /* SettingsTabView.swift in Sources */,
 				4107446328CA1C5D006D5D7D /* PowerFlowView.swift in Sources */,
 				41A25D3F28CA5CFB00315714 /* GraphTabViewModel.swift in Sources */,

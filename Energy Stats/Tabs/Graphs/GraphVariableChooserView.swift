@@ -13,7 +13,7 @@ struct GraphVariableChooserView: View {
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             Form {
                 Section {
                     Button("Default") { viewModel.chooseDefaultVariables() }
@@ -47,31 +47,33 @@ struct GraphVariableChooserView: View {
                 }
             }
 
-            Section {
-                VStack(spacing: 0) {
-                    HStack {
-                        Button(action: {
-                            dismiss()
-                        }) {
-                            Text("Cancel")
-                                .frame(maxWidth: .infinity)
-                        }
-                        .padding()
-                        .buttonStyle(.borderedProminent)
+            VStack(spacing: 0) {
+                Color("BottomBarDivider")
+                    .frame(height: 1)
+                    .frame(maxWidth: .infinity)
 
-                        Button(action: {
-                            viewModel.apply()
-                            dismiss()
-                        }) {
-                            Text("Apply")
-                                .frame(maxWidth: .infinity)
-                        }
-                        .padding()
-                        .buttonStyle(.borderedProminent)
+                HStack {
+                    Button(action: {
+                        dismiss()
+                    }) {
+                        Text("Cancel")
+                            .frame(maxWidth: .infinity)
                     }
+                    .padding()
+                    .buttonStyle(.borderedProminent)
 
-                    Text("Note that not all variables contain values")
+                    Button(action: {
+                        viewModel.apply()
+                        dismiss()
+                    }) {
+                        Text("Apply")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .padding()
+                    .buttonStyle(.borderedProminent)
                 }
+
+                Text("Note that not all variables contain values")
             }
         }
     }

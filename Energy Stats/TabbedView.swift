@@ -40,8 +40,17 @@ struct TabbedView: View {
                 GraphTabView(viewModel: graphViewModel)
                     .tabItem {
                         VStack {
-                            Image(systemName: "lines.measurement.horizontal")
-                            Text("Graphs")
+                            Image(systemName: "chart.xyaxis.line")
+                            Text("Parameters")
+                        }
+                        .accessibilityIdentifier("graph_tab")
+                    }
+
+                StatsTabView(viewModel: StatsTabViewModel())
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "chart.bar.xaxis")
+                            Text("Stats")
                         }
                         .accessibilityIdentifier("graph_tab")
                     }

@@ -14,9 +14,9 @@ struct ValuesAtTime {
     let values: [GraphValue]
 }
 
-enum GraphDisplayMode: Equatable {
-    case today(_ hours: Int)
-    case historic(_ date: Date)
+struct GraphDisplayMode {
+    let date: Date
+    let hours: Int
 }
 
 class GraphTabViewModel: ObservableObject {
@@ -39,38 +39,29 @@ class GraphTabViewModel: ObservableObject {
     private var queryDate = QueryDate.current()
     private var hours: Int = 24
 
-    @Published var displayMode = GraphDisplayMode.today(24) {
+    @Published var displayMode = GraphDisplayMode(date: .now, hours: 24) {
         didSet {
-            switch displayMode {
-            case .today(let hours):
-                let previousHours = self.hours
-                switch hours {
-                case 6:
-                    stride = 1
-                case 12:
-                    stride = 2
-                default:
-                    stride = 3
-                }
+            let previousHours = hours
 
-                if queryDate != QueryDate(from: dateProvider()) {
-                    queryDate = QueryDate(from: dateProvider())
-                    Task { @MainActor in
-                        await load()
-                    }
+            switch hours {
+            case 6:
+                stride = 1
+            case 12:
+                stride = 2
+            default:
+                stride = 3
+            }
+
+            let updatedDate = QueryDate(from: displayMode.date)
+            if queryDate != updatedDate {
+                queryDate = updatedDate
+                Task { @MainActor in
+                    await load()
                 }
-                if hours != previousHours {
-                    self.hours = hours
-                    refresh()
-                }
-            case .historic(let date):
-                if queryDate != QueryDate(from: date) {
-                    queryDate = QueryDate(from: date)
-                    stride = 24
-                    Task { @MainActor in
-                        await load()
-                    }
-                }
+            }
+            if displayMode.hours != previousHours {
+                hours = displayMode.hours
+                refresh()
             }
         }
     }
@@ -149,12 +140,9 @@ class GraphTabViewModel: ObservableObject {
         let refreshedData = rawData
             .filter { !hiddenVariableTypes.contains($0.variable) }
             .filter { value in
-                if case .today(let hours) = displayMode {
-                    let oldest = dateProvider().addingTimeInterval(0 - (3600 * Double(hours)))
-                    return value.date > oldest
-                } else {
-                    return true
-                }
+                let hours = displayMode.hours
+                let oldest = displayMode.date.addingTimeInterval(0 - (3600 * Double(hours)))
+                return value.date > oldest
             }
             .sorted(by: { lhs, rhs in
                 lhs.date < rhs.date

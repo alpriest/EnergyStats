@@ -20,6 +20,7 @@ struct GraphTabView: View {
         Group {
             VStack {
                 GraphHeaderView(displayMode: $viewModel.displayMode, showingVariables: $showingVariables)
+                    .padding(.horizontal)
 
                 ScrollView {
                     UsageGraphView(viewModel: viewModel,
