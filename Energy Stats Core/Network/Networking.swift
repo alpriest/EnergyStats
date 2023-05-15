@@ -22,7 +22,7 @@ extension URL {
 public protocol Networking {
     func ensureHasToken() async
     func verifyCredentials(username: String, hashedPassword: String) async throws
-    func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate) async throws -> [ReportResponse]
+    func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [ReportResponse]
     func fetchBattery(deviceID: String) async throws -> BatteryResponse
     func fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse
     func fetchRaw(deviceID: String, variables: [RawVariable], queryDate: QueryDate) async throws -> [RawResponse]
@@ -77,10 +77,10 @@ public class Network: Networking {
         return response.0.token
     }
 
-    public func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate) async throws -> [ReportResponse] {
+    public func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [ReportResponse] {
         var request = URLRequest(url: URL.report)
         request.httpMethod = "POST"
-        request.httpBody = try! JSONEncoder().encode(ReportRequest(deviceID: deviceID, variables: variables, queryDate: queryDate))
+        request.httpBody = try! JSONEncoder().encode(ReportRequest(deviceID: deviceID, variables: variables, queryDate: queryDate, reportType: reportType))
 
         let result: ([ReportResponse], Data) = try await fetch(request)
         store.reportResponse = NetworkOperation(description: "fetchReport", value: result.0, raw: result.1)

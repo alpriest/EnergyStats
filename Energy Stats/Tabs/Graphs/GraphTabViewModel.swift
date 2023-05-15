@@ -19,9 +19,16 @@ struct GraphDisplayMode {
     let hours: Int
 }
 
-class GraphTabViewModel: ObservableObject {
+protocol Graphable: ObservableObject {
+    var data: [GraphValue] { get }
+    var stride: Int { get }
+    func data(at date: Date) -> ValuesAtTime
+}
+
+class GraphTabViewModel: Graphable {
     private let haptic = UIImpactFeedbackGenerator()
     private let networking: Networking
+    private let configManager: ConfigManaging
     private var rawData: [GraphValue] = [] {
         didSet {
             data = rawData
@@ -65,8 +72,6 @@ class GraphTabViewModel: ObservableObject {
             }
         }
     }
-
-    private let configManager: ConfigManaging
 
     static let DefaultGraphVariables = ["generationPower",
                                         "batChargePower",
@@ -113,7 +118,7 @@ class GraphTabViewModel: ObservableObject {
                 }
             }
 
-            let reports = try await networking.fetchReport(deviceID: currentDevice.deviceID, variables: reportVariables, queryDate: queryDate)
+            let reports = try await networking.fetchReport(deviceID: currentDevice.deviceID, variables: reportVariables, queryDate: queryDate, reportType: .day)
             rawGraphVariables.forEach { rawVariable in
                 guard let reportVariable = rawVariable.reportVariable else { return }
                 guard let response = reports.first(where: { $0.variable.lowercased() == reportVariable.networkTitle.lowercased() }) else { return }

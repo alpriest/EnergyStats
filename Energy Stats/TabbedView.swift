@@ -15,6 +15,7 @@ struct TabbedView: View {
     @StateObject var summaryViewModel: PowerFlowTabViewModel
     @StateObject var graphViewModel: GraphTabViewModel
     @StateObject var settingsTabViewModel: SettingsTabViewModel
+    @StateObject var statsTabViewModel: StatsTabViewModel
 
     init(networking: Networking, userManager: UserManager, configManager: ConfigManager) {
         self.networking = networking
@@ -23,6 +24,7 @@ struct TabbedView: View {
         _summaryViewModel = .init(wrappedValue: PowerFlowTabViewModel(networking, configManager: configManager))
         _graphViewModel = .init(wrappedValue: GraphTabViewModel(networking, configManager: configManager))
         _settingsTabViewModel = .init(wrappedValue: SettingsTabViewModel(userManager: userManager, config: configManager))
+        _statsTabViewModel = .init(wrappedValue: StatsTabViewModel(networking: networking, configManager: configManager))
     }
 
     var body: some View {
@@ -37,20 +39,20 @@ struct TabbedView: View {
                 }
 
             if #available(iOS 16.0, *) {
+                StatsTabView(viewModel: statsTabViewModel)
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "chart.bar.xaxis")
+                            Text("Stats")
+                        }
+                        .accessibilityIdentifier("graph_tab")
+                    }
+
                 GraphTabView(viewModel: graphViewModel)
                     .tabItem {
                         VStack {
                             Image(systemName: "chart.xyaxis.line")
                             Text("Parameters")
-                        }
-                        .accessibilityIdentifier("graph_tab")
-                    }
-
-                StatsTabView(viewModel: StatsTabViewModel())
-                    .tabItem {
-                        VStack {
-                            Image(systemName: "chart.bar.xaxis")
-                            Text("Stats")
                         }
                         .accessibilityIdentifier("graph_tab")
                     }
@@ -75,7 +77,7 @@ struct TabbedView: View {
 #if DEBUG
 struct TabbedView_Previews: PreviewProvider {
     static var previews: some View {
-        TabbedView(networking: DemoNetworking(), userManager:.preview(), configManager: PreviewConfigManager())
+        TabbedView(networking: DemoNetworking(), userManager: .preview(), configManager: PreviewConfigManager())
     }
 }
 #endif

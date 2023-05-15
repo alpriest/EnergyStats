@@ -9,6 +9,12 @@ import Charts
 import Energy_Stats_Core
 import SwiftUI
 
+enum StatsDisplayMode: Equatable {
+    case day(Date)
+    case month(_ month: Int, _ year: Int)
+    case year(Int)
+}
+
 @available(iOS 16.0, *)
 struct StatsTabView: View {
     @ObservedObject var viewModel: StatsTabViewModel
@@ -18,18 +24,17 @@ struct StatsTabView: View {
     var body: some View {
         Group {
             VStack {
-                HStack {
-                    Text("Years")
-                    Text("2023")
-                }
-//                GraphHeaderView(displayMode: $viewModel.displayMode, showingVariables: $showingVariables)
+                DatePickerView(viewModel: DatePickerViewModel($viewModel.displayMode))
+                    .padding(.horizontal)
 
                 ScrollView {
-//                    UsageGraphView(viewModel: viewModel,
-//                                   selectedDate: $selectedDate,
-//                                   valuesAtTime: $valuesAtTime)
-//                        .frame(height: 250)
-//                        .padding(.vertical)
+                    UsageGraphView(viewModel: viewModel,
+                                   selectedDate: $selectedDate,
+                                   valuesAtTime: $valuesAtTime)
+                        .frame(height: 250)
+                        .padding(.vertical)
+
+                    Text(String(describing: viewModel.displayMode))
 //
 //                    GraphVariablesToggles(viewModel: viewModel, selectedDate: $selectedDate, valuesAtTime: $valuesAtTime)
                 }
@@ -44,10 +49,12 @@ struct StatsTabView: View {
     }
 }
 
+#if DEBUG
 @available(iOS 16.0, *)
 struct StatsTabView_Previews: PreviewProvider {
     static var previews: some View {
-        StatsTabView(viewModel: StatsTabViewModel())
+        StatsTabView(viewModel: StatsTabViewModel(networking: DemoNetworking(), configManager: PreviewConfigManager()))
             .previewDevice("iPhone 13 Mini")
     }
 }
+#endif

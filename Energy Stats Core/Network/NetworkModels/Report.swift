@@ -7,29 +7,36 @@
 
 import Foundation
 
+public enum ReportType: String, RawRepresentable, Encodable {
+    case day
+    case month
+    case year
+}
+
 struct ReportRequest: Encodable {
     let deviceID: String
-    let reportType = "day"
+    let reportType: ReportType
     let variables: [String]
     let queryDate: QueryDate
 
-    internal init(deviceID: String, variables: [ReportVariable], queryDate: QueryDate) {
+    internal init(deviceID: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) {
         self.deviceID = deviceID
         self.variables = variables.map { $0.networkTitle }
         self.queryDate = queryDate
+        self.reportType = reportType
     }
 }
 
 public struct QueryDate: Encodable {
     let year: Int
-    let month: Int
-    let day: Int
+    let month: Int?
+    let day: Int?
 
     public static func current() -> QueryDate {
         QueryDate(from: Date())
     }
 
-    public init(year: Int, month: Int, day: Int) {
+    public init(year: Int, month: Int?, day: Int?) {
         self.year = year
         self.month = month
         self.day = day

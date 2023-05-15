@@ -91,6 +91,8 @@
 		41923E3E2916BC6F00D1A8C5 /* UsageGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41923E3D2916BC6F00D1A8C5 /* UsageGraphView.swift */; };
 		41923E422916BECC00D1A8C5 /* GraphTabViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41923E412916BECC00D1A8C5 /* GraphTabViewTests.swift */; };
 		419CCB542933BABF00882649 /* ErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419CCB532933BABF00882649 /* ErrorAlertView.swift */; };
+		419DFA862A12930E0067313A /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419DFA842A1292380067313A /* DatePickerView.swift */; };
+		419DFA882A12A6DF0067313A /* DatePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419DFA872A12A6DF0067313A /* DatePickerViewModel.swift */; };
 		41A25D3D28CA5CDF00315714 /* GraphTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A25D3C28CA5CDF00315714 /* GraphTabView.swift */; };
 		41A25D3F28CA5CFB00315714 /* GraphTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A25D3E28CA5CFB00315714 /* GraphTabViewModel.swift */; };
 		41A95B9729DB3F6A00A35169 /* Energy_Stats_Core.h in Headers */ = {isa = PBXBuildFile; fileRef = 41A95B9629DB3F6A00A35169 /* Energy_Stats_Core.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -249,6 +251,8 @@
 		41923E3D2916BC6F00D1A8C5 /* UsageGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageGraphView.swift; sourceTree = "<group>"; };
 		41923E412916BECC00D1A8C5 /* GraphTabViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTabViewTests.swift; sourceTree = "<group>"; };
 		419CCB532933BABF00882649 /* ErrorAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertView.swift; sourceTree = "<group>"; };
+		419DFA842A1292380067313A /* DatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
+		419DFA872A12A6DF0067313A /* DatePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewModel.swift; sourceTree = "<group>"; };
 		41A25D3C28CA5CDF00315714 /* GraphTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTabView.swift; sourceTree = "<group>"; };
 		41A25D3E28CA5CFB00315714 /* GraphTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTabViewModel.swift; sourceTree = "<group>"; };
 		41A25D4028CA6E0000315714 /* DemoNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoNetworking.swift; sourceTree = "<group>"; };
@@ -519,6 +523,8 @@
 			children = (
 				417AA2192A12454A0073CD34 /* StatsTabView.swift */,
 				417AA21C2A1245C00073CD34 /* StatsTabViewModel.swift */,
+				419DFA842A1292380067313A /* DatePickerView.swift */,
+				419DFA872A12A6DF0067313A /* DatePickerViewModel.swift */,
 			);
 			path = Stats;
 			sourceTree = "<group>";
@@ -904,6 +910,7 @@
 				416318C029DDD82800C2C285 /* ResponseDebugView.swift in Sources */,
 				414BF82829B4918300E2EB51 /* SettingsTabViewModel.swift in Sources */,
 				4162BC302A097C1300DFEDC1 /* SunView.swift in Sources */,
+				419DFA862A12930E0067313A /* DatePickerView.swift in Sources */,
 				416318B929DDD44C00C2C285 /* DebugDataView.swift in Sources */,
 				41E4B31328DB77A3003F7F47 /* HomePowerView.swift in Sources */,
 				41A25D3D28CA5CDF00315714 /* GraphTabView.swift in Sources */,
@@ -911,6 +918,7 @@
 				41E4B31028DB7666003F7F47 /* BatteryPowerView.swift in Sources */,
 				4140144E28C70B3200EA5BA1 /* Energy_StatsApp.swift in Sources */,
 				41C49EAE2A0398E4003700CB /* PreviewUserManager.swift in Sources */,
+				419DFA882A12A6DF0067313A /* DatePickerViewModel.swift in Sources */,
 				4171854E2A010B6300D18CDD /* GraphVariableChooserViewModel.swift in Sources */,
 				417153E629F2BD3300639A7B /* LoadState.swift in Sources */,
 				4130364B29B8BE7F006B5CE9 /* InverterChoiceView.swift in Sources */,

@@ -44,7 +44,7 @@ class MockNetworking: Networking {
 
     func fetchDeviceList() async throws -> PagedDeviceListResponse {
         PagedDeviceListResponse(currentPage: 1, pageSize: 1, total: 1, devices: [
-            PagedDeviceListResponse.Device(plantName: "plant1", deviceID: "abcdef", deviceSN: "123123", hasBattery: true, hasPV: true)
+            PagedDeviceListResponse.Device(plantName: "plant1", deviceID: "abcdef", deviceSN: "123123", hasBattery: true, hasPV: true, deviceType: "F4000")
         ])
     }
 
