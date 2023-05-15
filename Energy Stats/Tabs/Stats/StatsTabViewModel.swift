@@ -8,7 +8,7 @@
 import Energy_Stats_Core
 import Foundation
 
-class StatsTabViewModel: Graphable {
+class StatsTabViewModel: ObservableObject {
     private let networking: Networking
     private let configManager: ConfigManaging
 
@@ -35,20 +35,20 @@ class StatsTabViewModel: Graphable {
 
     func load() async {
         print("AWP", "load")
-//        guard let currentDevice = configManager.currentDevice.value else { return }
-//
-//        let reportVariables: [ReportVariable] = [.feedIn, .generation, .chargeEnergyToTal, .dischargeEnergyToTal, .gridConsumption]
-//        let queryDate = makeQueryDate()
-//        let reportType = makeReportType()
-//
-//        do {
-//            let reports = try await networking.fetchReport(deviceID: currentDevice.deviceID, variables: reportVariables, queryDate: queryDate, reportType: reportType)
-//            
-//        } catch {
-//            await MainActor.run {
-//                self.state = .error(error, "Could not load, check your connection")
-//            }
-//        }
+        guard let currentDevice = configManager.currentDevice.value else { return }
+
+        let reportVariables: [ReportVariable] = [.feedIn, .generation, .chargeEnergyToTal, .dischargeEnergyToTal, .gridConsumption]
+        let queryDate = makeQueryDate()
+        let reportType = makeReportType()
+
+        do {
+            let reports = try await networking.fetchReport(deviceID: currentDevice.deviceID, variables: reportVariables, queryDate: queryDate, reportType: reportType)
+
+        } catch {
+            await MainActor.run {
+                self.state = .error(error, "Could not load, check your connection")
+            }
+        }
 //        rawGraphVariables.forEach { rawVariable in
 //            guard let reportVariable = rawVariable.reportVariable else { return }
 //            guard let response = reports.first(where: { $0.variable.lowercased() == reportVariable.networkTitle.lowercased() }) else { return }

@@ -19,13 +19,7 @@ struct GraphDisplayMode {
     let hours: Int
 }
 
-protocol Graphable: ObservableObject {
-    var data: [GraphValue] { get }
-    var stride: Int { get }
-    func data(at date: Date) -> ValuesAtTime
-}
-
-class GraphTabViewModel: Graphable {
+class GraphTabViewModel: ObservableObject {
     private let haptic = UIImpactFeedbackGenerator()
     private let networking: Networking
     private let configManager: ConfigManaging

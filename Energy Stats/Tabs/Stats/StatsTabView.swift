@@ -28,9 +28,7 @@ struct StatsTabView: View {
                     .padding(.horizontal)
 
                 ScrollView {
-                    UsageGraphView(viewModel: viewModel,
-                                   selectedDate: $selectedDate,
-                                   valuesAtTime: $valuesAtTime)
+                    StatsGraphView()
                         .frame(height: 250)
                         .padding(.vertical)
 

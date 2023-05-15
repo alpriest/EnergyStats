@@ -10,8 +10,8 @@ import Energy_Stats_Core
 import SwiftUI
 
 @available(iOS 16.0, *)
-struct UsageGraphView<T: Graphable>: View {
-    @ObservedObject var viewModel: T
+struct UsageGraphView: View {
+    @ObservedObject var viewModel: GraphTabViewModel
     @GestureState var isDetectingPress = true
     @Binding var selectedDate: Date?
     @Binding var valuesAtTime: ValuesAtTime?
@@ -21,7 +21,7 @@ struct UsageGraphView<T: Graphable>: View {
             LineMark(
                 x: .value("hour", $0.date),
                 y: .value("", $0.value),
-                series: .value("Title", $0.variable.name) //TODO: (as: .snapshot))
+                series: .value("Title", $0.variable.title(as: .snapshot))
             )
             .foregroundStyle($0.variable.colour)
         }
