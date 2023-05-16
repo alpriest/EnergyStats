@@ -29,7 +29,6 @@ struct StatsTabView: View {
         Group {
             VStack {
                 DatePickerView(viewModel: DatePickerViewModel($viewModel.displayMode))
-                    .padding(.horizontal)
 
                 ScrollView {
                     StatsGraphView(data: viewModel.data, unit: viewModel.unit, stride: 3)

@@ -62,10 +62,10 @@ struct ParameterGraphHeaderView: View {
                         Label("24 hours", systemImage: hours == 24 ? "checkmark" : "")
                     }
                 } label: {
-                    Button {} label: {
+                    NonFunctionalButton {
                         Image(systemName: "clock")
                             .frame(minWidth: 22)
-                    }.buttonStyle(.bordered)
+                    }
                 }
                 .disabled(!Calendar.current.isDate(candidateQueryDate, inSameDayAs: .now))
 

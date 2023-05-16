@@ -115,6 +115,7 @@
 		41C0B43429F96D3600CA9462 /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0B43329F96D3600CA9462 /* LocalizedString.swift */; };
 		41C49EAE2A0398E4003700CB /* PreviewUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C49EAD2A0398E4003700CB /* PreviewUserManager.swift */; };
 		41CD1F322A1414C1006B0C00 /* StatsGraphVariableToggles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CD1F312A1414C1006B0C00 /* StatsGraphVariableToggles.swift */; };
+		41CD1F342A141F81006B0C00 /* NonFunctionalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CD1F332A141F81006B0C00 /* NonFunctionalButton.swift */; };
 		41DD7F3A29C5B8940072CDE8 /* SolarPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD7F3929C5B8940072CDE8 /* SolarPowerView.swift */; };
 		41E1DFDF28D87781001235B9 /* SettingsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E1DFDE28D87781001235B9 /* SettingsTabView.swift */; };
 		41E299CF29B7260D001F017B /* Energy_Stats_UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E299CE29B7260D001F017B /* Energy_Stats_UITestsLaunchTests.swift */; };
@@ -285,6 +286,7 @@
 		41C0B43529F9753000CA9462 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		41C49EAD2A0398E4003700CB /* PreviewUserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewUserManager.swift; sourceTree = "<group>"; };
 		41CD1F312A1414C1006B0C00 /* StatsGraphVariableToggles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGraphVariableToggles.swift; sourceTree = "<group>"; };
+		41CD1F332A141F81006B0C00 /* NonFunctionalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonFunctionalButton.swift; sourceTree = "<group>"; };
 		41D6496B28DB321600A24B41 /* DeviceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceList.swift; sourceTree = "<group>"; };
 		41D7B12328C86E4000E14144 /* Raw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Raw.swift; sourceTree = "<group>"; };
 		41DD7F3929C5B8940072CDE8 /* SolarPowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarPowerView.swift; sourceTree = "<group>"; };
@@ -358,6 +360,7 @@
 				416318BD29DDD80E00C2C285 /* View+Copy.swift */,
 				417153E729F2D80C00639A7B /* Date+compare.swift */,
 				41C0B43329F96D3600CA9462 /* LocalizedString.swift */,
+				41CD1F332A141F81006B0C00 /* NonFunctionalButton.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -366,7 +369,7 @@
 			isa = PBXGroup;
 			children = (
 				41E1DFDD28D87778001235B9 /* Settings */,
-				41A25D3B28CA5CBD00315714 /* Graphs */,
+				41A25D3B28CA5CBD00315714 /* Parameters Graph */,
 				41A25D3A28CA5CB700315714 /* Power Flow */,
 				417AA21B2A1245AE0073CD34 /* Stats */,
 			);
@@ -551,7 +554,7 @@
 			path = "Power Flow";
 			sourceTree = "<group>";
 		};
-		41A25D3B28CA5CBD00315714 /* Graphs */ = {
+		41A25D3B28CA5CBD00315714 /* Parameters Graph */ = {
 			isa = PBXGroup;
 			children = (
 				41A25D3C28CA5CDF00315714 /* ParametersGraphTabView.swift */,
@@ -563,7 +566,7 @@
 				4171854B2A01033700D18CDD /* ParameterGraphVariablesToggles.swift */,
 				4171854D2A010B6300D18CDD /* GraphVariableChooserViewModel.swift */,
 			);
-			path = Graphs;
+			path = "Parameters Graph";
 			sourceTree = "<group>";
 		};
 		41A95B7E29DB2F0900A35169 /* Energy Stats Watch App Watch App */ = {
@@ -900,6 +903,7 @@
 				418EEEB52916843A006A8290 /* View+If.swift in Sources */,
 				4140145028C70B3200EA5BA1 /* TabbedView.swift in Sources */,
 				4141B20028D86C7200B60157 /* UserManager.swift in Sources */,
+				41CD1F342A141F81006B0C00 /* NonFunctionalButton.swift in Sources */,
 				41028F9528CDD7A300FB70FD /* OptionalView.swift in Sources */,
 				419CCB542933BABF00882649 /* ErrorAlertView.swift in Sources */,
 				41339C7228CC7B7B0062B976 /* LoginView.swift in Sources */,

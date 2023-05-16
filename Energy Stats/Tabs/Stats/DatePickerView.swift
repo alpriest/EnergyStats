@@ -31,10 +31,9 @@ struct DatePickerView: View {
                     Label("Year", systemImage: viewModel.range == .year ? "checkmark" : "")
                 }
             } label: {
-                Button {} label: {
+                NonFunctionalButton {
                     Image(systemName: "calendar.badge.clock")
                 }
-                .buttonStyle(.bordered)
             }
 
             HStack {
@@ -45,22 +44,38 @@ struct DatePickerView: View {
                         .labelsHidden()
                 case .month:
                     HStack {
-                        Picker("Month", selection: $viewModel.month) {
-                            ForEach(Array(Calendar.current.monthSymbols.enumerated()), id: \.element) { index, text in
-                                Text(text).tag(index)
+                        Menu {
+                            Picker("Month", selection: $viewModel.month) {
+                                ForEach(Array(Calendar.current.monthSymbols.reversed().enumerated()), id: \.element) { index, text in
+                                    Text(text).tag(index)
+                                }
+                            }
+                        } label: {
+                            NonFunctionalButton {
+                                Text(Calendar.current.shortMonthSymbols[viewModel.month])
+                                    .frame(minWidth: 35)
+                                Image(systemName: "chevron.up.chevron.down")
+                                    .font(.footnote)
                             }
                         }
-                        .pickerStyle(.menu)
                         .onChange(of: viewModel.month) { _ in
                             viewModel.updateDisplayMode()
                         }
 
-                        Picker("Year", selection: $viewModel.year) {
-                            ForEach(Array((1990 ..< 2024).reversed()), id: \.self) {
-                                Text(String(describing: $0))
+                        Menu {
+                            Picker("Year", selection: $viewModel.year) {
+                                ForEach(Array(viewModel.yearRange.reversed()), id: \.self) {
+                                    Text(String(describing: $0))
+                                }
+                            }
+                        } label: {
+                            NonFunctionalButton {
+                                Text("\(String(describing: viewModel.year))")
+                                    .frame(minWidth: 30)
+                                Image(systemName: "chevron.up.chevron.down")
+                                    .font(.footnote)
                             }
                         }
-                        .pickerStyle(.menu)
                         .onChange(of: viewModel.year) { _ in
                             viewModel.updateDisplayMode()
                         }
@@ -95,7 +110,9 @@ struct DatePickerView: View {
 
 struct DatePickerView_Previews: PreviewProvider {
     static var previews: some View {
-        let model = DatePickerViewModel(.constant(.day(.now)))
-        DatePickerView(viewModel: model)
+        let model = DatePickerViewModel(.constant(.month(8, 2023)))
+
+        return DatePickerView(viewModel: model)
+            .previewDevice("iPhone SE (3rd generation)")
     }
 }

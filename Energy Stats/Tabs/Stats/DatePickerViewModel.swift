@@ -25,6 +25,7 @@ class DatePickerViewModel: ObservableObject {
     @Published var date = Date.now {
         didSet { updateDisplayMode() }
     }
+    var yearRange = 2000...(Calendar.current.component(.year, from: .now))
 
     @MainActor @Binding var displayMode: StatsDisplayMode
     private var isInitialised = false
