@@ -1,5 +1,5 @@
 //
-//  GraphTabView.swift
+//  ParametersGraphTabView.swift
 //  Energy Stats
 //
 //  Created by Alistair Priest on 08/09/2022.
@@ -10,16 +10,20 @@ import Energy_Stats_Core
 import SwiftUI
 
 @available(iOS 16.0, *)
-struct GraphTabView: View {
-    @ObservedObject var viewModel: GraphTabViewModel
-    @State private var valuesAtTime: ValuesAtTime?
+struct ParametersGraphTabView: View {
+    @StateObject var viewModel: ParametersGraphTabViewModel
+    @State private var valuesAtTime: ValuesAtTime<GraphValue>?
     @State private var selectedDate: Date?
     @State private var showingVariables: Bool = false
+
+    init(configManager: ConfigManaging, networking: Networking) {
+        _viewModel = .init(wrappedValue: ParametersGraphTabViewModel(networking: networking, configManager: configManager))
+    }
 
     var body: some View {
         Group {
             VStack {
-                GraphHeaderView(displayMode: $viewModel.displayMode, showingVariables: $showingVariables)
+                ParameterGraphHeaderView(displayMode: $viewModel.displayMode, showingVariables: $showingVariables)
                     .padding(.horizontal)
 
                 ScrollView {
@@ -29,13 +33,13 @@ struct GraphTabView: View {
                         .frame(height: 250)
                         .padding(.vertical)
 
-                    GraphVariablesToggles(viewModel: viewModel, selectedDate: $selectedDate, valuesAtTime: $valuesAtTime)
+                    ParameterGraphVariablesToggles(viewModel: viewModel, selectedDate: $selectedDate, valuesAtTime: $valuesAtTime)
                 }
             }
             .padding()
         }
         .sheet(isPresented: $showingVariables) {
-            GraphVariableChooserView(viewModel: GraphVariableChooserViewModel(variables: viewModel.graphVariables, onApply: { viewModel.set(graphVariables: $0) }))
+            ParameterGraphVariableChooserView(viewModel: ParameterGraphVariableChooserViewModel(variables: viewModel.graphVariables, onApply: { viewModel.set(graphVariables: $0) }))
         }
         .task {
             Task {
@@ -48,7 +52,7 @@ struct GraphTabView: View {
 @available(iOS 16.0, *)
 struct GraphTabView_Previews: PreviewProvider {
     static var previews: some View {
-        GraphTabView(viewModel: GraphTabViewModel(DemoNetworking(), configManager: PreviewConfigManager()))
+        ParametersGraphTabView(configManager: PreviewConfigManager(), networking: DemoNetworking())
             .previewDevice("iPhone 13 Mini")
     }
 }

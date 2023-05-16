@@ -26,18 +26,15 @@ class StatsTabViewModel: ObservableObject {
     @Published var data: [StatsGraphValue] = []
     @Published var unit: Calendar.Component = .hour
     @Published var graphVariables: [StatsGraphVariable] = []
+    private var totals: [ReportVariable: Double] = [:]
 
     init(networking: Networking, configManager: ConfigManaging) {
         self.networking = networking
         self.configManager = configManager
 
-        graphVariables = [ReportVariable.feedIn, .generation, .chargeEnergyToTal, .dischargeEnergyToTal, .gridConsumption].map {
+        graphVariables = [.generation, ReportVariable.feedIn, .gridConsumption, .chargeEnergyToTal, .dischargeEnergyToTal].map {
             StatsGraphVariable($0, isSelected: true)
         }
-    }
-
-    func data(at date: Date) -> ValuesAtTime {
-        ValuesAtTime(values: [])
     }
 
     func load() async {
@@ -60,8 +57,12 @@ class StatsTabViewModel: ObservableObject {
                 updatedUnit = .month
             }
 
+            totals = [:]
+
             let updatedData = reports.flatMap { reportResponse -> [StatsGraphValue] in
                 guard let reportVariable = ReportVariable(rawValue: reportResponse.variable) else { return [] }
+
+                totals[reportVariable] = reportResponse.data.map { abs($0.value) }.reduce(0.0, +)
 
                 return reportResponse.data.map { dataPoint in
                     var graphPointDate = Date.yesterday()
@@ -103,14 +104,14 @@ class StatsTabViewModel: ObservableObject {
                 lhs.date < rhs.date
             })
 
-//        max = refreshedData.max(by: { lhs, rhs in
-//            lhs.value < rhs.value
-//        })
         data = refreshedData
+    }
 
-//        let scaleMin = ((refreshedData.min(by: { lhs, rhs in lhs.value < rhs.value })?.value) ?? 0) - 0.5
-//        let scaleMax = ((max?.value) ?? 0) + 0.5
-//        yScale = scaleMin ... scaleMax
+    func total(of type: ReportVariable?) -> Double? {
+        guard let type = type else { return nil }
+        guard totals.keys.contains(type) else { return nil }
+
+        return totals[type]
     }
 
     func toggle(visibilityOf variable: StatsGraphVariable) {

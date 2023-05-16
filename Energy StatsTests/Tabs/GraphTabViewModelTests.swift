@@ -11,7 +11,7 @@ import Energy_Stats_Core
 
 @MainActor
 final class GraphTabViewModelTests: XCTestCase {
-    var sut: GraphTabViewModel!
+    var sut: ParametersGraphTabViewModel!
     var networking: Networking!
     var config: MockConfig!
 
@@ -19,7 +19,7 @@ final class GraphTabViewModelTests: XCTestCase {
         config = MockConfig()
         networking = MockNetworking()
         let configManager = ConfigManager(networking: networking, config: config)
-        sut = GraphTabViewModel(networking, configManager: configManager, { Date(timeIntervalSince1970: 1669146973) })
+        sut = ParametersGraphTabViewModel(networking, configManager: configManager, { Date(timeIntervalSince1970: 1669146973) })
 
         try await configManager.fetchDevices()
     }

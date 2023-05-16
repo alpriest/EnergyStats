@@ -11,10 +11,10 @@ import SwiftUI
 
 @available(iOS 16.0, *)
 struct ParametersGraphView: View {
-    @ObservedObject var viewModel: GraphTabViewModel
+    @ObservedObject var viewModel: ParametersGraphTabViewModel
     @GestureState var isDetectingPress = true
     @Binding var selectedDate: Date?
-    @Binding var valuesAtTime: ValuesAtTime?
+    @Binding var valuesAtTime: ValuesAtTime<GraphValue>?
 
     var body: some View {
         Chart(viewModel.data, id: \.variable.variable) {
@@ -100,7 +100,7 @@ struct ParametersGraphView: View {
 @available(iOS 16.0, *)
 struct UsageGraphView_Previews: PreviewProvider {
     static var previews: some View {
-        let model = GraphTabViewModel(DemoNetworking(), configManager: PreviewConfigManager())
+        let model = ParametersGraphTabViewModel(networking: DemoNetworking(), configManager: PreviewConfigManager())
         Task { await model.load() }
         return ParametersGraphView(
             viewModel: model,

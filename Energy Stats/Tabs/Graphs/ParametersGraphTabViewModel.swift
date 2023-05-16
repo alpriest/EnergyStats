@@ -10,8 +10,8 @@ import Energy_Stats_Core
 import Foundation
 import SwiftUI
 
-struct ValuesAtTime {
-    let values: [GraphValue]
+struct ValuesAtTime<T> {
+    let values: [T]
 }
 
 struct GraphDisplayMode {
@@ -19,7 +19,7 @@ struct GraphDisplayMode {
     let hours: Int
 }
 
-class GraphTabViewModel: ObservableObject {
+class ParametersGraphTabViewModel: ObservableObject {
     private let haptic = UIImpactFeedbackGenerator()
     private let networking: Networking
     private let configManager: ConfigManaging
@@ -35,10 +35,10 @@ class GraphTabViewModel: ObservableObject {
 
     @Published private(set) var stride = 3
     @Published private(set) var data: [GraphValue] = []
-    @Published var graphVariables: [GraphVariable] = []
-    @Published private(set) var yScale = -0.5 ... 5.0
+    @Published var graphVariables: [ParameterGraphVariable] = []
     private var queryDate = QueryDate.current()
     private var hours: Int = 24
+    private var max: GraphValue?
 
     @Published var displayMode = GraphDisplayMode(date: .now, hours: 24) {
         didSet {
@@ -74,7 +74,7 @@ class GraphTabViewModel: ObservableObject {
                                         "gridConsumptionPower"]
     private var cancellable: AnyCancellable?
 
-    init(_ networking: Networking, configManager: ConfigManaging, _ dateProvider: @escaping () -> Date = { Date() }) {
+    init(networking: Networking, configManager: ConfigManaging, _ dateProvider: @escaping () -> Date = { Date() }) {
         self.networking = networking
         self.configManager = configManager
         self.dateProvider = dateProvider
@@ -82,10 +82,10 @@ class GraphTabViewModel: ObservableObject {
 
         cancellable = configManager.currentDevice
             .map { device in
-                device?.variables.compactMap { variable -> GraphVariable? in
+                device?.variables.compactMap { variable -> ParameterGraphVariable? in
                     guard let variable = configManager.variables.named(variable.variable) else { return nil }
 
-                    return GraphVariable(variable, isSelected: Self.DefaultGraphVariables.contains(variable.variable), enabled: Self.DefaultGraphVariables.contains(variable.variable))
+                    return ParameterGraphVariable(variable, isSelected: Self.DefaultGraphVariables.contains(variable.variable), enabled: Self.DefaultGraphVariables.contains(variable.variable))
                 } ?? []
             }
             .receive(on: RunLoop.main)
@@ -151,13 +151,7 @@ class GraphTabViewModel: ObservableObject {
             lhs.value < rhs.value
         })
         data = refreshedData
-
-        let scaleMin = ((refreshedData.min(by: { lhs, rhs in lhs.value < rhs.value })?.value) ?? 0) - 0.5
-        let scaleMax = ((max?.value) ?? 0) + 0.5
-        yScale = scaleMin ... scaleMax
     }
-
-    var max: GraphValue?
 
     func total(of type: ReportVariable?) -> Double? {
         guard let type = type else { return nil }
@@ -166,7 +160,7 @@ class GraphTabViewModel: ObservableObject {
         return totals[type]
     }
 
-    func data(at date: Date) -> ValuesAtTime {
+    func data(at date: Date) -> ValuesAtTime<GraphValue> {
         let visibleVariableTypes = graphVariables.filter { $0.enabled }.map { $0.type }
         let result = ValuesAtTime(values: rawData.filter { $0.date == date && visibleVariableTypes.contains($0.variable) })
 
@@ -177,7 +171,7 @@ class GraphTabViewModel: ObservableObject {
         return result
     }
 
-    func toggle(visibilityOf variable: GraphVariable) {
+    func toggle(visibilityOf variable: ParameterGraphVariable) {
         graphVariables = graphVariables.map {
             if $0.type == variable.type {
                 var modified = $0
@@ -189,7 +183,7 @@ class GraphTabViewModel: ObservableObject {
         }
     }
 
-    func set(graphVariables: [GraphVariable]) {
+    func set(graphVariables: [ParameterGraphVariable]) {
         self.graphVariables = graphVariables
         Task { await load() }
     }

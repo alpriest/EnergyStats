@@ -1,5 +1,5 @@
 //
-//  GraphHeaderView.swift
+//  ParameterGraphHeaderView.swift
 //  Energy Stats
 //
 //  Created by Alistair Priest on 21/04/2023.
@@ -9,7 +9,7 @@ import Energy_Stats_Core
 import SwiftUI
 
 @available(iOS 16.0, *)
-struct GraphHeaderView: View {
+struct ParameterGraphHeaderView: View {
     @State private var hours: Int = 24
     @Binding var displayMode: GraphDisplayMode
     @State private var candidateQueryDate = Date()
@@ -97,7 +97,7 @@ struct GraphHeaderView: View {
 struct GraphHeaderView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            GraphHeaderView(displayMode: .constant(GraphDisplayMode(date: .now, hours: 6)), showingVariables: .constant(false))
+            ParameterGraphHeaderView(displayMode: .constant(GraphDisplayMode(date: .now, hours: 6)), showingVariables: .constant(false))
         }
     }
 }

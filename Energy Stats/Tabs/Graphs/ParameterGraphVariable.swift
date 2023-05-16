@@ -8,7 +8,7 @@
 import Energy_Stats_Core
 import Foundation
 
-struct GraphVariable: Identifiable, Equatable, Hashable {
+struct ParameterGraphVariable: Identifiable, Equatable, Hashable {
     let type: RawVariable
     var enabled: Bool
     var isSelected: Bool

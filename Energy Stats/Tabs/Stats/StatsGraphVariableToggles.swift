@@ -1,18 +1,18 @@
 //
-//  GraphVariablesToggles.swift
+//  StatsGraphVariableToggles.swift
 //  Energy Stats
 //
-//  Created by Alistair Priest on 02/05/2023.
+//  Created by Alistair Priest on 16/05/2023.
 //
 
-import Energy_Stats_Core
 import SwiftUI
+import Energy_Stats_Core
 
 @available(iOS 16.0, *)
-struct GraphVariablesToggles: View {
-    @ObservedObject var viewModel: GraphTabViewModel
+struct StatsGraphVariableToggles: View {
+    @ObservedObject var viewModel: StatsTabViewModel
     @Binding var selectedDate: Date?
-    @Binding var valuesAtTime: ValuesAtTime?
+    @Binding var valuesAtTime: ValuesAtTime<StatsGraphValue>?
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -27,10 +27,9 @@ struct GraphVariablesToggles: View {
                                     .padding(.top, 5)
 
                                 VStack(alignment: .leading) {
-                                    let title = valuesAtTime == nil ? variable.type.title(as: .total) : variable.type.title(as: .snapshot)
-                                    Text(title)
+                                    Text(variable.type.title)
 
-                                    if title != variable.type.description {
+                                    if variable.type.title != variable.type.description {
                                         Text(variable.type.description)
                                             .font(.system(size: 10))
                                             .foregroundColor(.gray)
@@ -39,10 +38,10 @@ struct GraphVariablesToggles: View {
 
                                 Spacer()
 
-                                if let valuesAtTime, let graphValue = valuesAtTime.values.first(where: { $0.variable == variable.type }) {
+                                if let valuesAtTime, let graphValue = valuesAtTime.values.first(where: { $0.type == variable.type }) {
                                     Text(graphValue.formatted())
                                 } else {
-                                    OptionalView(viewModel.total(of: variable.type.reportVariable)) {
+                                    OptionalView(viewModel.total(of: variable.type)) {
                                         Text($0.kWh(2))
                                     }
                                 }
@@ -75,12 +74,11 @@ struct GraphVariablesToggles: View {
 }
 
 #if DEBUG
-
 @available(iOS 16.0, *)
-struct GraphVariablesSelection_Previews: PreviewProvider {
+struct StatsGraphVariableToggles_Previews: PreviewProvider {
     static var previews: some View {
-        GraphVariablesToggles(
-            viewModel: GraphTabViewModel(DemoNetworking(), configManager: PreviewConfigManager()),
+        StatsGraphVariableToggles(
+            viewModel: StatsTabViewModel(networking: DemoNetworking(), configManager: PreviewConfigManager()),
             selectedDate: .constant(nil),
             valuesAtTime: .constant(nil)
         )

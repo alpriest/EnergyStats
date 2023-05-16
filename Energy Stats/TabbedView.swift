@@ -12,14 +12,12 @@ struct TabbedView: View {
     let configManager: ConfigManager
     let networking: Networking
     let userManager: UserManager
-    @StateObject var graphViewModel: GraphTabViewModel
     @StateObject var settingsTabViewModel: SettingsTabViewModel
 
     init(networking: Networking, userManager: UserManager, configManager: ConfigManager) {
         self.networking = networking
         self.userManager = userManager
         self.configManager = configManager
-        _graphViewModel = .init(wrappedValue: GraphTabViewModel(networking, configManager: configManager))
         _settingsTabViewModel = .init(wrappedValue: SettingsTabViewModel(userManager: userManager, config: configManager))
     }
 
@@ -35,22 +33,22 @@ struct TabbedView: View {
                 }
 
             if #available(iOS 16.0, *) {
-                StatsTabView(configManager: configManager, networking: networking, appTheme: configManager.appTheme.value)
+                StatsTabView(configManager: configManager, networking: networking)
                     .tabItem {
                         VStack {
                             Image(systemName: "chart.bar.xaxis")
                             Text("Stats")
                         }
-                        .accessibilityIdentifier("graph_tab")
+                        .accessibilityIdentifier("stats_tab")
                     }
 
-                GraphTabView(viewModel: graphViewModel)
+                ParametersGraphTabView(configManager: configManager, networking: networking)
                     .tabItem {
                         VStack {
                             Image(systemName: "chart.xyaxis.line")
                             Text("Parameters")
                         }
-                        .accessibilityIdentifier("graph_tab")
+                        .accessibilityIdentifier("parameters_tab")
                     }
             }
 

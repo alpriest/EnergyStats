@@ -18,13 +18,11 @@ enum StatsDisplayMode: Equatable {
 @available(iOS 16.0, *)
 struct StatsTabView: View {
     @StateObject var viewModel: StatsTabViewModel
-    @State private var valuesAtTime: ValuesAtTime?
+    @State private var valuesAtTime: ValuesAtTime<StatsGraphValue>?
     @State private var selectedDate: Date?
-    private let appTheme: AppTheme
 
-    init(configManager: ConfigManaging, networking: Networking, appTheme: AppTheme) {
+    init(configManager: ConfigManaging, networking: Networking) {
         _viewModel = .init(wrappedValue: StatsTabViewModel(networking: networking, configManager: configManager))
-        self.appTheme = appTheme
     }
 
     var body: some View {
@@ -55,7 +53,7 @@ struct StatsTabView: View {
 @available(iOS 16.0, *)
 struct StatsTabView_Previews: PreviewProvider {
     static var previews: some View {
-        StatsTabView(configManager: PreviewConfigManager(), networking: DemoNetworking(), appTheme: AppTheme.mock())
+        StatsTabView(configManager: PreviewConfigManager(), networking: DemoNetworking())
             .previewDevice("iPhone 13 Mini")
     }
 }

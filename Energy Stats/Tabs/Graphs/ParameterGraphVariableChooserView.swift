@@ -1,5 +1,5 @@
 //
-//  GraphVariableChooserView.swift
+//  ParameterGraphVariableChooserView.swift
 //  Energy Stats
 //
 //  Created by Alistair Priest on 01/05/2023.
@@ -8,8 +8,8 @@
 import Energy_Stats_Core
 import SwiftUI
 
-struct GraphVariableChooserView: View {
-    @ObservedObject var viewModel: GraphVariableChooserViewModel
+struct ParameterGraphVariableChooserView: View {
+    @ObservedObject var viewModel: ParameterGraphVariableChooserViewModel
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
@@ -102,8 +102,8 @@ struct VariableChooser_Previews: PreviewProvider {
                          RawVariable(name: "cPVPower", variable: "pvPower", unit: "kW"),
                          RawVariable(name: "cPV2Volt", variable: "pv2Volt", unit: "V"),
                          RawVariable(name: "dPV2Current", variable: "pv2Current", unit: "A"),
-                         RawVariable(name: "dPV2Power", variable: "pv2Power", unit: "kW")].map { GraphVariable($0, isSelected: [true, false].randomElement()!) }
+                         RawVariable(name: "dPV2Power", variable: "pv2Power", unit: "kW")].map { ParameterGraphVariable($0, isSelected: [true, false].randomElement()!) }
 
-        return GraphVariableChooserView(viewModel: GraphVariableChooserViewModel(variables: variables, onApply: { _ in }))
+        return ParameterGraphVariableChooserView(viewModel: ParameterGraphVariableChooserViewModel(variables: variables, onApply: { _ in }))
     }
 }

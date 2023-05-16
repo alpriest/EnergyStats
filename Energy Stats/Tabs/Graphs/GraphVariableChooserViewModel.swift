@@ -1,5 +1,5 @@
 //
-//  GraphVariableChooserViewModel.swift
+//  ParameterGraphVariableChooserViewModel.swift
 //  Energy Stats
 //
 //  Created by Alistair Priest on 02/05/2023.
@@ -7,18 +7,18 @@
 
 import SwiftUI
 
-class GraphVariableChooserViewModel: ObservableObject {
-    @Published var variables: [GraphVariable] = []
-    private let onApply: ([GraphVariable]) -> Void
+class ParameterGraphVariableChooserViewModel: ObservableObject {
+    @Published var variables: [ParameterGraphVariable] = []
+    private let onApply: ([ParameterGraphVariable]) -> Void
     private let haptic = UIImpactFeedbackGenerator()
 
-    init(variables: [GraphVariable], onApply: @escaping ([GraphVariable]) -> Void) {
+    init(variables: [ParameterGraphVariable], onApply: @escaping ([ParameterGraphVariable]) -> Void) {
         self.variables = variables.sorted(by: { $0.type.name < $1.type.name })
         self.onApply = onApply
         haptic.prepare()
     }
 
-    func toggle(updating: GraphVariable) {
+    func toggle(updating: ParameterGraphVariable) {
         variables = variables.map { existingVariable in
             var existingVariable = existingVariable
 
@@ -35,7 +35,7 @@ class GraphVariableChooserViewModel: ObservableObject {
     }
 
     func chooseDefaultVariables() {
-        select(just: GraphTabViewModel.DefaultGraphVariables)
+        select(just: ParametersGraphTabViewModel.DefaultGraphVariables)
     }
 
     func chooseCompareStringsVariables() {
