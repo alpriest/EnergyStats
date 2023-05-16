@@ -13,6 +13,17 @@ enum StatsDisplayMode: Equatable {
     case day(Date)
     case month(_ month: Int, _ year: Int)
     case year(Int)
+
+    func unit() -> Calendar.Component {
+        switch self {
+        case .day:
+            return .hour
+        case .month:
+            return .day
+        case .year:
+            return .month
+        }
+    }
 }
 
 @available(iOS 16.0, *)
@@ -31,7 +42,7 @@ struct StatsTabView: View {
                 DatePickerView(viewModel: DatePickerViewModel($viewModel.displayMode))
 
                 ScrollView {
-                    StatsGraphView(data: viewModel.data, unit: viewModel.unit, stride: 3)
+                    StatsGraphView(viewModel: viewModel, selectedDate: $selectedDate, valuesAtTime: $valuesAtTime)
                         .frame(height: 250)
                         .padding(.vertical)
 

@@ -47,15 +47,15 @@ public enum ReportVariable: String, RawRepresentable {
     public var title: String {
         switch self {
         case .generation:
-            return "Output power"
+            return "Output energy"
         case .feedIn:
-            return "Feed-in power"
+            return "Feed-in energy"
         case .chargeEnergyToTal:
-            return "Charge power"
+            return "Charge energy"
         case .dischargeEnergyToTal:
-            return "Discharge power"
+            return "Discharge energy"
         case .gridConsumption:
-            return "Grid consumption power"
+            return "Grid consumption energy"
         }
     }
 

@@ -7,8 +7,10 @@
 
 import Energy_Stats_Core
 import Foundation
+import SwiftUI
 
 class StatsTabViewModel: ObservableObject {
+    private let haptic = UIImpactFeedbackGenerator()
     private let configManager: ConfigManaging
     private let networking: Networking
 
@@ -27,6 +29,7 @@ class StatsTabViewModel: ObservableObject {
     @Published var unit: Calendar.Component = .hour
     @Published var graphVariables: [StatsGraphVariable] = []
     private var totals: [ReportVariable: Double] = [:]
+    private var max: StatsGraphValue?
 
     init(networking: Networking, configManager: ConfigManaging) {
         self.networking = networking
@@ -47,16 +50,6 @@ class StatsTabViewModel: ObservableObject {
         do {
             let reports = try await networking.fetchReport(deviceID: currentDevice.deviceID, variables: reportVariables, queryDate: queryDate, reportType: reportType)
 
-            let updatedUnit: Calendar.Component
-            switch displayMode {
-            case .day:
-                updatedUnit = .hour
-            case .month:
-                updatedUnit = .day
-            case .year:
-                updatedUnit = .month
-            }
-
             totals = [:]
 
             let updatedData = reports.flatMap { reportResponse -> [StatsGraphValue] in
@@ -69,8 +62,10 @@ class StatsTabViewModel: ObservableObject {
 
                     switch displayMode {
                     case .day(let date):
-                        graphPointDate = date
-                        graphPointDate = Calendar.current.date(from: DateComponents(hour: dataPoint.index - 1, minute: 0))!
+                        graphPointDate = Calendar.current.date(from: DateComponents(year: Calendar.current.component(.year, from: date),
+                                                                                    month: Calendar.current.component(.month, from: date),
+                                                                                    day: Calendar.current.component(.day, from: date),
+                                                                                    hour: dataPoint.index - 1, minute: 0))!
                     case .month(let month, let year):
                         graphPointDate = Calendar.current.date(from: DateComponents(year: year, month: month, day: dataPoint.index, hour: 0))!
                     case .year(let year):
@@ -84,7 +79,7 @@ class StatsTabViewModel: ObservableObject {
             }
 
             await MainActor.run {
-                self.unit = updatedUnit
+                self.unit = displayMode.unit()
                 self.rawData = updatedData
                 refresh()
             }
@@ -124,6 +119,17 @@ class StatsTabViewModel: ObservableObject {
                 return $0
             }
         }
+    }
+
+    func data(at date: Date) -> ValuesAtTime<StatsGraphValue> {
+        let visibleVariableTypes = graphVariables.filter { $0.enabled }.map { $0.type }
+        let result = ValuesAtTime(values: rawData.filter { $0.date == date && visibleVariableTypes.contains($0.type) })
+
+        if let maxDate = max?.date, date == maxDate {
+            haptic.impactOccurred()
+        }
+
+        return result
     }
 }
 

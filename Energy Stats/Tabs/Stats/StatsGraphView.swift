@@ -53,15 +53,15 @@ struct StatsGraphValue: Identifiable {
 
 @available(iOS 16.0, *)
 struct StatsGraphView: View {
-    typealias Data = [StatsGraphValue]
-    let data: Data
-    let unit: Calendar.Component
-    let stride: Int
+    let viewModel: StatsTabViewModel
+    @GestureState var isDetectingPress = true
+    @Binding var selectedDate: Date?
+    @Binding var valuesAtTime: ValuesAtTime<StatsGraphValue>?
 
     var body: some View {
-        Chart(data, id: \.type.title) {
+        Chart(viewModel.data, id: \.type.title) {
             BarMark(
-                x: .value("hour", $0.date, unit: unit),
+                x: .value("hour", $0.date, unit: viewModel.unit),
                 y: .value("Amount", $0.value)
             )
             .position(by: .value("parameter", $0.type.networkTitle))
@@ -72,11 +72,11 @@ struct StatsGraphView: View {
         }
         .chartLegend(.hidden)
         .chartXAxis(content: {
-            AxisMarks(values: .stride(by: unit, count: stride)) { value in
+            AxisMarks(values: .stride(by: viewModel.unit, count: viewModel.stride)) { value in
                 if let date = value.as(Date.self) {
                     AxisTick(centered: true)
                     AxisValueLabel(centered: false) {
-                        switch unit {
+                        switch viewModel.unit {
                         case .month:
                             Text(date, format: .dateTime.month())
                         case .day:
@@ -90,6 +90,53 @@ struct StatsGraphView: View {
                 }
             }
         })
+        .chartOverlay { chartProxy in
+            GeometryReader { geometryProxy in
+                Rectangle().fill(.clear).contentShape(Rectangle())
+                    .gesture(DragGesture()
+                        .updating($isDetectingPress) { currentState, _, _ in
+                            let xLocation = currentState.location.x - geometryProxy[chartProxy.plotAreaFrame].origin.x
+
+                            if let plotElement = chartProxy.value(atX: xLocation, as: Date.self) {
+                                if let graphValue = viewModel.data.first(where: {
+                                    $0.date > plotElement
+                                }), selectedDate != graphValue.date {
+                                    selectedDate = graphValue.date
+                                    valuesAtTime = viewModel.data(at: graphValue.date)
+                                }
+                            }
+                        }
+                    )
+                    .gesture(SpatialTapGesture()
+                        .onEnded { value in
+                            let xLocation = value.location.x - geometryProxy[chartProxy.plotAreaFrame].origin.x
+
+                            if let plotElement = chartProxy.value(atX: xLocation, as: Date.self) {
+                                if let graphValue = viewModel.data.first(where: {
+                                    $0.date > plotElement
+                                }) {
+                                    selectedDate = graphValue.date
+                                    valuesAtTime = viewModel.data(at: graphValue.date)
+                                }
+                            }
+                        }
+                    )
+            }
+        }
+        .chartOverlay { chartProxy in
+            GeometryReader { geometryReader in
+                if let date = selectedDate,
+                   let elementLocation = chartProxy.position(forX: date)
+                {
+                    let location = elementLocation - geometryReader[chartProxy.plotAreaFrame].origin.x
+
+                    Rectangle()
+                        .fill(Color("lines_notflowing"))
+                        .frame(width: 1, height: chartProxy.plotAreaSize.height)
+                        .offset(x: location)
+                }
+            }
+        }
     }
 }
 
@@ -97,34 +144,13 @@ struct StatsGraphView: View {
 @available(iOS 16.0, *)
 struct StatsGraphView_Previews: PreviewProvider {
     static var previews: some View {
-        let variables = [ReportVariable(rawValue: "feedin")!, ReportVariable(rawValue: "generation")!, ReportVariable(rawValue: "gridConsumption")!, ReportVariable(rawValue: "chargeEnergyToTal")!, ReportVariable(rawValue: "dischargeEnergyToTal")!]
-
-        ScrollView {
-            VStack {
-                Text("Day by hours")
-                let hourlyData = variables.flatMap { v in
-                    (1 ... 12).map { h in
-                        StatsGraphValue(date: .hoursAgo(h), value: Double(h), type: v)
-                    }
-                }
-                StatsGraphView(data: hourlyData, unit: .hour, stride: 3)
-
-                Text("Month by days")
-                let monthlyData = variables.flatMap { v in
-                    (1 ... 31).map { h in
-                        StatsGraphValue(date: .dayOfMonth(h), value: Double(h), type: v)
-                    }
-                }
-                StatsGraphView(data: monthlyData, unit: .day, stride: 3)
-
-                Text("Year by months")
-                let yearData = variables.flatMap { v in
-                    (1 ... 12).map { h in
-                        StatsGraphValue(date: .month(h), value: Double(h), type: v)
-                    }
-                }
-                StatsGraphView(data: yearData, unit: .month, stride: 3)
-            }
+        VStack {
+            Text("Day by hours")
+            StatsGraphView(
+                viewModel: StatsTabViewModel(networking: DemoNetworking(), configManager: PreviewConfigManager()),
+                selectedDate: .constant(nil),
+                valuesAtTime: .constant(nil)
+            )
         }
     }
 }
