@@ -19,12 +19,15 @@ class DatePickerViewModel: ObservableObject {
     }
 
     @Published var month = 0
-    @Published var year = 0
+    @Published var year = 0 {
+        didSet { updateDisplayMode() }
+    }
     @Published var date = Date.now {
         didSet { updateDisplayMode() }
     }
 
     @MainActor @Binding var displayMode: StatsDisplayMode
+    private var isInitialised = false
 
     init(_ displayMode: Binding<StatsDisplayMode>) {
         _displayMode = displayMode
@@ -43,6 +46,8 @@ class DatePickerViewModel: ObservableObject {
             self.year = year
             range = .year
         }
+
+        isInitialised = true
     }
 
     func increase() {
@@ -82,6 +87,8 @@ class DatePickerViewModel: ObservableObject {
     }
 
     func updateDisplayMode() {
+        guard isInitialised else { return }
+
         Task { @MainActor in
             let updatedDisplayMode = makeUpdatedDisplayMode()
 

@@ -12,24 +12,20 @@ struct TabbedView: View {
     let configManager: ConfigManager
     let networking: Networking
     let userManager: UserManager
-    @StateObject var summaryViewModel: PowerFlowTabViewModel
     @StateObject var graphViewModel: GraphTabViewModel
     @StateObject var settingsTabViewModel: SettingsTabViewModel
-    @StateObject var statsTabViewModel: StatsTabViewModel
 
     init(networking: Networking, userManager: UserManager, configManager: ConfigManager) {
         self.networking = networking
         self.userManager = userManager
         self.configManager = configManager
-        _summaryViewModel = .init(wrappedValue: PowerFlowTabViewModel(networking, configManager: configManager))
         _graphViewModel = .init(wrappedValue: GraphTabViewModel(networking, configManager: configManager))
         _settingsTabViewModel = .init(wrappedValue: SettingsTabViewModel(userManager: userManager, config: configManager))
-        _statsTabViewModel = .init(wrappedValue: StatsTabViewModel(networking: networking, configManager: configManager))
     }
 
     var body: some View {
         TabView {
-            PowerFlowTabView(viewModel: summaryViewModel, appTheme: configManager.appTheme.value)
+            PowerFlowTabView(configManager: configManager, networking: networking, appTheme: configManager.appTheme.value)
                 .tabItem {
                     VStack {
                         Image(systemName: "arrow.up.arrow.down")
@@ -39,7 +35,7 @@ struct TabbedView: View {
                 }
 
             if #available(iOS 16.0, *) {
-                StatsTabView(viewModel: statsTabViewModel)
+                StatsTabView(configManager: configManager, networking: networking, appTheme: configManager.appTheme.value)
                     .tabItem {
                         VStack {
                             Image(systemName: "chart.bar.xaxis")

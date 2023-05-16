@@ -40,7 +40,7 @@ class PowerFlowTabViewModel: ObservableObject {
         }
     }
 
-    init(_ network: Networking, configManager: ConfigManager) {
+    init(_ network: Networking, configManager: ConfigManaging) {
         self.network = network
         self.configManager = configManager
 

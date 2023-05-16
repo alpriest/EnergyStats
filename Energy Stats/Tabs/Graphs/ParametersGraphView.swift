@@ -1,5 +1,5 @@
 //
-//  UsageGraphView.swift
+//  ParametersGraphView.swift
 //  Energy Stats
 //
 //  Created by Alistair Priest on 05/11/2022.
@@ -10,7 +10,7 @@ import Energy_Stats_Core
 import SwiftUI
 
 @available(iOS 16.0, *)
-struct UsageGraphView: View {
+struct ParametersGraphView: View {
     @ObservedObject var viewModel: GraphTabViewModel
     @GestureState var isDetectingPress = true
     @Binding var selectedDate: Date?
@@ -102,7 +102,7 @@ struct UsageGraphView_Previews: PreviewProvider {
     static var previews: some View {
         let model = GraphTabViewModel(DemoNetworking(), configManager: PreviewConfigManager())
         Task { await model.load() }
-        return UsageGraphView(
+        return ParametersGraphView(
             viewModel: model,
             selectedDate: .constant(nil),
             valuesAtTime: .constant(nil)

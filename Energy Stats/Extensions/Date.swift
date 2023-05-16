@@ -13,4 +13,8 @@ extension Date {
         formatter.dateFormat = "HH:00"
         return formatter.string(from: self)
     }
+
+    static func yesterday() -> Date {
+        Calendar.current.date(byAdding: .day, value: -1, to: .now)!
+    }
 }

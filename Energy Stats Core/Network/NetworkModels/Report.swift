@@ -28,9 +28,9 @@ struct ReportRequest: Encodable {
 }
 
 public struct QueryDate: Encodable {
-    let year: Int
-    let month: Int?
-    let day: Int?
+    public let year: Int
+    public let month: Int?
+    public let day: Int?
 
     public static func current() -> QueryDate {
         QueryDate(from: Date())

@@ -80,12 +80,14 @@ struct DatePickerView: View {
                 viewModel.decrease()
             } label: {
                 Image(systemName: "chevron.left")
+                    .frame(minWidth: 22)
             }.buttonStyle(.bordered)
 
             Button {
                 viewModel.increase()
             } label: {
                 Image(systemName: "chevron.right")
+                    .frame(minWidth: 22)
             }.buttonStyle(.bordered)
         }
     }

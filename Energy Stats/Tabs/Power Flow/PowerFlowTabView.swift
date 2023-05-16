@@ -10,8 +10,13 @@ import SwiftUI
 import Energy_Stats_Core
 
 struct PowerFlowTabView: View {
-    @ObservedObject var viewModel: PowerFlowTabViewModel
     let appTheme: AppTheme
+    @StateObject private var viewModel: PowerFlowTabViewModel
+
+    init(configManager: ConfigManaging, networking: Networking, appTheme: AppTheme) {
+        _viewModel = .init(wrappedValue: PowerFlowTabViewModel(networking, configManager: configManager))
+        self.appTheme = appTheme
+    }
 
     var body: some View {
         VStack {
@@ -71,7 +76,7 @@ struct PowerFlowTabView: View {
 
 struct PowerFlowTabView_Previews: PreviewProvider {
     static var previews: some View {
-        PowerFlowTabView(viewModel: PowerFlowTabViewModel(DemoNetworking(), configManager: PreviewConfigManager()),
+        PowerFlowTabView(configManager: PreviewConfigManager(), networking: DemoNetworking(),
                          appTheme: AppTheme.mock())
     }
 }

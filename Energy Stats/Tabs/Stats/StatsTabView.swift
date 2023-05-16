@@ -17,9 +17,15 @@ enum StatsDisplayMode: Equatable {
 
 @available(iOS 16.0, *)
 struct StatsTabView: View {
-    @ObservedObject var viewModel: StatsTabViewModel
+    @StateObject var viewModel: StatsTabViewModel
     @State private var valuesAtTime: ValuesAtTime?
     @State private var selectedDate: Date?
+    private let appTheme: AppTheme
+
+    init(configManager: ConfigManaging, networking: Networking, appTheme: AppTheme) {
+        _viewModel = .init(wrappedValue: StatsTabViewModel(networking: networking, configManager: configManager))
+        self.appTheme = appTheme
+    }
 
     var body: some View {
         Group {
@@ -28,13 +34,11 @@ struct StatsTabView: View {
                     .padding(.horizontal)
 
                 ScrollView {
-                    StatsGraphView()
+                    StatsGraphView(data: viewModel.data, unit: viewModel.unit, stride: 3)
                         .frame(height: 250)
                         .padding(.vertical)
 
-                    Text(String(describing: viewModel.displayMode))
-//
-//                    GraphVariablesToggles(viewModel: viewModel, selectedDate: $selectedDate, valuesAtTime: $valuesAtTime)
+                    StatsGraphVariableToggles(viewModel: viewModel, selectedDate: $selectedDate, valuesAtTime: $valuesAtTime)
                 }
             }
             .padding()
@@ -51,7 +55,7 @@ struct StatsTabView: View {
 @available(iOS 16.0, *)
 struct StatsTabView_Previews: PreviewProvider {
     static var previews: some View {
-        StatsTabView(viewModel: StatsTabViewModel(networking: DemoNetworking(), configManager: PreviewConfigManager()))
+        StatsTabView(configManager: PreviewConfigManager(), networking: DemoNetworking(), appTheme: AppTheme.mock())
             .previewDevice("iPhone 13 Mini")
     }
 }

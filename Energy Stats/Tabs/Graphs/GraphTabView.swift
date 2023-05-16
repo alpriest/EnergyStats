@@ -23,7 +23,7 @@ struct GraphTabView: View {
                     .padding(.horizontal)
 
                 ScrollView {
-                    UsageGraphView(viewModel: viewModel,
+                    ParametersGraphView(viewModel: viewModel,
                                    selectedDate: $selectedDate,
                                    valuesAtTime: $valuesAtTime)
                         .frame(height: 250)
