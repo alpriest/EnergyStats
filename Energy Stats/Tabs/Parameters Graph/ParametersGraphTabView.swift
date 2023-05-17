@@ -34,6 +34,12 @@ struct ParametersGraphTabView: View {
                         .padding(.vertical)
 
                     ParameterGraphVariablesToggles(viewModel: viewModel, selectedDate: $selectedDate, valuesAtTime: $valuesAtTime)
+
+                    Text("Parameters are updated every 5 minutes by Fox and only available for a single day at a time")
+                        .font(.footnote)
+                        .multilineTextAlignment(.center)
+                        .padding(.top, 44)
+                        .foregroundColor(Color("text_dimmed"))
                 }
             }
             .padding()

@@ -81,7 +81,7 @@ struct BatteryPowerView: View {
                         Text($0)
                             .multilineTextAlignment(.center)
                             .font(.caption)
-                            .foregroundColor(Color.gray)
+                            .foregroundColor(Color("text_dimmed"))
                     }
                 }
             }

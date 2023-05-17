@@ -29,7 +29,7 @@ struct PowerFlowTabView: View {
                 Text(viewModel.updateState)
                     .monospacedDigit()
                     .font(.caption)
-                    .foregroundColor(.gray)
+                    .foregroundColor(Color("text_dimmed"))
             case let .failed(error, reason):
                 Spacer()
                 ErrorAlertView(cause: error, message: reason) {

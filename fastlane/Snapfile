@@ -1,12 +1,12 @@
 # Uncomment the lines below you want to change by removing the # in the beginning
 
 # A list of devices you want to take the screenshots from
- devices([
-   "iPhone 8 Plus",
-   "iPhone 11 Pro Max",
-   "iPhone 14 Pro Max",
-   "iPad Pro (12.9-inch) (2nd generation)",
-   "iPad Pro (12.9-inch) (6th generation)"
+devices([
+  "iPhone 8 Plus",
+  "iPhone 11 Pro Max",
+  "iPhone 14 Pro Max",
+  "iPad Pro (12.9-inch) (2nd generation)",
+  "iPad Pro (12.9-inch) (6th generation)",
 ])
 
 # languages([
@@ -28,7 +28,7 @@ clear_previous_screenshots(true)
 # Remove the '#' to set the status bar to 9:41 AM, and show full battery and reception. See also override_status_bar_arguments for custom options.
 override_status_bar(true)
 
-project './Energy Stats.xcodeproj'
+project "./Energy Stats.xcodeproj"
 
 # Arguments to pass to the app on launch. See https://docs.fastlane.tools/actions/snapshot/#launch-arguments
 # launch_arguments(["-favColor red"])

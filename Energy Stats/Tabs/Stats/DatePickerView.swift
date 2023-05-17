@@ -34,7 +34,7 @@ struct DatePickerView: View {
                 NonFunctionalButton {
                     Image(systemName: "calendar.badge.clock")
                 }
-            }
+            }.accessibilityIdentifier("stats_datepicker")
 
             HStack {
                 switch viewModel.range {

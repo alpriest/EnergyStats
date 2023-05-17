@@ -47,6 +47,12 @@ struct StatsTabView: View {
                         .padding(.vertical)
 
                     StatsGraphVariableToggles(viewModel: viewModel, selectedDate: $selectedDate, valuesAtTime: $valuesAtTime)
+
+                    Text("Stats are aggregated by Fox into 1 hr, 1 day or 1 month totals")
+                        .font(.footnote)
+                        .foregroundColor(Color("text_dimmed"))
+                        .multilineTextAlignment(.center)
+                        .padding(.top, 44)
                 }
             }
             .padding()

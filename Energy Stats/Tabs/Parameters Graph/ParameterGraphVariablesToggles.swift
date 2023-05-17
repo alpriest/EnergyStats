@@ -33,7 +33,7 @@ struct ParameterGraphVariablesToggles: View {
                                     if title != variable.type.description {
                                         Text(variable.type.description)
                                             .font(.system(size: 10))
-                                            .foregroundColor(.gray)
+                                            .foregroundColor(Color("text_dimmed"))
                                     }
                                 }
 

@@ -56,6 +56,7 @@ struct StatsGraphView: View {
     let viewModel: StatsTabViewModel
     @GestureState var isDetectingPress = true
     @Binding var selectedDate: Date?
+    @State private var nextDate: Date?
     @Binding var valuesAtTime: ValuesAtTime<StatsGraphValue>?
 
     var body: some View {
@@ -98,9 +99,9 @@ struct StatsGraphView: View {
                             let xLocation = currentState.location.x - geometryProxy[chartProxy.plotAreaFrame].origin.x
 
                             if let plotElement = chartProxy.value(atX: xLocation, as: Date.self) {
-                                if let graphValue = viewModel.data.first(where: {
-                                    $0.date > plotElement
-                                }), selectedDate != graphValue.date {
+                                if let graphValue = viewModel.data.reversed().first(where: { plotElement > $0.date }),
+                                   selectedDate != graphValue.date
+                                {
                                     selectedDate = graphValue.date
                                     valuesAtTime = viewModel.data(at: graphValue.date)
                                 }
@@ -111,13 +112,11 @@ struct StatsGraphView: View {
                         .onEnded { value in
                             let xLocation = value.location.x - geometryProxy[chartProxy.plotAreaFrame].origin.x
 
-                            if let plotElement = chartProxy.value(atX: xLocation, as: Date.self) {
-                                if let graphValue = viewModel.data.first(where: {
-                                    $0.date > plotElement
-                                }) {
-                                    selectedDate = graphValue.date
-                                    valuesAtTime = viewModel.data(at: graphValue.date)
-                                }
+                            if let plotElement = chartProxy.value(atX: xLocation, as: Date.self),
+                               let graphValue = viewModel.data.reversed().first(where: { plotElement > $0.date })
+                            {
+                                selectedDate = graphValue.date
+                                valuesAtTime = viewModel.data(at: selectedDate)
                             }
                         }
                     )
@@ -130,10 +129,13 @@ struct StatsGraphView: View {
                 {
                     let location = elementLocation - geometryReader[chartProxy.plotAreaFrame].origin.x
 
-                    Rectangle()
-                        .fill(Color("lines_notflowing"))
-                        .frame(width: 1, height: chartProxy.plotAreaSize.height)
-                        .offset(x: location)
+                    if let firstDate = viewModel.data[safe: 0]?.date, let secondDate = viewModel.data.first(where: { $0.date > firstDate })?.date,
+                       let firstPosition = chartProxy.position(forX: firstDate), let secondPosition = chartProxy.position(forX: secondDate) {
+                        Rectangle()
+                            .fill(Color("graph_highlight"))
+                            .frame(width: secondPosition - firstPosition, height: chartProxy.plotAreaSize.height)
+                            .offset(x: location)
+                    }
                 }
             }
         }

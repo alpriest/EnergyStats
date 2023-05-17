@@ -61,6 +61,7 @@ struct ParameterGraphVariableChooserView: View {
                     }
                     .padding()
                     .buttonStyle(.borderedProminent)
+                    .accessibilityIdentifier("cancel")
 
                     Button(action: {
                         viewModel.apply()

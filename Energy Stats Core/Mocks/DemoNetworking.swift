@@ -52,7 +52,16 @@ public class DemoNetworking: Networking {
             throw NetworkError.unknown
         }
 
-        let data = try data(filename: "report")
+        let data: Data
+        switch reportType {
+        case .day:
+            data = try self.data(filename: "report-day")
+        case .month:
+            data = try self.data(filename: "report-month")
+        case .year:
+            data = try self.data(filename: "report-year")
+        }
+
         let response = try JSONDecoder().decode(NetworkResponse<[ReportResponse]>.self, from: data)
         guard let result = response.result else { throw NetworkError.invalidToken }
 

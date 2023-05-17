@@ -32,7 +32,7 @@ struct StatsGraphVariableToggles: View {
                                     if variable.type.title != variable.type.description {
                                         Text(variable.type.description)
                                             .font(.system(size: 10))
-                                            .foregroundColor(.gray)
+                                            .foregroundColor(Color("text_dimmed"))
                                     }
                                 }
 
@@ -58,7 +58,8 @@ struct StatsGraphVariableToggles: View {
 
             if valuesAtTime != nil, let selectedDate {
                 HStack {
-                    Text(selectedDate, format: .dateTime)
+                    Text(viewModel.unitFormatted(selectedDate))
+
                     Button("Clear graph values", action: {
                         self.valuesAtTime = nil
                         self.selectedDate = nil

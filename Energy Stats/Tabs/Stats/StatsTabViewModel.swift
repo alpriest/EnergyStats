@@ -38,6 +38,8 @@ class StatsTabViewModel: ObservableObject {
         graphVariables = [.generation, ReportVariable.feedIn, .gridConsumption, .chargeEnergyToTal, .dischargeEnergyToTal].map {
             StatsGraphVariable($0, isSelected: true)
         }
+
+        haptic.prepare()
     }
 
     func load() async {
@@ -99,6 +101,9 @@ class StatsTabViewModel: ObservableObject {
                 lhs.date < rhs.date
             })
 
+        max = refreshedData.max(by: { lhs, rhs in
+            lhs.value < rhs.value
+        })
         data = refreshedData
     }
 
@@ -121,7 +126,8 @@ class StatsTabViewModel: ObservableObject {
         }
     }
 
-    func data(at date: Date) -> ValuesAtTime<StatsGraphValue> {
+    func data(at date: Date?) -> ValuesAtTime<StatsGraphValue> {
+        guard let date else { return ValuesAtTime(values: []) }
         let visibleVariableTypes = graphVariables.filter { $0.enabled }.map { $0.type }
         let result = ValuesAtTime(values: rawData.filter { $0.date == date && visibleVariableTypes.contains($0.type) })
 
@@ -130,6 +136,17 @@ class StatsTabViewModel: ObservableObject {
         }
 
         return result
+    }
+
+    func unitFormatted(_ date: Date) -> String {
+        switch displayMode {
+        case .day:
+            return DateFormatter.dayHour.string(from: date)
+        case .month:
+            return DateFormatter.dayMonth.string(from: date)
+        case .year:
+            return DateFormatter.monthYear.string(from: date)
+        }
     }
 }
 
