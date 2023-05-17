@@ -48,7 +48,7 @@ struct StatsTabView: View {
 
                     StatsGraphVariableToggles(viewModel: viewModel, selectedDate: $selectedDate, valuesAtTime: $valuesAtTime)
 
-                    Text("Stats are aggregated by Fox into 1 hr, 1 day or 1 month totals")
+                    Text("Stats are aggregated by FoxESS into 1 hr, 1 day or 1 month totals")
                         .font(.footnote)
                         .foregroundColor(Color("text_dimmed"))
                         .multilineTextAlignment(.center)

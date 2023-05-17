@@ -46,7 +46,7 @@ struct DatePickerView: View {
                     HStack {
                         Menu {
                             Picker("Month", selection: $viewModel.month) {
-                                ForEach(Array(Calendar.current.monthSymbols.reversed().enumerated()), id: \.element) { index, text in
+                                ForEach(Array(Calendar.current.monthSymbols.enumerated()), id: \.element) { index, text in
                                     Text(text).tag(index)
                                 }
                             }

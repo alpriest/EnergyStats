@@ -158,7 +158,7 @@ private extension StatsTabViewModel {
                              month: Calendar.current.component(.month, from: date),
                              day: Calendar.current.component(.day, from: date))
         case .month(let month, let year):
-            return QueryDate(year: year, month: month, day: nil)
+            return QueryDate(year: year, month: month + 1, day: nil)
         case .year(let year):
             return QueryDate(year: year, month: nil, day: nil)
         }

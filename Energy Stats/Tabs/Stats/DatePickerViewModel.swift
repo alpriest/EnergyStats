@@ -33,7 +33,7 @@ class DatePickerViewModel: ObservableObject {
     init(_ displayMode: Binding<StatsDisplayMode>) {
         _displayMode = displayMode
         year = Calendar.current.component(.year, from: .now)
-        month = Calendar.current.component(.month, from: .now)
+        month = Calendar.current.component(.month, from: .now) - 1
 
         switch displayMode.wrappedValue {
         case .day(let date):
