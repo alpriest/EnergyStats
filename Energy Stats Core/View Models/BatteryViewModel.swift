@@ -30,8 +30,8 @@ public struct BatteryViewModel: Sendable {
     }
 }
 
-extension BatteryViewModel {
-    public static var noBattery: BatteryViewModel {
+public extension BatteryViewModel {
+    static var noBattery: BatteryViewModel {
         BatteryViewModel()
     }
 }

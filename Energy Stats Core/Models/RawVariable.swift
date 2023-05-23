@@ -8,8 +8,17 @@
 import SwiftUI
 
 public enum ValueUsage: String {
-    case snapshot = "power"
-    case total = "energy"
+    case snapshot
+    case total
+
+    public func title() -> String {
+        switch self {
+        case .snapshot:
+            return String(localized: "power")
+        case .total:
+            return String(localized: "energy")
+        }
+    }
 }
 
 public extension RawVariable {
@@ -33,17 +42,17 @@ public extension RawVariable {
     func title(as usage: ValueUsage) -> String {
         switch self.variable {
         case "generationPower":
-            return "Output " + usage.rawValue
+            return String(localized: "Output ") + usage.title()
         case "feedinPower":
-            return "Feed-in " + usage.rawValue
+            return String(localized: "Feed-in ") + usage.title()
         case "batChargePower":
-            return "Charge " + usage.rawValue
+            return String(localized: "Charge ") + usage.title()
         case "batDischargePower":
-            return "Discharge " + usage.rawValue
+            return String(localized: "Discharge ") + usage.title()
         case "gridConsumptionPower":
-            return "Grid consumption " + usage.rawValue
+            return String(localized: "Grid consumption ") + usage.title()
         case "loadsPower":
-            return "Loads " + usage.rawValue
+            return String(localized: "Loads ") + usage.title()
         default:
             return name
         }
@@ -75,17 +84,17 @@ public extension RawVariable {
     var description: String {
         switch self.variable {
         case "generationPower":
-            return "Solar / Battery power coming through the inverter"
+            return String(localized: "Solar / Battery power coming through the inverter")
         case "feedinPower":
-            return "Power being sent to the grid"
+            return String(localized: "Power being sent to the grid")
         case "batChargePower":
-            return "Power charging the battery"
+            return String(localized: "Power charging the battery")
         case "batDischargePower":
-            return "Power discharging from the battery"
+            return String(localized: "Power discharging from the battery")
         case "gridConsumptionPower":
-            return "Power coming from the grid"
+            return String(localized: "Power coming from the grid")
         case "loadsPower":
-            return "Loads power"
+            return String(localized: "Loads power")
         default:
             return name
         }

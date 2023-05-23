@@ -89,7 +89,7 @@ struct SettingsTabView: View {
                 Section(
                     content: {
                         VStack {
-                            Text("You are logged in as \(viewModel.username)")
+                            Text("You are logged in as ") + Text(viewModel.username)
                             Button("logout") {
                                 viewModel.logout()
                             }.buttonStyle(.bordered)
@@ -116,6 +116,7 @@ struct SettingsTabView: View {
                                     Text("Rate this app")
                                         .multilineTextAlignment(.center)
                                 }
+                                .frame(minWidth: 0, maxWidth: .infinity)
 
                                 Spacer()
 
@@ -126,11 +127,11 @@ struct SettingsTabView: View {
                                     Image(systemName: "cup.and.saucer")
                                     Text("Buy me a coffee")
                                 }
+                                .frame(minWidth: 0, maxWidth: .infinity)
                             }
                             .padding(.top, 44)
                             .padding(.bottom, 44)
                             .frame(maxWidth: .infinity)
-
 
                             Text("Version ") + Text(viewModel.appVersion)
                         }

@@ -1,18 +1,82 @@
-/* 
+/*
   Localizable.strings
   Energy Stats
 
   Created by Alistair Priest on 26/04/2023.
-  
+
 */
-"Loading" = "Laden...";
-"Could not load. Check your internet connection" = "Konnte nicht geladen werden. Prüfe deine Internetverbindung";
-"Could not login. Check your internet connection" = "Anmeldung nicht möglich. Prüfe deine Internetverbindung";
-"Could not login as demo user" = "Prüfe deine Internetverbindung";
+"Loading" = "Lade...";
+"Could not load. Check your internet connection" = "Laden nicht möglich. Prüfen Sie Ihre Internetverbindung";
+"Could not login. Check your internet connection" = "Anmeldung nicht möglich. Prüfen Sie Ihre Internetverbindung";
+"Could not login as demo user" = "Anmeldung als Demo-Benutzer nicht möglich";
 "Wrong credentials, try again" = "Falsche Anmeldedaten, versuchen Sie es erneut";
 "Empty" = "Leer";
 "Full" = "Voll";
 "Next update in" = "Nächstes Update in";
 "Settings" = "Einstellungen";
-"Graphs" = "Schaubilder";
+"Graphs" = "Graphen";
 "Power flow" = "Leistungsfluss";
+"Yield today " = "Ertrag heute ";
+
+/* Settings page */
+"Buy me a coffee" = "Kaufen Sie mir einen Kaffee";
+"Rate this app" = "Bewerten Sie diese App";
+"Get in touch" = "Kontaktieren Sie mich";
+"logout" = "Logout";
+"You are logged in as " = "Sie sind angemeldet als ";
+"Debug" = "Debug";
+"FoxESS Cloud data is updated every 5 minutes. 'Auto' attempts to synchronise data fetches just after the data is uploaded from your inverter to minimise server load." = "FoxESS Cloud-Daten werden alle 5 Minuten aktualisiert. 'Auto' versucht, die Datenabfragen direkt nach dem Upload von Ihrem Wechselrichter zu synchronisieren, um die Server-Last zu minimieren.";
+"Refresh frequency" = "Aktualisierungshäufigkeit";
+"1 min" = "1 min";
+"5 mins" = "5 min";
+"Auto" = "Auto";
+"'Show usable battery' deducts the Min SOC amount from the battery charge level and percentage. Due to inaccuracies in the way battery levels are measured this may result in occasionally showing a negative amount remaining." = "'Zeige nur die verwendbare Batteriekapazität' leitet den minimalen SOC vom Batterieladezustand und -prozentsatz ab. Aufgrund von Ungenauigkeiten in der Art und Weise, wie der Batterieladezustand gemessen wird, kann dies manchmal zur Anzeige von einer negativen verbleibenden Restladung führen.";
+"Decimal places" = "Dezimalstellen";
+"Show sunshine background" = "Zeige den Sonnenschein-Hintergrund";
+"Show usable battery only" = "Zeige nur die verwendbare Batteriekapazität";
+"Show battery full/empty estimate" = "Zeige die Schätzung für Batterie voll/leer";
+"Show battery temperature" = "Zeige die Batterie-Temperatur";
+"Show total yield" = "Zeige den Gesamtertrag";
+"Show coloured flow lines" = "Zeige farbige Leistungsfluss-Linien";
+"Min battery charge (SOC)" = "Minimale Batterieladung (SOC)";
+"Capacity" = "Kapazität";
+"OK" = "OK";
+"Cancel" = "Abbrechen";
+"Battery" = "Batterie";
+"capacity = residual / (Min SOC / 100)" = "Kapazität = Restladung / (Min SOC / 100)";
+" where residual is estimated by your installation and may not be accurate. Tap the capacity above to enter a manual value." = " wobei die Restladung durch Ihre Installation geschätzt wird und nicht akkurat sein könnte. Klicken Sie oben auf 'Kapazität', um einen manuellen Wert einzugeben.";
+"Empty/full battery durations are estimates based on calculated capacity, assume that solar conditions and battery charge rates remain constant." = "Die Zeitdauer für eine leere/volle Batterie ist eine Schätzung basierend auf der berechneten Kapazität unter der Annahme, dass die solaren Bedingungen und die (Ent-)Laderate der Batterie konstant bleiben.";
+"Copy to clipboard" = "In die Zwischenablage kopieren";
+"Firmware Versions" = "Firmware-Versionen";
+"Find out more about firmware versions from the " = "Mehr Informationen über Firmware-Versionen gibt es auf der ";
+" website" = " Webseite";
+"Inverter" = "Wechselrichter";
+"Device selection" = "Geräte-Auswahl";
+"Selected device and related battery information will be displayed on the main page" = "Informationen zum ausgewählten Gerät und der dazugehörigen Batterie werden auf der Hauptseite angezeigt";
+"Parameters are updated every 5 minutes by FoxESS and only available for a single day at a time" = "Die Parameter werden alle 5 Minuten von FoxESS aktualisiert und sind immer nur für einen Tag gleichzeitig verfügbar";
+"Choose date" = "Datum auswählen";
+"6 hours" = "6 Stunden";
+"12 hours" = "12 Stunden";
+"24 hours" = "24 Stunden";
+"Clear graph values" = "Graphwerte zurücksetzen";
+"Stats are aggregated by FoxESS into 1 hr, 1 day or 1 month totals" = "Stats (Statistiken) werden von FoxESS für jeweils 1 Stunde, 1 Tag oder 1 Monat aufsummiert";
+"Day" = "Tag";
+"Month" = "Monat";
+"Year" = "Jahr";
+"Choose date" = "Datum auswählen";
+
+/* Graph pages */
+"power" = "Leistung";
+"energy" = "Energie";
+"Output " = "Ertrags-";
+"Solar / Battery power coming through the inverter" = "Solar-/Batterieleistung, die vom Wechselrichter geliefert wird";
+"Feed-in " = "Einspeise-";
+"Power being sent to the grid" = "Leistung zum Einspeisen ins Netz";
+"Charge " = "Lade-";
+"Power charging the battery" = "Leistung zum Laden der Batterie";
+"Discharge " = "Entlade-";
+"Power discharging from the battery" = "Leistung vom Entladen der Batterie";
+"Grid consumption " = "Netzverbrauchs-";
+"Power coming from the grid" = "Leistung, die vom Netz bezogen wird";
+"Loads " = "Last-";
+"Loads power" = "Leistung der Lasten";

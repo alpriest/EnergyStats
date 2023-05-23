@@ -2,27 +2,27 @@
   "errno": 0,
   "result": [
     {
-      "variable": "generation",
+      "variable": "feedin",
       "data": [
         {
           "index": 1,
-          "value": 0
+          "value": 1.5
         },
         {
           "index": 2,
-          "value": 0
+          "value": 2.9000000000000057
         },
         {
           "index": 3,
-          "value": 0
+          "value": 22
         },
         {
           "index": 4,
-          "value": 0
+          "value": 195.4
         },
         {
           "index": 5,
-          "value": 0
+          "value": 219.89999999999998
         },
         {
           "index": 6,
@@ -50,80 +50,32 @@
         },
         {
           "index": 12,
-          "value": 0
-        },
-        {
-          "index": 13,
-          "value": 0
-        },
-        {
-          "index": 14,
-          "value": 0
-        },
-        {
-          "index": 15,
-          "value": 0
-        },
-        {
-          "index": 16,
-          "value": 0.39999999999997726
-        },
-        {
-          "index": 17,
-          "value": 0.2999999999999545
-        },
-        {
-          "index": 18,
-          "value": 1
-        },
-        {
-          "index": 19,
-          "value": 0.20000000000004547
-        },
-        {
-          "index": 20,
-          "value": 0
-        },
-        {
-          "index": 21,
-          "value": 0
-        },
-        {
-          "index": 22,
-          "value": 0
-        },
-        {
-          "index": 23,
-          "value": 0
-        },
-        {
-          "index": 24,
           "value": 0
         }
       ]
     },
     {
-      "variable": "feedin",
+      "variable": "generation",
       "data": [
         {
           "index": 1,
-          "value": 0
+          "value": 101.29999999999995
         },
         {
           "index": 2,
-          "value": 0
+          "value": 149.80000000000018
         },
         {
           "index": 3,
-          "value": 0
+          "value": 253.79999999999995
         },
         {
           "index": 4,
-          "value": 0
+          "value": 446.70000000000005
         },
         {
           "index": 5,
-          "value": 0
+          "value": 390.7000000000007
         },
         {
           "index": 6,
@@ -151,54 +103,6 @@
         },
         {
           "index": 12,
-          "value": 0
-        },
-        {
-          "index": 13,
-          "value": 0
-        },
-        {
-          "index": 14,
-          "value": 0
-        },
-        {
-          "index": 15,
-          "value": 0
-        },
-        {
-          "index": 16,
-          "value": 0
-        },
-        {
-          "index": 17,
-          "value": 0
-        },
-        {
-          "index": 18,
-          "value": 0
-        },
-        {
-          "index": 19,
-          "value": 0
-        },
-        {
-          "index": 20,
-          "value": 0
-        },
-        {
-          "index": 21,
-          "value": 0
-        },
-        {
-          "index": 22,
-          "value": 0
-        },
-        {
-          "index": 23,
-          "value": 0
-        },
-        {
-          "index": 24,
           "value": 0
         }
       ]
@@ -208,23 +112,23 @@
       "data": [
         {
           "index": 1,
-          "value": 0
+          "value": 66.79999999999995
         },
         {
           "index": 2,
-          "value": 0
+          "value": 94.60000000000014
         },
         {
           "index": 3,
-          "value": 0
+          "value": 154.79999999999995
         },
         {
           "index": 4,
-          "value": 0
+          "value": 148.30000000000007
         },
         {
           "index": 5,
-          "value": 0
+          "value": 94.70000000000005
         },
         {
           "index": 6,
@@ -236,70 +140,22 @@
         },
         {
           "index": 8,
-          "value": 0.5999999999999659
+          "value": 0
         },
         {
           "index": 9,
-          "value": 0.5
+          "value": 0
         },
         {
           "index": 10,
-          "value": 0.5
+          "value": 0
         },
         {
           "index": 11,
-          "value": 0.5
+          "value": 0
         },
         {
           "index": 12,
-          "value": 0.5
-        },
-        {
-          "index": 13,
-          "value": 0.5
-        },
-        {
-          "index": 14,
-          "value": 0.5
-        },
-        {
-          "index": 15,
-          "value": 0.5
-        },
-        {
-          "index": 16,
-          "value": 0
-        },
-        {
-          "index": 17,
-          "value": 0
-        },
-        {
-          "index": 18,
-          "value": 0
-        },
-        {
-          "index": 19,
-          "value": 0
-        },
-        {
-          "index": 20,
-          "value": 0
-        },
-        {
-          "index": 21,
-          "value": 0
-        },
-        {
-          "index": 22,
-          "value": 0
-        },
-        {
-          "index": 23,
-          "value": 0
-        },
-        {
-          "index": 24,
           "value": 0
         }
       ]
@@ -309,23 +165,23 @@
       "data": [
         {
           "index": 1,
-          "value": 0
+          "value": 63.099999999999966
         },
         {
           "index": 2,
-          "value": 0
+          "value": 89.39999999999998
         },
         {
           "index": 3,
-          "value": 0
+          "value": 146
         },
         {
           "index": 4,
-          "value": 0
+          "value": 141.5999999999998
         },
         {
           "index": 5,
-          "value": 0
+          "value": 86.20000000000016
         },
         {
           "index": 6,
@@ -353,54 +209,6 @@
         },
         {
           "index": 12,
-          "value": 0
-        },
-        {
-          "index": 13,
-          "value": 0
-        },
-        {
-          "index": 14,
-          "value": 0
-        },
-        {
-          "index": 15,
-          "value": 0
-        },
-        {
-          "index": 16,
-          "value": 0.39999999999997726
-        },
-        {
-          "index": 17,
-          "value": 0.39999999999997726
-        },
-        {
-          "index": 18,
-          "value": 1.1000000000000227
-        },
-        {
-          "index": 19,
-          "value": 0.30000000000001137
-        },
-        {
-          "index": 20,
-          "value": 0
-        },
-        {
-          "index": 21,
-          "value": 0
-        },
-        {
-          "index": 22,
-          "value": 0
-        },
-        {
-          "index": 23,
-          "value": 0
-        },
-        {
-          "index": 24,
           "value": 0
         }
       ]
@@ -410,98 +218,50 @@
       "data": [
         {
           "index": 1,
-          "value": 0.10000000000002274
+          "value": 272.4999999999999
         },
         {
           "index": 2,
-          "value": 0.19999999999998863
+          "value": 153
         },
         {
           "index": 3,
-          "value": 0.19999999999998863
+          "value": 101.80000000000018
         },
         {
           "index": 4,
-          "value": 0.10000000000002274
+          "value": 19.40000000000009
         },
         {
           "index": 5,
-          "value": 0.0999999999999659
+          "value": 4.7000000000000455
         },
         {
           "index": 6,
-          "value": 0.0999999999999659
+          "value": 0
         },
         {
           "index": 7,
-          "value": 0.19999999999998863
+          "value": 0
         },
         {
           "index": 8,
-          "value": 1.8000000000000114
+          "value": 0
         },
         {
           "index": 9,
-          "value": 0.6999999999999886
+          "value": 0
         },
         {
           "index": 10,
-          "value": 0.9000000000000341
+          "value": 0
         },
         {
           "index": 11,
-          "value": 0.39999999999997726
+          "value": 0
         },
         {
           "index": 12,
-          "value": 0.19999999999998863
-        },
-        {
-          "index": 13,
-          "value": 0.19999999999998863
-        },
-        {
-          "index": 14,
-          "value": 0.4000000000000341
-        },
-        {
-          "index": 15,
-          "value": 2.1000000000000227
-        },
-        {
-          "index": 16,
-          "value": 0.10000000000002274
-        },
-        {
-          "index": 17,
-          "value": 0
-        },
-        {
-          "index": 18,
-          "value": 0
-        },
-        {
-          "index": 19,
-          "value": 0
-        },
-        {
-          "index": 20,
-          "value": 0
-        },
-        {
-          "index": 21,
-          "value": 0
-        },
-        {
-          "index": 22,
-          "value": 0
-        },
-        {
-          "index": 23,
-          "value": 0
-        },
-        {
-          "index": 24,
           "value": 0
         }
       ]

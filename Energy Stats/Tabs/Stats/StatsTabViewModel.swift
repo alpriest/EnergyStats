@@ -15,7 +15,7 @@ class StatsTabViewModel: ObservableObject {
     private let networking: Networking
 
     @Published var state = LoadState.inactive
-    @Published var displayMode: StatsDisplayMode = .day(.yesterday()) {
+    @Published var displayMode: StatsDisplayMode = .day(Date()) {
         didSet {
             Task { @MainActor in
                 await load()
@@ -36,7 +36,7 @@ class StatsTabViewModel: ObservableObject {
         self.configManager = configManager
 
         graphVariables = [.generation, ReportVariable.feedIn, .gridConsumption, .chargeEnergyToTal, .dischargeEnergyToTal].map {
-            StatsGraphVariable($0, isSelected: true)
+            StatsGraphVariable($0)
         }
 
         haptic.prepare()

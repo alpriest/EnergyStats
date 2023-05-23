@@ -16,3 +16,69 @@
 "Settings" = "Ustawienia";
 "Graphs" = "Wykresy";
 "Power flow" = "Przepływ mocy";
+"Yield today " = "Dzisiejszy wydajność ";
+
+/* Settings page */
+"Buy me a coffee" = "Zrób mi kawę";
+"Rate this app" = "Oceń tę aplikację";
+"Get in touch" = "Skontaktuj się";
+"logout" = "Wyloguj";
+"You are logged in as " = "Zalogowany jako ";
+"Debug" = "Debugowanie";
+"FoxESS Cloud data is updated every 5 minutes. 'Auto' attempts to synchronise data fetches just after the data is uploaded from your inverter to minimise server load." = "Dane w chmurze FoxESS są aktualizowane co 5 minut. Tryb „Auto” próbuje zsynchronizować pobieranie danych zaraz po przesłaniu ich z falownika, aby zminimalizować obciążenie serwera.";
+"Refresh frequency" = "Częstotliwość odświeżania";
+"1 min" = "1 min";
+"5 mins" = "5 min";
+"Auto" = "Auto";
+"'Show usable battery' deducts the Min SOC amount from the battery charge level and percentage. Due to inaccuracies in the way battery levels are measured this may result in occasionally showing a negative amount remaining." = "'Pokaż baterię użytkową' odejmuje ilość Min SOC od poziomu naładowania i procentu baterii. Ze względu na niedokładności w pomiarze poziomów baterii może to czasami skutkować wyświetlaniem ujemnej pozostałej ilości.";
+"Decimal places" = "Miejsca po przecinku";
+"Show sunshine background" = "Pokaż tło z promieniami słonecznymi";
+"Show usable battery only" = "Pokaż tylko baterię użytkową";
+"Show battery full/empty estimate" = "Pokaż szacowaną pełną/pustą baterię";
+"Show battery temperature" = "Pokaż temperaturę baterii";
+"Show total yield" = "Pokaż całkowity wydajność";
+"Show coloured flow lines" = "Pokaż kolorowe linie przepływu";
+"Min battery charge (SOC)" = "Minimalne naładowanie baterii (SOC)";
+"Capacity" = "Pojemność";
+"OK" = "OK";
+"Cancel" = "Anuluj";
+"Battery" = "Bateria";
+"capacity = residual / (Min SOC / 100)" = "pojemność = resztkowa / (Min SOC / 100)";
+" where residual is estimated by your installation and may not be accurate. Tap the capacity above to enter a manual value." = " gdzie resztkowa jest szacowana przez Twoją instalację i może nie być dokładna. Dotknij powyższą pojemność, aby wprowadzić wartość ręcznie.";
+"Empty/full battery durations are estimates based on calculated capacity, assume that solar conditions and battery charge rates remain constant." = "Czas trwania pustej/pełnej baterii to szacunki oparte na obliczonej pojemności, zakładające stałe warunki słoneczne i tempo ładowania baterii.";
+"Copy to clipboard" = "Skopiuj do schowka";
+"Firmware Versions" = "Wersje oprogramowania";
+"Find out more about firmware versions from the " = "Dowiedz się więcej o wersjach oprogramowania na stronie ";
+" website" = " strona";
+"Inverter" = "Falownik";
+"Device selection" = "Wybór urządzenia";
+"Selected device and related battery information will be displayed on the main page" = "Wybrane urządzenie i powiązane informacje o baterii zostaną wyświetlone na stronie głównej";
+"Parameters are updated every 5 minutes by FoxESS and only available for a single day at a time" = "Parametry są aktualizowane co 5 minut przez FoxESS i dostępne tylko na jeden dzień";
+"Version " = "Wersja ";
+
+/* Variables page */
+"Predefined selections" = "Wybrane opcje";
+"Default" = "Domyślne";
+"Compare strings" = "Porównaj ciągi";
+"Temperatures" = "Temperatury";
+"None" = "Brak";
+"All" = "Wszystko";
+"Cancel" = "Anuluj";
+"Apply" = "Zastosuj";
+"Note that not all parameters contain values" = "Zwróć uwagę, że nie wszystkie parametry zawierają wartości";
+
+/* Graph pages */
+"power" = "moc";
+"energy" = "energia";
+"Output " = "Wyjście ";
+"Solar / Battery power coming through the inverter" = "Moc słoneczna / zasilanie bateryjne przechodzące przez falownik";
+"Feed-in " = "Wprowadzenie ";
+"Power being sent to the grid" = "Moc wysyłana do sieci";
+"Charge " = "Ładowanie ";
+"Power charging the battery" = "Moc ładowania baterii";
+"Discharge " = "Rozładowanie ";
+"Power discharging from the battery" = "Moc rozładowywania z baterii";
+"Grid consumption " = "Konsumpcja z sieci ";
+"Power coming from the grid" = "Moc pochodząca z sieci";
+"Loads " = "Obciążenia ";
+"Loads power" = "Moc obciążeń";

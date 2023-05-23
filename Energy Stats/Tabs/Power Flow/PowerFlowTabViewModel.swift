@@ -128,7 +128,15 @@ class PowerFlowTabViewModel: ObservableObject {
                                   self.configManager.variables.named("batDischargePower")].compactMap { $0 }
             let raws = try await self.network.fetchRaw(deviceID: currentDevice.deviceID, variables: graphVariables, queryDate: .current())
             let currentViewModel = CurrentStatusViewModel(raws: raws)
-            let battery = try currentDevice.battery != nil ? BatteryViewModel(from: await self.network.fetchBattery(deviceID: currentDevice.deviceID)) : .noBattery
+            var battery: BatteryViewModel = .noBattery
+            if currentDevice.battery != nil {
+                do {
+                    let response = try await self.network.fetchBattery(deviceID: currentDevice.deviceID)
+                    battery = BatteryViewModel(from: response)
+                } catch {
+                }
+            }
+
             let summary = HomePowerFlowViewModel(solar: currentViewModel.currentSolarPower,
                                                  battery: battery.chargePower,
                                                  home: currentViewModel.currentHomeConsumption,

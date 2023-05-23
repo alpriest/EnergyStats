@@ -74,7 +74,7 @@ struct ParameterGraphVariableChooserView: View {
                     .buttonStyle(.borderedProminent)
                 }
 
-                Text("Note that not all variables contain values")
+                Text("Note that not all parameters contain values")
             }
         }
     }

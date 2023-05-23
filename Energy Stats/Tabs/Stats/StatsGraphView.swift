@@ -12,24 +12,17 @@ import SwiftUI
 struct StatsGraphVariable: Identifiable, Equatable, Hashable {
     let type: ReportVariable
     var enabled: Bool
-    var isSelected: Bool
     var id: String { type.title }
 
-    init(_ type: ReportVariable, isSelected: Bool = false, enabled: Bool = true) {
+    init(_ type: ReportVariable, enabled: Bool = true) {
         self.type = type
         self.enabled = enabled
-        self.isSelected = isSelected
     }
 
-    init?(_ type: ReportVariable?, isSelected: Bool = false, enabled: Bool = true) {
+    init?(_ type: ReportVariable?, enabled: Bool = true) {
         guard let type else { return nil }
 
-        self.init(type, isSelected: isSelected, enabled: enabled)
-    }
-
-    mutating func setSelected(_ selected: Bool) {
-        isSelected = selected
-        enabled = true
+        self.init(type, enabled: enabled)
     }
 }
 

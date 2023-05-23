@@ -45,32 +45,34 @@ public enum ReportVariable: String, RawRepresentable {
     }
 
     public var title: String {
+        let usage = ValueUsage.total
+
         switch self {
         case .generation:
-            return "Output energy"
+            return String(localized: "Output ") + usage.title()
         case .feedIn:
-            return "Feed-in energy"
+            return String(localized: "Feed-in ") + usage.title()
         case .chargeEnergyToTal:
-            return "Charge energy"
+            return String(localized: "Charge ") + usage.title()
         case .dischargeEnergyToTal:
-            return "Discharge energy"
+            return String(localized: "Discharge ") + usage.title()
         case .gridConsumption:
-            return "Grid consumption energy"
+            return String(localized: "Grid consumption ") + usage.title()
         }
     }
 
     public var description: String {
         switch self {
         case .generation:
-            return "Solar / Battery power coming through the inverter"
+            return String(localized: "Solar / Battery power coming through the inverter")
         case .feedIn:
-            return "Power being sent to the grid"
+            return String(localized: "Power being sent to the grid")
         case .chargeEnergyToTal:
-            return "Power charging the battery"
+            return String(localized: "Power charging the battery")
         case .dischargeEnergyToTal:
-            return "Power discharging from the battery"
+            return String(localized: "Power discharging from the battery")
         case .gridConsumption:
-            return "Power coming from the grid"
+            return String(localized: "Power coming from the grid")
         }
     }
 
