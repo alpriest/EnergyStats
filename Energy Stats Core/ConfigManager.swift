@@ -87,15 +87,21 @@ public class ConfigManager: ConfigManaging {
             let variables = try await networking.fetchVariables(deviceID: device.deviceID)
 
             if device.hasBattery {
-                let battery = try await networking.fetchBattery(deviceID: device.deviceID)
-                let batterySettings = try await networking.fetchBatterySettings(deviceSN: device.deviceSN)
-                if battery.soc > 0 {
-                    batteryCapacity = String(Int(battery.residual / (Double(battery.soc) / 100.0)))
-                } else {
-                    batteryCapacity = "0"
+                do {
+                    let battery = try await networking.fetchBattery(deviceID: device.deviceID)
+                    let batterySettings = try await networking.fetchBatterySettings(deviceSN: device.deviceSN)
+                    if battery.soc > 0 {
+                        batteryCapacity = String(Int(battery.residual / (Double(battery.soc) / 100.0)))
+                    } else {
+                        batteryCapacity = "0"
+                    }
+                    minSOC = String(Double(batterySettings.minSoc) / 100.0)
+                    deviceBattery = Device.Battery(capacity: batteryCapacity, minSOC: minSOC)
+                } catch {
+                    batteryCapacity = nil
+                    minSOC = nil
+                    deviceBattery = nil
                 }
-                minSOC = String(Double(batterySettings.minSoc) / 100.0)
-                deviceBattery = Device.Battery(capacity: batteryCapacity, minSOC: minSOC)
             } else {
                 batteryCapacity = nil
                 minSOC = nil
