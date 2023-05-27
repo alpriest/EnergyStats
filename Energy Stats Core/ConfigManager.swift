@@ -95,7 +95,7 @@ public class ConfigManager: ConfigManaging {
                     } else {
                         batteryCapacity = "0"
                     }
-                    minSOC = String(Double(batterySettings.minSoc) / 100.0)
+                    minSOC = String(Double(batterySettings.minGridSoc) / 100.0)
                     deviceBattery = Device.Battery(capacity: batteryCapacity, minSOC: minSOC)
                 } catch {
                     batteryCapacity = nil

@@ -43,6 +43,7 @@
 "OK" = "OK";
 "Cancel" = "Anuluj";
 "Battery" = "Bateria";
+"Calculated as " = "Obliczone jako ";
 "capacity = residual / (Min SOC / 100)" = "pojemność = resztkowa / (Min SOC / 100)";
 " where residual is estimated by your installation and may not be accurate. Tap the capacity above to enter a manual value." = " gdzie resztkowa jest szacowana przez Twoją instalację i może nie być dokładna. Dotknij powyższą pojemność, aby wprowadzić wartość ręcznie.";
 "Empty/full battery durations are estimates based on calculated capacity, assume that solar conditions and battery charge rates remain constant." = "Czas trwania pustej/pełnej baterii to szacunki oparte na obliczonej pojemności, zakładające stałe warunki słoneczne i tempo ładowania baterii.";

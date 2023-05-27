@@ -30,6 +30,7 @@
 "1 min" = "1 min";
 "5 mins" = "5 mins";
 "Auto" = "Auto";
+"Display" = "Display";
 "'Show usable battery' deducts the Min SOC amount from the battery charge level and percentage. Due to inaccuracies in the way battery levels are measured this may result in occasionally showing a negative amount remaining." = "'Mostrar batería utilizable' resta la cantidad de Min SOC del nivel y porcentaje de carga de la batería. Debido a imprecisiones en la forma en que se miden los niveles de la batería, esto puede resultar en que ocasionalmente se muestre un valor negativo restante.";
 "Decimal places" = "Decimales";
 "Show sunshine background" = "Mostrar fondo de sol";
@@ -43,6 +44,7 @@
 "OK" = "Aceptar";
 "Cancel" = "Cancelar";
 "Battery" = "Batería";
+"Calculated as " = "Calculado como ";
 "capacity = residual / (Min SOC / 100)" = "capacidad = residual / (Min SOC / 100)";
 " where residual is estimated by your installation and may not be accurate. Tap the capacity above to enter a manual value." = " donde el residual es una estimación realizada por tu instalación y puede no ser precisa. Toca la capacidad anterior para ingresar un valor manual.";
 "Empty/full battery durations are estimates based on calculated capacity, assume that solar conditions and battery charge rates remain constant." = "Las duraciones de batería vacía/llena son estimaciones basadas en la capacidad calculada, asumiendo que las condiciones solares y las tasas de carga de la batería permanezcan constantes.";

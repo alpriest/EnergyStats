@@ -50,9 +50,8 @@ struct DebugDataView: View {
                     )
                 }
             }, footer: {
-                Text("Having problems? View the most recent data logs above to help and diagnose issues")
+                Text("Having problems? View the most recent data logs above to help diagnose issues")
             })
-
         }.navigationTitle("Network logs")
     }
 }
@@ -63,10 +62,10 @@ struct DebugDataView_Previews: PreviewProvider {
         let network = DemoNetworking()
         let store = InMemoryLoggingNetworkStore()
         Task {
-            store.rawResponse = NetworkOperation(description: "fetchRaw", value: try await network.fetchRaw(deviceID: "123", variables: [RawVariable(name: "BatChargePower", variable: "batChargePower", unit: "kW")], queryDate: .current()), raw: "test".data(using: .utf8)!)
-            store.reportResponse = NetworkOperation(description: "fetchReport", value: try await network.fetchReport(deviceID: "123", variables: [.chargeEnergyToTal], queryDate: .current(), reportType: .day), raw: "test".data(using: .utf8)!)
-            store.batteryResponse = NetworkOperation(description: "fetchBattery", value: try await network.fetchBattery(deviceID: "123"), raw: "test".data(using: .utf8)!)
-            store.deviceListResponse = NetworkOperation(description: "fetchDeviceList", value: try await network.fetchDeviceList(), raw: "test".data(using: .utf8)!)
+            store.rawResponse = try NetworkOperation(description: "fetchRaw", value: await network.fetchRaw(deviceID: "123", variables: [RawVariable(name: "BatChargePower", variable: "batChargePower", unit: "kW")], queryDate: .current()), raw: "test".data(using: .utf8)!)
+            store.reportResponse = try NetworkOperation(description: "fetchReport", value: await network.fetchReport(deviceID: "123", variables: [.chargeEnergyToTal], queryDate: .current(), reportType: .day), raw: "test".data(using: .utf8)!)
+            store.batteryResponse = try NetworkOperation(description: "fetchBattery", value: await network.fetchBattery(deviceID: "123"), raw: "test".data(using: .utf8)!)
+            store.deviceListResponse = try NetworkOperation(description: "fetchDeviceList", value: await network.fetchDeviceList(), raw: "test".data(using: .utf8)!)
         }
 
         return NavigationView {

@@ -57,6 +57,7 @@ struct BatterySettingsView: View {
             }, header: {
                 Text("Battery")
             }, footer: {
+                Text("Calculated as ") +
                 Text("capacity = residual / (Min SOC / 100)").italic() +
                     Text(" where residual is estimated by your installation and may not be accurate. Tap the capacity above to enter a manual value.") + Text("\n\n") +
                     Text("Empty/full battery durations are estimates based on calculated capacity, assume that solar conditions and battery charge rates remain constant.")
