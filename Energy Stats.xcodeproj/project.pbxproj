@@ -80,7 +80,7 @@
 		417185482A0051CA00D18CDD /* ParameterGraphVariableChooserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417185472A0051CA00D18CDD /* ParameterGraphVariableChooserView.swift */; };
 		4171854A2A01006000D18CDD /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417185492A01006000D18CDD /* Double.swift */; };
 		4171854C2A01033700D18CDD /* ParameterGraphVariablesToggles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171854B2A01033700D18CDD /* ParameterGraphVariablesToggles.swift */; };
-		4171854E2A010B6300D18CDD /* GraphVariableChooserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171854D2A010B6300D18CDD /* GraphVariableChooserViewModel.swift */; };
+		4171854E2A010B6300D18CDD /* ParameterGraphVariableChooserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171854D2A010B6300D18CDD /* ParameterGraphVariableChooserViewModel.swift */; };
 		417185502A01188300D18CDD /* firmware-version-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 4171854F2A01188300D18CDD /* firmware-version-success.json */; };
 		417185522A0119F300D18CDD /* variables-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 417185512A0119F300D18CDD /* variables-success.json */; };
 		417AA21A2A12454A0073CD34 /* StatsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AA2192A12454A0073CD34 /* StatsTabView.swift */; };
@@ -245,7 +245,7 @@
 		417185472A0051CA00D18CDD /* ParameterGraphVariableChooserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterGraphVariableChooserView.swift; sourceTree = "<group>"; };
 		417185492A01006000D18CDD /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		4171854B2A01033700D18CDD /* ParameterGraphVariablesToggles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterGraphVariablesToggles.swift; sourceTree = "<group>"; };
-		4171854D2A010B6300D18CDD /* GraphVariableChooserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphVariableChooserViewModel.swift; sourceTree = "<group>"; };
+		4171854D2A010B6300D18CDD /* ParameterGraphVariableChooserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterGraphVariableChooserViewModel.swift; sourceTree = "<group>"; };
 		4171854F2A01188300D18CDD /* firmware-version-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "firmware-version-success.json"; sourceTree = "<group>"; };
 		417185512A0119F300D18CDD /* variables-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "variables-success.json"; sourceTree = "<group>"; };
 		41777F1428F49C61009944FF /* NetworkFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFacade.swift; sourceTree = "<group>"; };
@@ -568,9 +568,9 @@
 				41923E3D2916BC6F00D1A8C5 /* ParametersGraphView.swift */,
 				4140ECD9292D58D300992DD8 /* ParameterGraphVariable.swift */,
 				417153E329F2BCD700639A7B /* ParameterGraphHeaderView.swift */,
-				417185472A0051CA00D18CDD /* ParameterGraphVariableChooserView.swift */,
 				4171854B2A01033700D18CDD /* ParameterGraphVariablesToggles.swift */,
-				4171854D2A010B6300D18CDD /* GraphVariableChooserViewModel.swift */,
+				417185472A0051CA00D18CDD /* ParameterGraphVariableChooserView.swift */,
+				4171854D2A010B6300D18CDD /* ParameterGraphVariableChooserViewModel.swift */,
 			);
 			path = "Parameters Graph";
 			sourceTree = "<group>";
@@ -939,7 +939,7 @@
 				4140144E28C70B3200EA5BA1 /* Energy_StatsApp.swift in Sources */,
 				41C49EAE2A0398E4003700CB /* PreviewUserManager.swift in Sources */,
 				419DFA882A12A6DF0067313A /* DatePickerViewModel.swift in Sources */,
-				4171854E2A010B6300D18CDD /* GraphVariableChooserViewModel.swift in Sources */,
+				4171854E2A010B6300D18CDD /* ParameterGraphVariableChooserViewModel.swift in Sources */,
 				417153E629F2BD3300639A7B /* LoadState.swift in Sources */,
 				4130364B29B8BE7F006B5CE9 /* InverterChoiceView.swift in Sources */,
 				41E4B30E28DB7511003F7F47 /* BatteryCapacityCalculator.swift in Sources */,

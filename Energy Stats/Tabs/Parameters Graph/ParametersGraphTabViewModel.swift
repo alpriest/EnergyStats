@@ -101,8 +101,6 @@ class ParametersGraphTabViewModel: ObservableObject {
 
         do {
             let rawGraphVariables = graphVariables.filter { $0.isSelected }.compactMap { $0.type }
-            let reportVariables = rawGraphVariables.compactMap { $0.reportVariable }
-
             let raw = try await networking.fetchRaw(deviceID: currentDevice.deviceID, variables: rawGraphVariables, queryDate: queryDate)
             let rawData: [GraphValue] = raw.flatMap { response -> [GraphValue] in
                 guard let rawVariable = configManager.variables.first(where: { $0.variable == response.variable }) else { return [] }
@@ -112,6 +110,7 @@ class ParametersGraphTabViewModel: ObservableObject {
                 }
             }
 
+            let reportVariables = rawGraphVariables.compactMap { $0.reportVariable }
             let reports = try await networking.fetchReport(deviceID: currentDevice.deviceID, variables: reportVariables, queryDate: queryDate, reportType: .day)
             rawGraphVariables.forEach { rawVariable in
                 guard let reportVariable = rawVariable.reportVariable else { return }

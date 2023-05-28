@@ -79,13 +79,13 @@ public enum ReportVariable: String, RawRepresentable {
     public var colour: Color {
         switch self {
         case .generation:
-            return .yellow.opacity(0.8)
+            return .orange.opacity(0.7)
         case .feedIn:
-            return .mint.opacity(0.8)
+            return .purple.opacity(0.8)
         case .chargeEnergyToTal:
             return .green.opacity(0.8)
         case .dischargeEnergyToTal:
-            return .red.opacity(0.5)
+            return .blue.opacity(0.8)
         case .gridConsumption:
             return .red.opacity(0.8)
         }
