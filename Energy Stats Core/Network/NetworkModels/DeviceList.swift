@@ -54,13 +54,29 @@ public struct Device: Codable, Hashable, Identifiable {
     public let variables: [RawVariable]
 
     public struct Battery: Codable, Hashable {
-        let capacity: String?
-        let minSOC: String?
+        public let capacity: String?
+        public let minSOC: String?
+
+        public init(capacity: String?, minSOC: String?) {
+            self.capacity = capacity
+            self.minSOC = minSOC
+        }
     }
 
     public var id: String { deviceID }
 
     public var deviceDisplayName: String {
         deviceType ?? "\(deviceID) Re-login to update"
+    }
+
+    public init(plantName: String, deviceID: String, deviceSN: String, hasPV: Bool, battery: Battery?, deviceType: String?, firmware: DeviceFirmwareVersion?, variables: [RawVariable]) {
+        self.plantName = plantName
+        self.deviceID = deviceID
+        self.deviceSN = deviceSN
+        self.hasPV = hasPV
+        self.battery = battery
+        self.deviceType = deviceType
+        self.firmware = firmware
+        self.variables = variables
     }
 }

@@ -54,7 +54,8 @@ struct InverterFirmwareVersionsView_Previews: PreviewProvider {
         Form {
             InverterFirmwareVersionsView(viewModel: SettingsTabViewModel(
                 userManager: .preview(),
-                config: PreviewConfigManager()
+                config: PreviewConfigManager(),
+                networking: DemoNetworking()
             ))
         }
     }

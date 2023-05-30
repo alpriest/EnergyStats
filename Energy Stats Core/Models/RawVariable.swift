@@ -63,13 +63,13 @@ public extension RawVariable {
         case "batChargePower":
             return .green.opacity(0.8)
         case "batDischargePower":
-            return .red.opacity(0.5)
+            return .blue.opacity(0.8)
         case "generationPower":
-            return .yellow.opacity(0.8)
+            return .orange.opacity(0.7)
         case "gridConsumptionPower":
             return .red.opacity(0.8)
         case "feedinPower":
-            return .mint.opacity(0.8)
+            return .purple.opacity(0.8)
         case "loadsPower":
             return .black.opacity(0.2)
         default:

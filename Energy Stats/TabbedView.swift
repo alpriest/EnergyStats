@@ -18,7 +18,7 @@ struct TabbedView: View {
         self.networking = networking
         self.userManager = userManager
         self.configManager = configManager
-        _settingsTabViewModel = .init(wrappedValue: SettingsTabViewModel(userManager: userManager, config: configManager))
+        _settingsTabViewModel = .init(wrappedValue: SettingsTabViewModel(userManager: userManager, config: configManager, networking: networking))
     }
 
     var body: some View {

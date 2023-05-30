@@ -68,7 +68,7 @@ public class ConfigManager: ConfigManaging {
                 showTotalYield: config.showTotalYield
             )
         )
-        self.selectedDeviceID = self.selectedDeviceID
+        selectedDeviceID = selectedDeviceID
     }
 
     public func fetchDevices() async throws {
@@ -79,10 +79,7 @@ public class ConfigManager: ConfigManaging {
         }
 
         let newDevices = try await deviceList.devices.asyncMap { device in
-            let batteryCapacity: String?
-            let minSOC: String?
             let deviceBattery: Device.Battery?
-
             let firmware = try await fetchFirmwareVersions(deviceID: device.deviceID)
             let variables = try await networking.fetchVariables(deviceID: device.deviceID)
 
@@ -90,21 +87,12 @@ public class ConfigManager: ConfigManaging {
                 do {
                     let battery = try await networking.fetchBattery(deviceID: device.deviceID)
                     let batterySettings = try await networking.fetchBatterySettings(deviceSN: device.deviceSN)
-                    if battery.soc > 0 {
-                        batteryCapacity = String(Int(battery.residual / (Double(battery.soc) / 100.0)))
-                    } else {
-                        batteryCapacity = "0"
-                    }
-                    minSOC = String(Double(batterySettings.minGridSoc) / 100.0)
-                    deviceBattery = Device.Battery(capacity: batteryCapacity, minSOC: minSOC)
+
+                    deviceBattery = BatteryResponseMapper.map(battery: battery, settings: batterySettings)
                 } catch {
-                    batteryCapacity = nil
-                    minSOC = nil
                     deviceBattery = nil
                 }
             } else {
-                batteryCapacity = nil
-                minSOC = nil
                 deviceBattery = nil
             }
 
@@ -325,5 +313,21 @@ public class ConfigManager: ConfigManaging {
                 config.devices = nil
             }
         }
+    }
+}
+
+public class BatteryResponseMapper {
+    public static func map(battery: BatteryResponse, settings: BatterySettingsResponse) -> Device.Battery {
+        let batteryCapacity: String
+        let minSOC: String
+
+        if battery.soc > 0 {
+            batteryCapacity = String(Int(battery.residual / (Double(battery.soc) / 100.0)))
+        } else {
+            batteryCapacity = "0"
+        }
+        minSOC = String(Double(settings.minGridSoc) / 100.0)
+
+        return Device.Battery(capacity: batteryCapacity, minSOC: minSOC)
     }
 }

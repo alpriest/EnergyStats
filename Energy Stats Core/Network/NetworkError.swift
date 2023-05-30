@@ -28,17 +28,17 @@ public enum NetworkError: LocalizedError, CustomStringConvertible, Equatable {
         case .invalidConfiguration(let reason):
             builder.append("Invalid configuration", reason)
         case .badCredentials:
-            builder.append("Bad credentials")
+            builder.append(String(localized: "Bad credentials"))
         case .unknown:
-            builder.append("Unknown network error")
+            builder.append(String(localized: "Unknown network error"))
         case .invalidToken:
-            builder.append("Invalid token. Please logout and login again.")
+            builder.append(String(localized: "Invalid token. Please logout and login again."))
         case .tryLater:
-            builder.append("You've hit the server rate limit. Please try later.")
+            builder.append(String(localized: "You've hit the server rate limit. Please try later."))
         case .offline:
-            builder.append("You appear to be offline. Please check your connection.")
+            builder.append(String(localized: "You appear to be offline. Please check your connection."))
         case .maintenanceMode:
-            builder.append("Fox servers are offline. Please try later.")
+            builder.append(String(localized: "Fox servers are offline. Please try later."))
         }
 
         return builder.formatted()
@@ -66,4 +66,3 @@ public enum NetworkError: LocalizedError, CustomStringConvertible, Equatable {
         }
     }
 }
-

@@ -15,10 +15,16 @@
 "Next update in" = "Nächstes Update in";
 "Settings" = "Einstellungen";
 "Graphs" = "Graphen";
+"Stats" = "Statistiken";
 "Power flow" = "Leistungsfluss";
 "Yield today " = "Ertrag heute ";
+"retry" = "Wiederholen";
+"You appear to be offline. Please check your connection." = "Sie scheinen offline zu sein. Bitte überprüfen Sie Ihre Internetverbindung.";
+"Parameters" = "Parameter";
 
 /* Settings page */
+"Display" = "Anzeige";
+"Recalculate capacity" = "Kapazität neu berechnen";
 "Buy me a coffee" = "Kaufen Sie mir einen Kaffee";
 "Rate this app" = "Bewerten Sie diese App";
 "Get in touch" = "Kontaktieren Sie mich";
@@ -30,8 +36,7 @@
 "1 min" = "1 min";
 "5 mins" = "5 min";
 "Auto" = "Auto";
-"Display" = "Display";
-"'Show usable battery' deducts the Min SOC amount from the battery charge level and percentage. Due to inaccuracies in the way battery levels are measured this may result in occasionally showing a negative amount remaining." = "'Zeige nur die verwendbare Batteriekapazität' leitet den minimalen SOC vom Batterieladezustand und -prozentsatz ab. Aufgrund von Ungenauigkeiten in der Art und Weise, wie der Batterieladezustand gemessen wird, kann dies manchmal zur Anzeige von einer negativen verbleibenden Restladung führen.";
+"Deducts the Min SOC amount from the battery charge level and percentage. Due to inaccuracies in the way battery levels are measured this may occasionally show a negative amount." = "'Zeige nur die verwendbare Batteriekapazität' leitet den minimalen SOC vom Batterieladezustand und -prozentsatz ab. Aufgrund von Ungenauigkeiten in der Art und Weise, wie der Batterieladezustand gemessen wird, kann dies manchmal zur Anzeige von einer negativen verbleibenden Restladung führen.";
 "Decimal places" = "Dezimalstellen";
 "Show sunshine background" = "Zeige den Sonnenschein-Hintergrund";
 "Show usable battery only" = "Zeige nur die verwendbare Batteriekapazität";
@@ -40,6 +45,7 @@
 "Show total yield" = "Zeige den Gesamtertrag";
 "Show coloured flow lines" = "Zeige farbige Leistungsfluss-Linien";
 "Min battery charge (SOC)" = "Minimale Batterieladung (SOC)";
+"Show values in Watts" = "Zeige Werte in Watt";
 "Capacity" = "Kapazität";
 "OK" = "OK";
 "Cancel" = "Abbrechen";
@@ -55,13 +61,13 @@
 "Inverter" = "Wechselrichter";
 "Device selection" = "Geräte-Auswahl";
 "Selected device and related battery information will be displayed on the main page" = "Informationen zum ausgewählten Gerät und der dazugehörigen Batterie werden auf der Hauptseite angezeigt";
-"Parameters are updated every 5 minutes by FoxESS and only available for a single day at a time" = "Die Parameter werden alle 5 Minuten von FoxESS aktualisiert und sind immer nur für einen Tag gleichzeitig verfügbar";
+"Parameters are updated every 5 minutes by FoxESS and only available for a single day at a time" = "Die Parameter werden alle 5 Minuten von FoxESS aktualisiert und sind immer nur für einen Tag verfügbar";
 "Choose date" = "Datum auswählen";
 "6 hours" = "6 Stunden";
 "12 hours" = "12 Stunden";
 "24 hours" = "24 Stunden";
 "Clear graph values" = "Graphwerte zurücksetzen";
-"Stats are aggregated by FoxESS into 1 hr, 1 day or 1 month totals" = "Stats (Statistiken) werden von FoxESS für jeweils 1 Stunde, 1 Tag oder 1 Monat aufsummiert";
+"Stats are aggregated by FoxESS into 1 hr, 1 day or 1 month totals" = "Statistiken werden von FoxESS für jeweils 1 Stunde, 1 Tag oder 1 Monat aufsummiert";
 "Day" = "Tag";
 "Month" = "Monat";
 "Year" = "Jahr";

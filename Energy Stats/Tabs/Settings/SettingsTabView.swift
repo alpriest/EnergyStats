@@ -32,18 +32,6 @@ struct SettingsTabView: View {
                             Text("Show total yield")
                         }
 
-                        Toggle(isOn: $viewModel.showBatteryTemperature) {
-                            Text("Show battery temperature")
-                        }
-
-                        Toggle(isOn: $viewModel.showBatteryEstimate) {
-                            Text("Show battery full/empty estimate")
-                        }
-
-                        Toggle(isOn: $viewModel.showUsableBatteryOnly) {
-                            Text("Show usable battery only")
-                        }
-
                         Toggle(isOn: $viewModel.showSunnyBackground) {
                             Text("Show sunshine background")
                         }
@@ -63,9 +51,6 @@ struct SettingsTabView: View {
                     },
                     header: {
                         Text("Display")
-                    },
-                    footer: {
-                        Text("'Show usable battery' deducts the Min SOC amount from the battery charge level and percentage. Due to inaccuracies in the way battery levels are measured this may result in occasionally showing a negative amount remaining.")
                     })
 
                 Section(
@@ -147,7 +132,8 @@ struct SettingsTabView_Previews: PreviewProvider {
         SettingsTabView(
             viewModel: SettingsTabViewModel(
                 userManager: .preview(),
-                config: PreviewConfigManager()),
+                config: PreviewConfigManager(),
+                networking: DemoNetworking()),
             configManager: PreviewConfigManager())
     }
 }

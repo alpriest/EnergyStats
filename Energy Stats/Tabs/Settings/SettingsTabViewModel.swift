@@ -22,11 +22,7 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
-    @Published var batteryCapacity: String {
-        didSet {
-            config.batteryCapacity = batteryCapacity
-        }
-    }
+    @Published var batteryCapacity: String
 
     @Published var showBatteryTemperature: Bool {
         didSet {
@@ -76,10 +72,12 @@ class SettingsTabViewModel: ObservableObject {
     private var config: ConfigManaging
     private let userManager: UserManager
     private var cancellables = Set<AnyCancellable>()
+    private let networking: Networking
 
-    init(userManager: UserManager, config: ConfigManaging) {
+    init(userManager: UserManager, config: ConfigManaging, networking: Networking) {
         self.userManager = userManager
         self.config = config
+        self.networking = networking
         showColouredLines = config.showColouredLines
         showBatteryTemperature = config.showBatteryTemperature
         refreshFrequency = config.refreshFrequency
@@ -108,14 +106,60 @@ class SettingsTabViewModel: ObservableObject {
 
     @Published var minSOC: Double
     var username: String { userManager.getUsername() ?? "" }
+    @Published var showAlert = false
 
     @MainActor
     func logout() {
         userManager.logout()
     }
 
+    func saveBatteryCapacity() {
+        if let int = Int(batteryCapacity), int > 0 {
+            config.batteryCapacity = batteryCapacity
+        } else {
+            batteryCapacity = config.batteryCapacity
+            showAlert = true
+        }
+    }
+
+    func revertBatteryCapacityEdits() {
+        batteryCapacity = config.batteryCapacity
+    }
+
     var appVersion: String {
         let dictionary = Bundle.main.infoDictionary!
         return dictionary["CFBundleShortVersionString"] as! String
+    }
+
+    func recalculateBatteryCapacity() {
+        guard let device = config.currentDevice.value else { return }
+        guard let devices = config.devices else { return }
+
+        Task { [networking] in
+            let battery = try await networking.fetchBattery(deviceID: device.deviceID)
+            let batterySettings = try await networking.fetchBatterySettings(deviceSN: device.deviceSN)
+
+            if battery.soc > 0 {
+                let battery = BatteryResponseMapper.map(battery: battery, settings: batterySettings)
+
+                config.devices = devices.map {
+                    if $0.deviceID == device.deviceID {
+                        return Device(
+                            plantName: $0.plantName,
+                            deviceID: $0.deviceID,
+                            deviceSN: $0.deviceSN,
+                            hasPV: $0.hasPV,
+                            battery: battery,
+                            deviceType: $0.deviceType,
+                            firmware: $0.firmware,
+                            variables: $0.variables
+                        )
+                    } else {
+                        return $0
+                    }
+                }
+                config.select(device: device)
+            }
+        }
     }
 }

@@ -34,10 +34,12 @@ struct BatterySettingsView: View {
 
                                 HStack {
                                     Button("OK") {
+                                        viewModel.saveBatteryCapacity()
                                         isEditingCapacity = false
                                         focused = false
                                     }.buttonStyle(.bordered)
                                     Button("Cancel") {
+                                        viewModel.revertBatteryCapacityEdits()
                                         isEditingCapacity = false
                                         focused = false
                                     }.buttonStyle(.bordered)
@@ -54,14 +56,44 @@ struct BatterySettingsView: View {
                     }
                 }
 
+                Button("Recalculate capacity", action: {
+                    viewModel.recalculateBatteryCapacity()
+                })
             }, header: {
                 Text("Battery")
             }, footer: {
                 Text("Calculated as ") +
-                Text("capacity = residual / (Min SOC / 100)").italic() +
-                    Text(" where residual is estimated by your installation and may not be accurate. Tap the capacity above to enter a manual value.") + Text("\n\n") +
-                    Text("Empty/full battery durations are estimates based on calculated capacity, assume that solar conditions and battery charge rates remain constant.")
-            })
+                    Text("capacity = residual / (Min SOC / 100)").italic() +
+                    Text(" where residual is estimated by your installation and may not be accurate. Tap the capacity above to enter a manual value.")
+            }
+        ).alert("Invalid Battery Capacity", isPresented: $viewModel.showAlert, actions: {
+            Button("OK") {}
+        }, message: {
+            Text("Amount entered must be greater than 0")
+        })
+
+        Section {
+            Toggle(isOn: $viewModel.showBatteryEstimate) {
+                Text("Show battery full/empty estimate")
+            }
+
+        } footer: {
+            Text("Empty/full battery durations are estimates based on calculated capacity, assume that solar conditions and battery charge rates remain constant.")
+        }
+
+        Section(content: {
+            Toggle(isOn: $viewModel.showUsableBatteryOnly) {
+                Text("Show usable battery only")
+            }
+        }, footer: {
+            Text("Deducts the Min SOC amount from the battery charge level and percentage. Due to inaccuracies in the way battery levels are measured this may occasionally show a negative amount.")
+        })
+
+        Section {
+            Toggle(isOn: $viewModel.showBatteryTemperature) {
+                Text("Show battery temperature")
+            }
+        }
     }
 }
 
@@ -71,7 +103,8 @@ struct BatterySettingsView_Previews: PreviewProvider {
         Form {
             BatterySettingsView(viewModel: SettingsTabViewModel(
                 userManager: .preview(),
-                config: PreviewConfigManager())
+                config: PreviewConfigManager(),
+                networking: DemoNetworking())
             )
         }
     }

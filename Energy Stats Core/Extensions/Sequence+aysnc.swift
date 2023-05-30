@@ -8,7 +8,7 @@
 import Foundation
 
 extension Sequence {
-    func asyncMap<T>(_ transform: (Element) async throws -> T) async rethrows -> [T] {
+    public func asyncMap<T>(_ transform: (Element) async throws -> T) async rethrows -> [T] {
         var values = [T]()
 
         for element in self {
@@ -18,7 +18,7 @@ extension Sequence {
         return values
     }
 
-    func asyncForEach(_ operation: (Element) async throws -> Void) async rethrows {
+    public func asyncForEach(_ operation: (Element) async throws -> Void) async rethrows {
         for element in self {
             try await operation(element)
         }

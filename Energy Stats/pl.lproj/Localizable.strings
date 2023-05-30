@@ -30,7 +30,7 @@
 "1 min" = "1 min";
 "5 mins" = "5 min";
 "Auto" = "Auto";
-"'Show usable battery' deducts the Min SOC amount from the battery charge level and percentage. Due to inaccuracies in the way battery levels are measured this may result in occasionally showing a negative amount remaining." = "'Pokaż baterię użytkową' odejmuje ilość Min SOC od poziomu naładowania i procentu baterii. Ze względu na niedokładności w pomiarze poziomów baterii może to czasami skutkować wyświetlaniem ujemnej pozostałej ilości.";
+"Deducts the Min SOC amount from the battery charge level and percentage. Due to inaccuracies in the way battery levels are measured this may occasionally show a negative amount." = "'Pokaż baterię użytkową' odejmuje ilość Min SOC od poziomu naładowania i procentu baterii. Ze względu na niedokładności w pomiarze poziomów baterii może to czasami skutkować wyświetlaniem ujemnej pozostałej ilości.";
 "Decimal places" = "Miejsca po przecinku";
 "Show sunshine background" = "Pokaż tło z promieniami słonecznymi";
 "Show usable battery only" = "Pokaż tylko baterię użytkową";

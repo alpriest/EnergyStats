@@ -22,7 +22,7 @@ struct BatteryPowerViewModel {
         self.temperature = temperature
         self.configManager = configManager
 
-        calculator = BatteryCapacityCalculator(capacityW: configManager.batteryCapacityW,
+        calculator = BatteryCapacityCalculator(capacityWh: configManager.batteryCapacityW,
                                                minimumSOC: configManager.minSOC)
     }
 
@@ -33,8 +33,8 @@ struct BatteryPowerViewModel {
         )
     }
 
-    var batteryStoredChargekW: Double {
-        calculator.currentEstimatedChargeAmountW(
+    var batteryStoredChargekWh: Double {
+        calculator.currentEstimatedChargeAmountWh(
             batteryStateOfCharge: actualBatteryStateOfCharge,
             includeUnusableCapacity: !configManager.showUsableBatteryOnly
         ) / 1000.0
@@ -66,7 +66,7 @@ struct BatteryPowerView: View {
                     if percentage {
                         Text(viewModel.batteryStateOfCharge, format: .percent)
                     } else {
-                        Text(viewModel.batteryStoredChargekW.kW(appTheme.decimalPlaces))
+                        Text(viewModel.batteryStoredChargekWh.kWh(appTheme.decimalPlaces))
                     }
                 }.onTapGesture {
                     percentage.toggle()

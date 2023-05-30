@@ -8,29 +8,29 @@
 import Foundation
 
 class BatteryCapacityCalculator {
-    private let capacityW: Double
+    private let capacityWh: Double
     private let formatter = RelativeDateTimeFormatter()
     private let minimumSOC: Double
     private let percentageConsideredFull = 98.75
 
-    init(capacityW: Int, minimumSOC: Double) {
-        self.capacityW = Double(capacityW)
+    init(capacityWh: Int, minimumSOC: Double) {
+        self.capacityWh = Double(capacityWh)
         self.minimumSOC = minimumSOC
     }
 
     private var minimumCharge: Double {
-        capacityW * minimumSOC
+        capacityWh * minimumSOC
     }
 
     func batteryChargeStatusDescription(batteryChargePowerkWH: Double, batteryStateOfCharge: Double) -> String? {
         guard abs(batteryChargePowerkWH) > 0 else { return nil }
         
-        let currentEstimatedCharge = capacityW * batteryStateOfCharge
+        let currentEstimatedCharge = capacityWh * batteryStateOfCharge
 
         if batteryChargePowerkWH > 0 { // battery charging
             if batteryStateOfCharge >= percentageConsideredFull { return nil }
 
-            let capacityRemaining = capacityW - currentEstimatedCharge
+            let capacityRemaining = capacityWh - currentEstimatedCharge
             let minsToFullCharge = (capacityRemaining / (batteryChargePowerkWH * 1000.0)) * 60 * 60
             let duration = formatter.localizedString(fromTimeInterval: minsToFullCharge)
 
@@ -45,8 +45,8 @@ class BatteryCapacityCalculator {
         }
     }
 
-    func currentEstimatedChargeAmountW(batteryStateOfCharge: Double, includeUnusableCapacity: Bool = true) -> Double {
-        (capacityW * batteryStateOfCharge) - (includeUnusableCapacity ? 0 : minimumCharge)
+    func currentEstimatedChargeAmountWh(batteryStateOfCharge: Double, includeUnusableCapacity: Bool = true) -> Double {
+        (capacityWh * batteryStateOfCharge) - (includeUnusableCapacity ? 0 : minimumCharge)
     }
 
     func effectiveBatteryStateOfCharge(batteryStateOfCharge: Double, includeUnusableCapacity: Bool = true) -> Double {
