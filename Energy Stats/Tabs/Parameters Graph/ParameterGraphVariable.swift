@@ -32,25 +32,25 @@ struct ParameterGraphVariable: Identifiable, Equatable, Hashable {
     }
 }
 
-struct GraphValue: Identifiable {
+struct ParameterGraphValue: Identifiable {
     let date: Date
     let value: Double
-    let variable: RawVariable
+    let type: RawVariable
 
-    var id: String { "\(date.iso8601())_\(variable.variable)" }
+    var id: String { "\(date.iso8601())_\(type.variable)" }
 
     init(date: Date, queryDate: QueryDate, value: Double, variable: RawVariable) {
         self.date = date
         self.value = value
-        self.variable = variable
+        self.type = variable
     }
 
     func formatted() -> String {
-        switch variable.unit {
+        switch type.unit {
         case "kW":
             return value.kW(2)
         default:
-            return "\(value) \(variable.unit)"
+            return "\(value) \(type.unit)"
         }
     }
 }

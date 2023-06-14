@@ -23,7 +23,7 @@ class ParametersGraphTabViewModel: ObservableObject {
     private let haptic = UIImpactFeedbackGenerator()
     private let networking: Networking
     private let configManager: ConfigManaging
-    private var rawData: [GraphValue] = [] {
+    private var rawData: [ParameterGraphValue] = [] {
         didSet {
             data = rawData
         }
@@ -34,11 +34,13 @@ class ParametersGraphTabViewModel: ObservableObject {
     @Published var state = LoadState.inactive
 
     @Published private(set) var stride = 3
-    @Published private(set) var data: [GraphValue] = []
+    @Published private(set) var data: [ParameterGraphValue] = []
     @Published var graphVariables: [ParameterGraphVariable] = []
     private var queryDate = QueryDate.current()
     private var hours: Int = 24
-    private var max: GraphValue?
+    private var max: ParameterGraphValue?
+    var exportFile: CSVTextFile?
+    var exportFileName = ""
 
     @Published var displayMode = GraphDisplayMode(date: .now, hours: 24) {
         didSet {
@@ -102,11 +104,11 @@ class ParametersGraphTabViewModel: ObservableObject {
         do {
             let rawGraphVariables = graphVariables.filter { $0.isSelected }.compactMap { $0.type }
             let raw = try await networking.fetchRaw(deviceID: currentDevice.deviceID, variables: rawGraphVariables, queryDate: queryDate)
-            let rawData: [GraphValue] = raw.flatMap { response -> [GraphValue] in
+            let rawData: [ParameterGraphValue] = raw.flatMap { response -> [ParameterGraphValue] in
                 guard let rawVariable = configManager.variables.first(where: { $0.variable == response.variable }) else { return [] }
 
                 return response.data.compactMap {
-                    GraphValue(date: $0.time, queryDate: queryDate, value: $0.value, variable: rawVariable)
+                    ParameterGraphValue(date: $0.time, queryDate: queryDate, value: $0.value, variable: rawVariable)
                 }
             }
 
@@ -123,6 +125,7 @@ class ParametersGraphTabViewModel: ObservableObject {
             await MainActor.run {
                 self.rawData = rawData
                 self.refresh()
+                prepareExport()
                 self.state = .inactive
             }
         } catch {
@@ -136,7 +139,7 @@ class ParametersGraphTabViewModel: ObservableObject {
         let hiddenVariableTypes = graphVariables.filter { $0.enabled == false }.map { $0.type }
 
         let refreshedData = rawData
-            .filter { !hiddenVariableTypes.contains($0.variable) }
+            .filter { !hiddenVariableTypes.contains($0.type) }
             .filter { value in
                 let hours = displayMode.hours
                 let oldest = displayMode.date.addingTimeInterval(0 - (3600 * Double(hours)))
@@ -159,9 +162,9 @@ class ParametersGraphTabViewModel: ObservableObject {
         return totals[type]
     }
 
-    func data(at date: Date) -> ValuesAtTime<GraphValue> {
+    func data(at date: Date) -> ValuesAtTime<ParameterGraphValue> {
         let visibleVariableTypes = graphVariables.filter { $0.enabled }.map { $0.type }
-        let result = ValuesAtTime(values: rawData.filter { $0.date == date && visibleVariableTypes.contains($0.variable) })
+        let result = ValuesAtTime(values: rawData.filter { $0.date == date && visibleVariableTypes.contains($0.type) })
 
         if let maxDate = max?.date, date == maxDate {
             haptic.impactOccurred()
@@ -188,6 +191,30 @@ class ParametersGraphTabViewModel: ObservableObject {
     }
 
     var axisType: AxisUnit = .consistent("kW")
+
+    func prepareExport() {
+        let headers = ["Type", "Date", "Value"].lazy.joined(separator: ",")
+        let rows = rawData.map {
+            [$0.type.name, $0.date.iso8601(), String(describing: $0.value)].lazy.joined(separator: ",")
+        }
+
+        let text = ([headers] + rows)
+            .joined(separator: "\n")
+
+        exportFile = CSVTextFile(initialText: text)
+
+        let date = displayMode.date
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day], from: date)
+        if let year = components.year, let day = components.day {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMMM"
+            let monthName = dateFormatter.string(from: date)
+            exportFileName = "energystats_parameters_\(year)_\(monthName)_\(day).csv"
+        } else {
+            exportFileName = "energystats_parameters_unknown_date.csv"
+        }
+    }
 }
 
 enum AxisUnit {

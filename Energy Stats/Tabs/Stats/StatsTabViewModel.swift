@@ -18,10 +18,15 @@ class StatsTabViewModel: ObservableObject {
     @Published var displayMode: StatsDisplayMode = .day(Date()) {
         didSet {
             Task { @MainActor in
+                selectedDate = nil
+                valuesAtTime = nil
                 await load()
             }
         }
     }
+
+    @Published var valuesAtTime: ValuesAtTime<StatsGraphValue>?
+    @Published var selectedDate: Date?
 
     var stride: Int = 3
     private var rawData: [StatsGraphValue] = []
@@ -30,6 +35,8 @@ class StatsTabViewModel: ObservableObject {
     @Published var graphVariables: [StatsGraphVariable] = []
     private var totals: [ReportVariable: Double] = [:]
     private var max: StatsGraphValue?
+    var exportFile: CSVTextFile?
+    var exportFileName = ""
 
     init(networking: Networking, configManager: ConfigManaging) {
         self.networking = networking
@@ -84,6 +91,7 @@ class StatsTabViewModel: ObservableObject {
                 self.unit = displayMode.unit()
                 self.rawData = updatedData
                 refresh()
+                prepareExport()
             }
         } catch {
             await MainActor.run {
@@ -143,9 +151,40 @@ class StatsTabViewModel: ObservableObject {
         case .day:
             return DateFormatter.dayHour.string(from: date)
         case .month:
-            return DateFormatter.dayMonth.string(from: date)
+            if let month = Calendar.current.date(byAdding: .month, value: 1, to: date) {
+                return DateFormatter.dayMonth.string(from: month)
+            } else { return "" }
         case .year:
             return DateFormatter.monthYear.string(from: date)
+        }
+    }
+
+    func prepareExport() {
+        let headers = ["Type", "Date", "Value"].lazy.joined(separator: ",")
+        let rows = rawData.map {
+            [$0.type.networkTitle, $0.date.iso8601(), String(describing: $0.value)].lazy.joined(separator: ",")
+        }
+
+        let text = ([headers] + rows)
+            .joined(separator: "\n")
+
+        exportFile = CSVTextFile(initialText: text)
+
+        switch displayMode {
+        case .day(let date):
+            let calendar = Calendar.current
+            let components = calendar.dateComponents([.year, .month, .day], from: date)
+            if let year = components.year, let month = components.month, let day = components.day {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MMMM"
+                exportFileName = "energystats_stats_\(year)_\(month)_\(day).csv"
+            } else {
+                exportFileName = "energystats_stats_unknown_date.csv"
+            }
+        case .month(let month, let year):
+            exportFileName = "energystats_stats_\(year)_\(month + 1).csv"
+        case .year(let year):
+            exportFileName = "energystats_stats_\(year).csv"
         }
     }
 }

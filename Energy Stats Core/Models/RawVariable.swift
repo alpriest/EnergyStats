@@ -82,21 +82,12 @@ public extension RawVariable {
     }
 
     var description: String {
-        switch self.variable {
-        case "generationPower":
-            return String(localized: "Solar / Battery power coming through the inverter")
-        case "feedinPower":
-            return String(localized: "Power being sent to the grid")
-        case "batChargePower":
-            return String(localized: "Power charging the battery")
-        case "batDischargePower":
-            return String(localized: "Power discharging from the battery")
-        case "gridConsumptionPower":
-            return String(localized: "Power coming from the grid")
-        case "loadsPower":
-            return String(localized: "Loads power")
-        default:
+        let key = "rawvariable_\(self.variable.lowercased())"
+        let localized = NSLocalizedString(key, comment: "")
+        if localized.isEmpty || localized == key {
             return name
+        } else {
+            return localized
         }
     }
 }

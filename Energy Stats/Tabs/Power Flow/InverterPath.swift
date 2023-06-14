@@ -82,7 +82,7 @@ struct InverterView: View {
                             .font(.caption2)
                     }
                 }
-                .background(Color.white)
+                .background(Color("background"))
                 .buttonStyle(.bordered)
             }
         }

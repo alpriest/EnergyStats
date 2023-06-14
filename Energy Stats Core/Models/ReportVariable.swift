@@ -62,18 +62,8 @@ public enum ReportVariable: String, RawRepresentable {
     }
 
     public var description: String {
-        switch self {
-        case .generation:
-            return String(localized: "Solar / Battery power coming through the inverter")
-        case .feedIn:
-            return String(localized: "Power being sent to the grid")
-        case .chargeEnergyToTal:
-            return String(localized: "Power charging the battery")
-        case .dischargeEnergyToTal:
-            return String(localized: "Power discharging from the battery")
-        case .gridConsumption:
-            return String(localized: "Power coming from the grid")
-        }
+        let key = "reportvariable_\(self.networkTitle.lowercased())"
+        return NSLocalizedString(key, comment: "")
     }
 
     public var colour: Color {

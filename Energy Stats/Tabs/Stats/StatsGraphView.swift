@@ -95,8 +95,10 @@ struct StatsGraphView: View {
                                 if let graphValue = viewModel.data.reversed().first(where: { plotElement > $0.date }),
                                    selectedDate != graphValue.date
                                 {
-                                    selectedDate = graphValue.date
-                                    valuesAtTime = viewModel.data(at: graphValue.date)
+                                    Task { @MainActor in
+                                        selectedDate = graphValue.date
+                                        valuesAtTime = viewModel.data(at: graphValue.date)
+                                    }
                                 }
                             }
                         }
@@ -108,8 +110,10 @@ struct StatsGraphView: View {
                             if let plotElement = chartProxy.value(atX: xLocation, as: Date.self),
                                let graphValue = viewModel.data.reversed().first(where: { plotElement > $0.date })
                             {
-                                selectedDate = graphValue.date
-                                valuesAtTime = viewModel.data(at: selectedDate)
+                                Task { @MainActor in
+                                    selectedDate = graphValue.date
+                                    valuesAtTime = viewModel.data(at: selectedDate)
+                                }
                             }
                         }
                     )

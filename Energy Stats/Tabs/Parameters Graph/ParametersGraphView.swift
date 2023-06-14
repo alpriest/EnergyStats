@@ -14,16 +14,16 @@ struct ParametersGraphView: View {
     @ObservedObject var viewModel: ParametersGraphTabViewModel
     @GestureState var isDetectingPress = true
     @Binding var selectedDate: Date?
-    @Binding var valuesAtTime: ValuesAtTime<GraphValue>?
+    @Binding var valuesAtTime: ValuesAtTime<ParameterGraphValue>?
 
     var body: some View {
-        Chart(viewModel.data, id: \.variable.variable) {
+        Chart(viewModel.data, id: \.type.variable) {
             LineMark(
                 x: .value("hour", $0.date),
                 y: .value("", $0.value),
-                series: .value("Title", $0.variable.title(as: .snapshot))
+                series: .value("Title", $0.type.title(as: .snapshot))
             )
-            .foregroundStyle($0.variable.colour)
+            .foregroundStyle($0.type.colour)
         }
         .chartPlotStyle { content in
             content.background(Color.gray.gradient.opacity(0.02))

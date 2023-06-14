@@ -43,9 +43,16 @@ struct ErrorAlertView: View {
                     .multilineTextAlignment(.center)
                     .padding(.bottom)
 
-                Button(action: { retry() }) {
-                    Text("retry")
-                }.buttonStyle(.bordered)
+                VStack {
+                    Button(action: { retry() }) {
+                        Text("Retry")
+                    }.buttonStyle(.bordered)
+
+                    Button("Check FoxESS Server status") {
+                        let url = URL(string: "https://monitor.foxesscommunity.com/")!
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    }.buttonStyle(.bordered)
+                }
             }
             .frame(height: 200)
             .alert(detailedMessage, isPresented: $errorShowing) {

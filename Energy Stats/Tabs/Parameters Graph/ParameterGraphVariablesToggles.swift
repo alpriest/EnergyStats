@@ -12,7 +12,7 @@ import SwiftUI
 struct ParameterGraphVariablesToggles: View {
     @ObservedObject var viewModel: ParametersGraphTabViewModel
     @Binding var selectedDate: Date?
-    @Binding var valuesAtTime: ValuesAtTime<GraphValue>?
+    @Binding var valuesAtTime: ValuesAtTime<ParameterGraphValue>?
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -39,7 +39,7 @@ struct ParameterGraphVariablesToggles: View {
 
                                 Spacer()
 
-                                if let valuesAtTime, let graphValue = valuesAtTime.values.first(where: { $0.variable == variable.type }) {
+                                if let valuesAtTime, let graphValue = valuesAtTime.values.first(where: { $0.type == variable.type }) {
                                     Text(graphValue.formatted())
                                 } else {
                                     OptionalView(viewModel.total(of: variable.type.reportVariable)) {

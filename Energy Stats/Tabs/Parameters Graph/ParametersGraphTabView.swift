@@ -12,9 +12,10 @@ import SwiftUI
 @available(iOS 16.0, *)
 struct ParametersGraphTabView: View {
     @StateObject var viewModel: ParametersGraphTabViewModel
-    @State private var valuesAtTime: ValuesAtTime<GraphValue>?
+    @State private var valuesAtTime: ValuesAtTime<ParameterGraphValue>?
     @State private var selectedDate: Date?
-    @State private var showingVariables: Bool = false
+    @State private var showingVariables = false
+    @State private var showingExporter = false
 
     init(configManager: ConfigManaging, networking: Networking) {
         _viewModel = .init(wrappedValue: ParametersGraphTabViewModel(networking: networking, configManager: configManager))
@@ -37,9 +38,15 @@ struct ParametersGraphTabView: View {
 
                     Text("Parameters are updated every 5 minutes by FoxESS and only available for a single day at a time")
                         .font(.footnote)
-                        .multilineTextAlignment(.center)
-                        .padding(.top, 44)
                         .foregroundColor(Color("text_dimmed"))
+                        .multilineTextAlignment(.center)
+                        .padding(.vertical, 28)
+
+                    if viewModel.exportFile != nil {
+                        Button(action: { showingExporter = true }) {
+                            Text("Export CSV data")
+                        }.buttonStyle(.borderedProminent)
+                    }
                 }
             }
             .padding()
@@ -47,6 +54,7 @@ struct ParametersGraphTabView: View {
         .sheet(isPresented: $showingVariables) {
             ParameterGraphVariableChooserView(viewModel: ParameterGraphVariableChooserViewModel(variables: viewModel.graphVariables, onApply: { viewModel.set(graphVariables: $0) }))
         }
+        .csvExporting(isShowing: $showingExporter, file: viewModel.exportFile, filename: viewModel.exportFileName)
         .task {
             Task {
                 await viewModel.load()

@@ -29,8 +29,7 @@ enum StatsDisplayMode: Equatable {
 @available(iOS 16.0, *)
 struct StatsTabView: View {
     @StateObject var viewModel: StatsTabViewModel
-    @State private var valuesAtTime: ValuesAtTime<StatsGraphValue>?
-    @State private var selectedDate: Date?
+    @State private var showingExporter = false
 
     init(configManager: ConfigManaging, networking: Networking) {
         _viewModel = .init(wrappedValue: StatsTabViewModel(networking: networking, configManager: configManager))
@@ -42,21 +41,28 @@ struct StatsTabView: View {
                 DatePickerView(viewModel: DatePickerViewModel($viewModel.displayMode))
 
                 ScrollView {
-                    StatsGraphView(viewModel: viewModel, selectedDate: $selectedDate, valuesAtTime: $valuesAtTime)
+                    StatsGraphView(viewModel: viewModel, selectedDate: $viewModel.selectedDate, valuesAtTime: $viewModel.valuesAtTime)
                         .frame(height: 250)
                         .padding(.vertical)
 
-                    StatsGraphVariableToggles(viewModel: viewModel, selectedDate: $selectedDate, valuesAtTime: $valuesAtTime)
+                    StatsGraphVariableToggles(viewModel: viewModel, selectedDate: $viewModel.selectedDate, valuesAtTime: $viewModel.valuesAtTime)
 
                     Text("Stats are aggregated by FoxESS into 1 hr, 1 day or 1 month totals")
                         .font(.footnote)
                         .foregroundColor(Color("text_dimmed"))
                         .multilineTextAlignment(.center)
-                        .padding(.top, 44)
+                        .padding(.vertical, 28)
+
+                    if viewModel.exportFile != nil {
+                        Button(action: { showingExporter = true }) {
+                            Text("Export CSV data")
+                        }.buttonStyle(.borderedProminent)
+                    }
                 }
             }
             .padding()
         }
+        .csvExporting(isShowing: $showingExporter, file: viewModel.exportFile, filename: viewModel.exportFileName)
         .task {
             Task {
                 await viewModel.load()
