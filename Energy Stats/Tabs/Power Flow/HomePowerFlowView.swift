@@ -72,17 +72,3 @@ extension HomePowerFlowViewModel {
     }
 }
 
-extension AppTheme {
-    static func mock() -> AppTheme {
-        AppTheme(
-            showColouredLines: true,
-            showBatteryTemperature: true,
-            showSunnyBackground: true,
-            decimalPlaces: 3,
-            showBatteryEstimate: true,
-            showUsableBatteryOnly: false,
-            showInW: false,
-            showTotalYield: false
-        )
-    }
-}
