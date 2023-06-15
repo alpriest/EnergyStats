@@ -105,25 +105,3 @@ struct SolarPowerView_Previews: PreviewProvider {
         }
     }
 }
-
-struct Glowing: ViewModifier {
-    let active: Bool
-    let color: Color
-    let radius: CGFloat
-
-    @ViewBuilder func body(content: Content) -> some View {
-        if active {
-            content
-                .shadow(color: color, radius: radius / 2)
-                .shadow(color: color, radius: radius / 2)
-        } else {
-            content
-        }
-    }
-}
-
-extension View {
-    func glow(active: Bool, color: Color = .yellow, radius: CGFloat = 20) -> some View {
-        modifier(Glowing(active: active, color: color, radius: radius))
-    }
-}

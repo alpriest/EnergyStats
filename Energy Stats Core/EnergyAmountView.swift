@@ -24,20 +24,18 @@ public struct EnergyAmountView: View {
     }
 
     public var body: some View {
-        Color.clear.overlay(
-            Group {
-                if appTheme.showInW {
-                    Text(amount.w())
-                } else {
-                    Text(amount.kW(decimalPlaces))
-                }
+        Group {
+            if appTheme.showInW {
+                Text(amount.w())
+            } else {
+                Text(amount.kW(decimalPlaces))
             }
-            .padding(3)
-            .padding(.horizontal, 4)
-            .background(backgroundColor)
-            .foregroundColor(textColor)
-            .cornerRadius(3)
-        )
+        }
+        .padding(3)
+        .padding(.horizontal, 4)
+        .background(backgroundColor)
+        .foregroundColor(textColor)
+        .cornerRadius(3)
     }
 }
 

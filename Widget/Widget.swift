@@ -12,6 +12,7 @@ import WidgetKit
 
 struct Provider: IntentTimelineProvider {
     private let config = UserDefaultsConfig()
+    private let configManager: ConfigManaging
     private let keychainStore = KeychainStore()
     let network: Networking
 
@@ -19,15 +20,16 @@ struct Provider: IntentTimelineProvider {
         let store = InMemoryLoggingNetworkStore()
         network = NetworkFacade(network: Network(credentials: keychainStore, config: config, store: store),
                                 config: config)
+        configManager = ConfigManager(networking: network, config: config)
     }
 
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), soc: 0.80, grid: 2.0, configuration: ConfigurationIntent())
+        SimpleEntry.empty(configuration: ConfigurationIntent())
     }
 
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
         if context.isPreview {
-            let entry = SimpleEntry(date: Date(), soc: 0.63, grid: 2.0, configuration: configuration)
+            let entry = SimpleEntry(date: Date(), soc: 0.63, grid: 2.0, home: 0.342, solar: 3.21, configuration: configuration)
             completion(entry)
         } else {
             Task {
@@ -41,7 +43,7 @@ struct Provider: IntentTimelineProvider {
         Task {
             let entry = await getCurrentState(for: configuration)
 
-            // Create a date that's 15 minutes in the future.
+            // Create a date that's 5 minutes in the future.
             let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 5, to: entry.date)!
 
             // Create the timeline with the entry and a reload policy with the date
@@ -65,6 +67,8 @@ struct Provider: IntentTimelineProvider {
             date: date,
             soc: Double(battery.soc) / 100.0,
             grid: 2.0, // TODO: Fetch from server
+            home: 0.8, // TODO: Fetch from server
+            solar: 2.34, // TODO: Fetch from server
             configuration: configuration
         )
 
@@ -74,26 +78,21 @@ struct Provider: IntentTimelineProvider {
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
+    var battery: Double = 0.0
     var soc: Double
     var grid: Double = 0.0
+    var home: Double = 0.0
+    var solar: Double = 0.0
     let configuration: ConfigurationIntent
 
     static func empty(configuration: ConfigurationIntent) -> SimpleEntry {
         SimpleEntry(date: Date(),
+                    battery: 0.0,
                     soc: 0,
                     grid: 0.0,
+                    home: 0.0,
+                    solar: 0.0,
                     configuration: configuration)
     }
 }
 
-struct EnergyStatsWidget: Widget {
-    let kind: String = "EnergyStatsWidget"
-
-    var body: some WidgetConfiguration {
-        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
-            WidgetEntryView(entry: entry)
-        }
-        .configurationDisplayName("Battery Level")
-        .description("The percentage of the battery capacity that is available")
-    }
-}

@@ -65,7 +65,6 @@
 		4162BC2A2A08E33600DFEDC1 /* raw-h1-deviceid.json in Resources */ = {isa = PBXBuildFile; fileRef = 4162BC292A08E33600DFEDC1 /* raw-h1-deviceid.json */; };
 		4162BC2C2A09772C00DFEDC1 /* earnings.json in Resources */ = {isa = PBXBuildFile; fileRef = 4162BC2B2A09772C00DFEDC1 /* earnings.json */; };
 		4162BC2E2A09773D00DFEDC1 /* EarningsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4162BC2D2A09773D00DFEDC1 /* EarningsResponse.swift */; };
-		4162BC302A097C1300DFEDC1 /* SunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4162BC2F2A097C1300DFEDC1 /* SunView.swift */; };
 		416318B729DDD2E100C2C285 /* InMemoryLoggingNetworkingDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416318B629DDD2E100C2C285 /* InMemoryLoggingNetworkingDecorator.swift */; };
 		416318B929DDD44C00C2C285 /* DebugDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416318B829DDD44C00C2C285 /* DebugDataView.swift */; };
 		416318BE29DDD80E00C2C285 /* View+Copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416318BD29DDD80E00C2C285 /* View+Copy.swift */; };
@@ -93,8 +92,16 @@
 		4185473E2A3A1624000128C7 /* Widget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 4185473A2A3A1623000128C7 /* Widget.intentdefinition */; };
 		4185473F2A3A1624000128C7 /* Widget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 4185473A2A3A1623000128C7 /* Widget.intentdefinition */; };
 		418547422A3A1624000128C7 /* WidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 418547322A3A1623000128C7 /* WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		418547482A3A1A89000128C7 /* WidgetEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418547462A3A1A64000128C7 /* WidgetEntryView.swift */; };
+		418547482A3A1A89000128C7 /* PowerFlowValuesWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418547462A3A1A64000128C7 /* PowerFlowValuesWidgetView.swift */; };
 		418547492A3A1C7A000128C7 /* EnergyAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127690128EC865000D5A094 /* EnergyAmountView.swift */; };
+		4185474C2A3B1025000128C7 /* SunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4162BC2F2A097C1300DFEDC1 /* SunView.swift */; };
+		4185FAA02A3B23680082D53F /* Energy_Stats_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; };
+		4185FAA12A3B23680082D53F /* Energy_Stats_Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4185FAA82A3B28680082D53F /* SmallPowerFlowValuesWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4185FAA72A3B28680082D53F /* SmallPowerFlowValuesWidgetView.swift */; };
+		4185FAAC2A3B384B0082D53F /* LargePowerFlowValuesWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4185FAAB2A3B384B0082D53F /* LargePowerFlowValuesWidgetView.swift */; };
+		4185FAAE2A3B38690082D53F /* VerticalFlowGauge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4185FAAD2A3B38690082D53F /* VerticalFlowGauge.swift */; };
+		4185FAB22A3B6C8D0082D53F /* BatteryWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4185FAB12A3B6C8D0082D53F /* BatteryWidget.swift */; };
+		4185FAB42A3B6CDC0082D53F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4185FAB32A3B6CDC0082D53F /* Extensions.swift */; };
 		418EEEB52916843A006A8290 /* View+If.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418EEEB42916843A006A8290 /* View+If.swift */; };
 		41923E3C2916B8A800D1A8C5 /* battery-soc-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41923E3B2916B8A800D1A8C5 /* battery-soc-success.json */; };
 		41923E3E2916BC6F00D1A8C5 /* ParametersGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41923E3D2916BC6F00D1A8C5 /* ParametersGraphView.swift */; };
@@ -123,6 +130,8 @@
 		41C0B43429F96D3600CA9462 /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0B43329F96D3600CA9462 /* LocalizedString.swift */; };
 		41C49EAE2A0398E4003700CB /* PreviewUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C49EAD2A0398E4003700CB /* PreviewUserManager.swift */; };
 		41C6AF662A360CF600C88F2B /* CSVTextFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C6AF652A360CF600C88F2B /* CSVTextFile.swift */; };
+		41CB71482A3B1A2800199415 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41CB71472A3B1A2800199415 /* Assets.xcassets */; };
+		41CB714A2A3B1B6C00199415 /* StyleGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CB71492A3B1B6C00199415 /* StyleGuide.swift */; };
 		41CD1F322A1414C1006B0C00 /* StatsGraphVariableToggles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CD1F312A1414C1006B0C00 /* StatsGraphVariableToggles.swift */; };
 		41CD1F342A141F81006B0C00 /* NonFunctionalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CD1F332A141F81006B0C00 /* NonFunctionalButton.swift */; };
 		41DD7F3A29C5B8940072CDE8 /* SolarPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD7F3929C5B8940072CDE8 /* SolarPowerView.swift */; };
@@ -146,6 +155,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 418547312A3A1623000128C7;
 			remoteInfo = WidgetExtension;
+		};
+		4185FAA22A3B23680082D53F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4140144228C70B3200EA5BA1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 41A95B9329DB3F6A00A35169;
+			remoteInfo = "Energy Stats Core";
 		};
 		41A95B9829DB3F6A00A35169 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -180,6 +196,17 @@
 				418547422A3A1624000128C7 /* WidgetExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4185FAA42A3B23680082D53F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4185FAA12A3B23680082D53F /* Energy_Stats_Core.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		41A95B8B29DB2F0A00A35169 /* Embed Watch Content */ = {
@@ -288,9 +315,14 @@
 		4185473A2A3A1623000128C7 /* Widget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Widget.intentdefinition; sourceTree = "<group>"; };
 		4185473B2A3A1624000128C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4185473D2A3A1624000128C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		418547462A3A1A64000128C7 /* WidgetEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetEntryView.swift; sourceTree = "<group>"; };
+		418547462A3A1A64000128C7 /* PowerFlowValuesWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerFlowValuesWidgetView.swift; sourceTree = "<group>"; };
 		4185474A2A3A59D7000128C7 /* WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WidgetExtension.entitlements; sourceTree = "<group>"; };
 		4185474B2A3A59E4000128C7 /* Energy Stats.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Energy Stats.entitlements"; sourceTree = "<group>"; };
+		4185FAA72A3B28680082D53F /* SmallPowerFlowValuesWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallPowerFlowValuesWidgetView.swift; sourceTree = "<group>"; };
+		4185FAAB2A3B384B0082D53F /* LargePowerFlowValuesWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargePowerFlowValuesWidgetView.swift; sourceTree = "<group>"; };
+		4185FAAD2A3B38690082D53F /* VerticalFlowGauge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalFlowGauge.swift; sourceTree = "<group>"; };
+		4185FAB12A3B6C8D0082D53F /* BatteryWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryWidget.swift; sourceTree = "<group>"; };
+		4185FAB32A3B6CDC0082D53F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		418EEEB42916843A006A8290 /* View+If.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+If.swift"; sourceTree = "<group>"; };
 		41923E3B2916B8A800D1A8C5 /* battery-soc-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "battery-soc-success.json"; sourceTree = "<group>"; };
 		41923E3D2916BC6F00D1A8C5 /* ParametersGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersGraphView.swift; sourceTree = "<group>"; };
@@ -327,6 +359,8 @@
 		41C0B43529F9753000CA9462 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		41C49EAD2A0398E4003700CB /* PreviewUserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewUserManager.swift; sourceTree = "<group>"; };
 		41C6AF652A360CF600C88F2B /* CSVTextFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVTextFile.swift; sourceTree = "<group>"; };
+		41CB71472A3B1A2800199415 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "Energy Stats/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
+		41CB71492A3B1B6C00199415 /* StyleGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleGuide.swift; sourceTree = "<group>"; };
 		41CD1F312A1414C1006B0C00 /* StatsGraphVariableToggles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGraphVariableToggles.swift; sourceTree = "<group>"; };
 		41CD1F332A141F81006B0C00 /* NonFunctionalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonFunctionalButton.swift; sourceTree = "<group>"; };
 		41D6496B28DB321600A24B41 /* DeviceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceList.swift; sourceTree = "<group>"; };
@@ -363,6 +397,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				418547342A3A1623000128C7 /* SwiftUI.framework in Frameworks */,
+				4185FAA02A3B23680082D53F /* Energy_Stats_Core.framework in Frameworks */,
 				418547332A3A1623000128C7 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -601,14 +636,35 @@
 		418547352A3A1623000128C7 /* Widget */ = {
 			isa = PBXGroup;
 			children = (
+				4185FAB02A3B6C7C0082D53F /* Battery Capacity Widget */,
 				418547362A3A1623000128C7 /* WidgetBundle.swift */,
 				418547382A3A1623000128C7 /* Widget.swift */,
 				4185473A2A3A1623000128C7 /* Widget.intentdefinition */,
 				4185473B2A3A1624000128C7 /* Assets.xcassets */,
 				4185473D2A3A1624000128C7 /* Info.plist */,
-				418547462A3A1A64000128C7 /* WidgetEntryView.swift */,
+				4185FAAF2A3B38BD0082D53F /* Power Flow Widget */,
+				4185FAB32A3B6CDC0082D53F /* Extensions.swift */,
 			);
 			path = Widget;
+			sourceTree = "<group>";
+		};
+		4185FAAF2A3B38BD0082D53F /* Power Flow Widget */ = {
+			isa = PBXGroup;
+			children = (
+				418547462A3A1A64000128C7 /* PowerFlowValuesWidgetView.swift */,
+				4185FAA72A3B28680082D53F /* SmallPowerFlowValuesWidgetView.swift */,
+				4185FAAB2A3B384B0082D53F /* LargePowerFlowValuesWidgetView.swift */,
+				4185FAAD2A3B38690082D53F /* VerticalFlowGauge.swift */,
+			);
+			path = "Power Flow Widget";
+			sourceTree = "<group>";
+		};
+		4185FAB02A3B6C7C0082D53F /* Battery Capacity Widget */ = {
+			isa = PBXGroup;
+			children = (
+				4185FAB12A3B6C8D0082D53F /* BatteryWidget.swift */,
+			);
+			path = "Battery Capacity Widget";
 			sourceTree = "<group>";
 		};
 		41A25D3A28CA5CB700315714 /* Power Flow */ = {
@@ -664,10 +720,12 @@
 		41A95B9529DB3F6A00A35169 /* Energy Stats Core */ = {
 			isa = PBXGroup;
 			children = (
+				41CB71472A3B1A2800199415 /* Assets.xcassets */,
 				41A95B9629DB3F6A00A35169 /* Energy_Stats_Core.h */,
 				4109140129DB7AB900133CC5 /* View Models */,
 				41A25D4228CA706700315714 /* CountdownTimer.swift */,
 				4127690128EC865000D5A094 /* EnergyAmountView.swift */,
+				4162BC2F2A097C1300DFEDC1 /* SunView.swift */,
 				410AA38729D96F6D00CD107C /* AppTheme.swift */,
 				4103D1E029DB6CB9001B0BC8 /* ConfigManager.swift */,
 				41339C7328CC7BA50062B976 /* KeychainStore.swift */,
@@ -677,6 +735,7 @@
 				41E4B30C28DB670C003F7F47 /* Network */,
 				41A95BA029DB3F7E00A35169 /* PylonView.swift */,
 				410913FC29DB78EF00133CC5 /* PreciseDateTimeFormatter.swift */,
+				41CB71492A3B1B6C00199415 /* StyleGuide.swift */,
 			);
 			path = "Energy Stats Core";
 			sourceTree = "<group>";
@@ -749,7 +808,6 @@
 				41E4B31228DB77A3003F7F47 /* HomePowerView.swift */,
 				41E4B31428DB77E8003F7F47 /* GridPowerView.swift */,
 				41DD7F3929C5B8940072CDE8 /* SolarPowerView.swift */,
-				4162BC2F2A097C1300DFEDC1 /* SunView.swift */,
 			);
 			path = "Power Views";
 			sourceTree = "<group>";
@@ -814,10 +872,12 @@
 				4185472E2A3A1623000128C7 /* Sources */,
 				4185472F2A3A1623000128C7 /* Frameworks */,
 				418547302A3A1623000128C7 /* Resources */,
+				4185FAA42A3B23680082D53F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				4185FAA32A3B23680082D53F /* PBXTargetDependency */,
 			);
 			name = WidgetExtension;
 			productName = WidgetExtension;
@@ -970,6 +1030,7 @@
 				41F71AC12A1504D900A8C81B /* report-month.json in Resources */,
 				4162BC2A2A08E33600DFEDC1 /* raw-h1-deviceid.json in Resources */,
 				41FDAD502A01604F00EDACF3 /* variables.json in Resources */,
+				41CB71482A3B1A2800199415 /* Assets.xcassets in Resources */,
 				4103D1DD29DB6C8C001B0BC8 /* report-day.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1028,7 +1089,6 @@
 				41C0B43429F96D3600CA9462 /* LocalizedString.swift in Sources */,
 				416318C029DDD82800C2C285 /* ResponseDebugView.swift in Sources */,
 				414BF82829B4918300E2EB51 /* SettingsTabViewModel.swift in Sources */,
-				4162BC302A097C1300DFEDC1 /* SunView.swift in Sources */,
 				41CD1F322A1414C1006B0C00 /* StatsGraphVariableToggles.swift in Sources */,
 				419DFA862A12930E0067313A /* DatePickerView.swift in Sources */,
 				416318B929DDD44C00C2C285 /* DebugDataView.swift in Sources */,
@@ -1063,9 +1123,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4185FAA82A3B28680082D53F /* SmallPowerFlowValuesWidgetView.swift in Sources */,
+				4185FAB42A3B6CDC0082D53F /* Extensions.swift in Sources */,
+				4185FAAC2A3B384B0082D53F /* LargePowerFlowValuesWidgetView.swift in Sources */,
 				418547372A3A1623000128C7 /* WidgetBundle.swift in Sources */,
-				418547482A3A1A89000128C7 /* WidgetEntryView.swift in Sources */,
+				418547482A3A1A89000128C7 /* PowerFlowValuesWidgetView.swift in Sources */,
 				418547392A3A1623000128C7 /* Widget.swift in Sources */,
+				4185FAB22A3B6C8D0082D53F /* BatteryWidget.swift in Sources */,
+				4185FAAE2A3B38690082D53F /* VerticalFlowGauge.swift in Sources */,
 				4185473E2A3A1624000128C7 /* Widget.intentdefinition in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1102,11 +1167,13 @@
 				4171854429FFCF9500D18CDD /* Color+Hex.swift in Sources */,
 				4103D1E429DB6D12001B0BC8 /* KeychainStore.swift in Sources */,
 				4103D1DF29DB6C8C001B0BC8 /* DemoNetworking.swift in Sources */,
+				41CB714A2A3B1B6C00199415 /* StyleGuide.swift in Sources */,
 				4103D1D329DB6C51001B0BC8 /* BatteryResponse.swift in Sources */,
 				4103D1D229DB6C51001B0BC8 /* NetworkError.swift in Sources */,
 				4103D1D429DB6C51001B0BC8 /* DeviceList.swift in Sources */,
 				4171854A2A01006000D18CDD /* Double.swift in Sources */,
 				416318B729DDD2E100C2C285 /* InMemoryLoggingNetworkingDecorator.swift in Sources */,
+				4185474C2A3B1025000128C7 /* SunView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1143,6 +1210,11 @@
 			isa = PBXTargetDependency;
 			target = 418547312A3A1623000128C7 /* WidgetExtension */;
 			targetProxy = 418547402A3A1624000128C7 /* PBXContainerItemProxy */;
+		};
+		4185FAA32A3B23680082D53F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 41A95B9329DB3F6A00A35169 /* Energy Stats Core */;
+			targetProxy = 4185FAA22A3B23680082D53F /* PBXContainerItemProxy */;
 		};
 		41A95B9929DB3F6A00A35169 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1382,7 +1454,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.33;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats.Widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1411,7 +1483,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.33;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats.Widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1424,6 +1496,7 @@
 		41A95B9D29DB3F6A00A35169 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -1451,7 +1524,7 @@
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
-				PRODUCT_BUNDLE_IDENTIFIER = "club.weplay.app.Energy-Stats-Core";
+				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats.Core;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = auto;
 				SKIP_INSTALL = YES;
@@ -1470,6 +1543,7 @@
 		41A95B9E29DB3F6A00A35169 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -1497,7 +1571,7 @@
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
-				PRODUCT_BUNDLE_IDENTIFIER = "club.weplay.app.Energy-Stats-Core";
+				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats.Core;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = auto;
 				SKIP_INSTALL = YES;
@@ -1558,7 +1632,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.alpriest.Energy-StatsTests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStatsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -1577,7 +1651,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.alpriest.Energy-StatsTests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStatsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;

@@ -8,11 +8,15 @@
 import SwiftUI
 
 public struct PylonView: View {
-    public init() {}
+    private let lineWidth: CGFloat
+
+    public init(lineWidth: CGFloat = 2) {
+        self.lineWidth = lineWidth
+    }
 
     public var body: some View {
         PylonShape()
-            .stroke(lineWidth: 2)
+            .stroke(lineWidth: lineWidth)
             .padding(2)
     }
 }
