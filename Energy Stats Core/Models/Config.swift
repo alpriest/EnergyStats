@@ -22,8 +22,57 @@ public protocol Config {
     var showTotalYield: Bool { get set }
 }
 
+extension UserDefaults {
+    static var shared: UserDefaults {
+        UserDefaults(suiteName: "group.com.alpriest.EnergyStats")!
+    }
+}
+
 public class UserDefaultsConfig: Config {
-    public init() {}
+    public init() {
+        let suiteDefaults = UserDefaults.shared
+        let defaults = UserDefaults.standard
+
+        if defaults.data(forKey: "devices") != nil && suiteDefaults.data(forKey: "devices") == nil {
+            migrate(from: defaults, to: suiteDefaults)
+        }
+    }
+
+    func migrate(from source: UserDefaults, to destination: UserDefaults) {
+        destination.set(source.bool(forKey: "isDemoUser"), forKey: "isDemoUser")
+        destination.set(bool(from: source, forKey: "showColouredLines", defaultValue: true), forKey: "showColouredLines")
+        destination.set(source.bool(forKey: "showBatteryTemperature"), forKey: "showBatteryTemperature")
+        destination.set(source.bool(forKey: "showBatteryEstimate"), forKey: "showBatteryEstimate")
+        destination.set(source.integer(forKey: "refreshFrequency"), forKey: "refreshFrequency")
+        destination.set(integer(from: source, forKey: "decimalPlaces", defaultValue: 3), forKey: "decimalPlaces")
+        destination.set(bool(from: source, forKey: "showSunnyBackground", defaultValue: true), forKey: "showSunnyBackground")
+        destination.set(source.bool(forKey: "showUsableBatteryOnly"), forKey: "showUsableBatteryOnly")
+        destination.set(bool(from: source, forKey: "showTotalYield", defaultValue: true), forKey: "showTotalYield")
+        destination.set(source.data(forKey: "devices"), forKey: "devices")
+        destination.set(source.string(forKey: "selectedDeviceID"), forKey: "selectedDeviceID")
+        destination.set(source.bool(forKey: "showInW"), forKey: "showInW")
+
+        source.removeObject(forKey: "isDemoUser")
+        source.removeObject(forKey: "showColouredLines")
+        source.removeObject(forKey: "showBatteryTemperature")
+        source.removeObject(forKey: "showBatteryEstimate")
+        source.removeObject(forKey: "refreshFrequency")
+        source.removeObject(forKey: "decimalPlaces")
+        source.removeObject(forKey: "showSunnyBackground")
+        source.removeObject(forKey: "showUsableBatteryOnly")
+        source.removeObject(forKey: "showTotalYield")
+        source.removeObject(forKey: "devices")
+        source.removeObject(forKey: "selectedDeviceID")
+        source.removeObject(forKey: "showInW")
+    }
+
+    private func bool(from source: UserDefaults, forKey key: String, defaultValue: Bool) -> Bool {
+        (source.object(forKey: key) as? Bool) ?? defaultValue
+    }
+
+    private func integer(from source: UserDefaults, forKey key: String, defaultValue: Int) -> Int {
+        (source.object(forKey: key) as? Int) ?? defaultValue
+    }
 
     @UserDefaultsStoredBool(key: "isDemoUser")
     public var isDemoUser: Bool
@@ -69,10 +118,10 @@ public struct UserDefaultsStoredInt {
 
     public var wrappedValue: Int {
         get {
-            (UserDefaults.standard.object(forKey: key) as? Int) ?? defaultValue
+            (UserDefaults.shared.object(forKey: key) as? Int) ?? defaultValue
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: key)
+            UserDefaults.shared.set(newValue, forKey: key)
         }
     }
 }
@@ -83,10 +132,10 @@ public struct UserDefaultsStoredString {
 
     public var wrappedValue: String? {
         get {
-            UserDefaults.standard.string(forKey: key)
+            UserDefaults.shared.string(forKey: key)
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: key)
+            UserDefaults.shared.set(newValue, forKey: key)
         }
     }
 }
@@ -98,10 +147,10 @@ public struct UserDefaultsStoredBool {
 
     public var wrappedValue: Bool {
         get {
-            (UserDefaults.standard.object(forKey: key) as? Bool) ?? defaultValue
+            (UserDefaults.shared.object(forKey: key) as? Bool) ?? defaultValue
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: key)
+            UserDefaults.shared.set(newValue, forKey: key)
         }
     }
 }
@@ -112,10 +161,10 @@ public struct UserDefaultsStoredData {
 
     public var wrappedValue: Data? {
         get {
-            UserDefaults.standard.data(forKey: key)
+            UserDefaults.shared.data(forKey: key)
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: key)
+            UserDefaults.shared.set(newValue, forKey: key)
         }
     }
 }
