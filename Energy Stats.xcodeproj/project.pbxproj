@@ -102,6 +102,7 @@
 		4185FAAE2A3B38690082D53F /* VerticalFlowGauge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4185FAAD2A3B38690082D53F /* VerticalFlowGauge.swift */; };
 		4185FAB22A3B6C8D0082D53F /* BatteryWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4185FAB12A3B6C8D0082D53F /* BatteryWidget.swift */; };
 		4185FAB42A3B6CDC0082D53F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4185FAB32A3B6CDC0082D53F /* Extensions.swift */; };
+		4185FAB62A3B74E60082D53F /* BatteryStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4185FAB52A3B74E60082D53F /* BatteryStatusView.swift */; };
 		418EEEB52916843A006A8290 /* View+If.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418EEEB42916843A006A8290 /* View+If.swift */; };
 		41923E3C2916B8A800D1A8C5 /* battery-soc-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41923E3B2916B8A800D1A8C5 /* battery-soc-success.json */; };
 		41923E3E2916BC6F00D1A8C5 /* ParametersGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41923E3D2916BC6F00D1A8C5 /* ParametersGraphView.swift */; };
@@ -323,6 +324,7 @@
 		4185FAAD2A3B38690082D53F /* VerticalFlowGauge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalFlowGauge.swift; sourceTree = "<group>"; };
 		4185FAB12A3B6C8D0082D53F /* BatteryWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryWidget.swift; sourceTree = "<group>"; };
 		4185FAB32A3B6CDC0082D53F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		4185FAB52A3B74E60082D53F /* BatteryStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryStatusView.swift; sourceTree = "<group>"; };
 		418EEEB42916843A006A8290 /* View+If.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+If.swift"; sourceTree = "<group>"; };
 		41923E3B2916B8A800D1A8C5 /* battery-soc-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "battery-soc-success.json"; sourceTree = "<group>"; };
 		41923E3D2916BC6F00D1A8C5 /* ParametersGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersGraphView.swift; sourceTree = "<group>"; };
@@ -655,6 +657,7 @@
 				4185FAA72A3B28680082D53F /* SmallPowerFlowValuesWidgetView.swift */,
 				4185FAAB2A3B384B0082D53F /* LargePowerFlowValuesWidgetView.swift */,
 				4185FAAD2A3B38690082D53F /* VerticalFlowGauge.swift */,
+				4185FAB52A3B74E60082D53F /* BatteryStatusView.swift */,
 			);
 			path = "Power Flow Widget";
 			sourceTree = "<group>";
@@ -1127,6 +1130,7 @@
 				4185FAB42A3B6CDC0082D53F /* Extensions.swift in Sources */,
 				4185FAAC2A3B384B0082D53F /* LargePowerFlowValuesWidgetView.swift in Sources */,
 				418547372A3A1623000128C7 /* WidgetBundle.swift in Sources */,
+				4185FAB62A3B74E60082D53F /* BatteryStatusView.swift in Sources */,
 				418547482A3A1A89000128C7 /* PowerFlowValuesWidgetView.swift in Sources */,
 				418547392A3A1623000128C7 /* Widget.swift in Sources */,
 				4185FAB22A3B6C8D0082D53F /* BatteryWidget.swift in Sources */,

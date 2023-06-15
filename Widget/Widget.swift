@@ -60,7 +60,8 @@ struct Provider: IntentTimelineProvider {
 
     private func getCurrentState(for configuration: ConfigurationIntent) async -> SimpleEntry {
         guard let deviceID = config.selectedDeviceID,
-              let battery = try? await network.fetchBattery(deviceID: deviceID) else { return SimpleEntry.empty(configuration: configuration) }
+              let battery = try? await network.fetchBattery(deviceID: deviceID) 
+        else { return SimpleEntry.empty(configuration: configuration) }
 
         let date = Date()
         let entry = SimpleEntry(

@@ -56,26 +56,11 @@ struct LargePowerFlowValuesWidgetView: View {
 
     var body: some View {
         HStack {
-            VStack {
-                Gauge(value: self.entry.soc) {
-                    Image(systemName: "minus.plus.batteryblock.fill")
-                        .font(.system(size: 16))
-                } currentValueLabel: {
-                    Text(self.entry.soc, format: .percent)
-                }
-                .gaugeStyle(.accessoryCircular)
-                .scaleEffect(1.2)
-                .padding(.bottom, 4)
-
-                EnergyAmountView(
-                    amount: self.entry.battery,
-                    decimalPlaces: configManager.appTheme.value.decimalPlaces,
-                    backgroundColor: configManager.appTheme.value.lineColor(for: self.entry.battery, showColour: true),
-                    textColor: configManager.appTheme.value.textColor(for: self.entry.battery, showColour: true),
-                    appTheme: configManager.appTheme.value
-                )
-                .font(.system(size: 18))
-            }
+            BatteryStatusView(
+                soc: entry.soc,
+                battery: entry.battery,
+                appTheme: configManager.appTheme.value
+            )
             .frame(maxWidth: .infinity)
 
             VStack {

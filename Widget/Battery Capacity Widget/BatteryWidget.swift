@@ -32,9 +32,16 @@ struct BatteryWidget: Widget {
 struct BatteryWidgetView: View {
     var entry: Provider.Entry
     let configManager: ConfigManaging
+    @Environment(\.widgetFamily) var family
 
     var body: some View {
-        Text("Hello")
+        BatteryStatusView(
+            soc: entry.soc,
+            battery: entry.battery,
+            appTheme: configManager.appTheme.value
+        )
+        .scaleEffect(x: family == .systemLarge ? 2.5 : 1.0,
+                     y: family == .systemLarge ? 2.5 : 1.0)
     }
 }
 
@@ -44,6 +51,6 @@ struct BatteryWidget_Previews: PreviewProvider {
             entry: SimpleEntry(date: Date(), soc: 0.80, grid: 2.0, home: -0.321, solar: 3.22, configuration: ConfigurationIntent()),
             configManager: ConfigManager(networking: DemoNetworking(), config: MockConfig())
         )
-        .previewContext(WidgetPreviewContext(family: .systemMedium))
+        .previewContext(WidgetPreviewContext(family: .systemLarge))
     }
 }

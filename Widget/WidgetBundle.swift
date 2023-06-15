@@ -13,5 +13,6 @@ import WidgetKit
 struct MyWidgetBundle: WidgetBundle {
     var body: some Widget {
         PowerFlowValuesWidget()
+        BatteryWidget()
     }
 }
