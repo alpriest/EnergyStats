@@ -205,6 +205,7 @@ class OldKeychainStore: ObservableObject {
     public func logout() {
         SecItemDelete(makeQuery(tag: "username"))
         SecItemDelete(makeQuery(tag: "password"))
+        SecItemDelete(makeQuery(tag: "token"))
         updateHasCredentials()
     }
 
