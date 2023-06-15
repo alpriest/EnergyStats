@@ -59,7 +59,6 @@ public class KeychainStore: KeychainStoring, ObservableObject {
             } catch {
                 print(error)
             }
-            oldKeychainStore.logout()
         }
 
         updateHasCredentials()
