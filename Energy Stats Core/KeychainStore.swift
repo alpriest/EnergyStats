@@ -47,19 +47,22 @@ public class KeychainStore: KeychainStoring, ObservableObject {
 
     public init() {
         hasCredentials = hasCredentialsSubject.eraseToAnyPublisher()
-        updateHasCredentials()
-
         let oldKeychainStore = OldKeychainStore()
 
         if let username = oldKeychainStore.getUsername(),
            let hashedPassword = oldKeychainStore.getHashedPassword(),
            getUsername() == nil
         {
-            try? store(username: username, hashedPassword: hashedPassword)
+            do {
+                try? store(username: username, hashedPassword: hashedPassword)
+            } catch {
+                print(error)
+            }
             try? store(token: oldKeychainStore.getToken())
             oldKeychainStore.logout()
         }
-        // Migrate from non-shared app group to shared version
+
+        updateHasCredentials()
     }
 
     public func getUsername() -> String? {
