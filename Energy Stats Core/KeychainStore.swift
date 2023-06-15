@@ -54,11 +54,11 @@ public class KeychainStore: KeychainStoring, ObservableObject {
            getUsername() == nil
         {
             do {
-                try? store(username: username, hashedPassword: hashedPassword)
+                try store(username: username, hashedPassword: hashedPassword)
+                try store(token: oldKeychainStore.getToken())
             } catch {
                 print(error)
             }
-            try? store(token: oldKeychainStore.getToken())
             oldKeychainStore.logout()
         }
 
