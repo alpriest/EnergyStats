@@ -13,7 +13,7 @@ class ParameterGraphVariableChooserViewModel: ObservableObject {
     private let haptic = UIImpactFeedbackGenerator()
 
     init(variables: [ParameterGraphVariable], onApply: @escaping ([ParameterGraphVariable]) -> Void) {
-        self.variables = variables.sorted(by: { $0.type.name < $1.type.name })
+        self.variables = variables.sorted(by: { $0.type.name.lowercased() < $1.type.name.lowercased() })
         self.onApply = onApply
         haptic.prepare()
     }
@@ -49,6 +49,12 @@ class ParameterGraphVariableChooserViewModel: ObservableObject {
         select(just: ["ambientTemperation",
                       "invTemperation",
                       "batTemperature"])
+    }
+
+    func chooseBatteryVariables() {
+        select(just: ["batTemperature",
+                      "batVolt",
+                      "batCurrent"])
     }
 
     func select(just newVariables: [String]) {

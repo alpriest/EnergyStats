@@ -19,6 +19,7 @@ struct ParameterGraphVariableChooserView: View {
                     Button("Default") { viewModel.chooseDefaultVariables() }
                     Button("Compare strings") { viewModel.chooseCompareStringsVariables() }
                     Button("Temperatures") { viewModel.chooseTemperatureVariables() }
+                    Button("Battery") { viewModel.chooseBatteryVariables() }
                     Button("None") { viewModel.select(just: []) }
                 } header: {
                     Text("Predefined selections")
@@ -37,6 +38,8 @@ struct ParameterGraphVariableChooserView: View {
                                 }
 
                                 Spacer()
+
+                                Text(variable.type.unit)
                             }
                             .contentShape(Rectangle())
                         }
