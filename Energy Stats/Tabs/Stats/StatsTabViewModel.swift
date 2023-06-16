@@ -91,7 +91,7 @@ class StatsTabViewModel: ObservableObject {
                 self.unit = displayMode.unit()
                 self.rawData = updatedData
                 refresh()
-                prepareExport()
+//                prepareExport()
             }
         } catch {
             await MainActor.run {

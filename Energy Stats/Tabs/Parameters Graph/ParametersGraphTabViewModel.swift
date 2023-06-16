@@ -125,7 +125,7 @@ class ParametersGraphTabViewModel: ObservableObject {
             await MainActor.run {
                 self.rawData = rawData
                 self.refresh()
-                prepareExport()
+//                prepareExport()
                 self.state = .inactive
             }
         } catch {

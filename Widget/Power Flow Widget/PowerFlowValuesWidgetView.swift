@@ -18,7 +18,7 @@ struct PowerFlowValuesWidget: Widget {
     }
 
     var body: some WidgetConfiguration {
-        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider(network: network)) { entry in
+        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
             PowerFlowValuesWidgetView(entry: entry, configManager: network.configManager)
         }
     }
@@ -39,7 +39,7 @@ class BackgroundNetwork: NSObject, URLSessionDelegate {
         let config = UserDefaultsConfig()
         let store = InMemoryLoggingNetworkStore()
 
-        let network = NetworkFacade(network: Network(credentials: keychainStore, config: config, store: store, urlSession: backgroundUrlSession),
+        let network = NetworkFacade(network: Network(credentials: keychainStore, config: config, store: store),
                                     config: config)
         self.configManager = ConfigManager(networking: network, config: config)
     }
