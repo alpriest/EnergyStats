@@ -5,8 +5,9 @@
 //  Created by Alistair Priest on 15/06/2023.
 //
 
-import SwiftUI
 import Energy_Stats_Core
+import SwiftUI
+import WidgetKit
 
 struct BatteryStatusView: View {
     let soc: Double
@@ -25,14 +26,19 @@ struct BatteryStatusView: View {
             .scaleEffect(1.2)
             .padding(.bottom, 4)
 
-            EnergyAmountView(
-                amount: battery,
-                decimalPlaces: appTheme.decimalPlaces,
-                backgroundColor: appTheme.lineColor(for: battery, showColour: true),
-                textColor: appTheme.textColor(for: battery, showColour: true),
-                appTheme: appTheme
-            )
-            .font(.system(size: 18))
+            HStack(spacing: 0) {
+                FlowArrow(
+                    amount: battery,
+                    color: appTheme.lineColor(for: battery, showColour: true)
+                )
+
+                WidgetEnergyAmountView(
+                    amount: battery,
+                    decimalPlaces: appTheme.decimalPlaces,
+                    appTheme: appTheme
+                )
+                .font(.system(size: 18))
+            }
         }
     }
 }
@@ -43,6 +49,6 @@ struct BatteryStatusView_Previews: PreviewProvider {
             soc: 70,
             battery: 0.98,
             appTheme: .mock()
-        )
+        ).previewContext(WidgetPreviewContext(family: .systemMedium))
     }
 }

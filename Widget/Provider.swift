@@ -84,16 +84,50 @@ struct SimpleEntry: TimelineEntry {
     var grid: Double = 0.0
     var home: Double = 0.0
     var solar: Double = 0.0
-    let configuration: ConfigurationIntent
+    let error: String?
+    let state: EntryState
 
-    static func empty(configuration: ConfigurationIntent) -> SimpleEntry {
+    private init(date: Date, battery: Double, soc: Double, grid: Double, home: Double, solar: Double, error: String?, state: EntryState) {
+        self.date = date
+        self.battery = battery
+        self.soc = soc
+        self.grid = grid
+        self.home = home
+        self.solar = solar
+        self.error = error
+        self.state = state
+    }
+
+    static func loaded(battery: Double, soc: Double, grid: Double, home: Double, solar: Double) -> SimpleEntry {
+        SimpleEntry(date: Date(),
+                    battery: battery,
+                    soc: soc,
+                    grid: grid,
+                    home: home,
+                    solar: solar,
+                    error: nil,
+                    state: .loaded)
+    }
+
+    static func placeholder() -> SimpleEntry {
         SimpleEntry(date: Date(),
                     battery: 0.0,
                     soc: 0,
                     grid: 0.0,
                     home: 0.0,
                     solar: 0.0,
-                    configuration: configuration)
+                    error: nil,
+                    state: .placeholder)
+    }
+
+    static func failed(error: String) -> SimpleEntry {
+        SimpleEntry(date: Date(),
+                    battery: 0.0,
+                    soc: 0,
+                    grid: 0.0,
+                    home: 0.0,
+                    solar: 0.0,
+                    error: error,
+                    state: .failed)
     }
 }
-

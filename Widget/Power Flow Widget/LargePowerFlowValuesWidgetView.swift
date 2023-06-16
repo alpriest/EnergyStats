@@ -55,37 +55,46 @@ struct LargePowerFlowValuesWidgetView: View {
     }
 
     var body: some View {
-        HStack {
-            BatteryStatusView(
-                soc: entry.soc,
-                battery: entry.battery,
-                appTheme: configManager.appTheme.value
-            )
-            .frame(maxWidth: .infinity)
-
+        if let error = entry.error {
+            Text(error)
+        } else {
             VStack {
-                LazyVGrid(columns: [GridItem(.fixed(40)), GridItem(.fixed(90), alignment: .trailing)]) {
-                    ForEach(data, id: \.self) { item in
-                        item.image()
-                            .font(.system(size: 20))
-                            .frame(width: 22, height: 22)
-                            .padding(.horizontal, 4)
+                HStack {
+                    BatteryStatusView(
+                        soc: entry.soc,
+                        battery: entry.battery,
+                        appTheme: configManager.appTheme.value
+                    )
+                    .frame(maxWidth: .infinity)
 
-                        EnergyAmountView(
-                            amount: item.amount,
-                            decimalPlaces: configManager.appTheme.value.decimalPlaces,
-                            backgroundColor: configManager.appTheme.value.lineColor(for: item.amount, showColour: item.showColouredLines),
-                            textColor: configManager.appTheme.value.textColor(for: item.amount, showColour: item.showColouredLines),
-                            appTheme: configManager.appTheme.value
-                        )
-                        .monospacedDigit()
-                        .frame(minWidth: 110, alignment: .trailing)
-                        .font(.system(size: 18))
+                    VStack {
+                        LazyVGrid(columns: [GridItem(.fixed(24)), GridItem(.fixed(24)), GridItem(.flexible(minimum: 98, maximum: 150), alignment: .trailing)]) {
+                            ForEach(data, id: \.self) { item in
+                                FlowArrow(amount: item.amount, color: configManager.appTheme.value.lineColor(for: item.amount, showColour: item.showColouredLines))
+
+                                item.image()
+                                    .font(.system(size: 20))
+                                    .frame(width: 22, height: 22)
+                                    .padding(.horizontal, 4)
+
+                                WidgetEnergyAmountView(
+                                    amount: item.amount,
+                                    decimalPlaces: configManager.appTheme.value.decimalPlaces,
+                                    appTheme: configManager.appTheme.value
+                                )
+                                .font(.system(size: 18))
+                            }
+                        }
                     }
                 }
+                .padding(.trailing)
+
+                Text(entry.date, format: .dateTime)
+                    .font(.caption2)
+                    .foregroundColor(.gray)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .padding(.trailing)
             }
-            .frame(maxWidth: .infinity)
-            .padding(.trailing)
         }
     }
 }
@@ -93,7 +102,7 @@ struct LargePowerFlowValuesWidgetView: View {
 struct LargePowerFlowValuesWidgetView_Previews: PreviewProvider {
     static var previews: some View {
         LargePowerFlowValuesWidgetView(
-            entry: SimpleEntry(date: Date(), soc: 0.80, grid: 2.0, home: -0.321, solar: 3.22, configuration: ConfigurationIntent()),
+            entry: SimpleEntry.loaded(battery: 0.74, soc: 0.80, grid: -1.5, home: -0.321, solar: 3.20),
             configManager: ConfigManager(networking: DemoNetworking(), config: MockConfig())
         )
         .previewContext(WidgetPreviewContext(family: .systemMedium))

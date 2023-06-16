@@ -48,7 +48,7 @@ struct BatteryWidgetView: View {
 struct BatteryWidget_Previews: PreviewProvider {
     static var previews: some View {
         BatteryWidgetView(
-            entry: SimpleEntry(date: Date(), soc: 0.80, grid: 2.0, home: -0.321, solar: 3.22, configuration: ConfigurationIntent()),
+            entry: SimpleEntry.loaded(battery: 0.74, soc: 0.80, grid: 2.0, home: -0.321, solar: 3.20),
             configManager: ConfigManager(networking: DemoNetworking(), config: MockConfig())
         )
         .previewContext(WidgetPreviewContext(family: .systemLarge))
