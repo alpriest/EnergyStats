@@ -23,6 +23,7 @@
 "Invalid token. Please logout and login again." = "Invalid token. Please logout and login again.";
 "Unknown network error" = "Unknown network error";
 "Bad credentials" = "Bad credentials";
+"rawvariable_pvpower" = "The total power from all strings, in kilowatts (kW)";
 "rawvariable_generationpower" = "Solar / Battery power coming through the inverter";
 "rawvariable_feedinpower" = "Power being exported back to the grid";
 "rawvariable_batchargepower" = "Power charging the battery";

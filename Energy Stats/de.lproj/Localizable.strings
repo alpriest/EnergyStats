@@ -87,6 +87,7 @@
 "reportvariable_chargeenergytotal" = "Leistung zum Laden der Batterie";
 "reportvariable_dischargeenergytotal" = "Leistung vom Entladen der Batterie";
 "reportvariable_gridconsumption" = "Leistung, die vom Netz bezogen wird";
+"rawvariable_pvpower" = "Die Leistung von alle PV-String in Kilowatt (kW)";
 "rawvariable_generationpower" = "Solar-/Batterieleistung, die vom Wechselrichter geliefert wird";
 "rawvariable_feedinpower" = "Leistung, die zurück ins Netz eingespeist wird";
 "rawvariable_batchargepower" = "Leistung zum Laden der Batterie";

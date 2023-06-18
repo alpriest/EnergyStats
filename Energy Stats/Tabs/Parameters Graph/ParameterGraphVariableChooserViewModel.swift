@@ -39,7 +39,8 @@ class ParameterGraphVariableChooserViewModel: ObservableObject {
     }
 
     func chooseCompareStringsVariables() {
-        select(just: ["pv1Power",
+        select(just: ["pvPower",
+                      "pv1Power",
                       "pv2Power",
                       "pv3Power",
                       "pv4Power"])
