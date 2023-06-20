@@ -84,6 +84,8 @@
 		417AA21A2A12454A0073CD34 /* StatsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AA2192A12454A0073CD34 /* StatsTabView.swift */; };
 		417AA21D2A1245C00073CD34 /* StatsTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AA21C2A1245C00073CD34 /* StatsTabViewModel.swift */; };
 		418141452A12BABA00FFC6A6 /* StatsGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418141442A12BABA00FFC6A6 /* StatsGraphView.swift */; };
+		418199C72A4034530001B5D4 /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418199C62A4034530001B5D4 /* FAQView.swift */; };
+		418199CA2A4035F40001B5D4 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 418199C92A4035F40001B5D4 /* MarkdownUI */; };
 		418547332A3A1623000128C7 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 418547162A3A1530000128C7 /* WidgetKit.framework */; };
 		418547342A3A1623000128C7 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 418547182A3A1530000128C7 /* SwiftUI.framework */; };
 		418547372A3A1623000128C7 /* WidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418547362A3A1623000128C7 /* WidgetBundle.swift */; };
@@ -291,6 +293,7 @@
 		417AA2192A12454A0073CD34 /* StatsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTabView.swift; sourceTree = "<group>"; };
 		417AA21C2A1245C00073CD34 /* StatsTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTabViewModel.swift; sourceTree = "<group>"; };
 		418141442A12BABA00FFC6A6 /* StatsGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGraphView.swift; sourceTree = "<group>"; };
+		418199C62A4034530001B5D4 /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
 		418547162A3A1530000128C7 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		418547182A3A1530000128C7 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		418547322A3A1623000128C7 /* WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -374,6 +377,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				418199CA2A4035F40001B5D4 /* MarkdownUI in Frameworks */,
 				41B6910128E043A10058126E /* OHHTTPStubs in Frameworks */,
 				41A95B9A29DB3F6A00A35169 /* Energy_Stats_Core.framework in Frameworks */,
 			);
@@ -766,6 +770,7 @@
 				4130364A29B8BE7F006B5CE9 /* InverterChoiceView.swift */,
 				41626CCF29D969E9003FEB00 /* InverterFirmwareVersionsView.swift */,
 				416318BA29DDD7E500C2C285 /* Debug View */,
+				418199C62A4034530001B5D4 /* FAQView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -848,6 +853,7 @@
 			name = "Energy Stats";
 			packageProductDependencies = (
 				41B6910028E043A10058126E /* OHHTTPStubs */,
+				418199C92A4035F40001B5D4 /* MarkdownUI */,
 			);
 			productName = "PV Stats";
 			productReference = 4140144A28C70B3200EA5BA1 /* Energy Stats.app */;
@@ -975,6 +981,7 @@
 			packageReferences = (
 				41B690F728E040060058126E /* XCRemoteSwiftPackageReference "OHHTTPStubs" */,
 				4127910E28E38EFB00D5F993 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
+				418199C82A4035F40001B5D4 /* XCRemoteSwiftPackageReference "MarkdownUI" */,
 			);
 			productRefGroup = 4140144B28C70B3200EA5BA1 /* Products */;
 			projectDirPath = "";
@@ -1088,6 +1095,7 @@
 				41C49EAE2A0398E4003700CB /* PreviewUserManager.swift in Sources */,
 				419DFA882A12A6DF0067313A /* DatePickerViewModel.swift in Sources */,
 				4171854E2A010B6300D18CDD /* ParameterGraphVariableChooserViewModel.swift in Sources */,
+				418199C72A4034530001B5D4 /* FAQView.swift in Sources */,
 				417153E629F2BD3300639A7B /* LoadState.swift in Sources */,
 				4130364B29B8BE7F006B5CE9 /* InverterChoiceView.swift in Sources */,
 				41E4B30E28DB7511003F7F47 /* BatteryCapacityCalculator.swift in Sources */,
@@ -1373,7 +1381,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.34;
+				MARKETING_VERSION = 1.35;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1409,7 +1417,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.34;
+				MARKETING_VERSION = 1.35;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1714,6 +1722,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		418199C82A4035F40001B5D4 /* XCRemoteSwiftPackageReference "MarkdownUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gonzalezreal/MarkdownUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		41B690F728E040060058126E /* XCRemoteSwiftPackageReference "OHHTTPStubs" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AliSoftware/OHHTTPStubs";
@@ -1729,6 +1745,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4127910E28E38EFB00D5F993 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
 			productName = SnapshotTesting;
+		};
+		418199C92A4035F40001B5D4 /* MarkdownUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 418199C82A4035F40001B5D4 /* XCRemoteSwiftPackageReference "MarkdownUI" */;
+			productName = MarkdownUI;
 		};
 		41B690F828E040060058126E /* OHHTTPStubsSwift */ = {
 			isa = XCSwiftPackageProductDependency;

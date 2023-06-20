@@ -69,6 +69,7 @@ struct SettingsTabView: View {
 
                 Section {
                     NavigationLink("Debug") { DebugDataView() }
+                    NavigationLink("FAQ") { FAQView() }
                 }
 
                 Section(

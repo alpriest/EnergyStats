@@ -58,13 +58,10 @@ class StatsTabViewModel: ObservableObject {
 
         do {
             let reports = try await networking.fetchReport(deviceID: currentDevice.deviceID, variables: reportVariables, queryDate: queryDate, reportType: reportType)
-
-            totals = [:]
+            totals = try await generateTotals(currentDevice: currentDevice, reportType: reportType, queryDate: queryDate, reports: reports, reportVariables: reportVariables)
 
             let updatedData = reports.flatMap { reportResponse -> [StatsGraphValue] in
                 guard let reportVariable = ReportVariable(rawValue: reportResponse.variable) else { return [] }
-
-                totals[reportVariable] = reportResponse.data.map { abs($0.value) }.reduce(0.0, +)
 
                 return reportResponse.data.map { dataPoint in
                     var graphPointDate = Date.yesterday()
@@ -98,6 +95,34 @@ class StatsTabViewModel: ObservableObject {
                 self.state = .error(error, "Could not load, check your connection")
             }
         }
+    }
+
+    func generateTotals(
+        currentDevice: Device,
+        reportType: ReportType,
+        queryDate: QueryDate,
+        reports: [ReportResponse],
+        reportVariables: [ReportVariable]
+    ) async throws -> [ReportVariable: Double] {
+        var totals = [ReportVariable: Double]()
+
+        if case .day = reportType {
+            let monthlyReports = try await networking.fetchReport(deviceID: currentDevice.deviceID, variables: reportVariables, queryDate: queryDate, reportType: .month)
+
+            monthlyReports.forEach { reportResponse in
+                guard let reportVariable = ReportVariable(rawValue: reportResponse.variable) else { return }
+
+                totals[reportVariable] = reportResponse.data.first { $0.index == queryDate.day }?.value ?? 0.0
+            }
+        } else {
+            reports.forEach { reportResponse in
+                guard let reportVariable = ReportVariable(rawValue: reportResponse.variable) else { return }
+
+                totals[reportVariable] = reportResponse.data.map { abs($0.value) }.reduce(0.0, +)
+            }
+        }
+
+        return totals
     }
 
     func refresh() {

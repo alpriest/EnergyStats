@@ -22,6 +22,7 @@
 "You've hit the server rate limit. Please try later." = "You've hit the server rate limit. Please try later.";
 "Invalid token. Please logout and login again." = "Invalid token. Please logout and login again.";
 "Unknown network error" = "Unknown network error";
+"Deducts the Min SOC amount from the battery charge level and percentage. Due to inaccuracies in the way battery levels are measured this may occasionally show a negative amount." = "Deducts the Min SOC amount from the battery charge level and percentage. Due to inaccuracies in the way battery levels are measured this may occasionally show a negative amount. Your percentage and capacity will differ from the FoxESS energy if you select this option.";
 "Bad credentials" = "Bad credentials";
 "rawvariable_pvpower" = "The total power from all strings, in kilowatts (kW)";
 "rawvariable_generationpower" = "Solar / Battery power coming through the inverter";

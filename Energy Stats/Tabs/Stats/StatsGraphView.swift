@@ -127,7 +127,8 @@ struct StatsGraphView: View {
                     let location = elementLocation - geometryReader[chartProxy.plotAreaFrame].origin.x
 
                     if let firstDate = viewModel.data[safe: 0]?.date, let secondDate = viewModel.data.first(where: { $0.date > firstDate })?.date,
-                       let firstPosition = chartProxy.position(forX: firstDate), let secondPosition = chartProxy.position(forX: secondDate) {
+                       let firstPosition = chartProxy.position(forX: firstDate), let secondPosition = chartProxy.position(forX: secondDate)
+                    {
                         Rectangle()
                             .fill(Color("graph_highlight"))
                             .frame(width: secondPosition - firstPosition, height: chartProxy.plotAreaSize.height)
