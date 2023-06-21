@@ -1,0 +1,9 @@
+Get an instant overview of how your FoxESS PV/Battery installation is performing!
+
+- If you have a battery you can see duration until full/empty
+- Automatically re-login
+- Graphs of inverter parameters
+- Historic statistics information
+- Show battery temperature
+
+This app requires you to have an account with FoxESS Cloud in order to login. You cannot change any settings on your Inverter with this app.
