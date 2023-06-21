@@ -123,3 +123,4 @@
 "reportvariable_chargeenergytotal" = "Potencia de carga de la batería";
 "reportvariable_dischargeenergytotal" = "Potencia de descarga de la batería";
 "reportvariable_gridconsumption" = "Potencia proveniente de la red";
+"Find out more about these variables" = "Obtén más información sobre estas variables";

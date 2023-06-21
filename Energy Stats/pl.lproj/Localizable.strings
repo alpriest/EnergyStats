@@ -111,3 +111,4 @@
 "reportvariable_chargeenergytotal" = "Moc ładowania akumulatora";
 "reportvariable_dischargeenergytotal" = "Moc rozładowywania się akumulatora";
 "reportvariable_gridconsumption" = "Moc pobierana z sieci";
+"Find out more about these variables" = "Dowiedz się więcej o tych zmiennych";

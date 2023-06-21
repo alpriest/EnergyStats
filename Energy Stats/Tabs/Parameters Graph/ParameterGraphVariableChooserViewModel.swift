@@ -55,7 +55,8 @@ class ParameterGraphVariableChooserViewModel: ObservableObject {
     func chooseBatteryVariables() {
         select(just: ["batTemperature",
                       "batVolt",
-                      "batCurrent"])
+                      "batCurrent",
+                      "SoC"])
     }
 
     func select(just newVariables: [String]) {
