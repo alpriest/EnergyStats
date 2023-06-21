@@ -41,10 +41,6 @@ struct ParameterGraphVariablesToggles: View {
 
                                 if let valuesAtTime, let graphValue = valuesAtTime.values.first(where: { $0.type == variable.type }) {
                                     Text(graphValue.formatted())
-                                } else {
-                                    OptionalView(viewModel.total(of: variable.type.reportVariable)) {
-                                        Text($0.kWh(2))
-                                    }
                                 }
                             }
                             .opacity(variable.enabled ? 1.0 : 0.5)

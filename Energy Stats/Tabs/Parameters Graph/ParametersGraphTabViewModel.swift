@@ -29,7 +29,6 @@ class ParametersGraphTabViewModel: ObservableObject {
         }
     }
 
-    private var totals: [ReportVariable: Double] = [:]
     private let dateProvider: () -> Date
     @Published var state = LoadState.inactive
 
@@ -112,16 +111,6 @@ class ParametersGraphTabViewModel: ObservableObject {
                 }
             }
 
-            let reportVariables = rawGraphVariables.compactMap { $0.reportVariable }
-            let reports = try await networking.fetchReport(deviceID: currentDevice.deviceID, variables: reportVariables, queryDate: queryDate, reportType: .day)
-            rawGraphVariables.forEach { rawVariable in
-                guard let reportVariable = rawVariable.reportVariable else { return }
-                guard let response = reports.first(where: { $0.variable.lowercased() == reportVariable.networkTitle.lowercased() }) else { return }
-
-                totals[reportVariable] = 0
-                totals[reportVariable] = response.data.map { abs($0.value) }.reduce(0.0, +)
-            }
-
             await MainActor.run {
                 self.rawData = rawData
                 self.refresh()
@@ -153,13 +142,6 @@ class ParametersGraphTabViewModel: ObservableObject {
             lhs.value < rhs.value
         })
         data = refreshedData
-    }
-
-    func total(of type: ReportVariable?) -> Double? {
-        guard let type = type else { return nil }
-        guard totals.keys.contains(type) else { return nil }
-
-        return totals[type]
     }
 
     func data(at date: Date) -> ValuesAtTime<ParameterGraphValue> {
