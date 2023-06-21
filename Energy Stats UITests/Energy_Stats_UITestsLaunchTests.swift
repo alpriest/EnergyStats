@@ -29,26 +29,26 @@ final class Energy_Stats_UITestsLaunchTests: XCTestCase {
 
         app.buttons["power_flow_tab"].tap()
 
-        snapshot("1_power_flow_tab")
+        snapshot("01_power_flow_tab")
 
         app.buttons["stats_tab"].tap()
         app.buttons["stats_datepicker"].tap()
         app.buttons["Month"].tap()
 
-        snapshot("2_stats_tab")
+        snapshot("02_stats_tab")
 
         app.buttons["parameters_tab"].tap()
 
-        snapshot("3_graph_tab")
+        snapshot("03_graph_tab")
 
         app.buttons["variable_chooser"].tap()
 
-        snapshot("4_choose_variable")
+        snapshot("04_choose_variable")
 
         app.buttons["cancel"].tap()
 
         app.buttons["settings_tab"].tap()
 
-        snapshot("5_settings_tab")
+        snapshot("05_settings_tab")
     }
 }
