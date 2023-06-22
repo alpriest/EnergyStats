@@ -52,7 +52,7 @@ struct TabbedView: View {
                     }
             }
 
-            SettingsTabView(viewModel: settingsTabViewModel, configManager: configManager)
+            SettingsTabView(viewModel: settingsTabViewModel, configManager: configManager, networking: networking)
                 .tabItem {
                     VStack {
                         Image(systemName: "gearshape")

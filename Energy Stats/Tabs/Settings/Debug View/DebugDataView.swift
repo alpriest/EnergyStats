@@ -9,44 +9,87 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct DebugDataView: View {
-    @EnvironmentObject var network: InMemoryLoggingNetworkStore
+    struct NoCurrentDeviceFoundError: Error {}
+
+    @EnvironmentObject var store: InMemoryLoggingNetworkStore
+    let networking: Networking
+    let configManager: ConfigManaging
 
     var body: some View {
         Form {
             Section(content: {
                 NavigationLink("Raw") {
                     ResponseDebugView<[RawResponse]>(
+                        store: store,
                         title: "Raw",
                         missing: "Data is fetched and cached on the power flow view.",
-                        mapper: { $0.rawResponse }
+                        mapper: { $0.rawResponse },
+                        fetcher: nil
                     )
                 }
                 NavigationLink("Report") {
                     ResponseDebugView<[ReportResponse]>(
+                        store: store,
                         title: "Report",
                         missing: "Data is only fetched and cached on the graph view. Click that page to load report data",
-                        mapper: { $0.reportResponse }
+                        mapper: { $0.reportResponse },
+                        fetcher: nil
                     )
                 }
                 NavigationLink("Battery") {
                     ResponseDebugView<BatteryResponse>(
+                        store: store,
                         title: "Battery",
                         missing: "Data is fetched and cached on the power flow view.",
-                        mapper: { $0.batteryResponse }
+                        mapper: { $0.batteryResponse },
+                        fetcher: {
+                            if let deviceID = configManager.currentDevice.value?.deviceID {
+                                _ = try await networking.fetchBattery(deviceID: deviceID)
+                            } else {
+                                throw NoCurrentDeviceFoundError()
+                            }
+                        }
+                    )
+                }
+                NavigationLink("Battery Settings") {
+                    ResponseDebugView<BatterySettingsResponse>(
+                        store: store,
+                        title: "Battery Settings",
+                        missing: "Battery Settings are only fetched and recached on login, logout and login to see the data response.",
+                        mapper: { $0.batterySettingsResponse },
+                        fetcher: {
+                            if let deviceSN = configManager.currentDevice.value?.deviceSN {
+                                _ = try await networking.fetchBatterySettings(deviceSN: deviceSN)
+                            } else {
+                                throw NoCurrentDeviceFoundError()
+                            }
+                        }
                     )
                 }
                 NavigationLink("Device List") {
                     ResponseDebugView<PagedDeviceListResponse>(
+                        store: store,
                         title: "Device List",
-                        missing: "Device list is only fetched and recached on login, logout to see the data response.",
-                        mapper: { $0.deviceListResponse }
+                        missing: "Device list is only fetched and recached on login, logout and login to see the data response.",
+                        mapper: { $0.deviceListResponse },
+                        fetcher: {
+                            _ = try await networking.fetchDeviceList()
+                        }
                     )
                 }
                 NavigationLink("Firmware Versions") {
                     ResponseDebugView<AddressBookResponse>(
+                        store: store,
                         title: "Firmware Versions",
-                        missing: "Device list is only fetched and recached on login, logout to see the data response.",
-                        mapper: { $0.addressBookResponse }
+                        missing: "Device list is only fetched and recached on login, logout and login to see the data response.",
+                        mapper: { $0.addressBookResponse },
+                        fetcher: {
+                            if let deviceID = configManager.currentDevice.value?.deviceID {
+                                _ = try await networking.fetchAddressBook(deviceID: deviceID)
+                            } else {
+                                throw NoCurrentDeviceFoundError()
+                            }
+                        }
                     )
                 }
             }, footer: {
@@ -69,7 +112,7 @@ struct DebugDataView_Previews: PreviewProvider {
         }
 
         return NavigationView {
-            DebugDataView()
+            DebugDataView(networking: network, configManager: PreviewConfigManager())
         }
         .environmentObject(store)
     }

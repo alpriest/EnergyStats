@@ -36,7 +36,6 @@ class StatsTabViewModel: ObservableObject {
     private var totals: [ReportVariable: Double] = [:]
     private var max: StatsGraphValue?
     var exportFile: CSVTextFile?
-    var exportFileName = ""
 
     init(networking: Networking, configManager: ConfigManaging) {
         self.networking = networking
@@ -88,7 +87,7 @@ class StatsTabViewModel: ObservableObject {
                 self.unit = displayMode.unit()
                 self.rawData = updatedData
                 refresh()
-//                prepareExport()
+                prepareExport()
             }
         } catch {
             await MainActor.run {
@@ -190,10 +189,8 @@ class StatsTabViewModel: ObservableObject {
             [$0.type.networkTitle, $0.date.iso8601(), String(describing: $0.value)].lazy.joined(separator: ",")
         }
 
-        let text = ([headers] + rows)
-            .joined(separator: "\n")
-
-        exportFile = CSVTextFile(initialText: text)
+        let text = ([headers] + rows).joined(separator: "\n")
+        let exportFileName: String
 
         switch displayMode {
         case .day(let date):
@@ -211,6 +208,8 @@ class StatsTabViewModel: ObservableObject {
         case .year(let year):
             exportFileName = "energystats_stats_\(year).csv"
         }
+
+        exportFile = CSVTextFile(text: text, filename: exportFileName)
     }
 }
 

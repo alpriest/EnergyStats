@@ -11,6 +11,7 @@ import SwiftUI
 struct SettingsTabView: View {
     @ObservedObject var viewModel: SettingsTabViewModel
     let configManager: ConfigManaging
+    let networking: Networking
 
     var body: some View {
         NavigationView {
@@ -68,7 +69,7 @@ struct SettingsTabView: View {
                     })
 
                 Section {
-                    NavigationLink("Debug") { DebugDataView() }
+                    NavigationLink("Debug") { DebugDataView(networking: networking, configManager: configManager) }
                     NavigationLink("FAQ") { FAQView() }
                 }
 
@@ -135,7 +136,9 @@ struct SettingsTabView_Previews: PreviewProvider {
                 userManager: .preview(),
                 config: PreviewConfigManager(),
                 networking: DemoNetworking()),
-            configManager: PreviewConfigManager())
+            configManager: PreviewConfigManager(),
+            networking: DemoNetworking()
+        )
     }
 }
 #endif

@@ -29,8 +29,8 @@ struct ParametersGraphTabView: View {
 
                 ScrollView {
                     ParametersGraphView(viewModel: viewModel,
-                                   selectedDate: $selectedDate,
-                                   valuesAtTime: $valuesAtTime)
+                                        selectedDate: $selectedDate,
+                                        valuesAtTime: $valuesAtTime)
                         .frame(height: 250)
                         .padding(.vertical)
 
@@ -42,10 +42,10 @@ struct ParametersGraphTabView: View {
                         .multilineTextAlignment(.center)
                         .padding(.vertical, 28)
 
-                    if viewModel.exportFile != nil {
-                        Button(action: { showingExporter = true }) {
-                            Text("Export CSV data")
-                        }.buttonStyle(.borderedProminent)
+                    if let url = viewModel.exportFile?.url {
+                        ShareLink(item: url) {
+                            Label("Export graph data", systemImage: "square.and.arrow.up")
+                        }
                     }
                 }
             }
@@ -54,7 +54,6 @@ struct ParametersGraphTabView: View {
         .sheet(isPresented: $showingVariables) {
             ParameterGraphVariableChooserView(viewModel: ParameterGraphVariableChooserViewModel(variables: viewModel.graphVariables, onApply: { viewModel.set(graphVariables: $0) }))
         }
-        .csvExporting(isShowing: $showingExporter, file: viewModel.exportFile, filename: viewModel.exportFileName)
         .task {
             Task {
                 await viewModel.load()

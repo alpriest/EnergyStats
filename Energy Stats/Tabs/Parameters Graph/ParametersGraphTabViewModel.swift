@@ -39,7 +39,6 @@ class ParametersGraphTabViewModel: ObservableObject {
     private var hours: Int = 24
     private var max: ParameterGraphValue?
     var exportFile: CSVTextFile?
-    var exportFileName = ""
 
     @Published var displayMode = GraphDisplayMode(date: .now, hours: 24) {
         didSet {
@@ -114,7 +113,7 @@ class ParametersGraphTabViewModel: ObservableObject {
             await MainActor.run {
                 self.rawData = rawData
                 self.refresh()
-//                prepareExport()
+                prepareExport()
                 self.state = .inactive
             }
         } catch {
@@ -180,11 +179,9 @@ class ParametersGraphTabViewModel: ObservableObject {
             [$0.type.name, $0.date.iso8601(), String(describing: $0.value)].lazy.joined(separator: ",")
         }
 
-        let text = ([headers] + rows)
-            .joined(separator: "\n")
+        let text = ([headers] + rows).joined(separator: "\n")
 
-        exportFile = CSVTextFile(initialText: text)
-
+        let exportFileName: String
         let date = displayMode.date
         let calendar = Calendar.current
         let components = calendar.dateComponents([.year, .month, .day], from: date)
@@ -196,6 +193,8 @@ class ParametersGraphTabViewModel: ObservableObject {
         } else {
             exportFileName = "energystats_parameters_unknown_date.csv"
         }
+
+        exportFile = CSVTextFile(text: text, filename: exportFileName)
     }
 }
 

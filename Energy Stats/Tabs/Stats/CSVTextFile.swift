@@ -8,40 +8,31 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
-struct CSVExporting: ViewModifier {
-    @Binding var isShowing: Bool
-    let file: CSVTextFile?
-    let filename: String
+struct CSVTextFile {
+    let url: URL?
 
-    func body(content: Content) -> some View {
-        content
-            .fileExporter(isPresented: $isShowing, document: file, contentType: .commaSeparatedText, defaultFilename: filename) { _ in }
-    }
-}
+    init?(text: String, filename: String) {
+        self.url = CSVTextFile.save(filename: filename, text: text)
 
-extension View {
-    func csvExporting(isShowing: Binding<Bool>, file: CSVTextFile?, filename: String) -> some View {
-        modifier(CSVExporting(isShowing: isShowing, file: file, filename: filename))
-    }
-}
-
-struct CSVTextFile: FileDocument {
-    static var readableContentTypes = [UTType.commaSeparatedText]
-    static var writeableContentTypes = [UTType.commaSeparatedText]
-
-    private let text: String
-
-    init(initialText: String) {
-        text = initialText
+        if self.url == nil {
+            return nil
+        }
     }
 
-    init(configuration: ReadConfiguration) throws {
-        text = ""
-    }
+    static func save(filename: String, text: String) -> URL? {
+        let fileManager = FileManager.default
+        let tempDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory())
+        let tempFileURL = tempDirectoryURL.appendingPathComponent(filename)
+        try? fileManager.removeItem(at: tempFileURL) 
 
-    // this will be called when the system wants to write our data to disk
-    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
-        let data = Data(text.utf8)
-        return FileWrapper(regularFileWithContents: data)
+        do {
+            try text.write(to: tempFileURL, atomically: true, encoding: .utf8)
+            return tempFileURL
+        } catch {
+            // Handle any exceptions that may occur while saving the file
+            print("Error saving file: \(error)")
+        }
+
+        return nil
     }
 }

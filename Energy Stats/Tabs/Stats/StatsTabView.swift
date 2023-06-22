@@ -53,16 +53,15 @@ struct StatsTabView: View {
                         .multilineTextAlignment(.center)
                         .padding(.vertical, 28)
 
-                    if viewModel.exportFile != nil {
-                        Button(action: { showingExporter = true }) {
-                            Text("Export CSV data")
-                        }.buttonStyle(.borderedProminent)
+                    if let url = viewModel.exportFile?.url {
+                        ShareLink(item: url) {
+                            Label("Export graph data", systemImage: "square.and.arrow.up")
+                        }
                     }
                 }
             }
             .padding()
         }
-        .csvExporting(isShowing: $showingExporter, file: viewModel.exportFile, filename: viewModel.exportFileName)
         .task {
             Task {
                 await viewModel.load()

@@ -9,9 +9,12 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct ResponseDebugView<T: Decodable>: View {
-    @EnvironmentObject var network: InMemoryLoggingNetworkStore
     let title: String
     let missing: String
+    let fetcher: (() async throws -> ())?
+    private let store: InMemoryLoggingNetworkStore
+    @State private var fetchError: String?
+    @State private var mapResult: NetworkOperation<T>?
     let mapper: (InMemoryLoggingNetworkStore) -> NetworkOperation<T>?
 
     struct Line: Identifiable {
@@ -23,11 +26,26 @@ struct ResponseDebugView<T: Decodable>: View {
         }
     }
 
+    init(
+        store: InMemoryLoggingNetworkStore,
+        title: String,
+        missing: String,
+        mapper: @escaping (InMemoryLoggingNetworkStore) -> NetworkOperation<T>?,
+        fetcher: (() async throws -> ())?
+    ) {
+        self.store = store
+        self.title = title
+        self.missing = missing
+        self.fetcher = fetcher
+        self.mapper = mapper
+        self.mapResult = mapper(store)
+    }
+
     var body: some View {
         VStack {
-            if let response = mapper(network) {
+            if let mapResult {
                 (Text("Last fetched ") +
-                    Text(response.time, formatter: DateFormatter.forDebug()))
+                    Text(mapResult.time, formatter: DateFormatter.forDebug()))
                     .padding(.bottom)
 
                 ScrollView {
@@ -41,6 +59,26 @@ struct ResponseDebugView<T: Decodable>: View {
                 }
             } else {
                 Text(missing)
+                    .padding()
+            }
+
+            if let fetcher {
+                Button {
+                    Task {
+                        do {
+                            try await fetcher()
+                            self.mapResult = mapper(store)
+                        } catch {
+                            fetchError = String(describing: error)
+                        }
+                    }
+                } label: {
+                    Text("Fetch now")
+                }.buttonStyle(.bordered)
+
+                OptionalView(fetchError) {
+                    Text($0)
+                }
             }
         }
         .navigationTitle(title)
@@ -52,7 +90,7 @@ struct ResponseDebugView<T: Decodable>: View {
     }
 
     private var asText: String {
-        guard let data = mapper(network)?.raw else { return "" }
+        guard let data = mapResult?.raw else { return "" }
 
         return data.formattedJSON()
     }
@@ -63,6 +101,8 @@ struct ResponseDebugView<T: Decodable>: View {
 }
 
 struct ResponseDebugView_Previews: PreviewProvider {
+    struct TestError: Error {}
+
     static var previews: some View {
         let network = DemoNetworking()
         let store = InMemoryLoggingNetworkStore()
@@ -71,9 +111,11 @@ struct ResponseDebugView_Previews: PreviewProvider {
         }
 
         return ResponseDebugView<[ReportResponse]>(
+            store: store,
             title: "Report",
             missing: "Data is only fetched and cached on the graph view.\nClick that page to load report data",
-            mapper: { $0.reportResponse }
+            mapper: { $0.reportResponse },
+            fetcher: { throw TestError() }
         )
         .environmentObject(store)
     }
