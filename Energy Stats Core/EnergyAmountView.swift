@@ -8,16 +8,50 @@
 import Combine
 import SwiftUI
 
+public struct PowerText: View {
+    let amount: Double
+    let appTheme: AppTheme
+
+    public init(amount: Double, appTheme: AppTheme) {
+        self.amount = amount
+        self.appTheme = appTheme
+    }
+
+    public var body: some View {
+        if appTheme.showInW {
+            Text(amount.w())
+        } else {
+            Text(amount.kW(appTheme.decimalPlaces))
+        }
+    }
+}
+
+public struct EnergyText: View {
+    let amount: Double
+    let appTheme: AppTheme
+
+    public init(amount: Double, appTheme: AppTheme) {
+        self.amount = amount
+        self.appTheme = appTheme
+    }
+
+    public var body: some View {
+        if appTheme.showInW {
+            Text(amount.wh())
+        } else {
+            Text(amount.kWh(appTheme.decimalPlaces))
+        }
+    }
+}
+
 public struct EnergyAmountView: View {
     public let amount: Double
-    public let decimalPlaces: Int
     public let backgroundColor: Color
     public let textColor: Color
     public let appTheme: AppTheme
 
-    public init(amount: Double, decimalPlaces: Int, backgroundColor: Color, textColor: Color, appTheme: AppTheme) {
+    public init(amount: Double, backgroundColor: Color, textColor: Color, appTheme: AppTheme) {
         self.amount = amount
-        self.decimalPlaces = decimalPlaces
         self.backgroundColor = backgroundColor
         self.textColor = textColor
         self.appTheme = appTheme
@@ -25,11 +59,7 @@ public struct EnergyAmountView: View {
 
     public var body: some View {
         Group {
-            if appTheme.showInW {
-                Text(amount.w())
-            } else {
-                Text(amount.kW(decimalPlaces))
-            }
+            EnergyText(amount: amount, appTheme: appTheme)
         }
         .padding(3)
         .padding(.horizontal, 4)
@@ -41,7 +71,7 @@ public struct EnergyAmountView: View {
 
 struct EnergyAmountView_Previews: PreviewProvider {
     static var previews: some View {
-        EnergyAmountView(amount: 0.310, decimalPlaces: 3, backgroundColor: .red, textColor: .black, appTheme: AppTheme.mock())
+        EnergyAmountView(amount: 0.310, backgroundColor: .red, textColor: .black, appTheme: AppTheme.mock())
     }
 }
 
@@ -55,7 +85,8 @@ public extension AppTheme {
             showBatteryEstimate: true,
             showUsableBatteryOnly: false,
             showInW: false,
-            showTotalYield: false
+            showTotalYield: false,
+            showSelfSufficiencyEstimate: true
         )
     }
 }

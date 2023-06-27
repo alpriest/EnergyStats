@@ -20,6 +20,7 @@ public protocol Config {
     var showUsableBatteryOnly: Bool { get set }
     var showInW: Bool { get set }
     var showTotalYield: Bool { get set }
+    var showSelfSufficiencyEstimate: Bool { get set }
 }
 
 extension UserDefaults {
@@ -109,6 +110,9 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredBool(key: "showInW", defaultValue: true)
     public var showInW: Bool
+
+    @UserDefaultsStoredBool(key: "showSelfSufficiencyEstimate", defaultValue: false)
+    public var showSelfSufficiencyEstimate: Bool
 }
 
 @propertyWrapper

@@ -28,6 +28,7 @@ public protocol ConfigManaging {
     var batteryCapacityW: Int { get }
     var isDemoUser: Bool { get set }
     var showColouredLines: Bool { get set }
+    var showSelfSufficiencyEstimate: Bool { get set }
     var showBatteryTemperature: Bool { get set }
     var showBatteryEstimate: Bool { get set }
     var showUsableBatteryOnly: Bool { get set }
@@ -65,7 +66,8 @@ public class ConfigManager: ConfigManaging {
                 showBatteryEstimate: config.showBatteryEstimate,
                 showUsableBatteryOnly: config.showUsableBatteryOnly,
                 showInW: config.showInW,
-                showTotalYield: config.showTotalYield
+                showTotalYield: config.showTotalYield,
+                showSelfSufficiencyEstimate: config.showSelfSufficiencyEstimate
             )
         )
         selectedDeviceID = selectedDeviceID
@@ -273,6 +275,16 @@ public class ConfigManager: ConfigManaging {
         }
     }
 
+    public var showSelfSufficiencyEstimate: Bool {
+        get { config.showSelfSufficiencyEstimate }
+        set {
+            config.showSelfSufficiencyEstimate = newValue
+            appTheme.send(appTheme.value.update(
+                showSelfSufficiencyEstimate: config.showSelfSufficiencyEstimate
+            ))
+        }
+    }
+
     public var decimalPlaces: Int {
         get { config.decimalPlaces }
         set {
@@ -316,7 +328,7 @@ public class ConfigManager: ConfigManaging {
     }
 }
 
-public class BatteryResponseMapper {
+public enum BatteryResponseMapper {
     public static func map(battery: BatteryResponse, settings: BatterySettingsResponse) -> Device.Battery {
         let batteryCapacity: String
         let minSOC: String

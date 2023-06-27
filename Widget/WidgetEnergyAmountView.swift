@@ -21,11 +21,7 @@ public struct WidgetEnergyAmountView: View {
 
     public var body: some View {
         HStack {
-            if appTheme.showInW {
-                Text(amount.w())
-            } else {
-                Text(amount.kW(decimalPlaces))
-            }
+            EnergyText(amount: amount, appTheme: appTheme)
         }
         .monospacedDigit()
         .padding(3)

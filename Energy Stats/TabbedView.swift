@@ -33,7 +33,7 @@ struct TabbedView: View {
                 }
 
             if #available(iOS 16.0, *) {
-                StatsTabView(configManager: configManager, networking: networking)
+                StatsTabView(configManager: configManager, networking: networking, appTheme: configManager.appTheme.value)
                     .tabItem {
                         VStack {
                             Image(systemName: "chart.bar.xaxis")

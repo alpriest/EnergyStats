@@ -16,6 +16,12 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
+    @Published var showSelfSufficiencyEstimate: Bool {
+        didSet {
+            config.showSelfSufficiencyEstimate = showSelfSufficiencyEstimate
+        }
+    }
+
     @Published var showTotalYield: Bool {
         didSet {
             config.showTotalYield = showTotalYield
@@ -91,6 +97,7 @@ class SettingsTabViewModel: ObservableObject {
         hasBattery = config.hasBattery
         firmwareVersions = config.firmwareVersions
         showTotalYield = config.showTotalYield
+        showSelfSufficiencyEstimate = config.showSelfSufficiencyEstimate
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }

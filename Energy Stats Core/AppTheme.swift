@@ -5,8 +5,8 @@
 //  Created by Alistair Priest on 02/04/2023.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 public struct AppTheme {
     public var showColouredLines: Bool
@@ -17,8 +17,19 @@ public struct AppTheme {
     public var showUsableBatteryOnly: Bool
     public var showInW: Bool
     public var showTotalYield: Bool
+    public var showSelfSufficiencyEstimate: Bool
 
-    public init(showColouredLines: Bool, showBatteryTemperature: Bool, showSunnyBackground: Bool, decimalPlaces: Int, showBatteryEstimate: Bool, showUsableBatteryOnly: Bool, showInW: Bool, showTotalYield: Bool) {
+    public init(
+        showColouredLines: Bool,
+        showBatteryTemperature: Bool,
+        showSunnyBackground: Bool,
+        decimalPlaces: Int,
+        showBatteryEstimate: Bool,
+        showUsableBatteryOnly: Bool,
+        showInW: Bool,
+        showTotalYield: Bool,
+        showSelfSufficiencyEstimate: Bool
+    ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
         self.showSunnyBackground = showSunnyBackground
@@ -27,6 +38,7 @@ public struct AppTheme {
         self.showUsableBatteryOnly = showUsableBatteryOnly
         self.showInW = showInW
         self.showTotalYield = showTotalYield
+        self.showSelfSufficiencyEstimate = showSelfSufficiencyEstimate
     }
 
     public func update(
@@ -37,7 +49,8 @@ public struct AppTheme {
         showBatteryEstimate: Bool? = nil,
         showUsableBatteryOnly: Bool? = nil,
         showInW: Bool? = nil,
-        showTotalYield: Bool? = nil
+        showTotalYield: Bool? = nil,
+        showSelfSufficiencyEstimate: Bool? = nil
     ) -> AppTheme {
         AppTheme(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -47,7 +60,8 @@ public struct AppTheme {
             showBatteryEstimate: showBatteryEstimate ?? self.showBatteryEstimate,
             showUsableBatteryOnly: showUsableBatteryOnly ?? self.showUsableBatteryOnly,
             showInW: showInW ?? self.showInW,
-            showTotalYield: showTotalYield ?? self.showTotalYield
+            showTotalYield: showTotalYield ?? self.showTotalYield,
+            showSelfSufficiencyEstimate: showSelfSufficiencyEstimate ?? self.showSelfSufficiencyEstimate
         )
     }
 }

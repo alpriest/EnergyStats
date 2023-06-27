@@ -33,6 +33,8 @@ class StatsTabViewModel: ObservableObject {
     @Published var data: [StatsGraphValue] = []
     @Published var unit: Calendar.Component = .hour
     @Published var graphVariables: [StatsGraphVariable] = []
+    @Published var selfSufficiencyEstimate: String? = nil
+    @Published var homeUsage: Double? = nil
     private var totals: [ReportVariable: Double] = [:]
     private var max: StatsGraphValue?
     var exportFile: CSVTextFile?
@@ -86,6 +88,7 @@ class StatsTabViewModel: ObservableObject {
             await MainActor.run {
                 self.unit = displayMode.unit()
                 self.rawData = updatedData
+                self.selfSufficiencyEstimate = calculateSelfSufficiencyEstimate()
                 refresh()
                 prepareExport()
             }
@@ -94,6 +97,31 @@ class StatsTabViewModel: ObservableObject {
                 self.state = .error(error, "Could not load, check your connection")
             }
         }
+    }
+
+    func calculateSelfSufficiencyEstimate() -> String? {
+        guard let generation = totals[ReportVariable.generation],
+              let feedIn = totals[ReportVariable.feedIn],
+              let grid = totals[ReportVariable.gridConsumption],
+              let batteryCharge = totals[ReportVariable.chargeEnergyToTal],
+              let batteryDischarge = totals[ReportVariable.dischargeEnergyToTal]
+        else { return nil }
+
+        homeUsage = generation - feedIn + grid
+
+        let result = SelfSufficiencyCalculator().calculate(
+            generation: generation,
+            feedIn: feedIn,
+            grid: grid,
+            batteryCharge: batteryCharge,
+            batteryDischarge: batteryDischarge
+        )
+
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .percent
+        numberFormatter.maximumFractionDigits = 1
+
+        return numberFormatter.string(from: NSNumber(value: result))
     }
 
     func generateTotals(

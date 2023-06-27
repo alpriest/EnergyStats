@@ -33,6 +33,10 @@ struct SettingsTabView: View {
                             Text("Show total yield")
                         }
 
+                        Toggle(isOn: $viewModel.showSelfSufficiencyEstimate) {
+                            Text("Show self sufficiency estimates")
+                        }
+
                         Toggle(isOn: $viewModel.showSunnyBackground) {
                             Text("Show sunshine background")
                         }

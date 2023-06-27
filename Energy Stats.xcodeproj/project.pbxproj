@@ -52,6 +52,9 @@
 		4130364929B86F66006B5CE9 /* BatterySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4130364829B86F66006B5CE9 /* BatterySettingsView.swift */; };
 		4130364B29B8BE7F006B5CE9 /* InverterChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4130364A29B8BE7F006B5CE9 /* InverterChoiceView.swift */; };
 		41339C7228CC7B7B0062B976 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41339C7128CC7B7B0062B976 /* LoginView.swift */; };
+		413B7A312A4A390C00562A68 /* SelfSufficiencyCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413B7A302A4A390C00562A68 /* SelfSufficiencyCalculator.swift */; };
+		413B7A3A2A4A397000562A68 /* Energy_Stats_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; platformFilter = ios; };
+		413B7A412A4A399900562A68 /* SelfSufficiencyCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413B7A402A4A399900562A68 /* SelfSufficiencyCalculatorTests.swift */; };
 		4140144E28C70B3200EA5BA1 /* Energy_StatsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140144D28C70B3200EA5BA1 /* Energy_StatsApp.swift */; };
 		4140145028C70B3200EA5BA1 /* TabbedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140144F28C70B3200EA5BA1 /* TabbedView.swift */; };
 		4140145228C70B3200EA5BA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4140145128C70B3200EA5BA1 /* Assets.xcassets */; };
@@ -135,6 +138,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		413B7A3B2A4A397000562A68 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4140144228C70B3200EA5BA1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 41A95B9329DB3F6A00A35169;
+			remoteInfo = "Energy Stats Core";
+		};
 		41A95B9829DB3F6A00A35169 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4140144228C70B3200EA5BA1 /* Project object */;
@@ -212,6 +222,9 @@
 		4130364A29B8BE7F006B5CE9 /* InverterChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterChoiceView.swift; sourceTree = "<group>"; };
 		41339C7128CC7B7B0062B976 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		41339C7328CC7BA50062B976 /* KeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStore.swift; sourceTree = "<group>"; };
+		413B7A302A4A390C00562A68 /* SelfSufficiencyCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSufficiencyCalculator.swift; sourceTree = "<group>"; };
+		413B7A362A4A397000562A68 /* Energy Stats Core Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Energy Stats Core Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		413B7A402A4A399900562A68 /* SelfSufficiencyCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSufficiencyCalculatorTests.swift; sourceTree = "<group>"; };
 		4140144A28C70B3200EA5BA1 /* Energy Stats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Energy Stats.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4140144D28C70B3200EA5BA1 /* Energy_StatsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Energy_StatsApp.swift; sourceTree = "<group>"; };
 		4140144F28C70B3200EA5BA1 /* TabbedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbedView.swift; sourceTree = "<group>"; };
@@ -334,6 +347,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		413B7A332A4A397000562A68 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				413B7A3A2A4A397000562A68 /* Energy_Stats_Core.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4140144728C70B3200EA5BA1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -460,6 +481,14 @@
 			path = Mocks;
 			sourceTree = "<group>";
 		};
+		413B7A372A4A397000562A68 /* Energy Stats Core Tests */ = {
+			isa = PBXGroup;
+			children = (
+				413B7A402A4A399900562A68 /* SelfSufficiencyCalculatorTests.swift */,
+			);
+			path = "Energy Stats Core Tests";
+			sourceTree = "<group>";
+		};
 		4140144128C70B3200EA5BA1 = {
 			isa = PBXGroup;
 			children = (
@@ -468,6 +497,7 @@
 				41E299CB29B7260D001F017B /* Energy Stats UITests */,
 				41A95B7E29DB2F0900A35169 /* Energy Stats Watch App Watch App */,
 				41A95B9529DB3F6A00A35169 /* Energy Stats Core */,
+				413B7A372A4A397000562A68 /* Energy Stats Core Tests */,
 				418547352A3A1623000128C7 /* Widget */,
 				4140144B28C70B3200EA5BA1 /* Products */,
 				41B690FF28E043A10058126E /* Frameworks */,
@@ -481,6 +511,7 @@
 				41EDDF7128CD2ED30092C662 /* Energy StatsTests.xctest */,
 				41E299CA29B7260D001F017B /* Energy Stats UITests.xctest */,
 				41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */,
+				413B7A362A4A397000562A68 /* Energy Stats Core Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -678,6 +709,7 @@
 				41A95BA029DB3F7E00A35169 /* PylonView.swift */,
 				410913FC29DB78EF00133CC5 /* PreciseDateTimeFormatter.swift */,
 				41CB71492A3B1B6C00199415 /* StyleGuide.swift */,
+				413B7A302A4A390C00562A68 /* SelfSufficiencyCalculator.swift */,
 			);
 			path = "Energy Stats Core";
 			sourceTree = "<group>";
@@ -783,6 +815,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		413B7A352A4A397000562A68 /* Energy Stats Core Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 413B7A3D2A4A397000562A68 /* Build configuration list for PBXNativeTarget "Energy Stats Core Tests" */;
+			buildPhases = (
+				413B7A322A4A397000562A68 /* Sources */,
+				413B7A332A4A397000562A68 /* Frameworks */,
+				413B7A342A4A397000562A68 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				413B7A3C2A4A397000562A68 /* PBXTargetDependency */,
+			);
+			name = "Energy Stats Core Tests";
+			productName = "Energy Stats Core Tests";
+			productReference = 413B7A362A4A397000562A68 /* Energy Stats Core Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		4140144928C70B3200EA5BA1 /* Energy Stats */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4140145828C70B3200EA5BA1 /* Build configuration list for PBXNativeTarget "Energy Stats" */;
@@ -875,6 +925,10 @@
 				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					413B7A352A4A397000562A68 = {
+						CreatedOnToolsVersion = 14.3;
+						LastSwiftMigration = 1430;
+					};
 					4140144928C70B3200EA5BA1 = {
 						CreatedOnToolsVersion = 14.0;
 					};
@@ -917,11 +971,19 @@
 				41EDDF7028CD2ED30092C662 /* Energy StatsTests */,
 				41E299C929B7260D001F017B /* Energy Stats UITests */,
 				41A95B9329DB3F6A00A35169 /* Energy Stats Core */,
+				413B7A352A4A397000562A68 /* Energy Stats Core Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		413B7A342A4A397000562A68 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4140144828C70B3200EA5BA1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -975,6 +1037,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		413B7A322A4A397000562A68 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				413B7A412A4A399900562A68 /* SelfSufficiencyCalculatorTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4140144628C70B3200EA5BA1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1061,6 +1131,7 @@
 				4109140029DB7AB600133CC5 /* HomePowerFlowViewModel.swift in Sources */,
 				4103D1E229DB6CD7001B0BC8 /* ConfigManager.swift in Sources */,
 				4171854429FFCF9500D18CDD /* Color+Hex.swift in Sources */,
+				413B7A312A4A390C00562A68 /* SelfSufficiencyCalculator.swift in Sources */,
 				4103D1E429DB6D12001B0BC8 /* KeychainStore.swift in Sources */,
 				4103D1DF29DB6C8C001B0BC8 /* DemoNetworking.swift in Sources */,
 				41CB714A2A3B1B6C00199415 /* StyleGuide.swift in Sources */,
@@ -1102,6 +1173,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		413B7A3C2A4A397000562A68 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = 41A95B9329DB3F6A00A35169 /* Energy Stats Core */;
+			targetProxy = 413B7A3B2A4A397000562A68 /* PBXContainerItemProxy */;
+		};
 		41A95B9929DB3F6A00A35169 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 41A95B9329DB3F6A00A35169 /* Energy Stats Core */;
@@ -1134,6 +1211,43 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		413B7A3E2A4A397000562A68 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 885RLNNNK2;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.alpriest.Energy-Stats-Core-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		413B7A3F2A4A397000562A68 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 885RLNNNK2;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.alpriest.Energy-Stats-Core-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		4140145628C70B3200EA5BA1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1491,6 +1605,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		413B7A3D2A4A397000562A68 /* Build configuration list for PBXNativeTarget "Energy Stats Core Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				413B7A3E2A4A397000562A68 /* Debug */,
+				413B7A3F2A4A397000562A68 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		4140144528C70B3200EA5BA1 /* Build configuration list for PBXProject "Energy Stats" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

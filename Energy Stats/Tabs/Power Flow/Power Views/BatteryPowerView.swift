@@ -11,14 +11,14 @@ import SwiftUI
 
 struct BatteryPowerViewModel {
     private let actualBatteryStateOfCharge: Double
-    private(set) var batteryChargekWH: Double
+    private(set) var batteryChargekWh: Double
     private let calculator: BatteryCapacityCalculator
     private(set) var temperature: Double
     private let configManager: ConfigManaging
 
     init(configManager: ConfigManaging, batteryStateOfCharge: Double, batteryChargekWH: Double, temperature: Double) {
         actualBatteryStateOfCharge = batteryStateOfCharge
-        self.batteryChargekWH = batteryChargekWH
+        self.batteryChargekWh = batteryChargekWH
         self.temperature = temperature
         self.configManager = configManager
 
@@ -28,7 +28,7 @@ struct BatteryPowerViewModel {
 
     var batteryExtra: String? {
         calculator.batteryChargeStatusDescription(
-            batteryChargePowerkWH: batteryChargekWH,
+            batteryChargePowerkWH: batteryChargekWh,
             batteryStateOfCharge: actualBatteryStateOfCharge
         )
     }
@@ -57,7 +57,7 @@ struct BatteryPowerView: View {
 
     var body: some View {
         VStack {
-            PowerFlowView(amount: viewModel.batteryChargekWH, appTheme: appTheme, showColouredLines: true)
+            PowerFlowView(amount: viewModel.batteryChargekWh, appTheme: appTheme, showColouredLines: true)
             Image(systemName: "minus.plus.batteryblock.fill")
                 .font(.system(size: 48))
                 .frame(width: 45, height: 45)
@@ -66,7 +66,7 @@ struct BatteryPowerView: View {
                     if percentage {
                         Text(viewModel.batteryStateOfCharge, format: .percent)
                     } else {
-                        Text(viewModel.batteryStoredChargekWh.kWh(appTheme.decimalPlaces))
+                        EnergyText(amount: viewModel.batteryStoredChargekWh, appTheme: appTheme)
                     }
                 }.onTapGesture {
                     percentage.toggle()
