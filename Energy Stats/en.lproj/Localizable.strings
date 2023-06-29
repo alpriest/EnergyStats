@@ -60,3 +60,6 @@
 "reportvariable_chargeenergytotal" = "Power charging the battery";
 "reportvariable_dischargeenergytotal" = "Power discharging from the battery";
 "reportvariable_gridconsumption" = "Power coming from the grid";
+"reportvariable_loads" = "Power used by the house";
+"absolute_self_sufficiency" = "Assumes any amount taken from the grid reduces your self-sufficiency.\n\nSufficiency = grid / houseUsage";
+"net_self_sufficiency" = "Assumes if your net consumption is positive then you are self-sufficient.\n\nSufficiency = (export - import + batCharge - batDischarge) / houseUsage";

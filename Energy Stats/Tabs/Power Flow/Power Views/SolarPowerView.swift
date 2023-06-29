@@ -26,7 +26,7 @@ struct SolarPowerView: View {
     var body: some View {
         VStack {
             if appTheme.showTotalYield {
-                HStack {
+                HStack(spacing: 0) {
                     Text("Yield today ")
                     EnergyText(amount: viewModel.generation, appTheme: appTheme)
                 }

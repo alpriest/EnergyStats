@@ -39,7 +39,7 @@ struct DatePickerView: View {
             HStack {
                 switch viewModel.range {
                 case .day:
-                    DatePicker("Choose date", selection: $viewModel.date, displayedComponents: .date)
+                    DatePicker("Choose date", selection: $viewModel.date, in: ...Date(), displayedComponents: .date)
                         .datePickerStyle(.compact)
                         .labelsHidden()
                 case .month:
@@ -96,14 +96,17 @@ struct DatePickerView: View {
             } label: {
                 Image(systemName: "chevron.left")
                     .frame(minWidth: 22)
-            }.buttonStyle(.bordered)
+            }
+            .buttonStyle(.bordered)
 
             Button {
                 viewModel.increase()
             } label: {
                 Image(systemName: "chevron.right")
                     .frame(minWidth: 22)
-            }.buttonStyle(.bordered)
+            }
+            .buttonStyle(.bordered)
+            .disabled(!viewModel.canIncrease)
         }
     }
 }

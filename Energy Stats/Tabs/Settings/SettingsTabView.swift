@@ -55,18 +55,7 @@ struct SettingsTabView: View {
                         Text("Display")
                     })
 
-                Section {
-                    Picker("Self sufficiency estimates", selection: $viewModel.selfSufficiencyEstimateRawMode) {
-                        Text("Off").tag(0)
-                        Text("Net").tag(1)
-                        Text("Absolute").tag(2)
-                    }.pickerStyle(.segmented)
-
-                } header: {
-                    Text("Self sufficiency estimates")
-                } footer: {
-                    Text("Net")
-                }
+                SelfSufficiencySettingsView(mode: $viewModel.selfSufficiencyEstimateMode)
 
                 Section(
                     content: {

@@ -74,11 +74,6 @@ class SettingsTabViewModel: ObservableObject {
 
     @Published var hasBattery: Bool
     @Published var firmwareVersions: DeviceFirmwareVersion?
-    @Published var selfSufficiencyEstimateRawMode = 0 {
-        didSet {
-            config.selfSufficiencyEstimateMode = SelfSufficiencyEstimateMode(rawValue: selfSufficiencyEstimateRawMode) ?? .off
-        }
-    }
 
     private var config: ConfigManaging
     private let userManager: UserManager

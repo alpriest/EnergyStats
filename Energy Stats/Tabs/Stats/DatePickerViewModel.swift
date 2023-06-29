@@ -26,6 +26,7 @@ class DatePickerViewModel: ObservableObject {
         didSet { updateDisplayMode() }
     }
     var yearRange = 2000...(Calendar.current.component(.year, from: .now))
+    @Published var canIncrease = false
 
     @MainActor @Binding var displayMode: StatsDisplayMode
     private var isInitialised = false
@@ -49,6 +50,7 @@ class DatePickerViewModel: ObservableObject {
         }
 
         isInitialised = true
+        updateDisplayMode()
     }
 
     func increase() {
@@ -96,6 +98,8 @@ class DatePickerViewModel: ObservableObject {
             if updatedDisplayMode != displayMode {
                 displayMode = updatedDisplayMode
             }
+
+            canIncrease = !Calendar.current.isDate(date, inSameDayAs: Date())
         }
     }
 
@@ -110,3 +114,4 @@ class DatePickerViewModel: ObservableObject {
         }
     }
 }
+
