@@ -33,7 +33,8 @@ class StatsTabViewModel: ObservableObject {
     @Published var data: [StatsGraphValue] = []
     @Published var unit: Calendar.Component = .hour
     @Published var graphVariables: [StatsGraphVariable] = []
-    @Published var selfSufficiencyEstimate: String? = nil
+    @Published var netSelfSufficiencyEstimate: String? = nil
+    @Published var absoluteSelfSufficiencyEstimate: String? = nil
     @Published var homeUsage: Double? = nil
     private var totals: [ReportVariable: Double] = [:]
     private var max: StatsGraphValue?
@@ -43,7 +44,7 @@ class StatsTabViewModel: ObservableObject {
         self.networking = networking
         self.configManager = configManager
 
-        graphVariables = [.generation, ReportVariable.feedIn, .gridConsumption, .chargeEnergyToTal, .dischargeEnergyToTal].map {
+        graphVariables = [.generation, ReportVariable.feedIn, .gridConsumption, .chargeEnergyToTal, .dischargeEnergyToTal, .loads].map {
             StatsGraphVariable($0)
         }
 
@@ -53,7 +54,7 @@ class StatsTabViewModel: ObservableObject {
     func load() async {
         guard let currentDevice = configManager.currentDevice.value else { return }
 
-        let reportVariables: [ReportVariable] = [.feedIn, .generation, .chargeEnergyToTal, .dischargeEnergyToTal, .gridConsumption]
+        let reportVariables: [ReportVariable] = [.feedIn, .generation, .chargeEnergyToTal, .dischargeEnergyToTal, .gridConsumption, .loads]
         let queryDate = makeQueryDate()
         let reportType = makeReportType()
 
@@ -88,7 +89,7 @@ class StatsTabViewModel: ObservableObject {
             await MainActor.run {
                 self.unit = displayMode.unit()
                 self.rawData = updatedData
-                self.selfSufficiencyEstimate = calculateSelfSufficiencyEstimate()
+                calculateSelfSufficiencyEstimate()
                 refresh()
                 prepareExport()
             }
@@ -99,29 +100,38 @@ class StatsTabViewModel: ObservableObject {
         }
     }
 
-    func calculateSelfSufficiencyEstimate() -> String? {
-        guard let generation = totals[ReportVariable.generation],
+    func calculateSelfSufficiencyEstimate() {
+        guard let grid = totals[ReportVariable.gridConsumption],
               let feedIn = totals[ReportVariable.feedIn],
-              let grid = totals[ReportVariable.gridConsumption],
+              let loads = totals[ReportVariable.loads],
               let batteryCharge = totals[ReportVariable.chargeEnergyToTal],
               let batteryDischarge = totals[ReportVariable.dischargeEnergyToTal]
-        else { return nil }
+        else { return }
 
-        homeUsage = generation - feedIn + grid
+        homeUsage = loads
 
-        let result = SelfSufficiencyCalculator().calculate(
-            generation: generation,
-            feedIn: feedIn,
+        let netResult = NetSelfSufficiencyCalculator.calculate(
             grid: grid,
+            feedIn: feedIn,
+            loads: loads,
             batteryCharge: batteryCharge,
             batteryDischarge: batteryDischarge
         )
+        netSelfSufficiencyEstimate = asPercent(netResult)
 
+        let absoluteResult = AbsoluteSelfSufficiencyCalculator.calculate(
+            loads: loads,
+            grid: grid
+        )
+        absoluteSelfSufficiencyEstimate = asPercent(absoluteResult)
+    }
+
+    func asPercent(_ value: Double) -> String? {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .percent
         numberFormatter.maximumFractionDigits = 1
 
-        return numberFormatter.string(from: NSNumber(value: result))
+        return numberFormatter.string(from: NSNumber(value: value))
     }
 
     func generateTotals(

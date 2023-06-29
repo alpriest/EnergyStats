@@ -8,6 +8,12 @@
 import Combine
 import Foundation
 
+public enum SelfSufficiencyEstimateMode: Int, RawRepresentable {
+    case off = 0
+    case net = 1
+    case absolute = 2
+}
+
 public struct AppTheme {
     public var showColouredLines: Bool
     public var showBatteryTemperature: Bool
@@ -17,7 +23,7 @@ public struct AppTheme {
     public var showUsableBatteryOnly: Bool
     public var showInW: Bool
     public var showTotalYield: Bool
-    public var showSelfSufficiencyEstimate: Bool
+    public var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode
 
     public init(
         showColouredLines: Bool,
@@ -28,7 +34,7 @@ public struct AppTheme {
         showUsableBatteryOnly: Bool,
         showInW: Bool,
         showTotalYield: Bool,
-        showSelfSufficiencyEstimate: Bool
+        selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -38,7 +44,7 @@ public struct AppTheme {
         self.showUsableBatteryOnly = showUsableBatteryOnly
         self.showInW = showInW
         self.showTotalYield = showTotalYield
-        self.showSelfSufficiencyEstimate = showSelfSufficiencyEstimate
+        self.selfSufficiencyEstimateMode = selfSufficiencyEstimateMode
     }
 
     public func update(
@@ -50,7 +56,7 @@ public struct AppTheme {
         showUsableBatteryOnly: Bool? = nil,
         showInW: Bool? = nil,
         showTotalYield: Bool? = nil,
-        showSelfSufficiencyEstimate: Bool? = nil
+        selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode? = nil
     ) -> AppTheme {
         AppTheme(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -61,7 +67,7 @@ public struct AppTheme {
             showUsableBatteryOnly: showUsableBatteryOnly ?? self.showUsableBatteryOnly,
             showInW: showInW ?? self.showInW,
             showTotalYield: showTotalYield ?? self.showTotalYield,
-            showSelfSufficiencyEstimate: showSelfSufficiencyEstimate ?? self.showSelfSufficiencyEstimate
+            selfSufficiencyEstimateMode: selfSufficiencyEstimateMode ?? self.selfSufficiencyEstimateMode
         )
     }
 }

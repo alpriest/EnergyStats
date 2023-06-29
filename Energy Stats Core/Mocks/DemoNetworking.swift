@@ -138,7 +138,7 @@ public class MockConfig: Config {
     public var showUsableBatteryOnly: Bool = false
     public var showInW: Bool = false
     public var showTotalYield: Bool = false
-    public var showSelfSufficiencyEstimate: Bool = false
+    public var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode = .off
 }
 
 public class PreviewConfigManager: ConfigManager {

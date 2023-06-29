@@ -31,7 +31,6 @@ struct StatsTabView: View {
     @StateObject var viewModel: StatsTabViewModel
     @State private var showingExporter = false
     private let appTheme: AppTheme
-    @Environment(\.colorScheme) var colorScheme
 
     init(configManager: ConfigManaging, networking: Networking, appTheme: AppTheme) {
         _viewModel = .init(wrappedValue: StatsTabViewModel(networking: networking, configManager: configManager))
@@ -50,46 +49,8 @@ struct StatsTabView: View {
 
                     StatsGraphVariableToggles(viewModel: viewModel, selectedDate: $viewModel.selectedDate, valuesAtTime: $viewModel.valuesAtTime, appTheme: appTheme)
 
-                    if appTheme.showSelfSufficiencyEstimate, let estimate = viewModel.selfSufficiencyEstimate {
-                        ZStack(alignment: .topLeading) {
-                            Group {
-                                RoundedRectangle(cornerRadius: 6)
-                                    .stroke(Color("highlight_box"), lineWidth: 1)
-                                    .background(Color("highlight_box").opacity(0.1))
-
-                                Text("Approximations")
-                                    .padding(2)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 3)
-                                            .fill(Color("highlight_box"))
-                                    )
-                                    .font(.caption2)
-                                    .fontWeight(.bold)
-                                    .offset(x: 8, y: -8)
-                                    .foregroundColor(Color.white.opacity(colorScheme == .dark ? 0.8 : 1.0))
-                            }
-                            .compositingGroup()
-
-                            ZStack {
-                                VStack {
-                                    HStack {
-                                        Text("Self sufficiency ")
-                                        Spacer()
-                                        Text(estimate)
-                                    }
-                                    if let home = viewModel.homeUsage {
-                                        HStack {
-                                            Text("Home usage ")
-                                            Spacer()
-                                            EnergyText(amount: home, appTheme: appTheme)
-                                        }
-                                    }
-                                }
-                                .padding()
-                                .frame(minWidth: 0, maxWidth: .infinity)
-                            }
-                        }
-                        .padding()
+                    if appTheme.selfSufficiencyEstimateMode != .off {
+                        SelfSufficiencyEstimateView(viewModel: viewModel, mode: appTheme.selfSufficiencyEstimateMode, appTheme: appTheme)
                     }
 
                     Text("Stats are aggregated by FoxESS into 1 hr, 1 day or 1 month totals")

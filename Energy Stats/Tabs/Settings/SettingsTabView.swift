@@ -33,10 +33,6 @@ struct SettingsTabView: View {
                             Text("Show total yield")
                         }
 
-                        Toggle(isOn: $viewModel.showSelfSufficiencyEstimate) {
-                            Text("Show self sufficiency estimates")
-                        }
-
                         Toggle(isOn: $viewModel.showSunnyBackground) {
                             Text("Show sunshine background")
                         }
@@ -53,10 +49,24 @@ struct SettingsTabView: View {
                         Toggle(isOn: $viewModel.showInW) {
                             Text("Show values in Watts")
                         }
+
                     },
                     header: {
                         Text("Display")
                     })
+
+                Section {
+                    Picker("Self sufficiency estimates", selection: $viewModel.selfSufficiencyEstimateRawMode) {
+                        Text("Off").tag(0)
+                        Text("Net").tag(1)
+                        Text("Absolute").tag(2)
+                    }.pickerStyle(.segmented)
+
+                } header: {
+                    Text("Self sufficiency estimates")
+                } footer: {
+                    Text("Net")
+                }
 
                 Section(
                     content: {
@@ -141,8 +151,7 @@ struct SettingsTabView_Previews: PreviewProvider {
                 config: PreviewConfigManager(),
                 networking: DemoNetworking()),
             configManager: PreviewConfigManager(),
-            networking: DemoNetworking()
-        )
+            networking: DemoNetworking())
     }
 }
 #endif

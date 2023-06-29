@@ -28,7 +28,7 @@ public protocol ConfigManaging {
     var batteryCapacityW: Int { get }
     var isDemoUser: Bool { get set }
     var showColouredLines: Bool { get set }
-    var showSelfSufficiencyEstimate: Bool { get set }
+    var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode { get set }
     var showBatteryTemperature: Bool { get set }
     var showBatteryEstimate: Bool { get set }
     var showUsableBatteryOnly: Bool { get set }
@@ -67,7 +67,7 @@ public class ConfigManager: ConfigManaging {
                 showUsableBatteryOnly: config.showUsableBatteryOnly,
                 showInW: config.showInW,
                 showTotalYield: config.showTotalYield,
-                showSelfSufficiencyEstimate: config.showSelfSufficiencyEstimate
+                selfSufficiencyEstimateMode: config.selfSufficiencyEstimateMode
             )
         )
         selectedDeviceID = selectedDeviceID
@@ -275,12 +275,12 @@ public class ConfigManager: ConfigManaging {
         }
     }
 
-    public var showSelfSufficiencyEstimate: Bool {
-        get { config.showSelfSufficiencyEstimate }
+    public var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode {
+        get { config.selfSufficiencyEstimateMode }
         set {
-            config.showSelfSufficiencyEstimate = newValue
+            config.selfSufficiencyEstimateMode = newValue
             appTheme.send(appTheme.value.update(
-                showSelfSufficiencyEstimate: config.showSelfSufficiencyEstimate
+                selfSufficiencyEstimateMode: config.selfSufficiencyEstimateMode
             ))
         }
     }

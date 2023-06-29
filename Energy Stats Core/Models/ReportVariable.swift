@@ -13,6 +13,7 @@ public enum ReportVariable: String, RawRepresentable {
     case gridConsumption
     case chargeEnergyToTal
     case dischargeEnergyToTal
+    case loads
 
     public var networkTitle: String {
         switch self {
@@ -39,6 +40,8 @@ public enum ReportVariable: String, RawRepresentable {
             self = .chargeEnergyToTal
         case "dischargeEnergyToTal":
             self = .dischargeEnergyToTal
+        case "loads":
+            self = .loads
         default:
             return nil
         }
@@ -58,6 +61,8 @@ public enum ReportVariable: String, RawRepresentable {
             return String(localized: "Discharge ") + usage.title()
         case .gridConsumption:
             return String(localized: "Grid consumption ") + usage.title()
+        case .loads:
+            return String(localized: "Loads ") + usage.title()
         }
     }
 
@@ -78,6 +83,8 @@ public enum ReportVariable: String, RawRepresentable {
             return .blue.opacity(0.8)
         case .gridConsumption:
             return .red.opacity(0.8)
+        case .loads:
+            return .black.opacity(0.8)
         }
     }
 }

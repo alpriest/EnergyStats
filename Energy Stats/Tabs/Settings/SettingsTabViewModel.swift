@@ -16,9 +16,9 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
-    @Published var showSelfSufficiencyEstimate: Bool {
+    @Published var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode {
         didSet {
-            config.showSelfSufficiencyEstimate = showSelfSufficiencyEstimate
+            config.selfSufficiencyEstimateMode = selfSufficiencyEstimateMode
         }
     }
 
@@ -74,6 +74,11 @@ class SettingsTabViewModel: ObservableObject {
 
     @Published var hasBattery: Bool
     @Published var firmwareVersions: DeviceFirmwareVersion?
+    @Published var selfSufficiencyEstimateRawMode = 0 {
+        didSet {
+            config.selfSufficiencyEstimateMode = SelfSufficiencyEstimateMode(rawValue: selfSufficiencyEstimateRawMode) ?? .off
+        }
+    }
 
     private var config: ConfigManaging
     private let userManager: UserManager
@@ -97,7 +102,7 @@ class SettingsTabViewModel: ObservableObject {
         hasBattery = config.hasBattery
         firmwareVersions = config.firmwareVersions
         showTotalYield = config.showTotalYield
-        showSelfSufficiencyEstimate = config.showSelfSufficiencyEstimate
+        selfSufficiencyEstimateMode = config.selfSufficiencyEstimateMode
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }

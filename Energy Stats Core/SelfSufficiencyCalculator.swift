@@ -7,14 +7,29 @@
 
 import Foundation
 
-public final class SelfSufficiencyCalculator {
-    public init() {}
+public enum NetSelfSufficiencyCalculator {
+    public static func calculate(grid: Double, feedIn: Double, loads: Double, batteryCharge: Double, batteryDischarge: Double) -> Double {
+        let netGeneration = feedIn - grid + batteryCharge - batteryDischarge
+        let homeConsumption = loads
 
-    public func calculate(generation: Double, feedIn: Double, grid: Double, batteryCharge: Double, batteryDischarge: Double) -> Double {
-        let homeConsumption = generation - feedIn + grid + batteryDischarge - batteryCharge
-        let selfServedPower = generation + batteryDischarge
+        var result: Double = 0
+        if netGeneration > 0 {
+            result = 1
+        } else if netGeneration < 0 {
+            result = 0
+        } else if netGeneration + homeConsumption > 0 {
+            result = (netGeneration + homeConsumption) / homeConsumption
+        }
 
-        let result = max(0.0, min(1.0, (selfServedPower / homeConsumption))) - (grid / homeConsumption)
+        return result.rounded(decimalPlaces: 3)
+    }
+}
+
+public enum AbsoluteSelfSufficiencyCalculator {
+    public static func calculate(loads: Double, grid: Double) -> Double {
+        guard loads > 0 else { return 0 }
+
+        let result = 1 - (min(loads, max(grid, 0)) / loads)
 
         return result.rounded(decimalPlaces: 3)
     }
