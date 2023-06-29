@@ -4,4 +4,7 @@
    <FileRef
       location = "container:Energy Stats.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:Energy Stats Core/Energy Stats Core.xctestplan">
+   </FileRef>
 </Workspace>

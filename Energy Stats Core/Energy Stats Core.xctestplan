@@ -1,0 +1,25 @@
+{
+  "configurations" : [
+    {
+      "id" : "AF49F7C1-6B68-44D2-A6AD-530459B8B550",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Energy Stats.xcodeproj",
+        "identifier" : "413B7A352A4A397000562A68",
+        "name" : "Energy Stats Core Tests"
+      }
+    }
+  ],
+  "version" : 1
+}

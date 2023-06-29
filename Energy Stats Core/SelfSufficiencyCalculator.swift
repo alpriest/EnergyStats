@@ -15,7 +15,7 @@ public enum NetSelfSufficiencyCalculator {
         var result: Double = 0
         if netGeneration > 0 {
             result = 1
-        } else if netGeneration < 0 {
+        } else if netGeneration + homeConsumption < 0 {
             result = 0
         } else if netGeneration + homeConsumption > 0 {
             result = (netGeneration + homeConsumption) / homeConsumption
