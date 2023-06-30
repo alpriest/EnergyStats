@@ -21,16 +21,16 @@ public enum NetSelfSufficiencyCalculator {
             result = (netGeneration + homeConsumption) / homeConsumption
         }
 
-        return result.rounded(decimalPlaces: 3)
+        return result.rounded(decimalPlaces: 4)
     }
 }
 
 public enum AbsoluteSelfSufficiencyCalculator {
     public static func calculate(loads: Double, grid: Double) -> Double {
-        guard loads > 0 else { return 0 }
+        guard loads > 0 else { return 0.0 }
 
-        let result = 1 - (min(loads, max(grid, 0)) / loads)
+        let result = 1 - (min(loads, max(grid, 0.0)) / loads)
 
-        return result.rounded(decimalPlaces: 3)
+        return result.rounded(decimalPlaces: 4)
     }
 }
