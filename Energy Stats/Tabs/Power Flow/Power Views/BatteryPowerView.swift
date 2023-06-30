@@ -52,7 +52,7 @@ struct BatteryPowerViewModel {
 struct BatteryPowerView: View {
     let viewModel: BatteryPowerViewModel
     @Binding var iconFooterSize: CGSize
-    @State private var percentage = true
+    @AppStorage("showBatteryAsPercentage") private var percentage: Bool = false
     let appTheme: AppTheme
 
     var body: some View {
