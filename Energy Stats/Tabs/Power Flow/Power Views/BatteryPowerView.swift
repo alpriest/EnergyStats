@@ -9,6 +9,14 @@ import Combine
 import Energy_Stats_Core
 import SwiftUI
 
+struct BatterySizePreferenceKey: PreferenceKey {
+    static var defaultValue: CGSize = .zero
+
+    static func reduce(value: inout CGSize, nextValue: () -> CGSize) {
+        defaultValue = nextValue()
+    }
+}
+
 struct BatteryPowerViewModel {
     private let actualBatteryStateOfCharge: Double
     private(set) var batteryChargekWh: Double
