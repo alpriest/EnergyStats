@@ -8,47 +8,6 @@
 import Energy_Stats_Core
 import SwiftUI
 
-class ParameterGraphHeaderViewModel: ObservableObject {
-    @Published var hours: Int = 24 {
-        didSet {
-            updateDisplayMode()
-        }
-    }
-    @Binding private var displayMode: GraphDisplayMode
-    @Published var candidateQueryDate = Date() {
-        didSet {
-            updateDisplayMode()
-        }
-    }
-    @Published var canChangeHours: Bool = true
-    private var isInitialised = false
-
-    init(displayMode: Binding<GraphDisplayMode>) {
-        self._displayMode = displayMode
-        self.candidateQueryDate = displayMode.wrappedValue.date
-        self.hours = displayMode.wrappedValue.hours
-
-        isInitialised = true
-    }
-
-    func decrease() {
-        hours = 24
-        candidateQueryDate = candidateQueryDate.addingTimeInterval(-86400)
-    }
-
-    func increase() {
-        hours = 24
-        candidateQueryDate = candidateQueryDate.addingTimeInterval(86400)
-    }
-
-    func updateDisplayMode() {
-        Task { @MainActor in
-            displayMode = .init(date: candidateQueryDate, hours: hours)
-            canChangeHours = Calendar.current.isDate(candidateQueryDate, inSameDayAs: .now)
-        }
-    }
-}
-
 @available(iOS 16.0, *)
 struct ParameterGraphHeaderView: View {
     @StateObject var viewModel: ParameterGraphHeaderViewModel
@@ -109,7 +68,9 @@ struct ParameterGraphHeaderView: View {
                 } label: {
                     Image(systemName: "chevron.right")
                         .frame(minWidth: 22)
-                }.buttonStyle(.bordered)
+                }
+                .buttonStyle(.bordered)
+                .disabled(!viewModel.canIncrease)
             }
         }
         .padding(.horizontal)
