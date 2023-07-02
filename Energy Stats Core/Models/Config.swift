@@ -21,6 +21,7 @@ public protocol Config {
     var showInW: Bool { get set }
     var showTotalYield: Bool { get set }
     var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode { get set }
+    var showEarnings: Bool { get set }
 }
 
 extension UserDefaults {
@@ -99,7 +100,7 @@ public class UserDefaultsConfig: Config {
     @UserDefaultsStoredBool(key: "showUsableBatteryOnly", defaultValue: false)
     public var showUsableBatteryOnly: Bool
 
-    @UserDefaultsStoredBool(key: "showTotalYield", defaultValue: true)
+    @UserDefaultsStoredBool(key: "showTotalYield", defaultValue: false)
     public var showTotalYield: Bool
 
     @UserDefaultsStoredData(key: "devices")
@@ -113,13 +114,16 @@ public class UserDefaultsConfig: Config {
 
     public var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode {
         get {
-            let rawValue = (UserDefaults.shared.integer(forKey: "selfSufficiencyEstimateMode") as? Int) ?? 0
+            let rawValue = UserDefaults.shared.integer(forKey: "selfSufficiencyEstimateMode")
             return SelfSufficiencyEstimateMode(rawValue: rawValue) ?? .off
         }
         set {
             UserDefaults.shared.set(newValue.rawValue, forKey: "selfSufficiencyEstimateMode")
         }
     }
+
+    @UserDefaultsStoredBool(key: "showEarnings", defaultValue: false)
+    public var showEarnings: Bool
 }
 
 @propertyWrapper

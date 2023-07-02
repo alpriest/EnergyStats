@@ -22,10 +22,12 @@ class DatePickerViewModel: ObservableObject {
     @Published var year = 0 {
         didSet { updateDisplayMode() }
     }
+
     @Published var date = Date.now {
         didSet { updateDisplayMode() }
     }
-    var yearRange = 2000...(Calendar.current.component(.year, from: .now))
+
+    var yearRange = 2000 ... (Calendar.current.component(.year, from: .now))
     @Published var canIncrease = false
 
     @MainActor @Binding var displayMode: StatsDisplayMode
@@ -99,7 +101,17 @@ class DatePickerViewModel: ObservableObject {
                 displayMode = updatedDisplayMode
             }
 
-            canIncrease = !Calendar.current.isDate(date, inSameDayAs: Date())
+            switch displayMode {
+            case .day(let date):
+                canIncrease = !Calendar.current.isDate(date, inSameDayAs: Date())
+            case .month(let month, let year):
+                let currentMonth = Calendar.current.component(.month, from: Date()) - 1
+                let currentYear = Calendar.current.component(.year, from: Date())
+                canIncrease = (month < currentMonth && year <= currentYear) || month == 11 && currentMonth == 0
+            case .year(let year):
+                let currentYear = Calendar.current.component(.year, from: Date())
+                canIncrease = year < currentYear
+            }
         }
     }
 
@@ -114,4 +126,3 @@ class DatePickerViewModel: ObservableObject {
         }
     }
 }
-

@@ -55,6 +55,14 @@ struct SettingsTabView: View {
                         Text("Display")
                     })
 
+                Section {
+                    Toggle(isOn: $viewModel.showEarnings) {
+                        Text("Show estimated earnings")
+                    }
+                } footer: {
+                    Text("Shows earnings today, this month, this year, and all-time based on a crude calculation of feed-in ｘ price as configured on FoxESS cloud.")
+                }
+
                 SelfSufficiencySettingsView(mode: $viewModel.selfSufficiencyEstimateMode)
 
                 Section(

@@ -72,6 +72,12 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
+    @Published var showEarnings: Bool {
+        didSet {
+            config.showEarnings = showEarnings
+        }
+    }
+
     @Published var hasBattery: Bool
     @Published var firmwareVersions: DeviceFirmwareVersion?
 
@@ -98,6 +104,7 @@ class SettingsTabViewModel: ObservableObject {
         firmwareVersions = config.firmwareVersions
         showTotalYield = config.showTotalYield
         selfSufficiencyEstimateMode = config.selfSufficiencyEstimateMode
+        showEarnings = config.showEarnings
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }

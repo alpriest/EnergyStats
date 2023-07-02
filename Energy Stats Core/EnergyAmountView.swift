@@ -86,7 +86,8 @@ public extension AppTheme {
             showUsableBatteryOnly: false,
             showInW: showInW,
             showTotalYield: false,
-            selfSufficiencyEstimateMode: .off
+            selfSufficiencyEstimateMode: .off,
+            showEarnings: false
         )
     }
 }

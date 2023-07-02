@@ -24,7 +24,7 @@ struct ParametersGraphTabView: View {
     var body: some View {
         Group {
             VStack {
-                ParameterGraphHeaderView(displayMode: $viewModel.displayMode, showingVariables: $showingVariables)
+                ParameterGraphHeaderView(viewModel: ParameterGraphHeaderViewModel(displayMode: $viewModel.displayMode), showingVariables: $showingVariables)
                     .padding(.horizontal)
 
                 ScrollView {

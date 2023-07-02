@@ -16,8 +16,9 @@ public struct HomePowerFlowViewModel: Equatable {
     public let hasBattery: Bool
     public let batteryTemperature: Double
     public let todaysGeneration: Double
+    public let earnings: String
 
-    public init(solar: Double, battery: Double, home: Double, grid: Double, batteryStateOfCharge: Double, hasBattery: Bool, batteryTemperature: Double, todaysGeneration: Double) {
+    public init(solar: Double, battery: Double, home: Double, grid: Double, batteryStateOfCharge: Double, hasBattery: Bool, batteryTemperature: Double, todaysGeneration: Double, earnings: String) {
         self.solar = solar
         self.battery = battery
         self.home = home
@@ -26,6 +27,7 @@ public struct HomePowerFlowViewModel: Equatable {
         self.hasBattery = hasBattery
         self.batteryTemperature = batteryTemperature
         self.todaysGeneration = todaysGeneration
+        self.earnings = earnings
     }
 
     public static func ==(lhs: HomePowerFlowViewModel, rhs: HomePowerFlowViewModel) -> Bool {
@@ -41,6 +43,6 @@ public struct HomePowerFlowViewModel: Equatable {
 
 extension HomePowerFlowViewModel {
     public static func empty() -> Self {
-        .init(solar: 0, battery: 0, home: 0, grid: 0, batteryStateOfCharge: 0, hasBattery: false, batteryTemperature: 15.6, todaysGeneration: 8.05)
+        .init(solar: 0, battery: 0, home: 0, grid: 0, batteryStateOfCharge: 0, hasBattery: false, batteryTemperature: 0.0, todaysGeneration: 0.0, earnings: "")
     }
 }

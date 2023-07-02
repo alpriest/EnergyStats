@@ -8,7 +8,11 @@
 import Foundation
 
 public struct EarningsResponse: Decodable {
+    public let currency: String
     public let today: Earning
+    public let month: Earning
+    public let year: Earning
+    public let cumulate: Earning
 
     public struct Earning: Decodable {
         public let generation: Double

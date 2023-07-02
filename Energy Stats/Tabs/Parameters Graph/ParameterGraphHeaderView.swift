@@ -8,20 +8,51 @@
 import Energy_Stats_Core
 import SwiftUI
 
-@available(iOS 16.0, *)
-struct ParameterGraphHeaderView: View {
-    @State private var hours: Int = 24
-    @Binding var displayMode: GraphDisplayMode
-    @State private var candidateQueryDate = Date()
-    @Binding var showingVariables: Bool
+class ParameterGraphHeaderViewModel: ObservableObject {
+    @Published var hours: Int = 24 {
+        didSet {
+            updateDisplayMode()
+        }
+    }
+    @Binding private var displayMode: GraphDisplayMode
+    @Published var candidateQueryDate = Date() {
+        didSet {
+            updateDisplayMode()
+        }
+    }
+    @Published var canChangeHours: Bool = true
+    private var isInitialised = false
 
-    init(displayMode: Binding<GraphDisplayMode>, showingVariables: Binding<Bool>) {
+    init(displayMode: Binding<GraphDisplayMode>) {
         self._displayMode = displayMode
-        self._showingVariables = showingVariables
-
         self.candidateQueryDate = displayMode.wrappedValue.date
         self.hours = displayMode.wrappedValue.hours
+
+        isInitialised = true
     }
+
+    func decrease() {
+        hours = 24
+        candidateQueryDate = candidateQueryDate.addingTimeInterval(-86400)
+    }
+
+    func increase() {
+        hours = 24
+        candidateQueryDate = candidateQueryDate.addingTimeInterval(86400)
+    }
+
+    func updateDisplayMode() {
+        Task { @MainActor in
+            displayMode = .init(date: candidateQueryDate, hours: hours)
+            canChangeHours = Calendar.current.isDate(candidateQueryDate, inSameDayAs: .now)
+        }
+    }
+}
+
+@available(iOS 16.0, *)
+struct ParameterGraphHeaderView: View {
+    @StateObject var viewModel: ParameterGraphHeaderViewModel
+    @Binding var showingVariables: Bool
 
     var body: some View {
         Group {
@@ -35,31 +66,28 @@ struct ParameterGraphHeaderView: View {
                 .buttonStyle(.bordered)
                 .accessibilityIdentifier("variable_chooser")
 
-                DatePicker("Choose date", selection: $candidateQueryDate, displayedComponents: .date)
+                DatePicker("Choose date", selection: $viewModel.candidateQueryDate, displayedComponents: .date)
                     .datePickerStyle(.compact)
                     .frame(height: 23)
                     .labelsHidden()
 
                 Menu {
                     Button {
-                        hours = 6
-                        displayMode = .init(date: candidateQueryDate, hours: hours)
+                        viewModel.hours = 6
                     } label: {
-                        Label("6 hours", systemImage: hours == 6 ? "checkmark" : "")
+                        Label("6 hours", systemImage: viewModel.hours == 6 ? "checkmark" : "")
                     }
 
                     Button {
-                        hours = 12
-                        displayMode = .init(date: candidateQueryDate, hours: hours)
+                        viewModel.hours = 12
                     } label: {
-                        Label("12 hours", systemImage: hours == 12 ? "checkmark" : "")
+                        Label("12 hours", systemImage: viewModel.hours == 12 ? "checkmark" : "")
                     }
 
                     Button {
-                        hours = 24
-                        displayMode = .init(date: candidateQueryDate, hours: hours)
+                        viewModel.hours = 24
                     } label: {
-                        Label("24 hours", systemImage: hours == 24 ? "checkmark" : "")
+                        Label("24 hours", systemImage: viewModel.hours == 24 ? "checkmark" : "")
                     }
                 } label: {
                     NonFunctionalButton {
@@ -67,26 +95,21 @@ struct ParameterGraphHeaderView: View {
                             .frame(minWidth: 22)
                     }
                 }
-                .disabled(!Calendar.current.isDate(candidateQueryDate, inSameDayAs: .now))
+                .disabled(!viewModel.canChangeHours)
 
                 Button {
-                    hours = 24
-                    candidateQueryDate = candidateQueryDate.addingTimeInterval(-86400)
+                    viewModel.decrease()
                 } label: {
                     Image(systemName: "chevron.left")
                         .frame(minWidth: 22)
                 }.buttonStyle(.bordered)
 
                 Button {
-                    hours = 24
-                    candidateQueryDate = candidateQueryDate.addingTimeInterval(86400)
+                    viewModel.increase()
                 } label: {
                     Image(systemName: "chevron.right")
                         .frame(minWidth: 22)
                 }.buttonStyle(.bordered)
-            }
-            .onChange(of: candidateQueryDate) { newValue in
-                displayMode = .init(date: newValue, hours: hours)
             }
         }
         .padding(.horizontal)
@@ -97,7 +120,7 @@ struct ParameterGraphHeaderView: View {
 struct GraphHeaderView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            ParameterGraphHeaderView(displayMode: .constant(GraphDisplayMode(date: .now, hours: 6)), showingVariables: .constant(false))
+            ParameterGraphHeaderView(viewModel: ParameterGraphHeaderViewModel(displayMode: .constant(.init(date: .now, hours: 6))), showingVariables: .constant(false))
         }
     }
 }

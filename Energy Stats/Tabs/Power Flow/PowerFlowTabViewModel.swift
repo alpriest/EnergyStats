@@ -133,8 +133,7 @@ class PowerFlowTabViewModel: ObservableObject {
                 do {
                     let response = try await self.network.fetchBattery(deviceID: currentDevice.deviceID)
                     battery = BatteryViewModel(from: response)
-                } catch {
-                }
+                } catch {}
             }
 
             let summary = HomePowerFlowViewModel(solar: currentViewModel.currentSolarPower,
@@ -144,7 +143,8 @@ class PowerFlowTabViewModel: ObservableObject {
                                                  batteryStateOfCharge: battery.chargeLevel,
                                                  hasBattery: battery.hasBattery,
                                                  batteryTemperature: battery.temperature,
-                                                 todaysGeneration: earnings.today.generation)
+                                                 todaysGeneration: earnings.today.generation,
+                                                 earnings: self.makeEarnings(earnings))
 
             self.state = .loaded(.empty()) // refreshes the marching ants line speed
             try await Task.sleep(nanoseconds: 1000)
@@ -196,5 +196,9 @@ class PowerFlowTabViewModel: ObservableObject {
         do {
             try await Task.sleep(nanoseconds: 1_000_000_000)
         } catch {}
+    }
+
+    private func makeEarnings(_ response: EarningsResponse) -> String {
+        return "\(response.currency) \(response.today.earnings.rounded(decimalPlaces: 2)), \(response.month.earnings.rounded(decimalPlaces: 2)), \(response.year.earnings.rounded(decimalPlaces: 2)), \(response.cumulate.earnings.rounded(decimalPlaces: 2))"
     }
 }

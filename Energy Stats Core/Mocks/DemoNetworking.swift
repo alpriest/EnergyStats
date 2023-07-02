@@ -139,6 +139,7 @@ public class MockConfig: Config {
     public var showInW: Bool = false
     public var showTotalYield: Bool = false
     public var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode = .off
+    public var showEarnings: Bool = false
 }
 
 public class PreviewConfigManager: ConfigManager {

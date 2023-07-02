@@ -44,6 +44,7 @@ public protocol ConfigManaging {
     var variables: [RawVariable] { get }
     var currentDevice: CurrentValueSubject<Device?, Never> { get }
     var hasBattery: Bool { get }
+    var showEarnings: Bool { get set }
 }
 
 public class ConfigManager: ConfigManaging {
@@ -67,7 +68,8 @@ public class ConfigManager: ConfigManaging {
                 showUsableBatteryOnly: config.showUsableBatteryOnly,
                 showInW: config.showInW,
                 showTotalYield: config.showTotalYield,
-                selfSufficiencyEstimateMode: config.selfSufficiencyEstimateMode
+                selfSufficiencyEstimateMode: config.selfSufficiencyEstimateMode,
+                showEarnings: config.showEarnings
             )
         )
         selectedDeviceID = selectedDeviceID
@@ -301,6 +303,16 @@ public class ConfigManager: ConfigManaging {
             config.showInW = newValue
             appTheme.send(appTheme.value.update(
                 showInW: config.showInW
+            ))
+        }
+    }
+
+    public var showEarnings: Bool {
+        get { config.showEarnings }
+        set {
+            config.showEarnings = newValue
+            appTheme.send(appTheme.value.update(
+                showEarnings: config.showEarnings
             ))
         }
     }
