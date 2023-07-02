@@ -35,6 +35,7 @@ class ParametersGraphTabViewModel: ObservableObject {
     @Published private(set) var stride = 3
     @Published private(set) var data: [ParameterGraphValue] = []
     @Published var graphVariables: [ParameterGraphVariable] = []
+    @Published var graphVariableBounds: [ParameterGraphBounds] = []
     private var queryDate = QueryDate.current()
     private var hours: Int = 24
     private var max: ParameterGraphValue?
@@ -140,6 +141,20 @@ class ParametersGraphTabViewModel: ObservableObject {
         max = refreshedData.max(by: { lhs, rhs in
             lhs.value < rhs.value
         })
+
+        graphVariableBounds = graphVariables.map { variable in
+            let variableData = refreshedData.filter({ $0.type == variable.type })
+
+            let min = variableData.min(by: { lhs, rhs in
+                lhs.value < rhs.value
+            })?.value
+            let max = variableData.max(by: { lhs, rhs in
+                lhs.value < rhs.value
+            })?.value
+
+            return ParameterGraphBounds(type: variable.type, min: min, max: max)
+        }
+
         data = refreshedData
     }
 

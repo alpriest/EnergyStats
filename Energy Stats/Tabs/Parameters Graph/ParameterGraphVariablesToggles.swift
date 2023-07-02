@@ -41,6 +41,9 @@ struct ParameterGraphVariablesToggles: View {
 
                                 if let valuesAtTime, let graphValue = valuesAtTime.values.first(where: { $0.type == variable.type }) {
                                     Text(graphValue.formatted())
+                                } else if let bounds = viewModel.graphVariableBounds.first(where: { $0.type == variable.type }) {
+                                    ValueBoundsView(value: bounds.min, type: .min)
+                                    ValueBoundsView(value: bounds.max, type: .max)
                                 }
                             }
                             .opacity(variable.enabled ? 1.0 : 0.5)

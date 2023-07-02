@@ -71,7 +71,7 @@ public extension RawVariable {
         case "feedinPower":
             return .purple.opacity(0.8)
         case "loadsPower":
-            return .black.opacity(0.2)
+            return Color("loads_power").opacity(0.2)
         default:
             if let md5 = self.variable.md5() {
                 return Color(hex: String(md5.prefix(6)))

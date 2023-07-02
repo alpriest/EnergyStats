@@ -505,6 +505,107 @@
           "value": 0
         }
       ]
+    },
+    {
+      "variable": "loads",
+      "data": [
+        {
+          "index": 1,
+          "value": 0.20000000000027285
+        },
+        {
+          "index": 2,
+          "value": 0.09999999999990905
+        },
+        {
+          "index": 3,
+          "value": 0.1999999999998181
+        },
+        {
+          "index": 4,
+          "value": 0.09999999999990905
+        },
+        {
+          "index": 5,
+          "value": 0.20000000000027285
+        },
+        {
+          "index": 6,
+          "value": 0.09999999999990905
+        },
+        {
+          "index": 7,
+          "value": 0.1999999999998181
+        },
+        {
+          "index": 8,
+          "value": 0.20000000000027285
+        },
+        {
+          "index": 9,
+          "value": 0
+        },
+        {
+          "index": 10,
+          "value": 0
+        },
+        {
+          "index": 11,
+          "value": 0
+        },
+        {
+          "index": 12,
+          "value": 0
+        },
+        {
+          "index": 13,
+          "value": 0
+        },
+        {
+          "index": 14,
+          "value": 0
+        },
+        {
+          "index": 15,
+          "value": 0
+        },
+        {
+          "index": 16,
+          "value": 0
+        },
+        {
+          "index": 17,
+          "value": 0
+        },
+        {
+          "index": 18,
+          "value": 0
+        },
+        {
+          "index": 19,
+          "value": 0
+        },
+        {
+          "index": 20,
+          "value": 0
+        },
+        {
+          "index": 21,
+          "value": 0
+        },
+        {
+          "index": 22,
+          "value": 0
+        },
+        {
+          "index": 23,
+          "value": 0
+        },
+        {
+          "index": 24,
+          "value": 0
+        }
+      ]
     }
   ]
 }

@@ -54,3 +54,9 @@ struct ParameterGraphValue: Identifiable {
         }
     }
 }
+
+struct ParameterGraphBounds {
+    let type: RawVariable
+    let min: Double?
+    let max: Double?
+}
