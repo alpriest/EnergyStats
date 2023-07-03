@@ -23,9 +23,9 @@ struct BatteryPowerViewModel {
     private let calculator: BatteryCapacityCalculator
     private(set) var temperature: Double
     private let configManager: ConfigManaging
-    let residual: Double
+    let residual: Int
 
-    init(configManager: ConfigManaging, batteryStateOfCharge: Double, batteryChargekWH: Double, temperature: Double, batteryResidual: Double) {
+    init(configManager: ConfigManaging, batteryStateOfCharge: Double, batteryChargekWH: Double, temperature: Double, batteryResidual: Int) {
         actualBatteryStateOfCharge = batteryStateOfCharge
         self.batteryChargekWh = batteryChargekWH
         self.temperature = temperature
@@ -44,7 +44,7 @@ struct BatteryPowerViewModel {
     }
 
     var batteryStoredChargekWh: Double {
-        residual / 1000.0
+        Double(residual) / 1000.0
     }
 
     var batteryStateOfCharge: Double {

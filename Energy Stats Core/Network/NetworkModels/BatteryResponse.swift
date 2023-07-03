@@ -10,7 +10,7 @@ import Foundation
 public struct BatteryResponse: Decodable {
     public let power: Double
     public let soc: Int
-    public let residual: Double
+    public let residual: Int
     public let temperature: Double
 }
 

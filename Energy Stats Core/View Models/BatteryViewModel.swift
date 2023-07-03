@@ -12,7 +12,7 @@ public struct BatteryViewModel: Sendable {
     public let chargeLevel: Double
     public let chargePower: Double
     public let temperature: Double
-    public let residual: Double
+    public let residual: Int
 
     public init(from battery: BatteryResponse) {
         chargeLevel = Double(battery.soc) / 100.0
