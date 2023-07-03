@@ -143,6 +143,7 @@ class PowerFlowTabViewModel: ObservableObject {
                                                  batteryStateOfCharge: battery.chargeLevel,
                                                  hasBattery: battery.hasBattery,
                                                  batteryTemperature: battery.temperature,
+                                                 batteryResidual: battery.residual,
                                                  todaysGeneration: earnings.today.generation,
                                                  earnings: self.makeEarnings(earnings))
 

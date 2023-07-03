@@ -85,7 +85,7 @@ public class UserDefaultsConfig: Config {
     @UserDefaultsStoredBool(key: "showBatteryTemperature")
     public var showBatteryTemperature: Bool
 
-    @UserDefaultsStoredBool(key: "showBatteryEstimate")
+    @UserDefaultsStoredBool(key: "showBatteryEstimate", defaultValue: true)
     public var showBatteryEstimate: Bool
 
     @UserDefaultsStoredInt(key: "refreshFrequency")
@@ -109,7 +109,7 @@ public class UserDefaultsConfig: Config {
     @UserDefaultsStoredString(key: "selectedDeviceID")
     public var selectedDeviceID: String?
 
-    @UserDefaultsStoredBool(key: "showInW", defaultValue: true)
+    @UserDefaultsStoredBool(key: "showInW", defaultValue: false)
     public var showInW: Bool
 
     public var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode {

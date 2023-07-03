@@ -52,7 +52,7 @@ struct SelfSufficiencyEstimateView: View {
                 VStack {
                     OptionalView(estimate) { estimate in
                         HStack {
-                            Text("Self sufficiency ")
+                            Text("Self sufficiency")
                             Spacer()
                             Text(estimate)
                         }
@@ -60,7 +60,7 @@ struct SelfSufficiencyEstimateView: View {
 
                     if let home = viewModel.homeUsage {
                         HStack {
-                            Text("Home usage ")
+                            Text("Home usage")
                             Spacer()
                             EnergyText(amount: home, appTheme: appTheme)
                         }

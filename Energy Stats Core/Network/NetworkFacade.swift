@@ -21,17 +21,17 @@ public class NetworkFacade: Networking {
     public func ensureHasToken() async {
         if config.isDemoUser {
             await fakeNetwork.ensureHasToken()
+        } else {
+            await network.ensureHasToken()
         }
-
-        await network.ensureHasToken()
     }
 
     public func verifyCredentials(username: String, hashedPassword: String) async throws {
         if config.isDemoUser {
             try await fakeNetwork.verifyCredentials(username: username, hashedPassword: hashedPassword)
+        } else {
+            try await network.verifyCredentials(username: username, hashedPassword: hashedPassword)
         }
-
-        try await network.verifyCredentials(username: username, hashedPassword: hashedPassword)
     }
 
     public func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [ReportResponse] {

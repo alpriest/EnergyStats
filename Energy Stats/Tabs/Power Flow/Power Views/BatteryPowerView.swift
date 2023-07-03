@@ -23,12 +23,14 @@ struct BatteryPowerViewModel {
     private let calculator: BatteryCapacityCalculator
     private(set) var temperature: Double
     private let configManager: ConfigManaging
+    let residual: Double
 
-    init(configManager: ConfigManaging, batteryStateOfCharge: Double, batteryChargekWH: Double, temperature: Double) {
+    init(configManager: ConfigManaging, batteryStateOfCharge: Double, batteryChargekWH: Double, temperature: Double, batteryResidual: Double) {
         actualBatteryStateOfCharge = batteryStateOfCharge
         self.batteryChargekWh = batteryChargekWH
         self.temperature = temperature
         self.configManager = configManager
+        self.residual = batteryResidual
 
         calculator = BatteryCapacityCalculator(capacityWh: configManager.batteryCapacityW,
                                                minimumSOC: configManager.minSOC)
@@ -42,10 +44,7 @@ struct BatteryPowerViewModel {
     }
 
     var batteryStoredChargekWh: Double {
-        calculator.currentEstimatedChargeAmountWh(
-            batteryStateOfCharge: actualBatteryStateOfCharge,
-            includeUnusableCapacity: !configManager.showUsableBatteryOnly
-        ) / 1000.0
+        residual / 1000.0
     }
 
     var batteryStateOfCharge: Double {
@@ -60,7 +59,7 @@ struct BatteryPowerViewModel {
 struct BatteryPowerView: View {
     let viewModel: BatteryPowerViewModel
     @Binding var iconFooterSize: CGSize
-    @AppStorage("showBatteryAsPercentage") private var percentage: Bool = false
+    @AppStorage("showBatteryAsResidual") private var batteryResidual: Bool = false
     let appTheme: AppTheme
 
     var body: some View {
@@ -71,13 +70,13 @@ struct BatteryPowerView: View {
                 .frame(width: 45, height: 45)
             VStack {
                 Group {
-                    if percentage {
-                        Text(viewModel.batteryStateOfCharge, format: .percent)
-                    } else {
+                    if batteryResidual {
                         EnergyText(amount: viewModel.batteryStoredChargekWh, appTheme: appTheme)
+                    } else {
+                        Text(viewModel.batteryStateOfCharge, format: .percent)
                     }
                 }.onTapGesture {
-                    percentage.toggle()
+                    batteryResidual.toggle()
                 }
 
                 if appTheme.showBatteryTemperature {
@@ -112,6 +111,6 @@ struct BatteryPowerView_Previews: PreviewProvider {
 
 extension BatteryPowerViewModel {
     static func any() -> BatteryPowerViewModel {
-        .init(configManager: PreviewConfigManager(), batteryStateOfCharge: 0.99, batteryChargekWH: -0.01, temperature: 15.6)
+        .init(configManager: PreviewConfigManager(), batteryStateOfCharge: 0.99, batteryChargekWH: -0.01, temperature: 15.6, batteryResidual: 5940)
     }
 }

@@ -87,7 +87,7 @@
 "reportvariable_chargeenergytotal" = "Leistung zum Laden der Batterie";
 "reportvariable_dischargeenergytotal" = "Leistung vom Entladen der Batterie";
 "reportvariable_gridconsumption" = "Leistung, die vom Netz bezogen wird";
-"rawvariable_pvpower" = "Die Leistung von alle PV-String in Kilowatt (kW)";
+"rawvariable_pvpower" = "Die Leistung von allen PV-Strings in Kilowatt (kW)";
 "rawvariable_generationpower" = "Solar-/Batterieleistung, die vom Wechselrichter geliefert wird";
 "rawvariable_feedinpower" = "Leistung, die zurück ins Netz eingespeist wird";
 "rawvariable_batchargepower" = "Leistung zum Laden der Batterie";
@@ -127,4 +127,14 @@
 "Apply" = "Anwenden";
 "Note that not all parameters contain values" = "Bitte beachten, dass nicht alle Parameter Werte enthalten";
 "Find out more about these variables" = "Mehr Informationen über diese Variablen";
-
+"reportvariable_loads" = "Leistung, die im Haus verbraucht wurde";
+"absolute_self_sufficiency" = "Annahme, dass jeder Strombezug vom Netz die Autarkie reduziert.\n\nAutarkie = Netzbezug / Hausverbrauch";
+"net_self_sufficiency" = "Annahme von Autarkie falls der Nettoverbrauch positiv ist.\n\nAutarkie = (Export - Import + Batterieladung - Batterieentladung) / Hausverbrauch";
+"Self sufficiency estimates" = "Autarkie-Schätzungen";
+"Off" = "Aus";
+"Net" = "Netto";
+"Absolute" = "Absolut";
+"Approximations" = "Schätzungen";
+"Self sufficiency" = "Autarkie";
+"Home usage" = "Hausverbrauch";
+"Export graph data" = "Graphdaten exportieren";

@@ -57,7 +57,13 @@ struct HomePowerFlowView: View {
 
             HStack {
                 if viewModel.hasBattery {
-                    BatteryPowerView(viewModel: BatteryPowerViewModel(configManager: configManager, batteryStateOfCharge: viewModel.batteryStateOfCharge, batteryChargekWH: viewModel.battery, temperature: viewModel.batteryTemperature), iconFooterSize: $iconFooterSize, appTheme: appTheme)
+                    BatteryPowerView(viewModel: BatteryPowerViewModel(configManager: configManager,
+                                                                      batteryStateOfCharge: viewModel.batteryStateOfCharge,
+                                                                      batteryChargekWH: viewModel.battery,
+                                                                      temperature: viewModel.batteryTemperature,
+                                                                      batteryResidual: viewModel.batteryResidual),
+                                     iconFooterSize: $iconFooterSize,
+                                     appTheme: appTheme)
                         .background(GeometryReader { reader in
                             Color.clear.preference(key: BatteryFlowSizePreferenceKey.self, value: reader.size)
                                 .onPreferenceChange(BatteryFlowSizePreferenceKey.self) { size in
@@ -102,6 +108,6 @@ struct PowerSummaryView_Previews: PreviewProvider {
 
 extension HomePowerFlowViewModel {
     static func any() -> HomePowerFlowViewModel {
-        .init(solar: 2.5, battery: -0.01, home: 1.5, grid: 0.71, batteryStateOfCharge: 0.99, hasBattery: true, batteryTemperature: 15.6, todaysGeneration: 8.5, earnings: "GBP(£) 1 / 5 / 99")
+        .init(solar: 2.5, battery: -0.01, home: 1.5, grid: 0.71, batteryStateOfCharge: 0.99, hasBattery: true, batteryTemperature: 15.6, batteryResidual: 5678, todaysGeneration: 8.5, earnings: "GBP(£) 1 / 5 / 99")
     }
 }
