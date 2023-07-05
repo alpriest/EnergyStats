@@ -89,7 +89,7 @@
 		418141452A12BABA00FFC6A6 /* StatsGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418141442A12BABA00FFC6A6 /* StatsGraphView.swift */; };
 		418199C72A4034530001B5D4 /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418199C62A4034530001B5D4 /* FAQView.swift */; };
 		418199CA2A4035F40001B5D4 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 418199C92A4035F40001B5D4 /* MarkdownUI */; };
-		418547492A3A1C7A000128C7 /* EnergyAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127690128EC865000D5A094 /* EnergyAmountView.swift */; };
+		418547492A3A1C7A000128C7 /* PowerAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127690128EC865000D5A094 /* PowerAmountView.swift */; };
 		4185474C2A3B1025000128C7 /* SunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4162BC2F2A097C1300DFEDC1 /* SunView.swift */; };
 		418EEEB52916843A006A8290 /* View+If.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418EEEB42916843A006A8290 /* View+If.swift */; };
 		41923E3C2916B8A800D1A8C5 /* battery-soc-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41923E3B2916B8A800D1A8C5 /* battery-soc-success.json */; };
@@ -212,7 +212,7 @@
 		410AA38729D96F6D00CD107C /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		4110065A28E890E40018C3DF /* GraphTabViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTabViewModelTests.swift; sourceTree = "<group>"; };
 		4111333529B7D61200972935 /* Sequence+aysnc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+aysnc.swift"; sourceTree = "<group>"; };
-		4127690128EC865000D5A094 /* EnergyAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnergyAmountView.swift; sourceTree = "<group>"; };
+		4127690128EC865000D5A094 /* PowerAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerAmountView.swift; sourceTree = "<group>"; };
 		412790FE28E1FB9200D5F993 /* UserManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManagerTests.swift; sourceTree = "<group>"; };
 		4127910128E1FBD300D5F993 /* MockKeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockKeychainStore.swift; sourceTree = "<group>"; };
 		4127910528E1FC1D00D5F993 /* MockNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworking.swift; sourceTree = "<group>"; };
@@ -708,7 +708,7 @@
 				41A95B9629DB3F6A00A35169 /* Energy_Stats_Core.h */,
 				4109140129DB7AB900133CC5 /* View Models */,
 				41A25D4228CA706700315714 /* CountdownTimer.swift */,
-				4127690128EC865000D5A094 /* EnergyAmountView.swift */,
+				4127690128EC865000D5A094 /* PowerAmountView.swift */,
 				4162BC2F2A097C1300DFEDC1 /* SunView.swift */,
 				410AA38729D96F6D00CD107C /* AppTheme.swift */,
 				4103D1E029DB6CB9001B0BC8 /* ConfigManager.swift */,
@@ -1141,7 +1141,7 @@
 				4103D1D929DB6C6D001B0BC8 /* ReportVariable.swift in Sources */,
 				4103D1D129DB6C51001B0BC8 /* Raw.swift in Sources */,
 				4103D1D829DB6C51001B0BC8 /* NetworkFacade.swift in Sources */,
-				418547492A3A1C7A000128C7 /* EnergyAmountView.swift in Sources */,
+				418547492A3A1C7A000128C7 /* PowerAmountView.swift in Sources */,
 				41F71ABD2A14FBEC00A8C81B /* Array+Safe.swift in Sources */,
 				4103D1D029DB6C51001B0BC8 /* Report.swift in Sources */,
 				4109140029DB7AB600133CC5 /* HomePowerFlowViewModel.swift in Sources */,
@@ -1403,7 +1403,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.42;
+				MARKETING_VERSION = 1.43;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1439,7 +1439,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.42;
+				MARKETING_VERSION = 1.43;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

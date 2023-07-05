@@ -34,7 +34,7 @@ struct PowerFlowView: View {
                     }
 
                     VStack {
-                        EnergyAmountView(amount: amount, backgroundColor: lineColor, textColor: textColor, appTheme: appTheme)
+                        PowerAmountView(amount: amount, backgroundColor: lineColor, textColor: textColor, appTheme: appTheme)
                             .font(.body.bold())
                     }
                 }

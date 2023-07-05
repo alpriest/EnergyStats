@@ -42,12 +42,10 @@ public class Network: Networking {
     }
 
     private let credentials: KeychainStoring
-    private let config: Config
     private let store: InMemoryLoggingNetworkStore
 
-    public init(credentials: KeychainStoring, config: Config, store: InMemoryLoggingNetworkStore) {
+    public init(credentials: KeychainStoring, store: InMemoryLoggingNetworkStore) {
         self.credentials = credentials
-        self.config = config
         self.store = store
     }
 

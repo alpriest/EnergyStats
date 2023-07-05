@@ -44,7 +44,7 @@ public struct EnergyText: View {
     }
 }
 
-public struct EnergyAmountView: View {
+public struct PowerAmountView: View {
     public let amount: Double
     public let backgroundColor: Color
     public let textColor: Color
@@ -59,7 +59,7 @@ public struct EnergyAmountView: View {
 
     public var body: some View {
         Group {
-            EnergyText(amount: amount, appTheme: appTheme)
+            PowerText(amount: amount, appTheme: appTheme)
         }
         .padding(3)
         .padding(.horizontal, 4)
@@ -71,7 +71,7 @@ public struct EnergyAmountView: View {
 
 struct EnergyAmountView_Previews: PreviewProvider {
     static var previews: some View {
-        EnergyAmountView(amount: 0.310, backgroundColor: .red, textColor: .black, appTheme: AppTheme.mock())
+        PowerAmountView(amount: 0.310, backgroundColor: .red, textColor: .black, appTheme: AppTheme.mock())
     }
 }
 
