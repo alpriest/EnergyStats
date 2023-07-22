@@ -1,2 +1,4 @@
 screenshots.html
 screenshots
+*.DS_Store
+*.xcuserstate
