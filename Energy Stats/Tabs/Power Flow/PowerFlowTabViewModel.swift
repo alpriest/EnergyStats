@@ -200,6 +200,6 @@ class PowerFlowTabViewModel: ObservableObject {
     }
 
     private func makeEarnings(_ response: EarningsResponse) -> String {
-        return "\(response.currency) \(response.today.earnings.roundedToString(decimalPlaces: 2)), \( response.month.earnings.roundedToString(decimalPlaces: 2)), \( response.year.earnings.roundedToString(decimalPlaces: 2)), \( response.cumulate.earnings.roundedToString(decimalPlaces: 2))"
+        return "\(response.currency) \(response.today.earnings.roundedToString(decimalPlaces: 2)), \(response.month.earnings.roundedToString(decimalPlaces: 2)), \(response.year.earnings.roundedToString(decimalPlaces: 2)), \(response.cumulate.earnings.roundedToString(decimalPlaces: 2))"
     }
 }
