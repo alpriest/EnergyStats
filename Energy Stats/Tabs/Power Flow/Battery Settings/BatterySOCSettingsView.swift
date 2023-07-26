@@ -5,20 +5,50 @@
 //  Created by Alistair Priest on 26/07/2023.
 //
 
+import Energy_Stats_Core
 import SwiftUI
 
+class BatterySOCSettingsViewModel: ObservableObject {
+    private let networking: Networking
+    private let config: ConfigManaging
+    @Published var soc: String = ""
+    @Published var socOnGrid: String = ""
+    @Published var errorMessage: String?
+
+    init(networking: Networking, config: ConfigManaging) {
+        self.networking = networking
+        self.config = config
+    }
+
+    func save() {
+        Task { @MainActor in
+            guard let soc = Int(soc), let socOnGrid = Int(socOnGrid), let deviceSN = config.currentDevice.value?.deviceSN else {
+                errorMessage = "Cannot save, please check values"
+                return
+            }
+
+            try await networking.setSoc(
+                minGridSOC: soc,
+                minSOC: socOnGrid,
+                deviceSN: deviceSN
+            )
+        }
+    }
+}
+
 struct BatterySOCSettingsView: View {
-    @Binding var soc: String
-    @Binding var socOnGrid: String
-    @State private var errorMessage: String?
+    @StateObject var viewModel: BatterySOCSettingsViewModel
+
+    init(networking: Networking, config: ConfigManaging) {
+        self._viewModel = StateObject(wrappedValue: BatterySOCSettingsViewModel(networking: networking, config: config))
+    }
 
     var body: some View {
         Section(
             content: {
                 HStack {
                     Text("Min SoC")
-                    TextField("Min SoC", text: $soc)
-                        .keyboardType(.numberPad)
+                    NumberTextField("Min SoC", text: $viewModel.soc)
                         .multilineTextAlignment(.trailing)
                     Text("%")
                 }
@@ -32,8 +62,7 @@ struct BatterySOCSettingsView: View {
             content: {
                 HStack {
                     Text("Min SoC on Grid")
-                    TextField("Min SoC on Grid", text: $socOnGrid)
-                        .keyboardType(.numberPad)
+                    NumberTextField("Min SoC on Grid", text: $viewModel.socOnGrid)
                         .multilineTextAlignment(.trailing)
                     Text("%")
                 }
@@ -51,12 +80,14 @@ struct BatterySOCSettingsView: View {
 
         Section(content: {}, footer: {
             VStack {
-                OptionalView(errorMessage) {
+                OptionalView(viewModel.errorMessage) {
                     Text($0)
                         .foregroundColor(Color.red)
                 }
 
-                Button(action: {}, label: {
+                Button(action: {
+                    viewModel.save()
+                }, label: {
                     Text("Save")
                         .frame(minWidth: 0, maxWidth: .infinity)
                 })
@@ -69,7 +100,8 @@ struct BatterySOCSettingsView: View {
 struct BatterySOCSettingsView_Previews: PreviewProvider {
     static var previews: some View {
         Form {
-            BatterySOCSettingsView(soc: .constant(""), socOnGrid: .constant(""))
+            BatterySOCSettingsView(networking: DemoNetworking(),
+                                   config: ConfigManager(networking: DemoNetworking(), config: MockConfig()))
         }
     }
 }

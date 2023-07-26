@@ -62,6 +62,8 @@ struct BatteryPowerView: View {
     @AppStorage("showBatteryAsResidual") private var batteryResidual: Bool = false
     let appTheme: AppTheme
     @State private var batterySettingsShowing = false
+    let networking: Networking
+    let config: ConfigManaging
 
     var body: some View {
         VStack {
@@ -103,9 +105,7 @@ struct BatteryPowerView: View {
                     }
             })
             .sheet(isPresented: $batterySettingsShowing) {
-                BatteryChargeSettingsView(soc: 20, socOnGrid: 10,
-                                          timePeriod1: ChargeTimePeriod(start: nil, end: nil, enabled: false),
-                                          timePeriod2: ChargeTimePeriod(start: nil, end: nil, enabled: false))
+                BatteryChargeSettingsView(networking: networking, config: config)
             }
         }
     }
@@ -114,7 +114,9 @@ struct BatteryPowerView: View {
 struct BatteryPowerView_Previews: PreviewProvider {
     static var previews: some View {
         BatteryPowerView(viewModel: BatteryPowerViewModel.any(), iconFooterSize: .constant(CGSize.zero),
-                         appTheme: AppTheme.mock())
+                         appTheme: AppTheme.mock(),
+                         networking: DemoNetworking(),
+                         config: ConfigManager(networking: DemoNetworking(), config: MockConfig()))
     }
 }
 
