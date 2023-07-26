@@ -33,7 +33,7 @@ struct ParametersGraphView: View {
                 if (value.index == 0) || (value.index % viewModel.stride == 0), let date = value.as(Date.self) {
                     AxisTick(centered: false)
                     AxisValueLabel(centered: false) {
-                        Text(date.militaryTime())
+                        Text(date.militaryTimeWithoutMinutes())
                     }
                 }
             }

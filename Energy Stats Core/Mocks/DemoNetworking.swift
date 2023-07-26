@@ -115,6 +115,9 @@ public class DemoNetworking: Networking {
 
         return try Data(contentsOf: url)
     }
+
+    public func setSoc(minGridSOC: Int, minSOC: Int, deviceSN: String) async throws {
+    }
 }
 
 public class MockConfig: Config {

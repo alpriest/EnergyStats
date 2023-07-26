@@ -27,10 +27,10 @@ struct BatteryPowerViewModel {
 
     init(configManager: ConfigManaging, batteryStateOfCharge: Double, batteryChargekWH: Double, temperature: Double, batteryResidual: Int) {
         actualBatteryStateOfCharge = batteryStateOfCharge
-        self.batteryChargekWh = batteryChargekWH
+        batteryChargekWh = batteryChargekWH
         self.temperature = temperature
         self.configManager = configManager
-        self.residual = batteryResidual
+        residual = batteryResidual
 
         calculator = BatteryCapacityCalculator(capacityWh: configManager.batteryCapacityW,
                                                minimumSOC: configManager.minSOC)
@@ -61,6 +61,7 @@ struct BatteryPowerView: View {
     @Binding var iconFooterSize: CGSize
     @AppStorage("showBatteryAsResidual") private var batteryResidual: Bool = false
     let appTheme: AppTheme
+    @State private var batterySettingsShowing = false
 
     var body: some View {
         VStack {
@@ -68,6 +69,9 @@ struct BatteryPowerView: View {
             Image(systemName: "minus.plus.batteryblock.fill")
                 .font(.system(size: 48))
                 .frame(width: 45, height: 45)
+                .onTapGesture {
+                    batterySettingsShowing.toggle()
+                }
             VStack {
                 Group {
                     if batteryResidual {
@@ -98,6 +102,11 @@ struct BatteryPowerView: View {
                         iconFooterSize = size
                     }
             })
+            .sheet(isPresented: $batterySettingsShowing) {
+                BatteryChargeSettingsView(soc: 20, socOnGrid: 10,
+                                          timePeriod1: ChargeTimePeriod(start: nil, end: nil, enabled: false),
+                                          timePeriod2: ChargeTimePeriod(start: nil, end: nil, enabled: false))
+            }
         }
     }
 }

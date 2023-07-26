@@ -97,4 +97,12 @@ public class NetworkFacade: Networking {
 
         return try await network.fetchEarnings(deviceID: deviceID)
     }
+
+    public func setSoc(minGridSOC: Int, minSOC: Int, deviceSN: String) async throws {
+        if config.isDemoUser {
+            return try await fakeNetwork.setSoc(minGridSOC: minGridSOC, minSOC: minSOC, deviceSN: deviceSN)
+        }
+
+        return try await network.setSoc(minGridSOC: minGridSOC, minSOC: minSOC, deviceSN: deviceSN)
+    }
 }

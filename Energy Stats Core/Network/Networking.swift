@@ -13,10 +13,11 @@ extension URL {
     static var raw = URL(string: "https://www.foxesscloud.com/c/v0/device/history/raw")!
     static var battery = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/info")!
     static var deviceList = URL(string: "https://www.foxesscloud.com/c/v0/device/list")!
-    static var soc = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/soc/get")!
+    static var socGet = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/soc/get")!
     static var addressBook = URL(string: "https://www.foxesscloud.com/c/v0/device/addressbook")!
     static var variables = URL(string: "https://www.foxesscloud.com/c/v1/device/variables")!
     static var earnings = URL(string: "https://www.foxesscloud.com/c/v0/device/earnings")!
+    static var socSet = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/soc/set")!
 }
 
 public protocol Networking {
@@ -30,6 +31,7 @@ public protocol Networking {
     func fetchAddressBook(deviceID: String) async throws -> AddressBookResponse
     func fetchVariables(deviceID: String) async throws -> [RawVariable]
     func fetchEarnings(deviceID: String) async throws -> EarningsResponse
+    func setSoc(minGridSOC: Int, minSOC: Int, deviceSN: String) async throws
 }
 
 public class Network: Networking {
@@ -94,7 +96,7 @@ public class Network: Networking {
     }
 
     public func fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse {
-        let request = append(queryItems: [URLQueryItem(name: "sn", value: deviceSN)], to: URL.soc)
+        let request = append(queryItems: [URLQueryItem(name: "sn", value: deviceSN)], to: URL.socGet)
 
         let result: (BatterySettingsResponse, Data) = try await fetch(request)
         store.batterySettingsResponse = NetworkOperation(description: "fetchBatterySettings", value: result.0, raw: result.1)
@@ -143,6 +145,15 @@ public class Network: Networking {
         let result: (EarningsResponse, Data) = try await fetch(request)
         store.earnings = NetworkOperation(description: "fetchEarnings", value: result.0, raw: result.1)
         return result.0
+    }
+
+    public func setSoc(minGridSOC: Int, minSOC: Int, deviceSN: String) async throws {
+        var request = URLRequest(url: URL.socSet)
+        request.httpMethod = "POST"
+        request.httpBody = try! JSONEncoder().encode(SetSOCRequest(minGridSoc: minGridSOC, minSoc: minSOC, sn: deviceSN))
+
+        let result: (String?, Data) = try await fetch(request)
+        store.setSOCResponse = NetworkOperation(description: "setSOC", value: result.0 ?? "<null>", raw: result.1)
     }
 }
 

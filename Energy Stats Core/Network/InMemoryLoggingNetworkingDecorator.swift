@@ -16,6 +16,7 @@ public class InMemoryLoggingNetworkStore: ObservableObject {
     public var addressBookResponse: NetworkOperation<AddressBookResponse>?
     public var variables: NetworkOperation<VariablesResponse>?
     public var earnings: NetworkOperation<EarningsResponse>?
+    public var setSOCResponse: NetworkOperation<String>?
 
     public init() {}
 
@@ -28,6 +29,7 @@ public class InMemoryLoggingNetworkStore: ObservableObject {
         addressBookResponse = nil
         variables = nil
         earnings = nil
+        setSOCResponse = nil
     }
 }
 
