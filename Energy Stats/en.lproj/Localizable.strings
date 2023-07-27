@@ -67,6 +67,9 @@
 "Off" = "Off";
 "Net" = "Net";
 "Absolute" = "Absolute";
+
+/* Battery Charge Pages */
+
 "Minimum charge levels" = "Minimum charge levels";
 "Charge times" = "Charge times";
 "Min SoC" = "Min SoC";
