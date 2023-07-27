@@ -42,6 +42,12 @@ struct ChargeTimePeriod: Equatable {
     var valid: Bool {
         validate == nil
     }
+
+    func asChargeTime() -> ChargeTime {
+        ChargeTime(enableGrid: enabled,
+                   startTime: start.toTime(),
+                   endTime: end.toTime())
+    }
 }
 
 extension Date {
@@ -53,5 +59,12 @@ extension Date {
     static func fromTime(_ time: Time) -> Date {
         guard let result = Calendar.current.date(bySetting: .hour, value: time.hour, of: .now) else { return .now }
         return Calendar.current.date(bySetting: .minute, value: time.minute, of: result) ?? .now
+    }
+
+    func toTime() -> Time {
+        let components = Calendar.current.dateComponents([.hour, .minute], from: self)
+
+        return Time(hour: components.hour ?? 0,
+                    minute: components.minute ?? 0)
     }
 }

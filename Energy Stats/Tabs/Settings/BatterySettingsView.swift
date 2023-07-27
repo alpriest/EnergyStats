@@ -15,10 +15,12 @@ struct BatterySettingsView: View {
 
     var body: some View {
         Group {
-            NavigationLink("Charge Settings") {
-                BatteryChargeSettingsView(networking: viewModel.networking,
-                                          config: viewModel.config,
-                                          onSOCchange: { viewModel.recalculateBatteryCapacity() })
+            NavigationLink("Minimum charge levels") {
+                BatterySOCSettingsView(networking: viewModel.networking, config: viewModel.config, onSOCchange: { viewModel.recalculateBatteryCapacity() })
+            }
+
+            NavigationLink("Charge times") {
+                BatteryForceChargeSettingsView(networking: viewModel.networking, config: viewModel.config)
             }
 
             Section(

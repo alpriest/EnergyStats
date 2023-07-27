@@ -35,6 +35,7 @@ public protocol Networking {
     func fetchEarnings(deviceID: String) async throws -> EarningsResponse
     func setSoc(minGridSOC: Int, minSOC: Int, deviceSN: String) async throws
     func fetchBatteryTimes(deviceSN: String) async throws -> BatteryTimesResponse
+    func setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws
 }
 
 public class Network: Networking {
@@ -168,6 +169,18 @@ public class Network: Networking {
         let result: (BatteryTimesResponse, Data) = try await fetch(request)
         store.batteryTimesResponse = NetworkOperation(description: "batteryTimesResponse", value: result.0, raw: result.1)
         return result.0
+    }
+
+    public func setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws {
+        var request = URLRequest(url: URL.batteryTimeSet)
+        request.httpMethod = "POST"
+        request.httpBody = try! JSONEncoder().encode(SetBatteryTimesRequest(sn: deviceSN, times: times))
+
+        do {
+            let _: (String, Data) = try await fetch(request)
+        } catch NetworkError.invalidResponse(_, let statusCode) where statusCode == 200 {
+            // Ignore
+        }
     }
 }
 

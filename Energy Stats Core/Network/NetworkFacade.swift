@@ -113,4 +113,12 @@ public class NetworkFacade: Networking {
 
         return try await network.fetchBatteryTimes(deviceSN: deviceSN)
     }
+
+    public func setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws {
+        if config.isDemoUser {
+            return try await fakeNetwork.setBatteryTimes(deviceSN: deviceSN, times: times)
+        }
+
+        return try await network.setBatteryTimes(deviceSN: deviceSN, times: times)
+    }
 }
