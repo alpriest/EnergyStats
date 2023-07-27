@@ -25,7 +25,7 @@ struct ChargeTimePeriod: Equatable {
 
     var description: String? {
         if enabled {
-            return "Your battery will be charged from \(start.militaryTime()) to \(end.militaryTime())"
+            return String(format: String(key: .chargeTimeSummary), arguments: [start.militaryTime(), end.militaryTime()])
         } else {
             return nil
         }
@@ -33,7 +33,7 @@ struct ChargeTimePeriod: Equatable {
 
     var validate: String? {
         if start > end {
-            return "Start time must be before the end time"
+            return String(key: .chargeTimePeriodFailedValidation)
         }
 
         return nil

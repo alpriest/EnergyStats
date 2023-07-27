@@ -27,7 +27,7 @@ struct BatterySOCSettingsView: View {
                     }
                 },
                 footer: {
-                    Text("The minimum charge the battery should maintain.")
+                    Text("minsoc_description")
                 }
             )
 

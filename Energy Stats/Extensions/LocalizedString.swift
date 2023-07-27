@@ -16,6 +16,8 @@ struct LocalizedString {
         case full = "Full"
         case nextUpdateIn = "Next update in"
         case dataFetchError = "Something went wrong and no device was found. Please try logging in again."
+        case chargeTimePeriodFailedValidation = "Start time must be before the end time"
+        case chargeTimeSummary = "battery_charge_range"
     }
 }
 
