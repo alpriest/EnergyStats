@@ -34,9 +34,9 @@ public class DemoNetworking: Networking {
     public func fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse {
         switch deviceSN {
         case "1234":
-            return BatterySettingsResponse(minGridSoc: 20)
+            return BatterySettingsResponse(minGridSoc: 20, minSoc: 20)
         default:
-            return BatterySettingsResponse(minGridSoc: 15)
+            return BatterySettingsResponse(minGridSoc: 15, minSoc: 15)
         }
     }
 

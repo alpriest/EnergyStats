@@ -14,33 +14,37 @@ enum BatteryChargeTab {
 }
 
 struct BatteryChargeSettingsView: View {
-    @State private var tabView: BatteryChargeTab = .forceCharge
-    let networking: Networking
-    let config: ConfigManaging
+    @State private var tabView: BatteryChargeTab = .soc
+    private let networking: Networking
+    private let config: ConfigManaging
+    private let onSOCchange: () -> Void
 
-    init(networking: Networking, config: ConfigManaging) {
+    init(networking: Networking, config: ConfigManaging, onSOCchange: @escaping () -> Void) {
         self.networking = networking
         self.config = config
+        self.onSOCchange = onSOCchange
     }
 
     var body: some View {
         Form {
-            Picker(selection: $tabView) {
-                Text("Force Charge")
-                    .tag(BatteryChargeTab.forceCharge)
-                Text("SOC")
-                    .tag(BatteryChargeTab.soc)
-            } label: {
-                Text("Group")
+            Section {
+                Picker(selection: $tabView) {
+                    Text("Min SoC")
+                        .tag(BatteryChargeTab.soc)
+                    Text("Force Charge")
+                        .tag(BatteryChargeTab.forceCharge)
+                } label: {
+                    Text("Group")
+                }
+                .pickerStyle(.segmented)
             }
-            .pickerStyle(.segmented)
 
             Group {
                 switch tabView {
+                case .soc:
+                    BatterySOCSettingsView(networking: networking, config: config, onSOCchange: onSOCchange)
                 case .forceCharge:
                     BatteryForceChargeSettingsView(networking: networking, config: config)
-                case .soc:
-                    BatterySOCSettingsView(networking: networking, config: config)
                 }
             }
         }
@@ -50,6 +54,7 @@ struct BatteryChargeSettingsView: View {
 struct BatteryChargeSettingsView_Previews: PreviewProvider {
     static var previews: some View {
         BatteryChargeSettingsView(networking: DemoNetworking(),
-                                  config: ConfigManager(networking: DemoNetworking(), config: MockConfig()))
+                                  config: ConfigManager(networking: DemoNetworking(), config: MockConfig()),
+                                  onSOCchange: { })
     }
 }

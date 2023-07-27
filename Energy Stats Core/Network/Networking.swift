@@ -152,8 +152,11 @@ public class Network: Networking {
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(SetSOCRequest(minGridSoc: minGridSOC, minSoc: minSOC, sn: deviceSN))
 
-        let result: (String?, Data) = try await fetch(request)
-        store.setSOCResponse = NetworkOperation(description: "setSOC", value: result.0 ?? "<null>", raw: result.1)
+        do {
+            let _: (String, Data) = try await fetch(request)
+        } catch NetworkError.invalidResponse(_, let statusCode) where statusCode == 200 {
+            // Ignore
+        }
     }
 }
 

@@ -81,10 +81,10 @@ class SettingsTabViewModel: ObservableObject {
     @Published var hasBattery: Bool
     @Published var firmwareVersions: DeviceFirmwareVersion?
 
-    private var config: ConfigManaging
+    private(set) var config: ConfigManaging
     private let userManager: UserManager
     private var cancellables = Set<AnyCancellable>()
-    private let networking: Networking
+    let networking: Networking
 
     init(userManager: UserManager, config: ConfigManaging, networking: Networking) {
         self.userManager = userManager

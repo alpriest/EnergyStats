@@ -15,7 +15,8 @@ public struct BatteryResponse: Decodable {
 }
 
 public struct BatterySettingsResponse: Decodable {
-    let minGridSoc: Int
+    public let minGridSoc: Int
+    public let minSoc: Int
 }
 
 public struct SetSOCRequest: Encodable {

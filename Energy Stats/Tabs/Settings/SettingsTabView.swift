@@ -20,7 +20,13 @@ struct SettingsTabView: View {
                 InverterFirmwareVersionsView(viewModel: viewModel)
 
                 if viewModel.hasBattery {
-                    BatterySettingsView(viewModel: viewModel)
+                    NavigationLink {
+                        Form {
+                            BatterySettingsView(viewModel: viewModel)
+                        }
+                    } label: {
+                        Text("Battery")
+                    }
                 }
 
                 Section(
