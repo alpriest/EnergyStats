@@ -105,4 +105,12 @@ public class NetworkFacade: Networking {
 
         return try await network.setSoc(minGridSOC: minGridSOC, minSOC: minSOC, deviceSN: deviceSN)
     }
+
+    public func fetchBatteryTimes(deviceSN: String) async throws -> BatteryTimesResponse {
+        if config.isDemoUser {
+            return try await fakeNetwork.fetchBatteryTimes(deviceSN: deviceSN)
+        }
+
+        return try await network.fetchBatteryTimes(deviceSN: deviceSN)
+    }
 }

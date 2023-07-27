@@ -18,6 +18,8 @@ extension URL {
     static var variables = URL(string: "https://www.foxesscloud.com/c/v1/device/variables")!
     static var earnings = URL(string: "https://www.foxesscloud.com/c/v0/device/earnings")!
     static var socSet = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/soc/set")!
+    static var batteryTimes = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/time/get")!
+    static var batteryTimeSet = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/time/set")!
 }
 
 public protocol Networking {
@@ -32,6 +34,7 @@ public protocol Networking {
     func fetchVariables(deviceID: String) async throws -> [RawVariable]
     func fetchEarnings(deviceID: String) async throws -> EarningsResponse
     func setSoc(minGridSOC: Int, minSOC: Int, deviceSN: String) async throws
+    func fetchBatteryTimes(deviceSN: String) async throws -> BatteryTimesResponse
 }
 
 public class Network: Networking {
@@ -157,6 +160,14 @@ public class Network: Networking {
         } catch NetworkError.invalidResponse(_, let statusCode) where statusCode == 200 {
             // Ignore
         }
+    }
+
+    public func fetchBatteryTimes(deviceSN: String) async throws -> BatteryTimesResponse {
+        let request = append(queryItems: [URLQueryItem(name: "sn", value: deviceSN)], to: URL.batteryTimes)
+
+        let result: (BatteryTimesResponse, Data) = try await fetch(request)
+        store.batteryTimesResponse = NetworkOperation(description: "batteryTimesResponse", value: result.0, raw: result.1)
+        return result.0
     }
 }
 

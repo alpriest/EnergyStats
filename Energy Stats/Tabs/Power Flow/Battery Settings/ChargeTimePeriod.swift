@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Energy_Stats_Core
 
 struct ChargeTimePeriod: Equatable {
     var start: Date
@@ -16,6 +17,10 @@ struct ChargeTimePeriod: Equatable {
         self.start = start ?? .zero()
         self.end = end ?? .zero()
         self.enabled = enabled
+    }
+
+    init(startTime: Time, endTime: Time, enabled: Bool) {
+        self.init(start: Date.fromTime(startTime), end: Date.fromTime(endTime), enabled: enabled)
     }
 
     var description: String? {
@@ -43,5 +48,10 @@ extension Date {
     static func zero() -> Date {
         guard let result = Calendar.current.date(bySetting: .hour, value: 0, of: .now) else { return .now }
         return Calendar.current.date(bySetting: .minute, value: 0, of: result) ?? .now
+    }
+
+    static func fromTime(_ time: Time) -> Date {
+        guard let result = Calendar.current.date(bySetting: .hour, value: time.hour, of: .now) else { return .now }
+        return Calendar.current.date(bySetting: .minute, value: time.minute, of: result) ?? .now
     }
 }

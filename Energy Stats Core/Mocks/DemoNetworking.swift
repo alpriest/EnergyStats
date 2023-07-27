@@ -118,6 +118,13 @@ public class DemoNetworking: Networking {
 
     public func setSoc(minGridSOC: Int, minSOC: Int, deviceSN: String) async throws {
     }
+
+    public func fetchBatteryTimes(deviceSN: String) async throws -> BatteryTimesResponse {
+        BatteryTimesResponse(sn: "ABC1234", times: [
+            BatteryTime(enableGrid: false, startTime: Time(hour: 01, minute: 00), endTime: Time(hour: 01, minute: 30)),
+            BatteryTime(enableGrid: false, startTime: Time(hour: 03, minute: 00), endTime: Time(hour: 03, minute: 30))
+        ])
+    }
 }
 
 public class MockConfig: Config {

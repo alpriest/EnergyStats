@@ -48,6 +48,7 @@
 		411029132A71C066004018BB /* Tintable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411029122A71C066004018BB /* Tintable.swift */; };
 		411029152A71C4F2004018BB /* NumberTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411029142A71C4F2004018BB /* NumberTextField.swift */; };
 		411029172A71C975004018BB /* ChargeTimePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411029162A71C975004018BB /* ChargeTimePeriod.swift */; };
+		411029192A729F02004018BB /* BatteryTimesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411029182A729F02004018BB /* BatteryTimesResponse.swift */; };
 		412790FF28E1FB9200D5F993 /* UserManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412790FE28E1FB9200D5F993 /* UserManagerTests.swift */; };
 		4127910228E1FBD300D5F993 /* MockKeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127910128E1FBD300D5F993 /* MockKeychainStore.swift */; };
 		4127910628E1FC1D00D5F993 /* MockNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127910528E1FC1D00D5F993 /* MockNetworking.swift */; };
@@ -225,6 +226,7 @@
 		411029122A71C066004018BB /* Tintable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tintable.swift; sourceTree = "<group>"; };
 		411029142A71C4F2004018BB /* NumberTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberTextField.swift; sourceTree = "<group>"; };
 		411029162A71C975004018BB /* ChargeTimePeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargeTimePeriod.swift; sourceTree = "<group>"; };
+		411029182A729F02004018BB /* BatteryTimesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryTimesResponse.swift; sourceTree = "<group>"; };
 		4111333529B7D61200972935 /* Sequence+aysnc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+aysnc.swift"; sourceTree = "<group>"; };
 		4127690128EC865000D5A094 /* PowerAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerAmountView.swift; sourceTree = "<group>"; };
 		412790FE28E1FB9200D5F993 /* UserManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManagerTests.swift; sourceTree = "<group>"; };
@@ -593,6 +595,7 @@
 				41626CCB29D95E37003FEB00 /* AddressBookResponse.swift */,
 				417185452A004FA900D18CDD /* VariablesResponse.swift */,
 				4162BC2D2A09773D00DFEDC1 /* EarningsResponse.swift */,
+				411029182A729F02004018BB /* BatteryTimesResponse.swift */,
 			);
 			path = NetworkModels;
 			sourceTree = "<group>";
@@ -1181,6 +1184,7 @@
 				41F71ABD2A14FBEC00A8C81B /* Array+Safe.swift in Sources */,
 				4103D1D029DB6C51001B0BC8 /* Report.swift in Sources */,
 				4109140029DB7AB600133CC5 /* HomePowerFlowViewModel.swift in Sources */,
+				411029192A729F02004018BB /* BatteryTimesResponse.swift in Sources */,
 				4103D1E229DB6CD7001B0BC8 /* ConfigManager.swift in Sources */,
 				4171854429FFCF9500D18CDD /* Color+Hex.swift in Sources */,
 				413B7A312A4A390C00562A68 /* SelfSufficiencyCalculator.swift in Sources */,
