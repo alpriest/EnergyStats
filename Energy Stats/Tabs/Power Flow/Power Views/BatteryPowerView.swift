@@ -61,9 +61,6 @@ struct BatteryPowerView: View {
     @Binding var iconFooterSize: CGSize
     @AppStorage("showBatteryAsResidual") private var batteryResidual: Bool = false
     let appTheme: AppTheme
-    @State private var batterySettingsShowing = false
-    let networking: Networking
-    let config: ConfigManaging
 
     var body: some View {
         VStack {
@@ -71,9 +68,6 @@ struct BatteryPowerView: View {
             Image(systemName: "minus.plus.batteryblock.fill")
                 .font(.system(size: 48))
                 .frame(width: 45, height: 45)
-                .onTapGesture {
-                    batterySettingsShowing.toggle()
-                }
             VStack {
                 Group {
                     if batteryResidual {
@@ -104,9 +98,6 @@ struct BatteryPowerView: View {
                         iconFooterSize = size
                     }
             })
-            .sheet(isPresented: $batterySettingsShowing) {
-                BatteryChargeSettingsView(networking: networking, config: config)
-            }
         }
     }
 }
@@ -114,9 +105,7 @@ struct BatteryPowerView: View {
 struct BatteryPowerView_Previews: PreviewProvider {
     static var previews: some View {
         BatteryPowerView(viewModel: BatteryPowerViewModel.any(), iconFooterSize: .constant(CGSize.zero),
-                         appTheme: AppTheme.mock(),
-                         networking: DemoNetworking(),
-                         config: ConfigManager(networking: DemoNetworking(), config: MockConfig()))
+                         appTheme: AppTheme.mock())
     }
 }
 

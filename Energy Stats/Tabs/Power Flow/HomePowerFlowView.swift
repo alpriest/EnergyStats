@@ -39,7 +39,6 @@ struct HomePowerFlowView: View {
     let configManager: ConfigManaging
     let viewModel: HomePowerFlowViewModel
     let appTheme: AppTheme
-    let networking: Networking
     @State var batteryPowerWidth: CGFloat = 0.0
     @State var homePowerWidth: CGFloat = 0.0
     @State var gridPowerWidth: CGFloat = 0.0
@@ -64,9 +63,7 @@ struct HomePowerFlowView: View {
                                                                       temperature: viewModel.batteryTemperature,
                                                                       batteryResidual: viewModel.batteryResidual),
                                      iconFooterSize: $iconFooterSize,
-                                     appTheme: appTheme,
-                                     networking: networking,
-                                     config: configManager)
+                                     appTheme: appTheme)
                         .background(GeometryReader { reader in
                             Color.clear.preference(key: BatteryFlowSizePreferenceKey.self, value: reader.size)
                                 .onPreferenceChange(BatteryFlowSizePreferenceKey.self) { size in
@@ -104,8 +101,7 @@ struct PowerSummaryView_Previews: PreviewProvider {
     static var previews: some View {
         HomePowerFlowView(configManager: PreviewConfigManager(),
                           viewModel: HomePowerFlowViewModel.any(),
-                          appTheme: AppTheme.mock(decimalPlaces: 3, showInW: false),
-                          networking: DemoNetworking())
+                          appTheme: AppTheme.mock(decimalPlaces: 3, showInW: false))
             .environment(\.locale, .init(identifier: "de"))
     }
 }

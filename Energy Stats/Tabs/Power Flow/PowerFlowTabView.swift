@@ -11,20 +11,18 @@ import Energy_Stats_Core
 
 struct PowerFlowTabView: View {
     let appTheme: AppTheme
-    let networking: Networking
     @StateObject private var viewModel: PowerFlowTabViewModel
 
     init(configManager: ConfigManaging, networking: Networking, appTheme: AppTheme) {
         _viewModel = .init(wrappedValue: PowerFlowTabViewModel(networking, configManager: configManager))
         self.appTheme = appTheme
-        self.networking = networking
     }
 
     var body: some View {
         VStack {
             switch viewModel.state {
             case let .loaded(summary):
-                HomePowerFlowView(configManager: viewModel.configManager, viewModel: summary, appTheme: appTheme, networking: networking)
+                HomePowerFlowView(configManager: viewModel.configManager, viewModel: summary, appTheme: appTheme)
 
                 Spacer()
 
