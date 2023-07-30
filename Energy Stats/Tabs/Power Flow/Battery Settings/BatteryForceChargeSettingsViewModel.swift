@@ -5,21 +5,29 @@
 //  Created by Alistair Priest on 27/07/2023.
 //
 
-import Foundation
+import Combine
 import Energy_Stats_Core
+import Foundation
 
 class BatteryForceChargeSettingsViewModel: ObservableObject {
     private let networking: Networking
     private let config: ConfigManaging
     @Published var state: LoadState = .inactive
-    @Published var timePeriod1: ChargeTimePeriod = .init(enabled: false)
-    @Published var timePeriod2: ChargeTimePeriod = .init(enabled: false)
+    @Published var timePeriod1: ChargeTimePeriod = .init(start: Date(), end: Date(), enabled: false)
+    @Published var timePeriod2: ChargeTimePeriod = .init(start: Date(), end: Date(), enabled: false)
+    @Published var summary = ""
+    private var cancellable: AnyCancellable?
 
     init(networking: Networking, config: ConfigManaging) {
         self.networking = networking
         self.config = config
 
         load()
+
+        cancellable = Publishers.Zip($timePeriod1, $timePeriod2)
+            .sink { [weak self] p1, p2 in
+                self?.generateSummary(period1: p1, period2: p2)
+            }
     }
 
     func load() {
@@ -66,5 +74,25 @@ class BatteryForceChargeSettingsViewModel: ObservableObject {
 
     var valid: Bool {
         timePeriod1.valid && timePeriod2.valid
+    }
+
+    func generateSummary(period1: ChargeTimePeriod, period2: ChargeTimePeriod) {
+        var result = ""
+
+        if !period1.enabled && !period2.enabled {
+            result = String(key: .noBatteryCharge)
+        } else if period1.enabled && period2.enabled {
+            result = String(format: String(key: .bothBatteryChargePeriods), period1.description, period2.description)
+
+            if period1.overlaps(period2) {
+                result += String(key: .batteryPeriodsOverlap)
+            }
+        } else if period1.enabled {
+            result = String(format: String(key: .oneBatteryChargePeriod), period1.description)
+        } else if period2.enabled {
+            result = String(format: String(key: .oneBatteryChargePeriod), period2.description)
+        }
+
+        summary = result
     }
 }

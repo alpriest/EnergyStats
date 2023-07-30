@@ -21,7 +21,9 @@ struct BatteryForceChargeSettingsView: View {
             BatteryTimePeriodView(timePeriod: $viewModel.timePeriod2, title: "Force charge period 2")
 
             Section(content: {}, footer: {
-                VStack {
+                VStack(alignment: .leading) {
+                    Text(viewModel.summary)
+
                     Button(action: { viewModel.save() }, label: {
                         Text("Save")
                             .frame(minWidth: 0, maxWidth: .infinity)
@@ -29,17 +31,22 @@ struct BatteryForceChargeSettingsView: View {
                     .buttonStyle(.borderedProminent)
                     .disabled(!viewModel.valid)
                 }
+                .frame(minWidth: 0, maxWidth: .infinity)
             })
         }
         .loadable($viewModel.state, retry: { viewModel.load() })
+        .onChange(of: viewModel.timePeriod1) { newValue in
+            viewModel.generateSummary(period1: newValue, period2: viewModel.timePeriod2)
+        }
+        .onChange(of: viewModel.timePeriod2) { newValue in
+            viewModel.generateSummary(period1: viewModel.timePeriod1, period2: newValue)
+        }
     }
 }
 
 struct BatteryForceChargeSettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        Form {
-            BatteryForceChargeSettingsView(networking: DemoNetworking(),
-                                           config: ConfigManager(networking: DemoNetworking(), config: MockConfig()))
-        }
+        BatteryForceChargeSettingsView(networking: DemoNetworking(),
+                                       config: ConfigManager(networking: DemoNetworking(), config: MockConfig()))
     }
 }

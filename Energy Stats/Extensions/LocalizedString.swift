@@ -18,6 +18,10 @@ struct LocalizedString {
         case dataFetchError = "Something went wrong and no device was found. Please try logging in again."
         case chargeTimePeriodFailedValidation = "Start time must be before the end time"
         case chargeTimeSummary = "battery_charge_range"
+        case noBatteryCharge = "no_battery_charge"
+        case bothBatteryChargePeriods = "both_battery_charge_periods"
+        case batteryPeriodsOverlap = "battery_periods_overlap"
+        case oneBatteryChargePeriod = "one_battery_charge_period"
     }
 }
 

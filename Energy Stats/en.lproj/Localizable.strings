@@ -85,5 +85,9 @@
 "Enable charge from grid" = "Enable charge from grid";
 "Start" = "Start";
 "End" = "End";
-"battery_charge_range" = "Your battery will be charged from %@ to %@";
+"battery_charge_range" = "%@ to %@";
 "Start time must be before the end time" = "Start time must be before the end time";
+"no_battery_charge" = "Your battery will not be force charged from the grid.";
+"both_battery_charge_periods" = "Your battery will be force charged from the grid between %@, and %@.";
+"battery_periods_overlap" = "These periods overlap, you may want to update them.";
+"one_battery_charge_period" = "Your battery will be force charged from the grid between %@.";

@@ -37,10 +37,6 @@ struct BatteryTimePeriodView: View {
                             .foregroundColor(.red)
                             .padding(.bottom)
                     }
-
-                    OptionalView(timePeriod.description) {
-                        Text($0)
-                    }
                 }
             }
         ).onChange(of: timePeriod) { newValue in
@@ -57,7 +53,7 @@ struct BatteryTimePeriodView_Previews: PreviewProvider {
     }
 
     struct Preview: View {
-        @State private var period = ChargeTimePeriod(enabled: true)
+        @State private var period = ChargeTimePeriod(start: Date(), end: Date(), enabled: true)
         var body: some View {
             Form {
                 BatteryTimePeriodView(timePeriod: $period, title: "Period 1")

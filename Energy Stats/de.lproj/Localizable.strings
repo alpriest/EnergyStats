@@ -152,5 +152,9 @@
 "Enable charge from grid" = "Laden aus dem Netz aktivieren";
 "Start" = "Start";
 "End" = "Ende";
-"battery_charge_range" = "Ihre Batterie wird von %@ bis %@ geladen.";
+"battery_charge_range" = "%@ bis %@";
 "Start time must be before the end time" = "Die Startzeit muss vor der Endzeit liegen.";
+"no_battery_charge" = "Ihr Akku wird nicht von der Stromversorgung erzwungen geladen.";
+"both_battery_charge_periods" = "Ihr Akku wird zwischen %@ und %@ von der Stromversorgung erzwungen geladen.";
+"battery_periods_overlap" = "Diese Zeiträume überschneiden sich möglicherweise, Sie möchten sie möglicherweise aktualisieren.";
+"one_battery_charge_period" = "Ihr Akku wird zwischen %@ von der Stromversorgung erzwungen geladen.";

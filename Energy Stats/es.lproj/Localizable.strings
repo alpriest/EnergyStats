@@ -140,5 +140,9 @@
 "Enable charge from grid" = "Activar carga desde la red";
 "Start" = "Inicio";
 "End" = "Fin";
-"battery_charge_range" = "Su batería se cargará desde %@ hasta %@.";
+"battery_charge_range" = "%@ hasta %@";
 "Start time must be before the end time" = "La hora de inicio debe ser anterior a la hora de finalización.";
+"no_battery_charge" = "Su batería no será cargada forzadamente desde la red eléctrica.";
+"both_battery_charge_periods" = "Su batería será cargada forzadamente desde la red eléctrica entre %@ y %@.";
+"battery_periods_overlap" = "Estos períodos se superponen, puede que desee actualizarlos.";
+"one_battery_charge_period" = "Su batería será cargada forzadamente desde la red eléctrica entre %@.";

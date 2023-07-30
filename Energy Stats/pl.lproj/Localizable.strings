@@ -128,5 +128,9 @@
 "Enable charge from grid" = "Włącz ładowanie z sieci";
 "Start" = "Początek";
 "End" = "Koniec";
-"battery_charge_range" = "Twoja bateria zostanie naładowana od %@ do %@.";
+"battery_charge_range" = "%@ do %@";
 "Start time must be before the end time" = "Czas rozpoczęcia musi być przed czasem zakończenia.";
+"no_battery_charge" = "Twoja bateria nie będzie ładowana siłą z sieci.";
+"both_battery_charge_periods" = "Twoja bateria zostanie naładowana siłą z sieci między %@, a %@.";
+"battery_periods_overlap" = "Te okresy naładowania się nakładają, możesz je zaktualizować.";
+"one_battery_charge_period" = "Twoja bateria będzie ładowana siłą z sieci między %@.";
