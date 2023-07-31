@@ -146,3 +146,6 @@
 "both_battery_charge_periods" = "Su batería será cargada forzadamente desde la red eléctrica entre %@ y %@.";
 "battery_periods_overlap" = "Estos períodos se superponen, puede que desee actualizarlos.";
 "one_battery_charge_period" = "Su batería será cargada forzadamente desde la red eléctrica entre %@.";
+"Minimum charge levels" = "Niveles mínimos de carga";
+"Charge times" = "Tiempos de carga";
+"Summary" = "Resumen";

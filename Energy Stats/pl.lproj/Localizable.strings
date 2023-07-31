@@ -134,3 +134,6 @@
 "both_battery_charge_periods" = "Twoja bateria zostanie naładowana siłą z sieci między %@, a %@.";
 "battery_periods_overlap" = "Te okresy naładowania się nakładają, możesz je zaktualizować.";
 "one_battery_charge_period" = "Twoja bateria będzie ładowana siłą z sieci między %@.";
+"Minimum charge levels" = "Minimalne poziomy naładowania";
+"Charge times" = "Czasy ładowania";
+"Summary" = "Podsumowanie";

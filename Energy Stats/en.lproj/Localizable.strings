@@ -91,3 +91,5 @@
 "both_battery_charge_periods" = "Your battery will be force charged from the grid between %@, and %@.";
 "battery_periods_overlap" = "These periods overlap, you may want to update them.";
 "one_battery_charge_period" = "Your battery will be force charged from the grid between %@.";
+"Minimum charge levels" = "Minimum charge levels";
+"Charge times" = "Charge times";

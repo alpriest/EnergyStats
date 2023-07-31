@@ -8,7 +8,6 @@
 import XCTest
 
 final class Energy_Stats_UITestsLaunchTests: XCTestCase {
-
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         false
     }
@@ -38,17 +37,25 @@ final class Energy_Stats_UITestsLaunchTests: XCTestCase {
         snapshot("02_stats_tab")
 
         app.buttons["parameters_tab"].tap()
-
         snapshot("03_graph_tab")
 
         app.buttons["variable_chooser"].tap()
-
         snapshot("04_choose_variable")
 
         app.buttons["cancel"].tap()
 
         app.buttons["settings_tab"].tap()
-
         snapshot("05_settings_tab")
+
+        app.buttons["Battery"].tap()
+        snapshot("06_settings_tab")
+
+        app.buttons["Minimum charge levels"].tap()
+        snapshot("06_battery_charge_levels")
+
+        app.navigationBars.buttons.element(boundBy: 0).tap()
+
+        app.buttons["Charge times"].tap()
+        snapshot("07_battery_charge_times")
     }
 }

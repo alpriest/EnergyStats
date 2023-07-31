@@ -158,3 +158,6 @@
 "both_battery_charge_periods" = "Ihr Akku wird zwischen %@ und %@ von der Stromversorgung erzwungen geladen.";
 "battery_periods_overlap" = "Diese Zeiträume überschneiden sich möglicherweise, Sie möchten sie möglicherweise aktualisieren.";
 "one_battery_charge_period" = "Ihr Akku wird zwischen %@ von der Stromversorgung erzwungen geladen.";
+"Minimum charge levels" = "Mindestladepegel";
+"Charge times" = "Ladezeiten";
+"Summary" = "Zusammenfassung";
