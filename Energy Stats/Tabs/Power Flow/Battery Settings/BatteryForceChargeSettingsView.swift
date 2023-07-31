@@ -48,5 +48,6 @@ struct BatteryForceChargeSettingsView_Previews: PreviewProvider {
     static var previews: some View {
         BatteryForceChargeSettingsView(networking: DemoNetworking(),
                                        config: ConfigManager(networking: DemoNetworking(), config: MockConfig()))
+            .environment(\.locale, .init(identifier: "de"))
     }
 }

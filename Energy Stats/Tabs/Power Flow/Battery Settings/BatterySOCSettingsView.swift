@@ -42,11 +42,11 @@ struct BatterySOCSettingsView: View {
                 },
                 footer: {
                     VStack(alignment: .leading) {
-                        Text("The minimum charge the battery should maintain when grid power is present.")
+                        Text("minsocgrid_description")
                             .padding(.bottom)
-                        Text("For the most part this is the setting that determines when the batteries will stop being used. Setting this higher than Min SoC will reserve battery power for a grid outage. For example, if you set Min SoC to 10% and Min SoC on Grid to 20%, the inverter will stop supplying power from the batteries at 20% and the house load will be supplied from the grid. If there is a grid outage, the batteries could be used (via an EPS switch) to supply emergency power until the battery charge drops to 10%.")
+                        Text("minsoc_detail")
                             .padding(.bottom)
-                        Text("If you're not sure then set both values the same.")
+                        Text("minsoc_notsure_footnote")
                     }
                 }
             )

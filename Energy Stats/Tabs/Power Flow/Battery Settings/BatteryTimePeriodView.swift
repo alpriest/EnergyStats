@@ -9,8 +9,7 @@ import SwiftUI
 
 struct BatteryTimePeriodView: View {
     @Binding var timePeriod: ChargeTimePeriod
-    @State private var startError = false
-    @State private var endError = false
+    @State private var timeError = false
     @State private var errorMessage: String?
     let title: String
 
@@ -21,11 +20,11 @@ struct BatteryTimePeriodView: View {
 
                 DatePicker("Start", selection: $timePeriod.start, displayedComponents: [.hourAndMinute])
                     .datePickerStyle(.compact)
-                    .tinted(enabled: $startError)
+                    .tinted(enabled: $timeError)
 
                 DatePicker("End", selection: $timePeriod.end, displayedComponents: [.hourAndMinute])
                     .datePickerStyle(.compact)
-                    .tinted(enabled: $endError)
+                    .tinted(enabled: $timeError)
             },
             header: {
                 Text(title)
@@ -40,8 +39,7 @@ struct BatteryTimePeriodView: View {
                 }
             }
         ).onChange(of: timePeriod) { newValue in
-            startError = newValue.start > timePeriod.end
-            endError = timePeriod.end < newValue.start
+            timeError = !newValue.valid
             errorMessage = newValue.validate
         }
     }

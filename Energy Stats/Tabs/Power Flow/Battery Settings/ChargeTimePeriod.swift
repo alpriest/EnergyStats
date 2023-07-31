@@ -32,6 +32,8 @@ struct ChargeTimePeriod: Equatable {
     }
 
     var validate: String? {
+        if !enabled { return nil }
+
         if start > end {
             return String(key: .chargeTimePeriodFailedValidation)
         }
@@ -40,7 +42,7 @@ struct ChargeTimePeriod: Equatable {
     }
 
     var valid: Bool {
-        validate == nil
+        !enabled || (enabled && validate == nil)
     }
 
     func asChargeTime() -> ChargeTime {
