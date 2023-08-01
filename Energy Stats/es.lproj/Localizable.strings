@@ -127,7 +127,7 @@
 
 /* Battery Charge Pages */
 "Minimum charge levels" = "Niveles mínimos de carga";
-"Charge times" = "Tiempos de carga";
+"Charge times" = "Horario de carga";
 "Min SoC" = "Min. SoC";
 "minsoc_description" = "El nivel mínimo de carga que la batería debe mantener.";
 "Min SoC on Grid" = "Min. SoC en red";
@@ -135,17 +135,20 @@
 "minsoc_detail" = "En su mayor parte, esta es la configuración que determina cuándo las baterías dejarán de ser utilizadas. Configurar este valor más alto que Min SoC reservará energía de la batería para un corte en el suministro de red. Por ejemplo, si estableces Min SoC en 10% y Min SoC en red en 20%, el inversor dejará de suministrar energía de las baterías al 20% y la carga de la casa será suministrada por la red. Si hay un corte de red, las baterías podrían ser utilizadas (a través de un interruptor EPS) para suministrar energía de emergencia hasta que la carga de la batería caiga al 10%.";
 "minsoc_notsure_footnote" = "Si no estás seguro, entonces configura ambos valores iguales.";
 "Save" = "Guardar";
-"Force charge period 1" = "Forzar periodo de carga 1";
-"Force charge period 2" = "Forzar periodo de carga 2";
+"Time period 1" = "Forzar periodo de carga 1";
+"Time period 2" = "Forzar periodo de carga 2";
 "Enable charge from grid" = "Activar carga desde la red";
 "Start" = "Inicio";
 "End" = "Fin";
 "battery_charge_range" = "%@ hasta %@";
 "Start time must be before the end time" = "La hora de inicio debe ser anterior a la hora de finalización.";
-"no_battery_charge" = "Su batería no será cargada forzadamente desde la red eléctrica.";
+"no_battery_charge" = "El plan de batería no alterará el uso de la batería. La carga de la casa se abastecerá de las baterías si hay capacidad disponible.";
 "both_battery_charge_periods" = "Su batería será cargada forzadamente desde la red eléctrica entre %@ y %@.";
 "battery_periods_overlap" = "Estos períodos se superponen, puede que desee actualizarlos.";
 "one_battery_charge_period" = "Su batería será cargada forzadamente desde la red eléctrica entre %@.";
 "Minimum charge levels" = "Niveles mínimos de carga";
-"Charge times" = "Tiempos de carga";
 "Summary" = "Resumen";
+"both_battery_freeze_periods" = "Sus baterías no se cargarán ni se descargaran entre %@ y %@. Cualquier consumo de la casa vendrá de la red eléctrica durante estos periodos. Restablezca los periodos de tiempo para desactivar esta función.";
+"one_battery_freeze_period" = "Su batería no se cargará ni se descargará entre %@. Cualquier consumo de la casa vendrá de la red eléctrica durante este periodo. Restablezca el periodo de tiempo para desactivar esta función.";
+"Schedule summary" = "Resumen del horario";
+"Reset times" = "Horarios de reinicio";

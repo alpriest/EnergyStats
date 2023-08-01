@@ -72,7 +72,7 @@
 /* Battery Charge Pages */
 
 "Minimum charge levels" = "Minimum charge levels";
-"Charge times" = "Charge times";
+"Charge times" = "Charge schedule";
 "Min SoC" = "Min SoC";
 "minsoc_description" = "The minimum charge the battery should maintain.";
 "Min SoC on Grid" = "Min SoC on Grid";
@@ -80,16 +80,18 @@
 "minsoc_detail" = "For the most part this is the setting that determines when the batteries will stop being used. Setting this higher than Min SoC will reserve battery power for a grid outage. For example, if you set Min SoC to 10% and Min SoC on Grid to 20%, the inverter will stop supplying power from the batteries at 20% and the house load will be supplied from the grid. If there is a grid outage, the batteries could be used (via an EPS switch) to supply emergency power until the battery charge drops to 10%.";
 "minsoc_notsure_footnote" = "If you're not sure then set both values the same.";
 "Save" = "Save";
-"Force charge period 1" = "Force charge period 1";
-"Force charge period 2" = "Force charge period 2";
+"Time period 1" = "Force charge period 1";
+"Time period 2" = "Force charge period 2";
 "Enable charge from grid" = "Enable charge from grid";
 "Start" = "Start";
 "End" = "End";
 "battery_charge_range" = "%@ to %@";
 "Start time must be before the end time" = "Start time must be before the end time";
-"no_battery_charge" = "Your battery will not be force charged from the grid.";
+"no_battery_charge" = "The battery schedule will not alter the battery usage. House load will be met from the batteries if capacity is available.";
 "both_battery_charge_periods" = "Your battery will be force charged from the grid between %@, and %@.";
 "battery_periods_overlap" = "These periods overlap, you may want to update them.";
 "one_battery_charge_period" = "Your battery will be force charged from the grid between %@.";
-"Minimum charge levels" = "Minimum charge levels";
-"Charge times" = "Charge times";
+"both_battery_freeze_periods" = "Your batteries will not charge or discharge between %@ and %@. Any house load will come from the grid between these times. Reset time periods to disable this.";
+"one_battery_freeze_period" = "Your batteries will not charge or discharge between %@. Any house load will come from the grid between these times. Reset the time period to disable this.";
+"Schedule summary" = "Schedule summary";
+"Reset times" = "Reset times";

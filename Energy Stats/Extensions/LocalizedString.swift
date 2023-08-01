@@ -22,6 +22,8 @@ struct LocalizedString {
         case bothBatteryChargePeriods = "both_battery_charge_periods"
         case batteryPeriodsOverlap = "battery_periods_overlap"
         case oneBatteryChargePeriod = "one_battery_charge_period"
+        case bothBatteryFreezePeriods = "both_battery_freeze_periods"
+        case oneBatteryFreezePeriod = "one_battery_freeze_period"
     }
 }
 

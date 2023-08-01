@@ -41,14 +41,14 @@
 		4109140029DB7AB600133CC5 /* HomePowerFlowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EDDF6B28CD2A630092C662 /* HomePowerFlowViewModel.swift */; };
 		4109140229DB7AE700133CC5 /* BatteryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140147028C77AAA00EA5BA1 /* BatteryViewModel.swift */; };
 		4110065B28E890E40018C3DF /* GraphTabViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4110065A28E890E40018C3DF /* GraphTabViewModelTests.swift */; };
-		4110290D2A71B713004018BB /* BatteryForceChargeSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4110290C2A71B713004018BB /* BatteryForceChargeSettingsView.swift */; };
+		4110290D2A71B713004018BB /* BatteryChargeScheduleSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4110290C2A71B713004018BB /* BatteryChargeScheduleSettingsView.swift */; };
 		4110290F2A71B908004018BB /* BatterySOCSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4110290E2A71B908004018BB /* BatterySOCSettingsView.swift */; };
 		411029112A71B95F004018BB /* BatteryTimePeriodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411029102A71B95F004018BB /* BatteryTimePeriodView.swift */; };
 		411029132A71C066004018BB /* Tintable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411029122A71C066004018BB /* Tintable.swift */; };
 		411029152A71C4F2004018BB /* NumberTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411029142A71C4F2004018BB /* NumberTextField.swift */; };
 		411029172A71C975004018BB /* ChargeTimePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411029162A71C975004018BB /* ChargeTimePeriod.swift */; };
 		411029192A729F02004018BB /* BatteryTimesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411029182A729F02004018BB /* BatteryTimesResponse.swift */; };
-		4110291B2A72AFAA004018BB /* BatteryForceChargeSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4110291A2A72AFAA004018BB /* BatteryForceChargeSettingsViewModel.swift */; };
+		4110291B2A72AFAA004018BB /* BatteryChargeScheduleSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4110291A2A72AFAA004018BB /* BatteryChargeScheduleSettingsViewModel.swift */; };
 		4110291D2A72AFC2004018BB /* BatterySOCSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4110291C2A72AFC2004018BB /* BatterySOCSettingsViewModel.swift */; };
 		412790FF28E1FB9200D5F993 /* UserManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412790FE28E1FB9200D5F993 /* UserManagerTests.swift */; };
 		4127910228E1FBD300D5F993 /* MockKeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127910128E1FBD300D5F993 /* MockKeychainStore.swift */; };
@@ -221,14 +221,14 @@
 		410913FC29DB78EF00133CC5 /* PreciseDateTimeFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreciseDateTimeFormatter.swift; sourceTree = "<group>"; };
 		410AA38729D96F6D00CD107C /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		4110065A28E890E40018C3DF /* GraphTabViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTabViewModelTests.swift; sourceTree = "<group>"; };
-		4110290C2A71B713004018BB /* BatteryForceChargeSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryForceChargeSettingsView.swift; sourceTree = "<group>"; };
+		4110290C2A71B713004018BB /* BatteryChargeScheduleSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryChargeScheduleSettingsView.swift; sourceTree = "<group>"; };
 		4110290E2A71B908004018BB /* BatterySOCSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatterySOCSettingsView.swift; sourceTree = "<group>"; };
 		411029102A71B95F004018BB /* BatteryTimePeriodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryTimePeriodView.swift; sourceTree = "<group>"; };
 		411029122A71C066004018BB /* Tintable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tintable.swift; sourceTree = "<group>"; };
 		411029142A71C4F2004018BB /* NumberTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberTextField.swift; sourceTree = "<group>"; };
 		411029162A71C975004018BB /* ChargeTimePeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargeTimePeriod.swift; sourceTree = "<group>"; };
 		411029182A729F02004018BB /* BatteryTimesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryTimesResponse.swift; sourceTree = "<group>"; };
-		4110291A2A72AFAA004018BB /* BatteryForceChargeSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryForceChargeSettingsViewModel.swift; sourceTree = "<group>"; };
+		4110291A2A72AFAA004018BB /* BatteryChargeScheduleSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryChargeScheduleSettingsViewModel.swift; sourceTree = "<group>"; };
 		4110291C2A72AFC2004018BB /* BatterySOCSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatterySOCSettingsViewModel.swift; sourceTree = "<group>"; };
 		4111333529B7D61200972935 /* Sequence+aysnc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+aysnc.swift"; sourceTree = "<group>"; };
 		4127690128EC865000D5A094 /* PowerAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerAmountView.swift; sourceTree = "<group>"; };
@@ -483,8 +483,8 @@
 			children = (
 				411029102A71B95F004018BB /* BatteryTimePeriodView.swift */,
 				411029162A71C975004018BB /* ChargeTimePeriod.swift */,
-				4110290C2A71B713004018BB /* BatteryForceChargeSettingsView.swift */,
-				4110291A2A72AFAA004018BB /* BatteryForceChargeSettingsViewModel.swift */,
+				4110290C2A71B713004018BB /* BatteryChargeScheduleSettingsView.swift */,
+				4110291A2A72AFAA004018BB /* BatteryChargeScheduleSettingsViewModel.swift */,
 				4110290E2A71B908004018BB /* BatterySOCSettingsView.swift */,
 				4110291C2A72AFC2004018BB /* BatterySOCSettingsViewModel.swift */,
 			);
@@ -1100,7 +1100,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4107446C28CA57A9006D5D7D /* PowerFlowTabView.swift in Sources */,
-				4110290D2A71B713004018BB /* BatteryForceChargeSettingsView.swift in Sources */,
+				4110290D2A71B713004018BB /* BatteryChargeScheduleSettingsView.swift in Sources */,
 				418EEEB52916843A006A8290 /* View+If.swift in Sources */,
 				4140145028C70B3200EA5BA1 /* TabbedView.swift in Sources */,
 				411029132A71C066004018BB /* Tintable.swift in Sources */,
@@ -1124,7 +1124,7 @@
 				417153E829F2D80C00639A7B /* Date+compare.swift in Sources */,
 				418141452A12BABA00FFC6A6 /* StatsGraphView.swift in Sources */,
 				411029112A71B95F004018BB /* BatteryTimePeriodView.swift in Sources */,
-				4110291B2A72AFAA004018BB /* BatteryForceChargeSettingsViewModel.swift in Sources */,
+				4110291B2A72AFAA004018BB /* BatteryChargeScheduleSettingsViewModel.swift in Sources */,
 				41C0B43429F96D3600CA9462 /* LocalizedString.swift in Sources */,
 				416318C029DDD82800C2C285 /* ResponseDebugView.swift in Sources */,
 				414BF82829B4918300E2EB51 /* SettingsTabViewModel.swift in Sources */,
@@ -1451,7 +1451,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.48;
+				MARKETING_VERSION = 1.49;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1487,7 +1487,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.48;
+				MARKETING_VERSION = 1.49;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

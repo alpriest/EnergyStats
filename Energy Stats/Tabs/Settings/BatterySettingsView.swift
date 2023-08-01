@@ -20,7 +20,7 @@ struct BatterySettingsView: View {
             }
 
             NavigationLink("Charge times") {
-                BatteryForceChargeSettingsView(networking: viewModel.networking, config: viewModel.config)
+                BatteryChargeScheduleSettingsView(networking: viewModel.networking, config: viewModel.config)
             }
 
             Section(

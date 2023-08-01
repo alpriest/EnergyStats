@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Energy_Stats_Core
 
 struct BatteryTimePeriodView: View {
     @Binding var timePeriod: ChargeTimePeriod
@@ -36,6 +37,11 @@ struct BatteryTimePeriodView: View {
                             .foregroundColor(.red)
                             .padding(.bottom)
                     }
+
+                    Button("Reset times") {
+                        timePeriod.start = Date.fromTime(Time.zero())
+                        timePeriod.end = Date.fromTime(Time.zero())
+                    }.buttonStyle(.borderless)
                 }
             }
         ).onChange(of: timePeriod) { newValue in

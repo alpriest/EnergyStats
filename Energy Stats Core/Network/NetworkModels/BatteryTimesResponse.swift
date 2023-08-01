@@ -25,7 +25,7 @@ public struct ChargeTime: Codable {
     }
 }
 
-public struct Time: Codable {
+public struct Time: Codable, Equatable {
     public let hour: Int
     public let minute: Int
 

@@ -115,7 +115,7 @@
 
 /* Battery Charge Pages */
 "Minimum charge levels" = "Minimalne poziomy naładowania";
-"Charge times" = "Czasy ładowania";
+"Charge times" = "Plan ładowania";
 "Min SoC" = "Min. PoC";
 "minsoc_description" = "Minimalny poziom naładowania, który bateria powinna utrzymywać.";
 "Min SoC on Grid" = "Min. PoC w sieci";
@@ -123,17 +123,20 @@
 "minsoc_detail" = "W większości przypadków jest to ustawienie, które decyduje o zatrzymaniu korzystania z baterii. Ustawienie wartości wyższej niż Min SoC zastrzeże moc baterii na wypadek awarii sieci. Na przykład, jeśli ustawisz Min SoC na 10% i Min SoC w sieci na 20%, falownik zatrzyma dostarczanie energii z baterii przy 20%, a obciążenie domu będzie zasilane z sieci. W przypadku braku zasilania z sieci, baterie mogą być używane (za pośrednictwem przełącznika EPS) do dostarczania energii awaryjnej do momentu, gdy naładowanie baterii spadnie do 10%.";
 "minsoc_notsure_footnote" = "Jeśli nie jesteś pewien, ustaw obie wartości tak samo.";
 "Save" = "Zapisz";
-"Force charge period 1" = "Wymuś okres ładowania 1";
-"Force charge period 2" = "Wymuś okres ładowania 2";
+"Time period 1" = "Wymuś okres ładowania 1";
+"Time period 2" = "Wymuś okres ładowania 2";
 "Enable charge from grid" = "Włącz ładowanie z sieci";
 "Start" = "Początek";
 "End" = "Koniec";
 "battery_charge_range" = "%@ do %@";
 "Start time must be before the end time" = "Czas rozpoczęcia musi być przed czasem zakończenia.";
-"no_battery_charge" = "Twoja bateria nie będzie ładowana siłą z sieci.";
+"no_battery_charge" = "Harmonogram baterii nie zmieni wykorzystania baterii. Obciążenie domu będzie zasilane z baterii, jeśli jest dostępna pojemność.";
 "both_battery_charge_periods" = "Twoja bateria zostanie naładowana siłą z sieci między %@, a %@.";
 "battery_periods_overlap" = "Te okresy naładowania się nakładają, możesz je zaktualizować.";
 "one_battery_charge_period" = "Twoja bateria będzie ładowana siłą z sieci między %@.";
 "Minimum charge levels" = "Minimalne poziomy naładowania";
-"Charge times" = "Czasy ładowania";
 "Summary" = "Podsumowanie";
+"both_battery_freeze_periods" = "Twoje baterie nie będą ładowane ani rozładowywane między %@ a %@. Każde obciążenie domu będzie pochodzić z sieci w tym czasie. Aby wyłączyć tę funkcję, zresetuj okresy czasu.";
+"one_battery_freeze_period" = "Twoja bateria nie będzie ładowana ani rozładowywana między %@. Każde obciążenie domu będzie pochodzić z sieci w tym czasie. Aby wyłączyć tę funkcję, zresetuj okres czasu.";
+"Schedule summary" = "Podsumowanie harmonogramu";
+"Reset times" = "Czasy resetowania";

@@ -1,5 +1,5 @@
 //
-//  BatteryForceChargeSettingsViewModel.swift
+//  BatteryChargeScheduleSettingsViewModel.swift
 //  Energy Stats
 //
 //  Created by Alistair Priest on 27/07/2023.
@@ -9,7 +9,7 @@ import Combine
 import Energy_Stats_Core
 import Foundation
 
-class BatteryForceChargeSettingsViewModel: ObservableObject {
+class BatteryChargeScheduleSettingsViewModel: ObservableObject {
     private let networking: Networking
     private let config: ConfigManaging
     @Published var state: LoadState = .inactive
@@ -72,6 +72,11 @@ class BatteryForceChargeSettingsViewModel: ObservableObject {
         }
     }
 
+    func reset() {
+        timePeriod1 = ChargeTimePeriod(start: .zero(), end: .zero(), enabled: false)
+        timePeriod2 = ChargeTimePeriod(start: .zero(), end: .zero(), enabled: false)
+    }
+
     var valid: Bool {
         timePeriod1.valid && timePeriod2.valid
     }
@@ -80,7 +85,15 @@ class BatteryForceChargeSettingsViewModel: ObservableObject {
         var result = ""
 
         if !period1.enabled && !period2.enabled {
-            result = String(key: .noBatteryCharge)
+            if period1.hasTimes && period2.hasTimes {
+                result = String(format: String(key: .bothBatteryFreezePeriods), period1.description, period2.description)
+            } else if period1.hasTimes {
+                result = String(format: String(key: .oneBatteryFreezePeriod), period1.description)
+            } else if period2.hasTimes {
+                result = String(format: String(key: .oneBatteryFreezePeriod), period2.description)
+            } else {
+                result = String(key: .noBatteryCharge)
+            }
         } else if period1.enabled && period2.enabled {
             result = String(format: String(key: .bothBatteryChargePeriods), period1.description, period2.description)
 

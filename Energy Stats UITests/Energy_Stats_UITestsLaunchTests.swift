@@ -55,7 +55,7 @@ final class Energy_Stats_UITestsLaunchTests: XCTestCase {
 
         app.navigationBars.buttons.element(boundBy: 0).tap()
 
-        app.buttons["Charge times"].tap()
+        app.buttons["Charge schedule"].tap()
         snapshot("08_battery_charge_times")
     }
 }

@@ -1,5 +1,5 @@
 //
-//  BatteryForceChargeSettingsView.swift
+//  BatteryChargeScheduleSettingsView.swift
 //  Energy Stats
 //
 //  Created by Alistair Priest on 26/07/2023.
@@ -8,20 +8,23 @@
 import Energy_Stats_Core
 import SwiftUI
 
-struct BatteryForceChargeSettingsView: View {
-    @StateObject var viewModel: BatteryForceChargeSettingsViewModel
+struct BatteryChargeScheduleSettingsView: View {
+    @StateObject var viewModel: BatteryChargeScheduleSettingsViewModel
 
     init(networking: Networking, config: ConfigManaging) {
-        _viewModel = StateObject(wrappedValue: BatteryForceChargeSettingsViewModel(networking: networking, config: config))
+        _viewModel = StateObject(wrappedValue: BatteryChargeScheduleSettingsViewModel(networking: networking, config: config))
     }
 
     var body: some View {
         Form {
-            BatteryTimePeriodView(timePeriod: $viewModel.timePeriod1, title: "Force charge period 1")
-            BatteryTimePeriodView(timePeriod: $viewModel.timePeriod2, title: "Force charge period 2")
+            BatteryTimePeriodView(timePeriod: $viewModel.timePeriod1, title: "Time period 1")
+            BatteryTimePeriodView(timePeriod: $viewModel.timePeriod2, title: "Time period 2")
 
             Section(content: {}, footer: {
                 VStack(alignment: .leading) {
+                    Text("Schedule summary")
+                        .font(.headline)
+
                     Text(viewModel.summary)
 
                     Button(action: { viewModel.save() }, label: {
@@ -34,6 +37,7 @@ struct BatteryForceChargeSettingsView: View {
                 .frame(minWidth: 0, maxWidth: .infinity)
             })
         }
+        .navigationTitle("Battery Schedule")
         .loadable($viewModel.state, retry: { viewModel.load() })
         .onChange(of: viewModel.timePeriod1) { newValue in
             viewModel.generateSummary(period1: newValue, period2: viewModel.timePeriod2)
@@ -46,8 +50,9 @@ struct BatteryForceChargeSettingsView: View {
 
 struct BatteryForceChargeSettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        BatteryForceChargeSettingsView(networking: DemoNetworking(),
-                                       config: ConfigManager(networking: DemoNetworking(), config: MockConfig()))
-            .environment(\.locale, .init(identifier: "de"))
+        NavigationView {
+            BatteryChargeScheduleSettingsView(networking: DemoNetworking(),
+                                           config: ConfigManager(networking: DemoNetworking(), config: MockConfig()))
+        }
     }
 }

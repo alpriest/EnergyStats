@@ -24,11 +24,7 @@ struct ChargeTimePeriod: Equatable {
     }
 
     var description: String {
-        if enabled {
-            return String(format: String(key: .chargeTimeSummary), arguments: [start.militaryTime(), end.militaryTime()])
-        } else {
-            return ""
-        }
+        String(format: String(key: .chargeTimeSummary), arguments: [start.militaryTime(), end.militaryTime()])
     }
 
     var validate: String? {
@@ -45,6 +41,10 @@ struct ChargeTimePeriod: Equatable {
         !enabled || (enabled && validate == nil)
     }
 
+    var hasTimes: Bool {
+        start.toTime() != .zero() || end.toTime() != .zero()
+    }
+
     func asChargeTime() -> ChargeTime {
         ChargeTime(enableGrid: enabled,
                    startTime: start.toTime(),
@@ -56,9 +56,9 @@ struct ChargeTimePeriod: Equatable {
         let otherPeriod = otherPeriod.asChargeTime()
 
         return !(thisPeriod.endTime.hour < otherPeriod.startTime.hour ||
-                 (thisPeriod.endTime.hour == otherPeriod.startTime.hour && thisPeriod.endTime.minute <= otherPeriod.startTime.minute) ||
-                 thisPeriod.startTime.hour > otherPeriod.endTime.hour ||
-                 (thisPeriod.startTime.hour == otherPeriod.endTime.hour && thisPeriod.startTime.minute >= otherPeriod.endTime.minute))
+            (thisPeriod.endTime.hour == otherPeriod.startTime.hour && thisPeriod.endTime.minute <= otherPeriod.startTime.minute) ||
+            thisPeriod.startTime.hour > otherPeriod.endTime.hour ||
+            (thisPeriod.startTime.hour == otherPeriod.endTime.hour && thisPeriod.startTime.minute >= otherPeriod.endTime.minute))
     }
 }
 
@@ -78,5 +78,11 @@ extension Date {
 
         return Time(hour: components.hour ?? 0,
                     minute: components.minute ?? 0)
+    }
+}
+
+extension Time {
+    static func zero() -> Time {
+        Time(hour: 0, minute: 0)
     }
 }
