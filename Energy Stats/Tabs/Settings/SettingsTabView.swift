@@ -86,6 +86,13 @@ struct SettingsTabView: View {
                     })
 
                 Section {
+                    NavigationLink("FoxESS Cloud Status") { WebView(url: URL(string: "https://monitor.foxesscommunity.com/status/foxess")!) }
+                    Button {
+                        let url = URL(string: "https://www.facebook.com/groups/foxessownersgroup")!
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    } label: {
+                        NavigationLink("Facebook group", destination: EmptyView())
+                    }.buttonStyle(.plain)
                     NavigationLink("Debug") { DebugDataView(networking: networking, configManager: configManager) }
                     NavigationLink("FAQ") { FAQView() }
                 }

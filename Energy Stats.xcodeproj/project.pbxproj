@@ -130,6 +130,7 @@
 		41C0B43429F96D3600CA9462 /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0B43329F96D3600CA9462 /* LocalizedString.swift */; };
 		41C19DCD2A4DDE46009883AB /* SelfSufficiencyEstimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C19DCC2A4DDE46009883AB /* SelfSufficiencyEstimateView.swift */; };
 		41C19DCF2A4E09F9009883AB /* SelfSufficiencySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C19DCE2A4E09F9009883AB /* SelfSufficiencySettingsView.swift */; };
+		41C249A52A77FC7400D8E9E7 /* FoxESSCloudStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C249A42A77FC7400D8E9E7 /* FoxESSCloudStatusView.swift */; };
 		41C49EAE2A0398E4003700CB /* PreviewUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C49EAD2A0398E4003700CB /* PreviewUserManager.swift */; };
 		41C6AF662A360CF600C88F2B /* CSVTextFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C6AF652A360CF600C88F2B /* CSVTextFile.swift */; };
 		41CB71482A3B1A2800199415 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41CB71472A3B1A2800199415 /* Assets.xcassets */; };
@@ -347,6 +348,7 @@
 		41C0B43529F9753000CA9462 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		41C19DCC2A4DDE46009883AB /* SelfSufficiencyEstimateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSufficiencyEstimateView.swift; sourceTree = "<group>"; };
 		41C19DCE2A4E09F9009883AB /* SelfSufficiencySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSufficiencySettingsView.swift; sourceTree = "<group>"; };
+		41C249A42A77FC7400D8E9E7 /* FoxESSCloudStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoxESSCloudStatusView.swift; sourceTree = "<group>"; };
 		41C49EAD2A0398E4003700CB /* PreviewUserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewUserManager.swift; sourceTree = "<group>"; };
 		41C6AF652A360CF600C88F2B /* CSVTextFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVTextFile.swift; sourceTree = "<group>"; };
 		41CB71472A3B1A2800199415 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "Energy Stats/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
@@ -798,6 +800,7 @@
 				416318BA29DDD7E500C2C285 /* Debug View */,
 				418199C62A4034530001B5D4 /* FAQView.swift */,
 				41C19DCE2A4E09F9009883AB /* SelfSufficiencySettingsView.swift */,
+				41C249A42A77FC7400D8E9E7 /* FoxESSCloudStatusView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1130,6 +1133,7 @@
 				419DFA862A12930E0067313A /* DatePickerView.swift in Sources */,
 				416318B929DDD44C00C2C285 /* DebugDataView.swift in Sources */,
 				41E4B31328DB77A3003F7F47 /* HomePowerView.swift in Sources */,
+				41C249A52A77FC7400D8E9E7 /* FoxESSCloudStatusView.swift in Sources */,
 				41A25D3D28CA5CDF00315714 /* ParametersGraphTabView.swift in Sources */,
 				4140ECDA292D58D300992DD8 /* ParameterGraphVariable.swift in Sources */,
 				41E4B31028DB7666003F7F47 /* BatteryPowerView.swift in Sources */,
@@ -1447,7 +1451,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.47;
+				MARKETING_VERSION = 1.48;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1483,7 +1487,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.47;
+				MARKETING_VERSION = 1.48;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
