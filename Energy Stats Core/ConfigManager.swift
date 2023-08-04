@@ -108,7 +108,8 @@ public class ConfigManager: ConfigManaging {
                 battery: deviceBattery,
                 deviceType: device.deviceType,
                 firmware: firmware,
-                variables: variables
+                variables: variables,
+                moduleSN: device.moduleSN
             )
         }
         devices = newDevices
@@ -129,16 +130,7 @@ public class ConfigManager: ConfigManaging {
         devices = try await devices?.asyncMap { [weak self] in
             let firmware = try await self?.fetchFirmwareVersions(deviceID: $0.deviceID)
             if firmware != $0.firmware {
-                return Device(
-                    plantName: $0.plantName,
-                    deviceID: $0.deviceID,
-                    deviceSN: $0.deviceSN,
-                    hasPV: $0.hasPV,
-                    battery: $0.battery,
-                    deviceType: $0.deviceType,
-                    firmware: firmware,
-                    variables: $0.variables
-                )
+                return $0.copy(firmware: firmware)
             } else {
                 return $0
             }
@@ -172,16 +164,7 @@ public class ConfigManager: ConfigManaging {
         set {
             devices = devices?.map {
                 if $0.deviceID == currentDevice.value?.deviceID, let battery = $0.battery {
-                    return Device(
-                        plantName: $0.plantName,
-                        deviceID: $0.deviceID,
-                        deviceSN: $0.deviceSN,
-                        hasPV: $0.hasPV,
-                        battery: Device.Battery(capacity: newValue, minSOC: battery.minSOC),
-                        deviceType: $0.deviceType,
-                        firmware: $0.firmware,
-                        variables: $0.variables
-                    )
+                    return $0.copy(battery: Device.Battery(capacity: newValue, minSOC: battery.minSOC))
                 } else {
                     return $0
                 }

@@ -95,3 +95,4 @@
 "one_battery_freeze_period" = "Your batteries will not charge or discharge between %@. Any house load will come from the grid between these times. Reset the time period to disable this.";
 "Schedule summary" = "Schedule summary";
 "Reset times" = "Reset times";
+"Battery Schedule" = "Battery Schedule";

@@ -16,14 +16,15 @@ struct SettingsTabView: View {
     var body: some View {
         NavigationView {
             Form {
-                InverterChoiceView(viewModel: InverterChoiceViewModel(configManager: configManager))
-                InverterFirmwareVersionsView(viewModel: viewModel)
+                NavigationLink {
+                    InverterSettingsView(configManager: configManager, firmwareVersion: viewModel.firmwareVersions)
+                } label: {
+                    Text("Inverter")
+                }
 
                 if viewModel.hasBattery {
                     NavigationLink {
-                        Form {
-                            BatterySettingsView(viewModel: viewModel)
-                        }
+                        BatterySettingsView(viewModel: viewModel)
                     } label: {
                         Text("Battery")
                     }

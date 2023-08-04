@@ -9,42 +9,35 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct InverterFirmwareVersionsView: View {
-    @ObservedObject var viewModel: SettingsTabViewModel
+    let viewModel: DeviceFirmwareVersion?
 
     var body: some View {
-        Section(
-            content: {
-                if let version = viewModel.firmwareVersions {
-                    HStack {
-                        Text("Manager: ") +
-                            Text(version.manager)
-                        Text("Slave: ") +
-                            Text(version.slave)
-                        Text("Master: ") +
-                            Text(version.master)
-                    }.contextMenu {
-                        Button(action: {
-                            UIPasteboard.general.string = "Manager: \(version.manager) Slave: \(version.slave) Master: \(version.master)"
-                        }) {
-                            Text("Copy to clipboard")
-                            Image(systemName: "doc.on.doc")
-                        }
+        Group {
+            if let version = viewModel {
+                Section {
+                    ESLabeledContent("Manager", value: version.manager)
+                    ESLabeledContent("Slave", value: version.slave)
+                    ESLabeledContent("Master", value: version.master)
+                } header: {
+                    Text("Firmware Versions")
+                } footer: {
+                    VStack(alignment: .leading) {
+                        Text("Find out more about firmware versions from the ") +
+                            Text("foxesscommunity.com")
+                            .foregroundColor(Color.blue) +
+                            Text(" website")
+                    }
+                    .onTapGesture {
+                        UIApplication.shared.open(URL(string: "https://foxesscommunity.com/viewforum.php?f=29")!)
                     }
                 }
-            },
-            header: { Text("Firmware Versions") },
-            footer: {
-                VStack(alignment: .leading) {
-                    Text("Find out more about firmware versions from the ") +
-                        Text("foxesscommunity.com")
-                        .foregroundColor(Color.blue) +
-                        Text(" website")
-                }
-                .onTapGesture {
-                    UIApplication.shared.open(URL(string: "https://foxesscommunity.com/viewforum.php?f=29")!)
-                }
+                .alertCopy(text(version))
             }
-        )
+        }
+    }
+
+    func text(_ version: DeviceFirmwareVersion) -> String {
+        "Manager: \(version.manager) Slave: \(version.slave) Master: \(version.master)"
     }
 }
 
@@ -52,11 +45,7 @@ struct InverterFirmwareVersionsView: View {
 struct InverterFirmwareVersionsView_Previews: PreviewProvider {
     static var previews: some View {
         Form {
-            InverterFirmwareVersionsView(viewModel: SettingsTabViewModel(
-                userManager: .preview(),
-                config: PreviewConfigManager(),
-                networking: DemoNetworking()
-            ))
+            InverterFirmwareVersionsView(viewModel: DeviceFirmwareVersion.preview())
         }
     }
 }

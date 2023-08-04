@@ -6,6 +6,7 @@
   
 */
 "Loading" = "Carga...";
+"Saving" = "Ahorro...";
 "Could not load. Check your internet connection" = "Nie powiodło się. Sprawdź swoje połączenie z internetem";
 "Could not login. Check your internet connection" = "Nie można się zalogować. Sprawdź swoje połączenie z internetem";
 "Could not login as demo user" = "Sprawdź swoje połączenie z internetem";
@@ -78,6 +79,7 @@
 "Cancel" = "Cancelar";
 "Apply" = "Aplicar";
 "Note that not all parameters contain values" = "Tenga en cuenta que no todos los parámetros contienen valores";
+"Earnings" = "Ganancias";
 
 /* Graph pages */
 "power" = "potencia";
@@ -152,3 +154,5 @@
 "one_battery_freeze_period" = "Su batería no se cargará ni se descargará entre %@. Cualquier consumo de la casa vendrá de la red eléctrica durante este periodo. Restablezca el periodo de tiempo para desactivar esta función.";
 "Schedule summary" = "Resumen del horario";
 "Reset times" = "Horarios de reinicio";
+"Battery Schedule" = "Programa de Batería";
+"Show estimated earnings" = "Mostrar ganancias estimadas";

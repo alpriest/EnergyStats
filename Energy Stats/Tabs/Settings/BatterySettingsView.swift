@@ -14,7 +14,7 @@ struct BatterySettingsView: View {
     @State private var isEditingCapacity = false
 
     var body: some View {
-        Group {
+        Form {
             NavigationLink("Minimum charge levels") {
                 BatterySOCSettingsView(networking: viewModel.networking, config: viewModel.config, onSOCchange: { viewModel.recalculateBatteryCapacity() })
             }
@@ -111,13 +111,11 @@ struct BatterySettingsView: View {
 struct BatterySettingsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            Form {
-                BatterySettingsView(viewModel: SettingsTabViewModel(
-                    userManager: .preview(),
-                    config: PreviewConfigManager(),
-                    networking: DemoNetworking()
-                ))
-            }
+            BatterySettingsView(viewModel: SettingsTabViewModel(
+                userManager: .preview(),
+                config: PreviewConfigManager(),
+                networking: DemoNetworking()
+            ))
         }
     }
 }

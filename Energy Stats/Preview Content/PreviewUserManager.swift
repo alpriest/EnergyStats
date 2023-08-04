@@ -13,3 +13,9 @@ extension UserManager {
         UserManager(networking: DemoNetworking(), store: KeychainStore(), configManager: PreviewConfigManager(), networkCache: InMemoryLoggingNetworkStore())
     }
 }
+
+extension DeviceFirmwareVersion {
+    static func preview() -> DeviceFirmwareVersion {
+        DeviceFirmwareVersion(master: "1.54", slave: "1.01", manager: "1.27")
+    }
+}

@@ -158,16 +158,7 @@ class SettingsTabViewModel: ObservableObject {
 
                 config.devices = devices.map {
                     if $0.deviceID == device.deviceID {
-                        return Device(
-                            plantName: $0.plantName,
-                            deviceID: $0.deviceID,
-                            deviceSN: $0.deviceSN,
-                            hasPV: $0.hasPV,
-                            battery: battery,
-                            deviceType: $0.deviceType,
-                            firmware: $0.firmware,
-                            variables: $0.variables
-                        )
+                        return $0.copy(battery: battery)
                     } else {
                         return $0
                     }

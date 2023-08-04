@@ -10,6 +10,7 @@ import Foundation
 struct LocalizedString {
     enum Key: String, RawRepresentable {
         case loading = "Loading"
+        case saving = "Saving"
         case couldNotLogin = "Could not login. Check your internet connection"
         case wrongCredentials = "Wrong credentials, try again"
         case empty = "Empty"

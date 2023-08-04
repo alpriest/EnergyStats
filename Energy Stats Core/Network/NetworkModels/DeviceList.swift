@@ -33,6 +33,7 @@ public struct PagedDeviceListResponse: Decodable, Hashable {
         public let plantName: String
         public let deviceID: String
         public let deviceSN: String
+        public let moduleSN: String
         public let hasBattery: Bool
         public let hasPV: Bool
         public let deviceType: String
@@ -52,6 +53,7 @@ public struct Device: Codable, Hashable, Identifiable {
     public let deviceType: String?
     public let firmware: DeviceFirmwareVersion?
     public let variables: [RawVariable]
+    public let moduleSN: String
 
     public struct Battery: Codable, Hashable {
         public let capacity: String?
@@ -69,7 +71,16 @@ public struct Device: Codable, Hashable, Identifiable {
         deviceType ?? "\(deviceID) Re-login to update"
     }
 
-    public init(plantName: String, deviceID: String, deviceSN: String, hasPV: Bool, battery: Battery?, deviceType: String?, firmware: DeviceFirmwareVersion?, variables: [RawVariable]) {
+    public init(plantName: String,
+                deviceID: String,
+                deviceSN: String,
+                hasPV: Bool,
+                battery: Battery?,
+                deviceType: String?,
+                firmware: DeviceFirmwareVersion?,
+                variables: [RawVariable],
+                moduleSN: String)
+    {
         self.plantName = plantName
         self.deviceID = deviceID
         self.deviceSN = deviceSN
@@ -78,5 +89,29 @@ public struct Device: Codable, Hashable, Identifiable {
         self.deviceType = deviceType
         self.firmware = firmware
         self.variables = variables
+        self.moduleSN = moduleSN
+    }
+
+    public func copy(plantName: String? = nil,
+              deviceID: String? = nil,
+              deviceSN: String? = nil,
+              hasPV: Bool? = nil,
+              battery: Battery? = nil,
+              deviceType: String? = nil,
+              firmware: DeviceFirmwareVersion? = nil,
+              variables: [RawVariable]? = nil,
+              moduleSN: String? = nil) -> Device
+    {
+        Device(
+            plantName: plantName ?? self.plantName,
+            deviceID: deviceID ?? self.deviceID,
+            deviceSN: deviceSN ?? self.deviceSN,
+            hasPV: hasPV ?? self.hasPV,
+            battery: battery ?? self.battery,
+            deviceType: deviceType ?? self.deviceType,
+            firmware: firmware ?? self.firmware,
+            variables: variables ?? self.variables,
+            moduleSN: moduleSN ?? self.moduleSN
+        )
     }
 }

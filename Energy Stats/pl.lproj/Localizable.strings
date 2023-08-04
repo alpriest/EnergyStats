@@ -6,6 +6,7 @@
   
 */
 "Loading" = "Ładuję...";
+"Saving" = "Oszczędność...";
 "Could not load. Check your internet connection" = "Nie powiodło się. Sprawdź swoje połączenie z internetem";
 "Could not login. Check your internet connection" = "Nie można się zalogować. Sprawdź swoje połączenie z internetem";
 "Could not login as demo user" = "Sprawdź swoje połączenie z internetem";
@@ -67,6 +68,7 @@
 "Cancel" = "Anuluj";
 "Apply" = "Zastosuj";
 "Note that not all parameters contain values" = "Zwróć uwagę, że nie wszystkie parametry zawierają wartości";
+"Earnings" = "Zyski";
 
 /* Graph pages */
 "power" = "moc";
@@ -140,3 +142,5 @@
 "one_battery_freeze_period" = "Twoja bateria nie będzie ładowana ani rozładowywana między %@. Każde obciążenie domu będzie pochodzić z sieci w tym czasie. Aby wyłączyć tę funkcję, zresetuj okres czasu.";
 "Schedule summary" = "Podsumowanie harmonogramu";
 "Reset times" = "Czasy resetowania";
+"Battery Schedule" = "Harmonogram baterii";
+"Show estimated earnings" = "Pokaż szacowane zyski";

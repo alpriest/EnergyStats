@@ -29,7 +29,7 @@ class BatterySOCSettingsViewModel: ObservableObject {
         Task { @MainActor in
             guard state == .inactive else { return }
             guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
-            state = .active("Loading...")
+            state = .active(String(key: .loading))
 
             do {
                 let settings = try await networking.fetchBatterySettings(deviceSN: deviceSN)
@@ -49,12 +49,12 @@ class BatterySOCSettingsViewModel: ObservableObject {
                 errorMessage = "Cannot save, please check values"
                 return
             }
-            state = .active("Saving...")
+            state = .active(String(key: .saving))
 
             do {
                 try await networking.setSoc(
-                    minGridSOC: soc,
-                    minSOC: socOnGrid,
+                    minGridSOC: socOnGrid,
+                    minSOC: soc,
                     deviceSN: deviceSN
                 )
 

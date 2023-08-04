@@ -6,6 +6,7 @@
 
 */
 "Loading" = "Lade...";
+"Saving" = "Sparen...";
 "Could not load. Check your internet connection" = "Laden nicht möglich. Prüfen Sie Ihre Internetverbindung";
 "Could not login. Check your internet connection" = "Anmeldung nicht möglich. Prüfen Sie Ihre Internetverbindung";
 "Could not login as demo user" = "Anmeldung als Demo-Benutzer nicht möglich";
@@ -72,6 +73,7 @@
 "Month" = "Monat";
 "Year" = "Jahr";
 "Choose date" = "Datum auswählen";
+"Earnings" = "Ertrag";
 
 /* Graph pages */
 "power" = "Leistung";
@@ -164,3 +166,5 @@
 "one_battery_freeze_period" = "Ihre Batterien werden zwischen %@ weder aufgeladen noch entladen. Jeglicher Hausverbrauch wird in dieser Zeit von der Netzversorgung gedeckt. Zur Deaktivierung setzen Sie die Zeitperiode zurück.";
 "Schedule summary" = "Zeitplan Zusammenfassung";
 "Reset times" = "Reset-Zeiten";
+"Battery Schedule" = "Batterie-Ladeplan";
+"Show estimated earnings" = "Zeige geschätzten Ertrag";

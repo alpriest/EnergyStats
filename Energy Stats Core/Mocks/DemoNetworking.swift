@@ -42,8 +42,8 @@ public class DemoNetworking: Networking {
 
     public func fetchDeviceList() async throws -> PagedDeviceListResponse {
         PagedDeviceListResponse(currentPage: 1, pageSize: 10, total: 1, devices: [
-            PagedDeviceListResponse.Device(plantName: "demo-device-1", deviceID: "f3000-deviceid", deviceSN: "1234", hasBattery: true, hasPV: true, deviceType: "F3000"),
-            PagedDeviceListResponse.Device(plantName: "demo-device-2", deviceID: "h1-deviceid", deviceSN: "5678", hasBattery: true, hasPV: true, deviceType: "H1-3.7-E")
+            PagedDeviceListResponse.Device(plantName: "demo-device-1", deviceID: "f3000-deviceid", deviceSN: "1234", moduleSN: "sn-1", hasBattery: true, hasPV: true, deviceType: "F3000"),
+            PagedDeviceListResponse.Device(plantName: "demo-device-2", deviceID: "h1-deviceid", deviceSN: "5678", moduleSN: "sn-2", hasBattery: true, hasPV: true, deviceType: "H1-3.7-E")
         ])
     }
 
