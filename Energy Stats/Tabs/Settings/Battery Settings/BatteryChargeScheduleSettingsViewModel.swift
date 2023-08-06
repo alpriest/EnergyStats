@@ -77,10 +77,6 @@ class BatteryChargeScheduleSettingsViewModel: ObservableObject {
         timePeriod2 = ChargeTimePeriod(start: .zero(), end: .zero(), enabled: false)
     }
 
-    var valid: Bool {
-        timePeriod1.valid && timePeriod2.valid
-    }
-
     func generateSummary(period1: ChargeTimePeriod, period2: ChargeTimePeriod) {
         var result = ""
 

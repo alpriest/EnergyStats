@@ -32,7 +32,6 @@ struct BatteryChargeScheduleSettingsView: View {
                             .frame(minWidth: 0, maxWidth: .infinity)
                     })
                     .buttonStyle(.borderedProminent)
-                    .disabled(!viewModel.valid)
                 }
                 .frame(minWidth: 0, maxWidth: .infinity)
             })

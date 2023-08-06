@@ -16,6 +16,12 @@ struct InverterSettingsView: View {
         Form {
             InverterChoiceView(viewModel: InverterChoiceViewModel(configManager: configManager))
 
+            NavigationLink {
+                InverterWorkModeView()
+            } label: {
+                Text("Configure Work Mode")
+            }
+
             InverterFirmwareVersionsView(viewModel: firmwareVersion)
 
             if let currentDevice = configManager.currentDevice.value {
@@ -53,11 +59,13 @@ struct InverterSettingsView: View {
     }
 }
 
+#if DEBUG
 struct InverterSettingsView_Previews: PreviewProvider {
     static var previews: some View {
         InverterSettingsView(configManager: PreviewConfigManager(), firmwareVersion: .preview())
     }
 }
+#endif
 
 struct ESLabeledContent: View {
     let title: String

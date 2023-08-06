@@ -83,6 +83,8 @@
 		416318C029DDD82800C2C285 /* ResponseDebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416318BF29DDD82800C2C285 /* ResponseDebugView.swift */; };
 		416AE4362A7D2C8B003D0122 /* InverterSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416AE4352A7D2C8B003D0122 /* InverterSettingsView.swift */; };
 		416AE4382A7D956E003D0122 /* AlertCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416AE4372A7D956E003D0122 /* AlertCopy.swift */; };
+		416AE43A2A7FA76E003D0122 /* InverterWorkModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416AE4392A7FA76E003D0122 /* InverterWorkModeView.swift */; };
+		416AE43C2A7FA8EA003D0122 /* SingleSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416AE43B2A7FA8EA003D0122 /* SingleSelectView.swift */; };
 		417153E429F2BCD700639A7B /* ParameterGraphHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417153E329F2BCD700639A7B /* ParameterGraphHeaderView.swift */; };
 		417153E629F2BD3300639A7B /* LoadState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417153E529F2BD3300639A7B /* LoadState.swift */; };
 		417153E829F2D80C00639A7B /* Date+compare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417153E729F2D80C00639A7B /* Date+compare.swift */; };
@@ -281,6 +283,8 @@
 		416318BF29DDD82800C2C285 /* ResponseDebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseDebugView.swift; sourceTree = "<group>"; };
 		416AE4352A7D2C8B003D0122 /* InverterSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterSettingsView.swift; sourceTree = "<group>"; };
 		416AE4372A7D956E003D0122 /* AlertCopy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCopy.swift; sourceTree = "<group>"; };
+		416AE4392A7FA76E003D0122 /* InverterWorkModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterWorkModeView.swift; sourceTree = "<group>"; };
+		416AE43B2A7FA8EA003D0122 /* SingleSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSelectView.swift; sourceTree = "<group>"; };
 		417153E329F2BCD700639A7B /* ParameterGraphHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterGraphHeaderView.swift; sourceTree = "<group>"; };
 		417153E529F2BD3300639A7B /* LoadState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadState.swift; sourceTree = "<group>"; };
 		417153E729F2D80C00639A7B /* Date+compare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+compare.swift"; sourceTree = "<group>"; };
@@ -448,6 +452,7 @@
 				411029122A71C066004018BB /* Tintable.swift */,
 				411029142A71C4F2004018BB /* NumberTextField.swift */,
 				416AE4372A7D956E003D0122 /* AlertCopy.swift */,
+				416AE43B2A7FA8EA003D0122 /* SingleSelectView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -643,6 +648,7 @@
 			isa = PBXGroup;
 			children = (
 				416AE4352A7D2C8B003D0122 /* InverterSettingsView.swift */,
+				416AE4392A7FA76E003D0122 /* InverterWorkModeView.swift */,
 			);
 			path = Inverter;
 			sourceTree = "<group>";
@@ -1115,6 +1121,7 @@
 			files = (
 				4107446C28CA57A9006D5D7D /* PowerFlowTabView.swift in Sources */,
 				4110290D2A71B713004018BB /* BatteryChargeScheduleSettingsView.swift in Sources */,
+				416AE43A2A7FA76E003D0122 /* InverterWorkModeView.swift in Sources */,
 				418EEEB52916843A006A8290 /* View+If.swift in Sources */,
 				4140145028C70B3200EA5BA1 /* TabbedView.swift in Sources */,
 				411029132A71C066004018BB /* Tintable.swift in Sources */,
@@ -1124,6 +1131,7 @@
 				411029152A71C4F2004018BB /* NumberTextField.swift in Sources */,
 				419CCB542933BABF00882649 /* ErrorAlertView.swift in Sources */,
 				41339C7228CC7B7B0062B976 /* LoginView.swift in Sources */,
+				416AE43C2A7FA8EA003D0122 /* SingleSelectView.swift in Sources */,
 				41626CD029D969E9003FEB00 /* InverterFirmwareVersionsView.swift in Sources */,
 				4171854C2A01033700D18CDD /* ParameterGraphVariablesToggles.swift in Sources */,
 				417185482A0051CA00D18CDD /* ParameterGraphVariableChooserView.swift in Sources */,
@@ -1469,7 +1477,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.50;
+				MARKETING_VERSION = 1.51;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1505,7 +1513,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.50;
+				MARKETING_VERSION = 1.51;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

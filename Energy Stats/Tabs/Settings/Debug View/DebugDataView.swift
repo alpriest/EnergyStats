@@ -55,7 +55,7 @@ struct DebugDataView: View {
                     ResponseDebugView<BatterySettingsResponse>(
                         store: store,
                         title: "Battery Settings",
-                        missing: "Battery Settings are only fetched and recached on login, logout and login to see the data response.",
+                        missing: "Battery Settings are fetched and recached on login. Logout and login to see the data response, or tap below",
                         mapper: { $0.batterySettingsResponse },
                         fetcher: {
                             if let deviceSN = configManager.currentDevice.value?.deviceSN {
@@ -66,11 +66,26 @@ struct DebugDataView: View {
                         }
                     )
                 }
+                NavigationLink("Battery Times") {
+                    ResponseDebugView<BatteryTimesResponse>(
+                        store: store,
+                        title: "Battery Times",
+                        missing: "Battery Times are fetched on demand.",
+                        mapper: { $0.batteryTimesResponse },
+                        fetcher: {
+                            if let deviceSN = configManager.currentDevice.value?.deviceSN {
+                                _ = try await networking.fetchBatteryTimes(deviceSN: deviceSN)
+                            } else {
+                                throw NoCurrentDeviceFoundError()
+                            }
+                        }
+                    )
+                }
                 NavigationLink("Device List") {
                     ResponseDebugView<PagedDeviceListResponse>(
                         store: store,
                         title: "Device List",
-                        missing: "Device list is only fetched and recached on login, logout and login to see the data response.",
+                        missing: "Device list is fetched and recached on login, logout and login to see the data response.",
                         mapper: { $0.deviceListResponse },
                         fetcher: {
                             _ = try await networking.fetchDeviceList()
@@ -81,7 +96,7 @@ struct DebugDataView: View {
                     ResponseDebugView<AddressBookResponse>(
                         store: store,
                         title: "Firmware Versions",
-                        missing: "Device list is only fetched and recached on login, logout and login to see the data response.",
+                        missing: "Firmware version is fetched and recached on login, logout and login to see the data response.",
                         mapper: { $0.addressBookResponse },
                         fetcher: {
                             if let deviceID = configManager.currentDevice.value?.deviceID {

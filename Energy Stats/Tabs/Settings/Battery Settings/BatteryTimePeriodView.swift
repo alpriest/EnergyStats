@@ -10,7 +10,6 @@ import Energy_Stats_Core
 
 struct BatteryTimePeriodView: View {
     @Binding var timePeriod: ChargeTimePeriod
-    @State private var timeError = false
     @State private var errorMessage: String?
     let title: String
 
@@ -21,11 +20,9 @@ struct BatteryTimePeriodView: View {
 
                 DatePicker("Start", selection: $timePeriod.start, displayedComponents: [.hourAndMinute])
                     .datePickerStyle(.compact)
-                    .tinted(enabled: $timeError)
 
                 DatePicker("End", selection: $timePeriod.end, displayedComponents: [.hourAndMinute])
                     .datePickerStyle(.compact)
-                    .tinted(enabled: $timeError)
             },
             header: {
                 Text(title)
@@ -45,7 +42,6 @@ struct BatteryTimePeriodView: View {
                 }
             }
         ).onChange(of: timePeriod) { newValue in
-            timeError = !newValue.valid
             errorMessage = newValue.validate
         }
     }
