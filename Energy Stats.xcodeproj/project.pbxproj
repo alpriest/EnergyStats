@@ -285,6 +285,7 @@
 		416AE4372A7D956E003D0122 /* AlertCopy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCopy.swift; sourceTree = "<group>"; };
 		416AE4392A7FA76E003D0122 /* InverterWorkModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterWorkModeView.swift; sourceTree = "<group>"; };
 		416AE43B2A7FA8EA003D0122 /* SingleSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSelectView.swift; sourceTree = "<group>"; };
+		416AE43D2A7FF6DA003D0122 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		417153E329F2BCD700639A7B /* ParameterGraphHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterGraphHeaderView.swift; sourceTree = "<group>"; };
 		417153E529F2BD3300639A7B /* LoadState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadState.swift; sourceTree = "<group>"; };
 		417153E729F2D80C00639A7B /* Date+compare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+compare.swift"; sourceTree = "<group>"; };
@@ -1026,6 +1027,7 @@
 				de,
 				es,
 				pl,
+				it,
 			);
 			mainGroup = 4140144128C70B3200EA5BA1;
 			packageReferences = (
@@ -1292,6 +1294,7 @@
 				41C0B43129F95C1500CA9462 /* de */,
 				41C0B43229F95E8200CA9462 /* es */,
 				41C0B43529F9753000CA9462 /* pl */,
+				416AE43D2A7FF6DA003D0122 /* it */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

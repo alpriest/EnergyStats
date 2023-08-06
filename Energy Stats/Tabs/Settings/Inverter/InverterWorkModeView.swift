@@ -32,35 +32,19 @@ enum WorkModes: CaseIterable, Describable {
     var subtitle: some View {
         switch self {
         case .selfUse:
-            return Text("""
-            In this mode, the inverter prioritises power allocation as follows:
-
-            1. House Load
-            2. Battery Charging
-            3. Export
-            """)
+            return Text("self_use_mode")
 
         case .feedInFirst:
-            return Text("""
-            In this mode, the inverter prioritises power allocation as follows:
-
-            House Load
-            Export
-            Battery Charging
-            """)
+            return Text("feed_in_first_mode")
 
         case .backup:
-            return Text("""
-            In this mode, the inverter prioritises power allocation as follows:
+            return Text("backup_mode")
 
-            Battery Charging
-            House Load
-            Export
-            """)
         case .powerStation:
-            return Text("This mode has unknown behaviour")
+            return Text("powerstation_mode")
+
         case .peakShaving:
-            return Text("This mode has unknown behaviour")
+            return Text("peak_shaving_mode")
         }
     }
 }

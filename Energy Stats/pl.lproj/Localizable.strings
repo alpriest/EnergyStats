@@ -144,3 +144,10 @@
 "Reset times" = "Czasy resetowania";
 "Battery Schedule" = "Harmonogram baterii";
 "Show estimated earnings" = "Pokaż szacowane zyski";
+
+/* Inverter page */
+"self_use_mode" = "W tym trybie inwerter priorytetowo alokuje moc zgodnie z następującym porządkiem:\n\n1. Obciążenie domu\n2. Ładowanie baterii\n3. Eksport";
+"feed_in_first_mode" = "W tym trybie inwerter priorytetowo alokuje moc zgodnie z następującym porządkiem:\n\n1. Obciążenie domu\n2. Eksport\n3. Ładowanie baterii";
+"backup_mode" = "W tym trybie inwerter priorytetowo alokuje moc zgodnie z następującym porządkiem:\n\n1. Ładowanie baterii\n2. Obciążenie domu\n3. Eksport";
+"powerstation_mode" = "Ten tryb ma nieznane zachowanie";
+"peak_shaving_mode" = "Ten tryb ma nieznane zachowanie";

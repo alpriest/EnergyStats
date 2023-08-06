@@ -96,3 +96,10 @@
 "Schedule summary" = "Schedule summary";
 "Reset times" = "Reset times";
 "Battery Schedule" = "Battery Schedule";
+
+/* Inverter page */
+"self_use_mode" = "In this mode, the inverter prioritises power allocation as follows:\n\n1. House Load\n2. Battery Charging\n3. Export";
+"feed_in_first_mode" = "In this mode, the inverter prioritises power allocation as follows:\n\n1. House Load\n2. Export\n3. Battery Charging";
+"backup_mode" = "In this mode, the inverter prioritises power allocation as follows:\n\n1. Battery Charging\n2. House Load\n3. Export";
+"powerstation_mode" = "This mode has unknown behaviour";
+"peak_shaving_mode" = "This mode has unknown behaviour";
