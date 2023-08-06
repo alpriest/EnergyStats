@@ -39,8 +39,28 @@ enum WorkModes: CaseIterable, Describable {
             2. Battery Charging
             3. Export
             """)
-        default:
-            return Text("")
+
+        case .feedInFirst:
+            return Text("""
+            In this mode, the inverter prioritises power allocation as follows:
+
+            House Load
+            Export
+            Battery Charging
+            """)
+
+        case .backup:
+            return Text("""
+            In this mode, the inverter prioritises power allocation as follows:
+
+            Battery Charging
+            House Load
+            Export
+            """)
+        case .powerStation:
+            return Text("This mode has unknown behaviour")
+        case .peakShaving:
+            return Text("This mode has unknown behaviour")
         }
     }
 }
@@ -49,37 +69,33 @@ struct InverterWorkModeView: View {
     var body: some View {
         SingleSelectView(SingleSelectableListViewModel([WorkModes.selfUse],
                                                        allItems: WorkModes.allCases,
-                                                       onApply: { _ in }))
-        {
-            HStack {
-                Image(systemName: "exclamationmark.triangle.fill")
-                    .font(.title)
-                    .foregroundColor(.red)
+                                                       onApply: { _ in }),
+                         header: {
+                             HStack {
+                                 Image(systemName: "exclamationmark.triangle.fill")
+                                     .font(.title)
+                                     .foregroundColor(.red)
 
-                Text("Only change these values if you know what you are doing")
+                                 Text("Only change these values if you know what you are doing")
 
-                Image(systemName: "exclamationmark.triangle.fill")
-                    .font(.title)
-                    .foregroundColor(.red)
-            }
-            .padding(.vertical)
-        }
-        .navigationTitle("Configure Work Mode")
-        .navigationBarTitleDisplayMode(.inline)
-//            } header: {
-//                Text("All")
-//            } footer: {
-//                Link(destination: URL(string: "https://github.com/TonyM1958/HA-FoxESS-Modbus/wiki/Fox-ESS-Cloud#search-parameters")!) {
-//                    HStack {
-//                        Text("Find out more about these variables")
-//                        Image(systemName: "rectangle.portrait.and.arrow.right")
-//                    }
-//                    .padding()
-//                    .frame(maxWidth: .infinity)
-//                    .font(.caption)
-//                }
-//            }
-//        }
+                                 Image(systemName: "exclamationmark.triangle.fill")
+                                     .font(.title)
+                                     .foregroundColor(.red)
+                             }
+                             .padding(.vertical)
+                         }, footer: {
+                             Link(destination: URL(string: "https://github.com/TonyM1958/HA-FoxESS-Modbus/wiki/Inverter-Work-Modes")!) {
+                                 HStack {
+                                     Text("Find out more about work modes")
+                                     Image(systemName: "rectangle.portrait.and.arrow.right")
+                                 }
+                                 .padding()
+                                 .frame(maxWidth: .infinity)
+                                 .font(.caption)
+                             }
+                         })
+                         .navigationTitle("Configure Work Mode")
+                         .navigationBarTitleDisplayMode(.inline)
     }
 }
 

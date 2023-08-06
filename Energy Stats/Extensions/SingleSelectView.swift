@@ -7,14 +7,19 @@
 
 import SwiftUI
 
-struct SingleSelectView<T: Selectable, Header: View>: View {
+struct SingleSelectView<T: Selectable, Header: View, Footer: View>: View {
     @ObservedObject var viewModel: SingleSelectableListViewModel<T>
     @Environment(\.dismiss) var dismiss
     private let header: () -> Header
+    private let footer: () -> Footer
 
-    init(_ viewModel: SingleSelectableListViewModel<T>, header: @escaping () -> Header) {
+    init(_ viewModel: SingleSelectableListViewModel<T>,
+         header: @escaping () -> Header,
+         footer: @escaping () -> Footer)
+    {
         self.viewModel = viewModel
         self.header = header
+        self.footer = footer
     }
 
     var body: some View {
@@ -46,6 +51,8 @@ struct SingleSelectView<T: Selectable, Header: View>: View {
                     }
                 } header: {
                     header()
+                } footer: {
+                    footer()
                 }
             }
 
@@ -85,7 +92,8 @@ struct SingleSelectView_Previews: PreviewProvider {
         SingleSelectView(SingleSelectableListViewModel([WorkModes.selfUse],
                                                        allItems: WorkModes.allCases,
                                                        onApply: { _ in }),
-                         header: { Text("Header") })
+                         header: { Text("Header") },
+                         footer: { Text("Footer") })
     }
 }
 
