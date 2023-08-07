@@ -7,22 +7,22 @@
 
 import SwiftUI
 
-struct SingleSelectView<T: Selectable, Header: View, Footer: View>: View {
+public struct SingleSelectView<T: Selectable, Header: View, Footer: View>: View {
     @ObservedObject var viewModel: SingleSelectableListViewModel<T>
     @Environment(\.dismiss) var dismiss
     private let header: () -> Header
     private let footer: () -> Footer
 
-    init(_ viewModel: SingleSelectableListViewModel<T>,
-         header: @escaping () -> Header,
-         footer: @escaping () -> Footer)
+    public init(_ viewModel: SingleSelectableListViewModel<T>,
+                header: @escaping () -> Header,
+                footer: @escaping () -> Footer)
     {
         self.viewModel = viewModel
         self.header = header
         self.footer = footer
     }
 
-    var body: some View {
+    public var body: some View {
         VStack(spacing: 0) {
             Form {
                 Section {
@@ -89,55 +89,55 @@ struct SingleSelectView<T: Selectable, Header: View, Footer: View>: View {
 
 struct SingleSelectView_Previews: PreviewProvider {
     static var previews: some View {
-        SingleSelectView(SingleSelectableListViewModel([WorkModes.selfUse],
-                                                       allItems: WorkModes.allCases,
+        SingleSelectView(SingleSelectableListViewModel([WorkMode.selfUse],
+                                                       allItems: WorkMode.allCases,
                                                        onApply: { _ in }),
                          header: { Text("Header") },
                          footer: { Text("Footer") })
     }
 }
 
-protocol Describable {
+public protocol Describable {
     associatedtype ExtraContent: View
 
     var title: String { get }
     var subtitle: ExtraContent { get }
 }
 
-typealias Selectable = Describable & Hashable
+public typealias Selectable = Describable & Hashable
 
-struct SelectableItem<T: Selectable>: Identifiable, Equatable, Hashable {
-    let item: T
-    var isSelected: Bool
-    var id: String { item.title }
+public struct SelectableItem<T: Selectable>: Identifiable, Equatable, Hashable {
+    public let item: T
+    public var isSelected: Bool
+    public var id: String { item.title }
 
-    init(_ item: T, isSelected: Bool = false) {
+    public init(_ item: T, isSelected: Bool = false) {
         self.item = item
         self.isSelected = isSelected
     }
 
-    mutating func setSelected(_ selected: Bool) {
+    public mutating func setSelected(_ selected: Bool) {
         isSelected = selected
     }
 }
 
-protocol SelectableListViewModel: ObservableObject {
+public protocol SelectableListViewModel: ObservableObject {
     associatedtype T: Selectable
 
     func toggle(updating: SelectableItem<T>)
     func apply()
 }
 
-final class SingleSelectableListViewModel<T: Selectable>: SelectableListViewModel {
+public final class SingleSelectableListViewModel<T: Selectable>: SelectableListViewModel {
     @Published var items: [SelectableItem<T>]
     private let onApply: ([T]) -> Void
 
-    init(_ selected: [T], allItems: [T], onApply: @escaping ([T]) -> Void) {
+    public init(_ selected: [T], allItems: [T], onApply: @escaping ([T]) -> Void) {
         self.onApply = onApply
         self.items = allItems.map { SelectableItem($0, isSelected: selected.contains($0)) }
     }
 
-    func toggle(updating: SelectableItem<T>) {
+    public func toggle(updating: SelectableItem<T>) {
         items = items.map { existingVariable in
             var existingVariable = existingVariable
 
@@ -151,7 +151,7 @@ final class SingleSelectableListViewModel<T: Selectable>: SelectableListViewMode
         }
     }
 
-    func apply() {
+    public func apply() {
         onApply(items.filter { $0.isSelected }.map { $0.item })
     }
 }

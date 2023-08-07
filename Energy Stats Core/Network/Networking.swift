@@ -20,6 +20,8 @@ extension URL {
     static var socSet = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/soc/set")!
     static var batteryTimes = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/time/get")!
     static var batteryTimeSet = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/time/set")!
+    static var deviceSettings = URL(string: "https://www.foxesscloud.com/c/v0/device/setting/get")!
+    static var deviceSettingsSet = URL(string: "https://www.foxesscloud.com/c/v0/device/setting/set")!
 }
 
 public protocol Networking {
@@ -36,6 +38,9 @@ public protocol Networking {
     func setSoc(minGridSOC: Int, minSOC: Int, deviceSN: String) async throws
     func fetchBatteryTimes(deviceSN: String) async throws -> BatteryTimesResponse
     func setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws
+    func fetchWorkMode(deviceID: String) async throws -> DeviceSettingsGetRequest
+    func setWorkMode(deviceID: String, workMode: InverterWorkMode) async throws
+    // https://www.foxesscloud.com/c/v0/device/setting/get?id=03274209-486c-4ea3-9c28-159f25ee84cb&hasVersionHead=1&key=operation_mode__work_mode
 }
 
 public class Network: Networking {
@@ -175,6 +180,30 @@ public class Network: Networking {
         var request = URLRequest(url: URL.batteryTimeSet)
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(SetBatteryTimesRequest(sn: deviceSN, times: times))
+
+        do {
+            let _: (String, Data) = try await fetch(request)
+        } catch NetworkError.invalidResponse(_, let statusCode) where statusCode == 200 {
+            // Ignore
+        }
+    }
+
+    public func fetchWorkMode(deviceID: String) async throws -> DeviceSettingsGetRequest {
+        let request = append(queryItems: [
+            URLQueryItem(name: "id", value: deviceID),
+            URLQueryItem(name: "hasVersionHead", value: "1"),
+            URLQueryItem(name: "key", value: "operation_mode__work_mode"),
+        ], to: URL.deviceSettings)
+
+        let result: (DeviceSettingsGetRequest, Data) = try await fetch(request)
+//        store.inverterWorkModeResponse = NetworkOperation(description: "inverterWorkModeResponse", value: result.0, raw: result.1)
+        return result.0
+    }
+
+    public func setWorkMode(deviceID: String, workMode: InverterWorkMode) async throws {
+        var request = URLRequest(url: URL.deviceSettingsSet)
+        request.httpMethod = "POST"
+        request.httpBody = try! JSONEncoder().encode(DeviceSettingsSetRequest(id: deviceID, key: .operationModeWorkMode, values: InverterValues(operationModeWorkMode: workMode)))
 
         do {
             let _: (String, Data) = try await fetch(request)

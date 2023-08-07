@@ -121,4 +121,20 @@ public class NetworkFacade: Networking {
 
         return try await network.setBatteryTimes(deviceSN: deviceSN, times: times)
     }
+
+    public func fetchWorkMode(deviceID: String) async throws -> DeviceSettingsGetRequest {
+        if config.isDemoUser {
+            return try await fakeNetwork.fetchWorkMode(deviceID: deviceID)
+        }
+
+        return try await network.fetchWorkMode(deviceID: deviceID)
+    }
+
+    public func setWorkMode(deviceID: String, workMode: InverterWorkMode) async throws {
+        if config.isDemoUser {
+            return try await fakeNetwork.setWorkMode(deviceID: deviceID, workMode: workMode)
+        }
+
+        return try await network.setWorkMode(deviceID: deviceID, workMode: workMode)
+    }
 }

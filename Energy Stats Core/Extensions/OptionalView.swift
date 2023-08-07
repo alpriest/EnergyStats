@@ -7,16 +7,16 @@
 
 import SwiftUI
 
-struct OptionalView<T, Content>: View where Content: View {
-    internal init(_ item: T?, content: @escaping (T) -> Content) {
+public struct OptionalView<T, Content>: View where Content: View {
+    public init(_ item: T?, content: @escaping (T) -> Content) {
         self.item = item
         self.content = content
     }
 
-    let item: T?
-    var content: (T) -> Content
+    public let item: T?
+    public var content: (T) -> Content
 
-    var body: some View {
+    public var body: some View {
         Group {
             if let item = item {
                 content(item)

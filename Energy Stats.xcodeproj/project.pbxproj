@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		41028F9528CDD7A300FB70FD /* OptionalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41028F9428CDD7A300FB70FD /* OptionalView.swift */; };
 		4103D1CF29DB6C4D001B0BC8 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146128C7146300EA5BA1 /* Auth.swift */; };
 		4103D1D029DB6C51001B0BC8 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146428C714C000EA5BA1 /* Report.swift */; };
 		4103D1D129DB6C51001B0BC8 /* Raw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D7B12328C86E4000E14144 /* Raw.swift */; };
@@ -84,7 +83,10 @@
 		416AE4362A7D2C8B003D0122 /* InverterSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416AE4352A7D2C8B003D0122 /* InverterSettingsView.swift */; };
 		416AE4382A7D956E003D0122 /* AlertCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416AE4372A7D956E003D0122 /* AlertCopy.swift */; };
 		416AE43A2A7FA76E003D0122 /* InverterWorkModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416AE4392A7FA76E003D0122 /* InverterWorkModeView.swift */; };
-		416AE43C2A7FA8EA003D0122 /* SingleSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416AE43B2A7FA8EA003D0122 /* SingleSelectView.swift */; };
+		416AE4452A811FBB003D0122 /* DeviceSettingsGetRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416AE4442A811FBB003D0122 /* DeviceSettingsGetRequest.swift */; };
+		416AE4462A812814003D0122 /* SingleSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416AE43B2A7FA8EA003D0122 /* SingleSelectView.swift */; };
+		416AE4482A812876003D0122 /* WorkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416AE4472A812876003D0122 /* WorkMode.swift */; };
+		416AE4492A8128B9003D0122 /* OptionalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41028F9428CDD7A300FB70FD /* OptionalView.swift */; };
 		417153E429F2BCD700639A7B /* ParameterGraphHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417153E329F2BCD700639A7B /* ParameterGraphHeaderView.swift */; };
 		417153E629F2BD3300639A7B /* LoadState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417153E529F2BD3300639A7B /* LoadState.swift */; };
 		417153E829F2D80C00639A7B /* Date+compare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417153E729F2D80C00639A7B /* Date+compare.swift */; };
@@ -286,6 +288,8 @@
 		416AE4392A7FA76E003D0122 /* InverterWorkModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterWorkModeView.swift; sourceTree = "<group>"; };
 		416AE43B2A7FA8EA003D0122 /* SingleSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSelectView.swift; sourceTree = "<group>"; };
 		416AE43D2A7FF6DA003D0122 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		416AE4442A811FBB003D0122 /* DeviceSettingsGetRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSettingsGetRequest.swift; sourceTree = "<group>"; };
+		416AE4472A812876003D0122 /* WorkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkMode.swift; sourceTree = "<group>"; };
 		417153E329F2BCD700639A7B /* ParameterGraphHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterGraphHeaderView.swift; sourceTree = "<group>"; };
 		417153E529F2BD3300639A7B /* LoadState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadState.swift; sourceTree = "<group>"; };
 		417153E729F2D80C00639A7B /* Date+compare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+compare.swift"; sourceTree = "<group>"; };
@@ -431,6 +435,8 @@
 		4103D1E629DB6D2C001B0BC8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				41028F9428CDD7A300FB70FD /* OptionalView.swift */,
+				416AE43B2A7FA8EA003D0122 /* SingleSelectView.swift */,
 				4127910C28E2442100D5F993 /* Array+Safe.swift */,
 				4111333529B7D61200972935 /* Sequence+aysnc.swift */,
 				4171854129FFCF2500D18CDD /* String+MD5.swift */,
@@ -443,7 +449,6 @@
 		4106A92E28D05EC10009DA28 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				41028F9428CDD7A300FB70FD /* OptionalView.swift */,
 				4128E4C028DA5F6600C1D698 /* Date.swift */,
 				418EEEB42916843A006A8290 /* View+If.swift */,
 				416318BD29DDD80E00C2C285 /* View+Copy.swift */,
@@ -453,7 +458,6 @@
 				411029122A71C066004018BB /* Tintable.swift */,
 				411029142A71C4F2004018BB /* NumberTextField.swift */,
 				416AE4372A7D956E003D0122 /* AlertCopy.swift */,
-				416AE43B2A7FA8EA003D0122 /* SingleSelectView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -612,6 +616,7 @@
 				417185452A004FA900D18CDD /* VariablesResponse.swift */,
 				4162BC2D2A09773D00DFEDC1 /* EarningsResponse.swift */,
 				411029182A729F02004018BB /* BatteryTimesResponse.swift */,
+				416AE4442A811FBB003D0122 /* DeviceSettingsGetRequest.swift */,
 			);
 			path = NetworkModels;
 			sourceTree = "<group>";
@@ -623,6 +628,7 @@
 				4106A92C28CFCD960009DA28 /* RawVariable.swift */,
 				4103F82F2922BFBA00567B1C /* ReportVariable.swift */,
 				41626CD129D96AD9003FEB00 /* DeviceFirmwareVersion.swift */,
+				416AE4472A812876003D0122 /* WorkMode.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1129,11 +1135,9 @@
 				411029132A71C066004018BB /* Tintable.swift in Sources */,
 				4141B20028D86C7200B60157 /* UserManager.swift in Sources */,
 				41CD1F342A141F81006B0C00 /* NonFunctionalButton.swift in Sources */,
-				41028F9528CDD7A300FB70FD /* OptionalView.swift in Sources */,
 				411029152A71C4F2004018BB /* NumberTextField.swift in Sources */,
 				419CCB542933BABF00882649 /* ErrorAlertView.swift in Sources */,
 				41339C7228CC7B7B0062B976 /* LoginView.swift in Sources */,
-				416AE43C2A7FA8EA003D0122 /* SingleSelectView.swift in Sources */,
 				41626CD029D969E9003FEB00 /* InverterFirmwareVersionsView.swift in Sources */,
 				4171854C2A01033700D18CDD /* ParameterGraphVariablesToggles.swift in Sources */,
 				417185482A0051CA00D18CDD /* ParameterGraphVariableChooserView.swift in Sources */,
@@ -1203,10 +1207,13 @@
 				4103D1DB29DB6C6D001B0BC8 /* RawVariable.swift in Sources */,
 				4103D1E529DB6D29001B0BC8 /* Sequence+aysnc.swift in Sources */,
 				4103D1DA29DB6C6D001B0BC8 /* DeviceFirmwareVersion.swift in Sources */,
+				416AE4482A812876003D0122 /* WorkMode.swift in Sources */,
 				4162BC2E2A09773D00DFEDC1 /* EarningsResponse.swift in Sources */,
 				41A95BA129DB3F7E00A35169 /* PylonView.swift in Sources */,
 				4103D1D529DB6C51001B0BC8 /* NetworkResponse.swift in Sources */,
+				416AE4462A812814003D0122 /* SingleSelectView.swift in Sources */,
 				410913FD29DB78EF00133CC5 /* PreciseDateTimeFormatter.swift in Sources */,
+				416AE4492A8128B9003D0122 /* OptionalView.swift in Sources */,
 				417185462A004FA900D18CDD /* VariablesResponse.swift in Sources */,
 				4103D1CF29DB6C4D001B0BC8 /* Auth.swift in Sources */,
 				410913FF29DB7A2700133CC5 /* CurrentStatusViewModel.swift in Sources */,
@@ -1215,6 +1222,7 @@
 				4103D1D129DB6C51001B0BC8 /* Raw.swift in Sources */,
 				4103D1D829DB6C51001B0BC8 /* NetworkFacade.swift in Sources */,
 				418547492A3A1C7A000128C7 /* PowerAmountView.swift in Sources */,
+				416AE4452A811FBB003D0122 /* DeviceSettingsGetRequest.swift in Sources */,
 				41F71ABD2A14FBEC00A8C81B /* Array+Safe.swift in Sources */,
 				4103D1D029DB6C51001B0BC8 /* Report.swift in Sources */,
 				4109140029DB7AB600133CC5 /* HomePowerFlowViewModel.swift in Sources */,

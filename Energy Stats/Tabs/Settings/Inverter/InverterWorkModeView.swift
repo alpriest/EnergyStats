@@ -5,54 +5,53 @@
 //  Created by Alistair Priest on 06/08/2023.
 //
 
+import Energy_Stats_Core
 import SwiftUI
 
-enum WorkModes: CaseIterable, Describable {
-    case selfUse
-    case feedInFirst
-    case backup
-    case powerStation
-    case peakShaving
+class InverterWorkModeViewModel: ObservableObject {
+    private let networking: Networking
+    private let config: ConfigManaging
+    @Published var state: LoadState = .inactive
+    @Published var workMode: WorkMode = .selfUse
 
-    var title: String {
-        switch self {
-        case .selfUse:
-            return "Self Use"
-        case .feedInFirst:
-            return "Feed In First"
-        case .backup:
-            return "Backup"
-        case .powerStation:
-            return "Power Station"
-        case .peakShaving:
-            return "Peak Shaving"
+    init(networking: Networking, config: ConfigManaging) {
+        self.networking = networking
+        self.config = config
+
+        load()
+    }
+
+    func load() {
+        Task {
+            guard state == .inactive else { return }
+            guard let deviceID = config.currentDevice.value?.deviceID else { return }
+            state = .active(String(key: .loading))
+
+            do {
+                // https://www.foxesscloud.com/c/v0/device/setting/get?id=03274209-486c-4ea3-9c28-159f25ee84cb&hasVersionHead=1&key=operation_mode__work_mode
+                let response = try await networking.fetchWorkMode(deviceID: deviceID)
+                workMode = response.values.operationModeWorkMode.asWorkMode()
+
+                state = .inactive
+            } catch {
+                state = .error(error, "Could not load settings")
+            }
         }
     }
 
-    var subtitle: some View {
-        switch self {
-        case .selfUse:
-            return Text("self_use_mode")
-
-        case .feedInFirst:
-            return Text("feed_in_first_mode")
-
-        case .backup:
-            return Text("backup_mode")
-
-        case .powerStation:
-            return Text("powerstation_mode")
-
-        case .peakShaving:
-            return Text("peak_shaving_mode")
-        }
-    }
+    func save() {}
 }
 
 struct InverterWorkModeView: View {
+    @StateObject var viewModel: InverterWorkModeViewModel
+
+    init(networking: Networking, config: ConfigManaging) {
+        _viewModel = StateObject(wrappedValue: InverterWorkModeViewModel(networking: networking, config: config))
+    }
+
     var body: some View {
-        SingleSelectView(SingleSelectableListViewModel([WorkModes.selfUse],
-                                                       allItems: WorkModes.allCases,
+        SingleSelectView(SingleSelectableListViewModel([WorkMode.selfUse],
+                                                       allItems: WorkMode.allCases,
                                                        onApply: { _ in }),
                          header: {
                              HStack {
@@ -80,13 +79,16 @@ struct InverterWorkModeView: View {
                          })
                          .navigationTitle("Configure Work Mode")
                          .navigationBarTitleDisplayMode(.inline)
+                         .loadable($viewModel.state) {
+                             viewModel.load()
+                         }
     }
 }
 
 struct InverterWorkmodeView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            InverterWorkModeView()
+            InverterWorkModeView(networking: DemoNetworking(), config: PreviewConfigManager())
         }
     }
 }
