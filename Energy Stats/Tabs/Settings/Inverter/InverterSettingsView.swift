@@ -9,6 +9,7 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct InverterSettingsView: View {
+    let networking: Networking
     let configManager: ConfigManaging
     let firmwareVersion: DeviceFirmwareVersion?
 
@@ -16,11 +17,11 @@ struct InverterSettingsView: View {
         Form {
             InverterChoiceView(viewModel: InverterChoiceViewModel(configManager: configManager))
 
-//            NavigationLink {
-//                InverterWorkModeView()
-//            } label: {
-//                Text("Configure Work Mode")
-//            }
+            NavigationLink {
+                InverterWorkModeView(networking: networking, config: configManager)
+            } label: {
+                Text("Configure Work Mode")
+            }
 
             InverterFirmwareVersionsView(viewModel: firmwareVersion)
 
@@ -62,7 +63,11 @@ struct InverterSettingsView: View {
 #if DEBUG
 struct InverterSettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        InverterSettingsView(configManager: PreviewConfigManager(), firmwareVersion: .preview())
+        InverterSettingsView(
+            networking: DemoNetworking(),
+            configManager: PreviewConfigManager(),
+            firmwareVersion: .preview()
+        )
     }
 }
 #endif

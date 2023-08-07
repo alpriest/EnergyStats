@@ -17,7 +17,7 @@ struct SettingsTabView: View {
         NavigationView {
             Form {
                 NavigationLink {
-                    InverterSettingsView(configManager: configManager, firmwareVersion: viewModel.firmwareVersions)
+                    InverterSettingsView(networking: networking, configManager: configManager, firmwareVersion: viewModel.firmwareVersions)
                 } label: {
                     Text("Inverter")
                 }

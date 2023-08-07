@@ -12,7 +12,7 @@ class InverterWorkModeViewModel: ObservableObject {
     private let networking: Networking
     private let config: ConfigManaging
     @Published var state: LoadState = .inactive
-    @Published var workMode: WorkMode = .selfUse
+    @Published var items: [SelectableItem<WorkMode>] = []
 
     init(networking: Networking, config: ConfigManaging) {
         self.networking = networking
@@ -22,66 +22,156 @@ class InverterWorkModeViewModel: ObservableObject {
     }
 
     func load() {
-        Task {
+        Task { @MainActor in
             guard state == .inactive else { return }
             guard let deviceID = config.currentDevice.value?.deviceID else { return }
             state = .active(String(key: .loading))
 
             do {
-                // https://www.foxesscloud.com/c/v0/device/setting/get?id=03274209-486c-4ea3-9c28-159f25ee84cb&hasVersionHead=1&key=operation_mode__work_mode
                 let response = try await networking.fetchWorkMode(deviceID: deviceID)
-                workMode = response.values.operationModeWorkMode.asWorkMode()
+                let workMode = response.values.operationModeWorkMode.asWorkMode()
+                self.items = WorkMode.allCases.map { SelectableItem($0, isSelected: $0 == workMode) }
 
                 state = .inactive
             } catch {
-                state = .error(error, "Could not load settings")
+                state = .error(error, "Could not load work mode")
             }
         }
     }
 
-    func save() {}
+    func save() async -> Bool {
+        guard let mode = selected else { return false }
+
+        Task { @MainActor in
+            guard state == .inactive else { return }
+            guard let deviceID = config.currentDevice.value?.deviceID else { return }
+
+            do {
+                try await networking.setWorkMode(deviceID: deviceID, workMode: mode.asInverterWorkMode())
+                state = .inactive
+            } catch {
+                state = .error(error, "Could not save work mode")
+            }
+        }
+        return true
+    }
+
+    func toggle(updating: SelectableItem<WorkMode>) {
+        items = items.map { existingVariable in
+            var existingVariable = existingVariable
+
+            if existingVariable.id == updating.id {
+                existingVariable.setSelected(true)
+            } else {
+                existingVariable.setSelected(false)
+            }
+
+            return existingVariable
+        }
+    }
+
+    var selected: WorkMode? {
+        items.first(where: { $0.isSelected })?.item
+    }
 }
 
 struct InverterWorkModeView: View {
     @StateObject var viewModel: InverterWorkModeViewModel
+    @Environment(\.dismiss) var dismiss
 
     init(networking: Networking, config: ConfigManaging) {
         _viewModel = StateObject(wrappedValue: InverterWorkModeViewModel(networking: networking, config: config))
     }
 
     var body: some View {
-        SingleSelectView(SingleSelectableListViewModel([WorkMode.selfUse],
-                                                       allItems: WorkMode.allCases,
-                                                       onApply: { _ in }),
-                         header: {
-                             HStack {
-                                 Image(systemName: "exclamationmark.triangle.fill")
-                                     .font(.title)
-                                     .foregroundColor(.red)
+        VStack(spacing: 0) {
+            Form {
+                Section {
+                    List {
+                        ForEach(viewModel.items, id: \.self) { item in
+                            Button {
+                                viewModel.toggle(updating: item)
+                            } label: {
+                                HStack(alignment: .firstTextBaseline) {
+                                    Image(systemName: item.isSelected ? "checkmark.circle.fill" : "circle")
+                                    VStack(alignment: .leading) {
+                                        Text(item.item.title)
 
-                                 Text("Only change these values if you know what you are doing")
+                                        OptionalView(item.item.subtitle) {
+                                            AnyView($0)
+                                        }
+                                        .font(.caption)
+                                        .foregroundColor(.gray)
+                                    }
+                                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                    .contentShape(Rectangle())
+                                }
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                        }
+                    }
+                } header: {
+                    HStack {
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .font(.title)
+                            .foregroundColor(.red)
 
-                                 Image(systemName: "exclamationmark.triangle.fill")
-                                     .font(.title)
-                                     .foregroundColor(.red)
-                             }
-                             .padding(.vertical)
-                         }, footer: {
-                             Link(destination: URL(string: "https://github.com/TonyM1958/HA-FoxESS-Modbus/wiki/Inverter-Work-Modes")!) {
-                                 HStack {
-                                     Text("Find out more about work modes")
-                                     Image(systemName: "rectangle.portrait.and.arrow.right")
-                                 }
-                                 .padding()
-                                 .frame(maxWidth: .infinity)
-                                 .font(.caption)
-                             }
-                         })
-                         .navigationTitle("Configure Work Mode")
-                         .navigationBarTitleDisplayMode(.inline)
-                         .loadable($viewModel.state) {
-                             viewModel.load()
-                         }
+                        Text("Only change these values if you know what you are doing")
+
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .font(.title)
+                            .foregroundColor(.red)
+                    }
+                    .padding(.vertical)
+                } footer: {
+                    Link(destination: URL(string: "https://github.com/TonyM1958/HA-FoxESS-Modbus/wiki/Inverter-Work-Modes")!) {
+                        HStack {
+                            Text("Find out more about work modes")
+                            Image(systemName: "rectangle.portrait.and.arrow.right")
+                        }
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .font(.caption)
+                    }
+                }
+            }
+
+            VStack(spacing: 0) {
+                Color("BottomBarDivider")
+                    .frame(height: 1)
+                    .frame(maxWidth: .infinity)
+
+                HStack {
+                    Button(action: {
+                        dismiss()
+                    }) {
+                        Text("Cancel")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .padding()
+                    .buttonStyle(.borderedProminent)
+                    .accessibilityIdentifier("cancel")
+
+                    Button(action: {
+                        Task {
+                            if await viewModel.save() {
+                                dismiss()
+                            }
+                        }
+                    }) {
+                        Text("Apply")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .padding()
+                    .buttonStyle(.borderedProminent)
+                }
+            }
+        }
+        .navigationTitle("Configure Work Mode")
+        .navigationBarTitleDisplayMode(.inline)
+        .loadable($viewModel.state) {
+            viewModel.load()
+        }
     }
 }
 

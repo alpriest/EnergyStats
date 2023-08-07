@@ -48,4 +48,19 @@ public enum WorkMode: CaseIterable, Describable {
             return Text("peak_shaving_mode")
         }
     }
+
+    public func asInverterWorkMode() -> InverterWorkMode {
+        switch self {
+        case .selfUse:
+            return .selfUse
+        case .feedInFirst:
+            return .feedInFirst
+        case .backup:
+            return .backup
+        case .powerStation:
+            return .powerStation
+        case .peakShaving:
+            return .peakShaving
+        }
+    }
 }
