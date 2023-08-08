@@ -13,6 +13,8 @@ class InverterWorkModeViewModel: ObservableObject {
     private let config: ConfigManaging
     @Published var state: LoadState = .inactive
     @Published var items: [SelectableItem<WorkMode>] = []
+    @Published var alertContent: AlertContent?
+    @Published var shouldDismiss = false
 
     init(networking: Networking, config: ConfigManaging) {
         self.networking = networking
@@ -39,21 +41,25 @@ class InverterWorkModeViewModel: ObservableObject {
         }
     }
 
-    func save() async -> Bool {
-        guard let mode = selected else { return false }
+    func save() async {
+        guard let mode = selected else { return }
 
         Task { @MainActor in
             guard state == .inactive else { return }
             guard let deviceID = config.currentDevice.value?.deviceID else { return }
+            state = .active(String(key: .saving))
 
             do {
                 try await networking.setWorkMode(deviceID: deviceID, workMode: mode.asInverterWorkMode())
-                state = .inactive
+                alertContent = AlertContent(title: "Saved", message: "Your inverter settings were saved", onDismiss: {
+                    Task { @MainActor in
+                        self.shouldDismiss = true
+                    }
+                })
             } catch {
                 state = .error(error, "Could not save work mode")
             }
         }
-        return true
     }
 
     func toggle(updating: SelectableItem<WorkMode>) {
@@ -154,9 +160,7 @@ struct InverterWorkModeView: View {
 
                     Button(action: {
                         Task {
-                            if await viewModel.save() {
-                                dismiss()
-                            }
+                            await viewModel.save()
                         }
                     }) {
                         Text("Apply")
@@ -167,10 +171,16 @@ struct InverterWorkModeView: View {
                 }
             }
         }
+        .alert(alertContent: $viewModel.alertContent)
         .navigationTitle("Configure Work Mode")
         .navigationBarTitleDisplayMode(.inline)
         .loadable($viewModel.state) {
             viewModel.load()
+        }
+        .onChange(of: viewModel.shouldDismiss) {
+            if $0 {
+                dismiss()
+            }
         }
     }
 }
