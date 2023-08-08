@@ -10,65 +10,76 @@ import SwiftUI
 
 struct BatterySOCSettingsView: View {
     @StateObject var viewModel: BatterySOCSettingsViewModel
+    @Environment(\.dismiss) var dismiss
 
     init(networking: Networking, config: ConfigManaging, onSOCchange: @escaping () -> Void) {
         self._viewModel = StateObject(wrappedValue: BatterySOCSettingsViewModel(networking: networking, config: config, onSOCchange: onSOCchange))
     }
 
     var body: some View {
-        Form {
-            Section(
-                content: {
-                    HStack {
-                        Text("Min SoC")
-                        NumberTextField("Min SoC", text: $viewModel.soc)
-                            .multilineTextAlignment(.trailing)
-                        Text("%")
+        VStack(spacing: 0) {
+            Form {
+                Section(
+                    content: {
+                        HStack {
+                            Text("Min SoC")
+                            NumberTextField("Min SoC", text: $viewModel.soc)
+                                .multilineTextAlignment(.trailing)
+                            Text("%")
+                        }
+                    },
+                    footer: {
+                        Text("minsoc_description")
                     }
-                },
-                footer: {
-                    Text("minsoc_description")
-                }
-            )
+                )
 
-            Section(
-                content: {
-                    HStack {
-                        Text("Min SoC on Grid")
-                        NumberTextField("Min SoC on Grid", text: $viewModel.socOnGrid)
-                            .multilineTextAlignment(.trailing)
-                        Text("%")
+                Section(
+                    content: {
+                        HStack {
+                            Text("Min SoC on Grid")
+                            NumberTextField("Min SoC on Grid", text: $viewModel.socOnGrid)
+                                .multilineTextAlignment(.trailing)
+                            Text("%")
+                        }
+                    },
+                    footer: {
+                        VStack(alignment: .leading) {
+                            Text("minsocgrid_description")
+                                .padding(.bottom)
+                            Text("minsoc_detail")
+                                .padding(.bottom)
+                            Text("minsoc_notsure_footnote")
+                        }
                     }
-                },
-                footer: {
-                    VStack(alignment: .leading) {
-                        Text("minsocgrid_description")
-                            .padding(.bottom)
-                        Text("minsoc_detail")
-                            .padding(.bottom)
-                        Text("minsoc_notsure_footnote")
-                    }
-                }
-            )
+                )
 
-            Section(content: {}, footer: {
-                VStack {
-                    OptionalView(viewModel.errorMessage) {
-                        Text($0)
-                            .foregroundColor(Color.red)
-                    }
+                Section(content: {}, footer: {
+                    VStack {
+                        OptionalView(viewModel.errorMessage) {
+                            Text($0)
+                                .foregroundColor(Color.red)
+                        }
 
-                    Button(action: {
-                        viewModel.save()
-                    }, label: {
-                        Text("Save")
-                            .frame(minWidth: 0, maxWidth: .infinity)
-                    })
-                    .buttonStyle(.borderedProminent)
-                }
-            })
+                        Button(action: {
+                            viewModel.save()
+                        }, label: {
+                            Text("Save")
+                                .frame(minWidth: 0, maxWidth: .infinity)
+                        })
+                        .buttonStyle(.borderedProminent)
+                    }
+                })
+            }
         }
+        .navigationTitle("Configure Battery Charge Levels")
+        .navigationBarTitleDisplayMode(.inline)
         .loadable($viewModel.state, retry: { viewModel.load() })
+        .alert(alertContent: $viewModel.alertContent)
+        .onChange(of: viewModel.shouldDismiss) {
+            if $0 {
+                dismiss()
+            }
+        }
     }
 }
 

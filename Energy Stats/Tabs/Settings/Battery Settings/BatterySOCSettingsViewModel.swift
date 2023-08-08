@@ -11,11 +11,13 @@ import Energy_Stats_Core
 class BatterySOCSettingsViewModel: ObservableObject {
     private let networking: Networking
     private let config: ConfigManaging
+    private let onSOCchange: () -> Void
     @Published var soc: String = ""
     @Published var socOnGrid: String = ""
     @Published var errorMessage: String?
     @Published var state: LoadState = .inactive
-    private let onSOCchange: () -> Void
+    @Published var alertContent: AlertContent?
+    @Published var shouldDismiss = false
 
     init(networking: Networking, config: ConfigManaging, onSOCchange: @escaping () -> Void) {
         self.networking = networking
@@ -60,7 +62,11 @@ class BatterySOCSettingsViewModel: ObservableObject {
 
                 onSOCchange()
 
-                state = .inactive
+                alertContent = AlertContent(title: "Success", message: "Your battery settings were saved", onDismiss: {
+                    Task { @MainActor in
+                        self.shouldDismiss = true
+                    }
+                })
             } catch {
                 state = .error(error, "Could not save settings")
             }

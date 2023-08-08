@@ -10,6 +10,7 @@ import SwiftUI
 
 struct BatteryChargeScheduleSettingsView: View {
     @StateObject var viewModel: BatteryChargeScheduleSettingsViewModel
+    @Environment(\.dismiss) var dismiss
 
     init(networking: Networking, config: ConfigManaging) {
         _viewModel = StateObject(wrappedValue: BatteryChargeScheduleSettingsViewModel(networking: networking, config: config))
@@ -37,12 +38,19 @@ struct BatteryChargeScheduleSettingsView: View {
             })
         }
         .navigationTitle("Battery Schedule")
+        .navigationBarTitleDisplayMode(.inline)
         .loadable($viewModel.state, retry: { viewModel.load() })
         .onChange(of: viewModel.timePeriod1) { newValue in
             viewModel.generateSummary(period1: newValue, period2: viewModel.timePeriod2)
         }
         .onChange(of: viewModel.timePeriod2) { newValue in
             viewModel.generateSummary(period1: viewModel.timePeriod1, period2: newValue)
+        }
+        .alert(alertContent: $viewModel.alertContent)
+        .onChange(of: viewModel.shouldDismiss) {
+            if $0 {
+                dismiss()
+            }
         }
     }
 }

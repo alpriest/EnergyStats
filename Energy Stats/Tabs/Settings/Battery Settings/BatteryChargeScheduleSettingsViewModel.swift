@@ -12,11 +12,13 @@ import Foundation
 class BatteryChargeScheduleSettingsViewModel: ObservableObject {
     private let networking: Networking
     private let config: ConfigManaging
+    private var cancellable: AnyCancellable?
     @Published var state: LoadState = .inactive
     @Published var timePeriod1: ChargeTimePeriod = .init(start: Date(), end: Date(), enabled: false)
     @Published var timePeriod2: ChargeTimePeriod = .init(start: Date(), end: Date(), enabled: false)
     @Published var summary = ""
-    private var cancellable: AnyCancellable?
+    @Published var alertContent: AlertContent?
+    @Published var shouldDismiss = false
 
     init(networking: Networking, config: ConfigManaging) {
         self.networking = networking
@@ -56,7 +58,7 @@ class BatteryChargeScheduleSettingsViewModel: ObservableObject {
     func save() {
         Task { @MainActor in
             guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
-            state = .active("Saving...")
+            state = .active(String(key: .saving))
 
             do {
                 let times: [ChargeTime] = [
@@ -65,7 +67,11 @@ class BatteryChargeScheduleSettingsViewModel: ObservableObject {
                 ]
 
                 try await networking.setBatteryTimes(deviceSN: deviceSN, times: times)
-                state = .inactive
+                alertContent = AlertContent(title: "Success", message: "Your charge schedule was saved", onDismiss: {
+                    Task { @MainActor in
+                        self.shouldDismiss = true
+                    }
+                })
             } catch {
                 state = .error(error, "Could not save settings")
             }

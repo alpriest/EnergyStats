@@ -41,7 +41,7 @@ class InverterWorkModeViewModel: ObservableObject {
         }
     }
 
-    func save() async {
+    func save() {
         guard let mode = selected else { return }
 
         Task { @MainActor in
@@ -51,7 +51,7 @@ class InverterWorkModeViewModel: ObservableObject {
 
             do {
                 try await networking.setWorkMode(deviceID: deviceID, workMode: mode.asInverterWorkMode())
-                alertContent = AlertContent(title: "Saved", message: "Your inverter settings were saved", onDismiss: {
+                alertContent = AlertContent(title: "Success", message: "Your inverter settings were saved", onDismiss: {
                     Task { @MainActor in
                         self.shouldDismiss = true
                     }
@@ -159,9 +159,7 @@ struct InverterWorkModeView: View {
                     .accessibilityIdentifier("cancel")
 
                     Button(action: {
-                        Task {
-                            await viewModel.save()
-                        }
+                        viewModel.save()
                     }) {
                         Text("Apply")
                             .frame(maxWidth: .infinity)
@@ -171,12 +169,12 @@ struct InverterWorkModeView: View {
                 }
             }
         }
-        .alert(alertContent: $viewModel.alertContent)
-        .navigationTitle("Configure Work Mode")
-        .navigationBarTitleDisplayMode(.inline)
         .loadable($viewModel.state) {
             viewModel.load()
         }
+        .alert(alertContent: $viewModel.alertContent)
+        .navigationTitle("Configure Work Mode")
+        .navigationBarTitleDisplayMode(.inline)
         .onChange(of: viewModel.shouldDismiss) {
             if $0 {
                 dismiss()

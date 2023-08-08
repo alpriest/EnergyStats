@@ -17,10 +17,8 @@ struct InverterSettingsView: View {
         Form {
             InverterChoiceView(viewModel: InverterChoiceViewModel(configManager: configManager))
 
-            NavigationLink {
+            NavigationLink("Configure Work Mode") {
                 InverterWorkModeView(networking: networking, config: configManager)
-            } label: {
-                Text("Configure Work Mode")
             }
 
             InverterFirmwareVersionsView(viewModel: firmwareVersion)
