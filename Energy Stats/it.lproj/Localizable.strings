@@ -85,7 +85,6 @@
 "Start" = "Inizio";
 "End" = "Fine";
 "battery_charge_range" = "%@ a %@";
-"Start time must be before the end time" = "L'ora di inizio deve essere prima dell'ora di fine";
 "no_battery_charge" = "La programmazione della batteria non modificherà l'uso della batteria. Il carico della casa verrà soddisfatto dalle batterie se c'è disponibilità di capacità.";
 "both_battery_charge_periods" = "La tua batteria verrà caricata forzatamente dalla rete tra le %@ e le %@.";
 "battery_periods_overlap" = "Questi periodi si sovrappongono, potresti volerli aggiornare.";

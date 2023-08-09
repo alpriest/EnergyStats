@@ -131,7 +131,6 @@
 "Start" = "Początek";
 "End" = "Koniec";
 "battery_charge_range" = "%@ do %@";
-"Start time must be before the end time" = "Czas rozpoczęcia musi być przed czasem zakończenia.";
 "no_battery_charge" = "Harmonogram baterii nie zmieni wykorzystania baterii. Obciążenie domu będzie zasilane z baterii, jeśli jest dostępna pojemność.";
 "both_battery_charge_periods" = "Twoja bateria zostanie naładowana siłą z sieci między %@, a %@.";
 "battery_periods_overlap" = "Te okresy naładowania się nakładają, możesz je zaktualizować.";

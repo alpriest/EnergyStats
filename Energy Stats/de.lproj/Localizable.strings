@@ -155,7 +155,6 @@
 "Start" = "Start";
 "End" = "Ende";
 "battery_charge_range" = "%@ bis %@";
-"Start time must be before the end time" = "Die Startzeit muss vor der Endzeit liegen.";
 "no_battery_charge" = "Der Batterieplan wird die Batterienutzung nicht ändern. Der Hausstrombedarf wird aus den Batterien gedeckt, wenn Kapazität vorhanden ist.";
 "both_battery_charge_periods" = "Ihr Akku wird zwischen %@ und %@ von der Stromversorgung erzwungen geladen.";
 "battery_periods_overlap" = "Diese Zeiträume überschneiden sich möglicherweise, Sie möchten sie möglicherweise aktualisieren.";

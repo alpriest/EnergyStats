@@ -27,20 +27,6 @@ struct ChargeTimePeriod: Equatable {
         String(format: String(key: .chargeTimeSummary), arguments: [start.militaryTime(), end.militaryTime()])
     }
 
-    var validate: String? {
-        if !enabled { return nil }
-
-        if start > end {
-            return String(key: .chargeTimePeriodFailedValidation)
-        }
-
-        return nil
-    }
-
-    var valid: Bool {
-        !enabled || (enabled && validate == nil)
-    }
-
     var hasTimes: Bool {
         start.toTime() != .zero() || end.toTime() != .zero()
     }

@@ -29,21 +29,13 @@ struct BatteryTimePeriodView: View {
             },
             footer: {
                 VStack(alignment: .leading) {
-                    OptionalView(errorMessage) {
-                        Text($0)
-                            .foregroundColor(.red)
-                            .padding(.bottom)
-                    }
-
                     Button("Reset times") {
                         timePeriod.start = Date.fromTime(Time.zero())
                         timePeriod.end = Date.fromTime(Time.zero())
                     }.buttonStyle(.borderless)
                 }
             }
-        ).onChange(of: timePeriod) { newValue in
-            errorMessage = newValue.validate
-        }
+        )
     }
 }
 
