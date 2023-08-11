@@ -28,14 +28,14 @@ struct SolarPowerView: View {
         VStack {
             if appTheme.showTotalYield {
                 HStack(spacing: 0) {
-                    Text("Yield today ")
+                    Text("Yield today") + Text(" ")
                     EnergyText(amount: viewModel.generation, appTheme: appTheme)
                 }
             }
 
             if appTheme.showEarnings {
                 HStack(spacing: 0) {
-                    Text("Earnings ")
+                    Text("Earnings") + Text(" ")
                     Text(viewModel.earnings)
                 }
             }

@@ -72,10 +72,20 @@ public extension Double {
         let power = pow(10, Double(decimalPlaces))
         return (self * power).rounded() / power
     }
-    
+
     func roundedToString(decimalPlaces: Int) -> String {
         let roundedNumber = self.rounded(decimalPlaces: decimalPlaces)
-        return String(format:"%.\(decimalPlaces)f", roundedNumber)
+
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = decimalPlaces
+        numberFormatter.locale = Locale.current
+
+        if let formattedString = numberFormatter.string(from: NSNumber(value: roundedNumber)) {
+            return formattedString
+        } else {
+            return String(format: "%.\(decimalPlaces)f", roundedNumber)
+        }
     }
 
     func percent() -> String {
