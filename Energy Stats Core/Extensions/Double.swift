@@ -73,11 +73,12 @@ public extension Double {
         return (self * power).rounded() / power
     }
 
-    func roundedToString(decimalPlaces: Int) -> String {
+    func roundedToString(decimalPlaces: Int, currencySymbol: String) -> String {
         let roundedNumber = self.rounded(decimalPlaces: decimalPlaces)
 
         let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
+        numberFormatter.numberStyle = .currency
+        numberFormatter.currencySymbol = currencySymbol
         numberFormatter.maximumFractionDigits = decimalPlaces
         numberFormatter.locale = Locale.current
 

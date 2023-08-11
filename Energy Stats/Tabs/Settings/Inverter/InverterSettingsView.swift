@@ -25,13 +25,13 @@ struct InverterSettingsView: View {
 
             if let currentDevice = configManager.currentDevice.value {
                 Section {
-                    ESLabeledContent("Plant Name", value: currentDevice.plantName)
-                    ESLabeledContent("Device Type", value: currentDevice.deviceType)
-                    ESLabeledContent("Device ID", value: currentDevice.deviceID)
-                    ESLabeledContent("Device Serial No.", value: currentDevice.deviceSN)
-                    ESLabeledContent("Module Serial No.", value: currentDevice.moduleSN)
-                    ESLabeledContent("Has Battery", value: currentDevice.battery != nil ? "true" : "false")
-                    ESLabeledContent("Has Solar", value: currentDevice.hasPV ? "true" : "false")
+                    ESLabeledText("Plant Name", value: currentDevice.plantName)
+                    ESLabeledText("Device Type", value: currentDevice.deviceType)
+                    ESLabeledText("Device ID", value: currentDevice.deviceID)
+                    ESLabeledText("Device Serial No.", value: currentDevice.deviceSN)
+                    ESLabeledText("Module Serial No.", value: currentDevice.moduleSN)
+                    ESLabeledText("Has Battery", value: currentDevice.battery != nil ? "true" : "false")
+                    ESLabeledText("Has Solar", value: currentDevice.hasPV ? "true" : "false")
                 }
                 .contentShape(Rectangle())
                 .alertCopy(text(currentDevice))
@@ -70,7 +70,31 @@ struct InverterSettingsView_Previews: PreviewProvider {
 }
 #endif
 
-struct ESLabeledContent: View {
+struct ESLabeledContent<Content: View>: View {
+    let title: String
+    let content: () -> Content
+
+    init(_ title: String, @ViewBuilder content: @escaping () -> Content) {
+        self.title = title
+        self.content = content
+    }
+
+    var body: some View {
+        Group {
+            if #available(iOS 16, *) {
+                LabeledContent(title, content: content)
+            } else {
+                HStack {
+                    Text(title)
+                    Spacer()
+                    content()
+                }
+            }
+        }
+    }
+}
+
+struct ESLabeledText: View {
     let title: String
     let value: String?
 

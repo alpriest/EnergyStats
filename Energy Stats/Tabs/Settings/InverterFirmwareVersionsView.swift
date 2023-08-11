@@ -15,9 +15,9 @@ struct InverterFirmwareVersionsView: View {
         Group {
             if let version = viewModel {
                 Section {
-                    ESLabeledContent("Manager", value: version.manager)
-                    ESLabeledContent("Slave", value: version.slave)
-                    ESLabeledContent("Master", value: version.master)
+                    ESLabeledText("Manager", value: version.manager)
+                    ESLabeledText("Slave", value: version.slave)
+                    ESLabeledText("Master", value: version.master)
                 } header: {
                     Text("Firmware Versions")
                 } footer: {

@@ -37,7 +37,7 @@ struct SolarPowerView: View {
                 HStack(spacing: 0) {
                     Text("Earnings") + Text(" ")
                     Text(viewModel.earnings)
-                }
+                }.font(.caption)
             }
 
             switch viewModel.solar {

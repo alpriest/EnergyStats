@@ -133,6 +133,13 @@ public class DemoNetworking: Networking {
 
     public func setWorkMode(deviceID: String, workMode: InverterWorkMode) async throws {
     }
+
+    public func fetchDataLoggers() async throws -> PagedDataLoggerListResponse {
+        PagedDataLoggerListResponse(currentPage: 1, pageSize: 10, total: 1, data: [
+            PagedDataLoggerListResponse.DataLogger(moduleSN: "ABC123DEF456", moduleType: "W2", plantName: "John Doe", version: "3.08", signal: 3, communication: 1),
+            PagedDataLoggerListResponse.DataLogger(moduleSN: "123DEF456ABC", moduleType: "W2", plantName: "Jane Doe", version: "3.08", signal: 1, communication: 0)
+        ])
+    }
 }
 
 public class MockConfig: Config {

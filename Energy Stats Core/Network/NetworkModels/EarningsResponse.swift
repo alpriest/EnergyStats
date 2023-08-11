@@ -18,4 +18,14 @@ public struct EarningsResponse: Decodable {
         public let generation: Double
         public let earnings: Double
     }
+
+    public var currencySymbol: String {
+        if currency.starts(with: "GBP") {
+            return "£"
+        } else if currency.starts(with: "EUR") {
+            return "€"
+        } else {
+            return currency
+        }
+    }
 }

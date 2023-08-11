@@ -22,6 +22,7 @@ extension URL {
     static var batteryTimeSet = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/time/set")!
     static var deviceSettings = URL(string: "https://www.foxesscloud.com/c/v0/device/setting/get")!
     static var deviceSettingsSet = URL(string: "https://www.foxesscloud.com/c/v0/device/setting/set")!
+    static var moduleList = URL(string: "https://www.foxesscloud.com/c/v0/module/list")!
 }
 
 public protocol Networking {
@@ -40,6 +41,7 @@ public protocol Networking {
     func setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws
     func fetchWorkMode(deviceID: String) async throws -> DeviceSettingsGetResponse
     func setWorkMode(deviceID: String, workMode: InverterWorkMode) async throws
+    func fetchDataLoggers() async throws -> PagedDataLoggerListResponse
 }
 
 public class Network: Networking {
@@ -209,6 +211,16 @@ public class Network: Networking {
         } catch NetworkError.invalidResponse(_, let statusCode) where statusCode == 200 {
             // Ignore
         }
+    }
+
+    public func fetchDataLoggers() async throws -> PagedDataLoggerListResponse {
+        var request = URLRequest(url: URL.moduleList)
+        request.httpMethod = "POST"
+        request.httpBody = try! JSONEncoder().encode(DataLoggerListRequest())
+
+        let result: (PagedDataLoggerListResponse, Data) = try await fetch(request)
+//        store.inverterWorkModeResponse = NetworkOperation(description: "inverterWorkModeResponse", value: result.0, raw: result.1)
+        return result.0
     }
 }
 

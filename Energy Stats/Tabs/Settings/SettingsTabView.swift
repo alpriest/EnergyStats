@@ -30,6 +30,12 @@ struct SettingsTabView: View {
                     }
                 }
 
+                NavigationLink {
+                    DataLoggersView(networking: networking)
+                } label: {
+                    Text("Datalogger")
+                }
+
                 Section(
                     content: {
                         Toggle(isOn: $viewModel.showColouredLines) {

@@ -137,4 +137,12 @@ public class NetworkFacade: Networking {
 
         return try await network.setWorkMode(deviceID: deviceID, workMode: workMode)
     }
+
+    public func fetchDataLoggers() async throws -> PagedDataLoggerListResponse {
+        if config.isDemoUser {
+            return try await fakeNetwork.fetchDataLoggers()
+        }
+
+        return try await network.fetchDataLoggers()
+    }
 }
