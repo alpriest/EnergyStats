@@ -13,7 +13,7 @@ public struct DeviceSettingsSetRequest: Encodable {
     public let values: InverterValues
 }
 
-public struct DeviceSettingsGetRequest: Decodable {
+public struct DeviceSettingsGetResponse: Decodable {
     public let `protocol`: String
     public let raw: String
     public let values: InverterValues

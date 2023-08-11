@@ -101,3 +101,8 @@
 "backup_mode" = "In questa modalità, l'inverter assegna prioritariamente la potenza come segue:\n\n1. Carica della batteria\n2. Carico della casa\n3. Esportazione";
 "powerstation_mode" = "Questa modalità ha un comportamento sconosciuto";
 "peak_shaving_mode" = "Questa modalità ha un comportamento sconosciuto";
+"Self Use" = "Autoconsumo";
+"Feed In First" = "Alimentazione in Primo Luogo";
+"Backup" = "Backup";
+"Power Station" = "Stazione di Energia";
+"Peak Shaving" = "Riduzione dei Picchi";

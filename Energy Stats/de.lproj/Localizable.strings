@@ -174,3 +174,8 @@
 "backup_mode" = "In diesem Modus priorisiert der Wechselrichter die Stromzuweisung wie folgt:\n\n1. Batterieladung\n2. Hauslast\n3. Einspeisung";
 "powerstation_mode" = "In diesem Modus ist das Verhalten unbekannt";
 "peak_shaving_mode" = "In diesem Modus ist das Verhalten unbekannt";
+"Self Use" = "Eigenverbrauch";
+"Feed In First" = "Einspeisung zuerst";
+"Backup" = "Backup";
+"Power Station" = "Stromstation";
+"Peak Shaving" = "Lastspitzenabdeckung";

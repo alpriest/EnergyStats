@@ -83,7 +83,7 @@
 		416AE4362A7D2C8B003D0122 /* InverterSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416AE4352A7D2C8B003D0122 /* InverterSettingsView.swift */; };
 		416AE4382A7D956E003D0122 /* AlertCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416AE4372A7D956E003D0122 /* AlertCopy.swift */; };
 		416AE43A2A7FA76E003D0122 /* InverterWorkModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416AE4392A7FA76E003D0122 /* InverterWorkModeView.swift */; };
-		416AE4452A811FBB003D0122 /* DeviceSettingsGetRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416AE4442A811FBB003D0122 /* DeviceSettingsGetRequest.swift */; };
+		416AE4452A811FBB003D0122 /* DeviceSettingsGetResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416AE4442A811FBB003D0122 /* DeviceSettingsGetResponse.swift */; };
 		416AE4482A812876003D0122 /* WorkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416AE4472A812876003D0122 /* WorkMode.swift */; };
 		416AE4492A8128B9003D0122 /* OptionalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41028F9428CDD7A300FB70FD /* OptionalView.swift */; };
 		416AE44B2A8170E6003D0122 /* SelectableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416AE44A2A8170E6003D0122 /* SelectableItem.swift */; };
@@ -288,7 +288,7 @@
 		416AE4372A7D956E003D0122 /* AlertCopy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCopy.swift; sourceTree = "<group>"; };
 		416AE4392A7FA76E003D0122 /* InverterWorkModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterWorkModeView.swift; sourceTree = "<group>"; };
 		416AE43D2A7FF6DA003D0122 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
-		416AE4442A811FBB003D0122 /* DeviceSettingsGetRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSettingsGetRequest.swift; sourceTree = "<group>"; };
+		416AE4442A811FBB003D0122 /* DeviceSettingsGetResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSettingsGetResponse.swift; sourceTree = "<group>"; };
 		416AE4472A812876003D0122 /* WorkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkMode.swift; sourceTree = "<group>"; };
 		416AE44A2A8170E6003D0122 /* SelectableItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectableItem.swift; sourceTree = "<group>"; };
 		416AE44C2A821E4F003D0122 /* AlertContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertContent.swift; sourceTree = "<group>"; };
@@ -619,7 +619,7 @@
 				417185452A004FA900D18CDD /* VariablesResponse.swift */,
 				4162BC2D2A09773D00DFEDC1 /* EarningsResponse.swift */,
 				411029182A729F02004018BB /* BatteryTimesResponse.swift */,
-				416AE4442A811FBB003D0122 /* DeviceSettingsGetRequest.swift */,
+				416AE4442A811FBB003D0122 /* DeviceSettingsGetResponse.swift */,
 			);
 			path = NetworkModels;
 			sourceTree = "<group>";
@@ -1225,7 +1225,7 @@
 				4103D1D129DB6C51001B0BC8 /* Raw.swift in Sources */,
 				4103D1D829DB6C51001B0BC8 /* NetworkFacade.swift in Sources */,
 				418547492A3A1C7A000128C7 /* PowerAmountView.swift in Sources */,
-				416AE4452A811FBB003D0122 /* DeviceSettingsGetRequest.swift in Sources */,
+				416AE4452A811FBB003D0122 /* DeviceSettingsGetResponse.swift in Sources */,
 				41F71ABD2A14FBEC00A8C81B /* Array+Safe.swift in Sources */,
 				4103D1D029DB6C51001B0BC8 /* Report.swift in Sources */,
 				4109140029DB7AB600133CC5 /* HomePowerFlowViewModel.swift in Sources */,

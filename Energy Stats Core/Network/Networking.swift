@@ -38,9 +38,8 @@ public protocol Networking {
     func setSoc(minGridSOC: Int, minSOC: Int, deviceSN: String) async throws
     func fetchBatteryTimes(deviceSN: String) async throws -> BatteryTimesResponse
     func setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws
-    func fetchWorkMode(deviceID: String) async throws -> DeviceSettingsGetRequest
+    func fetchWorkMode(deviceID: String) async throws -> DeviceSettingsGetResponse
     func setWorkMode(deviceID: String, workMode: InverterWorkMode) async throws
-    // https://www.foxesscloud.com/c/v0/device/setting/get?id=03274209-486c-4ea3-9c28-159f25ee84cb&hasVersionHead=1&key=operation_mode__work_mode
 }
 
 public class Network: Networking {
@@ -188,14 +187,14 @@ public class Network: Networking {
         }
     }
 
-    public func fetchWorkMode(deviceID: String) async throws -> DeviceSettingsGetRequest {
+    public func fetchWorkMode(deviceID: String) async throws -> DeviceSettingsGetResponse {
         let request = append(queryItems: [
             URLQueryItem(name: "id", value: deviceID),
             URLQueryItem(name: "hasVersionHead", value: "1"),
             URLQueryItem(name: "key", value: "operation_mode__work_mode"),
         ], to: URL.deviceSettings)
 
-        let result: (DeviceSettingsGetRequest, Data) = try await fetch(request)
+        let result: (DeviceSettingsGetResponse, Data) = try await fetch(request)
 //        store.inverterWorkModeResponse = NetworkOperation(description: "inverterWorkModeResponse", value: result.0, raw: result.1)
         return result.0
     }

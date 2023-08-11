@@ -150,3 +150,8 @@
 "backup_mode" = "W tym trybie inwerter priorytetowo alokuje moc zgodnie z następującym porządkiem:\n\n1. Ładowanie baterii\n2. Obciążenie domu\n3. Eksport";
 "powerstation_mode" = "Ten tryb ma nieznane zachowanie";
 "peak_shaving_mode" = "Ten tryb ma nieznane zachowanie";
+"Self Use" = "Samozużycie";
+"Feed In First" = "Wprowadź najpierw";
+"Backup" = "Zapasowy";
+"Power Station" = "Elektrownia";
+"Peak Shaving" = "Ograniczanie Szczytów";

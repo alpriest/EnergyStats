@@ -127,8 +127,8 @@ public class DemoNetworking: Networking {
 
     public func setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws {}
 
-    public func fetchWorkMode(deviceID: String) async throws -> DeviceSettingsGetRequest {
-        DeviceSettingsGetRequest(protocol: "H1234", raw: "", values: InverterValues(operationModeWorkMode: .feedInFirst))
+    public func fetchWorkMode(deviceID: String) async throws -> DeviceSettingsGetResponse {
+        DeviceSettingsGetResponse(protocol: "H1234", raw: "", values: InverterValues(operationModeWorkMode: .feedInFirst))
     }
 
     public func setWorkMode(deviceID: String, workMode: InverterWorkMode) async throws {
