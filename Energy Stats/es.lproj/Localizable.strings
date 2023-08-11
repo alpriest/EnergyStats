@@ -68,6 +68,7 @@
 "Year" = "Año";
 "Choose date" = "Seleccionar fecha";
 "Version " = "Versión ";
+"Shows earnings today, this month, this year, and all-time based on a crude calculation of feed-in ｘ price as configured on FoxESS cloud." = "Muestra las ganancias de hoy, este mes, este año y en total en función de un cálculo básico de alimentación ｘ precio según la configuración en la nube de FoxESS.";
 
 /* Parameters page */
 "Predefined selections" = "Selecciones predefinidas";
@@ -168,3 +169,6 @@
 "Backup" = "Respaldo";
 "Power Station" = "Estación de Energía";
 "Peak Shaving" = "Reducción de Picos";
+"Configure Work Mode" = "Configurar modo de trabajo";
+"Inverter change warning" = "Cambie estos valores solo si sabe lo que está haciendo";
+"Find out more about work modes" = "Obtén más información sobre los modos de trabajo";

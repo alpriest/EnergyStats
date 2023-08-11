@@ -68,6 +68,8 @@
 "Off" = "Off";
 "Net" = "Netto";
 "Absolute" = "Assoluta";
+"Shows earnings today, this month, this year, and all-time based on a crude calculation of feed-in ｘ price as configured on FoxESS cloud." = "Mostra le entrate di oggi, di questo mese, di quest'anno e complessivamente basate su un calcolo approssimativo di feed-in ｘ prezzo come configurato su FoxESS cloud.";
+"Inverter" = "Inverter";
 
 /* Battery Charge Pages */
 "Minimum charge levels" = "Livelli di carica minimi";
@@ -106,3 +108,6 @@
 "Backup" = "Backup";
 "Power Station" = "Stazione di Energia";
 "Peak Shaving" = "Riduzione dei Picchi";
+"Configure Work Mode" = "Configura modalità di lavoro";
+"Inverter change warning" = "Modificare questi valori solo se si sa cosa si sta facendo";
+"Find out more about work modes" = "Scopri di più sui modi di lavoro";

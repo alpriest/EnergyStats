@@ -122,7 +122,7 @@ struct InverterWorkModeView: View {
                             .font(.title)
                             .foregroundColor(.red)
 
-                        Text("Only change these values if you know what you are doing")
+                        Text("Inverter change warning")
 
                         Image(systemName: "exclamationmark.triangle.fill")
                             .font(.title)
