@@ -18,9 +18,9 @@ public extension Double {
         numberFormatter.maximumFractionDigits = places
 
         if let formattedString = numberFormatter.string(from: NSNumber(value: divided)) {
-            return "\(formattedString)kW"
+            return "\(formattedString) kW"
         } else {
-            return "\(divided)kW"
+            return "\(divided) kW"
         }
     }
 
@@ -34,9 +34,9 @@ public extension Double {
         numberFormatter.maximumFractionDigits = places
 
         if let formattedString = numberFormatter.string(from: NSNumber(value: divided)) {
-            return "\(formattedString)kWh"
+            return "\(formattedString) kWh"
         } else {
-            return "\(divided)kWh"
+            return "\(divided) kWh"
         }
     }
 
@@ -48,9 +48,9 @@ public extension Double {
         numberFormatter.maximumFractionDigits = 0
 
         if let formattedString = numberFormatter.string(from: NSNumber(value: divided)) {
-            return "\(formattedString)W"
+            return "\(formattedString) W"
         } else {
-            return "\(divided)W"
+            return "\(divided) W"
         }
     }
 
@@ -62,9 +62,9 @@ public extension Double {
         numberFormatter.maximumFractionDigits = 0
 
         if let formattedString = numberFormatter.string(from: NSNumber(value: divided)) {
-            return "\(formattedString)Wh"
+            return "\(formattedString) Wh"
         } else {
-            return "\(divided)Wh"
+            return "\(divided) Wh"
         }
     }
 

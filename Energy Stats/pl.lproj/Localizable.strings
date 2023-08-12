@@ -58,6 +58,7 @@
 "Parameters are updated every 5 minutes by FoxESS and only available for a single day at a time" = "Parametry są aktualizowane co 5 minut przez FoxESS i dostępne tylko na jeden dzień";
 "Version " = "Wersja ";
 "Shows earnings today, this month, this year, and all-time based on a crude calculation of feed-in ｘ price as configured on FoxESS cloud." = "Wyświetla dzisiejsze zarobki, zarobki w tym miesiącu, w tym roku oraz ogólnie oparte na przybliżonych obliczeniach feed-in ｘ cena, zgodnie z konfiguracją w chmurze FoxESS.";
+"Show values in Watts" = "Pokaż wartości w watach";
 
 /* Variables page */
 "Predefined selections" = "Wybrane opcje";

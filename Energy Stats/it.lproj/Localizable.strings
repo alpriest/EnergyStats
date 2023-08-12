@@ -70,6 +70,7 @@
 "Absolute" = "Assoluta";
 "Shows earnings today, this month, this year, and all-time based on a crude calculation of feed-in ｘ price as configured on FoxESS cloud." = "Mostra le entrate di oggi, di questo mese, di quest'anno e complessivamente basate su un calcolo approssimativo di feed-in ｘ prezzo come configurato su FoxESS cloud.";
 "Inverter" = "Inverter";
+"Show values in Watts" = "Mostra valori in watt";
 
 /* Battery Charge Pages */
 "Minimum charge levels" = "Livelli di carica minimi";
