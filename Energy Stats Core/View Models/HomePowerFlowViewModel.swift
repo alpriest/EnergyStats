@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct InverterTemperatures {
+public struct InverterTemperatures: Sendable {
     public let ambient: Double
     public let inverter: Double
 
