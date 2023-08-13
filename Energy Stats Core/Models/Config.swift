@@ -22,6 +22,7 @@ public protocol Config {
     var showTotalYield: Bool { get set }
     var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode { get set }
     var showEarnings: Bool { get set }
+    var showInverterTemperature: Bool { get set }
 }
 
 extension UserDefaults {
@@ -111,6 +112,9 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredBool(key: "showInW", defaultValue: false)
     public var showInW: Bool
+
+    @UserDefaultsStoredBool(key: "showInverterTemperature", defaultValue: false)
+    public var showInverterTemperature: Bool
 
     public var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode {
         get {

@@ -69,7 +69,8 @@ public class ConfigManager: ConfigManaging {
                 showInW: config.showInW,
                 showTotalYield: config.showTotalYield,
                 selfSufficiencyEstimateMode: config.selfSufficiencyEstimateMode,
-                showEarnings: config.showEarnings
+                showEarnings: config.showEarnings,
+                showInverterTemperature: config.showInverterTemperature
             )
         )
         selectedDeviceID = selectedDeviceID

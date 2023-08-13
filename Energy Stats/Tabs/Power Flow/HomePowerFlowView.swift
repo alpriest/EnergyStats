@@ -49,7 +49,7 @@ struct HomePowerFlowView: View {
                                                                               generation: viewModel.todaysGeneration,
                                                                               earnings: viewModel.earnings))
 
-            InverterView(viewModel: InverterViewModel(configManager: configManager))
+            InverterView(viewModel: InverterViewModel(configManager: configManager), appTheme: appTheme)
                 .frame(height: 2)
                 .frame(width: batteryPowerWidth + gridPowerWidth + 16)
                 .padding(.vertical, 1)

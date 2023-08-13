@@ -165,6 +165,7 @@ public class MockConfig: Config {
     public var showTotalYield: Bool = false
     public var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode = .off
     public var showEarnings: Bool = false
+    public var showInverterTemperature: Bool = false
 }
 
 public class PreviewConfigManager: ConfigManager {

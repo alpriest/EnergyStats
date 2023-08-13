@@ -25,6 +25,7 @@ public struct AppTheme {
     public var showTotalYield: Bool
     public var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode
     public var showEarnings: Bool
+    public var showInverterTemperature: Bool
 
     public init(
         showColouredLines: Bool,
@@ -36,7 +37,8 @@ public struct AppTheme {
         showInW: Bool,
         showTotalYield: Bool,
         selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode,
-        showEarnings: Bool
+        showEarnings: Bool,
+        showInverterTemperature: Bool
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -48,6 +50,7 @@ public struct AppTheme {
         self.showTotalYield = showTotalYield
         self.selfSufficiencyEstimateMode = selfSufficiencyEstimateMode
         self.showEarnings = showEarnings
+        self.showInverterTemperature = showInverterTemperature
     }
 
     public func update(
@@ -60,7 +63,8 @@ public struct AppTheme {
         showInW: Bool? = nil,
         showTotalYield: Bool? = nil,
         selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode? = nil,
-        showEarnings: Bool? = nil
+        showEarnings: Bool? = nil,
+        showInverterTemperature: Bool? = nil
     ) -> AppTheme {
         AppTheme(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -72,7 +76,8 @@ public struct AppTheme {
             showInW: showInW ?? self.showInW,
             showTotalYield: showTotalYield ?? self.showTotalYield,
             selfSufficiencyEstimateMode: selfSufficiencyEstimateMode ?? self.selfSufficiencyEstimateMode,
-            showEarnings: showEarnings ?? self.showEarnings
+            showEarnings: showEarnings ?? self.showEarnings,
+            showInverterTemperature: showInverterTemperature ?? self.showInverterTemperature
         )
     }
 }

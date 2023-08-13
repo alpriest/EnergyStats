@@ -24,4 +24,5 @@ class MockConfig: Config {
     var showBatteryEstimate: Bool = false
     var devices: Data? = nil
     var selectedDeviceID: String? = "1234"
+    var showInverterTemperature: Bool = false
 }
