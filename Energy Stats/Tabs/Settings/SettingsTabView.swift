@@ -46,6 +46,10 @@ struct SettingsTabView: View {
                             Text("Show total yield")
                         }
 
+                        Toggle(isOn: $viewModel.showInverterTemperature) {
+                            Text("Show inverter temperatures")
+                        }
+
                         Toggle(isOn: $viewModel.showSunnyBackground) {
                             Text("Show sunshine background")
                         }

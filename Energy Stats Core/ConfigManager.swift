@@ -45,6 +45,7 @@ public protocol ConfigManaging {
     var currentDevice: CurrentValueSubject<Device?, Never> { get }
     var hasBattery: Bool { get }
     var showEarnings: Bool { get set }
+    var showInverterTemperature: Bool { get set }
 }
 
 public class ConfigManager: ConfigManaging {
@@ -297,6 +298,16 @@ public class ConfigManager: ConfigManaging {
             config.showEarnings = newValue
             appTheme.send(appTheme.value.update(
                 showEarnings: config.showEarnings
+            ))
+        }
+    }
+
+    public var showInverterTemperature: Bool {
+        get { config.showInverterTemperature }
+        set {
+            config.showInverterTemperature = newValue
+            appTheme.send(appTheme.value.update(
+                showInverterTemperature: config.showInverterTemperature
             ))
         }
     }

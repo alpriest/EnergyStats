@@ -8,16 +8,6 @@
 import Energy_Stats_Core
 import SwiftUI
 
-struct InverterPath: Shape {
-    func path(in rect: CGRect) -> Path {
-        Path { path in
-            path.move(to: CGPoint(x: 0, y: rect.height / 2.0))
-            path.addLine(to: CGPoint(x: rect.width, y: rect.height / 2.0))
-            path.move(to: CGPoint(x: rect.width, y: rect.height / 2.0))
-        }
-    }
-}
-
 struct SelectableDevice: Identifiable {
     let device: Device
     let isSelected: Bool
@@ -28,9 +18,11 @@ struct SelectableDevice: Identifiable {
 class InverterViewModel: ObservableObject {
     private var configManager: ConfigManaging
     @Published var devices: [SelectableDevice] = []
+    let temperatures: InverterTemperatures
 
-    init(configManager: ConfigManaging) {
+    init(configManager: ConfigManaging, temperatures: InverterTemperatures) {
         self.configManager = configManager
+        self.temperatures = temperatures
 
         updateDevices()
     }

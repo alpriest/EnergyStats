@@ -31,7 +31,7 @@
 		4107446128C9EF6B006D5D7D /* HomePowerFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446028C9EF6B006D5D7D /* HomePowerFlowView.swift */; };
 		4107446328CA1C5D006D5D7D /* PowerFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446228CA1C5D006D5D7D /* PowerFlowView.swift */; };
 		4107446528CA1D76006D5D7D /* FlowingLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446428CA1D76006D5D7D /* FlowingLine.swift */; };
-		4107446728CA22B3006D5D7D /* InverterPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446628CA22B3006D5D7D /* InverterPath.swift */; };
+		4107446728CA22B3006D5D7D /* InverterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446628CA22B3006D5D7D /* InverterViewModel.swift */; };
 		4107446C28CA57A9006D5D7D /* PowerFlowTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446B28CA57A9006D5D7D /* PowerFlowTabView.swift */; };
 		41075D6029DC392E007F897A /* BatteryCapacityCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41075D5F29DC392E007F897A /* BatteryCapacityCalculatorTests.swift */; };
 		410913FD29DB78EF00133CC5 /* PreciseDateTimeFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410913FC29DB78EF00133CC5 /* PreciseDateTimeFormatter.swift */; };
@@ -225,7 +225,7 @@
 		4107446028C9EF6B006D5D7D /* HomePowerFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePowerFlowView.swift; sourceTree = "<group>"; };
 		4107446228CA1C5D006D5D7D /* PowerFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerFlowView.swift; sourceTree = "<group>"; };
 		4107446428CA1D76006D5D7D /* FlowingLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowingLine.swift; sourceTree = "<group>"; };
-		4107446628CA22B3006D5D7D /* InverterPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterPath.swift; sourceTree = "<group>"; };
+		4107446628CA22B3006D5D7D /* InverterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterViewModel.swift; sourceTree = "<group>"; };
 		4107446B28CA57A9006D5D7D /* PowerFlowTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerFlowTabView.swift; sourceTree = "<group>"; };
 		41075D5F29DC392E007F897A /* BatteryCapacityCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryCapacityCalculatorTests.swift; sourceTree = "<group>"; };
 		410913FC29DB78EF00133CC5 /* PreciseDateTimeFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreciseDateTimeFormatter.swift; sourceTree = "<group>"; };
@@ -536,7 +536,7 @@
 		4134ACC22A88A19A00CB4BA8 /* Inverter View */ = {
 			isa = PBXGroup;
 			children = (
-				4107446628CA22B3006D5D7D /* InverterPath.swift */,
+				4107446628CA22B3006D5D7D /* InverterViewModel.swift */,
 				4134ACC32A88A1A800CB4BA8 /* InverterView.swift */,
 			);
 			path = "Inverter View";
@@ -1220,7 +1220,7 @@
 				41923E3E2916BC6F00D1A8C5 /* ParametersGraphView.swift in Sources */,
 				416AE4382A7D956E003D0122 /* AlertCopy.swift in Sources */,
 				416318BE29DDD80E00C2C285 /* View+Copy.swift in Sources */,
-				4107446728CA22B3006D5D7D /* InverterPath.swift in Sources */,
+				4107446728CA22B3006D5D7D /* InverterViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

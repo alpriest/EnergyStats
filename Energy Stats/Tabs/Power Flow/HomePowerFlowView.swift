@@ -49,7 +49,7 @@ struct HomePowerFlowView: View {
                                                                               generation: viewModel.todaysGeneration,
                                                                               earnings: viewModel.earnings))
 
-            InverterView(viewModel: InverterViewModel(configManager: configManager), appTheme: appTheme)
+            InverterView(viewModel: InverterViewModel(configManager: configManager, temperatures: viewModel.inverterTemperatures), appTheme: appTheme)
                 .frame(height: 2)
                 .frame(width: batteryPowerWidth + gridPowerWidth + 16)
                 .padding(.vertical, 1)
@@ -108,6 +108,10 @@ struct PowerSummaryView_Previews: PreviewProvider {
 
 extension HomePowerFlowViewModel {
     static func any() -> HomePowerFlowViewModel {
-        .init(solar: 2.5, battery: -0.01, home: 1.5, grid: 0.71, batteryStateOfCharge: 0.99, hasBattery: true, batteryTemperature: 15.6, batteryResidual: 5678, todaysGeneration: 8.5, earnings: "GBP(£) 1 / 5 / 99")
+        .init(solar: 2.5, battery: -0.01,
+              home: 1.5, grid: 0.71, batteryStateOfCharge: 0.99,
+              hasBattery: true, batteryTemperature: 15.6, batteryResidual: 5678,
+              todaysGeneration: 8.5, earnings: "GBP(£) 1 / 5 / 99",
+              inverterTemperatures: InverterTemperatures(ambient: 0.0, inverter: 0.0))
     }
 }

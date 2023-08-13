@@ -78,6 +78,12 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
+    @Published var showInverterTemperature: Bool {
+        didSet {
+            config.showInverterTemperature = showInverterTemperature
+        }
+    }
+
     @Published var hasBattery: Bool
     @Published var firmwareVersions: DeviceFirmwareVersion?
 
@@ -105,6 +111,7 @@ class SettingsTabViewModel: ObservableObject {
         showTotalYield = config.showTotalYield
         selfSufficiencyEstimateMode = config.selfSufficiencyEstimateMode
         showEarnings = config.showEarnings
+        showInverterTemperature = config.showInverterTemperature
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }

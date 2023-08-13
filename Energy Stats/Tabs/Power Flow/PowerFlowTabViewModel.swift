@@ -125,7 +125,9 @@ class PowerFlowTabViewModel: ObservableObject {
                                   self.configManager.variables.named("generationPower"),
                                   self.configManager.variables.named("loadsPower"),
                                   self.configManager.variables.named("batChargePower"),
-                                  self.configManager.variables.named("batDischargePower")].compactMap { $0 }
+                                  self.configManager.variables.named("batDischargePower"),
+                                  self.configManager.variables.named("ambientTemperation"),
+                                  self.configManager.variables.named("invTemperation")].compactMap { $0 }
             let raws = try await self.network.fetchRaw(deviceID: currentDevice.deviceID, variables: graphVariables, queryDate: .current())
             let currentViewModel = CurrentStatusViewModel(raws: raws)
             var battery: BatteryViewModel = .noBattery
@@ -145,7 +147,8 @@ class PowerFlowTabViewModel: ObservableObject {
                                                  batteryTemperature: battery.temperature,
                                                  batteryResidual: battery.residual,
                                                  todaysGeneration: earnings.today.generation,
-                                                 earnings: self.makeEarnings(earnings))
+                                                 earnings: self.makeEarnings(earnings),
+                                                 inverterTemperatures: currentViewModel.currentTemperatures)
 
             self.state = .loaded(.empty()) // refreshes the marching ants line speed
             try await Task.sleep(nanoseconds: 1000)
