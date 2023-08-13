@@ -17,6 +17,11 @@ struct ValuesAtTime<T> {
 struct GraphDisplayMode: Equatable {
     let date: Date
     let hours: Int
+
+    static func ==(lhs: GraphDisplayMode, rhs: GraphDisplayMode) -> Bool {
+        lhs.hours == rhs.hours &&
+        lhs.date.iso8601() == rhs.date.iso8601()
+    }
 }
 
 class ParametersGraphTabViewModel: ObservableObject {
@@ -44,16 +49,7 @@ class ParametersGraphTabViewModel: ObservableObject {
     @Published var displayMode = GraphDisplayMode(date: .now, hours: 24) {
         didSet {
             let previousHours = hours
-
-            switch hours {
-            case 6:
-                stride = 1
-            case 12:
-                stride = 2
-            default:
-                stride = 3
-            }
-
+            
             let updatedDate = QueryDate(from: displayMode.date)
             if queryDate != updatedDate {
                 queryDate = updatedDate
@@ -63,6 +59,16 @@ class ParametersGraphTabViewModel: ObservableObject {
             }
             if displayMode.hours != previousHours {
                 hours = displayMode.hours
+
+                switch hours {
+                case 6:
+                    stride = 1
+                case 12:
+                    stride = 2
+                default:
+                    stride = 3
+                }
+
                 refresh()
             }
         }

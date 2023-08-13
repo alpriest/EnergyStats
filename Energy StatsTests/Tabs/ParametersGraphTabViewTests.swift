@@ -1,5 +1,5 @@
 //
-//  GraphTabViewTests.swift
+//  ParametersGraphTabViewTests.swift
 //  Energy StatsTests
 //
 //  Created by Alistair Priest on 05/11/2022.
@@ -12,7 +12,7 @@ import XCTest
 import Energy_Stats_Core
 
 //@MainActor
-//final class GraphTabViewTests: XCTestCase {
+//final class ParametersGraphTabViewTests: XCTestCase {
 //    func test_when_user_arrives() async throws {
 //        let networking = MockNetworking(throwOnCall: false, dateProvider: { Date(timeIntervalSince1970: 1664127352) })
 //        let configManager = ConfigManager(networking: networking, config: MockConfig())
