@@ -21,6 +21,10 @@ struct ParametersGraphTabView: View {
         _viewModel = .init(wrappedValue: ParametersGraphTabViewModel(networking: networking, configManager: configManager))
     }
 
+    init(viewModel: ParametersGraphTabViewModel) {
+        _viewModel = .init(wrappedValue: viewModel)
+    }
+
     var body: some View {
         Group {
             VStack {

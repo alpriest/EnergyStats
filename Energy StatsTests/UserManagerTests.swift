@@ -28,7 +28,7 @@ final class UserManagerTests: XCTestCase {
     }
 
     func test_isLoggedIn_SetsOnInitialisation() {
-        var expectation = self.expectation(description: #function)
+        let expectation = self.expectation(description: #function)
         keychainStore.updateHasCredentials(value: true)
 
         sut.$isLoggedIn
