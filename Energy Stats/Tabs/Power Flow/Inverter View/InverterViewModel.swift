@@ -18,9 +18,9 @@ struct SelectableDevice: Identifiable {
 class InverterViewModel: ObservableObject {
     private var configManager: ConfigManaging
     @Published var devices: [SelectableDevice] = []
-    let temperatures: InverterTemperatures
+    let temperatures: InverterTemperatures?
 
-    init(configManager: ConfigManaging, temperatures: InverterTemperatures) {
+    init(configManager: ConfigManaging, temperatures: InverterTemperatures?) {
         self.configManager = configManager
         self.temperatures = temperatures
 

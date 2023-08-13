@@ -55,10 +55,10 @@ struct InverterView: View {
 
                     deviceNameSelector()
 
-                    if appTheme.showInverterTemperature {
+                    if appTheme.showInverterTemperature, let temperatures = viewModel.temperatures {
                         HStack {
-                            InverterTemperatureView(value: viewModel.temperatures.ambient, name: "internal")
-                            InverterTemperatureView(value: viewModel.temperatures.inverter, name: "external")
+                            InverterTemperatureView(value: temperatures.ambient, name: "internal")
+                            InverterTemperatureView(value: temperatures.inverter, name: "external")
                         }
                         .background(Color("background"))
                     }
@@ -67,10 +67,10 @@ struct InverterView: View {
                 HStack {
                     deviceNameSelector()
 
-                    if appTheme.showInverterTemperature {
+                    if appTheme.showInverterTemperature, let temperatures = viewModel.temperatures {
                         HStack {
-                            InverterTemperatureView(value: viewModel.temperatures.ambient, name: "internal")
-                            InverterTemperatureView(value: viewModel.temperatures.inverter, name: "external")
+                            InverterTemperatureView(value: temperatures.ambient, name: "internal")
+                            InverterTemperatureView(value: temperatures.inverter, name: "external")
                         }
                         .background(Color("background"))
                     }

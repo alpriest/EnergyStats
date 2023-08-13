@@ -11,14 +11,19 @@ public struct CurrentStatusViewModel: Sendable {
     public let currentSolarPower: Double
     public let currentGridExport: Double
     public let currentHomeConsumption: Double
-    public let currentTemperatures: InverterTemperatures
+    public let currentTemperatures: InverterTemperatures?
     public let lastUpdate: Date
 
     public init(raws: [RawResponse]) {
         currentSolarPower = max(0, raws.currentValue(for: "batChargePower") - raws.currentValue(for: "batDischargePower") - raws.currentValue(for: "gridConsumptionPower") + raws.currentValue(for: "loadsPower") + raws.currentValue(for: "feedinPower"))
         currentGridExport = raws.currentValue(for: "feedinPower") - raws.currentValue(for: "gridConsumptionPower")
         currentHomeConsumption = raws.currentValue(for: "gridConsumptionPower") + raws.currentValue(for: "generationPower") - raws.currentValue(for: "feedinPower")
-        currentTemperatures = InverterTemperatures(ambient: raws.currentValue(for: "ambientTemperation"), inverter: raws.currentValue(for: "invTemperation"))
+        if raws.contains(where: { response in response.variable == "ambientTemperation" }) &&
+            raws.contains(where: { response in response.variable == "invTemperation" }) {
+            currentTemperatures = InverterTemperatures(ambient: raws.currentValue(for: "ambientTemperation"), inverter: raws.currentValue(for: "invTemperation"))
+        } else {
+            currentTemperatures = nil
+        }
         lastUpdate = raws.current(for: "gridConsumptionPower")?.time ?? Date()
     }
 }

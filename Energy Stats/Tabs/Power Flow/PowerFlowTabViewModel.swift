@@ -19,7 +19,8 @@ class PowerFlowTabViewModel: ObservableObject {
     @MainActor @Published private(set) var state: State = .unloaded
     private(set) var isLoading = false
     private var totalTicks = 60
-    private var cancellable: AnyCancellable?
+    private var currentDeviceCancellable: AnyCancellable?
+    private var themeChangeCancellable: AnyCancellable?
 
     enum State: Equatable {
         case unloaded
@@ -48,6 +49,7 @@ class PowerFlowTabViewModel: ObservableObject {
         NotificationCenter.default.addObserver(self, selector: #selector(self.didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
 
         self.addDeviceChangeObserver()
+        self.adddThemeChangeObserver()
     }
 
     func startTimer() async {
@@ -85,13 +87,23 @@ class PowerFlowTabViewModel: ObservableObject {
     }
 
     func addDeviceChangeObserver() {
-        guard self.cancellable == nil else { return }
+        guard self.currentDeviceCancellable == nil else { return }
 
-        self.cancellable = self.configManager.currentDevice.sink { device in
+        self.currentDeviceCancellable = self.configManager.currentDevice.sink { device in
             guard device != nil else { return }
 
             Task {
                 await self.timerFired()
+            }
+        }
+    }
+
+    func adddThemeChangeObserver() {
+        guard themeChangeCancellable == nil else { return }
+
+        themeChangeCancellable = configManager.appTheme.sink { theme in
+            if theme.showInverterTemperature {
+                Task { await self.loadData() }
             }
         }
     }
@@ -120,15 +132,21 @@ class PowerFlowTabViewModel: ObservableObject {
             await self.network.ensureHasToken()
 
             let earnings = try await self.network.fetchEarnings(deviceID: currentDevice.deviceID)
-            let graphVariables = [configManager.variables.named("feedinPower"),
+            var graphVariables = [configManager.variables.named("feedinPower"),
                                   self.configManager.variables.named("gridConsumptionPower"),
                                   self.configManager.variables.named("generationPower"),
                                   self.configManager.variables.named("loadsPower"),
                                   self.configManager.variables.named("batChargePower"),
-                                  self.configManager.variables.named("batDischargePower"),
-                                  self.configManager.variables.named("ambientTemperation"),
-                                  self.configManager.variables.named("invTemperation")].compactMap { $0 }
-            let raws = try await self.network.fetchRaw(deviceID: currentDevice.deviceID, variables: graphVariables, queryDate: .current())
+                                  self.configManager.variables.named("batDischargePower")]
+
+            if configManager.appTheme.value.showInverterTemperature {
+                graphVariables.append(contentsOf: [
+                    self.configManager.variables.named("ambientTemperation"),
+                    self.configManager.variables.named("invTemperation")
+                ])
+            }
+
+            let raws = try await self.network.fetchRaw(deviceID: currentDevice.deviceID, variables: graphVariables.compactMap { $0 }, queryDate: .current())
             let currentViewModel = CurrentStatusViewModel(raws: raws)
             var battery: BatteryViewModel = .noBattery
             if currentDevice.battery != nil {
