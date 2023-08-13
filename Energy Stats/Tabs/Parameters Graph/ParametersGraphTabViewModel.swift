@@ -14,7 +14,7 @@ struct ValuesAtTime<T> {
     let values: [T]
 }
 
-struct GraphDisplayMode {
+struct GraphDisplayMode: Equatable {
     let date: Date
     let hours: Int
 }

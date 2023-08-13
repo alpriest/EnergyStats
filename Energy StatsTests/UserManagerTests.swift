@@ -22,7 +22,7 @@ final class UserManagerTests: XCTestCase {
         keychainStore = MockKeychainStore()
         config = MockConfig()
         let cache = InMemoryLoggingNetworkStore()
-        networking = Network(credentials: keychainStore, config: config, store: cache)
+        networking = Network(credentials: keychainStore,  store: cache)
         configManager = PreviewConfigManager(networking: networking, config: config)
         sut = UserManager(networking: networking, store: keychainStore, configManager: configManager, networkCache: cache)
     }

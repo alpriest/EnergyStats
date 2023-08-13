@@ -10,6 +10,9 @@ import Foundation
 import Energy_Stats_Core
 
 class MockConfig: Config {
+    var showTotalYield: Bool = false
+    var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode = .absolute
+    var showEarnings: Bool = false
     var showInW: Bool = false
     var isDemoUser: Bool = false
     var showColouredLines: Bool = true

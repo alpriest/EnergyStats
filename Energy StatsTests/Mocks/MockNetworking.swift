@@ -6,8 +6,8 @@
 //
 
 @testable import Energy_Stats
-import Foundation
 @testable import Energy_Stats_Core
+import Foundation
 
 class MockNetworking: Networking {
     func fetchVariables(deviceID: String) async throws -> [RawVariable] {
@@ -33,7 +33,7 @@ class MockNetworking: Networking {
     }
 
     func fetchBatterySOC() async throws -> BatterySettingsResponse {
-        BatterySettingsResponse(minSoc: 20)
+        BatterySettingsResponse(minGridSoc: 15, minSoc: 20)
     }
 
     func verifyCredentials(username: String, hashedPassword: String) async throws {
@@ -44,7 +44,7 @@ class MockNetworking: Networking {
 
     func fetchDeviceList() async throws -> PagedDeviceListResponse {
         PagedDeviceListResponse(currentPage: 1, pageSize: 1, total: 1, devices: [
-            PagedDeviceListResponse.Device(plantName: "plant1", deviceID: "abcdef", deviceSN: "123123", hasBattery: true, hasPV: true, deviceType: "F4000")
+            PagedDeviceListResponse.Device(plantName: "plant1", deviceID: "abcdef", deviceSN: "123123", moduleSN: "SN123", hasBattery: true, hasPV: true, deviceType: "F4000")
         ])
     }
 
@@ -57,7 +57,7 @@ class MockNetworking: Networking {
     }
 
     func fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse {
-        BatterySettingsResponse(minSoc: 20)
+        BatterySettingsResponse(minGridSoc: 15, minSoc: 20)
     }
 
     func fetchBattery(deviceID: String) async throws -> BatteryResponse {
@@ -85,6 +85,41 @@ class MockNetworking: Networking {
 
     func fetchAddressBook(deviceID: String) async throws -> AddressBookResponse {
         AddressBookResponse(softVersion: AddressBookResponse.SoftwareVersion(master: "1", slave: "2", manager: "3"))
+    }
+
+    func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [ReportResponse] {
+        []
+    }
+
+    func fetchEarnings(deviceID: String) async throws -> EarningsResponse {
+        EarningsResponse(currency: "GBP", today: EarningsResponse.Earning(generation: 1.0, earnings: 1.0),
+                         month: EarningsResponse.Earning(generation: 2.0, earnings: 2.0),
+                         year: EarningsResponse.Earning(generation: 3.0, earnings: 3.0),
+                         cumulate: EarningsResponse.Earning(generation: 4.0, earnings: 4.0))
+    }
+
+    func setSoc(minGridSOC: Int, minSOC: Int, deviceSN: String) async throws {}
+
+    func fetchBatteryTimes(deviceSN: String) async throws -> BatteryTimesResponse {
+        BatteryTimesResponse(sn: "ABC1234", times: [
+            ChargeTime(enableGrid: false, startTime: Time(hour: 01, minute: 00), endTime: Time(hour: 01, minute: 30)),
+            ChargeTime(enableGrid: false, startTime: Time(hour: 03, minute: 00), endTime: Time(hour: 03, minute: 30))
+        ])
+    }
+
+    func setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws {}
+
+    func fetchWorkMode(deviceID: String) async throws -> DeviceSettingsGetResponse {
+        DeviceSettingsGetResponse(protocol: "H1234", raw: "", values: InverterValues(operationModeWorkMode: .feedInFirst))
+    }
+
+    func setWorkMode(deviceID: String, workMode: InverterWorkMode) async throws {}
+
+    func fetchDataLoggers() async throws -> PagedDataLoggerListResponse {
+        PagedDataLoggerListResponse(currentPage: 1, pageSize: 10, total: 1, data: [
+            PagedDataLoggerListResponse.DataLogger(moduleSN: "ABC123DEF456", moduleType: "W2", plantName: "John Doe", version: "3.08", signal: 3, communication: 1),
+            PagedDataLoggerListResponse.DataLogger(moduleSN: "123DEF456ABC", moduleType: "W2", plantName: "Jane Doe", version: "3.08", signal: 1, communication: 0)
+        ])
     }
 
     private func rawData() throws -> Data {

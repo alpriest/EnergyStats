@@ -19,14 +19,14 @@ final class GraphTabViewModelTests: XCTestCase {
         config = MockConfig()
         networking = MockNetworking()
         let configManager = ConfigManager(networking: networking, config: config)
-        sut = ParametersGraphTabViewModel(networking, configManager: configManager, { Date(timeIntervalSince1970: 1669146973) })
+        sut = ParametersGraphTabViewModel(networking: networking, configManager: configManager, { Date(timeIntervalSince1970: 1669146973) })
 
         try await configManager.fetchDevices()
     }
 
     func test_initial_values() {
         XCTAssertEqual(sut.data.count, 0)
-        XCTAssertEqual(sut.displayMode, .today(24))
+        XCTAssertEqual(sut.displayMode, GraphDisplayMode(date: .now, hours: 24))
         XCTAssertEqual(sut.stride, 3)
         XCTAssertEqual(sut.graphVariables, [])
     }
@@ -43,7 +43,7 @@ final class GraphTabViewModelTests: XCTestCase {
         stubHTTPResponses(with: [.rawSuccess, .reportSuccess, .rawSuccess])
         await sut.load()
 
-        sut.displayMode = .today(12)
+        sut.displayMode = GraphDisplayMode(date: .now, hours: 24)
 
         XCTAssertEqual(sut.data.count, 660)
     }

@@ -12,12 +12,10 @@ import XCTest
 final class NetworkTests: XCTestCase {
     private var sut: Networking!
     private var keychainStore: MockKeychainStore!
-    private var config: MockConfig!
 
     override func setUp() {
         keychainStore = MockKeychainStore()
-        config = MockConfig()
-        sut = Network(credentials: keychainStore, config: config, store: InMemoryLoggingNetworkStore())
+        sut = Network(credentials: keychainStore, store: InMemoryLoggingNetworkStore())
     }
 
     func test_verifyCredentials_does_not_throw_on_success() async throws {
@@ -58,16 +56,14 @@ final class NetworkTests: XCTestCase {
     }
 
     func test_fetchReport_returns_data_on_success() async throws {
-        config.configureAsLoggedIn()
         stubHTTPResponse(with: .reportSuccess)
 
-        let report = try await sut.fetchReport(deviceID: "any", variables: [.feedIn, .gridConsumption, .generation, .chargeEnergyToTal, .dischargeEnergyToTal], queryDate: QueryDate.any())
+        let report = try await sut.fetchReport(deviceID: "any", variables: [.feedIn, .gridConsumption, .generation, .chargeEnergyToTal, .dischargeEnergyToTal], queryDate: QueryDate.any(), reportType: .day)
 
         XCTAssertEqual(report.count, 5)
     }
 
     func test_fetchBattery_returns_data_on_success() async throws {
-        config.configureAsLoggedIn()
         stubHTTPResponse(with: .batterySuccess)
 
         let report = try await sut.fetchBattery(deviceID: "any")
@@ -77,7 +73,6 @@ final class NetworkTests: XCTestCase {
     }
 
     func test_fetchRaw_returns_data_on_success() async throws {
-        config.configureAsLoggedIn()
         stubHTTPResponse(with: .rawSuccess)
 
         let raw = try await sut.fetchRaw(deviceID: "1", variables: [
@@ -100,11 +95,10 @@ final class NetworkTests: XCTestCase {
     }
 
     func test_fetchReport_throws_when_offline() async {
-        config.configureAsLoggedIn()
         stubOffline()
 
         do {
-            _ = try await sut.fetchReport(deviceID: "!", variables: [.feedIn, .gridConsumption, .generation, .chargeEnergyToTal], queryDate: QueryDate.any())
+            _ = try await sut.fetchReport(deviceID: "!", variables: [.feedIn, .gridConsumption, .generation, .chargeEnergyToTal], queryDate: QueryDate.any(), reportType: .day)
         } catch NetworkError.offline {
         } catch {
             XCTFail()
@@ -112,11 +106,10 @@ final class NetworkTests: XCTestCase {
     }
 
     func test_fetchReport_returns_tryLater() async {
-        config.configureAsLoggedIn()
         stubHTTPResponse(with: .tryLaterFailure)
 
         do {
-            _ = try await sut.fetchReport(deviceID: "1", variables: [.feedIn, .gridConsumption, .generation, .chargeEnergyToTal], queryDate: QueryDate.any())
+            _ = try await sut.fetchReport(deviceID: "1", variables: [.feedIn, .gridConsumption, .generation, .chargeEnergyToTal], queryDate: QueryDate.any(), reportType: .day)
         } catch NetworkError.tryLater {
         } catch {
             XCTFail()
@@ -124,18 +117,11 @@ final class NetworkTests: XCTestCase {
     }
 
     func test_fetchReport_withInvalidToken_requestsToken_andRetriesOriginalFetch() async throws {
-        config.configureAsLoggedIn()
         keychainStore.username = "bob"
         keychainStore.hashedPassword = "secrethash"
         stubHTTPResponses(with: [.badTokenFailure, .loginSuccess, .reportSuccess])
 
-        _ = try await sut.fetchReport(deviceID: "1", variables: [.feedIn, .gridConsumption, .generation, .chargeEnergyToTal], queryDate: QueryDate.any())
-    }
-}
-
-extension MockConfig {
-    func configureAsLoggedIn() {
-        selectedDeviceID = "1"
+        _ = try await sut.fetchReport(deviceID: "1", variables: [.feedIn, .gridConsumption, .generation, .chargeEnergyToTal], queryDate: QueryDate.any(), reportType: .day)
     }
 }
 
