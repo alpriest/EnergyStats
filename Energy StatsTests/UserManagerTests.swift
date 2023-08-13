@@ -28,19 +28,18 @@ final class UserManagerTests: XCTestCase {
     }
 
     func test_isLoggedIn_SetsOnInitialisation() {
-        var expectation: XCTestExpectation? = self.expectation(description: #function)
+        var expectation = self.expectation(description: #function)
         keychainStore.updateHasCredentials(value: true)
 
         sut.$isLoggedIn
             .receive(subscriber: Subscribers.Sink(receiveCompletion: { _ in
             }, receiveValue: { value in
                 if value {
-                    expectation?.fulfill()
-                    expectation = nil
+                    expectation.fulfill()
                 }
             }))
 
-        wait(for: [expectation!], timeout: 1.0)
+        wait(for: [expectation], timeout: 1.0)
         XCTAssertTrue(sut.isLoggedIn)
     }
 
@@ -66,7 +65,7 @@ final class UserManagerTests: XCTestCase {
 
     func test_login_success() async {
         let received = ValueReceiver(sut.$state)
-        stubHTTPResponses(with: [.loginSuccess, .deviceListSuccess, .batterySuccess, .batterySocSuccess, .firmwareVersionSuccess, .variablesSuccess])
+        stubHTTPResponses(with: [.loginSuccess, .deviceListSuccess, .firmwareVersionSuccess, .variablesSuccess, .batterySuccess, .batterySocSuccess])
 
         await sut.login(username: "bob", password: "password")
 
