@@ -101,8 +101,10 @@ struct InverterView: View {
                 }
                 .buttonStyle(.bordered)
             } else {
-                Text(viewModel.devices.first?.device.deviceDisplayName ?? "")
-                    .padding(2)
+                if appTheme.showInverterTemperature {
+                    Text(viewModel.devices.first?.device.deviceDisplayName ?? "")
+                        .padding(2)
+                }
             }
         }
         .background(Color("background"))
