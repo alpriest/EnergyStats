@@ -17,18 +17,21 @@ struct DatePickerView: View {
                     viewModel.range = .day
                 } label: {
                     Label("Day", systemImage: viewModel.range == .day ? "checkmark" : "")
+                        .accessibilityIdentifier("day")
                 }
 
                 Button {
                     viewModel.range = .month
                 } label: {
                     Label("Month", systemImage: viewModel.range == .month ? "checkmark" : "")
+                        .accessibilityIdentifier("month")
                 }
 
                 Button {
                     viewModel.range = .year
                 } label: {
                     Label("Year", systemImage: viewModel.range == .year ? "checkmark" : "")
+                        .accessibilityIdentifier("year")
                 }
             } label: {
                 NonFunctionalButton {

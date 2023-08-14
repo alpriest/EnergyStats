@@ -32,7 +32,7 @@ final class Energy_Stats_UITestsLaunchTests: XCTestCase {
 
         app.buttons["stats_tab"].tap()
         app.buttons["stats_datepicker"].tap()
-        app.buttons["Month"].tap()
+        app.buttons["month"].tap()
 
         snapshot("02_stats_tab")
 
@@ -47,10 +47,10 @@ final class Energy_Stats_UITestsLaunchTests: XCTestCase {
         app.buttons["settings_tab"].tap()
         snapshot("05_settings_tab")
 
-        app.buttons["Battery"].tap()
+        app.buttons["battery"].tap()
         snapshot("06_battery_settings")
 
-        app.buttons["Minimum charge levels"].tap()
+        app.buttons["minimum charge levels"].tap()
         snapshot("07_battery_charge_levels")
 
         app.navigationBars.buttons.element(boundBy: 0).tap()

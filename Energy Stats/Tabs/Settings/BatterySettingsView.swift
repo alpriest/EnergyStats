@@ -17,11 +17,11 @@ struct BatterySettingsView: View {
         Form {
             NavigationLink("Minimum charge levels") {
                 BatterySOCSettingsView(networking: viewModel.networking, config: viewModel.config, onSOCchange: { viewModel.recalculateBatteryCapacity() })
-            }
+            }.accessibilityIdentifier("minimum charge levels")
 
             NavigationLink("Charge times") {
                 BatteryChargeScheduleSettingsView(networking: viewModel.networking, config: viewModel.config)
-            }
+            }.accessibilityIdentifier("charge schedule")
 
             Section(
                 content: {

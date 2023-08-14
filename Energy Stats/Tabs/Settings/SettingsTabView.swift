@@ -27,6 +27,7 @@ struct SettingsTabView: View {
                         BatterySettingsView(viewModel: viewModel)
                     } label: {
                         Text("Battery")
+                            .accessibilityIdentifier("battery")
                     }
                 }
 
