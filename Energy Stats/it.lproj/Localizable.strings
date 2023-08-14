@@ -17,6 +17,7 @@
 "Stats" = "Statistiche";
 "Min battery charge (SOC)" = "Carica minima della batteria (SoC)";
 "Power flow" = "Flusso di potenza";
+"Yield today" = "Resa oggi";
 "Buy me a coffee" = "Offrimi un caffè";
 "You appear to be offline. Please check your connection." = "Sembri essere offline. Controlla la tua connessione.";
 "Fox servers are offline. Please try later." = "I server Fox sono offline. Riprova più tardi.";
@@ -71,6 +72,27 @@
 "Shows earnings today, this month, this year, and all-time based on a crude calculation of feed-in ｘ price as configured on FoxESS cloud." = "Mostra le entrate di oggi, di questo mese, di quest'anno e complessivamente basate su un calcolo approssimativo di feed-in ｘ prezzo come configurato su FoxESS cloud.";
 "Inverter" = "Inverter";
 "Show values in Watts" = "Mostra valori in watt";
+"Export graph data" = "Esporta dati del grafico";
+"Stats are aggregated by FoxESS into 1 hr, 1 day or 1 month totals" = "Le statistiche vengono aggregate da FoxESS in totali ogni 1 ora, 1 giorno o 1 mese.";
+"Output " = "Uscita ";
+"power" = "Potenza";
+"energy" = "Energia";
+"Apply" = "Applica";
+"Cancel" = "Annulla";
+"Note that not all parameters contain values" = "Si noti che non tutti i parametri contengono valori.";
+"Predefined selections" = "Selezioni predefinite";
+"All" = "Tutto";
+"Inverter" = "Inverter";
+"Battery" = "Batteria";
+"Show sunshine background" = "Mostra sfondo soleggiato";
+"Show usable battery only" = "Mostra solo la batteria utilizzabile";
+"Show battery full/empty estimate" = "Mostra stima batteria piena/vuota";
+"Show battery temperature" = "Mostra temperatura batteria";
+"Show total yield" = "Mostra resa totale";
+"Show coloured flow lines" = "Mostra linee di flusso colorate";
+"You are logged in as " = "Sei connesso come ";
+"Capacity" = "Capacità";
+"Show estimated earnings" = "Mostra guadagni stimati";
 
 /* Battery Charge Pages */
 "Minimum charge levels" = "Livelli di carica minimi";
