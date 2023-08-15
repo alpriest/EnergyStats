@@ -18,7 +18,7 @@ struct HomePowerView: View {
         VStack {
             PowerFlowView(amount: amount, appTheme: appTheme, showColouredLines: false)
             Image(systemName: "house.fill")
-                .font(.system(size: 48))
+                .font(.system(size: 44))
                 .frame(width: 45, height: 45)
             Color.clear.frame(width: iconFooterSize.width, height: iconFooterSize.height)
         }

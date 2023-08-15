@@ -47,23 +47,15 @@ struct InverterView: View {
                 .foregroundColor(Color("lines_notflowing"))
 
             if verticalSizeClass == .regular {
-                VStack(spacing: 0) {
-                    if appTheme.showInverterTemperature {
-                        Text("hidden")
-                            .hidden()
-                    }
-
-                    deviceNameSelector()
-
-                    if appTheme.showInverterTemperature, let temperatures = viewModel.temperatures {
-                        HStack {
-                            InverterTemperatureView(value: temperatures.ambient, name: "internal")
-                            InverterTemperatureView(value: temperatures.inverter, name: "external")
-                        }
-                        .background(Color("background"))
-                    }
-                }
+                // Vertical alignment
+//                VStack(spacing: 0) {
+                    InverterIconView()
+                        .frame(width: 55, height: 40)
+                        .padding(.bottom, 5)
+                        .background(verticalDeviceDetail().offset(y: 40))
+//                }
             } else {
+                // Horizontal alignment
                 HStack {
                     deviceNameSelector()
 
@@ -76,6 +68,24 @@ struct InverterView: View {
                     }
                 }
             }
+        }
+    }
+
+    @ViewBuilder
+    func verticalDeviceDetail() -> some View {
+        if appTheme.showInverterTemperature {
+            Text("hidden")
+                .hidden()
+        }
+
+        deviceNameSelector()
+
+        if appTheme.showInverterTemperature, let temperatures = viewModel.temperatures {
+            HStack {
+                InverterTemperatureView(value: temperatures.ambient, name: "internal")
+                InverterTemperatureView(value: temperatures.inverter, name: "external")
+            }
+            .background(Color("background"))
         }
     }
 

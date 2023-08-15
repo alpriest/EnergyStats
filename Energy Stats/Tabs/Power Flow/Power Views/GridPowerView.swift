@@ -17,7 +17,7 @@ struct GridPowerView: View {
     var body: some View {
         VStack {
             PowerFlowView(amount: amount, appTheme: appTheme, showColouredLines: true)
-            PylonView()
+            PylonView(lineWidth: 3)
                 .frame(width: 45, height: 45)
             Color.clear.frame(width: iconFooterSize.width, height: iconFooterSize.height)
         }
