@@ -54,7 +54,9 @@ public class ConfigManager: ConfigManaging {
     public var appTheme: CurrentValueSubject<AppTheme, Never>
     public var currentDevice = CurrentValueSubject<Device?, Never>(nil)
 
-    public struct NoDeviceFoundError: Error {}
+    public struct NoDeviceFoundError: Error {
+        public init() {}
+    }
 
     public init(networking: Networking, config: Config) {
         self.networking = networking

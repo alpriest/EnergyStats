@@ -14,6 +14,16 @@ struct ContentView: View {
     let configManager: ConfigManager
     @State private var state = LoadState.active(String(key: .loading))
 
+    var body: some View {
+        if loginManager.isLoggedIn {
+            TabbedView(networking: network, userManager: loginManager, configManager: configManager)
+                .loadable($state, retry: fetchConfig)
+                .task { fetchConfig() }
+        } else {
+            LoginView(userManager: loginManager)
+        }
+    }
+
     func fetchConfig() {
         Task {
             do {
@@ -36,16 +46,6 @@ struct ContentView: View {
                     state = .error(error, String(key: .couldNotLogin))
                 }
             }
-        }
-    }
-
-    var body: some View {
-        if loginManager.isLoggedIn {
-            TabbedView(networking: network, userManager: loginManager, configManager: configManager)
-                .loadable($state, retry: fetchConfig)
-                .task { fetchConfig() }
-        } else {
-            LoginView(userManager: loginManager)
         }
     }
 }
