@@ -119,6 +119,7 @@
 "Schedule summary" = "Sommario dell'orario";
 "Reset times" = "Resetta gli orari";
 "Battery Schedule" = "Programmazione della batteria";
+"Battery capacity recalculated" = "Capacità della batteria ricalcolata";
 
 /* Inverter page */
 "self_use_mode" = "In questa modalità, l'inverter assegna prioritariamente la potenza come segue:\n\n1. Carico della casa\n2. Carica della batteria\n3. Esportazione";

@@ -8,11 +8,9 @@
 import SwiftUI
 
 struct InverterIconPath: View {
-//    func path(in rect: CGRect) -> Path {
     var body: some View {
-
-        return Canvas { context, size in
-            let cablesHeight = size.height * 0.15
+        Canvas { context, size in
+            let cablesHeight = size.height * 0.12
             let cablesWidth = size.width * 0.1
             let panelX = size.width * 0.15
             let panelY = size.height * 0.2
@@ -25,21 +23,21 @@ struct InverterIconPath: View {
             }
 
             let cable1 = Path { path in
-                path.addRoundedRect(in: CGRect(x: cablesWidth * 1.5, y: size.height - cablesHeight - cablesLineWidth, width: cablesWidth, height: cablesHeight), cornerSize: cornerSize)
+                path.addRect(CGRect(x: cablesWidth * 1.5, y: size.height - cablesHeight - cablesLineWidth, width: cablesWidth, height: cablesHeight))
             }
 
             let cable2 = Path { path in
-                path.addRoundedRect(in: CGRect(x: cablesWidth * 3.5, y: size.height - cablesHeight - cablesLineWidth, width: cablesWidth, height: cablesHeight), cornerSize: cornerSize)
+                path.addRect(CGRect(x: cablesWidth * 3.5, y: size.height - cablesHeight - cablesLineWidth, width: cablesWidth, height: cablesHeight))
             }
 
             let screen = Path { path in
                 path.addRect(CGRect(x: panelX, y: panelY, width: panelX * 2.5, height: panelY * 1.5))
             }
 
-            context.fill(inverter, with: .color(.white))
-            context.stroke(inverter, with: .color(.black), lineWidth: inverterLineWidth)
-            context.stroke(cable1, with: .color(.black), lineWidth: cablesLineWidth)
-            context.stroke(cable2, with: .color(.black), lineWidth: cablesLineWidth)
+            context.fill(inverter, with: .color(Color("background")))
+            context.stroke(inverter, with: .color(Color("background_inverted")), lineWidth: inverterLineWidth)
+            context.stroke(cable1, with: .color(Color("background_inverted")), lineWidth: cablesLineWidth)
+            context.stroke(cable2, with: .color(Color("background_inverted")), lineWidth: cablesLineWidth)
             context.fill(screen, with: .color(.gray.opacity(0.5)))
         }
     }
@@ -65,6 +63,8 @@ struct InverterIconView: View {
                     }
             }
         )
+        .padding(2)
+        .background(Color("background"))
     }
 }
 

@@ -158,6 +158,7 @@
 "Reset times" = "Horarios de reinicio";
 "Battery Schedule" = "Programa de Batería";
 "Show estimated earnings" = "Mostrar ganancias estimadas";
+"Battery capacity recalculated" = "Capacidad de la batería recalculada";
 
 /* Inverter page */
 "self_use_mode" = "En este modo, el inversor prioriza la asignación de energía de la siguiente manera:\n\n1. Carga de la casa\n2. Carga de batería\n3. Exportar";

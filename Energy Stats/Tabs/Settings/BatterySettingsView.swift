@@ -78,6 +78,11 @@ struct BatterySettingsView: View {
             }, message: {
                 Text("Amount entered must be greater than 0")
             })
+            .alert("Recalculated", isPresented: $viewModel.showRecalculationAlert, actions: {
+                Button("OK") {}
+            }, message: {
+                Text("Battery capacity recalculated")
+            })
 
             Section {
                 Toggle(isOn: $viewModel.showBatteryEstimate) {

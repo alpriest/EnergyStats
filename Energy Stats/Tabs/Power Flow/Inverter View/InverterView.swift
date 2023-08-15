@@ -48,12 +48,11 @@ struct InverterView: View {
 
             if verticalSizeClass == .regular {
                 // Vertical alignment
-//                VStack(spacing: 0) {
-                    InverterIconView()
-                        .frame(width: 55, height: 40)
-                        .padding(.bottom, 5)
-                        .background(verticalDeviceDetail().offset(y: 40))
-//                }
+                InverterIconView()
+                    .frame(width: 50, height: 60)
+                    .padding(5)
+
+                verticalDeviceDetail().offset(y: 45)
             } else {
                 // Horizontal alignment
                 HStack {

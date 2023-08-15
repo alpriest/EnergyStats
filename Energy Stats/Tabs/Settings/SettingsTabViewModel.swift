@@ -128,6 +128,7 @@ class SettingsTabViewModel: ObservableObject {
     @Published var minSOC: Double
     var username: String { userManager.getUsername() ?? "" }
     @Published var showAlert = false
+    @Published var showRecalculationAlert = false
 
     @MainActor
     func logout() {
@@ -156,7 +157,7 @@ class SettingsTabViewModel: ObservableObject {
         guard let device = config.currentDevice.value else { return }
         guard let devices = config.devices else { return }
 
-        Task { [networking] in
+        Task { @MainActor [networking] in
             let battery = try await networking.fetchBattery(deviceID: device.deviceID)
             let batterySettings = try await networking.fetchBatterySettings(deviceSN: device.deviceSN)
 
@@ -171,6 +172,7 @@ class SettingsTabViewModel: ObservableObject {
                     }
                 }
                 config.select(device: device)
+                showRecalculationAlert = true
             }
         }
     }

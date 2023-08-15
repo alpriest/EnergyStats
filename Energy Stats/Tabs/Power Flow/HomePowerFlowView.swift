@@ -42,17 +42,19 @@ struct HomePowerFlowView: View {
     @State var batteryPowerWidth: CGFloat = 0.0
     @State var homePowerWidth: CGFloat = 0.0
     @State var gridPowerWidth: CGFloat = 0.0
+    @State var size: CGSize = .zero
 
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
             SolarPowerView(appTheme: appTheme, viewModel: SolarPowerViewModel(solar: viewModel.solar,
                                                                               generation: viewModel.todaysGeneration,
                                                                               earnings: viewModel.earnings))
+                .frame(height: size.height * 0.4)
 
             InverterView(viewModel: InverterViewModel(configManager: configManager, temperatures: viewModel.inverterTemperatures), appTheme: appTheme)
                 .frame(height: 2)
-                .frame(width: batteryPowerWidth + gridPowerWidth + 16)
-                .padding(.vertical, 1)
+                .frame(width: batteryPowerWidth + gridPowerWidth + 20)
+                .padding(.vertical, 2)
                 .zIndex(1)
 
             HStack {
@@ -93,7 +95,9 @@ struct HomePowerFlowView: View {
                     })
             }
             .padding(.horizontal, 14)
-        }
+        }.background(GeometryReader { reader in
+            Color.clear.onAppear { size = reader.size }.onChange(of: reader.size) { newValue in size = newValue }
+        })
     }
 }
 

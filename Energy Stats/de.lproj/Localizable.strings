@@ -168,6 +168,7 @@
 "Reset times" = "Reset-Zeiten";
 "Battery Schedule" = "Batterie-Ladeplan";
 "Show estimated earnings" = "Zeige geschätzten Ertrag";
+"Battery capacity recalculated" = "Batteriekapazität neu berechnet";
 
 /* Inverter page */
 "self_use_mode" = "In diesem Modus priorisiert der Wechselrichter die Stromzuweisung wie folgt:\n\n1. Hauslast\n2. Batterieladung\n3. Einspeisung";

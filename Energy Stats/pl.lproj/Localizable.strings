@@ -145,6 +145,7 @@
 "Reset times" = "Czasy resetowania";
 "Battery Schedule" = "Harmonogram baterii";
 "Show estimated earnings" = "Pokaż szacowane zyski";
+"Battery capacity recalculated" = "Pojemność baterii przeliczona";
 
 /* Inverter page */
 "self_use_mode" = "W tym trybie inwerter priorytetowo alokuje moc zgodnie z następującym porządkiem:\n\n1. Obciążenie domu\n2. Ładowanie baterii\n3. Eksport";
