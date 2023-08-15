@@ -49,7 +49,7 @@ struct InverterView: View {
             if verticalSizeClass == .regular {
                 // Vertical alignment
                 InverterIconView()
-                    .frame(width: 50, height: 60)
+                    .frame(width: 55, height: 60)
                     .padding(5)
 
                 verticalDeviceDetail().offset(y: 45)
