@@ -18,7 +18,6 @@ struct CheckBatteryChargeLevelIntent: AppIntent {
         let store = KeychainStore()
         let network = Network(credentials: store, store: InMemoryLoggingNetworkStore())
         let config = UserDefaultsConfig()
-        let configManager = ConfigManager(networking: network, config: config)
         guard let deviceID = config.selectedDeviceID else {
             throw ConfigManager.NoDeviceFoundError()
         }
