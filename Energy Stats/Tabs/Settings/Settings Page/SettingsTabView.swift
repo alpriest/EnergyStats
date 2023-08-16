@@ -17,7 +17,10 @@ struct SettingsTabView: View {
         NavigationView {
             Form {
                 NavigationLink {
-                    InverterSettingsView(networking: networking, configManager: configManager, firmwareVersion: viewModel.firmwareVersions)
+                    InverterSettingsView(networking: networking,
+                                         configManager: configManager,
+                                         firmwareVersion: viewModel.firmwareVersions,
+                                         showInverterTemperature: $viewModel.showInverterTemperature)
                 } label: {
                     Text("Inverter")
                 }
@@ -45,10 +48,6 @@ struct SettingsTabView: View {
 
                         Toggle(isOn: $viewModel.showTotalYield) {
                             Text("Show total yield")
-                        }
-
-                        Toggle(isOn: $viewModel.showInverterTemperature) {
-                            Text("Show inverter temperatures")
                         }
 
                         Toggle(isOn: $viewModel.showSunnyBackground) {
@@ -109,56 +108,7 @@ struct SettingsTabView: View {
                     NavigationLink("FAQ") { FAQView() }
                 }
 
-                Section(
-                    content: {
-                        VStack {
-                            Text("You are logged in as ") + Text(viewModel.username)
-                            Button("logout") {
-                                viewModel.logout()
-                            }.buttonStyle(.bordered)
-                        }.frame(maxWidth: .infinity)
-                    }, footer: {
-                        VStack {
-                            HStack {
-                                Button {
-                                    let url = URL(string: "mailto:energystatsapp@gmail.com")!
-                                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                                } label: {
-                                    Image(systemName: "envelope")
-                                    Text("Get in touch")
-                                }
-                            }
-                            .padding(.top, 88)
-
-                            HStack {
-                                Button {
-                                    let url = URL(string: "itms-apps://itunes.apple.com/app/id1644492526?action=write-review")!
-                                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                                } label: {
-                                    Image(systemName: "medal")
-                                    Text("Rate this app")
-                                        .multilineTextAlignment(.center)
-                                }
-                                .frame(minWidth: 0, maxWidth: .infinity)
-
-                                Spacer()
-
-                                Button {
-                                    let url = URL(string: "https://buymeacoffee.com/alpriest")!
-                                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                                } label: {
-                                    Image(systemName: "cup.and.saucer")
-                                    Text("Buy me a coffee")
-                                }
-                                .frame(minWidth: 0, maxWidth: .infinity)
-                            }
-                            .padding(.top, 44)
-                            .padding(.bottom, 44)
-                            .frame(maxWidth: .infinity)
-
-                            Text("Version ") + Text(viewModel.appVersion)
-                        }
-                    })
+                SettingsFooterView(username: viewModel.username, onLogout: viewModel.logout, appVersion: viewModel.appVersion)
             }
         }.navigationViewStyle(StackNavigationViewStyle())
     }

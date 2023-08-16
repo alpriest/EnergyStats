@@ -59,17 +59,11 @@ struct BatterySOCSettingsView: View {
                             Text($0)
                                 .foregroundColor(Color.red)
                         }
-
-                        Button(action: {
-                            viewModel.save()
-                        }, label: {
-                            Text("Save")
-                                .frame(minWidth: 0, maxWidth: .infinity)
-                        })
-                        .buttonStyle(.borderedProminent)
                     }
                 })
             }
+
+            BottomButtonsView { viewModel.save() }
         }
         .navigationTitle("Configure Battery Charge Levels")
         .navigationBarTitleDisplayMode(.inline)

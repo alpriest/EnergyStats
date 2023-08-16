@@ -142,32 +142,7 @@ struct InverterWorkModeView: View {
                 }
             }
 
-            VStack(spacing: 0) {
-                Color("BottomBarDivider")
-                    .frame(height: 1)
-                    .frame(maxWidth: .infinity)
-
-                HStack {
-                    Button(action: {
-                        dismiss()
-                    }) {
-                        Text("Cancel")
-                            .frame(maxWidth: .infinity)
-                    }
-                    .padding()
-                    .buttonStyle(.borderedProminent)
-                    .accessibilityIdentifier("cancel")
-
-                    Button(action: {
-                        viewModel.save()
-                    }) {
-                        Text("Apply")
-                            .frame(maxWidth: .infinity)
-                    }
-                    .padding()
-                    .buttonStyle(.borderedProminent)
-                }
-            }
+            BottomButtonsView { viewModel.save() }
         }
         .loadable($viewModel.state) {
             viewModel.load()

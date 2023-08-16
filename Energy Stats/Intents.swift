@@ -35,8 +35,8 @@ struct EnergyStatsShortcuts: AppShortcutsProvider {
     static var appShortcuts: [AppShortcut] {
         AppShortcut(
             intent: CheckBatteryChargeLevelIntent(),
-            phrases: ["Show me my battery SOC on \(.applicationName)"],
-            shortTitle: "Battery SOC"
+            phrases: ["Check my storage battery SOC on \(.applicationName)"],
+            shortTitle: "Storage Battery SOC"
         )
     }
 }

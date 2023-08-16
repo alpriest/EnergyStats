@@ -14,7 +14,7 @@ struct InverterIconPath: View {
             let cablesWidth = size.width * 0.1
             let panelX = size.width * 0.15
             let panelY = size.height * 0.2
-            let cornerSize = CGSize(width: 5, height: 5)
+            let cornerSize = CGSize(width: 3, height: 3)
             let inverterLineWidth: CGFloat = 3
             let cablesLineWidth: CGFloat = 2
 

@@ -73,6 +73,8 @@
 		4141B20028D86C7200B60157 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141B1FF28D86C7200B60157 /* UserManager.swift */; };
 		4141B20228D871B900B60157 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141B20128D871B900B60157 /* ContentView.swift */; };
 		414BF82829B4918300E2EB51 /* SettingsTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */; };
+		4160098B2A8D18B10096CCD9 /* SettingsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4160098A2A8D18B10096CCD9 /* SettingsFooterView.swift */; };
+		4160098D2A8D1A690096CCD9 /* BottomButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4160098C2A8D1A690096CCD9 /* BottomButtonsView.swift */; };
 		41626CD029D969E9003FEB00 /* InverterFirmwareVersionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41626CCF29D969E9003FEB00 /* InverterFirmwareVersionsView.swift */; };
 		4162BC2A2A08E33600DFEDC1 /* raw-h1-deviceid.json in Resources */ = {isa = PBXBuildFile; fileRef = 4162BC292A08E33600DFEDC1 /* raw-h1-deviceid.json */; };
 		4162BC2C2A09772C00DFEDC1 /* earnings.json in Resources */ = {isa = PBXBuildFile; fileRef = 4162BC2B2A09772C00DFEDC1 /* earnings.json */; };
@@ -288,6 +290,8 @@
 		4141B1FF28D86C7200B60157 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		4141B20128D871B900B60157 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabViewModel.swift; sourceTree = "<group>"; };
+		4160098A2A8D18B10096CCD9 /* SettingsFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFooterView.swift; sourceTree = "<group>"; };
+		4160098C2A8D1A690096CCD9 /* BottomButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButtonsView.swift; sourceTree = "<group>"; };
 		41626CCB29D95E37003FEB00 /* AddressBookResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressBookResponse.swift; sourceTree = "<group>"; };
 		41626CCD29D95E9C003FEB00 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		41626CCF29D969E9003FEB00 /* InverterFirmwareVersionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterFirmwareVersionsView.swift; sourceTree = "<group>"; };
@@ -481,6 +485,7 @@
 				411029122A71C066004018BB /* Tintable.swift */,
 				411029142A71C4F2004018BB /* NumberTextField.swift */,
 				416AE4372A7D956E003D0122 /* AlertCopy.swift */,
+				4160098C2A8D1A690096CCD9 /* BottomButtonsView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -519,6 +524,7 @@
 		4110290B2A71B704004018BB /* Battery Settings */ = {
 			isa = PBXGroup;
 			children = (
+				4130364829B86F66006B5CE9 /* BatterySettingsView.swift */,
 				411029102A71B95F004018BB /* BatteryTimePeriodView.swift */,
 				411029162A71C975004018BB /* ChargeTimePeriod.swift */,
 				4110290C2A71B713004018BB /* BatteryChargeScheduleSettingsView.swift */,
@@ -677,6 +683,16 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		416009892A8D18540096CCD9 /* Settings Page */ = {
+			isa = PBXGroup;
+			children = (
+				41E1DFDE28D87781001235B9 /* SettingsTabView.swift */,
+				414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */,
+				4160098A2A8D18B10096CCD9 /* SettingsFooterView.swift */,
+			);
+			path = "Settings Page";
+			sourceTree = "<group>";
+		};
 		416318BA29DDD7E500C2C285 /* Debug View */ = {
 			isa = PBXGroup;
 			children = (
@@ -689,6 +705,8 @@
 		416AE4342A7D2C67003D0122 /* Inverter */ = {
 			isa = PBXGroup;
 			children = (
+				4130364A29B8BE7F006B5CE9 /* InverterChoiceView.swift */,
+				41626CCF29D969E9003FEB00 /* InverterFirmwareVersionsView.swift */,
 				416AE4352A7D2C8B003D0122 /* InverterSettingsView.swift */,
 				416AE4392A7FA76E003D0122 /* InverterWorkModeView.swift */,
 			);
@@ -863,11 +881,7 @@
 				4192F9972A86748F0035DAB8 /* Data Logger */,
 				4110290B2A71B704004018BB /* Battery Settings */,
 				416AE4342A7D2C67003D0122 /* Inverter */,
-				41E1DFDE28D87781001235B9 /* SettingsTabView.swift */,
-				414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */,
-				4130364829B86F66006B5CE9 /* BatterySettingsView.swift */,
-				4130364A29B8BE7F006B5CE9 /* InverterChoiceView.swift */,
-				41626CCF29D969E9003FEB00 /* InverterFirmwareVersionsView.swift */,
+				416009892A8D18540096CCD9 /* Settings Page */,
 				416318BA29DDD7E500C2C285 /* Debug View */,
 				418199C62A4034530001B5D4 /* FAQView.swift */,
 				41C19DCE2A4E09F9009883AB /* SelfSufficiencySettingsView.swift */,
@@ -1195,6 +1209,7 @@
 				416AE4362A7D2C8B003D0122 /* InverterSettingsView.swift in Sources */,
 				417AA21A2A12454A0073CD34 /* StatsTabView.swift in Sources */,
 				4130364929B86F66006B5CE9 /* BatterySettingsView.swift in Sources */,
+				4160098B2A8D18B10096CCD9 /* SettingsFooterView.swift in Sources */,
 				411029172A71C975004018BB /* ChargeTimePeriod.swift in Sources */,
 				4141B20228D871B900B60157 /* ContentView.swift in Sources */,
 				417153E829F2D80C00639A7B /* Date+compare.swift in Sources */,
@@ -1206,6 +1221,7 @@
 				416318C029DDD82800C2C285 /* ResponseDebugView.swift in Sources */,
 				414BF82829B4918300E2EB51 /* SettingsTabViewModel.swift in Sources */,
 				41CD1F322A1414C1006B0C00 /* StatsGraphVariableToggles.swift in Sources */,
+				4160098D2A8D1A690096CCD9 /* BottomButtonsView.swift in Sources */,
 				4110291D2A72AFC2004018BB /* BatterySOCSettingsViewModel.swift in Sources */,
 				419DFA862A12930E0067313A /* DatePickerView.swift in Sources */,
 				416318B929DDD44C00C2C285 /* DebugDataView.swift in Sources */,
@@ -1538,7 +1554,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.54;
+				MARKETING_VERSION = 1.55;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1573,7 +1589,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.54;
+				MARKETING_VERSION = 1.55;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

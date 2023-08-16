@@ -17,25 +17,23 @@ struct BatteryChargeScheduleSettingsView: View {
     }
 
     var body: some View {
-        Form {
-            BatteryTimePeriodView(timePeriod: $viewModel.timePeriod1, title: "Time period 1")
-            BatteryTimePeriodView(timePeriod: $viewModel.timePeriod2, title: "Time period 2")
+        VStack(spacing: 0) {
+            Form {
+                BatteryTimePeriodView(timePeriod: $viewModel.timePeriod1, title: "Time period 1")
+                BatteryTimePeriodView(timePeriod: $viewModel.timePeriod2, title: "Time period 2")
 
-            Section(content: {}, footer: {
-                VStack(alignment: .leading) {
-                    Text("Schedule summary")
-                        .font(.headline)
+                Section(content: {}, footer: {
+                    VStack(alignment: .leading) {
+                        Text("Schedule summary")
+                            .font(.headline)
 
-                    Text(viewModel.summary)
+                        Text(viewModel.summary)
+                    }
+                    .frame(minWidth: 0, maxWidth: .infinity)
+                })
+            }
 
-                    Button(action: { viewModel.save() }, label: {
-                        Text("Save")
-                            .frame(minWidth: 0, maxWidth: .infinity)
-                    })
-                    .buttonStyle(.borderedProminent)
-                }
-                .frame(minWidth: 0, maxWidth: .infinity)
-            })
+            BottomButtonsView { viewModel.save() }
         }
         .navigationTitle("Battery Schedule")
         .navigationBarTitleDisplayMode(.inline)
