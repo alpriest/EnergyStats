@@ -14,11 +14,13 @@ struct PowerFlowView: View {
     private let animationDuration: Double
     private let appTheme: AppTheme
     private let showColouredLines: Bool
+    private let type: AmountType
 
-    init(amount: Double, appTheme: AppTheme, showColouredLines: Bool) {
+    init(amount: Double, appTheme: AppTheme, showColouredLines: Bool, type: AmountType) {
         self.amount = amount
         self.appTheme = appTheme
         self.showColouredLines = showColouredLines
+        self.type = type
 
         animationDuration = max(0.4, 2.7 - abs(amount))
     }
@@ -34,7 +36,7 @@ struct PowerFlowView: View {
                     }
 
                     VStack {
-                        PowerAmountView(amount: amount, backgroundColor: lineColor, textColor: textColor, appTheme: appTheme)
+                        PowerAmountView(amount: amount, backgroundColor: lineColor, textColor: textColor, appTheme: appTheme, type: type)
                             .font(.body.bold())
                     }
                 }
@@ -89,7 +91,7 @@ struct PowerFlowView_Previews: PreviewProvider {
                 Color.clear.overlay(
                     Group {
                         if visible {
-                            PowerFlowView(amount: amount, appTheme: AppTheme.mock(), showColouredLines: true)
+                            PowerFlowView(amount: amount, appTheme: AppTheme.mock(), showColouredLines: true, type: .solarFlow)
                         }
                     }
                 ).frame(height: 100)

@@ -16,10 +16,13 @@ struct HomePowerView: View {
 
     var body: some View {
         VStack {
-            PowerFlowView(amount: amount, appTheme: appTheme, showColouredLines: false)
+            PowerFlowView(amount: amount, appTheme: appTheme, showColouredLines: false, type: .homeFlow)
+
             Image(systemName: "house.fill")
                 .font(.system(size: 44))
                 .frame(width: 45, height: 45)
+                .accessibilityHidden(true)
+
             Color.clear.frame(width: iconFooterSize.width, height: iconFooterSize.height)
         }
     }

@@ -25,13 +25,22 @@ struct InverterTemperatureView: View {
     var body: some View {
         if let value {
             VStack(alignment: .center) {
-                (Text(value, format: .number) +
-                    Text("℃"))
+                Text(formattedValue + "℃")
                     .font(.caption)
                 Text(name.uppercased())
                     .font(.system(size: 8.0))
             }
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel("Inverter \(name) temperature \(formattedValue) ℃")
         }
+    }
+
+    var formattedValue: String {
+        guard let value else { return "" }
+
+        let formatter = NumberFormatter()
+        formatter.maximumFractionDigits = 1
+        return formatter.string(from: NSNumber(value: value)) ?? ""
     }
 }
 
@@ -47,14 +56,15 @@ struct InverterView: View {
                 .foregroundColor(Color("lines_notflowing"))
 
             if verticalSizeClass == .regular {
-                // Vertical alignment
+                // Portrait
                 InverterIconView()
                     .frame(width: 55, height: 60)
                     .padding(5)
+                    .accessibilityHidden(true)
 
                 verticalDeviceDetail().offset(y: 45)
             } else {
-                // Horizontal alignment
+                // Landscape
                 HStack {
                     deviceNameSelector()
 
@@ -72,19 +82,21 @@ struct InverterView: View {
 
     @ViewBuilder
     func verticalDeviceDetail() -> some View {
-        if appTheme.showInverterTemperature {
-            Text("hidden")
-                .hidden()
-        }
-
-        deviceNameSelector()
-
-        if appTheme.showInverterTemperature, let temperatures = viewModel.temperatures {
-            HStack {
-                InverterTemperatureView(value: temperatures.ambient, name: "internal")
-                InverterTemperatureView(value: temperatures.inverter, name: "external")
+        VStack {
+            if appTheme.showInverterTemperature {
+                Text("hidden")
+                    .hidden()
             }
-            .background(Color("background"))
+            
+            deviceNameSelector()
+            
+            if appTheme.showInverterTemperature, let temperatures = viewModel.temperatures {
+                HStack {
+                    InverterTemperatureView(value: temperatures.ambient, name: "internal")
+                    InverterTemperatureView(value: temperatures.inverter, name: "external")
+                }
+                .background(Color("background"))
+            }
         }
     }
 

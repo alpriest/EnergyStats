@@ -55,8 +55,10 @@ extension Date {
     }
 
     static func fromTime(_ time: Time) -> Date {
-        guard let result = Calendar.current.date(bySetting: .hour, value: time.hour, of: .now) else { return .now }
-        return Calendar.current.date(bySetting: .minute, value: time.minute, of: result) ?? .now
+        var components = DateComponents()
+        components.hour = time.hour
+        components.minute = time.minute
+        return Calendar.current.date(from: components) ?? .now
     }
 
     func toTime() -> Time {

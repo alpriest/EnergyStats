@@ -42,7 +42,7 @@ struct StatsGraphVariableToggles: View {
                                 Text(graphValue.formatted())
                             } else {
                                 OptionalView(viewModel.total(of: variable.type)) {
-                                    EnergyText(amount: $0, appTheme: appTheme)
+                                    EnergyText(amount: $0, appTheme: appTheme, type: .default)
                                 }
                             }
                         }

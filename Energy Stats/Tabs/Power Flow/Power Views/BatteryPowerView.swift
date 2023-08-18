@@ -64,14 +64,17 @@ struct BatteryPowerView: View {
 
     var body: some View {
         VStack {
-            PowerFlowView(amount: viewModel.batteryChargekWh, appTheme: appTheme, showColouredLines: true)
+            PowerFlowView(amount: viewModel.batteryChargekWh, appTheme: appTheme, showColouredLines: true, type: .batteryFlow)
+
             Image(systemName: "minus.plus.batteryblock.fill")
                 .font(.system(size: 48))
                 .frame(width: 45, height: 45)
+                .accessibilityHidden(true)
+
             VStack {
                 Group {
                     if batteryResidual {
-                        EnergyText(amount: viewModel.batteryStoredChargekWh, appTheme: appTheme)
+                        EnergyText(amount: viewModel.batteryStoredChargekWh, appTheme: appTheme, type: .batteryCapacity)
                     } else {
                         Text(viewModel.batteryStateOfCharge, format: .percent)
                     }

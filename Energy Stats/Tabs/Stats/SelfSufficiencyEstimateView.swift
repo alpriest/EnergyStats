@@ -62,7 +62,7 @@ struct SelfSufficiencyEstimateView: View {
                         HStack {
                             Text("Home usage")
                             Spacer()
-                            EnergyText(amount: home, appTheme: appTheme)
+                            EnergyText(amount: home, appTheme: appTheme, type: .selfSufficiency)
                         }
                     }
                 }

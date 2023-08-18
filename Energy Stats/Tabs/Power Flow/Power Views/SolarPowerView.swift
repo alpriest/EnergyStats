@@ -28,8 +28,8 @@ struct SolarPowerView: View {
         VStack {
             if appTheme.showTotalYield {
                 HStack(spacing: 0) {
-                    Text("Yield today") + Text(" ")
-                    EnergyText(amount: viewModel.generation, appTheme: appTheme)
+                    (Text("Yield today") + Text(" ")).accessibilityHidden(true)
+                    EnergyText(amount: viewModel.generation, appTheme: appTheme, type: .totalYield)
                 }
             }
 
@@ -55,7 +55,7 @@ struct SolarPowerView: View {
                     .frame(width: 40, height: 40)
             }
 
-            PowerFlowView(amount: viewModel.solar, appTheme: appTheme, showColouredLines: false)
+            PowerFlowView(amount: viewModel.solar, appTheme: appTheme, showColouredLines: false, type: .solarFlow)
         }
     }
 }
