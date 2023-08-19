@@ -77,6 +77,7 @@ struct BatteryPowerView: View {
                         EnergyText(amount: viewModel.batteryStoredChargekWh, appTheme: appTheme, type: .batteryCapacity)
                     } else {
                         Text(viewModel.batteryStateOfCharge, format: .percent)
+                            .accessibilityLabel(String(format: String(accessibilityKey: .batteryCapacityPercentage), String(describing: (viewModel.batteryStateOfCharge.percent()))))
                     }
                 }.onTapGesture {
                     batteryResidual.toggle()
@@ -84,6 +85,7 @@ struct BatteryPowerView: View {
 
                 if appTheme.showBatteryTemperature {
                     Text(viewModel.temperature, format: .number) + Text("°C")
+                        .accessibilityLabel(String(format: String(accessibilityKey: .batteryTemperature), viewModel.temperature))
                 }
 
                 if appTheme.showBatteryEstimate {
@@ -92,6 +94,7 @@ struct BatteryPowerView: View {
                             .multilineTextAlignment(.center)
                             .font(.caption)
                             .foregroundColor(Color("text_dimmed"))
+                            .accessibilityLabel(String(format: String(accessibilityKey: .batteryEstimate), $0))
                     }
                 }
             }

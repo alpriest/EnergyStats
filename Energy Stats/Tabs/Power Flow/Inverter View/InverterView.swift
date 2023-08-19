@@ -58,7 +58,7 @@ struct InverterView: View {
             if verticalSizeClass == .regular {
                 // Portrait
                 InverterIconView()
-                    .frame(width: 55, height: 60)
+                    .frame(width: 50, height: 55)
                     .padding(5)
                     .accessibilityHidden(true)
 

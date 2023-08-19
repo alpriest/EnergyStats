@@ -34,7 +34,7 @@ struct InverterIconPath: View {
                 path.addRect(CGRect(x: panelX, y: panelY, width: panelX * 2.5, height: panelY * 1.5))
             }
 
-            context.fill(inverter, with: .color(Color("background")))
+            context.fill(inverter, with: .color(Color("background_inverted")))
             context.stroke(inverter, with: .color(Color("background_inverted")), lineWidth: inverterLineWidth)
             context.stroke(cable1, with: .color(Color("background_inverted")), lineWidth: cablesLineWidth)
             context.stroke(cable2, with: .color(Color("background_inverted")), lineWidth: cablesLineWidth)
@@ -54,7 +54,8 @@ struct InverterIconView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(height: size.height / 2.5)
-                .offset(x: -size.width / 7, y: size.height * 0.2)
+                .offset(x: -size.width / 10, y: size.height * 0.2)
+                .foregroundColor(Color("background"))
         }.background(
             GeometryReader { reader in
                 Color.clear.onAppear { size = reader.size }
@@ -71,6 +72,6 @@ struct InverterIconView: View {
 struct InverterIconView_Previews: PreviewProvider {
     static var previews: some View {
         InverterIconView()
-            .frame(width: 50, height: 35)
+            .frame(width: 50, height: 60)
     }
 }

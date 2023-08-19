@@ -186,3 +186,6 @@
 "accessibility.gridExportRate" = "Exportando %@ a la red";
 "accessibility.gridConsumptionRate" = "Importando %@ de la red";
 "accessibility.yieldToday" = "Rendimiento hoy: %@";
+"accessibility.batteryTemperature" = "Temperatura de la batería: %@ ℃";
+"accessibility.batteryEstimate" = "Batería %@";
+"accessibility.batteryCapacityPercentage" = "Capacidad de la batería: %@";

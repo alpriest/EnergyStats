@@ -124,3 +124,6 @@
 "accessibility.gridExportRate" = "Exporting %@ to grid";
 "accessibility.gridConsumptionRate" = "Importing %@ from grid";
 "accessibility.yieldToday" = "Yield today %@";
+"accessibility.batteryTemperature" = "Battery temperature %@ ℃";
+"accessibility.batteryEstimate" = "Battery %@";
+"accessibility.batteryCapacityPercentage" = "Battery capacity %@";

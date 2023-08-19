@@ -32,11 +32,14 @@ public struct LocalizedString {
             case currentSolarGenerationAmount = "accessibility.solarGeneration"
             case batteryStoringRate = "accessibility.batteryStoringRate"
             case batteryEmptyingRate = "accessibility.batteryEmptyingRate"
+            case batteryCapacityPercentage = "accessibility.batteryCapacityPercentage"
             case batteryCapacity = "accessibility.batteryCapacity"
             case homeConsumptionRate = "accessibility.homeConsumptionRate"
             case gridExportRate = "accessibility.gridExportRate"
             case gridConsumptionRate = "accessibility.gridConsumptionRate"
             case totalYield = "accessibility.yieldToday"
+            case batteryTemperature = "accessibility.batteryTemperature"
+            case batteryEstimate = "accessibility.batteryEstimate"
         }
     }
 }
