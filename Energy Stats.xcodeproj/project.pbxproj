@@ -103,6 +103,8 @@
 		4171854E2A010B6300D18CDD /* ParameterGraphVariableChooserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171854D2A010B6300D18CDD /* ParameterGraphVariableChooserViewModel.swift */; };
 		417185502A01188300D18CDD /* firmware-version-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 4171854F2A01188300D18CDD /* firmware-version-success.json */; };
 		417185522A0119F300D18CDD /* variables-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 417185512A0119F300D18CDD /* variables-success.json */; };
+		41757BBC2A90A05E00573FB4 /* AmountType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41757BBB2A90A05E00573FB4 /* AmountType.swift */; };
+		41757BBD2A90A06E00573FB4 /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0B43329F96D3600CA9462 /* LocalizedString.swift */; };
 		417AA21A2A12454A0073CD34 /* StatsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AA2192A12454A0073CD34 /* StatsTabView.swift */; };
 		417AA21D2A1245C00073CD34 /* StatsTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AA21C2A1245C00073CD34 /* StatsTabViewModel.swift */; };
 		418141452A12BABA00FFC6A6 /* StatsGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418141442A12BABA00FFC6A6 /* StatsGraphView.swift */; };
@@ -139,7 +141,6 @@
 		41B6910D28E0CD8F0058126E /* raw-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B6910C28E0CD8F0058126E /* raw-success.json */; };
 		41B6910F28E0CDFC0058126E /* devicelist-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B6910E28E0CDFC0058126E /* devicelist-success.json */; };
 		41C0B42C29F95C0000CA9462 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 41C0B42E29F95C0000CA9462 /* Localizable.strings */; };
-		41C0B43429F96D3600CA9462 /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0B43329F96D3600CA9462 /* LocalizedString.swift */; };
 		41C19DCD2A4DDE46009883AB /* SelfSufficiencyEstimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C19DCC2A4DDE46009883AB /* SelfSufficiencyEstimateView.swift */; };
 		41C19DCF2A4E09F9009883AB /* SelfSufficiencySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C19DCE2A4E09F9009883AB /* SelfSufficiencySettingsView.swift */; };
 		41C249A52A77FC7400D8E9E7 /* FoxESSCloudStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C249A42A77FC7400D8E9E7 /* FoxESSCloudStatusView.swift */; };
@@ -324,6 +325,7 @@
 		4171854D2A010B6300D18CDD /* ParameterGraphVariableChooserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterGraphVariableChooserViewModel.swift; sourceTree = "<group>"; };
 		4171854F2A01188300D18CDD /* firmware-version-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "firmware-version-success.json"; sourceTree = "<group>"; };
 		417185512A0119F300D18CDD /* variables-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "variables-success.json"; sourceTree = "<group>"; };
+		41757BBB2A90A05E00573FB4 /* AmountType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountType.swift; sourceTree = "<group>"; };
 		41777F1428F49C61009944FF /* NetworkFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFacade.swift; sourceTree = "<group>"; };
 		417AA2192A12454A0073CD34 /* StatsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTabView.swift; sourceTree = "<group>"; };
 		417AA21C2A1245C00073CD34 /* StatsTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTabViewModel.swift; sourceTree = "<group>"; };
@@ -461,6 +463,7 @@
 		4103D1E629DB6D2C001B0BC8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				41C0B43329F96D3600CA9462 /* LocalizedString.swift */,
 				416AE44A2A8170E6003D0122 /* SelectableItem.swift */,
 				41028F9428CDD7A300FB70FD /* OptionalView.swift */,
 				4127910C28E2442100D5F993 /* Array+Safe.swift */,
@@ -480,7 +483,6 @@
 				418EEEB42916843A006A8290 /* View+If.swift */,
 				416318BD29DDD80E00C2C285 /* View+Copy.swift */,
 				417153E729F2D80C00639A7B /* Date+compare.swift */,
-				41C0B43329F96D3600CA9462 /* LocalizedString.swift */,
 				41CD1F332A141F81006B0C00 /* NonFunctionalButton.swift */,
 				411029122A71C066004018BB /* Tintable.swift */,
 				411029142A71C4F2004018BB /* NumberTextField.swift */,
@@ -844,6 +846,7 @@
 				410913FC29DB78EF00133CC5 /* PreciseDateTimeFormatter.swift */,
 				41CB71492A3B1B6C00199415 /* StyleGuide.swift */,
 				413B7A302A4A390C00562A68 /* SelfSufficiencyCalculator.swift */,
+				41757BBB2A90A05E00573FB4 /* AmountType.swift */,
 			);
 			path = "Energy Stats Core";
 			sourceTree = "<group>";
@@ -1217,7 +1220,6 @@
 				4134ACC42A88A1A800CB4BA8 /* InverterView.swift in Sources */,
 				411029112A71B95F004018BB /* BatteryTimePeriodView.swift in Sources */,
 				4110291B2A72AFAA004018BB /* BatteryChargeScheduleSettingsViewModel.swift in Sources */,
-				41C0B43429F96D3600CA9462 /* LocalizedString.swift in Sources */,
 				416318C029DDD82800C2C285 /* ResponseDebugView.swift in Sources */,
 				414BF82829B4918300E2EB51 /* SettingsTabViewModel.swift in Sources */,
 				41CD1F322A1414C1006B0C00 /* StatsGraphVariableToggles.swift in Sources */,
@@ -1264,6 +1266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4103D1D629DB6C51001B0BC8 /* AddressBookResponse.swift in Sources */,
+				41757BBC2A90A05E00573FB4 /* AmountType.swift in Sources */,
 				4109140229DB7AE700133CC5 /* BatteryViewModel.swift in Sources */,
 				4103D1D729DB6C51001B0BC8 /* Networking.swift in Sources */,
 				4171854229FFCF2500D18CDD /* String+MD5.swift in Sources */,
@@ -1297,6 +1300,7 @@
 				416AE44D2A821E4F003D0122 /* AlertContent.swift in Sources */,
 				4171854429FFCF9500D18CDD /* Color+Hex.swift in Sources */,
 				413B7A312A4A390C00562A68 /* SelfSufficiencyCalculator.swift in Sources */,
+				41757BBD2A90A06E00573FB4 /* LocalizedString.swift in Sources */,
 				4103D1E429DB6D12001B0BC8 /* KeychainStore.swift in Sources */,
 				4103D1DF29DB6C8C001B0BC8 /* DemoNetworking.swift in Sources */,
 				41CB714A2A3B1B6C00199415 /* StyleGuide.swift in Sources */,

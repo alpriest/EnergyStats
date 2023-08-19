@@ -184,3 +184,15 @@
 "Configure Work Mode" = "Arbeitsmodus konfigurieren";
 "Inverter change warning" = "Ändern Sie diese Werte nur, wenn Sie wissen, was Sie tun";
 "Find out more about work modes" = "Erfahren Sie mehr über Arbeitsmodi";
+
+/* Accessibility */
+"accessibility.inverter" = "Wechselrichter";
+"accessibility.temperature" = "Temperatur";
+"accessibility.solarGeneration" = "Solaranlage erzeugt derzeit %@";
+"accessibility.batteryStoringRate" = "Batterie lädt %@";
+"accessibility.batteryEmptyingRate" = "Batterie entlädt %@";
+"accessibility.batteryCapacity" = "Batteriekapazität %@";
+"accessibility.homeConsumptionRate" = "Haus verbraucht %@";
+"accessibility.gridExportRate" = "Exportiere %@ ins Netz";
+"accessibility.gridConsumptionRate" = "Importiere %@ aus dem Netz";
+"accessibility.yieldToday" = "Heutige Ausbeute %@";

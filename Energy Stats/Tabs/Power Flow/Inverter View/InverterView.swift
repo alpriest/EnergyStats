@@ -23,7 +23,7 @@ struct InverterTemperatureView: View {
     let name: String
 
     var body: some View {
-        if let value {
+        if let formattedValue {
             VStack(alignment: .center) {
                 Text(formattedValue + "℃")
                     .font(.caption)
@@ -31,11 +31,11 @@ struct InverterTemperatureView: View {
                     .font(.system(size: 8.0))
             }
             .accessibilityElement(children: .ignore)
-            .accessibilityLabel("Inverter \(name) temperature \(formattedValue) ℃")
+            .accessibilityLabel(Text("accessibility.inverter") + Text(" \(name) ") + Text("accessibility.temperature") + Text(" \(formattedValue) ℃"))
         }
     }
 
-    var formattedValue: String {
+    var formattedValue: String? {
         guard let value else { return "" }
 
         let formatter = NumberFormatter()

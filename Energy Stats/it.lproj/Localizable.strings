@@ -135,3 +135,15 @@
 "Configure Work Mode" = "Configura modalità di lavoro";
 "Inverter change warning" = "Modificare questi valori solo se si sa cosa si sta facendo";
 "Find out more about work modes" = "Scopri di più sui modi di lavoro";
+
+/* Accessibility */
+"accessibility.inverter" = "Inverter";
+"accessibility.temperature" = "Temperatura";
+"accessibility.solarGeneration" = "Generazione solare attuale: %@";
+"accessibility.batteryStoringRate" = "Caricamento batteria: %@";
+"accessibility.batteryEmptyingRate" = "Svuotamento batteria: %@";
+"accessibility.batteryCapacity" = "Capacità della batteria: %@";
+"accessibility.homeConsumptionRate" = "Consumo domestico: %@";
+"accessibility.gridExportRate" = "Esportando %@ alla rete";
+"accessibility.gridConsumptionRate" = "Importando %@ dalla rete";
+"accessibility.yieldToday" = "Resa odierna: %@";

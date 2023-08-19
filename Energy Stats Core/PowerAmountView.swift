@@ -8,46 +8,6 @@
 import Combine
 import SwiftUI
 
-public enum AmountType {
-    case solarFlow
-    case batteryFlow
-    case batteryCapacity
-    case homeFlow
-    case gridFlow
-    case selfSufficiency
-    case totalYield
-    case `default`
-
-    func accessibilityLabel(amount: Double, amountWithUnit: String) -> String {
-        switch self {
-        case .solarFlow:
-            return "Solar currently generating \(amountWithUnit)"
-        case .batteryFlow:
-            if amount > 0 {
-                return "Battery storing \(amountWithUnit)"
-            } else {
-                return "Battery emptying \(amountWithUnit)"
-            }
-        case .batteryCapacity:
-            return "Battery capacity \(amountWithUnit)"
-        case .homeFlow:
-            return "Home consuming \(amountWithUnit)"
-        case .gridFlow:
-            if amount > 0 {
-                return "Exporting \(amountWithUnit) to grid"
-            } else {
-                return "Importing \(amountWithUnit) from grid"
-            }
-        case .selfSufficiency:
-            return amountWithUnit
-        case .totalYield:
-            return "Yield today \(amountWithUnit)"
-        case .default:
-            return amountWithUnit
-        }
-    }
-}
-
 public struct PowerText: View {
     let amount: Double
     let appTheme: AppTheme

@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct LocalizedString {
-    enum Key: String, RawRepresentable {
+public struct LocalizedString {
+    public enum Key: String, RawRepresentable {
         case loading = "Loading"
         case saving = "Saving"
         case couldNotLogin = "Could not login. Check your internet connection"
@@ -25,11 +25,28 @@ struct LocalizedString {
         case oneBatteryChargePeriod = "one_battery_charge_period"
         case bothBatteryFreezePeriods = "both_battery_freeze_periods"
         case oneBatteryFreezePeriod = "one_battery_freeze_period"
+
+        public enum Accessibility: String, RawRepresentable {
+            case inverter = "accessibility.inverter"
+            case temperature = "accessibility.temperature"
+            case currentSolarGenerationAmount = "accessibility.solarGeneration"
+            case batteryStoringRate = "accessibility.batteryStoringRate"
+            case batteryEmptyingRate = "accessibility.batteryEmptyingRate"
+            case batteryCapacity = "accessibility.batteryCapacity"
+            case homeConsumptionRate = "accessibility.homeConsumptionRate"
+            case gridExportRate = "accessibility.gridExportRate"
+            case gridConsumptionRate = "accessibility.gridConsumptionRate"
+            case totalYield = "accessibility.yieldToday"
+        }
     }
 }
 
-extension String {
+public extension String {
     init(key: LocalizedString.Key) {
+        self = NSLocalizedString(key.rawValue, comment: "")
+    }
+
+    init(accessibilityKey key: LocalizedString.Key.Accessibility) {
         self = NSLocalizedString(key.rawValue, comment: "")
     }
 }

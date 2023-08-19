@@ -112,3 +112,15 @@
 "Peak Shaving" = "Peak Shaving";
 "Configure Work Mode" = "Configure Work Mode";
 "Inverter change warning" = "Only change these values if you know what you are doing";
+
+/* Accessibility */
+"accessibility.inverter" = "inverter";
+"accessibility.temperature" = "temperature";
+"accessibility.solarGeneration" = "Solar currently generating %@";
+"accessibility.batteryStoringRate" = "Battery storing %@";
+"accessibility.batteryEmptyingRate" = "Battery emptying %@";
+"accessibility.batteryCapacity" = "Battery capacity %@";
+"accessibility.homeConsumptionRate" = "Home consuming %@";
+"accessibility.gridExportRate" = "Exporting %@ to grid";
+"accessibility.gridConsumptionRate" = "Importing %@ from grid";
+"accessibility.yieldToday" = "Yield today %@";
