@@ -128,6 +128,10 @@
 "reportvariable_dischargeenergytotal" = "Potencia de descarga de la batería";
 "reportvariable_gridconsumption" = "Potencia proveniente de la red";
 "Find out more about these variables" = "Obtén más información sobre estas variables";
+"absolute_self_sufficiency" = "Supone que cualquier cantidad tomada de la red disminuye tu autosuficiencia.\n\nAutosuficiencia = red / consumoCasa";
+"net_self_sufficiency" = "Supone que si tu consumo neto es positivo, entonces eres autosuficiente.\n\nAutosuficiencia = (exportación - importación + cargaBatería - descargaBatería) / consumoCasa";
+"no_self_sufficiency" = "No se mostrará ninguna estimación de autosuficiencia";
+"Self sufficiency estimates" = "Estimaciones de autosuficiencia";
 
 /* Battery Charge Pages */
 "Minimum charge levels" = "Niveles mínimos de carga";

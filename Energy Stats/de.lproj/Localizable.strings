@@ -133,6 +133,7 @@
 "reportvariable_loads" = "Leistung, die im Haus verbraucht wurde";
 "absolute_self_sufficiency" = "Annahme, dass jeder Strombezug vom Netz die Autarkie reduziert.\n\nAutarkie = Netzbezug / Hausverbrauch";
 "net_self_sufficiency" = "Annahme von Autarkie falls der Nettoverbrauch positiv ist.\n\nAutarkie = (Export - Import + Batterieladung - Batterieentladung) / Hausverbrauch";
+"no_self_sufficiency" = "Es wird keine Selbsteinschätzung der Selbstständigkeit angezeigt";
 "Self sufficiency estimates" = "Autarkie-Schätzungen";
 "Off" = "Aus";
 "Net" = "Netto";

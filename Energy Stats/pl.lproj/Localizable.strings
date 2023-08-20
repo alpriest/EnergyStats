@@ -116,6 +116,10 @@
 "reportvariable_dischargeenergytotal" = "Moc rozładowywania się akumulatora";
 "reportvariable_gridconsumption" = "Moc pobierana z sieci";
 "Find out more about these variables" = "Dowiedz się więcej o tych zmiennych";
+"absolute_self_sufficiency" = "Zakłada, że każda ilość pobrana z sieci zmniejsza Twoją samowystarczalność.\n\nSamowystarczalność = sieć / zużycieDom";
+"net_self_sufficiency" = "Zakłada, że jeśli Twoje zużycie netto jest dodatnie, to jesteś samowystarczalny.\n\nSamowystarczalność = (eksport - import + ładowanieBaterii - rozładowanieBaterii) / zużycieDom";
+"no_self_sufficiency" = "Nie zostanie wyświetlona żadna ocena samowystarczalności";
+"Self sufficiency estimates" = "Oceny samowystarczalności";
 
 /* Battery Charge Pages */
 "Minimum charge levels" = "Minimalne poziomy naładowania";

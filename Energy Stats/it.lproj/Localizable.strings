@@ -65,6 +65,7 @@
 "reportvariable_loads" = "Potenza utilizzata dalla casa";
 "absolute_self_sufficiency" = "Presume che qualsiasi importo prelevato dalla rete riduca la tua autosufficienza.\n\nSufficienza = rete / consumoCasa";
 "net_self_sufficiency" = "Presume che se il tuo consumo netto è positivo, allora sei autosufficiente.\n\nSufficienza = (esportazione - importazione + caricaBatteria - scaricaBatteria) / consumoCasa";
+"no_self_sufficiency" = "Nessuna stima di autosufficienza sarà mostrata";
 "Self sufficiency estimates" = "Stime di autosufficienza";
 "Off" = "Off";
 "Net" = "Netto";

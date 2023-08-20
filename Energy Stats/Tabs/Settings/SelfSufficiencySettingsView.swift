@@ -33,7 +33,7 @@ struct SelfSufficiencySettingsView: View {
             case SelfSufficiencyEstimateMode.net.rawValue:
                 Text("net_self_sufficiency")
             default:
-                Text("No self sufficiency estimate will be shown")
+                Text("no_self_sufficiency")
             }
         }.onChange(of: internalMode) { newValue in
             mode = SelfSufficiencyEstimateMode(rawValue: newValue) ?? .off
