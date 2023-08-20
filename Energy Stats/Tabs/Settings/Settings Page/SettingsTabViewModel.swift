@@ -16,12 +16,6 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
-    @Published var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode {
-        didSet {
-            config.selfSufficiencyEstimateMode = selfSufficiencyEstimateMode
-        }
-    }
-
     @Published var showTotalYield: Bool {
         didSet {
             config.showTotalYield = showTotalYield
@@ -72,12 +66,6 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
-    @Published var showEarnings: Bool {
-        didSet {
-            config.showEarnings = showEarnings
-        }
-    }
-
     @Published var showInverterTemperature: Bool {
         didSet {
             config.showInverterTemperature = showInverterTemperature
@@ -109,8 +97,6 @@ class SettingsTabViewModel: ObservableObject {
         hasBattery = config.hasBattery
         firmwareVersions = config.firmwareVersions
         showTotalYield = config.showTotalYield
-        selfSufficiencyEstimateMode = config.selfSufficiencyEstimateMode
-        showEarnings = config.showEarnings
         showInverterTemperature = config.showInverterTemperature
 
         config.currentDevice.sink { [weak self] _ in

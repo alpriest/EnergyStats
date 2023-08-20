@@ -67,31 +67,25 @@ struct SettingsTabView: View {
                             Text("Show values in Watts")
                         }
 
+                        NavigationLink {
+                            ApproximationsView(configManager: configManager)
+                        } label: {
+                            Text("Approximations")
+                        }
                     },
                     header: {
                         Text("Display")
                     })
-
-                Section {
-                    Toggle(isOn: $viewModel.showEarnings) {
-                        Text("Show estimated earnings")
-                    }
-                } footer: {
-                    Text("Shows earnings today, this month, this year, and all-time based on a crude calculation of feed-in ｘ price as configured on FoxESS cloud.")
-                }
-
-                SelfSufficiencySettingsView(mode: $viewModel.selfSufficiencyEstimateMode)
-
                 Section(
                     content: {
-                        Picker("Refresh frequency", selection: $viewModel.refreshFrequency) {
+                        Picker("Data Refresh frequency", selection: $viewModel.refreshFrequency) {
                             Text("1 min").tag(RefreshFrequency.ONE_MINUTE)
                             Text("5 mins").tag(RefreshFrequency.FIVE_MINUTES)
                             Text("Auto").tag(RefreshFrequency.AUTO)
                         }
                         .pickerStyle(.segmented)
                     }, header: {
-                        Text("Refresh frequency")
+                        Text("Data Refresh frequency")
                     }, footer: {
                         Text("FoxESS Cloud data is updated every 5 minutes. 'Auto' attempts to synchronise data fetches just after the data is uploaded from your inverter to minimise server load.")
                     })

@@ -84,8 +84,9 @@ struct BatteryPowerView: View {
                 }
 
                 if appTheme.showBatteryTemperature {
-                    Text(viewModel.temperature, format: .number) + Text("°C")
-                        .accessibilityLabel(String(format: String(accessibilityKey: .batteryTemperature), viewModel.temperature))
+                    (Text(viewModel.temperature, format: .number) + Text("°C"))
+                        .accessibilityElement(children: .ignore)
+                        .accessibilityLabel(String(format: String(accessibilityKey: .batteryTemperature), viewModel.temperature.roundedToString(decimalPlaces: 2)))
                 }
 
                 if appTheme.showBatteryEstimate {

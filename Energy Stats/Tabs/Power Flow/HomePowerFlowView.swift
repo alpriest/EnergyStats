@@ -36,13 +36,21 @@ struct GridFlowSizePreferenceKey: PreferenceKey {
 struct HomePowerFlowView: View {
     @State private var iconFooterSize: CGSize = .zero
     @State private var lastUpdated = Date()
-    let configManager: ConfigManaging
-    let viewModel: HomePowerFlowViewModel
-    let appTheme: AppTheme
-    @State var batteryPowerWidth: CGFloat = 0.0
-    @State var homePowerWidth: CGFloat = 0.0
-    @State var gridPowerWidth: CGFloat = 0.0
-    @State var size: CGSize = .zero
+    @State private var appTheme: AppTheme = .mock()
+    @State private var batteryPowerWidth: CGFloat = 0.0
+    @State private var homePowerWidth: CGFloat = 0.0
+    @State private var gridPowerWidth: CGFloat = 0.0
+    @State private var size: CGSize = .zero
+    private let configManager: ConfigManaging
+    private let viewModel: HomePowerFlowViewModel
+    private var appThemePublisher: LatestAppTheme
+
+    init(configManager: ConfigManaging, viewModel: HomePowerFlowViewModel, appThemePublisher: LatestAppTheme) {
+        self.configManager = configManager
+        self.viewModel = viewModel
+        self.appThemePublisher = appThemePublisher
+        self.appTheme = appThemePublisher.value
+    }
 
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
@@ -98,6 +106,9 @@ struct HomePowerFlowView: View {
         }.background(GeometryReader { reader in
             Color.clear.onAppear { size = reader.size }.onChange(of: reader.size) { newValue in size = newValue }
         })
+        .onReceive(appThemePublisher) {
+            self.appTheme = $0
+        }
     }
 }
 
@@ -105,7 +116,7 @@ struct PowerSummaryView_Previews: PreviewProvider {
     static var previews: some View {
         HomePowerFlowView(configManager: PreviewConfigManager(),
                           viewModel: HomePowerFlowViewModel.any(),
-                          appTheme: AppTheme.mock(decimalPlaces: 3, showInW: false, showInverterTemperature: true))
+                          appThemePublisher: CurrentValueSubject(AppTheme.mock(decimalPlaces: 3, showInW: false, showInverterTemperature: true)))
             .environment(\.locale, .init(identifier: "de"))
     }
 }

@@ -24,7 +24,6 @@ struct SelfSufficiencySettingsView: View {
                 Text("Net").tag(1)
                 Text("Absolute").tag(2)
             }.pickerStyle(.segmented)
-
         } header: {
             Text("Self sufficiency estimates")
         } footer: {
@@ -34,7 +33,7 @@ struct SelfSufficiencySettingsView: View {
             case SelfSufficiencyEstimateMode.net.rawValue:
                 Text("net_self_sufficiency")
             default:
-                EmptyView()
+                Text("No self sufficiency estimate will be shown")
             }
         }.onChange(of: internalMode) { newValue in
             mode = SelfSufficiencyEstimateMode(rawValue: newValue) ?? .off
