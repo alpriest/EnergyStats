@@ -34,7 +34,7 @@ public class InMemoryLoggingNetworkStore: ObservableObject {
 }
 
 public struct NetworkOperation<T: Decodable> {
-    public let time: Date = Date()
+    public let time: Date = .init()
     public let description: String
     public let value: T
     public let raw: Data

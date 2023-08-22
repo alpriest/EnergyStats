@@ -38,7 +38,10 @@ struct ResponseDebugView<T: Decodable>: View {
         self.missing = missing
         self.fetcher = fetcher
         self.mapper = mapper
-        self.mapResult = mapper(store)
+    }
+
+    func load() {
+        mapResult = mapper(store)
     }
 
     var body: some View {
@@ -67,7 +70,7 @@ struct ResponseDebugView<T: Decodable>: View {
                     Task {
                         do {
                             try await fetcher()
-                            self.mapResult = mapper(store)
+                            load()
                         } catch {
                             fetchError = String(describing: error)
                         }
@@ -86,6 +89,9 @@ struct ResponseDebugView<T: Decodable>: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 CopyButton(text: asText)
             }
+        }
+        .task {
+            load()
         }
     }
 
