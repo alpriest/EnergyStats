@@ -12,7 +12,7 @@ public class InMemoryLoggingNetworkStore: ObservableObject {
     public var batteryResponse: NetworkOperation<BatteryResponse>?
     public var batterySettingsResponse: NetworkOperation<BatterySettingsResponse>?
     public var rawResponse: NetworkOperation<[RawResponse]>?
-    public var deviceListResponse: NetworkOperation<PagedDeviceListResponse>?
+    public var deviceListResponse: NetworkOperation<[PagedDeviceListResponse.Device]>?
     public var addressBookResponse: NetworkOperation<AddressBookResponse>?
     public var variables: NetworkOperation<VariablesResponse>?
     public var earnings: NetworkOperation<EarningsResponse>?

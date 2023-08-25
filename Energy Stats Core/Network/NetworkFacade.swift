@@ -66,7 +66,7 @@ public class NetworkFacade: Networking {
         return try await network.fetchRaw(deviceID: deviceID, variables: variables, queryDate: queryDate)
     }
 
-    public func fetchDeviceList() async throws -> PagedDeviceListResponse {
+    public func fetchDeviceList() async throws -> [PagedDeviceListResponse.Device] {
         if config.isDemoUser {
             return try await fakeNetwork.fetchDeviceList()
         }

@@ -66,7 +66,7 @@ class BatteryChargeScheduleSettingsViewModel: ObservableObject {
                 ]
 
                 try await networking.setBatteryTimes(deviceSN: deviceSN, times: times)
-                alertContent = AlertContent(title: "Success", message: String(key: .batteryChargeScheduleSettingsWereSaved))
+                alertContent = AlertContent(title: String(key: .success), message: String(key: .batteryChargeScheduleSettingsWereSaved))
                 state = .inactive
             } catch {
                 state = .error(error, "Could not save settings")
@@ -80,30 +80,46 @@ class BatteryChargeScheduleSettingsViewModel: ObservableObject {
     }
 
     func generateSummary(period1: ChargeTimePeriod, period2: ChargeTimePeriod) {
-        var result = ""
+        var resultParts: [String] = []
 
         if !period1.enabled && !period2.enabled {
             if period1.hasTimes && period2.hasTimes {
-                result = String(format: String(key: .bothBatteryFreezePeriods), period1.description, period2.description)
+                resultParts.append(String(format: String(key: .bothBatteryFreezePeriods), period1.description, period2.description))
             } else if period1.hasTimes {
-                result = String(format: String(key: .oneBatteryFreezePeriod), period1.description)
+                resultParts.append(String(format: String(key: .oneBatteryFreezePeriod), period1.description, "1"))
             } else if period2.hasTimes {
-                result = String(format: String(key: .oneBatteryFreezePeriod), period2.description)
+                resultParts.append(String(format: String(key: .oneBatteryFreezePeriod), period2.description, "2"))
             } else {
-                result = String(key: .noBatteryCharge)
+                resultParts.append(String(key: .noBatteryCharge))
             }
         } else if period1.enabled && period2.enabled {
-            result = String(format: String(key: .bothBatteryChargePeriods), period1.description, period2.description)
+            resultParts.append(String(format: String(key: .bothBatteryChargePeriods), period1.description, period2.description))
 
             if period1.overlaps(period2) {
-                result += String(key: .batteryPeriodsOverlap)
+                resultParts.append(String(key: .batteryPeriodsOverlap))
             }
         } else if period1.enabled {
-            result = String(format: String(key: .oneBatteryChargePeriod), period1.description)
+            resultParts.append(String(format: String(key: .oneBatteryChargePeriod), period1.description))
+
+            if period2.hasTimes {
+                resultParts.append(String(format: String(key: .oneBatteryFreezePeriod), period2.description, "2"))
+            }
+
+            if period1.overlaps(period2) {
+                resultParts.append(String(key: .batteryPeriodsOverlap))
+            }
         } else if period2.enabled {
-            result = String(format: String(key: .oneBatteryChargePeriod), period2.description)
+            resultParts.append(String(format: String(key: .oneBatteryChargePeriod), period2.description))
+
+            if period1.hasTimes {
+                resultParts.append(String(format: String(key: .oneBatteryFreezePeriod), period1.description, "1"))
+            }
+
+            if period1.overlaps(period2) {
+                resultParts.append(String(key: .batteryPeriodsOverlap))
+            }
         }
 
-        summary = result
+        summary = resultParts.joined(separator: " ")
     }
 }

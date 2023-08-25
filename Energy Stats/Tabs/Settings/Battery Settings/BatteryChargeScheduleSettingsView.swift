@@ -27,6 +27,7 @@ struct BatteryChargeScheduleSettingsView: View {
                             .font(.headline)
 
                         Text(viewModel.summary)
+                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                     }
                     .frame(minWidth: 0, maxWidth: .infinity)
                 })
@@ -51,7 +52,7 @@ struct BatteryForceChargeSettingsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             BatteryChargeScheduleSettingsView(networking: DemoNetworking(),
-                                           config: ConfigManager(networking: DemoNetworking(), config: MockConfig()))
+                                              config: ConfigManager(networking: DemoNetworking(), config: MockConfig()))
         }
     }
 }

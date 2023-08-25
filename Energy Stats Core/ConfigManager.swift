@@ -82,11 +82,11 @@ public class ConfigManager: ConfigManaging {
     public func fetchDevices() async throws {
         let deviceList = try await networking.fetchDeviceList()
 
-        guard deviceList.devices.count > 0 else {
+        guard deviceList.count > 0 else {
             throw NoDeviceFoundError()
         }
 
-        let newDevices = try await deviceList.devices.asyncMap { device in
+        let newDevices = try await deviceList.asyncMap { device in
             let deviceBattery: Device.Battery?
             let firmware = try await fetchFirmwareVersions(deviceID: device.deviceID)
             let variables = try await networking.fetchVariables(deviceID: device.deviceID)
