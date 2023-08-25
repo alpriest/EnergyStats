@@ -10,7 +10,6 @@ import SwiftUI
 
 struct BatterySOCSettingsView: View {
     @StateObject var viewModel: BatterySOCSettingsViewModel
-    @Environment(\.dismiss) var dismiss
 
     init(networking: Networking, config: ConfigManaging, onSOCchange: @escaping () -> Void) {
         self._viewModel = StateObject(wrappedValue: BatterySOCSettingsViewModel(networking: networking, config: config, onSOCchange: onSOCchange))
@@ -69,11 +68,6 @@ struct BatterySOCSettingsView: View {
         .navigationBarTitleDisplayMode(.inline)
         .loadable($viewModel.state, retry: { viewModel.load() })
         .alert(alertContent: $viewModel.alertContent)
-        .onChange(of: viewModel.shouldDismiss) {
-            if $0 {
-                dismiss()
-            }
-        }
     }
 }
 

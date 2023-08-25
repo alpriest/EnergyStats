@@ -18,7 +18,6 @@ class BatteryChargeScheduleSettingsViewModel: ObservableObject {
     @Published var timePeriod2: ChargeTimePeriod = .init(start: Date(), end: Date(), enabled: false)
     @Published var summary = ""
     @Published var alertContent: AlertContent?
-    @Published var shouldDismiss = false
 
     init(networking: Networking, config: ConfigManaging) {
         self.networking = networking
@@ -67,11 +66,8 @@ class BatteryChargeScheduleSettingsViewModel: ObservableObject {
                 ]
 
                 try await networking.setBatteryTimes(deviceSN: deviceSN, times: times)
-                alertContent = AlertContent(title: "Success", message: "Your charge schedule was saved", onDismiss: {
-                    Task { @MainActor in
-                        self.shouldDismiss = true
-                    }
-                })
+                alertContent = AlertContent(title: "Success", message: "Your charge schedule was saved")
+                state = .inactive
             } catch {
                 state = .error(error, "Could not save settings")
             }

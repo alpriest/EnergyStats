@@ -10,7 +10,6 @@ import SwiftUI
 
 struct BatteryChargeScheduleSettingsView: View {
     @StateObject var viewModel: BatteryChargeScheduleSettingsViewModel
-    @Environment(\.dismiss) var dismiss
 
     init(networking: Networking, config: ConfigManaging) {
         _viewModel = StateObject(wrappedValue: BatteryChargeScheduleSettingsViewModel(networking: networking, config: config))
@@ -45,11 +44,6 @@ struct BatteryChargeScheduleSettingsView: View {
             viewModel.generateSummary(period1: viewModel.timePeriod1, period2: newValue)
         }
         .alert(alertContent: $viewModel.alertContent)
-        .onChange(of: viewModel.shouldDismiss) {
-            if $0 {
-                dismiss()
-            }
-        }
     }
 }
 

@@ -113,6 +113,7 @@
 "Peak Shaving" = "Peak Shaving";
 "Configure Work Mode" = "Configure Work Mode";
 "Inverter change warning" = "Only change these values if you know what you are doing";
+"Show inverter temperatures" = "Show inverter temperatures";
 
 /* Accessibility */
 "accessibility.inverter" = "inverter";

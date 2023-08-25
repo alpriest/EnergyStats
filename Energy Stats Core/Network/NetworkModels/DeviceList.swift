@@ -68,7 +68,11 @@ public struct Device: Codable, Hashable, Identifiable {
     public var id: String { deviceID }
 
     public var deviceDisplayName: String {
-        deviceType ?? "\(deviceID) Re-login to update"
+        if let deviceType {
+            return "\(deviceType) (\(plantName))"
+        } else {
+            return "\(deviceID) Re-login to update"
+        }
     }
 
     public init(plantName: String,
@@ -93,14 +97,14 @@ public struct Device: Codable, Hashable, Identifiable {
     }
 
     public func copy(plantName: String? = nil,
-              deviceID: String? = nil,
-              deviceSN: String? = nil,
-              hasPV: Bool? = nil,
-              battery: Battery? = nil,
-              deviceType: String? = nil,
-              firmware: DeviceFirmwareVersion? = nil,
-              variables: [RawVariable]? = nil,
-              moduleSN: String? = nil) -> Device
+                     deviceID: String? = nil,
+                     deviceSN: String? = nil,
+                     hasPV: Bool? = nil,
+                     battery: Battery? = nil,
+                     deviceType: String? = nil,
+                     firmware: DeviceFirmwareVersion? = nil,
+                     variables: [RawVariable]? = nil,
+                     moduleSN: String? = nil) -> Device
     {
         Device(
             plantName: plantName ?? self.plantName,

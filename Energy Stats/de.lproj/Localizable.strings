@@ -185,6 +185,7 @@
 "Configure Work Mode" = "Arbeitsmodus konfigurieren";
 "Inverter change warning" = "Ändern Sie diese Werte nur, wenn Sie wissen, was Sie tun";
 "Find out more about work modes" = "Erfahren Sie mehr über Arbeitsmodi";
+"Show inverter temperatures" = "Zeige Temperaturen des Wechselrichters";
 
 /* Accessibility */
 "accessibility.inverter" = "Wechselrichter";

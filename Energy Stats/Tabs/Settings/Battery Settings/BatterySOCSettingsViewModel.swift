@@ -17,7 +17,6 @@ class BatterySOCSettingsViewModel: ObservableObject {
     @Published var errorMessage: String?
     @Published var state: LoadState = .inactive
     @Published var alertContent: AlertContent?
-    @Published var shouldDismiss = false
 
     init(networking: Networking, config: ConfigManaging, onSOCchange: @escaping () -> Void) {
         self.networking = networking
@@ -62,11 +61,8 @@ class BatterySOCSettingsViewModel: ObservableObject {
 
                 onSOCchange()
 
-                alertContent = AlertContent(title: "Success", message: "Your battery settings were saved", onDismiss: {
-                    Task { @MainActor in
-                        self.shouldDismiss = true
-                    }
-                })
+                alertContent = AlertContent(title: "Success", message: "Your battery settings were saved")
+                state = .inactive
             } catch {
                 state = .error(error, "Could not save settings")
             }

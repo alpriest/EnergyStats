@@ -165,6 +165,7 @@
 "Configure Work Mode" = "Skonfiguruj tryb pracy";
 "Inverter change warning" = "Zmieniaj te wartości tylko, jeśli wiesz, co robisz";
 "Find out more about work modes" = "Dowiedz się więcej o trybach pracy";
+"Show inverter temperatures" = "Pokaż temperatury falownika";
 
 /* Accessibility */
 "accessibility.inverter" = "Falownik";

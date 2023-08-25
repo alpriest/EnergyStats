@@ -153,6 +153,7 @@
 		41CB714A2A3B1B6C00199415 /* StyleGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CB71492A3B1B6C00199415 /* StyleGuide.swift */; };
 		41CD1F322A1414C1006B0C00 /* StatsGraphVariableToggles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CD1F312A1414C1006B0C00 /* StatsGraphVariableToggles.swift */; };
 		41CD1F342A141F81006B0C00 /* NonFunctionalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CD1F332A141F81006B0C00 /* NonFunctionalButton.swift */; };
+		41CF044C2A95006E00ADCCAD /* ExternalWebNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CF044B2A95006E00ADCCAD /* ExternalWebNavigationLink.swift */; };
 		41DD7F3A29C5B8940072CDE8 /* SolarPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD7F3929C5B8940072CDE8 /* SolarPowerView.swift */; };
 		41E1DFDF28D87781001235B9 /* SettingsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E1DFDE28D87781001235B9 /* SettingsTabView.swift */; };
 		41E299CF29B7260D001F017B /* Energy_Stats_UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E299CE29B7260D001F017B /* Energy_Stats_UITestsLaunchTests.swift */; };
@@ -398,6 +399,7 @@
 		41CB71492A3B1B6C00199415 /* StyleGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleGuide.swift; sourceTree = "<group>"; };
 		41CD1F312A1414C1006B0C00 /* StatsGraphVariableToggles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGraphVariableToggles.swift; sourceTree = "<group>"; };
 		41CD1F332A141F81006B0C00 /* NonFunctionalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonFunctionalButton.swift; sourceTree = "<group>"; };
+		41CF044B2A95006E00ADCCAD /* ExternalWebNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWebNavigationLink.swift; sourceTree = "<group>"; };
 		41D6496B28DB321600A24B41 /* DeviceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceList.swift; sourceTree = "<group>"; };
 		41D7B12328C86E4000E14144 /* Raw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Raw.swift; sourceTree = "<group>"; };
 		41DD7F3929C5B8940072CDE8 /* SolarPowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarPowerView.swift; sourceTree = "<group>"; };
@@ -490,6 +492,7 @@
 				411029142A71C4F2004018BB /* NumberTextField.swift */,
 				416AE4372A7D956E003D0122 /* AlertCopy.swift */,
 				4160098C2A8D1A690096CCD9 /* BottomButtonsView.swift */,
+				41CF044B2A95006E00ADCCAD /* ExternalWebNavigationLink.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1209,6 +1212,7 @@
 				411029132A71C066004018BB /* Tintable.swift in Sources */,
 				4141B20028D86C7200B60157 /* UserManager.swift in Sources */,
 				41CD1F342A141F81006B0C00 /* NonFunctionalButton.swift in Sources */,
+				41CF044C2A95006E00ADCCAD /* ExternalWebNavigationLink.swift in Sources */,
 				411029152A71C4F2004018BB /* NumberTextField.swift in Sources */,
 				419CCB542933BABF00882649 /* ErrorAlertView.swift in Sources */,
 				41339C7228CC7B7B0062B976 /* LoginView.swift in Sources */,

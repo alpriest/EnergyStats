@@ -14,7 +14,6 @@ class InverterWorkModeViewModel: ObservableObject {
     @Published var state: LoadState = .inactive
     @Published var items: [SelectableItem<WorkMode>] = []
     @Published var alertContent: AlertContent?
-    @Published var shouldDismiss = false
 
     init(networking: Networking, config: ConfigManaging) {
         self.networking = networking
@@ -51,11 +50,8 @@ class InverterWorkModeViewModel: ObservableObject {
 
             do {
                 try await networking.setWorkMode(deviceID: deviceID, workMode: mode.asInverterWorkMode())
-                alertContent = AlertContent(title: "Success", message: "Your inverter settings were saved", onDismiss: {
-                    Task { @MainActor in
-                        self.shouldDismiss = true
-                    }
-                })
+                alertContent = AlertContent(title: "Success", message: "Your inverter settings were saved")
+                state = .inactive
             } catch {
                 state = .error(error, "Could not save work mode")
             }
@@ -83,7 +79,6 @@ class InverterWorkModeViewModel: ObservableObject {
 
 struct InverterWorkModeView: View {
     @StateObject var viewModel: InverterWorkModeViewModel
-    @Environment(\.dismiss) var dismiss
 
     init(networking: Networking, config: ConfigManaging) {
         _viewModel = StateObject(wrappedValue: InverterWorkModeViewModel(networking: networking, config: config))
@@ -150,11 +145,6 @@ struct InverterWorkModeView: View {
         .alert(alertContent: $viewModel.alertContent)
         .navigationTitle("Configure Work Mode")
         .navigationBarTitleDisplayMode(.inline)
-        .onChange(of: viewModel.shouldDismiss) {
-            if $0 {
-                dismiss()
-            }
-        }
     }
 }
 
