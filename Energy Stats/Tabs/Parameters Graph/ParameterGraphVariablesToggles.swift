@@ -55,18 +55,6 @@ struct ParameterGraphVariablesToggles: View {
             }
             .scrollDisabled(true)
             .scrollContentBackground(.hidden)
-
-            if valuesAtTime != nil, let selectedDate {
-                HStack {
-                    Text(selectedDate, format: .dateTime)
-                    Button("Clear graph values", action: {
-                        self.valuesAtTime = nil
-                        self.selectedDate = nil
-                    })
-                    .padding()
-                }.frame(maxWidth: .infinity)
-            }
-
         }.onChange(of: viewModel.graphVariables) { _ in
             viewModel.refresh()
         }

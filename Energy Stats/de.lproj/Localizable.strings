@@ -173,6 +173,7 @@
 "Battery capacity recalculated" = "Batteriekapazität neu berechnet";
 "batterySOC_settings_saved" = "Batterie-SOC-Änderungen wurden gespeichert";
 "battery_charge_schedule_settings_saved" = "Der Batterieladezeitplan wurde gespeichert";
+"Touch the graph to see values at that time" = "Berühren Sie den Graphen, um Werte zu dieser Zeit anzuzeigen";
 
 /* Inverter page */
 "self_use_mode" = "In diesem Modus priorisiert der Wechselrichter die Stromzuweisung wie folgt:\n\n1. Hauslast\n2. Batterieladung\n3. Einspeisung";

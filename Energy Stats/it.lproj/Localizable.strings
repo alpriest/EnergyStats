@@ -96,6 +96,7 @@
 "You are logged in as " = "Sei connesso come ";
 "Capacity" = "Capacità";
 "Show estimated earnings" = "Mostra guadagni stimati";
+"Touch the graph to see values at that time" = "Tocca il grafico per visualizzare i valori in quel momento";
 
 /* Battery Charge Pages */
 "Minimum charge levels" = "Livelli di carica minimi";

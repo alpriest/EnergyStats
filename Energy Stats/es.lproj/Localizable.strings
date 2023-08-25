@@ -133,6 +133,7 @@
 "net_self_sufficiency" = "Supone que si tu consumo neto es positivo, entonces eres autosuficiente.\n\nAutosuficiencia = (exportación - importación + cargaBatería - descargaBatería) / consumoCasa";
 "no_self_sufficiency" = "No se mostrará ninguna estimación de autosuficiencia";
 "Self sufficiency estimates" = "Estimaciones de autosuficiencia";
+"Touch the graph to see values at that time" = "Toca el gráfico para ver los valores en ese momento";
 
 /* Battery Charge Pages */
 "Minimum charge levels" = "Niveles mínimos de carga";

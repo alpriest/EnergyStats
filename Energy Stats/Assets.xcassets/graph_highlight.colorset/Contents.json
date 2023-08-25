@@ -4,6 +4,24 @@
       "color" : {
         "color-space" : "display-p3",
         "components" : {
+          "alpha" : "0.700",
+          "blue" : "220",
+          "green" : "220",
+          "red" : "220"
+        }
+      },
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "color" : {
+        "color-space" : "display-p3",
+        "components" : {
           "alpha" : "0.500",
           "blue" : "230",
           "green" : "230",

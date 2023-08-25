@@ -71,6 +71,8 @@
 "Off" = "Off";
 "Net" = "Net";
 "Absolute" = "Absolute";
+"Clear graph values" = "Clear";
+"Touch the graph to see values at that time" = "Touch the graph to see values at that time";
 
 /* Battery Charge Pages */
 

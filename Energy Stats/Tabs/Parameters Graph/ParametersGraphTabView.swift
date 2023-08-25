@@ -32,6 +32,20 @@ struct ParametersGraphTabView: View {
                     .padding(.horizontal)
 
                 ScrollView {
+                    HStack {
+                        Group {
+                            if let selectedDate {
+                                Text(selectedDate, format: .dateTime)
+                                Button("Clear graph values", action: {
+                                    self.valuesAtTime = nil
+                                    self.selectedDate = nil
+                                })
+                            } else {
+                                Text("Touch the graph to see values at that time")
+                            }
+                        }.padding(.vertical)
+                    }.frame(maxWidth: .infinity)
+
                     ParametersGraphView(viewModel: viewModel,
                                         selectedDate: $selectedDate,
                                         valuesAtTime: $valuesAtTime)
