@@ -66,7 +66,7 @@ class BatteryChargeScheduleSettingsViewModel: ObservableObject {
                 ]
 
                 try await networking.setBatteryTimes(deviceSN: deviceSN, times: times)
-                alertContent = AlertContent(title: "Success", message: "Your charge schedule was saved")
+                alertContent = AlertContent(title: "Success", message: String(key: .batteryChargeScheduleSettingsWereSaved))
                 state = .inactive
             } catch {
                 state = .error(error, "Could not save settings")

@@ -61,7 +61,7 @@ class BatterySOCSettingsViewModel: ObservableObject {
 
                 onSOCchange()
 
-                alertContent = AlertContent(title: "Success", message: "Your battery settings were saved")
+                alertContent = AlertContent(title: "Success", message: String(key: .batterySOCSettingsWereSaved))
                 state = .inactive
             } catch {
                 state = .error(error, "Could not save settings")

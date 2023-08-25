@@ -121,6 +121,8 @@
 "Reset times" = "Resetta gli orari";
 "Battery Schedule" = "Programmazione della batteria";
 "Battery capacity recalculated" = "Capacità della batteria ricalcolata";
+"batterySOC_settings_saved" = "Le modifiche allo stato di carica della batteria sono state salvate";
+"battery_charge_schedule_settings_saved" = "È stato salvato il programma di ricarica della batteria";
 
 /* Inverter page */
 "self_use_mode" = "In questa modalità, l'inverter assegna prioritariamente la potenza come segue:\n\n1. Carico della casa\n2. Carica della batteria\n3. Esportazione";
@@ -137,6 +139,7 @@
 "Inverter change warning" = "Modificare questi valori solo se si sa cosa si sta facendo";
 "Find out more about work modes" = "Scopri di più sui modi di lavoro";
 "Show inverter temperatures" = "Mostra temperature dell'inverter";
+"inverter_settings_saved" = "La modalità di lavoro dell'inverter è stata salvata";
 
 /* Accessibility */
 "accessibility.inverter" = "Inverter";

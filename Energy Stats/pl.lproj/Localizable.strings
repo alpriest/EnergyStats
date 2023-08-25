@@ -150,6 +150,8 @@
 "Battery Schedule" = "Harmonogram baterii";
 "Show estimated earnings" = "Pokaż szacowane zyski";
 "Battery capacity recalculated" = "Pojemność baterii przeliczona";
+"batterySOC_settings_saved" = "Zmiany w SOC baterii zostały zapisane";
+"battery_charge_schedule_settings_saved" = "Zapisano harmonogram ładowania baterii";
 
 /* Inverter page */
 "self_use_mode" = "W tym trybie inwerter priorytetowo alokuje moc zgodnie z następującym porządkiem:\n\n1. Obciążenie domu\n2. Ładowanie baterii\n3. Eksport";
@@ -166,6 +168,7 @@
 "Inverter change warning" = "Zmieniaj te wartości tylko, jeśli wiesz, co robisz";
 "Find out more about work modes" = "Dowiedz się więcej o trybach pracy";
 "Show inverter temperatures" = "Pokaż temperatury falownika";
+"inverter_settings_saved" = "Tryb pracy falownika został zapisany";
 
 /* Accessibility */
 "accessibility.inverter" = "Falownik";

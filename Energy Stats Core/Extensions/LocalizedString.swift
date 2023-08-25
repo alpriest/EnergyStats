@@ -25,6 +25,9 @@ public struct LocalizedString {
         case oneBatteryChargePeriod = "one_battery_charge_period"
         case bothBatteryFreezePeriods = "both_battery_freeze_periods"
         case oneBatteryFreezePeriod = "one_battery_freeze_period"
+        case inverterSettingsWereSaved = "inverter_settings_saved"
+        case batterySOCSettingsWereSaved = "batterySOC_settings_saved"
+        case batteryChargeScheduleSettingsWereSaved = "battery_charge_schedule_settings_saved"
 
         public enum Accessibility: String, RawRepresentable {
             case inverter = "accessibility.inverter"
