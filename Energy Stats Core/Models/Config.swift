@@ -23,6 +23,7 @@ public protocol Config {
     var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode { get set }
     var showEarnings: Bool { get set }
     var showInverterTemperature: Bool { get set }
+    var selectedParameterGraphVariables: [String] { get set }
 }
 
 extension UserDefaults {
@@ -32,42 +33,7 @@ extension UserDefaults {
 }
 
 public class UserDefaultsConfig: Config {
-    public init() {
-        let suiteDefaults = UserDefaults.shared
-        let defaults = UserDefaults.standard
-
-        if defaults.data(forKey: "devices") != nil && suiteDefaults.data(forKey: "devices") == nil {
-            migrate(from: defaults, to: suiteDefaults)
-        }
-    }
-
-    func migrate(from source: UserDefaults, to destination: UserDefaults) {
-        destination.set(source.bool(forKey: "isDemoUser"), forKey: "isDemoUser")
-        destination.set(bool(from: source, forKey: "showColouredLines", defaultValue: true), forKey: "showColouredLines")
-        destination.set(source.bool(forKey: "showBatteryTemperature"), forKey: "showBatteryTemperature")
-        destination.set(source.bool(forKey: "showBatteryEstimate"), forKey: "showBatteryEstimate")
-        destination.set(source.integer(forKey: "refreshFrequency"), forKey: "refreshFrequency")
-        destination.set(integer(from: source, forKey: "decimalPlaces", defaultValue: 3), forKey: "decimalPlaces")
-        destination.set(bool(from: source, forKey: "showSunnyBackground", defaultValue: true), forKey: "showSunnyBackground")
-        destination.set(source.bool(forKey: "showUsableBatteryOnly"), forKey: "showUsableBatteryOnly")
-        destination.set(bool(from: source, forKey: "showTotalYield", defaultValue: true), forKey: "showTotalYield")
-        destination.set(source.data(forKey: "devices"), forKey: "devices")
-        destination.set(source.string(forKey: "selectedDeviceID"), forKey: "selectedDeviceID")
-        destination.set(source.bool(forKey: "showInW"), forKey: "showInW")
-
-        source.removeObject(forKey: "isDemoUser")
-        source.removeObject(forKey: "showColouredLines")
-        source.removeObject(forKey: "showBatteryTemperature")
-        source.removeObject(forKey: "showBatteryEstimate")
-        source.removeObject(forKey: "refreshFrequency")
-        source.removeObject(forKey: "decimalPlaces")
-        source.removeObject(forKey: "showSunnyBackground")
-        source.removeObject(forKey: "showUsableBatteryOnly")
-        source.removeObject(forKey: "showTotalYield")
-        source.removeObject(forKey: "devices")
-        source.removeObject(forKey: "selectedDeviceID")
-        source.removeObject(forKey: "showInW")
-    }
+    public init() {}
 
     private func bool(from source: UserDefaults, forKey key: String, defaultValue: Bool) -> Bool {
         (source.object(forKey: key) as? Bool) ?? defaultValue
@@ -128,6 +94,15 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredBool(key: "showEarnings", defaultValue: false)
     public var showEarnings: Bool
+
+    public var selectedParameterGraphVariables: [String] {
+        get {
+            UserDefaults.shared.array(forKey: "selectedParameterGraphVariables") as? [String] ?? []
+        }
+        set {
+            UserDefaults.shared.set(newValue, forKey: "selectedParameterGraphVariables")
+        }
+    }
 }
 
 @propertyWrapper

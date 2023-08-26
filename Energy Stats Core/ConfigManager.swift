@@ -46,6 +46,7 @@ public protocol ConfigManaging {
     var hasBattery: Bool { get }
     var showEarnings: Bool { get set }
     var showInverterTemperature: Bool { get set }
+    var selectedParameterGraphVariables: [String] { get set }
 }
 
 public class ConfigManager: ConfigManaging {
@@ -333,6 +334,13 @@ public class ConfigManager: ConfigManaging {
             } else {
                 config.devices = nil
             }
+        }
+    }
+
+    public var selectedParameterGraphVariables: [String] {
+        get { config.selectedParameterGraphVariables }
+        set {
+            config.selectedParameterGraphVariables = newValue
         }
     }
 }

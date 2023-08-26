@@ -166,6 +166,7 @@ public class MockConfig: Config {
     public var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode = .off
     public var showEarnings: Bool = false
     public var showInverterTemperature: Bool = false
+    public var selectedParameterGraphVariables: [String] = []
 }
 
 public class PreviewConfigManager: ConfigManager {

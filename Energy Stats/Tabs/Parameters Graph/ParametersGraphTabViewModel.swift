@@ -81,7 +81,7 @@ class ParametersGraphTabViewModel: ObservableObject {
                                         "gridConsumptionPower"]
     private var cancellable: AnyCancellable?
 
-    init(networking: Networking, configManager: ConfigManaging, _ dateProvider: @escaping () -> Date = { Date() }) {
+    init(networking: Networking, configManager: ConfigManaging, dateProvider: @escaping () -> Date = { Date() }) {
         self.networking = networking
         self.configManager = configManager
         self.dateProvider = dateProvider
