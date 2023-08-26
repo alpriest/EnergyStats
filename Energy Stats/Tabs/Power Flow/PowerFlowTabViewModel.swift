@@ -136,8 +136,7 @@ class PowerFlowTabViewModel: ObservableObject {
                                   self.configManager.variables.named("gridConsumptionPower"),
                                   self.configManager.variables.named("generationPower"),
                                   self.configManager.variables.named("loadsPower"),
-                                  self.configManager.variables.named("batChargePower"),
-                                  self.configManager.variables.named("batDischargePower")]
+                                  self.configManager.variables.named("pvPower")]
 
             if configManager.appTheme.value.showInverterTemperature {
                 graphVariables.append(contentsOf: [
