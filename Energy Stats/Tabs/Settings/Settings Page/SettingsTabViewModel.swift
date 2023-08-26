@@ -75,6 +75,12 @@ class SettingsTabViewModel: ObservableObject {
     @Published var hasBattery: Bool
     @Published var firmwareVersions: DeviceFirmwareVersion?
 
+    @Published var showHomeTotal: Bool {
+        didSet {
+            config.showHomeTotal = showHomeTotal
+        }
+    }
+
     private(set) var config: ConfigManaging
     private let userManager: UserManager
     private var cancellables = Set<AnyCancellable>()
@@ -98,6 +104,7 @@ class SettingsTabViewModel: ObservableObject {
         firmwareVersions = config.firmwareVersions
         showTotalYield = config.showTotalYield
         showInverterTemperature = config.showInverterTemperature
+        showHomeTotal = config.showHomeTotal
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }

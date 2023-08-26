@@ -41,7 +41,7 @@ class ParametersGraphTabViewModel: ObservableObject {
     @Published private(set) var data: [ParameterGraphValue] = []
     @Published var graphVariables: [ParameterGraphVariable] = []
     @Published var graphVariableBounds: [ParameterGraphBounds] = []
-    private var queryDate = QueryDate.current()
+    private var queryDate = QueryDate.now()
     private var hours: Int = 24
     private var max: ParameterGraphValue?
     var exportFile: CSVTextFile?

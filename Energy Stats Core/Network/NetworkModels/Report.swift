@@ -32,7 +32,7 @@ public struct QueryDate: Encodable {
     public let month: Int?
     public let day: Int?
 
-    public static func current() -> QueryDate {
+    public static func now() -> QueryDate {
         QueryDate(from: Date())
     }
 

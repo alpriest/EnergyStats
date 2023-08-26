@@ -44,6 +44,7 @@ public struct LocalizedString {
             case totalYield = "accessibility.yieldToday"
             case batteryTemperature = "accessibility.batteryTemperature"
             case batteryEstimate = "accessibility.batteryEstimate"
+            case homeTotalUsage = "accessibility.homeTotalUsage"
         }
     }
 }

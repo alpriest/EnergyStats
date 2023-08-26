@@ -15,6 +15,7 @@ public enum AmountType {
     case gridFlow
     case selfSufficiency
     case totalYield
+    case homeUsage
     case `default`
 }
 
@@ -43,6 +44,8 @@ extension AmountType {
             return amountWithUnit
         case .totalYield:
             return String(format: String(accessibilityKey: .totalYield), arguments: [amountWithUnit])
+        case .homeUsage:
+            return String(format: String(accessibilityKey: .homeTotalUsage), arguments: [amountWithUnit])
         case .default:
             return amountWithUnit
         }

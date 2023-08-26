@@ -167,6 +167,7 @@ public class MockConfig: Config {
     public var showEarnings: Bool = false
     public var showInverterTemperature: Bool = false
     public var selectedParameterGraphVariables: [String] = []
+    public var showHomeTotal: Bool = true
 }
 
 public class PreviewConfigManager: ConfigManager {

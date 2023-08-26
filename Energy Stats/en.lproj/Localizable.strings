@@ -73,6 +73,7 @@
 "Absolute" = "Absolute";
 "Clear graph values" = "Clear";
 "Touch the graph to see values at that time" = "Touch the graph to see values at that time";
+"Usage today" = "Usage today";
 
 /* Battery Charge Pages */
 
@@ -135,3 +136,4 @@
 "accessibility.batteryTemperature" = "Battery temperature %@ ℃";
 "accessibility.batteryEstimate" = "Battery %@";
 "accessibility.batteryCapacityPercentage" = "Battery capacity %@";
+"accessibility.homeTotalUsage" = "Total home usage today %@";

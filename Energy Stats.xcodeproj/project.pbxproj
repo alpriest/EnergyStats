@@ -112,6 +112,7 @@
 		418141452A12BABA00FFC6A6 /* StatsGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418141442A12BABA00FFC6A6 /* StatsGraphView.swift */; };
 		418199C72A4034530001B5D4 /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418199C62A4034530001B5D4 /* FAQView.swift */; };
 		418199CA2A4035F40001B5D4 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 418199C92A4035F40001B5D4 /* MarkdownUI */; };
+		418240782A9A33E300101064 /* TotalsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418240772A9A33E300101064 /* TotalsViewModel.swift */; };
 		418547492A3A1C7A000128C7 /* PowerAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127690128EC865000D5A094 /* PowerAmountView.swift */; };
 		4185474C2A3B1025000128C7 /* SunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4162BC2F2A097C1300DFEDC1 /* SunView.swift */; };
 		418EEEB52916843A006A8290 /* View+If.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418EEEB42916843A006A8290 /* View+If.swift */; };
@@ -336,6 +337,7 @@
 		417AA21C2A1245C00073CD34 /* StatsTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTabViewModel.swift; sourceTree = "<group>"; };
 		418141442A12BABA00FFC6A6 /* StatsGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGraphView.swift; sourceTree = "<group>"; };
 		418199C62A4034530001B5D4 /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
+		418240772A9A33E300101064 /* TotalsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalsViewModel.swift; sourceTree = "<group>"; };
 		418547162A3A1530000128C7 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		418547182A3A1530000128C7 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		418547362A3A1623000128C7 /* WidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetBundle.swift; sourceTree = "<group>"; };
@@ -516,6 +518,7 @@
 				4140147028C77AAA00EA5BA1 /* BatteryViewModel.swift */,
 				4140146828C7374400EA5BA1 /* CurrentStatusViewModel.swift */,
 				41EDDF6B28CD2A630092C662 /* HomePowerFlowViewModel.swift */,
+				418240772A9A33E300101064 /* TotalsViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -1291,6 +1294,7 @@
 				4103D1D729DB6C51001B0BC8 /* Networking.swift in Sources */,
 				4171854229FFCF2500D18CDD /* String+MD5.swift in Sources */,
 				4103D1DC29DB6C6D001B0BC8 /* Config.swift in Sources */,
+				418240782A9A33E300101064 /* TotalsViewModel.swift in Sources */,
 				4103D1E329DB6D03001B0BC8 /* AppTheme.swift in Sources */,
 				4103D1DB29DB6C6D001B0BC8 /* RawVariable.swift in Sources */,
 				4103D1E529DB6D29001B0BC8 /* Sequence+aysnc.swift in Sources */,

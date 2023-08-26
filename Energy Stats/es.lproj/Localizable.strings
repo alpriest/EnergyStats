@@ -134,6 +134,7 @@
 "no_self_sufficiency" = "No se mostrará ninguna estimación de autosuficiencia";
 "Self sufficiency estimates" = "Estimaciones de autosuficiencia";
 "Touch the graph to see values at that time" = "Toca el gráfico para ver los valores en ese momento";
+"Usage today" = "Consumo de hoy";
 
 /* Battery Charge Pages */
 "Minimum charge levels" = "Niveles mínimos de carga";
@@ -199,3 +200,4 @@
 "accessibility.batteryTemperature" = "Temperatura de la batería: %@ ℃";
 "accessibility.batteryEstimate" = "Batería %@";
 "accessibility.batteryCapacityPercentage" = "Capacidad de la batería: %@";
+"accessibility.homeTotalUsage" = "Consumo total en el hogar hoy %@";

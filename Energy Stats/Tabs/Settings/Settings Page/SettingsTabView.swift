@@ -42,16 +42,22 @@ struct SettingsTabView: View {
 
                 Section(
                     content: {
-                        Toggle(isOn: $viewModel.showColouredLines) {
-                            Text("Show coloured flow lines")
-                        }
+                        Group {
+                            Toggle(isOn: $viewModel.showColouredLines) {
+                                Text("Show coloured flow lines")
+                            }
 
-                        Toggle(isOn: $viewModel.showTotalYield) {
-                            Text("Show total yield")
-                        }
+                            Toggle(isOn: $viewModel.showTotalYield) {
+                                Text("Show total yield")
+                            }
 
-                        Toggle(isOn: $viewModel.showSunnyBackground) {
-                            Text("Show sunshine background")
+                            Toggle(isOn: $viewModel.showHomeTotal) {
+                                Text("Show total home usage")
+                            }
+
+                            Toggle(isOn: $viewModel.showSunnyBackground) {
+                                Text("Show sunshine background")
+                            }
                         }
 
                         HStack {

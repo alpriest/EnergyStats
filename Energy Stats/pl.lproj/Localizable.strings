@@ -60,6 +60,7 @@
 "Version " = "Wersja ";
 "Shows earnings today, this month, this year, and all-time based on a crude calculation of feed-in ｘ price as configured on FoxESS cloud." = "Wyświetla dzisiejsze zarobki, zarobki w tym miesiącu, w tym roku oraz ogólnie oparte na przybliżonych obliczeniach feed-in ｘ cena, zgodnie z konfiguracją w chmurze FoxESS.";
 "Show values in Watts" = "Pokaż wartości w watach";
+"Usage today" = "Dzisiejsze zużycie";
 
 /* Variables page */
 "Predefined selections" = "Wybrane opcje";
@@ -186,3 +187,4 @@
 "accessibility.batteryTemperature" = "Temperatura baterii: %@ ℃";
 "accessibility.batteryEstimate" = "Bateria %@";
 "accessibility.batteryCapacityPercentage" = "Pojemność baterii: %@";
+"accessibility.homeTotalUsage" = "Całkowite dzisiejsze zużycie w domu %@";

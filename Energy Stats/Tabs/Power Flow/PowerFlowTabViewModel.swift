@@ -131,12 +131,17 @@ class PowerFlowTabViewModel: ObservableObject {
             await MainActor.run { self.updateState = "Updating..." }
             await self.network.ensureHasToken()
 
-            let earnings = try await self.network.fetchEarnings(deviceID: currentDevice.deviceID)
             var graphVariables = [configManager.variables.named("feedinPower"),
                                   self.configManager.variables.named("gridConsumptionPower"),
                                   self.configManager.variables.named("generationPower"),
-                                  self.configManager.variables.named("loadsPower"),
                                   self.configManager.variables.named("pvPower")]
+
+            let totals = try await self.network.fetchReport(deviceID: currentDevice.deviceID,
+                                                            variables: [.loads],
+                                                            queryDate: .now(),
+                                                            reportType: .month)
+            let earnings = try await self.network.fetchEarnings(deviceID: currentDevice.deviceID)
+            let totalsViewModel = TotalsViewModel(reports: totals, earnings: earnings)
 
             if configManager.appTheme.value.showInverterTemperature {
                 graphVariables.append(contentsOf: [
@@ -145,7 +150,7 @@ class PowerFlowTabViewModel: ObservableObject {
                 ])
             }
 
-            let raws = try await self.network.fetchRaw(deviceID: currentDevice.deviceID, variables: graphVariables.compactMap { $0 }, queryDate: .current())
+            let raws = try await self.network.fetchRaw(deviceID: currentDevice.deviceID, variables: graphVariables.compactMap { $0 }, queryDate: .now())
             let currentViewModel = CurrentStatusViewModel(raws: raws)
             var battery: BatteryViewModel = .noBattery
             if currentDevice.battery != nil {
@@ -165,7 +170,8 @@ class PowerFlowTabViewModel: ObservableObject {
                                                  batteryResidual: battery.residual,
                                                  todaysGeneration: earnings.today.generation,
                                                  earnings: self.makeEarnings(earnings),
-                                                 inverterTemperatures: currentViewModel.currentTemperatures)
+                                                 inverterTemperatures: currentViewModel.currentTemperatures,
+                                                 homeTotal: totalsViewModel.home)
 
             self.state = .loaded(.empty()) // refreshes the marching ants line speed
             try await Task.sleep(nanoseconds: 1000)

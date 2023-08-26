@@ -84,7 +84,7 @@ struct HomePowerFlowView: View {
                     Spacer()
                 }
 
-                HomePowerView(amount: viewModel.home, iconFooterSize: iconFooterSize, appTheme: appTheme)
+                HomePowerView(amount: viewModel.home, total: viewModel.homeTotal, iconFooterSize: iconFooterSize, appTheme: appTheme)
                     .background(GeometryReader { reader in
                         Color.clear.preference(key: HomeFlowSizePreferenceKey.self, value: reader.size)
                             .onPreferenceChange(HomeFlowSizePreferenceKey.self) { size in
@@ -103,6 +103,7 @@ struct HomePowerFlowView: View {
                     })
             }
             .padding(.horizontal, 14)
+            .padding(.bottom, 16)
         }.background(GeometryReader { reader in
             Color.clear.onAppear { size = reader.size }.onChange(of: reader.size) { newValue in size = newValue }
         })
@@ -123,10 +124,17 @@ struct PowerSummaryView_Previews: PreviewProvider {
 
 extension HomePowerFlowViewModel {
     static func any() -> HomePowerFlowViewModel {
-        .init(solar: 2.5, battery: -0.01,
-              home: 1.5, grid: 0.71, batteryStateOfCharge: 0.99,
-              hasBattery: true, batteryTemperature: 15.6, batteryResidual: 5678,
-              todaysGeneration: 8.5, earnings: "GBP(£) 1 / 5 / 99",
-              inverterTemperatures: InverterTemperatures(ambient: 4.0, inverter: 9.0))
+        .init(solar: 2.5,
+              battery: -0.01,
+              home: 1.5,
+              grid: 0.71,
+              batteryStateOfCharge: 0.99,
+              hasBattery: true,
+              batteryTemperature: 15.6,
+              batteryResidual: 5678,
+              todaysGeneration: 8.5,
+              earnings: "GBP(£) 1 / 5 / 99",
+              inverterTemperatures: InverterTemperatures(ambient: 4.0, inverter: 9.0),
+              homeTotal: 1.0)
     }
 }
