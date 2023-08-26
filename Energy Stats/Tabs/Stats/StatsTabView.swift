@@ -6,6 +6,7 @@
 //
 
 import Charts
+import Combine
 import Energy_Stats_Core
 import SwiftUI
 
@@ -30,11 +31,13 @@ enum StatsDisplayMode: Equatable {
 struct StatsTabView: View {
     @StateObject var viewModel: StatsTabViewModel
     @State private var showingExporter = false
-    private let appTheme: AppTheme
+    @State private var appTheme: AppTheme
+    private var appThemePublisher: LatestAppTheme
 
-    init(configManager: ConfigManaging, networking: Networking, appTheme: AppTheme) {
+    init(configManager: ConfigManaging, networking: Networking, appThemePublisher: LatestAppTheme) {
         _viewModel = .init(wrappedValue: StatsTabViewModel(networking: networking, configManager: configManager))
-        self.appTheme = appTheme
+        self.appThemePublisher = appThemePublisher
+        self.appTheme = appThemePublisher.value
     }
 
     var body: some View {
@@ -47,11 +50,9 @@ struct StatsTabView: View {
                         .frame(height: 250)
                         .padding(.vertical)
 
-                    StatsGraphVariableToggles(viewModel: viewModel, selectedDate: $viewModel.selectedDate, valuesAtTime: $viewModel.valuesAtTime, appTheme: appTheme)
+                    StatsGraphVariableToggles(viewModel: viewModel, selectedDate: $viewModel.selectedDate, valuesAtTime: $viewModel.valuesAtTime, appTheme: appThemePublisher.value)
 
-                    if appTheme.selfSufficiencyEstimateMode != .off {
-                        SelfSufficiencyEstimateView(viewModel: viewModel, mode: appTheme.selfSufficiencyEstimateMode, appTheme: appTheme)
-                    }
+                    ApproximationsView(viewModel: viewModel, appTheme: appThemePublisher.value)
 
                     Text("Stats are aggregated by FoxESS into 1 hr, 1 day or 1 month totals")
                         .font(.footnote)
@@ -73,6 +74,9 @@ struct StatsTabView: View {
                 await viewModel.load()
             }
         }
+        .onReceive(appThemePublisher) {
+            self.appTheme = $0
+        }
     }
 }
 
@@ -80,7 +84,7 @@ struct StatsTabView: View {
 @available(iOS 16.0, *)
 struct StatsTabView_Previews: PreviewProvider {
     static var previews: some View {
-        StatsTabView(configManager: PreviewConfigManager(), networking: DemoNetworking(), appTheme: .mock())
+        StatsTabView(configManager: PreviewConfigManager(), networking: DemoNetworking(), appThemePublisher: CurrentValueSubject(.mock()))
             .previewDevice("iPhone 13 Mini")
     }
 }

@@ -64,6 +64,7 @@
 		413B7A312A4A390C00562A68 /* SelfSufficiencyCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413B7A302A4A390C00562A68 /* SelfSufficiencyCalculator.swift */; };
 		413B7A3A2A4A397000562A68 /* Energy_Stats_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; platformFilter = ios; };
 		413B7A412A4A399900562A68 /* SelfSufficiencyCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413B7A402A4A399900562A68 /* SelfSufficiencyCalculatorTests.swift */; };
+		413BF2892A99F8A500A32B0D /* ApproximationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413BF2882A99F8A500A32B0D /* ApproximationsView.swift */; };
 		4140144E28C70B3200EA5BA1 /* Energy_StatsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140144D28C70B3200EA5BA1 /* Energy_StatsApp.swift */; };
 		4140145028C70B3200EA5BA1 /* TabbedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140144F28C70B3200EA5BA1 /* TabbedView.swift */; };
 		4140145228C70B3200EA5BA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4140145128C70B3200EA5BA1 /* Assets.xcassets */; };
@@ -73,7 +74,7 @@
 		4141B20028D86C7200B60157 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141B1FF28D86C7200B60157 /* UserManager.swift */; };
 		4141B20228D871B900B60157 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141B20128D871B900B60157 /* ContentView.swift */; };
 		414BF82829B4918300E2EB51 /* SettingsTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */; };
-		414FB0D82A924E3D00845486 /* ApproximationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414FB0D72A924E3D00845486 /* ApproximationsView.swift */; };
+		414FB0D82A924E3D00845486 /* ApproximationsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414FB0D72A924E3D00845486 /* ApproximationsSettingsView.swift */; };
 		4160098B2A8D18B10096CCD9 /* SettingsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4160098A2A8D18B10096CCD9 /* SettingsFooterView.swift */; };
 		4160098D2A8D1A690096CCD9 /* BottomButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4160098C2A8D1A690096CCD9 /* BottomButtonsView.swift */; };
 		41626CD029D969E9003FEB00 /* InverterFirmwareVersionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41626CCF29D969E9003FEB00 /* InverterFirmwareVersionsView.swift */; };
@@ -276,6 +277,7 @@
 		413B7A302A4A390C00562A68 /* SelfSufficiencyCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSufficiencyCalculator.swift; sourceTree = "<group>"; };
 		413B7A362A4A397000562A68 /* Energy Stats Core Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Energy Stats Core Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		413B7A402A4A399900562A68 /* SelfSufficiencyCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSufficiencyCalculatorTests.swift; sourceTree = "<group>"; };
+		413BF2882A99F8A500A32B0D /* ApproximationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproximationsView.swift; sourceTree = "<group>"; };
 		4140144A28C70B3200EA5BA1 /* Energy Stats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Energy Stats.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4140144D28C70B3200EA5BA1 /* Energy_StatsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Energy_StatsApp.swift; sourceTree = "<group>"; };
 		4140144F28C70B3200EA5BA1 /* TabbedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbedView.swift; sourceTree = "<group>"; };
@@ -293,7 +295,7 @@
 		4141B1FF28D86C7200B60157 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		4141B20128D871B900B60157 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabViewModel.swift; sourceTree = "<group>"; };
-		414FB0D72A924E3D00845486 /* ApproximationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproximationsView.swift; sourceTree = "<group>"; };
+		414FB0D72A924E3D00845486 /* ApproximationsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproximationsSettingsView.swift; sourceTree = "<group>"; };
 		4160098A2A8D18B10096CCD9 /* SettingsFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFooterView.swift; sourceTree = "<group>"; };
 		4160098C2A8D1A690096CCD9 /* BottomButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButtonsView.swift; sourceTree = "<group>"; };
 		41626CCB29D95E37003FEB00 /* AddressBookResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressBookResponse.swift; sourceTree = "<group>"; };
@@ -693,7 +695,7 @@
 		414FB0D62A924E3100845486 /* Approximations */ = {
 			isa = PBXGroup;
 			children = (
-				414FB0D72A924E3D00845486 /* ApproximationsView.swift */,
+				414FB0D72A924E3D00845486 /* ApproximationsSettingsView.swift */,
 			);
 			path = Approximations;
 			sourceTree = "<group>";
@@ -739,6 +741,7 @@
 				41CD1F312A1414C1006B0C00 /* StatsGraphVariableToggles.swift */,
 				41C6AF652A360CF600C88F2B /* CSVTextFile.swift */,
 				41C19DCC2A4DDE46009883AB /* SelfSufficiencyEstimateView.swift */,
+				413BF2882A99F8A500A32B0D /* ApproximationsView.swift */,
 			);
 			path = Stats;
 			sourceTree = "<group>";
@@ -1240,7 +1243,7 @@
 				41CD1F322A1414C1006B0C00 /* StatsGraphVariableToggles.swift in Sources */,
 				4160098D2A8D1A690096CCD9 /* BottomButtonsView.swift in Sources */,
 				4110291D2A72AFC2004018BB /* BatterySOCSettingsViewModel.swift in Sources */,
-				414FB0D82A924E3D00845486 /* ApproximationsView.swift in Sources */,
+				414FB0D82A924E3D00845486 /* ApproximationsSettingsView.swift in Sources */,
 				419DFA862A12930E0067313A /* DatePickerView.swift in Sources */,
 				416318B929DDD44C00C2C285 /* DebugDataView.swift in Sources */,
 				41E4B31328DB77A3003F7F47 /* HomePowerView.swift in Sources */,
@@ -1271,6 +1274,7 @@
 				41A25D3F28CA5CFB00315714 /* ParametersGraphTabViewModel.swift in Sources */,
 				4107446128C9EF6B006D5D7D /* HomePowerFlowView.swift in Sources */,
 				41923E3E2916BC6F00D1A8C5 /* ParametersGraphView.swift in Sources */,
+				413BF2892A99F8A500A32B0D /* ApproximationsView.swift in Sources */,
 				416AE4382A7D956E003D0122 /* AlertCopy.swift in Sources */,
 				416318BE29DDD80E00C2C285 /* View+Copy.swift in Sources */,
 				4107446728CA22B3006D5D7D /* InverterViewModel.swift in Sources */,

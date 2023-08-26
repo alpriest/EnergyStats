@@ -1,5 +1,5 @@
 //
-//  ApproximationsView.swift
+//  ApproximationsSettingsView.swift
 //  Energy Stats
 //
 //  Created by Alistair Priest on 20/08/2023.
@@ -8,7 +8,7 @@
 import Energy_Stats_Core
 import SwiftUI
 
-class ApproximationsViewModel: ObservableObject {
+class ApproximationsSettingsViewModel: ObservableObject {
     @Published var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode {
         didSet {
             configManager.selfSufficiencyEstimateMode = selfSufficiencyEstimateMode
@@ -30,11 +30,11 @@ class ApproximationsViewModel: ObservableObject {
     }
 }
 
-struct ApproximationsView: View     {
-    @StateObject private var viewModel: ApproximationsViewModel
+struct ApproximationsSettingsView: View {
+    @StateObject private var viewModel: ApproximationsSettingsViewModel
 
     init(configManager: ConfigManaging) {
-        _viewModel = .init(wrappedValue: ApproximationsViewModel(configManager: configManager))
+        _viewModel = .init(wrappedValue: ApproximationsSettingsViewModel(configManager: configManager))
     }
 
     var body: some View {
@@ -54,10 +54,12 @@ struct ApproximationsView: View     {
     }
 }
 
-struct ApproximationsView_Previews: PreviewProvider {
+#if DEBUG
+struct ApproximationsSettingsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ApproximationsView(configManager: PreviewConfigManager())
+            ApproximationsSettingsView(configManager: PreviewConfigManager())
         }
     }
 }
+#endif

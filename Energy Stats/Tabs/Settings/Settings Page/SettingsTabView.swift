@@ -68,7 +68,7 @@ struct SettingsTabView: View {
                         }
 
                         NavigationLink {
-                            ApproximationsView(configManager: configManager)
+                            ApproximationsSettingsView(configManager: configManager)
                         } label: {
                             Text("Approximations")
                         }

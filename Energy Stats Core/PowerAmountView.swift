@@ -92,7 +92,10 @@ struct EnergyAmountView_Previews: PreviewProvider {
 }
 
 public extension AppTheme {
-    static func mock(decimalPlaces: Int = 3, showInW: Bool = false, showInverterTemperature: Bool = false) -> AppTheme {
+    static func mock(decimalPlaces: Int = 3,
+                     showInW: Bool = false,
+                     showInverterTemperature: Bool = false,
+                     selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode = .off) -> AppTheme {
         AppTheme(
             showColouredLines: true,
             showBatteryTemperature: true,
@@ -102,7 +105,7 @@ public extension AppTheme {
             showUsableBatteryOnly: false,
             showInW: showInW,
             showTotalYield: false,
-            selfSufficiencyEstimateMode: .off,
+            selfSufficiencyEstimateMode: selfSufficiencyEstimateMode,
             showEarnings: false,
             showInverterTemperature: showInverterTemperature
         )
