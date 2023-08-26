@@ -59,4 +59,5 @@ struct ParameterGraphBounds {
     let type: RawVariable
     let min: Double?
     let max: Double?
+    let now: Double?
 }

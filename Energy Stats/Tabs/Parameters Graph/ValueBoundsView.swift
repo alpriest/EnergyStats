@@ -10,6 +10,7 @@ import SwiftUI
 enum BoundType: String, RawRepresentable {
     case min
     case max
+    case now
 }
 
 struct ValueBoundsView: View {

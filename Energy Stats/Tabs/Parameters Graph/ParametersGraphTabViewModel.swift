@@ -163,8 +163,9 @@ class ParametersGraphTabViewModel: ObservableObject {
             let max = variableData.max(by: { lhs, rhs in
                 lhs.value < rhs.value
             })?.value
+            let now = variableData.last?.value
 
-            return ParameterGraphBounds(type: variable.type, min: min, max: max)
+            return ParameterGraphBounds(type: variable.type, min: min, max: max, now: now)
         }
 
         data = refreshedData
