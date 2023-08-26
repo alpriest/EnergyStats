@@ -20,14 +20,14 @@ struct GraphDisplayMode: Equatable {
 
     static func ==(lhs: GraphDisplayMode, rhs: GraphDisplayMode) -> Bool {
         lhs.hours == rhs.hours &&
-        lhs.date.iso8601() == rhs.date.iso8601()
+            lhs.date.iso8601() == rhs.date.iso8601()
     }
 }
 
 class ParametersGraphTabViewModel: ObservableObject {
     private let haptic = UIImpactFeedbackGenerator()
     private let networking: Networking
-    private let configManager: ConfigManaging
+    private var configManager: ConfigManaging
     private var rawData: [ParameterGraphValue] = [] {
         didSet {
             data = rawData
@@ -49,7 +49,7 @@ class ParametersGraphTabViewModel: ObservableObject {
     @Published var displayMode = GraphDisplayMode(date: .now, hours: 24) {
         didSet {
             let previousHours = hours
-            
+
             let updatedDate = QueryDate(from: displayMode.date)
             if queryDate != updatedDate {
                 queryDate = updatedDate
@@ -74,11 +74,6 @@ class ParametersGraphTabViewModel: ObservableObject {
         }
     }
 
-    static let DefaultGraphVariables = ["generationPower",
-                                        "batChargePower",
-                                        "batDischargePower",
-                                        "feedinPower",
-                                        "gridConsumptionPower"]
     private var cancellable: AnyCancellable?
 
     init(networking: Networking, configManager: ConfigManaging, dateProvider: @escaping () -> Date = { Date() }) {
@@ -89,14 +84,25 @@ class ParametersGraphTabViewModel: ObservableObject {
 
         cancellable = configManager.currentDevice
             .map { device in
-                device?.variables.compactMap { variable -> ParameterGraphVariable? in
+                device?.variables.compactMap { [weak self] variable -> ParameterGraphVariable? in
+                    guard let self else { return nil }
                     guard let variable = configManager.variables.named(variable.variable) else { return nil }
 
-                    return ParameterGraphVariable(variable, isSelected: Self.DefaultGraphVariables.contains(variable.variable), enabled: Self.DefaultGraphVariables.contains(variable.variable))
+                    return ParameterGraphVariable(variable,
+                                                  isSelected: selectedGraphVariables.contains(variable.variable),
+                                                  enabled: selectedGraphVariables.contains(variable.variable))
                 } ?? []
             }
             .receive(on: RunLoop.main)
             .assign(to: \.graphVariables, on: self)
+    }
+
+    var selectedGraphVariables: [String] {
+        if configManager.selectedParameterGraphVariables.count == 0 {
+            return ParameterGraphVariableChooserViewModel.DefaultGraphVariables
+        } else {
+            return configManager.selectedParameterGraphVariables
+        }
     }
 
     func load() async {
@@ -149,7 +155,7 @@ class ParametersGraphTabViewModel: ObservableObject {
         })
 
         graphVariableBounds = graphVariables.map { variable in
-            let variableData = refreshedData.filter({ $0.type == variable.type })
+            let variableData = refreshedData.filter { $0.type == variable.type }
 
             let min = variableData.min(by: { lhs, rhs in
                 lhs.value < rhs.value
@@ -162,6 +168,8 @@ class ParametersGraphTabViewModel: ObservableObject {
         }
 
         data = refreshedData
+
+        storeVariables()
     }
 
     func data(at date: Date) -> ValuesAtTime<ParameterGraphValue> {
@@ -216,6 +224,10 @@ class ParametersGraphTabViewModel: ObservableObject {
         }
 
         exportFile = CSVTextFile(text: text, filename: exportFileName)
+    }
+
+    private func storeVariables() {
+        configManager.selectedParameterGraphVariables = graphVariables.filter { $0.isSelected }.map { $0.type.variable }
     }
 }
 
