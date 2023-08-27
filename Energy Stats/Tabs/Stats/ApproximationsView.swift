@@ -19,6 +19,7 @@ struct ApproximationsView: View {
                 RoundedRectangle(cornerRadius: 6)
                     .stroke(Color("highlight_box"), lineWidth: 1)
                     .background(Color("highlight_box").opacity(0.1))
+                    .padding(1)
 
                 Text("Approximations")
                     .padding(2)
