@@ -6,6 +6,7 @@
 //
 
 import Charts
+import Combine
 import Energy_Stats_Core
 import SwiftUI
 
@@ -16,13 +17,13 @@ struct ParametersGraphTabView: View {
     @State private var selectedDate: Date?
     @State private var showingVariables = false
     @State private var showingExporter = false
+    @State private var appTheme: AppTheme = .mock()
+    private let appThemePublisher: LatestAppTheme
 
     init(configManager: ConfigManaging, networking: Networking) {
         _viewModel = .init(wrappedValue: ParametersGraphTabViewModel(networking: networking, configManager: configManager))
-    }
-
-    init(viewModel: ParametersGraphTabViewModel) {
-        _viewModel = .init(wrappedValue: viewModel)
+        self.appThemePublisher = configManager.appTheme
+        self.appTheme = appThemePublisher.value
     }
 
     var body: some View {
@@ -52,7 +53,7 @@ struct ParametersGraphTabView: View {
                         .frame(height: 250)
                         .padding(.vertical)
 
-                    ParameterGraphVariablesToggles(viewModel: viewModel, selectedDate: $selectedDate, valuesAtTime: $valuesAtTime)
+                    ParameterGraphVariablesToggles(viewModel: viewModel, selectedDate: $selectedDate, valuesAtTime: $valuesAtTime, appTheme: appTheme)
 
                     Text("Parameters are updated every 5 minutes by FoxESS and only available for a single day at a time")
                         .font(.footnote)
@@ -77,13 +78,17 @@ struct ParametersGraphTabView: View {
                 await viewModel.load()
             }
         }
+        .onReceive(appThemePublisher) {
+            self.appTheme = $0
+        }
     }
 }
 
 @available(iOS 16.0, *)
 struct GraphTabView_Previews: PreviewProvider {
     static var previews: some View {
-        ParametersGraphTabView(configManager: PreviewConfigManager(), networking: DemoNetworking())
+        ParametersGraphTabView(configManager: PreviewConfigManager(),
+                               networking: DemoNetworking())
             .previewDevice("iPhone 13 Mini")
     }
 }

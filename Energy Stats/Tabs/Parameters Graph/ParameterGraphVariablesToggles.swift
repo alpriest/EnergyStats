@@ -13,6 +13,7 @@ struct ParameterGraphVariablesToggles: View {
     @ObservedObject var viewModel: ParametersGraphTabViewModel
     @Binding var selectedDate: Date?
     @Binding var valuesAtTime: ValuesAtTime<ParameterGraphValue>?
+    let appTheme: AppTheme
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -46,9 +47,9 @@ struct ParameterGraphVariablesToggles: View {
                                             .font(.system(size: 8.0))
                                     }
                                 } else if let bounds = viewModel.graphVariableBounds.first(where: { $0.type == variable.type }) {
-                                    ValueBoundsView(value: bounds.min, type: .min)
-                                    ValueBoundsView(value: bounds.max, type: .max)
-                                    ValueBoundsView(value: bounds.now, type: .now)
+                                    ValueBoundsView(value: bounds.min, type: .min, decimalPlaces: appTheme.decimalPlaces)
+                                    ValueBoundsView(value: bounds.max, type: .max, decimalPlaces: appTheme.decimalPlaces)
+                                    ValueBoundsView(value: bounds.now, type: .now, decimalPlaces: appTheme.decimalPlaces)
                                 }
                             }
                             .opacity(variable.enabled ? 1.0 : 0.5)
@@ -74,7 +75,8 @@ struct GraphVariablesSelection_Previews: PreviewProvider {
         ParameterGraphVariablesToggles(
             viewModel: ParametersGraphTabViewModel(networking: DemoNetworking(), configManager: PreviewConfigManager()),
             selectedDate: .constant(nil),
-            valuesAtTime: .constant(nil)
+            valuesAtTime: .constant(nil),
+            appTheme: .mock()
         )
     }
 }

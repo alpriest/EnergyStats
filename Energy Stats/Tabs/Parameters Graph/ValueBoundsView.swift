@@ -16,11 +16,12 @@ enum BoundType: String, RawRepresentable {
 struct ValueBoundsView: View {
     let value: Double?
     let type: BoundType
+    let decimalPlaces: Int
 
     var body: some View {
         if let value {
             VStack(alignment: .trailing) {
-                Text(value, format: .number)
+                Text(value.roundedToString(decimalPlaces: decimalPlaces))
                 Text(type.rawValue.uppercased())
                     .font(.system(size: 8.0))
             }
@@ -31,8 +32,8 @@ struct ValueBoundsView: View {
 struct ValueBoundsView_Previews: PreviewProvider {
     static var previews: some View {
         HStack {
-            ValueBoundsView(value: 0.3, type: .min)
-            ValueBoundsView(value: 23.3, type: .max)
+            ValueBoundsView(value: 0.3, type: .min, decimalPlaces: 1)
+            ValueBoundsView(value: 23.3, type: .max, decimalPlaces: 3)
         }
     }
 }
