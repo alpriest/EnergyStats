@@ -21,7 +21,9 @@ public struct PylonView: View {
                 .padding(2)
                 .clipped()
 
-            Color.white.frame(width: .infinity, height: lineWidth / 2.0)
+            Color("background")
+                .frame(maxWidth: .infinity)
+                .frame(height: lineWidth / 2.0)
         }
     }
 }
