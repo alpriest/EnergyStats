@@ -103,9 +103,8 @@ struct SettingsTabView: View {
                     ExternalWebNavigationLink(url: "https://www.foxesscommunity.com", title: "FoxESS Community")
                     ExternalWebNavigationLink(url: "https://www.facebook.com/groups/foxessownersgroup", title: "Facebook group")
 
-                    NavigationLink("Debug") { DebugDataView(networking: networking, configManager: configManager) }
-
                     NavigationLink("Frequently Asked Questions") { FAQView() }
+                    NavigationLink("Debug") { DebugDataView(networking: networking, configManager: configManager) }
                 }
 
                 SettingsFooterView(username: viewModel.username, onLogout: viewModel.logout, appVersion: viewModel.appVersion)
