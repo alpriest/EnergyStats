@@ -48,6 +48,7 @@ public protocol ConfigManaging {
     var showInverterTemperature: Bool { get set }
     var selectedParameterGraphVariables: [String] { get set }
     var showHomeTotal: Bool { get set }
+    var showInverterIcon: Bool { get set }
 }
 
 public class ConfigManager: ConfigManaging {
@@ -76,7 +77,8 @@ public class ConfigManager: ConfigManaging {
                 selfSufficiencyEstimateMode: config.selfSufficiencyEstimateMode,
                 showEarnings: config.showEarnings,
                 showInverterTemperature: config.showInverterTemperature,
-                showHomeTotal: config.showHomeTotal
+                showHomeTotal: config.showHomeTotal,
+                showInverterIcon: config.showInverterIcon
             )
         )
         selectedDeviceID = selectedDeviceID
@@ -352,6 +354,16 @@ public class ConfigManager: ConfigManaging {
             config.showHomeTotal = newValue
             appTheme.send(appTheme.value.update(
                 showHomeTotal: config.showHomeTotal
+            ))
+        }
+    }
+
+    public var showInverterIcon: Bool {
+        get { config.showInverterIcon }
+        set {
+            config.showInverterIcon = newValue
+            appTheme.send(appTheme.value.update(
+                showInverterIcon: config.showInverterIcon
             ))
         }
     }

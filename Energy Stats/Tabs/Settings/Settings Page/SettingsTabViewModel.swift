@@ -81,6 +81,12 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
+    @Published var showInverterIcon: Bool {
+        didSet {
+            config.showInverterIcon = showInverterIcon
+        }
+    }
+
     private(set) var config: ConfigManaging
     private let userManager: UserManager
     private var cancellables = Set<AnyCancellable>()
@@ -105,6 +111,7 @@ class SettingsTabViewModel: ObservableObject {
         showTotalYield = config.showTotalYield
         showInverterTemperature = config.showInverterTemperature
         showHomeTotal = config.showHomeTotal
+        showInverterIcon = config.showInverterIcon
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }

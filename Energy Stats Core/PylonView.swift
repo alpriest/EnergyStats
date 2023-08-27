@@ -15,21 +15,28 @@ public struct PylonView: View {
     }
 
     public var body: some View {
-        PylonShape()
-            .stroke(lineWidth: lineWidth)
-            .padding(2)
+        ZStack(alignment: .bottom) {
+            PylonShape(lineWidth: lineWidth)
+                .stroke(lineWidth: lineWidth)
+                .padding(2)
+                .clipped()
+
+            Color.white.frame(width: .infinity, height: lineWidth / 2.0)
+        }
     }
 }
 
 struct PylonShape: Shape {
+    let lineWidth: CGFloat
+
     func path(in rect: CGRect) -> Path {
         let hSize = rect.width * 0.1
         let vSize = rect.height * 0.1
 
-        let leftLegBottom = CGPoint(x: hSize * 2.5, y: rect.maxY)
-        let leftLegTop = CGPoint(x: hSize * 4, y: 0)
-        let rightLegBottom = CGPoint(x: hSize * 7.5, y: rect.maxY)
-        let rightLegTop = CGPoint(x: hSize * 6, y: 0)
+        let leftLegBottom = CGPoint(x: hSize * 2.5, y: rect.maxY + (lineWidth / 2.0))
+        let leftLegTop = CGPoint(x: hSize * 4, y: 0 + (lineWidth / 2.0))
+        let rightLegBottom = CGPoint(x: hSize * 7.5, y: rect.maxY + (lineWidth / 2.0))
+        let rightLegTop = CGPoint(x: hSize * 6, y: 0 + (lineWidth / 2.0))
 
         return Path { path in
             path.move(to: leftLegBottom)
@@ -47,17 +54,18 @@ struct PylonShape: Shape {
 
             // cross
             path.move(to: leftLegBottom)
-            path.addLine(to: CGPoint(x: hSize * 6.9, y: vSize * 5))
+            path.addLine(to: CGPoint(x: hSize * 6.8, y: vSize * 5))
 
             // cross
             path.move(to: rightLegBottom)
-            path.addLine(to: CGPoint(x: hSize * 3.1, y: vSize * 5))
+            path.addLine(to: CGPoint(x: hSize * 3.2, y: vSize * 5))
         }
     }
 }
 
 struct PylonView_Previews: PreviewProvider {
     static var previews: some View {
-        PylonView()
+        PylonView(lineWidth: 2)
+            .frame(width: 45, height: 45)
     }
 }

@@ -61,8 +61,9 @@ struct InverterView: View {
                     .frame(width: 50, height: 55)
                     .padding(5)
                     .accessibilityHidden(true)
+                    .opacity(appTheme.showInverterIcon ? 1 : 0)
 
-                verticalDeviceDetail().offset(y: 45)
+                verticalDeviceDetail().offset(y: appTheme.showInverterIcon ? 45 : 0)
             } else {
                 // Landscape
                 HStack {
@@ -87,9 +88,9 @@ struct InverterView: View {
                 Text("hidden")
                     .hidden()
             }
-            
+
             deviceNameSelector()
-            
+
             if appTheme.showInverterTemperature, let temperatures = viewModel.temperatures {
                 HStack {
                     InverterTemperatureView(value: temperatures.ambient, name: "internal")

@@ -108,7 +108,8 @@ public extension AppTheme {
             selfSufficiencyEstimateMode: selfSufficiencyEstimateMode,
             showEarnings: false,
             showInverterTemperature: showInverterTemperature,
-            showHomeTotal: false
+            showHomeTotal: false,
+            showInverterIcon: true
         )
     }
 }

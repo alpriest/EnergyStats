@@ -13,6 +13,7 @@ struct InverterSettingsView: View {
     let configManager: ConfigManaging
     let firmwareVersion: DeviceFirmwareVersion?
     @Binding var showInverterTemperature: Bool
+    @Binding var showInverterIcon: Bool
 
     var body: some View {
         Form {
@@ -24,6 +25,10 @@ struct InverterSettingsView: View {
 
             Toggle(isOn: $showInverterTemperature) {
                 Text("Show inverter temperatures")
+            }
+
+            Toggle(isOn: $showInverterIcon) {
+                Text("Show inverter icon")
             }
 
             InverterFirmwareVersionsView(viewModel: firmwareVersion)
@@ -70,7 +75,8 @@ struct InverterSettingsView_Previews: PreviewProvider {
             networking: DemoNetworking(),
             configManager: PreviewConfigManager(),
             firmwareVersion: .preview(),
-            showInverterTemperature: .constant(true)
+            showInverterTemperature: .constant(true),
+            showInverterIcon: .constant(true)
         )
     }
 }
