@@ -16,6 +16,7 @@ public enum AmountType {
     case selfSufficiency
     case totalYield
     case homeUsage
+    case totalSolarGenerated
     case `default`
 }
 
@@ -46,6 +47,8 @@ extension AmountType {
             return String(format: String(accessibilityKey: .totalYield), arguments: [amountWithUnit])
         case .homeUsage:
             return String(format: String(accessibilityKey: .homeTotalUsage), arguments: [amountWithUnit])
+        case .totalSolarGenerated:
+            return String(format: String(accessibilityKey: .totalSolarGenerated), arguments: [amountWithUnit])
         case .default:
             return amountWithUnit
         }

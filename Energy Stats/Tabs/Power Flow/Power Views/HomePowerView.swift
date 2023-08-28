@@ -12,7 +12,7 @@ import SwiftUI
 struct HomePowerView: View {
     let amount: Double
     let total: Double
-    let iconFooterSize: CGSize
+    let iconFooterHeight: Double
     let appTheme: AppTheme
 
     var body: some View {
@@ -33,7 +33,7 @@ struct HomePowerView: View {
                         .foregroundColor(Color("text_dimmed"))
                 }
             }
-            .frame(width: iconFooterSize.width, height: iconFooterSize.height)
+            .frame(height: iconFooterHeight)
         }
     }
 }
@@ -42,7 +42,7 @@ struct HomePowerView_Previews: PreviewProvider {
     static var previews: some View {
         HomePowerView(amount: 1.05,
                       total: 4.5,
-                      iconFooterSize: CGSize(width: 32, height: 32),
+                      iconFooterHeight: 32,
                       appTheme: AppTheme.mock())
             .frame(width: 50, height: 220)
     }

@@ -41,16 +41,18 @@ struct ApproximationsView: View {
                     if let home = viewModel.homeUsage {
                         HStack {
                             Text("Home usage")
+                                .accessibilityElement(children: .ignore)
                             Spacer()
                             EnergyText(amount: home, appTheme: appTheme, type: .selfSufficiency)
                         }
                     }
 
-                    if let solarUsage = viewModel.solarUsage {
+                    if let totalSolarGenerated = viewModel.totalSolarGenerated {
                         HStack {
-                            Text("Solar consumption")
+                            Text("Solar generated")
+                                .accessibilityElement(children: .ignore)
                             Spacer()
-                            EnergyText(amount: solarUsage, appTheme: appTheme, type: .selfSufficiency)
+                            EnergyText(amount: totalSolarGenerated, appTheme: appTheme, type: .totalSolarGenerated) // TODO:
                         }
                     }
                 }.padding()

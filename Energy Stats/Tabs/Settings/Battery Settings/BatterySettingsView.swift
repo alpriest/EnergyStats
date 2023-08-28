@@ -25,12 +25,6 @@ struct BatterySettingsView: View {
 
             Section(
                 content: {
-                    HStack {
-                        Text("Min battery charge (SOC)")
-                        Spacer()
-                        Text(viewModel.minSOC, format: .percent)
-                    }
-
                     HStack(alignment: .top) {
                         Text("Capacity")
                         Spacer()

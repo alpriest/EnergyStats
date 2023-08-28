@@ -40,7 +40,6 @@
 "Show battery temperature" = "Pokaż temperaturę baterii";
 "Show total yield" = "Pokaż całkowity wydajność";
 "Show coloured flow lines" = "Pokaż kolorowe linie przepływu";
-"Min battery charge (SOC)" = "Minimalne naładowanie baterii (SOC)";
 "Capacity" = "Pojemność";
 "OK" = "OK";
 "Cancel" = "Anuluj";
@@ -61,6 +60,7 @@
 "Shows earnings today, this month, this year, and all-time based on a crude calculation of feed-in ｘ price as configured on FoxESS cloud." = "Wyświetla dzisiejsze zarobki, zarobki w tym miesiącu, w tym roku oraz ogólnie oparte na przybliżonych obliczeniach feed-in ｘ cena, zgodnie z konfiguracją w chmurze FoxESS.";
 "Show values in Watts" = "Pokaż wartości w watach";
 "Usage today" = "Dzisiejsze zużycie";
+"Solar generated" = "Generowany przez energię słoneczną";
 
 /* Variables page */
 "Predefined selections" = "Wybrane opcje";
@@ -188,3 +188,4 @@
 "accessibility.batteryEstimate" = "Bateria %@";
 "accessibility.batteryCapacityPercentage" = "Pojemność baterii: %@";
 "accessibility.homeTotalUsage" = "Całkowite dzisiejsze zużycie w domu %@";
+"accessibility.totalSolarGenerated" = "Całkowicie wygenerowana energia słoneczna %@";

@@ -29,6 +29,8 @@ public struct LocalizedString {
         case inverterSettingsWereSaved = "inverter_settings_saved"
         case batterySOCSettingsWereSaved = "batterySOC_settings_saved"
         case batteryChargeScheduleSettingsWereSaved = "battery_charge_schedule_settings_saved"
+        case errorTitle = "error_title"
+        case batteryReadError = "battery_read_error"
 
         public enum Accessibility: String, RawRepresentable {
             case inverter = "accessibility.inverter"
@@ -45,6 +47,7 @@ public struct LocalizedString {
             case batteryTemperature = "accessibility.batteryTemperature"
             case batteryEstimate = "accessibility.batteryEstimate"
             case homeTotalUsage = "accessibility.homeTotalUsage"
+            case totalSolarGenerated = "accessibility.totalSolarGenerated"
         }
     }
 }

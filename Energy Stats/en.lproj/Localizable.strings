@@ -15,7 +15,6 @@
 "Next update in" = "Next update in";
 "Settings" = "Settings";
 "Stats" = "Stats";
-"Min battery charge (SOC)" = "Min battery charge (SoC)";
 "Power flow" = "Power flow";
 "Earnings" = "Earnings";
 "Success" = "Success";
@@ -74,6 +73,8 @@
 "Clear graph values" = "Clear";
 "Touch the graph to see values at that time" = "Touch the graph to see values at that time";
 "Usage today" = "Usage today";
+"error_title" = "Error";
+"battery_read_error" = "Something went wrong reading your battery settings. Error message follows.\n\n%@";
 
 /* Battery Charge Pages */
 
@@ -137,3 +138,4 @@
 "accessibility.batteryEstimate" = "Battery %@";
 "accessibility.batteryCapacityPercentage" = "Battery capacity %@";
 "accessibility.homeTotalUsage" = "Total home usage today %@";
+"accessibility.totalSolarGenerated" = "Total solar generated %@";

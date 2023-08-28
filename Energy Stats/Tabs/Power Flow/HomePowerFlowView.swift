@@ -34,7 +34,7 @@ struct GridFlowSizePreferenceKey: PreferenceKey {
 }
 
 struct HomePowerFlowView: View {
-    @State private var iconFooterSize: CGSize = .zero
+    @State private var iconFooterHeight: Double = 0
     @State private var lastUpdated = Date()
     @State private var appTheme: AppTheme = .mock()
     @State private var batteryPowerWidth: CGFloat = 0.0
@@ -66,13 +66,14 @@ struct HomePowerFlowView: View {
                 .zIndex(1)
 
             HStack {
-                if viewModel.hasBattery {
+                if viewModel.hasBattery || viewModel.hasBatteryError {
                     BatteryPowerView(viewModel: BatteryPowerViewModel(configManager: configManager,
                                                                       batteryStateOfCharge: viewModel.batteryStateOfCharge,
                                                                       batteryChargekWH: viewModel.battery,
                                                                       temperature: viewModel.batteryTemperature,
-                                                                      batteryResidual: viewModel.batteryResidual),
-                                     iconFooterSize: $iconFooterSize,
+                                                                      batteryResidual: viewModel.batteryResidual,
+                                                                      error: viewModel.batteryError),
+                                     iconFooterHeight: $iconFooterHeight,
                                      appTheme: appTheme)
                         .background(GeometryReader { reader in
                             Color.clear.preference(key: BatteryFlowSizePreferenceKey.self, value: reader.size)
@@ -84,7 +85,7 @@ struct HomePowerFlowView: View {
                     Spacer()
                 }
 
-                HomePowerView(amount: viewModel.home, total: viewModel.homeTotal, iconFooterSize: iconFooterSize, appTheme: appTheme)
+                HomePowerView(amount: viewModel.home, total: viewModel.homeTotal, iconFooterHeight: iconFooterHeight, appTheme: appTheme)
                     .background(GeometryReader { reader in
                         Color.clear.preference(key: HomeFlowSizePreferenceKey.self, value: reader.size)
                             .onPreferenceChange(HomeFlowSizePreferenceKey.self) { size in
@@ -94,7 +95,7 @@ struct HomePowerFlowView: View {
 
                 Spacer()
 
-                GridPowerView(amount: viewModel.grid, iconFooterSize: iconFooterSize, appTheme: appTheme)
+                GridPowerView(amount: viewModel.grid, iconFooterHeight: iconFooterHeight, appTheme: appTheme)
                     .background(GeometryReader { reader in
                         Color.clear.preference(key: GridFlowSizePreferenceKey.self, value: reader.size)
                             .onPreferenceChange(GridFlowSizePreferenceKey.self) { size in
@@ -125,16 +126,24 @@ struct PowerSummaryView_Previews: PreviewProvider {
 extension HomePowerFlowViewModel {
     static func any() -> HomePowerFlowViewModel {
         .init(solar: 2.5,
-              battery: -0.01,
+              battery: .any(),
               home: 1.5,
               grid: 0.71,
-              batteryStateOfCharge: 0.99,
-              hasBattery: true,
-              batteryTemperature: 15.6,
-              batteryResidual: 5678,
               todaysGeneration: 8.5,
               earnings: "GBP(£) 1 / 5 / 99",
               inverterTemperatures: InverterTemperatures(ambient: 4.0, inverter: 9.0),
               homeTotal: 1.0)
+    }
+}
+
+extension BatteryViewModel {
+    static func any() -> BatteryViewModel {
+        BatteryViewModel(
+            hasBattery: true,
+            chargeLevel: 0.99,
+            chargePower: 0.1,
+            temperature: 15.6,
+            residual: 5678
+        )
     }
 }

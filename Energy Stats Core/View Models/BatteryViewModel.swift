@@ -13,6 +13,7 @@ public struct BatteryViewModel: Sendable {
     public let chargePower: Double
     public let temperature: Double
     public let residual: Int
+    public let error: Error?
 
     public init(from battery: BatteryResponse) {
         chargeLevel = Double(battery.soc) / 100.0
@@ -22,9 +23,24 @@ public struct BatteryViewModel: Sendable {
         hasBattery = true
         temperature = battery.temperature
         residual = Int(battery.residual)
+        error = nil
     }
 
-    public init() {
+    public init(hasBattery: Bool = false,
+                chargeLevel: Double = 0,
+                chargePower: Double = 0,
+                temperature: Double = 0,
+                residual: Int = 0) {
+        self.hasBattery = hasBattery
+        self.chargeLevel = chargeLevel
+        self.chargePower = chargePower
+        self.temperature = temperature
+        self.residual = residual
+        error = nil
+    }
+
+    public init(error: Error) {
+        self.error = error
         hasBattery = false
         chargeLevel = 0
         chargePower = 0

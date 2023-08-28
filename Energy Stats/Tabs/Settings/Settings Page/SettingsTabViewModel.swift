@@ -104,7 +104,6 @@ class SettingsTabViewModel: ObservableObject {
         showBatteryEstimate = config.showBatteryEstimate
         showUsableBatteryOnly = config.showUsableBatteryOnly
         showInW = config.showInW
-        minSOC = config.minSOC
         batteryCapacity = String(describing: config.batteryCapacity)
         hasBattery = config.hasBattery
         firmwareVersions = config.firmwareVersions
@@ -117,7 +116,6 @@ class SettingsTabViewModel: ObservableObject {
             guard let self else { return }
 
             Task { @MainActor in
-                self.minSOC = config.minSOC
                 self.batteryCapacity = String(describing: config.batteryCapacity)
                 self.hasBattery = config.hasBattery
                 self.firmwareVersions = config.firmwareVersions
@@ -125,7 +123,6 @@ class SettingsTabViewModel: ObservableObject {
         }.store(in: &cancellables)
     }
 
-    @Published var minSOC: Double
     var username: String { userManager.getUsername() ?? "" }
     @Published var showAlert = false
     @Published var showRecalculationAlert = false

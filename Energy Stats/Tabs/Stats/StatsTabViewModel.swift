@@ -36,7 +36,7 @@ class StatsTabViewModel: ObservableObject {
     @Published var netSelfSufficiencyEstimate: String? = nil
     @Published var absoluteSelfSufficiencyEstimate: String? = nil
     @Published var homeUsage: Double? = nil
-    @Published var solarUsage: Double? = nil
+    @Published var totalSolarGenerated: Double? = nil
     private var totals: [ReportVariable: Double] = [:]
     private var max: StatsGraphValue?
     var exportFile: CSVTextFile?
@@ -110,7 +110,7 @@ class StatsTabViewModel: ObservableObject {
         else { return }
 
         homeUsage = loads
-        solarUsage = loads - grid
+        totalSolarGenerated = (batteryCharge - batteryDischarge - grid + loads + feedIn)
 
         let netResult = NetSelfSufficiencyCalculator.calculate(
             grid: grid,

@@ -157,17 +157,15 @@ class PowerFlowTabViewModel: ObservableObject {
                 do {
                     let response = try await self.network.fetchBattery(deviceID: currentDevice.deviceID)
                     battery = BatteryViewModel(from: response)
-                } catch {}
+                } catch {
+                    battery = BatteryViewModel(error: error)
+                }
             }
 
             let summary = HomePowerFlowViewModel(solar: currentViewModel.currentSolarPower,
-                                                 battery: battery.chargePower,
+                                                 battery: battery,
                                                  home: currentViewModel.currentHomeConsumption,
                                                  grid: currentViewModel.currentGridExport,
-                                                 batteryStateOfCharge: battery.chargeLevel,
-                                                 hasBattery: battery.hasBattery,
-                                                 batteryTemperature: battery.temperature,
-                                                 batteryResidual: battery.residual,
                                                  todaysGeneration: earnings.today.generation,
                                                  earnings: self.makeEarnings(earnings),
                                                  inverterTemperatures: currentViewModel.currentTemperatures,

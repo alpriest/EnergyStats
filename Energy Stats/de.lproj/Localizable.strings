@@ -46,7 +46,6 @@
 "Show battery temperature" = "Zeige die Batterie-Temperatur";
 "Show total yield" = "Zeige den Gesamtertrag";
 "Show coloured flow lines" = "Zeige farbige Leistungsfluss-Linien";
-"Min battery charge (SOC)" = "Minimale Batterieladung (SOC)";
 "Show values in Watts" = "Zeige Werte in Watt";
 "Capacity" = "Kapazität";
 "OK" = "OK";
@@ -142,6 +141,7 @@
 "Approximations" = "Schätzungen";
 "Self sufficiency" = "Autarkie";
 "Home usage" = "Hausverbrauch";
+"Solar generated" = "Solar erzeugt";
 "Export graph data" = "Graphdaten exportieren";
 "Minimum charge levels" = "Mindestladepegel";
 "Charge times" = "Ladeplan";
@@ -208,3 +208,4 @@
 "accessibility.batteryEstimate" = "Batterie %@";
 "accessibility.batteryCapacityPercentage" = "Batteriekapazität: %@";
 "accessibility.homeTotalUsage" = "Gesamtnutzung zu Hause heute %@";
+"accessibility.totalSolarGenerated" = "Gesamte solare Erzeugung %@";

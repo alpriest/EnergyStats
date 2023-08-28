@@ -15,7 +15,6 @@
 "Next update in" = "Prossimo aggiornamento tra";
 "Settings" = "Impostazioni";
 "Stats" = "Statistiche";
-"Min battery charge (SOC)" = "Carica minima della batteria (SoC)";
 "Power flow" = "Flusso di potenza";
 "Yield today" = "Resa oggi";
 "Buy me a coffee" = "Offrimi un caffè";
@@ -98,6 +97,7 @@
 "Show estimated earnings" = "Mostra guadagni stimati";
 "Touch the graph to see values at that time" = "Tocca il grafico per visualizzare i valori in quel momento";
 "Usage today" = "Utilizzo oggi";
+"Solar generated" = "Generato da energia solare";
 
 /* Battery Charge Pages */
 "Minimum charge levels" = "Livelli di carica minimi";
@@ -160,3 +160,4 @@
 "accessibility.batteryEstimate" = "Batteria %@";
 "accessibility.batteryCapacityPercentage" = "Capacità della batteria: %@";
 "accessibility.homeTotalUsage" = "Consumo totale in casa oggi %@";
+"accessibility.totalSolarGenerated" = "Totale generato da energia solare %@";
