@@ -14,17 +14,29 @@ public struct CurrentStatusViewModel: Sendable {
     public let currentTemperatures: InverterTemperatures?
     public let lastUpdate: Date
 
-    public init(raws: [RawResponse]) {
-        currentSolarPower = raws.currentValue(for: "pvPower")
-        currentGridExport = raws.currentValue(for: "feedinPower") - raws.currentValue(for: "gridConsumptionPower")
-        currentHomeConsumption = raws.currentValue(for: "gridConsumptionPower") + raws.currentValue(for: "generationPower") - raws.currentValue(for: "feedinPower")
+    public init(device: Device, raws: [RawResponse]) {
+        self.currentGridExport = raws.currentValue(for: "feedinPower") - raws.currentValue(for: "gridConsumptionPower")
+        self.currentHomeConsumption = raws.currentValue(for: "loadsPower") // + raws.currentValue(for: "meterPower2")
         if raws.contains(where: { response in response.variable == "ambientTemperation" }) &&
-            raws.contains(where: { response in response.variable == "invTemperation" }) {
-            currentTemperatures = InverterTemperatures(ambient: raws.currentValue(for: "ambientTemperation"), inverter: raws.currentValue(for: "invTemperation"))
+            raws.contains(where: { response in response.variable == "invTemperation" })
+        {
+            self.currentTemperatures = InverterTemperatures(ambient: raws.currentValue(for: "ambientTemperation"), inverter: raws.currentValue(for: "invTemperation"))
         } else {
-            currentTemperatures = nil
+            self.currentTemperatures = nil
         }
-        lastUpdate = raws.current(for: "gridConsumptionPower")?.time ?? Date()
+        self.lastUpdate = raws.first?.data.first?.time ?? Date()
+        self.currentSolarPower = Self.calculateSolarPower(device: device, raws: raws)
+    }
+}
+
+private extension CurrentStatusViewModel {
+    static func calculateSolarPower(device: Device, raws: [RawResponse]) -> Double {
+        if device.hasPV {
+            return raws.currentValue(for: "pvPower")
+        } else {
+            let ACtoDCconversion = 0.92
+            return raws.currentValue(for: "meterPower2") / ACtoDCconversion
+        }
     }
 }
 
@@ -38,21 +50,21 @@ extension Array where Element == RawResponse {
     }
 }
 
-extension Date {
-    public func small() -> String {
+public extension Date {
+    func small() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM d, HH:mm:ss"
         return formatter.string(from: self)
     }
 
-    public func iso8601() -> String {
+    func iso8601() -> String {
         let formatter = ISO8601DateFormatter()
         return formatter.string(from: self)
     }
 }
 
-extension DateFormatter {
-    public static func forDebug() -> DateFormatter {
+public extension DateFormatter {
+    static func forDebug() -> DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM d, HH:mm:ss"
         return formatter

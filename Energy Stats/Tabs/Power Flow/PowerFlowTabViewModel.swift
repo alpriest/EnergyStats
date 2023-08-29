@@ -99,9 +99,9 @@ class PowerFlowTabViewModel: ObservableObject {
     }
 
     func adddThemeChangeObserver() {
-        guard themeChangeCancellable == nil else { return }
+        guard self.themeChangeCancellable == nil else { return }
 
-        themeChangeCancellable = configManager.appTheme.sink { theme in
+        self.themeChangeCancellable = self.configManager.appTheme.sink { theme in
             if theme.showInverterTemperature {
                 Task { await self.loadData() }
             }
@@ -131,10 +131,12 @@ class PowerFlowTabViewModel: ObservableObject {
             await MainActor.run { self.updateState = "Updating..." }
             await self.network.ensureHasToken()
 
-            var graphVariables = [configManager.variables.named("feedinPower"),
-                                  self.configManager.variables.named("gridConsumptionPower"),
-                                  self.configManager.variables.named("generationPower"),
-                                  self.configManager.variables.named("pvPower")]
+            var rawVariables = [configManager.variables.named("feedinPower"),
+                                self.configManager.variables.named("gridConsumptionPower"),
+                                self.configManager.variables.named("loadsPower"),
+                                self.configManager.variables.named("generationPower"),
+                                self.configManager.variables.named("pvPower"),
+                                self.configManager.variables.named("meterPower2")]
 
             let totals = try await self.network.fetchReport(deviceID: currentDevice.deviceID,
                                                             variables: [.loads],
@@ -143,15 +145,15 @@ class PowerFlowTabViewModel: ObservableObject {
             let earnings = try await self.network.fetchEarnings(deviceID: currentDevice.deviceID)
             let totalsViewModel = TotalsViewModel(reports: totals, earnings: earnings)
 
-            if configManager.appTheme.value.showInverterTemperature {
-                graphVariables.append(contentsOf: [
+            if self.configManager.appTheme.value.showInverterTemperature {
+                rawVariables.append(contentsOf: [
                     self.configManager.variables.named("ambientTemperation"),
                     self.configManager.variables.named("invTemperation")
                 ])
             }
 
-            let raws = try await self.network.fetchRaw(deviceID: currentDevice.deviceID, variables: graphVariables.compactMap { $0 }, queryDate: .now())
-            let currentViewModel = CurrentStatusViewModel(raws: raws)
+            let raws = try await self.network.fetchRaw(deviceID: currentDevice.deviceID, variables: rawVariables.compactMap { $0 }, queryDate: .now())
+            let currentViewModel = CurrentStatusViewModel(device: currentDevice, raws: raws)
             var battery: BatteryViewModel = .noBattery
             if currentDevice.battery != nil {
                 do {
