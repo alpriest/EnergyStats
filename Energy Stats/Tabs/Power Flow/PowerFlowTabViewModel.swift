@@ -143,7 +143,7 @@ class PowerFlowTabViewModel: ObservableObject {
                                                             queryDate: .now(),
                                                             reportType: .month)
             let earnings = try await self.network.fetchEarnings(deviceID: currentDevice.deviceID)
-            let totalsViewModel = TotalsViewModel(reports: totals, earnings: earnings)
+            let totalsViewModel = TotalsViewModel(reports: totals)
 
             if self.configManager.appTheme.value.showInverterTemperature {
                 rawVariables.append(contentsOf: [
@@ -153,9 +153,9 @@ class PowerFlowTabViewModel: ObservableObject {
             }
 
             let raws = try await self.network.fetchRaw(deviceID: currentDevice.deviceID, variables: rawVariables.compactMap { $0 }, queryDate: .now())
-            let currentViewModel = CurrentStatusViewModel(device: currentDevice, raws: raws)
+            let currentViewModel = CurrentStatusViewModel(device: currentDevice, raws: raws, shouldInvertCT2: self.configManager.shouldInvertCT2)
             var battery: BatteryViewModel = .noBattery
-            if currentDevice.battery != nil {
+            if currentDevice.hasBattery {
                 do {
                     let response = try await self.network.fetchBattery(deviceID: currentDevice.deviceID)
                     battery = BatteryViewModel(from: response)
@@ -167,7 +167,7 @@ class PowerFlowTabViewModel: ObservableObject {
             let summary = HomePowerFlowViewModel(solar: currentViewModel.currentSolarPower,
                                                  battery: battery,
                                                  home: currentViewModel.currentHomeConsumption,
-                                                 grid: currentViewModel.currentGridExport,
+                                                 grid: currentViewModel.currentGrid,
                                                  todaysGeneration: earnings.today.generation,
                                                  earnings: self.makeEarnings(earnings),
                                                  inverterTemperatures: currentViewModel.currentTemperatures,

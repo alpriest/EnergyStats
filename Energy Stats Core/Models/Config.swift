@@ -26,6 +26,7 @@ public protocol Config {
     var selectedParameterGraphVariables: [String] { get set }
     var showHomeTotal: Bool { get set }
     var showInverterIcon: Bool { get set }
+    var shouldInvertCT2: Bool { get set }
 }
 
 extension UserDefaults {
@@ -89,6 +90,9 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredBool(key: "showInverterIcon", defaultValue: true)
     public var showInverterIcon: Bool
+
+    @UserDefaultsStoredBool(key: "shouldInvertCT2", defaultValue: false)
+    public var shouldInvertCT2: Bool
 
     public var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode {
         get {

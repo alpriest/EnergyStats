@@ -109,7 +109,8 @@ public extension AppTheme {
             showEarnings: false,
             showInverterTemperature: showInverterTemperature,
             showHomeTotal: false,
-            showInverterIcon: true
+            showInverterIcon: true,
+            shouldInvertCT2: false
         )
     }
 }

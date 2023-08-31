@@ -87,6 +87,12 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
+    @Published var shouldInvertCT2: Bool {
+        didSet {
+            config.shouldInvertCT2 = shouldInvertCT2
+        }
+    }
+
     private(set) var config: ConfigManaging
     private let userManager: UserManager
     private var cancellables = Set<AnyCancellable>()
@@ -111,6 +117,7 @@ class SettingsTabViewModel: ObservableObject {
         showInverterTemperature = config.showInverterTemperature
         showHomeTotal = config.showHomeTotal
         showInverterIcon = config.showInverterIcon
+        shouldInvertCT2 = config.shouldInvertCT2
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }

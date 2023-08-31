@@ -21,7 +21,8 @@ struct SettingsTabView: View {
                                          configManager: configManager,
                                          firmwareVersion: viewModel.firmwareVersions,
                                          showInverterTemperature: $viewModel.showInverterTemperature,
-                                         showInverterIcon: $viewModel.showInverterIcon)
+                                         showInverterIcon: $viewModel.showInverterIcon,
+                                         shouldInvertCT2: $viewModel.shouldInvertCT2)
                 } label: {
                     Text("Inverter")
                 }

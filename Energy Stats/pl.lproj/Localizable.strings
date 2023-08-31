@@ -172,6 +172,10 @@
 "Find out more about work modes" = "Dowiedz się więcej o trybach pracy";
 "Show inverter temperatures" = "Pokaż temperatury falownika";
 "inverter_settings_saved" = "Tryb pracy falownika został zapisany";
+"Show inverter icon" = "Pokaż ikonę falownika";
+"Invert CT2 values when detected" = "Odwróć wartości CT2 po wykryciu";
+"Advanced" = "Zaawansowane";
+"invert_ct2_footnote" = "Jeśli masz kilka falowników i wartości generacji PV są nieprawidłowe, spróbuj to przełączyć.";
 
 /* Accessibility */
 "accessibility.inverter" = "Falownik";

@@ -14,6 +14,7 @@ struct InverterSettingsView: View {
     let firmwareVersion: DeviceFirmwareVersion?
     @Binding var showInverterTemperature: Bool
     @Binding var showInverterIcon: Bool
+    @Binding var shouldInvertCT2: Bool
 
     var body: some View {
         Form {
@@ -29,6 +30,16 @@ struct InverterSettingsView: View {
 
             Toggle(isOn: $showInverterIcon) {
                 Text("Show inverter icon")
+            }
+
+            Section {
+                Toggle(isOn: $shouldInvertCT2) {
+                    Text("Invert CT2 values when detected")
+                }
+            } header: {
+                Text("Advanced")
+            } footer: {
+                Text("invert_ct2_footnote")
             }
 
             InverterFirmwareVersionsView(viewModel: firmwareVersion)
@@ -76,7 +87,8 @@ struct InverterSettingsView_Previews: PreviewProvider {
             configManager: PreviewConfigManager(),
             firmwareVersion: .preview(),
             showInverterTemperature: .constant(true),
-            showInverterIcon: .constant(true)
+            showInverterIcon: .constant(true),
+            shouldInvertCT2: .constant(true)
         )
     }
 }

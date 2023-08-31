@@ -9,13 +9,13 @@ import Foundation
 
 public struct CurrentStatusViewModel: Sendable {
     public let currentSolarPower: Double
-    public let currentGridExport: Double
+    public let currentGrid: Double
     public let currentHomeConsumption: Double
     public let currentTemperatures: InverterTemperatures?
     public let lastUpdate: Date
 
-    public init(device: Device, raws: [RawResponse]) {
-        self.currentGridExport = raws.currentValue(for: "feedinPower") - raws.currentValue(for: "gridConsumptionPower")
+    public init(device: Device, raws: [RawResponse], shouldInvertCT2: Bool) {
+        self.currentGrid = raws.currentValue(for: "feedinPower") - raws.currentValue(for: "gridConsumptionPower")
         self.currentHomeConsumption = raws.currentValue(for: "loadsPower") // + raws.currentValue(for: "meterPower2")
         if raws.contains(where: { response in response.variable == "ambientTemperation" }) &&
             raws.contains(where: { response in response.variable == "invTemperation" })
@@ -25,16 +25,17 @@ public struct CurrentStatusViewModel: Sendable {
             self.currentTemperatures = nil
         }
         self.lastUpdate = raws.first?.data.first?.time ?? Date()
-        self.currentSolarPower = Self.calculateSolarPower(device: device, raws: raws)
+        self.currentSolarPower = Self.calculateSolarPower(device: device, raws: raws, shouldInvertCT2: shouldInvertCT2)
     }
 }
 
 private extension CurrentStatusViewModel {
-    static func calculateSolarPower(device: Device, raws: [RawResponse]) -> Double {
+    static func calculateSolarPower(device: Device, raws: [RawResponse], shouldInvertCT2: Bool) -> Double {
+        let ACtoDCconversion = 0.92
+
         if device.hasPV {
-            return raws.currentValue(for: "pvPower")
+            return raws.currentValue(for: "pvPower") + ((shouldInvertCT2 ? 0 - raws.currentValue(for: "meterPower2") : raws.currentValue(for: "meterPower2")) / ACtoDCconversion)
         } else {
-            let ACtoDCconversion = 0.92
             return raws.currentValue(for: "meterPower2") / ACtoDCconversion
         }
     }

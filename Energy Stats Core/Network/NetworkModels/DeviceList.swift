@@ -50,6 +50,7 @@ public struct Device: Codable, Hashable, Identifiable {
     public let deviceSN: String
     public let hasPV: Bool
     public let battery: Battery?
+    public let hasBattery: Bool
     public let deviceType: String?
     public let firmware: DeviceFirmwareVersion?
     public let variables: [RawVariable]
@@ -79,6 +80,7 @@ public struct Device: Codable, Hashable, Identifiable {
                 deviceID: String,
                 deviceSN: String,
                 hasPV: Bool,
+                hasBattery: Bool,
                 battery: Battery?,
                 deviceType: String?,
                 firmware: DeviceFirmwareVersion?,
@@ -89,6 +91,7 @@ public struct Device: Codable, Hashable, Identifiable {
         self.deviceID = deviceID
         self.deviceSN = deviceSN
         self.hasPV = hasPV
+        self.hasBattery = hasBattery
         self.battery = battery
         self.deviceType = deviceType
         self.firmware = firmware
@@ -100,6 +103,7 @@ public struct Device: Codable, Hashable, Identifiable {
                      deviceID: String? = nil,
                      deviceSN: String? = nil,
                      hasPV: Bool? = nil,
+                     hasBattery: Bool? = nil,
                      battery: Battery? = nil,
                      deviceType: String? = nil,
                      firmware: DeviceFirmwareVersion? = nil,
@@ -111,6 +115,7 @@ public struct Device: Codable, Hashable, Identifiable {
             deviceID: deviceID ?? self.deviceID,
             deviceSN: deviceSN ?? self.deviceSN,
             hasPV: hasPV ?? self.hasPV,
+            hasBattery: hasBattery ?? self.hasBattery,
             battery: battery ?? self.battery,
             deviceType: deviceType ?? self.deviceType,
             firmware: firmware ?? self.firmware,

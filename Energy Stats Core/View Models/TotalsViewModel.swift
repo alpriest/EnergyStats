@@ -8,11 +8,7 @@
 import Foundation
 
 public struct TotalsViewModel {
-    private let earnings: EarningsResponse
-
-    public init(reports: [ReportResponse], earnings: EarningsResponse) {
-        self.earnings = earnings
-
+    public init(reports: [ReportResponse]) {
         self.home = reports.todayValue(for: "loads")
     }
 

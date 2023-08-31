@@ -192,6 +192,10 @@
 "Find out more about work modes" = "Erfahren Sie mehr über Arbeitsmodi";
 "Show inverter temperatures" = "Zeige Temperaturen des Wechselrichters";
 "inverter_settings_saved" = "Der Arbeitsmodus des Wechselrichters wurde gespeichert";
+"Show inverter icon" = "Inverter-Symbol anzeigen";
+"Invert CT2 values when detected" = "CT2-Werte umkehren, wenn erkannt";
+"Advanced" = "Erweitert";
+"invert_ct2_footnote" = "Wenn Sie mehrere Wechselrichter haben und Ihre PV-Erzeugungswerte nicht korrekt sind, versuchen Sie, dies umzuschalten.";
 
 /* Accessibility */
 "accessibility.inverter" = "Wechselrichter";

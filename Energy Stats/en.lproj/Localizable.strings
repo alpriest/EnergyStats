@@ -122,6 +122,10 @@
 "Inverter change warning" = "Only change these values if you know what you are doing";
 "Show inverter temperatures" = "Show inverter temperatures";
 "inverter_settings_saved" = "Your inverter settings were saved";
+"Show inverter icon" = "Show inverter icon";
+"Invert CT2 values when detected" = "Invert CT2 values when detected";
+"Advanced" = "Advanced";
+"invert_ct2_footnote" = "If you have multiple inverters and your PV generation values are incorrect try toggling this.";
 
 /* Accessibility */
 "accessibility.inverter" = "inverter";

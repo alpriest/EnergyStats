@@ -49,6 +49,7 @@ public protocol ConfigManaging {
     var selectedParameterGraphVariables: [String] { get set }
     var showHomeTotal: Bool { get set }
     var showInverterIcon: Bool { get set }
+    var shouldInvertCT2: Bool { get set }
 }
 
 public class ConfigManager: ConfigManaging {
@@ -78,7 +79,8 @@ public class ConfigManager: ConfigManaging {
                 showEarnings: config.showEarnings,
                 showInverterTemperature: config.showInverterTemperature,
                 showHomeTotal: config.showHomeTotal,
-                showInverterIcon: config.showInverterIcon
+                showInverterIcon: config.showInverterIcon,
+                shouldInvertCT2: config.shouldInvertCT2
             )
         )
         selectedDeviceID = selectedDeviceID
@@ -114,6 +116,7 @@ public class ConfigManager: ConfigManaging {
                 deviceID: device.deviceID,
                 deviceSN: device.deviceSN,
                 hasPV: device.hasPV,
+                hasBattery: device.hasBattery,
                 battery: deviceBattery,
                 deviceType: device.deviceType,
                 firmware: firmware,
@@ -364,6 +367,16 @@ public class ConfigManager: ConfigManaging {
             config.showInverterIcon = newValue
             appTheme.send(appTheme.value.update(
                 showInverterIcon: config.showInverterIcon
+            ))
+        }
+    }
+
+    public var shouldInvertCT2: Bool {
+        get { config.shouldInvertCT2 }
+        set {
+            config.shouldInvertCT2 = newValue
+            appTheme.send(appTheme.value.update(
+                shouldInvertCT2: config.shouldInvertCT2
             ))
         }
     }

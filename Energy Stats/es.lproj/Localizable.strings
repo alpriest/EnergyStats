@@ -185,6 +185,10 @@
 "Find out more about work modes" = "Obtén más información sobre los modos de trabajo";
 "Show inverter temperatures" = "Mostrar temperaturas del inversor";
 "inverter_settings_saved" = "El modo de trabajo del inversor se ha guardado";
+"Show inverter icon" = "Mostrar icono del inversor";
+"Invert CT2 values when detected" = "Invertir valores de CT2 cuando se detecte";
+"Advanced" = "Avanzado";
+"invert_ct2_footnote" = "Si tiene varios inversores y los valores de generación de PV no son correctos, intente cambiar esto.";
 
 /* Accessibility */
 "accessibility.inverter" = "Inversor";

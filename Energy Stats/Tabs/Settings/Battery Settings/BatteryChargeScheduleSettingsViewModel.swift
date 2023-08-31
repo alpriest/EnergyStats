@@ -98,6 +98,7 @@ class BatteryChargeScheduleSettingsViewModel: ObservableObject {
             if period1.overlaps(period2) {
                 resultParts.append(String(key: .batteryPeriodsOverlap))
             }
+
         } else if period1.enabled {
             resultParts.append(String(format: String(key: .oneBatteryChargePeriod), period1.description))
 

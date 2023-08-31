@@ -46,6 +46,21 @@ struct StatsTabView: View {
                 DatePickerView(viewModel: DatePickerViewModel($viewModel.displayMode))
 
                 ScrollView {
+                    HStack {
+                        Group {
+                            if viewModel.valuesAtTime != nil, let selectedDate = viewModel.selectedDate {
+                                Text(viewModel.unitFormatted(selectedDate))
+
+                                Button("Clear graph values", action: {
+                                    self.viewModel.valuesAtTime = nil
+                                    self.viewModel.selectedDate = nil
+                                })
+                            } else {
+                                Text("Touch the graph to see values at that time")
+                            }
+                        }.padding(.vertical)
+                    }.frame(maxWidth: .infinity)
+
                     StatsGraphView(viewModel: viewModel, selectedDate: $viewModel.selectedDate, valuesAtTime: $viewModel.valuesAtTime)
                         .frame(height: 250)
                         .padding(.vertical)
