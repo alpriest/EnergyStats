@@ -110,10 +110,9 @@ struct BatteryPowerView: View {
                     }
                 }
                 .background(GeometryReader { reader in
-                    Color.clear.preference(key: BatterySizePreferenceKey.self, value: reader.size)
-                        .onPreferenceChange(BatterySizePreferenceKey.self) { size in
-                            iconFooterHeight = size.height
-                        }
+                    Color.clear
+                        .onChange(of: reader.size) { iconFooterHeight = $0.height }
+                        .onAppear { iconFooterHeight = reader.size.height }
                 })
                 .opacity(viewModel.hasError ? 0.2 : 1.0)
             }

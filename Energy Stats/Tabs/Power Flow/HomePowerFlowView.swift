@@ -9,30 +9,6 @@ import Combine
 import Energy_Stats_Core
 import SwiftUI
 
-struct BatteryFlowSizePreferenceKey: PreferenceKey {
-    static var defaultValue: CGSize = .zero
-
-    static func reduce(value: inout CGSize, nextValue: () -> CGSize) {
-        defaultValue = nextValue()
-    }
-}
-
-struct HomeFlowSizePreferenceKey: PreferenceKey {
-    static var defaultValue: CGSize = .zero
-
-    static func reduce(value: inout CGSize, nextValue: () -> CGSize) {
-        defaultValue = nextValue()
-    }
-}
-
-struct GridFlowSizePreferenceKey: PreferenceKey {
-    static var defaultValue: CGSize = .zero
-
-    static func reduce(value: inout CGSize, nextValue: () -> CGSize) {
-        defaultValue = nextValue()
-    }
-}
-
 struct HomePowerFlowView: View {
     @State private var iconFooterHeight: Double = 0
     @State private var lastUpdated = Date()
@@ -61,11 +37,11 @@ struct HomePowerFlowView: View {
 
             InverterView(viewModel: InverterViewModel(configManager: configManager, temperatures: viewModel.inverterTemperatures), appTheme: appTheme)
                 .frame(height: 2)
-                .frame(width: batteryPowerWidth + gridPowerWidth + 20)
+                .frame(width: batteryPowerWidth + gridPowerWidth + (inverterPadding * 5))
                 .padding(.vertical, 2)
                 .zIndex(1)
 
-            HStack {
+            HStack(alignment: .top) {
                 if viewModel.hasBattery || viewModel.hasBatteryError {
                     BatteryPowerView(viewModel: BatteryPowerViewModel(configManager: configManager,
                                                                       batteryStateOfCharge: viewModel.batteryStateOfCharge,
@@ -76,10 +52,9 @@ struct HomePowerFlowView: View {
                                      iconFooterHeight: $iconFooterHeight,
                                      appTheme: appTheme)
                         .background(GeometryReader { reader in
-                            Color.clear.preference(key: BatteryFlowSizePreferenceKey.self, value: reader.size)
-                                .onPreferenceChange(BatteryFlowSizePreferenceKey.self) { size in
-                                    batteryPowerWidth = size.width
-                                }
+                            Color.clear
+                                .onChange(of: reader.size) { batteryPowerWidth = $0.width }
+                                .onAppear { batteryPowerWidth = reader.size.width }
                         })
 
                     Spacer()
@@ -87,20 +62,18 @@ struct HomePowerFlowView: View {
 
                 HomePowerView(amount: viewModel.home, total: viewModel.homeTotal, iconFooterHeight: iconFooterHeight, appTheme: appTheme)
                     .background(GeometryReader { reader in
-                        Color.clear.preference(key: HomeFlowSizePreferenceKey.self, value: reader.size)
-                            .onPreferenceChange(HomeFlowSizePreferenceKey.self) { size in
-                                homePowerWidth = size.width
-                            }
+                        Color.clear
+                            .onChange(of: reader.size) { homePowerWidth = $0.width }
+                            .onAppear { homePowerWidth = reader.size.width }
                     })
 
                 Spacer()
 
                 GridPowerView(amount: viewModel.grid, iconFooterHeight: iconFooterHeight, appTheme: appTheme)
                     .background(GeometryReader { reader in
-                        Color.clear.preference(key: GridFlowSizePreferenceKey.self, value: reader.size)
-                            .onPreferenceChange(GridFlowSizePreferenceKey.self) { size in
-                                gridPowerWidth = size.width
-                            }
+                        Color.clear
+                            .onChange(of: reader.size) { gridPowerWidth = $0.width }
+                            .onAppear { gridPowerWidth = reader.size.width }
                     })
             }
             .padding(.horizontal, 14)
@@ -112,21 +85,25 @@ struct HomePowerFlowView: View {
             self.appTheme = $0
         }
     }
+
+    private var inverterPadding: CGFloat {
+        (viewModel.hasBattery || viewModel.hasBatteryError) ? 4 : 2
+    }
 }
 
 struct PowerSummaryView_Previews: PreviewProvider {
     static var previews: some View {
         HomePowerFlowView(configManager: PreviewConfigManager(),
-                          viewModel: HomePowerFlowViewModel.any(),
-                          appThemePublisher: CurrentValueSubject(AppTheme.mock(decimalPlaces: 3, showInW: false, showInverterTemperature: true)))
+                          viewModel: HomePowerFlowViewModel.any(battery: .any()),
+                          appThemePublisher: CurrentValueSubject(AppTheme.mock(decimalPlaces: 3, showInW: false, showInverterTemperature: true, showHomeTotal: true)))
             .environment(\.locale, .init(identifier: "de"))
     }
 }
 
 extension HomePowerFlowViewModel {
-    static func any() -> HomePowerFlowViewModel {
+    static func any(battery: BatteryViewModel = .any()) -> HomePowerFlowViewModel {
         .init(solar: 2.5,
-              battery: .any(),
+              battery: battery,
               home: 1.5,
               grid: 0.71,
               todaysGeneration: 8.5,

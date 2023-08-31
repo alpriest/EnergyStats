@@ -10,7 +10,7 @@ import Foundation
 public struct BatteryResponse: Decodable {
     public let power: Double
     public let soc: Int
-    public let residual: Int
+    public let residual: Double
     public let temperature: Double
 
     enum CodingKeys: CodingKey {
@@ -20,7 +20,7 @@ public struct BatteryResponse: Decodable {
         case temperature
     }
 
-    public init(power: Double, soc: Int, residual: Int, temperature: Double) {
+    public init(power: Double, soc: Int, residual: Double, temperature: Double) {
         self.power = power
         self.soc = soc
         self.residual = residual

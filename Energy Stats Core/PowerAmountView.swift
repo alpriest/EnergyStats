@@ -95,7 +95,8 @@ public extension AppTheme {
     static func mock(decimalPlaces: Int = 3,
                      showInW: Bool = false,
                      showInverterTemperature: Bool = false,
-                     selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode = .off) -> AppTheme {
+                     selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode = .off,
+                     showHomeTotal: Bool = false) -> AppTheme {
         AppTheme(
             showColouredLines: true,
             showBatteryTemperature: true,
@@ -108,7 +109,7 @@ public extension AppTheme {
             selfSufficiencyEstimateMode: selfSufficiencyEstimateMode,
             showEarnings: false,
             showInverterTemperature: showInverterTemperature,
-            showHomeTotal: false,
+            showHomeTotal: showHomeTotal,
             showInverterIcon: true,
             shouldInvertCT2: false
         )

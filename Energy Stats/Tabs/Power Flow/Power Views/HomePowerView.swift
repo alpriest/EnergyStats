@@ -20,7 +20,7 @@ struct HomePowerView: View {
             PowerFlowView(amount: amount, appTheme: appTheme, showColouredLines: false, type: .homeFlow)
 
             Image(systemName: "house.fill")
-                .font(.system(size: 44))
+                .resizable()
                 .frame(width: 45, height: 45)
                 .accessibilityHidden(true)
                 .padding(.bottom, 1)
@@ -32,6 +32,8 @@ struct HomePowerView: View {
                         .font(.caption)
                         .foregroundColor(Color("text_dimmed"))
                 }
+
+                Spacer()
             }
             .frame(height: iconFooterHeight)
         }
