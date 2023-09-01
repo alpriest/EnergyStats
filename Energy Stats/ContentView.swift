@@ -33,12 +33,6 @@ struct ContentView: View {
                     Task { try await configManager.refreshFirmwareVersions() }
                 }
 
-                if let currentDevice = configManager.currentDevice.value {
-                    if currentDevice.battery == nil && currentDevice.hasBattery {
-                        try await configManager.fetchDevices()
-                    }
-                }
-
                 Task { @MainActor in
                     state = .inactive
                 }
