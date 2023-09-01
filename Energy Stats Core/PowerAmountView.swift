@@ -96,7 +96,8 @@ public extension AppTheme {
                      showInW: Bool = false,
                      showInverterTemperature: Bool = false,
                      selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode = .off,
-                     showHomeTotal: Bool = false) -> AppTheme {
+                     showHomeTotal: Bool = false,
+                     showInverterPlantName: Bool = false) -> AppTheme {
         AppTheme(
             showColouredLines: true,
             showBatteryTemperature: true,
@@ -111,7 +112,8 @@ public extension AppTheme {
             showInverterTemperature: showInverterTemperature,
             showHomeTotal: showHomeTotal,
             showInverterIcon: true,
-            shouldInvertCT2: false
+            shouldInvertCT2: false,
+            showInverterPlantName: showInverterPlantName
         )
     }
 }

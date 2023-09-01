@@ -29,6 +29,7 @@ public struct AppTheme {
     public var showHomeTotal: Bool
     public var showInverterIcon: Bool
     public var shouldInvertCT2: Bool
+    public var showInverterPlantName: Bool
 
     public init(
         showColouredLines: Bool,
@@ -44,7 +45,8 @@ public struct AppTheme {
         showInverterTemperature: Bool,
         showHomeTotal: Bool,
         showInverterIcon: Bool,
-        shouldInvertCT2: Bool
+        shouldInvertCT2: Bool,
+        showInverterPlantName: Bool
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -60,6 +62,7 @@ public struct AppTheme {
         self.showHomeTotal = showHomeTotal
         self.showInverterIcon = showInverterIcon
         self.shouldInvertCT2 = shouldInvertCT2
+        self.showInverterPlantName = showInverterPlantName
     }
 
     public func update(
@@ -76,7 +79,8 @@ public struct AppTheme {
         showInverterTemperature: Bool? = nil,
         showHomeTotal: Bool? = nil,
         showInverterIcon: Bool? = nil,
-        shouldInvertCT2: Bool? = nil
+        shouldInvertCT2: Bool? = nil,
+        showInverterPlantName: Bool? = nil
     ) -> AppTheme {
         AppTheme(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -92,7 +96,8 @@ public struct AppTheme {
             showInverterTemperature: showInverterTemperature ?? self.showInverterTemperature,
             showHomeTotal: showHomeTotal ?? self.showHomeTotal,
             showInverterIcon: showInverterIcon ?? self.showInverterIcon,
-            shouldInvertCT2: shouldInvertCT2 ?? self.shouldInvertCT2
+            shouldInvertCT2: shouldInvertCT2 ?? self.shouldInvertCT2,
+            showInverterPlantName: showInverterPlantName ?? self.showInverterPlantName
         )
     }
 }

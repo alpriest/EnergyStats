@@ -15,6 +15,7 @@ struct InverterSettingsView: View {
     @Binding var showInverterTemperature: Bool
     @Binding var showInverterIcon: Bool
     @Binding var shouldInvertCT2: Bool
+    @Binding var showInverterPlantName: Bool
 
     var body: some View {
         Form {
@@ -30,6 +31,10 @@ struct InverterSettingsView: View {
 
             Toggle(isOn: $showInverterIcon) {
                 Text("Show inverter icon")
+            }
+
+            Toggle(isOn: $showInverterPlantName) {
+                Text("Show inverter plant name")
             }
 
             Section {
@@ -88,7 +93,8 @@ struct InverterSettingsView_Previews: PreviewProvider {
             firmwareVersion: .preview(),
             showInverterTemperature: .constant(true),
             showInverterIcon: .constant(true),
-            shouldInvertCT2: .constant(true)
+            shouldInvertCT2: .constant(true),
+            showInverterPlantName: .constant(true)
         )
     }
 }

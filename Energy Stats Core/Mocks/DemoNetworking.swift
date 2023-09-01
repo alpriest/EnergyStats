@@ -170,6 +170,7 @@ public class MockConfig: Config {
     public var showHomeTotal: Bool = true
     public var showInverterIcon: Bool = true
     public var shouldInvertCT2: Bool = true
+    public var showInverterPlantName: Bool = false
 }
 
 public class PreviewConfigManager: ConfigManager {

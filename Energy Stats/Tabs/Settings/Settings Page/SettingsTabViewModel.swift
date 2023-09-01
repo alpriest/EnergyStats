@@ -10,6 +10,12 @@ import Energy_Stats_Core
 import SwiftUI
 
 class SettingsTabViewModel: ObservableObject {
+    @Published var showInverterPlantName: Bool {
+        didSet {
+            config.showInverterPlantName = showInverterPlantName
+        }
+    }
+
     @Published var showColouredLines: Bool {
         didSet {
             config.showColouredLines = showColouredLines
@@ -118,6 +124,7 @@ class SettingsTabViewModel: ObservableObject {
         showHomeTotal = config.showHomeTotal
         showInverterIcon = config.showInverterIcon
         shouldInvertCT2 = config.shouldInvertCT2
+        showInverterPlantName = config.showInverterPlantName
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }

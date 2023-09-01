@@ -27,6 +27,7 @@ public protocol Config {
     var showHomeTotal: Bool { get set }
     var showInverterIcon: Bool { get set }
     var shouldInvertCT2: Bool { get set }
+    var showInverterPlantName: Bool { get set }
 }
 
 extension UserDefaults {
@@ -93,6 +94,9 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredBool(key: "shouldInvertCT2", defaultValue: false)
     public var shouldInvertCT2: Bool
+
+    @UserDefaultsStoredBool(key: "showInverterPlantName", defaultValue: false)
+    public var showInverterPlantName: Bool
 
     public var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode {
         get {

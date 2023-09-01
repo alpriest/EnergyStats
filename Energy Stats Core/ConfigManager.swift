@@ -50,6 +50,7 @@ public protocol ConfigManaging {
     var showHomeTotal: Bool { get set }
     var showInverterIcon: Bool { get set }
     var shouldInvertCT2: Bool { get set }
+    var showInverterPlantName: Bool { get set }
 }
 
 public class ConfigManager: ConfigManaging {
@@ -80,7 +81,8 @@ public class ConfigManager: ConfigManaging {
                 showInverterTemperature: config.showInverterTemperature,
                 showHomeTotal: config.showHomeTotal,
                 showInverterIcon: config.showInverterIcon,
-                shouldInvertCT2: config.shouldInvertCT2
+                shouldInvertCT2: config.shouldInvertCT2,
+                showInverterPlantName: config.showInverterPlantName
             )
         )
         selectedDeviceID = selectedDeviceID
@@ -377,6 +379,16 @@ public class ConfigManager: ConfigManaging {
             config.shouldInvertCT2 = newValue
             appTheme.send(appTheme.value.update(
                 shouldInvertCT2: config.shouldInvertCT2
+            ))
+        }
+    }
+
+    public var showInverterPlantName: Bool {
+        get { config.showInverterPlantName }
+        set {
+            config.showInverterPlantName = newValue
+            appTheme.send(appTheme.value.update(
+                shouldInvertCT2: config.showInverterPlantName
             ))
         }
     }
