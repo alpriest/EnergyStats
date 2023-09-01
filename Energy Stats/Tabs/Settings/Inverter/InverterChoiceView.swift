@@ -35,7 +35,7 @@ struct InverterChoiceView: View {
                 content: {
                     Picker("Inverter", selection: $viewModel.selectedDeviceID) {
                         ForEach(viewModel.devices, id: \.deviceID) { device in
-                            Text(device.deviceDisplayName)
+                            Text(device.deviceSelectorName)
                                 .tag(device.deviceID)
                         }
                     }

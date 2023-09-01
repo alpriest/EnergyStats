@@ -69,11 +69,11 @@ public struct Device: Codable, Hashable, Identifiable {
     public var id: String { deviceID }
 
     public var deviceDisplayName: String {
-        if let deviceType {
-            return "\(deviceType) (\(plantName))"
-        } else {
-            return "\(deviceID) Re-login to update"
-        }
+        deviceType ?? "\(deviceID) Re-login to update"
+    }
+
+    public var deviceSelectorName: String {
+        "\(deviceDisplayName) \(plantName)"
     }
 
     public init(plantName: String,

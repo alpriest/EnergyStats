@@ -388,7 +388,7 @@ public class ConfigManager: ConfigManaging {
         set {
             config.showInverterPlantName = newValue
             appTheme.send(appTheme.value.update(
-                shouldInvertCT2: config.showInverterPlantName
+                showInverterPlantName: config.showInverterPlantName
             ))
         }
     }

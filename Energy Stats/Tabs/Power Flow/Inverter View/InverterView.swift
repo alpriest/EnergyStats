@@ -112,6 +112,13 @@ struct InverterView: View {
                         } label: {
                             Label(selectableDevice.device.deviceDisplayName,
                                   systemImage: selectableDevice.isSelected ? "checkmark" : "")
+
+                            if appTheme.showInverterPlantName {
+                                OptionalView(selectableDevice.device.plantName) {
+                                    Text($0)
+                                        .font(.caption2)
+                                }
+                            }
                         }
                     }
                 } label: {
@@ -123,10 +130,19 @@ struct InverterView: View {
                 }
                 .buttonStyle(.bordered)
             } else {
-                if appTheme.showInverterTemperature {
-                    Text(viewModel.devices.first?.device.deviceDisplayName ?? "")
-                        .padding(2)
+                VStack {
+                    if appTheme.showInverterTemperature {
+                        Text(viewModel.devices.first?.device.deviceDisplayName ?? "")
+                    }
+
+                    if appTheme.showInverterPlantName {
+                        OptionalView(viewModel.devicePlantName) {
+                            Text($0)
+                                .font(.caption2)
+                        }
+                    }
                 }
+                .padding(2)
             }
         }
         .background(Color("background"))
@@ -136,10 +152,14 @@ struct InverterView: View {
 struct InverterView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            InverterView(viewModel: InverterViewModel(configManager: PreviewConfigManager(), temperatures: InverterTemperatures.any()), appTheme: .mock(showInverterTemperature: true))
+            InverterView(viewModel: InverterViewModel(configManager: PreviewConfigManager(),
+                                                      temperatures: InverterTemperatures.any()),
+                         appTheme: .mock(showInverterTemperature: true, showInverterPlantName: true))
                 .background(Color.gray.opacity(0.3))
 
-            InverterView(viewModel: InverterViewModel(configManager: PreviewConfigManager(), temperatures: InverterTemperatures.any()), appTheme: .mock(showInverterTemperature: false))
+            InverterView(viewModel: InverterViewModel(configManager: PreviewConfigManager(),
+                                                      temperatures: InverterTemperatures.any()),
+                         appTheme: .mock(showInverterTemperature: false))
                 .background(Color.gray.opacity(0.3))
         }
     }
