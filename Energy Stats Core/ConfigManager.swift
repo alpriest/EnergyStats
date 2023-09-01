@@ -185,7 +185,7 @@ public class ConfigManager: ConfigManaging {
     }
 
     public var hasBattery: Bool {
-        currentDevice.value?.battery != nil
+        currentDevice.value?.hasBattery ?? false
     }
 
     public var batteryCapacityW: Int {
@@ -388,7 +388,7 @@ public enum BatteryResponseMapper {
         let minSOC: String
 
         if battery.soc > 0 {
-            batteryCapacity = String(Int(Double(battery.residual) / (Double(battery.soc) / 100.0)))
+            batteryCapacity = String(Int(battery.residual / (Double(battery.soc) / 100.0)))
         } else {
             batteryCapacity = "0"
         }
