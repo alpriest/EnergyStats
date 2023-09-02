@@ -26,10 +26,11 @@ public struct AppTheme {
     public var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode
     public var showEarnings: Bool
     public var showInverterTemperature: Bool
-    public var showHomeTotal: Bool
+    public var showHomeTotalOnPowerFlow: Bool
     public var showInverterIcon: Bool
     public var shouldInvertCT2: Bool
     public var showInverterPlantName: Bool
+    public var showGridTotalsOnPowerFlow: Bool
 
     public init(
         showColouredLines: Bool,
@@ -43,10 +44,11 @@ public struct AppTheme {
         selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode,
         showEarnings: Bool,
         showInverterTemperature: Bool,
-        showHomeTotal: Bool,
+        showHomeTotalOnPowerFlow: Bool,
         showInverterIcon: Bool,
         shouldInvertCT2: Bool,
-        showInverterPlantName: Bool
+        showInverterPlantName: Bool,
+        showGridTotalsOnPowerFlow: Bool
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -59,13 +61,14 @@ public struct AppTheme {
         self.selfSufficiencyEstimateMode = selfSufficiencyEstimateMode
         self.showEarnings = showEarnings
         self.showInverterTemperature = showInverterTemperature
-        self.showHomeTotal = showHomeTotal
+        self.showHomeTotalOnPowerFlow = showHomeTotalOnPowerFlow
         self.showInverterIcon = showInverterIcon
         self.shouldInvertCT2 = shouldInvertCT2
         self.showInverterPlantName = showInverterPlantName
+        self.showGridTotalsOnPowerFlow = showGridTotalsOnPowerFlow
     }
 
-    public func update(
+    public func copy(
         showColouredLines: Bool? = nil,
         showBatteryTemperature: Bool? = nil,
         showSunnyBackground: Bool? = nil,
@@ -77,10 +80,11 @@ public struct AppTheme {
         selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode? = nil,
         showEarnings: Bool? = nil,
         showInverterTemperature: Bool? = nil,
-        showHomeTotal: Bool? = nil,
+        showHomeTotalOnPowerFlow: Bool? = nil,
         showInverterIcon: Bool? = nil,
         shouldInvertCT2: Bool? = nil,
-        showInverterPlantName: Bool? = nil
+        showInverterPlantName: Bool? = nil,
+        showGridTotalsOnPowerFlow: Bool? = nil
     ) -> AppTheme {
         AppTheme(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -94,10 +98,11 @@ public struct AppTheme {
             selfSufficiencyEstimateMode: selfSufficiencyEstimateMode ?? self.selfSufficiencyEstimateMode,
             showEarnings: showEarnings ?? self.showEarnings,
             showInverterTemperature: showInverterTemperature ?? self.showInverterTemperature,
-            showHomeTotal: showHomeTotal ?? self.showHomeTotal,
+            showHomeTotalOnPowerFlow: showHomeTotalOnPowerFlow ?? self.showHomeTotalOnPowerFlow,
             showInverterIcon: showInverterIcon ?? self.showInverterIcon,
             shouldInvertCT2: shouldInvertCT2 ?? self.shouldInvertCT2,
-            showInverterPlantName: showInverterPlantName ?? self.showInverterPlantName
+            showInverterPlantName: showInverterPlantName ?? self.showInverterPlantName,
+            showGridTotalsOnPowerFlow: showGridTotalsOnPowerFlow ?? self.showGridTotalsOnPowerFlow
         )
     }
 }

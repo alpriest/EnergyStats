@@ -24,10 +24,11 @@ public protocol Config {
     var showEarnings: Bool { get set }
     var showInverterTemperature: Bool { get set }
     var selectedParameterGraphVariables: [String] { get set }
-    var showHomeTotal: Bool { get set }
+    var showHomeTotalOnPowerFlow: Bool { get set }
     var showInverterIcon: Bool { get set }
     var shouldInvertCT2: Bool { get set }
     var showInverterPlantName: Bool { get set }
+    var showGridTotalsOnPowerFlow: Bool { get set }
 }
 
 extension UserDefaults {
@@ -87,7 +88,7 @@ public class UserDefaultsConfig: Config {
     public var showInverterTemperature: Bool
 
     @UserDefaultsStoredBool(key: "showHomeTotal", defaultValue: false)
-    public var showHomeTotal: Bool
+    public var showHomeTotalOnPowerFlow: Bool
 
     @UserDefaultsStoredBool(key: "showInverterIcon", defaultValue: true)
     public var showInverterIcon: Bool
@@ -97,6 +98,9 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredBool(key: "showInverterPlantName", defaultValue: false)
     public var showInverterPlantName: Bool
+
+    @UserDefaultsStoredBool(key: "showGridTotalsOnPowerFlow", defaultValue: false)
+    public var showGridTotalsOnPowerFlow: Bool
 
     public var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode {
         get {

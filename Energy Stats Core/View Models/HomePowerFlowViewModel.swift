@@ -25,9 +25,21 @@ public struct HomePowerFlowViewModel: Equatable {
     public let earnings: String
     public let inverterTemperatures: InverterTemperatures?
     public let homeTotal: Double
+    public let gridImportTotal: Double
+    public let gridExportTotal: Double
     private let batteryViewModel: BatteryViewModel
 
-    public init(solar: Double, battery: BatteryViewModel, home: Double, grid: Double, todaysGeneration: Double, earnings: String, inverterTemperatures: InverterTemperatures?, homeTotal: Double) {
+    public init(solar: Double,
+                battery: BatteryViewModel,
+                home: Double,
+                grid: Double,
+                todaysGeneration: Double,
+                earnings: String,
+                inverterTemperatures: InverterTemperatures?,
+                homeTotal: Double,
+                gridImportTotal: Double,
+                gridExportTotal: Double)
+    {
         self.solar = solar
         self.batteryViewModel = battery
         self.home = home
@@ -36,12 +48,14 @@ public struct HomePowerFlowViewModel: Equatable {
         self.earnings = earnings
         self.inverterTemperatures = inverterTemperatures
         self.homeTotal = homeTotal
+        self.gridImportTotal = gridImportTotal
+        self.gridExportTotal = gridExportTotal
     }
 
     public static func ==(lhs: HomePowerFlowViewModel, rhs: HomePowerFlowViewModel) -> Bool {
         lhs.solar == rhs.solar &&
-        lhs.home == rhs.home &&
-        lhs.grid == rhs.grid
+            lhs.home == rhs.home &&
+            lhs.grid == rhs.grid
     }
 
     public var batteryStateOfCharge: Double {
@@ -82,6 +96,8 @@ public extension HomePowerFlowViewModel {
               todaysGeneration: 0.0,
               earnings: "",
               inverterTemperatures: InverterTemperatures(ambient: 0.0, inverter: 0.0),
-              homeTotal: 0)
+              homeTotal: 0,
+              gridImportTotal: 0,
+              gridExportTotal: 0)
     }
 }

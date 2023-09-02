@@ -106,6 +106,16 @@
 "Battery capacity recalculated" = "Battery capacity recalculated";
 "batterySOC_settings_saved" = "Your battery settings were saved";
 "battery_charge_schedule_settings_saved" = "Your charge schedule was saved";
+"export_total" = "Export total";
+"import_total" = "Import total";
+"settings.showHomeTotalOnPowerflow" = "Show daily home totals";
+"settings.showGridTotalsOnPowerflow" = "Show daily grid totals";
+"settings.dataRefreshFrequencyHeader" = "Data Refresh frequency";
+"settings.donateVia" = "Donate via";
+"settings.foxessCommunity" = "FoxESS Community";
+"settings.facebookGroup" = "Facebook Group";
+"settings.debug" = "Debug";
+"settings.faq" = "Frequently Asked Questions";
 
 /* Inverter page */
 "self_use_mode" = "In this mode, the inverter prioritises power allocation as follows:\n\n1. House Load\n2. Battery Charging\n3. Export";
@@ -141,5 +151,7 @@
 "accessibility.batteryTemperature" = "Battery temperature %@ ℃";
 "accessibility.batteryEstimate" = "Battery %@";
 "accessibility.batteryCapacityPercentage" = "Battery capacity %@";
-"accessibility.homeTotalUsage" = "Total home usage today %@";
+"accessibility.homeTotalUsageToday" = "Total home usage today %@";
 "accessibility.totalSolarGenerated" = "Total solar generated %@";
+"accessibility.totalImportedToday" = "Total imported today %@";
+"accessibility.totalExportedToday" = "Total exported today %@";

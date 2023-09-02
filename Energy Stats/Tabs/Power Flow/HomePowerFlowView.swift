@@ -69,7 +69,7 @@ struct HomePowerFlowView: View {
 
                 Spacer()
 
-                GridPowerView(amount: viewModel.grid, iconFooterHeight: iconFooterHeight, appTheme: appTheme)
+                GridPowerView(amount: viewModel.grid, gridExportTotal: viewModel.gridExportTotal, gridImportTotal: viewModel.gridImportTotal, iconFooterHeight: iconFooterHeight, appTheme: appTheme)
                     .background(GeometryReader { reader in
                         Color.clear
                             .onChange(of: reader.size) { gridPowerWidth = $0.width }
@@ -95,7 +95,7 @@ struct PowerSummaryView_Previews: PreviewProvider {
     static var previews: some View {
         HomePowerFlowView(configManager: PreviewConfigManager(),
                           viewModel: HomePowerFlowViewModel.any(battery: .any()),
-                          appThemePublisher: CurrentValueSubject(AppTheme.mock(decimalPlaces: 3, showInW: false, showInverterTemperature: true, showHomeTotal: true)))
+                          appThemePublisher: CurrentValueSubject(AppTheme.mock(decimalPlaces: 3, showInW: false, showInverterTemperature: true, showHomeTotalOnPowerFlow: true)))
             .environment(\.locale, .init(identifier: "de"))
     }
 }
@@ -109,7 +109,9 @@ extension HomePowerFlowViewModel {
               todaysGeneration: 8.5,
               earnings: "GBP(£) 1 / 5 / 99",
               inverterTemperatures: InverterTemperatures(ambient: 4.0, inverter: 9.0),
-              homeTotal: 1.0)
+              homeTotal: 1.0,
+              gridImportTotal: 12.0,
+              gridExportTotal: 2.4)
     }
 }
 

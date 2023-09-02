@@ -47,10 +47,11 @@ public protocol ConfigManaging {
     var showEarnings: Bool { get set }
     var showInverterTemperature: Bool { get set }
     var selectedParameterGraphVariables: [String] { get set }
-    var showHomeTotal: Bool { get set }
+    var showHomeTotalOnPowerFlow: Bool { get set }
     var showInverterIcon: Bool { get set }
     var shouldInvertCT2: Bool { get set }
     var showInverterPlantName: Bool { get set }
+    var showGridTotalsOnPowerFlow: Bool { get set }
 }
 
 public class ConfigManager: ConfigManaging {
@@ -79,10 +80,11 @@ public class ConfigManager: ConfigManaging {
                 selfSufficiencyEstimateMode: config.selfSufficiencyEstimateMode,
                 showEarnings: config.showEarnings,
                 showInverterTemperature: config.showInverterTemperature,
-                showHomeTotal: config.showHomeTotal,
+                showHomeTotalOnPowerFlow: config.showHomeTotalOnPowerFlow,
                 showInverterIcon: config.showInverterIcon,
                 shouldInvertCT2: config.shouldInvertCT2,
-                showInverterPlantName: config.showInverterPlantName
+                showInverterPlantName: config.showInverterPlantName,
+                showGridTotalsOnPowerFlow: config.showGridTotalsOnPowerFlow
             )
         )
         selectedDeviceID = selectedDeviceID
@@ -213,7 +215,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showColouredLines }
         set {
             config.showColouredLines = newValue
-            appTheme.send(appTheme.value.update(
+            appTheme.send(appTheme.value.copy(
                 showColouredLines: config.showColouredLines
             ))
         }
@@ -223,7 +225,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showBatteryTemperature }
         set {
             config.showBatteryTemperature = newValue
-            appTheme.send(appTheme.value.update(
+            appTheme.send(appTheme.value.copy(
                 showBatteryTemperature: config.showBatteryTemperature
             ))
         }
@@ -233,7 +235,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showBatteryEstimate }
         set {
             config.showBatteryEstimate = newValue
-            appTheme.send(appTheme.value.update(
+            appTheme.send(appTheme.value.copy(
                 showBatteryEstimate: config.showBatteryEstimate
             ))
         }
@@ -243,7 +245,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showUsableBatteryOnly }
         set {
             config.showUsableBatteryOnly = newValue
-            appTheme.send(appTheme.value.update(
+            appTheme.send(appTheme.value.copy(
                 showUsableBatteryOnly: config.showUsableBatteryOnly
             ))
         }
@@ -253,7 +255,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showTotalYield }
         set {
             config.showTotalYield = newValue
-            appTheme.send(appTheme.value.update(
+            appTheme.send(appTheme.value.copy(
                 showTotalYield: config.showTotalYield
             ))
         }
@@ -268,7 +270,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showSunnyBackground }
         set {
             config.showSunnyBackground = newValue
-            appTheme.send(appTheme.value.update(
+            appTheme.send(appTheme.value.copy(
                 showSunnyBackground: config.showSunnyBackground
             ))
         }
@@ -278,7 +280,7 @@ public class ConfigManager: ConfigManaging {
         get { config.selfSufficiencyEstimateMode }
         set {
             config.selfSufficiencyEstimateMode = newValue
-            appTheme.send(appTheme.value.update(
+            appTheme.send(appTheme.value.copy(
                 selfSufficiencyEstimateMode: config.selfSufficiencyEstimateMode
             ))
         }
@@ -288,7 +290,7 @@ public class ConfigManager: ConfigManaging {
         get { config.decimalPlaces }
         set {
             config.decimalPlaces = newValue
-            appTheme.send(appTheme.value.update(
+            appTheme.send(appTheme.value.copy(
                 decimalPlaces: config.decimalPlaces
             ))
         }
@@ -298,7 +300,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showInW }
         set {
             config.showInW = newValue
-            appTheme.send(appTheme.value.update(
+            appTheme.send(appTheme.value.copy(
                 showInW: config.showInW
             ))
         }
@@ -308,7 +310,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showEarnings }
         set {
             config.showEarnings = newValue
-            appTheme.send(appTheme.value.update(
+            appTheme.send(appTheme.value.copy(
                 showEarnings: config.showEarnings
             ))
         }
@@ -318,7 +320,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showInverterTemperature }
         set {
             config.showInverterTemperature = newValue
-            appTheme.send(appTheme.value.update(
+            appTheme.send(appTheme.value.copy(
                 showInverterTemperature: config.showInverterTemperature
             ))
         }
@@ -353,12 +355,12 @@ public class ConfigManager: ConfigManaging {
         }
     }
 
-    public var showHomeTotal: Bool {
-        get { config.showHomeTotal }
+    public var showHomeTotalOnPowerFlow: Bool {
+        get { config.showHomeTotalOnPowerFlow }
         set {
-            config.showHomeTotal = newValue
-            appTheme.send(appTheme.value.update(
-                showHomeTotal: config.showHomeTotal
+            config.showHomeTotalOnPowerFlow = newValue
+            appTheme.send(appTheme.value.copy(
+                showHomeTotalOnPowerFlow: config.showHomeTotalOnPowerFlow
             ))
         }
     }
@@ -367,7 +369,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showInverterIcon }
         set {
             config.showInverterIcon = newValue
-            appTheme.send(appTheme.value.update(
+            appTheme.send(appTheme.value.copy(
                 showInverterIcon: config.showInverterIcon
             ))
         }
@@ -377,7 +379,7 @@ public class ConfigManager: ConfigManaging {
         get { config.shouldInvertCT2 }
         set {
             config.shouldInvertCT2 = newValue
-            appTheme.send(appTheme.value.update(
+            appTheme.send(appTheme.value.copy(
                 shouldInvertCT2: config.shouldInvertCT2
             ))
         }
@@ -387,8 +389,18 @@ public class ConfigManager: ConfigManaging {
         get { config.showInverterPlantName }
         set {
             config.showInverterPlantName = newValue
-            appTheme.send(appTheme.value.update(
+            appTheme.send(appTheme.value.copy(
                 showInverterPlantName: config.showInverterPlantName
+            ))
+        }
+    }
+
+    public var showGridTotalsOnPowerFlow: Bool {
+        get { config.showGridTotalsOnPowerFlow }
+        set {
+            config.showGridTotalsOnPowerFlow = newValue
+            appTheme.send(appTheme.value.copy(
+                showGridTotalsOnPowerFlow: config.showGridTotalsOnPowerFlow
             ))
         }
     }

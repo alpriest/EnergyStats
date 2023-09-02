@@ -175,6 +175,16 @@
 "battery_charge_schedule_settings_saved" = "Der Batterieladezeitplan wurde gespeichert";
 "Touch the graph to see values at that time" = "Berühren Sie den Graphen, um Werte zu dieser Zeit anzuzeigen";
 "Usage today" = "Verbrauch heute";
+"export_total" = "Gesamtausfuhr";
+"import_total" = "Gesamtimport";
+"settings.showHomeTotalOnPowerflow" = "Tägliche Gesamtübersicht zu Hause anzeigen";
+"settings.showGridTotalsOnPowerflow" = "Tägliche Gesamtübersicht des Netzstroms anzeigen";
+"settings.dataRefreshFrequencyHeader" = "Datenaktualisierungsfrequenz";
+"settings.donateVia" = "Spenden über";
+"settings.foxessCommunity" = "FoxESS-Community";
+"settings.facebookGroup" = "Facebook-Gruppe";
+"settings.debug" = "Debuggen";
+"settings.faq" = "Häufig gestellte Fragen";
 
 /* Inverter page */
 "self_use_mode" = "In diesem Modus priorisiert der Wechselrichter die Stromzuweisung wie folgt:\n\n1. Hauslast\n2. Batterieladung\n3. Einspeisung";
@@ -211,5 +221,7 @@
 "accessibility.batteryTemperature" = "Batterietemperatur: %@ ℃";
 "accessibility.batteryEstimate" = "Batterie %@";
 "accessibility.batteryCapacityPercentage" = "Batteriekapazität: %@";
-"accessibility.homeTotalUsage" = "Gesamtnutzung zu Hause heute %@";
+"accessibility.homeTotalUsageToday" = "Gesamtnutzung zu Hause heute %@";
 "accessibility.totalSolarGenerated" = "Gesamte solare Erzeugung %@";
+"accessibility.totalImportedToday" = "Heute insgesamt importiert %@";
+"accessibility.totalExportedToday" = "Heute insgesamt exportiert %@";

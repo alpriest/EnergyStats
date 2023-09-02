@@ -167,10 +167,11 @@ public class MockConfig: Config {
     public var showEarnings: Bool = false
     public var showInverterTemperature: Bool = false
     public var selectedParameterGraphVariables: [String] = []
-    public var showHomeTotal: Bool = true
+    public var showHomeTotalOnPowerFlow: Bool = true
     public var showInverterIcon: Bool = true
     public var shouldInvertCT2: Bool = true
     public var showInverterPlantName: Bool = false
+    public var showGridTotalsOnPowerFlow: Bool = false
 }
 
 public class PreviewConfigManager: ConfigManager {

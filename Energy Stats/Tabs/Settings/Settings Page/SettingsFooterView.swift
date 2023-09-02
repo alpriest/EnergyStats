@@ -55,7 +55,7 @@ struct SettingsFooterView: View {
                         let url = URL(string: "https://paypal.me/alpriest")!
                         UIApplication.shared.open(url, options: [:], completionHandler: nil)
                     } label: {
-                        Text("Donate via")
+                        Text("settings.donateVia")
                             .accessibilityValue("Donate via PayPal")
                         Image("paypal_logo")
                             .resizable()

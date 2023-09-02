@@ -139,7 +139,7 @@ class PowerFlowTabViewModel: ObservableObject {
                                 self.configManager.variables.named("meterPower2")]
 
             let totals = try await self.network.fetchReport(deviceID: currentDevice.deviceID,
-                                                            variables: [.loads],
+                                                            variables: [.loads, .feedIn, .gridConsumption],
                                                             queryDate: .now(),
                                                             reportType: .month)
             let earnings = try await self.network.fetchEarnings(deviceID: currentDevice.deviceID)
@@ -164,14 +164,18 @@ class PowerFlowTabViewModel: ObservableObject {
                 }
             }
 
-            let summary = HomePowerFlowViewModel(solar: currentViewModel.currentSolarPower,
-                                                 battery: battery,
-                                                 home: currentViewModel.currentHomeConsumption,
-                                                 grid: currentViewModel.currentGrid,
-                                                 todaysGeneration: earnings.today.generation,
-                                                 earnings: self.makeEarnings(earnings),
-                                                 inverterTemperatures: currentViewModel.currentTemperatures,
-                                                 homeTotal: totalsViewModel.home)
+            let summary = HomePowerFlowViewModel(
+                solar: currentViewModel.currentSolarPower,
+                battery: battery,
+                home: currentViewModel.currentHomeConsumption,
+                grid: currentViewModel.currentGrid,
+                todaysGeneration: earnings.today.generation,
+                earnings: self.makeEarnings(earnings),
+                inverterTemperatures: currentViewModel.currentTemperatures,
+                homeTotal: totalsViewModel.home,
+                gridImportTotal: totalsViewModel.gridImport,
+                gridExportTotal: totalsViewModel.gridExport
+            )
 
             self.state = .loaded(.empty()) // refreshes the marching ants line speed
             try await Task.sleep(nanoseconds: 1000)

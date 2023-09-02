@@ -17,6 +17,8 @@ public enum AmountType {
     case totalYield
     case homeUsage
     case totalSolarGenerated
+    case totalImport
+    case totalExport
     case `default`
 }
 
@@ -46,9 +48,13 @@ extension AmountType {
         case .totalYield:
             return String(format: String(accessibilityKey: .totalYield), arguments: [amountWithUnit])
         case .homeUsage:
-            return String(format: String(accessibilityKey: .homeTotalUsage), arguments: [amountWithUnit])
+            return String(format: String(accessibilityKey: .homeTotalUsageToday), arguments: [amountWithUnit])
         case .totalSolarGenerated:
             return String(format: String(accessibilityKey: .totalSolarGenerated), arguments: [amountWithUnit])
+        case .totalImport:
+            return String(format: String(accessibilityKey: .totalImportedToday), arguments: [amountWithUnit])
+        case .totalExport:
+            return String(format: String(accessibilityKey: .totalExportedToday), arguments: [amountWithUnit])
         case .default:
             return amountWithUnit
         }

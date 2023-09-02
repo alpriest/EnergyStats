@@ -43,48 +43,8 @@ struct SettingsTabView: View {
                     Text("Datalogger")
                 }
 
-                Section(
-                    content: {
-                        Group {
-                            Toggle(isOn: $viewModel.showColouredLines) {
-                                Text("Show coloured flow lines")
-                            }
+                DisplaySettingsView(viewModel: viewModel, configManager: configManager)
 
-                            Toggle(isOn: $viewModel.showTotalYield) {
-                                Text("Show total yield")
-                            }
-
-                            Toggle(isOn: $viewModel.showHomeTotal) {
-                                Text("Show total home usage")
-                            }
-
-                            Toggle(isOn: $viewModel.showSunnyBackground) {
-                                Text("Show sunshine background")
-                            }
-                        }
-
-                        HStack {
-                            Text("Decimal places").padding(.trailing)
-                            Spacer()
-                            Picker("Decimal places", selection: $viewModel.decimalPlaces) {
-                                Text("2").tag(2)
-                                Text("3").tag(3)
-                            }.pickerStyle(.segmented)
-                        }
-
-                        Toggle(isOn: $viewModel.showInW) {
-                            Text("Show values in Watts")
-                        }
-
-                        NavigationLink {
-                            ApproximationsSettingsView(configManager: configManager)
-                        } label: {
-                            Text("Approximations")
-                        }
-                    },
-                    header: {
-                        Text("Display")
-                    })
                 Section(
                     content: {
                         Picker("Data Refresh frequency", selection: $viewModel.refreshFrequency) {
@@ -94,7 +54,7 @@ struct SettingsTabView: View {
                         }
                         .pickerStyle(.segmented)
                     }, header: {
-                        Text("Data Refresh frequency")
+                        Text("settings.dataRefreshFrequencyHeader")
                     }, footer: {
                         Text("FoxESS Cloud data is updated every 5 minutes. 'Auto' attempts to synchronise data fetches just after the data is uploaded from your inverter to minimise server load.")
                     })
@@ -102,11 +62,11 @@ struct SettingsTabView: View {
                 Section {
                     NavigationLink("FoxESS Cloud Status") { WebView(url: URL(string: "https://monitor.foxesscommunity.com/status/foxess")!) }
 
-                    ExternalWebNavigationLink(url: "https://www.foxesscommunity.com", title: "FoxESS Community")
-                    ExternalWebNavigationLink(url: "https://www.facebook.com/groups/foxessownersgroup", title: "Facebook group")
+                    ExternalWebNavigationLink(url: "https://www.foxesscommunity.com", title: .foxessCommunity)
+                    ExternalWebNavigationLink(url: "https://www.facebook.com/groups/foxessownersgroup", title:.facebookGroup)
 
-                    NavigationLink("Frequently Asked Questions") { FAQView() }
-                    NavigationLink("Debug") { DebugDataView(networking: networking, configManager: configManager) }
+                    NavigationLink("settings.faq") { FAQView() }
+                    NavigationLink("settings.debug") { DebugDataView(networking: networking, configManager: configManager) }
                 }
 
                 SettingsFooterView(username: viewModel.username, onLogout: viewModel.logout, appVersion: viewModel.appVersion)

@@ -26,7 +26,7 @@ struct HomePowerView: View {
                 .padding(.bottom, 1)
 
             VStack {
-                if appTheme.showHomeTotal {
+                if appTheme.showHomeTotalOnPowerFlow {
                     EnergyText(amount: total, appTheme: appTheme, type: .homeUsage)
                     Text("Usage today")
                         .font(.caption)

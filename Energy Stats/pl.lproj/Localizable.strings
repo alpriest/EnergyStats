@@ -155,6 +155,14 @@
 "Battery capacity recalculated" = "Pojemność baterii przeliczona";
 "batterySOC_settings_saved" = "Zmiany w SOC baterii zostały zapisane";
 "battery_charge_schedule_settings_saved" = "Zapisano harmonogram ładowania baterii";
+"settings.showHomeTotalOnPowerflow" = "Pokaż codzienne sumy w domu";
+"settings.showGridTotalsOnPowerflow" = "Pokaż codzienne sumy z sieci";
+"settings.dataRefreshFrequencyHeader" = "Częstotliwość odświeżania danych";
+"settings.donateVia" = "Wpłata za pośrednictwem";
+"settings.foxessCommunity" = "Społeczność FoxESS";
+"settings.facebookGroup" = "Grupa na Facebooku";
+"settings.debug" = "Debugowanie";
+"settings.faq" = "Najczęściej Zadawane Pytania";
 
 /* Inverter page */
 "self_use_mode" = "W tym trybie inwerter priorytetowo alokuje moc zgodnie z następującym porządkiem:\n\n1. Obciążenie domu\n2. Ładowanie baterii\n3. Eksport";
@@ -176,6 +184,8 @@
 "Invert CT2 values when detected" = "Odwróć wartości CT2 po wykryciu";
 "Advanced" = "Zaawansowane";
 "invert_ct2_footnote" = "Jeśli masz kilka falowników i wartości generacji PV są nieprawidłowe, spróbuj to przełączyć.";
+"export_total" = "Eksport całkowity";
+"import_total" = "Import całkowity";
 
 /* Accessibility */
 "accessibility.inverter" = "Falownik";
@@ -191,5 +201,7 @@
 "accessibility.batteryTemperature" = "Temperatura baterii: %@ ℃";
 "accessibility.batteryEstimate" = "Bateria %@";
 "accessibility.batteryCapacityPercentage" = "Pojemność baterii: %@";
-"accessibility.homeTotalUsage" = "Całkowite dzisiejsze zużycie w domu %@";
+"accessibility.homeTotalUsageToday" = "Całkowite dzisiejsze zużycie w domu %@";
 "accessibility.totalSolarGenerated" = "Całkowicie wygenerowana energia słoneczna %@";
+"accessibility.totalImportedToday" = "Łącznie importowane dzisiaj %@";
+"accessibility.totalExportedToday" = "Łącznie wyeksportowane dzisiaj %@";

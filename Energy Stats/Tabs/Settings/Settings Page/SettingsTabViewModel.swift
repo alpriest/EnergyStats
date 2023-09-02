@@ -81,9 +81,9 @@ class SettingsTabViewModel: ObservableObject {
     @Published var hasBattery: Bool
     @Published var firmwareVersions: DeviceFirmwareVersion?
 
-    @Published var showHomeTotal: Bool {
+    @Published var showHomeTotalOnPowerFlow: Bool {
         didSet {
-            config.showHomeTotal = showHomeTotal
+            config.showHomeTotalOnPowerFlow = showHomeTotalOnPowerFlow
         }
     }
 
@@ -96,6 +96,12 @@ class SettingsTabViewModel: ObservableObject {
     @Published var shouldInvertCT2: Bool {
         didSet {
             config.shouldInvertCT2 = shouldInvertCT2
+        }
+    }
+
+    @Published var showGridTotalsOnPowerFlow: Bool {
+        didSet {
+            config.showGridTotalsOnPowerFlow = showGridTotalsOnPowerFlow
         }
     }
 
@@ -121,10 +127,11 @@ class SettingsTabViewModel: ObservableObject {
         firmwareVersions = config.firmwareVersions
         showTotalYield = config.showTotalYield
         showInverterTemperature = config.showInverterTemperature
-        showHomeTotal = config.showHomeTotal
+        showHomeTotalOnPowerFlow = config.showHomeTotalOnPowerFlow
         showInverterIcon = config.showInverterIcon
         shouldInvertCT2 = config.shouldInvertCT2
         showInverterPlantName = config.showInverterPlantName
+        showGridTotalsOnPowerFlow = config.showGridTotalsOnPowerFlow
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }

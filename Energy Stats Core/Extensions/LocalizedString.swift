@@ -31,6 +31,9 @@ public struct LocalizedString {
         case batteryChargeScheduleSettingsWereSaved = "battery_charge_schedule_settings_saved"
         case errorTitle = "error_title"
         case batteryReadError = "battery_read_error"
+        case foxessCommunity = "settings.foxessCommunity"
+        case facebookGroup = "settings.facebookGroup"
+        case debug = "settings.debug"
 
         public enum Accessibility: String, RawRepresentable {
             case inverter = "accessibility.inverter"
@@ -46,8 +49,10 @@ public struct LocalizedString {
             case totalYield = "accessibility.yieldToday"
             case batteryTemperature = "accessibility.batteryTemperature"
             case batteryEstimate = "accessibility.batteryEstimate"
-            case homeTotalUsage = "accessibility.homeTotalUsage"
+            case homeTotalUsageToday = "accessibility.homeTotalUsageToday"
             case totalSolarGenerated = "accessibility.totalSolarGenerated"
+            case totalImportedToday = "accessibility.totalImportedToday"
+            case totalExportedToday = "accessibility.totalExportedToday"
         }
     }
 }
