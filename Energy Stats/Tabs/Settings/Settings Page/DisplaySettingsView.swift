@@ -62,6 +62,7 @@ struct DisplaySettingsView: View {
     }
 }
 
+#if DEBUG
 struct DisplaySettingsView_Previews: PreviewProvider {
     static var previews: some View {
         DisplaySettingsView(
@@ -72,3 +73,4 @@ struct DisplaySettingsView_Previews: PreviewProvider {
             configManager: PreviewConfigManager())
     }
 }
+#endif
