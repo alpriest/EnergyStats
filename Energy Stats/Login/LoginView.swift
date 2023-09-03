@@ -5,8 +5,8 @@
 //  Created by Alistair Priest on 10/09/2022.
 //
 
-import SwiftUI
 import Energy_Stats_Core
+import SwiftUI
 
 struct LoginView: View {
     @State private var username: String = ""

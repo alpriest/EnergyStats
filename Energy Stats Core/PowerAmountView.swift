@@ -90,31 +90,3 @@ struct EnergyAmountView_Previews: PreviewProvider {
         PowerAmountView(amount: 0.310, backgroundColor: .red, textColor: .black, appTheme: AppTheme.mock(), type: .solarFlow)
     }
 }
-
-public extension AppTheme {
-    static func mock(decimalPlaces: Int = 3,
-                     showInW: Bool = false,
-                     showInverterTemperature: Bool = false,
-                     selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode = .off,
-                     showHomeTotalOnPowerFlow: Bool = false,
-                     showInverterPlantName: Bool = false) -> AppTheme {
-        AppTheme(
-            showColouredLines: true,
-            showBatteryTemperature: true,
-            showSunnyBackground: true,
-            decimalPlaces: decimalPlaces,
-            showBatteryEstimate: true,
-            showUsableBatteryOnly: false,
-            showInW: showInW,
-            showTotalYield: false,
-            selfSufficiencyEstimateMode: selfSufficiencyEstimateMode,
-            showEarnings: false,
-            showInverterTemperature: showInverterTemperature,
-            showHomeTotalOnPowerFlow: showHomeTotalOnPowerFlow,
-            showInverterIcon: true,
-            shouldInvertCT2: false,
-            showInverterPlantName: showInverterPlantName,
-            showGridTotalsOnPowerFlow: false
-        )
-    }
-}
