@@ -9,14 +9,6 @@ import Combine
 import Energy_Stats_Core
 import SwiftUI
 
-struct BatterySizePreferenceKey: PreferenceKey {
-    static var defaultValue: CGSize = .zero
-
-    static func reduce(value: inout CGSize, nextValue: () -> CGSize) {
-        defaultValue = nextValue()
-    }
-}
-
 struct BatteryPowerViewModel {
     private let actualBatteryStateOfCharge: Double
     private(set) var batteryChargekWh: Double
@@ -64,8 +56,6 @@ struct BatteryPowerViewModel {
 
 struct BatteryPowerView: View {
     let viewModel: BatteryPowerViewModel
-    @Binding var iconFooterHeight: Double
-    @AppStorage("showBatteryAsResidual") private var batteryResidual: Bool = false
     let appTheme: AppTheme
     @State private var alertContent: AlertContent?
 
@@ -80,41 +70,6 @@ struct BatteryPowerView: View {
                     .frame(width: 45, height: 45)
                     .accessibilityHidden(true)
                     .opacity(viewModel.hasError ? 0.2 : 1.0)
-
-                VStack {
-                    Group {
-                        if batteryResidual {
-                            EnergyText(amount: viewModel.batteryStoredChargekWh, appTheme: appTheme, type: .batteryCapacity)
-                        } else {
-                            Text(viewModel.batteryStateOfCharge, format: .percent)
-                                .accessibilityLabel(String(format: String(accessibilityKey: .batteryCapacityPercentage), String(describing: viewModel.batteryStateOfCharge.percent())))
-                        }
-                    }.onTapGesture {
-                        batteryResidual.toggle()
-                    }
-
-                    if appTheme.showBatteryTemperature {
-                        (Text(viewModel.temperature, format: .number) + Text("°C"))
-                            .accessibilityElement(children: .ignore)
-                            .accessibilityLabel(String(format: String(accessibilityKey: .batteryTemperature), viewModel.temperature.roundedToString(decimalPlaces: 2)))
-                    }
-
-                    if appTheme.showBatteryEstimate {
-                        OptionalView(viewModel.batteryExtra) {
-                            Text($0)
-                                .multilineTextAlignment(.center)
-                                .font(.caption)
-                                .foregroundColor(Color("text_dimmed"))
-                                .accessibilityLabel(String(format: String(accessibilityKey: .batteryEstimate), $0))
-                        }
-                    }
-                }
-                .background(GeometryReader { reader in
-                    Color.clear
-                        .onChange(of: reader.size) { iconFooterHeight = $0.height }
-                        .onAppear { iconFooterHeight = reader.size.height }
-                })
-                .opacity(viewModel.hasError ? 0.2 : 1.0)
             }
 
             if viewModel.hasError {
@@ -148,7 +103,7 @@ struct BatteryPowerView_Previews: PreviewProvider {
     struct FakeError: Error {}
 
     static var previews: some View {
-        BatteryPowerView(viewModel: BatteryPowerViewModel.any(error: FakeError()), iconFooterHeight: .constant(0),
+        BatteryPowerView(viewModel: BatteryPowerViewModel.any(error: FakeError()),
                          appTheme: AppTheme.mock())
     }
 }

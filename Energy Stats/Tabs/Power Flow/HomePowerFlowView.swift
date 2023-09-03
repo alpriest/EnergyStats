@@ -13,9 +13,6 @@ struct HomePowerFlowView: View {
     @State private var iconFooterHeight: Double = 0
     @State private var lastUpdated = Date()
     @State private var appTheme: AppTheme = .mock()
-    @State private var batteryPowerWidth: CGFloat = 0.0
-    @State private var homePowerWidth: CGFloat = 0.0
-    @State private var gridPowerWidth: CGFloat = 0.0
     @State private var size: CGSize = .zero
     private let configManager: ConfigManaging
     private let viewModel: HomePowerFlowViewModel
@@ -37,7 +34,7 @@ struct HomePowerFlowView: View {
 
             InverterView(viewModel: InverterViewModel(configManager: configManager, temperatures: viewModel.inverterTemperatures), appTheme: appTheme)
                 .frame(height: 2)
-                .frame(width: batteryPowerWidth + gridPowerWidth + (inverterPadding * 5))
+                .frame(width: inverterLineWidth)
                 .padding(.vertical, 2)
                 .zIndex(1)
 
@@ -49,35 +46,51 @@ struct HomePowerFlowView: View {
                                                                       temperature: viewModel.batteryTemperature,
                                                                       batteryResidual: viewModel.batteryResidual,
                                                                       error: viewModel.batteryError),
-                                     iconFooterHeight: $iconFooterHeight,
                                      appTheme: appTheme)
-                        .background(GeometryReader { reader in
-                            Color.clear
-                                .onChange(of: reader.size) { batteryPowerWidth = $0.width }
-                                .onAppear { batteryPowerWidth = reader.size.width }
-                        })
+                        .frame(width: columnWidth)
 
-                    Spacer()
+                    Spacer().frame(width: horizontalPadding)
                 }
 
-                HomePowerView(amount: viewModel.home, total: viewModel.homeTotal, iconFooterHeight: iconFooterHeight, appTheme: appTheme)
-                    .background(GeometryReader { reader in
-                        Color.clear
-                            .onChange(of: reader.size) { homePowerWidth = $0.width }
-                            .onAppear { homePowerWidth = reader.size.width }
-                    })
+                HomePowerView(amount: viewModel.home, appTheme: appTheme)
+                    .frame(width: columnWidth)
 
-                Spacer()
+                Spacer().frame(width: horizontalPadding)
 
-                GridPowerView(amount: viewModel.grid, gridExportTotal: viewModel.gridExportTotal, gridImportTotal: viewModel.gridImportTotal, iconFooterHeight: iconFooterHeight, appTheme: appTheme)
-                    .background(GeometryReader { reader in
-                        Color.clear
-                            .onChange(of: reader.size) { gridPowerWidth = $0.width }
-                            .onAppear { gridPowerWidth = reader.size.width }
-                    })
+                GridPowerView(amount: viewModel.grid, appTheme: appTheme)
+                    .frame(width: columnWidth)
             }
-            .padding(.horizontal, 14)
+            .padding(.bottom, 4)
+            .padding(.horizontal, horizontalPadding)
+
+            // Totals
+            HStack(alignment: .top) {
+                if viewModel.hasBattery || viewModel.hasBatteryError {
+                    BatteryPowerFooterView(viewModel: BatteryPowerViewModel(configManager: configManager,
+                                                                            batteryStateOfCharge: viewModel.batteryStateOfCharge,
+                                                                            batteryChargekWH: viewModel.battery,
+                                                                            temperature: viewModel.batteryTemperature,
+                                                                            batteryResidual: viewModel.batteryResidual,
+                                                                            error: viewModel.batteryError),
+                                           appTheme: appTheme)
+                        .frame(width: columnWidth)
+
+                    Spacer().frame(width: horizontalPadding)
+                }
+
+                HomePowerFooterView(amount: viewModel.homeTotal, appTheme: appTheme)
+                    .frame(width: columnWidth)
+
+                Spacer().frame(width: horizontalPadding)
+
+                GridPowerFooterView(importTotal: viewModel.gridImportTotal,
+                                    exportTotal: viewModel.gridExportTotal,
+                                    appTheme: appTheme)
+                    .frame(width: columnWidth)
+            }
             .padding(.bottom, 16)
+            .padding(.horizontal, horizontalPadding)
+
         }.background(GeometryReader { reader in
             Color.clear.onAppear { size = reader.size }.onChange(of: reader.size) { newValue in size = newValue }
         })
@@ -86,8 +99,27 @@ struct HomePowerFlowView: View {
         }
     }
 
+    private let horizontalPadding: CGFloat = 14
+    private var columnWidth: CGFloat {
+        let spacerCount: CGFloat = 3 + (showingBatteryColumn ? 1 : 0)
+        return (UIScreen.main.bounds.width - (horizontalPadding * spacerCount)) / (showingBatteryColumn ? 3 : 2)
+    }
+
+    private var columnCount: CGFloat {
+        showingBatteryColumn ? 3 : 2
+    }
+
     private var inverterPadding: CGFloat {
-        (viewModel.hasBattery || viewModel.hasBatteryError) ? 4 : 2
+        showingBatteryColumn ? 6 : 2
+    }
+
+    private var showingBatteryColumn: Bool {
+        viewModel.hasBattery || viewModel.hasBatteryError
+    }
+
+    private var inverterLineWidth: CGFloat {
+        let lineWidth: CGFloat = 4
+        return columnWidth * (columnCount - 1) + (horizontalPadding * (columnCount - 1)) + (2.0 * (lineWidth / 2.0))
     }
 }
 
