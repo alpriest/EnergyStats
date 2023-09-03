@@ -110,7 +110,7 @@ class StatsTabViewModel: ObservableObject {
         else { return }
 
         homeUsage = loads
-        totalSolarGenerated = min(0, (batteryCharge - batteryDischarge - grid + loads + feedIn))
+        totalSolarGenerated = Swift.max(0, (batteryCharge - batteryDischarge - grid + loads + feedIn))
 
         let netResult = NetSelfSufficiencyCalculator.calculate(
             grid: grid,
