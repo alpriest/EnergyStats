@@ -1,5 +1,5 @@
 //
-//  PowerSummaryView.swift
+//  LoadedPowerFlowView.swift
 //  Energy Stats
 //
 //  Created by Alistair Priest on 08/09/2022.
@@ -9,7 +9,7 @@ import Combine
 import Energy_Stats_Core
 import SwiftUI
 
-struct HomePowerFlowView: View {
+struct LoadedPowerFlowView: View {
     @State private var iconFooterHeight: Double = 0
     @State private var appTheme: AppTheme = .mock()
     @State private var size: CGSize = .zero
@@ -124,9 +124,9 @@ struct HomePowerFlowView: View {
 
 struct PowerSummaryView_Previews: PreviewProvider {
     static var previews: some View {
-        HomePowerFlowView(configManager: PreviewConfigManager(),
-                          viewModel: HomePowerFlowViewModel.any(battery: .any()),
-                          appThemePublisher: CurrentValueSubject(AppTheme.mock(decimalPlaces: 3, showInW: false, showInverterTemperature: true, showHomeTotalOnPowerFlow: true)))
+        LoadedPowerFlowView(configManager: PreviewConfigManager(),
+                            viewModel: HomePowerFlowViewModel.any(battery: .any()),
+                            appThemePublisher: CurrentValueSubject(AppTheme.mock(decimalPlaces: 3, showInW: false, showInverterTemperature: true, showHomeTotalOnPowerFlow: true)))
             .environment(\.locale, .init(identifier: "de"))
     }
 }
