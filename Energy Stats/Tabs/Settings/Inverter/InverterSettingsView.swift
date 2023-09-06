@@ -16,6 +16,7 @@ struct InverterSettingsView: View {
     @Binding var showInverterIcon: Bool
     @Binding var shouldInvertCT2: Bool
     @Binding var showInverterPlantName: Bool
+    @Binding var showInverterTypeName: Bool
 
     var body: some View {
         Form {
@@ -31,6 +32,10 @@ struct InverterSettingsView: View {
 
             Toggle(isOn: $showInverterIcon) {
                 Text("Show inverter icon")
+            }
+
+            Toggle(isOn: $showInverterTypeName) {
+                Text("settings.inverter.showInverterTypeNameOnPowerflow")
             }
 
             Toggle(isOn: $showInverterPlantName) {
@@ -63,6 +68,8 @@ struct InverterSettingsView: View {
                 .alertCopy(text(currentDevice))
             }
         }
+        .navigationTitle("Inverter")
+        .navigationBarTitleDisplayMode(.inline)
     }
 
     func text(_ currentDevice: Device) -> String {
@@ -94,7 +101,8 @@ struct InverterSettingsView_Previews: PreviewProvider {
             showInverterTemperature: .constant(true),
             showInverterIcon: .constant(true),
             shouldInvertCT2: .constant(true),
-            showInverterPlantName: .constant(true)
+            showInverterPlantName: .constant(true),
+            showInverterTypeName: .constant(true)
         )
     }
 }

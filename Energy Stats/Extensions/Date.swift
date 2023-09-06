@@ -26,6 +26,12 @@ extension Date {
 }
 
 extension DateFormatter {
+    static var hourMinuteSecond: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm:ss"
+        return formatter
+    }()
+
     static var dayHour: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MMM HH:00"

@@ -29,6 +29,9 @@ public protocol Config {
     var shouldInvertCT2: Bool { get set }
     var showInverterPlantName: Bool { get set }
     var showGridTotalsOnPowerFlow: Bool { get set }
+    var showInverterTypeNameOnPowerFlow: Bool { get set }
+    var deviceBatteryOverrides: [String: String] { get set }
+    var showLastUpdateTimestamp: Bool { get set }
 }
 
 extension UserDefaults {
@@ -102,6 +105,12 @@ public class UserDefaultsConfig: Config {
     @UserDefaultsStoredBool(key: "showGridTotalsOnPowerFlow", defaultValue: false)
     public var showGridTotalsOnPowerFlow: Bool
 
+    @UserDefaultsStoredBool(key: "showInverterTypeNameOnPowerFlow", defaultValue: false)
+    public var showInverterTypeNameOnPowerFlow: Bool
+
+    @UserDefaultsStoredBool(key: "showLastUpdateTimestamp", defaultValue: false)
+    public var showLastUpdateTimestamp: Bool
+
     public var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode {
         get {
             let rawValue = UserDefaults.shared.integer(forKey: "selfSufficiencyEstimateMode")
@@ -121,6 +130,15 @@ public class UserDefaultsConfig: Config {
         }
         set {
             UserDefaults.shared.set(newValue, forKey: "selectedParameterGraphVariables")
+        }
+    }
+
+    public var deviceBatteryOverrides: [String : String] {
+        get {
+            UserDefaults.shared.dictionary(forKey: "deviceBatteryOverrides") as? [String: String] ?? [:]
+        }
+        set {
+            UserDefaults.shared.set(newValue, forKey: "deviceBatteryOverrides")
         }
     }
 }

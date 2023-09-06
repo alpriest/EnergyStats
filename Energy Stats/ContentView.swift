@@ -5,8 +5,8 @@
 //  Created by Alistair Priest on 19/09/2022.
 //
 
-import SwiftUI
 import Energy_Stats_Core
+import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var loginManager: UserManager
@@ -27,11 +27,8 @@ struct ContentView: View {
     func fetchConfig() {
         Task {
             do {
-                if configManager.devices?.first(where: { $0.firmware == nil }) != nil {
-                    try await configManager.fetchDevices()
-                } else {
-                    Task { try await configManager.refreshFirmwareVersions() }
-                }
+                try await configManager.fetchDevices()
+                try await configManager.refreshFirmwareVersions()
 
                 Task { @MainActor in
                     state = .inactive
@@ -41,7 +38,7 @@ struct ContentView: View {
                 Task { @MainActor in
                     state = .error(error, String(key: .dataFetchError))
                 }
-            } catch let error {
+            } catch {
                 Task { @MainActor in
                     state = .error(error, String(key: .couldNotLogin))
                 }

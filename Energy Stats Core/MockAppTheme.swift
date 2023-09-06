@@ -30,7 +30,9 @@ public extension AppTheme {
             showInverterIcon: true,
             shouldInvertCT2: false,
             showInverterPlantName: showInverterPlantName,
-            showGridTotalsOnPowerFlow: true
+            showGridTotalsOnPowerFlow: true,
+            showInverterTypeNameOnPowerFlow: true,
+            showLastUpdateTimestamp: false
         )
     }
 }

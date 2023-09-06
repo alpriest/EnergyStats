@@ -14,7 +14,7 @@ class PowerFlowTabViewModel: ObservableObject {
     private let network: Networking
     private(set) var configManager: ConfigManaging
     private let timer = CountdownTimer()
-    @MainActor @Published private(set) var lastUpdated: String = Date().small()
+    @MainActor @Published private(set) var lastUpdated = Date()
     @MainActor @Published private(set) var updateState: String = "Updating..."
     @MainActor @Published private(set) var state: State = .unloaded
     private(set) var isLoading = false
@@ -180,6 +180,7 @@ class PowerFlowTabViewModel: ObservableObject {
             self.state = .loaded(.empty()) // refreshes the marching ants line speed
             try await Task.sleep(nanoseconds: 1000)
             self.state = .loaded(summary)
+            self.lastUpdated = Date()
             self.calculateTicks(historicalViewModel: currentViewModel)
             self.updateState = " "
         } catch {

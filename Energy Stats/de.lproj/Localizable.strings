@@ -185,6 +185,7 @@
 "settings.facebookGroup" = "Facebook-Gruppe";
 "settings.debug" = "Debuggen";
 "settings.faq" = "Häufig gestellte Fragen";
+"settings.inverter.showInverterTypeNameOnPowerflow" = "Inverter-Typnamen anzeigen";
 
 /* Inverter page */
 "self_use_mode" = "In diesem Modus priorisiert der Wechselrichter die Stromzuweisung wie folgt:\n\n1. Hauslast\n2. Batterieladung\n3. Einspeisung";

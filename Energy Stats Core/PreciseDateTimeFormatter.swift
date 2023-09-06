@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class PreciseDateTimeFormatter {
+public enum PreciseDateTimeFormatter {
     public static func localizedString(from seconds: Int) -> String {
         switch seconds {
         case 0 ..< 60:
@@ -18,4 +18,12 @@ public class PreciseDateTimeFormatter {
             return "\(minutes)m \(remainder)s"
         }
     }
+}
+
+public extension DateFormatter {
+    static var fullTime: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        return formatter
+    }()
 }

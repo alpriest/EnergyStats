@@ -122,16 +122,24 @@ struct InverterView: View {
                         }
                     }
                 } label: {
-                    HStack {
-                        Text(viewModel.deviceType)
-                        Image(systemName: "chevron.up.chevron.down")
-                            .font(.caption2)
+                    VStack {
+                        HStack {
+                            Text(viewModel.deviceType)
+                            Image(systemName: "chevron.up.chevron.down")
+                                .font(.caption2)
+                        }
+                        if appTheme.showInverterPlantName {
+                            OptionalView(viewModel.devicePlantName) {
+                                Text($0)
+                                    .font(.caption2)
+                            }
+                        }
                     }
                 }
                 .buttonStyle(.bordered)
             } else {
                 VStack {
-                    if appTheme.showInverterTemperature {
+                    if appTheme.showInverterTypeNameOnPowerFlow {
                         Text(viewModel.devices.first?.device.deviceDisplayName ?? "")
                     }
 

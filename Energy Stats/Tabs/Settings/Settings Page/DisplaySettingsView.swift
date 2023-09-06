@@ -50,6 +50,10 @@ struct DisplaySettingsView: View {
                     Text("Show values in Watts")
                 }
 
+                Toggle(isOn: $viewModel.showLastUpdateTimestamp) {
+                    Text("Show last update timestamp")
+                }
+
                 NavigationLink {
                     ApproximationsSettingsView(configManager: configManager)
                 } label: {
@@ -65,12 +69,14 @@ struct DisplaySettingsView: View {
 #if DEBUG
 struct DisplaySettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        DisplaySettingsView(
-            viewModel: SettingsTabViewModel(
-                userManager: .preview(),
-                config: PreviewConfigManager(),
-                networking: DemoNetworking()),
-            configManager: PreviewConfigManager())
+        Form {
+            DisplaySettingsView(
+                viewModel: SettingsTabViewModel(
+                    userManager: .preview(),
+                    config: PreviewConfigManager(),
+                    networking: DemoNetworking()),
+                configManager: PreviewConfigManager())
+        }
     }
 }
 #endif

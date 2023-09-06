@@ -11,7 +11,6 @@ import SwiftUI
 
 struct HomePowerFlowView: View {
     @State private var iconFooterHeight: Double = 0
-    @State private var lastUpdated = Date()
     @State private var appTheme: AppTheme = .mock()
     @State private var size: CGSize = .zero
     private let configManager: ConfigManaging

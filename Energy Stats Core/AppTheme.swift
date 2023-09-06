@@ -31,6 +31,8 @@ public struct AppTheme {
     public var shouldInvertCT2: Bool
     public var showInverterPlantName: Bool
     public var showGridTotalsOnPowerFlow: Bool
+    public var showInverterTypeNameOnPowerFlow: Bool
+    public var showLastUpdateTimestamp: Bool
 
     public init(
         showColouredLines: Bool,
@@ -48,7 +50,9 @@ public struct AppTheme {
         showInverterIcon: Bool,
         shouldInvertCT2: Bool,
         showInverterPlantName: Bool,
-        showGridTotalsOnPowerFlow: Bool
+        showGridTotalsOnPowerFlow: Bool,
+        showInverterTypeNameOnPowerFlow: Bool,
+        showLastUpdateTimestamp: Bool
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -66,6 +70,8 @@ public struct AppTheme {
         self.shouldInvertCT2 = shouldInvertCT2
         self.showInverterPlantName = showInverterPlantName
         self.showGridTotalsOnPowerFlow = showGridTotalsOnPowerFlow
+        self.showInverterTypeNameOnPowerFlow = showInverterTypeNameOnPowerFlow
+        self.showLastUpdateTimestamp = showLastUpdateTimestamp
     }
 
     public func copy(
@@ -84,7 +90,9 @@ public struct AppTheme {
         showInverterIcon: Bool? = nil,
         shouldInvertCT2: Bool? = nil,
         showInverterPlantName: Bool? = nil,
-        showGridTotalsOnPowerFlow: Bool? = nil
+        showGridTotalsOnPowerFlow: Bool? = nil,
+        showInverterTypeNameOnPowerFlow: Bool? = nil,
+        showLastUpdateTimestamp: Bool? = nil
     ) -> AppTheme {
         AppTheme(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -102,7 +110,9 @@ public struct AppTheme {
             showInverterIcon: showInverterIcon ?? self.showInverterIcon,
             shouldInvertCT2: shouldInvertCT2 ?? self.shouldInvertCT2,
             showInverterPlantName: showInverterPlantName ?? self.showInverterPlantName,
-            showGridTotalsOnPowerFlow: showGridTotalsOnPowerFlow ?? self.showGridTotalsOnPowerFlow
+            showGridTotalsOnPowerFlow: showGridTotalsOnPowerFlow ?? self.showGridTotalsOnPowerFlow,
+            showInverterTypeNameOnPowerFlow: showInverterTypeNameOnPowerFlow ?? self.showInverterTypeNameOnPowerFlow,
+            showLastUpdateTimestamp: showLastUpdateTimestamp ?? self.showLastUpdateTimestamp
         )
     }
 }

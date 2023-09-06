@@ -172,6 +172,9 @@ public class MockConfig: Config {
     public var shouldInvertCT2: Bool = true
     public var showInverterPlantName: Bool = false
     public var showGridTotalsOnPowerFlow: Bool = false
+    public var showInverterTypeNameOnPowerFlow: Bool = false
+    public var deviceBatteryOverrides: [String: String] = [:]
+    public var showLastUpdateTimestamp: Bool = false
 }
 
 public class PreviewConfigManager: ConfigManager {

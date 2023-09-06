@@ -10,6 +10,18 @@ import Energy_Stats_Core
 import SwiftUI
 
 class SettingsTabViewModel: ObservableObject {
+    @Published var showLastUpdateTimestamp: Bool {
+        didSet {
+            config.showLastUpdateTimestamp = showLastUpdateTimestamp
+        }
+    }
+
+    @Published var showInverterTypeNameOnPowerFlow: Bool {
+        didSet {
+            config.showInverterTypeNameOnPowerFlow = showInverterTypeNameOnPowerFlow
+        }
+    }
+
     @Published var showInverterPlantName: Bool {
         didSet {
             config.showInverterPlantName = showInverterPlantName
@@ -132,6 +144,8 @@ class SettingsTabViewModel: ObservableObject {
         shouldInvertCT2 = config.shouldInvertCT2
         showInverterPlantName = config.showInverterPlantName
         showGridTotalsOnPowerFlow = config.showGridTotalsOnPowerFlow
+        showInverterTypeNameOnPowerFlow = config.showInverterTypeNameOnPowerFlow
+        showLastUpdateTimestamp = config.showLastUpdateTimestamp
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }
@@ -190,6 +204,8 @@ class SettingsTabViewModel: ObservableObject {
                     }
                 }
                 config.select(device: device)
+                config.clearBatteryOverride(for: device.deviceID)
+                batteryCapacity = config.batteryCapacity
                 showRecalculationAlert = true
             }
         }

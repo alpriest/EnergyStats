@@ -23,6 +23,7 @@ public protocol ConfigManaging {
     func logout()
     func select(device: Device?)
     func refreshFirmwareVersions() async throws
+    func clearBatteryOverride(for deviceID: String)
     var minSOC: Double { get }
     var batteryCapacity: String { get set }
     var batteryCapacityW: Int { get }
@@ -52,6 +53,8 @@ public protocol ConfigManaging {
     var shouldInvertCT2: Bool { get set }
     var showInverterPlantName: Bool { get set }
     var showGridTotalsOnPowerFlow: Bool { get set }
+    var showInverterTypeNameOnPowerFlow: Bool { get set }
+    var showLastUpdateTimestamp: Bool { get set }
 }
 
 public class ConfigManager: ConfigManaging {
@@ -84,7 +87,9 @@ public class ConfigManager: ConfigManaging {
                 showInverterIcon: config.showInverterIcon,
                 shouldInvertCT2: config.shouldInvertCT2,
                 showInverterPlantName: config.showInverterPlantName,
-                showGridTotalsOnPowerFlow: config.showGridTotalsOnPowerFlow
+                showGridTotalsOnPowerFlow: config.showGridTotalsOnPowerFlow,
+                showInverterTypeNameOnPowerFlow: config.showInverterTypeNameOnPowerFlow,
+                showLastUpdateTimestamp: config.showLastUpdateTimestamp
             )
         )
         selectedDeviceID = selectedDeviceID
@@ -176,16 +181,28 @@ public class ConfigManager: ConfigManaging {
     }
 
     public var batteryCapacity: String {
-        get { currentDevice.value?.battery?.capacity ?? "2600" }
-        set {
-            devices = devices?.map {
-                if $0.deviceID == currentDevice.value?.deviceID, let battery = $0.battery {
-                    return $0.copy(battery: Device.Battery(capacity: newValue, minSOC: battery.minSOC))
-                } else {
-                    return $0
-                }
+        get {
+            if let currentDevice = currentDevice.value {
+                let override = config.deviceBatteryOverrides[currentDevice.deviceID]
+
+                return override ?? currentDevice.battery?.capacity ?? "0"
+            } else {
+                return "0"
             }
         }
+        set {
+            if let currentDevice = currentDevice.value {
+                config.deviceBatteryOverrides[currentDevice.deviceID] = newValue
+            }
+
+            devices = devices?.map {
+                $0
+            }
+        }
+    }
+
+    public func clearBatteryOverride(for deviceID: String) {
+        config.deviceBatteryOverrides.removeValue(forKey: deviceID)
     }
 
     public var hasBattery: Bool {
@@ -193,7 +210,7 @@ public class ConfigManager: ConfigManaging {
     }
 
     public var batteryCapacityW: Int {
-        Int(currentDevice.value?.battery?.capacity ?? "0") ?? 0
+        Int(batteryCapacity) ?? 0
     }
 
     public var selectedDeviceID: String? {
@@ -326,6 +343,16 @@ public class ConfigManager: ConfigManaging {
         }
     }
 
+    public var showInverterTypeNameOnPowerFlow: Bool {
+        get { config.showInverterTypeNameOnPowerFlow }
+        set {
+            config.showInverterTypeNameOnPowerFlow = newValue
+            appTheme.send(appTheme.value.copy(
+                showInverterTypeNameOnPowerFlow: config.showInverterTypeNameOnPowerFlow
+            ))
+        }
+    }
+
     public var devices: [Device]? {
         get {
             guard let deviceListData = config.devices else { return nil }
@@ -401,6 +428,16 @@ public class ConfigManager: ConfigManaging {
             config.showGridTotalsOnPowerFlow = newValue
             appTheme.send(appTheme.value.copy(
                 showGridTotalsOnPowerFlow: config.showGridTotalsOnPowerFlow
+            ))
+        }
+    }
+
+    public var showLastUpdateTimestamp: Bool {
+        get { config.showLastUpdateTimestamp }
+        set {
+            config.showLastUpdateTimestamp = newValue
+            appTheme.send(appTheme.value.copy(
+                showLastUpdateTimestamp: config.showLastUpdateTimestamp
             ))
         }
     }

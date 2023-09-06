@@ -6,8 +6,8 @@
 //
 
 import Combine
-import SwiftUI
 import Energy_Stats_Core
+import SwiftUI
 
 struct PowerFlowTabView: View {
     @StateObject private var viewModel: PowerFlowTabViewModel
@@ -28,10 +28,26 @@ struct PowerFlowTabView: View {
 
                 Spacer()
 
-                Text(viewModel.updateState)
+                if appTheme.showLastUpdateTimestamp {
+                    HStack {
+                        Text("Last update") +
+                            Text(" ") +
+                            Text(viewModel.lastUpdated, formatter: DateFormatter.hourMinuteSecond)
+
+                        Text(viewModel.updateState)
+                            .monospacedDigit()
+                            .font(.caption)
+                            .foregroundColor(Color("text_dimmed"))
+                    }
                     .monospacedDigit()
                     .font(.caption)
                     .foregroundColor(Color("text_dimmed"))
+                } else {
+                    Text(viewModel.updateState)
+                        .monospacedDigit()
+                        .font(.caption)
+                        .foregroundColor(Color("text_dimmed"))
+                }
             case let .failed(error, reason):
                 Spacer()
                 ErrorAlertView(cause: error, message: reason) {
