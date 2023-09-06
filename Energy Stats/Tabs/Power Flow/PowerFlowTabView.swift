@@ -28,26 +28,7 @@ struct PowerFlowTabView: View {
 
                 Spacer()
 
-                if appTheme.showLastUpdateTimestamp {
-                    HStack {
-                        Text("Last update") +
-                            Text(" ") +
-                            Text(viewModel.lastUpdated, formatter: DateFormatter.hourMinuteSecond)
-
-                        Text(viewModel.updateState)
-                            .monospacedDigit()
-                            .font(.caption)
-                            .foregroundColor(Color("text_dimmed"))
-                    }
-                    .monospacedDigit()
-                    .font(.caption)
-                    .foregroundColor(Color("text_dimmed"))
-                } else {
-                    Text(viewModel.updateState)
-                        .monospacedDigit()
-                        .font(.caption)
-                        .foregroundColor(Color("text_dimmed"))
-                }
+                updateFooterMessage()
             case let .failed(error, reason):
                 Spacer()
                 ErrorAlertView(cause: error, message: reason) {
@@ -81,6 +62,21 @@ struct PowerFlowTabView: View {
         case false:
             Color("background")
         }
+    }
+
+    @ViewBuilder func updateFooterMessage() -> some View {
+        HStack {
+            if appTheme.showLastUpdateTimestamp {
+                Text("Last update") +
+                Text(" ") +
+                Text(viewModel.lastUpdated, formatter: DateFormatter.hourMinuteSecond)
+            }
+
+            Text(viewModel.updateState)
+        }
+        .monospacedDigit()
+        .font(.caption)
+        .foregroundColor(Color("text_dimmed"))
     }
 
     private var backgroundGradient: some View {
