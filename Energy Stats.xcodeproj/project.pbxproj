@@ -155,6 +155,9 @@
 		41C6AF662A360CF600C88F2B /* CSVTextFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C6AF652A360CF600C88F2B /* CSVTextFile.swift */; };
 		41C849692A8BBC3800431410 /* Intents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C849682A8BBC3800431410 /* Intents.swift */; };
 		41C8496B2A8BBF1500431410 /* InverterIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C8496A2A8BBF1500431410 /* InverterIconView.swift */; };
+		41CA35712AA8C02C00D45734 /* EarningsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CA35702AA8C02C00D45734 /* EarningsView.swift */; };
+		41CA35732AA8C10900D45734 /* EarningsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CA35722AA8C10900D45734 /* EarningsViewModel.swift */; };
+		41CA35762AA8C52100D45734 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 41CA35752AA8C52100D45734 /* OrderedCollections */; };
 		41CB71482A3B1A2800199415 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41CB71472A3B1A2800199415 /* Assets.xcassets */; };
 		41CB714A2A3B1B6C00199415 /* StyleGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CB71492A3B1B6C00199415 /* StyleGuide.swift */; };
 		41CD1F322A1414C1006B0C00 /* StatsGraphVariableToggles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CD1F312A1414C1006B0C00 /* StatsGraphVariableToggles.swift */; };
@@ -408,6 +411,8 @@
 		41C6AF652A360CF600C88F2B /* CSVTextFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVTextFile.swift; sourceTree = "<group>"; };
 		41C849682A8BBC3800431410 /* Intents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intents.swift; sourceTree = "<group>"; };
 		41C8496A2A8BBF1500431410 /* InverterIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterIconView.swift; sourceTree = "<group>"; };
+		41CA35702AA8C02C00D45734 /* EarningsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarningsView.swift; sourceTree = "<group>"; };
+		41CA35722AA8C10900D45734 /* EarningsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarningsViewModel.swift; sourceTree = "<group>"; };
 		41CB71472A3B1A2800199415 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "Energy Stats/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
 		41CB71492A3B1B6C00199415 /* StyleGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleGuide.swift; sourceTree = "<group>"; };
 		41CD1F312A1414C1006B0C00 /* StatsGraphVariableToggles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGraphVariableToggles.swift; sourceTree = "<group>"; };
@@ -448,6 +453,7 @@
 			files = (
 				418199CA2A4035F40001B5D4 /* MarkdownUI in Frameworks */,
 				41B6910128E043A10058126E /* OHHTTPStubs in Frameworks */,
+				41CA35762AA8C52100D45734 /* OrderedCollections in Frameworks */,
 				41A95B9A29DB3F6A00A35169 /* Energy_Stats_Core.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -529,6 +535,7 @@
 				4140146828C7374400EA5BA1 /* CurrentStatusViewModel.swift */,
 				41EDDF6B28CD2A630092C662 /* HomePowerFlowViewModel.swift */,
 				418240772A9A33E300101064 /* TotalsViewModel.swift */,
+				41CA35722AA8C10900D45734 /* EarningsViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -956,6 +963,7 @@
 				41AF2F402AA4C674008FCA2E /* BatteryPowerFooterView.swift */,
 				41AF2F422AA4C6C1008FCA2E /* HomePowerFooterView.swift */,
 				41AF2F442AA4C74F008FCA2E /* GridPowerFooterView.swift */,
+				41CA35702AA8C02C00D45734 /* EarningsView.swift */,
 			);
 			path = "Power Views";
 			sourceTree = "<group>";
@@ -1026,6 +1034,7 @@
 			packageProductDependencies = (
 				41B6910028E043A10058126E /* OHHTTPStubs */,
 				418199C92A4035F40001B5D4 /* MarkdownUI */,
+				41CA35752AA8C52100D45734 /* OrderedCollections */,
 			);
 			productName = "PV Stats";
 			productReference = 4140144A28C70B3200EA5BA1 /* Energy Stats.app */;
@@ -1137,6 +1146,7 @@
 				41B690F728E040060058126E /* XCRemoteSwiftPackageReference "OHHTTPStubs" */,
 				4127910E28E38EFB00D5F993 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 				418199C82A4035F40001B5D4 /* XCRemoteSwiftPackageReference "MarkdownUI" */,
+				41CA35742AA8C52100D45734 /* XCRemoteSwiftPackageReference "swift-collections" */,
 			);
 			productRefGroup = 4140144B28C70B3200EA5BA1 /* Products */;
 			projectDirPath = "";
@@ -1274,6 +1284,7 @@
 				41E4B31028DB7666003F7F47 /* BatteryPowerView.swift in Sources */,
 				4140144E28C70B3200EA5BA1 /* Energy_StatsApp.swift in Sources */,
 				41ACB2C42A51832E005831B0 /* ParameterGraphHeaderViewModel.swift in Sources */,
+				41CA35712AA8C02C00D45734 /* EarningsView.swift in Sources */,
 				4192F9992A8674990035DAB8 /* DataLoggersView.swift in Sources */,
 				41C49EAE2A0398E4003700CB /* PreviewUserManager.swift in Sources */,
 				4110290F2A71B908004018BB /* BatterySOCSettingsView.swift in Sources */,
@@ -1328,6 +1339,7 @@
 				416AE4492A8128B9003D0122 /* OptionalView.swift in Sources */,
 				417185462A004FA900D18CDD /* VariablesResponse.swift in Sources */,
 				4103D1CF29DB6C4D001B0BC8 /* Auth.swift in Sources */,
+				41CA35732AA8C10900D45734 /* EarningsViewModel.swift in Sources */,
 				410913FF29DB7A2700133CC5 /* CurrentStatusViewModel.swift in Sources */,
 				410913FE29DB791200133CC5 /* CountdownTimer.swift in Sources */,
 				4103D1D929DB6C6D001B0BC8 /* ReportVariable.swift in Sources */,
@@ -1900,6 +1912,14 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		41CA35742AA8C52100D45734 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1922,6 +1942,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 41B690F728E040060058126E /* XCRemoteSwiftPackageReference "OHHTTPStubs" */;
 			productName = OHHTTPStubs;
+		};
+		41CA35752AA8C52100D45734 /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 41CA35742AA8C52100D45734 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

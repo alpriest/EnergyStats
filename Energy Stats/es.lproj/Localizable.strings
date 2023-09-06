@@ -177,6 +177,10 @@
 "settings.debug" = "Depuración";
 "settings.faq" = "Preguntas Frecuentes";
 "settings.inverter.showInverterTypeNameOnPowerflow" = "Mostrar el nombre del tipo de inversor";
+"today" = "hoy";
+"month" = "mes";
+"year" = "año";
+"cumulate" = "total";
 
 /* Inverter page */
 "self_use_mode" = "En este modo, el inversor prioriza la asignación de energía de la siguiente manera:\n\n1. Carga de la casa\n2. Carga de batería\n3. Exportar";

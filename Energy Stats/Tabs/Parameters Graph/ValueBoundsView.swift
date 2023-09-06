@@ -20,11 +20,25 @@ struct ValueBoundsView: View {
 
     var body: some View {
         if let value {
-            VStack(alignment: .trailing) {
-                Text(value.roundedToString(decimalPlaces: decimalPlaces))
-                Text(type.rawValue.uppercased())
-                    .font(.system(size: 8.0))
-            }
+            SubLabelledView(
+                value: value.roundedToString(decimalPlaces: decimalPlaces),
+                label: type.rawValue.uppercased(),
+                alignment: .trailing
+            )
+        }
+    }
+}
+
+struct SubLabelledView: View {
+    let value: String
+    let label: String
+    let alignment: HorizontalAlignment
+
+    var body: some View {
+        VStack(alignment: alignment) {
+            Text(value)
+            Text(label)
+                .font(.system(size: 8.0))
         }
     }
 }

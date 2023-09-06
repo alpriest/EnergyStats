@@ -40,6 +40,7 @@ struct StatsGraphVariableToggles: View {
 
                             if let valuesAtTime, let graphValue = valuesAtTime.values.first(where: { $0.type == variable.type }) {
                                 Text(graphValue.formatted())
+                                    .monospacedDigit()
                             } else {
                                 OptionalView(viewModel.total(of: variable.type)) {
                                     EnergyText(amount: $0, appTheme: appTheme, type: .default)

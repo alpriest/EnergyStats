@@ -136,6 +136,10 @@
 "settings.debug" = "Debug";
 "settings.faq" = "Domande Frequenti";
 "settings.inverter.showInverterTypeNameOnPowerflow" = "Mostra il nome del tipo di inverter";
+"today" = "oggi";
+"month" = "mese";
+"year" = "anno";
+"cumulate" = "totale";
 
 /* Inverter page */
 "self_use_mode" = "In questa modalità, l'inverter assegna prioritariamente la potenza come segue:\n\n1. Carico della casa\n2. Carica della batteria\n3. Esportazione";

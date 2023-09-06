@@ -126,7 +126,7 @@ struct PowerSummaryView_Previews: PreviewProvider {
     static var previews: some View {
         LoadedPowerFlowView(configManager: PreviewConfigManager(),
                             viewModel: HomePowerFlowViewModel.any(battery: .any()),
-                            appThemePublisher: CurrentValueSubject(AppTheme.mock(decimalPlaces: 3, showInW: false, showInverterTemperature: true, showHomeTotalOnPowerFlow: true)))
+                            appThemePublisher: CurrentValueSubject(AppTheme.mock().copy(decimalPlaces: 3, showInW: false, showEarnings: true, showInverterTemperature: true, showHomeTotalOnPowerFlow: true)))
             .environment(\.locale, .init(identifier: "de"))
     }
 }
@@ -138,7 +138,7 @@ extension HomePowerFlowViewModel {
               home: 1.5,
               grid: 0.71,
               todaysGeneration: 8.5,
-              earnings: "GBP(£) 1 / 5 / 99",
+              earnings: .any(),
               inverterTemperatures: InverterTemperatures(ambient: 4.0, inverter: 9.0),
               homeTotal: 1.0,
               gridImportTotal: 12.0,

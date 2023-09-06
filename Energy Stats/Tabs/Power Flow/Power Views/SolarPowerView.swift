@@ -12,7 +12,7 @@ import SwiftUI
 struct SolarPowerViewModel {
     let solar: Double
     let generation: Double
-    let earnings: String
+    let earnings: EarningsViewModel
 }
 
 struct SolarPowerView: View {
@@ -34,10 +34,8 @@ struct SolarPowerView: View {
             }
 
             if appTheme.showEarnings {
-                HStack(spacing: 0) {
-                    Text("Earnings") + Text(" ")
-                    Text(viewModel.earnings)
-                }.font(.caption)
+                EarningsView(viewModel: viewModel.earnings)
+                    .padding(.bottom, 4)
             }
 
             switch viewModel.solar {
@@ -68,23 +66,23 @@ struct SolarPowerView_Previews: PreviewProvider {
             HStack {
                 SolarPowerView(
                     appTheme: AppTheme.mock(),
-                    viewModel: SolarPowerViewModel(solar: 0, generation: 0, earnings: "GBP 1/5/99")
+                    viewModel: SolarPowerViewModel(solar: 0, generation: 0, earnings: .any())
                 )
                 SolarPowerView(
                     appTheme: AppTheme.mock(),
-                    viewModel: SolarPowerViewModel(solar: 0.5, generation: 1.5, earnings: "GBP 1/5/99")
+                    viewModel: SolarPowerViewModel(solar: 0.5, generation: 1.5, earnings: .any())
                 )
                 SolarPowerView(
                     appTheme: AppTheme.mock(),
-                    viewModel: SolarPowerViewModel(solar: 1.5, generation: 1.5, earnings: "GBP 1/5/99")
+                    viewModel: SolarPowerViewModel(solar: 1.5, generation: 1.5, earnings: .any())
                 )
                 SolarPowerView(
                     appTheme: AppTheme.mock(),
-                    viewModel: SolarPowerViewModel(solar: 2.5, generation: 4.5, earnings: "GBP 1/5/99")
+                    viewModel: SolarPowerViewModel(solar: 2.5, generation: 4.5, earnings: .any())
                 )
                 SolarPowerView(
                     appTheme: AppTheme.mock(),
-                    viewModel: SolarPowerViewModel(solar: 3.5, generation: 9.5, earnings: "GBP 1/5/99")
+                    viewModel: SolarPowerViewModel(solar: 3.5, generation: 9.5, earnings: .any())
                 )
             }
         }
@@ -98,7 +96,7 @@ struct SolarPowerView_Previews: PreviewProvider {
         var body: some View {
             VStack {
                 Color.clear.overlay(
-                    SolarPowerView(appTheme: AppTheme.mock(), viewModel: SolarPowerViewModel(solar: amount, generation: 8.5, earnings: "GBP(£) 12 / 99 / 123"))
+                    SolarPowerView(appTheme: AppTheme.mock().copy(showTotalYield: true, showEarnings: true), viewModel: SolarPowerViewModel(solar: amount, generation: 8.5, earnings: .any()))
                 ).frame(height: 100)
 
                 Slider(value: $amount, in: 0 ... 5.0, step: 0.1, label: {

@@ -230,12 +230,13 @@ class PowerFlowTabViewModel: ObservableObject {
         } catch {}
     }
 
-    private func makeEarnings(_ response: EarningsResponse) -> String {
-        return String([
-            response.today.earnings.roundedToString(decimalPlaces: 2, currencySymbol: response.currencySymbol),
-            response.month.earnings.roundedToString(decimalPlaces: 2, currencySymbol: response.currencySymbol),
-            response.year.earnings.roundedToString(decimalPlaces: 2, currencySymbol: response.currencySymbol),
-            response.cumulate.earnings.roundedToString(decimalPlaces: 2, currencySymbol: response.currencySymbol)
-        ].joined(separator: " ⋅ "))
+    private func makeEarnings(_ response: EarningsResponse) -> EarningsViewModel {
+        EarningsViewModel(
+            today: response.today.earnings,
+            month: response.month.earnings,
+            year: response.year.earnings,
+            cumulate: response.cumulate.earnings,
+            currencySymbol: response.currencySymbol
+        )
     }
 }

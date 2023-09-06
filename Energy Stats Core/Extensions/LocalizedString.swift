@@ -34,6 +34,10 @@ public struct LocalizedString {
         case foxessCommunity = "settings.foxessCommunity"
         case facebookGroup = "settings.facebookGroup"
         case debug = "settings.debug"
+        case today = "today"
+        case month = "month"
+        case year = "year"
+        case cumulate = "total"
 
         public enum Accessibility: String, RawRepresentable {
             case inverter = "accessibility.inverter"

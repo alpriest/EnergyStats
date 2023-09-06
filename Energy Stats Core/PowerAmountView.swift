@@ -22,6 +22,7 @@ public struct PowerText: View {
     public var body: some View {
         Text(amountWithUnit)
             .accessibilityLabel(type.accessibilityLabel(amount: amount, amountWithUnit: amountWithUnit))
+            .monospacedDigit()
     }
 
     private var amountWithUnit: String {
@@ -47,6 +48,7 @@ public struct EnergyText: View {
     public var body: some View {
         Text(amountWithUnit)
             .accessibilityLabel(type.accessibilityLabel(amount: amount, amountWithUnit: amountWithUnit))
+            .monospacedDigit()
     }
 
     private var amountWithUnit: String {

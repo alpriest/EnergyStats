@@ -117,6 +117,10 @@
 "settings.debug" = "Debug";
 "settings.faq" = "Frequently Asked Questions";
 "settings.inverter.showInverterTypeNameOnPowerflow" = "Show inverter type name";
+"today" = "today";
+"month" = "month";
+"year" = "year";
+"cumulate" = "total";
 
 /* Inverter page */
 "self_use_mode" = "In this mode, the inverter prioritises power allocation as follows:\n\n1. House Load\n2. Battery Charging\n3. Export";
