@@ -13,6 +13,7 @@ struct PowerFlowTabView: View {
     @StateObject private var viewModel: PowerFlowTabViewModel
     @State private var appTheme: AppTheme
     private var appThemePublisher: LatestAppTheme
+    @AppStorage("showLastUpdateTimestamp") private var showLastUpdateTimestamp: Bool = false
 
     init(configManager: ConfigManaging, networking: Networking, appThemePublisher: LatestAppTheme) {
         _viewModel = .init(wrappedValue: PowerFlowTabViewModel(networking, configManager: configManager))
@@ -67,16 +68,29 @@ struct PowerFlowTabView: View {
     @ViewBuilder func updateFooterMessage() -> some View {
         HStack {
             if appTheme.showLastUpdateTimestamp {
-                Text("Last update") +
-                Text(" ") +
-                Text(viewModel.lastUpdated, formatter: DateFormatter.hourMinuteSecond)
+                lastUpdateMessage()
+                Text(viewModel.updateState)
+            } else {
+                Group {
+                    if showLastUpdateTimestamp {
+                        lastUpdateMessage()
+                    } else {
+                        Text(viewModel.updateState)
+                    }
+                }.onTapGesture {
+                    showLastUpdateTimestamp.toggle()
+                }
             }
-
-            Text(viewModel.updateState)
         }
         .monospacedDigit()
         .font(.caption)
         .foregroundColor(Color("text_dimmed"))
+    }
+
+    @ViewBuilder func lastUpdateMessage() -> some View {
+        Text("Last update") +
+        Text(" ") +
+        Text(viewModel.lastUpdated, formatter: DateFormatter.hourMinuteSecond)
     }
 
     private var backgroundGradient: some View {
