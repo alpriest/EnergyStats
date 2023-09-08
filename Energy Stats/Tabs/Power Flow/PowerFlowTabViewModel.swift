@@ -180,7 +180,7 @@ class PowerFlowTabViewModel: ObservableObject {
             self.state = .loaded(.empty()) // refreshes the marching ants line speed
             try await Task.sleep(nanoseconds: 1000)
             self.state = .loaded(summary)
-            self.lastUpdated = Date()
+            self.lastUpdated = currentViewModel.lastUpdate
             self.calculateTicks(historicalViewModel: currentViewModel)
             self.updateState = " "
         } catch {

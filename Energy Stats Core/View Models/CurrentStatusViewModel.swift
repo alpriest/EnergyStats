@@ -24,7 +24,7 @@ public struct CurrentStatusViewModel: Sendable {
         } else {
             self.currentTemperatures = nil
         }
-        self.lastUpdate = raws.first?.data.first?.time ?? Date()
+        self.lastUpdate = raws.current(for: "gridConsumptionPower")?.time ?? Date()
         self.currentSolarPower = Self.calculateSolarPower(device: device, raws: raws, shouldInvertCT2: shouldInvertCT2)
     }
 }

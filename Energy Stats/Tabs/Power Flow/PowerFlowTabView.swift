@@ -89,8 +89,8 @@ struct PowerFlowTabView: View {
 
     @ViewBuilder func lastUpdateMessage() -> some View {
         Text("Last update") +
-        Text(" ") +
-        Text(viewModel.lastUpdated, formatter: DateFormatter.hourMinuteSecond)
+            Text(" ") +
+            Text(viewModel.lastUpdated, formatter: DateFormatter.hourMinuteSecond)
     }
 
     private var backgroundGradient: some View {

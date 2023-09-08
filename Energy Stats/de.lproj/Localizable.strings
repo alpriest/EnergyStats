@@ -173,7 +173,7 @@
 "Battery capacity recalculated" = "Batteriekapazität neu berechnet";
 "batterySOC_settings_saved" = "Batterie-SOC-Änderungen wurden gespeichert";
 "battery_charge_schedule_settings_saved" = "Der Batterieladezeitplan wurde gespeichert";
-"Touch the graph to see values at that time" = "Berühren Sie den Graphen, um Werte zu dieser Zeit anzuzeigen";
+"Touch the graph to see values at that time" = "Graph berühren um Werte anzuzeigen";
 "Usage today" = "Verbrauch heute";
 "export_total" = "Gesamtausfuhr";
 "import_total" = "Gesamtimport";

@@ -17,49 +17,47 @@ struct ErrorAlertView: View {
 
     var body: some View {
         VStack {
+            Button(action: { errorShowing.toggle() }) {
+                ZStack {
+                    Circle()
+                        .foregroundColor(.red)
+                        .frame(width: ripple ? 130 : 99, height: ripple ? 130 : 99)
+
+                    Image(systemName: "exclamationmark.circle.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .foregroundColor(.white)
+                        .frame(width: 100, height: 100)
+                }
+                .transition(.opacity.combined(with: .scale.animation(.easeOut)))
+                .animation(Animation.easeIn(duration: 0.06), value: ripple)
+                .frame(height: 130)
+                .onTapGesture {
+                    errorShowing.toggle()
+                }
+            }
+
+            Text(inlineMessage)
+                .fixedSize(horizontal: false, vertical: true)
+                .multilineTextAlignment(.center)
+                .padding(.bottom)
+
             VStack {
-                Button(action: { errorShowing.toggle() }) {
-                    ZStack {
-                        Circle()
-                            .foregroundColor(.red)
-                            .frame(width: ripple ? 130 : 99, height: ripple ? 130 : 99)
+                Button(action: { retry() }) {
+                    Text("Retry")
+                }.buttonStyle(.bordered)
 
-                        Image(systemName: "exclamationmark.circle.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .foregroundColor(.white)
-                            .frame(width: 100, height: 100)
-                    }
-                    .transition(.opacity.combined(with: .scale.animation(.easeOut)))
-                    .animation(Animation.easeIn(duration: 0.06), value: ripple)
-                    .frame(height: 130)
-                    .onTapGesture {
-                        errorShowing.toggle()
-                    }
-                }
-
-                Text(inlineMessage)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .multilineTextAlignment(.center)
-                    .padding(.bottom)
-
-                VStack {
-                    Button(action: { retry() }) {
-                        Text("Retry")
-                    }.buttonStyle(.bordered)
-
-                    Button("Check FoxESS Server status") {
-                        let url = URL(string: "https://monitor.foxesscommunity.com/")!
-                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                    }.buttonStyle(.bordered)
-                }
+                Button("Check FoxESS Server status") {
+                    let url = URL(string: "https://monitor.foxesscommunity.com/")!
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }.buttonStyle(.bordered)
             }
-            .frame(height: 200)
-            .alert(detailedMessage, isPresented: $errorShowing) {
-                Button("OK") {}
-            }
-            .onAppear { ripple = true }
         }
+        .frame(height: 200)
+        .alert(detailedMessage, isPresented: $errorShowing) {
+            Button("OK") {}
+        }
+        .onAppear { ripple = true }
     }
 
     var detailedMessage: String {

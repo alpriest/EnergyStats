@@ -12,7 +12,7 @@ struct ContentView: View {
     @ObservedObject var loginManager: UserManager
     let network: Networking
     let configManager: ConfigManager
-    @State private var state = LoadState.active(String(key: .loading))
+    @State private var state = LoadState.inactive
 
     var body: some View {
         if loginManager.isLoggedIn {
@@ -25,14 +25,14 @@ struct ContentView: View {
     }
 
     func fetchConfig() {
-        Task {
+        Task { @MainActor in
             do {
+                state = .active(String(key: .loading))
+
                 try await configManager.fetchDevices()
                 try await configManager.refreshFirmwareVersions()
 
-                Task { @MainActor in
-                    state = .inactive
-                }
+                state = .inactive
             } catch let error as ConfigManager.NoDeviceFoundError {
                 loginManager.logout()
                 Task { @MainActor in

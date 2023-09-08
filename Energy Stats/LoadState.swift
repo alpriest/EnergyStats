@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum LoadState: Equatable {
+enum LoadState {
     case inactive
     case active(String)
     case error(Error?, String)

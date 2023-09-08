@@ -19,7 +19,7 @@ struct HomePowerView: View {
 
             Image(systemName: "house.fill")
                 .resizable()
-                .frame(width: 45, height: 45)
+                .frame(width: 50, height: 45)
                 .accessibilityHidden(true)
                 .padding(.bottom, 1)
         }
