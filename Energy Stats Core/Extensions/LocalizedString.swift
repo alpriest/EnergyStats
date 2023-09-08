@@ -17,7 +17,8 @@ public struct LocalizedString {
         case empty = "Empty"
         case full = "Full"
         case nextUpdateIn = "Next update in"
-        case dataFetchError = "Something went wrong and no device was found. Please try logging in again."
+        case launchDataFetchError = "Something went wrong. Please try logging in again."
+        case dataFetchError = "data_fetch_error"
         case chargeTimePeriodFailedValidation = "Start time must be before the end time"
         case chargeTimeSummary = "battery_charge_range"
         case noBatteryCharge = "no_battery_charge"
@@ -38,6 +39,7 @@ public struct LocalizedString {
         case month = "month"
         case year = "year"
         case cumulate = "total"
+        case tapIconForDetail = "tap_for_detail"
 
         public enum Accessibility: String, RawRepresentable {
             case inverter = "accessibility.inverter"

@@ -181,6 +181,10 @@
 "month" = "mes";
 "year" = "año";
 "cumulate" = "total";
+"Retry" = "Reintentar";
+"Check FoxESS Server status" = "Comprobar estado del servidor FoxESS";
+"data_fetch_error" = "Se produjo un error al obtener los datos de la nube de FoxESS.";
+"tap_for_detail" = "Toque el icono para más detalles.";
 
 /* Inverter page */
 "self_use_mode" = "En este modo, el inversor prioriza la asignación de energía de la siguiente manera:\n\n1. Carga de la casa\n2. Carga de batería\n3. Exportar";

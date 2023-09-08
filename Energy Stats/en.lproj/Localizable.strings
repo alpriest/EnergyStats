@@ -20,7 +20,7 @@
 "Success" = "Success";
 "Buy me a coffee" = "Buy me a coffee";
 "You appear to be offline. Please check your connection." = "You appear to be offline. Please check your connection.";
-"Fox servers are offline. Please try later." = "Fox servers are offline. Please try later.";
+"Fox servers are offline. Please try later." = "Fox servers are in maintenance mode. Please try later.";
 "You've hit the server rate limit. Please try later." = "You've hit the server rate limit. Please try later.";
 "Invalid token. Please logout and login again." = "Invalid token. Please logout and login again.";
 "Unknown network error" = "Unknown network error";
@@ -75,6 +75,10 @@
 "Usage today" = "Usage today";
 "error_title" = "Error";
 "battery_read_error" = "Something went wrong reading your battery settings. Error message follows.\n\n%@";
+"Retry" = "Retry";
+"Check FoxESS Server status" = "Check FoxESS Server status";
+"data_fetch_error" = "Something went wrong fetching data from FoxESS cloud.";
+"tap_for_detail" = "Tap the icon for further detail.";
 
 /* Battery Charge Pages */
 

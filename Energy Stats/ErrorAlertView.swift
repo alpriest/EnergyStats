@@ -42,6 +42,11 @@ struct ErrorAlertView: View {
                 .multilineTextAlignment(.center)
                 .padding(.bottom)
 
+            Text(tapIconMessage)
+                .fixedSize(horizontal: false, vertical: true)
+                .multilineTextAlignment(.center)
+                .padding(.bottom)
+
             VStack {
                 Button(action: { retry() }) {
                     Text("Retry")
@@ -69,7 +74,11 @@ struct ErrorAlertView: View {
             return cause.localizedDescription
         }
 
-        return "Something went wrong. Tap the icon for further detail."
+        return String(key: .dataFetchError)
+    }
+
+    var tapIconMessage: String {
+        String(key: .tapIconForDetail)
     }
 
     var popupMessage: String {
@@ -80,7 +89,7 @@ struct ErrorAlertView: View {
 struct ErrorAlertView_Previews: PreviewProvider {
     static var previews: some View {
         ErrorAlertView(
-            cause: NetworkError.maintenanceMode,
+            cause: nil,
             message: "This is a long message. This is a long message. This is a long message. This is a long message",
             retry: {}
         )

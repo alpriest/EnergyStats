@@ -190,6 +190,10 @@
 "month" = "Monat";
 "year" = "Jahr";
 "cumulate" = "Gesamt";
+"Retry" = "Wiederholen";
+"Check FoxESS Server status" = "FoxESS Serverstatus überprüfen";
+"data_fetch_error" = "Es ist ein Fehler beim Abrufen der Daten von der FoxESS-Cloud aufgetreten.";
+"tap_for_detail" = "Tippen Sie auf das Symbol für weitere Details.";
 
 /* Inverter page */
 "self_use_mode" = "In diesem Modus priorisiert der Wechselrichter die Stromzuweisung wie folgt:\n\n1. Hauslast\n2. Batterieladung\n3. Einspeisung";
