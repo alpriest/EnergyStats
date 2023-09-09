@@ -124,15 +124,19 @@ struct InverterView: View {
                 } label: {
                     VStack {
                         HStack {
-                            Text(viewModel.deviceType)
+                            VStack {
+                                if appTheme.showInverterTypeNameOnPowerFlow {
+                                    Text(viewModel.deviceType)
+                                }
+                                if appTheme.showInverterPlantName {
+                                    OptionalView(viewModel.devicePlantName) {
+                                        Text($0)
+                                            .font(.caption2)
+                                    }
+                                }
+                            }
                             Image(systemName: "chevron.up.chevron.down")
                                 .font(.caption2)
-                        }
-                        if appTheme.showInverterPlantName {
-                            OptionalView(viewModel.devicePlantName) {
-                                Text($0)
-                                    .font(.caption2)
-                            }
                         }
                     }
                 }
@@ -162,12 +166,12 @@ struct InverterView_Previews: PreviewProvider {
         VStack {
             InverterView(viewModel: InverterViewModel(configManager: PreviewConfigManager(),
                                                       temperatures: InverterTemperatures.any()),
-                         appTheme: .mock(showInverterTemperature: true, showInverterPlantName: true))
+                         appTheme: .mock().copy(showInverterTemperature: true, showInverterPlantName: true))
                 .background(Color.gray.opacity(0.3))
 
             InverterView(viewModel: InverterViewModel(configManager: PreviewConfigManager(),
                                                       temperatures: InverterTemperatures.any()),
-                         appTheme: .mock(showInverterTemperature: false))
+                         appTheme: .mock().copy(showInverterTemperature: false))
                 .background(Color.gray.opacity(0.3))
         }
     }
