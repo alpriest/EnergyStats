@@ -23,6 +23,7 @@
 "You appear to be offline. Please check your connection." = "Sie scheinen offline zu sein. Bitte überprüfen Sie Ihre Internetverbindung.";
 "Parameters" = "Parameter";
 "Success" = "Erfolg";
+"You've hit the server rate limit. Please try later." = "Sie haben das Server-Limit erreicht. Bitte versuchen Sie es später erneut.";
 
 /* Settings page */
 "Display" = "Anzeige";
@@ -38,7 +39,7 @@
 "1 min" = "1 min";
 "5 mins" = "5 min";
 "Auto" = "Auto";
-"Deducts the Min SOC amount from the battery charge level and percentage. Due to inaccuracies in the way battery levels are measured this may occasionally show a negative amount." = "'Zeige nur die verwendbare Batteriekapazität' leitet den minimalen SOC vom Batterieladezustand und -prozentsatz ab. Aufgrund von Ungenauigkeiten in der Art und Weise, wie der Batterieladezustand gemessen wird, kann dies manchmal zur Anzeige von einer negativen verbleibenden Restladung führen.";
+"show_usable_battery_description" = "'Zeige nur die verwendbare Batteriekapazität' leitet den minimalen SOC vom Batterieladezustand und -prozentsatz ab. Aufgrund von Ungenauigkeiten in der Art und Weise, wie der Batterieladezustand gemessen wird, kann dies manchmal zur Anzeige von einer negativen verbleibenden Restladung führen.";
 "Decimal places" = "Dezimalstellen";
 "Show sunshine background" = "Zeige den Sonnenschein-Hintergrund";
 "Show usable battery only" = "Zeige nur die verwendbare Batteriekapazität";
@@ -63,7 +64,6 @@
 "Device selection" = "Geräte-Auswahl";
 "Selected device and related battery information will be displayed on the main page" = "Informationen zum ausgewählten Gerät und der dazugehörigen Batterie werden auf der Hauptseite angezeigt";
 "Parameters are updated every 5 minutes by FoxESS and only available for a single day at a time" = "Die Parameter werden alle 5 Minuten von FoxESS aktualisiert und sind immer nur für einen Tag verfügbar";
-"Choose date" = "Datum auswählen";
 "6 hours" = "6 Stunden";
 "12 hours" = "12 Stunden";
 "24 hours" = "24 Stunden";
@@ -75,6 +75,7 @@
 "Choose date" = "Datum auswählen";
 "Earnings" = "Ertrag";
 "Shows earnings today, this month, this year, and all-time based on a crude calculation of feed-in ｘ price as configured on FoxESS cloud." = "Zeigt die heutigen Einnahmen, die Einnahmen dieses Monats, dieses Jahres und insgesamt basierend auf einer groben Berechnung von Einspeisung ｘ Preis, wie in der FoxESS Cloud konfiguriert.";
+"battery_read_error" = "Beim Lesen Ihrer Batterieeinstellungen ist ein Fehler aufgetreten. Die Fehlermeldung lautet wie folgt.\n\n%1$@";
 
 /* Graph pages */
 "power" = "Leistung";
@@ -157,15 +158,14 @@
 "Enable charge from grid" = "Laden aus dem Netz aktivieren";
 "Start" = "Start";
 "End" = "Ende";
-"battery_charge_range" = "%@ bis %@";
+"battery_charge_range" = "%1$@ bis %2$@";
 "no_battery_charge" = "Der Batterieplan wird die Batterienutzung nicht ändern. Der Hausstrombedarf wird aus den Batterien gedeckt, wenn Kapazität vorhanden ist.";
-"both_battery_charge_periods" = "Ihr Akku wird zwischen %@ und %@ von der Stromversorgung erzwungen geladen.";
+"both_battery_charge_periods" = "Ihr Akku wird zwischen %1$@ und %2$@ von der Stromversorgung erzwungen geladen.";
 "battery_periods_overlap" = "Diese Zeiträume überschneiden sich möglicherweise, Sie möchten sie möglicherweise aktualisieren.";
-"one_battery_charge_period" = "Ihr Akku wird zwischen %@ von der Stromversorgung erzwungen geladen.";
-"Minimum charge levels" = "Mindestladepegel";
+"one_battery_charge_period" = "Ihr Akku wird zwischen %1$@ von der Stromversorgung erzwungen geladen.";
 "Summary" = "Zusammenfassung";
-"both_battery_freeze_periods" = "Ihre Batterien werden zwischen %@ und %@ weder aufgeladen noch entladen. Jeglicher Hausverbrauch wird in dieser Zeit von der Netzversorgung gedeckt. Zur Deaktivierung setzen Sie die Zeitperioden zurück.";
-"one_battery_freeze_period" = "Ihre Batterien werden zwischen %@ weder aufgeladen noch entladen. Jeglicher Hausverbrauch wird in dieser Zeit von der Netzversorgung gedeckt. Zur Deaktivierung setzen Sie die Zeitperiode zurück.";
+"both_battery_freeze_periods" = "Ihre Batterien werden zwischen %1$@ und %2$@ weder aufgeladen noch entladen. Jeglicher Hausverbrauch wird in dieser Zeit von der Netzversorgung gedeckt. Zur Deaktivierung setzen Sie die Zeitperioden zurück.";
+"one_battery_freeze_period" = "Ihr Akku wird zwischen %1$@ nicht aufgeladen oder entladen. Jegliche Haushaltslast wird in dieser Zeit aus dem Stromnetz bezogen. Um dies zu deaktivieren, setzen Sie den Zeitraum %2$@ zurück.";
 "Schedule summary" = "Zeitplan Zusammenfassung";
 "Reset times" = "Reset-Zeiten";
 "Battery Schedule" = "Batterie-Ladeplan";
@@ -175,6 +175,7 @@
 "battery_charge_schedule_settings_saved" = "Der Batterieladezeitplan wurde gespeichert";
 "Touch the graph to see values at that time" = "Graph berühren um Werte anzuzeigen";
 "Usage today" = "Verbrauch heute";
+"error_title" = "Error";
 "export_total" = "Gesamtausfuhr";
 "import_total" = "Gesamtimport";
 "settings.showHomeTotalOnPowerflow" = "Tägliche Gesamtübersicht zu Hause anzeigen";
@@ -219,18 +220,18 @@
 /* Accessibility */
 "accessibility.inverter" = "Wechselrichter";
 "accessibility.temperature" = "Temperatur";
-"accessibility.solarGeneration" = "Solaranlage erzeugt derzeit %@";
-"accessibility.batteryStoringRate" = "Batterie lädt %@";
-"accessibility.batteryEmptyingRate" = "Batterie entlädt %@";
-"accessibility.batteryCapacity" = "Batteriekapazität %@";
-"accessibility.homeConsumptionRate" = "Haus verbraucht %@";
-"accessibility.gridExportRate" = "Exportiere %@ ins Netz";
-"accessibility.gridConsumptionRate" = "Importiere %@ aus dem Netz";
-"accessibility.yieldToday" = "Heutige Ausbeute %@";
-"accessibility.batteryTemperature" = "Batterietemperatur: %@ ℃";
-"accessibility.batteryEstimate" = "Batterie %@";
-"accessibility.batteryCapacityPercentage" = "Batteriekapazität: %@";
-"accessibility.homeTotalUsageToday" = "Gesamtnutzung zu Hause heute %@";
-"accessibility.totalSolarGenerated" = "Gesamte solare Erzeugung %@";
-"accessibility.totalImportedToday" = "Heute insgesamt importiert %@";
-"accessibility.totalExportedToday" = "Heute insgesamt exportiert %@";
+"accessibility.solarGeneration" = "Solaranlage erzeugt derzeit %1$@";
+"accessibility.batteryStoringRate" = "Batterie lädt %1$@";
+"accessibility.batteryEmptyingRate" = "Batterie entlädt %1$@";
+"accessibility.batteryCapacity" = "Batteriekapazität %1$@";
+"accessibility.homeConsumptionRate" = "Haus verbraucht %1$@";
+"accessibility.gridExportRate" = "Exportiere %1$@ ins Netz";
+"accessibility.gridConsumptionRate" = "Importiere %1$@ aus dem Netz";
+"accessibility.yieldToday" = "Heutige Ausbeute %1$@";
+"accessibility.batteryTemperature" = "Batterietemperatur: %1$@ ℃";
+"accessibility.batteryEstimate" = "Batterie %1$@";
+"accessibility.batteryCapacityPercentage" = "Batteriekapazität: %1$@";
+"accessibility.homeTotalUsageToday" = "Gesamtnutzung zu Hause heute %1$@";
+"accessibility.totalSolarGenerated" = "Gesamte solare Erzeugung %1$@";
+"accessibility.totalImportedToday" = "Heute insgesamt importiert %1$@";
+"accessibility.totalExportedToday" = "Heute insgesamt exportiert %1$@@";

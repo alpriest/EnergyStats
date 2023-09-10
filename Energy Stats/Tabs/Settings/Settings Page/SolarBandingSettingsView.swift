@@ -9,21 +9,18 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct SolarBandingSettingsView: View {
-    @State private var definitions: SolarRangeDefinitions
     @State private var change1: Double
     @State private var change2: Double
     @State private var change3: Double
     @State private var modifiedAppTheme: AppTheme
+    private var range = 0.1 ... 10
     private let appTheme: AppTheme
-    private var range: ClosedRange<Double>
 
-    init(definitions: SolarRangeDefinitions, appTheme: AppTheme) {
-        self.definitions = definitions
-        self.appTheme = appTheme
-        self.range = 0.1 ... 10
-        self.change1 = definitions.breakPoint1
-        self.change2 = definitions.breakPoint2
-        self.change3 = definitions.breakPoint3
+    init(configManager: ConfigManaging) {
+        self.change1 = configManager.solarDefinitions.breakPoint1
+        self.change2 = configManager.solarDefinitions.breakPoint2
+        self.change3 = configManager.solarDefinitions.breakPoint3
+        self.appTheme = configManager.appTheme.value
         self.modifiedAppTheme = appTheme
         self.modifiedAppTheme = makeAppTheme()
     }
@@ -122,6 +119,8 @@ struct SolarBandingSettingsView: View {
 
 struct SolarBandingSettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SolarBandingSettingsView(definitions: .default(), appTheme: .mock())
+        SolarBandingSettingsView(
+            configManager: PreviewConfigManager()
+        )
     }
 }

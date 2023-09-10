@@ -32,7 +32,7 @@
 "1 min" = "1 min";
 "5 mins" = "5 min";
 "Auto" = "Auto";
-"Deducts the Min SOC amount from the battery charge level and percentage. Due to inaccuracies in the way battery levels are measured this may occasionally show a negative amount." = "'Pokaż baterię użytkową' odejmuje ilość Min SOC od poziomu naładowania i procentu baterii. Ze względu na niedokładności w pomiarze poziomów baterii może to czasami skutkować wyświetlaniem ujemnej pozostałej ilości.";
+"show_usable_battery_description" = "'Pokaż baterię użytkową' odejmuje ilość Min SOC od poziomu naładowania i procentu baterii. Ze względu na niedokładności w pomiarze poziomów baterii może to czasami skutkować wyświetlaniem ujemnej pozostałej ilości.";
 "Decimal places" = "Miejsca po przecinku";
 "Show sunshine background" = "Pokaż tło z promieniami słonecznymi";
 "Show usable battery only" = "Pokaż tylko baterię użytkową";
@@ -60,6 +60,7 @@
 "Shows earnings today, this month, this year, and all-time based on a crude calculation of feed-in ｘ price as configured on FoxESS cloud." = "Wyświetla dzisiejsze zarobki, zarobki w tym miesiącu, w tym roku oraz ogólnie oparte na przybliżonych obliczeniach feed-in ｘ cena, zgodnie z konfiguracją w chmurze FoxESS.";
 "Show values in Watts" = "Pokaż wartości w watach";
 "Usage today" = "Dzisiejsze zużycie";
+"error_title" = "Błąd";
 "Solar generated" = "Generowany przez energię słoneczną";
 
 /* Variables page */
@@ -69,10 +70,10 @@
 "Temperatures" = "Temperatury";
 "None" = "Brak";
 "All" = "Wszystko";
-"Cancel" = "Anuluj";
 "Apply" = "Zastosuj";
 "Note that not all parameters contain values" = "Zwróć uwagę, że nie wszystkie parametry zawierają wartości";
 "Earnings" = "Zyski";
+"battery_read_error" = "Wystąpił problem podczas odczytu ustawień baterii. Oto komunikat błędu.\n\n%1$@";
 
 /* Graph pages */
 "power" = "moc";
@@ -82,6 +83,7 @@
 "Charge " = "Ładowanie ";
 "Discharge " = "Rozładowanie ";
 "Grid consumption " = "Konsumpcja z sieci ";
+"rawvariable_pvpower" = "Całkowita moc ze wszystkich stringów, w kilowatach (kW)";
 "rawvariable_generationpower" = "Moc generacji ze źródeł słonecznych / akumulatora przechodząca przez falownik";
 "rawvariable_feedinpower" = "Moc eksportowana z powrotem do sieci";
 "rawvariable_batchargepower" = "Moc ładowania akumulatora";
@@ -117,12 +119,14 @@
 "reportvariable_chargeenergytotal" = "Moc ładowania akumulatora";
 "reportvariable_dischargeenergytotal" = "Moc rozładowywania się akumulatora";
 "reportvariable_gridconsumption" = "Moc pobierana z sieci";
+"reportvariable_loads" = "Moc używana przez dom";
 "Find out more about these variables" = "Dowiedz się więcej o tych zmiennych";
 "absolute_self_sufficiency" = "Zakłada, że każda ilość pobrana z sieci zmniejsza Twoją samowystarczalność.\n\nSamowystarczalność = sieć / zużycieDom";
 "net_self_sufficiency" = "Zakłada, że jeśli Twoje zużycie netto jest dodatnie, to jesteś samowystarczalny.\n\nSamowystarczalność = (eksport - import + ładowanieBaterii - rozładowanieBaterii) / zużycieDom";
 "no_self_sufficiency" = "Nie zostanie wyświetlona żadna ocena samowystarczalności";
 "Self sufficiency estimates" = "Oceny samowystarczalności";
 "Touch the graph to see values at that time" = "Dotknij wykresu, aby zobaczyć wartości o danej godzinie";
+"Absolute" = "Absolute";
 
 /* Battery Charge Pages */
 "Minimum charge levels" = "Minimalne poziomy naładowania";
@@ -139,15 +143,14 @@
 "Enable charge from grid" = "Włącz ładowanie z sieci";
 "Start" = "Początek";
 "End" = "Koniec";
-"battery_charge_range" = "%@ do %@";
+"battery_charge_range" = "%1$@ do %2$@";
 "no_battery_charge" = "Harmonogram baterii nie zmieni wykorzystania baterii. Obciążenie domu będzie zasilane z baterii, jeśli jest dostępna pojemność.";
-"both_battery_charge_periods" = "Twoja bateria zostanie naładowana siłą z sieci między %@, a %@.";
+"both_battery_charge_periods" = "Twoja bateria zostanie naładowana siłą z sieci między %1$@, a %2$@.";
 "battery_periods_overlap" = "Te okresy naładowania się nakładają, możesz je zaktualizować.";
-"one_battery_charge_period" = "Twoja bateria będzie ładowana siłą z sieci między %@.";
-"Minimum charge levels" = "Minimalne poziomy naładowania";
+"one_battery_charge_period" = "Twoja bateria będzie ładowana siłą z sieci między %1$@.";
 "Summary" = "Podsumowanie";
-"both_battery_freeze_periods" = "Twoje baterie nie będą ładowane ani rozładowywane między %@ a %@. Każde obciążenie domu będzie pochodzić z sieci w tym czasie. Aby wyłączyć tę funkcję, zresetuj okresy czasu.";
-"one_battery_freeze_period" = "Twoja bateria nie będzie ładowana ani rozładowywana między %@. Każde obciążenie domu będzie pochodzić z sieci w tym czasie. Aby wyłączyć tę funkcję, zresetuj okres czasu.";
+"both_battery_freeze_periods" = "Twoje baterie nie będą ładowane ani rozładowywane między %1$@ a %2$@. Każde obciążenie domu będzie pochodzić z sieci w tym czasie. Aby wyłączyć tę funkcję, zresetuj okresy czasu.";
+"one_battery_freeze_period" = "Twoja bateria nie będzie się ładować ani rozładowywać między %1$@. Wszelkie obciążenia domowe będą zasilane z sieci w tym czasie. Zresetuj okres czasu %2$@, aby wyłączyć tę funkcję.";
 "Schedule summary" = "Podsumowanie harmonogramu";
 "Reset times" = "Czasy resetowania";
 "Battery Schedule" = "Harmonogram baterii";
@@ -172,6 +175,7 @@
 "Check FoxESS Server status" = "Sprawdź status serwera FoxESS";
 "data_fetch_error" = "Wystąpił błąd podczas pobierania danych z chmury FoxESS.";
 "tap_for_detail" = "Dotknij ikony, aby uzyskać więcej informacji.";
+"You've hit the server rate limit. Please try later." = "Osiągnięto limit prędkości serwera. Proszę spróbować później.";
 
 /* Inverter page */
 "self_use_mode" = "W tym trybie inwerter priorytetowo alokuje moc zgodnie z następującym porządkiem:\n\n1. Obciążenie domu\n2. Ładowanie baterii\n3. Eksport";
@@ -199,18 +203,18 @@
 /* Accessibility */
 "accessibility.inverter" = "Falownik";
 "accessibility.temperature" = "Temperatura";
-"accessibility.solarGeneration" = "Aktualna produkcja energii słonecznej: %@";
-"accessibility.batteryStoringRate" = "Ładowanie baterii: %@";
-"accessibility.batteryEmptyingRate" = "Rozładowywanie baterii: %@";
-"accessibility.batteryCapacity" = "Pojemność baterii: %@";
-"accessibility.homeConsumptionRate" = "Konsumpcja w domu: %@";
-"accessibility.gridExportRate" = "Eksportowanie %@ do sieci";
-"accessibility.gridConsumptionRate" = "Importowanie %@ z sieci";
-"accessibility.yieldToday" = "Dzisiejszy wydajność: %@";
-"accessibility.batteryTemperature" = "Temperatura baterii: %@ ℃";
-"accessibility.batteryEstimate" = "Bateria %@";
-"accessibility.batteryCapacityPercentage" = "Pojemność baterii: %@";
-"accessibility.homeTotalUsageToday" = "Całkowite dzisiejsze zużycie w domu %@";
-"accessibility.totalSolarGenerated" = "Całkowicie wygenerowana energia słoneczna %@";
-"accessibility.totalImportedToday" = "Łącznie importowane dzisiaj %@";
-"accessibility.totalExportedToday" = "Łącznie wyeksportowane dzisiaj %@";
+"accessibility.solarGeneration" = "Aktualna produkcja energii słonecznej: %1$@";
+"accessibility.batteryStoringRate" = "Ładowanie baterii: %1$@";
+"accessibility.batteryEmptyingRate" = "Rozładowywanie baterii: %1$@";
+"accessibility.batteryCapacity" = "Pojemność baterii: %1$@";
+"accessibility.homeConsumptionRate" = "Konsumpcja w domu: %1$@";
+"accessibility.gridExportRate" = "Eksportowanie %1$@ do sieci";
+"accessibility.gridConsumptionRate" = "Importowanie %1$@ z sieci";
+"accessibility.yieldToday" = "Dzisiejszy wydajność: %1$@";
+"accessibility.batteryTemperature" = "Temperatura baterii: %1$@ ℃";
+"accessibility.batteryEstimate" = "Bateria %1$@";
+"accessibility.batteryCapacityPercentage" = "Pojemność baterii: %1$@";
+"accessibility.homeTotalUsageToday" = "Całkowite dzisiejsze zużycie w domu %1$@";
+"accessibility.totalSolarGenerated" = "Całkowicie wygenerowana energia słoneczna %1$@";
+"accessibility.totalImportedToday" = "Łącznie importowane dzisiaj %1$@";
+"accessibility.totalExportedToday" = "Łącznie wyeksportowane dzisiaj %1$@";

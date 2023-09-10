@@ -97,7 +97,7 @@ struct BatterySettingsView: View {
                     Text("Show usable battery only")
                 }
             }, footer: {
-                Text("Deducts the Min SOC amount from the battery charge level and percentage. Due to inaccuracies in the way battery levels are measured this may occasionally show a negative amount.")
+                Text("show_usable_battery_description")
             })
 
             Section {

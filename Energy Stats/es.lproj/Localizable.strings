@@ -33,7 +33,7 @@
 "5 mins" = "5 mins";
 "Auto" = "Auto";
 "Display" = "Display";
-"'Show usable battery' deducts the Min SOC amount from the battery charge level and percentage. Due to inaccuracies in the way battery levels are measured this may result in occasionally showing a negative amount remaining." = "'Mostrar batería utilizable' resta la cantidad de Min SOC del nivel y porcentaje de carga de la batería. Debido a imprecisiones en la forma en que se miden los niveles de la batería, esto puede resultar en que ocasionalmente se muestre un valor negativo restante.";
+"show_usable_battery_description" = "'Mostrar batería utilizable' resta la cantidad de Min SOC del nivel y porcentaje de carga de la batería. Debido a imprecisiones en la forma en que se miden los niveles de la batería, esto puede resultar en que ocasionalmente se muestre un valor negativo restante.";
 "Decimal places" = "Decimales";
 "Show sunshine background" = "Mostrar fondo de sol";
 "Show usable battery only" = "Mostrar solo batería utilizable";
@@ -43,7 +43,6 @@
 "Show coloured flow lines" = "Mostrar líneas de flujo de colores";
 "Capacity" = "Capacidad";
 "OK" = "Aceptar";
-"Cancel" = "Cancelar";
 "Battery" = "Batería";
 "Calculated as " = "Calculado como ";
 "capacity = residual / (Min SOC / 100)" = "capacidad = residual / (Min SOC / 100)";
@@ -57,7 +56,6 @@
 "Device selection" = "Selección de dispositivo";
 "Selected device and related battery information will be displayed on the main page" = "El dispositivo seleccionado y la información de la batería relacionada se mostrarán en la página principal";
 "Parameters are updated every 5 minutes by FoxESS and only available for a single day at a time" = "Los parámetros se actualizan cada 5 minutos por FoxESS y solo están disponibles para un solo día a la vez";
-"Choose date" = "Seleccionar fecha";
 "6 hours" = "6 horas";
 "12 hours" = "12 horas";
 "24 hours" = "24 horas";
@@ -83,6 +81,7 @@
 "Apply" = "Aplicar";
 "Note that not all parameters contain values" = "Tenga en cuenta que no todos los parámetros contienen valores";
 "Earnings" = "Ganancias";
+"battery_read_error" = "Se produjo un error al leer la configuración de su batería. A continuación, se muestra el mensaje de error.\n\n%1$@";
 
 /* Graph pages */
 "power" = "potencia";
@@ -93,6 +92,7 @@
 "Discharge " = "Descarga ";
 "Grid consumption " = "Consumo de la red ";
 "Loads " = "Cargas ";
+"rawvariable_pvpower" = "La potencia total de todas las cadenas, en kilovatios (kW)";
 "rawvariable_generationpower" = "Potencia solar / de la batería que pasa a través del inversor";
 "rawvariable_feedinpower" = "Potencia exportada de vuelta a la red";
 "rawvariable_batchargepower" = "Potencia de carga de la batería";
@@ -128,6 +128,7 @@
 "reportvariable_chargeenergytotal" = "Potencia de carga de la batería";
 "reportvariable_dischargeenergytotal" = "Potencia de descarga de la batería";
 "reportvariable_gridconsumption" = "Potencia proveniente de la red";
+"reportvariable_loads" = "Energía utilizada por la casa";
 "Find out more about these variables" = "Obtén más información sobre estas variables";
 "absolute_self_sufficiency" = "Supone que cualquier cantidad tomada de la red disminuye tu autosuficiencia.\n\nAutosuficiencia = red / consumoCasa";
 "net_self_sufficiency" = "Supone que si tu consumo neto es positivo, entonces eres autosuficiente.\n\nAutosuficiencia = (exportación - importación + cargaBatería - descargaBatería) / consumoCasa";
@@ -135,6 +136,8 @@
 "Self sufficiency estimates" = "Estimaciones de autosuficiencia";
 "Touch the graph to see values at that time" = "Toca el gráfico para ver los valores en ese momento";
 "Usage today" = "Consumo de hoy";
+"error_title" = "Error";
+"Absolute" = "Absolute";
 
 /* Battery Charge Pages */
 "Minimum charge levels" = "Niveles mínimos de carga";
@@ -151,16 +154,15 @@
 "Enable charge from grid" = "Activar carga desde la red";
 "Start" = "Inicio";
 "End" = "Fin";
-"battery_charge_range" = "%@ hasta %@";
+"battery_charge_range" = "%1$@ hasta %2$@";
 "Start time must be before the end time" = "La hora de inicio debe ser anterior a la hora de finalización.";
 "no_battery_charge" = "El plan de batería no alterará el uso de la batería. La carga de la casa se abastecerá de las baterías si hay capacidad disponible.";
-"both_battery_charge_periods" = "Su batería será cargada forzadamente desde la red eléctrica entre %@ y %@.";
+"both_battery_charge_periods" = "Su batería será cargada forzadamente desde la red eléctrica entre %1$@ y %2$@.";
 "battery_periods_overlap" = "Estos períodos se superponen, puede que desee actualizarlos.";
-"one_battery_charge_period" = "Su batería será cargada forzadamente desde la red eléctrica entre %@.";
-"Minimum charge levels" = "Niveles mínimos de carga";
+"one_battery_charge_period" = "Su batería será cargada forzadamente desde la red eléctrica entre %1$@.";
 "Summary" = "Resumen";
-"both_battery_freeze_periods" = "Sus baterías no se cargarán ni se descargaran entre %@ y %@. Cualquier consumo de la casa vendrá de la red eléctrica durante estos periodos. Restablezca los periodos de tiempo para desactivar esta función.";
-"one_battery_freeze_period" = "Su batería no se cargará ni se descargará entre %@. Cualquier consumo de la casa vendrá de la red eléctrica durante este periodo. Restablezca el periodo de tiempo para desactivar esta función.";
+"both_battery_freeze_periods" = "Sus baterías no se cargarán ni se descargaran entre %1$@ y %2$@. Cualquier consumo de la casa vendrá de la red eléctrica durante estos periodos. Restablezca los periodos de tiempo para desactivar esta función.";
+"one_battery_freeze_period" = "Su batería no se cargará ni descargará entre %1$@. Cualquier carga en el hogar se tomará de la red eléctrica durante este período. Reinicie el período de tiempo %2$@ para desactivar esta función.";
 "Schedule summary" = "Resumen del horario";
 "Reset times" = "Horarios de reinicio";
 "Battery Schedule" = "Programa de Batería";
@@ -185,6 +187,7 @@
 "Check FoxESS Server status" = "Comprobar estado del servidor FoxESS";
 "data_fetch_error" = "Se produjo un error al obtener los datos de la nube de FoxESS.";
 "tap_for_detail" = "Toque el icono para más detalles.";
+"You've hit the server rate limit. Please try later." = "Ha alcanzado el límite de velocidad del servidor. Por favor, intente más tarde.";
 
 /* Inverter page */
 "self_use_mode" = "En este modo, el inversor prioriza la asignación de energía de la siguiente manera:\n\n1. Carga de la casa\n2. Carga de batería\n3. Exportar";
@@ -212,19 +215,19 @@
 /* Accessibility */
 "accessibility.inverter" = "Inversor";
 "accessibility.temperature" = "Temperatura";
-"accessibility.solarGeneration" = "Generación solar actual: %@";
-"accessibility.batteryStoringRate" = "Almacenamiento de batería: %@";
-"accessibility.batteryEmptyingRate" = "Descarga de batería: %@";
-"accessibility.batteryCapacity" = "Capacidad de la batería: %@";
-"accessibility.homeConsumptionRate" = "Consumo en casa: %@";
-"accessibility.gridExportRate" = "Exportando %@ a la red";
-"accessibility.gridConsumptionRate" = "Importando %@ de la red";
-"accessibility.yieldToday" = "Rendimiento hoy: %@";
-"accessibility.batteryTemperature" = "Temperatura de la batería: %@ ℃";
-"accessibility.batteryEstimate" = "Batería %@";
-"accessibility.batteryCapacityPercentage" = "Capacidad de la batería: %@";
-"accessibility.homeTotalUsageToday" = "Consumo total en el hogar hoy %@";
-"accessibility.totalSolarGenerated" = "Total generado por energía solar %@";
-"accessibility.totalImportedToday" = "Total importado hoy %@";
-"accessibility.totalExportedToday" = "Total exportado hoy %@";
+"accessibility.solarGeneration" = "Generación solar actual: %1$@";
+"accessibility.batteryStoringRate" = "Almacenamiento de batería: %1$@";
+"accessibility.batteryEmptyingRate" = "Descarga de batería: %1$@";
+"accessibility.batteryCapacity" = "Capacidad de la batería: %1$@";
+"accessibility.homeConsumptionRate" = "Consumo en casa: %1$@";
+"accessibility.gridExportRate" = "Exportando %1$@ a la red";
+"accessibility.gridConsumptionRate" = "Importando %1$@ de la red";
+"accessibility.yieldToday" = "Rendimiento hoy: %1$@";
+"accessibility.batteryTemperature" = "Temperatura de la batería: %1$@ ℃";
+"accessibility.batteryEstimate" = "Batería %1$@";
+"accessibility.batteryCapacityPercentage" = "Capacidad de la batería: %1$@";
+"accessibility.homeTotalUsageToday" = "Consumo total en el hogar hoy %1$@";
+"accessibility.totalSolarGenerated" = "Total generado por energía solar %1$@";
+"accessibility.totalImportedToday" = "Total importado hoy %1$@";
+"accessibility.totalExportedToday" = "Total exportado hoy %1$@";
 

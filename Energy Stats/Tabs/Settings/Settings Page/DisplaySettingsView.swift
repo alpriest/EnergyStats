@@ -13,56 +13,61 @@ struct DisplaySettingsView: View {
     let configManager: ConfigManaging
 
     var body: some View {
-        Section(
-            content: {
-                Group {
-                    Toggle(isOn: $viewModel.showColouredLines) {
-                        Text("Show coloured flow lines")
-                    }
-
-                    Toggle(isOn: $viewModel.showTotalYield) {
-                        Text("Show total yield")
-                    }
-
-                    Toggle(isOn: $viewModel.showHomeTotalOnPowerFlow) {
-                        Text("settings.showHomeTotalOnPowerflow")
-                    }
-
-                    Toggle(isOn: $viewModel.showGridTotalsOnPowerFlow) {
-                        Text("settings.showGridTotalsOnPowerflow")
-                    }
-
-                    Toggle(isOn: $viewModel.showSunnyBackground) {
-                        Text("Show sunshine background")
-                    }
+        Section {
+            Group {
+                Toggle(isOn: $viewModel.showColouredLines) {
+                    Text("Show coloured flow lines")
                 }
 
-                HStack {
-                    Text("Decimal places").padding(.trailing)
-                    Spacer()
-                    Picker("Decimal places", selection: $viewModel.decimalPlaces) {
-                        Text("2").tag(2)
-                        Text("3").tag(3)
-                    }.pickerStyle(.segmented)
+                Toggle(isOn: $viewModel.showTotalYield) {
+                    Text("Show total yield")
                 }
 
-                Toggle(isOn: $viewModel.showInW) {
-                    Text("Show values in Watts")
+                Toggle(isOn: $viewModel.showHomeTotalOnPowerFlow) {
+                    Text("settings.showHomeTotalOnPowerflow")
                 }
 
-                Toggle(isOn: $viewModel.showLastUpdateTimestamp) {
-                    Text("Show last update timestamp")
+                Toggle(isOn: $viewModel.showGridTotalsOnPowerFlow) {
+                    Text("settings.showGridTotalsOnPowerflow")
                 }
 
-                NavigationLink {
-                    ApproximationsSettingsView(configManager: configManager)
-                } label: {
-                    Text("Approximations")
+                Toggle(isOn: $viewModel.showSunnyBackground) {
+                    Text("Show sunshine background")
                 }
-            },
+            }
+
+            HStack {
+                Text("Decimal places").padding(.trailing)
+                Spacer()
+                Picker("Decimal places", selection: $viewModel.decimalPlaces) {
+                    Text("2").tag(2)
+                    Text("3").tag(3)
+                }.pickerStyle(.segmented)
+            }
+
+            Toggle(isOn: $viewModel.showInW) {
+                Text("Show values in Watts")
+            }
+
+            Toggle(isOn: $viewModel.showLastUpdateTimestamp) {
+                Text("Show last update timestamp")
+            }
+        }
             header: {
-                Text("Display")
-            })
+            Text("Display")
+        }
+
+        NavigationLink {
+            ApproximationsSettingsView(configManager: configManager)
+        } label: {
+            Text("Approximations")
+        }
+
+        NavigationLink {
+            SolarBandingSettingsView(configManager: configManager)
+        } label: {
+            Text("Solar display")
+        }
     }
 }
 
