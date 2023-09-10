@@ -32,7 +32,8 @@ public extension AppTheme {
             showInverterPlantName: showInverterPlantName,
             showGridTotalsOnPowerFlow: true,
             showInverterTypeNameOnPowerFlow: true,
-            showLastUpdateTimestamp: false
+            showLastUpdateTimestamp: false,
+            solarDefinitions: .default()
         )
     }
 }

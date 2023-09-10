@@ -173,6 +173,7 @@
 		41E4B31328DB77A3003F7F47 /* HomePowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E4B31228DB77A3003F7F47 /* HomePowerView.swift */; };
 		41E4B31528DB77E8003F7F47 /* GridPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E4B31428DB77E8003F7F47 /* GridPowerView.swift */; };
 		41E8E7242AADFB3900DC4B89 /* SolarBandingSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E8E7232AADFB3900DC4B89 /* SolarBandingSettingsView.swift */; };
+		41E8E7262AAE0D0D00DC4B89 /* SolarRangeDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E8E7252AAE0D0D00DC4B89 /* SolarRangeDefinitions.swift */; };
 		41F71ABD2A14FBEC00A8C81B /* Array+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127910C28E2442100D5F993 /* Array+Safe.swift */; };
 		41F71ABF2A1504C700A8C81B /* report-year.json in Resources */ = {isa = PBXBuildFile; fileRef = 41F71ABE2A1504C700A8C81B /* report-year.json */; };
 		41F71AC12A1504D900A8C81B /* report-month.json in Resources */ = {isa = PBXBuildFile; fileRef = 41F71AC02A1504D900A8C81B /* report-month.json */; };
@@ -432,6 +433,7 @@
 		41E4B31228DB77A3003F7F47 /* HomePowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePowerView.swift; sourceTree = "<group>"; };
 		41E4B31428DB77E8003F7F47 /* GridPowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPowerView.swift; sourceTree = "<group>"; };
 		41E8E7232AADFB3900DC4B89 /* SolarBandingSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarBandingSettingsView.swift; sourceTree = "<group>"; };
+		41E8E7252AAE0D0D00DC4B89 /* SolarRangeDefinitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarRangeDefinitions.swift; sourceTree = "<group>"; };
 		41EDDF6B28CD2A630092C662 /* HomePowerFlowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePowerFlowViewModel.swift; sourceTree = "<group>"; };
 		41EDDF7128CD2ED30092C662 /* Energy StatsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Energy StatsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		41F71ABE2A1504C700A8C81B /* report-year.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "report-year.json"; sourceTree = "<group>"; };
@@ -701,6 +703,7 @@
 				4103F82F2922BFBA00567B1C /* ReportVariable.swift */,
 				41626CD129D96AD9003FEB00 /* DeviceFirmwareVersion.swift */,
 				416AE4472A812876003D0122 /* WorkMode.swift */,
+				41E8E7252AAE0D0D00DC4B89 /* SolarRangeDefinitions.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1350,6 +1353,7 @@
 				4103D1D129DB6C51001B0BC8 /* Raw.swift in Sources */,
 				4103D1D829DB6C51001B0BC8 /* NetworkFacade.swift in Sources */,
 				418547492A3A1C7A000128C7 /* PowerAmountView.swift in Sources */,
+				41E8E7262AAE0D0D00DC4B89 /* SolarRangeDefinitions.swift in Sources */,
 				416AE4452A811FBB003D0122 /* DeviceSettingsGetResponse.swift in Sources */,
 				41F71ABD2A14FBEC00A8C81B /* Array+Safe.swift in Sources */,
 				4103D1D029DB6C51001B0BC8 /* Report.swift in Sources */,

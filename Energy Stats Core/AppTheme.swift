@@ -33,6 +33,7 @@ public struct AppTheme {
     public var showGridTotalsOnPowerFlow: Bool
     public var showInverterTypeNameOnPowerFlow: Bool
     public var showLastUpdateTimestamp: Bool
+    public var solarDefinitions: SolarRangeDefinitions
 
     public init(
         showColouredLines: Bool,
@@ -52,7 +53,8 @@ public struct AppTheme {
         showInverterPlantName: Bool,
         showGridTotalsOnPowerFlow: Bool,
         showInverterTypeNameOnPowerFlow: Bool,
-        showLastUpdateTimestamp: Bool
+        showLastUpdateTimestamp: Bool,
+        solarDefinitions: SolarRangeDefinitions
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -72,6 +74,7 @@ public struct AppTheme {
         self.showGridTotalsOnPowerFlow = showGridTotalsOnPowerFlow
         self.showInverterTypeNameOnPowerFlow = showInverterTypeNameOnPowerFlow
         self.showLastUpdateTimestamp = showLastUpdateTimestamp
+        self.solarDefinitions = solarDefinitions
     }
 
     public func copy(
@@ -92,7 +95,8 @@ public struct AppTheme {
         showInverterPlantName: Bool? = nil,
         showGridTotalsOnPowerFlow: Bool? = nil,
         showInverterTypeNameOnPowerFlow: Bool? = nil,
-        showLastUpdateTimestamp: Bool? = nil
+        showLastUpdateTimestamp: Bool? = nil,
+        solarDefinitions: SolarRangeDefinitions? = nil
     ) -> AppTheme {
         AppTheme(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -112,7 +116,8 @@ public struct AppTheme {
             showInverterPlantName: showInverterPlantName ?? self.showInverterPlantName,
             showGridTotalsOnPowerFlow: showGridTotalsOnPowerFlow ?? self.showGridTotalsOnPowerFlow,
             showInverterTypeNameOnPowerFlow: showInverterTypeNameOnPowerFlow ?? self.showInverterTypeNameOnPowerFlow,
-            showLastUpdateTimestamp: showLastUpdateTimestamp ?? self.showLastUpdateTimestamp
+            showLastUpdateTimestamp: showLastUpdateTimestamp ?? self.showLastUpdateTimestamp,
+            solarDefinitions: solarDefinitions ?? self.solarDefinitions
         )
     }
 }

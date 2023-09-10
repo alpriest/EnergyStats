@@ -32,6 +32,7 @@ public protocol Config {
     var showInverterTypeNameOnPowerFlow: Bool { get set }
     var deviceBatteryOverrides: [String: String] { get set }
     var showLastUpdateTimestamp: Bool { get set }
+    var solarDefinitions: SolarRangeDefinitions { get set }
 }
 
 extension UserDefaults {
@@ -139,6 +140,15 @@ public class UserDefaultsConfig: Config {
         }
         set {
             UserDefaults.shared.set(newValue, forKey: "deviceBatteryOverrides")
+        }
+    }
+
+    public var solarDefinitions: SolarRangeDefinitions {
+        get {
+            UserDefaults.shared.object(forKey: "solarDefinitions") as? SolarRangeDefinitions ?? SolarRangeDefinitions.default()
+        }
+        set {
+            UserDefaults.shared.set(newValue, forKey: "solarDefinitions")
         }
     }
 }

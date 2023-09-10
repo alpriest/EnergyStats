@@ -9,11 +9,13 @@ import SwiftUI
 
 struct NumberTextField: View {
     let title: String
+    let range: ClosedRange<Int>
     @Binding var text: String
 
-    init(_ title: String, text: Binding<String>) {
+    init(_ title: String, text: Binding<String>, range: ClosedRange<Int>) {
         self.title = title
         self._text = text
+        self.range = range
     }
 
     var body: some View {
@@ -24,11 +26,11 @@ struct NumberTextField: View {
                 if filtered != newValue {
                     text = filtered
                 }
-                if Int(text) ?? 0 < 0 {
-                    text = "0"
+                if Int(text) ?? 0 < range.lowerBound {
+                    text = String(describing: range.lowerBound)
                 }
-                if Int(text) ?? 0 > 100 {
-                    text = "100"
+                if Int(text) ?? 0 > range.upperBound {
+                    text = String(describing: range.upperBound)
                 }
             })
 
@@ -45,7 +47,7 @@ struct NumberTextField_Previews: PreviewProvider {
         @State var value = "12"
 
         var body: some View {
-            NumberTextField("Hello", text: $value)
+            NumberTextField("Hello", text: $value, range: 1...100)
         }
     }
 }

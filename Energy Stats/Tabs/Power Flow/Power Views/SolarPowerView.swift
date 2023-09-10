@@ -39,16 +39,16 @@ struct SolarPowerView: View {
             }
 
             switch viewModel.solar {
-            case 0.001 ..< 1:
+            case 0.001 ..< appTheme.solarDefinitions.breakPoint1:
                 SunView(solar: viewModel.solar, glowing: false, glowColor: .clear, sunColor: Color("Sun"))
                     .frame(width: 40, height: 40)
-            case 1 ..< 2:
+            case appTheme.solarDefinitions.breakPoint1 ..< appTheme.solarDefinitions.breakPoint2:
                 SunView(solar: viewModel.solar, glowing: true, glowColor: .yellow.opacity(0.3), sunColor: Color("Sun"))
                     .frame(width: 40, height: 40)
-            case 2 ..< 3:
+            case appTheme.solarDefinitions.breakPoint2 ..< appTheme.solarDefinitions.breakPoint3:
                 SunView(solar: viewModel.solar, glowing: true, glowColor: Color("Sun"), sunColor: .orange)
                     .frame(width: 40, height: 40)
-            case 3 ..< 500:
+            case appTheme.solarDefinitions.breakPoint3 ..< 500:
                 SunView(solar: viewModel.solar, glowing: true, glowColor: .orange, sunColor: .red)
                     .frame(width: 40, height: 40)
             default:
@@ -64,7 +64,7 @@ struct SolarPowerView: View {
 struct SolarPowerView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            AdjustableView(config: MockConfig(), maximum: 5.0)
+            AdjustableView(appTheme: .mock(), config: MockConfig(), maximum: 5.0)
 
             HStack {
                 SolarPowerView(
@@ -95,13 +95,14 @@ struct SolarPowerView_Previews: PreviewProvider {
 struct AdjustableView: View {
     @State private var amount: Double = 3.0
     @State private var visible = true
+    let appTheme: AppTheme
     let config: Config
     let maximum: Double
 
     var body: some View {
         VStack {
             Color.clear.overlay(
-                SolarPowerView(appTheme: AppTheme.mock().copy(showTotalYield: false, showEarnings: false), viewModel: SolarPowerViewModel(solar: amount, generation: 8.5, earnings: .any()))
+                SolarPowerView(appTheme: appTheme, viewModel: SolarPowerViewModel(solar: amount, generation: 8.5, earnings: .any()))
             ).frame(height: 100)
 
             Slider(value: $amount, in: 0 ... maximum, step: 0.1, label: {

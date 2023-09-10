@@ -8,75 +8,120 @@
 import Energy_Stats_Core
 import SwiftUI
 
-struct SolarRangeView: View {
-    let title: String
-    @State private var lower: String
-    @State private var higher: String
-
-    init(title: String, range: ClosedRange<Int>) {
-        self.title = title
-        self.lower = String(describing: range.lowerBound)
-        self.higher = String(describing: range.upperBound)
-    }
-
-    var body: some View {
-        Section {
-            HStack {
-                Text("Min W")
-                NumberTextField("Min W", text: $lower)
-                    .multilineTextAlignment(.trailing)
-            }
-
-            HStack {
-                Text("Max W")
-                NumberTextField("Max W", text: $higher)
-                    .multilineTextAlignment(.trailing)
-            }
-        } header: {
-            Text(title)
-        }
-    }
-}
-
 struct SolarBandingSettingsView: View {
-    let definitions: SolarRangeDefinitions
+    @State private var definitions: SolarRangeDefinitions
+    @State private var change1: Double
+    @State private var change2: Double
+    @State private var change3: Double
+    @State private var modifiedAppTheme: AppTheme
+    private let appTheme: AppTheme
+    private var range: ClosedRange<Double>
+
+    init(definitions: SolarRangeDefinitions, appTheme: AppTheme) {
+        self.definitions = definitions
+        self.appTheme = appTheme
+        self.range = 0.1 ... 10
+        self.change1 = definitions.breakPoint1
+        self.change2 = definitions.breakPoint2
+        self.change3 = definitions.breakPoint3
+        self.modifiedAppTheme = appTheme
+        self.modifiedAppTheme = makeAppTheme()
+    }
 
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             Form {
                 Section {
-                    AdjustableView(config: MockConfig(), maximum: Double(definitions.range4.lowerBound + 500) / 1000.0)
+                    AdjustableView(appTheme: modifiedAppTheme, config: MockConfig(), maximum: change3 + 0.500)
                 } header: {
-                    Text("Try it")
+                    Text("Example")
+                } footer: {
+                    Text("Drag the slider to simulate solar conditions to see how your solar graph will display. Use the breakpoint sliders below to adjust the breakpoints between different display variants.")
                 }
 
-                SolarRangeView(title: "Range 1", range: definitions.range1)
-                SolarRangeView(title: "Range 2", range: definitions.range2)
-                SolarRangeView(title: "Range 3", range: definitions.range3)
-                SolarRangeView(title: "Range 4", range: definitions.range4)
+                Section {
+                    HStack {
+                        Slider(value: $change1, in: range, step: 0.1)
+                        Text(change1.kWh(3))
+                    }
+                } header: {
+                    Text("Breakpoint 1")
+                }
+
+                Section {
+                    HStack {
+                        Slider(value: $change2, in: range, step: 0.1)
+                        Text(change2.kWh(3))
+                    }
+                } header: {
+                    Text("Breakpoint 2")
+                }
+
+                Section {
+                    HStack {
+                        Slider(value: $change3, in: range, step: 0.1)
+                        Text(change3.kWh(3))
+                    }
+                } header: {
+                    Text("Breakpoint 3")
+                }
+
+                Button {
+                    change1 = 1
+                    change2 = 2
+                    change3 = 3
+                } label: {
+                    Text("Restore defaults")
+                }
+            }.onChange(of: change1) { newValue in
+                if newValue > change2 {
+                    change2 = newValue
+                }
+                if change2 > change3 {
+                    change3 = change2
+                }
+
+                modifiedAppTheme = makeAppTheme()
+            }
+            .onChange(of: change2) { newValue in
+                if newValue < change1 {
+                    change1 = newValue
+                }
+                if newValue > change3 {
+                    change3 = newValue
+                }
+
+                modifiedAppTheme = makeAppTheme()
+            }
+            .onChange(of: change3) { newValue in
+                if newValue < change2 {
+                    change2 = newValue
+                }
+                if change2 < change1 {
+                    change2 = change1
+                }
+
+                modifiedAppTheme = makeAppTheme()
             }
 
             BottomButtonsView {
-                // TODO
+                // TODO:
             }
         }
+    }
+
+    func makeAppTheme() -> AppTheme {
+        appTheme
+            .copy(solarDefinitions: SolarRangeDefinitions(
+                breakPoint1: change1,
+                breakPoint2: change2,
+                breakPoint3: change3
+            ))
     }
 }
 
 struct SolarBandingSettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SolarBandingSettingsView(definitions: SolarRangeDefinitions(
-            range1: 1...999,
-            range2: 1000...1999,
-            range3: 2000...2999,
-            range4: 3000...500000
-        ))
+        SolarBandingSettingsView(definitions: .default(), appTheme: .mock())
     }
-}
-
-struct SolarRangeDefinitions {
-    let range1: ClosedRange<Int>
-    let range2: ClosedRange<Int>
-    let range3: ClosedRange<Int>
-    let range4: ClosedRange<Int>
 }

@@ -175,6 +175,7 @@ public class MockConfig: Config {
     public var showInverterTypeNameOnPowerFlow: Bool = false
     public var deviceBatteryOverrides: [String: String] = [:]
     public var showLastUpdateTimestamp: Bool = false
+    public var solarDefinitions: SolarRangeDefinitions = .default()
 }
 
 public class PreviewConfigManager: ConfigManager {
