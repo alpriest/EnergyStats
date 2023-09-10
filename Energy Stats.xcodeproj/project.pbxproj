@@ -172,6 +172,7 @@
 		41E4B31028DB7666003F7F47 /* BatteryPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E4B30F28DB7666003F7F47 /* BatteryPowerView.swift */; };
 		41E4B31328DB77A3003F7F47 /* HomePowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E4B31228DB77A3003F7F47 /* HomePowerView.swift */; };
 		41E4B31528DB77E8003F7F47 /* GridPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E4B31428DB77E8003F7F47 /* GridPowerView.swift */; };
+		41E8E7242AADFB3900DC4B89 /* SolarBandingSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E8E7232AADFB3900DC4B89 /* SolarBandingSettingsView.swift */; };
 		41F71ABD2A14FBEC00A8C81B /* Array+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127910C28E2442100D5F993 /* Array+Safe.swift */; };
 		41F71ABF2A1504C700A8C81B /* report-year.json in Resources */ = {isa = PBXBuildFile; fileRef = 41F71ABE2A1504C700A8C81B /* report-year.json */; };
 		41F71AC12A1504D900A8C81B /* report-month.json in Resources */ = {isa = PBXBuildFile; fileRef = 41F71AC02A1504D900A8C81B /* report-month.json */; };
@@ -430,6 +431,7 @@
 		41E4B30F28DB7666003F7F47 /* BatteryPowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryPowerView.swift; sourceTree = "<group>"; };
 		41E4B31228DB77A3003F7F47 /* HomePowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePowerView.swift; sourceTree = "<group>"; };
 		41E4B31428DB77E8003F7F47 /* GridPowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPowerView.swift; sourceTree = "<group>"; };
+		41E8E7232AADFB3900DC4B89 /* SolarBandingSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarBandingSettingsView.swift; sourceTree = "<group>"; };
 		41EDDF6B28CD2A630092C662 /* HomePowerFlowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePowerFlowViewModel.swift; sourceTree = "<group>"; };
 		41EDDF7128CD2ED30092C662 /* Energy StatsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Energy StatsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		41F71ABE2A1504C700A8C81B /* report-year.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "report-year.json"; sourceTree = "<group>"; };
@@ -727,6 +729,7 @@
 				414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */,
 				4160098A2A8D18B10096CCD9 /* SettingsFooterView.swift */,
 				419AB47F2AA36D24002CBC96 /* DisplaySettingsView.swift */,
+				41E8E7232AADFB3900DC4B89 /* SolarBandingSettingsView.swift */,
 			);
 			path = "Settings Page";
 			sourceTree = "<group>";
@@ -1295,6 +1298,7 @@
 				41C19DCD2A4DDE46009883AB /* SelfSufficiencyEstimateView.swift in Sources */,
 				4130364B29B8BE7F006B5CE9 /* InverterChoiceView.swift in Sources */,
 				41E4B30E28DB7511003F7F47 /* BatteryCapacityCalculator.swift in Sources */,
+				41E8E7242AADFB3900DC4B89 /* SolarBandingSettingsView.swift in Sources */,
 				4140145C28C70B4A00EA5BA1 /* PowerFlowTabViewModel.swift in Sources */,
 				4128E4C128DA5F6600C1D698 /* Date.swift in Sources */,
 				41C19DCF2A4E09F9009883AB /* SelfSufficiencySettingsView.swift in Sources */,
@@ -1614,7 +1618,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.69;
+				MARKETING_VERSION = 1.70;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1649,7 +1653,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.69;
+				MARKETING_VERSION = 1.70;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

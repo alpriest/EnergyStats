@@ -39,8 +39,11 @@ struct SolarPowerView: View {
             }
 
             switch viewModel.solar {
-            case 1 ..< 2:
+            case 0.001 ..< 1:
                 SunView(solar: viewModel.solar, glowing: false, glowColor: .clear, sunColor: Color("Sun"))
+                    .frame(width: 40, height: 40)
+            case 1 ..< 2:
+                SunView(solar: viewModel.solar, glowing: true, glowColor: .yellow.opacity(0.3), sunColor: Color("Sun"))
                     .frame(width: 40, height: 40)
             case 2 ..< 3:
                 SunView(solar: viewModel.solar, glowing: true, glowColor: Color("Sun"), sunColor: .orange)
@@ -61,7 +64,7 @@ struct SolarPowerView: View {
 struct SolarPowerView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            AdjustableView(config: MockConfig())
+            AdjustableView(config: MockConfig(), maximum: 5.0)
 
             HStack {
                 SolarPowerView(
@@ -87,30 +90,29 @@ struct SolarPowerView_Previews: PreviewProvider {
             }
         }
     }
+}
 
-    struct AdjustableView: View {
-        @State private var amount: Double = 3.0
-        @State private var visible = true
-        let config: Config
+struct AdjustableView: View {
+    @State private var amount: Double = 3.0
+    @State private var visible = true
+    let config: Config
+    let maximum: Double
 
-        var body: some View {
-            VStack {
-                Color.clear.overlay(
-                    SolarPowerView(appTheme: AppTheme.mock().copy(showTotalYield: true, showEarnings: true), viewModel: SolarPowerViewModel(solar: amount, generation: 8.5, earnings: .any()))
-                ).frame(height: 100)
+    var body: some View {
+        VStack {
+            Color.clear.overlay(
+                SolarPowerView(appTheme: AppTheme.mock().copy(showTotalYield: false, showEarnings: false), viewModel: SolarPowerViewModel(solar: amount, generation: 8.5, earnings: .any()))
+            ).frame(height: 100)
 
-                Slider(value: $amount, in: 0 ... 5.0, step: 0.1, label: {
-                    Text("kWH")
-                }, onEditingChanged: { _ in
+            Slider(value: $amount, in: 0 ... maximum, step: 0.1, label: {
+                Text("kWH")
+            }, onEditingChanged: { _ in
+                visible.toggle()
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
                     visible.toggle()
-
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-                        visible.toggle()
-                    }
-                })
-
-                Text(amount, format: .number)
-            }
+                }
+            })
         }
     }
 }

@@ -134,7 +134,9 @@ public class ConfigManager: ConfigManaging {
             )
         }
         devices = newDevices
-        select(device: devices?.first)
+        if selectedDeviceID == nil {
+            select(device: devices?.first)
+        }
     }
 
     private func fetchFirmwareVersions(deviceID: String) async throws -> DeviceFirmwareVersion {

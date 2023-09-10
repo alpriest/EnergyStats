@@ -5,9 +5,9 @@
 //  Created by Alistair Priest on 15/08/2023.
 //
 
-import Foundation
 import AppIntents
 import Energy_Stats_Core
+import Foundation
 
 @available(iOS 16.0, *)
 struct CheckBatteryChargeLevelIntent: AppIntent {
@@ -28,6 +28,29 @@ struct CheckBatteryChargeLevelIntent: AppIntent {
         return .result(value: battery.soc, dialog: IntentDialog(stringLiteral: "\(battery.soc)%"))
     }
 }
+
+//@available(iOS 16.0, *)
+//struct ChangeWorkModeIntent: AppIntent {
+//    static var title: LocalizedStringResource = "Change inverter work mode"
+//    static var description: IntentDescription? = "Changes the work mode of the inverter"
+//    static var authenticationPolicy: IntentAuthenticationPolicy = .alwaysAllowed
+//    static var openAppWhenRun: Bool = false
+//
+//    @Parameter(title: "WorkMode", description: "The workmode to change the inverter to", requestValueDialog: IntentDialog("Which work mode would you like to set?"))
+//    var workMode: WorkMode
+//
+//    func perform() async throws -> some IntentResult & ProvidesDialog {
+//        let store = KeychainStore()
+//        let network = Network(credentials: store, store: InMemoryLoggingNetworkStore())
+//        let config = UserDefaultsConfig()
+//        guard let deviceID = config.selectedDeviceID else {
+//            throw ConfigManager.NoDeviceFoundError()
+//        }
+//        let battery = try await network.fetchBattery(deviceID: deviceID)
+//
+//        return .result(value: battery.soc, dialog: IntentDialog(stringLiteral: "\(battery.soc)%"))
+//    }
+//}
 
 @available(iOS 16.0, *)
 struct EnergyStatsShortcuts: AppShortcutsProvider {

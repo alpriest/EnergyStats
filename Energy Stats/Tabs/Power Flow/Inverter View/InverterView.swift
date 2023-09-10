@@ -84,11 +84,6 @@ struct InverterView: View {
     @ViewBuilder
     func verticalDeviceDetail() -> some View {
         VStack {
-            if appTheme.showInverterTemperature {
-                Text("hidden")
-                    .hidden()
-            }
-
             deviceNameSelector()
 
             if appTheme.showInverterTemperature, let temperatures = viewModel.temperatures {
@@ -125,8 +120,8 @@ struct InverterView: View {
                     VStack {
                         HStack {
                             VStack {
-                                if appTheme.showInverterTypeNameOnPowerFlow {
-                                    Text(viewModel.deviceType)
+                                if appTheme.showInverterTypeNameOnPowerFlow, let typeName = viewModel.deviceType {
+                                    Text(typeName)
                                 }
                                 if appTheme.showInverterPlantName {
                                     OptionalView(viewModel.devicePlantName) {
@@ -141,10 +136,11 @@ struct InverterView: View {
                     }
                 }
                 .buttonStyle(.bordered)
+                .padding(.top, 5)
             } else {
                 VStack {
-                    if appTheme.showInverterTypeNameOnPowerFlow {
-                        Text(viewModel.devices.first?.device.deviceDisplayName ?? "")
+                    if appTheme.showInverterTypeNameOnPowerFlow, let typeName = viewModel.deviceType {
+                        Text(typeName)
                     }
 
                     if appTheme.showInverterPlantName {

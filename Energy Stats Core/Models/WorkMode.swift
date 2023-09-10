@@ -5,10 +5,11 @@
 //  Created by Alistair Priest on 07/08/2023.
 //
 
+import AppIntents
 import Foundation
 import SwiftUI
 
-public enum WorkMode: CaseIterable, Describable {
+public enum WorkMode: String, CaseIterable, Describable {
     case selfUse
     case feedInFirst
     case backup
@@ -63,4 +64,17 @@ public enum WorkMode: CaseIterable, Describable {
             return .peakShaving
         }
     }
+}
+
+@available(iOS 16.0, *)
+extension WorkMode: AppEnum, CaseDisplayRepresentable {
+    public static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Work mode")
+
+    public static var caseDisplayRepresentations: [Self: DisplayRepresentation] = [
+        .selfUse: DisplayRepresentation(title: "Self Use"),
+        .feedInFirst: DisplayRepresentation(title: "Feed In First"),
+        .backup: DisplayRepresentation(title: "Backup"),
+        .powerStation: DisplayRepresentation(title: "Power Station"),
+        .peakShaving: DisplayRepresentation(title: "Peak Shaving")
+    ]
 }

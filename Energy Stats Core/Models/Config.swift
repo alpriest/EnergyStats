@@ -96,7 +96,7 @@ public class UserDefaultsConfig: Config {
     @UserDefaultsStoredBool(key: "showInverterIcon", defaultValue: true)
     public var showInverterIcon: Bool
 
-    @UserDefaultsStoredBool(key: "shouldInvertCT2", defaultValue: false)
+    @UserDefaultsStoredBool(key: "shouldInvertCT2", defaultValue: true)
     public var shouldInvertCT2: Bool
 
     @UserDefaultsStoredBool(key: "showInverterPlantName", defaultValue: false)
