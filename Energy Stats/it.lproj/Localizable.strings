@@ -101,6 +101,10 @@
 "battery_read_error" = "Si è verificato un problema nella lettura delle impostazioni della batteria. Di seguito il messaggio di errore.\n\n%1$@";
 "Clear graph values" = "Cancella";
 "Earnings" = "Guadagni";
+"solar_example_description" = "Trascina il cursore per simulare le condizioni solari e vedere come verrà visualizzato il tuo flusso solare. Utilizza i cursori dei punti di interruzione qui sotto per regolare i punti di interruzione tra diverse varianti di visualizzazione.";
+"Example" = "Esempio";
+"Breakpoint" = "Punto di interruzione %1$@";
+"Restore defaults" = "Ripristina impostazioni predefinite";
 
 /* Battery Charge Pages */
 "Minimum charge levels" = "Livelli di carica minimi";

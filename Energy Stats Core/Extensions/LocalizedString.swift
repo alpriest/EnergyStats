@@ -39,6 +39,7 @@ public struct LocalizedString {
         case year = "year"
         case cumulate = "total"
         case tapIconForDetail = "tap_for_detail"
+        case breakpoint = "breakpoint"
 
         public enum Accessibility: String, RawRepresentable {
             case inverter = "accessibility.inverter"
@@ -65,6 +66,10 @@ public struct LocalizedString {
 public extension String {
     init(key: LocalizedString.Key) {
         self = NSLocalizedString(key.rawValue, comment: "")
+    }
+
+    init(key: LocalizedString.Key, arguments: [CVarArg]) {
+        self = String(format: NSLocalizedString(key.rawValue, comment: ""), arguments: arguments)
     }
 
     init(accessibilityKey key: LocalizedString.Key.Accessibility) {

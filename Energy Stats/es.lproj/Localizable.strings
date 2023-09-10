@@ -75,6 +75,10 @@
 "Shows earnings today, this month, this year, and all-time based on a crude calculation of feed-in ｘ price as configured on FoxESS cloud." = "Muestra las ganancias de hoy, este mes, este año y en total en función de un cálculo básico de alimentación ｘ precio según la configuración en la nube de FoxESS.";
 "Show values in Watts" = "Mostrar valores en vatios";
 "Solar generated" = "Generado por energía solar";
+"solar_example_description" = "Arrastre el control deslizante para simular las condiciones solares y ver cómo se muestra su flujo solar. Utilice los controles deslizantes de puntos de quiebre a continuación para ajustar los puntos de quiebre entre diferentes variantes de visualización.";
+"Example" = "Ejemplo";
+"Breakpoint" = "Punto de quiebre %1$@";
+"Restore defaults" = "Restaurar valores predeterminados";
 
 /* Parameters page */
 "Predefined selections" = "Selecciones predefinidas";

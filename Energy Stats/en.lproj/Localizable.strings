@@ -78,6 +78,10 @@
 "Check FoxESS Server status" = "Check FoxESS Server status";
 "data_fetch_error" = "Something went wrong fetching data from FoxESS cloud.";
 "tap_for_detail" = "Tap the icon for further detail.";
+"solar_example_description" = "Drag the slider to simulate solar conditions to see how your solar flow will display. Use the breakpoint sliders below to adjust the breakpoints between different display variants.";
+"Example" = "Example";
+"Breakpoint" = "Breakpoint %1$@";
+"Restore defaults" = "Restore defaults";
 
 /* Battery Charge Pages */
 

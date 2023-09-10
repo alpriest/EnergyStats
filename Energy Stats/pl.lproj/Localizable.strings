@@ -69,6 +69,10 @@
 "error_title" = "Błąd";
 "Solar generated" = "Generowany przez energię słoneczną";
 "Clear graph values" = "Wyczyść";
+"solar_example_description" = "Przeciągnij suwak, aby symulować warunki słoneczne i zobaczyć, jak będzie wyświetlany Twój przepływ energii słonecznej. Użyj suwaków punktów przełomowych poniżej, aby dostosować punkty przełomowe między różnymi wariantami wyświetlania.";
+"Example" = "Przykład";
+"Breakpoint" = "Punkt przełomowy %1$@";
+"Restore defaults" = "Przywróć domyślne";
 
 /* Variables page */
 "Predefined selections" = "Wybrane opcje";

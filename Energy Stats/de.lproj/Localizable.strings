@@ -80,6 +80,10 @@
 "Earnings" = "Ertrag";
 "Shows earnings today, this month, this year, and all-time based on a crude calculation of feed-in ｘ price as configured on FoxESS cloud." = "Zeigt die heutigen Einnahmen, die Einnahmen dieses Monats, dieses Jahres und insgesamt basierend auf einer groben Berechnung von Einspeisung ｘ Preis, wie in der FoxESS Cloud konfiguriert.";
 "battery_read_error" = "Beim Lesen Ihrer Batterieeinstellungen ist ein Fehler aufgetreten. Die Fehlermeldung lautet wie folgt.\n\n%1$@";
+"solar_example_description" = "Verschieben Sie den Schieberegler, um Solarkonditionen zu simulieren und zu sehen, wie Ihr Solarfluss angezeigt wird. Verwenden Sie die Breakpoint-Schieberegler unten, um die Breakpoints zwischen verschiedenen Anzeigeversionen anzupassen.";
+"Example" = "Beispiel";
+"Breakpoint" = "Breakpoint %1$@";
+"Restore defaults" = "Standardeinstellungen wiederherstellen";
 
 /* Graph pages */
 "power" = "Leistung";

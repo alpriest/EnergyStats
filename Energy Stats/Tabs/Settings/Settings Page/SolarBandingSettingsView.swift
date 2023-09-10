@@ -33,7 +33,7 @@ struct SolarBandingSettingsView: View {
                 } header: {
                     Text("Example")
                 } footer: {
-                    Text("Drag the slider to simulate solar conditions to see how your solar graph will display. Use the breakpoint sliders below to adjust the breakpoints between different display variants.")
+                    Text("solar_example_description")
                 }
 
                 Section {
@@ -42,7 +42,7 @@ struct SolarBandingSettingsView: View {
                         Text(change1.kWh(3))
                     }
                 } header: {
-                    Text("Breakpoint 1")
+                    Text(String(key: .breakpoint, arguments: ["1"]))
                 }
 
                 Section {
@@ -51,7 +51,7 @@ struct SolarBandingSettingsView: View {
                         Text(change2.kWh(3))
                     }
                 } header: {
-                    Text("Breakpoint 2")
+                    Text(String(key: .breakpoint, arguments: ["2"]))
                 }
 
                 Section {
@@ -60,7 +60,7 @@ struct SolarBandingSettingsView: View {
                         Text(change3.kWh(3))
                     }
                 } header: {
-                    Text("Breakpoint 3")
+                    Text(String(key: .breakpoint, arguments: ["3"]))
                 }
 
                 Button {
@@ -122,5 +122,6 @@ struct SolarBandingSettingsView_Previews: PreviewProvider {
         SolarBandingSettingsView(
             configManager: PreviewConfigManager()
         )
+        .environment(\.locale, .init(identifier: "es"))
     }
 }
