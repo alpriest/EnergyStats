@@ -8,18 +8,36 @@
 import Energy_Stats_Core
 import SwiftUI
 
+class SolarBandingSettingsViewModel: ObservableObject {
+    private var configManager: ConfigManaging
+
+    init(configManager: ConfigManaging) {
+        self.configManager = configManager
+    }
+
+    func update(breakpoint1: Double, breakpoint2: Double, breakpoint3: Double) {
+        configManager.solarDefinitions = SolarRangeDefinitions(
+            breakPoint1: breakpoint1,
+            breakPoint2: breakpoint2,
+            breakPoint3: breakpoint3
+        )
+    }
+}
+
 struct SolarBandingSettingsView: View {
-    @State private var change1: Double
-    @State private var change2: Double
-    @State private var change3: Double
+    @StateObject var viewModel: SolarBandingSettingsViewModel
+    @State private var breakpoint1: Double
+    @State private var breakpoint2: Double
+    @State private var breakpoint3: Double
     @State private var modifiedAppTheme: AppTheme
     private var range = 0.1 ... 10
     private let appTheme: AppTheme
 
     init(configManager: ConfigManaging) {
-        self.change1 = configManager.solarDefinitions.breakPoint1
-        self.change2 = configManager.solarDefinitions.breakPoint2
-        self.change3 = configManager.solarDefinitions.breakPoint3
+        _viewModel = .init(wrappedValue: SolarBandingSettingsViewModel(configManager: configManager))
+        self.breakpoint1 = configManager.solarDefinitions.breakPoint1
+        self.breakpoint2 = configManager.solarDefinitions.breakPoint2
+        self.breakpoint3 = configManager.solarDefinitions.breakPoint3
         self.appTheme = configManager.appTheme.value
         self.modifiedAppTheme = appTheme
         self.modifiedAppTheme = makeAppTheme()
@@ -29,7 +47,7 @@ struct SolarBandingSettingsView: View {
         VStack(spacing: 0) {
             Form {
                 Section {
-                    AdjustableView(appTheme: modifiedAppTheme, config: MockConfig(), maximum: change3 + 0.500)
+                    AdjustableView(appTheme: modifiedAppTheme, config: MockConfig(), maximum: breakpoint3 + 0.500)
                 } header: {
                     Text("Example")
                 } footer: {
@@ -38,8 +56,8 @@ struct SolarBandingSettingsView: View {
 
                 Section {
                     HStack {
-                        Slider(value: $change1, in: range, step: 0.1)
-                        Text(change1.kWh(3))
+                        Slider(value: $breakpoint1, in: range, step: 0.1)
+                        Text(breakpoint1.kWh(3))
                     }
                 } header: {
                     Text(String(key: .breakpoint, arguments: ["1"]))
@@ -47,8 +65,8 @@ struct SolarBandingSettingsView: View {
 
                 Section {
                     HStack {
-                        Slider(value: $change2, in: range, step: 0.1)
-                        Text(change2.kWh(3))
+                        Slider(value: $breakpoint2, in: range, step: 0.1)
+                        Text(breakpoint2.kWh(3))
                     }
                 } header: {
                     Text(String(key: .breakpoint, arguments: ["2"]))
@@ -56,53 +74,55 @@ struct SolarBandingSettingsView: View {
 
                 Section {
                     HStack {
-                        Slider(value: $change3, in: range, step: 0.1)
-                        Text(change3.kWh(3))
+                        Slider(value: $breakpoint3, in: range, step: 0.1)
+                        Text(breakpoint3.kWh(3))
                     }
                 } header: {
                     Text(String(key: .breakpoint, arguments: ["3"]))
                 }
 
                 Button {
-                    change1 = 1
-                    change2 = 2
-                    change3 = 3
+                    breakpoint1 = 1
+                    breakpoint2 = 2
+                    breakpoint3 = 3
                 } label: {
                     Text("Restore defaults")
                 }
-            }.onChange(of: change1) { newValue in
-                if newValue > change2 {
-                    change2 = newValue
+            }.onChange(of: breakpoint1) { newValue in
+                if newValue > breakpoint2 {
+                    breakpoint2 = newValue
                 }
-                if change2 > change3 {
-                    change3 = change2
-                }
-
-                modifiedAppTheme = makeAppTheme()
-            }
-            .onChange(of: change2) { newValue in
-                if newValue < change1 {
-                    change1 = newValue
-                }
-                if newValue > change3 {
-                    change3 = newValue
+                if breakpoint2 > breakpoint3 {
+                    breakpoint3 = breakpoint2
                 }
 
                 modifiedAppTheme = makeAppTheme()
             }
-            .onChange(of: change3) { newValue in
-                if newValue < change2 {
-                    change2 = newValue
+            .onChange(of: breakpoint2) { newValue in
+                if newValue < breakpoint1 {
+                    breakpoint1 = newValue
                 }
-                if change2 < change1 {
-                    change2 = change1
+                if newValue > breakpoint3 {
+                    breakpoint3 = newValue
+                }
+
+                modifiedAppTheme = makeAppTheme()
+            }
+            .onChange(of: breakpoint3) { newValue in
+                if newValue < breakpoint2 {
+                    breakpoint2 = newValue
+                }
+                if breakpoint2 < breakpoint1 {
+                    breakpoint2 = breakpoint1
                 }
 
                 modifiedAppTheme = makeAppTheme()
             }
 
             BottomButtonsView {
-                // TODO:
+                viewModel.update(breakpoint1: breakpoint1,
+                                 breakpoint2: breakpoint2,
+                                 breakpoint3: breakpoint3)
             }
         }
     }
@@ -110,9 +130,9 @@ struct SolarBandingSettingsView: View {
     func makeAppTheme() -> AppTheme {
         appTheme
             .copy(solarDefinitions: SolarRangeDefinitions(
-                breakPoint1: change1,
-                breakPoint2: change2,
-                breakPoint3: change3
+                breakPoint1: breakpoint1,
+                breakPoint2: breakpoint2,
+                breakPoint3: breakpoint3
             ))
     }
 }

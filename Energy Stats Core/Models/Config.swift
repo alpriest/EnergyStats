@@ -134,7 +134,7 @@ public class UserDefaultsConfig: Config {
         }
     }
 
-    public var deviceBatteryOverrides: [String : String] {
+    public var deviceBatteryOverrides: [String: String] {
         get {
             UserDefaults.shared.dictionary(forKey: "deviceBatteryOverrides") as? [String: String] ?? [:]
         }
@@ -145,10 +145,20 @@ public class UserDefaultsConfig: Config {
 
     public var solarDefinitions: SolarRangeDefinitions {
         get {
-            UserDefaults.shared.object(forKey: "solarDefinitions") as? SolarRangeDefinitions ?? SolarRangeDefinitions.default()
+            guard let solarDefinitions = UserDefaults.shared.data(forKey: "solarDefinitions") else { return .default() }
+            do {
+                return try JSONDecoder().decode(SolarRangeDefinitions.self, from: solarDefinitions)
+            } catch {
+                return .default()
+            }
         }
         set {
-            UserDefaults.shared.set(newValue, forKey: "solarDefinitions")
+            do {
+                let data = try JSONEncoder().encode(newValue)
+                UserDefaults.shared.set(data, forKey: "solarDefinitions")
+            } catch {
+                print("AWP", "Failed to encode Solar Definitions 💥")
+            }
         }
     }
 }

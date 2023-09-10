@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct SolarRangeDefinitions {
+public struct SolarRangeDefinitions: Codable {
     public let breakPoint1: Double
     public let breakPoint2: Double
     public let breakPoint3: Double
