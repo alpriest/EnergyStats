@@ -24,6 +24,10 @@
 "Parameters" = "Parameter";
 "Success" = "Erfolg";
 "You've hit the server rate limit. Please try later." = "Sie haben das Server-Limit erreicht. Bitte versuchen Sie es später erneut.";
+"Fox servers are offline. Please try later." = "Die Fox-Server sind offline. Bitte versuchen Sie es später.";
+"Bad credentials" = "Ungültige Anmeldedaten";
+"Invalid token. Please logout and login again." = "Ungültiges Token. Bitte ausloggen und erneut einloggen.";
+"Unknown network error" = "Unbekannter Netzwerkfehler";
 
 /* Settings page */
 "Display" = "Anzeige";
@@ -39,7 +43,7 @@
 "1 min" = "1 min";
 "5 mins" = "5 min";
 "Auto" = "Auto";
-"show_usable_battery_description" = "'Zeige nur die verwendbare Batteriekapazität' leitet den minimalen SOC vom Batterieladezustand und -prozentsatz ab. Aufgrund von Ungenauigkeiten in der Art und Weise, wie der Batterieladezustand gemessen wird, kann dies manchmal zur Anzeige von einer negativen verbleibenden Restladung führen.";
+"show_usable_battery_description" = "Zieht den Min SOC-Betrag von der Batterieladung und dem Prozentsatz nur in der Stromflussansicht ab. Aufgrund von Ungenauigkeiten bei der Messung des Batteriestands kann dies gelegentlich zu einer negativen Restmenge führen. Ihr Prozentsatz und die Kapazität werden sich von der FoxESS-App unterscheiden, wenn Sie diese Option auswählen.";
 "Decimal places" = "Dezimalstellen";
 "Show sunshine background" = "Zeige den Sonnenschein-Hintergrund";
 "Show usable battery only" = "Zeige nur die verwendbare Batteriekapazität";

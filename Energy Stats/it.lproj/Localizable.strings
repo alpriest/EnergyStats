@@ -25,7 +25,7 @@
 "You've hit the server rate limit. Please try later." = "Hai raggiunto il limite di richieste al server. Riprova più tardi.";
 "Invalid token. Please logout and login again." = "Token non valido. Effettua il logout e accedi nuovamente.";
 "Unknown network error" = "Errore di rete sconosciuto";
-"show_usable_battery_description" = "Sottrae l'importo Min SOC dal livello di carica e percentuale della batteria. A causa delle imprecisioni nella misurazione dei livelli della batteria, potrebbe occasionalmente mostrare un importo negativo. La percentuale e la capacità saranno diverse dall'energia FoxESS se si seleziona questa opzione.";
+"show_usable_battery_description" = "Sottrae l'importo SOC minimo dal livello di carica della batteria e dal percentuale solo nella vista del flusso di energia. A causa di inaccuratezze nella misurazione dei livelli della batteria, ciò può occasionalmente comportare la visualizzazione di un importo negativo rimanente. La percentuale e la capacità differiranno dall'app FoxESS se si seleziona questa opzione.";
 "Bad credentials" = "Credenziali non valide";
 "rawvariable_pvpower" = "La potenza totale di tutte le stringhe, in kilowatt (kW)";
 "rawvariable_generationpower" = "Potenza solare / batteria che passa attraverso l'inverter";
@@ -99,6 +99,8 @@
 "error_title" = "Errore";
 "Solar generated" = "Generato da energia solare";
 "battery_read_error" = "Si è verificato un problema nella lettura delle impostazioni della batteria. Di seguito il messaggio di errore.\n\n%1$@";
+"Clear graph values" = "Cancella";
+"Earnings" = "Guadagni";
 
 /* Battery Charge Pages */
 "Minimum charge levels" = "Livelli di carica minimi";

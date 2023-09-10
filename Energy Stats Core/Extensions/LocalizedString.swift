@@ -19,7 +19,6 @@ public struct LocalizedString {
         case nextUpdateIn = "Next update in"
         case launchDataFetchError = "Something went wrong. Please try logging in again."
         case dataFetchError = "data_fetch_error"
-        case chargeTimePeriodFailedValidation = "Start time must be before the end time"
         case chargeTimeSummary = "battery_charge_range"
         case noBatteryCharge = "no_battery_charge"
         case bothBatteryChargePeriods = "both_battery_charge_periods"

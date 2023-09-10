@@ -18,14 +18,13 @@
 "Power flow" = "Power flow";
 "Earnings" = "Earnings";
 "Success" = "Success";
-"show_usable_battery_description" = "Deducts the Min SOC amount from the battery charge level and percentage on the power flow view only. Due to inaccuracies in the way battery levels are measured this may result in occasionally showing a negative amount remaining.";
+"show_usable_battery_description" = "Deducts the Min SOC amount from the battery charge level and percentage on the power flow view only. Due to inaccuracies in the way battery levels are measured this may result in occasionally showing a negative amount remaining. Your percentage and capacity will differ from the FoxESS app if you select this option.";
 "Buy me a coffee" = "Buy me a coffee";
 "You appear to be offline. Please check your connection." = "You appear to be offline. Please check your connection.";
 "Fox servers are offline. Please try later." = "Fox servers are in maintenance mode. Please try later.";
 "You've hit the server rate limit. Please try later." = "You've hit the server rate limit. Please try later.";
 "Invalid token. Please logout and login again." = "Invalid token. Please logout and login again.";
 "Unknown network error" = "Unknown network error";
-"Deducts the Min SOC amount from the battery charge level and percentage. Due to inaccuracies in the way battery levels are measured this may occasionally show a negative amount." = "Deducts the Min SOC amount from the battery charge level and percentage. Due to inaccuracies in the way battery levels are measured this may occasionally show a negative amount. Your percentage and capacity will differ from the FoxESS energy if you select this option.";
 "Bad credentials" = "Bad credentials";
 "rawvariable_generationpower" = "Solar / Battery power coming through the inverter";
 "rawvariable_feedinpower" = "Power being exported back to the grid";
@@ -97,7 +96,6 @@
 "Start" = "Start";
 "End" = "End";
 "battery_charge_range" = "%1$@ to %2$@";
-"Start time must be before the end time" = "Start time must be before the end time";
 "no_battery_charge" = "The battery schedule will not alter the battery usage. House load will be met from the batteries if capacity is available.";
 "both_battery_charge_periods" = "Your battery will be force charged from the grid between %1$@, and %2$@.";
 "battery_periods_overlap" = "These periods overlap, you may want to update them.";

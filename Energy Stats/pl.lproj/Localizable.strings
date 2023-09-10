@@ -19,6 +19,12 @@
 "Power flow" = "Przepływ mocy";
 "Yield today" = "Dzisiejszy wydajność";
 "Success" = "Sukces";
+"You appear to be offline. Please check your connection." = "Wydajesz się być offline. Proszę sprawdzić połączenie.";
+"Fox servers are offline. Please try later." = "Serwery Fox są w trybie konserwacji. Proszę spróbować później.";
+"Bad credentials" = "Nieprawidłowe dane uwierzytelniające";
+"Invalid token. Please logout and login again." = "Nieprawidłowy token. Proszę wylogować się i zalogować ponownie.";
+"Unknown network error" = "Nieznany błąd sieciowy";
+"Stats" = "Statystyki";
 
 /* Settings page */
 "Buy me a coffee" = "Zrób mi kawę";
@@ -32,7 +38,7 @@
 "1 min" = "1 min";
 "5 mins" = "5 min";
 "Auto" = "Auto";
-"show_usable_battery_description" = "'Pokaż baterię użytkową' odejmuje ilość Min SOC od poziomu naładowania i procentu baterii. Ze względu na niedokładności w pomiarze poziomów baterii może to czasami skutkować wyświetlaniem ujemnej pozostałej ilości.";
+"show_usable_battery_description" = "Odejmuje minimalną ilość SOC od poziomu naładowania baterii i procentu tylko w widoku przepływu energii. Ze względu na niedokładności w pomiarze poziomów baterii może to czasami skutkować wyświetlaniem ujemnej pozostałej ilości. Wybranie tej opcji spowoduje różnice w procentach i pojemności w porównaniu do aplikacji FoxESS.";
 "Decimal places" = "Miejsca po przecinku";
 "Show sunshine background" = "Pokaż tło z promieniami słonecznymi";
 "Show usable battery only" = "Pokaż tylko baterię użytkową";
@@ -62,6 +68,7 @@
 "Usage today" = "Dzisiejsze zużycie";
 "error_title" = "Błąd";
 "Solar generated" = "Generowany przez energię słoneczną";
+"Clear graph values" = "Wyczyść";
 
 /* Variables page */
 "Predefined selections" = "Wybrane opcje";
@@ -176,6 +183,8 @@
 "data_fetch_error" = "Wystąpił błąd podczas pobierania danych z chmury FoxESS.";
 "tap_for_detail" = "Dotknij ikony, aby uzyskać więcej informacji.";
 "You've hit the server rate limit. Please try later." = "Osiągnięto limit prędkości serwera. Proszę spróbować później.";
+"Off" = "Wyłączone";
+"Net" = "Sieć";
 
 /* Inverter page */
 "self_use_mode" = "W tym trybie inwerter priorytetowo alokuje moc zgodnie z następującym porządkiem:\n\n1. Obciążenie domu\n2. Ładowanie baterii\n3. Eksport";

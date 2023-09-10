@@ -19,6 +19,12 @@
 "Power flow" = "Flujo de potencia";
 "Yield today" = "Rendimiento hoy";
 "Success" = "Éxito";
+"You appear to be offline. Please check your connection." = "Parece que estás desconectado. Por favor, verifica tu conexión.";
+"Fox servers are offline. Please try later." = "Los servidores de Fox están en modo de mantenimiento. Por favor, inténtalo más tarde.";
+"Bad credentials" = "Credenciales incorrectas";
+"Invalid token. Please logout and login again." = "Token no válido. Por favor, cierre la sesión e inicie sesión nuevamente.";
+"Unknown network error" = "Error de red desconocido";
+"Stats" = "Estadísticas";
 
 /* Settings page */
 "Buy me a coffee" = "Invítame un café";
@@ -33,7 +39,7 @@
 "5 mins" = "5 mins";
 "Auto" = "Auto";
 "Display" = "Display";
-"show_usable_battery_description" = "'Mostrar batería utilizable' resta la cantidad de Min SOC del nivel y porcentaje de carga de la batería. Debido a imprecisiones en la forma en que se miden los niveles de la batería, esto puede resultar en que ocasionalmente se muestre un valor negativo restante.";
+"show_usable_battery_description" = "Resta la cantidad mínima SOC del nivel de carga y el porcentaje de la batería solo en la vista de flujo de energía. Debido a inexactitudes en la forma en que se miden los niveles de la batería, esto puede resultar ocasionalmente en la visualización de una cantidad negativa restante. Su porcentaje y capacidad diferirán de la aplicación FoxESS si selecciona esta opción.";
 "Decimal places" = "Decimales";
 "Show sunshine background" = "Mostrar fondo de sol";
 "Show usable battery only" = "Mostrar solo batería utilizable";
@@ -155,7 +161,6 @@
 "Start" = "Inicio";
 "End" = "Fin";
 "battery_charge_range" = "%1$@ hasta %2$@";
-"Start time must be before the end time" = "La hora de inicio debe ser anterior a la hora de finalización.";
 "no_battery_charge" = "El plan de batería no alterará el uso de la batería. La carga de la casa se abastecerá de las baterías si hay capacidad disponible.";
 "both_battery_charge_periods" = "Su batería será cargada forzadamente desde la red eléctrica entre %1$@ y %2$@.";
 "battery_periods_overlap" = "Estos períodos se superponen, puede que desee actualizarlos.";
@@ -188,6 +193,8 @@
 "data_fetch_error" = "Se produjo un error al obtener los datos de la nube de FoxESS.";
 "tap_for_detail" = "Toque el icono para más detalles.";
 "You've hit the server rate limit. Please try later." = "Ha alcanzado el límite de velocidad del servidor. Por favor, intente más tarde.";
+"Off" = "Apagado";
+"Net" = "Red";
 
 /* Inverter page */
 "self_use_mode" = "En este modo, el inversor prioriza la asignación de energía de la siguiente manera:\n\n1. Carga de la casa\n2. Carga de batería\n3. Exportar";
