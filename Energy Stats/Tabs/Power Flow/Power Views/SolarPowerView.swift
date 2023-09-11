@@ -64,7 +64,7 @@ struct SolarPowerView: View {
 struct SolarPowerView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            AdjustableView(appTheme: .mock(), config: MockConfig(), maximum: 5.0)
+            AdjustableView(appTheme: .mock(), config: MockConfig(), maximum: 5.0, thresholds: [])
 
             HStack {
                 SolarPowerView(
@@ -98,6 +98,16 @@ struct AdjustableView: View {
     let appTheme: AppTheme
     let config: Config
     let maximum: Double
+    let thresholds: [Double]
+    private let haptic = UISelectionFeedbackGenerator()
+
+    init(appTheme: AppTheme, config: Config, maximum: Double, thresholds: [Double]) {
+        self.appTheme = appTheme
+        self.config = config
+        self.maximum = maximum
+        self.thresholds = thresholds
+        haptic.prepare()
+    }
 
     var body: some View {
         VStack {
@@ -114,6 +124,11 @@ struct AdjustableView: View {
                     visible.toggle()
                 }
             })
+            .onChange(of: amount) { newValue in
+                if thresholds.contains(newValue) {
+                    haptic.selectionChanged()
+                }
+            }
         }
     }
 }

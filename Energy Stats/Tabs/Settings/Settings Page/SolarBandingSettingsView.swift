@@ -10,9 +10,11 @@ import SwiftUI
 
 class SolarBandingSettingsViewModel: ObservableObject {
     private var configManager: ConfigManaging
+    let haptic = UIImpactFeedbackGenerator()
 
     init(configManager: ConfigManaging) {
         self.configManager = configManager
+        haptic.prepare()
     }
 
     func update(breakpoint1: Double, breakpoint2: Double, breakpoint3: Double) {
@@ -80,7 +82,10 @@ struct SolarBandingSettingsView: View {
                 }
 
                 Section {
-                    AdjustableView(appTheme: modifiedAppTheme, config: MockConfig(), maximum: breakpoint3 + 0.500)
+                    AdjustableView(appTheme: modifiedAppTheme, 
+                                   config: MockConfig(),
+                                   maximum: breakpoint3 + 0.500,
+                                   thresholds: [breakpoint1, breakpoint2, breakpoint3])
                 } header: {
                     Text("Example")
                 } footer: {
