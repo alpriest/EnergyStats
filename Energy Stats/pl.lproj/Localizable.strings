@@ -69,9 +69,15 @@
 "error_title" = "Błąd";
 "Solar generated" = "Generowany przez energię słoneczną";
 "Clear graph values" = "Wyczyść";
-"solar_example_description" = "Przeciągnij suwak, aby symulować warunki słoneczne i zobaczyć, jak będzie wyświetlany Twój przepływ energii słonecznej. Użyj suwaków punktów przełomowych poniżej, aby dostosować punkty przełomowe między różnymi wariantami wyświetlania.";
+"solar_example_description" = "Przesuń suwak powyżej, aby zobaczyć, jak będzie wyświetlany Twój przepływ energii słonecznej przy różnych poziomach mocy.";
+"low_threshold" = "Niski próg";
+"low_threshold_description" = "Poniżej tej ilości słońce będzie żółte.";
+"medium_threshold" = "Średni próg";
+"medium_threshold_description" = "Między niskim a średnim słońce będzie żółte i świecące.";
+"high_threshold" = "Wysoki próg";
+"high_threshold_description" = "Między średnim a wysokim słońce będzie pomarańczowe i świecące. Powyżej wysokiego słońce będzie czerwone i świecące.";
+"Sun display variation thresholds" = "Progi zmienności wyświetlania słońca";
 "Example" = "Przykład";
-"Breakpoint" = "Punkt przełomowy %1$@";
 "Restore defaults" = "Przywróć domyślne";
 
 /* Variables page */

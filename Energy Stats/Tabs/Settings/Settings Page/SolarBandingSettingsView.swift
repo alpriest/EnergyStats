@@ -47,20 +47,14 @@ struct SolarBandingSettingsView: View {
         VStack(spacing: 0) {
             Form {
                 Section {
-                    AdjustableView(appTheme: modifiedAppTheme, config: MockConfig(), maximum: breakpoint3 + 0.500)
-                } header: {
-                    Text("Example")
-                } footer: {
-                    Text("solar_example_description")
-                }
-
-                Section {
                     HStack {
                         Slider(value: $breakpoint1, in: range, step: 0.1)
                         Text(breakpoint1.kWh(3))
                     }
                 } header: {
-                    Text(String(key: .breakpoint, arguments: ["1"]))
+                    Text("low_threshold")
+                } footer: {
+                    Text("low_threshold_description")
                 }
 
                 Section {
@@ -69,7 +63,9 @@ struct SolarBandingSettingsView: View {
                         Text(breakpoint2.kWh(3))
                     }
                 } header: {
-                    Text(String(key: .breakpoint, arguments: ["2"]))
+                    Text("medium_threshold")
+                } footer: {
+                    Text("medium_threshold_description")
                 }
 
                 Section {
@@ -78,7 +74,17 @@ struct SolarBandingSettingsView: View {
                         Text(breakpoint3.kWh(3))
                     }
                 } header: {
-                    Text(String(key: .breakpoint, arguments: ["3"]))
+                    Text("high_threshold")
+                } footer: {
+                    Text("high_threshold_description")
+                }
+
+                Section {
+                    AdjustableView(appTheme: modifiedAppTheme, config: MockConfig(), maximum: breakpoint3 + 0.500)
+                } header: {
+                    Text("Example")
+                } footer: {
+                    Text("solar_example_description")
                 }
 
                 Button {
@@ -125,6 +131,8 @@ struct SolarBandingSettingsView: View {
                                  breakpoint3: breakpoint3)
             }
         }
+        .navigationTitle("Sun display variation thresholds")
+        .navigationBarTitleDisplayMode(.inline)
     }
 
     func makeAppTheme() -> AppTheme {
@@ -139,9 +147,11 @@ struct SolarBandingSettingsView: View {
 
 struct SolarBandingSettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SolarBandingSettingsView(
-            configManager: PreviewConfigManager()
-        )
-        .environment(\.locale, .init(identifier: "es"))
+        NavigationView {
+            SolarBandingSettingsView(
+                configManager: PreviewConfigManager()
+            )
+        }
+        .environment(\.locale, .init(identifier: "de"))
     }
 }

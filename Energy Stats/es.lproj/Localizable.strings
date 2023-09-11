@@ -75,9 +75,15 @@
 "Shows earnings today, this month, this year, and all-time based on a crude calculation of feed-in ｘ price as configured on FoxESS cloud." = "Muestra las ganancias de hoy, este mes, este año y en total en función de un cálculo básico de alimentación ｘ precio según la configuración en la nube de FoxESS.";
 "Show values in Watts" = "Mostrar valores en vatios";
 "Solar generated" = "Generado por energía solar";
-"solar_example_description" = "Arrastre el control deslizante para simular las condiciones solares y ver cómo se muestra su flujo solar. Utilice los controles deslizantes de puntos de quiebre a continuación para ajustar los puntos de quiebre entre diferentes variantes de visualización.";
+"solar_example_description" = "Arrastra el control deslizante de arriba para ver cómo se mostrará tu flujo solar al generar diferentes niveles de energía.";
+"low_threshold" = "Umbral bajo";
+"low_threshold_description" = "Por debajo de esta cantidad, el sol será amarillo.";
+"medium_threshold" = "Umbral medio";
+"medium_threshold_description" = "Entre bajo y medio, el sol será amarillo y brillante.";
+"high_threshold" = "Umbral alto";
+"high_threshold_description" = "Entre medio y alto, el sol será naranja y brillante. Por encima de alto, el sol será rojo y brillante.";
+"Sun display variation thresholds" = "Umbral de variación de visualización del sol";
 "Example" = "Ejemplo";
-"Breakpoint" = "Punto de quiebre %1$@";
 "Restore defaults" = "Restaurar valores predeterminados";
 
 /* Parameters page */

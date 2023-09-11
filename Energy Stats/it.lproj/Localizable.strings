@@ -101,9 +101,15 @@
 "battery_read_error" = "Si è verificato un problema nella lettura delle impostazioni della batteria. Di seguito il messaggio di errore.\n\n%1$@";
 "Clear graph values" = "Cancella";
 "Earnings" = "Guadagni";
-"solar_example_description" = "Trascina il cursore per simulare le condizioni solari e vedere come verrà visualizzato il tuo flusso solare. Utilizza i cursori dei punti di interruzione qui sotto per regolare i punti di interruzione tra diverse varianti di visualizzazione.";
+"solar_example_description" = "Trascina il cursore sopra per vedere come verrà visualizzato il tuo flusso solare quando viene generato un diverso livello di potenza.";
+"low_threshold" = "Soglia bassa";
+"low_threshold_description" = "Al di sotto di questa quantità il sole sarà giallo.";
+"medium_threshold" = "Soglia media";
+"medium_threshold_description" = "Tra bassa e media, il sole sarà giallo e luminoso.";
+"high_threshold" = "Soglia alta";
+"high_threshold_description" = "Tra media e alta, il sole sarà arancione e luminoso. Al di sopra dell'alta soglia il sole sarà rosso e luminoso.";
+"Sun display variation thresholds" = "Soglie di visualizzazione solare";
 "Example" = "Esempio";
-"Breakpoint" = "Punto di interruzione %1$@";
 "Restore defaults" = "Ripristina impostazioni predefinite";
 
 /* Battery Charge Pages */

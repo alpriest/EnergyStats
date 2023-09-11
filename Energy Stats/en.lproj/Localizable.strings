@@ -78,10 +78,16 @@
 "Check FoxESS Server status" = "Check FoxESS Server status";
 "data_fetch_error" = "Something went wrong fetching data from FoxESS cloud.";
 "tap_for_detail" = "Tap the icon for further detail.";
-"solar_example_description" = "Drag the slider to simulate solar conditions to see how your solar flow will display. Use the breakpoint sliders below to adjust the breakpoints between different display variants.";
 "Example" = "Example";
-"Breakpoint" = "Breakpoint %1$@";
 "Restore defaults" = "Restore defaults";
+"solar_example_description" = "Drag the slider above to see how your solar flow will display when generating different levels of power.";
+"low_threshold" = "Low threshold";
+"low_threshold_description" = "Below this amount the sun will be yellow.";
+"medium_threshold" = "Medium threshold";
+"medium_threshold_description" = "Between low and medium the sun will be yellow and glowing.";
+"high_threshold" = "High threshold";
+"high_threshold_description" = "Between medium and high the sun will be orange and glowing. Above high the sun will be red and glowing.";
+"Sun display variation thresholds" = "Sun display variation thresholds";
 
 /* Battery Charge Pages */
 

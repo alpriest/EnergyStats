@@ -66,7 +66,7 @@ struct DisplaySettingsView: View {
         NavigationLink {
             SolarBandingSettingsView(configManager: configManager)
         } label: {
-            Text("Solar display")
+            Text("Sun display variation thresholds")
         }
     }
 }

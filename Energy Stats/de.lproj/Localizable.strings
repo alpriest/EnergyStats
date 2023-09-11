@@ -80,9 +80,15 @@
 "Earnings" = "Ertrag";
 "Shows earnings today, this month, this year, and all-time based on a crude calculation of feed-in ｘ price as configured on FoxESS cloud." = "Zeigt die heutigen Einnahmen, die Einnahmen dieses Monats, dieses Jahres und insgesamt basierend auf einer groben Berechnung von Einspeisung ｘ Preis, wie in der FoxESS Cloud konfiguriert.";
 "battery_read_error" = "Beim Lesen Ihrer Batterieeinstellungen ist ein Fehler aufgetreten. Die Fehlermeldung lautet wie folgt.\n\n%1$@";
-"solar_example_description" = "Verschieben Sie den Schieberegler, um Solarkonditionen zu simulieren und zu sehen, wie Ihr Solarfluss angezeigt wird. Verwenden Sie die Breakpoint-Schieberegler unten, um die Breakpoints zwischen verschiedenen Anzeigeversionen anzupassen.";
+"solar_example_description" = "Ziehen Sie den Schieberegler oben, um zu sehen, wie Ihr Solarfluss angezeigt wird, wenn verschiedene Leistungsstufen erzeugt werden.";
+"low_threshold" = "Niedrige Schwelle";
+"low_threshold_description" = "Unterhalb dieses Betrags wird die Sonne gelb sein.";
+"medium_threshold" = "Mittlere Schwelle";
+"medium_threshold_description" = "Zwischen niedriger und mittlerer Schwelle wird die Sonne gelb und leuchtend sein.";
+"high_threshold" = "Hohe Schwelle";
+"high_threshold_description" = "Zwischen mittlerer und hoher Schwelle wird die Sonne orange und leuchtend sein. Über der hohen Schwelle wird die Sonne rot und leuchtend sein.";
+"Sun display variation thresholds" = "Schwellenwerte der Sonnenanzeigevielfalt";
 "Example" = "Beispiel";
-"Breakpoint" = "Breakpoint %1$@";
 "Restore defaults" = "Standardeinstellungen wiederherstellen";
 
 /* Graph pages */
