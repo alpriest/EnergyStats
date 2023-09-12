@@ -99,7 +99,6 @@
 "minsocgrid_description" = "The minimum charge the battery should maintain when grid power is present.";
 "minsoc_detail" = "For the most part this is the setting that determines when the batteries will stop being used. Setting this higher than Min SoC will reserve battery power for a grid outage. For example, if you set Min SoC to 10% and Min SoC on Grid to 20%, the inverter will stop supplying power from the batteries at 20% and the house load will be supplied from the grid. If there is a grid outage, the batteries could be used (via an EPS switch) to supply emergency power until the battery charge drops to 10%.";
 "minsoc_notsure_footnote" = "If you're not sure then set both values the same.";
-"Save" = "Save";
 "Time period 1" = "Force charge period 1";
 "Time period 2" = "Force charge period 2";
 "Enable charge from grid" = "Enable charge from grid";

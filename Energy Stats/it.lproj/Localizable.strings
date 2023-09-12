@@ -121,7 +121,6 @@
 "minsocgrid_description" = "La carica minima che la batteria dovrebbe mantenere quando è presente l'alimentazione della rete.";
 "minsoc_detail" = "Per la maggior parte, questa è l'impostazione che determina quando le batterie smetteranno di essere utilizzate. Impostando questo valore più alto di Min SoC, si riserva l'energia della batteria per un'interruzione di corrente. Ad esempio, se si imposta Min SoC al 10% e Min SoC in rete al 20%, l'inverter smetterà di fornire energia dalle batterie al 20% e il carico della casa verrà alimentato dalla rete. Se c'è un'interruzione di corrente, le batterie potrebbero essere utilizzate (tramite uno switch EPS) per fornire energia di emergenza fino a quando la carica della batteria scende al 10%.";
 "minsoc_notsure_footnote" = "Se non sei sicuro, imposta entrambi i valori uguali.";
-"Save" = "Salva";
 "Time period 1" = "Periodo di carica forzata 1";
 "Time period 2" = "Periodo di carica forzata 2";
 "Enable charge from grid" = "Abilita carica dalla rete";

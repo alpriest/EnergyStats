@@ -164,7 +164,6 @@
 "minsocgrid_description" = "El nivel mínimo de carga que la batería debe mantener cuando hay suministro de red.";
 "minsoc_detail" = "En su mayor parte, esta es la configuración que determina cuándo las baterías dejarán de ser utilizadas. Configurar este valor más alto que Min SoC reservará energía de la batería para un corte en el suministro de red. Por ejemplo, si estableces Min SoC en 10% y Min SoC en red en 20%, el inversor dejará de suministrar energía de las baterías al 20% y la carga de la casa será suministrada por la red. Si hay un corte de red, las baterías podrían ser utilizadas (a través de un interruptor EPS) para suministrar energía de emergencia hasta que la carga de la batería caiga al 10%.";
 "minsoc_notsure_footnote" = "Si no estás seguro, entonces configura ambos valores iguales.";
-"Save" = "Guardar";
 "Time period 1" = "Forzar periodo de carga 1";
 "Time period 2" = "Forzar periodo de carga 2";
 "Enable charge from grid" = "Activar carga desde la red";

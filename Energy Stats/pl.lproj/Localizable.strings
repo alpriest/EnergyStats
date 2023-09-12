@@ -154,7 +154,6 @@
 "minsocgrid_description" = "Minimalny poziom naładowania, który bateria powinna utrzymywać w obecności zasilania z sieci.";
 "minsoc_detail" = "W większości przypadków jest to ustawienie, które decyduje o zatrzymaniu korzystania z baterii. Ustawienie wartości wyższej niż Min SoC zastrzeże moc baterii na wypadek awarii sieci. Na przykład, jeśli ustawisz Min SoC na 10% i Min SoC w sieci na 20%, falownik zatrzyma dostarczanie energii z baterii przy 20%, a obciążenie domu będzie zasilane z sieci. W przypadku braku zasilania z sieci, baterie mogą być używane (za pośrednictwem przełącznika EPS) do dostarczania energii awaryjnej do momentu, gdy naładowanie baterii spadnie do 10%.";
 "minsoc_notsure_footnote" = "Jeśli nie jesteś pewien, ustaw obie wartości tak samo.";
-"Save" = "Zapisz";
 "Time period 1" = "Wymuś okres ładowania 1";
 "Time period 2" = "Wymuś okres ładowania 2";
 "Enable charge from grid" = "Włącz ładowanie z sieci";

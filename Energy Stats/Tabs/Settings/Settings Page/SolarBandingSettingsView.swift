@@ -100,33 +100,22 @@ struct SolarBandingSettingsView: View {
                     Text("Restore defaults")
                 }
             }.onChange(of: breakpoint1) { newValue in
-                if newValue > breakpoint2 {
-                    breakpoint2 = newValue
-                }
-                if breakpoint2 > breakpoint3 {
-                    breakpoint3 = breakpoint2
+                if breakpoint1 >= breakpoint2 {
+                    breakpoint1 = breakpoint2 - 0.1
                 }
 
                 modifiedAppTheme = makeAppTheme()
             }
             .onChange(of: breakpoint2) { newValue in
-                if newValue < breakpoint1 {
-                    breakpoint1 = newValue
-                }
-                if newValue > breakpoint3 {
-                    breakpoint3 = newValue
+                if breakpoint2 >= breakpoint3 {
+                    breakpoint2 = breakpoint3 - 0.1
                 }
 
+                verifyThresholds()
                 modifiedAppTheme = makeAppTheme()
             }
             .onChange(of: breakpoint3) { newValue in
-                if newValue < breakpoint2 {
-                    breakpoint2 = newValue
-                }
-                if breakpoint2 < breakpoint1 {
-                    breakpoint2 = breakpoint1
-                }
-
+                verifyThresholds()
                 modifiedAppTheme = makeAppTheme()
             }
 
@@ -138,6 +127,16 @@ struct SolarBandingSettingsView: View {
         }
         .navigationTitle("Sun display variation thresholds")
         .navigationBarTitleDisplayMode(.inline)
+    }
+
+    func verifyThresholds() {
+        if breakpoint2 <= breakpoint1 {
+            breakpoint2 = breakpoint1 + 0.1
+        }
+
+        if breakpoint3 <= breakpoint2 {
+            breakpoint3 = breakpoint2 + 0.1
+        }
     }
 
     func makeAppTheme() -> AppTheme {
@@ -157,6 +156,6 @@ struct SolarBandingSettingsView_Previews: PreviewProvider {
                 configManager: PreviewConfigManager()
             )
         }
-        .environment(\.locale, .init(identifier: "de"))
+        .environment(\.locale, .init(identifier: "en"))
     }
 }

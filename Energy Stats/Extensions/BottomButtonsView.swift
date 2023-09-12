@@ -37,11 +37,12 @@ struct BottomButtonsView: View {
                 .padding()
                 .buttonStyle(.borderedProminent)
             }
-        }    }
+        }
+    }
 }
 
 struct BottomButtonsView_Previews: PreviewProvider {
     static var previews: some View {
-        BottomButtonsView() { }
+        BottomButtonsView {}
     }
 }
