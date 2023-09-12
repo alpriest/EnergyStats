@@ -7,14 +7,14 @@
 
 import Foundation
 
-public struct EarningsResponse: Decodable {
+public struct EarningsResponse: Codable {
     public let currency: String
     public let today: Earning
     public let month: Earning
     public let year: Earning
     public let cumulate: Earning
 
-    public struct Earning: Decodable {
+    public struct Earning: Codable {
         public let generation: Double
         public let earnings: Double
     }

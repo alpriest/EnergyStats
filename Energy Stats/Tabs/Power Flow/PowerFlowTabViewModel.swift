@@ -74,11 +74,7 @@ class PowerFlowTabViewModel: ObservableObject {
     }
 
     func timerFired() async {
-        guard self.isLoading == false else { return }
-
         await self.timer.stop()
-        self.isLoading = true
-        defer { isLoading = false }
 
         await self.loadData()
         await self.startTimer()
@@ -114,6 +110,11 @@ class PowerFlowTabViewModel: ObservableObject {
 
     @MainActor
     func loadData() async {
+        guard self.isLoading == false else { return }
+
+        self.isLoading = true
+        defer { isLoading = false }
+
         do {
             if self.configManager.currentDevice.value == nil {
                 try await self.configManager.fetchDevices()

@@ -136,6 +136,7 @@
 		41AF2F412AA4C674008FCA2E /* BatteryPowerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AF2F402AA4C674008FCA2E /* BatteryPowerFooterView.swift */; };
 		41AF2F432AA4C6C1008FCA2E /* HomePowerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AF2F422AA4C6C1008FCA2E /* HomePowerFooterView.swift */; };
 		41AF2F452AA4C74F008FCA2E /* GridPowerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AF2F442AA4C74F008FCA2E /* GridPowerFooterView.swift */; };
+		41B3FFE82AB07FE10020DFC9 /* NetworkCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B3FFE72AB07FE10020DFC9 /* NetworkCache.swift */; };
 		41B690F628E03EA70058126E /* NetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B690F528E03EA70058126E /* NetworkTests.swift */; };
 		41B690F928E040060058126E /* OHHTTPStubsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 41B690F828E040060058126E /* OHHTTPStubsSwift */; };
 		41B690FD28E042560058126E /* login-failure.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B690FB28E042560058126E /* login-failure.json */; };
@@ -247,7 +248,7 @@
 
 /* Begin PBXFileReference section */
 		41028F9428CDD7A300FB70FD /* OptionalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalView.swift; sourceTree = "<group>"; };
-		4103D1CD29DB6C43001B0BC8 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		4103D1CD29DB6C43001B0BC8 /* WatchContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchContentViewModel.swift; sourceTree = "<group>"; };
 		4103D1E029DB6CB9001B0BC8 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
 		4103F82F2922BFBA00567B1C /* ReportVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportVariable.swift; sourceTree = "<group>"; };
 		4106A92C28CFCD960009DA28 /* RawVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawVariable.swift; sourceTree = "<group>"; };
@@ -391,6 +392,7 @@
 		41AF2F402AA4C674008FCA2E /* BatteryPowerFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryPowerFooterView.swift; sourceTree = "<group>"; };
 		41AF2F422AA4C6C1008FCA2E /* HomePowerFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePowerFooterView.swift; sourceTree = "<group>"; };
 		41AF2F442AA4C74F008FCA2E /* GridPowerFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPowerFooterView.swift; sourceTree = "<group>"; };
+		41B3FFE72AB07FE10020DFC9 /* NetworkCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCache.swift; sourceTree = "<group>"; };
 		41B690F328DF5C390058126E /* NetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponse.swift; sourceTree = "<group>"; };
 		41B690F528E03EA70058126E /* NetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTests.swift; sourceTree = "<group>"; };
 		41B690FB28E042560058126E /* login-failure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "login-failure.json"; sourceTree = "<group>"; };
@@ -856,7 +858,7 @@
 				41A95B8129DB2F0900A35169 /* ContentView.swift */,
 				41A95B8329DB2F0A00A35169 /* Assets.xcassets */,
 				41A95B8529DB2F0A00A35169 /* Preview Content */,
-				4103D1CD29DB6C43001B0BC8 /* ContentViewModel.swift */,
+				4103D1CD29DB6C43001B0BC8 /* WatchContentViewModel.swift */,
 			);
 			path = "Energy Stats Watch App Watch App";
 			sourceTree = "<group>";
@@ -955,6 +957,7 @@
 				41777F1428F49C61009944FF /* NetworkFacade.swift */,
 				41626CCD29D95E9C003FEB00 /* NetworkError.swift */,
 				416318B629DDD2E100C2C285 /* InMemoryLoggingNetworkingDecorator.swift */,
+				41B3FFE72AB07FE10020DFC9 /* NetworkCache.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1328,6 +1331,7 @@
 				4103D1D629DB6C51001B0BC8 /* AddressBookResponse.swift in Sources */,
 				41757BBC2A90A05E00573FB4 /* AmountType.swift in Sources */,
 				4109140229DB7AE700133CC5 /* BatteryViewModel.swift in Sources */,
+				41B3FFE82AB07FE10020DFC9 /* NetworkCache.swift in Sources */,
 				4103D1D729DB6C51001B0BC8 /* Networking.swift in Sources */,
 				4171854229FFCF2500D18CDD /* String+MD5.swift in Sources */,
 				4103D1DC29DB6C6D001B0BC8 /* Config.swift in Sources */,
@@ -1622,7 +1626,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.71;
+				MARKETING_VERSION = 1.72;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1657,7 +1661,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.71;
+				MARKETING_VERSION = 1.72;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

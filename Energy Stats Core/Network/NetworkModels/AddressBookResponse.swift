@@ -7,10 +7,10 @@
 
 import Foundation
 
-public struct AddressBookResponse: Decodable {
+public struct AddressBookResponse: Codable {
     let softVersion: SoftwareVersion
 
-    public struct SoftwareVersion: Decodable {
+    public struct SoftwareVersion: Codable {
         let master: String
         let slave: String
         let manager: String

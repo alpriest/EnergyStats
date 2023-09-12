@@ -76,7 +76,7 @@ class StatsTabViewModel: ObservableObject {
                                                                                     day: Calendar.current.component(.day, from: date),
                                                                                     hour: dataPoint.index - 1, minute: 0))!
                     case .month(let month, let year):
-                        graphPointDate = Calendar.current.date(from: DateComponents(year: year, month: month, day: dataPoint.index, hour: 0))!
+                        graphPointDate = Calendar.current.date(from: DateComponents(year: year, month: month + 1, day: dataPoint.index, hour: 0))!
                     case .year(let year):
                         graphPointDate = Calendar.current.date(from: DateComponents(year: year, month: dataPoint.index, day: 1, hour: 0))!
                     }
@@ -109,8 +109,22 @@ class StatsTabViewModel: ObservableObject {
               let batteryDischarge = totals[ReportVariable.dischargeEnergyToTal]
         else { return }
 
+        calculateSelfSufficiencyEstimate(grid: grid,
+                                         feedIn: feedIn,
+                                         loads: loads,
+                                         batteryCharge: batteryCharge,
+                                         batteryDischarge: batteryDischarge)
+    }
+
+    func calculateSelfSufficiencyEstimate(
+        grid: Double,
+        feedIn: Double,
+        loads: Double,
+        batteryCharge: Double,
+        batteryDischarge: Double
+    ) {
         homeUsage = loads
-        totalSolarGenerated = Swift.max(0, (batteryCharge - batteryDischarge - grid + loads + feedIn))
+        totalSolarGenerated = Swift.max(0, batteryCharge - batteryDischarge - grid + loads + feedIn)
 
         let netResult = NetSelfSufficiencyCalculator.calculate(
             grid: grid,
@@ -205,6 +219,21 @@ class StatsTabViewModel: ObservableObject {
 
         if let maxDate = max?.date, date == maxDate {
             haptic.impactOccurred()
+        }
+
+        if let grid = result.values.first(where: { $0.type == .gridConsumption })?.value,
+           let feedIn = result.values.first(where: { $0.type == .feedIn })?.value,
+           let loads = result.values.first(where: { $0.type == .loads })?.value,
+           let batteryCharge = result.values.first(where: { $0.type == .chargeEnergyToTal })?.value,
+           let batteryDischarge = result.values.first(where: { $0.type == .dischargeEnergyToTal })?.value
+        {
+            calculateSelfSufficiencyEstimate(
+                grid: grid,
+                feedIn: feedIn,
+                loads: loads,
+                batteryCharge: batteryCharge,
+                batteryDischarge: batteryDischarge
+            )
         }
 
         return result

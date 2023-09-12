@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct BatteryResponse: Decodable {
+public struct BatteryResponse: Codable {
     public let power: Double
     public let soc: Int
     public let residual: Double
@@ -28,7 +28,7 @@ public struct BatteryResponse: Decodable {
     }
 }
 
-public struct BatterySettingsResponse: Decodable {
+public struct BatterySettingsResponse: Codable {
     public let minGridSoc: Int
     public let minSoc: Int
 }
