@@ -218,13 +218,6 @@ class PowerFlowTabViewModel: ObservableObject {
         Task { await self.stopTimer() }
     }
 
-    @objc
-    func deviceChanged() {
-        Task { @MainActor in
-            await self.timerFired()
-        }
-    }
-
     func sleep() async {
         do {
             try await Task.sleep(nanoseconds: 1_000_000_000)

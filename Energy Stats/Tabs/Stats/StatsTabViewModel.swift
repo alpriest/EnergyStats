@@ -5,6 +5,7 @@
 //  Created by Alistair Priest on 15/05/2023.
 //
 
+import Combine
 import Energy_Stats_Core
 import Foundation
 import SwiftUI
@@ -40,18 +41,26 @@ class StatsTabViewModel: ObservableObject {
     private var totals: [ReportVariable: Double] = [:]
     private var max: StatsGraphValue?
     var exportFile: CSVTextFile?
+    private var currentDeviceCancellable: AnyCancellable?
 
     init(networking: Networking, configManager: ConfigManaging) {
         self.networking = networking
         self.configManager = configManager
 
-        graphVariables = [.generation, ReportVariable.feedIn, .gridConsumption, .chargeEnergyToTal, .dischargeEnergyToTal, .loads].map {
-            StatsGraphVariable($0)
-        }
-
         haptic.prepare()
 
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
+        self.addDeviceChangeObserver()
+    }
+
+    func addDeviceChangeObserver() {
+        guard self.currentDeviceCancellable == nil else { return }
+
+        self.currentDeviceCancellable = self.configManager.currentDevice.sink { device in
+            guard let device else { return }
+
+            Task { await self.updateGraphVariables(for: device) }
+        }
     }
 
     @objc
@@ -65,8 +74,27 @@ class StatsTabViewModel: ObservableObject {
         totals.isEmpty == false
     }
 
+    private func updateGraphVariables(for device: Device) async {
+        await MainActor.run {
+            graphVariables = [.generation,
+                              ReportVariable.feedIn,
+                              .gridConsumption,
+                              device.hasBattery ? .chargeEnergyToTal : nil,
+                              device.hasBattery ? .dischargeEnergyToTal : nil,
+                              .loads]
+                .compactMap { $0 }
+                .map {
+                    StatsGraphVariable($0)
+                }
+        }
+    }
+
     func load() async {
         guard let currentDevice = configManager.currentDevice.value else { return }
+
+        if graphVariables.isEmpty {
+            await updateGraphVariables(for: currentDevice)
+        }
 
         let reportVariables: [ReportVariable] = [.feedIn, .generation, .chargeEnergyToTal, .dischargeEnergyToTal, .gridConsumption, .loads]
         let queryDate = makeQueryDate()

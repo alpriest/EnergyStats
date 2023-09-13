@@ -20,7 +20,7 @@
         "generationTotal": 517.9,
         "productType": "H",
         "flowType": 2,
-        "hasBattery": true,
+        "hasBattery": false,
         "hasPV": true,
         "dataLatestUploadDate": "2022-09-25 18:50:50 BST+0100"
       }

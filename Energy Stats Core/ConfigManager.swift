@@ -14,10 +14,6 @@ public enum RefreshFrequency: Int {
     case FIVE_MINUTES = 5
 }
 
-public extension Notification.Name {
-    static let deviceChanged = Notification.Name(rawValue: "DeviceChanged")
-}
-
 public protocol ConfigManaging {
     func fetchDevices() async throws
     func logout()
