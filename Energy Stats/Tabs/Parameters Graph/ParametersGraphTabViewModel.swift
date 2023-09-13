@@ -95,6 +95,19 @@ class ParametersGraphTabViewModel: ObservableObject {
             }
             .receive(on: RunLoop.main)
             .assign(to: \.graphVariables, on: self)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
+    }
+
+    @objc
+    func didBecomeActiveNotification() {
+        if hasData {
+            Task { await self.load() }
+        }
+    }
+
+    private var hasData: Bool {
+        data.isEmpty == false
     }
 
     var selectedGraphVariables: [String] {

@@ -50,6 +50,19 @@ class StatsTabViewModel: ObservableObject {
         }
 
         haptic.prepare()
+
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
+    }
+
+    @objc
+    func didBecomeActiveNotification() {
+        if hasData {
+            Task { await self.load() }
+        }
+    }
+
+    private var hasData: Bool {
+        totals.isEmpty == false
     }
 
     func load() async {

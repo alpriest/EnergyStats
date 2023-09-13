@@ -86,9 +86,7 @@ struct StatsTabView: View {
             .padding()
         }
         .task {
-            Task {
-                await viewModel.load()
-            }
+            await viewModel.load()
         }
         .onReceive(appThemePublisher) {
             self.appTheme = $0
