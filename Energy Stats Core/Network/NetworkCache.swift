@@ -15,12 +15,16 @@ struct CachedItem {
         self.cacheTime = Date()
         self.item = item
     }
+
+    func isFresherThan(interval: TimeInterval) -> Bool {
+        abs(cacheTime.timeIntervalSinceNow) < interval
+    }
 }
 
 public class NetworkCache: Networking {
     private let network: Networking
     private var cache: [String: CachedItem] = [:]
-    private let shortCacheDurationInSeconds: TimeInterval = 5
+    private let shortCacheDurationInSeconds: TimeInterval = 3
 
     public init(network: Networking) {
         self.network = network
@@ -41,7 +45,7 @@ public class NetworkCache: Networking {
     public func fetchBattery(deviceID: String) async throws -> BatteryResponse {
         let key = makeKey(base: "fetchBattery", arguments: deviceID)
 
-        if let item = cache[key], let cached = item.item as? BatteryResponse, item.cacheTime.timeIntervalSinceNow < shortCacheDurationInSeconds {
+        if let item = cache[key], let cached = item.item as? BatteryResponse, item.isFresherThan(interval: shortCacheDurationInSeconds) {
             return cached
         } else {
             let fresh = try await network.fetchBattery(deviceID: deviceID)
@@ -53,7 +57,7 @@ public class NetworkCache: Networking {
     public func fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse {
         let key = makeKey(base: #function, arguments: deviceSN)
 
-        if let item = cache[key], let cached = item.item as? BatterySettingsResponse, item.cacheTime.timeIntervalSinceNow < shortCacheDurationInSeconds {
+        if let item = cache[key], let cached = item.item as? BatterySettingsResponse, item.isFresherThan(interval: shortCacheDurationInSeconds) {
             return cached
         } else {
             let fresh = try await network.fetchBatterySettings(deviceSN: deviceSN)
@@ -73,7 +77,7 @@ public class NetworkCache: Networking {
     public func fetchAddressBook(deviceID: String) async throws -> AddressBookResponse {
         let key = makeKey(base: #function, arguments: deviceID)
 
-        if let item = cache[key], let cached = item.item as? AddressBookResponse, item.cacheTime.timeIntervalSinceNow < shortCacheDurationInSeconds {
+        if let item = cache[key], let cached = item.item as? AddressBookResponse, item.isFresherThan(interval: shortCacheDurationInSeconds) {
             return cached
         } else {
             let fresh = try await network.fetchAddressBook(deviceID: deviceID)
@@ -89,7 +93,7 @@ public class NetworkCache: Networking {
     public func fetchEarnings(deviceID: String) async throws -> EarningsResponse {
         let key = makeKey(base: #function, arguments: deviceID)
 
-        if let item = cache[key], let cached = item.item as? EarningsResponse, item.cacheTime.timeIntervalSinceNow < shortCacheDurationInSeconds {
+        if let item = cache[key], let cached = item.item as? EarningsResponse, item.isFresherThan(interval: shortCacheDurationInSeconds) {
             return cached
         } else {
             let fresh = try await network.fetchEarnings(deviceID: deviceID)
