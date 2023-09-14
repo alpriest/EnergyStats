@@ -52,6 +52,7 @@ public protocol ConfigManaging {
     var showInverterTypeNameOnPowerFlow: Bool { get set }
     var showLastUpdateTimestamp: Bool { get set }
     var solarDefinitions: SolarRangeDefinitions { get set }
+    var parameterGroups: [ParameterGroup] { get set }
 }
 
 public class ConfigManager: ConfigManaging {
@@ -87,7 +88,8 @@ public class ConfigManager: ConfigManaging {
                 showGridTotalsOnPowerFlow: config.showGridTotalsOnPowerFlow,
                 showInverterTypeNameOnPowerFlow: config.showInverterTypeNameOnPowerFlow,
                 showLastUpdateTimestamp: config.showLastUpdateTimestamp,
-                solarDefinitions: config.solarDefinitions
+                solarDefinitions: config.solarDefinitions,
+                parameterGroups: config.parameterGroups
             )
         )
         selectedDeviceID = selectedDeviceID
@@ -359,6 +361,16 @@ public class ConfigManager: ConfigManaging {
             config.solarDefinitions = newValue
             appTheme.send(appTheme.value.copy(
                 solarDefinitions: config.solarDefinitions
+            ))
+        }
+    }
+
+    public var parameterGroups: [ParameterGroup] {
+        get { config.parameterGroups }
+        set {
+            config.parameterGroups = newValue
+            appTheme.send(appTheme.value.copy(
+                parameterGroups: config.parameterGroups
             ))
         }
     }

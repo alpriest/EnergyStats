@@ -10,86 +10,104 @@ import SwiftUI
 
 struct ParameterGraphVariableChooserView: View {
     @ObservedObject var viewModel: ParameterGraphVariableChooserViewModel
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) private var dismiss
+    @State private var editMode = EditMode.inactive
+    @State private var groupName = ""
+
+    func delete(at offsets: IndexSet) {
+        offsets.forEach { index in
+            viewModel.delete(at: index)
+        }
+    }
 
     var body: some View {
-        VStack(spacing: 0) {
-            Form {
-                Section {
-                    Button("Default") { viewModel.chooseDefaultVariables() }
-                    Button("Compare strings") { viewModel.chooseCompareStringsVariables() }
-                    Button("Temperatures") { viewModel.chooseTemperatureVariables() }
-                    Button("Battery") { viewModel.chooseBatteryVariables() }
-                    Button("None") { viewModel.select(just: []) }
-                } header: {
-                    Text("Predefined selections")
-                }
-
-                Section {
-                    List(viewModel.variables) { variable in
-                        Button {
-                            viewModel.toggle(updating: variable)
-                        } label: {
-                            HStack {
-                                if variable.isSelected {
-                                    Label(variable.type.name, systemImage: "checkmark.circle.fill")
-                                } else {
-                                    Label(variable.type.name, systemImage: "circle")
-                                }
-
-                                Spacer()
-
-                                Text(variable.type.unit)
-                            }
-                            .contentShape(Rectangle())
-                        }
-                        .buttonStyle(PlainButtonStyle())
-                    }
-                } header: {
-                    Text("All")
-                } footer: {
-                    Link(destination: URL(string: "https://github.com/TonyM1958/HA-FoxESS-Modbus/wiki/Fox-ESS-Cloud#search-parameters")!) {
-                        HStack {
-                            Text("Find out more about these variables")
-                            Image(systemName: "rectangle.portrait.and.arrow.right")
-                        }
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .font(.caption)
-                    }
-                }
-            }
-
+        NavigationView {
             VStack(spacing: 0) {
-                Color("BottomBarDivider")
-                    .frame(height: 1)
-                    .frame(maxWidth: .infinity)
+                Form {
+                    Section {
+                        List {
+                            Button("Default") { viewModel.chooseDefaultVariables() }
 
-                HStack {
-                    Button(action: {
-                        dismiss()
-                    }) {
-                        Text("Cancel")
-                            .frame(maxWidth: .infinity)
-                    }
-                    .padding()
-                    .buttonStyle(.borderedProminent)
-                    .accessibilityIdentifier("cancel")
+                            ForEach(viewModel.groups, id: \.title) { group in
+                                Button(group.title) { viewModel.select(just: group.parameterNames) }
+                            }
+                            .onDelete(perform: delete)
 
-                    Button(action: {
-                        viewModel.apply()
-                        dismiss()
-                    }) {
-                        Text("Apply")
-                            .frame(maxWidth: .infinity)
+                            Button("None") { viewModel.select(just: []) }
+                        }
+
+                    } header: {
+                        Text("Groups")
                     }
-                    .padding()
-                    .buttonStyle(.borderedProminent)
+
+                    if editMode.isEditing {
+                        Section {
+                            TextField("Group name", text: $groupName)
+                            Button("Create") {
+                                viewModel.createGroup(named: groupName)
+                                editMode = .inactive
+                                groupName = ""
+                            }.contentShape(Rectangle())
+                        } header: {
+                            Text("Create")
+                        } footer: {
+                            Text("This will create a new group from your selected parameters.")
+                        }
+                    }
+
+                    Section {
+                        List(viewModel.variables) { variable in
+                            Button {
+                                viewModel.toggle(updating: variable)
+                            } label: {
+                                HStack {
+                                    if variable.isSelected {
+                                        Label(variable.type.name, systemImage: "checkmark.circle.fill")
+                                    } else {
+                                        Label(variable.type.name, systemImage: "circle")
+                                    }
+
+                                    Spacer()
+
+                                    Text(variable.type.unit)
+                                }
+                                .contentShape(Rectangle())
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                        }
+                    } header: {
+                        Text("Parameters")
+                    } footer: {
+                        Link(destination: URL(string: "https://github.com/TonyM1958/HA-FoxESS-Modbus/wiki/Fox-ESS-Cloud#search-parameters")!) {
+                            HStack {
+                                Text("Find out more about these variables")
+                                Image(systemName: "rectangle.portrait.and.arrow.right")
+                            }
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .font(.caption)
+                        }
+
+                        Button("Restore defaults") {}
+                            .buttonStyle(.borderedProminent)
+                    }
                 }
 
-                Text("Note that not all parameters contain values")
+                BottomButtonsView {
+                    viewModel.apply()
+                    dismiss()
+                } footer: {
+                    Text("Note that not all parameters contain values")
+                }
             }
+            .navigationTitle("Parameter Groups")
+            .toolbar { ToolbarItem(placement: .navigationBarTrailing) { EditButton() } }
+            .environment(\.editMode, self.$editMode)
         }
+    }
+
+    private var isEditing: Bool {
+        editMode.isEditing == true
     }
 }
 
@@ -118,6 +136,9 @@ struct VariableChooser_Previews: PreviewProvider {
                          RawVariable(name: "dPV2Current", variable: "pv2Current", unit: "A"),
                          RawVariable(name: "dPV2Power", variable: "pv2Power", unit: "kW")].map { ParameterGraphVariable($0, isSelected: [true, false].randomElement()!) }
 
-        return ParameterGraphVariableChooserView(viewModel: ParameterGraphVariableChooserViewModel(variables: variables, onApply: { _ in }))
+        return ParameterGraphVariableChooserView(
+            viewModel: ParameterGraphVariableChooserViewModel(variables: variables,
+                                                              configManager: PreviewConfigManager(),
+                                                              onApply: { _ in }))
     }
 }

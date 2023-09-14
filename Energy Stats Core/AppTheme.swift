@@ -34,6 +34,7 @@ public struct AppTheme {
     public var showInverterTypeNameOnPowerFlow: Bool
     public var showLastUpdateTimestamp: Bool
     public var solarDefinitions: SolarRangeDefinitions
+    public var parameterGroups: [ParameterGroup]
 
     public init(
         showColouredLines: Bool,
@@ -54,7 +55,8 @@ public struct AppTheme {
         showGridTotalsOnPowerFlow: Bool,
         showInverterTypeNameOnPowerFlow: Bool,
         showLastUpdateTimestamp: Bool,
-        solarDefinitions: SolarRangeDefinitions
+        solarDefinitions: SolarRangeDefinitions,
+        parameterGroups: [ParameterGroup]
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -75,6 +77,7 @@ public struct AppTheme {
         self.showInverterTypeNameOnPowerFlow = showInverterTypeNameOnPowerFlow
         self.showLastUpdateTimestamp = showLastUpdateTimestamp
         self.solarDefinitions = solarDefinitions
+        self.parameterGroups = parameterGroups
     }
 
     public func copy(
@@ -96,7 +99,8 @@ public struct AppTheme {
         showGridTotalsOnPowerFlow: Bool? = nil,
         showInverterTypeNameOnPowerFlow: Bool? = nil,
         showLastUpdateTimestamp: Bool? = nil,
-        solarDefinitions: SolarRangeDefinitions? = nil
+        solarDefinitions: SolarRangeDefinitions? = nil,
+        parameterGroups: [ParameterGroup]? = nil
     ) -> AppTheme {
         AppTheme(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -117,7 +121,8 @@ public struct AppTheme {
             showGridTotalsOnPowerFlow: showGridTotalsOnPowerFlow ?? self.showGridTotalsOnPowerFlow,
             showInverterTypeNameOnPowerFlow: showInverterTypeNameOnPowerFlow ?? self.showInverterTypeNameOnPowerFlow,
             showLastUpdateTimestamp: showLastUpdateTimestamp ?? self.showLastUpdateTimestamp,
-            solarDefinitions: solarDefinitions ?? self.solarDefinitions
+            solarDefinitions: solarDefinitions ?? self.solarDefinitions,
+            parameterGroups: parameterGroups ?? self.parameterGroups
         )
     }
 }

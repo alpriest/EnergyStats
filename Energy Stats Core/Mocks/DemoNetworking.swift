@@ -177,6 +177,7 @@ public class MockConfig: Config {
     public var deviceBatteryOverrides: [String: String] = [:]
     public var showLastUpdateTimestamp: Bool = false
     public var solarDefinitions: SolarRangeDefinitions = .default()
+    public var parameterGroups: [ParameterGroup] = DefaultParameterGroups()
 }
 
 public class PreviewConfigManager: ConfigManager {

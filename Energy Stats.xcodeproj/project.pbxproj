@@ -164,6 +164,7 @@
 		41CD1F322A1414C1006B0C00 /* StatsGraphVariableToggles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CD1F312A1414C1006B0C00 /* StatsGraphVariableToggles.swift */; };
 		41CD1F342A141F81006B0C00 /* NonFunctionalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CD1F332A141F81006B0C00 /* NonFunctionalButton.swift */; };
 		41CF044C2A95006E00ADCCAD /* ExternalWebNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CF044B2A95006E00ADCCAD /* ExternalWebNavigationLink.swift */; };
+		41D286E52AB352AC00B18FEF /* ParameterGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D286E42AB352AC00B18FEF /* ParameterGroup.swift */; };
 		41D8402D2AB2E0DE00769E81 /* ErrorMessagesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D8402C2AB2E0DE00769E81 /* ErrorMessagesResponse.swift */; };
 		41DD7F3A29C5B8940072CDE8 /* SolarPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD7F3929C5B8940072CDE8 /* SolarPowerView.swift */; };
 		41DF51D22AA4CF6D007B5102 /* MockAppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DF51D12AA4CF6D007B5102 /* MockAppTheme.swift */; };
@@ -423,6 +424,7 @@
 		41CD1F312A1414C1006B0C00 /* StatsGraphVariableToggles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGraphVariableToggles.swift; sourceTree = "<group>"; };
 		41CD1F332A141F81006B0C00 /* NonFunctionalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonFunctionalButton.swift; sourceTree = "<group>"; };
 		41CF044B2A95006E00ADCCAD /* ExternalWebNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWebNavigationLink.swift; sourceTree = "<group>"; };
+		41D286E42AB352AC00B18FEF /* ParameterGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterGroup.swift; sourceTree = "<group>"; };
 		41D6496B28DB321600A24B41 /* DeviceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceList.swift; sourceTree = "<group>"; };
 		41D7B12328C86E4000E14144 /* Raw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Raw.swift; sourceTree = "<group>"; };
 		41D8402C2AB2E0DE00769E81 /* ErrorMessagesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessagesResponse.swift; sourceTree = "<group>"; };
@@ -709,6 +711,7 @@
 				41626CD129D96AD9003FEB00 /* DeviceFirmwareVersion.swift */,
 				416AE4472A812876003D0122 /* WorkMode.swift */,
 				41E8E7252AAE0D0D00DC4B89 /* SolarRangeDefinitions.swift */,
+				41D286E42AB352AC00B18FEF /* ParameterGroup.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1380,6 +1383,7 @@
 				4103D1D229DB6C51001B0BC8 /* NetworkError.swift in Sources */,
 				4103D1D429DB6C51001B0BC8 /* DeviceList.swift in Sources */,
 				4171854A2A01006000D18CDD /* Double.swift in Sources */,
+				41D286E52AB352AC00B18FEF /* ParameterGroup.swift in Sources */,
 				416318B729DDD2E100C2C285 /* InMemoryLoggingNetworkingDecorator.swift in Sources */,
 				4185474C2A3B1025000128C7 /* SunView.swift in Sources */,
 			);

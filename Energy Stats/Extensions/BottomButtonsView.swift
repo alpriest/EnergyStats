@@ -7,9 +7,15 @@
 
 import SwiftUI
 
-struct BottomButtonsView: View {
+struct BottomButtonsView<Content: View>: View {
     @Environment(\.dismiss) var dismiss
     let onApply: () -> Void
+    let footer: () -> Content
+
+    init(onApply: @escaping () -> Void, @ViewBuilder footer: @escaping () -> Content = { EmptyView() }) {
+        self.onApply = onApply
+        self.footer = footer
+    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -37,6 +43,8 @@ struct BottomButtonsView: View {
                 .padding()
                 .buttonStyle(.borderedProminent)
             }
+
+            footer()
         }
     }
 }

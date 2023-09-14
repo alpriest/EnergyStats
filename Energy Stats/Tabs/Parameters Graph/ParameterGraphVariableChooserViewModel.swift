@@ -6,15 +6,20 @@
 //
 
 import SwiftUI
+import Energy_Stats_Core
 
 class ParameterGraphVariableChooserViewModel: ObservableObject {
     @Published var variables: [ParameterGraphVariable] = []
     private let onApply: ([ParameterGraphVariable]) -> Void
     private let haptic = UIImpactFeedbackGenerator()
+    private var configManager: ConfigManaging
+    @Published var groups: [ParameterGroup]
 
-    init(variables: [ParameterGraphVariable], onApply: @escaping ([ParameterGraphVariable]) -> Void) {
+    init(variables: [ParameterGraphVariable], configManager: ConfigManaging, onApply: @escaping ([ParameterGraphVariable]) -> Void) {
         self.variables = variables.sorted(by: { $0.type.name.lowercased() < $1.type.name.lowercased() })
+        self.configManager = configManager
         self.onApply = onApply
+        self.groups = configManager.parameterGroups
         haptic.prepare()
     }
 
@@ -34,6 +39,16 @@ class ParameterGraphVariableChooserViewModel: ObservableObject {
         onApply(variables)
     }
 
+    func createGroup(named name: String) {
+        groups.append(ParameterGroup(title: name, parameterNames: variables.filter { $0.isSelected }.map { $0.type.variable }))
+        configManager.parameterGroups = groups
+    }
+
+    func delete(at index: Int) {
+        groups.remove(at: index)
+        configManager.parameterGroups = groups
+    }
+
     static let DefaultGraphVariables = ["generationPower",
                                         "batChargePower",
                                         "batDischargePower",
@@ -42,27 +57,6 @@ class ParameterGraphVariableChooserViewModel: ObservableObject {
 
     func chooseDefaultVariables() {
         select(just: Self.DefaultGraphVariables)
-    }
-
-    func chooseCompareStringsVariables() {
-        select(just: ["pvPower",
-                      "pv1Power",
-                      "pv2Power",
-                      "pv3Power",
-                      "pv4Power"])
-    }
-
-    func chooseTemperatureVariables() {
-        select(just: ["ambientTemperation",
-                      "invTemperation",
-                      "batTemperature"])
-    }
-
-    func chooseBatteryVariables() {
-        select(just: ["batTemperature",
-                      "batVolt",
-                      "batCurrent",
-                      "SoC"])
     }
 
     func select(just newVariables: [String]) {

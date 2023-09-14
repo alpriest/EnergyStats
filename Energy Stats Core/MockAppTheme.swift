@@ -33,7 +33,8 @@ public extension AppTheme {
             showGridTotalsOnPowerFlow: true,
             showInverterTypeNameOnPowerFlow: true,
             showLastUpdateTimestamp: false,
-            solarDefinitions: .default()
+            solarDefinitions: .default(),
+            parameterGroups: DefaultParameterGroups()
         )
     }
 }

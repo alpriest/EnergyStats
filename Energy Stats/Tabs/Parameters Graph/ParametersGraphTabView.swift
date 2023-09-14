@@ -19,9 +19,11 @@ struct ParametersGraphTabView: View {
     @State private var showingExporter = false
     @State private var appTheme: AppTheme = .mock()
     private let appThemePublisher: LatestAppTheme
+    private let configManager: ConfigManaging
 
     init(configManager: ConfigManaging, networking: Networking) {
         _viewModel = .init(wrappedValue: ParametersGraphTabViewModel(networking: networking, configManager: configManager))
+        self.configManager = configManager
         self.appThemePublisher = configManager.appTheme
         self.appTheme = appThemePublisher.value
     }
@@ -71,7 +73,7 @@ struct ParametersGraphTabView: View {
             .padding()
         }
         .sheet(isPresented: $showingVariables) {
-            ParameterGraphVariableChooserView(viewModel: ParameterGraphVariableChooserViewModel(variables: viewModel.graphVariables, onApply: { viewModel.set(graphVariables: $0) }))
+            ParameterGraphVariableChooserView(viewModel: ParameterGraphVariableChooserViewModel(variables: viewModel.graphVariables, configManager: configManager,  onApply: { viewModel.set(graphVariables: $0) }))
         }
         .task {
             Task {

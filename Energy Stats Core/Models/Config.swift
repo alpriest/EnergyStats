@@ -33,6 +33,7 @@ public protocol Config {
     var deviceBatteryOverrides: [String: String] { get set }
     var showLastUpdateTimestamp: Bool { get set }
     var solarDefinitions: SolarRangeDefinitions { get set }
+    var parameterGroups: [ParameterGroup] { get set }
 }
 
 extension UserDefaults {
@@ -161,6 +162,9 @@ public class UserDefaultsConfig: Config {
             }
         }
     }
+
+    @UserDefaultsStoredCodable(key: "parameterGroups", defaultValue: DefaultParameterGroups())
+    public var parameterGroups: [ParameterGroup]
 }
 
 @propertyWrapper
@@ -219,4 +223,48 @@ public struct UserDefaultsStoredData {
             UserDefaults.shared.set(newValue, forKey: key)
         }
     }
+}
+
+@propertyWrapper
+public struct UserDefaultsStoredCodable<T: Codable> {
+    var key: String
+    var defaultValue: T
+
+    public var wrappedValue: T {
+        get {
+            guard let data = UserDefaults.shared.data(forKey: key) else {
+                return defaultValue
+            }
+            do {
+                return try JSONDecoder().decode(T.self, from: data)
+            } catch {
+                return defaultValue
+            }
+        }
+        set {
+            do {
+                let data = try JSONEncoder().encode(newValue)
+                UserDefaults.shared.set(data, forKey: key)
+            } catch {
+                print("AWP", "Failed to encode value for \(key) 💥")
+            }
+        }
+    }
+}
+
+public func DefaultParameterGroups() -> [ParameterGroup] {
+    [
+        ParameterGroup(title: "Compare strings", parameterNames: ["pvPower",
+                                                                  "pv1Power",
+                                                                  "pv2Power",
+                                                                  "pv3Power",
+                                                                  "pv4Power"]),
+        ParameterGroup(title: "Temperatures", parameterNames: ["ambientTemperation",
+                                                               "invTemperation",
+                                                               "batTemperature"]),
+        ParameterGroup(title: "Battery", parameterNames: ["batTemperature",
+                                                          "batVolt",
+                                                          "batCurrent",
+                                                          "SoC"])
+    ]
 }
