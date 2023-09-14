@@ -125,6 +125,10 @@ public class NetworkCache: Networking {
     public func fetchDataLoggers() async throws -> PagedDataLoggerListResponse {
         try await network.fetchDataLoggers()
     }
+
+    public func fetchErrorMessages() async {
+        try await network.fetchErrorMessages()
+    }
 }
 
 private extension NetworkCache {

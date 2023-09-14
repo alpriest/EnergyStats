@@ -49,7 +49,7 @@ public class DemoNetworking: Networking {
 
     public func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [ReportResponse] {
         if throwOnCall {
-            throw NetworkError.unknown
+            throw NetworkError.unknown("", "Fake thrown error")
         }
 
         let data: Data
@@ -70,7 +70,7 @@ public class DemoNetworking: Networking {
 
     public func fetchRaw(deviceID: String, variables: [RawVariable], queryDate: QueryDate) async throws -> [RawResponse] {
         if throwOnCall {
-            throw NetworkError.unknown
+            throw NetworkError.unknown("", "Fake thrown error")
         }
 
         let data = try data(filename: "raw-\(deviceID)")
@@ -131,8 +131,7 @@ public class DemoNetworking: Networking {
         DeviceSettingsGetResponse(protocol: "H1234", raw: "", values: InverterValues(operationModeWorkMode: .feedInFirst))
     }
 
-    public func setWorkMode(deviceID: String, workMode: InverterWorkMode) async throws {
-    }
+    public func setWorkMode(deviceID: String, workMode: InverterWorkMode) async throws {}
 
     public func fetchDataLoggers() async throws -> PagedDataLoggerListResponse {
         PagedDataLoggerListResponse(currentPage: 1, pageSize: 10, total: 1, data: [
@@ -140,6 +139,8 @@ public class DemoNetworking: Networking {
             PagedDataLoggerListResponse.DataLogger(moduleSN: "123DEF456ABC", moduleType: "W2", plantName: "Jane Doe", version: "3.08", signal: 1, communication: 0)
         ])
     }
+
+    public func fetchErrorMessages() async {}
 }
 
 public class MockConfig: Config {

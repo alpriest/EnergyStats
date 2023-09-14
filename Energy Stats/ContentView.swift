@@ -29,6 +29,7 @@ struct ContentView: View {
             do {
                 state = .active(String(key: .loading))
 
+                await network.fetchErrorMessages()
                 try await configManager.fetchDevices()
                 try await configManager.refreshFirmwareVersions()
 

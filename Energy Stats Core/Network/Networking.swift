@@ -23,6 +23,7 @@ extension URL {
     static var deviceSettings = URL(string: "https://www.foxesscloud.com/c/v0/device/setting/get")!
     static var deviceSettingsSet = URL(string: "https://www.foxesscloud.com/c/v0/device/setting/set")!
     static var moduleList = URL(string: "https://www.foxesscloud.com/c/v0/module/list")!
+    static var errorMessages = URL(string: "https://www.foxesscloud.com/c/v0/errors/message")!
 }
 
 public protocol Networking {
@@ -42,6 +43,7 @@ public protocol Networking {
     func fetchWorkMode(deviceID: String) async throws -> DeviceSettingsGetResponse
     func setWorkMode(deviceID: String, workMode: InverterWorkMode) async throws
     func fetchDataLoggers() async throws -> PagedDataLoggerListResponse
+    func fetchErrorMessages() async
 }
 
 public class Network: Networking {
@@ -55,6 +57,7 @@ public class Network: Networking {
 
     private let credentials: KeychainStoring
     private let store: InMemoryLoggingNetworkStore
+    private var errorMessages: [String: String] = [:]
 
     public init(credentials: KeychainStoring, store: InMemoryLoggingNetworkStore) {
         self.credentials = credentials
@@ -222,6 +225,17 @@ public class Network: Networking {
 //        store.inverterWorkModeResponse = NetworkOperation(description: "inverterWorkModeResponse", value: result.0, raw: result.1)
         return result.0
     }
+
+    public func fetchErrorMessages() async {
+        var request = URLRequest(url: URL.errorMessages)
+
+        do {
+            let result: (ErrorMessagesResponse, Data) = try await fetch(request)
+            self.errorMessages = result.0.messages.first?.value ?? [:]
+        } catch {
+            // Ignore
+        }
+    }
 }
 
 private extension Network {
@@ -242,21 +256,25 @@ private extension Network {
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {
-                throw NetworkError.unknown
+                throw NetworkError.unknown("", "Invalid response type")
             }
 
             guard 200 ... 300 ~= statusCode else { throw NetworkError.invalidResponse(request.url, statusCode) }
 
             let networkResponse: NetworkResponse<T> = try JSONDecoder().decode(NetworkResponse<T>.self, from: data)
 
-            if [41808, 41809, 41810].contains(networkResponse.errno) {
-                throw NetworkError.invalidToken
-            } else if networkResponse.errno == 41807 {
-                throw NetworkError.badCredentials
-            } else if networkResponse.errno == 40401 {
-                throw NetworkError.tryLater
-            } else if networkResponse.errno == 30000 {
-                throw NetworkError.maintenanceMode
+            if networkResponse.errno > 0 {
+                if [41808, 41809, 41810].contains(networkResponse.errno) {
+                    throw NetworkError.invalidToken
+                } else if networkResponse.errno == 41807 {
+                    throw NetworkError.badCredentials
+                } else if networkResponse.errno == 40401 {
+                    throw NetworkError.tryLater
+                } else if networkResponse.errno == 30000 {
+                    throw NetworkError.maintenanceMode
+                } else {
+                    throw NetworkError.unknown(String(networkResponse.errno), errorMessage(for: networkResponse.errno))
+                }
             }
 
             if let result = networkResponse.result {
@@ -280,6 +298,10 @@ private extension Network {
                 throw error
             }
         }
+    }
+
+    private func errorMessage(for errno: Int) -> String {
+        errorMessages[String(errno)] ?? "Unknown"
     }
 
     func addHeaders(to request: inout URLRequest) {

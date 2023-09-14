@@ -145,4 +145,12 @@ public class NetworkFacade: Networking {
 
         return try await network.fetchDataLoggers()
     }
+
+    public func fetchErrorMessages() async {
+        if config.isDemoUser {
+            await fakeNetwork.fetchErrorMessages()
+        }
+
+        await network.fetchErrorMessages()
+    }
 }

@@ -11,7 +11,7 @@ public enum NetworkError: LocalizedError, CustomStringConvertible, Equatable {
     case invalidResponse(_ url: URL?, _ responseCode: Int?)
     case invalidConfiguration(_ reason: String)
     case badCredentials
-    case unknown
+    case unknown(String, String)
     case invalidToken
     case tryLater
     case offline
@@ -29,8 +29,8 @@ public enum NetworkError: LocalizedError, CustomStringConvertible, Equatable {
             builder.append("Invalid configuration", reason)
         case .badCredentials:
             builder.append(String(localized: "Bad credentials"))
-        case .unknown:
-            builder.append(String(localized: "Unknown network error"))
+        case .unknown(let code, let message):
+            builder.append(String("Code: \(code) \(message)"))
         case .invalidToken:
             builder.append(String(localized: "Invalid token. Please logout and login again."))
         case .tryLater:
