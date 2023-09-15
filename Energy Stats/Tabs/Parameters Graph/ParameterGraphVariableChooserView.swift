@@ -101,8 +101,9 @@ struct ParameterGraphVariableChooserView: View {
                 }
             }
             .navigationTitle("Parameter Groups")
-            .toolbar { ToolbarItem(placement: .navigationBarTrailing) { EditButton() } }
-            .environment(\.editMode, self.$editMode)
+            .navigationBarTitleDisplayMode(.inline)
+//            .toolbar { ToolbarItem(placement: .navigationBarTrailing) { EditButton() } }
+//            .environment(\.editMode, self.$editMode)
         }
     }
 
