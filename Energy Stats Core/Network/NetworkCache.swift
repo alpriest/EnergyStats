@@ -127,7 +127,7 @@ public class NetworkCache: Networking {
     }
 
     public func fetchErrorMessages() async {
-        try await network.fetchErrorMessages()
+        await network.fetchErrorMessages()
     }
 }
 

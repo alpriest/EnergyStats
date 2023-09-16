@@ -227,7 +227,7 @@ public class Network: Networking {
     }
 
     public func fetchErrorMessages() async {
-        var request = URLRequest(url: URL.errorMessages)
+        let request = URLRequest(url: URL.errorMessages)
 
         do {
             let result: (ErrorMessagesResponse, Data) = try await fetch(request)
