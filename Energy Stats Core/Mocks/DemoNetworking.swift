@@ -154,6 +154,7 @@ public class MockConfig: Config {
     public var hasBattery: Bool = true
     public var hasPV: Bool = true
     public var isDemoUser: Bool = true
+    public var hasRunBefore: Bool = true
     public var showColouredLines: Bool = true
     public var showBatteryTemperature: Bool = true
     public var refreshFrequency: Int = 0

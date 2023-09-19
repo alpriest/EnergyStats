@@ -9,6 +9,7 @@ import Foundation
 
 public protocol Config {
     var isDemoUser: Bool { get set }
+    var hasRunBefore: Bool { get set }
     var showColouredLines: Bool { get set }
     var showBatteryTemperature: Bool { get set }
     var showBatteryEstimate: Bool { get set }
@@ -52,6 +53,9 @@ public class UserDefaultsConfig: Config {
     private func integer(from source: UserDefaults, forKey key: String, defaultValue: Int) -> Int {
         (source.object(forKey: key) as? Int) ?? defaultValue
     }
+
+    @UserDefaultsStoredBool(key: "hasRunBefore")
+    public var hasRunBefore: Bool
 
     @UserDefaultsStoredBool(key: "isDemoUser")
     public var isDemoUser: Bool

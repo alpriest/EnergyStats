@@ -27,6 +27,17 @@ class UserManager: ObservableObject {
         self.store.hasCredentials
             .assign(to: \.isLoggedIn, on: self)
             .store(in: &cancellables)
+
+        signOutIfFirstRun()
+    }
+
+    func signOutIfFirstRun() {
+        if configManager.hasRunBefore { return }
+
+        Task { @MainActor in
+//            logout()  // Enable this in October 2023
+            configManager.hasRunBefore = true
+        }
     }
 
     func getUsername() -> String? {

@@ -20,6 +20,7 @@ public protocol ConfigManaging {
     func select(device: Device?)
     func refreshFirmwareVersions() async throws
     func clearBatteryOverride(for deviceID: String)
+    var hasRunBefore: Bool { get set }
     var minSOC: Double { get }
     var batteryCapacity: String { get set }
     var batteryCapacityW: Int { get }
@@ -201,6 +202,11 @@ public class ConfigManager: ConfigManaging {
                 $0
             }
         }
+    }
+
+    public var hasRunBefore: Bool {
+        get { config.hasRunBefore }
+        set { config.hasRunBefore = newValue }
     }
 
     public func clearBatteryOverride(for deviceID: String) {
