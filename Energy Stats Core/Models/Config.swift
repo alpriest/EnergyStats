@@ -258,17 +258,23 @@ public struct UserDefaultsStoredCodable<T: Codable> {
 
 public func DefaultParameterGroups() -> [ParameterGroup] {
     [
-        ParameterGroup(title: "Compare strings", parameterNames: ["pvPower",
-                                                                  "pv1Power",
-                                                                  "pv2Power",
-                                                                  "pv3Power",
-                                                                  "pv4Power"]),
-        ParameterGroup(title: "Temperatures", parameterNames: ["ambientTemperation",
-                                                               "invTemperation",
-                                                               "batTemperature"]),
-        ParameterGroup(title: "Battery", parameterNames: ["batTemperature",
-                                                          "batVolt",
-                                                          "batCurrent",
-                                                          "SoC"])
+        ParameterGroup(id: UUID(),
+                       title: "Compare strings",
+                       parameterNames: ["pvPower",
+                                        "pv1Power",
+                                        "pv2Power",
+                                        "pv3Power",
+                                        "pv4Power"]),
+        ParameterGroup(id: UUID(),
+                       title: "Temperatures",
+                       parameterNames: ["ambientTemperation",
+                                        "invTemperation",
+                                        "batTemperature"]),
+        ParameterGroup(id: UUID(),
+                       title: "Battery",
+                       parameterNames: ["batTemperature",
+                                        "batVolt",
+                                        "batCurrent",
+                                        "SoC"])
     ]
 }

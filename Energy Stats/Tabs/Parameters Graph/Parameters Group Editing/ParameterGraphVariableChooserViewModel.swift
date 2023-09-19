@@ -12,7 +12,7 @@ class ParameterGraphVariableChooserViewModel: ObservableObject {
     @Published var variables: [ParameterGraphVariable] = []
     private let onApply: ([ParameterGraphVariable]) -> Void
     private let haptic = UIImpactFeedbackGenerator()
-    private var configManager: ConfigManaging
+    private(set) var configManager: ConfigManaging
     @Published var groups: [ParameterGroup]
 
     init(variables: [ParameterGraphVariable], configManager: ConfigManaging, onApply: @escaping ([ParameterGraphVariable]) -> Void) {
@@ -40,7 +40,7 @@ class ParameterGraphVariableChooserViewModel: ObservableObject {
     }
 
     func createGroup(named name: String) {
-        groups.append(ParameterGroup(title: name, parameterNames: variables.filter { $0.isSelected }.map { $0.type.variable }))
+        groups.append(ParameterGroup(id: UUID(), title: name, parameterNames: variables.filter { $0.isSelected }.map { $0.type.variable }))
         configManager.parameterGroups = groups
     }
 

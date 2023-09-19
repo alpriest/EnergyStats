@@ -14,12 +14,6 @@ struct ParameterGraphVariableChooserView: View {
     @State private var editMode = EditMode.inactive
     @State private var groupName = ""
 
-    func delete(at offsets: IndexSet) {
-        offsets.forEach { index in
-            viewModel.delete(at: index)
-        }
-    }
-
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
@@ -31,7 +25,6 @@ struct ParameterGraphVariableChooserView: View {
                             ForEach(viewModel.groups, id: \.title) { group in
                                 Button(group.title) { viewModel.select(just: group.parameterNames) }
                             }
-                            .onDelete(perform: delete)
 
                             Button("None") { viewModel.select(just: []) }
                         }
@@ -84,8 +77,10 @@ struct ParameterGraphVariableChooserView: View {
             }
             .navigationTitle("Parameter Groups")
             .navigationBarTitleDisplayMode(.inline)
-//            .toolbar { ToolbarItem(placement: .navigationBarTrailing) { EditButton() } }
-//            .environment(\.editMode, self.$editMode)
+            .toolbar { ToolbarItem(placement: .navigationBarTrailing) {
+                NavigationLink(destination: { ParameterVariableGroupEditorView(viewModel: ParameterVariableGroupEditorViewModel(configManager: viewModel.configManager)) },
+                               label: { Text("Edit") })
+            } }
         }
     }
 
@@ -94,15 +89,13 @@ struct ParameterGraphVariableChooserView: View {
     }
 }
 
-struct VariableChooser_Previews: PreviewProvider {
-    static var previews: some View {
-        let variables = RawVariable.previewList().map { ParameterGraphVariable($0, isSelected: [true, false].randomElement()!) }
+#Preview {
+    let variables = RawVariable.previewList().map { ParameterGraphVariable($0, isSelected: [true, false].randomElement()!) }
 
-        return ParameterGraphVariableChooserView(
-            viewModel: ParameterGraphVariableChooserViewModel(variables: variables,
-                                                              configManager: PreviewConfigManager(),
-                                                              onApply: { _ in }))
-    }
+    return ParameterGraphVariableChooserView(
+        viewModel: ParameterGraphVariableChooserViewModel(variables: variables,
+                                                          configManager: PreviewConfigManager(),
+                                                          onApply: { _ in }))
 }
 
 extension RawVariable {

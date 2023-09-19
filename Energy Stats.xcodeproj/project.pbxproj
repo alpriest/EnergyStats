@@ -39,8 +39,9 @@
 		410913FF29DB7A2700133CC5 /* CurrentStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146828C7374400EA5BA1 /* CurrentStatusViewModel.swift */; };
 		4109140029DB7AB600133CC5 /* HomePowerFlowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EDDF6B28CD2A630092C662 /* HomePowerFlowViewModel.swift */; };
 		4109140229DB7AE700133CC5 /* BatteryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140147028C77AAA00EA5BA1 /* BatteryViewModel.swift */; };
-		410FC8862AB98F020004CBC2 /* ParameterVariableGroupEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410FC8852AB98F020004CBC2 /* ParameterVariableGroupEditor.swift */; };
+		410FC8862AB98F020004CBC2 /* ParameterVariableGroupEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410FC8852AB98F020004CBC2 /* ParameterVariableGroupEditorView.swift */; };
 		410FC8882AB9B5450004CBC2 /* ParameterVariableListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410FC8872AB9B5450004CBC2 /* ParameterVariableListView.swift */; };
+		410FC88A2AB9EAD90004CBC2 /* ParameterVariableGroupEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410FC8892AB9EAD90004CBC2 /* ParameterVariableGroupEditorViewModel.swift */; };
 		4110065B28E890E40018C3DF /* ParametersGraphTabViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4110065A28E890E40018C3DF /* ParametersGraphTabViewModelTests.swift */; };
 		4110290D2A71B713004018BB /* BatteryChargeScheduleSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4110290C2A71B713004018BB /* BatteryChargeScheduleSettingsView.swift */; };
 		4110290F2A71B908004018BB /* BatterySOCSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4110290E2A71B908004018BB /* BatterySOCSettingsView.swift */; };
@@ -264,8 +265,9 @@
 		41075D5F29DC392E007F897A /* BatteryCapacityCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryCapacityCalculatorTests.swift; sourceTree = "<group>"; };
 		410913FC29DB78EF00133CC5 /* PreciseDateTimeFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreciseDateTimeFormatter.swift; sourceTree = "<group>"; };
 		410AA38729D96F6D00CD107C /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
-		410FC8852AB98F020004CBC2 /* ParameterVariableGroupEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterVariableGroupEditor.swift; sourceTree = "<group>"; };
+		410FC8852AB98F020004CBC2 /* ParameterVariableGroupEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterVariableGroupEditorView.swift; sourceTree = "<group>"; };
 		410FC8872AB9B5450004CBC2 /* ParameterVariableListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterVariableListView.swift; sourceTree = "<group>"; };
+		410FC8892AB9EAD90004CBC2 /* ParameterVariableGroupEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterVariableGroupEditorViewModel.swift; sourceTree = "<group>"; };
 		4110065A28E890E40018C3DF /* ParametersGraphTabViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersGraphTabViewModelTests.swift; sourceTree = "<group>"; };
 		4110290C2A71B713004018BB /* BatteryChargeScheduleSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryChargeScheduleSettingsView.swift; sourceTree = "<group>"; };
 		4110290E2A71B908004018BB /* BatterySOCSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatterySOCSettingsView.swift; sourceTree = "<group>"; };
@@ -559,7 +561,8 @@
 			children = (
 				417185472A0051CA00D18CDD /* ParameterGraphVariableChooserView.swift */,
 				4171854D2A010B6300D18CDD /* ParameterGraphVariableChooserViewModel.swift */,
-				410FC8852AB98F020004CBC2 /* ParameterVariableGroupEditor.swift */,
+				410FC8852AB98F020004CBC2 /* ParameterVariableGroupEditorView.swift */,
+				410FC8892AB9EAD90004CBC2 /* ParameterVariableGroupEditorViewModel.swift */,
 			);
 			path = "Parameters Group Editing";
 			sourceTree = "<group>";
@@ -1318,6 +1321,7 @@
 				41C49EAE2A0398E4003700CB /* PreviewUserManager.swift in Sources */,
 				4110290F2A71B908004018BB /* BatterySOCSettingsView.swift in Sources */,
 				419DFA882A12A6DF0067313A /* DatePickerViewModel.swift in Sources */,
+				410FC88A2AB9EAD90004CBC2 /* ParameterVariableGroupEditorViewModel.swift in Sources */,
 				4171854E2A010B6300D18CDD /* ParameterGraphVariableChooserViewModel.swift in Sources */,
 				418199C72A4034530001B5D4 /* FAQView.swift in Sources */,
 				417153E629F2BD3300639A7B /* LoadState.swift in Sources */,
@@ -1342,7 +1346,7 @@
 				416AE4382A7D956E003D0122 /* AlertCopy.swift in Sources */,
 				416318BE29DDD80E00C2C285 /* View+Copy.swift in Sources */,
 				4107446728CA22B3006D5D7D /* InverterViewModel.swift in Sources */,
-				410FC8862AB98F020004CBC2 /* ParameterVariableGroupEditor.swift in Sources */,
+				410FC8862AB98F020004CBC2 /* ParameterVariableGroupEditorView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
