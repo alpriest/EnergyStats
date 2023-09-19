@@ -10,8 +10,9 @@ import SwiftUI
 
 struct ParameterVariableGroupEditorView: View {
     @ObservedObject var viewModel: ParameterVariableGroupEditorViewModel
-    @State private var presentRenameAlert = false
+    @State private var presentAlert = false
     @State private var renameText = ""
+    @State private var onAlertSubmission: ((String) -> Void)?
 
     var body: some View {
         VStack(spacing: 0) {
@@ -30,27 +31,31 @@ struct ParameterVariableGroupEditorView: View {
                         if let selectedGroup = viewModel.selectedGroup {
                             Button("Rename...") {
                                 renameText = selectedGroup.title
-                                presentRenameAlert = true
+                                onAlertSubmission = viewModel.update
+                                presentAlert = true
                             }
                             .buttonStyle(.bordered)
-                            .alert("Login", isPresented: $presentRenameAlert, actions: {
-                                TextField("Username", text: $renameText)
-
-                                Button("OK", action: {
-                                    viewModel.update(title: renameText)
-                                })
-                                Button("Cancel", role: .cancel, action: {
-                                    presentRenameAlert = false
-                                })
-                            }, message: {
-                                Text("Please enter your username and password.")
-                            })
                         }
 
                         Button("Create new...") {
-                            // TODO:
-                        }.buttonStyle(.bordered)
+                            renameText = ""
+                            onAlertSubmission = viewModel.create
+                            presentAlert = true
+                        }
+                        .buttonStyle(.bordered)
                     }
+                    .alert("Group name", isPresented: $presentAlert, actions: {
+                        TextField("Group name", text: $renameText)
+
+                        Button("Apply") {
+                            onAlertSubmission?(renameText)
+                        }
+                        Button("Cancel", role: .cancel) {
+                            presentAlert = false
+                        }
+                    }, message: {
+                        Text("Please enter the new name")
+                    })
                 }
 
                 Section {

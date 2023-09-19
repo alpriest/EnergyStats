@@ -5,8 +5,8 @@
 //  Created by Alistair Priest on 19/09/2023.
 //
 
-import Foundation
 import Energy_Stats_Core
+import Foundation
 
 class ParameterVariableGroupEditorViewModel: ObservableObject {
     @Published var selected: UUID? {
@@ -57,16 +57,25 @@ class ParameterVariableGroupEditorViewModel: ObservableObject {
         configManager.parameterGroups = groups
     }
 
-    func update(title: String) {
+    func update(_ title: String) {
         guard let selectedGroup else { return }
 
-        self.groups = groups.map { existingGroup in
+        groups = groups.map { existingGroup in
             if existingGroup.id == selected {
                 return ParameterGroup(id: selectedGroup.id, title: title, parameterNames: selectedGroup.parameterNames)
             } else {
                 return existingGroup
             }
         }
+    }
+
+    func create(_ title: String) {
+        groups = groups + [
+            ParameterGroup(id: UUID(),
+                           title: title,
+                           parameterNames: variables.filter { $0.isSelected}.map { $0.type.variable})
+        ]
+        configManager.parameterGroups = groups
     }
 
     private func updateVariables(for group: ParameterGroup?) {
