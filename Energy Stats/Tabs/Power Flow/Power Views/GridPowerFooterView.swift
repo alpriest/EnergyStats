@@ -9,7 +9,6 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct GridPowerFooterView: View {
-    @AppStorage("gridPowerView_showImportTotal") private var showImport: Bool = false
     let importTotal: Double
     let exportTotal: Double
     let appTheme: AppTheme
@@ -17,21 +16,15 @@ struct GridPowerFooterView: View {
     var body: some View {
         VStack(alignment: .center) {
             if appTheme.showGridTotalsOnPowerFlow {
-                Group {
-                    if showImport {
-                        EnergyText(amount: importTotal, appTheme: appTheme, type: .totalImport)
-                        Text("import_total")
-                            .font(.caption)
-                            .foregroundColor(Color("text_dimmed"))
-                    } else {
-                        EnergyText(amount: exportTotal, appTheme: appTheme, type: .totalExport)
-                        Text("export_total")
-                            .font(.caption)
-                            .foregroundColor(Color("text_dimmed"))
-                    }
-                }.onTapGesture {
-                    showImport.toggle()
-                }
+                EnergyText(amount: importTotal, appTheme: appTheme, type: .totalImport)
+                Text("import_total")
+                    .font(.caption)
+                    .foregroundColor(Color("text_dimmed"))
+
+                EnergyText(amount: exportTotal, appTheme: appTheme, type: .totalExport)
+                Text("export_total")
+                    .font(.caption)
+                    .foregroundColor(Color("text_dimmed"))
             }
         }
     }

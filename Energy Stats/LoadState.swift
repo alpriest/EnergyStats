@@ -38,7 +38,7 @@ struct LoadStateView: ViewModifier {
                 ProgressView()
             }
         case .error(let error, let reason):
-            ErrorAlertView(cause: error, message: reason , retry: retry)
+            ErrorAlertView(cause: error, message: reason, retry: retry)
         case .inactive:
             content
         }

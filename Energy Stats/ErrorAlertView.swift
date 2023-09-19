@@ -14,6 +14,7 @@ struct ErrorAlertView: View {
     let message: String
     let retry: () -> Void
     @State private var errorShowing = false
+    @EnvironmentObject var userManager: UserManager
 
     var body: some View {
         VStack {
@@ -57,6 +58,12 @@ struct ErrorAlertView: View {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 }.buttonStyle(.bordered)
             }
+
+            if showLogout {
+                Button(action: { userManager.logout() }) {
+                    Text("Logout")
+                }.buttonStyle(.bordered)
+            }
         }
         .frame(height: 200)
         .alert(detailedMessage, isPresented: $errorShowing) {
@@ -84,14 +91,26 @@ struct ErrorAlertView: View {
     var popupMessage: String {
         cause?.localizedDescription ?? message
     }
+
+    var showLogout: Bool {
+        if let cause = cause as? NetworkError, case .badCredentials = cause {
+            return true
+        }
+
+        return false
+    }
 }
 
+#if DEBUG
 struct ErrorAlertView_Previews: PreviewProvider {
     static var previews: some View {
         ErrorAlertView(
-            cause: nil,
+            cause: NetworkError.badCredentials,
             message: "This is a long message. This is a long message. This is a long message. This is a long message",
             retry: {}
         )
+        .environmentObject(UserManager.preview())
+        .environment(\.locale, .init(identifier: "de"))
     }
 }
+#endif
