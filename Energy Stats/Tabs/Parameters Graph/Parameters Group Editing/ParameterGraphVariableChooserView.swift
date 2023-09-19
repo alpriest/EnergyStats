@@ -56,25 +56,7 @@ struct ParameterGraphVariableChooserView: View {
                     }
 
                     Section {
-                        List(viewModel.variables) { variable in
-                            Button {
-                                viewModel.toggle(updating: variable)
-                            } label: {
-                                HStack {
-                                    if variable.isSelected {
-                                        Label(variable.type.name, systemImage: "checkmark.circle.fill")
-                                    } else {
-                                        Label(variable.type.name, systemImage: "circle")
-                                    }
-
-                                    Spacer()
-
-                                    Text(variable.type.unit)
-                                }
-                                .contentShape(Rectangle())
-                            }
-                            .buttonStyle(PlainButtonStyle())
-                        }
+                        ParameterVariableListView(variables: viewModel.variables, onTap: viewModel.toggle)
                     } header: {
                         Text("Parameters")
                     } footer: {
@@ -114,32 +96,38 @@ struct ParameterGraphVariableChooserView: View {
 
 struct VariableChooser_Previews: PreviewProvider {
     static var previews: some View {
-        let variables = [RawVariable(name: "PV1Volt", variable: "pv1Volt", unit: "V"),
-                         RawVariable(name: "PV1Current", variable: "pv1Current", unit: "A"),
-                         RawVariable(name: "PV1Power", variable: "pv1Power", unit: "kW"),
-                         RawVariable(name: "PVPower", variable: "pvPower", unit: "kW"),
-                         RawVariable(name: "PV2Volt", variable: "pv2Volt", unit: "V"),
-                         RawVariable(name: "PV2Current", variable: "pv2Current", unit: "A"),
-                         RawVariable(name: "aPV1Current", variable: "pv1Current", unit: "A"),
-                         RawVariable(name: "aPV1Power", variable: "pv1Power", unit: "kW"),
-                         RawVariable(name: "aPVPower", variable: "pvPower", unit: "kW"),
-                         RawVariable(name: "aPV2Volt", variable: "pv2Volt", unit: "V"),
-                         RawVariable(name: "aPV2Current", variable: "pv2Current", unit: "A"),
-                         RawVariable(name: "bPV1Current", variable: "pv1Current", unit: "A"),
-                         RawVariable(name: "bPV1Power", variable: "pv1Power", unit: "kW"),
-                         RawVariable(name: "bPVPower", variable: "pvPower", unit: "kW"),
-                         RawVariable(name: "bPV2Volt", variable: "pv2Volt", unit: "V"),
-                         RawVariable(name: "cPV2Current", variable: "pv2Current", unit: "A"),
-                         RawVariable(name: "cPV1Current", variable: "pv1Current", unit: "A"),
-                         RawVariable(name: "cPV1Power", variable: "pv1Power", unit: "kW"),
-                         RawVariable(name: "cPVPower", variable: "pvPower", unit: "kW"),
-                         RawVariable(name: "cPV2Volt", variable: "pv2Volt", unit: "V"),
-                         RawVariable(name: "dPV2Current", variable: "pv2Current", unit: "A"),
-                         RawVariable(name: "dPV2Power", variable: "pv2Power", unit: "kW")].map { ParameterGraphVariable($0, isSelected: [true, false].randomElement()!) }
+        let variables = RawVariable.previewList().map { ParameterGraphVariable($0, isSelected: [true, false].randomElement()!) }
 
         return ParameterGraphVariableChooserView(
             viewModel: ParameterGraphVariableChooserViewModel(variables: variables,
                                                               configManager: PreviewConfigManager(),
                                                               onApply: { _ in }))
+    }
+}
+
+extension RawVariable {
+    static func previewList() -> [RawVariable] {
+        [RawVariable(name: "PV1Volt", variable: "pv1Volt", unit: "V"),
+         RawVariable(name: "PV1Current", variable: "pv1Current", unit: "A"),
+         RawVariable(name: "PV1Power", variable: "pv1Power", unit: "kW"),
+         RawVariable(name: "PVPower", variable: "pvPower", unit: "kW"),
+         RawVariable(name: "PV2Volt", variable: "pv2Volt", unit: "V"),
+         RawVariable(name: "PV2Current", variable: "pv2Current", unit: "A"),
+         RawVariable(name: "generationPower", variable: "generationPower", unit: "A"),
+         RawVariable(name: "batChargePower", variable: "batChargePower", unit: "kW"),
+         RawVariable(name: "batDischargePower", variable: "batDischargePower", unit: "kW"),
+         RawVariable(name: "feedinPower", variable: "feedinPower", unit: "V"),
+         RawVariable(name: "gridConsumptionPower", variable: "gridConsumptionPower", unit: "A"),
+         RawVariable(name: "bPV1Current", variable: "pv1Current", unit: "A"),
+         RawVariable(name: "bPV1Power", variable: "pv1Power", unit: "kW"),
+         RawVariable(name: "bPVPower", variable: "pvPower", unit: "kW"),
+         RawVariable(name: "bPV2Volt", variable: "pv2Volt", unit: "V"),
+         RawVariable(name: "batTemperature", variable: "batTemperature", unit: "A"),
+         RawVariable(name: "batVolt", variable: "batVolt", unit: "A"),
+         RawVariable(name: "batCurrent", variable: "batCurrent", unit: "kW"),
+         RawVariable(name: "SoC", variable: "SoC", unit: "kW"),
+         RawVariable(name: "cPV2Volt", variable: "pv2Volt", unit: "V"),
+         RawVariable(name: "dPV2Current", variable: "pv2Current", unit: "A"),
+         RawVariable(name: "dPV2Power", variable: "pv2Power", unit: "kW")]
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct ParameterGroup: Codable {
+public struct ParameterGroup: Codable, Hashable {
     public let title: String
     public let parameterNames: [String]
 
