@@ -15,7 +15,8 @@ struct Energy_StatsApp: App {
         let config = UserDefaultsConfig()
         let store = InMemoryLoggingNetworkStore()
         let network = NetworkFacade(network: NetworkCache(network: Network(credentials: keychainStore, store: store)),
-                                    config: config)
+                                    config: config,
+                                    store: keychainStore)
         let configManager = ConfigManager(networking: network, config: config)
         let userManager = UserManager(networking: network, store: keychainStore, configManager: configManager, networkCache: store)
 

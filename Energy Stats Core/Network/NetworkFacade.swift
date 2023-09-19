@@ -11,15 +11,21 @@ public class NetworkFacade: Networking {
     private let network: Networking
     private let fakeNetwork: Networking
     private let config: Config
+    private let store: KeychainStoring
 
-    public init(network: Networking, config: Config) {
+    public init(network: Networking, config: Config, store: KeychainStoring) {
         self.network = network
         self.fakeNetwork = DemoNetworking()
         self.config = config
+        self.store = store
+    }
+
+    private var isDemoUser: Bool {
+        config.isDemoUser || store.isDemoUser
     }
 
     public func ensureHasToken() async {
-        if config.isDemoUser {
+        if isDemoUser {
             await fakeNetwork.ensureHasToken()
         } else {
             await network.ensureHasToken()
@@ -27,7 +33,7 @@ public class NetworkFacade: Networking {
     }
 
     public func verifyCredentials(username: String, hashedPassword: String) async throws {
-        if config.isDemoUser {
+        if isDemoUser {
             try await fakeNetwork.verifyCredentials(username: username, hashedPassword: hashedPassword)
         } else {
             try await network.verifyCredentials(username: username, hashedPassword: hashedPassword)
@@ -35,7 +41,7 @@ public class NetworkFacade: Networking {
     }
 
     public func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [ReportResponse] {
-        if config.isDemoUser {
+        if isDemoUser {
             return try await fakeNetwork.fetchReport(deviceID: deviceID, variables: variables, queryDate: queryDate, reportType: reportType)
         }
 
@@ -43,7 +49,7 @@ public class NetworkFacade: Networking {
     }
 
     public func fetchBattery(deviceID: String) async throws -> BatteryResponse {
-        if config.isDemoUser {
+        if isDemoUser {
             return try await fakeNetwork.fetchBattery(deviceID: deviceID)
         }
 
@@ -51,7 +57,7 @@ public class NetworkFacade: Networking {
     }
 
     public func fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse {
-        if config.isDemoUser {
+        if isDemoUser {
             return try await fakeNetwork.fetchBatterySettings(deviceSN: deviceSN)
         }
 
@@ -59,7 +65,7 @@ public class NetworkFacade: Networking {
     }
 
     public func fetchRaw(deviceID: String, variables: [RawVariable], queryDate: QueryDate) async throws -> [RawResponse] {
-        if config.isDemoUser {
+        if isDemoUser {
             return try await fakeNetwork.fetchRaw(deviceID: deviceID, variables: variables, queryDate: queryDate)
         }
 
@@ -67,7 +73,7 @@ public class NetworkFacade: Networking {
     }
 
     public func fetchDeviceList() async throws -> [PagedDeviceListResponse.Device] {
-        if config.isDemoUser {
+        if isDemoUser {
             return try await fakeNetwork.fetchDeviceList()
         }
 
@@ -75,7 +81,7 @@ public class NetworkFacade: Networking {
     }
 
     public func fetchAddressBook(deviceID: String) async throws -> AddressBookResponse {
-        if config.isDemoUser {
+        if isDemoUser {
             return try await fakeNetwork.fetchAddressBook(deviceID: deviceID)
         }
 
@@ -83,7 +89,7 @@ public class NetworkFacade: Networking {
     }
 
     public func fetchVariables(deviceID: String) async throws -> [RawVariable] {
-        if config.isDemoUser {
+        if isDemoUser {
             return try await fakeNetwork.fetchVariables(deviceID: deviceID)
         }
 
@@ -91,7 +97,7 @@ public class NetworkFacade: Networking {
     }
 
     public func fetchEarnings(deviceID: String) async throws -> EarningsResponse {
-        if config.isDemoUser {
+        if isDemoUser {
             return try await fakeNetwork.fetchEarnings(deviceID: deviceID)
         }
 
@@ -99,7 +105,7 @@ public class NetworkFacade: Networking {
     }
 
     public func setSoc(minGridSOC: Int, minSOC: Int, deviceSN: String) async throws {
-        if config.isDemoUser {
+        if isDemoUser {
             return try await fakeNetwork.setSoc(minGridSOC: minGridSOC, minSOC: minSOC, deviceSN: deviceSN)
         }
 
@@ -107,7 +113,7 @@ public class NetworkFacade: Networking {
     }
 
     public func fetchBatteryTimes(deviceSN: String) async throws -> BatteryTimesResponse {
-        if config.isDemoUser {
+        if isDemoUser {
             return try await fakeNetwork.fetchBatteryTimes(deviceSN: deviceSN)
         }
 
@@ -115,7 +121,7 @@ public class NetworkFacade: Networking {
     }
 
     public func setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws {
-        if config.isDemoUser {
+        if isDemoUser {
             return try await fakeNetwork.setBatteryTimes(deviceSN: deviceSN, times: times)
         }
 
@@ -123,7 +129,7 @@ public class NetworkFacade: Networking {
     }
 
     public func fetchWorkMode(deviceID: String) async throws -> DeviceSettingsGetResponse {
-        if config.isDemoUser {
+        if isDemoUser {
             return try await fakeNetwork.fetchWorkMode(deviceID: deviceID)
         }
 
@@ -131,7 +137,7 @@ public class NetworkFacade: Networking {
     }
 
     public func setWorkMode(deviceID: String, workMode: InverterWorkMode) async throws {
-        if config.isDemoUser {
+        if isDemoUser {
             return try await fakeNetwork.setWorkMode(deviceID: deviceID, workMode: workMode)
         }
 
@@ -139,7 +145,7 @@ public class NetworkFacade: Networking {
     }
 
     public func fetchDataLoggers() async throws -> PagedDataLoggerListResponse {
-        if config.isDemoUser {
+        if isDemoUser {
             return try await fakeNetwork.fetchDataLoggers()
         }
 
@@ -147,7 +153,7 @@ public class NetworkFacade: Networking {
     }
 
     public func fetchErrorMessages() async {
-        if config.isDemoUser {
+        if isDemoUser {
             await fakeNetwork.fetchErrorMessages()
         }
 
