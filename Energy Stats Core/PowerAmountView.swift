@@ -79,8 +79,8 @@ public struct PowerAmountView: View {
         Group {
             PowerText(amount: amount, appTheme: appTheme, type: type)
         }
-        .padding(3)
-        .padding(.horizontal, 4)
+        .padding(.vertical, 2)
+        .padding(.horizontal, 3)
         .background(backgroundColor)
         .foregroundColor(textColor)
         .cornerRadius(3)
