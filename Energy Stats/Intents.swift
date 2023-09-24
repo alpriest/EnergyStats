@@ -16,7 +16,7 @@ struct CheckBatteryChargeLevelIntent: AppIntent {
     static var authenticationPolicy: IntentAuthenticationPolicy = .alwaysAllowed
     static var openAppWhenRun: Bool = false
 
-    func perform() async throws -> some IntentResult & ProvidesDialog {
+    func perform() async throws -> some ProvidesDialog & ReturnsValue<Int> {
         let store = KeychainStore()
         let network = Network(credentials: store, store: InMemoryLoggingNetworkStore())
         let config = UserDefaultsConfig()
@@ -29,28 +29,66 @@ struct CheckBatteryChargeLevelIntent: AppIntent {
     }
 }
 
-//@available(iOS 16.0, *)
-//struct ChangeWorkModeIntent: AppIntent {
-//    static var title: LocalizedStringResource = "Change inverter work mode"
-//    static var description: IntentDescription? = "Changes the work mode of the inverter"
-//    static var authenticationPolicy: IntentAuthenticationPolicy = .alwaysAllowed
-//    static var openAppWhenRun: Bool = false
-//
-//    @Parameter(title: "WorkMode", description: "The workmode to change the inverter to", requestValueDialog: IntentDialog("Which work mode would you like to set?"))
-//    var workMode: WorkMode
-//
-//    func perform() async throws -> some IntentResult & ProvidesDialog {
-//        let store = KeychainStore()
-//        let network = Network(credentials: store, store: InMemoryLoggingNetworkStore())
-//        let config = UserDefaultsConfig()
-//        guard let deviceID = config.selectedDeviceID else {
-//            throw ConfigManager.NoDeviceFoundError()
-//        }
-//        let battery = try await network.fetchBattery(deviceID: deviceID)
-//
-//        return .result(value: battery.soc, dialog: IntentDialog(stringLiteral: "\(battery.soc)%"))
-//    }
-//}
+@available(iOS 16.0, *)
+enum IntentsWorkMode: String, AppEnum, CaseDisplayRepresentable, RawRepresentable {
+    case selfUse
+    case feedInFirst
+    case backup
+    case powerStation
+    case peakShaving
+
+    public static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Work mode")
+
+    public static var caseDisplayRepresentations: [Self: DisplayRepresentation] = [
+        .selfUse: DisplayRepresentation(title: "Self Use"),
+        .feedInFirst: DisplayRepresentation(title: "Feed In First"),
+        .backup: DisplayRepresentation(title: "Backup"),
+        .powerStation: DisplayRepresentation(title: "Power Station"),
+        .peakShaving: DisplayRepresentation(title: "Peak Shaving")
+    ]
+
+    public func asInverterWorkMode() -> InverterWorkMode {
+        switch self {
+        case .selfUse:
+            return .selfUse
+        case .feedInFirst:
+            return .feedInFirst
+        case .backup:
+            return .backup
+        case .powerStation:
+            return .powerStation
+        case .peakShaving:
+            return .peakShaving
+        }
+    }
+}
+
+@available(iOS 16.0, *)
+struct ChangeWorkModeIntent: AppIntent {
+    static var title: LocalizedStringResource = "Change inverter work mode"
+    static var description: IntentDescription? = "Changes the work mode of the inverter"
+    static var authenticationPolicy: IntentAuthenticationPolicy = .alwaysAllowed
+    static var openAppWhenRun: Bool = false
+
+    @Parameter(
+        title: "WorkMode",
+        description: "The workmode to change the inverter to",
+        requestValueDialog: IntentDialog("Which work mode would you like to set?")
+    )
+    var workMode: IntentsWorkMode
+
+    func perform() async throws -> some ReturnsValue<Bool> {
+        let store = KeychainStore()
+        let network = Network(credentials: store, store: InMemoryLoggingNetworkStore())
+        let config = UserDefaultsConfig()
+        guard let deviceID = config.selectedDeviceID else {
+            throw ConfigManager.NoDeviceFoundError()
+        }
+        try await network.setWorkMode(deviceID: deviceID, workMode: workMode.asInverterWorkMode())
+
+        return .result(value: true)
+    }
+}
 
 @available(iOS 16.0, *)
 struct EnergyStatsShortcuts: AppShortcutsProvider {
