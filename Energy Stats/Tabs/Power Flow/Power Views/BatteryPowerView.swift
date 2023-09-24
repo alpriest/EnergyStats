@@ -26,7 +26,7 @@ struct BatteryPowerViewModel {
         residual = batteryResidual
         self.error = error
 
-        calculator = BatteryCapacityCalculator(capacityWh: configManager.batteryCapacityW,
+        calculator = BatteryCapacityCalculator(capacityW: configManager.batteryCapacityW,
                                                minimumSOC: configManager.minSOC)
     }
 

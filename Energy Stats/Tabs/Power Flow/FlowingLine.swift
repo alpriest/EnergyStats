@@ -117,7 +117,6 @@ struct DirectionalArrow_Previews: PreviewProvider {
         HStack {
             FlowingLine(direction: .up, animationDuration: 1.5, color: .red)
                 .frame(width: 100, height: 300)
-                .background(Color.red)
         }
     }
 }

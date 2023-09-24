@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct FlowArrow: View {
     let amount: Double
@@ -24,9 +25,10 @@ struct FlowArrow: View {
     }
 }
 
-
 struct FlowArrow_Previews: PreviewProvider {
     static var previews: some View {
         FlowArrow(amount: 1.0, color: .red)
+            .previewContext(WidgetPreviewContext(family: .systemMedium))
+            .containerBackground(for: .widget) {}
     }
 }

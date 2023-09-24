@@ -7,6 +7,7 @@
 
 import Energy_Stats_Core
 import SwiftUI
+import WidgetKit
 
 public struct WidgetEnergyAmountView: View {
     public let amount: Double
@@ -20,18 +21,18 @@ public struct WidgetEnergyAmountView: View {
     }
 
     public var body: some View {
-        HStack {
-            EnergyText(amount: amount, appTheme: appTheme)
-        }
-        .monospacedDigit()
-        .padding(3)
-        .padding(.horizontal, 4)
-        .cornerRadius(3)
+        EnergyText(amount: abs(amount), appTheme: appTheme, type: .batteryCapacity)
+            .monospacedDigit()
+            .padding(.vertical, 2)
+            .padding(.horizontal, 3)
+            .cornerRadius(3)
     }
 }
 
 struct EnergyAmountView2_Previews: PreviewProvider {
     static var previews: some View {
         WidgetEnergyAmountView(amount: 0.310, decimalPlaces: 3, appTheme: AppTheme.mock())
+            .previewContext(WidgetPreviewContext(family: .systemMedium))
+            .containerBackground(for: .widget) {}
     }
 }

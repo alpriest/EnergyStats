@@ -15,9 +15,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4140144928C70B3200EA5BA1"
-               BuildableName = "Energy Stats.app"
-               BlueprintName = "Energy Stats"
+               BlueprintIdentifier = "412A266B2AC03B2200F61456"
+               BuildableName = "Energy Stats WidgetsExtension.appex"
+               BlueprintName = "Energy Stats WidgetsExtension"
                ReferencedContainer = "container:Energy Stats.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -29,9 +29,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "418547312A3A1623000128C7"
-               BuildableName = "WidgetExtension.appex"
-               BlueprintName = "WidgetExtension"
+               BlueprintIdentifier = "4140144928C70B3200EA5BA1"
+               BuildableName = "Energy Stats.app"
+               BlueprintName = "Energy Stats"
                ReferencedContainer = "container:Energy Stats.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -56,21 +56,41 @@
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
       launchAutomaticallySubstyle = "2">
+      <RemoteRunnable
+         runnableDebuggingMode = "2"
+         BundleIdentifier = "com.apple.springboard">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "412A266B2AC03B2200F61456"
+            BuildableName = "Energy Stats WidgetsExtension.appex"
+            BlueprintName = "Energy Stats WidgetsExtension"
+            ReferencedContainer = "container:Energy Stats.xcodeproj">
+         </BuildableReference>
+      </RemoteRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "4140144928C70B3200EA5BA1"
+            BuildableName = "Energy Stats.app"
+            BlueprintName = "Energy Stats"
+            ReferencedContainer = "container:Energy Stats.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "_XCWidgetKind"
             value = ""
-            isEnabled = "NO">
+            isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "_XCWidgetDefaultView"
             value = "timeline"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "_XCWidgetFamily"
-            value = "medium"
-            isEnabled = "NO">
+            value = "systemMedium"
+            isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
    </LaunchAction>
@@ -82,6 +102,16 @@
       debugDocumentVersioning = "YES"
       askForAppToLaunch = "Yes"
       launchAutomaticallySubstyle = "2">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "4140144928C70B3200EA5BA1"
+            BuildableName = "Energy Stats.app"
+            BlueprintName = "Energy Stats"
+            ReferencedContainer = "container:Energy Stats.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

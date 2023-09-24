@@ -7,30 +7,30 @@
 
 import Foundation
 
-class BatteryCapacityCalculator {
-    private let capacityWh: Double
+public class BatteryCapacityCalculator {
+    private let capacityW: Double
     private let formatter = RelativeDateTimeFormatter()
     private let minimumSOC: Double
     private let percentageConsideredFull = 98.75
 
-    init(capacityWh: Int, minimumSOC: Double) {
-        self.capacityWh = Double(capacityWh)
+    public init(capacityW: Int, minimumSOC: Double) {
+        self.capacityW = Double(capacityW)
         self.minimumSOC = minimumSOC
     }
 
     private var minimumCharge: Double {
-        capacityWh * minimumSOC
+        capacityW * minimumSOC
     }
 
-    func batteryChargeStatusDescription(batteryChargePowerkWH: Double, batteryStateOfCharge: Double) -> String? {
+    public func batteryChargeStatusDescription(batteryChargePowerkWH: Double, batteryStateOfCharge: Double) -> String? {
         guard abs(batteryChargePowerkWH) > 0 else { return nil }
         
-        let currentEstimatedCharge = capacityWh * batteryStateOfCharge
+        let currentEstimatedCharge = capacityW * batteryStateOfCharge
 
         if batteryChargePowerkWH > 0 { // battery charging
             if batteryStateOfCharge >= percentageConsideredFull { return nil }
 
-            let capacityRemaining = capacityWh - currentEstimatedCharge
+            let capacityRemaining = capacityW - currentEstimatedCharge
             let minsToFullCharge = (capacityRemaining / (batteryChargePowerkWH * 1000.0)) * 60 * 60
             let duration = formatter.localizedString(fromTimeInterval: minsToFullCharge)
 
@@ -45,11 +45,11 @@ class BatteryCapacityCalculator {
         }
     }
 
-    func currentEstimatedChargeAmountWh(batteryStateOfCharge: Double, includeUnusableCapacity: Bool = true) -> Double {
-        (capacityWh * batteryStateOfCharge) - (includeUnusableCapacity ? 0 : minimumCharge)
+    public func currentEstimatedChargeAmountWh(batteryStateOfCharge: Double, includeUnusableCapacity: Bool = true) -> Double {
+        (capacityW * batteryStateOfCharge) - (includeUnusableCapacity ? 0 : minimumCharge)
     }
 
-    func effectiveBatteryStateOfCharge(batteryStateOfCharge: Double, includeUnusableCapacity: Bool = true) -> Double {
+    public func effectiveBatteryStateOfCharge(batteryStateOfCharge: Double, includeUnusableCapacity: Bool = true) -> Double {
         guard batteryStateOfCharge <= percentageConsideredFull else { return 0.99 }
 
         let deduction = includeUnusableCapacity ? 0 : minimumSOC

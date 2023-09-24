@@ -17,13 +17,14 @@ struct BatteryWidget: Widget {
         let keychainStore = KeychainStore()
         let config = UserDefaultsConfig()
         let store = InMemoryLoggingNetworkStore()
-        let network = NetworkFacade(network: Network(credentials: keychainStore, config: config, store: store),
-                                    config: config)
+        let network = NetworkFacade(network: Network(credentials: keychainStore, store: store),
+                                    config: config,
+                                    store: keychainStore)
         configManager = ConfigManager(networking: network, config: config)
     }
 
     var body: some WidgetConfiguration {
-        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
+        StaticConfiguration(kind: kind, provider: Provider()) { entry in
             BatteryWidgetView(entry: entry, configManager: configManager)
         }
     }
@@ -36,8 +37,9 @@ struct BatteryWidgetView: View {
 
     var body: some View {
         BatteryStatusView(
-            soc: entry.soc,
-            battery: entry.battery,
+            soc: Double(entry.soc) / 100.0,
+            chargeStatusDescription: entry.chargeStatusDescription,
+            lastUpdated: entry.date,
             appTheme: configManager.appTheme.value
         )
         .scaleEffect(x: family == .systemLarge ? 2.5 : 1.0,
@@ -48,7 +50,7 @@ struct BatteryWidgetView: View {
 struct BatteryWidget_Previews: PreviewProvider {
     static var previews: some View {
         BatteryWidgetView(
-            entry: SimpleEntry.loaded(battery: 0.74, soc: 0.80, grid: 2.0, home: -0.321, solar: 3.20),
+            entry: SimpleEntry.loaded(soc: 80, chargeStatusDescription: "Full in 23 minutes"),
             configManager: ConfigManager(networking: DemoNetworking(), config: MockConfig())
         )
         .previewContext(WidgetPreviewContext(family: .systemLarge))
