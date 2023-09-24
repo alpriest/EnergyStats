@@ -10,14 +10,14 @@ import Energy_Stats_Core
 import Foundation
 import WidgetKit
 
-class HomeEnergyState {
-    static var shared: HomeEnergyState = .init()
+class HomeEnergyStateManager {
+    static var shared: HomeEnergyStateManager = .init()
 
     private(set) var batterySOC: Int = 0
     private(set) var lastUpdated: Date = .distantPast
     private(set) var chargeStatusDescription: String?
 
-    func update(soc: Int, chargeStatusDescription: String?) {
+    private func update(soc: Int, chargeStatusDescription: String?) {
         batterySOC = soc
         self.chargeStatusDescription = chargeStatusDescription
         lastUpdated = .now
@@ -26,16 +26,10 @@ class HomeEnergyState {
     var isStale: Bool {
         lastUpdated.timeIntervalSinceNow < -60
     }
-}
 
-@available(iOS 16.0, *)
-struct UpdateBatteryChargeLevelIntent: AppIntent {
-    static var title: LocalizedStringResource = "Check Storage Battery SOC"
-    static var description: IntentDescription? = "Returns the battery state of charge as a percentage"
-    static var authenticationPolicy: IntentAuthenticationPolicy = .alwaysAllowed
-    static var openAppWhenRun: Bool = false
+    func update() async throws {
+        guard isStale else { return }
 
-    func perform() async throws -> some ReturnsValue<Int> {
         let keychainStore = KeychainStore()
         let config = UserDefaultsConfig()
         let store = InMemoryLoggingNetworkStore()
@@ -53,10 +47,28 @@ struct UpdateBatteryChargeLevelIntent: AppIntent {
         let viewModel = BatteryViewModel(from: battery)
         let chargeStatusDescription = calculator.batteryChargeStatusDescription(batteryChargePowerkWH: viewModel.chargePower, batteryStateOfCharge: viewModel.chargeLevel)
 
-        HomeEnergyState.shared.update(soc: battery.soc + ([1, 5, 10].randomElement() ?? 1), 
-                                      chargeStatusDescription: chargeStatusDescription)
-        WidgetCenter.shared.reloadTimelines(ofKind: "BatteryWidget")
+        update(soc: battery.soc + ([1, 5, 10].randomElement() ?? 1),
+               chargeStatusDescription: chargeStatusDescription)
+    }
+}
 
-        return .result(value: battery.soc)
+@available(iOS 16.0, *)
+struct UpdateBatteryChargeLevelIntent: AppIntent {
+    static var title: LocalizedStringResource = "Update Storage Battery SOC for the widget"
+    static var authenticationPolicy: IntentAuthenticationPolicy = .alwaysAllowed
+    static var openAppWhenRun: Bool = false
+
+    func perform() async throws -> some ReturnsValue<Bool> {
+        do {
+            try await HomeEnergyStateManager.shared.update()
+
+            WidgetCenter.shared.reloadTimelines(ofKind: "BatteryWidget")
+
+            return .result(value: true)
+        } catch {
+            return .result(value: false)
+        }
+
+//        return .result(value: battery.soc)
     }
 }

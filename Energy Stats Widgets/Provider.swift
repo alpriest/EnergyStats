@@ -60,21 +60,12 @@ struct Provider: TimelineProvider {
     }
 
     private func getCurrentState() async -> SimpleEntry {
-        if HomeEnergyState.shared.isStale {
-            guard let deviceID = config.selectedDeviceID,
-                  let battery = try? await network.fetchBattery(deviceID: deviceID)
-            else { return SimpleEntry.placeholder() }
+        do {
+            try await HomeEnergyStateManager.shared.update()
 
-            let calculator = BatteryCapacityCalculator(capacityW: configManager.batteryCapacityW,
-                                                       minimumSOC: configManager.minSOC)
-            let viewModel = BatteryViewModel(from: battery)
-            let chargeStatusDescription = calculator.batteryChargeStatusDescription(batteryChargePowerkWH: viewModel.chargePower, batteryStateOfCharge: viewModel.chargeLevel)
-
-            HomeEnergyState.shared.update(soc: battery.soc, chargeStatusDescription: chargeStatusDescription)
-
-            return .loaded(soc: battery.soc, chargeStatusDescription: chargeStatusDescription)
-        } else {
-            return .loaded(soc: HomeEnergyState.shared.batterySOC, chargeStatusDescription: HomeEnergyState.shared.chargeStatusDescription)
+            return .loaded(soc: HomeEnergyStateManager.shared.batterySOC, chargeStatusDescription: HomeEnergyStateManager.shared.chargeStatusDescription)
+        } catch {
+            return .failed(error: "Could not load \(error.localizedDescription)")
         }
     }
 }
