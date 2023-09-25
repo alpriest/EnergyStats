@@ -47,8 +47,7 @@ class HomeEnergyStateManager {
         let viewModel = BatteryViewModel(from: battery)
         let chargeStatusDescription = calculator.batteryChargeStatusDescription(batteryChargePowerkWH: viewModel.chargePower, batteryStateOfCharge: viewModel.chargeLevel)
 
-        update(soc: battery.soc + ([1, 5, 10].randomElement() ?? 1),
-               chargeStatusDescription: chargeStatusDescription)
+        update(soc: battery.soc, chargeStatusDescription: chargeStatusDescription)
     }
 }
 
@@ -68,7 +67,5 @@ struct UpdateBatteryChargeLevelIntent: AppIntent {
         } catch {
             return .result(value: false)
         }
-
-//        return .result(value: battery.soc)
     }
 }

@@ -42,8 +42,7 @@ struct BatteryWidgetView: View {
             lastUpdated: entry.date,
             appTheme: configManager.appTheme.value
         )
-        .scaleEffect(x: family == .systemLarge ? 2.5 : 1.0,
-                     y: family == .systemLarge ? 2.5 : 1.0)
+        .containerBackground(Color.white.opacity(0.1), for: .widget)
     }
 }
 
