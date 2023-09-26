@@ -43,6 +43,7 @@ struct BatteryWidgetView: View {
             appTheme: configManager.appTheme.value
         )
         .containerBackground(Color.white.opacity(0.1), for: .widget)
+        .modelContainer(for: BatteryWidgetState.self)
     }
 }
 

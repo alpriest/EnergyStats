@@ -8,27 +8,34 @@
 import AppIntents
 import Energy_Stats_Core
 import Foundation
+import SwiftData
 import WidgetKit
 
+@available(iOS 17.0, *)
 class HomeEnergyStateManager {
     static var shared: HomeEnergyStateManager = .init()
 
-    private(set) var batterySOC: Int = 0
-    private(set) var lastUpdated: Date = .distantPast
-    private(set) var chargeStatusDescription: String?
+    private let modelContainer: ModelContainer
 
-    private func update(soc: Int, chargeStatusDescription: String?) {
-        batterySOC = soc
-        self.chargeStatusDescription = chargeStatusDescription
-        lastUpdated = .now
+    init() {
+        do {
+            modelContainer = try ModelContainer(for: BatteryWidgetState.self)
+        } catch {
+            fatalError("Failed to create the model container: \(error)")
+        }
     }
 
-    var isStale: Bool {
-        lastUpdated.timeIntervalSinceNow < -60
+    @MainActor
+    func isStale() async -> Bool {
+        let fetchDescriptor: FetchDescriptor<BatteryWidgetState> = FetchDescriptor()
+        guard let widgetState = (try? modelContainer.mainContext.fetch(fetchDescriptor))?.first else { return true }
+
+        return widgetState.lastUpdated.timeIntervalSinceNow < -60
     }
 
+    @MainActor
     func update() async throws {
-        guard isStale else { return }
+        guard await isStale() else { return }
 
         let keychainStore = KeychainStore()
         let config = UserDefaultsConfig()
@@ -48,6 +55,18 @@ class HomeEnergyStateManager {
         let chargeStatusDescription = calculator.batteryChargeStatusDescription(batteryChargePowerkWH: viewModel.chargePower, batteryStateOfCharge: viewModel.chargeLevel)
 
         update(soc: battery.soc, chargeStatusDescription: chargeStatusDescription)
+    }
+
+    @MainActor
+    private func update(soc: Int, chargeStatusDescription: String?) {
+        let fetchDescriptor: FetchDescriptor<BatteryWidgetState> = FetchDescriptor()
+        if let widgetState = (try? modelContainer.mainContext.fetch(fetchDescriptor))?.first {
+            modelContainer.mainContext.delete(widgetState)
+        }
+
+        let state = BatteryWidgetState(batterySOC: soc, chargeStatusDescription: chargeStatusDescription)
+
+        modelContainer.mainContext.insert(state)
     }
 }
 

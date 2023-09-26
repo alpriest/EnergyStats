@@ -9,12 +9,14 @@ import Energy_Stats_Core
 import Intents
 import SwiftUI
 import WidgetKit
+import SwiftData
 
 struct Provider: TimelineProvider {
     private let config = UserDefaultsConfig()
     private let configManager: ConfigManaging
     private let keychainStore = KeychainStore()
     let network: Networking
+    private let modelContainer: ModelContainer
 
     init() {
         let store = InMemoryLoggingNetworkStore()
@@ -22,6 +24,12 @@ struct Provider: TimelineProvider {
                                 config: config,
                                 store: keychainStore)
         configManager = ConfigManager(networking: network, config: config)
+
+        do {
+            modelContainer = try ModelContainer(for: BatteryWidgetState.self)
+        } catch {
+            fatalError("Failed to create the model container: \(error)")
+        }
     }
 
     func placeholder(in context: Context) -> SimpleEntry {
@@ -41,7 +49,7 @@ struct Provider: TimelineProvider {
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<SimpleEntry>) -> ()) {
-        Task {
+        Task { @MainActor in
             let entry = await getCurrentState()
 
             // Create a date that's 60 minutes in the future.
@@ -59,11 +67,17 @@ struct Provider: TimelineProvider {
         }
     }
 
+    @MainActor
     private func getCurrentState() async -> SimpleEntry {
         do {
             try await HomeEnergyStateManager.shared.update()
 
-            return .loaded(soc: HomeEnergyStateManager.shared.batterySOC, chargeStatusDescription: HomeEnergyStateManager.shared.chargeStatusDescription)
+            let fetchDescriptor: FetchDescriptor<BatteryWidgetState> = FetchDescriptor()
+            if let widgetState = (try? modelContainer.mainContext.fetch(fetchDescriptor))?.first {
+                return SimpleEntry.loaded(soc: widgetState.batterySOC, chargeStatusDescription: widgetState.chargeStatusDescription)
+            } else {
+                return .failed(error: "Could not load from CoreData")
+            }
         } catch {
             return .failed(error: "Could not load \(error.localizedDescription)")
         }
