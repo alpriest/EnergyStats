@@ -34,6 +34,7 @@ struct BatteryWidgetView: View {
     var entry: Provider.Entry
     let configManager: ConfigManaging
     @Environment(\.widgetFamily) var family
+    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         BatteryStatusView(
@@ -42,7 +43,13 @@ struct BatteryWidgetView: View {
             lastUpdated: entry.date,
             appTheme: configManager.appTheme.value
         )
-        .containerBackground(Color.white.opacity(0.1), for: .widget)
+        .containerBackground(for: .widget) {
+            if colorScheme == .dark {
+                Color.white.opacity(0.1)
+            } else {
+                LinearGradient(colors: [Color.yellow.opacity(0.4), Color.white], startPoint: UnitPoint(x: -0.1, y: 0.0), endPoint: UnitPoint(x: 0, y: 1.0))
+            }
+        }
         .modelContainer(for: BatteryWidgetState.self)
     }
 }
@@ -53,6 +60,6 @@ struct BatteryWidget_Previews: PreviewProvider {
             entry: SimpleEntry.loaded(soc: 80, chargeStatusDescription: "Full in 23 minutes"),
             configManager: ConfigManager(networking: DemoNetworking(), config: MockConfig())
         )
-        .previewContext(WidgetPreviewContext(family: .systemLarge))
+        .previewContext(WidgetPreviewContext(family: .systemMedium))
     }
 }

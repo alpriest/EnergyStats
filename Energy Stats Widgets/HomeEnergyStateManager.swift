@@ -37,6 +37,8 @@ class HomeEnergyStateManager {
     func update() async throws {
         guard await isStale() else { return }
 
+        deleteEntry()
+
         let keychainStore = KeychainStore()
         let config = UserDefaultsConfig()
         let store = InMemoryLoggingNetworkStore()
@@ -59,14 +61,17 @@ class HomeEnergyStateManager {
 
     @MainActor
     private func update(soc: Int, chargeStatusDescription: String?) {
+        let state = BatteryWidgetState(batterySOC: soc, chargeStatusDescription: chargeStatusDescription)
+
+        modelContainer.mainContext.insert(state)
+    }
+
+    @MainActor
+    private func deleteEntry() {
         let fetchDescriptor: FetchDescriptor<BatteryWidgetState> = FetchDescriptor()
         if let widgetState = (try? modelContainer.mainContext.fetch(fetchDescriptor))?.first {
             modelContainer.mainContext.delete(widgetState)
         }
-
-        let state = BatteryWidgetState(batterySOC: soc, chargeStatusDescription: chargeStatusDescription)
-
-        modelContainer.mainContext.insert(state)
     }
 }
 
