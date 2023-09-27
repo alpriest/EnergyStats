@@ -64,12 +64,12 @@ public struct LocalizedString {
 }
 
 public extension String {
-    init(key: LocalizedString.Key) {
-        self = NSLocalizedString(key.rawValue, comment: "")
+    init(key: LocalizedString.Key, bundle: Bundle = .main) {
+        self = NSLocalizedString(key.rawValue, bundle: bundle, comment: "")
     }
 
-    init(key: LocalizedString.Key, arguments: [CVarArg]) {
-        self = String(format: NSLocalizedString(key.rawValue, comment: ""), arguments: arguments)
+    init(key: LocalizedString.Key, bundle: Bundle = .main, arguments: [CVarArg]) {
+        self = String(format: NSLocalizedString(key.rawValue, bundle: bundle, comment: ""), arguments: arguments)
     }
 
     init(accessibilityKey key: LocalizedString.Key.Accessibility) {

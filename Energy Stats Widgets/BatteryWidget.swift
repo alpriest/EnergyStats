@@ -35,14 +35,26 @@ struct BatteryWidgetView: View {
     let configManager: ConfigManaging
     @Environment(\.widgetFamily) var family
     @Environment(\.colorScheme) var colorScheme
+    @State private var foo: String = Date.now.iso8601()
 
     var body: some View {
-        BatteryStatusView(
-            soc: Double(entry.soc) / 100.0,
-            chargeStatusDescription: entry.chargeStatusDescription,
-            lastUpdated: entry.date,
-            appTheme: configManager.appTheme.value
-        )
+        Group {
+            if case let .failed(reason) = entry.state {
+                VStack {
+                    Text(reason)
+                    Button(intent: UpdateBatteryChargeLevelIntent()) {
+                        Text("Tap to retry")
+                    }.buttonStyle(.bordered)
+                }
+            } else {
+                BatteryStatusView(
+                    soc: Double(entry.soc) / 100.0,
+                    chargeStatusDescription: entry.chargeStatusDescription,
+                    lastUpdated: entry.date,
+                    appTheme: configManager.appTheme.value
+                ).redacted(reason: entry.state == .placeholder ? [.placeholder] : [])
+            }
+        }
         .containerBackground(for: .widget) {
             if colorScheme == .dark {
                 Color.white.opacity(0.1)
@@ -57,9 +69,16 @@ struct BatteryWidgetView: View {
 struct BatteryWidget_Previews: PreviewProvider {
     static var previews: some View {
         BatteryWidgetView(
-            entry: SimpleEntry.loaded(soc: 80, chargeStatusDescription: "Full in 23 minutes"),
+            entry: SimpleEntry.failed(error: "failed to load data"),
             configManager: ConfigManager(networking: DemoNetworking(), config: MockConfig())
         )
         .previewContext(WidgetPreviewContext(family: .systemMedium))
+
+        BatteryWidgetView(
+            entry: SimpleEntry.loaded(soc: 50, chargeStatusDescription: "Full in 22 minutes"),
+            configManager: ConfigManager(networking: DemoNetworking(), config: MockConfig())
+        )
+        .previewContext(WidgetPreviewContext(family: .systemSmall))
+        .environment(\.locale, .init(identifier: "de-DE"))
     }
 }

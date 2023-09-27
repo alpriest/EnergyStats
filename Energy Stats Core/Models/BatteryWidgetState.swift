@@ -19,7 +19,7 @@ public class BatteryWidgetState {
         self.batterySOC = batterySOC
         self.lastUpdated = Date()
         self.chargeStatusDescription = chargeStatusDescription
-    }
+    }   
 
     public static func empty() -> BatteryWidgetState {
         BatteryWidgetState(batterySOC: 0, lastUpdated: .distantPast, chargeStatusDescription: nil)

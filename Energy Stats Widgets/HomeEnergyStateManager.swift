@@ -15,7 +15,7 @@ import WidgetKit
 class HomeEnergyStateManager {
     static var shared: HomeEnergyStateManager = .init()
 
-    private let modelContainer: ModelContainer
+    let modelContainer: ModelContainer
 
     init() {
         do {
@@ -37,8 +37,6 @@ class HomeEnergyStateManager {
     func update() async throws {
         guard await isStale() else { return }
 
-        deleteEntry()
-
         let keychainStore = KeychainStore()
         let config = UserDefaultsConfig()
         let store = InMemoryLoggingNetworkStore()
@@ -52,18 +50,22 @@ class HomeEnergyStateManager {
         }
         let battery = try await network.fetchBattery(deviceID: deviceID)
         let calculator = BatteryCapacityCalculator(capacityW: configManager.batteryCapacityW,
-                                                   minimumSOC: configManager.minSOC)
+                                                   minimumSOC: configManager.minSOC,
+                                                   bundle: Bundle(for: BundleLocator.self))
         let viewModel = BatteryViewModel(from: battery)
         let chargeStatusDescription = calculator.batteryChargeStatusDescription(batteryChargePowerkWH: viewModel.chargePower, batteryStateOfCharge: viewModel.chargeLevel)
 
-        update(soc: battery.soc, chargeStatusDescription: chargeStatusDescription)
+        try update(soc: battery.soc, chargeStatusDescription: chargeStatusDescription)
     }
 
     @MainActor
-    private func update(soc: Int, chargeStatusDescription: String?) {
+    private func update(soc: Int, chargeStatusDescription: String?) throws {
         let state = BatteryWidgetState(batterySOC: soc, chargeStatusDescription: chargeStatusDescription)
 
+        deleteEntry()
+
         modelContainer.mainContext.insert(state)
+        modelContainer.mainContext.processPendingChanges()
     }
 
     @MainActor

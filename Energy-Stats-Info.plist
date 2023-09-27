@@ -12,8 +12,6 @@
 	<array>
 		<string>CheckBatterySOCIntent</string>
 	</array>
-	<key>UIBackgroundModes</key>
-	<array/>
 	<key>UILaunchScreen</key>
 	<dict>
 		<key>UIColorName</key>

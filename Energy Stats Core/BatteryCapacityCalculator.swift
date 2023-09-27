@@ -12,10 +12,12 @@ public class BatteryCapacityCalculator {
     private let formatter = RelativeDateTimeFormatter()
     private let minimumSOC: Double
     private let percentageConsideredFull = 98.75
+    private let bundle: Bundle
 
-    public init(capacityW: Int, minimumSOC: Double) {
+    public init(capacityW: Int, minimumSOC: Double, bundle: Bundle = .main) {
         self.capacityW = Double(capacityW)
         self.minimumSOC = minimumSOC
+        self.bundle = bundle
     }
 
     private var minimumCharge: Double {
@@ -34,14 +36,14 @@ public class BatteryCapacityCalculator {
             let minsToFullCharge = (capacityRemaining / (batteryChargePowerkWH * 1000.0)) * 60 * 60
             let duration = formatter.localizedString(fromTimeInterval: minsToFullCharge)
 
-            return String(key: .full) + " \(duration)"
+            return String(key: .full, bundle: bundle) + " \(duration)"
         } else { // battery emptying
             if batteryStateOfCharge <= (minimumSOC * 1.02) { return nil }
             let chargeRemaining = currentEstimatedCharge - minimumCharge
             let minsUntilEmpty = (chargeRemaining / abs(batteryChargePowerkWH * 1000.0)) * 60 * 60
             let duration = formatter.localizedString(fromTimeInterval: minsUntilEmpty)
 
-            return String(key: .empty) + " \(duration)"
+            return String(key: .empty, bundle: bundle) + " \(duration)"
         }
     }
 

@@ -11,6 +11,7 @@ import WidgetKit
 
 struct BatteryStatusView: View {
     @Environment(\.widgetFamily) var family
+    @Environment(\.redactionReasons) var redactionReasons
     let soc: Double
     let chargeStatusDescription: String?
     let lastUpdated: Date
@@ -19,7 +20,7 @@ struct BatteryStatusView: View {
     var body: some View {
         switch self.family {
         case .systemSmall:
-            VStack {
+            VStack(alignment: .center) {
                 gaugeView()
                 descriptionView()
                 Text(lastUpdated, format: .dateTime)
@@ -61,6 +62,8 @@ struct BatteryStatusView: View {
     }
 
     private var tint: Color {
+        guard redactionReasons.isEmpty else { return Color(uiColor: .label) }
+
         if soc < 0.40 {
             return .red
         } else if soc < 0.70 {

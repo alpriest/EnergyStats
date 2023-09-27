@@ -7,9 +7,11 @@
 
 import Energy_Stats_Core
 import Intents
+import SwiftData
 import SwiftUI
 import WidgetKit
-import SwiftData
+
+public final class BundleLocator {}
 
 struct Provider: TimelineProvider {
     private let config = UserDefaultsConfig()
@@ -24,12 +26,7 @@ struct Provider: TimelineProvider {
                                 config: config,
                                 store: keychainStore)
         configManager = ConfigManager(networking: network, config: config)
-
-        do {
-            modelContainer = try ModelContainer(for: BatteryWidgetState.self)
-        } catch {
-            fatalError("Failed to create the model container: \(error)")
-        }
+        modelContainer = HomeEnergyStateManager.shared.modelContainer
     }
 
     func placeholder(in context: Context) -> SimpleEntry {
@@ -41,7 +38,7 @@ struct Provider: TimelineProvider {
             let entry = SimpleEntry.placeholder()
             completion(entry)
         } else {
-            Task {
+            Task { @MainActor in
                 let entry = await getCurrentState()
                 completion(entry)
             }
@@ -73,7 +70,7 @@ struct Provider: TimelineProvider {
             try await HomeEnergyStateManager.shared.update()
 
             let fetchDescriptor: FetchDescriptor<BatteryWidgetState> = FetchDescriptor()
-            if let widgetState = (try? modelContainer.mainContext.fetch(fetchDescriptor))?.first {
+            if let widgetState = try (modelContainer.mainContext.fetch(fetchDescriptor)).first {
                 return SimpleEntry.loaded(soc: widgetState.batterySOC, chargeStatusDescription: widgetState.chargeStatusDescription)
             } else {
                 return .failed(error: "Could not load from CoreData")
@@ -84,23 +81,21 @@ struct Provider: TimelineProvider {
     }
 }
 
-enum EntryState {
+enum EntryState: Equatable {
     case loaded
     case placeholder
-    case failed
+    case failed(reason: String)
 }
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
     let soc: Int
     let chargeStatusDescription: String?
-    let error: String?
     let state: EntryState
 
-    private init(date: Date, soc: Int, chargeStatusDescription: String?, error: String?, state: EntryState) {
+    private init(date: Date, soc: Int, chargeStatusDescription: String?, state: EntryState) {
         self.date = date
         self.soc = soc
-        self.error = error
         self.state = state
         self.chargeStatusDescription = chargeStatusDescription
     }
@@ -109,7 +104,6 @@ struct SimpleEntry: TimelineEntry {
         SimpleEntry(date: Date(),
                     soc: soc,
                     chargeStatusDescription: chargeStatusDescription,
-                    error: nil,
                     state: .loaded)
     }
 
@@ -117,7 +111,6 @@ struct SimpleEntry: TimelineEntry {
         SimpleEntry(date: Date(),
                     soc: 0,
                     chargeStatusDescription: nil,
-                    error: nil,
                     state: .placeholder)
     }
 
@@ -125,7 +118,6 @@ struct SimpleEntry: TimelineEntry {
         SimpleEntry(date: Date(),
                     soc: 0,
                     chargeStatusDescription: nil,
-                    error: error,
-                    state: .failed)
+                    state: .failed(reason: error))
     }
 }
