@@ -73,7 +73,7 @@ struct Provider: TimelineProvider {
             if let widgetState = try (modelContainer.mainContext.fetch(fetchDescriptor)).first {
                 return SimpleEntry.loaded(soc: widgetState.batterySOC, chargeStatusDescription: widgetState.chargeStatusDescription)
             } else {
-                return .failed(error: "Could not load from CoreData")
+                return .failed(error: "Could not load latest state")
             }
         } catch _ as ConfigManager.NoBattery {
             return .failed(error: "Your selected inverter has no battery connected")
