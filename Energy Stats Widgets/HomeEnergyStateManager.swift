@@ -48,6 +48,9 @@ class HomeEnergyStateManager {
         guard let deviceID = config.selectedDeviceID else {
             throw ConfigManager.NoDeviceFoundError()
         }
+        guard configManager.hasBattery else {
+            throw ConfigManager.NoBattery()
+        }
         let battery = try await network.fetchBattery(deviceID: deviceID)
         let calculator = BatteryCapacityCalculator(capacityW: configManager.batteryCapacityW,
                                                    minimumSOC: configManager.minSOC,

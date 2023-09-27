@@ -66,6 +66,10 @@ public class ConfigManager: ConfigManaging {
         public init() {}
     }
 
+    public struct NoBattery: Error {
+        public init() {}
+    }
+
     public init(networking: Networking, config: Config) {
         self.networking = networking
         self.config = config

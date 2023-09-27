@@ -75,6 +75,8 @@ struct Provider: TimelineProvider {
             } else {
                 return .failed(error: "Could not load from CoreData")
             }
+        } catch _ as ConfigManager.NoBattery {
+            return .failed(error: "Your selected inverter has no battery connected")
         } catch {
             return .failed(error: "Could not load \(error.localizedDescription)")
         }
