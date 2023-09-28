@@ -6,5 +6,9 @@
 	<array>
 		<string>group.com.alpriest.EnergyStats</string>
 	</array>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>$(AppIdentifierPrefix)com.alpriest.EnergyStats</string>
+	</array>
 </dict>
 </plist>

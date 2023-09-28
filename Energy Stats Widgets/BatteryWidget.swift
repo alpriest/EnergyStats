@@ -78,7 +78,6 @@ struct BatteryWidget_Previews: PreviewProvider {
             entry: SimpleEntry.loaded(soc: 50, chargeStatusDescription: "Full in 22 minutes"),
             configManager: ConfigManager(networking: DemoNetworking(), config: MockConfig())
         )
-        .previewContext(WidgetPreviewContext(family: .systemSmall))
-        .environment(\.locale, .init(identifier: "de-DE"))
+        .previewContext(WidgetPreviewContext(family: .systemMedium))
     }
 }

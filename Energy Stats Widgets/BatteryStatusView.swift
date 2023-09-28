@@ -30,8 +30,11 @@ struct BatteryStatusView: View {
             VStack(spacing: 24) {
                 HStack(spacing: 44) {
                     gaugeView()
+                        .padding(.leading)
+
                     descriptionView()
                         .font(.title)
+                        .frame(minWidth: 0, maxWidth: .infinity)
                 }
                 Text(lastUpdated, format: .dateTime)
                     .font(.system(size: 12.0, weight: .light))
@@ -46,12 +49,14 @@ struct BatteryStatusView: View {
                     .font(.system(size: 16))
             } currentValueLabel: {
                 Text(soc, format: .percent)
+                    .font(.system(size: 26))
             }
             .gaugeStyle(.accessoryCircular)
-            .scaleEffect(1.2)
             .padding(.bottom, 4)
             .tint(tint)
-        }.buttonStyle(.plain)
+        }
+        .buttonStyle(.plain)
+        .scaleEffect(self.family == .systemSmall ? 1.2 : 1.4)
     }
 
     private func descriptionView() -> some View {
@@ -78,7 +83,7 @@ struct BatteryStatusView_Previews: PreviewProvider {
     static var previews: some View {
         BatteryStatusView(
             soc: 0.8,
-            chargeStatusDescription: "Empty in 15 hours",
+            chargeStatusDescription: "Full in 1 minute",
             lastUpdated: .now,
             appTheme: .mock()
         )
