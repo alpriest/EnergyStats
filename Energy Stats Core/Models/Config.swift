@@ -19,7 +19,7 @@ public protocol Config {
     var devices: Data? { get set }
     var selectedDeviceID: String? { get set }
     var showUsableBatteryOnly: Bool { get set }
-    var showInW: Bool { get set }
+    var displayUnit: Int { get set }
     var showTotalYield: Bool { get set }
     var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode { get set }
     var showEarnings: Bool { get set }
@@ -90,8 +90,8 @@ public class UserDefaultsConfig: Config {
     @UserDefaultsStoredString(key: "selectedDeviceID")
     public var selectedDeviceID: String?
 
-    @UserDefaultsStoredBool(key: "showInW", defaultValue: false)
-    public var showInW: Bool
+    @UserDefaultsStoredInt(key: "displayUnit")
+    public var displayUnit: Int
 
     @UserDefaultsStoredBool(key: "showInverterTemperature", defaultValue: false)
     public var showInverterTemperature: Bool

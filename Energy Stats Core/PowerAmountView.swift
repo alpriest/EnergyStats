@@ -26,10 +26,17 @@ public struct PowerText: View {
     }
 
     private var amountWithUnit: String {
-        if appTheme.showInW {
-            return amount.w()
-        } else {
+        switch appTheme.displayUnit {
+        case .adaptive:
+            if amount < 1 {
+                return amount.w()
+            } else {
+                return amount.kW(appTheme.decimalPlaces)
+            }
+        case .kilowatt:
             return amount.kW(appTheme.decimalPlaces)
+        case .watt:
+            return amount.w()
         }
     }
 }
@@ -52,10 +59,17 @@ public struct EnergyText: View {
     }
 
     private var amountWithUnit: String {
-        if appTheme.showInW {
-            return amount.wh()
-        } else {
+        switch appTheme.displayUnit {
+        case .adaptive:
+            if amount < 1000 {
+                return amount.wh()
+            } else {
+                return amount.kWh(appTheme.decimalPlaces)
+            }
+        case .kilowatt:
             return amount.kWh(appTheme.decimalPlaces)
+        case .watt:
+            return amount.wh()
         }
     }
 }

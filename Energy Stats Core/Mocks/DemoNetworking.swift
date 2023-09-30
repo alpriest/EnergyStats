@@ -42,8 +42,8 @@ public class DemoNetworking: Networking {
 
     public func fetchDeviceList() async throws -> [PagedDeviceListResponse.Device] {
         [
-            PagedDeviceListResponse.Device(plantName: "demo-device-1", deviceID: "f3000-deviceid", deviceSN: "1234", moduleSN: "sn-1", hasBattery: false, hasPV: true, deviceType: "F3000"),
-            PagedDeviceListResponse.Device(plantName: "demo-device-2", deviceID: "h1-deviceid", deviceSN: "5678", moduleSN: "sn-2", hasBattery: true, hasPV: true, deviceType: "H1-3.7-E")
+            PagedDeviceListResponse.Device(plantName: "demo-device-1", deviceID: "h1-deviceid", deviceSN: "5678", moduleSN: "sn-1", hasBattery: true, hasPV: true, deviceType: "H1-3.7-E"),
+            PagedDeviceListResponse.Device(plantName: "demo-device-2", deviceID: "f3000-deviceid", deviceSN: "1234", moduleSN: "sn-2", hasBattery: false, hasPV: true, deviceType: "F3000")
         ]
     }
 
@@ -163,7 +163,7 @@ public class MockConfig: Config {
     public var devices: Data?
     public var selectedDeviceID: String?
     public var showUsableBatteryOnly: Bool = false
-    public var showInW: Bool = false
+    public var displayUnit: Int = 0
     public var showTotalYield: Bool = false
     public var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode = .off
     public var showEarnings: Bool = false

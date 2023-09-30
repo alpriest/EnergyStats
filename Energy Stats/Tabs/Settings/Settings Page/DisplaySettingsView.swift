@@ -45,16 +45,32 @@ struct DisplaySettingsView: View {
                 }.pickerStyle(.segmented)
             }
 
-            Toggle(isOn: $viewModel.showInW) {
-                Text("Show values in Watts")
-            }
-
             Toggle(isOn: $viewModel.showLastUpdateTimestamp) {
                 Text("Show last update timestamp")
             }
-        }
-            header: {
+        } header: {
             Text("Display")
+        }
+
+        Section {
+            HStack {
+                Text("Units").padding(.trailing)
+                Spacer()
+                Picker("Units", selection: $viewModel.displayUnit) {
+                    Text("Watts").tag(DisplayUnit.watt)
+                    Text("Kilowatts").tag(DisplayUnit.kilowatt)
+                    Text("Adaptive").tag(DisplayUnit.adaptive)
+                }.pickerStyle(.segmented)
+            }
+        } footer: {
+            switch viewModel.displayUnit {
+            case .kilowatt:
+                Text("E.g. \(Double(3.456).kW(viewModel.decimalPlaces)), \(Double(0.123).kW(3))")
+            case .watt:
+                Text("E.g. \(Double(3.456).w()), \(Double(0.123).w())")
+            case .adaptive:
+                Text("E.g. \(Double(3.456).kW(viewModel.decimalPlaces)), \(Double(0.123).w())")
+            }
         }
 
         NavigationLink {

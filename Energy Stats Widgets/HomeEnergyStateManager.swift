@@ -11,7 +11,6 @@ import Foundation
 import SwiftData
 import WidgetKit
 
-@available(iOS 17.0, *)
 class HomeEnergyStateManager {
     static var shared: HomeEnergyStateManager = .init()
 

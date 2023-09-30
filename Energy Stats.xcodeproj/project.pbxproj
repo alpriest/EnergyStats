@@ -91,6 +91,7 @@
 		4141B20228D871B900B60157 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141B20128D871B900B60157 /* ContentView.swift */; };
 		41463D912AC44C7C00B2EB25 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 41463D902AC44C7C00B2EB25 /* Localizable.xcstrings */; };
 		414BF82829B4918300E2EB51 /* SettingsTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */; };
+		414D7A312AC8CE9C0083923F /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D7A302AC8CE9C0083923F /* Unit.swift */; };
 		414FB0D82A924E3D00845486 /* ApproximationsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414FB0D72A924E3D00845486 /* ApproximationsSettingsView.swift */; };
 		4160098B2A8D18B10096CCD9 /* SettingsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4160098A2A8D18B10096CCD9 /* SettingsFooterView.swift */; };
 		4160098D2A8D1A690096CCD9 /* BottomButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4160098C2A8D1A690096CCD9 /* BottomButtonsView.swift */; };
@@ -139,8 +140,6 @@
 		4192F9992A8674990035DAB8 /* DataLoggersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4192F9982A8674990035DAB8 /* DataLoggersView.swift */; };
 		4192F99B2A8678DB0035DAB8 /* PagedDataLoggerListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4192F99A2A8678DB0035DAB8 /* PagedDataLoggerListResponse.swift */; };
 		419576172AC2F29600EB7362 /* BatteryWidgetState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419576162AC2F29600EB7362 /* BatteryWidgetState.swift */; };
-		419576192AC2F71400EB7362 /* ModelContainerPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419576182AC2F71400EB7362 /* ModelContainerPreview.swift */; };
-		4195761C2AC2F76F00EB7362 /* PreviewSampleBatteryWidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4195761B2AC2F76F00EB7362 /* PreviewSampleBatteryWidgetData.swift */; };
 		419AB4802AA36D24002CBC96 /* DisplaySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AB47F2AA36D24002CBC96 /* DisplaySettingsView.swift */; };
 		419CCB542933BABF00882649 /* ErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419CCB532933BABF00882649 /* ErrorAlertView.swift */; };
 		419DFA862A12930E0067313A /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419DFA842A1292380067313A /* DatePickerView.swift */; };
@@ -364,6 +363,7 @@
 		4141B20128D871B900B60157 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		41463D902AC44C7C00B2EB25 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabViewModel.swift; sourceTree = "<group>"; };
+		414D7A302AC8CE9C0083923F /* Unit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unit.swift; sourceTree = "<group>"; };
 		414FB0D72A924E3D00845486 /* ApproximationsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproximationsSettingsView.swift; sourceTree = "<group>"; };
 		4160098A2A8D18B10096CCD9 /* SettingsFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFooterView.swift; sourceTree = "<group>"; };
 		4160098C2A8D1A690096CCD9 /* BottomButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButtonsView.swift; sourceTree = "<group>"; };
@@ -426,8 +426,6 @@
 		4192F9982A8674990035DAB8 /* DataLoggersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoggersView.swift; sourceTree = "<group>"; };
 		4192F99A2A8678DB0035DAB8 /* PagedDataLoggerListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagedDataLoggerListResponse.swift; sourceTree = "<group>"; };
 		419576162AC2F29600EB7362 /* BatteryWidgetState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryWidgetState.swift; sourceTree = "<group>"; };
-		419576182AC2F71400EB7362 /* ModelContainerPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelContainerPreview.swift; sourceTree = "<group>"; };
-		4195761B2AC2F76F00EB7362 /* PreviewSampleBatteryWidgetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewSampleBatteryWidgetData.swift; sourceTree = "<group>"; };
 		419AB47F2AA36D24002CBC96 /* DisplaySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaySettingsView.swift; sourceTree = "<group>"; };
 		419CCB532933BABF00882649 /* ErrorAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertView.swift; sourceTree = "<group>"; };
 		419DFA842A1292380067313A /* DatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
@@ -810,6 +808,7 @@
 				41E8E7252AAE0D0D00DC4B89 /* SolarRangeDefinitions.swift */,
 				41D286E42AB352AC00B18FEF /* ParameterGroup.swift */,
 				419576162AC2F29600EB7362 /* BatteryWidgetState.swift */,
+				414D7A302AC8CE9C0083923F /* Unit.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -898,15 +897,6 @@
 			path = "Data Logger";
 			sourceTree = "<group>";
 		};
-		4195761A2AC2F75700EB7362 /* Widget Previews */ = {
-			isa = PBXGroup;
-			children = (
-				419576182AC2F71400EB7362 /* ModelContainerPreview.swift */,
-				4195761B2AC2F76F00EB7362 /* PreviewSampleBatteryWidgetData.swift */,
-			);
-			path = "Widget Previews";
-			sourceTree = "<group>";
-		};
 		41A25D3A28CA5CB700315714 /* Power Flow */ = {
 			isa = PBXGroup;
 			children = (
@@ -981,7 +971,6 @@
 				413B7A302A4A390C00562A68 /* SelfSufficiencyCalculator.swift */,
 				41757BBB2A90A05E00573FB4 /* AmountType.swift */,
 				41DF51D12AA4CF6D007B5102 /* MockAppTheme.swift */,
-				4195761A2AC2F75700EB7362 /* Widget Previews */,
 			);
 			path = "Energy Stats Core";
 			sourceTree = "<group>";
@@ -1475,7 +1464,6 @@
 				4171854229FFCF2500D18CDD /* String+MD5.swift in Sources */,
 				4103D1DC29DB6C6D001B0BC8 /* Config.swift in Sources */,
 				418240782A9A33E300101064 /* TotalsViewModel.swift in Sources */,
-				419576192AC2F71400EB7362 /* ModelContainerPreview.swift in Sources */,
 				4103D1E329DB6D03001B0BC8 /* AppTheme.swift in Sources */,
 				4103D1DB29DB6C6D001B0BC8 /* RawVariable.swift in Sources */,
 				4103D1E529DB6D29001B0BC8 /* Sequence+aysnc.swift in Sources */,
@@ -1511,7 +1499,6 @@
 				413B7A312A4A390C00562A68 /* SelfSufficiencyCalculator.swift in Sources */,
 				41757BBD2A90A06E00573FB4 /* LocalizedString.swift in Sources */,
 				4103D1E429DB6D12001B0BC8 /* KeychainStore.swift in Sources */,
-				4195761C2AC2F76F00EB7362 /* PreviewSampleBatteryWidgetData.swift in Sources */,
 				419576172AC2F29600EB7362 /* BatteryWidgetState.swift in Sources */,
 				4103D1DF29DB6C8C001B0BC8 /* DemoNetworking.swift in Sources */,
 				41CB714A2A3B1B6C00199415 /* StyleGuide.swift in Sources */,
@@ -1519,6 +1506,7 @@
 				4103D1D329DB6C51001B0BC8 /* BatteryResponse.swift in Sources */,
 				4103D1D229DB6C51001B0BC8 /* NetworkError.swift in Sources */,
 				4103D1D429DB6C51001B0BC8 /* DeviceList.swift in Sources */,
+				414D7A312AC8CE9C0083923F /* Unit.swift in Sources */,
 				4171854A2A01006000D18CDD /* Double.swift in Sources */,
 				41D286E52AB352AC00B18FEF /* ParameterGroup.swift in Sources */,
 				416318B729DDD2E100C2C285 /* InMemoryLoggingNetworkingDecorator.swift in Sources */,

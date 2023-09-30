@@ -78,9 +78,9 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
-    @Published var showInW: Bool {
+    @Published var displayUnit: DisplayUnit {
         didSet {
-            config.showInW = showInW
+            config.displayUnit = displayUnit
         }
     }
 
@@ -133,7 +133,7 @@ class SettingsTabViewModel: ObservableObject {
         showSunnyBackground = config.showSunnyBackground
         showBatteryEstimate = config.showBatteryEstimate
         showUsableBatteryOnly = config.showUsableBatteryOnly
-        showInW = config.showInW
+        displayUnit = config.displayUnit
         batteryCapacity = String(describing: config.batteryCapacity)
         hasBattery = config.hasBattery
         firmwareVersions = config.firmwareVersions

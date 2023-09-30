@@ -9,7 +9,7 @@ import Foundation
 
 public extension AppTheme {
     static func mock(decimalPlaces: Int = 3,
-                     showInW: Bool = false,
+                     displayUnit: DisplayUnit = .kilowatt,
                      showInverterTemperature: Bool = true,
                      selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode = .off,
                      showHomeTotalOnPowerFlow: Bool = true,
@@ -21,7 +21,7 @@ public extension AppTheme {
             decimalPlaces: decimalPlaces,
             showBatteryEstimate: true,
             showUsableBatteryOnly: false,
-            showInW: showInW,
+            displayUnit: displayUnit,
             showTotalYield: false,
             selfSufficiencyEstimateMode: selfSufficiencyEstimateMode,
             showEarnings: false,

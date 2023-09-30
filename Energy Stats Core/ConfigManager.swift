@@ -38,7 +38,7 @@ public protocol ConfigManaging {
     var devices: [Device]? { get set }
     var selectedDeviceID: String? { get }
     var firmwareVersions: DeviceFirmwareVersion? { get }
-    var showInW: Bool { get set }
+    var displayUnit: DisplayUnit { get set }
     var variables: [RawVariable] { get }
     var currentDevice: CurrentValueSubject<Device?, Never> { get }
     var hasBattery: Bool { get }
@@ -81,7 +81,7 @@ public class ConfigManager: ConfigManaging {
                 decimalPlaces: config.decimalPlaces,
                 showBatteryEstimate: config.showBatteryEstimate,
                 showUsableBatteryOnly: config.showUsableBatteryOnly,
-                showInW: config.showInW,
+                displayUnit: DisplayUnit(rawValue: config.displayUnit) ?? .kilowatt,
                 showTotalYield: config.showTotalYield,
                 selfSufficiencyEstimateMode: config.selfSufficiencyEstimateMode,
                 showEarnings: config.showEarnings,
@@ -325,12 +325,12 @@ public class ConfigManager: ConfigManaging {
         }
     }
 
-    public var showInW: Bool {
-        get { config.showInW }
+    public var displayUnit: DisplayUnit {
+        get { DisplayUnit(rawValue: config.displayUnit) ?? .kilowatt }
         set {
-            config.showInW = newValue
+            config.displayUnit = newValue.rawValue
             appTheme.send(appTheme.value.copy(
-                showInW: config.showInW
+                displayUnit: newValue
             ))
         }
     }

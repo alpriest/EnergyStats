@@ -57,12 +57,29 @@ struct BatteryWidgetView: View {
         }
         .containerBackground(for: .widget) {
             if colorScheme == .dark {
-                Color.white.opacity(0.1)
+                VStack {
+                    Color.clear
+                    Color.white.opacity(0.2)
+                        .frame(height: footerHeight)
+                }
             } else {
-                LinearGradient(colors: [Color.yellow.opacity(0.4), Color.white], startPoint: UnitPoint(x: -0.1, y: 0.0), endPoint: UnitPoint(x: 0, y: 1.0))
+                VStack {
+                    Color.clear
+                    Color.lightGray.opacity(0.6)
+                        .frame(height: footerHeight)
+                }
             }
         }
         .modelContainer(for: BatteryWidgetState.self)
+    }
+
+    var footerHeight: CGFloat {
+        switch family {
+        case .systemSmall:
+            return 32
+        default:
+            return 38
+        }
     }
 }
 
@@ -78,6 +95,6 @@ struct BatteryWidget_Previews: PreviewProvider {
             entry: SimpleEntry.loaded(soc: 50, chargeStatusDescription: "Full in 22 minutes"),
             configManager: ConfigManager(networking: DemoNetworking(), config: MockConfig())
         )
-        .previewContext(WidgetPreviewContext(family: .systemMedium))
+        .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }

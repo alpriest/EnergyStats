@@ -21,7 +21,7 @@ public struct AppTheme {
     public var decimalPlaces: Int
     public var showBatteryEstimate: Bool
     public var showUsableBatteryOnly: Bool
-    public var showInW: Bool
+    public var displayUnit: DisplayUnit
     public var showTotalYield: Bool
     public var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode
     public var showEarnings: Bool
@@ -43,7 +43,7 @@ public struct AppTheme {
         decimalPlaces: Int,
         showBatteryEstimate: Bool,
         showUsableBatteryOnly: Bool,
-        showInW: Bool,
+        displayUnit: DisplayUnit,
         showTotalYield: Bool,
         selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode,
         showEarnings: Bool,
@@ -64,7 +64,7 @@ public struct AppTheme {
         self.decimalPlaces = decimalPlaces
         self.showBatteryEstimate = showBatteryEstimate
         self.showUsableBatteryOnly = showUsableBatteryOnly
-        self.showInW = showInW
+        self.displayUnit = displayUnit
         self.showTotalYield = showTotalYield
         self.selfSufficiencyEstimateMode = selfSufficiencyEstimateMode
         self.showEarnings = showEarnings
@@ -87,7 +87,7 @@ public struct AppTheme {
         decimalPlaces: Int? = nil,
         showBatteryEstimate: Bool? = nil,
         showUsableBatteryOnly: Bool? = nil,
-        showInW: Bool? = nil,
+        displayUnit: DisplayUnit? = nil,
         showTotalYield: Bool? = nil,
         selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode? = nil,
         showEarnings: Bool? = nil,
@@ -109,7 +109,7 @@ public struct AppTheme {
             decimalPlaces: decimalPlaces ?? self.decimalPlaces,
             showBatteryEstimate: showBatteryEstimate ?? self.showBatteryEstimate,
             showUsableBatteryOnly: showUsableBatteryOnly ?? self.showUsableBatteryOnly,
-            showInW: showInW ?? self.showInW,
+            displayUnit: displayUnit ?? self.displayUnit,
             showTotalYield: showTotalYield ?? self.showTotalYield,
             selfSufficiencyEstimateMode: selfSufficiencyEstimateMode ?? self.selfSufficiencyEstimateMode,
             showEarnings: showEarnings ?? self.showEarnings,
