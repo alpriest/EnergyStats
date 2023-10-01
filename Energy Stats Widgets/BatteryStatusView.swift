@@ -16,6 +16,7 @@ struct BatteryStatusView: View {
     let chargeStatusDescription: String?
     let lastUpdated: Date
     let appTheme: AppTheme
+    let hasError: Bool
 
     var body: some View {
         switch self.family {
@@ -30,8 +31,15 @@ struct BatteryStatusView: View {
                 Group {
                     Spacer()
 
-                    Text(lastUpdated, format: .dateTime)
-                        .font(.system(size: 8.0, weight: .light))
+                    HStack {
+                        if hasError {
+                            Image(systemName: "exclamationmark.triangle.fill")
+                                .foregroundStyle(Color.red)
+                        }
+
+                        Text(lastUpdated, format: .dateTime)
+                    }
+                    .font(.system(size: 8.0, weight: .light))
                 }
             }
         default:
@@ -48,8 +56,17 @@ struct BatteryStatusView: View {
                 Group {
                     Spacer()
 
-                    Text(lastUpdated, format: .dateTime)
-                        .font(.system(size: 12.0, weight: .light))
+                    HStack {
+                        Text(lastUpdated, format: .dateTime)
+
+                        if hasError {
+                            Image(systemName: "exclamationmark.triangle.fill")
+                                .foregroundStyle(Color.red)
+
+                            Text("Update failed")
+                        }
+                    }
+                    .font(.system(size: 12.0, weight: .light))
                 }
             }.padding(.top, 12)
         }
@@ -100,9 +117,10 @@ struct BatteryStatusView_Previews: PreviewProvider {
             soc: 0.8,
             chargeStatusDescription: "Full in 22 minutes",
             lastUpdated: .now,
-            appTheme: .mock()
+            appTheme: .mock(),
+            hasError: true
         )
-        .previewContext(WidgetPreviewContext(family: .systemSmall))
+        .previewContext(WidgetPreviewContext(family: .systemMedium))
         .containerBackground(for: .widget) {
             VStack {
                 Color.clear
@@ -115,7 +133,8 @@ struct BatteryStatusView_Previews: PreviewProvider {
             soc: 0.8,
             chargeStatusDescription: "Empty in 15 hours",
             lastUpdated: .now,
-            appTheme: .mock()
+            appTheme: .mock(),
+            hasError: false
         )
         .previewContext(WidgetPreviewContext(family: .systemSmall))
         .containerBackground(for: .widget) {}

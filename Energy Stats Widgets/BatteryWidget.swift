@@ -37,8 +37,8 @@ struct BatteryWidgetView: View {
     @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
-        Group {
-            if case let .failed(reason) = entry.state {
+        VStack {
+            if case let .failedWithoutData(reason) = entry.state {
                 VStack {
                     HStack(alignment: .center) {
                         Image(systemName: "exclamationmark.triangle.fill")
@@ -54,16 +54,18 @@ struct BatteryWidgetView: View {
                 }
             } else {
                 BatteryStatusView(
-                    soc: Double(entry.soc) / 100.0,
+                    soc: Double(entry.soc ?? 0) / 100.0,
                     chargeStatusDescription: entry.chargeStatusDescription,
                     lastUpdated: entry.date,
-                    appTheme: configManager.appTheme.value
-                ).redacted(reason: entry.state == .placeholder ? [.placeholder] : [])
+                    appTheme: configManager.appTheme.value,
+                    hasError: entry.errorMessage != nil
+                )
             }
         }
+        .redacted(reason: entry.state == .placeholder ? [.placeholder] : [])
         .containerBackground(for: .widget) {
             switch entry.state {
-            case .failed:
+            case .failedWithoutData:
                 Color.clear
             default:
                 if colorScheme == .dark {
@@ -103,7 +105,10 @@ struct BatteryWidget_Previews: PreviewProvider {
         .previewContext(WidgetPreviewContext(family: .systemMedium))
 
         BatteryWidgetView(
-            entry: SimpleEntry.loaded(soc: 50, chargeStatusDescription: "Full in 22 minutes"),
+            entry: SimpleEntry.loaded(date: Date(),
+                                      soc: 50,
+                                      chargeStatusDescription: "Full in 22 minutes",
+                                      errorMessage: "Could not refresh"),
             configManager: ConfigManager(networking: DemoNetworking(), config: MockConfig())
         )
         .previewContext(WidgetPreviewContext(family: .systemSmall))

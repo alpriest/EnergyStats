@@ -66,14 +66,27 @@ struct Provider: TimelineProvider {
 
     @MainActor
     private func getCurrentState() async -> SimpleEntry {
+        var errorMessage: String? = nil
+
         do {
             try await HomeEnergyStateManager.shared.update()
+        } catch _ as ConfigManager.NoBattery {
+            return .failed(error: "Your selected inverter has no battery connected")
+        } catch {
+            errorMessage = error.localizedDescription
+        }
 
+        do {
             let fetchDescriptor: FetchDescriptor<BatteryWidgetState> = FetchDescriptor()
             if let widgetState = try (modelContainer.mainContext.fetch(fetchDescriptor)).first {
-                return SimpleEntry.loaded(soc: widgetState.batterySOC, chargeStatusDescription: widgetState.chargeStatusDescription)
+                return SimpleEntry.loaded(
+                    date: widgetState.lastUpdated,
+                    soc: widgetState.batterySOC,
+                    chargeStatusDescription: widgetState.chargeStatusDescription,
+                    errorMessage: errorMessage
+                )
             } else {
-                return .failed(error: "Could not load latest state")
+                return .failed(error: errorMessage ?? "Could not fetch data")
             }
         } catch _ as ConfigManager.NoBattery {
             return .failed(error: "Your selected inverter has no battery connected")
@@ -86,40 +99,45 @@ struct Provider: TimelineProvider {
 enum EntryState: Equatable {
     case loaded
     case placeholder
-    case failed(reason: String)
+    case failedWithoutData(reason: String)
 }
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
-    let soc: Int
+    let soc: Int?
     let chargeStatusDescription: String?
     let state: EntryState
+    let errorMessage: String?
 
-    private init(date: Date, soc: Int, chargeStatusDescription: String?, state: EntryState) {
+    private init(date: Date, soc: Int?, chargeStatusDescription: String?, state: EntryState, errorMessage: String?) {
         self.date = date
         self.soc = soc
         self.state = state
         self.chargeStatusDescription = chargeStatusDescription
+        self.errorMessage = errorMessage
     }
 
-    static func loaded(soc: Int, chargeStatusDescription: String?) -> SimpleEntry {
-        SimpleEntry(date: Date(),
+    static func loaded(date: Date, soc: Int, chargeStatusDescription: String?, errorMessage: String?) -> SimpleEntry {
+        SimpleEntry(date: date,
                     soc: soc,
                     chargeStatusDescription: chargeStatusDescription,
-                    state: .loaded)
+                    state: .loaded,
+                    errorMessage: nil)
     }
 
     static func placeholder() -> SimpleEntry {
         SimpleEntry(date: Date(),
                     soc: 87,
                     chargeStatusDescription: "Full in 25 minutes",
-                    state: .placeholder)
+                    state: .placeholder,
+                    errorMessage: nil)
     }
 
     static func failed(error: String) -> SimpleEntry {
         SimpleEntry(date: Date(),
-                    soc: 0,
+                    soc: nil,
                     chargeStatusDescription: nil,
-                    state: .failed(reason: error))
+                    state: .failedWithoutData(reason: error),
+                    errorMessage: error)
     }
 }
