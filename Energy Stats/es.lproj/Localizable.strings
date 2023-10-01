@@ -204,6 +204,13 @@
 "You've hit the server rate limit. Please try later." = "Ha alcanzado el límite de velocidad del servidor. Por favor, intente más tarde.";
 "Off" = "Apagado";
 "Net" = "Red";
+"display_unit_kilowatts_description" = "Todos los valores se muestran en kilovatios. Por ejemplo, %1$@, %2$@";
+"display_unit_watts_description" = "Todos los valores se muestran en vatios. Por ejemplo, %1$@, %2$@";
+"display_unit_adaptive_description" = "Los valores se muestran en kilovatios a menos que sean menores de 1 kilovatio, en cuyo caso se muestran en vatios. Por ejemplo, %1$@, %2$@";
+"Units" = "Unidades";
+"Watts" = "Vatios";
+"Kilowatts" = "Kilovatios";
+"Adaptive" = "Adaptativo";
 
 /* Inverter page */
 "self_use_mode" = "En este modo, el inversor prioriza la asignación de energía de la siguiente manera:\n\n1. Carga de la casa\n2. Carga de batería\n3. Exportar";

@@ -90,6 +90,13 @@
 "Sun display variation thresholds" = "Schwellenwerte der Sonnenanzeigevielfalt";
 "Example" = "Beispiel";
 "Restore defaults" = "Standardeinstellungen wiederherstellen";
+"display_unit_kilowatts_description" = "Alle Werte werden in Kilowatt angezeigt. Zum Beispiel %1$@, %2$@";
+"display_unit_watts_description" = "Alle Werte werden in Watt angezeigt. Zum Beispiel %1$@, %2$@";
+"display_unit_adaptive_description" = "Die Werte werden in Kilowatt angezeigt, es sei denn, sie sind unter 1 Kilowatt, dann werden sie in Watt angezeigt. Zum Beispiel %1$@, %2$@";
+"Units" = "Einheiten";
+"Watts" = "Watt";
+"Kilowatts" = "Kilowatt";
+"Adaptive" = "Adaptiv";
 
 /* Graph pages */
 "power" = "Leistung";

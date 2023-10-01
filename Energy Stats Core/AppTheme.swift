@@ -24,7 +24,10 @@ public struct AppTheme {
     public var displayUnit: DisplayUnit
     public var showTotalYield: Bool
     public var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode
-    public var showEarnings: Bool
+    public var showFinancialEarnings: Bool
+    public var showFinancialSavings: Bool
+    public var showFinancialCosts: Bool
+    public var financialModel: FinancialModel
     public var showInverterTemperature: Bool
     public var showHomeTotalOnPowerFlow: Bool
     public var showInverterIcon: Bool
@@ -46,7 +49,10 @@ public struct AppTheme {
         displayUnit: DisplayUnit,
         showTotalYield: Bool,
         selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode,
-        showEarnings: Bool,
+        showFinancialEarnings: Bool,
+        showFinancialSavings: Bool,
+        showFinancialCosts: Bool,
+        financialModel: FinancialModel,
         showInverterTemperature: Bool,
         showHomeTotalOnPowerFlow: Bool,
         showInverterIcon: Bool,
@@ -67,7 +73,10 @@ public struct AppTheme {
         self.displayUnit = displayUnit
         self.showTotalYield = showTotalYield
         self.selfSufficiencyEstimateMode = selfSufficiencyEstimateMode
-        self.showEarnings = showEarnings
+        self.showFinancialEarnings = showFinancialEarnings
+        self.showFinancialSavings = showFinancialSavings
+        self.showFinancialCosts = showFinancialCosts
+        self.financialModel = financialModel
         self.showInverterTemperature = showInverterTemperature
         self.showHomeTotalOnPowerFlow = showHomeTotalOnPowerFlow
         self.showInverterIcon = showInverterIcon
@@ -90,7 +99,10 @@ public struct AppTheme {
         displayUnit: DisplayUnit? = nil,
         showTotalYield: Bool? = nil,
         selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode? = nil,
-        showEarnings: Bool? = nil,
+        showFinancialEarnings: Bool? = nil,
+        showFinancialSavings: Bool? = nil,
+        showFinancialCosts: Bool? = nil,
+        financialModel: FinancialModel? = nil,
         showInverterTemperature: Bool? = nil,
         showHomeTotalOnPowerFlow: Bool? = nil,
         showInverterIcon: Bool? = nil,
@@ -112,7 +124,10 @@ public struct AppTheme {
             displayUnit: displayUnit ?? self.displayUnit,
             showTotalYield: showTotalYield ?? self.showTotalYield,
             selfSufficiencyEstimateMode: selfSufficiencyEstimateMode ?? self.selfSufficiencyEstimateMode,
-            showEarnings: showEarnings ?? self.showEarnings,
+            showFinancialEarnings: showFinancialEarnings ?? self.showFinancialEarnings,
+            showFinancialSavings: showFinancialSavings ?? self.showFinancialSavings,
+            showFinancialCosts: showFinancialCosts ?? self.showFinancialCosts,
+            financialModel: financialModel ?? self.financialModel,
             showInverterTemperature: showInverterTemperature ?? self.showInverterTemperature,
             showHomeTotalOnPowerFlow: showHomeTotalOnPowerFlow ?? self.showHomeTotalOnPowerFlow,
             showInverterIcon: showInverterIcon ?? self.showInverterIcon,

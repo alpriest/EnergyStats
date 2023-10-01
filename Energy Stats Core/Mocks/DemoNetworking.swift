@@ -166,7 +166,10 @@ public class MockConfig: Config {
     public var displayUnit: Int = 0
     public var showTotalYield: Bool = false
     public var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode = .off
-    public var showEarnings: Bool = false
+    public var showFinancialEarnings: Bool = false
+    public var showFinancialSavings: Bool = false
+    public var showFinancialCosts: Bool = false
+    public var financialModel: Int = FinancialModel.energyStats.rawValue
     public var showInverterTemperature: Bool = false
     public var selectedParameterGraphVariables: [String] = []
     public var showHomeTotalOnPowerFlow: Bool = true

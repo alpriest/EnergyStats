@@ -171,7 +171,7 @@ class PowerFlowTabViewModel: ObservableObject {
                 home: currentViewModel.currentHomeConsumption,
                 grid: currentViewModel.currentGrid,
                 todaysGeneration: earnings.today.generation,
-                earnings: self.makeEarnings(earnings),
+                earnings: EarningsViewModel(response: earnings, totalsViewModel: totalsViewModel),
                 inverterTemperatures: currentViewModel.currentTemperatures,
                 homeTotal: totalsViewModel.home,
                 gridImportTotal: totalsViewModel.gridImport,
@@ -222,15 +222,5 @@ class PowerFlowTabViewModel: ObservableObject {
         do {
             try await Task.sleep(nanoseconds: 1_000_000_000)
         } catch {}
-    }
-
-    private func makeEarnings(_ response: EarningsResponse) -> EarningsViewModel {
-        EarningsViewModel(
-            today: response.today.earnings,
-            month: response.month.earnings,
-            year: response.year.earnings,
-            cumulate: response.cumulate.earnings,
-            currencySymbol: response.currencySymbol
-        )
     }
 }

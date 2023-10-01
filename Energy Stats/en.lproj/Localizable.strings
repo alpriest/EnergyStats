@@ -88,7 +88,7 @@
 "high_threshold" = "High threshold";
 "high_threshold_description" = "Between medium and high the sun will be orange and glowing. Above high the sun will be red and glowing.";
 "Sun display variation thresholds" = "Sun display variation thresholds";
-"foxess_earnings_calculation_description" = "Shows earnings today, this month, this year, and all-time based on a calculation of feed-in kWh * price.";
+"foxess_earnings_calculation_description" = "Shows earnings today, this month, this year, and all-time based on a calculation of feed-in kWh * unit price.";
 
 /* Battery Charge Pages */
 

@@ -15,45 +15,49 @@ class ApproximationsSettingsViewModel: ObservableObject {
         }
     }
 
-    @Published var showEarnings: Bool {
+    @Published var showFinancialEarnings: Bool {
         didSet {
-            configManager.showEarnings = showEarnings
+            configManager.showFinancialEarnings = showFinancialEarnings
         }
     }
 
-    @Published var showSavings: Bool {
+    @Published var showFinancialSavings: Bool {
         didSet {
-            // TODO
+            configManager.showFinancialSavings = showFinancialSavings
         }
     }
 
-    @Published var showCosts: Bool {
+    @Published var showFinancialCosts: Bool {
         didSet {
-            // TODO
+            configManager.showFinancialCosts = showFinancialCosts
         }
     }
+
+    @Published var financialModel: FinancialModel {
+        didSet {
+            configManager.financialModel = financialModel
+        }
+    }
+
+    @Published var foxFeedInUnitPrice = "0.30" // TODO Read from Fox
+    @Published var energyStatsFeedInUnitPrice = "0.12" // TODO Write to config
+    @Published var energyStatsGridImportUnitPrice = "0.39" // TODO Write to config
 
     private(set) var configManager: ConfigManaging
 
     init(configManager: ConfigManaging) {
         self.configManager = configManager
         selfSufficiencyEstimateMode = configManager.selfSufficiencyEstimateMode
-        showEarnings = configManager.showEarnings
-        showSavings = true // TODO
-        showCosts = true // TODO
+        showFinancialEarnings = configManager.showFinancialEarnings
+        showFinancialSavings = configManager.showFinancialSavings
+        showFinancialCosts = configManager.showFinancialCosts
+        financialModel = configManager.financialModel
     }
-}
-
-enum FinancialModel {
-    case energyStats
-    case foxESS
 }
 
 struct ApproximationsSettingsView: View {
     @StateObject private var viewModel: ApproximationsSettingsViewModel
     @State private var financialModel = FinancialModel.energyStats
-    @State private var foxFeedInUnitPrice = "0.30"
-    @State private var energyStatsFeedInUnitPrice = ""
 
     init(configManager: ConfigManaging) {
         _viewModel = .init(wrappedValue: ApproximationsSettingsViewModel(configManager: configManager))
@@ -75,41 +79,41 @@ struct ApproximationsSettingsView: View {
             switch financialModel {
             case .energyStats:
                 Section {
-                    Toggle(isOn: $viewModel.showEarnings) {
+                    Toggle(isOn: $viewModel.showFinancialEarnings) {
                         Text("Show estimated earnings")
                     }
 
-                    makeTextField(title: "Feed In Unit price", currencyCode: "£", text: $energyStatsFeedInUnitPrice)
+                    makeTextField(title: "Feed In Unit price", currencyCode: "£", text: $viewModel.energyStatsFeedInUnitPrice)
                 } header: {
                     Text("Energy Stats Model")
                 } footer: {
-                    Text("Shows earnings today, this month, this year, and all-time based on a calculation of feed-in kWh * unit price.")
+                    Text("Shows earnings based on how much you have exported.\n\nFeed-In kWh * FeedInUnitPrice")
                 }
 
                 Section {
-                    Toggle(isOn: $viewModel.showSavings) {
+                    Toggle(isOn: $viewModel.showFinancialSavings) {
                         Text("Show estimated savings")
                     }
 
-                    makeTextField(title: "Grid Import Unit price", currencyCode: "£", text: $energyStatsFeedInUnitPrice)
+                    makeTextField(title: "Grid Import Unit price", currencyCode: "£", text: $viewModel.energyStatsGridImportUnitPrice)
                 } footer: {
-                    Text("Shows savings today, this month, this year, and all-time based on a calculation of solar generated kWh * unit price.")
+                    Text("Shows savings based on how much solar you have generated and used that you would have otherwise had to purchase.\n\n(SolarGeneration kWh - Feed-In kWh) * ImportUnitPrice")
                 }
 
                 Section {
-                    Toggle(isOn: $viewModel.showCosts) {
+                    Toggle(isOn: $viewModel.showFinancialCosts) {
                         Text("Show estimated costs")
                     }
                 } footer: {
-                    Text("Shows costs today, this month, this year, and all-time based on a calculation of grid import kWh * unit price.")
+                    Text("Shows costs based on how much you imported.\n\nGridImport kWh * ImportUnitPrice")
                 }
             case .foxESS:
                 Section {
-                    Toggle(isOn: $viewModel.showEarnings) {
+                    Toggle(isOn: $viewModel.showFinancialEarnings) {
                         Text("Show estimated earnings")
                     }
 
-                    makeTextField(title: "Unit price", currencyCode: "£", text: $foxFeedInUnitPrice)
+                    makeTextField(title: "Unit price", currencyCode: "£", text: $viewModel.foxFeedInUnitPrice)
                 } header: {
                     Text("FoxESS Model")
                 } footer: {

@@ -42,7 +42,10 @@ public protocol ConfigManaging {
     var variables: [RawVariable] { get }
     var currentDevice: CurrentValueSubject<Device?, Never> { get }
     var hasBattery: Bool { get }
-    var showEarnings: Bool { get set }
+    var showFinancialEarnings: Bool { get set }
+    var showFinancialSavings: Bool { get set }
+    var showFinancialCosts: Bool { get set }
+    var financialModel: FinancialModel { get set }
     var showInverterTemperature: Bool { get set }
     var selectedParameterGraphVariables: [String] { get set }
     var showHomeTotalOnPowerFlow: Bool { get set }
@@ -84,7 +87,10 @@ public class ConfigManager: ConfigManaging {
                 displayUnit: DisplayUnit(rawValue: config.displayUnit) ?? .kilowatt,
                 showTotalYield: config.showTotalYield,
                 selfSufficiencyEstimateMode: config.selfSufficiencyEstimateMode,
-                showEarnings: config.showEarnings,
+                showFinancialEarnings: config.showFinancialEarnings,
+                showFinancialSavings: config.showFinancialSavings,
+                showFinancialCosts: config.showFinancialCosts,
+                financialModel: FinancialModel(rawValue: config.financialModel) ?? .foxESS,
                 showInverterTemperature: config.showInverterTemperature,
                 showHomeTotalOnPowerFlow: config.showHomeTotalOnPowerFlow,
                 showInverterIcon: config.showInverterIcon,
@@ -335,12 +341,42 @@ public class ConfigManager: ConfigManaging {
         }
     }
 
-    public var showEarnings: Bool {
-        get { config.showEarnings }
+    public var showFinancialEarnings: Bool {
+        get { config.showFinancialEarnings }
         set {
-            config.showEarnings = newValue
+            config.showFinancialEarnings = newValue
             appTheme.send(appTheme.value.copy(
-                showEarnings: config.showEarnings
+                showFinancialEarnings: config.showFinancialEarnings
+            ))
+        }
+    }
+
+    public var showFinancialSavings: Bool {
+        get { config.showFinancialSavings }
+        set {
+            config.showFinancialSavings = newValue
+            appTheme.send(appTheme.value.copy(
+                showFinancialSavings: config.showFinancialSavings
+            ))
+        }
+    }
+
+    public var showFinancialCosts: Bool {
+        get { config.showFinancialCosts }
+        set {
+            config.showFinancialCosts = newValue
+            appTheme.send(appTheme.value.copy(
+                showFinancialCosts: config.showFinancialCosts
+            ))
+        }
+    }
+
+    public var financialModel: FinancialModel {
+        get { FinancialModel(rawValue: config.financialModel) ?? .foxESS }
+        set {
+            config.financialModel = newValue.rawValue
+            appTheme.send(appTheme.value.copy(
+                financialModel: FinancialModel(rawValue: config.financialModel)
             ))
         }
     }

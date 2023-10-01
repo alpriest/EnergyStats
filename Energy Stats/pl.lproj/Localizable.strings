@@ -79,6 +79,13 @@
 "Sun display variation thresholds" = "Progi zmienności wyświetlania słońca";
 "Example" = "Przykład";
 "Restore defaults" = "Przywróć domyślne";
+"display_unit_kilowatts_description" = "Wszystkie wartości są wyświetlane w kilowatach. Na przykład %1$@, %2$@";
+"display_unit_watts_description" = "Wszystkie wartości są wyświetlane w watach. Na przykład %1$@, %2$@";
+"display_unit_adaptive_description" = "Wartości są wyświetlane w kilowatach, chyba że są mniejsze niż 1 kilowat, wtedy są wyświetlane w watach. Na przykład %1$@, %2$@";
+"Units" = "Jednostki";
+"Watts" = "Waty";
+"Kilowatts" = "Kilowaty";
+"Adaptive" = "Adaptacyjny";
 
 /* Variables page */
 "Predefined selections" = "Wybrane opcje";

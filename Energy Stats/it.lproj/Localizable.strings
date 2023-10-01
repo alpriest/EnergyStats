@@ -156,6 +156,13 @@
 "Check FoxESS Server status" = "Verifica lo stato del server FoxESS";
 "data_fetch_error" = "Si è verificato un errore durante il recupero dei dati dalla cloud FoxESS.";
 "tap_for_detail" = "Tocca l'icona per ulteriori dettagli.";
+"display_unit_kilowatts_description" = "Tutti i valori sono espressi in kilowatt. Ad esempio, %1$@, %2$@";
+"display_unit_watts_description" = "Tutti i valori sono espressi in watt. Ad esempio, %1$@, %2$@";
+"display_unit_adaptive_description" = "I valori vengono espressi in kilowatt a meno che non siano inferiori a 1 kilowatt, momento in cui vengono espressi in watt. Ad esempio, %1$@, %2$@";
+"Units" = "Unità";
+"Watts" = "Watt";
+"Kilowatts" = "Kilowatt";
+"Adaptive" = "Adattivo";
 
 /* Inverter page */
 "self_use_mode" = "In questa modalità, l'inverter assegna prioritariamente la potenza come segue:\n\n1. Carico della casa\n2. Carica della batteria\n3. Esportazione";

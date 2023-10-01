@@ -8,27 +8,71 @@
 import Foundation
 
 public struct EarningsViewModel {
-    public let today: Double
-    public let month: Double
-    public let year: Double
-    public let cumulate: Double
-    public let currencySymbol: String
+    private let response: EarningsResponse
+    private let totalsViewModel: TotalsViewModel
 
-    public init(today: Double, month: Double, year: Double, cumulate: Double, currencySymbol: String) {
-        self.today = today
-        self.month = month
-        self.year = year
-        self.cumulate = cumulate
-        self.currencySymbol = currencySymbol
+    public func today(_ model: FinancialModel) -> Double {
+        switch model {
+        case .energyStats:
+            return 0
+        case .foxESS:
+            return response.today.earnings
+        }
+    }
+
+    public func month(_ model: FinancialModel) -> Double {
+        switch model {
+        case .energyStats:
+            return 0
+        case .foxESS:
+            return response.month.earnings
+        }
+    }
+
+    public func year(_ model: FinancialModel) -> Double {
+        switch model {
+        case .energyStats:
+            return 0
+        case .foxESS:
+            return response.year.earnings
+        }
+    }
+
+    public func cumulate(_ model: FinancialModel) -> Double? {
+        switch model {
+        case .energyStats:
+            return nil
+        case .foxESS:
+            return response.cumulate.earnings
+        }
+    }
+
+    public var currencySymbol: String {
+        response.currencySymbol
+    }
+
+    public init(response: EarningsResponse, totalsViewModel: TotalsViewModel) {
+        self.response = response
+        self.totalsViewModel = totalsViewModel
     }
 }
 
 public extension EarningsViewModel {
     static func any() -> EarningsViewModel {
-        EarningsViewModel(today: 1.0, month: 5.0, year: 89.1, cumulate: 121.1, currencySymbol: "£")
+        EarningsViewModel(response: EarningsResponse(currency: "£",
+                                                     today: EarningsResponse.Earning(generation: 1.0, earnings: 1.0),
+                                                     month: EarningsResponse.Earning(generation: 2.0, earnings: 2.0),
+                                                     year: EarningsResponse.Earning(generation: 3.0, earnings: 3.0),
+                                                     cumulate: EarningsResponse.Earning(generation: 1.0, earnings: 1.0)),
+                          totalsViewModel: TotalsViewModel(reports: []))
     }
 
     static func empty() -> EarningsViewModel {
-        EarningsViewModel(today: 0.0, month: 0.0, year: 0.0, cumulate: 0.0, currencySymbol: "")
+        EarningsViewModel(response: EarningsResponse(currency: "",
+                                                     today: EarningsResponse.Earning(generation: 0.0, earnings: 0.0),
+                                                     month: EarningsResponse.Earning(generation: 0.0, earnings: 0.0),
+                                                     year: EarningsResponse.Earning(generation: 0.0, earnings: 0.0),
+                                                     cumulate: EarningsResponse.Earning(generation: 0.0, earnings: 0.0)),
+                          totalsViewModel: TotalsViewModel(reports: []))
     }
 }

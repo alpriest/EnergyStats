@@ -33,7 +33,7 @@ struct SolarPowerView: View {
                 }
             }
 
-            if appTheme.showEarnings {
+            if appTheme.showFinancialEarnings {
                 EarningsView(viewModel: viewModel.earnings)
                     .padding(.bottom, 4)
             }

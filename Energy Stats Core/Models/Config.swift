@@ -22,7 +22,10 @@ public protocol Config {
     var displayUnit: Int { get set }
     var showTotalYield: Bool { get set }
     var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode { get set }
-    var showEarnings: Bool { get set }
+    var showFinancialEarnings: Bool { get set }
+    var showFinancialSavings: Bool { get set }
+    var showFinancialCosts: Bool { get set }
+    var financialModel: Int { get set }
     var showInverterTemperature: Bool { get set }
     var selectedParameterGraphVariables: [String] { get set }
     var showHomeTotalOnPowerFlow: Bool { get set }
@@ -128,7 +131,16 @@ public class UserDefaultsConfig: Config {
     }
 
     @UserDefaultsStoredBool(key: "showEarnings", defaultValue: false)
-    public var showEarnings: Bool
+    public var showFinancialEarnings: Bool
+
+    @UserDefaultsStoredBool(key: "showFinancialSavings", defaultValue: false)
+    public var showFinancialSavings: Bool
+
+    @UserDefaultsStoredBool(key: "showFinancialCosts", defaultValue: false)
+    public var showFinancialCosts: Bool
+
+    @UserDefaultsStoredInt(key: "financialModel", defaultValue: 1)
+    public var financialModel: Int
 
     public var selectedParameterGraphVariables: [String] {
         get {

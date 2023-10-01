@@ -6,24 +6,37 @@
 //
 
 import Energy_Stats_Core
-import SwiftUI
 import OrderedCollections
+import SwiftUI
 
 struct EarningsView: View {
     let viewModel: EarningsViewModel
-    let pairs: OrderedDictionary<LocalizedString.Key, KeyPath<EarningsViewModel, Double>> = [
-        .today: \.today,
-        .month: \.month,
-        .year: \.year,
-        .cumulate: \.cumulate
-    ]
+    let model = FinancialModel.foxESS
 
     var body: some View {
         HStack {
-            ForEach(Array(pairs), id: \.key) { title, keyPath in
+            SubLabelledView(
+                value: viewModel.today(model).roundedToString(decimalPlaces: 2, currencySymbol: viewModel.currencySymbol),
+                label: String(key: .today),
+                alignment: .center
+            )
+
+            SubLabelledView(
+                value: viewModel.month(model).roundedToString(decimalPlaces: 2, currencySymbol: viewModel.currencySymbol),
+                label: String(key: .month),
+                alignment: .center
+            )
+
+            SubLabelledView(
+                value: viewModel.year(model).roundedToString(decimalPlaces: 2, currencySymbol: viewModel.currencySymbol),
+                label: String(key: .year),
+                alignment: .center
+            )
+
+            OptionalView(viewModel.cumulate(model)) {
                 SubLabelledView(
-                    value: viewModel[keyPath: keyPath].roundedToString(decimalPlaces: 2, currencySymbol: viewModel.currencySymbol),
-                    label: String(key: title),
+                    value: $0.roundedToString(decimalPlaces: 2, currencySymbol: viewModel.currencySymbol),
+                    label: String(key: .cumulate),
                     alignment: .center
                 )
             }
