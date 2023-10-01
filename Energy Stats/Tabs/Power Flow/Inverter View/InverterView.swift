@@ -120,13 +120,26 @@ struct InverterView: View {
                     VStack {
                         HStack {
                             VStack {
-                                if appTheme.showInverterTypeNameOnPowerFlow, let typeName = viewModel.deviceType {
-                                    Text(typeName)
-                                }
-                                if appTheme.showInverterPlantName {
+                                switch (appTheme.showInverterTypeNameOnPowerFlow, appTheme.showInverterPlantName) {
+                                case (true, false):
+                                    OptionalView(viewModel.deviceType) {
+                                        Text($0)
+                                    }
+                                case (false, true):
+                                    OptionalView(viewModel.devicePlantName) {
+                                        Text($0)
+                                    }
+                                case (true, true):
+                                    OptionalView(viewModel.deviceType) {
+                                        Text($0)
+                                    }
                                     OptionalView(viewModel.devicePlantName) {
                                         Text($0)
                                             .font(.caption2)
+                                    }
+                                case (false, false):
+                                    OptionalView(viewModel.deviceDisplayName) {
+                                        Text($0)
                                     }
                                 }
                             }
