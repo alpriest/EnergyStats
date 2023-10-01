@@ -111,8 +111,8 @@ struct SimpleEntry: TimelineEntry {
 
     static func placeholder() -> SimpleEntry {
         SimpleEntry(date: Date(),
-                    soc: 0,
-                    chargeStatusDescription: nil,
+                    soc: 87,
+                    chargeStatusDescription: "Full in 25 minutes",
                     state: .placeholder)
     }
 

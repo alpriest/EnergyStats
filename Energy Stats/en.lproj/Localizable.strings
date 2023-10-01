@@ -132,6 +132,11 @@
 "month" = "month";
 "year" = "year";
 "cumulate" = "total";
+"e.g." = "e.g.";
+"Units" = "Units";
+"Watts" = "Watts";
+"Kilowatts" = "Kilowatts";
+"Adaptive" = "Adaptive";
 
 /* Inverter page */
 "self_use_mode" = "In this mode, the inverter prioritises power allocation as follows:\n\n1. House Load\n2. Battery Charging\n3. Export";

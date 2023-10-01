@@ -35,13 +35,19 @@ struct BatteryWidgetView: View {
     let configManager: ConfigManaging
     @Environment(\.widgetFamily) var family
     @Environment(\.colorScheme) var colorScheme
-    @State private var foo: String = Date.now.iso8601()
 
     var body: some View {
         Group {
             if case let .failed(reason) = entry.state {
                 VStack {
-                    Text(reason)
+                    HStack(alignment: .center) {
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .foregroundStyle(Color.red)
+                            .font(.title)
+
+                        Text(reason)
+                    }.padding(.bottom)
+
                     Button(intent: UpdateBatteryChargeLevelIntent()) {
                         Text("Tap to retry")
                     }.buttonStyle(.bordered)
@@ -56,17 +62,22 @@ struct BatteryWidgetView: View {
             }
         }
         .containerBackground(for: .widget) {
-            if colorScheme == .dark {
-                VStack {
-                    Color.clear
-                    Color.white.opacity(0.2)
-                        .frame(height: footerHeight)
-                }
-            } else {
-                VStack {
-                    Color.clear
-                    Color.lightGray.opacity(0.6)
-                        .frame(height: footerHeight)
+            switch entry.state {
+            case .failed:
+                Color.clear
+            default:
+                if colorScheme == .dark {
+                    VStack {
+                        Color.clear
+                        Color.white.opacity(0.2)
+                            .frame(height: footerHeight)
+                    }
+                } else {
+                    VStack {
+                        Color.clear
+                        Color.lightGray.opacity(0.6)
+                            .frame(height: footerHeight)
+                    }
                 }
             }
         }
@@ -86,7 +97,7 @@ struct BatteryWidgetView: View {
 struct BatteryWidget_Previews: PreviewProvider {
     static var previews: some View {
         BatteryWidgetView(
-            entry: SimpleEntry.failed(error: "failed to load data"),
+            entry: SimpleEntry.failed(error: "Something went wrong"),
             configManager: ConfigManager(networking: DemoNetworking(), config: MockConfig())
         )
         .previewContext(WidgetPreviewContext(family: .systemMedium))
