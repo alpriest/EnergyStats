@@ -72,7 +72,7 @@
 "Year" = "Año";
 "Choose date" = "Seleccionar fecha";
 "Version " = "Versión ";
-"Shows earnings today, this month, this year, and all-time based on a crude calculation of feed-in ｘ price as configured on FoxESS cloud." = "Muestra las ganancias de hoy, este mes, este año y en total en función de un cálculo básico de alimentación ｘ precio según la configuración en la nube de FoxESS.";
+"foxess_earnings_calculation_description" = "Muestra las ganancias de hoy, este mes, este año y en total en función de un cálculo básico de alimentación ｘ precio según la configuración en la nube de FoxESS.";
 "Show values in Watts" = "Mostrar valores en vatios";
 "Solar generated" = "Generado por energía solar";
 "solar_example_description" = "Arrastra el control deslizante de arriba para ver cómo se mostrará tu flujo solar al generar diferentes niveles de energía.";

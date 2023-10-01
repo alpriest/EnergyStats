@@ -81,6 +81,7 @@ public extension Double {
             numberFormatter.numberStyle = .currency
             numberFormatter.currencySymbol = currencySymbol
         }
+        numberFormatter.minimumFractionDigits = decimalPlaces
         numberFormatter.maximumFractionDigits = decimalPlaces
         numberFormatter.locale = Locale.current
 
