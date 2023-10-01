@@ -49,7 +49,7 @@ struct StatsTabView: View {
                     HStack {
                         Group {
                             if viewModel.valuesAtTime != nil, let selectedDate = viewModel.selectedDate {
-                                Text(viewModel.unitFormatted(selectedDate))
+                                Text(viewModel.selectedDateFormatted(selectedDate))
 
                                 Button("Clear graph values", action: {
                                     self.viewModel.valuesAtTime = nil

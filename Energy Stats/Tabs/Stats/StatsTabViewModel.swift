@@ -50,13 +50,13 @@ class StatsTabViewModel: ObservableObject {
         haptic.prepare()
 
         NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
-        self.addDeviceChangeObserver()
+        addDeviceChangeObserver()
     }
 
     func addDeviceChangeObserver() {
-        guard self.currentDeviceCancellable == nil else { return }
+        guard currentDeviceCancellable == nil else { return }
 
-        self.currentDeviceCancellable = self.configManager.currentDevice.sink { device in
+        currentDeviceCancellable = configManager.currentDevice.sink { device in
             guard let device else { return }
 
             Task { await self.updateGraphVariables(for: device) }
@@ -280,14 +280,12 @@ class StatsTabViewModel: ObservableObject {
         return result
     }
 
-    func unitFormatted(_ date: Date) -> String {
+    func selectedDateFormatted(_ date: Date) -> String {
         switch displayMode {
         case .day:
             return DateFormatter.dayHour.string(from: date)
         case .month:
-            if let month = Calendar.current.date(byAdding: .month, value: 1, to: date) {
-                return DateFormatter.dayMonth.string(from: month)
-            } else { return "" }
+            return DateFormatter.dayMonth.string(from: date)
         case .year:
             return DateFormatter.monthYear.string(from: date)
         }
