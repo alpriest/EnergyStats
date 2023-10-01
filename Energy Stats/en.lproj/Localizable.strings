@@ -132,7 +132,9 @@
 "month" = "month";
 "year" = "year";
 "cumulate" = "total";
-"e.g." = "e.g.";
+"display_unit_kilowatts_description" = "All values are shown as kilowatts. E.g. %1$@, %2$@";
+"display_unit_watts_description" = "All values are shown as watts. E.g. %1$@, %2$@";
+"display_unit_adaptive_description" = "Values are shown as kilowatts unless under 1 kilowatt when they are shown as watts. E.g. %1$@, %2$@";
 "Units" = "Units";
 "Watts" = "Watts";
 "Kilowatts" = "Kilowatts";

@@ -40,6 +40,9 @@ public struct LocalizedString {
         case cumulate = "total"
         case tapIconForDetail = "tap_for_detail"
         case breakpoint = "breakpoint"
+        case displayUnitKilowattsDescription = "display_unit_kilowatts_description"
+        case displayUnitWattsDescription = "display_unit_watts_description"
+        case displayUnitAdaptiveDescription = "display_unit_adaptive_description"
 
         public enum Accessibility: String, RawRepresentable {
             case inverter = "accessibility.inverter"

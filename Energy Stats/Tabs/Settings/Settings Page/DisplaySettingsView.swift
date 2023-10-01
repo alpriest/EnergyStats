@@ -65,11 +65,11 @@ struct DisplaySettingsView: View {
         } footer: {
             switch viewModel.displayUnit {
             case .kilowatt:
-                Text("E.g. \(Double(3.456).kW(viewModel.decimalPlaces)), \(Double(0.123).kW(3))")
+                Text(String(key: .displayUnitKilowattsDescription, arguments: [Double(3.456).kW(viewModel.decimalPlaces), Double(0.123).kW(3)]))
             case .watt:
-                Text("E.g. \(Double(3.456).w()), \(Double(0.123).w())")
+                Text(String(key: .displayUnitWattsDescription, arguments: [Double(3.456).w(), Double(0.123).w()]))
             case .adaptive:
-                Text("E.g. \(Double(3.456).kW(viewModel.decimalPlaces)), \(Double(0.123).w())")
+                Text(String(key: .displayUnitAdaptiveDescription, arguments: [Double(3.456).kW(viewModel.decimalPlaces), Double(0.123).w()]))
             }
         }
 
