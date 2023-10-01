@@ -57,7 +57,6 @@ class ApproximationsSettingsViewModel: ObservableObject {
 
 struct ApproximationsSettingsView: View {
     @StateObject private var viewModel: ApproximationsSettingsViewModel
-    @State private var financialModel = FinancialModel.energyStats
 
     init(configManager: ConfigManaging) {
         _viewModel = .init(wrappedValue: ApproximationsSettingsViewModel(configManager: configManager))
@@ -68,7 +67,7 @@ struct ApproximationsSettingsView: View {
             SelfSufficiencySettingsView(mode: $viewModel.selfSufficiencyEstimateMode)
 
             Section {
-                Picker("Financial Model", selection: $financialModel) {
+                Picker("Financial Model", selection: $viewModel.financialModel) {
                     Text("Energy Stats").tag(FinancialModel.energyStats)
                     Text("FoxESS").tag(FinancialModel.foxESS)
                 }.pickerStyle(.segmented)
@@ -76,7 +75,7 @@ struct ApproximationsSettingsView: View {
                 Text("Financials")
             }
 
-            switch financialModel {
+            switch viewModel.financialModel {
             case .energyStats:
                 Section {
                     Toggle(isOn: $viewModel.showFinancialEarnings) {

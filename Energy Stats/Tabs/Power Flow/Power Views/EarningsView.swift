@@ -11,29 +11,29 @@ import SwiftUI
 
 struct EarningsView: View {
     let viewModel: EarningsViewModel
-    let model = FinancialModel.foxESS
+    let appTheme: AppTheme
 
     var body: some View {
         HStack {
             SubLabelledView(
-                value: viewModel.today(model).roundedToString(decimalPlaces: 2, currencySymbol: viewModel.currencySymbol),
+                value: viewModel.today(appTheme.financialModel).roundedToString(decimalPlaces: 2, currencySymbol: viewModel.currencySymbol),
                 label: String(key: .today),
                 alignment: .center
             )
 
             SubLabelledView(
-                value: viewModel.month(model).roundedToString(decimalPlaces: 2, currencySymbol: viewModel.currencySymbol),
+                value: viewModel.month(appTheme.financialModel).roundedToString(decimalPlaces: 2, currencySymbol: viewModel.currencySymbol),
                 label: String(key: .month),
                 alignment: .center
             )
 
             SubLabelledView(
-                value: viewModel.year(model).roundedToString(decimalPlaces: 2, currencySymbol: viewModel.currencySymbol),
+                value: viewModel.year(appTheme.financialModel).roundedToString(decimalPlaces: 2, currencySymbol: viewModel.currencySymbol),
                 label: String(key: .year),
                 alignment: .center
             )
 
-            OptionalView(viewModel.cumulate(model)) {
+            OptionalView(viewModel.cumulate(appTheme.financialModel)) {
                 SubLabelledView(
                     value: $0.roundedToString(decimalPlaces: 2, currencySymbol: viewModel.currencySymbol),
                     label: String(key: .cumulate),
@@ -46,6 +46,6 @@ struct EarningsView: View {
 
 struct EarningsView_Previews: PreviewProvider {
     static var previews: some View {
-        EarningsView(viewModel: .any())
+        EarningsView(viewModel: .any(), appTheme: .mock())
     }
 }

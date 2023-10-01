@@ -34,7 +34,7 @@ struct SolarPowerView: View {
             }
 
             if appTheme.showFinancialEarnings {
-                EarningsView(viewModel: viewModel.earnings)
+                EarningsView(viewModel: viewModel.earnings, appTheme: appTheme)
                     .padding(.bottom, 4)
             }
 
