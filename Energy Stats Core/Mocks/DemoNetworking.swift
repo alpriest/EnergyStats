@@ -170,6 +170,8 @@ public class MockConfig: Config {
     public var showFinancialSavings: Bool = false
     public var showFinancialCosts: Bool = false
     public var financialModel: Int = FinancialModel.energyStats.rawValue
+    public var gridImportUnitPrice: Double = 0.15
+    public var feedInUnitPrice: Double = 0.05
     public var showInverterTemperature: Bool = false
     public var selectedParameterGraphVariables: [String] = []
     public var showHomeTotalOnPowerFlow: Bool = true

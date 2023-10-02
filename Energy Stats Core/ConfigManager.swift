@@ -14,7 +14,7 @@ public enum RefreshFrequency: Int {
     case FIVE_MINUTES = 5
 }
 
-public protocol ConfigManaging {
+public protocol ConfigManaging: FinancialConfigManaging {
     func fetchDevices() async throws
     func logout()
     func select(device: Device?)
@@ -42,10 +42,6 @@ public protocol ConfigManaging {
     var variables: [RawVariable] { get }
     var currentDevice: CurrentValueSubject<Device?, Never> { get }
     var hasBattery: Bool { get }
-    var showFinancialEarnings: Bool { get set }
-    var showFinancialSavings: Bool { get set }
-    var showFinancialCosts: Bool { get set }
-    var financialModel: FinancialModel { get set }
     var showInverterTemperature: Bool { get set }
     var selectedParameterGraphVariables: [String] { get set }
     var showHomeTotalOnPowerFlow: Bool { get set }
@@ -57,6 +53,15 @@ public protocol ConfigManaging {
     var showLastUpdateTimestamp: Bool { get set }
     var solarDefinitions: SolarRangeDefinitions { get set }
     var parameterGroups: [ParameterGroup] { get set }
+}
+
+public protocol FinancialConfigManaging {
+    var showFinancialEarnings: Bool { get set }
+    var showFinancialSavings: Bool { get set }
+    var showFinancialCosts: Bool { get set }
+    var financialModel: FinancialModel { get set }
+    var feedInUnitPrice: Double { get set }
+    var gridImportUnitPrice: Double { get set }
 }
 
 public class ConfigManager: ConfigManaging {
@@ -91,6 +96,8 @@ public class ConfigManager: ConfigManaging {
                 showFinancialSavings: config.showFinancialSavings,
                 showFinancialCosts: config.showFinancialCosts,
                 financialModel: FinancialModel(rawValue: config.financialModel) ?? .foxESS,
+                feedInUnitPrice: config.feedInUnitPrice,
+                gridImportUnitPrice: config.gridImportUnitPrice,
                 showInverterTemperature: config.showInverterTemperature,
                 showHomeTotalOnPowerFlow: config.showHomeTotalOnPowerFlow,
                 showInverterIcon: config.showInverterIcon,
@@ -377,6 +384,26 @@ public class ConfigManager: ConfigManaging {
             config.financialModel = newValue.rawValue
             appTheme.send(appTheme.value.copy(
                 financialModel: FinancialModel(rawValue: config.financialModel)
+            ))
+        }
+    }
+
+    public var feedInUnitPrice: Double {
+        get { config.feedInUnitPrice }
+        set {
+            config.feedInUnitPrice = newValue
+            appTheme.send(appTheme.value.copy(
+                feedInUnitPrice: config.feedInUnitPrice
+            ))
+        }
+    }
+
+    public var gridImportUnitPrice: Double {
+        get { config.gridImportUnitPrice }
+        set {
+            config.gridImportUnitPrice = newValue
+            appTheme.send(appTheme.value.copy(
+                feedInUnitPrice: config.gridImportUnitPrice
             ))
         }
     }

@@ -10,29 +10,30 @@ import Foundation
 public struct EarningsViewModel {
     private let response: EarningsResponse
     private let totalsViewModel: TotalsViewModel
+    private let config: FinancialConfigManaging
 
     public func today(_ model: FinancialModel) -> Double {
         switch model {
         case .energyStats:
-            return 0
+            return totalsViewModel.gridExport * config.feedInUnitPrice
         case .foxESS:
             return response.today.earnings
         }
     }
 
-    public func month(_ model: FinancialModel) -> Double {
+    public func month(_ model: FinancialModel) -> Double? {
         switch model {
         case .energyStats:
-            return 0
+            return nil
         case .foxESS:
             return response.month.earnings
         }
     }
 
-    public func year(_ model: FinancialModel) -> Double {
+    public func year(_ model: FinancialModel) -> Double? {
         switch model {
         case .energyStats:
-            return 0
+            return nil
         case .foxESS:
             return response.year.earnings
         }
@@ -51,9 +52,10 @@ public struct EarningsViewModel {
         response.currencySymbol
     }
 
-    public init(response: EarningsResponse, totalsViewModel: TotalsViewModel) {
+    public init(response: EarningsResponse, totalsViewModel: TotalsViewModel, config: FinancialConfigManaging) {
         self.response = response
         self.totalsViewModel = totalsViewModel
+        self.config = config
     }
 }
 
@@ -64,7 +66,8 @@ public extension EarningsViewModel {
                                                      month: EarningsResponse.Earning(generation: 2.0, earnings: 2.0),
                                                      year: EarningsResponse.Earning(generation: 3.0, earnings: 3.0),
                                                      cumulate: EarningsResponse.Earning(generation: 1.0, earnings: 1.0)),
-                          totalsViewModel: TotalsViewModel(reports: []))
+                          totalsViewModel: TotalsViewModel(reports: []),
+                          config: PreviewConfigManager())
     }
 
     static func empty() -> EarningsViewModel {
@@ -73,6 +76,7 @@ public extension EarningsViewModel {
                                                      month: EarningsResponse.Earning(generation: 0.0, earnings: 0.0),
                                                      year: EarningsResponse.Earning(generation: 0.0, earnings: 0.0),
                                                      cumulate: EarningsResponse.Earning(generation: 0.0, earnings: 0.0)),
-                          totalsViewModel: TotalsViewModel(reports: []))
+                          totalsViewModel: TotalsViewModel(reports: []),
+                          config: PreviewConfigManager())
     }
 }

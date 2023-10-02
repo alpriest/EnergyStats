@@ -38,6 +38,8 @@ public protocol Config {
     var showLastUpdateTimestamp: Bool { get set }
     var solarDefinitions: SolarRangeDefinitions { get set }
     var parameterGroups: [ParameterGroup] { get set }
+    var feedInUnitPrice: Double { get set }
+    var gridImportUnitPrice: Double { get set }
 }
 
 extension UserDefaults {
@@ -142,6 +144,12 @@ public class UserDefaultsConfig: Config {
     @UserDefaultsStoredInt(key: "financialModel", defaultValue: 1)
     public var financialModel: Int
 
+    @UserDefaultsStoredDouble(key: "feedInUnitPrice", defaultValue: 0.05)
+    public var feedInUnitPrice: Double
+
+    @UserDefaultsStoredDouble(key: "gridImportUnitPrice", defaultValue: 0.15)
+    public var gridImportUnitPrice: Double
+
     public var selectedParameterGraphVariables: [String] {
         get {
             UserDefaults.shared.array(forKey: "selectedParameterGraphVariables") as? [String] ?? []
@@ -191,6 +199,21 @@ public struct UserDefaultsStoredInt {
     public var wrappedValue: Int {
         get {
             (UserDefaults.shared.object(forKey: key) as? Int) ?? defaultValue
+        }
+        set {
+            UserDefaults.shared.set(newValue, forKey: key)
+        }
+    }
+}
+
+@propertyWrapper
+public struct UserDefaultsStoredDouble {
+    var key: String
+    var defaultValue: Double = 0.0
+
+    public var wrappedValue: Double {
+        get {
+            (UserDefaults.shared.object(forKey: key) as? Double) ?? defaultValue
         }
         set {
             UserDefaults.shared.set(newValue, forKey: key)

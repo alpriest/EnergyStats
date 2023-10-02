@@ -21,17 +21,21 @@ struct EarningsView: View {
                 alignment: .center
             )
 
-            SubLabelledView(
-                value: viewModel.month(appTheme.financialModel).roundedToString(decimalPlaces: 2, currencySymbol: viewModel.currencySymbol),
-                label: String(key: .month),
-                alignment: .center
-            )
+            OptionalView(viewModel.month(appTheme.financialModel)) {
+                SubLabelledView(
+                    value: $0.roundedToString(decimalPlaces: 2, currencySymbol: viewModel.currencySymbol),
+                    label: String(key: .month),
+                    alignment: .center
+                )
+            }
 
-            SubLabelledView(
-                value: viewModel.year(appTheme.financialModel).roundedToString(decimalPlaces: 2, currencySymbol: viewModel.currencySymbol),
-                label: String(key: .year),
-                alignment: .center
-            )
+            OptionalView(viewModel.year(appTheme.financialModel)) {
+                SubLabelledView(
+                    value: $0.roundedToString(decimalPlaces: 2, currencySymbol: viewModel.currencySymbol),
+                    label: String(key: .year),
+                    alignment: .center
+                )
+            }
 
             OptionalView(viewModel.cumulate(appTheme.financialModel)) {
                 SubLabelledView(

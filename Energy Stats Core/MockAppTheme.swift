@@ -28,6 +28,8 @@ public extension AppTheme {
             showFinancialSavings: false,
             showFinancialCosts: false,
             financialModel: .energyStats,
+            feedInUnitPrice: 0.05,
+            gridImportUnitPrice: 0.15,
             showInverterTemperature: showInverterTemperature,
             showHomeTotalOnPowerFlow: showHomeTotalOnPowerFlow,
             showInverterIcon: true,

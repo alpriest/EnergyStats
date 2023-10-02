@@ -28,6 +28,8 @@ public struct AppTheme {
     public var showFinancialSavings: Bool
     public var showFinancialCosts: Bool
     public var financialModel: FinancialModel
+    public var feedInUnitPrice: Double
+    public var gridImportUnitPrice: Double
     public var showInverterTemperature: Bool
     public var showHomeTotalOnPowerFlow: Bool
     public var showInverterIcon: Bool
@@ -53,6 +55,8 @@ public struct AppTheme {
         showFinancialSavings: Bool,
         showFinancialCosts: Bool,
         financialModel: FinancialModel,
+        feedInUnitPrice: Double,
+        gridImportUnitPrice: Double,
         showInverterTemperature: Bool,
         showHomeTotalOnPowerFlow: Bool,
         showInverterIcon: Bool,
@@ -77,6 +81,8 @@ public struct AppTheme {
         self.showFinancialSavings = showFinancialSavings
         self.showFinancialCosts = showFinancialCosts
         self.financialModel = financialModel
+        self.feedInUnitPrice = feedInUnitPrice
+        self.gridImportUnitPrice = gridImportUnitPrice
         self.showInverterTemperature = showInverterTemperature
         self.showHomeTotalOnPowerFlow = showHomeTotalOnPowerFlow
         self.showInverterIcon = showInverterIcon
@@ -103,6 +109,8 @@ public struct AppTheme {
         showFinancialSavings: Bool? = nil,
         showFinancialCosts: Bool? = nil,
         financialModel: FinancialModel? = nil,
+        feedInUnitPrice: Double? = nil,
+        gridImportUnitPrice: Double? = nil,
         showInverterTemperature: Bool? = nil,
         showHomeTotalOnPowerFlow: Bool? = nil,
         showInverterIcon: Bool? = nil,
@@ -128,6 +136,8 @@ public struct AppTheme {
             showFinancialSavings: showFinancialSavings ?? self.showFinancialSavings,
             showFinancialCosts: showFinancialCosts ?? self.showFinancialCosts,
             financialModel: financialModel ?? self.financialModel,
+            feedInUnitPrice: feedInUnitPrice ?? self.feedInUnitPrice,
+            gridImportUnitPrice: gridImportUnitPrice ?? self.gridImportUnitPrice,
             showInverterTemperature: showInverterTemperature ?? self.showInverterTemperature,
             showHomeTotalOnPowerFlow: showHomeTotalOnPowerFlow ?? self.showHomeTotalOnPowerFlow,
             showInverterIcon: showInverterIcon ?? self.showInverterIcon,
