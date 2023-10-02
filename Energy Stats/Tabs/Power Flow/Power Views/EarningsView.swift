@@ -15,32 +15,10 @@ struct EarningsView: View {
 
     var body: some View {
         HStack {
-            SubLabelledView(
-                value: viewModel.today(appTheme.financialModel).roundedToString(decimalPlaces: 2, currencySymbol: viewModel.currencySymbol),
-                label: String(key: .today),
-                alignment: .center
-            )
-
-            OptionalView(viewModel.month(appTheme.financialModel)) {
+            ForEach(viewModel.amounts(appTheme.financialModel), id: \.self) { amount in
                 SubLabelledView(
-                    value: $0.roundedToString(decimalPlaces: 2, currencySymbol: viewModel.currencySymbol),
-                    label: String(key: .month),
-                    alignment: .center
-                )
-            }
-
-            OptionalView(viewModel.year(appTheme.financialModel)) {
-                SubLabelledView(
-                    value: $0.roundedToString(decimalPlaces: 2, currencySymbol: viewModel.currencySymbol),
-                    label: String(key: .year),
-                    alignment: .center
-                )
-            }
-
-            OptionalView(viewModel.cumulate(appTheme.financialModel)) {
-                SubLabelledView(
-                    value: $0.roundedToString(decimalPlaces: 2, currencySymbol: viewModel.currencySymbol),
-                    label: String(key: .cumulate),
+                    value: amount.formattedAmount(),
+                    label: String(key: amount.title),
                     alignment: .center
                 )
             }

@@ -37,12 +37,15 @@ public struct LocalizedString {
         case today = "today"
         case month = "month"
         case year = "year"
-        case cumulate = "total"
+        case total = "total"
         case tapIconForDetail = "tap_for_detail"
         case breakpoint = "breakpoint"
         case displayUnitKilowattsDescription = "display_unit_kilowatts_description"
         case displayUnitWattsDescription = "display_unit_watts_description"
         case displayUnitAdaptiveDescription = "display_unit_adaptive_description"
+        case exportedIncome = "exported_income"
+        case importedCost = "imported_cost"
+        case solarSavings = "solar_savings"
 
         public enum Accessibility: String, RawRepresentable {
             case inverter = "accessibility.inverter"

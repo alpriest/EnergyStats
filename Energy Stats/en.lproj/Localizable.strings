@@ -132,7 +132,7 @@
 "today" = "today";
 "month" = "month";
 "year" = "year";
-"cumulate" = "total";
+"total" = "total";
 "display_unit_kilowatts_description" = "All values are shown as kilowatts. E.g. %1$@, %2$@";
 "display_unit_watts_description" = "All values are shown as watts. E.g. %1$@, %2$@";
 "display_unit_adaptive_description" = "Values are shown as kilowatts unless under 1 kilowatt when they are shown as watts. E.g. %1$@, %2$@";
@@ -140,6 +140,9 @@
 "Watts" = "Watts";
 "Kilowatts" = "Kilowatts";
 "Adaptive" = "Adaptive";
+"exported_income" = "exported";
+"imported_cost" = "imported";
+"solar_savings" = "savings";
 
 /* Inverter page */
 "self_use_mode" = "In this mode, the inverter prioritises power allocation as follows:\n\n1. House Load\n2. Battery Charging\n3. Export";

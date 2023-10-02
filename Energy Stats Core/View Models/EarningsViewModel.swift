@@ -7,44 +7,50 @@
 
 import Foundation
 
+public struct FinanceAmount: Hashable, Identifiable {
+    public let title: LocalizedString.Key
+    let amount: Double
+    private let currencySymbol: String
+
+    public init(title: LocalizedString.Key, amount: Double, currencySymbol: String) {
+        self.title = title
+        self.amount = amount
+        self.currencySymbol = currencySymbol
+    }
+
+    public func formattedAmount() -> String {
+        amount.roundedToString(decimalPlaces: 2, currencySymbol: currencySymbol)
+    }
+
+    public var id: String { title.rawValue }
+}
+
 public struct EarningsViewModel {
     private let response: EarningsResponse
     private let totalsViewModel: TotalsViewModel
     private let config: FinancialConfigManaging
 
-    public func today(_ model: FinancialModel) -> Double {
+    public func amounts(_ model: FinancialModel) -> [FinanceAmount] {
         switch model {
         case .energyStats:
-            return totalsViewModel.gridExport * config.feedInUnitPrice
-        case .foxESS:
-            return response.today.earnings
-        }
-    }
+            let exportIncome = totalsViewModel.gridExport * config.feedInUnitPrice
+            let gridPurchaseCost = totalsViewModel.gridImport * config.gridImportUnitPrice
+            let solarSaving = 0 * config.gridImportUnitPrice // todo
+            let total = exportIncome + solarSaving - gridPurchaseCost
 
-    public func month(_ model: FinancialModel) -> Double? {
-        switch model {
-        case .energyStats:
-            return nil
+            return [
+                FinanceAmount(title: .exportedIncome, amount: exportIncome, currencySymbol: response.currencySymbol),
+                FinanceAmount(title: .importedCost, amount: gridPurchaseCost, currencySymbol: response.currencySymbol),
+                FinanceAmount(title: .solarSavings, amount: solarSaving, currencySymbol: response.currencySymbol),
+                FinanceAmount(title: .total, amount: total, currencySymbol: response.currencySymbol)
+            ]
         case .foxESS:
-            return response.month.earnings
-        }
-    }
-
-    public func year(_ model: FinancialModel) -> Double? {
-        switch model {
-        case .energyStats:
-            return nil
-        case .foxESS:
-            return response.year.earnings
-        }
-    }
-
-    public func cumulate(_ model: FinancialModel) -> Double? {
-        switch model {
-        case .energyStats:
-            return nil
-        case .foxESS:
-            return response.cumulate.earnings
+            return [
+                FinanceAmount(title: .today, amount: response.today.earnings, currencySymbol: response.currencySymbol),
+                FinanceAmount(title: .month, amount: response.month.earnings, currencySymbol: response.currencySymbol),
+                FinanceAmount(title: .year, amount: response.year.earnings, currencySymbol: response.currencySymbol),
+                FinanceAmount(title: .total, amount: response.cumulate.earnings, currencySymbol: response.currencySymbol)
+            ]
         }
     }
 
