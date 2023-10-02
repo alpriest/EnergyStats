@@ -139,8 +139,13 @@ class PowerFlowTabViewModel: ObservableObject {
                                 self.configManager.variables.named("pvPower"),
                                 self.configManager.variables.named("meterPower2")]
 
+            var reportVariables = [ReportVariable.loads, .feedIn, .gridConsumption]
+            if currentDevice.hasBattery {
+                reportVariables.append(contentsOf: [.chargeEnergyToTal, .dischargeEnergyToTal])
+            }
+
             let totals = try await self.network.fetchReport(deviceID: currentDevice.deviceID,
-                                                            variables: [.loads, .feedIn, .gridConsumption],
+                                                            variables: reportVariables,
                                                             queryDate: .now(),
                                                             reportType: .month)
             let earnings = try await self.network.fetchEarnings(deviceID: currentDevice.deviceID)

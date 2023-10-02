@@ -47,12 +47,40 @@ struct ApproximationsView: View {
                         }
                     }
 
-                    if let totalSolarGenerated = viewModel.totalSolarGenerated {
+                    if let totals = viewModel.totalsViewModel {
                         HStack {
                             Text("Solar generated")
                                 .accessibilityElement(children: .ignore)
                             Spacer()
-                            EnergyText(amount: totalSolarGenerated, appTheme: appTheme, type: .totalSolarGenerated) // TODO:
+                            EnergyText(amount: totals.solar, appTheme: appTheme, type: .totalSolarGenerated)
+                        }
+
+                        HStack {
+                            Text("Exported income")
+                                .accessibilityElement(children: .ignore)
+                            Spacer()
+                            Text("£0.00")
+                        }
+
+                        HStack {
+                            Text("Imported cost")
+                                .accessibilityElement(children: .ignore)
+                            Spacer()
+                            Text("£0.82")
+                        }
+
+                        HStack {
+                            Text("Solar savings")
+                                .accessibilityElement(children: .ignore)
+                            Spacer()
+                            Text("£1.33")
+                        }
+
+                        HStack {
+                            Text("Total")
+                                .accessibilityElement(children: .ignore)
+                            Spacer()
+                            Text("£0.51")
                         }
                     }
                 }.padding()

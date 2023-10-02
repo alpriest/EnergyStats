@@ -35,7 +35,7 @@ public struct EarningsViewModel {
         case .energyStats:
             let exportIncome = totalsViewModel.gridExport * config.feedInUnitPrice
             let gridPurchaseCost = totalsViewModel.gridImport * config.gridImportUnitPrice
-            let solarSaving = 0 * config.gridImportUnitPrice // todo
+            let solarSaving = totalsViewModel.solar * config.gridImportUnitPrice
             let total = exportIncome + solarSaving - gridPurchaseCost
 
             return [
