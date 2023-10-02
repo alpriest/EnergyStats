@@ -25,25 +25,37 @@ public struct FinanceAmount: Hashable, Identifiable {
     public var id: String { title.rawValue }
 }
 
-public struct EarningsViewModel {
-    private let response: EarningsResponse
+public struct EnergyStatsFinancialModel {
     private let totalsViewModel: TotalsViewModel
     private let config: FinancialConfigManaging
+    private let currencySymbol: String
+    public let exportIncome: FinanceAmount
+    public let solarSaving: FinanceAmount
+    public let total: FinanceAmount
+
+    public init(totalsViewModel: TotalsViewModel, config: FinancialConfigManaging, currencySymbol: String) {
+        self.totalsViewModel = totalsViewModel
+        self.config = config
+        self.currencySymbol = currencySymbol
+
+        exportIncome = FinanceAmount(title: .exportedIncome, amount: totalsViewModel.gridExport * config.feedInUnitPrice, currencySymbol: currencySymbol)
+        solarSaving = FinanceAmount(title: .solarSavings, amount: totalsViewModel.solar * config.gridImportUnitPrice, currencySymbol: currencySymbol)
+        total = FinanceAmount(title: .total, amount: exportIncome.amount + solarSaving.amount, currencySymbol: currencySymbol)
+    }
+
+    func amounts() -> [FinanceAmount] {
+        [exportIncome, solarSaving, total]
+    }
+}
+
+public struct EarningsViewModel {
+    private let response: EarningsResponse
+    private let energyStatsFinancialModel: EnergyStatsFinancialModel
 
     public func amounts(_ model: FinancialModel) -> [FinanceAmount] {
         switch model {
         case .energyStats:
-            let exportIncome = totalsViewModel.gridExport * config.feedInUnitPrice
-            let gridPurchaseCost = totalsViewModel.gridImport * config.gridImportUnitPrice
-            let solarSaving = totalsViewModel.solar * config.gridImportUnitPrice
-            let total = exportIncome + solarSaving - gridPurchaseCost
-
-            return [
-                FinanceAmount(title: .exportedIncome, amount: exportIncome, currencySymbol: response.currencySymbol),
-                FinanceAmount(title: .importedCost, amount: gridPurchaseCost, currencySymbol: response.currencySymbol),
-                FinanceAmount(title: .solarSavings, amount: solarSaving, currencySymbol: response.currencySymbol),
-                FinanceAmount(title: .total, amount: total, currencySymbol: response.currencySymbol)
-            ]
+            return energyStatsFinancialModel.amounts()
         case .foxESS:
             return [
                 FinanceAmount(title: .today, amount: response.today.earnings, currencySymbol: response.currencySymbol),
@@ -58,10 +70,9 @@ public struct EarningsViewModel {
         response.currencySymbol
     }
 
-    public init(response: EarningsResponse, totalsViewModel: TotalsViewModel, config: FinancialConfigManaging) {
+    public init(response: EarningsResponse, energyStatsFinancialModel: EnergyStatsFinancialModel) {
         self.response = response
-        self.totalsViewModel = totalsViewModel
-        self.config = config
+        self.energyStatsFinancialModel = energyStatsFinancialModel
     }
 }
 
@@ -72,17 +83,19 @@ public extension EarningsViewModel {
                                                      month: EarningsResponse.Earning(generation: 2.0, earnings: 2.0),
                                                      year: EarningsResponse.Earning(generation: 3.0, earnings: 3.0),
                                                      cumulate: EarningsResponse.Earning(generation: 1.0, earnings: 1.0)),
-                          totalsViewModel: TotalsViewModel(reports: []),
-                          config: PreviewConfigManager())
+                          energyStatsFinancialModel: EnergyStatsFinancialModel(totalsViewModel: TotalsViewModel(reports: []),
+                                                                               config: PreviewConfigManager(),
+                                                                               currencySymbol: "£"))
     }
 
     static func empty() -> EarningsViewModel {
-        EarningsViewModel(response: EarningsResponse(currency: "",
+        EarningsViewModel(response: EarningsResponse(currency: "£",
                                                      today: EarningsResponse.Earning(generation: 0.0, earnings: 0.0),
                                                      month: EarningsResponse.Earning(generation: 0.0, earnings: 0.0),
                                                      year: EarningsResponse.Earning(generation: 0.0, earnings: 0.0),
                                                      cumulate: EarningsResponse.Earning(generation: 0.0, earnings: 0.0)),
-                          totalsViewModel: TotalsViewModel(reports: []),
-                          config: PreviewConfigManager())
+                          energyStatsFinancialModel: EnergyStatsFinancialModel(totalsViewModel: TotalsViewModel(reports: []),
+                                                                               config: PreviewConfigManager(),
+                                                                               currencySymbol: "£"))
     }
 }

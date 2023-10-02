@@ -176,7 +176,7 @@ class PowerFlowTabViewModel: ObservableObject {
                 home: currentViewModel.currentHomeConsumption,
                 grid: currentViewModel.currentGrid,
                 todaysGeneration: earnings.today.generation,
-                earnings: EarningsViewModel(response: earnings, totalsViewModel: totalsViewModel, config: configManager),
+                earnings: EarningsViewModel(response: earnings, energyStatsFinancialModel: EnergyStatsFinancialModel(totalsViewModel: totalsViewModel, config: configManager, currencySymbol: earnings.currencySymbol)),
                 inverterTemperatures: currentViewModel.currentTemperatures,
                 homeTotal: totalsViewModel.home,
                 gridImportTotal: totalsViewModel.gridImport,

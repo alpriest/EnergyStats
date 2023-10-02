@@ -38,6 +38,7 @@ class StatsTabViewModel: ObservableObject {
     @Published var absoluteSelfSufficiencyEstimate: String? = nil
     @Published var homeUsage: Double? = nil
     @Published var totalsViewModel: TotalsViewModel? = nil
+    @Published var financialModel: EnergyStatsFinancialModel? = nil
     private var totals: [ReportVariable: Double] = [:]
     private var max: StatsGraphValue?
     var exportFile: CSVTextFile?
@@ -149,11 +150,13 @@ class StatsTabViewModel: ObservableObject {
 
         let batteryCharge = totals[ReportVariable.chargeEnergyToTal]
         let batteryDischarge = totals[ReportVariable.dischargeEnergyToTal]
-        totalsViewModel = TotalsViewModel(grid: grid,
+        let totalsViewModel = TotalsViewModel(grid: grid,
                                           feedIn: feedIn,
                                           loads: loads,
                                           batteryCharge: batteryCharge ?? 0,
                                           batteryDischarge: batteryDischarge ?? 0)
+        self.totalsViewModel = totalsViewModel
+        financialModel = EnergyStatsFinancialModel(totalsViewModel: totalsViewModel, config: configManager, currencySymbol: "£")
 
         calculateSelfSufficiencyEstimate(grid: grid,
                                          feedIn: feedIn,
