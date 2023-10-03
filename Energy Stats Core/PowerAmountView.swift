@@ -61,7 +61,7 @@ public struct EnergyText: View {
     private var amountWithUnit: String {
         switch appTheme.displayUnit {
         case .adaptive:
-            if amount < 1000 {
+            if amount < 1 {
                 return amount.wh()
             } else {
                 return amount.kWh(appTheme.decimalPlaces)

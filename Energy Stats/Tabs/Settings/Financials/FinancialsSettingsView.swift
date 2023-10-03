@@ -16,6 +16,7 @@ struct FinancialsSettingsView: View {
     }
 
     var body: some View {
+        Form {
         Section {
             Toggle(isOn: $viewModel.showFinancialSummary) {
                 Text("Show financial summary")
@@ -41,12 +42,13 @@ struct FinancialsSettingsView: View {
             }
         }
 
-        if viewModel.showFinancialSummary {
-            switch viewModel.financialModel {
-            case .energyStats:
-                energyStats()
-            case .foxESS:
-                foxESS()
+            if viewModel.showFinancialSummary {
+                switch viewModel.financialModel {
+                case .energyStats:
+                    energyStats()
+                case .foxESS:
+                    foxESS()
+                }
             }
         }
     }
