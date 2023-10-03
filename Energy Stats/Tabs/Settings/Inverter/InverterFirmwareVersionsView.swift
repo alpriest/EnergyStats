@@ -25,7 +25,7 @@ struct InverterFirmwareVersionsView: View {
                         Text("Find out more about firmware versions from the ") +
                             Text("foxesscommunity.com")
                             .foregroundColor(Color.blue) +
-                            Text(" website")
+                            Text(" ") + Text("website")
                     }
                     .onTapGesture {
                         UIApplication.shared.open(URL(string: "https://foxesscommunity.com/viewforum.php?f=29")!)
