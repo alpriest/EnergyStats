@@ -31,7 +31,9 @@ struct ContentView: View {
 
                 await network.fetchErrorMessages()
                 try await configManager.fetchDevices()
-                try await configManager.refreshFirmwareVersions()
+                Task {
+                    try await configManager.refreshFirmwareVersions()
+                }
 
                 state = .inactive
             } catch let error as ConfigManager.NoDeviceFoundError {
