@@ -58,7 +58,7 @@ struct ApproximationsView: View {
 
                     if let financialModel = viewModel.financialModel {
                         HStack {
-                            Text("Exported income")
+                            Text("Export income")
                             Spacer()
                             Text(financialModel.exportIncome.formattedAmount())
                         }

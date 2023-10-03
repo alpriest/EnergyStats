@@ -135,6 +135,8 @@
 		418240782A9A33E300101064 /* TotalsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418240772A9A33E300101064 /* TotalsViewModel.swift */; };
 		418547492A3A1C7A000128C7 /* PowerAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127690128EC865000D5A094 /* PowerAmountView.swift */; };
 		4185474C2A3B1025000128C7 /* SunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4162BC2F2A097C1300DFEDC1 /* SunView.swift */; };
+		418EB4852ACC012C0021B87A /* FinancialsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418EB4842ACC012C0021B87A /* FinancialsSettingsView.swift */; };
+		418EB4872ACC019A0021B87A /* FinancialsSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418EB4862ACC019A0021B87A /* FinancialsSettingsViewModel.swift */; };
 		418EEEB52916843A006A8290 /* View+If.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418EEEB42916843A006A8290 /* View+If.swift */; };
 		41923E3C2916B8A800D1A8C5 /* battery-soc-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41923E3B2916B8A800D1A8C5 /* battery-soc-success.json */; };
 		41923E3E2916BC6F00D1A8C5 /* ParametersGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41923E3D2916BC6F00D1A8C5 /* ParametersGraphView.swift */; };
@@ -423,6 +425,8 @@
 		4185FAB52A3B74E60082D53F /* BatteryStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryStatusView.swift; sourceTree = "<group>"; };
 		4185FAB72A3C3F620082D53F /* WidgetEnergyTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetEnergyTextView.swift; sourceTree = "<group>"; };
 		4185FAB92A3C41E70082D53F /* FlowArrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowArrow.swift; sourceTree = "<group>"; };
+		418EB4842ACC012C0021B87A /* FinancialsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancialsSettingsView.swift; sourceTree = "<group>"; };
+		418EB4862ACC019A0021B87A /* FinancialsSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancialsSettingsViewModel.swift; sourceTree = "<group>"; };
 		418EEEB42916843A006A8290 /* View+If.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+If.swift"; sourceTree = "<group>"; };
 		41923E3B2916B8A800D1A8C5 /* battery-soc-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "battery-soc-success.json"; sourceTree = "<group>"; };
 		41923E3D2916BC6F00D1A8C5 /* ParametersGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersGraphView.swift; sourceTree = "<group>"; };
@@ -895,6 +899,15 @@
 			path = "Power Flow Widget";
 			sourceTree = "<group>";
 		};
+		418EB4832ACC011C0021B87A /* Financials */ = {
+			isa = PBXGroup;
+			children = (
+				418EB4842ACC012C0021B87A /* FinancialsSettingsView.swift */,
+				418EB4862ACC019A0021B87A /* FinancialsSettingsViewModel.swift */,
+			);
+			path = Financials;
+			sourceTree = "<group>";
+		};
 		4192F9972A86748F0035DAB8 /* Data Logger */ = {
 			isa = PBXGroup;
 			children = (
@@ -1011,6 +1024,7 @@
 		41E1DFDD28D87778001235B9 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				418EB4832ACC011C0021B87A /* Financials */,
 				414FB0D62A924E3100845486 /* Approximations */,
 				4192F9972A86748F0035DAB8 /* Data Logger */,
 				4110290B2A71B704004018BB /* Battery Settings */,
@@ -1382,6 +1396,7 @@
 				418EEEB52916843A006A8290 /* View+If.swift in Sources */,
 				41C8496B2A8BBF1500431410 /* InverterIconView.swift in Sources */,
 				4140145028C70B3200EA5BA1 /* TabbedView.swift in Sources */,
+				418EB4872ACC019A0021B87A /* FinancialsSettingsViewModel.swift in Sources */,
 				411029132A71C066004018BB /* Tintable.swift in Sources */,
 				4141B20028D86C7200B60157 /* UserManager.swift in Sources */,
 				41AF2F412AA4C674008FCA2E /* BatteryPowerFooterView.swift in Sources */,
@@ -1412,6 +1427,7 @@
 				41AF2F452AA4C74F008FCA2E /* GridPowerFooterView.swift in Sources */,
 				4110291B2A72AFAA004018BB /* BatteryChargeScheduleSettingsViewModel.swift in Sources */,
 				416318C029DDD82800C2C285 /* ResponseDebugView.swift in Sources */,
+				418EB4852ACC012C0021B87A /* FinancialsSettingsView.swift in Sources */,
 				414BF82829B4918300E2EB51 /* SettingsTabViewModel.swift in Sources */,
 				41CD1F322A1414C1006B0C00 /* StatsGraphVariableToggles.swift in Sources */,
 				4160098D2A8D1A690096CCD9 /* BottomButtonsView.swift in Sources */,
