@@ -56,7 +56,6 @@ struct SettingsFooterView: View {
                         UIApplication.shared.open(url, options: [:], completionHandler: nil)
                     } label: {
                         Text("settings.donateVia")
-                            .accessibilityValue("Donate via PayPal")
                         Image("paypal_logo")
                             .resizable()
                             .aspectRatio(contentMode: .fit)

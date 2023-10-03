@@ -45,7 +45,7 @@ public struct LocalizedString {
         case displayUnitAdaptiveDescription = "display_unit_adaptive_description"
         case exportedIncome = "exported_income"
         case importedCost = "imported_cost"
-        case gridImportAvoided = "grid_import_avoided"
+        case gridImportAvoidedShortTitle = "grid_import_avoided_short_title"
 
         public enum Accessibility: String, RawRepresentable {
             case inverter = "accessibility.inverter"
