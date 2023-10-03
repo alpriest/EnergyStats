@@ -43,8 +43,10 @@ struct FinancialsSettingsView: View {
                     case .energyStats:
                         energyStatsFooter()
                     case .foxESS:
-                        Text("This unit price is stored on the FoxESS Cloud.")
-                        Text("foxess_earnings_calculation_description")
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("This unit price is stored on the FoxESS Cloud.")
+                            Text("foxess_earnings_calculation_description")
+                        }
                     }
                 }
             }
@@ -60,7 +62,7 @@ struct FinancialsSettingsView: View {
                 .padding(.bottom, 24)
 
             VStack(alignment: .leading) {
-                Text("Exported").bold()
+                Text("exported_income_short_title").bold()
 
                 Text("Approximate income received from exporting energy to the grid.")
 
@@ -71,7 +73,7 @@ struct FinancialsSettingsView: View {
             .padding(.bottom, 16)
 
             VStack(alignment: .leading) {
-                Text("Avoided").bold()
+                Text("grid_import_avoided_short_title").bold()
 
                 Text("Approximate expenditure avoided by generating your own solar power.")
 
@@ -82,12 +84,12 @@ struct FinancialsSettingsView: View {
             .padding(.bottom, 16)
 
             VStack(alignment: .leading) {
-                Text("Total").bold()
+                Text("total").bold()
 
                 Text("Approximate total benefit of having your solar/battery installation.")
 
                 VStack(alignment: .center) {
-                    Text("exported + avoided").italic()
+                    (Text("exported_income_short_title") + Text(" + ") + Text("grid_import_avoided_short_title")).italic()
                 }.frame(maxWidth: .infinity)
             }
             .padding(.bottom, 16)
@@ -98,6 +100,7 @@ struct FinancialsSettingsView: View {
     func makeTextField(title: LocalizedStringKey, currencyCode: LocalizedStringKey, text: Binding<String>) -> some View {
         HStack {
             Text(title)
+                .multilineTextAlignment(.leading)
             Spacer()
             Text(currencyCode)
             TextField(0.roundedToString(decimalPlaces: 2, currencySymbol: nil), text: text)

@@ -113,6 +113,34 @@
         }
       }
     },
+    " + " : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
+    },
     " Wh" : {
       "localizations" : {
         "de" : {
@@ -165,34 +193,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : " gdzie resztkowa jest szacowana przez Twoją instalację i może nie być dokładna. Dotknij powyższą pojemność, aby wprowadzić wartość ręcznie."
-          }
-        }
-      }
-    },
-    "-" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
           }
         }
       }
@@ -282,34 +282,6 @@
       }
     },
     "°C" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        }
-      }
-    },
-    "+" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1382,6 +1354,90 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zastosuj"
+          }
+        }
+      }
+    },
+    "Approximate expenditure avoided by generating your own solar power." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ungefähre vermiedene Ausgaben durch die Erzeugung Ihrer eigenen Solarenergie."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gasto aproximado evitado al generar tu propia energía solar."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spesa approssimativa evitata generando la tua energia solare."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Przybliżone wydatki uniknięte dzięki własnemu wytwarzaniu energii słonecznej."
+          }
+        }
+      }
+    },
+    "Approximate income received from exporting energy to the grid." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ungefähr erzielte Einnahmen aus dem Export von Energie ins Netz."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingresos aproximados recibidos por exportar energía a la red."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entrate approssimative ricevute dall'esportazione di energia nella rete."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Przybliżone dochody uzyskane z eksportu energii do sieci."
+          }
+        }
+      }
+    },
+    "Approximate total benefit of having your solar/battery installation." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ungefährer Gesamtnutzen Ihrer Solar-/Batterieanlage."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beneficio total aproximado de tener tu instalación solar/batería."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beneficio totale approssimativo di avere la tua installazione solare/batteria."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Przybliżony ogólny korzyść z posiadania instalacji solarnej/baterii."
           }
         }
       }
@@ -3439,8 +3495,8 @@
       "localizations" : {
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Zeigt nur auf der Übersichtsseite eine Nettoschätzung der finanziellen Situation für heute an, und eine vollständige Aufschlüsselung des ausgewählten Zeitraums auf der Statistikseite."
+            "state" : "translated",
+            "value" : "Zeigt Finanzschätzungen nur für heute auf der Flow-Seite und für den ausgewählten Zeitraum auf der Statistik-Seite."
           }
         },
         "en" : {
@@ -3451,20 +3507,20 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Muestra la estimación financiera neta solo para hoy en la página de flujo y un desglose completo del período de tiempo seleccionado en la página de estadísticas."
+            "state" : "translated",
+            "value" : "Muestra estimaciones financieras solo para hoy en la página de flujo, y para el período de tiempo seleccionado en la página de estadísticas."
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Mostra solo una stima finanziaria netta per oggi nella pagina dei dati in tempo reale, e una completa dettagliata del periodo di tempo selezionato nella pagina delle statistiche."
+            "state" : "translated",
+            "value" : "Mostra stime finanziarie solo per oggi sulla pagina di flusso e per il periodo di tempo selezionato sulla pagina delle statistiche."
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Wyświetla dzisiejszą szacunkową sytuację finansową tylko na stronie z przepływem, a pełny rozbicie wybranego okresu czasu na stronie statystyk."
+            "state" : "translated",
+            "value" : "Pokazuje szacunki finansowe tylko na stronie przepływu, a także dla wybranego okresu czasu na stronie statystyk."
           }
         }
       }
@@ -3885,34 +3941,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Model finansowy"
-          }
-        }
-      }
-    },
-    "Financial summary is a total of:" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Die Finanzübersicht ist eine Summe von:"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "El resumen financiero es un total de:"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Il riepilogo finanziario è un totale di:"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Podsumowanie finansowe to suma:"
           }
         }
       }
@@ -4478,34 +4506,6 @@
         }
       }
     },
-    "GridImport kWh * ImportUnitPrice" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        }
-      }
-    },
     "Group" : {
       "localizations" : {
         "de" : {
@@ -4828,41 +4828,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Import całkowity"
-          }
-        }
-      }
-    },
-    "imported_cost_short_title" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "importiert"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "imported"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "importado"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Costo importato"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "importowano"
           }
         }
       }
@@ -9710,7 +9675,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gesamt"
+            "value" : "gesamt"
           }
         },
         "en" : {
