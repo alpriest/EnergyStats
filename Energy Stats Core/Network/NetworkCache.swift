@@ -24,7 +24,7 @@ struct CachedItem {
 public class NetworkCache: Networking {
     private let network: Networking
     private var cache: [String: CachedItem] = [:]
-    private let shortCacheDurationInSeconds: TimeInterval = 3
+    private let shortCacheDurationInSeconds: TimeInterval = 5
 
     public init(network: Networking) {
         self.network = network
