@@ -60,7 +60,7 @@ struct ErrorAlertView: View {
             }
 
             Button(action: { userManager.logout() }) {
-                Text("Logout")
+                Text("logout")
             }.buttonStyle(.bordered)
         }
         .frame(height: 200)

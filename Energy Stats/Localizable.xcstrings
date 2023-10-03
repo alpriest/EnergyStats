@@ -9,7 +9,19 @@
             "value" : ""
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
@@ -25,7 +37,19 @@
             "value" : ""
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
@@ -41,7 +65,19 @@
             "value" : ""
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
@@ -57,7 +93,19 @@
             "value" : ""
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
@@ -73,7 +121,19 @@
             "value" : ""
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
@@ -117,7 +177,19 @@
             "value" : ""
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
@@ -133,7 +205,19 @@
             "value" : ""
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
@@ -149,7 +233,19 @@
             "value" : ""
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
@@ -165,7 +261,19 @@
             "value" : ""
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
@@ -181,7 +289,19 @@
             "value" : ""
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
@@ -197,7 +317,19 @@
             "value" : ""
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
@@ -213,7 +345,19 @@
             "value" : ""
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
@@ -257,7 +401,19 @@
             "value" : ""
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
@@ -273,7 +429,19 @@
             "value" : ""
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
@@ -328,6 +496,12 @@
             "state" : "translated",
             "value" : "6 ore"
           }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "6 godzin"
+          }
         }
       }
     },
@@ -350,6 +524,12 @@
             "state" : "translated",
             "value" : "12 ore"
           }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "12 godzin"
+          }
         }
       }
     },
@@ -371,6 +551,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "24 ore"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "24 godziny"
           }
         }
       }
@@ -1124,10 +1310,22 @@
             "value" : "Betrag"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cantidad"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Importo"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kwota"
           }
         }
       }
@@ -1140,10 +1338,22 @@
             "value" : "Der eingegebene Betrag muss größer als 0 sein"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La cantidad ingresada debe ser mayor que 0"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "L'importo inserito deve essere maggiore di 0"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wprowadzona kwota musi być większa niż 0"
           }
         }
       }
@@ -1184,10 +1394,22 @@
             "value" : "Schätzungen"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aproximaciones"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Approssimazioni"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Przybliżenia"
           }
         }
       }
@@ -1382,10 +1604,22 @@
             "value" : "Akku-Fehler. Tippen Sie für Details"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error de la batería. Toque para más detalles"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Errore della batteria. Tocca per dettagli"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Błąd baterii. Dotknij, aby zobaczyć szczegóły"
           }
         }
       }
@@ -1426,10 +1660,22 @@
             "value" : "Batterieeinstellungen"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configuración de la batería"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impostazioni della batteria"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ustawienia baterii"
           }
         }
       }
@@ -1442,10 +1688,22 @@
             "value" : "Batteriezeiten"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tiempos de la batería"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tempi di carica della batteria"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Czasy pracy baterii"
           }
         }
       }
@@ -1843,10 +2101,22 @@
             "value" : "Wechseln des Wechselrichterbetriebsmodus"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cambiar el modo de trabajo del inversor"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cambia modalità di lavoro dell'inverter"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zmiana trybu pracy falownika"
           }
         }
       }
@@ -1859,10 +2129,22 @@
             "value" : "Ändert den Arbeitsmodus des Wechselrichters"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cambia el modo de trabajo del inversor"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Modifica la modalità di lavoro dell'inverter"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zmienia tryb pracy falownika"
           }
         }
       }
@@ -1966,10 +2248,22 @@
             "value" : "Überprüfen Sie den Ladezustand des Speicherakkus"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verificar el estado de carga de la batería de almacenamiento"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Verifica lo stato di carica della batteria di accumulo"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sprawdź stan naładowania baterii magazynującej"
           }
         }
       }
@@ -1993,6 +2287,12 @@
             "state" : "translated",
             "value" : "Scegli una data"
           }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wybierz datę"
+          }
         }
       }
     },
@@ -2004,10 +2304,22 @@
             "value" : "Gruppe zum Bearbeiten auswählen"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elegir grupo para editar"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Scegli un gruppo da modificare"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wybierz grupę do edycji"
           }
         }
       }
@@ -2020,10 +2332,22 @@
             "value" : "Parameter auswählen"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elegir parámetros"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Scegli i parametri"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wybierz parametry"
           }
         }
       }
@@ -2099,10 +2423,22 @@
             "value" : "Batterieladepegel konfigurieren"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configurar niveles de carga de la batería"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Configura i livelli di carica della batteria"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Konfiguruj poziomy naładowania baterii"
           }
         }
       }
@@ -2143,10 +2479,22 @@
             "value" : "Kopiert!"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Copiado!"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Copiato!"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skopiowane!"
           }
         }
       }
@@ -2292,10 +2640,22 @@
             "value" : "Erstellen"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crear"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Crea"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utwórz"
           }
         }
       }
@@ -2308,10 +2668,22 @@
             "value" : "Neu erstellen..."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crear nuevo..."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Crea nuovo..."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utwórz nowy..."
           }
         }
       }
@@ -2353,10 +2725,22 @@
             "value" : "Datenaktualisierungshäufigkeit"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Frecuencia de actualización de datos"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Frequenza di aggiornamento dati"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Częstotliwość odświeżania danych"
           }
         }
       }
@@ -2404,10 +2788,22 @@
             "value" : "Datenlogger"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Registrador de datos"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rejestrator danych"
           }
         }
       }
@@ -2431,6 +2827,12 @@
             "state" : "translated",
             "value" : "Giorno"
           }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dzień"
+          }
         }
       }
     },
@@ -2442,10 +2844,22 @@
             "value" : "Tag stündlich"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Día por horas"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Giorno per ore"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dzień według godzin"
           }
         }
       }
@@ -2543,7 +2957,19 @@
             "value" : ""
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
@@ -2559,10 +2985,22 @@
             "value" : "Geräteliste"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lista de dispositivos"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Elenco dispositivi"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lista urządzeń"
           }
         }
       }
@@ -2643,6 +3081,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Visualizza"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wyświetlacz"
           }
         }
       }
@@ -2795,10 +3239,22 @@
             "value" : "Bearbeiten"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Modifica"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edytuj"
           }
         }
       }
@@ -2959,7 +3415,19 @@
             "value" : ""
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
@@ -2971,20 +3439,32 @@
       "localizations" : {
         "de" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Zeigt nur auf der Übersichtsseite eine Nettoschätzung der finanziellen Situation für heute an, und eine vollständige Aufschlüsselung des ausgewählten Zeitraums auf der Statistikseite."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Shows net financial estimate for today only on the flow page, and full breakdown of the selected time period on the stats page."
+            "value" : "Shows financial estimates for today only on the flow page, and for the selected time period on the stats page."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Muestra la estimación financiera neta solo para hoy en la página de flujo y un desglose completo del período de tiempo seleccionado en la página de estadísticas."
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Mostra solo una stima finanziaria netta per oggi nella pagina dei dati in tempo reale, e una completa dettagliata del periodo di tempo selezionato nella pagina delle statistiche."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wyświetla dzisiejszą szacunkową sytuację finansową tylko na stronie z przepływem, a pełny rozbicie wybranego okresu czasu na stronie statystyk."
           }
         }
       }
@@ -2997,10 +3477,22 @@
             "value" : "Geben Sie Ihre FoxESS Cloud-Daten ein"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingrese los detalles de su nube FoxESS"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Inserisci i tuoi dettagli di FoxESS Cloud"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wprowadź dane do chmury FoxESS"
           }
         }
       }
@@ -3076,10 +3568,22 @@
             "value" : "Graphdaten exportieren"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exportar datos del gráfico"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Esporta dati del grafico"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eksportuj dane z wykresu"
           }
         }
       }
@@ -3092,10 +3596,22 @@
             "value" : "Exporteinnahmen"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exportar ingresos"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Entrate da esportazione"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eksportuj dochody"
           }
         }
       }
@@ -3149,10 +3665,22 @@
             "value" : "exported"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "exportado"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "esportato"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "eksportowano"
           }
         }
       }
@@ -3193,10 +3721,22 @@
             "value" : "Einspeiseeinheitspreis"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Precio de la unidad de alimentación"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prezzo unitario di immissione in rete"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cena za oddawaną energię"
           }
         }
       }
@@ -3273,7 +3813,19 @@
             "value" : ""
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
@@ -3289,10 +3841,22 @@
             "value" : "Jetzt abrufen"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obtener ahora"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Recupera ora"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pobierz teraz"
           }
         }
       }
@@ -3305,10 +3869,22 @@
             "value" : "Finanzmodell"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modelo financiero"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Modello finanziario"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Model finansowy"
           }
         }
       }
@@ -3321,10 +3897,22 @@
             "value" : "Die Finanzübersicht ist eine Summe von:"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El resumen financiero es un total de:"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Il riepilogo finanziario è un totale di:"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Podsumowanie finansowe to suma:"
           }
         }
       }
@@ -3337,10 +3925,22 @@
             "value" : "Finanzen"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finanzas"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Finanze"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dane finansowe"
           }
         }
       }
@@ -3500,7 +4100,19 @@
             "value" : ""
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
@@ -3544,10 +4156,22 @@
             "value" : ""
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Stato di FoxESS Cloud"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Status chmury FoxESS"
           }
         }
       }
@@ -3594,7 +4218,19 @@
             "value" : ""
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
@@ -3610,10 +4246,22 @@
             "value" : "Häufig gestellte Fragen"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preguntas frecuentes"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Domande frequenti"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Najczęściej zadawane pytania"
           }
         }
       }
@@ -3725,6 +4373,12 @@
             "value" : "Consumo de la red "
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Consumo dalla rete"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3740,6 +4394,24 @@
             "state" : "translated",
             "value" : "Vermeidung von Netzimport"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importación de la red evitada"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importazione dalla rete evitata"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oszczędność na imporcie z sieci"
+          }
         }
       }
     },
@@ -3749,6 +4421,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Netzeinspeisungspreis"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Precio unitario de importación de la red"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prezzo unitario dell'importazione dalla rete"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cena za import energii z sieci"
           }
         }
       }
@@ -3767,12 +4457,48 @@
             "state" : "translated",
             "value" : "avoided"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "evitado"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "evitato"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "uniknięto"
+          }
         }
       }
     },
     "GridImport kWh * ImportUnitPrice" : {
       "localizations" : {
         "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
@@ -3787,6 +4513,24 @@
             "state" : "translated",
             "value" : "Gruppe"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Grupo"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gruppo"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Grupa"
+          }
         }
       }
     },
@@ -3796,6 +4540,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gruppenname"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre del grupo"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nome del gruppo"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nazwa grupy"
           }
         }
       }
@@ -3807,6 +4569,24 @@
             "state" : "translated",
             "value" : "Gruppen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Grupos"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gruppi"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Grupy"
+          }
         }
       }
     },
@@ -3816,6 +4596,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Haben Sie Probleme? Sehen Sie sich die neuesten Datenprotokolle oben an, um bei der Fehlerdiagnose zu helfen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Tienes problemas? Vea los registros de datos más recientes arriba para ayudar a diagnosticar problemas"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hai problemi? Visualizza i registri dei dati più recenti sopra per aiutare a diagnosticare i problemi"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Masz problemy? Wyświetl najnowsze dzienniki danych powyżej, aby pomóc w diagnozowaniu problemów"
           }
         }
       }
@@ -3951,6 +4749,24 @@
             "state" : "translated",
             "value" : "Hausverbrauch"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uso en el hogar"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utilizzo domestico"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zużycie w domu"
+          }
         }
       }
     },
@@ -3960,6 +4776,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "hora"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ora"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Godzina"
           }
         }
       }
@@ -4012,6 +4846,24 @@
             "state" : "translated",
             "value" : "imported"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "importado"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Costo importato"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "importowano"
+          }
         }
       }
     },
@@ -4021,6 +4873,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ungültige Batteriekapazität"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Capacidad de batería no válida"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Capacità della batteria non valida"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nieprawidłowa pojemność baterii"
           }
         }
       }
@@ -4254,6 +5124,24 @@
             "state" : "translated",
             "value" : ""
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
         }
       }
     },
@@ -4264,6 +5152,24 @@
             "state" : "translated",
             "value" : "Zuletzt abgerufen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Última descarga"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ultimo recupero"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ostatnie pobranie"
+          }
         }
       }
     },
@@ -4273,6 +5179,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Letzte Aktualisierung"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Última actualización"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ultimo aggiornamento"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ostatnia aktualizacja"
           }
         }
       }
@@ -4326,6 +5250,18 @@
             "state" : "translated",
             "value" : "Cargas "
           }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carichi"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obciążenia"
+          }
         }
       }
     },
@@ -4335,6 +5271,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Einloggen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iniciar sesión"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accedi"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zaloguj mnie"
           }
         }
       }
@@ -4353,20 +5307,16 @@
             "value" : "Cerrar sesión"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esci"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wyloguj"
-          }
-        }
-      }
-    },
-    "Logout" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Abmelden"
           }
         }
       }
@@ -4776,6 +5726,18 @@
             "state" : "translated",
             "value" : "Mes"
           }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mese"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Miesiąc"
+          }
         }
       }
     },
@@ -4847,6 +5809,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Netzwerkprotokolle"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Registros de red"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Registri di rete"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dzienniki sieciowe"
           }
         }
       }
@@ -4969,6 +5949,12 @@
             "value" : "Ninguno"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nessuno"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5045,6 +6031,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aceptar"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
           }
         },
         "pl" : {
@@ -5161,6 +6153,24 @@
             "state" : "translated",
             "value" : ""
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "parámetro"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "parametro"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parametr"
+          }
         }
       }
     },
@@ -5171,6 +6181,24 @@
             "state" : "translated",
             "value" : "Parametergruppen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Grupos de parámetros"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gruppi di parametri"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Grupy parametrów"
+          }
         }
       }
     },
@@ -5180,6 +6208,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Parameter"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parámetros"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parametri"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parametry"
           }
         }
       }
@@ -5198,6 +6244,12 @@
             "value" : "Los parámetros se actualizan cada 5 minutos por FoxESS y solo están disponibles para un solo día a la vez"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I parametri vengono aggiornati ogni 5 minuti da FoxESS e sono disponibili solo per un giorno alla volta"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5212,6 +6264,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Passwort"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contraseña"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hasło"
           }
         }
       }
@@ -5285,6 +6355,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bitte geben Sie den neuen Namen ein"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Por favor, ingrese el nuevo nombre"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inserisci il nuovo nome"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Proszę wprowadzić nową nazwę"
           }
         }
       }
@@ -5453,6 +6541,12 @@
             "value" : "Califica esta aplicación"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Valuta questa app"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5467,6 +6561,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Roh"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crudo"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Grezzo"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Surowe dane"
           }
         }
       }
@@ -6557,6 +7669,24 @@
             "state" : "translated",
             "value" : "Kapazität neu berechnen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recalcular capacidad"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ricalcola capacità"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Przelicz pojemność"
+          }
         }
       }
     },
@@ -6566,6 +7696,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Neuberechnet"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recalculado"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ricalcolato"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Przeliczono"
           }
         }
       }
@@ -6585,6 +7733,12 @@
             "value" : "Frecuencia de actualización"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Frequenza di aggiornamento"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6600,6 +7754,24 @@
             "state" : "translated",
             "value" : "Umbenennen..."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cambiar nombre..."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rinomina..."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zmień nazwę..."
+          }
         }
       }
     },
@@ -6609,6 +7781,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bericht"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Informe"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rapporto"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Raport"
           }
         }
       }
@@ -6887,6 +8077,24 @@
             "state" : "translated",
             "value" : "Wiederholen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "reintentar"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Riprova"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ponów"
+          }
         }
       }
     },
@@ -6925,6 +8133,24 @@
             "state" : "translated",
             "value" : "Gibt den Batterieladestand als Prozentsatz zurück"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Devuelve el estado de carga de la batería como porcentaje"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restituisce lo stato di carica della batteria come percentuale"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zwraca stan naładowania baterii jako procent"
+          }
         }
       }
     },
@@ -6941,6 +8167,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ahorro..."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Risparmio"
           }
         },
         "pl" : {
@@ -6993,6 +8225,12 @@
             "value" : "El dispositivo seleccionado y la información de la batería relacionada se mostrarán en la página principal"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il dispositivo selezionato e le informazioni sulla batteria correlata verranno visualizzati nella pagina principale"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7007,6 +8245,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Autarkie"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autosuficiencia"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto-sufficienza"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Samowystarczalność"
           }
         }
       }
@@ -7559,6 +8815,24 @@
             "state" : "translated",
             "value" : "Finanzielle Zusammenfassung anzeigen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar resumen financiero"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra il riepilogo finanziario"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pokaż podsumowanie finansowe"
+          }
         }
       }
     },
@@ -7597,6 +8871,24 @@
             "state" : "translated",
             "value" : "Weise den Wechselrichter Anlagenname aus"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar nombre de la planta inversora"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra il nome dell'impianto dell'inverter"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pokaż nazwę elektrowni falownika"
+          }
         }
       }
     },
@@ -7634,6 +8926,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Letzte Aktualisierungszeit anzeigen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar marca de tiempo de la última actualización"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra l'ultima marca di tempo dell'ultimo aggiornamento"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pokaż znacznik ostatniej aktualizacji"
           }
         }
       }
@@ -7922,6 +9232,12 @@
             "state" : "translated",
             "value" : "Le statistiche vengono aggregate da FoxESS in totali ogni 1 ora, 1 giorno o 1 mese."
           }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Statystyki są agregowane przez FoxESS w sumy 1 godz., 1 dzień lub 1 miesiąc"
+          }
         }
       }
     },
@@ -7931,6 +9247,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Speicherbatterie-Ladezustand"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estado de carga de la batería de almacenamiento"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stato di carica della batteria di accumulo"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stan naładowania baterii magazynującej"
           }
         }
       }
@@ -7983,6 +9317,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Resumen"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sommario"
           }
         },
         "pl" : {
@@ -8071,6 +9411,12 @@
             "value" : "Temperaturas"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temperature"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8092,6 +9438,24 @@
             "state" : "translated",
             "value" : "Tests"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
         }
       }
     },
@@ -8101,6 +9465,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Der Arbeitsmodus, um den Wechselrichter zu ändern"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El modo de trabajo para cambiar el inversor a"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La modalità di lavoro da assegnare all'inverter"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tryb pracy do zmiany fal"
           }
         }
       }
@@ -8112,6 +9494,24 @@
             "state" : "translated",
             "value" : "Dieser Einheitspreis ist auf der FoxESS Cloud gespeichert."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este precio unitario se almacena en la nube FoxESS."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Questo prezzo unitario è memorizzato su FoxESS Cloud."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ta cena jednostkowa jest przechowywana w chmurze FoxESS."
+          }
         }
       }
     },
@@ -8121,6 +9521,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dadurch wird eine neue Gruppe aus Ihren ausgewählten Parametern erstellt."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esto creará un nuevo grupo a partir de los parámetros seleccionados."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ciò creerà un nuovo gruppo dai parametri selezionati."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To utworzy nową grupę na podstawie wybranych parametrów."
           }
         }
       }
@@ -8202,6 +9620,24 @@
             "state" : "translated",
             "value" : "Titel"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Título"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Titolo"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tytuł"
+          }
         }
       }
     },
@@ -8247,6 +9683,24 @@
             "state" : "translated",
             "value" : "umschalten"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cambiar"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attiva"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Przełącz"
+          }
         }
       }
     },
@@ -8264,6 +9718,24 @@
             "state" : "translated",
             "value" : "total"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "totale"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Całkowity"
+          }
         }
       }
     },
@@ -8273,6 +9745,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gesamtvorteil"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beneficio total"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beneficio totale"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Całkowity zysk"
           }
         }
       }
@@ -8311,6 +9801,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Demo ausprobieren"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Probar demo"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prova demo"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wypróbuj demo"
           }
         }
       }
@@ -8413,6 +9921,24 @@
             "state" : "translated",
             "value" : "Benutzername"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre de usuario"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nome utente"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nazwa użytkownika"
+          }
         }
       }
     },
@@ -8428,6 +9954,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Versión "
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Versione"
           }
         },
         "pl" : {
@@ -8473,6 +10005,24 @@
             "state" : "translated",
             "value" : "Webseite"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "sitio web"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "sito web"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Strona internetowa"
+          }
         }
       }
     },
@@ -8483,6 +10033,24 @@
             "state" : "translated",
             "value" : "Welchen Arbeitsmodus möchten Sie einstellen?"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Qué modo de trabajo le gustaría configurar?"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quale modalità di lavoro desideri impostare?"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Który tryb pracy chciałbyś ustawić?"
+          }
         }
       }
     },
@@ -8492,6 +10060,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Arbeitsmodus"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modo de trabajo"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modalità di lavoro"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tryb pracy"
           }
         }
       }
@@ -8578,6 +10164,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Año"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anno"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rok"
           }
         }
       }

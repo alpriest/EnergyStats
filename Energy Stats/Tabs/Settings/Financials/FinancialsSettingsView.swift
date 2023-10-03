@@ -5,8 +5,8 @@
 //  Created by Alistair Priest on 03/10/2023.
 //
 
-import SwiftUI
 import Energy_Stats_Core
+import SwiftUI
 
 struct FinancialsSettingsView: View {
     @StateObject private var viewModel: FinancialsSettingsViewModel
@@ -17,70 +17,82 @@ struct FinancialsSettingsView: View {
 
     var body: some View {
         Form {
-        Section {
-            Toggle(isOn: $viewModel.showFinancialSummary) {
-                Text("Show financial summary")
-            }
-
-            if viewModel.showFinancialSummary {
-                Picker("Financial Model", selection: $viewModel.financialModel) {
-                    Text("Energy Stats").tag(FinancialModel.energyStats)
-                    Text("FoxESS").tag(FinancialModel.foxESS)
+            Section {
+                Toggle(isOn: $viewModel.showFinancialSummary) {
+                    Text("Show financial summary")
                 }
-                .pickerStyle(.segmented)
-            }
-        } header: {
-            Text("Financials")
-        } footer: {
-            if viewModel.showFinancialSummary {
-                switch viewModel.financialModel {
-                case .energyStats:
-                    Text("energy_stats_earnings_calculation_description")
-                case .foxESS:
-                    Text("foxess_earnings_calculation_description")
+
+                if viewModel.showFinancialSummary {
+                    Picker("Financial Model", selection: $viewModel.financialModel) {
+                        Text("Energy Stats").tag(FinancialModel.energyStats)
+                        Text("FoxESS").tag(FinancialModel.foxESS)
+                    }
+                    .pickerStyle(.segmented)
+
+                    switch viewModel.financialModel {
+                    case .energyStats:
+                        makeTextField(title: "Feed In Unit price", currencyCode: "£", text: $viewModel.energyStatsFeedInUnitPrice)
+                        makeTextField(title: "Grid Import Unit price", currencyCode: "£", text: $viewModel.energyStatsGridImportUnitPrice)
+                    case .foxESS:
+                        makeTextField(title: "Feed In Unit price", currencyCode: "£", text: $viewModel.foxFeedInUnitPrice)
+                    }
+                }
+            } footer: {
+                if viewModel.showFinancialSummary {
+                    switch viewModel.financialModel {
+                    case .energyStats:
+                        energyStatsFooter()
+                    case .foxESS:
+                        Text("This unit price is stored on the FoxESS Cloud.")
+                        Text("foxess_earnings_calculation_description")
+                    }
                 }
             }
         }
-
-            if viewModel.showFinancialSummary {
-                switch viewModel.financialModel {
-                case .energyStats:
-                    energyStats()
-                case .foxESS:
-                    foxESS()
-                }
-            }
-        }
+        .navigationTitle("Financials")
+        .navigationBarTitleDisplayMode(.inline)
     }
 
     @ViewBuilder
-    func energyStats() -> some View {
-        Section {
-            makeTextField(title: "Feed In Unit price", currencyCode: "£", text: $viewModel.energyStatsFeedInUnitPrice)
-            makeTextField(title: "Grid Import Unit price", currencyCode: "£", text: $viewModel.energyStatsGridImportUnitPrice)
-        } footer: {
-            VStack(alignment: .leading) {
-                Text("Financial summary is a total of:")
-                    .padding(.bottom, 16)
+    func energyStatsFooter() -> some View {
+        VStack(alignment: .leading) {
+            Text("energy_stats_earnings_calculation_description")
+                .padding(.bottom, 24)
 
-                VStack(alignment: .center, spacing: 8) {
-                    Text("Feed-In kWh * FeedInUnitPrice")
-                    Text("+")
-                    Text("(SolarGeneration kWh - Feed-In kWh) * ImportUnitPrice")
-                    Text("-")
-                    Text("GridImport kWh * ImportUnitPrice")
+            VStack(alignment: .leading) {
+                Text("Exported").bold()
+
+                Text("Approximate income received from exporting energy to the grid.")
+
+                VStack(alignment: .center) {
+                    Text("Feed-In kWh * FeedInUnitPrice").italic()
                 }.frame(maxWidth: .infinity)
             }
-        }
-    }
+            .padding(.bottom, 16)
 
-    @ViewBuilder
-    func foxESS() -> some View {
-        Section {
-            makeTextField(title: "Feed In Unit price", currencyCode: "£", text: $viewModel.foxFeedInUnitPrice)
-        } footer: {
-            Text("This unit price is stored on the FoxESS Cloud.")
+            VStack(alignment: .leading) {
+                Text("Avoided").bold()
+
+                Text("Approximate expenditure avoided by generating your own solar power.")
+
+                VStack(alignment: .center) {
+                    Text("(SolarGeneration kWh - Feed-In kWh) * ImportUnitPrice").italic()
+                }.frame(maxWidth: .infinity)
+            }
+            .padding(.bottom, 16)
+
+            VStack(alignment: .leading) {
+                Text("Total").bold()
+
+                Text("Approximate total benefit of having your solar/battery installation.")
+
+                VStack(alignment: .center) {
+                    Text("exported + avoided").italic()
+                }.frame(maxWidth: .infinity)
+            }
+            .padding(.bottom, 16)
         }
+        .frame(maxWidth: .infinity)
     }
 
     func makeTextField(title: LocalizedStringKey, currencyCode: LocalizedStringKey, text: Binding<String>) -> some View {
