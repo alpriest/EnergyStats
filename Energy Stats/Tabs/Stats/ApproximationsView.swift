@@ -59,21 +59,18 @@ struct ApproximationsView: View {
                     if let financialModel = viewModel.financialModel {
                         HStack {
                             Text("Exported income")
-                                .accessibilityElement(children: .ignore)
                             Spacer()
                             Text(financialModel.exportIncome.formattedAmount())
                         }
 
                         HStack {
                             Text("Grid import avoided")
-                                .accessibilityElement(children: .ignore)
                             Spacer()
                             Text(financialModel.solarSaving.formattedAmount())
                         }
 
                         HStack {
                             Text("Total benefit")
-                                .accessibilityElement(children: .ignore)
                             Spacer()
                             Text(financialModel.total.formattedAmount())
                         }
