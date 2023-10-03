@@ -38,7 +38,7 @@ public struct EnergyStatsFinancialModel {
         self.config = config
         self.currencySymbol = currencySymbol
 
-        exportIncome = FinanceAmount(title: .exportedIncome, amount: totalsViewModel.gridExport * config.feedInUnitPrice, currencySymbol: currencySymbol)
+        exportIncome = FinanceAmount(title: .exportedIncomeShortTitle, amount: totalsViewModel.gridExport * config.feedInUnitPrice, currencySymbol: currencySymbol)
         solarSaving = FinanceAmount(title: .gridImportAvoidedShortTitle, amount: totalsViewModel.solar * config.gridImportUnitPrice, currencySymbol: currencySymbol)
         total = FinanceAmount(title: .total, amount: exportIncome.amount + solarSaving.amount, currencySymbol: currencySymbol)
     }

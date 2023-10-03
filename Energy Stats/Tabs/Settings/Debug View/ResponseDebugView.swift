@@ -47,7 +47,7 @@ struct ResponseDebugView<T: Decodable>: View {
     var body: some View {
         VStack {
             if let mapResult {
-                (Text("Last fetched ") +
+                (Text("Last fetched") + Text(" ") + 
                     Text(mapResult.time, formatter: DateFormatter.forDebug()))
                     .padding(.bottom)
 

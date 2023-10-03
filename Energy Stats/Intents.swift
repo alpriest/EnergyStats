@@ -71,7 +71,7 @@ struct ChangeWorkModeIntent: AppIntent {
     static var openAppWhenRun: Bool = false
 
     @Parameter(
-        title: "WorkMode",
+        title: "Work mode",
         description: "The workmode to change the inverter to",
         requestValueDialog: IntentDialog("Which work mode would you like to set?")
     )

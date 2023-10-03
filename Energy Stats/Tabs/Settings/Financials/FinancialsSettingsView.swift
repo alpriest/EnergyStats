@@ -35,7 +35,7 @@ struct FinancialsSettingsView: View {
             if viewModel.showFinancialSummary {
                 switch viewModel.financialModel {
                 case .energyStats:
-                    Text("Shows net financial estimate for today only on the flow page, and full breakdown the selected time period on the stats page.")
+                    Text("energy_stats_earnings_calculation_description")
                 case .foxESS:
                     Text("foxess_earnings_calculation_description")
                 }

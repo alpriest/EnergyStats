@@ -106,7 +106,14 @@
       }
     },
     "(SolarGeneration kWh - Feed-In kWh) * ImportUnitPrice" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
     "%" : {
       "localizations" : {
@@ -1018,10 +1025,24 @@
       }
     },
     "Amount" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Betrag"
+          }
+        }
+      }
     },
     "Amount entered must be greater than 0" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der eingegebene Betrag muss größer als 0 sein"
+          }
+        }
+      }
     },
     "Apply" : {
       "localizations" : {
@@ -1238,7 +1259,14 @@
       }
     },
     "Battery error. Tap for detail" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Akku-Fehler. Tippen Sie für Details"
+          }
+        }
+      }
     },
     "Battery Schedule" : {
       "localizations" : {
@@ -1269,10 +1297,24 @@
       }
     },
     "Battery Settings" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Batterieeinstellungen"
+          }
+        }
+      }
     },
     "Battery Times" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Batteriezeiten"
+          }
+        }
+      }
     },
     "battery_charge_range" : {
       "extractionState" : "manual",
@@ -1648,10 +1690,24 @@
       }
     },
     "Change inverter work mode" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wechseln des Wechselrichterbetriebsmodus"
+          }
+        }
+      }
     },
     "Changes the work mode of the inverter" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ändert den Arbeitsmodus des Wechselrichters"
+          }
+        }
+      }
     },
     "Charge " : {
       "extractionState" : "manual",
@@ -1739,7 +1795,14 @@
       }
     },
     "Check Storage Battery SOC" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Überprüfen Sie den Ladezustand des Speicherakkus"
+          }
+        }
+      }
     },
     "Choose date" : {
       "localizations" : {
@@ -1758,10 +1821,24 @@
       }
     },
     "Choose group to edit" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gruppe zum Bearbeiten auswählen"
+          }
+        }
+      }
     },
     "Choose Parameters" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parameter auswählen"
+          }
+        }
+      }
     },
     "Clear graph values" : {
       "localizations" : {
@@ -1821,7 +1898,14 @@
       }
     },
     "Configure Battery Charge Levels" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Batterieladepegel konfigurieren"
+          }
+        }
+      }
     },
     "Configure Work Mode" : {
       "localizations" : {
@@ -1852,7 +1936,14 @@
       }
     },
     "Copied!" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kopiert!"
+          }
+        }
+      }
     },
     "Copy to clipboard" : {
       "localizations" : {
@@ -2076,7 +2167,14 @@
       }
     },
     "Datalogger" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Datenlogger"
+          }
+        }
+      }
     },
     "Day" : {
       "localizations" : {
@@ -2182,7 +2280,14 @@
       }
     },
     "Device List" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geräteliste"
+          }
+        }
+      }
     },
     "Device selection" : {
       "localizations" : {
@@ -2548,8 +2653,31 @@
         }
       }
     },
+    "energy_stats_earnings_calculation_description" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zeigt nur auf der Übersichtsseite eine Nettoschätzung der finanziellen Situation für heute an, und eine vollständige Aufschlüsselung des ausgewählten Zeitraums auf der Statistikseite."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shows net financial estimate for today only on the flow page, and full breakdown of the selected time period on the stats page."
+          }
+        }
+      }
+    },
     "Enter your FoxESS Cloud details" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geben Sie Ihre FoxESS Cloud-Daten ein"
+          }
+        }
+      }
     },
     "error_title" : {
       "extractionState" : "manual",
@@ -2674,9 +2802,15 @@
         }
       }
     },
-    "exported_income" : {
+    "exported_income_short_title" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "exportiert"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2714,7 +2848,14 @@
       }
     },
     "Feed In Unit price" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einspeiseeinheitspreis"
+          }
+        }
+      }
     },
     "feed_in_first_mode" : {
       "extractionState" : "manual",
@@ -2775,7 +2916,14 @@
       }
     },
     "Feed-In kWh * FeedInUnitPrice" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
     "Fetch now" : {
       "localizations" : {
@@ -2788,13 +2936,34 @@
       }
     },
     "Financial Model" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finanzmodell"
+          }
+        }
+      }
     },
     "Financial summary is a total of:" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Finanzübersicht ist eine Summe von:"
+          }
+        }
+      }
     },
     "Financials" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finanzen"
+          }
+        }
+      }
     },
     "Find out more about firmware versions from the " : {
       "localizations" : {
@@ -2958,7 +3127,14 @@
       }
     },
     "FoxESS Cloud Status" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
     "foxess_earnings_calculation_description" : {
       "localizations" : {
@@ -2995,10 +3171,24 @@
       }
     },
     "foxesscommunity.com" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
     "Frequently Asked Questions" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Häufig gestellte Fragen"
+          }
+        }
+      }
     },
     "Full" : {
       "extractionState" : "manual",
@@ -3114,7 +3304,14 @@
       }
     },
     "Grid Import Unit price" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Netzeinspeisungspreis"
+          }
+        }
+      }
     },
     "grid_import_avoided_short_title" : {
       "extractionState" : "manual",
@@ -3134,19 +3331,54 @@
       }
     },
     "GridImport kWh * ImportUnitPrice" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
     "Group" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gruppe"
+          }
+        }
+      }
     },
     "Group name" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gruppenname"
+          }
+        }
+      }
     },
     "Groups" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gruppen"
+          }
+        }
+      }
     },
     "Having problems? View the most recent data logs above to help diagnose issues" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haben Sie Probleme? Sehen Sie sich die neuesten Datenprotokolle oben an, um bei der Fehlerdiagnose zu helfen"
+          }
+        }
+      }
     },
     "Hello" : {
       "localizations" : {
@@ -3283,7 +3515,14 @@
       }
     },
     "hour" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
     "import_total" : {
       "localizations" : {
@@ -3319,9 +3558,15 @@
         }
       }
     },
-    "imported_cost" : {
+    "imported_cost_short_title" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "importiert"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3331,7 +3576,14 @@
       }
     },
     "Invalid Battery Capacity" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ungültige Batteriekapazität"
+          }
+        }
+      }
     },
     "Invalid token. Please logout and login again." : {
       "extractionState" : "manual",
@@ -3556,13 +3808,34 @@
       }
     },
     "kWH" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
-    "Last fetched " : {
-
+    "Last fetched" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zuletzt abgerufen"
+          }
+        }
+      }
     },
     "Last update" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Letzte Aktualisierung"
+          }
+        }
+      }
     },
     "Loading" : {
       "comment" : "Localizable.strings\n  Energy Stats\n\n  Created by Alistair Priest on 26/04/2023.",
@@ -3617,7 +3890,14 @@
       }
     },
     "Log me in" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einloggen"
+          }
+        }
+      }
     },
     "logout" : {
       "localizations" : {
@@ -3642,7 +3922,14 @@
       }
     },
     "Logout" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abmelden"
+          }
+        }
+      }
     },
     "low_threshold" : {
       "localizations" : {
@@ -4115,7 +4402,14 @@
       }
     },
     "Network logs" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Netzwerkprotokolle"
+          }
+        }
+      }
     },
     "Next update in" : {
       "extractionState" : "manual",
@@ -4728,7 +5022,14 @@
       }
     },
     "Raw" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Roh"
+          }
+        }
+      }
     },
     "rawvariable_ambienttemperation" : {
       "extractionState" : "manual",
@@ -6178,7 +6479,14 @@
       }
     },
     "Returns the battery state of charge as a percentage" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gibt den Batterieladestand als Prozentsatz zurück"
+          }
+        }
+      }
     },
     "Saving" : {
       "extractionState" : "manual",
@@ -7037,9 +7345,6 @@
         }
       }
     },
-    "Shows net financial estimate for today only on the flow page, and full breakdown the selected time period on the stats page." : {
-
-    },
     "Solar generated" : {
       "localizations" : {
         "de" : {
@@ -7181,7 +7486,14 @@
       }
     },
     "Storage Battery SOC" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Speicherbatterie-Ladezustand"
+          }
+        }
+      }
     },
     "Success" : {
       "extractionState" : "manual",
@@ -7328,16 +7640,50 @@
       }
     },
     "Tests" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tests"
+          }
+        }
+      }
     },
     "The workmode to change the inverter to" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Arbeitsmodus, um den Wechselrichter zu ändern"
+          }
+        }
+      }
     },
     "This unit price is stored on the FoxESS Cloud." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dieser Einheitspreis ist auf der FoxESS Cloud gespeichert."
+          }
+        }
+      }
     },
     "This will create a new group from your selected parameters." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dadurch wird eine neue Gruppe aus Ihren ausgewählten Parametern erstellt."
+          }
+        }
+      }
     },
     "Time period 1" : {
       "extractionState" : "manual",
@@ -7410,7 +7756,14 @@
       }
     },
     "Title" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Titel"
+          }
+        }
+      }
     },
     "today" : {
       "extractionState" : "manual",
@@ -7475,7 +7828,14 @@
       }
     },
     "Total benefit" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gesamtvorteil"
+          }
+        }
+      }
     },
     "Touch the graph to see values at that time" : {
       "localizations" : {
@@ -7667,13 +8027,24 @@
       }
     },
     "Which work mode would you like to set?" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Welchen Arbeitsmodus möchten Sie einstellen?"
+          }
+        }
+      }
     },
     "Work mode" : {
-
-    },
-    "WorkMode" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arbeitsmodus"
+          }
+        }
+      }
     },
     "Wrong credentials, try again" : {
       "extractionState" : "manual",
