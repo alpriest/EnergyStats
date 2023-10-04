@@ -38,6 +38,7 @@ public protocol Config {
     var parameterGroups: [ParameterGroup] { get set }
     var feedInUnitPrice: Double { get set }
     var gridImportUnitPrice: Double { get set }
+    var currencySymbol: String { get set }
 }
 
 extension UserDefaults {
@@ -90,7 +91,7 @@ public class UserDefaultsConfig: Config {
     @UserDefaultsStoredData(key: "devices")
     public var devices: Data?
 
-    @UserDefaultsStoredString(key: "selectedDeviceID")
+    @UserDefaultsStoredOptionalString(key: "selectedDeviceID")
     public var selectedDeviceID: String?
 
     @UserDefaultsStoredInt(key: "displayUnit")
@@ -141,6 +142,9 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredDouble(key: "gridImportUnitPrice", defaultValue: 0.15)
     public var gridImportUnitPrice: Double
+
+    @UserDefaultsStoredString(key: "currencySymbol", defaultValue: "£")
+    public var currencySymbol: String
 
     public var selectedParameterGraphVariables: [String] {
         get {
@@ -214,12 +218,27 @@ public struct UserDefaultsStoredDouble {
 }
 
 @propertyWrapper
-public struct UserDefaultsStoredString {
+public struct UserDefaultsStoredOptionalString {
     var key: String
 
     public var wrappedValue: String? {
         get {
             UserDefaults.shared.string(forKey: key)
+        }
+        set {
+            UserDefaults.shared.set(newValue, forKey: key)
+        }
+    }
+}
+
+@propertyWrapper
+public struct UserDefaultsStoredString {
+    var key: String
+    var defaultValue: String
+
+    public var wrappedValue: String {
+        get {
+            UserDefaults.shared.string(forKey: key) ?? defaultValue
         }
         set {
             UserDefaults.shared.set(newValue, forKey: key)

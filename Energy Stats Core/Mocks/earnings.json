@@ -1,7 +1,7 @@
 {
   "errno": 0,
   "result": {
-    "currency": "GBP(￡)",
+    "currency": "EUR(€)",
     "power": 0.187,
     "today": {
       "generation": 8.700000000000045,

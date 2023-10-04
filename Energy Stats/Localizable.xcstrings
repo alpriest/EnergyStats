@@ -202,7 +202,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ""
+            "value" : "(Solarenergie kWh - Einspeiseenergie kWh) * Netzbezugspreis"
           }
         },
         "es" : {
@@ -1363,7 +1363,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ungefähre vermiedene Ausgaben durch die Erzeugung Ihrer eigenen Solarenergie."
+            "value" : "Ungefähre eingesparte Ausgaben durch die Erzeugung Ihrer eigenen Solarenergie."
           }
         },
         "es" : {
@@ -3496,7 +3496,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zeigt Finanzschätzungen nur für heute auf der Flow-Seite und für den ausgewählten Zeitraum auf der Statistik-Seite."
+            "value" : "Zeigt Finanzschätzungen nur für heute auf der Leistungsfluss-Seite und für den ausgewählten Zeitraum auf der Statistik-Seite."
           }
         },
         "en" : {
@@ -3774,7 +3774,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Einspeiseeinheitspreis"
+            "value" : "Einspeisevergütung"
           }
         },
         "es" : {
@@ -3866,7 +3866,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ""
+            "value" : "Einspeiseenergie kWh * Einspeisevergütung"
           }
         },
         "es" : {
@@ -3941,35 +3941,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Model finansowy"
-          }
-        }
-      }
-    },
-    "Financials" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Finanzen"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Finanzas"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Finanze"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dane finansowe"
           }
         }
       }
@@ -4421,7 +4392,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vermeidung von Netzimport"
+            "value" : "Eingesparter Netzverbrauch"
           }
         },
         "es" : {
@@ -4449,7 +4420,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Netzeinspeisungspreis"
+            "value" : "Netzbezugspreis"
           }
         },
         "es" : {
@@ -4478,7 +4449,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "vermieden"
+            "value" : "eingespart"
           }
         },
         "en" : {
@@ -9156,7 +9127,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Statistiken"
+            "value" : "Statistik"
           }
         },
         "es" : {
@@ -9184,7 +9155,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Statistiken werden von FoxESS für jeweils 1 Stunde, 1 Tag oder 1 Monat aufsummiert"
+            "value" : "Statistik werden von FoxESS für jeweils 1 Stunde, 1 Tag oder 1 Monat aufsummiert"
           }
         },
         "es" : {

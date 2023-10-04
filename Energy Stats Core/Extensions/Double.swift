@@ -85,10 +85,10 @@ public extension Double {
         numberFormatter.maximumFractionDigits = decimalPlaces
         numberFormatter.locale = Locale.current
 
-        if let formattedString = numberFormatter.string(from: NSNumber(value: roundedNumber)) {
-            return formattedString
+        return if let formattedString = numberFormatter.string(from: NSNumber(value: roundedNumber)) {
+            formattedString
         } else {
-            return String(format: "%.\(decimalPlaces)f", roundedNumber)
+            String(format: "%.\(decimalPlaces)f", roundedNumber)
         }
     }
 

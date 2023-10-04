@@ -53,6 +53,7 @@ public protocol ConfigManaging: FinancialConfigManaging {
     var showLastUpdateTimestamp: Bool { get set }
     var solarDefinitions: SolarRangeDefinitions { get set }
     var parameterGroups: [ParameterGroup] { get set }
+    var currencySymbol: String { get set }
 }
 
 public protocol FinancialConfigManaging {
@@ -239,6 +240,13 @@ public class ConfigManager: ConfigManaging {
         set {
             config.selectedDeviceID = newValue
             currentDevice.send(devices?.first(where: { $0.deviceID == selectedDeviceID }) ?? devices?.first)
+        }
+    }
+
+    public var currencySymbol: String {
+        get { config.currencySymbol }
+        set {
+            config.currencySymbol = newValue
         }
     }
 

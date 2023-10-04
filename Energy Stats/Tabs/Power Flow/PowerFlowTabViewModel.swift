@@ -149,6 +149,7 @@ class PowerFlowTabViewModel: ObservableObject {
                                                             queryDate: .now(),
                                                             reportType: .month)
             let earnings = try await self.network.fetchEarnings(deviceID: currentDevice.deviceID)
+            configManager.currencySymbol = earnings.currencySymbol
             let totalsViewModel = TotalsViewModel(reports: totals)
 
             if self.configManager.appTheme.value.showInverterTemperature {
@@ -176,7 +177,7 @@ class PowerFlowTabViewModel: ObservableObject {
                 home: currentViewModel.currentHomeConsumption,
                 grid: currentViewModel.currentGrid,
                 todaysGeneration: earnings.today.generation,
-                earnings: EarningsViewModel(response: earnings, energyStatsFinancialModel: EnergyStatsFinancialModel(totalsViewModel: totalsViewModel, config: configManager, currencySymbol: earnings.currencySymbol)),
+                earnings: EarningsViewModel(response: earnings, energyStatsFinancialModel: EnergyStatsFinancialModel(totalsViewModel: totalsViewModel, config: configManager, currencySymbol: configManager.currencySymbol)),
                 inverterTemperatures: currentViewModel.currentTemperatures,
                 homeTotal: totalsViewModel.home,
                 gridImportTotal: totalsViewModel.gridImport,

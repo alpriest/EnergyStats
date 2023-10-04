@@ -182,6 +182,7 @@ public class MockConfig: Config {
     public var showLastUpdateTimestamp: Bool = false
     public var solarDefinitions: SolarRangeDefinitions = .default()
     public var parameterGroups: [ParameterGroup] = DefaultParameterGroups()
+    public var currencySymbol: String = "£"
 }
 
 public class PreviewConfigManager: ConfigManager {

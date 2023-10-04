@@ -51,7 +51,7 @@ struct SolarBandingSettingsView: View {
                 Section {
                     HStack {
                         Slider(value: $breakpoint1, in: range, step: 0.1)
-                        Text(breakpoint1.kWh(3))
+                        Text(breakpoint1.kW(3))
                     }
                 } header: {
                     Text("low_threshold")
@@ -62,7 +62,7 @@ struct SolarBandingSettingsView: View {
                 Section {
                     HStack {
                         Slider(value: $breakpoint2, in: range, step: 0.1)
-                        Text(breakpoint2.kWh(3))
+                        Text(breakpoint2.kW(3))
                     }
                 } header: {
                     Text("medium_threshold")
@@ -73,7 +73,7 @@ struct SolarBandingSettingsView: View {
                 Section {
                     HStack {
                         Slider(value: $breakpoint3, in: range, step: 0.1)
-                        Text(breakpoint3.kWh(3))
+                        Text(breakpoint3.kW(3))
                     }
                 } header: {
                     Text("high_threshold")

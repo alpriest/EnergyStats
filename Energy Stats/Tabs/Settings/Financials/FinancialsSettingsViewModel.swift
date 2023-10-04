@@ -21,7 +21,6 @@ class FinancialsSettingsViewModel: ObservableObject {
         }
     }
 
-    @Published var foxFeedInUnitPrice = "0.30" // TODO: Read from Fox (https://www.foxesscloud.com/sapn/v0/plant/get?stationID=760f8106-a59b-45ee-bf81-1665e9e9429d)
     @Published var energyStatsFeedInUnitPrice: String {
         didSet {
             configManager.feedInUnitPrice = Double(energyStatsFeedInUnitPrice) ?? 0.0

@@ -156,7 +156,7 @@ class StatsTabViewModel: ObservableObject {
                                           batteryCharge: batteryCharge ?? 0,
                                           batteryDischarge: batteryDischarge ?? 0)
         self.totalsViewModel = totalsViewModel
-        financialModel = EnergyStatsFinancialModel(totalsViewModel: totalsViewModel, config: configManager, currencySymbol: "£")
+        financialModel = EnergyStatsFinancialModel(totalsViewModel: totalsViewModel, config: configManager, currencySymbol: configManager.currencySymbol)
 
         calculateSelfSufficiencyEstimate(grid: grid,
                                          feedIn: feedIn,
