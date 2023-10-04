@@ -57,8 +57,6 @@ public protocol ConfigManaging: FinancialConfigManaging {
 
 public protocol FinancialConfigManaging {
     var showFinancialEarnings: Bool { get set }
-    var showFinancialSavings: Bool { get set }
-    var showFinancialCosts: Bool { get set }
     var financialModel: FinancialModel { get set }
     var feedInUnitPrice: Double { get set }
     var gridImportUnitPrice: Double { get set }
@@ -93,8 +91,6 @@ public class ConfigManager: ConfigManaging {
                 showTotalYield: config.showTotalYield,
                 selfSufficiencyEstimateMode: config.selfSufficiencyEstimateMode,
                 showFinancialEarnings: config.showFinancialEarnings,
-                showFinancialSavings: config.showFinancialSavings,
-                showFinancialCosts: config.showFinancialCosts,
                 financialModel: FinancialModel(rawValue: config.financialModel) ?? .foxESS,
                 feedInUnitPrice: config.feedInUnitPrice,
                 gridImportUnitPrice: config.gridImportUnitPrice,
@@ -354,26 +350,6 @@ public class ConfigManager: ConfigManaging {
             config.showFinancialEarnings = newValue
             appTheme.send(appTheme.value.copy(
                 showFinancialEarnings: config.showFinancialEarnings
-            ))
-        }
-    }
-
-    public var showFinancialSavings: Bool {
-        get { config.showFinancialSavings }
-        set {
-            config.showFinancialSavings = newValue
-            appTheme.send(appTheme.value.copy(
-                showFinancialSavings: config.showFinancialSavings
-            ))
-        }
-    }
-
-    public var showFinancialCosts: Bool {
-        get { config.showFinancialCosts }
-        set {
-            config.showFinancialCosts = newValue
-            appTheme.send(appTheme.value.copy(
-                showFinancialCosts: config.showFinancialCosts
             ))
         }
     }

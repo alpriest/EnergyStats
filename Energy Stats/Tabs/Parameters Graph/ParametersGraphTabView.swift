@@ -21,8 +21,8 @@ struct ParametersGraphTabView: View {
     private let appThemePublisher: LatestAppTheme
     private let configManager: ConfigManaging
 
-    init(configManager: ConfigManaging, networking: Networking) {
-        _viewModel = .init(wrappedValue: ParametersGraphTabViewModel(networking: networking, configManager: configManager))
+    init(configManager: ConfigManaging, networking: Networking, dateProvider: @escaping () -> Date = { Date() }) {
+        _viewModel = .init(wrappedValue: ParametersGraphTabViewModel(networking: networking, configManager: configManager, dateProvider: dateProvider))
         self.configManager = configManager
         self.appThemePublisher = configManager.appTheme
         self.appTheme = appThemePublisher.value

@@ -25,8 +25,6 @@ public struct AppTheme {
     public var showTotalYield: Bool
     public var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode
     public var showFinancialEarnings: Bool
-    public var showFinancialSavings: Bool
-    public var showFinancialCosts: Bool
     public var financialModel: FinancialModel
     public var feedInUnitPrice: Double
     public var gridImportUnitPrice: Double
@@ -52,8 +50,6 @@ public struct AppTheme {
         showTotalYield: Bool,
         selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode,
         showFinancialEarnings: Bool,
-        showFinancialSavings: Bool,
-        showFinancialCosts: Bool,
         financialModel: FinancialModel,
         feedInUnitPrice: Double,
         gridImportUnitPrice: Double,
@@ -78,8 +74,6 @@ public struct AppTheme {
         self.showTotalYield = showTotalYield
         self.selfSufficiencyEstimateMode = selfSufficiencyEstimateMode
         self.showFinancialEarnings = showFinancialEarnings
-        self.showFinancialSavings = showFinancialSavings
-        self.showFinancialCosts = showFinancialCosts
         self.financialModel = financialModel
         self.feedInUnitPrice = feedInUnitPrice
         self.gridImportUnitPrice = gridImportUnitPrice
@@ -106,8 +100,6 @@ public struct AppTheme {
         showTotalYield: Bool? = nil,
         selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode? = nil,
         showFinancialEarnings: Bool? = nil,
-        showFinancialSavings: Bool? = nil,
-        showFinancialCosts: Bool? = nil,
         financialModel: FinancialModel? = nil,
         feedInUnitPrice: Double? = nil,
         gridImportUnitPrice: Double? = nil,
@@ -133,8 +125,6 @@ public struct AppTheme {
             showTotalYield: showTotalYield ?? self.showTotalYield,
             selfSufficiencyEstimateMode: selfSufficiencyEstimateMode ?? self.selfSufficiencyEstimateMode,
             showFinancialEarnings: showFinancialEarnings ?? self.showFinancialEarnings,
-            showFinancialSavings: showFinancialSavings ?? self.showFinancialSavings,
-            showFinancialCosts: showFinancialCosts ?? self.showFinancialCosts,
             financialModel: financialModel ?? self.financialModel,
             feedInUnitPrice: feedInUnitPrice ?? self.feedInUnitPrice,
             gridImportUnitPrice: gridImportUnitPrice ?? self.gridImportUnitPrice,

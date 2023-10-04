@@ -25,8 +25,6 @@ public extension AppTheme {
             showTotalYield: false,
             selfSufficiencyEstimateMode: selfSufficiencyEstimateMode,
             showFinancialEarnings: false,
-            showFinancialSavings: false,
-            showFinancialCosts: false,
             financialModel: .energyStats,
             feedInUnitPrice: 0.05,
             gridImportUnitPrice: 0.15,

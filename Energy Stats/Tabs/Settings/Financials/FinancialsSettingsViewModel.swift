@@ -15,18 +15,6 @@ class FinancialsSettingsViewModel: ObservableObject {
         }
     }
 
-    @Published var showFinancialSavings: Bool {
-        didSet {
-            configManager.showFinancialSavings = showFinancialSavings
-        }
-    }
-
-    @Published var showFinancialCosts: Bool {
-        didSet {
-            configManager.showFinancialCosts = showFinancialCosts
-        }
-    }
-
     @Published var financialModel: FinancialModel {
         didSet {
             configManager.financialModel = financialModel
@@ -51,8 +39,6 @@ class FinancialsSettingsViewModel: ObservableObject {
     init(configManager: ConfigManaging) {
         self.configManager = configManager
         showFinancialSummary = configManager.showFinancialEarnings
-        showFinancialSavings = configManager.showFinancialSavings
-        showFinancialCosts = configManager.showFinancialCosts
         financialModel = configManager.financialModel
         energyStatsFeedInUnitPrice = String(configManager.feedInUnitPrice)
         energyStatsGridImportUnitPrice = String(configManager.gridImportUnitPrice)

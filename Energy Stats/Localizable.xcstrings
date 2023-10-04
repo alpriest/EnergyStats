@@ -3946,6 +3946,7 @@
       }
     },
     "Financials" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -9452,30 +9453,30 @@
         }
       }
     },
-    "This unit price is stored on the FoxESS Cloud." : {
+    "This unit price is managed on the FoxESS Cloud." : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dieser Einheitspreis ist auf der FoxESS Cloud gespeichert."
+            "value" : "Dieser Einheitspreis wird in der FoxESS Cloud verwaltet."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Este precio unitario se almacena en la nube FoxESS."
+            "value" : "Este precio unitario se gestiona en la nube de FoxESS."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Questo prezzo unitario è memorizzato su FoxESS Cloud."
+            "value" : "Questo prezzo unitario è gestito sulla FoxESS Cloud."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ta cena jednostkowa jest przechowywana w chmurze FoxESS."
+            "value" : "Ta cena jednostkowa jest zarządzana w chmurze FoxESS."
           }
         }
       }

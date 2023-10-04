@@ -80,12 +80,6 @@ struct DisplaySettingsView: View {
         }
 
         NavigationLink {
-            FinancialsSettingsView(configManager: configManager)
-        } label: {
-            Text("Financials")
-        }
-
-        NavigationLink {
             SolarBandingSettingsView(configManager: configManager)
         } label: {
             Text("Sun display variation thresholds")

@@ -9,50 +9,42 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct FinancialsSettingsView: View {
-    @StateObject private var viewModel: FinancialsSettingsViewModel
-
-    init(configManager: ConfigManaging) {
-        _viewModel = .init(wrappedValue: FinancialsSettingsViewModel(configManager: configManager))
-    }
+    @ObservedObject var viewModel: FinancialsSettingsViewModel
 
     var body: some View {
-        Form {
-            Section {
-                Toggle(isOn: $viewModel.showFinancialSummary) {
-                    Text("Show financial summary")
-                }
+        Section {
+            Toggle(isOn: $viewModel.showFinancialSummary) {
+                Text("Show financial summary")
+            }
 
-                if viewModel.showFinancialSummary {
-                    Picker("Financial Model", selection: $viewModel.financialModel) {
-                        Text("Energy Stats").tag(FinancialModel.energyStats)
-                        Text("FoxESS").tag(FinancialModel.foxESS)
-                    }
-                    .pickerStyle(.segmented)
-
-                    switch viewModel.financialModel {
-                    case .energyStats:
-                        makeTextField(title: "Feed In Unit price", currencyCode: "£", text: $viewModel.energyStatsFeedInUnitPrice)
-                        makeTextField(title: "Grid Import Unit price", currencyCode: "£", text: $viewModel.energyStatsGridImportUnitPrice)
-                    case .foxESS:
-                        makeTextField(title: "Feed In Unit price", currencyCode: "£", text: $viewModel.foxFeedInUnitPrice)
-                    }
+            if viewModel.showFinancialSummary {
+                Picker("Financial Model", selection: $viewModel.financialModel) {
+                    Text("Energy Stats").tag(FinancialModel.energyStats)
+                    Text("FoxESS").tag(FinancialModel.foxESS)
                 }
-            } footer: {
-                if viewModel.showFinancialSummary {
-                    switch viewModel.financialModel {
-                    case .energyStats:
-                        energyStatsFooter()
-                    case .foxESS:
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("This unit price is stored on the FoxESS Cloud.")
-                            Text("foxess_earnings_calculation_description")
-                        }
+                .pickerStyle(.segmented)
+
+                switch viewModel.financialModel {
+                case .energyStats:
+                    makeTextField(title: "Feed In Unit price", currencyCode: "£", text: $viewModel.energyStatsFeedInUnitPrice)
+                    makeTextField(title: "Grid Import Unit price", currencyCode: "£", text: $viewModel.energyStatsGridImportUnitPrice)
+                case .foxESS:
+                    EmptyView()
+                }
+            }
+        } footer: {
+            if viewModel.showFinancialSummary {
+                switch viewModel.financialModel {
+                case .energyStats:
+                    energyStatsFooter()
+                case .foxESS:
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("This unit price is managed on the FoxESS Cloud.")
+                        Text("foxess_earnings_calculation_description")
                     }
                 }
             }
         }
-        .navigationTitle("Financials")
-        .navigationBarTitleDisplayMode(.inline)
     }
 
     @ViewBuilder
@@ -111,5 +103,5 @@ struct FinancialsSettingsView: View {
 }
 
 #Preview {
-    FinancialsSettingsView(configManager: PreviewConfigManager())
+    FinancialsSettingsView(viewModel: FinancialsSettingsViewModel(configManager:  PreviewConfigManager()))
 }
