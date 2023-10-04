@@ -105,5 +105,7 @@ struct FinancialsSettingsView: View {
 }
 
 #Preview {
-    FinancialsSettingsView(viewModel: FinancialsSettingsViewModel(configManager:  PreviewConfigManager()))
+    Form {
+        FinancialsSettingsView(viewModel: FinancialsSettingsViewModel(configManager:  PreviewConfigManager()))
+    }
 }
