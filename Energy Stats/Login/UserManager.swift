@@ -35,7 +35,7 @@ class UserManager: ObservableObject {
         if configManager.hasRunBefore { return }
 
         Task { @MainActor in
-//            logout()  // Enable this in October 2023
+            logout()
             configManager.hasRunBefore = true
         }
     }

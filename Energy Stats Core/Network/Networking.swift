@@ -24,6 +24,8 @@ extension URL {
     static var deviceSettingsSet = URL(string: "https://www.foxesscloud.com/c/v0/device/setting/set")!
     static var moduleList = URL(string: "https://www.foxesscloud.com/c/v0/module/list")!
     static var errorMessages = URL(string: "https://www.foxesscloud.com/c/v0/errors/message")!
+//    static var getPlant = URL(string: "https://www.foxesscloud.com/c/v0/plant/get")! // ?stationID=760f8106-a59b-45ee-bf81-1665e9e9429d
+    static var updatePlant = URL(string: "https://www.foxesscloud.com/c/v0/plant/update")!
 }
 
 public protocol Networking {

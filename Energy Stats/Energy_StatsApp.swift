@@ -31,11 +31,21 @@ struct Energy_StatsApp: App {
                 )
                 .environmentObject(store)
                 .environmentObject(userManager)
+                .task {
+                    if isRunningScreenshots() {
+                        config.financialModel = 0
+                        config.showFinancialEarnings = true
+                    }
+                }
             }
         }
     }
 
     func isRunningTests() -> Bool {
         CommandLine.arguments.contains("-TESTING=1")
+    }
+
+    func isRunningScreenshots() -> Bool {
+        CommandLine.arguments.contains("screenshots")
     }
 }

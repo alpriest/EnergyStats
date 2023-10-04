@@ -190,6 +190,8 @@
 		41D286E52AB352AC00B18FEF /* ParameterGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D286E42AB352AC00B18FEF /* ParameterGroup.swift */; };
 		41D8402D2AB2E0DE00769E81 /* ErrorMessagesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D8402C2AB2E0DE00769E81 /* ErrorMessagesResponse.swift */; };
 		41DD7F3A29C5B8940072CDE8 /* SolarPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD7F3929C5B8940072CDE8 /* SolarPowerView.swift */; };
+		41DE1B512ACD57A8001BB2D1 /* Energy_Stats_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; platformFilter = ios; };
+		41DE1B522ACD57A8001BB2D1 /* Energy_Stats_Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		41DF51D22AA4CF6D007B5102 /* MockAppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DF51D12AA4CF6D007B5102 /* MockAppTheme.swift */; };
 		41E1DFDF28D87781001235B9 /* SettingsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E1DFDE28D87781001235B9 /* SettingsTabView.swift */; };
 		41E299CF29B7260D001F017B /* Energy_Stats_UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E299CE29B7260D001F017B /* Energy_Stats_UITestsLaunchTests.swift */; };
@@ -222,6 +224,13 @@
 			remoteInfo = "Energy Stats Core";
 		};
 		41A95B9829DB3F6A00A35169 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4140144228C70B3200EA5BA1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 41A95B9329DB3F6A00A35169;
+			remoteInfo = "Energy Stats Core";
+		};
+		41DE1B532ACD57A8001BB2D1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4140144228C70B3200EA5BA1 /* Project object */;
 			proxyType = 1;
@@ -290,6 +299,17 @@
 			dstSubfolderSpec = 10;
 			files = (
 				41A95B9B29DB3F6A00A35169 /* Energy_Stats_Core.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		41DE1B552ACD57A8001BB2D1 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				41DE1B522ACD57A8001BB2D1 /* Energy_Stats_Core.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -554,6 +574,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				41B690F928E040060058126E /* OHHTTPStubsSwift in Frameworks */,
+				41DE1B512ACD57A8001BB2D1 /* Energy_Stats_Core.framework in Frameworks */,
 				4127911028E38EFB00D5F993 /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1206,11 +1227,13 @@
 				41EDDF6D28CD2ED30092C662 /* Sources */,
 				41EDDF6E28CD2ED30092C662 /* Frameworks */,
 				41EDDF6F28CD2ED30092C662 /* Resources */,
+				41DE1B552ACD57A8001BB2D1 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				41EDDF7628CD2ED30092C662 /* PBXTargetDependency */,
+				41DE1B542ACD57A8001BB2D1 /* PBXTargetDependency */,
 			);
 			name = "Energy StatsTests";
 			packageProductDependencies = (
@@ -1578,6 +1601,12 @@
 			isa = PBXTargetDependency;
 			target = 41A95B9329DB3F6A00A35169 /* Energy Stats Core */;
 			targetProxy = 41A95B9829DB3F6A00A35169 /* PBXContainerItemProxy */;
+		};
+		41DE1B542ACD57A8001BB2D1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = 41A95B9329DB3F6A00A35169 /* Energy Stats Core */;
+			targetProxy = 41DE1B532ACD57A8001BB2D1 /* PBXContainerItemProxy */;
 		};
 		41E299D129B7260D001F017B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

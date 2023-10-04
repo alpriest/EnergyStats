@@ -42,15 +42,15 @@ class MockNetworking: Networking {
         }
     }
 
-    func fetchDeviceList() async throws -> PagedDeviceListResponse {
-        PagedDeviceListResponse(currentPage: 1, pageSize: 1, total: 1, devices: [
+    func fetchDeviceList() async throws -> [PagedDeviceListResponse.Device] {
+        [
             PagedDeviceListResponse.Device(plantName: "plant1", deviceID: "abcdef", deviceSN: "123123", moduleSN: "SN123", hasBattery: true, hasPV: true, deviceType: "F4000")
-        ])
+        ]
     }
 
     func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate) async throws -> [ReportResponse] {
         if throwOnCall {
-            throw NetworkError.unknown
+            throw NetworkError.maintenanceMode
         }
 
         return [ReportResponse(variable: "feedin", data: [.init(index: 14, value: 1.5)])]
@@ -64,9 +64,13 @@ class MockNetworking: Networking {
         BatteryResponse(power: 0.27, soc: 56, residual: 2200, temperature: 13.6)
     }
 
+    func fetchErrorMessages() async {
+
+    }
+
     func fetchRaw(deviceID: String, variables: [RawVariable], queryDate: Energy_Stats_Core.QueryDate) async throws -> [RawResponse] {
         if throwOnCall {
-            throw NetworkError.unknown
+            throw NetworkError.maintenanceMode
         }
 
         let response = try JSONDecoder().decode(NetworkResponse<[RawResponse]>.self, from: rawData())

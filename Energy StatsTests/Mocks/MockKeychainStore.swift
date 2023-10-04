@@ -11,6 +11,7 @@ import Foundation
 import Combine
 
 class MockKeychainStore: KeychainStoring {
+    var isDemoUser: Bool = true
     var username: String?
     var hashedPassword: String?
     var token: String?

@@ -17,27 +17,19 @@ final class ParametersGraphTabViewTests: XCTestCase {
         let networking = MockNetworking(throwOnCall: false, dateProvider: { Date(timeIntervalSince1970: 1664127352) })
         let configManager = ConfigManager(networking: networking, config: MockConfig())
         try await configManager.fetchDevices()
-        let viewModel = ParametersGraphTabViewModel(
-            networking: networking,
-            configManager: configManager
-        ) { Date(timeIntervalSince1970: 1664127352) }
 
-        let sut = ParametersGraphTabView(viewModel: viewModel)
+        let sut = ParametersGraphTabView(configManager: configManager, networking: networking) { Date(timeIntervalSince1970: 1664127352) }
         let view = UIHostingController(rootView: sut)
 
-        await viewModel.load()
+        await sut.viewModel.load()
 
         assertSnapshot(matching: view, as: .image(on: .iPhone13Pro))
     }
 
     func test_with_network_failure() async {
         let networking = MockNetworking(throwOnCall: true)
-        let viewModel = ParametersGraphTabViewModel(
-            networking: MockNetworking(throwOnCall: true),
-            configManager: ConfigManager(networking: networking, config: MockConfig())
-        )
-        await viewModel.load()
-        let sut = ParametersGraphTabView(viewModel: viewModel)
+        let sut = ParametersGraphTabView(configManager: ConfigManager(networking: networking, config: MockConfig()), networking: networking)
+        await sut.viewModel.load()
         let view = UIHostingController(rootView: sut)
 
         assertSnapshot(matching: view, as: .image(on: .iPhone13Pro))

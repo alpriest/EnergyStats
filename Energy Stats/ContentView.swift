@@ -27,15 +27,11 @@ struct ContentView: View {
     func fetchConfig() {
         Task { @MainActor in
             do {
-                state = .active(String(key: .loading))
-
                 await network.fetchErrorMessages()
                 try await configManager.fetchDevices()
                 Task {
                     try await configManager.refreshFirmwareVersions()
                 }
-
-                state = .inactive
             } catch let error as ConfigManager.NoDeviceFoundError {
                 loginManager.logout()
                 Task { @MainActor in

@@ -15,14 +15,16 @@ struct FinancialsSettingsView: View {
         Section {
             Toggle(isOn: $viewModel.showFinancialSummary) {
                 Text("Show financial summary")
-            }
+            }.accessibilityIdentifier("toggle_financial_summary")
 
             if viewModel.showFinancialSummary {
                 Picker("Financial Model", selection: $viewModel.financialModel) {
-                    Text("Energy Stats").tag(FinancialModel.energyStats)
+                    Text("Energy Stats")
+                        .tag(FinancialModel.energyStats)
                     Text("FoxESS").tag(FinancialModel.foxESS)
                 }
                 .pickerStyle(.segmented)
+                .accessibilityIdentifier("show_energy_stats_model")
 
                 switch viewModel.financialModel {
                 case .energyStats:

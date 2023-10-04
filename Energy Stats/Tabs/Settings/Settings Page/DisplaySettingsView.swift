@@ -78,6 +78,7 @@ struct DisplaySettingsView: View {
         } label: {
             Text("Approximations")
         }
+        .accessibilityIdentifier("approximations")
 
         NavigationLink {
             SolarBandingSettingsView(configManager: configManager)

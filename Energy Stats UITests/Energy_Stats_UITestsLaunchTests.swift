@@ -20,6 +20,7 @@ final class Energy_Stats_UITestsLaunchTests: XCTestCase {
     func test_takeScreenshots() async throws {
         let app = XCUIApplication()
         setupSnapshot(app)
+        app.launchArguments = ["screenshots"]
         app.launch()
 
         if app.buttons["try_demo"].exists {
@@ -57,5 +58,12 @@ final class Energy_Stats_UITestsLaunchTests: XCTestCase {
 
         app.buttons["charge schedule"].tap()
         snapshot("08_battery_charge_times")
+
+        app.navigationBars.buttons.element(boundBy: 0).tap()
+        app.navigationBars.buttons.element(boundBy: 0).tap()
+
+        app.buttons["approximations"].tap()
+        app.switches["toggle_financial_summary"].tap()
+        snapshot("09_financial_summary")
     }
 }
