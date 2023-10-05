@@ -2892,34 +2892,6 @@
         }
       }
     },
-    "Day by hours" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tag stündlich"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Día por horas"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Giorno per ore"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dzień według godzin"
-          }
-        }
-      }
-    },
     "Debug" : {
       "extractionState" : "manual",
       "localizations" : {
