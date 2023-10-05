@@ -151,12 +151,15 @@ class StatsTabViewModel: ObservableObject {
         let batteryCharge = totals[ReportVariable.chargeEnergyToTal]
         let batteryDischarge = totals[ReportVariable.dischargeEnergyToTal]
         let totalsViewModel = TotalsViewModel(grid: grid,
-                                          feedIn: feedIn,
-                                          loads: loads,
-                                          batteryCharge: batteryCharge ?? 0,
-                                          batteryDischarge: batteryDischarge ?? 0)
+                                              feedIn: feedIn,
+                                              loads: loads,
+                                              batteryCharge: batteryCharge ?? 0,
+                                              batteryDischarge: batteryDischarge ?? 0)
         self.totalsViewModel = totalsViewModel
-        financialModel = EnergyStatsFinancialModel(totalsViewModel: totalsViewModel, config: configManager, currencySymbol: configManager.currencySymbol)
+
+        if configManager.financialModel == .energyStats {
+            financialModel = EnergyStatsFinancialModel(totalsViewModel: totalsViewModel, config: configManager, currencySymbol: configManager.currencySymbol)
+        }
 
         calculateSelfSufficiencyEstimate(grid: grid,
                                          feedIn: feedIn,
