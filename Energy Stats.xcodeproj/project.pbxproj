@@ -103,6 +103,7 @@
 		4162BC2E2A09773D00DFEDC1 /* EarningsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4162BC2D2A09773D00DFEDC1 /* EarningsResponse.swift */; };
 		416318B729DDD2E100C2C285 /* InMemoryLoggingNetworkingDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416318B629DDD2E100C2C285 /* InMemoryLoggingNetworkingDecorator.swift */; };
 		416318B929DDD44C00C2C285 /* DebugDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416318B829DDD44C00C2C285 /* DebugDataView.swift */; };
+		416318BE29DDD80E00C2C285 /* View+Copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416318BD29DDD80E00C2C285 /* View+Copy.swift */; };
 		416318C029DDD82800C2C285 /* ResponseDebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416318BF29DDD82800C2C285 /* ResponseDebugView.swift */; };
 		416AE4362A7D2C8B003D0122 /* InverterSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416AE4352A7D2C8B003D0122 /* InverterSettingsView.swift */; };
 		416AE4382A7D956E003D0122 /* AlertCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416AE4372A7D956E003D0122 /* AlertCopy.swift */; };
@@ -151,12 +152,9 @@
 		41A25D3D28CA5CDF00315714 /* ParametersGraphTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A25D3C28CA5CDF00315714 /* ParametersGraphTabView.swift */; };
 		41A25D3F28CA5CFB00315714 /* ParametersGraphTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A25D3E28CA5CFB00315714 /* ParametersGraphTabViewModel.swift */; };
 		41A95B9729DB3F6A00A35169 /* Energy_Stats_Core.h in Headers */ = {isa = PBXBuildFile; fileRef = 41A95B9629DB3F6A00A35169 /* Energy_Stats_Core.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		41A95B9A29DB3F6A00A35169 /* Energy_Stats_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; platformFilters = (ios, macos, ); };
-		41A95B9B29DB3F6A00A35169 /* Energy_Stats_Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; platformFilters = (ios, macos, ); settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		41A95B9A29DB3F6A00A35169 /* Energy_Stats_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; };
+		41A95B9B29DB3F6A00A35169 /* Energy_Stats_Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		41A95BA129DB3F7E00A35169 /* PylonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A95BA029DB3F7E00A35169 /* PylonView.swift */; };
-		41AA80FE2AD05B9B007F4FBF /* UrlOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA80FD2AD05B9B007F4FBF /* UrlOpener.swift */; };
-		41AA81002AD05CBF007F4FBF /* ImpactHapticGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA80FF2AD05CBF007F4FBF /* ImpactHapticGenerator.swift */; };
-		41AA81022AD06BCA007F4FBF /* iosExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA81012AD06BCA007F4FBF /* iosExtension.swift */; };
 		41ACB2C42A51832E005831B0 /* ParameterGraphHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41ACB2C32A51832E005831B0 /* ParameterGraphHeaderViewModel.swift */; };
 		41ACB2C62A51ADEB005831B0 /* ValueBoundsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41ACB2C52A51ADEB005831B0 /* ValueBoundsView.swift */; };
 		41AF2F412AA4C674008FCA2E /* BatteryPowerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AF2F402AA4C674008FCA2E /* BatteryPowerFooterView.swift */; };
@@ -405,6 +403,7 @@
 		4162BC2F2A097C1300DFEDC1 /* SunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunView.swift; sourceTree = "<group>"; };
 		416318B629DDD2E100C2C285 /* InMemoryLoggingNetworkingDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryLoggingNetworkingDecorator.swift; sourceTree = "<group>"; };
 		416318B829DDD44C00C2C285 /* DebugDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugDataView.swift; sourceTree = "<group>"; };
+		416318BD29DDD80E00C2C285 /* View+Copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Copy.swift"; sourceTree = "<group>"; };
 		416318BF29DDD82800C2C285 /* ResponseDebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseDebugView.swift; sourceTree = "<group>"; };
 		416AE4352A7D2C8B003D0122 /* InverterSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterSettingsView.swift; sourceTree = "<group>"; };
 		416AE4372A7D956E003D0122 /* AlertCopy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCopy.swift; sourceTree = "<group>"; };
@@ -470,9 +469,6 @@
 		41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Energy_Stats_Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		41A95B9629DB3F6A00A35169 /* Energy_Stats_Core.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Energy_Stats_Core.h; sourceTree = "<group>"; };
 		41A95BA029DB3F7E00A35169 /* PylonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PylonView.swift; sourceTree = "<group>"; };
-		41AA80FD2AD05B9B007F4FBF /* UrlOpener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlOpener.swift; sourceTree = "<group>"; };
-		41AA80FF2AD05CBF007F4FBF /* ImpactHapticGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactHapticGenerator.swift; sourceTree = "<group>"; };
-		41AA81012AD06BCA007F4FBF /* iosExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosExtension.swift; sourceTree = "<group>"; };
 		41ACB2C32A51832E005831B0 /* ParameterGraphHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterGraphHeaderViewModel.swift; sourceTree = "<group>"; };
 		41ACB2C52A51ADEB005831B0 /* ValueBoundsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueBoundsView.swift; sourceTree = "<group>"; };
 		41AED86928CDCD94009C6517 /* raw-f3000-deviceid.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "raw-f3000-deviceid.json"; sourceTree = "<group>"; };
@@ -598,7 +594,6 @@
 				4171854329FFCF9500D18CDD /* Color+Hex.swift */,
 				417185492A01006000D18CDD /* Double.swift */,
 				416AE44C2A821E4F003D0122 /* AlertContent.swift */,
-				41AA81012AD06BCA007F4FBF /* iosExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -608,6 +603,7 @@
 			children = (
 				4128E4C028DA5F6600C1D698 /* Date.swift */,
 				418EEEB42916843A006A8290 /* View+If.swift */,
+				416318BD29DDD80E00C2C285 /* View+Copy.swift */,
 				417153E729F2D80C00639A7B /* Date+compare.swift */,
 				41CD1F332A141F81006B0C00 /* NonFunctionalButton.swift */,
 				411029122A71C066004018BB /* Tintable.swift */,
@@ -615,7 +611,6 @@
 				416AE4372A7D956E003D0122 /* AlertCopy.swift */,
 				4160098C2A8D1A690096CCD9 /* BottomButtonsView.swift */,
 				41CF044B2A95006E00ADCCAD /* ExternalWebNavigationLink.swift */,
-				41AA80FD2AD05B9B007F4FBF /* UrlOpener.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1012,7 +1007,6 @@
 				413B7A302A4A390C00562A68 /* SelfSufficiencyCalculator.swift */,
 				41757BBB2A90A05E00573FB4 /* AmountType.swift */,
 				41DF51D12AA4CF6D007B5102 /* MockAppTheme.swift */,
-				41AA80FF2AD05CBF007F4FBF /* ImpactHapticGenerator.swift */,
 			);
 			path = "Energy Stats Core";
 			sourceTree = "<group>";
@@ -1494,8 +1488,8 @@
 				41AF2F432AA4C6C1008FCA2E /* HomePowerFooterView.swift in Sources */,
 				413BF2892A99F8A500A32B0D /* ApproximationsView.swift in Sources */,
 				416AE4382A7D956E003D0122 /* AlertCopy.swift in Sources */,
+				416318BE29DDD80E00C2C285 /* View+Copy.swift in Sources */,
 				4107446728CA22B3006D5D7D /* InverterViewModel.swift in Sources */,
-				41AA80FE2AD05B9B007F4FBF /* UrlOpener.swift in Sources */,
 				410FC8862AB98F020004CBC2 /* ParameterVariableGroupEditorView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1521,14 +1515,12 @@
 				416AE4482A812876003D0122 /* WorkMode.swift in Sources */,
 				4162BC2E2A09773D00DFEDC1 /* EarningsResponse.swift in Sources */,
 				41A95BA129DB3F7E00A35169 /* PylonView.swift in Sources */,
-				41AA81022AD06BCA007F4FBF /* iosExtension.swift in Sources */,
 				41D8402D2AB2E0DE00769E81 /* ErrorMessagesResponse.swift in Sources */,
 				4103D1D529DB6C51001B0BC8 /* NetworkResponse.swift in Sources */,
 				4192F99B2A8678DB0035DAB8 /* PagedDataLoggerListResponse.swift in Sources */,
 				410913FD29DB78EF00133CC5 /* PreciseDateTimeFormatter.swift in Sources */,
 				416AE4492A8128B9003D0122 /* OptionalView.swift in Sources */,
 				417185462A004FA900D18CDD /* VariablesResponse.swift in Sources */,
-				41AA81002AD05CBF007F4FBF /* ImpactHapticGenerator.swift in Sources */,
 				4103D1CF29DB6C4D001B0BC8 /* Auth.swift in Sources */,
 				41CA35732AA8C10900D45734 /* EarningsViewModel.swift in Sources */,
 				410913FF29DB7A2700133CC5 /* CurrentStatusViewModel.swift in Sources */,
@@ -1607,10 +1599,6 @@
 		};
 		41A95B9929DB3F6A00A35169 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			platformFilters = (
-				ios,
-				macos,
-			);
 			target = 41A95B9329DB3F6A00A35169 /* Energy Stats Core */;
 			targetProxy = 41A95B9829DB3F6A00A35169 /* PBXContainerItemProxy */;
 		};
@@ -1886,7 +1874,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1920,7 +1908,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;

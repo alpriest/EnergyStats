@@ -33,7 +33,7 @@ struct BatterySettingsView: View {
                                 VStack(alignment: .trailing) {
                                     TextField("Capacity", text: $viewModel.batteryCapacity)
                                         .multilineTextAlignment(.trailing)
-                                        .numberPadKeyboardType()
+                                        .keyboardType(.numberPad)
                                         .focused($focused)
 
                                     HStack {
@@ -107,7 +107,7 @@ struct BatterySettingsView: View {
             }
         }
         .navigationTitle("Battery")
-        .inlineNavigationBarTitle()
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

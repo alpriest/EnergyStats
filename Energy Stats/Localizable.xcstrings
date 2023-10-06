@@ -2557,7 +2557,6 @@
       }
     },
     "Copy to clipboard" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

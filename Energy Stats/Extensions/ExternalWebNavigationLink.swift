@@ -15,7 +15,7 @@ struct ExternalWebNavigationLink: View {
     var body: some View {
         Button {
             let url = URL(string: url)!
-            UrlOpener.open(url)
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
         } label: {
             NavigationLink {
                 EmptyView()
@@ -24,19 +24,9 @@ struct ExternalWebNavigationLink: View {
             }
         }
         .buttonStyle(.automatic)
-        .tint(Color.label)
+        .tint(Color(uiColor: UIColor.label))
     }
 }
-
-#if os(iOS)
-extension Color {
-    static var label: Color = { Color(uiColor: UIColor.label) }()
-}
-#else
-extension Color {
-    static var label: Color = { Color(nsColor: NSColor.textColor) }()
-}
-#endif
 
 #if DEBUG
 struct ExternalWebNavigationLink_Previews: PreviewProvider {

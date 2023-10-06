@@ -69,7 +69,7 @@ struct InverterSettingsView: View {
             }
         }
         .navigationTitle("Inverter")
-        .inlineNavigationBarTitle()
+        .navigationBarTitleDisplayMode(.inline)
     }
 
     func text(_ currentDevice: Device) -> String {

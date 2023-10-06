@@ -10,10 +10,11 @@ import SwiftUI
 
 class SolarBandingSettingsViewModel: ObservableObject {
     private var configManager: ConfigManaging
-    let haptic = ImpactHapticGenerator()
+    let haptic = UIImpactFeedbackGenerator()
 
     init(configManager: ConfigManaging) {
         self.configManager = configManager
+        haptic.prepare()
     }
 
     func update(breakpoint1: Double, breakpoint2: Double, breakpoint3: Double) {
@@ -125,7 +126,7 @@ struct SolarBandingSettingsView: View {
             }
         }
         .navigationTitle("Sun display variation thresholds")
-        .inlineNavigationBarTitle()
+        .navigationBarTitleDisplayMode(.inline)
     }
 
     func verifyThresholds() {

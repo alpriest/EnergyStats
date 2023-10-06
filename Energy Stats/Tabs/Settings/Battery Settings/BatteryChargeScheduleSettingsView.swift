@@ -36,7 +36,7 @@ struct BatteryChargeScheduleSettingsView: View {
             BottomButtonsView { viewModel.save() }
         }
         .navigationTitle("Battery Schedule")
-        .inlineNavigationBarTitle()
+        .navigationBarTitleDisplayMode(.inline)
         .loadable($viewModel.state, retry: { viewModel.load() })
         .onChange(of: viewModel.timePeriod1) { newValue in
             viewModel.generateSummary(period1: newValue, period2: viewModel.timePeriod2)

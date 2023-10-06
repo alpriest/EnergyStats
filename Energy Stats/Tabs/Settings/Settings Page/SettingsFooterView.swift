@@ -26,7 +26,7 @@ struct SettingsFooterView: View {
                     HStack {
                         Button {
                             let url = URL(string: "mailto:energystatsapp@gmail.com")!
-                            UrlOpener.open(url)
+                            UIApplication.shared.open(url, options: [:], completionHandler: nil)
                         } label: {
                             Image(systemName: "envelope")
                             Text("Get in touch")
@@ -36,7 +36,7 @@ struct SettingsFooterView: View {
 
                     Button {
                         let url = URL(string: "itms-apps://itunes.apple.com/app/id1644492526?action=write-review")!
-                        UrlOpener.open(url)
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
                     } label: {
                         Image(systemName: "medal")
                         Text("Rate this app")
@@ -45,7 +45,7 @@ struct SettingsFooterView: View {
 
                     Button {
                         let url = URL(string: "https://buymeacoffee.com/alpriest")!
-                        UrlOpener.open(url)
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
                     } label: {
                         Image(systemName: "cup.and.saucer")
                         Text("Buy me a coffee")
@@ -53,7 +53,7 @@ struct SettingsFooterView: View {
 
                     Button {
                         let url = URL(string: "https://paypal.me/alpriest")!
-                        UrlOpener.open(url)
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
                     } label: {
                         Text("settings.donateVia")
                         Image("paypal_logo")

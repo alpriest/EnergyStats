@@ -22,12 +22,12 @@ struct LoginView: View {
 
             TextField("Username", text: $username)
                 .textFieldStyle(.roundedBorder)
-                .disableAutoCapitalization()
+                .autocapitalization(.none)
                 .autocorrectionDisabled()
 
             SecureField("Password", text: $password)
                 .textFieldStyle(.roundedBorder)
-                .disableAutoCapitalization()
+                .autocapitalization(.none)
                 .autocorrectionDisabled()
 
             HStack {

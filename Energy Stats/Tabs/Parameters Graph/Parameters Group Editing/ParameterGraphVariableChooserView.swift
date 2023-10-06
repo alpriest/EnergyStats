@@ -8,19 +8,10 @@
 import Energy_Stats_Core
 import SwiftUI
 
-enum ESEditMode {
-    case inactive
-    case active
-
-    var isEditing: Bool {
-        self == .active
-    }
-}
-
 struct ParameterGraphVariableChooserView: View {
     @ObservedObject var viewModel: ParameterGraphVariableChooserViewModel
     @Environment(\.dismiss) private var dismiss
-    @State private var editMode = ESEditMode.inactive
+    @State private var editMode = EditMode.inactive
     @State private var groupName = ""
 
     var body: some View {
@@ -87,7 +78,7 @@ struct ParameterGraphVariableChooserView: View {
                 }
             }
             .navigationTitle("Parameter Groups")
-            .inlineNavigationBarTitle()
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar { ToolbarItem(placement: .navigationBarTrailing) {
                 NavigationLink(destination: { ParameterVariableGroupEditorView(viewModel: ParameterVariableGroupEditorViewModel(configManager: viewModel.configManager)) },
                                label: { Text("Edit") })

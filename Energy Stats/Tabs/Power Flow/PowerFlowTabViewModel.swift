@@ -8,9 +8,7 @@
 import Combine
 import Energy_Stats_Core
 import Foundation
-#if os(iOS)
 import UIKit
-#endif
 
 class PowerFlowTabViewModel: ObservableObject {
     private let network: Networking
@@ -47,10 +45,8 @@ class PowerFlowTabViewModel: ObservableObject {
         self.network = network
         self.configManager = configManager
 
-        #if os(iOS)
         NotificationCenter.default.addObserver(self, selector: #selector(self.willResignActiveNotification), name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
-        #endif
 
         self.addDeviceChangeObserver()
         self.adddThemeChangeObserver()

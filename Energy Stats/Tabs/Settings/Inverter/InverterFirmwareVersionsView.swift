@@ -28,8 +28,7 @@ struct InverterFirmwareVersionsView: View {
                             Text(" ") + Text("website")
                     }
                     .onTapGesture {
-                        let url = URL(string: "https://foxesscommunity.com/viewforum.php?f=29")!
-                        UrlOpener.open(url)
+                        UIApplication.shared.open(URL(string: "https://foxesscommunity.com/viewforum.php?f=29")!)
                     }
                 }
                 .alertCopy(text(version))

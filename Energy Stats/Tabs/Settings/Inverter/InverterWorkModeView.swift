@@ -144,7 +144,7 @@ struct InverterWorkModeView: View {
         }
         .alert(alertContent: $viewModel.alertContent)
         .navigationTitle("Configure Work Mode")
-        .inlineNavigationBarTitle()
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

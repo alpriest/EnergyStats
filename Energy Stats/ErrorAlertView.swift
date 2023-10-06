@@ -55,7 +55,7 @@ struct ErrorAlertView: View {
 
                 Button("Check FoxESS Server status") {
                     let url = URL(string: "https://monitor.foxesscommunity.com/")!
-                    UrlOpener.open(url)
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 }.buttonStyle(.bordered)
             }
 
@@ -92,7 +92,7 @@ struct ErrorAlertView: View {
 }
 
 #if DEBUG
-struct ErrorAlertView_Previews: PreviewProvider {
+ struct ErrorAlertView_Previews: PreviewProvider {
     static var previews: some View {
         ErrorAlertView(
             cause: NetworkError.badCredentials,
@@ -102,5 +102,5 @@ struct ErrorAlertView_Previews: PreviewProvider {
         .environmentObject(UserManager.preview())
         .environment(\.locale, .init(identifier: "de"))
     }
-}
+ }
 #endif
