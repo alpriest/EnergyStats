@@ -75,7 +75,9 @@ struct ApproximationsView: View {
                             Text(financialModel.total.formattedAmount())
                         }
                     }
-                }.padding()
+                }
+                .padding()
+                .monospacedDigit()
             }
         }
         .padding(.top)

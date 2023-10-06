@@ -28,8 +28,8 @@ struct FinancialsSettingsView: View {
 
                 switch viewModel.financialModel {
                 case .energyStats:
-                    makeTextField(title: "Feed In Unit price", currencyCode: "£", text: $viewModel.energyStatsFeedInUnitPrice)
-                    makeTextField(title: "Grid Import Unit price", currencyCode: "£", text: $viewModel.energyStatsGridImportUnitPrice)
+                    makeTextField(title: "Feed In Unit price", currencySymbol: viewModel.currencySymbol, text: $viewModel.energyStatsFeedInUnitPrice)
+                    makeTextField(title: "Grid Import Unit price", currencySymbol: viewModel.currencySymbol, text: $viewModel.energyStatsGridImportUnitPrice)
                 case .foxESS:
                     EmptyView()
                 }
@@ -91,14 +91,15 @@ struct FinancialsSettingsView: View {
         .frame(maxWidth: .infinity)
     }
 
-    func makeTextField(title: LocalizedStringKey, currencyCode: LocalizedStringKey, text: Binding<String>) -> some View {
+    func makeTextField(title: LocalizedStringKey, currencySymbol: String, text: Binding<String>) -> some View {
         HStack {
             Text(title)
                 .multilineTextAlignment(.leading)
             Spacer()
-            Text(currencyCode)
-            TextField(0.roundedToString(decimalPlaces: 2, currencySymbol: nil), text: text)
+            Text(currencySymbol)
+            TextField(0.roundedToString(decimalPlaces: 2, currencySymbol: currencySymbol), text: text)
                 .frame(width: 50)
+                .monospacedDigit()
         }
         .multilineTextAlignment(.trailing)
     }

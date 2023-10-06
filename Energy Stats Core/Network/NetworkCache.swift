@@ -25,6 +25,7 @@ public class NetworkCache: Networking {
     private let network: Networking
     private var cache: [String: CachedItem] = [:]
     private let shortCacheDurationInSeconds: TimeInterval = 5
+    private let serialiserQueue = DispatchQueue(label: "networkcache.write.queue")
 
     public init(network: Networking) {
         self.network = network
@@ -49,7 +50,8 @@ public class NetworkCache: Networking {
             return cached
         } else {
             let fresh = try await network.fetchBattery(deviceID: deviceID)
-            cache[key] = CachedItem(fresh)
+
+            store(key: key, value: CachedItem(fresh))
             return fresh
         }
     }
@@ -61,7 +63,7 @@ public class NetworkCache: Networking {
             return cached
         } else {
             let fresh = try await network.fetchBatterySettings(deviceSN: deviceSN)
-            cache[key] = CachedItem(fresh)
+            store(key: key, value: CachedItem(fresh))
             return fresh
         }
     }
@@ -81,7 +83,7 @@ public class NetworkCache: Networking {
             return cached
         } else {
             let fresh = try await network.fetchAddressBook(deviceID: deviceID)
-            cache[key] = CachedItem(fresh)
+            store(key: key, value: CachedItem(fresh))
             return fresh
         }
     }
@@ -97,7 +99,7 @@ public class NetworkCache: Networking {
             return cached
         } else {
             let fresh = try await network.fetchEarnings(deviceID: deviceID)
-            cache[key] = CachedItem(fresh)
+            store(key: key, value: CachedItem(fresh))
             return fresh
         }
     }
@@ -134,5 +136,11 @@ public class NetworkCache: Networking {
 private extension NetworkCache {
     func makeKey(base: String, arguments: String...) -> String {
         ([base] + arguments).joined(separator: "_")
+    }
+
+    private func store(key: String, value: CachedItem) {
+        serialiserQueue.sync {
+            cache[key] = value
+        }
     }
 }

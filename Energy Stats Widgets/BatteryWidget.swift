@@ -27,6 +27,12 @@ struct BatteryWidget: Widget {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             BatteryWidgetView(entry: entry, configManager: configManager)
         }
+        .configurationDisplayName("Battery Status Widget")
+        .description("Shows the status of your battery storage")
+        .supportedFamilies([.accessoryCircular,
+                            .accessoryInline,
+                            .systemSmall,
+                            .systemMedium])
     }
 }
 

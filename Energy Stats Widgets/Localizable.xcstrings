@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Battery Status Widget" : {
+
+    },
     "Empty" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -58,6 +61,9 @@
           }
         }
       }
+    },
+    "Shows the status of your battery storage" : {
+
     },
     "Tap to retry" : {
       "localizations" : {

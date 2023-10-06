@@ -42,6 +42,13 @@ struct BatteryStatusView: View {
                     .font(.system(size: 8.0, weight: .light))
                 }
             }
+        case .accessoryInline:
+            HStack {
+                Image(systemName: "minus.plus.batteryblock.fill")
+                descriptionView()
+            }
+        case .accessoryCircular:
+            gaugeView(scale: false)
         default:
             VStack {
                 HStack(spacing: 44) {
@@ -72,7 +79,7 @@ struct BatteryStatusView: View {
         }
     }
 
-    private func gaugeView() -> some View {
+    private func gaugeView(scale: Bool = true) -> some View {
         Button(intent: UpdateBatteryChargeLevelIntent()) {
             VStack {
                 Gauge(value: soc) {
@@ -88,7 +95,7 @@ struct BatteryStatusView: View {
             }
         }
         .buttonStyle(.plain)
-        .scaleEffect(family == .systemSmall ? 1.2 : 1.4)
+        .scaleEffect(scale ? (family == .systemSmall ? 1.2 : 1.4) : 1.0)
     }
 
     private func descriptionView() -> some View {
@@ -118,9 +125,9 @@ struct BatteryStatusView_Previews: PreviewProvider {
             chargeStatusDescription: "Full in 22 minutes",
             lastUpdated: .now,
             appTheme: .mock(),
-            hasError: true
+            hasError: false
         )
-        .previewContext(WidgetPreviewContext(family: .systemMedium))
+        .previewContext(WidgetPreviewContext(family: .accessoryCircular))
         .containerBackground(for: .widget) {
             VStack {
                 Color.clear
@@ -129,14 +136,14 @@ struct BatteryStatusView_Previews: PreviewProvider {
             }
         }
 
-        BatteryStatusView(
-            soc: 0.8,
-            chargeStatusDescription: "Empty in 15 hours",
-            lastUpdated: .now,
-            appTheme: .mock(),
-            hasError: false
-        )
-        .previewContext(WidgetPreviewContext(family: .systemSmall))
-        .containerBackground(for: .widget) {}
+//        BatteryStatusView(
+//            soc: 0.8,
+//            chargeStatusDescription: "Empty in 15 hours",
+//            lastUpdated: .now,
+//            appTheme: .mock(),
+//            hasError: false
+//        )
+//        .previewContext(WidgetPreviewContext(family: .systemSmall))
+//        .containerBackground(for: .widget) {}
     }
 }

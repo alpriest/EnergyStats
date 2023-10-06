@@ -33,13 +33,16 @@ class FinancialsSettingsViewModel: ObservableObject {
         }
     }
 
+    let currencySymbol: String
+
     private(set) var configManager: ConfigManaging
 
     init(configManager: ConfigManaging) {
         self.configManager = configManager
         showFinancialSummary = configManager.showFinancialEarnings
         financialModel = configManager.financialModel
-        energyStatsFeedInUnitPrice = String(configManager.feedInUnitPrice)
-        energyStatsGridImportUnitPrice = String(configManager.gridImportUnitPrice)
+        energyStatsFeedInUnitPrice = configManager.feedInUnitPrice.roundedToString(decimalPlaces: 2)
+        energyStatsGridImportUnitPrice = configManager.gridImportUnitPrice.roundedToString(decimalPlaces: 2)
+        currencySymbol = configManager.currencySymbol
     }
 }
