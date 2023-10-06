@@ -11,7 +11,7 @@ import Energy_Stats_Core
 class ParameterGraphVariableChooserViewModel: ObservableObject {
     @Published var variables: [ParameterGraphVariable] = []
     private let onApply: ([ParameterGraphVariable]) -> Void
-    private let haptic = UIImpactFeedbackGenerator()
+    private let haptic = ImpactHapticGenerator()
     private(set) var configManager: ConfigManaging
     @Published var groups: [ParameterGroup]
 
@@ -20,7 +20,6 @@ class ParameterGraphVariableChooserViewModel: ObservableObject {
         self.configManager = configManager
         self.onApply = onApply
         self.groups = configManager.parameterGroups
-        haptic.prepare()
     }
 
     func toggle(updating: ParameterGraphVariable) {

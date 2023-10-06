@@ -8,7 +8,7 @@
 import Foundation
 import SwiftData
 
-@available(iOS 17.0, *)
+@available(iOS 17.0, macOS 14.0, *)
 @Model
 public class BatteryWidgetState {
     public let batterySOC: Int
@@ -26,7 +26,7 @@ public class BatteryWidgetState {
     }
 }
 
-@available(iOS 17.0, *)
+@available(iOS 17.0, macOS 14.0, *)
 extension BatteryWidgetState {
     static var preview: BatteryWidgetState {
         BatteryWidgetState(batterySOC: 55, lastUpdated: .now, chargeStatusDescription: "Full in 23 minutes")

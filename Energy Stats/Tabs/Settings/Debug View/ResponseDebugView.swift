@@ -85,11 +85,7 @@ struct ResponseDebugView<T: Decodable>: View {
             }
         }
         .navigationTitle(title)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                CopyButton(text: asText)
-            }
-        }
+        .navBarCopyButton(text: asText)
         .task {
             load()
         }

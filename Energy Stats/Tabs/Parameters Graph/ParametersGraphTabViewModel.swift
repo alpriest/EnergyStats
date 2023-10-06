@@ -25,7 +25,7 @@ struct GraphDisplayMode: Equatable {
 }
 
 class ParametersGraphTabViewModel: ObservableObject {
-    private let haptic = UIImpactFeedbackGenerator()
+    private let haptic = ImpactHapticGenerator()
     private let networking: Networking
     private var configManager: ConfigManaging
     private var rawData: [ParameterGraphValue] = [] {
@@ -80,7 +80,6 @@ class ParametersGraphTabViewModel: ObservableObject {
         self.networking = networking
         self.configManager = configManager
         self.dateProvider = dateProvider
-        haptic.prepare()
 
         cancellable = configManager.currentDevice
             .map { device in
@@ -96,7 +95,9 @@ class ParametersGraphTabViewModel: ObservableObject {
             .receive(on: RunLoop.main)
             .assign(to: \.graphVariables, on: self)
 
+        #if os(iOS)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
+        #endif
     }
 
     @objc

@@ -11,7 +11,7 @@ import Foundation
 import SwiftUI
 
 class StatsTabViewModel: ObservableObject {
-    private let haptic = UIImpactFeedbackGenerator()
+    private let haptic = ImpactHapticGenerator()
     private let configManager: ConfigManaging
     private let networking: Networking
 
@@ -48,9 +48,9 @@ class StatsTabViewModel: ObservableObject {
         self.networking = networking
         self.configManager = configManager
 
-        haptic.prepare()
-
+#if os(iOS)
         NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
+#endif
         addDeviceChangeObserver()
     }
 

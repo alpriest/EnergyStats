@@ -24,7 +24,7 @@ struct ApproximationsSettingsView: View {
             FinancialsSettingsView(viewModel: financialsViewModel)
         }
         .navigationTitle("Approximations")
-        .navigationBarTitleDisplayMode(.inline)
+        .inlineNavigationBarTitle()
     }
 }
 

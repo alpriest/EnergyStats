@@ -99,14 +99,13 @@ struct AdjustableView: View {
     let config: Config
     let maximum: Double
     let thresholds: [Double]
-    private let haptic = UISelectionFeedbackGenerator()
+    private let haptic = SelectionHapticGenerator()
 
     init(appTheme: AppTheme, config: Config, maximum: Double, thresholds: [Double]) {
         self.appTheme = appTheme
         self.config = config
         self.maximum = maximum
         self.thresholds = thresholds
-        haptic.prepare()
     }
 
     var body: some View {

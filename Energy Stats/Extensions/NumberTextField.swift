@@ -20,7 +20,7 @@ struct NumberTextField: View {
 
     var body: some View {
         TextField(title, text: $text)
-            .keyboardType(.numberPad)
+            .numberPadKeyboardType()
             .onChange(of: text, perform: { newValue in
                 let filtered = newValue.filter { "0123456789".contains($0) }
                 if filtered != newValue {
