@@ -33,21 +33,6 @@ struct ParameterGraphVariableChooserView: View {
                         Text("Groups")
                     }
 
-                    if editMode.isEditing {
-                        Section {
-                            TextField("Group name", text: $groupName)
-                            Button("Create") {
-                                viewModel.createGroup(named: groupName)
-                                editMode = .inactive
-                                groupName = ""
-                            }.contentShape(Rectangle())
-                        } header: {
-                            Text("Create")
-                        } footer: {
-                            Text("This will create a new group from your selected parameters.")
-                        }
-                    }
-
                     Section {
                         ParameterVariableListView(variables: viewModel.variables, onTap: viewModel.toggle)
                     } header: {

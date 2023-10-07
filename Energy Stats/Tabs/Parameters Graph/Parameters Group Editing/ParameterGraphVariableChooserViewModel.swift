@@ -39,16 +39,6 @@ class ParameterGraphVariableChooserViewModel: ObservableObject {
         onApply(variables)
     }
 
-    func createGroup(named name: String) {
-        groups.append(ParameterGroup(id: UUID(), title: name, parameterNames: variables.filter { $0.isSelected }.map { $0.type.variable }))
-        configManager.parameterGroups = groups
-    }
-
-    func delete(at index: Int) {
-        groups.remove(at: index)
-        configManager.parameterGroups = groups
-    }
-
     static let DefaultGraphVariables = ["generationPower",
                                         "batChargePower",
                                         "batDischargePower",
