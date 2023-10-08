@@ -23,13 +23,13 @@ class FinancialsSettingsViewModel: ObservableObject {
 
     @Published var energyStatsFeedInUnitPrice: String {
         didSet {
-            configManager.feedInUnitPrice = Double(energyStatsFeedInUnitPrice) ?? 0.0
+            configManager.feedInUnitPrice = energyStatsFeedInUnitPrice.asCurrencyStringToDouble()
         }
     }
 
     @Published var energyStatsGridImportUnitPrice: String {
         didSet {
-            configManager.gridImportUnitPrice = Double(energyStatsGridImportUnitPrice) ?? 0.0
+            configManager.gridImportUnitPrice = energyStatsGridImportUnitPrice.asCurrencyStringToDouble()
         }
     }
 
@@ -41,8 +41,8 @@ class FinancialsSettingsViewModel: ObservableObject {
         self.configManager = configManager
         showFinancialSummary = configManager.showFinancialEarnings
         financialModel = configManager.financialModel
-        energyStatsFeedInUnitPrice = configManager.feedInUnitPrice.roundedToString(decimalPlaces: 2)
-        energyStatsGridImportUnitPrice = configManager.gridImportUnitPrice.roundedToString(decimalPlaces: 2)
+        energyStatsFeedInUnitPrice = configManager.feedInUnitPrice.roundedToString(decimalPlaces: 3)
+        energyStatsGridImportUnitPrice = configManager.gridImportUnitPrice.roundedToString(decimalPlaces: 3)
         currencySymbol = configManager.currencySymbol
     }
 }

@@ -2866,6 +2866,7 @@
       }
     },
     "Day by hours" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
