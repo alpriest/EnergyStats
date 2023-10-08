@@ -57,7 +57,7 @@ struct ApproximationsView: View {
                             }
                         }
 
-                        if let financialModel = viewModel.financialModel {
+                        if let financialModel = approximationsViewModel.financialModel {
                             HStack {
                                 Text("Export income")
                                 Spacer()

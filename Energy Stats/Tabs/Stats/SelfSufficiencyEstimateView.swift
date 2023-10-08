@@ -49,6 +49,8 @@ extension ApproximationsViewModel {
     static func any() -> ApproximationsViewModel {
         ApproximationsViewModel(
             netSelfSufficiencyEstimate: "95%",
-            absoluteSelfSufficiencyEstimate: "100%")
+            absoluteSelfSufficiencyEstimate: "100%",
+            financialModel: nil
+        )
     }
 }

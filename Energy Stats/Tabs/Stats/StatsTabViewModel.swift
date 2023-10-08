@@ -13,6 +13,7 @@ import SwiftUI
 struct ApproximationsViewModel {
     let netSelfSufficiencyEstimate: String?
     let absoluteSelfSufficiencyEstimate: String?
+    let financialModel: EnergyStatsFinancialModel?
 }
 
 class StatsTabViewModel: ObservableObject {
@@ -42,7 +43,6 @@ class StatsTabViewModel: ObservableObject {
     @Published var approximationsViewModel: ApproximationsViewModel? = nil
     @Published var homeUsage: Double? = nil
     @Published var totalsViewModel: TotalsViewModel? = nil
-    @Published var financialModel: EnergyStatsFinancialModel? = nil
     private var totals: [ReportVariable: Double] = [:]
     private var max: StatsGraphValue?
     var exportFile: CSVTextFile?
@@ -190,6 +190,8 @@ class StatsTabViewModel: ObservableObject {
             grid: grid
         )
 
+        let financialModel: EnergyStatsFinancialModel?
+
         if configManager.financialModel == .energyStats {
             let totalsForSelectedData = TotalsViewModel(grid: grid, feedIn: feedIn, loads: loads, batteryCharge: batteryCharge, batteryDischarge: batteryDischarge)
             financialModel = EnergyStatsFinancialModel(
@@ -197,11 +199,14 @@ class StatsTabViewModel: ObservableObject {
                 config: configManager,
                 currencySymbol: configManager.currencySymbol
             )
+        } else {
+            financialModel = nil
         }
 
         approximationsViewModel = ApproximationsViewModel(
             netSelfSufficiencyEstimate: asPercent(netResult),
-            absoluteSelfSufficiencyEstimate: asPercent(absoluteResult)
+            absoluteSelfSufficiencyEstimate: asPercent(absoluteResult),
+            financialModel: financialModel
         )
     }
 
