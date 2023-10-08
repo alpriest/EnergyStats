@@ -14,6 +14,8 @@ struct ApproximationsViewModel {
     let netSelfSufficiencyEstimate: String?
     let absoluteSelfSufficiencyEstimate: String?
     let financialModel: EnergyStatsFinancialModel?
+    let homeUsage: Double?
+    let totalsViewModel: TotalsViewModel?
 }
 
 class StatsTabViewModel: ObservableObject {
@@ -41,8 +43,6 @@ class StatsTabViewModel: ObservableObject {
     @Published var unit: Calendar.Component = .hour
     @Published var graphVariables: [StatsGraphVariable] = []
     @Published var approximationsViewModel: ApproximationsViewModel? = nil
-    @Published var homeUsage: Double? = nil
-    @Published var totalsViewModel: TotalsViewModel? = nil
     private var totals: [ReportVariable: Double] = [:]
     private var max: StatsGraphValue?
     var exportFile: CSVTextFile?
@@ -154,12 +154,6 @@ class StatsTabViewModel: ObservableObject {
 
         let batteryCharge = totals[ReportVariable.chargeEnergyToTal]
         let batteryDischarge = totals[ReportVariable.dischargeEnergyToTal]
-        let totalsViewModel = TotalsViewModel(grid: grid,
-                                              feedIn: feedIn,
-                                              loads: loads,
-                                              batteryCharge: batteryCharge ?? 0,
-                                              batteryDischarge: batteryDischarge ?? 0)
-        self.totalsViewModel = totalsViewModel
 
         calculateApproximations(grid: grid,
                                 feedIn: feedIn,
@@ -175,8 +169,6 @@ class StatsTabViewModel: ObservableObject {
         batteryCharge: Double,
         batteryDischarge: Double
     ) {
-        homeUsage = loads
-
         let netResult = NetSelfSufficiencyCalculator.calculate(
             grid: grid,
             feedIn: feedIn,
@@ -191,11 +183,15 @@ class StatsTabViewModel: ObservableObject {
         )
 
         let financialModel: EnergyStatsFinancialModel?
+        let totalsViewModel = TotalsViewModel(grid: grid,
+                                              feedIn: feedIn,
+                                              loads: loads,
+                                              batteryCharge: batteryCharge,
+                                              batteryDischarge: batteryDischarge)
 
         if configManager.financialModel == .energyStats {
-            let totalsForSelectedData = TotalsViewModel(grid: grid, feedIn: feedIn, loads: loads, batteryCharge: batteryCharge, batteryDischarge: batteryDischarge)
             financialModel = EnergyStatsFinancialModel(
-                totalsViewModel: totalsForSelectedData,
+                totalsViewModel: totalsViewModel,
                 config: configManager,
                 currencySymbol: configManager.currencySymbol
             )
@@ -206,7 +202,9 @@ class StatsTabViewModel: ObservableObject {
         approximationsViewModel = ApproximationsViewModel(
             netSelfSufficiencyEstimate: asPercent(netResult),
             absoluteSelfSufficiencyEstimate: asPercent(absoluteResult),
-            financialModel: financialModel
+            financialModel: financialModel,
+            homeUsage: loads,
+            totalsViewModel: totalsViewModel
         )
     }
 

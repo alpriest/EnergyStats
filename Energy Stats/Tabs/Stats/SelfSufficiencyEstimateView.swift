@@ -50,7 +50,15 @@ extension ApproximationsViewModel {
         ApproximationsViewModel(
             netSelfSufficiencyEstimate: "95%",
             absoluteSelfSufficiencyEstimate: "100%",
-            financialModel: nil
+            financialModel: nil,
+            homeUsage: 4.5,
+            totalsViewModel: .any()
         )
+    }
+}
+
+extension TotalsViewModel {
+    static func any() -> TotalsViewModel {
+        TotalsViewModel(grid: 1.0, feedIn: 2.0, loads: 5.0, batteryCharge: 2.3, batteryDischarge: 1.2)
     }
 }

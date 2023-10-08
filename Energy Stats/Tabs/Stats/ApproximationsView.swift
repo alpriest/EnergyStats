@@ -39,7 +39,7 @@ struct ApproximationsView: View {
                             SelfSufficiencyEstimateView(approximationsViewModel, mode: appTheme.selfSufficiencyEstimateMode)
                         }
 
-                        if let home = viewModel.homeUsage {
+                        if let home = approximationsViewModel.homeUsage {
                             HStack {
                                 Text("Home usage")
                                     .accessibilityElement(children: .ignore)
@@ -48,7 +48,7 @@ struct ApproximationsView: View {
                             }
                         }
 
-                        if let totals = viewModel.totalsViewModel {
+                        if let totals = approximationsViewModel.totalsViewModel {
                             HStack {
                                 Text("Solar generated")
                                     .accessibilityElement(children: .ignore)
