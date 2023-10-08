@@ -2527,6 +2527,34 @@
         }
       }
     },
+    "Copy debug data" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Debug-Daten kopieren"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copiar datos de depuración"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copia dati di debug"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kopiuj dane debugowania"
+          }
+        }
+      }
+    },
     "Copy to clipboard" : {
       "localizations" : {
         "de" : {
@@ -2656,35 +2684,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nie można się zalogować. Sprawdź swoje połączenie z internetem"
-          }
-        }
-      }
-    },
-    "Create" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Erstellen"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Crear"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Crea"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Utwórz"
           }
         }
       }
@@ -9277,31 +9276,31 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tippen Sie auf das Symbol für weitere Details."
+            "value" : "Tippen für Details."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tap the icon for further detail."
+            "value" : "Tap for detail."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Toque el icono para más detalles."
+            "value" : "Toque para detalle."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tocca l'icona per ulteriori dettagli."
+            "value" : "Tocca per dettaglio."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dotknij ikony, aby uzyskać więcej informacji."
+            "value" : "Kliknij, aby uzyskać szczegóły."
           }
         }
       }
@@ -9421,35 +9420,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ta cena jednostkowa jest zarządzana w chmurze FoxESS."
-          }
-        }
-      }
-    },
-    "This will create a new group from your selected parameters." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dadurch wird eine neue Gruppe aus Ihren ausgewählten Parametern erstellt."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Esto creará un nuevo grupo a partir de los parámetros seleccionados."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ciò creerà un nuovo gruppo dai parametri selezionati."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "To utworzy nową grupę na podstawie wybranych parametrów."
           }
         }
       }

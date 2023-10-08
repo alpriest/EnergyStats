@@ -9,7 +9,6 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct ErrorAlertView: View {
-    @State private var ripple = false
     let cause: Error?
     let message: String
     let retry: () -> Void
@@ -18,35 +17,29 @@ struct ErrorAlertView: View {
 
     var body: some View {
         VStack {
-            Button(action: { errorShowing.toggle() }) {
-                ZStack {
-                    Circle()
-                        .foregroundColor(.red)
-                        .frame(width: ripple ? 130 : 99, height: ripple ? 130 : 99)
+            ZStack {
+                Circle()
+                    .foregroundColor(.red)
+                    .frame(width: 130, height: 130)
 
-                    Image(systemName: "exclamationmark.circle.fill")
-                        .resizable()
-                        .scaledToFit()
-                        .foregroundColor(.white)
-                        .frame(width: 100, height: 100)
-                }
-                .transition(.opacity.combined(with: .scale.animation(.easeOut)))
-                .animation(Animation.easeIn(duration: 0.06), value: ripple)
-                .frame(height: 130)
-                .onTapGesture {
-                    errorShowing.toggle()
-                }
+                Image(systemName: "exclamationmark.circle.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .foregroundColor(.white)
+                    .frame(width: 100, height: 100)
             }
+            .frame(height: 130)
 
             Text(inlineMessage)
                 .fixedSize(horizontal: false, vertical: true)
                 .multilineTextAlignment(.center)
                 .padding(.bottom)
 
-            Text(tapIconMessage)
-                .fixedSize(horizontal: false, vertical: true)
-                .multilineTextAlignment(.center)
-                .padding(.bottom)
+            Button(action: { errorShowing.toggle() }) {
+                Text(tapIconMessage)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .multilineTextAlignment(.center)
+            }.buttonStyle(.bordered)
 
             VStack {
                 Button(action: { retry() }) {
@@ -64,10 +57,58 @@ struct ErrorAlertView: View {
             }.buttonStyle(.bordered)
         }
         .frame(height: 200)
-        .alert(detailedMessage, isPresented: $errorShowing) {
-            Button("OK") {}
+        .overlay(
+            VStack {
+                Text(detailedMessage)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.bottom)
+
+                Button {
+                    UIPasteboard.general.string = debugData
+                } label: {
+                    Text("Copy debug data")
+                }
+
+                Button(action: { errorShowing = false }, label: {
+                    Text("OK")
+                }).buttonStyle(.bordered)
+            }
+            .padding()
+            .background(Color("background"))
+            .border(Color.black)
+            .opacity(errorShowing ? 1 : 0)
+        )
+    }
+
+    private var debugData: String {
+        struct DebugDataText: Encodable {
+            let request: String?
+            let response: String?
+            let data: String?
         }
-        .onAppear { ripple = true }
+
+        let dataString: String?
+        if let data = InMemoryLoggingNetworkStore.shared.latestData {
+            dataString = (String(data: data, encoding: .utf8) ?? "data could not be parsed")
+        } else {
+            dataString = nil
+        }
+
+        let result = DebugDataText(
+            request: InMemoryLoggingNetworkStore.shared.latestRequest?.debugDescription,
+            response: InMemoryLoggingNetworkStore.shared.latestResponse?.debugDescription,
+            data: dataString
+        )
+
+        do {
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted
+
+            let jsonData = try encoder.encode(result)
+            return String(data: jsonData, encoding: .utf8) ?? "Could not generate JSON"
+        } catch {
+            return "Could not generate JSON"
+        }
     }
 
     var detailedMessage: String {
@@ -92,7 +133,7 @@ struct ErrorAlertView: View {
 }
 
 #if DEBUG
- struct ErrorAlertView_Previews: PreviewProvider {
+struct ErrorAlertView_Previews: PreviewProvider {
     static var previews: some View {
         ErrorAlertView(
             cause: NetworkError.badCredentials,
@@ -102,5 +143,5 @@ struct ErrorAlertView: View {
         .environmentObject(UserManager.preview())
         .environment(\.locale, .init(identifier: "de"))
     }
- }
+}
 #endif

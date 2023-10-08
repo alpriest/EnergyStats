@@ -18,6 +18,8 @@ public class InMemoryLoggingNetworkStore: ObservableObject {
     public var earnings: NetworkOperation<EarningsResponse>?
     public var batteryTimesResponse: NetworkOperation<BatteryTimesResponse>?
 
+    public static let shared = InMemoryLoggingNetworkStore()
+
     public init() {}
 
     public func logout() {
@@ -31,6 +33,10 @@ public class InMemoryLoggingNetworkStore: ObservableObject {
         earnings = nil
         batteryTimesResponse = nil
     }
+
+    public var latestRequest: URLRequest?
+    public var latestData: Data?
+    public var latestResponse: URLResponse?
 }
 
 public struct NetworkOperation<T: Decodable> {

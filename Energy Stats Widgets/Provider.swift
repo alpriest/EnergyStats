@@ -21,7 +21,7 @@ struct Provider: TimelineProvider {
     private let modelContainer: ModelContainer
 
     init() {
-        let store = InMemoryLoggingNetworkStore()
+        let store = InMemoryLoggingNetworkStore.shared
         network = NetworkFacade(network: Network(credentials: keychainStore, store: store),
                                 config: config,
                                 store: keychainStore)

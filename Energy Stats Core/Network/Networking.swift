@@ -261,6 +261,10 @@ private extension Network {
                 throw NetworkError.unknown("", "Invalid response type")
             }
 
+            store.latestData = data
+            store.latestResponse = response
+            store.latestRequest = request
+
             guard 200 ... 300 ~= statusCode else { throw NetworkError.invalidResponse(request.url, statusCode) }
 
             let networkResponse: NetworkResponse<T> = try JSONDecoder().decode(NetworkResponse<T>.self, from: data)

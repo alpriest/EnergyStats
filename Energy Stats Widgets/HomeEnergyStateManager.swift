@@ -38,7 +38,7 @@ class HomeEnergyStateManager {
 
         let keychainStore = KeychainStore()
         let config = UserDefaultsConfig()
-        let store = InMemoryLoggingNetworkStore()
+        let store = InMemoryLoggingNetworkStore.shared
         let network = NetworkFacade(network: NetworkCache(network: Network(credentials: keychainStore, store: store)),
                                     config: config,
                                     store: keychainStore)
