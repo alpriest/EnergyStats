@@ -9,11 +9,11 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct SelfSufficiencyEstimateView: View {
-    private let viewModel: StatsTabViewModel
+    private let viewModel: ApproximationsViewModel
     private let estimate: String?
     @Environment(\.colorScheme) var colorScheme
 
-    init(viewModel: StatsTabViewModel, mode: SelfSufficiencyEstimateMode) {
+    init(_ viewModel: ApproximationsViewModel, mode: SelfSufficiencyEstimateMode) {
         self.viewModel = viewModel
 
         switch mode {
@@ -40,7 +40,15 @@ struct SelfSufficiencyEstimateView: View {
 @available(iOS 16.0, *)
 struct SelfSufficiencyEstimateView_Previews: PreviewProvider {
     static var previews: some View {
-        SelfSufficiencyEstimateView(viewModel: StatsTabViewModel(networking: DemoNetworking(), configManager: PreviewConfigManager()),
+        SelfSufficiencyEstimateView(ApproximationsViewModel.any(),
                                     mode: .absolute)
+    }
+}
+
+extension ApproximationsViewModel {
+    static func any() -> ApproximationsViewModel {
+        ApproximationsViewModel(
+            netSelfSufficiencyEstimate: "95%",
+            absoluteSelfSufficiencyEstimate: "100%")
     }
 }

@@ -32,52 +32,54 @@ struct ApproximationsView: View {
                     .foregroundColor(Color.white.opacity(colorScheme == .dark ? 0.8 : 1.0))
             }
 
-            ZStack {
-                VStack {
-                    if appTheme.selfSufficiencyEstimateMode != .off {
-                        SelfSufficiencyEstimateView(viewModel: viewModel, mode: appTheme.selfSufficiencyEstimateMode)
-                    }
+            if let approximationsViewModel = viewModel.approximationsViewModel {
+                ZStack {
+                    VStack {
+                        if appTheme.selfSufficiencyEstimateMode != .off {
+                            SelfSufficiencyEstimateView(approximationsViewModel, mode: appTheme.selfSufficiencyEstimateMode)
+                        }
 
-                    if let home = viewModel.homeUsage {
-                        HStack {
-                            Text("Home usage")
-                                .accessibilityElement(children: .ignore)
-                            Spacer()
-                            EnergyText(amount: home, appTheme: appTheme, type: .selfSufficiency)
+                        if let home = viewModel.homeUsage {
+                            HStack {
+                                Text("Home usage")
+                                    .accessibilityElement(children: .ignore)
+                                Spacer()
+                                EnergyText(amount: home, appTheme: appTheme, type: .selfSufficiency)
+                            }
+                        }
+
+                        if let totals = viewModel.totalsViewModel {
+                            HStack {
+                                Text("Solar generated")
+                                    .accessibilityElement(children: .ignore)
+                                Spacer()
+                                EnergyText(amount: totals.solar, appTheme: appTheme, type: .totalSolarGenerated)
+                            }
+                        }
+
+                        if let financialModel = viewModel.financialModel {
+                            HStack {
+                                Text("Export income")
+                                Spacer()
+                                Text(financialModel.exportIncome.formattedAmount())
+                            }
+
+                            HStack {
+                                Text("Grid import avoided")
+                                Spacer()
+                                Text(financialModel.solarSaving.formattedAmount())
+                            }
+
+                            HStack {
+                                Text("Total benefit")
+                                Spacer()
+                                Text(financialModel.total.formattedAmount())
+                            }
                         }
                     }
-
-                    if let totals = viewModel.totalsViewModel {
-                        HStack {
-                            Text("Solar generated")
-                                .accessibilityElement(children: .ignore)
-                            Spacer()
-                            EnergyText(amount: totals.solar, appTheme: appTheme, type: .totalSolarGenerated)
-                        }
-                    }
-
-                    if let financialModel = viewModel.financialModel {
-                        HStack {
-                            Text("Export income")
-                            Spacer()
-                            Text(financialModel.exportIncome.formattedAmount())
-                        }
-
-                        HStack {
-                            Text("Grid import avoided")
-                            Spacer()
-                            Text(financialModel.solarSaving.formattedAmount())
-                        }
-
-                        HStack {
-                            Text("Total benefit")
-                            Spacer()
-                            Text(financialModel.total.formattedAmount())
-                        }
-                    }
+                    .padding()
+                    .monospacedDigit()
                 }
-                .padding()
-                .monospacedDigit()
             }
         }
         .padding(.top)

@@ -54,7 +54,7 @@ struct StatsTabView: View {
                                 Button("Clear graph values", action: {
                                     self.viewModel.valuesAtTime = nil
                                     self.viewModel.selectedDate = nil
-                                    self.viewModel.calculateSelfSufficiencyEstimate()
+                                    self.viewModel.calculateApproximations()
                                 })
                             } else {
                                 Text("Touch the graph to see values at that time")

@@ -10,6 +10,11 @@ import Energy_Stats_Core
 import Foundation
 import SwiftUI
 
+struct ApproximationsViewModel {
+    let netSelfSufficiencyEstimate: String?
+    let absoluteSelfSufficiencyEstimate: String?
+}
+
 class StatsTabViewModel: ObservableObject {
     private let haptic = UIImpactFeedbackGenerator()
     private let configManager: ConfigManaging
@@ -34,8 +39,7 @@ class StatsTabViewModel: ObservableObject {
     @Published var data: [StatsGraphValue] = []
     @Published var unit: Calendar.Component = .hour
     @Published var graphVariables: [StatsGraphVariable] = []
-    @Published var netSelfSufficiencyEstimate: String? = nil
-    @Published var absoluteSelfSufficiencyEstimate: String? = nil
+    @Published var approximationsViewModel: ApproximationsViewModel? = nil
     @Published var homeUsage: Double? = nil
     @Published var totalsViewModel: TotalsViewModel? = nil
     @Published var financialModel: EnergyStatsFinancialModel? = nil
@@ -132,7 +136,7 @@ class StatsTabViewModel: ObservableObject {
             await MainActor.run {
                 self.unit = displayMode.unit()
                 self.rawData = updatedData
-                calculateSelfSufficiencyEstimate()
+                calculateApproximations()
                 refresh()
                 prepareExport()
             }
@@ -143,7 +147,7 @@ class StatsTabViewModel: ObservableObject {
         }
     }
 
-    func calculateSelfSufficiencyEstimate() {
+    func calculateApproximations() {
         guard let grid = totals[ReportVariable.gridConsumption],
               let feedIn = totals[ReportVariable.feedIn],
               let loads = totals[ReportVariable.loads] else { return }
@@ -157,18 +161,14 @@ class StatsTabViewModel: ObservableObject {
                                               batteryDischarge: batteryDischarge ?? 0)
         self.totalsViewModel = totalsViewModel
 
-        if configManager.financialModel == .energyStats {
-            financialModel = EnergyStatsFinancialModel(totalsViewModel: totalsViewModel, config: configManager, currencySymbol: configManager.currencySymbol)
-        }
-
-        calculateSelfSufficiencyEstimate(grid: grid,
-                                         feedIn: feedIn,
-                                         loads: loads,
-                                         batteryCharge: batteryCharge ?? 0,
-                                         batteryDischarge: batteryDischarge ?? 0)
+        calculateApproximations(grid: grid,
+                                feedIn: feedIn,
+                                loads: loads,
+                                batteryCharge: batteryCharge ?? 0,
+                                batteryDischarge: batteryDischarge ?? 0)
     }
 
-    func calculateSelfSufficiencyEstimate(
+    func calculateApproximations(
         grid: Double,
         feedIn: Double,
         loads: Double,
@@ -184,13 +184,25 @@ class StatsTabViewModel: ObservableObject {
             batteryCharge: batteryCharge,
             batteryDischarge: batteryDischarge
         )
-        netSelfSufficiencyEstimate = asPercent(netResult)
 
         let absoluteResult = AbsoluteSelfSufficiencyCalculator.calculate(
             loads: loads,
             grid: grid
         )
-        absoluteSelfSufficiencyEstimate = asPercent(absoluteResult)
+
+        if configManager.financialModel == .energyStats {
+            let totalsForSelectedData = TotalsViewModel(grid: grid, feedIn: feedIn, loads: loads, batteryCharge: batteryCharge, batteryDischarge: batteryDischarge)
+            financialModel = EnergyStatsFinancialModel(
+                totalsViewModel: totalsForSelectedData,
+                config: configManager,
+                currencySymbol: configManager.currencySymbol
+            )
+        }
+
+        approximationsViewModel = ApproximationsViewModel(
+            netSelfSufficiencyEstimate: asPercent(netResult),
+            absoluteSelfSufficiencyEstimate: asPercent(absoluteResult)
+        )
     }
 
     func asPercent(_ value: Double) -> String? {
@@ -278,7 +290,7 @@ class StatsTabViewModel: ObservableObject {
            let batteryCharge = result.values.first(where: { $0.type == .chargeEnergyToTal })?.value,
            let batteryDischarge = result.values.first(where: { $0.type == .dischargeEnergyToTal })?.value
         {
-            calculateSelfSufficiencyEstimate(
+            calculateApproximations(
                 grid: grid,
                 feedIn: feedIn,
                 loads: loads,
