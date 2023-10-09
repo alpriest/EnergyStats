@@ -26,18 +26,6 @@ struct SolarPowerView: View {
 
     var body: some View {
         VStack {
-            if appTheme.showTotalYield {
-                HStack(spacing: 0) {
-                    (Text("Yield today") + Text(" ")).accessibilityHidden(true)
-                    EnergyText(amount: viewModel.generation, appTheme: appTheme, type: .totalYield)
-                }
-            }
-
-            if appTheme.showFinancialEarnings {
-                EarningsView(viewModel: viewModel.earnings, appTheme: appTheme)
-                    .padding(.bottom, 4)
-            }
-
             switch viewModel.solar {
             case 0.001 ..< appTheme.solarDefinitions.breakPoint1:
                 SunView(solar: viewModel.solar, glowing: false, glowColor: .clear, sunColor: Color("Sun"))

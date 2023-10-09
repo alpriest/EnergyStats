@@ -7,6 +7,15 @@
 
 import SwiftUI
 
+struct MidYHorizontalLine: Shape {
+    func path(in rect: CGRect) -> Path {
+        Path { path in
+            path.move(to: CGPoint(x: rect.minX, y: rect.midY))
+            path.addLine(to: CGPoint(x: rect.maxX, y: rect.midY))
+        }
+    }
+}
+
 struct Line: Shape {
     func path(in rect: CGRect) -> Path {
         Path { path in
@@ -16,13 +25,14 @@ struct Line: Shape {
     }
 }
 
-struct FlowingLine: View {
+struct FlowingLine<S: Shape>: View {
     @State var phase: CGFloat = 0
     private let totalPhase: CGFloat = 20
     private let lineWidth: CGFloat = 4
     let direction: Direction
     let animationDuration: Double
     let color: Color
+    let shape: S
 
     enum Direction {
         case down
@@ -30,7 +40,7 @@ struct FlowingLine: View {
     }
 
     var body: some View {
-        Line()
+        shape
             .stroke(
                 style: strokeStyle
             )
@@ -115,8 +125,9 @@ struct FlowingLine: View {
 struct DirectionalArrow_Previews: PreviewProvider {
     static var previews: some View {
         HStack {
-            FlowingLine(direction: .up, animationDuration: 1.5, color: .red)
+            FlowingLine(direction: .up, animationDuration: 1.5, color: .red, shape: MidYHorizontalLine())
                 .frame(width: 100, height: 300)
+                .background(Color.gray)
         }
     }
 }

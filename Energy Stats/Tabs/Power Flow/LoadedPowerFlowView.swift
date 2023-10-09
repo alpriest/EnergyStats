@@ -16,6 +16,7 @@ struct LoadedPowerFlowView: View {
     private let configManager: ConfigManaging
     private let viewModel: HomePowerFlowViewModel
     private var appThemePublisher: LatestAppTheme
+    @State private var showCT2 = true
 
     init(configManager: ConfigManaging, viewModel: HomePowerFlowViewModel, appThemePublisher: LatestAppTheme) {
         self.configManager = configManager
@@ -25,74 +26,121 @@ struct LoadedPowerFlowView: View {
     }
 
     var body: some View {
-        VStack(alignment: .center, spacing: 0) {
-            SolarPowerView(appTheme: appTheme, viewModel: SolarPowerViewModel(solar: viewModel.solar,
-                                                                              generation: viewModel.todaysGeneration,
-                                                                              earnings: viewModel.earnings))
-                .frame(height: size.height * 0.4)
+        ZStack {
+            VStack(alignment: .center, spacing: 0) {
+                if size == .zero {
+                    Color.clear.frame(minWidth: 0, maxWidth: .infinity)
+                } else {
+                    if appTheme.showTotalYield {
+                        HStack(spacing: 0) {
+                            (Text("Yield today") + Text(" ")).accessibilityHidden(true)
+                            EnergyText(amount: viewModel.todaysGeneration, appTheme: appTheme, type: .totalYield)
+                        }
+                    }
 
-            InverterView(viewModel: InverterViewModel(configManager: configManager, temperatures: viewModel.inverterTemperatures), appTheme: appTheme)
-                .frame(height: 2)
-                .frame(width: inverterLineWidth)
-                .padding(.vertical, 2)
-                .zIndex(1)
+                    if appTheme.showFinancialEarnings {
+                        EarningsView(viewModel: viewModel.earnings, appTheme: appTheme)
+                            .padding(.bottom, 4)
+                    }
 
-            HStack(alignment: .top) {
-                if viewModel.hasBattery || viewModel.hasBatteryError {
-                    BatteryPowerView(viewModel: BatteryPowerViewModel(configManager: configManager,
-                                                                      batteryStateOfCharge: viewModel.batteryStateOfCharge,
-                                                                      batteryChargekWH: viewModel.battery,
-                                                                      temperature: viewModel.batteryTemperature,
-                                                                      batteryResidual: viewModel.batteryResidual,
-                                                                      error: viewModel.batteryError),
-                                     appTheme: appTheme)
-                        .frame(width: columnWidth)
+                    ZStack {
+                        HStack {
+                            if showCT2 {
+                                VStack(spacing: 0) {
+                                    CT2_icon()
+                                    PowerFlowView(amount: 0.1, appTheme: appTheme, showColouredLines: false, type: .solarFlow)
+                                    Color.clear.frame(height: size.height * 0.1)
+                                }
+                                .frame(width: columnWidth, height: size.height * 0.4)
 
-                    Spacer().frame(width: horizontalPadding)
+                                Spacer().frame(width: horizontalPadding)
+                            }
+
+                            SolarPowerView(appTheme: appTheme, viewModel: SolarPowerViewModel(solar: viewModel.solar,
+                                                                                              generation: viewModel.todaysGeneration,
+                                                                                              earnings: viewModel.earnings))
+
+                                .frame(width: columnWidth, height: size.height * 0.4)
+
+                            if showCT2 {
+                                Spacer().frame(width: horizontalPadding)
+
+                                Color.clear
+                                    .frame(width: columnWidth, height: size.height * 0.4)
+                            }
+                        }
+
+                        if showCT2 {
+                            PowerFlowView(amount: 0.1, appTheme: appTheme, showColouredLines: false, type: .solarFlow, shape: MidYHorizontalLine(), showAmount: false)
+                                .offset(x: -0.5 * (columnWidth + horizontalPadding), y: size.height * 0.1)
+                                .frame(width: columnWidth * 1 + horizontalPadding)
+                        }
+                    }
+
+                    InverterView(viewModel: InverterViewModel(configManager: configManager, temperatures: viewModel.inverterTemperatures), appTheme: appTheme)
+                        .frame(height: 2)
+                        .frame(width: inverterLineWidth)
+                        .padding(.vertical, 2)
+                        .zIndex(1)
+
+                    HStack(alignment: .top) {
+                        if viewModel.hasBattery || viewModel.hasBatteryError {
+                            BatteryPowerView(viewModel: BatteryPowerViewModel(configManager: configManager,
+                                                                              batteryStateOfCharge: viewModel.batteryStateOfCharge,
+                                                                              batteryChargekWH: viewModel.battery,
+                                                                              temperature: viewModel.batteryTemperature,
+                                                                              batteryResidual: viewModel.batteryResidual,
+                                                                              error: viewModel.batteryError),
+                                             appTheme: appTheme)
+                                .frame(width: columnWidth)
+
+                            Spacer().frame(width: horizontalPadding)
+                        }
+
+                        HomePowerView(amount: viewModel.home, appTheme: appTheme)
+                            .frame(width: columnWidth)
+
+                        Spacer().frame(width: horizontalPadding)
+
+                        GridPowerView(amount: viewModel.grid, appTheme: appTheme)
+                            .frame(width: columnWidth)
+                    }
+                    .padding(.bottom, 4)
+                    .padding(.horizontal, horizontalPadding)
+
+                    // Totals
+                    HStack(alignment: .top) {
+                        if viewModel.hasBattery || viewModel.hasBatteryError {
+                            BatteryPowerFooterView(viewModel: BatteryPowerViewModel(configManager: configManager,
+                                                                                    batteryStateOfCharge: viewModel.batteryStateOfCharge,
+                                                                                    batteryChargekWH: viewModel.battery,
+                                                                                    temperature: viewModel.batteryTemperature,
+                                                                                    batteryResidual: viewModel.batteryResidual,
+                                                                                    error: viewModel.batteryError),
+                                                   appTheme: appTheme)
+                                .frame(width: columnWidth)
+
+                            Spacer().frame(width: horizontalPadding)
+                        }
+
+                        HomePowerFooterView(amount: viewModel.homeTotal, appTheme: appTheme)
+                            .frame(width: columnWidth)
+
+                        Spacer().frame(width: horizontalPadding)
+
+                        GridPowerFooterView(importTotal: viewModel.gridImportTotal,
+                                            exportTotal: viewModel.gridExportTotal,
+                                            appTheme: appTheme)
+                            .frame(width: columnWidth)
+                    }
+                    .padding(.bottom, 16)
+                    .padding(.horizontal, horizontalPadding)
                 }
 
-                HomePowerView(amount: viewModel.home, appTheme: appTheme)
-                    .frame(width: columnWidth)
-
-                Spacer().frame(width: horizontalPadding)
-
-                GridPowerView(amount: viewModel.grid, appTheme: appTheme)
-                    .frame(width: columnWidth)
-            }
-            .padding(.bottom, 4)
-            .padding(.horizontal, horizontalPadding)
-
-            // Totals
-            HStack(alignment: .top) {
-                if viewModel.hasBattery || viewModel.hasBatteryError {
-                    BatteryPowerFooterView(viewModel: BatteryPowerViewModel(configManager: configManager,
-                                                                            batteryStateOfCharge: viewModel.batteryStateOfCharge,
-                                                                            batteryChargekWH: viewModel.battery,
-                                                                            temperature: viewModel.batteryTemperature,
-                                                                            batteryResidual: viewModel.batteryResidual,
-                                                                            error: viewModel.batteryError),
-                                           appTheme: appTheme)
-                        .frame(width: columnWidth)
-
-                    Spacer().frame(width: horizontalPadding)
-                }
-
-                HomePowerFooterView(amount: viewModel.homeTotal, appTheme: appTheme)
-                    .frame(width: columnWidth)
-
-                Spacer().frame(width: horizontalPadding)
-
-                GridPowerFooterView(importTotal: viewModel.gridImportTotal,
-                                    exportTotal: viewModel.gridExportTotal,
-                                    appTheme: appTheme)
-                    .frame(width: columnWidth)
-            }
-            .padding(.bottom, 16)
-            .padding(.horizontal, horizontalPadding)
-
-        }.background(GeometryReader { reader in
-            Color.clear.onAppear { size = reader.size }.onChange(of: reader.size) { newValue in size = newValue }
-        })
+            }.background(GeometryReader { reader in
+                Color.clear.onAppear { size = reader.size }.onChange(of: reader.size) { newValue in size = newValue }
+            })
+        }
         .onReceive(appThemePublisher) {
             self.appTheme = $0
         }

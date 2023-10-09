@@ -2716,6 +2716,9 @@
         }
       }
     },
+    "CT2" : {
+
+    },
     "cumulate" : {
       "extractionState" : "manual",
       "localizations" : {

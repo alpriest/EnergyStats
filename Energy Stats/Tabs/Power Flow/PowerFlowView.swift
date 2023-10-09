@@ -9,18 +9,22 @@ import Combine
 import Energy_Stats_Core
 import SwiftUI
 
-struct PowerFlowView: View {
+struct PowerFlowView<S: Shape>: View {
     private let amount: Double
     private let animationDuration: Double
     private let appTheme: AppTheme
     private let showColouredLines: Bool
     private let type: AmountType
+    private let shape: S
+    private let showAmount: Bool
 
-    init(amount: Double, appTheme: AppTheme, showColouredLines: Bool, type: AmountType) {
+    init(amount: Double, appTheme: AppTheme, showColouredLines: Bool, type: AmountType, shape: S = Line(), showAmount: Bool = true) {
         self.amount = amount
         self.appTheme = appTheme
         self.showColouredLines = showColouredLines
         self.type = type
+        self.shape = shape
+        self.showAmount = showAmount
 
         animationDuration = max(0.4, 2.7 - abs(amount))
     }
@@ -30,12 +34,12 @@ struct PowerFlowView: View {
             if isFlowing {
                 ZStack {
                     if amount > 0 {
-                        FlowingLine(direction: .down, animationDuration: animationDuration, color: lineColor)
+                        FlowingLine(direction: .down, animationDuration: animationDuration, color: lineColor, shape: shape)
                     } else {
-                        FlowingLine(direction: .up, animationDuration: animationDuration, color: lineColor)
+                        FlowingLine(direction: .up, animationDuration: animationDuration, color: lineColor, shape: shape)
                     }
 
-                    VStack {
+                    if showAmount {
                         PowerAmountView(amount: amount, backgroundColor: lineColor, textColor: textColor, appTheme: appTheme, type: type)
                             .font(.body.bold())
                     }
@@ -44,7 +48,8 @@ struct PowerFlowView: View {
                 Line()
                     .stroke(lineColor, lineWidth: 4)
             }
-        }.clipped()
+        }
+        .clipped()
     }
 
     var lineColor: Color {

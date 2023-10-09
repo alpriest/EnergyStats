@@ -28,6 +28,7 @@
 		4103D1E329DB6D03001B0BC8 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410AA38729D96F6D00CD107C /* AppTheme.swift */; };
 		4103D1E429DB6D12001B0BC8 /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41339C7328CC7BA50062B976 /* KeychainStore.swift */; };
 		4103D1E529DB6D29001B0BC8 /* Sequence+aysnc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4111333529B7D61200972935 /* Sequence+aysnc.swift */; };
+		410484C82AD49D95007F68C0 /* CT2-icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410484C72AD49D95007F68C0 /* CT2-icon.swift */; };
 		4107446128C9EF6B006D5D7D /* LoadedPowerFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446028C9EF6B006D5D7D /* LoadedPowerFlowView.swift */; };
 		4107446328CA1C5D006D5D7D /* PowerFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446228CA1C5D006D5D7D /* PowerFlowView.swift */; };
 		4107446528CA1D76006D5D7D /* FlowingLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446428CA1D76006D5D7D /* FlowingLine.swift */; };
@@ -322,6 +323,7 @@
 		4103D1CD29DB6C43001B0BC8 /* WatchContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchContentViewModel.swift; sourceTree = "<group>"; };
 		4103D1E029DB6CB9001B0BC8 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
 		4103F82F2922BFBA00567B1C /* ReportVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportVariable.swift; sourceTree = "<group>"; };
+		410484C72AD49D95007F68C0 /* CT2-icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CT2-icon.swift"; sourceTree = "<group>"; };
 		4106A92C28CFCD960009DA28 /* RawVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawVariable.swift; sourceTree = "<group>"; };
 		4107446028C9EF6B006D5D7D /* LoadedPowerFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadedPowerFlowView.swift; sourceTree = "<group>"; };
 		4107446228CA1C5D006D5D7D /* PowerFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerFlowView.swift; sourceTree = "<group>"; };
@@ -946,6 +948,7 @@
 				4107446B28CA57A9006D5D7D /* PowerFlowTabView.swift */,
 				4140145B28C70B4A00EA5BA1 /* PowerFlowTabViewModel.swift */,
 				4107446228CA1C5D006D5D7D /* PowerFlowView.swift */,
+				410484C72AD49D95007F68C0 /* CT2-icon.swift */,
 			);
 			path = "Power Flow";
 			sourceTree = "<group>";
@@ -1491,6 +1494,7 @@
 				41AF2F432AA4C6C1008FCA2E /* HomePowerFooterView.swift in Sources */,
 				413BF2892A99F8A500A32B0D /* ApproximationsView.swift in Sources */,
 				416AE4382A7D956E003D0122 /* AlertCopy.swift in Sources */,
+				410484C82AD49D95007F68C0 /* CT2-icon.swift in Sources */,
 				416318BE29DDD80E00C2C285 /* View+Copy.swift in Sources */,
 				4107446728CA22B3006D5D7D /* InverterViewModel.swift in Sources */,
 				410FC8862AB98F020004CBC2 /* ParameterVariableGroupEditorView.swift in Sources */,
