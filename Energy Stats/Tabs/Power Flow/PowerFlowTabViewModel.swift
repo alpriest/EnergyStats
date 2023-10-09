@@ -21,6 +21,7 @@ class PowerFlowTabViewModel: ObservableObject {
     private var totalTicks = 60
     private var currentDeviceCancellable: AnyCancellable?
     private var themeChangeCancellable: AnyCancellable?
+    private var latestAppTheme: AppTheme
 
     enum State: Equatable {
         case unloaded
@@ -44,6 +45,7 @@ class PowerFlowTabViewModel: ObservableObject {
     init(_ network: Networking, configManager: ConfigManaging) {
         self.network = network
         self.configManager = configManager
+        self.latestAppTheme = configManager.appTheme.value
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.willResignActiveNotification), name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
@@ -98,7 +100,9 @@ class PowerFlowTabViewModel: ObservableObject {
         guard self.themeChangeCancellable == nil else { return }
 
         self.themeChangeCancellable = self.configManager.appTheme.sink { theme in
-            if theme.showInverterTemperature {
+            if self.latestAppTheme.showInverterTemperature != theme.showInverterTemperature ||
+                self.latestAppTheme.shouldInvertCT2 != theme.shouldInvertCT2 {
+                self.latestAppTheme = theme
                 Task { await self.loadData() }
             }
         }
