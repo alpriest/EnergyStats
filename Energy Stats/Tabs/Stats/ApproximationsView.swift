@@ -9,7 +9,7 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct ApproximationsView: View {
-    @ObservedObject var viewModel: StatsTabViewModel
+    let viewModel: ApproximationsViewModel
     let appTheme: AppTheme
     @Environment(\.colorScheme) var colorScheme
 
@@ -32,54 +32,52 @@ struct ApproximationsView: View {
                     .foregroundColor(Color.white.opacity(colorScheme == .dark ? 0.8 : 1.0))
             }
 
-            if let approximationsViewModel = viewModel.approximationsViewModel {
-                ZStack {
-                    VStack {
-                        if appTheme.selfSufficiencyEstimateMode != .off {
-                            SelfSufficiencyEstimateView(approximationsViewModel, mode: appTheme.selfSufficiencyEstimateMode)
-                        }
+            ZStack {
+                VStack {
+                    if appTheme.selfSufficiencyEstimateMode != .off {
+                        SelfSufficiencyEstimateView(viewModel, mode: appTheme.selfSufficiencyEstimateMode)
+                    }
 
-                        if let home = approximationsViewModel.homeUsage {
-                            HStack {
-                                Text("Home usage")
-                                    .accessibilityElement(children: .ignore)
-                                Spacer()
-                                EnergyText(amount: home, appTheme: appTheme, type: .selfSufficiency)
-                            }
-                        }
-
-                        if let totals = approximationsViewModel.totalsViewModel {
-                            HStack {
-                                Text("Solar generated")
-                                    .accessibilityElement(children: .ignore)
-                                Spacer()
-                                EnergyText(amount: totals.solar, appTheme: appTheme, type: .totalSolarGenerated)
-                            }
-                        }
-
-                        if let financialModel = approximationsViewModel.financialModel {
-                            HStack {
-                                Text("Export income")
-                                Spacer()
-                                Text(financialModel.exportIncome.formattedAmount())
-                            }
-
-                            HStack {
-                                Text("Grid import avoided")
-                                Spacer()
-                                Text(financialModel.solarSaving.formattedAmount())
-                            }
-
-                            HStack {
-                                Text("Total benefit")
-                                Spacer()
-                                Text(financialModel.total.formattedAmount())
-                            }
+                    if let home = viewModel.homeUsage {
+                        HStack {
+                            Text("Home usage")
+                                .accessibilityElement(children: .ignore)
+                            Spacer()
+                            EnergyText(amount: home, appTheme: appTheme, type: .selfSufficiency)
                         }
                     }
-                    .padding()
-                    .monospacedDigit()
+
+                    if let totals = viewModel.totalsViewModel {
+                        HStack {
+                            Text("Solar generated")
+                                .accessibilityElement(children: .ignore)
+                            Spacer()
+                            EnergyText(amount: totals.solar, appTheme: appTheme, type: .totalSolarGenerated)
+                        }
+                    }
+
+                    if let financialModel = viewModel.financialModel {
+                        HStack {
+                            Text("Export income")
+                            Spacer()
+                            Text(financialModel.exportIncome.formattedAmount())
+                        }
+
+                        HStack {
+                            Text("Grid import avoided")
+                            Spacer()
+                            Text(financialModel.solarSaving.formattedAmount())
+                        }
+
+                        HStack {
+                            Text("Total benefit")
+                            Spacer()
+                            Text(financialModel.total.formattedAmount())
+                        }
+                    }
                 }
+                .padding()
+                .monospacedDigit()
             }
         }
         .padding(.top)
@@ -89,8 +87,7 @@ struct ApproximationsView: View {
 #if DEBUG
 struct ApproximationsView_Previews: PreviewProvider {
     static var previews: some View {
-        ApproximationsView(viewModel: StatsTabViewModel(networking: DemoNetworking(),
-                                                        configManager: PreviewConfigManager()),
+        ApproximationsView(viewModel: .any(),
                            appTheme: .mock(selfSufficiencyEstimateMode: .net))
     }
 }
