@@ -183,6 +183,7 @@ public class MockConfig: Config {
     public var solarDefinitions: SolarRangeDefinitions = .default()
     public var parameterGroups: [ParameterGroup] = DefaultParameterGroups()
     public var currencySymbol: String = "£"
+    public var shouldCombineCT2WithPVPower: Bool = true
 }
 
 public class PreviewConfigManager: ConfigManager {

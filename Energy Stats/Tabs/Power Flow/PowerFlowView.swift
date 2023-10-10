@@ -45,7 +45,7 @@ struct PowerFlowView<S: Shape>: View {
                     }
                 }
             } else {
-                Line()
+                shape
                     .stroke(lineColor, lineWidth: 4)
             }
         }

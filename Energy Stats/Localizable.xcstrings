@@ -1189,34 +1189,6 @@
         }
       }
     },
-    "Advanced" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Erweitert"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Avanzado"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Avanzate"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zaawansowane"
-          }
-        }
-      }
-    },
     "All" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2414,6 +2386,34 @@
         }
       }
     },
+    "Combine CT2 with PV power" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CT2 mit PV-Leistung kombinieren"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Combinar CT2 con la potencia PV"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Combina CT2 con la potenza PV"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Połącz CT2 z mocą PV"
+          }
+        }
+      }
+    },
     "Compare strings" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2717,7 +2717,60 @@
       }
     },
     "CT2" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
+    },
+    "CT2 Settings" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CT2-Einstellungen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configuración de CT2"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impostazioni CT2"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ustawienia CT2"
+          }
+        }
+      }
     },
     "cumulate" : {
       "extractionState" : "manual",
@@ -2868,6 +2921,7 @@
       }
     },
     "Day by hours" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4875,31 +4929,31 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wenn Sie mehrere Wechselrichter haben und Ihre PV-Erzeugungswerte nicht korrekt sind, versuchen Sie, dies umzuschalten."
+            "value" : "Wenn Sie mehrere Wechselrichter haben und Ihre PV-Generierungswerte inkorrekt sind, versuchen Sie diese Einstellungen anzupassen."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "If you have multiple inverters and your PV generation values are incorrect try toggling this."
+            "value" : "If you have multiple inverters and your PV generation values are incorrect try adjusting these settings."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Si tiene varios inversores y los valores de generación de PV no son correctos, intente cambiar esto."
+            "value" : "Si tienes varios inversores y los valores de generación de PV son incorrectos, intenta ajustar estas configuraciones."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Se hai più inverter e i valori di generazione PV non sono corretti, prova a cambiare questa opzione."
+            "value" : "Si tienes varios inversores y los valores de generación de PV son incorrectos, intenta ajustar estas configuraciones."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jeśli masz kilka falowników i wartości generacji PV są nieprawidłowe, spróbuj to przełączyć."
+            "value" : "Jeśli masz kilka inwerterów i wartości generacji PV są nieprawidłowe, spróbuj dostosować te ustawienia."
           }
         }
       }

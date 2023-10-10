@@ -39,6 +39,7 @@ public protocol Config {
     var feedInUnitPrice: Double { get set }
     var gridImportUnitPrice: Double { get set }
     var currencySymbol: String { get set }
+    var shouldCombineCT2WithPVPower: Bool { get set }
 }
 
 extension UserDefaults {
@@ -145,6 +146,9 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredString(key: "currencySymbol", defaultValue: "£")
     public var currencySymbol: String
+
+    @UserDefaultsStoredBool(key: "shouldCombineCT2WithPVPower", defaultValue: true)
+    public var shouldCombineCT2WithPVPower: Bool
 
     public var selectedParameterGraphVariables: [String] {
         get {

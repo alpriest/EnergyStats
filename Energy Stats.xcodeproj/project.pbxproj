@@ -37,7 +37,7 @@
 		41075D6029DC392E007F897A /* BatteryCapacityCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41075D5F29DC392E007F897A /* BatteryCapacityCalculatorTests.swift */; };
 		410913FD29DB78EF00133CC5 /* PreciseDateTimeFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410913FC29DB78EF00133CC5 /* PreciseDateTimeFormatter.swift */; };
 		410913FE29DB791200133CC5 /* CountdownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A25D4228CA706700315714 /* CountdownTimer.swift */; };
-		410913FF29DB7A2700133CC5 /* CurrentStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146828C7374400EA5BA1 /* CurrentStatusViewModel.swift */; };
+		410913FF29DB7A2700133CC5 /* CurrentStatusCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146828C7374400EA5BA1 /* CurrentStatusCalculator.swift */; };
 		4109140029DB7AB600133CC5 /* HomePowerFlowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EDDF6B28CD2A630092C662 /* HomePowerFlowViewModel.swift */; };
 		4109140229DB7AE700133CC5 /* BatteryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140147028C77AAA00EA5BA1 /* BatteryViewModel.swift */; };
 		410FC8862AB98F020004CBC2 /* ParameterVariableGroupEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410FC8852AB98F020004CBC2 /* ParameterVariableGroupEditorView.swift */; };
@@ -382,7 +382,7 @@
 		4140145F28C70D4700EA5BA1 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		4140146128C7146300EA5BA1 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		4140146428C714C000EA5BA1 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
-		4140146828C7374400EA5BA1 /* CurrentStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentStatusViewModel.swift; sourceTree = "<group>"; };
+		4140146828C7374400EA5BA1 /* CurrentStatusCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentStatusCalculator.swift; sourceTree = "<group>"; };
 		4140146E28C77A3100EA5BA1 /* BatteryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryResponse.swift; sourceTree = "<group>"; };
 		4140147028C77AAA00EA5BA1 /* BatteryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryViewModel.swift; sourceTree = "<group>"; };
 		4140ECD9292D58D300992DD8 /* ParameterGraphVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterGraphVariable.swift; sourceTree = "<group>"; };
@@ -635,7 +635,7 @@
 			isa = PBXGroup;
 			children = (
 				4140147028C77AAA00EA5BA1 /* BatteryViewModel.swift */,
-				4140146828C7374400EA5BA1 /* CurrentStatusViewModel.swift */,
+				4140146828C7374400EA5BA1 /* CurrentStatusCalculator.swift */,
 				41EDDF6B28CD2A630092C662 /* HomePowerFlowViewModel.swift */,
 				418240772A9A33E300101064 /* TotalsViewModel.swift */,
 				41CA35722AA8C10900D45734 /* EarningsViewModel.swift */,
@@ -1531,7 +1531,7 @@
 				417185462A004FA900D18CDD /* VariablesResponse.swift in Sources */,
 				4103D1CF29DB6C4D001B0BC8 /* Auth.swift in Sources */,
 				41CA35732AA8C10900D45734 /* EarningsViewModel.swift in Sources */,
-				410913FF29DB7A2700133CC5 /* CurrentStatusViewModel.swift in Sources */,
+				410913FF29DB7A2700133CC5 /* CurrentStatusCalculator.swift in Sources */,
 				410913FE29DB791200133CC5 /* CountdownTimer.swift in Sources */,
 				4103D1D929DB6C6D001B0BC8 /* ReportVariable.swift in Sources */,
 				4103D1D129DB6C51001B0BC8 /* Raw.swift in Sources */,
@@ -1788,7 +1788,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.84;
+				MARKETING_VERSION = 1.85;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1846,7 +1846,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.84;
+				MARKETING_VERSION = 1.85;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

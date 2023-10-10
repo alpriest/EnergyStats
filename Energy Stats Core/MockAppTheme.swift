@@ -37,7 +37,8 @@ public extension AppTheme {
             showInverterTypeNameOnPowerFlow: true,
             showLastUpdateTimestamp: false,
             solarDefinitions: .default(),
-            parameterGroups: DefaultParameterGroups()
+            parameterGroups: DefaultParameterGroups(),
+            shouldCombineCT2WithPVPower: true
         )
     }
 }

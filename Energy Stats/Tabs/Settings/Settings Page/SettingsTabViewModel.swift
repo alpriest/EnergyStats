@@ -117,6 +117,12 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
+    @Published var shouldCombineCT2WithPVPower: Bool {
+        didSet {
+            config.shouldCombineCT2WithPVPower = shouldCombineCT2WithPVPower
+        }
+    }
+
     private(set) var config: ConfigManaging
     private let userManager: UserManager
     private var cancellables = Set<AnyCancellable>()
@@ -146,6 +152,7 @@ class SettingsTabViewModel: ObservableObject {
         showGridTotalsOnPowerFlow = config.showGridTotalsOnPowerFlow
         showInverterTypeNameOnPowerFlow = config.showInverterTypeNameOnPowerFlow
         showLastUpdateTimestamp = config.showLastUpdateTimestamp
+        shouldCombineCT2WithPVPower = config.shouldCombineCT2WithPVPower
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }

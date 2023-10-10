@@ -1,5 +1,5 @@
 //
-//  CurrentStatusViewModel.swift
+//  CurrentStatusCalculator.swift
 //  Energy Stats
 //
 //  Created by Alistair Priest on 06/09/2022.
@@ -7,14 +7,16 @@
 
 import Foundation
 
-public struct CurrentStatusViewModel: Sendable {
+public struct CurrentStatusCalculator: Sendable {
     public let currentSolarPower: Double
     public let currentGrid: Double
     public let currentHomeConsumption: Double
     public let currentTemperatures: InverterTemperatures?
     public let lastUpdate: Date
+    public let currentCT2: Double
+    static let ACtoDCconversion = 0.92
 
-    public init(device: Device, raws: [RawResponse], shouldInvertCT2: Bool) {
+    public init(device: Device, raws: [RawResponse], shouldInvertCT2: Bool, shouldCombineCT2WithPVPower: Bool) {
         self.currentGrid = raws.currentValue(for: "feedinPower") - raws.currentValue(for: "gridConsumptionPower")
         self.currentHomeConsumption = raws.currentValue(for: "loadsPower") // + raws.currentValue(for: "meterPower2")
         if raws.contains(where: { response in response.variable == "ambientTemperation" }) &&
@@ -25,29 +27,30 @@ public struct CurrentStatusViewModel: Sendable {
             self.currentTemperatures = nil
         }
         self.lastUpdate = raws.current(for: "gridConsumptionPower")?.time ?? Date()
-        self.currentSolarPower = Self.calculateSolarPower(device: device, raws: raws, shouldInvertCT2: shouldInvertCT2)
+        self.currentCT2 = ((shouldInvertCT2 ? 0 - raws.currentValue(for: "meterPower2") : raws.currentValue(for: "meterPower2")) / Self.ACtoDCconversion)
+        self.currentSolarPower = Self.calculateSolarPower(device: device, raws: raws, shouldInvertCT2: shouldInvertCT2, shouldCombineCT2WithPVPower: shouldCombineCT2WithPVPower)
     }
 }
 
-private extension CurrentStatusViewModel {
-    static func calculateSolarPower(device: Device, raws: [RawResponse], shouldInvertCT2: Bool) -> Double {
-        let ACtoDCconversion = 0.92
+private extension CurrentStatusCalculator {
+    static func calculateSolarPower(device: Device, raws: [RawResponse], shouldInvertCT2: Bool, shouldCombineCT2WithPVPower: Bool) -> Double {
+        let ct2 = ((shouldInvertCT2 ? 0 - raws.currentValue(for: "meterPower2") : raws.currentValue(for: "meterPower2")) / ACtoDCconversion)
 
         if device.hasPV {
-            return raws.currentValue(for: "pvPower") + ((shouldInvertCT2 ? 0 - raws.currentValue(for: "meterPower2") : raws.currentValue(for: "meterPower2")) / ACtoDCconversion)
+            return raws.currentValue(for: "pvPower") + (shouldCombineCT2WithPVPower ? ct2 : 0.0)
         } else {
-            return raws.currentValue(for: "meterPower2") / ACtoDCconversion
+            return ct2
         }
     }
 }
 
 extension Array where Element == RawResponse {
     func current(for key: String) -> RawResponse.ReportData? {
-        self.first(where: { $0.variable.lowercased() == key.lowercased() })?.data.last
+        first(where: { $0.variable.lowercased() == key.lowercased() })?.data.last
     }
 
     func currentValue(for key: String) -> Double {
-        self.current(for: key)?.value ?? 0.0
+        current(for: key)?.value ?? 0.0
     }
 }
 

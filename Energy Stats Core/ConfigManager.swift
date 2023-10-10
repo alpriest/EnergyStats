@@ -54,6 +54,7 @@ public protocol ConfigManaging: FinancialConfigManaging {
     var solarDefinitions: SolarRangeDefinitions { get set }
     var parameterGroups: [ParameterGroup] { get set }
     var currencySymbol: String { get set }
+    var shouldCombineCT2WithPVPower: Bool { get set }
 }
 
 public protocol FinancialConfigManaging {
@@ -104,7 +105,8 @@ public class ConfigManager: ConfigManaging {
                 showInverterTypeNameOnPowerFlow: config.showInverterTypeNameOnPowerFlow,
                 showLastUpdateTimestamp: config.showLastUpdateTimestamp,
                 solarDefinitions: config.solarDefinitions,
-                parameterGroups: config.parameterGroups
+                parameterGroups: config.parameterGroups,
+                shouldCombineCT2WithPVPower: config.shouldCombineCT2WithPVPower
             )
         )
         selectedDeviceID = selectedDeviceID
@@ -517,6 +519,16 @@ public class ConfigManager: ConfigManaging {
             config.showLastUpdateTimestamp = newValue
             appTheme.send(appTheme.value.copy(
                 showLastUpdateTimestamp: config.showLastUpdateTimestamp
+            ))
+        }
+    }
+
+    public var shouldCombineCT2WithPVPower: Bool {
+        get { config.shouldCombineCT2WithPVPower }
+        set {
+            config.shouldCombineCT2WithPVPower = newValue
+            appTheme.send(appTheme.value.copy(
+                shouldCombineCT2WithPVPower: config.shouldCombineCT2WithPVPower
             ))
         }
     }

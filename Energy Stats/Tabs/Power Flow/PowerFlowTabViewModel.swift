@@ -101,7 +101,8 @@ class PowerFlowTabViewModel: ObservableObject {
 
         self.themeChangeCancellable = self.configManager.appTheme.sink { theme in
             if self.latestAppTheme.showInverterTemperature != theme.showInverterTemperature ||
-                self.latestAppTheme.shouldInvertCT2 != theme.shouldInvertCT2 {
+                self.latestAppTheme.shouldInvertCT2 != theme.shouldInvertCT2 ||
+                self.latestAppTheme.shouldCombineCT2WithPVPower != theme.shouldCombineCT2WithPVPower {
                 self.latestAppTheme = theme
                 Task { await self.loadData() }
             }
@@ -164,7 +165,10 @@ class PowerFlowTabViewModel: ObservableObject {
             }
 
             let raws = try await self.network.fetchRaw(deviceID: currentDevice.deviceID, variables: rawVariables.compactMap { $0 }, queryDate: .now())
-            let currentViewModel = CurrentStatusViewModel(device: currentDevice, raws: raws, shouldInvertCT2: self.configManager.shouldInvertCT2)
+            let currentViewModel = CurrentStatusCalculator(device: currentDevice, 
+                                                           raws: raws,
+                                                           shouldInvertCT2: self.configManager.shouldInvertCT2, 
+                                                           shouldCombineCT2WithPVPower: self.configManager.shouldCombineCT2WithPVPower)
             var battery: BatteryViewModel = .noBattery
             if currentDevice.hasBattery {
                 do {
@@ -185,7 +189,8 @@ class PowerFlowTabViewModel: ObservableObject {
                 inverterTemperatures: currentViewModel.currentTemperatures,
                 homeTotal: totalsViewModel.home,
                 gridImportTotal: totalsViewModel.gridImport,
-                gridExportTotal: totalsViewModel.gridExport
+                gridExportTotal: totalsViewModel.gridExport,
+                ct2: currentViewModel.currentCT2
             )
 
             self.state = .loaded(.empty()) // refreshes the marching ants line speed
@@ -200,7 +205,7 @@ class PowerFlowTabViewModel: ObservableObject {
         }
     }
 
-    func calculateTicks(historicalViewModel: CurrentStatusViewModel) {
+    func calculateTicks(historicalViewModel: CurrentStatusCalculator) {
         switch self.configManager.refreshFrequency {
         case .ONE_MINUTE:
             self.totalTicks = 60

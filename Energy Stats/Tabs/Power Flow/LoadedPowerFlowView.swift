@@ -16,7 +16,6 @@ struct LoadedPowerFlowView: View {
     private let configManager: ConfigManaging
     private let viewModel: HomePowerFlowViewModel
     private var appThemePublisher: LatestAppTheme
-    @State private var showCT2 = true
 
     init(configManager: ConfigManaging, viewModel: HomePowerFlowViewModel, appThemePublisher: LatestAppTheme) {
         self.configManager = configManager
@@ -40,18 +39,18 @@ struct LoadedPowerFlowView: View {
 
                     if appTheme.showFinancialEarnings {
                         EarningsView(viewModel: viewModel.earnings, appTheme: appTheme)
-                            .padding(.bottom, 4)
+                            .padding(.bottom, 8)
                     }
 
                     ZStack {
                         HStack {
-                            if showCT2 {
+                            if !appTheme.shouldCombineCT2WithPVPower {
                                 VStack(spacing: 0) {
                                     CT2_icon()
-                                    PowerFlowView(amount: 0.1, appTheme: appTheme, showColouredLines: false, type: .solarFlow)
+                                    PowerFlowView(amount: viewModel.ct2, appTheme: appTheme, showColouredLines: false, type: .solarFlow)
                                     Color.clear.frame(height: size.height * 0.1)
                                 }
-                                .frame(width: columnWidth, height: size.height * 0.4)
+                                .frame(width: topColumnWidth, height: size.height * 0.4)
 
                                 Spacer().frame(width: horizontalPadding)
                             }
@@ -60,20 +59,20 @@ struct LoadedPowerFlowView: View {
                                                                                               generation: viewModel.todaysGeneration,
                                                                                               earnings: viewModel.earnings))
 
-                                .frame(width: columnWidth, height: size.height * 0.4)
+                                .frame(width: topColumnWidth, height: size.height * 0.4)
 
-                            if showCT2 {
+                            if !appTheme.shouldCombineCT2WithPVPower {
                                 Spacer().frame(width: horizontalPadding)
 
                                 Color.clear
-                                    .frame(width: columnWidth, height: size.height * 0.4)
+                                    .frame(width: topColumnWidth, height: size.height * 0.4)
                             }
                         }
 
-                        if showCT2 {
-                            PowerFlowView(amount: 0.1, appTheme: appTheme, showColouredLines: false, type: .solarFlow, shape: MidYHorizontalLine(), showAmount: false)
-                                .offset(x: -0.5 * (columnWidth + horizontalPadding), y: size.height * 0.1)
-                                .frame(width: columnWidth * 1 + horizontalPadding)
+                        if !appTheme.shouldCombineCT2WithPVPower {
+                            PowerFlowView(amount: viewModel.ct2, appTheme: appTheme, showColouredLines: false, type: .solarFlow, shape: MidYHorizontalLine(), showAmount: false)
+                                .offset(x: -0.5 * topColumnWidth - (horizontalPadding / 2.0), y: size.height * 0.1)
+                                .frame(width: topColumnWidth + horizontalPadding)
                         }
                     }
 
@@ -92,18 +91,18 @@ struct LoadedPowerFlowView: View {
                                                                               batteryResidual: viewModel.batteryResidual,
                                                                               error: viewModel.batteryError),
                                              appTheme: appTheme)
-                                .frame(width: columnWidth)
+                                .frame(width: bottomColumnWidth)
 
                             Spacer().frame(width: horizontalPadding)
                         }
 
                         HomePowerView(amount: viewModel.home, appTheme: appTheme)
-                            .frame(width: columnWidth)
+                            .frame(width: bottomColumnWidth)
 
                         Spacer().frame(width: horizontalPadding)
 
                         GridPowerView(amount: viewModel.grid, appTheme: appTheme)
-                            .frame(width: columnWidth)
+                            .frame(width: bottomColumnWidth)
                     }
                     .padding(.bottom, 4)
                     .padding(.horizontal, horizontalPadding)
@@ -118,20 +117,20 @@ struct LoadedPowerFlowView: View {
                                                                                     batteryResidual: viewModel.batteryResidual,
                                                                                     error: viewModel.batteryError),
                                                    appTheme: appTheme)
-                                .frame(width: columnWidth)
+                                .frame(width: bottomColumnWidth)
 
                             Spacer().frame(width: horizontalPadding)
                         }
 
                         HomePowerFooterView(amount: viewModel.homeTotal, appTheme: appTheme)
-                            .frame(width: columnWidth)
+                            .frame(width: bottomColumnWidth)
 
                         Spacer().frame(width: horizontalPadding)
 
                         GridPowerFooterView(importTotal: viewModel.gridImportTotal,
                                             exportTotal: viewModel.gridExportTotal,
                                             appTheme: appTheme)
-                            .frame(width: columnWidth)
+                            .frame(width: bottomColumnWidth)
                     }
                     .padding(.bottom, 16)
                     .padding(.horizontal, horizontalPadding)
@@ -147,9 +146,14 @@ struct LoadedPowerFlowView: View {
     }
 
     private let horizontalPadding: CGFloat = 14
-    private var columnWidth: CGFloat {
+    private var bottomColumnWidth: CGFloat {
         let spacerCount: CGFloat = 3 + (showingBatteryColumn ? 1 : 0)
         return (UIScreen.main.bounds.width - (horizontalPadding * spacerCount)) / (showingBatteryColumn ? 3 : 2)
+    }
+
+    private var topColumnWidth: CGFloat {
+        let spacerCount: CGFloat = 4
+        return (UIScreen.main.bounds.width - (horizontalPadding * spacerCount)) / 3
     }
 
     private var columnCount: CGFloat {
@@ -166,7 +170,7 @@ struct LoadedPowerFlowView: View {
 
     private var inverterLineWidth: CGFloat {
         let lineWidth: CGFloat = 4
-        return columnWidth * (columnCount - 1) + (horizontalPadding * (columnCount - 1)) + (2.0 * (lineWidth / 2.0))
+        return bottomColumnWidth * (columnCount - 1) + (horizontalPadding * (columnCount - 1)) + (2.0 * (lineWidth / 2.0))
     }
 }
 
@@ -174,7 +178,12 @@ struct PowerSummaryView_Previews: PreviewProvider {
     static var previews: some View {
         LoadedPowerFlowView(configManager: PreviewConfigManager(),
                             viewModel: HomePowerFlowViewModel.any(battery: .any()),
-                            appThemePublisher: CurrentValueSubject(AppTheme.mock().copy(decimalPlaces: 3, displayUnit: .adaptive, showFinancialEarnings: true, showInverterTemperature: true, showHomeTotalOnPowerFlow: true)))
+                            appThemePublisher: CurrentValueSubject(AppTheme.mock().copy(decimalPlaces: 3,
+                                                                                        displayUnit: .adaptive,
+                                                                                        showFinancialEarnings: true,
+                                                                                        showInverterTemperature: true,
+                                                                                        showHomeTotalOnPowerFlow: true,
+                                                                                        shouldCombineCT2WithPVPower: true)))
             .environment(\.locale, .init(identifier: "en"))
     }
 }
@@ -190,7 +199,8 @@ extension HomePowerFlowViewModel {
               inverterTemperatures: InverterTemperatures(ambient: 4.0, inverter: 9.0),
               homeTotal: 1.0,
               gridImportTotal: 12.0,
-              gridExportTotal: 2.4)
+              gridExportTotal: 2.4,
+              ct2: 0)
     }
 }
 

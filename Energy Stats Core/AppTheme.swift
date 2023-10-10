@@ -38,6 +38,7 @@ public struct AppTheme {
     public var showLastUpdateTimestamp: Bool
     public var solarDefinitions: SolarRangeDefinitions
     public var parameterGroups: [ParameterGroup]
+    public var shouldCombineCT2WithPVPower: Bool
 
     public init(
         showColouredLines: Bool,
@@ -62,7 +63,8 @@ public struct AppTheme {
         showInverterTypeNameOnPowerFlow: Bool,
         showLastUpdateTimestamp: Bool,
         solarDefinitions: SolarRangeDefinitions,
-        parameterGroups: [ParameterGroup]
+        parameterGroups: [ParameterGroup],
+        shouldCombineCT2WithPVPower: Bool
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -87,6 +89,7 @@ public struct AppTheme {
         self.showLastUpdateTimestamp = showLastUpdateTimestamp
         self.solarDefinitions = solarDefinitions
         self.parameterGroups = parameterGroups
+        self.shouldCombineCT2WithPVPower = shouldCombineCT2WithPVPower
     }
 
     public func copy(
@@ -112,7 +115,8 @@ public struct AppTheme {
         showInverterTypeNameOnPowerFlow: Bool? = nil,
         showLastUpdateTimestamp: Bool? = nil,
         solarDefinitions: SolarRangeDefinitions? = nil,
-        parameterGroups: [ParameterGroup]? = nil
+        parameterGroups: [ParameterGroup]? = nil,
+        shouldCombineCT2WithPVPower: Bool? = nil
     ) -> AppTheme {
         AppTheme(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -137,7 +141,8 @@ public struct AppTheme {
             showInverterTypeNameOnPowerFlow: showInverterTypeNameOnPowerFlow ?? self.showInverterTypeNameOnPowerFlow,
             showLastUpdateTimestamp: showLastUpdateTimestamp ?? self.showLastUpdateTimestamp,
             solarDefinitions: solarDefinitions ?? self.solarDefinitions,
-            parameterGroups: parameterGroups ?? self.parameterGroups
+            parameterGroups: parameterGroups ?? self.parameterGroups,
+            shouldCombineCT2WithPVPower: shouldCombineCT2WithPVPower ?? self.shouldCombineCT2WithPVPower
         )
     }
 }
