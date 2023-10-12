@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DatePickerView: View {
     @ObservedObject var viewModel: DatePickerViewModel
+    @Binding var showingGraph: Bool
 
     var body: some View {
         HStack {
@@ -33,6 +34,16 @@ struct DatePickerView: View {
                     Label("Year", systemImage: viewModel.range == .year ? "checkmark" : "")
                         .accessibilityIdentifier("year")
                 }
+
+                Divider()
+
+                Button {
+                    showingGraph.toggle()
+                } label: {
+                    Label(showingGraph ? "Hide graph" : "Show graph", systemImage: "chart.bar.xaxis")
+                }
+                .buttonStyle(.bordered)
+
             } label: {
                 NonFunctionalButton {
                     Image(systemName: "calendar.badge.clock")
@@ -118,7 +129,8 @@ struct DatePickerView_Previews: PreviewProvider {
     static var previews: some View {
         let model = DatePickerViewModel(.constant(.month(8, 2023)))
 
-        return DatePickerView(viewModel: model)
+        return DatePickerView(viewModel: model, showingGraph: .constant(true))
+            .frame(height: 200)
             .previewDevice("iPhone SE (3rd generation)")
     }
 }

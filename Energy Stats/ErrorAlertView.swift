@@ -8,12 +8,36 @@
 import Energy_Stats_Core
 import SwiftUI
 
+struct EqualWidthButtonStyle: ButtonStyle {
+    @Binding var buttonWidth: CGFloat
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .background(rectReader($buttonWidth))
+            .frame(minWidth: buttonWidth)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 7)
+            .background(Color.lightGray)
+            .foregroundStyle(Color.accentColor)
+            .cornerRadius(6)
+    }
+
+    private func rectReader(_ binding: Binding<CGFloat>) -> some View {
+        GeometryReader { gr -> Color in
+            DispatchQueue.main.async {
+                binding.wrappedValue = max(binding.wrappedValue, gr.frame(in: .local).width)
+            }
+            return Color.clear
+        }
+    }
+}
+
 struct ErrorAlertView: View {
     let cause: Error?
     let message: String
     let retry: () -> Void
-    @State private var errorShowing = false
     @EnvironmentObject var userManager: UserManager
+    @State private var buttonWidth: CGFloat = .zero
 
     var body: some View {
         VStack {
@@ -35,49 +59,54 @@ struct ErrorAlertView: View {
                 .multilineTextAlignment(.center)
                 .padding(.bottom)
 
-            Button(action: { errorShowing.toggle() }) {
-                Text(tapIconMessage)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .multilineTextAlignment(.center)
-            }.buttonStyle(.bordered)
+            Text(detailedMessage)
+                .fixedSize(horizontal: false, vertical: true)
+                .multilineTextAlignment(.center)
+                .padding(.bottom)
+                .font(.caption)
+
+            Button {
+                UIPasteboard.general.string = debugData
+            } label: {
+                Text("Copy debug data")
+            }
+            .buttonStyle(EqualWidthButtonStyle(buttonWidth: $buttonWidth))
 
             VStack {
                 Button(action: { retry() }) {
                     Text("Retry")
-                }.buttonStyle(.bordered)
+                        .background(rectReader($buttonWidth))
+                        .frame(minWidth: buttonWidth)
+                }
+                .buttonStyle(EqualWidthButtonStyle(buttonWidth: $buttonWidth))
 
-                Button("Check FoxESS Server status") {
+                Button {
                     let url = URL(string: "https://monitor.foxesscommunity.com/")!
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                }.buttonStyle(.bordered)
+                } label: {
+                    Text("Check FoxESS Server status")
+                        .background(rectReader($buttonWidth))
+                        .frame(minWidth: buttonWidth)
+                }
+                .buttonStyle(EqualWidthButtonStyle(buttonWidth: $buttonWidth))
             }
 
             Button(action: { userManager.logout() }) {
                 Text("logout")
-            }.buttonStyle(.bordered)
-        }
-        .frame(height: 200)
-        .overlay(
-            VStack {
-                Text(detailedMessage)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .padding(.bottom)
-
-                Button {
-                    UIPasteboard.general.string = debugData
-                } label: {
-                    Text("Copy debug data")
-                }
-
-                Button(action: { errorShowing = false }, label: {
-                    Text("OK")
-                }).buttonStyle(.bordered)
+                    .background(rectReader($buttonWidth))
+                    .frame(minWidth: buttonWidth)
             }
-            .padding()
-            .background(Color("background"))
-            .border(Color.black)
-            .opacity(errorShowing ? 1 : 0)
-        )
+            .buttonStyle(EqualWidthButtonStyle(buttonWidth: $buttonWidth))
+        }
+    }
+
+    private func rectReader(_ binding: Binding<CGFloat>) -> some View {
+        GeometryReader { gr -> Color in
+            DispatchQueue.main.async {
+                binding.wrappedValue = max(binding.wrappedValue, gr.frame(in: .local).width)
+            }
+            return Color.clear
+        }
     }
 
     private var debugData: String {
@@ -133,15 +162,13 @@ struct ErrorAlertView: View {
 }
 
 #if DEBUG
-struct ErrorAlertView_Previews: PreviewProvider {
-    static var previews: some View {
-        ErrorAlertView(
-            cause: NetworkError.badCredentials,
-            message: "This is a long message. This is a long message. This is a long message. This is a long message",
-            retry: {}
-        )
-        .environmentObject(UserManager.preview())
-        .environment(\.locale, .init(identifier: "de"))
-    }
+#Preview {
+    ErrorAlertView(
+        cause: NetworkError.badCredentials,
+        message: "This is a long message. This is a long message. This is a long message. This is a long message",
+        retry: {}
+    )
+    .environmentObject(UserManager.preview())
+    .environment(\.locale, .init(identifier: "de"))
 }
 #endif

@@ -33,6 +33,7 @@ struct StatsTabView: View {
     @State private var showingExporter = false
     @State private var appTheme: AppTheme
     private var appThemePublisher: LatestAppTheme
+    @AppStorage("showStatsGraph") private var showingGraph = true
 
     init(configManager: ConfigManaging, networking: Networking, appThemePublisher: LatestAppTheme) {
         _viewModel = .init(wrappedValue: StatsTabViewModel(networking: networking, configManager: configManager))
@@ -43,28 +44,33 @@ struct StatsTabView: View {
     var body: some View {
         Group {
             VStack {
-                DatePickerView(viewModel: DatePickerViewModel($viewModel.displayMode))
+                DatePickerView(viewModel: DatePickerViewModel($viewModel.displayMode),
+                               showingGraph: $showingGraph)
 
                 ScrollView {
-                    HStack {
-                        Group {
-                            if viewModel.valuesAtTime != nil, let selectedDate = viewModel.selectedDate {
-                                Text(viewModel.selectedDateFormatted(selectedDate))
+                    if showingGraph {
+                        HStack {
+                            Group {
+                                if viewModel.valuesAtTime != nil, let selectedDate = viewModel.selectedDate {
+                                    Text(viewModel.selectedDateFormatted(selectedDate))
 
-                                Button("Clear graph values", action: {
-                                    self.viewModel.valuesAtTime = nil
-                                    self.viewModel.selectedDate = nil
-                                    self.viewModel.calculateApproximations()
-                                })
-                            } else {
-                                Text("Touch the graph to see values at that time")
-                            }
-                        }.padding(.vertical)
-                    }.frame(maxWidth: .infinity)
+                                    Button("Clear graph values", action: {
+                                        self.viewModel.valuesAtTime = nil
+                                        self.viewModel.selectedDate = nil
+                                        self.viewModel.calculateApproximations()
+                                    })
+                                } else {
+                                    Text("Touch the graph to see values at that time")
+                                }
+                            }.padding(.vertical)
+                        }.frame(maxWidth: .infinity)
 
-                    StatsGraphView(viewModel: viewModel, selectedDate: $viewModel.selectedDate, valuesAtTime: $viewModel.valuesAtTime)
-                        .frame(height: 250)
-                        .padding(.vertical)
+                        StatsGraphView(viewModel: viewModel, selectedDate: $viewModel.selectedDate, valuesAtTime: $viewModel.valuesAtTime)
+                            .frame(height: 250)
+                            .padding(.vertical)
+                    } else {
+                        Spacer()
+                    }
 
                     StatsGraphVariableToggles(viewModel: viewModel, selectedDate: $viewModel.selectedDate, valuesAtTime: $viewModel.valuesAtTime, appTheme: appThemePublisher.value)
 

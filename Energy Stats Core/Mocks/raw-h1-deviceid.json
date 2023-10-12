@@ -4317,6 +4317,17 @@
           "value": 30.8
         }
       ]
+    },
+    {
+      "variable": "pvPower",
+      "unit": "kWh",
+      "name": "pvPower",
+      "data": [
+        {
+          "time": "2023-08-18 00:03:17 BST+0100",
+          "value": 1.3
+        }
+      ]
     }
   ]
 }

@@ -2921,7 +2921,6 @@
       }
     },
     "Day by hours" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4671,6 +4670,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
+          }
+        }
+      }
+    },
+    "Hide graph" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diagramm ausblenden"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ocultar gráfico"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra grafico"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ukryj wykres"
           }
         }
       }
@@ -8802,6 +8829,34 @@
         }
       }
     },
+    "Show graph" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diagramm anzeigen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar gráfico"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nascondi grafico"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pokaż wykres"
+          }
+        }
+      }
+    },
     "Show inverter icon" : {
       "localizations" : {
         "de" : {
@@ -9333,31 +9388,31 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tippen für Details."
+            "value" : "Tippen für Details"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tap for detail."
+            "value" : "Tap for detail"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Toque para detalle."
+            "value" : "Toque para detalle"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tocca per dettaglio."
+            "value" : "Tocca per dettaglio"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kliknij, aby uzyskać szczegóły."
+            "value" : "Kliknij, aby uzyskać szczegóły"
           }
         }
       }
