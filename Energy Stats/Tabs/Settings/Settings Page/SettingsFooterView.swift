@@ -25,7 +25,7 @@ struct SettingsFooterView: View {
                 VStack(alignment: .center, spacing: 44) {
                     HStack {
                         Button {
-                            let url = URL(string: "mailto:energystatsapp@gmail.com")!
+                            let url = URL(string: "mailto:energystatsapp@gmail.com?subject=iOS%20App%20\(appVersion)")!
                             UIApplication.shared.open(url, options: [:], completionHandler: nil)
                         } label: {
                             Image(systemName: "envelope")

@@ -39,6 +39,7 @@ public struct AppTheme {
     public var solarDefinitions: SolarRangeDefinitions
     public var parameterGroups: [ParameterGroup]
     public var shouldCombineCT2WithPVPower: Bool
+    public var showGraphValueDescriptions: Bool
 
     public init(
         showColouredLines: Bool,
@@ -64,7 +65,8 @@ public struct AppTheme {
         showLastUpdateTimestamp: Bool,
         solarDefinitions: SolarRangeDefinitions,
         parameterGroups: [ParameterGroup],
-        shouldCombineCT2WithPVPower: Bool
+        shouldCombineCT2WithPVPower: Bool,
+        showGraphValueDescriptions: Bool
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -90,6 +92,7 @@ public struct AppTheme {
         self.solarDefinitions = solarDefinitions
         self.parameterGroups = parameterGroups
         self.shouldCombineCT2WithPVPower = shouldCombineCT2WithPVPower
+        self.showGraphValueDescriptions = showGraphValueDescriptions
     }
 
     public func copy(
@@ -116,7 +119,8 @@ public struct AppTheme {
         showLastUpdateTimestamp: Bool? = nil,
         solarDefinitions: SolarRangeDefinitions? = nil,
         parameterGroups: [ParameterGroup]? = nil,
-        shouldCombineCT2WithPVPower: Bool? = nil
+        shouldCombineCT2WithPVPower: Bool? = nil,
+        showGraphValueDescriptions: Bool? = nil
     ) -> AppTheme {
         AppTheme(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -142,7 +146,8 @@ public struct AppTheme {
             showLastUpdateTimestamp: showLastUpdateTimestamp ?? self.showLastUpdateTimestamp,
             solarDefinitions: solarDefinitions ?? self.solarDefinitions,
             parameterGroups: parameterGroups ?? self.parameterGroups,
-            shouldCombineCT2WithPVPower: shouldCombineCT2WithPVPower ?? self.shouldCombineCT2WithPVPower
+            shouldCombineCT2WithPVPower: shouldCombineCT2WithPVPower ?? self.shouldCombineCT2WithPVPower,
+            showGraphValueDescriptions: showGraphValueDescriptions ?? self.showGraphValueDescriptions
         )
     }
 }

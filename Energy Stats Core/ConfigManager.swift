@@ -55,6 +55,7 @@ public protocol ConfigManaging: FinancialConfigManaging {
     var parameterGroups: [ParameterGroup] { get set }
     var currencySymbol: String { get set }
     var shouldCombineCT2WithPVPower: Bool { get set }
+    var showGraphValueDescriptions: Bool { get set }
 }
 
 public protocol FinancialConfigManaging {
@@ -106,7 +107,8 @@ public class ConfigManager: ConfigManaging {
                 showLastUpdateTimestamp: config.showLastUpdateTimestamp,
                 solarDefinitions: config.solarDefinitions,
                 parameterGroups: config.parameterGroups,
-                shouldCombineCT2WithPVPower: config.shouldCombineCT2WithPVPower
+                shouldCombineCT2WithPVPower: config.shouldCombineCT2WithPVPower,
+                showGraphValueDescriptions: config.showGraphValueDescriptions
             )
         )
         selectedDeviceID = selectedDeviceID
@@ -430,6 +432,16 @@ public class ConfigManager: ConfigManaging {
             config.parameterGroups = newValue
             appTheme.send(appTheme.value.copy(
                 parameterGroups: config.parameterGroups
+            ))
+        }
+    }
+
+    public var showGraphValueDescriptions: Bool {
+        get { config.showGraphValueDescriptions }
+        set {
+            config.showGraphValueDescriptions = newValue
+            appTheme.send(appTheme.value.copy(
+                showGraphValueDescriptions: config.showGraphValueDescriptions
             ))
         }
     }

@@ -48,6 +48,10 @@ struct DisplaySettingsView: View {
             Toggle(isOn: $viewModel.showLastUpdateTimestamp) {
                 Text("Show last update timestamp")
             }
+
+            Toggle(isOn: $viewModel.showGraphValueDescriptions) {
+                Text("Show graph value descriptions")
+            }
         } header: {
             Text("Display")
         }

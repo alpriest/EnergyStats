@@ -146,6 +146,7 @@ public class DemoNetworking: Networking {
 public class MockConfig: Config {
     public init() {}
 
+    public var showGraphValueDescriptions: Bool = true
     public var showBatteryEstimate: Bool = true
     public var batteryCapacity: String?
     public var minSOC: String?

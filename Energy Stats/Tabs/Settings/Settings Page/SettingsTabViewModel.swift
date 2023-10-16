@@ -10,6 +10,12 @@ import Energy_Stats_Core
 import SwiftUI
 
 class SettingsTabViewModel: ObservableObject {
+    @Published var showGraphValueDescriptions: Bool {
+        didSet {
+            config.showGraphValueDescriptions = showGraphValueDescriptions
+        }
+    }
+
     @Published var showLastUpdateTimestamp: Bool {
         didSet {
             config.showLastUpdateTimestamp = showLastUpdateTimestamp
@@ -153,6 +159,7 @@ class SettingsTabViewModel: ObservableObject {
         showInverterTypeNameOnPowerFlow = config.showInverterTypeNameOnPowerFlow
         showLastUpdateTimestamp = config.showLastUpdateTimestamp
         shouldCombineCT2WithPVPower = config.shouldCombineCT2WithPVPower
+        showGraphValueDescriptions = config.showGraphValueDescriptions
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }

@@ -40,6 +40,7 @@ public protocol Config {
     var gridImportUnitPrice: Double { get set }
     var currencySymbol: String { get set }
     var shouldCombineCT2WithPVPower: Bool { get set }
+    var showGraphValueDescriptions: Bool { get set }
 }
 
 extension UserDefaults {
@@ -58,6 +59,9 @@ public class UserDefaultsConfig: Config {
     private func integer(from source: UserDefaults, forKey key: String, defaultValue: Int) -> Int {
         (source.object(forKey: key) as? Int) ?? defaultValue
     }
+
+    @UserDefaultsStoredBool(key: "showGraphValueDescriptions", defaultValue: true)
+    public var showGraphValueDescriptions: Bool
 
     @UserDefaultsStoredBool(key: "hasRunBefore")
     public var hasRunBefore: Bool

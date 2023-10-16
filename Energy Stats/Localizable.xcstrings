@@ -8858,6 +8858,34 @@
         }
       }
     },
+    "Show graph value descriptions" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Werte-Beschreibungen im Diagramm anzeigen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar descripciones de los valores del gráfico"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra descrizioni dei valori del grafico"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pokaż opisy wartości na wykresie"
+          }
+        }
+      }
+    },
     "Show inverter icon" : {
       "localizations" : {
         "de" : {

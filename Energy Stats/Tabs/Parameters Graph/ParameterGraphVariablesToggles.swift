@@ -31,7 +31,7 @@ struct ParameterGraphVariablesToggles: View {
                                     let title = valuesAtTime == nil ? variable.type.title(as: .total) : variable.type.title(as: .snapshot)
                                     Text(title)
 
-                                    if title != variable.type.description {
+                                    if title != variable.type.description, appTheme.showGraphValueDescriptions {
                                         Text(variable.type.description)
                                             .font(.system(size: 10))
                                             .foregroundColor(Color("text_dimmed"))

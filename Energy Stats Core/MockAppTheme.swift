@@ -38,7 +38,8 @@ public extension AppTheme {
             showLastUpdateTimestamp: false,
             solarDefinitions: .default(),
             parameterGroups: DefaultParameterGroups(),
-            shouldCombineCT2WithPVPower: true
+            shouldCombineCT2WithPVPower: true,
+            showGraphValueDescriptions: true
         )
     }
 }

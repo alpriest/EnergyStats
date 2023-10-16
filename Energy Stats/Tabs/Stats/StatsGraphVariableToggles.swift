@@ -29,7 +29,7 @@ struct StatsGraphVariableToggles: View {
                             VStack(alignment: .leading) {
                                 Text(variable.type.title)
 
-                                if variable.type.title != variable.type.description {
+                                if variable.type.title != variable.type.description, appTheme.showGraphValueDescriptions {
                                     Text(variable.type.description)
                                         .font(.system(size: 10))
                                         .foregroundColor(Color("text_dimmed"))
