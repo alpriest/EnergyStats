@@ -83,6 +83,6 @@ class ParameterVariableGroupEditorViewModel: ObservableObject {
 
         variables = rawVariables.map { rawVariable in
             ParameterGraphVariable(rawVariable, isSelected: group.parameterNames.contains(rawVariable.variable))
-        }
+        }.sorted(by: { $0.type.name.lowercased() < $1.type.name.lowercased() })
     }
 }
