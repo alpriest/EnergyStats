@@ -12,6 +12,7 @@ struct ApproximationsView: View {
     let viewModel: ApproximationsViewModel
     let appTheme: AppTheme
     @Environment(\.colorScheme) var colorScheme
+    @State private var showSolarCalculation = false
 
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -53,6 +54,14 @@ struct ApproximationsView: View {
                                 .accessibilityElement(children: .ignore)
                             Spacer()
                             EnergyText(amount: totals.solar, appTheme: appTheme, type: .totalSolarGenerated)
+                        }.onTapGesture {
+                            withAnimation {
+                                showSolarCalculation.toggle()
+                            }
+                        }
+
+                        if showSolarCalculation {
+                            CalculationBreakdownView(breakdown: totals.solarBreakdown)
                         }
                     }
 
@@ -84,6 +93,26 @@ struct ApproximationsView: View {
     }
 }
 
+struct CalculationBreakdownView: View {
+    let breakdown: CalculationBreakdown
+
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 6)
+                .stroke(Color("highlight_box"), lineWidth: 1)
+                .background(Color("highlight_box").opacity(0.1))
+
+            VStack(alignment: .leading, spacing: 8) {
+                Text(breakdown.formula)
+                Text(breakdown.calculation)
+            }
+            .padding(5)
+        }
+        .font(.caption2)
+        .padding(.bottom)
+    }
+}
+
 #if DEBUG
 struct ApproximationsView_Previews: PreviewProvider {
     static var previews: some View {
@@ -92,3 +121,10 @@ struct ApproximationsView_Previews: PreviewProvider {
     }
 }
 #endif
+
+#Preview {
+    CalculationBreakdownView(breakdown: CalculationBreakdown(
+        formula: "max(0, batteryCharge - batteryDischarge - gridImport + home + gridExport)",
+        calculation: "max(0, 7.6 - 7.4 - 4.9 + 9.4 + 3.1)"
+    ))
+}
