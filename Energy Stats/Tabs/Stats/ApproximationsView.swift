@@ -12,16 +12,16 @@ struct ApproximationsView: View {
     let viewModel: ApproximationsViewModel
     let appTheme: AppTheme
     @Environment(\.colorScheme) var colorScheme
-    @State private var showSolarCalculation = false
+    @State private var showCalculations = false
 
     var body: some View {
         ZStack(alignment: .topLeading) {
-            Group {
-                RoundedRectangle(cornerRadius: 6)
-                    .stroke(Color("highlight_box"), lineWidth: 1)
-                    .background(Color("highlight_box").opacity(0.1))
-                    .padding(1)
+            RoundedRectangle(cornerRadius: 6)
+                .stroke(Color("highlight_box"), lineWidth: 1)
+                .background(Color("highlight_box").opacity(0.1))
+                .padding(1)
 
+            HStack {
                 Text("Approximations")
                     .padding(2)
                     .background(
@@ -31,6 +31,24 @@ struct ApproximationsView: View {
                     .font(.caption2.weight(.bold))
                     .offset(x: 8, y: -8)
                     .foregroundColor(Color.white.opacity(colorScheme == .dark ? 0.8 : 1.0))
+
+                Spacer()
+
+                Image(systemName: showCalculations ? "eye" : "eye.slash")
+                    .padding(2)
+                    .background(
+                        RoundedRectangle(cornerRadius: 3)
+                            .fill(Color("highlight_box"))
+                    )
+                    .multilineTextAlignment(.trailing)
+                    .font(.caption2.weight(.bold))
+                    .offset(x: -8, y: -8)
+                    .foregroundColor(Color.white.opacity(colorScheme == .dark ? 0.8 : 1.0))
+                    .onTapGesture {
+                        withAnimation {
+                            showCalculations.toggle()
+                        }
+                    }
             }
 
             ZStack {
@@ -49,19 +67,17 @@ struct ApproximationsView: View {
                     }
 
                     if let totals = viewModel.totalsViewModel {
-                        HStack {
-                            Text("Solar generated")
-                                .accessibilityElement(children: .ignore)
-                            Spacer()
-                            EnergyText(amount: totals.solar, appTheme: appTheme, type: .totalSolarGenerated)
-                        }.onTapGesture {
-                            withAnimation {
-                                showSolarCalculation.toggle()
+                        VStack(spacing: 2) {
+                            HStack {
+                                Text("Solar generated")
+                                    .accessibilityElement(children: .ignore)
+                                Spacer()
+                                EnergyText(amount: totals.solar, appTheme: appTheme, type: .totalSolarGenerated)
                             }
-                        }
-
-                        if showSolarCalculation {
-                            CalculationBreakdownView(breakdown: totals.solarBreakdown)
+                            
+                            if showCalculations {
+                                CalculationBreakdownView(breakdown: totals.solarBreakdown)
+                            }
                         }
                     }
 
