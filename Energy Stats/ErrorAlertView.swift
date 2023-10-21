@@ -10,6 +10,7 @@ import SwiftUI
 
 struct EqualWidthButtonStyle: ButtonStyle {
     @Binding var buttonWidth: CGFloat
+    @Environment(\.colorScheme) var colorScheme
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
@@ -17,7 +18,7 @@ struct EqualWidthButtonStyle: ButtonStyle {
             .frame(minWidth: buttonWidth)
             .padding(.horizontal, 8)
             .padding(.vertical, 7)
-            .background(Color.lightGray)
+            .background(colorScheme == .dark ? Color.white.opacity(0.14) : Color.lightGray)
             .foregroundStyle(Color.accentColor)
             .cornerRadius(6)
     }

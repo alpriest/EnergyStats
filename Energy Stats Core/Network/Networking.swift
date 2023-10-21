@@ -254,6 +254,7 @@ private extension Network {
     func fetch<T: Decodable>(_ request: URLRequest, retry: Bool = true) async throws -> (T, Data) {
         var request = request
         addHeaders(to: &request)
+        store.latestRequest = request
 
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
@@ -263,7 +264,6 @@ private extension Network {
 
             store.latestData = data
             store.latestResponse = response
-            store.latestRequest = request
 
             guard 200 ... 300 ~= statusCode else { throw NetworkError.invalidResponse(request.url, statusCode) }
 

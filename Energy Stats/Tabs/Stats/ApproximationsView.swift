@@ -54,7 +54,7 @@ struct ApproximationsView: View {
             ZStack {
                 VStack {
                     if appTheme.selfSufficiencyEstimateMode != .off {
-                        SelfSufficiencyEstimateView(viewModel, mode: appTheme.selfSufficiencyEstimateMode)
+                        SelfSufficiencyEstimateView(viewModel, mode: appTheme.selfSufficiencyEstimateMode, showCalculations: showCalculations)
                     }
 
                     if let home = viewModel.homeUsage {
@@ -74,7 +74,7 @@ struct ApproximationsView: View {
                                 Spacer()
                                 EnergyText(amount: totals.solar, appTheme: appTheme, type: .totalSolarGenerated)
                             }
-                            
+
                             if showCalculations {
                                 CalculationBreakdownView(breakdown: totals.solarBreakdown)
                             }
@@ -82,16 +82,26 @@ struct ApproximationsView: View {
                     }
 
                     if let financialModel = viewModel.financialModel {
-                        HStack {
-                            Text("Export income")
-                            Spacer()
-                            Text(financialModel.exportIncome.formattedAmount())
+                        VStack(spacing: 2) {
+                            HStack {
+                                Text("Export income")
+                                Spacer()
+                                Text(financialModel.exportIncome.formattedAmount())
+                            }
+                            if showCalculations {
+                                CalculationBreakdownView(breakdown: financialModel.exportBreakdown)
+                            }
                         }
 
-                        HStack {
-                            Text("Grid import avoided")
-                            Spacer()
-                            Text(financialModel.solarSaving.formattedAmount())
+                        VStack(spacing: 2) {
+                            HStack {
+                                Text("Grid import avoided")
+                                Spacer()
+                                Text(financialModel.solarSaving.formattedAmount())
+                            }
+                            if showCalculations {
+                                CalculationBreakdownView(breakdown: financialModel.solarSavingBreakdown)
+                            }
                         }
 
                         HStack {
@@ -122,8 +132,10 @@ struct CalculationBreakdownView: View {
                 Text(breakdown.formula)
                 Text(breakdown.calculation)
             }
+            .frame(minWidth: 0, maxWidth: .infinity, alignment: .topLeading)
             .padding(5)
         }
+        .fixedSize(horizontal: false, vertical: true)
         .font(.caption2)
         .padding(.bottom)
     }

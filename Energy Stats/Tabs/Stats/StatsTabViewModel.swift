@@ -12,7 +12,9 @@ import SwiftUI
 
 struct ApproximationsViewModel {
     let netSelfSufficiencyEstimate: String?
+    let netSelfSufficiencyEstimateCalculationBreakdown: CalculationBreakdown
     let absoluteSelfSufficiencyEstimate: String?
+    let absoluteSelfSufficiencyEstimateCalculationBreakdown: CalculationBreakdown
     let financialModel: EnergyStatsFinancialModel?
     let homeUsage: Double?
     let totalsViewModel: TotalsViewModel?
@@ -169,7 +171,7 @@ class StatsTabViewModel: ObservableObject {
         batteryCharge: Double,
         batteryDischarge: Double
     ) {
-        let netResult = NetSelfSufficiencyCalculator.calculate(
+        let (netResult, netResultCalculationBreakdown) = NetSelfSufficiencyCalculator.calculate(
             grid: grid,
             feedIn: feedIn,
             loads: loads,
@@ -177,7 +179,7 @@ class StatsTabViewModel: ObservableObject {
             batteryDischarge: batteryDischarge
         )
 
-        let absoluteResult = AbsoluteSelfSufficiencyCalculator.calculate(
+        let (absoluteResult, absoluteResultCalculationBreakdown) = AbsoluteSelfSufficiencyCalculator.calculate(
             loads: loads,
             grid: grid
         )
@@ -201,7 +203,9 @@ class StatsTabViewModel: ObservableObject {
 
         approximationsViewModel = ApproximationsViewModel(
             netSelfSufficiencyEstimate: asPercent(netResult),
+            netSelfSufficiencyEstimateCalculationBreakdown: netResultCalculationBreakdown,
             absoluteSelfSufficiencyEstimate: asPercent(absoluteResult),
+            absoluteSelfSufficiencyEstimateCalculationBreakdown: absoluteResultCalculationBreakdown,
             financialModel: financialModel,
             homeUsage: loads,
             totalsViewModel: totalsViewModel

@@ -32,6 +32,8 @@ public struct EnergyStatsFinancialModel {
     public let exportIncome: FinanceAmount
     public let solarSaving: FinanceAmount
     public let total: FinanceAmount
+    public let exportBreakdown: CalculationBreakdown
+    public let solarSavingBreakdown: CalculationBreakdown
 
     public init(totalsViewModel: TotalsViewModel, config: FinancialConfigManaging, currencySymbol: String) {
         self.totalsViewModel = totalsViewModel
@@ -39,7 +41,17 @@ public struct EnergyStatsFinancialModel {
         self.currencySymbol = currencySymbol
 
         exportIncome = FinanceAmount(title: .exportedIncomeShortTitle, amount: totalsViewModel.gridExport * config.feedInUnitPrice, currencySymbol: currencySymbol)
+        exportBreakdown = CalculationBreakdown(
+            formula: "gridExport * feedInUnitPrice",
+            calculation: "\(totalsViewModel.gridExport.roundedToString(decimalPlaces: 2)) * \(config.feedInUnitPrice.roundedToString(decimalPlaces: 2))"
+        )
+
         solarSaving = FinanceAmount(title: .gridImportAvoidedShortTitle, amount: (totalsViewModel.solar - totalsViewModel.gridExport) * config.gridImportUnitPrice, currencySymbol: currencySymbol)
+        solarSavingBreakdown = CalculationBreakdown(
+            formula: "(solar - gridExport) * gridImportUnitPrice",
+            calculation: "(\(totalsViewModel.solar.roundedToString(decimalPlaces: 2)) - \(totalsViewModel.gridExport.roundedToString(decimalPlaces: 2))) * \(config.gridImportUnitPrice)"
+        )
+
         total = FinanceAmount(title: .total, amount: exportIncome.amount + solarSaving.amount, currencySymbol: currencySymbol)
     }
 

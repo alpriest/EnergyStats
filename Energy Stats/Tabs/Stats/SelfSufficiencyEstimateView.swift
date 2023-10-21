@@ -11,27 +11,39 @@ import SwiftUI
 struct SelfSufficiencyEstimateView: View {
     private let viewModel: ApproximationsViewModel
     private let estimate: String?
+    private let showCalculations: Bool
+    private let calculations: CalculationBreakdown?
     @Environment(\.colorScheme) var colorScheme
 
-    init(_ viewModel: ApproximationsViewModel, mode: SelfSufficiencyEstimateMode) {
+    init(_ viewModel: ApproximationsViewModel, mode: SelfSufficiencyEstimateMode, showCalculations: Bool) {
         self.viewModel = viewModel
+        self.showCalculations = showCalculations
 
         switch mode {
         case .off:
             self.estimate = nil
+            self.calculations = nil
         case .absolute:
             self.estimate = viewModel.absoluteSelfSufficiencyEstimate
+            self.calculations = viewModel.absoluteSelfSufficiencyEstimateCalculationBreakdown
         case .net:
             self.estimate = viewModel.netSelfSufficiencyEstimate
+            self.calculations = viewModel.netSelfSufficiencyEstimateCalculationBreakdown
         }
     }
 
     var body: some View {
         OptionalView(estimate) { estimate in
-            HStack {
-                Text("Self sufficiency")
-                Spacer()
-                Text(estimate)
+            VStack(spacing: 2) {
+                HStack {
+                    Text("Self sufficiency")
+                    Spacer()
+                    Text(estimate)
+                }
+
+                if showCalculations {
+                    CalculationBreakdownView(breakdown: CalculationBreakdown(formula: "x", calculation: "y"))
+                }
             }
         }
     }
@@ -41,7 +53,8 @@ struct SelfSufficiencyEstimateView: View {
 struct SelfSufficiencyEstimateView_Previews: PreviewProvider {
     static var previews: some View {
         SelfSufficiencyEstimateView(ApproximationsViewModel.any(),
-                                    mode: .absolute)
+                                    mode: .absolute,
+                                    showCalculations: true)
     }
 }
 
@@ -49,7 +62,9 @@ extension ApproximationsViewModel {
     static func any() -> ApproximationsViewModel {
         ApproximationsViewModel(
             netSelfSufficiencyEstimate: "95%",
+            netSelfSufficiencyEstimateCalculationBreakdown: CalculationBreakdown(formula: "x * b", calculation: "1 * 5"),
             absoluteSelfSufficiencyEstimate: "100%",
+            absoluteSelfSufficiencyEstimateCalculationBreakdown: CalculationBreakdown(formula: "x * b / c", calculation: "1 * 5 / 8.9"),
             financialModel: nil,
             homeUsage: 4.5,
             totalsViewModel: .any()

@@ -8,7 +8,7 @@
 import Foundation
 
 public enum NetSelfSufficiencyCalculator {
-    public static func calculate(grid: Double, feedIn: Double, loads: Double, batteryCharge: Double, batteryDischarge: Double) -> Double {
+    public static func calculate(grid: Double, feedIn: Double, loads: Double, batteryCharge: Double, batteryDischarge: Double) -> (Double, CalculationBreakdown) {
         let netGeneration = feedIn - grid + batteryCharge - batteryDischarge
         let homeConsumption = loads
 
@@ -21,16 +21,25 @@ public enum NetSelfSufficiencyCalculator {
             result = (netGeneration + homeConsumption) / homeConsumption
         }
 
-        return result.rounded(decimalPlaces: 4)
+        let breakdown = CalculationBreakdown(
+            formula: "",
+            calculation: "")
+
+        return (result.rounded(decimalPlaces: 4), breakdown)
     }
 }
 
 public enum AbsoluteSelfSufficiencyCalculator {
-    public static func calculate(loads: Double, grid: Double) -> Double {
-        guard loads > 0 else { return 0.0 }
+    public static func calculate(loads: Double, grid: Double) -> (Double, CalculationBreakdown) {
+        guard loads > 0 else { return (0.0, CalculationBreakdown(formula: "", calculation: "")) }
 
         let result = 1 - (min(loads, max(grid, 0.0)) / loads)
 
-        return result.rounded(decimalPlaces: 4)
+        let breakdown = CalculationBreakdown(
+            formula: "1 - (min(loads, max(grid, 0.0)) / loads)",
+            calculation: "1 - (min(\(loads), max(\(grid), 0.0)) / \(loads)"
+        )
+
+        return (result.rounded(decimalPlaces: 4), breakdown)
     }
 }
