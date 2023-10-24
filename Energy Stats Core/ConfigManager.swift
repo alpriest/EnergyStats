@@ -180,9 +180,7 @@ public class ConfigManager: ConfigManaging {
     }
 
     public func logout() {
-        config.selectedDeviceID = nil
-        config.devices = nil
-        config.isDemoUser = false
+        config.clear()
     }
 
     public func select(device: Device?) {

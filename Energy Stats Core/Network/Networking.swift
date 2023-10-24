@@ -50,10 +50,15 @@ public protocol Networking {
 
 public class Network: Networking {
     private var token: String? {
-        get { credentials.getToken() }
+        get {
+            credentials.getToken()
+        }
         set {
-            do { try credentials.store(token: newValue) }
-            catch { print("AWP", "Could not store token") }
+            do {
+                try credentials.store(token: newValue)
+            } catch {
+                print("AWP", "Could not store token")
+            }
         }
     }
 
@@ -82,7 +87,10 @@ public class Network: Networking {
 
     private func fetchLoginToken(username: String? = nil, hashedPassword: String? = nil) async throws -> String {
         guard let hashedPassword = hashedPassword ?? credentials.getHashedPassword(),
-              let username = username ?? credentials.getUsername() else { throw NetworkError.badCredentials }
+              let username = username ?? credentials.getUsername()
+        else {
+            throw NetworkError.badCredentials
+        }
 
         var request = URLRequest(url: URL.auth)
         request.httpMethod = "POST"
@@ -169,7 +177,7 @@ public class Network: Networking {
 
         do {
             let _: (String, Data) = try await fetch(request)
-        } catch NetworkError.invalidResponse(_, let statusCode) where statusCode == 200 {
+        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
             // Ignore
         }
     }
@@ -189,7 +197,7 @@ public class Network: Networking {
 
         do {
             let _: (String, Data) = try await fetch(request)
-        } catch NetworkError.invalidResponse(_, let statusCode) where statusCode == 200 {
+        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
             // Ignore
         }
     }
@@ -213,7 +221,7 @@ public class Network: Networking {
 
         do {
             let _: (String, Data) = try await fetch(request)
-        } catch NetworkError.invalidResponse(_, let statusCode) where statusCode == 200 {
+        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
             // Ignore
         }
     }
@@ -233,7 +241,7 @@ public class Network: Networking {
 
         do {
             let result: (ErrorMessagesResponse, Data) = try await fetch(request)
-            self.errorMessages = result.0.messages.first?.value ?? [:]
+            errorMessages = result.0.messages.first?.value ?? [:]
         } catch {
             // Ignore
         }
@@ -311,7 +319,9 @@ private extension Network {
     }
 
     func addHeaders(to request: inout URLRequest) {
-        request.setValue(token, forHTTPHeaderField: "token")
+        if let token {
+            request.setValue(token, forHTTPHeaderField: "token")
+        }
         request.setValue(UserAgent.random(), forHTTPHeaderField: "User-Agent")
         request.setValue("application/json, text/plain, */*", forHTTPHeaderField: "Accept")
         request.setValue("https://www.foxesscloud.com/bus/device/inverterDetail?id=xyz&flowType=1&status=1&hasPV=true&hasBattery=true", forHTTPHeaderField: "Referrer")
@@ -330,7 +340,7 @@ enum UserAgent {
             "Mozilla/5.0 (Linux; Android 5.1; AFTS Build/LMY47O) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/41.99900.2250.0242 Safari/537.36",
             "AppleTV11,1/11.1",
             "Mozilla/5.0 (iPhone14,3; U; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) Version/10.0 Mobile/19A346 Safari/602.1",
-            "Mozilla/5.0 (iPhone13,2; U; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) Version/10.0 Mobile/15E148 Safari/602.1"
+            "Mozilla/5.0 (iPhone13,2; U; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) Version/10.0 Mobile/15E148 Safari/602.1",
         ]
 
         return values.randomElement()!

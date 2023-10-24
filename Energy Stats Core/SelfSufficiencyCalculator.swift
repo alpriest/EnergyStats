@@ -22,8 +22,8 @@ public enum NetSelfSufficiencyCalculator {
         }
 
         let breakdown = CalculationBreakdown(
-            formula: "",
-            calculation: "")
+            formula: "TODO",
+            calculation: "TODO")
 
         return (result.rounded(decimalPlaces: 4), breakdown)
     }
@@ -31,12 +31,13 @@ public enum NetSelfSufficiencyCalculator {
 
 public enum AbsoluteSelfSufficiencyCalculator {
     public static func calculate(loads: Double, grid: Double) -> (Double, CalculationBreakdown) {
-        guard loads > 0 else { return (0.0, CalculationBreakdown(formula: "", calculation: "")) }
+        let formula = "1 - (min(loads, max(grid, 0.0)) / loads)"
+        guard loads > 0 else { return (0.0, CalculationBreakdown(formula: formula, calculation: "")) }
 
         let result = 1 - (min(loads, max(grid, 0.0)) / loads)
 
         let breakdown = CalculationBreakdown(
-            formula: "1 - (min(loads, max(grid, 0.0)) / loads)",
+            formula: formula,
             calculation: "1 - (min(\(loads), max(\(grid), 0.0)) / \(loads)"
         )
 

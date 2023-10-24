@@ -145,6 +145,7 @@ public class DemoNetworking: Networking {
 
 public class MockConfig: Config {
     public init() {}
+    public func clear() {}
 
     public var showGraphValueDescriptions: Bool = true
     public var showBatteryEstimate: Bool = true

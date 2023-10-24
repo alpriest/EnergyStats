@@ -13,6 +13,7 @@ import UIKit
 class PowerFlowTabViewModel: ObservableObject {
     private let network: Networking
     private(set) var configManager: ConfigManaging
+    private let userManager: UserManager
     private let timer = CountdownTimer()
     @MainActor @Published private(set) var lastUpdated = Date()
     @MainActor @Published private(set) var updateState: String = "Updating..."
@@ -22,6 +23,7 @@ class PowerFlowTabViewModel: ObservableObject {
     private var currentDeviceCancellable: AnyCancellable?
     private var themeChangeCancellable: AnyCancellable?
     private var latestAppTheme: AppTheme
+    private var hasRefreshedFirmware = false
 
     enum State: Equatable {
         case unloaded
@@ -42,16 +44,14 @@ class PowerFlowTabViewModel: ObservableObject {
         }
     }
 
-    init(_ network: Networking, configManager: ConfigManaging) {
+    init(_ network: Networking, configManager: ConfigManaging, userManager: UserManager) {
         self.network = network
         self.configManager = configManager
+        self.userManager = userManager
         self.latestAppTheme = configManager.appTheme.value
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.willResignActiveNotification), name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
-
-        self.addDeviceChangeObserver()
-        self.adddThemeChangeObserver()
     }
 
     func startTimer() async {
@@ -69,14 +69,27 @@ class PowerFlowTabViewModel: ObservableObject {
     func viewAppeared() {
         Task { @MainActor [weak self] in
             guard let self else { return }
+            guard self.userManager.isLoggedIn else { return }
+
             if self.timer.isTicking == false {
                 await self.timerFired()
+            }
+            self.addDeviceChangeObserver()
+            self.addThemeChangeObserver()
+            if self.hasRefreshedFirmware == false {
+                Task {
+                    try await self.configManager.refreshFirmwareVersions()
+                    self.hasRefreshedFirmware = true
+                }
             }
         }
     }
 
+    @MainActor
     func timerFired() async {
-        await self.timer.stop()
+        guard self.timer.isTicking == false else { return }
+
+        self.timer.stop()
 
         await self.loadData()
         await self.startTimer()
@@ -96,13 +109,14 @@ class PowerFlowTabViewModel: ObservableObject {
         }
     }
 
-    func adddThemeChangeObserver() {
+    func addThemeChangeObserver() {
         guard self.themeChangeCancellable == nil else { return }
 
         self.themeChangeCancellable = self.configManager.appTheme.sink { theme in
             if self.latestAppTheme.showInverterTemperature != theme.showInverterTemperature ||
                 self.latestAppTheme.shouldInvertCT2 != theme.shouldInvertCT2 ||
-                self.latestAppTheme.shouldCombineCT2WithPVPower != theme.shouldCombineCT2WithPVPower {
+                self.latestAppTheme.shouldCombineCT2WithPVPower != theme.shouldCombineCT2WithPVPower
+            {
                 self.latestAppTheme = theme
                 Task { await self.loadData() }
             }
@@ -154,7 +168,7 @@ class PowerFlowTabViewModel: ObservableObject {
                                                             queryDate: .now(),
                                                             reportType: .month)
             let earnings = try await self.network.fetchEarnings(deviceID: currentDevice.deviceID)
-            configManager.currencySymbol = earnings.currencySymbol
+            self.configManager.currencySymbol = earnings.currencySymbol
             let totalsViewModel = TotalsViewModel(reports: totals)
 
             if self.configManager.appTheme.value.showInverterTemperature {
@@ -165,9 +179,9 @@ class PowerFlowTabViewModel: ObservableObject {
             }
 
             let raws = try await self.network.fetchRaw(deviceID: currentDevice.deviceID, variables: rawVariables.compactMap { $0 }, queryDate: .now())
-            let currentViewModel = CurrentStatusCalculator(device: currentDevice, 
+            let currentViewModel = CurrentStatusCalculator(device: currentDevice,
                                                            raws: raws,
-                                                           shouldInvertCT2: self.configManager.shouldInvertCT2, 
+                                                           shouldInvertCT2: self.configManager.shouldInvertCT2,
                                                            shouldCombineCT2WithPVPower: self.configManager.shouldCombineCT2WithPVPower)
             var battery: BatteryViewModel = .noBattery
             if currentDevice.hasBattery {
@@ -185,7 +199,7 @@ class PowerFlowTabViewModel: ObservableObject {
                 home: currentViewModel.currentHomeConsumption,
                 grid: currentViewModel.currentGrid,
                 todaysGeneration: earnings.today.generation,
-                earnings: EarningsViewModel(response: earnings, energyStatsFinancialModel: EnergyStatsFinancialModel(totalsViewModel: totalsViewModel, config: configManager, currencySymbol: configManager.currencySymbol)),
+                earnings: EarningsViewModel(response: earnings, energyStatsFinancialModel: EnergyStatsFinancialModel(totalsViewModel: totalsViewModel, config: self.configManager, currencySymbol: self.configManager.currencySymbol)),
                 inverterTemperatures: currentViewModel.currentTemperatures,
                 homeTotal: totalsViewModel.home,
                 gridImportTotal: totalsViewModel.gridImport,

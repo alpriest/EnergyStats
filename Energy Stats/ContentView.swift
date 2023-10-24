@@ -17,31 +17,8 @@ struct ContentView: View {
     var body: some View {
         if loginManager.isLoggedIn {
             TabbedView(networking: network, userManager: loginManager, configManager: configManager)
-                .loadable($state, retry: fetchConfig)
-                .task { fetchConfig() }
         } else {
             LoginView(userManager: loginManager)
-        }
-    }
-
-    func fetchConfig() {
-        Task { @MainActor in
-            do {
-                await network.fetchErrorMessages()
-                try await configManager.fetchDevices()
-                Task {
-                    try await configManager.refreshFirmwareVersions()
-                }
-            } catch let error as ConfigManager.NoDeviceFoundError {
-                loginManager.logout()
-                Task { @MainActor in
-                    state = .error(error, String(key: .dataFetchError))
-                }
-            } catch {
-                Task { @MainActor in
-                    state = .error(error, String(key: .couldNotLogin))
-                }
-            }
         }
     }
 }

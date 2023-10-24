@@ -15,8 +15,8 @@ struct PowerFlowTabView: View {
     private var appThemePublisher: LatestAppTheme
     @AppStorage("showLastUpdateTimestamp") private var showLastUpdateTimestamp: Bool = false
 
-    init(configManager: ConfigManaging, networking: Networking, appThemePublisher: LatestAppTheme) {
-        _viewModel = .init(wrappedValue: PowerFlowTabViewModel(networking, configManager: configManager))
+    init(configManager: ConfigManaging, networking: Networking, userManager: UserManager, appThemePublisher: LatestAppTheme) {
+        _viewModel = .init(wrappedValue: PowerFlowTabViewModel(networking, configManager: configManager, userManager: userManager))
         self.appThemePublisher = appThemePublisher
         self.appTheme = appThemePublisher.value
     }
@@ -105,9 +105,11 @@ struct PowerFlowTabView: View {
     }
 }
 
-struct PowerFlowTabView_Previews: PreviewProvider {
-    static var previews: some View {
-        PowerFlowTabView(configManager: PreviewConfigManager(), networking: DemoNetworking(),
-                         appThemePublisher: CurrentValueSubject(AppTheme.mock()))
-    }
+#if DEBUG
+#Preview {
+    PowerFlowTabView(configManager: PreviewConfigManager(),
+                     networking: DemoNetworking(),
+                     userManager: UserManager.preview(),
+                     appThemePublisher: CurrentValueSubject(AppTheme.mock()))
 }
+#endif

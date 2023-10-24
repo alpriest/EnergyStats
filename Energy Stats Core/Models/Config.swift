@@ -8,6 +8,7 @@
 import Foundation
 
 public protocol Config {
+    func clear()
     var isDemoUser: Bool { get set }
     var hasRunBefore: Bool { get set }
     var showColouredLines: Bool { get set }
@@ -51,6 +52,42 @@ extension UserDefaults {
 
 public class UserDefaultsConfig: Config {
     public init() {}
+
+    public func clear() {
+        UserDefaults.shared.removeObject(forKey: "showGraphValueDescriptions")
+        UserDefaults.shared.removeObject(forKey: "hasRunBefore")
+        UserDefaults.shared.removeObject(forKey: "isDemoUser")
+        UserDefaults.shared.removeObject(forKey: "showColouredLines")
+        UserDefaults.shared.removeObject(forKey: "showBatteryTemperature")
+        UserDefaults.shared.removeObject(forKey: "showBatteryEstimate")
+        UserDefaults.shared.removeObject(forKey: "refreshFrequency")
+        UserDefaults.shared.removeObject(forKey: "decimalPlaces")
+        UserDefaults.shared.removeObject(forKey: "showSunnyBackground")
+        UserDefaults.shared.removeObject(forKey: "showUsableBatteryOnly")
+        UserDefaults.shared.removeObject(forKey: "showTotalYield")
+        UserDefaults.shared.removeObject(forKey: "devices")
+        UserDefaults.shared.removeObject(forKey: "selectedDeviceID")
+        UserDefaults.shared.removeObject(forKey: "displayUnit")
+        UserDefaults.shared.removeObject(forKey: "showInverterTemperature")
+        UserDefaults.shared.removeObject(forKey: "showHomeTotalOnPowerFlow")
+        UserDefaults.shared.removeObject(forKey: "showInverterIcon")
+        UserDefaults.shared.removeObject(forKey: "shouldInvertCT2")
+        UserDefaults.shared.removeObject(forKey: "showInverterPlantName")
+        UserDefaults.shared.removeObject(forKey: "showGridTotalsOnPowerFlow")
+        UserDefaults.shared.removeObject(forKey: "showInverterTypeNameOnPowerFlow")
+        UserDefaults.shared.removeObject(forKey: "showLastUpdateTimestamp")
+        UserDefaults.shared.removeObject(forKey: "selfSufficiencyEstimateMode")
+        UserDefaults.shared.removeObject(forKey: "showFinancialEarnings")
+        UserDefaults.shared.removeObject(forKey: "financialModel")
+        UserDefaults.shared.removeObject(forKey: "feedInUnitPrice")
+        UserDefaults.shared.removeObject(forKey: "gridImportUnitPrice")
+        UserDefaults.shared.removeObject(forKey: "currencySymbol")
+        UserDefaults.shared.removeObject(forKey: "shouldCombineCT2WithPVPower")
+        UserDefaults.shared.removeObject(forKey: "selectedParameterGraphVariables")
+        UserDefaults.shared.removeObject(forKey: "deviceBatteryOverrides")
+        UserDefaults.shared.removeObject(forKey: "solarDefinitions")
+        UserDefaults.shared.removeObject(forKey: "parameterGroups")
+    }
 
     private func bool(from source: UserDefaults, forKey key: String, defaultValue: Bool) -> Bool {
         (source.object(forKey: key) as? Bool) ?? defaultValue

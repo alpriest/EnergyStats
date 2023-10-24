@@ -23,13 +23,13 @@ struct DeviceListRequest: Encodable {
     }
 }
 
-public struct PagedDeviceListResponse: Decodable, Hashable {
+public struct PagedDeviceListResponse: Codable, Hashable {
     let currentPage: Int
     let pageSize: Int
     let total: Int
     public let devices: [Device]
 
-    public struct Device: Decodable, Hashable {
+    public struct Device: Codable, Hashable {
         public let plantName: String
         public let deviceID: String
         public let deviceSN: String

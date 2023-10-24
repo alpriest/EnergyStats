@@ -73,7 +73,15 @@ public class NetworkCache: Networking {
     }
 
     public func fetchDeviceList() async throws -> [PagedDeviceListResponse.Device] {
-        try await network.fetchDeviceList()
+        let key = makeKey(base: #function)
+
+        if let item = cache[key], let cached = item.item as? [PagedDeviceListResponse.Device], item.isFresherThan(interval: shortCacheDurationInSeconds) {
+            return cached
+        } else {
+            let fresh = try await network.fetchDeviceList()
+            store(key: key, value: CachedItem(fresh))
+            return fresh
+        }
     }
 
     public func fetchAddressBook(deviceID: String) async throws -> AddressBookResponse {

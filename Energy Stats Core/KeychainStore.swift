@@ -60,8 +60,6 @@ public class KeychainStore: KeychainStoring, ObservableObject {
     }
 
     public func store(username: String, hashedPassword: String, updateHasCredentials: Bool = true) throws {
-        logout()
-
         try set(tag: "password", value: hashedPassword)
         try set(tag: "username", value: username)
 
@@ -100,7 +98,9 @@ private extension KeychainStore {
     func get(tag: String) -> String? {
         var result: AnyObject?
         let status = SecItemCopyMatching(makeQuery(tag: tag), &result)
-        guard status == 0 else { return nil }
+        guard status == 0 else {
+            return nil
+        }
 
         guard let dict = result as? NSDictionary else { return nil }
         guard let data = dict[kSecValueData] as? Data else { return nil }
