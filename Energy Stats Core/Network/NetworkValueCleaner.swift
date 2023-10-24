@@ -95,7 +95,10 @@ public class NetworkValueCleaner: Networking {
 
 private extension Double {
     func capped() -> Double {
-        let mask = 0x0FFFF
-        return Double(Int(self * 10) & mask) / 10.0
+        return if self > 0 {
+            Double(Int(self * 10) & 0x0FFFF) / 10.0
+        } else {
+            self
+        }
     }
 }
