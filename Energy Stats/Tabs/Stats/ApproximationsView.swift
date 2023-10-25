@@ -130,6 +130,8 @@ struct CalculationBreakdownView: View {
 
             VStack(alignment: .leading, spacing: 8) {
                 Text(breakdown.formula)
+                    .italic()
+                
                 Text(breakdown.calculation)
             }
             .frame(minWidth: 0, maxWidth: .infinity, alignment: .topLeading)

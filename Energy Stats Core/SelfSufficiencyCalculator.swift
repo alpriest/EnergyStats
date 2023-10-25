@@ -22,8 +22,21 @@ public enum NetSelfSufficiencyCalculator {
         }
 
         let breakdown = CalculationBreakdown(
-            formula: "TODO",
-            calculation: "TODO")
+            formula: """
+                     netGeneration = feedIn - grid + batteryCharge - batteryDischarge
+
+                     If netGeneration > 0 then result = 1
+                     Else if netGeneration + homeConsumption < 0 then result = 0
+                     Else if netGeneration + homeConsumption > 0 then result = (netGeneration + homeConsumption) / homeConsumption
+                     """,
+            calculation: """
+                     netGeneration = \(feedIn) - \(grid) + \(batteryCharge) - \(batteryDischarge)
+
+                     If \(netGeneration) > 0 then result = 1
+                     Else if \(netGeneration) + \(loads) < 0 then result = 0
+                     Else if \(netGeneration) + \(loads) > 0 then result = (\(netGeneration) + \(loads)) / \(loads)
+                     """
+        )
 
         return (result.rounded(decimalPlaces: 4), breakdown)
     }

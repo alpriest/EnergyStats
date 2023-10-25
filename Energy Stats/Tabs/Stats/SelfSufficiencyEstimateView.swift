@@ -41,8 +41,8 @@ struct SelfSufficiencyEstimateView: View {
                     Text(estimate)
                 }
 
-                if showCalculations {
-                    CalculationBreakdownView(breakdown: CalculationBreakdown(formula: "x", calculation: "y"))
+                if showCalculations, let calculations = calculations {
+                    CalculationBreakdownView(breakdown: CalculationBreakdown(formula: calculations.formula, calculation: calculations.calculation))
                 }
             }
         }

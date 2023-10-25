@@ -41,11 +41,11 @@ public struct TotalsViewModel {
                                                    calculation: "max(0, \(batteryCharge.rounded(decimalPlaces: 2)) - \(batteryDischarge.rounded(decimalPlaces: 2)) - \(gridImport.rounded(decimalPlaces: 2)) + \(home.rounded(decimalPlaces: 2)) + \(gridExport.rounded(decimalPlaces: 2)))")
     }
 
-    public var home: Double
-    public var gridImport: Double
-    public var gridExport: Double
-    public var solar: Double
-    public var solarBreakdown: CalculationBreakdown
+    public let home: Double
+    public let gridImport: Double
+    public let gridExport: Double
+    public let solar: Double
+    public let solarBreakdown: CalculationBreakdown
 }
 
 private extension Array where Element == ReportResponse {
