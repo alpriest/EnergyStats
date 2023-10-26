@@ -87,26 +87,23 @@ class PowerFlowTabViewModel: ObservableObject {
 
     @MainActor
     func timerFired() async {
-        guard self.timer.isTicking == false else { return }
-
         self.timer.stop()
-
         await self.loadData()
         await self.startTimer()
-
-        self.addDeviceChangeObserver()
     }
 
     func addDeviceChangeObserver() {
         guard self.currentDeviceCancellable == nil else { return }
 
-        self.currentDeviceCancellable = self.configManager.currentDevice.sink { device in
-            guard device != nil else { return }
+        self.currentDeviceCancellable = self.configManager.currentDevice
+            .removeDuplicates()
+            .sink { device in
+                guard device != nil else { return }
 
-            Task {
-                await self.timerFired()
+                Task {
+                    await self.timerFired()
+                }
             }
-        }
     }
 
     func addThemeChangeObserver() {

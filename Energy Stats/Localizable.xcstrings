@@ -8489,31 +8489,31 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Facebook-Gruppe"
+            "value" : "Facebook-Supportgruppe"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Facebook Group"
+            "value" : "Facebook Support Group"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Grupo de Facebook"
+            "value" : "Grupo de Soporte en Facebook"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gruppo Facebook"
+            "value" : "Gruppo di Supporto su Facebook"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Grupa na Facebooku"
+            "value" : "Grupa Wsparcia na Facebooku"
           }
         }
       }
@@ -8558,31 +8558,31 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "FoxESS-Community"
+            "value" : "FoxESS Community-Support"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "FoxESS Community"
+            "value" : "FoxESS Community Support"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Comunidad FoxESS"
+            "value" : "Soporte Comunitario FoxESS"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Comunità FoxESS"
+            "value" : "Supporto Comunitario FoxESS"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Społeczność FoxESS"
+            "value" : "Wsparcie Społeczności FoxESS"
           }
         }
       }
