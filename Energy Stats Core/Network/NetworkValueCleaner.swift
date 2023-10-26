@@ -93,12 +93,21 @@ public class NetworkValueCleaner: Networking {
     }
 }
 
-private extension Double {
+extension Double {
     func capped() -> Double {
-        return if self > 0 {
-            Double(Int(self * 10) & 0x0FFFF) / 10.0
+        guard self > 0 else { return self }
+
+        let register = Int(self * 10)
+        let mask = 0xfff00000
+        let masked = register & mask
+        if masked == 0 {
+            return self
         } else {
-            self
+            return self - (Double(masked) / 10.0).rounded(decimalPlaces: 3)
         }
+    }
+
+    func sameValueAs(other: Double) -> Bool {
+        abs(self - other) < 0.0000001
     }
 }

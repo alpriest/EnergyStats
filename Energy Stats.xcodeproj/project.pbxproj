@@ -53,6 +53,7 @@
 		411029192A729F02004018BB /* BatteryTimesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411029182A729F02004018BB /* BatteryTimesResponse.swift */; };
 		4110291B2A72AFAA004018BB /* BatteryChargeScheduleSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4110291A2A72AFAA004018BB /* BatteryChargeScheduleSettingsViewModel.swift */; };
 		4110291D2A72AFC2004018BB /* BatterySOCSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4110291C2A72AFC2004018BB /* BatterySOCSettingsViewModel.swift */; };
+		4113708A2AEA48C0003D74AD /* Double+CappedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411370892AEA48C0003D74AD /* Double+CappedTests.swift */; };
 		412790FF28E1FB9200D5F993 /* UserManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412790FE28E1FB9200D5F993 /* UserManagerTests.swift */; };
 		4127910228E1FBD300D5F993 /* MockKeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127910128E1FBD300D5F993 /* MockKeychainStore.swift */; };
 		4127910628E1FC1D00D5F993 /* MockNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127910528E1FC1D00D5F993 /* MockNetworking.swift */; };
@@ -348,6 +349,7 @@
 		4110291A2A72AFAA004018BB /* BatteryChargeScheduleSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryChargeScheduleSettingsViewModel.swift; sourceTree = "<group>"; };
 		4110291C2A72AFC2004018BB /* BatterySOCSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatterySOCSettingsViewModel.swift; sourceTree = "<group>"; };
 		4111333529B7D61200972935 /* Sequence+aysnc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+aysnc.swift"; sourceTree = "<group>"; };
+		411370892AEA48C0003D74AD /* Double+CappedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+CappedTests.swift"; sourceTree = "<group>"; };
 		4127690128EC865000D5A094 /* PowerAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerAmountView.swift; sourceTree = "<group>"; };
 		412790FE28E1FB9200D5F993 /* UserManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManagerTests.swift; sourceTree = "<group>"; };
 		4127910128E1FBD300D5F993 /* MockKeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockKeychainStore.swift; sourceTree = "<group>"; };
@@ -747,6 +749,7 @@
 			isa = PBXGroup;
 			children = (
 				413B7A402A4A399900562A68 /* SelfSufficiencyCalculatorTests.swift */,
+				411370892AEA48C0003D74AD /* Double+CappedTests.swift */,
 			);
 			path = "Energy Stats Core Tests";
 			sourceTree = "<group>";
@@ -1410,6 +1413,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				413B7A412A4A399900562A68 /* SelfSufficiencyCalculatorTests.swift in Sources */,
+				4113708A2AEA48C0003D74AD /* Double+CappedTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
