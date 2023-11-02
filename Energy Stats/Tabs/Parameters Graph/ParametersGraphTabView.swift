@@ -10,7 +10,6 @@ import Combine
 import Energy_Stats_Core
 import SwiftUI
 
-@available(iOS 16.0, *)
 struct ParametersGraphTabView: View {
     @StateObject var viewModel: ParametersGraphTabViewModel
     @State private var valuesAtTime: ValuesAtTime<ParameterGraphValue>?
@@ -35,25 +34,27 @@ struct ParametersGraphTabView: View {
                     .padding(.horizontal)
 
                 ScrollView {
-                    HStack {
-                        Group {
-                            if let selectedDate {
-                                Text(selectedDate, format: .dateTime)
-                                Button("Clear graph values", action: {
-                                    self.valuesAtTime = nil
-                                    self.selectedDate = nil
-                                })
-                            } else {
-                                Text("Touch the graph to see values at that time")
-                            }
-                        }.padding(.vertical)
-                    }.frame(maxWidth: .infinity)
+                    if #available(iOS 16.0, *) {
+                        HStack {
+                            Group {
+                                if let selectedDate {
+                                    Text(selectedDate, format: .dateTime)
+                                    Button("Clear graph values", action: {
+                                        self.valuesAtTime = nil
+                                        self.selectedDate = nil
+                                    })
+                                } else {
+                                    Text("Touch the graph to see values at that time")
+                                }
+                            }.padding(.vertical)
+                        }.frame(maxWidth: .infinity)
 
-                    ParametersGraphView(viewModel: viewModel,
-                                        selectedDate: $selectedDate,
-                                        valuesAtTime: $valuesAtTime)
+                        ParametersGraphView(viewModel: viewModel,
+                                            selectedDate: $selectedDate,
+                                            valuesAtTime: $valuesAtTime)
                         .frame(height: 250)
                         .padding(.vertical)
+                    }
 
                     ParameterGraphVariablesToggles(viewModel: viewModel, selectedDate: $selectedDate, valuesAtTime: $valuesAtTime, appTheme: appTheme)
 
@@ -63,10 +64,20 @@ struct ParametersGraphTabView: View {
                         .multilineTextAlignment(.center)
                         .padding(.vertical, 28)
 
-                    if let url = viewModel.exportFile?.url {
-                        ShareLink(item: url) {
-                            Label("Export graph data", systemImage: "square.and.arrow.up")
+                    if #available(iOS 16.0, *) {
+                        if let url = viewModel.exportFile?.url {
+                            ShareLink(item: url) {
+                                Label("Export graph data", systemImage: "square.and.arrow.up")
+                            }
                         }
+                    }
+
+                    if #available(iOS 16.0, *) {
+                    } else {
+                        Text("Graph functionality requires iOS 16 or newer")
+                            .font(.footnote)
+                            .foregroundColor(Color("text_dimmed"))
+                            .multilineTextAlignment(.center)
                     }
                 }
             }

@@ -27,7 +27,6 @@ enum StatsDisplayMode: Equatable {
     }
 }
 
-@available(iOS 16.0, *)
 struct StatsTabView: View {
     @StateObject var viewModel: StatsTabViewModel
     @State private var showingExporter = false
@@ -49,25 +48,27 @@ struct StatsTabView: View {
 
                 ScrollView {
                     if showingGraph {
-                        HStack {
-                            Group {
-                                if viewModel.valuesAtTime != nil, let selectedDate = viewModel.selectedDate {
-                                    Text(viewModel.selectedDateFormatted(selectedDate))
+                        if #available(iOS 16.0, *) {
+                            HStack {
+                                Group {
+                                    if viewModel.valuesAtTime != nil, let selectedDate = viewModel.selectedDate {
+                                        Text(viewModel.selectedDateFormatted(selectedDate))
 
-                                    Button("Clear graph values", action: {
-                                        self.viewModel.valuesAtTime = nil
-                                        self.viewModel.selectedDate = nil
-                                        self.viewModel.calculateApproximations()
-                                    })
-                                } else {
-                                    Text("Touch the graph to see values at that time")
-                                }
-                            }.padding(.vertical)
-                        }.frame(maxWidth: .infinity)
+                                        Button("Clear graph values", action: {
+                                            self.viewModel.valuesAtTime = nil
+                                            self.viewModel.selectedDate = nil
+                                            self.viewModel.calculateApproximations()
+                                        })
+                                    } else {
+                                        Text("Touch the graph to see values at that time")
+                                    }
+                                }.padding(.vertical)
+                            }.frame(maxWidth: .infinity)
 
-                        StatsGraphView(viewModel: viewModel, selectedDate: $viewModel.selectedDate, valuesAtTime: $viewModel.valuesAtTime)
-                            .frame(height: 250)
-                            .padding(.vertical)
+                            StatsGraphView(viewModel: viewModel, selectedDate: $viewModel.selectedDate, valuesAtTime: $viewModel.valuesAtTime)
+                                .frame(height: 250)
+                                .padding(.vertical)
+                        }
                     } else {
                         Spacer()
                     }
@@ -84,10 +85,20 @@ struct StatsTabView: View {
                         .multilineTextAlignment(.center)
                         .padding(.vertical, 28)
 
-                    if let url = viewModel.exportFile?.url {
-                        ShareLink(item: url) {
-                            Label("Export graph data", systemImage: "square.and.arrow.up")
+                    if #available(iOS 16.0, *) {
+                        if let url = viewModel.exportFile?.url {
+                            ShareLink(item: url) {
+                                Label("Export graph data", systemImage: "square.and.arrow.up")
+                            }
                         }
+                    }
+
+                    if #available(iOS 16.0, *) {
+                    } else {
+                        Text("Graph functionality requires iOS 16 or newer")
+                            .font(.footnote)
+                            .foregroundColor(Color("text_dimmed"))
+                            .multilineTextAlignment(.center)
                     }
                 }
             }

@@ -8,7 +8,6 @@
 import Energy_Stats_Core
 import SwiftUI
 
-@available(iOS 16.0, *)
 struct ParameterGraphHeaderView: View {
     @StateObject var viewModel: ParameterGraphHeaderViewModel
     @Binding var showingVariables: Bool

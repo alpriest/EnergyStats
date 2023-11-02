@@ -70,9 +70,6 @@
 		412A26792AC03B2400F61456 /* Energy Stats WidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 412A266C2AC03B2200F61456 /* Energy Stats WidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		412A267E2AC03B4B00F61456 /* BatteryWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4185FAB12A3B6C8D0082D53F /* BatteryWidget.swift */; };
 		412A267F2AC03B4E00F61456 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418547382A3A1623000128C7 /* Provider.swift */; };
-		412A26802AC03B7800F61456 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4185FAB32A3B6CDC0082D53F /* Extensions.swift */; };
-		412A26812AC03B7C00F61456 /* FlowArrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4185FAB92A3C41E70082D53F /* FlowArrow.swift */; };
-		412A26822AC03B7F00F61456 /* WidgetEnergyTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4185FAB72A3C3F620082D53F /* WidgetEnergyTextView.swift */; };
 		412A26832AC03BF000F61456 /* BatteryStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4185FAB52A3B74E60082D53F /* BatteryStatusView.swift */; };
 		412A26872AC05DA200F61456 /* HomeEnergyStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412A26852AC05D1200F61456 /* HomeEnergyStateManager.swift */; };
 		412A26882AC07FC800F61456 /* BatteryCapacityCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E4B30D28DB7511003F7F47 /* BatteryCapacityCalculator.swift */; };
@@ -443,16 +440,9 @@
 		418547162A3A1530000128C7 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		418547182A3A1530000128C7 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		418547382A3A1623000128C7 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
-		418547462A3A1A64000128C7 /* PowerFlowValuesWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerFlowValuesWidgetView.swift; sourceTree = "<group>"; };
 		4185474B2A3A59E4000128C7 /* Energy Stats.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Energy Stats.entitlements"; sourceTree = "<group>"; };
-		4185FAA72A3B28680082D53F /* SmallPowerFlowValuesWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallPowerFlowValuesWidgetView.swift; sourceTree = "<group>"; };
-		4185FAAB2A3B384B0082D53F /* LargePowerFlowValuesWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargePowerFlowValuesWidgetView.swift; sourceTree = "<group>"; };
-		4185FAAD2A3B38690082D53F /* VerticalFlowGauge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalFlowGauge.swift; sourceTree = "<group>"; };
 		4185FAB12A3B6C8D0082D53F /* BatteryWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryWidget.swift; sourceTree = "<group>"; };
-		4185FAB32A3B6CDC0082D53F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		4185FAB52A3B74E60082D53F /* BatteryStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryStatusView.swift; sourceTree = "<group>"; };
-		4185FAB72A3C3F620082D53F /* WidgetEnergyTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetEnergyTextView.swift; sourceTree = "<group>"; };
-		4185FAB92A3C41E70082D53F /* FlowArrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowArrow.swift; sourceTree = "<group>"; };
 		418EB4842ACC012C0021B87A /* FinancialsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancialsSettingsView.swift; sourceTree = "<group>"; };
 		418EB4862ACC019A0021B87A /* FinancialsSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancialsSettingsViewModel.swift; sourceTree = "<group>"; };
 		418EB4882ACC10220021B87A /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
@@ -707,10 +697,6 @@
 			children = (
 				412A26842AC05B9B00F61456 /* Energy Stats WidgetsExtension.entitlements */,
 				412A26852AC05D1200F61456 /* HomeEnergyStateManager.swift */,
-				4185FAAF2A3B38BD0082D53F /* Power Flow Widget */,
-				4185FAB72A3C3F620082D53F /* WidgetEnergyTextView.swift */,
-				4185FAB92A3C41E70082D53F /* FlowArrow.swift */,
-				4185FAB32A3B6CDC0082D53F /* Extensions.swift */,
 				418547382A3A1623000128C7 /* Provider.swift */,
 				4185FAB12A3B6C8D0082D53F /* BatteryWidget.swift */,
 				4185FAB52A3B74E60082D53F /* BatteryStatusView.swift */,
@@ -916,17 +902,6 @@
 				413BF2882A99F8A500A32B0D /* ApproximationsView.swift */,
 			);
 			path = Stats;
-			sourceTree = "<group>";
-		};
-		4185FAAF2A3B38BD0082D53F /* Power Flow Widget */ = {
-			isa = PBXGroup;
-			children = (
-				418547462A3A1A64000128C7 /* PowerFlowValuesWidgetView.swift */,
-				4185FAA72A3B28680082D53F /* SmallPowerFlowValuesWidgetView.swift */,
-				4185FAAB2A3B384B0082D53F /* LargePowerFlowValuesWidgetView.swift */,
-				4185FAAD2A3B38690082D53F /* VerticalFlowGauge.swift */,
-			);
-			path = "Power Flow Widget";
 			sourceTree = "<group>";
 		};
 		418EB4832ACC011C0021B87A /* Financials */ = {
@@ -1400,9 +1375,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				412A26822AC03B7F00F61456 /* WidgetEnergyTextView.swift in Sources */,
-				412A26802AC03B7800F61456 /* Extensions.swift in Sources */,
-				412A26812AC03B7C00F61456 /* FlowArrow.swift in Sources */,
 				412A267F2AC03B4E00F61456 /* Provider.swift in Sources */,
 				412A26832AC03BF000F61456 /* BatteryStatusView.swift in Sources */,
 				412A26872AC05DA200F61456 /* HomeEnergyStateManager.swift in Sources */,
@@ -1800,7 +1772,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.91;
+				MARKETING_VERSION = 1.92;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1858,7 +1830,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.91;
+				MARKETING_VERSION = 1.92;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

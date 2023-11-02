@@ -4358,6 +4358,9 @@
         }
       }
     },
+    "Graph functionality requires iOS 16 or newer" : {
+
+    },
     "Graphs" : {
       "extractionState" : "manual",
       "localizations" : {

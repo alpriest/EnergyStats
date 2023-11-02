@@ -8,7 +8,6 @@
 import Energy_Stats_Core
 import SwiftUI
 
-@available(iOS 16.0, *)
 struct ParameterGraphVariablesToggles: View {
     @ObservedObject var viewModel: ParametersGraphTabViewModel
     @Binding var selectedDate: Date?
@@ -20,7 +19,7 @@ struct ParameterGraphVariablesToggles: View {
             ForEach(viewModel.graphVariables, id: \.self) { variable in
                 if variable.isSelected {
                     HStack {
-                        Button(action: { viewModel.toggle(visibilityOf: variable) }) {
+                        row(variable) {
                             HStack(alignment: .top) {
                                 Circle()
                                     .foregroundColor(variable.type.colour)
@@ -54,15 +53,24 @@ struct ParameterGraphVariablesToggles: View {
                             }
                             .opacity(variable.enabled ? 1.0 : 0.5)
                         }
-                        .buttonStyle(.plain)
                     }
                     .listRowSeparator(.hidden)
                 }
             }
-            .scrollDisabled(true)
-            .scrollContentBackground(.hidden)
         }.onChange(of: viewModel.graphVariables) { _ in
             viewModel.refresh()
+        }
+    }
+
+    @ViewBuilder
+    private func row(_ variable: ParameterGraphVariable, _ content: () -> some View) -> some View {
+        if #available(iOS 16.0, *) {
+            Button(action: { viewModel.toggle(visibilityOf: variable) }) {
+                content()
+            }
+            .buttonStyle(.plain)
+        } else {
+            content()
         }
     }
 }

@@ -8,7 +8,6 @@
 import Energy_Stats_Core
 import SwiftUI
 
-@available(iOS 16.0, *)
 struct StatsGraphVariableToggles: View {
     @ObservedObject var viewModel: StatsTabViewModel
     @Binding var selectedDate: Date?
@@ -19,7 +18,7 @@ struct StatsGraphVariableToggles: View {
         VStack(alignment: .leading) {
             ForEach(viewModel.graphVariables, id: \.self) { variable in
                 HStack {
-                    Button(action: { viewModel.toggle(visibilityOf: variable) }) {
+                    row(variable) {
                         HStack(alignment: .top) {
                             Circle()
                                 .foregroundColor(variable.type.colour)
@@ -49,15 +48,24 @@ struct StatsGraphVariableToggles: View {
                         }
                         .opacity(variable.enabled ? 1.0 : 0.5)
                     }
-                    .buttonStyle(.plain)
                 }
                 .listRowSeparator(.hidden)
             }
-            .scrollDisabled(true)
-            .scrollContentBackground(.hidden)
 
         }.onChange(of: viewModel.graphVariables) { _ in
             viewModel.refresh()
+        }
+    }
+
+    @ViewBuilder
+    private func row(_ variable: StatsGraphVariable, _ content: () -> some View) -> some View {
+        if #available(iOS 16.0, *) {
+            Button(action: { viewModel.toggle(visibilityOf: variable) }) {
+                content()
+            }
+            .buttonStyle(.plain)
+        } else {
+            content()
         }
     }
 }

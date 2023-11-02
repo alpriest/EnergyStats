@@ -32,25 +32,23 @@ struct TabbedView: View {
                     .accessibilityIdentifier("power_flow_tab")
                 }
 
-            if #available(iOS 16.0, *) {
-                StatsTabView(configManager: configManager, networking: networking, appThemePublisher: configManager.appTheme)
-                    .tabItem {
-                        VStack {
-                            Image(systemName: "chart.bar.xaxis")
-                            Text("Stats")
-                        }
-                        .accessibilityIdentifier("stats_tab")
+            StatsTabView(configManager: configManager, networking: networking, appThemePublisher: configManager.appTheme)
+                .tabItem {
+                    VStack {
+                        Image(systemName: "chart.bar.xaxis")
+                        Text("Stats")
                     }
+                    .accessibilityIdentifier("stats_tab")
+                }
 
-                ParametersGraphTabView(configManager: configManager, networking: networking)
-                    .tabItem {
-                        VStack {
-                            Image(systemName: "chart.xyaxis.line")
-                            Text("Parameters")
-                        }
-                        .accessibilityIdentifier("parameters_tab")
+            ParametersGraphTabView(configManager: configManager, networking: networking)
+                .tabItem {
+                    VStack {
+                        Image(systemName: "chart.xyaxis.line")
+                        Text("Parameters")
                     }
-            }
+                    .accessibilityIdentifier("parameters_tab")
+                }
 
             SettingsTabView(viewModel: settingsTabViewModel, configManager: configManager, networking: networking)
                 .tabItem {

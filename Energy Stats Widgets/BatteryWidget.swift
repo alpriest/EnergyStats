@@ -45,18 +45,29 @@ struct BatteryWidgetView: View {
     var body: some View {
         VStack {
             if case let .failedWithoutData(reason) = entry.state {
-                VStack {
-                    HStack(alignment: .center) {
+                switch family {
+                case .accessoryCircular:
+                    VStack(alignment: .center) {
                         Image(systemName: "exclamationmark.triangle.fill")
-                            .foregroundStyle(Color.red)
                             .font(.title)
 
-                        Text(reason)
+                        Text("No device")
+                            .font(.system(size: 8))
                     }.padding(.bottom)
+                default:
+                    VStack {
+                        HStack(alignment: .center) {
+                            Image(systemName: "exclamationmark.triangle.fill")
+                                .foregroundStyle(Color.red)
+                                .font(.title)
 
-                    Button(intent: UpdateBatteryChargeLevelIntent()) {
-                        Text("Tap to retry")
-                    }.buttonStyle(.bordered)
+                            Text(reason)
+                        }.padding(.bottom)
+
+                        Button(intent: UpdateBatteryChargeLevelIntent()) {
+                            Text("Tap to retry")
+                        }.buttonStyle(.bordered)
+                    }
                 }
             } else {
                 BatteryStatusView(
@@ -108,7 +119,7 @@ struct BatteryWidget_Previews: PreviewProvider {
             entry: SimpleEntry.failed(error: "Something went wrong"),
             configManager: ConfigManager(networking: DemoNetworking(), config: MockConfig())
         )
-        .previewContext(WidgetPreviewContext(family: .systemMedium))
+        .previewContext(WidgetPreviewContext(family: .accessoryCircular))
 
         BatteryWidgetView(
             entry: SimpleEntry.loaded(date: Date(),

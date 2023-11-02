@@ -98,7 +98,7 @@ struct FinancialsSettingsView: View {
             Spacer()
             Text(currencySymbol)
             TextField(0.roundedToString(decimalPlaces: 2, currencySymbol: currencySymbol), text: text)
-                .frame(width: 50)
+                .frame(width: 60)
                 .monospacedDigit()
         }
         .multilineTextAlignment(.trailing)
