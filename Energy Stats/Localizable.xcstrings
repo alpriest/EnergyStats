@@ -1415,7 +1415,32 @@
       }
     },
     "Are you sure you want to delete the group '%@'?" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sind Sie sicher, dass Sie die Gruppe '%@' löschen möchten?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Estás seguro de que quieres eliminar el grupo '%@'?"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sei sicuro di voler eliminare il gruppo '%@'?"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Czy na pewno chcesz usunąć grupę '%@'?"
+          }
+        }
+      }
     },
     "Auto" : {
       "localizations" : {
@@ -2692,33 +2717,29 @@
       }
     },
     "Create" : {
-
-    },
-    "Create new..." : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Neu erstellen..."
+            "value" : "Neu erstellen"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Crear nuevo..."
+            "value" : "Crear nuevo"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Crea nuovo..."
+            "value" : "Crea nuovo"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Utwórz nowy..."
+            "value" : "Utwórz nSamowystarczalność"
           }
         }
       }
@@ -2928,6 +2949,7 @@
       }
     },
     "Day by hours" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -3041,7 +3063,32 @@
       }
     },
     "Delete" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Löschen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elimina"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usuń"
+          }
+        }
+      }
     },
     "demo" : {
       "localizations" : {
@@ -4368,7 +4415,32 @@
       }
     },
     "Graph functionality requires iOS 16 or newer" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Grafikfunktionalität erfordert iOS 16 oder neuer"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La funcionalidad del gráfico requiere iOS 16 o más reciente"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La funzionalità del grafico richiede iOS 16 o più recente"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Funkcjonalność grafu wymaga systemu iOS 16 lub nowszego."
+          }
+        }
+      }
     },
     "Graphs" : {
       "extractionState" : "manual",
@@ -7754,33 +7826,29 @@
       }
     },
     "Rename" : {
-
-    },
-    "Rename..." : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Umbenennen..."
+            "value" : "Umbenennen"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cambiar nombre..."
+            "value" : "Cambiar nombre"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Rinomina..."
+            "value" : "Rinomina"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zmień nazwę..."
+            "value" : "Zmień nazwę"
           }
         }
       }
