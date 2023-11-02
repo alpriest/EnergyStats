@@ -5,15 +5,16 @@
 //  Created by Alistair Priest on 02/05/2023.
 //
 
-import SwiftUI
 import Energy_Stats_Core
+import SwiftUI
 
 class ParameterGraphVariableChooserViewModel: ObservableObject {
-    @Published var variables: [ParameterGraphVariable] = []
+    @Published var variables: [ParameterGraphVariable] = [] { didSet { determineSelectedGroup() }}
     private let onApply: ([ParameterGraphVariable]) -> Void
     private let haptic = UIImpactFeedbackGenerator()
     private(set) var configManager: ConfigManaging
     @Published var groups: [ParameterGroup]
+    @Published var selected: UUID?
 
     init(variables: [ParameterGraphVariable], configManager: ConfigManaging, onApply: @escaping ([ParameterGraphVariable]) -> Void) {
         self.variables = variables.sorted(by: { $0.type.name.lowercased() < $1.type.name.lowercased() })
@@ -49,6 +50,10 @@ class ParameterGraphVariableChooserViewModel: ObservableObject {
         select(just: Self.DefaultGraphVariables)
     }
 
+    func select(_ group: ParameterGroup) {
+        select(just: group.parameterNames)
+    }
+
     func select(just newVariables: [String]) {
         variables = variables.map { existingVariable in
             var existingVariable = existingVariable
@@ -61,5 +66,11 @@ class ParameterGraphVariableChooserViewModel: ObservableObject {
         }
 
         haptic.impactOccurred()
+    }
+
+    private func determineSelectedGroup() {
+        selected = groups.first(where: { group -> Bool in
+            group.parameterNames.sorted() == variables.filter { $0.isSelected }.map { $0.type.variable }.sorted()
+        })?.id
     }
 }

@@ -1414,6 +1414,9 @@
         }
       }
     },
+    "Are you sure you want to delete the group '%@'?" : {
+
+    },
     "Auto" : {
       "localizations" : {
         "de" : {
@@ -2688,7 +2691,11 @@
         }
       }
     },
+    "Create" : {
+
+    },
     "Create new..." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2921,7 +2928,6 @@
       }
     },
     "Day by hours" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -3033,6 +3039,9 @@
           }
         }
       }
+    },
+    "Delete" : {
+
     },
     "demo" : {
       "localizations" : {
@@ -7744,7 +7753,11 @@
         }
       }
     },
+    "Rename" : {
+
+    },
     "Rename..." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

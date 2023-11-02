@@ -21,14 +21,23 @@ struct ParameterGraphVariableChooserView: View {
                     Section {
                         List {
                             Button("Default") { viewModel.chooseDefaultVariables() }
+                            Button("None") { viewModel.select(just: []) }
 
                             ForEach(viewModel.groups, id: \.title) { group in
-                                Button(group.title) { viewModel.select(just: group.parameterNames) }
+                                Button {
+                                    viewModel.select(group)
+                                } label: {
+                                    HStack {
+                                        Text(group.title)
+                                        Spacer()
+
+                                        if viewModel.selected == group.id {
+                                            Image(systemName: "checkmark")
+                                        }
+                                    }
+                                }
                             }
-
-                            Button("None") { viewModel.select(just: []) }
                         }
-
                     } header: {
                         Text("Groups")
                     }

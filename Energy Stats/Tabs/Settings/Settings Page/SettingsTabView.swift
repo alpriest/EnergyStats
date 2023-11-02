@@ -73,7 +73,9 @@ struct SettingsTabView: View {
 
                 SettingsFooterView(username: viewModel.username, onLogout: viewModel.logout, appVersion: viewModel.appVersion)
             }
-        }.navigationViewStyle(StackNavigationViewStyle())
+            .navigationTitle("Settings")
+        }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 

@@ -70,12 +70,28 @@ class ParameterVariableGroupEditorViewModel: ObservableObject {
     }
 
     func create(_ title: String) {
+        let newGroupId = UUID()
         groups = groups + [
-            ParameterGroup(id: UUID(),
+            ParameterGroup(id: newGroupId,
                            title: title,
                            parameterNames: variables.filter { $0.isSelected}.map { $0.type.variable})
         ]
         configManager.parameterGroups = groups
+        selected = newGroupId
+    }
+
+    func delete() {
+        guard let selectedGroup else { return }
+
+        groups = groups.compactMap { existingGroup in
+            if existingGroup.title == selectedGroup.title {
+                return nil
+            } else {
+                return existingGroup
+            }
+        }
+        configManager.parameterGroups = groups
+        selected = groups.first?.id
     }
 
     private func updateVariables(for group: ParameterGroup?) {
