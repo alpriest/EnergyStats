@@ -37,6 +37,7 @@ struct SubLabelledView: View {
     var body: some View {
         VStack(alignment: alignment) {
             Text(value)
+                .monospacedDigit()
             Text(label)
                 .font(.system(size: 8.0))
         }
