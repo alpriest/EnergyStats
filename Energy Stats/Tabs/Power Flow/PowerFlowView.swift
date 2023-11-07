@@ -81,10 +81,8 @@ struct PowerFlowView<S: Shape>: View {
     }
 }
 
-struct PowerFlowView_Previews: PreviewProvider {
-    static var previews: some View {
-        AdjustableView(config: MockConfig())
-    }
+#Preview {
+    return AdjustableView(config: MockConfig())
 
     struct AdjustableView: View {
         @State private var amount: Double = 2.0

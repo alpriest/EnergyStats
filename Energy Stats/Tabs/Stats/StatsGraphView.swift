@@ -142,16 +142,14 @@ struct StatsGraphView: View {
 
 #if DEBUG
 @available(iOS 16.0, *)
-struct StatsGraphView_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            Text("Day by hours")
-            StatsGraphView(
-                viewModel: StatsTabViewModel(networking: DemoNetworking(), configManager: PreviewConfigManager()),
-                selectedDate: .constant(nil),
-                valuesAtTime: .constant(nil)
-            )
-        }
+#Preview {
+    VStack {
+        Text("Day by hours")
+        StatsGraphView(
+            viewModel: StatsTabViewModel(networking: DemoNetworking(), configManager: PreviewConfigManager()),
+            selectedDate: .constant(nil),
+            valuesAtTime: .constant(nil)
+        )
     }
 }
 

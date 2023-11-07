@@ -51,8 +51,6 @@ struct BottomButtonsView<Content: View>: View {
     }
 }
 
-struct BottomButtonsView_Previews: PreviewProvider {
-    static var previews: some View {
-        BottomButtonsView {}
-    }
+#Preview {
+    BottomButtonsView {}
 }

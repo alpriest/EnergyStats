@@ -78,14 +78,13 @@ struct ParameterGraphVariablesToggles: View {
 #if DEBUG
 
 @available(iOS 16.0, *)
-struct GraphVariablesSelection_Previews: PreviewProvider {
-    static var previews: some View {
-        ParameterGraphVariablesToggles(
-            viewModel: ParametersGraphTabViewModel(networking: DemoNetworking(), configManager: PreviewConfigManager()),
-            selectedDate: .constant(nil),
-            valuesAtTime: .constant(nil),
-            appTheme: .mock()
-        )
-    }
+#Preview {
+    ParameterGraphVariablesToggles(
+        viewModel: ParametersGraphTabViewModel(networking: DemoNetworking(), configManager: PreviewConfigManager()),
+        selectedDate: .constant(nil),
+        valuesAtTime: .constant(nil),
+        appTheme: .mock()
+    )
 }
+
 #endif

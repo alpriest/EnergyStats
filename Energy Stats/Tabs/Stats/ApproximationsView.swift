@@ -131,7 +131,7 @@ struct CalculationBreakdownView: View {
             VStack(alignment: .leading, spacing: 8) {
                 Text(breakdown.formula)
                     .italic()
-                
+
                 Text(breakdown.calculation)
             }
             .frame(minWidth: 0, maxWidth: .infinity, alignment: .topLeading)
@@ -144,13 +144,10 @@ struct CalculationBreakdownView: View {
 }
 
 #if DEBUG
-struct ApproximationsView_Previews: PreviewProvider {
-    static var previews: some View {
-        ApproximationsView(viewModel: .any(),
-                           appTheme: .mock(selfSufficiencyEstimateMode: .net))
-    }
+#Preview {
+    ApproximationsView(viewModel: .any(),
+                       appTheme: .mock(selfSufficiencyEstimateMode: .net))
 }
-#endif
 
 #Preview {
     CalculationBreakdownView(breakdown: CalculationBreakdown(
@@ -158,3 +155,4 @@ struct ApproximationsView_Previews: PreviewProvider {
         calculation: "max(0, 7.6 - 7.4 - 4.9 + 9.4 + 3.1)"
     ))
 }
+#endif

@@ -46,9 +46,7 @@ struct BatteryPowerFooterView: View {
     }
 }
 
-struct BatteryPowerFooterView_Previews: PreviewProvider {
-    static var previews: some View {
-        BatteryPowerFooterView(viewModel: BatteryPowerViewModel.any(error: nil),
-                               appTheme: AppTheme.mock())
-    }
+#Preview {
+    BatteryPowerFooterView(viewModel: BatteryPowerViewModel.any(error: nil),
+                           appTheme: AppTheme.mock())
 }

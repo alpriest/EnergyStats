@@ -33,21 +33,17 @@ struct NumberTextField: View {
                     text = String(describing: range.upperBound)
                 }
             })
-
     }
 }
 
-struct NumberTextField_Previews: PreviewProvider {
-    static var previews: some View {
-        Preview()
-            .padding()
-    }
-
+#Preview {
     struct Preview: View {
         @State var value = "12"
 
         var body: some View {
-            NumberTextField("Hello", text: $value, range: 1...100)
+            NumberTextField("Hello", text: $value, range: 1 ... 100)
         }
     }
+
+    return Preview().padding()
 }

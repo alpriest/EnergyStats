@@ -71,10 +71,8 @@ struct BatterySOCSettingsView: View {
     }
 }
 
-struct BatterySOCSettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        BatterySOCSettingsView(networking: DemoNetworking(),
-                               config: ConfigManager(networking: DemoNetworking(), config: MockConfig()),
-                               onSOCchange: {})
-    }
+#Preview {
+    BatterySOCSettingsView(networking: DemoNetworking(),
+                           config: ConfigManager(networking: DemoNetworking(), config: MockConfig()),
+                           onSOCchange: {})
 }

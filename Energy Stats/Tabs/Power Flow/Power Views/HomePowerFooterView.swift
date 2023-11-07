@@ -25,9 +25,7 @@ struct HomePowerFooterView: View {
     }
 }
 
-struct HomePowerFooterView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomePowerFooterView(amount: 1.0,
-                            appTheme: .mock())
-    }
+#Preview {
+    HomePowerFooterView(amount: 1.0,
+                        appTheme: .mock())
 }

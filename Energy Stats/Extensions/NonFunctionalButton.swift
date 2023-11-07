@@ -20,13 +20,11 @@ struct NonFunctionalButton<Content: View>: View {
     }
 }
 
-struct NonFunctionalButton_Previews: PreviewProvider {
-    static var previews: some View {
-        NonFunctionalButton {
-            Text(Calendar.current.shortMonthSymbols[1])
-                .frame(minWidth: 35)
-            Image(systemName: "chevron.up.chevron.down")
-                .font(.footnote)
-        }
+#Preview {
+    NonFunctionalButton {
+        Text(Calendar.current.shortMonthSymbols[1])
+            .frame(minWidth: 35)
+        Image(systemName: "chevron.up.chevron.down")
+            .font(.footnote)
     }
 }

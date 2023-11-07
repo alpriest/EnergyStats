@@ -44,11 +44,9 @@ struct SubLabelledView: View {
     }
 }
 
-struct ValueBoundsView_Previews: PreviewProvider {
-    static var previews: some View {
-        HStack {
-            ValueBoundsView(value: 0.3, type: .min, decimalPlaces: 1)
-            ValueBoundsView(value: 23.3, type: .max, decimalPlaces: 3)
-        }
+#Preview {
+    HStack {
+        ValueBoundsView(value: 0.3, type: .min, decimalPlaces: 1)
+        ValueBoundsView(value: 23.3, type: .max, decimalPlaces: 3)
     }
 }

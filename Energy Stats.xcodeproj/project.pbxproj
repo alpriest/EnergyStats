@@ -136,6 +136,7 @@
 		418240782A9A33E300101064 /* TotalsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418240772A9A33E300101064 /* TotalsViewModel.swift */; };
 		418547492A3A1C7A000128C7 /* PowerAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127690128EC865000D5A094 /* PowerAmountView.swift */; };
 		4185474C2A3B1025000128C7 /* SunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4162BC2F2A097C1300DFEDC1 /* SunView.swift */; };
+		418C6E952AFAC3BF000DE35F /* SummaryTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C6E942AFAC3BF000DE35F /* SummaryTabView.swift */; };
 		418EB4852ACC012C0021B87A /* FinancialsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418EB4842ACC012C0021B87A /* FinancialsSettingsView.swift */; };
 		418EB4872ACC019A0021B87A /* FinancialsSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418EB4862ACC019A0021B87A /* FinancialsSettingsViewModel.swift */; };
 		418EB4892ACC10220021B87A /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 418EB4882ACC10220021B87A /* Localizable.xcstrings */; };
@@ -443,6 +444,7 @@
 		4185474B2A3A59E4000128C7 /* Energy Stats.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Energy Stats.entitlements"; sourceTree = "<group>"; };
 		4185FAB12A3B6C8D0082D53F /* BatteryWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryWidget.swift; sourceTree = "<group>"; };
 		4185FAB52A3B74E60082D53F /* BatteryStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryStatusView.swift; sourceTree = "<group>"; };
+		418C6E942AFAC3BF000DE35F /* SummaryTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTabView.swift; sourceTree = "<group>"; };
 		418EB4842ACC012C0021B87A /* FinancialsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancialsSettingsView.swift; sourceTree = "<group>"; };
 		418EB4862ACC019A0021B87A /* FinancialsSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancialsSettingsViewModel.swift; sourceTree = "<group>"; };
 		418EB4882ACC10220021B87A /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
@@ -619,10 +621,11 @@
 		4107446A28CA57A1006D5D7D /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
-				41E1DFDD28D87778001235B9 /* Settings */,
 				41A25D3B28CA5CBD00315714 /* Parameters Graph */,
 				41A25D3A28CA5CB700315714 /* Power Flow */,
+				41E1DFDD28D87778001235B9 /* Settings */,
 				417AA21B2A1245AE0073CD34 /* Stats */,
+				418C6E932AFAC3B1000DE35F /* Summary */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -902,6 +905,14 @@
 				413BF2882A99F8A500A32B0D /* ApproximationsView.swift */,
 			);
 			path = Stats;
+			sourceTree = "<group>";
+		};
+		418C6E932AFAC3B1000DE35F /* Summary */ = {
+			isa = PBXGroup;
+			children = (
+				418C6E942AFAC3BF000DE35F /* SummaryTabView.swift */,
+			);
+			path = Summary;
 			sourceTree = "<group>";
 		};
 		418EB4832ACC011C0021B87A /* Financials */ = {
@@ -1479,6 +1490,7 @@
 				416AE4382A7D956E003D0122 /* AlertCopy.swift in Sources */,
 				410484C82AD49D95007F68C0 /* CT2-icon.swift in Sources */,
 				416318BE29DDD80E00C2C285 /* View+Copy.swift in Sources */,
+				418C6E952AFAC3BF000DE35F /* SummaryTabView.swift in Sources */,
 				4107446728CA22B3006D5D7D /* InverterViewModel.swift in Sources */,
 				410FC8862AB98F020004CBC2 /* ParameterVariableGroupEditorView.swift in Sources */,
 			);

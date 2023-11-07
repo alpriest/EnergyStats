@@ -115,10 +115,8 @@ struct StatsTabView: View {
 
 #if DEBUG
 @available(iOS 16.0, *)
-struct StatsTabView_Previews: PreviewProvider {
-    static var previews: some View {
-        StatsTabView(configManager: PreviewConfigManager(), networking: DemoNetworking(), appThemePublisher: CurrentValueSubject(.mock()))
-            .previewDevice("iPhone 13 Mini")
-    }
+#Preview {
+    StatsTabView(configManager: PreviewConfigManager(), networking: DemoNetworking(), appThemePublisher: CurrentValueSubject(.mock()))
+        .previewDevice("iPhone 13 Mini")
 }
 #endif

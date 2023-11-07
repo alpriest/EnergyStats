@@ -125,12 +125,10 @@ struct DatePickerView: View {
     }
 }
 
-struct DatePickerView_Previews: PreviewProvider {
-    static var previews: some View {
-        let model = DatePickerViewModel(.constant(.month(8, 2023)))
+#Preview {
+    let model = DatePickerViewModel(.constant(.month(8, 2023)))
 
-        return DatePickerView(viewModel: model, showingGraph: .constant(true))
-            .frame(height: 200)
-            .previewDevice("iPhone SE (3rd generation)")
-    }
+    return DatePickerView(viewModel: model, showingGraph: .constant(true))
+        .frame(height: 200)
+        .previewDevice("iPhone SE (3rd generation)")
 }

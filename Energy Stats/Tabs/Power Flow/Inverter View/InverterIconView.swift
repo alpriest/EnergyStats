@@ -69,9 +69,7 @@ struct InverterIconView: View {
     }
 }
 
-struct InverterIconView_Previews: PreviewProvider {
-    static var previews: some View {
-        InverterIconView()
-            .frame(width: 50, height: 60)
-    }
+#Preview {
+    InverterIconView()
+        .frame(width: 50, height: 60)
 }

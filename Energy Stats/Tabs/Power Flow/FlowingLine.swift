@@ -122,12 +122,10 @@ struct FlowingLine<S: Shape>: View {
 //    }
 // }
 
-struct DirectionalArrow_Previews: PreviewProvider {
-    static var previews: some View {
-        HStack {
-            FlowingLine(direction: .up, animationDuration: 1.5, color: .red, shape: MidYHorizontalLine())
-                .frame(width: 100, height: 300)
-                .background(Color.gray)
-        }
+#Preview {
+    HStack {
+        FlowingLine(direction: .up, animationDuration: 1.5, color: .red, shape: MidYHorizontalLine())
+            .frame(width: 100, height: 300)
+            .background(Color.gray)
     }
 }

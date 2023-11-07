@@ -26,9 +26,7 @@ extension View {
     }
 }
 
-struct AlertCopy_Previews: PreviewProvider {
-    static var previews: some View {
-        Text("Hello")
-            .alertCopy("Hello")
-    }
+#Preview {
+    Text("Hello")
+        .alertCopy("Hello")
 }

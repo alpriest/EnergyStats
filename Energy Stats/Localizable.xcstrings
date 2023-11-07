@@ -2949,6 +2949,7 @@
       }
     },
     "Day by hours" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4757,6 +4758,9 @@
           }
         }
       }
+    },
+    "Hello, World!" : {
+
     },
     "Hide graph" : {
       "localizations" : {

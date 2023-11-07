@@ -50,12 +50,10 @@ struct SelfSufficiencyEstimateView: View {
 }
 
 @available(iOS 16.0, *)
-struct SelfSufficiencyEstimateView_Previews: PreviewProvider {
-    static var previews: some View {
-        SelfSufficiencyEstimateView(ApproximationsViewModel.any(),
-                                    mode: .absolute,
-                                    showCalculations: true)
-    }
+#Preview {
+    SelfSufficiencyEstimateView(ApproximationsViewModel.any(),
+                                mode: .absolute,
+                                showCalculations: true)
 }
 
 extension ApproximationsViewModel {

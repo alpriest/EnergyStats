@@ -99,13 +99,11 @@ struct BatteryPowerView: View {
     }
 }
 
-struct BatteryPowerView_Previews: PreviewProvider {
+#Preview {
     struct FakeError: Error {}
 
-    static var previews: some View {
-        BatteryPowerView(viewModel: BatteryPowerViewModel.any(error: FakeError()),
-                         appTheme: AppTheme.mock())
-    }
+    return BatteryPowerView(viewModel: BatteryPowerViewModel.any(error: FakeError()),
+                            appTheme: AppTheme.mock())
 }
 
 extension BatteryPowerViewModel {

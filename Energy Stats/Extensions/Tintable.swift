@@ -28,14 +28,12 @@ extension View {
     }
 }
 
-struct Tintable_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            Text("hello world")
-                .tinted(enabled: .constant(true), color: .green)
+#Preview {
+    VStack {
+        Text("hello world")
+            .tinted(enabled: .constant(true), color: .green)
 
-            Text("hello world")
-                .tinted(enabled: .constant(false), color: .green)
-        }
+        Text("hello world")
+            .tinted(enabled: .constant(false), color: .green)
     }
 }

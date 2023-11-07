@@ -24,13 +24,11 @@ struct ContentView: View {
 }
 
 #if DEBUG
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView(
-            loginManager: .preview(),
-            network: DemoNetworking(),
-            configManager: PreviewConfigManager()
-        )
-    }
+#Preview {
+    ContentView(
+        loginManager: .preview(),
+        network: DemoNetworking(),
+        configManager: PreviewConfigManager()
+    )
 }
 #endif

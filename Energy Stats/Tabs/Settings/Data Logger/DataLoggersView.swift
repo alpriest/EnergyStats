@@ -116,19 +116,17 @@ struct DataLoggersView: View {
     }
 }
 
-struct DataLoggersView_Previews: PreviewProvider {
-    static var previews: some View {
-        Form {
-            DataLoggerView(
-                item: DataLogger(
-                    moduleSN: "669W2EFF22FA815",
-                    moduleType: "W2",
-                    plantName: "Alistair Priest",
-                    version: "3.08",
-                    signal: 3,
-                    communication: 1
-                )
+#Preview {
+    Form {
+        DataLoggerView(
+            item: DataLogger(
+                moduleSN: "669W2EFF22FA815",
+                moduleType: "W2",
+                plantName: "Alistair Priest",
+                version: "3.08",
+                signal: 3,
+                communication: 1
             )
-        }
+        )
     }
 }

@@ -26,10 +26,8 @@ struct HomePowerView: View {
     }
 }
 
-struct HomePowerView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomePowerView(amount: 1.05,
-                      appTheme: AppTheme.mock())
-            .frame(width: 50, height: 220)
-    }
+#Preview {
+    HomePowerView(amount: 1.05,
+                  appTheme: AppTheme.mock())
+        .frame(width: 50, height: 220)
 }

@@ -50,6 +50,15 @@ struct TabbedView: View {
                     .accessibilityIdentifier("parameters_tab")
                 }
 
+            SummaryTabView()
+                .tabItem {
+                    VStack {
+                        Image(systemName: "book.pages")
+                        Text("Summary")
+                    }
+                    .accessibilityIdentifier("summary_tab")
+                }
+
             SettingsTabView(viewModel: settingsTabViewModel, configManager: configManager, networking: networking)
                 .tabItem {
                     VStack {
@@ -67,9 +76,7 @@ struct TabbedView: View {
 }
 
 #if DEBUG
-struct TabbedView_Previews: PreviewProvider {
-    static var previews: some View {
-        TabbedView(networking: DemoNetworking(), userManager: .preview(), configManager: PreviewConfigManager())
-    }
+#Preview {
+    TabbedView(networking: DemoNetworking(), userManager: .preview(), configManager: PreviewConfigManager())
 }
 #endif

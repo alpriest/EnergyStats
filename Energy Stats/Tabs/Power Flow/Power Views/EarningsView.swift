@@ -26,8 +26,6 @@ struct EarningsView: View {
     }
 }
 
-struct EarningsView_Previews: PreviewProvider {
-    static var previews: some View {
-        EarningsView(viewModel: .any(), appTheme: .mock())
-    }
+#Preview {
+    EarningsView(viewModel: .any(), appTheme: .mock())
 }

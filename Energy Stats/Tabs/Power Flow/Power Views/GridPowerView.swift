@@ -22,9 +22,7 @@ struct GridPowerView: View {
     }
 }
 
-struct GridPowerView_Previews: PreviewProvider {
-    static var previews: some View {
-        GridPowerView(amount: 0.4,
-                      appTheme: AppTheme.mock())
-    }
+#Preview {
+    GridPowerView(amount: 0.4,
+                  appTheme: AppTheme.mock())
 }
