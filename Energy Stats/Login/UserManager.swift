@@ -11,7 +11,7 @@ import Foundation
 
 class UserManager: ObservableObject {
     private let networking: Networking
-    private let configManager: ConfigManager
+    private var configManager: ConfigManaging
     private let store: KeychainStoring
     private var cancellables = Set<AnyCancellable>()
     private let networkCache: InMemoryLoggingNetworkStore

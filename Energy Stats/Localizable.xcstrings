@@ -2611,6 +2611,9 @@
         }
       }
     },
+    "Could not load approximations" : {
+
+    },
     "Could not load. Check your internet connection" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -4732,6 +4735,7 @@
       }
     },
     "hello world" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4758,9 +4762,6 @@
           }
         }
       }
-    },
-    "Hello, World!" : {
-
     },
     "Hide graph" : {
       "localizations" : {
@@ -9786,6 +9787,7 @@
       }
     },
     "Toggle" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

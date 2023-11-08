@@ -1,7 +1,60 @@
 {
   "errno": 0,
   "result": [
-    {
+      {
+        "variable": "loads",
+        "data": [
+          {
+            "index": 1,
+            "value": 1.5
+          },
+          {
+            "index": 2,
+            "value": 2.9000000000000057
+          },
+          {
+            "index": 3,
+            "value": 22
+          },
+          {
+            "index": 4,
+            "value": 195.4
+          },
+          {
+            "index": 5,
+            "value": 219.89999999999998
+          },
+          {
+            "index": 6,
+            "value": 0
+          },
+          {
+            "index": 7,
+            "value": 0
+          },
+          {
+            "index": 8,
+            "value": 0
+          },
+          {
+            "index": 9,
+            "value": 0
+          },
+          {
+            "index": 10,
+            "value": 0
+          },
+          {
+            "index": 11,
+            "value": 0
+          },
+          {
+            "index": 12,
+            "value": 0
+          }
+        ]
+      },
+      {
       "variable": "feedin",
       "data": [
         {

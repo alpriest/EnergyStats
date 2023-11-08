@@ -119,6 +119,8 @@ struct BatteryStatusView: View {
 }
 
 struct BatteryStatusView_Previews: PreviewProvider {
+    static var mylightGray: Color { Color("pale_gray", bundle: Bundle(for: CountdownTimer.self)) }
+
     static var previews: some View {
         BatteryStatusView(
             soc: 0.8,
@@ -131,7 +133,7 @@ struct BatteryStatusView_Previews: PreviewProvider {
         .containerBackground(for: .widget) {
             VStack {
                 Color.clear
-                Color.lightGray.opacity(0.6)
+                mylightGray.opacity(0.6)
                     .frame(height: 38)
             }
         }

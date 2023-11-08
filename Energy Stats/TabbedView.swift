@@ -50,7 +50,7 @@ struct TabbedView: View {
                     .accessibilityIdentifier("parameters_tab")
                 }
 
-            SummaryTabView()
+            SummaryTabView(configManager: configManager, networking: networking, appThemePublisher: configManager.appTheme)
                 .tabItem {
                     VStack {
                         Image(systemName: "book.pages")

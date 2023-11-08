@@ -18,7 +18,7 @@ struct EqualWidthButtonStyle: ButtonStyle {
             .frame(minWidth: buttonWidth)
             .padding(.horizontal, 8)
             .padding(.vertical, 7)
-            .background(colorScheme == .dark ? Color.white.opacity(0.14) : Color.lightGray)
+            .background(colorScheme == .dark ? Color.white.opacity(0.14) : Color.paleGray)
             .foregroundStyle(Color.accentColor)
             .cornerRadius(6)
     }

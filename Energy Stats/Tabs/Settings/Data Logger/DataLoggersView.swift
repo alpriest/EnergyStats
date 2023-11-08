@@ -54,19 +54,19 @@ struct SignalView: View {
         HStack(alignment: .bottom, spacing: 2) {
             Rectangle()
                 .frame(width: 5, height: 5)
-                .foregroundColor(amount > 0 ? .primary : .lightGray)
+                .foregroundColor(amount > 0 ? .primary : .paleGray)
 
             Rectangle()
                 .frame(width: 5, height: 10)
-                .foregroundColor(amount > 1 ? .primary : .lightGray)
+                .foregroundColor(amount > 1 ? .primary : .paleGray)
 
             Rectangle()
                 .frame(width: 5, height: 15)
-                .foregroundColor(amount > 2 ? .primary : .lightGray)
+                .foregroundColor(amount > 2 ? .primary : .paleGray)
 
             Rectangle()
                 .frame(width: 5, height: 20)
-                .foregroundColor(amount > 3 ? .primary : .lightGray)
+                .foregroundColor(amount > 3 ? .primary : .paleGray)
         }
     }
 }

@@ -94,7 +94,7 @@ struct BatteryWidgetView: View {
                 } else {
                     VStack {
                         Color.clear
-                        Color.lightGray.opacity(0.6)
+                        Color.paleGray.opacity(0.6)
                             .frame(height: footerHeight)
                     }
                 }

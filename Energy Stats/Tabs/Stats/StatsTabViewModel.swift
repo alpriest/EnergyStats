@@ -24,6 +24,7 @@ class StatsTabViewModel: ObservableObject {
     private let haptic = UIImpactFeedbackGenerator()
     private let configManager: ConfigManaging
     private let networking: Networking
+    private let approximationsCalculator: ApproximationsCalculator
 
     @Published var state = LoadState.inactive
     @Published var displayMode: StatsDisplayMode = .day(Date()) {
@@ -53,6 +54,7 @@ class StatsTabViewModel: ObservableObject {
     init(networking: Networking, configManager: ConfigManaging) {
         self.networking = networking
         self.configManager = configManager
+        self.approximationsCalculator = ApproximationsCalculator(configManager: configManager, networking: networking)
 
         haptic.prepare()
 
@@ -109,7 +111,7 @@ class StatsTabViewModel: ObservableObject {
 
         do {
             let reports = try await networking.fetchReport(deviceID: currentDevice.deviceID, variables: reportVariables, queryDate: queryDate, reportType: reportType)
-            totals = try await generateTotals(currentDevice: currentDevice, reportType: reportType, queryDate: queryDate, reports: reports, reportVariables: reportVariables)
+            totals = try await approximationsCalculator.generateTotals(currentDevice: currentDevice, reportType: reportType, queryDate: queryDate, reports: reports, reportVariables: reportVariables)
 
             let updatedData = reports.flatMap { reportResponse -> [StatsGraphValue] in
                 guard let reportVariable = ReportVariable(rawValue: reportResponse.variable) else { return [] }
@@ -157,95 +159,11 @@ class StatsTabViewModel: ObservableObject {
         let batteryCharge = totals[ReportVariable.chargeEnergyToTal]
         let batteryDischarge = totals[ReportVariable.dischargeEnergyToTal]
 
-        calculateApproximations(grid: grid,
-                                feedIn: feedIn,
-                                loads: loads,
-                                batteryCharge: batteryCharge ?? 0,
-                                batteryDischarge: batteryDischarge ?? 0)
-    }
-
-    func calculateApproximations(
-        grid: Double,
-        feedIn: Double,
-        loads: Double,
-        batteryCharge: Double,
-        batteryDischarge: Double
-    ) {
-        let (netResult, netResultCalculationBreakdown) = NetSelfSufficiencyCalculator.calculate(
-            grid: grid,
-            feedIn: feedIn,
-            loads: loads,
-            batteryCharge: batteryCharge,
-            batteryDischarge: batteryDischarge
-        )
-
-        let (absoluteResult, absoluteResultCalculationBreakdown) = AbsoluteSelfSufficiencyCalculator.calculate(
-            loads: loads,
-            grid: grid
-        )
-
-        let financialModel: EnergyStatsFinancialModel?
-        let totalsViewModel = TotalsViewModel(grid: grid,
-                                              feedIn: feedIn,
-                                              loads: loads,
-                                              batteryCharge: batteryCharge,
-                                              batteryDischarge: batteryDischarge)
-
-        if configManager.financialModel == .energyStats {
-            financialModel = EnergyStatsFinancialModel(
-                totalsViewModel: totalsViewModel,
-                config: configManager,
-                currencySymbol: configManager.currencySymbol
-            )
-        } else {
-            financialModel = nil
-        }
-
-        approximationsViewModel = ApproximationsViewModel(
-            netSelfSufficiencyEstimate: asPercent(netResult),
-            netSelfSufficiencyEstimateCalculationBreakdown: netResultCalculationBreakdown,
-            absoluteSelfSufficiencyEstimate: asPercent(absoluteResult),
-            absoluteSelfSufficiencyEstimateCalculationBreakdown: absoluteResultCalculationBreakdown,
-            financialModel: financialModel,
-            homeUsage: loads,
-            totalsViewModel: totalsViewModel
-        )
-    }
-
-    func asPercent(_ value: Double) -> String? {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .percent
-        numberFormatter.maximumFractionDigits = 1
-
-        return numberFormatter.string(from: NSNumber(value: value))
-    }
-
-    func generateTotals(
-        currentDevice: Device,
-        reportType: ReportType,
-        queryDate: QueryDate,
-        reports: [ReportResponse],
-        reportVariables: [ReportVariable]
-    ) async throws -> [ReportVariable: Double] {
-        var totals = [ReportVariable: Double]()
-
-        if case .day = reportType {
-            let monthlyReports = try await networking.fetchReport(deviceID: currentDevice.deviceID, variables: reportVariables, queryDate: queryDate, reportType: .month)
-
-            monthlyReports.forEach { reportResponse in
-                guard let reportVariable = ReportVariable(rawValue: reportResponse.variable) else { return }
-
-                totals[reportVariable] = reportResponse.data.first { $0.index == queryDate.day }?.value ?? 0.0
-            }
-        } else {
-            reports.forEach { reportResponse in
-                guard let reportVariable = ReportVariable(rawValue: reportResponse.variable) else { return }
-
-                totals[reportVariable] = reportResponse.data.map { abs($0.value) }.reduce(0.0, +)
-            }
-        }
-
-        return totals
+        approximationsViewModel = approximationsCalculator.calculateApproximations(grid: grid,
+                                                                                   feedIn: feedIn,
+                                                                                   loads: loads,
+                                                                                   batteryCharge: batteryCharge ?? 0,
+                                                                                   batteryDischarge: batteryDischarge ?? 0)
     }
 
     func refresh() {
@@ -297,7 +215,7 @@ class StatsTabViewModel: ObservableObject {
            let batteryCharge = result.values.first(where: { $0.type == .chargeEnergyToTal })?.value,
            let batteryDischarge = result.values.first(where: { $0.type == .dischargeEnergyToTal })?.value
         {
-            calculateApproximations(
+            approximationsViewModel = approximationsCalculator.calculateApproximations(
                 grid: grid,
                 feedIn: feedIn,
                 loads: loads,

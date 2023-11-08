@@ -26,7 +26,6 @@ public struct FinanceAmount: Hashable, Identifiable {
 }
 
 public struct EnergyStatsFinancialModel {
-    private let totalsViewModel: TotalsViewModel
     private let config: FinancialConfigManaging
     private let currencySymbol: String
     public let exportIncome: FinanceAmount
@@ -36,7 +35,6 @@ public struct EnergyStatsFinancialModel {
     public let solarSavingBreakdown: CalculationBreakdown
 
     public init(totalsViewModel: TotalsViewModel, config: FinancialConfigManaging, currencySymbol: String) {
-        self.totalsViewModel = totalsViewModel
         self.config = config
         self.currencySymbol = currencySymbol
 
