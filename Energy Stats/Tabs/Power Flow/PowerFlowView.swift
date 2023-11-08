@@ -55,24 +55,24 @@ struct PowerFlowView<S: Shape>: View {
     var lineColor: Color {
         if isFlowing && appTheme.showColouredLines && showColouredLines {
             if amount > 0 {
-                return Color("lines_positive")
+                return Color.linesPositive
             } else {
-                return Color("lines_negative")
+                return Color.linesNegative
             }
         } else {
-            return Color("lines_notflowing")
+            return .linesNotFlowing
         }
     }
 
     var textColor: Color {
         if isFlowing && appTheme.showColouredLines && showColouredLines {
             if amount > 0 {
-                return Color("text_positive")
+                return Color.textPositive
             } else {
-                return Color("text_negative")
+                return Color.textNegative
             }
         } else {
-            return Color("text_notflowing")
+            return Color.textNotFlowing
         }
     }
 

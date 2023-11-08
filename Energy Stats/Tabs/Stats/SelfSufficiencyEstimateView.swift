@@ -64,6 +64,7 @@ extension ApproximationsViewModel {
             absoluteSelfSufficiencyEstimate: "100%",
             absoluteSelfSufficiencyEstimateCalculationBreakdown: CalculationBreakdown(formula: "x * b / c", calculation: "1 * 5 / 8.9"),
             financialModel: nil,
+            earnings: nil,
             homeUsage: 4.5,
             totalsViewModel: .any()
         )

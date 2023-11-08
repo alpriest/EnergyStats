@@ -16,6 +16,7 @@ class SummaryTabViewModel: ObservableObject {
     @Published var exportIncome: String = ""
     @Published var gridImportAvoided: String = ""
     @Published var approximationsViewModel: ApproximationsViewModel? = nil
+    @Published var foxESSTotal: FinanceAmount?
     private let approximationsCalculator: ApproximationsCalculator
 
     init(configManager: ConfigManaging, networking: Networking) {
@@ -25,30 +26,48 @@ class SummaryTabViewModel: ObservableObject {
     }
 
     func load() {
-        if let currentDevice = configManager.currentDevice.value {
-            Task { @MainActor in
-                isLoading = true
-                let reportVariables = [ReportVariable.feedIn, .generation, .chargeEnergyToTal, .dischargeEnergyToTal, .gridConsumption, .loads]
-                let reports = try await self.networking.fetchReport(deviceID: currentDevice.deviceID,
-                                                                    variables: reportVariables,
-                                                                    queryDate: QueryDate(year: 2023, month: nil, day: nil),
-                                                                    reportType: .year)
-                let earnings = try await self.networking.fetchEarnings(deviceID: currentDevice.deviceID)
-                var totals = [ReportVariable: Double]()
-                reports.forEach { reportResponse in
-                    guard let reportVariable = ReportVariable(rawValue: reportResponse.variable) else { return }
+        guard approximationsViewModel == nil else { return }
+        guard let currentDevice = configManager.currentDevice.value else { return }
 
-                    totals[reportVariable] = reportResponse.data.map { abs($0.value) }.reduce(0.0, +)
-                }
+        Task { @MainActor in
+            isLoading = true
+            let foxEarnings = try await self.networking.fetchEarnings(deviceID: currentDevice.deviceID)
+            foxESSTotal = FinanceAmount(title: .total, amount: foxEarnings.cumulate.earnings, currencySymbol: foxEarnings.currencySymbol)
+            let totals = try await fetchAllYears(device: currentDevice)
 
-                self.approximationsViewModel = makeEarningsViewModel(totals: totals, response: earnings)
+            self.approximationsViewModel = makeApproximationsViewModel(totals: totals, response: foxEarnings)
 
-                isLoading = false
-            }
+            isLoading = false
         }
     }
 
-    private func makeEarningsViewModel(
+    private func fetchAllYears(device: Device) async throws -> [ReportVariable: Double] {
+        var totals = [ReportVariable: Double]()
+
+        totals = try await fetchYear(2023, device: device, totals: totals)
+        totals = try await fetchYear(2022, device: device, totals: totals)
+
+        return totals
+    }
+
+    private func fetchYear(_ year: Int, device: Device, totals: [ReportVariable: Double]) async throws -> [ReportVariable: Double] {
+        let reportVariables = [ReportVariable.feedIn, .generation, .chargeEnergyToTal, .dischargeEnergyToTal, .gridConsumption, .loads]
+        let reports = try await networking.fetchReport(deviceID: device.deviceID,
+                                                       variables: reportVariables,
+                                                       queryDate: QueryDate(year: year, month: nil, day: nil),
+                                                       reportType: .year)
+
+        var totals = totals
+        reports.forEach { reportResponse in
+            guard let reportVariable = ReportVariable(rawValue: reportResponse.variable) else { return }
+
+            totals[reportVariable] = (totals[reportVariable] ?? 0) + reportResponse.data.map { abs($0.value) }.reduce(0.0, +)
+        }
+
+        return totals
+    }
+
+    private func makeApproximationsViewModel(
         totals: [ReportVariable: Double],
         response: EarningsResponse
     ) -> ApproximationsViewModel? {
@@ -61,6 +80,6 @@ class SummaryTabViewModel: ObservableObject {
             return nil
         }
 
-        return approximationsCalculator.calculateApproximations(grid: grid, feedIn: feedIn, loads: loads, batteryCharge: batteryCharge, batteryDischarge: batteryDischarge)
+        return approximationsCalculator.calculateApproximations(grid: grid, feedIn: feedIn, loads: loads, batteryCharge: batteryCharge, batteryDischarge: batteryDischarge, earnings: response)
     }
 }

@@ -76,7 +76,7 @@ struct StatsTabView: View {
                     StatsGraphVariableToggles(viewModel: viewModel, selectedDate: $viewModel.selectedDate, valuesAtTime: $viewModel.valuesAtTime, appTheme: appThemePublisher.value)
 
                     if let approximationsViewModel = viewModel.approximationsViewModel {
-                        ApproximationsView(viewModel: approximationsViewModel, appTheme: appThemePublisher.value)
+                        ApproximationsView(viewModel: approximationsViewModel, appTheme: appThemePublisher.value, decimalPlaceOverride: nil)
                     }
 
                     Text("Stats are aggregated by FoxESS into 1 hr, 1 day or 1 month totals")

@@ -13,6 +13,7 @@ struct ApproximationsView: View {
     let appTheme: AppTheme
     @Environment(\.colorScheme) var colorScheme
     @State private var showCalculations = false
+    let decimalPlaceOverride: Int?
 
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -62,7 +63,7 @@ struct ApproximationsView: View {
                             Text("Home usage")
                                 .accessibilityElement(children: .ignore)
                             Spacer()
-                            EnergyText(amount: home, appTheme: appTheme, type: .selfSufficiency)
+                            EnergyText(amount: home, appTheme: appTheme, type: .selfSufficiency, decimalPlaceOverride: decimalPlaceOverride)
                         }
                     }
 
@@ -72,7 +73,7 @@ struct ApproximationsView: View {
                                 Text("Solar generated")
                                     .accessibilityElement(children: .ignore)
                                 Spacer()
-                                EnergyText(amount: totals.solar, appTheme: appTheme, type: .totalSolarGenerated)
+                                EnergyText(amount: totals.solar, appTheme: appTheme, type: .totalSolarGenerated, decimalPlaceOverride: decimalPlaceOverride)
                             }
 
                             if showCalculations {
@@ -108,6 +109,16 @@ struct ApproximationsView: View {
                             Text("Total benefit")
                             Spacer()
                             Text(financialModel.total.formattedAmount())
+                        }
+                    }
+
+                    if let earnings = viewModel.earnings {
+                        VStack(spacing: 2) {
+                            HStack {
+                                Text("Accumulated income")
+                                Spacer()
+                                Text(FinanceAmount(title: .total, amount: earnings.cumulate.earnings, currencySymbol: earnings.currencySymbol).formattedAmount())
+                            }
                         }
                     }
                 }
@@ -146,7 +157,8 @@ struct CalculationBreakdownView: View {
 #if DEBUG
 #Preview {
     ApproximationsView(viewModel: .any(),
-                       appTheme: .mock(selfSufficiencyEstimateMode: .net))
+                       appTheme: .mock(selfSufficiencyEstimateMode: .net),
+                       decimalPlaceOverride: nil)
 }
 
 #Preview {

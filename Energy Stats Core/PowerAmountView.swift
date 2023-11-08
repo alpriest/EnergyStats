@@ -45,11 +45,13 @@ public struct EnergyText: View {
     let amount: Double
     let appTheme: AppTheme
     let type: AmountType
+    let decimalPlaceOverride: Int?
 
-    public init(amount: Double, appTheme: AppTheme, type: AmountType) {
+    public init(amount: Double, appTheme: AppTheme, type: AmountType, decimalPlaceOverride: Int? = nil) {
         self.amount = amount
         self.appTheme = appTheme
         self.type = type
+        self.decimalPlaceOverride = decimalPlaceOverride
     }
 
     public var body: some View {
@@ -64,10 +66,10 @@ public struct EnergyText: View {
             if amount < 1 {
                 return amount.wh()
             } else {
-                return amount.kWh(appTheme.decimalPlaces)
+                return amount.kWh(decimalPlaceOverride ?? appTheme.decimalPlaces)
             }
         case .kilowatt:
-            return amount.kWh(appTheme.decimalPlaces)
+            return amount.kWh(decimalPlaceOverride ?? appTheme.decimalPlaces)
         case .watt:
             return amount.wh()
         }

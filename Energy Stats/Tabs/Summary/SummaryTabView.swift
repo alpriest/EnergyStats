@@ -10,7 +10,7 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct SummaryTabView: View {
-    @ObservedObject var viewModel: SummaryTabViewModel
+    @StateObject var viewModel: SummaryTabViewModel
     @State private var appTheme: AppTheme
     private var appThemePublisher: LatestAppTheme
 
@@ -21,25 +21,36 @@ struct SummaryTabView: View {
     }
 
     var body: some View {
-        ScrollView {
-            VStack {
-                if viewModel.isLoading {
-                    if #available(iOS 17.0, *) {
-                        Image(systemName: "chart.bar.xaxis.ascending")
-                            .symbolEffect(.variableColor.iterative, options: .repeating, value: viewModel.isLoading)
+        NavigationView {
+            ScrollView {
+                VStack {
+                    if viewModel.isLoading {
+                        Group {
+                            if #available(iOS 17.0, *) {
+                                Image(systemName: "chart.bar.xaxis.ascending")
+                                    .font(.system(size: 72))
+                                    .symbolEffect(.variableColor.iterative, options: .repeating)
+                            } else {
+                                Image(systemName: "chart.bar.xaxis.ascending")
+                            }
+                        }
                     } else {
-                        Image(systemName: "chart.bar.xaxis.ascending")
-                    }
-                } else {
-                    if let approximationsViewModel = viewModel.approximationsViewModel {
-                        ApproximationsView(viewModel: approximationsViewModel, appTheme: appTheme)
-                    } else {
-                        Text("Could not load approximations")
+                        if let approximationsViewModel = viewModel.approximationsViewModel {
+                            ApproximationsView(viewModel: approximationsViewModel, appTheme: appTheme, decimalPlaceOverride: 0)
+                        } else {
+                            Text("Could not load approximations")
+                        }
                     }
                 }
+                .padding()
             }
-        }.onAppear {
+            .navigationTitle("Summary")
+        }
+        .onAppear {
             viewModel.load()
+        }
+        .onReceive(appThemePublisher) {
+            self.appTheme = $0
         }
     }
 }

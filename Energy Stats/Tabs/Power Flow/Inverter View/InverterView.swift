@@ -53,7 +53,7 @@ struct InverterView: View {
         ZStack {
             InverterPath()
                 .stroke(lineWidth: 4)
-                .foregroundColor(Color("lines_notflowing"))
+                .foregroundColor(Color.linesNotFlowing)
 
             if verticalSizeClass == .regular {
                 // Portrait

@@ -12,8 +12,8 @@ public extension Color {
     static var linesNegative: Color { Color("lines_negative", bundle: Bundle(for: CountdownTimer.self)) }
     static var textPositive: Color { Color("text_positive", bundle: Bundle(for: CountdownTimer.self)) }
     static var textNegative: Color { Color("text_negative", bundle: Bundle(for: CountdownTimer.self)) }
-    static var linesNotFlowing: Color { Color("lines_notflowing", bundle: Bundle(for: CountdownTimer.self)) }
-    static var textNotFlowing: Color { Color("text_notflowing", bundle: Bundle(for: CountdownTimer.self)) }
+    static var linesNotFlowing: Color { Color("lines_not_flowing", bundle: Bundle(for: CountdownTimer.self)) }
+    static var textNotFlowing: Color { Color("text_not_flowing", bundle: Bundle(for: CountdownTimer.self)) }
     static var paleGray: Color { Color("pale_gray", bundle: Bundle(for: CountdownTimer.self)) }
 }
 

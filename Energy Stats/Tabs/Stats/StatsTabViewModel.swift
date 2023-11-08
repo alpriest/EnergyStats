@@ -16,6 +16,7 @@ struct ApproximationsViewModel {
     let absoluteSelfSufficiencyEstimate: String?
     let absoluteSelfSufficiencyEstimateCalculationBreakdown: CalculationBreakdown
     let financialModel: EnergyStatsFinancialModel?
+    let earnings: EarningsResponse?
     let homeUsage: Double?
     let totalsViewModel: TotalsViewModel?
 }
@@ -163,7 +164,8 @@ class StatsTabViewModel: ObservableObject {
                                                                                    feedIn: feedIn,
                                                                                    loads: loads,
                                                                                    batteryCharge: batteryCharge ?? 0,
-                                                                                   batteryDischarge: batteryDischarge ?? 0)
+                                                                                   batteryDischarge: batteryDischarge ?? 0,
+                                                                                   earnings: nil)
     }
 
     func refresh() {
@@ -220,7 +222,8 @@ class StatsTabViewModel: ObservableObject {
                 feedIn: feedIn,
                 loads: loads,
                 batteryCharge: batteryCharge,
-                batteryDischarge: batteryDischarge
+                batteryDischarge: batteryDischarge,
+                earnings: nil
             )
         }
 
