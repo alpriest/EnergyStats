@@ -66,7 +66,8 @@ extension ApproximationsViewModel {
             financialModel: nil,
             earnings: nil,
             homeUsage: 4.5,
-            totalsViewModel: .any()
+            totalsViewModel: .any(),
+            financialModelType: .energyStats
         )
     }
 }

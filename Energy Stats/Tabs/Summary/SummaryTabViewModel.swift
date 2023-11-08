@@ -80,6 +80,12 @@ class SummaryTabViewModel: ObservableObject {
             return nil
         }
 
-        return approximationsCalculator.calculateApproximations(grid: grid, feedIn: feedIn, loads: loads, batteryCharge: batteryCharge, batteryDischarge: batteryDischarge, earnings: response)
+        return approximationsCalculator.calculateApproximations(grid: grid, 
+                                                                feedIn: feedIn,
+                                                                loads: loads,
+                                                                batteryCharge: batteryCharge,
+                                                                batteryDischarge: batteryDischarge,
+                                                                earnings: response,
+                                                                financialModelType: configManager.financialModel)
     }
 }

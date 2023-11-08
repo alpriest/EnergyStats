@@ -19,6 +19,7 @@ struct ApproximationsViewModel {
     let earnings: EarningsResponse?
     let homeUsage: Double?
     let totalsViewModel: TotalsViewModel?
+    let financialModelType: FinancialModel
 }
 
 class StatsTabViewModel: ObservableObject {
@@ -165,7 +166,8 @@ class StatsTabViewModel: ObservableObject {
                                                                                    loads: loads,
                                                                                    batteryCharge: batteryCharge ?? 0,
                                                                                    batteryDischarge: batteryDischarge ?? 0,
-                                                                                   earnings: nil)
+                                                                                   earnings: nil,
+                                                                                   financialModelType: configManager.financialModel)
     }
 
     func refresh() {
@@ -223,7 +225,8 @@ class StatsTabViewModel: ObservableObject {
                 loads: loads,
                 batteryCharge: batteryCharge,
                 batteryDischarge: batteryDischarge,
-                earnings: nil
+                earnings: nil,
+                financialModelType: configManager.financialModel
             )
         }
 
