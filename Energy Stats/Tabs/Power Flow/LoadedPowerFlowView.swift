@@ -50,7 +50,7 @@ struct LoadedPowerFlowView: View {
                                     PowerFlowView(amount: viewModel.ct2, appTheme: appTheme, showColouredLines: false, type: .solarFlow)
                                     Color.clear.frame(height: size.height * 0.1)
                                 }
-                                .frame(width: topColumnWidth, height: size.height * 0.4)
+                                .frame(width: topColumnWidth, height: size.height * 0.35)
 
                                 Spacer().frame(width: horizontalPadding)
                             }
@@ -59,13 +59,13 @@ struct LoadedPowerFlowView: View {
                                                                                               generation: viewModel.todaysGeneration,
                                                                                               earnings: viewModel.earnings))
 
-                                .frame(width: topColumnWidth, height: size.height * 0.4)
+                                .frame(width: topColumnWidth, height: size.height * 0.35)
 
                             if !appTheme.shouldCombineCT2WithPVPower {
                                 Spacer().frame(width: horizontalPadding)
 
                                 Color.clear
-                                    .frame(width: topColumnWidth, height: size.height * 0.4)
+                                    .frame(width: topColumnWidth, height: size.height * 0.35)
                             }
                         }
 

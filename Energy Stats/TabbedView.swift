@@ -53,7 +53,11 @@ struct TabbedView: View {
             SummaryTabView(configManager: configManager, networking: networking, appThemePublisher: configManager.appTheme)
                 .tabItem {
                     VStack {
-                        Image(systemName: "book.pages")
+                        if #available(iOS 17.0, *) {
+                            Image(systemName: "book.pages")
+                        } else {
+                            Image(systemName: "book")
+                        }
                         Text("Summary")
                     }
                     .accessibilityIdentifier("summary_tab")
