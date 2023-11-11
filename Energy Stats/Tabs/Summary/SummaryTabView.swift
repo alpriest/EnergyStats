@@ -23,7 +23,7 @@ struct SummaryTabView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                VStack {
+                VStack(alignment: .leading) {
                     if viewModel.isLoading {
                         Group {
                             if #available(iOS 17.0, *) {
@@ -36,7 +36,30 @@ struct SummaryTabView: View {
                         }
                     } else {
                         if let approximationsViewModel = viewModel.approximationsViewModel {
-                            ApproximationsView(viewModel: approximationsViewModel, appTheme: appTheme, decimalPlaceOverride: 0)
+                            energySummaryRow(title: "Home usage", amount: approximationsViewModel.homeUsage)
+                            energySummaryRow(title: "Solar generated", amount: approximationsViewModel.totalsViewModel?.solar)
+
+                            Spacer(minLength: 22)
+
+                            if let model = approximationsViewModel.financialModel, case .energyStats = appTheme.financialModel {
+                                moneySummaryRow(title: "Export income", amount: model.exportIncome.amount)
+                                moneySummaryRow(title: "Grid import avoided", amount: model.solarSaving.amount)
+                                moneySummaryRow(title: "Total benefit", amount: model.total.amount)
+                            }
+
+                            if let earnings = approximationsViewModel.earnings, case .foxESS = appTheme.financialModel {
+                                moneySummaryRow(title: "Total benefit", amount: earnings.cumulate.earnings)
+                            }
+
+                            Text("Includes data from \(viewModel.oldestDataDate) to Present")
+                                .font(.footnote)
+                                .padding(.top)
+                                .foregroundStyle(.secondary)
+
+                            Text("Figures are approximate and assume the buy/sell energy prices remained constant throughout the period of ownership.")
+                                .font(.footnote)
+                                .padding(.top)
+                                .foregroundStyle(.secondary)
                         } else {
                             Text("Could not load approximations")
                         }
@@ -51,6 +74,40 @@ struct SummaryTabView: View {
         }
         .onReceive(appThemePublisher) {
             self.appTheme = $0
+        }
+    }
+
+    @ViewBuilder
+    private func energySummaryRow(title: String, amount: Double?) -> some View {
+        summaryRow(title: title, amount: amount) {
+            EnergyText(amount: $0, appTheme: appTheme, type: .default, decimalPlaceOverride: 0)
+                .font(.system(size: 28))
+                .monospacedDigit()
+        }
+    }
+
+    @ViewBuilder
+    private func moneySummaryRow(title: String, amount: Double?) -> some View {
+        summaryRow(title: title, amount: amount) {
+            Text(FinanceAmount(title: .total, amount: $0, currencySymbol: "£").formattedAmount())
+                .font(.system(size: 28))
+                .monospacedDigit()
+        }
+    }
+
+    @ViewBuilder
+    private func summaryRow(title: String, amount: Double?, text: @escaping (Double) -> some View) -> some View {
+        if let amount {
+            HStack {
+                Text(title)
+                    .font(.system(size: 28))
+
+                Spacer()
+
+                AnimatedNumber(target: amount) {
+                    text($0)
+                }
+            }
         }
     }
 }

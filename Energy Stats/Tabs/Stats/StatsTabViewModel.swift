@@ -19,7 +19,6 @@ struct ApproximationsViewModel {
     let earnings: EarningsResponse?
     let homeUsage: Double?
     let totalsViewModel: TotalsViewModel?
-    let financialModelType: FinancialModel
 }
 
 class StatsTabViewModel: ObservableObject {

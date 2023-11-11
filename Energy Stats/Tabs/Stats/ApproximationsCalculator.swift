@@ -59,8 +59,7 @@ struct ApproximationsCalculator {
             financialModel: financialModel,
             earnings: earnings,
             homeUsage: loads,
-            totalsViewModel: totalsViewModel,
-            financialModelType: financialModelType
+            totalsViewModel: totalsViewModel
         )
     }
 

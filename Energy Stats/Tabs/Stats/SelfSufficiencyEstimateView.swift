@@ -14,10 +14,12 @@ struct SelfSufficiencyEstimateView: View {
     private let showCalculations: Bool
     private let calculations: CalculationBreakdown?
     @Environment(\.colorScheme) var colorScheme
+    private let decimalPlaces: Int
 
-    init(_ viewModel: ApproximationsViewModel, mode: SelfSufficiencyEstimateMode, showCalculations: Bool) {
+    init(_ viewModel: ApproximationsViewModel, mode: SelfSufficiencyEstimateMode, showCalculations: Bool, decimalPlaces: Int) {
         self.viewModel = viewModel
         self.showCalculations = showCalculations
+        self.decimalPlaces = decimalPlaces
 
         switch mode {
         case .off:
@@ -42,7 +44,10 @@ struct SelfSufficiencyEstimateView: View {
                 }
 
                 if showCalculations, let calculations = calculations {
-                    CalculationBreakdownView(breakdown: CalculationBreakdown(formula: calculations.formula, calculation: calculations.calculation))
+                    CalculationBreakdownView(
+                        breakdown: CalculationBreakdown(formula: calculations.formula, calculation: calculations.calculation),
+                        decimalPlaces: decimalPlaces
+                    )
                 }
             }
         }
@@ -53,21 +58,21 @@ struct SelfSufficiencyEstimateView: View {
 #Preview {
     SelfSufficiencyEstimateView(ApproximationsViewModel.any(),
                                 mode: .absolute,
-                                showCalculations: true)
+                                showCalculations: true,
+                                decimalPlaces: 3)
 }
 
 extension ApproximationsViewModel {
     static func any() -> ApproximationsViewModel {
         ApproximationsViewModel(
             netSelfSufficiencyEstimate: "95%",
-            netSelfSufficiencyEstimateCalculationBreakdown: CalculationBreakdown(formula: "x * b", calculation: "1 * 5"),
+            netSelfSufficiencyEstimateCalculationBreakdown: CalculationBreakdown(formula: "x * b", calculation: { _ in "1 * 5" }),
             absoluteSelfSufficiencyEstimate: "100%",
-            absoluteSelfSufficiencyEstimateCalculationBreakdown: CalculationBreakdown(formula: "x * b / c", calculation: "1 * 5 / 8.9"),
+            absoluteSelfSufficiencyEstimateCalculationBreakdown: CalculationBreakdown(formula: "x * b / c", calculation: { _ in "1 * 5 / 8.9" }),
             financialModel: nil,
             earnings: nil,
             homeUsage: 4.5,
-            totalsViewModel: .any(),
-            financialModelType: .energyStats
+            totalsViewModel: .any()
         )
     }
 }

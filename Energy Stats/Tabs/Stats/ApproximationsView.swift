@@ -55,7 +55,7 @@ struct ApproximationsView: View {
             ZStack {
                 VStack {
                     if appTheme.selfSufficiencyEstimateMode != .off {
-                        SelfSufficiencyEstimateView(viewModel, mode: appTheme.selfSufficiencyEstimateMode, showCalculations: showCalculations)
+                        SelfSufficiencyEstimateView(viewModel, mode: appTheme.selfSufficiencyEstimateMode, showCalculations: showCalculations, decimalPlaces: appTheme.decimalPlaces)
                     }
 
                     if let home = viewModel.homeUsage {
@@ -77,12 +77,12 @@ struct ApproximationsView: View {
                             }
 
                             if showCalculations {
-                                CalculationBreakdownView(breakdown: totals.solarBreakdown)
+                                CalculationBreakdownView(breakdown: totals.solarBreakdown, decimalPlaces: appTheme.decimalPlaces)
                             }
                         }
                     }
 
-                    if let financialModel = viewModel.financialModel, case .energyStats = viewModel.financialModelType {
+                    if let financialModel = viewModel.financialModel, case .energyStats = appTheme.financialModel {
                         VStack(spacing: 2) {
                             HStack {
                                 Text("Export income")
@@ -90,7 +90,7 @@ struct ApproximationsView: View {
                                 Text(financialModel.exportIncome.formattedAmount())
                             }
                             if showCalculations {
-                                CalculationBreakdownView(breakdown: financialModel.exportBreakdown)
+                                CalculationBreakdownView(breakdown: financialModel.exportBreakdown, decimalPlaces: appTheme.decimalPlaces)
                             }
                         }
 
@@ -101,7 +101,7 @@ struct ApproximationsView: View {
                                 Text(financialModel.solarSaving.formattedAmount())
                             }
                             if showCalculations {
-                                CalculationBreakdownView(breakdown: financialModel.solarSavingBreakdown)
+                                CalculationBreakdownView(breakdown: financialModel.solarSavingBreakdown, decimalPlaces: appTheme.decimalPlaces)
                             }
                         }
 
@@ -112,7 +112,7 @@ struct ApproximationsView: View {
                         }
                     }
 
-                    if let earnings = viewModel.earnings, case .foxESS = viewModel.financialModelType {
+                    if let earnings = viewModel.earnings, case .foxESS = appTheme.financialModel {
                         VStack(spacing: 2) {
                             HStack {
                                 Text("Accumulated income")
@@ -132,6 +132,7 @@ struct ApproximationsView: View {
 
 struct CalculationBreakdownView: View {
     let breakdown: CalculationBreakdown
+    let decimalPlaces: Int
 
     var body: some View {
         ZStack {
@@ -143,7 +144,7 @@ struct CalculationBreakdownView: View {
                 Text(breakdown.formula)
                     .italic()
 
-                Text(breakdown.calculation)
+                Text(breakdown.calculation(decimalPlaces))
             }
             .frame(minWidth: 0, maxWidth: .infinity, alignment: .topLeading)
             .padding(5)
@@ -162,9 +163,12 @@ struct CalculationBreakdownView: View {
 }
 
 #Preview {
-    CalculationBreakdownView(breakdown: CalculationBreakdown(
-        formula: "max(0, batteryCharge - batteryDischarge - gridImport + home + gridExport)",
-        calculation: "max(0, 7.6 - 7.4 - 4.9 + 9.4 + 3.1)"
-    ))
+    CalculationBreakdownView(
+        breakdown: CalculationBreakdown(
+            formula: "max(0, batteryCharge - batteryDischarge - gridImport + home + gridExport)",
+            calculation: { _ in "max(0, 7.6 - 7.4 - 4.9 + 9.4 + 3.1)" }
+        ),
+        decimalPlaces: 2
+    )
 }
 #endif

@@ -3582,6 +3582,9 @@
         }
       }
     },
+    "Energy Usage" : {
+
+    },
     "energy_stats_earnings_calculation_description" : {
       "localizations" : {
         "de" : {
@@ -4008,6 +4011,9 @@
         }
       }
     },
+    "Figures are approximate and assume the buy/sell energy prices remained constant throughout the period of ownership." : {
+
+    },
     "Financial Model" : {
       "localizations" : {
         "de" : {
@@ -4035,6 +4041,9 @@
           }
         }
       }
+    },
+    "Financials" : {
+
     },
     "Find out more about firmware versions from the " : {
       "localizations" : {
@@ -4534,6 +4543,9 @@
         }
       }
     },
+    "Grid Import Avoided" : {
+
+    },
     "Grid Import Unit price" : {
       "localizations" : {
         "de" : {
@@ -4766,6 +4778,9 @@
         }
       }
     },
+    "Hide breakdown" : {
+
+    },
     "Hide graph" : {
       "localizations" : {
         "de" : {
@@ -4951,6 +4966,9 @@
           }
         }
       }
+    },
+    "Includes data from %@ to Present" : {
+
     },
     "Invalid Battery Capacity" : {
       "localizations" : {
@@ -5201,6 +5219,9 @@
           }
         }
       }
+    },
+    "kWh" : {
+
     },
     "kWH" : {
       "localizations" : {
@@ -8836,6 +8857,9 @@
         }
       }
     },
+    "Show breakdown" : {
+
+    },
     "Show coloured flow lines" : {
       "localizations" : {
         "de" : {
@@ -9359,7 +9383,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Statistik werden von FoxESS für jeweils 1 Stunde, 1 Tag oder 1 Monat aufsummiert"
+            "value" : "Statistiken werden von FoxESS für jeweils 1 Stunde, 1 Tag oder 1 Monat aufsummiert"
           }
         },
         "es" : {
@@ -9999,6 +10023,9 @@
           }
         }
       }
+    },
+    "Usage" : {
+
     },
     "Usage today" : {
       "localizations" : {

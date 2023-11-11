@@ -9,7 +9,7 @@ import Foundation
 
 public struct FinanceAmount: Hashable, Identifiable {
     public let title: LocalizedString.Key
-    let amount: Double
+    public let amount: Double
     private let currencySymbol: String
 
     public init(title: LocalizedString.Key, amount: Double, currencySymbol: String) {
@@ -41,13 +41,13 @@ public struct EnergyStatsFinancialModel {
         exportIncome = FinanceAmount(title: .exportedIncomeShortTitle, amount: totalsViewModel.gridExport * config.feedInUnitPrice, currencySymbol: currencySymbol)
         exportBreakdown = CalculationBreakdown(
             formula: "gridExport * feedInUnitPrice",
-            calculation: "\(totalsViewModel.gridExport.roundedToString(decimalPlaces: 2)) * \(config.feedInUnitPrice.roundedToString(decimalPlaces: 2))"
+            calculation: { dp in "\(totalsViewModel.gridExport.roundedToString(decimalPlaces: dp)) * \(config.feedInUnitPrice.roundedToString(decimalPlaces: dp))" }
         )
 
         solarSaving = FinanceAmount(title: .gridImportAvoidedShortTitle, amount: (totalsViewModel.solar - totalsViewModel.gridExport) * config.gridImportUnitPrice, currencySymbol: currencySymbol)
         solarSavingBreakdown = CalculationBreakdown(
             formula: "(solar - gridExport) * gridImportUnitPrice",
-            calculation: "(\(totalsViewModel.solar.roundedToString(decimalPlaces: 2)) - \(totalsViewModel.gridExport.roundedToString(decimalPlaces: 2))) * \(config.gridImportUnitPrice)"
+            calculation: { dp in "(\(totalsViewModel.solar.roundedToString(decimalPlaces: dp)) - \(totalsViewModel.gridExport.roundedToString(decimalPlaces: dp))) * \(config.gridImportUnitPrice.roundedToString(decimalPlaces: dp))" }
         )
 
         total = FinanceAmount(title: .total, amount: exportIncome.amount + solarSaving.amount, currencySymbol: currencySymbol)

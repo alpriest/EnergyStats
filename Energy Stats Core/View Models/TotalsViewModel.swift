@@ -9,9 +9,9 @@ import Foundation
 
 public struct CalculationBreakdown {
     public let formula: String
-    public let calculation: String
+    public let calculation: (Int) -> String
 
-    public init(formula: String, calculation: String) {
+    public init(formula: String, calculation: @escaping (Int) -> String) {
         self.formula = formula
         self.calculation = calculation
     }
@@ -32,13 +32,16 @@ public struct TotalsViewModel {
                 feedIn: Double,
                 loads: Double,
                 batteryCharge: Double,
-                batteryDischarge: Double) {
+                batteryDischarge: Double)
+    {
         self.home = loads
         self.gridExport = feedIn
         self.gridImport = grid
         self.solar = max(0, batteryCharge - batteryDischarge - gridImport + home + gridExport)
         self.solarBreakdown = CalculationBreakdown(formula: "max(0, batteryCharge - batteryDischarge - gridImport + home + gridExport)",
-                                                   calculation: "max(0, \(batteryCharge.rounded(decimalPlaces: 2)) - \(batteryDischarge.rounded(decimalPlaces: 2)) - \(gridImport.rounded(decimalPlaces: 2)) + \(home.rounded(decimalPlaces: 2)) + \(gridExport.rounded(decimalPlaces: 2)))")
+                                                   calculation: { dp in
+                                                       "max(0, \(batteryCharge.roundedToString(decimalPlaces: dp)) - \(batteryDischarge.roundedToString(decimalPlaces: dp)) - \(grid.roundedToString(decimalPlaces: dp)) + \(loads.roundedToString(decimalPlaces: dp)) + \(grid.roundedToString(decimalPlaces: dp)))"
+                                                   })
     }
 
     public let home: Double
