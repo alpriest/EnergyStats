@@ -2926,6 +2926,9 @@
         }
       }
     },
+    "Date" : {
+
+    },
     "Day" : {
       "localizations" : {
         "de" : {
@@ -3582,9 +3585,6 @@
         }
       }
     },
-    "Energy Usage" : {
-
-    },
     "energy_stats_earnings_calculation_description" : {
       "localizations" : {
         "de" : {
@@ -4041,9 +4041,6 @@
           }
         }
       }
-    },
-    "Financials" : {
-
     },
     "Find out more about firmware versions from the " : {
       "localizations" : {
@@ -4543,9 +4540,6 @@
         }
       }
     },
-    "Grid Import Avoided" : {
-
-    },
     "Grid Import Unit price" : {
       "localizations" : {
         "de" : {
@@ -4777,9 +4771,6 @@
           }
         }
       }
-    },
-    "Hide breakdown" : {
-
     },
     "Hide graph" : {
       "localizations" : {
@@ -8857,9 +8848,6 @@
         }
       }
     },
-    "Show breakdown" : {
-
-    },
     "Show coloured flow lines" : {
       "localizations" : {
         "de" : {
@@ -9259,6 +9247,9 @@
           }
         }
       }
+    },
+    "Solar Forecast Today" : {
+
     },
     "Solar generated" : {
       "localizations" : {
@@ -10023,9 +10014,6 @@
           }
         }
       }
-    },
-    "Usage" : {
-
     },
     "Usage today" : {
       "localizations" : {

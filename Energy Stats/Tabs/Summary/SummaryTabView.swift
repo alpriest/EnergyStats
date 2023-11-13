@@ -63,6 +63,10 @@ struct SummaryTabView: View {
                         } else {
                             Text("Could not load approximations")
                         }
+
+                        if #available (iOS 16.0, *) {
+                            SolarForecastView(appTheme: appTheme)
+                        }
                     }
                 }
                 .padding()
@@ -89,7 +93,7 @@ struct SummaryTabView: View {
     @ViewBuilder
     private func moneySummaryRow(title: String, amount: Double?) -> some View {
         summaryRow(title: title, amount: amount) {
-            Text(FinanceAmount(title: .total, amount: $0, currencySymbol: "£").formattedAmount())
+            Text(FinanceAmount(title: .total, amount: $0, currencySymbol: "£").formattedAmount()) // TODO
                 .font(.system(size: 28))
                 .monospacedDigit()
         }

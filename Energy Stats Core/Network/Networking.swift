@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension URL {
+private extension URL {
     static var auth = URL(string: "https://www.foxesscloud.com/c/v0/user/login")!
     static var report = URL(string: "https://www.foxesscloud.com/c/v0/device/history/report")!
     static var raw = URL(string: "https://www.foxesscloud.com/c/v0/device/history/raw")!
