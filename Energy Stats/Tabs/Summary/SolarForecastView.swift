@@ -93,7 +93,8 @@ struct ForecastView: View {
                 .overlay {
                     Text(title)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                        .foregroundStyle(.black)
+                        .padding(2)
+                        .foregroundStyle(Color(uiColor: .label))
                 }
         }
         .chartXAxis(content: {
@@ -124,8 +125,15 @@ struct ForecastView: View {
     SolarForecastView(appTheme: AppTheme.mock(), viewModel: SolarForecastViewModel(configManager: PreviewConfigManager(), appTheme: CurrentValueSubject(AppTheme.mock())))
 }
 
-private class PreviewSolcast: SolarForecasting {
-    func fetchForecast() async throws -> SolcastForecastResponseList {
+@available(iOS 16.0, *)
+#Preview {
+    ForecastView(data: PreviewSolcast().fetchForecast().forecasts,
+                 appTheme: AppTheme.mock(),
+                 title: "Today")
+}
+
+private class PreviewSolcast {
+    func fetchForecast() -> SolcastForecastResponseList {
         SolcastForecastResponseList(forecasts: [
             SolcastForecastResponse(pv_estimate: 0, pv_estimate10: 0, pv_estimate90: 0, period_end: ISO8601DateFormatter().date(from: "2023-11-14T06:00:00Z")!),
             SolcastForecastResponse(pv_estimate: 0, pv_estimate10: 0, pv_estimate90: 0, period_end: ISO8601DateFormatter().date(from: "2023-11-14T06:30:00Z")!),

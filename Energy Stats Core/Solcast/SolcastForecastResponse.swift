@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct SolcastForecastResponseList: Decodable {
+public struct SolcastForecastResponseList: Codable {
     public let forecasts: [SolcastForecastResponse]
 
     public init(forecasts: [SolcastForecastResponse]) {
@@ -15,7 +15,7 @@ public struct SolcastForecastResponseList: Decodable {
     }
 }
 
-public struct SolcastForecastResponse: Decodable {
+public struct SolcastForecastResponse: Codable {
     public let pv_estimate: Double
     public let pv_estimate10: Double
     public let pv_estimate90: Double
