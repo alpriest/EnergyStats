@@ -6,16 +6,12 @@
 //
 
 import Charts
+import Combine
 import Energy_Stats_Core
 import SwiftUI
 
 extension SolcastForecastResponse: Identifiable {
     public var id: Double { period_end.timeIntervalSince1970 }
-}
-
-struct SolcastConfig: SolcastSolarForecastingConfiguration {
-    var resourceId: String = "6f0b-c4ca-8e82-464f"
-    var apiKey: String = "naXJZBtGUCUE8wX9a23pCaXxG0o1ub_e"
 }
 
 @available(iOS 16.0, *)
@@ -28,6 +24,16 @@ struct SolarForecastView: View {
             Text("Solar Forecasts")
                 .font(.largeTitle)
 
+            if viewModel.hasConfig {
+                loadedView()
+            } else {
+                Text("Visit the settings tab to configure Solcast")
+            }
+        }
+    }
+
+    private func loadedView() -> some View {
+        VStack(spacing: 8) {
             VStack(spacing: 22) {
                 ForecastView(data: viewModel.today, appTheme: appTheme, title: "Today")
                 ForecastView(data: viewModel.tomorrow, appTheme: appTheme, title: "Tomorrow")
@@ -115,7 +121,7 @@ struct ForecastView: View {
 
 @available(iOS 16.0, *)
 #Preview {
-    SolarForecastView(appTheme: AppTheme.mock(), viewModel: SolarForecastViewModel(service: PreviewSolcast()))
+    SolarForecastView(appTheme: AppTheme.mock(), viewModel: SolarForecastViewModel(configManager: PreviewConfigManager(), appTheme: CurrentValueSubject(AppTheme.mock())))
 }
 
 private class PreviewSolcast: SolarForecasting {

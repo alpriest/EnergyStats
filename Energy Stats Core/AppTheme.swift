@@ -40,6 +40,8 @@ public struct AppTheme {
     public var parameterGroups: [ParameterGroup]
     public var shouldCombineCT2WithPVPower: Bool
     public var showGraphValueDescriptions: Bool
+    public var solcastResourceId: String?
+    public var solcastApiKey: String?
 
     public init(
         showColouredLines: Bool,
@@ -66,7 +68,9 @@ public struct AppTheme {
         solarDefinitions: SolarRangeDefinitions,
         parameterGroups: [ParameterGroup],
         shouldCombineCT2WithPVPower: Bool,
-        showGraphValueDescriptions: Bool
+        showGraphValueDescriptions: Bool,
+        solcastResourceId: String?,
+        solcastApiKey: String?
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -93,6 +97,8 @@ public struct AppTheme {
         self.parameterGroups = parameterGroups
         self.shouldCombineCT2WithPVPower = shouldCombineCT2WithPVPower
         self.showGraphValueDescriptions = showGraphValueDescriptions
+        self.solcastResourceId = solcastResourceId
+        self.solcastApiKey = solcastApiKey
     }
 
     public func copy(
@@ -120,7 +126,9 @@ public struct AppTheme {
         solarDefinitions: SolarRangeDefinitions? = nil,
         parameterGroups: [ParameterGroup]? = nil,
         shouldCombineCT2WithPVPower: Bool? = nil,
-        showGraphValueDescriptions: Bool? = nil
+        showGraphValueDescriptions: Bool? = nil,
+        solcastResourceId: String? = nil,
+        solcastApiKey: String? = nil
     ) -> AppTheme {
         AppTheme(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -147,7 +155,9 @@ public struct AppTheme {
             solarDefinitions: solarDefinitions ?? self.solarDefinitions,
             parameterGroups: parameterGroups ?? self.parameterGroups,
             shouldCombineCT2WithPVPower: shouldCombineCT2WithPVPower ?? self.shouldCombineCT2WithPVPower,
-            showGraphValueDescriptions: showGraphValueDescriptions ?? self.showGraphValueDescriptions
+            showGraphValueDescriptions: showGraphValueDescriptions ?? self.showGraphValueDescriptions,
+            solcastResourceId: solcastResourceId ?? self.solcastResourceId,
+            solcastApiKey: solcastApiKey ?? self.solcastApiKey
         )
     }
 }

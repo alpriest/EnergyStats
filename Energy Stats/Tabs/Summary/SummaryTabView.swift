@@ -13,11 +13,15 @@ struct SummaryTabView: View {
     @StateObject var viewModel: SummaryTabViewModel
     @State private var appTheme: AppTheme
     private var appThemePublisher: LatestAppTheme
+    private let configManager: ConfigManaging
+    @StateObject private var solarForecastViewModel: SolarForecastViewModel
 
     init(configManager: ConfigManaging, networking: Networking, appThemePublisher: LatestAppTheme) {
+        self.configManager = configManager
         _viewModel = .init(wrappedValue: SummaryTabViewModel(configManager: configManager, networking: networking))
+        _solarForecastViewModel = .init(wrappedValue: SolarForecastViewModel(configManager: configManager, appTheme: appThemePublisher))
+        _appTheme = State(initialValue: appThemePublisher.value)
         self.appThemePublisher = appThemePublisher
-        self.appTheme = appThemePublisher.value
     }
 
     var body: some View {
@@ -61,7 +65,7 @@ struct SummaryTabView: View {
 
                         if #available (iOS 16.0, *) {
                             Divider()
-                            SolarForecastView(appTheme: appTheme, viewModel: SolarForecastViewModel(service: Solcast(config: SolcastConfig())))
+                            SolarForecastView(appTheme: appTheme, viewModel: solarForecastViewModel)
                         }
                     }
                 }

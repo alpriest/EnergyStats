@@ -39,7 +39,9 @@ public extension AppTheme {
             solarDefinitions: .default(),
             parameterGroups: DefaultParameterGroups(),
             shouldCombineCT2WithPVPower: true,
-            showGraphValueDescriptions: true
+            showGraphValueDescriptions: true,
+            solcastResourceId: nil,
+            solcastApiKey: nil
         )
     }
 }

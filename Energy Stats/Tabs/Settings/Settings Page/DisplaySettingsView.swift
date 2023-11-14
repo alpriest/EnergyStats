@@ -95,6 +95,12 @@ struct DisplaySettingsView: View {
         } label: {
             Text("Sun display variation thresholds")
         }
+
+        NavigationLink {
+            SolcastSettingsView(configManager: configManager)
+        } label: {
+            Text("Solcast Solar Prediction")
+        }
     }
 }
 

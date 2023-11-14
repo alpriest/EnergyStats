@@ -42,6 +42,8 @@ public protocol Config {
     var currencySymbol: String { get set }
     var shouldCombineCT2WithPVPower: Bool { get set }
     var showGraphValueDescriptions: Bool { get set }
+    var solcastResourceId: String? { get set }
+    var solcastApiKey: String? { get set }
 }
 
 extension UserDefaults {
@@ -87,6 +89,8 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "deviceBatteryOverrides")
         UserDefaults.shared.removeObject(forKey: "solarDefinitions")
         UserDefaults.shared.removeObject(forKey: "parameterGroups")
+        UserDefaults.shared.removeObject(forKey: "solcastResourceId")
+        UserDefaults.shared.removeObject(forKey: "solcastApiKey")
     }
 
     private func bool(from source: UserDefaults, forKey key: String, defaultValue: Bool) -> Bool {
@@ -230,6 +234,12 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredCodable(key: "parameterGroups", defaultValue: DefaultParameterGroups())
     public var parameterGroups: [ParameterGroup]
+
+    @UserDefaultsStoredOptionalString(key: "solcastResourceId")
+    public var solcastResourceId: String?
+
+    @UserDefaultsStoredOptionalString(key: "solcastApiKey")
+    public var solcastApiKey: String?
 }
 
 @propertyWrapper

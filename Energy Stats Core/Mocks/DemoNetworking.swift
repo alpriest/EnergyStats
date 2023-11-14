@@ -186,6 +186,8 @@ public class MockConfig: Config {
     public var parameterGroups: [ParameterGroup] = DefaultParameterGroups()
     public var currencySymbol: String = "£"
     public var shouldCombineCT2WithPVPower: Bool = true
+    public var solcastResourceId: String? = nil
+    public var solcastApiKey: String? = nil
 }
 
 public class PreviewConfigManager: ConfigManager {

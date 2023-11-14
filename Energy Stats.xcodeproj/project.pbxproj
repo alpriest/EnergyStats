@@ -94,6 +94,7 @@
 		4141B20028D86C7200B60157 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141B1FF28D86C7200B60157 /* UserManager.swift */; };
 		4141B20228D871B900B60157 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141B20128D871B900B60157 /* ContentView.swift */; };
 		41463D912AC44C7C00B2EB25 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 41463D902AC44C7C00B2EB25 /* Localizable.xcstrings */; };
+		4149DE9B2B03C3AC004F5FC6 /* SolcastSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4149DE9A2B03C3AC004F5FC6 /* SolcastSettingsView.swift */; };
 		414BF82829B4918300E2EB51 /* SettingsTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */; };
 		414D7A312AC8CE9C0083923F /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D7A302AC8CE9C0083923F /* Unit.swift */; };
 		414D7A332AC989030083923F /* FinancialModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D7A322AC989030083923F /* FinancialModel.swift */; };
@@ -401,6 +402,7 @@
 		4141B1FF28D86C7200B60157 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		4141B20128D871B900B60157 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		41463D902AC44C7C00B2EB25 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		4149DE9A2B03C3AC004F5FC6 /* SolcastSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolcastSettingsView.swift; sourceTree = "<group>"; };
 		414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabViewModel.swift; sourceTree = "<group>"; };
 		414D7A302AC8CE9C0083923F /* Unit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unit.swift; sourceTree = "<group>"; };
 		414D7A322AC989030083923F /* FinancialModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancialModel.swift; sourceTree = "<group>"; };
@@ -870,6 +872,14 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		4149DE992B03C3A0004F5FC6 /* Solcast Settings */ = {
+			isa = PBXGroup;
+			children = (
+				4149DE9A2B03C3AC004F5FC6 /* SolcastSettingsView.swift */,
+			);
+			path = "Solcast Settings";
+			sourceTree = "<group>";
+		};
 		416009892A8D18540096CCD9 /* Settings Page */ = {
 			isa = PBXGroup;
 			children = (
@@ -1057,6 +1067,7 @@
 		41E1DFDD28D87778001235B9 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				4149DE992B03C3A0004F5FC6 /* Solcast Settings */,
 				418EB4832ACC011C0021B87A /* Financials */,
 				4192F9972A86748F0035DAB8 /* Data Logger */,
 				4110290B2A71B704004018BB /* Battery Settings */,
@@ -1504,6 +1515,7 @@
 				41923E3E2916BC6F00D1A8C5 /* ParametersGraphView.swift in Sources */,
 				41AF2F432AA4C6C1008FCA2E /* HomePowerFooterView.swift in Sources */,
 				413BF2892A99F8A500A32B0D /* ApproximationsView.swift in Sources */,
+				4149DE9B2B03C3AC004F5FC6 /* SolcastSettingsView.swift in Sources */,
 				416AE4382A7D956E003D0122 /* AlertCopy.swift in Sources */,
 				410484C82AD49D95007F68C0 /* CT2-icon.swift in Sources */,
 				416318BE29DDD80E00C2C285 /* View+Copy.swift in Sources */,

@@ -14,7 +14,7 @@ public enum RefreshFrequency: Int {
     case FIVE_MINUTES = 5
 }
 
-public protocol ConfigManaging: FinancialConfigManaging {
+public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging {
     func fetchDevices() async throws
     func logout()
     func select(device: Device?)
@@ -56,6 +56,11 @@ public protocol ConfigManaging: FinancialConfigManaging {
     var currencySymbol: String { get set }
     var shouldCombineCT2WithPVPower: Bool { get set }
     var showGraphValueDescriptions: Bool { get set }
+}
+
+public protocol SolcastConfigManaging {
+    var solcastResourceId: String? { get set }
+    var solcastApiKey: String? { get set }
 }
 
 public protocol FinancialConfigManaging {
@@ -108,7 +113,9 @@ public class ConfigManager: ConfigManaging {
                 solarDefinitions: config.solarDefinitions,
                 parameterGroups: config.parameterGroups,
                 shouldCombineCT2WithPVPower: config.shouldCombineCT2WithPVPower,
-                showGraphValueDescriptions: config.showGraphValueDescriptions
+                showGraphValueDescriptions: config.showGraphValueDescriptions,
+                solcastResourceId: config.solcastResourceId,
+                solcastApiKey: config.solcastApiKey
             )
         )
         selectedDeviceID = selectedDeviceID
@@ -539,6 +546,26 @@ public class ConfigManager: ConfigManaging {
             config.shouldCombineCT2WithPVPower = newValue
             appTheme.send(appTheme.value.copy(
                 shouldCombineCT2WithPVPower: config.shouldCombineCT2WithPVPower
+            ))
+        }
+    }
+
+    public var solcastResourceId: String? {
+        get { config.solcastResourceId }
+        set {
+            config.solcastResourceId = newValue
+            appTheme.send(appTheme.value.copy(
+                solcastResourceId: config.solcastResourceId
+            ))
+        }
+    }
+
+    public var solcastApiKey: String? {
+        get { config.solcastApiKey }
+        set {
+            config.solcastApiKey = newValue
+            appTheme.send(appTheme.value.copy(
+                solcastApiKey: config.solcastApiKey
             ))
         }
     }
