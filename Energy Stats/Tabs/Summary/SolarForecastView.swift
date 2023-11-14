@@ -65,6 +65,7 @@ struct SolarForecastView: View {
 
 @available(iOS 16.0, *)
 struct ForecastView: View {
+    @State private var size: CGSize = .zero
     let data: [SolcastForecastResponse]
     let appTheme: AppTheme
     let title: String
@@ -97,6 +98,26 @@ struct ForecastView: View {
                         .foregroundStyle(Color(uiColor: .label))
                 }
         }
+        .chartOverlay { chartProxy in
+            GeometryReader { geometryReader in
+                if let elementLocation = chartProxy.position(forX: Date()) {
+                    let location = elementLocation - geometryReader[chartProxy.plotAreaFrame].origin.x
+
+                    Rectangle()
+                        .fill(Color.pink.opacity(0.5))
+                        .frame(width: 1, height: chartProxy.plotAreaSize.height * 0.92)
+                        .offset(x: location, y: chartProxy.plotAreaSize.height * 0.07)
+
+                    Text("now")
+                        .background(GeometryReader(content: { reader in
+                            Color.clear.onAppear { size = reader.size }.onChange(of: reader.size) { newValue in size = newValue }
+                        }))
+                        .font(.caption2)
+                        .foregroundStyle(Color.pink.opacity(0.5))
+                        .offset(x: location - size.width / 2, y: 0)
+                }
+            }
+        }
         .chartXAxis(content: {
             AxisMarks(values: .stride(by: .hour)) { value in
                 if (value.index == 0) || (value.index % 4 == 0), let date = value.as(Date.self) {
@@ -118,11 +139,6 @@ struct ForecastView: View {
         })
         .frame(height: 200)
     }
-}
-
-@available(iOS 16.0, *)
-#Preview {
-    SolarForecastView(appTheme: AppTheme.mock(), viewModel: SolarForecastViewModel(configManager: PreviewConfigManager(), appTheme: CurrentValueSubject(AppTheme.mock())))
 }
 
 @available(iOS 16.0, *)
