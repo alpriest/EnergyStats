@@ -2926,9 +2926,6 @@
         }
       }
     },
-    "Date" : {
-
-    },
     "Day" : {
       "localizations" : {
         "de" : {
@@ -4011,9 +4008,6 @@
         }
       }
     },
-    "Figures are approximate and assume the buy/sell energy prices remained constant throughout the period of ownership." : {
-
-    },
     "Financial Model" : {
       "localizations" : {
         "de" : {
@@ -4958,7 +4952,7 @@
         }
       }
     },
-    "Includes data from %@ to Present" : {
+    "Includes data from %@ to Present. Figures are approximate and assume the buy/sell energy prices remained constant throughout the period of ownership." : {
 
     },
     "Invalid Battery Capacity" : {
@@ -6623,6 +6617,12 @@
           }
         }
       }
+    },
+    "Prediction" : {
+
+    },
+    "Range of confidence" : {
+
     },
     "Rate this app" : {
       "localizations" : {
@@ -8392,6 +8392,9 @@
         }
       }
     },
+    "Self Sufficiency Estimates" : {
+
+    },
     "Self Use" : {
       "localizations" : {
         "de" : {
@@ -9248,7 +9251,7 @@
         }
       }
     },
-    "Solar Forecast Today" : {
+    "Solar Forecasts" : {
 
     },
     "Solar generated" : {
@@ -9670,6 +9673,9 @@
           }
         }
       }
+    },
+    "Time" : {
+
     },
     "Time period 1" : {
       "extractionState" : "manual",

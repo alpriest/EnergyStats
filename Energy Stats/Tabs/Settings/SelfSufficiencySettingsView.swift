@@ -5,46 +5,63 @@
 //  Created by Alistair Priest on 29/06/2023.
 //
 
-import SwiftUI
 import Energy_Stats_Core
+import SwiftUI
+
+class SelfSufficiencySettingsViewModel: ObservableObject {
+    @Published var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode {
+        didSet {
+            configManager.selfSufficiencyEstimateMode = selfSufficiencyEstimateMode
+        }
+    }
+
+    private(set) var configManager: ConfigManaging
+
+    init(configManager: ConfigManaging) {
+        self.configManager = configManager
+        selfSufficiencyEstimateMode = configManager.selfSufficiencyEstimateMode
+    }
+}
 
 struct SelfSufficiencySettingsView: View {
-    @Binding var mode: SelfSufficiencyEstimateMode
     @State private var internalMode: Int
+    @StateObject private var viewModel: SelfSufficiencySettingsViewModel
 
-    init(mode: Binding<SelfSufficiencyEstimateMode>) {
-        self._mode = mode
-        self.internalMode = mode.wrappedValue.rawValue
+    init(configManager: ConfigManaging) {
+        _viewModel = .init(wrappedValue: SelfSufficiencySettingsViewModel(configManager: configManager))
+        internalMode = configManager.selfSufficiencyEstimateMode.rawValue
     }
 
     var body: some View {
-        Section {
-            Picker("Self sufficiency estimates", selection: $internalMode) {
-                Text("Off").tag(0)
-                Text("Net").tag(1)
-                Text("Absolute").tag(2)
-            }.pickerStyle(.segmented)
-        } header: {
-            Text("Self sufficiency estimates")
-        } footer: {
-            switch internalMode {
-            case SelfSufficiencyEstimateMode.absolute.rawValue:
-                Text("absolute_self_sufficiency")
-            case SelfSufficiencyEstimateMode.net.rawValue:
-                Text("net_self_sufficiency")
-            default:
-                Text("no_self_sufficiency")
+        Form {
+            Section {
+                Picker("Self sufficiency estimates", selection: $internalMode) {
+                    Text("Off").tag(0)
+                    Text("Net").tag(1)
+                    Text("Absolute").tag(2)
+                }.pickerStyle(.segmented)
+            } footer: {
+                switch internalMode {
+                case SelfSufficiencyEstimateMode.absolute.rawValue:
+                    Text("absolute_self_sufficiency")
+                case SelfSufficiencyEstimateMode.net.rawValue:
+                    Text("net_self_sufficiency")
+                default:
+                    Text("no_self_sufficiency")
+                }
+            }.onChange(of: internalMode) { newValue in
+                viewModel.selfSufficiencyEstimateMode = SelfSufficiencyEstimateMode(rawValue: newValue) ?? .off
             }
-        }.onChange(of: internalMode) { newValue in
-            mode = SelfSufficiencyEstimateMode(rawValue: newValue) ?? .off
         }
+        .navigationTitle("Self sufficiency estimates")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 struct SelfSufficiencySettingsView_Previews: PreviewProvider {
     static var previews: some View {
         Form {
-            SelfSufficiencySettingsView(mode: .constant(.net))
+            SelfSufficiencySettingsView(configManager: PreviewConfigManager())
         }
     }
 }

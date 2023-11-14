@@ -26,7 +26,7 @@ struct ParametersGraphView: View {
             .foregroundStyle($0.type.colour)
         }
         .chartPlotStyle { content in
-            content.background(Color.gray.gradient.opacity(0.02))
+            content.background(Color.gray.gradient.opacity(0.04))
         }
         .chartXAxis(content: {
             AxisMarks(values: .stride(by: .hour)) { value in

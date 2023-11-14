@@ -50,18 +50,18 @@ struct TabbedView: View {
                     .accessibilityIdentifier("parameters_tab")
                 }
 
-//            SummaryTabView(configManager: configManager, networking: networking, appThemePublisher: configManager.appTheme)
-//                .tabItem {
-//                    VStack {
-//                        if #available(iOS 17.0, *) {
-//                            Image(systemName: "book.pages")
-//                        } else {
-//                            Image(systemName: "book")
-//                        }
-//                        Text("Summary")
-//                    }
-//                    .accessibilityIdentifier("summary_tab")
-//                }
+            SummaryTabView(configManager: configManager, networking: networking, appThemePublisher: configManager.appTheme)
+                .tabItem {
+                    VStack {
+                        if #available(iOS 17.0, *) {
+                            Image(systemName: "book.pages")
+                        } else {
+                            Image(systemName: "book")
+                        }
+                        Text("Summary")
+                    }
+                    .accessibilityIdentifier("summary_tab")
+                }
 
             SettingsTabView(viewModel: settingsTabViewModel, configManager: configManager, networking: networking)
                 .tabItem {

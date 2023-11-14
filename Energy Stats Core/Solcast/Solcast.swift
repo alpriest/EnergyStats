@@ -51,7 +51,22 @@ public class Solcast: SolarForecasting {
 
             guard 200 ... 300 ~= statusCode else { throw NetworkError.invalidResponse(request.url, statusCode) }
 
-            let networkResponse: T = try JSONDecoder().decode(T.self, from: data)
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .custom({ (decoder) -> Date in
+                let container = try decoder.singleValueContainer()
+                let dateString = try container.decode(String.self)
+
+                let formatter = ISO8601DateFormatter()
+                formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+
+                if let date = formatter.date(from: dateString) {
+                    return date
+                } else {
+                    throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid date format")
+                }
+            })
+            
+            let networkResponse: T = try decoder.decode(T.self, from: data)
             return networkResponse
         } catch let error as NSError {
             if error.domain == NSURLErrorDomain, error.code == URLError.notConnectedToInternet.rawValue {

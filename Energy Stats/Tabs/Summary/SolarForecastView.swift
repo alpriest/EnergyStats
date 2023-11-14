@@ -20,76 +20,137 @@ struct SolcastConfig: SolcastSolarForecastingConfiguration {
 
 @available(iOS 16.0, *)
 struct SolarForecastView: View {
-    @State private var data: [SolcastForecastResponse] = []
-//    var foo = [
-//        SolarForecast(estimate: 0, estimate10: 0, estimate90: 0, period: ISO8601DateFormatter().date(from: "2023-11-14T06:00:00Z")!),
-//        SolarForecast(estimate: 0, estimate10: 0, estimate90: 0, period: ISO8601DateFormatter().date(from: "2023-11-14T06:30:00Z")!),
-//        SolarForecast(estimate: 0, estimate10: 0, estimate90: 0, period: ISO8601DateFormatter().date(from: "2023-11-14T07:00:00Z")!),
-//        SolarForecast(estimate: 0, estimate10: 0, estimate90: 0, period: ISO8601DateFormatter().date(from: "2023-11-14T07:30:00Z")!),
-//        SolarForecast(estimate: 0.0084, estimate10: 0.0056, estimate90: 0.0167, period: ISO8601DateFormatter().date(from: "2023-11-14T08:00:00Z")!),
-//        SolarForecast(estimate: 0.0501, estimate10: 0.0223, estimate90: 0.0891, period: ISO8601DateFormatter().date(from: "2023-11-14T08:30:00Z")!),
-//        SolarForecast(estimate: 0.0975, estimate10: 0.0418, estimate90: 0.1811, period: ISO8601DateFormatter().date(from: "2023-11-14T09:00:00Z")!),
-//        SolarForecast(estimate: 0.1635, estimate10: 0.0771, estimate90: 0.4012, period: ISO8601DateFormatter().date(from: "2023-11-14T09:30:00Z")!),
-//        SolarForecast(estimate: 0.3364, estimate10: 0.1377, estimate90: 0.746, period: ISO8601DateFormatter().date(from: "2023-11-14T10:00:00Z")!),
-//        SolarForecast(estimate: 0.4891, estimate10: 0.2125, estimate90: 1.1081, period: ISO8601DateFormatter().date(from: "2023-11-14T10:30:00Z")!),
-//        SolarForecast(estimate: 0.609, estimate10: 0.2531, estimate90: 1.505, period: ISO8601DateFormatter().date(from: "2023-11-14T11:00:00Z")!),
-//        SolarForecast(estimate: 0.7061, estimate10: 0.2835, estimate90: 1.8413, period: ISO8601DateFormatter().date(from: "2023-11-14T11:30:00Z")!),
-//        SolarForecast(estimate: 0.7667, estimate10: 0.2936, estimate90: 2.09, period: ISO8601DateFormatter().date(from: "2023-11-14T12:00:00Z")!),
-//        SolarForecast(estimate: 0.8404, estimate10: 0.3037, estimate90: 2.3005, period: ISO8601DateFormatter().date(from: "2023-11-14T12:30:00Z")!),
-//        SolarForecast(estimate: 0.9307, estimate10: 0.3138, estimate90: 2.5050, period: ISO8601DateFormatter().date(from: "2023-11-14T13:00:00Z")!),
-//        SolarForecast(estimate: 0.9832, estimate10: 0.3087, estimate90: 2.5392, period: ISO8601DateFormatter().date(from: "2023-11-14T13:30:00Z")!),
-//        SolarForecast(estimate: 0.9438, estimate10: 0.2733, estimate90: 2.5179, period: ISO8601DateFormatter().date(from: "2023-11-14T14:00:00Z")!),
-//        SolarForecast(estimate: 0.8035, estimate10: 0.1973, estimate90: 2.8682, period: ISO8601DateFormatter().date(from: "2023-11-14T14:30:00Z")!),
-//        SolarForecast(estimate: 0.5897, estimate10: 0.128, estimate90: 2.5599, period: ISO8601DateFormatter().date(from: "2023-11-14T15:00:00Z")!),
-//        SolarForecast(estimate: 0.1594, estimate10: 0.0716, estimate90: 1.6839, period: ISO8601DateFormatter().date(from: "2023-11-14T15:30:00Z")!),
-//        SolarForecast(estimate: 0.0496, estimate10: 0.0248, estimate90: 0.6277, period: ISO8601DateFormatter().date(from: "2023-11-14T16:00:00Z")!),
-//        SolarForecast(estimate: 0.0028, estimate10: 0.0028, estimate90: 0.0055, period: ISO8601DateFormatter().date(from: "2023-11-14T16:30:00Z")!),
-//        SolarForecast(estimate: 0, estimate10: 0, estimate90: 0, period: ISO8601DateFormatter().date(from: "2023-11-14T17:00:00Z")!),
-//        SolarForecast(estimate: 0, estimate10: 0, estimate90: 0, period: ISO8601DateFormatter().date(from: "2023-11-14T17:30:00Z")!),
-//        SolarForecast(estimate: 0, estimate10: 0, estimate90: 0, period: ISO8601DateFormatter().date(from: "2023-11-14T18:00:00Z")!),
-//        SolarForecast(estimate: 0, estimate10: 0, estimate90: 0, period: ISO8601DateFormatter().date(from: "2023-11-14T18:30:00Z")!),
-//        SolarForecast(estimate: 0, estimate10: 0, estimate90: 0, period: ISO8601DateFormatter().date(from: "2023-11-14T19:00:00Z")!),
-//        SolarForecast(estimate: 0, estimate10: 0, estimate90: 0, period: ISO8601DateFormatter().date(from: "2023-11-14T19:30:00Z")!),
-//        SolarForecast(estimate: 0, estimate10: 0, estimate90: 0, period: ISO8601DateFormatter().date(from: "2023-11-14T20:00:00Z")!),
-//        SolarForecast(estimate: 0, estimate10: 0, estimate90: 0, period: ISO8601DateFormatter().date(from: "2023-11-14T20:30:00Z")!),
-//    ]
-    let service = Solcast(config: SolcastConfig())
     let appTheme: AppTheme
+    @ObservedObject var viewModel: SolarForecastViewModel
 
     var body: some View {
-        VStack(spacing: 44) {
-            VStack(spacing: 8) {
-                Text("Solar Forecast Today")
-                    .font(.title2)
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Solar Forecasts")
+                .font(.largeTitle)
 
-                ZStack {
-                    Chart {
-                        ForEach(data) { data in
-                            AreaMark(x: .value("Date", data.period_end),
-                                     yStart: .value("kWh", data.pv_estimate10),
-                                     yEnd: .value("kWh", data.pv_estimate90))
-                                .foregroundStyle(Color.yellow.gradient)
-                                .opacity(0.2)
+            VStack(spacing: 22) {
+                ForecastView(data: viewModel.today, appTheme: appTheme, title: "Today")
+                ForecastView(data: viewModel.tomorrow, appTheme: appTheme, title: "Tomorrow")
 
-                            LineMark(
-                                x: .value("Date", data.period_end),
-                                y: .value("kWh", data.pv_estimate)
-                            )
-                            .foregroundStyle(Color.blue)
-                            .lineStyle(StrokeStyle(lineWidth: 2, dash: [5, 5], dashPhase: 0))
-                        }
-                        .interpolationMethod(.catmullRom)
-                    }
-                    .frame(height: 200)
+                HStack {
+                    MidYHorizontalLine()
+                        .stroke(style: StrokeStyle(lineWidth: 2, dash: [5, 5], dashPhase: 0))
+                        .foregroundStyle(Color.blue)
+                        .frame(width: 20, height: 5)
+
+                    Text("Prediction")
+
+                    Rectangle()
+                        .foregroundStyle(Color.yellow.gradient.opacity(0.2))
+                        .frame(width: 20, height: 15)
+
+                    Text("Range of confidence")
                 }
+                .padding(.top)
+                .font(.footnote)
             }
-        }.task {
-            Task { self.data = try await service.fetchForecast().forecasts }
+        }
+        .loadable($viewModel.state, retry: { viewModel.load() })
+        .onAppear {
+            self.viewModel.load()
         }
     }
 }
 
 @available(iOS 16.0, *)
+struct ForecastView: View {
+    let data: [SolcastForecastResponse]
+    let appTheme: AppTheme
+    let title: String
+
+    var body: some View {
+        Chart {
+            ForEach(data) { data in
+                AreaMark(x: .value("Time", data.period_end),
+                         yStart: .value("kWh", data.pv_estimate10),
+                         yEnd: .value("kWh", data.pv_estimate90))
+                    .foregroundStyle(Color.yellow.gradient.opacity(0.2))
+
+                LineMark(
+                    x: .value("Time", data.period_end),
+                    y: .value("kWh", data.pv_estimate)
+                )
+                .foregroundStyle(Color.blue)
+                .lineStyle(StrokeStyle(lineWidth: 2, dash: [5, 5], dashPhase: 0))
+            }
+            .interpolationMethod(.catmullRom)
+        }
+        .chartLegend(.hidden)
+        .chartPlotStyle { content in
+            content
+                .background(Color.gray.gradient.opacity(0.04))
+                .overlay {
+                    Text(title)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                        .foregroundStyle(.black)
+                }
+        }
+        .chartXAxis(content: {
+            AxisMarks(values: .stride(by: .hour)) { value in
+                if (value.index == 0) || (value.index % 4 == 0), let date = value.as(Date.self) {
+                    AxisTick(centered: false)
+                    AxisValueLabel(centered: false) {
+                        Text(date, format: .dateTime.hour())
+                    }
+                }
+            }
+        })
+        .chartYAxis(content: {
+            AxisMarks { value in
+                if let amount = value.as(Double.self) {
+                    AxisValueLabel {
+                        EnergyText(amount: amount, appTheme: appTheme, type: .default, decimalPlaceOverride: 0)
+                    }
+                }
+            }
+        })
+        .frame(height: 200)
+    }
+}
+
+@available(iOS 16.0, *)
 #Preview {
-    SolarForecastView(appTheme: AppTheme.mock())
+    SolarForecastView(appTheme: AppTheme.mock(), viewModel: SolarForecastViewModel(service: PreviewSolcast()))
+}
+
+private class PreviewSolcast: SolarForecasting {
+    func fetchForecast() async throws -> SolcastForecastResponseList {
+        SolcastForecastResponseList(forecasts: [
+            SolcastForecastResponse(pv_estimate: 0, pv_estimate10: 0, pv_estimate90: 0, period_end: ISO8601DateFormatter().date(from: "2023-11-14T06:00:00Z")!),
+            SolcastForecastResponse(pv_estimate: 0, pv_estimate10: 0, pv_estimate90: 0, period_end: ISO8601DateFormatter().date(from: "2023-11-14T06:30:00Z")!),
+            SolcastForecastResponse(pv_estimate: 0, pv_estimate10: 0, pv_estimate90: 0, period_end: ISO8601DateFormatter().date(from: "2023-11-14T07:00:00Z")!),
+            SolcastForecastResponse(pv_estimate: 0, pv_estimate10: 0, pv_estimate90: 0, period_end: ISO8601DateFormatter().date(from: "2023-11-14T07:30:00Z")!),
+            SolcastForecastResponse(pv_estimate: 0.0084, pv_estimate10: 0.0056, pv_estimate90: 0.0167, period_end: ISO8601DateFormatter().date(from: "2023-11-14T08:00:00Z")!),
+            SolcastForecastResponse(pv_estimate: 0.0501, pv_estimate10: 0.0223, pv_estimate90: 0.0891, period_end: ISO8601DateFormatter().date(from: "2023-11-14T08:30:00Z")!),
+            SolcastForecastResponse(pv_estimate: 0.0975, pv_estimate10: 0.0418, pv_estimate90: 0.1811, period_end: ISO8601DateFormatter().date(from: "2023-11-14T09:00:00Z")!),
+            SolcastForecastResponse(pv_estimate: 0.1635, pv_estimate10: 0.0771, pv_estimate90: 0.4012, period_end: ISO8601DateFormatter().date(from: "2023-11-14T09:30:00Z")!),
+            SolcastForecastResponse(pv_estimate: 0.3364, pv_estimate10: 0.1377, pv_estimate90: 0.746, period_end: ISO8601DateFormatter().date(from: "2023-11-14T10:00:00Z")!),
+            SolcastForecastResponse(pv_estimate: 0.4891, pv_estimate10: 0.2125, pv_estimate90: 1.1081, period_end: ISO8601DateFormatter().date(from: "2023-11-14T10:30:00Z")!),
+            SolcastForecastResponse(pv_estimate: 0.609, pv_estimate10: 0.2531, pv_estimate90: 1.505, period_end: ISO8601DateFormatter().date(from: "2023-11-14T11:00:00Z")!),
+            SolcastForecastResponse(pv_estimate: 0.7061, pv_estimate10: 0.2835, pv_estimate90: 1.8413, period_end: ISO8601DateFormatter().date(from: "2023-11-14T11:30:00Z")!),
+            SolcastForecastResponse(pv_estimate: 0.7667, pv_estimate10: 0.2936, pv_estimate90: 2.09, period_end: ISO8601DateFormatter().date(from: "2023-11-14T12:00:00Z")!),
+            SolcastForecastResponse(pv_estimate: 0.8404, pv_estimate10: 0.3037, pv_estimate90: 2.3005, period_end: ISO8601DateFormatter().date(from: "2023-11-14T12:30:00Z")!),
+            SolcastForecastResponse(pv_estimate: 0.9307, pv_estimate10: 0.3138, pv_estimate90: 2.5050, period_end: ISO8601DateFormatter().date(from: "2023-11-14T13:00:00Z")!),
+            SolcastForecastResponse(pv_estimate: 0.9832, pv_estimate10: 0.3087, pv_estimate90: 2.5392, period_end: ISO8601DateFormatter().date(from: "2023-11-14T13:30:00Z")!),
+            SolcastForecastResponse(pv_estimate: 0.9438, pv_estimate10: 0.2733, pv_estimate90: 2.5179, period_end: ISO8601DateFormatter().date(from: "2023-11-14T14:00:00Z")!),
+            SolcastForecastResponse(pv_estimate: 0.8035, pv_estimate10: 0.1973, pv_estimate90: 2.8682, period_end: ISO8601DateFormatter().date(from: "2023-11-14T14:30:00Z")!),
+            SolcastForecastResponse(pv_estimate: 0.5897, pv_estimate10: 0.128, pv_estimate90: 2.5599, period_end: ISO8601DateFormatter().date(from: "2023-11-14T15:00:00Z")!),
+            SolcastForecastResponse(pv_estimate: 0.1594, pv_estimate10: 0.0716, pv_estimate90: 1.6839, period_end: ISO8601DateFormatter().date(from: "2023-11-14T15:30:00Z")!),
+            SolcastForecastResponse(pv_estimate: 0.0496, pv_estimate10: 0.0248, pv_estimate90: 0.6277, period_end: ISO8601DateFormatter().date(from: "2023-11-14T16:00:00Z")!),
+            SolcastForecastResponse(pv_estimate: 0.0028, pv_estimate10: 0.0028, pv_estimate90: 0.0055, period_end: ISO8601DateFormatter().date(from: "2023-11-14T16:30:00Z")!),
+            SolcastForecastResponse(pv_estimate: 0, pv_estimate10: 0, pv_estimate90: 0, period_end: ISO8601DateFormatter().date(from: "2023-11-14T17:00:00Z")!),
+            SolcastForecastResponse(pv_estimate: 0, pv_estimate10: 0, pv_estimate90: 0, period_end: ISO8601DateFormatter().date(from: "2023-11-14T17:30:00Z")!),
+            SolcastForecastResponse(pv_estimate: 0, pv_estimate10: 0, pv_estimate90: 0, period_end: ISO8601DateFormatter().date(from: "2023-11-14T18:00:00Z")!),
+            SolcastForecastResponse(pv_estimate: 0, pv_estimate10: 0, pv_estimate90: 0, period_end: ISO8601DateFormatter().date(from: "2023-11-14T18:30:00Z")!),
+            SolcastForecastResponse(pv_estimate: 0, pv_estimate10: 0, pv_estimate90: 0, period_end: ISO8601DateFormatter().date(from: "2023-11-14T19:00:00Z")!),
+            SolcastForecastResponse(pv_estimate: 0, pv_estimate10: 0, pv_estimate90: 0, period_end: ISO8601DateFormatter().date(from: "2023-11-14T19:30:00Z")!),
+            SolcastForecastResponse(pv_estimate: 0, pv_estimate10: 0, pv_estimate90: 0, period_end: ISO8601DateFormatter().date(from: "2023-11-14T20:00:00Z")!),
+            SolcastForecastResponse(pv_estimate: 0, pv_estimate10: 0, pv_estimate90: 0, period_end: ISO8601DateFormatter().date(from: "2023-11-14T20:30:00Z")!)
+        ])
+    }
 }

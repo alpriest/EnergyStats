@@ -51,21 +51,17 @@ struct SummaryTabView: View {
                                 moneySummaryRow(title: "Total benefit", amount: earnings.cumulate.earnings)
                             }
 
-                            Text("Includes data from \(viewModel.oldestDataDate) to Present")
-                                .font(.footnote)
-                                .padding(.top)
-                                .foregroundStyle(.secondary)
-
-                            Text("Figures are approximate and assume the buy/sell energy prices remained constant throughout the period of ownership.")
-                                .font(.footnote)
-                                .padding(.top)
+                            Text("Includes data from \(viewModel.oldestDataDate) to Present. Figures are approximate and assume the buy/sell energy prices remained constant throughout the period of ownership.")
+                                .font(.caption2)
+                                .padding(.vertical)
                                 .foregroundStyle(.secondary)
                         } else {
                             Text("Could not load approximations")
                         }
 
                         if #available (iOS 16.0, *) {
-                            SolarForecastView(appTheme: appTheme)
+                            Divider()
+                            SolarForecastView(appTheme: appTheme, viewModel: SolarForecastViewModel(service: Solcast(config: SolcastConfig())))
                         }
                     }
                 }
@@ -85,7 +81,7 @@ struct SummaryTabView: View {
     private func energySummaryRow(title: String, amount: Double?) -> some View {
         summaryRow(title: title, amount: amount) {
             EnergyText(amount: $0, appTheme: appTheme, type: .default, decimalPlaceOverride: 0)
-                .font(.system(size: 28))
+                .font(.title2)
                 .monospacedDigit()
         }
     }
@@ -94,7 +90,7 @@ struct SummaryTabView: View {
     private func moneySummaryRow(title: String, amount: Double?) -> some View {
         summaryRow(title: title, amount: amount) {
             Text(FinanceAmount(title: .total, amount: $0, currencySymbol: "£").formattedAmount()) // TODO
-                .font(.system(size: 28))
+                .font(.title2)
                 .monospacedDigit()
         }
     }
@@ -104,7 +100,7 @@ struct SummaryTabView: View {
         if let amount {
             HStack {
                 Text(title)
-                    .font(.system(size: 28))
+                    .font(.title2)
 
                 Spacer()
 

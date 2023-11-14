@@ -78,11 +78,17 @@ struct DisplaySettingsView: View {
         }
 
         NavigationLink {
-            ApproximationsSettingsView(configManager: configManager)
+            SelfSufficiencySettingsView(configManager: configManager)
         } label: {
-            Text("Approximations")
+            Text("Self Sufficiency Estimates")
         }
-        .accessibilityIdentifier("approximations")
+
+        NavigationLink {
+            FinancialsSettingsView(configManager: configManager)
+        } label: {
+            Text("Financial Model")
+        }
+        .accessibilityIdentifier("financials")
 
         NavigationLink {
             SolarBandingSettingsView(configManager: configManager)

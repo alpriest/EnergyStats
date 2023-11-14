@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		41009A712B02CD59009D853B /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41009A702B02CD59009D853B /* API.swift */; };
+		41009A712B02CD59009D853B /* Solcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41009A702B02CD59009D853B /* Solcast.swift */; };
 		41009A732B02D852009D853B /* SolcastForecastResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41009A722B02D852009D853B /* SolcastForecastResponse.swift */; };
+		41009A752B03B13A009D853B /* SolarForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41009A742B03B13A009D853B /* SolarForecastViewModel.swift */; };
 		4103D1CF29DB6C4D001B0BC8 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146128C7146300EA5BA1 /* Auth.swift */; };
 		4103D1D029DB6C51001B0BC8 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146428C714C000EA5BA1 /* Report.swift */; };
 		4103D1D129DB6C51001B0BC8 /* Raw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D7B12328C86E4000E14144 /* Raw.swift */; };
@@ -96,8 +97,6 @@
 		414BF82829B4918300E2EB51 /* SettingsTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */; };
 		414D7A312AC8CE9C0083923F /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D7A302AC8CE9C0083923F /* Unit.swift */; };
 		414D7A332AC989030083923F /* FinancialModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D7A322AC989030083923F /* FinancialModel.swift */; };
-		414D7A352AC9D5220083923F /* ApproximationsSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D7A342AC9D5220083923F /* ApproximationsSettingsViewModel.swift */; };
-		414FB0D82A924E3D00845486 /* ApproximationsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414FB0D72A924E3D00845486 /* ApproximationsSettingsView.swift */; };
 		4160098B2A8D18B10096CCD9 /* SettingsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4160098A2A8D18B10096CCD9 /* SettingsFooterView.swift */; };
 		4160098D2A8D1A690096CCD9 /* BottomButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4160098C2A8D1A690096CCD9 /* BottomButtonsView.swift */; };
 		41626CD029D969E9003FEB00 /* InverterFirmwareVersionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41626CCF29D969E9003FEB00 /* InverterFirmwareVersionsView.swift */; };
@@ -326,8 +325,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		41009A702B02CD59009D853B /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		41009A702B02CD59009D853B /* Solcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Solcast.swift; sourceTree = "<group>"; };
 		41009A722B02D852009D853B /* SolcastForecastResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolcastForecastResponse.swift; sourceTree = "<group>"; };
+		41009A742B03B13A009D853B /* SolarForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarForecastViewModel.swift; sourceTree = "<group>"; };
 		41028F9428CDD7A300FB70FD /* OptionalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalView.swift; sourceTree = "<group>"; };
 		4103D1CD29DB6C43001B0BC8 /* WatchContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchContentViewModel.swift; sourceTree = "<group>"; };
 		4103D1E029DB6CB9001B0BC8 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
@@ -404,8 +404,6 @@
 		414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabViewModel.swift; sourceTree = "<group>"; };
 		414D7A302AC8CE9C0083923F /* Unit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unit.swift; sourceTree = "<group>"; };
 		414D7A322AC989030083923F /* FinancialModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancialModel.swift; sourceTree = "<group>"; };
-		414D7A342AC9D5220083923F /* ApproximationsSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproximationsSettingsViewModel.swift; sourceTree = "<group>"; };
-		414FB0D72A924E3D00845486 /* ApproximationsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproximationsSettingsView.swift; sourceTree = "<group>"; };
 		4160098A2A8D18B10096CCD9 /* SettingsFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFooterView.swift; sourceTree = "<group>"; };
 		4160098C2A8D1A690096CCD9 /* BottomButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButtonsView.swift; sourceTree = "<group>"; };
 		41626CCB29D95E37003FEB00 /* AddressBookResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressBookResponse.swift; sourceTree = "<group>"; };
@@ -599,7 +597,7 @@
 		41009A6F2B02CD50009D853B /* Solcast */ = {
 			isa = PBXGroup;
 			children = (
-				41009A702B02CD59009D853B /* API.swift */,
+				41009A702B02CD59009D853B /* Solcast.swift */,
 				41009A722B02D852009D853B /* SolcastForecastResponse.swift */,
 			);
 			path = Solcast;
@@ -872,15 +870,6 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
-		414FB0D62A924E3100845486 /* Approximations */ = {
-			isa = PBXGroup;
-			children = (
-				414FB0D72A924E3D00845486 /* ApproximationsSettingsView.swift */,
-				414D7A342AC9D5220083923F /* ApproximationsSettingsViewModel.swift */,
-			);
-			path = Approximations;
-			sourceTree = "<group>";
-		};
 		416009892A8D18540096CCD9 /* Settings Page */ = {
 			isa = PBXGroup;
 			children = (
@@ -936,6 +925,7 @@
 				418C6E942AFAC3BF000DE35F /* SummaryTabView.swift */,
 				418C6E962AFAC7E4000DE35F /* SummaryTabViewModel.swift */,
 				411DF2732AFD404E00CEEB23 /* SolarForecastView.swift */,
+				41009A742B03B13A009D853B /* SolarForecastViewModel.swift */,
 			);
 			path = Summary;
 			sourceTree = "<group>";
@@ -1068,7 +1058,6 @@
 			isa = PBXGroup;
 			children = (
 				418EB4832ACC011C0021B87A /* Financials */,
-				414FB0D62A924E3100845486 /* Approximations */,
 				4192F9972A86748F0035DAB8 /* Data Logger */,
 				4110290B2A71B704004018BB /* Battery Settings */,
 				416AE4342A7D2C67003D0122 /* Inverter */,
@@ -1466,7 +1455,6 @@
 				4160098B2A8D18B10096CCD9 /* SettingsFooterView.swift in Sources */,
 				411029172A71C975004018BB /* ChargeTimePeriod.swift in Sources */,
 				4141B20228D871B900B60157 /* ContentView.swift in Sources */,
-				414D7A352AC9D5220083923F /* ApproximationsSettingsViewModel.swift in Sources */,
 				417153E829F2D80C00639A7B /* Date+compare.swift in Sources */,
 				418141452A12BABA00FFC6A6 /* StatsGraphView.swift in Sources */,
 				4134ACC42A88A1A800CB4BA8 /* InverterView.swift in Sources */,
@@ -1479,9 +1467,9 @@
 				41CD1F322A1414C1006B0C00 /* StatsGraphVariableToggles.swift in Sources */,
 				4160098D2A8D1A690096CCD9 /* BottomButtonsView.swift in Sources */,
 				4110291D2A72AFC2004018BB /* BatterySOCSettingsViewModel.swift in Sources */,
-				414FB0D82A924E3D00845486 /* ApproximationsSettingsView.swift in Sources */,
 				419DFA862A12930E0067313A /* DatePickerView.swift in Sources */,
 				416318B929DDD44C00C2C285 /* DebugDataView.swift in Sources */,
+				41009A752B03B13A009D853B /* SolarForecastViewModel.swift in Sources */,
 				41E4B31328DB77A3003F7F47 /* HomePowerView.swift in Sources */,
 				41C249A52A77FC7400D8E9E7 /* FoxESSCloudStatusView.swift in Sources */,
 				41A25D3D28CA5CDF00315714 /* ParametersGraphTabView.swift in Sources */,
@@ -1564,7 +1552,7 @@
 				4103D1D829DB6C51001B0BC8 /* NetworkFacade.swift in Sources */,
 				418547492A3A1C7A000128C7 /* PowerAmountView.swift in Sources */,
 				41E8E7262AAE0D0D00DC4B89 /* SolarRangeDefinitions.swift in Sources */,
-				41009A712B02CD59009D853B /* API.swift in Sources */,
+				41009A712B02CD59009D853B /* Solcast.swift in Sources */,
 				416AE4452A811FBB003D0122 /* DeviceSettingsGetResponse.swift in Sources */,
 				41F71ABD2A14FBEC00A8C81B /* Array+Safe.swift in Sources */,
 				4103D1D029DB6C51001B0BC8 /* Report.swift in Sources */,
