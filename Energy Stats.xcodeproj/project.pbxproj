@@ -155,6 +155,7 @@
 		4192F99B2A8678DB0035DAB8 /* PagedDataLoggerListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4192F99A2A8678DB0035DAB8 /* PagedDataLoggerListResponse.swift */; };
 		419576172AC2F29600EB7362 /* BatteryWidgetState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419576162AC2F29600EB7362 /* BatteryWidgetState.swift */; };
 		419AB4802AA36D24002CBC96 /* DisplaySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AB47F2AA36D24002CBC96 /* DisplaySettingsView.swift */; };
+		419B8DEA2B04D6BA0094402C /* SolcastCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419B8DE92B04D6BA0094402C /* SolcastCacheTests.swift */; };
 		419CCB542933BABF00882649 /* ErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419CCB532933BABF00882649 /* ErrorAlertView.swift */; };
 		419DFA862A12930E0067313A /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419DFA842A1292380067313A /* DatePickerView.swift */; };
 		419DFA882A12A6DF0067313A /* DatePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419DFA872A12A6DF0067313A /* DatePickerViewModel.swift */; };
@@ -470,6 +471,7 @@
 		4192F99A2A8678DB0035DAB8 /* PagedDataLoggerListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagedDataLoggerListResponse.swift; sourceTree = "<group>"; };
 		419576162AC2F29600EB7362 /* BatteryWidgetState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryWidgetState.swift; sourceTree = "<group>"; };
 		419AB47F2AA36D24002CBC96 /* DisplaySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaySettingsView.swift; sourceTree = "<group>"; };
+		419B8DE92B04D6BA0094402C /* SolcastCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolcastCacheTests.swift; sourceTree = "<group>"; };
 		419CCB532933BABF00882649 /* ErrorAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertView.swift; sourceTree = "<group>"; };
 		419DFA842A1292380067313A /* DatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		419DFA872A12A6DF0067313A /* DatePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewModel.swift; sourceTree = "<group>"; };
@@ -767,6 +769,7 @@
 				413B7A402A4A399900562A68 /* SelfSufficiencyCalculatorTests.swift */,
 				411370892AEA48C0003D74AD /* Double+CappedTests.swift */,
 				411B302D2AEAE0DD006A6C02 /* FoxEssCloudParseStrategyTests.swift */,
+				419B8DE92B04D6BA0094402C /* SolcastCacheTests.swift */,
 			);
 			path = "Energy Stats Core Tests";
 			sourceTree = "<group>";
@@ -1429,6 +1432,7 @@
 			files = (
 				411B302E2AEAE0DD006A6C02 /* FoxEssCloudParseStrategyTests.swift in Sources */,
 				413B7A412A4A399900562A68 /* SelfSufficiencyCalculatorTests.swift in Sources */,
+				419B8DEA2B04D6BA0094402C /* SolcastCacheTests.swift in Sources */,
 				4113708A2AEA48C0003D74AD /* Double+CappedTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
