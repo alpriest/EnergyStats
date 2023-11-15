@@ -66,9 +66,24 @@ struct SolarForecastView: View {
 @available(iOS 16.0, *)
 struct ForecastView: View {
     @State private var size: CGSize = .zero
-    let data: [SolcastForecastResponse]
-    let appTheme: AppTheme
-    let title: String
+    private let data: [SolcastForecastResponse]
+    private let appTheme: AppTheme
+    private let title: String
+    private let xScale: ClosedRange<Date>
+
+    init(data: [SolcastForecastResponse], appTheme: AppTheme, title: String) {
+        self.data = data
+        self.appTheme = appTheme
+        self.title = title
+
+        if let graphDate = data.first?.period_end {
+            let startDate = Calendar.current.startOfDay(for: graphDate)
+            let endDate = Calendar.current.date(byAdding: .day, value: 1, to: startDate)!
+            self.xScale = Calendar.current.startOfDay(for: startDate)...endDate
+        } else {
+            self.xScale = Date()...Date()
+        }
+    }
 
     var body: some View {
         Chart {
@@ -118,9 +133,10 @@ struct ForecastView: View {
                 }
             }
         }
+        .chartXScale(domain: xScale)
         .chartXAxis(content: {
-            AxisMarks(values: .stride(by: .hour)) { value in
-                if (value.index == 0) || (value.index % 4 == 0), let date = value.as(Date.self) {
+            AxisMarks(values: .stride(by: .hour, count: 4)) { value in
+                if let date = value.as(Date.self) {
                     AxisTick(centered: false)
                     AxisValueLabel(centered: false) {
                         Text(date, format: .dateTime.hour())
@@ -129,7 +145,7 @@ struct ForecastView: View {
             }
         })
         .chartYAxis(content: {
-            AxisMarks { value in
+            AxisMarks(values: .automatic(desiredCount: 4)) { value in
                 if let amount = value.as(Double.self) {
                     AxisValueLabel {
                         EnergyText(amount: amount, appTheme: appTheme, type: .default, decimalPlaceOverride: 0)
