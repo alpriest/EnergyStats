@@ -10,12 +10,16 @@ import SwiftUI
 
 class SolcastSettingsViewModel: ObservableObject {
     private var configManager: ConfigManaging
+    @Published var resourceId: String = ""
+    @Published var apiKey: String = ""
 
     init(configManager: ConfigManaging) {
         self.configManager = configManager
+        resourceId = configManager.solcastResourceId ?? ""
+        apiKey = configManager.solcastApiKey ?? ""
     }
 
-    func save(resourceId: String, apiKey: String) {
+    func save() {
         configManager.solcastResourceId = resourceId
         configManager.solcastApiKey = apiKey
     }
@@ -28,26 +32,18 @@ struct SolcastSettingsView: View {
         _viewModel = .init(wrappedValue: SolcastSettingsViewModel(configManager: configManager))
     }
 
-    @State private var resourceId: String = ""
-    @State private var apiKey: String = ""
-
     var body: some View {
         VStack(spacing: 0) {
             Form {
                 Section {
-                    Text("""
-                    Solcast provide solar predictions based on your location. To sign up for free, visit https://solcast.com/free-rooftop-solar-forecasting and register for Hobbyist Access.
-
-                    Once you've signed up and have created your site, paste the resource ID and your API key below.
-                    """)
-
-                    TextField("Resource ID", text: $resourceId)
-                    TextField("API Key", text: $apiKey)
+                    Text("Solcast_description")
+                    TextField("Resource ID", text: $viewModel.resourceId)
+                    SecureField("API Key", text: $viewModel.apiKey)
                 }
             }
 
             BottomButtonsView {
-                viewModel.save(resourceId: resourceId, apiKey: apiKey)
+                viewModel.save()
             }
         }
         .navigationTitle("Solcast Solar Prediction")

@@ -18,12 +18,14 @@ class SummaryTabViewModel: ObservableObject {
     @Published var approximationsViewModel: ApproximationsViewModel? = nil
     @Published var foxESSTotal: FinanceAmount?
     @Published var oldestDataDate: String = ""
+    let currencySymbol: String
     private let approximationsCalculator: ApproximationsCalculator
 
     init(configManager: ConfigManaging, networking: Networking) {
         self.networking = networking
         self.configManager = configManager
         self.approximationsCalculator = ApproximationsCalculator(configManager: configManager, networking: networking)
+        currencySymbol = self.configManager.currencySymbol
     }
 
     func load() {

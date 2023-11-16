@@ -9542,8 +9542,14 @@
         }
       }
     },
-    "Solcast provide solar predictions based on your location. To sign up for free, visit https://solcast.com/free-rooftop-solar-forecasting and register for Hobbyist Access.\n\nOnce you've signed up and have created your site, paste the resource ID and your API key below." : {
+    "Solcast_description" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solcast provide solar predictions based on your location. To sign up for free, visit https://solcast.com/free-rooftop-solar-forecasting and register for Hobbyist Access.\n\nOnce you've signed up and have created your site, paste the resource ID and your API key below."
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
