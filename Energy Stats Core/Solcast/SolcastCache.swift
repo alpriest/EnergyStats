@@ -25,7 +25,7 @@ public class SolcastCache: SolarForecasting {
     }
 
     public func fetchForecast() async throws -> SolcastForecastResponseList {
-        let threeHours: Double = 10_800
+        let twelveHours: Double = 43_200
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
 
@@ -34,7 +34,7 @@ public class SolcastCache: SolarForecasting {
         {
             let attributes = try fileManager.attributesOfItem(atPath: fileURL.path)
             if let modificationDate = attributes[.modificationDate] as? Date,
-               today().timeIntervalSince(modificationDate) > threeHours
+               today().timeIntervalSince(modificationDate) > twelveHours
             {
                 return try await fetchAndStore(merging: cachedDataModel)
             } else {

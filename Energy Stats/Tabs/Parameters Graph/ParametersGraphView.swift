@@ -15,8 +15,6 @@ struct ParametersGraphView: View {
     @GestureState var isDetectingPress = true
     @Binding var selectedDate: Date?
     @Binding var valuesAtTime: ValuesAtTime<ParameterGraphValue>?
-    private let startDate = Calendar.current.startOfDay(for: Date())
-    private let endDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))!
 
     var body: some View {
         Chart(viewModel.data, id: \.type.variable) {
@@ -30,8 +28,8 @@ struct ParametersGraphView: View {
         .chartPlotStyle { content in
             content.background(Color.gray.gradient.opacity(0.04))
         }
-        .chartXScale(domain: startDate...endDate)
-        .chartXAxis(content: {
+        .chartXScale(domain: viewModel.xScale)
+        .chartXAxis {
             AxisMarks(values: .stride(by: .hour, count: viewModel.stride)) { value in
                 if let date = value.as(Date.self) {
                     AxisTick(centered: false)
@@ -40,16 +38,17 @@ struct ParametersGraphView: View {
                     }
                 }
             }
-        })
-        .chartYAxis(content: {
+        }
+        .chartYAxis {
             AxisMarks { value in
                 if let amount = value.as(Double.self) {
+                    AxisGridLine()
                     AxisValueLabel {
                         Text(amount, format: .number)
                     }
                 }
             }
-        })
+        }
         .chartOverlay { chartProxy in
             GeometryReader { geometryProxy in
                 Rectangle().fill(.clear).contentShape(Rectangle())

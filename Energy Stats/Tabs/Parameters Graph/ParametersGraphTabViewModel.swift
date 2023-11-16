@@ -45,6 +45,7 @@ class ParametersGraphTabViewModel: ObservableObject {
     private var hours: Int = 24
     private var max: ParameterGraphValue?
     var exportFile: CSVTextFile?
+    @Published var xScale: ClosedRange<Date> = Calendar.current.startOfDay(for: Date())...Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))!
 
     @Published var displayMode = GraphDisplayMode(date: .now, hours: 24) {
         didSet {
@@ -180,6 +181,9 @@ class ParametersGraphTabViewModel: ObservableObject {
 
             return ParameterGraphBounds(type: variable.type, min: min, max: max, now: now)
         }
+
+        let start = Calendar.current.startOfDay(for: displayMode.date)
+        xScale = start...Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: displayMode.date))!
 
         data = refreshedData
 

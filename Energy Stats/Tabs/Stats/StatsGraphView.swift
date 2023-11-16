@@ -64,8 +64,7 @@ struct StatsGraphView: View {
         .chartPlotStyle { content in
             content.background(Color.gray.gradient.opacity(0.04))
         }
-        .chartLegend(.hidden)
-        .chartXAxis(content: {
+        .chartXAxis {
             AxisMarks(values: .stride(by: viewModel.unit, count: viewModel.stride)) { value in
                 if let date = value.as(Date.self) {
                     AxisTick(centered: true)
@@ -83,7 +82,7 @@ struct StatsGraphView: View {
                     }
                 }
             }
-        })
+        }
         .chartOverlay { chartProxy in
             GeometryReader { geometryProxy in
                 Rectangle().fill(.clear).contentShape(Rectangle())
