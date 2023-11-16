@@ -62,7 +62,7 @@ final class Energy_Stats_UITestsLaunchTests: XCTestCase {
         app.navigationBars.buttons.element(boundBy: 0).tap()
         app.navigationBars.buttons.element(boundBy: 0).tap()
 
-        app.buttons["approximations"].tap()
+        app.buttons["financials"].tap()
         app.switches["toggle_financial_summary"].tap()
         snapshot("09_financial_summary")
     }
