@@ -1162,7 +1162,32 @@
       }
     },
     "Accumulated income" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Angesammeltes Einkommen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingresos acumulados"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reddito accumulato"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skumulowany dochód"
+          }
+        }
+      }
     },
     "Adaptive" : {
       "localizations" : {
@@ -1278,7 +1303,32 @@
       }
     },
     "API Key" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
     "Apply" : {
       "localizations" : {
@@ -2618,7 +2668,32 @@
       }
     },
     "Could not load approximations" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annäherungen konnten nicht geladen werden"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pudieron cargar las aproximaciones"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile caricare le approssimazioni"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nie można załadować przybliżeń"
+          }
+        }
+      }
     },
     "Could not load. Check your internet connection" : {
       "extractionState" : "manual",
@@ -2953,35 +3028,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dzień"
-          }
-        }
-      }
-    },
-    "Day by hours" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
           }
         }
       }
@@ -4740,35 +4786,6 @@
         }
       }
     },
-    "hello world" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        }
-      }
-    },
     "Hide graph" : {
       "localizations" : {
         "de" : {
@@ -4956,7 +4973,32 @@
       }
     },
     "Includes data from %@ to Present. Figures are approximate and assume the buy/sell energy prices remained constant throughout the period of ownership." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beinhaltet Daten von %@ bis heute. Die Zahlen sind annähernd und gehen davon aus, dass die Energiekauf-/verkaufspreise während des gesamten Besitzzeitraums konstant blieben."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Incluye datos desde %@ hasta el presente. Las cifras son aproximadas y asumen que los precios de compra/venta de energía se mantuvieron constantes durante todo el período de propiedad."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Include dati da %@ a oggi. Le cifre sono approssimative e presuppongono che i prezzi di acquisto/vendita dell'energia siano rimasti costanti per tutto il periodo di proprietà."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zawiera dane od %@ do teraz. Liczby są przybliżone i zakładają, że ceny kupna/sprzedaży energii pozostały stałe przez cały okres posiadania."
+          }
+        }
+      }
     },
     "Invalid Battery Capacity" : {
       "localizations" : {
@@ -5209,7 +5251,32 @@
       }
     },
     "kWh" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
     "kWH" : {
       "localizations" : {
@@ -6086,7 +6153,32 @@
       }
     },
     "now" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "jetzt"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ahora"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ora"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teraz"
+          }
+        }
+      }
     },
     "Off" : {
       "localizations" : {
@@ -6625,10 +6717,60 @@
       }
     },
     "Prediction" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vorhersage"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Predicción"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Previsione"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Przewidywanie"
+          }
+        }
+      }
     },
     "Range of confidence" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vertrauensbereich"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rango de confianza"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intervallo di confidenza"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zakres ufności"
+          }
+        }
+      }
     },
     "Rate this app" : {
       "localizations" : {
@@ -8145,7 +8287,32 @@
       }
     },
     "Resource ID" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
     "Restore defaults" : {
       "localizations" : {
@@ -8402,7 +8569,32 @@
       }
     },
     "Self Sufficiency Estimates" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schätzungen zur Eigenversorgung"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estimaciones de Autosuficiencia"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stime di Autosufficienza"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Szacunki Samowystarczalności"
+          }
+        }
+      }
     },
     "Self Use" : {
       "localizations" : {
@@ -9261,7 +9453,32 @@
       }
     },
     "Solar Forecasts" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solarprognosen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pronósticos Solares"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Previsioni Solari"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prognozy Solarne"
+          }
+        }
+      }
     },
     "Solar generated" : {
       "localizations" : {
@@ -9326,10 +9543,60 @@
       }
     },
     "Solcast provide solar predictions based on your location. To sign up for free, visit https://solcast.com/free-rooftop-solar-forecasting and register for Hobbyist Access.\n\nOnce you've signed up and have created your site, paste the resource ID and your API key below." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solcast bietet Solarprognosen basierend auf Ihrem Standort. Um sich kostenlos anzumelden, besuchen Sie https://solcast.com/free-rooftop-solar-forecasting und registrieren Sie sich für den Hobbyist-Zugang.\n\nNachdem Sie sich angemeldet und Ihre Seite erstellt haben, fügen Sie die Ressourcen-ID und Ihren API-Schlüssel unten ein."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solcast proporciona predicciones solares basadas en tu ubicación. Para registrarte gratuitamente, visita https://solcast.com/free-rooftop-solar-forecasting y regístrate para el Acceso de Aficionados.\n\nUna vez que te hayas registrado y hayas creado tu sitio, pega el ID del recurso y tu clave API abajo."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solcast fornisce previsioni solari basate sulla tua posizione. Per iscriverti gratuitamente, visita https://solcast.com/free-rooftop-solar-forecasting e registrati per l'Accesso Hobbistico.\n\nUna volta che ti sei iscritto e hai creato il tuo sito, incolla l'ID della risorsa e la tua chiave API qui sotto."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solcast oferuje prognozy słoneczne oparte na Twojej lokalizacji. Aby zarejestrować się za darmo, odwiedź https://solcast.com/free-rooftop-solar-forecasting i zarejestruj się, aby uzyskać dostęp dla Hobbyistów.\n\nPo zarejestrowaniu się i utworzeniu swojej strony, wklej poniżej ID zasobu i swój klucz API."
+          }
+        }
+      }
     },
     "Solcast Solar Prediction" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solcast Solarprognose"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Predicción Solar de Solcast"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Previsione Solare di Solcast"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prognoza Solarna Solcast"
+          }
+        }
+      }
     },
     "Start" : {
       "localizations" : {
@@ -9690,7 +9957,32 @@
       }
     },
     "Time" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zeit"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tiempo"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tempo"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Czas"
+          }
+        }
+      }
     },
     "Time period 1" : {
       "extractionState" : "manual",
@@ -9821,35 +10113,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "dzisiaj"
-          }
-        }
-      }
-    },
-    "Toggle" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "umschalten"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cambiar"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Attiva"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Przełącz"
           }
         }
       }
@@ -10121,7 +10384,32 @@
       }
     },
     "Visit the settings tab to configure Solcast" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Besuchen Sie die Einstellungen, um Solcast zu konfigurieren"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visita la pestaña de configuración para configurar Solcast"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visita la scheda delle impostazioni per configurare Solcast"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Odwiedź zakładkę ustawień, aby skonfigurować Solcast"
+          }
+        }
+      }
     },
     "Watts" : {
       "localizations" : {
