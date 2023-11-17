@@ -28,7 +28,7 @@ private extension URL {
     static var updatePlant = URL(string: "https://www.foxesscloud.com/c/v0/plant/update")!
 }
 
-public protocol Networking {
+public protocol FoxESSNetworking {
     func ensureHasToken() async
     func verifyCredentials(username: String, hashedPassword: String) async throws
     func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [ReportResponse]
@@ -48,7 +48,7 @@ public protocol Networking {
     func fetchErrorMessages() async
 }
 
-public class Network: Networking {
+public class Network: FoxESSNetworking {
     private var token: String? {
         get {
             credentials.getToken()

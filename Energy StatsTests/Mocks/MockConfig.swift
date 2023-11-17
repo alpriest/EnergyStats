@@ -10,6 +10,13 @@ import Energy_Stats_Core
 import Foundation
 
 class MockConfig: Config {
+    func clear() {}
+
+    var currencySymbol: String = ""
+    var shouldCombineCT2WithPVPower: Bool = true
+    var showGraphValueDescriptions: Bool = true
+    var solcastResourceId: String?
+    var solcastApiKey: String?
     var hasRunBefore: Bool = true
     var displayUnit: Int = 0
     var showFinancialEarnings: Bool = true

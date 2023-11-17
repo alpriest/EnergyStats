@@ -17,7 +17,7 @@ struct Provider: TimelineProvider {
     private let config = UserDefaultsConfig()
     private let configManager: ConfigManaging
     private let keychainStore = KeychainStore()
-    let network: Networking
+    let network: FoxESSNetworking
     private let modelContainer: ModelContainer
 
     init() {

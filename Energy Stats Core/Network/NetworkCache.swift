@@ -21,13 +21,13 @@ struct CachedItem {
     }
 }
 
-public class NetworkCache: Networking {
-    private let network: Networking
+public class NetworkCache: FoxESSNetworking {
+    private let network: FoxESSNetworking
     private var cache: [String: CachedItem] = [:]
     private let shortCacheDurationInSeconds: TimeInterval = 5
     private let serialiserQueue = DispatchQueue(label: "networkcache.write.queue")
 
-    public init(network: Networking) {
+    public init(network: FoxESSNetworking) {
         self.network = network
     }
 

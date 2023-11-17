@@ -10,7 +10,7 @@ import Energy_Stats_Core
 
 struct ApproximationsCalculator {
     let configManager: ConfigManaging
-    let networking: Networking
+    let networking: FoxESSNetworking
 
     func calculateApproximations(
         grid: Double,

@@ -10,14 +10,16 @@ import SwiftUI
 
 struct TabbedView: View {
     let configManager: ConfigManager
-    let networking: Networking
+    let networking: FoxESSNetworking
     let userManager: UserManager
+    let solarForecastProvider: SolarForecastProviding
     @StateObject var settingsTabViewModel: SettingsTabViewModel
 
-    init(networking: Networking, userManager: UserManager, configManager: ConfigManager) {
+    init(networking: FoxESSNetworking, userManager: UserManager, configManager: ConfigManager, solarForecastProvider: @escaping SolarForecastProviding) {
         self.networking = networking
         self.userManager = userManager
         self.configManager = configManager
+        self.solarForecastProvider = solarForecastProvider
         _settingsTabViewModel = .init(wrappedValue: SettingsTabViewModel(userManager: userManager, config: configManager, networking: networking))
     }
 
@@ -50,7 +52,7 @@ struct TabbedView: View {
                     .accessibilityIdentifier("parameters_tab")
                 }
 
-            SummaryTabView(configManager: configManager, networking: networking, appThemePublisher: configManager.appTheme)
+            SummaryTabView(configManager: configManager, networking: networking, appThemePublisher: configManager.appTheme, solarForecastProvider: solarForecastProvider)
                 .tabItem {
                     VStack {
                         if #available(iOS 17.0, *) {
@@ -81,6 +83,9 @@ struct TabbedView: View {
 
 #if DEBUG
 #Preview {
-    TabbedView(networking: DemoNetworking(), userManager: .preview(), configManager: PreviewConfigManager())
+    TabbedView(networking: DemoNetworking(),
+               userManager: .preview(),
+               configManager: PreviewConfigManager(),
+               solarForecastProvider: { DemoSolcast(config: $0) })
 }
 #endif

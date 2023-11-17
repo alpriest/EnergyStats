@@ -10,7 +10,7 @@ import Energy_Stats_Core
 import Foundation
 
 class UserManager: ObservableObject {
-    private let networking: Networking
+    private let networking: FoxESSNetworking
     private var configManager: ConfigManaging
     private let store: KeychainStoring
     private var cancellables = Set<AnyCancellable>()
@@ -18,7 +18,7 @@ class UserManager: ObservableObject {
     @MainActor @Published var state = LoadState.inactive
     @MainActor @Published var isLoggedIn: Bool = false
 
-    init(networking: Networking, store: KeychainStoring, configManager: ConfigManager, networkCache: InMemoryLoggingNetworkStore) {
+    init(networking: FoxESSNetworking, store: KeychainStoring, configManager: ConfigManager, networkCache: InMemoryLoggingNetworkStore) {
         self.networking = networking
         self.store = store
         self.configManager = configManager

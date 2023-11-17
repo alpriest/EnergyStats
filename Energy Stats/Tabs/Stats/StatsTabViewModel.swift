@@ -24,7 +24,7 @@ struct ApproximationsViewModel {
 class StatsTabViewModel: ObservableObject {
     private let haptic = UIImpactFeedbackGenerator()
     private let configManager: ConfigManaging
-    private let networking: Networking
+    private let networking: FoxESSNetworking
     private let approximationsCalculator: ApproximationsCalculator
 
     @Published var state = LoadState.inactive
@@ -52,7 +52,7 @@ class StatsTabViewModel: ObservableObject {
     var exportFile: CSVTextFile?
     private var currentDeviceCancellable: AnyCancellable?
 
-    init(networking: Networking, configManager: ConfigManaging) {
+    init(networking: FoxESSNetworking, configManager: ConfigManaging) {
         self.networking = networking
         self.configManager = configManager
         self.approximationsCalculator = ApproximationsCalculator(configManager: configManager, networking: networking)

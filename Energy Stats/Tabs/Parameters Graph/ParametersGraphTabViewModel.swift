@@ -26,7 +26,7 @@ struct GraphDisplayMode: Equatable {
 
 class ParametersGraphTabViewModel: ObservableObject {
     private let haptic = UIImpactFeedbackGenerator()
-    private let networking: Networking
+    private let networking: FoxESSNetworking
     private var configManager: ConfigManaging
     private var rawData: [ParameterGraphValue] = [] {
         didSet {
@@ -77,7 +77,7 @@ class ParametersGraphTabViewModel: ObservableObject {
 
     private var cancellable: AnyCancellable?
 
-    init(networking: Networking, configManager: ConfigManaging, dateProvider: @escaping () -> Date = { Date() }) {
+    init(networking: FoxESSNetworking, configManager: ConfigManaging, dateProvider: @escaping () -> Date = { Date() }) {
         self.networking = networking
         self.configManager = configManager
         self.dateProvider = dateProvider

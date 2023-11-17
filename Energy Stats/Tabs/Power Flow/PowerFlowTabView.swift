@@ -15,7 +15,7 @@ struct PowerFlowTabView: View {
     private var appThemePublisher: LatestAppTheme
     @AppStorage("showLastUpdateTimestamp") private var showLastUpdateTimestamp: Bool = false
 
-    init(configManager: ConfigManaging, networking: Networking, userManager: UserManager, appThemePublisher: LatestAppTheme) {
+    init(configManager: ConfigManaging, networking: FoxESSNetworking, userManager: UserManager, appThemePublisher: LatestAppTheme) {
         _viewModel = .init(wrappedValue: PowerFlowTabViewModel(networking, configManager: configManager, userManager: userManager))
         self.appThemePublisher = appThemePublisher
         self.appTheme = appThemePublisher.value

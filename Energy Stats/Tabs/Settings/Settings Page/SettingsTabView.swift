@@ -11,7 +11,7 @@ import SwiftUI
 struct SettingsTabView: View {
     @ObservedObject var viewModel: SettingsTabViewModel
     let configManager: ConfigManaging
-    let networking: Networking
+    let networking: FoxESSNetworking
 
     var body: some View {
         NavigationView {

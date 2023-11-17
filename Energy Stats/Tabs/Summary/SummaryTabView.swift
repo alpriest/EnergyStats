@@ -16,10 +16,10 @@ struct SummaryTabView: View {
     private let configManager: ConfigManaging
     @StateObject private var solarForecastViewModel: SolarForecastViewModel
 
-    init(configManager: ConfigManaging, networking: Networking, appThemePublisher: LatestAppTheme) {
+    init(configManager: ConfigManaging, networking: FoxESSNetworking, appThemePublisher: LatestAppTheme, solarForecastProvider: @escaping SolarForecastProviding) {
         self.configManager = configManager
         _viewModel = .init(wrappedValue: SummaryTabViewModel(configManager: configManager, networking: networking))
-        _solarForecastViewModel = .init(wrappedValue: SolarForecastViewModel(configManager: configManager, appTheme: appThemePublisher))
+        _solarForecastViewModel = .init(wrappedValue: SolarForecastViewModel(configManager: configManager, appTheme: appThemePublisher, solarForecastProvider: solarForecastProvider))
         _appTheme = State(initialValue: appThemePublisher.value)
         self.appThemePublisher = appThemePublisher
     }
@@ -63,7 +63,7 @@ struct SummaryTabView: View {
                             Text("Could not load approximations")
                         }
 
-                        if #available (iOS 16.0, *) {
+                        if #available(iOS 16.0, *) {
                             Divider()
                             SolarForecastView(appTheme: appTheme, viewModel: solarForecastViewModel)
                         }
@@ -73,6 +73,7 @@ struct SummaryTabView: View {
             }
             .navigationTitle("Summary")
         }
+        .navigationViewStyle(StackNavigationViewStyle())
         .onAppear {
             viewModel.load()
         }
@@ -119,5 +120,6 @@ struct SummaryTabView: View {
 #Preview {
     SummaryTabView(configManager: PreviewConfigManager(),
                    networking: DemoNetworking(),
-                   appThemePublisher: CurrentValueSubject(.mock()))
+                   appThemePublisher: CurrentValueSubject(.mock()),
+                   solarForecastProvider: { DemoSolcast(config: $0) })
 }

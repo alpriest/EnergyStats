@@ -10,7 +10,7 @@ import Energy_Stats_Core
 import Foundation
 
 class BatteryChargeScheduleSettingsViewModel: ObservableObject {
-    private let networking: Networking
+    private let networking: FoxESSNetworking
     private let config: ConfigManaging
     private var cancellable: AnyCancellable?
     @Published var state: LoadState = .inactive
@@ -19,7 +19,7 @@ class BatteryChargeScheduleSettingsViewModel: ObservableObject {
     @Published var summary = ""
     @Published var alertContent: AlertContent?
 
-    init(networking: Networking, config: ConfigManaging) {
+    init(networking: FoxESSNetworking, config: ConfigManaging) {
         self.networking = networking
         self.config = config
 

@@ -18,7 +18,7 @@
 		4103D1D429DB6C51001B0BC8 /* DeviceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D6496B28DB321600A24B41 /* DeviceList.swift */; };
 		4103D1D529DB6C51001B0BC8 /* NetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B690F328DF5C390058126E /* NetworkResponse.swift */; };
 		4103D1D629DB6C51001B0BC8 /* AddressBookResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41626CCB29D95E37003FEB00 /* AddressBookResponse.swift */; };
-		4103D1D729DB6C51001B0BC8 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140145F28C70D4700EA5BA1 /* Networking.swift */; };
+		4103D1D729DB6C51001B0BC8 /* FoxESSNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140145F28C70D4700EA5BA1 /* FoxESSNetworking.swift */; };
 		4103D1D829DB6C51001B0BC8 /* NetworkFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41777F1428F49C61009944FF /* NetworkFacade.swift */; };
 		4103D1D929DB6C6D001B0BC8 /* ReportVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4103F82F2922BFBA00567B1C /* ReportVariable.swift */; };
 		4103D1DA29DB6C6D001B0BC8 /* DeviceFirmwareVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41626CD129D96AD9003FEB00 /* DeviceFirmwareVersion.swift */; };
@@ -119,7 +119,6 @@
 		416AE44D2A821E4F003D0122 /* AlertContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416AE44C2A821E4F003D0122 /* AlertContent.swift */; };
 		417153E429F2BCD700639A7B /* ParameterGraphHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417153E329F2BCD700639A7B /* ParameterGraphHeaderView.swift */; };
 		417153E629F2BD3300639A7B /* LoadState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417153E529F2BD3300639A7B /* LoadState.swift */; };
-		417153E829F2D80C00639A7B /* Date+compare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417153E729F2D80C00639A7B /* Date+compare.swift */; };
 		4171854229FFCF2500D18CDD /* String+MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171854129FFCF2500D18CDD /* String+MD5.swift */; };
 		4171854429FFCF9500D18CDD /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171854329FFCF9500D18CDD /* Color+Hex.swift */; };
 		417185462A004FA900D18CDD /* VariablesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417185452A004FA900D18CDD /* VariablesResponse.swift */; };
@@ -200,6 +199,8 @@
 		41D286E52AB352AC00B18FEF /* ParameterGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D286E42AB352AC00B18FEF /* ParameterGroup.swift */; };
 		41D8402D2AB2E0DE00769E81 /* ErrorMessagesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D8402C2AB2E0DE00769E81 /* ErrorMessagesResponse.swift */; };
 		41DC515A2AE2E9DC00FD348B /* NetworkValueCleaner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DC51592AE2E9DC00FD348B /* NetworkValueCleaner.swift */; };
+		41DCF5422B06C20B0010843F /* solcast.json in Resources */ = {isa = PBXBuildFile; fileRef = 41DCF5412B06C20B0010843F /* solcast.json */; };
+		41DCF5442B06CBD40010843F /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DCF5432B06CBD40010843F /* Date.swift */; };
 		41DD7F3A29C5B8940072CDE8 /* SolarPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD7F3929C5B8940072CDE8 /* SolarPowerView.swift */; };
 		41DE1B512ACD57A8001BB2D1 /* Energy_Stats_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; platformFilter = ios; };
 		41DE1B522ACD57A8001BB2D1 /* Energy_Stats_Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -394,7 +395,7 @@
 		4140145428C70B3200EA5BA1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4140145B28C70B4A00EA5BA1 /* PowerFlowTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerFlowTabViewModel.swift; sourceTree = "<group>"; };
 		4140145D28C70D1400EA5BA1 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
-		4140145F28C70D4700EA5BA1 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		4140145F28C70D4700EA5BA1 /* FoxESSNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoxESSNetworking.swift; sourceTree = "<group>"; };
 		4140146128C7146300EA5BA1 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		4140146428C714C000EA5BA1 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		4140146828C7374400EA5BA1 /* CurrentStatusCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentStatusCalculator.swift; sourceTree = "<group>"; };
@@ -432,7 +433,6 @@
 		416AE44C2A821E4F003D0122 /* AlertContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertContent.swift; sourceTree = "<group>"; };
 		417153E329F2BCD700639A7B /* ParameterGraphHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterGraphHeaderView.swift; sourceTree = "<group>"; };
 		417153E529F2BD3300639A7B /* LoadState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadState.swift; sourceTree = "<group>"; };
-		417153E729F2D80C00639A7B /* Date+compare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+compare.swift"; sourceTree = "<group>"; };
 		4171854129FFCF2500D18CDD /* String+MD5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+MD5.swift"; sourceTree = "<group>"; };
 		4171854329FFCF9500D18CDD /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
 		417185452A004FA900D18CDD /* VariablesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariablesResponse.swift; sourceTree = "<group>"; };
@@ -523,6 +523,8 @@
 		41D7B12328C86E4000E14144 /* Raw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Raw.swift; sourceTree = "<group>"; };
 		41D8402C2AB2E0DE00769E81 /* ErrorMessagesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessagesResponse.swift; sourceTree = "<group>"; };
 		41DC51592AE2E9DC00FD348B /* NetworkValueCleaner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkValueCleaner.swift; sourceTree = "<group>"; };
+		41DCF5412B06C20B0010843F /* solcast.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = solcast.json; sourceTree = "<group>"; };
+		41DCF5432B06CBD40010843F /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		41DD7F3929C5B8940072CDE8 /* SolarPowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarPowerView.swift; sourceTree = "<group>"; };
 		41DF51D12AA4CF6D007B5102 /* MockAppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAppTheme.swift; sourceTree = "<group>"; };
 		41E1DFDE28D87781001235B9 /* SettingsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabView.swift; sourceTree = "<group>"; };
@@ -624,6 +626,7 @@
 				4111333529B7D61200972935 /* Sequence+aysnc.swift */,
 				418024E12AD16D00009A2625 /* String+Currency.swift */,
 				4171854129FFCF2500D18CDD /* String+MD5.swift */,
+				41DCF5432B06CBD40010843F /* Date.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -634,7 +637,6 @@
 				4128E4C028DA5F6600C1D698 /* Date.swift */,
 				418EEEB42916843A006A8290 /* View+If.swift */,
 				416318BD29DDD80E00C2C285 /* View+Copy.swift */,
-				417153E729F2D80C00639A7B /* Date+compare.swift */,
 				41CD1F332A141F81006B0C00 /* NonFunctionalButton.swift */,
 				411029122A71C066004018BB /* Tintable.swift */,
 				411029142A71C4F2004018BB /* NumberTextField.swift */,
@@ -751,6 +753,7 @@
 		413745072919022C00D351F1 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				41DCF5412B06C20B0010843F /* solcast.json */,
 				41F71ABE2A1504C700A8C81B /* report-year.json */,
 				41F71AC02A1504D900A8C81B /* report-month.json */,
 				41FDAD4F2A01604F00EDACF3 /* variables.json */,
@@ -1100,7 +1103,7 @@
 			isa = PBXGroup;
 			children = (
 				4140146328C7146B00EA5BA1 /* NetworkModels */,
-				4140145F28C70D4700EA5BA1 /* Networking.swift */,
+				4140145F28C70D4700EA5BA1 /* FoxESSNetworking.swift */,
 				41777F1428F49C61009944FF /* NetworkFacade.swift */,
 				41626CCD29D95E9C003FEB00 /* NetworkError.swift */,
 				416318B629DDD2E100C2C285 /* InMemoryLoggingNetworkingDecorator.swift */,
@@ -1378,6 +1381,7 @@
 				4162BC2C2A09772C00DFEDC1 /* earnings.json in Resources */,
 				4103D1DE29DB6C8C001B0BC8 /* raw-f3000-deviceid.json in Resources */,
 				41F71ABF2A1504C700A8C81B /* report-year.json in Resources */,
+				41DCF5422B06C20B0010843F /* solcast.json in Resources */,
 				41F71AC12A1504D900A8C81B /* report-month.json in Resources */,
 				4162BC2A2A08E33600DFEDC1 /* raw-h1-deviceid.json in Resources */,
 				41FDAD502A01604F00EDACF3 /* variables.json in Resources */,
@@ -1473,7 +1477,6 @@
 				4160098B2A8D18B10096CCD9 /* SettingsFooterView.swift in Sources */,
 				411029172A71C975004018BB /* ChargeTimePeriod.swift in Sources */,
 				4141B20228D871B900B60157 /* ContentView.swift in Sources */,
-				417153E829F2D80C00639A7B /* Date+compare.swift in Sources */,
 				418141452A12BABA00FFC6A6 /* StatsGraphView.swift in Sources */,
 				4134ACC42A88A1A800CB4BA8 /* InverterView.swift in Sources */,
 				411029112A71B95F004018BB /* BatteryTimePeriodView.swift in Sources */,
@@ -1541,7 +1544,7 @@
 				41757BBC2A90A05E00573FB4 /* AmountType.swift in Sources */,
 				4109140229DB7AE700133CC5 /* BatteryViewModel.swift in Sources */,
 				41B3FFE82AB07FE10020DFC9 /* NetworkCache.swift in Sources */,
-				4103D1D729DB6C51001B0BC8 /* Networking.swift in Sources */,
+				4103D1D729DB6C51001B0BC8 /* FoxESSNetworking.swift in Sources */,
 				4171854229FFCF2500D18CDD /* String+MD5.swift in Sources */,
 				418024E22AD16D00009A2625 /* String+Currency.swift in Sources */,
 				41009A732B02D852009D853B /* SolcastForecastResponse.swift in Sources */,
@@ -1552,6 +1555,7 @@
 				4103D1E529DB6D29001B0BC8 /* Sequence+aysnc.swift in Sources */,
 				416AE44B2A8170E6003D0122 /* SelectableItem.swift in Sources */,
 				4103D1DA29DB6C6D001B0BC8 /* DeviceFirmwareVersion.swift in Sources */,
+				41DCF5442B06CBD40010843F /* Date.swift in Sources */,
 				414D7A332AC989030083923F /* FinancialModel.swift in Sources */,
 				416AE4482A812876003D0122 /* WorkMode.swift in Sources */,
 				4162BC2E2A09773D00DFEDC1 /* EarningsResponse.swift in Sources */,

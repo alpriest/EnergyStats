@@ -132,9 +132,9 @@ class SettingsTabViewModel: ObservableObject {
     private(set) var config: ConfigManaging
     private let userManager: UserManager
     private var cancellables = Set<AnyCancellable>()
-    let networking: Networking
+    let networking: FoxESSNetworking
 
-    init(userManager: UserManager, config: ConfigManaging, networking: Networking) {
+    init(userManager: UserManager, config: ConfigManaging, networking: FoxESSNetworking) {
         self.userManager = userManager
         self.config = config
         self.networking = networking

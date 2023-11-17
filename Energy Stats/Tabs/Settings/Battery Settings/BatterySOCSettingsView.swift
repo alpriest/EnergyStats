@@ -11,7 +11,7 @@ import SwiftUI
 struct BatterySOCSettingsView: View {
     @StateObject var viewModel: BatterySOCSettingsViewModel
 
-    init(networking: Networking, config: ConfigManaging, onSOCchange: @escaping () -> Void) {
+    init(networking: FoxESSNetworking, config: ConfigManaging, onSOCchange: @escaping () -> Void) {
         self._viewModel = StateObject(wrappedValue: BatterySOCSettingsViewModel(networking: networking, config: config, onSOCchange: onSOCchange))
     }
 

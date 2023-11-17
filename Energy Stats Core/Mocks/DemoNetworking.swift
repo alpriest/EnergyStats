@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class DemoNetworking: Networking {
+public class DemoNetworking: FoxESSNetworking {
     private let throwOnCall: Bool
 
     public init(throwOnCall: Bool = false) {
@@ -186,8 +186,8 @@ public class MockConfig: Config {
     public var parameterGroups: [ParameterGroup] = DefaultParameterGroups()
     public var currencySymbol: String = "£"
     public var shouldCombineCT2WithPVPower: Bool = true
-    public var solcastResourceId: String? = nil
-    public var solcastApiKey: String? = nil
+    public var solcastResourceId: String? = "demo_resource_id"
+    public var solcastApiKey: String? = "demo_api_keu"
 }
 
 public class PreviewConfigManager: ConfigManager {

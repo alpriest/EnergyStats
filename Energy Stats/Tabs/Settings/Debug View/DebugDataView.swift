@@ -12,7 +12,7 @@ struct DebugDataView: View {
     struct NoCurrentDeviceFoundError: Error {}
 
     @EnvironmentObject var store: InMemoryLoggingNetworkStore
-    let networking: Networking
+    let networking: FoxESSNetworking
     let configManager: ConfigManaging
 
     var body: some View {

@@ -9,7 +9,7 @@ import Energy_Stats_Core
 import Foundation
 
 class SummaryTabViewModel: ObservableObject {
-    private let networking: Networking
+    private let networking: FoxESSNetworking
     private let configManager: ConfigManaging
     @Published var isLoading = false
     @Published var totalSaving: String = ""
@@ -21,7 +21,7 @@ class SummaryTabViewModel: ObservableObject {
     let currencySymbol: String
     private let approximationsCalculator: ApproximationsCalculator
 
-    init(configManager: ConfigManaging, networking: Networking) {
+    init(configManager: ConfigManaging, networking: FoxESSNetworking) {
         self.networking = networking
         self.configManager = configManager
         self.approximationsCalculator = ApproximationsCalculator(configManager: configManager, networking: networking)

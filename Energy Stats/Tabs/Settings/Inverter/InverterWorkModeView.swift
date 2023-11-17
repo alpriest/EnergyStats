@@ -9,13 +9,13 @@ import Energy_Stats_Core
 import SwiftUI
 
 class InverterWorkModeViewModel: ObservableObject {
-    private let networking: Networking
+    private let networking: FoxESSNetworking
     private let config: ConfigManaging
     @Published var state: LoadState = .inactive
     @Published var items: [SelectableItem<WorkMode>] = []
     @Published var alertContent: AlertContent?
 
-    init(networking: Networking, config: ConfigManaging) {
+    init(networking: FoxESSNetworking, config: ConfigManaging) {
         self.networking = networking
         self.config = config
 
@@ -80,7 +80,7 @@ class InverterWorkModeViewModel: ObservableObject {
 struct InverterWorkModeView: View {
     @StateObject var viewModel: InverterWorkModeViewModel
 
-    init(networking: Networking, config: ConfigManaging) {
+    init(networking: FoxESSNetworking, config: ConfigManaging) {
         _viewModel = StateObject(wrappedValue: InverterWorkModeViewModel(networking: networking, config: config))
     }
 

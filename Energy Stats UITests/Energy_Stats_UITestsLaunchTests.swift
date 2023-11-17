@@ -45,25 +45,29 @@ final class Energy_Stats_UITestsLaunchTests: XCTestCase {
 
         app.buttons["cancel"].tap()
 
+        app.buttons["summary_tab"].tap()
+        snapshot("05_summary_tab")
+
         app.buttons["settings_tab"].tap()
-        snapshot("05_settings_tab")
+        snapshot("06_settings_tab")
 
         app.buttons["battery"].tap()
-        snapshot("06_battery_settings")
+        snapshot("07_battery_settings")
 
         app.buttons["minimum charge levels"].tap()
-        snapshot("07_battery_charge_levels")
+        snapshot("08_battery_charge_levels")
 
         app.navigationBars.buttons.element(boundBy: 0).tap()
 
         app.buttons["charge schedule"].tap()
-        snapshot("08_battery_charge_times")
+        snapshot("09_battery_charge_times")
 
         app.navigationBars.buttons.element(boundBy: 0).tap()
         app.navigationBars.buttons.element(boundBy: 0).tap()
 
+        app.swipeUp()
         app.buttons["financials"].tap()
         app.switches["toggle_financial_summary"].tap()
-        snapshot("09_financial_summary")
+        snapshot("10_financial_summary")
     }
 }

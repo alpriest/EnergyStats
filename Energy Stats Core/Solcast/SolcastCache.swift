@@ -14,7 +14,7 @@ public class SolcastCache: SolarForecasting {
     private let fileManager: FileManaging
 
     public init(config: SolcastSolarForecastingConfiguration,
-                service makeService: (SolcastSolarForecastingConfiguration) -> SolarForecasting = { Solcast(config: $0) },
+                service makeService: (SolcastSolarForecastingConfiguration) -> SolarForecasting,
                 today: @escaping () -> Date = { Date() },
                 fileManager: FileManaging = FileManager.default)
     {
@@ -43,6 +43,10 @@ public class SolcastCache: SolarForecasting {
         } else {
             return try await fetchAndStore()
         }
+    }
+
+    public var hasValidConfig: Bool {
+        service.hasValidConfig
     }
 
     private func fetchAndStore(merging previous: SolcastForecastResponseList? = nil) async throws -> SolcastForecastResponseList {

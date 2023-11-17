@@ -9,7 +9,7 @@
 @testable import Energy_Stats_Core
 import Foundation
 
-class MockNetworking: Networking {
+class MockNetworking: FoxESSNetworking {
     func fetchVariables(deviceID: String) async throws -> [RawVariable] {
         [
             RawVariable(name: "Output Power", variable: "generationPower", unit: "kW"),

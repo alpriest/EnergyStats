@@ -22,9 +22,9 @@ struct DataLogger: Identifiable {
 class DataLoggersViewModel: ObservableObject {
     @Published var items: [DataLogger] = []
     @Published var state: LoadState = .inactive
-    private let networking: Networking
+    private let networking: FoxESSNetworking
 
-    init(networking: Networking) {
+    init(networking: FoxESSNetworking) {
         self.networking = networking
     }
 
@@ -99,7 +99,7 @@ struct DataLoggerView: View {
 struct DataLoggersView: View {
     @StateObject private var viewModel: DataLoggersViewModel
 
-    init(networking: Networking) {
+    init(networking: FoxESSNetworking) {
         self._viewModel = StateObject(wrappedValue: DataLoggersViewModel(networking: networking))
     }
 

@@ -9,7 +9,7 @@ import Foundation
 import Energy_Stats_Core
 
 class BatterySOCSettingsViewModel: ObservableObject {
-    private let networking: Networking
+    private let networking: FoxESSNetworking
     private let config: ConfigManaging
     private let onSOCchange: () -> Void
     @Published var soc: String = ""
@@ -18,7 +18,7 @@ class BatterySOCSettingsViewModel: ObservableObject {
     @Published var state: LoadState = .inactive
     @Published var alertContent: AlertContent?
 
-    init(networking: Networking, config: ConfigManaging, onSOCchange: @escaping () -> Void) {
+    init(networking: FoxESSNetworking, config: ConfigManaging, onSOCchange: @escaping () -> Void) {
         self.networking = networking
         self.config = config
         self.onSOCchange = onSOCchange

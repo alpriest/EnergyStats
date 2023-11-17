@@ -71,7 +71,7 @@ public protocol FinancialConfigManaging {
 }
 
 public class ConfigManager: ConfigManaging {
-    private let networking: Networking
+    private let networking: FoxESSNetworking
     private var config: Config
     public var appTheme: CurrentValueSubject<AppTheme, Never>
     public var currentDevice = CurrentValueSubject<Device?, Never>(nil)
@@ -84,7 +84,7 @@ public class ConfigManager: ConfigManaging {
         public init() {}
     }
 
-    public init(networking: Networking, config: Config) {
+    public init(networking: FoxESSNetworking, config: Config) {
         self.networking = networking
         self.config = config
         appTheme = CurrentValueSubject(

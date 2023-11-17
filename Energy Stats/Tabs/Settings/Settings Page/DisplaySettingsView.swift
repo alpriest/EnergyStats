@@ -87,8 +87,8 @@ struct DisplaySettingsView: View {
             FinancialsSettingsView(configManager: configManager)
         } label: {
             Text("Financial Model")
+                .accessibilityIdentifier("financials")
         }
-        .accessibilityIdentifier("financials")
 
         NavigationLink {
             SolarBandingSettingsView(configManager: configManager)

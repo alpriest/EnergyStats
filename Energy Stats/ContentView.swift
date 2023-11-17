@@ -10,13 +10,14 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var loginManager: UserManager
-    let network: Networking
+    let network: FoxESSNetworking
     let configManager: ConfigManager
+    let solarForecastProvider: SolarForecastProviding
     @State private var state = LoadState.inactive
 
     var body: some View {
         if loginManager.isLoggedIn {
-            TabbedView(networking: network, userManager: loginManager, configManager: configManager)
+            TabbedView(networking: network, userManager: loginManager, configManager: configManager, solarForecastProvider: solarForecastProvider)
         } else {
             LoginView(userManager: loginManager)
         }
@@ -28,7 +29,8 @@ struct ContentView: View {
     ContentView(
         loginManager: .preview(),
         network: DemoNetworking(),
-        configManager: PreviewConfigManager()
+        configManager: PreviewConfigManager(),
+        solarForecastProvider: { DemoSolcast(config: $0) }
     )
 }
 #endif

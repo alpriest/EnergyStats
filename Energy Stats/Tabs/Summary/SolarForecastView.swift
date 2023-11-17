@@ -24,7 +24,7 @@ struct SolarForecastView: View {
             Text("Solar Forecasts")
                 .font(.largeTitle)
 
-            if viewModel.hasConfig {
+            if viewModel.service?.hasValidConfig ?? false {
                 loadedView()
             } else {
                 Text("Visit the settings tab to configure Solcast")

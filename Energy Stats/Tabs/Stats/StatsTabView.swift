@@ -34,7 +34,7 @@ struct StatsTabView: View {
     private var appThemePublisher: LatestAppTheme
     @AppStorage("showStatsGraph") private var showingGraph = true
 
-    init(configManager: ConfigManaging, networking: Networking, appThemePublisher: LatestAppTheme) {
+    init(configManager: ConfigManaging, networking: FoxESSNetworking, appThemePublisher: LatestAppTheme) {
         _viewModel = .init(wrappedValue: StatsTabViewModel(networking: networking, configManager: configManager))
         self.appThemePublisher = appThemePublisher
         self.appTheme = appThemePublisher.value

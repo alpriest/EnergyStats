@@ -7,10 +7,10 @@
 
 import Foundation
 
-public class NetworkValueCleaner: Networking {
-    private let network: Networking
+public class NetworkValueCleaner: FoxESSNetworking {
+    private let network: FoxESSNetworking
 
-    public init(network: Networking) {
+    public init(network: FoxESSNetworking) {
         self.network = network
     }
 

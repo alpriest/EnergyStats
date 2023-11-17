@@ -20,6 +20,9 @@ struct Energy_StatsApp: App {
         let network = NetworkValueCleaner(network: facade)
         let configManager = ConfigManager(networking: network, config: config)
         let userManager = UserManager(networking: network, store: keychainStore, configManager: configManager, networkCache: store)
+        let solarForecastProvider = { solarConfig -> SolarForecasting in
+            config.isDemoUser ? DemoSolcast(config: solarConfig) : Solcast(config: solarConfig)
+        }
 
         return WindowGroup {
             if isRunningTests() {
@@ -28,7 +31,8 @@ struct Energy_StatsApp: App {
                 ContentView(
                     loginManager: userManager,
                     network: network,
-                    configManager: configManager
+                    configManager: configManager,
+                    solarForecastProvider: solarForecastProvider
                 )
                 .environmentObject(store)
                 .environmentObject(userManager)

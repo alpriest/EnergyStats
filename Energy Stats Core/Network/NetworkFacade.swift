@@ -7,13 +7,13 @@
 
 import Foundation
 
-public class NetworkFacade: Networking {
-    private let network: Networking
-    private let fakeNetwork: Networking
+public class NetworkFacade: FoxESSNetworking {
+    private let network: FoxESSNetworking
+    private let fakeNetwork: FoxESSNetworking
     private let config: Config
     private let store: KeychainStoring
 
-    public init(network: Networking, config: Config, store: KeychainStoring) {
+    public init(network: FoxESSNetworking, config: Config, store: KeychainStoring) {
         self.network = network
         self.fakeNetwork = DemoNetworking()
         self.config = config

@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 
 class PowerFlowTabViewModel: ObservableObject {
-    private let network: Networking
+    private let network: FoxESSNetworking
     private(set) var configManager: ConfigManaging
     private let userManager: UserManager
     private let timer = CountdownTimer()
@@ -44,7 +44,7 @@ class PowerFlowTabViewModel: ObservableObject {
         }
     }
 
-    init(_ network: Networking, configManager: ConfigManaging, userManager: UserManager) {
+    init(_ network: FoxESSNetworking, configManager: ConfigManaging, userManager: UserManager) {
         self.network = network
         self.configManager = configManager
         self.userManager = userManager

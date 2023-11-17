@@ -9,7 +9,7 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct InverterSettingsView: View {
-    let networking: Networking
+    let networking: FoxESSNetworking
     let configManager: ConfigManaging
     let firmwareVersion: DeviceFirmwareVersion?
     @Binding var showInverterTemperature: Bool
