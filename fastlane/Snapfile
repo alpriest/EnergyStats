@@ -15,6 +15,7 @@ languages([
 ])
 
 erase_simulator
+localize_simulator true
 
 # The name of the scheme which contains the UI Tests
 scheme("Screenshots")
