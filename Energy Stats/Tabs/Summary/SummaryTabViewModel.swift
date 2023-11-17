@@ -12,9 +12,6 @@ class SummaryTabViewModel: ObservableObject {
     private let networking: FoxESSNetworking
     private let configManager: ConfigManaging
     @Published var isLoading = false
-    @Published var totalSaving: String = ""
-    @Published var exportIncome: String = ""
-    @Published var gridImportAvoided: String = ""
     @Published var approximationsViewModel: ApproximationsViewModel? = nil
     @Published var foxESSTotal: FinanceAmount?
     @Published var oldestDataDate: String = ""
@@ -140,7 +137,6 @@ class SummaryTabViewModel: ObservableObject {
                                                                 loads: loads,
                                                                 batteryCharge: batteryCharge,
                                                                 batteryDischarge: batteryDischarge,
-                                                                earnings: response,
-                                                                financialModelType: configManager.financialModel)
+                                                                earnings: response)
     }
 }

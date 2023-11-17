@@ -8,6 +8,7 @@
 import Combine
 import Energy_Stats_Core
 import Foundation
+import UIKit
 
 private struct SolcastSolarForecastingConfigurationAdapter: SolcastSolarForecastingConfiguration {
     var resourceId: String?
@@ -37,6 +38,7 @@ class SolarForecastViewModel: ObservableObject {
             let config = SolcastSolarForecastingConfigurationAdapter(resourceId: theme.solcastResourceId, apiKey: theme.solcastApiKey)
             self?.service = solarForecastProvider(config)
         }
+        NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
     }
 
     func load() {
@@ -49,7 +51,7 @@ class SolarForecastViewModel: ObservableObject {
         state = .active("Loading...")
 
         Task {
-            do  {
+            do {
                 let data = try await service.fetchForecast().forecasts
 
                 Task { @MainActor in
@@ -60,7 +62,11 @@ class SolarForecastViewModel: ObservableObject {
             } catch {
                 print(error)
             }
-
         }
+    }
+
+    @objc
+    func didBecomeActiveNotification() {
+        load()
     }
 }

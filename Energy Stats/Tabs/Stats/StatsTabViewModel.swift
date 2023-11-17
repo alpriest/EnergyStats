@@ -165,8 +165,7 @@ class StatsTabViewModel: ObservableObject {
                                                                                    loads: loads,
                                                                                    batteryCharge: batteryCharge ?? 0,
                                                                                    batteryDischarge: batteryDischarge ?? 0,
-                                                                                   earnings: nil,
-                                                                                   financialModelType: configManager.financialModel)
+                                                                                   earnings: nil)
     }
 
     func refresh() {
@@ -224,8 +223,7 @@ class StatsTabViewModel: ObservableObject {
                 loads: loads,
                 batteryCharge: batteryCharge,
                 batteryDischarge: batteryDischarge,
-                earnings: nil,
-                financialModelType: configManager.financialModel
+                earnings: nil
             )
         }
 

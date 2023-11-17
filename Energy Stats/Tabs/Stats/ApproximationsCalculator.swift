@@ -18,8 +18,7 @@ struct ApproximationsCalculator {
         loads: Double,
         batteryCharge: Double,
         batteryDischarge: Double,
-        earnings: EarningsResponse?,
-        financialModelType: FinancialModel
+        earnings: EarningsResponse?
     ) -> ApproximationsViewModel {
         let (netResult, netResultCalculationBreakdown) = NetSelfSufficiencyCalculator.calculate(
             grid: grid,
