@@ -15,13 +15,13 @@ struct Energy_StatsApp: App {
         let config = UserDefaultsConfig()
         let store = InMemoryLoggingNetworkStore.shared
         let facade = NetworkFacade(network: NetworkCache(network: Network(credentials: keychainStore, store: store)),
-                                    config: config,
-                                    store: keychainStore)
+                                   config: config,
+                                   store: keychainStore)
         let network = NetworkValueCleaner(network: facade)
         let configManager = ConfigManager(networking: network, config: config)
         let userManager = UserManager(networking: network, store: keychainStore, configManager: configManager, networkCache: store)
         let solarForecastProvider = { solarConfig -> SolarForecasting in
-            config.isDemoUser ? DemoSolcast(config: solarConfig) : Solcast(config: solarConfig)
+            config.isDemoUser ? DemoSolcast(config: solarConfig) : SolcastCache(config: solarConfig, service: { Solcast(config: $0) })
         }
 
         return WindowGroup {
