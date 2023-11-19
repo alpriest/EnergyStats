@@ -12,15 +12,15 @@ import SwiftUI
 struct PowerFlowView<S: Shape>: View {
     private let amount: Double
     private let animationDuration: Double
-    private let appTheme: AppTheme
+    private let appSettings: AppSettings
     private let showColouredLines: Bool
     private let type: AmountType
     private let shape: S
     private let showAmount: Bool
 
-    init(amount: Double, appTheme: AppTheme, showColouredLines: Bool, type: AmountType, shape: S = Line(), showAmount: Bool = true) {
+    init(amount: Double, appSettings: AppSettings, showColouredLines: Bool, type: AmountType, shape: S = Line(), showAmount: Bool = true) {
         self.amount = amount
-        self.appTheme = appTheme
+        self.appSettings = appSettings
         self.showColouredLines = showColouredLines
         self.type = type
         self.shape = shape
@@ -40,7 +40,7 @@ struct PowerFlowView<S: Shape>: View {
                     }
 
                     if showAmount {
-                        PowerAmountView(amount: amount, backgroundColor: lineColor, textColor: textColor, appTheme: appTheme, type: type)
+                        PowerAmountView(amount: amount, backgroundColor: lineColor, textColor: textColor, appSettings: appSettings, type: type)
                             .font(.body.bold())
                     }
                 }
@@ -53,7 +53,7 @@ struct PowerFlowView<S: Shape>: View {
     }
 
     var lineColor: Color {
-        if isFlowing && appTheme.showColouredLines && showColouredLines {
+        if isFlowing && appSettings.showColouredLines && showColouredLines {
             if amount > 0 {
                 return Color.linesPositive
             } else {
@@ -65,7 +65,7 @@ struct PowerFlowView<S: Shape>: View {
     }
 
     var textColor: Color {
-        if isFlowing && appTheme.showColouredLines && showColouredLines {
+        if isFlowing && appSettings.showColouredLines && showColouredLines {
             if amount > 0 {
                 return Color.textPositive
             } else {
@@ -94,7 +94,7 @@ struct PowerFlowView<S: Shape>: View {
                 Color.clear.overlay(
                     Group {
                         if visible {
-                            PowerFlowView(amount: amount, appTheme: AppTheme.mock(), showColouredLines: true, type: .solarFlow)
+                            PowerFlowView(amount: amount, appSettings: AppSettings.mock(), showColouredLines: true, type: .solarFlow)
                         }
                     }
                 ).frame(height: 100)

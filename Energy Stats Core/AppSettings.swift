@@ -1,5 +1,5 @@
 //
-//  AppTheme.swift
+//  AppSettings.swift
 //  Energy Stats
 //
 //  Created by Alistair Priest on 02/04/2023.
@@ -14,7 +14,7 @@ public enum SelfSufficiencyEstimateMode: Int, RawRepresentable {
     case absolute = 2
 }
 
-public struct AppTheme {
+public struct AppSettings {
     public var showColouredLines: Bool
     public var showBatteryTemperature: Bool
     public var showSunnyBackground: Bool
@@ -129,8 +129,8 @@ public struct AppTheme {
         showGraphValueDescriptions: Bool? = nil,
         solcastResourceId: String? = nil,
         solcastApiKey: String? = nil
-    ) -> AppTheme {
-        AppTheme(
+    ) -> AppSettings {
+        AppSettings(
             showColouredLines: showColouredLines ?? self.showColouredLines,
             showBatteryTemperature: showBatteryTemperature ?? self.showBatteryTemperature,
             showSunnyBackground: showSunnyBackground ?? self.showSunnyBackground,
@@ -162,4 +162,4 @@ public struct AppTheme {
     }
 }
 
-public typealias LatestAppTheme = CurrentValueSubject<AppTheme, Never>
+public typealias LatestAppPublisher = CurrentValueSubject<AppSettings, Never>

@@ -30,14 +30,14 @@ enum StatsDisplayMode: Equatable {
 struct StatsTabView: View {
     @StateObject var viewModel: StatsTabViewModel
     @State private var showingExporter = false
-    @State private var appTheme: AppTheme
-    private var appThemePublisher: LatestAppTheme
+    @State private var appSettings: AppSettings
+    private var appSettingsPublisher: LatestAppPublisher
     @AppStorage("showStatsGraph") private var showingGraph = true
 
-    init(configManager: ConfigManaging, networking: FoxESSNetworking, appThemePublisher: LatestAppTheme) {
+    init(configManager: ConfigManaging, networking: FoxESSNetworking, appSettingsPublisher: LatestAppPublisher) {
         _viewModel = .init(wrappedValue: StatsTabViewModel(networking: networking, configManager: configManager))
-        self.appThemePublisher = appThemePublisher
-        self.appTheme = appThemePublisher.value
+        self.appSettingsPublisher = appSettingsPublisher
+        self.appSettings = appSettingsPublisher.value
     }
 
     var body: some View {
@@ -73,10 +73,10 @@ struct StatsTabView: View {
                         Spacer()
                     }
 
-                    StatsGraphVariableToggles(viewModel: viewModel, selectedDate: $viewModel.selectedDate, valuesAtTime: $viewModel.valuesAtTime, appTheme: appThemePublisher.value)
+                    StatsGraphVariableToggles(viewModel: viewModel, selectedDate: $viewModel.selectedDate, valuesAtTime: $viewModel.valuesAtTime, appSettings: appSettingsPublisher.value)
 
                     if let approximationsViewModel = viewModel.approximationsViewModel {
-                        ApproximationsView(viewModel: approximationsViewModel, appTheme: appThemePublisher.value, decimalPlaceOverride: nil)
+                        ApproximationsView(viewModel: approximationsViewModel, appSettings: appSettingsPublisher.value, decimalPlaceOverride: nil)
                     }
 
                     Text("Stats are aggregated by FoxESS into 1 hr, 1 day or 1 month totals")
@@ -107,8 +107,8 @@ struct StatsTabView: View {
         .task {
             await viewModel.load()
         }
-        .onReceive(appThemePublisher) {
-            self.appTheme = $0
+        .onReceive(appSettingsPublisher) {
+            self.appSettings = $0
         }
     }
 }
@@ -116,7 +116,7 @@ struct StatsTabView: View {
 #if DEBUG
 @available(iOS 16.0, *)
 #Preview {
-    StatsTabView(configManager: PreviewConfigManager(), networking: DemoNetworking(), appThemePublisher: CurrentValueSubject(.mock()))
+    StatsTabView(configManager: PreviewConfigManager(), networking: DemoNetworking(), appSettingsPublisher: CurrentValueSubject(.mock()))
         .previewDevice("iPhone 13 Mini")
 }
 #endif

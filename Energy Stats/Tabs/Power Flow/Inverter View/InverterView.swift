@@ -47,7 +47,7 @@ struct InverterTemperatureView: View {
 struct InverterView: View {
     @ObservedObject var viewModel: InverterViewModel
     @Environment(\.verticalSizeClass) private var verticalSizeClass
-    let appTheme: AppTheme
+    let appSettings: AppSettings
 
     var body: some View {
         ZStack {
@@ -61,15 +61,15 @@ struct InverterView: View {
                     .frame(width: 50, height: 55)
                     .padding(5)
                     .accessibilityHidden(true)
-                    .opacity(appTheme.showInverterIcon ? 1 : 0)
+                    .opacity(appSettings.showInverterIcon ? 1 : 0)
 
-                verticalDeviceDetail().offset(y: appTheme.showInverterIcon ? 45 : 0)
+                verticalDeviceDetail().offset(y: appSettings.showInverterIcon ? 45 : 0)
             } else {
                 // Landscape
                 HStack {
                     deviceNameSelector()
 
-                    if appTheme.showInverterTemperature, let temperatures = viewModel.temperatures {
+                    if appSettings.showInverterTemperature, let temperatures = viewModel.temperatures {
                         HStack {
                             InverterTemperatureView(value: temperatures.ambient, name: "internal")
                             InverterTemperatureView(value: temperatures.inverter, name: "external")
@@ -86,7 +86,7 @@ struct InverterView: View {
         VStack {
             deviceNameSelector()
 
-            if appTheme.showInverterTemperature, let temperatures = viewModel.temperatures {
+            if appSettings.showInverterTemperature, let temperatures = viewModel.temperatures {
                 HStack {
                     InverterTemperatureView(value: temperatures.ambient, name: "internal")
                     InverterTemperatureView(value: temperatures.inverter, name: "external")
@@ -108,7 +108,7 @@ struct InverterView: View {
                             Label(selectableDevice.device.deviceDisplayName,
                                   systemImage: selectableDevice.isSelected ? "checkmark" : "")
 
-                            if appTheme.showInverterPlantName {
+                            if appSettings.showInverterPlantName {
                                 OptionalView(selectableDevice.device.plantName) {
                                     Text($0)
                                         .font(.caption2)
@@ -120,7 +120,7 @@ struct InverterView: View {
                     VStack {
                         HStack {
                             VStack {
-                                switch (appTheme.showInverterTypeNameOnPowerFlow, appTheme.showInverterPlantName) {
+                                switch (appSettings.showInverterTypeNameOnPowerFlow, appSettings.showInverterPlantName) {
                                 case (true, false):
                                     OptionalView(viewModel.deviceType) {
                                         Text($0)
@@ -152,11 +152,11 @@ struct InverterView: View {
                 .padding(.top, 5)
             } else {
                 VStack {
-                    if appTheme.showInverterTypeNameOnPowerFlow, let typeName = viewModel.deviceType {
+                    if appSettings.showInverterTypeNameOnPowerFlow, let typeName = viewModel.deviceType {
                         Text(typeName)
                     }
 
-                    if appTheme.showInverterPlantName {
+                    if appSettings.showInverterPlantName {
                         OptionalView(viewModel.devicePlantName) {
                             Text($0)
                                 .font(.caption2)
@@ -175,12 +175,12 @@ struct InverterView_Previews: PreviewProvider {
         VStack {
             InverterView(viewModel: InverterViewModel(configManager: PreviewConfigManager(),
                                                       temperatures: InverterTemperatures.any()),
-                         appTheme: .mock().copy(showInverterTemperature: true, showInverterPlantName: true))
+                         appSettings: .mock().copy(showInverterTemperature: true, showInverterPlantName: true))
                 .background(Color.gray.opacity(0.3))
 
             InverterView(viewModel: InverterViewModel(configManager: PreviewConfigManager(),
                                                       temperatures: InverterTemperatures.any()),
-                         appTheme: .mock().copy(showInverterTemperature: false))
+                         appSettings: .mock().copy(showInverterTemperature: false))
                 .background(Color.gray.opacity(0.3))
         }
     }

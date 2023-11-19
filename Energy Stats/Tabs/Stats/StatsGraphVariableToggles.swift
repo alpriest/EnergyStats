@@ -12,7 +12,7 @@ struct StatsGraphVariableToggles: View {
     @ObservedObject var viewModel: StatsTabViewModel
     @Binding var selectedDate: Date?
     @Binding var valuesAtTime: ValuesAtTime<StatsGraphValue>?
-    let appTheme: AppTheme
+    let appSettings: AppSettings
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -28,7 +28,7 @@ struct StatsGraphVariableToggles: View {
                             VStack(alignment: .leading) {
                                 Text(variable.type.title)
 
-                                if variable.type.title != variable.type.description, appTheme.showGraphValueDescriptions {
+                                if variable.type.title != variable.type.description, appSettings.showGraphValueDescriptions {
                                     Text(variable.type.description)
                                         .font(.system(size: 10))
                                         .foregroundColor(Color("text_dimmed"))
@@ -42,7 +42,7 @@ struct StatsGraphVariableToggles: View {
                                     .monospacedDigit()
                             } else {
                                 OptionalView(viewModel.total(of: variable.type)) {
-                                    EnergyText(amount: $0, appTheme: appTheme, type: .default)
+                                    EnergyText(amount: $0, appSettings: appSettings, type: .default)
                                 }
                             }
                         }
@@ -78,7 +78,7 @@ struct StatsGraphVariableToggles_Previews: PreviewProvider {
             viewModel: StatsTabViewModel(networking: DemoNetworking(), configManager: PreviewConfigManager()),
             selectedDate: .constant(nil),
             valuesAtTime: .constant(nil),
-            appTheme: .mock()
+            appSettings: .mock()
         )
     }
 }

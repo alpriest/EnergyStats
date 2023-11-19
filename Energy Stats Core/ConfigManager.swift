@@ -32,7 +32,7 @@ public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging {
     var showUsableBatteryOnly: Bool { get set }
     var showTotalYield: Bool { get set }
     var refreshFrequency: RefreshFrequency { get set }
-    var appTheme: LatestAppTheme { get }
+    var appSettings: LatestAppPublisher { get }
     var decimalPlaces: Int { get set }
     var showSunnyBackground: Bool { get set }
     var devices: [Device]? { get set }
@@ -73,7 +73,7 @@ public protocol FinancialConfigManaging {
 public class ConfigManager: ConfigManaging {
     private let networking: FoxESSNetworking
     private var config: Config
-    public var appTheme: CurrentValueSubject<AppTheme, Never>
+    public var appSettings: CurrentValueSubject<AppSettings, Never>
     public var currentDevice = CurrentValueSubject<Device?, Never>(nil)
 
     public struct NoDeviceFoundError: Error {
@@ -87,8 +87,8 @@ public class ConfigManager: ConfigManaging {
     public init(networking: FoxESSNetworking, config: Config) {
         self.networking = networking
         self.config = config
-        appTheme = CurrentValueSubject(
-            AppTheme(
+        appSettings = CurrentValueSubject(
+            AppSettings(
                 showColouredLines: config.showColouredLines,
                 showBatteryTemperature: config.showBatteryTemperature,
                 showSunnyBackground: config.showSunnyBackground,
@@ -270,7 +270,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showColouredLines }
         set {
             config.showColouredLines = newValue
-            appTheme.send(appTheme.value.copy(
+            appSettings.send(appSettings.value.copy(
                 showColouredLines: config.showColouredLines
             ))
         }
@@ -280,7 +280,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showBatteryTemperature }
         set {
             config.showBatteryTemperature = newValue
-            appTheme.send(appTheme.value.copy(
+            appSettings.send(appSettings.value.copy(
                 showBatteryTemperature: config.showBatteryTemperature
             ))
         }
@@ -290,7 +290,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showBatteryEstimate }
         set {
             config.showBatteryEstimate = newValue
-            appTheme.send(appTheme.value.copy(
+            appSettings.send(appSettings.value.copy(
                 showBatteryEstimate: config.showBatteryEstimate
             ))
         }
@@ -300,7 +300,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showUsableBatteryOnly }
         set {
             config.showUsableBatteryOnly = newValue
-            appTheme.send(appTheme.value.copy(
+            appSettings.send(appSettings.value.copy(
                 showUsableBatteryOnly: config.showUsableBatteryOnly
             ))
         }
@@ -310,7 +310,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showTotalYield }
         set {
             config.showTotalYield = newValue
-            appTheme.send(appTheme.value.copy(
+            appSettings.send(appSettings.value.copy(
                 showTotalYield: config.showTotalYield
             ))
         }
@@ -325,7 +325,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showSunnyBackground }
         set {
             config.showSunnyBackground = newValue
-            appTheme.send(appTheme.value.copy(
+            appSettings.send(appSettings.value.copy(
                 showSunnyBackground: config.showSunnyBackground
             ))
         }
@@ -335,7 +335,7 @@ public class ConfigManager: ConfigManaging {
         get { config.selfSufficiencyEstimateMode }
         set {
             config.selfSufficiencyEstimateMode = newValue
-            appTheme.send(appTheme.value.copy(
+            appSettings.send(appSettings.value.copy(
                 selfSufficiencyEstimateMode: config.selfSufficiencyEstimateMode
             ))
         }
@@ -345,7 +345,7 @@ public class ConfigManager: ConfigManaging {
         get { config.decimalPlaces }
         set {
             config.decimalPlaces = newValue
-            appTheme.send(appTheme.value.copy(
+            appSettings.send(appSettings.value.copy(
                 decimalPlaces: config.decimalPlaces
             ))
         }
@@ -355,7 +355,7 @@ public class ConfigManager: ConfigManaging {
         get { DisplayUnit(rawValue: config.displayUnit) ?? .kilowatt }
         set {
             config.displayUnit = newValue.rawValue
-            appTheme.send(appTheme.value.copy(
+            appSettings.send(appSettings.value.copy(
                 displayUnit: newValue
             ))
         }
@@ -365,7 +365,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showFinancialEarnings }
         set {
             config.showFinancialEarnings = newValue
-            appTheme.send(appTheme.value.copy(
+            appSettings.send(appSettings.value.copy(
                 showFinancialEarnings: config.showFinancialEarnings
             ))
         }
@@ -375,7 +375,7 @@ public class ConfigManager: ConfigManaging {
         get { FinancialModel(rawValue: config.financialModel) ?? .foxESS }
         set {
             config.financialModel = newValue.rawValue
-            appTheme.send(appTheme.value.copy(
+            appSettings.send(appSettings.value.copy(
                 financialModel: FinancialModel(rawValue: config.financialModel)
             ))
         }
@@ -385,7 +385,7 @@ public class ConfigManager: ConfigManaging {
         get { config.feedInUnitPrice }
         set {
             config.feedInUnitPrice = newValue
-            appTheme.send(appTheme.value.copy(
+            appSettings.send(appSettings.value.copy(
                 feedInUnitPrice: config.feedInUnitPrice
             ))
         }
@@ -395,7 +395,7 @@ public class ConfigManager: ConfigManaging {
         get { config.gridImportUnitPrice }
         set {
             config.gridImportUnitPrice = newValue
-            appTheme.send(appTheme.value.copy(
+            appSettings.send(appSettings.value.copy(
                 feedInUnitPrice: config.gridImportUnitPrice
             ))
         }
@@ -405,7 +405,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showInverterTemperature }
         set {
             config.showInverterTemperature = newValue
-            appTheme.send(appTheme.value.copy(
+            appSettings.send(appSettings.value.copy(
                 showInverterTemperature: config.showInverterTemperature
             ))
         }
@@ -415,7 +415,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showInverterTypeNameOnPowerFlow }
         set {
             config.showInverterTypeNameOnPowerFlow = newValue
-            appTheme.send(appTheme.value.copy(
+            appSettings.send(appSettings.value.copy(
                 showInverterTypeNameOnPowerFlow: config.showInverterTypeNameOnPowerFlow
             ))
         }
@@ -425,7 +425,7 @@ public class ConfigManager: ConfigManaging {
         get { config.solarDefinitions }
         set {
             config.solarDefinitions = newValue
-            appTheme.send(appTheme.value.copy(
+            appSettings.send(appSettings.value.copy(
                 solarDefinitions: config.solarDefinitions
             ))
         }
@@ -435,7 +435,7 @@ public class ConfigManager: ConfigManaging {
         get { config.parameterGroups }
         set {
             config.parameterGroups = newValue
-            appTheme.send(appTheme.value.copy(
+            appSettings.send(appSettings.value.copy(
                 parameterGroups: config.parameterGroups
             ))
         }
@@ -445,7 +445,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showGraphValueDescriptions }
         set {
             config.showGraphValueDescriptions = newValue
-            appTheme.send(appTheme.value.copy(
+            appSettings.send(appSettings.value.copy(
                 showGraphValueDescriptions: config.showGraphValueDescriptions
             ))
         }
@@ -484,7 +484,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showHomeTotalOnPowerFlow }
         set {
             config.showHomeTotalOnPowerFlow = newValue
-            appTheme.send(appTheme.value.copy(
+            appSettings.send(appSettings.value.copy(
                 showHomeTotalOnPowerFlow: config.showHomeTotalOnPowerFlow
             ))
         }
@@ -494,7 +494,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showInverterIcon }
         set {
             config.showInverterIcon = newValue
-            appTheme.send(appTheme.value.copy(
+            appSettings.send(appSettings.value.copy(
                 showInverterIcon: config.showInverterIcon
             ))
         }
@@ -504,7 +504,7 @@ public class ConfigManager: ConfigManaging {
         get { config.shouldInvertCT2 }
         set {
             config.shouldInvertCT2 = newValue
-            appTheme.send(appTheme.value.copy(
+            appSettings.send(appSettings.value.copy(
                 shouldInvertCT2: config.shouldInvertCT2
             ))
         }
@@ -514,7 +514,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showInverterPlantName }
         set {
             config.showInverterPlantName = newValue
-            appTheme.send(appTheme.value.copy(
+            appSettings.send(appSettings.value.copy(
                 showInverterPlantName: config.showInverterPlantName
             ))
         }
@@ -524,7 +524,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showGridTotalsOnPowerFlow }
         set {
             config.showGridTotalsOnPowerFlow = newValue
-            appTheme.send(appTheme.value.copy(
+            appSettings.send(appSettings.value.copy(
                 showGridTotalsOnPowerFlow: config.showGridTotalsOnPowerFlow
             ))
         }
@@ -534,7 +534,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showLastUpdateTimestamp }
         set {
             config.showLastUpdateTimestamp = newValue
-            appTheme.send(appTheme.value.copy(
+            appSettings.send(appSettings.value.copy(
                 showLastUpdateTimestamp: config.showLastUpdateTimestamp
             ))
         }
@@ -544,7 +544,7 @@ public class ConfigManager: ConfigManaging {
         get { config.shouldCombineCT2WithPVPower }
         set {
             config.shouldCombineCT2WithPVPower = newValue
-            appTheme.send(appTheme.value.copy(
+            appSettings.send(appSettings.value.copy(
                 shouldCombineCT2WithPVPower: config.shouldCombineCT2WithPVPower
             ))
         }
@@ -554,7 +554,7 @@ public class ConfigManager: ConfigManaging {
         get { config.solcastResourceId }
         set {
             config.solcastResourceId = newValue
-            appTheme.send(appTheme.value.copy(
+            appSettings.send(appSettings.value.copy(
                 solcastResourceId: config.solcastResourceId
             ))
         }
@@ -564,7 +564,7 @@ public class ConfigManager: ConfigManaging {
         get { config.solcastApiKey }
         set {
             config.solcastApiKey = newValue
-            appTheme.send(appTheme.value.copy(
+            appSettings.send(appSettings.value.copy(
                 solcastApiKey: config.solcastApiKey
             ))
         }

@@ -16,11 +16,11 @@ extension SolcastForecastResponse: Identifiable {
 
 @available(iOS 16.0, *)
 struct SolarForecastView: View {
-    let appTheme: AppTheme
+    let appSettings: AppSettings
     @ObservedObject var viewModel: SolarForecastViewModel
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 16) {
             Text("Solar Forecasts")
                 .font(.largeTitle)
 
@@ -35,8 +35,8 @@ struct SolarForecastView: View {
     private func loadedView() -> some View {
         VStack(spacing: 8) {
             VStack(spacing: 22) {
-                ForecastView(data: viewModel.today, appTheme: appTheme, title: "Today")
-                ForecastView(data: viewModel.tomorrow, appTheme: appTheme, title: "Tomorrow")
+                ForecastView(data: viewModel.today, appSettings: appSettings, title: "today")
+                ForecastView(data: viewModel.tomorrow, appSettings: appSettings, title: "tomorrow")
 
                 HStack {
                     MidYHorizontalLine()
@@ -67,13 +67,13 @@ struct SolarForecastView: View {
 struct ForecastView: View {
     @State private var size: CGSize = .zero
     private let data: [SolcastForecastResponse]
-    private let appTheme: AppTheme
-    private let title: String
+    private let appSettings: AppSettings
+    private let title: LocalizedStringKey
     private let xScale: ClosedRange<Date>
 
-    init(data: [SolcastForecastResponse], appTheme: AppTheme, title: String) {
+    init(data: [SolcastForecastResponse], appSettings: AppSettings, title: LocalizedStringKey) {
         self.data = data
-        self.appTheme = appTheme
+        self.appSettings = appSettings
         self.title = title
 
         if let graphDate = data.first?.period_end {
@@ -111,6 +111,7 @@ struct ForecastView: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                         .padding(2)
                         .foregroundStyle(Color(uiColor: .label))
+                        .font(.caption)
                 }
         }
         .chartOverlay { chartProxy in
@@ -147,8 +148,9 @@ struct ForecastView: View {
         .chartYAxis(content: {
             AxisMarks(values: .automatic(desiredCount: 4)) { value in
                 if let amount = value.as(Double.self) {
+                    AxisGridLine()
                     AxisValueLabel {
-                        EnergyText(amount: amount, appTheme: appTheme, type: .default, decimalPlaceOverride: 0)
+                        EnergyText(amount: amount, appSettings: appSettings, type: .default, decimalPlaceOverride: 0)
                     }
                 }
             }
@@ -160,8 +162,8 @@ struct ForecastView: View {
 @available(iOS 16.0, *)
 #Preview {
     ForecastView(data: PreviewSolcast().fetchForecast().forecasts,
-                 appTheme: AppTheme.mock(),
-                 title: "Today")
+                 appSettings: AppSettings.mock(),
+                 title: "today")
 }
 
 private class PreviewSolcast {

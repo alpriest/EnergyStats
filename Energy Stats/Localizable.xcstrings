@@ -3784,7 +3784,7 @@
         }
       }
     },
-    "Export income" : {
+    "export_income" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4555,34 +4555,6 @@
         }
       }
     },
-    "Grid import avoided" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eingesparter Netzverbrauch"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Importación de la red evitada"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Importazione dalla rete evitata"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Oszczędność na imporcie z sieci"
-          }
-        }
-      }
-    },
     "Grid Import Unit price" : {
       "localizations" : {
         "de" : {
@@ -4607,6 +4579,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cena za import energii z sieci"
+          }
+        }
+      }
+    },
+    "grid_import_avoided" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eingesparter Netzverbrauch"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importación de la red evitada"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importazione dalla rete evitata"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oszczędność na imporcie z sieci"
           }
         }
       }
@@ -4882,7 +4882,7 @@
         }
       }
     },
-    "Home usage" : {
+    "home_usage" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -9480,34 +9480,6 @@
         }
       }
     },
-    "Solar generated" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Solar erzeugt"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Generado por energía solar"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Generato da energia solare"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Generowany przez energię słoneczną"
-          }
-        }
-      }
-    },
     "solar_example_description" : {
       "localizations" : {
         "de" : {
@@ -9542,36 +9514,30 @@
         }
       }
     },
-    "Solcast_description" : {
+    "solar_generated" : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Solcast provide solar predictions based on your location. To sign up for free, visit https://solcast.com/free-rooftop-solar-forecasting and register for Hobbyist Access.\n\nOnce you've signed up and have created your site, paste the resource ID and your API key below."
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Solcast bietet Solarprognosen basierend auf Ihrem Standort. Um sich kostenlos anzumelden, besuchen Sie https://solcast.com/free-rooftop-solar-forecasting und registrieren Sie sich für den Hobbyist-Zugang.\n\nNachdem Sie sich angemeldet und Ihre Seite erstellt haben, fügen Sie die Ressourcen-ID und Ihren API-Schlüssel unten ein."
+            "value" : "Solar erzeugt"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Solcast proporciona predicciones solares basadas en tu ubicación. Para registrarte gratuitamente, visita https://solcast.com/free-rooftop-solar-forecasting y regístrate para el Acceso de Aficionados.\n\nUna vez que te hayas registrado y hayas creado tu sitio, pega el ID del recurso y tu clave API abajo."
+            "value" : "Generado por energía solar"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Solcast fornisce previsioni solari basate sulla tua posizione. Per iscriverti gratuitamente, visita https://solcast.com/free-rooftop-solar-forecasting e registrati per l'Accesso Hobbistico.\n\nUna volta che ti sei iscritto e hai creato il tuo sito, incolla l'ID della risorsa e la tua chiave API qui sotto."
+            "value" : "Generato da energia solare"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Solcast oferuje prognozy słoneczne oparte na Twojej lokalizacji. Aby zarejestrować się za darmo, odwiedź https://solcast.com/free-rooftop-solar-forecasting i zarejestruj się, aby uzyskać dostęp dla Hobbyistów.\n\nPo zarejestrowaniu się i utworzeniu swojej strony, wklej poniżej ID zasobu i swój klucz API."
+            "value" : "Generowany przez energię słoneczną"
           }
         }
       }
@@ -9600,6 +9566,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prognoza Solarna Solcast"
+          }
+        }
+      }
+    },
+    "Solcast_description" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solcast bietet Solarprognosen basierend auf Ihrem Standort. Um sich kostenlos anzumelden, besuchen Sie https://solcast.com/free-rooftop-solar-forecasting und registrieren Sie sich für den Hobbyist-Zugang.\n\nNachdem Sie sich angemeldet und Ihre Seite erstellt haben, fügen Sie die Ressourcen-ID und Ihren API-Schlüssel unten ein."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solcast provide solar predictions based on your location. To sign up for free, visit https://solcast.com/free-rooftop-solar-forecasting and register for Hobbyist Access.\n\nOnce you've signed up and have created your site, paste the resource ID and your API key below."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solcast proporciona predicciones solares basadas en tu ubicación. Para registrarte gratuitamente, visita https://solcast.com/free-rooftop-solar-forecasting y regístrate para el Acceso de Aficionados.\n\nUna vez que te hayas registrado y hayas creado tu sitio, pega el ID del recurso y tu clave API abajo."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solcast fornisce previsioni solari basate sulla tua posizione. Per iscriverti gratuitamente, visita https://solcast.com/free-rooftop-solar-forecasting e registrati per l'Accesso Hobbistico.\n\nUna volta che ti sei iscritto e hai creato il tuo sito, incolla l'ID della risorsa e la tua chiave API qui sotto."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solcast oferuje prognozy słoneczne oparte na Twojej lokalizacji. Aby zarejestrować się za darmo, odwiedź https://solcast.com/free-rooftop-solar-forecasting i zarejestruj się, aby uzyskać dostęp dla Hobbyistów.\n\nPo zarejestrowaniu się i utworzeniu swojej strony, wklej poniżej ID zasobu i swój klucz API."
           }
         }
       }
@@ -10123,6 +10123,34 @@
         }
       }
     },
+    "tomorrow" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "morgen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "mañana"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "domani"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "jutro"
+          }
+        }
+      }
+    },
     "total" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -10158,7 +10186,7 @@
         }
       }
     },
-    "Total benefit" : {
+    "total_benefit" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {

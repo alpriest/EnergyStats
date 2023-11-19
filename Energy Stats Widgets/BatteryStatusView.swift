@@ -15,7 +15,7 @@ struct BatteryStatusView: View {
     let soc: Double
     let chargeStatusDescription: String?
     let lastUpdated: Date
-    let appTheme: AppTheme
+    let appSettings: AppSettings
     let hasError: Bool
 
     var body: some View {
@@ -126,7 +126,7 @@ struct BatteryStatusView_Previews: PreviewProvider {
             soc: 0.8,
             chargeStatusDescription: "Full in 22 minutes",
             lastUpdated: .now,
-            appTheme: .mock(),
+            appSettings: .mock(),
             hasError: false
         )
         .previewContext(WidgetPreviewContext(family: .accessoryCircular))

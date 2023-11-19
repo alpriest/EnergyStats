@@ -10,12 +10,12 @@ import SwiftUI
 
 public struct PowerText: View {
     let amount: Double
-    let appTheme: AppTheme
+    let appSettings: AppSettings
     let type: AmountType
 
-    public init(amount: Double, appTheme: AppTheme, type: AmountType) {
+    public init(amount: Double, appSettings: AppSettings, type: AmountType) {
         self.amount = amount
-        self.appTheme = appTheme
+        self.appSettings = appSettings
         self.type = type
     }
 
@@ -26,15 +26,15 @@ public struct PowerText: View {
     }
 
     private var amountWithUnit: String {
-        switch appTheme.displayUnit {
+        switch appSettings.displayUnit {
         case .adaptive:
             if amount < 1 {
                 return amount.w()
             } else {
-                return amount.kW(appTheme.decimalPlaces)
+                return amount.kW(appSettings.decimalPlaces)
             }
         case .kilowatt:
-            return amount.kW(appTheme.decimalPlaces)
+            return amount.kW(appSettings.decimalPlaces)
         case .watt:
             return amount.w()
         }
@@ -43,13 +43,13 @@ public struct PowerText: View {
 
 public struct EnergyText: View {
     let amount: Double
-    let appTheme: AppTheme
+    let appSettings: AppSettings
     let type: AmountType
     let decimalPlaceOverride: Int?
 
-    public init(amount: Double, appTheme: AppTheme, type: AmountType, decimalPlaceOverride: Int? = nil) {
+    public init(amount: Double, appSettings: AppSettings, type: AmountType, decimalPlaceOverride: Int? = nil) {
         self.amount = amount
-        self.appTheme = appTheme
+        self.appSettings = appSettings
         self.type = type
         self.decimalPlaceOverride = decimalPlaceOverride
     }
@@ -61,15 +61,15 @@ public struct EnergyText: View {
     }
 
     private var amountWithUnit: String {
-        switch appTheme.displayUnit {
+        switch appSettings.displayUnit {
         case .adaptive:
             if amount < 1 {
                 return amount.wh()
             } else {
-                return amount.kWh(decimalPlaceOverride ?? appTheme.decimalPlaces)
+                return amount.kWh(decimalPlaceOverride ?? appSettings.decimalPlaces)
             }
         case .kilowatt:
-            return amount.kWh(decimalPlaceOverride ?? appTheme.decimalPlaces)
+            return amount.kWh(decimalPlaceOverride ?? appSettings.decimalPlaces)
         case .watt:
             return amount.wh()
         }
@@ -80,20 +80,20 @@ public struct PowerAmountView: View {
     public let amount: Double
     public let backgroundColor: Color
     public let textColor: Color
-    public let appTheme: AppTheme
+    public let appSettings: AppSettings
     public let type: AmountType
 
-    public init(amount: Double, backgroundColor: Color, textColor: Color, appTheme: AppTheme, type: AmountType) {
+    public init(amount: Double, backgroundColor: Color, textColor: Color, appSettings: AppSettings, type: AmountType) {
         self.amount = amount
         self.backgroundColor = backgroundColor
         self.textColor = textColor
-        self.appTheme = appTheme
+        self.appSettings = appSettings
         self.type = type
     }
 
     public var body: some View {
         Group {
-            PowerText(amount: amount, appTheme: appTheme, type: type)
+            PowerText(amount: amount, appSettings: appSettings, type: type)
         }
         .padding(.vertical, 2)
         .padding(.horizontal, 3)
@@ -105,6 +105,6 @@ public struct PowerAmountView: View {
 
 struct EnergyAmountView_Previews: PreviewProvider {
     static var previews: some View {
-        PowerAmountView(amount: 0.310, backgroundColor: .red, textColor: .black, appTheme: AppTheme.mock(), type: .solarFlow)
+        PowerAmountView(amount: 0.310, backgroundColor: .red, textColor: .black, appSettings: AppSettings.mock(), type: .solarFlow)
     }
 }

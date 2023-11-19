@@ -16,15 +16,15 @@ struct ParametersGraphTabView: View {
     @State private var selectedDate: Date?
     @State private var showingVariables = false
     @State private var showingExporter = false
-    @State private var appTheme: AppTheme = .mock()
-    private let appThemePublisher: LatestAppTheme
+    @State private var appSettings: AppSettings = .mock()
+    private let appSettingsPublisher: LatestAppPublisher
     private let configManager: ConfigManaging
 
     init(configManager: ConfigManaging, networking: FoxESSNetworking, dateProvider: @escaping () -> Date = { Date() }) {
         _viewModel = .init(wrappedValue: ParametersGraphTabViewModel(networking: networking, configManager: configManager, dateProvider: dateProvider))
         self.configManager = configManager
-        self.appThemePublisher = configManager.appTheme
-        self.appTheme = appThemePublisher.value
+        self.appSettingsPublisher = configManager.appSettings
+        self.appSettings = appSettingsPublisher.value
     }
 
     var body: some View {
@@ -56,7 +56,7 @@ struct ParametersGraphTabView: View {
                         .padding(.vertical)
                     }
 
-                    ParameterGraphVariablesToggles(viewModel: viewModel, selectedDate: $selectedDate, valuesAtTime: $valuesAtTime, appTheme: appTheme)
+                    ParameterGraphVariablesToggles(viewModel: viewModel, selectedDate: $selectedDate, valuesAtTime: $valuesAtTime, appSettings: appSettings)
 
                     Text("Parameters are updated every 5 minutes by FoxESS and only available for a single day at a time")
                         .font(.footnote)
@@ -91,8 +91,8 @@ struct ParametersGraphTabView: View {
                 await viewModel.load()
             }
         }
-        .onReceive(appThemePublisher) {
-            self.appTheme = $0
+        .onReceive(appSettingsPublisher) {
+            self.appSettings = $0
         }
     }
 }

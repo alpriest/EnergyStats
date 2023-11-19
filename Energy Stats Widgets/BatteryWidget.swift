@@ -74,7 +74,7 @@ struct BatteryWidgetView: View {
                     soc: Double(entry.soc ?? 0) / 100.0,
                     chargeStatusDescription: entry.chargeStatusDescription,
                     lastUpdated: entry.date,
-                    appTheme: configManager.appTheme.value,
+                    appSettings: configManager.appSettings.value,
                     hasError: entry.errorMessage != nil
                 )
             }

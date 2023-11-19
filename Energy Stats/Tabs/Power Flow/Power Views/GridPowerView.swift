@@ -11,11 +11,11 @@ import SwiftUI
 
 struct GridPowerView: View {
     let amount: Double
-    let appTheme: AppTheme
+    let appSettings: AppSettings
 
     var body: some View {
         VStack {
-            PowerFlowView(amount: amount, appTheme: appTheme, showColouredLines: true, type: .gridFlow)
+            PowerFlowView(amount: amount, appSettings: appSettings, showColouredLines: true, type: .gridFlow)
             PylonView(lineWidth: 3)
                 .frame(width: 45, height: 45)
         }
@@ -24,5 +24,5 @@ struct GridPowerView: View {
 
 #Preview {
     GridPowerView(amount: 0.4,
-                  appTheme: AppTheme.mock())
+                  appSettings: AppSettings.mock())
 }

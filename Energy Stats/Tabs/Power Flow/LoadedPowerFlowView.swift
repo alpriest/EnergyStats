@@ -11,17 +11,17 @@ import SwiftUI
 
 struct LoadedPowerFlowView: View {
     @State private var iconFooterHeight: Double = 0
-    @State private var appTheme: AppTheme = .mock()
+    @State private var appSettings: AppSettings = .mock()
     @State private var size: CGSize = .zero
     private let configManager: ConfigManaging
     private let viewModel: HomePowerFlowViewModel
-    private var appThemePublisher: LatestAppTheme
+    private var appSettingsPublisher: LatestAppPublisher
 
-    init(configManager: ConfigManaging, viewModel: HomePowerFlowViewModel, appThemePublisher: LatestAppTheme) {
+    init(configManager: ConfigManaging, viewModel: HomePowerFlowViewModel, appSettingsPublisher: LatestAppPublisher) {
         self.configManager = configManager
         self.viewModel = viewModel
-        self.appThemePublisher = appThemePublisher
-        self.appTheme = appThemePublisher.value
+        self.appSettingsPublisher = appSettingsPublisher
+        self.appSettings = appSettingsPublisher.value
     }
 
     var body: some View {
@@ -30,24 +30,24 @@ struct LoadedPowerFlowView: View {
                 if size == .zero {
                     Color.clear.frame(minWidth: 0, maxWidth: .infinity)
                 } else {
-                    if appTheme.showTotalYield {
+                    if appSettings.showTotalYield {
                         HStack(spacing: 0) {
                             (Text("Yield today") + Text(" ")).accessibilityHidden(true)
-                            EnergyText(amount: viewModel.todaysGeneration, appTheme: appTheme, type: .totalYield)
+                            EnergyText(amount: viewModel.todaysGeneration, appSettings: appSettings, type: .totalYield)
                         }
                     }
 
-                    if appTheme.showFinancialEarnings {
-                        EarningsView(viewModel: viewModel.earnings, appTheme: appTheme)
+                    if appSettings.showFinancialEarnings {
+                        EarningsView(viewModel: viewModel.earnings, appSettings: appSettings)
                             .padding(.bottom, 8)
                     }
 
                     ZStack {
                         HStack {
-                            if !appTheme.shouldCombineCT2WithPVPower {
+                            if !appSettings.shouldCombineCT2WithPVPower {
                                 VStack(spacing: 0) {
                                     CT2_icon()
-                                    PowerFlowView(amount: viewModel.ct2, appTheme: appTheme, showColouredLines: false, type: .solarFlow)
+                                    PowerFlowView(amount: viewModel.ct2, appSettings: appSettings, showColouredLines: false, type: .solarFlow)
                                     Color.clear.frame(height: size.height * 0.1)
                                 }
                                 .frame(width: topColumnWidth, height: size.height * 0.35)
@@ -55,13 +55,13 @@ struct LoadedPowerFlowView: View {
                                 Spacer().frame(width: horizontalPadding)
                             }
 
-                            SolarPowerView(appTheme: appTheme, viewModel: SolarPowerViewModel(solar: viewModel.solar,
+                            SolarPowerView(appSettings: appSettings, viewModel: SolarPowerViewModel(solar: viewModel.solar,
                                                                                               generation: viewModel.todaysGeneration,
                                                                                               earnings: viewModel.earnings))
 
                                 .frame(width: topColumnWidth, height: size.height * 0.35)
 
-                            if !appTheme.shouldCombineCT2WithPVPower {
+                            if !appSettings.shouldCombineCT2WithPVPower {
                                 Spacer().frame(width: horizontalPadding)
 
                                 Color.clear
@@ -69,14 +69,14 @@ struct LoadedPowerFlowView: View {
                             }
                         }
 
-                        if !appTheme.shouldCombineCT2WithPVPower {
-                            PowerFlowView(amount: viewModel.ct2, appTheme: appTheme, showColouredLines: false, type: .solarFlow, shape: MidYHorizontalLine(), showAmount: false)
+                        if !appSettings.shouldCombineCT2WithPVPower {
+                            PowerFlowView(amount: viewModel.ct2, appSettings: appSettings, showColouredLines: false, type: .solarFlow, shape: MidYHorizontalLine(), showAmount: false)
                                 .offset(x: -0.5 * topColumnWidth - (horizontalPadding / 2.0), y: size.height * 0.1)
                                 .frame(width: topColumnWidth + horizontalPadding)
                         }
                     }
 
-                    InverterView(viewModel: InverterViewModel(configManager: configManager, temperatures: viewModel.inverterTemperatures), appTheme: appTheme)
+                    InverterView(viewModel: InverterViewModel(configManager: configManager, temperatures: viewModel.inverterTemperatures), appSettings: appSettings)
                         .frame(height: 2)
                         .frame(width: inverterLineWidth)
                         .padding(.vertical, 2)
@@ -90,18 +90,18 @@ struct LoadedPowerFlowView: View {
                                                                               temperature: viewModel.batteryTemperature,
                                                                               batteryResidual: viewModel.batteryResidual,
                                                                               error: viewModel.batteryError),
-                                             appTheme: appTheme)
+                                             appSettings: appSettings)
                                 .frame(width: bottomColumnWidth)
 
                             Spacer().frame(width: horizontalPadding)
                         }
 
-                        HomePowerView(amount: viewModel.home, appTheme: appTheme)
+                        HomePowerView(amount: viewModel.home, appSettings: appSettings)
                             .frame(width: bottomColumnWidth)
 
                         Spacer().frame(width: horizontalPadding)
 
-                        GridPowerView(amount: viewModel.grid, appTheme: appTheme)
+                        GridPowerView(amount: viewModel.grid, appSettings: appSettings)
                             .frame(width: bottomColumnWidth)
                     }
                     .padding(.bottom, 4)
@@ -116,20 +116,20 @@ struct LoadedPowerFlowView: View {
                                                                                     temperature: viewModel.batteryTemperature,
                                                                                     batteryResidual: viewModel.batteryResidual,
                                                                                     error: viewModel.batteryError),
-                                                   appTheme: appTheme)
+                                                   appSettings: appSettings)
                                 .frame(width: bottomColumnWidth)
 
                             Spacer().frame(width: horizontalPadding)
                         }
 
-                        HomePowerFooterView(amount: viewModel.homeTotal, appTheme: appTheme)
+                        HomePowerFooterView(amount: viewModel.homeTotal, appSettings: appSettings)
                             .frame(width: bottomColumnWidth)
 
                         Spacer().frame(width: horizontalPadding)
 
                         GridPowerFooterView(importTotal: viewModel.gridImportTotal,
                                             exportTotal: viewModel.gridExportTotal,
-                                            appTheme: appTheme)
+                                            appSettings: appSettings)
                             .frame(width: bottomColumnWidth)
                     }
                     .padding(.bottom, 16)
@@ -140,8 +140,8 @@ struct LoadedPowerFlowView: View {
                 Color.clear.onAppear { size = reader.size }.onChange(of: reader.size) { newValue in size = newValue }
             })
         }
-        .onReceive(appThemePublisher) {
-            self.appTheme = $0
+        .onReceive(appSettingsPublisher) {
+            self.appSettings = $0
         }
     }
 
@@ -178,7 +178,7 @@ struct PowerSummaryView_Previews: PreviewProvider {
     static var previews: some View {
         LoadedPowerFlowView(configManager: PreviewConfigManager(),
                             viewModel: HomePowerFlowViewModel.any(battery: .any()),
-                            appThemePublisher: CurrentValueSubject(AppTheme.mock().copy(decimalPlaces: 3,
+                            appSettingsPublisher: CurrentValueSubject(AppSettings.mock().copy(decimalPlaces: 3,
                                                                                         displayUnit: .adaptive,
                                                                                         showFinancialEarnings: true,
                                                                                         showInverterTemperature: true,

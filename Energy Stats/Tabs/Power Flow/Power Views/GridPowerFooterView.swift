@@ -11,17 +11,17 @@ import SwiftUI
 struct GridPowerFooterView: View {
     let importTotal: Double
     let exportTotal: Double
-    let appTheme: AppTheme
+    let appSettings: AppSettings
 
     var body: some View {
         VStack(alignment: .center) {
-            if appTheme.showGridTotalsOnPowerFlow {
-                EnergyText(amount: importTotal, appTheme: appTheme, type: .totalImport)
+            if appSettings.showGridTotalsOnPowerFlow {
+                EnergyText(amount: importTotal, appSettings: appSettings, type: .totalImport)
                 Text("import_total")
                     .font(.caption)
                     .foregroundColor(Color("text_dimmed"))
 
-                EnergyText(amount: exportTotal, appTheme: appTheme, type: .totalExport)
+                EnergyText(amount: exportTotal, appSettings: appSettings, type: .totalExport)
                 Text("export_total")
                     .font(.caption)
                     .foregroundColor(Color("text_dimmed"))
@@ -33,7 +33,7 @@ struct GridPowerFooterView: View {
 struct GridPowerFooterView_Previews: PreviewProvider {
     static var previews: some View {
         GridPowerFooterView(
-            importTotal: 1.0, exportTotal: 2.0, appTheme: .mock()
+            importTotal: 1.0, exportTotal: 2.0, appSettings: .mock()
         )
     }
 }

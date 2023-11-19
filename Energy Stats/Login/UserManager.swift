@@ -52,7 +52,7 @@ class UserManager: ObservableObject {
 
             if username == "demo", password == "user" {
                 configManager.isDemoUser = true
-                configManager.appTheme.send(AppTheme.mock())
+                configManager.appSettings.send(AppSettings.mock())
             } else {
                 try await networking.verifyCredentials(username: username, hashedPassword: hashedPassword)
             }

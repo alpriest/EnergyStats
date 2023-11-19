@@ -11,11 +11,11 @@ import SwiftUI
 
 struct HomePowerView: View {
     let amount: Double
-    let appTheme: AppTheme
+    let appSettings: AppSettings
 
     var body: some View {
         VStack {
-            PowerFlowView(amount: amount, appTheme: appTheme, showColouredLines: false, type: .homeFlow)
+            PowerFlowView(amount: amount, appSettings: appSettings, showColouredLines: false, type: .homeFlow)
 
             Image(systemName: "house.fill")
                 .resizable()
@@ -28,6 +28,6 @@ struct HomePowerView: View {
 
 #Preview {
     HomePowerView(amount: 1.05,
-                  appTheme: AppTheme.mock())
+                  appSettings: AppSettings.mock())
         .frame(width: 50, height: 220)
 }

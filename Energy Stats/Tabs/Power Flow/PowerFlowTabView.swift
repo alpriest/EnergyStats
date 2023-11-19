@@ -11,21 +11,21 @@ import SwiftUI
 
 struct PowerFlowTabView: View {
     @StateObject private var viewModel: PowerFlowTabViewModel
-    @State private var appTheme: AppTheme
-    private var appThemePublisher: LatestAppTheme
+    @State private var appSettings: AppSettings
+    private var appSettingsPublisher: LatestAppPublisher
     @AppStorage("showLastUpdateTimestamp") private var showLastUpdateTimestamp: Bool = false
 
-    init(configManager: ConfigManaging, networking: FoxESSNetworking, userManager: UserManager, appThemePublisher: LatestAppTheme) {
+    init(configManager: ConfigManaging, networking: FoxESSNetworking, userManager: UserManager, appSettingsPublisher: LatestAppPublisher) {
         _viewModel = .init(wrappedValue: PowerFlowTabViewModel(networking, configManager: configManager, userManager: userManager))
-        self.appThemePublisher = appThemePublisher
-        self.appTheme = appThemePublisher.value
+        self.appSettingsPublisher = appSettingsPublisher
+        self.appSettings = appSettingsPublisher.value
     }
 
     var body: some View {
         VStack {
             switch viewModel.state {
             case let .loaded(summary):
-                LoadedPowerFlowView(configManager: viewModel.configManager, viewModel: summary, appThemePublisher: appThemePublisher)
+                LoadedPowerFlowView(configManager: viewModel.configManager, viewModel: summary, appSettingsPublisher: appSettingsPublisher)
 
                 Spacer()
 
@@ -51,13 +51,13 @@ struct PowerFlowTabView: View {
         .onAppear {
             viewModel.viewAppeared()
         }
-        .onReceive(appThemePublisher) {
-            self.appTheme = $0
+        .onReceive(appSettingsPublisher) {
+            self.appSettings = $0
         }
     }
 
     @ViewBuilder func background() -> some View {
-        switch appTheme.showSunnyBackground {
+        switch appSettings.showSunnyBackground {
         case true:
             backgroundGradient
         case false:
@@ -67,7 +67,7 @@ struct PowerFlowTabView: View {
 
     @ViewBuilder func updateFooterMessage() -> some View {
         HStack {
-            if appTheme.showLastUpdateTimestamp {
+            if appSettings.showLastUpdateTimestamp {
                 lastUpdateMessage()
                 Text(viewModel.updateState)
             } else {
@@ -110,6 +110,6 @@ struct PowerFlowTabView: View {
     PowerFlowTabView(configManager: PreviewConfigManager(),
                      networking: DemoNetworking(),
                      userManager: UserManager.preview(),
-                     appThemePublisher: CurrentValueSubject(AppTheme.mock()))
+                     appSettingsPublisher: CurrentValueSubject(AppSettings.mock()))
 }
 #endif

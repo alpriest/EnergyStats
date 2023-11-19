@@ -10,12 +10,12 @@ import SwiftUI
 
 struct HomePowerFooterView: View {
     let amount: Double
-    let appTheme: AppTheme
+    let appSettings: AppSettings
 
     var body: some View {
         VStack(alignment: .center) {
-            if appTheme.showHomeTotalOnPowerFlow {
-                EnergyText(amount: amount, appTheme: appTheme, type: .homeUsage)
+            if appSettings.showHomeTotalOnPowerFlow {
+                EnergyText(amount: amount, appSettings: appSettings, type: .homeUsage)
                 Text("Usage today")
                     .multilineTextAlignment(.center)
                     .font(.caption)
@@ -27,5 +27,5 @@ struct HomePowerFooterView: View {
 
 #Preview {
     HomePowerFooterView(amount: 1.0,
-                        appTheme: .mock())
+                        appSettings: .mock())
 }

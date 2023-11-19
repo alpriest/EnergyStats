@@ -31,11 +31,11 @@ class SolarForecastViewModel: ObservableObject {
     private let solarForecastProvider: (SolcastSolarForecastingConfiguration) -> SolarForecasting
     private(set) var service: SolarForecasting?
 
-    init(configManager: ConfigManaging, appTheme: LatestAppTheme, solarForecastProvider: @escaping SolarForecastProviding) {
+    init(configManager: ConfigManaging, appSettingsPublisher: LatestAppPublisher, solarForecastProvider: @escaping SolarForecastProviding) {
         self.configManager = configManager
         self.solarForecastProvider = solarForecastProvider
-        self.cancellable = appTheme.sink { [weak self] theme in
-            let config = SolcastSolarForecastingConfigurationAdapter(resourceId: theme.solcastResourceId, apiKey: theme.solcastApiKey)
+        self.cancellable = appSettingsPublisher.sink { [weak self] appSettings in
+            let config = SolcastSolarForecastingConfigurationAdapter(resourceId: appSettings.solcastResourceId, apiKey: appSettings.solcastApiKey)
             self?.service = solarForecastProvider(config)
         }
         NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)

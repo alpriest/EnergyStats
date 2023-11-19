@@ -11,13 +11,13 @@ import SwiftUI
 struct BatteryPowerFooterView: View {
     @AppStorage("showBatteryAsResidual") private var batteryResidual: Bool = false
     let viewModel: BatteryPowerViewModel
-    let appTheme: AppTheme
+    let appSettings: AppSettings
 
     var body: some View {
         VStack {
             Group {
                 if batteryResidual {
-                    EnergyText(amount: viewModel.batteryStoredChargekWh, appTheme: appTheme, type: .batteryCapacity)
+                    EnergyText(amount: viewModel.batteryStoredChargekWh, appSettings: appSettings, type: .batteryCapacity)
                 } else {
                     Text(viewModel.batteryStateOfCharge, format: .percent)
                         .accessibilityLabel(String(format: String(accessibilityKey: .batteryCapacityPercentage), String(describing: viewModel.batteryStateOfCharge.percent())))
@@ -26,13 +26,13 @@ struct BatteryPowerFooterView: View {
                 batteryResidual.toggle()
             }
 
-            if appTheme.showBatteryTemperature {
+            if appSettings.showBatteryTemperature {
                 (Text(viewModel.temperature, format: .number) + Text("°C"))
                     .accessibilityElement(children: .ignore)
                     .accessibilityLabel(String(format: String(accessibilityKey: .batteryTemperature), viewModel.temperature.roundedToString(decimalPlaces: 2)))
             }
 
-            if appTheme.showBatteryEstimate {
+            if appSettings.showBatteryEstimate {
                 OptionalView(viewModel.batteryExtra) {
                     Text($0)
                         .multilineTextAlignment(.center)
@@ -48,5 +48,5 @@ struct BatteryPowerFooterView: View {
 
 #Preview {
     BatteryPowerFooterView(viewModel: BatteryPowerViewModel.any(error: nil),
-                           appTheme: AppTheme.mock())
+                           appSettings: AppSettings.mock())
 }

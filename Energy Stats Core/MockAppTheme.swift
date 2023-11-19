@@ -7,14 +7,14 @@
 
 import Foundation
 
-public extension AppTheme {
+public extension AppSettings {
     static func mock(decimalPlaces: Int = 3,
                      displayUnit: DisplayUnit = .kilowatt,
                      showInverterTemperature: Bool = true,
                      selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode = .off,
                      showHomeTotalOnPowerFlow: Bool = true,
-                     showInverterPlantName: Bool = false) -> AppTheme {
-        AppTheme(
+                     showInverterPlantName: Bool = false) -> AppSettings {
+        AppSettings(
             showColouredLines: true,
             showBatteryTemperature: true,
             showSunnyBackground: true,

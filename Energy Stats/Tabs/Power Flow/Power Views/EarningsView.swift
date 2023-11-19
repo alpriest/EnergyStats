@@ -11,11 +11,11 @@ import SwiftUI
 
 struct EarningsView: View {
     let viewModel: EarningsViewModel
-    let appTheme: AppTheme
+    let appSettings: AppSettings
 
     var body: some View {
         HStack {
-            ForEach(viewModel.amounts(appTheme.financialModel), id: \.self) { amount in
+            ForEach(viewModel.amounts(appSettings.financialModel), id: \.self) { amount in
                 SubLabelledView(
                     value: amount.formattedAmount(),
                     label: String(key: amount.title),
@@ -27,5 +27,5 @@ struct EarningsView: View {
 }
 
 #Preview {
-    EarningsView(viewModel: .any(), appTheme: .mock())
+    EarningsView(viewModel: .any(), appSettings: .mock())
 }

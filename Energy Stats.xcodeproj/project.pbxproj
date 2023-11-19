@@ -28,7 +28,7 @@
 		4103D1DE29DB6C8C001B0BC8 /* raw-f3000-deviceid.json in Resources */ = {isa = PBXBuildFile; fileRef = 41AED86928CDCD94009C6517 /* raw-f3000-deviceid.json */; };
 		4103D1DF29DB6C8C001B0BC8 /* DemoNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A25D4028CA6E0000315714 /* DemoNetworking.swift */; };
 		4103D1E229DB6CD7001B0BC8 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4103D1E029DB6CB9001B0BC8 /* ConfigManager.swift */; };
-		4103D1E329DB6D03001B0BC8 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410AA38729D96F6D00CD107C /* AppTheme.swift */; };
+		4103D1E329DB6D03001B0BC8 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410AA38729D96F6D00CD107C /* AppSettings.swift */; };
 		4103D1E429DB6D12001B0BC8 /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41339C7328CC7BA50062B976 /* KeychainStore.swift */; };
 		4103D1E529DB6D29001B0BC8 /* Sequence+aysnc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4111333529B7D61200972935 /* Sequence+aysnc.swift */; };
 		410484C82AD49D95007F68C0 /* CT2-icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410484C72AD49D95007F68C0 /* CT2-icon.swift */; };
@@ -345,7 +345,7 @@
 		4107446B28CA57A9006D5D7D /* PowerFlowTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerFlowTabView.swift; sourceTree = "<group>"; };
 		41075D5F29DC392E007F897A /* BatteryCapacityCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryCapacityCalculatorTests.swift; sourceTree = "<group>"; };
 		410913FC29DB78EF00133CC5 /* PreciseDateTimeFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreciseDateTimeFormatter.swift; sourceTree = "<group>"; };
-		410AA38729D96F6D00CD107C /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
+		410AA38729D96F6D00CD107C /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		410FC8852AB98F020004CBC2 /* ParameterVariableGroupEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterVariableGroupEditorView.swift; sourceTree = "<group>"; };
 		410FC8872AB9B5450004CBC2 /* ParameterVariableListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterVariableListView.swift; sourceTree = "<group>"; };
 		410FC8892AB9EAD90004CBC2 /* ParameterVariableGroupEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterVariableGroupEditorViewModel.swift; sourceTree = "<group>"; };
@@ -1029,7 +1029,7 @@
 				41A25D4228CA706700315714 /* CountdownTimer.swift */,
 				4127690128EC865000D5A094 /* PowerAmountView.swift */,
 				4162BC2F2A097C1300DFEDC1 /* SunView.swift */,
-				410AA38729D96F6D00CD107C /* AppTheme.swift */,
+				410AA38729D96F6D00CD107C /* AppSettings.swift */,
 				4103D1E029DB6CB9001B0BC8 /* ConfigManager.swift */,
 				41339C7328CC7BA50062B976 /* KeychainStore.swift */,
 				4103D1E629DB6D2C001B0BC8 /* Extensions */,
@@ -1550,7 +1550,7 @@
 				41009A732B02D852009D853B /* SolcastForecastResponse.swift in Sources */,
 				4103D1DC29DB6C6D001B0BC8 /* Config.swift in Sources */,
 				418240782A9A33E300101064 /* TotalsViewModel.swift in Sources */,
-				4103D1E329DB6D03001B0BC8 /* AppTheme.swift in Sources */,
+				4103D1E329DB6D03001B0BC8 /* AppSettings.swift in Sources */,
 				4103D1DB29DB6C6D001B0BC8 /* RawVariable.swift in Sources */,
 				4103D1E529DB6D29001B0BC8 /* Sequence+aysnc.swift in Sources */,
 				416AE44B2A8170E6003D0122 /* SelectableItem.swift in Sources */,

@@ -16,27 +16,27 @@ struct SolarPowerViewModel {
 }
 
 struct SolarPowerView: View {
-    private let appTheme: AppTheme
+    private let appSettings: AppSettings
     private let viewModel: SolarPowerViewModel
 
-    init(appTheme: AppTheme, viewModel: SolarPowerViewModel) {
-        self.appTheme = appTheme
+    init(appSettings: AppSettings, viewModel: SolarPowerViewModel) {
+        self.appSettings = appSettings
         self.viewModel = viewModel
     }
 
     var body: some View {
         VStack {
             switch viewModel.solar {
-            case 0.001 ..< appTheme.solarDefinitions.breakPoint1:
+            case 0.001 ..< appSettings.solarDefinitions.breakPoint1:
                 SunView(solar: viewModel.solar, glowing: false, glowColor: .clear, sunColor: Color("Sun"))
                     .frame(width: 40, height: 40)
-            case appTheme.solarDefinitions.breakPoint1 ..< appTheme.solarDefinitions.breakPoint2:
+            case appSettings.solarDefinitions.breakPoint1 ..< appSettings.solarDefinitions.breakPoint2:
                 SunView(solar: viewModel.solar, glowing: true, glowColor: .yellow.opacity(0.3), sunColor: Color("Sun"))
                     .frame(width: 40, height: 40)
-            case appTheme.solarDefinitions.breakPoint2 ..< appTheme.solarDefinitions.breakPoint3:
+            case appSettings.solarDefinitions.breakPoint2 ..< appSettings.solarDefinitions.breakPoint3:
                 SunView(solar: viewModel.solar, glowing: true, glowColor: Color("Sun"), sunColor: .orange)
                     .frame(width: 40, height: 40)
-            case appTheme.solarDefinitions.breakPoint3 ..< 500:
+            case appSettings.solarDefinitions.breakPoint3 ..< 500:
                 SunView(solar: viewModel.solar, glowing: true, glowColor: .orange, sunColor: .red)
                     .frame(width: 40, height: 40)
             default:
@@ -44,7 +44,7 @@ struct SolarPowerView: View {
                     .frame(width: 40, height: 40)
             }
 
-            PowerFlowView(amount: viewModel.solar, appTheme: appTheme, showColouredLines: false, type: .solarFlow)
+            PowerFlowView(amount: viewModel.solar, appSettings: appSettings, showColouredLines: false, type: .solarFlow)
         }
     }
 }
@@ -52,27 +52,27 @@ struct SolarPowerView: View {
 struct SolarPowerView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            AdjustableView(appTheme: .mock(), config: MockConfig(), maximum: 5.0, thresholds: [])
+            AdjustableView(appSettings: .mock(), config: MockConfig(), maximum: 5.0, thresholds: [])
 
             HStack {
                 SolarPowerView(
-                    appTheme: AppTheme.mock(),
+                    appSettings: AppSettings.mock(),
                     viewModel: SolarPowerViewModel(solar: 0, generation: 0, earnings: .any())
                 )
                 SolarPowerView(
-                    appTheme: AppTheme.mock(),
+                    appSettings: AppSettings.mock(),
                     viewModel: SolarPowerViewModel(solar: 0.5, generation: 1.5, earnings: .any())
                 )
                 SolarPowerView(
-                    appTheme: AppTheme.mock(),
+                    appSettings: AppSettings.mock(),
                     viewModel: SolarPowerViewModel(solar: 1.5, generation: 1.5, earnings: .any())
                 )
                 SolarPowerView(
-                    appTheme: AppTheme.mock(),
+                    appSettings: AppSettings.mock(),
                     viewModel: SolarPowerViewModel(solar: 2.5, generation: 4.5, earnings: .any())
                 )
                 SolarPowerView(
-                    appTheme: AppTheme.mock(),
+                    appSettings: AppSettings.mock(),
                     viewModel: SolarPowerViewModel(solar: 3.5, generation: 9.5, earnings: .any())
                 )
             }
@@ -83,14 +83,14 @@ struct SolarPowerView_Previews: PreviewProvider {
 struct AdjustableView: View {
     @State private var amount: Double = 3.0
     @State private var visible = true
-    let appTheme: AppTheme
+    let appSettings: AppSettings
     let config: Config
     let maximum: Double
     let thresholds: [Double]
     private let haptic = UISelectionFeedbackGenerator()
 
-    init(appTheme: AppTheme, config: Config, maximum: Double, thresholds: [Double]) {
-        self.appTheme = appTheme
+    init(appSettings: AppSettings, config: Config, maximum: Double, thresholds: [Double]) {
+        self.appSettings = appSettings
         self.config = config
         self.maximum = maximum
         self.thresholds = thresholds
@@ -100,7 +100,7 @@ struct AdjustableView: View {
     var body: some View {
         VStack {
             Color.clear.overlay(
-                SolarPowerView(appTheme: appTheme, viewModel: SolarPowerViewModel(solar: amount, generation: 8.5, earnings: .any()))
+                SolarPowerView(appSettings: appSettings, viewModel: SolarPowerViewModel(solar: amount, generation: 8.5, earnings: .any()))
             ).frame(height: 100)
 
             Slider(value: $amount, in: 0 ... maximum, step: 0.1, label: {

@@ -31,17 +31,17 @@ struct SolarBandingSettingsView: View {
     @State private var breakpoint1: Double
     @State private var breakpoint2: Double
     @State private var breakpoint3: Double
-    @State private var modifiedAppTheme: AppTheme
+    @State private var modifiedAppTheme: AppSettings
     private var range = 0.1 ... 10
-    private let appTheme: AppTheme
+    private let appSettings: AppSettings
 
     init(configManager: ConfigManaging) {
         _viewModel = .init(wrappedValue: SolarBandingSettingsViewModel(configManager: configManager))
         self.breakpoint1 = configManager.solarDefinitions.breakPoint1
         self.breakpoint2 = configManager.solarDefinitions.breakPoint2
         self.breakpoint3 = configManager.solarDefinitions.breakPoint3
-        self.appTheme = configManager.appTheme.value
-        self.modifiedAppTheme = appTheme
+        self.appSettings = configManager.appSettings.value
+        self.modifiedAppTheme = appSettings
         self.modifiedAppTheme = makeAppTheme()
     }
 
@@ -82,7 +82,7 @@ struct SolarBandingSettingsView: View {
                 }
 
                 Section {
-                    AdjustableView(appTheme: modifiedAppTheme, 
+                    AdjustableView(appSettings: modifiedAppTheme, 
                                    config: MockConfig(),
                                    maximum: breakpoint3 + 0.500,
                                    thresholds: [breakpoint1, breakpoint2, breakpoint3])
@@ -139,8 +139,8 @@ struct SolarBandingSettingsView: View {
         }
     }
 
-    func makeAppTheme() -> AppTheme {
-        appTheme
+    func makeAppTheme() -> AppSettings {
+        appSettings
             .copy(solarDefinitions: SolarRangeDefinitions(
                 breakPoint1: breakpoint1,
                 breakPoint2: breakpoint2,

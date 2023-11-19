@@ -12,7 +12,7 @@ struct ParameterGraphVariablesToggles: View {
     @ObservedObject var viewModel: ParametersGraphTabViewModel
     @Binding var selectedDate: Date?
     @Binding var valuesAtTime: ValuesAtTime<ParameterGraphValue>?
-    let appTheme: AppTheme
+    let appSettings: AppSettings
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -30,7 +30,7 @@ struct ParameterGraphVariablesToggles: View {
                                     let title = valuesAtTime == nil ? variable.type.title(as: .total) : variable.type.title(as: .snapshot)
                                     Text(title)
 
-                                    if title != variable.type.description, appTheme.showGraphValueDescriptions {
+                                    if title != variable.type.description, appSettings.showGraphValueDescriptions {
                                         Text(variable.type.description)
                                             .font(.system(size: 10))
                                             .foregroundColor(Color("text_dimmed"))
@@ -46,9 +46,9 @@ struct ParameterGraphVariablesToggles: View {
                                             .font(.system(size: 8.0))
                                     }
                                 } else if let bounds = viewModel.graphVariableBounds.first(where: { $0.type == variable.type }) {
-                                    ValueBoundsView(value: bounds.min, type: .min, decimalPlaces: appTheme.decimalPlaces)
-                                    ValueBoundsView(value: bounds.max, type: .max, decimalPlaces: appTheme.decimalPlaces)
-                                    ValueBoundsView(value: bounds.now, type: .now, decimalPlaces: appTheme.decimalPlaces)
+                                    ValueBoundsView(value: bounds.min, type: .min, decimalPlaces: appSettings.decimalPlaces)
+                                    ValueBoundsView(value: bounds.max, type: .max, decimalPlaces: appSettings.decimalPlaces)
+                                    ValueBoundsView(value: bounds.now, type: .now, decimalPlaces: appSettings.decimalPlaces)
                                 }
                             }
                             .opacity(variable.enabled ? 1.0 : 0.5)
@@ -83,7 +83,7 @@ struct ParameterGraphVariablesToggles: View {
         viewModel: ParametersGraphTabViewModel(networking: DemoNetworking(), configManager: PreviewConfigManager()),
         selectedDate: .constant(nil),
         valuesAtTime: .constant(nil),
-        appTheme: .mock()
+        appSettings: .mock()
     )
 }
 

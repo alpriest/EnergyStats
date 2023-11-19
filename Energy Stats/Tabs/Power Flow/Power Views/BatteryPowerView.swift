@@ -56,13 +56,13 @@ struct BatteryPowerViewModel {
 
 struct BatteryPowerView: View {
     let viewModel: BatteryPowerViewModel
-    let appTheme: AppTheme
+    let appSettings: AppSettings
     @State private var alertContent: AlertContent?
 
     var body: some View {
         ZStack {
             VStack {
-                PowerFlowView(amount: viewModel.batteryChargekWh, appTheme: appTheme, showColouredLines: true, type: .batteryFlow)
+                PowerFlowView(amount: viewModel.batteryChargekWh, appSettings: appSettings, showColouredLines: true, type: .batteryFlow)
                     .opacity(viewModel.hasError ? 0.2 : 1.0)
 
                 Image(systemName: "minus.plus.batteryblock.fill")
@@ -103,7 +103,7 @@ struct BatteryPowerView: View {
     struct FakeError: Error {}
 
     return BatteryPowerView(viewModel: BatteryPowerViewModel.any(error: FakeError()),
-                            appTheme: AppTheme.mock())
+                            appSettings: AppSettings.mock())
 }
 
 extension BatteryPowerViewModel {

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ApproximationsView: View {
     let viewModel: ApproximationsViewModel
-    let appTheme: AppTheme
+    let appSettings: AppSettings
     @Environment(\.colorScheme) var colorScheme
     @State private var showCalculations = false
     let decimalPlaceOverride: Int?
@@ -54,65 +54,65 @@ struct ApproximationsView: View {
 
             ZStack {
                 VStack {
-                    if appTheme.selfSufficiencyEstimateMode != .off {
-                        SelfSufficiencyEstimateView(viewModel, mode: appTheme.selfSufficiencyEstimateMode, showCalculations: showCalculations, decimalPlaces: appTheme.decimalPlaces)
+                    if appSettings.selfSufficiencyEstimateMode != .off {
+                        SelfSufficiencyEstimateView(viewModel, mode: appSettings.selfSufficiencyEstimateMode, showCalculations: showCalculations, decimalPlaces: appSettings.decimalPlaces)
                     }
 
                     if let home = viewModel.homeUsage {
                         HStack {
-                            Text("Home usage")
+                            Text("home_usage")
                                 .accessibilityElement(children: .ignore)
                             Spacer()
-                            EnergyText(amount: home, appTheme: appTheme, type: .selfSufficiency, decimalPlaceOverride: decimalPlaceOverride)
+                            EnergyText(amount: home, appSettings: appSettings, type: .selfSufficiency, decimalPlaceOverride: decimalPlaceOverride)
                         }
                     }
 
                     if let totals = viewModel.totalsViewModel {
                         VStack(spacing: 2) {
                             HStack {
-                                Text("Solar generated")
+                                Text("solar_generated")
                                     .accessibilityElement(children: .ignore)
                                 Spacer()
-                                EnergyText(amount: totals.solar, appTheme: appTheme, type: .totalSolarGenerated, decimalPlaceOverride: decimalPlaceOverride)
+                                EnergyText(amount: totals.solar, appSettings: appSettings, type: .totalSolarGenerated, decimalPlaceOverride: decimalPlaceOverride)
                             }
 
                             if showCalculations {
-                                CalculationBreakdownView(breakdown: totals.solarBreakdown, decimalPlaces: appTheme.decimalPlaces)
+                                CalculationBreakdownView(breakdown: totals.solarBreakdown, decimalPlaces: appSettings.decimalPlaces)
                             }
                         }
                     }
 
-                    if let financialModel = viewModel.financialModel, case .energyStats = appTheme.financialModel {
+                    if let financialModel = viewModel.financialModel, case .energyStats = appSettings.financialModel {
                         VStack(spacing: 2) {
                             HStack {
-                                Text("Export income")
+                                Text("export_income")
                                 Spacer()
                                 Text(financialModel.exportIncome.formattedAmount())
                             }
                             if showCalculations {
-                                CalculationBreakdownView(breakdown: financialModel.exportBreakdown, decimalPlaces: appTheme.decimalPlaces)
+                                CalculationBreakdownView(breakdown: financialModel.exportBreakdown, decimalPlaces: appSettings.decimalPlaces)
                             }
                         }
 
                         VStack(spacing: 2) {
                             HStack {
-                                Text("Grid import avoided")
+                                Text("grid_import_avoided")
                                 Spacer()
                                 Text(financialModel.solarSaving.formattedAmount())
                             }
                             if showCalculations {
-                                CalculationBreakdownView(breakdown: financialModel.solarSavingBreakdown, decimalPlaces: appTheme.decimalPlaces)
+                                CalculationBreakdownView(breakdown: financialModel.solarSavingBreakdown, decimalPlaces: appSettings.decimalPlaces)
                             }
                         }
 
                         HStack {
-                            Text("Total benefit")
+                            Text("total_benefit")
                             Spacer()
                             Text(financialModel.total.formattedAmount())
                         }
                     }
 
-                    if let earnings = viewModel.earnings, case .foxESS = appTheme.financialModel {
+                    if let earnings = viewModel.earnings, case .foxESS = appSettings.financialModel {
                         VStack(spacing: 2) {
                             HStack {
                                 Text("Accumulated income")
@@ -158,7 +158,7 @@ struct CalculationBreakdownView: View {
 #if DEBUG
 #Preview {
     ApproximationsView(viewModel: .any(),
-                       appTheme: .mock(selfSufficiencyEstimateMode: .net),
+                       appSettings: .mock(selfSufficiencyEstimateMode: .net),
                        decimalPlaceOverride: nil)
 }
 

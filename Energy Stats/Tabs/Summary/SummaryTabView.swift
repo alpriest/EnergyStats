@@ -11,17 +11,17 @@ import SwiftUI
 
 struct SummaryTabView: View {
     @StateObject var viewModel: SummaryTabViewModel
-    @State private var appTheme: AppTheme
-    private var appThemePublisher: LatestAppTheme
+    @State private var appSettings: AppSettings
+    private var appSettingsPublisher: LatestAppPublisher
     private let configManager: ConfigManaging
     @StateObject private var solarForecastViewModel: SolarForecastViewModel
 
-    init(configManager: ConfigManaging, networking: FoxESSNetworking, appThemePublisher: LatestAppTheme, solarForecastProvider: @escaping SolarForecastProviding) {
+    init(configManager: ConfigManaging, networking: FoxESSNetworking, appSettingsPublisher: LatestAppPublisher, solarForecastProvider: @escaping SolarForecastProviding) {
         self.configManager = configManager
         _viewModel = .init(wrappedValue: SummaryTabViewModel(configManager: configManager, networking: networking))
-        _solarForecastViewModel = .init(wrappedValue: SolarForecastViewModel(configManager: configManager, appTheme: appThemePublisher, solarForecastProvider: solarForecastProvider))
-        _appTheme = State(initialValue: appThemePublisher.value)
-        self.appThemePublisher = appThemePublisher
+        _solarForecastViewModel = .init(wrappedValue: SolarForecastViewModel(configManager: configManager, appSettingsPublisher: appSettingsPublisher, solarForecastProvider: solarForecastProvider))
+        _appSettings = State(initialValue: appSettingsPublisher.value)
+        self.appSettingsPublisher = appSettingsPublisher
     }
 
     var body: some View {
@@ -40,19 +40,19 @@ struct SummaryTabView: View {
                         }
                     } else {
                         if let approximationsViewModel = viewModel.approximationsViewModel {
-                            energySummaryRow(title: "Home usage", amount: approximationsViewModel.homeUsage)
-                            energySummaryRow(title: "Solar generated", amount: approximationsViewModel.totalsViewModel?.solar)
+                            energySummaryRow(title: "home_usage", amount: approximationsViewModel.homeUsage)
+                            energySummaryRow(title: "solar_generated", amount: approximationsViewModel.totalsViewModel?.solar)
 
                             Spacer(minLength: 22)
 
-                            if let model = approximationsViewModel.financialModel, case .energyStats = appTheme.financialModel {
-                                moneySummaryRow(title: "Export income", amount: model.exportIncome.amount)
-                                moneySummaryRow(title: "Grid import avoided", amount: model.solarSaving.amount)
-                                moneySummaryRow(title: "Total benefit", amount: model.total.amount)
+                            if let model = approximationsViewModel.financialModel, case .energyStats = appSettings.financialModel {
+                                moneySummaryRow(title: "export_income", amount: model.exportIncome.amount)
+                                moneySummaryRow(title: "grid_import_avoided", amount: model.solarSaving.amount)
+                                moneySummaryRow(title: "total_benefit", amount: model.total.amount)
                             }
 
-                            if let earnings = approximationsViewModel.earnings, case .foxESS = appTheme.financialModel {
-                                moneySummaryRow(title: "Total benefit", amount: earnings.cumulate.earnings)
+                            if let earnings = approximationsViewModel.earnings, case .foxESS = appSettings.financialModel {
+                                moneySummaryRow(title: "total_benefit", amount: earnings.cumulate.earnings)
                             }
 
                             Text("Includes data from \(viewModel.oldestDataDate) to Present. Figures are approximate and assume the buy/sell energy prices remained constant throughout the period of ownership.")
@@ -65,7 +65,7 @@ struct SummaryTabView: View {
 
                         if #available(iOS 16.0, *) {
                             Divider()
-                            SolarForecastView(appTheme: appTheme, viewModel: solarForecastViewModel)
+                            SolarForecastView(appSettings: appSettings, viewModel: solarForecastViewModel)
                         }
                     }
                 }
@@ -77,22 +77,22 @@ struct SummaryTabView: View {
         .onAppear {
             viewModel.load()
         }
-        .onReceive(appThemePublisher) {
-            self.appTheme = $0
+        .onReceive(appSettingsPublisher) {
+            self.appSettings = $0
         }
     }
 
     @ViewBuilder
-    private func energySummaryRow(title: String, amount: Double?) -> some View {
+    private func energySummaryRow(title: LocalizedStringKey, amount: Double?) -> some View {
         summaryRow(title: title, amount: amount) {
-            EnergyText(amount: $0, appTheme: appTheme, type: .default, decimalPlaceOverride: 0)
+            EnergyText(amount: $0, appSettings: appSettings, type: .default, decimalPlaceOverride: 0)
                 .font(.title2)
                 .monospacedDigit()
         }
     }
 
     @ViewBuilder
-    private func moneySummaryRow(title: String, amount: Double?) -> some View {
+    private func moneySummaryRow(title: LocalizedStringKey, amount: Double?) -> some View {
         summaryRow(title: title, amount: amount) {
             Text(FinanceAmount(title: .total, amount: $0, currencySymbol: viewModel.currencySymbol).formattedAmount())
                 .font(.title2)
@@ -101,7 +101,7 @@ struct SummaryTabView: View {
     }
 
     @ViewBuilder
-    private func summaryRow(title: String, amount: Double?, text: @escaping (Double) -> some View) -> some View {
+    private func summaryRow(title: LocalizedStringKey, amount: Double?, text: @escaping (Double) -> some View) -> some View {
         if let amount {
             HStack {
                 Text(title)
@@ -120,6 +120,6 @@ struct SummaryTabView: View {
 #Preview {
     SummaryTabView(configManager: PreviewConfigManager(),
                    networking: DemoNetworking(),
-                   appThemePublisher: CurrentValueSubject(.mock()),
+                   appSettingsPublisher: CurrentValueSubject(.mock()),
                    solarForecastProvider: { DemoSolcast(config: $0) })
 }

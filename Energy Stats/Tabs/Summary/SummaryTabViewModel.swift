@@ -111,7 +111,7 @@ class SummaryTabViewModel: ObservableObject {
             }
 
             if monthlyTotal == 0 && (month < currentMonth || year < currentYear) {
-                emptyMonth = month
+                emptyMonth = month + 1
                 break
             }
         }
