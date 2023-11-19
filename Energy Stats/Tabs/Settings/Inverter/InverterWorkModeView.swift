@@ -50,7 +50,7 @@ class InverterWorkModeViewModel: ObservableObject {
 
             do {
                 try await networking.setWorkMode(deviceID: deviceID, workMode: mode.asInverterWorkMode())
-                alertContent = AlertContent(title: String(key: .success), message: String(key: .inverterSettingsWereSaved))
+                alertContent = AlertContent(title: "Success", message: "inverter_settings_saved")
                 state = .inactive
             } catch {
                 state = .error(error, "Could not save work mode")

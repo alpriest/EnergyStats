@@ -10,7 +10,7 @@ import Energy_Stats_Core
 import Foundation
 import UIKit
 
-private struct SolcastSolarForecastingConfigurationAdapter: SolcastSolarForecastingConfiguration {
+struct SolcastSolarForecastingConfigurationAdapter: SolcastSolarForecastingConfiguration {
     var resourceId: String?
     var apiKey: String?
 

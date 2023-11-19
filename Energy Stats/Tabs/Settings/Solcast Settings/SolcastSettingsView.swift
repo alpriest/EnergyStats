@@ -8,23 +8,6 @@
 import Energy_Stats_Core
 import SwiftUI
 
-class SolcastSettingsViewModel: ObservableObject {
-    private var configManager: ConfigManaging
-    @Published var resourceId: String = ""
-    @Published var apiKey: String = ""
-
-    init(configManager: ConfigManaging) {
-        self.configManager = configManager
-        resourceId = configManager.solcastResourceId ?? ""
-        apiKey = configManager.solcastApiKey ?? ""
-    }
-
-    func save() {
-        configManager.solcastResourceId = resourceId
-        configManager.solcastApiKey = apiKey
-    }
-}
-
 struct SolcastSettingsView: View {
     @StateObject var viewModel: SolcastSettingsViewModel
 
@@ -39,6 +22,8 @@ struct SolcastSettingsView: View {
                     Text("Solcast_description")
                     TextField("Resource ID", text: $viewModel.resourceId)
                     SecureField("API Key", text: $viewModel.apiKey)
+                } footer: {
+                    Text("solcast_how_fo_find_keys")
                 }
             }
 
@@ -48,6 +33,7 @@ struct SolcastSettingsView: View {
         }
         .navigationTitle("Solcast Solar Prediction")
         .navigationBarTitleDisplayMode(.inline)
+        .alert(alertContent: $viewModel.alertContent)
     }
 }
 

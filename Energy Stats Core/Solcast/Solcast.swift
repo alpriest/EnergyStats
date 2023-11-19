@@ -57,9 +57,8 @@ public class Solcast: SolarForecasting {
 
         do {
             return try await fetch(request)
-        } catch let error {
-            print(error)
-            return SolcastForecastResponseList(forecasts: [])
+        } catch {
+            throw error
         }
     }
 
@@ -70,9 +69,17 @@ public class Solcast: SolarForecasting {
                 throw NetworkError.unknown("", "Invalid response type")
             }
 
-            guard 200 ... 300 ~= statusCode else { throw NetworkError.invalidResponse(request.url, statusCode) }
-
             let decoder = JSONDecoder.solcast()
+
+            if statusCode == 404 {
+                let errorResponse = try decoder.decode(ErrorApiResponse.self, from: data)
+                throw NetworkError.invalidConfiguration(errorResponse.responseStatus.message)
+            }
+
+            guard 200 ... 300 ~= statusCode else {
+                throw NetworkError.invalidResponse(request.url, statusCode)
+            }
+
             let networkResponse: T = try decoder.decode(T.self, from: data)
             return networkResponse
         } catch let error as NSError {
@@ -98,7 +105,7 @@ public class Solcast: SolarForecasting {
 extension JSONDecoder {
     static func solcast() -> JSONDecoder {
         let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .custom({ (decoder) -> Date in
+        decoder.dateDecodingStrategy = .custom { decoder -> Date in
             let container = try decoder.singleValueContainer()
             let dateString = try container.decode(String.self)
 
@@ -110,10 +117,23 @@ extension JSONDecoder {
             } else {
                 throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid date format")
             }
-        })
+        }
         return decoder
     }
 }
+
+private struct ErrorApiResponse: Decodable {
+    let responseStatus: ResponseStatus
+
+    enum CodingKeys: String, CodingKey {
+        case responseStatus = "response_status"
+    }
+}
+
+private struct ResponseStatus: Decodable {
+    let message: String
+}
+
 
 public class DemoSolcast: SolarForecasting {
     public init(config: SolcastSolarForecastingConfiguration) {}

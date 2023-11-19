@@ -9604,6 +9604,74 @@
         }
       }
     },
+    "solcast_how_fo_find_keys" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ihre Ressourcen-ID finden Sie unter https://toolkit.solcast.com.au und Ihren API-Schlüssel finden Sie, indem Sie das Menü oben rechts auf der Seite anklicken."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your Resource ID can be found at https://toolkit.solcast.com.au and your API key can be found by clicking the menu at the top right of the page."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu ID de recurso se puede encontrar en https://toolkit.solcast.com.au y tu clave API se puede encontrar haciendo clic en el menú en la parte superior derecha de la página."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il tuo ID risorsa può essere trovato su https://toolkit.solcast.com.au e la tua chiave API può essere trovata cliccando sul menu in alto a destra della pagina"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Twój identyfikator zasobu można znaleźć na stronie https://toolkit.solcast.com.au, a klucz API znajdziesz, klikając menu w prawym górnym rogu strony."
+          }
+        }
+      }
+    },
+    "solcast_settings_saved" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ihre Solcast-Einstellungen wurden erfolgreich verifiziert."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your Solcast settings were successfully verified."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tus configuraciones de Solcast fueron verificadas con éxito."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le tue impostazioni Solcast sono state verificate con successo."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Twoje ustawienia Solcast zostały pomyślnie zweryfikowane."
+          }
+        }
+      }
+    },
     "Start" : {
       "localizations" : {
         "de" : {

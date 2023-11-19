@@ -8,11 +8,11 @@
 import SwiftUI
 
 public struct AlertContent {
-    public let title: String
-    public let message: String
+    public let title: LocalizedStringKey
+    public let message: LocalizedStringKey
     public let onDismiss: () -> Void
 
-    public init(title: String, message: String, onDismiss: @escaping (() -> Void) = {}) {
+    public init(title: LocalizedStringKey, message: LocalizedStringKey, onDismiss: @escaping (() -> Void) = {}) {
         self.title = title
         self.message = message
         self.onDismiss = onDismiss

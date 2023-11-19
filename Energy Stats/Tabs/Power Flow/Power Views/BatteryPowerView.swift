@@ -82,8 +82,8 @@ struct BatteryPowerView: View {
     func errorOverlay() -> some View {
         if viewModel.hasError {
             Button {
-                alertContent = AlertContent(title: String(key: .errorTitle),
-                                            message: String(format: String(key: .batteryReadError), String(describing: viewModel.error)))
+                alertContent = AlertContent(title: "error_title",
+                                            message: LocalizedStringKey(stringLiteral: String(format: String(key: .batteryReadError), String(describing: viewModel.error))))
             } label: {
                 VStack {
                     Image(systemName: "exclamationmark.triangle.fill")

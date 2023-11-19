@@ -11,7 +11,7 @@ public enum NetworkError: LocalizedError, CustomStringConvertible, Equatable {
     case invalidResponse(_ url: URL?, _ responseCode: Int?)
     case invalidConfiguration(_ reason: String)
     case badCredentials
-    case unknown(String, String)
+    case unknown(_ errNo: String, _ message: String)
     case invalidToken
     case tryLater
     case offline

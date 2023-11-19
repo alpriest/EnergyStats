@@ -205,6 +205,7 @@
 		41DE1B512ACD57A8001BB2D1 /* Energy_Stats_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; platformFilter = ios; };
 		41DE1B522ACD57A8001BB2D1 /* Energy_Stats_Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		41DF51D22AA4CF6D007B5102 /* MockAppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DF51D12AA4CF6D007B5102 /* MockAppTheme.swift */; };
+		41E165B32B0A877100B17590 /* SolcastSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E165B22B0A877100B17590 /* SolcastSettingsViewModel.swift */; };
 		41E1DFDF28D87781001235B9 /* SettingsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E1DFDE28D87781001235B9 /* SettingsTabView.swift */; };
 		41E299CF29B7260D001F017B /* Energy_Stats_UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E299CE29B7260D001F017B /* Energy_Stats_UITestsLaunchTests.swift */; };
 		41E299D629B78A42001F017B /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E299D529B78A41001F017B /* SnapshotHelper.swift */; };
@@ -527,6 +528,7 @@
 		41DCF5432B06CBD40010843F /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		41DD7F3929C5B8940072CDE8 /* SolarPowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarPowerView.swift; sourceTree = "<group>"; };
 		41DF51D12AA4CF6D007B5102 /* MockAppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAppTheme.swift; sourceTree = "<group>"; };
+		41E165B22B0A877100B17590 /* SolcastSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolcastSettingsViewModel.swift; sourceTree = "<group>"; };
 		41E1DFDE28D87781001235B9 /* SettingsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabView.swift; sourceTree = "<group>"; };
 		41E299CA29B7260D001F017B /* Energy Stats UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Energy Stats UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		41E299CE29B7260D001F017B /* Energy_Stats_UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Energy_Stats_UITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -885,6 +887,7 @@
 			isa = PBXGroup;
 			children = (
 				4149DE9A2B03C3AC004F5FC6 /* SolcastSettingsView.swift */,
+				41E165B22B0A877100B17590 /* SolcastSettingsViewModel.swift */,
 			);
 			path = "Solcast Settings";
 			sourceTree = "<group>";
@@ -1492,6 +1495,7 @@
 				416318B929DDD44C00C2C285 /* DebugDataView.swift in Sources */,
 				41009A752B03B13A009D853B /* SolarForecastViewModel.swift in Sources */,
 				41E4B31328DB77A3003F7F47 /* HomePowerView.swift in Sources */,
+				41E165B32B0A877100B17590 /* SolcastSettingsViewModel.swift in Sources */,
 				41C249A52A77FC7400D8E9E7 /* FoxESSCloudStatusView.swift in Sources */,
 				41A25D3D28CA5CDF00315714 /* ParametersGraphTabView.swift in Sources */,
 				4140ECDA292D58D300992DD8 /* ParameterGraphVariable.swift in Sources */,
@@ -1828,7 +1832,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.96;
+				MARKETING_VERSION = 1.97;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1886,7 +1890,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.96;
+				MARKETING_VERSION = 1.97;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

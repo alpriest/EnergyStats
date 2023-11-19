@@ -25,6 +25,10 @@ public class SolcastCache: SolarForecasting {
     }
 
     public func fetchForecast() async throws -> SolcastForecastResponseList {
+        guard let fileURL = makeFileURL() else {
+            throw ConfigMissingError()
+        }
+
         let twelveHours: Double = 43_200
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
@@ -36,12 +40,12 @@ public class SolcastCache: SolarForecasting {
             if let modificationDate = attributes[.modificationDate] as? Date,
                today().timeIntervalSince(modificationDate) > twelveHours
             {
-                return try await fetchAndStore(merging: cachedDataModel)
+                return try await fetchAndStore(merging: cachedDataModel, fileURL: fileURL)
             } else {
                 return cachedDataModel
             }
         } else {
-            return try await fetchAndStore()
+            return try await fetchAndStore(fileURL: fileURL)
         }
     }
 
@@ -49,7 +53,7 @@ public class SolcastCache: SolarForecasting {
         service.hasValidConfig
     }
 
-    private func fetchAndStore(merging previous: SolcastForecastResponseList? = nil) async throws -> SolcastForecastResponseList {
+    private func fetchAndStore(merging previous: SolcastForecastResponseList? = nil, fileURL: URL) async throws -> SolcastForecastResponseList {
         var latest = try await service.fetchForecast().forecasts
         let previous = previous?.forecasts ?? []
         let todayStart = Calendar.current.startOfDay(for: today())
@@ -73,15 +77,19 @@ public class SolcastCache: SolarForecasting {
         return result
     }
 
-    private var fileURL: URL {
+    private func makeFileURL() -> URL? {
+        guard let (resourceId, _) = config.credentials() else {
+            return nil
+        }
+
         let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
-        return urls[0].appendingPathComponent("solcast.json")
+        return urls[0].appendingPathComponent("solcast-\(resourceId).json")
     }
 }
 
 extension FileManager: FileManaging {}
 
 public protocol FileManaging {
-    func attributesOfItem(atPath path: String) throws -> [FileAttributeKey : Any]
+    func attributesOfItem(atPath path: String) throws -> [FileAttributeKey: Any]
     func urls(for directory: FileManager.SearchPathDirectory, in domainMask: FileManager.SearchPathDomainMask) -> [URL]
 }
