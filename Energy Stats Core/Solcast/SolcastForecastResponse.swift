@@ -20,11 +20,13 @@ public struct SolcastForecastResponse: Codable {
     public let pv_estimate10: Double
     public let pv_estimate90: Double
     public let period_end: Date
+    public let period: String
 
-    public init(pv_estimate: Double, pv_estimate10: Double, pv_estimate90: Double, period_end: Date) {
+    public init(pv_estimate: Double, pv_estimate10: Double, pv_estimate90: Double, period_end: Date, period: String) {
         self.pv_estimate = pv_estimate
         self.pv_estimate10 = pv_estimate10
         self.pv_estimate90 = pv_estimate90
         self.period_end = period_end
+        self.period = period
     }
 }

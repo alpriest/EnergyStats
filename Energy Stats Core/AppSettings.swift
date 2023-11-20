@@ -40,8 +40,7 @@ public struct AppSettings {
     public var parameterGroups: [ParameterGroup]
     public var shouldCombineCT2WithPVPower: Bool
     public var showGraphValueDescriptions: Bool
-    public var solcastResourceId: String?
-    public var solcastApiKey: String?
+    public var solcastSettings: SolcastSettings
 
     public init(
         showColouredLines: Bool,
@@ -69,8 +68,7 @@ public struct AppSettings {
         parameterGroups: [ParameterGroup],
         shouldCombineCT2WithPVPower: Bool,
         showGraphValueDescriptions: Bool,
-        solcastResourceId: String?,
-        solcastApiKey: String?
+        solcastSettings: SolcastSettings
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -97,8 +95,7 @@ public struct AppSettings {
         self.parameterGroups = parameterGroups
         self.shouldCombineCT2WithPVPower = shouldCombineCT2WithPVPower
         self.showGraphValueDescriptions = showGraphValueDescriptions
-        self.solcastResourceId = solcastResourceId
-        self.solcastApiKey = solcastApiKey
+        self.solcastSettings = solcastSettings
     }
 
     public func copy(
@@ -127,8 +124,7 @@ public struct AppSettings {
         parameterGroups: [ParameterGroup]? = nil,
         shouldCombineCT2WithPVPower: Bool? = nil,
         showGraphValueDescriptions: Bool? = nil,
-        solcastResourceId: String? = nil,
-        solcastApiKey: String? = nil
+        solcastSettings: SolcastSettings? = nil
     ) -> AppSettings {
         AppSettings(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -156,8 +152,7 @@ public struct AppSettings {
             parameterGroups: parameterGroups ?? self.parameterGroups,
             shouldCombineCT2WithPVPower: shouldCombineCT2WithPVPower ?? self.shouldCombineCT2WithPVPower,
             showGraphValueDescriptions: showGraphValueDescriptions ?? self.showGraphValueDescriptions,
-            solcastResourceId: solcastResourceId ?? self.solcastResourceId,
-            solcastApiKey: solcastApiKey ?? self.solcastApiKey
+            solcastSettings: solcastSettings ?? self.solcastSettings
         )
     }
 }

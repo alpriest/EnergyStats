@@ -20,8 +20,8 @@ struct Energy_StatsApp: App {
         let network = NetworkValueCleaner(network: facade)
         let configManager = ConfigManager(networking: network, config: config)
         let userManager = UserManager(networking: network, store: keychainStore, configManager: configManager, networkCache: store)
-        let solarForecastProvider = { solarConfig -> SolarForecasting in
-            config.isDemoUser ? DemoSolcast(config: solarConfig) : SolcastCache(config: solarConfig, service: { Solcast(config: $0) })
+        let solarForecastProvider = { () -> SolarForecasting in
+            config.isDemoUser ? DemoSolcast() : SolcastCache(service: { Solcast() })
         }
 
         return WindowGroup {

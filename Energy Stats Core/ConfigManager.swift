@@ -59,8 +59,7 @@ public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging {
 }
 
 public protocol SolcastConfigManaging {
-    var solcastResourceId: String? { get set }
-    var solcastApiKey: String? { get set }
+    var solcastSettings: SolcastSettings { get set }
 }
 
 public protocol FinancialConfigManaging {
@@ -114,8 +113,7 @@ public class ConfigManager: ConfigManaging {
                 parameterGroups: config.parameterGroups,
                 shouldCombineCT2WithPVPower: config.shouldCombineCT2WithPVPower,
                 showGraphValueDescriptions: config.showGraphValueDescriptions,
-                solcastResourceId: config.solcastResourceId,
-                solcastApiKey: config.solcastApiKey
+                solcastSettings: config.solcastSettings
             )
         )
         selectedDeviceID = selectedDeviceID
@@ -550,22 +548,12 @@ public class ConfigManager: ConfigManaging {
         }
     }
 
-    public var solcastResourceId: String? {
-        get { config.solcastResourceId }
+    public var solcastSettings: SolcastSettings {
+        get { config.solcastSettings }
         set {
-            config.solcastResourceId = newValue
+            config.solcastSettings = newValue
             appSettings.send(appSettings.value.copy(
-                solcastResourceId: config.solcastResourceId
-            ))
-        }
-    }
-
-    public var solcastApiKey: String? {
-        get { config.solcastApiKey }
-        set {
-            config.solcastApiKey = newValue
-            appSettings.send(appSettings.value.copy(
-                solcastApiKey: config.solcastApiKey
+                solcastSettings: config.solcastSettings
             ))
         }
     }

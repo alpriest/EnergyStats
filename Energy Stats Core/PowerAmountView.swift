@@ -105,6 +105,8 @@ public struct PowerAmountView: View {
 
 struct EnergyAmountView_Previews: PreviewProvider {
     static var previews: some View {
-        PowerAmountView(amount: 0.310, backgroundColor: .red, textColor: .black, appSettings: AppSettings.mock(), type: .solarFlow)
+//        PowerAmountView(amount: 0.310, backgroundColor: .red, textColor: .black, appSettings: AppSettings.mock(), type: .solarFlow)
+        EnergyText(amount: 0.310, appSettings: AppSettings.mock(), type: .solarFlow)
+            .background(Color.red)
     }
 }

@@ -121,5 +121,5 @@ struct SummaryTabView: View {
     SummaryTabView(configManager: PreviewConfigManager(),
                    networking: DemoNetworking(),
                    appSettingsPublisher: CurrentValueSubject(.mock()),
-                   solarForecastProvider: { DemoSolcast(config: $0) })
+                   solarForecastProvider: { DemoSolcast() })
 }

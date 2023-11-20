@@ -86,6 +86,6 @@ struct TabbedView: View {
     TabbedView(networking: DemoNetworking(),
                userManager: .preview(),
                configManager: PreviewConfigManager(),
-               solarForecastProvider: { DemoSolcast(config: $0) })
+               solarForecastProvider: { DemoSolcast() })
 }
 #endif

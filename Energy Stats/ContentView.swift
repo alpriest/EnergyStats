@@ -30,7 +30,7 @@ struct ContentView: View {
         loginManager: .preview(),
         network: DemoNetworking(),
         configManager: PreviewConfigManager(),
-        solarForecastProvider: { DemoSolcast(config: $0) }
+        solarForecastProvider: { DemoSolcast() }
     )
 }
 #endif

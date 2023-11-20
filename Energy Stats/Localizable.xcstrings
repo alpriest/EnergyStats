@@ -3792,6 +3792,12 @@
             "value" : "Exporteinnahmen"
           }
         },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Export income"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4197,6 +4203,74 @@
         }
       }
     },
+    "Forecast today" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wettervorhersage für heute"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Forecast today"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pronóstico de hoy"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Previsione di oggi"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prognoza na dzisiaj"
+          }
+        }
+      }
+    },
+    "Forecast tomorrow" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wettervorhersage für morgen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Forecast tomorrow"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pronóstico para mañana"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Previsione per domani"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prognoza na jutro"
+          }
+        }
+      }
+    },
     "Fox servers are offline. Please try later." : {
       "extractionState" : "manual",
       "localizations" : {
@@ -4591,6 +4665,12 @@
             "value" : "Eingesparter Netzverbrauch"
           }
         },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Grid import avoided"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4888,6 +4968,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hausverbrauch"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Home usage"
           }
         },
         "es" : {
@@ -5839,6 +5925,34 @@
         }
       }
     },
+    "Monitor a second Solcast resource by entering details above." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Überwachen Sie eine zweite Solcast-Ressource, indem Sie die Details oben eingeben."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Monitoree un segundo recurso de Solcast ingresando los detalles arriba."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Monitora una seconda risorsa Solcast inserendo i dettagli sopra."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Monitoruj drugi zasób Solcast, wprowadzając szczegóły powyżej."
+          }
+        }
+      }
+    },
     "month" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -6302,6 +6416,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Twoja bateria nie będzie się ładować ani rozładowywać między %1$@. Wszelkie obciążenia domowe będą zasilane z sieci w tym czasie. Zresetuj okres czasu %2$@, aby wyłączyć tę funkcję."
+          }
+        }
+      }
+    },
+    "Optional Name" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Optionaler Name"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre Opcional"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nome Opzionale"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opcjonalna nazwa"
           }
         }
       }
@@ -9522,6 +9664,12 @@
             "value" : "Solar erzeugt"
           }
         },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solar generated"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10156,69 +10304,6 @@
         }
       }
     },
-    "today" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "heute"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "today"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "hoy"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "oggi"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "dzisiaj"
-          }
-        }
-      }
-    },
-    "tomorrow" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "morgen"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "mañana"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "domani"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "jutro"
-          }
-        }
-      }
-    },
     "total" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -10260,6 +10345,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gesamtvorteil"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total benefit"
           }
         },
         "es" : {

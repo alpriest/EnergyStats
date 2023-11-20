@@ -8,23 +8,7 @@
 import Foundation
 
 public protocol SolarForecasting {
-    func fetchForecast() async throws -> SolcastForecastResponseList
-    var hasValidConfig: Bool { get }
-}
-
-public protocol SolcastSolarForecastingConfiguration {
-    var resourceId: String? { get }
-    var apiKey: String? { get }
-
-    func credentials() -> (resourceId: String, apiKey: String)?
-}
-
-public extension SolcastSolarForecastingConfiguration {
-    func credentials() -> (resourceId: String, apiKey: String)? {
-        guard let resourceId, let apiKey else { return nil }
-
-        return (resourceId, apiKey)
-    }
+    func fetchForecast(for site: SolcastSettings.Site) async throws -> SolcastForecastResponseList
 }
 
 private extension URL {
@@ -34,25 +18,13 @@ private extension URL {
 public struct ConfigMissingError: Error {}
 
 public class Solcast: SolarForecasting {
-    private let config: SolcastSolarForecastingConfiguration
+    public init() { }
 
-    public init(config: SolcastSolarForecastingConfiguration) {
-        self.config = config
-    }
-
-    public var hasValidConfig: Bool {
-        config.apiKey != nil && config.resourceId != nil
-    }
-
-    public func fetchForecast() async throws -> SolcastForecastResponseList {
-        guard let (resourceId, apiKey) = config.credentials() else {
-            throw ConfigMissingError()
-        }
-
-        let url = URL(string: URL.rooftopSites.replacingOccurrences(of: "{resource_id}", with: resourceId))!
+    public func fetchForecast(for site: SolcastSettings.Site) async throws -> SolcastForecastResponseList {
+        let url = URL(string: URL.rooftopSites.replacingOccurrences(of: "{resource_id}", with: site.resourceId))!
         let request = append(queryItems: [
             URLQueryItem(name: "format", value: "json"),
-            URLQueryItem(name: "API_KEY", value: apiKey)
+            URLQueryItem(name: "API_KEY", value: site.apiKey)
         ], to: url)
 
         do {
@@ -136,9 +108,9 @@ private struct ResponseStatus: Decodable {
 
 
 public class DemoSolcast: SolarForecasting {
-    public init(config: SolcastSolarForecastingConfiguration) {}
-
-    public func fetchForecast() async throws -> SolcastForecastResponseList {
+    public init() {}
+    
+    public func fetchForecast(for site: SolcastSettings.Site) async throws -> SolcastForecastResponseList {
         let data = try data(filename: "solcast")
         let decoder = JSONDecoder.solcast()
         let result = try decoder.decode(SolcastForecastResponseList.self, from: data)
@@ -160,7 +132,8 @@ public class DemoSolcast: SolarForecasting {
                 pv_estimate: forecast.pv_estimate,
                 pv_estimate10: forecast.pv_estimate10,
                 pv_estimate90: forecast.pv_estimate90,
-                period_end: date ?? forecast.period_end
+                period_end: date ?? forecast.period_end,
+                period: forecast.period
             )
         })
     }

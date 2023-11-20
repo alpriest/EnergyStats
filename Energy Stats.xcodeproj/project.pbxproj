@@ -206,6 +206,11 @@
 		41DE1B522ACD57A8001BB2D1 /* Energy_Stats_Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		41DF51D22AA4CF6D007B5102 /* MockAppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DF51D12AA4CF6D007B5102 /* MockAppTheme.swift */; };
 		41E165B32B0A877100B17590 /* SolcastSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E165B22B0A877100B17590 /* SolcastSettingsViewModel.swift */; };
+		41E165B52B0B961200B17590 /* SolcastSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E165B42B0B961200B17590 /* SolcastSettings.swift */; };
+		41E165B72B0BAD7400B17590 /* UserDefaultsConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E165B62B0BAD7400B17590 /* UserDefaultsConfig.swift */; };
+		41E165B92B0BAD9500B17590 /* UserDefaultsPropertyWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E165B82B0BAD9500B17590 /* UserDefaultsPropertyWrappers.swift */; };
+		41E165BB2B0BE1BD00B17590 /* ForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E165BA2B0BE1BD00B17590 /* ForecastView.swift */; };
+		41E165BD2B0BE33E00B17590 /* Array+Any.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E165BC2B0BE33E00B17590 /* Array+Any.swift */; };
 		41E1DFDF28D87781001235B9 /* SettingsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E1DFDE28D87781001235B9 /* SettingsTabView.swift */; };
 		41E299CF29B7260D001F017B /* Energy_Stats_UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E299CE29B7260D001F017B /* Energy_Stats_UITestsLaunchTests.swift */; };
 		41E299D629B78A42001F017B /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E299D529B78A41001F017B /* SnapshotHelper.swift */; };
@@ -529,6 +534,11 @@
 		41DD7F3929C5B8940072CDE8 /* SolarPowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarPowerView.swift; sourceTree = "<group>"; };
 		41DF51D12AA4CF6D007B5102 /* MockAppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAppTheme.swift; sourceTree = "<group>"; };
 		41E165B22B0A877100B17590 /* SolcastSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolcastSettingsViewModel.swift; sourceTree = "<group>"; };
+		41E165B42B0B961200B17590 /* SolcastSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolcastSettings.swift; sourceTree = "<group>"; };
+		41E165B62B0BAD7400B17590 /* UserDefaultsConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsConfig.swift; sourceTree = "<group>"; };
+		41E165B82B0BAD9500B17590 /* UserDefaultsPropertyWrappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsPropertyWrappers.swift; sourceTree = "<group>"; };
+		41E165BA2B0BE1BD00B17590 /* ForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastView.swift; sourceTree = "<group>"; };
+		41E165BC2B0BE33E00B17590 /* Array+Any.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Any.swift"; sourceTree = "<group>"; };
 		41E1DFDE28D87781001235B9 /* SettingsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabView.swift; sourceTree = "<group>"; };
 		41E299CA29B7260D001F017B /* Energy Stats UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Energy Stats UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		41E299CE29B7260D001F017B /* Energy_Stats_UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Energy_Stats_UITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -629,6 +639,7 @@
 				418024E12AD16D00009A2625 /* String+Currency.swift */,
 				4171854129FFCF2500D18CDD /* String+MD5.swift */,
 				41DCF5432B06CBD40010843F /* Date.swift */,
+				41E165BC2B0BE33E00B17590 /* Array+Any.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -870,6 +881,9 @@
 				419576162AC2F29600EB7362 /* BatteryWidgetState.swift */,
 				414D7A302AC8CE9C0083923F /* Unit.swift */,
 				414D7A322AC989030083923F /* FinancialModel.swift */,
+				41E165B42B0B961200B17590 /* SolcastSettings.swift */,
+				41E165B62B0BAD7400B17590 /* UserDefaultsConfig.swift */,
+				41E165B82B0BAD9500B17590 /* UserDefaultsPropertyWrappers.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -948,6 +962,7 @@
 				418C6E962AFAC7E4000DE35F /* SummaryTabViewModel.swift */,
 				411DF2732AFD404E00CEEB23 /* SolarForecastView.swift */,
 				41009A742B03B13A009D853B /* SolarForecastViewModel.swift */,
+				41E165BA2B0BE1BD00B17590 /* ForecastView.swift */,
 			);
 			path = Summary;
 			sourceTree = "<group>";
@@ -1528,6 +1543,7 @@
 				4107446128C9EF6B006D5D7D /* LoadedPowerFlowView.swift in Sources */,
 				41923E3E2916BC6F00D1A8C5 /* ParametersGraphView.swift in Sources */,
 				41AF2F432AA4C6C1008FCA2E /* HomePowerFooterView.swift in Sources */,
+				41E165BB2B0BE1BD00B17590 /* ForecastView.swift in Sources */,
 				413BF2892A99F8A500A32B0D /* ApproximationsView.swift in Sources */,
 				4149DE9B2B03C3AC004F5FC6 /* SolcastSettingsView.swift in Sources */,
 				416AE4382A7D956E003D0122 /* AlertCopy.swift in Sources */,
@@ -1569,6 +1585,7 @@
 				4192F99B2A8678DB0035DAB8 /* PagedDataLoggerListResponse.swift in Sources */,
 				410913FD29DB78EF00133CC5 /* PreciseDateTimeFormatter.swift in Sources */,
 				416AE4492A8128B9003D0122 /* OptionalView.swift in Sources */,
+				41E165B52B0B961200B17590 /* SolcastSettings.swift in Sources */,
 				417185462A004FA900D18CDD /* VariablesResponse.swift in Sources */,
 				4103D1CF29DB6C4D001B0BC8 /* Auth.swift in Sources */,
 				41CA35732AA8C10900D45734 /* EarningsViewModel.swift in Sources */,
@@ -1587,17 +1604,20 @@
 				4109140029DB7AB600133CC5 /* HomePowerFlowViewModel.swift in Sources */,
 				411029192A729F02004018BB /* BatteryTimesResponse.swift in Sources */,
 				4103D1E229DB6CD7001B0BC8 /* ConfigManager.swift in Sources */,
+				41E165B92B0BAD9500B17590 /* UserDefaultsPropertyWrappers.swift in Sources */,
 				416AE44D2A821E4F003D0122 /* AlertContent.swift in Sources */,
 				4149DE9D2B04BDE6004F5FC6 /* SolcastCache.swift in Sources */,
 				4171854429FFCF9500D18CDD /* Color+Hex.swift in Sources */,
 				418685D52AFE700100355B6D /* AnimatedNumber.swift in Sources */,
 				413B7A312A4A390C00562A68 /* SelfSufficiencyCalculator.swift in Sources */,
+				41E165BD2B0BE33E00B17590 /* Array+Any.swift in Sources */,
 				41757BBD2A90A06E00573FB4 /* LocalizedString.swift in Sources */,
 				4103D1E429DB6D12001B0BC8 /* KeychainStore.swift in Sources */,
 				419576172AC2F29600EB7362 /* BatteryWidgetState.swift in Sources */,
 				4103D1DF29DB6C8C001B0BC8 /* DemoNetworking.swift in Sources */,
 				41CB714A2A3B1B6C00199415 /* StyleGuide.swift in Sources */,
 				412A26882AC07FC800F61456 /* BatteryCapacityCalculator.swift in Sources */,
+				41E165B72B0BAD7400B17590 /* UserDefaultsConfig.swift in Sources */,
 				4103D1D329DB6C51001B0BC8 /* BatteryResponse.swift in Sources */,
 				4103D1D229DB6C51001B0BC8 /* NetworkError.swift in Sources */,
 				4103D1D429DB6C51001B0BC8 /* DeviceList.swift in Sources */,
