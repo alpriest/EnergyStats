@@ -102,19 +102,6 @@ class SolarForecastViewModel: ObservableObject {
         }
         return 0.0
     }
-
-    private func sites(from settings: AppSettings) -> [SolcastSettings.Site] {
-        if let resourceId = UserDefaults.standard.string(forKey: "solcastResourceId"),
-           let apiKey = UserDefaults.standard.string(forKey: "solcastApiKey")
-        {
-            UserDefaults.standard.removeObject(forKey: "solcastResourceId")
-            UserDefaults.standard.removeObject(forKey: "solcastApiKey")
-
-            return [SolcastSettings.Site(resourceId: resourceId, apiKey: apiKey, name: nil)].compactMap { $0 }
-        } else {
-            return settings.solcastSettings.sites
-        }
-    }
 }
 
 extension SolcastSettings.Site {

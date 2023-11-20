@@ -117,6 +117,19 @@ public class ConfigManager: ConfigManaging {
             )
         )
         selectedDeviceID = selectedDeviceID
+
+        migrateSolcast()
+    }
+
+    private func migrateSolcast() {
+        if let resourceId = UserDefaults.standard.string(forKey: "solcastResourceId"),
+           let apiKey = UserDefaults.standard.string(forKey: "solcastApiKey")
+        {
+            UserDefaults.standard.removeObject(forKey: "solcastResourceId")
+            UserDefaults.standard.removeObject(forKey: "solcastApiKey")
+
+            solcastSettings = SolcastSettings(sites: [SolcastSettings.Site(resourceId: resourceId, apiKey: apiKey, name: nil)].compactMap { $0 })
+        }
     }
 
     public func fetchDevices() async throws {
