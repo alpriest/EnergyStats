@@ -122,11 +122,11 @@ public class ConfigManager: ConfigManaging {
     }
 
     private func migrateSolcast() {
-        if let resourceId = UserDefaults.standard.string(forKey: "solcastResourceId"),
-           let apiKey = UserDefaults.standard.string(forKey: "solcastApiKey")
+        if let resourceId = UserDefaults.shared.string(forKey: "solcastResourceId"),
+           let apiKey = UserDefaults.shared.string(forKey: "solcastApiKey")
         {
-            UserDefaults.standard.removeObject(forKey: "solcastResourceId")
-            UserDefaults.standard.removeObject(forKey: "solcastApiKey")
+            UserDefaults.shared.removeObject(forKey: "solcastResourceId")
+            UserDefaults.shared.removeObject(forKey: "solcastApiKey")
 
             solcastSettings = SolcastSettings(sites: [SolcastSettings.Site(resourceId: resourceId, apiKey: apiKey, name: nil)].compactMap { $0 })
         }
