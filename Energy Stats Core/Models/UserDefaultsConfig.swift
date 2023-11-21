@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension UserDefaults {
+public extension UserDefaults {
     static var shared: UserDefaults {
         UserDefaults(suiteName: "group.com.alpriest.EnergyStats")!
     }
@@ -189,6 +189,6 @@ public class UserDefaultsConfig: Config {
     @UserDefaultsStoredCodable(key: "parameterGroups", defaultValue: DefaultParameterGroups())
     public var parameterGroups: [ParameterGroup]
 
-    @UserDefaultsStoredCodable(key: "solcastSettings", defaultValue: SolcastSettings(sites: []))
+    @UserDefaultsStoredCodable(key: "solcastSettings", defaultValue: SolcastSettings(apiKey: nil, sites: []))
     public var solcastSettings: SolcastSettings
 }

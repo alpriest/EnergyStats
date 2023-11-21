@@ -46,6 +46,7 @@ class SolarForecastViewModel: ObservableObject {
     func load() {
         guard state == .inactive else { return }
         guard settings.solcastSettings.sites.any() else { return }
+        guard let apiKey = settings.solcastSettings.apiKey else { return }
 
         let service = solarForecastProvider()
         let today = Calendar.current.startOfDay(for: Date())
@@ -55,10 +56,9 @@ class SolarForecastViewModel: ObservableObject {
 
         Task { @MainActor in
             data = await settings.solcastSettings.sites
-                .filter { $0.isValid() }
                 .asyncMap { site in
                     do {
-                        let data = try await service.fetchForecast(for: site).forecasts
+                        let data = try await service.fetchForecast(for: site, apiKey: apiKey).forecasts
                         let todayData = data.filter { $0.period_end.isSame(as: today) }
                         let tomorrowData = data.filter { $0.period_end.isSame(as: tomorrow) }
 
@@ -101,11 +101,5 @@ class SolarForecastViewModel: ObservableObject {
             return periodMinutes / 60.0 // Convert minutes to hours
         }
         return 0.0
-    }
-}
-
-extension SolcastSettings.Site {
-    func isValid() -> Bool {
-        resourceId != "" && apiKey != ""
     }
 }

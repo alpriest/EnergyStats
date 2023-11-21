@@ -30,3 +30,29 @@ public struct SolcastForecastResponse: Codable {
         self.period = period
     }
 }
+
+public struct SolcastSiteResponseList: Decodable {
+    public let sites: [SolcastSiteResponse]
+}
+
+public struct SolcastSiteResponse: Decodable {
+    public let name: String?
+    public let resourceId: String
+    public let capacity: Double
+    public let longitude: Double
+    public let latitude: Double
+    public let azimuth: Int
+    public let tilt: Int
+    public let lossFactor: Double
+
+    public init(name: String?, resourceId: String, capacity: Double, longitude: Double, latitude: Double, azimuth: Int, tilt: Int, lossFactor: Double) {
+        self.name = name
+        self.resourceId = resourceId
+        self.capacity = capacity
+        self.longitude = longitude
+        self.latitude = latitude
+        self.azimuth = azimuth
+        self.tilt = tilt
+        self.lossFactor = lossFactor
+    }
+}

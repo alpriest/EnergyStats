@@ -8,11 +8,13 @@
 import Foundation
 
 public protocol SolarForecasting {
-    func fetchForecast(for site: SolcastSettings.Site) async throws -> SolcastForecastResponseList
+    func fetchSites(apiKey: String) async throws -> SolcastSiteResponseList
+    func fetchForecast(for site: SolcastSettings.Site, apiKey: String) async throws -> SolcastForecastResponseList
 }
 
 private extension URL {
-    static var rooftopSites = "https://api.solcast.com.au/rooftop_sites/{resource_id}/forecasts"
+    static var rooftopSites = "https://api.solcast.com.au/rooftop_sites"
+    static var rooftopSitesForecast = "https://api.solcast.com.au/rooftop_sites/{resource_id}/forecasts"
 }
 
 public struct ConfigMissingError: Error {}
@@ -20,11 +22,25 @@ public struct ConfigMissingError: Error {}
 public class Solcast: SolarForecasting {
     public init() { }
 
-    public func fetchForecast(for site: SolcastSettings.Site) async throws -> SolcastForecastResponseList {
-        let url = URL(string: URL.rooftopSites.replacingOccurrences(of: "{resource_id}", with: site.resourceId))!
+    public func fetchSites(apiKey: String) async throws -> SolcastSiteResponseList {
+        let url = URL(string: URL.rooftopSites)!
         let request = append(queryItems: [
             URLQueryItem(name: "format", value: "json"),
-            URLQueryItem(name: "API_KEY", value: site.apiKey)
+            URLQueryItem(name: "API_KEY", value: apiKey)
+        ], to: url)
+
+        do {
+            return try await fetch(request)
+        } catch {
+            throw error
+        }
+    }
+
+    public func fetchForecast(for site: SolcastSettings.Site, apiKey: String) async throws -> SolcastForecastResponseList {
+        let url = URL(string: URL.rooftopSitesForecast.replacingOccurrences(of: "{resource_id}", with: site.resourceId))!
+        let request = append(queryItems: [
+            URLQueryItem(name: "format", value: "json"),
+            URLQueryItem(name: "API_KEY", value: apiKey)
         ], to: url)
 
         do {
@@ -109,8 +125,15 @@ private struct ResponseStatus: Decodable {
 
 public class DemoSolcast: SolarForecasting {
     public init() {}
-    
-    public func fetchForecast(for site: SolcastSettings.Site) async throws -> SolcastForecastResponseList {
+
+    public func fetchSites(apiKey: String) async throws -> SolcastSiteResponseList {
+        SolcastSiteResponseList(sites: [
+            SolcastSiteResponse(name: "Front", resourceId: "abc-123", capacity: 3.7, longitude: -0.2664026, latitude: 51.5287398, azimuth: 134, tilt: 45, lossFactor: 0.9),
+            SolcastSiteResponse(name: "Back", resourceId: "abc-123", capacity: 4.1, longitude: -0.2664026, latitude: 51.5287398, azimuth: 226, tilt: 45, lossFactor: 0.9)
+        ])
+    }
+
+    public func fetchForecast(for site: SolcastSettings.Site, apiKey: String) async throws -> SolcastForecastResponseList {
         let data = try data(filename: "solcast")
         let decoder = JSONDecoder.solcast()
         let result = try decoder.decode(SolcastForecastResponseList.self, from: data)

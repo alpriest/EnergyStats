@@ -117,19 +117,6 @@ public class ConfigManager: ConfigManaging {
             )
         )
         selectedDeviceID = selectedDeviceID
-
-        migrateSolcast()
-    }
-
-    private func migrateSolcast() {
-        if let resourceId = UserDefaults.shared.string(forKey: "solcastResourceId"),
-           let apiKey = UserDefaults.shared.string(forKey: "solcastApiKey")
-        {
-            UserDefaults.shared.removeObject(forKey: "solcastResourceId")
-            UserDefaults.shared.removeObject(forKey: "solcastApiKey")
-
-            solcastSettings = SolcastSettings(sites: [SolcastSettings.Site(resourceId: resourceId, apiKey: apiKey, name: nil)].compactMap { $0 })
-        }
     }
 
     public func fetchDevices() async throws {

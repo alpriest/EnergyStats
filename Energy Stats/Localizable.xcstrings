@@ -5926,6 +5926,7 @@
       }
     },
     "Monitor a second Solcast resource by entering details above." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -6421,6 +6422,7 @@
       }
     },
     "Optional Name" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -8429,6 +8431,7 @@
       }
     },
     "Resource ID" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

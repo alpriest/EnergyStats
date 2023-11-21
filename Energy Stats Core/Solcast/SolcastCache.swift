@@ -21,7 +21,11 @@ public class SolcastCache: SolarForecasting {
         self.fileManager = fileManager
     }
 
-    public func fetchForecast(for site: SolcastSettings.Site) async throws -> SolcastForecastResponseList {
+    public func fetchSites(apiKey: String) async throws -> SolcastSiteResponseList {
+        try await service.fetchSites(apiKey: apiKey)
+    }
+
+    public func fetchForecast(for site: SolcastSettings.Site, apiKey: String) async throws -> SolcastForecastResponseList {
         guard let fileURL = makeFileURL(for: site) else {
             throw ConfigMissingError()
         }
@@ -37,17 +41,17 @@ public class SolcastCache: SolarForecasting {
             if let modificationDate = attributes[.modificationDate] as? Date,
                today().timeIntervalSince(modificationDate) > twelveHours
             {
-                return try await fetchAndStore(for: site, merging: cachedDataModel, fileURL: fileURL)
+                return try await fetchAndStore(for: site, apiKey: apiKey, merging: cachedDataModel, fileURL: fileURL)
             } else {
                 return cachedDataModel
             }
         } else {
-            return try await fetchAndStore(for: site, fileURL: fileURL)
+            return try await fetchAndStore(for: site, apiKey: apiKey, fileURL: fileURL)
         }
     }
 
-    private func fetchAndStore(for site: SolcastSettings.Site, merging previous: SolcastForecastResponseList? = nil, fileURL: URL) async throws -> SolcastForecastResponseList {
-        var latest = try await service.fetchForecast(for: site).forecasts
+    private func fetchAndStore(for site: SolcastSettings.Site, apiKey: String, merging previous: SolcastForecastResponseList? = nil, fileURL: URL) async throws -> SolcastForecastResponseList {
+        var latest = try await service.fetchForecast(for: site, apiKey: apiKey).forecasts
         let previous = previous?.forecasts ?? []
         let todayStart = Calendar.current.startOfDay(for: today())
 

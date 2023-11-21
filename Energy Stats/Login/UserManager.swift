@@ -29,6 +29,7 @@ class UserManager: ObservableObject {
             .store(in: &cancellables)
 
         signOutIfFirstRun()
+        Task { await migrateSolcast() }
     }
 
     func signOutIfFirstRun() {
@@ -37,6 +38,22 @@ class UserManager: ObservableObject {
         Task { @MainActor in
             logout()
             configManager.hasRunBefore = true
+        }
+    }
+
+    func migrateSolcast() async {
+        if let apiKey = UserDefaults.shared.string(forKey: "solcastApiKey") {
+            UserDefaults.shared.removeObject(forKey: "solcastResourceId")
+            UserDefaults.shared.removeObject(forKey: "solcastApiKey")
+
+            do {
+                let solcast = Solcast()
+                let response = try await solcast.fetchSites(apiKey: apiKey)
+
+                configManager.solcastSettings = SolcastSettings(apiKey: apiKey, sites: response.sites.map { SolcastSettings.Site(site: $0) })
+            } catch {
+                print(error)
+            }
         }
     }
 

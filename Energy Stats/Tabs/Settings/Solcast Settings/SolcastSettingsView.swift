@@ -20,21 +20,12 @@ struct SolcastSettingsView: View {
             Form {
                 Section {
                     Text("Solcast_description")
-
-                    TextField("Resource ID", text: $viewModel.site1ResourceId)
-                    TextField("Optional Name", text: $viewModel.site1Name)
-                    SecureField("API Key", text: $viewModel.site1ApiKey)
+                    SecureField("API Key", text: $viewModel.apiKey)
                 } footer: {
                     Text("solcast_how_fo_find_keys")
                 }
 
-                Section {
-                    TextField("Resource ID", text: $viewModel.site2ResourceId)
-                    TextField("Optional Name", text: $viewModel.site2Name)
-                    SecureField("API Key", text: $viewModel.site2ApiKey)
-                } footer: {
-                    Text("Monitor a second Solcast resource by entering details above.")
-                }
+                // TODO: Display sites
             }
 
             BottomButtonsView {
