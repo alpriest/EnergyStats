@@ -56,14 +56,14 @@ public class SolcastCache: SolarForecasting {
         let todayStart = Calendar.current.startOfDay(for: today())
 
         var merged = previous.map { p in
-            if let indexOfLatestForecastPeriod = latest.firstIndex(where: { $0.period_end == p.period_end }) {
+            if let indexOfLatestForecastPeriod = latest.firstIndex(where: { $0.periodEnd == p.periodEnd }) {
                 return latest.remove(at: indexOfLatestForecastPeriod)
             }
             return p
         }
 
         merged.append(contentsOf: latest)
-        merged = merged.filter { $0.period_end >= todayStart }
+        merged = merged.filter { $0.periodEnd >= todayStart }
 
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601

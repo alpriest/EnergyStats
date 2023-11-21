@@ -20,6 +20,11 @@ extension Date {
         return formatter.string(from: self)
     }
 
+    func monthYear() -> String {
+        let formatter = DateFormatter.monthYear
+        return formatter.string(from: self)
+    }
+
     static func yesterday() -> Date {
         Calendar.current.date(byAdding: .day, value: -1, to: .now)!
     }

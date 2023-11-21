@@ -5925,35 +5925,6 @@
         }
       }
     },
-    "Monitor a second Solcast resource by entering details above." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Überwachen Sie eine zweite Solcast-Ressource, indem Sie die Details oben eingeben."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Monitoree un segundo recurso de Solcast ingresando los detalles arriba."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Monitora una seconda risorsa Solcast inserendo i dettagli sopra."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Monitoruj drugi zasób Solcast, wprowadzając szczegóły powyżej."
-          }
-        }
-      }
-    },
     "month" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -6417,35 +6388,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Twoja bateria nie będzie się ładować ani rozładowywać między %1$@. Wszelkie obciążenia domowe będą zasilane z sieci w tym czasie. Zresetuj okres czasu %2$@, aby wyłączyć tę funkcję."
-          }
-        }
-      }
-    },
-    "Optional Name" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Optionaler Name"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nombre Opcional"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nome Opzionale"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Opcjonalna nazwa"
           }
         }
       }
@@ -8430,35 +8372,6 @@
         }
       }
     },
-    "Resource ID" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        }
-      }
-    },
     "Restore defaults" : {
       "localizations" : {
         "de" : {
@@ -9725,31 +9638,31 @@
       "localizations" : {
         "de" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Solcast bietet Solarprognosen basierend auf Ihrem Standort. Um sich kostenlos anzumelden, besuchen Sie https://solcast.com/free-rooftop-solar-forecasting und registrieren Sie sich für den Hobbyist-Zugang.\n\nNachdem Sie sich angemeldet und Ihre Seite erstellt haben, fügen Sie die Ressourcen-ID und Ihren API-Schlüssel unten ein."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Solcast provide solar predictions based on your location. To sign up for free, visit https://solcast.com/free-rooftop-solar-forecasting and register for Hobbyist Access.\n\nOnce you've signed up and have created your site, paste the resource ID and your API key below."
+            "value" : "Solcast provide solar predictions based on your location. To sign up for free, visit https://solcast.com/free-rooftop-solar-forecasting and register for Hobbyist Access.\n\nOnce you've signed up and have created your site(s) paste your API key below."
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Solcast proporciona predicciones solares basadas en tu ubicación. Para registrarte gratuitamente, visita https://solcast.com/free-rooftop-solar-forecasting y regístrate para el Acceso de Aficionados.\n\nUna vez que te hayas registrado y hayas creado tu sitio, pega el ID del recurso y tu clave API abajo."
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Solcast fornisce previsioni solari basate sulla tua posizione. Per iscriverti gratuitamente, visita https://solcast.com/free-rooftop-solar-forecasting e registrati per l'Accesso Hobbistico.\n\nUna volta che ti sei iscritto e hai creato il tuo sito, incolla l'ID della risorsa e la tua chiave API qui sotto."
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Solcast oferuje prognozy słoneczne oparte na Twojej lokalizacji. Aby zarejestrować się za darmo, odwiedź https://solcast.com/free-rooftop-solar-forecasting i zarejestruj się, aby uzyskać dostęp dla Hobbyistów.\n\nPo zarejestrowaniu się i utworzeniu swojej strony, wklej poniżej ID zasobu i swój klucz API."
           }
         }
@@ -9759,31 +9672,31 @@
       "localizations" : {
         "de" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Ihre Ressourcen-ID finden Sie unter https://toolkit.solcast.com.au und Ihren API-Schlüssel finden Sie, indem Sie das Menü oben rechts auf der Seite anklicken."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your Resource ID can be found at https://toolkit.solcast.com.au and your API key can be found by clicking the menu at the top right of the page."
+            "value" : "Your API key can be found at https://toolkit.solcast.com.au by clicking the menu at the top right of the page."
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Tu ID de recurso se puede encontrar en https://toolkit.solcast.com.au y tu clave API se puede encontrar haciendo clic en el menú en la parte superior derecha de la página."
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Il tuo ID risorsa può essere trovato su https://toolkit.solcast.com.au e la tua chiave API può essere trovata cliccando sul menu in alto a destra della pagina"
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Twój identyfikator zasobu można znaleźć na stronie https://toolkit.solcast.com.au, a klucz API znajdziesz, klikając menu w prawym górnym rogu strony."
           }
         }

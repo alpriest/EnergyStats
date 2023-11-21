@@ -58,6 +58,7 @@ public class Solcast: SolarForecasting {
             }
 
             let decoder = JSONDecoder.solcast()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
 
             if statusCode == 404 {
                 let errorResponse = try decoder.decode(ErrorApiResponse.self, from: data)
@@ -127,9 +128,11 @@ public class DemoSolcast: SolarForecasting {
     public init() {}
 
     public func fetchSites(apiKey: String) async throws -> SolcastSiteResponseList {
-        SolcastSiteResponseList(sites: [
-            SolcastSiteResponse(name: "Front", resourceId: "abc-123", capacity: 3.7, longitude: -0.2664026, latitude: 51.5287398, azimuth: 134, tilt: 45, lossFactor: 0.9),
-            SolcastSiteResponse(name: "Back", resourceId: "abc-123", capacity: 4.1, longitude: -0.2664026, latitude: 51.5287398, azimuth: 226, tilt: 45, lossFactor: 0.9)
+        let nov_13_2023_1000am: Date = Date(timeIntervalSince1970: 1699957800)
+
+        return SolcastSiteResponseList(sites: [
+            SolcastSiteResponse(name: "Front", resourceId: "abc-123", capacity: 3.7, longitude: -0.2664026, latitude: 51.5287398, azimuth: 134, tilt: 45, lossFactor: 0.9, dcCapacity: 5.6, installDate: nov_13_2023_1000am),
+            SolcastSiteResponse(name: "Back", resourceId: "abc-123", capacity: 4.1, longitude: -0.2664026, latitude: 51.5287398, azimuth: 226, tilt: 45, lossFactor: 0.9, dcCapacity: 5.6, installDate: nov_13_2023_1000am)
         ])
     }
 
@@ -142,20 +145,20 @@ public class DemoSolcast: SolarForecasting {
         let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: today)!
 
         return SolcastForecastResponseList(forecasts: result.forecasts.map { forecast in
-            let thenComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: forecast.period_end)
+            let thenComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: forecast.periodEnd)
 
             let date: Date?
-            if forecast.period_end.isSame(as: day1) {
+            if forecast.periodEnd.isSame(as: day1) {
                 date = Calendar.current.date(bySettingHour: thenComponents.hour ?? 0, minute: thenComponents.minute ?? 0, second: thenComponents.second ?? 0, of: today)
             } else {
                 date = Calendar.current.date(bySettingHour: thenComponents.hour ?? 0, minute: thenComponents.minute ?? 0, second: thenComponents.second ?? 0, of: tomorrow)
             }
 
             return SolcastForecastResponse(
-                pv_estimate: forecast.pv_estimate,
-                pv_estimate10: forecast.pv_estimate10,
-                pv_estimate90: forecast.pv_estimate90,
-                period_end: date ?? forecast.period_end,
+                pvEstimate: forecast.pvEstimate,
+                pvEstimate10: forecast.pvEstimate10,
+                pvEstimate90: forecast.pvEstimate90,
+                periodEnd: date ?? forecast.periodEnd,
                 period: forecast.period
             )
         })

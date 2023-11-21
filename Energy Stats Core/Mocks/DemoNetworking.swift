@@ -186,12 +186,29 @@ public class MockConfig: Config {
     public var parameterGroups: [ParameterGroup] = DefaultParameterGroups()
     public var currencySymbol: String = "£"
     public var shouldCombineCT2WithPVPower: Bool = true
-    public var solcastSettings: SolcastSettings = SolcastSettings(apiKey: nil, sites: [])
+    public var solcastSettings: SolcastSettings = SolcastSettings(apiKey: nil, sites: [SolcastSite.preview()])
 }
 
 public class PreviewConfigManager: ConfigManager {
     public convenience init() {
         self.init(networking: DemoNetworking(), config: MockConfig())
         Task { try await fetchDevices() }
+    }
+}
+
+public extension SolcastSite {
+    static func preview() -> SolcastSite {
+        SolcastSite(
+            name: "Front panels",
+            resourceId: "abc-123-def-456",
+            lng: -2.470923,
+            lat: 53.377811,
+            azimuth: 134,
+            tilt: 45,
+            lossFactor: 0.9,
+            acCapacity: 3.7,
+            dcCapacity: 5.6,
+            installDate: Date()
+        )
     }
 }

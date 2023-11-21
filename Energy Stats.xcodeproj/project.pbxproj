@@ -224,6 +224,7 @@
 		41F71AC12A1504D900A8C81B /* report-month.json in Resources */ = {isa = PBXBuildFile; fileRef = 41F71AC02A1504D900A8C81B /* report-month.json */; };
 		41FB0D272AC19150002C8FED /* Energy_Stats_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; };
 		41FDAD502A01604F00EDACF3 /* variables.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FDAD4F2A01604F00EDACF3 /* variables.json */; };
+		41FE6BB12B0CBA7900A66CC3 /* SolcastSiteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FE6BB02B0CBA7900A66CC3 /* SolcastSiteView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -555,6 +556,7 @@
 		41F71AC02A1504D900A8C81B /* report-month.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "report-month.json"; sourceTree = "<group>"; };
 		41F8D8F6292D7650005E2D18 /* report-day.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "report-day.json"; sourceTree = "<group>"; };
 		41FDAD4F2A01604F00EDACF3 /* variables.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = variables.json; sourceTree = "<group>"; };
+		41FE6BB02B0CBA7900A66CC3 /* SolcastSiteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolcastSiteView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -902,6 +904,7 @@
 			children = (
 				4149DE9A2B03C3AC004F5FC6 /* SolcastSettingsView.swift */,
 				41E165B22B0A877100B17590 /* SolcastSettingsViewModel.swift */,
+				41FE6BB02B0CBA7900A66CC3 /* SolcastSiteView.swift */,
 			);
 			path = "Solcast Settings";
 			sourceTree = "<group>";
@@ -1542,6 +1545,7 @@
 				41A25D3F28CA5CFB00315714 /* ParametersGraphTabViewModel.swift in Sources */,
 				4107446128C9EF6B006D5D7D /* LoadedPowerFlowView.swift in Sources */,
 				41923E3E2916BC6F00D1A8C5 /* ParametersGraphView.swift in Sources */,
+				41FE6BB12B0CBA7900A66CC3 /* SolcastSiteView.swift in Sources */,
 				41AF2F432AA4C6C1008FCA2E /* HomePowerFooterView.swift in Sources */,
 				41E165BB2B0BE1BD00B17590 /* ForecastView.swift in Sources */,
 				413BF2892A99F8A500A32B0D /* ApproximationsView.swift in Sources */,

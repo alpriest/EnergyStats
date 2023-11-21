@@ -25,7 +25,11 @@ struct SolcastSettingsView: View {
                     Text("solcast_how_fo_find_keys")
                 }
 
-                // TODO: Display sites
+                ForEach(viewModel.sites, id: \.resourceId) { site in
+                    Section {
+                        SolcastSiteView(site: site)
+                    }
+                }
             }
 
             BottomButtonsView {

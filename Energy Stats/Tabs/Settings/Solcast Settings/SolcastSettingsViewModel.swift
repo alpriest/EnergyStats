@@ -14,7 +14,7 @@ class SolcastSettingsViewModel: ObservableObject {
     @MainActor @Published var apiKey: String = ""
     @Published var alertContent: AlertContent?
     private let solarService: SolarForecastProviding
-    @Published var site: [SolcastSite] = []
+    @Published var sites: [SolcastSite] = []
 
     init(configManager: ConfigManaging, solarService: @escaping SolarForecastProviding) {
         self.configManager = configManager
@@ -22,20 +22,24 @@ class SolcastSettingsViewModel: ObservableObject {
 
         Task { @MainActor in
             apiKey = configManager.solcastSettings.apiKey ?? ""
+            sites = configManager.solcastSettings.sites
         }
     }
 
     @MainActor
     func save() {
-        Task {
+        Task { @MainActor in
             do {
                 let service = solarService()
                 let response = try await service.fetchSites(apiKey: apiKey)
                 configManager.solcastSettings = SolcastSettings(apiKey: apiKey, sites: response.sites.map { SolcastSite(site: $0) })
+                self.sites = configManager.solcastSettings.sites
 
                 alertContent = AlertContent(title: "Success", message: "solcast_settings_saved")
             } catch let NetworkError.invalidConfiguration(reason) {
                 alertContent = AlertContent(title: "error_title", message: LocalizedStringKey(stringLiteral: reason))
+            } catch {
+                alertContent = AlertContent(title: "error_title", message: LocalizedStringKey(stringLiteral: error.localizedDescription))
             }
         }
     }

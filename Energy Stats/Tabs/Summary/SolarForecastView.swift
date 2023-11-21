@@ -11,7 +11,7 @@ import Energy_Stats_Core
 import SwiftUI
 
 extension SolcastForecastResponse: Identifiable {
-    public var id: Double { period_end.timeIntervalSince1970 }
+    public var id: Double { periodEnd.timeIntervalSince1970 }
 }
 
 @available(iOS 16.0, *)

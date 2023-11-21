@@ -59,8 +59,8 @@ class SolarForecastViewModel: ObservableObject {
                 .asyncMap { site in
                     do {
                         let data = try await service.fetchForecast(for: site, apiKey: apiKey).forecasts
-                        let todayData = data.filter { $0.period_end.isSame(as: today) }
-                        let tomorrowData = data.filter { $0.period_end.isSame(as: tomorrow) }
+                        let todayData = data.filter { $0.periodEnd.isSame(as: today) }
+                        let tomorrowData = data.filter { $0.periodEnd.isSame(as: tomorrow) }
 
                         return SolarForecastViewData(
                             today: todayData,
@@ -69,7 +69,8 @@ class SolarForecastViewModel: ObservableObject {
                             tomorrowTotal: total(forecasts: tomorrowData),
                             name: site.name
                         )
-                    } catch {
+                    } catch let error {
+                        print("AWP", error)
                         return nil
                     }
                 }
@@ -87,7 +88,7 @@ class SolarForecastViewModel: ObservableObject {
     func total(forecasts: [SolcastForecastResponse]) -> Double {
         let totalPVOutput = forecasts.reduce(0.0) { total, forecast in
             let periodHours = convertPeriodToHours(period: forecast.period)
-            return total + (forecast.pv_estimate * periodHours)
+            return total + (forecast.pvEstimate * periodHours)
         }
 
         return totalPVOutput
