@@ -12,11 +12,13 @@ public struct PowerText: View {
     let amount: Double
     let appSettings: AppSettings
     let type: AmountType
+    let decimalPlaceOverride: Int?
 
-    public init(amount: Double, appSettings: AppSettings, type: AmountType) {
+    public init(amount: Double, appSettings: AppSettings, type: AmountType, decimalPlaceOverride: Int? = nil) {
         self.amount = amount
         self.appSettings = appSettings
         self.type = type
+        self.decimalPlaceOverride = decimalPlaceOverride
     }
 
     public var body: some View {
@@ -31,10 +33,10 @@ public struct PowerText: View {
             if amount < 1 {
                 return amount.w()
             } else {
-                return amount.kW(appSettings.decimalPlaces)
+                return amount.kW(decimalPlaceOverride ?? appSettings.decimalPlaces)
             }
         case .kilowatt:
-            return amount.kW(appSettings.decimalPlaces)
+            return amount.kW(decimalPlaceOverride ?? appSettings.decimalPlaces)
         case .watt:
             return amount.w()
         }

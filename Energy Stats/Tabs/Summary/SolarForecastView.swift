@@ -36,11 +36,11 @@ struct SolarForecastView: View {
         VStack(spacing: 8) {
             VStack(spacing: 22) {
                 ForEach(viewModel.data) { site in
-                    ForecastView(data: site.today, total: site.todayTotal, appSettings: appSettings, name: site.name, title: "Forecast today")
+                    ForecastView(data: site.today, total: site.todayTotal, appSettings: appSettings, name: site.name, title: "Forecast today", yAxisDecimalPlaces: appSettings.decimalPlaces)
                 }
 
                 ForEach(viewModel.data) { site in
-                    ForecastView(data: site.tomorrow, total: site.tomorrowTotal, appSettings: appSettings, name: site.name, title: "Forecast tomorrow")
+                    ForecastView(data: site.tomorrow, total: site.tomorrowTotal, appSettings: appSettings, name: site.name, title: "Forecast tomorrow", yAxisDecimalPlaces: appSettings.decimalPlaces)
                 }
 
                 HStack {

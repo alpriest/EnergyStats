@@ -18,13 +18,15 @@ struct ForecastView: View {
     private let title: LocalizedStringKey
     private let xScale: ClosedRange<Date>
     private let name: String?
+    private let yAxisDecimalPlaces: Int
 
-    init(data: [SolcastForecastResponse], total: Double, appSettings: AppSettings, name: String?, title: LocalizedStringKey) {
+    init(data: [SolcastForecastResponse], total: Double, appSettings: AppSettings, name: String?, title: LocalizedStringKey, yAxisDecimalPlaces: Int) {
         self.data = data
         self.total = total
         self.appSettings = appSettings
         self.name = name
         self.title = title
+        self.yAxisDecimalPlaces = yAxisDecimalPlaces
 
         if let graphDate = data.first?.periodEnd {
             let startDate = Calendar.current.startOfDay(for: graphDate)
@@ -107,7 +109,7 @@ struct ForecastView: View {
                     if let amount = value.as(Double.self) {
                         AxisGridLine()
                         AxisValueLabel {
-                            EnergyText(amount: amount, appSettings: appSettings, type: .default, decimalPlaceOverride: 0)
+                            PowerText(amount: amount, appSettings: appSettings, type: .default, decimalPlaceOverride: yAxisDecimalPlaces)
                         }
                     }
                 }
@@ -123,7 +125,8 @@ struct ForecastView: View {
                  total: 5.0,
                  appSettings: AppSettings.mock(),
                  name: "bob",
-                 title: "Forecast today")
+                 title: "Forecast today",
+                 yAxisDecimalPlaces: 2)
 }
 
 private class PreviewSolcast {
