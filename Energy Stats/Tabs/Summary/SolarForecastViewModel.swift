@@ -37,10 +37,7 @@ class SolarForecastViewModel: ObservableObject {
         self.configManager = configManager
         self.solarForecastProvider = solarForecastProvider
         self.settings = appSettingsPublisher.value
-        self.cancellable = appSettingsPublisher
-            .assign(to: \.settings, on: self)
-
-        NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
+        self.cancellable = appSettingsPublisher.assign(to: \.settings, on: self)
     }
 
     func load() {
@@ -78,6 +75,8 @@ class SolarForecastViewModel: ObservableObject {
 
             self.state = .inactive
         }
+
+        NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
     }
 
     @objc
