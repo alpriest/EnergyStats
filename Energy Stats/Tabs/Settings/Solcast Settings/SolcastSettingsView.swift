@@ -11,8 +11,8 @@ import SwiftUI
 struct SolcastSettingsView: View {
     @StateObject var viewModel: SolcastSettingsViewModel
 
-    init(configManager: ConfigManaging) {
-        _viewModel = .init(wrappedValue: SolcastSettingsViewModel(configManager: configManager))
+    init(configManager: ConfigManaging, solarService: @escaping SolarForecastProviding) {
+        _viewModel = .init(wrappedValue: SolcastSettingsViewModel(configManager: configManager, solarService: solarService))
     }
 
     var body: some View {
@@ -39,5 +39,5 @@ struct SolcastSettingsView: View {
 }
 
 #Preview {
-    SolcastSettingsView(configManager: PreviewConfigManager())
+    SolcastSettingsView(configManager: PreviewConfigManager()) { DemoSolcast() }
 }

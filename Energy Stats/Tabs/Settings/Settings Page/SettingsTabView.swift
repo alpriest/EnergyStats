@@ -12,6 +12,7 @@ struct SettingsTabView: View {
     @ObservedObject var viewModel: SettingsTabViewModel
     let configManager: ConfigManaging
     let networking: FoxESSNetworking
+    let solarService: SolarForecastProviding
 
     var body: some View {
         NavigationView {
@@ -45,7 +46,7 @@ struct SettingsTabView: View {
                     Text("Datalogger")
                 }
 
-                DisplaySettingsView(viewModel: viewModel, configManager: configManager)
+                DisplaySettingsView(viewModel: viewModel, configManager: configManager, solarService: solarService)
 
                 Section(
                     content: {
@@ -65,7 +66,7 @@ struct SettingsTabView: View {
                     NavigationLink("FoxESS Cloud Status") { WebView(url: URL(string: "https://monitor.foxesscommunity.com/status/foxess")!) }
 
                     ExternalWebNavigationLink(url: "https://www.foxesscommunity.com", title: .foxessCommunity)
-                    ExternalWebNavigationLink(url: "https://www.facebook.com/groups/foxessownersgroup", title:.facebookGroup)
+                    ExternalWebNavigationLink(url: "https://www.facebook.com/groups/foxessownersgroup", title: .facebookGroup)
 
                     NavigationLink("settings.faq") { FAQView() }
                     NavigationLink("settings.debug") { DebugDataView(networking: networking, configManager: configManager) }
@@ -88,7 +89,8 @@ struct SettingsTabView_Previews: PreviewProvider {
                 config: PreviewConfigManager(),
                 networking: DemoNetworking()),
             configManager: PreviewConfigManager(),
-            networking: DemoNetworking())
+            networking: DemoNetworking(),
+            solarService: { DemoSolcast() })
     }
 }
 #endif

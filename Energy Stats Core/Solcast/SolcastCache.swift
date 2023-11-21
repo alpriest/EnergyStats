@@ -25,7 +25,7 @@ public class SolcastCache: SolarForecasting {
         try await service.fetchSites(apiKey: apiKey)
     }
 
-    public func fetchForecast(for site: SolcastSettings.Site, apiKey: String) async throws -> SolcastForecastResponseList {
+    public func fetchForecast(for site: SolcastSite, apiKey: String) async throws -> SolcastForecastResponseList {
         guard let fileURL = makeFileURL(for: site) else {
             throw ConfigMissingError()
         }
@@ -50,7 +50,7 @@ public class SolcastCache: SolarForecasting {
         }
     }
 
-    private func fetchAndStore(for site: SolcastSettings.Site, apiKey: String, merging previous: SolcastForecastResponseList? = nil, fileURL: URL) async throws -> SolcastForecastResponseList {
+    private func fetchAndStore(for site: SolcastSite, apiKey: String, merging previous: SolcastForecastResponseList? = nil, fileURL: URL) async throws -> SolcastForecastResponseList {
         var latest = try await service.fetchForecast(for: site, apiKey: apiKey).forecasts
         let previous = previous?.forecasts ?? []
         let todayStart = Calendar.current.startOfDay(for: today())
@@ -74,7 +74,7 @@ public class SolcastCache: SolarForecasting {
         return result
     }
 
-    private func makeFileURL(for site: SolcastSettings.Site) -> URL? {
+    private func makeFileURL(for site: SolcastSite) -> URL? {
         let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
         return urls[0].appendingPathComponent("solcast-\(site.resourceId).json")
     }

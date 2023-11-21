@@ -13,9 +13,12 @@ class SolcastSettingsViewModel: ObservableObject {
     private var configManager: ConfigManaging
     @MainActor @Published var apiKey: String = ""
     @Published var alertContent: AlertContent?
+    private let solarService: SolarForecastProviding
+    @Published var site: [SolcastSite] = []
 
-    init(configManager: ConfigManaging) {
+    init(configManager: ConfigManaging, solarService: @escaping SolarForecastProviding) {
         self.configManager = configManager
+        self.solarService = solarService
 
         Task { @MainActor in
             apiKey = configManager.solcastSettings.apiKey ?? ""
@@ -26,9 +29,9 @@ class SolcastSettingsViewModel: ObservableObject {
     func save() {
         Task {
             do {
-                let service = SolcastCache(service: { Solcast() }) // TODO: INJECT
+                let service = solarService()
                 let response = try await service.fetchSites(apiKey: apiKey)
-                configManager.solcastSettings = SolcastSettings(apiKey: apiKey, sites: response.sites.map { SolcastSettings.Site(site: $0) })
+                configManager.solcastSettings = SolcastSettings(apiKey: apiKey, sites: response.sites.map { SolcastSite(site: $0) })
 
                 alertContent = AlertContent(title: "Success", message: "solcast_settings_saved")
             } catch let NetworkError.invalidConfiguration(reason) {

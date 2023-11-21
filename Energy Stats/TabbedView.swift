@@ -65,7 +65,7 @@ struct TabbedView: View {
                     .accessibilityIdentifier("summary_tab")
                 }
 
-            SettingsTabView(viewModel: settingsTabViewModel, configManager: configManager, networking: networking)
+            SettingsTabView(viewModel: settingsTabViewModel, configManager: configManager, networking: networking, solarService: solarForecastProvider)
                 .tabItem {
                     VStack {
                         Image(systemName: "gearshape")

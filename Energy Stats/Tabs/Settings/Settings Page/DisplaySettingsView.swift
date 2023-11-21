@@ -11,6 +11,7 @@ import SwiftUI
 struct DisplaySettingsView: View {
     @ObservedObject var viewModel: SettingsTabViewModel
     let configManager: ConfigManaging
+    let solarService: SolarForecastProviding
 
     var body: some View {
         Section {
@@ -97,7 +98,7 @@ struct DisplaySettingsView: View {
         }
 
         NavigationLink {
-            SolcastSettingsView(configManager: configManager)
+            SolcastSettingsView(configManager: configManager, solarService: solarService)
         } label: {
             Text("Solcast Solar Prediction")
         }
@@ -113,7 +114,8 @@ struct DisplaySettingsView_Previews: PreviewProvider {
                     userManager: .preview(),
                     config: PreviewConfigManager(),
                     networking: DemoNetworking()),
-                configManager: PreviewConfigManager())
+                configManager: PreviewConfigManager(),
+                solarService: { DemoSolcast() })
         }
     }
 }

@@ -9,7 +9,7 @@ import Foundation
 
 public protocol SolarForecasting {
     func fetchSites(apiKey: String) async throws -> SolcastSiteResponseList
-    func fetchForecast(for site: SolcastSettings.Site, apiKey: String) async throws -> SolcastForecastResponseList
+    func fetchForecast(for site: SolcastSite, apiKey: String) async throws -> SolcastForecastResponseList
 }
 
 private extension URL {
@@ -36,7 +36,7 @@ public class Solcast: SolarForecasting {
         }
     }
 
-    public func fetchForecast(for site: SolcastSettings.Site, apiKey: String) async throws -> SolcastForecastResponseList {
+    public func fetchForecast(for site: SolcastSite, apiKey: String) async throws -> SolcastForecastResponseList {
         let url = URL(string: URL.rooftopSitesForecast.replacingOccurrences(of: "{resource_id}", with: site.resourceId))!
         let request = append(queryItems: [
             URLQueryItem(name: "format", value: "json"),
@@ -133,7 +133,7 @@ public class DemoSolcast: SolarForecasting {
         ])
     }
 
-    public func fetchForecast(for site: SolcastSettings.Site, apiKey: String) async throws -> SolcastForecastResponseList {
+    public func fetchForecast(for site: SolcastSite, apiKey: String) async throws -> SolcastForecastResponseList {
         let data = try data(filename: "solcast")
         let decoder = JSONDecoder.solcast()
         let result = try decoder.decode(SolcastForecastResponseList.self, from: data)

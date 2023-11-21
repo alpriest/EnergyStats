@@ -50,7 +50,7 @@ class UserManager: ObservableObject {
                 let solcast = Solcast()
                 let response = try await solcast.fetchSites(apiKey: apiKey)
 
-                configManager.solcastSettings = SolcastSettings(apiKey: apiKey, sites: response.sites.map { SolcastSettings.Site(site: $0) })
+                configManager.solcastSettings = SolcastSettings(apiKey: apiKey, sites: response.sites.map { SolcastSite(site: $0) })
             } catch {
                 print(error)
             }
