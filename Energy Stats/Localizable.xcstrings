@@ -9667,65 +9667,31 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Solcast bietet Solarprognosen basierend auf Ihrem Standort. Um sich kostenlos anzumelden, besuchen Sie https://solcast.com/free-rooftop-solar-forecasting und registrieren Sie sich für den Hobbyist-Zugang.\n\nNachdem Sie sich angemeldet und Ihre Website(s) erstellt haben, fügen Sie Ihren API-Schlüssel unten ein."
+            "value" : "Solcast bietet Solarprognosen basierend auf Ihrem Standort. Um sich kostenlos anzumelden, besuchen Sie https://solcast.com/free-rooftop-solar-forecasting und registrieren Sie sich für den Hobbyist-Zugang.\n\nNachdem Sie sich angemeldet und Ihre Website(s) erstellt haben, fügen Sie Ihren API-Schlüssel unten ein. Ihren API-Schlüssel finden Sie auf https://toolkit.solcast.com.au, indem Sie das Menü oben rechts auf der Seite anklicken."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Solcast provide solar predictions based on your location. To sign up for free, visit https://solcast.com/free-rooftop-solar-forecasting and register for Hobbyist Access.\n\nOnce you've signed up and have created your site(s) paste your API key below."
+            "value" : "Solcast provide solar predictions based on your location. To sign up for free, visit https://solcast.com/free-rooftop-solar-forecasting and register for Hobbyist Access.\n\nOnce you've signed up and have created your site(s) paste your API key below. Your API key can be found at https://toolkit.solcast.com.au by clicking the menu at the top right of the page."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Solcast ofrece predicciones solares basadas en tu ubicación. Para registrarte gratuitamente, visita https://solcast.com/free-rooftop-solar-forecasting y regístrate para el Acceso para Aficionados.\n\nUna vez que te hayas registrado y hayas creado tus sitios, pega tu clave API a continuación."
+            "value" : "Solcast ofrece predicciones solares basadas en tu ubicación. Para registrarte gratuitamente, visita https://solcast.com/free-rooftop-solar-forecasting y regístrate para el Acceso para Aficionados.\n\nUna vez que te hayas registrado y hayas creado tus sitios, pega tu clave API a continuación. Puedes encontrar tu clave API en https://toolkit.solcast.com.au haciendo clic en el menú en la parte superior derecha de la página."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Solcast fornisce previsioni solari basate sulla tua posizione. Per iscriverti gratuitamente, visita https://solcast.com/free-rooftop-solar-forecasting e registrati per l'Accesso per Hobbisti.\n\nUna volta che ti sei iscritto e hai creato i tuoi siti, incolla qui sotto la tua chiave API."
+            "value" : "Solcast fornisce previsioni solari basate sulla tua posizione. Per iscriverti gratuitamente, visita https://solcast.com/free-rooftop-solar-forecasting e registrati per l'Accesso per Hobbisti.\n\nUna volta che ti sei iscritto e hai creato i tuoi siti, incolla qui sotto la tua chiave API. La tua chiave API può essere trovata su https://toolkit.solcast.com.au cliccando sul menu in alto a destra della pagina."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Solcast dostarcza prognozy solarne na podstawie Twojej lokalizacji. Aby zarejestrować się za darmo, odwiedź https://solcast.com/free-rooftop-solar-forecasting i zarejestruj się, aby uzyskać Dostęp dla Hobbystów.\n\nPo zarejestrowaniu się i utworzeniu swoich stron, wklej poniżej swój klucz API."
-          }
-        }
-      }
-    },
-    "solcast_how_fo_find_keys" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ihren API-Schlüssel finden Sie auf https://toolkit.solcast.com.au, indem Sie das Menü oben rechts auf der Seite anklicken."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your API key can be found at https://toolkit.solcast.com.au by clicking the menu at the top right of the page."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Puedes encontrar tu clave API en https://toolkit.solcast.com.au haciendo clic en el menú en la parte superior derecha de la página."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "La tua chiave API può essere trovata su https://toolkit.solcast.com.au cliccando sul menu in alto a destra della pagina."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Twój klucz API można znaleźć na https://toolkit.solcast.com.au, klikając menu w prawym górnym rogu strony."
+            "value" : "Solcast dostarcza prognozy solarne na podstawie Twojej lokalizacji. Aby zarejestrować się za darmo, odwiedź https://solcast.com/free-rooftop-solar-forecasting i zarejestruj się, aby uzyskać Dostęp dla Hobbystów.\n\nPo zarejestrowaniu się i utworzeniu swoich stron, wklej poniżej swój klucz API. Twój klucz API można znaleźć na https://toolkit.solcast.com.au, klikając menu w prawym górnym rogu strony."
           }
         }
       }

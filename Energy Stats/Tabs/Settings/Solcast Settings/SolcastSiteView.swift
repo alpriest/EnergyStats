@@ -20,6 +20,7 @@ struct SolcastSiteView: View {
             HStack(alignment: .top) {
                 Map(coordinateRegion: .constant(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: site.lat, longitude: site.lng),
                                                                    span: MKCoordinateSpan(latitudeDelta: 0.0015, longitudeDelta: 0.0015))))
+                .disabled(true)
                 .frame(width: 120, height: 120)
                 
                 VStack(alignment: .leading) {
