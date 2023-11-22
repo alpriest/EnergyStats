@@ -15,11 +15,13 @@ typealias SolarForecastProviding = () -> SolarForecasting
 struct SolarForecastViewData: Identifiable {
     let id: String = UUID().uuidString
 
+    let error: String?
     let today: [SolcastForecastResponse]
     let todayTotal: Double
     let tomorrow: [SolcastForecastResponse]
     let tomorrowTotal: Double
     let name: String?
+    let resourceId: String
 }
 
 class SolarForecastViewModel: ObservableObject {
@@ -60,18 +62,36 @@ class SolarForecastViewModel: ObservableObject {
                         let tomorrowData = data.filter { $0.periodEnd.isSame(as: tomorrow) }
 
                         return SolarForecastViewData(
+                            error: nil,
                             today: todayData,
                             todayTotal: total(forecasts: todayData),
                             tomorrow: tomorrowData,
                             tomorrowTotal: total(forecasts: tomorrowData),
-                            name: site.name
+                            name: site.name,
+                            resourceId: site.resourceId
+                        )
+                    } catch NetworkError.tryLater {
+                        return SolarForecastViewData(
+                            error: "You have exceeded your free daily limit.",
+                            today: [],
+                            todayTotal: 0.0,
+                            tomorrow: [],
+                            tomorrowTotal: 0.0,
+                            name: site.name,
+                            resourceId: site.resourceId
                         )
                     } catch let error {
-                        print("AWP", error)
-                        return nil
+                        return SolarForecastViewData(
+                            error: error.localizedDescription,
+                            today: [],
+                            todayTotal: 0.0,
+                            tomorrow: [],
+                            tomorrowTotal: 0.0,
+                            name: site.name,
+                            resourceId: site.resourceId
+                        )
                     }
                 }
-                .compactMap { $0 }
 
             self.state = .inactive
         }

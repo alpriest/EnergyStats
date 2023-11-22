@@ -63,6 +63,8 @@ public class Solcast: SolarForecasting {
             if statusCode == 404 {
                 let errorResponse = try decoder.decode(ErrorApiResponse.self, from: data)
                 throw NetworkError.invalidConfiguration(errorResponse.responseStatus.message)
+            } else if statusCode == 429 {
+                throw NetworkError.tryLater
             }
 
             guard 200 ... 300 ~= statusCode else {

@@ -19,14 +19,18 @@ struct ForecastView: View {
     private let xScale: ClosedRange<Date>
     private let name: String?
     private let yAxisDecimalPlaces: Int
+    private let error: String?
+    private let resourceId: String
 
-    init(data: [SolcastForecastResponse], total: Double, appSettings: AppSettings, name: String?, title: LocalizedStringKey, yAxisDecimalPlaces: Int) {
+    init(data: [SolcastForecastResponse], total: Double, appSettings: AppSettings, name: String?, title: LocalizedStringKey, yAxisDecimalPlaces: Int, error: String?, resourceId: String) {
         self.data = data
         self.total = total
         self.appSettings = appSettings
         self.name = name
         self.title = title
         self.yAxisDecimalPlaces = yAxisDecimalPlaces
+        self.error = error
+        self.resourceId = resourceId
 
         if let graphDate = data.first?.periodEnd {
             let startDate = Calendar.current.startOfDay(for: graphDate)
@@ -39,94 +43,128 @@ struct ForecastView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            HStack(spacing: 3) {
-                OptionalView(name) {
-                    Text($0)
-                        .bold()
-                }
-
-                Text(title)
-
-                EnergyText(amount: total, appSettings: appSettings, type: .default)
+            if let error {
+                errorView(text: error)
+            } else {
+                graphView()
             }
-            .foregroundStyle(Color(uiColor: .label))
-            .font(.caption)
-
-            Chart {
-                ForEach(data) { data in
-                    AreaMark(x: .value("Time", data.periodEnd),
-                             yStart: .value("kWh", data.pvEstimate10),
-                             yEnd: .value("kWh", data.pvEstimate90))
-                        .foregroundStyle(Color.yellow.gradient.opacity(0.2))
-
-                    LineMark(
-                        x: .value("Time", data.periodEnd),
-                        y: .value("kWh", data.pvEstimate)
-                    )
-                    .foregroundStyle(Color.blue)
-                    .lineStyle(StrokeStyle(lineWidth: 2, dash: [5, 5], dashPhase: 0))
-                }
-                .interpolationMethod(.catmullRom)
-            }
-            .chartLegend(.hidden)
-            .chartPlotStyle { content in
-                content
-                    .background(Color.gray.gradient.opacity(0.04))
-            }
-            .chartOverlay { chartProxy in
-                GeometryReader { geometryReader in
-                    if let elementLocation = chartProxy.position(forX: Date()) {
-                        let location = elementLocation - geometryReader[chartProxy.plotAreaFrame].origin.x
-
-                        Rectangle()
-                            .fill(Color.pink.opacity(0.5))
-                            .frame(width: 1, height: chartProxy.plotAreaSize.height * 0.92)
-                            .offset(x: location, y: chartProxy.plotAreaSize.height * 0.07)
-
-                        Text("now")
-                            .background(GeometryReader(content: { reader in
-                                Color.clear.onAppear { size = reader.size }.onChange(of: reader.size) { newValue in size = newValue }
-                            }))
-                            .font(.caption2)
-                            .foregroundStyle(Color.pink.opacity(0.5))
-                            .offset(x: location - size.width / 2, y: 0)
-                    }
-                }
-            }
-            .chartXScale(domain: xScale)
-            .chartXAxis(content: {
-                AxisMarks(values: .stride(by: .hour, count: 4)) { value in
-                    if let date = value.as(Date.self) {
-                        AxisTick(centered: false)
-                        AxisValueLabel(centered: false) {
-                            Text(date, format: .dateTime.hour())
-                        }
-                    }
-                }
-            })
-            .chartYAxis(content: {
-                AxisMarks(values: .automatic(desiredCount: 4)) { value in
-                    if let amount = value.as(Double.self) {
-                        AxisGridLine()
-                        AxisValueLabel {
-                            PowerText(amount: amount, appSettings: appSettings, type: .default, decimalPlaceOverride: yAxisDecimalPlaces)
-                        }
-                    }
-                }
-            })
-            .frame(height: 200)
         }
+    }
+
+    @ViewBuilder
+    private func errorView(text: String) -> some View {
+        HStack(spacing: 0) {
+            Image(systemName: "exclamationmark.triangle.fill")
+                .foregroundStyle(Color.red)
+
+            VStack(alignment: .leading) {
+                Text("Resource Id: \(resourceId)")
+
+                Text(text)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .font(.caption)
+            .foregroundStyle(Color.secondary)
+        }
+    }
+
+    @ViewBuilder
+    private func graphView() -> some View {
+        HStack(spacing: 3) {
+            OptionalView(name) {
+                Text($0)
+                    .bold()
+            }
+
+            Text(title)
+
+            EnergyText(amount: total, appSettings: appSettings, type: .default)
+        }
+        .foregroundStyle(Color(uiColor: .label))
+        .font(.caption)
+
+        Chart {
+            ForEach(data) { data in
+                AreaMark(x: .value("Time", data.periodEnd),
+                         yStart: .value("kWh", data.pvEstimate10),
+                         yEnd: .value("kWh", data.pvEstimate90))
+                    .foregroundStyle(Color.yellow.gradient.opacity(0.2))
+
+                LineMark(
+                    x: .value("Time", data.periodEnd),
+                    y: .value("kWh", data.pvEstimate)
+                )
+                .foregroundStyle(Color.blue)
+                .lineStyle(StrokeStyle(lineWidth: 2, dash: [5, 5], dashPhase: 0))
+            }
+            .interpolationMethod(.catmullRom)
+        }
+        .chartLegend(.hidden)
+        .chartPlotStyle { content in
+            content
+                .background(Color.gray.gradient.opacity(0.04))
+        }
+        .chartOverlay { chartProxy in
+            GeometryReader { geometryReader in
+                if let elementLocation = chartProxy.position(forX: Date()) {
+                    let location = elementLocation - geometryReader[chartProxy.plotAreaFrame].origin.x
+
+                    Rectangle()
+                        .fill(Color.pink.opacity(0.5))
+                        .frame(width: 1, height: chartProxy.plotAreaSize.height * 0.92)
+                        .offset(x: location, y: chartProxy.plotAreaSize.height * 0.07)
+
+                    Text("now")
+                        .background(GeometryReader(content: { reader in
+                            Color.clear.onAppear { size = reader.size }.onChange(of: reader.size) { newValue in size = newValue }
+                        }))
+                        .font(.caption2)
+                        .foregroundStyle(Color.pink.opacity(0.5))
+                        .offset(x: location - size.width / 2, y: 0)
+                }
+            }
+        }
+        .chartXScale(domain: xScale)
+        .chartXAxis(content: {
+            AxisMarks(values: .stride(by: .hour, count: 4)) { value in
+                if let date = value.as(Date.self) {
+                    AxisTick(centered: false)
+                    AxisValueLabel(centered: false) {
+                        Text(date, format: .dateTime.hour())
+                    }
+                }
+            }
+        })
+        .chartYAxis(content: {
+            AxisMarks(values: .automatic(desiredCount: 4)) { value in
+                if let amount = value.as(Double.self) {
+                    AxisGridLine()
+                    AxisValueLabel {
+                        PowerText(amount: amount, appSettings: appSettings, type: .default, decimalPlaceOverride: yAxisDecimalPlaces)
+                    }
+                }
+            }
+        })
+        .frame(height: 200)
     }
 }
 
 @available(iOS 16.0, *)
 #Preview {
-    ForecastView(data: PreviewSolcast().fetchForecast().forecasts,
-                 total: 5.0,
-                 appSettings: AppSettings.mock(),
-                 name: "bob",
-                 title: "Forecast today",
-                 yAxisDecimalPlaces: 2)
+    VStack(alignment: .leading, spacing: 16) {
+        VStack(spacing: 8) {
+            VStack(alignment: .leading, spacing: 22) {
+                ForecastView(data: PreviewSolcast().fetchForecast().forecasts,
+                             total: 5.0,
+                             appSettings: AppSettings.mock(),
+                             name: "bob",
+                             title: "Forecast today",
+                             yAxisDecimalPlaces: 2,
+                             error: "The data",
+                             resourceId: "abc-123-def-456")
+            }
+        }
+    }.padding()
 }
 
 private class PreviewSolcast {
