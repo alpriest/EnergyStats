@@ -31,10 +31,10 @@ struct StatsTabView: View {
     @StateObject var viewModel: StatsTabViewModel
     @State private var showingExporter = false
     @State private var appSettings: AppSettings
-    private var appSettingsPublisher: LatestAppPublisher
+    private var appSettingsPublisher: LatestAppSettingsPublisher
     @AppStorage("showStatsGraph") private var showingGraph = true
 
-    init(configManager: ConfigManaging, networking: FoxESSNetworking, appSettingsPublisher: LatestAppPublisher) {
+    init(configManager: ConfigManaging, networking: FoxESSNetworking, appSettingsPublisher: LatestAppSettingsPublisher) {
         _viewModel = .init(wrappedValue: StatsTabViewModel(networking: networking, configManager: configManager))
         self.appSettingsPublisher = appSettingsPublisher
         self.appSettings = appSettingsPublisher.value

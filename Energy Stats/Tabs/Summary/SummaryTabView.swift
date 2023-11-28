@@ -12,11 +12,11 @@ import SwiftUI
 struct SummaryTabView: View {
     @StateObject var viewModel: SummaryTabViewModel
     @State private var appSettings: AppSettings
-    private var appSettingsPublisher: LatestAppPublisher
+    private var appSettingsPublisher: LatestAppSettingsPublisher
     private let configManager: ConfigManaging
     @StateObject private var solarForecastViewModel: SolarForecastViewModel
 
-    init(configManager: ConfigManaging, networking: FoxESSNetworking, appSettingsPublisher: LatestAppPublisher, solarForecastProvider: @escaping SolarForecastProviding) {
+    init(configManager: ConfigManaging, networking: FoxESSNetworking, appSettingsPublisher: LatestAppSettingsPublisher, solarForecastProvider: @escaping SolarForecastProviding) {
         self.configManager = configManager
         _viewModel = .init(wrappedValue: SummaryTabViewModel(configManager: configManager, networking: networking))
         _solarForecastViewModel = .init(wrappedValue: SolarForecastViewModel(configManager: configManager, appSettingsPublisher: appSettingsPublisher, solarForecastProvider: solarForecastProvider))

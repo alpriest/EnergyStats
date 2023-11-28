@@ -16,32 +16,32 @@ struct SolcastSettingsView: View {
     }
 
     var body: some View {
-        NavigationView {
-            VStack(spacing: 0) {
-                Form {
-                    Section {
-                        Text("Solcast_description")
-                        SecureField("API Key", text: $viewModel.apiKey)
-                    }
-
-                    ForEach(viewModel.sites, id: \.resourceId) { site in
-                        Section {
-                            SolcastSiteView(site: site)
-                        }
-                    }
+        VStack(spacing: 0) {
+            Form {
+                Section {
+                    Text("Solcast_description")
+                    SecureField("API Key", text: $viewModel.apiKey)
                 }
 
-                BottomButtonsView {
-                    viewModel.save()
+                ForEach(viewModel.sites, id: \.resourceId) { site in
+                    Section {
+                        SolcastSiteView(site: site)
+                    }
                 }
             }
-            .navigationTitle("Solcast Solar Prediction")
-            .navigationBarTitleDisplayMode(.inline)
-            .alert(alertContent: $viewModel.alertContent)
+
+            BottomButtonsView {
+                viewModel.save()
+            }
         }
+        .navigationTitle("Solcast Solar Prediction")
+        .navigationBarTitleDisplayMode(.inline)
+        .alert(alertContent: $viewModel.alertContent)
     }
 }
 
 #Preview {
-    SolcastSettingsView(configManager: PreviewConfigManager()) { DemoSolcast() }
+    NavigationView {
+        SolcastSettingsView(configManager: PreviewConfigManager()) { DemoSolcast() }
+    }
 }

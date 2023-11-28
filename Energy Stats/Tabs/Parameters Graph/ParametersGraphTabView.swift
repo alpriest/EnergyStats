@@ -17,7 +17,7 @@ struct ParametersGraphTabView: View {
     @State private var showingVariables = false
     @State private var showingExporter = false
     @State private var appSettings: AppSettings = .mock()
-    private let appSettingsPublisher: LatestAppPublisher
+    private let appSettingsPublisher: LatestAppSettingsPublisher
     private let configManager: ConfigManaging
 
     init(configManager: ConfigManaging, networking: FoxESSNetworking, dateProvider: @escaping () -> Date = { Date() }) {

@@ -15,9 +15,9 @@ struct LoadedPowerFlowView: View {
     @State private var size: CGSize = .zero
     private let configManager: ConfigManaging
     private let viewModel: HomePowerFlowViewModel
-    private var appSettingsPublisher: LatestAppPublisher
+    private var appSettingsPublisher: LatestAppSettingsPublisher
 
-    init(configManager: ConfigManaging, viewModel: HomePowerFlowViewModel, appSettingsPublisher: LatestAppPublisher) {
+    init(configManager: ConfigManaging, viewModel: HomePowerFlowViewModel, appSettingsPublisher: LatestAppSettingsPublisher) {
         self.configManager = configManager
         self.viewModel = viewModel
         self.appSettingsPublisher = appSettingsPublisher

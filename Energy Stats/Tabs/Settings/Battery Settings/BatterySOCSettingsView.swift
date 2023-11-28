@@ -22,7 +22,7 @@ struct BatterySOCSettingsView: View {
                     content: {
                         HStack {
                             Text("Min SoC")
-                            NumberTextField("Min SoC", text: $viewModel.soc, range: 1...100)
+                            NumberTextField("Min SoC", text: $viewModel.soc)
                                 .multilineTextAlignment(.trailing)
                             Text("%")
                         }
@@ -36,7 +36,7 @@ struct BatterySOCSettingsView: View {
                     content: {
                         HStack {
                             Text("Min SoC on Grid")
-                            NumberTextField("Min SoC on Grid", text: $viewModel.socOnGrid, range: 1...100)
+                            NumberTextField("Min SoC on Grid", text: $viewModel.socOnGrid)
                                 .multilineTextAlignment(.trailing)
                             Text("%")
                         }

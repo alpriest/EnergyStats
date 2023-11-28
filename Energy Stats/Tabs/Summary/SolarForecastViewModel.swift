@@ -35,7 +35,7 @@ class SolarForecastViewModel: ObservableObject {
         hasSites = !settings.solcastSettings.sites.isEmpty
     }}
 
-    init(configManager: ConfigManaging, appSettingsPublisher: LatestAppPublisher, solarForecastProvider: @escaping SolarForecastProviding) {
+    init(configManager: ConfigManaging, appSettingsPublisher: LatestAppSettingsPublisher, solarForecastProvider: @escaping SolarForecastProviding) {
         self.configManager = configManager
         self.solarForecastProvider = solarForecastProvider
         self.settings = appSettingsPublisher.value

@@ -33,6 +33,9 @@ struct SolcastSiteView: View {
                         }
                         row(title: "Azimuth", value: site.azimuth)
                         row(title: "Tilt", value: site.tilt)
+                        OptionalView(site.lossFactor) {
+                            row(title: "Loss Factor", value: $0)
+                        }
                         OptionalView(site.installDate) {
                             row(title: "Install Date", value: $0.monthYear())
                         }
@@ -44,17 +47,17 @@ struct SolcastSiteView: View {
     }
 
     @ViewBuilder
-    private func row(title: String, value: Int) -> some View {
+    private func row(title: LocalizedStringKey, value: Int) -> some View {
         row(title: title, value: String(describing: value))
     }
 
     @ViewBuilder
-    private func row(title: String, value: Double) -> some View {
+    private func row(title: LocalizedStringKey, value: Double) -> some View {
         row(title: title, value: String(describing: value))
     }
 
     @ViewBuilder
-    private func row(title: String, value: String) -> some View {
+    private func row(title: LocalizedStringKey, value: String) -> some View {
         HStack {
             Text(title)
                 .foregroundStyle(Color.secondary)

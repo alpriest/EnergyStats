@@ -20,7 +20,7 @@ private extension URL {
 public struct ConfigMissingError: Error {}
 
 public class Solcast: SolarForecasting {
-    public init() { }
+    public init() {}
 
     public func fetchSites(apiKey: String) async throws -> SolcastSiteResponseList {
         let url = URL(string: URL.rooftopSites)!
@@ -32,6 +32,7 @@ public class Solcast: SolarForecasting {
         do {
             return try await fetch(request)
         } catch {
+            print("AWP", error)
             throw error
         }
     }
@@ -43,11 +44,7 @@ public class Solcast: SolarForecasting {
             URLQueryItem(name: "API_KEY", value: apiKey)
         ], to: url)
 
-        do {
-            return try await fetch(request)
-        } catch {
-            throw error
-        }
+        return try await fetch(request)
     }
 
     func fetch<T: Decodable>(_ request: URLRequest) async throws -> T {
@@ -125,12 +122,11 @@ private struct ResponseStatus: Decodable {
     let message: String
 }
 
-
 public class DemoSolcast: SolarForecasting {
     public init() {}
 
     public func fetchSites(apiKey: String) async throws -> SolcastSiteResponseList {
-        let nov_13_2023_1000am: Date = Date(timeIntervalSince1970: 1699957800)
+        let nov_13_2023_1000am = Date(timeIntervalSince1970: 1699957800)
 
         return SolcastSiteResponseList(sites: [
             SolcastSiteResponse(name: "Front", resourceId: "abc-123", capacity: 3.7, longitude: -0.2664026, latitude: 51.5287398, azimuth: 134, tilt: 45, lossFactor: 0.9, dcCapacity: 5.6, installDate: nov_13_2023_1000am),

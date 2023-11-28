@@ -160,7 +160,7 @@ struct ForecastView: View {
                              name: "bob",
                              title: "Forecast today",
                              yAxisDecimalPlaces: 2,
-                             error: "The data",
+                             error: nil,
                              resourceId: "abc-123-def-456")
             }
         }

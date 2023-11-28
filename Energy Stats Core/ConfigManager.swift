@@ -32,7 +32,7 @@ public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging {
     var showUsableBatteryOnly: Bool { get set }
     var showTotalYield: Bool { get set }
     var refreshFrequency: RefreshFrequency { get set }
-    var appSettings: LatestAppPublisher { get }
+    var appSettings: LatestAppSettingsPublisher { get }
     var decimalPlaces: Int { get set }
     var showSunnyBackground: Bool { get set }
     var devices: [Device]? { get set }

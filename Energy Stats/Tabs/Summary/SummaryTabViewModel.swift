@@ -13,7 +13,6 @@ class SummaryTabViewModel: ObservableObject {
     private let configManager: ConfigManaging
     @Published var isLoading = false
     @Published var approximationsViewModel: ApproximationsViewModel? = nil
-    @Published var foxESSTotal: FinanceAmount?
     @Published var oldestDataDate: String = ""
     let currencySymbol: String
     private let approximationsCalculator: ApproximationsCalculator
@@ -32,7 +31,6 @@ class SummaryTabViewModel: ObservableObject {
         Task { @MainActor in
             isLoading = true
             let foxEarnings = try await self.networking.fetchEarnings(deviceID: currentDevice.deviceID)
-            foxESSTotal = FinanceAmount(title: .total, amount: foxEarnings.cumulate.earnings, currencySymbol: foxEarnings.currencySymbol)
             let totals = try await fetchAllYears(device: currentDevice)
 
             self.approximationsViewModel = makeApproximationsViewModel(totals: totals, response: foxEarnings)

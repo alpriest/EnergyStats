@@ -567,6 +567,9 @@
         }
       }
     },
+    "AC Capacity (inverters)" : {
+
+    },
     "accessibility.batteryCapacity" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1526,6 +1529,9 @@
         }
       }
     },
+    "Azimuth" : {
+
+    },
     "Backup" : {
       "localizations" : {
         "de" : {
@@ -2117,6 +2123,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Anuluj"
+          }
+        }
+      }
+    },
+    "Cannot save, please check the values are within the range 1 to 100" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Speichern nicht möglich, bitte überprüfen Sie, ob die Werte im Bereich von 1 bis 100 liegen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se puede guardar, por favor verifica que los valores estén dentro del rango de 1 a 100."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile salvare, si prega di controllare che i valori siano compresi nell'intervallo da 1 a 100."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nie można zapisać, sprawdź, czy wartości mieszczą się w zakresie od 1 do 100."
           }
         }
       }
@@ -3031,6 +3065,9 @@
           }
         }
       }
+    },
+    "DC Capacity (modules)" : {
+
     },
     "Debug" : {
       "extractionState" : "manual",
@@ -5086,6 +5123,9 @@
         }
       }
     },
+    "Install Date" : {
+
+    },
     "Invalid Battery Capacity" : {
       "localizations" : {
         "de" : {
@@ -5448,6 +5488,9 @@
         }
       }
     },
+    "Latitude" : {
+
+    },
     "Loading" : {
       "comment" : "Localizable.strings\n  Energy Stats\n\n  Created by Alistair Priest on 26/04/2023.",
       "localizations" : {
@@ -5567,6 +5610,12 @@
           }
         }
       }
+    },
+    "Longitude" : {
+
+    },
+    "Loss Factor" : {
+
     },
     "low_threshold" : {
       "localizations" : {
@@ -10087,6 +10136,9 @@
           }
         }
       }
+    },
+    "Tilt" : {
+
     },
     "Time" : {
       "localizations" : {

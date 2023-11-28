@@ -12,10 +12,10 @@ import SwiftUI
 struct PowerFlowTabView: View {
     @StateObject private var viewModel: PowerFlowTabViewModel
     @State private var appSettings: AppSettings
-    private var appSettingsPublisher: LatestAppPublisher
+    private var appSettingsPublisher: LatestAppSettingsPublisher
     @AppStorage("showLastUpdateTimestamp") private var showLastUpdateTimestamp: Bool = false
 
-    init(configManager: ConfigManaging, networking: FoxESSNetworking, userManager: UserManager, appSettingsPublisher: LatestAppPublisher) {
+    init(configManager: ConfigManaging, networking: FoxESSNetworking, userManager: UserManager, appSettingsPublisher: LatestAppSettingsPublisher) {
         _viewModel = .init(wrappedValue: PowerFlowTabViewModel(networking, configManager: configManager, userManager: userManager))
         self.appSettingsPublisher = appSettingsPublisher
         self.appSettings = appSettingsPublisher.value
