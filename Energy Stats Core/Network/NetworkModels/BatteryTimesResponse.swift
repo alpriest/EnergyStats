@@ -25,13 +25,39 @@ public struct ChargeTime: Codable {
     }
 }
 
-public struct Time: Codable, Equatable {
+public struct Time: Codable, Equatable, Comparable {
     public let hour: Int
     public let minute: Int
 
     public init(hour: Int, minute: Int) {
         self.hour = hour
         self.minute = minute
+    }
+
+    public static func < (lhs: Time, rhs: Time) -> Bool {
+        return if lhs.hour != rhs.hour {
+            lhs.hour < rhs.hour
+        } else {
+            lhs.minute < rhs.minute
+        }
+    }
+
+    public static func > (lhs: Time, rhs: Time) -> Bool {
+        return if lhs.hour != rhs.hour {
+            lhs.hour > rhs.hour
+        } else {
+            lhs.minute > rhs.minute
+        }
+    }
+
+    public var formatted: String {
+        let formatter = NumberFormatter()
+        formatter.minimumIntegerDigits = 2
+
+        let hour = formatter.string(from: NSNumber(value: hour)) ?? ""
+        let minute = formatter.string(from: NSNumber(value: minute)) ?? ""
+
+        return "\(hour):\(minute)"
     }
 }
 
