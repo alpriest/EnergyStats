@@ -57,6 +57,9 @@
         }
       }
     },
+    " - " : {
+
+    },
     " %@ " : {
       "localizations" : {
         "de" : {
@@ -309,6 +312,9 @@
         }
       }
     },
+    "00:00" : {
+
+    },
     "1 min" : {
       "localizations" : {
         "de" : {
@@ -449,6 +455,9 @@
         }
       }
     },
+    "08:00" : {
+
+    },
     "12 hours" : {
       "localizations" : {
         "de" : {
@@ -477,6 +486,9 @@
         }
       }
     },
+    "16:00" : {
+
+    },
     "24 hours" : {
       "localizations" : {
         "de" : {
@@ -504,6 +516,9 @@
           }
         }
       }
+    },
+    "24:00" : {
+
     },
     "Absolute" : {
       "localizations" : {
@@ -3566,6 +3581,9 @@
           }
         }
       }
+    },
+    "editor %@" : {
+
     },
     "Empty" : {
       "extractionState" : "manual",
