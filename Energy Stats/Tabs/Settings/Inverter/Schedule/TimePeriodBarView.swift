@@ -45,24 +45,7 @@ struct TimePeriodBarView: View {
                 Text("24:00")
             }
             .font(.caption2)
-
-
-//            Rectangle()
-//                .fill(Color.clear)
-//                .frame(height: height)
-//                .overlay(
-//                    GeometryReader { reader in
-//                        ZStack(alignment: .leading) {
-//                            ForEach(phases) { phase in
-//                                Text(phase.start.formatted)
-//                                    .offset(x: reader.size.width * phase.startPoint)
-//                            }
-//                        }
-//                    }
-//                )
-//                .font(.caption2)
         }
-        .frame(width: .infinity, alignment: .leading)
     }
 }
 
