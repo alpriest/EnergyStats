@@ -27,6 +27,10 @@ struct InverterSettingsView: View {
                 InverterWorkModeView(networking: networking, config: configManager)
             }
 
+            NavigationLink("Configure Schedule") {
+                ScheduleView(networking: networking, config: configManager)
+            }
+
             Toggle(isOn: $showInverterTemperature) {
                 Text("Show inverter temperatures")
             }

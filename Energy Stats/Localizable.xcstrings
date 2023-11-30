@@ -2654,6 +2654,9 @@
         }
       }
     },
+    "Configure Schedule" : {
+
+    },
     "Configure Work Mode" : {
       "localizations" : {
         "de" : {
@@ -5430,6 +5433,9 @@
           }
         }
       }
+    },
+    "Inverter Schedule" : {
+
     },
     "inverter_settings_saved" : {
       "extractionState" : "manual",

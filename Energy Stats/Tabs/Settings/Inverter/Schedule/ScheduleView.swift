@@ -8,10 +8,49 @@
 import Energy_Stats_Core
 import SwiftUI
 
+class ScheduleViewModel: ObservableObject {
+    let networking: FoxESSNetworking
+    let config: ConfigManaging
+    @Published var schedule: Schedule?
+    @Published var state: LoadState = .inactive
+    @Published var alertContent: AlertContent?
+
+    init(networking: FoxESSNetworking, config: ConfigManaging) {
+        self.networking = networking
+        self.config = config
+    }
+
+    @MainActor
+    func load() {
+        schedule = .preview()
+    }
+
+    func save() {}
+}
+
 struct ScheduleView: View {
-    let schedule: Schedule
+    @StateObject var viewModel: ScheduleViewModel
+
+    init(networking: FoxESSNetworking, config: ConfigManaging) {
+        _viewModel = StateObject(wrappedValue: ScheduleViewModel(networking: networking, config: config))
+    }
 
     var body: some View {
+        VStack(spacing: 0) {
+            if let schedule = viewModel.schedule {
+                loaded(schedule: schedule)
+            }
+
+            BottomButtonsView { viewModel.save() }
+        }
+        .task { viewModel.load() }
+        .navigationTitle("Inverter Schedule")
+        .navigationBarTitleDisplayMode(.inline)
+        .loadable($viewModel.state, retry: { viewModel.load() })
+        .alert(alertContent: $viewModel.alertContent)
+    }
+
+    private func loaded(schedule: Schedule) -> some View {
         Form {
             Section {
                 VStack(alignment: .leading) {
@@ -60,7 +99,10 @@ struct Card<T: View>: View {
 
 #Preview {
     NavigationView {
-        ScheduleView(schedule: .preview())
+        ScheduleView(
+            networking: DemoNetworking(),
+            config: PreviewConfigManager()
+        )
     }
 }
 
