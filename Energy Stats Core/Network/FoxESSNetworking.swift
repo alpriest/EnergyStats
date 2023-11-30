@@ -26,6 +26,7 @@ private extension URL {
     static var errorMessages = URL(string: "https://www.foxesscloud.com/c/v0/errors/message")!
 //    static var getPlant = URL(string: "https://www.foxesscloud.com/c/v0/plant/get")! // ?stationID=760f8106-a59b-45ee-bf81-1665e9e9429d
     static var updatePlant = URL(string: "https://www.foxesscloud.com/c/v0/plant/update")!
+    static var getSchedulerFlag = URL(string: "https://www.foxesscloud.com/generic/v0/device/scheduler/get/flag")!
 }
 
 public protocol FoxESSNetworking {
@@ -46,6 +47,7 @@ public protocol FoxESSNetworking {
     func setWorkMode(deviceID: String, workMode: InverterWorkMode) async throws
     func fetchDataLoggers() async throws -> PagedDataLoggerListResponse
     func fetchErrorMessages() async
+    func fetchSchedulerFlag(deviceSN: String) async throws -> SchedulerFlagResponse
 }
 
 public class Network: FoxESSNetworking {
@@ -98,6 +100,15 @@ public class Network: FoxESSNetworking {
 
         let response: (AuthResponse, _) = try await fetch(request, retry: false)
         return response.0.token
+    }
+
+    public func fetchSchedulerFlag(deviceSN: String) async throws -> SchedulerFlagResponse {
+        var request = append(queryItems: [URLQueryItem(name: "deviceSN", value: deviceSN)], to: URL.getSchedulerFlag)
+        request.setValue("en", forHTTPHeaderField: "lang") // TODO: Localise
+        request.setValue("Europe/London", forHTTPHeaderField: "timezone") // TODO: Localise
+
+        let result: (SchedulerFlagResponse, Data) = try await fetch(request)
+        return result.0
     }
 
     public func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [ReportResponse] {

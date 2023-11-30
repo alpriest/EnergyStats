@@ -6458,6 +6458,9 @@
         }
       }
     },
+    "Not supported" : {
+
+    },
     "Note that not all parameters contain values" : {
       "localizations" : {
         "de" : {
@@ -8817,6 +8820,9 @@
           }
         }
       }
+    },
+    "Schedules are not supported on this inverter. Please contact FoxESS support." : {
+
     },
     "Selected device and related battery information will be displayed on the main page" : {
       "localizations" : {

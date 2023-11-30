@@ -19,9 +19,9 @@ struct ScheduleView: View {
         VStack(spacing: 0) {
             if let schedule = viewModel.schedule {
                 loaded(schedule: schedule)
-            }
 
-            BottomButtonsView { viewModel.save() }
+                BottomButtonsView { viewModel.save() }
+            }
         }
         .task { viewModel.load() }
         .navigationTitle("Inverter Schedule")

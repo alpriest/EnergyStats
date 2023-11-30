@@ -20,9 +20,23 @@ class ScheduleViewModel: ObservableObject {
         self.config = config
     }
 
-    @MainActor
     func load() {
-        schedule = .preview()
+        Task { @MainActor in
+            guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
+            do {
+                let flag = try await networking.fetchSchedulerFlag(deviceSN: deviceSN)
+                if flag.support {
+                    schedule = .preview()
+                } else {
+                    alertContent = AlertContent(
+                        title: "Not supported",
+                        message: "Schedules are not supported on this inverter. Please contact FoxESS support."
+                    )
+                }
+            } catch {
+                self.state = LoadState.error(error, error.localizedDescription)
+            }
+        }
     }
 
     func save() {}

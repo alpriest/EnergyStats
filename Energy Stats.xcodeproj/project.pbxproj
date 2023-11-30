@@ -144,6 +144,7 @@
 		418C091D2B17EC0E00183603 /* TimePeriodBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C091C2B17EC0E00183603 /* TimePeriodBarView.swift */; };
 		418C091F2B17EDC000183603 /* ScheduleModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C091E2B17EDC000183603 /* ScheduleModels.swift */; };
 		418C09212B18A98400183603 /* ScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C09202B18A98400183603 /* ScheduleViewModel.swift */; };
+		418C09232B18A9E300183603 /* SchedulerFlagResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C09222B18A9E300183603 /* SchedulerFlagResponse.swift */; };
 		418C6E952AFAC3BF000DE35F /* SummaryTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C6E942AFAC3BF000DE35F /* SummaryTabView.swift */; };
 		418C6E972AFAC7E4000DE35F /* SummaryTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C6E962AFAC7E4000DE35F /* SummaryTabViewModel.swift */; };
 		418C6E992AFB8A15000DE35F /* ApproximationsCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C6E982AFB8A15000DE35F /* ApproximationsCalculator.swift */; };
@@ -472,6 +473,7 @@
 		418C091C2B17EC0E00183603 /* TimePeriodBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePeriodBarView.swift; sourceTree = "<group>"; };
 		418C091E2B17EDC000183603 /* ScheduleModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleModels.swift; sourceTree = "<group>"; };
 		418C09202B18A98400183603 /* ScheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewModel.swift; sourceTree = "<group>"; };
+		418C09222B18A9E300183603 /* SchedulerFlagResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulerFlagResponse.swift; sourceTree = "<group>"; };
 		418C6E942AFAC3BF000DE35F /* SummaryTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTabView.swift; sourceTree = "<group>"; };
 		418C6E962AFAC7E4000DE35F /* SummaryTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTabViewModel.swift; sourceTree = "<group>"; };
 		418C6E982AFB8A15000DE35F /* ApproximationsCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproximationsCalculator.swift; sourceTree = "<group>"; };
@@ -874,6 +876,7 @@
 				416AE4442A811FBB003D0122 /* DeviceSettingsGetResponse.swift */,
 				4192F99A2A8678DB0035DAB8 /* PagedDataLoggerListResponse.swift */,
 				41D8402C2AB2E0DE00769E81 /* ErrorMessagesResponse.swift */,
+				418C09222B18A9E300183603 /* SchedulerFlagResponse.swift */,
 			);
 			path = NetworkModels;
 			sourceTree = "<group>";
@@ -1625,6 +1628,7 @@
 				418547492A3A1C7A000128C7 /* PowerAmountView.swift in Sources */,
 				41E8E7262AAE0D0D00DC4B89 /* SolarRangeDefinitions.swift in Sources */,
 				41009A712B02CD59009D853B /* Solcast.swift in Sources */,
+				418C09232B18A9E300183603 /* SchedulerFlagResponse.swift in Sources */,
 				416AE4452A811FBB003D0122 /* DeviceSettingsGetResponse.swift in Sources */,
 				41F71ABD2A14FBEC00A8C81B /* Array+Safe.swift in Sources */,
 				4103D1D029DB6C51001B0BC8 /* Report.swift in Sources */,

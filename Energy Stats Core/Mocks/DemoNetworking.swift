@@ -22,6 +22,10 @@ public class DemoNetworking: FoxESSNetworking {
         // Assume mock credentials are valid
     }
 
+    public func fetchSchedulerFlag(deviceSN: String) async throws -> SchedulerFlagResponse {
+        SchedulerFlagResponse(enable: true, support: true)
+    }
+
     public func fetchBattery(deviceID: String) async throws -> BatteryResponse {
         switch deviceID {
         case "f3000-deviceid":
