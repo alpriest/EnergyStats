@@ -22,6 +22,27 @@ public class DemoNetworking: FoxESSNetworking {
         // Assume mock credentials are valid
     }
 
+    public func fetchSchedule(deviceSN: String) async throws -> ScheduleListResponse {
+        ScheduleListResponse(
+            data: [ScheduleMetadataResponse(templateName: "", enable: true, templateID: "")],
+            enable: true,
+            pollcy: [
+                SchedulePhaseResponse(fdpwr: 0, endH: 17, workMode: "ForceCharge", fdsoc: 100, soc: 100, startM: 0, minsocongrid: 100, startH: 15, endM: 0),
+                SchedulePhaseResponse(fdpwr: 3500, endH: 18, workMode: "ForceDischarge", fdsoc: 20, soc: 20, startM: 0, minsocongrid: 20, startH: 17, endM: 30)
+            ]
+        )
+    }
+
+    public func fetchScheduleModes(deviceID: String) async throws -> [SchedulerModeResponse] {
+        [
+            SchedulerModeResponse(color: "#80F6BD16", name: "Back Up", key: "Backup"),
+            SchedulerModeResponse(color: "#805B8FF9", name: "Feed-in Priority", key: "Feedin"),
+            SchedulerModeResponse(color: "#80BBE9FB", name: "Force Charge", key: "ForceCharge"),
+            SchedulerModeResponse(color: "#8065789B", name: "Force Discharge", key: "ForceDischarge"),
+            SchedulerModeResponse(color: "#8061DDAA", name: "Self-Use", key: "SelfUse")
+        ]
+    }
+
     public func fetchSchedulerFlag(deviceSN: String) async throws -> SchedulerFlagResponse {
         SchedulerFlagResponse(enable: true, support: true)
     }
@@ -190,7 +211,7 @@ public class MockConfig: Config {
     public var parameterGroups: [ParameterGroup] = DefaultParameterGroups()
     public var currencySymbol: String = "£"
     public var shouldCombineCT2WithPVPower: Bool = true
-    public var solcastSettings: SolcastSettings = SolcastSettings(apiKey: nil, sites: [SolcastSite.preview()])
+    public var solcastSettings: SolcastSettings = .init(apiKey: nil, sites: [SolcastSite.preview()])
 }
 
 public class PreviewConfigManager: ConfigManager {

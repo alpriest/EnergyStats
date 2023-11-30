@@ -40,6 +40,22 @@ public class NetworkFacade: FoxESSNetworking {
         }
     }
 
+    public func fetchSchedule(deviceSN: String) async throws -> ScheduleListResponse {
+        if isDemoUser {
+            try await fakeNetwork.fetchSchedule(deviceSN: deviceSN)
+        } else {
+            try await network.fetchSchedule(deviceSN: deviceSN)
+        }
+    }
+
+    public func fetchScheduleModes(deviceID: String) async throws -> [SchedulerModeResponse] {
+        if isDemoUser {
+            try await fakeNetwork.fetchScheduleModes(deviceID: deviceID)
+        } else {
+            try await network.fetchScheduleModes(deviceID: deviceID)
+        }
+    }
+
     public func fetchSchedulerFlag(deviceSN: String) async throws -> SchedulerFlagResponse {
         if isDemoUser {
             try await fakeNetwork.fetchSchedulerFlag(deviceSN: deviceSN)

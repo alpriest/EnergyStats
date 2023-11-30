@@ -22,6 +22,14 @@ public class NetworkValueCleaner: FoxESSNetworking {
         try await network.verifyCredentials(username: username, hashedPassword: hashedPassword)
     }
 
+    public func fetchSchedule(deviceSN: String) async throws -> ScheduleListResponse {
+        try await network.fetchSchedule(deviceSN: deviceSN)
+    }
+
+    public func fetchScheduleModes(deviceID: String) async throws -> [SchedulerModeResponse] {
+        try await network.fetchScheduleModes(deviceID: deviceID)
+    }
+
     public func fetchSchedulerFlag(deviceSN: String) async throws -> SchedulerFlagResponse {
         try await network.fetchSchedulerFlag(deviceSN: deviceSN)
     }

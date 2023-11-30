@@ -7,6 +7,7 @@
 
 import Energy_Stats_Core
 import Foundation
+import SwiftUI
 
 class ScheduleViewModel: ObservableObject {
     let networking: FoxESSNetworking
@@ -21,12 +22,19 @@ class ScheduleViewModel: ObservableObject {
     }
 
     func load() {
-        Task { @MainActor in
-            guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
+        Task { @MainActor [self] in
+            guard
+                let deviceSN = config.currentDevice.value?.deviceSN,
+                let deviceID = config.currentDevice.value?.deviceID
+            else { return }
+
             do {
                 let flag = try await networking.fetchSchedulerFlag(deviceSN: deviceSN)
                 if flag.support {
-                    schedule = .preview()
+                    let workModes = try await networking.fetchScheduleModes(deviceID: deviceID)
+                    let scheduleResponse = try await networking.fetchSchedule(deviceSN: deviceSN)
+
+                    self.schedule = Schedule(schedule: scheduleResponse, workModes: workModes)
                 } else {
                     alertContent = AlertContent(
                         title: "Not supported",
@@ -40,4 +48,29 @@ class ScheduleViewModel: ObservableObject {
     }
 
     func save() {}
+}
+
+private extension SchedulePhaseResponse {
+    func toSchedulePhase(workModes: [SchedulerModeResponse]) -> SchedulePhase {
+        SchedulePhase(
+            start: Time(hour: startH, minute: startM),
+            end: Time(hour: endH, minute: endM),
+            mode: workMode,
+            forceDischargePower: Double(fdpwr) / 1000.0,
+            forceDischargeSOC: fdsoc,
+            batterySOC: soc,
+            color: Color.scheduleColor(named: workMode)
+        )
+    }
+}
+
+private extension Schedule {
+    init(schedule: ScheduleListResponse, workModes: [SchedulerModeResponse]) {
+        let phases = schedule.pollcy.map { $0.toSchedulePhase(workModes: workModes)}
+
+        self.init(
+            name: nil,
+            phases: phases
+        )
+    }
 }

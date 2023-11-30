@@ -27,6 +27,8 @@ private extension URL {
 //    static var getPlant = URL(string: "https://www.foxesscloud.com/c/v0/plant/get")! // ?stationID=760f8106-a59b-45ee-bf81-1665e9e9429d
     static var updatePlant = URL(string: "https://www.foxesscloud.com/c/v0/plant/update")!
     static var getSchedulerFlag = URL(string: "https://www.foxesscloud.com/generic/v0/device/scheduler/get/flag")!
+    static var schedulerModes = URL(string: "https://www.foxesscloud.com/generic/v0/device/scheduler/modes/get")!
+    static var getSchedule = URL(string: "https://www.foxesscloud.com/generic/v0/device/scheduler/list")!
 }
 
 public protocol FoxESSNetworking {
@@ -48,6 +50,8 @@ public protocol FoxESSNetworking {
     func fetchDataLoggers() async throws -> PagedDataLoggerListResponse
     func fetchErrorMessages() async
     func fetchSchedulerFlag(deviceSN: String) async throws -> SchedulerFlagResponse
+    func fetchScheduleModes(deviceID: String) async throws -> [SchedulerModeResponse]
+    func fetchSchedule(deviceSN: String) async throws -> ScheduleListResponse
 }
 
 public class Network: FoxESSNetworking {
@@ -100,6 +104,24 @@ public class Network: FoxESSNetworking {
 
         let response: (AuthResponse, _) = try await fetch(request, retry: false)
         return response.0.token
+    }
+
+    public func fetchSchedule(deviceSN: String) async throws -> ScheduleListResponse {
+        var request = append(queryItems: [URLQueryItem(name: "deviceSN", value: deviceSN)], to: URL.getSchedule)
+        request.setValue("en", forHTTPHeaderField: "lang") // TODO: Localise
+        request.setValue("Europe/London", forHTTPHeaderField: "timezone") // TODO: Localise
+
+        let result: (ScheduleListResponse, Data) = try await fetch(request)
+        return result.0
+    }
+
+    public func fetchScheduleModes(deviceID: String) async throws -> [SchedulerModeResponse] {
+        var request = append(queryItems: [URLQueryItem(name: "deviceID", value: deviceID)], to: URL.schedulerModes)
+        request.setValue("en", forHTTPHeaderField: "lang") // TODO: Localise
+        request.setValue("Europe/London", forHTTPHeaderField: "timezone") // TODO: Localise
+
+        let result: (SchedulerModesResponse, Data) = try await fetch(request)
+        return result.0.modes
     }
 
     public func fetchSchedulerFlag(deviceSN: String) async throws -> SchedulerFlagResponse {

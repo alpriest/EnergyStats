@@ -15,6 +15,16 @@ public extension Color {
     static var linesNotFlowing: Color { Color("lines_not_flowing", bundle: Bundle(for: CountdownTimer.self)) }
     static var textNotFlowing: Color { Color("text_not_flowing", bundle: Bundle(for: CountdownTimer.self)) }
     static var paleGray: Color { Color("pale_gray", bundle: Bundle(for: CountdownTimer.self)) }
+
+    static func scheduleColor(named name: String) -> Color {
+        let mapping: [String: Color] = [
+            "Feedin": Color.linesPositive,
+            "ForceCharge": Color.linesNegative,
+            "ForceDischarge": Color.linesPositive
+        ]
+
+        return mapping[name] ?? Color.black
+    }
 }
 
 public class BundleLocator {}
