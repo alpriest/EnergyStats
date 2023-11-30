@@ -143,6 +143,7 @@
 		418C09192B17845B00183603 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C09182B17845B00183603 /* ScheduleView.swift */; };
 		418C091D2B17EC0E00183603 /* TimePeriodBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C091C2B17EC0E00183603 /* TimePeriodBarView.swift */; };
 		418C091F2B17EDC000183603 /* ScheduleModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C091E2B17EDC000183603 /* ScheduleModels.swift */; };
+		418C09212B18A98400183603 /* ScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C09202B18A98400183603 /* ScheduleViewModel.swift */; };
 		418C6E952AFAC3BF000DE35F /* SummaryTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C6E942AFAC3BF000DE35F /* SummaryTabView.swift */; };
 		418C6E972AFAC7E4000DE35F /* SummaryTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C6E962AFAC7E4000DE35F /* SummaryTabViewModel.swift */; };
 		418C6E992AFB8A15000DE35F /* ApproximationsCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C6E982AFB8A15000DE35F /* ApproximationsCalculator.swift */; };
@@ -470,6 +471,7 @@
 		418C09182B17845B00183603 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
 		418C091C2B17EC0E00183603 /* TimePeriodBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePeriodBarView.swift; sourceTree = "<group>"; };
 		418C091E2B17EDC000183603 /* ScheduleModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleModels.swift; sourceTree = "<group>"; };
+		418C09202B18A98400183603 /* ScheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewModel.swift; sourceTree = "<group>"; };
 		418C6E942AFAC3BF000DE35F /* SummaryTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTabView.swift; sourceTree = "<group>"; };
 		418C6E962AFAC7E4000DE35F /* SummaryTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTabViewModel.swift; sourceTree = "<group>"; };
 		418C6E982AFB8A15000DE35F /* ApproximationsCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproximationsCalculator.swift; sourceTree = "<group>"; };
@@ -971,6 +973,7 @@
 				418C09182B17845B00183603 /* ScheduleView.swift */,
 				418C091C2B17EC0E00183603 /* TimePeriodBarView.swift */,
 				418C091E2B17EDC000183603 /* ScheduleModels.swift */,
+				418C09202B18A98400183603 /* ScheduleViewModel.swift */,
 			);
 			path = Schedule;
 			sourceTree = "<group>";
@@ -1532,6 +1535,7 @@
 				41009A752B03B13A009D853B /* SolarForecastViewModel.swift in Sources */,
 				41E4B31328DB77A3003F7F47 /* HomePowerView.swift in Sources */,
 				41E165B32B0A877100B17590 /* SolcastSettingsViewModel.swift in Sources */,
+				418C09212B18A98400183603 /* ScheduleViewModel.swift in Sources */,
 				41C249A52A77FC7400D8E9E7 /* FoxESSCloudStatusView.swift in Sources */,
 				41A25D3D28CA5CDF00315714 /* ParametersGraphTabView.swift in Sources */,
 				4140ECDA292D58D300992DD8 /* ParameterGraphVariable.swift in Sources */,

@@ -8,26 +8,6 @@
 import Energy_Stats_Core
 import SwiftUI
 
-class ScheduleViewModel: ObservableObject {
-    let networking: FoxESSNetworking
-    let config: ConfigManaging
-    @Published var schedule: Schedule?
-    @Published var state: LoadState = .inactive
-    @Published var alertContent: AlertContent?
-
-    init(networking: FoxESSNetworking, config: ConfigManaging) {
-        self.networking = networking
-        self.config = config
-    }
-
-    @MainActor
-    func load() {
-        schedule = .preview()
-    }
-
-    func save() {}
-}
-
 struct ScheduleView: View {
     @StateObject var viewModel: ScheduleViewModel
 
