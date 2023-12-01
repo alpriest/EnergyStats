@@ -40,7 +40,7 @@ public struct TotalsViewModel {
         self.solar = max(0, batteryCharge - batteryDischarge - gridImport + home + gridExport)
         self.solarBreakdown = CalculationBreakdown(formula: "max(0, batteryCharge - batteryDischarge - gridImport + home + gridExport)",
                                                    calculation: { dp in
-                                                       "max(0, \(batteryCharge.roundedToString(decimalPlaces: dp)) - \(batteryDischarge.roundedToString(decimalPlaces: dp)) - \(grid.roundedToString(decimalPlaces: dp)) + \(loads.roundedToString(decimalPlaces: dp)) + \(grid.roundedToString(decimalPlaces: dp)))"
+                                                       "max(0, \(batteryCharge.roundedToString(decimalPlaces: dp)) - \(batteryDischarge.roundedToString(decimalPlaces: dp)) - \(grid.roundedToString(decimalPlaces: dp)) + \(loads.roundedToString(decimalPlaces: dp)) + \(feedIn.roundedToString(decimalPlaces: dp)))"
                                                    })
     }
 
