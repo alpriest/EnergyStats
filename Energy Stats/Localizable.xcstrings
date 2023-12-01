@@ -1260,6 +1260,9 @@
         }
       }
     },
+    "Add new phase" : {
+
+    },
     "All" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2930,6 +2933,9 @@
         }
       }
     },
+    "create new" : {
+
+    },
     "CT2" : {
       "localizations" : {
         "de" : {
@@ -3585,9 +3591,6 @@
         }
       }
     },
-    "editor %@" : {
-
-    },
     "Empty" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3706,6 +3709,9 @@
           }
         }
       }
+    },
+    "End time" : {
+
     },
     "energy" : {
       "extractionState" : "manual",
@@ -4335,6 +4341,12 @@
           }
         }
       }
+    },
+    "Force Discharge Power" : {
+
+    },
+    "Force Discharge SoC" : {
+
     },
     "Forecast today" : {
       "localizations" : {
@@ -10012,6 +10024,9 @@
         }
       }
     },
+    "Start time" : {
+
+    },
     "Stats" : {
       "localizations" : {
         "de" : {
@@ -10795,6 +10810,9 @@
           }
         }
       }
+    },
+    "W" : {
+
     },
     "Watts" : {
       "localizations" : {

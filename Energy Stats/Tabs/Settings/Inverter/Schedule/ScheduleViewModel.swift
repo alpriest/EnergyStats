@@ -15,6 +15,7 @@ class ScheduleViewModel: ObservableObject {
     @Published var schedule: Schedule?
     @Published var state: LoadState = .inactive
     @Published var alertContent: AlertContent?
+    @Published var modes: [SchedulerModeResponse] = []
 
     init(networking: FoxESSNetworking, config: ConfigManaging) {
         self.networking = networking
@@ -31,10 +32,10 @@ class ScheduleViewModel: ObservableObject {
             do {
                 let flag = try await networking.fetchSchedulerFlag(deviceSN: deviceSN)
                 if flag.support {
-                    let workModes = try await networking.fetchScheduleModes(deviceID: deviceID)
+                    self.modes = try await networking.fetchScheduleModes(deviceID: deviceID)
                     let scheduleResponse = try await networking.fetchSchedule(deviceSN: deviceSN)
 
-                    self.schedule = Schedule(schedule: scheduleResponse, workModes: workModes)
+                    self.schedule = Schedule(schedule: scheduleResponse, workModes: self.modes)
                 } else {
                     alertContent = AlertContent(
                         title: "Not supported",
@@ -55,8 +56,8 @@ private extension SchedulePhaseResponse {
         SchedulePhase(
             start: Time(hour: startH, minute: startM),
             end: Time(hour: endH, minute: endM),
-            mode: workMode,
-            forceDischargePower: Double(fdpwr) / 1000.0,
+            mode: workModes.first { $0.key == workMode }?.name ?? workMode,
+            forceDischargePower: fdpwr,
             forceDischargeSOC: fdsoc,
             batterySOC: soc,
             color: Color.scheduleColor(named: workMode)

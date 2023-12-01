@@ -45,7 +45,7 @@ struct ScheduleView: View {
 
             ForEach(schedule.phases) { phase in
                 NavigationLink(destination: {
-                    Text("editor \(phase.id)")
+                    SchedulePhaseView(modes: viewModel.modes, phase: phase)
                 }, label: {
                     HStack {
                         phase.color
@@ -62,6 +62,12 @@ struct ScheduleView: View {
                 })
             }
             .frame(maxWidth: .infinity)
+
+            NavigationLink(destination: {
+                Text("create new")
+            }, label: {
+                Text("Add new phase")
+            })
         }
     }
 }
@@ -116,7 +122,7 @@ extension Schedule {
                         minute: 30
                     ),
                     mode: "Force discharge",
-                    forceDischargePower: 3.5,
+                    forceDischargePower: 3500,
                     forceDischargeSOC: 20,
                     batterySOC: 20,
                     color: .linesPositive
@@ -131,7 +137,7 @@ extension Schedule {
                         minute: 30
                     ),
                     mode: "Force discharge",
-                    forceDischargePower: 3.5,
+                    forceDischargePower: 3500,
                     forceDischargeSOC: 20,
                     batterySOC: 20,
                     color: .linesPositive

@@ -22,7 +22,7 @@ struct SchedulePhase: Identifiable {
     let start: Time
     let end: Time
     let mode: String
-    let forceDischargePower: Double
+    let forceDischargePower: Int
     let forceDischargeSOC: Int
     let batterySOC: Int
     let id = UUID().uuidString

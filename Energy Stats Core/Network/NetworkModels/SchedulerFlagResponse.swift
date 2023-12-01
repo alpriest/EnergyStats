@@ -16,10 +16,16 @@ public struct SchedulerModesResponse: Decodable {
     public let modes: [SchedulerModeResponse]
 }
 
-public struct SchedulerModeResponse: Decodable {
+public struct SchedulerModeResponse: Decodable, Hashable {
     public let color: String
     public let name: String
     public let key: String
+
+    public init(color: String, name: String, key: String) {
+        self.color = color
+        self.name = name
+        self.key = key
+    }
 }
 
 public struct ScheduleListResponse: Decodable {
