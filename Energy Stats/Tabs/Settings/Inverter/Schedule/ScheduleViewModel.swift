@@ -52,11 +52,11 @@ class ScheduleViewModel: ObservableObject {
 }
 
 private extension SchedulePhaseResponse {
-    func toSchedulePhase(workModes: [SchedulerModeResponse]) -> SchedulePhase {
+    func toSchedulePhase(workModes: [SchedulerModeResponse]) -> SchedulePhase? {
         SchedulePhase(
             start: Time(hour: startH, minute: startM),
             end: Time(hour: endH, minute: endM),
-            mode: workModes.first { $0.key == workMode }?.name ?? workMode,
+            mode: workModes.first { $0.key == workMode },
             forceDischargePower: fdpwr,
             forceDischargeSOC: fdsoc,
             batterySOC: soc,
@@ -67,7 +67,7 @@ private extension SchedulePhaseResponse {
 
 private extension Schedule {
     init(schedule: ScheduleListResponse, workModes: [SchedulerModeResponse]) {
-        let phases = schedule.pollcy.map { $0.toSchedulePhase(workModes: workModes)}
+        let phases = schedule.pollcy.compactMap { $0.toSchedulePhase(workModes: workModes)}
 
         self.init(
             name: nil,

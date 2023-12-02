@@ -11,7 +11,7 @@ import SwiftUI
 struct SchedulePhaseView: View {
     @State private var startTime: Date
     @State private var endTime: Date
-    @State private var workMode: String
+    @State private var workMode: SchedulerModeResponse
     @State private var minSOC: String
     @State private var fdSOC: String
     @State private var fdPower: String
@@ -30,7 +30,7 @@ struct SchedulePhaseView: View {
         } else {
             self._startTime = State(wrappedValue: Date())
             self._endTime = State(wrappedValue: Date())
-            self._workMode = State(wrappedValue: modes.first?.name ?? "")
+            self._workMode = State(wrappedValue: modes.first!)
             self._minSOC = State(wrappedValue: "10")
             self._fdSOC = State(wrappedValue: "10")
             self._fdPower = State(wrappedValue: "0")
@@ -103,7 +103,7 @@ struct SchedulePhaseView: View {
     }
 
     private func minSoCDescription() -> String? {
-        switch workMode {
+        switch workMode.key {
         case "Backup": return nil
         case "Feedin": return nil
         case "ForceCharge": return nil
@@ -114,7 +114,7 @@ struct SchedulePhaseView: View {
     }
 
     private func forceDischargeSoCDescription() -> String? {
-        switch workMode {
+        switch workMode.key {
         case "Backup": return nil
         case "Feedin": return nil
         case "ForceCharge": return nil
@@ -125,7 +125,7 @@ struct SchedulePhaseView: View {
     }
 
     private func forceDischargePowerDescription() -> String? {
-        switch workMode {
+        switch workMode.key {
         case "Backup": return nil
         case "Feedin": return nil
         case "ForceCharge": return nil
@@ -154,7 +154,7 @@ struct SchedulePhaseView: View {
                 hour: 23,
                 minute: 30
             ),
-            mode: "Force discharge",
+            mode: SchedulerModeResponse(color: "#ff0000", name: "Force discharge", key: "ForceDischarge"),
             forceDischargePower: 3500,
             forceDischargeSOC: 20,
             batterySOC: 20,

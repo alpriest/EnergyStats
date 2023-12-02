@@ -21,12 +21,24 @@ struct Schedule {
 struct SchedulePhase: Identifiable {
     let start: Time
     let end: Time
-    let mode: String
+    let mode: SchedulerModeResponse
     let forceDischargePower: Int
     let forceDischargeSOC: Int
     let batterySOC: Int
     let id = UUID().uuidString
     let color: Color
+
+    init?(start: Time, end: Time, mode: SchedulerModeResponse?, forceDischargePower: Int, forceDischargeSOC: Int, batterySOC: Int, color: Color) {
+        guard let mode else { return nil }
+
+        self.start = start
+        self.end = end
+        self.mode = mode
+        self.forceDischargePower = forceDischargePower
+        self.forceDischargeSOC = forceDischargeSOC
+        self.batterySOC = batterySOC
+        self.color = color
+    }
 
     var startPoint: CGFloat { CGFloat(minutesAfterMidnight(start)) / (24 * 60) }
     var endPoint: CGFloat { CGFloat(minutesAfterMidnight(end)) / (24 * 60) }

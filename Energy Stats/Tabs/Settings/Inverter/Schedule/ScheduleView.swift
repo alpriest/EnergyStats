@@ -56,7 +56,7 @@ struct ScheduleView: View {
                         VStack(alignment: .leading) {
                             (Text(phase.start.formatted) + Text(" - ") + Text(phase.end.formatted)).bold()
 
-                            Text(phase.mode)
+                            Text(phase.mode.name)
                         }
                     }
                 })
@@ -64,7 +64,7 @@ struct ScheduleView: View {
             .frame(maxWidth: .infinity)
 
             NavigationLink(destination: {
-                Text("create new")
+                SchedulePhaseView(modes: viewModel.modes, phase: nil)
             }, label: {
                 Text("Add new phase")
             })
@@ -106,12 +106,12 @@ extension Schedule {
                         hour: 2,
                         minute: 00
                     ),
-                    mode: "Force charge",
+                    mode: SchedulerModeResponse(color: "#00ff00", name: "Force charge", key: "ForceDischarge"),
                     forceDischargePower: 0,
                     forceDischargeSOC: 100,
                     batterySOC: 100,
                     color: .linesNegative
-                ),
+                )!,
                 SchedulePhase(
                     start: Time(
                         hour: 10,
@@ -121,12 +121,12 @@ extension Schedule {
                         hour: 14,
                         minute: 30
                     ),
-                    mode: "Force discharge",
+                    mode: SchedulerModeResponse(color: "#ff0000", name: "Force discharge", key: "ForceDischarge"),
                     forceDischargePower: 3500,
                     forceDischargeSOC: 20,
                     batterySOC: 20,
                     color: .linesPositive
-                ),
+                )!,
                 SchedulePhase(
                     start: Time(
                         hour: 19,
@@ -136,12 +136,12 @@ extension Schedule {
                         hour: 23,
                         minute: 30
                     ),
-                    mode: "Force discharge",
+                    mode: SchedulerModeResponse(color: "#ff0000", name: "Force discharge", key: "ForceDischarge"),
                     forceDischargePower: 3500,
                     forceDischargeSOC: 20,
                     batterySOC: 20,
                     color: .linesPositive
-                )
+                )!
             ]
         )
     }
