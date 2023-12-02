@@ -19,18 +19,19 @@ struct Schedule {
 }
 
 struct SchedulePhase: Identifiable {
+    let id: String
     let start: Time
     let end: Time
     let mode: SchedulerModeResponse
     let forceDischargePower: Int
     let forceDischargeSOC: Int
     let batterySOC: Int
-    let id = UUID().uuidString
     let color: Color
 
-    init?(start: Time, end: Time, mode: SchedulerModeResponse?, forceDischargePower: Int, forceDischargeSOC: Int, batterySOC: Int, color: Color) {
+    init?(id: String? = nil, start: Time, end: Time, mode: SchedulerModeResponse?, forceDischargePower: Int, forceDischargeSOC: Int, batterySOC: Int, color: Color) {
         guard let mode else { return nil }
 
+        self.id = id ?? UUID().uuidString
         self.start = start
         self.end = end
         self.mode = mode
@@ -38,6 +39,17 @@ struct SchedulePhase: Identifiable {
         self.forceDischargeSOC = forceDischargeSOC
         self.batterySOC = batterySOC
         self.color = color
+    }
+
+    init(mode: SchedulerModeResponse) {
+        self.id = UUID().uuidString
+        self.start = Date().toTime()
+        self.end = Date().toTime()
+        self.mode = mode
+        self.forceDischargePower = 0
+        self.forceDischargeSOC = 10
+        self.batterySOC = 10
+        self.color = Color.scheduleColor(named: mode.key)
     }
 
     var startPoint: CGFloat { CGFloat(minutesAfterMidnight(start)) / (24 * 60) }

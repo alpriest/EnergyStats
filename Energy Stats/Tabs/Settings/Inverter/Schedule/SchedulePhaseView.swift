@@ -15,26 +15,21 @@ struct SchedulePhaseView: View {
     @State private var minSOC: String
     @State private var fdSOC: String
     @State private var fdPower: String
+    private let id: String?
     private let modes: [SchedulerModeResponse]
+    private let onChange: (SchedulePhase) -> Void
 
-    init(modes: [SchedulerModeResponse], phase: SchedulePhase?) {
+    init(modes: [SchedulerModeResponse], phase: SchedulePhase, onChange: @escaping (SchedulePhase) -> Void) {
         self.modes = modes
+        self.onChange = onChange
 
-        if let phase {
-            self._startTime = State(wrappedValue: Date.fromTime(phase.start))
-            self._endTime = State(wrappedValue: Date.fromTime(phase.end))
-            self._workMode = State(wrappedValue: phase.mode)
-            self._minSOC = State(wrappedValue: String(describing: phase.batterySOC))
-            self._fdSOC = State(wrappedValue: String(describing: phase.forceDischargeSOC))
-            self._fdPower = State(wrappedValue: String(describing: phase.forceDischargePower))
-        } else {
-            self._startTime = State(wrappedValue: Date())
-            self._endTime = State(wrappedValue: Date())
-            self._workMode = State(wrappedValue: modes.first!)
-            self._minSOC = State(wrappedValue: "10")
-            self._fdSOC = State(wrappedValue: "10")
-            self._fdPower = State(wrappedValue: "0")
-        }
+        self.id = phase.id
+        self._startTime = State(wrappedValue: Date.fromTime(phase.start))
+        self._endTime = State(wrappedValue: Date.fromTime(phase.end))
+        self._workMode = State(wrappedValue: phase.mode)
+        self._minSOC = State(wrappedValue: String(describing: phase.batterySOC))
+        self._fdSOC = State(wrappedValue: String(describing: phase.forceDischargeSOC))
+        self._fdPower = State(wrappedValue: String(describing: phase.forceDischargePower))
     }
 
     var body: some View {
@@ -100,6 +95,27 @@ struct SchedulePhaseView: View {
                 }
             }
         }
+        .onChange(of: startTime) { _ in notify() }
+        .onChange(of: endTime) { _ in notify() }
+        .onChange(of: workMode) { _ in notify() }
+        .onChange(of: minSOC) { _ in notify() }
+        .onChange(of: fdSOC) { _ in notify() }
+        .onChange(of: fdPower) { _ in notify() }
+    }
+
+    private func notify() {
+        if let phase = SchedulePhase(
+            id: id,
+            start: startTime.toTime(),
+            end: endTime.toTime(),
+            mode: workMode,
+            forceDischargePower: Int(fdPower) ?? 0,
+            forceDischargeSOC: Int(fdSOC) ?? 0,
+            batterySOC: Int(minSOC) ?? 0,
+            color: Color.scheduleColor(named: workMode.key)
+        ) {
+            onChange(phase)
+        }
     }
 
     private func minSoCDescription() -> String? {
@@ -158,7 +174,8 @@ struct SchedulePhaseView: View {
             forceDischargePower: 3500,
             forceDischargeSOC: 20,
             batterySOC: 20,
-            color: .linesPositive
-        )
+            color: Color.scheduleColor(named: "ForceDischarge")
+        )!,
+        onChange: { print("\($0.id) changed") }
     )
 }

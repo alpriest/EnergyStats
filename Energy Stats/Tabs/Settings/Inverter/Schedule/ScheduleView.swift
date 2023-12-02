@@ -45,7 +45,9 @@ struct ScheduleView: View {
 
             ForEach(schedule.phases) { phase in
                 NavigationLink(destination: {
-                    SchedulePhaseView(modes: viewModel.modes, phase: phase)
+                    SchedulePhaseView(modes: viewModel.modes, phase: phase) { phase in
+                        viewModel.updated(phase: phase)
+                    }
                 }, label: {
                     HStack {
                         phase.color
@@ -63,11 +65,11 @@ struct ScheduleView: View {
             }
             .frame(maxWidth: .infinity)
 
-            NavigationLink(destination: {
-                SchedulePhaseView(modes: viewModel.modes, phase: nil)
-            }, label: {
+            Button {
+                viewModel.addNewPhase()
+            } label: {
                 Text("Add new phase")
-            })
+            }
         }
     }
 }

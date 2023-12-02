@@ -28,6 +28,7 @@ class ScheduleViewModel: ObservableObject {
                 let deviceSN = config.currentDevice.value?.deviceSN,
                 let deviceID = config.currentDevice.value?.deviceID
             else { return }
+            guard schedule == nil else { return }
 
             do {
                 let flag = try await networking.fetchSchedulerFlag(deviceSN: deviceSN)
@@ -49,6 +50,31 @@ class ScheduleViewModel: ObservableObject {
     }
 
     func save() {}
+
+    func addNewPhase() {
+        guard let schedule else { return }
+        guard let mode = modes.first else { return }
+
+        self.schedule = Schedule(
+            name: schedule.name,
+            phases: schedule.phases + [SchedulePhase(mode: mode)]
+        )
+    }
+
+    func updated(phase updatedPhase: SchedulePhase) {
+        guard let schedule else { return }
+
+        self.schedule = Schedule(
+            name: schedule.name,
+            phases: schedule.phases.map {
+                if $0.id == updatedPhase.id {
+                    return updatedPhase
+                } else {
+                    return $0
+                }
+            }
+        )
+    }
 }
 
 private extension SchedulePhaseResponse {
