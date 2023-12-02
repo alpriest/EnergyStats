@@ -2204,31 +2204,31 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ihre Batterien werden zwischen %1$@ und %2$@ weder aufgeladen noch entladen. Jeglicher Hausverbrauch wird in dieser Zeit von der Netzversorgung gedeckt. Zur Deaktivierung setzen Sie die Zeitperioden zurück."
+            "value" : "Ihre Batterie wird sich zwischen %1$@ und %2$@ nicht aufladen oder entladen. Die Solarenergie wird zum Aufladen der Batterie umgeleitet. Jede Hauslast wird in dieser Zeit vom Netz kommen. Setzen Sie die Zeitperioden zurück, um dies zu deaktivieren."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your battery will not charge or discharge between %1$@ and %2$@. Any house load will come from the grid between these times. Reset the time periods to disable this."
+            "value" : "Your battery will not charge or discharge between %1$@ and %2$@. Solar power will be diverted to charging the battery. Any house load will come from the grid between these times. Reset the time periods to disable this."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sus baterías no se cargarán ni se descargaran entre %1$@ y %2$@. Cualquier consumo de la casa vendrá de la red eléctrica durante estos periodos. Restablezca los periodos de tiempo para desactivar esta función."
+            "value" : "Su batería no se cargará ni descargará entre %1$@ y %2$@. La energía solar se desviará para cargar la batería. Cualquier carga de la casa provendrá de la red entre estos tiempos. Restablezca los períodos de tiempo para desactivar esto."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Le tue batterie non si caricheranno né scaricheranno tra le %1$@ e le %2$@. Qualsiasi carico della casa verrà dalla rete durante questi orari. Resettare gli orari per disabilitare questa funzione."
+            "value" : "La tua batteria non si caricherà né scaricherà tra %1$@ e %2$@. L'energia solare verrà deviata per caricare la batteria. Qualsiasi carico domestico verrà dalla rete in questi orari. Reimposta i periodi di tempo per disabilitare questa funzione."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Twoje baterie nie będą ładowane ani rozładowywane między %1$@ a %2$@. Każde obciążenie domu będzie pochodzić z sieci w tym czasie. Aby wyłączyć tę funkcję, zresetuj okresy czasu."
+            "value" : "Twoja bateria nie będzie się ładować ani rozładowywać między %1$@ a %2$@. Energia słoneczna zostanie przekierowana do ładowania baterii. Wszelkie obciążenia domowe będą pochodzić z sieci w tych godzinach. Zresetuj okresy czasu, aby to wyłączyć."
           }
         }
       }
@@ -3200,31 +3200,31 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Werte über 65.535 werden gekürzt. Z.B. würde ein Wert von 45.899,7 als 24,5 angezeigt werden. Verwenden Sie dies, wenn Sie abnormal große Zahlen auf Ihren Grafiken sehen."
+            "value" : "Werte über 104.857 werden gekürzt. Z.B. würde ein Wert von 45.899,7 als 24,5 angezeigt werden. Verwenden Sie dies, wenn Sie abnormal große Zahlen auf Ihren Grafiken sehen."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Values above 65,535 will be clipped. E.g. a value of 45,899.7 would be shown as 24.5. Use this if you're seeing abnormally large numbers on your graphs."
+            "value" : "Values above 104,857 will be clipped. E.g. a value of 45,899.7 would be shown as 24.5. Use this if you're seeing abnormally large numbers on your graphs."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Los valores superiores a 65,535 serán recortados. Por ejemplo, un valor de 45,899.7 se mostrará como 24.5. Utilice esto si observa números anormalmente grandes en sus gráficos."
+            "value" : "Los valores superiores a 104,857 serán recortados. Por ejemplo, un valor de 45,899.7 se mostrará como 24.5. Utilice esto si observa números anormalmente grandes en sus gráficos."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "I valori superiori a 65,535 verranno tagliati. Ad esempio, un valore di 45,899.7 verrà mostrato come 24.5. Usa questo se stai vedendo numeri anormalmente grandi sui tuoi grafici."
+            "value" : "I valori superiori a 104,857 verranno tagliati. Ad esempio, un valore di 45,899.7 verrà mostrato come 24.5. Usa questo se stai vedendo numeri anormalmente grandi sui tuoi grafici."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wartości powyżej 65 535 będą obcinane. Na przykład wartość 45 899,7 zostanie pokazana jako 24,5. Użyj tego, jeśli zauważysz nienormalnie duże liczby na swoich wykresach."
+            "value" : "Wartości powyżej 104 857 będą obcinane. Na przykład wartość 45 899,7 zostanie pokazana jako 24,5. Użyj tego, jeśli zauważysz nienormalnie duże liczby na swoich wykresach."
           }
         }
       }
@@ -6945,31 +6945,31 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ihr Akku wird zwischen %1$@ nicht aufgeladen oder entladen. Jegliche Haushaltslast wird in dieser Zeit aus dem Stromnetz bezogen. Um dies zu deaktivieren, setzen Sie den Zeitraum %2$@ zurück."
+            "value" : "Ihre Batterie wird sich zwischen %1$@ nicht aufladen oder entladen. Die Solarenergie wird zum Aufladen der Batterie umgeleitet. Jede Hauslast wird in dieser Zeit vom Netz kommen. Setzen Sie den Zeitraum %2$@ zurück, um dies zu deaktivieren."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your battery will not charge or discharge between %1$@. Any house load will come from the grid between these times. Reset time period %2$@ to disable this."
+            "value" : "Your battery will not charge or discharge between %1$@. Solar power will be diverted to charging the battery. Any house load will come from the grid between these times. Reset time period %2$@ to disable this."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Su batería no se cargará ni descargará entre %1$@. Cualquier carga en el hogar se tomará de la red eléctrica durante este período. Reinicie el período de tiempo %2$@ para desactivar esta función."
+            "value" : "Su batería no se cargará ni descargará entre %1$@. La energía solar se desviará para cargar la batería. Cualquier carga de la casa provendrá de la red durante estos tiempos. Restablezca el período de tiempo %2$@ para desactivar esto."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "La sua batteria non si caricherà né scaricherà tra le %1$@. Ogni carico domestico verrà prelevato dalla rete elettrica in questo periodo. Reimposta il periodo di tempo %2$@ per disabilitare questa funzione."
+            "value" : "La tua batteria non si caricherà né scaricherà tra %1$@. L'energia solare verrà deviata per caricare la batteria. Qualsiasi carico domestico verrà dalla rete in questi orari. Reimposta il periodo di tempo %2$@ per disabilitare questa funzione."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Twoja bateria nie będzie się ładować ani rozładowywać między %1$@. Wszelkie obciążenia domowe będą zasilane z sieci w tym czasie. Zresetuj okres czasu %2$@, aby wyłączyć tę funkcję."
+            "value" : "Twoja bateria nie będzie się ładować ani rozładowywać między %1$@. Energia słoneczna zostanie przekierowana do ładowania baterii. Wszelkie obciążenia domowe będą pochodzić z sieci w tych godzinach. Zresetuj okres czasu %2$@, aby to wyłączyć."
           }
         }
       }
