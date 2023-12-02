@@ -3012,6 +3012,9 @@
         }
       }
     },
+    "Data Ceiling" : {
+
+    },
     "Data Refresh frequency" : {
       "localizations" : {
         "de" : {
@@ -3036,6 +3039,39 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Częstotliwość odświeżania danych"
+          }
+        }
+      }
+    },
+    "data_ceiling_enhanced" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Values above 65,535 will be clipped. E.g. a value of 458,997 would be shown as 245"
+          }
+        }
+      }
+    },
+    "data_ceiling_mild" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Values above 1,048,575 will be clipped. E.g. a value of 201,539,769 would be shown as 3461.8"
+          }
+        }
+      }
+    },
+    "data_ceiling_none" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Values will be shown unmodified from the data feed"
           }
         }
       }
@@ -3794,6 +3830,9 @@
           }
         }
       }
+    },
+    "Enhanced" : {
+
     },
     "Enter your FoxESS Cloud details" : {
       "localizations" : {
@@ -5945,6 +5984,9 @@
           }
         }
       }
+    },
+    "Mild" : {
+
     },
     "Min SoC" : {
       "localizations" : {

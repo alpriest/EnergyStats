@@ -25,7 +25,7 @@ struct TabbedView: View {
 
     var body: some View {
         TabView {
-            PowerFlowTabView(configManager: configManager, networking: networking, userManager: userManager, appSettingsPublisher: configManager.appSettings)
+            PowerFlowTabView(configManager: configManager, networking: networking, userManager: userManager, appSettingsPublisher: configManager.appSettingsPublisher)
                 .tabItem {
                     VStack {
                         Image(systemName: "arrow.up.arrow.down")
@@ -34,7 +34,7 @@ struct TabbedView: View {
                     .accessibilityIdentifier("power_flow_tab")
                 }
 
-            StatsTabView(configManager: configManager, networking: networking, appSettingsPublisher: configManager.appSettings)
+            StatsTabView(configManager: configManager, networking: networking, appSettingsPublisher: configManager.appSettingsPublisher)
                 .tabItem {
                     VStack {
                         Image(systemName: "chart.bar.xaxis")
@@ -52,7 +52,7 @@ struct TabbedView: View {
                     .accessibilityIdentifier("parameters_tab")
                 }
 
-            SummaryTabView(configManager: configManager, networking: networking, appSettingsPublisher: configManager.appSettings, solarForecastProvider: solarForecastProvider)
+            SummaryTabView(configManager: configManager, networking: networking, appSettingsPublisher: configManager.appSettingsPublisher, solarForecastProvider: solarForecastProvider)
                 .tabItem {
                     VStack {
                         if #available(iOS 17.0, *) {

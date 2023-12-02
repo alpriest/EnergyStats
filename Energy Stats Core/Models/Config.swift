@@ -43,6 +43,7 @@ public protocol Config {
     var shouldCombineCT2WithPVPower: Bool { get set }
     var showGraphValueDescriptions: Bool { get set }
     var solcastSettings: SolcastSettings { get set }
+    var dataCeiling: DataCeiling { get set }
 }
 
 public func DefaultParameterGroups() -> [ParameterGroup] {

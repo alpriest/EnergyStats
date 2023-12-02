@@ -40,7 +40,8 @@ public extension AppSettings {
             parameterGroups: DefaultParameterGroups(),
             shouldCombineCT2WithPVPower: true,
             showGraphValueDescriptions: true,
-            solcastSettings: SolcastSettings(apiKey: nil, sites: [])
+            solcastSettings: SolcastSettings(apiKey: nil, sites: []),
+            dataCeiling: DataCeiling.mild
         )
     }
 }

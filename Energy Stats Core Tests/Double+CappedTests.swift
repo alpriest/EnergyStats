@@ -10,15 +10,33 @@ import XCTest
 @testable import Energy_Stats_Core
 
 class DoubleTests: XCTestCase {
-    func test_full_large_number() {
-        XCTAssertTrue(201539769.0.capped().sameValueAs(other: 3461.8))
+    func test_large_number_without_capping_does_not_cap() {
+        assertSameValueAs(first: 201539769.capped(.none), second: 201539769)
+    }
+
+    func test_large_number_with_mild_capping_does_cap() {
+        assertSameValueAs(first: 201539769.capped(.mild), second: 3461.8)
+    }
+
+    func test_small_number_with_mild_capping_does_not_cap() {
+        assertSameValueAs(first: 458997.capped(.mild), second: 458997)
+    }
+
+    func test_small_number_with_enhanced_capping_does_cap() {
+        assertSameValueAs(first: 458997.capped(.enhanced), second: 245)
     }
 
     func test_3dp_decimal_numbers() {
-        XCTAssertTrue(1.234.capped().sameValueAs(other: 1.234))
+        assertSameValueAs(first: 1.234.capped(.mild), second: 1.234)
     }
 
     func test_2dp_full_decimal_numbers() {
-        XCTAssertTrue(1.200.capped().sameValueAs(other: 1.200))
+        assertSameValueAs(first: 1.200.capped(.mild), second: 1.200)
+    }
+
+    private func assertSameValueAs(first: Double, second: Double, file: StaticString = #file, line: UInt = #line) {
+        if abs(first - second) > 0.0000001 {
+            XCTFail("Expected \(first) to equal \(second)", file: file, line: line)
+        }
     }
 }

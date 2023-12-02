@@ -23,7 +23,7 @@ struct ParametersGraphTabView: View {
     init(configManager: ConfigManaging, networking: FoxESSNetworking, dateProvider: @escaping () -> Date = { Date() }) {
         _viewModel = .init(wrappedValue: ParametersGraphTabViewModel(networking: networking, configManager: configManager, dateProvider: dateProvider))
         self.configManager = configManager
-        self.appSettingsPublisher = configManager.appSettings
+        self.appSettingsPublisher = configManager.appSettingsPublisher
         self.appSettings = appSettingsPublisher.value
     }
 

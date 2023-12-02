@@ -13,7 +13,7 @@ final class AbsoluteSelfSufficiencyCalculatorTests: XCTestCase {
         let (result, breakdown) = AbsoluteSelfSufficiencyCalculator.calculate(loads: 10000, grid: 300)
 
         XCTAssertEqual(result, 0.97)
-        XCTAssertEqual(breakdown.formula, "1 - (min(loads, max(grid, 0.0)) / loads)")
+        XCTAssertEqual(breakdown.formula, "1 - (min(loads, max(grid, 0.00)) / loads)")
         XCTAssertEqual(breakdown.calculation(1), "1 - (min(10000.0, max(300.0, 0.0) / 10000.0")
     }
 

@@ -5,6 +5,7 @@
 //  Created by Alistair Priest on 08/09/2022.
 //
 
+import Combine
 import Foundation
 
 public class DemoNetworking: FoxESSNetworking {
@@ -187,11 +188,12 @@ public class MockConfig: Config {
     public var currencySymbol: String = "£"
     public var shouldCombineCT2WithPVPower: Bool = true
     public var solcastSettings: SolcastSettings = SolcastSettings(apiKey: nil, sites: [SolcastSite.preview()])
+    public var dataCeiling: DataCeiling = .mild
 }
 
 public class PreviewConfigManager: ConfigManager {
     public convenience init() {
-        self.init(networking: DemoNetworking(), config: MockConfig())
+        self.init(networking: DemoNetworking(), config: MockConfig(), appSettingsPublisher: CurrentValueSubject(AppSettings.mock()))
         Task { try await fetchDevices() }
     }
 }

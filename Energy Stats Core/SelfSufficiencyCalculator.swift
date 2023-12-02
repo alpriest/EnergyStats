@@ -44,7 +44,7 @@ public enum NetSelfSufficiencyCalculator {
 
 public enum AbsoluteSelfSufficiencyCalculator {
     public static func calculate(loads: Double, grid: Double) -> (Double, CalculationBreakdown) {
-        let formula = "1 - (min(loads, max(grid, \(0.roundedToString(decimalPlaces: 2))) / loads)"
+        let formula = "1 - (min(loads, max(grid, \(0.roundedToString(decimalPlaces: 2)))) / loads)"
         guard loads > 0 else { return (0.0, CalculationBreakdown(formula: formula, calculation: { _ in "" })) }
 
         let result = 1 - (min(loads, max(grid, 0.0)) / loads)

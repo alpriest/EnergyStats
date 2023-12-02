@@ -48,7 +48,7 @@ class PowerFlowTabViewModel: ObservableObject {
         self.network = network
         self.configManager = configManager
         self.userManager = userManager
-        self.latestAppTheme = configManager.appSettings.value
+        self.latestAppTheme = configManager.appSettingsPublisher.value
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.willResignActiveNotification), name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
@@ -109,7 +109,7 @@ class PowerFlowTabViewModel: ObservableObject {
     func addThemeChangeObserver() {
         guard self.themeChangeCancellable == nil else { return }
 
-        self.themeChangeCancellable = self.configManager.appSettings.sink { theme in
+        self.themeChangeCancellable = self.configManager.appSettingsPublisher.sink { theme in
             if self.latestAppTheme.showInverterTemperature != theme.showInverterTemperature ||
                 self.latestAppTheme.shouldInvertCT2 != theme.shouldInvertCT2 ||
                 self.latestAppTheme.shouldCombineCT2WithPVPower != theme.shouldCombineCT2WithPVPower
@@ -168,7 +168,7 @@ class PowerFlowTabViewModel: ObservableObject {
             self.configManager.currencySymbol = earnings.currencySymbol
             let totalsViewModel = TotalsViewModel(reports: totals)
 
-            if self.configManager.appSettings.value.showInverterTemperature {
+            if self.configManager.appSettingsPublisher.value.showInverterTemperature {
                 rawVariables.append(contentsOf: [
                     self.configManager.variables.named("ambientTemperation"),
                     self.configManager.variables.named("invTemperation")

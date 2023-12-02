@@ -9,9 +9,11 @@ import Foundation
 
 public class NetworkValueCleaner: FoxESSNetworking {
     private let network: FoxESSNetworking
+    private let appSettingsPublisher: LatestAppSettingsPublisher
 
-    public init(network: FoxESSNetworking) {
+    public init(network: FoxESSNetworking, appSettingsPublisher: LatestAppSettingsPublisher) {
         self.network = network
+        self.appSettingsPublisher = appSettingsPublisher
     }
 
     public func ensureHasToken() async {
@@ -26,7 +28,7 @@ public class NetworkValueCleaner: FoxESSNetworking {
         try await network.fetchReport(deviceID: deviceID, variables: variables, queryDate: queryDate, reportType: reportType)
             .map { original in
                 ReportResponse(variable: original.variable, data: original.data.map { originalData in
-                    ReportResponse.ReportData(index: originalData.index, value: originalData.value.capped())
+                    ReportResponse.ReportData(index: originalData.index, value: originalData.value.capped(appSettingsPublisher.value.dataCeiling))
                 })
             }
     }
@@ -43,7 +45,7 @@ public class NetworkValueCleaner: FoxESSNetworking {
         try await network.fetchRaw(deviceID: deviceID, variables: variables, queryDate: queryDate)
             .map { original in
                 RawResponse(variable: original.variable, data: original.data.map { originalData in
-                    RawResponse.ReportData(time: originalData.time, value: originalData.value.capped())
+                    RawResponse.ReportData(time: originalData.time, value: originalData.value.capped(appSettingsPublisher.value.dataCeiling))
                 })
             }
     }
@@ -94,20 +96,24 @@ public class NetworkValueCleaner: FoxESSNetworking {
 }
 
 extension Double {
-    func capped() -> Double {
+    func capped(_ ceiling: DataCeiling) -> Double {
         guard self > 0 else { return self }
 
         let register = Int(self * 10)
-        let mask = 0xfff00000
+        let mask = switch ceiling {
+        case .none:
+            0x0
+        case .mild:
+            0xfff00000
+        case .enhanced:
+            0xffff0000
+        }
+
         let masked = register & mask
         if masked == 0 {
             return self
         } else {
             return self - (Double(masked) / 10.0).rounded(decimalPlaces: 3)
         }
-    }
-
-    func sameValueAs(other: Double) -> Bool {
-        abs(self - other) < 0.0000001
     }
 }

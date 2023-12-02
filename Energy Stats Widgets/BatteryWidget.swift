@@ -20,7 +20,8 @@ struct BatteryWidget: Widget {
         let network = NetworkFacade(network: Network(credentials: keychainStore, store: store),
                                     config: config,
                                     store: keychainStore)
-        configManager = ConfigManager(networking: network, config: config)
+        let appSettingsPublisher = AppSettingsPublisherFactory.make(from: config)
+        configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher)
     }
 
     var body: some WidgetConfiguration {
@@ -74,7 +75,7 @@ struct BatteryWidgetView: View {
                     soc: Double(entry.soc ?? 0) / 100.0,
                     chargeStatusDescription: entry.chargeStatusDescription,
                     lastUpdated: entry.date,
-                    appSettings: configManager.appSettings.value,
+                    appSettings: configManager.appSettingsPublisher.value,
                     hasError: entry.errorMessage != nil
                 )
             }
@@ -117,7 +118,7 @@ struct BatteryWidget_Previews: PreviewProvider {
     static var previews: some View {
         BatteryWidgetView(
             entry: SimpleEntry.failed(error: "Something went wrong"),
-            configManager: ConfigManager(networking: DemoNetworking(), config: MockConfig())
+            configManager: ConfigManager(networking: DemoNetworking(), config: MockConfig(), appSettingsPublisher: AppSettingsPublisherFactory.make(from: MockConfig()))
         )
         .previewContext(WidgetPreviewContext(family: .accessoryCircular))
 
@@ -126,7 +127,7 @@ struct BatteryWidget_Previews: PreviewProvider {
                                       soc: 50,
                                       chargeStatusDescription: "Full in 22 minutes",
                                       errorMessage: "Could not refresh"),
-            configManager: ConfigManager(networking: DemoNetworking(), config: MockConfig())
+            configManager: ConfigManager(networking: DemoNetworking(), config: MockConfig(), appSettingsPublisher: AppSettingsPublisherFactory.make(from: MockConfig()))
         )
         .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
