@@ -15,13 +15,20 @@ struct SchedulePhaseView: View {
     @State private var minSOC: String
     @State private var fdSOC: String
     @State private var fdPower: String
-    private let id: String?
+    private let id: String
     private let modes: [SchedulerModeResponse]
     private let onChange: (SchedulePhase) -> Void
+    private let onDelete: (String) -> Void
 
-    init(modes: [SchedulerModeResponse], phase: SchedulePhase, onChange: @escaping (SchedulePhase) -> Void) {
+    init(
+        modes: [SchedulerModeResponse],
+        phase: SchedulePhase,
+        onChange: @escaping (SchedulePhase) -> Void,
+        onDelete: @escaping (String) -> Void
+    ) {
         self.modes = modes
         self.onChange = onChange
+        self.onDelete = onDelete
 
         self.id = phase.id
         self._startTime = State(wrappedValue: Date.fromTime(phase.start))
@@ -92,6 +99,12 @@ struct SchedulePhaseView: View {
                     OptionalView(forceDischargePowerDescription()) {
                         Text($0)
                     }
+                }
+
+                Button(role: .destructive) {
+                    onDelete(id)
+                } label: {
+                    Text("Delete phase")
                 }
             }
         }
@@ -176,6 +189,7 @@ struct SchedulePhaseView: View {
             batterySOC: 20,
             color: Color.scheduleColor(named: "ForceDischarge")
         )!,
-        onChange: { print("\($0.id) changed") }
+        onChange: { print($0.id, " changed") },
+        onDelete: { print($0, " deleted") }
     )
 }

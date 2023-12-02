@@ -34,9 +34,15 @@ struct ScheduleView: View {
         Form {
             Section {
                 VStack(alignment: .leading) {
-                    Text(schedule.name)
-                        .font(.title2)
-                        .padding(.bottom)
+                    HStack {
+                        Text(schedule.name)
+                            .font(.title2)
+                            .padding(.bottom)
+
+                        Toggle(isOn: $viewModel.enabled, label: {
+                            Text("Enabled")
+                        }).labelsHidden()
+                    }
 
                     TimePeriodBarView(phases: schedule.phases)
                         .padding(.bottom, 22)
@@ -44,11 +50,17 @@ struct ScheduleView: View {
             }
 
             ForEach(schedule.phases) { phase in
-                NavigationLink(destination: {
-                    SchedulePhaseView(modes: viewModel.modes, phase: phase) { phase in
-                        viewModel.updated(phase: phase)
-                    }
-                }, label: {
+                NavigationLink {
+                    SchedulePhaseView(modes: viewModel.modes,
+                                      phase: phase,
+                                      onChange: {
+                                          phase in
+                                          viewModel.updated(phase: phase)
+                                      },
+                                      onDelete: {
+                                          viewModel.deleted(id: $0)
+                                      })
+                } label: {
                     HStack {
                         phase.color
                             .frame(width: 5)
@@ -61,7 +73,7 @@ struct ScheduleView: View {
                             Text(phase.mode.name)
                         }
                     }
-                })
+                }
             }
             .frame(maxWidth: .infinity)
 

@@ -16,6 +16,7 @@ class ScheduleViewModel: ObservableObject {
     @Published var state: LoadState = .inactive
     @Published var alertContent: AlertContent?
     @Published var modes: [SchedulerModeResponse] = []
+    @Published var enabled: Bool = false
 
     init(networking: FoxESSNetworking, config: ConfigManaging) {
         self.networking = networking
@@ -37,6 +38,7 @@ class ScheduleViewModel: ObservableObject {
                     let scheduleResponse = try await networking.fetchSchedule(deviceSN: deviceSN)
 
                     self.schedule = Schedule(schedule: scheduleResponse, workModes: self.modes)
+                    self.enabled = scheduleResponse.enable
                 } else {
                     alertContent = AlertContent(
                         title: "Not supported",
@@ -69,6 +71,21 @@ class ScheduleViewModel: ObservableObject {
             phases: schedule.phases.map {
                 if $0.id == updatedPhase.id {
                     return updatedPhase
+                } else {
+                    return $0
+                }
+            }
+        )
+    }
+
+    func deleted(id: String) {
+        guard let schedule else { return }
+
+        self.schedule = Schedule(
+            name: schedule.name,
+            phases: schedule.phases.compactMap {
+                if $0.id == id {
+                    return nil
                 } else {
                     return $0
                 }
