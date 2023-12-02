@@ -58,7 +58,32 @@
       }
     },
     " - " : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
     " %@ " : {
       "localizations" : {
@@ -313,7 +338,32 @@
       }
     },
     "00:00" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
     "1 min" : {
       "localizations" : {
@@ -456,7 +506,32 @@
       }
     },
     "08:00" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
     "12 hours" : {
       "localizations" : {
@@ -487,7 +562,32 @@
       }
     },
     "16:00" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
     "24 hours" : {
       "localizations" : {
@@ -518,7 +618,32 @@
       }
     },
     "24:00" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
     "Absolute" : {
       "localizations" : {
@@ -2276,6 +2401,34 @@
         }
       }
     },
+    "Ceiling" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Datenobergrenze"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Techo"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Soffitto"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sufit"
+          }
+        }
+      }
+    },
     "Change inverter work mode" : {
       "localizations" : {
         "de" : {
@@ -3012,9 +3165,6 @@
         }
       }
     },
-    "Data Ceiling" : {
-
-    },
     "Data Refresh frequency" : {
       "localizations" : {
         "de" : {
@@ -3044,12 +3194,37 @@
       }
     },
     "data_ceiling_enhanced" : {
+      "comment" : "ssssss",
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Werte über 65.535 werden gekürzt. Z.B. würde ein Wert von 45.899,7 als 24,5 angezeigt werden. Verwenden Sie dies, wenn Sie abnormal große Zahlen auf Ihren Grafiken sehen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Values above 65,535 will be clipped. E.g. a value of 458,997 would be shown as 245"
+            "value" : "Values above 65,535 will be clipped. E.g. a value of 45,899.7 would be shown as 24.5. Use this if you're seeing abnormally large numbers on your graphs."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Los valores superiores a 65,535 serán recortados. Por ejemplo, un valor de 45,899.7 se mostrará como 24.5. Utilice esto si observa números anormalmente grandes en sus gráficos."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I valori superiori a 65,535 verranno tagliati. Ad esempio, un valore di 45,899.7 verrà mostrato come 24.5. Usa questo se stai vedendo numeri anormalmente grandi sui tuoi grafici."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wartości powyżej 65 535 będą obcinane. Na przykład wartość 45 899,7 zostanie pokazana jako 24,5. Użyj tego, jeśli zauważysz nienormalnie duże liczby na swoich wykresach."
           }
         }
       }
@@ -3057,10 +3232,34 @@
     "data_ceiling_mild" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Werte über 1.048.575 werden gekürzt. Z.B. würde ein Wert von 201.539.769 als 3461.8 angezeigt werden. Verwenden Sie dies, wenn Sie abnormal große Zahlen auf Ihren Grafiken sehen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Values above 1,048,575 will be clipped. E.g. a value of 201,539,769 would be shown as 3461.8"
+            "value" : "Values above 1,048,575 will be clipped. E.g. a value of 201,539,769 would be shown as 3461.8. Use this if you're seeing abnormally large numbers on your graphs."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Los valores superiores a 1,048,575 serán recortados. Por ejemplo, un valor de 201,539,769 se mostrará como 3461.8. Utilice esto si observa números anormalmente grandes en sus gráficos."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I valori superiori a 1,048,575 verranno tagliati. Ad esempio, un valore di 201,539,769 verrà mostrato come 3461.8. Usa questo se stai vedendo numeri anormalmente grandi sui tuoi grafici."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wartości powyżej 1 048 575 będą obcinane. Na przykład wartość 201 539 769 zostanie pokazana jako 3461.8. Użyj tego, jeśli zauważysz nienormalnie duże liczby na swoich wykresach."
           }
         }
       }
@@ -3068,10 +3267,34 @@
     "data_ceiling_none" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Werte werden unverändert aus dem Datenfeed angezeigt. Sie können abnorm große Zahlen in Ihrer Nutzung sehen, wo die Daten beschädigt werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Values will be shown unmodified from the data feed"
+            "value" : "Values will be shown unmodified from the data feed. You may see abnormally large numbers in your usage where the data gets corrupted."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Los valores se mostrarán sin modificar desde la fuente de datos. Puede ver números anormalmente grandes en su uso donde los datos se corrompan."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I valori saranno mostrati senza modifiche dal feed di dati. Potresti vedere numeri anormalmente grandi nel tuo utilizzo dove i dati vengono corrotti."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wartości będą wyświetlane bez modyfikacji z kanału danych. Możesz zobaczyć nienormalnie duże liczby w swoim użyciu, gdzie dane zostają uszkodzone."
           }
         }
       }
@@ -3619,7 +3842,32 @@
       }
     },
     "editor %@" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
     "Empty" : {
       "extractionState" : "manual",
@@ -3832,7 +4080,32 @@
       }
     },
     "Enhanced" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verbessert"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mejorado"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Migliorato"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ulepszony"
+          }
+        }
+      }
     },
     "Enter your FoxESS Cloud details" : {
       "localizations" : {
@@ -5986,7 +6259,32 @@
       }
     },
     "Mild" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mild"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suave"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mite"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Łagodny"
+          }
+        }
+      }
     },
     "Min SoC" : {
       "localizations" : {

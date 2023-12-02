@@ -19,11 +19,11 @@ class DoubleTests: XCTestCase {
     }
 
     func test_small_number_with_mild_capping_does_not_cap() {
-        assertSameValueAs(first: 458997.capped(.mild), second: 458997)
+        assertSameValueAs(first: 45899.7.capped(.mild), second: 45899.7)
     }
 
     func test_small_number_with_enhanced_capping_does_cap() {
-        assertSameValueAs(first: 458997.capped(.enhanced), second: 245)
+        assertSameValueAs(first: 45899.7.capped(.enhanced), second: 24.5)
     }
 
     func test_3dp_decimal_numbers() {
