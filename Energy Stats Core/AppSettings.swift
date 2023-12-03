@@ -41,6 +41,7 @@ public struct AppSettings {
     public var shouldCombineCT2WithPVPower: Bool
     public var showGraphValueDescriptions: Bool
     public var solcastSettings: SolcastSettings
+    public var dataCeiling: DataCeiling
 
     public init(
         showColouredLines: Bool,
@@ -68,7 +69,8 @@ public struct AppSettings {
         parameterGroups: [ParameterGroup],
         shouldCombineCT2WithPVPower: Bool,
         showGraphValueDescriptions: Bool,
-        solcastSettings: SolcastSettings
+        solcastSettings: SolcastSettings,
+        dataCeiling: DataCeiling
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -96,6 +98,7 @@ public struct AppSettings {
         self.shouldCombineCT2WithPVPower = shouldCombineCT2WithPVPower
         self.showGraphValueDescriptions = showGraphValueDescriptions
         self.solcastSettings = solcastSettings
+        self.dataCeiling = dataCeiling
     }
 
     public func copy(
@@ -124,7 +127,8 @@ public struct AppSettings {
         parameterGroups: [ParameterGroup]? = nil,
         shouldCombineCT2WithPVPower: Bool? = nil,
         showGraphValueDescriptions: Bool? = nil,
-        solcastSettings: SolcastSettings? = nil
+        solcastSettings: SolcastSettings? = nil,
+        dataCeiling: DataCeiling? = nil
     ) -> AppSettings {
         AppSettings(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -152,7 +156,8 @@ public struct AppSettings {
             parameterGroups: parameterGroups ?? self.parameterGroups,
             shouldCombineCT2WithPVPower: shouldCombineCT2WithPVPower ?? self.shouldCombineCT2WithPVPower,
             showGraphValueDescriptions: showGraphValueDescriptions ?? self.showGraphValueDescriptions,
-            solcastSettings: solcastSettings ?? self.solcastSettings
+            solcastSettings: solcastSettings ?? self.solcastSettings,
+            dataCeiling: dataCeiling ?? self.dataCeiling
         )
     }
 }

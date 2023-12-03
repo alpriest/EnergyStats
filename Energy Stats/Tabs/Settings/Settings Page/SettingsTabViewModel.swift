@@ -90,6 +90,12 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
+    @Published var dataCeiling: DataCeiling {
+        didSet {
+            config.dataCeiling = dataCeiling
+        }
+    }
+
     @Published var showInverterTemperature: Bool {
         didSet {
             config.showInverterTemperature = showInverterTemperature
@@ -160,6 +166,7 @@ class SettingsTabViewModel: ObservableObject {
         showLastUpdateTimestamp = config.showLastUpdateTimestamp
         shouldCombineCT2WithPVPower = config.shouldCombineCT2WithPVPower
         showGraphValueDescriptions = config.showGraphValueDescriptions
+        dataCeiling = config.dataCeiling
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }

@@ -78,6 +78,27 @@ struct DisplaySettingsView: View {
             }
         }
 
+        Section {
+            HStack {
+                Text("Ceiling").padding(.trailing)
+                Spacer()
+                Picker("Ceiling", selection: $viewModel.dataCeiling) {
+                    Text("None").tag(DataCeiling.none)
+                    Text("Mild").tag(DataCeiling.mild)
+                    Text("Enhanced").tag(DataCeiling.enhanced)
+                }.pickerStyle(.segmented)
+            }
+        } footer: {
+            switch viewModel.dataCeiling {
+            case .none:
+                Text(String(key: .dataCeilingNone))
+            case .mild:
+                Text(String(key: .dataCeilingMild, arguments: [Double(201539769), Double(3461.8)]))
+            case .enhanced:
+                Text(String(key: .dataCeilingEnhanced, arguments: [Double(458997), Double(245)]))
+            }
+        }
+
         NavigationLink {
             SelfSufficiencySettingsView(configManager: configManager)
         } label: {

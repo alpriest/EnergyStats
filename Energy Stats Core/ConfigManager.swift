@@ -32,7 +32,7 @@ public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging {
     var showUsableBatteryOnly: Bool { get set }
     var showTotalYield: Bool { get set }
     var refreshFrequency: RefreshFrequency { get set }
-    var appSettings: LatestAppSettingsPublisher { get }
+    var appSettingsPublisher: LatestAppSettingsPublisher { get }
     var decimalPlaces: Int { get set }
     var showSunnyBackground: Bool { get set }
     var devices: [Device]? { get set }
@@ -56,6 +56,7 @@ public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging {
     var currencySymbol: String { get set }
     var shouldCombineCT2WithPVPower: Bool { get set }
     var showGraphValueDescriptions: Bool { get set }
+    var dataCeiling: DataCeiling { get set }
 }
 
 public protocol SolcastConfigManaging {
@@ -72,7 +73,7 @@ public protocol FinancialConfigManaging {
 public class ConfigManager: ConfigManaging {
     private let networking: FoxESSNetworking
     private var config: Config
-    public var appSettings: CurrentValueSubject<AppSettings, Never>
+    public var appSettingsPublisher: CurrentValueSubject<AppSettings, Never>
     public var currentDevice = CurrentValueSubject<Device?, Never>(nil)
 
     public struct NoDeviceFoundError: Error {
@@ -83,39 +84,10 @@ public class ConfigManager: ConfigManaging {
         public init() {}
     }
 
-    public init(networking: FoxESSNetworking, config: Config) {
+    public init(networking: FoxESSNetworking, config: Config, appSettingsPublisher: CurrentValueSubject<AppSettings, Never>) {
         self.networking = networking
         self.config = config
-        appSettings = CurrentValueSubject(
-            AppSettings(
-                showColouredLines: config.showColouredLines,
-                showBatteryTemperature: config.showBatteryTemperature,
-                showSunnyBackground: config.showSunnyBackground,
-                decimalPlaces: config.decimalPlaces,
-                showBatteryEstimate: config.showBatteryEstimate,
-                showUsableBatteryOnly: config.showUsableBatteryOnly,
-                displayUnit: DisplayUnit(rawValue: config.displayUnit) ?? .kilowatt,
-                showTotalYield: config.showTotalYield,
-                selfSufficiencyEstimateMode: config.selfSufficiencyEstimateMode,
-                showFinancialEarnings: config.showFinancialEarnings,
-                financialModel: FinancialModel(rawValue: config.financialModel) ?? .foxESS,
-                feedInUnitPrice: config.feedInUnitPrice,
-                gridImportUnitPrice: config.gridImportUnitPrice,
-                showInverterTemperature: config.showInverterTemperature,
-                showHomeTotalOnPowerFlow: config.showHomeTotalOnPowerFlow,
-                showInverterIcon: config.showInverterIcon,
-                shouldInvertCT2: config.shouldInvertCT2,
-                showInverterPlantName: config.showInverterPlantName,
-                showGridTotalsOnPowerFlow: config.showGridTotalsOnPowerFlow,
-                showInverterTypeNameOnPowerFlow: config.showInverterTypeNameOnPowerFlow,
-                showLastUpdateTimestamp: config.showLastUpdateTimestamp,
-                solarDefinitions: config.solarDefinitions,
-                parameterGroups: config.parameterGroups,
-                shouldCombineCT2WithPVPower: config.shouldCombineCT2WithPVPower,
-                showGraphValueDescriptions: config.showGraphValueDescriptions,
-                solcastSettings: config.solcastSettings
-            )
-        )
+        self.appSettingsPublisher = appSettingsPublisher
         selectedDeviceID = selectedDeviceID
     }
 
@@ -268,7 +240,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showColouredLines }
         set {
             config.showColouredLines = newValue
-            appSettings.send(appSettings.value.copy(
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
                 showColouredLines: config.showColouredLines
             ))
         }
@@ -278,7 +250,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showBatteryTemperature }
         set {
             config.showBatteryTemperature = newValue
-            appSettings.send(appSettings.value.copy(
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
                 showBatteryTemperature: config.showBatteryTemperature
             ))
         }
@@ -288,7 +260,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showBatteryEstimate }
         set {
             config.showBatteryEstimate = newValue
-            appSettings.send(appSettings.value.copy(
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
                 showBatteryEstimate: config.showBatteryEstimate
             ))
         }
@@ -298,7 +270,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showUsableBatteryOnly }
         set {
             config.showUsableBatteryOnly = newValue
-            appSettings.send(appSettings.value.copy(
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
                 showUsableBatteryOnly: config.showUsableBatteryOnly
             ))
         }
@@ -308,7 +280,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showTotalYield }
         set {
             config.showTotalYield = newValue
-            appSettings.send(appSettings.value.copy(
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
                 showTotalYield: config.showTotalYield
             ))
         }
@@ -323,7 +295,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showSunnyBackground }
         set {
             config.showSunnyBackground = newValue
-            appSettings.send(appSettings.value.copy(
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
                 showSunnyBackground: config.showSunnyBackground
             ))
         }
@@ -333,7 +305,7 @@ public class ConfigManager: ConfigManaging {
         get { config.selfSufficiencyEstimateMode }
         set {
             config.selfSufficiencyEstimateMode = newValue
-            appSettings.send(appSettings.value.copy(
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
                 selfSufficiencyEstimateMode: config.selfSufficiencyEstimateMode
             ))
         }
@@ -343,7 +315,7 @@ public class ConfigManager: ConfigManaging {
         get { config.decimalPlaces }
         set {
             config.decimalPlaces = newValue
-            appSettings.send(appSettings.value.copy(
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
                 decimalPlaces: config.decimalPlaces
             ))
         }
@@ -353,7 +325,7 @@ public class ConfigManager: ConfigManaging {
         get { DisplayUnit(rawValue: config.displayUnit) ?? .kilowatt }
         set {
             config.displayUnit = newValue.rawValue
-            appSettings.send(appSettings.value.copy(
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
                 displayUnit: newValue
             ))
         }
@@ -363,7 +335,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showFinancialEarnings }
         set {
             config.showFinancialEarnings = newValue
-            appSettings.send(appSettings.value.copy(
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
                 showFinancialEarnings: config.showFinancialEarnings
             ))
         }
@@ -373,7 +345,7 @@ public class ConfigManager: ConfigManaging {
         get { FinancialModel(rawValue: config.financialModel) ?? .foxESS }
         set {
             config.financialModel = newValue.rawValue
-            appSettings.send(appSettings.value.copy(
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
                 financialModel: FinancialModel(rawValue: config.financialModel)
             ))
         }
@@ -383,7 +355,7 @@ public class ConfigManager: ConfigManaging {
         get { config.feedInUnitPrice }
         set {
             config.feedInUnitPrice = newValue
-            appSettings.send(appSettings.value.copy(
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
                 feedInUnitPrice: config.feedInUnitPrice
             ))
         }
@@ -393,7 +365,7 @@ public class ConfigManager: ConfigManaging {
         get { config.gridImportUnitPrice }
         set {
             config.gridImportUnitPrice = newValue
-            appSettings.send(appSettings.value.copy(
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
                 feedInUnitPrice: config.gridImportUnitPrice
             ))
         }
@@ -403,7 +375,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showInverterTemperature }
         set {
             config.showInverterTemperature = newValue
-            appSettings.send(appSettings.value.copy(
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
                 showInverterTemperature: config.showInverterTemperature
             ))
         }
@@ -413,7 +385,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showInverterTypeNameOnPowerFlow }
         set {
             config.showInverterTypeNameOnPowerFlow = newValue
-            appSettings.send(appSettings.value.copy(
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
                 showInverterTypeNameOnPowerFlow: config.showInverterTypeNameOnPowerFlow
             ))
         }
@@ -423,7 +395,7 @@ public class ConfigManager: ConfigManaging {
         get { config.solarDefinitions }
         set {
             config.solarDefinitions = newValue
-            appSettings.send(appSettings.value.copy(
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
                 solarDefinitions: config.solarDefinitions
             ))
         }
@@ -433,7 +405,7 @@ public class ConfigManager: ConfigManaging {
         get { config.parameterGroups }
         set {
             config.parameterGroups = newValue
-            appSettings.send(appSettings.value.copy(
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
                 parameterGroups: config.parameterGroups
             ))
         }
@@ -443,7 +415,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showGraphValueDescriptions }
         set {
             config.showGraphValueDescriptions = newValue
-            appSettings.send(appSettings.value.copy(
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
                 showGraphValueDescriptions: config.showGraphValueDescriptions
             ))
         }
@@ -482,7 +454,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showHomeTotalOnPowerFlow }
         set {
             config.showHomeTotalOnPowerFlow = newValue
-            appSettings.send(appSettings.value.copy(
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
                 showHomeTotalOnPowerFlow: config.showHomeTotalOnPowerFlow
             ))
         }
@@ -492,7 +464,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showInverterIcon }
         set {
             config.showInverterIcon = newValue
-            appSettings.send(appSettings.value.copy(
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
                 showInverterIcon: config.showInverterIcon
             ))
         }
@@ -502,7 +474,7 @@ public class ConfigManager: ConfigManaging {
         get { config.shouldInvertCT2 }
         set {
             config.shouldInvertCT2 = newValue
-            appSettings.send(appSettings.value.copy(
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
                 shouldInvertCT2: config.shouldInvertCT2
             ))
         }
@@ -512,7 +484,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showInverterPlantName }
         set {
             config.showInverterPlantName = newValue
-            appSettings.send(appSettings.value.copy(
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
                 showInverterPlantName: config.showInverterPlantName
             ))
         }
@@ -522,7 +494,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showGridTotalsOnPowerFlow }
         set {
             config.showGridTotalsOnPowerFlow = newValue
-            appSettings.send(appSettings.value.copy(
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
                 showGridTotalsOnPowerFlow: config.showGridTotalsOnPowerFlow
             ))
         }
@@ -532,7 +504,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showLastUpdateTimestamp }
         set {
             config.showLastUpdateTimestamp = newValue
-            appSettings.send(appSettings.value.copy(
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
                 showLastUpdateTimestamp: config.showLastUpdateTimestamp
             ))
         }
@@ -542,7 +514,7 @@ public class ConfigManager: ConfigManaging {
         get { config.shouldCombineCT2WithPVPower }
         set {
             config.shouldCombineCT2WithPVPower = newValue
-            appSettings.send(appSettings.value.copy(
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
                 shouldCombineCT2WithPVPower: config.shouldCombineCT2WithPVPower
             ))
         }
@@ -552,8 +524,18 @@ public class ConfigManager: ConfigManaging {
         get { config.solcastSettings }
         set {
             config.solcastSettings = newValue
-            appSettings.send(appSettings.value.copy(
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
                 solcastSettings: config.solcastSettings
+            ))
+        }
+    }
+
+    public var dataCeiling: DataCeiling {
+        get { config.dataCeiling }
+        set {
+            config.dataCeiling = newValue
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+                dataCeiling: config.dataCeiling
             ))
         }
     }

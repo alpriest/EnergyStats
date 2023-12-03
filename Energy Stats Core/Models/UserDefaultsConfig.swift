@@ -53,6 +53,7 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "solcastResourceId") // Remove 2024
         UserDefaults.shared.removeObject(forKey: "solcastApiKey") // Remove 2024
         UserDefaults.shared.removeObject(forKey: "solcastSettings")
+        UserDefaults.shared.removeObject(forKey: "dataCeiling")
     }
 
     @UserDefaultsStoredBool(key: "showGraphValueDescriptions", defaultValue: true)
@@ -191,4 +192,14 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredCodable(key: "solcastSettings", defaultValue: SolcastSettings(apiKey: nil, sites: []))
     public var solcastSettings: SolcastSettings
+
+    public var dataCeiling: DataCeiling {
+        get {
+            let rawValue = UserDefaults.shared.integer(forKey: "dataCeiling")
+            return DataCeiling(rawValue: rawValue) ?? .mild
+        }
+        set {
+            UserDefaults.shared.set(newValue.rawValue, forKey: "dataCeiling")
+        }
+    }
 }

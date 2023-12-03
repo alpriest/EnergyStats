@@ -25,7 +25,8 @@ struct Provider: TimelineProvider {
         network = NetworkFacade(network: Network(credentials: keychainStore, store: store),
                                 config: config,
                                 store: keychainStore)
-        configManager = ConfigManager(networking: network, config: config)
+        let appSettingsPublisher = AppSettingsPublisherFactory.make(from: config)
+        configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher)
         modelContainer = HomeEnergyStateManager.shared.modelContainer
     }
 

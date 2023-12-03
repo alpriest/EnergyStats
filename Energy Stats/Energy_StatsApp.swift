@@ -5,6 +5,7 @@
 //  Created by Alistair Priest on 06/09/2022.
 //
 
+import Combine
 import Energy_Stats_Core
 import SwiftUI
 
@@ -17,8 +18,9 @@ struct Energy_StatsApp: App {
         let facade = NetworkFacade(network: NetworkCache(network: Network(credentials: keychainStore, store: store)),
                                    config: config,
                                    store: keychainStore)
-        let network = NetworkValueCleaner(network: facade)
-        let configManager = ConfigManager(networking: network, config: config)
+        let appSettingsPublisher = AppSettingsPublisherFactory.make(from: config)
+        let network = NetworkValueCleaner(network: facade, appSettingsPublisher: appSettingsPublisher)
+        let configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher)
         let userManager = UserManager(networking: network, store: keychainStore, configManager: configManager, networkCache: store)
         let solarForecastProvider: () -> SolarForecasting = {
             config.isDemoUser ? DemoSolcast() : SolcastCache(service: { Solcast() })

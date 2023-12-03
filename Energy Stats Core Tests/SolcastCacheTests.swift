@@ -11,32 +11,32 @@ import XCTest
 final class SolcastCacheTests: XCTestCase {
     func test_MergesExistingTodayContent_WithFreshContent() async throws {
         let existing = SolcastForecastResponseList(forecasts: [
-            SolcastForecastResponse(pv_estimate: 110.00, pv_estimate10: 0.5, pv_estimate90: 8.0, period_end: .nov_14_2023_1000am),
-            SolcastForecastResponse(pv_estimate: 110.30, pv_estimate10: 0.5, pv_estimate90: 8.0, period_end: .nov_14_2023_1030am)
+            SolcastForecastResponse(pvEstimate: 110.00, pvEstimate10: 0.5, pvEstimate90: 8.0, periodEnd: .nov_14_2023_1000am, period: "PT30M"),
+            SolcastForecastResponse(pvEstimate: 110.30, pvEstimate10: 0.5, pvEstimate90: 8.0, periodEnd: .nov_14_2023_1030am, period: "PT30M")
         ])
 
         let fresh = SolcastForecastResponseList(forecasts: [
-            SolcastForecastResponse(pv_estimate: 210.30, pv_estimate10: 2.5, pv_estimate90: 2.0, period_end: .nov_14_2023_1030am),
-            SolcastForecastResponse(pv_estimate: 211.00, pv_estimate10: 2.5, pv_estimate90: 2.0, period_end: .nov_14_2023_1100am)
+            SolcastForecastResponse(pvEstimate: 210.30, pvEstimate10: 2.5, pvEstimate90: 2.0, periodEnd: .nov_14_2023_1030am, period: "PT30M"),
+            SolcastForecastResponse(pvEstimate: 211.00, pvEstimate10: 2.5, pvEstimate90: 2.0, periodEnd: .nov_14_2023_1100am, period: "PT30M")
         ])
+        let site = SolcastSite.preview()
 
         let mockFileManager = MockFileManager()
         let mockService = MockSolcast()
-        let sut = SolcastCache(config: SolcastConfig(),
-                               service: { _ in mockService },
+        let sut = SolcastCache(service: { mockService },
                                today: { Date.nov_14_2023_1000am },
                                fileManager: mockFileManager)
         mockFileManager.modificationDate = .nov_13_2023_1000am
 
         mockService.stub = existing
-        let result1 = try await sut.fetchForecast()
-        XCTAssertEqual(result1.forecasts.map { $0.pv_estimate }, [110.00, 110.30])
+        let result1 = try await sut.fetchForecast(for: site, apiKey: "1")
+        XCTAssertEqual(result1.forecasts.map { $0.pvEstimate }, [110.00, 110.30])
         XCTAssertEqual(result1.forecasts.count, 2)
 
         mockService.stub = fresh
-        let result2 = try await sut.fetchForecast()
+        let result2 = try await sut.fetchForecast(for: site, apiKey: "1")
 
-        XCTAssertEqual(result2.forecasts.map { $0.pv_estimate }, [110.00, 210.30, 211.00])
+        XCTAssertEqual(result2.forecasts.map { $0.pvEstimate }, [110.00, 210.30, 211.00])
         XCTAssertEqual(result2.forecasts.count, 3)
     }
 }
@@ -48,15 +48,15 @@ private extension Date {
     static var nov_14_2023_1100am: Date { Date(timeIntervalSince1970: 1700046000) }
 }
 
-private struct SolcastConfig: SolcastSolarForecastingConfiguration {
-    var resourceId: String = "abc"
-    var apiKey: String = "123"
-}
-
 private class MockSolcast: SolarForecasting {
     var stub: SolcastForecastResponseList = .init(forecasts: [])
+    var siteStub: SolcastSiteResponseList = .init(sites: [])
 
-    func fetchForecast() async throws -> SolcastForecastResponseList {
+    func fetchSites(apiKey: String) async throws -> SolcastSiteResponseList {
+        siteStub
+    }
+
+    func fetchForecast(for site: SolcastSite, apiKey: String) async throws -> SolcastForecastResponseList {
         stub
     }
 }

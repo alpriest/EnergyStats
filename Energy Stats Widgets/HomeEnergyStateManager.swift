@@ -42,7 +42,8 @@ class HomeEnergyStateManager {
         let network = NetworkFacade(network: NetworkCache(network: Network(credentials: keychainStore, store: store)),
                                     config: config,
                                     store: keychainStore)
-        let configManager = ConfigManager(networking: network, config: config)
+        let appSettingsPublisher = AppSettingsPublisherFactory.make(from: config)
+        let configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher)
 
         guard let deviceID = config.selectedDeviceID else {
             throw ConfigManager.NoDeviceFoundError()

@@ -1,5 +1,5 @@
 //
-//  Unit.swift
+//  DisplayUnit.swift
 //  Energy Stats Core
 //
 //  Created by Alistair Priest on 30/09/2023.
