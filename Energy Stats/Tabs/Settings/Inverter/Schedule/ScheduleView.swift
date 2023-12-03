@@ -87,7 +87,7 @@ struct ScheduleView: View {
 
             Section {
                 Button("Delete schedule", role: .destructive) {
-                    //                presentConfirmation = true
+                    viewModel.deleteSchedule()
                 }
             }
         }

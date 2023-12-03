@@ -40,6 +40,14 @@ public class NetworkFacade: FoxESSNetworking {
         }
     }
 
+    public func deleteSchedule(deviceSN: String) async throws {
+        if isDemoUser {
+            try await fakeNetwork.deleteSchedule(deviceSN: deviceSN)
+        } else {
+            try await network.deleteSchedule(deviceSN: deviceSN)
+        }
+    }
+
     public func saveSchedule(deviceSN: String, schedule: Schedule) async throws {
         if isDemoUser {
             try await fakeNetwork.saveSchedule(deviceSN: deviceSN, schedule: schedule)

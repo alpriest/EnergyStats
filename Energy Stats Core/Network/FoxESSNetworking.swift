@@ -30,6 +30,7 @@ private extension URL {
     static var schedulerModes = URL(string: "https://www.foxesscloud.com/generic/v0/device/scheduler/modes/get")!
     static var getSchedule = URL(string: "https://www.foxesscloud.com/generic/v0/device/scheduler/list")!
     static var saveSchedule = URL(string: "https://www.foxesscloud.com/generic/v0/device/scheduler/enable")!
+    static var deleteSchedule = URL(string: "https://www.foxesscloud.com/generic/v0/device/scheduler/disable")!
 }
 
 public protocol FoxESSNetworking {
@@ -54,6 +55,7 @@ public protocol FoxESSNetworking {
     func fetchScheduleModes(deviceID: String) async throws -> [SchedulerModeResponse]
     func fetchSchedule(deviceSN: String) async throws -> ScheduleListResponse
     func saveSchedule(deviceSN: String, schedule: Schedule) async throws
+    func deleteSchedule(deviceSN: String) async throws
 }
 
 public class Network: FoxESSNetworking {
@@ -106,6 +108,17 @@ public class Network: FoxESSNetworking {
 
         let response: (AuthResponse, _) = try await fetch(request, retry: false)
         return response.0.token
+    }
+
+    public func deleteSchedule(deviceSN: String) async throws {
+        var request = append(queryItems: [URLQueryItem(name: "deviceSN", value: deviceSN)], to: URL.deleteSchedule)
+        addLocalisedHeaders(to: &request)
+
+        do {
+            let _: (String, Data) = try await fetch(request)
+        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
+            // Ignore
+        }
     }
 
     public func saveSchedule(deviceSN: String, schedule: Schedule) async throws {

@@ -5768,6 +5768,9 @@
         }
       }
     },
+    "inverter_charge_schedule_deleted" : {
+
+    },
     "inverter_charge_schedule_settings_saved" : {
       "localizations" : {
         "en" : {
@@ -9203,7 +9206,7 @@
         }
       }
     },
-    "Schedules are not supported on this inverter. Please contact FoxESS support." : {
+    "Schedules are not supported on this inverter." : {
 
     },
     "Selected device and related battery information will be displayed on the main page" : {

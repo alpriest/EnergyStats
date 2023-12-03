@@ -49,7 +49,7 @@ class ScheduleViewModel: ObservableObject {
                     self.state = .inactive
                     alertContent = AlertContent(
                         title: "Not supported",
-                        message: "Schedules are not supported on this inverter. Please contact FoxESS support."
+                        message: "Schedules are not supported on this inverter."
                     )
                 }
             } catch {
@@ -77,6 +77,25 @@ class ScheduleViewModel: ObservableObject {
                 alertContent = AlertContent(
                     title: "Success",
                     message: "inverter_charge_schedule_settings_saved"
+                )
+            } catch {
+                self.state = .inactive
+                alertContent = AlertContent(title: "error_title", message: LocalizedStringKey(stringLiteral: error.localizedDescription))
+            }
+        }
+    }
+
+    func deleteSchedule() {
+        guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
+
+        Task { @MainActor [self] in
+            self.state = .active(String(key: .saving))
+            do {
+                try await networking.deleteSchedule(deviceSN: deviceSN)
+                self.state = .inactive
+                alertContent = AlertContent(
+                    title: "Success",
+                    message: "inverter_charge_schedule_deleted"
                 )
             } catch {
                 self.state = .inactive
