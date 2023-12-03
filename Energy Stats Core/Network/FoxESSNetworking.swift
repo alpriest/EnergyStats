@@ -112,8 +112,13 @@ public class Network: FoxESSNetworking {
         var request = URLRequest(url: URL.saveSchedule)
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(ScheduleSaveRequest(pollcy: schedule.phases.map { $0.toPollcy() }, deviceSN: deviceSN))
+        addLocalisedHeaders(to: &request)
 
-        let _: (String, Data) = try await fetch(request)
+        do {
+            let _: (String, Data) = try await fetch(request)
+        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
+            // Ignore
+        }
     }
 
     public func fetchSchedule(deviceSN: String) async throws -> ScheduleListResponse {

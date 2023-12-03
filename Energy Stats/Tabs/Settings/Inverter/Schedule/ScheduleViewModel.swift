@@ -34,6 +34,8 @@ class ScheduleViewModel: ObservableObject {
             else { return }
             guard schedule == nil else { return }
 
+            self.state = .active(String(key: .loading))
+
             do {
                 let flag = try await networking.fetchSchedulerFlag(deviceSN: deviceSN)
                 if flag.support {
@@ -42,7 +44,9 @@ class ScheduleViewModel: ObservableObject {
 
                     self.schedule = Schedule(schedule: scheduleResponse, workModes: self.modes)
                     self.enabled = scheduleResponse.enable
+                    self.state = .inactive
                 } else {
+                    self.state = .inactive
                     alertContent = AlertContent(
                         title: "Not supported",
                         message: "Schedules are not supported on this inverter. Please contact FoxESS support."
@@ -67,12 +71,15 @@ class ScheduleViewModel: ObservableObject {
 
         Task { @MainActor [self] in
             do {
+                self.state = .active(String(key: .saving))
                 try await networking.saveSchedule(deviceSN: deviceSN, schedule: schedule)
+                self.state = .inactive
                 alertContent = AlertContent(
                     title: "Success",
                     message: "inverter_charge_schedule_settings_saved"
                 )
             } catch {
+                self.state = .inactive
                 alertContent = AlertContent(title: "error_title", message: LocalizedStringKey(stringLiteral: error.localizedDescription))
             }
         }
