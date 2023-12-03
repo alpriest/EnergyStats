@@ -24,7 +24,7 @@ struct ScheduleView: View {
             }
         }
         .task { viewModel.load() }
-        .navigationTitle("Inverter Schedule")
+        .navigationTitle("\(viewModel.deviceName) Schedule")
         .navigationBarTitleDisplayMode(.inline)
         .loadable($viewModel.state, retry: { viewModel.load() })
         .alert(alertContent: $viewModel.alertContent)
@@ -37,12 +37,15 @@ struct ScheduleView: View {
                     HStack {
                         Text(schedule.name)
                             .font(.title2)
-                            .padding(.bottom)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+
+                        Spacer()
 
                         Toggle(isOn: $viewModel.enabled, label: {
                             Text("Enabled")
                         }).labelsHidden()
                     }
+                    .padding(.bottom)
 
                     TimePeriodBarView(phases: schedule.phases)
                         .padding(.bottom, 22)

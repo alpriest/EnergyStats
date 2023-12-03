@@ -17,10 +17,13 @@ class ScheduleViewModel: ObservableObject {
     @Published var alertContent: AlertContent?
     @Published var modes: [SchedulerModeResponse] = []
     @Published var enabled: Bool = false
+    @Published var deviceName: String = ""
 
     init(networking: FoxESSNetworking, config: ConfigManaging) {
         self.networking = networking
         self.config = config
+
+        deviceName = config.currentDevice.value?.deviceDisplayName ?? "Unknown device"
     }
 
     func load() {

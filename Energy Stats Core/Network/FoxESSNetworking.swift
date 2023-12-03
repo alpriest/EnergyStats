@@ -114,8 +114,7 @@ public class Network: FoxESSNetworking {
 
     public func fetchSchedule(deviceSN: String) async throws -> ScheduleListResponse {
         var request = append(queryItems: [URLQueryItem(name: "deviceSN", value: deviceSN)], to: URL.getSchedule)
-        request.setValue("en", forHTTPHeaderField: "lang") // TODO: Localise
-        request.setValue("Europe/London", forHTTPHeaderField: "timezone") // TODO: Localise
+        addLocalisedHeaders(to: &request)
 
         let result: (ScheduleListResponse, Data) = try await fetch(request)
         return result.0
@@ -123,8 +122,7 @@ public class Network: FoxESSNetworking {
 
     public func fetchScheduleModes(deviceID: String) async throws -> [SchedulerModeResponse] {
         var request = append(queryItems: [URLQueryItem(name: "deviceID", value: deviceID)], to: URL.schedulerModes)
-        request.setValue("en", forHTTPHeaderField: "lang") // TODO: Localise
-        request.setValue("Europe/London", forHTTPHeaderField: "timezone") // TODO: Localise
+        addLocalisedHeaders(to: &request)
 
         let result: (SchedulerModesResponse, Data) = try await fetch(request)
         return result.0.modes
@@ -132,8 +130,7 @@ public class Network: FoxESSNetworking {
 
     public func fetchSchedulerFlag(deviceSN: String) async throws -> SchedulerFlagResponse {
         var request = append(queryItems: [URLQueryItem(name: "deviceSN", value: deviceSN)], to: URL.getSchedulerFlag)
-        request.setValue("en", forHTTPHeaderField: "lang") // TODO: Localise
-        request.setValue("Europe/London", forHTTPHeaderField: "timezone") // TODO: Localise
+        addLocalisedHeaders(to: &request)
 
         let result: (SchedulerFlagResponse, Data) = try await fetch(request)
         return result.0
@@ -357,7 +354,7 @@ private extension Network {
         errorMessages[String(errno)] ?? "Unknown"
     }
 
-    func addHeaders(to request: inout URLRequest) {
+    private func addHeaders(to request: inout URLRequest) {
         if let token {
             request.setValue(token, forHTTPHeaderField: "token")
         }
@@ -366,6 +363,20 @@ private extension Network {
         request.setValue("https://www.foxesscloud.com/bus/device/inverterDetail?id=xyz&flowType=1&status=1&hasPV=true&hasBattery=true", forHTTPHeaderField: "Referrer")
         request.setValue("en-US;q=0.9,en;q=0.8,de;q=0.7,nl;q=0.6", forHTTPHeaderField: "Accept-Language")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    }
+
+    private func addLocalisedHeaders(to request: inout URLRequest) {
+        request.setValue(languageCode, forHTTPHeaderField: "lang")
+        request.setValue(timezone, forHTTPHeaderField: "timezone")
+    }
+
+    private var languageCode: String {
+        guard let languageCode = Locale.preferredLanguages.first else { return "en" }
+        return languageCode.split(separator: "-").first.map(String.init) ?? "en"
+    }
+
+    private var timezone: String {
+        TimeZone.current.identifier
     }
 }
 
