@@ -3851,6 +3851,7 @@
       }
     },
     "editor %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -3968,6 +3969,9 @@
           }
         }
       }
+    },
+    "Enabled" : {
+
     },
     "End" : {
       "localizations" : {
@@ -5764,6 +5768,9 @@
     "Inverter Schedule" : {
 
     },
+    "inverter_charge_schedule_settings_saved" : {
+
+    },
     "inverter_settings_saved" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -6715,6 +6722,9 @@
           }
         }
       }
+    },
+    "No schedule to save." : {
+
     },
     "no_battery_charge" : {
       "extractionState" : "manual",
@@ -10338,6 +10348,9 @@
           }
         }
       }
+    },
+    "Some of the phases overlap, please adjust and try again." : {
+
     },
     "Start" : {
       "localizations" : {

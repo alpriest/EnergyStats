@@ -23,6 +23,9 @@ public class DemoNetworking: FoxESSNetworking {
         // Assume mock credentials are valid
     }
 
+    public func saveSchedule(deviceSN: String) async throws {
+    }
+
     public func fetchSchedule(deviceSN: String) async throws -> ScheduleListResponse {
         ScheduleListResponse(
             data: [ScheduleMetadataResponse(templateName: "", enable: true, templateID: "")],

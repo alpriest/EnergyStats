@@ -51,7 +51,29 @@ class ScheduleViewModel: ObservableObject {
         }
     }
 
-    func save() {}
+    func save() {
+        guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
+        guard let schedule else {
+            alertContent = AlertContent(title: "error_title", message: "No schedule to save.")
+            return
+        }
+        guard isValid() else {
+            alertContent = AlertContent(title: "error_title", message: "Some of the phases overlap, please adjust and try again.")
+            return
+        }
+
+        Task { @MainActor [self] in
+            do {
+                try await networking.saveSchedule(deviceSN: deviceSN)
+                alertContent = AlertContent(
+                    title: "Success",
+                    message: "inverter_charge_schedule_settings_saved"
+                )
+            } catch {
+                alertContent = AlertContent(title: "error_title", message: LocalizedStringKey(stringLiteral: error.localizedDescription))
+            }
+        }
+    }
 
     func addNewPhase() {
         guard let schedule else { return }
@@ -94,6 +116,29 @@ class ScheduleViewModel: ObservableObject {
     }
 }
 
+private extension ScheduleViewModel {
+    func isValid() -> Bool {
+        guard let schedule else { return false }
+        for (index, phase) in schedule.phases.enumerated() {
+            let phaseStart = phase.start.toMinutes()
+            let phaseEnd = phase.end.toMinutes()
+
+            // Check for overlap with other phases
+            for otherPhase in schedule.phases[(index + 1)...] {
+                let otherStart = otherPhase.start.toMinutes()
+                let otherEnd = otherPhase.end.toMinutes()
+
+                // Check if the time periods overlap
+                if phaseStart < otherEnd && otherStart < phaseEnd {
+                    return false
+                }
+            }
+        }
+
+        return true
+    }
+}
+
 private extension SchedulePhaseResponse {
     func toSchedulePhase(workModes: [SchedulerModeResponse]) -> SchedulePhase? {
         SchedulePhase(
@@ -110,7 +155,7 @@ private extension SchedulePhaseResponse {
 
 private extension Schedule {
     init(schedule: ScheduleListResponse, workModes: [SchedulerModeResponse]) {
-        let phases = schedule.pollcy.compactMap { $0.toSchedulePhase(workModes: workModes)}
+        let phases = schedule.pollcy.compactMap { $0.toSchedulePhase(workModes: workModes) }
 
         self.init(
             name: nil,

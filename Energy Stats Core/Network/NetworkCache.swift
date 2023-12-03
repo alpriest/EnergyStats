@@ -39,6 +39,10 @@ public class NetworkCache: FoxESSNetworking {
         try await network.verifyCredentials(username: username, hashedPassword: hashedPassword)
     }
 
+    public func saveSchedule(deviceSN: String) async throws {
+        try await network.saveSchedule(deviceSN: deviceSN)
+    }
+
     public func fetchSchedule(deviceSN: String) async throws -> ScheduleListResponse {
         try await network.fetchSchedule(deviceSN: deviceSN)
     }

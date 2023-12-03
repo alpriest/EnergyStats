@@ -59,6 +59,10 @@ public struct Time: Codable, Equatable, Comparable {
 
         return "\(hour):\(minute)"
     }
+
+    public func toMinutes() -> Int {
+        return hour * 60 + minute
+    }
 }
 
 public struct SetBatteryTimesRequest: Encodable {
