@@ -31,7 +31,7 @@ public struct SchedulerModeResponse: Decodable, Hashable {
 public struct ScheduleListResponse: Decodable {
     public let data: [ScheduleMetadataResponse]
     public let enable: Bool
-    public let pollcy: [SchedulePhaseResponse]
+    public let pollcy: [SchedulePollcy]
 }
 
 public struct ScheduleMetadataResponse: Decodable {
@@ -40,14 +40,18 @@ public struct ScheduleMetadataResponse: Decodable {
     public let templateID: String
 }
 
-public struct SchedulePhaseResponse: Decodable {
-    public let fdpwr: Int
+public struct SchedulePollcy: Codable {
+    public let startH: Int
     public let endH: Int
+    public let startM: Int
+    public let endM: Int
+    public let fdpwr: Int
     public let workMode: String
     public let fdsoc: Int
-    public let soc: Int
-    public let startM: Int
     public let minsocongrid: Int
-    public let startH: Int
-    public let endM: Int
+}
+
+public struct ScheduleSaveRequest: Encodable {
+    public let pollcy: [SchedulePollcy]
+    public let deviceSN: String
 }

@@ -29,7 +29,7 @@ private extension URL {
     static var getSchedulerFlag = URL(string: "https://www.foxesscloud.com/generic/v0/device/scheduler/get/flag")!
     static var schedulerModes = URL(string: "https://www.foxesscloud.com/generic/v0/device/scheduler/modes/get")!
     static var getSchedule = URL(string: "https://www.foxesscloud.com/generic/v0/device/scheduler/list")!
-    static var saveSchedule = URL(string: "")!
+    static var saveSchedule = URL(string: "https://www.foxesscloud.com/generic/v0/device/scheduler/enable")!
 }
 
 public protocol FoxESSNetworking {
@@ -109,7 +109,11 @@ public class Network: FoxESSNetworking {
     }
 
     public func saveSchedule(deviceSN: String, schedule: Schedule) async throws {
-        // TODO: Write implementation
+        var request = URLRequest(url: URL.saveSchedule)
+        request.httpMethod = "POST"
+        request.httpBody = try! JSONEncoder().encode(ScheduleSaveRequest(pollcy: schedule.phases.map { $0.toPollcy() }, deviceSN: deviceSN))
+
+        let _: (String, Data) = try await fetch(request)
     }
 
     public func fetchSchedule(deviceSN: String) async throws -> ScheduleListResponse {

@@ -142,7 +142,7 @@ private extension ScheduleViewModel {
     }
 }
 
-private extension SchedulePhaseResponse {
+private extension SchedulePollcy {
     func toSchedulePhase(workModes: [SchedulerModeResponse]) -> SchedulePhase? {
         SchedulePhase(
             start: Time(hour: startH, minute: startM),
@@ -150,7 +150,7 @@ private extension SchedulePhaseResponse {
             mode: workModes.first { $0.key == workMode },
             forceDischargePower: fdpwr,
             forceDischargeSOC: fdsoc,
-            batterySOC: soc,
+            batterySOC: minsocongrid,
             color: Color.scheduleColor(named: workMode)
         )
     }

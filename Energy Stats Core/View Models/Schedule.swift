@@ -57,4 +57,17 @@ public struct SchedulePhase: Identifiable {
     private func minutesAfterMidnight(_ time: Time) -> Int {
         (time.hour * 60) + time.minute
     }
+
+    func toPollcy() -> SchedulePollcy {
+        SchedulePollcy(
+            startH: start.hour,
+            endH: end.hour,
+            startM: start.minute,
+            endM: end.minute,
+            fdpwr: forceDischargePower,
+            workMode: mode.key,
+            fdsoc: forceDischargeSOC,
+            minsocongrid: batterySOC
+        )
+    }
 }
