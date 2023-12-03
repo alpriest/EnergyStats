@@ -34,22 +34,21 @@ struct ScheduleView: View {
         Form {
             Section {
                 VStack(alignment: .leading) {
-                    HStack {
-                        Text(schedule.name)
-                            .font(.title2)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-
-                        Spacer()
-
-                        Toggle(isOn: $viewModel.enabled, label: {
-                            Text("Enabled")
-                        }).labelsHidden()
-                    }
-                    .padding(.bottom)
+                    Text(schedule.name)
+                        .font(.title2)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.bottom)
 
                     TimePeriodBarView(phases: schedule.phases)
                         .padding(.bottom, 22)
                 }
+            }
+
+            if schedule.phases.count == 0 {
+                Section {}
+                    footer: {
+                        Text("You have no time periods defined.")
+                    }
             }
 
             ForEach(schedule.phases) { phase in
@@ -81,9 +80,15 @@ struct ScheduleView: View {
             .frame(maxWidth: .infinity)
 
             Button {
-                viewModel.addNewPhase()
+                viewModel.addNewTimePeriod()
             } label: {
-                Text("Add new phase")
+                Text("Add new time period")
+            }
+
+            Section {
+                Button("Delete schedule", role: .destructive) {
+                    //                presentConfirmation = true
+                }
             }
         }
     }

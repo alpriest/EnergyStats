@@ -61,13 +61,13 @@ class ScheduleViewModel: ObservableObject {
             return
         }
         guard isValid() else {
-            alertContent = AlertContent(title: "error_title", message: "Some of the phases overlap, please adjust and try again.")
+            alertContent = AlertContent(title: "error_title", message: "overlapping_time_periods")
             return
         }
 
         Task { @MainActor [self] in
             do {
-                try await networking.saveSchedule(deviceSN: deviceSN)
+                try await networking.saveSchedule(deviceSN: deviceSN, schedule: schedule)
                 alertContent = AlertContent(
                     title: "Success",
                     message: "inverter_charge_schedule_settings_saved"
@@ -78,7 +78,7 @@ class ScheduleViewModel: ObservableObject {
         }
     }
 
-    func addNewPhase() {
+    func addNewTimePeriod() {
         guard let schedule else { return }
         guard let mode = modes.first else { return }
 

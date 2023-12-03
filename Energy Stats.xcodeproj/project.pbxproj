@@ -153,6 +153,8 @@
 		418EB4872ACC019A0021B87A /* FinancialsSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418EB4862ACC019A0021B87A /* FinancialsSettingsViewModel.swift */; };
 		418EB4892ACC10220021B87A /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 418EB4882ACC10220021B87A /* Localizable.xcstrings */; };
 		418EEEB52916843A006A8290 /* View+If.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418EEEB42916843A006A8290 /* View+If.swift */; };
+		4190921D2B1D253D0017CB65 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4190921C2B1D253D0017CB65 /* Schedule.swift */; };
+		4190921F2B1D25890017CB65 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4190921E2B1D25890017CB65 /* Time.swift */; };
 		41923E3C2916B8A800D1A8C5 /* battery-soc-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41923E3B2916B8A800D1A8C5 /* battery-soc-success.json */; };
 		41923E3E2916BC6F00D1A8C5 /* ParametersGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41923E3D2916BC6F00D1A8C5 /* ParametersGraphView.swift */; };
 		41923E422916BECC00D1A8C5 /* ParametersGraphTabViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41923E412916BECC00D1A8C5 /* ParametersGraphTabViewTests.swift */; };
@@ -485,6 +487,8 @@
 		418EB4862ACC019A0021B87A /* FinancialsSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancialsSettingsViewModel.swift; sourceTree = "<group>"; };
 		418EB4882ACC10220021B87A /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		418EEEB42916843A006A8290 /* View+If.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+If.swift"; sourceTree = "<group>"; };
+		4190921C2B1D253D0017CB65 /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
+		4190921E2B1D25890017CB65 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		41923E3B2916B8A800D1A8C5 /* battery-soc-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "battery-soc-success.json"; sourceTree = "<group>"; };
 		41923E3D2916BC6F00D1A8C5 /* ParametersGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersGraphView.swift; sourceTree = "<group>"; };
 		41923E412916BECC00D1A8C5 /* ParametersGraphTabViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersGraphTabViewTests.swift; sourceTree = "<group>"; };
@@ -698,6 +702,7 @@
 				41EDDF6B28CD2A630092C662 /* HomePowerFlowViewModel.swift */,
 				418240772A9A33E300101064 /* TotalsViewModel.swift */,
 				41CA35722AA8C10900D45734 /* EarningsViewModel.swift */,
+				4190921C2B1D253D0017CB65 /* Schedule.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -883,6 +888,7 @@
 				4192F99A2A8678DB0035DAB8 /* PagedDataLoggerListResponse.swift */,
 				41D8402C2AB2E0DE00769E81 /* ErrorMessagesResponse.swift */,
 				418C09222B18A9E300183603 /* SchedulerFlagResponse.swift */,
+				4190921E2B1D25890017CB65 /* Time.swift */,
 			);
 			path = NetworkModels;
 			sourceTree = "<group>";
@@ -1619,6 +1625,7 @@
 				4103D1DA29DB6C6D001B0BC8 /* DeviceFirmwareVersion.swift in Sources */,
 				41DCF5442B06CBD40010843F /* Date.swift in Sources */,
 				414D7A332AC989030083923F /* FinancialModel.swift in Sources */,
+				4190921D2B1D253D0017CB65 /* Schedule.swift in Sources */,
 				416AE4482A812876003D0122 /* WorkMode.swift in Sources */,
 				4162BC2E2A09773D00DFEDC1 /* EarningsResponse.swift in Sources */,
 				41A95BA129DB3F7E00A35169 /* PylonView.swift in Sources */,
@@ -1659,6 +1666,7 @@
 				419576172AC2F29600EB7362 /* BatteryWidgetState.swift in Sources */,
 				4103D1DF29DB6C8C001B0BC8 /* DemoNetworking.swift in Sources */,
 				41CB714A2A3B1B6C00199415 /* StyleGuide.swift in Sources */,
+				4190921F2B1D25890017CB65 /* Time.swift in Sources */,
 				412A26882AC07FC800F61456 /* BatteryCapacityCalculator.swift in Sources */,
 				41E165B72B0BAD7400B17590 /* UserDefaultsConfig.swift in Sources */,
 				4103D1D329DB6C51001B0BC8 /* BatteryResponse.swift in Sources */,

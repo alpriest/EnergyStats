@@ -53,7 +53,7 @@ public protocol FoxESSNetworking {
     func fetchSchedulerFlag(deviceSN: String) async throws -> SchedulerFlagResponse
     func fetchScheduleModes(deviceID: String) async throws -> [SchedulerModeResponse]
     func fetchSchedule(deviceSN: String) async throws -> ScheduleListResponse
-    func saveSchedule(deviceSN: String) async throws
+    func saveSchedule(deviceSN: String, schedule: Schedule) async throws
 }
 
 public class Network: FoxESSNetworking {
@@ -108,7 +108,7 @@ public class Network: FoxESSNetworking {
         return response.0.token
     }
 
-    public func saveSchedule(deviceSN: String) async throws {
+    public func saveSchedule(deviceSN: String, schedule: Schedule) async throws {
         // TODO: Write implementation
     }
 

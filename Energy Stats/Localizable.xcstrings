@@ -309,6 +309,9 @@
         }
       }
     },
+    "%@ Schedule" : {
+
+    },
     "°C" : {
       "localizations" : {
         "de" : {
@@ -1385,7 +1388,7 @@
         }
       }
     },
-    "Add new phase" : {
+    "Add new time period" : {
 
     },
     "All" : {
@@ -3540,6 +3543,9 @@
     "Delete phase" : {
 
     },
+    "Delete schedule" : {
+
+    },
     "demo" : {
       "localizations" : {
         "de" : {
@@ -3969,9 +3975,6 @@
           }
         }
       }
-    },
-    "Enabled" : {
-
     },
     "End" : {
       "localizations" : {
@@ -5765,9 +5768,6 @@
         }
       }
     },
-    "Inverter Schedule" : {
-
-    },
     "inverter_charge_schedule_settings_saved" : {
 
     },
@@ -7033,6 +7033,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wyjście "
+          }
+        }
+      }
+    },
+    "overlapping_time_periods" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Some of the time periods overlap, please adjust and try again."
           }
         }
       }
@@ -10349,9 +10359,6 @@
         }
       }
     },
-    "Some of the phases overlap, please adjust and try again." : {
-
-    },
     "Start" : {
       "localizations" : {
         "de" : {
@@ -11470,6 +11477,9 @@
           }
         }
       }
+    },
+    "You have no time periods defined." : {
+
     },
     "You've hit the server rate limit. Please try later." : {
       "extractionState" : "manual",

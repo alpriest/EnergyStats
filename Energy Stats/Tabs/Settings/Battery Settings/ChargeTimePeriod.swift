@@ -47,30 +47,3 @@ struct ChargeTimePeriod: Equatable {
             (thisPeriod.startTime.hour == otherPeriod.endTime.hour && thisPeriod.startTime.minute >= otherPeriod.endTime.minute))
     }
 }
-
-extension Date {
-    static func zero() -> Date {
-        guard let result = Calendar.current.date(bySetting: .hour, value: 0, of: .now) else { return .now }
-        return Calendar.current.date(bySetting: .minute, value: 0, of: result) ?? .now
-    }
-
-    static func fromTime(_ time: Time) -> Date {
-        var components = DateComponents()
-        components.hour = time.hour
-        components.minute = time.minute
-        return Calendar.current.date(from: components) ?? .now
-    }
-
-    func toTime() -> Time {
-        let components = Calendar.current.dateComponents([.hour, .minute], from: self)
-
-        return Time(hour: components.hour ?? 0,
-                    minute: components.minute ?? 0)
-    }
-}
-
-extension Time {
-    static func zero() -> Time {
-        Time(hour: 0, minute: 0)
-    }
-}

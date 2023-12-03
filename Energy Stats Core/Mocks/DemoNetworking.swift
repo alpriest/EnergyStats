@@ -23,7 +23,7 @@ public class DemoNetworking: FoxESSNetworking {
         // Assume mock credentials are valid
     }
 
-    public func saveSchedule(deviceSN: String) async throws {
+    public func saveSchedule(deviceSN: String, schedule: Schedule) async throws {
     }
 
     public func fetchSchedule(deviceSN: String) async throws -> ScheduleListResponse {
@@ -31,8 +31,8 @@ public class DemoNetworking: FoxESSNetworking {
             data: [ScheduleMetadataResponse(templateName: "", enable: true, templateID: "")],
             enable: true,
             pollcy: [
-                SchedulePhaseResponse(fdpwr: 0, endH: 17, workMode: "ForceCharge", fdsoc: 100, soc: 100, startM: 0, minsocongrid: 100, startH: 15, endM: 0),
-                SchedulePhaseResponse(fdpwr: 3500, endH: 18, workMode: "ForceDischarge", fdsoc: 20, soc: 20, startM: 0, minsocongrid: 20, startH: 17, endM: 30)
+//                SchedulePhaseResponse(fdpwr: 0, endH: 17, workMode: "ForceCharge", fdsoc: 100, soc: 100, startM: 0, minsocongrid: 100, startH: 15, endM: 0),
+//                SchedulePhaseResponse(fdpwr: 3500, endH: 18, workMode: "ForceDischarge", fdsoc: 20, soc: 20, startM: 0, minsocongrid: 20, startH: 17, endM: 30)
             ]
         )
     }
