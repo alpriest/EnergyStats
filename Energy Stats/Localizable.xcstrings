@@ -5769,7 +5769,14 @@
       }
     },
     "inverter_charge_schedule_settings_saved" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your inverter schedule settings were saved. Please be aware that any battery charge schedule you had will have been deleted."
+          }
+        }
+      }
     },
     "inverter_settings_saved" : {
       "extractionState" : "manual",
