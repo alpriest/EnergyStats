@@ -10,13 +10,28 @@ import SwiftUI
 
 struct ScheduleTemplateListView: View {
     @StateObject var viewModel: ScheduleTemplateListViewModel
+    @State private var selectedTemplateID: String?
 
     init(networking: FoxESSNetworking, config: ConfigManaging) {
         _viewModel = StateObject(wrappedValue: ScheduleTemplateListViewModel(networking: networking, config: config))
     }
 
     var body: some View {
-        Text("Hello, World!")
+        Form {
+            Section {
+                Picker("Template", selection: $selectedTemplateID) {
+                    Text("Choose").tag(nil as String?)
+
+                    ForEach(viewModel.templates) {
+                        Text($0.name)
+                            .tag($0.id as String?)
+                    }
+                }
+            } header: {
+                Text("")
+            }
+        }
+            .onAppear { Task { await viewModel.load() } }
     }
 }
 

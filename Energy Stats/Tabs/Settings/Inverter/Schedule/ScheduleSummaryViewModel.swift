@@ -96,7 +96,7 @@ class ScheduleSummaryViewModel: ObservableObject {
     }
 }
 
-private extension ScheduleTemplateResponse {
+extension ScheduleTemplateResponse {
     func toScheduleTemplate() -> ScheduleTemplate? {
         guard !templateID.isEmpty else { return nil }
 

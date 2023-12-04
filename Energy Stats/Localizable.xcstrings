@@ -2604,6 +2604,9 @@
         }
       }
     },
+    "Choose" : {
+
+    },
     "Choose date" : {
       "localizations" : {
         "de" : {
@@ -5329,9 +5332,6 @@
           }
         }
       }
-    },
-    "Hello, World!" : {
-
     },
     "Hide graph" : {
       "localizations" : {
@@ -10642,6 +10642,9 @@
           }
         }
       }
+    },
+    "Template" : {
+
     },
     "Templates" : {
 

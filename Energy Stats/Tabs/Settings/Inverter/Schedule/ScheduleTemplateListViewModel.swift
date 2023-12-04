@@ -11,10 +11,22 @@ import Foundation
 class ScheduleTemplateListViewModel: ObservableObject {
     let networking: FoxESSNetworking
     let config: ConfigManaging
+    @Published var templates: [ScheduleTemplate] = []
+    @Published var state: LoadState = .inactive
 
     init(networking: FoxESSNetworking, config: ConfigManaging) {
         self.networking = networking
         self.config = config
+    }
+
+    @MainActor
+    func load() async {
+        do {
+            let templatesResponse = try await networking.fetchScheduleTemplates()
+            self.templates = templatesResponse.data.compactMap { $0.toScheduleTemplate() }
+        } catch {
+            state = LoadState.error(error, error.localizedDescription)
+        }
     }
 
 //    @MainActor
