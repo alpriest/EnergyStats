@@ -28,7 +28,7 @@ struct InverterSettingsView: View {
             }
 
             NavigationLink("Configure Schedule") {
-                ScheduleView(networking: networking, config: configManager)
+                ScheduleSummaryView(networking: networking, config: configManager)
             }
 
             Toggle(isOn: $showInverterTemperature) {

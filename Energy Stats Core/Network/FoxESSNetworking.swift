@@ -31,6 +31,8 @@ private extension URL {
     static var getSchedule = URL(string: "https://www.foxesscloud.com/generic/v0/device/scheduler/list")!
     static var saveSchedule = URL(string: "https://www.foxesscloud.com/generic/v0/device/scheduler/enable")!
     static var deleteSchedule = URL(string: "https://www.foxesscloud.com/generic/v0/device/scheduler/disable")!
+    static var createScheduleTemplate = URL(string: "https://www.foxesscloud.com/generic/v0/device/scheduler/create")!
+    static var fetchScheduleTemplates = URL(string: "https://www.foxesscloud.com/generic/v0/device/scheduler/edit/list?templateType=2")!
 }
 
 public protocol FoxESSNetworking {
@@ -51,11 +53,15 @@ public protocol FoxESSNetworking {
     func setWorkMode(deviceID: String, workMode: InverterWorkMode) async throws
     func fetchDataLoggers() async throws -> PagedDataLoggerListResponse
     func fetchErrorMessages() async
+
     func fetchSchedulerFlag(deviceSN: String) async throws -> SchedulerFlagResponse
     func fetchScheduleModes(deviceID: String) async throws -> [SchedulerModeResponse]
     func fetchSchedule(deviceSN: String) async throws -> ScheduleListResponse
     func saveSchedule(deviceSN: String, schedule: Schedule) async throws
     func deleteSchedule(deviceSN: String) async throws
+    func createScheduleTemplate(name: String, description: String) async throws
+    func fetchScheduleTemplates() async throws -> ScheduleTemplateListResponse
+    func enableScheduleTemplate(deviceSN: String, templateID: String) async throws
 }
 
 public class Network: FoxESSNetworking {
@@ -110,6 +116,40 @@ public class Network: FoxESSNetworking {
         return response.0.token
     }
 
+    public func enableScheduleTemplate(deviceSN: String, templateID: String) async throws {
+        var request = URLRequest(url: URL.saveSchedule)
+        request.httpMethod = "POST"
+        request.httpBody = try! JSONEncoder().encode(ScheduleSaveRequest(pollcy: nil, templateID: templateID, deviceSN: deviceSN))
+        addLocalisedHeaders(to: &request)
+
+        do {
+            let _: (String, Data) = try await fetch(request)
+        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
+            // Ignore
+        }
+    }
+
+    public func fetchScheduleTemplates() async throws -> ScheduleTemplateListResponse{
+        var request = URLRequest(url: URL.fetchScheduleTemplates)
+        addLocalisedHeaders(to: &request)
+
+        let result: (ScheduleTemplateListResponse, Data) = try await fetch(request)
+        return result.0
+    }
+
+    public func createScheduleTemplate(name: String, description: String) async throws {
+        var request = URLRequest(url: URL.createScheduleTemplate)
+        request.httpMethod = "POST"
+        request.httpBody = try! JSONEncoder().encode(ScheduleTemplateCreateRequest(templateName: name, content: description))
+        addLocalisedHeaders(to: &request)
+
+        do {
+            let _: (String, Data) = try await fetch(request)
+        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
+            // Ignore
+        }
+    }
+
     public func deleteSchedule(deviceSN: String) async throws {
         var request = append(queryItems: [URLQueryItem(name: "deviceSN", value: deviceSN)], to: URL.deleteSchedule)
         addLocalisedHeaders(to: &request)
@@ -124,7 +164,7 @@ public class Network: FoxESSNetworking {
     public func saveSchedule(deviceSN: String, schedule: Schedule) async throws {
         var request = URLRequest(url: URL.saveSchedule)
         request.httpMethod = "POST"
-        request.httpBody = try! JSONEncoder().encode(ScheduleSaveRequest(pollcy: schedule.phases.map { $0.toPollcy() }, deviceSN: deviceSN))
+        request.httpBody = try! JSONEncoder().encode(ScheduleSaveRequest(pollcy: schedule.phases.map { $0.toPollcy() }, templateID: nil, deviceSN: deviceSN))
         addLocalisedHeaders(to: &request)
 
         do {

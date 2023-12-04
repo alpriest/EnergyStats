@@ -53,3 +53,58 @@ struct TimePeriodBarView: View {
 #Preview {
     TimePeriodBarView(phases: Schedule.preview().phases)
 }
+
+extension Schedule {
+    static func preview() -> Schedule {
+        Schedule(
+            name: nil,
+            phases: [
+                SchedulePhase(
+                    start: Time(
+                        hour: 1,
+                        minute: 00
+                    ),
+                    end: Time(
+                        hour: 2,
+                        minute: 00
+                    ),
+                    mode: SchedulerModeResponse(color: "#00ff00", name: "Force charge", key: "ForceDischarge"),
+                    forceDischargePower: 0,
+                    forceDischargeSOC: 100,
+                    batterySOC: 100,
+                    color: .linesNegative
+                )!,
+                SchedulePhase(
+                    start: Time(
+                        hour: 10,
+                        minute: 30
+                    ),
+                    end: Time(
+                        hour: 14,
+                        minute: 30
+                    ),
+                    mode: SchedulerModeResponse(color: "#ff0000", name: "Force discharge", key: "ForceDischarge"),
+                    forceDischargePower: 3500,
+                    forceDischargeSOC: 20,
+                    batterySOC: 20,
+                    color: .linesPositive
+                )!,
+                SchedulePhase(
+                    start: Time(
+                        hour: 19,
+                        minute: 30
+                    ),
+                    end: Time(
+                        hour: 23,
+                        minute: 30
+                    ),
+                    mode: SchedulerModeResponse(color: "#ff0000", name: "Force discharge", key: "ForceDischarge"),
+                    forceDischargePower: 3500,
+                    forceDischargeSOC: 20,
+                    batterySOC: 20,
+                    color: .linesPositive
+                )!
+            ]
+        )
+    }
+}

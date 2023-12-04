@@ -1,5 +1,5 @@
 //
-//  SchedulePhaseView.swift
+//  SchedulePhaseEditView.swift
 //  Energy Stats
 //
 //  Created by Alistair Priest on 30/11/2023.
@@ -8,7 +8,7 @@
 import Energy_Stats_Core
 import SwiftUI
 
-struct SchedulePhaseView: View {
+struct SchedulePhaseEditView: View {
     @State private var startTime: Date
     @State private var endTime: Date
     @State private var workMode: SchedulerModeResponse
@@ -166,7 +166,7 @@ struct SchedulePhaseView: View {
 }
 
 #Preview {
-    SchedulePhaseView(
+    SchedulePhaseEditView(
         modes: [
             SchedulerModeResponse(color: "#8065789B", name: "Force Discharge", key: "ForceDischarge"),
             SchedulerModeResponse(color: "#80F6BD16", name: "Back Up", key: "Backup"),

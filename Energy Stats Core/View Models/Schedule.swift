@@ -7,6 +7,18 @@
 
 import SwiftUI
 
+public struct ScheduleTemplate: Identifiable {
+    public let id: String
+    public let name: String
+    public let enabled: Bool
+
+    public init(id: String, name: String, enabled: Bool) {
+        self.id = id
+        self.name = name
+        self.enabled = enabled
+    }
+}
+
 public struct Schedule {
     public let name: String
     public let phases: [SchedulePhase]
@@ -61,8 +73,8 @@ public struct SchedulePhase: Identifiable {
     func toPollcy() -> SchedulePollcy {
         SchedulePollcy(
             startH: start.hour,
-            endH: end.hour,
             startM: start.minute,
+            endH: end.hour,
             endM: end.minute,
             fdpwr: forceDischargePower,
             workMode: mode.key,

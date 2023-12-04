@@ -40,6 +40,30 @@ public class NetworkFacade: FoxESSNetworking {
         }
     }
 
+    public func enableScheduleTemplate(deviceSN: String, templateID: String) async throws {
+        if isDemoUser {
+            try await fakeNetwork.enableScheduleTemplate(deviceSN: deviceSN, templateID: templateID)
+        } else {
+            try await network.enableScheduleTemplate(deviceSN: deviceSN, templateID: templateID)
+        }
+    }
+
+    public func fetchScheduleTemplates() async throws -> ScheduleTemplateListResponse {
+        if isDemoUser {
+            try await fakeNetwork.fetchScheduleTemplates()
+        } else {
+            try await network.fetchScheduleTemplates()
+        }
+    }
+
+    public func createScheduleTemplate(name: String, description: String) async throws {
+        if isDemoUser {
+            try await fakeNetwork.createScheduleTemplate(name: name, description: description)
+        } else {
+            try await network.createScheduleTemplate(name: name, description: description)
+        }
+    }
+
     public func deleteSchedule(deviceSN: String) async throws {
         if isDemoUser {
             try await fakeNetwork.deleteSchedule(deviceSN: deviceSN)

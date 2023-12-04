@@ -20,7 +20,8 @@ public extension Color {
         let mapping: [String: Color] = [
             "Feedin": Color.linesPositive,
             "ForceCharge": Color.linesNegative,
-            "ForceDischarge": Color.linesPositive
+            "ForceDischarge": Color.linesPositive,
+            "SelfUse": Color.paleGray
         ]
 
         return mapping[name] ?? Color.black

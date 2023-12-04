@@ -309,9 +309,6 @@
         }
       }
     },
-    "%@ Schedule" : {
-
-    },
     "°C" : {
       "localizations" : {
         "de" : {
@@ -1387,9 +1384,6 @@
           }
         }
       }
-    },
-    "Add new time period" : {
-
     },
     "All" : {
       "extractionState" : "manual",
@@ -3174,6 +3168,9 @@
         }
       }
     },
+    "Current Schedule" : {
+
+    },
     "Data Refresh frequency" : {
       "localizations" : {
         "de" : {
@@ -3541,9 +3538,6 @@
       }
     },
     "Delete phase" : {
-
-    },
-    "Delete schedule" : {
 
     },
     "demo" : {
@@ -3947,6 +3941,9 @@
           }
         }
       }
+    },
+    "Enable" : {
+
     },
     "Enable charge from grid" : {
       "localizations" : {
@@ -5333,6 +5330,9 @@
         }
       }
     },
+    "Hello, World!" : {
+
+    },
     "Hide graph" : {
       "localizations" : {
         "de" : {
@@ -6227,6 +6227,9 @@
           }
         }
       }
+    },
+    "Manage templates" : {
+
     },
     "medium_threshold" : {
       "localizations" : {
@@ -10640,6 +10643,9 @@
         }
       }
     },
+    "Templates" : {
+
+    },
     "Tests" : {
       "localizations" : {
         "de" : {
@@ -11299,6 +11305,9 @@
         }
       }
     },
+    "Work model" : {
+
+    },
     "Wrong credentials, try again" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -11487,6 +11496,9 @@
           }
         }
       }
+    },
+    "You don't have a schedule defined." : {
+
     },
     "You have no time periods defined." : {
 

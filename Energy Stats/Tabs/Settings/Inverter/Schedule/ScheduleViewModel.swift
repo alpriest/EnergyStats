@@ -16,7 +16,6 @@ class ScheduleViewModel: ObservableObject {
     @Published var state: LoadState = .inactive
     @Published var alertContent: AlertContent?
     @Published var modes: [SchedulerModeResponse] = []
-    @Published var enabled: Bool = false
     @Published var deviceName: String = ""
 
     init(networking: FoxESSNetworking, config: ConfigManaging) {
@@ -27,35 +26,35 @@ class ScheduleViewModel: ObservableObject {
     }
 
     func load() {
-        Task { @MainActor [self] in
-            guard
-                let deviceSN = config.currentDevice.value?.deviceSN,
-                let deviceID = config.currentDevice.value?.deviceID
-            else { return }
-            guard schedule == nil else { return }
-
-            self.state = .active(String(key: .loading))
-
-            do {
-                let flag = try await networking.fetchSchedulerFlag(deviceSN: deviceSN)
-                if flag.support {
-                    self.modes = try await networking.fetchScheduleModes(deviceID: deviceID)
-                    let scheduleResponse = try await networking.fetchSchedule(deviceSN: deviceSN)
-
-                    self.schedule = Schedule(schedule: scheduleResponse, workModes: self.modes)
-                    self.enabled = scheduleResponse.enable
-                    self.state = .inactive
-                } else {
-                    self.state = .inactive
-                    alertContent = AlertContent(
-                        title: "Not supported",
-                        message: "Schedules are not supported on this inverter."
-                    )
-                }
-            } catch {
-                self.state = LoadState.error(error, error.localizedDescription)
-            }
-        }
+//        Task { @MainActor [self] in
+//            guard
+//                let deviceSN = config.currentDevice.value?.deviceSN,
+//                let deviceID = config.currentDevice.value?.deviceID
+//            else { return }
+//            guard schedule == nil else { return }
+//
+//            self.state = .active(String(key: .loading))
+//
+//            do {
+//                let flag = try await networking.fetchSchedulerFlag(deviceSN: deviceSN)
+//                if flag.support {
+//                    self.modes = try await networking.fetchScheduleModes(deviceID: deviceID)
+//                    let scheduleResponse = try await networking.fetchSchedule(deviceSN: deviceSN)
+//
+//                    self.schedule = Schedule(schedule: scheduleResponse, workModes: self.modes)
+//                    self.enabled = scheduleResponse.enable
+//                    self.state = .inactive
+//                } else {
+//                    self.state = .inactive
+//                    alertContent = AlertContent(
+//                        title: "Not supported",
+//                        message: "Schedules are not supported on this inverter."
+//                    )
+//                }
+//            } catch {
+//                self.state = LoadState.error(error, error.localizedDescription)
+//            }
+//        }
     }
 
     func save() {
@@ -168,7 +167,7 @@ private extension ScheduleViewModel {
     }
 }
 
-private extension SchedulePollcy {
+extension SchedulePollcy {
     func toSchedulePhase(workModes: [SchedulerModeResponse]) -> SchedulePhase? {
         SchedulePhase(
             start: Time(hour: startH, minute: startM),

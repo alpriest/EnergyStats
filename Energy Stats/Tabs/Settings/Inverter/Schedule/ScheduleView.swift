@@ -1,181 +1,77 @@
 //
-//  StrategyView.swift
+//  ScheduleView.swift
 //  Energy Stats
 //
-//  Created by Alistair Priest on 29/11/2023.
+//  Created by Alistair Priest on 04/12/2023.
 //
 
 import Energy_Stats_Core
 import SwiftUI
 
 struct ScheduleView: View {
-    @StateObject var viewModel: ScheduleViewModel
-
-    init(networking: FoxESSNetworking, config: ConfigManaging) {
-        _viewModel = StateObject(wrappedValue: ScheduleViewModel(networking: networking, config: config))
-    }
+    let schedule: Schedule
+    let modes: [SchedulerModeResponse]
 
     var body: some View {
-        VStack(spacing: 0) {
-            if let schedule = viewModel.schedule {
-                loaded(schedule: schedule)
+        Section {
+            VStack(alignment: .leading) {
+                Text(schedule.name)
+                    .font(.title2)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.bottom)
 
-                BottomButtonsView { viewModel.save() }
+                TimePeriodBarView(phases: schedule.phases)
+                    .padding(.bottom, 22)
             }
         }
-        .task { viewModel.load() }
-        .navigationTitle("\(viewModel.deviceName) Schedule")
-        .navigationBarTitleDisplayMode(.inline)
-        .loadable($viewModel.state, retry: { viewModel.load() })
-        .alert(alertContent: $viewModel.alertContent)
-    }
 
-    private func loaded(schedule: Schedule) -> some View {
-        Form {
-            Section {
-                VStack(alignment: .leading) {
-                    Text(schedule.name)
-                        .font(.title2)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.bottom)
-
-                    TimePeriodBarView(phases: schedule.phases)
-                        .padding(.bottom, 22)
-                }
-            }
-
-            if schedule.phases.count == 0 {
-                Section {}
+        if schedule.phases.count == 0 {
+            Section {}
                     footer: {
-                        Text("You have no time periods defined.")
-                    }
-            }
+                    Text("You have no time periods defined.")
+                }
+        }
 
-            ForEach(schedule.phases) { phase in
-                NavigationLink {
-                    SchedulePhaseView(modes: viewModel.modes,
+        ForEach(schedule.phases) { phase in
+            NavigationLink {
+                SchedulePhaseEditView(modes: modes,
                                       phase: phase,
-                                      onChange: {
-                                          phase in
-                                          viewModel.updated(phase: phase)
+                                      onChange: { _ in
+//                                              viewModel.updated(phase: $0)
                                       },
-                                      onDelete: {
-                                          viewModel.deleted(id: $0)
+                                      onDelete: { _ in
+//                                              viewModel.deleted(id: $0)
                                       })
-                } label: {
-                    HStack {
-                        phase.color
-                            .frame(width: 5)
-                            .frame(maxHeight: .infinity)
-                            .padding(.vertical, 4)
+            } label: {
+                HStack {
+                    phase.color
+                        .frame(width: 5)
+                        .frame(maxHeight: .infinity)
+                        .padding(.vertical, 4)
 
-                        VStack(alignment: .leading) {
-                            (Text(phase.start.formatted) + Text(" - ") + Text(phase.end.formatted)).bold()
+                    VStack(alignment: .leading) {
+                        (Text(phase.start.formatted) + Text(" - ") + Text(phase.end.formatted)).bold()
 
-                            Text(phase.mode.name)
-                        }
+                        Text(phase.mode.name)
                     }
                 }
             }
-            .frame(maxWidth: .infinity)
-
-            Button {
-                viewModel.addNewTimePeriod()
-            } label: {
-                Text("Add new time period")
-            }
-
-            Section {
-                Button("Delete schedule", role: .destructive) {
-                    viewModel.deleteSchedule()
-                }
-            }
         }
-    }
-}
+        .frame(maxWidth: .infinity)
 
-struct Card<T: View>: View {
-    let content: () -> T
-
-    var body: some View {
-        VStack(alignment: .leading) {
-            content()
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
+//            Button {
+//                viewModel.addNewTimePeriod()
+//            } label: {
+//                Text("Add new time period")
+//            }
     }
 }
 
 #Preview {
-    NavigationView {
+    Form {
         ScheduleView(
-            networking: DemoNetworking(),
-            config: PreviewConfigManager()
+            schedule: Schedule(name: nil, phases: []),
+            modes: []
         )
-    }
-}
-
-extension Schedule {
-    static func preview() -> Schedule {
-        Schedule(
-            name: nil,
-            phases: [
-                SchedulePhase(
-                    start: Time(
-                        hour: 1,
-                        minute: 00
-                    ),
-                    end: Time(
-                        hour: 2,
-                        minute: 00
-                    ),
-                    mode: SchedulerModeResponse(color: "#00ff00", name: "Force charge", key: "ForceDischarge"),
-                    forceDischargePower: 0,
-                    forceDischargeSOC: 100,
-                    batterySOC: 100,
-                    color: .linesNegative
-                )!,
-                SchedulePhase(
-                    start: Time(
-                        hour: 10,
-                        minute: 30
-                    ),
-                    end: Time(
-                        hour: 14,
-                        minute: 30
-                    ),
-                    mode: SchedulerModeResponse(color: "#ff0000", name: "Force discharge", key: "ForceDischarge"),
-                    forceDischargePower: 3500,
-                    forceDischargeSOC: 20,
-                    batterySOC: 20,
-                    color: .linesPositive
-                )!,
-                SchedulePhase(
-                    start: Time(
-                        hour: 19,
-                        minute: 30
-                    ),
-                    end: Time(
-                        hour: 23,
-                        minute: 30
-                    ),
-                    mode: SchedulerModeResponse(color: "#ff0000", name: "Force discharge", key: "ForceDischarge"),
-                    forceDischargePower: 3500,
-                    forceDischargeSOC: 20,
-                    batterySOC: 20,
-                    color: .linesPositive
-                )!
-            ]
-        )
-    }
-}
-
-private extension Date {
-    func todayAt(hour: Int, minute: Int) -> Date {
-        let calendar = Calendar.current
-        var dateComponents = calendar.dateComponents([.year, .month, .day], from: self)
-        dateComponents.hour = hour
-        dateComponents.minute = minute
-        dateComponents.second = 0
-        return calendar.date(from: dateComponents)!
     }
 }
