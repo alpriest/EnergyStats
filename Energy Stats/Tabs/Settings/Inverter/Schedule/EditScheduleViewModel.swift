@@ -9,75 +9,43 @@ import Energy_Stats_Core
 import Foundation
 import SwiftUI
 
-class ScheduleViewModel: ObservableObject {
+class EditScheduleViewModel: ObservableObject {
     @Published var schedule: Schedule
     @Published var state: LoadState = .inactive
     @Published var alertContent: AlertContent?
     @Published var modes: [SchedulerModeResponse] = []
+    private let networking: FoxESSNetworking
+    private let config: ConfigManaging
 
-    init(schedule: Schedule, modes: [SchedulerModeResponse]) {
+    init(networking: FoxESSNetworking, config: ConfigManaging, schedule: Schedule, modes: [SchedulerModeResponse]) {
+        self.networking = networking
+        self.config = config
         self.schedule = schedule
         self.modes = modes
     }
 
-    func load() {
-//        Task { @MainActor [self] in
-//            guard
-//                let deviceSN = config.currentDevice.value?.deviceSN,
-//                let deviceID = config.currentDevice.value?.deviceID
-//            else { return }
-//            guard schedule == nil else { return }
-//
-//            self.state = .active(String(key: .loading))
-//
-//            do {
-//                let flag = try await networking.fetchSchedulerFlag(deviceSN: deviceSN)
-//                if flag.support {
-//                    self.modes = try await networking.fetchScheduleModes(deviceID: deviceID)
-//                    let scheduleResponse = try await networking.fetchSchedule(deviceSN: deviceSN)
-//
-//                    self.schedule = Schedule(schedule: scheduleResponse, workModes: self.modes)
-//                    self.enabled = scheduleResponse.enable
-//                    self.state = .inactive
-//                } else {
-//                    self.state = .inactive
-//                    alertContent = AlertContent(
-//                        title: "Not supported",
-//                        message: "Schedules are not supported on this inverter."
-//                    )
-//                }
-//            } catch {
-//                self.state = LoadState.error(error, error.localizedDescription)
-//            }
-//        }
-    }
+    func applyCurrentSchedule() {
+        guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
+        guard isValid() else {
+            alertContent = AlertContent(title: "error_title", message: "overlapping_time_periods")
+            return
+        }
 
-//    func save() {
-//        guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
-//        guard let schedule else {
-//            alertContent = AlertContent(title: "error_title", message: "No schedule to save.")
-//            return
-//        }
-//        guard isValid() else {
-//            alertContent = AlertContent(title: "error_title", message: "overlapping_time_periods")
-//            return
-//        }
-//
-//        Task { @MainActor [self] in
-//            do {
-//                self.state = .active(String(key: .saving))
-//                try await networking.saveSchedule(deviceSN: deviceSN, schedule: schedule)
-//                self.state = .inactive
-//                alertContent = AlertContent(
-//                    title: "Success",
-//                    message: "inverter_charge_schedule_settings_saved"
-//                )
-//            } catch {
-//                self.state = .inactive
-//                alertContent = AlertContent(title: "error_title", message: LocalizedStringKey(stringLiteral: error.localizedDescription))
-//            }
-//        }
-//    }
+        Task { @MainActor [self] in
+            do {
+                self.state = .active(String(key: .saving))
+                try await networking.saveSchedule(deviceSN: deviceSN, schedule: schedule)
+                self.state = .inactive
+                alertContent = AlertContent(
+                    title: "Success",
+                    message: "inverter_charge_schedule_settings_saved"
+                )
+            } catch {
+                self.state = .inactive
+                alertContent = AlertContent(title: "error_title", message: LocalizedStringKey(stringLiteral: error.localizedDescription))
+            }
+        }
+    }
 
 //    func deleteSchedule() {
 //        guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
@@ -98,48 +66,43 @@ class ScheduleViewModel: ObservableObject {
 //        }
 //    }
 
-//    func addNewTimePeriod() {
-//        guard let schedule else { return }
-//        guard let mode = modes.first else { return }
-//
-//        self.schedule = Schedule(
-//            name: schedule.name,
-//            phases: schedule.phases + [SchedulePhase(mode: mode)]
-//        )
-//    }
+    func addNewTimePeriod() {
+        guard let mode = modes.first else { return }
 
-//    func updated(phase updatedPhase: SchedulePhase) {
-//        guard let schedule else { return }
-//
-//        self.schedule = Schedule(
-//            name: schedule.name,
-//            phases: schedule.phases.map {
-//                if $0.id == updatedPhase.id {
-//                    return updatedPhase
-//                } else {
-//                    return $0
-//                }
-//            }
-//        )
-//    }
+        self.schedule = Schedule(
+            name: schedule.name,
+            phases: schedule.phases + [SchedulePhase(mode: mode)]
+        )
+    }
 
-//    func deleted(id: String) {
-//        guard let schedule else { return }
-//
-//        self.schedule = Schedule(
-//            name: schedule.name,
-//            phases: schedule.phases.compactMap {
-//                if $0.id == id {
-//                    return nil
-//                } else {
-//                    return $0
-//                }
-//            }
-//        )
-//    }
+    func updated(phase updatedPhase: SchedulePhase) {
+        self.schedule = Schedule(
+            name: schedule.name,
+            phases: schedule.phases.map {
+                if $0.id == updatedPhase.id {
+                    return updatedPhase
+                } else {
+                    return $0
+                }
+            }
+        )
+    }
+
+    func deleted(phase id: String) {
+        self.schedule = Schedule(
+            name: schedule.name,
+            phases: schedule.phases.compactMap {
+                if $0.id == id {
+                    return nil
+                } else {
+                    return $0
+                }
+            }
+        )
+    }
 }
 
-extension ScheduleViewModel {
+extension EditScheduleViewModel {
     func isValid() -> Bool {
         for (index, phase) in schedule.phases.enumerated() {
             let phaseStart = phase.start.toMinutes()

@@ -22,14 +22,26 @@ struct ScheduleSummaryView: View {
     var body: some View {
         VStack(spacing: 0) {
             Form {
-                Section {
-                    if let schedule = viewModel.schedule {
-                        ScheduleView(schedule: schedule, modes: viewModel.modes)
-                    } else {
-                        Text("You don't have a schedule defined.")
+                if let schedule = viewModel.schedule {
+                    Section {
+                        ScheduleView(schedule: schedule)
+                    } header: {
+                        Text("Current Schedule")
+                    } footer: {
+                        NavigationLink {
+                            EditScheduleView(
+                                networking: networking,
+                                config: config,
+                                schedule: schedule,
+                                modes: viewModel.modes
+                            )
+                        }
+                        label: {
+                            Text("Modify this schedule")
+                        }
                     }
-                } header: {
-                    Text("Current Schedule")
+                } else {
+                    Text("You don't have a schedule defined.")
                 }
 
                 Section {
@@ -40,13 +52,17 @@ struct ScheduleSummaryView: View {
                             Button {
                                 Task { await viewModel.enable(templateID: template.id) }
                             } label: {
-                                Text("Enable")
-                            }
+                                Text("Apply")
+                            }.buttonStyle(.borderless)
                         }
                     }
                 } header: {
                     Text("Templates")
                 } footer: {
+                    if viewModel.templates.count > 0 {
+                        Text("Choose from one of your template by tapping apply.")
+                    }
+
                     NavigationLink {
                         ScheduleTemplateListView(networking: networking, config: config)
                     } label: {

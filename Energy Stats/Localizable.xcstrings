@@ -1385,6 +1385,9 @@
         }
       }
     },
+    "Add time period" : {
+
+    },
     "All" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2637,6 +2640,9 @@
           }
         }
       }
+    },
+    "Choose from one of your template by tapping apply." : {
+
     },
     "Choose group to edit" : {
       "localizations" : {
@@ -3947,9 +3953,6 @@
           }
         }
       }
-    },
-    "Enable" : {
-
     },
     "Enable charge from grid" : {
       "localizations" : {
@@ -5772,7 +5775,6 @@
       }
     },
     "inverter_charge_schedule_settings_saved" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6549,6 +6551,9 @@
         }
       }
     },
+    "Modify this schedule" : {
+
+    },
     "month" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -7049,7 +7054,6 @@
       }
     },
     "overlapping_time_periods" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9150,6 +9154,9 @@
           }
         }
       }
+    },
+    "Save and activate schedule" : {
+
     },
     "Saving" : {
       "extractionState" : "manual",

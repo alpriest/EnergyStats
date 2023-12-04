@@ -104,8 +104,8 @@ struct SchedulePhaseEditView: View {
                 Button(role: .destructive) {
                     onDelete(id)
                 } label: {
-                    Text("Delete phase")
-                }
+                    Text("Delete time period")
+                }.buttonStyle(.borderless)
             }
         }
         .onChange(of: startTime) { _ in notify() }
@@ -167,13 +167,7 @@ struct SchedulePhaseEditView: View {
 
 #Preview {
     SchedulePhaseEditView(
-        modes: [
-            SchedulerModeResponse(color: "#8065789B", name: "Force Discharge", key: "ForceDischarge"),
-            SchedulerModeResponse(color: "#80F6BD16", name: "Back Up", key: "Backup"),
-            SchedulerModeResponse(color: "#805B8FF9", name: "Feed-in Priority", key: "Feedin"),
-            SchedulerModeResponse(color: "#80BBE9FB", name: "Force Charge", key: "ForceCharge"),
-            SchedulerModeResponse(color: "#8061DDAA", name: "Self-Use", key: "SelfUse")
-        ],
+        modes: SchedulerModeResponse.preview(),
         phase: SchedulePhase(
             start: Time(
                 hour: 19,
@@ -192,4 +186,16 @@ struct SchedulePhaseEditView: View {
         onChange: { print($0.id, " changed") },
         onDelete: { print($0, " deleted") }
     )
+}
+
+extension SchedulerModeResponse {
+    static func preview() -> [SchedulerModeResponse] {
+        [
+            SchedulerModeResponse(color: "#8065789B", name: "Force Discharge", key: "ForceDischarge"),
+            SchedulerModeResponse(color: "#80F6BD16", name: "Back Up", key: "Backup"),
+            SchedulerModeResponse(color: "#805B8FF9", name: "Feed-in Priority", key: "Feedin"),
+            SchedulerModeResponse(color: "#80BBE9FB", name: "Force Charge", key: "ForceCharge"),
+            SchedulerModeResponse(color: "#8061DDAA", name: "Self-Use", key: "SelfUse")
+        ]
+    }
 }

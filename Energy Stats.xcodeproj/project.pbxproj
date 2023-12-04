@@ -141,7 +141,7 @@
 		4185474C2A3B1025000128C7 /* SunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4162BC2F2A097C1300DFEDC1 /* SunView.swift */; };
 		418685D52AFE700100355B6D /* AnimatedNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418685D42AFE700100355B6D /* AnimatedNumber.swift */; };
 		418C091D2B17EC0E00183603 /* TimePeriodBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C091C2B17EC0E00183603 /* TimePeriodBarView.swift */; };
-		418C09212B18A98400183603 /* ScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C09202B18A98400183603 /* ScheduleViewModel.swift */; };
+		418C09212B18A98400183603 /* EditScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C09202B18A98400183603 /* EditScheduleViewModel.swift */; };
 		418C09232B18A9E300183603 /* SchedulerFlagResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C09222B18A9E300183603 /* SchedulerFlagResponse.swift */; };
 		418C09252B18FE9A00183603 /* SchedulePhaseEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C09242B18FE9A00183603 /* SchedulePhaseEditView.swift */; };
 		418C6E952AFAC3BF000DE35F /* SummaryTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C6E942AFAC3BF000DE35F /* SummaryTabView.swift */; };
@@ -157,7 +157,9 @@
 		419092232B1DC0070017CB65 /* ScheduleSummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419092222B1DC0070017CB65 /* ScheduleSummaryViewModel.swift */; };
 		419092262B1DDF870017CB65 /* ScheduleTemplateListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419092252B1DDF870017CB65 /* ScheduleTemplateListView.swift */; };
 		419092282B1DDFE60017CB65 /* ScheduleTemplateListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419092272B1DDFE60017CB65 /* ScheduleTemplateListViewModel.swift */; };
-		4190922A2B1DE3D90017CB65 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419092292B1DE3D90017CB65 /* ScheduleView.swift */; };
+		4190922A2B1DE3D90017CB65 /* EditScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419092292B1DE3D90017CB65 /* EditScheduleView.swift */; };
+		4190922C2B1E49210017CB65 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4190922B2B1E49210017CB65 /* ScheduleView.swift */; };
+		4190922E2B1E4B250017CB65 /* SchedulePhaseListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4190922D2B1E4B250017CB65 /* SchedulePhaseListItemView.swift */; };
 		41923E3C2916B8A800D1A8C5 /* battery-soc-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41923E3B2916B8A800D1A8C5 /* battery-soc-success.json */; };
 		41923E3E2916BC6F00D1A8C5 /* ParametersGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41923E3D2916BC6F00D1A8C5 /* ParametersGraphView.swift */; };
 		41923E422916BECC00D1A8C5 /* ParametersGraphTabViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41923E412916BECC00D1A8C5 /* ParametersGraphTabViewTests.swift */; };
@@ -478,7 +480,7 @@
 		4185FAB52A3B74E60082D53F /* BatteryStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryStatusView.swift; sourceTree = "<group>"; };
 		418685D42AFE700100355B6D /* AnimatedNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedNumber.swift; sourceTree = "<group>"; };
 		418C091C2B17EC0E00183603 /* TimePeriodBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePeriodBarView.swift; sourceTree = "<group>"; };
-		418C09202B18A98400183603 /* ScheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewModel.swift; sourceTree = "<group>"; };
+		418C09202B18A98400183603 /* EditScheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScheduleViewModel.swift; sourceTree = "<group>"; };
 		418C09222B18A9E300183603 /* SchedulerFlagResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulerFlagResponse.swift; sourceTree = "<group>"; };
 		418C09242B18FE9A00183603 /* SchedulePhaseEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePhaseEditView.swift; sourceTree = "<group>"; };
 		418C6E942AFAC3BF000DE35F /* SummaryTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTabView.swift; sourceTree = "<group>"; };
@@ -494,7 +496,9 @@
 		419092222B1DC0070017CB65 /* ScheduleSummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleSummaryViewModel.swift; sourceTree = "<group>"; };
 		419092252B1DDF870017CB65 /* ScheduleTemplateListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTemplateListView.swift; sourceTree = "<group>"; };
 		419092272B1DDFE60017CB65 /* ScheduleTemplateListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTemplateListViewModel.swift; sourceTree = "<group>"; };
-		419092292B1DE3D90017CB65 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
+		419092292B1DE3D90017CB65 /* EditScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScheduleView.swift; sourceTree = "<group>"; };
+		4190922B2B1E49210017CB65 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
+		4190922D2B1E4B250017CB65 /* SchedulePhaseListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePhaseListItemView.swift; sourceTree = "<group>"; };
 		41923E3B2916B8A800D1A8C5 /* battery-soc-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "battery-soc-success.json"; sourceTree = "<group>"; };
 		41923E3D2916BC6F00D1A8C5 /* ParametersGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersGraphView.swift; sourceTree = "<group>"; };
 		41923E412916BECC00D1A8C5 /* ParametersGraphTabViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersGraphTabViewTests.swift; sourceTree = "<group>"; };
@@ -998,8 +1002,10 @@
 				419092222B1DC0070017CB65 /* ScheduleSummaryViewModel.swift */,
 				419092252B1DDF870017CB65 /* ScheduleTemplateListView.swift */,
 				419092272B1DDFE60017CB65 /* ScheduleTemplateListViewModel.swift */,
-				419092292B1DE3D90017CB65 /* ScheduleView.swift */,
-				418C09202B18A98400183603 /* ScheduleViewModel.swift */,
+				419092292B1DE3D90017CB65 /* EditScheduleView.swift */,
+				418C09202B18A98400183603 /* EditScheduleViewModel.swift */,
+				4190922B2B1E49210017CB65 /* ScheduleView.swift */,
+				4190922D2B1E4B250017CB65 /* SchedulePhaseListItemView.swift */,
 			);
 			path = Schedule;
 			sourceTree = "<group>";
@@ -1515,6 +1521,7 @@
 			files = (
 				4107446C28CA57A9006D5D7D /* PowerFlowTabView.swift in Sources */,
 				419092262B1DDF870017CB65 /* ScheduleTemplateListView.swift in Sources */,
+				4190922E2B1E4B250017CB65 /* SchedulePhaseListItemView.swift in Sources */,
 				418C6E972AFAC7E4000DE35F /* SummaryTabViewModel.swift in Sources */,
 				411DF2742AFD404E00CEEB23 /* SolarForecastView.swift in Sources */,
 				4110290D2A71B713004018BB /* BatteryChargeScheduleSettingsView.swift in Sources */,
@@ -1563,7 +1570,7 @@
 				41009A752B03B13A009D853B /* SolarForecastViewModel.swift in Sources */,
 				41E4B31328DB77A3003F7F47 /* HomePowerView.swift in Sources */,
 				41E165B32B0A877100B17590 /* SolcastSettingsViewModel.swift in Sources */,
-				418C09212B18A98400183603 /* ScheduleViewModel.swift in Sources */,
+				418C09212B18A98400183603 /* EditScheduleViewModel.swift in Sources */,
 				41C249A52A77FC7400D8E9E7 /* FoxESSCloudStatusView.swift in Sources */,
 				41A25D3D28CA5CDF00315714 /* ParametersGraphTabView.swift in Sources */,
 				4140ECDA292D58D300992DD8 /* ParameterGraphVariable.swift in Sources */,
@@ -1596,9 +1603,10 @@
 				41E1DFDF28D87781001235B9 /* SettingsTabView.swift in Sources */,
 				419092282B1DDFE60017CB65 /* ScheduleTemplateListViewModel.swift in Sources */,
 				4107446328CA1C5D006D5D7D /* PowerFlowView.swift in Sources */,
-				4190922A2B1DE3D90017CB65 /* ScheduleView.swift in Sources */,
+				4190922A2B1DE3D90017CB65 /* EditScheduleView.swift in Sources */,
 				41A25D3F28CA5CFB00315714 /* ParametersGraphTabViewModel.swift in Sources */,
 				4107446128C9EF6B006D5D7D /* LoadedPowerFlowView.swift in Sources */,
+				4190922C2B1E49210017CB65 /* ScheduleView.swift in Sources */,
 				41923E3E2916BC6F00D1A8C5 /* ParametersGraphView.swift in Sources */,
 				41FE6BB12B0CBA7900A66CC3 /* SolcastSiteView.swift in Sources */,
 				41AF2F432AA4C6C1008FCA2E /* HomePowerFooterView.swift in Sources */,
