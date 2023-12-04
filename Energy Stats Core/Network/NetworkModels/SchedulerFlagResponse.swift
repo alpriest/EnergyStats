@@ -16,7 +16,7 @@ public struct SchedulerModesResponse: Decodable {
     public let modes: [SchedulerModeResponse]
 }
 
-public struct SchedulerModeResponse: Decodable, Hashable {
+public struct SchedulerModeResponse: Decodable, Hashable, Equatable {
     public let color: String
     public let name: String
     public let key: String

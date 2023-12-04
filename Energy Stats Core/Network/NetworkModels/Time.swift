@@ -7,13 +7,20 @@
 
 import Foundation
 
-public struct Time: Codable, Equatable, Comparable {
+public struct Time: Codable, Hashable, Equatable, Comparable {
     public let hour: Int
     public let minute: Int
 
     public init(hour: Int, minute: Int) {
         self.hour = hour
         self.minute = minute
+    }
+
+    public init(fromMinutes totalMinutes: Int) {
+        let hours = totalMinutes / 60
+        let minutes = totalMinutes % 60
+        self.hour = hours
+        self.minute = minutes
     }
 
     public static func < (lhs: Time, rhs: Time) -> Bool {
@@ -44,6 +51,11 @@ public struct Time: Codable, Equatable, Comparable {
 
     public func toMinutes() -> Int {
         return hour * 60 + minute
+    }
+
+    public func adding(minutes: Int) -> Time {
+        let newMinutes = toMinutes() + minutes
+        return Time(fromMinutes: newMinutes)
     }
 }
 

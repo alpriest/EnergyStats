@@ -9,32 +9,35 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct ScheduleView: View {
-    let schedule: Schedule
-    let modes: [SchedulerModeResponse]
+    @StateObject private var viewModel: ScheduleViewModel
+
+    init(schedule: Schedule, modes: [SchedulerModeResponse]) {
+        _viewModel = StateObject(wrappedValue: ScheduleViewModel(schedule: schedule, modes: modes))
+    }
 
     var body: some View {
         Section {
             VStack(alignment: .leading) {
-                Text(schedule.name)
+                Text(viewModel.schedule.name)
                     .font(.title2)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.bottom)
 
-                TimePeriodBarView(phases: schedule.phases)
+                TimePeriodBarView(phases: viewModel.schedule.phases)
                     .padding(.bottom, 22)
             }
         }
 
-        if schedule.phases.count == 0 {
+        if viewModel.schedule.phases.count == 0 {
             Section {}
                     footer: {
                     Text("You have no time periods defined.")
                 }
         }
 
-        ForEach(schedule.phases) { phase in
+        ForEach(viewModel.schedule.phases) { phase in
             NavigationLink {
-                SchedulePhaseEditView(modes: modes,
+                SchedulePhaseEditView(modes: viewModel.modes,
                                       phase: phase,
                                       onChange: { _ in
 //                                              viewModel.updated(phase: $0)
@@ -59,11 +62,11 @@ struct ScheduleView: View {
         }
         .frame(maxWidth: .infinity)
 
-//            Button {
-//                viewModel.addNewTimePeriod()
-//            } label: {
-//                Text("Add new time period")
-//            }
+        Button {
+            viewModel.appendPhasesInGaps(mode: SchedulerModeResponse(color: "", name: "Self Use", key: "SelfUse"), soc: 20)
+        } label: {
+            Text("Autofill gaps")
+        }
     }
 }
 

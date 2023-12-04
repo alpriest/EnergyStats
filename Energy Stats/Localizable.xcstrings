@@ -1694,6 +1694,9 @@
         }
       }
     },
+    "Autofill gaps" : {
+
+    },
     "Azimuth" : {
       "localizations" : {
         "de" : {
@@ -5768,10 +5771,8 @@
         }
       }
     },
-    "inverter_charge_schedule_deleted" : {
-
-    },
     "inverter_charge_schedule_settings_saved" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6736,9 +6737,6 @@
         }
       }
     },
-    "No schedule to save." : {
-
-    },
     "no_battery_charge" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -7051,6 +7049,7 @@
       }
     },
     "overlapping_time_periods" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

@@ -15,7 +15,7 @@ struct TimePeriodBarView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Rectangle()
-                .fill(Color.black.opacity(0.1))
+                .fill(Color.yellow.opacity(0.1))
                 .frame(height: height)
                 .overlay(
                     GeometryReader { reader in

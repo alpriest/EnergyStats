@@ -993,13 +993,13 @@
 			isa = PBXGroup;
 			children = (
 				418C091C2B17EC0E00183603 /* TimePeriodBarView.swift */,
-				418C09202B18A98400183603 /* ScheduleViewModel.swift */,
 				418C09242B18FE9A00183603 /* SchedulePhaseEditView.swift */,
 				419092202B1DBF2B0017CB65 /* ScheduleSummaryView.swift */,
 				419092222B1DC0070017CB65 /* ScheduleSummaryViewModel.swift */,
 				419092252B1DDF870017CB65 /* ScheduleTemplateListView.swift */,
 				419092272B1DDFE60017CB65 /* ScheduleTemplateListViewModel.swift */,
 				419092292B1DE3D90017CB65 /* ScheduleView.swift */,
+				418C09202B18A98400183603 /* ScheduleViewModel.swift */,
 			);
 			path = Schedule;
 			sourceTree = "<group>";

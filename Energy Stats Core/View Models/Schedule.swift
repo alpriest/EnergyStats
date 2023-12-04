@@ -19,7 +19,7 @@ public struct ScheduleTemplate: Identifiable {
     }
 }
 
-public struct Schedule {
+public struct Schedule: Hashable, Equatable {
     public let name: String
     public let phases: [SchedulePhase]
 
@@ -29,7 +29,7 @@ public struct Schedule {
     }
 }
 
-public struct SchedulePhase: Identifiable {
+public struct SchedulePhase: Identifiable, Hashable, Equatable {
     public let id: String
     public let start: Time
     public let end: Time

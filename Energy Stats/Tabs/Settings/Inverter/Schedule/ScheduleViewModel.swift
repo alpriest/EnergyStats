@@ -10,19 +10,14 @@ import Foundation
 import SwiftUI
 
 class ScheduleViewModel: ObservableObject {
-    let networking: FoxESSNetworking
-    let config: ConfigManaging
-    @Published var schedule: Schedule?
+    @Published var schedule: Schedule
     @Published var state: LoadState = .inactive
     @Published var alertContent: AlertContent?
     @Published var modes: [SchedulerModeResponse] = []
-    @Published var deviceName: String = ""
 
-    init(networking: FoxESSNetworking, config: ConfigManaging) {
-        self.networking = networking
-        self.config = config
-
-        deviceName = config.currentDevice.value?.deviceDisplayName ?? "Unknown device"
+    init(schedule: Schedule, modes: [SchedulerModeResponse]) {
+        self.schedule = schedule
+        self.modes = modes
     }
 
     func load() {
@@ -57,96 +52,95 @@ class ScheduleViewModel: ObservableObject {
 //        }
     }
 
-    func save() {
-        guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
-        guard let schedule else {
-            alertContent = AlertContent(title: "error_title", message: "No schedule to save.")
-            return
-        }
-        guard isValid() else {
-            alertContent = AlertContent(title: "error_title", message: "overlapping_time_periods")
-            return
-        }
+//    func save() {
+//        guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
+//        guard let schedule else {
+//            alertContent = AlertContent(title: "error_title", message: "No schedule to save.")
+//            return
+//        }
+//        guard isValid() else {
+//            alertContent = AlertContent(title: "error_title", message: "overlapping_time_periods")
+//            return
+//        }
+//
+//        Task { @MainActor [self] in
+//            do {
+//                self.state = .active(String(key: .saving))
+//                try await networking.saveSchedule(deviceSN: deviceSN, schedule: schedule)
+//                self.state = .inactive
+//                alertContent = AlertContent(
+//                    title: "Success",
+//                    message: "inverter_charge_schedule_settings_saved"
+//                )
+//            } catch {
+//                self.state = .inactive
+//                alertContent = AlertContent(title: "error_title", message: LocalizedStringKey(stringLiteral: error.localizedDescription))
+//            }
+//        }
+//    }
 
-        Task { @MainActor [self] in
-            do {
-                self.state = .active(String(key: .saving))
-                try await networking.saveSchedule(deviceSN: deviceSN, schedule: schedule)
-                self.state = .inactive
-                alertContent = AlertContent(
-                    title: "Success",
-                    message: "inverter_charge_schedule_settings_saved"
-                )
-            } catch {
-                self.state = .inactive
-                alertContent = AlertContent(title: "error_title", message: LocalizedStringKey(stringLiteral: error.localizedDescription))
-            }
-        }
-    }
+//    func deleteSchedule() {
+//        guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
+//
+//        Task { @MainActor [self] in
+//            self.state = .active(String(key: .saving))
+//            do {
+//                try await networking.deleteSchedule(deviceSN: deviceSN)
+//                self.state = .inactive
+//                alertContent = AlertContent(
+//                    title: "Success",
+//                    message: "inverter_charge_schedule_deleted"
+//                )
+//            } catch {
+//                self.state = .inactive
+//                alertContent = AlertContent(title: "error_title", message: LocalizedStringKey(stringLiteral: error.localizedDescription))
+//            }
+//        }
+//    }
 
-    func deleteSchedule() {
-        guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
+//    func addNewTimePeriod() {
+//        guard let schedule else { return }
+//        guard let mode = modes.first else { return }
+//
+//        self.schedule = Schedule(
+//            name: schedule.name,
+//            phases: schedule.phases + [SchedulePhase(mode: mode)]
+//        )
+//    }
 
-        Task { @MainActor [self] in
-            self.state = .active(String(key: .saving))
-            do {
-                try await networking.deleteSchedule(deviceSN: deviceSN)
-                self.state = .inactive
-                alertContent = AlertContent(
-                    title: "Success",
-                    message: "inverter_charge_schedule_deleted"
-                )
-            } catch {
-                self.state = .inactive
-                alertContent = AlertContent(title: "error_title", message: LocalizedStringKey(stringLiteral: error.localizedDescription))
-            }
-        }
-    }
+//    func updated(phase updatedPhase: SchedulePhase) {
+//        guard let schedule else { return }
+//
+//        self.schedule = Schedule(
+//            name: schedule.name,
+//            phases: schedule.phases.map {
+//                if $0.id == updatedPhase.id {
+//                    return updatedPhase
+//                } else {
+//                    return $0
+//                }
+//            }
+//        )
+//    }
 
-    func addNewTimePeriod() {
-        guard let schedule else { return }
-        guard let mode = modes.first else { return }
-
-        self.schedule = Schedule(
-            name: schedule.name,
-            phases: schedule.phases + [SchedulePhase(mode: mode)]
-        )
-    }
-
-    func updated(phase updatedPhase: SchedulePhase) {
-        guard let schedule else { return }
-
-        self.schedule = Schedule(
-            name: schedule.name,
-            phases: schedule.phases.map {
-                if $0.id == updatedPhase.id {
-                    return updatedPhase
-                } else {
-                    return $0
-                }
-            }
-        )
-    }
-
-    func deleted(id: String) {
-        guard let schedule else { return }
-
-        self.schedule = Schedule(
-            name: schedule.name,
-            phases: schedule.phases.compactMap {
-                if $0.id == id {
-                    return nil
-                } else {
-                    return $0
-                }
-            }
-        )
-    }
+//    func deleted(id: String) {
+//        guard let schedule else { return }
+//
+//        self.schedule = Schedule(
+//            name: schedule.name,
+//            phases: schedule.phases.compactMap {
+//                if $0.id == id {
+//                    return nil
+//                } else {
+//                    return $0
+//                }
+//            }
+//        )
+//    }
 }
 
-private extension ScheduleViewModel {
+extension ScheduleViewModel {
     func isValid() -> Bool {
-        guard let schedule else { return false }
         for (index, phase) in schedule.phases.enumerated() {
             let phaseStart = phase.start.toMinutes()
             let phaseEnd = phase.end.toMinutes()
@@ -157,13 +151,77 @@ private extension ScheduleViewModel {
                 let otherEnd = otherPhase.end.toMinutes()
 
                 // Check if the time periods overlap
-                if phaseStart < otherEnd && otherStart < phaseEnd {
+                // Updated to ensure periods must start/end on different minutes
+                if phaseStart <= otherEnd && otherStart < phaseEnd {
                     return false
                 }
             }
         }
 
         return true
+    }
+
+    @MainActor
+    func appendPhasesInGaps(mode: SchedulerModeResponse, soc: Int) {
+        let newPhases = schedule.phases + createPhasesInGaps(mode: mode, soc: soc)
+
+        schedule = Schedule(
+            name: schedule.name,
+            phases: newPhases.sorted { $0.start < $1.start }
+        )
+    }
+
+    func createPhasesInGaps(mode: SchedulerModeResponse, soc: Int) -> [SchedulePhase] {
+        // Ensure the phases are sorted by start time
+        let sortedPhases = schedule.phases.sorted { $0.start < $1.start }
+
+        let scheduleStartTime = Time(hour: 00, minute: 00)
+        let scheduleEndTime = Time(hour: 23, minute: 59)
+        var newPhases = [SchedulePhase]()
+        var lastEnd: Time?
+
+        for phase in sortedPhases {
+            if let lastEnd {
+                if lastEnd < phase.start.adding(minutes: -1) {
+                    let newPhaseStart = lastEnd.adding(minutes: 1)
+                    let newPhaseEnd = phase.start.adding(minutes: -1)
+
+                    // There's a gap between lastEnd and the current phase's start
+                    let newPhase = makePhase(from: newPhaseStart, to: newPhaseEnd, mode: mode, soc: soc)
+                    newPhases.append(newPhase)
+                }
+            } else {
+                if phase.start > scheduleStartTime {
+                    // There's a gap between startOfDay and the current phase's start
+                    let newPhaseEnd = phase.start.adding(minutes: -1)
+
+                    let newPhase = makePhase(from: scheduleStartTime, to: newPhaseEnd, mode: mode, soc: soc)
+                    newPhases.append(newPhase)
+                }
+            }
+            lastEnd = phase.end
+        }
+
+        // Check if there's a gap after the last phase
+        if let lastEnd = lastEnd, lastEnd < Time(hour: 23, minute: 59) {
+            let finalPhaseStart = lastEnd.adding(minutes: 1)
+            let finalPhase = makePhase(from: finalPhaseStart, to: scheduleEndTime, mode: mode, soc: soc)
+            newPhases.append(finalPhase)
+        }
+
+        return newPhases
+    }
+
+    private func makePhase(from start: Time, to end: Time, mode: SchedulerModeResponse, soc: Int) -> SchedulePhase {
+        SchedulePhase(
+            start: start,
+            end: end,
+            mode: mode,
+            forceDischargePower: 0,
+            forceDischargeSOC: soc,
+            batterySOC: soc,
+            color: Color.scheduleColor(named: mode.key)
+        )!
     }
 }
 
