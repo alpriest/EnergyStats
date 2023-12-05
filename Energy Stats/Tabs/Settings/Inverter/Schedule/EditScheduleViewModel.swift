@@ -123,69 +123,6 @@ extension EditScheduleViewModel {
 
         return true
     }
-
-    @MainActor
-    func appendPhasesInGaps(mode: SchedulerModeResponse, soc: Int) {
-        let newPhases = schedule.phases + createPhasesInGaps(mode: mode, soc: soc)
-
-        schedule = Schedule(
-            name: schedule.name,
-            phases: newPhases.sorted { $0.start < $1.start }
-        )
-    }
-
-    func createPhasesInGaps(mode: SchedulerModeResponse, soc: Int) -> [SchedulePhase] {
-        // Ensure the phases are sorted by start time
-        let sortedPhases = schedule.phases.sorted { $0.start < $1.start }
-
-        let scheduleStartTime = Time(hour: 00, minute: 00)
-        let scheduleEndTime = Time(hour: 23, minute: 59)
-        var newPhases = [SchedulePhase]()
-        var lastEnd: Time?
-
-        for phase in sortedPhases {
-            if let lastEnd {
-                if lastEnd < phase.start.adding(minutes: -1) {
-                    let newPhaseStart = lastEnd.adding(minutes: 1)
-                    let newPhaseEnd = phase.start.adding(minutes: -1)
-
-                    // There's a gap between lastEnd and the current phase's start
-                    let newPhase = makePhase(from: newPhaseStart, to: newPhaseEnd, mode: mode, soc: soc)
-                    newPhases.append(newPhase)
-                }
-            } else {
-                if phase.start > scheduleStartTime {
-                    // There's a gap between startOfDay and the current phase's start
-                    let newPhaseEnd = phase.start.adding(minutes: -1)
-
-                    let newPhase = makePhase(from: scheduleStartTime, to: newPhaseEnd, mode: mode, soc: soc)
-                    newPhases.append(newPhase)
-                }
-            }
-            lastEnd = phase.end
-        }
-
-        // Check if there's a gap after the last phase
-        if let lastEnd = lastEnd, lastEnd < Time(hour: 23, minute: 59) {
-            let finalPhaseStart = lastEnd.adding(minutes: 1)
-            let finalPhase = makePhase(from: finalPhaseStart, to: scheduleEndTime, mode: mode, soc: soc)
-            newPhases.append(finalPhase)
-        }
-
-        return newPhases
-    }
-
-    private func makePhase(from start: Time, to end: Time, mode: SchedulerModeResponse, soc: Int) -> SchedulePhase {
-        SchedulePhase(
-            start: start,
-            end: end,
-            mode: mode,
-            forceDischargePower: 0,
-            forceDischargeSOC: soc,
-            batterySOC: soc,
-            color: Color.scheduleColor(named: mode.key)
-        )!
-    }
 }
 
 extension SchedulePollcy {

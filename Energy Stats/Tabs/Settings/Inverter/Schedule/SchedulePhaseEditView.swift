@@ -15,6 +15,8 @@ struct SchedulePhaseEditView: View {
     @State private var minSOC: String
     @State private var fdSOC: String
     @State private var fdPower: String
+    @State private var minSOCError: String?
+    @State private var fdSOCError: String?
     private let id: String
     private let modes: [SchedulerModeResponse]
     private let onChange: (SchedulePhase) -> Void
@@ -66,6 +68,9 @@ struct SchedulePhaseEditView: View {
                         Text("%")
                     }
                 } footer: {
+                    OptionalView(minSOCError) {
+                        Text($0)
+                    }
                     OptionalView(minSoCDescription()) {
                         Text($0)
                     }
@@ -81,6 +86,9 @@ struct SchedulePhaseEditView: View {
                         Text("%")
                     }
                 } footer: {
+                    OptionalView(fdSOCError) {
+                        Text($0)
+                    }
                     OptionalView(forceDischargeSoCDescription()) {
                         Text($0)
                     }
@@ -101,11 +109,14 @@ struct SchedulePhaseEditView: View {
                     }
                 }
 
-                Button(role: .destructive) {
-                    onDelete(id)
-                } label: {
-                    Text("Delete time period")
-                }.buttonStyle(.borderless)
+                Section {}
+                    footer: {
+                        Button(role: .destructive) {
+                            onDelete(id)
+                        } label: {
+                            Text("Delete time period")
+                        }.buttonStyle(.bordered)
+                    }
             }
         }
         .onChange(of: startTime) { _ in notify() }
@@ -129,14 +140,16 @@ struct SchedulePhaseEditView: View {
         ) {
             onChange(phase)
         }
+
+        validate()
     }
 
     private func minSoCDescription() -> String? {
         switch workMode.key {
         case "Backup": return nil
         case "Feedin": return nil
-        case "ForceCharge": return nil
-        case "ForceDischarge": return nil
+        case "ForceCharge": return "The minimum battery state of charge."
+        case "ForceDischarge": return "The minimum battery state of charge. For Force Discharge this must be at most the Discharge SOC value."
         case "SelfUse": return nil
         default: return nil
         }
@@ -161,6 +174,30 @@ struct SchedulePhaseEditView: View {
         case "ForceDischarge": return "The output power level to be delivered, including your house load and grid export. E.g. set this to 5000 if this is your inverter limit then if the house load is 750W the other 4.25kW will be exported"
         case "SelfUse": return nil
         default: return nil
+        }
+    }
+
+    private func validate() {
+        guard !minSOC.isEmpty,
+              let minSOC = Int(minSOC),
+              minSOC < 10 || minSOC > 100
+        else {
+            minSOCError = "Please enter a number between 10 and 100"
+            return
+        }
+
+        guard !fdSOC.isEmpty,
+              let fdSOC = Int(fdSOC),
+              minSOC < 10 || minSOC > 100
+        else {
+            fdSOCError = "Please enter a number between 10 and 100"
+            return
+        }
+
+        guard minSOC <= fdSOC
+        else {
+            minSOCError = "Please ensure Min SoC is less than or equal to Force Disscharge SoC"
+            return
         }
     }
 }

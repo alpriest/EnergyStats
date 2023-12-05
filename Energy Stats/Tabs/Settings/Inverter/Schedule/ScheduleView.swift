@@ -14,7 +14,7 @@ struct ScheduleView: View {
     var body: some View {
         VStack {
             TimePeriodBarView(phases: schedule.phases)
-                .padding(.bottom, 22)
+                .padding(.vertical, 22)
 
             ForEach(schedule.phases) { phase in
                 SchedulePhaseListItemView(phase: phase)

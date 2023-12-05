@@ -23,25 +23,38 @@ struct ScheduleSummaryView: View {
         VStack(spacing: 0) {
             Form {
                 if let schedule = viewModel.schedule {
-                    Section {
-                        ScheduleView(schedule: schedule)
-                    } header: {
-                        Text("Current Schedule")
-                    } footer: {
-                        NavigationLink {
+                    if schedule.phases.count > 0 {
+                        Section {
+                            ScheduleView(schedule: schedule)
+                        } header: {
+                            Text("Current Schedule")
+                        } footer: {
+                            NavigationLink(destination: {
+                                               EditScheduleView(
+                                                   networking: networking,
+                                                   config: config,
+                                                   schedule: schedule,
+                                                   modes: viewModel.modes
+                                               )
+                                           },
+                                           label: {
+                                               Text("Modify this schedule")
+                                           })
+                        }
+                    } else {
+                        Text("You don't have a schedule defined.")
+
+                        NavigationLink(destination: {
                             EditScheduleView(
                                 networking: networking,
                                 config: config,
                                 schedule: schedule,
                                 modes: viewModel.modes
                             )
-                        }
-                        label: {
-                            Text("Modify this schedule")
-                        }
+                        }, label: {
+                            Text("Create a schedule")
+                        })
                     }
-                } else {
-                    Text("You don't have a schedule defined.")
                 }
 
                 Section {
@@ -59,14 +72,16 @@ struct ScheduleSummaryView: View {
                 } header: {
                     Text("Templates")
                 } footer: {
-                    if viewModel.templates.count > 0 {
-                        Text("Choose from one of your template by tapping apply.")
-                    }
-
-                    NavigationLink {
-                        ScheduleTemplateListView(networking: networking, config: config)
-                    } label: {
-                        Text("Manage templates")
+                    VStack {
+                        if viewModel.templates.count > 0 {
+                            Text("Enable one of your templates by tapping apply.")
+                        }
+                        
+                        NavigationLink {
+                            ScheduleTemplateListView(networking: networking, config: config)
+                        } label: {
+                            Text("Manage templates")
+                        }
                     }
                 }
             }

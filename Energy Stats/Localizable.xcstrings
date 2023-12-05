@@ -1697,9 +1697,6 @@
         }
       }
     },
-    "Autofill gaps" : {
-
-    },
     "Azimuth" : {
       "localizations" : {
         "de" : {
@@ -3095,6 +3092,9 @@
         }
       }
     },
+    "Create a schedule" : {
+
+    },
     "CT2" : {
       "localizations" : {
         "de" : {
@@ -3549,7 +3549,7 @@
         }
       }
     },
-    "Delete phase" : {
+    "Delete time period" : {
 
     },
     "demo" : {
@@ -11509,7 +11509,7 @@
     "You don't have a schedule defined." : {
 
     },
-    "You have no time periods defined." : {
+    "You have no time periods defined. Add a time period to define how you'd like your inverter to behave during specific hours." : {
 
     },
     "You've hit the server rate limit. Please try later." : {

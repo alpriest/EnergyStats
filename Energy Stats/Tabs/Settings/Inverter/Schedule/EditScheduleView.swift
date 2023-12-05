@@ -41,7 +41,7 @@ struct EditScheduleView: View {
             if viewModel.schedule.phases.count == 0 {
                 Section {}
                     footer: {
-                        Text("You have no time periods defined.")
+                        Text("You have no time periods defined. Add a time period to define how you'd like your inverter to behave during specific hours.")
                     }
             }
 
@@ -74,13 +74,9 @@ struct EditScheduleView: View {
                             viewModel.applyCurrentSchedule()
                         } label: {
                             Text("Save and activate schedule")
-                        }.buttonStyle(.bordered)
-
-                        Button {
-                            viewModel.appendPhasesInGaps(mode: SchedulerModeResponse(color: "", name: "Self Use", key: "SelfUse"), soc: 20)
-                        } label: {
-                            Text("Autofill gaps")
-                        }.buttonStyle(.bordered)
+                        }
+                        .buttonStyle(.bordered)
+                        .disabled(viewModel.schedule.phases.count == 0)
                     }
                 }
         }
