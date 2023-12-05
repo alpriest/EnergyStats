@@ -2607,9 +2607,6 @@
         }
       }
     },
-    "Choose" : {
-
-    },
     "Choose date" : {
       "localizations" : {
         "de" : {
@@ -3090,6 +3087,9 @@
       }
     },
     "Create a schedule" : {
+
+    },
+    "Create new template" : {
 
     },
     "CT2" : {
@@ -3576,6 +3576,9 @@
           }
         }
       }
+    },
+    "Description" : {
+
     },
     "Device List" : {
       "localizations" : {
@@ -5336,6 +5339,9 @@
         }
       }
     },
+    "Hello, World!" : {
+
+    },
     "Hide graph" : {
       "localizations" : {
         "de" : {
@@ -6614,6 +6620,9 @@
         }
       }
     },
+    "Name" : {
+
+    },
     "Net" : {
       "localizations" : {
         "de" : {
@@ -6703,6 +6712,9 @@
           }
         }
       }
+    },
+    "New template" : {
+
     },
     "Next update in" : {
       "extractionState" : "manual",
@@ -10645,9 +10657,6 @@
           }
         }
       }
-    },
-    "Template" : {
-
     },
     "Templates" : {
 

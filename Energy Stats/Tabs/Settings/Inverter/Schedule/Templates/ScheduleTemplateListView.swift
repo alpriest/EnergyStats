@@ -49,7 +49,11 @@ struct ScheduleTemplateListView: View {
                 Text("New template")
             } footer: {
                 Button(action: {
-                    Task { await viewModel.createTemplate(name: "bob", description: "foo") }
+                    Task {
+                        await viewModel.createTemplate(name: newTemplateName, description: newTemplateDescription)
+                        newTemplateName = ""
+                        newTemplateDescription = ""
+                    }
                 }, label: {
                     Text("Create new template")
                 }).buttonStyle(.borderedProminent)
