@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct ScheduleTemplate: Identifiable {
+public struct ScheduleTemplateSummary: Identifiable {
     public let id: String
     public let name: String
     public let enabled: Bool
@@ -19,13 +19,25 @@ public struct ScheduleTemplate: Identifiable {
     }
 }
 
+public struct ScheduleTemplate: Identifiable {
+    public let id: String
+    public let phases: [SchedulePhase]
+
+    public init(id: String, phases: [SchedulePhase]) {
+        self.id = id
+        self.phases = phases
+    }
+}
+
 public struct Schedule: Hashable, Equatable {
     public let name: String
     public let phases: [SchedulePhase]
+    public let templateID: String?
 
-    public init(name: String?, phases: [SchedulePhase]) {
+    public init(name: String?, phases: [SchedulePhase], templateID: String? = nil) {
         self.name = name ?? "Schedule"
         self.phases = phases
+        self.templateID = templateID
     }
 }
 

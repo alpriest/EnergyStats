@@ -13,7 +13,7 @@ class ScheduleSummaryViewModel: ObservableObject {
     let config: ConfigManaging
     @Published var state: LoadState = .inactive
     @Published var modes: [SchedulerModeResponse] = []
-    @Published var templates: [ScheduleTemplate] = []
+    @Published var templates: [ScheduleTemplateSummary] = []
     @Published var alertContent: AlertContent?
     @Published var schedule: Schedule?
     private var supported: Bool = false
@@ -61,7 +61,7 @@ class ScheduleSummaryViewModel: ObservableObject {
         setState(.active(String(key: .loading)))
 
         do {
-            let scheduleResponse = try await networking.fetchSchedule(deviceSN: deviceSN)
+            let scheduleResponse = try await networking.fetchCurrentSchedule(deviceSN: deviceSN)
 
             self.templates = scheduleResponse.data.compactMap { $0.toScheduleTemplate() }
             self.schedule = Schedule(name: "", phases: scheduleResponse.pollcy.compactMap { $0.toSchedulePhase(workModes: self.modes) })
@@ -96,11 +96,11 @@ class ScheduleSummaryViewModel: ObservableObject {
     }
 }
 
-extension ScheduleTemplateResponse {
-    func toScheduleTemplate() -> ScheduleTemplate? {
+extension ScheduleTemplateSummaryResponse {
+    func toScheduleTemplate() -> ScheduleTemplateSummary? {
         guard !templateID.isEmpty else { return nil }
 
-        return ScheduleTemplate(
+        return ScheduleTemplateSummary(
             id: templateID,
             name: templateName,
             enabled: enable

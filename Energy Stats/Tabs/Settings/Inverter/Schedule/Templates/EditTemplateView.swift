@@ -23,7 +23,19 @@ struct EditTemplateView: View {
     }
 
     var body: some View {
-        Text("Hello, World!")
+        Group {
+            OptionalView(viewModel.schedule) {
+                EditScheduleView(
+                    networking: viewModel.networking,
+                    config: viewModel.config,
+                    schedule: $0,
+                    modes: viewModel.modes,
+                    allowDeletion: false,
+                    allowSaveAsActiveSchedule: false,
+                    allowSavingTemplate: true
+                )
+            }
+        }
     }
 }
 

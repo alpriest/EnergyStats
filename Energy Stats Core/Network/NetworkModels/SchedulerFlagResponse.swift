@@ -29,15 +29,22 @@ public struct SchedulerModeResponse: Decodable, Hashable, Equatable {
 }
 
 public struct ScheduleListResponse: Decodable {
-    public let data: [ScheduleTemplateResponse]
+    public let data: [ScheduleTemplateSummaryResponse]
     public let enable: Bool
     public let pollcy: [SchedulePollcy]
+}
+
+public struct ScheduleTemplateSummaryResponse: Decodable {
+    public let templateName: String
+    public let enable: Bool
+    public let templateID: String
 }
 
 public struct ScheduleTemplateResponse: Decodable {
     public let templateName: String
     public let enable: Bool
-    public let templateID: String
+    public let pollcy: [SchedulePollcy]
+    public let content: String
 }
 
 public struct SchedulePollcy: Codable {
@@ -57,8 +64,13 @@ public struct ScheduleSaveRequest: Encodable {
     public let deviceSN: String
 }
 
+public struct ScheduleEnableRequest: Encodable {
+    public let templateID: String?
+    public let deviceSN: String
+}
+
 public struct ScheduleTemplateListResponse: Decodable {
-    public let data: [ScheduleTemplateResponse]
+    public let data: [ScheduleTemplateSummaryResponse]
 }
 
 public struct ScheduleTemplateCreateRequest: Encodable {

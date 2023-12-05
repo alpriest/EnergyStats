@@ -11,7 +11,7 @@ import Foundation
 class ScheduleTemplateListViewModel: ObservableObject {
     let networking: FoxESSNetworking
     let config: ConfigManaging
-    @Published var templates: [ScheduleTemplate] = []
+    @Published var templates: [ScheduleTemplateSummary] = []
     @Published var state: LoadState = .inactive
     @Published var schedule: Schedule?
 

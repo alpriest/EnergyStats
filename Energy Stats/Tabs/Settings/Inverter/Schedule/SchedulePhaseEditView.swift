@@ -117,7 +117,7 @@ struct SchedulePhaseEditView: View {
                             onDelete(id)
                         } label: {
                             HStack {
-                                Image(systemName: "xmark.bin")
+                                Image(systemName: "trash")
                                 Text("Delete time period")
                             }
                         }.buttonStyle(.bordered)

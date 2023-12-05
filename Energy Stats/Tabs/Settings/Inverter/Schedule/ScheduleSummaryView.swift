@@ -25,32 +25,39 @@ struct ScheduleSummaryView: View {
                 if let schedule = viewModel.schedule {
                     if schedule.phases.count > 0 {
                         Section {
-                            ScheduleView(schedule: schedule)
-                                .padding(.vertical, 4)
-                        } header: {
-                            Text("Current Schedule")
-                        } footer: {
                             NavigationLink(destination: {
                                                EditScheduleView(
                                                    networking: networking,
                                                    config: config,
                                                    schedule: schedule,
-                                                   modes: viewModel.modes
+                                                   modes: viewModel.modes,
+                                                   allowDeletion: true,
+                                                   allowSaveAsActiveSchedule: true,
+                                                   allowSavingTemplate: false
                                                )
                                            },
                                            label: {
-                                               Text("Modify this schedule")
+                                               ScheduleView(schedule: schedule)
+                                                   .padding(.vertical, 4)
                                            })
+                        } header: {
+                            Text("Current Schedule")
                         }
                     } else {
-                        Text("You don't have a schedule defined.")
+                        VStack {
+                            Text("You don't have a schedule defined.")
+                                .padding(.vertical, 44)
+                        }
 
                         NavigationLink(destination: {
                             EditScheduleView(
                                 networking: networking,
                                 config: config,
                                 schedule: schedule,
-                                modes: viewModel.modes
+                                modes: viewModel.modes,
+                                allowDeletion: false,
+                                allowSaveAsActiveSchedule: true,
+                                allowSavingTemplate: false
                             )
                         }, label: {
                             Text("Create a schedule")

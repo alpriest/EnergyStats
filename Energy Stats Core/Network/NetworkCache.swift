@@ -39,6 +39,14 @@ public class NetworkCache: FoxESSNetworking {
         try await network.verifyCredentials(username: username, hashedPassword: hashedPassword)
     }
 
+    public func saveScheduleTemplate(deviceSN: String, template: ScheduleTemplate) async throws {
+        try await network.saveScheduleTemplate(deviceSN: deviceSN, template: template)
+    }
+
+    public func fetchScheduleTemplate(deviceSN: String, templateID: String) async throws -> ScheduleTemplateResponse {
+        try await network.fetchScheduleTemplate(deviceSN: deviceSN, templateID: templateID)
+    }
+
     public func enableScheduleTemplate(deviceSN: String, templateID: String) async throws {
         try await network.enableScheduleTemplate(deviceSN: deviceSN, templateID: templateID)
     }
@@ -59,8 +67,8 @@ public class NetworkCache: FoxESSNetworking {
         try await network.saveSchedule(deviceSN: deviceSN, schedule: schedule)
     }
 
-    public func fetchSchedule(deviceSN: String) async throws -> ScheduleListResponse {
-        try await network.fetchSchedule(deviceSN: deviceSN)
+    public func fetchCurrentSchedule(deviceSN: String) async throws -> ScheduleListResponse {
+        try await network.fetchCurrentSchedule(deviceSN: deviceSN)
     }
 
     public func fetchScheduleModes(deviceID: String) async throws -> [SchedulerModeResponse] {

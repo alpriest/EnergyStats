@@ -38,7 +38,7 @@ struct ScheduleTemplateListView: View {
                     })
                 }
             } header: {
-                Text("")
+                Text("Templates")
             }
 
             Section {
@@ -48,15 +48,17 @@ struct ScheduleTemplateListView: View {
             } header: {
                 Text("New template")
             } footer: {
-                Button(action: {
+                Button {
                     Task {
                         await viewModel.createTemplate(name: newTemplateName, description: newTemplateDescription)
                         newTemplateName = ""
                         newTemplateDescription = ""
                     }
-                }, label: {
+                } label: {
                     Text("Create new template")
-                }).buttonStyle(.borderedProminent)
+                }
+                .buttonStyle(.borderedProminent)
+                .padding(.top)
             }
         }
         .onAppear { Task { await viewModel.load() } }
