@@ -67,13 +67,19 @@ struct EditScheduleView: View {
                         Button {
                             viewModel.addNewTimePeriod()
                         } label: {
-                            Text("Add time period")
+                            HStack {
+                                Image(systemName: "plus")
+                                Text("Add time period")
+                            }
                         }.buttonStyle(.bordered)
 
                         Button {
                             viewModel.applyCurrentSchedule()
                         } label: {
-                            Text("Save and activate schedule")
+                            HStack {
+                                Image(systemName: "play.fill")
+                                Text("Save and activate schedule")
+                            }
                         }
                         .buttonStyle(.bordered)
                         .disabled(viewModel.schedule.phases.count == 0)

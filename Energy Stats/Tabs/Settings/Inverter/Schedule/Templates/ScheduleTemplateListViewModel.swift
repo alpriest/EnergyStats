@@ -13,6 +13,7 @@ class ScheduleTemplateListViewModel: ObservableObject {
     let config: ConfigManaging
     @Published var templates: [ScheduleTemplate] = []
     @Published var state: LoadState = .inactive
+    @Published var schedule: Schedule?
 
     init(networking: FoxESSNetworking, config: ConfigManaging) {
         self.networking = networking
@@ -29,17 +30,26 @@ class ScheduleTemplateListViewModel: ObservableObject {
         }
     }
 
-//    @MainActor
-//    func createTemplate(name: String, description: String) async {
-//        guard state == .inactive else { return }
-//
-//        self.state = .active(String(key: .saving))
-//
-//        do {
-//            try await self.networking.createScheduleTemplate(name: name, description: description)
-//            await self.load()
-//        } catch {
-//            self.state = LoadState.error(error, error.localizedDescription)
-//        }
-//    }
+    func loadTemplate(id: String?) {
+        guard let id else {
+            schedule = nil
+            return
+        }
+
+        // Load from network
+    }
+
+    @MainActor
+    func createTemplate(name: String, description: String) async {
+        guard state == .inactive else { return }
+
+        self.state = .active(String(key: .saving))
+
+        do {
+            try await self.networking.createScheduleTemplate(name: name, description: description)
+            await self.load()
+        } catch {
+            self.state = LoadState.error(error, error.localizedDescription)
+        }
+    }
 }

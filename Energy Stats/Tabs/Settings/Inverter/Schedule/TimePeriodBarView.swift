@@ -68,7 +68,7 @@ extension Schedule {
                         hour: 2,
                         minute: 00
                     ),
-                    mode: SchedulerModeResponse(color: "#00ff00", name: "Force charge", key: "ForceDischarge"),
+                    mode: SchedulerModeResponse(color: "#00ff00", name: "Force charge", key: "ForceCharge"),
                     forceDischargePower: 0,
                     forceDischargeSOC: 100,
                     batterySOC: 100,
@@ -98,8 +98,8 @@ extension Schedule {
                         hour: 23,
                         minute: 30
                     ),
-                    mode: SchedulerModeResponse(color: "#ff0000", name: "Force discharge", key: "ForceDischarge"),
-                    forceDischargePower: 3500,
+                    mode: SchedulerModeResponse(color: "#ff0000", name: "Self Use", key: "SelfUse"),
+                    forceDischargePower: 0,
                     forceDischargeSOC: 20,
                     batterySOC: 20,
                     color: .linesPositive

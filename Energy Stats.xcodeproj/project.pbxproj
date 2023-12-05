@@ -211,6 +211,8 @@
 		41CF044C2A95006E00ADCCAD /* ExternalWebNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CF044B2A95006E00ADCCAD /* ExternalWebNavigationLink.swift */; };
 		41D286E52AB352AC00B18FEF /* ParameterGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D286E42AB352AC00B18FEF /* ParameterGroup.swift */; };
 		41D8402D2AB2E0DE00769E81 /* ErrorMessagesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D8402C2AB2E0DE00769E81 /* ErrorMessagesResponse.swift */; };
+		41DB220F2B1F965C00EC4015 /* EditTemplateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DB220E2B1F965C00EC4015 /* EditTemplateView.swift */; };
+		41DB22112B1F967500EC4015 /* EditTemplateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DB22102B1F967500EC4015 /* EditTemplateViewModel.swift */; };
 		41DC515A2AE2E9DC00FD348B /* NetworkValueCleaner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DC51592AE2E9DC00FD348B /* NetworkValueCleaner.swift */; };
 		41DCF5422B06C20B0010843F /* solcast.json in Resources */ = {isa = PBXBuildFile; fileRef = 41DCF5412B06C20B0010843F /* solcast.json */; };
 		41DCF5442B06CBD40010843F /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DCF5432B06CBD40010843F /* Date.swift */; };
@@ -557,6 +559,8 @@
 		41D6496B28DB321600A24B41 /* DeviceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceList.swift; sourceTree = "<group>"; };
 		41D7B12328C86E4000E14144 /* Raw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Raw.swift; sourceTree = "<group>"; };
 		41D8402C2AB2E0DE00769E81 /* ErrorMessagesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessagesResponse.swift; sourceTree = "<group>"; };
+		41DB220E2B1F965C00EC4015 /* EditTemplateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTemplateView.swift; sourceTree = "<group>"; };
+		41DB22102B1F967500EC4015 /* EditTemplateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTemplateViewModel.swift; sourceTree = "<group>"; };
 		41DC51592AE2E9DC00FD348B /* NetworkValueCleaner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkValueCleaner.swift; sourceTree = "<group>"; };
 		41DCF5412B06C20B0010843F /* solcast.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = solcast.json; sourceTree = "<group>"; };
 		41DCF5432B06CBD40010843F /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
@@ -1000,8 +1004,7 @@
 				418C09242B18FE9A00183603 /* SchedulePhaseEditView.swift */,
 				419092202B1DBF2B0017CB65 /* ScheduleSummaryView.swift */,
 				419092222B1DC0070017CB65 /* ScheduleSummaryViewModel.swift */,
-				419092252B1DDF870017CB65 /* ScheduleTemplateListView.swift */,
-				419092272B1DDFE60017CB65 /* ScheduleTemplateListViewModel.swift */,
+				41DB220D2B1F964D00EC4015 /* Templates */,
 				419092292B1DE3D90017CB65 /* EditScheduleView.swift */,
 				418C09202B18A98400183603 /* EditScheduleViewModel.swift */,
 				4190922B2B1E49210017CB65 /* ScheduleView.swift */,
@@ -1145,6 +1148,17 @@
 				418547182A3A1530000128C7 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		41DB220D2B1F964D00EC4015 /* Templates */ = {
+			isa = PBXGroup;
+			children = (
+				419092252B1DDF870017CB65 /* ScheduleTemplateListView.swift */,
+				419092272B1DDFE60017CB65 /* ScheduleTemplateListViewModel.swift */,
+				41DB220E2B1F965C00EC4015 /* EditTemplateView.swift */,
+				41DB22102B1F967500EC4015 /* EditTemplateViewModel.swift */,
+			);
+			path = Templates;
 			sourceTree = "<group>";
 		};
 		41E1DFDD28D87778001235B9 /* Settings */ = {
@@ -1576,6 +1590,7 @@
 				4140ECDA292D58D300992DD8 /* ParameterGraphVariable.swift in Sources */,
 				41E4B31028DB7666003F7F47 /* BatteryPowerView.swift in Sources */,
 				4140144E28C70B3200EA5BA1 /* Energy_StatsApp.swift in Sources */,
+				41DB220F2B1F965C00EC4015 /* EditTemplateView.swift in Sources */,
 				41ACB2C42A51832E005831B0 /* ParameterGraphHeaderViewModel.swift in Sources */,
 				41CA35712AA8C02C00D45734 /* EarningsView.swift in Sources */,
 				4192F9992A8674990035DAB8 /* DataLoggersView.swift in Sources */,
@@ -1614,6 +1629,7 @@
 				413BF2892A99F8A500A32B0D /* ApproximationsView.swift in Sources */,
 				4149DE9B2B03C3AC004F5FC6 /* SolcastSettingsView.swift in Sources */,
 				416AE4382A7D956E003D0122 /* AlertCopy.swift in Sources */,
+				41DB22112B1F967500EC4015 /* EditTemplateViewModel.swift in Sources */,
 				410484C82AD49D95007F68C0 /* CT2-icon.swift in Sources */,
 				416318BE29DDD80E00C2C285 /* View+Copy.swift in Sources */,
 				418C6E952AFAC3BF000DE35F /* SummaryTabView.swift in Sources */,

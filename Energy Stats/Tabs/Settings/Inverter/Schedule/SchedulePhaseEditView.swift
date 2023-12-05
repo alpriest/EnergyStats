@@ -63,13 +63,14 @@ struct SchedulePhaseEditView: View {
                 Section {
                     HStack {
                         Text("Min SoC")
-                        NumberTextField("Min SoC", text: $minSOC)
+                        NumberTextField("SoC", text: $minSOC)
                             .multilineTextAlignment(.trailing)
                         Text("%")
                     }
                 } footer: {
                     OptionalView(minSOCError) {
                         Text($0)
+                            .foregroundStyle(Color.red)
                     }
                     OptionalView(minSoCDescription()) {
                         Text($0)
@@ -80,7 +81,7 @@ struct SchedulePhaseEditView: View {
                     HStack {
                         Text("Force Discharge SoC")
                         Spacer()
-                        NumberTextField("Min SoC", text: $fdSOC)
+                        NumberTextField("SoC", text: $fdSOC)
                             .multilineTextAlignment(.trailing)
                             .frame(width: 100)
                         Text("%")
@@ -88,6 +89,7 @@ struct SchedulePhaseEditView: View {
                 } footer: {
                     OptionalView(fdSOCError) {
                         Text($0)
+                            .foregroundStyle(Color.red)
                     }
                     OptionalView(forceDischargeSoCDescription()) {
                         Text($0)
@@ -98,7 +100,7 @@ struct SchedulePhaseEditView: View {
                     HStack {
                         Text("Force Discharge Power")
                         Spacer()
-                        NumberTextField("Min SoC", text: $fdPower)
+                        NumberTextField("Power", text: $fdPower)
                             .multilineTextAlignment(.trailing)
                             .frame(width: 100)
                         Text("W")
@@ -114,7 +116,10 @@ struct SchedulePhaseEditView: View {
                         Button(role: .destructive) {
                             onDelete(id)
                         } label: {
-                            Text("Delete time period")
+                            HStack {
+                                Image(systemName: "xmark.bin")
+                                Text("Delete time period")
+                            }
                         }.buttonStyle(.bordered)
                     }
             }
@@ -160,7 +165,7 @@ struct SchedulePhaseEditView: View {
         case "Backup": return nil
         case "Feedin": return nil
         case "ForceCharge": return nil
-        case "ForceDischarge": return "The minimum battery state of charge for Force Discharge. When the battery reaches this level, discharging will stop. If you wanted to save some battery power for later, perhaps set it to 50%."
+        case "ForceDischarge": return "When the battery reaches this level, discharging will stop. If you wanted to save some battery power for later, perhaps set it to 50%."
         case "SelfUse": return nil
         default: return nil
         }
@@ -171,32 +176,27 @@ struct SchedulePhaseEditView: View {
         case "Backup": return nil
         case "Feedin": return nil
         case "ForceCharge": return nil
-        case "ForceDischarge": return "The output power level to be delivered, including your house load and grid export. E.g. set this to 5000 if this is your inverter limit then if the house load is 750W the other 4.25kW will be exported"
+        case "ForceDischarge": return "The output power level to be delivered, including your house load and grid export. E.g. If you have 5kW inverter then set this to 5000, then if the house load is 750W the other 4.25kW will be exported."
         case "SelfUse": return nil
         default: return nil
         }
     }
 
     private func validate() {
-        guard !minSOC.isEmpty,
-              let minSOC = Int(minSOC),
-              minSOC < 10 || minSOC > 100
-        else {
+        minSOCError = nil
+        fdSOCError = nil
+        minSOCError = nil
+
+        if let minSOC = Int(minSOC), !(10...100 ~= minSOC) {
             minSOCError = "Please enter a number between 10 and 100"
-            return
         }
 
-        guard !fdSOC.isEmpty,
-              let fdSOC = Int(fdSOC),
-              minSOC < 10 || minSOC > 100
-        else {
+        if let fdSOC = Int(fdSOC), !(10...100 ~= fdSOC) {
             fdSOCError = "Please enter a number between 10 and 100"
-            return
         }
 
-        guard minSOC <= fdSOC
-        else {
-            minSOCError = "Please ensure Min SoC is less than or equal to Force Disscharge SoC"
+        if let minSOC = Int(minSOC), let fdSOC = Int(fdSOC), minSOC > fdSOC {
+            minSOCError = "Min SoC must be less than or equal to Force Discharge SoC"
             return
         }
     }

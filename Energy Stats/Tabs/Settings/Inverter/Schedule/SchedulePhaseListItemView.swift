@@ -21,12 +21,28 @@ struct SchedulePhaseListItemView: View {
             VStack(alignment: .leading) {
                 (Text(phase.start.formatted) + Text(" - ") + Text(phase.end.formatted)).bold()
 
-                Text(phase.mode.name)
+                (Text(phase.mode.name) + Text(extra(for: phase)))
+                    .foregroundStyle(Color.primary.opacity(0.5))
+                    .font(.caption)
             }.frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
+
+    private func extra(for phase: SchedulePhase) -> String {
+        switch phase.mode.key {
+        case "ForceDischarge":
+            return " down to \(phase.forceDischargeSOC)% at \(phase.forceDischargePower)W"
+        case "ForceCharge":
+            return " up to \(phase.batterySOC)%"
+        default:
+            return ""
         }
     }
 }
 
 #Preview {
-    SchedulePhaseListItemView(phase: Schedule.preview().phases.first!)
+    VStack {
+        SchedulePhaseListItemView(phase: Schedule.preview().phases[0])
+        SchedulePhaseListItemView(phase: Schedule.preview().phases[1])
+    }
 }

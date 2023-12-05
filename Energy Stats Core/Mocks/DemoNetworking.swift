@@ -26,7 +26,11 @@ public class DemoNetworking: FoxESSNetworking {
     public func enableScheduleTemplate(deviceSN: String, templateID: String) async throws { }
 
     public func fetchScheduleTemplates() async throws -> ScheduleTemplateListResponse {
-        ScheduleTemplateListResponse(data: [])
+        ScheduleTemplateListResponse(data: [
+            .init(templateName: "Winter charging", enable: false, templateID: "a"),
+            .init(templateName: "Saving session", enable: false, templateID: "b"),
+            .init(templateName: "Summer usage", enable: false, templateID: "c")
+        ])
     }
 
     public func createScheduleTemplate(name: String, description: String) async throws {}

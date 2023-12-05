@@ -26,7 +26,7 @@ struct ScheduleSummaryView: View {
                     if schedule.phases.count > 0 {
                         Section {
                             ScheduleView(schedule: schedule)
-                                .padding(.top, 4)
+                                .padding(.vertical, 4)
                         } header: {
                             Text("Current Schedule")
                         } footer: {
@@ -76,7 +76,7 @@ struct ScheduleSummaryView: View {
                 } footer: {
                     VStack(alignment: .leading) {
                         NavigationLink {
-                            ScheduleTemplateListView(networking: networking, config: config)
+                            ScheduleTemplateListView(networking: networking, config: config, modes: viewModel.modes)
                         } label: {
                             Text("Manage templates")
                         }
