@@ -32,7 +32,7 @@ struct PowerFlowTabView: View {
                 updateFooterMessage()
             case let .failed(error, reason):
                 Spacer()
-                ErrorAlertView(cause: error, message: reason) {
+                ErrorAlertView(cause: error, message: reason, allowRetry: true) {
                     Task { await viewModel.timerFired() }
                 }
                 Spacer()

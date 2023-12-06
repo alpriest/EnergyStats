@@ -31,7 +31,7 @@ class DataLoggersViewModel: ObservableObject {
     func load() {
         Task { @MainActor in
             guard state == .inactive else { return }
-            state = .active(String(key: .loading))
+            state = .active("Loading")
 
             do {
                 let result = try await networking.fetchDataLoggers()

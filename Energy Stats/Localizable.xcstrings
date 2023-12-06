@@ -1363,6 +1363,9 @@
     "Activate schedule" : {
 
     },
+    "Activating" : {
+
+    },
     "Adaptive" : {
       "localizations" : {
         "de" : {
@@ -3874,6 +3877,9 @@
         }
       }
     },
+    "Edit Schedule" : {
+
+    },
     "Empty" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -6007,6 +6013,9 @@
           }
         }
       }
+    },
+    "Loading..." : {
+
     },
     "Loads " : {
       "extractionState" : "manual",

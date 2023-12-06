@@ -43,7 +43,7 @@ class ScheduleTemplateListViewModel: ObservableObject {
     func createTemplate(name: String, description: String) async {
         guard state == .inactive else { return }
 
-        self.state = .active(String(key: .saving))
+        state = .active("Saving")
 
         do {
             try await self.networking.createScheduleTemplate(name: name, description: description)

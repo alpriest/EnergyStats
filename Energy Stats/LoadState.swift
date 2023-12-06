@@ -9,7 +9,7 @@ import SwiftUI
 
 enum LoadState: Equatable {
     case inactive
-    case active(String)
+    case active(LocalizedStringKey)
     case error(Error?, String)
 
     static func ==(lhs: LoadState, rhs: LoadState) -> Bool {
@@ -28,6 +28,7 @@ enum LoadState: Equatable {
 
 struct LoadStateView: ViewModifier {
     @Binding var loadState: LoadState
+    var allowRetry: Bool
     let retry: () -> Void
 
     func body(content: Content) -> some View {
@@ -38,7 +39,7 @@ struct LoadStateView: ViewModifier {
                 ProgressView()
             }
         case .error(let error, let reason):
-            ErrorAlertView(cause: error, message: reason, retry: retry)
+            ErrorAlertView(cause: error, message: reason, allowRetry: allowRetry, retry: retry)
         case .inactive:
             content
         }
@@ -46,8 +47,8 @@ struct LoadStateView: ViewModifier {
 }
 
 extension View {
-    func loadable(_ state: Binding<LoadState>, retry: @escaping () -> Void) -> some View {
-        modifier(LoadStateView(loadState: state, retry: retry))
+    func loadable(_ state: Binding<LoadState>, allowRetry: Bool = true, retry: @escaping () -> Void) -> some View {
+        modifier(LoadStateView(loadState: state, allowRetry: allowRetry, retry: retry))
     }
 }
 

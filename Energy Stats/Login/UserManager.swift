@@ -64,7 +64,7 @@ class UserManager: ObservableObject {
     @MainActor
     func login(username: String, password: String) async {
         do {
-            state = .active(String(key: .loading))
+            state = .active("Loading")
             guard let hashedPassword = password.md5() else { throw NSError(domain: "md5", code: 0) }
 
             if username == "demo", password == "user" {

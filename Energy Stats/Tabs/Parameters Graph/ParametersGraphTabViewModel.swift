@@ -123,7 +123,7 @@ class ParametersGraphTabViewModel: ObservableObject {
         guard let currentDevice = configManager.currentDevice.value else { return }
 
         Task { @MainActor in
-            state = .active(String(localized: "Loading"))
+            state = .active("Loading")
         }
 
         do {

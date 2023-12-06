@@ -31,7 +31,7 @@ class ScheduleSummaryViewModel: ObservableObject {
             state == .inactive
         else { return }
 
-        self.state = .active(String(key: .loading))
+        state = .active("Loading")
 
         do {
             self.supported = try await self.networking.fetchSchedulerFlag(deviceSN: deviceSN).support
@@ -58,7 +58,7 @@ class ScheduleSummaryViewModel: ObservableObject {
         else { return }
 
         if self.modes.count == 0 { await self.preload() }
-        setState(.active(String(key: .loading)))
+        state = .active("Loading")
 
         do {
             let scheduleResponse = try await networking.fetchCurrentSchedule(deviceSN: deviceSN)
@@ -79,7 +79,7 @@ class ScheduleSummaryViewModel: ObservableObject {
         else { return }
 
         do {
-            self.state = .active(String(key: .saving))
+            state = .active("Loading")
 
             try await networking.enableScheduleTemplate(deviceSN: deviceSN, templateID: templateID)
             await load()

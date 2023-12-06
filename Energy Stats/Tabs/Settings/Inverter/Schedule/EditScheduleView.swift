@@ -55,10 +55,9 @@ struct EditScheduleView: View {
             }
 
             if viewModel.schedule.phases.count == 0 {
-                Section {}
-                    footer: {
-                        Text("You have no time periods defined. Add a time period to define how you'd like your inverter to behave during specific hours.")
-                    }
+                FooterSection {
+                    Text("You have no time periods defined. Add a time period to define how you'd like your inverter to behave during specific hours.")
+                }
             }
 
             ForEach(viewModel.schedule.phases) { phase in
@@ -77,65 +76,78 @@ struct EditScheduleView: View {
             }
             .frame(maxWidth: .infinity)
 
-            Section {}
-            footer: {
-                    VStack(alignment: .leading) {
+            FooterSection {
+                VStack(alignment: .leading) {
+                    Button {
+                        viewModel.addNewTimePeriod()
+                    } label: {
+                        Text("Add time period")
+                    }.buttonStyle(.borderedProminent)
+
+                    if allowSavingTemplate {
                         Button {
-                            viewModel.addNewTimePeriod()
+                            viewModel.saveTemplate {
+                                presentationMode.wrappedValue.dismiss()
+                            }
                         } label: {
-                            Text("Add time period")
-                        }.buttonStyle(.borderedProminent)
+                            Text("Save template")
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .disabled(viewModel.schedule.phases.count == 0)
+                    }
 
-                        if allowSavingTemplate {
-                            Button {
-                                viewModel.saveTemplate {
+                    if allowSaveAsActiveSchedule {
+                        Button {
+                            Task {
+                                await viewModel.saveSchedule {
                                     presentationMode.wrappedValue.dismiss()
                                 }
-                            } label: {
-                                Text("Save template")
                             }
-                            .buttonStyle(.borderedProminent)
-                            .disabled(viewModel.schedule.phases.count == 0)
+                        } label: {
+                            Text("Activate schedule")
                         }
+                        .buttonStyle(.borderedProminent)
+                        .disabled(viewModel.schedule.phases.count == 0)
+                    }
 
-                        if allowSaveAsActiveSchedule {
-                            Button {
-                                viewModel.saveSchedule {
+                    if allowDeletion {
+                        Button(role: .destructive) {
+                            presentConfirmation = true
+                        } label: {
+                            Text("Delete this schedule")
+                        }
+                        .buttonStyle(.bordered)
+                        .confirmationDialog("Are you sure you want to delete this schedule?",
+                                            isPresented: $presentConfirmation,
+                                            titleVisibility: .visible)
+                        {
+                            Button("Delete", role: .destructive) {
+                                viewModel.deleteSchedule {
                                     presentationMode.wrappedValue.dismiss()
                                 }
-                            } label: {
-                                Text("Activate schedule")
                             }
-                            .buttonStyle(.borderedProminent)
-                            .disabled(viewModel.schedule.phases.count == 0)
-                        }
 
-                        if allowDeletion {
-                            Button(role: .destructive) {
-                                presentConfirmation = true
-                            } label: {
-                                Text("Delete this schedule")
-                            }
-                            .buttonStyle(.bordered)
-                            .confirmationDialog("Are you sure you want to delete this schedule?",
-                                                isPresented: $presentConfirmation,
-                                                titleVisibility: .visible)
-                            {
-                                Button("Delete", role: .destructive) {
-                                    viewModel.deleteSchedule {
-                                        presentationMode.wrappedValue.dismiss()
-                                    }
-                                }
-
-                                Button("Cancel", role: .cancel) {
-                                    presentConfirmation = false
-                                }
+                            Button("Cancel", role: .cancel) {
+                                presentConfirmation = false
                             }
                         }
                     }
                 }
+            }
         }
+        .navigationTitle("Edit Schedule")
+        .navigationBarTitleDisplayMode(.inline)
+        .loadable($viewModel.state, allowRetry: false, retry: { viewModel.unused() })
         .alert(alertContent: $viewModel.alertContent)
+    }
+}
+
+struct FooterSection<V: View>: View {
+    var content: () -> V
+
+    var body: some View {
+        Section {}
+            footer: { content() }
     }
 }
 

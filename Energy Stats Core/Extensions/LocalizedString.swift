@@ -9,8 +9,6 @@ import Foundation
 
 public struct LocalizedString {
     public enum Key: String, RawRepresentable {
-        case loading = "Loading"
-        case saving = "Saving"
         case success = "Success"
         case couldNotLogin = "Could not login. Check your internet connection"
         case wrongCredentials = "Wrong credentials, try again"

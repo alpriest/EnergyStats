@@ -24,16 +24,16 @@ class EditScheduleViewModel: ObservableObject {
         self.modes = modes
     }
 
-    func saveSchedule(onCompletion: @escaping () -> Void) {
+    func saveSchedule(onCompletion: @escaping () -> Void) async {
         guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
         guard isValid() else {
             alertContent = AlertContent(title: "error_title", message: "overlapping_time_periods")
             return
         }
 
-        Task { [self] in
-            setState(.active(String(key: .saving)))
+        setState(.active("Activating"))
 
+        Task { [self] in
             do {
                 try await networking.saveSchedule(deviceSN: deviceSN, schedule: schedule)
 
@@ -60,9 +60,9 @@ class EditScheduleViewModel: ObservableObject {
             return
         }
 
-        Task { [self] in
-            setState(.active(String(key: .saving)))
+        setState(.active("Saving"))
 
+        Task { [self] in
             do {
                 try await networking.saveScheduleTemplate(deviceSN: deviceSN,
                                                           template: ScheduleTemplate(id: templateID, phases: schedule.phases))
@@ -85,9 +85,9 @@ class EditScheduleViewModel: ObservableObject {
     func deleteSchedule(onCompletion: @escaping () -> Void) {
         guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
 
-        Task { [self] in
-            setState(.active(String(key: .saving)))
+        setState(.active("Saving"))
 
+        Task { [self] in
             do {
                 try await networking.deleteSchedule(deviceSN: deviceSN)
 
@@ -149,6 +149,8 @@ class EditScheduleViewModel: ObservableObject {
             self.state = state
         }
     }
+
+    func unused() {}
 }
 
 extension EditScheduleViewModel {

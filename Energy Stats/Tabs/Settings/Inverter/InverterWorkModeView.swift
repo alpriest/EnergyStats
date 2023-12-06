@@ -26,7 +26,7 @@ class InverterWorkModeViewModel: ObservableObject {
         Task { @MainActor in
             guard state == .inactive else { return }
             guard let deviceID = config.currentDevice.value?.deviceID else { return }
-            state = .active(String(key: .loading))
+            state = .active("Loading")
 
             do {
                 let response = try await networking.fetchWorkMode(deviceID: deviceID)
@@ -46,7 +46,7 @@ class InverterWorkModeViewModel: ObservableObject {
         Task { @MainActor in
             guard state == .inactive else { return }
             guard let deviceID = config.currentDevice.value?.deviceID else { return }
-            state = .active(String(key: .saving))
+            state = .active("Saving")
 
             do {
                 try await networking.setWorkMode(deviceID: deviceID, workMode: mode.asInverterWorkMode())

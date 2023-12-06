@@ -36,6 +36,7 @@ struct EqualWidthButtonStyle: ButtonStyle {
 struct ErrorAlertView: View {
     let cause: Error?
     let message: String
+    let allowRetry: Bool
     let retry: () -> Void
     @EnvironmentObject var userManager: UserManager
     @State private var buttonWidth: CGFloat = .zero
@@ -74,12 +75,14 @@ struct ErrorAlertView: View {
             .buttonStyle(EqualWidthButtonStyle(buttonWidth: $buttonWidth))
 
             VStack {
-                Button(action: { retry() }) {
-                    Text("Retry")
-                        .background(rectReader($buttonWidth))
-                        .frame(minWidth: buttonWidth)
+                if allowRetry {
+                    Button(action: { retry() }) {
+                        Text("Retry")
+                            .background(rectReader($buttonWidth))
+                            .frame(minWidth: buttonWidth)
+                    }
+                    .buttonStyle(EqualWidthButtonStyle(buttonWidth: $buttonWidth))
                 }
-                .buttonStyle(EqualWidthButtonStyle(buttonWidth: $buttonWidth))
 
                 Button {
                     let url = URL(string: "https://monitor.foxesscommunity.com/")!
@@ -167,6 +170,7 @@ struct ErrorAlertView: View {
     ErrorAlertView(
         cause: NetworkError.badCredentials,
         message: "This is a long message. This is a long message. This is a long message. This is a long message",
+        allowRetry: true,
         retry: {}
     )
     .environmentObject(UserManager.preview())
