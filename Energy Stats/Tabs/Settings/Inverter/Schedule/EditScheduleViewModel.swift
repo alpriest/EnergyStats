@@ -76,6 +76,13 @@ class EditScheduleViewModel: ObservableObject {
         }
     }
 
+    func autoFillScheduleGaps() {
+        guard let mode = modes.first else { return }
+        let minSOC = Int(config.currentDevice.value?.battery?.minSOC) ?? 10
+
+        self.schedule = SchedulePhaseHelper.appendPhasesInGaps(to: schedule, mode: mode, soc: minSOC)
+    }
+
     func addNewTimePeriod() {
         self.schedule = SchedulePhaseHelper.addNewTimePeriod(to: schedule, modes: modes)
     }

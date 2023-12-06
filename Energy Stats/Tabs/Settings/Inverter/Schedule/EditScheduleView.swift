@@ -50,6 +50,12 @@ struct EditScheduleView: View {
                     }.buttonStyle(.borderedProminent)
 
                     Button {
+                        viewModel.autoFillScheduleGaps()
+                    } label: {
+                        Text("Autofill gaps")
+                    }.buttonStyle(.borderedProminent)
+
+                    Button {
                         Task {
                             await viewModel.saveSchedule {
                                 presentationMode.wrappedValue.dismiss()

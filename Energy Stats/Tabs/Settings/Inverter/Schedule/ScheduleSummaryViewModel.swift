@@ -72,14 +72,14 @@ class ScheduleSummaryViewModel: ObservableObject {
     }
 
     @MainActor
-    func enable(templateID: String) async {
+    func activate(templateID: String) async {
         guard
             let deviceSN = config.currentDevice.value?.deviceSN,
             state == .inactive
         else { return }
 
         do {
-            state = .active("Loading")
+            state = .active("Activating")
 
             try await networking.enableScheduleTemplate(deviceSN: deviceSN, templateID: templateID)
             await load()

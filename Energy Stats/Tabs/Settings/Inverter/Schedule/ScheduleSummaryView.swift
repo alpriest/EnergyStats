@@ -67,7 +67,7 @@ struct ScheduleSummaryView: View {
                             Text(template.name)
                             Spacer()
                             Button {
-                                Task { await viewModel.enable(templateID: template.id) }
+                                Task { await viewModel.activate(templateID: template.id) }
                             } label: {
                                 Text("Activate")
                             }.buttonStyle(.borderless)

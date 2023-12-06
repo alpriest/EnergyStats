@@ -127,7 +127,7 @@ public class Network: FoxESSNetworking {
             queryItems: [
                 URLQueryItem(name: "templateID", value: templateID),
             ],
-            to: URL.getSchedule
+            to: URL.deleteScheduleTemplate
         )
         addLocalisedHeaders(to: &request)
 

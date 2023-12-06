@@ -100,6 +100,14 @@ class EditTemplateViewModel: ObservableObject {
         }
     }
 
+    func autoFillScheduleGaps() {
+        guard let schedule else { return }
+        guard let mode = modes.first else { return }
+        let minSOC = Int(config.currentDevice.value?.battery?.minSOC) ?? 10
+
+        self.schedule = SchedulePhaseHelper.appendPhasesInGaps(to: schedule, mode: mode, soc: minSOC)
+    }
+
     func addNewTimePeriod() {
         guard let schedule else { return }
 
@@ -122,5 +130,13 @@ class EditTemplateViewModel: ObservableObject {
         Task { @MainActor in
             self.state = state
         }
+    }
+}
+
+extension Int {
+    init?(_ value: String?) {
+        guard let value else {return nil}
+
+        self.init(value)
     }
 }

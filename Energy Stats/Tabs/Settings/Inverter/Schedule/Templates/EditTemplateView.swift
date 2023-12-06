@@ -43,6 +43,12 @@ struct EditTemplateView: View {
                         }.buttonStyle(.borderedProminent)
 
                         Button {
+                            viewModel.autoFillScheduleGaps()
+                        } label: {
+                            Text("Autofill gaps")
+                        }.buttonStyle(.borderedProminent)
+
+                        Button {
                             viewModel.saveTemplate {
                                 presentationMode.wrappedValue.dismiss()
                             }
