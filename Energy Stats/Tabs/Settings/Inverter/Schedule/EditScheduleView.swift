@@ -12,18 +12,14 @@ struct EditScheduleView: View {
     @StateObject private var viewModel: EditScheduleViewModel
     @State private var presentConfirmation = false
     @Environment(\.presentationMode) var presentationMode
-    private let allowDeletion: Bool
-    private let allowSaveAsActiveSchedule: Bool
-    private let allowSavingTemplate: Bool
+    private let allowDelete: Bool
 
     init(
         networking: FoxESSNetworking,
         config: ConfigManaging,
         schedule: Schedule,
         modes: [SchedulerModeResponse],
-        allowDeletion: Bool,
-        allowSaveAsActiveSchedule: Bool,
-        allowSavingTemplate: Bool
+        allowDelete: Bool
     ) {
         _viewModel = StateObject(
             wrappedValue: EditScheduleViewModel(
@@ -33,48 +29,17 @@ struct EditScheduleView: View {
                 modes: modes
             )
         )
-        self.allowDeletion = allowDeletion
-        self.allowSaveAsActiveSchedule = allowSaveAsActiveSchedule
-        self.allowSavingTemplate = allowSavingTemplate
+        self.allowDelete = allowDelete
     }
 
     var body: some View {
         Form {
-            Section {
-                VStack(alignment: .leading) {
-                    if !viewModel.schedule.name.isEmpty {
-                        Text(viewModel.schedule.name)
-                            .font(.title2)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.bottom)
-                    }
-
-                    TimePeriodBarView(phases: viewModel.schedule.phases)
-                        .padding(.bottom, 22)
-                }
-            }
-
-            if viewModel.schedule.phases.count == 0 {
-                FooterSection {
-                    Text("You have no time periods defined. Add a time period to define how you'd like your inverter to behave during specific hours.")
-                }
-            }
-
-            ForEach(viewModel.schedule.phases) { phase in
-                NavigationLink {
-                    SchedulePhaseEditView(modes: viewModel.modes,
-                                          phase: phase,
-                                          onChange: {
-                                              viewModel.updated(phase: $0)
-                                          },
-                                          onDelete: {
-                                              viewModel.deleted(phase: $0)
-                                          })
-                } label: {
-                    SchedulePhaseListItemView(phase: phase)
-                }
-            }
-            .frame(maxWidth: .infinity)
+            ScheduleDetailView(
+                schedule: viewModel.schedule,
+                modes: viewModel.modes,
+                onUpdate: viewModel.updatedPhase,
+                onDelete: viewModel.deletedPhase
+            )
 
             FooterSection {
                 VStack(alignment: .leading) {
@@ -84,37 +49,23 @@ struct EditScheduleView: View {
                         Text("Add time period")
                     }.buttonStyle(.borderedProminent)
 
-                    if allowSavingTemplate {
-                        Button {
-                            viewModel.saveTemplate {
+                    Button {
+                        Task {
+                            await viewModel.saveSchedule {
                                 presentationMode.wrappedValue.dismiss()
                             }
-                        } label: {
-                            Text("Save template")
                         }
-                        .buttonStyle(.borderedProminent)
-                        .disabled(viewModel.schedule.phases.count == 0)
+                    } label: {
+                        Text("Activate schedule")
                     }
+                    .buttonStyle(.borderedProminent)
+                    .disabled(viewModel.schedule.phases.count == 0)
 
-                    if allowSaveAsActiveSchedule {
-                        Button {
-                            Task {
-                                await viewModel.saveSchedule {
-                                    presentationMode.wrappedValue.dismiss()
-                                }
-                            }
-                        } label: {
-                            Text("Activate schedule")
-                        }
-                        .buttonStyle(.borderedProminent)
-                        .disabled(viewModel.schedule.phases.count == 0)
-                    }
-
-                    if allowDeletion {
+                    if allowDelete {
                         Button(role: .destructive) {
                             presentConfirmation = true
                         } label: {
-                            Text("Delete this schedule")
+                            Text("Delete schedule")
                         }
                         .buttonStyle(.bordered)
                         .confirmationDialog("Are you sure you want to delete this schedule?",
@@ -135,7 +86,7 @@ struct EditScheduleView: View {
                 }
             }
         }
-        .navigationTitle("Edit Schedule")
+        .navigationTitle("Edit schedule")
         .navigationBarTitleDisplayMode(.inline)
         .loadable($viewModel.state, allowRetry: false, retry: { viewModel.unused() })
         .alert(alertContent: $viewModel.alertContent)
@@ -158,9 +109,7 @@ struct FooterSection<V: View>: View {
             config: PreviewConfigManager(),
             schedule: Schedule.preview(),
             modes: SchedulerModeResponse.preview(),
-            allowDeletion: true,
-            allowSaveAsActiveSchedule: true,
-            allowSavingTemplate: true
+            allowDelete: true
         )
     }
 }

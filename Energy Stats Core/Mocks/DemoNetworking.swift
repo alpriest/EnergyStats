@@ -23,6 +23,8 @@ public class DemoNetworking: FoxESSNetworking {
         // Assume mock credentials are valid
     }
 
+    public func deleteScheduleTemplate(templateID: String) async throws {}
+
     public func saveScheduleTemplate(deviceSN: String, template: ScheduleTemplate) async throws {}
 
     public func fetchScheduleTemplate(deviceSN: String, templateID: String) async throws -> ScheduleTemplateResponse {

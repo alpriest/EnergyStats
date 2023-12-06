@@ -52,7 +52,7 @@ public struct SchedulePollcy: Codable {
     public let startM: Int
     public let endH: Int
     public let endM: Int
-    public let fdpwr: Int
+    public let fdpwr: Int?
     public let workMode: String
     public let fdsoc: Int
     public let minsocongrid: Int

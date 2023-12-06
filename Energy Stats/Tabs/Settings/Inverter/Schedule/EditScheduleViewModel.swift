@@ -26,7 +26,7 @@ class EditScheduleViewModel: ObservableObject {
 
     func saveSchedule(onCompletion: @escaping () -> Void) async {
         guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
-        guard isValid() else {
+        guard schedule.isValid() else {
             alertContent = AlertContent(title: "error_title", message: "overlapping_time_periods")
             return
         }
@@ -42,36 +42,6 @@ class EditScheduleViewModel: ObservableObject {
                     alertContent = AlertContent(
                         title: "Success",
                         message: "inverter_charge_schedule_settings_saved",
-                        onDismiss: onCompletion
-                    )
-                }
-            } catch {
-                self.state = .inactive
-                alertContent = AlertContent(title: "error_title", message: LocalizedStringKey(stringLiteral: error.localizedDescription))
-            }
-        }
-    }
-
-    func saveTemplate(onCompletion: @escaping () -> Void) {
-        guard let templateID = schedule.templateID else { return }
-        guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
-        guard isValid() else {
-            alertContent = AlertContent(title: "error_title", message: "overlapping_time_periods")
-            return
-        }
-
-        setState(.active("Saving"))
-
-        Task { [self] in
-            do {
-                try await networking.saveScheduleTemplate(deviceSN: deviceSN,
-                                                          template: ScheduleTemplate(id: templateID, phases: schedule.phases))
-
-                Task { @MainActor in
-                    self.state = .inactive
-                    alertContent = AlertContent(
-                        title: "Success",
-                        message: "Template updated",
                         onDismiss: onCompletion
                     )
                 }
@@ -107,41 +77,15 @@ class EditScheduleViewModel: ObservableObject {
     }
 
     func addNewTimePeriod() {
-        guard let mode = modes.first else { return }
-
-        schedule = Schedule(
-            name: schedule.name,
-            phases: schedule.phases + [SchedulePhase(mode: mode)],
-            templateID: schedule.templateID
-        )
+        self.schedule = SchedulePhaseHelper.addNewTimePeriod(to: schedule, modes: modes)
     }
 
-    func updated(phase updatedPhase: SchedulePhase) {
-        schedule = Schedule(
-            name: schedule.name,
-            phases: schedule.phases.map {
-                if $0.id == updatedPhase.id {
-                    return updatedPhase
-                } else {
-                    return $0
-                }
-            },
-            templateID: schedule.templateID
-        )
+    func updatedPhase(_ phase: SchedulePhase) {
+        self.schedule = SchedulePhaseHelper.updated(phase: phase, on: schedule)
     }
 
-    func deleted(phase id: String) {
-        schedule = Schedule(
-            name: schedule.name,
-            phases: schedule.phases.compactMap {
-                if $0.id == id {
-                    return nil
-                } else {
-                    return $0
-                }
-            },
-            templateID: schedule.templateID
-        )
+    func deletedPhase(_ id: String) {
+        self.schedule = SchedulePhaseHelper.deleted(phaseID: id, on: schedule)
     }
 
     private func setState(_ state: LoadState) {
@@ -153,14 +97,14 @@ class EditScheduleViewModel: ObservableObject {
     func unused() {}
 }
 
-extension EditScheduleViewModel {
+extension Schedule {
     func isValid() -> Bool {
-        for (index, phase) in schedule.phases.enumerated() {
+        for (index, phase) in phases.enumerated() {
             let phaseStart = phase.start.toMinutes()
             let phaseEnd = phase.end.toMinutes()
 
             // Check for overlap with other phases
-            for otherPhase in schedule.phases[(index + 1)...] {
+            for otherPhase in phases[(index + 1)...] {
                 let otherStart = otherPhase.start.toMinutes()
                 let otherEnd = otherPhase.end.toMinutes()
 
@@ -182,7 +126,7 @@ extension SchedulePollcy {
             start: Time(hour: startH, minute: startM),
             end: Time(hour: endH, minute: endM),
             mode: workModes.first { $0.key == workMode },
-            forceDischargePower: fdpwr,
+            forceDischargePower: fdpwr ?? 0,
             forceDischargeSOC: fdsoc,
             batterySOC: minsocongrid,
             color: Color.scheduleColor(named: workMode)

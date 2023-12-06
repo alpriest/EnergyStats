@@ -34,6 +34,8 @@ struct SchedulePhaseListItemView: View {
             return " down to \(phase.forceDischargeSOC)% at \(phase.forceDischargePower)W"
         case "ForceCharge":
             return " up to \(phase.batterySOC)%"
+        case "SelfUse":
+            return " with \(phase.batterySOC)% min SOC"
         default:
             return ""
         }

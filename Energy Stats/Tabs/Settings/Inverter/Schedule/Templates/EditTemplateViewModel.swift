@@ -7,9 +7,11 @@
 
 import Energy_Stats_Core
 import Foundation
+import SwiftUI
 
 class EditTemplateViewModel: ObservableObject {
     @Published var state: LoadState = .inactive
+    @Published var alertContent: AlertContent?
     @Published var schedule: Schedule?
     let networking: FoxESSNetworking
     let config: ConfigManaging
@@ -27,7 +29,7 @@ class EditTemplateViewModel: ObservableObject {
         }
     }
 
-    private func load() async {
+    func load() async {
         guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
 
         do {
@@ -43,6 +45,77 @@ class EditTemplateViewModel: ObservableObject {
         } catch {
             setState(.error(error, error.localizedDescription))
         }
+    }
+
+    func saveTemplate(onCompletion: @escaping () -> Void) {
+        guard let schedule else { return }
+        guard let templateID = schedule.templateID else { return }
+        guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
+        guard schedule.isValid() else {
+            alertContent = AlertContent(title: "error_title", message: "overlapping_time_periods")
+            return
+        }
+
+        setState(.active("Saving"))
+
+        Task { [self] in
+            do {
+                try await networking.saveScheduleTemplate(deviceSN: deviceSN,
+                                                          template: ScheduleTemplate(id: templateID, phases: schedule.phases))
+
+                Task { @MainActor in
+                    self.state = .inactive
+                    alertContent = AlertContent(
+                        title: "Success",
+                        message: "Template updated",
+                        onDismiss: onCompletion
+                    )
+                }
+            } catch {
+                self.state = .inactive
+                alertContent = AlertContent(title: "error_title", message: LocalizedStringKey(stringLiteral: error.localizedDescription))
+            }
+        }
+    }
+
+    func deleteTemplate(onCompletion: @escaping () -> Void) {
+        setState(.active("Saving"))
+
+        Task { [self] in
+            do {
+                try await networking.deleteScheduleTemplate(templateID: templateID)
+
+                Task { @MainActor in
+                    self.state = .inactive
+                    alertContent = AlertContent(
+                        title: "Success",
+                        message: "inverter_charge_template_deleted",
+                        onDismiss: onCompletion
+                    )
+                }
+            } catch {
+                self.state = .inactive
+                alertContent = AlertContent(title: "error_title", message: LocalizedStringKey(stringLiteral: error.localizedDescription))
+            }
+        }
+    }
+
+    func addNewTimePeriod() {
+        guard let schedule else { return }
+
+        self.schedule = SchedulePhaseHelper.addNewTimePeriod(to: schedule, modes: modes)
+    }
+
+    func updatedPhase(_ phase: SchedulePhase) {
+        guard let schedule else { return }
+
+        self.schedule = SchedulePhaseHelper.updated(phase: phase, on: schedule)
+    }
+
+    func deletedPhase(_ id: String) {
+        guard let schedule else { return }
+
+        self.schedule = SchedulePhaseHelper.deleted(phaseID: id, on: schedule)
     }
 
     private func setState(_ state: LoadState) {

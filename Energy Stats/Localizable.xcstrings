@@ -1681,6 +1681,9 @@
     "Are you sure you want to delete this schedule?" : {
 
     },
+    "Are you sure you want to delete this template?" : {
+
+    },
     "Auto" : {
       "localizations" : {
         "de" : {
@@ -3558,7 +3561,10 @@
         }
       }
     },
-    "Delete this schedule" : {
+    "Delete schedule" : {
+
+    },
+    "Delete template" : {
 
     },
     "Delete time period" : {
@@ -3877,7 +3883,10 @@
         }
       }
     },
-    "Edit Schedule" : {
+    "Edit schedule" : {
+
+    },
+    "Edit Template" : {
 
     },
     "Empty" : {
@@ -5775,6 +5784,9 @@
           }
         }
       }
+    },
+    "inverter_charge_template_deleted" : {
+
     },
     "inverter_settings_saved" : {
       "extractionState" : "manual",
@@ -11312,7 +11324,7 @@
         }
       }
     },
-    "Work model" : {
+    "Work strategy" : {
 
     },
     "Wrong credentials, try again" : {

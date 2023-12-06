@@ -30,15 +30,6 @@ class ScheduleTemplateListViewModel: ObservableObject {
         }
     }
 
-    func loadTemplate(id: String?) {
-        guard let id else {
-            schedule = nil
-            return
-        }
-
-        // Load from network
-    }
-
     @MainActor
     func createTemplate(name: String, description: String) async {
         guard state == .inactive else { return }

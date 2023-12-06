@@ -8,7 +8,7 @@
 import SwiftUI
 
 public struct OptionalView<T, Content>: View where Content: View {
-    public init(_ item: T?, content: @escaping (T) -> Content) {
+    public init(_ item: T?, @ViewBuilder content: @escaping (T) -> Content) {
         self.item = item
         self.content = content
     }
@@ -31,8 +31,9 @@ struct OptionalView_Previews: PreviewProvider {
         let unset: String? = nil
 
         return VStack {
-            OptionalView(optional) {
-                Text($0)
+            OptionalView(optional) { f in
+                Text(f)
+                Text(f)
             }
 
             OptionalView(unset) {

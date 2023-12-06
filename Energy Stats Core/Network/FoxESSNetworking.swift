@@ -35,6 +35,7 @@ private extension URL {
     static var createScheduleTemplate = URL(string: "https://www.foxesscloud.com/generic/v0/device/scheduler/create")!
     static var fetchScheduleTemplates = URL(string: "https://www.foxesscloud.com/generic/v0/device/scheduler/edit/list?templateType=2")!
     static var getSchedule = URL(string: "https://www.foxesscloud.com/generic/v0/device/scheduler/detail")!
+    static var deleteScheduleTemplate = URL(string: "https://www.foxesscloud.com/generic/v0/device/scheduler/delete")!
 }
 
 public protocol FoxESSNetworking {
@@ -66,6 +67,7 @@ public protocol FoxESSNetworking {
     func fetchScheduleTemplates() async throws -> ScheduleTemplateListResponse
     func enableScheduleTemplate(deviceSN: String, templateID: String) async throws
     func fetchScheduleTemplate(deviceSN: String, templateID: String) async throws -> ScheduleTemplateResponse
+    func deleteScheduleTemplate(templateID: String) async throws
 }
 
 public class Network: FoxESSNetworking {
@@ -118,6 +120,22 @@ public class Network: FoxESSNetworking {
 
         let response: (AuthResponse, _) = try await fetch(request, retry: false)
         return response.0.token
+    }
+
+    public func deleteScheduleTemplate(templateID: String) async throws {
+        var request = append(
+            queryItems: [
+                URLQueryItem(name: "templateID", value: templateID),
+            ],
+            to: URL.getSchedule
+        )
+        addLocalisedHeaders(to: &request)
+
+        do {
+            let _: (String, Data) = try await fetch(request)
+        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
+            // Ignore
+        }
     }
 
     public func fetchScheduleTemplate(deviceSN: String, templateID: String) async throws -> ScheduleTemplateResponse {

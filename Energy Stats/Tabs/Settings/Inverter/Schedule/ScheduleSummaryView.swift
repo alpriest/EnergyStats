@@ -31,9 +31,7 @@ struct ScheduleSummaryView: View {
                                                    config: config,
                                                    schedule: schedule,
                                                    modes: viewModel.modes,
-                                                   allowDeletion: true,
-                                                   allowSaveAsActiveSchedule: true,
-                                                   allowSavingTemplate: false
+                                                   allowDelete: true
                                                )
                                            },
                                            label: {
@@ -55,9 +53,7 @@ struct ScheduleSummaryView: View {
                                 config: config,
                                 schedule: schedule,
                                 modes: viewModel.modes,
-                                allowDeletion: false,
-                                allowSaveAsActiveSchedule: true,
-                                allowSavingTemplate: false
+                                allowDelete: false
                             )
                         }, label: {
                             Text("Create a schedule")
@@ -92,7 +88,7 @@ struct ScheduleSummaryView: View {
             }
         }
         .loadable($viewModel.state, retry: { Task { await viewModel.load() } })
-        .navigationTitle("Work model")
+        .navigationTitle("Work strategy")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             Task { await self.viewModel.load() }
