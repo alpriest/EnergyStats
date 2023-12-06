@@ -70,6 +70,9 @@ class BatterySOCSettingsViewModel: ObservableObject {
 
                 alertContent = AlertContent(title: "Success", message: "batterySOC_settings_saved")
                 state = .inactive
+            } catch NetworkError.foxServerError(let code, _) where code == 44096 {
+                alertContent = AlertContent(title: "Failed", message: "cannot_save_due_to_active_schedule")
+                state = .inactive
             } catch {
                 state = .error(error, "Could not save settings")
             }

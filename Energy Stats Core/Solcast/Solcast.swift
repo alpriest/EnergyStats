@@ -51,7 +51,7 @@ public class Solcast: SolarForecasting {
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {
-                throw NetworkError.unknown("", "Invalid response type")
+                throw NetworkError.unknown("Invalid response type")
             }
 
             let decoder = JSONDecoder.solcast()

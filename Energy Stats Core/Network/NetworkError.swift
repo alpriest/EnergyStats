@@ -11,11 +11,12 @@ public enum NetworkError: LocalizedError, CustomStringConvertible, Equatable {
     case invalidResponse(_ url: URL?, _ responseCode: Int?)
     case invalidConfiguration(_ reason: String)
     case badCredentials
-    case unknown(_ errNo: String, _ message: String)
+    case foxServerError(_ errNo: Int, _ message: String)
     case invalidToken
     case tryLater
     case offline
     case maintenanceMode
+    case unknown(_ message: String)
 
     public var description: String {
         let builder = PartBuilder()
@@ -29,7 +30,7 @@ public enum NetworkError: LocalizedError, CustomStringConvertible, Equatable {
             builder.append("Invalid configuration", reason)
         case .badCredentials:
             builder.append(String(localized: "Bad credentials"))
-        case .unknown(let code, let message):
+        case .foxServerError(let code, let message):
             builder.append(String("Code: \(code) \(message)"))
         case .invalidToken:
             builder.append(String(localized: "Invalid token. Please logout and login again."))
@@ -39,6 +40,8 @@ public enum NetworkError: LocalizedError, CustomStringConvertible, Equatable {
             builder.append(String(localized: "You appear to be offline. Please check your connection."))
         case .maintenanceMode:
             builder.append(String(localized: "Fox servers are offline. Please try later."))
+        case .unknown(let message):
+            builder.append(message)
         }
 
         return builder.formatted()

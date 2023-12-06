@@ -106,7 +106,7 @@ public class DemoNetworking: FoxESSNetworking {
 
     public func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [ReportResponse] {
         if throwOnCall {
-            throw NetworkError.unknown("", "Fake thrown error")
+            throw NetworkError.foxServerError(0, "Fake thrown error")
         }
 
         let data: Data
@@ -127,7 +127,7 @@ public class DemoNetworking: FoxESSNetworking {
 
     public func fetchRaw(deviceID: String, variables: [RawVariable], queryDate: QueryDate) async throws -> [RawResponse] {
         if throwOnCall {
-            throw NetworkError.unknown("", "Fake thrown error")
+            throw NetworkError.foxServerError(0, "Fake thrown error")
         }
 
         let data = try data(filename: "raw-\(deviceID)")

@@ -418,7 +418,7 @@ private extension Network {
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {
-                throw NetworkError.unknown("", "Invalid response type")
+                throw NetworkError.unknown("Invalid response type")
             }
 
             store.latestData = data
@@ -438,7 +438,7 @@ private extension Network {
                 } else if networkResponse.errno == 30000 {
                     throw NetworkError.maintenanceMode
                 } else {
-                    throw NetworkError.unknown(String(networkResponse.errno), errorMessage(for: networkResponse.errno))
+                    throw NetworkError.foxServerError(networkResponse.errno, errorMessage(for: networkResponse.errno))
                 }
             }
 

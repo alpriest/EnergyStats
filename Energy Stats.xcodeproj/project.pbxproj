@@ -94,6 +94,8 @@
 		4141B20028D86C7200B60157 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141B1FF28D86C7200B60157 /* UserManager.swift */; };
 		4141B20228D871B900B60157 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141B20128D871B900B60157 /* ContentView.swift */; };
 		41463D912AC44C7C00B2EB25 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 41463D902AC44C7C00B2EB25 /* Localizable.xcstrings */; };
+		41495F382B211A75004A51C1 /* AlertContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41495F372B211A75004A51C1 /* AlertContentView.swift */; };
+		41495F3A2B211C8B004A51C1 /* InverterWorkModeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41495F392B211C8B004A51C1 /* InverterWorkModeViewModel.swift */; };
 		4149DE9B2B03C3AC004F5FC6 /* SolcastSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4149DE9A2B03C3AC004F5FC6 /* SolcastSettingsView.swift */; };
 		4149DE9D2B04BDE6004F5FC6 /* SolcastCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4149DE9C2B04BDE6004F5FC6 /* SolcastCache.swift */; };
 		414BF82829B4918300E2EB51 /* SettingsTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */; };
@@ -431,6 +433,8 @@
 		4141B1FF28D86C7200B60157 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		4141B20128D871B900B60157 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		41463D902AC44C7C00B2EB25 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		41495F372B211A75004A51C1 /* AlertContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertContentView.swift; sourceTree = "<group>"; };
+		41495F392B211C8B004A51C1 /* InverterWorkModeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterWorkModeViewModel.swift; sourceTree = "<group>"; };
 		4149DE9A2B03C3AC004F5FC6 /* SolcastSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolcastSettingsView.swift; sourceTree = "<group>"; };
 		4149DE9C2B04BDE6004F5FC6 /* SolcastCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolcastCache.swift; sourceTree = "<group>"; };
 		414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabViewModel.swift; sourceTree = "<group>"; };
@@ -680,6 +684,7 @@
 				4171854129FFCF2500D18CDD /* String+MD5.swift */,
 				41DCF5432B06CBD40010843F /* Date.swift */,
 				41E165BC2B0BE33E00B17590 /* Array+Any.swift */,
+				41495F372B211A75004A51C1 /* AlertContentView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -980,6 +985,7 @@
 				41626CCF29D969E9003FEB00 /* InverterFirmwareVersionsView.swift */,
 				416AE4352A7D2C8B003D0122 /* InverterSettingsView.swift */,
 				416AE4392A7FA76E003D0122 /* InverterWorkModeView.swift */,
+				41495F392B211C8B004A51C1 /* InverterWorkModeViewModel.swift */,
 			);
 			path = Inverter;
 			sourceTree = "<group>";
@@ -1626,6 +1632,7 @@
 				419092282B1DDFE60017CB65 /* ScheduleTemplateListViewModel.swift in Sources */,
 				41C0923B2B20FCB0001D1E22 /* SchedulePhaseEditDelegate.swift in Sources */,
 				4107446328CA1C5D006D5D7D /* PowerFlowView.swift in Sources */,
+				41495F3A2B211C8B004A51C1 /* InverterWorkModeViewModel.swift in Sources */,
 				4190922A2B1DE3D90017CB65 /* EditScheduleView.swift in Sources */,
 				41A25D3F28CA5CFB00315714 /* ParametersGraphTabViewModel.swift in Sources */,
 				4107446128C9EF6B006D5D7D /* LoadedPowerFlowView.swift in Sources */,
@@ -1669,6 +1676,7 @@
 				4103D1DA29DB6C6D001B0BC8 /* DeviceFirmwareVersion.swift in Sources */,
 				41DCF5442B06CBD40010843F /* Date.swift in Sources */,
 				414D7A332AC989030083923F /* FinancialModel.swift in Sources */,
+				41495F382B211A75004A51C1 /* AlertContentView.swift in Sources */,
 				4190921D2B1D253D0017CB65 /* Schedule.swift in Sources */,
 				416AE4482A812876003D0122 /* WorkMode.swift in Sources */,
 				4162BC2E2A09773D00DFEDC1 /* EarningsResponse.swift in Sources */,

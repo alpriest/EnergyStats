@@ -1358,13 +1358,88 @@
       }
     },
     "Activate" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktivieren"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activar"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attivare"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktywować"
+          }
+        }
+      }
     },
     "Activate schedule" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zeitplan aktivieren"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activar el horario"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attivare il programma"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktywować harmonogram"
+          }
+        }
+      }
     },
     "Activating" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktivierung"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activando"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attivando"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktywowanie"
+          }
+        }
+      }
     },
     "Adaptive" : {
       "localizations" : {
@@ -2362,6 +2437,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nie można zapisać, sprawdź, czy wartości mieszczą się w zakresie od 1 do 100."
+          }
+        }
+      }
+    },
+    "cannot_save_due_to_active_schedule" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cannot save settings because you have an active schedule. You need to delete your strategy and try again."
           }
         }
       }
@@ -4354,6 +4439,9 @@
           }
         }
       }
+    },
+    "Failed" : {
+
     },
     "Feed In First" : {
       "localizations" : {

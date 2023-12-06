@@ -145,7 +145,13 @@ struct ErrorAlertView: View {
     }
 
     var detailedMessage: String {
-        "\(message)\n\n\(cause?.localizedDescription ?? "")"
+        return if let cause, cause is NetworkError {
+            message
+        } else if let cause {
+            "\(message)\n\n\(cause.localizedDescription)"
+        } else {
+            message
+        }
     }
 
     var inlineMessage: String {
