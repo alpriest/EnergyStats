@@ -83,22 +83,16 @@ struct EditScheduleView: View {
                         Button {
                             viewModel.addNewTimePeriod()
                         } label: {
-                            HStack {
-                                Image(systemName: "plus")
-                                Text("Add time period")
-                            }
-                        }.buttonStyle(.bordered)
+                            Text("Add time period")
+                        }.buttonStyle(.borderedProminent)
 
                         if allowSavingTemplate {
                             Button {
                                 viewModel.saveTemplate()
                             } label: {
-                                HStack {
-                                    Image(systemName: "play.fill")
-                                    Text("Save template")
-                                }
+                                Text("Save template")
                             }
-                            .buttonStyle(.bordered)
+                            .buttonStyle(.borderedProminent)
                             .disabled(viewModel.schedule.phases.count == 0)
                         }
 
@@ -106,12 +100,9 @@ struct EditScheduleView: View {
                             Button {
                                 viewModel.saveSchedule()
                             } label: {
-                                HStack {
-                                    Image(systemName: "play.fill")
-                                    Text("Activate schedule")
-                                }
+                                Text("Activate schedule")
                             }
-                            .buttonStyle(.bordered)
+                            .buttonStyle(.borderedProminent)
                             .disabled(viewModel.schedule.phases.count == 0)
                         }
 
@@ -119,13 +110,9 @@ struct EditScheduleView: View {
                             Button(role: .destructive) {
                                 presentConfirmation = true
                             } label: {
-                                HStack {
-                                    Image(systemName: "trash")
-                                    Text("Delete this schedule")
-                                }
+                                Text("Delete this schedule")
                             }
                             .buttonStyle(.bordered)
-                            .padding(.vertical, 4)
                             .confirmationDialog("Are you sure you want to delete this schedule?",
                                                 isPresented: $presentConfirmation,
                                                 titleVisibility: .visible)
