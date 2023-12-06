@@ -39,7 +39,7 @@ struct ScheduleSummaryView: View {
                                                    .padding(.vertical, 4)
                                            })
                         } header: {
-                            Text("Current Schedule")
+                            Text("Current schedule")
                         }
                     } else {
                         VStack {

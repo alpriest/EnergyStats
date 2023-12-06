@@ -2543,10 +2543,34 @@
     },
     "cannot_save_due_to_active_schedule" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einstellungen können nicht gespeichert werden, da Sie einen aktiven Zeitplan haben. Sie müssen Ihren Zeitplan löschen und es erneut versuchen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cannot save settings because you have an active schedule. You need to delete your strategy and try again."
+            "value" : "Cannot save settings because you have an active schedule. You need to delete your schedule and try again."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pueden guardar los ajustes porque tienes un horario activo. Necesitas eliminar tu horario e intentarlo de nuevo."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile salvare le impostazioni perché hai un programma attivo. Devi cancellare il tuo programma e riprovare."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nie można zapisać ustawień, ponieważ masz aktywny harmonogram. Musisz usunąć swój harmonogram i spróbować ponownie."
           }
         }
       }
@@ -3013,9 +3037,6 @@
         }
       }
     },
-    "Configure Schedule" : {
-
-    },
     "Configure Work Mode" : {
       "localizations" : {
         "de" : {
@@ -3290,10 +3311,60 @@
       }
     },
     "Create a schedule" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einen Zeitplan erstellen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crear un horario"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crea un programma"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utwórz harmonogram"
+          }
+        }
+      }
     },
     "Create new template" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neue Vorlage erstellen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crear una nueva plantilla"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crea un nuovo modello"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utwórz nowy szablon"
+          }
+        }
+      }
     },
     "CT2" : {
       "localizations" : {
@@ -3380,8 +3451,33 @@
         }
       }
     },
-    "Current Schedule" : {
-
+    "Current schedule" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktueller Zeitplan"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Horario actual"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Programma attuale"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktualny harmonogram"
+          }
+        }
+      }
     },
     "Data Refresh frequency" : {
       "localizations" : {
@@ -3750,13 +3846,70 @@
       }
     },
     "Delete schedule" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zeitplan löschen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar horario"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elimina programma"
+          }
+        }
+      }
     },
     "Delete template" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vorlage löschen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar plantilla"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elimina modello"
+          }
+        }
+      }
     },
     "Delete time period" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zeitraum löschen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar período de tiempo"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elimina periodo di tempo"
+          }
+        }
+      }
     },
     "demo" : {
       "localizations" : {
@@ -3787,7 +3940,26 @@
       }
     },
     "Description" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beschreibung"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descripción"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descrizione"
+          }
+        }
+      }
     },
     "Device List" : {
       "localizations" : {
@@ -4072,10 +4244,48 @@
       }
     },
     "Edit schedule" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zeitplan bearbeiten"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar horario"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modifica programma"
+          }
+        }
+      }
     },
-    "Edit Template" : {
-
+    "Edit template" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vorlage bearbeiten"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar plantilla"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modifica modello"
+          }
+        }
+      }
     },
     "Empty" : {
       "extractionState" : "manual",
@@ -6442,6 +6652,9 @@
           }
         }
       }
+    },
+    "Manage schedules" : {
+
     },
     "Manage templates" : {
 

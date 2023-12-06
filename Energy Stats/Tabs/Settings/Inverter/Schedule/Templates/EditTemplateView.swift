@@ -82,7 +82,7 @@ struct EditTemplateView: View {
                 }
             }
         }
-        .navigationTitle("Edit Template")
+        .navigationTitle("Edit template")
         .navigationBarTitleDisplayMode(.inline)
         .loadable($viewModel.state, retry: { Task { await viewModel.load() } })
         .alert(alertContent: $viewModel.alertContent)
