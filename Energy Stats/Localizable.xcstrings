@@ -3864,6 +3864,12 @@
             "state" : "translated",
             "value" : "Elimina programma"
           }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usuń harmonogram"
+          }
         }
       }
     },
@@ -3886,6 +3892,12 @@
             "state" : "translated",
             "value" : "Elimina modello"
           }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usuń szablon"
+          }
         }
       }
     },
@@ -3907,6 +3919,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Elimina periodo di tempo"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usuń okres czasu"
           }
         }
       }
@@ -3957,6 +3975,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Descrizione"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opis"
           }
         }
       }
@@ -4262,6 +4286,12 @@
             "state" : "translated",
             "value" : "Modifica programma"
           }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edytuj harmonogram"
+          }
         }
       }
     },
@@ -4283,6 +4313,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Modifica modello"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edytuj szablon"
           }
         }
       }
@@ -4407,7 +4443,32 @@
       }
     },
     "End time" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Endzeit"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hora de finalización"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ora di fine"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Czas zakończenia"
+          }
+        }
+      }
     },
     "energy" : {
       "extractionState" : "manual",
@@ -4751,7 +4812,32 @@
       }
     },
     "Failed" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fehlgeschlagen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fallido"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fallito"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nieudane"
+          }
+        }
+      }
     },
     "Feed In First" : {
       "localizations" : {
@@ -5070,10 +5156,60 @@
       }
     },
     "Force Discharge Power" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entladungsleistung erzwingen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fuerza de descarga de potencia"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Forza di scarica di potenza"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wymuś moc rozładowania"
+          }
+        }
+      }
     },
     "Force Discharge SoC" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SoC-Entladung erzwingen (State of Charge)"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fuerza de descarga del SoC (Estado de carga)"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Forza di scarica del SoC (Stato di carica)"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wymuś rozładowanie SoC (Stan naładowania)"
+          }
+        }
+      }
     },
     "Forecast today" : {
       "localizations" : {
@@ -6175,10 +6311,34 @@
     },
     "inverter_charge_schedule_deleted" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ihr Zeitplan wurde gelöscht"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Your schedule was deleted"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu horario fue eliminado"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il tuo programma è stato eliminato"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Twój harmonogram został usunięty"
           }
         }
       }
@@ -6195,10 +6355,34 @@
     },
     "inverter_charge_template_deleted" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ihre Vorlage wurde gelöscht"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Your template was deleted"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu plantilla fue eliminada"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il tuo modello è stato eliminato"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Twój szablon został usunięty"
           }
         }
       }
@@ -6440,9 +6624,6 @@
           }
         }
       }
-    },
-    "Loading..." : {
-
     },
     "Loads " : {
       "extractionState" : "manual",

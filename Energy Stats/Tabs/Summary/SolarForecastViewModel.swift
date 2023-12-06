@@ -51,7 +51,7 @@ class SolarForecastViewModel: ObservableObject {
         let today = Calendar.current.startOfDay(for: Date())
         guard let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: today) else { return }
 
-        state = .active("Loading...")
+        state = .active("Loading")
 
         Task { @MainActor in
             data = await settings.solcastSettings.sites
