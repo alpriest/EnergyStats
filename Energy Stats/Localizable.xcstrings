@@ -6345,10 +6345,34 @@
     },
     "inverter_charge_schedule_settings_saved" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ihre Wechselrichter-Zeitplaneinstellungen wurden gespeichert. Bitte beachten Sie, dass Ihre Zeitplaneinstellungen Vorrang vor jedem Batterieladeplan, Mindest-SoC und zuvor konfiguriertem Wechselrichter-Arbeitsmodus haben werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your inverter schedule settings were saved. Please be aware that any battery charge schedule you had will have been deleted."
+            "value" : "Your inverter schedule settings were saved. Please be aware that your schedule settings will take priority over any battery charge schedule, min SOC and inverter work mode you had previously configured."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Los ajustes de horario de tu inversor han sido guardados. Ten en cuenta que tus ajustes de horario tendrán prioridad sobre cualquier horario de carga de batería, min SOC y modo de trabajo del inversor que hayas configurado anteriormente."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le impostazioni del programma del tuo inverter sono state salvate. Si prega di essere consapevoli che le impostazioni del programma avranno la priorità su qualsiasi programma di carica della batteria, min SOC e modalità di lavoro dell'inverter che avevi precedentemente configurato."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ustawienia harmonogramu Twojego falownika zostały zapisane. Należy pamiętać, że ustawienia harmonogramu będą miały priorytet nad wszelkimi wcześniej skonfigurowanymi harmonogramami ładowania baterii, min SOC i trybem pracy falownika."
           }
         }
       }
@@ -11483,10 +11507,60 @@
       }
     },
     "Template updated" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vorlage aktualisiert"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plantilla actualizada"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modello aggiornato"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Szablon zaktualizowany"
+          }
+        }
+      }
     },
     "Templates" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vorlagen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plantillas"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modelli"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Szablony"
+          }
+        }
+      }
     },
     "Tests" : {
       "localizations" : {
@@ -12033,7 +12107,32 @@
       }
     },
     "W" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
     "Watts" : {
       "localizations" : {
@@ -12148,7 +12247,32 @@
       }
     },
     "Work strategy" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arbeitsstrategie"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estrategia de trabajo"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Strategia di lavoro"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Strategia pracy"
+          }
+        }
+      }
     },
     "Wrong credentials, try again" : {
       "extractionState" : "manual",
@@ -12340,10 +12464,60 @@
       }
     },
     "You don't have a schedule defined." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sie haben keinen Zeitplan definiert."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No tienes un horario definido."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non hai un programma definito."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nie masz zdefiniowanego harmonogramu."
+          }
+        }
+      }
     },
     "You have no time periods defined. Add a time period to define how you'd like your inverter to behave during specific hours." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sie haben keine Zeitperioden definiert. Fügen Sie eine Zeitperiode hinzu, um zu definieren, wie sich Ihr Wechselrichter zu bestimmten Stunden verhalten soll."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No tienes períodos de tiempo definidos. Añade un período de tiempo para definir cómo te gustaría que se comportara tu inversor durante horas específicas."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non hai periodi di tempo definiti. Aggiungi un periodo di tempo per definire come desideri che il tuo inverter si comporti durante ore specifiche."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nie masz zdefiniowanych okresów czasu. Dodaj okres czasu, aby określić, jak chcesz, aby Twój falownik zachowywał się w określonych godzinach."
+          }
+        }
+      }
     },
     "You've hit the server rate limit. Please try later." : {
       "extractionState" : "manual",
