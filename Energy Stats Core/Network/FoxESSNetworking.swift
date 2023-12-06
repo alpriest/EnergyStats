@@ -197,7 +197,7 @@ public class Network: FoxESSNetworking {
     }
 
     public func saveSchedule(deviceSN: String, schedule: Schedule) async throws {
-        var request = URLRequest(url: URL.saveSchedule)
+        var request = URLRequest(url: URL.enableSchedule)
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(ScheduleSaveRequest(pollcy: schedule.phases.map { $0.toPollcy() }, templateID: nil, deviceSN: deviceSN))
         addLocalisedHeaders(to: &request)

@@ -18,6 +18,7 @@ struct ContentView: View {
     var body: some View {
         if loginManager.isLoggedIn {
             TabbedView(networking: network, userManager: loginManager, configManager: configManager, solarForecastProvider: solarForecastProvider)
+                .task { await network.fetchErrorMessages() }
         } else {
             LoginView(userManager: loginManager)
         }

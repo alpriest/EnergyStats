@@ -88,7 +88,9 @@ struct EditScheduleView: View {
 
                         if allowSavingTemplate {
                             Button {
-                                viewModel.saveTemplate()
+                                viewModel.saveTemplate {
+                                    presentationMode.wrappedValue.dismiss()
+                                }
                             } label: {
                                 Text("Save template")
                             }
@@ -98,7 +100,9 @@ struct EditScheduleView: View {
 
                         if allowSaveAsActiveSchedule {
                             Button {
-                                viewModel.saveSchedule()
+                                viewModel.saveSchedule {
+                                    presentationMode.wrappedValue.dismiss()
+                                }
                             } label: {
                                 Text("Activate schedule")
                             }

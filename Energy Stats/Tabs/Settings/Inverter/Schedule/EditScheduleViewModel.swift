@@ -24,14 +24,14 @@ class EditScheduleViewModel: ObservableObject {
         self.modes = modes
     }
 
-    func saveSchedule() {
+    func saveSchedule(onCompletion: @escaping () -> Void) {
         guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
         guard isValid() else {
             alertContent = AlertContent(title: "error_title", message: "overlapping_time_periods")
             return
         }
 
-        Task { @MainActor [self] in
+        Task { [self] in
             setState(.active(String(key: .saving)))
 
             do {
@@ -41,7 +41,8 @@ class EditScheduleViewModel: ObservableObject {
                     self.state = .inactive
                     alertContent = AlertContent(
                         title: "Success",
-                        message: "inverter_charge_schedule_settings_saved"
+                        message: "inverter_charge_schedule_settings_saved",
+                        onDismiss: onCompletion
                     )
                 }
             } catch {
@@ -51,7 +52,7 @@ class EditScheduleViewModel: ObservableObject {
         }
     }
 
-    func saveTemplate() {
+    func saveTemplate(onCompletion: @escaping () -> Void) {
         guard let templateID = schedule.templateID else { return }
         guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
         guard isValid() else {
@@ -59,7 +60,7 @@ class EditScheduleViewModel: ObservableObject {
             return
         }
 
-        Task { @MainActor [self] in
+        Task { [self] in
             setState(.active(String(key: .saving)))
 
             do {
@@ -70,7 +71,8 @@ class EditScheduleViewModel: ObservableObject {
                     self.state = .inactive
                     alertContent = AlertContent(
                         title: "Success",
-                        message: "Template updated"
+                        message: "Template updated",
+                        onDismiss: onCompletion
                     )
                 }
             } catch {
