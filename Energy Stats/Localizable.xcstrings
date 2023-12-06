@@ -3871,35 +3871,6 @@
         }
       }
     },
-    "editor %@" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        }
-      }
-    },
     "Empty" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -7646,31 +7617,31 @@
       "localizations" : {
         "de" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Der DC-Strom, der von der Batterie fließt gemessen vom BMS, in Ampere (A)"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The DC current flowing from the battery, measured by the BMS, in volts (V)"
+            "value" : "The DC current flowing from the battery, measured by the BMS, in amps (A)"
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "La corriente CC que fluye desde la batería, medida por el BMS, en amperios (A)"
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "La corrente DC che fluisce dalla batteria, misurata dal BMS, in volt (V)"
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Prąd stały płynący z akumulatora, mierzony przez BMS, w amperach (A)"
           }
         }
