@@ -196,7 +196,7 @@
 		41B6910B28E0CD370058126E /* battery-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B6910A28E0CD370058126E /* battery-success.json */; };
 		41B6910D28E0CD8F0058126E /* raw-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B6910C28E0CD8F0058126E /* raw-success.json */; };
 		41B6910F28E0CDFC0058126E /* devicelist-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B6910E28E0CDFC0058126E /* devicelist-success.json */; };
-		41BCC1A92B245C130062084A /* FoxESSNetworking+Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC1A82B245C130062084A /* FoxESSNetworking+Schedule.swift */; };
+		41BCC1A92B245C130062084A /* Network+Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC1A82B245C130062084A /* Network+Schedule.swift */; };
 		41BCC1AB2B245C280062084A /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC1AA2B245C280062084A /* Network.swift */; };
 		41C0923B2B20FCB0001D1E22 /* SchedulePhaseEditDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0923A2B20FCB0001D1E22 /* SchedulePhaseEditDelegate.swift */; };
 		41C0923D2B210255001D1E22 /* ScheduleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0923C2B210255001D1E22 /* ScheduleDetailView.swift */; };
@@ -548,7 +548,7 @@
 		41B6910A28E0CD370058126E /* battery-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "battery-success.json"; sourceTree = "<group>"; };
 		41B6910C28E0CD8F0058126E /* raw-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "raw-success.json"; sourceTree = "<group>"; };
 		41B6910E28E0CDFC0058126E /* devicelist-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "devicelist-success.json"; sourceTree = "<group>"; };
-		41BCC1A82B245C130062084A /* FoxESSNetworking+Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoxESSNetworking+Schedule.swift"; sourceTree = "<group>"; };
+		41BCC1A82B245C130062084A /* Network+Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+Schedule.swift"; sourceTree = "<group>"; };
 		41BCC1AA2B245C280062084A /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		41C0923A2B20FCB0001D1E22 /* SchedulePhaseEditDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePhaseEditDelegate.swift; sourceTree = "<group>"; };
 		41C0923C2B210255001D1E22 /* ScheduleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailView.swift; sourceTree = "<group>"; };
@@ -1213,7 +1213,7 @@
 				416318B629DDD2E100C2C285 /* InMemoryLoggingNetworkingDecorator.swift */,
 				41B3FFE72AB07FE10020DFC9 /* NetworkCache.swift */,
 				41DC51592AE2E9DC00FD348B /* NetworkValueCleaner.swift */,
-				41BCC1A82B245C130062084A /* FoxESSNetworking+Schedule.swift */,
+				41BCC1A82B245C130062084A /* Network+Schedule.swift */,
 				41BCC1AA2B245C280062084A /* Network.swift */,
 			);
 			path = Network;
@@ -1718,7 +1718,7 @@
 				4149DE9D2B04BDE6004F5FC6 /* SolcastCache.swift in Sources */,
 				4171854429FFCF9500D18CDD /* Color+Hex.swift in Sources */,
 				418685D52AFE700100355B6D /* AnimatedNumber.swift in Sources */,
-				41BCC1A92B245C130062084A /* FoxESSNetworking+Schedule.swift in Sources */,
+				41BCC1A92B245C130062084A /* Network+Schedule.swift in Sources */,
 				413B7A312A4A390C00562A68 /* SelfSufficiencyCalculator.swift in Sources */,
 				41E165BD2B0BE33E00B17590 /* Array+Any.swift in Sources */,
 				41757BBD2A90A06E00573FB4 /* LocalizedString.swift in Sources */,
