@@ -10,12 +10,13 @@ import SwiftUI
 struct CT2_icon: View {
     var body: some View {
         RoundedRectangle(cornerRadius: 5)
+            .fill(Color("background_inverted"))
             .frame(width: 42, height: 42)
             .overlay(
                 VStack {
                     Text("CT2")
                         .fontWeight(.heavy)
-                        .foregroundStyle(Color.white)
+                        .foregroundStyle(Color("background"))
                 }
             )
     }

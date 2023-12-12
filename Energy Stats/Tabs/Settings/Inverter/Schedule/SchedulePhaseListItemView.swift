@@ -31,9 +31,9 @@ struct SchedulePhaseListItemView: View {
     private func extra(for phase: SchedulePhase) -> String {
         switch phase.mode.key {
         case "ForceDischarge":
-            return " down to \(phase.forceDischargeSOC)% at \(phase.forceDischargePower)W"
+            return " at \(phase.forceDischargePower)W down to \(phase.forceDischargeSOC)%"
         case "ForceCharge":
-            return " up to \(phase.batterySOC)%"
+            return ""
         case "SelfUse":
             return " with \(phase.batterySOC)% min SOC"
         default:

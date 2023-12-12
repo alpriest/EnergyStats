@@ -101,6 +101,7 @@
 		414BF82829B4918300E2EB51 /* SettingsTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */; };
 		414D7A312AC8CE9C0083923F /* DisplayUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D7A302AC8CE9C0083923F /* DisplayUnit.swift */; };
 		414D7A332AC989030083923F /* FinancialModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D7A322AC989030083923F /* FinancialModel.swift */; };
+		4155D70D2B28FC920071346A /* Optional+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4155D70C2B28FC920071346A /* Optional+Int.swift */; };
 		4160098B2A8D18B10096CCD9 /* SettingsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4160098A2A8D18B10096CCD9 /* SettingsFooterView.swift */; };
 		4160098D2A8D1A690096CCD9 /* BottomButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4160098C2A8D1A690096CCD9 /* BottomButtonsView.swift */; };
 		41626CD029D969E9003FEB00 /* InverterFirmwareVersionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41626CCF29D969E9003FEB00 /* InverterFirmwareVersionsView.swift */; };
@@ -442,6 +443,7 @@
 		414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabViewModel.swift; sourceTree = "<group>"; };
 		414D7A302AC8CE9C0083923F /* DisplayUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayUnit.swift; sourceTree = "<group>"; };
 		414D7A322AC989030083923F /* FinancialModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancialModel.swift; sourceTree = "<group>"; };
+		4155D70C2B28FC920071346A /* Optional+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Int.swift"; sourceTree = "<group>"; };
 		4160098A2A8D18B10096CCD9 /* SettingsFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFooterView.swift; sourceTree = "<group>"; };
 		4160098C2A8D1A690096CCD9 /* BottomButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButtonsView.swift; sourceTree = "<group>"; };
 		41626CCB29D95E37003FEB00 /* AddressBookResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressBookResponse.swift; sourceTree = "<group>"; };
@@ -689,6 +691,7 @@
 				41DCF5432B06CBD40010843F /* Date.swift */,
 				41E165BC2B0BE33E00B17590 /* Array+Any.swift */,
 				41495F372B211A75004A51C1 /* AlertContentView.swift */,
+				4155D70C2B28FC920071346A /* Optional+Int.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1720,6 +1723,7 @@
 				418685D52AFE700100355B6D /* AnimatedNumber.swift in Sources */,
 				41BCC1A92B245C130062084A /* Network+Schedule.swift in Sources */,
 				413B7A312A4A390C00562A68 /* SelfSufficiencyCalculator.swift in Sources */,
+				4155D70D2B28FC920071346A /* Optional+Int.swift in Sources */,
 				41E165BD2B0BE33E00B17590 /* Array+Any.swift in Sources */,
 				41757BBD2A90A06E00573FB4 /* LocalizedString.swift in Sources */,
 				4103D1E429DB6D12001B0BC8 /* KeychainStore.swift in Sources */,
@@ -1964,7 +1968,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.101;
+				MARKETING_VERSION = 1.103;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2022,7 +2026,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.101;
+				MARKETING_VERSION = 1.103;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

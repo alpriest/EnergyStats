@@ -64,14 +64,14 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable {
         self.color = color
     }
 
-    public init(mode: SchedulerModeResponse) {
+    public init(mode: SchedulerModeResponse, device: Device?) {
         self.id = UUID().uuidString
         self.start = Date().toTime()
         self.end = Date().toTime()
         self.mode = mode
         self.forceDischargePower = 0
         self.forceDischargeSOC = 10
-        self.batterySOC = 10
+        self.batterySOC = Int(device?.battery?.minSOC) ?? 10
         self.color = Color.scheduleColor(named: mode.key)
     }
 

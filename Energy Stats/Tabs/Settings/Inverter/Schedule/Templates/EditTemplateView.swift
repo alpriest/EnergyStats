@@ -58,6 +58,16 @@ struct EditTemplateView: View {
                         .buttonStyle(.borderedProminent)
                         .disabled(schedule.phases.count == 0)
 
+                        Button {
+                            viewModel.activate {
+                                presentationMode.wrappedValue.dismiss()
+                            }
+                        } label: {
+                            Text("Activate template")
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .disabled(schedule.phases.count == 0)
+
                         Button(role: .destructive) {
                             presentConfirmation = true
                         } label: {
@@ -90,10 +100,12 @@ struct EditTemplateView: View {
 }
 
 #Preview {
-    EditTemplateView(
-        networking: DemoNetworking(),
-        config: PreviewConfigManager(),
-        templateID: "abc",
-        modes: SchedulerModeResponse.preview()
-    )
+    NavigationView {
+        EditTemplateView(
+            networking: DemoNetworking(),
+            config: PreviewConfigManager(),
+            templateID: "abc",
+            modes: SchedulerModeResponse.preview()
+        )
+    }
 }

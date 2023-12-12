@@ -44,6 +44,10 @@ struct SchedulePhaseEditView: View {
     var body: some View {
         VStack(spacing: 0) {
             Form {
+                FooterSection {
+                    Text("Define your phase here. Press back to view your entire schedule.")
+                }
+
                 Section {
                     DatePicker("Start time", selection: $startTime, displayedComponents: [.hourAndMinute])
                         .datePickerStyle(.compact)
@@ -150,7 +154,7 @@ struct SchedulePhaseEditView: View {
         switch workMode.key {
         case "Backup": return nil
         case "Feedin": return nil
-        case "ForceCharge": return "The minimum battery state of charge."
+        case "ForceCharge": return nil
         case "ForceDischarge": return "The minimum battery state of charge. For Force Discharge this must be at most the Discharge SOC value."
         case "SelfUse": return nil
         default: return nil

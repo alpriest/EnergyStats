@@ -1413,6 +1413,34 @@
         }
       }
     },
+    "Activate template" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vorlage aktivieren"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activar plantilla"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attiva modello"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktywuj szablon"
+          }
+        }
+      }
+    },
     "Activating" : {
       "localizations" : {
         "de" : {
@@ -3813,6 +3841,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Domyślne"
+          }
+        }
+      }
+    },
+    "Define your phase here. Press back to view your entire schedule." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Definieren Sie hier Ihre Phase. Drücken Sie zurück, um Ihren gesamten Zeitplan anzusehen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Defina su fase aquí. Pulse atrás para ver todo su horario."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Definisci la tua fase qui. Premi indietro per visualizzare l'intero programma."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zdefiniuj tutaj swoją fazę. Naciśnij wstecz, aby zobaczyć cały harmonogram."
           }
         }
       }
@@ -9502,6 +9558,34 @@
         }
       }
     },
+    "Remove key" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schlüssel entfernen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar clave"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rimuovi chiave"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usuń klucz"
+          }
+        }
+      }
+    },
     "Rename" : {
       "localizations" : {
         "de" : {
@@ -11502,6 +11586,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Temperatury"
+          }
+        }
+      }
+    },
+    "Template activated" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vorlage aktiviert"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plantilla activada"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modello attivato"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Szablon aktywowany"
           }
         }
       }

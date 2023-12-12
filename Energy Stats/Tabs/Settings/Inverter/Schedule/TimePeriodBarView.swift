@@ -102,7 +102,7 @@ extension Schedule {
                     forceDischargePower: 0,
                     forceDischargeSOC: 20,
                     batterySOC: 20,
-                    color: .linesPositive
+                    color: .paleGray
                 )!
             ]
         )

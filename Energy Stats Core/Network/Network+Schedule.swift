@@ -22,13 +22,12 @@ extension URL {
 
 public extension Network {
     func deleteScheduleTemplate(templateID: String) async throws {
-        var request = append(
+        let request = append(
             queryItems: [
                 URLQueryItem(name: "templateID", value: templateID),
             ],
             to: URL.deleteScheduleTemplate
         )
-        addLocalisedHeaders(to: &request)
 
         do {
             let _: (String, Data) = try await fetch(request)
@@ -38,14 +37,13 @@ public extension Network {
     }
 
     func fetchScheduleTemplate(deviceSN: String, templateID: String) async throws -> ScheduleTemplateResponse {
-        var request = append(
+        let request = append(
             queryItems: [
                 URLQueryItem(name: "deviceSN", value: deviceSN),
                 URLQueryItem(name: "templateID", value: templateID),
             ],
             to: URL.getSchedule
         )
-        addLocalisedHeaders(to: &request)
 
         let result: (ScheduleTemplateResponse, Data) = try await fetch(request)
         return result.0
@@ -55,7 +53,6 @@ public extension Network {
         var request = URLRequest(url: URL.enableSchedule)
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(ScheduleEnableRequest(templateID: templateID, deviceSN: deviceSN))
-        addLocalisedHeaders(to: &request)
 
         do {
             let _: (String, Data) = try await fetch(request)
@@ -72,7 +69,6 @@ public extension Network {
                                 templateID: template.id,
                                 deviceSN: deviceSN)
         )
-        addLocalisedHeaders(to: &request)
 
         do {
             let _: (String, Data) = try await fetch(request)
@@ -82,8 +78,7 @@ public extension Network {
     }
 
     func fetchScheduleTemplates() async throws -> ScheduleTemplateListResponse {
-        var request = URLRequest(url: URL.fetchScheduleTemplates)
-        addLocalisedHeaders(to: &request)
+        let request = URLRequest(url: URL.fetchScheduleTemplates)
 
         let result: (ScheduleTemplateListResponse, Data) = try await fetch(request)
         return result.0
@@ -93,7 +88,6 @@ public extension Network {
         var request = URLRequest(url: URL.createScheduleTemplate)
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(ScheduleTemplateCreateRequest(templateName: name, content: description))
-        addLocalisedHeaders(to: &request)
 
         do {
             let _: (String, Data) = try await fetch(request)
@@ -103,8 +97,7 @@ public extension Network {
     }
 
     func deleteSchedule(deviceSN: String) async throws {
-        var request = append(queryItems: [URLQueryItem(name: "deviceSN", value: deviceSN)], to: URL.deleteSchedule)
-        addLocalisedHeaders(to: &request)
+        let request = append(queryItems: [URLQueryItem(name: "deviceSN", value: deviceSN)], to: URL.deleteSchedule)
 
         do {
             let _: (String, Data) = try await fetch(request)
@@ -117,7 +110,6 @@ public extension Network {
         var request = URLRequest(url: URL.enableSchedule)
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(ScheduleSaveRequest(pollcy: schedule.phases.map { $0.toPollcy() }, templateID: nil, deviceSN: deviceSN))
-        addLocalisedHeaders(to: &request)
 
         do {
             let _: (String, Data) = try await fetch(request)
@@ -127,24 +119,21 @@ public extension Network {
     }
 
     func fetchCurrentSchedule(deviceSN: String) async throws -> ScheduleListResponse {
-        var request = append(queryItems: [URLQueryItem(name: "deviceSN", value: deviceSN)], to: URL.getCurrentSchedule)
-        addLocalisedHeaders(to: &request)
+        let request = append(queryItems: [URLQueryItem(name: "deviceSN", value: deviceSN)], to: URL.getCurrentSchedule)
 
         let result: (ScheduleListResponse, Data) = try await fetch(request)
         return result.0
     }
 
     func fetchScheduleModes(deviceID: String) async throws -> [SchedulerModeResponse] {
-        var request = append(queryItems: [URLQueryItem(name: "deviceID", value: deviceID)], to: URL.schedulerModes)
-        addLocalisedHeaders(to: &request)
+        let request = append(queryItems: [URLQueryItem(name: "deviceID", value: deviceID)], to: URL.schedulerModes)
 
         let result: (SchedulerModesResponse, Data) = try await fetch(request)
         return result.0.modes
     }
 
     func fetchSchedulerFlag(deviceSN: String) async throws -> SchedulerFlagResponse {
-        var request = append(queryItems: [URLQueryItem(name: "deviceSN", value: deviceSN)], to: URL.getSchedulerFlag)
-        addLocalisedHeaders(to: &request)
+        let request = append(queryItems: [URLQueryItem(name: "deviceSN", value: deviceSN)], to: URL.getSchedulerFlag)
 
         let result: (SchedulerFlagResponse, Data) = try await fetch(request)
         return result.0

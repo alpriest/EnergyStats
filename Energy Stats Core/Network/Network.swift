@@ -284,9 +284,6 @@ extension Network {
         request.setValue("application/json, text/plain, */*", forHTTPHeaderField: "Accept")
         request.setValue("en-US;q=0.9,en;q=0.8,de;q=0.7,nl;q=0.6", forHTTPHeaderField: "Accept-Language")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    }
-
-    func addLocalisedHeaders(to request: inout URLRequest) {
         request.setValue(languageCode, forHTTPHeaderField: "lang")
         request.setValue(timezone, forHTTPHeaderField: "timezone")
     }

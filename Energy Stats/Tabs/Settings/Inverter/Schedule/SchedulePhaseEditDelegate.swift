@@ -10,12 +10,12 @@ import Foundation
 import SwiftUI
 
 enum SchedulePhaseHelper {
-    static func addNewTimePeriod(to schedule: Schedule, modes: [SchedulerModeResponse]) -> Schedule {
+    static func addNewTimePeriod(to schedule: Schedule, modes: [SchedulerModeResponse], device: Device?) -> Schedule {
         guard let mode = modes.first else { return schedule }
 
         return Schedule(
             name: schedule.name,
-            phases: schedule.phases + [SchedulePhase(mode: mode)],
+            phases: schedule.phases + [SchedulePhase(mode: mode, device: device)].sorted { $0.start < $1.start },
             templateID: schedule.templateID
         )
     }
@@ -48,7 +48,8 @@ enum SchedulePhaseHelper {
         )
     }
 
-    static func appendPhasesInGaps(to schedule: Schedule, mode: SchedulerModeResponse, soc: Int) -> Schedule {
+    static func appendPhasesInGaps(to schedule: Schedule, mode: SchedulerModeResponse, device: Device?) -> Schedule {
+        let soc = Int(device?.battery?.minSOC) ?? 10
         let newPhases = schedule.phases + createPhasesInGaps(on: schedule, mode: mode, soc: soc)
 
         return Schedule(

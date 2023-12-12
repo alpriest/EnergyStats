@@ -28,6 +28,11 @@ struct SolcastSettingsView: View {
                         SolcastSiteView(site: site)
                     }
                 }
+
+                FooterSection {
+                    Button("Remove key", action: { viewModel.removeKey() })
+                        .buttonStyle(.bordered)
+                }
             }
 
             BottomButtonsView {

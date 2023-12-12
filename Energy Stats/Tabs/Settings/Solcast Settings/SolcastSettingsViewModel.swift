@@ -43,4 +43,13 @@ class SolcastSettingsViewModel: ObservableObject {
             }
         }
     }
+
+    func removeKey() {
+        configManager.solcastSettings = SolcastSettings(apiKey: nil, sites: [])
+
+        Task { @MainActor in
+            apiKey = ""
+            sites = []
+        }
+    }
 }

@@ -100,18 +100,50 @@ class EditTemplateViewModel: ObservableObject {
         }
     }
 
+    func activate(onCompletion: @escaping () -> Void) {
+        guard let schedule else { return }
+        guard let templateID = schedule.templateID else { return }
+        guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
+        guard state == .inactive else { return }
+        guard schedule.isValid() else {
+            alertContent = AlertContent(title: "error_title", message: "overlapping_time_periods")
+            return
+        }
+
+        Task { @MainActor in
+            do {
+                state = .active("Saving")
+                try await networking.saveScheduleTemplate(deviceSN: deviceSN,
+                                                          template: ScheduleTemplate(id: templateID, phases: schedule.phases))
+
+                state = .active("Activating")
+                try await networking.enableScheduleTemplate(deviceSN: deviceSN, templateID: templateID)
+
+                Task { @MainActor in
+                    self.state = .inactive
+                    alertContent = AlertContent(
+                        title: "Success",
+                        message: "Template activated",
+                        onDismiss: onCompletion
+                    )
+                }
+            } catch {
+                setState(.error(error, error.localizedDescription))
+            }
+        }
+    }
+
     func autoFillScheduleGaps() {
         guard let schedule else { return }
         guard let mode = modes.first else { return }
-        let minSOC = Int(config.currentDevice.value?.battery?.minSOC) ?? 10
 
-        self.schedule = SchedulePhaseHelper.appendPhasesInGaps(to: schedule, mode: mode, soc: minSOC)
+        self.schedule = SchedulePhaseHelper.appendPhasesInGaps(to: schedule, mode: mode, device: config.currentDevice.value)
     }
 
     func addNewTimePeriod() {
         guard let schedule else { return }
 
-        self.schedule = SchedulePhaseHelper.addNewTimePeriod(to: schedule, modes: modes)
+        self.schedule = SchedulePhaseHelper.addNewTimePeriod(to: schedule, modes: modes, device: config.currentDevice.value)
     }
 
     func updatedPhase(_ phase: SchedulePhase) {
@@ -130,13 +162,5 @@ class EditTemplateViewModel: ObservableObject {
         Task { @MainActor in
             self.state = state
         }
-    }
-}
-
-extension Int {
-    init?(_ value: String?) {
-        guard let value else {return nil}
-
-        self.init(value)
     }
 }
