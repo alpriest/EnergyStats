@@ -33,64 +33,63 @@ struct EditScheduleView: View {
     }
 
     var body: some View {
-        Form {
-            ScheduleDetailView(
-                schedule: viewModel.schedule,
-                modes: viewModel.modes,
-                onUpdate: viewModel.updatedPhase,
-                onDelete: viewModel.deletedPhase
-            )
+        VStack(spacing: 0) {
+            Form {
+                ScheduleDetailView(
+                    schedule: viewModel.schedule,
+                    modes: viewModel.modes,
+                    onUpdate: viewModel.updatedPhase,
+                    onDelete: viewModel.deletedPhase
+                )
 
-            FooterSection {
-                VStack(alignment: .leading) {
-                    Button {
-                        viewModel.addNewTimePeriod()
-                    } label: {
-                        Text("Add time period")
-                    }.buttonStyle(.borderedProminent)
-
-                    Button {
-                        viewModel.autoFillScheduleGaps()
-                    } label: {
-                        Text("Autofill gaps")
-                    }.buttonStyle(.borderedProminent)
-
-                    Button {
-                        Task {
-                            await viewModel.saveSchedule {
-                                presentationMode.wrappedValue.dismiss()
-                            }
-                        }
-                    } label: {
-                        Text("Activate schedule")
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .disabled(viewModel.schedule.phases.count == 0)
-
-                    if allowDelete {
-                        Button(role: .destructive) {
-                            presentConfirmation = true
+                FooterSection {
+                    VStack(alignment: .leading) {
+                        Button {
+                            viewModel.addNewTimePeriod()
                         } label: {
-                            Text("Delete schedule")
-                        }
-                        .buttonStyle(.bordered)
-                        .confirmationDialog("Are you sure you want to delete this schedule?",
-                                            isPresented: $presentConfirmation,
-                                            titleVisibility: .visible)
-                        {
-                            Button("Delete", role: .destructive) {
-                                viewModel.deleteSchedule {
-                                    presentationMode.wrappedValue.dismiss()
-                                }
-                            }
+                            Text("Add time period")
+                        }.buttonStyle(.borderedProminent)
 
-                            Button("Cancel", role: .cancel) {
-                                presentConfirmation = false
+                        Button {
+                            viewModel.autoFillScheduleGaps()
+                        } label: {
+                            Text("Autofill gaps")
+                        }.buttonStyle(.borderedProminent)
+
+                        if allowDelete {
+                            Button(role: .destructive) {
+                                presentConfirmation = true
+                            } label: {
+                                Text("Delete schedule")
+                            }
+                            .buttonStyle(.bordered)
+                            .confirmationDialog("Are you sure you want to delete this schedule?",
+                                                isPresented: $presentConfirmation,
+                                                titleVisibility: .visible)
+                            {
+                                Button("Delete", role: .destructive) {
+                                    viewModel.deleteSchedule {
+                                        presentationMode.wrappedValue.dismiss()
+                                    }
+                                }
+
+                                Button("Cancel", role: .cancel) {
+                                    presentConfirmation = false
+                                }
                             }
                         }
                     }
                 }
             }
+
+            BottomButtonsView(labels: BottomButtonLabels(left: "Cancel", right: "Activate"),
+                              onApply: {
+                                  Task {
+                                      await viewModel.saveSchedule {
+                                          presentationMode.wrappedValue.dismiss()
+                                      }
+                                  }
+                              })
         }
         .navigationTitle("Edit schedule")
         .navigationBarTitleDisplayMode(.inline)

@@ -124,16 +124,18 @@ struct SchedulePhaseEditView: View {
                         }.buttonStyle(.bordered)
                     }
             }
+
+            BottomButtonsView { save() }
         }
-        .onChange(of: startTime) { _ in notify() }
-        .onChange(of: endTime) { _ in notify() }
-        .onChange(of: workMode) { _ in notify() }
-        .onChange(of: minSOC) { _ in notify() }
-        .onChange(of: fdSOC) { _ in notify() }
-        .onChange(of: fdPower) { _ in notify() }
+        .onChange(of: startTime) { _ in validate() }
+        .onChange(of: endTime) { _ in validate() }
+        .onChange(of: workMode) { _ in validate() }
+        .onChange(of: minSOC) { _ in validate() }
+        .onChange(of: fdSOC) { _ in validate() }
+        .onChange(of: fdPower) { _ in validate() }
     }
 
-    private func notify() {
+    private func save() {
         if let phase = SchedulePhase(
             id: id,
             start: startTime.toTime(),
@@ -146,8 +148,6 @@ struct SchedulePhaseEditView: View {
         ) {
             onChange(phase)
         }
-
-        validate()
     }
 
     private func minSoCDescription() -> String? {
@@ -155,7 +155,7 @@ struct SchedulePhaseEditView: View {
         case "Backup": return nil
         case "Feedin": return nil
         case "ForceCharge": return nil
-        case "ForceDischarge": return "The minimum battery state of charge. For Force Discharge this must be at most the Discharge SOC value."
+        case "ForceDischarge": return "The minimum battery state of charge. This must be at most the Force Discharge SOC value."
         case "SelfUse": return nil
         default: return nil
         }
@@ -186,7 +186,6 @@ struct SchedulePhaseEditView: View {
     private func validate() {
         minSOCError = nil
         fdSOCError = nil
-        minSOCError = nil
 
         if let minSOC = Int(minSOC), !(10...100 ~= minSOC) {
             minSOCError = "Please enter a number between 10 and 100"
@@ -198,7 +197,6 @@ struct SchedulePhaseEditView: View {
 
         if let minSOC = Int(minSOC), let fdSOC = Int(fdSOC), minSOC > fdSOC {
             minSOCError = "Min SoC must be less than or equal to Force Discharge SoC"
-            return
         }
     }
 }

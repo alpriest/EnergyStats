@@ -199,7 +199,7 @@
 		41B6910F28E0CDFC0058126E /* devicelist-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B6910E28E0CDFC0058126E /* devicelist-success.json */; };
 		41BCC1A92B245C130062084A /* Network+Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC1A82B245C130062084A /* Network+Schedule.swift */; };
 		41BCC1AB2B245C280062084A /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC1AA2B245C280062084A /* Network.swift */; };
-		41C0923B2B20FCB0001D1E22 /* SchedulePhaseEditDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0923A2B20FCB0001D1E22 /* SchedulePhaseEditDelegate.swift */; };
+		41C0923B2B20FCB0001D1E22 /* SchedulePhaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0923A2B20FCB0001D1E22 /* SchedulePhaseHelper.swift */; };
 		41C0923D2B210255001D1E22 /* ScheduleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0923C2B210255001D1E22 /* ScheduleDetailView.swift */; };
 		41C19DCD2A4DDE46009883AB /* SelfSufficiencyEstimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C19DCC2A4DDE46009883AB /* SelfSufficiencyEstimateView.swift */; };
 		41C19DCF2A4E09F9009883AB /* SelfSufficiencySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C19DCE2A4E09F9009883AB /* SelfSufficiencySettingsView.swift */; };
@@ -552,7 +552,7 @@
 		41B6910E28E0CDFC0058126E /* devicelist-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "devicelist-success.json"; sourceTree = "<group>"; };
 		41BCC1A82B245C130062084A /* Network+Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+Schedule.swift"; sourceTree = "<group>"; };
 		41BCC1AA2B245C280062084A /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
-		41C0923A2B20FCB0001D1E22 /* SchedulePhaseEditDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePhaseEditDelegate.swift; sourceTree = "<group>"; };
+		41C0923A2B20FCB0001D1E22 /* SchedulePhaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePhaseHelper.swift; sourceTree = "<group>"; };
 		41C0923C2B210255001D1E22 /* ScheduleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailView.swift; sourceTree = "<group>"; };
 		41C0B43329F96D3600CA9462 /* LocalizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedString.swift; sourceTree = "<group>"; };
 		41C19DCC2A4DDE46009883AB /* SelfSufficiencyEstimateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSufficiencyEstimateView.swift; sourceTree = "<group>"; };
@@ -1026,7 +1026,7 @@
 				418C09202B18A98400183603 /* EditScheduleViewModel.swift */,
 				4190922B2B1E49210017CB65 /* ScheduleView.swift */,
 				4190922D2B1E4B250017CB65 /* SchedulePhaseListItemView.swift */,
-				41C0923A2B20FCB0001D1E22 /* SchedulePhaseEditDelegate.swift */,
+				41C0923A2B20FCB0001D1E22 /* SchedulePhaseHelper.swift */,
 				41C0923C2B210255001D1E22 /* ScheduleDetailView.swift */,
 			);
 			path = Schedule;
@@ -1639,7 +1639,7 @@
 				418C6E992AFB8A15000DE35F /* ApproximationsCalculator.swift in Sources */,
 				41E1DFDF28D87781001235B9 /* SettingsTabView.swift in Sources */,
 				419092282B1DDFE60017CB65 /* ScheduleTemplateListViewModel.swift in Sources */,
-				41C0923B2B20FCB0001D1E22 /* SchedulePhaseEditDelegate.swift in Sources */,
+				41C0923B2B20FCB0001D1E22 /* SchedulePhaseHelper.swift in Sources */,
 				4107446328CA1C5D006D5D7D /* PowerFlowView.swift in Sources */,
 				41495F3A2B211C8B004A51C1 /* InverterWorkModeViewModel.swift in Sources */,
 				4190922A2B1DE3D90017CB65 /* EditScheduleView.swift in Sources */,

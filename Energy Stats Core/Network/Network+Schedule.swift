@@ -12,7 +12,7 @@ extension URL {
     static var schedulerModes = URL(string: "https://www.foxesscloud.com/generic/v0/device/scheduler/modes/get")!
     static var getCurrentSchedule = URL(string: "https://www.foxesscloud.com/generic/v0/device/scheduler/list")!
     static var enableSchedule = URL(string: "https://www.foxesscloud.com/generic/v0/device/scheduler/enable")!
-    static var saveSchedule = URL(string: "https://www.foxesscloud.com/generic/v0/device/scheduler/save")!
+    static var saveScheduleTemplate = URL(string: "https://www.foxesscloud.com/generic/v0/device/scheduler/save")!
     static var deleteSchedule = URL(string: "https://www.foxesscloud.com/generic/v0/device/scheduler/disable")!
     static var createScheduleTemplate = URL(string: "https://www.foxesscloud.com/generic/v0/device/scheduler/create")!
     static var fetchScheduleTemplates = URL(string: "https://www.foxesscloud.com/generic/v0/device/scheduler/edit/list?templateType=2")!
@@ -62,7 +62,7 @@ public extension Network {
     }
 
     func saveScheduleTemplate(deviceSN: String, template: ScheduleTemplate) async throws {
-        var request = URLRequest(url: URL.saveSchedule)
+        var request = URLRequest(url: URL.saveScheduleTemplate)
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(
             ScheduleSaveRequest(pollcy: template.phases.map { $0.toPollcy() },

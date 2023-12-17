@@ -7,16 +7,32 @@
 
 import SwiftUI
 
+struct BottomButtonLabels {
+    let left: LocalizedStringKey
+    let right: LocalizedStringKey
+
+    static var defaults: BottomButtonLabels {
+        BottomButtonLabels(left: "Cancel", right: "Apply")
+    }
+}
+
 struct BottomButtonsView<Content: View>: View {
     @Environment(\.dismiss) private var dismiss
     private let onApply: () -> Void
     private let onCancel: (() -> Void)?
     private let footer: () -> Content
+    private let labels: BottomButtonLabels
 
-    init(onApply: @escaping () -> Void, onCancel: (() -> Void)? = nil, @ViewBuilder footer: @escaping () -> Content = { EmptyView() }) {
+    init(
+        labels: BottomButtonLabels = .defaults,
+        onApply: @escaping () -> Void,
+        onCancel: (() -> Void)? = nil,
+        @ViewBuilder footer: @escaping () -> Content = { EmptyView() }
+    ) {
         self.onApply = onApply
         self.onCancel = onCancel
         self.footer = footer
+        self.labels = labels
     }
 
     var body: some View {
@@ -29,7 +45,7 @@ struct BottomButtonsView<Content: View>: View {
                 Button(action: {
                     if let onCancel { onCancel() } else { dismiss() }
                 }) {
-                    Text("Cancel")
+                    Text(labels.left)
                         .frame(maxWidth: .infinity)
                 }
                 .padding()
@@ -39,7 +55,7 @@ struct BottomButtonsView<Content: View>: View {
                 Button(action: {
                     onApply()
                 }) {
-                    Text("Apply")
+                    Text(labels.right)
                         .frame(maxWidth: .infinity)
                 }
                 .padding()
