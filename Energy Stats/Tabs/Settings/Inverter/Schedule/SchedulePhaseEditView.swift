@@ -9,6 +9,7 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct SchedulePhaseEditView: View {
+    @Environment(\.presentationMode) var presentationMode
     @State private var startTime: Date
     @State private var endTime: Date
     @State private var workMode: SchedulerModeResponse
@@ -147,6 +148,7 @@ struct SchedulePhaseEditView: View {
             color: Color.scheduleColor(named: workMode.key)
         ) {
             onChange(phase)
+            presentationMode.wrappedValue.dismiss()
         }
     }
 
