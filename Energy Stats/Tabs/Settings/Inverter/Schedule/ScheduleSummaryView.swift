@@ -64,13 +64,16 @@ struct ScheduleSummaryView: View {
                 Section {
                     ForEach(viewModel.templates) { template in
                         HStack {
-                            Text(template.name)
+                                Text(template.name)
+
                             Spacer()
+                            
                             Button {
                                 Task { await viewModel.activate(templateID: template.id) }
                             } label: {
                                 Text("Activate")
-                            }.buttonStyle(.borderless)
+                            }
+                            .buttonStyle(.borderless)
                         }
                     }
                 } header: {
