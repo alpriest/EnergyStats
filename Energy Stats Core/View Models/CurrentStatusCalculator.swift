@@ -14,7 +14,6 @@ public struct CurrentStatusCalculator: Sendable {
     public let currentTemperatures: InverterTemperatures?
     public let lastUpdate: Date
     public let currentCT2: Double
-    static let ACtoDCconversion = 0.92
 
     public init(device: Device, raws: [RawResponse], shouldInvertCT2: Bool, shouldCombineCT2WithPVPower: Bool) {
         self.currentGrid = raws.currentValue(for: "feedinPower") - raws.currentValue(for: "gridConsumptionPower")
@@ -27,14 +26,14 @@ public struct CurrentStatusCalculator: Sendable {
             self.currentTemperatures = nil
         }
         self.lastUpdate = raws.current(for: "gridConsumptionPower")?.time ?? Date()
-        self.currentCT2 = ((shouldInvertCT2 ? 0 - raws.currentValue(for: "meterPower2") : raws.currentValue(for: "meterPower2")) / Self.ACtoDCconversion)
+        self.currentCT2 = (shouldInvertCT2 ? 0 - raws.currentValue(for: "meterPower2") : raws.currentValue(for: "meterPower2"))
         self.currentSolarPower = Self.calculateSolarPower(device: device, raws: raws, shouldInvertCT2: shouldInvertCT2, shouldCombineCT2WithPVPower: shouldCombineCT2WithPVPower)
     }
 }
 
 private extension CurrentStatusCalculator {
     static func calculateSolarPower(device: Device, raws: [RawResponse], shouldInvertCT2: Bool, shouldCombineCT2WithPVPower: Bool) -> Double {
-        let ct2 = ((shouldInvertCT2 ? 0 - raws.currentValue(for: "meterPower2") : raws.currentValue(for: "meterPower2")) / ACtoDCconversion)
+        let ct2 = (shouldInvertCT2 ? 0 - raws.currentValue(for: "meterPower2") : raws.currentValue(for: "meterPower2"))
 
         if device.hasPV {
             return raws.currentValue(for: "pvPower") + (shouldCombineCT2WithPVPower ? ct2 : 0.0)
