@@ -94,4 +94,8 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable {
             minsocongrid: batterySOC
         )
     }
+
+    public func isValid() -> Bool {
+        batterySOC <= forceDischargeSOC && end > start
+    }
 }

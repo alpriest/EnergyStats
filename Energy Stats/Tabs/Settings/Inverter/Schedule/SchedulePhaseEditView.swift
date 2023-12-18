@@ -16,8 +16,9 @@ struct SchedulePhaseEditView: View {
     @State private var minSOC: String
     @State private var fdSOC: String
     @State private var fdPower: String
-    @State private var minSOCError: String?
-    @State private var fdSOCError: String?
+    @State private var minSOCError: LocalizedStringKey?
+    @State private var fdSOCError: LocalizedStringKey?
+    @State private var timeError: LocalizedStringKey?
     private let id: String
     private let modes: [SchedulerModeResponse]
     private let onChange: (SchedulePhase) -> Void
@@ -63,6 +64,11 @@ struct SchedulePhaseEditView: View {
                         }
                     }
                     .pickerStyle(.menu)
+                } footer: {
+                    OptionalView(timeError) {
+                        Text($0)
+                            .foregroundStyle(Color.red)
+                    }
                 }
 
                 Section {
@@ -152,7 +158,7 @@ struct SchedulePhaseEditView: View {
         }
     }
 
-    private func minSoCDescription() -> String? {
+    private func minSoCDescription() -> LocalizedStringKey? {
         switch workMode.key {
         case "Backup": return nil
         case "Feedin": return nil
@@ -163,7 +169,7 @@ struct SchedulePhaseEditView: View {
         }
     }
 
-    private func forceDischargeSoCDescription() -> String? {
+    private func forceDischargeSoCDescription() -> LocalizedStringKey? {
         switch workMode.key {
         case "Backup": return nil
         case "Feedin": return nil
@@ -174,7 +180,7 @@ struct SchedulePhaseEditView: View {
         }
     }
 
-    private func forceDischargePowerDescription() -> String? {
+    private func forceDischargePowerDescription() -> LocalizedStringKey? {
         switch workMode.key {
         case "Backup": return nil
         case "Feedin": return nil
@@ -188,6 +194,7 @@ struct SchedulePhaseEditView: View {
     private func validate() {
         minSOCError = nil
         fdSOCError = nil
+        timeError = nil
 
         if let minSOC = Int(minSOC), !(10...100 ~= minSOC) {
             minSOCError = "Please enter a number between 10 and 100"
@@ -199,6 +206,10 @@ struct SchedulePhaseEditView: View {
 
         if let minSOC = Int(minSOC), let fdSOC = Int(fdSOC), minSOC > fdSOC {
             minSOCError = "Min SoC must be less than or equal to Force Discharge SoC"
+        }
+
+        if startTime >= endTime {
+            timeError = "End time must be after start time"
         }
     }
 }

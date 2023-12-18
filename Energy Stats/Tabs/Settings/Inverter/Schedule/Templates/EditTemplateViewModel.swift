@@ -67,7 +67,7 @@ class EditTemplateViewModel: ObservableObject {
                     self.state = .inactive
                     alertContent = AlertContent(
                         title: "Success",
-                        message: "Template updated",
+                        message: "Your template was saved",
                         onDismiss: onCompletion
                     )
                 }
@@ -79,7 +79,7 @@ class EditTemplateViewModel: ObservableObject {
     }
 
     func deleteTemplate(onCompletion: @escaping () -> Void) {
-        setState(.active("Saving"))
+        setState(.active("Deleting"))
 
         Task { [self] in
             do {
@@ -123,7 +123,7 @@ class EditTemplateViewModel: ObservableObject {
                     self.state = .inactive
                     alertContent = AlertContent(
                         title: "Success",
-                        message: "Template activated",
+                        message: "Your template was activated",
                         onDismiss: onCompletion
                     )
                 }

@@ -3831,6 +3831,12 @@
             "value" : "Definieren Sie hier Ihre Phase. Drücken Sie zurück, um Ihren gesamten Zeitplan anzusehen."
           }
         },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Define your time period here. Press back to view your entire schedule."
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3959,6 +3965,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Usuń okres czasu"
+          }
+        }
+      }
+    },
+    "Deleting" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Löschend"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminando"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminando"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usuwanie"
           }
         }
       }
@@ -4500,6 +4534,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Czas zakończenia"
+          }
+        }
+      }
+    },
+    "End time must be after start time" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Endzeit muss nach der Startzeit liegen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La hora de finalización debe ser posterior a la hora de inicio."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'orario di fine deve essere dopo l'orario di inizio."
           }
         }
       }
@@ -5222,25 +5278,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "SoC-Entladung erzwingen (State of Charge)"
+            "value" : "SoC-Entladung erzwingen"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fuerza de descarga del SoC (Estado de carga)"
+            "value" : "Fuerza de descarga del SoC"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Forza di scarica del SoC (Stato di carica)"
+            "value" : "Forza di scarica del SoC"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wymuś rozładowanie SoC (Stan naładowania)"
+            "value" : "Wymuś rozładowanie SoC"
           }
         }
       }
@@ -7072,6 +7128,34 @@
         }
       }
     },
+    "Min SoC must be less than or equal to Force Discharge SoC" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Min SoC muss kleiner oder gleich dem Force Discharge SoC sein"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El SoC mínimo debe ser menor o igual al SoC de Descarga Forzada"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il SoC minimo deve essere inferiore o uguale al SoC di Scarica Forzata"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Min SoC musi być mniejszy lub równy SoC Wymuszonego Rozładowania"
+          }
+        }
+      }
+    },
     "Min SoC on Grid" : {
       "localizations" : {
         "de" : {
@@ -8078,6 +8162,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ten tryb ma nieznane zachowanie"
+          }
+        }
+      }
+    },
+    "Please enter a number between 10 and 100" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bitte geben Sie eine Zahl zwischen 10 und 100 ein."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Por favor, introduce un número entre 10 y 100."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Per favore, inserisci un numero tra 10 e 100."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Proszę wpisać liczbę między 10 a 100."
           }
         }
       }
@@ -11568,62 +11680,6 @@
         }
       }
     },
-    "Template activated" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vorlage aktiviert"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Plantilla activada"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modello attivato"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Szablon aktywowany"
-          }
-        }
-      }
-    },
-    "Template updated" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vorlage aktualisiert"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Plantilla actualizada"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modello aggiornato"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Szablon zaktualizowany"
-          }
-        }
-      }
-    },
     "Templates" : {
       "localizations" : {
         "de" : {
@@ -11682,6 +11738,62 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
+          }
+        }
+      }
+    },
+    "The minimum battery state of charge. This must be at most the Force Discharge SOC value." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der minimale Ladezustand der Batterie. Dies muss höchstens der Force Discharge SOC-Wert sein."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El estado de carga mínimo de la batería. Esto debe ser como máximo el valor de SoC de Descarga Forzada."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lo stato di carica minimo della batteria. Questo deve essere al massimo il valore di SoC di Scarica Forzata."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Minimalny stan naładowania baterii. Musi to być co najwyżej wartość SoC Wymuszonego Rozładowania."
+          }
+        }
+      }
+    },
+    "The output power level to be delivered, including your house load and grid export. E.g. If you have 5kW inverter then set this to 5000, then if the house load is 750W the other 4.25kW will be exported." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das zu liefernde Ausgangsleistungsniveau, einschließlich Ihres Hausverbrauchs und der Netzeinspeisung. Z.B. wenn Sie einen 5kW Wechselrichter haben, stellen Sie diesen auf 5000 ein, dann, wenn die Hauslast 750W beträgt, werden die anderen 4.25kW exportiert."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El nivel de potencia de salida a entregar, incluyendo la carga de su casa y la exportación a la red. Por ejemplo, si tienes un inversor de 5kW, configúralo en 5000, entonces si la carga de la casa es de 750W, los otros 4.25kW serán exportados."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il livello di potenza in uscita da fornire, incluso il carico della casa e l'esportazione alla rete. Ad esempio, se hai un inverter da 5kW, impostalo su 5000, poi se il carico di casa è di 750W, gli altri 4.25kW verranno esportati."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poziom mocy wyjściowej do dostarczenia, włącznie z obciążeniem domu i eksportem do sieci. Na przykład, jeśli masz inwerter 5kW, ustaw go na 5000, a jeśli obciążenie domu wynosi 750W, pozostałe 4.25kW zostaną wyeksportowane."
           }
         }
       }
@@ -12280,6 +12392,34 @@
         }
       }
     },
+    "When the battery reaches this level, discharging will stop. If you wanted to save some battery power for later, perhaps set it to 50%." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wenn der Akku diesen Stand erreicht, wird die Entladung stoppen. Wenn du etwas Akkuleistung für später sparen möchtest, stelle ihn vielleicht auf 50%."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuando la batería alcance este nivel, la descarga se detendrá. Si quieres guardar algo de energía de la batería para más tarde, quizás configúralo al 50%."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quando la batteria raggiunge questo livello, la scarica si fermerà. Se vuoi risparmiare un po' di energia della batteria per dopo, forse impostalo al 50%."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gdy bateria osiągnie ten poziom, rozładowanie się zatrzyma. Jeśli chcesz zachować trochę mocy baterii na później, być może ustaw ją na 50%."
+          }
+        }
+      }
+    },
     "Which work mode would you like to set?" : {
       "localizations" : {
         "de" : {
@@ -12553,41 +12693,6 @@
         }
       }
     },
-    "You don't have a schedule defined." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sie haben keinen Zeitplan definiert."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You don't have an active schedule."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No tienes un horario definido."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Non hai un programma definito."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nie masz zdefiniowanego harmonogramu."
-          }
-        }
-      }
-    },
     "You have no time periods defined. Add a time period to define how you'd like your inverter to behave during specific hours." : {
       "localizations" : {
         "de" : {
@@ -12647,6 +12752,62 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Osiągnięto limit prędkości serwera. Proszę spróbować później."
+          }
+        }
+      }
+    },
+    "Your template was activated" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deine Vorlage wurde aktiviert"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu plantilla fue activada"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il tuo modello è stato attivato"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Twój szablon został aktywowany"
+          }
+        }
+      }
+    },
+    "Your template was saved" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deine Vorlage wurde gespeichert"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu plantilla fue guardada"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il tuo modello è stato salvato"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Twój szablon został zapisany"
           }
         }
       }

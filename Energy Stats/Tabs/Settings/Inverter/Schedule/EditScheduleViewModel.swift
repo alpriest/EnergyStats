@@ -119,6 +119,10 @@ extension Schedule {
                 if phaseStart <= otherEnd && otherStart < phaseEnd {
                     return false
                 }
+
+                if !phase.isValid() {
+                    return false
+                }
             }
         }
 
