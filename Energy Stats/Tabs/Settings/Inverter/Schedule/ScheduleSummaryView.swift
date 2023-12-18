@@ -39,14 +39,9 @@ struct ScheduleSummaryView: View {
                                                    .padding(.vertical, 4)
                                            })
                         } header: {
-                            Text("Current schedule")
+                            Text("active_schedule_title")
                         }
                     } else {
-                        VStack {
-                            Text("You don't have a schedule defined.")
-                                .padding(.vertical, 44)
-                        }
-
                         NavigationLink(destination: {
                             EditScheduleView(
                                 networking: networking,
@@ -64,29 +59,31 @@ struct ScheduleSummaryView: View {
                 Section {
                     ForEach(viewModel.templates) { template in
                         HStack {
-                                Text(template.name)
+                            Text(template.name)
 
                             Spacer()
-                            
+
                             Button {
                                 Task { await viewModel.activate(templateID: template.id) }
                             } label: {
                                 Text("Activate")
                             }
-                            .buttonStyle(.borderless)
+                            .buttonStyle(.borderedProminent)
                         }
                     }
                 } header: {
                     Text("Templates")
                         .padding(.top, 24)
                 } footer: {
-                    VStack(alignment: .leading) {
+                    VStack {
                         NavigationLink {
                             ScheduleTemplateListView(networking: networking, config: config, modes: viewModel.modes)
                         } label: {
                             Text("Manage templates")
-                        }
+                        }.buttonStyle(.borderedProminent)
                     }
+                    .frame(maxWidth: .infinity)
+                    .padding(.top)
                 }
             }
         }

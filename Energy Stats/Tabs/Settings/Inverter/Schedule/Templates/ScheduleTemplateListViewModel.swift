@@ -13,7 +13,6 @@ class ScheduleTemplateListViewModel: ObservableObject {
     let config: ConfigManaging
     @Published var templates: [ScheduleTemplateSummary] = []
     @Published var state: LoadState = .inactive
-    @Published var schedule: Schedule?
 
     init(networking: FoxESSNetworking, config: ConfigManaging) {
         self.networking = networking

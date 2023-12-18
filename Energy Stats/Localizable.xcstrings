@@ -1385,35 +1385,6 @@
         }
       }
     },
-    "Activate schedule" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zeitplan aktivieren"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activar el horario"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Attivare il programma"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aktywować harmonogram"
-          }
-        }
-      }
-    },
     "Activate template" : {
       "localizations" : {
         "de" : {
@@ -1466,6 +1437,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aktywowanie"
+          }
+        }
+      }
+    },
+    "active_schedule_title" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktiver Zeitplan"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Active schedule"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Horario activo"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Programma attivo"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktywny harmonogram"
           }
         }
       }
@@ -3476,34 +3481,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "łącznie"
-          }
-        }
-      }
-    },
-    "Current schedule" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aktueller Zeitplan"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Horario actual"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Programma attuale"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aktualny harmonogram"
           }
         }
       }
@@ -12577,11 +12554,18 @@
       }
     },
     "You don't have a schedule defined." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sie haben keinen Zeitplan definiert."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You don't have an active schedule."
           }
         },
         "es" : {

@@ -70,7 +70,7 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable {
         self.end = Date().toTime()
         self.mode = mode
         self.forceDischargePower = 0
-        self.forceDischargeSOC = 10
+        self.forceDischargeSOC = Int(device?.battery?.minSOC) ?? 10
         self.batterySOC = Int(device?.battery?.minSOC) ?? 10
         self.color = Color.scheduleColor(named: mode.key)
     }
