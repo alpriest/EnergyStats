@@ -23,28 +23,34 @@ struct InverterSettingsView: View {
         Form {
             InverterChoiceView(viewModel: InverterChoiceViewModel(configManager: configManager))
 
-            NavigationLink("Configure Work Mode") {
-                InverterWorkModeView(networking: networking, config: configManager)
+            Section {
+                NavigationLink("Configure Work Mode") {
+                    InverterWorkModeView(networking: networking, config: configManager)
+                }
+
+                NavigationLink("Manage schedules") {
+                    ScheduleSummaryView(networking: networking, config: configManager)
+                }
             }
 
-            NavigationLink("Manage schedules") {
-                ScheduleSummaryView(networking: networking, config: configManager)
-            }
+            Section {
+                Toggle(isOn: $showInverterTemperature) {
+                    Text("Show inverter temperatures")
+                }
 
-            Toggle(isOn: $showInverterTemperature) {
-                Text("Show inverter temperatures")
-            }
+                Toggle(isOn: $showInverterIcon) {
+                    Text("Show inverter icon")
+                }
 
-            Toggle(isOn: $showInverterIcon) {
-                Text("Show inverter icon")
-            }
+                Toggle(isOn: $showInverterTypeName) {
+                    Text("settings.inverter.showInverterTypeNameOnPowerflow")
+                }
 
-            Toggle(isOn: $showInverterTypeName) {
-                Text("settings.inverter.showInverterTypeNameOnPowerflow")
-            }
-
-            Toggle(isOn: $showInverterPlantName) {
-                Text("Show inverter plant name")
+                Toggle(isOn: $showInverterPlantName) {
+                    Text("Show inverter plant name")
+                }
+            } header: {
+                Text("Display Options")
             }
 
             Section {
@@ -103,17 +109,19 @@ struct InverterSettingsView: View {
 #if DEBUG
 struct InverterSettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        InverterSettingsView(
-            networking: DemoNetworking(),
-            configManager: PreviewConfigManager(),
-            firmwareVersion: .preview(),
-            showInverterTemperature: .constant(true),
-            showInverterIcon: .constant(true),
-            shouldInvertCT2: .constant(true),
-            showInverterPlantName: .constant(true),
-            showInverterTypeName: .constant(true),
-            shouldCombineCT2WithPVPower: .constant(true)
-        )
+        NavigationView {
+            InverterSettingsView(
+                networking: DemoNetworking(),
+                configManager: PreviewConfigManager(),
+                firmwareVersion: .preview(),
+                showInverterTemperature: .constant(true),
+                showInverterIcon: .constant(true),
+                shouldInvertCT2: .constant(true),
+                showInverterPlantName: .constant(true),
+                showInverterTypeName: .constant(true),
+                shouldCombineCT2WithPVPower: .constant(true)
+            )
+        }
     }
 }
 #endif

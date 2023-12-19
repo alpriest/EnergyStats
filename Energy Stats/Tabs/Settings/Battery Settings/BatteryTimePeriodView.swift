@@ -32,7 +32,7 @@ struct BatteryTimePeriodView: View {
                     Button("Reset times") {
                         timePeriod.start = Date.fromTime(Time.zero())
                         timePeriod.end = Date.fromTime(Time.zero())
-                    }.buttonStyle(.borderless)
+                    }.buttonStyle(.bordered)
                 }
             }
         )

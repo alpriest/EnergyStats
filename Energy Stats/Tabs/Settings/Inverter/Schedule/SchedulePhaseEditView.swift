@@ -41,6 +41,8 @@ struct SchedulePhaseEditView: View {
         self._minSOC = State(wrappedValue: String(describing: phase.batterySOC))
         self._fdSOC = State(wrappedValue: String(describing: phase.forceDischargeSOC))
         self._fdPower = State(wrappedValue: String(describing: phase.forceDischargePower))
+
+        validate()
     }
 
     var body: some View {

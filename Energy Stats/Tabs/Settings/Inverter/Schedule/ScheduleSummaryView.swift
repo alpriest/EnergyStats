@@ -88,7 +88,7 @@ struct ScheduleSummaryView: View {
             }
         }
         .loadable($viewModel.state, retry: { Task { await viewModel.load() } })
-        .navigationTitle("Work strategy")
+        .navigationTitle("Work schedule")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             Task { await self.viewModel.load() }

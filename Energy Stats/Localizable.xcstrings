@@ -4167,6 +4167,34 @@
         }
       }
     },
+    "Display Options" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anzeigeoptionen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opciones de visualización"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opzioni di visualizzazione"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opcje wyświetlania"
+          }
+        }
+      }
+    },
     "display_unit_adaptive_description" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -4556,6 +4584,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "L'orario di fine deve essere dopo l'orario di inizio."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Czas zakończenia musi być po czasie rozpoczęcia."
           }
         }
       }
@@ -12476,7 +12510,7 @@
         }
       }
     },
-    "Work strategy" : {
+    "Work schedule" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {

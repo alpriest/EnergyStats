@@ -53,6 +53,7 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable {
 
     public init?(id: String? = nil, start: Time, end: Time, mode: SchedulerModeResponse?, forceDischargePower: Int, forceDischargeSOC: Int, batterySOC: Int, color: Color) {
         guard let mode else { return nil }
+        guard start < end else { return nil }
 
         self.id = id ?? UUID().uuidString
         self.start = start
@@ -67,7 +68,7 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable {
     public init(mode: SchedulerModeResponse, device: Device?) {
         self.id = UUID().uuidString
         self.start = Date().toTime()
-        self.end = Date().toTime()
+        self.end = Date().toTime().adding(minutes: 1)
         self.mode = mode
         self.forceDischargePower = 0
         self.forceDischargeSOC = Int(device?.battery?.minSOC) ?? 10

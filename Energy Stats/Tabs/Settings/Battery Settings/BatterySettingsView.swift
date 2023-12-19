@@ -16,7 +16,11 @@ struct BatterySettingsView: View {
     var body: some View {
         Form {
             NavigationLink("Minimum charge levels") {
-                BatterySOCSettingsView(networking: viewModel.networking, config: viewModel.config, onSOCchange: { viewModel.recalculateBatteryCapacity() })
+                BatterySOCSettingsView(networking: viewModel.networking,
+                                       config: viewModel.config,
+                                       onSOCchange: {
+                                           viewModel.recalculateBatteryCapacity()
+                                       })
             }.accessibilityIdentifier("minimum charge levels")
 
             NavigationLink("Charge times") {
@@ -59,12 +63,14 @@ struct BatterySettingsView: View {
                             Text(" Wh")
                         }
                     }
-                }, footer: {
+                },
+                header: { Text("Display Options") },
+                footer: {
                     VStack(alignment: .leading) {
                         Button("Recalculate capacity", action: {
                             viewModel.recalculateBatteryCapacity()
                         })
-                        .buttonStyle(.borderless)
+                        .buttonStyle(.bordered)
                         .padding(.bottom, 4)
 
                         Text("Calculated as ") +
@@ -87,18 +93,17 @@ struct BatterySettingsView: View {
                 Toggle(isOn: $viewModel.showBatteryEstimate) {
                     Text("Show battery full/empty estimate")
                 }
-
             } footer: {
                 Text("Empty/full battery durations are estimates based on calculated capacity, assume that solar conditions and battery charge rates remain constant.")
             }
 
-            Section(content: {
+            Section {
                 Toggle(isOn: $viewModel.showUsableBatteryOnly) {
                     Text("Show usable battery only")
                 }
-            }, footer: {
+            } footer: {
                 Text("show_usable_battery_description")
-            })
+            }
 
             Section {
                 Toggle(isOn: $viewModel.showBatteryTemperature) {
