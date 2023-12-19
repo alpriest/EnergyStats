@@ -30,7 +30,7 @@ class ParametersGraphTabViewModel: ObservableObject {
     private var configManager: ConfigManaging
     private var rawData: [ParameterGraphValue] = [] {
         didSet {
-            data = rawData
+            data = Dictionary(grouping: rawData, by: { $0.type.unit })
         }
     }
 
@@ -38,7 +38,7 @@ class ParametersGraphTabViewModel: ObservableObject {
     @Published var state = LoadState.inactive
 
     @Published private(set) var stride = 3
-    @Published private(set) var data: [ParameterGraphValue] = []
+    @Published private(set) var data: [String: [ParameterGraphValue]] = [:]
     @Published var graphVariables: [ParameterGraphVariable] = []
     @Published var graphVariableBounds: [ParameterGraphBounds] = []
     private var queryDate = QueryDate.now()
@@ -185,7 +185,7 @@ class ParametersGraphTabViewModel: ObservableObject {
         let start = Calendar.current.startOfDay(for: displayMode.date)
         xScale = start...Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: displayMode.date))!
 
-        data = refreshedData
+        data = Dictionary(grouping: refreshedData, by: { $0.type.unit })
 
         storeVariables()
     }

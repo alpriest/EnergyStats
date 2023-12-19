@@ -11,13 +11,23 @@ import SwiftUI
 
 @available(iOS 16.0, *)
 struct ParametersGraphView: View {
+    let key: String
     @ObservedObject var viewModel: ParametersGraphTabViewModel
     @GestureState var isDetectingPress = true
     @Binding var selectedDate: Date?
     @Binding var valuesAtTime: ValuesAtTime<ParameterGraphValue>?
+    private let data: [ParameterGraphValue]
+
+    init(key: String, viewModel: ParametersGraphTabViewModel, selectedDate: Binding<Date?>, valuesAtTime: Binding<ValuesAtTime<ParameterGraphValue>?>) {
+        self.key = key
+        self.viewModel = viewModel
+        self._selectedDate = selectedDate
+        self._valuesAtTime = valuesAtTime
+        self.data = viewModel.data[key] ?? []
+    }
 
     var body: some View {
-        Chart(viewModel.data, id: \.type.variable) {
+        Chart(data, id: \.type.variable) {
             LineMark(
                 x: .value("hour", $0.date),
                 y: .value("", $0.value),
@@ -44,7 +54,7 @@ struct ParametersGraphView: View {
                 if let amount = value.as(Double.self) {
                     AxisGridLine()
                     AxisValueLabel {
-                        Text(amount, format: .number)
+                        Text("\(amount, format: .number) \(key)")
                     }
                 }
             }
@@ -57,7 +67,7 @@ struct ParametersGraphView: View {
                             let xLocation = currentState.location.x - geometryProxy[chartProxy.plotAreaFrame].origin.x
 
                             if let plotElement = chartProxy.value(atX: xLocation, as: Date.self) {
-                                if let graphValue = viewModel.data.first(where: {
+                                if let graphValue = data.first(where: {
                                     $0.date > plotElement
                                 }), selectedDate != graphValue.date {
                                     selectedDate = graphValue.date
@@ -71,7 +81,7 @@ struct ParametersGraphView: View {
                             let xLocation = value.location.x - geometryProxy[chartProxy.plotAreaFrame].origin.x
 
                             if let plotElement = chartProxy.value(atX: xLocation, as: Date.self) {
-                                if let graphValue = viewModel.data.first(where: {
+                                if let graphValue = data.first(where: {
                                     $0.date > plotElement
                                 }) {
                                     selectedDate = graphValue.date
@@ -105,6 +115,7 @@ struct UsageGraphView_Previews: PreviewProvider {
         let model = ParametersGraphTabViewModel(networking: DemoNetworking(), configManager: PreviewConfigManager())
         Task { await model.load() }
         return ParametersGraphView(
+            key: "℃",
             viewModel: model,
             selectedDate: .constant(nil),
             valuesAtTime: .constant(nil)

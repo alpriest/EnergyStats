@@ -49,11 +49,14 @@ struct ParametersGraphTabView: View {
                             }.padding(.vertical)
                         }.frame(maxWidth: .infinity)
 
-                        ParametersGraphView(viewModel: viewModel,
-                                            selectedDate: $selectedDate,
-                                            valuesAtTime: $valuesAtTime)
-                        .frame(height: 250)
-                        .padding(.vertical)
+                        ForEach(Array(viewModel.data.keys.sorted { $0 < $1 }), id: \.self) { key in
+                            ParametersGraphView(key: key,
+                                                viewModel: viewModel,
+                                                selectedDate: $selectedDate,
+                                                valuesAtTime: $valuesAtTime)
+                                .frame(height: 250)
+                                .padding(.vertical)
+                        }
                     }
 
                     ParameterGraphVariablesToggles(viewModel: viewModel, selectedDate: $selectedDate, valuesAtTime: $valuesAtTime, appSettings: appSettings)
@@ -84,7 +87,7 @@ struct ParametersGraphTabView: View {
             .padding()
         }
         .sheet(isPresented: $showingVariables) {
-            ParameterGraphVariableChooserView(viewModel: ParameterGraphVariableChooserViewModel(variables: viewModel.graphVariables, configManager: configManager,  onApply: { viewModel.set(graphVariables: $0) }))
+            ParameterGraphVariableChooserView(viewModel: ParameterGraphVariableChooserViewModel(variables: viewModel.graphVariables, configManager: configManager, onApply: { viewModel.set(graphVariables: $0) }))
         }
         .task {
             Task {
