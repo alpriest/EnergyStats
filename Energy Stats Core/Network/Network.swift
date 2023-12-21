@@ -278,14 +278,17 @@ extension Network {
     }
 
     func addHeaders(to request: inout URLRequest) {
-        if let token {
-            request.setValue(token, forHTTPHeaderField: "token")
-        }
+        let timestamp = Int(round(Date().timeIntervalSince1970 * 1000))
+        let websiteClientId = ""
+
+        request.setValue(token, forHTTPHeaderField: "token")
         request.setValue("application/json, text/plain, */*", forHTTPHeaderField: "Accept")
         request.setValue("en-US;q=0.9,en;q=0.8,de;q=0.7,nl;q=0.6", forHTTPHeaderField: "Accept-Language")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue(languageCode, forHTTPHeaderField: "lang")
         request.setValue(timezone, forHTTPHeaderField: "timezone")
+        request.setValue(String(describing: timestamp), forHTTPHeaderField: "timestamp")
+        request.setValue(signature(for: request) + "." + websiteClientId, forHTTPHeaderField: "signature")
     }
 
     private var languageCode: String {
@@ -295,6 +298,23 @@ extension Network {
 
     private var timezone: String {
         TimeZone.current.identifier
+    }
+
+    private func signature(for request: URLRequest) -> String {
+        let parts = [
+            request.url?.path ?? "",
+            request.header(for: "token"),
+            request.header(for: "lang"),
+            request.header(for: "timestamp"),
+        ]
+
+        return parts.joined(separator: "\\r\\n").md5()!
+    }
+}
+
+extension URLRequest {
+    func header(for field: String) -> String {
+        value(forHTTPHeaderField: field) ?? ""
     }
 }
 
