@@ -200,7 +200,7 @@ public class Network: FoxESSNetworking {
 
         do {
             let result: (ErrorMessagesResponse, Data) = try await fetch(request)
-            errorMessages = result.0.messages.first?.value ?? [:]
+            errorMessages = result.0.messages[languageCode] ?? [:]
         } catch {
             // Ignore
         }
