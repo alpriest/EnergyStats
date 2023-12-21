@@ -5,24 +5,29 @@
 //  Created by Alistair Priest on 26/07/2023.
 //
 
-import SwiftUI
+import Combine
 import Energy_Stats_Core
+import SwiftUI
 
 struct BatteryTimePeriodView: View {
     @Binding var timePeriod: ChargeTimePeriod
     @State private var errorMessage: String?
-    let title: String
+
+    private let appSettingsPublisher: LatestAppSettingsPublisher
+    private let title: String
+
+    init(timePeriod: Binding<ChargeTimePeriod>, title: String, appSettingsPublisher: LatestAppSettingsPublisher) {
+        self._timePeriod = timePeriod
+        self.title = title
+        self.appSettingsPublisher = appSettingsPublisher
+    }
 
     var body: some View {
         Section(
             content: {
                 Toggle(isOn: $timePeriod.enabled, label: { Text("Enable charge from grid") })
 
-                DatePicker("Start", selection: $timePeriod.start, displayedComponents: [.hourAndMinute])
-                    .datePickerStyle(.compact)
-
-                DatePicker("End", selection: $timePeriod.end, displayedComponents: [.hourAndMinute])
-                    .datePickerStyle(.compact)
+                CustomDatePicker(start: $timePeriod.start, end: $timePeriod.end, appSettingsPublisher: appSettingsPublisher)
             },
             header: {
                 Text(title)
@@ -48,7 +53,11 @@ struct BatteryTimePeriodView_Previews: PreviewProvider {
         @State private var period = ChargeTimePeriod(start: Date(), end: Date(), enabled: true)
         var body: some View {
             Form {
-                BatteryTimePeriodView(timePeriod: $period, title: "Period 1")
+                BatteryTimePeriodView(
+                    timePeriod: $period,
+                    title: "Period 1",
+                    appSettingsPublisher: CurrentValueSubject(.mock().copy(showHalfHourlyTimeSelectors: false))
+                )
             }
         }
     }

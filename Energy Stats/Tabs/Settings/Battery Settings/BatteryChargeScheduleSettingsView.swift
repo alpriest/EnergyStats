@@ -10,16 +10,18 @@ import SwiftUI
 
 struct BatteryChargeScheduleSettingsView: View {
     @StateObject var viewModel: BatteryChargeScheduleSettingsViewModel
+    private let appSettingsPublisher: LatestAppSettingsPublisher
 
     init(networking: FoxESSNetworking, config: ConfigManaging) {
         _viewModel = StateObject(wrappedValue: BatteryChargeScheduleSettingsViewModel(networking: networking, config: config))
+        self.appSettingsPublisher = config.appSettingsPublisher
     }
 
     var body: some View {
         VStack(spacing: 0) {
             Form {
-                BatteryTimePeriodView(timePeriod: $viewModel.timePeriod1, title: "Time period 1")
-                BatteryTimePeriodView(timePeriod: $viewModel.timePeriod2, title: "Time period 2")
+                BatteryTimePeriodView(timePeriod: $viewModel.timePeriod1, title: "Time period 1", appSettingsPublisher: appSettingsPublisher)
+                BatteryTimePeriodView(timePeriod: $viewModel.timePeriod2, title: "Time period 2", appSettingsPublisher: appSettingsPublisher)
 
                 Section(content: {}, footer: {
                     VStack(alignment: .leading) {

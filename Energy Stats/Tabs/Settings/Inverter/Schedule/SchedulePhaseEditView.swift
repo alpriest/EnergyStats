@@ -5,6 +5,7 @@
 //  Created by Alistair Priest on 30/11/2023.
 //
 
+import Combine
 import Energy_Stats_Core
 import SwiftUI
 
@@ -23,12 +24,14 @@ struct SchedulePhaseEditView: View {
     private let modes: [SchedulerModeResponse]
     private let onChange: (SchedulePhase) -> Void
     private let onDelete: (String) -> Void
+    private let appSettingsPublisher: LatestAppSettingsPublisher
 
     init(
         modes: [SchedulerModeResponse],
         phase: SchedulePhase,
         onChange: @escaping (SchedulePhase) -> Void,
-        onDelete: @escaping (String) -> Void
+        onDelete: @escaping (String) -> Void,
+        appSettingsPublisher: LatestAppSettingsPublisher
     ) {
         self.modes = modes
         self.onChange = onChange
@@ -41,6 +44,7 @@ struct SchedulePhaseEditView: View {
         self._minSOC = State(wrappedValue: String(describing: phase.batterySOC))
         self._fdSOC = State(wrappedValue: String(describing: phase.forceDischargeSOC))
         self._fdPower = State(wrappedValue: String(describing: phase.forceDischargePower))
+        self.appSettingsPublisher = appSettingsPublisher
 
         validate()
     }
@@ -53,11 +57,7 @@ struct SchedulePhaseEditView: View {
                 }
 
                 Section {
-                    DatePicker("Start time", selection: $startTime, displayedComponents: [.hourAndMinute])
-                        .datePickerStyle(.compact)
-
-                    DatePicker("End time", selection: $endTime, displayedComponents: [.hourAndMinute])
-                        .datePickerStyle(.compact)
+                    CustomDatePicker(start: $startTime, end: $endTime, appSettingsPublisher: appSettingsPublisher)
 
                     Picker("Work mode", selection: $workMode) {
                         ForEach(modes, id: \.self) { mode in
@@ -235,7 +235,8 @@ struct SchedulePhaseEditView: View {
             color: Color.scheduleColor(named: "ForceDischarge")
         )!,
         onChange: { print($0.id, " changed") },
-        onDelete: { print($0, " deleted") }
+        onDelete: { print($0, " deleted") },
+        appSettingsPublisher: CurrentValueSubject(.mock().copy(showHalfHourlyTimeSelectors: false))
     )
 }
 

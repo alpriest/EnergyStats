@@ -20,6 +20,8 @@ public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging {
     func select(device: Device?)
     func refreshFirmwareVersions() async throws
     func clearBatteryOverride(for deviceID: String)
+    var appSettingsPublisher: LatestAppSettingsPublisher { get }
+
     var hasRunBefore: Bool { get set }
     var minSOC: Double { get }
     var batteryCapacity: String { get set }
@@ -32,7 +34,6 @@ public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging {
     var showUsableBatteryOnly: Bool { get set }
     var showTotalYield: Bool { get set }
     var refreshFrequency: RefreshFrequency { get set }
-    var appSettingsPublisher: LatestAppSettingsPublisher { get }
     var decimalPlaces: Int { get set }
     var showSunnyBackground: Bool { get set }
     var devices: [Device]? { get set }
@@ -57,6 +58,7 @@ public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging {
     var shouldCombineCT2WithPVPower: Bool { get set }
     var showGraphValueDescriptions: Bool { get set }
     var dataCeiling: DataCeiling { get set }
+    var showHalfHourlyTimeSelectors: Bool { get set }
 }
 
 public protocol SolcastConfigManaging {
@@ -536,6 +538,16 @@ public class ConfigManager: ConfigManaging {
             config.dataCeiling = newValue
             appSettingsPublisher.send(appSettingsPublisher.value.copy(
                 dataCeiling: config.dataCeiling
+            ))
+        }
+    }
+
+    public var showHalfHourlyTimeSelectors: Bool {
+        get { config.showHalfHourlyTimeSelectors }
+        set {
+            config.showHalfHourlyTimeSelectors = newValue
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+                showHalfHourlyTimeSelectors: config.showHalfHourlyTimeSelectors
             ))
         }
     }

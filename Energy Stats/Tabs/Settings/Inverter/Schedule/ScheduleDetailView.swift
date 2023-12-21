@@ -5,6 +5,7 @@
 //  Created by Alistair Priest on 06/12/2023.
 //
 
+import Combine
 import Energy_Stats_Core
 import SwiftUI
 
@@ -13,6 +14,7 @@ struct ScheduleDetailView: View {
     let modes: [SchedulerModeResponse]
     let onUpdate: (SchedulePhase) -> Void
     let onDelete: (String) -> Void
+    let appSettingsPublisher: LatestAppSettingsPublisher
 
     var body: some View {
         Section {
@@ -40,7 +42,8 @@ struct ScheduleDetailView: View {
                 SchedulePhaseEditView(modes: modes,
                                       phase: phase,
                                       onChange: onUpdate,
-                                      onDelete: onDelete)
+                                      onDelete: onDelete,
+                                      appSettingsPublisher: appSettingsPublisher)
             } label: {
                 SchedulePhaseListItemView(phase: phase)
             }
@@ -54,6 +57,7 @@ struct ScheduleDetailView: View {
         schedule: Schedule.preview(),
         modes: SchedulerModeResponse.preview(),
         onUpdate: { _ in },
-        onDelete: { _ in }
+        onDelete: { _ in },
+        appSettingsPublisher: CurrentValueSubject(.mock().copy(showHalfHourlyTimeSelectors: false))
     )
 }

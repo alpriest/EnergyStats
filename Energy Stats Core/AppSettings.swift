@@ -42,6 +42,7 @@ public struct AppSettings {
     public var showGraphValueDescriptions: Bool
     public var solcastSettings: SolcastSettings
     public var dataCeiling: DataCeiling
+    public var showHalfHourlyTimeSelectors: Bool
 
     public init(
         showColouredLines: Bool,
@@ -70,7 +71,8 @@ public struct AppSettings {
         shouldCombineCT2WithPVPower: Bool,
         showGraphValueDescriptions: Bool,
         solcastSettings: SolcastSettings,
-        dataCeiling: DataCeiling
+        dataCeiling: DataCeiling,
+        showHalfHourlyTimeSelectors: Bool
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -99,6 +101,7 @@ public struct AppSettings {
         self.showGraphValueDescriptions = showGraphValueDescriptions
         self.solcastSettings = solcastSettings
         self.dataCeiling = dataCeiling
+        self.showHalfHourlyTimeSelectors = showHalfHourlyTimeSelectors
     }
 
     public func copy(
@@ -128,7 +131,8 @@ public struct AppSettings {
         shouldCombineCT2WithPVPower: Bool? = nil,
         showGraphValueDescriptions: Bool? = nil,
         solcastSettings: SolcastSettings? = nil,
-        dataCeiling: DataCeiling? = nil
+        dataCeiling: DataCeiling? = nil,
+        showHalfHourlyTimeSelectors: Bool? = nil
     ) -> AppSettings {
         AppSettings(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -157,7 +161,8 @@ public struct AppSettings {
             shouldCombineCT2WithPVPower: shouldCombineCT2WithPVPower ?? self.shouldCombineCT2WithPVPower,
             showGraphValueDescriptions: showGraphValueDescriptions ?? self.showGraphValueDescriptions,
             solcastSettings: solcastSettings ?? self.solcastSettings,
-            dataCeiling: dataCeiling ?? self.dataCeiling
+            dataCeiling: dataCeiling ?? self.dataCeiling,
+            showHalfHourlyTimeSelectors: showHalfHourlyTimeSelectors ?? self.showHalfHourlyTimeSelectors
         )
     }
 }

@@ -135,6 +135,12 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
+    @Published var showHalfHourlyTimeSelectors: Bool {
+        didSet {
+            config.showHalfHourlyTimeSelectors = showHalfHourlyTimeSelectors
+        }
+    }
+
     private(set) var config: ConfigManaging
     private let userManager: UserManager
     private var cancellables = Set<AnyCancellable>()
@@ -167,6 +173,7 @@ class SettingsTabViewModel: ObservableObject {
         shouldCombineCT2WithPVPower = config.shouldCombineCT2WithPVPower
         showGraphValueDescriptions = config.showGraphValueDescriptions
         dataCeiling = config.dataCeiling
+        showHalfHourlyTimeSelectors = config.showHalfHourlyTimeSelectors
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }

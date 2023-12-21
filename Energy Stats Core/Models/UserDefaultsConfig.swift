@@ -54,6 +54,7 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "solcastApiKey") // Remove 2024
         UserDefaults.shared.removeObject(forKey: "solcastSettings")
         UserDefaults.shared.removeObject(forKey: "dataCeiling")
+        UserDefaults.shared.removeObject(forKey: "showHalfHourlyTimeSelectors")
     }
 
     @UserDefaultsStoredBool(key: "showGraphValueDescriptions", defaultValue: true)
@@ -202,4 +203,7 @@ public class UserDefaultsConfig: Config {
             UserDefaults.shared.set(newValue.rawValue, forKey: "dataCeiling")
         }
     }
+
+    @UserDefaultsStoredBool(key: "showHalfHourlyTimeSelectors", defaultValue: false)
+    public var showHalfHourlyTimeSelectors: Bool
 }

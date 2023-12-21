@@ -46,12 +46,18 @@ struct DisplaySettingsView: View {
                 }.pickerStyle(.segmented)
             }
 
-            Toggle(isOn: $viewModel.showLastUpdateTimestamp) {
-                Text("Show last update timestamp")
-            }
+            Group {
+                Toggle(isOn: $viewModel.showLastUpdateTimestamp) {
+                    Text("Show last update timestamp")
+                }
 
-            Toggle(isOn: $viewModel.showGraphValueDescriptions) {
-                Text("Show graph value descriptions")
+                Toggle(isOn: $viewModel.showGraphValueDescriptions) {
+                    Text("Show graph value descriptions")
+                }
+
+                Toggle(isOn: $viewModel.showHalfHourlyTimeSelectors) {
+                    Text("Show half hourly time selectors")
+                }
             }
         } header: {
             Text("Display")

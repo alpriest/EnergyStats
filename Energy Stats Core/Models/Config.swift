@@ -44,6 +44,7 @@ public protocol Config {
     var showGraphValueDescriptions: Bool { get set }
     var solcastSettings: SolcastSettings { get set }
     var dataCeiling: DataCeiling { get set }
+    var showHalfHourlyTimeSelectors: Bool { get set }
 }
 
 public func DefaultParameterGroups() -> [ParameterGroup] {

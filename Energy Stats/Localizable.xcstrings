@@ -4573,6 +4573,7 @@
       }
     },
     "End time" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -11001,6 +11002,9 @@
         }
       }
     },
+    "Show half hourly time selectors" : {
+
+    },
     "Show inverter icon" : {
       "localizations" : {
         "de" : {
@@ -11481,6 +11485,7 @@
       }
     },
     "Start time" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

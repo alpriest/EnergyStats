@@ -13,6 +13,7 @@ struct EditScheduleView: View {
     @State private var presentConfirmation = false
     @Environment(\.presentationMode) var presentationMode
     private let allowDelete: Bool
+    private let appSettingsPublisher: LatestAppSettingsPublisher
 
     init(
         networking: FoxESSNetworking,
@@ -30,6 +31,7 @@ struct EditScheduleView: View {
             )
         )
         self.allowDelete = allowDelete
+        self.appSettingsPublisher = config.appSettingsPublisher
     }
 
     var body: some View {
@@ -39,7 +41,8 @@ struct EditScheduleView: View {
                     schedule: viewModel.schedule,
                     modes: viewModel.modes,
                     onUpdate: viewModel.updatedPhase,
-                    onDelete: viewModel.deletedPhase
+                    onDelete: viewModel.deletedPhase,
+                    appSettingsPublisher: appSettingsPublisher
                 )
 
                 FooterSection {

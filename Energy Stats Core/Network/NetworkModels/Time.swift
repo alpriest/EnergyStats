@@ -84,4 +84,9 @@ public extension Time {
     static func zero() -> Time {
         Time(hour: 0, minute: 0)
     }
+
+    func toDate() -> Date {
+        guard let result = Calendar.current.date(bySetting: .hour, value: hour, of: .now) else { return .now }
+        return Calendar.current.date(bySetting: .minute, value: minute, of: result) ?? .now
+    }
 }
