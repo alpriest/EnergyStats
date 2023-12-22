@@ -12,35 +12,52 @@ import SwiftUI
 struct CustomDatePicker: View {
     @Binding var start: Date
     @Binding var end: Date
-    private let appSettingsPublisher: LatestAppSettingsPublisher
-    @State private var appSettings: AppSettings = .mock()
+    @AppStorage("showHighAccuracyTimePickers") private var accurate = false
 
-    init(start: Binding<Date>, end: Binding<Date>, appSettingsPublisher: LatestAppSettingsPublisher) {
+    init(start: Binding<Date>, end: Binding<Date>) {
         self._start = start
         self._end = end
-        self.appSettingsPublisher = appSettingsPublisher
-        self.appSettings = appSettingsPublisher.value
     }
 
     var body: some View {
-        if true {
-            Picker("Start", selection: $start) {
-                ForEach(timeSlots, id: \.self) {
-                    Text($0.formatted).tag($0.toDate())
+        VStack {
+            HStack {
+                if accurate {
+                    DatePicker("Start", selection: $start, displayedComponents: [.hourAndMinute])
+                        .datePickerStyle(.compact)
+                } else {
+                    Picker("Start", selection: $start) {
+                        ForEach(timeSlots, id: \.self) {
+                            Text($0.formatted).tag($0.toDate())
+                        }
+                    }
                 }
+
+                Button(action: { accurate.toggle() }) {
+                    Image(systemName: "clock")
+                }
+                .buttonStyle(.bordered)
+                .padding(.vertical, 2)
             }
 
-            Picker("End", selection: $end) {
-                ForEach(timeSlots, id: \.self) {
-                    Text($0.formatted).tag($0.toDate())
+            HStack {
+                if accurate {
+                    DatePicker("End", selection: $end, displayedComponents: [.hourAndMinute])
+                        .datePickerStyle(.compact)
+                } else {
+                    Picker("End", selection: $end) {
+                        ForEach(timeSlots, id: \.self) {
+                            Text($0.formatted).tag($0.toDate())
+                        }
+                    }
                 }
-            }
-        } else {
-            DatePicker("Start", selection: $start, displayedComponents: [.hourAndMinute])
-                .datePickerStyle(.compact)
 
-            DatePicker("End", selection: $end, displayedComponents: [.hourAndMinute])
-                .datePickerStyle(.compact)
+                Button(action: { accurate.toggle() }) {
+                    Image(systemName: "clock")
+                }
+                .buttonStyle(.bordered)
+                .padding(.vertical, 2)
+            }
         }
     }
 
@@ -62,7 +79,6 @@ struct CustomDatePicker: View {
         start: .constant(Date()),
         end: .constant(
             Date()
-        ),
-        appSettingsPublisher: CurrentValueSubject(.mock().copy(showHalfHourlyTimeSelectors: false))
+        )
     )
 }

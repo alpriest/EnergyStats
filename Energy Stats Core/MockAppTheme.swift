@@ -41,8 +41,7 @@ public extension AppSettings {
             shouldCombineCT2WithPVPower: true,
             showGraphValueDescriptions: true,
             solcastSettings: SolcastSettings(apiKey: nil, sites: []),
-            dataCeiling: DataCeiling.mild,
-            showHalfHourlyTimeSelectors: true
+            dataCeiling: DataCeiling.mild
         )
     }
 }

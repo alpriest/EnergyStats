@@ -38,8 +38,7 @@ public enum AppSettingsPublisherFactory {
                 shouldCombineCT2WithPVPower: config.shouldCombineCT2WithPVPower,
                 showGraphValueDescriptions: config.showGraphValueDescriptions,
                 solcastSettings: config.solcastSettings,
-                dataCeiling: config.dataCeiling,
-                showHalfHourlyTimeSelectors: config.showHalfHourlyTimeSelectors
+                dataCeiling: config.dataCeiling
             )
         )
     }

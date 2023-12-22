@@ -13,13 +13,11 @@ struct BatteryTimePeriodView: View {
     @Binding var timePeriod: ChargeTimePeriod
     @State private var errorMessage: String?
 
-    private let appSettingsPublisher: LatestAppSettingsPublisher
     private let title: String
 
-    init(timePeriod: Binding<ChargeTimePeriod>, title: String, appSettingsPublisher: LatestAppSettingsPublisher) {
+    init(timePeriod: Binding<ChargeTimePeriod>, title: String) {
         self._timePeriod = timePeriod
         self.title = title
-        self.appSettingsPublisher = appSettingsPublisher
     }
 
     var body: some View {
@@ -27,7 +25,7 @@ struct BatteryTimePeriodView: View {
             content: {
                 Toggle(isOn: $timePeriod.enabled, label: { Text("Enable charge from grid") })
 
-                CustomDatePicker(start: $timePeriod.start, end: $timePeriod.end, appSettingsPublisher: appSettingsPublisher)
+                CustomDatePicker(start: $timePeriod.start, end: $timePeriod.end)
             },
             header: {
                 Text(title)
@@ -55,8 +53,7 @@ struct BatteryTimePeriodView_Previews: PreviewProvider {
             Form {
                 BatteryTimePeriodView(
                     timePeriod: $period,
-                    title: "Period 1",
-                    appSettingsPublisher: CurrentValueSubject(.mock().copy(showHalfHourlyTimeSelectors: false))
+                    title: "Period 1"
                 )
             }
         }

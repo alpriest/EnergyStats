@@ -14,7 +14,6 @@ struct ScheduleDetailView: View {
     let modes: [SchedulerModeResponse]
     let onUpdate: (SchedulePhase) -> Void
     let onDelete: (String) -> Void
-    let appSettingsPublisher: LatestAppSettingsPublisher
 
     var body: some View {
         Section {
@@ -42,8 +41,7 @@ struct ScheduleDetailView: View {
                 SchedulePhaseEditView(modes: modes,
                                       phase: phase,
                                       onChange: onUpdate,
-                                      onDelete: onDelete,
-                                      appSettingsPublisher: appSettingsPublisher)
+                                      onDelete: onDelete)
             } label: {
                 SchedulePhaseListItemView(phase: phase)
             }
@@ -57,7 +55,6 @@ struct ScheduleDetailView: View {
         schedule: Schedule.preview(),
         modes: SchedulerModeResponse.preview(),
         onUpdate: { _ in },
-        onDelete: { _ in },
-        appSettingsPublisher: CurrentValueSubject(.mock().copy(showHalfHourlyTimeSelectors: false))
+        onDelete: { _ in }
     )
 }

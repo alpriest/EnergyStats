@@ -58,7 +58,6 @@ public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging {
     var shouldCombineCT2WithPVPower: Bool { get set }
     var showGraphValueDescriptions: Bool { get set }
     var dataCeiling: DataCeiling { get set }
-    var showHalfHourlyTimeSelectors: Bool { get set }
 }
 
 public protocol SolcastConfigManaging {
@@ -538,16 +537,6 @@ public class ConfigManager: ConfigManaging {
             config.dataCeiling = newValue
             appSettingsPublisher.send(appSettingsPublisher.value.copy(
                 dataCeiling: config.dataCeiling
-            ))
-        }
-    }
-
-    public var showHalfHourlyTimeSelectors: Bool {
-        get { config.showHalfHourlyTimeSelectors }
-        set {
-            config.showHalfHourlyTimeSelectors = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
-                showHalfHourlyTimeSelectors: config.showHalfHourlyTimeSelectors
             ))
         }
     }

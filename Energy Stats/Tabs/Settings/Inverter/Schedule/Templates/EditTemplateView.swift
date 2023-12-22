@@ -12,7 +12,6 @@ struct EditTemplateView: View {
     @StateObject private var viewModel: EditTemplateViewModel
     @State private var presentConfirmation = false
     @Environment(\.presentationMode) var presentationMode
-    private let appSettingsPublisher: LatestAppSettingsPublisher
 
     init(networking: FoxESSNetworking, config: ConfigManaging, templateID: String, modes: [SchedulerModeResponse]) {
         _viewModel = StateObject(
@@ -23,7 +22,6 @@ struct EditTemplateView: View {
                 modes: modes
             )
         )
-        appSettingsPublisher = config.appSettingsPublisher
     }
 
     var body: some View {
@@ -33,8 +31,7 @@ struct EditTemplateView: View {
                     schedule: schedule,
                     modes: viewModel.modes,
                     onUpdate: viewModel.updatedPhase,
-                    onDelete: viewModel.deletedPhase,
-                    appSettingsPublisher: appSettingsPublisher
+                    onDelete: viewModel.deletedPhase
                 )
 
                 FooterSection {

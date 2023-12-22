@@ -245,7 +245,6 @@ public class MockConfig: Config {
     public var shouldCombineCT2WithPVPower: Bool = true
     public var solcastSettings: SolcastSettings = .init(apiKey: nil, sites: [SolcastSite.preview()])
     public var dataCeiling: DataCeiling = .mild
-    public var showHalfHourlyTimeSelectors: Bool = true
 }
 
 public class PreviewConfigManager: ConfigManager {

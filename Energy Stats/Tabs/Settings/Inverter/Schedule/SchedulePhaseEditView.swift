@@ -24,14 +24,12 @@ struct SchedulePhaseEditView: View {
     private let modes: [SchedulerModeResponse]
     private let onChange: (SchedulePhase) -> Void
     private let onDelete: (String) -> Void
-    private let appSettingsPublisher: LatestAppSettingsPublisher
 
     init(
         modes: [SchedulerModeResponse],
         phase: SchedulePhase,
         onChange: @escaping (SchedulePhase) -> Void,
-        onDelete: @escaping (String) -> Void,
-        appSettingsPublisher: LatestAppSettingsPublisher
+        onDelete: @escaping (String) -> Void
     ) {
         self.modes = modes
         self.onChange = onChange
@@ -44,7 +42,6 @@ struct SchedulePhaseEditView: View {
         self._minSOC = State(wrappedValue: String(describing: phase.batterySOC))
         self._fdSOC = State(wrappedValue: String(describing: phase.forceDischargeSOC))
         self._fdPower = State(wrappedValue: String(describing: phase.forceDischargePower))
-        self.appSettingsPublisher = appSettingsPublisher
 
         validate()
     }
@@ -57,7 +54,7 @@ struct SchedulePhaseEditView: View {
                 }
 
                 Section {
-                    CustomDatePicker(start: $startTime, end: $endTime, appSettingsPublisher: appSettingsPublisher)
+                    CustomDatePicker(start: $startTime, end: $endTime)
 
                     Picker("Work mode", selection: $workMode) {
                         ForEach(modes, id: \.self) { mode in
@@ -235,8 +232,7 @@ struct SchedulePhaseEditView: View {
             color: Color.scheduleColor(named: "ForceDischarge")
         )!,
         onChange: { print($0.id, " changed") },
-        onDelete: { print($0, " deleted") },
-        appSettingsPublisher: CurrentValueSubject(.mock().copy(showHalfHourlyTimeSelectors: false))
+        onDelete: { print($0, " deleted") }
     )
 }
 
