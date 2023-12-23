@@ -248,11 +248,11 @@ public class NetworkFacade: FoxESSNetworking {
         }
     }
 
-    public func fetchRealData(_ variables: [String]) async throws -> RealQueryResponse {
+    public func fetchRealData(deviceSN: String, variables: [String]) async throws -> [RealQueryResponse] {
         if isDemoUser {
-            try await fakeNetwork.fetchRealData(variables)
+            try await fakeNetwork.fetchRealData(deviceSN: deviceSN, variables: variables)
         } else {
-            try await network.fetchRealData(variables)
+            try await network.fetchRealData(deviceSN: deviceSN, variables: variables)
         }
     }
 }

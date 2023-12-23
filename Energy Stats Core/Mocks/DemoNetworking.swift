@@ -199,8 +199,8 @@ public class DemoNetworking: FoxESSNetworking {
 
     public func fetchErrorMessages() async {}
 
-    public func fetchRealData(_ variables: [String]) async throws -> RealQueryResponse {
-        RealQueryResponse(datas: [
+    public func fetchRealData(deviceSN: String, variables: [String]) async throws -> [RealQueryResponse] {
+        [RealQueryResponse(datas: [
             RealQueryResponse.RealData(unit: "kW", variable: "feedinPower", value: 0.0),
             RealQueryResponse.RealData(unit: "kW", variable: "gridConsumptionPower", value: 2.634),
             RealQueryResponse.RealData(unit: "kW", variable: "loadsPower", value: 2.708),
@@ -209,7 +209,7 @@ public class DemoNetworking: FoxESSNetworking {
             RealQueryResponse.RealData(unit: "kW", variable: "meterPower2", value: 0.0),
             RealQueryResponse.RealData(unit: "℃", variable: "ambientTemperation", value: 32.5),
             RealQueryResponse.RealData(unit: "℃", variable: "invTemperation", value: 23.2)
-        ], time: Date())
+        ], time: Date(), deviceSN: deviceSN)]
     }
 }
 

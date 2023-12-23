@@ -9,8 +9,10 @@ import Foundation
 
 #if OPEN_API
 public enum RealQueryResponseMapper {
-    public static func map(device: Device, real: RealQueryResponse) -> CurrentValues {
-        CurrentValues(
+    public static func map(device: Device, responses: [RealQueryResponse]) -> CurrentValues {
+        guard let real = responses.first(where: { $0.deviceSN == device.deviceSN }) else { return CurrentValues.empty() }
+
+        return CurrentValues(
             pvPower: real.datas.currentValue(for: "pvPower"),
             feedinPower: real.datas.currentValue(for: "feedinPower"),
             gridConsumptionPower: real.datas.currentValue(for: "gridConsumptionPower"),
@@ -62,6 +64,10 @@ public struct CurrentValues {
     let meterPower2: Double
     let hasPV: Bool
     let lastUpdate: Date
+
+    static func empty() -> CurrentValues {
+        .init(pvPower: 0, feedinPower: 0, gridConsumptionPower: 0, loadsPower: 0, ambientTemperation: 0, invTemperation: 0, meterPower2: 0, hasPV: false, lastUpdate: Date())
+    }
 }
 
 public struct CurrentStatusCalculator: Sendable {

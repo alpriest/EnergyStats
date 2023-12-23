@@ -177,8 +177,8 @@ class PowerFlowTabViewModel: ObservableObject {
 
             #if OPEN_API
             let real = try await self.network.fetchRealData(
-                currentDevice.deviceSN,
-                [
+                deviceSN: currentDevice.deviceSN,
+                variables: [
                     "feedinPower",
                     "gridConsumptionPower",
                     "loadsPower",
@@ -189,7 +189,7 @@ class PowerFlowTabViewModel: ObservableObject {
                     "invTemperation"
                 ]
             )
-            let currentValues = RealQueryResponseMapper.map(device: currentDevice, real: real)
+            let currentValues = RealQueryResponseMapper.map(device: currentDevice, responses: real)
             let currentViewModel = CurrentStatusCalculator(status: currentValues,
                                                            shouldInvertCT2: self.configManager.shouldInvertCT2,
                                                            shouldCombineCT2WithPVPower: self.configManager.shouldCombineCT2WithPVPower)

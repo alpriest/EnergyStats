@@ -58,5 +58,5 @@ public protocol FoxESSNetworking {
     func deleteScheduleTemplate(templateID: String) async throws
 
     // Open API
-    func fetchRealData(_ variables: [String]) async throws -> [RealQueryResponse]
+    func fetchRealData(deviceSN: String, variables: [String]) async throws -> [RealQueryResponse]
 }
