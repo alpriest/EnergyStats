@@ -7,63 +7,6 @@
 
 import Foundation
 
-#if OPEN_API
-public enum RealQueryResponseMapper {
-    public static func map(device: Device, real: RealQueryResponse) -> CurrentValues {
-        CurrentValues(
-            pvPower: real.datas.currentValue(for: "pvPower"),
-            feedinPower: real.datas.currentValue(for: "feedinPower"),
-            gridConsumptionPower: real.datas.currentValue(for: "gridConsumptionPower"),
-            loadsPower: real.datas.currentValue(for: "loadsPower"),
-            ambientTemperation: real.datas.currentValue(for: "ambientTemperation"),
-            invTemperation: real.datas.currentValue(for: "invTemperation"),
-            meterPower2: real.datas.currentValue(for: "meterPower2"),
-            hasPV: device.hasPV,
-            lastUpdate: real.time
-        )
-    }
-}
-
-extension Array where Element == RealQueryResponse.RealData {
-    func current(for key: String) -> Double? {
-        first(where: { $0.variable.lowercased() == key.lowercased() })?.value
-    }
-
-    func currentValue(for key: String) -> Double {
-        current(for: key) ?? 0.0
-    }
-}
-
-#endif
-
-public enum RawResponseMapper {
-    public static func map(device: Device, raws: [RawResponse]) -> CurrentValues {
-        CurrentValues(
-            pvPower: raws.currentValue(for: "pvPower"),
-            feedinPower: raws.currentValue(for: "feedinPower"),
-            gridConsumptionPower: raws.currentValue(for: "gridConsumptionPower"),
-            loadsPower: raws.currentValue(for: "loadsPower"),
-            ambientTemperation: raws.currentValue(for: "ambientTemperation"),
-            invTemperation: raws.currentValue(for: "invTemperation"),
-            meterPower2: raws.currentValue(for: "meterPower2"),
-            hasPV: device.hasPV,
-            lastUpdate: raws.current(for: "gridConsumptionPower")?.time ?? Date()
-        )
-    }
-}
-
-public struct CurrentValues {
-    let pvPower: Double
-    let feedinPower: Double
-    let gridConsumptionPower: Double
-    let loadsPower: Double
-    let ambientTemperation: Double
-    let invTemperation: Double
-    let meterPower2: Double
-    let hasPV: Bool
-    let lastUpdate: Date
-}
-
 public struct CurrentStatusCalculator: Sendable {
     public let currentSolarPower: Double
     public let currentGrid: Double
@@ -72,22 +15,28 @@ public struct CurrentStatusCalculator: Sendable {
     public let lastUpdate: Date
     public let currentCT2: Double
 
-    public init(status: CurrentValues, shouldInvertCT2: Bool, shouldCombineCT2WithPVPower: Bool) {
-        self.currentGrid = status.feedinPower - status.gridConsumptionPower
-        self.currentHomeConsumption = status.loadsPower // + raws.currentValue(for: "meterPower2")
-        self.currentTemperatures = InverterTemperatures(ambient: status.ambientTemperation, inverter: status.invTemperation)
-        self.lastUpdate = status.lastUpdate
-        self.currentCT2 = shouldInvertCT2 ? 0 - status.meterPower2 : status.meterPower2
-        self.currentSolarPower = Self.calculateSolarPower(hasPV: status.hasPV, status: status, shouldInvertCT2: shouldInvertCT2, shouldCombineCT2WithPVPower: shouldCombineCT2WithPVPower)
+    public init(device: Device, raws: [RawResponse], shouldInvertCT2: Bool, shouldCombineCT2WithPVPower: Bool) {
+        self.currentGrid = raws.currentValue(for: "feedinPower") - raws.currentValue(for: "gridConsumptionPower")
+        self.currentHomeConsumption = raws.currentValue(for: "loadsPower") // + raws.currentValue(for: "meterPower2")
+        if raws.contains(where: { response in response.variable == "ambientTemperation" }) &&
+            raws.contains(where: { response in response.variable == "invTemperation" })
+        {
+            self.currentTemperatures = InverterTemperatures(ambient: raws.currentValue(for: "ambientTemperation"), inverter: raws.currentValue(for: "invTemperation"))
+        } else {
+            self.currentTemperatures = nil
+        }
+        self.lastUpdate = raws.current(for: "gridConsumptionPower")?.time ?? Date()
+        self.currentCT2 = (shouldInvertCT2 ? 0 - raws.currentValue(for: "meterPower2") : raws.currentValue(for: "meterPower2"))
+        self.currentSolarPower = Self.calculateSolarPower(device: device, raws: raws, shouldInvertCT2: shouldInvertCT2, shouldCombineCT2WithPVPower: shouldCombineCT2WithPVPower)
     }
 }
 
 private extension CurrentStatusCalculator {
-    static func calculateSolarPower(hasPV: Bool, status: CurrentValues, shouldInvertCT2: Bool, shouldCombineCT2WithPVPower: Bool) -> Double {
-        let ct2 = (shouldInvertCT2 ? 0 - status.meterPower2 : status.meterPower2)
+    static func calculateSolarPower(device: Device, raws: [RawResponse], shouldInvertCT2: Bool, shouldCombineCT2WithPVPower: Bool) -> Double {
+        let ct2 = (shouldInvertCT2 ? 0 - raws.currentValue(for: "meterPower2") : raws.currentValue(for: "meterPower2"))
 
-        if hasPV {
-            return status.pvPower + (shouldCombineCT2WithPVPower ? ct2 : 0.0)
+        if device.hasPV {
+            return raws.currentValue(for: "pvPower") + (shouldCombineCT2WithPVPower ? ct2 : 0.0)
         } else {
             return ct2
         }
