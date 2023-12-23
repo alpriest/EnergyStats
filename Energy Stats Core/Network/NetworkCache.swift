@@ -183,6 +183,10 @@ public class NetworkCache: FoxESSNetworking {
     public func fetchErrorMessages() async {
         await network.fetchErrorMessages()
     }
+
+    public func fetchRealData(_ variables: [String]) async throws -> RealQueryResponse {
+        try await network.fetchRealData(variables)
+    }
 }
 
 private extension NetworkCache {

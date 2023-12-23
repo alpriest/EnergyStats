@@ -10,6 +10,8 @@
 		41009A712B02CD59009D853B /* Solcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41009A702B02CD59009D853B /* Solcast.swift */; };
 		41009A732B02D852009D853B /* SolcastForecastResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41009A722B02D852009D853B /* SolcastForecastResponse.swift */; };
 		41009A752B03B13A009D853B /* SolarForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41009A742B03B13A009D853B /* SolarForecastViewModel.swift */; };
+		410332122B3706B2001FFE3F /* RealQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410332112B3706B2001FFE3F /* RealQuery.swift */; };
+		410332142B3709B7001FFE3F /* Network+OpenAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410332132B3709B7001FFE3F /* Network+OpenAPI.swift */; };
 		4103D1CF29DB6C4D001B0BC8 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146128C7146300EA5BA1 /* Auth.swift */; };
 		4103D1D029DB6C51001B0BC8 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146428C714C000EA5BA1 /* Report.swift */; };
 		4103D1D129DB6C51001B0BC8 /* Raw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D7B12328C86E4000E14144 /* Raw.swift */; };
@@ -365,6 +367,8 @@
 		41009A722B02D852009D853B /* SolcastForecastResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolcastForecastResponse.swift; sourceTree = "<group>"; };
 		41009A742B03B13A009D853B /* SolarForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarForecastViewModel.swift; sourceTree = "<group>"; };
 		41028F9428CDD7A300FB70FD /* OptionalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalView.swift; sourceTree = "<group>"; };
+		410332112B3706B2001FFE3F /* RealQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealQuery.swift; sourceTree = "<group>"; };
+		410332132B3709B7001FFE3F /* Network+OpenAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+OpenAPI.swift"; sourceTree = "<group>"; };
 		4103D1CD29DB6C43001B0BC8 /* WatchContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchContentViewModel.swift; sourceTree = "<group>"; };
 		4103D1E029DB6CB9001B0BC8 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
 		4103F82F2922BFBA00567B1C /* ReportVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportVariable.swift; sourceTree = "<group>"; };
@@ -922,6 +926,7 @@
 				41D8402C2AB2E0DE00769E81 /* ErrorMessagesResponse.swift */,
 				418C09222B18A9E300183603 /* SchedulerFlagResponse.swift */,
 				4190921E2B1D25890017CB65 /* Time.swift */,
+				410332112B3706B2001FFE3F /* RealQuery.swift */,
 			);
 			path = NetworkModels;
 			sourceTree = "<group>";
@@ -1221,6 +1226,7 @@
 				41DC51592AE2E9DC00FD348B /* NetworkValueCleaner.swift */,
 				41BCC1A82B245C130062084A /* Network+Schedule.swift */,
 				41BCC1AA2B245C280062084A /* Network.swift */,
+				410332132B3709B7001FFE3F /* Network+OpenAPI.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1731,6 +1737,7 @@
 				41E165BD2B0BE33E00B17590 /* Array+Any.swift in Sources */,
 				41757BBD2A90A06E00573FB4 /* LocalizedString.swift in Sources */,
 				4103D1E429DB6D12001B0BC8 /* KeychainStore.swift in Sources */,
+				410332142B3709B7001FFE3F /* Network+OpenAPI.swift in Sources */,
 				419576172AC2F29600EB7362 /* BatteryWidgetState.swift in Sources */,
 				4103D1DF29DB6C8C001B0BC8 /* DemoNetworking.swift in Sources */,
 				41CB714A2A3B1B6C00199415 /* StyleGuide.swift in Sources */,
@@ -1739,6 +1746,7 @@
 				41E165B72B0BAD7400B17590 /* UserDefaultsConfig.swift in Sources */,
 				4103D1D329DB6C51001B0BC8 /* BatteryResponse.swift in Sources */,
 				4103D1D229DB6C51001B0BC8 /* NetworkError.swift in Sources */,
+				410332122B3706B2001FFE3F /* RealQuery.swift in Sources */,
 				4103D1D429DB6C51001B0BC8 /* DeviceList.swift in Sources */,
 				414D7A312AC8CE9C0083923F /* DisplayUnit.swift in Sources */,
 				4171854A2A01006000D18CDD /* Double.swift in Sources */,
@@ -1977,7 +1985,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG OPEN_API";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;

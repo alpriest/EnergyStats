@@ -175,11 +175,31 @@ class PowerFlowTabViewModel: ObservableObject {
                 ])
             }
 
-            let raws = try await self.network.fetchRaw(deviceID: currentDevice.deviceID, variables: rawVariables.compactMap { $0 }, queryDate: .now())
-            let currentViewModel = CurrentStatusCalculator(device: currentDevice,
-                                                           raws: raws,
+            #if OPEN_API
+            let real = try await self.network.fetchRealData(
+                currentDevice.deviceSN,
+                [
+                    "feedinPower",
+                    "gridConsumptionPower",
+                    "loadsPower",
+                    "generationPower",
+                    "pvPower",
+                    "meterPower2",
+                    "ambientTemperation",
+                    "invTemperation"
+                ]
+            )
+            let currentValues = RealQueryResponseMapper.map(device: currentDevice, real: real)
+            let currentViewModel = CurrentStatusCalculator(status: currentValues,
                                                            shouldInvertCT2: self.configManager.shouldInvertCT2,
                                                            shouldCombineCT2WithPVPower: self.configManager.shouldCombineCT2WithPVPower)
+            #else
+            let raws = try await self.network.fetchRaw(deviceID: currentDevice.deviceID, variables: rawVariables.compactMap { $0 }, queryDate: .now())
+            let currentValues = RawResponseMapper.map(device: currentDevice, raws: raws)
+            let currentViewModel = CurrentStatusCalculator(status: currentValues,
+                                                           shouldInvertCT2: self.configManager.shouldInvertCT2,
+                                                           shouldCombineCT2WithPVPower: self.configManager.shouldCombineCT2WithPVPower)
+            #endif
             var battery: BatteryViewModel = .noBattery
             if currentDevice.hasBattery {
                 do {

@@ -247,4 +247,12 @@ public class NetworkFacade: FoxESSNetworking {
             await network.fetchErrorMessages()
         }
     }
+
+    public func fetchRealData(_ variables: [String]) async throws -> RealQueryResponse {
+        if isDemoUser {
+            try await fakeNetwork.fetchRealData(variables)
+        } else {
+            try await network.fetchRealData(variables)
+        }
+    }
 }
