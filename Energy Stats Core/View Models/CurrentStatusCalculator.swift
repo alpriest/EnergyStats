@@ -9,24 +9,22 @@ import Foundation
 
 #if OPEN_API
 public enum RealQueryResponseMapper {
-    public static func map(device: Device, responses: [RealQueryResponse]) -> CurrentValues {
-        guard let real = responses.first(where: { $0.deviceSN == device.deviceSN }) else { return CurrentValues.empty() }
-
-        return CurrentValues(
-            pvPower: real.datas.currentValue(for: "pvPower"),
-            feedinPower: real.datas.currentValue(for: "feedinPower"),
-            gridConsumptionPower: real.datas.currentValue(for: "gridConsumptionPower"),
-            loadsPower: real.datas.currentValue(for: "loadsPower"),
-            ambientTemperation: real.datas.currentValue(for: "ambientTemperation"),
-            invTemperation: real.datas.currentValue(for: "invTemperation"),
-            meterPower2: real.datas.currentValue(for: "meterPower2"),
+    public static func mapCurrentValues(device: Device, response: OpenQueryResponse) -> CurrentValues {
+        CurrentValues(
+            pvPower: response.datas.currentValue(for: "pvPower"),
+            feedinPower: response.datas.currentValue(for: "feedinPower"),
+            gridConsumptionPower: response.datas.currentValue(for: "gridConsumptionPower"),
+            loadsPower: response.datas.currentValue(for: "loadsPower"),
+            ambientTemperation: response.datas.currentValue(for: "ambientTemperation"),
+            invTemperation: response.datas.currentValue(for: "invTemperation"),
+            meterPower2: response.datas.currentValue(for: "meterPower2"),
             hasPV: device.hasPV,
-            lastUpdate: real.time
+            lastUpdate: response.time
         )
     }
 }
 
-extension Array where Element == RealQueryResponse.RealData {
+extension Array where Element == OpenQueryResponse.Data {
     func current(for key: String) -> Double? {
         first(where: { $0.variable.lowercased() == key.lowercased() })?.value
     }

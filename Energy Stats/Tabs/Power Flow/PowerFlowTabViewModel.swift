@@ -189,7 +189,7 @@ class PowerFlowTabViewModel: ObservableObject {
                     "invTemperation"
                 ]
             )
-            let currentValues = RealQueryResponseMapper.map(device: currentDevice, responses: real)
+            let currentValues = RealQueryResponseMapper.mapCurrentValues(device: currentDevice, response: real)
             let currentViewModel = CurrentStatusCalculator(status: currentValues,
                                                            shouldInvertCT2: self.configManager.shouldInvertCT2,
                                                            shouldCombineCT2WithPVPower: self.configManager.shouldCombineCT2WithPVPower)

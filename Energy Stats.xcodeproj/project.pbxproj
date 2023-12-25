@@ -10,7 +10,7 @@
 		41009A712B02CD59009D853B /* Solcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41009A702B02CD59009D853B /* Solcast.swift */; };
 		41009A732B02D852009D853B /* SolcastForecastResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41009A722B02D852009D853B /* SolcastForecastResponse.swift */; };
 		41009A752B03B13A009D853B /* SolarForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41009A742B03B13A009D853B /* SolarForecastViewModel.swift */; };
-		410332122B3706B2001FFE3F /* RealQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410332112B3706B2001FFE3F /* RealQuery.swift */; };
+		410332122B3706B2001FFE3F /* OpenQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410332112B3706B2001FFE3F /* OpenQuery.swift */; };
 		410332142B3709B7001FFE3F /* Network+OpenAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410332132B3709B7001FFE3F /* Network+OpenAPI.swift */; };
 		4103D1CF29DB6C4D001B0BC8 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146128C7146300EA5BA1 /* Auth.swift */; };
 		4103D1D029DB6C51001B0BC8 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146428C714C000EA5BA1 /* Report.swift */; };
@@ -367,7 +367,7 @@
 		41009A722B02D852009D853B /* SolcastForecastResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolcastForecastResponse.swift; sourceTree = "<group>"; };
 		41009A742B03B13A009D853B /* SolarForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarForecastViewModel.swift; sourceTree = "<group>"; };
 		41028F9428CDD7A300FB70FD /* OptionalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalView.swift; sourceTree = "<group>"; };
-		410332112B3706B2001FFE3F /* RealQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealQuery.swift; sourceTree = "<group>"; };
+		410332112B3706B2001FFE3F /* OpenQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenQuery.swift; sourceTree = "<group>"; };
 		410332132B3709B7001FFE3F /* Network+OpenAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+OpenAPI.swift"; sourceTree = "<group>"; };
 		4103D1CD29DB6C43001B0BC8 /* WatchContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchContentViewModel.swift; sourceTree = "<group>"; };
 		4103D1E029DB6CB9001B0BC8 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
@@ -926,7 +926,7 @@
 				41D8402C2AB2E0DE00769E81 /* ErrorMessagesResponse.swift */,
 				418C09222B18A9E300183603 /* SchedulerFlagResponse.swift */,
 				4190921E2B1D25890017CB65 /* Time.swift */,
-				410332112B3706B2001FFE3F /* RealQuery.swift */,
+				410332112B3706B2001FFE3F /* OpenQuery.swift */,
 			);
 			path = NetworkModels;
 			sourceTree = "<group>";
@@ -1746,7 +1746,7 @@
 				41E165B72B0BAD7400B17590 /* UserDefaultsConfig.swift in Sources */,
 				4103D1D329DB6C51001B0BC8 /* BatteryResponse.swift in Sources */,
 				4103D1D229DB6C51001B0BC8 /* NetworkError.swift in Sources */,
-				410332122B3706B2001FFE3F /* RealQuery.swift in Sources */,
+				410332122B3706B2001FFE3F /* OpenQuery.swift in Sources */,
 				4103D1D429DB6C51001B0BC8 /* DeviceList.swift in Sources */,
 				414D7A312AC8CE9C0083923F /* DisplayUnit.swift in Sources */,
 				4171854A2A01006000D18CDD /* Double.swift in Sources */,
