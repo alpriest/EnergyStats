@@ -30,7 +30,7 @@ public struct PowerText: View {
     private var amountWithUnit: String {
         switch appSettings.displayUnit {
         case .adaptive:
-            if amount < 1 {
+            if abs(amount) < 1 {
                 return amount.w()
             } else {
                 return amount.kW(decimalPlaceOverride ?? appSettings.decimalPlaces)
@@ -65,7 +65,7 @@ public struct EnergyText: View {
     private var amountWithUnit: String {
         switch appSettings.displayUnit {
         case .adaptive:
-            if amount < 1 {
+            if abs(amount) < 1 {
                 return amount.wh()
             } else {
                 return amount.kWh(decimalPlaceOverride ?? appSettings.decimalPlaces)
