@@ -97,7 +97,7 @@ class ParametersGraphTabViewModel: ObservableObject {
             .receive(on: RunLoop.main)
             .assign(to: \.graphVariables, on: self)
 
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
     }
 
     @objc
@@ -127,28 +127,17 @@ class ParametersGraphTabViewModel: ObservableObject {
         }
 
         do {
-//            #if OPEN_API
-//            let rawGraphVariables = graphVariables.filter { $0.isSelected }.compactMap { $0.type.variable }
-//            if let real = try await self.networking.fetchRealData(deviceSN: currentDevice.deviceSN, variables: rawGraphVariables) {
-//                let rawData: [ParameterGraphValue] = real.datas.flatMap {
-//                    guard let rawVariable = configManager.variables.first(where: { $0.variable == deviceGroup.datas.variable }) else { return nil }
-//
-//                    real.datas.compactMap {
-//                        ParameterGraphValue(date: $0, queryDate: queryDate, value: $0.value, variable: rawVariable)
-//                    }
-//                }
-//            }
-//
-//            let rawData: [ParameterGraphValue] = real.compactMap { deviceGroup -> in
-//                guard deviceGroup.deviceSN == currentDevice.deviceSN else { return nil }
-//                guard let rawVariable = configManager.variables.first(where: { $0.variable == deviceGroup.datas.variable }) else { return [] }
-//
-//                return response.data.compactMap {
-//                    ParameterGraphValue(date: $0.time, queryDate: queryDate, value: $0.value, variable: rawVariable)
-//                }
-//
-//            }
-//            #else
+            #if OPEN_API
+            let rawGraphVariables = graphVariables.filter { $0.isSelected }.compactMap { $0.type.variable }
+            let history = try await networking.fetchHistory(deviceSN: currentDevice.deviceSN, variables: rawGraphVariables)
+            let rawData: [ParameterGraphValue] = history.datas.flatMap { response -> [ParameterGraphValue] in
+                guard let rawVariable = configManager.variables.first(where: { $0.variable == response.variable }) else { return [] }
+
+                return response.data.compactMap {
+                    ParameterGraphValue(date: $0.time, queryDate: queryDate, value: $0.value, variable: rawVariable)
+                }
+            }
+            #else
             let rawGraphVariables = graphVariables.filter { $0.isSelected }.compactMap { $0.type }
             let raw = try await networking.fetchRaw(deviceID: currentDevice.deviceID, variables: rawGraphVariables, queryDate: queryDate)
             let rawData: [ParameterGraphValue] = raw.flatMap { response -> [ParameterGraphValue] in
@@ -158,7 +147,7 @@ class ParametersGraphTabViewModel: ObservableObject {
                     ParameterGraphValue(date: $0.time, queryDate: queryDate, value: $0.value, variable: rawVariable)
                 }
             }
-//            #endif
+            #endif
 
             await MainActor.run {
                 self.rawData = rawData

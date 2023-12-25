@@ -53,13 +53,15 @@ public struct OpenHistoryResponse: Decodable {
     public let datas: [Data]
     public let deviceSN: String
 
-    public struct DeviceData: Decodable {
-        let unit: String
-        let data: [UnitData]
+    public struct Data: Decodable {
+        public let unit: String?
+        public let name: String
+        public let variable: String
+        public let data: [UnitData]
 
         public struct UnitData: Decodable {
-            let time: Date
-            let value: Double
+            public let time: Date
+            public let value: Double
 
             enum CodingKeys: CodingKey {
                 case time
