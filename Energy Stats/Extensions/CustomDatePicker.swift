@@ -12,7 +12,6 @@ import SwiftUI
 struct CustomDatePicker: View {
     @Binding var start: Date
     @Binding var end: Date
-    @AppStorage("showHighAccuracyTimePickers") private var accurate = false
 
     init(start: Binding<Date>, end: Binding<Date>) {
         self._start = start
@@ -21,44 +20,85 @@ struct CustomDatePicker: View {
 
     var body: some View {
         VStack {
-            HStack {
-                if accurate {
-                    DatePicker("Start", selection: $start, displayedComponents: [.hourAndMinute])
-                        .datePickerStyle(.compact)
-                } else {
-                    Picker("Start", selection: $start) {
-                        ForEach(timeSlots, id: \.self) {
-                            Text($0.formatted).tag($0.toDate())
-                        }
-                    }
-                }
+            SinglePickerView(label: "Start", date: $start)
+            SinglePickerView(label: "End", date: $end)
+        }
+    }
+}
 
-                Button(action: { accurate.toggle() }) {
-                    Image(systemName: "clock")
-                }
-                .buttonStyle(.bordered)
-                .padding(.vertical, 2)
+struct SinglePickerView: View {
+    let label: LocalizedStringKey
+    @Binding var date: Date
+    @State private var showing = false
+
+    init(label: LocalizedStringKey, date: Binding<Date>) {
+        self.label = label
+        self._date = date
+    }
+
+    var body: some View {
+        HStack {
+            Text(label)
+            Spacer()
+            Button(action: {
+                showing = true
+            }) {
+                Text(date, formatter: DateFormatter.fullTime)
+            }.buttonStyle(.bordered)
+        }.onTapGesture {
+            showing = true
+        }.sheet(isPresented: $showing, content: {
+            DatePickerSheet(label: label, date: date) {
+                date = $0
+                showing = false
+            }
+        })
+    }
+}
+
+struct DatePickerSheet: View {
+    let label: LocalizedStringKey
+    @State var date: Date
+    let onSelect: (Date) -> Void
+    @State private var timeStyleAccurate = true
+
+    init(label: LocalizedStringKey, date: Date, onSelect: @escaping (Date) -> Void) {
+        self.label = label
+        self._date = State(wrappedValue: date)
+        self.onSelect = onSelect
+    }
+
+    var body: some View {
+        VStack {
+            Picker("Accuracy", selection: $timeStyleAccurate) {
+                Text("Accurate")
+                    .tag(true)
+
+                Text("Half-hourly")
+                    .tag(false)
+            }.pickerStyle(.segmented)
+
+            switch timeStyleAccurate {
+            case true:
+                DatePicker(label, selection: $date, displayedComponents: [.hourAndMinute])
+                    .datePickerStyle(.wheel)
+                    .labelsHidden()
+            case false:
+                Picker(label, selection: $date) {
+                    ForEach(timeSlots, id: \.self) {
+                        Text($0.formatted).tag($0.toDate())
+                    }
+                }.pickerStyle(.wheel)
             }
 
-            HStack {
-                if accurate {
-                    DatePicker("End", selection: $end, displayedComponents: [.hourAndMinute])
-                        .datePickerStyle(.compact)
-                } else {
-                    Picker("End", selection: $end) {
-                        ForEach(timeSlots, id: \.self) {
-                            Text($0.formatted).tag($0.toDate())
-                        }
-                    }
-                }
+            Spacer()
 
-                Button(action: { accurate.toggle() }) {
-                    Image(systemName: "clock")
-                }
-                .buttonStyle(.bordered)
-                .padding(.vertical, 2)
+            BottomButtonsView {
+                onSelect(date)
             }
         }
+        .padding()
+        .modifier(MediumPresentationDetentsViewModifier())
     }
 
     private let timeSlots: [Time] = {
@@ -72,6 +112,16 @@ struct CustomDatePicker: View {
 
         return timeSlots
     }()
+}
+
+struct MediumPresentationDetentsViewModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(iOS 16.0, *) {
+            content.presentationDetents([.medium])
+        } else {
+            content
+        }
+    }
 }
 
 #Preview {
