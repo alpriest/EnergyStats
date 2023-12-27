@@ -7,7 +7,6 @@
 
 import SwiftUI
 import Energy_Stats_Core
-
 @main
 struct Energy_Stats_Watch_App_Watch_AppApp: App {
     var body: some Scene {

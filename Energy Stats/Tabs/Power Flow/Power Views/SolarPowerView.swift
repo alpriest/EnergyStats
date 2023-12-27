@@ -12,7 +12,7 @@ import SwiftUI
 struct SolarPowerViewModel {
     let solar: Double
     let generation: Double
-    let earnings: EarningsViewModel
+    let earnings: EarningsViewModel?
 }
 
 struct SolarPowerView: View {

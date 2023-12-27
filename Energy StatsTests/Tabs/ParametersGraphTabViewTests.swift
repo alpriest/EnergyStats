@@ -6,8 +6,7 @@
 //
 
 @testable import Energy_Stats
-import Energy_Stats_Core
-import SnapshotTesting
+import Energy_Stats_Coreimport SnapshotTesting
 import SwiftUI
 import XCTest
 

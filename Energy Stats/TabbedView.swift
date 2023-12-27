@@ -34,14 +34,14 @@ struct TabbedView: View {
                     .accessibilityIdentifier("power_flow_tab")
                 }
 
-            StatsTabView(configManager: configManager, networking: networking, appSettingsPublisher: configManager.appSettingsPublisher)
-                .tabItem {
-                    VStack {
-                        Image(systemName: "chart.bar.xaxis")
-                        Text("Stats")
-                    }
-                    .accessibilityIdentifier("stats_tab")
-                }
+//            StatsTabView(configManager: configManager, networking: networking, appSettingsPublisher: configManager.appSettingsPublisher)
+//                .tabItem {
+//                    VStack {
+//                        Image(systemName: "chart.bar.xaxis")
+//                        Text("Stats")
+//                    }
+//                    .accessibilityIdentifier("stats_tab")
+//                }
 
             ParametersGraphTabView(configManager: configManager, networking: networking)
                 .tabItem {
@@ -52,18 +52,18 @@ struct TabbedView: View {
                     .accessibilityIdentifier("parameters_tab")
                 }
 
-            SummaryTabView(configManager: configManager, networking: networking, appSettingsPublisher: configManager.appSettingsPublisher, solarForecastProvider: solarForecastProvider)
-                .tabItem {
-                    VStack {
-                        if #available(iOS 17.0, *) {
-                            Image(systemName: "book.pages")
-                        } else {
-                            Image(systemName: "book")
-                        }
-                        Text("Summary")
-                    }
-                    .accessibilityIdentifier("summary_tab")
-                }
+//            SummaryTabView(configManager: configManager, networking: networking, appSettingsPublisher: configManager.appSettingsPublisher, solarForecastProvider: solarForecastProvider)
+//                .tabItem {
+//                    VStack {
+//                        if #available(iOS 17.0, *) {
+//                            Image(systemName: "book.pages")
+//                        } else {
+//                            Image(systemName: "book")
+//                        }
+//                        Text("Summary")
+//                    }
+//                    .accessibilityIdentifier("summary_tab")
+//                }
 
             SettingsTabView(viewModel: settingsTabViewModel, configManager: configManager, networking: networking, solarService: solarForecastProvider)
                 .tabItem {

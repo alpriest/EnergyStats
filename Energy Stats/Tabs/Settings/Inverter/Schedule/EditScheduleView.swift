@@ -98,15 +98,6 @@ struct EditScheduleView: View {
     }
 }
 
-struct FooterSection<V: View>: View {
-    var content: () -> V
-
-    var body: some View {
-        Section {}
-            footer: { content() }
-    }
-}
-
 #Preview {
     NavigationView {
         EditScheduleView(

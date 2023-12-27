@@ -7,7 +7,6 @@
 
 import Foundation
 import Energy_Stats_Core
-
 class ContentViewModel: ObservableObject {
     @Published var summary: HomePowerFlowViewModel? = nil
 

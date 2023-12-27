@@ -7,7 +7,6 @@
 
 import SwiftUI
 import Energy_Stats_Core
-
 struct TimePeriodBarView: View {
     let phases: [SchedulePhase]
     private let height: CGFloat = 20

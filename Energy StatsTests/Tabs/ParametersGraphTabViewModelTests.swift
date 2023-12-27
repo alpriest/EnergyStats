@@ -6,8 +6,7 @@
 //
 
 @testable import Energy_Stats
-import Energy_Stats_Core
-import XCTest
+import Energy_Stats_Coreimport XCTest
 
 @MainActor
 final class ParametersGraphTabViewModelTests: XCTestCase {

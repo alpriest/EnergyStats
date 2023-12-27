@@ -19,11 +19,9 @@ public struct KeychainError: Error {
 
 public protocol KeychainStoring {
     func store(token: String?) throws
-    #if !OPEN_API
-    func getUsername() -> String?
-    func getHashedPassword() -> String?
-    func store(username: String, hashedPassword: String, updateHasCredentials: Bool) throws
-    #endif
+//    func getUsername() -> String?
+//    func getHashedPassword() -> String?
+//    func store(username: String, hashedPassword: String, updateHasCredentials: Bool) throws
     func logout()
     func updateHasCredentials()
     func getToken() -> String?
@@ -31,13 +29,11 @@ public protocol KeychainStoring {
     var isDemoUser: Bool { get }
 }
 
-#if !OPEN_API
-public extension KeychainStoring {
-    func store(username: String, hashedPassword: String) throws {
-        try store(username: username, hashedPassword: hashedPassword, updateHasCredentials: true)
-    }
-}
-#endif
+//public extension KeychainStoring {
+//    func store(username: String, hashedPassword: String) throws {
+//        try store(username: username, hashedPassword: hashedPassword, updateHasCredentials: true)
+//    }
+//}
 
 public class KeychainStore: KeychainStoring, ObservableObject {
     struct KeychainError: Error {
@@ -62,24 +58,22 @@ public class KeychainStore: KeychainStoring, ObservableObject {
         try set(tag: "token", value: token)
     }
 
-    #if !OPEN_API
-    public func getUsername() -> String? {
-        get(tag: "username")
-    }
-
-    public func getHashedPassword() -> String? {
-        get(tag: "password")
-    }
-
-    public func store(username: String, hashedPassword: String, updateHasCredentials: Bool = true) throws {
-        try set(tag: "password", value: hashedPassword)
-        try set(tag: "username", value: username)
-
-        if updateHasCredentials {
-            self.updateHasCredentials()
-        }
-    }
-    #endif
+//    public func getUsername() -> String? {
+//        get(tag: "username")
+//    }
+//
+//    public func getHashedPassword() -> String? {
+//        get(tag: "password")
+//    }
+//
+//    public func store(username: String, hashedPassword: String, updateHasCredentials: Bool = true) throws {
+//        try set(tag: "password", value: hashedPassword)
+//        try set(tag: "username", value: username)
+//
+//        if updateHasCredentials {
+//            self.updateHasCredentials()
+//        }
+//    }
 
     public func getToken() -> String? {
         get(tag: "token")
@@ -93,19 +87,13 @@ public class KeychainStore: KeychainStoring, ObservableObject {
     }
 
     public func updateHasCredentials() {
-        #if OPEN_API
         hasCredentialsSubject.send(getToken() != nil)
-        #else
-        hasCredentialsSubject.send(getUsername() != nil && getHashedPassword() != nil)
-        #endif
+//        hasCredentialsSubject.send(getUsername() != nil && getHashedPassword() != nil)
     }
 
     public var isDemoUser: Bool {
-        #if OPEN_API
         getToken() == "demo"
-        #else
-        getUsername() == "demo"
-        #endif
+//        getUsername() == "demo"
     }
 }
 

@@ -46,7 +46,7 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
-    @Published var batteryCapacity: String
+//    @Published var batteryCapacity: String
 
     @Published var showBatteryTemperature: Bool {
         didSet {
@@ -102,8 +102,8 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
-    @Published var hasBattery: Bool
-    @Published var firmwareVersions: DeviceFirmwareVersion?
+//    @Published var hasBattery: Bool
+//    @Published var firmwareVersions: DeviceFirmwareVersion?
 
     @Published var showHomeTotalOnPowerFlow: Bool {
         didSet {
@@ -152,9 +152,9 @@ class SettingsTabViewModel: ObservableObject {
         showBatteryEstimate = config.showBatteryEstimate
         showUsableBatteryOnly = config.showUsableBatteryOnly
         displayUnit = config.displayUnit
-        batteryCapacity = String(describing: config.batteryCapacity)
-        hasBattery = config.hasBattery
-        firmwareVersions = config.firmwareVersions
+//        batteryCapacity = String(describing: config.batteryCapacity)
+//        hasBattery = config.hasBattery
+//        firmwareVersions = config.firmwareVersions
         showTotalYield = config.showTotalYield
         showInverterTemperature = config.showInverterTemperature
         showHomeTotalOnPowerFlow = config.showHomeTotalOnPowerFlow
@@ -168,20 +168,18 @@ class SettingsTabViewModel: ObservableObject {
         showGraphValueDescriptions = config.showGraphValueDescriptions
         dataCeiling = config.dataCeiling
 
-        config.currentDevice.sink { [weak self] _ in
-            guard let self else { return }
-
-            Task { @MainActor in
-                self.batteryCapacity = String(describing: config.batteryCapacity)
-                self.hasBattery = config.hasBattery
-                self.firmwareVersions = config.firmwareVersions
-            }
-        }.store(in: &cancellables)
+//        config.currentDevice.sink { [weak self] _ in
+//            guard let self else { return }
+//
+//            Task { @MainActor in
+//                self.batteryCapacity = String(describing: config.batteryCapacity)
+//                self.hasBattery = config.hasBattery
+//                self.firmwareVersions = config.firmwareVersions
+//            }
+//        }.store(in: &cancellables)
     }
 
-    #if !OPEN_API
-    var username: String { userManager.getUsername() ?? "" }
-    #endif
+//    var username: String { userManager.getUsername() ?? "" }
     @Published var showAlert = false
     @Published var showRecalculationAlert = false
 
@@ -191,16 +189,16 @@ class SettingsTabViewModel: ObservableObject {
     }
 
     func saveBatteryCapacity() {
-        if let int = Int(batteryCapacity), int > 0 {
-            config.batteryCapacity = batteryCapacity
-        } else {
-            batteryCapacity = config.batteryCapacity
-            showAlert = true
-        }
+//        if let int = Int(batteryCapacity), int > 0 {
+//            config.batteryCapacity = batteryCapacity
+//        } else {
+//            batteryCapacity = config.batteryCapacity
+//            showAlert = true
+//        }
     }
 
     func revertBatteryCapacityEdits() {
-        batteryCapacity = config.batteryCapacity
+//        batteryCapacity = config.batteryCapacity
     }
 
     var appVersion: String {
@@ -209,28 +207,28 @@ class SettingsTabViewModel: ObservableObject {
     }
 
     func recalculateBatteryCapacity() {
-        guard let device = config.currentDevice.value else { return }
-        guard let devices = config.devices else { return }
-
-        Task { @MainActor [networking] in
-            let battery = try await networking.fetchBattery(deviceID: device.deviceID)
-            let batterySettings = try await networking.fetchBatterySettings(deviceSN: device.deviceSN)
-
-            if battery.soc > 0 {
-                let battery = BatteryResponseMapper.map(battery: battery, settings: batterySettings)
-
-                config.devices = devices.map {
-                    if $0.deviceID == device.deviceID {
-                        return $0.copy(battery: battery)
-                    } else {
-                        return $0
-                    }
-                }
-                config.select(device: device)
-                config.clearBatteryOverride(for: device.deviceID)
-                batteryCapacity = config.batteryCapacity
-                showRecalculationAlert = true
-            }
-        }
+//        guard let device = config.currentDevice.value else { return }
+//        guard let devices = config.devices else { return }
+//
+//        Task { @MainActor [networking] in
+//            let battery = try await networking.fetchBattery(deviceID: device.deviceID)
+//            let batterySettings = try await networking.fetchBatterySettings(deviceSN: device.deviceSN)
+//
+//            if battery.soc > 0 {
+//                let battery = BatteryResponseMapper.map(battery: battery, settings: batterySettings)
+//
+//                config.devices = devices.map {
+//                    if $0.deviceID == device.deviceID {
+//                        return $0.copy(battery: battery)
+//                    } else {
+//                        return $0
+//                    }
+//                }
+//                config.select(device: device)
+//                config.clearBatteryOverride(for: device.deviceID)
+//                batteryCapacity = config.batteryCapacity
+//                showRecalculationAlert = true
+//            }
+//        }
     }
 }

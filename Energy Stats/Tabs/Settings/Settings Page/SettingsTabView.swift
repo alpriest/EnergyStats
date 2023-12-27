@@ -20,7 +20,7 @@ struct SettingsTabView: View {
                 NavigationLink {
                     InverterSettingsView(networking: networking,
                                          configManager: configManager,
-                                         firmwareVersion: viewModel.firmwareVersions,
+//                                         firmwareVersion: viewModel.firmwareVersions,
                                          showInverterTemperature: $viewModel.showInverterTemperature,
                                          showInverterIcon: $viewModel.showInverterIcon,
                                          shouldInvertCT2: $viewModel.shouldInvertCT2,
@@ -31,22 +31,20 @@ struct SettingsTabView: View {
                     Text("Inverter")
                 }
 
-                if viewModel.hasBattery {
-                    NavigationLink {
-                        BatterySettingsView(viewModel: viewModel)
-                    } label: {
-                        Text("Battery")
-                            .accessibilityIdentifier("battery")
-                    }
-                }
+//                if viewModel.hasBattery {
+//                    NavigationLink {
+//                        BatterySettingsView(viewModel: viewModel)
+//                    } label: {
+//                        Text("Battery")
+//                            .accessibilityIdentifier("battery")
+//                    }
+//                }
 
-                #if !OPEN_API
-                NavigationLink {
-                    DataLoggersView(networking: networking)
-                } label: {
-                    Text("Datalogger")
-                }
-                #endif
+//                NavigationLink {
+//                    DataLoggersView(networking: networking)
+//                } label: {
+//                    Text("Datalogger")
+//                }
 
                 DisplaySettingsView(viewModel: viewModel, configManager: configManager, solarService: solarService)
 
@@ -74,7 +72,7 @@ struct SettingsTabView: View {
                     NavigationLink("settings.debug") { DebugDataView(networking: networking, configManager: configManager) }
                 }
 
-                SettingsFooterView(username: viewModel.username, onLogout: viewModel.logout, appVersion: viewModel.appVersion)
+//                SettingsFooterView(username: viewModel.username, onLogout: viewModel.logout, appVersion: viewModel.appVersion)
             }
             .navigationTitle("Settings")
         }

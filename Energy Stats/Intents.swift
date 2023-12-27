@@ -17,15 +17,16 @@ struct CheckBatteryChargeLevelIntent: AppIntent {
     static var openAppWhenRun: Bool = false
 
     func perform() async throws -> some ProvidesDialog & ReturnsValue<Int> {
-        let store = KeychainStore()
-        let network = Network(credentials: store, store: InMemoryLoggingNetworkStore())
-        let config = UserDefaultsConfig()
-        guard let deviceID = config.selectedDeviceID else {
-            throw ConfigManager.NoDeviceFoundError()
-        }
-        let battery = try await network.fetchBattery(deviceID: deviceID)
+//        let store = KeychainStore()
+//        let network = Network(credentials: store, store: InMemoryLoggingNetworkStore())
+//        let config = UserDefaultsConfig()
+//        guard let deviceID = config.selectedDeviceID else {
+//            throw ConfigManager.NoDeviceFoundError()
+//        }
+//        let battery = try await network.fetchBattery(deviceID: deviceID)
 
-        return .result(value: battery.soc, dialog: IntentDialog(stringLiteral: "\(battery.soc)%"))
+//        return .result(value: battery.soc, dialog: IntentDialog(stringLiteral: "\(battery.soc)%"))
+        return .result(value: 0, dialog: IntentDialog(stringLiteral: "0"))
     }
 }
 
@@ -78,14 +79,14 @@ struct ChangeWorkModeIntent: AppIntent {
     var workMode: IntentsWorkMode
 
     func perform() async throws -> some ReturnsValue<Bool> {
-        let store = KeychainStore()
-        let network = Network(credentials: store, store: InMemoryLoggingNetworkStore())
-        let config = UserDefaultsConfig()
-        guard let deviceID = config.selectedDeviceID else {
-            throw ConfigManager.NoDeviceFoundError()
-        }
-        try await network.setWorkMode(deviceID: deviceID, workMode: workMode.asInverterWorkMode())
-
+//        let store = KeychainStore()
+//        let network = Network(credentials: store, store: InMemoryLoggingNetworkStore())
+//        let config = UserDefaultsConfig()
+//        guard let deviceID = config.selectedDeviceID else {
+//            throw ConfigManager.NoDeviceFoundError()
+//        }
+//        try await network.setWorkMode(deviceID: deviceID, workMode: workMode.asInverterWorkMode())
+//
         return .result(value: true)
     }
 }

@@ -7,7 +7,6 @@
 
 import Foundation
 import Energy_Stats_Core
-
 extension UserManager {
     static func preview() -> UserManager {
         UserManager(networking: DemoNetworking(), store: KeychainStore(), configManager: PreviewConfigManager(), networkCache: InMemoryLoggingNetworkStore())

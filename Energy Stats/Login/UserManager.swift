@@ -57,11 +57,9 @@ class UserManager: ObservableObject {
         }
     }
 
-    #if !OPEN_API
-    func getUsername() -> String? {
-        store.getUsername()
-    }
-    #endif
+//    func getUsername() -> String? {
+//        store.getUsername()
+//    }
 
     @MainActor
     func login(apiKey: String) async {

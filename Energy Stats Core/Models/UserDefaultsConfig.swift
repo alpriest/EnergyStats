@@ -93,13 +93,10 @@ public class UserDefaultsConfig: Config {
     @UserDefaultsStoredData(key: "devices")
     public var devices: Data?
 
-    #if OPEN_API
     @UserDefaultsStoredOptionalString(key: "selectedDeviceSN")
     public var selectedDeviceSN: String?
-    #else
-    @UserDefaultsStoredOptionalString(key: "selectedDeviceID")
-    public var selectedDeviceID: String?
-    #endif
+//    @UserDefaultsStoredOptionalString(key: "selectedDeviceID")
+//    public var selectedDeviceID: String?
 
     @UserDefaultsStoredInt(key: "displayUnit")
     public var displayUnit: Int
@@ -208,4 +205,7 @@ public class UserDefaultsConfig: Config {
             UserDefaults.shared.set(newValue.rawValue, forKey: "dataCeiling")
         }
     }
+
+    @UserDefaultsStoredCodable(key: "variables", defaultValue: [])
+    public var variables: [Variable]
 }

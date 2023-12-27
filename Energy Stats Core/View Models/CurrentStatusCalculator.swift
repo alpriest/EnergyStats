@@ -7,7 +7,6 @@
 
 import Foundation
 
-#if OPEN_API
 public enum RealQueryResponseMapper {
     public static func mapCurrentValues(device: Device, response: OpenQueryResponse) -> CurrentValues {
         CurrentValues(
@@ -33,8 +32,6 @@ extension Array where Element == OpenQueryResponse.Data {
         current(for: key) ?? 0.0
     }
 }
-
-#endif
 
 public enum RawResponseMapper {
     public static func map(device: Device, raws: [RawResponse]) -> CurrentValues {

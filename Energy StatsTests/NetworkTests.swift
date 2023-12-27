@@ -6,8 +6,7 @@
 //
 
 @testable import Energy_Stats
-@testable import Energy_Stats_Core
-import XCTest
+@testable import Energy_Stats_Coreimport XCTest
 
 final class NetworkTests: XCTestCase {
     private var sut: FoxESSNetworking!

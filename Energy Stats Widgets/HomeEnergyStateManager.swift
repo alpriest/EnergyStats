@@ -45,20 +45,20 @@ class HomeEnergyStateManager {
         let appSettingsPublisher = AppSettingsPublisherFactory.make(from: config)
         let configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher)
 
-        guard let deviceID = config.selectedDeviceID else {
+        guard let deviceSN = config.selectedDeviceSN else {
             throw ConfigManager.NoDeviceFoundError()
         }
-        guard configManager.hasBattery else {
-            throw ConfigManager.NoBattery()
-        }
-        let battery = try await network.fetchBattery(deviceID: deviceID)
-        let calculator = BatteryCapacityCalculator(capacityW: configManager.batteryCapacityW,
-                                                   minimumSOC: configManager.minSOC,
-                                                   bundle: Bundle(for: BundleLocator.self))
-        let viewModel = BatteryViewModel(from: battery)
-        let chargeStatusDescription = calculator.batteryChargeStatusDescription(batteryChargePowerkWH: viewModel.chargePower, batteryStateOfCharge: viewModel.chargeLevel)
-
-        try update(soc: battery.soc, chargeStatusDescription: chargeStatusDescription)
+//        guard configManager.hasBattery else {
+//            throw ConfigManager.NoBattery()
+//        }
+//        let battery = try await network.fetchBattery(deviceID: deviceID)
+//        let calculator = BatteryCapacityCalculator(capacityW: configManager.batteryCapacityW,
+//                                                   minimumSOC: configManager.minSOC,
+//                                                   bundle: Bundle(for: BundleLocator.self))
+//        let viewModel = BatteryViewModel(from: battery)
+//        let chargeStatusDescription = calculator.batteryChargeStatusDescription(batteryChargePowerkWH: viewModel.chargePower, batteryStateOfCharge: viewModel.chargeLevel)
+//
+//        try update(soc: battery.soc, chargeStatusDescription: chargeStatusDescription)
     }
 
     @MainActor

@@ -7,7 +7,6 @@
 
 import XCTest
 @testable import Energy_Stats_Core
-
 final class FoxEssCloudParseStrategyTests: XCTestCase {
     func test_ParsesDatesWithDoubleTimezoneEncoded() throws {
         let date = "2023-10-26 03:10:49 +03+0300"

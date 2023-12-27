@@ -6,8 +6,7 @@
 //
 
 @testable import Energy_Stats
-import Energy_Stats_Core
-import XCTest
+import Energy_Stats_Coreimport XCTest
 
 final class BatteryCapacityCalculatorTests: XCTestCase {
     func test_returnsBatteryPercentageRemaining_IncludingUnusableMinSOC() {

@@ -8,7 +8,6 @@
 import Foundation
 import XCTest
 @testable import Energy_Stats_Core
-
 class DoubleTests: XCTestCase {
     func test_large_number_without_capping_does_not_cap() {
         assertSameValueAs(first: 201539769.capped(.none), second: 201539769)

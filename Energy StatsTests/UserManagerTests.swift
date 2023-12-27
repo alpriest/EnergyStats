@@ -9,7 +9,6 @@ import Combine
 @testable import Energy_Stats
 import XCTest
 import Energy_Stats_Core
-
 @MainActor
 final class UserManagerTests: XCTestCase {
     private var sut: UserManager!

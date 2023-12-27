@@ -5,8 +5,7 @@
 //  Created by Alistair Priest on 15/11/2023.
 //
 
-@testable import Energy_Stats_Core
-import XCTest
+@testable import Energy_Stats_Coreimport XCTest
 
 final class SolcastCacheTests: XCTestCase {
     func test_MergesExistingTodayContent_WithFreshContent() async throws {

@@ -21,7 +21,7 @@ class ParameterVariableGroupEditorViewModel: ObservableObject {
 
     @Published var groups: [ParameterGroup]
     @Published var variables: [ParameterGraphVariable] = []
-    private let rawVariables: [RawVariable]
+    private let rawVariables: [Variable]
     private var configManager: ConfigManaging
 
     init(configManager: ConfigManaging) {

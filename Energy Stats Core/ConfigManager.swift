@@ -17,19 +17,14 @@ public enum RefreshFrequency: Int {
 public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging {
     func fetchDevices() async throws
     func logout()
-#if OPEN_API
-    func select(deviceSN: String)
-#else
-    func refreshFirmwareVersions() async throws
-    func select(device: Device?)
-#endif
+    func select(deviceSN: String?)
+//    func refreshFirmwareVersions() async throws
+//    func select(device: Device?)
     func clearBatteryOverride(for deviceID: String)
     var appSettingsPublisher: LatestAppSettingsPublisher { get }
 
     var hasRunBefore: Bool { get set }
     var minSOC: Double { get }
-    var batteryCapacity: String { get set }
-    var batteryCapacityW: Int { get }
     var isDemoUser: Bool { get set }
     var showColouredLines: Bool { get set }
     var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode { get set }
@@ -40,18 +35,15 @@ public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging {
     var refreshFrequency: RefreshFrequency { get set }
     var decimalPlaces: Int { get set }
     var showSunnyBackground: Bool { get set }
-    var devices: [Device]? { get set }
-#if OPEN_API
     var selectedDeviceSN: String? { get }
-#else
-    var selectedDeviceID: String? { get }
-#endif
-#if !OPEN_API
-    var firmwareVersions: DeviceFirmwareVersion? { get }
-#endif
+//    var selectedDeviceID: String? { get }
+//    var firmwareVersions: DeviceFirmwareVersion? { get }
     var displayUnit: DisplayUnit { get set }
     var currentDevice: CurrentValueSubject<Device?, Never> { get }
     var hasBattery: Bool { get }
+//    var devices: [Device]? { get set }
+    var batteryCapacity: String { get set }
+    var batteryCapacityW: Int { get }
     var showInverterTemperature: Bool { get set }
     var selectedParameterGraphVariables: [String] { get set }
     var showHomeTotalOnPowerFlow: Bool { get set }
@@ -67,11 +59,8 @@ public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging {
     var shouldCombineCT2WithPVPower: Bool { get set }
     var showGraphValueDescriptions: Bool { get set }
     var dataCeiling: DataCeiling { get set }
-#if OPEN_API
     var variables: [Variable] { get }
-#else
-    var variables: [RawVariable] { get }
-#endif
+//    var variables: [RawVariable] { get }
 }
 
 public protocol SolcastConfigManaging {
@@ -105,7 +94,6 @@ public class ConfigManager: ConfigManaging {
         self.appSettingsPublisher = appSettingsPublisher
     }
 
-#if OPEN_API
     public func fetchDevices() async throws {
         let deviceList = try await networking.openapi_fetchDeviceList()
         config.variables = try await networking.openapi_fetchVariables().map {
@@ -116,128 +104,122 @@ public class ConfigManager: ConfigManaging {
             select(deviceSN: deviceList.first)
         }
     }
-#else
-    public func fetchDevices() async throws {
-        let deviceList = try await networking.fetchDeviceList()
-        guard deviceList.count > 0 else {
-            throw NoDeviceFoundError()
-        }
 
-        let newDevices = try await deviceList.asyncMap { device in
-            let deviceBattery: Device.Battery?
-            let firmware = try await fetchFirmwareVersions(deviceID: device.deviceID)
-            let variables = try await networking.fetchVariables(deviceID: device.deviceID)
+//    public func fetchDevices() async throws {
+//        let deviceList = try await networking.fetchDeviceList()
+//        guard deviceList.count > 0 else {
+//            throw NoDeviceFoundError()
+//        }
+//
+//        let newDevices = try await deviceList.asyncMap { device in
+//            let deviceBattery: Device.Battery?
+//            let firmware = try await fetchFirmwareVersions(deviceID: device.deviceID)
+//            let variables = try await networking.fetchVariables(deviceID: device.deviceID)
+//
+//            if device.hasBattery {
+//                do {
+//                    let battery = try await networking.fetchBattery(deviceID: device.deviceID)
+//                    let batterySettings = try await networking.fetchBatterySettings(deviceSN: device.deviceSN)
+//
+//                    deviceBattery = BatteryResponseMapper.map(battery: battery, settings: batterySettings)
+//                } catch {
+//                    deviceBattery = nil
+//                }
+//            } else {
+//                deviceBattery = nil
+//            }
+//
+//            return Device(
+//                plantName: device.plantName,
+//                deviceID: device.deviceID,
+//                deviceSN: device.deviceSN,
+//                hasPV: device.hasPV,
+//                hasBattery: device.hasBattery,
+//                battery: deviceBattery,
+//                deviceType: device.deviceType,
+//                firmware: firmware,
+//                variables: variables,
+//                moduleSN: device.moduleSN
+//            )
+//        }
+//        devices = newDevices
+//        if selectedDeviceID == nil {
+//            select(device: devices?.first)
+//        }
+//    }
 
-            if device.hasBattery {
-                do {
-                    let battery = try await networking.fetchBattery(deviceID: device.deviceID)
-                    let batterySettings = try await networking.fetchBatterySettings(deviceSN: device.deviceSN)
-
-                    deviceBattery = BatteryResponseMapper.map(battery: battery, settings: batterySettings)
-                } catch {
-                    deviceBattery = nil
-                }
-            } else {
-                deviceBattery = nil
-            }
-
-            return Device(
-                plantName: device.plantName,
-                deviceID: device.deviceID,
-                deviceSN: device.deviceSN,
-                hasPV: device.hasPV,
-                hasBattery: device.hasBattery,
-                battery: deviceBattery,
-                deviceType: device.deviceType,
-                firmware: firmware,
-                variables: variables,
-                moduleSN: device.moduleSN
-            )
-        }
-        devices = newDevices
-        if selectedDeviceID == nil {
-            select(device: devices?.first)
-        }
-    }
-#endif
-
-#if OPEN_API
     public var variables: [Variable] {
         config.variables
     }
-#else
-    public var variables: [RawVariable] {
-        currentDevice.value?.variables ?? []
-    }
-#endif
 
-#if !OPEN_API
-    private func fetchFirmwareVersions(deviceID: String) async throws -> DeviceFirmwareVersion {
-        let firmware = try await networking.fetchAddressBook(deviceID: deviceID)
+//    public var variables: [RawVariable] {
+//        currentDevice.value?.variables ?? []
+//    }
 
-        return DeviceFirmwareVersion(
-            master: firmware.softVersion.master,
-            slave: firmware.softVersion.slave,
-            manager: firmware.softVersion.manager
-        )
-    }
-
-    public func refreshFirmwareVersions() async throws {
-        devices = try await devices?.asyncMap { [weak self] in
-            let firmware = try await self?.fetchFirmwareVersions(deviceID: $0.deviceID)
-            if firmware != $0.firmware {
-                return $0.copy(firmware: firmware)
-            } else {
-                return $0
-            }
-        }
-    }
-#endif
+//    private func fetchFirmwareVersions(deviceID: String) async throws -> DeviceFirmwareVersion {
+//        let firmware = try await networking.fetchAddressBook(deviceID: deviceID)
+//
+//        return DeviceFirmwareVersion(
+//            master: firmware.softVersion.master,
+//            slave: firmware.softVersion.slave,
+//            manager: firmware.softVersion.manager
+//        )
+//    }
+//
+//    public func refreshFirmwareVersions() async throws {
+//        devices = try await devices?.asyncMap { [weak self] in
+//            let firmware = try await self?.fetchFirmwareVersions(deviceID: $0.deviceID)
+//            if firmware != $0.firmware {
+//                return $0.copy(firmware: firmware)
+//            } else {
+//                return $0
+//            }
+//        }
+//    }
 
     public func logout() {
         config.clear()
     }
 
-#if OPEN_API
     public func select(deviceSN: String?) {
         selectedDeviceSN = deviceSN
     }
-#else
-    public func select(device: Device?) {
-        guard let device else { return }
 
-        selectedDeviceID = device.deviceID
-    }
-
-    public var firmwareVersions: DeviceFirmwareVersion? {
-        currentDevice.value?.firmware
-    }
-#endif
+//    public func select(device: Device?) {
+//        guard let device else { return }
+//
+//        selectedDeviceID = device.deviceID
+//    }
+//
+//    public var firmwareVersions: DeviceFirmwareVersion? {
+//        currentDevice.value?.firmware
+//    }
 
     public var minSOC: Double { Double(currentDevice.value?.battery?.minSOC ?? "0.2") ?? 0.0 }
 
-#if !OPEN_API
     public var batteryCapacity: String {
-        get {
-            if let currentDevice = currentDevice.value {
-                let override = config.deviceBatteryOverrides[currentDevice.deviceID]
-
-                return override ?? currentDevice.battery?.capacity ?? "0"
-            } else {
-                return "0"
-            }
-        }
-        set {
-            if let currentDevice = currentDevice.value {
-                config.deviceBatteryOverrides[currentDevice.deviceID] = newValue
-            }
-
-            devices = devices?.map {
-                $0
-            }
-        }
+        get { "10000" }
+        set { }
     }
-#endif
+//        get {
+//            if let currentDevice = currentDevice.value {
+//                let override = config.deviceBatteryOverrides[currentDevice.deviceID]
+//
+//                return override ?? currentDevice.battery?.capacity ?? "0"
+//            } else {
+//                return "0"
+//            }
+//        }
+//        set {
+//            if let currentDevice = currentDevice.value {
+//                config.deviceBatteryOverrides[currentDevice.deviceID] = newValue
+//            }
+//
+//            devices = devices?.map {
+//                $0
+//            }
+//        }
+//    }
 
     public var hasRunBefore: Bool {
         get { config.hasRunBefore }
@@ -248,33 +230,29 @@ public class ConfigManager: ConfigManaging {
         config.deviceBatteryOverrides.removeValue(forKey: deviceID)
     }
 
-#if !OPEN_API
     public var hasBattery: Bool {
         currentDevice.value?.hasBattery ?? false
     }
-#endif
 
     public var batteryCapacityW: Int {
         Int(batteryCapacity) ?? 0
     }
 
-#if OPEN_API
     public var selectedDeviceSN: String? {
         get { config.selectedDeviceSN }
         set {
             config.selectedDeviceSN = newValue
-            currentDevice.send(devices?.first(where: { $0.deviceSN == selectedDeviceSN }) ?? devices?.first)
+//            currentDevice.send(devices?.first(where: { $0.deviceSN == selectedDeviceSN }) ?? devices?.first)
         }
     }
-#else
-    public var selectedDeviceID: String? {
-        get { config.selectedDeviceID }
-        set {
-            config.selectedDeviceID = newValue
-            currentDevice.send(devices?.first(where: { $0.deviceID == selectedDeviceID }) ?? devices?.first)
-        }
-    }
-#endif
+
+    //    public var selectedDeviceID: String? {
+//        get { config.selectedDeviceID }
+//        set {
+//            config.selectedDeviceID = newValue
+//            currentDevice.send(devices?.first(where: { $0.deviceID == selectedDeviceID }) ?? devices?.first)
+//        }
+//    }
 
     public var currencySymbol: String {
         get { config.currencySymbol }
@@ -475,29 +453,27 @@ public class ConfigManager: ConfigManaging {
         }
     }
 
-#if !OPEN_API
-    public var devices: [Device]? {
-        get {
-            guard let deviceListData = config.devices else { return nil }
-            do {
-                return try JSONDecoder().decode([Device].self, from: deviceListData)
-            } catch {
-                return nil
-            }
-        }
-        set {
-            if let newValue {
-                do {
-                    config.devices = try JSONEncoder().encode(newValue)
-                } catch {
-                    print("AWP", "Failed to encode device list 💥")
-                }
-            } else {
-                config.devices = nil
-            }
-        }
-    }
-#endif
+//    public var devices: [Device]? {
+//        get {
+//            guard let deviceListData = config.devices else { return nil }
+//            do {
+//                return try JSONDecoder().decode([Device].self, from: deviceListData)
+//            } catch {
+//                return nil
+//            }
+//        }
+//        set {
+//            if let newValue {
+//                do {
+//                    config.devices = try JSONEncoder().encode(newValue)
+//                } catch {
+//                    print("AWP", "Failed to encode device list 💥")
+//                }
+//            } else {
+//                config.devices = nil
+//            }
+//        }
+//    }
 
     public var selectedParameterGraphVariables: [String] {
         get { config.selectedParameterGraphVariables }
@@ -597,20 +573,18 @@ public class ConfigManager: ConfigManaging {
     }
 }
 
-#if !OPEN_API
-public enum BatteryResponseMapper {
-    public static func map(battery: BatteryResponse, settings: BatterySettingsResponse) -> Device.Battery {
-        let batteryCapacity: String
-        let minSOC: String
-
-        if battery.soc > 0 {
-            batteryCapacity = String(Int(battery.residual / (Double(battery.soc) / 100.0)))
-        } else {
-            batteryCapacity = "0"
-        }
-        minSOC = String(Double(settings.minGridSoc) / 100.0)
-
-        return Device.Battery(capacity: batteryCapacity, minSOC: minSOC)
-    }
-}
-#endif
+// public enum BatteryResponseMapper {
+//    public static func map(battery: BatteryResponse, settings: BatterySettingsResponse) -> Device.Battery {
+//        let batteryCapacity: String
+//        let minSOC: String
+//
+//        if battery.soc > 0 {
+//            batteryCapacity = String(Int(battery.residual / (Double(battery.soc) / 100.0)))
+//        } else {
+//            batteryCapacity = "0"
+//        }
+//        minSOC = String(Double(settings.minGridSoc) / 100.0)
+//
+//        return Device.Battery(capacity: batteryCapacity, minSOC: minSOC)
+//    }
+// }

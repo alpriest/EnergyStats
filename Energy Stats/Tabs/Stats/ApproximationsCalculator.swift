@@ -7,7 +7,6 @@
 
 import Foundation
 import Energy_Stats_Core
-
 struct ApproximationsCalculator {
     let configManager: ConfigManaging
     let networking: FoxESSNetworking

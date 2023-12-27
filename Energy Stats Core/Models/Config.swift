@@ -18,11 +18,8 @@ public protocol Config {
     var decimalPlaces: Int { get set }
     var showSunnyBackground: Bool { get set }
     var devices: Data? { get set }
-    #if OPEN_API
     var selectedDeviceSN: String? { get set }
-    #else
-    var selectedDeviceID: String? { get set }
-    #endif
+//    var selectedDeviceID: String? { get set }
     var showUsableBatteryOnly: Bool { get set }
     var displayUnit: Int { get set }
     var showTotalYield: Bool { get set }
@@ -48,9 +45,7 @@ public protocol Config {
     var showGraphValueDescriptions: Bool { get set }
     var solcastSettings: SolcastSettings { get set }
     var dataCeiling: DataCeiling { get set }
-    #if OPEN_API
     var variables: [Variable] { get set }
-    #endif
 }
 
 public func DefaultParameterGroups() -> [ParameterGroup] {

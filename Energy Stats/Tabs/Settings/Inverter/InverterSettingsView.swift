@@ -11,7 +11,7 @@ import SwiftUI
 struct InverterSettingsView: View {
     let networking: FoxESSNetworking
     let configManager: ConfigManaging
-    let firmwareVersion: DeviceFirmwareVersion?
+//    let firmwareVersion: DeviceFirmwareVersion?
     @Binding var showInverterTemperature: Bool
     @Binding var showInverterIcon: Bool
     @Binding var shouldInvertCT2: Bool
@@ -24,15 +24,13 @@ struct InverterSettingsView: View {
             InverterChoiceView(viewModel: InverterChoiceViewModel(configManager: configManager))
 
             Section {
-                #if !OPEN_API
-                NavigationLink("Configure Work Mode") {
-                    InverterWorkModeView(networking: networking, config: configManager)
-                }
-
-                NavigationLink("Manage schedules") {
-                    ScheduleSummaryView(networking: networking, config: configManager)
-                }
-                #endif
+//                NavigationLink("Configure Work Mode") {
+//                    InverterWorkModeView(networking: networking, config: configManager)
+//                }
+//
+//                NavigationLink("Manage schedules") {
+//                    ScheduleSummaryView(networking: networking, config: configManager)
+//                }
             }
 
             Section {
@@ -44,15 +42,13 @@ struct InverterSettingsView: View {
                     Text("Show inverter icon")
                 }
 
-                #if !OPEN_API
-                Toggle(isOn: $showInverterTypeName) {
-                    Text("settings.inverter.showInverterTypeNameOnPowerflow")
-                }
-
-                Toggle(isOn: $showInverterPlantName) {
-                    Text("Show inverter plant name")
-                }
-                #endif
+//                Toggle(isOn: $showInverterTypeName) {
+//                    Text("settings.inverter.showInverterTypeNameOnPowerflow")
+//                }
+//
+//                Toggle(isOn: $showInverterPlantName) {
+//                    Text("Show inverter plant name")
+//                }
             } header: {
                 Text("Display Options")
             }
@@ -71,9 +67,7 @@ struct InverterSettingsView: View {
                 Text("invert_ct2_footnote")
             }
 
-            #if !OPEN_API
-            InverterFirmwareVersionsView(viewModel: firmwareVersion)
-            #endif
+//            InverterFirmwareVersionsView(viewModel: firmwareVersion)
 
             if let currentDevice = configManager.currentDevice.value {
                 Section {
@@ -81,9 +75,7 @@ struct InverterSettingsView: View {
                     ESLabeledText("Device Type", value: currentDevice.deviceType)
                     ESLabeledText("Device ID", value: currentDevice.deviceID)
                     ESLabeledText("Device Serial No.", value: currentDevice.deviceSN)
-                    #if !OPEN_API
-                    ESLabeledText("Module Serial No.", value: currentDevice.moduleSN)
-                    #endif
+//                    ESLabeledText("Module Serial No.", value: currentDevice.moduleSN)
                     ESLabeledText("Has Battery", value: currentDevice.battery != nil ? "true" : "false")
                     ESLabeledText("Has Solar", value: currentDevice.hasPV ? "true" : "false")
                 }
@@ -121,7 +113,7 @@ struct InverterSettingsView_Previews: PreviewProvider {
             InverterSettingsView(
                 networking: DemoNetworking(),
                 configManager: PreviewConfigManager(),
-                firmwareVersion: .preview(),
+//                firmwareVersion: .preview(),
                 showInverterTemperature: .constant(true),
                 showInverterIcon: .constant(true),
                 shouldInvertCT2: .constant(true),

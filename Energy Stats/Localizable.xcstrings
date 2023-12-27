@@ -58,6 +58,7 @@
       }
     },
     " - " : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -86,6 +87,7 @@
       }
     },
     " %@ " : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -114,6 +116,7 @@
       }
     },
     " %@ ℃" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -170,6 +173,7 @@
       }
     },
     " Wh" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -198,6 +202,7 @@
       }
     },
     " where residual is estimated by your installation and may not be accurate. Tap the capacity above to enter a manual value." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -254,6 +259,7 @@
       }
     },
     "%" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -282,6 +288,7 @@
       }
     },
     "%@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -371,7 +378,11 @@
         }
       }
     },
+    "0" : {
+
+    },
     "00:00" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -540,6 +551,7 @@
       }
     },
     "08:00" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -596,6 +608,7 @@
       }
     },
     "16:00" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -652,6 +665,7 @@
       }
     },
     "24:00" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1121,6 +1135,7 @@
     },
     "accessibility.inverter" : {
       "comment" : "Accessibility",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1190,6 +1205,7 @@
       }
     },
     "accessibility.temperature" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1364,6 +1380,7 @@
       }
     },
     "Accumulated income" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1448,6 +1465,7 @@
       }
     },
     "Activate" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1476,6 +1494,7 @@
       }
     },
     "Activate template" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1504,6 +1523,7 @@
       }
     },
     "Activating" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1532,6 +1552,7 @@
       }
     },
     "active_schedule_title" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1594,6 +1615,7 @@
       }
     },
     "Add time period" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1651,6 +1673,7 @@
       }
     },
     "Amount" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1679,6 +1702,7 @@
       }
     },
     "Amount entered must be greater than 0" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1847,6 +1871,7 @@
       }
     },
     "Approximations" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1903,6 +1928,7 @@
       }
     },
     "Are you sure you want to delete this schedule?" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1931,6 +1957,7 @@
       }
     },
     "Are you sure you want to delete this template?" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1987,6 +2014,7 @@
       }
     },
     "Autofill gaps" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2169,6 +2197,7 @@
       }
     },
     "Battery capacity recalculated" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2225,6 +2254,7 @@
       }
     },
     "Battery Schedule" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2253,6 +2283,7 @@
       }
     },
     "Battery Settings" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2281,6 +2312,7 @@
       }
     },
     "Battery Times" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2582,6 +2614,7 @@
       }
     },
     "Calculated as " : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2638,6 +2671,7 @@
       }
     },
     "Cannot save, please check the values are within the range 1 to 100" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2666,6 +2700,7 @@
       }
     },
     "cannot_save_due_to_active_schedule" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2700,6 +2735,7 @@
       }
     },
     "Capacity" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2728,6 +2764,7 @@
       }
     },
     "capacity = residual / (Min SOC / 100)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2869,6 +2906,7 @@
       }
     },
     "Charge times" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -3134,6 +3172,7 @@
       }
     },
     "Configure Battery Charge Levels" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -3162,6 +3201,7 @@
       }
     },
     "Configure Work Mode" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -3274,6 +3314,7 @@
       }
     },
     "Could not load approximations" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -3435,6 +3476,7 @@
       }
     },
     "Create a schedule" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -3463,6 +3505,7 @@
       }
     },
     "Create new template" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -3745,6 +3788,7 @@
       }
     },
     "Datalogger" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -3773,6 +3817,7 @@
       }
     },
     "Day" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -3914,6 +3959,7 @@
       }
     },
     "Define your phase here. Press back to view your entire schedule." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -3976,6 +4022,7 @@
       }
     },
     "Delete schedule" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4004,6 +4051,7 @@
       }
     },
     "Delete template" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4032,6 +4080,7 @@
       }
     },
     "Delete time period" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4060,6 +4109,7 @@
       }
     },
     "Deleting" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4116,6 +4166,7 @@
       }
     },
     "Description" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4144,6 +4195,7 @@
       }
     },
     "Device List" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4454,6 +4506,7 @@
       }
     },
     "Edit schedule" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4482,6 +4535,7 @@
       }
     },
     "Edit template" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4545,6 +4599,7 @@
       }
     },
     "Empty/full battery durations are estimates based on calculated capacity, assume that solar conditions and battery charge rates remain constant." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4629,6 +4684,7 @@
       }
     },
     "End time must be after start time" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4779,6 +4835,7 @@
 
     },
     "Enter your FoxESS Cloud details" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4898,6 +4955,7 @@
       }
     },
     "export_income" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -5001,6 +5059,7 @@
       }
     },
     "Failed" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -5289,6 +5348,7 @@
       }
     },
     "Find out more about work modes" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -5345,6 +5405,7 @@
       }
     },
     "Force Discharge Power" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -5373,6 +5434,7 @@
       }
     },
     "Force Discharge SoC" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -5855,6 +5917,7 @@
       }
     },
     "grid_import_avoided" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -6092,6 +6155,7 @@
       }
     },
     "Hide graph" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -6188,6 +6252,7 @@
       }
     },
     "home_usage" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -6284,6 +6349,7 @@
       }
     },
     "Includes data from %@ to Present. Figures are approximate and assume the buy/sell energy prices remained constant throughout the period of ownership." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -6340,6 +6406,7 @@
       }
     },
     "Invalid Battery Capacity" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -6493,6 +6560,7 @@
       }
     },
     "Inverter change warning" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -6527,6 +6595,7 @@
       }
     },
     "inverter_charge_schedule_deleted" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -6561,6 +6630,7 @@
       }
     },
     "inverter_charge_schedule_settings_saved" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -6595,6 +6665,7 @@
       }
     },
     "inverter_charge_template_deleted" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -7076,6 +7147,7 @@
       }
     },
     "Manage schedules" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -7104,6 +7176,7 @@
       }
     },
     "Manage templates" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -7228,6 +7301,7 @@
       }
     },
     "Min SoC" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -7256,6 +7330,7 @@
       }
     },
     "Min SoC must be less than or equal to Force Discharge SoC" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -7284,6 +7359,7 @@
       }
     },
     "Min SoC on Grid" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -7313,6 +7389,7 @@
     },
     "Minimum charge levels" : {
       "comment" : "Battery Charge Pages",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -7341,6 +7418,7 @@
       }
     },
     "minsoc_description" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -7375,6 +7453,7 @@
       }
     },
     "minsoc_detail" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -7409,6 +7488,7 @@
       }
     },
     "minsoc_notsure_footnote" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -7443,6 +7523,7 @@
       }
     },
     "minsocgrid_description" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -7512,6 +7593,7 @@
       }
     },
     "Month" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -7540,6 +7622,7 @@
       }
     },
     "Name" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -7658,6 +7741,7 @@
       }
     },
     "New template" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -7818,6 +7902,7 @@
       }
     },
     "Not supported" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -7930,6 +8015,7 @@
       }
     },
     "OK" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -8057,6 +8143,7 @@
       }
     },
     "overlapping_time_periods" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -8091,6 +8178,7 @@
       }
     },
     "parameter" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -8203,6 +8291,7 @@
       }
     },
     "Password" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -8294,6 +8383,7 @@
       }
     },
     "Please enter a number between 10 and 100" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -9691,6 +9781,7 @@
       }
     },
     "Recalculate capacity" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -9719,6 +9810,7 @@
       }
     },
     "Recalculated" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -10239,6 +10331,7 @@
       }
     },
     "Save template" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -10296,6 +10389,7 @@
       }
     },
     "Schedule summary" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -10324,6 +10418,7 @@
       }
     },
     "Schedules are not supported on this inverter." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -10380,6 +10475,7 @@
       }
     },
     "Self sufficiency" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -10762,6 +10858,7 @@
       }
     },
     "settings.inverter.showInverterTypeNameOnPowerflow" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -10864,6 +10961,7 @@
       }
     },
     "Show battery full/empty estimate" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -11005,6 +11103,7 @@
       }
     },
     "Show graph" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -11089,6 +11188,7 @@
       }
     },
     "Show inverter plant name" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -11382,6 +11482,7 @@
       }
     },
     "solar_generated" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -11540,6 +11641,7 @@
       }
     },
     "Stats" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -11568,6 +11670,7 @@
       }
     },
     "Stats are aggregated by FoxESS into 1 hr, 1 day or 1 month totals" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -11780,6 +11883,7 @@
       }
     },
     "Templates" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -11842,6 +11946,7 @@
       }
     },
     "The minimum battery state of charge. This must be at most the Force Discharge SOC value." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -11870,6 +11975,7 @@
       }
     },
     "The output power level to be delivered, including your house load and grid export. E.g. If you have 5kW inverter then set this to 5000, then if the house load is 750W the other 4.25kW will be exported." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -12143,6 +12249,7 @@
       }
     },
     "total_benefit" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -12324,6 +12431,7 @@
       }
     },
     "Username" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -12408,6 +12516,7 @@
       }
     },
     "W" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -12492,6 +12601,7 @@
       }
     },
     "When the battery reaches this level, discharging will stop. If you wanted to save some battery power for later, perhaps set it to 50%." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -12586,6 +12696,7 @@
       }
     },
     "Work schedule" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -12684,6 +12795,7 @@
       }
     },
     "Year" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -12803,6 +12915,7 @@
       }
     },
     "You have no time periods defined. Add a time period to define how you'd like your inverter to behave during specific hours." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -12866,6 +12979,7 @@
       }
     },
     "Your template was activated" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -12894,6 +13008,7 @@
       }
     },
     "Your template was saved" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

@@ -22,7 +22,7 @@ public struct HomePowerFlowViewModel: Equatable {
     public let home: Double
     public let grid: Double
     public let todaysGeneration: Double
-    public let earnings: EarningsViewModel
+    public let earnings: EarningsViewModel?
     public let inverterTemperatures: InverterTemperatures?
     public let homeTotal: Double
     public let gridImportTotal: Double
@@ -35,7 +35,7 @@ public struct HomePowerFlowViewModel: Equatable {
                 home: Double,
                 grid: Double,
                 todaysGeneration: Double,
-                earnings: EarningsViewModel,
+                earnings: EarningsViewModel?,
                 inverterTemperatures: InverterTemperatures?,
                 homeTotal: Double,
                 gridImportTotal: Double,

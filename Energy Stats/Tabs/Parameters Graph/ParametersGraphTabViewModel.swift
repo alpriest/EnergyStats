@@ -127,9 +127,8 @@ class ParametersGraphTabViewModel: ObservableObject {
         }
 
         do {
-            #if OPEN_API
             let rawGraphVariables = graphVariables.filter { $0.isSelected }.compactMap { $0.type.variable }
-            let history = try await networking.fetchHistory(deviceSN: currentDevice.deviceSN, variables: rawGraphVariables)
+            let history = try await networking.openapi_fetchHistory(deviceSN: currentDevice.deviceSN, variables: rawGraphVariables)
             let rawData: [ParameterGraphValue] = history.datas.flatMap { response -> [ParameterGraphValue] in
                 guard let rawVariable = configManager.variables.first(where: { $0.variable == response.variable }) else { return [] }
 
@@ -137,17 +136,16 @@ class ParametersGraphTabViewModel: ObservableObject {
                     ParameterGraphValue(date: $0.time, queryDate: queryDate, value: $0.value, variable: rawVariable)
                 }
             }
-            #else
-            let rawGraphVariables = graphVariables.filter { $0.isSelected }.compactMap { $0.type }
-            let raw = try await networking.fetchRaw(deviceID: currentDevice.deviceID, variables: rawGraphVariables, queryDate: queryDate)
-            let rawData: [ParameterGraphValue] = raw.flatMap { response -> [ParameterGraphValue] in
-                guard let rawVariable = configManager.variables.first(where: { $0.variable == response.variable }) else { return [] }
 
-                return response.data.compactMap {
-                    ParameterGraphValue(date: $0.time, queryDate: queryDate, value: $0.value, variable: rawVariable)
-                }
-            }
-            #endif
+//            let rawGraphVariables = graphVariables.filter { $0.isSelected }.compactMap { $0.type }
+//            let raw = try await networking.fetchRaw(deviceID: currentDevice.deviceID, variables: rawGraphVariables, queryDate: queryDate)
+//            let rawData: [ParameterGraphValue] = raw.flatMap { response -> [ParameterGraphValue] in
+//                guard let rawVariable = configManager.variables.first(where: { $0.variable == response.variable }) else { return [] }
+//
+//                return response.data.compactMap {
+//                    ParameterGraphValue(date: $0.time, queryDate: queryDate, value: $0.value, variable: rawVariable)
+//                }
+//            }
 
             await MainActor.run {
                 self.rawData = rawData

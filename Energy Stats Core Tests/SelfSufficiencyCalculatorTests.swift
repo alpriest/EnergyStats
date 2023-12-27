@@ -5,8 +5,7 @@
 //  Created by Alistair Priest on 26/06/2023.
 //
 
-import Energy_Stats_Core
-import XCTest
+import Energy_Stats_Coreimport XCTest
 
 final class AbsoluteSelfSufficiencyCalculatorTests: XCTestCase {
     func test_Calculates_When_Some_Grid_Usage() {

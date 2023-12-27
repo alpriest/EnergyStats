@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Variable {
+public struct Variable: Codable, Equatable, Hashable {
     public let name: String
     public let variable: String
     public let unit: String
