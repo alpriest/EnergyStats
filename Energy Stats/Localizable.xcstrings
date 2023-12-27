@@ -343,6 +343,9 @@
         }
       }
     },
+    "•" : {
+
+    },
     "°C" : {
       "localizations" : {
         "de" : {
@@ -2196,6 +2199,9 @@
         }
       }
     },
+    "Battery Charge Period setting" : {
+
+    },
     "Battery error. Tap for detail" : {
       "localizations" : {
         "de" : {
@@ -2223,6 +2229,12 @@
           }
         }
       }
+    },
+    "Battery Min SOC setting" : {
+
+    },
+    "Battery residual amount" : {
+
     },
     "Battery Schedule" : {
       "localizations" : {
@@ -3772,6 +3784,9 @@
         }
       }
     },
+    "Datalogger data" : {
+
+    },
     "Day" : {
       "localizations" : {
         "de" : {
@@ -4143,6 +4158,9 @@
         }
       }
     },
+    "Device list" : {
+
+    },
     "Device List" : {
       "localizations" : {
         "de" : {
@@ -4389,6 +4407,12 @@
           }
         }
       }
+    },
+    "displayed at the top of the power flow tab" : {
+
+    },
+    "displayed in settings > inverter tab" : {
+
     },
     "Earnings" : {
       "extractionState" : "manual",
@@ -4712,6 +4736,9 @@
           }
         }
       }
+    },
+    "Energy Stats was built on APIs that are used by the FoxESS cloud website and app, in the same way other 3rd party integrations were built." : {
+
     },
     "energy_stats_earnings_calculation_description" : {
       "localizations" : {
@@ -5313,6 +5340,9 @@
         }
       }
     },
+    "Firmware versions" : {
+
+    },
     "Firmware Versions" : {
       "localizations" : {
         "de" : {
@@ -5583,6 +5613,9 @@
           }
         }
       }
+    },
+    "FoxESS has recently made changes to their data access policies, which now limits the availability of certain data essential for Energy Stats to operate effectively. They have directed me towards using their OpenAPIs, but these do not currently include key pieces of information listed below. As a result, the functionality of Energy Stats is significantly impacted." : {
+
     },
     "foxess_earnings_calculation_description" : {
       "localizations" : {
@@ -6246,6 +6279,9 @@
         }
       }
     },
+    "If a sufficient number of these information types become available I will be able to update the app." : {
+
+    },
     "import_total" : {
       "localizations" : {
         "de" : {
@@ -6522,6 +6558,9 @@
           }
         }
       }
+    },
+    "Inverter work mode setting" : {
+
     },
     "inverter_charge_schedule_deleted" : {
       "localizations" : {
@@ -8114,6 +8153,9 @@
           }
         }
       }
+    },
+    "Parameter data older than 3 days" : {
+
     },
     "Parameter Groups" : {
       "localizations" : {
@@ -10320,6 +10362,9 @@
         }
       }
     },
+    "Scheduler template management" : {
+
+    },
     "Schedules are not supported on this inverter." : {
       "localizations" : {
         "de" : {
@@ -11536,6 +11581,9 @@
         }
       }
     },
+    "Statistics" : {
+
+    },
     "Stats" : {
       "localizations" : {
         "de" : {
@@ -12104,6 +12152,9 @@
         }
       }
     },
+    "Today's yield" : {
+
+    },
     "total" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -12229,6 +12280,9 @@
         }
       }
     },
+    "Unavailable information" : {
+
+    },
     "Units" : {
       "localizations" : {
         "de" : {
@@ -12319,6 +12373,33 @@
           }
         }
       }
+    },
+    "used for adjusting min SOC settings" : {
+
+    },
+    "used for adjusting start/stop force charge periods" : {
+
+    },
+    "used for adjusting the current work mode (without schedule)" : {
+
+    },
+    "used for defining work mode scheduler templates" : {
+
+    },
+    "used for displaying data logger and signal strength" : {
+
+    },
+    "used in calculating the time to full/empty" : {
+
+    },
+    "used in determining what inverters you have, and if you have solar attached to the current device for the flow tab" : {
+
+    },
+    "used in the stats tab, summary tab, and calculating today's yield" : {
+
+    },
+    "used on the parameter tab for analysing historic behaviour" : {
+
     },
     "Username" : {
       "localizations" : {

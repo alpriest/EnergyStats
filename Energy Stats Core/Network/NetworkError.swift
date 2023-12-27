@@ -17,6 +17,7 @@ public enum NetworkError: LocalizedError, CustomStringConvertible, Equatable {
     case offline
     case maintenanceMode
     case unknown(_ message: String)
+    case requestRequiresSignature
 
     public var description: String {
         let builder = PartBuilder()
@@ -40,6 +41,8 @@ public enum NetworkError: LocalizedError, CustomStringConvertible, Equatable {
             builder.append(String(localized: "You appear to be offline. Please check your connection."))
         case .maintenanceMode:
             builder.append(String(localized: "Fox servers are offline. Please try later."))
+        case .requestRequiresSignature:
+            builder.append(String(localized: "Fox no longer permits these requests."))
         case .unknown(let message):
             builder.append(message)
         }

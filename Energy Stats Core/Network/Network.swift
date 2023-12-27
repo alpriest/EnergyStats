@@ -232,6 +232,10 @@ extension Network {
             store.latestData = data
             store.latestResponse = response
 
+            if statusCode == 406 {
+                throw NetworkError.requestRequiresSignature
+            }
+
             guard 200 ... 300 ~= statusCode else { throw NetworkError.invalidResponse(request.url, statusCode) }
 
             let networkResponse: NetworkResponse<T> = try JSONDecoder().decode(NetworkResponse<T>.self, from: data)

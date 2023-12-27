@@ -40,6 +40,7 @@ struct ErrorAlertView: View {
     let retry: () -> Void
     @EnvironmentObject var userManager: UserManager
     @State private var buttonWidth: CGFloat = .zero
+    @State private var showingFatalError = false
 
     var body: some View {
         VStack {
@@ -101,7 +102,12 @@ struct ErrorAlertView: View {
                     .frame(minWidth: buttonWidth)
             }
             .buttonStyle(EqualWidthButtonStyle(buttonWidth: $buttonWidth))
+        }.onAppear {
+            if let cause = cause as? NetworkError, case .requestRequiresSignature = cause {
+                showingFatalError = true
+            }
         }
+        //.sheet(isPresented: $showingFatalError, content: { UnsupportedErrorView() })
     }
 
     private func rectReader(_ binding: Binding<CGFloat>) -> some View {
