@@ -4775,6 +4775,9 @@
         }
       }
     },
+    "Enter your FoxESS Cloud API key" : {
+
+    },
     "Enter your FoxESS Cloud details" : {
       "localizations" : {
         "de" : {
@@ -12512,6 +12515,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gdy bateria osiągnie ten poziom, rozładowanie się zatrzyma. Jeśli chcesz zachować trochę mocy baterii na później, być może ustaw ją na 50%."
+          }
+        }
+      }
+    },
+    "where_to_find_api_key" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To find this visit https://www.foxesscloud.com/user/center, click API Management, then Generate API Key"
           }
         }
       }

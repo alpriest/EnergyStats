@@ -7,12 +7,22 @@
 
 import Foundation
 
-public struct OpenQueryResponse: Decodable {
-    public let datas: [Data]
+public struct OpenApiVariable: Decodable {
+    let name: String
+    let property: Variable
+
+    public struct Variable: Decodable {
+        let unit: String
+        let name: String
+    }
+}
+
+public struct OpenQueryResponse: Codable {
     public let time: Date
     public let deviceSN: String
+    public let datas: [Data]
 
-    public struct Data: Decodable {
+    public struct Data: Codable {
         let unit: String
         let variable: String
         let value: Double
@@ -32,10 +42,10 @@ public struct OpenQueryResponse: Decodable {
         self.deviceSN = try container.decode(String.self, forKey: OpenQueryResponse.CodingKeys.deviceSN)
     }
 
-    public init(datas: [Data], time: Date, deviceSN: String) {
-        self.datas = datas
+    public init(time: Date, deviceSN: String, datas: [Data]) {
         self.time = time
         self.deviceSN = deviceSN
+        self.datas = datas
     }
 }
 
@@ -50,8 +60,8 @@ public struct OpenHistoryRequest: Encodable {
 }
 
 public struct OpenHistoryResponse: Decodable {
-    public let datas: [Data]
     public let deviceSN: String
+    public let datas: [Data]
 
     public struct Data: Decodable {
         public let unit: String?
@@ -73,6 +83,11 @@ public struct OpenHistoryResponse: Decodable {
                 let timeString = try container.decode(String.self, forKey: CodingKeys.time)
                 self.time = try Date(timeString, strategy: FoxEssCloudParseStrategy())
                 self.value = try container.decode(Double.self, forKey: UnitData.CodingKeys.value)
+            }
+
+            public init(time: Date, value: Double) {
+                self.time = time
+                self.value = value
             }
         }
     }

@@ -199,23 +199,24 @@ public class DemoNetworking: FoxESSNetworking {
 
     public func fetchErrorMessages() async {}
 
-    public func fetchRealData(deviceSN: String, variables: [String]) async throws -> OpenQueryResponse {
-        OpenQueryResponse(datas: [
-            OpenQueryResponse.Data(unit: "kW", variable: "feedinPower", value: 0.0),
-            OpenQueryResponse.Data(unit: "kW", variable: "gridConsumptionPower", value: 2.634),
-            OpenQueryResponse.Data(unit: "kW", variable: "loadsPower", value: 2.708),
-            OpenQueryResponse.Data(unit: "kW", variable: "generationPower", value: 0.071),
-            OpenQueryResponse.Data(unit: "kW", variable: "pvPower", value: 0.111),
-            OpenQueryResponse.Data(unit: "kW", variable: "meterPower2", value: 0.0),
-            OpenQueryResponse.Data(unit: "℃", variable: "ambientTemperation", value: 32.5),
-            OpenQueryResponse.Data(unit: "℃", variable: "invTemperation", value: 23.2)
-        ], time: Date(), deviceSN: deviceSN)
+    public func openapi_fetchRealData(deviceSN: String, variables: [String]) async throws -> OpenQueryResponse {
+        OpenQueryResponse(time: Date(),
+                          deviceSN: deviceSN,
+                          datas: [
+                              OpenQueryResponse.Data(unit: "kW", variable: "feedinPower", value: 0.0),
+                              OpenQueryResponse.Data(unit: "kW", variable: "gridConsumptionPower", value: 2.634),
+                              OpenQueryResponse.Data(unit: "kW", variable: "loadsPower", value: 2.708),
+                              OpenQueryResponse.Data(unit: "kW", variable: "generationPower", value: 0.071),
+                              OpenQueryResponse.Data(unit: "kW", variable: "pvPower", value: 0.111),
+                              OpenQueryResponse.Data(unit: "kW", variable: "meterPower2", value: 0.0),
+                              OpenQueryResponse.Data(unit: "℃", variable: "ambientTemperation", value: 32.5),
+                              OpenQueryResponse.Data(unit: "℃", variable: "invTemperation", value: 23.2)
+                          ])
     }
 
-    public func fetchHistory(deviceSN: String, variables: [String]) async throws -> OpenHistoryResponse {
-        OpenHistoryResponse(datas: [], deviceSN: deviceSN)
+    public func openapi_fetchHistory(deviceSN: String, variables: [String]) async throws -> OpenHistoryResponse {
+        OpenHistoryResponse(deviceSN: deviceSN, datas: [])
     }
-
 }
 
 public class MockConfig: Config {

@@ -13,7 +13,7 @@ extension URL {
 }
 
 public extension Network {
-    func fetchRealData(deviceSN: String, variables: [String]) async throws -> OpenQueryResponse {
+    func openapi_fetchRealData(deviceSN: String, variables: [String]) async throws -> OpenQueryResponse {
         var request = URLRequest(url: URL.getOpenRealData)
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(OpenQueryRequest(deviceSN: deviceSN, variables: variables))
@@ -31,7 +31,7 @@ public extension Network {
         }
     }
 
-    func fetchHistory(deviceSN: String, variables: [String]) async throws -> OpenHistoryResponse {
+    func openapi_fetchHistory(deviceSN: String, variables: [String]) async throws -> OpenHistoryResponse {
         var request = URLRequest(url: URL.getOpenHistoryData)
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(OpenHistoryRequest(deviceSN: deviceSN, variables: variables))

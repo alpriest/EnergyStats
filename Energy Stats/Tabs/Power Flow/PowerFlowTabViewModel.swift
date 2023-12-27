@@ -195,8 +195,8 @@ class PowerFlowTabViewModel: ObservableObject {
                                                            shouldCombineCT2WithPVPower: self.configManager.shouldCombineCT2WithPVPower)
             #else
             let raws = try await self.network.fetchRaw(deviceID: currentDevice.deviceID, variables: rawVariables.compactMap { $0 }, queryDate: .now())
-            let currentViewModel = CurrentStatusCalculator(device: currentDevice,
-                                                           raws: raws,
+            let currentValues = RawResponseMapper.map(device: currentDevice, raws: raws)
+            let currentViewModel = CurrentStatusCalculator(status: currentValues,
                                                            shouldInvertCT2: self.configManager.shouldInvertCT2,
                                                            shouldCombineCT2WithPVPower: self.configManager.shouldCombineCT2WithPVPower)
             #endif

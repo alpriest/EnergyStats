@@ -9,37 +9,38 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct LoginView: View {
-    @State private var username: String = ""
-    @State private var password: String = ""
+    @State private var apiKey: String = ""
     @ObservedObject var userManager: UserManager
 
     var body: some View {
         VStack {
-            Text("Enter your FoxESS Cloud details")
-                .multilineTextAlignment(.center)
-                .font(.headline)
-                .padding()
+            VStack {
+                Text("Enter your FoxESS Cloud API key")
+                    .multilineTextAlignment(.center)
+                    .font(.headline)
+                    .padding(.bottom)
 
-            TextField("Username", text: $username)
-                .textFieldStyle(.roundedBorder)
-                .autocapitalization(.none)
-                .autocorrectionDisabled()
+                Text("where_to_find_api_key")
+                    .multilineTextAlignment(.center)
+                    .font(.caption)
+            }
+            .padding()
 
-            SecureField("Password", text: $password)
+            TextField("API Key", text: $apiKey)
                 .textFieldStyle(.roundedBorder)
                 .autocapitalization(.none)
                 .autocorrectionDisabled()
 
             HStack {
                 Button("Try demo") {
-                    Task { await userManager.login(username: "demo", password: "user") }
+                    Task { await userManager.login(apiKey: "demo") }
                 }
                 .accessibilityIdentifier("try_demo")
                 .padding()
                 .buttonStyle(.bordered)
 
                 Button("Log me in") {
-                    Task { await userManager.login(username: username, password: password) }
+                    Task { await userManager.login(apiKey: apiKey) }
                 }
                 .disabled(loginDisabled)
                 .padding()
@@ -52,8 +53,8 @@ struct LoginView: View {
         }
     }
 
-    var loginDisabled: Bool {
-        username.isEmpty || password.isEmpty
+    private var loginDisabled: Bool {
+        apiKey.isEmpty
     }
 }
 
