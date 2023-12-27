@@ -17,8 +17,12 @@ public enum RefreshFrequency: Int {
 public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging {
     func fetchDevices() async throws
     func logout()
-    func select(device: Device?)
+#if OPEN_API
+    func select(deviceSN: String)
+#else
     func refreshFirmwareVersions() async throws
+    func select(device: Device?)
+#endif
     func clearBatteryOverride(for deviceID: String)
     var appSettingsPublisher: LatestAppSettingsPublisher { get }
 
@@ -37,10 +41,15 @@ public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging {
     var decimalPlaces: Int { get set }
     var showSunnyBackground: Bool { get set }
     var devices: [Device]? { get set }
+#if OPEN_API
+    var selectedDeviceSN: String? { get }
+#else
     var selectedDeviceID: String? { get }
+#endif
+#if !OPEN_API
     var firmwareVersions: DeviceFirmwareVersion? { get }
+#endif
     var displayUnit: DisplayUnit { get set }
-    var variables: [RawVariable] { get }
     var currentDevice: CurrentValueSubject<Device?, Never> { get }
     var hasBattery: Bool { get }
     var showInverterTemperature: Bool { get set }
@@ -58,6 +67,11 @@ public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging {
     var shouldCombineCT2WithPVPower: Bool { get set }
     var showGraphValueDescriptions: Bool { get set }
     var dataCeiling: DataCeiling { get set }
+#if OPEN_API
+    var variables: [Variable] { get }
+#else
+    var variables: [RawVariable] { get }
+#endif
 }
 
 public protocol SolcastConfigManaging {
@@ -91,15 +105,73 @@ public class ConfigManager: ConfigManaging {
         self.appSettingsPublisher = appSettingsPublisher
     }
 
+#if OPEN_API
     public func fetchDevices() async throws {
         let deviceList = try await networking.openapi_fetchDeviceList()
-        let variables = try await networking.openapi_fetchVariables()
+        config.variables = try await networking.openapi_fetchVariables().map {
+            Variable(name: $0.name, variable: $0.property.name, unit: $0.property.unit)
+        }
 
         if selectedDeviceSN == nil {
-            select(device: deviceList.first)
+            select(deviceSN: deviceList.first)
         }
     }
+#else
+    public func fetchDevices() async throws {
+        let deviceList = try await networking.fetchDeviceList()
+        guard deviceList.count > 0 else {
+            throw NoDeviceFoundError()
+        }
 
+        let newDevices = try await deviceList.asyncMap { device in
+            let deviceBattery: Device.Battery?
+            let firmware = try await fetchFirmwareVersions(deviceID: device.deviceID)
+            let variables = try await networking.fetchVariables(deviceID: device.deviceID)
+
+            if device.hasBattery {
+                do {
+                    let battery = try await networking.fetchBattery(deviceID: device.deviceID)
+                    let batterySettings = try await networking.fetchBatterySettings(deviceSN: device.deviceSN)
+
+                    deviceBattery = BatteryResponseMapper.map(battery: battery, settings: batterySettings)
+                } catch {
+                    deviceBattery = nil
+                }
+            } else {
+                deviceBattery = nil
+            }
+
+            return Device(
+                plantName: device.plantName,
+                deviceID: device.deviceID,
+                deviceSN: device.deviceSN,
+                hasPV: device.hasPV,
+                hasBattery: device.hasBattery,
+                battery: deviceBattery,
+                deviceType: device.deviceType,
+                firmware: firmware,
+                variables: variables,
+                moduleSN: device.moduleSN
+            )
+        }
+        devices = newDevices
+        if selectedDeviceID == nil {
+            select(device: devices?.first)
+        }
+    }
+#endif
+
+#if OPEN_API
+    public var variables: [Variable] {
+        config.variables
+    }
+#else
+    public var variables: [RawVariable] {
+        currentDevice.value?.variables ?? []
+    }
+#endif
+
+#if !OPEN_API
     private func fetchFirmwareVersions(deviceID: String) async throws -> DeviceFirmwareVersion {
         let firmware = try await networking.fetchAddressBook(deviceID: deviceID)
 
@@ -120,21 +192,31 @@ public class ConfigManager: ConfigManaging {
             }
         }
     }
+#endif
 
     public func logout() {
         config.clear()
     }
 
+#if OPEN_API
     public func select(deviceSN: String?) {
         selectedDeviceSN = deviceSN
     }
+#else
+    public func select(device: Device?) {
+        guard let device else { return }
+
+        selectedDeviceID = device.deviceID
+    }
+
+    public var firmwareVersions: DeviceFirmwareVersion? {
+        currentDevice.value?.firmware
+    }
+#endif
 
     public var minSOC: Double { Double(currentDevice.value?.battery?.minSOC ?? "0.2") ?? 0.0 }
 
-    public var variables: [RawVariable] {
-        currentDevice.value?.variables ?? []
-    }
-
+#if !OPEN_API
     public var batteryCapacity: String {
         get {
             if let currentDevice = currentDevice.value {
@@ -155,6 +237,7 @@ public class ConfigManager: ConfigManaging {
             }
         }
     }
+#endif
 
     public var hasRunBefore: Bool {
         get { config.hasRunBefore }
@@ -165,14 +248,17 @@ public class ConfigManager: ConfigManaging {
         config.deviceBatteryOverrides.removeValue(forKey: deviceID)
     }
 
+#if !OPEN_API
     public var hasBattery: Bool {
         currentDevice.value?.hasBattery ?? false
     }
+#endif
 
     public var batteryCapacityW: Int {
         Int(batteryCapacity) ?? 0
     }
 
+#if OPEN_API
     public var selectedDeviceSN: String? {
         get { config.selectedDeviceSN }
         set {
@@ -180,6 +266,15 @@ public class ConfigManager: ConfigManaging {
             currentDevice.send(devices?.first(where: { $0.deviceSN == selectedDeviceSN }) ?? devices?.first)
         }
     }
+#else
+    public var selectedDeviceID: String? {
+        get { config.selectedDeviceID }
+        set {
+            config.selectedDeviceID = newValue
+            currentDevice.send(devices?.first(where: { $0.deviceID == selectedDeviceID }) ?? devices?.first)
+        }
+    }
+#endif
 
     public var currencySymbol: String {
         get { config.currencySymbol }
@@ -380,6 +475,7 @@ public class ConfigManager: ConfigManaging {
         }
     }
 
+#if !OPEN_API
     public var devices: [Device]? {
         get {
             guard let deviceListData = config.devices else { return nil }
@@ -401,6 +497,7 @@ public class ConfigManager: ConfigManaging {
             }
         }
     }
+#endif
 
     public var selectedParameterGraphVariables: [String] {
         get { config.selectedParameterGraphVariables }
@@ -500,6 +597,7 @@ public class ConfigManager: ConfigManaging {
     }
 }
 
+#if !OPEN_API
 public enum BatteryResponseMapper {
     public static func map(battery: BatteryResponse, settings: BatterySettingsResponse) -> Device.Battery {
         let batteryCapacity: String
@@ -515,3 +613,4 @@ public enum BatteryResponseMapper {
         return Device.Battery(capacity: batteryCapacity, minSOC: minSOC)
     }
 }
+#endif

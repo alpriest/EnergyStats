@@ -30,6 +30,7 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "showTotalYield")
         UserDefaults.shared.removeObject(forKey: "devices")
         UserDefaults.shared.removeObject(forKey: "selectedDeviceID")
+        UserDefaults.shared.removeObject(forKey: "selectedDeviceSN")
         UserDefaults.shared.removeObject(forKey: "displayUnit")
         UserDefaults.shared.removeObject(forKey: "showInverterTemperature")
         UserDefaults.shared.removeObject(forKey: "showHomeTotalOnPowerFlow")
@@ -92,8 +93,13 @@ public class UserDefaultsConfig: Config {
     @UserDefaultsStoredData(key: "devices")
     public var devices: Data?
 
+    #if OPEN_API
+    @UserDefaultsStoredOptionalString(key: "selectedDeviceSN")
+    public var selectedDeviceSN: String?
+    #else
     @UserDefaultsStoredOptionalString(key: "selectedDeviceID")
     public var selectedDeviceID: String?
+    #endif
 
     @UserDefaultsStoredInt(key: "displayUnit")
     public var displayUnit: Int

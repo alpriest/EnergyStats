@@ -247,7 +247,11 @@ public class MockConfig: Config {
     public var decimalPlaces: Int = 3
     public var showSunnyBackground: Bool = true
     public var devices: Data?
+    #if OPEN_API
     public var selectedDeviceSN: String?
+    #else
+    public var selectedDeviceID: String?
+    #endif
     public var showUsableBatteryOnly: Bool = false
     public var displayUnit: Int = 0
     public var showTotalYield: Bool = false

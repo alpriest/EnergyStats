@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 public class NetworkValueCleaner: FoxESSNetworking {
     private let network: FoxESSNetworking
     private let appSettingsPublisher: LatestAppSettingsPublisher
@@ -14,6 +15,124 @@ public class NetworkValueCleaner: FoxESSNetworking {
     public init(network: FoxESSNetworking, appSettingsPublisher: LatestAppSettingsPublisher) {
         self.network = network
         self.appSettingsPublisher = appSettingsPublisher
+    }
+
+    public func ensureHasToken() async {
+        await network.ensureHasToken()
+    }
+
+    public func verifyCredentials(username: String, hashedPassword: String) async throws {
+        try await network.verifyCredentials(username: username, hashedPassword: hashedPassword)
+    }
+
+    public func deleteScheduleTemplate(templateID: String) async throws {
+        try await network.deleteScheduleTemplate(templateID: templateID)
+    }
+
+    public func saveScheduleTemplate(deviceSN: String, template: ScheduleTemplate) async throws {
+        try await network.saveScheduleTemplate(deviceSN: deviceSN, template: template)
+    }
+
+    public func fetchScheduleTemplate(deviceSN: String, templateID: String) async throws -> ScheduleTemplateResponse {
+        try await network.fetchScheduleTemplate(deviceSN: deviceSN, templateID: templateID)
+    }
+
+    public func enableScheduleTemplate(deviceSN: String, templateID: String) async throws {
+        try await network.enableScheduleTemplate(deviceSN: deviceSN, templateID: templateID)
+    }
+
+    public func fetchScheduleTemplates() async throws -> ScheduleTemplateListResponse {
+        try await network.fetchScheduleTemplates()
+    }
+
+    public func createScheduleTemplate(name: String, description: String) async throws {
+        try await network.createScheduleTemplate(name: name, description: description)
+    }
+
+    public func deleteSchedule(deviceSN: String) async throws {
+        try await network.deleteSchedule(deviceSN: deviceSN)
+    }
+
+    public func saveSchedule(deviceSN: String, schedule: Schedule) async throws {
+        try await network.saveSchedule(deviceSN: deviceSN, schedule: schedule)
+    }
+
+    public func fetchCurrentSchedule(deviceSN: String) async throws -> ScheduleListResponse {
+        try await network.fetchCurrentSchedule(deviceSN: deviceSN)
+    }
+
+    public func fetchScheduleModes(deviceID: String) async throws -> [SchedulerModeResponse] {
+        try await network.fetchScheduleModes(deviceID: deviceID)
+    }
+
+    public func fetchSchedulerFlag(deviceSN: String) async throws -> SchedulerFlagResponse {
+        try await network.fetchSchedulerFlag(deviceSN: deviceSN)
+    }
+
+    public func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [ReportResponse] {
+        try await network.fetchReport(deviceID: deviceID, variables: variables, queryDate: queryDate, reportType: reportType)
+            .map { original in
+                ReportResponse(variable: original.variable, data: original.data.map { originalData in
+                    ReportResponse.ReportData(index: originalData.index, value: originalData.value.capped(appSettingsPublisher.value.dataCeiling))
+                })
+            }
+    }
+
+    public func fetchBattery(deviceID: String) async throws -> BatteryResponse {
+        try await network.fetchBattery(deviceID: deviceID)
+    }
+
+    public func fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse {
+        try await network.fetchBatterySettings(deviceSN: deviceSN)
+    }
+
+    public func fetchRaw(deviceID: String, variables: [RawVariable], queryDate: QueryDate) async throws -> [RawResponse] {
+        try await network.fetchRaw(deviceID: deviceID, variables: variables, queryDate: queryDate)
+            .map { original in
+                RawResponse(variable: original.variable, data: original.data.map { originalData in
+                    RawResponse.ReportData(time: originalData.time, value: originalData.value.capped(appSettingsPublisher.value.dataCeiling))
+                })
+            }
+    }
+
+    public func fetchDeviceList() async throws -> [PagedDeviceListResponse.Device] {
+        try await network.fetchDeviceList()
+    }
+
+    public func fetchAddressBook(deviceID: String) async throws -> AddressBookResponse {
+        try await network.fetchAddressBook(deviceID: deviceID)
+    }
+
+    public func fetchVariables(deviceID: String) async throws -> [RawVariable] {
+        try await network.fetchVariables(deviceID: deviceID)
+    }
+
+    public func fetchEarnings(deviceID: String) async throws -> EarningsResponse {
+        try await network.fetchEarnings(deviceID: deviceID)
+    }
+
+    public func setSoc(minGridSOC: Int, minSOC: Int, deviceSN: String) async throws {
+        try await network.setSoc(minGridSOC: minGridSOC, minSOC: minSOC, deviceSN: deviceSN)
+    }
+
+    public func fetchBatteryTimes(deviceSN: String) async throws -> BatteryTimesResponse {
+        try await network.fetchBatteryTimes(deviceSN: deviceSN)
+    }
+
+    public func setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws {
+        try await network.setBatteryTimes(deviceSN: deviceSN, times: times)
+    }
+
+    public func fetchWorkMode(deviceID: String) async throws -> DeviceSettingsGetResponse {
+        try await network.fetchWorkMode(deviceID: deviceID)
+    }
+
+    public func setWorkMode(deviceID: String, workMode: InverterWorkMode) async throws {
+        try await network.setWorkMode(deviceID: deviceID, workMode: workMode)
+    }
+
+    public func fetchDataLoggers() async throws -> PagedDataLoggerListResponse {
+        try await network.fetchDataLoggers()
     }
 
     public func fetchErrorMessages() async {

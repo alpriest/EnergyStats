@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Energy Stats Core OpenAPI.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>7</integer>
+		</dict>
 		<key>Energy Stats Core Tests.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
@@ -29,11 +34,6 @@
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
-		<key>Energy Stats copy.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>6</integer>
-		</dict>
 		<key>Energy Stats.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
@@ -58,6 +58,11 @@
 			<true/>
 		</dict>
 		<key>4140144928C70B3200EA5BA1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4149D3AE2B3C87DF00314449</key>
 		<dict>
 			<key>primary</key>
 			<true/>

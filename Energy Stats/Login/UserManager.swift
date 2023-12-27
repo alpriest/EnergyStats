@@ -57,6 +57,12 @@ class UserManager: ObservableObject {
         }
     }
 
+    #if !OPEN_API
+    func getUsername() -> String? {
+        store.getUsername()
+    }
+    #endif
+
     @MainActor
     func login(apiKey: String) async {
         do {
@@ -82,6 +88,7 @@ class UserManager: ObservableObject {
             }
         }
     }
+
 
     @MainActor
     func logout() {
