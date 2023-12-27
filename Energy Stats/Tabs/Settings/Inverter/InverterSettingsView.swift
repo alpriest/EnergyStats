@@ -24,6 +24,7 @@ struct InverterSettingsView: View {
             InverterChoiceView(viewModel: InverterChoiceViewModel(configManager: configManager))
 
             Section {
+                #if !OPEN_API
                 NavigationLink("Configure Work Mode") {
                     InverterWorkModeView(networking: networking, config: configManager)
                 }
@@ -31,6 +32,7 @@ struct InverterSettingsView: View {
                 NavigationLink("Manage schedules") {
                     ScheduleSummaryView(networking: networking, config: configManager)
                 }
+                #endif
             }
 
             Section {
@@ -42,6 +44,7 @@ struct InverterSettingsView: View {
                     Text("Show inverter icon")
                 }
 
+                #if !OPEN_API
                 Toggle(isOn: $showInverterTypeName) {
                     Text("settings.inverter.showInverterTypeNameOnPowerflow")
                 }
@@ -49,6 +52,7 @@ struct InverterSettingsView: View {
                 Toggle(isOn: $showInverterPlantName) {
                     Text("Show inverter plant name")
                 }
+                #endif
             } header: {
                 Text("Display Options")
             }
@@ -67,7 +71,9 @@ struct InverterSettingsView: View {
                 Text("invert_ct2_footnote")
             }
 
+            #if !OPEN_API
             InverterFirmwareVersionsView(viewModel: firmwareVersion)
+            #endif
 
             if let currentDevice = configManager.currentDevice.value {
                 Section {
@@ -75,7 +81,9 @@ struct InverterSettingsView: View {
                     ESLabeledText("Device Type", value: currentDevice.deviceType)
                     ESLabeledText("Device ID", value: currentDevice.deviceID)
                     ESLabeledText("Device Serial No.", value: currentDevice.deviceSN)
+                    #if !OPEN_API
                     ESLabeledText("Module Serial No.", value: currentDevice.moduleSN)
+                    #endif
                     ESLabeledText("Has Battery", value: currentDevice.battery != nil ? "true" : "false")
                     ESLabeledText("Has Solar", value: currentDevice.hasPV ? "true" : "false")
                 }

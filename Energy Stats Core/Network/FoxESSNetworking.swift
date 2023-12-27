@@ -61,6 +61,6 @@ public protocol FoxESSNetworking {
     // Open API
     func openapi_fetchVariables() async throws -> [OpenApiVariable]
     func openapi_fetchDeviceList() async throws -> [String]
-    func openapi_fetchRealData(deviceSN: String?, variables: [String]) async throws -> OpenQueryResponse
+    func openapi_fetchRealData(deviceSN: String, variables: [String]) async throws -> OpenQueryResponse
     func openapi_fetchHistory(deviceSN: String, variables: [String]) async throws -> OpenHistoryResponse
 }

@@ -56,4 +56,20 @@ public class NetworkFacade: FoxESSNetworking {
             try await network.openapi_fetchHistory(deviceSN: deviceSN, variables: variables)
         }
     }
+
+    public func openapi_fetchDeviceList() async throws -> [String] {
+        if isDemoUser {
+            try await fakeNetwork.openapi_fetchDeviceList()
+        } else {
+            try await network.openapi_fetchDeviceList()
+        }
+    }
+
+    public func openapi_fetchVariables() async throws -> [OpenApiVariable] {
+        if isDemoUser {
+            try await fakeNetwork.openapi_fetchVariables()
+        } else {
+            try await network.openapi_fetchVariables()
+        }
+    }
 }

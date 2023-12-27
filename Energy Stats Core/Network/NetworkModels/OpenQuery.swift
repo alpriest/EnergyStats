@@ -50,7 +50,7 @@ public struct OpenQueryResponse: Codable {
 }
 
 public struct OpenQueryRequest: Encodable {
-    public let deviceSN: String
+    public let deviceSN: String?
     public let variables: [String]
 }
 

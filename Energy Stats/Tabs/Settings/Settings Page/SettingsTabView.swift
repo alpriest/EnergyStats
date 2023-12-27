@@ -40,11 +40,13 @@ struct SettingsTabView: View {
                     }
                 }
 
+                #if !OPEN_API
                 NavigationLink {
                     DataLoggersView(networking: networking)
                 } label: {
                     Text("Datalogger")
                 }
+                #endif
 
                 DisplaySettingsView(viewModel: viewModel, configManager: configManager, solarService: solarService)
 

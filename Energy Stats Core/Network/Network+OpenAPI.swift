@@ -10,6 +10,7 @@ import Foundation
 extension URL {
     static var getOpenRealData = URL(string: "https://www.foxesscloud.com/op/v0/device/real/query")!
     static var getOpenHistoryData = URL(string: "https://www.foxesscloud.com/op/v0/device/history/query")!
+    static var getOpenVariables = URL(string: "https://www.foxesscloud.com/op/v0/device/variable/get")!
 }
 
 public extension Network {
@@ -43,6 +44,26 @@ public extension Network {
             } else {
                 throw NetworkError.missingData
             }
+        } catch {
+            print(error)
+            throw error
+        }
+    }
+
+    func openapi_fetchVariables() async throws -> [OpenApiVariable] {
+        let request = URLRequest(url: URL.getOpenVariables)
+        let result: ([OpenApiVariable], Data) = try await fetch(request)
+        return result.0
+    }
+
+    func openapi_fetchDeviceList() async throws -> [String] {
+        var request = URLRequest(url: URL.getOpenRealData)
+        request.httpMethod = "POST"
+        request.httpBody = try! JSONEncoder().encode(OpenQueryRequest(deviceSN: nil, variables: ["invTemperation"]))
+
+        do {
+            let result: ([OpenQueryResponse], Data) = try await fetch(request)
+            return result.0.map { $0.deviceSN }
         } catch {
             print(error)
             throw error

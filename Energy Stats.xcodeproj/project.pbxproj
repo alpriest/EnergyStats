@@ -98,6 +98,117 @@
 		41463D912AC44C7C00B2EB25 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 41463D902AC44C7C00B2EB25 /* Localizable.xcstrings */; };
 		41495F382B211A75004A51C1 /* AlertContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41495F372B211A75004A51C1 /* AlertContentView.swift */; };
 		41495F3A2B211C8B004A51C1 /* InverterWorkModeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41495F392B211C8B004A51C1 /* InverterWorkModeViewModel.swift */; };
+		4149D3BA2B3C87DF00314449 /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41ED2EEF2B349EF7001CF277 /* CustomDatePicker.swift */; };
+		4149D3BB2B3C87DF00314449 /* PowerFlowTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446B28CA57A9006D5D7D /* PowerFlowTabView.swift */; };
+		4149D3BC2B3C87DF00314449 /* ScheduleTemplateListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419092252B1DDF870017CB65 /* ScheduleTemplateListView.swift */; };
+		4149D3BD2B3C87DF00314449 /* SchedulePhaseListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4190922D2B1E4B250017CB65 /* SchedulePhaseListItemView.swift */; };
+		4149D3BE2B3C87DF00314449 /* SummaryTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C6E962AFAC7E4000DE35F /* SummaryTabViewModel.swift */; };
+		4149D3BF2B3C87DF00314449 /* SolarForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411DF2732AFD404E00CEEB23 /* SolarForecastView.swift */; };
+		4149D3C12B3C87DF00314449 /* InverterWorkModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416AE4392A7FA76E003D0122 /* InverterWorkModeView.swift */; };
+		4149D3C22B3C87DF00314449 /* DisplaySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AB47F2AA36D24002CBC96 /* DisplaySettingsView.swift */; };
+		4149D3C32B3C87DF00314449 /* View+If.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418EEEB42916843A006A8290 /* View+If.swift */; };
+		4149D3C42B3C87DF00314449 /* InverterIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C8496A2A8BBF1500431410 /* InverterIconView.swift */; };
+		4149D3C52B3C87DF00314449 /* TabbedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140144F28C70B3200EA5BA1 /* TabbedView.swift */; };
+		4149D3C62B3C87DF00314449 /* FinancialsSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418EB4862ACC019A0021B87A /* FinancialsSettingsViewModel.swift */; };
+		4149D3C72B3C87DF00314449 /* Tintable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411029122A71C066004018BB /* Tintable.swift */; };
+		4149D3C82B3C87DF00314449 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141B1FF28D86C7200B60157 /* UserManager.swift */; };
+		4149D3C92B3C87DF00314449 /* BatteryPowerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AF2F402AA4C674008FCA2E /* BatteryPowerFooterView.swift */; };
+		4149D3CA2B3C87DF00314449 /* NonFunctionalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CD1F332A141F81006B0C00 /* NonFunctionalButton.swift */; };
+		4149D3CB2B3C87DF00314449 /* ExternalWebNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CF044B2A95006E00ADCCAD /* ExternalWebNavigationLink.swift */; };
+		4149D3CC2B3C87DF00314449 /* NumberTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411029142A71C4F2004018BB /* NumberTextField.swift */; };
+		4149D3CD2B3C87DF00314449 /* ErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419CCB532933BABF00882649 /* ErrorAlertView.swift */; };
+		4149D3CE2B3C87DF00314449 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41339C7128CC7B7B0062B976 /* LoginView.swift */; };
+		4149D3CF2B3C87DF00314449 /* InverterFirmwareVersionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41626CCF29D969E9003FEB00 /* InverterFirmwareVersionsView.swift */; };
+		4149D3D02B3C87DF00314449 /* ParameterGraphVariablesToggles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171854B2A01033700D18CDD /* ParameterGraphVariablesToggles.swift */; };
+		4149D3D12B3C87DF00314449 /* ScheduleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0923C2B210255001D1E22 /* ScheduleDetailView.swift */; };
+		4149D3D22B3C87DF00314449 /* ScheduleSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419092202B1DBF2B0017CB65 /* ScheduleSummaryView.swift */; };
+		4149D3D32B3C87DF00314449 /* ParameterGraphVariableChooserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417185472A0051CA00D18CDD /* ParameterGraphVariableChooserView.swift */; };
+		4149D3D42B3C87DF00314449 /* CSVTextFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C6AF652A360CF600C88F2B /* CSVTextFile.swift */; };
+		4149D3D52B3C87DF00314449 /* Intents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C849682A8BBC3800431410 /* Intents.swift */; };
+		4149D3D62B3C87DF00314449 /* ValueBoundsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41ACB2C52A51ADEB005831B0 /* ValueBoundsView.swift */; };
+		4149D3D72B3C87DF00314449 /* GridPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E4B31428DB77E8003F7F47 /* GridPowerView.swift */; };
+		4149D3D82B3C87DF00314449 /* ParameterGraphHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417153E329F2BCD700639A7B /* ParameterGraphHeaderView.swift */; };
+		4149D3D92B3C87DF00314449 /* InverterSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416AE4352A7D2C8B003D0122 /* InverterSettingsView.swift */; };
+		4149D3DA2B3C87DF00314449 /* StatsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AA2192A12454A0073CD34 /* StatsTabView.swift */; };
+		4149D3DB2B3C87DF00314449 /* BatterySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4130364829B86F66006B5CE9 /* BatterySettingsView.swift */; };
+		4149D3DC2B3C87DF00314449 /* SettingsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4160098A2A8D18B10096CCD9 /* SettingsFooterView.swift */; };
+		4149D3DD2B3C87DF00314449 /* ChargeTimePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411029162A71C975004018BB /* ChargeTimePeriod.swift */; };
+		4149D3DE2B3C87DF00314449 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141B20128D871B900B60157 /* ContentView.swift */; };
+		4149D3DF2B3C87DF00314449 /* StatsGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418141442A12BABA00FFC6A6 /* StatsGraphView.swift */; };
+		4149D3E02B3C87DF00314449 /* InverterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4134ACC32A88A1A800CB4BA8 /* InverterView.swift */; };
+		4149D3E12B3C87DF00314449 /* BatteryTimePeriodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411029102A71B95F004018BB /* BatteryTimePeriodView.swift */; };
+		4149D3E22B3C87DF00314449 /* GridPowerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AF2F442AA4C74F008FCA2E /* GridPowerFooterView.swift */; };
+		4149D3E42B3C87DF00314449 /* ResponseDebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416318BF29DDD82800C2C285 /* ResponseDebugView.swift */; };
+		4149D3E52B3C87DF00314449 /* FinancialsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418EB4842ACC012C0021B87A /* FinancialsSettingsView.swift */; };
+		4149D3E62B3C87DF00314449 /* SettingsTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */; };
+		4149D3E72B3C87DF00314449 /* StatsGraphVariableToggles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CD1F312A1414C1006B0C00 /* StatsGraphVariableToggles.swift */; };
+		4149D3E82B3C87DF00314449 /* BottomButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4160098C2A8D1A690096CCD9 /* BottomButtonsView.swift */; };
+		4149D3EA2B3C87DF00314449 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419DFA842A1292380067313A /* DatePickerView.swift */; };
+		4149D3EB2B3C87DF00314449 /* DebugDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416318B829DDD44C00C2C285 /* DebugDataView.swift */; };
+		4149D3EC2B3C87DF00314449 /* SolarForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41009A742B03B13A009D853B /* SolarForecastViewModel.swift */; };
+		4149D3ED2B3C87DF00314449 /* HomePowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E4B31228DB77A3003F7F47 /* HomePowerView.swift */; };
+		4149D3EE2B3C87DF00314449 /* SolcastSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E165B22B0A877100B17590 /* SolcastSettingsViewModel.swift */; };
+		4149D3EF2B3C87DF00314449 /* EditScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C09202B18A98400183603 /* EditScheduleViewModel.swift */; };
+		4149D3F02B3C87DF00314449 /* FoxESSCloudStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C249A42A77FC7400D8E9E7 /* FoxESSCloudStatusView.swift */; };
+		4149D3F12B3C87DF00314449 /* ParametersGraphTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A25D3C28CA5CDF00315714 /* ParametersGraphTabView.swift */; };
+		4149D3F22B3C87DF00314449 /* ParameterGraphVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140ECD9292D58D300992DD8 /* ParameterGraphVariable.swift */; };
+		4149D3F32B3C87DF00314449 /* BatteryPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E4B30F28DB7666003F7F47 /* BatteryPowerView.swift */; };
+		4149D3F42B3C87DF00314449 /* Energy_StatsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140144D28C70B3200EA5BA1 /* Energy_StatsApp.swift */; };
+		4149D3F52B3C87DF00314449 /* EditTemplateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DB220E2B1F965C00EC4015 /* EditTemplateView.swift */; };
+		4149D3F62B3C87DF00314449 /* ParameterGraphHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41ACB2C32A51832E005831B0 /* ParameterGraphHeaderViewModel.swift */; };
+		4149D3F72B3C87DF00314449 /* EarningsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CA35702AA8C02C00D45734 /* EarningsView.swift */; };
+		4149D3F82B3C87DF00314449 /* DataLoggersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4192F9982A8674990035DAB8 /* DataLoggersView.swift */; };
+		4149D3F92B3C87DF00314449 /* PreviewUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C49EAD2A0398E4003700CB /* PreviewUserManager.swift */; };
+		4149D3FA2B3C87DF00314449 /* ScheduleSummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419092222B1DC0070017CB65 /* ScheduleSummaryViewModel.swift */; };
+		4149D3FC2B3C87DF00314449 /* DatePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419DFA872A12A6DF0067313A /* DatePickerViewModel.swift */; };
+		4149D3FD2B3C87DF00314449 /* ParameterVariableGroupEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410FC8892AB9EAD90004CBC2 /* ParameterVariableGroupEditorViewModel.swift */; };
+		4149D3FE2B3C87DF00314449 /* ParameterGraphVariableChooserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171854D2A010B6300D18CDD /* ParameterGraphVariableChooserViewModel.swift */; };
+		4149D3FF2B3C87DF00314449 /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418199C62A4034530001B5D4 /* FAQView.swift */; };
+		4149D4002B3C87DF00314449 /* LoadState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417153E529F2BD3300639A7B /* LoadState.swift */; };
+		4149D4012B3C87DF00314449 /* ParameterVariableListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410FC8872AB9B5450004CBC2 /* ParameterVariableListView.swift */; };
+		4149D4022B3C87DF00314449 /* SelfSufficiencyEstimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C19DCC2A4DDE46009883AB /* SelfSufficiencyEstimateView.swift */; };
+		4149D4032B3C87DF00314449 /* InverterChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4130364A29B8BE7F006B5CE9 /* InverterChoiceView.swift */; };
+		4149D4042B3C87DF00314449 /* SolarBandingSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E8E7232AADFB3900DC4B89 /* SolarBandingSettingsView.swift */; };
+		4149D4052B3C87DF00314449 /* TimePeriodBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C091C2B17EC0E00183603 /* TimePeriodBarView.swift */; };
+		4149D4062B3C87DF00314449 /* PowerFlowTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140145B28C70B4A00EA5BA1 /* PowerFlowTabViewModel.swift */; };
+		4149D4072B3C87DF00314449 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4128E4C028DA5F6600C1D698 /* Date.swift */; };
+		4149D4082B3C87DF00314449 /* SchedulePhaseEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C09242B18FE9A00183603 /* SchedulePhaseEditView.swift */; };
+		4149D4092B3C87DF00314449 /* SelfSufficiencySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C19DCE2A4E09F9009883AB /* SelfSufficiencySettingsView.swift */; };
+		4149D40A2B3C87DF00314449 /* SolarPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD7F3929C5B8940072CDE8 /* SolarPowerView.swift */; };
+		4149D40B2B3C87DF00314449 /* FlowingLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446428CA1D76006D5D7D /* FlowingLine.swift */; };
+		4149D40C2B3C87DF00314449 /* StatsTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AA21C2A1245C00073CD34 /* StatsTabViewModel.swift */; };
+		4149D40D2B3C87DF00314449 /* ApproximationsCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C6E982AFB8A15000DE35F /* ApproximationsCalculator.swift */; };
+		4149D40E2B3C87DF00314449 /* SettingsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E1DFDE28D87781001235B9 /* SettingsTabView.swift */; };
+		4149D40F2B3C87DF00314449 /* ScheduleTemplateListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419092272B1DDFE60017CB65 /* ScheduleTemplateListViewModel.swift */; };
+		4149D4102B3C87DF00314449 /* SchedulePhaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0923A2B20FCB0001D1E22 /* SchedulePhaseHelper.swift */; };
+		4149D4112B3C87DF00314449 /* PowerFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446228CA1C5D006D5D7D /* PowerFlowView.swift */; };
+		4149D4122B3C87DF00314449 /* InverterWorkModeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41495F392B211C8B004A51C1 /* InverterWorkModeViewModel.swift */; };
+		4149D4132B3C87DF00314449 /* EditScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419092292B1DE3D90017CB65 /* EditScheduleView.swift */; };
+		4149D4142B3C87DF00314449 /* ParametersGraphTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A25D3E28CA5CFB00315714 /* ParametersGraphTabViewModel.swift */; };
+		4149D4152B3C87DF00314449 /* LoadedPowerFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446028C9EF6B006D5D7D /* LoadedPowerFlowView.swift */; };
+		4149D4162B3C87DF00314449 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4190922B2B1E49210017CB65 /* ScheduleView.swift */; };
+		4149D4172B3C87DF00314449 /* ParametersGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41923E3D2916BC6F00D1A8C5 /* ParametersGraphView.swift */; };
+		4149D4182B3C87DF00314449 /* SolcastSiteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FE6BB02B0CBA7900A66CC3 /* SolcastSiteView.swift */; };
+		4149D4192B3C87DF00314449 /* HomePowerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AF2F422AA4C6C1008FCA2E /* HomePowerFooterView.swift */; };
+		4149D41A2B3C87DF00314449 /* ForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E165BA2B0BE1BD00B17590 /* ForecastView.swift */; };
+		4149D41B2B3C87DF00314449 /* ApproximationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413BF2882A99F8A500A32B0D /* ApproximationsView.swift */; };
+		4149D41C2B3C87DF00314449 /* SolcastSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4149DE9A2B03C3AC004F5FC6 /* SolcastSettingsView.swift */; };
+		4149D41D2B3C87DF00314449 /* AlertCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416AE4372A7D956E003D0122 /* AlertCopy.swift */; };
+		4149D41E2B3C87DF00314449 /* EditTemplateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DB22102B1F967500EC4015 /* EditTemplateViewModel.swift */; };
+		4149D41F2B3C87DF00314449 /* CT2-icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410484C72AD49D95007F68C0 /* CT2-icon.swift */; };
+		4149D4202B3C87DF00314449 /* View+Copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416318BD29DDD80E00C2C285 /* View+Copy.swift */; };
+		4149D4212B3C87DF00314449 /* SummaryTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C6E942AFAC3BF000DE35F /* SummaryTabView.swift */; };
+		4149D4222B3C87DF00314449 /* InverterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446628CA22B3006D5D7D /* InverterViewModel.swift */; };
+		4149D4232B3C87DF00314449 /* ParameterVariableGroupEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410FC8852AB98F020004CBC2 /* ParameterVariableGroupEditorView.swift */; };
+		4149D4252B3C87DF00314449 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 4149D3B52B3C87DF00314449 /* MarkdownUI */; };
+		4149D4262B3C87DF00314449 /* OHHTTPStubs in Frameworks */ = {isa = PBXBuildFile; productRef = 4149D3B32B3C87DF00314449 /* OHHTTPStubs */; };
+		4149D4272B3C87DF00314449 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 4149D3B72B3C87DF00314449 /* OrderedCollections */; };
+		4149D4282B3C87DF00314449 /* Energy_Stats_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; };
+		4149D42A2B3C87DF00314449 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4140145428C70B3200EA5BA1 /* Preview Assets.xcassets */; };
+		4149D42B2B3C87DF00314449 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 418EB4882ACC10220021B87A /* Localizable.xcstrings */; };
+		4149D42C2B3C87DF00314449 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4140145128C70B3200EA5BA1 /* Assets.xcassets */; };
+		4149D42F2B3C87DF00314449 /* Energy_Stats_Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4149D4322B3C87DF00314449 /* Energy Stats WidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 412A266C2AC03B2200F61456 /* Energy Stats WidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4149DE9B2B03C3AC004F5FC6 /* SolcastSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4149DE9A2B03C3AC004F5FC6 /* SolcastSettingsView.swift */; };
 		4149DE9D2B04BDE6004F5FC6 /* SolcastCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4149DE9C2B04BDE6004F5FC6 /* SolcastCache.swift */; };
 		414BF82829B4918300E2EB51 /* SettingsTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */; };
@@ -269,6 +380,20 @@
 			remoteGlobalIDString = 41A95B9329DB3F6A00A35169;
 			remoteInfo = "Energy Stats Core";
 		};
+		4149D3B02B3C87DF00314449 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4140144228C70B3200EA5BA1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 41A95B9329DB3F6A00A35169;
+			remoteInfo = "Energy Stats Core";
+		};
+		4149D3B22B3C87DF00314449 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4140144228C70B3200EA5BA1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 412A266B2AC03B2200F61456;
+			remoteInfo = "Energy Stats WidgetsExtension";
+		};
 		41A95B9829DB3F6A00A35169 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4140144228C70B3200EA5BA1 /* Project object */;
@@ -326,6 +451,48 @@
 			files = (
 			);
 			name = "Embed ExtensionKit Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4149D42D2B3C87DF00314449 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4149D42E2B3C87DF00314449 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4149D42F2B3C87DF00314449 /* Energy_Stats_Core.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4149D4302B3C87DF00314449 /* Embed ExtensionKit Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(EXTENSIONS_FOLDER_PATH)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			name = "Embed ExtensionKit Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4149D4312B3C87DF00314449 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				4149D4322B3C87DF00314449 /* Energy Stats WidgetsExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		41A95B8B29DB2F0A00A35169 /* Embed Watch Content */ = {
@@ -443,6 +610,8 @@
 		41463D902AC44C7C00B2EB25 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		41495F372B211A75004A51C1 /* AlertContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertContentView.swift; sourceTree = "<group>"; };
 		41495F392B211C8B004A51C1 /* InverterWorkModeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterWorkModeViewModel.swift; sourceTree = "<group>"; };
+		4149D4362B3C87DF00314449 /* Energy Stats OpenAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Energy Stats OpenAPI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4149D4372B3C87DF00314449 /* Energy Stats copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Energy Stats copy-Info.plist"; path = "/Users/alpriest/Developer/Energy-Stats-iOS/Energy Stats copy-Info.plist"; sourceTree = "<absolute>"; };
 		4149DE9A2B03C3AC004F5FC6 /* SolcastSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolcastSettingsView.swift; sourceTree = "<group>"; };
 		4149DE9C2B04BDE6004F5FC6 /* SolcastCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolcastCache.swift; sourceTree = "<group>"; };
 		414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabViewModel.swift; sourceTree = "<group>"; };
@@ -640,6 +809,17 @@
 				41B6910128E043A10058126E /* OHHTTPStubs in Frameworks */,
 				41CA35762AA8C52100D45734 /* OrderedCollections in Frameworks */,
 				41A95B9A29DB3F6A00A35169 /* Energy_Stats_Core.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4149D4242B3C87DF00314449 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4149D4252B3C87DF00314449 /* MarkdownUI in Frameworks */,
+				4149D4262B3C87DF00314449 /* OHHTTPStubs in Frameworks */,
+				4149D4272B3C87DF00314449 /* OrderedCollections in Frameworks */,
+				4149D4282B3C87DF00314449 /* Energy_Stats_Core.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -862,6 +1042,7 @@
 				412A266F2AC03B2300F61456 /* Energy Stats Widgets */,
 				4140144B28C70B3200EA5BA1 /* Products */,
 				41B690FF28E043A10058126E /* Frameworks */,
+				4149D4372B3C87DF00314449 /* Energy Stats copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -874,6 +1055,7 @@
 				41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */,
 				413B7A362A4A397000562A68 /* Energy Stats Core Tests.xctest */,
 				412A266C2AC03B2200F61456 /* Energy Stats WidgetsExtension.appex */,
+				4149D4362B3C87DF00314449 /* Energy Stats OpenAPI.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1338,6 +1520,34 @@
 			productReference = 4140144A28C70B3200EA5BA1 /* Energy Stats.app */;
 			productType = "com.apple.product-type.application";
 		};
+		4149D3AE2B3C87DF00314449 /* Energy Stats OpenAPI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4149D4332B3C87DF00314449 /* Build configuration list for PBXNativeTarget "Energy Stats OpenAPI" */;
+			buildPhases = (
+				4149D3B92B3C87DF00314449 /* Sources */,
+				4149D4242B3C87DF00314449 /* Frameworks */,
+				4149D4292B3C87DF00314449 /* Resources */,
+				4149D42D2B3C87DF00314449 /* Embed Watch Content */,
+				4149D42E2B3C87DF00314449 /* Embed Frameworks */,
+				4149D4302B3C87DF00314449 /* Embed ExtensionKit Extensions */,
+				4149D4312B3C87DF00314449 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4149D3AF2B3C87DF00314449 /* PBXTargetDependency */,
+				4149D3B12B3C87DF00314449 /* PBXTargetDependency */,
+			);
+			name = "Energy Stats OpenAPI";
+			packageProductDependencies = (
+				4149D3B32B3C87DF00314449 /* OHHTTPStubs */,
+				4149D3B52B3C87DF00314449 /* MarkdownUI */,
+				4149D3B72B3C87DF00314449 /* OrderedCollections */,
+			);
+			productName = "PV Stats";
+			productReference = 4149D4362B3C87DF00314449 /* Energy Stats OpenAPI.app */;
+			productType = "com.apple.product-type.application";
+		};
 		41A95B9329DB3F6A00A35169 /* Energy Stats Core */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 41A95B9C29DB3F6A00A35169 /* Build configuration list for PBXNativeTarget "Energy Stats Core" */;
@@ -1461,6 +1671,7 @@
 				41A95B9329DB3F6A00A35169 /* Energy Stats Core */,
 				413B7A352A4A397000562A68 /* Energy Stats Core Tests */,
 				412A266B2AC03B2200F61456 /* Energy Stats WidgetsExtension */,
+				4149D3AE2B3C87DF00314449 /* Energy Stats OpenAPI */,
 			);
 		};
 /* End PBXProject section */
@@ -1489,6 +1700,16 @@
 				4140145528C70B3200EA5BA1 /* Preview Assets.xcassets in Resources */,
 				418EB4892ACC10220021B87A /* Localizable.xcstrings in Resources */,
 				4140145228C70B3200EA5BA1 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4149D4292B3C87DF00314449 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4149D42A2B3C87DF00314449 /* Preview Assets.xcassets in Resources */,
+				4149D42B2B3C87DF00314449 /* Localizable.xcstrings in Resources */,
+				4149D42C2B3C87DF00314449 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1672,6 +1893,115 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4149D3B92B3C87DF00314449 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4149D3BA2B3C87DF00314449 /* CustomDatePicker.swift in Sources */,
+				4149D3BB2B3C87DF00314449 /* PowerFlowTabView.swift in Sources */,
+				4149D3BC2B3C87DF00314449 /* ScheduleTemplateListView.swift in Sources */,
+				4149D3BD2B3C87DF00314449 /* SchedulePhaseListItemView.swift in Sources */,
+				4149D3BE2B3C87DF00314449 /* SummaryTabViewModel.swift in Sources */,
+				4149D3BF2B3C87DF00314449 /* SolarForecastView.swift in Sources */,
+				4149D3C12B3C87DF00314449 /* InverterWorkModeView.swift in Sources */,
+				4149D3C22B3C87DF00314449 /* DisplaySettingsView.swift in Sources */,
+				4149D3C32B3C87DF00314449 /* View+If.swift in Sources */,
+				4149D3C42B3C87DF00314449 /* InverterIconView.swift in Sources */,
+				4149D3C52B3C87DF00314449 /* TabbedView.swift in Sources */,
+				4149D3C62B3C87DF00314449 /* FinancialsSettingsViewModel.swift in Sources */,
+				4149D3C72B3C87DF00314449 /* Tintable.swift in Sources */,
+				4149D3C82B3C87DF00314449 /* UserManager.swift in Sources */,
+				4149D3C92B3C87DF00314449 /* BatteryPowerFooterView.swift in Sources */,
+				4149D3CA2B3C87DF00314449 /* NonFunctionalButton.swift in Sources */,
+				4149D3CB2B3C87DF00314449 /* ExternalWebNavigationLink.swift in Sources */,
+				4149D3CC2B3C87DF00314449 /* NumberTextField.swift in Sources */,
+				4149D3CD2B3C87DF00314449 /* ErrorAlertView.swift in Sources */,
+				4149D3CE2B3C87DF00314449 /* LoginView.swift in Sources */,
+				4149D3CF2B3C87DF00314449 /* InverterFirmwareVersionsView.swift in Sources */,
+				4149D3D02B3C87DF00314449 /* ParameterGraphVariablesToggles.swift in Sources */,
+				4149D3D12B3C87DF00314449 /* ScheduleDetailView.swift in Sources */,
+				4149D3D22B3C87DF00314449 /* ScheduleSummaryView.swift in Sources */,
+				4149D3D32B3C87DF00314449 /* ParameterGraphVariableChooserView.swift in Sources */,
+				4149D3D42B3C87DF00314449 /* CSVTextFile.swift in Sources */,
+				4149D3D52B3C87DF00314449 /* Intents.swift in Sources */,
+				4149D3D62B3C87DF00314449 /* ValueBoundsView.swift in Sources */,
+				4149D3D72B3C87DF00314449 /* GridPowerView.swift in Sources */,
+				4149D3D82B3C87DF00314449 /* ParameterGraphHeaderView.swift in Sources */,
+				4149D3D92B3C87DF00314449 /* InverterSettingsView.swift in Sources */,
+				4149D3DA2B3C87DF00314449 /* StatsTabView.swift in Sources */,
+				4149D3DB2B3C87DF00314449 /* BatterySettingsView.swift in Sources */,
+				4149D3DC2B3C87DF00314449 /* SettingsFooterView.swift in Sources */,
+				4149D3DD2B3C87DF00314449 /* ChargeTimePeriod.swift in Sources */,
+				4149D3DE2B3C87DF00314449 /* ContentView.swift in Sources */,
+				4149D3DF2B3C87DF00314449 /* StatsGraphView.swift in Sources */,
+				4149D3E02B3C87DF00314449 /* InverterView.swift in Sources */,
+				4149D3E12B3C87DF00314449 /* BatteryTimePeriodView.swift in Sources */,
+				4149D3E22B3C87DF00314449 /* GridPowerFooterView.swift in Sources */,
+				4149D3E42B3C87DF00314449 /* ResponseDebugView.swift in Sources */,
+				4149D3E52B3C87DF00314449 /* FinancialsSettingsView.swift in Sources */,
+				4149D3E62B3C87DF00314449 /* SettingsTabViewModel.swift in Sources */,
+				4149D3E72B3C87DF00314449 /* StatsGraphVariableToggles.swift in Sources */,
+				4149D3E82B3C87DF00314449 /* BottomButtonsView.swift in Sources */,
+				4149D3EA2B3C87DF00314449 /* DatePickerView.swift in Sources */,
+				4149D3EB2B3C87DF00314449 /* DebugDataView.swift in Sources */,
+				4149D3EC2B3C87DF00314449 /* SolarForecastViewModel.swift in Sources */,
+				4149D3ED2B3C87DF00314449 /* HomePowerView.swift in Sources */,
+				4149D3EE2B3C87DF00314449 /* SolcastSettingsViewModel.swift in Sources */,
+				4149D3EF2B3C87DF00314449 /* EditScheduleViewModel.swift in Sources */,
+				4149D3F02B3C87DF00314449 /* FoxESSCloudStatusView.swift in Sources */,
+				4149D3F12B3C87DF00314449 /* ParametersGraphTabView.swift in Sources */,
+				4149D3F22B3C87DF00314449 /* ParameterGraphVariable.swift in Sources */,
+				4149D3F32B3C87DF00314449 /* BatteryPowerView.swift in Sources */,
+				4149D3F42B3C87DF00314449 /* Energy_StatsApp.swift in Sources */,
+				4149D3F52B3C87DF00314449 /* EditTemplateView.swift in Sources */,
+				4149D3F62B3C87DF00314449 /* ParameterGraphHeaderViewModel.swift in Sources */,
+				4149D3F72B3C87DF00314449 /* EarningsView.swift in Sources */,
+				4149D3F82B3C87DF00314449 /* DataLoggersView.swift in Sources */,
+				4149D3F92B3C87DF00314449 /* PreviewUserManager.swift in Sources */,
+				4149D3FA2B3C87DF00314449 /* ScheduleSummaryViewModel.swift in Sources */,
+				4149D3FC2B3C87DF00314449 /* DatePickerViewModel.swift in Sources */,
+				4149D3FD2B3C87DF00314449 /* ParameterVariableGroupEditorViewModel.swift in Sources */,
+				4149D3FE2B3C87DF00314449 /* ParameterGraphVariableChooserViewModel.swift in Sources */,
+				4149D3FF2B3C87DF00314449 /* FAQView.swift in Sources */,
+				4149D4002B3C87DF00314449 /* LoadState.swift in Sources */,
+				4149D4012B3C87DF00314449 /* ParameterVariableListView.swift in Sources */,
+				4149D4022B3C87DF00314449 /* SelfSufficiencyEstimateView.swift in Sources */,
+				4149D4032B3C87DF00314449 /* InverterChoiceView.swift in Sources */,
+				4149D4042B3C87DF00314449 /* SolarBandingSettingsView.swift in Sources */,
+				4149D4052B3C87DF00314449 /* TimePeriodBarView.swift in Sources */,
+				4149D4062B3C87DF00314449 /* PowerFlowTabViewModel.swift in Sources */,
+				4149D4072B3C87DF00314449 /* Date.swift in Sources */,
+				4149D4082B3C87DF00314449 /* SchedulePhaseEditView.swift in Sources */,
+				4149D4092B3C87DF00314449 /* SelfSufficiencySettingsView.swift in Sources */,
+				4149D40A2B3C87DF00314449 /* SolarPowerView.swift in Sources */,
+				4149D40B2B3C87DF00314449 /* FlowingLine.swift in Sources */,
+				4149D40C2B3C87DF00314449 /* StatsTabViewModel.swift in Sources */,
+				4149D40D2B3C87DF00314449 /* ApproximationsCalculator.swift in Sources */,
+				4149D40E2B3C87DF00314449 /* SettingsTabView.swift in Sources */,
+				4149D40F2B3C87DF00314449 /* ScheduleTemplateListViewModel.swift in Sources */,
+				4149D4102B3C87DF00314449 /* SchedulePhaseHelper.swift in Sources */,
+				4149D4112B3C87DF00314449 /* PowerFlowView.swift in Sources */,
+				4149D4122B3C87DF00314449 /* InverterWorkModeViewModel.swift in Sources */,
+				4149D4132B3C87DF00314449 /* EditScheduleView.swift in Sources */,
+				4149D4142B3C87DF00314449 /* ParametersGraphTabViewModel.swift in Sources */,
+				4149D4152B3C87DF00314449 /* LoadedPowerFlowView.swift in Sources */,
+				4149D4162B3C87DF00314449 /* ScheduleView.swift in Sources */,
+				4149D4172B3C87DF00314449 /* ParametersGraphView.swift in Sources */,
+				4149D4182B3C87DF00314449 /* SolcastSiteView.swift in Sources */,
+				4149D4192B3C87DF00314449 /* HomePowerFooterView.swift in Sources */,
+				4149D41A2B3C87DF00314449 /* ForecastView.swift in Sources */,
+				4149D41B2B3C87DF00314449 /* ApproximationsView.swift in Sources */,
+				4149D41C2B3C87DF00314449 /* SolcastSettingsView.swift in Sources */,
+				4149D41D2B3C87DF00314449 /* AlertCopy.swift in Sources */,
+				4149D41E2B3C87DF00314449 /* EditTemplateViewModel.swift in Sources */,
+				4149D41F2B3C87DF00314449 /* CT2-icon.swift in Sources */,
+				4149D4202B3C87DF00314449 /* View+Copy.swift in Sources */,
+				4149D4212B3C87DF00314449 /* SummaryTabView.swift in Sources */,
+				4149D4222B3C87DF00314449 /* InverterViewModel.swift in Sources */,
+				4149D4232B3C87DF00314449 /* ParameterVariableGroupEditorView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		41A95B9029DB3F6A00A35169 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1796,6 +2126,16 @@
 			platformFilter = ios;
 			target = 41A95B9329DB3F6A00A35169 /* Energy Stats Core */;
 			targetProxy = 413B7A3B2A4A397000562A68 /* PBXContainerItemProxy */;
+		};
+		4149D3AF2B3C87DF00314449 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 41A95B9329DB3F6A00A35169 /* Energy Stats Core */;
+			targetProxy = 4149D3B02B3C87DF00314449 /* PBXContainerItemProxy */;
+		};
+		4149D3B12B3C87DF00314449 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 412A266B2AC03B2200F61456 /* Energy Stats WidgetsExtension */;
+			targetProxy = 4149D3B22B3C87DF00314449 /* PBXContainerItemProxy */;
 		};
 		41A95B9929DB3F6A00A35169 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2117,6 +2457,76 @@
 			};
 			name = Release;
 		};
+		4149D4342B3C87DF00314449 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Energy Stats/Energy Stats.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_ASSET_PATHS = "\"Energy Stats/Preview Content\"";
+				DEVELOPMENT_TEAM = 885RLNNNK2;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Energy Stats copy-Info.plist";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = "INCLUDE_SOURCE\nOPEN_API";
+				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4149D4352B3C87DF00314449 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Energy Stats/Energy Stats.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Energy Stats/Preview Content\"";
+				DEVELOPMENT_TEAM = 885RLNNNK2;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Energy Stats copy-Info.plist";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		41A95B9D29DB3F6A00A35169 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2323,6 +2733,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		4149D4332B3C87DF00314449 /* Build configuration list for PBXNativeTarget "Energy Stats OpenAPI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4149D4342B3C87DF00314449 /* Debug */,
+				4149D4352B3C87DF00314449 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		41A95B9C29DB3F6A00A35169 /* Build configuration list for PBXNativeTarget "Energy Stats Core" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -2361,6 +2780,30 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		4149D3B42B3C87DF00314449 /* XCRemoteSwiftPackageReference "OHHTTPStubs" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AliSoftware/OHHTTPStubs";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+		4149D3B62B3C87DF00314449 /* XCRemoteSwiftPackageReference "MarkdownUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gonzalezreal/MarkdownUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		4149D3B82B3C87DF00314449 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		418199C82A4035F40001B5D4 /* XCRemoteSwiftPackageReference "MarkdownUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/gonzalezreal/MarkdownUI";
@@ -2392,6 +2835,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4127910E28E38EFB00D5F993 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
 			productName = SnapshotTesting;
+		};
+		4149D3B32B3C87DF00314449 /* OHHTTPStubs */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4149D3B42B3C87DF00314449 /* XCRemoteSwiftPackageReference "OHHTTPStubs" */;
+			productName = OHHTTPStubs;
+		};
+		4149D3B52B3C87DF00314449 /* MarkdownUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4149D3B62B3C87DF00314449 /* XCRemoteSwiftPackageReference "MarkdownUI" */;
+			productName = MarkdownUI;
+		};
+		4149D3B72B3C87DF00314449 /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4149D3B82B3C87DF00314449 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
 		};
 		418199C92A4035F40001B5D4 /* MarkdownUI */ = {
 			isa = XCSwiftPackageProductDependency;

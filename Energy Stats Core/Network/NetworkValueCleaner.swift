@@ -42,6 +42,14 @@ public class NetworkValueCleaner: FoxESSNetworking {
                                      })
         })
     }
+
+    public func openapi_fetchVariables() async throws -> [OpenApiVariable] {
+        try await network.openapi_fetchVariables()
+    }
+
+    public func openapi_fetchDeviceList() async throws -> [String] {
+        try await network.openapi_fetchDeviceList()
+    }
 }
 
 extension Double {

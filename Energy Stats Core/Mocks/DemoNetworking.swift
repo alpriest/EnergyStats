@@ -217,6 +217,14 @@ public class DemoNetworking: FoxESSNetworking {
     public func openapi_fetchHistory(deviceSN: String, variables: [String]) async throws -> OpenHistoryResponse {
         OpenHistoryResponse(deviceSN: deviceSN, datas: [])
     }
+
+    public func openapi_fetchVariables() async throws -> [OpenApiVariable] {
+        []
+    }
+
+    public func openapi_fetchDeviceList() async throws -> [String] {
+        ["1234", "5678"]
+    }
 }
 
 public class MockConfig: Config {
@@ -239,7 +247,7 @@ public class MockConfig: Config {
     public var decimalPlaces: Int = 3
     public var showSunnyBackground: Bool = true
     public var devices: Data?
-    public var selectedDeviceID: String?
+    public var selectedDeviceSN: String?
     public var showUsableBatteryOnly: Bool = false
     public var displayUnit: Int = 0
     public var showTotalYield: Bool = false

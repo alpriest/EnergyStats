@@ -55,6 +55,14 @@ public class NetworkCache: FoxESSNetworking {
     public func openapi_fetchHistory(deviceSN: String, variables: [String]) async throws -> OpenHistoryResponse {
         try await network.openapi_fetchHistory(deviceSN: deviceSN, variables: variables)
     }
+
+    public func openapi_fetchDeviceList() async throws -> [String] {
+        try await network.openapi_fetchDeviceList()
+    }
+
+    public func openapi_fetchVariables() async throws -> [OpenApiVariable] {
+        try await network.openapi_fetchVariables()
+    }
 }
 
 private extension NetworkCache {

@@ -15,6 +15,7 @@ struct BatterySettingsView: View {
 
     var body: some View {
         Form {
+            #if !OPEN_API
             NavigationLink("Minimum charge levels") {
                 BatterySOCSettingsView(networking: viewModel.networking,
                                        config: viewModel.config,
@@ -26,6 +27,7 @@ struct BatterySettingsView: View {
             NavigationLink("Charge times") {
                 BatteryChargeScheduleSettingsView(networking: viewModel.networking, config: viewModel.config)
             }.accessibilityIdentifier("charge schedule")
+            #endif
 
             Section(
                 content: {
