@@ -139,7 +139,7 @@ class PowerFlowTabViewModel: ObservableObject {
 //                try await self.configManager.fetchDevices()
 //            }
 
-            guard let currentDevice = configManager.currentDevice.value else {
+            guard let currentDeviceSN = configManager.selectedDeviceSN else {
                 self.state = .failed(nil, "No devices found. Please logout and try logging in again.")
                 return
             }
@@ -159,9 +159,9 @@ class PowerFlowTabViewModel: ObservableObject {
                                 self.configManager.variables.named("meterPower2")]
 
             var reportVariables = [ReportVariable.loads, .feedIn, .gridConsumption]
-            if currentDevice.hasBattery {
+//            if currentDevice.hasBattery {
                 reportVariables.append(contentsOf: [.chargeEnergyToTal, .dischargeEnergyToTal])
-            }
+//            }
 
 //            let totals = try await self.network.fetchReport(deviceID: currentDevice.deviceID,
 //                                                            variables: reportVariables,
@@ -179,7 +179,7 @@ class PowerFlowTabViewModel: ObservableObject {
 //            }
 
             let real = try await self.network.openapi_fetchRealData(
-                deviceSN: currentDevice.deviceSN,
+                deviceSN: currentDeviceSN,
                 variables: [
                     "feedinPower",
                     "gridConsumptionPower",
@@ -191,7 +191,7 @@ class PowerFlowTabViewModel: ObservableObject {
                     "invTemperation"
                 ]
             )
-            let currentValues = RealQueryResponseMapper.mapCurrentValues(device: currentDevice, response: real)
+            let currentValues = RealQueryResponseMapper.mapCurrentValues(response: real)
             let currentViewModel = CurrentStatusCalculator(status: currentValues,
                                                            shouldInvertCT2: self.configManager.shouldInvertCT2,
                                                            shouldCombineCT2WithPVPower: self.configManager.shouldCombineCT2WithPVPower)

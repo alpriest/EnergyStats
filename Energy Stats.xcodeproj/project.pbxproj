@@ -171,6 +171,8 @@
 		41BBF8BB2B3CB995005D1A55 /* BatteryPowerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AF2F402AA4C674008FCA2E /* BatteryPowerFooterView.swift */; };
 		41BCC1A92B245C130062084A /* Network+Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC1A82B245C130062084A /* Network+Schedule.swift */; };
 		41BCC1AB2B245C280062084A /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC1AA2B245C280062084A /* Network.swift */; };
+		41BD20B42B3DBE6700E0EE75 /* InverterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4134ACC32A88A1A800CB4BA8 /* InverterView.swift */; };
+		41BD20B52B3DBE6F00E0EE75 /* InverterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446628CA22B3006D5D7D /* InverterViewModel.swift */; };
 		41C19DCF2A4E09F9009883AB /* SelfSufficiencySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C19DCE2A4E09F9009883AB /* SelfSufficiencySettingsView.swift */; };
 		41C249A52A77FC7400D8E9E7 /* FoxESSCloudStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C249A42A77FC7400D8E9E7 /* FoxESSCloudStatusView.swift */; };
 		41C49EAE2A0398E4003700CB /* PreviewUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C49EAD2A0398E4003700CB /* PreviewUserManager.swift */; };
@@ -1530,6 +1532,7 @@
 				4107446C28CA57A9006D5D7D /* PowerFlowTabView.swift in Sources */,
 				411DF2742AFD404E00CEEB23 /* SolarForecastView.swift in Sources */,
 				419AB4802AA36D24002CBC96 /* DisplaySettingsView.swift in Sources */,
+				41BD20B42B3DBE6700E0EE75 /* InverterView.swift in Sources */,
 				418EEEB52916843A006A8290 /* View+If.swift in Sources */,
 				41C8496B2A8BBF1500431410 /* InverterIconView.swift in Sources */,
 				4140145028C70B3200EA5BA1 /* TabbedView.swift in Sources */,
@@ -1558,6 +1561,7 @@
 				411029112A71B95F004018BB /* BatteryTimePeriodView.swift in Sources */,
 				41AF2F452AA4C74F008FCA2E /* GridPowerFooterView.swift in Sources */,
 				416318C029DDD82800C2C285 /* ResponseDebugView.swift in Sources */,
+				41BD20B52B3DBE6F00E0EE75 /* InverterViewModel.swift in Sources */,
 				418EB4852ACC012C0021B87A /* FinancialsSettingsView.swift in Sources */,
 				414BF82829B4918300E2EB51 /* SettingsTabViewModel.swift in Sources */,
 				4160098D2A8D1A690096CCD9 /* BottomButtonsView.swift in Sources */,

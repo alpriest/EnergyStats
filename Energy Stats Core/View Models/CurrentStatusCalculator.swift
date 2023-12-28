@@ -8,7 +8,7 @@
 import Foundation
 
 public enum RealQueryResponseMapper {
-    public static func mapCurrentValues(device: Device, response: OpenQueryResponse) -> CurrentValues {
+    public static func mapCurrentValues(response: OpenQueryResponse) -> CurrentValues {
         CurrentValues(
             pvPower: response.datas.currentValue(for: "pvPower"),
             feedinPower: response.datas.currentValue(for: "feedinPower"),
@@ -17,7 +17,7 @@ public enum RealQueryResponseMapper {
             ambientTemperation: response.datas.currentValue(for: "ambientTemperation"),
             invTemperation: response.datas.currentValue(for: "invTemperation"),
             meterPower2: response.datas.currentValue(for: "meterPower2"),
-            hasPV: device.hasPV,
+            hasPV: true,
             lastUpdate: response.time
         )
     }

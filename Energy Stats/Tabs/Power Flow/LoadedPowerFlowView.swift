@@ -76,11 +76,11 @@ struct LoadedPowerFlowView: View {
                         }
                     }
 
-//                    InverterView(viewModel: InverterViewModel(configManager: configManager, temperatures: viewModel.inverterTemperatures), appSettings: appSettings)
-//                        .frame(height: 2)
-//                        .frame(width: inverterLineWidth)
-//                        .padding(.vertical, 2)
-//                        .zIndex(1)
+                    InverterView(viewModel: InverterViewModel(configManager: configManager, temperatures: viewModel.inverterTemperatures), appSettings: appSettings)
+                        .frame(height: 2)
+                        .frame(width: inverterLineWidth)
+                        .padding(.vertical, 2)
+                        .zIndex(1)
 
                     HStack(alignment: .top) {
                         if viewModel.hasBattery || viewModel.hasBatteryError {

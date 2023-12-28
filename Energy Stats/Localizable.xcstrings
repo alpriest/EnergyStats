@@ -87,7 +87,6 @@
       }
     },
     " %@ " : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -116,7 +115,6 @@
       }
     },
     " %@ ℃" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1135,7 +1133,6 @@
     },
     "accessibility.inverter" : {
       "comment" : "Accessibility",
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1205,7 +1202,6 @@
       }
     },
     "accessibility.temperature" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

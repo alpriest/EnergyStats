@@ -28,14 +28,14 @@ class InverterViewModel: ObservableObject {
     }
 
     func updateDevices() {
-        let deviceList = configManager.devices ?? []
-        devices = deviceList.map {
-            SelectableDevice(device: $0, isSelected: configManager.selectedDeviceID == $0.deviceID)
-        }
+//        let deviceList = configManager.devices ?? []
+//        devices = deviceList.map {
+//            SelectableDevice(device: $0, isSelected: configManager.selectedDeviceID == $0.deviceID)
+//        }
     }
 
     func select(device: Device) {
-        configManager.select(device: device)
+        configManager.select(deviceSN: device.deviceSN)
         updateDevices()
     }
 
