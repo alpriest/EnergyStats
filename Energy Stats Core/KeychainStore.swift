@@ -16,7 +16,6 @@ public struct KeychainError: Error {
     let code: OSStatus?
 }
 
-
 public protocol KeychainStoring {
     func store(token: String?) throws
 //    func getUsername() -> String?
@@ -29,11 +28,11 @@ public protocol KeychainStoring {
     var isDemoUser: Bool { get }
 }
 
-//public extension KeychainStoring {
+// public extension KeychainStoring {
 //    func store(username: String, hashedPassword: String) throws {
 //        try store(username: username, hashedPassword: hashedPassword, updateHasCredentials: true)
 //    }
-//}
+// }
 
 public class KeychainStore: KeychainStoring, ObservableObject {
     struct KeychainError: Error {
@@ -56,6 +55,8 @@ public class KeychainStore: KeychainStoring, ObservableObject {
         SecItemDelete(makeQuery(tag: "token"))
 
         try set(tag: "token", value: token)
+
+        updateHasCredentials()
     }
 
 //    public func getUsername() -> String? {

@@ -12887,6 +12887,7 @@
       }
     },
     "You are logged in as " : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

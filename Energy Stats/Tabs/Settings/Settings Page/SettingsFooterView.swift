@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SettingsFooterView: View {
-    let username: String
     let onLogout: @MainActor () -> Void
     let appVersion: String
 
@@ -16,7 +15,6 @@ struct SettingsFooterView: View {
         Section(
             content: {
                 VStack {
-                    Text("You are logged in as ") + Text(username)
                     Button("logout") {
                         onLogout()
                     }.buttonStyle(.bordered)
@@ -73,8 +71,7 @@ struct SettingsFooterView: View {
 struct SettingsFooterView_Previews: PreviewProvider {
     static var previews: some View {
         Form {
-            SettingsFooterView(username: "bob priest",
-                               onLogout: {},
+            SettingsFooterView(onLogout: {},
                                appVersion: "1.23")
         }
     }

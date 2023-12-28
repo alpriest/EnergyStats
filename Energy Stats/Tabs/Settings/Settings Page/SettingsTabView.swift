@@ -17,6 +17,11 @@ struct SettingsTabView: View {
     var body: some View {
         NavigationView {
             Form {
+                TextField("API Key", text: $viewModel.apiKey)
+                    .textFieldStyle(.roundedBorder)
+                    .autocapitalization(.none)
+                    .autocorrectionDisabled()
+
                 NavigationLink {
                     InverterSettingsView(networking: networking,
                                          configManager: configManager,
@@ -72,7 +77,7 @@ struct SettingsTabView: View {
                     NavigationLink("settings.debug") { DebugDataView(networking: networking, configManager: configManager) }
                 }
 
-//                SettingsFooterView(username: viewModel.username, onLogout: viewModel.logout, appVersion: viewModel.appVersion)
+                SettingsFooterView(onLogout: viewModel.logout, appVersion: viewModel.appVersion)
             }
             .navigationTitle("Settings")
         }

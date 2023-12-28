@@ -10,6 +10,12 @@ import Energy_Stats_Core
 import SwiftUI
 
 class SettingsTabViewModel: ObservableObject {
+    @Published var apiKey: String {
+        didSet {
+            Task { await userManager.login(apiKey: apiKey) }
+        }
+    }
+
     @Published var showGraphValueDescriptions: Bool {
         didSet {
             config.showGraphValueDescriptions = showGraphValueDescriptions
@@ -167,6 +173,7 @@ class SettingsTabViewModel: ObservableObject {
         shouldCombineCT2WithPVPower = config.shouldCombineCT2WithPVPower
         showGraphValueDescriptions = config.showGraphValueDescriptions
         dataCeiling = config.dataCeiling
+        apiKey = ""
 
 //        config.currentDevice.sink { [weak self] _ in
 //            guard let self else { return }

@@ -52,8 +52,8 @@ public extension Network {
 
     func openapi_fetchVariables() async throws -> [OpenApiVariable] {
         let request = URLRequest(url: URL.getOpenVariables)
-        let result: ([OpenApiVariable], Data) = try await fetch(request)
-        return result.0
+        let result: (OpenApiVariableArray, Data) = try await fetch(request)
+        return result.0.array
     }
 
     func openapi_fetchDeviceList() async throws -> [String] {

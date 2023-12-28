@@ -7,13 +7,64 @@
 
 import Foundation
 
+public struct OpenApiVariableArray: Decodable {
+    let array: [OpenApiVariable]
+
+    public init(from decoder: Decoder) throws {
+        var apiVariables = [OpenApiVariable]()
+        var container = try decoder.unkeyedContainer()
+
+        while !container.isAtEnd {
+            let resultDictionary = try container.nestedContainer(keyedBy: DynamicCodingKeys.self)
+            for key in resultDictionary.allKeys {
+                let yieldData = try resultDictionary.decode(YieldData.self, forKey: key)
+                let apiVariable = OpenApiVariable(
+                    name: yieldData.name,
+                    variable: key.stringValue,
+                    unit: yieldData.unit
+                )
+                apiVariables.append(apiVariable)
+            }
+        }
+
+        self.array = apiVariables
+    }
+
+    struct YieldData: Decodable {
+        let unit: String?
+        let name: String
+
+        enum CodingKeys: CodingKey {
+            case unit
+            case name
+        }
+
+        init(from decoder: Decoder) throws {
+            let container: KeyedDecodingContainer<OpenApiVariableArray.YieldData.CodingKeys> = try decoder.container(keyedBy: OpenApiVariableArray.YieldData.CodingKeys.self)
+            self.unit = try? container.decode(String.self, forKey: OpenApiVariableArray.YieldData.CodingKeys.unit)
+            let names = try container.decode(Dictionary<String, String>.self, forKey: OpenApiVariableArray.YieldData.CodingKeys.name)
+            self.name = names["en"] ?? "Unknown"
+        }
+    }
+}
+
 public struct OpenApiVariable: Decodable {
     let name: String
-    let property: Variable
+    let variable: String
+    let unit: String?
+}
 
-    public struct Variable: Decodable {
-        let unit: String
-        let name: String
+struct DynamicCodingKeys: CodingKey {
+    var stringValue: String
+    var intValue: Int?
+
+    init(stringValue: String) {
+        self.stringValue = stringValue
+    }
+
+    init?(intValue: Int) {
+        self.intValue = intValue
+        self.stringValue = "\(intValue)"
     }
 }
 

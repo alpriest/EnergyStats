@@ -96,8 +96,9 @@ public class ConfigManager: ConfigManaging {
 
     public func fetchDevices() async throws {
         let deviceList = try await networking.openapi_fetchDeviceList()
-        config.variables = try await networking.openapi_fetchVariables().map {
-            Variable(name: $0.name, variable: $0.property.name, unit: $0.property.unit)
+        config.variables = try await networking.openapi_fetchVariables().compactMap {
+            guard let unit = $0.unit else { return nil }
+            return Variable(name: $0.name, variable: $0.name, unit: unit)
         }
 
         if selectedDeviceSN == nil {
@@ -199,8 +200,9 @@ public class ConfigManager: ConfigManaging {
 
     public var batteryCapacity: String {
         get { "10000" }
-        set { }
+        set {}
     }
+
 //        get {
 //            if let currentDevice = currentDevice.value {
 //                let override = config.deviceBatteryOverrides[currentDevice.deviceID]
