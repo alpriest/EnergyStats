@@ -23,7 +23,7 @@ public enum RealQueryResponseMapper {
     }
 }
 
-extension Array where Element == OpenQueryResponse.Data {
+public extension Array where Element == OpenQueryResponse.Data {
     func current(for key: String) -> Double? {
         first(where: { $0.variable.lowercased() == key.lowercased() })?.value
     }

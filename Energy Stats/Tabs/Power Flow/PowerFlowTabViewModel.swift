@@ -160,7 +160,7 @@ class PowerFlowTabViewModel: ObservableObject {
 
             var reportVariables = [ReportVariable.loads, .feedIn, .gridConsumption]
 //            if currentDevice.hasBattery {
-                reportVariables.append(contentsOf: [.chargeEnergyToTal, .dischargeEnergyToTal])
+            reportVariables.append(contentsOf: [.chargeEnergyToTal, .dischargeEnergyToTal])
 //            }
 
 //            let totals = try await self.network.fetchReport(deviceID: currentDevice.deviceID,
@@ -188,7 +188,11 @@ class PowerFlowTabViewModel: ObservableObject {
                     "pvPower",
                     "meterPower2",
                     "ambientTemperation",
-                    "invTemperation"
+                    "invTemperation",
+                    "batChargePower",
+                    "batDischargePower",
+                    "SoC",
+                    "batTemperature"
                 ]
             )
             let currentValues = RealQueryResponseMapper.mapCurrentValues(response: real)
@@ -202,7 +206,14 @@ class PowerFlowTabViewModel: ObservableObject {
 //                                                           shouldInvertCT2: self.configManager.shouldInvertCT2,
 //                                                           shouldCombineCT2WithPVPower: self.configManager.shouldCombineCT2WithPVPower)
 
-            var battery: BatteryViewModel = .noBattery
+            var battery: BatteryViewModel = .init(
+                from: BatteryResponse(
+                    power: real.datas.currentValue(for: "batChargePower") - (0 - real.datas.currentValue(for: "batDischargePower")),
+                    soc: Int(real.datas.currentValue(for: "SoC")),
+                    residual: 0,
+                    temperature: real.datas.currentValue(for: "batTemperature")
+                )
+            )
 //            if currentDevice.hasBattery {
 //                do {
 //                    let response = try await self.network.fetchBattery(deviceID: currentDevice.deviceID)
@@ -218,16 +229,16 @@ class PowerFlowTabViewModel: ObservableObject {
                 home: currentViewModel.currentHomeConsumption,
                 grid: currentViewModel.currentGrid,
                 todaysGeneration: 0,
-                //earnings.today.generation,
+                // earnings.today.generation,
                 earnings: nil,
 //                earnings: nil, EarningsViewModel(
 //                    response: earnings,
 //                    energyStatsFinancialModel: EnergyStatsFinancialModel(totalsViewModel: totalsViewModel, config: self.configManager, currencySymbol: self.configManager.currencySymbol)
 //                ),
                 inverterTemperatures: currentViewModel.currentTemperatures,
-                homeTotal: 0, //totalsViewModel.home,
-                gridImportTotal: 0, //totalsViewModel.gridImport,
-                gridExportTotal: 0, //totalsViewModel.gridExport,
+                homeTotal: 0, // totalsViewModel.home,
+                gridImportTotal: 0, // totalsViewModel.gridImport,
+                gridExportTotal: 0, // totalsViewModel.gridExport,
                 ct2: currentViewModel.currentCT2
             )
 
