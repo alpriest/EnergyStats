@@ -107,7 +107,7 @@ struct ErrorAlertView: View {
                 showingFatalError = true
             }
         }
-        //.sheet(isPresented: $showingFatalError, content: { UnsupportedErrorView() })
+        .sheet(isPresented: $showingFatalError, content: { UnsupportedErrorView() })
     }
 
     private func rectReader(_ binding: Binding<CGFloat>) -> some View {

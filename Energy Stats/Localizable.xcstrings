@@ -4737,7 +4737,7 @@
         }
       }
     },
-    "Energy Stats was built on APIs that are used by the FoxESS cloud website and app, in the same way other 3rd party integrations were built." : {
+    "Energy Stats was built on technologies (APIs) that are used by the FoxESS cloud website and app, in the same way other 3rd party integrations were built." : {
 
     },
     "energy_stats_earnings_calculation_description" : {
@@ -5614,7 +5614,7 @@
         }
       }
     },
-    "FoxESS has recently made changes to their data access policies, which now limits the availability of certain data essential for Energy Stats to operate effectively. They have directed me towards using their OpenAPIs, but these do not currently include key pieces of information listed below. As a result, the functionality of Energy Stats is significantly impacted." : {
+    "FoxESS has recently made changes to their data access policies, which now limits the availability of certain data essential for Energy Stats to operate effectively. They have directed me towards using their OpenAPIs, but these do not currently include key pieces of information listed below. As a result, the functionality of Energy Stats is significantly impacted to the point where it is no longer viable." : {
 
     },
     "foxess_earnings_calculation_description" : {
@@ -12346,6 +12346,9 @@
         }
       }
     },
+    "Unsupported" : {
+
+    },
     "Usage today" : {
       "localizations" : {
         "de" : {
@@ -12392,7 +12395,7 @@
     "used in calculating the time to full/empty" : {
 
     },
-    "used in determining what inverters you have, and if you have solar attached to the current device for the flow tab" : {
+    "used in describing what inverters you have, and if you have solar attached to the current device for the flow tab" : {
 
     },
     "used in the stats tab, summary tab, and calculating today's yield" : {
