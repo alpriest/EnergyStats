@@ -32,7 +32,6 @@ public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging {
     var showBatteryTemperature: Bool { get set }
     var showBatteryEstimate: Bool { get set }
     var showUsableBatteryOnly: Bool { get set }
-    var showTotalYield: Bool { get set }
     var refreshFrequency: RefreshFrequency { get set }
     var decimalPlaces: Int { get set }
     var showSunnyBackground: Bool { get set }
@@ -58,6 +57,7 @@ public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging {
     var shouldCombineCT2WithPVPower: Bool { get set }
     var showGraphValueDescriptions: Bool { get set }
     var dataCeiling: DataCeiling { get set }
+    var totalSolarYieldModel: TotalSolarYieldModel { get set }
 }
 
 public protocol SolcastConfigManaging {
@@ -273,16 +273,6 @@ public class ConfigManager: ConfigManaging {
             config.showUsableBatteryOnly = newValue
             appSettingsPublisher.send(appSettingsPublisher.value.copy(
                 showUsableBatteryOnly: config.showUsableBatteryOnly
-            ))
-        }
-    }
-
-    public var showTotalYield: Bool {
-        get { config.showTotalYield }
-        set {
-            config.showTotalYield = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
-                showTotalYield: config.showTotalYield
             ))
         }
     }
@@ -537,6 +527,16 @@ public class ConfigManager: ConfigManaging {
             config.dataCeiling = newValue
             appSettingsPublisher.send(appSettingsPublisher.value.copy(
                 dataCeiling: config.dataCeiling
+            ))
+        }
+    }
+
+    public var totalSolarYieldModel: TotalSolarYieldModel {
+        get { TotalSolarYieldModel(rawValue: config.totalSolarYieldModel) ?? .energyStats }
+        set {
+            config.totalSolarYieldModel = newValue.rawValue
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+                totalSolarYieldModel: totalSolarYieldModel
             ))
         }
     }

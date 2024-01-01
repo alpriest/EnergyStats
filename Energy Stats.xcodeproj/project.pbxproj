@@ -251,6 +251,7 @@
 		41FB0D272AC19150002C8FED /* Energy_Stats_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; };
 		41FDAD502A01604F00EDACF3 /* variables.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FDAD4F2A01604F00EDACF3 /* variables.json */; };
 		41FE6BB12B0CBA7900A66CC3 /* SolcastSiteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FE6BB02B0CBA7900A66CC3 /* SolcastSiteView.swift */; };
+		41FF14ED2B432EEC00FAAF1D /* GenerationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FF14EC2B432EEC00FAAF1D /* GenerationViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -609,6 +610,7 @@
 		41F8D8F6292D7650005E2D18 /* report-day.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "report-day.json"; sourceTree = "<group>"; };
 		41FDAD4F2A01604F00EDACF3 /* variables.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = variables.json; sourceTree = "<group>"; };
 		41FE6BB02B0CBA7900A66CC3 /* SolcastSiteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolcastSiteView.swift; sourceTree = "<group>"; };
+		41FF14EC2B432EEC00FAAF1D /* GenerationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -738,6 +740,7 @@
 				418240772A9A33E300101064 /* TotalsViewModel.swift */,
 				41CA35722AA8C10900D45734 /* EarningsViewModel.swift */,
 				4190921C2B1D253D0017CB65 /* Schedule.swift */,
+				41FF14EC2B432EEC00FAAF1D /* GenerationViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -1741,6 +1744,7 @@
 				4190921F2B1D25890017CB65 /* Time.swift in Sources */,
 				412A26882AC07FC800F61456 /* BatteryCapacityCalculator.swift in Sources */,
 				41E165B72B0BAD7400B17590 /* UserDefaultsConfig.swift in Sources */,
+				41FF14ED2B432EEC00FAAF1D /* GenerationViewModel.swift in Sources */,
 				4103D1D329DB6C51001B0BC8 /* BatteryResponse.swift in Sources */,
 				4103D1D229DB6C51001B0BC8 /* NetworkError.swift in Sources */,
 				4103D1D429DB6C51001B0BC8 /* DeviceList.swift in Sources */,
@@ -1976,7 +1980,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.106;
+				MARKETING_VERSION = 1.108;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2034,7 +2038,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.106;
+				MARKETING_VERSION = 1.108;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

@@ -223,7 +223,6 @@ public class MockConfig: Config {
     public var selectedDeviceID: String?
     public var showUsableBatteryOnly: Bool = false
     public var displayUnit: Int = 0
-    public var showTotalYield: Bool = false
     public var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode = .off
     public var showFinancialEarnings: Bool = false
     public var financialModel: Int = FinancialModel.energyStats.rawValue
@@ -245,6 +244,7 @@ public class MockConfig: Config {
     public var shouldCombineCT2WithPVPower: Bool = true
     public var solcastSettings: SolcastSettings = .init(apiKey: nil, sites: [SolcastSite.preview()])
     public var dataCeiling: DataCeiling = .mild
+    public var totalSolarYieldModel: Int = 0
 }
 
 public class PreviewConfigManager: ConfigManager {

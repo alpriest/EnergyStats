@@ -19,7 +19,6 @@ public enum AppSettingsPublisherFactory {
                 showBatteryEstimate: config.showBatteryEstimate,
                 showUsableBatteryOnly: config.showUsableBatteryOnly,
                 displayUnit: DisplayUnit(rawValue: config.displayUnit) ?? .kilowatt,
-                showTotalYield: config.showTotalYield,
                 selfSufficiencyEstimateMode: config.selfSufficiencyEstimateMode,
                 showFinancialEarnings: config.showFinancialEarnings,
                 financialModel: FinancialModel(rawValue: config.financialModel) ?? .foxESS,
@@ -38,7 +37,8 @@ public enum AppSettingsPublisherFactory {
                 shouldCombineCT2WithPVPower: config.shouldCombineCT2WithPVPower,
                 showGraphValueDescriptions: config.showGraphValueDescriptions,
                 solcastSettings: config.solcastSettings,
-                dataCeiling: config.dataCeiling
+                dataCeiling: config.dataCeiling,
+                totalSolarYieldModel: TotalSolarYieldModel(rawValue: config.totalSolarYieldModel) ?? .energyStats
             )
         )
     }

@@ -20,10 +20,6 @@ struct DisplaySettingsView: View {
                     Text("Show coloured flow lines")
                 }
 
-                Toggle(isOn: $viewModel.showTotalYield) {
-                    Text("Show total yield")
-                }
-
                 Toggle(isOn: $viewModel.showHomeTotalOnPowerFlow) {
                     Text("settings.showHomeTotalOnPowerflow")
                 }
@@ -59,6 +55,26 @@ struct DisplaySettingsView: View {
             Text("Display")
         }
 
+        Section {
+            HStack {
+                Text("settings.yield.title").padding(.trailing)
+                Spacer()
+                Picker("settings.yield.title", selection: $viewModel.totalSolarYieldModel) {
+                    Text("Off").tag(TotalSolarYieldModel.off)
+                    Text("PV Only").tag(TotalSolarYieldModel.energyStats)
+                    Text("FoxESS").tag(TotalSolarYieldModel.foxESS)
+                }.pickerStyle(.segmented)
+            }
+        } footer: {
+            switch viewModel.totalSolarYieldModel {
+            case TotalSolarYieldModel.off:
+                EmptyView()
+            case TotalSolarYieldModel.energyStats:
+                Text("Calculated as a Riemann sum approximation integration of pvPower. This will be reasonably accurate but only for today.")
+            case TotalSolarYieldModel.foxESS:
+                Text("Uses the FoxESS supplied value which contains battery output and solar output.")
+            }
+        }
         Section {
             HStack {
                 Text("Units").padding(.trailing)

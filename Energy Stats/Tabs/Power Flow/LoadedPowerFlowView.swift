@@ -11,7 +11,7 @@ import SwiftUI
 
 struct LoadedPowerFlowView: View {
     @State private var iconFooterHeight: Double = 0
-    @State private var appSettings: AppSettings = .mock()
+    @State private var appSettings: AppSettings
     @State private var size: CGSize = .zero
     private let configManager: ConfigManaging
     private let viewModel: HomePowerFlowViewModel
@@ -21,7 +21,7 @@ struct LoadedPowerFlowView: View {
         self.configManager = configManager
         self.viewModel = viewModel
         self.appSettingsPublisher = appSettingsPublisher
-        self.appSettings = appSettingsPublisher.value
+        self._appSettings = State(wrappedValue: appSettingsPublisher.value)
     }
 
     var body: some View {
@@ -30,11 +30,12 @@ struct LoadedPowerFlowView: View {
                 if size == .zero {
                     Color.clear.frame(minWidth: 0, maxWidth: .infinity)
                 } else {
-                    if appSettings.showTotalYield {
+                    if appSettings.totalSolarYieldModel != .off {
                         HStack(spacing: 0) {
                             (Text("Yield today") + Text(" ")).accessibilityHidden(true)
-                            EnergyText(amount: viewModel.todaysGeneration, appSettings: appSettings, type: .totalYield)
+                            EnergyText(amount: viewModel.todaysGeneration.todayGeneration(appSettings.totalSolarYieldModel), appSettings: appSettings, type: .totalYield)
                         }
+                        .padding(.bottom, 8)
                     }
 
                     if appSettings.showFinancialEarnings {
@@ -56,8 +57,7 @@ struct LoadedPowerFlowView: View {
                             }
 
                             SolarPowerView(appSettings: appSettings, viewModel: SolarPowerViewModel(solar: viewModel.solar,
-                                                                                              generation: viewModel.todaysGeneration,
-                                                                                              earnings: viewModel.earnings))
+                                                                                                    earnings: viewModel.earnings))
 
                                 .frame(width: topColumnWidth, height: size.height * 0.35)
 
@@ -194,7 +194,7 @@ extension HomePowerFlowViewModel {
               battery: battery,
               home: 1.5,
               grid: 0.71,
-              todaysGeneration: 8.5,
+              todaysGeneration: GenerationViewModel(raws: [], todayGeneration: 8.5),
               earnings: .any(),
               inverterTemperatures: InverterTemperatures(ambient: 4.0, inverter: 9.0),
               homeTotal: 1.0,

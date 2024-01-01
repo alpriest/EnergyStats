@@ -54,6 +54,7 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "solcastApiKey") // Remove 2024
         UserDefaults.shared.removeObject(forKey: "solcastSettings")
         UserDefaults.shared.removeObject(forKey: "dataCeiling")
+        UserDefaults.shared.removeObject(forKey: "totalSolarYieldModel")
     }
 
     @UserDefaultsStoredBool(key: "showGraphValueDescriptions", defaultValue: true)
@@ -135,7 +136,7 @@ public class UserDefaultsConfig: Config {
     @UserDefaultsStoredBool(key: "showEarnings", defaultValue: false)
     public var showFinancialEarnings: Bool
 
-    @UserDefaultsStoredInt(key: "financialModel", defaultValue: 1)
+    @UserDefaultsStoredInt(key: "financialModel", defaultValue: FinancialModel.foxESS.rawValue)
     public var financialModel: Int
 
     @UserDefaultsStoredDouble(key: "feedInUnitPrice", defaultValue: 0.05)
@@ -202,4 +203,7 @@ public class UserDefaultsConfig: Config {
             UserDefaults.shared.set(newValue.rawValue, forKey: "dataCeiling")
         }
     }
+
+    @UserDefaultsStoredInt(key: "totalSolarYieldModel", defaultValue: TotalSolarYieldModel.energyStats.rawValue)
+    public var totalSolarYieldModel: Int
 }

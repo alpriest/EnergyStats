@@ -343,9 +343,6 @@
         }
       }
     },
-    "•" : {
-
-    },
     "°C" : {
       "localizations" : {
         "de" : {
@@ -2199,9 +2196,6 @@
         }
       }
     },
-    "Battery Charge Period setting" : {
-
-    },
     "Battery error. Tap for detail" : {
       "localizations" : {
         "de" : {
@@ -2229,12 +2223,6 @@
           }
         }
       }
-    },
-    "Battery Min SOC setting" : {
-
-    },
-    "Battery residual amount" : {
-
     },
     "Battery Schedule" : {
       "localizations" : {
@@ -2617,6 +2605,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Obliczone jako "
+          }
+        }
+      }
+    },
+    "Calculated as a Riemann sum approximation integration of pvPower. This will be reasonably accurate but only for today." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Berechnet als eine Riemann-Summen-Approximation der Integration von pvPower. Dies wird für heute recht genau sein."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calculado como una aproximación de la suma de Riemann de la integración de pvPower. Esto será razonablemente preciso, pero solo para hoy."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calcolato come un'approssimazione della somma di Riemann dell'integrazione di pvPower. Questo sarà ragionevolmente accurato, ma solo per oggi."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obliczona jako przybliżenie sumy Riemanna całkowania pvPower. Będzie to dość dokładne, ale tylko na dzisiaj."
           }
         }
       }
@@ -3784,9 +3800,6 @@
         }
       }
     },
-    "Datalogger data" : {
-
-    },
     "Day" : {
       "localizations" : {
         "de" : {
@@ -4158,9 +4171,6 @@
         }
       }
     },
-    "Device list" : {
-
-    },
     "Device List" : {
       "localizations" : {
         "de" : {
@@ -4407,12 +4417,6 @@
           }
         }
       }
-    },
-    "displayed at the top of the power flow tab" : {
-
-    },
-    "displayed in settings > inverter tab" : {
-
     },
     "Earnings" : {
       "extractionState" : "manual",
@@ -4736,9 +4740,6 @@
           }
         }
       }
-    },
-    "Energy Stats was built on technologies (APIs) that are used by the FoxESS cloud website and app, in the same way other 3rd party integrations were built." : {
-
     },
     "energy_stats_earnings_calculation_description" : {
       "localizations" : {
@@ -5340,9 +5341,6 @@
         }
       }
     },
-    "Firmware versions" : {
-
-    },
     "Firmware Versions" : {
       "localizations" : {
         "de" : {
@@ -5613,9 +5611,6 @@
           }
         }
       }
-    },
-    "FoxESS has recently made changes to their data access policies, which now limits the availability of certain data essential for Energy Stats to operate effectively. They have directed me towards using their OpenAPIs, but these do not currently include key pieces of information listed below. As a result, the functionality of Energy Stats is significantly impacted to the point where it is no longer viable." : {
-
     },
     "foxess_earnings_calculation_description" : {
       "localizations" : {
@@ -6279,9 +6274,6 @@
         }
       }
     },
-    "If a sufficient number of these information types become available I will be able to update the app." : {
-
-    },
     "import_total" : {
       "localizations" : {
         "de" : {
@@ -6558,9 +6550,6 @@
           }
         }
       }
-    },
-    "Inverter work mode setting" : {
-
     },
     "inverter_charge_schedule_deleted" : {
       "localizations" : {
@@ -8154,9 +8143,6 @@
         }
       }
     },
-    "Parameter data older than 3 days" : {
-
-    },
     "Parameter Groups" : {
       "localizations" : {
         "de" : {
@@ -8562,6 +8548,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Przewidywanie"
+          }
+        }
+      }
+    },
+    "PV Only" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nur PV"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solo PV"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solo PV"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tylko PV"
           }
         }
       }
@@ -10362,9 +10376,6 @@
         }
       }
     },
-    "Scheduler template management" : {
-
-    },
     "Schedules are not supported on this inverter." : {
       "localizations" : {
         "de" : {
@@ -10905,6 +10916,40 @@
         }
       }
     },
+    "settings.yield.title" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ertrag"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yield"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rendimiento"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rendimento"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wydajność"
+          }
+        }
+      }
+    },
     "Show battery full/empty estimate" : {
       "localizations" : {
         "de" : {
@@ -11242,34 +11287,6 @@
         }
       }
     },
-    "Show total yield" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zeige den Gesamtertrag"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mostrar producción total"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mostra resa totale"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pokaż całkowity wydajność"
-          }
-        }
-      }
-    },
     "Show usable battery only" : {
       "localizations" : {
         "de" : {
@@ -11580,9 +11597,6 @@
           }
         }
       }
-    },
-    "Statistics" : {
-
     },
     "Stats" : {
       "localizations" : {
@@ -12152,9 +12166,6 @@
         }
       }
     },
-    "Today's yield" : {
-
-    },
     "total" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -12280,9 +12291,6 @@
         }
       }
     },
-    "Unavailable information" : {
-
-    },
     "Units" : {
       "localizations" : {
         "de" : {
@@ -12347,7 +12355,32 @@
       }
     },
     "Unsupported" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nicht unterstützt"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No soportado"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non supportato"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nieobsługiwane"
+          }
+        }
+      }
     },
     "Usage today" : {
       "localizations" : {
@@ -12377,33 +12410,6 @@
         }
       }
     },
-    "used for adjusting min SOC settings" : {
-
-    },
-    "used for adjusting start/stop force charge periods" : {
-
-    },
-    "used for adjusting the current work mode (without schedule)" : {
-
-    },
-    "used for defining work mode scheduler templates" : {
-
-    },
-    "used for displaying data logger and signal strength" : {
-
-    },
-    "used in calculating the time to full/empty" : {
-
-    },
-    "used in describing what inverters you have, and if you have solar attached to the current device for the flow tab" : {
-
-    },
-    "used in the stats tab, summary tab, and calculating today's yield" : {
-
-    },
-    "used on the parameter tab for analysing historic behaviour" : {
-
-    },
     "Username" : {
       "localizations" : {
         "de" : {
@@ -12428,6 +12434,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nazwa użytkownika"
+          }
+        }
+      }
+    },
+    "Uses the FoxESS supplied value which contains battery output and solar output." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verwendet den von FoxESS gelieferten Wert, der die Batterieausgabe und Solarleistung enthält."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utiliza el valor suministrado por FoxESS, que contiene la salida de la batería y la salida solar."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utilizza il valore fornito da FoxESS, che include l'uscita della batteria e l'uscita solare."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wykorzystuje wartość dostarczoną przez FoxESS, która zawiera moc wyjściową baterii i energii słonecznej."
           }
         }
       }

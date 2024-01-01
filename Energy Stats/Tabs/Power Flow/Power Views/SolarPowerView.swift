@@ -11,7 +11,6 @@ import SwiftUI
 
 struct SolarPowerViewModel {
     let solar: Double
-    let generation: Double
     let earnings: EarningsViewModel
 }
 
@@ -57,23 +56,23 @@ struct SolarPowerView_Previews: PreviewProvider {
             HStack {
                 SolarPowerView(
                     appSettings: AppSettings.mock(),
-                    viewModel: SolarPowerViewModel(solar: 0, generation: 0, earnings: .any())
+                    viewModel: SolarPowerViewModel(solar: 0, earnings: .any())
                 )
                 SolarPowerView(
                     appSettings: AppSettings.mock(),
-                    viewModel: SolarPowerViewModel(solar: 0.5, generation: 1.5, earnings: .any())
+                    viewModel: SolarPowerViewModel(solar: 0.5, earnings: .any())
                 )
                 SolarPowerView(
                     appSettings: AppSettings.mock(),
-                    viewModel: SolarPowerViewModel(solar: 1.5, generation: 1.5, earnings: .any())
+                    viewModel: SolarPowerViewModel(solar: 1.5, earnings: .any())
                 )
                 SolarPowerView(
                     appSettings: AppSettings.mock(),
-                    viewModel: SolarPowerViewModel(solar: 2.5, generation: 4.5, earnings: .any())
+                    viewModel: SolarPowerViewModel(solar: 2.5, earnings: .any())
                 )
                 SolarPowerView(
                     appSettings: AppSettings.mock(),
-                    viewModel: SolarPowerViewModel(solar: 3.5, generation: 9.5, earnings: .any())
+                    viewModel: SolarPowerViewModel(solar: 3.5, earnings: .any())
                 )
             }
         }
@@ -100,7 +99,7 @@ struct AdjustableView: View {
     var body: some View {
         VStack {
             Color.clear.overlay(
-                SolarPowerView(appSettings: appSettings, viewModel: SolarPowerViewModel(solar: amount, generation: 8.5, earnings: .any()))
+                SolarPowerView(appSettings: appSettings, viewModel: SolarPowerViewModel(solar: amount, earnings: .any()))
             ).frame(height: 100)
 
             Slider(value: $amount, in: 0 ... maximum, step: 0.1, label: {

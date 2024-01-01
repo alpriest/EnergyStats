@@ -195,7 +195,7 @@ class PowerFlowTabViewModel: ObservableObject {
                 battery: battery,
                 home: currentViewModel.currentHomeConsumption,
                 grid: currentViewModel.currentGrid,
-                todaysGeneration: earnings.today.generation,
+                todaysGeneration: GenerationViewModel(raws: raws, todayGeneration: earnings.today.generation),
                 earnings: EarningsViewModel(response: earnings, energyStatsFinancialModel: EnergyStatsFinancialModel(totalsViewModel: totalsViewModel, config: self.configManager, currencySymbol: self.configManager.currencySymbol)),
                 inverterTemperatures: currentViewModel.currentTemperatures,
                 homeTotal: totalsViewModel.home,
@@ -248,5 +248,13 @@ class PowerFlowTabViewModel: ObservableObject {
         do {
             try await Task.sleep(nanoseconds: 1_000_000_000)
         } catch {}
+    }
+
+    func calculateSolar(_ raws: [RawResponse]) -> Double {
+        let filteredVariables = raws.filter { $0.variable == "pv1Power" || $0.variable == "pv2Power" }
+
+        let totalSum = filteredVariables.flatMap { $0.data }.reduce(0) { $0 + $1.value }
+
+        return Double(totalSum) / 12.0
     }
 }

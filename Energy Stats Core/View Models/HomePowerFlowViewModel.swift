@@ -21,7 +21,7 @@ public struct HomePowerFlowViewModel: Equatable {
     public let solar: Double
     public let home: Double
     public let grid: Double
-    public let todaysGeneration: Double
+    public let todaysGeneration: GenerationViewModel
     public let earnings: EarningsViewModel
     public let inverterTemperatures: InverterTemperatures?
     public let homeTotal: Double
@@ -34,7 +34,7 @@ public struct HomePowerFlowViewModel: Equatable {
                 battery: BatteryViewModel,
                 home: Double,
                 grid: Double,
-                todaysGeneration: Double,
+                todaysGeneration: GenerationViewModel,
                 earnings: EarningsViewModel,
                 inverterTemperatures: InverterTemperatures?,
                 homeTotal: Double,
@@ -100,7 +100,7 @@ public extension HomePowerFlowViewModel {
               battery: BatteryViewModel.noBattery,
               home: 0,
               grid: 0,
-              todaysGeneration: 0.0,
+              todaysGeneration: GenerationViewModel(raws: [], todayGeneration: 0.0),
               earnings: .empty(),
               inverterTemperatures: InverterTemperatures(ambient: 0.0, inverter: 0.0),
               homeTotal: 0,

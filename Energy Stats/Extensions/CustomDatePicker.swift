@@ -60,7 +60,7 @@ struct DatePickerSheet: View {
     let label: LocalizedStringKey
     @State var date: Date
     let onSelect: (Date) -> Void
-    @State private var timeStyleAccurate = true
+    @AppStorage("timeStyleAccurate") private var timeStyleAccurate = true
 
     init(label: LocalizedStringKey, date: Date, onSelect: @escaping (Date) -> Void) {
         self.label = label

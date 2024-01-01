@@ -40,12 +40,6 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
-    @Published var showTotalYield: Bool {
-        didSet {
-            config.showTotalYield = showTotalYield
-        }
-    }
-
     @Published var batteryCapacity: String
 
     @Published var showBatteryTemperature: Bool {
@@ -135,6 +129,12 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
+    @Published var totalSolarYieldModel: TotalSolarYieldModel {
+        didSet {
+            config.totalSolarYieldModel = totalSolarYieldModel
+        }
+    }
+
     private(set) var config: ConfigManaging
     private let userManager: UserManager
     private var cancellables = Set<AnyCancellable>()
@@ -155,7 +155,6 @@ class SettingsTabViewModel: ObservableObject {
         batteryCapacity = String(describing: config.batteryCapacity)
         hasBattery = config.hasBattery
         firmwareVersions = config.firmwareVersions
-        showTotalYield = config.showTotalYield
         showInverterTemperature = config.showInverterTemperature
         showHomeTotalOnPowerFlow = config.showHomeTotalOnPowerFlow
         showInverterIcon = config.showInverterIcon
@@ -167,6 +166,7 @@ class SettingsTabViewModel: ObservableObject {
         shouldCombineCT2WithPVPower = config.shouldCombineCT2WithPVPower
         showGraphValueDescriptions = config.showGraphValueDescriptions
         dataCeiling = config.dataCeiling
+        totalSolarYieldModel = config.totalSolarYieldModel
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }

@@ -14,6 +14,12 @@ public enum SelfSufficiencyEstimateMode: Int, RawRepresentable {
     case absolute = 2
 }
 
+public enum TotalSolarYieldModel: Int, RawRepresentable {
+    case off = 0
+    case energyStats = 1
+    case foxESS = 2
+}
+
 public struct AppSettings {
     public var showColouredLines: Bool
     public var showBatteryTemperature: Bool
@@ -22,7 +28,6 @@ public struct AppSettings {
     public var showBatteryEstimate: Bool
     public var showUsableBatteryOnly: Bool
     public var displayUnit: DisplayUnit
-    public var showTotalYield: Bool
     public var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode
     public var showFinancialEarnings: Bool
     public var financialModel: FinancialModel
@@ -42,6 +47,7 @@ public struct AppSettings {
     public var showGraphValueDescriptions: Bool
     public var solcastSettings: SolcastSettings
     public var dataCeiling: DataCeiling
+    public var totalSolarYieldModel: TotalSolarYieldModel
 
     public init(
         showColouredLines: Bool,
@@ -51,7 +57,6 @@ public struct AppSettings {
         showBatteryEstimate: Bool,
         showUsableBatteryOnly: Bool,
         displayUnit: DisplayUnit,
-        showTotalYield: Bool,
         selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode,
         showFinancialEarnings: Bool,
         financialModel: FinancialModel,
@@ -70,7 +75,8 @@ public struct AppSettings {
         shouldCombineCT2WithPVPower: Bool,
         showGraphValueDescriptions: Bool,
         solcastSettings: SolcastSettings,
-        dataCeiling: DataCeiling
+        dataCeiling: DataCeiling,
+        totalSolarYieldModel: TotalSolarYieldModel
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -79,7 +85,7 @@ public struct AppSettings {
         self.showBatteryEstimate = showBatteryEstimate
         self.showUsableBatteryOnly = showUsableBatteryOnly
         self.displayUnit = displayUnit
-        self.showTotalYield = showTotalYield
+        self.totalSolarYieldModel = totalSolarYieldModel
         self.selfSufficiencyEstimateMode = selfSufficiencyEstimateMode
         self.showFinancialEarnings = showFinancialEarnings
         self.financialModel = financialModel
@@ -109,7 +115,6 @@ public struct AppSettings {
         showBatteryEstimate: Bool? = nil,
         showUsableBatteryOnly: Bool? = nil,
         displayUnit: DisplayUnit? = nil,
-        showTotalYield: Bool? = nil,
         selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode? = nil,
         showFinancialEarnings: Bool? = nil,
         financialModel: FinancialModel? = nil,
@@ -128,7 +133,8 @@ public struct AppSettings {
         shouldCombineCT2WithPVPower: Bool? = nil,
         showGraphValueDescriptions: Bool? = nil,
         solcastSettings: SolcastSettings? = nil,
-        dataCeiling: DataCeiling? = nil
+        dataCeiling: DataCeiling? = nil,
+        totalSolarYieldModel: TotalSolarYieldModel? = nil
     ) -> AppSettings {
         AppSettings(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -138,7 +144,6 @@ public struct AppSettings {
             showBatteryEstimate: showBatteryEstimate ?? self.showBatteryEstimate,
             showUsableBatteryOnly: showUsableBatteryOnly ?? self.showUsableBatteryOnly,
             displayUnit: displayUnit ?? self.displayUnit,
-            showTotalYield: showTotalYield ?? self.showTotalYield,
             selfSufficiencyEstimateMode: selfSufficiencyEstimateMode ?? self.selfSufficiencyEstimateMode,
             showFinancialEarnings: showFinancialEarnings ?? self.showFinancialEarnings,
             financialModel: financialModel ?? self.financialModel,
@@ -157,7 +162,8 @@ public struct AppSettings {
             shouldCombineCT2WithPVPower: shouldCombineCT2WithPVPower ?? self.shouldCombineCT2WithPVPower,
             showGraphValueDescriptions: showGraphValueDescriptions ?? self.showGraphValueDescriptions,
             solcastSettings: solcastSettings ?? self.solcastSettings,
-            dataCeiling: dataCeiling ?? self.dataCeiling
+            dataCeiling: dataCeiling ?? self.dataCeiling,
+            totalSolarYieldModel: totalSolarYieldModel ?? self.totalSolarYieldModel
         )
     }
 }

@@ -21,7 +21,6 @@ public protocol Config {
     var selectedDeviceID: String? { get set }
     var showUsableBatteryOnly: Bool { get set }
     var displayUnit: Int { get set }
-    var showTotalYield: Bool { get set }
     var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode { get set }
     var showFinancialEarnings: Bool { get set }
     var financialModel: Int { get set }
@@ -44,6 +43,7 @@ public protocol Config {
     var showGraphValueDescriptions: Bool { get set }
     var solcastSettings: SolcastSettings { get set }
     var dataCeiling: DataCeiling { get set }
+    var totalSolarYieldModel: Int { get set }
 }
 
 public func DefaultParameterGroups() -> [ParameterGroup] {
