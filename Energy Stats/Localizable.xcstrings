@@ -7842,34 +7842,6 @@
         }
       }
     },
-    "Not supported" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nicht unterstützt"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No soportado"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Non supportato"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nieobsługiwane"
-          }
-        }
-      }
-    },
     "Note that not all parameters contain values" : {
       "localizations" : {
         "de" : {
@@ -10376,30 +10348,37 @@
         }
       }
     },
-    "Schedules are not supported on this inverter." : {
+    "schedules_unsupported" : {
+      "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zeitpläne werden von diesem Wechselrichter nicht unterstützt."
+            "value" : "Zeitpläne werden nicht unterstützt. Sie haben die Manager-Firmware-Version %1$@, Sie benötigen Version %2$@ oder höher."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schedules are not supported. You have manager firmware version %1$@, you need version %2$@ or greater."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Los horarios no son compatibles con este inversor."
+            "value" : "Los horarios no están soportados. Tienes la versión de firmware del gerente %1$@, necesitas la versión %2$@ o superior."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "I programmi non sono supportati su questo inverter."
+            "value" : "Le pianificazioni non sono supportate. Hai la versione del firmware del manager %1$@, ti serve la versione %2$@ o superiore."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Harmonogramy nie są obsługiwane przez ten falownik."
+            "value" : "Harmonogramy nie są obsługiwane. Masz wersję oprogramowania menedżera %1$@, potrzebujesz wersji %2$@ lub nowszej."
           }
         }
       }

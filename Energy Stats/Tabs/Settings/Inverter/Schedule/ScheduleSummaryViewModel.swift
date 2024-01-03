@@ -16,7 +16,8 @@ class ScheduleSummaryViewModel: ObservableObject {
     @Published var templates: [ScheduleTemplateSummary] = []
     @Published var alertContent: AlertContent?
     @Published var schedule: Schedule?
-    private var supported: Bool = false
+    @Published var supported: Bool = false
+    private let requiredManagerFirmwareVersion = "1.70"
 
     init(networking: FoxESSNetworking, config: ConfigManaging) {
         self.networking = networking
@@ -31,19 +32,17 @@ class ScheduleSummaryViewModel: ObservableObject {
             state == .inactive
         else { return }
 
-        state = .active("Loading")
+        self.state = .active("Loading")
 
         do {
             self.supported = try await self.networking.fetchSchedulerFlag(deviceSN: deviceSN).support
-            if self.supported {
+            if self.config.firmwareVersions.hasManager(greaterThan: self.requiredManagerFirmwareVersion) && self.supported {
                 self.modes = try await self.networking.fetchScheduleModes(deviceID: deviceID)
                 self.state = .inactive
             } else {
-                self.state = .inactive
-                self.alertContent = AlertContent(
-                    title: "Not supported",
-                    message: "Schedules are not supported on this inverter."
-                )
+                let message = String(key: .schedulesUnsupported, arguments: [self.config.firmwareVersions?.manager ?? "", requiredManagerFirmwareVersion])
+                self.state = .error(nil, message)
+                self.supported = false
             }
         } catch {
             self.state = LoadState.error(error, error.localizedDescription)
@@ -57,17 +56,22 @@ class ScheduleSummaryViewModel: ObservableObject {
             state == .inactive
         else { return }
 
-        if self.modes.count == 0 { await self.preload() }
-        state = .active("Loading")
+        if self.modes.count == 0 {
+            await self.preload()
+            if case .error = self.state {
+                return
+            }
+        }
+        self.state = .active("Loading")
 
         do {
             let scheduleResponse = try await networking.fetchCurrentSchedule(deviceSN: deviceSN)
 
             self.templates = scheduleResponse.data.compactMap { $0.toScheduleTemplate() }
             self.schedule = Schedule(name: "", phases: scheduleResponse.pollcy.compactMap { $0.toSchedulePhase(workModes: self.modes) })
-            setState(.inactive)
+            self.setState(.inactive)
         } catch {
-            setState(.error(error, error.localizedDescription))
+            self.setState(.error(error, error.localizedDescription))
         }
     }
 
@@ -79,13 +83,13 @@ class ScheduleSummaryViewModel: ObservableObject {
         else { return }
 
         do {
-            state = .active("Activating")
+            self.state = .active("Activating")
 
-            try await networking.enableScheduleTemplate(deviceSN: deviceSN, templateID: templateID)
-            await load()
-            setState(.inactive)
+            try await self.networking.enableScheduleTemplate(deviceSN: deviceSN, templateID: templateID)
+            await self.load()
+            self.setState(.inactive)
         } catch {
-            setState(.error(error, error.localizedDescription))
+            self.setState(.error(error, error.localizedDescription))
         }
     }
 

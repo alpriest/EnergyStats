@@ -20,6 +20,31 @@ struct ScheduleSummaryView: View {
     }
 
     var body: some View {
+        Group {
+            switch viewModel.state {
+            case .inactive:
+                content()
+            case let .error(_, reason):
+                Text(reason)
+                    .multilineTextAlignment(.center)
+            case let .active(reason):
+                Spacer()
+                HStack(spacing: 8) {
+                    Text(reason)
+                    ProgressView()
+                }
+                Spacer()
+            }
+        }
+        .onAppear {
+            Task { await self.viewModel.load() }
+        }
+        .navigationTitle("Work schedule")
+        .navigationBarTitleDisplayMode(.inline)
+    }
+
+    @ViewBuilder
+    private func content() -> some View {
         VStack(spacing: 0) {
             Form {
                 if let schedule = viewModel.schedule {
@@ -88,11 +113,7 @@ struct ScheduleSummaryView: View {
             }
         }
         .loadable($viewModel.state, retry: { Task { await viewModel.load() } })
-        .navigationTitle("Work schedule")
-        .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-            Task { await self.viewModel.load() }
-        }
+        .alert(alertContent: $viewModel.alertContent)
     }
 }
 
