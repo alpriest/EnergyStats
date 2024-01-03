@@ -16,7 +16,6 @@ class ScheduleSummaryViewModel: ObservableObject {
     @Published var templates: [ScheduleTemplateSummary] = []
     @Published var alertContent: AlertContent?
     @Published var schedule: Schedule?
-    @Published var supported: Bool = false
     private let requiredManagerFirmwareVersion = "1.70"
 
     init(networking: FoxESSNetworking, config: ConfigManaging) {
@@ -27,7 +26,6 @@ class ScheduleSummaryViewModel: ObservableObject {
     @MainActor
     func preload() async {
         guard
-            let deviceSN = config.currentDevice.value?.deviceSN,
             let deviceID = config.currentDevice.value?.deviceID,
             state == .inactive
         else { return }
@@ -35,14 +33,12 @@ class ScheduleSummaryViewModel: ObservableObject {
         self.state = .active("Loading")
 
         do {
-            self.supported = try await self.networking.fetchSchedulerFlag(deviceSN: deviceSN).support
-            if self.config.firmwareVersions.hasManager(greaterThan: self.requiredManagerFirmwareVersion) && self.supported {
+            if self.config.firmwareVersions.hasManager(greaterThan: self.requiredManagerFirmwareVersion) {
                 self.modes = try await self.networking.fetchScheduleModes(deviceID: deviceID)
                 self.state = .inactive
             } else {
-                let message = String(key: .schedulesUnsupported, arguments: [self.config.firmwareVersions?.manager ?? "", requiredManagerFirmwareVersion])
+                let message = String(key: .schedulesUnsupported, arguments: [self.config.firmwareVersions?.manager ?? "", self.requiredManagerFirmwareVersion])
                 self.state = .error(nil, message)
-                self.supported = false
             }
         } catch {
             self.state = LoadState.error(error, error.localizedDescription)
