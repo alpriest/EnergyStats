@@ -12,6 +12,16 @@ class FinancialsSettingsViewModel: ObservableObject {
     @Published var showFinancialSummary: Bool {
         didSet {
             configManager.showFinancialEarnings = showFinancialSummary
+
+            if !showFinancialSummary {
+                showFinancialSummaryOnFlowPage = false
+            }
+        }
+    }
+
+    @Published var showFinancialSummaryOnFlowPage: Bool {
+        didSet {
+            configManager.showFinancialSummaryOnFlowPage = showFinancialSummaryOnFlowPage
         }
     }
 
@@ -40,6 +50,7 @@ class FinancialsSettingsViewModel: ObservableObject {
     init(configManager: ConfigManaging) {
         self.configManager = configManager
         showFinancialSummary = configManager.showFinancialEarnings
+        showFinancialSummaryOnFlowPage = configManager.showFinancialSummaryOnFlowPage
         financialModel = configManager.financialModel
         energyStatsFeedInUnitPrice = configManager.feedInUnitPrice.roundedToString(decimalPlaces: 3)
         energyStatsGridImportUnitPrice = configManager.gridImportUnitPrice.roundedToString(decimalPlaces: 3)

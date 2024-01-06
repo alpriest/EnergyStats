@@ -114,7 +114,7 @@ struct PowerFlowView<S: Shape>: View {
                 Button {
                     visible.toggle()
                 } label: {
-                    Text("Toggle")
+                    Text(verbatim: "Toggle")
                 }
             }
         }

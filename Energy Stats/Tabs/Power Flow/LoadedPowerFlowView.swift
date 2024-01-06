@@ -38,7 +38,7 @@ struct LoadedPowerFlowView: View {
                         .padding(.bottom, 8)
                     }
 
-                    if appSettings.showFinancialEarnings {
+                    if appSettings.showFinancialSummaryOnFlowPage {
                         EarningsView(viewModel: viewModel.earnings, appSettings: appSettings)
                             .padding(.bottom, 8)
                     }

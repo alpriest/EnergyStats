@@ -48,6 +48,7 @@ public struct AppSettings {
     public var solcastSettings: SolcastSettings
     public var dataCeiling: DataCeiling
     public var totalSolarYieldModel: TotalSolarYieldModel
+    public var showFinancialSummaryOnFlowPage: Bool
 
     public init(
         showColouredLines: Bool,
@@ -76,7 +77,8 @@ public struct AppSettings {
         showGraphValueDescriptions: Bool,
         solcastSettings: SolcastSettings,
         dataCeiling: DataCeiling,
-        totalSolarYieldModel: TotalSolarYieldModel
+        totalSolarYieldModel: TotalSolarYieldModel,
+        showFinancialSummaryOnFlowPage: Bool
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -105,6 +107,7 @@ public struct AppSettings {
         self.showGraphValueDescriptions = showGraphValueDescriptions
         self.solcastSettings = solcastSettings
         self.dataCeiling = dataCeiling
+        self.showFinancialSummaryOnFlowPage = showFinancialSummaryOnFlowPage
     }
 
     public func copy(
@@ -134,7 +137,8 @@ public struct AppSettings {
         showGraphValueDescriptions: Bool? = nil,
         solcastSettings: SolcastSettings? = nil,
         dataCeiling: DataCeiling? = nil,
-        totalSolarYieldModel: TotalSolarYieldModel? = nil
+        totalSolarYieldModel: TotalSolarYieldModel? = nil,
+        showFinancialSummaryOnFlowPage: Bool? = nil
     ) -> AppSettings {
         AppSettings(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -163,7 +167,8 @@ public struct AppSettings {
             showGraphValueDescriptions: showGraphValueDescriptions ?? self.showGraphValueDescriptions,
             solcastSettings: solcastSettings ?? self.solcastSettings,
             dataCeiling: dataCeiling ?? self.dataCeiling,
-            totalSolarYieldModel: totalSolarYieldModel ?? self.totalSolarYieldModel
+            totalSolarYieldModel: totalSolarYieldModel ?? self.totalSolarYieldModel,
+            showFinancialSummaryOnFlowPage: showFinancialSummaryOnFlowPage ?? self.showFinancialSummaryOnFlowPage
         )
     }
 }

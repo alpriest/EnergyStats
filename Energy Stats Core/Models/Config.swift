@@ -44,6 +44,7 @@ public protocol Config {
     var solcastSettings: SolcastSettings { get set }
     var dataCeiling: DataCeiling { get set }
     var totalSolarYieldModel: Int { get set }
+    var showFinancialSummaryOnFlowPage: Bool { get set }
 }
 
 public func DefaultParameterGroups() -> [ParameterGroup] {

@@ -55,9 +55,9 @@ extension View {
 struct LoadState_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            Text("Hello").loadable(.constant(.active("Loading")), retry: {})
-            Text("Hello").loadable(.constant(.error(nil, "Something went wrong")), retry: {})
-            Text("Hello").loadable(.constant(.inactive), retry: {})
+            Text(verbatim: "Hello").loadable(.constant(.active("Loading")), retry: {})
+            Text(verbatim: "Hello").loadable(.constant(.error(nil, "Something went wrong")), retry: {})
+            Text(verbatim: "Hello").loadable(.constant(.inactive), retry: {})
         }
         .environment(\.locale, .init(identifier: "de"))
     }

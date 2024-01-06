@@ -27,6 +27,6 @@ extension View {
 }
 
 #Preview {
-    Text("Hello")
+    Text(verbatim: "Hello")
         .alertCopy("Hello")
 }

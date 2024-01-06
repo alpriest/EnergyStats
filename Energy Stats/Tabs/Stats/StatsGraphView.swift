@@ -143,7 +143,7 @@ struct StatsGraphView: View {
 @available(iOS 16.0, *)
 #Preview {
     VStack {
-        Text("Day by hours")
+        Text(verbatim: "Day by hours")
         StatsGraphView(
             viewModel: StatsTabViewModel(networking: DemoNetworking(), configManager: PreviewConfigManager()),
             selectedDate: .constant(nil),

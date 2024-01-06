@@ -55,6 +55,7 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "solcastSettings")
         UserDefaults.shared.removeObject(forKey: "dataCeiling")
         UserDefaults.shared.removeObject(forKey: "totalSolarYieldModel")
+        UserDefaults.shared.removeObject(forKey: "showFinancialSummaryOnFlowPage")
     }
 
     @UserDefaultsStoredBool(key: "showGraphValueDescriptions", defaultValue: true)
@@ -147,6 +148,9 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredString(key: "currencySymbol", defaultValue: "£")
     public var currencySymbol: String
+
+    @UserDefaultsStoredBool(key: "showFinancialSummaryOnFlowPage", defaultValue: true)
+    public var showFinancialSummaryOnFlowPage: Bool
 
     @UserDefaultsStoredBool(key: "shouldCombineCT2WithPVPower", defaultValue: true)
     public var shouldCombineCT2WithPVPower: Bool

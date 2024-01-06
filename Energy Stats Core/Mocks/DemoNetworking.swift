@@ -245,6 +245,7 @@ public class MockConfig: Config {
     public var solcastSettings: SolcastSettings = .init(apiKey: nil, sites: [SolcastSite.preview()])
     public var dataCeiling: DataCeiling = .mild
     public var totalSolarYieldModel: Int = 0
+    public var showFinancialSummaryOnFlowPage: Bool = true
 }
 
 public class PreviewConfigManager: ConfigManager {

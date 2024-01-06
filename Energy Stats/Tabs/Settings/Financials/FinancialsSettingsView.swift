@@ -23,6 +23,10 @@ struct FinancialsSettingsView: View {
                 }.accessibilityIdentifier("toggle_financial_summary")
 
                 if viewModel.showFinancialSummary {
+                    Toggle(isOn: $viewModel.showFinancialSummaryOnFlowPage) {
+                        Text("Show on flow page")
+                    }
+
                     Picker("Financial Model", selection: $viewModel.financialModel) {
                         Text("Energy Stats")
                             .tag(FinancialModel.energyStats)

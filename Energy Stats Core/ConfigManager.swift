@@ -8,69 +8,6 @@
 import Combine
 import Foundation
 
-public enum RefreshFrequency: Int {
-    case AUTO = 0
-    case ONE_MINUTE = 1
-    case FIVE_MINUTES = 5
-}
-
-public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging {
-    func fetchDevices() async throws
-    func logout()
-    func select(device: Device?)
-    func refreshFirmwareVersions() async throws
-    func clearBatteryOverride(for deviceID: String)
-    var appSettingsPublisher: LatestAppSettingsPublisher { get }
-
-    var hasRunBefore: Bool { get set }
-    var minSOC: Double { get }
-    var batteryCapacity: String { get set }
-    var batteryCapacityW: Int { get }
-    var isDemoUser: Bool { get set }
-    var showColouredLines: Bool { get set }
-    var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode { get set }
-    var showBatteryTemperature: Bool { get set }
-    var showBatteryEstimate: Bool { get set }
-    var showUsableBatteryOnly: Bool { get set }
-    var refreshFrequency: RefreshFrequency { get set }
-    var decimalPlaces: Int { get set }
-    var showSunnyBackground: Bool { get set }
-    var devices: [Device]? { get set }
-    var selectedDeviceID: String? { get }
-    var firmwareVersions: DeviceFirmwareVersion? { get }
-    var displayUnit: DisplayUnit { get set }
-    var variables: [RawVariable] { get }
-    var currentDevice: CurrentValueSubject<Device?, Never> { get }
-    var hasBattery: Bool { get }
-    var showInverterTemperature: Bool { get set }
-    var selectedParameterGraphVariables: [String] { get set }
-    var showHomeTotalOnPowerFlow: Bool { get set }
-    var showInverterIcon: Bool { get set }
-    var shouldInvertCT2: Bool { get set }
-    var showInverterPlantName: Bool { get set }
-    var showGridTotalsOnPowerFlow: Bool { get set }
-    var showInverterTypeNameOnPowerFlow: Bool { get set }
-    var showLastUpdateTimestamp: Bool { get set }
-    var solarDefinitions: SolarRangeDefinitions { get set }
-    var parameterGroups: [ParameterGroup] { get set }
-    var currencySymbol: String { get set }
-    var shouldCombineCT2WithPVPower: Bool { get set }
-    var showGraphValueDescriptions: Bool { get set }
-    var dataCeiling: DataCeiling { get set }
-    var totalSolarYieldModel: TotalSolarYieldModel { get set }
-}
-
-public protocol SolcastConfigManaging {
-    var solcastSettings: SolcastSettings { get set }
-}
-
-public protocol FinancialConfigManaging {
-    var showFinancialEarnings: Bool { get set }
-    var financialModel: FinancialModel { get set }
-    var feedInUnitPrice: Double { get set }
-    var gridImportUnitPrice: Double { get set }
-}
-
 public class ConfigManager: ConfigManaging {
     private let networking: FoxESSNetworking
     private var config: Config
@@ -328,6 +265,16 @@ public class ConfigManager: ConfigManaging {
             config.showFinancialEarnings = newValue
             appSettingsPublisher.send(appSettingsPublisher.value.copy(
                 showFinancialEarnings: config.showFinancialEarnings
+            ))
+        }
+    }
+
+    public var showFinancialSummaryOnFlowPage: Bool {
+        get { config.showFinancialSummaryOnFlowPage }
+        set {
+            config.showFinancialSummaryOnFlowPage = newValue
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+                showFinancialSummaryOnFlowPage: config.showFinancialSummaryOnFlowPage
             ))
         }
     }

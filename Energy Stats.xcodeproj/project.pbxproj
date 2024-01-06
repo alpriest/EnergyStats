@@ -221,6 +221,7 @@
 		41D8402D2AB2E0DE00769E81 /* ErrorMessagesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D8402C2AB2E0DE00769E81 /* ErrorMessagesResponse.swift */; };
 		41DB220F2B1F965C00EC4015 /* EditTemplateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DB220E2B1F965C00EC4015 /* EditTemplateView.swift */; };
 		41DB22112B1F967500EC4015 /* EditTemplateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DB22102B1F967500EC4015 /* EditTemplateViewModel.swift */; };
+		41DB4F2D2B4940A800DAB5BB /* ConfigManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DB4F2C2B4940A800DAB5BB /* ConfigManaging.swift */; };
 		41DC515A2AE2E9DC00FD348B /* NetworkValueCleaner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DC51592AE2E9DC00FD348B /* NetworkValueCleaner.swift */; };
 		41DCF5422B06C20B0010843F /* solcast.json in Resources */ = {isa = PBXBuildFile; fileRef = 41DCF5412B06C20B0010843F /* solcast.json */; };
 		41DCF5442B06CBD40010843F /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DCF5432B06CBD40010843F /* Date.swift */; };
@@ -579,6 +580,7 @@
 		41D8402C2AB2E0DE00769E81 /* ErrorMessagesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessagesResponse.swift; sourceTree = "<group>"; };
 		41DB220E2B1F965C00EC4015 /* EditTemplateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTemplateView.swift; sourceTree = "<group>"; };
 		41DB22102B1F967500EC4015 /* EditTemplateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTemplateViewModel.swift; sourceTree = "<group>"; };
+		41DB4F2C2B4940A800DAB5BB /* ConfigManaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManaging.swift; sourceTree = "<group>"; };
 		41DC51592AE2E9DC00FD348B /* NetworkValueCleaner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkValueCleaner.swift; sourceTree = "<group>"; };
 		41DCF5412B06C20B0010843F /* solcast.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = solcast.json; sourceTree = "<group>"; };
 		41DCF5432B06CBD40010843F /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
@@ -1147,6 +1149,7 @@
 				41757BBB2A90A05E00573FB4 /* AmountType.swift */,
 				41DF51D12AA4CF6D007B5102 /* MockAppTheme.swift */,
 				41E3BEC22B1B5A160051C68B /* AppSettingsPublisherFactory.swift */,
+				41DB4F2C2B4940A800DAB5BB /* ConfigManaging.swift */,
 			);
 			path = "Energy Stats Core";
 			sourceTree = "<group>";
@@ -1738,6 +1741,7 @@
 				41E165BD2B0BE33E00B17590 /* Array+Any.swift in Sources */,
 				41757BBD2A90A06E00573FB4 /* LocalizedString.swift in Sources */,
 				4103D1E429DB6D12001B0BC8 /* KeychainStore.swift in Sources */,
+				41DB4F2D2B4940A800DAB5BB /* ConfigManaging.swift in Sources */,
 				419576172AC2F29600EB7362 /* BatteryWidgetState.swift in Sources */,
 				4103D1DF29DB6C8C001B0BC8 /* DemoNetworking.swift in Sources */,
 				41CB714A2A3B1B6C00199415 /* StyleGuide.swift in Sources */,
@@ -1980,7 +1984,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.110;
+				MARKETING_VERSION = 1.111;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2038,7 +2042,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.110;
+				MARKETING_VERSION = 1.111;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

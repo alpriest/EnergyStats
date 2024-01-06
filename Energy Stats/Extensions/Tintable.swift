@@ -30,10 +30,10 @@ extension View {
 
 #Preview {
     VStack {
-        Text("hello world")
+        Text(verbatim: "hello world")
             .tinted(enabled: .constant(true), color: .green)
 
-        Text("hello world")
+        Text(verbatim: "hello world")
             .tinted(enabled: .constant(false), color: .green)
     }
 }
