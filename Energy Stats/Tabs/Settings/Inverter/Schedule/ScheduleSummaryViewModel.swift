@@ -26,19 +26,25 @@ class ScheduleSummaryViewModel: ObservableObject {
     @MainActor
     func preload() async {
         guard
-            let deviceID = config.currentDevice.value?.deviceID,
+            let device = config.currentDevice.value,
             state == .inactive
         else { return }
 
         self.state = .active("Loading")
 
         do {
-            if self.config.firmwareVersions.hasManager(greaterThan: self.requiredManagerFirmwareVersion) {
-                self.modes = try await self.networking.fetchScheduleModes(deviceID: deviceID)
-                self.state = .inactive
-            } else {
-                let message = String(key: .schedulesUnsupported, arguments: [self.config.firmwareVersions?.manager ?? "", self.requiredManagerFirmwareVersion])
+            let supported = try await networking.fetchSchedulerFlag(deviceSN: device.deviceSN).support
+            if !supported {
+                let message = String(key: .schedulesUnsupported, arguments: [device.deviceDisplayName])
                 self.state = .error(nil, message)
+            } else {
+                if self.config.firmwareVersions.hasManager(greaterThan: self.requiredManagerFirmwareVersion) {
+                    self.modes = try await self.networking.fetchScheduleModes(deviceID: device.deviceID)
+                    self.state = .inactive
+                } else {
+                    let message = String(key: .schedulesUnsupportedFirmware, arguments: [self.config.firmwareVersions?.manager ?? "", self.requiredManagerFirmwareVersion])
+                    self.state = .error(nil, message)
+                }
             }
         } catch {
             self.state = LoadState.error(error, error.localizedDescription)
