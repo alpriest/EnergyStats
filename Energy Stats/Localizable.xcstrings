@@ -10566,6 +10566,34 @@
         }
       }
     },
+    "Separate parameter graphs by unit" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trenne Parameterdiagramme nach Einheit"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Separa los gráficos de parámetros por unidad"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Separa i grafici dei parametri per unità"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oddziel wykresy parametrów według jednostki"
+          }
+        }
+      }
+    },
     "Settings" : {
       "localizations" : {
         "de" : {

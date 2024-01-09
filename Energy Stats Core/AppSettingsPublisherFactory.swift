@@ -39,7 +39,8 @@ public enum AppSettingsPublisherFactory {
                 solcastSettings: config.solcastSettings,
                 dataCeiling: config.dataCeiling,
                 totalSolarYieldModel: TotalSolarYieldModel(rawValue: config.totalSolarYieldModel) ?? .energyStats,
-                showFinancialSummaryOnFlowPage: config.showFinancialSummaryOnFlowPage
+                showFinancialSummaryOnFlowPage: config.showFinancialSummaryOnFlowPage,
+                separateParameterGraphsByUnit: config.separateParameterGraphsByUnit
             )
         )
     }

@@ -59,6 +59,7 @@ public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging {
     var dataCeiling: DataCeiling { get set }
     var totalSolarYieldModel: TotalSolarYieldModel { get set }
     var showFinancialSummaryOnFlowPage: Bool { get set }
+    var separateParameterGraphsByUnit: Bool { get set }
 }
 
 public protocol SolcastConfigManaging {

@@ -10,6 +10,12 @@ import Energy_Stats_Core
 import SwiftUI
 
 class SettingsTabViewModel: ObservableObject {
+    @Published var separateParameterGraphsByUnit: Bool {
+        didSet {
+            config.separateParameterGraphsByUnit = separateParameterGraphsByUnit
+        }
+    }
+
     @Published var showGraphValueDescriptions: Bool {
         didSet {
             config.showGraphValueDescriptions = showGraphValueDescriptions
@@ -167,6 +173,7 @@ class SettingsTabViewModel: ObservableObject {
         showGraphValueDescriptions = config.showGraphValueDescriptions
         dataCeiling = config.dataCeiling
         totalSolarYieldModel = config.totalSolarYieldModel
+        separateParameterGraphsByUnit = config.separateParameterGraphsByUnit
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }

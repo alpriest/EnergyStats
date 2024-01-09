@@ -246,6 +246,7 @@ public class MockConfig: Config {
     public var dataCeiling: DataCeiling = .mild
     public var totalSolarYieldModel: Int = 0
     public var showFinancialSummaryOnFlowPage: Bool = true
+    public var separateParameterGraphsByUnit: Bool = true
 }
 
 public class PreviewConfigManager: ConfigManager {

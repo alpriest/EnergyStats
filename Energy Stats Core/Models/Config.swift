@@ -45,6 +45,7 @@ public protocol Config {
     var dataCeiling: DataCeiling { get set }
     var totalSolarYieldModel: Int { get set }
     var showFinancialSummaryOnFlowPage: Bool { get set }
+    var separateParameterGraphsByUnit: Bool { get set }
 }
 
 public func DefaultParameterGroups() -> [ParameterGroup] {

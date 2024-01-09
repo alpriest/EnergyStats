@@ -50,6 +50,10 @@ struct DisplaySettingsView: View {
                 Toggle(isOn: $viewModel.showGraphValueDescriptions) {
                     Text("Show graph value descriptions")
                 }
+
+                Toggle(isOn: $viewModel.separateParameterGraphsByUnit) {
+                    Text("Separate parameter graphs by unit")
+                }
             }
         } header: {
             Text("Display")

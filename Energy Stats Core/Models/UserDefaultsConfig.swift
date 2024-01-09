@@ -56,6 +56,7 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "dataCeiling")
         UserDefaults.shared.removeObject(forKey: "totalSolarYieldModel")
         UserDefaults.shared.removeObject(forKey: "showFinancialSummaryOnFlowPage")
+        UserDefaults.shared.removeObject(forKey: "separateParameterGraphsByUnit")
     }
 
     @UserDefaultsStoredBool(key: "showGraphValueDescriptions", defaultValue: true)
@@ -210,4 +211,7 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredInt(key: "totalSolarYieldModel", defaultValue: TotalSolarYieldModel.energyStats.rawValue)
     public var totalSolarYieldModel: Int
+
+    @UserDefaultsStoredBool(key: "separateParameterGraphsByUnit", defaultValue: true)
+    public var separateParameterGraphsByUnit: Bool
 }

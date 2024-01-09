@@ -42,7 +42,8 @@ public extension AppSettings {
             solcastSettings: SolcastSettings(apiKey: nil, sites: []),
             dataCeiling: DataCeiling.mild,
             totalSolarYieldModel: TotalSolarYieldModel.energyStats,
-            showFinancialSummaryOnFlowPage: true
+            showFinancialSummaryOnFlowPage: true,
+            separateParameterGraphsByUnit: true
         )
     }
 }

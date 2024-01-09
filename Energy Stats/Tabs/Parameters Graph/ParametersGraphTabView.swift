@@ -49,13 +49,22 @@ struct ParametersGraphTabView: View {
                             }.padding(.vertical)
                         }.frame(maxWidth: .infinity)
 
-                        ForEach(Array(viewModel.data.keys.sorted { $0 < $1 }), id: \.self) { key in
-                            ParametersGraphView(key: key,
+                        if configManager.separateParameterGraphsByUnit {
+                            ForEach(Array(viewModel.data.keys.sorted { $0 < $1 }), id: \.self) { key in
+                                ParametersGraphView(key: key,
+                                                    viewModel: viewModel,
+                                                    selectedDate: $selectedDate,
+                                                    valuesAtTime: $valuesAtTime)
+                                .frame(height: 250)
+                                .padding(.vertical)
+                            }
+                        } else {
+                            ParametersGraphView(key: nil,
                                                 viewModel: viewModel,
                                                 selectedDate: $selectedDate,
                                                 valuesAtTime: $valuesAtTime)
-                                .frame(height: 250)
-                                .padding(.vertical)
+                            .frame(height: 250)
+                            .padding(.vertical)
                         }
                     }
 

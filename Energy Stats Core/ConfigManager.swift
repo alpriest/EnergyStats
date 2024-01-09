@@ -487,6 +487,16 @@ public class ConfigManager: ConfigManaging {
             ))
         }
     }
+
+    public var separateParameterGraphsByUnit: Bool {
+        get { config.separateParameterGraphsByUnit }
+        set {
+            config.separateParameterGraphsByUnit = newValue
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+                separateParameterGraphsByUnit: config.separateParameterGraphsByUnit
+            ))
+        }
+    }
 }
 
 public enum BatteryResponseMapper {

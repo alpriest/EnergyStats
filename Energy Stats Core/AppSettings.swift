@@ -49,6 +49,7 @@ public struct AppSettings {
     public var dataCeiling: DataCeiling
     public var totalSolarYieldModel: TotalSolarYieldModel
     public var showFinancialSummaryOnFlowPage: Bool
+    public var separateParameterGraphsByUnit: Bool
 
     public init(
         showColouredLines: Bool,
@@ -78,7 +79,8 @@ public struct AppSettings {
         solcastSettings: SolcastSettings,
         dataCeiling: DataCeiling,
         totalSolarYieldModel: TotalSolarYieldModel,
-        showFinancialSummaryOnFlowPage: Bool
+        showFinancialSummaryOnFlowPage: Bool,
+        separateParameterGraphsByUnit: Bool
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -108,6 +110,7 @@ public struct AppSettings {
         self.solcastSettings = solcastSettings
         self.dataCeiling = dataCeiling
         self.showFinancialSummaryOnFlowPage = showFinancialSummaryOnFlowPage
+        self.separateParameterGraphsByUnit = separateParameterGraphsByUnit
     }
 
     public func copy(
@@ -138,7 +141,8 @@ public struct AppSettings {
         solcastSettings: SolcastSettings? = nil,
         dataCeiling: DataCeiling? = nil,
         totalSolarYieldModel: TotalSolarYieldModel? = nil,
-        showFinancialSummaryOnFlowPage: Bool? = nil
+        showFinancialSummaryOnFlowPage: Bool? = nil,
+        separateParameterGraphsByUnit: Bool? = nil
     ) -> AppSettings {
         AppSettings(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -168,7 +172,8 @@ public struct AppSettings {
             solcastSettings: solcastSettings ?? self.solcastSettings,
             dataCeiling: dataCeiling ?? self.dataCeiling,
             totalSolarYieldModel: totalSolarYieldModel ?? self.totalSolarYieldModel,
-            showFinancialSummaryOnFlowPage: showFinancialSummaryOnFlowPage ?? self.showFinancialSummaryOnFlowPage
+            showFinancialSummaryOnFlowPage: showFinancialSummaryOnFlowPage ?? self.showFinancialSummaryOnFlowPage,
+            separateParameterGraphsByUnit: separateParameterGraphsByUnit ?? self.separateParameterGraphsByUnit
         )
     }
 }

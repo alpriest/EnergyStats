@@ -11,19 +11,24 @@ import SwiftUI
 
 @available(iOS 16.0, *)
 struct ParametersGraphView: View {
-    let key: String
+    private let key: String?
     @ObservedObject var viewModel: ParametersGraphTabViewModel
     @GestureState var isDetectingPress = true
     @Binding var selectedDate: Date?
     @Binding var valuesAtTime: ValuesAtTime<ParameterGraphValue>?
     private let data: [ParameterGraphValue]
 
-    init(key: String, viewModel: ParametersGraphTabViewModel, selectedDate: Binding<Date?>, valuesAtTime: Binding<ValuesAtTime<ParameterGraphValue>?>) {
+    init(key: String?, viewModel: ParametersGraphTabViewModel, selectedDate: Binding<Date?>, valuesAtTime: Binding<ValuesAtTime<ParameterGraphValue>?>) {
         self.key = key
         self.viewModel = viewModel
         self._selectedDate = selectedDate
         self._valuesAtTime = valuesAtTime
-        self.data = viewModel.data[key] ?? []
+
+        if let key {
+            self.data = viewModel.data[key] ?? []
+        } else {
+            self.data = viewModel.data.values.flatMap { $0 }
+        }
     }
 
     var body: some View {
@@ -54,7 +59,11 @@ struct ParametersGraphView: View {
                 if let amount = value.as(Double.self) {
                     AxisGridLine()
                     AxisValueLabel {
-                        Text("\(amount, format: .number) \(key)")
+                        if let key {
+                            Text("\(amount, format: .number) \(key)")
+                        } else {
+                            Text("\(amount, format: .number)")
+                        }
                     }
                 }
             }
