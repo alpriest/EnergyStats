@@ -113,6 +113,7 @@
 		416318B929DDD44C00C2C285 /* DebugDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416318B829DDD44C00C2C285 /* DebugDataView.swift */; };
 		416318BE29DDD80E00C2C285 /* View+Copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416318BD29DDD80E00C2C285 /* View+Copy.swift */; };
 		416318C029DDD82800C2C285 /* ResponseDebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416318BF29DDD82800C2C285 /* ResponseDebugView.swift */; };
+		4163CA7C2B4DE46D00FDA232 /* APIKeyLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4163CA7B2B4DE46D00FDA232 /* APIKeyLoginView.swift */; };
 		416AE4362A7D2C8B003D0122 /* InverterSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416AE4352A7D2C8B003D0122 /* InverterSettingsView.swift */; };
 		416AE4382A7D956E003D0122 /* AlertCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416AE4372A7D956E003D0122 /* AlertCopy.swift */; };
 		416AE43A2A7FA76E003D0122 /* InverterWorkModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416AE4392A7FA76E003D0122 /* InverterWorkModeView.swift */; };
@@ -463,6 +464,7 @@
 		416318B829DDD44C00C2C285 /* DebugDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugDataView.swift; sourceTree = "<group>"; };
 		416318BD29DDD80E00C2C285 /* View+Copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Copy.swift"; sourceTree = "<group>"; };
 		416318BF29DDD82800C2C285 /* ResponseDebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseDebugView.swift; sourceTree = "<group>"; };
+		4163CA7B2B4DE46D00FDA232 /* APIKeyLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeyLoginView.swift; sourceTree = "<group>"; };
 		416AE4352A7D2C8B003D0122 /* InverterSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterSettingsView.swift; sourceTree = "<group>"; };
 		416AE4372A7D956E003D0122 /* AlertCopy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCopy.swift; sourceTree = "<group>"; };
 		416AE4392A7FA76E003D0122 /* InverterWorkModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterWorkModeView.swift; sourceTree = "<group>"; };
@@ -960,6 +962,7 @@
 			children = (
 				41339C7128CC7B7B0062B976 /* LoginView.swift */,
 				4141B1FF28D86C7200B60157 /* UserManager.swift */,
+				4163CA7B2B4DE46D00FDA232 /* APIKeyLoginView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1661,6 +1664,7 @@
 				4107446128C9EF6B006D5D7D /* LoadedPowerFlowView.swift in Sources */,
 				4190922C2B1E49210017CB65 /* ScheduleView.swift in Sources */,
 				41923E3E2916BC6F00D1A8C5 /* ParametersGraphView.swift in Sources */,
+				4163CA7C2B4DE46D00FDA232 /* APIKeyLoginView.swift in Sources */,
 				41FE6BB12B0CBA7900A66CC3 /* SolcastSiteView.swift in Sources */,
 				41AF2F432AA4C6C1008FCA2E /* HomePowerFooterView.swift in Sources */,
 				41E165BB2B0BE1BD00B17590 /* ForecastView.swift in Sources */,
