@@ -28,10 +28,17 @@ public struct GenerationViewModel {
     }
 
     func calculateSolar(_ raws: [RawResponse]) -> Double {
-        let filteredVariables = raws.filter { $0.variable == "pvPower" }
+        let filteredVariables = raws.filter { $0.variable == "pvPower" }.flatMap { $0.data }
 
-        let totalSum = filteredVariables.flatMap { $0.data }.reduce(0) { $0 + $1.value }
+        let timeDifferenceInSeconds: TimeInterval
+        if let firstTime = filteredVariables[safe: 0]?.time, let secondTime = filteredVariables[safe: 1]?.time {
+            timeDifferenceInSeconds = (secondTime.timeIntervalSince1970 - firstTime.timeIntervalSince1970)
+        } else {
+            timeDifferenceInSeconds = 5.0 * 60.0
+        }
 
-        return Double(totalSum) / 12.0
+        let totalSum = filteredVariables.reduce(0) { $0 + $1.value }
+
+        return Double(totalSum) * (timeDifferenceInSeconds / 3600.0)
     }
 }

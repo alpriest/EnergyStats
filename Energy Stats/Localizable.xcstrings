@@ -427,6 +427,9 @@
         }
       }
     },
+    "1. Login at https://www.foxesscloud.com/" : {
+
+    },
     "2" : {
       "localizations" : {
         "de" : {
@@ -454,6 +457,9 @@
           }
         }
       }
+    },
+    "2. Click the person icon top-right" : {
+
     },
     "3" : {
       "localizations" : {
@@ -483,6 +489,12 @@
         }
       }
     },
+    "3. Click the User Profile menu option" : {
+
+    },
+    "4. Click Generate API key" : {
+
+    },
     "5 mins" : {
       "localizations" : {
         "de" : {
@@ -511,6 +523,9 @@
         }
       }
     },
+    "5. Copy the API key (make a note of it securely)" : {
+
+    },
     "6 hours" : {
       "localizations" : {
         "de" : {
@@ -538,6 +553,9 @@
           }
         }
       }
+    },
+    "6. Paste the API key above" : {
+
     },
     "08:00" : {
       "localizations" : {
@@ -12026,6 +12044,9 @@
         }
       }
     },
+    "This change to API key was required by FoxESS in January 2024. The FoxESS site does not function well on mobile devices. Please do not contact Energy Stats with issues about the FoxESS website, only FoxESS will be able to assist you in any issues with their site." : {
+
+    },
     "This unit price is managed on the FoxESS Cloud." : {
       "localizations" : {
         "de" : {
@@ -12207,6 +12228,9 @@
           }
         }
       }
+    },
+    "To get your API key:" : {
+
     },
     "total" : {
       "extractionState" : "manual",
