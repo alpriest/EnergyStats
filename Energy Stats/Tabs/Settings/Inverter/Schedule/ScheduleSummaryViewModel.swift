@@ -16,7 +16,6 @@ class ScheduleSummaryViewModel: ObservableObject {
     @Published var templates: [ScheduleTemplateSummary] = []
     @Published var alertContent: AlertContent?
     @Published var schedule: Schedule?
-    private let requiredManagerFirmwareVersion = "1.70"
 
     init(networking: FoxESSNetworking, config: ConfigManaging) {
         self.networking = networking
@@ -35,16 +34,11 @@ class ScheduleSummaryViewModel: ObservableObject {
         do {
             let supported = try await networking.fetchSchedulerFlag(deviceSN: device.deviceSN).support
             if !supported {
-                let message = String(key: .schedulesUnsupported, arguments: [device.deviceDisplayName])
+                let message = String(key: .schedulesUnsupported, arguments: [device.deviceDisplayName, self.config.firmwareVersions?.manager ?? ""])
                 self.state = .error(nil, message)
             } else {
-                if self.config.firmwareVersions.hasManager(greaterThan: self.requiredManagerFirmwareVersion) {
-                    self.modes = try await self.networking.fetchScheduleModes(deviceID: device.deviceID)
-                    self.state = .inactive
-                } else {
-                    let message = String(key: .schedulesUnsupportedFirmware, arguments: [self.config.firmwareVersions?.manager ?? "", self.requiredManagerFirmwareVersion])
-                    self.state = .error(nil, message)
-                }
+                self.modes = try await self.networking.fetchScheduleModes(deviceID: device.deviceID)
+                self.state = .inactive
             }
         } catch {
             self.state = LoadState.error(error, error.localizedDescription)

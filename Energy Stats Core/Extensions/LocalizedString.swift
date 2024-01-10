@@ -45,7 +45,6 @@ public struct LocalizedString {
         case dataCeilingMild = "data_ceiling_mild"
         case dataCeilingEnhanced = "data_ceiling_enhanced"
         case schedulesUnsupported = "schedules_unsupported"
-        case schedulesUnsupportedFirmware = "schedules_unsupported_firmware"
 
         public enum Accessibility: String, RawRepresentable {
             case inverter = "accessibility.inverter"

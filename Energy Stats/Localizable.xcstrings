@@ -10344,66 +10344,31 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zeitpläne werden auf deinem %1$@ nicht unterstützt."
+            "value" : "Zeitpläne werden auf Ihrem %1$@ mit der Firmware-Version, die Sie haben %2$@, nicht unterstützt."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Schedules are not supported on your %1$@."
+            "value" : "Schedules are not supported on your %1$@ with the firmware version you have %2$@."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Los horarios no son compatibles con tu %1$@."
+            "value" : "Los horarios no son compatibles con su %1$@ con la versión de firmware que tiene %2$@."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Le pianificazioni non sono supportate sul tuo %1$@."
+            "value" : "Gli orari non sono supportati sul tuo %1$@ con la versione del firmware che hai %2$@."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Harmonogramy nie są obsługiwane na twoim %1$@."
-          }
-        }
-      }
-    },
-    "schedules_unsupported_firmware" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Du hast die Manager-Firmware-Version %1$@, du benötigst Version %2$@ oder höher für die Zeitplanung."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You have manager firmware version %1$@, you need version %2$@ or greater for scheduling."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tienes la versión %1$@ del firmware del gestor, necesitas la versión %2$@ o superior para programar."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hai la versione %1$@ del firmware del manager, ti serve la versione %2$@ o superiore per la pianificazione."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Masz wersję %1$@ firmware menedżera, potrzebujesz wersji %2$@ lub nowszej do planowania."
+            "value" : "Harmonogramy nie są obsługiwane na twoim %1$@ z wersją oprogramowania układowego, którą masz %2$@."
           }
         }
       }
