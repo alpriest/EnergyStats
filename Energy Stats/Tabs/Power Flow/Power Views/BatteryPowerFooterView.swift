@@ -43,6 +43,7 @@ struct BatteryPowerFooterView: View {
             }
         }
         .opacity(viewModel.hasError ? 0.2 : 1.0)
+        .accessibilityElement(children: .combine)
     }
 }
 

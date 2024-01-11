@@ -20,8 +20,10 @@ struct HomePowerFooterView: View {
                     .multilineTextAlignment(.center)
                     .font(.caption)
                     .foregroundColor(Color("text_dimmed"))
+                    .accessibilityHidden(true)
             }
         }
+        .accessibilityElement(children: .combine)
     }
 }
 

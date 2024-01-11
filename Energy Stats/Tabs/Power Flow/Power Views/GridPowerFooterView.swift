@@ -20,13 +20,16 @@ struct GridPowerFooterView: View {
                 Text("import_total")
                     .font(.caption)
                     .foregroundColor(Color("text_dimmed"))
+                    .accessibilityHidden(true)
 
                 EnergyText(amount: exportTotal, appSettings: appSettings, type: .totalExport)
                 Text("export_total")
                     .font(.caption)
                     .foregroundColor(Color("text_dimmed"))
+                    .accessibilityHidden(true)
             }
         }
+        .accessibilityElement(children: .combine)
     }
 }
 
