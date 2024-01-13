@@ -45,7 +45,7 @@ class HomeEnergyStateManager {
         let appSettingsPublisher = AppSettingsPublisherFactory.make(from: config)
         let configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher)
 
-        guard let deviceID = config.selectedDeviceID else {
+        guard let deviceID = config.selectedDeviceSN else {
             throw ConfigManager.NoDeviceFoundError()
         }
         guard configManager.hasBattery else {

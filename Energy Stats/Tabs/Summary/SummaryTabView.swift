@@ -51,10 +51,6 @@ struct SummaryTabView: View {
                                 moneySummaryRow(title: "total_benefit", amount: model.total.amount)
                             }
 
-                            if let earnings = approximationsViewModel.earnings, case .foxESS = appSettings.financialModel {
-                                moneySummaryRow(title: "total_benefit", amount: earnings.cumulate.earnings)
-                            }
-
                             Text("Includes data from \(viewModel.oldestDataDate) to Present. Figures are approximate and assume the buy/sell energy prices remained constant throughout the period of ownership.")
                                 .font(.caption2)
                                 .padding(.vertical)

@@ -26,11 +26,11 @@ public class ConfigManager: ConfigManaging {
         self.networking = networking
         self.config = config
         self.appSettingsPublisher = appSettingsPublisher
-        selectedDeviceID = selectedDeviceID
+        selectedDeviceSN = selectedDeviceSN
     }
 
     public func fetchDevices() async throws {
-        let deviceList = try await networking.fetchDeviceList()
+        let deviceList = try await networking.openapi_fetchDeviceList()
         config.variables = try await networking.openapi_fetchVariables().compactMap {
             guard let unit = $0.unit else { return nil }
             return Variable(name: $0.name, variable: $0.name, unit: unit)
@@ -40,8 +40,8 @@ public class ConfigManager: ConfigManaging {
             throw NoDeviceFoundError()
         }
 
-        let newDevices = try await deviceList.asyncMap { device in
-            let deviceBattery: Device.Battery?
+        let newDevices = deviceList.map { device in
+//            let deviceBattery: Device.Battery?
 //            let firmware = try await fetchFirmwareVersions(deviceID: device.deviceID) // TODO: This will be in the device response
 //            let variables = try await networking.fetchVariables(deviceID: device.deviceID)
 
@@ -61,13 +61,13 @@ public class ConfigManager: ConfigManaging {
             return Device(
                 deviceSN: device.deviceSN,
                 stationName: device.stationName,
-                battery: deviceBattery,
+                battery: nil,
                 firmware: DeviceFirmwareVersion(master: device.masterVersion, slave: device.slaveVersion, manager: device.managerVersion),
                 moduleSN: device.moduleSN
             )
         }
         devices = newDevices
-        if selectedDeviceID == nil {
+        if selectedDeviceSN == nil {
             select(device: devices?.first)
         }
     }
@@ -89,7 +89,7 @@ public class ConfigManager: ConfigManaging {
     public func select(device: Device?) {
         guard let device else { return }
 
-        selectedDeviceID = device.deviceID
+        selectedDeviceSN = device.deviceSN
     }
 
     public var firmwareVersions: DeviceFirmwareVersion? {
@@ -105,16 +105,16 @@ public class ConfigManager: ConfigManaging {
     public var batteryCapacity: String {
         get {
             if let currentDevice = currentDevice.value {
-                let override = config.deviceBatteryOverrides[currentDevice.deviceID]
+                let override = config.deviceBatteryOverrides[currentDevice.deviceSN]
 
-                return override ?? currentDevice.battery?.capacity ?? "0"
+                return override ?? "0"
             } else {
                 return "0"
             }
         }
         set {
             if let currentDevice = currentDevice.value {
-                config.deviceBatteryOverrides[currentDevice.deviceID] = newValue
+                config.deviceBatteryOverrides[currentDevice.deviceSN] = newValue
             }
 
             devices = devices?.map {
@@ -133,18 +133,19 @@ public class ConfigManager: ConfigManaging {
     }
 
     public var hasBattery: Bool {
-        currentDevice.value?.hasBattery ?? false
+        true //TODO: Move to config
+//        currentDevice.value?.hasBattery ?? false
     }
 
     public var batteryCapacityW: Int {
         Int(batteryCapacity) ?? 0
     }
 
-    public var selectedDeviceID: String? {
-        get { config.selectedDeviceID }
+    public var selectedDeviceSN: String? {
+        get { config.selectedDeviceSN }
         set {
-            config.selectedDeviceID = newValue
-            currentDevice.send(devices?.first(where: { $0.deviceID == selectedDeviceID }) ?? devices?.first)
+            config.selectedDeviceSN = newValue
+            currentDevice.send(devices?.first(where: { $0.deviceSN == selectedDeviceSN }) ?? devices?.first)
         }
     }
 

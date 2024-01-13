@@ -9,9 +9,9 @@ import Energy_Stats_Core
 import SwiftUI
 
 class InverterChoiceViewModel: ObservableObject {
-    @Published var selectedDeviceID: String {
+    @Published var selectedDeviceSN: String {
         didSet {
-            configManager.select(device: devices.first(where: { $0.deviceID == selectedDeviceID }))
+            configManager.select(device: devices.first(where: { $0.deviceSN == selectedDeviceSN }))
         }
     }
 
@@ -21,7 +21,7 @@ class InverterChoiceViewModel: ObservableObject {
 
     init(configManager: ConfigManaging) {
         self.configManager = configManager
-        self.selectedDeviceID = configManager.selectedDeviceID ?? ""
+        self.selectedDeviceSN = configManager.selectedDeviceSN ?? ""
         self.devices = configManager.devices ?? []
     }
 }
@@ -33,10 +33,10 @@ struct InverterChoiceView: View {
         if viewModel.devices.count > 1 {
             Section(
                 content: {
-                    Picker("Inverter", selection: $viewModel.selectedDeviceID) {
-                        ForEach(viewModel.devices, id: \.deviceID) { device in
+                    Picker("Inverter", selection: $viewModel.selectedDeviceSN) {
+                        ForEach(viewModel.devices, id: \.deviceSN) { device in
                             Text(device.deviceSelectorName)
-                                .tag(device.deviceID)
+                                .tag(device.deviceSN)
                         }
                     }
                 },

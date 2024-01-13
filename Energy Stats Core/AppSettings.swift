@@ -39,7 +39,6 @@ public struct AppSettings {
     public var shouldInvertCT2: Bool
     public var showInverterPlantName: Bool
     public var showGridTotalsOnPowerFlow: Bool
-    public var showInverterTypeNameOnPowerFlow: Bool
     public var showLastUpdateTimestamp: Bool
     public var solarDefinitions: SolarRangeDefinitions
     public var parameterGroups: [ParameterGroup]

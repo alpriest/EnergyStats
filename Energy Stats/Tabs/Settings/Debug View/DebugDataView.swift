@@ -36,21 +36,6 @@ struct DebugDataView: View {
                         fetcher: nil
                     )
                 }
-                NavigationLink("Battery") {
-                    ResponseDebugView<BatteryResponse>(
-                        store: store,
-                        title: "Battery",
-                        missing: "Data is fetched and cached on the power flow view.",
-                        mapper: { $0.batteryResponse },
-                        fetcher: {
-                            if let deviceID = configManager.currentDevice.value?.deviceID {
-                                _ = try await networking.fetchBattery(deviceID: deviceID)
-                            } else {
-                                throw NoCurrentDeviceFoundError()
-                            }
-                        }
-                    )
-                }
                 NavigationLink("Battery Settings") {
                     ResponseDebugView<BatterySettingsResponse>(
                         store: store,
@@ -82,28 +67,13 @@ struct DebugDataView: View {
                     )
                 }
                 NavigationLink("Device List") {
-                    ResponseDebugView<[PagedDeviceListResponse.Device]>(
+                    ResponseDebugView<[DeviceDetailResponse]>(
                         store: store,
                         title: "Device List",
                         missing: "Device list is fetched and recached on login, logout and login to see the data response.",
                         mapper: { $0.deviceListResponse },
                         fetcher: {
-                            _ = try await networking.fetchDeviceList()
-                        }
-                    )
-                }
-                NavigationLink("Firmware Versions") {
-                    ResponseDebugView<AddressBookResponse>(
-                        store: store,
-                        title: "Firmware Versions",
-                        missing: "Firmware version is fetched and recached on login, logout and login to see the data response.",
-                        mapper: { $0.addressBookResponse },
-                        fetcher: {
-                            if let deviceID = configManager.currentDevice.value?.deviceID {
-                                _ = try await networking.fetchAddressBook(deviceID: deviceID)
-                            } else {
-                                throw NoCurrentDeviceFoundError()
-                            }
+                            _ = try await networking.openapi_fetchDeviceList()
                         }
                     )
                 }
@@ -123,7 +93,7 @@ struct DebugDataView_Previews: PreviewProvider {
             store.rawResponse = try NetworkOperation(description: "fetchRaw", value: await network.fetchRaw(deviceID: "123", variables: [RawVariable(name: "BatChargePower", variable: "batChargePower", unit: "kW")], queryDate: .now()), raw: "test".data(using: .utf8)!)
             store.reportResponse = try NetworkOperation(description: "fetchReport", value: await network.fetchReport(deviceID: "123", variables: [.chargeEnergyToTal], queryDate: .now(), reportType: .day), raw: "test".data(using: .utf8)!)
             store.batteryResponse = try NetworkOperation(description: "fetchBattery", value: await network.fetchBattery(deviceID: "123"), raw: "test".data(using: .utf8)!)
-            store.deviceListResponse = try NetworkOperation(description: "fetchDeviceList", value: await network.fetchDeviceList(), raw: "test".data(using: .utf8)!)
+            store.deviceListResponse = try NetworkOperation(description: "fetchDeviceList", value: await network.openapi_fetchDeviceList(), raw: "test".data(using: .utf8)!)
         }
 
         return NavigationView {

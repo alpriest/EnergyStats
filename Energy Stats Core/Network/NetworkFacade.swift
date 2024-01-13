@@ -144,11 +144,11 @@ public class NetworkFacade: FoxESSNetworking {
         }
     }
 
-    public func fetchDeviceList() async throws -> [PagedDeviceListResponse.Device] {
+    public func openapi_fetchDeviceList() async throws -> [DeviceDetailResponse] {
         return if isDemoUser {
-            try await fakeNetwork.fetchDeviceList()
+            try await fakeNetwork.openapi_fetchDeviceList()
         } else {
-            try await network.fetchDeviceList()
+            try await network.openapi_fetchDeviceList()
         }
     }
 
@@ -165,14 +165,6 @@ public class NetworkFacade: FoxESSNetworking {
             try await fakeNetwork.fetchVariables(deviceID: deviceID)
         } else {
             try await network.fetchVariables(deviceID: deviceID)
-        }
-    }
-
-    public func fetchEarnings(deviceID: String) async throws -> EarningsResponse {
-        return if isDemoUser {
-            try await fakeNetwork.fetchEarnings(deviceID: deviceID)
-        } else {
-            try await network.fetchEarnings(deviceID: deviceID)
         }
     }
 
@@ -253,6 +245,14 @@ public class NetworkFacade: FoxESSNetworking {
             try await fakeNetwork.openapi_fetchVariables()
         } else {
             try await network.openapi_fetchVariables()
+        }
+    }
+
+    public func openapi_fetchReport(deviceSN: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [OpenReportResponse] {
+        if isDemoUser {
+            try await fakeNetwork.openapi_fetchReport(deviceSN: deviceSN, variables: variables, queryDate: queryDate, reportType: reportType)
+        } else {
+            try await network.openapi_fetchReport(deviceSN: deviceSN, variables: variables, queryDate: queryDate, reportType: reportType)
         }
     }
 }

@@ -11,6 +11,7 @@ extension URL {
     static var getOpenRealData = URL(string: "https://www.foxesscloud.com/op/v0/device/real/query")!
     static var getOpenHistoryData = URL(string: "https://www.foxesscloud.com/op/v0/device/history/query")!
     static var getOpenVariables = URL(string: "https://www.foxesscloud.com/op/v0/device/variable/get")!
+    static var getOpenReportData = URL(string: "https://www.foxesscloud.com/op/v0/device/report/query")!
 }
 
 public extension Network {
@@ -56,17 +57,12 @@ public extension Network {
         return result.0.array
     }
 
-    func openapi_fetchDeviceList() async throws -> [String] {
-        var request = URLRequest(url: URL.getOpenRealData)
+    func openapi_fetchReport(deviceSN: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [OpenReportResponse] {
+        var request = URLRequest(url: URL.getOpenReportData)
         request.httpMethod = "POST"
-        request.httpBody = try! JSONEncoder().encode(OpenQueryRequest(deviceSN: nil, variables: ["invTemperation"]))
+        request.httpBody = try! JSONEncoder().encode(OpenReportRequest(deviceSN: deviceSN, variables: variables, queryDate: queryDate, dimension: reportType))
 
-        do {
-            let result: ([OpenQueryResponse], Data) = try await fetch(request)
-            return result.0.map { $0.deviceSN }
-        } catch {
-            print(error)
-            throw error
-        }
+        let result: ([OpenReportResponse], Data) = try await fetch(request)
+        return result.0
     }
 }

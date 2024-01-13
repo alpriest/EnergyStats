@@ -97,9 +97,9 @@ public class DemoNetworking: FoxESSNetworking {
         }
     }
 
-    public func fetchDeviceList() async throws -> [PagedDeviceListResponse.Device] {
+    public func openapi_fetchDeviceList() async throws -> [DeviceDetailResponse] {
         [
-            PagedDeviceListResponse.Device(
+            DeviceDetailResponse(
                 deviceSN: "5678",
                 moduleSN: "sn-1",
                 plantID: "p1",
@@ -109,9 +109,9 @@ public class DemoNetworking: FoxESSNetworking {
                 slaveVersion: "3.0",
                 hardwareVersion: "4.0",
                 status: 1,
-                function: PagedDeviceListResponse.Function(scheduler: false)
+                function: DeviceDetailResponse.Function(scheduler: false)
             ),
-            PagedDeviceListResponse.Device(
+            DeviceDetailResponse(
                 deviceSN: "1234",
                 moduleSN: "sn-2",
                 plantID: "p2",
@@ -121,7 +121,7 @@ public class DemoNetworking: FoxESSNetworking {
                 slaveVersion: "3.0",
                 hardwareVersion: "4.0",
                 status: 1,
-                function: PagedDeviceListResponse.Function(scheduler: false)
+                function: DeviceDetailResponse.Function(scheduler: false)
             )
         ]
     }
@@ -179,14 +179,6 @@ public class DemoNetworking: FoxESSNetworking {
         return result.variables
     }
 
-    public func fetchEarnings(deviceID: String) async throws -> EarningsResponse {
-        let data = try data(filename: "earnings")
-        let response = try JSONDecoder().decode(NetworkResponse<EarningsResponse>.self, from: data)
-        guard let result = response.result else { throw NetworkError.invalidToken }
-
-        return result
-    }
-
     private func data(filename: String) throws -> Data {
         guard let url = Bundle(for: type(of: self)).url(forResource: filename, withExtension: "json") else {
             return Data()
@@ -225,14 +217,14 @@ public class DemoNetworking: FoxESSNetworking {
         OpenQueryResponse(time: Date(),
                           deviceSN: deviceSN,
                           datas: [
-                              OpenQueryResponse.Data(unit: "kW", variable: "feedinPower", value: 0.0),
-                              OpenQueryResponse.Data(unit: "kW", variable: "gridConsumptionPower", value: 2.634),
-                              OpenQueryResponse.Data(unit: "kW", variable: "loadsPower", value: 2.708),
-                              OpenQueryResponse.Data(unit: "kW", variable: "generationPower", value: 0.071),
-                              OpenQueryResponse.Data(unit: "kW", variable: "pvPower", value: 0.111),
-                              OpenQueryResponse.Data(unit: "kW", variable: "meterPower2", value: 0.0),
-                              OpenQueryResponse.Data(unit: "℃", variable: "ambientTemperation", value: 32.5),
-                              OpenQueryResponse.Data(unit: "℃", variable: "invTemperation", value: 23.2)
+                            OpenQueryResponse.Data(unit: "kW", variable: "feedinPower", value: 0.0),
+                            OpenQueryResponse.Data(unit: "kW", variable: "gridConsumptionPower", value: 2.634),
+                            OpenQueryResponse.Data(unit: "kW", variable: "loadsPower", value: 2.708),
+                            OpenQueryResponse.Data(unit: "kW", variable: "generationPower", value: 0.071),
+                            OpenQueryResponse.Data(unit: "kW", variable: "pvPower", value: 0.111),
+                            OpenQueryResponse.Data(unit: "kW", variable: "meterPower2", value: 0.0),
+                            OpenQueryResponse.Data(unit: "℃", variable: "ambientTemperation", value: 32.5),
+                            OpenQueryResponse.Data(unit: "℃", variable: "invTemperation", value: 23.2)
                           ])
     }
 
@@ -241,6 +233,10 @@ public class DemoNetworking: FoxESSNetworking {
     }
 
     public func openapi_fetchVariables() async throws -> [OpenApiVariable] {
+        []
+    }
+
+    public func openapi_fetchReport(deviceSN: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [OpenReportResponse] {
         []
     }
 }
@@ -265,7 +261,7 @@ public class MockConfig: Config {
     public var decimalPlaces: Int = 3
     public var showSunnyBackground: Bool = true
     public var devices: Data?
-    public var selectedDeviceID: String?
+    public var selectedDeviceSN: String?
     public var showUsableBatteryOnly: Bool = false
     public var displayUnit: Int = 0
     public var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode = .off

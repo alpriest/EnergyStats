@@ -143,3 +143,28 @@ public struct OpenHistoryResponse: Decodable {
         }
     }
 }
+
+public struct OpenReportRequest: Encodable {
+    let sn: String
+    let dimension: ReportType
+    let variables: [String]
+    let queryDate: QueryDate
+
+    internal init(deviceSN: String, variables: [ReportVariable], queryDate: QueryDate, dimension: ReportType) {
+        self.sn = deviceSN
+        self.variables = variables.map { $0.networkTitle }
+        self.queryDate = queryDate
+        self.dimension = dimension
+    }
+}
+
+public struct OpenReportResponse: Decodable {
+    public let variable: String
+    public let unit: String
+    public let values: [ReportData]
+
+    public struct ReportData: Decodable, Hashable {
+        public let index: Int
+        public let value: Double
+    }
+}

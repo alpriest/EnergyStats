@@ -18,9 +18,7 @@ struct BatterySettingsView: View {
             NavigationLink("Minimum charge levels") {
                 BatterySOCSettingsView(networking: viewModel.networking,
                                        config: viewModel.config,
-                                       onSOCchange: {
-                                           viewModel.recalculateBatteryCapacity()
-                                       })
+                                       onSOCchange: {})
             }.accessibilityIdentifier("minimum charge levels")
 
             NavigationLink("Charge times") {
@@ -67,15 +65,7 @@ struct BatterySettingsView: View {
                 header: { Text("Display Options") },
                 footer: {
                     VStack(alignment: .leading) {
-                        Button("Recalculate capacity", action: {
-                            viewModel.recalculateBatteryCapacity()
-                        })
-                        .buttonStyle(.bordered)
-                        .padding(.bottom, 4)
-
-                        Text("Calculated as ") +
-                            Text("capacity = residual / (Min SOC / 100)").italic() +
-                            Text(" where residual is estimated by your installation and may not be accurate. Tap the capacity above to enter a manual value.")
+                        Text("Tap the capacity above to enter a manual value.")
                     }
                 }
             ).alert("Invalid Battery Capacity", isPresented: $viewModel.showAlert, actions: {

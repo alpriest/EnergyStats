@@ -111,16 +111,6 @@ struct ApproximationsView: View {
                             Text(financialModel.total.formattedAmount())
                         }
                     }
-
-                    if let earnings = viewModel.earnings, case .foxESS = appSettings.financialModel {
-                        VStack(spacing: 2) {
-                            HStack {
-                                Text("Accumulated income")
-                                Spacer()
-                                Text(FinanceAmount(title: .total, amount: earnings.cumulate.earnings, currencySymbol: earnings.currencySymbol).formattedAmount())
-                            }
-                        }
-                    }
                 }
                 .padding()
                 .monospacedDigit()

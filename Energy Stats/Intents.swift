@@ -20,7 +20,7 @@ struct CheckBatteryChargeLevelIntent: AppIntent {
         let store = KeychainStore()
         let network = Network(credentials: store, store: InMemoryLoggingNetworkStore())
         let config = UserDefaultsConfig()
-        guard let deviceID = config.selectedDeviceID else {
+        guard let deviceID = config.selectedDeviceSN else {
             throw ConfigManager.NoDeviceFoundError()
         }
         let battery = try await network.fetchBattery(deviceID: deviceID)
@@ -81,7 +81,7 @@ struct ChangeWorkModeIntent: AppIntent {
         let store = KeychainStore()
         let network = Network(credentials: store, store: InMemoryLoggingNetworkStore())
         let config = UserDefaultsConfig()
-        guard let deviceID = config.selectedDeviceID else {
+        guard let deviceID = config.selectedDeviceSN else {
             throw ConfigManager.NoDeviceFoundError()
         }
         try await network.setWorkMode(deviceID: deviceID, workMode: workMode.asInverterWorkMode())

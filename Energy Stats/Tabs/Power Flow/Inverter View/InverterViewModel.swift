@@ -12,7 +12,7 @@ struct SelectableDevice: Identifiable {
     let device: Device
     let isSelected: Bool
 
-    var id: String { device.deviceID }
+    var id: String { device.deviceSN }
 }
 
 class InverterViewModel: ObservableObject {
@@ -30,7 +30,7 @@ class InverterViewModel: ObservableObject {
     func updateDevices() {
         let deviceList = configManager.devices ?? []
         devices = deviceList.map {
-            SelectableDevice(device: $0, isSelected: configManager.selectedDeviceID == $0.deviceID)
+            SelectableDevice(device: $0, isSelected: configManager.selectedDeviceSN == $0.deviceSN)
         }
     }
 
@@ -43,12 +43,8 @@ class InverterViewModel: ObservableObject {
         devices.count > 1
     }
 
-    var deviceType: String? {
-        configManager.currentDevice.value?.deviceType
-    }
-
-    var devicePlantName: String? {
-        configManager.currentDevice.value?.plantName
+    var deviceStationName: String? {
+        configManager.currentDevice.value?.stationName
     }
 
     var deviceDisplayName: String? {

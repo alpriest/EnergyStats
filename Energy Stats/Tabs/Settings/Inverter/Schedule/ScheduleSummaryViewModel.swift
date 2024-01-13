@@ -37,7 +37,33 @@ class ScheduleSummaryViewModel: ObservableObject {
                 let message = String(key: .schedulesUnsupported, arguments: [device.deviceDisplayName, self.config.firmwareVersions?.manager ?? ""])
                 self.state = .error(nil, message)
             } else {
-                self.modes = try await self.networking.fetchScheduleModes(deviceID: device.deviceID)
+                self.modes = [
+                    SchedulerModeResponse(
+                      color: "#80F6BD16",
+                      name: "Back Up",
+                      key: "Backup"
+                    ),
+                    SchedulerModeResponse(
+                      color: "#805B8FF9",
+                      name: "Feed-in Priority",
+                      key: "Feedin"
+                    ),
+                      SchedulerModeResponse(
+                      color: "#80BBE9FB",
+                      name: "Force Charge",
+                      key: "ForceCharge"
+                    ),
+                      SchedulerModeResponse(
+                      color: "#8065789B",
+                      name: "Force Discharge",
+                      key: "ForceDischarge"
+                    ),
+                      SchedulerModeResponse(
+                      color: "#8061DDAA",
+                      name: "Self-Use",
+                      key: "SelfUse"
+                    )
+                  ]
                 self.state = .inactive
             }
         } catch {

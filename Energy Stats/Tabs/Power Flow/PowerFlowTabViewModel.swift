@@ -23,7 +23,6 @@ class PowerFlowTabViewModel: ObservableObject {
     private var currentDeviceCancellable: AnyCancellable?
     private var themeChangeCancellable: AnyCancellable?
     private var latestAppTheme: AppSettings
-    private var hasRefreshedFirmware = false
 
     enum State: Equatable {
         case unloaded
@@ -126,11 +125,11 @@ class PowerFlowTabViewModel: ObservableObject {
         defer { isLoading = false }
 
         do {
-            if self.configManager.currentDevice.value == nil {
+            if self.configManager.selectedDeviceSN == nil {
                 try await self.configManager.fetchDevices()
             }
 
-            guard let currentDevice = configManager.currentDevice.value else {
+            guard let currentDeviceSN = configManager.selectedDeviceSN else {
                 self.state = .failed(nil, "No devices found. Please logout and try logging in again.")
                 return
             }
@@ -149,17 +148,15 @@ class PowerFlowTabViewModel: ObservableObject {
                                 self.configManager.variables.named("meterPower2")]
 
             var reportVariables = [ReportVariable.loads, .feedIn, .gridConsumption]
-            if currentDevice.hasBattery {
+            if self.configManager.hasBattery {
                 reportVariables.append(contentsOf: [.chargeEnergyToTal, .dischargeEnergyToTal])
             }
 
-            let totals = try await self.network.fetchReport(deviceID: currentDevice.deviceID,
-                                                            variables: reportVariables,
-                                                            queryDate: .now(),
-                                                            reportType: .month)
-            let earnings = try await self.network.fetchEarnings(deviceID: currentDevice.deviceID)
-            self.configManager.currencySymbol = earnings.currencySymbol
-            let totalsViewModel = TotalsViewModel(reports: totals)
+            let historyResponse = try await self.network.openapi_fetchReport(deviceSN: currentDeviceSN,
+                                                                             variables: reportVariables,
+                                                                             queryDate: .now(),
+                                                                             reportType: .month)
+            let totals = TotalsViewModel(reports: historyResponse)
 
             if self.configManager.appSettingsPublisher.value.showInverterTemperature {
                 rawVariables.append(contentsOf: [
@@ -168,19 +165,40 @@ class PowerFlowTabViewModel: ObservableObject {
                 ])
             }
 
-            let raws = try await self.network.fetchRaw(deviceID: currentDevice.deviceID, variables: rawVariables.compactMap { $0 }, queryDate: .now())
-            let currentViewModel = CurrentStatusCalculator(device: currentDevice,
-                                                           raws: raws,
+            let real = try await self.network.openapi_fetchRealData(
+                deviceSN: currentDeviceSN,
+                variables: [
+                    "feedinPower",
+                    "gridConsumptionPower",
+                    "loadsPower",
+                    "generationPower",
+                    "pvPower",
+                    "meterPower2",
+                    "ambientTemperation",
+                    "invTemperation",
+                    "batChargePower",
+                    "batDischargePower",
+                    "SoC",
+                    "batTemperature"
+                ]
+            )
+            let currentValues = RealQueryResponseMapper.mapCurrentValues(response: real)
+            let currentViewModel = CurrentStatusCalculator(status: currentValues,
                                                            shouldInvertCT2: self.configManager.shouldInvertCT2,
                                                            shouldCombineCT2WithPVPower: self.configManager.shouldCombineCT2WithPVPower)
-            var battery: BatteryViewModel = .noBattery
-            if currentDevice.hasBattery {
-                do {
-                    let response = try await self.network.fetchBattery(deviceID: currentDevice.deviceID)
-                    battery = BatteryViewModel(from: response)
-                } catch {
-                    battery = BatteryViewModel(error: error)
-                }
+
+            let battery: BatteryViewModel
+            if self.configManager.hasBattery {
+                battery = .init(
+                    from: BatteryResponse(
+                        power: real.datas.currentValue(for: "batChargePower") - (0 - real.datas.currentValue(for: "batDischargePower")),
+                        soc: Int(real.datas.currentValue(for: "SoC")),
+                        residual: 0,
+                        temperature: real.datas.currentValue(for: "batTemperature")
+                    )
+                )
+            } else {
+                battery = .noBattery
             }
 
             let summary = HomePowerFlowViewModel(
@@ -188,12 +206,12 @@ class PowerFlowTabViewModel: ObservableObject {
                 battery: battery,
                 home: currentViewModel.currentHomeConsumption,
                 grid: currentViewModel.currentGrid,
-                todaysGeneration: GenerationViewModel(raws: raws, todayGeneration: earnings.today.generation),
-                earnings: EarningsViewModel(response: earnings, energyStatsFinancialModel: EnergyStatsFinancialModel(totalsViewModel: totalsViewModel, config: self.configManager, currencySymbol: self.configManager.currencySymbol)),
+                todaysGeneration: GenerationViewModel(response: historyResponse),
+                earnings: EarningsViewModel(energyStatsFinancialModel: EnergyStatsFinancialModel(totalsViewModel: totals, config: self.configManager, currencySymbol: self.configManager.currencySymbol)),
                 inverterTemperatures: currentViewModel.currentTemperatures,
-                homeTotal: totalsViewModel.home,
-                gridImportTotal: totalsViewModel.gridImport,
-                gridExportTotal: totalsViewModel.gridExport,
+                homeTotal: totals.home,
+                gridImportTotal: totals.gridImport,
+                gridExportTotal: totals.gridExport,
                 ct2: currentViewModel.currentCT2
             )
 

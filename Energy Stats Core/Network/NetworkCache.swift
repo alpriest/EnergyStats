@@ -108,13 +108,13 @@ public class NetworkCache: FoxESSNetworking {
         try await network.fetchRaw(deviceID: deviceID, variables: variables, queryDate: queryDate)
     }
 
-    public func fetchDeviceList() async throws -> [PagedDeviceListResponse.Device] {
+    public func openapi_fetchDeviceList() async throws -> [DeviceDetailResponse] {
         let key = makeKey(base: #function)
 
-        if let item = cache[key], let cached = item.item as? [PagedDeviceListResponse.Device], item.isFresherThan(interval: shortCacheDurationInSeconds) {
+        if let item = cache[key], let cached = item.item as? [DeviceDetailResponse], item.isFresherThan(interval: shortCacheDurationInSeconds) {
             return cached
         } else {
-            let fresh = try await network.fetchDeviceList()
+            let fresh = try await network.openapi_fetchDeviceList()
             store(key: key, value: CachedItem(fresh))
             return fresh
         }
@@ -134,18 +134,6 @@ public class NetworkCache: FoxESSNetworking {
 
     public func fetchVariables(deviceID: String) async throws -> [RawVariable] {
         try await network.fetchVariables(deviceID: deviceID)
-    }
-
-    public func fetchEarnings(deviceID: String) async throws -> EarningsResponse {
-        let key = makeKey(base: #function, arguments: deviceID)
-
-        if let item = cache[key], let cached = item.item as? EarningsResponse, item.isFresherThan(interval: shortCacheDurationInSeconds) {
-            return cached
-        } else {
-            let fresh = try await network.fetchEarnings(deviceID: deviceID)
-            store(key: key, value: CachedItem(fresh))
-            return fresh
-        }
     }
 
     public func setSoc(minGridSOC: Int, minSOC: Int, deviceSN: String) async throws {
@@ -194,6 +182,10 @@ public class NetworkCache: FoxESSNetworking {
 
     public func openapi_fetchVariables() async throws -> [OpenApiVariable] {
         try await network.openapi_fetchVariables()
+    }
+
+    public func openapi_fetchReport(deviceSN: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [OpenReportResponse] {
+        try await network.openapi_fetchReport(deviceSN: deviceSN, variables: variables, queryDate: queryDate, reportType: reportType)
     }
 }
 

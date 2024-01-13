@@ -12,10 +12,10 @@ extension URL {
     static var raw = URL(string: "https://www.foxesscloud.com/c/v0/device/history/raw")!
     static var battery = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/info")!
     static var deviceList = URL(string: "https://www.foxesscloud.com/op/v0/device/list")! // UPDATED
+    static var deviceDetail = URL(string: "https://www.foxesscloud.com/op/v0/device/detail")! // UPDATED
     static var socGet = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/soc/get")!
     static var addressBook = URL(string: "https://www.foxesscloud.com/c/v0/device/addressbook")!
     static var variables = URL(string: "https://www.foxesscloud.com/c/v1/device/variables")!
-    static var earnings = URL(string: "https://www.foxesscloud.com/c/v0/device/earnings")!
     static var socSet = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/soc/set")!
     static var batteryTimes = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/time/get")!
     static var batteryTimeSet = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/time/set")!
@@ -30,10 +30,9 @@ public protocol FoxESSNetworking {
     func fetchBattery(deviceID: String) async throws -> BatteryResponse
     func fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse
     func fetchRaw(deviceID: String, variables: [RawVariable], queryDate: QueryDate) async throws -> [RawResponse]
-    func fetchDeviceList() async throws -> [PagedDeviceListResponse.Device]
+    func openapi_fetchDeviceList() async throws -> [DeviceDetailResponse]
     func fetchAddressBook(deviceID: String) async throws -> AddressBookResponse
     func fetchVariables(deviceID: String) async throws -> [RawVariable]
-    func fetchEarnings(deviceID: String) async throws -> EarningsResponse
     func setSoc(minGridSOC: Int, minSOC: Int, deviceSN: String) async throws
     func fetchBatteryTimes(deviceSN: String) async throws -> BatteryTimesResponse
     func setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws
@@ -57,4 +56,5 @@ public protocol FoxESSNetworking {
     func openapi_fetchRealData(deviceSN: String, variables: [String]) async throws -> OpenQueryResponse
     func openapi_fetchHistory(deviceSN: String, variables: [String]) async throws -> OpenHistoryResponse
     func openapi_fetchVariables() async throws -> [OpenApiVariable]
+    func openapi_fetchReport(deviceSN: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [OpenReportResponse]
 }

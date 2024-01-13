@@ -17,8 +17,7 @@ struct ApproximationsCalculator {
         feedIn: Double,
         loads: Double,
         batteryCharge: Double,
-        batteryDischarge: Double,
-        earnings: EarningsResponse?
+        batteryDischarge: Double
     ) -> ApproximationsViewModel {
         let (netResult, netResultCalculationBreakdown) = NetSelfSufficiencyCalculator.calculate(
             grid: grid,
@@ -56,7 +55,6 @@ struct ApproximationsCalculator {
             absoluteSelfSufficiencyEstimate: asPercent(absoluteResult),
             absoluteSelfSufficiencyEstimateCalculationBreakdown: absoluteResultCalculationBreakdown,
             financialModel: financialModel,
-            earnings: earnings,
             homeUsage: loads,
             totalsViewModel: totalsViewModel
         )
@@ -66,24 +64,24 @@ struct ApproximationsCalculator {
         currentDevice: Device,
         reportType: ReportType,
         queryDate: QueryDate,
-        reports: [ReportResponse],
+        reports: [OpenReportResponse],
         reportVariables: [ReportVariable]
     ) async throws -> [ReportVariable: Double] {
         var totals = [ReportVariable: Double]()
 
         if case .day = reportType {
-            let monthlyReports = try await networking.fetchReport(deviceID: currentDevice.deviceID, variables: reportVariables, queryDate: queryDate, reportType: .month)
+            let monthlyReports = try await networking.openapi_fetchReport(deviceSN: currentDevice.deviceSN, variables: reportVariables, queryDate: queryDate, reportType: .month)
 
             monthlyReports.forEach { reportResponse in
                 guard let reportVariable = ReportVariable(rawValue: reportResponse.variable) else { return }
 
-                totals[reportVariable] = reportResponse.data.first { $0.index == queryDate.day }?.value ?? 0.0
+                totals[reportVariable] = reportResponse.values.first { $0.index == queryDate.day }?.value ?? 0.0
             }
         } else {
             reports.forEach { reportResponse in
                 guard let reportVariable = ReportVariable(rawValue: reportResponse.variable) else { return }
 
-                totals[reportVariable] = reportResponse.data.map { abs($0.value) }.reduce(0.0, +)
+                totals[reportVariable] = reportResponse.values.map { abs($0.value) }.reduce(0.0, +)
             }
         }
 

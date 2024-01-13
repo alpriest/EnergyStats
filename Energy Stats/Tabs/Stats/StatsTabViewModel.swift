@@ -16,7 +16,6 @@ struct ApproximationsViewModel {
     let absoluteSelfSufficiencyEstimate: String?
     let absoluteSelfSufficiencyEstimateCalculationBreakdown: CalculationBreakdown
     let financialModel: EnergyStatsFinancialModel?
-    let earnings: EarningsResponse?
     let homeUsage: Double?
     let totalsViewModel: TotalsViewModel?
 }
@@ -89,8 +88,8 @@ class StatsTabViewModel: ObservableObject {
             graphVariables = [.generation,
                               ReportVariable.feedIn,
                               .gridConsumption,
-                              device.hasBattery ? .chargeEnergyToTal : nil,
-                              device.hasBattery ? .dischargeEnergyToTal : nil,
+                              configManager.hasBattery ? .chargeEnergyToTal : nil,
+                              configManager.hasBattery ? .dischargeEnergyToTal : nil,
                               .loads]
                 .compactMap { $0 }
                 .map {
@@ -111,13 +110,13 @@ class StatsTabViewModel: ObservableObject {
         let reportType = makeReportType()
 
         do {
-            let reports = try await networking.fetchReport(deviceID: currentDevice.deviceID, variables: reportVariables, queryDate: queryDate, reportType: reportType)
+            let reports = try await networking.openapi_fetchReport(deviceSN: currentDevice.deviceSN, variables: reportVariables, queryDate: queryDate, reportType: reportType)
             totals = try await approximationsCalculator.generateTotals(currentDevice: currentDevice, reportType: reportType, queryDate: queryDate, reports: reports, reportVariables: reportVariables)
 
             let updatedData = reports.flatMap { reportResponse -> [StatsGraphValue] in
                 guard let reportVariable = ReportVariable(rawValue: reportResponse.variable) else { return [] }
 
-                return reportResponse.data.map { dataPoint in
+                return reportResponse.values.map { dataPoint in
                     var graphPointDate = Date.yesterday()
 
                     switch displayMode {
@@ -164,8 +163,7 @@ class StatsTabViewModel: ObservableObject {
                                                                                    feedIn: feedIn,
                                                                                    loads: loads,
                                                                                    batteryCharge: batteryCharge ?? 0,
-                                                                                   batteryDischarge: batteryDischarge ?? 0,
-                                                                                   earnings: nil)
+                                                                                   batteryDischarge: batteryDischarge ?? 0)
     }
 
     func refresh() {
@@ -222,8 +220,7 @@ class StatsTabViewModel: ObservableObject {
                 feedIn: feedIn,
                 loads: loads,
                 batteryCharge: batteryCharge,
-                batteryDischarge: batteryDischarge,
-                earnings: nil
+                batteryDischarge: batteryDischarge
             )
         }
 

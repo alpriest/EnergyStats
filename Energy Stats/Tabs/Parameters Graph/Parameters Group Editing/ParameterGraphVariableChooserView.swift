@@ -86,7 +86,7 @@ struct ParameterGraphVariableChooserView: View {
 }
 
 #Preview {
-    let variables = RawVariable.previewList().map { ParameterGraphVariable($0, isSelected: [true, false].randomElement()!) }
+    let variables = Variable.previewList().map { ParameterGraphVariable($0, isSelected: [true, false].randomElement()!) }
 
     return ParameterGraphVariableChooserView(
         viewModel: ParameterGraphVariableChooserViewModel(variables: variables,
@@ -94,29 +94,29 @@ struct ParameterGraphVariableChooserView: View {
                                                           onApply: { _ in }))
 }
 
-extension RawVariable {
-    static func previewList() -> [RawVariable] {
-        [RawVariable(name: "PV1Volt", variable: "pv1Volt", unit: "V"),
-         RawVariable(name: "PV1Current", variable: "pv1Current", unit: "A"),
-         RawVariable(name: "PV1Power", variable: "pv1Power", unit: "kW"),
-         RawVariable(name: "PVPower", variable: "pvPower", unit: "kW"),
-         RawVariable(name: "PV2Volt", variable: "pv2Volt", unit: "V"),
-         RawVariable(name: "PV2Current", variable: "pv2Current", unit: "A"),
-         RawVariable(name: "generationPower", variable: "generationPower", unit: "A"),
-         RawVariable(name: "batChargePower", variable: "batChargePower", unit: "kW"),
-         RawVariable(name: "batDischargePower", variable: "batDischargePower", unit: "kW"),
-         RawVariable(name: "feedinPower", variable: "feedinPower", unit: "V"),
-         RawVariable(name: "gridConsumptionPower", variable: "gridConsumptionPower", unit: "A"),
-         RawVariable(name: "bPV1Current", variable: "pv1Current", unit: "A"),
-         RawVariable(name: "bPV1Power", variable: "pv1Power", unit: "kW"),
-         RawVariable(name: "bPVPower", variable: "pvPower", unit: "kW"),
-         RawVariable(name: "bPV2Volt", variable: "pv2Volt", unit: "V"),
-         RawVariable(name: "batTemperature", variable: "batTemperature", unit: "A"),
-         RawVariable(name: "batVolt", variable: "batVolt", unit: "A"),
-         RawVariable(name: "batCurrent", variable: "batCurrent", unit: "kW"),
-         RawVariable(name: "SoC", variable: "SoC", unit: "kW"),
-         RawVariable(name: "cPV2Volt", variable: "pv2Volt", unit: "V"),
-         RawVariable(name: "dPV2Current", variable: "pv2Current", unit: "A"),
-         RawVariable(name: "dPV2Power", variable: "pv2Power", unit: "kW")]
+extension Variable {
+    static func previewList() -> [Variable] {
+        [Variable(name: "PV1Volt", variable: "pv1Volt", unit: "V"),
+         Variable(name: "PV1Current", variable: "pv1Current", unit: "A"),
+         Variable(name: "PV1Power", variable: "pv1Power", unit: "kW"),
+         Variable(name: "PVPower", variable: "pvPower", unit: "kW"),
+         Variable(name: "PV2Volt", variable: "pv2Volt", unit: "V"),
+         Variable(name: "PV2Current", variable: "pv2Current", unit: "A"),
+         Variable(name: "generationPower", variable: "generationPower", unit: "A"),
+         Variable(name: "batChargePower", variable: "batChargePower", unit: "kW"),
+         Variable(name: "batDischargePower", variable: "batDischargePower", unit: "kW"),
+         Variable(name: "feedinPower", variable: "feedinPower", unit: "V"),
+         Variable(name: "gridConsumptionPower", variable: "gridConsumptionPower", unit: "A"),
+         Variable(name: "bPV1Current", variable: "pv1Current", unit: "A"),
+         Variable(name: "bPV1Power", variable: "pv1Power", unit: "kW"),
+         Variable(name: "bPVPower", variable: "pvPower", unit: "kW"),
+         Variable(name: "bPV2Volt", variable: "pv2Volt", unit: "V"),
+         Variable(name: "batTemperature", variable: "batTemperature", unit: "A"),
+         Variable(name: "batVolt", variable: "batVolt", unit: "A"),
+         Variable(name: "batCurrent", variable: "batCurrent", unit: "kW"),
+         Variable(name: "SoC", variable: "SoC", unit: "kW"),
+         Variable(name: "cPV2Volt", variable: "pv2Volt", unit: "V"),
+         Variable(name: "dPV2Current", variable: "pv2Current", unit: "A"),
+         Variable(name: "dPV2Power", variable: "pv2Power", unit: "kW")]
     }
 }

@@ -37,7 +37,7 @@ struct ParameterVariableListView: View {
 
 #Preview {
     ParameterVariableListView(
-        variables: RawVariable.previewList().map { ParameterGraphVariable($0, isSelected: [true, false].randomElement()!) },
+        variables: Variable.previewList().map { ParameterGraphVariable($0, isSelected: [true, false].randomElement()!) },
         onTap: { _ in }
     )
 }

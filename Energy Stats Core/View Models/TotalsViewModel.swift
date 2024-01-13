@@ -18,7 +18,7 @@ public struct CalculationBreakdown {
 }
 
 public struct TotalsViewModel {
-    public init(reports: [ReportResponse]) {
+    public init(reports: [OpenReportResponse]) {
         let home = reports.todayValue(for: ReportVariable.loads)
         let gridExport = reports.todayValue(for: ReportVariable.feedIn)
         let gridImport = reports.todayValue(for: ReportVariable.gridConsumption)
@@ -51,10 +51,10 @@ public struct TotalsViewModel {
     public let solarBreakdown: CalculationBreakdown
 }
 
-private extension Array where Element == ReportResponse {
-    func today(for key: ReportVariable) -> ReportResponse.ReportData? {
+private extension Array where Element == OpenReportResponse {
+    func today(for key: ReportVariable) -> OpenReportResponse.ReportData? {
         guard let currentDateIndex = Calendar.current.dateComponents([.day], from: Date()).day else { return nil }
-        return first(where: { $0.variable.lowercased() == key.rawValue.lowercased() })?.data.first(where: { $0.index == currentDateIndex })
+        return first(where: { $0.variable.lowercased() == key.rawValue.lowercased() })?.values.first(where: { $0.index == currentDateIndex })
     }
 
     func todayValue(for key: ReportVariable) -> Double {

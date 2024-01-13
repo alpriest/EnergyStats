@@ -21,20 +21,27 @@ public struct PagedDeviceListResponse: Codable, Hashable {
     let currentPage: Int
     let pageSize: Int
     let total: Int
-    public let devices: [Device]
+    public let data: [Device]
 
     public struct Device: Codable, Hashable {
         public let deviceSN: String
         public let moduleSN: String
         public let plantID: String
-        public let stationName: String
-        public let managerVersion: String
-        public let masterVersion: String
-        public let slaveVersion: String
-        public let hardwareVersion: String
         public let status: Int
-        public let function: Function
     }
+}
+
+public struct DeviceDetailResponse: Codable, Hashable {
+    public let deviceSN: String
+    public let moduleSN: String
+    public let plantID: String
+    public let stationName: String
+    public let managerVersion: String
+    public let masterVersion: String
+    public let slaveVersion: String
+    public let hardwareVersion: String
+    public let status: Int
+    public let function: Function
 
     public struct Function: Codable, Hashable {
         public let scheduler: Bool

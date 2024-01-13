@@ -86,8 +86,8 @@ public class NetworkValueCleaner: FoxESSNetworking {
             }
     }
 
-    public func fetchDeviceList() async throws -> [PagedDeviceListResponse.Device] {
-        try await network.fetchDeviceList()
+    public func openapi_fetchDeviceList() async throws -> [DeviceDetailResponse] {
+        try await network.openapi_fetchDeviceList()
     }
 
     public func fetchAddressBook(deviceID: String) async throws -> AddressBookResponse {
@@ -96,10 +96,6 @@ public class NetworkValueCleaner: FoxESSNetworking {
 
     public func fetchVariables(deviceID: String) async throws -> [RawVariable] {
         try await network.fetchVariables(deviceID: deviceID)
-    }
-
-    public func fetchEarnings(deviceID: String) async throws -> EarningsResponse {
-        try await network.fetchEarnings(deviceID: deviceID)
     }
 
     public func setSoc(minGridSOC: Int, minSOC: Int, deviceSN: String) async throws {
@@ -155,6 +151,10 @@ public class NetworkValueCleaner: FoxESSNetworking {
 
     public func openapi_fetchVariables() async throws -> [OpenApiVariable] {
         try await network.openapi_fetchVariables()
+    }
+
+    public func openapi_fetchReport(deviceSN: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [OpenReportResponse] {
+        try await network.openapi_fetchReport(deviceSN: deviceSN, variables: variables, queryDate: queryDate, reportType: reportType)
     }
 }
 

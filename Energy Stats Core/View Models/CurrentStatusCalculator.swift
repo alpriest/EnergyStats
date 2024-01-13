@@ -17,7 +17,7 @@ public enum RealQueryResponseMapper {
             ambientTemperation: response.datas.currentValue(for: "ambientTemperation"),
             invTemperation: response.datas.currentValue(for: "invTemperation"),
             meterPower2: response.datas.currentValue(for: "meterPower2"),
-            hasPV: true,
+            hasPV: true, //TODO ?
             lastUpdate: response.time
         )
     }

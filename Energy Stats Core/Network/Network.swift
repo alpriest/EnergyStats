@@ -9,9 +9,7 @@ import Foundation
 
 public class Network: FoxESSNetworking {
     private var token: String? {
-        get {
-            credentials.getToken()
-        }
+        credentials.getToken()
     }
 
     private let credentials: KeychainStoring
@@ -59,14 +57,25 @@ public class Network: FoxESSNetworking {
         return result.0
     }
 
-    public func fetchDeviceList() async throws -> [PagedDeviceListResponse.Device] {
+    public func openapi_fetchDeviceList() async throws -> [DeviceDetailResponse] {
         var request = URLRequest(url: URL.deviceList)
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(DeviceListRequest())
 
-        let result: (PagedDeviceListResponse, Data) = try await fetch(request)
-        store.deviceListResponse = NetworkOperation(description: "fetchDeviceList", value: result.0.devices, raw: result.1)
-        return result.0.devices
+        let deviceListResult: (PagedDeviceListResponse, _) = try await fetch(request)
+        let devices = try await deviceListResult.0.data.asyncMap {
+            try await openapi_fetchDevice(deviceSN: $0.deviceSN)
+        }
+
+        store.deviceListResponse = NetworkOperation(description: "fetchDeviceList", value: devices, raw: deviceListResult.1)
+        return devices
+    }
+
+    func openapi_fetchDevice(deviceSN: String) async throws -> DeviceDetailResponse {
+        let request = append(queryItems: [URLQueryItem(name: "sn", value: deviceSN)], to: URL.deviceDetail)
+
+        let result: (DeviceDetailResponse, _) = try await fetch(request)
+        return result.0
     }
 
     public func fetchAddressBook(deviceID: String) async throws -> AddressBookResponse {
@@ -83,14 +92,6 @@ public class Network: FoxESSNetworking {
         let result: (VariablesResponse, Data) = try await fetch(request)
         store.variables = NetworkOperation(description: "fetchVariables", value: result.0, raw: result.1)
         return result.0.variables
-    }
-
-    public func fetchEarnings(deviceID: String) async throws -> EarningsResponse {
-        let request = append(queryItems: [URLQueryItem(name: "deviceID", value: deviceID)], to: URL.earnings)
-
-        let result: (EarningsResponse, Data) = try await fetch(request)
-        store.earnings = NetworkOperation(description: "fetchEarnings", value: result.0, raw: result.1)
-        return result.0
     }
 
     public func setSoc(minGridSOC: Int, minSOC: Int, deviceSN: String) async throws {

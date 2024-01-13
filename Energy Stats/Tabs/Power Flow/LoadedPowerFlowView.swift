@@ -194,7 +194,7 @@ extension HomePowerFlowViewModel {
               battery: battery,
               home: 1.5,
               grid: 0.71,
-              todaysGeneration: GenerationViewModel(raws: [], todayGeneration: 8.5),
+              todaysGeneration: GenerationViewModel(response: []),
               earnings: .any(),
               inverterTemperatures: InverterTemperatures(ambient: 4.0, inverter: 9.0),
               homeTotal: 1.0,

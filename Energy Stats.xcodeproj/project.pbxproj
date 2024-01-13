@@ -110,7 +110,6 @@
 		41626CD029D969E9003FEB00 /* InverterFirmwareVersionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41626CCF29D969E9003FEB00 /* InverterFirmwareVersionsView.swift */; };
 		4162BC2A2A08E33600DFEDC1 /* raw-h1-deviceid.json in Resources */ = {isa = PBXBuildFile; fileRef = 4162BC292A08E33600DFEDC1 /* raw-h1-deviceid.json */; };
 		4162BC2C2A09772C00DFEDC1 /* earnings.json in Resources */ = {isa = PBXBuildFile; fileRef = 4162BC2B2A09772C00DFEDC1 /* earnings.json */; };
-		4162BC2E2A09773D00DFEDC1 /* EarningsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4162BC2D2A09773D00DFEDC1 /* EarningsResponse.swift */; };
 		416318B729DDD2E100C2C285 /* InMemoryLoggingNetworkingDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416318B629DDD2E100C2C285 /* InMemoryLoggingNetworkingDecorator.swift */; };
 		416318B929DDD44C00C2C285 /* DebugDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416318B829DDD44C00C2C285 /* DebugDataView.swift */; };
 		416318BE29DDD80E00C2C285 /* View+Copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416318BD29DDD80E00C2C285 /* View+Copy.swift */; };
@@ -462,7 +461,6 @@
 		41626CD129D96AD9003FEB00 /* DeviceFirmwareVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceFirmwareVersion.swift; sourceTree = "<group>"; };
 		4162BC292A08E33600DFEDC1 /* raw-h1-deviceid.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "raw-h1-deviceid.json"; sourceTree = "<group>"; };
 		4162BC2B2A09772C00DFEDC1 /* earnings.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = earnings.json; sourceTree = "<group>"; };
-		4162BC2D2A09773D00DFEDC1 /* EarningsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarningsResponse.swift; sourceTree = "<group>"; };
 		4162BC2F2A097C1300DFEDC1 /* SunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunView.swift; sourceTree = "<group>"; };
 		416318B629DDD2E100C2C285 /* InMemoryLoggingNetworkingDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryLoggingNetworkingDecorator.swift; sourceTree = "<group>"; };
 		416318B829DDD44C00C2C285 /* DebugDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugDataView.swift; sourceTree = "<group>"; };
@@ -929,7 +927,6 @@
 				41B690F328DF5C390058126E /* NetworkResponse.swift */,
 				41626CCB29D95E37003FEB00 /* AddressBookResponse.swift */,
 				417185452A004FA900D18CDD /* VariablesResponse.swift */,
-				4162BC2D2A09773D00DFEDC1 /* EarningsResponse.swift */,
 				411029182A729F02004018BB /* BatteryTimesResponse.swift */,
 				416AE4442A811FBB003D0122 /* DeviceSettingsGetResponse.swift */,
 				4192F99A2A8678DB0035DAB8 /* PagedDataLoggerListResponse.swift */,
@@ -1712,7 +1709,6 @@
 				41495F382B211A75004A51C1 /* AlertContentView.swift in Sources */,
 				4190921D2B1D253D0017CB65 /* Schedule.swift in Sources */,
 				416AE4482A812876003D0122 /* WorkMode.swift in Sources */,
-				4162BC2E2A09773D00DFEDC1 /* EarningsResponse.swift in Sources */,
 				41A95BA129DB3F7E00A35169 /* PylonView.swift in Sources */,
 				41D8402D2AB2E0DE00769E81 /* ErrorMessagesResponse.swift in Sources */,
 				4103D1D529DB6C51001B0BC8 /* NetworkResponse.swift in Sources */,

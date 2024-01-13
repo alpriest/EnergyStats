@@ -30,6 +30,7 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "showTotalYield")
         UserDefaults.shared.removeObject(forKey: "devices")
         UserDefaults.shared.removeObject(forKey: "selectedDeviceID")
+        UserDefaults.shared.removeObject(forKey: "selectedDeviceSN")
         UserDefaults.shared.removeObject(forKey: "displayUnit")
         UserDefaults.shared.removeObject(forKey: "showInverterTemperature")
         UserDefaults.shared.removeObject(forKey: "showHomeTotalOnPowerFlow")
@@ -96,7 +97,7 @@ public class UserDefaultsConfig: Config {
     public var devices: Data?
 
     @UserDefaultsStoredOptionalString(key: "selectedDeviceID")
-    public var selectedDeviceID: String?
+    public var selectedDeviceSN: String?
 
     @UserDefaultsStoredInt(key: "displayUnit")
     public var displayUnit: Int
@@ -214,4 +215,7 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredBool(key: "separateParameterGraphsByUnit", defaultValue: true)
     public var separateParameterGraphsByUnit: Bool
+
+    @UserDefaultsStoredCodable(key: "variables", defaultValue: [])
+    public var variables: [Variable]
 }

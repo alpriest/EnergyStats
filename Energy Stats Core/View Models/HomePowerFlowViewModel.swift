@@ -100,7 +100,7 @@ public extension HomePowerFlowViewModel {
               battery: BatteryViewModel.noBattery,
               home: 0,
               grid: 0,
-              todaysGeneration: GenerationViewModel(raws: [], todayGeneration: 0.0),
+              todaysGeneration: GenerationViewModel(response: []),
               earnings: .empty(),
               inverterTemperatures: InverterTemperatures(ambient: 0.0, inverter: 0.0),
               homeTotal: 0,

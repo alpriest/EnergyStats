@@ -71,13 +71,9 @@ struct InverterSettingsView: View {
 
             if let currentDevice = configManager.currentDevice.value {
                 Section {
-                    ESLabeledText("Plant Name", value: currentDevice.plantName)
-                    ESLabeledText("Device Type", value: currentDevice.deviceType)
-                    ESLabeledText("Device ID", value: currentDevice.deviceID)
                     ESLabeledText("Device Serial No.", value: currentDevice.deviceSN)
                     ESLabeledText("Module Serial No.", value: currentDevice.moduleSN)
-                    ESLabeledText("Has Battery", value: currentDevice.battery != nil ? "true" : "false")
-                    ESLabeledText("Has Solar", value: currentDevice.hasPV ? "true" : "false")
+                    ESLabeledText("Station name", value: currentDevice.stationName)
                 }
                 .contentShape(Rectangle())
                 .alertCopy(text(currentDevice))
@@ -89,13 +85,9 @@ struct InverterSettingsView: View {
 
     func text(_ currentDevice: Device) -> String {
         [
-            makePair("Plant Name", value: currentDevice.plantName),
-            makePair("Device Type", value: currentDevice.deviceType),
-            makePair("Device ID", value: currentDevice.deviceID),
+            makePair("Station name", value: currentDevice.stationName),
             makePair("Device Serial No.", value: currentDevice.deviceSN),
-            makePair("Module Serial No.", value: currentDevice.moduleSN),
-            makePair("Has Battery", value: currentDevice.battery != nil ? "true" : "false"),
-            makePair("Has Solar", value: currentDevice.hasPV ? "true" : "false")
+            makePair("Module Serial No.", value: currentDevice.moduleSN)
         ]
         .compactMap { $0 }
         .joined(separator: "\n")

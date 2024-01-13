@@ -85,14 +85,14 @@ class ParametersGraphTabViewModel: ObservableObject {
 
         cancellable = configManager.currentDevice
             .map { device in
-                device?.variables.compactMap { [weak self] variable -> ParameterGraphVariable? in
+                configManager.variables.compactMap { [weak self] variable -> ParameterGraphVariable? in
                     guard let self else { return nil }
                     guard let variable = configManager.variables.named(variable.variable) else { return nil }
 
                     return ParameterGraphVariable(variable,
                                                   isSelected: selectedGraphVariables.contains(variable.variable),
                                                   enabled: selectedGraphVariables.contains(variable.variable))
-                } ?? []
+                }
             }
             .receive(on: RunLoop.main)
             .assign(to: \.graphVariables, on: self)
@@ -128,8 +128,8 @@ class ParametersGraphTabViewModel: ObservableObject {
 
         do {
             let rawGraphVariables = graphVariables.filter { $0.isSelected }.compactMap { $0.type }
-            let raw = try await networking.fetchRaw(deviceID: currentDevice.deviceID, variables: rawGraphVariables, queryDate: queryDate)
-            let rawData: [ParameterGraphValue] = raw.flatMap { response -> [ParameterGraphValue] in
+            let raw = try await networking.openapi_fetchHistory(deviceSN: currentDevice.deviceSN, variables: rawGraphVariables.map { $0.variable }) // TODO , queryDate: queryDate)
+            let rawData: [ParameterGraphValue] = raw.datas.flatMap { response -> [ParameterGraphValue] in
                 guard let rawVariable = configManager.variables.first(where: { $0.variable == response.variable }) else { return [] }
 
                 return response.data.compactMap {

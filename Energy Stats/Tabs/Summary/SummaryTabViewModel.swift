@@ -20,7 +20,7 @@ class SummaryTabViewModel: ObservableObject {
     init(configManager: ConfigManaging, networking: FoxESSNetworking) {
         self.networking = networking
         self.configManager = configManager
-        self.approximationsCalculator = ApproximationsCalculator(configManager: configManager, networking: networking)
+        approximationsCalculator = ApproximationsCalculator(configManager: configManager, networking: networking)
         currencySymbol = self.configManager.currencySymbol
     }
 
@@ -30,10 +30,9 @@ class SummaryTabViewModel: ObservableObject {
 
         Task { @MainActor in
             isLoading = true
-            let foxEarnings = try await self.networking.fetchEarnings(deviceID: currentDevice.deviceID)
             let totals = try await fetchAllYears(device: currentDevice)
 
-            self.approximationsViewModel = makeApproximationsViewModel(totals: totals, response: foxEarnings)
+            self.approximationsViewModel = makeApproximationsViewModel(totals: totals)
 
             isLoading = false
         }
@@ -83,16 +82,16 @@ class SummaryTabViewModel: ObservableObject {
 
     private func fetchYear(_ year: Int, device: Device) async throws -> ([ReportVariable: Double], Int?) {
         let reportVariables = [ReportVariable.feedIn, .generation, .chargeEnergyToTal, .dischargeEnergyToTal, .gridConsumption, .loads]
-        let reports = try await networking.fetchReport(deviceID: device.deviceID,
-                                                       variables: reportVariables,
-                                                       queryDate: QueryDate(year: year, month: nil, day: nil),
-                                                       reportType: .year)
+        let reports = try await networking.openapi_fetchReport(deviceSN: device.deviceSN,
+                                                               variables: reportVariables,
+                                                               queryDate: QueryDate(year: year, month: nil, day: nil),
+                                                               reportType: .year)
 
         var totals = [ReportVariable: Double]()
         reports.forEach { reportResponse in
             guard let reportVariable = ReportVariable(rawValue: reportResponse.variable) else { return }
 
-            totals[reportVariable] = reportResponse.data.map { abs($0.value) }.reduce(0.0, +)
+            totals[reportVariable] = reportResponse.values.map { abs($0.value) }.reduce(0.0, +)
         }
 
         let currentYear = Calendar.current.component(.year, from: Date())
@@ -103,7 +102,8 @@ class SummaryTabViewModel: ObservableObject {
 
             reportVariables.forEach { variable in
                 if let report = reports.first(where: { $0.variable == variable.networkTitle }),
-                   let monthlyAmount = report.data.first(where: { $0.index == month })?.value {
+                   let monthlyAmount = report.values.first(where: { $0.index == month })?.value
+                {
                     monthlyTotal = monthlyTotal + monthlyAmount
                 }
             }
@@ -118,8 +118,7 @@ class SummaryTabViewModel: ObservableObject {
     }
 
     private func makeApproximationsViewModel(
-        totals: [ReportVariable: Double],
-        response: EarningsResponse
+        totals: [ReportVariable: Double]
     ) -> ApproximationsViewModel? {
         guard let grid = totals[ReportVariable.gridConsumption],
               let feedIn = totals[ReportVariable.feedIn],
@@ -134,7 +133,6 @@ class SummaryTabViewModel: ObservableObject {
                                                                 feedIn: feedIn,
                                                                 loads: loads,
                                                                 batteryCharge: batteryCharge,
-                                                                batteryDischarge: batteryDischarge,
-                                                                earnings: response)
+                                                                batteryDischarge: batteryDischarge)
     }
 }

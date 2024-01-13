@@ -8,37 +8,25 @@
 import Foundation
 
 public struct GenerationViewModel {
-    private let raws: [RawResponse]
-    private let todayGeneration: Double
+    private let response: [OpenReportResponse]
 
-    public init(raws: [RawResponse], todayGeneration: Double) {
-        self.raws = raws
-        self.todayGeneration = todayGeneration
+    public init(response: [OpenReportResponse]) {
+        self.response = response
     }
 
-    public func todayGeneration(_ model: TotalSolarYieldModel) -> Double {
-        switch model {
-        case .off:
-            0
-        case .energyStats:
-            calculateSolar(raws)
-        case .foxESS:
-            todayGeneration
-        }
-    }
-
-    func calculateSolar(_ raws: [RawResponse]) -> Double {
-        let filteredVariables = raws.filter { $0.variable == "pvPower" }.flatMap { $0.data }
-
-        let timeDifferenceInSeconds: TimeInterval
-        if let firstTime = filteredVariables[safe: 0]?.time, let secondTime = filteredVariables[safe: 1]?.time {
-            timeDifferenceInSeconds = (secondTime.timeIntervalSince1970 - firstTime.timeIntervalSince1970)
-        } else {
-            timeDifferenceInSeconds = 5.0 * 60.0
-        }
-
-        let totalSum = filteredVariables.reduce(0) { $0 + $1.value }
-
-        return Double(totalSum) * (timeDifferenceInSeconds / 3600.0)
+    public func todayGeneration(_ model: TotalSolarYieldModel) -> Double { // TODO: Remove parameter
+        return 0 // TODO: Get below working when we see the data
+//        let filteredVariables = response.filter { $0.variable == "pvPower" }.flatMap { $0.values }
+//
+//        let timeDifferenceInSeconds: TimeInterval
+//        if let firstTime = filteredVariables[safe: 0]?.time, let secondTime = filteredVariables[safe: 1]?.time {
+//            timeDifferenceInSeconds = (secondTime.timeIntervalSince1970 - firstTime.timeIntervalSince1970)
+//        } else {
+//            timeDifferenceInSeconds = 5.0 * 60.0
+//        }
+//
+//        let totalSum = filteredVariables.reduce(0) { $0 + $1.value }
+//
+//        return Double(totalSum) * (timeDifferenceInSeconds / 3600.0)
     }
 }

@@ -18,7 +18,7 @@ public protocol Config {
     var decimalPlaces: Int { get set }
     var showSunnyBackground: Bool { get set }
     var devices: Data? { get set }
-    var selectedDeviceID: String? { get set }
+    var selectedDeviceSN: String? { get set }
     var showUsableBatteryOnly: Bool { get set }
     var displayUnit: Int { get set }
     var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode { get set }
