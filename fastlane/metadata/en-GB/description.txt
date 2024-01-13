@@ -5,5 +5,9 @@ Get an instant overview of how your FoxESS PV/Battery installation is performing
 - Graphs of inverter parameters
 - Historic statistics information
 - Show battery temperature
+- Modify battery charge times
+- Modify minimum SOC values
+- Modify inverter work modes
+- Shortcuts to let you change the inverter work mode and retrieve battery SOC
 
-This app requires you to have an account with FoxESS Cloud in order to login. You cannot change any settings on your Inverter with this app.
+This app requires you to have an account with FoxESS Cloud in order to login.

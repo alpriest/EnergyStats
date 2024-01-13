@@ -1,0 +1,1 @@
+Migliorato il supporto per VoiceOver sulla pagina del flusso.

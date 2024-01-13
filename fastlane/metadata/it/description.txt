@@ -1,0 +1,13 @@
+Ottieni una panoramica istantanea delle prestazioni della tua installazione FoxESS PV/Battery!
+
+- Se hai una batteria, puoi vedere la durata fino al pieno/svuotamento
+- Accesso automatico
+- Grafici dei parametri dell'inverter
+- Informazioni statistiche storiche
+- Mostra la temperatura della batteria
+- Modifica gli orari di carica della batteria
+- Modifica i valori minimi dello stato di carica (SOC)
+- Modifica le modalità di lavoro dell'inverter
+- Visualizza le informazioni del datalogger
+
+Questa app richiede un account con FoxESS Cloud per effettuare l'accesso.
