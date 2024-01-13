@@ -12,13 +12,6 @@ public class Network: FoxESSNetworking {
         get {
             credentials.getToken()
         }
-        set {
-            do {
-                try credentials.store(token: newValue)
-            } catch {
-                print("AWP", "Could not store token")
-            }
-        }
     }
 
     private let credentials: KeychainStoring
@@ -28,35 +21,6 @@ public class Network: FoxESSNetworking {
     public init(credentials: KeychainStoring, store: InMemoryLoggingNetworkStore) {
         self.credentials = credentials
         self.store = store
-    }
-
-    public func verifyCredentials(username: String, hashedPassword: String) async throws {
-        token = try await fetchLoginToken(username: username, hashedPassword: hashedPassword)
-    }
-
-    public func ensureHasToken() async {
-        do {
-            if token == nil {
-                token = try await fetchLoginToken()
-            }
-        } catch {
-            // TODO:
-        }
-    }
-
-    private func fetchLoginToken(username: String? = nil, hashedPassword: String? = nil) async throws -> String {
-        guard let hashedPassword = hashedPassword ?? credentials.getHashedPassword(),
-              let username = username ?? credentials.getUsername()
-        else {
-            throw NetworkError.badCredentials
-        }
-
-        var request = URLRequest(url: URL.auth)
-        request.httpMethod = "POST"
-        request.httpBody = try! JSONEncoder().encode(AuthRequest(user: username, password: hashedPassword))
-
-        let response: (AuthResponse, _) = try await fetch(request, retry: false)
-        return response.0.token
     }
 
     public func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [ReportResponse] {
@@ -259,15 +223,6 @@ extension Network {
             }
 
             throw NetworkError.invalidResponse(request.url, statusCode)
-        } catch let error as NetworkError {
-            switch error {
-            case .invalidToken where retry:
-                token = nil
-                token = try await fetchLoginToken()
-                return try await fetch(request, retry: false)
-            default:
-                throw error
-            }
         } catch let error as NSError {
             if error.domain == NSURLErrorDomain, error.code == URLError.notConnectedToInternet.rawValue {
                 throw NetworkError.offline
@@ -290,6 +245,11 @@ extension Network {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue(languageCode, forHTTPHeaderField: "lang")
         request.setValue(timezone, forHTTPHeaderField: "timezone")
+
+        let timestamp = Int(round(Date().timeIntervalSince1970 * 1000))
+
+        request.setValue(String(describing: timestamp), forHTTPHeaderField: "timestamp")
+        request.setValue(openAPISignature(for: request), forHTTPHeaderField: "signature")
     }
 
     private var languageCode: String {
@@ -300,10 +260,26 @@ extension Network {
     private var timezone: String {
         TimeZone.current.identifier
     }
+
+    private func openAPISignature(for request: URLRequest) -> String {
+        let parts = [
+            request.url?.path ?? "",
+            request.header(for: "token"),
+            request.header(for: "timestamp"),
+        ]
+
+        return parts.joined(separator: "\\r\\n").md5()!
+    }
 }
 
 extension LocalizedError where Self: CustomStringConvertible {
     var errorDescription: String? {
         return description
+    }
+}
+
+extension URLRequest {
+    func header(for field: String) -> String {
+        value(forHTTPHeaderField: field) ?? ""
     }
 }

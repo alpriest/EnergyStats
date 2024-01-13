@@ -99,8 +99,30 @@ public class DemoNetworking: FoxESSNetworking {
 
     public func fetchDeviceList() async throws -> [PagedDeviceListResponse.Device] {
         [
-            PagedDeviceListResponse.Device(plantName: "demo-device-1", deviceID: "h1-deviceid", deviceSN: "5678", moduleSN: "sn-1", hasBattery: true, hasPV: true, deviceType: "H1-3.7-E"),
-            PagedDeviceListResponse.Device(plantName: "demo-device-2", deviceID: "f3000-deviceid", deviceSN: "1234", moduleSN: "sn-2", hasBattery: false, hasPV: true, deviceType: "F3000")
+            PagedDeviceListResponse.Device(
+                deviceSN: "5678",
+                moduleSN: "sn-1",
+                plantID: "p1",
+                stationName: "station 1",
+                managerVersion: "1.0",
+                masterVersion: "2.0",
+                slaveVersion: "3.0",
+                hardwareVersion: "4.0",
+                status: 1,
+                function: PagedDeviceListResponse.Function(scheduler: false)
+            ),
+            PagedDeviceListResponse.Device(
+                deviceSN: "1234",
+                moduleSN: "sn-2",
+                plantID: "p2",
+                stationName: "station 2",
+                managerVersion: "1.0",
+                masterVersion: "2.0",
+                slaveVersion: "3.0",
+                hardwareVersion: "4.0",
+                status: 1,
+                function: PagedDeviceListResponse.Function(scheduler: false)
+            )
         ]
     }
 
@@ -198,6 +220,29 @@ public class DemoNetworking: FoxESSNetworking {
     }
 
     public func fetchErrorMessages() async {}
+
+    public func openapi_fetchRealData(deviceSN: String, variables: [String]) async throws -> OpenQueryResponse {
+        OpenQueryResponse(time: Date(),
+                          deviceSN: deviceSN,
+                          datas: [
+                              OpenQueryResponse.Data(unit: "kW", variable: "feedinPower", value: 0.0),
+                              OpenQueryResponse.Data(unit: "kW", variable: "gridConsumptionPower", value: 2.634),
+                              OpenQueryResponse.Data(unit: "kW", variable: "loadsPower", value: 2.708),
+                              OpenQueryResponse.Data(unit: "kW", variable: "generationPower", value: 0.071),
+                              OpenQueryResponse.Data(unit: "kW", variable: "pvPower", value: 0.111),
+                              OpenQueryResponse.Data(unit: "kW", variable: "meterPower2", value: 0.0),
+                              OpenQueryResponse.Data(unit: "℃", variable: "ambientTemperation", value: 32.5),
+                              OpenQueryResponse.Data(unit: "℃", variable: "invTemperation", value: 23.2)
+                          ])
+    }
+
+    public func openapi_fetchHistory(deviceSN: String, variables: [String]) async throws -> OpenHistoryResponse {
+        OpenHistoryResponse(deviceSN: deviceSN, datas: [])
+    }
+
+    public func openapi_fetchVariables() async throws -> [OpenApiVariable] {
+        []
+    }
 }
 
 public class MockConfig: Config {
@@ -247,6 +292,7 @@ public class MockConfig: Config {
     public var totalSolarYieldModel: Int = 0
     public var showFinancialSummaryOnFlowPage: Bool = true
     public var separateParameterGraphsByUnit: Bool = true
+    public var variables: [Variable] = []
 }
 
 public class PreviewConfigManager: ConfigManager {

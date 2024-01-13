@@ -186,7 +186,6 @@ class SettingsTabViewModel: ObservableObject {
         }.store(in: &cancellables)
     }
 
-    var username: String { userManager.getUsername() ?? "" }
     @Published var showAlert = false
     @Published var showRecalculationAlert = false
 

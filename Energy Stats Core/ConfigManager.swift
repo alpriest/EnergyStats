@@ -31,6 +31,10 @@ public class ConfigManager: ConfigManaging {
 
     public func fetchDevices() async throws {
         let deviceList = try await networking.fetchDeviceList()
+        config.variables = try await networking.openapi_fetchVariables().compactMap {
+            guard let unit = $0.unit else { return nil }
+            return Variable(name: $0.name, variable: $0.name, unit: unit)
+        }
 
         guard deviceList.count > 0 else {
             throw NoDeviceFoundError()
@@ -38,32 +42,27 @@ public class ConfigManager: ConfigManaging {
 
         let newDevices = try await deviceList.asyncMap { device in
             let deviceBattery: Device.Battery?
-            let firmware = try await fetchFirmwareVersions(deviceID: device.deviceID)
-            let variables = try await networking.fetchVariables(deviceID: device.deviceID)
+//            let firmware = try await fetchFirmwareVersions(deviceID: device.deviceID) // TODO: This will be in the device response
+//            let variables = try await networking.fetchVariables(deviceID: device.deviceID)
 
-            if device.hasBattery {
-                do {
-                    let battery = try await networking.fetchBattery(deviceID: device.deviceID)
-                    let batterySettings = try await networking.fetchBatterySettings(deviceSN: device.deviceSN)
-
-                    deviceBattery = BatteryResponseMapper.map(battery: battery, settings: batterySettings)
-                } catch {
-                    deviceBattery = nil
-                }
-            } else {
-                deviceBattery = nil
-            }
+//            if device.hasBattery {
+//                do {
+//                    let battery = try await networking.fetchBattery(deviceID: device.deviceID)
+//                    let batterySettings = try await networking.fetchBatterySettings(deviceSN: device.deviceSN)
+//
+//                    deviceBattery = BatteryResponseMapper.map(battery: battery, settings: batterySettings)
+//                } catch {
+//                    deviceBattery = nil
+//                }
+//            } else {
+//                deviceBattery = nil
+//            }
 
             return Device(
-                plantName: device.plantName,
-                deviceID: device.deviceID,
                 deviceSN: device.deviceSN,
-                hasPV: device.hasPV,
-                hasBattery: device.hasBattery,
+                stationName: device.stationName,
                 battery: deviceBattery,
-                deviceType: device.deviceType,
-                firmware: firmware,
-                variables: variables,
+                firmware: DeviceFirmwareVersion(master: device.masterVersion, slave: device.slaveVersion, manager: device.managerVersion),
                 moduleSN: device.moduleSN
             )
         }
@@ -83,17 +82,6 @@ public class ConfigManager: ConfigManaging {
         )
     }
 
-    public func refreshFirmwareVersions() async throws {
-        devices = try await devices?.asyncMap { [weak self] in
-            let firmware = try await self?.fetchFirmwareVersions(deviceID: $0.deviceID)
-            if firmware != $0.firmware {
-                return $0.copy(firmware: firmware)
-            } else {
-                return $0
-            }
-        }
-    }
-
     public func logout() {
         config.clear()
     }
@@ -110,8 +98,8 @@ public class ConfigManager: ConfigManaging {
 
     public var minSOC: Double { Double(currentDevice.value?.battery?.minSOC ?? "0.2") ?? 0.0 }
 
-    public var variables: [RawVariable] {
-        currentDevice.value?.variables ?? []
+    public var variables: [Variable] {
+        config.variables
     }
 
     public var batteryCapacity: String {

@@ -8,11 +8,10 @@
 import Foundation
 
 extension URL {
-    static var auth = URL(string: "https://www.foxesscloud.com/c/v0/user/login")!
     static var report = URL(string: "https://www.foxesscloud.com/c/v0/device/history/report")!
     static var raw = URL(string: "https://www.foxesscloud.com/c/v0/device/history/raw")!
     static var battery = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/info")!
-    static var deviceList = URL(string: "https://www.foxesscloud.com/c/v0/device/list")!
+    static var deviceList = URL(string: "https://www.foxesscloud.com/op/v0/device/list")! // UPDATED
     static var socGet = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/soc/get")!
     static var addressBook = URL(string: "https://www.foxesscloud.com/c/v0/device/addressbook")!
     static var variables = URL(string: "https://www.foxesscloud.com/c/v1/device/variables")!
@@ -27,8 +26,6 @@ extension URL {
 }
 
 public protocol FoxESSNetworking {
-    func ensureHasToken() async
-    func verifyCredentials(username: String, hashedPassword: String) async throws
     func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [ReportResponse]
     func fetchBattery(deviceID: String) async throws -> BatteryResponse
     func fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse
@@ -56,4 +53,8 @@ public protocol FoxESSNetworking {
     func enableScheduleTemplate(deviceSN: String, templateID: String) async throws
     func fetchScheduleTemplate(deviceSN: String, templateID: String) async throws -> ScheduleTemplateResponse
     func deleteScheduleTemplate(templateID: String) async throws
+
+    func openapi_fetchRealData(deviceSN: String, variables: [String]) async throws -> OpenQueryResponse
+    func openapi_fetchHistory(deviceSN: String, variables: [String]) async throws -> OpenHistoryResponse
+    func openapi_fetchVariables() async throws -> [OpenApiVariable]
 }

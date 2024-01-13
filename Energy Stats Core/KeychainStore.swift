@@ -17,21 +17,12 @@ public struct KeychainError: Error {
 }
 
 public protocol KeychainStoring {
-    func getUsername() -> String?
-    func getHashedPassword() -> String?
-    func store(username: String, hashedPassword: String, updateHasCredentials: Bool) throws
-    func store(token: String?) throws
+    func store(apiKey: String?) throws
     func logout()
     func updateHasCredentials()
     func getToken() -> String?
     var hasCredentials: AnyPublisher<Bool, Never> { get }
     var isDemoUser: Bool { get }
-}
-
-public extension KeychainStoring {
-    func store(username: String, hashedPassword: String) throws {
-        try store(username: username, hashedPassword: hashedPassword, updateHasCredentials: true)
-    }
 }
 
 public class KeychainStore: KeychainStoring, ObservableObject {
@@ -51,27 +42,12 @@ public class KeychainStore: KeychainStoring, ObservableObject {
         updateHasCredentials()
     }
 
-    public func getUsername() -> String? {
-        get(tag: "username")
-    }
-
-    public func getHashedPassword() -> String? {
-        get(tag: "password")
-    }
-
-    public func store(username: String, hashedPassword: String, updateHasCredentials: Bool = true) throws {
-        try set(tag: "password", value: hashedPassword)
-        try set(tag: "username", value: username)
-
-        if updateHasCredentials {
-            self.updateHasCredentials()
-        }
-    }
-
-    public func store(token: String?) throws {
+    public func store(apiKey: String?) throws {
         SecItemDelete(makeQuery(tag: "token"))
 
-        try set(tag: "token", value: token)
+        try set(tag: "token", value: apiKey)
+
+        updateHasCredentials()
     }
 
     public func getToken() -> String? {
@@ -86,11 +62,11 @@ public class KeychainStore: KeychainStoring, ObservableObject {
     }
 
     public func updateHasCredentials() {
-        hasCredentialsSubject.send(getUsername() != nil && getHashedPassword() != nil)
+        hasCredentialsSubject.send(getToken() != nil)
     }
 
     public var isDemoUser: Bool {
-        getUsername() == "demo"
+        getToken() == "demo"
     }
 }
 

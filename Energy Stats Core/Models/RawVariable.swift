@@ -21,7 +21,7 @@ public enum ValueUsage: String {
     }
 }
 
-public extension RawVariable {
+public extension Variable {
     var reportVariable: ReportVariable? {
         switch self.variable {
         case "generationPower":
@@ -104,8 +104,8 @@ public struct RawVariable: Codable, Equatable, Hashable {
     }
 }
 
-public extension Array where Element == RawVariable {
-    func named(_ variable: String) -> RawVariable? {
+public extension Array where Element == Variable {
+    func named(_ variable: String) -> Variable? {
         first(where: { $0.variable == variable })
     }
 }

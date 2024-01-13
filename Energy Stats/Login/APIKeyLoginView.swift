@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct APIKeyLoginView: View {
+    @ObservedObject var userManager: UserManager
     @State private var apiKey = ""
 
     var body: some View {
@@ -24,14 +25,14 @@ struct APIKeyLoginView: View {
 
             HStack {
                 Button("Try demo") {
-                    Task { }
+                    Task { await userManager.login(apiKey: "demo") }
                 }
                 .accessibilityIdentifier("try_demo")
                 .padding()
                 .buttonStyle(.bordered)
 
                 Button("Log me in") {
-                    Task {  }
+                    Task { await userManager.login(apiKey: apiKey) }
                 }
                 .padding()
                 .buttonStyle(.borderedProminent)
@@ -58,5 +59,5 @@ struct APIKeyLoginView: View {
 }
 
 #Preview {
-    APIKeyLoginView()
+    APIKeyLoginView(userManager: UserManager.preview())
 }

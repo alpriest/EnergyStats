@@ -24,22 +24,6 @@ public class NetworkFacade: FoxESSNetworking {
         config.isDemoUser || store.isDemoUser
     }
 
-    public func ensureHasToken() async {
-        if isDemoUser {
-            await fakeNetwork.ensureHasToken()
-        } else {
-            await network.ensureHasToken()
-        }
-    }
-
-    public func verifyCredentials(username: String, hashedPassword: String) async throws {
-        if isDemoUser {
-            try await fakeNetwork.verifyCredentials(username: username, hashedPassword: hashedPassword)
-        } else {
-            try await network.verifyCredentials(username: username, hashedPassword: hashedPassword)
-        }
-    }
-
     public func deleteScheduleTemplate(templateID: String) async throws {
         if isDemoUser {
             try await fakeNetwork.deleteScheduleTemplate(templateID: templateID)
@@ -245,6 +229,30 @@ public class NetworkFacade: FoxESSNetworking {
             await fakeNetwork.fetchErrorMessages()
         } else {
             await network.fetchErrorMessages()
+        }
+    }
+
+    public func openapi_fetchRealData(deviceSN: String, variables: [String]) async throws -> OpenQueryResponse {
+        if isDemoUser {
+            try await fakeNetwork.openapi_fetchRealData(deviceSN: deviceSN, variables: variables)
+        } else {
+            try await network.openapi_fetchRealData(deviceSN: deviceSN, variables: variables)
+        }
+    }
+
+    public func openapi_fetchHistory(deviceSN: String, variables: [String]) async throws -> OpenHistoryResponse {
+        if isDemoUser {
+            try await fakeNetwork.openapi_fetchHistory(deviceSN: deviceSN, variables: variables)
+        } else {
+            try await network.openapi_fetchHistory(deviceSN: deviceSN, variables: variables)
+        }
+    }
+
+    public func openapi_fetchVariables() async throws -> [OpenApiVariable] {
+        if isDemoUser {
+            try await fakeNetwork.openapi_fetchVariables()
+        } else {
+            try await network.openapi_fetchVariables()
         }
     }
 }

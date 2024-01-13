@@ -20,7 +20,7 @@ struct ContentView: View {
             TabbedView(networking: network, userManager: loginManager, configManager: configManager, solarForecastProvider: solarForecastProvider)
                 .task { await network.fetchErrorMessages() }
         } else {
-            LoginView(userManager: loginManager)
+            APIKeyLoginView(userManager: loginManager)
         }
     }
 }

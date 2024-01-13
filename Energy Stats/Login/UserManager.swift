@@ -57,24 +57,16 @@ class UserManager: ObservableObject {
         }
     }
 
-    func getUsername() -> String? {
-        store.getUsername()
-    }
-
     @MainActor
-    func login(username: String, password: String) async {
+    func login(apiKey: String) async {
         do {
             state = .active("Loading")
-            guard let hashedPassword = password.md5() else { throw NSError(domain: "md5", code: 0) }
-
-            if username == "demo", password == "user" {
+            if apiKey == "demo" {
                 configManager.isDemoUser = true
                 configManager.appSettingsPublisher.send(AppSettings.mock())
-            } else {
-                try await networking.verifyCredentials(username: username, hashedPassword: hashedPassword)
             }
 
-            try store.store(username: username, hashedPassword: hashedPassword, updateHasCredentials: false)
+            try store.store(apiKey: apiKey)
             try await configManager.fetchDevices()
             store.updateHasCredentials()
         } catch let error as NetworkError {

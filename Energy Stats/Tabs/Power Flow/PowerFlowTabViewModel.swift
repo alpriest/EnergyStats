@@ -76,12 +76,6 @@ class PowerFlowTabViewModel: ObservableObject {
             }
             self.addDeviceChangeObserver()
             self.addThemeChangeObserver()
-            if self.hasRefreshedFirmware == false {
-                Task {
-                    try await self.configManager.refreshFirmwareVersions()
-                    self.hasRefreshedFirmware = true
-                }
-            }
         }
     }
 
@@ -146,7 +140,6 @@ class PowerFlowTabViewModel: ObservableObject {
             }
 
             await MainActor.run { self.updateState = "Updating..." }
-            await self.network.ensureHasToken()
 
             var rawVariables = [configManager.variables.named("feedinPower"),
                                 self.configManager.variables.named("gridConsumptionPower"),

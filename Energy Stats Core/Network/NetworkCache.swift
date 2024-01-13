@@ -31,14 +31,6 @@ public class NetworkCache: FoxESSNetworking {
         self.network = network
     }
 
-    public func ensureHasToken() async {
-        await network.ensureHasToken()
-    }
-
-    public func verifyCredentials(username: String, hashedPassword: String) async throws {
-        try await network.verifyCredentials(username: username, hashedPassword: hashedPassword)
-    }
-
     public func deleteScheduleTemplate(templateID: String) async throws {
         try await network.deleteScheduleTemplate(templateID: templateID)
     }
@@ -182,6 +174,26 @@ public class NetworkCache: FoxESSNetworking {
 
     public func fetchErrorMessages() async {
         await network.fetchErrorMessages()
+    }
+
+    public func openapi_fetchRealData(deviceSN: String, variables: [String]) async throws -> OpenQueryResponse {
+        let key = makeKey(base: #function, arguments: deviceSN, variables.joined(separator: "_"))
+
+        if let item = cache[key], let cached = item.item as? OpenQueryResponse, item.isFresherThan(interval: shortCacheDurationInSeconds) {
+            return cached
+        } else {
+            let fresh = try await network.openapi_fetchRealData(deviceSN: deviceSN, variables: variables)
+            store(key: key, value: CachedItem(fresh))
+            return fresh
+        }
+    }
+
+    public func openapi_fetchHistory(deviceSN: String, variables: [String]) async throws -> OpenHistoryResponse {
+        try await network.openapi_fetchHistory(deviceSN: deviceSN, variables: variables)
+    }
+
+    public func openapi_fetchVariables() async throws -> [OpenApiVariable] {
+        try await network.openapi_fetchVariables()
     }
 }
 

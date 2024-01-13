@@ -16,14 +16,6 @@ public class NetworkValueCleaner: FoxESSNetworking {
         self.appSettingsPublisher = appSettingsPublisher
     }
 
-    public func ensureHasToken() async {
-        await network.ensureHasToken()
-    }
-
-    public func verifyCredentials(username: String, hashedPassword: String) async throws {
-        try await network.verifyCredentials(username: username, hashedPassword: hashedPassword)
-    }
-
     public func deleteScheduleTemplate(templateID: String) async throws {
         try await network.deleteScheduleTemplate(templateID: templateID)
     }
@@ -136,6 +128,33 @@ public class NetworkValueCleaner: FoxESSNetworking {
 
     public func fetchErrorMessages() async {
         await network.fetchErrorMessages()
+    }
+
+    public func openapi_fetchRealData(deviceSN: String, variables: [String]) async throws -> OpenQueryResponse {
+        let original = try await network.openapi_fetchRealData(deviceSN: deviceSN, variables: variables)
+
+        return OpenQueryResponse(time: original.time, deviceSN: deviceSN, datas: original.datas.map { originalData in
+            OpenQueryResponse.Data(unit: originalData.unit,
+                                   variable: originalData.variable,
+                                   value: originalData.value.capped(appSettingsPublisher.value.dataCeiling))
+        })
+    }
+
+    public func openapi_fetchHistory(deviceSN: String, variables: [String]) async throws -> OpenHistoryResponse {
+        let original = try await network.openapi_fetchHistory(deviceSN: deviceSN, variables: variables)
+
+        return OpenHistoryResponse(deviceSN: original.deviceSN, datas: original.datas.map { originalData in
+            OpenHistoryResponse.Data(unit: originalData.unit,
+                                     name: originalData.name,
+                                     variable: originalData.variable,
+                                     data: originalData.data.map {
+                                         OpenHistoryResponse.Data.UnitData(time: $0.time, value: $0.value.capped(appSettingsPublisher.value.dataCeiling))
+                                     })
+        })
+    }
+
+    public func openapi_fetchVariables() async throws -> [OpenApiVariable] {
+        try await network.openapi_fetchVariables()
     }
 }
 

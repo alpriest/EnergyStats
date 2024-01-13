@@ -79,7 +79,9 @@
 		412A26882AC07FC800F61456 /* BatteryCapacityCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E4B30D28DB7511003F7F47 /* BatteryCapacityCalculator.swift */; };
 		4130364929B86F66006B5CE9 /* BatterySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4130364829B86F66006B5CE9 /* BatterySettingsView.swift */; };
 		4130364B29B8BE7F006B5CE9 /* InverterChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4130364A29B8BE7F006B5CE9 /* InverterChoiceView.swift */; };
-		41339C7228CC7B7B0062B976 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41339C7128CC7B7B0062B976 /* LoginView.swift */; };
+		4131AF4B2B5288CF00836B77 /* Network+OpenAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4131AF4A2B5288CF00836B77 /* Network+OpenAPI.swift */; };
+		4131AF4D2B5288F400836B77 /* OpenQueryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4131AF4C2B5288F400836B77 /* OpenQueryResponse.swift */; };
+		4131AF4F2B52A37F00836B77 /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4131AF4E2B52A37F00836B77 /* Variable.swift */; };
 		4134ACC42A88A1A800CB4BA8 /* InverterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4134ACC32A88A1A800CB4BA8 /* InverterView.swift */; };
 		413B7A312A4A390C00562A68 /* SelfSufficiencyCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413B7A302A4A390C00562A68 /* SelfSufficiencyCalculator.swift */; };
 		413B7A3A2A4A397000562A68 /* Energy_Stats_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; platformFilter = ios; };
@@ -417,7 +419,9 @@
 		412E3C7D28D2519B004A0DCF /* Energy-Stats-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Energy-Stats-Info.plist"; sourceTree = SOURCE_ROOT; };
 		4130364829B86F66006B5CE9 /* BatterySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatterySettingsView.swift; sourceTree = "<group>"; };
 		4130364A29B8BE7F006B5CE9 /* InverterChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterChoiceView.swift; sourceTree = "<group>"; };
-		41339C7128CC7B7B0062B976 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		4131AF4A2B5288CF00836B77 /* Network+OpenAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+OpenAPI.swift"; sourceTree = "<group>"; };
+		4131AF4C2B5288F400836B77 /* OpenQueryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenQueryResponse.swift; sourceTree = "<group>"; };
+		4131AF4E2B52A37F00836B77 /* Variable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
 		41339C7328CC7BA50062B976 /* KeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStore.swift; sourceTree = "<group>"; };
 		4134ACC32A88A1A800CB4BA8 /* InverterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterView.swift; sourceTree = "<group>"; };
 		413B7A302A4A390C00562A68 /* SelfSufficiencyCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSufficiencyCalculator.swift; sourceTree = "<group>"; };
@@ -932,6 +936,7 @@
 				41D8402C2AB2E0DE00769E81 /* ErrorMessagesResponse.swift */,
 				418C09222B18A9E300183603 /* SchedulerFlagResponse.swift */,
 				4190921E2B1D25890017CB65 /* Time.swift */,
+				4131AF4C2B5288F400836B77 /* OpenQueryResponse.swift */,
 			);
 			path = NetworkModels;
 			sourceTree = "<group>";
@@ -953,6 +958,7 @@
 				41E165B62B0BAD7400B17590 /* UserDefaultsConfig.swift */,
 				41E165B82B0BAD9500B17590 /* UserDefaultsPropertyWrappers.swift */,
 				41E3BEC02B1B55A30051C68B /* DataCeiling.swift */,
+				4131AF4E2B52A37F00836B77 /* Variable.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -960,7 +966,6 @@
 		4141B1FE28D86C5B00B60157 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				41339C7128CC7B7B0062B976 /* LoginView.swift */,
 				4141B1FF28D86C7200B60157 /* UserManager.swift */,
 				4163CA7B2B4DE46D00FDA232 /* APIKeyLoginView.swift */,
 			);
@@ -1233,6 +1238,7 @@
 				41DC51592AE2E9DC00FD348B /* NetworkValueCleaner.swift */,
 				41BCC1A82B245C130062084A /* Network+Schedule.swift */,
 				41BCC1AA2B245C280062084A /* Network.swift */,
+				4131AF4A2B5288CF00836B77 /* Network+OpenAPI.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1589,7 +1595,6 @@
 				41CF044C2A95006E00ADCCAD /* ExternalWebNavigationLink.swift in Sources */,
 				411029152A71C4F2004018BB /* NumberTextField.swift in Sources */,
 				419CCB542933BABF00882649 /* ErrorAlertView.swift in Sources */,
-				41339C7228CC7B7B0062B976 /* LoginView.swift in Sources */,
 				41626CD029D969E9003FEB00 /* InverterFirmwareVersionsView.swift in Sources */,
 				4171854C2A01033700D18CDD /* ParameterGraphVariablesToggles.swift in Sources */,
 				41C0923D2B210255001D1E22 /* ScheduleDetailView.swift in Sources */,
@@ -1703,6 +1708,7 @@
 				4103D1DA29DB6C6D001B0BC8 /* DeviceFirmwareVersion.swift in Sources */,
 				41DCF5442B06CBD40010843F /* Date.swift in Sources */,
 				414D7A332AC989030083923F /* FinancialModel.swift in Sources */,
+				4131AF4B2B5288CF00836B77 /* Network+OpenAPI.swift in Sources */,
 				41495F382B211A75004A51C1 /* AlertContentView.swift in Sources */,
 				4190921D2B1D253D0017CB65 /* Schedule.swift in Sources */,
 				416AE4482A812876003D0122 /* WorkMode.swift in Sources */,
@@ -1711,6 +1717,7 @@
 				41D8402D2AB2E0DE00769E81 /* ErrorMessagesResponse.swift in Sources */,
 				4103D1D529DB6C51001B0BC8 /* NetworkResponse.swift in Sources */,
 				4192F99B2A8678DB0035DAB8 /* PagedDataLoggerListResponse.swift in Sources */,
+				4131AF4F2B52A37F00836B77 /* Variable.swift in Sources */,
 				410913FD29DB78EF00133CC5 /* PreciseDateTimeFormatter.swift in Sources */,
 				416AE4492A8128B9003D0122 /* OptionalView.swift in Sources */,
 				41E165B52B0B961200B17590 /* SolcastSettings.swift in Sources */,
@@ -1740,6 +1747,7 @@
 				4171854429FFCF9500D18CDD /* Color+Hex.swift in Sources */,
 				418685D52AFE700100355B6D /* AnimatedNumber.swift in Sources */,
 				41BCC1A92B245C130062084A /* Network+Schedule.swift in Sources */,
+				4131AF4D2B5288F400836B77 /* OpenQueryResponse.swift in Sources */,
 				413B7A312A4A390C00562A68 /* SelfSufficiencyCalculator.swift in Sources */,
 				4155D70D2B28FC920071346A /* Optional+Int.swift in Sources */,
 				41E165BD2B0BE33E00B17590 /* Array+Any.swift in Sources */,

@@ -18,7 +18,6 @@ public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging {
     func fetchDevices() async throws
     func logout()
     func select(device: Device?)
-    func refreshFirmwareVersions() async throws
     func clearBatteryOverride(for deviceID: String)
     var appSettingsPublisher: LatestAppSettingsPublisher { get }
 
@@ -36,10 +35,10 @@ public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging {
     var decimalPlaces: Int { get set }
     var showSunnyBackground: Bool { get set }
     var devices: [Device]? { get set }
-    var selectedDeviceID: String? { get }
+    var selectedDeviceSN: String? { get }
     var firmwareVersions: DeviceFirmwareVersion? { get }
     var displayUnit: DisplayUnit { get set }
-    var variables: [RawVariable] { get }
+    var variables: [Variable] { get }
     var currentDevice: CurrentValueSubject<Device?, Never> { get }
     var hasBattery: Bool { get }
     var showInverterTemperature: Bool { get set }

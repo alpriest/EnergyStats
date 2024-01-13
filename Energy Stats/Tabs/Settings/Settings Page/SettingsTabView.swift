@@ -72,7 +72,7 @@ struct SettingsTabView: View {
                     NavigationLink("settings.debug") { DebugDataView(networking: networking, configManager: configManager) }
                 }
 
-                SettingsFooterView(username: viewModel.username, onLogout: viewModel.logout, appVersion: viewModel.appVersion)
+                SettingsFooterView(onLogout: viewModel.logout, appVersion: viewModel.appVersion)
             }
             .navigationTitle("Settings")
         }

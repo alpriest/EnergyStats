@@ -10,12 +10,6 @@ import Foundation
 struct DeviceListRequest: Encodable {
     let pageSize = 20
     let currentPage = 1
-    let total = 0
-    let condition = Condition()
-
-    struct Condition: Encodable {
-        let queryDate = QueryDate()
-    }
 
     struct QueryDate: Encodable {
         let begin = 0
@@ -30,13 +24,20 @@ public struct PagedDeviceListResponse: Codable, Hashable {
     public let devices: [Device]
 
     public struct Device: Codable, Hashable {
-        public let plantName: String
-        public let deviceID: String
         public let deviceSN: String
         public let moduleSN: String
-        public let hasBattery: Bool
-        public let hasPV: Bool
-        public let deviceType: String
+        public let plantID: String
+        public let stationName: String
+        public let managerVersion: String
+        public let masterVersion: String
+        public let slaveVersion: String
+        public let hardwareVersion: String
+        public let status: Int
+        public let function: Function
+    }
+
+    public struct Function: Codable, Hashable {
+        public let scheduler: Bool
     }
 }
 
@@ -45,15 +46,10 @@ struct DeviceList: Codable {
 }
 
 public struct Device: Codable, Hashable, Identifiable {
-    public let plantName: String
-    public let deviceID: String
     public let deviceSN: String
-    public let hasPV: Bool
+    public let stationName: String
     public let battery: Battery?
-    public let hasBattery: Bool
-    public let deviceType: String?
     public let firmware: DeviceFirmwareVersion?
-    public let variables: [RawVariable]
     public let moduleSN: String
 
     public struct Battery: Codable, Hashable {
@@ -66,60 +62,40 @@ public struct Device: Codable, Hashable, Identifiable {
         }
     }
 
-    public var id: String { deviceID }
+    public var id: String { deviceSN }
 
     public var deviceDisplayName: String {
-        deviceType ?? "\(deviceID) Re-login to update"
+        "Unknown"
     }
 
     public var deviceSelectorName: String {
-        "\(deviceDisplayName) \(plantName)"
+        "\(deviceDisplayName) \(stationName)"
     }
 
-    public init(plantName: String,
-                deviceID: String,
-                deviceSN: String,
-                hasPV: Bool,
-                hasBattery: Bool,
+    public init(deviceSN: String,
+                stationName: String,
                 battery: Battery?,
-                deviceType: String?,
                 firmware: DeviceFirmwareVersion?,
-                variables: [RawVariable],
                 moduleSN: String)
     {
-        self.plantName = plantName
-        self.deviceID = deviceID
         self.deviceSN = deviceSN
-        self.hasPV = hasPV
-        self.hasBattery = hasBattery
+        self.stationName = stationName
         self.battery = battery
-        self.deviceType = deviceType
         self.firmware = firmware
-        self.variables = variables
         self.moduleSN = moduleSN
     }
 
-    public func copy(plantName: String? = nil,
-                     deviceID: String? = nil,
-                     deviceSN: String? = nil,
-                     hasPV: Bool? = nil,
-                     hasBattery: Bool? = nil,
+    public func copy(deviceSN: String? = nil,
+                     stationName: String? = nil,
                      battery: Battery? = nil,
-                     deviceType: String? = nil,
                      firmware: DeviceFirmwareVersion? = nil,
-                     variables: [RawVariable]? = nil,
                      moduleSN: String? = nil) -> Device
     {
         Device(
-            plantName: plantName ?? self.plantName,
-            deviceID: deviceID ?? self.deviceID,
             deviceSN: deviceSN ?? self.deviceSN,
-            hasPV: hasPV ?? self.hasPV,
-            hasBattery: hasBattery ?? self.hasBattery,
+            stationName: stationName ?? self.stationName,
             battery: battery ?? self.battery,
-            deviceType: deviceType ?? self.deviceType,
             firmware: firmware ?? self.firmware,
-            variables: variables ?? self.variables,
             moduleSN: moduleSN ?? self.moduleSN
         )
     }
