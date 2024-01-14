@@ -34,7 +34,7 @@ public struct PagedDeviceListResponse: Codable, Hashable {
 public struct DeviceDetailResponse: Codable, Hashable {
     public let deviceSN: String
     public let moduleSN: String
-    public let plantID: String
+    public let stationID: String
     public let stationName: String
     public let managerVersion: String
     public let masterVersion: String

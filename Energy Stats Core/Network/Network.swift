@@ -225,6 +225,7 @@ extension Network {
 
             throw NetworkError.invalidResponse(request.url, statusCode)
         } catch let error as NSError {
+            print(error)
             if error.domain == NSURLErrorDomain, error.code == URLError.notConnectedToInternet.rawValue {
                 throw NetworkError.offline
             } else {

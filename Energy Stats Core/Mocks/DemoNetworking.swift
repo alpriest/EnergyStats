@@ -102,7 +102,7 @@ public class DemoNetworking: FoxESSNetworking {
             DeviceDetailResponse(
                 deviceSN: "5678",
                 moduleSN: "sn-1",
-                plantID: "p1",
+                stationID: "p1",
                 stationName: "station 1",
                 managerVersion: "1.0",
                 masterVersion: "2.0",
@@ -114,7 +114,7 @@ public class DemoNetworking: FoxESSNetworking {
             DeviceDetailResponse(
                 deviceSN: "1234",
                 moduleSN: "sn-2",
-                plantID: "p2",
+                stationID: "p2",
                 stationName: "station 2",
                 managerVersion: "1.0",
                 masterVersion: "2.0",
