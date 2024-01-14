@@ -158,12 +158,26 @@ public struct OpenReportRequest: Encodable {
     }
 }
 
-public struct OpenReportResponse: Decodable {
+public struct OpenReportResponse: Codable {
     public let variable: String
     public let unit: String
     public let values: [ReportData]
 
-    public struct ReportData: Decodable, Hashable {
+    enum CodingKeys: CodingKey {
+        case variable
+        case unit
+        case values
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.variable = try container.decode(String.self, forKey: .variable)
+        self.unit = try container.decode(String.self, forKey: .unit)
+        let doubleValues = try container.decode([Double].self, forKey: .values)
+        self.values = doubleValues.enumerated().map { ReportData(index: $0, value: $1) }
+    }
+
+    public struct ReportData: Codable {
         public let index: Int
         public let value: Double
     }
