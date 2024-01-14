@@ -121,6 +121,7 @@ class ParametersGraphTabViewModel: ObservableObject {
 
     func load() async {
         guard let currentDevice = configManager.currentDevice.value else { return }
+        guard let start = queryDate.asDate() else { return }
 
         Task { @MainActor in
             state = .active("Loading")
@@ -128,7 +129,9 @@ class ParametersGraphTabViewModel: ObservableObject {
 
         do {
             let rawGraphVariables = graphVariables.filter { $0.isSelected }.compactMap { $0.type }
-            let raw = try await networking.openapi_fetchHistory(deviceSN: currentDevice.deviceSN, variables: rawGraphVariables.map { $0.variable }) // TODO , queryDate: queryDate)
+            let startDate = Calendar.current.startOfDay(for: start)
+            let endDate = Calendar.current.startOfDay(for: start.addingTimeInterval(86400))
+            let raw = try await networking.openapi_fetchHistory(deviceSN: currentDevice.deviceSN, variables: rawGraphVariables.map { $0.variable }, start: startDate, end: endDate)
             let rawData: [ParameterGraphValue] = raw.datas.flatMap { response -> [ParameterGraphValue] in
                 guard let rawVariable = configManager.variables.first(where: { $0.variable == response.variable }) else { return [] }
 

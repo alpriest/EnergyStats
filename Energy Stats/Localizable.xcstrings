@@ -5552,6 +5552,7 @@
       }
     },
     "FoxESS" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -8522,6 +8523,7 @@
       }
     },
     "PV Only" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -12484,6 +12486,7 @@
       }
     },
     "Uses the FoxESS supplied value which contains battery output and solar output." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

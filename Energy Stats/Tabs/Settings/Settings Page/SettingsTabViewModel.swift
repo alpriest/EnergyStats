@@ -129,9 +129,9 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
-    @Published var totalSolarYieldModel: TotalSolarYieldModel {
+    @Published var showTotalYieldOnPowerFlow: Bool {
         didSet {
-            config.totalSolarYieldModel = totalSolarYieldModel
+            config.showTotalYieldOnPowerFlow = showTotalYieldOnPowerFlow
         }
     }
 
@@ -165,7 +165,7 @@ class SettingsTabViewModel: ObservableObject {
         shouldCombineCT2WithPVPower = config.shouldCombineCT2WithPVPower
         showGraphValueDescriptions = config.showGraphValueDescriptions
         dataCeiling = config.dataCeiling
-        totalSolarYieldModel = config.totalSolarYieldModel
+        showTotalYieldOnPowerFlow = config.showTotalYieldOnPowerFlow
         separateParameterGraphsByUnit = config.separateParameterGraphsByUnit
 
         config.currentDevice.sink { [weak self] _ in

@@ -30,10 +30,10 @@ struct LoadedPowerFlowView: View {
                 if size == .zero {
                     Color.clear.frame(minWidth: 0, maxWidth: .infinity)
                 } else {
-                    if appSettings.totalSolarYieldModel != .off {
+                    if appSettings.showTotalYieldOnPowerFlow {
                         HStack(spacing: 0) {
                             (Text("Yield today") + Text(" ")).accessibilityHidden(true)
-                            EnergyText(amount: viewModel.todaysGeneration.todayGeneration(appSettings.totalSolarYieldModel), appSettings: appSettings, type: .totalYield)
+                            EnergyText(amount: viewModel.todaysGeneration.todayGeneration(), appSettings: appSettings, type: .totalYield)
                         }
                         .padding(.bottom, 8)
                     }
@@ -194,7 +194,7 @@ extension HomePowerFlowViewModel {
               battery: battery,
               home: 1.5,
               grid: 0.71,
-              todaysGeneration: GenerationViewModel(response: []),
+              todaysGeneration: GenerationViewModel(response: OpenHistoryResponse(deviceSN: "abc123", datas: [])),
               earnings: .any(),
               inverterTemperatures: InverterTemperatures(ambient: 4.0, inverter: 9.0),
               homeTotal: 1.0,

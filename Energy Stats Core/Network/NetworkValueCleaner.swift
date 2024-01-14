@@ -136,8 +136,8 @@ public class NetworkValueCleaner: FoxESSNetworking {
         })
     }
 
-    public func openapi_fetchHistory(deviceSN: String, variables: [String]) async throws -> OpenHistoryResponse {
-        let original = try await network.openapi_fetchHistory(deviceSN: deviceSN, variables: variables)
+    public func openapi_fetchHistory(deviceSN: String, variables: [String], start: Date, end: Date) async throws -> OpenHistoryResponse {
+        let original = try await network.openapi_fetchHistory(deviceSN: deviceSN, variables: variables, start: start, end: end)
 
         return OpenHistoryResponse(deviceSN: original.deviceSN, datas: original.datas.map { originalData in
             OpenHistoryResponse.Data(unit: originalData.unit,

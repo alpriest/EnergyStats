@@ -61,23 +61,12 @@ struct DisplaySettingsView: View {
 
         Section {
             HStack {
-                Text("settings.yield.title").padding(.trailing)
-                Spacer()
-                Picker("settings.yield.title", selection: $viewModel.totalSolarYieldModel) {
-                    Text("Off").tag(TotalSolarYieldModel.off)
-                    Text("PV Only").tag(TotalSolarYieldModel.energyStats)
-                    Text("FoxESS").tag(TotalSolarYieldModel.foxESS)
-                }.pickerStyle(.segmented)
+                Toggle(isOn: $viewModel.showTotalYieldOnPowerFlow) {
+                    Text("settings.yield.title")
+                }
             }
         } footer: {
-            switch viewModel.totalSolarYieldModel {
-            case TotalSolarYieldModel.off:
-                EmptyView()
-            case TotalSolarYieldModel.energyStats:
-                Text("Calculated as a Riemann sum approximation integration of pvPower. This will be reasonably accurate but only for today.")
-            case TotalSolarYieldModel.foxESS:
-                Text("Uses the FoxESS supplied value which contains battery output and solar output.")
-            }
+            Text("Calculated as a Riemann sum approximation integration of pvPower. This will be reasonably accurate but only for today.")
         }
         Section {
             HStack {

@@ -41,7 +41,7 @@ public protocol Config {
     var showGraphValueDescriptions: Bool { get set }
     var solcastSettings: SolcastSettings { get set }
     var dataCeiling: DataCeiling { get set }
-    var totalSolarYieldModel: Int { get set }
+    var showTotalYieldOnPowerFlow: Bool { get set }
     var showFinancialSummaryOnFlowPage: Bool { get set }
     var separateParameterGraphsByUnit: Bool { get set }
     var variables: [Variable] { get set }

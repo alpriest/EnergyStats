@@ -232,11 +232,11 @@ public class NetworkFacade: FoxESSNetworking {
         }
     }
 
-    public func openapi_fetchHistory(deviceSN: String, variables: [String]) async throws -> OpenHistoryResponse {
+    public func openapi_fetchHistory(deviceSN: String, variables: [String], start: Date, end: Date) async throws -> OpenHistoryResponse {
         if isDemoUser {
-            try await fakeNetwork.openapi_fetchHistory(deviceSN: deviceSN, variables: variables)
+            try await fakeNetwork.openapi_fetchHistory(deviceSN: deviceSN, variables: variables, start: start, end: end)
         } else {
-            try await network.openapi_fetchHistory(deviceSN: deviceSN, variables: variables)
+            try await network.openapi_fetchHistory(deviceSN: deviceSN, variables: variables, start: start, end: end)
         }
     }
 

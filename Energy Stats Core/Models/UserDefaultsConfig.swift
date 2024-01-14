@@ -53,7 +53,7 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "solcastApiKey") // Remove 2024
         UserDefaults.shared.removeObject(forKey: "solcastSettings")
         UserDefaults.shared.removeObject(forKey: "dataCeiling")
-        UserDefaults.shared.removeObject(forKey: "totalSolarYieldModel")
+        UserDefaults.shared.removeObject(forKey: "showTotalYieldOnPowerFlow")
         UserDefaults.shared.removeObject(forKey: "showFinancialSummaryOnFlowPage")
         UserDefaults.shared.removeObject(forKey: "separateParameterGraphsByUnit")
     }
@@ -88,8 +88,8 @@ public class UserDefaultsConfig: Config {
     @UserDefaultsStoredBool(key: "showUsableBatteryOnly", defaultValue: false)
     public var showUsableBatteryOnly: Bool
 
-    @UserDefaultsStoredBool(key: "showTotalYield", defaultValue: false)
-    public var showTotalYield: Bool
+    @UserDefaultsStoredBool(key: "showTotalYieldOnPowerFlow", defaultValue: false)
+    public var showTotalYieldOnPowerFlow: Bool
 
     @UserDefaultsStoredData(key: "devices")
     public var devices: Data?
@@ -201,9 +201,6 @@ public class UserDefaultsConfig: Config {
             UserDefaults.shared.set(newValue.rawValue, forKey: "dataCeiling")
         }
     }
-
-    @UserDefaultsStoredInt(key: "totalSolarYieldModel", defaultValue: TotalSolarYieldModel.energyStats.rawValue)
-    public var totalSolarYieldModel: Int
 
     @UserDefaultsStoredBool(key: "separateParameterGraphsByUnit", defaultValue: true)
     public var separateParameterGraphsByUnit: Bool

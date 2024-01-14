@@ -55,7 +55,7 @@ public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging {
     var shouldCombineCT2WithPVPower: Bool { get set }
     var showGraphValueDescriptions: Bool { get set }
     var dataCeiling: DataCeiling { get set }
-    var totalSolarYieldModel: TotalSolarYieldModel { get set }
+    var showTotalYieldOnPowerFlow: Bool { get set }
     var showFinancialSummaryOnFlowPage: Bool { get set }
     var separateParameterGraphsByUnit: Bool { get set }
 }

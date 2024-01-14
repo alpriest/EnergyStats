@@ -450,12 +450,12 @@ public class ConfigManager: ConfigManaging {
         }
     }
 
-    public var totalSolarYieldModel: TotalSolarYieldModel {
-        get { TotalSolarYieldModel(rawValue: config.totalSolarYieldModel) ?? .energyStats }
+    public var showTotalYieldOnPowerFlow: Bool {
+        get { config.showTotalYieldOnPowerFlow }
         set {
-            config.totalSolarYieldModel = newValue.rawValue
+            config.showTotalYieldOnPowerFlow = newValue
             appSettingsPublisher.send(appSettingsPublisher.value.copy(
-                totalSolarYieldModel: totalSolarYieldModel
+                showTotalYieldOnPowerFlow: showTotalYieldOnPowerFlow
             ))
         }
     }

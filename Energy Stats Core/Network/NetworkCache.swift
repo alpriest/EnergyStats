@@ -176,8 +176,16 @@ public class NetworkCache: FoxESSNetworking {
         }
     }
 
-    public func openapi_fetchHistory(deviceSN: String, variables: [String]) async throws -> OpenHistoryResponse {
-        try await network.openapi_fetchHistory(deviceSN: deviceSN, variables: variables)
+    public func openapi_fetchHistory(deviceSN: String, variables: [String], start: Date, end: Date) async throws -> OpenHistoryResponse {
+        let key = makeKey(base: #function, arguments: deviceSN, variables.joined(separator: "_"), String(start.timeIntervalSince1970), String(end.timeIntervalSince1970))
+
+        if let item = cache[key], let cached = item.item as? OpenHistoryResponse, item.isFresherThan(interval: shortCacheDurationInSeconds) {
+            return cached
+        } else {
+            let fresh = try await network.openapi_fetchHistory(deviceSN: deviceSN, variables: variables, start: start, end: end)
+            store(key: key, value: CachedItem(fresh))
+            return fresh
+        }
     }
 
     public func openapi_fetchVariables() async throws -> [OpenApiVariable] {
@@ -198,8 +206,8 @@ public class NetworkCache: FoxESSNetworking {
 }
 
 private extension NetworkCache {
-    func makeKey(base: String, arguments: String...) -> String {
-        ([base] + arguments).joined(separator: "_")
+    func makeKey(base: String, arguments: String?...) -> String {
+        ([base] + arguments.compactMap { $0 }).joined(separator: "_")
     }
 
     private func store(key: String, value: CachedItem) {

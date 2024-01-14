@@ -17,7 +17,6 @@ public enum SelfSufficiencyEstimateMode: Int, RawRepresentable {
 public enum TotalSolarYieldModel: Int, RawRepresentable {
     case off = 0
     case energyStats = 1
-    case foxESS = 2
 }
 
 public struct AppSettings {
@@ -45,7 +44,7 @@ public struct AppSettings {
     public var showGraphValueDescriptions: Bool
     public var solcastSettings: SolcastSettings
     public var dataCeiling: DataCeiling
-    public var totalSolarYieldModel: TotalSolarYieldModel
+    public var showTotalYieldOnPowerFlow: Bool
     public var showFinancialSummaryOnFlowPage: Bool
     public var separateParameterGraphsByUnit: Bool
 
@@ -74,7 +73,7 @@ public struct AppSettings {
         showGraphValueDescriptions: Bool,
         solcastSettings: SolcastSettings,
         dataCeiling: DataCeiling,
-        totalSolarYieldModel: TotalSolarYieldModel,
+        showTotalYieldOnPowerFlow: Bool,
         showFinancialSummaryOnFlowPage: Bool,
         separateParameterGraphsByUnit: Bool
     ) {
@@ -85,7 +84,7 @@ public struct AppSettings {
         self.showBatteryEstimate = showBatteryEstimate
         self.showUsableBatteryOnly = showUsableBatteryOnly
         self.displayUnit = displayUnit
-        self.totalSolarYieldModel = totalSolarYieldModel
+        self.showTotalYieldOnPowerFlow = showTotalYieldOnPowerFlow
         self.selfSufficiencyEstimateMode = selfSufficiencyEstimateMode
         self.showFinancialEarnings = showFinancialEarnings
         self.feedInUnitPrice = feedInUnitPrice
@@ -132,7 +131,7 @@ public struct AppSettings {
         showGraphValueDescriptions: Bool? = nil,
         solcastSettings: SolcastSettings? = nil,
         dataCeiling: DataCeiling? = nil,
-        totalSolarYieldModel: TotalSolarYieldModel? = nil,
+        showTotalYieldOnPowerFlow: Bool? = nil,
         showFinancialSummaryOnFlowPage: Bool? = nil,
         separateParameterGraphsByUnit: Bool? = nil
     ) -> AppSettings {
@@ -161,7 +160,7 @@ public struct AppSettings {
             showGraphValueDescriptions: showGraphValueDescriptions ?? self.showGraphValueDescriptions,
             solcastSettings: solcastSettings ?? self.solcastSettings,
             dataCeiling: dataCeiling ?? self.dataCeiling,
-            totalSolarYieldModel: totalSolarYieldModel ?? self.totalSolarYieldModel,
+            showTotalYieldOnPowerFlow: showTotalYieldOnPowerFlow ?? self.showTotalYieldOnPowerFlow,
             showFinancialSummaryOnFlowPage: showFinancialSummaryOnFlowPage ?? self.showFinancialSummaryOnFlowPage,
             separateParameterGraphsByUnit: separateParameterGraphsByUnit ?? self.separateParameterGraphsByUnit
         )

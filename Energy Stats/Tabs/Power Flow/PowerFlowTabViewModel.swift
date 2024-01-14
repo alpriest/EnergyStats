@@ -152,11 +152,11 @@ class PowerFlowTabViewModel: ObservableObject {
                 reportVariables.append(contentsOf: [.chargeEnergyToTal, .dischargeEnergyToTal])
             }
 
-            let historyResponse = try await self.network.openapi_fetchReport(deviceSN: currentDeviceSN,
+            let reportResponse = try await self.network.openapi_fetchReport(deviceSN: currentDeviceSN,
                                                                              variables: reportVariables,
                                                                              queryDate: .now(),
                                                                              reportType: .month)
-            let totals = TotalsViewModel(reports: historyResponse)
+            let totals = TotalsViewModel(reports: reportResponse)
 
             if self.configManager.appSettingsPublisher.value.showInverterTemperature {
                 rawVariables.append(contentsOf: [
@@ -201,12 +201,15 @@ class PowerFlowTabViewModel: ObservableObject {
                 battery = .noBattery
             }
 
+            let start = Calendar.current.startOfDay(for: Date())
+            let history = try await network.openapi_fetchHistory(deviceSN: currentDeviceSN, variables: ["pvPower", "meterPower2"], start: start, end: start.addingTimeInterval(86400))
+
             let summary = HomePowerFlowViewModel(
                 solar: currentViewModel.currentSolarPower,
                 battery: battery,
                 home: currentViewModel.currentHomeConsumption,
                 grid: currentViewModel.currentGrid,
-                todaysGeneration: GenerationViewModel(response: historyResponse),
+                todaysGeneration: GenerationViewModel(response: history),
                 earnings: EarningsViewModel(energyStatsFinancialModel: EnergyStatsFinancialModel(totalsViewModel: totals, config: self.configManager, currencySymbol: self.configManager.currencySymbol)),
                 inverterTemperatures: currentViewModel.currentTemperatures,
                 homeTotal: totals.home,

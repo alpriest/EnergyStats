@@ -228,7 +228,7 @@ public class DemoNetworking: FoxESSNetworking {
                           ])
     }
 
-    public func openapi_fetchHistory(deviceSN: String, variables: [String]) async throws -> OpenHistoryResponse {
+    public func openapi_fetchHistory(deviceSN: String, variables: [String], start: Date, end: Date) async throws -> OpenHistoryResponse {
         OpenHistoryResponse(deviceSN: deviceSN, datas: [])
     }
 
@@ -283,7 +283,7 @@ public class MockConfig: Config {
     public var shouldCombineCT2WithPVPower: Bool = true
     public var solcastSettings: SolcastSettings = .init(apiKey: nil, sites: [SolcastSite.preview()])
     public var dataCeiling: DataCeiling = .mild
-    public var totalSolarYieldModel: Int = 0
+    public var showTotalYieldOnPowerFlow: Bool = true
     public var showFinancialSummaryOnFlowPage: Bool = true
     public var separateParameterGraphsByUnit: Bool = true
     public var variables: [Variable] = []

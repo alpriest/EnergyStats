@@ -33,10 +33,17 @@ public extension Network {
         }
     }
 
-    func openapi_fetchHistory(deviceSN: String, variables: [String]) async throws -> OpenHistoryResponse {
+    func openapi_fetchHistory(deviceSN: String, variables: [String], start: Date, end: Date) async throws -> OpenHistoryResponse {
         var request = URLRequest(url: URL.getOpenHistoryData)
         request.httpMethod = "POST"
-        request.httpBody = try! JSONEncoder().encode(OpenHistoryRequest(deviceSN: deviceSN, variables: variables))
+        request.httpBody = try! JSONEncoder().encode(
+            OpenHistoryRequest(
+                sn: deviceSN,
+                variables: variables,
+                begin: start.timeIntervalSince1970 * 1000,
+                end: end.timeIntervalSince1970 * 1000
+            )
+        )
 
         do {
             let result: ([OpenHistoryResponse], Data) = try await fetch(request)

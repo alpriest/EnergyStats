@@ -106,21 +106,28 @@ public struct OpenQueryRequest: Encodable {
 }
 
 public struct OpenHistoryRequest: Encodable {
-    public let deviceSN: String
+    public let sn: String
     public let variables: [String]
+    public let begin: Double
+    public let end: Double
 }
 
-public struct OpenHistoryResponse: Decodable {
+public struct OpenHistoryResponse: Codable {
     public let deviceSN: String
     public let datas: [Data]
 
-    public struct Data: Decodable {
+    public init(deviceSN: String, datas: [Data]) {
+        self.deviceSN = deviceSN
+        self.datas = datas
+    }
+
+    public struct Data: Codable {
         public let unit: String?
         public let name: String
         public let variable: String
         public let data: [UnitData]
 
-        public struct UnitData: Decodable {
+        public struct UnitData: Codable {
             public let time: Date
             public let value: Double
 
