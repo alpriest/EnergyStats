@@ -120,11 +120,9 @@ struct InverterView: View {
                     VStack {
                         HStack {
                             VStack {
-                                if appSettings.showInverterStationName {
-                                    OptionalView(viewModel.deviceStationName) {
-                                        Text($0)
-                                            .font(.caption2)
-                                    }
+                                OptionalView(viewModel.deviceStationName) {
+                                    Text($0)
+                                        .font(.caption2)
                                 }
                             }
                             Image(systemName: "chevron.up.chevron.down")
@@ -136,11 +134,9 @@ struct InverterView: View {
                 .padding(.top, 5)
             } else {
                 VStack {
-                    if appSettings.showInverterStationName {
-                        OptionalView(viewModel.deviceStationName) {
-                            Text($0)
-                                .font(.caption2)
-                        }
+                    OptionalView(viewModel.deviceStationName) {
+                        Text($0)
+                            .font(.caption2)
                     }
                 }
                 .padding(2)

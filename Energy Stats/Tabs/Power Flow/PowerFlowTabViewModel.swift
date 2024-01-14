@@ -125,7 +125,7 @@ class PowerFlowTabViewModel: ObservableObject {
         defer { isLoading = false }
 
         do {
-            if self.configManager.selectedDeviceSN == nil {
+            if configManager.currentDevice.value == nil {
                 try await self.configManager.fetchDevices()
             }
 

@@ -70,6 +70,8 @@ public class ConfigManager: ConfigManaging {
         devices = newDevices
         if selectedDeviceSN == nil {
             select(device: devices?.first)
+        } else if currentDevice.value == nil {
+            select(device: devices?.first(where: { $0.deviceSN == selectedDeviceSN }))
         }
     }
 
@@ -134,7 +136,7 @@ public class ConfigManager: ConfigManaging {
     }
 
     public var hasBattery: Bool {
-        true // TODO: Move to config
+        true // TODO: Move to config but hanging off currentDevice
 //        currentDevice.value?.hasBattery ?? false
     }
 

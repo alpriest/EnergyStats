@@ -73,11 +73,11 @@ public struct Device: Codable, Hashable, Identifiable {
     public var id: String { deviceSN }
 
     public var deviceDisplayName: String {
-        stationName
+        "\(stationName) \(stationID)"
     }
 
     public var deviceSelectorName: String {
-        "\(deviceDisplayName) \(stationID)"
+        stationName
     }
 
     public init(deviceSN: String,
