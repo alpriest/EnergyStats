@@ -29,9 +29,8 @@ public protocol Config {
     var showHomeTotalOnPowerFlow: Bool { get set }
     var showInverterIcon: Bool { get set }
     var shouldInvertCT2: Bool { get set }
-    var showInverterPlantName: Bool { get set }
+    var showInverterStationName: Bool { get set }
     var showGridTotalsOnPowerFlow: Bool { get set }
-    var showInverterTypeNameOnPowerFlow: Bool { get set }
     var deviceBatteryOverrides: [String: String] { get set }
     var showLastUpdateTimestamp: Bool { get set }
     var solarDefinitions: SolarRangeDefinitions { get set }

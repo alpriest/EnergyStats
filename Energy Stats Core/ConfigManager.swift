@@ -58,7 +58,7 @@ public class ConfigManager: ConfigManaging {
 //                deviceBattery = nil
 //            }
 
-            return Device(
+            Device(
                 deviceSN: device.deviceSN,
                 stationName: device.stationName,
                 battery: nil,
@@ -133,7 +133,7 @@ public class ConfigManager: ConfigManaging {
     }
 
     public var hasBattery: Bool {
-        true //TODO: Move to config
+        true // TODO: Move to config
 //        currentDevice.value?.hasBattery ?? false
     }
 
@@ -308,16 +308,6 @@ public class ConfigManager: ConfigManaging {
         }
     }
 
-    public var showInverterTypeNameOnPowerFlow: Bool {
-        get { config.showInverterTypeNameOnPowerFlow }
-        set {
-            config.showInverterTypeNameOnPowerFlow = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
-                showInverterTypeNameOnPowerFlow: config.showInverterTypeNameOnPowerFlow
-            ))
-        }
-    }
-
     public var solarDefinitions: SolarRangeDefinitions {
         get { config.solarDefinitions }
         set {
@@ -407,12 +397,12 @@ public class ConfigManager: ConfigManaging {
         }
     }
 
-    public var showInverterPlantName: Bool {
-        get { config.showInverterPlantName }
+    public var showInverterStationName: Bool {
+        get { config.showInverterStationName }
         set {
-            config.showInverterPlantName = newValue
+            config.showInverterStationName = newValue
             appSettingsPublisher.send(appSettingsPublisher.value.copy(
-                showInverterPlantName: config.showInverterPlantName
+                showInverterStationName: config.showInverterStationName
             ))
         }
     }

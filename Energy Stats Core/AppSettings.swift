@@ -37,7 +37,7 @@ public struct AppSettings {
     public var showHomeTotalOnPowerFlow: Bool
     public var showInverterIcon: Bool
     public var shouldInvertCT2: Bool
-    public var showInverterPlantName: Bool
+    public var showInverterStationName: Bool
     public var showGridTotalsOnPowerFlow: Bool
     public var showLastUpdateTimestamp: Bool
     public var solarDefinitions: SolarRangeDefinitions
@@ -67,9 +67,8 @@ public struct AppSettings {
         showHomeTotalOnPowerFlow: Bool,
         showInverterIcon: Bool,
         shouldInvertCT2: Bool,
-        showInverterPlantName: Bool,
+        showInverterStationName: Bool,
         showGridTotalsOnPowerFlow: Bool,
-        showInverterTypeNameOnPowerFlow: Bool,
         showLastUpdateTimestamp: Bool,
         solarDefinitions: SolarRangeDefinitions,
         parameterGroups: [ParameterGroup],
@@ -98,9 +97,8 @@ public struct AppSettings {
         self.showHomeTotalOnPowerFlow = showHomeTotalOnPowerFlow
         self.showInverterIcon = showInverterIcon
         self.shouldInvertCT2 = shouldInvertCT2
-        self.showInverterPlantName = showInverterPlantName
+        self.showInverterStationName = showInverterStationName
         self.showGridTotalsOnPowerFlow = showGridTotalsOnPowerFlow
-        self.showInverterTypeNameOnPowerFlow = showInverterTypeNameOnPowerFlow
         self.showLastUpdateTimestamp = showLastUpdateTimestamp
         self.solarDefinitions = solarDefinitions
         self.parameterGroups = parameterGroups
@@ -129,9 +127,8 @@ public struct AppSettings {
         showHomeTotalOnPowerFlow: Bool? = nil,
         showInverterIcon: Bool? = nil,
         shouldInvertCT2: Bool? = nil,
-        showInverterPlantName: Bool? = nil,
+        showInverterStationName: Bool? = nil,
         showGridTotalsOnPowerFlow: Bool? = nil,
-        showInverterTypeNameOnPowerFlow: Bool? = nil,
         showLastUpdateTimestamp: Bool? = nil,
         solarDefinitions: SolarRangeDefinitions? = nil,
         parameterGroups: [ParameterGroup]? = nil,
@@ -160,9 +157,8 @@ public struct AppSettings {
             showHomeTotalOnPowerFlow: showHomeTotalOnPowerFlow ?? self.showHomeTotalOnPowerFlow,
             showInverterIcon: showInverterIcon ?? self.showInverterIcon,
             shouldInvertCT2: shouldInvertCT2 ?? self.shouldInvertCT2,
-            showInverterPlantName: showInverterPlantName ?? self.showInverterPlantName,
+            showInverterStationName: showInverterStationName ?? self.showInverterStationName,
             showGridTotalsOnPowerFlow: showGridTotalsOnPowerFlow ?? self.showGridTotalsOnPowerFlow,
-            showInverterTypeNameOnPowerFlow: showInverterTypeNameOnPowerFlow ?? self.showInverterTypeNameOnPowerFlow,
             showLastUpdateTimestamp: showLastUpdateTimestamp ?? self.showLastUpdateTimestamp,
             solarDefinitions: solarDefinitions ?? self.solarDefinitions,
             parameterGroups: parameterGroups ?? self.parameterGroups,

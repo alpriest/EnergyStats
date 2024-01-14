@@ -198,6 +198,7 @@
       }
     },
     " where residual is estimated by your installation and may not be accurate. Tap the capacity above to enter a manual value." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1382,6 +1383,7 @@
       }
     },
     "Accumulated income" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2600,6 +2602,7 @@
       }
     },
     "Calculated as " : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2774,6 +2777,7 @@
       }
     },
     "capacity = residual / (Min SOC / 100)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -9707,6 +9711,7 @@
       }
     },
     "Recalculate capacity" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -10813,6 +10818,7 @@
       }
     },
     "settings.inverter.showInverterTypeNameOnPowerflow" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -11799,6 +11805,9 @@
           }
         }
       }
+    },
+    "Tap the capacity above to enter a manual value." : {
+
     },
     "tap_for_detail" : {
       "extractionState" : "manual",

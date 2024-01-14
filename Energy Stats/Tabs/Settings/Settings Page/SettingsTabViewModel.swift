@@ -28,15 +28,9 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
-    @Published var showInverterTypeNameOnPowerFlow: Bool {
+    @Published var showInverterStationName: Bool {
         didSet {
-            config.showInverterTypeNameOnPowerFlow = showInverterTypeNameOnPowerFlow
-        }
-    }
-
-    @Published var showInverterPlantName: Bool {
-        didSet {
-            config.showInverterPlantName = showInverterPlantName
+            config.showInverterStationName = showInverterStationName
         }
     }
 
@@ -165,9 +159,8 @@ class SettingsTabViewModel: ObservableObject {
         showHomeTotalOnPowerFlow = config.showHomeTotalOnPowerFlow
         showInverterIcon = config.showInverterIcon
         shouldInvertCT2 = config.shouldInvertCT2
-        showInverterPlantName = config.showInverterPlantName
+        showInverterStationName = config.showInverterStationName
         showGridTotalsOnPowerFlow = config.showGridTotalsOnPowerFlow
-        showInverterTypeNameOnPowerFlow = config.showInverterTypeNameOnPowerFlow
         showLastUpdateTimestamp = config.showLastUpdateTimestamp
         shouldCombineCT2WithPVPower = config.shouldCombineCT2WithPVPower
         showGraphValueDescriptions = config.showGraphValueDescriptions

@@ -15,8 +15,7 @@ struct InverterSettingsView: View {
     @Binding var showInverterTemperature: Bool
     @Binding var showInverterIcon: Bool
     @Binding var shouldInvertCT2: Bool
-    @Binding var showInverterPlantName: Bool
-    @Binding var showInverterTypeName: Bool
+    @Binding var showInverterStationName: Bool
     @Binding var shouldCombineCT2WithPVPower: Bool
 
     var body: some View {
@@ -42,11 +41,7 @@ struct InverterSettingsView: View {
                     Text("Show inverter icon")
                 }
 
-                Toggle(isOn: $showInverterTypeName) {
-                    Text("settings.inverter.showInverterTypeNameOnPowerflow")
-                }
-
-                Toggle(isOn: $showInverterPlantName) {
+                Toggle(isOn: $showInverterStationName) {
                     Text("Show inverter plant name")
                 }
             } header: {
@@ -109,8 +104,7 @@ struct InverterSettingsView_Previews: PreviewProvider {
                 showInverterTemperature: .constant(true),
                 showInverterIcon: .constant(true),
                 shouldInvertCT2: .constant(true),
-                showInverterPlantName: .constant(true),
-                showInverterTypeName: .constant(true),
+                showInverterStationName: .constant(true),
                 shouldCombineCT2WithPVPower: .constant(true)
             )
         }

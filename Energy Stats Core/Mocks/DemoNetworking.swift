@@ -274,9 +274,8 @@ public class MockConfig: Config {
     public var showHomeTotalOnPowerFlow: Bool = true
     public var showInverterIcon: Bool = true
     public var shouldInvertCT2: Bool = true
-    public var showInverterPlantName: Bool = false
+    public var showInverterStationName: Bool = false
     public var showGridTotalsOnPowerFlow: Bool = false
-    public var showInverterTypeNameOnPowerFlow: Bool = false
     public var deviceBatteryOverrides: [String: String] = [:]
     public var showLastUpdateTimestamp: Bool = false
     public var solarDefinitions: SolarRangeDefinitions = .default()

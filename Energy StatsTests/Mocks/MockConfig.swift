@@ -25,9 +25,8 @@ class MockConfig: Config {
     var showHomeTotalOnPowerFlow: Bool = false
     var showInverterIcon: Bool = false
     var shouldInvertCT2: Bool = false
-    var showInverterPlantName: Bool = false
+    var showInverterStationName: Bool = false
     var showGridTotalsOnPowerFlow: Bool = false
-    var showInverterTypeNameOnPowerFlow: Bool = false
     var deviceBatteryOverrides: [String: String] = [:]
     var showLastUpdateTimestamp: Bool = false
     var solarDefinitions: SolarRangeDefinitions = .default()

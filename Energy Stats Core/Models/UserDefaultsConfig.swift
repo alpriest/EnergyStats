@@ -36,9 +36,8 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "showHomeTotalOnPowerFlow")
         UserDefaults.shared.removeObject(forKey: "showInverterIcon")
         UserDefaults.shared.removeObject(forKey: "shouldInvertCT2")
-        UserDefaults.shared.removeObject(forKey: "showInverterPlantName")
+        UserDefaults.shared.removeObject(forKey: "showInverterStationName")
         UserDefaults.shared.removeObject(forKey: "showGridTotalsOnPowerFlow")
-        UserDefaults.shared.removeObject(forKey: "showInverterTypeNameOnPowerFlow")
         UserDefaults.shared.removeObject(forKey: "showLastUpdateTimestamp")
         UserDefaults.shared.removeObject(forKey: "selfSufficiencyEstimateMode")
         UserDefaults.shared.removeObject(forKey: "showFinancialEarnings")
@@ -114,14 +113,11 @@ public class UserDefaultsConfig: Config {
     @UserDefaultsStoredBool(key: "shouldInvertCT2", defaultValue: true)
     public var shouldInvertCT2: Bool
 
-    @UserDefaultsStoredBool(key: "showInverterPlantName", defaultValue: false)
-    public var showInverterPlantName: Bool
+    @UserDefaultsStoredBool(key: "showInverterStationName", defaultValue: false)
+    public var showInverterStationName: Bool
 
     @UserDefaultsStoredBool(key: "showGridTotalsOnPowerFlow", defaultValue: false)
     public var showGridTotalsOnPowerFlow: Bool
-
-    @UserDefaultsStoredBool(key: "showInverterTypeNameOnPowerFlow", defaultValue: false)
-    public var showInverterTypeNameOnPowerFlow: Bool
 
     @UserDefaultsStoredBool(key: "showLastUpdateTimestamp", defaultValue: false)
     public var showLastUpdateTimestamp: Bool

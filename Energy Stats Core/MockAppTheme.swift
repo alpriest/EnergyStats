@@ -13,7 +13,7 @@ public extension AppSettings {
                      showInverterTemperature: Bool = true,
                      selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode = .off,
                      showHomeTotalOnPowerFlow: Bool = true,
-                     showInverterPlantName: Bool = false) -> AppSettings {
+                     showInverterStationName: Bool = false) -> AppSettings {
         AppSettings(
             showColouredLines: true,
             showBatteryTemperature: true,
@@ -31,9 +31,8 @@ public extension AppSettings {
             showHomeTotalOnPowerFlow: showHomeTotalOnPowerFlow,
             showInverterIcon: true,
             shouldInvertCT2: false,
-            showInverterPlantName: showInverterPlantName,
+            showInverterStationName: showInverterStationName,
             showGridTotalsOnPowerFlow: true,
-            showInverterTypeNameOnPowerFlow: true,
             showLastUpdateTimestamp: false,
             solarDefinitions: .default(),
             parameterGroups: DefaultParameterGroups(),

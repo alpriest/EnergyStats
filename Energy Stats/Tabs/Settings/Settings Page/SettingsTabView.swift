@@ -24,8 +24,7 @@ struct SettingsTabView: View {
                                          showInverterTemperature: $viewModel.showInverterTemperature,
                                          showInverterIcon: $viewModel.showInverterIcon,
                                          shouldInvertCT2: $viewModel.shouldInvertCT2,
-                                         showInverterPlantName: $viewModel.showInverterPlantName,
-                                         showInverterTypeName: $viewModel.showInverterTypeNameOnPowerFlow,
+                                         showInverterStationName: $viewModel.showInverterStationName,
                                          shouldCombineCT2WithPVPower: $viewModel.shouldCombineCT2WithPVPower)
                 } label: {
                     Text("Inverter")
