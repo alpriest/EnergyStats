@@ -82,7 +82,7 @@ struct ApproximationsView: View {
                         }
                     }
 
-                    if let financialModel = viewModel.financialModel, case .energyStats = appSettings.financialModel {
+                    if let financialModel = viewModel.financialModel {
                         VStack(spacing: 2) {
                             HStack {
                                 Text("export_income")

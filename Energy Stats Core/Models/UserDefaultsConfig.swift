@@ -41,7 +41,6 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "showLastUpdateTimestamp")
         UserDefaults.shared.removeObject(forKey: "selfSufficiencyEstimateMode")
         UserDefaults.shared.removeObject(forKey: "showFinancialEarnings")
-        UserDefaults.shared.removeObject(forKey: "financialModel")
         UserDefaults.shared.removeObject(forKey: "feedInUnitPrice")
         UserDefaults.shared.removeObject(forKey: "gridImportUnitPrice")
         UserDefaults.shared.removeObject(forKey: "currencySymbol")
@@ -134,9 +133,6 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredBool(key: "showEarnings", defaultValue: false)
     public var showFinancialEarnings: Bool
-
-    @UserDefaultsStoredInt(key: "financialModel", defaultValue: FinancialModel.foxESS.rawValue)
-    public var financialModel: Int
 
     @UserDefaultsStoredDouble(key: "feedInUnitPrice", defaultValue: 0.05)
     public var feedInUnitPrice: Double

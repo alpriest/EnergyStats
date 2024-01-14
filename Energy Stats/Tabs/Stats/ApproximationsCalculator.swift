@@ -5,8 +5,8 @@
 //  Created by Alistair Priest on 08/11/2023.
 //
 
-import Foundation
 import Energy_Stats_Core
+import Foundation
 
 struct ApproximationsCalculator {
     let configManager: ConfigManaging
@@ -32,22 +32,17 @@ struct ApproximationsCalculator {
             grid: grid
         )
 
-        let financialModel: EnergyStatsFinancialModel?
         let totalsViewModel = TotalsViewModel(grid: grid,
                                               feedIn: feedIn,
                                               loads: loads,
                                               batteryCharge: batteryCharge,
                                               batteryDischarge: batteryDischarge)
 
-        if configManager.financialModel == .energyStats {
-            financialModel = EnergyStatsFinancialModel(
-                totalsViewModel: totalsViewModel,
-                config: configManager,
-                currencySymbol: configManager.currencySymbol
-            )
-        } else {
-            financialModel = nil
-        }
+        let financialModel = EnergyStatsFinancialModel(
+            totalsViewModel: totalsViewModel,
+            config: configManager,
+            currencySymbol: configManager.currencySymbol
+        )
 
         return ApproximationsViewModel(
             netSelfSufficiencyEstimate: asPercent(netResult),

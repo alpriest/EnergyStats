@@ -66,7 +66,6 @@ public protocol SolcastConfigManaging {
 
 public protocol FinancialConfigManaging {
     var showFinancialEarnings: Bool { get set }
-    var financialModel: FinancialModel { get set }
     var feedInUnitPrice: Double { get set }
     var gridImportUnitPrice: Double { get set }
 }

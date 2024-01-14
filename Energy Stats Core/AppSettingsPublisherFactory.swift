@@ -21,7 +21,6 @@ public enum AppSettingsPublisherFactory {
                 displayUnit: DisplayUnit(rawValue: config.displayUnit) ?? .kilowatt,
                 selfSufficiencyEstimateMode: config.selfSufficiencyEstimateMode,
                 showFinancialEarnings: config.showFinancialEarnings,
-                financialModel: FinancialModel(rawValue: config.financialModel) ?? .foxESS,
                 feedInUnitPrice: config.feedInUnitPrice,
                 gridImportUnitPrice: config.gridImportUnitPrice,
                 showInverterTemperature: config.showInverterTemperature,

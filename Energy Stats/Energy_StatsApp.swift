@@ -41,7 +41,6 @@ struct Energy_StatsApp: App {
                 .task {
                     try? keychainStore.store(apiKey: "648d67a7-80af-4520-9873-0c8a9f6ddb27")
                     if isRunningScreenshots() {
-                        config.financialModel = 0
                         config.showFinancialEarnings = true
                     }
                 }

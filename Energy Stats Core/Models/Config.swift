@@ -23,7 +23,6 @@ public protocol Config {
     var displayUnit: Int { get set }
     var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode { get set }
     var showFinancialEarnings: Bool { get set }
-    var financialModel: Int { get set }
     var showInverterTemperature: Bool { get set }
     var selectedParameterGraphVariables: [String] { get set }
     var showHomeTotalOnPowerFlow: Bool { get set }

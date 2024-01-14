@@ -27,33 +27,12 @@ struct FinancialsSettingsView: View {
                         Text("Show on flow page")
                     }
 
-                    Picker("Financial Model", selection: $viewModel.financialModel) {
-                        Text("Energy Stats")
-                            .tag(FinancialModel.energyStats)
-                        Text("FoxESS").tag(FinancialModel.foxESS)
-                    }
-                    .pickerStyle(.segmented)
-                    .accessibilityIdentifier("show_energy_stats_model")
-
-                    switch viewModel.financialModel {
-                    case .energyStats:
-                        makeTextField(title: "Feed In Unit price", currencySymbol: viewModel.currencySymbol, text: $viewModel.energyStatsFeedInUnitPrice)
-                        makeTextField(title: "Grid Import Unit price", currencySymbol: viewModel.currencySymbol, text: $viewModel.energyStatsGridImportUnitPrice)
-                    case .foxESS:
-                        EmptyView()
-                    }
+                    makeTextField(title: "Feed In Unit price", currencySymbol: viewModel.currencySymbol, text: $viewModel.energyStatsFeedInUnitPrice)
+                    makeTextField(title: "Grid Import Unit price", currencySymbol: viewModel.currencySymbol, text: $viewModel.energyStatsGridImportUnitPrice)
                 }
             } footer: {
                 if viewModel.showFinancialSummary {
-                    switch viewModel.financialModel {
-                    case .energyStats:
-                        energyStatsFooter()
-                    case .foxESS:
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("This unit price is managed on the FoxESS Cloud.")
-                            Text("foxess_earnings_calculation_description")
-                        }
-                    }
+                    energyStatsFooter()
                 }
             }
         }

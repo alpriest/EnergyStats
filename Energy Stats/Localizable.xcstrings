@@ -4736,6 +4736,7 @@
       }
     },
     "Energy Stats" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -5635,6 +5636,7 @@
       }
     },
     "foxess_earnings_calculation_description" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -12023,6 +12025,7 @@
 
     },
     "This unit price is managed on the FoxESS Cloud." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

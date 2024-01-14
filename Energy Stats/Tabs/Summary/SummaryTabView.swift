@@ -45,7 +45,7 @@ struct SummaryTabView: View {
 
                             Spacer(minLength: 22)
 
-                            if let model = approximationsViewModel.financialModel, case .energyStats = appSettings.financialModel {
+                            if let model = approximationsViewModel.financialModel {
                                 moneySummaryRow(title: "export_income", amount: model.exportIncome.amount)
                                 moneySummaryRow(title: "grid_import_avoided", amount: model.solarSaving.amount)
                                 moneySummaryRow(title: "total_benefit", amount: model.total.amount)

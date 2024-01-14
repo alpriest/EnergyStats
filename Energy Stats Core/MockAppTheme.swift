@@ -24,7 +24,6 @@ public extension AppSettings {
             displayUnit: displayUnit,
             selfSufficiencyEstimateMode: selfSufficiencyEstimateMode,
             showFinancialEarnings: false,
-            financialModel: .energyStats,
             feedInUnitPrice: 0.05,
             gridImportUnitPrice: 0.15,
             showInverterTemperature: showInverterTemperature,

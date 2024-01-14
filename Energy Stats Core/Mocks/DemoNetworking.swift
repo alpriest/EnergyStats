@@ -266,7 +266,6 @@ public class MockConfig: Config {
     public var displayUnit: Int = 0
     public var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode = .off
     public var showFinancialEarnings: Bool = false
-    public var financialModel: Int = FinancialModel.energyStats.rawValue
     public var gridImportUnitPrice: Double = 0.15
     public var feedInUnitPrice: Double = 0.05
     public var showInverterTemperature: Bool = false

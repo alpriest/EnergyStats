@@ -30,7 +30,6 @@ public struct AppSettings {
     public var displayUnit: DisplayUnit
     public var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode
     public var showFinancialEarnings: Bool
-    public var financialModel: FinancialModel
     public var feedInUnitPrice: Double
     public var gridImportUnitPrice: Double
     public var showInverterTemperature: Bool
@@ -60,7 +59,6 @@ public struct AppSettings {
         displayUnit: DisplayUnit,
         selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode,
         showFinancialEarnings: Bool,
-        financialModel: FinancialModel,
         feedInUnitPrice: Double,
         gridImportUnitPrice: Double,
         showInverterTemperature: Bool,
@@ -90,7 +88,6 @@ public struct AppSettings {
         self.totalSolarYieldModel = totalSolarYieldModel
         self.selfSufficiencyEstimateMode = selfSufficiencyEstimateMode
         self.showFinancialEarnings = showFinancialEarnings
-        self.financialModel = financialModel
         self.feedInUnitPrice = feedInUnitPrice
         self.gridImportUnitPrice = gridImportUnitPrice
         self.showInverterTemperature = showInverterTemperature
@@ -120,7 +117,6 @@ public struct AppSettings {
         displayUnit: DisplayUnit? = nil,
         selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode? = nil,
         showFinancialEarnings: Bool? = nil,
-        financialModel: FinancialModel? = nil,
         feedInUnitPrice: Double? = nil,
         gridImportUnitPrice: Double? = nil,
         showInverterTemperature: Bool? = nil,
@@ -150,7 +146,6 @@ public struct AppSettings {
             displayUnit: displayUnit ?? self.displayUnit,
             selfSufficiencyEstimateMode: selfSufficiencyEstimateMode ?? self.selfSufficiencyEstimateMode,
             showFinancialEarnings: showFinancialEarnings ?? self.showFinancialEarnings,
-            financialModel: financialModel ?? self.financialModel,
             feedInUnitPrice: feedInUnitPrice ?? self.feedInUnitPrice,
             gridImportUnitPrice: gridImportUnitPrice ?? self.gridImportUnitPrice,
             showInverterTemperature: showInverterTemperature ?? self.showInverterTemperature,

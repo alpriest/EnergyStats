@@ -25,12 +25,6 @@ class FinancialsSettingsViewModel: ObservableObject {
         }
     }
 
-    @Published var financialModel: FinancialModel {
-        didSet {
-            configManager.financialModel = financialModel
-        }
-    }
-
     @Published var energyStatsFeedInUnitPrice: String {
         didSet {
             configManager.feedInUnitPrice = energyStatsFeedInUnitPrice.asCurrencyStringToDouble()
@@ -51,7 +45,6 @@ class FinancialsSettingsViewModel: ObservableObject {
         self.configManager = configManager
         showFinancialSummary = configManager.showFinancialEarnings
         showFinancialSummaryOnFlowPage = configManager.showFinancialSummaryOnFlowPage
-        financialModel = configManager.financialModel
         energyStatsFeedInUnitPrice = configManager.feedInUnitPrice.roundedToString(decimalPlaces: 3)
         energyStatsGridImportUnitPrice = configManager.gridImportUnitPrice.roundedToString(decimalPlaces: 3)
         currencySymbol = configManager.currencySymbol

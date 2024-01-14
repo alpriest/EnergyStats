@@ -61,13 +61,8 @@ public struct EnergyStatsFinancialModel {
 public struct EarningsViewModel {
     private let energyStatsFinancialModel: EnergyStatsFinancialModel
 
-    public func amounts(_ model: FinancialModel) -> [FinanceAmount] {
-        switch model {
-        case .energyStats:
-            return energyStatsFinancialModel.amounts()
-        case .foxESS:
-            return []
-        }
+    public func amounts() -> [FinanceAmount] {
+        energyStatsFinancialModel.amounts()
     }
 
     public var currencySymbol: String {

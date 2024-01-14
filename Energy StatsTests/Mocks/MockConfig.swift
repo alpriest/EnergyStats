@@ -20,7 +20,6 @@ class MockConfig: Config {
     var hasRunBefore: Bool = true
     var displayUnit: Int = 0
     var showFinancialEarnings: Bool = true
-    var financialModel: Int = 0
     var selectedParameterGraphVariables: [String] = []
     var showHomeTotalOnPowerFlow: Bool = false
     var showInverterIcon: Bool = false

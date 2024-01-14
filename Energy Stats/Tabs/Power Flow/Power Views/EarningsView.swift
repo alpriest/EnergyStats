@@ -15,7 +15,7 @@ struct EarningsView: View {
 
     var body: some View {
         HStack {
-            ForEach(viewModel.amounts(appSettings.financialModel), id: \.self) { amount in
+            ForEach(viewModel.amounts(), id: \.self) { amount in
                 SubLabelledView(
                     value: amount.formattedAmount(),
                     label: String(key: amount.title),

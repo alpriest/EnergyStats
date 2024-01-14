@@ -271,16 +271,6 @@ public class ConfigManager: ConfigManaging {
         }
     }
 
-    public var financialModel: FinancialModel {
-        get { FinancialModel(rawValue: config.financialModel) ?? .foxESS }
-        set {
-            config.financialModel = newValue.rawValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
-                financialModel: FinancialModel(rawValue: config.financialModel)
-            ))
-        }
-    }
-
     public var feedInUnitPrice: Double {
         get { config.feedInUnitPrice }
         set {
