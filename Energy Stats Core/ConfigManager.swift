@@ -61,6 +61,7 @@ public class ConfigManager: ConfigManaging {
             Device(
                 deviceSN: device.deviceSN,
                 stationName: device.stationName,
+                stationID: device.stationID,
                 battery: nil,
                 firmware: DeviceFirmwareVersion(master: device.masterVersion, slave: device.slaveVersion, manager: device.managerVersion),
                 moduleSN: device.moduleSN

@@ -55,6 +55,7 @@ struct DeviceList: Codable {
 public struct Device: Codable, Hashable, Identifiable {
     public let deviceSN: String
     public let stationName: String
+    public let stationID: String
     public let battery: Battery?
     public let firmware: DeviceFirmwareVersion?
     public let moduleSN: String
@@ -72,21 +73,23 @@ public struct Device: Codable, Hashable, Identifiable {
     public var id: String { deviceSN }
 
     public var deviceDisplayName: String {
-        "Unknown"
+        stationName
     }
 
     public var deviceSelectorName: String {
-        "\(deviceDisplayName) \(stationName)"
+        "\(deviceDisplayName) \(stationID)"
     }
 
     public init(deviceSN: String,
                 stationName: String,
+                stationID: String,
                 battery: Battery?,
                 firmware: DeviceFirmwareVersion?,
                 moduleSN: String)
     {
         self.deviceSN = deviceSN
         self.stationName = stationName
+        self.stationID = stationID
         self.battery = battery
         self.firmware = firmware
         self.moduleSN = moduleSN
@@ -94,6 +97,7 @@ public struct Device: Codable, Hashable, Identifiable {
 
     public func copy(deviceSN: String? = nil,
                      stationName: String? = nil,
+                     stationID: String? = nil,
                      battery: Battery? = nil,
                      firmware: DeviceFirmwareVersion? = nil,
                      moduleSN: String? = nil) -> Device
@@ -101,6 +105,7 @@ public struct Device: Codable, Hashable, Identifiable {
         Device(
             deviceSN: deviceSN ?? self.deviceSN,
             stationName: stationName ?? self.stationName,
+            stationID: stationID ?? self.stationID,
             battery: battery ?? self.battery,
             firmware: firmware ?? self.firmware,
             moduleSN: moduleSN ?? self.moduleSN
