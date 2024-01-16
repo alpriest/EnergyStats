@@ -86,18 +86,6 @@ public class Network: FoxESSNetworking {
         return result.0.variables
     }
 
-    public func setSoc(minGridSOC: Int, minSOC: Int, deviceSN: String) async throws {
-        var request = URLRequest(url: URL.socSet)
-        request.httpMethod = "POST"
-        request.httpBody = try! JSONEncoder().encode(SetSOCRequest(minGridSoc: minGridSOC, minSoc: minSOC, sn: deviceSN))
-
-        do {
-            let _: (String, Data) = try await fetch(request)
-        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
-            // Ignore
-        }
-    }
-
     public func fetchBatteryTimes(deviceSN: String) async throws -> BatteryTimesResponse {
         let request = append(queryItems: [URLQueryItem(name: "sn", value: deviceSN)], to: URL.batteryTimes)
 

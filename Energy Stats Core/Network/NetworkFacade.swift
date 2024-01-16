@@ -169,11 +169,11 @@ public class NetworkFacade: FoxESSNetworking {
         }
     }
 
-    public func setSoc(minGridSOC: Int, minSOC: Int, deviceSN: String) async throws {
+    public func openapi_setBatterySoc(deviceSN: String, minSOCOnGrid: Int, minSOC: Int) async throws {
         return if isDemoUser {
-            try await fakeNetwork.setSoc(minGridSOC: minGridSOC, minSOC: minSOC, deviceSN: deviceSN)
+            try await fakeNetwork.openapi_setBatterySoc(deviceSN: deviceSN, minSOCOnGrid: minSOCOnGrid, minSOC: minSOC)
         } else {
-            try await network.setSoc(minGridSOC: minGridSOC, minSOC: minSOC, deviceSN: deviceSN)
+            try await network.openapi_setBatterySoc(deviceSN: deviceSN, minSOCOnGrid: minSOCOnGrid, minSOC: minSOC)
         }
     }
 

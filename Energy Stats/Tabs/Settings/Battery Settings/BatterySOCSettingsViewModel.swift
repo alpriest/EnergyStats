@@ -60,10 +60,10 @@ class BatterySOCSettingsViewModel: ObservableObject {
             state = .active("Saving")
 
             do {
-                try await networking.setSoc(
-                    minGridSOC: socOnGrid,
-                    minSOC: soc,
-                    deviceSN: deviceSN
+                try await networking.openapi_setBatterySoc(
+                    deviceSN: deviceSN,
+                    minSOCOnGrid: socOnGrid,
+                    minSOC: soc
                 )
 
                 onSOCchange()
