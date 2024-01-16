@@ -12,6 +12,7 @@ public class NetworkFacade: FoxESSNetworking {
     private let fakeNetwork: FoxESSNetworking
     private let config: Config
     private let store: KeychainStoring
+    private let throttler = ThrottleManager()
 
     public init(network: FoxESSNetworking, config: Config, store: KeychainStoring) {
         self.network = network
@@ -226,14 +227,62 @@ public class NetworkFacade: FoxESSNetworking {
 
     public func openapi_fetchRealData(deviceSN: String, variables: [String]) async throws -> OpenQueryResponse {
         if isDemoUser {
-            try await fakeNetwork.openapi_fetchRealData(deviceSN: deviceSN, variables: variables)
+            return try await fakeNetwork.openapi_fetchRealData(deviceSN: deviceSN, variables: variables)
         } else {
-            try await network.openapi_fetchRealData(deviceSN: deviceSN, variables: variables)
+            defer {
+                throttler.didInvoke(method: #function)
+            }
+            try await throttler.throttle(method: #function)
+            return try await network.openapi_fetchRealData(deviceSN: deviceSN, variables: variables)
         }
     }
 
-    private var lastCallTime = Date.distantPast
     public func openapi_fetchHistory(deviceSN: String, variables: [String], start: Date, end: Date) async throws -> OpenHistoryResponse {
+        if isDemoUser {
+            return try await fakeNetwork.openapi_fetchHistory(deviceSN: deviceSN, variables: variables, start: start, end: end)
+        } else {
+            defer {
+                throttler.didInvoke(method: #function)
+            }
+            try await throttler.throttle(method: #function)
+            return try await network.openapi_fetchHistory(deviceSN: deviceSN, variables: variables, start: start, end: end)
+        }
+    }
+
+    public func openapi_fetchVariables() async throws -> [OpenApiVariable] {
+        if isDemoUser {
+            return try await fakeNetwork.openapi_fetchVariables()
+        } else {
+            defer {
+                throttler.didInvoke(method: #function)
+            }
+            try await throttler.throttle(method: #function)
+            return try await network.openapi_fetchVariables()
+        }
+    }
+
+    public func openapi_fetchReport(deviceSN: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [OpenReportResponse] {
+        if isDemoUser {
+            return try await fakeNetwork.openapi_fetchReport(deviceSN: deviceSN, variables: variables, queryDate: queryDate, reportType: reportType)
+        } else {
+            defer {
+                throttler.didInvoke(method: #function)
+            }
+            try await throttler.throttle(method: #function)
+            return try await network.openapi_fetchReport(deviceSN: deviceSN, variables: variables, queryDate: queryDate, reportType: reportType)
+        }
+    }
+}
+
+class ThrottleManager {
+    private var lastCallTimes: [String: Date] = [:]
+
+    func throttle(method: String) async throws {
+        guard let lastCallTime = lastCallTimes[method] else {
+            lastCallTimes[method] = Date()
+            return
+        }
+
         let now = Date()
         let timeSinceLastCall = now.timeIntervalSince(lastCallTime)
 
@@ -241,31 +290,9 @@ public class NetworkFacade: FoxESSNetworking {
             let waitTime = UInt64((1.0 - timeSinceLastCall) * 1_000_000_000) // Convert seconds to nanoseconds
             try await Task.sleep(nanoseconds: waitTime)
         }
-
-        let result: OpenHistoryResponse
-        if isDemoUser {
-            result = try await fakeNetwork.openapi_fetchHistory(deviceSN: deviceSN, variables: variables, start: start, end: end)
-        } else {
-            result = try await network.openapi_fetchHistory(deviceSN: deviceSN, variables: variables, start: start, end: end)
-        }
-
-        lastCallTime = Date()
-        return result
     }
 
-    public func openapi_fetchVariables() async throws -> [OpenApiVariable] {
-        if isDemoUser {
-            try await fakeNetwork.openapi_fetchVariables()
-        } else {
-            try await network.openapi_fetchVariables()
-        }
-    }
-
-    public func openapi_fetchReport(deviceSN: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [OpenReportResponse] {
-        if isDemoUser {
-            try await fakeNetwork.openapi_fetchReport(deviceSN: deviceSN, variables: variables, queryDate: queryDate, reportType: reportType)
-        } else {
-            try await network.openapi_fetchReport(deviceSN: deviceSN, variables: variables, queryDate: queryDate, reportType: reportType)
-        }
+    func didInvoke(method: String) {
+        lastCallTimes[method] = Date()
     }
 }

@@ -180,8 +180,10 @@ public class NetworkCache: FoxESSNetworking {
         let key = makeKey(base: #function, arguments: deviceSN, variables.joined(separator: "_"), String(start.timeIntervalSince1970), String(end.timeIntervalSince1970))
 
         if let item = cache[key], let cached = item.item as? OpenHistoryResponse, item.isFresherThan(interval: shortCacheDurationInSeconds) {
+            print("AWP", "Return cached")
             return cached
         } else {
+            print("AWP", "Fetch fresh")
             let fresh = try await network.openapi_fetchHistory(deviceSN: deviceSN, variables: variables, start: start, end: end)
             store(key: key, value: CachedItem(fresh))
             return fresh
