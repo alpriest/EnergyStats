@@ -8,18 +8,16 @@
 import Foundation
 
 public struct BatteryTimesResponse: Decodable {
-    let sn: String
     public let times: [ChargeTime]
 }
 
 public struct ChargeTime: Codable {
-    var enableCharge = true
-    public let enableGrid: Bool
+    public let enable: Bool
     public let startTime: Time
     public let endTime: Time
 
-    public init(enableGrid: Bool, startTime: Time, endTime: Time) {
-        self.enableGrid = enableGrid
+    public init(enable: Bool, startTime: Time, endTime: Time) {
+        self.enable = enable
         self.startTime = startTime
         self.endTime = endTime
     }

@@ -59,7 +59,7 @@ struct DebugDataView: View {
                         mapper: { $0.batteryTimesResponse },
                         fetcher: {
                             if let deviceSN = configManager.currentDevice.value?.deviceSN {
-                                _ = try await networking.fetchBatteryTimes(deviceSN: deviceSN)
+                                _ = try await networking.openapi_fetchBatteryTimes(deviceSN: deviceSN)
                             } else {
                                 throw NoCurrentDeviceFoundError()
                             }

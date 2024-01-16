@@ -38,13 +38,13 @@ class BatteryChargeScheduleSettingsViewModel: ObservableObject {
             state = .active("Loading")
 
             do {
-                let settings = try await networking.fetchBatteryTimes(deviceSN: deviceSN)
+                let settings = try await networking.openapi_fetchBatteryTimes(deviceSN: deviceSN)
                 if let first = settings.times[safe: 0] {
-                    timePeriod1 = ChargeTimePeriod(startTime: first.startTime, endTime: first.endTime, enabled: first.enableGrid)
+                    timePeriod1 = ChargeTimePeriod(startTime: first.startTime, endTime: first.endTime, enabled: first.enable)
                 }
 
                 if let second = settings.times[safe: 1] {
-                    timePeriod2 = ChargeTimePeriod(startTime: second.startTime, endTime: second.endTime, enabled: second.enableGrid)
+                    timePeriod2 = ChargeTimePeriod(startTime: second.startTime, endTime: second.endTime, enabled: second.enable)
                 }
 
                 state = .inactive

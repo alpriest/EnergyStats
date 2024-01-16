@@ -86,14 +86,6 @@ public class Network: FoxESSNetworking {
         return result.0.variables
     }
 
-    public func fetchBatteryTimes(deviceSN: String) async throws -> BatteryTimesResponse {
-        let request = append(queryItems: [URLQueryItem(name: "sn", value: deviceSN)], to: URL.batteryTimes)
-
-        let result: (BatteryTimesResponse, Data) = try await fetch(request)
-        store.batteryTimesResponse = NetworkOperation(description: "batteryTimesResponse", value: result.0, raw: result.1)
-        return result.0
-    }
-
     public func setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws {
         var request = URLRequest(url: URL.batteryTimeSet)
         request.httpMethod = "POST"

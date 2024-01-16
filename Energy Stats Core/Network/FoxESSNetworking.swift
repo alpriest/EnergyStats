@@ -17,7 +17,6 @@ extension URL {
     static var deviceSettingsSet = URL(string: "https://www.foxesscloud.com/c/v0/device/setting/set")!
     static var moduleList = URL(string: "https://www.foxesscloud.com/c/v0/module/list")!
     static var errorMessages = URL(string: "https://www.foxesscloud.com/c/v0/errors/message")!
-    static var batteryTimes = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/time/get")!
     static var batteryTimeSet = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/time/set")!
 }
 
@@ -30,8 +29,6 @@ public protocol FoxESSNetworking {
     func fetchBattery(deviceID: String) async throws -> BatteryResponse
     func fetchAddressBook(deviceID: String) async throws -> AddressBookResponse
     func fetchVariables(deviceID: String) async throws -> [RawVariable]
-    func fetchBatteryTimes(deviceSN: String) async throws -> BatteryTimesResponse
-    func setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws
     func fetchWorkMode(deviceID: String) async throws -> DeviceSettingsGetResponse
     func setWorkMode(deviceID: String, workMode: InverterWorkMode) async throws
     func fetchDataLoggers() async throws -> PagedDataLoggerListResponse
@@ -56,4 +53,6 @@ public protocol FoxESSNetworking {
     func openapi_fetchReport(deviceSN: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [OpenReportResponse]
     func openapi_fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse
     func openapi_setBatterySoc(deviceSN: String, minSOCOnGrid: Int, minSOC: Int) async throws
+    func openapi_fetchBatteryTimes(deviceSN: String) async throws -> BatteryTimesResponse
+    func setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws
 }

@@ -32,7 +32,7 @@ struct ChargeTimePeriod: Equatable {
     }
 
     func asChargeTime() -> ChargeTime {
-        ChargeTime(enableGrid: enabled,
+        ChargeTime(enable: enabled,
                    startTime: start.toTime(),
                    endTime: end.toTime())
     }

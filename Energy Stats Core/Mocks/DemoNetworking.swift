@@ -189,10 +189,10 @@ public class DemoNetworking: FoxESSNetworking {
 
     public func openapi_setBatterySoc(deviceSN: String, minSOCOnGrid: Int, minSOC: Int) async throws {}
 
-    public func fetchBatteryTimes(deviceSN: String) async throws -> BatteryTimesResponse {
-        BatteryTimesResponse(sn: "ABC1234", times: [
-            ChargeTime(enableGrid: false, startTime: Time(hour: 01, minute: 00), endTime: Time(hour: 01, minute: 30)),
-            ChargeTime(enableGrid: false, startTime: Time(hour: 03, minute: 00), endTime: Time(hour: 03, minute: 30))
+    public func openapi_fetchBatteryTimes(deviceSN: String) async throws -> BatteryTimesResponse {
+        BatteryTimesResponse(times: [
+            ChargeTime(enable: false, startTime: Time(hour: 01, minute: 00), endTime: Time(hour: 01, minute: 30)),
+            ChargeTime(enable: false, startTime: Time(hour: 03, minute: 00), endTime: Time(hour: 03, minute: 30))
         ])
     }
 
