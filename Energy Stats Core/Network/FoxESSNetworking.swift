@@ -13,7 +13,6 @@ extension URL {
     static var battery = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/info")!
     static var deviceList = URL(string: "https://www.foxesscloud.com/op/v0/device/list")! // UPDATED
     static var deviceDetail = URL(string: "https://www.foxesscloud.com/op/v0/device/detail")! // UPDATED
-    static var socGet = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/soc/get")!
     static var addressBook = URL(string: "https://www.foxesscloud.com/c/v0/device/addressbook")!
     static var variables = URL(string: "https://www.foxesscloud.com/c/v1/device/variables")!
     static var socSet = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/soc/set")!
@@ -28,7 +27,6 @@ extension URL {
 public protocol FoxESSNetworking {
     func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [ReportResponse]
     func fetchBattery(deviceID: String) async throws -> BatteryResponse
-    func fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse
     func fetchRaw(deviceID: String, variables: [RawVariable], queryDate: QueryDate) async throws -> [RawResponse]
     func openapi_fetchDeviceList() async throws -> [DeviceDetailResponse]
     func fetchAddressBook(deviceID: String) async throws -> AddressBookResponse
@@ -57,4 +55,5 @@ public protocol FoxESSNetworking {
     func openapi_fetchHistory(deviceSN: String, variables: [String], start: Date, end: Date) async throws -> OpenHistoryResponse
     func openapi_fetchVariables() async throws -> [OpenApiVariable]
     func openapi_fetchReport(deviceSN: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [OpenReportResponse]
+    func openapi_fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse
 }

@@ -88,12 +88,12 @@ public class DemoNetworking: FoxESSNetworking {
         }
     }
 
-    public func fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse {
+    public func openapi_fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse {
         switch deviceSN {
         case "1234":
-            return BatterySettingsResponse(minGridSoc: 20, minSoc: 20)
+            return BatterySettingsResponse(minSocOnGrid: 20, minSoc: 20)
         default:
-            return BatterySettingsResponse(minGridSoc: 15, minSoc: 15)
+            return BatterySettingsResponse(minSocOnGrid: 15, minSoc: 15)
         }
     }
 

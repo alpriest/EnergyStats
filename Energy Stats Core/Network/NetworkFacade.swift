@@ -129,11 +129,11 @@ public class NetworkFacade: FoxESSNetworking {
         }
     }
 
-    public func fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse {
+    public func openapi_fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse {
         return if isDemoUser {
-            try await fakeNetwork.fetchBatterySettings(deviceSN: deviceSN)
+            try await fakeNetwork.openapi_fetchBatterySettings(deviceSN: deviceSN)
         } else {
-            try await network.fetchBatterySettings(deviceSN: deviceSN)
+            try await network.openapi_fetchBatterySettings(deviceSN: deviceSN)
         }
     }
 

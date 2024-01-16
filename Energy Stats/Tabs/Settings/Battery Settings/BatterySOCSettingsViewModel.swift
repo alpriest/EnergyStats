@@ -34,9 +34,9 @@ class BatterySOCSettingsViewModel: ObservableObject {
             state = .active("Loading")
 
             do {
-                let settings = try await networking.fetchBatterySettings(deviceSN: deviceSN)
+                let settings = try await networking.openapi_fetchBatterySettings(deviceSN: deviceSN)
                 self.soc = String(describing: settings.minSoc)
-                self.socOnGrid = String(describing: settings.minGridSoc)
+                self.socOnGrid = String(describing: settings.minSocOnGrid)
 
                 state = .inactive
             } catch {

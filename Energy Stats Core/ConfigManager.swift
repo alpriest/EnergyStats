@@ -481,7 +481,7 @@ public enum BatteryResponseMapper {
         } else {
             batteryCapacity = "0"
         }
-        minSOC = String(Double(settings.minGridSoc) / 100.0)
+        minSOC = String(Double(settings.minSocOnGrid) / 100.0)
 
         return Device.Battery(capacity: batteryCapacity, minSOC: minSOC)
     }

@@ -13,7 +13,7 @@ public class Network: FoxESSNetworking {
     }
 
     private let credentials: KeychainStoring
-    private let store: InMemoryLoggingNetworkStore
+    let store: InMemoryLoggingNetworkStore
     private var errorMessages: [String: String] = [:]
 
     public init(credentials: KeychainStoring, store: InMemoryLoggingNetworkStore) {
@@ -36,14 +36,6 @@ public class Network: FoxESSNetworking {
 
         let result: (BatteryResponse, Data) = try await fetch(request)
         store.batteryResponse = NetworkOperation(description: "fetchBattery", value: result.0, raw: result.1)
-        return result.0
-    }
-
-    public func fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse {
-        let request = append(queryItems: [URLQueryItem(name: "sn", value: deviceSN)], to: URL.socGet)
-
-        let result: (BatterySettingsResponse, Data) = try await fetch(request)
-        store.batterySettingsResponse = NetworkOperation(description: "fetchBatterySettings", value: result.0, raw: result.1)
         return result.0
     }
 

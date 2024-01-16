@@ -12,6 +12,7 @@ extension URL {
     static var getOpenHistoryData = URL(string: "https://www.foxesscloud.com/op/v0/device/history/query")!
     static var getOpenVariables = URL(string: "https://www.foxesscloud.com/op/v0/device/variable/get")!
     static var getOpenReportData = URL(string: "https://www.foxesscloud.com/op/v0/device/report/query")!
+    static var getOpenBatterySOC = URL(string: "https://www.foxesscloud.com/op/v0/device/battery/soc/get")!
 }
 
 public extension Network {
@@ -70,6 +71,14 @@ public extension Network {
         request.httpBody = try! JSONEncoder().encode(OpenReportRequest(deviceSN: deviceSN, variables: variables, queryDate: queryDate, dimension: reportType))
 
         let result: ([OpenReportResponse], Data) = try await fetch(request)
+        return result.0
+    }
+
+    func openapi_fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse {
+        let request = append(queryItems: [URLQueryItem(name: "sn", value: deviceSN)], to: URL.getOpenBatterySOC)
+
+        let result: (BatterySettingsResponse, Data) = try await fetch(request)
+        store.batterySettingsResponse = NetworkOperation(description: "fetchBatterySettings", value: result.0, raw: result.1)
         return result.0
     }
 }

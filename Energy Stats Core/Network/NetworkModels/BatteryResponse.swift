@@ -29,7 +29,7 @@ public struct BatteryResponse: Codable {
 }
 
 public struct BatterySettingsResponse: Codable {
-    public let minGridSoc: Int
+    public let minSocOnGrid: Int
     public let minSoc: Int
 }
 

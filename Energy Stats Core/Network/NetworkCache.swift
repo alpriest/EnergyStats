@@ -92,13 +92,13 @@ public class NetworkCache: FoxESSNetworking {
         }
     }
 
-    public func fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse {
+    public func openapi_fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse {
         let key = makeKey(base: #function, arguments: deviceSN)
 
         if let item = cache[key], let cached = item.item as? BatterySettingsResponse, item.isFresherThan(interval: shortCacheDurationInSeconds) {
             return cached
         } else {
-            let fresh = try await network.fetchBatterySettings(deviceSN: deviceSN)
+            let fresh = try await network.openapi_fetchBatterySettings(deviceSN: deviceSN)
             store(key: key, value: CachedItem(fresh))
             return fresh
         }
