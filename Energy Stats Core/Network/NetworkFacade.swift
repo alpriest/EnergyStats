@@ -185,11 +185,11 @@ public class NetworkFacade: FoxESSNetworking {
         }
     }
 
-    public func setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws {
+    public func openapi_setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws {
         return if isDemoUser {
-            try await fakeNetwork.setBatteryTimes(deviceSN: deviceSN, times: times)
+            try await fakeNetwork.openapi_setBatteryTimes(deviceSN: deviceSN, times: times)
         } else {
-            try await network.setBatteryTimes(deviceSN: deviceSN, times: times)
+            try await network.openapi_setBatteryTimes(deviceSN: deviceSN, times: times)
         }
     }
 

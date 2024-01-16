@@ -196,7 +196,7 @@ public class DemoNetworking: FoxESSNetworking {
         ])
     }
 
-    public func setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws {}
+    public func openapi_setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws {}
 
     public func fetchWorkMode(deviceID: String) async throws -> DeviceSettingsGetResponse {
         DeviceSettingsGetResponse(protocol: "H1234", raw: "", values: InverterValues(operationModeWorkMode: .feedInFirst))

@@ -17,6 +17,7 @@ extension URL {
     static var deviceDetail = URL(string: "https://www.foxesscloud.com/op/v0/device/detail")!
     static var setOpenBatterySOC = URL(string: "https://www.foxesscloud.com/op/v0/device/battery/soc/set")!
     static var getOpenBatteryChargeTimes = URL(string: "https://www.foxesscloud.com/op/v0/device/battery/forceChargeTime/get")!
+    static var setOpenBatteryChargeTimes = URL(string: "https://www.foxesscloud.com/op/v0/device/battery/forceChargeTime/set")!
 }
 
 public extension Network {
@@ -104,5 +105,17 @@ public extension Network {
         let result: (BatteryTimesResponse, Data) = try await fetch(request)
         store.batteryTimesResponse = NetworkOperation(description: "batteryTimesResponse", value: result.0, raw: result.1)
         return result.0
+    }
+
+    func openapi_setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws {
+        var request = URLRequest(url: URL.setOpenBatteryChargeTimes)
+        request.httpMethod = "POST"
+        request.httpBody = try! JSONEncoder().encode(SetBatteryTimesRequest(sn: deviceSN, times: times))
+
+        do {
+            let _: (String, Data) = try await fetch(request)
+        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
+            // Ignore
+        }
     }
 }

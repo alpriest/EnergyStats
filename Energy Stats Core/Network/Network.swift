@@ -86,18 +86,6 @@ public class Network: FoxESSNetworking {
         return result.0.variables
     }
 
-    public func setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws {
-        var request = URLRequest(url: URL.batteryTimeSet)
-        request.httpMethod = "POST"
-        request.httpBody = try! JSONEncoder().encode(SetBatteryTimesRequest(sn: deviceSN, times: times))
-
-        do {
-            let _: (String, Data) = try await fetch(request)
-        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
-            // Ignore
-        }
-    }
-
     public func fetchWorkMode(deviceID: String) async throws -> DeviceSettingsGetResponse {
         let request = append(queryItems: [
             URLQueryItem(name: "id", value: deviceID),

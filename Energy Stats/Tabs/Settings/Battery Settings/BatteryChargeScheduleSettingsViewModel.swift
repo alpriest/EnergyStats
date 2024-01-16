@@ -65,7 +65,7 @@ class BatteryChargeScheduleSettingsViewModel: ObservableObject {
                     timePeriod2.asChargeTime()
                 ]
 
-                try await networking.setBatteryTimes(deviceSN: deviceSN, times: times)
+                try await networking.openapi_setBatteryTimes(deviceSN: deviceSN, times: times)
                 alertContent = AlertContent(title: "Success", message: "battery_charge_schedule_settings_saved")
                 state = .inactive
             } catch NetworkError.foxServerError(let code, _) where code == 44096 {

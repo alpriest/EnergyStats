@@ -17,7 +17,6 @@ extension URL {
     static var deviceSettingsSet = URL(string: "https://www.foxesscloud.com/c/v0/device/setting/set")!
     static var moduleList = URL(string: "https://www.foxesscloud.com/c/v0/module/list")!
     static var errorMessages = URL(string: "https://www.foxesscloud.com/c/v0/errors/message")!
-    static var batteryTimeSet = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/time/set")!
 }
 
 public protocol FoxESSNetworking {
@@ -54,5 +53,5 @@ public protocol FoxESSNetworking {
     func openapi_fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse
     func openapi_setBatterySoc(deviceSN: String, minSOCOnGrid: Int, minSOC: Int) async throws
     func openapi_fetchBatteryTimes(deviceSN: String) async throws -> BatteryTimesResponse
-    func setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws
+    func openapi_setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws
 }
