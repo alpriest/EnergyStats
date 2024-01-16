@@ -33,7 +33,7 @@ class MockNetworking: FoxESSNetworking {
     }
 
     func fetchBatterySOC() async throws -> BatterySettingsResponse {
-        BatterySettingsResponse(minGridSoc: 15, minSoc: 20)
+        BatterySettingsResponse(minSocOnGrid: 15, minSoc: 20)
     }
 
     func verifyCredentials(username: String, hashedPassword: String) async throws {
@@ -44,7 +44,7 @@ class MockNetworking: FoxESSNetworking {
 
     func fetchDeviceList() async throws -> [PagedDeviceListResponse.Device] {
         [
-            PagedDeviceListResponse.Device(plantName: "plant1", deviceID: "abcdef", deviceSN: "123123", moduleSN: "SN123", hasBattery: true, hasPV: true, deviceType: "F4000")
+            PagedDeviceListResponse.Device(deviceSN: "123123", moduleSN: "SN123", plantID: "123", status: 1)
         ]
     }
 
@@ -57,16 +57,14 @@ class MockNetworking: FoxESSNetworking {
     }
 
     func fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse {
-        BatterySettingsResponse(minGridSoc: 15, minSoc: 20)
+        BatterySettingsResponse(minSocOnGrid: 15, minSoc: 20)
     }
 
     func fetchBattery(deviceID: String) async throws -> BatteryResponse {
         BatteryResponse(power: 0.27, soc: 56, residual: 2200, temperature: 13.6)
     }
 
-    func fetchErrorMessages() async {
-
-    }
+    func fetchErrorMessages() async {}
 
     func fetchRaw(deviceID: String, variables: [RawVariable], queryDate: Energy_Stats_Core.QueryDate) async throws -> [RawResponse] {
         if throwOnCall {
@@ -91,24 +89,6 @@ class MockNetworking: FoxESSNetworking {
         []
     }
 
-    func fetchEarnings(deviceID: String) async throws -> EarningsResponse {
-        EarningsResponse(currency: "GBP", today: EarningsResponse.Earning(generation: 1.0, earnings: 1.0),
-                         month: EarningsResponse.Earning(generation: 2.0, earnings: 2.0),
-                         year: EarningsResponse.Earning(generation: 3.0, earnings: 3.0),
-                         cumulate: EarningsResponse.Earning(generation: 4.0, earnings: 4.0))
-    }
-
-    func setSoc(minGridSOC: Int, minSOC: Int, deviceSN: String) async throws {}
-
-    func fetchBatteryTimes(deviceSN: String) async throws -> BatteryTimesResponse {
-        BatteryTimesResponse(sn: "ABC1234", times: [
-            ChargeTime(enableGrid: false, startTime: Time(hour: 01, minute: 00), endTime: Time(hour: 01, minute: 30)),
-            ChargeTime(enableGrid: false, startTime: Time(hour: 03, minute: 00), endTime: Time(hour: 03, minute: 30))
-        ])
-    }
-
-    func setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws {}
-
     func fetchWorkMode(deviceID: String) async throws -> DeviceSettingsGetResponse {
         DeviceSettingsGetResponse(protocol: "H1234", raw: "", values: InverterValues(operationModeWorkMode: .feedInFirst))
     }
@@ -129,4 +109,71 @@ class MockNetworking: FoxESSNetworking {
 
         return try Data(contentsOf: url)
     }
+
+    func fetchSchedulerFlag(deviceSN: String) async throws -> Energy_Stats_Core.SchedulerFlagResponse {
+        SchedulerFlagResponse(enable: true, support: true)
+    }
+
+    func fetchScheduleModes(deviceID: String) async throws -> [Energy_Stats_Core.SchedulerModeResponse] {
+        []
+    }
+
+    func fetchCurrentSchedule(deviceSN: String) async throws -> Energy_Stats_Core.ScheduleListResponse {
+        ScheduleListResponse(data: [], enable: false, pollcy: [])
+    }
+
+    func saveSchedule(deviceSN: String, schedule: Energy_Stats_Core.Schedule) async throws {}
+
+    func saveScheduleTemplate(deviceSN: String, template: Energy_Stats_Core.ScheduleTemplate) async throws {}
+
+    func deleteSchedule(deviceSN: String) async throws {}
+
+    func createScheduleTemplate(name: String, description: String) async throws {}
+
+    func fetchScheduleTemplates() async throws -> Energy_Stats_Core.ScheduleTemplateListResponse {
+        ScheduleTemplateListResponse(data: [])
+    }
+
+    func enableScheduleTemplate(deviceSN: String, templateID: String) async throws {}
+
+    func fetchScheduleTemplate(deviceSN: String, templateID: String) async throws -> Energy_Stats_Core.ScheduleTemplateResponse {
+        ScheduleTemplateResponse(templateName: "", enable: false, pollcy: [], content: "")
+    }
+
+    func deleteScheduleTemplate(templateID: String) async throws {}
+
+    func openapi_fetchDeviceList() async throws -> [Energy_Stats_Core.DeviceDetailResponse] {
+        []
+    }
+
+    func openapi_fetchRealData(deviceSN: String, variables: [String]) async throws -> Energy_Stats_Core.OpenQueryResponse {
+        OpenQueryResponse(time: Date(), deviceSN: "", datas: [])
+    }
+
+    func openapi_fetchHistory(deviceSN: String, variables: [String], start: Date, end: Date) async throws -> Energy_Stats_Core.OpenHistoryResponse {
+        OpenHistoryResponse(deviceSN: "", datas: [])
+    }
+
+    func openapi_fetchVariables() async throws -> [Energy_Stats_Core.OpenApiVariable] {
+        []
+    }
+
+    func openapi_fetchReport(deviceSN: String, variables: [Energy_Stats_Core.ReportVariable], queryDate: Energy_Stats_Core.QueryDate, reportType: Energy_Stats_Core.ReportType) async throws -> [Energy_Stats_Core.OpenReportResponse] {
+        []
+    }
+
+    func openapi_fetchBatterySettings(deviceSN: String) async throws -> Energy_Stats_Core.BatterySettingsResponse {
+        BatterySettingsResponse(minSocOnGrid: 0, minSoc: 0)
+    }
+
+    func openapi_setBatterySoc(deviceSN: String, minSOCOnGrid: Int, minSOC: Int) async throws {}
+
+    func openapi_fetchBatteryTimes(deviceSN: String) async throws -> Energy_Stats_Core.BatteryTimesResponse {
+        BatteryTimesResponse(times: [
+            ChargeTime(enable: false, startTime: Time(hour: 01, minute: 00), endTime: Time(hour: 01, minute: 30)),
+            ChargeTime(enable: false, startTime: Time(hour: 03, minute: 00), endTime: Time(hour: 03, minute: 30))
+        ])
+    }
+
+    func openapi_setBatteryTimes(deviceSN: String, times: [Energy_Stats_Core.ChargeTime]) async throws {}
 }

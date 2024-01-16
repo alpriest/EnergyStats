@@ -18,43 +18,6 @@ final class NetworkTests: XCTestCase {
         sut = Network(credentials: keychainStore, store: InMemoryLoggingNetworkStore())
     }
 
-    func test_verifyCredentials_does_not_throw_on_success() async throws {
-        stubHTTPResponse(with: .loginSuccess)
-
-        try await sut.verifyCredentials(username: "bob", hashedPassword: "secret")
-    }
-
-    func test_verifyCredentials_throws_on_failure() async throws {
-        stubHTTPResponse(with: .loginFailure)
-
-        do {
-            try await sut.verifyCredentials(username: "bob", hashedPassword: "secret")
-        } catch NetworkError.badCredentials {
-        } catch {
-            XCTFail()
-        }
-    }
-
-    func test_ensureTokenValid_fetches_new_token_if_none() async throws {
-        keychainStore.token = nil
-        keychainStore.username = "bob"
-        keychainStore.hashedPassword = "secrethash"
-        stubHTTPResponse(with: .loginSuccess)
-
-        await sut.ensureHasToken()
-
-        XCTAssertNotNil(keychainStore.token)
-    }
-
-    func test_ensureTokenValid_fetches_device_list_if_token_present() async throws {
-        keychainStore.token = "token"
-        stubHTTPResponse(with: .deviceListSuccess)
-
-        await sut.ensureHasToken()
-
-        XCTAssertNotNil(keychainStore.token)
-    }
-
     func test_fetchReport_returns_data_on_success() async throws {
         stubHTTPResponse(with: .reportSuccess)
 
@@ -88,10 +51,9 @@ final class NetworkTests: XCTestCase {
     func test_fetchDeviceList_returns_data_on_success() async throws {
         stubHTTPResponse(with: .deviceListSuccess)
 
-        let devices = try await sut.fetchDeviceList()
+        let devices = try await sut.openapi_fetchDeviceList()
 
-        XCTAssertEqual(devices.first?.hasBattery, false)
-        XCTAssertEqual(devices.first?.deviceID, "12345678-0000-0000-1234-aaaabbbbcccc")
+        XCTAssertEqual(devices.first?.deviceSN, "12345678-0000-0000-1234-aaaabbbbcccc")
     }
 
     func test_fetchReport_throws_when_offline() async {
@@ -117,7 +79,7 @@ final class NetworkTests: XCTestCase {
     }
 
     func test_fetchReport_withInvalidToken_requestsToken_andRetriesOriginalFetch() async throws {
-        keychainStore.username = "bob"
+        keychainStore.token = "bob"
         keychainStore.hashedPassword = "secrethash"
         stubHTTPResponses(with: [.badTokenFailure, .loginSuccess, .reportSuccess])
 

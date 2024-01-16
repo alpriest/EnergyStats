@@ -47,4 +47,11 @@ class MockConfig: Config {
     var devices: Data? = nil
     var selectedDeviceID: String? = "1234"
     var showInverterTemperature: Bool = false
+    var selectedDeviceSN: String? = nil
+    var solcastSettings: SolcastSettings = SolcastSettings(apiKey: nil, sites: [])
+    var dataCeiling: DataCeiling = .none
+    var showTotalYieldOnPowerFlow: Bool = false
+    var showFinancialSummaryOnFlowPage: Bool = false
+    var separateParameterGraphsByUnit: Bool = false
+    var variables: [Variable] = []
 }

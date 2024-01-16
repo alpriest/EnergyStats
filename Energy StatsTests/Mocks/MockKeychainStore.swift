@@ -12,30 +12,20 @@ import Combine
 
 class MockKeychainStore: KeychainStoring {
     var isDemoUser: Bool = true
-    var username: String?
     var hashedPassword: String?
     var token: String?
     var logoutCalled = false
-
-    func getUsername() -> String? {
-        username
-    }
 
     func getHashedPassword() -> String? {
         hashedPassword
     }
 
-    func store(token: String?) throws {
-        self.token = token
+    func store(apiKey: String?) throws {
+        self.token = apiKey
     }
 
     func getToken() -> String? {
         token
-    }
-
-    func store(username: String, hashedPassword: String, updateHasCredentials: Bool = true) throws {
-        self.username = username
-        self.hashedPassword = hashedPassword
     }
 
     func logout() {

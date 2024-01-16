@@ -23,7 +23,7 @@ final class UserManagerTests: XCTestCase {
         config = MockConfig()
         let cache = InMemoryLoggingNetworkStore()
         networking = Network(credentials: keychainStore,  store: cache)
-        configManager = PreviewConfigManager(networking: networking, config: config)
+        configManager = PreviewConfigManager(networking: networking, config: config, appSettingsPublisher: CurrentValueSubject<AppSettings, Never>(AppSettings.mock()))
         sut = UserManager(networking: networking, store: keychainStore, configManager: configManager, networkCache: cache)
     }
 
@@ -41,12 +41,6 @@ final class UserManagerTests: XCTestCase {
 
         wait(for: [expectation], timeout: 1.0)
         XCTAssertTrue(sut.isLoggedIn)
-    }
-
-    func test_returns_username_from_keychain() {
-        keychainStore.username = "bob"
-
-        XCTAssertEqual(sut.getUsername(), "bob")
     }
 
     func test_logout_clears_store() {
@@ -67,10 +61,10 @@ final class UserManagerTests: XCTestCase {
         let received = ValueReceiver(sut.$state)
         stubHTTPResponses(with: [.loginSuccess, .deviceListSuccess, .firmwareVersionSuccess, .variablesSuccess, .batterySuccess, .batterySocSuccess])
 
-        await sut.login(username: "bob", password: "password")
+        await sut.login(apiKey: "bob")
 
         XCTAssertEqual(received.values, [.inactive, .active("Loading...")])
-        XCTAssertEqual(keychainStore.username, "bob")
+        XCTAssertEqual(keychainStore.token, "bob")
         XCTAssertEqual(keychainStore.hashedPassword, "password".md5()!)
         XCTAssertEqual(config.selectedDeviceID, "12345678-0000-0000-1234-aaaabbbbcccc")
         XCTAssertNotNil(config.devices)
@@ -80,7 +74,7 @@ final class UserManagerTests: XCTestCase {
         let received = ValueReceiver(sut.$state)
         stubHTTPResponses(with: [.loginSuccess, .tryLaterFailure])
 
-        await sut.login(username: "bob", password: "password")
+        await sut.login(apiKey: "bob")
 
         XCTAssertEqual(received.values, [.inactive, .active("Loading..."), .inactive, .error(nil, "Could not login. Check your internet connection")])
         XCTAssertTrue(keychainStore.logoutCalled)
@@ -90,10 +84,10 @@ final class UserManagerTests: XCTestCase {
         let received = ValueReceiver(sut.$state)
         stubHTTPResponses(with: [.loginFailure])
 
-        await sut.login(username: "bob", password: "wrongpassword")
+        await sut.login(apiKey: "bob")
 
         XCTAssertEqual(received.values, [.inactive, .active("Loading..."), .inactive, .error(nil, "Wrong credentials, try again")])
-        XCTAssertNil(keychainStore.username)
+        XCTAssertNil(keychainStore.token)
         XCTAssertNil(keychainStore.hashedPassword)
         XCTAssertTrue(keychainStore.logoutCalled)
     }
@@ -102,10 +96,10 @@ final class UserManagerTests: XCTestCase {
         let received = ValueReceiver(sut.$state)
         stubOffline()
 
-        await sut.login(username: "bob", password: "wrongpassword")
+        await sut.login(apiKey: "bob")
 
         XCTAssertEqual(received.values, [.inactive, .active("Loading..."), .inactive, .error(nil, "Could not login. Check your internet connection")])
-        XCTAssertNil(keychainStore.username)
+        XCTAssertNil(keychainStore.token)
         XCTAssertNil(keychainStore.hashedPassword)
         XCTAssertTrue(keychainStore.logoutCalled)
     }

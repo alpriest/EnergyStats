@@ -5,6 +5,7 @@
 //  Created by Alistair Priest on 01/10/2022.
 //
 
+import Combine
 @testable import Energy_Stats
 import Energy_Stats_Core
 import XCTest
@@ -18,7 +19,7 @@ final class ParametersGraphTabViewModelTests: XCTestCase {
     override func setUp() async throws {
         config = MockConfig()
         networking = MockNetworking()
-        let configManager = ConfigManager(networking: networking, config: config)
+        let configManager = ConfigManager(networking: networking, config: config, appSettingsPublisher: CurrentValueSubject<AppSettings, Never>(AppSettings.mock()))
         sut = ParametersGraphTabViewModel(networking: networking, configManager: configManager) { Date(timeIntervalSince1970: 1669146973) }
 
         try await configManager.fetchDevices()
@@ -29,11 +30,11 @@ final class ParametersGraphTabViewModelTests: XCTestCase {
         XCTAssertEqual(sut.displayMode, GraphDisplayMode(date: .now, hours: 24))
         XCTAssertEqual(sut.stride, 3)
         XCTAssertEqual(sut.graphVariables, [
-            ParameterGraphVariable(RawVariable(name: "Output Power", variable: "generationPower", unit: "kW"), isSelected: true),
-            ParameterGraphVariable(RawVariable(name: "Feed-in Power", variable: "feedinPower", unit: "kW"), isSelected: true),
-            ParameterGraphVariable(RawVariable(name: "Charge Power", variable: "batChargePower", unit: "kW"), isSelected: true),
-            ParameterGraphVariable(RawVariable(name: "Discharge Power", variable: "batDischargePower", unit: "kW"), isSelected: true),
-            ParameterGraphVariable(RawVariable(name: "GridConsumption Power", variable: "gridConsumptionPower", unit: "kW"), isSelected: true),
+            ParameterGraphVariable(Variable(name: "Output Power", variable: "generationPower", unit: "kW"), isSelected: true),
+            ParameterGraphVariable(Variable(name: "Feed-in Power", variable: "feedinPower", unit: "kW"), isSelected: true),
+            ParameterGraphVariable(Variable(name: "Charge Power", variable: "batChargePower", unit: "kW"), isSelected: true),
+            ParameterGraphVariable(Variable(name: "Discharge Power", variable: "batDischargePower", unit: "kW"), isSelected: true),
+            ParameterGraphVariable(Variable(name: "GridConsumption Power", variable: "gridConsumptionPower", unit: "kW"), isSelected: true),
         ])
     }
 
