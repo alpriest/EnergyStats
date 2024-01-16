@@ -232,12 +232,25 @@ public class NetworkFacade: FoxESSNetworking {
         }
     }
 
+    private var lastCallTime = Date.distantPast
     public func openapi_fetchHistory(deviceSN: String, variables: [String], start: Date, end: Date) async throws -> OpenHistoryResponse {
-        if isDemoUser {
-            try await fakeNetwork.openapi_fetchHistory(deviceSN: deviceSN, variables: variables, start: start, end: end)
-        } else {
-            try await network.openapi_fetchHistory(deviceSN: deviceSN, variables: variables, start: start, end: end)
+        let now = Date()
+        let timeSinceLastCall = now.timeIntervalSince(lastCallTime)
+
+        if timeSinceLastCall < 1.0 {
+            let waitTime = UInt64((1.0 - timeSinceLastCall) * 1_000_000_000) // Convert seconds to nanoseconds
+            try await Task.sleep(nanoseconds: waitTime)
         }
+
+        let result: OpenHistoryResponse
+        if isDemoUser {
+            result = try await fakeNetwork.openapi_fetchHistory(deviceSN: deviceSN, variables: variables, start: start, end: end)
+        } else {
+            result = try await network.openapi_fetchHistory(deviceSN: deviceSN, variables: variables, start: start, end: end)
+        }
+
+        lastCallTime = Date()
+        return result
     }
 
     public func openapi_fetchVariables() async throws -> [OpenApiVariable] {
