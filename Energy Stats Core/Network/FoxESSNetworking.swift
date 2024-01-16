@@ -11,7 +11,6 @@ extension URL {
     static var report = URL(string: "https://www.foxesscloud.com/c/v0/device/history/report")!
     static var raw = URL(string: "https://www.foxesscloud.com/c/v0/device/history/raw")!
     static var battery = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/info")!
-    static var addressBook = URL(string: "https://www.foxesscloud.com/c/v0/device/addressbook")!
     static var variables = URL(string: "https://www.foxesscloud.com/c/v1/device/variables")!
     static var deviceSettings = URL(string: "https://www.foxesscloud.com/c/v0/device/setting/get")!
     static var deviceSettingsSet = URL(string: "https://www.foxesscloud.com/c/v0/device/setting/set")!
@@ -26,7 +25,6 @@ public protocol FoxESSNetworking {
     func fetchRaw(deviceID: String, variables: [RawVariable], queryDate: QueryDate) async throws -> [RawResponse]
 
     func fetchBattery(deviceID: String) async throws -> BatteryResponse
-    func fetchAddressBook(deviceID: String) async throws -> AddressBookResponse
     func fetchVariables(deviceID: String) async throws -> [RawVariable]
     func fetchWorkMode(deviceID: String) async throws -> DeviceSettingsGetResponse
     func setWorkMode(deviceID: String, workMode: InverterWorkMode) async throws

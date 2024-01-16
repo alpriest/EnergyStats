@@ -75,16 +75,6 @@ public class ConfigManager: ConfigManaging {
         }
     }
 
-    private func fetchFirmwareVersions(deviceID: String) async throws -> DeviceFirmwareVersion {
-        let firmware = try await networking.fetchAddressBook(deviceID: deviceID)
-
-        return DeviceFirmwareVersion(
-            master: firmware.softVersion.master,
-            slave: firmware.softVersion.slave,
-            manager: firmware.softVersion.manager
-        )
-    }
-
     public func logout() {
         config.clear()
     }

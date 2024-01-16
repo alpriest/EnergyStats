@@ -90,10 +90,6 @@ public class NetworkValueCleaner: FoxESSNetworking {
         try await network.openapi_fetchDeviceList()
     }
 
-    public func fetchAddressBook(deviceID: String) async throws -> AddressBookResponse {
-        try await network.fetchAddressBook(deviceID: deviceID)
-    }
-
     public func fetchVariables(deviceID: String) async throws -> [RawVariable] {
         try await network.fetchVariables(deviceID: deviceID)
     }

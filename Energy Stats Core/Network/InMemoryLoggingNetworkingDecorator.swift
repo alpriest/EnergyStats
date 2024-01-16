@@ -13,7 +13,6 @@ public class InMemoryLoggingNetworkStore: ObservableObject {
     public var batterySettingsResponse: NetworkOperation<BatterySettingsResponse>?
     public var rawResponse: NetworkOperation<[RawResponse]>?
     public var deviceListResponse: NetworkOperation<[DeviceDetailResponse]>?
-    public var addressBookResponse: NetworkOperation<AddressBookResponse>?
     public var variables: NetworkOperation<VariablesResponse>?
     public var batteryTimesResponse: NetworkOperation<BatteryTimesResponse>?
 
@@ -27,7 +26,6 @@ public class InMemoryLoggingNetworkStore: ObservableObject {
         batterySettingsResponse = nil
         rawResponse = nil
         deviceListResponse = nil
-        addressBookResponse = nil
         variables = nil
         batteryTimesResponse = nil
     }

@@ -167,10 +167,6 @@ public class DemoNetworking: FoxESSNetworking {
         }
     }
 
-    public func fetchAddressBook(deviceID: String) async throws -> AddressBookResponse {
-        AddressBookResponse(softVersion: AddressBookResponse.SoftwareVersion(master: "1.54", slave: "1.02", manager: "1.57"))
-    }
-
     public func fetchVariables(deviceID: String) async throws -> [RawVariable] {
         let data = try data(filename: "variables")
         let response = try JSONDecoder().decode(NetworkResponse<VariablesResponse>.self, from: data)

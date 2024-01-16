@@ -153,14 +153,6 @@ public class NetworkFacade: FoxESSNetworking {
         }
     }
 
-    public func fetchAddressBook(deviceID: String) async throws -> AddressBookResponse {
-        return if isDemoUser {
-            try await fakeNetwork.fetchAddressBook(deviceID: deviceID)
-        } else {
-            try await network.fetchAddressBook(deviceID: deviceID)
-        }
-    }
-
     public func fetchVariables(deviceID: String) async throws -> [RawVariable] {
         return if isDemoUser {
             try await fakeNetwork.fetchVariables(deviceID: deviceID)

@@ -70,14 +70,6 @@ public class Network: FoxESSNetworking {
         return result.0
     }
 
-    public func fetchAddressBook(deviceID: String) async throws -> AddressBookResponse {
-        let request = append(queryItems: [URLQueryItem(name: "deviceID", value: deviceID)], to: URL.addressBook)
-
-        let result: (AddressBookResponse, Data) = try await fetch(request)
-        store.addressBookResponse = NetworkOperation(description: "fetchAddressBookResponse", value: result.0, raw: result.1)
-        return result.0
-    }
-
     public func fetchVariables(deviceID: String) async throws -> [RawVariable] {
         let request = append(queryItems: [URLQueryItem(name: "deviceID", value: deviceID)], to: URL.variables)
 

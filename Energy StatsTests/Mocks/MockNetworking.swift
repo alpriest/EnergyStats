@@ -87,10 +87,6 @@ class MockNetworking: FoxESSNetworking {
         }
     }
 
-    func fetchAddressBook(deviceID: String) async throws -> AddressBookResponse {
-        AddressBookResponse(softVersion: AddressBookResponse.SoftwareVersion(master: "1", slave: "2", manager: "3"))
-    }
-
     func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [ReportResponse] {
         []
     }

@@ -120,18 +120,6 @@ public class NetworkCache: FoxESSNetworking {
         }
     }
 
-    public func fetchAddressBook(deviceID: String) async throws -> AddressBookResponse {
-        let key = makeKey(base: #function, arguments: deviceID)
-
-        if let item = cache[key], let cached = item.item as? AddressBookResponse, item.isFresherThan(interval: shortCacheDurationInSeconds) {
-            return cached
-        } else {
-            let fresh = try await network.fetchAddressBook(deviceID: deviceID)
-            store(key: key, value: CachedItem(fresh))
-            return fresh
-        }
-    }
-
     public func fetchVariables(deviceID: String) async throws -> [RawVariable] {
         try await network.fetchVariables(deviceID: deviceID)
     }
