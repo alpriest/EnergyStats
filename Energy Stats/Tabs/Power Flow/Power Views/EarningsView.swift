@@ -10,7 +10,7 @@ import OrderedCollections
 import SwiftUI
 
 struct EarningsView: View {
-    let viewModel: EarningsViewModel
+    let viewModel: EnergyStatsFinancialModel
     let appSettings: AppSettings
 
     var body: some View {

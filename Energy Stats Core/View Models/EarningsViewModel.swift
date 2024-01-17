@@ -27,7 +27,7 @@ public struct FinanceAmount: Hashable, Identifiable {
 
 public struct EnergyStatsFinancialModel {
     private let config: FinancialConfigManaging
-    let currencySymbol: String
+    public let currencySymbol: String
     public let exportIncome: FinanceAmount
     public let solarSaving: FinanceAmount
     public let total: FinanceAmount
@@ -53,37 +53,17 @@ public struct EnergyStatsFinancialModel {
         total = FinanceAmount(title: .total, amount: exportIncome.amount + solarSaving.amount, currencySymbol: currencySymbol)
     }
 
-    func amounts() -> [FinanceAmount] {
+    public func amounts() -> [FinanceAmount] {
         [exportIncome, solarSaving, total]
     }
 }
 
-public struct EarningsViewModel {
-    private let energyStatsFinancialModel: EnergyStatsFinancialModel
-
-    public func amounts() -> [FinanceAmount] {
-        energyStatsFinancialModel.amounts()
+public extension EnergyStatsFinancialModel {
+    static func any() -> EnergyStatsFinancialModel {
+        EnergyStatsFinancialModel(totalsViewModel: TotalsViewModel(reports: []),
+                                  config: PreviewConfigManager(),
+                                  currencySymbol: "£")
     }
 
-    public var currencySymbol: String {
-        energyStatsFinancialModel.currencySymbol
-    }
-
-    public init(energyStatsFinancialModel: EnergyStatsFinancialModel) {
-        self.energyStatsFinancialModel = energyStatsFinancialModel
-    }
-}
-
-public extension EarningsViewModel {
-    static func any() -> EarningsViewModel {
-        EarningsViewModel(energyStatsFinancialModel: EnergyStatsFinancialModel(totalsViewModel: TotalsViewModel(reports: []),
-                                                                               config: PreviewConfigManager(),
-                                                                               currencySymbol: "£"))
-    }
-
-    static func empty() -> EarningsViewModel {
-        EarningsViewModel(energyStatsFinancialModel: EnergyStatsFinancialModel(totalsViewModel: TotalsViewModel(reports: []),
-                                                                               config: PreviewConfigManager(),
-                                                                               currencySymbol: "£"))
-    }
+    static func empty() -> EnergyStatsFinancialModel { any() }
 }

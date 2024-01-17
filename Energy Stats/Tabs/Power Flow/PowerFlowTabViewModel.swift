@@ -203,7 +203,6 @@ class PowerFlowTabViewModel: ObservableObject {
 
             let start = Calendar.current.startOfDay(for: Date())
             let history = try await network.openapi_fetchHistory(deviceSN: currentDeviceSN, variables: ["pvPower", "meterPower2"], start: start, end: start.addingTimeInterval(86400))
-            let historyUnused = try await network.openapi_fetchHistory(deviceSN: currentDeviceSN, variables: ["meterPower2"], start: start, end: start.addingTimeInterval(86400))
 
             let summary = HomePowerFlowViewModel(
                 solar: currentViewModel.currentSolarPower,
@@ -211,7 +210,7 @@ class PowerFlowTabViewModel: ObservableObject {
                 home: currentViewModel.currentHomeConsumption,
                 grid: currentViewModel.currentGrid,
                 todaysGeneration: GenerationViewModel(response: history),
-                earnings: EarningsViewModel(energyStatsFinancialModel: EnergyStatsFinancialModel(totalsViewModel: totals, config: self.configManager, currencySymbol: self.configManager.currencySymbol)),
+                earnings: EnergyStatsFinancialModel(totalsViewModel: totals, config: self.configManager, currencySymbol: self.configManager.currencySymbol),
                 inverterTemperatures: currentViewModel.currentTemperatures,
                 homeTotal: totals.home,
                 gridImportTotal: totals.gridImport,
