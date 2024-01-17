@@ -13,7 +13,7 @@ public class InMemoryLoggingNetworkStore: ObservableObject {
     public var batterySettingsResponse: NetworkOperation<BatterySettingsResponse>?
     public var queryResponse: NetworkOperation<OpenQueryResponse>?
     public var deviceListResponse: NetworkOperation<[DeviceDetailResponse]>?
-    public var variables: NetworkOperation<VariablesResponse>?
+    public var variables: NetworkOperation<OpenApiVariableArray>?
     public var batteryTimesResponse: NetworkOperation<BatteryTimesResponse>?
 
     public static let shared = InMemoryLoggingNetworkStore()

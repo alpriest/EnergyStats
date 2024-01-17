@@ -63,16 +63,6 @@ private extension CurrentStatusCalculator {
     }
 }
 
-extension Array where Element == RawResponse {
-    func current(for key: String) -> RawResponse.ReportData? {
-        first(where: { $0.variable.lowercased() == key.lowercased() })?.data.last
-    }
-
-    func currentValue(for key: String) -> Double {
-        current(for: key)?.value ?? 0.0
-    }
-}
-
 public extension Date {
     func small() -> String {
         let formatter = DateFormatter()

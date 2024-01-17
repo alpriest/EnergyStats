@@ -50,14 +50,6 @@ public class Network: FoxESSNetworking {
         return result.0
     }
 
-    public func fetchVariables(deviceID: String) async throws -> [RawVariable] {
-        let request = append(queryItems: [URLQueryItem(name: "deviceID", value: deviceID)], to: URL.variables)
-
-        let result: (VariablesResponse, Data) = try await fetch(request)
-        store.variables = NetworkOperation(description: "fetchVariables", value: result.0, raw: result.1)
-        return result.0.variables
-    }
-
     public func fetchWorkMode(deviceID: String) async throws -> DeviceSettingsGetResponse {
         let request = append(queryItems: [
             URLQueryItem(name: "id", value: deviceID),

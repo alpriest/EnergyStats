@@ -126,14 +126,6 @@ public class DemoNetworking: FoxESSNetworking {
         ]
     }
 
-    public func fetchVariables(deviceID: String) async throws -> [RawVariable] {
-        let data = try data(filename: "variables")
-        let response = try JSONDecoder().decode(NetworkResponse<VariablesResponse>.self, from: data)
-        guard let result = response.result else { throw NetworkError.invalidToken }
-
-        return result.variables
-    }
-
     private func data(filename: String) throws -> Data {
         guard let url = Bundle(for: type(of: self)).url(forResource: filename, withExtension: "json") else {
             return Data()

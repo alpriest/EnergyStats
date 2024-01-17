@@ -19,7 +19,6 @@ extension URL {
 
 public protocol FoxESSNetworking {
     func fetchBattery(deviceID: String) async throws -> BatteryResponse
-    func fetchVariables(deviceID: String) async throws -> [RawVariable]
     func fetchWorkMode(deviceID: String) async throws -> DeviceSettingsGetResponse
     func setWorkMode(deviceID: String, workMode: InverterWorkMode) async throws
     func fetchDataLoggers() async throws -> PagedDataLoggerListResponse

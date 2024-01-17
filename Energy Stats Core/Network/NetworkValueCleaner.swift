@@ -72,10 +72,6 @@ public class NetworkValueCleaner: FoxESSNetworking {
         try await network.openapi_fetchDeviceList()
     }
 
-    public func fetchVariables(deviceID: String) async throws -> [RawVariable] {
-        try await network.fetchVariables(deviceID: deviceID)
-    }
-
     public func openapi_setBatterySoc(deviceSN: String, minSOCOnGrid: Int, minSOC: Int) async throws {
         try await network.openapi_setBatterySoc(deviceSN: deviceSN, minSOCOnGrid: minSOCOnGrid, minSOC: minSOC)
     }

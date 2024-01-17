@@ -137,14 +137,6 @@ public class NetworkFacade: FoxESSNetworking {
         }
     }
 
-    public func fetchVariables(deviceID: String) async throws -> [RawVariable] {
-        return if isDemoUser {
-            try await fakeNetwork.fetchVariables(deviceID: deviceID)
-        } else {
-            try await network.fetchVariables(deviceID: deviceID)
-        }
-    }
-
     public func openapi_setBatterySoc(deviceSN: String, minSOCOnGrid: Int, minSOC: Int) async throws {
         return if isDemoUser {
             try await fakeNetwork.openapi_setBatterySoc(deviceSN: deviceSN, minSOCOnGrid: minSOCOnGrid, minSOC: minSOC)
