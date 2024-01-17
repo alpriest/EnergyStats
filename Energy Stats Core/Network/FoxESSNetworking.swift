@@ -8,7 +8,6 @@
 import Foundation
 
 extension URL {
-    static var report = URL(string: "https://www.foxesscloud.com/c/v0/device/history/report")!
     static var raw = URL(string: "https://www.foxesscloud.com/c/v0/device/history/raw")!
     static var battery = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/info")!
     static var variables = URL(string: "https://www.foxesscloud.com/c/v1/device/variables")!
@@ -19,11 +18,6 @@ extension URL {
 }
 
 public protocol FoxESSNetworking {
-    @available(*, deprecated, renamed: "openapi_fetchReport", message: "Unavailable")
-    func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [ReportResponse]
-    @available(*, deprecated, renamed: "openapi_fetchRealData", message: "Unavailable")
-    func fetchRaw(deviceID: String, variables: [RawVariable], queryDate: QueryDate) async throws -> [RawResponse]
-
     func fetchBattery(deviceID: String) async throws -> BatteryResponse
     func fetchVariables(deviceID: String) async throws -> [RawVariable]
     func fetchWorkMode(deviceID: String) async throws -> DeviceSettingsGetResponse

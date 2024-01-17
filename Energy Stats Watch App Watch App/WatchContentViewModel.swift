@@ -5,8 +5,8 @@
 //  Created by Alistair Priest on 03/04/2023.
 //
 
-import Foundation
 import Energy_Stats_Core
+import Foundation
 
 class ContentViewModel: ObservableObject {
     @Published var summary: HomePowerFlowViewModel? = nil
@@ -36,7 +36,7 @@ class ContentViewModel: ObservableObject {
     }
 
     func timerFired() async {
-        guard configManager.currentDevice != nil else {
+        guard self.configManager.currentDevice != nil else {
             await MainActor.run {
                 self.updateState = "Please login via the iOS app first."
             }
@@ -65,9 +65,9 @@ class ContentViewModel: ObservableObject {
             await MainActor.run { self.updateState = "Updating..." }
             await self.network.ensureHasToken()
 
-            let raws = try await self.network.fetchRaw(deviceID: currentDevice.deviceID, variables: [.feedinPower, .gridConsumptionPower, .generationPower, .loadsPower, .batChargePower, .batDischargePower])
+            let raws = try await self.network.openapi_fetchRealData(deviceSN: currentDevice.deviceID, variables: [.feedinPower, .gridConsumptionPower, .generationPower, .loadsPower, .batChargePower, .batDischargePower].map { $0.variable })
             let currentViewModel = CurrentStatusViewModel(raws: raws)
-            let battery = currentDevice.battery != nil ? BatteryViewModel(from: try await self.network.fetchBattery(deviceID: currentDevice.deviceID)) : .noBattery
+            let battery = try currentDevice.battery != nil ? BatteryViewModel(from: await self.network.fetchBattery(deviceID: currentDevice.deviceID)) : .noBattery
             let summary = HomePowerFlowViewModel(solar: currentViewModel.currentSolarPower,
                                                  battery: battery.chargePower,
                                                  home: currentViewModel.currentHomeConsumption,

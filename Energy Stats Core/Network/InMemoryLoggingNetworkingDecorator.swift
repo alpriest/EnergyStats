@@ -8,10 +8,10 @@
 import Foundation
 
 public class InMemoryLoggingNetworkStore: ObservableObject {
-    public var reportResponse: NetworkOperation<[ReportResponse]>?
+    public var reportResponse: NetworkOperation<[OpenReportResponse]>?
     public var batteryResponse: NetworkOperation<BatteryResponse>?
     public var batterySettingsResponse: NetworkOperation<BatterySettingsResponse>?
-    public var rawResponse: NetworkOperation<[RawResponse]>?
+    public var queryResponse: NetworkOperation<OpenQueryResponse>?
     public var deviceListResponse: NetworkOperation<[DeviceDetailResponse]>?
     public var variables: NetworkOperation<VariablesResponse>?
     public var batteryTimesResponse: NetworkOperation<BatteryTimesResponse>?
@@ -24,7 +24,7 @@ public class InMemoryLoggingNetworkStore: ObservableObject {
         reportResponse = nil
         batteryResponse = nil
         batterySettingsResponse = nil
-        rawResponse = nil
+        queryResponse = nil
         deviceListResponse = nil
         variables = nil
         batteryTimesResponse = nil

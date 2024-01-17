@@ -113,14 +113,6 @@ public class NetworkFacade: FoxESSNetworking {
         }
     }
 
-    public func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [ReportResponse] {
-        return if isDemoUser {
-            try await fakeNetwork.fetchReport(deviceID: deviceID, variables: variables, queryDate: queryDate, reportType: reportType)
-        } else {
-            try await network.fetchReport(deviceID: deviceID, variables: variables, queryDate: queryDate, reportType: reportType)
-        }
-    }
-
     public func fetchBattery(deviceID: String) async throws -> BatteryResponse {
         return if isDemoUser {
             try await fakeNetwork.fetchBattery(deviceID: deviceID)
@@ -134,14 +126,6 @@ public class NetworkFacade: FoxESSNetworking {
             try await fakeNetwork.openapi_fetchBatterySettings(deviceSN: deviceSN)
         } else {
             try await network.openapi_fetchBatterySettings(deviceSN: deviceSN)
-        }
-    }
-
-    public func fetchRaw(deviceID: String, variables: [RawVariable], queryDate: QueryDate) async throws -> [RawResponse] {
-        return if isDemoUser {
-            try await fakeNetwork.fetchRaw(deviceID: deviceID, variables: variables, queryDate: queryDate)
-        } else {
-            try await network.fetchRaw(deviceID: deviceID, variables: variables, queryDate: queryDate)
         }
     }
 

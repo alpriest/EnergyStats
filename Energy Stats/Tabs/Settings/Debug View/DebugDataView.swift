@@ -19,16 +19,16 @@ struct DebugDataView: View {
         Form {
             Section(content: {
                 NavigationLink("Raw") {
-                    ResponseDebugView<[RawResponse]>(
+                    ResponseDebugView<OpenQueryResponse>(
                         store: store,
                         title: "Raw",
                         missing: "Data is fetched and cached on the power flow view.",
-                        mapper: { $0.rawResponse },
+                        mapper: { $0.queryResponse },
                         fetcher: nil
                     )
                 }
                 NavigationLink("Report") {
-                    ResponseDebugView<[ReportResponse]>(
+                    ResponseDebugView<[OpenReportResponse]>(
                         store: store,
                         title: "Report",
                         missing: "Data is only fetched and cached on the graph view. Click that page to load report data",
@@ -90,8 +90,8 @@ struct DebugDataView_Previews: PreviewProvider {
         let network = DemoNetworking()
         let store = InMemoryLoggingNetworkStore()
         Task {
-            store.rawResponse = try NetworkOperation(description: "fetchRaw", value: await network.fetchRaw(deviceID: "123", variables: [RawVariable(name: "BatChargePower", variable: "batChargePower", unit: "kW")], queryDate: .now()), raw: "test".data(using: .utf8)!)
-            store.reportResponse = try NetworkOperation(description: "fetchReport", value: await network.fetchReport(deviceID: "123", variables: [.chargeEnergyToTal], queryDate: .now(), reportType: .day), raw: "test".data(using: .utf8)!)
+            store.queryResponse = try NetworkOperation(description: "fetchRaw", value: await network.openapi_fetchRealData(deviceSN: "123", variables: [Variable(name: "BatChargePower", variable: "batChargePower", unit: "kW")].map { $0.variable }), raw: "test".data(using: .utf8)!)
+            store.reportResponse = try NetworkOperation(description: "fetchReport", value: await network.openapi_fetchReport(deviceSN: "123", variables: [.chargeEnergyToTal], queryDate: .now(), reportType: .day), raw: "test".data(using: .utf8)!)
             store.batteryResponse = try NetworkOperation(description: "fetchBattery", value: await network.fetchBattery(deviceID: "123"), raw: "test".data(using: .utf8)!)
             store.deviceListResponse = try NetworkOperation(description: "fetchDeviceList", value: await network.openapi_fetchDeviceList(), raw: "test".data(using: .utf8)!)
         }

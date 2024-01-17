@@ -66,29 +66,6 @@ class MockNetworking: FoxESSNetworking {
 
     func fetchErrorMessages() async {}
 
-    func fetchRaw(deviceID: String, variables: [RawVariable], queryDate: Energy_Stats_Core.QueryDate) async throws -> [RawResponse] {
-        if throwOnCall {
-            throw NetworkError.maintenanceMode
-        }
-
-        let response = try JSONDecoder().decode(NetworkResponse<[RawResponse]>.self, from: rawData())
-        guard let result = response.result else { throw NetworkError.invalidToken }
-
-        return result.map {
-            RawResponse(variable: $0.variable, data: $0.data.map {
-                let components = Calendar.current.dateComponents([.hour, .minute, .second], from: $0.time)
-
-                let date = Calendar.current.date(bySettingHour: components.hour ?? 0, minute: components.minute ?? 0, second: components.second ?? 0, of: dateProvider())
-
-                return RawResponse.ReportData(time: date ?? $0.time, value: $0.value)
-            })
-        }
-    }
-
-    func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [ReportResponse] {
-        []
-    }
-
     func fetchWorkMode(deviceID: String) async throws -> DeviceSettingsGetResponse {
         DeviceSettingsGetResponse(protocol: "H1234", raw: "", values: InverterValues(operationModeWorkMode: .feedInFirst))
     }

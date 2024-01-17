@@ -21,7 +21,7 @@ final class NetworkTests: XCTestCase {
     func test_fetchReport_returns_data_on_success() async throws {
         stubHTTPResponse(with: .reportSuccess)
 
-        let report = try await sut.fetchReport(deviceID: "any", variables: [.feedIn, .gridConsumption, .generation, .chargeEnergyToTal, .dischargeEnergyToTal], queryDate: QueryDate.any(), reportType: .day)
+        let report = try await sut.openapi_fetchReport(deviceSN: "any", variables: [.feedIn, .gridConsumption, .generation, .chargeEnergyToTal, .dischargeEnergyToTal], queryDate: QueryDate.any(), reportType: .day)
 
         XCTAssertEqual(report.count, 5)
     }
@@ -35,17 +35,17 @@ final class NetworkTests: XCTestCase {
         XCTAssertEqual(report.soc, 23)
     }
 
-    func test_fetchRaw_returns_data_on_success() async throws {
+    func test_fetchReal_returns_data_on_success() async throws {
         stubHTTPResponse(with: .rawSuccess)
 
-        let raw = try await sut.fetchRaw(deviceID: "1", variables: [
+        let raw = try await sut.openapi_fetchRealData(deviceSN: "1", variables: [
             RawVariable(name: "feedinPower", variable: "feedinPower", unit: "kWH"),
             RawVariable(name: "gridConsumptionPower", variable: "gridConsumptionPower", unit: "kWH"),
             RawVariable(name: "batChargePower", variable: "batChargePower", unit: "kWH"),
             RawVariable(name: "batDischargePower", variable: "batDischargePower", unit: "kWH"),
-            RawVariable(name: "generationPower", variable: "generationPower", unit: "kWH")], queryDate: .any())
+            RawVariable(name: "generationPower", variable: "generationPower", unit: "kWH")].map { $0.variable})
 
-        XCTAssertEqual(raw.count, 5)
+        XCTAssertEqual(raw.datas.count, 5)
     }
 
     func test_fetchDeviceList_returns_data_on_success() async throws {
@@ -60,7 +60,7 @@ final class NetworkTests: XCTestCase {
         stubOffline()
 
         do {
-            _ = try await sut.fetchReport(deviceID: "!", variables: [.feedIn, .gridConsumption, .generation, .chargeEnergyToTal], queryDate: QueryDate.any(), reportType: .day)
+            _ = try await sut.openapi_fetchReport(deviceSN: "!", variables: [.feedIn, .gridConsumption, .generation, .chargeEnergyToTal], queryDate: QueryDate.any(), reportType: .day)
         } catch NetworkError.offline {
         } catch {
             XCTFail()
@@ -71,7 +71,7 @@ final class NetworkTests: XCTestCase {
         stubHTTPResponse(with: .tryLaterFailure)
 
         do {
-            _ = try await sut.fetchReport(deviceID: "1", variables: [.feedIn, .gridConsumption, .generation, .chargeEnergyToTal], queryDate: QueryDate.any(), reportType: .day)
+            _ = try await sut.openapi_fetchReport(deviceSN: "1", variables: [.feedIn, .gridConsumption, .generation, .chargeEnergyToTal], queryDate: QueryDate.any(), reportType: .day)
         } catch NetworkError.tryLater {
         } catch {
             XCTFail()
@@ -83,7 +83,7 @@ final class NetworkTests: XCTestCase {
         keychainStore.hashedPassword = "secrethash"
         stubHTTPResponses(with: [.badTokenFailure, .loginSuccess, .reportSuccess])
 
-        _ = try await sut.fetchReport(deviceID: "1", variables: [.feedIn, .gridConsumption, .generation, .chargeEnergyToTal], queryDate: QueryDate.any(), reportType: .day)
+        _ = try await sut.openapi_fetchReport(deviceSN: "1", variables: [.feedIn, .gridConsumption, .generation, .chargeEnergyToTal], queryDate: QueryDate.any(), reportType: .day)
     }
 }
 

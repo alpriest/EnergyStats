@@ -21,31 +21,11 @@ public class Network: FoxESSNetworking {
         self.store = store
     }
 
-    public func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [ReportResponse] {
-        var request = URLRequest(url: URL.report)
-        request.httpMethod = "POST"
-        request.httpBody = try! JSONEncoder().encode(ReportRequest(deviceID: deviceID, variables: variables, queryDate: queryDate, reportType: reportType))
-
-        let result: ([ReportResponse], Data) = try await fetch(request)
-        store.reportResponse = NetworkOperation(description: "fetchReport", value: result.0, raw: result.1)
-        return result.0
-    }
-
     public func fetchBattery(deviceID: String) async throws -> BatteryResponse {
         let request = append(queryItems: [URLQueryItem(name: "id", value: deviceID)], to: URL.battery)
 
         let result: (BatteryResponse, Data) = try await fetch(request)
         store.batteryResponse = NetworkOperation(description: "fetchBattery", value: result.0, raw: result.1)
-        return result.0
-    }
-
-    public func fetchRaw(deviceID: String, variables: [RawVariable], queryDate: QueryDate) async throws -> [RawResponse] {
-        var request = URLRequest(url: URL.raw)
-        request.httpMethod = "POST"
-        request.httpBody = try! JSONEncoder().encode(RawRequest(deviceID: deviceID, variables: variables, queryDate: queryDate))
-
-        let result: ([RawResponse], Data) = try await fetch(request)
-        store.rawResponse = NetworkOperation(description: "fetchRaw", value: result.0, raw: result.1)
         return result.0
     }
 

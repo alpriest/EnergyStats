@@ -126,47 +126,6 @@ public class DemoNetworking: FoxESSNetworking {
         ]
     }
 
-    public func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [ReportResponse] {
-        if throwOnCall {
-            throw NetworkError.foxServerError(0, "Fake thrown error")
-        }
-
-        let data: Data
-        switch reportType {
-        case .day:
-            data = try self.data(filename: "report-day")
-        case .month:
-            data = try self.data(filename: "report-month")
-        case .year:
-            data = try self.data(filename: "report-year")
-        }
-
-        let response = try JSONDecoder().decode(NetworkResponse<[ReportResponse]>.self, from: data)
-        guard let result = response.result else { throw NetworkError.invalidToken }
-
-        return result
-    }
-
-    public func fetchRaw(deviceID: String, variables: [RawVariable], queryDate: QueryDate) async throws -> [RawResponse] {
-        if throwOnCall {
-            throw NetworkError.foxServerError(0, "Fake thrown error")
-        }
-
-        let data = try data(filename: "raw-\(deviceID)")
-        let response = try JSONDecoder().decode(NetworkResponse<[RawResponse]>.self, from: data)
-        guard let result = response.result else { throw NetworkError.invalidToken }
-
-        return result.map {
-            RawResponse(variable: $0.variable, data: $0.data.map {
-                let thenComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: $0.time)
-
-                let date = Calendar.current.date(bySettingHour: thenComponents.hour ?? 0, minute: thenComponents.minute ?? 0, second: thenComponents.second ?? 0, of: Date())
-
-                return RawResponse.ReportData(time: date ?? $0.time, value: $0.value)
-            })
-        }
-    }
-
     public func fetchVariables(deviceID: String) async throws -> [RawVariable] {
         let data = try data(filename: "variables")
         let response = try JSONDecoder().decode(NetworkResponse<VariablesResponse>.self, from: data)
@@ -233,6 +192,24 @@ public class DemoNetworking: FoxESSNetworking {
     }
 
     public func openapi_fetchReport(deviceSN: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [OpenReportResponse] {
+//        if throwOnCall {
+//            throw NetworkError.foxServerError(0, "Fake thrown error")
+//        }
+//
+//        let data: Data
+//        switch reportType {
+//        case .day:
+//            data = try self.data(filename: "report-day")
+//        case .month:
+//            data = try self.data(filename: "report-month")
+//        case .year:
+//            data = try self.data(filename: "report-year")
+//        }
+//
+//        let response = try JSONDecoder().decode(NetworkResponse<[ReportResponse]>.self, from: data)
+//        guard let result = response.result else { throw NetworkError.invalidToken }
+//
+//        return result
         []
     }
 }

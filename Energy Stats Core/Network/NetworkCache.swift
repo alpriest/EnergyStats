@@ -75,10 +75,6 @@ public class NetworkCache: FoxESSNetworking {
         try await network.fetchSchedulerFlag(deviceSN: deviceSN)
     }
 
-    public func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [ReportResponse] {
-        try await network.fetchReport(deviceID: deviceID, variables: variables, queryDate: queryDate, reportType: reportType)
-    }
-
     public func fetchBattery(deviceID: String) async throws -> BatteryResponse {
         let key = makeKey(base: "fetchBattery", arguments: deviceID)
 
@@ -102,10 +98,6 @@ public class NetworkCache: FoxESSNetworking {
             store(key: key, value: CachedItem(fresh))
             return fresh
         }
-    }
-
-    public func fetchRaw(deviceID: String, variables: [RawVariable], queryDate: QueryDate) async throws -> [RawResponse] {
-        try await network.fetchRaw(deviceID: deviceID, variables: variables, queryDate: queryDate)
     }
 
     public func openapi_fetchDeviceList() async throws -> [DeviceDetailResponse] {
