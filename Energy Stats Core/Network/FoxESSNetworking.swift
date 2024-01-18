@@ -18,8 +18,8 @@ extension URL {
 }
 
 public protocol FoxESSNetworking {
-    func fetchWorkMode(deviceID: String) async throws -> DeviceSettingsGetResponse
-    func setWorkMode(deviceID: String, workMode: InverterWorkMode) async throws
+//    func fetchWorkMode(deviceID: String) async throws -> DeviceSettingsGetResponse
+//    func setWorkMode(deviceID: String, workMode: InverterWorkMode) async throws
     func fetchDataLoggers() async throws -> PagedDataLoggerListResponse
     func fetchErrorMessages() async
 

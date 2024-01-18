@@ -2063,6 +2063,7 @@
       }
     },
     "Backup" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2834,6 +2835,7 @@
       }
     },
     "Change inverter work mode" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2862,6 +2864,7 @@
       }
     },
     "Changes the work mode of the inverter" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -5078,6 +5081,7 @@
       }
     },
     "Feed In First" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -8229,6 +8233,7 @@
       }
     },
     "Peak Shaving" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -8406,6 +8411,7 @@
       }
     },
     "Power Station" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -10499,6 +10505,7 @@
       }
     },
     "Self Use" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -11999,6 +12006,7 @@
       }
     },
     "The workmode to change the inverter to" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -12686,6 +12694,7 @@
       }
     },
     "Which work mode would you like to set?" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

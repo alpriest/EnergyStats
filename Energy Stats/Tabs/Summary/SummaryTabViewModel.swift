@@ -40,11 +40,11 @@ class SummaryTabViewModel: ObservableObject {
 
     private func fetchAllYears(device: Device) async throws -> [ReportVariable: Double] {
         var totals = [ReportVariable: Double]()
-        let maxYears = 20
+        let oldestYear = 2020
         var hasFinished = false
 
         let currentYear = Calendar.current.component(.year, from: Date())
-        for year in (currentYear - maxYears ... currentYear).reversed() {
+        for year in (oldestYear ... currentYear).reversed() {
             if hasFinished {
                 break
             }

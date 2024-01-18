@@ -42,29 +42,29 @@ public class Network: FoxESSNetworking {
         return result.0
     }
 
-    public func fetchWorkMode(deviceID: String) async throws -> DeviceSettingsGetResponse {
-        let request = append(queryItems: [
-            URLQueryItem(name: "id", value: deviceID),
-            URLQueryItem(name: "hasVersionHead", value: "1"),
-            URLQueryItem(name: "key", value: "operation_mode__work_mode"),
-        ], to: URL.deviceSettings)
+//    public func fetchWorkMode(deviceID: String) async throws -> DeviceSettingsGetResponse {
+//        let request = append(queryItems: [
+//            URLQueryItem(name: "id", value: deviceID),
+//            URLQueryItem(name: "hasVersionHead", value: "1"),
+//            URLQueryItem(name: "key", value: "operation_mode__work_mode"),
+//        ], to: URL.deviceSettings)
+//
+//        let result: (DeviceSettingsGetResponse, Data) = try await fetch(request)
+////        store.inverterWorkModeResponse = NetworkOperation(description: "inverterWorkModeResponse", value: result.0, raw: result.1)
+//        return result.0
+//    }
 
-        let result: (DeviceSettingsGetResponse, Data) = try await fetch(request)
-//        store.inverterWorkModeResponse = NetworkOperation(description: "inverterWorkModeResponse", value: result.0, raw: result.1)
-        return result.0
-    }
-
-    public func setWorkMode(deviceID: String, workMode: InverterWorkMode) async throws {
-        var request = URLRequest(url: URL.deviceSettingsSet)
-        request.httpMethod = "POST"
-        request.httpBody = try! JSONEncoder().encode(DeviceSettingsSetRequest(id: deviceID, key: .operationModeWorkMode, values: InverterValues(operationModeWorkMode: workMode)))
-
-        do {
-            let _: (String, Data) = try await fetch(request)
-        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
-            // Ignore
-        }
-    }
+//    public func setWorkMode(deviceID: String, workMode: InverterWorkMode) async throws {
+//        var request = URLRequest(url: URL.deviceSettingsSet)
+//        request.httpMethod = "POST"
+//        request.httpBody = try! JSONEncoder().encode(DeviceSettingsSetRequest(id: deviceID, key: .operationModeWorkMode, values: InverterValues(operationModeWorkMode: workMode)))
+//
+//        do {
+//            let _: (String, Data) = try await fetch(request)
+//        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
+//            // Ignore
+//        }
+//    }
 
     public func fetchDataLoggers() async throws -> PagedDataLoggerListResponse {
         var request = URLRequest(url: URL.moduleList)

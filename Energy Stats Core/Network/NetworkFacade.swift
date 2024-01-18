@@ -153,22 +153,6 @@ public class NetworkFacade: FoxESSNetworking {
         }
     }
 
-    public func fetchWorkMode(deviceID: String) async throws -> DeviceSettingsGetResponse {
-        return if isDemoUser {
-            try await fakeNetwork.fetchWorkMode(deviceID: deviceID)
-        } else {
-            try await network.fetchWorkMode(deviceID: deviceID)
-        }
-    }
-
-    public func setWorkMode(deviceID: String, workMode: InverterWorkMode) async throws {
-        return if isDemoUser {
-            try await fakeNetwork.setWorkMode(deviceID: deviceID, workMode: workMode)
-        } else {
-            try await network.setWorkMode(deviceID: deviceID, workMode: workMode)
-        }
-    }
-
     public func fetchDataLoggers() async throws -> PagedDataLoggerListResponse {
         return if isDemoUser {
             try await fakeNetwork.fetchDataLoggers()

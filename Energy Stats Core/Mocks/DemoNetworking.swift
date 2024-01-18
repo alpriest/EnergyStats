@@ -144,12 +144,6 @@ public class DemoNetworking: FoxESSNetworking {
 
     public func openapi_setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws {}
 
-    public func fetchWorkMode(deviceID: String) async throws -> DeviceSettingsGetResponse {
-        DeviceSettingsGetResponse(protocol: "H1234", raw: "", values: InverterValues(operationModeWorkMode: .feedInFirst))
-    }
-
-    public func setWorkMode(deviceID: String, workMode: InverterWorkMode) async throws {}
-
     public func fetchDataLoggers() async throws -> PagedDataLoggerListResponse {
         PagedDataLoggerListResponse(currentPage: 1, pageSize: 10, total: 1, data: [
             PagedDataLoggerListResponse.DataLogger(moduleSN: "ABC123DEF456", moduleType: "W2", plantName: "John Doe", version: "3.08", signal: 3, communication: 1),

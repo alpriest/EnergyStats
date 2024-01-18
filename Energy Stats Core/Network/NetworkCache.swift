@@ -111,14 +111,6 @@ public class NetworkCache: FoxESSNetworking {
         try await network.openapi_setBatteryTimes(deviceSN: deviceSN, times: times)
     }
 
-    public func fetchWorkMode(deviceID: String) async throws -> DeviceSettingsGetResponse {
-        try await network.fetchWorkMode(deviceID: deviceID)
-    }
-
-    public func setWorkMode(deviceID: String, workMode: InverterWorkMode) async throws {
-        try await network.setWorkMode(deviceID: deviceID, workMode: workMode)
-    }
-
     public func fetchDataLoggers() async throws -> PagedDataLoggerListResponse {
         try await network.fetchDataLoggers()
     }
