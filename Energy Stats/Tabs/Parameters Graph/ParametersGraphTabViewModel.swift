@@ -87,7 +87,6 @@ class ParametersGraphTabViewModel: ObservableObject {
             .map { device in
                 configManager.variables.compactMap { [weak self] variable -> ParameterGraphVariable? in
                     guard let self else { return nil }
-                    guard let variable = configManager.variables.named(variable.variable) else { return nil }
 
                     return ParameterGraphVariable(variable,
                                                   isSelected: selectedGraphVariables.contains(variable.variable),

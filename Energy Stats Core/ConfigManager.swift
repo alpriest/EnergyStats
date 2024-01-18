@@ -33,7 +33,7 @@ public class ConfigManager: ConfigManaging {
         let deviceList = try await networking.openapi_fetchDeviceList()
         config.variables = try await networking.openapi_fetchVariables().compactMap {
             guard let unit = $0.unit else { return nil }
-            return Variable(name: $0.name, variable: $0.name, unit: unit)
+            return Variable(name: $0.name, variable: $0.variable, unit: unit)
         }
 
         guard deviceList.count > 0 else {
