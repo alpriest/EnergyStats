@@ -45,13 +45,10 @@ public class ConfigManager: ConfigManaging {
 
             if device.hasBattery {
                 do {
-                    // TODO
-                    // Fetch ResidualEnergy from variables API
-//                    let battery = try await networking.fetchBattery(deviceID: device.deviceID)
-//                    let batterySettings = try await networking.fetchBatterySettings(deviceSN: device.deviceSN)
+                    let batteryVariables = try await networking.openapi_fetchRealData(deviceSN: device.deviceSN, variables: ["ResidualEnergy", "SoC"])
+                    let batterySettings = try await networking.openapi_fetchBatterySettings(deviceSN: device.deviceSN)
 
-//                    deviceBattery = BatteryResponseMapper.map(battery: battery, settings: batterySettings)
-                    deviceBattery = nil
+                    deviceBattery = BatteryResponseMapper.map(batteryVariables: batteryVariables, settings: batterySettings)
                 } catch {
                     deviceBattery = nil
                 }
@@ -466,12 +463,14 @@ public class ConfigManager: ConfigManaging {
 }
 
 public enum BatteryResponseMapper {
-    public static func map(battery: BatteryResponse, settings: BatterySOCResponse) -> Device.Battery {
+    public static func map(batteryVariables: OpenQueryResponse, settings: BatterySOCResponse) -> Device.Battery? {
+        guard let residual = batteryVariables.datas.current(for: "ResidualEnergy"),
+              let soc = batteryVariables.datas.current(for: "SoC") else { return nil }
         let batteryCapacity: String
         let minSOC: String
 
-        if battery.soc > 0 {
-            batteryCapacity = String(Int(battery.residual / (Double(battery.soc) / 100.0)))
+        if soc > 0 {
+            batteryCapacity = String(Int((residual * 10.0) / (soc / 100.0)))
         } else {
             batteryCapacity = "0"
         }

@@ -17,7 +17,7 @@ public struct KeychainError: Error {
 }
 
 public protocol KeychainStoring {
-    func store(apiKey: String?) throws
+    func store(apiKey: String?, notifyObservers: Bool) throws
     func logout()
     func updateHasCredentials()
     func getToken() -> String?
@@ -42,12 +42,14 @@ public class KeychainStore: KeychainStoring, ObservableObject {
         updateHasCredentials()
     }
 
-    public func store(apiKey: String?) throws {
+    public func store(apiKey: String?, notifyObservers: Bool) throws {
         SecItemDelete(makeQuery(tag: "token"))
 
         try set(tag: "token", value: apiKey)
 
-        updateHasCredentials()
+        if notifyObservers {
+            updateHasCredentials()
+        }
     }
 
     public func getToken() -> String? {

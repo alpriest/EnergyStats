@@ -66,7 +66,7 @@ class UserManager: ObservableObject {
                 configManager.appSettingsPublisher.send(AppSettings.mock())
             }
 
-            try store.store(apiKey: apiKey)
+            try store.store(apiKey: apiKey, notifyObservers: false)
             try await configManager.fetchDevices()
             store.updateHasCredentials()
         } catch let error as NetworkError {

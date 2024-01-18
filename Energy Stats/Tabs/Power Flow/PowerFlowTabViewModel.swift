@@ -180,7 +180,8 @@ class PowerFlowTabViewModel: ObservableObject {
                     "batChargePower",
                     "batDischargePower",
                     "SoC",
-                    "batTemperature"
+                    "batTemperature",
+                    "ResidualEnergy"
                 ]
             )
             let currentValues = RealQueryResponseMapper.mapCurrentValues(device: currentDevice, response: real)
@@ -194,7 +195,7 @@ class PowerFlowTabViewModel: ObservableObject {
                     from: BatteryResponse(
                         power: real.datas.currentValue(for: "batChargePower") - (0 - real.datas.currentValue(for: "batDischargePower")),
                         soc: Int(real.datas.currentValue(for: "SoC")),
-                        residual: 0,
+                        residual: real.datas.currentValue(for: "ResidualEnergy") * 10.0,
                         temperature: real.datas.currentValue(for: "batTemperature")
                     )
                 )

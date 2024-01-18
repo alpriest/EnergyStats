@@ -9,7 +9,7 @@ import SwiftUI
 
 struct APIKeyLoginView: View {
     @ObservedObject var userManager: UserManager
-    @State private var apiKey = ""
+    @State private var apiKey = "648d67a7-80af-4520-9873-0c8a9f6ddb27"
 
     var body: some View {
         VStack {

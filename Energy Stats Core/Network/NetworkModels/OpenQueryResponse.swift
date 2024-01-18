@@ -155,12 +155,16 @@ public struct OpenReportRequest: Encodable {
     let sn: String
     let dimension: ReportType
     let variables: [String]
-    let queryDate: QueryDate
+    let year: Int
+    let month: Int?
+    let day: Int?
 
     internal init(deviceSN: String, variables: [ReportVariable], queryDate: QueryDate, dimension: ReportType) {
         self.sn = deviceSN
         self.variables = variables.map { $0.networkTitle }
-        self.queryDate = queryDate
+        self.year = queryDate.year
+        self.month = queryDate.month
+        self.day = queryDate.day
         self.dimension = dimension
     }
 }
