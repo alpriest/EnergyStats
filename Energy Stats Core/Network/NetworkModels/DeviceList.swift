@@ -21,12 +21,16 @@ public struct PagedDeviceListResponse: Codable, Hashable {
     let currentPage: Int
     let pageSize: Int
     let total: Int
-    public let data: [Device]
+    public let data: [PagedDeviceListResponseDevice]
 
-    public struct Device: Codable, Hashable {
+    public struct PagedDeviceListResponseDevice: Codable, Hashable {
         public let deviceSN: String
         public let moduleSN: String
-        public let plantID: String
+        public let stationID: String
+        public let productType: String
+        public let deviceType: String
+        public let hasBattery: Bool
+        public let hasPV: Bool
         public let status: Int
     }
 }
@@ -42,6 +46,10 @@ public struct DeviceDetailResponse: Codable, Hashable {
     public let hardwareVersion: String
     public let status: Int
     public let function: Function
+    public let productType: String
+    public let deviceType: String
+    public let hasBattery: Bool
+    public let hasPV: Bool
 
     public struct Function: Codable, Hashable {
         public let scheduler: Bool
@@ -54,8 +62,11 @@ struct DeviceList: Codable {
 
 public struct Device: Codable, Hashable, Identifiable {
     public let deviceSN: String
+    public let hasPV: Bool
     public let stationName: String
     public let stationID: String
+    public let hasBattery: Bool
+    public let deviceType: String
     public let battery: Battery?
     public let firmware: DeviceFirmwareVersion?
     public let moduleSN: String
@@ -73,7 +84,7 @@ public struct Device: Codable, Hashable, Identifiable {
     public var id: String { deviceSN }
 
     public var deviceDisplayName: String {
-        "\(stationName) \(stationID)"
+        "\(deviceType) \(deviceSN)"
     }
 
     public var deviceSelectorName: String {
@@ -85,7 +96,10 @@ public struct Device: Codable, Hashable, Identifiable {
                 stationID: String,
                 battery: Battery?,
                 firmware: DeviceFirmwareVersion?,
-                moduleSN: String)
+                moduleSN: String,
+                deviceType: String,
+                hasPV: Bool,
+                hasBattery: Bool)
     {
         self.deviceSN = deviceSN
         self.stationName = stationName
@@ -93,6 +107,9 @@ public struct Device: Codable, Hashable, Identifiable {
         self.battery = battery
         self.firmware = firmware
         self.moduleSN = moduleSN
+        self.deviceType = deviceType
+        self.hasPV = hasPV
+        self.hasBattery = hasBattery
     }
 
     public func copy(deviceSN: String? = nil,
@@ -100,7 +117,10 @@ public struct Device: Codable, Hashable, Identifiable {
                      stationID: String? = nil,
                      battery: Battery? = nil,
                      firmware: DeviceFirmwareVersion? = nil,
-                     moduleSN: String? = nil) -> Device
+                     moduleSN: String? = nil,
+                     deviceType: String? = nil,
+                     hasPV: Bool? = nil,
+                     hasBattery: Bool? = nil) -> Device
     {
         Device(
             deviceSN: deviceSN ?? self.deviceSN,
@@ -108,7 +128,10 @@ public struct Device: Codable, Hashable, Identifiable {
             stationID: stationID ?? self.stationID,
             battery: battery ?? self.battery,
             firmware: firmware ?? self.firmware,
-            moduleSN: moduleSN ?? self.moduleSN
+            moduleSN: moduleSN ?? self.moduleSN,
+            deviceType: deviceType ?? self.deviceType,
+            hasPV: hasPV ?? self.hasPV,
+            hasBattery: hasBattery ?? self.hasBattery
         )
     }
 }

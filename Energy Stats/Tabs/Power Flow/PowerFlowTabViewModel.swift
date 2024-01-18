@@ -125,14 +125,15 @@ class PowerFlowTabViewModel: ObservableObject {
         defer { isLoading = false }
 
         do {
-            if configManager.currentDevice.value == nil {
+            if self.configManager.currentDevice.value == nil {
                 try await self.configManager.fetchDevices()
             }
 
-            guard let currentDeviceSN = configManager.selectedDeviceSN else {
+            guard let currentDevice = configManager.currentDevice.value else {
                 self.state = .failed(nil, "No devices found. Please logout and try logging in again.")
                 return
             }
+            let currentDeviceSN = currentDevice.deviceSN
 
             if case .failed = self.state {
                 state = .unloaded
@@ -153,9 +154,9 @@ class PowerFlowTabViewModel: ObservableObject {
             }
 
             let reportResponse = try await self.network.openapi_fetchReport(deviceSN: currentDeviceSN,
-                                                                             variables: reportVariables,
-                                                                             queryDate: .now(),
-                                                                             reportType: .month)
+                                                                            variables: reportVariables,
+                                                                            queryDate: .now(),
+                                                                            reportType: .month)
             let totals = TotalsViewModel(reports: reportResponse)
 
             if self.configManager.appSettingsPublisher.value.showInverterTemperature {
@@ -182,13 +183,13 @@ class PowerFlowTabViewModel: ObservableObject {
                     "batTemperature"
                 ]
             )
-            let currentValues = RealQueryResponseMapper.mapCurrentValues(response: real)
+            let currentValues = RealQueryResponseMapper.mapCurrentValues(device: currentDevice, response: real)
             let currentViewModel = CurrentStatusCalculator(status: currentValues,
                                                            shouldInvertCT2: self.configManager.shouldInvertCT2,
                                                            shouldCombineCT2WithPVPower: self.configManager.shouldCombineCT2WithPVPower)
 
             let battery: BatteryViewModel
-            if self.configManager.hasBattery {
+            if self.configManager.currentDevice.value?.hasBattery == true {
                 battery = .init(
                     from: BatteryResponse(
                         power: real.datas.currentValue(for: "batChargePower") - (0 - real.datas.currentValue(for: "batDischargePower")),
@@ -260,7 +261,7 @@ class PowerFlowTabViewModel: ObservableObject {
 
     func sleep() async {
         do {
-            try await Task.sleep(nanoseconds: 1_000_000_000)
+            try await Task.sleep(nanoseconds: 1000000000)
         } catch {}
     }
 }

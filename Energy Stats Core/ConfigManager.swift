@@ -40,31 +40,34 @@ public class ConfigManager: ConfigManaging {
             throw NoDeviceFoundError()
         }
 
-        let newDevices = deviceList.map { device in
-//            let deviceBattery: Device.Battery?
-//            let firmware = try await fetchFirmwareVersions(deviceID: device.deviceID) // TODO: This will be in the device response
-//            let variables = try await networking.fetchVariables(deviceID: device.deviceID)
+        let newDevices = await deviceList.asyncMap { device in
+            let deviceBattery: Device.Battery?
 
-//            if device.hasBattery {
-//                do {
+            if device.hasBattery {
+                do {
+                    // TODO
 //                    let battery = try await networking.fetchBattery(deviceID: device.deviceID)
 //                    let batterySettings = try await networking.fetchBatterySettings(deviceSN: device.deviceSN)
-//
-//                    deviceBattery = BatteryResponseMapper.map(battery: battery, settings: batterySettings)
-//                } catch {
-//                    deviceBattery = nil
-//                }
-//            } else {
-//                deviceBattery = nil
-//            }
 
-            Device(
+//                    deviceBattery = BatteryResponseMapper.map(battery: battery, settings: batterySettings)
+                    deviceBattery = nil
+                } catch {
+                    deviceBattery = nil
+                }
+            } else {
+                deviceBattery = nil
+            }
+
+            return Device(
                 deviceSN: device.deviceSN,
                 stationName: device.stationName,
                 stationID: device.stationID,
-                battery: nil,
+                battery: deviceBattery,
                 firmware: DeviceFirmwareVersion(master: device.masterVersion, slave: device.slaveVersion, manager: device.managerVersion),
-                moduleSN: device.moduleSN
+                moduleSN: device.moduleSN,
+                deviceType: device.deviceType,
+                hasPV: device.hasPV,
+                hasBattery: device.hasBattery
             )
         }
         devices = newDevices

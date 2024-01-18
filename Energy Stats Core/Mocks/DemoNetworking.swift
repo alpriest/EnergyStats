@@ -109,7 +109,11 @@ public class DemoNetworking: FoxESSNetworking {
                 slaveVersion: "3.0",
                 hardwareVersion: "4.0",
                 status: 1,
-                function: DeviceDetailResponse.Function(scheduler: false)
+                function: DeviceDetailResponse.Function(scheduler: false),
+                productType: "H",
+                deviceType: "h1-3.0",
+                hasBattery: true,
+                hasPV: true
             ),
             DeviceDetailResponse(
                 deviceSN: "1234",
@@ -121,7 +125,11 @@ public class DemoNetworking: FoxESSNetworking {
                 slaveVersion: "3.0",
                 hardwareVersion: "4.0",
                 status: 1,
-                function: DeviceDetailResponse.Function(scheduler: false)
+                function: DeviceDetailResponse.Function(scheduler: false),
+                productType: "H",
+                deviceType: "h1-5.0",
+                hasBattery: true,
+                hasPV: false
             )
         ]
     }
@@ -164,14 +172,14 @@ public class DemoNetworking: FoxESSNetworking {
         OpenQueryResponse(time: Date(),
                           deviceSN: deviceSN,
                           datas: [
-                            OpenQueryResponse.Data(unit: "kW", variable: "feedinPower", value: 0.0),
-                            OpenQueryResponse.Data(unit: "kW", variable: "gridConsumptionPower", value: 2.634),
-                            OpenQueryResponse.Data(unit: "kW", variable: "loadsPower", value: 2.708),
-                            OpenQueryResponse.Data(unit: "kW", variable: "generationPower", value: 0.071),
-                            OpenQueryResponse.Data(unit: "kW", variable: "pvPower", value: 0.111),
-                            OpenQueryResponse.Data(unit: "kW", variable: "meterPower2", value: 0.0),
-                            OpenQueryResponse.Data(unit: "℃", variable: "ambientTemperation", value: 32.5),
-                            OpenQueryResponse.Data(unit: "℃", variable: "invTemperation", value: 23.2)
+                              OpenQueryResponse.Data(unit: "kW", variable: "feedinPower", value: 0.0),
+                              OpenQueryResponse.Data(unit: "kW", variable: "gridConsumptionPower", value: 2.634),
+                              OpenQueryResponse.Data(unit: "kW", variable: "loadsPower", value: 2.708),
+                              OpenQueryResponse.Data(unit: "kW", variable: "generationPower", value: 0.071),
+                              OpenQueryResponse.Data(unit: "kW", variable: "pvPower", value: 0.111),
+                              OpenQueryResponse.Data(unit: "kW", variable: "meterPower2", value: 0.0),
+                              OpenQueryResponse.Data(unit: "℃", variable: "ambientTemperation", value: 32.5),
+                              OpenQueryResponse.Data(unit: "℃", variable: "invTemperation", value: 23.2)
                           ])
     }
 

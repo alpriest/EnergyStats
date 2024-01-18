@@ -129,8 +129,8 @@ class ParametersGraphTabViewModel: ObservableObject {
 
         do {
             let rawGraphVariables = graphVariables.filter { $0.isSelected }.compactMap { $0.type }
-            let startDate = Calendar.current.startOfDay(for: start)
-            let endDate = Calendar.current.startOfDay(for: start.addingTimeInterval(86400))
+            let startDate = Calendar.current.startOfDay(for: start) // TODO change for each day
+            let endDate = Calendar.current.startOfDay(for: start.addingTimeInterval(86400)) // TODO change for each day
             let raw = try await networking.openapi_fetchHistory(deviceSN: currentDevice.deviceSN, variables: rawGraphVariables.map { $0.variable }, start: startDate, end: endDate)
             let rawData: [ParameterGraphValue] = raw.datas.flatMap { response -> [ParameterGraphValue] in
                 guard let rawVariable = configManager.variables.first(where: { $0.variable == response.variable }) else { return [] }
