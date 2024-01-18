@@ -7,6 +7,7 @@
 
 import Foundation
 
+// TODO: Delete this type
 public struct BatteryResponse: Codable {
     public let power: Double
     public let soc: Int
@@ -28,7 +29,7 @@ public struct BatteryResponse: Codable {
     }
 }
 
-public struct BatterySettingsResponse: Codable {
+public struct BatterySOCResponse: Codable {
     public let minSocOnGrid: Int
     public let minSoc: Int
 }

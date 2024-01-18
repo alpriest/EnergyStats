@@ -79,10 +79,10 @@ public extension Network {
         return result.0
     }
 
-    func openapi_fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse {
+    func openapi_fetchBatterySettings(deviceSN: String) async throws -> BatterySOCResponse {
         let request = append(queryItems: [URLQueryItem(name: "sn", value: deviceSN)], to: URL.getOpenBatterySOC)
 
-        let result: (BatterySettingsResponse, Data) = try await fetch(request)
+        let result: (BatterySOCResponse, Data) = try await fetch(request)
         store.batterySettingsResponse = NetworkOperation(description: "fetchBatterySettings", value: result.0, raw: result.1)
         return result.0
     }

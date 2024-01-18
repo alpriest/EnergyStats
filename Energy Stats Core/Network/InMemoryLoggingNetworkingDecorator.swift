@@ -9,8 +9,7 @@ import Foundation
 
 public class InMemoryLoggingNetworkStore: ObservableObject {
     public var reportResponse: NetworkOperation<[OpenReportResponse]>?
-    public var batteryResponse: NetworkOperation<BatteryResponse>?
-    public var batterySettingsResponse: NetworkOperation<BatterySettingsResponse>?
+    public var batterySettingsResponse: NetworkOperation<BatterySOCResponse>?
     public var queryResponse: NetworkOperation<OpenQueryResponse>?
     public var deviceListResponse: NetworkOperation<[DeviceDetailResponse]>?
     public var variables: NetworkOperation<OpenApiVariableArray>?
@@ -22,7 +21,6 @@ public class InMemoryLoggingNetworkStore: ObservableObject {
 
     public func logout() {
         reportResponse = nil
-        batteryResponse = nil
         batterySettingsResponse = nil
         queryResponse = nil
         deviceListResponse = nil

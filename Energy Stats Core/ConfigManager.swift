@@ -46,6 +46,7 @@ public class ConfigManager: ConfigManaging {
             if device.hasBattery {
                 do {
                     // TODO
+                    // Fetch ResidualEnergy from variables API
 //                    let battery = try await networking.fetchBattery(deviceID: device.deviceID)
 //                    let batterySettings = try await networking.fetchBatterySettings(deviceSN: device.deviceSN)
 
@@ -465,7 +466,7 @@ public class ConfigManager: ConfigManaging {
 }
 
 public enum BatteryResponseMapper {
-    public static func map(battery: BatteryResponse, settings: BatterySettingsResponse) -> Device.Battery {
+    public static func map(battery: BatteryResponse, settings: BatterySOCResponse) -> Device.Battery {
         let batteryCapacity: String
         let minSOC: String
 

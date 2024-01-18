@@ -22,20 +22,14 @@ class MockNetworking: FoxESSNetworking {
         // Assume valid
     }
 
-    func fetchBatterySOC() async throws -> BatterySettingsResponse {
-        BatterySettingsResponse(minSocOnGrid: 15, minSoc: 20)
+    func fetchBatterySOC() async throws -> BatterySOCResponse {
+        BatterySOCResponse(minSocOnGrid: 15, minSoc: 20)
     }
 
     func verifyCredentials(username: String, hashedPassword: String) async throws {
         if throwOnCall {
             throw NetworkError.badCredentials
         }
-    }
-
-    func fetchDeviceList() async throws -> [PagedDeviceListResponse.Device] {
-        [
-            PagedDeviceListResponse.Device(deviceSN: "123123", moduleSN: "SN123", plantID: "123", status: 1)
-        ]
     }
 
     func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate) async throws -> [ReportResponse] {
@@ -46,12 +40,8 @@ class MockNetworking: FoxESSNetworking {
         return [ReportResponse(variable: "feedin", data: [.init(index: 14, value: 1.5)])]
     }
 
-    func fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse {
-        BatterySettingsResponse(minSocOnGrid: 15, minSoc: 20)
-    }
-
-    func fetchBattery(deviceID: String) async throws -> BatteryResponse {
-        BatteryResponse(power: 0.27, soc: 56, residual: 2200, temperature: 13.6)
+    func fetchBatterySettings(deviceSN: String) async throws -> BatterySOCResponse {
+        BatterySOCResponse(minSocOnGrid: 15, minSoc: 20)
     }
 
     func fetchErrorMessages() async {}
@@ -129,8 +119,8 @@ class MockNetworking: FoxESSNetworking {
         []
     }
 
-    func openapi_fetchBatterySettings(deviceSN: String) async throws -> Energy_Stats_Core.BatterySettingsResponse {
-        BatterySettingsResponse(minSocOnGrid: 0, minSoc: 0)
+    func openapi_fetchBatterySettings(deviceSN: String) async throws -> Energy_Stats_Core.BatterySOCResponse {
+        BatterySOCResponse(minSocOnGrid: 0, minSoc: 0)
     }
 
     func openapi_setBatterySoc(deviceSN: String, minSOCOnGrid: Int, minSOC: Int) async throws {}

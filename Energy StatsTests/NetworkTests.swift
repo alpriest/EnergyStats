@@ -26,24 +26,15 @@ final class NetworkTests: XCTestCase {
         XCTAssertEqual(report.count, 5)
     }
 
-    func test_fetchBattery_returns_data_on_success() async throws {
-        stubHTTPResponse(with: .batterySuccess)
-
-        let report = try await sut.fetchBattery(deviceID: "any")
-
-        XCTAssertEqual(report.power, -1.065)
-        XCTAssertEqual(report.soc, 23)
-    }
-
     func test_fetchReal_returns_data_on_success() async throws {
         stubHTTPResponse(with: .rawSuccess)
 
         let raw = try await sut.openapi_fetchRealData(deviceSN: "1", variables: [
-            RawVariable(name: "feedinPower", variable: "feedinPower", unit: "kWH"),
-            RawVariable(name: "gridConsumptionPower", variable: "gridConsumptionPower", unit: "kWH"),
-            RawVariable(name: "batChargePower", variable: "batChargePower", unit: "kWH"),
-            RawVariable(name: "batDischargePower", variable: "batDischargePower", unit: "kWH"),
-            RawVariable(name: "generationPower", variable: "generationPower", unit: "kWH")].map { $0.variable})
+            Variable(name: "feedinPower", variable: "feedinPower", unit: "kWH"),
+            Variable(name: "gridConsumptionPower", variable: "gridConsumptionPower", unit: "kWH"),
+            Variable(name: "batChargePower", variable: "batChargePower", unit: "kWH"),
+            Variable(name: "batDischargePower", variable: "batDischargePower", unit: "kWH"),
+            Variable(name: "generationPower", variable: "generationPower", unit: "kWH")].map { $0.variable})
 
         XCTAssertEqual(raw.datas.count, 5)
     }

@@ -21,14 +21,6 @@ public class Network: FoxESSNetworking {
         self.store = store
     }
 
-    public func fetchBattery(deviceID: String) async throws -> BatteryResponse {
-        let request = append(queryItems: [URLQueryItem(name: "id", value: deviceID)], to: URL.battery)
-
-        let result: (BatteryResponse, Data) = try await fetch(request)
-        store.batteryResponse = NetworkOperation(description: "fetchBattery", value: result.0, raw: result.1)
-        return result.0
-    }
-
     public func openapi_fetchDeviceList() async throws -> [DeviceDetailResponse] {
         var request = URLRequest(url: URL.deviceList)
         request.httpMethod = "POST"

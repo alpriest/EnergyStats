@@ -79,21 +79,12 @@ public class DemoNetworking: FoxESSNetworking {
         SchedulerFlagResponse(enable: true, support: true)
     }
 
-    public func fetchBattery(deviceID: String) async throws -> BatteryResponse {
-        switch deviceID {
-        case "f3000-deviceid":
-            return BatteryResponse(power: 0.28, soc: 76, residual: 7550, temperature: 17.3)
-        default:
-            return BatteryResponse(power: 0.78, soc: 46, residual: 17510, temperature: 19.3)
-        }
-    }
-
-    public func openapi_fetchBatterySettings(deviceSN: String) async throws -> BatterySettingsResponse {
+    public func openapi_fetchBatterySettings(deviceSN: String) async throws -> BatterySOCResponse {
         switch deviceSN {
         case "1234":
-            return BatterySettingsResponse(minSocOnGrid: 20, minSoc: 20)
+            return BatterySOCResponse(minSocOnGrid: 20, minSoc: 20)
         default:
-            return BatterySettingsResponse(minSocOnGrid: 15, minSoc: 15)
+            return BatterySOCResponse(minSocOnGrid: 15, minSoc: 15)
         }
     }
 
