@@ -191,13 +191,11 @@ class PowerFlowTabViewModel: ObservableObject {
 
             let battery: BatteryViewModel
             if self.configManager.currentDevice.value?.hasBattery == true {
-                battery = .init(
-                    from: BatteryResponse(
-                        power: real.datas.currentValue(for: "batChargePower") - (0 - real.datas.currentValue(for: "batDischargePower")),
-                        soc: Int(real.datas.currentValue(for: "SoC")),
-                        residual: real.datas.currentValue(for: "ResidualEnergy") * 10.0,
-                        temperature: real.datas.currentValue(for: "batTemperature")
-                    )
+                battery = BatteryViewModel(
+                    power: real.datas.currentValue(for: "batChargePower") - (0 - real.datas.currentValue(for: "batDischargePower")),
+                    soc: Int(real.datas.currentValue(for: "SoC")),
+                    residual: real.datas.currentValue(for: "ResidualEnergy") * 10.0,
+                    temperature: real.datas.currentValue(for: "batTemperature")
                 )
             } else {
                 battery = .noBattery

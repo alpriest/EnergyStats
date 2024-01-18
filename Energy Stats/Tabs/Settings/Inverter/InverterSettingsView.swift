@@ -23,9 +23,9 @@ struct InverterSettingsView: View {
             InverterChoiceView(viewModel: InverterChoiceViewModel(configManager: configManager))
 
             Section {
-                NavigationLink("Configure Work Mode") {
-                    InverterWorkModeView(networking: networking, config: configManager)
-                }
+//                NavigationLink("Configure Work Mode") {
+//                    InverterWorkModeView(networking: networking, config: configManager)
+//                }
 
                 NavigationLink("Manage schedules") {
                     ScheduleSummaryView(networking: networking, config: configManager)

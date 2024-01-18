@@ -3212,6 +3212,7 @@
       }
     },
     "Configure Work Mode" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -5337,6 +5338,7 @@
       }
     },
     "Find out more about work modes" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -6515,6 +6517,7 @@
       }
     },
     "Inverter change warning" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

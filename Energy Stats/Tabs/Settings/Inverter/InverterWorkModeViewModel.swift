@@ -28,7 +28,6 @@ class InverterWorkModeViewModel: ObservableObject {
             guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
             state = .active("Loading")
 
-            // TODO
 //            do {
 //                let response = try await networking.fetchWorkMode(deviceSN: deviceSN)
 //                let workMode = response.values.operationModeWorkMode.asWorkMode()
@@ -44,7 +43,6 @@ class InverterWorkModeViewModel: ObservableObject {
     func save() {
         guard let mode = selected else { return }
 
-        // TODO
 //        Task { @MainActor in
 //            guard state == .inactive else { return }
 //            guard let deviceSN = config.currentDevice.value?.deviceSN else { return }

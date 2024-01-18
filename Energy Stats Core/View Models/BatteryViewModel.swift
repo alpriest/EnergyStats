@@ -15,14 +15,14 @@ public struct BatteryViewModel: Sendable {
     public let residual: Int
     public let error: Error?
 
-    public init(from battery: BatteryResponse) {
-        chargeLevel = Double(battery.soc) / 100.0
+    public init(power: Double, soc: Int, residual: Double, temperature: Double) {
+        chargeLevel = Double(soc) / 100.0
 
-        let powerAsCharge = 0 - battery.power
+        let powerAsCharge = 0 - power
         chargePower = powerAsCharge
         hasBattery = true
-        temperature = battery.temperature
-        residual = Int(battery.residual)
+        self.temperature = temperature
+        self.residual = Int(residual)
         error = nil
     }
 
