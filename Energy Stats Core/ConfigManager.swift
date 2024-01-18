@@ -101,7 +101,7 @@ public class ConfigManager: ConfigManaging {
             if let currentDevice = currentDevice.value {
                 let override = config.deviceBatteryOverrides[currentDevice.deviceSN]
 
-                return override ?? "0"
+                return override ?? currentDevice.battery?.capacity ?? "0"
             } else {
                 return "0"
             }
@@ -127,8 +127,7 @@ public class ConfigManager: ConfigManaging {
     }
 
     public var hasBattery: Bool {
-        true // TODO: Move to config but hanging off currentDevice
-//        currentDevice.value?.hasBattery ?? false
+        currentDevice.value?.hasBattery ?? false
     }
 
     public var batteryCapacityW: Int {
