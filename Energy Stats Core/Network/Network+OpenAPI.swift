@@ -13,11 +13,12 @@ extension URL {
     static var getOpenVariables = URL(string: "https://www.foxesscloud.com/op/v0/device/variable/get")!
     static var getOpenReportData = URL(string: "https://www.foxesscloud.com/op/v0/device/report/query")!
     static var getOpenBatterySOC = URL(string: "https://www.foxesscloud.com/op/v0/device/battery/soc/get")!
-    static var deviceList = URL(string: "https://www.foxesscloud.com/op/v0/device/list")!
-    static var deviceDetail = URL(string: "https://www.foxesscloud.com/op/v0/device/detail")!
+    static var getOpenDeviceList = URL(string: "https://www.foxesscloud.com/op/v0/device/list")!
+    static var getOpenDeviceDetail = URL(string: "https://www.foxesscloud.com/op/v0/device/detail")!
     static var setOpenBatterySOC = URL(string: "https://www.foxesscloud.com/op/v0/device/battery/soc/set")!
     static var getOpenBatteryChargeTimes = URL(string: "https://www.foxesscloud.com/op/v0/device/battery/forceChargeTime/get")!
     static var setOpenBatteryChargeTimes = URL(string: "https://www.foxesscloud.com/op/v0/device/battery/forceChargeTime/set")!
+    static var getOpenModuleList = URL(string: "https://www.foxesscloud.com/op/v0/module/list")!
 }
 
 public extension Network {
@@ -118,4 +119,36 @@ public extension Network {
             // Ignore
         }
     }
+
+    func openapi_fetchDeviceList() async throws -> [DeviceDetailResponse] {
+        var request = URLRequest(url: URL.getOpenDeviceList)
+        request.httpMethod = "POST"
+        request.httpBody = try! JSONEncoder().encode(DeviceListRequest())
+
+        let deviceListResult: (PagedDeviceListResponse, _) = try await fetch(request)
+        let devices = try await deviceListResult.0.data.asyncMap {
+            try await openapi_fetchDevice(deviceSN: $0.deviceSN)
+        }
+
+        store.deviceListResponse = NetworkOperation(description: "fetchDeviceList", value: devices, raw: deviceListResult.1)
+        return devices
+    }
+
+    func openapi_fetchDevice(deviceSN: String) async throws -> DeviceDetailResponse {
+        let request = append(queryItems: [URLQueryItem(name: "sn", value: deviceSN)], to: URL.getOpenDeviceDetail)
+
+        let result: (DeviceDetailResponse, _) = try await fetch(request)
+        return result.0
+    }
+
+    public func openapi_fetchDataLoggers() async throws -> [DataLoggerResponse] {
+        var request = URLRequest(url: URL.getOpenModuleList)
+        request.httpMethod = "POST"
+        request.httpBody = try! JSONEncoder().encode(DataLoggerListRequest())
+
+        let result: ([DataLoggerResponse], Data) = try await fetch(request)
+//        store.inverterWorkModeResponse = NetworkOperation(description: "inverterWorkModeResponse", value: result.0, raw: result.1)
+        return result.0
+    }
+
 }

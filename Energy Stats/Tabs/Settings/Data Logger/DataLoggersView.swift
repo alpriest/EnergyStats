@@ -10,11 +10,9 @@ import SwiftUI
 
 struct DataLogger: Identifiable {
     let moduleSN: String
-    let moduleType: String
-    let plantName: String
-    let version: String
+    let stationID: String
+    let online: Bool
     let signal: Int
-    let communication: Int
 
     var id: String { moduleSN }
 }
@@ -34,9 +32,14 @@ class DataLoggersViewModel: ObservableObject {
             state = .active("Loading")
 
             do {
-                let result = try await networking.fetchDataLoggers()
-                self.items = result.data.map {
-                    DataLogger(moduleSN: $0.moduleSN, moduleType: $0.moduleType, plantName: $0.plantName, version: $0.version, signal: $0.signal, communication: $0.communication)
+                let result = try await networking.openapi_fetchDataLoggers()
+                self.items = result.map {
+                    DataLogger(
+                        moduleSN: $0.moduleSN,
+                        stationID: $0.stationID,
+                        online: $0.status == .online,
+                        signal: $0.signal
+                    )
                 }
 
                 state = .inactive
@@ -77,19 +80,17 @@ struct DataLoggerView: View {
     var body: some View {
         Section {
             ESLabeledText("Module SN", value: item.moduleSN)
-            ESLabeledText("Module Type", value: item.moduleType)
-            ESLabeledText("Plant Name", value: item.plantName)
-            ESLabeledText("Version", value: item.version)
+            ESLabeledText("Station ID", value: item.stationID)
             ESLabeledContent("Signal") {
                 SignalView(amount: item.signal)
             }
             ESLabeledContent("Status") {
-                if item.communication == 0 {
-                    Image(systemName: "xmark.circle.fill")
-                        .foregroundColor(.red)
-                } else if item.communication == 1 {
+                if item.online {
                     Image(systemName: "checkmark.circle.fill")
                         .foregroundColor(.green)
+                } else {
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundColor(.red)
                 }
             }
         }
@@ -121,11 +122,9 @@ struct DataLoggersView: View {
         DataLoggerView(
             item: DataLogger(
                 moduleSN: "669W2EFF22FA815",
-                moduleType: "W2",
-                plantName: "Alistair Priest",
-                version: "3.08",
-                signal: 3,
-                communication: 1
+                stationID: "W2",
+                online: true,
+                signal: 3
             )
         )
     }

@@ -8,19 +8,10 @@
 import Foundation
 
 extension URL {
-    static var raw = URL(string: "https://www.foxesscloud.com/c/v0/device/history/raw")!
-    static var battery = URL(string: "https://www.foxesscloud.com/c/v0/device/battery/info")!
-    static var variables = URL(string: "https://www.foxesscloud.com/c/v1/device/variables")!
-    static var deviceSettings = URL(string: "https://www.foxesscloud.com/c/v0/device/setting/get")!
-    static var deviceSettingsSet = URL(string: "https://www.foxesscloud.com/c/v0/device/setting/set")!
-    static var moduleList = URL(string: "https://www.foxesscloud.com/c/v0/module/list")!
     static var errorMessages = URL(string: "https://www.foxesscloud.com/c/v0/errors/message")!
 }
 
 public protocol FoxESSNetworking {
-//    func fetchWorkMode(deviceID: String) async throws -> DeviceSettingsGetResponse
-//    func setWorkMode(deviceID: String, workMode: InverterWorkMode) async throws
-    func fetchDataLoggers() async throws -> PagedDataLoggerListResponse
     func fetchErrorMessages() async
 
     func fetchSchedulerFlag(deviceSN: String) async throws -> SchedulerFlagResponse
@@ -44,4 +35,5 @@ public protocol FoxESSNetworking {
     func openapi_setBatterySoc(deviceSN: String, minSOCOnGrid: Int, minSOC: Int) async throws
     func openapi_fetchBatteryTimes(deviceSN: String) async throws -> BatteryTimesResponse
     func openapi_setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws
+    func openapi_fetchDataLoggers() async throws -> [DataLoggerResponse]
 }

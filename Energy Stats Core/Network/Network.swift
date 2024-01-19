@@ -21,61 +21,6 @@ public class Network: FoxESSNetworking {
         self.store = store
     }
 
-    public func openapi_fetchDeviceList() async throws -> [DeviceDetailResponse] {
-        var request = URLRequest(url: URL.deviceList)
-        request.httpMethod = "POST"
-        request.httpBody = try! JSONEncoder().encode(DeviceListRequest())
-
-        let deviceListResult: (PagedDeviceListResponse, _) = try await fetch(request)
-        let devices = try await deviceListResult.0.data.asyncMap {
-            try await openapi_fetchDevice(deviceSN: $0.deviceSN)
-        }
-
-        store.deviceListResponse = NetworkOperation(description: "fetchDeviceList", value: devices, raw: deviceListResult.1)
-        return devices
-    }
-
-    func openapi_fetchDevice(deviceSN: String) async throws -> DeviceDetailResponse {
-        let request = append(queryItems: [URLQueryItem(name: "sn", value: deviceSN)], to: URL.deviceDetail)
-
-        let result: (DeviceDetailResponse, _) = try await fetch(request)
-        return result.0
-    }
-
-//    public func fetchWorkMode(deviceID: String) async throws -> DeviceSettingsGetResponse {
-//        let request = append(queryItems: [
-//            URLQueryItem(name: "id", value: deviceID),
-//            URLQueryItem(name: "hasVersionHead", value: "1"),
-//            URLQueryItem(name: "key", value: "operation_mode__work_mode"),
-//        ], to: URL.deviceSettings)
-//
-//        let result: (DeviceSettingsGetResponse, Data) = try await fetch(request)
-////        store.inverterWorkModeResponse = NetworkOperation(description: "inverterWorkModeResponse", value: result.0, raw: result.1)
-//        return result.0
-//    }
-
-//    public func setWorkMode(deviceID: String, workMode: InverterWorkMode) async throws {
-//        var request = URLRequest(url: URL.deviceSettingsSet)
-//        request.httpMethod = "POST"
-//        request.httpBody = try! JSONEncoder().encode(DeviceSettingsSetRequest(id: deviceID, key: .operationModeWorkMode, values: InverterValues(operationModeWorkMode: workMode)))
-//
-//        do {
-//            let _: (String, Data) = try await fetch(request)
-//        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
-//            // Ignore
-//        }
-//    }
-
-    public func fetchDataLoggers() async throws -> PagedDataLoggerListResponse {
-        var request = URLRequest(url: URL.moduleList)
-        request.httpMethod = "POST"
-        request.httpBody = try! JSONEncoder().encode(DataLoggerListRequest())
-
-        let result: (PagedDataLoggerListResponse, Data) = try await fetch(request)
-//        store.inverterWorkModeResponse = NetworkOperation(description: "inverterWorkModeResponse", value: result.0, raw: result.1)
-        return result.0
-    }
-
     public func fetchErrorMessages() async {
         let request = URLRequest(url: URL.errorMessages)
 

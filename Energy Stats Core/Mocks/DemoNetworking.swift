@@ -144,11 +144,11 @@ public class DemoNetworking: FoxESSNetworking {
 
     public func openapi_setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws {}
 
-    public func fetchDataLoggers() async throws -> PagedDataLoggerListResponse {
-        PagedDataLoggerListResponse(currentPage: 1, pageSize: 10, total: 1, data: [
-            PagedDataLoggerListResponse.DataLogger(moduleSN: "ABC123DEF456", moduleType: "W2", plantName: "John Doe", version: "3.08", signal: 3, communication: 1),
-            PagedDataLoggerListResponse.DataLogger(moduleSN: "123DEF456ABC", moduleType: "W2", plantName: "Jane Doe", version: "3.08", signal: 1, communication: 0)
-        ])
+    public func openapi_fetchDataLoggers() async throws -> [DataLoggerResponse] {
+        [
+            DataLoggerResponse(moduleSN: "ABC123DEF456", stationID: "John Doe 1", status: .online, signal: 3),
+            DataLoggerResponse(moduleSN: "123DEF456ABC", stationID: "Jane Doe 2", status: .online, signal: 1)
+        ]
     }
 
     public func fetchErrorMessages() async {}

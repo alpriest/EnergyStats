@@ -153,11 +153,11 @@ public class NetworkFacade: FoxESSNetworking {
         }
     }
 
-    public func fetchDataLoggers() async throws -> PagedDataLoggerListResponse {
+    public func openapi_fetchDataLoggers() async throws -> [DataLoggerResponse] {
         return if isDemoUser {
-            try await fakeNetwork.fetchDataLoggers()
+            try await fakeNetwork.openapi_fetchDataLoggers()
         } else {
-            try await network.fetchDataLoggers()
+            try await network.openapi_fetchDataLoggers()
         }
     }
 

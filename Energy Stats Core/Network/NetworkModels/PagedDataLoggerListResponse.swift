@@ -7,31 +7,20 @@
 
 import Foundation
 
-public struct PagedDataLoggerListResponse: Decodable, Hashable {
-    let currentPage: Int
-    let pageSize: Int
-    let total: Int
-    public let data: [DataLogger]
+public struct DataLoggerResponse: Decodable, Hashable {
+    public let moduleSN: String
+    public let stationID: String
+    public let status: DataLoggerStatus
+    public let signal: Int
+}
 
-    public struct DataLogger: Decodable, Hashable {
-        public let moduleSN: String
-        public let moduleType: String
-        public let plantName: String
-        public let version: String
-        public let signal: Int
-        public let communication: Int
-    }
+public enum DataLoggerStatus: Int, RawRepresentable, Decodable {
+    case unknown = 0
+    case online = 1
+    case offline = 2
 }
 
 struct DataLoggerListRequest: Encodable {
     let pageSize = 20
     let currentPage = 1
-    let total = 0
-    let condition = Condition()
-
-    struct Condition: Encodable {
-        let communication: Int = 0
-        let moduleSN: String = ""
-        let moduleType: String = ""
-    }
 }

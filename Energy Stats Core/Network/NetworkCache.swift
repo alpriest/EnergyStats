@@ -111,8 +111,8 @@ public class NetworkCache: FoxESSNetworking {
         try await network.openapi_setBatteryTimes(deviceSN: deviceSN, times: times)
     }
 
-    public func fetchDataLoggers() async throws -> PagedDataLoggerListResponse {
-        try await network.fetchDataLoggers()
+    public func openapi_fetchDataLoggers() async throws -> [DataLoggerResponse] {
+        try await network.openapi_fetchDataLoggers()
     }
 
     public func fetchErrorMessages() async {
