@@ -91,7 +91,7 @@ public extension Network {
     func openapi_setBatterySoc(deviceSN: String, minSOCOnGrid: Int, minSOC: Int) async throws {
         var request = URLRequest(url: URL.setOpenBatterySOC)
         request.httpMethod = "POST"
-        request.httpBody = try! JSONEncoder().encode(SetBatterySOCRequest(minSOCOnGrid: minSOCOnGrid, minSoc: minSOC, sn: deviceSN))
+        request.httpBody = try! JSONEncoder().encode(SetBatterySOCRequest(minSocOnGrid: minSOCOnGrid, minSoc: minSOC, sn: deviceSN))
 
         do {
             let _: (String, Data) = try await fetch(request)
@@ -100,18 +100,32 @@ public extension Network {
         }
     }
 
-    func openapi_fetchBatteryTimes(deviceSN: String) async throws -> BatteryTimesResponse {
+    func openapi_fetchBatteryTimes(deviceSN: String) async throws -> [ChargeTime] {
         let request = append(queryItems: [URLQueryItem(name: "sn", value: deviceSN)], to: URL.getOpenBatteryChargeTimes)
 
         let result: (BatteryTimesResponse, Data) = try await fetch(request)
         store.batteryTimesResponse = NetworkOperation(description: "batteryTimesResponse", value: result.0, raw: result.1)
-        return result.0
+
+        return [
+            ChargeTime(enable: result.0.enable1, startTime: result.0.startTime1, endTime: result.0.endTime1),
+            ChargeTime(enable: result.0.enable2, startTime: result.0.startTime2, endTime: result.0.endTime2)
+        ]
     }
 
     func openapi_setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws {
+        guard times.count == 2 else { return }
+
         var request = URLRequest(url: URL.setOpenBatteryChargeTimes)
         request.httpMethod = "POST"
-        request.httpBody = try! JSONEncoder().encode(SetBatteryTimesRequest(sn: deviceSN, times: times))
+        request.httpBody = try! JSONEncoder().encode(
+            SetBatteryTimesRequest(sn: deviceSN,
+                                   enable1: times[0].enable,
+                                   startTime1: times[0].startTime,
+                                   endTime1: times[0].endTime,
+                                   enable2: times[1].enable,
+                                   startTime2: times[1].startTime,
+                                   endTime2: times[1].endTime)
+        )
 
         do {
             let _: (String, Data) = try await fetch(request)
@@ -141,7 +155,7 @@ public extension Network {
         return result.0
     }
 
-    public func openapi_fetchDataLoggers() async throws -> [DataLoggerResponse] {
+    func openapi_fetchDataLoggers() async throws -> [DataLoggerResponse] {
         var request = URLRequest(url: URL.getOpenModuleList)
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(DataLoggerListRequest())
@@ -150,5 +164,4 @@ public extension Network {
 //        store.inverterWorkModeResponse = NetworkOperation(description: "inverterWorkModeResponse", value: result.0, raw: result.1)
         return result.0
     }
-
 }

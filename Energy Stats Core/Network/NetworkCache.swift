@@ -103,7 +103,7 @@ public class NetworkCache: FoxESSNetworking {
         try await network.openapi_setBatterySoc(deviceSN: deviceSN, minSOCOnGrid: minSOCOnGrid, minSOC: minSOC)
     }
 
-    public func openapi_fetchBatteryTimes(deviceSN: String) async throws -> BatteryTimesResponse {
+    public func openapi_fetchBatteryTimes(deviceSN: String) async throws -> [ChargeTime] {
         try await network.openapi_fetchBatteryTimes(deviceSN: deviceSN)
     }
 

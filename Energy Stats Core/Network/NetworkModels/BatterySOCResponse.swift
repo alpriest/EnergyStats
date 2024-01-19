@@ -13,7 +13,7 @@ public struct BatterySOCResponse: Codable {
 }
 
 public struct SetBatterySOCRequest: Encodable {
-    public let minSOCOnGrid: Int
+    public let minSocOnGrid: Int
     public let minSoc: Int
     public let sn: String
 }

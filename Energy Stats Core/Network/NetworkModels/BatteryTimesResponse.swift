@@ -8,7 +8,25 @@
 import Foundation
 
 public struct BatteryTimesResponse: Decodable {
-    public let times: [ChargeTime]
+    public let enable1: Bool
+    public let startTime1: Time
+    public let endTime1: Time
+
+    public let enable2: Bool
+    public let startTime2: Time
+    public let endTime2: Time
+}
+
+public struct SetBatteryTimesRequest: Encodable {
+    let sn: String
+
+    let enable1: Bool
+    let startTime1: Time
+    let endTime1: Time
+
+    let enable2: Bool
+    let startTime2: Time
+    let endTime2: Time
 }
 
 public struct ChargeTime: Codable {
@@ -21,9 +39,4 @@ public struct ChargeTime: Codable {
         self.startTime = startTime
         self.endTime = endTime
     }
-}
-
-public struct SetBatteryTimesRequest: Encodable {
-    let sn: String
-    public let times: [ChargeTime]
 }
