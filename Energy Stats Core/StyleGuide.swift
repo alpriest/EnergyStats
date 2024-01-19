@@ -16,12 +16,12 @@ public extension Color {
     static var textNotFlowing: Color { Color("text_not_flowing", bundle: Bundle(for: CountdownTimer.self)) }
     static var paleGray: Color { Color("pale_gray", bundle: Bundle(for: CountdownTimer.self)) }
 
-    static func scheduleColor(named name: String) -> Color {
-        let mapping: [String: Color] = [
-            "Feedin": Color.linesPositive,
-            "ForceCharge": Color.linesNegative,
-            "ForceDischarge": Color.linesPositive,
-            "SelfUse": Color.paleGray
+    static func scheduleColor(named name: WorkMode) -> Color {
+        let mapping: [WorkMode: Color] = [
+            .FeedIn: Color.linesPositive,
+            .ForceCharge: Color.linesNegative,
+            .ForceDischarge: Color.linesPositive,
+            .SelfUse: Color.paleGray
         ]
 
         return mapping[name] ?? Color.black

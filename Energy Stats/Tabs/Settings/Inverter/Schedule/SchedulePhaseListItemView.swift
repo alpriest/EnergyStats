@@ -21,7 +21,7 @@ struct SchedulePhaseListItemView: View {
             VStack(alignment: .leading) {
                 (Text(phase.start.formatted) + Text(" - ") + Text(phase.end.formatted)).bold()
 
-                (Text(phase.mode.name) + Text(extra(for: phase)))
+                (Text(phase.mode.title) + Text(extra(for: phase)))
                     .foregroundStyle(Color.primary.opacity(0.5))
                     .font(.caption)
             }.frame(maxWidth: .infinity, alignment: .leading)
@@ -29,13 +29,13 @@ struct SchedulePhaseListItemView: View {
     }
 
     private func extra(for phase: SchedulePhase) -> String {
-        switch phase.mode.key {
-        case "ForceDischarge":
+        switch phase.mode {
+        case .ForceDischarge:
             return " at \(phase.forceDischargePower)W down to \(phase.forceDischargeSOC)%"
-        case "ForceCharge":
+        case .ForceCharge:
             return ""
-        case "SelfUse":
-            return " with \(phase.batterySOC)% min SOC"
+        case .SelfUse:
+            return " with \(phase.minSocOnGrid)% min SOC"
         default:
             return ""
         }

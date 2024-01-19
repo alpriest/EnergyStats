@@ -46,13 +46,7 @@ class MockNetworking: FoxESSNetworking {
 
     func fetchErrorMessages() async {}
 
-    func fetchWorkMode(deviceID: String) async throws -> DeviceSettingsGetResponse {
-        DeviceSettingsGetResponse(protocol: "H1234", raw: "", values: InverterValues(operationModeWorkMode: .feedInFirst))
-    }
-
-    func setWorkMode(deviceID: String, workMode: InverterWorkMode) async throws {}
-
-    func fetchDataLoggers() async throws -> PagedDataLoggerListResponse {
+    func fetchDataLoggers() async throws -> [DataLoggerResponse] {
         PagedDataLoggerListResponse(currentPage: 1, pageSize: 10, total: 1, data: [
             PagedDataLoggerListResponse.DataLogger(moduleSN: "ABC123DEF456", moduleType: "W2", plantName: "John Doe", version: "3.08", signal: 3, communication: 1),
             PagedDataLoggerListResponse.DataLogger(moduleSN: "123DEF456ABC", moduleType: "W2", plantName: "Jane Doe", version: "3.08", signal: 1, communication: 0)
@@ -73,10 +67,6 @@ class MockNetworking: FoxESSNetworking {
 
     func fetchScheduleModes(deviceID: String) async throws -> [Energy_Stats_Core.SchedulerModeResponse] {
         []
-    }
-
-    func fetchCurrentSchedule(deviceSN: String) async throws -> Energy_Stats_Core.ScheduleListResponse {
-        ScheduleListResponse(data: [], enable: false, pollcy: [])
     }
 
     func saveSchedule(deviceSN: String, schedule: Energy_Stats_Core.Schedule) async throws {}

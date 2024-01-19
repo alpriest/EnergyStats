@@ -42,7 +42,7 @@ public struct OpenApiVariableArray: Decodable {
         init(from decoder: Decoder) throws {
             let container: KeyedDecodingContainer<OpenApiVariableArray.YieldData.CodingKeys> = try decoder.container(keyedBy: OpenApiVariableArray.YieldData.CodingKeys.self)
             self.unit = try? container.decode(String.self, forKey: OpenApiVariableArray.YieldData.CodingKeys.unit)
-            let names = try container.decode(Dictionary<String, String>.self, forKey: OpenApiVariableArray.YieldData.CodingKeys.name)
+            let names = try container.decode([String: String].self, forKey: OpenApiVariableArray.YieldData.CodingKeys.name)
             self.name = names["en"] ?? "Unknown"
         }
     }
@@ -192,4 +192,72 @@ public struct OpenReportResponse: Codable {
         public let index: Int
         public let value: Double
     }
+}
+
+public struct GetCurrentSchedulerRequest: Encodable {
+    public let deviceSN: String
+}
+
+public struct SchedulerFlagRequest: Encodable {
+    public let deviceSN: String
+}
+
+public struct SchedulerFlagResponse: Decodable {
+    public let enable: Bool
+    public let support: Bool
+}
+
+public struct ScheduleDetailResponse: Decodable {
+    public let enable: Bool
+    public let startHour: Int
+    public let startMinute: Int
+    public let endHour: Int
+    public let endMinute: Int
+    public let workMode: WorkMode
+    public let minSocOnGrid: Int
+    public let fdsoc: Int
+    public let fdpwr: Int?
+
+    enum CodingKeys: CodingKey {
+        case enable
+        case startHour
+        case startMinute
+        case endHour
+        case endMinute
+        case fdpwr
+        case workMode
+        case fdsoc
+        case minSocOnGrid
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.enable = try container.decode(Bool.self, forKey: .enable)
+        self.startHour = try container.decode(Int.self, forKey: .startHour)
+        self.startMinute = try container.decode(Int.self, forKey: .startMinute)
+        self.endHour = try container.decode(Int.self, forKey: .endHour)
+        self.endMinute = try container.decode(Int.self, forKey: .endMinute)
+        self.fdpwr = try container.decodeIfPresent(Int.self, forKey: .fdpwr)
+        let workMode = try container.decode(String.self, forKey: .workMode)
+        self.workMode = WorkMode(rawValue: workMode.lowercased()) ?? .SelfUse
+        self.fdsoc = try container.decode(Int.self, forKey: .fdsoc)
+        self.minSocOnGrid = try container.decode(Int.self, forKey: .minSocOnGrid)
+    }
+
+    public init(enable: Bool, startHour: Int, startMinute: Int, endHour: Int, endMinute: Int, workMode: WorkMode, minSocOnGrid: Int, fdsoc: Int, fdpwr: Int?) {
+        self.enable = enable
+        self.startHour = startHour
+        self.startMinute = startMinute
+        self.endHour = endHour
+        self.endMinute = endMinute
+        self.workMode = workMode
+        self.minSocOnGrid = minSocOnGrid
+        self.fdsoc = fdsoc
+        self.fdpwr = fdpwr
+    }
+}
+
+public struct ScheduleDetailListResponse: Decodable {
+    public let enable: Bool
+    public let groups: [ScheduleDetailResponse]
 }

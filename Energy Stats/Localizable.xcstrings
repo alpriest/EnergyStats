@@ -1496,6 +1496,7 @@
       }
     },
     "Activate template" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1951,6 +1952,7 @@
       }
     },
     "Are you sure you want to delete this template?" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -3517,6 +3519,7 @@
       }
     },
     "Create new template" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4058,6 +4061,7 @@
       }
     },
     "Delete template" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4114,6 +4118,7 @@
       }
     },
     "Deleting" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4170,6 +4175,7 @@
       }
     },
     "Description" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4536,6 +4542,7 @@
       }
     },
     "Edit template" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -6624,6 +6631,7 @@
       }
     },
     "inverter_charge_template_deleted" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -7133,6 +7141,7 @@
       }
     },
     "Manage templates" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -7569,6 +7578,7 @@
       }
     },
     "Name" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -7687,6 +7697,7 @@
       }
     },
     "New template" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -10273,6 +10284,7 @@
       }
     },
     "Save template" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -11888,6 +11900,7 @@
       }
     },
     "Templates" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -13032,6 +13045,7 @@
       }
     },
     "Your template was activated" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -13060,6 +13074,7 @@
       }
     },
     "Your template was saved" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

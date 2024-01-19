@@ -25,91 +25,83 @@ public class NetworkFacade: FoxESSNetworking {
         config.isDemoUser || store.isDemoUser
     }
 
-    public func deleteScheduleTemplate(templateID: String) async throws {
-        if isDemoUser {
-            try await fakeNetwork.deleteScheduleTemplate(templateID: templateID)
-        } else {
-            try await network.deleteScheduleTemplate(templateID: templateID)
-        }
-    }
+//    public func deleteScheduleTemplate(templateID: String) async throws {
+//        if isDemoUser {
+//            try await fakeNetwork.deleteScheduleTemplate(templateID: templateID)
+//        } else {
+//            try await network.deleteScheduleTemplate(templateID: templateID)
+//        }
+//    }
+//
+//    public func fetchScheduleTemplate(deviceSN: String, templateID: String) async throws -> ScheduleTemplateResponse {
+//        if isDemoUser {
+//            try await fakeNetwork.fetchScheduleTemplate(deviceSN: deviceSN, templateID: templateID)
+//        } else {
+//            try await network.fetchScheduleTemplate(deviceSN: deviceSN, templateID: templateID)
+//        }
+//    }
+//
+//    public func enableScheduleTemplate(deviceSN: String, templateID: String) async throws {
+//        if isDemoUser {
+//            try await fakeNetwork.enableScheduleTemplate(deviceSN: deviceSN, templateID: templateID)
+//        } else {
+//            try await network.enableScheduleTemplate(deviceSN: deviceSN, templateID: templateID)
+//        }
+//    }
+//
+//    public func fetchScheduleTemplates() async throws -> ScheduleTemplateListResponse {
+//        if isDemoUser {
+//            try await fakeNetwork.fetchScheduleTemplates()
+//        } else {
+//            try await network.fetchScheduleTemplates()
+//        }
+//    }
+//
+//    public func createScheduleTemplate(name: String, description: String) async throws {
+//        if isDemoUser {
+//            try await fakeNetwork.createScheduleTemplate(name: name, description: description)
+//        } else {
+//            try await network.createScheduleTemplate(name: name, description: description)
+//        }
+//    }
+//
+//    public func deleteSchedule(deviceSN: String) async throws {
+//        if isDemoUser {
+//            try await fakeNetwork.deleteSchedule(deviceSN: deviceSN)
+//        } else {
+//            try await network.deleteSchedule(deviceSN: deviceSN)
+//        }
+//    }
+//
+//    public func saveSchedule(deviceSN: String, schedule: Schedule) async throws {
+//        if isDemoUser {
+//            try await fakeNetwork.saveSchedule(deviceSN: deviceSN, schedule: schedule)
+//        } else {
+//            try await network.saveSchedule(deviceSN: deviceSN, schedule: schedule)
+//        }
+//    }
+//
+//    public func saveScheduleTemplate(deviceSN: String, template: ScheduleTemplate) async throws {
+//        if isDemoUser {
+//            try await fakeNetwork.saveScheduleTemplate(deviceSN: deviceSN, template: template)
+//        } else {
+//            try await network.saveScheduleTemplate(deviceSN: deviceSN, template: template)
+//        }
+//    }
+//
+//    public func fetchScheduleModes(deviceID: String) async throws -> [SchedulerModeResponse] {
+//        if isDemoUser {
+//            try await fakeNetwork.fetchScheduleModes(deviceID: deviceID)
+//        } else {
+//            try await network.fetchScheduleModes(deviceID: deviceID)
+//        }
+//    }
 
-    public func fetchScheduleTemplate(deviceSN: String, templateID: String) async throws -> ScheduleTemplateResponse {
+    public func openapi_fetchSchedulerFlag(deviceSN: String) async throws -> SchedulerFlagResponse {
         if isDemoUser {
-            try await fakeNetwork.fetchScheduleTemplate(deviceSN: deviceSN, templateID: templateID)
+            try await fakeNetwork.openapi_fetchSchedulerFlag(deviceSN: deviceSN)
         } else {
-            try await network.fetchScheduleTemplate(deviceSN: deviceSN, templateID: templateID)
-        }
-    }
-
-    public func enableScheduleTemplate(deviceSN: String, templateID: String) async throws {
-        if isDemoUser {
-            try await fakeNetwork.enableScheduleTemplate(deviceSN: deviceSN, templateID: templateID)
-        } else {
-            try await network.enableScheduleTemplate(deviceSN: deviceSN, templateID: templateID)
-        }
-    }
-
-    public func fetchScheduleTemplates() async throws -> ScheduleTemplateListResponse {
-        if isDemoUser {
-            try await fakeNetwork.fetchScheduleTemplates()
-        } else {
-            try await network.fetchScheduleTemplates()
-        }
-    }
-
-    public func createScheduleTemplate(name: String, description: String) async throws {
-        if isDemoUser {
-            try await fakeNetwork.createScheduleTemplate(name: name, description: description)
-        } else {
-            try await network.createScheduleTemplate(name: name, description: description)
-        }
-    }
-
-    public func deleteSchedule(deviceSN: String) async throws {
-        if isDemoUser {
-            try await fakeNetwork.deleteSchedule(deviceSN: deviceSN)
-        } else {
-            try await network.deleteSchedule(deviceSN: deviceSN)
-        }
-    }
-
-    public func saveSchedule(deviceSN: String, schedule: Schedule) async throws {
-        if isDemoUser {
-            try await fakeNetwork.saveSchedule(deviceSN: deviceSN, schedule: schedule)
-        } else {
-            try await network.saveSchedule(deviceSN: deviceSN, schedule: schedule)
-        }
-    }
-
-    public func saveScheduleTemplate(deviceSN: String, template: ScheduleTemplate) async throws {
-        if isDemoUser {
-            try await fakeNetwork.saveScheduleTemplate(deviceSN: deviceSN, template: template)
-        } else {
-            try await network.saveScheduleTemplate(deviceSN: deviceSN, template: template)
-        }
-    }
-
-    public func fetchCurrentSchedule(deviceSN: String) async throws -> ScheduleListResponse {
-        if isDemoUser {
-            try await fakeNetwork.fetchCurrentSchedule(deviceSN: deviceSN)
-        } else {
-            try await network.fetchCurrentSchedule(deviceSN: deviceSN)
-        }
-    }
-
-    public func fetchScheduleModes(deviceID: String) async throws -> [SchedulerModeResponse] {
-        if isDemoUser {
-            try await fakeNetwork.fetchScheduleModes(deviceID: deviceID)
-        } else {
-            try await network.fetchScheduleModes(deviceID: deviceID)
-        }
-    }
-
-    public func fetchSchedulerFlag(deviceSN: String) async throws -> SchedulerFlagResponse {
-        if isDemoUser {
-            try await fakeNetwork.fetchSchedulerFlag(deviceSN: deviceSN)
-        } else {
-            try await network.fetchSchedulerFlag(deviceSN: deviceSN)
+            try await network.openapi_fetchSchedulerFlag(deviceSN: deviceSN)
         }
     }
 
@@ -214,6 +206,18 @@ public class NetworkFacade: FoxESSNetworking {
             }
             try await throttler.throttle(method: #function)
             return try await network.openapi_fetchReport(deviceSN: deviceSN, variables: variables, queryDate: queryDate, reportType: reportType)
+        }
+    }
+
+    public func openapi_fetchCurrentSchedule(deviceSN: String) async throws -> ScheduleDetailListResponse {
+        if isDemoUser {
+            return try await network.openapi_fetchCurrentSchedule(deviceSN: deviceSN)
+        } else {
+            defer {
+                throttler.didInvoke(method: #function)
+            }
+            try await throttler.throttle(method: #function)
+            return try await network.openapi_fetchCurrentSchedule(deviceSN: deviceSN)
         }
     }
 }

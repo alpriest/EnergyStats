@@ -9,62 +9,28 @@ import AppIntents
 import Foundation
 import SwiftUI
 
-//public enum WorkMode: String, CaseIterable, Describable {
-//    case selfUse
-//    case feedInFirst
-//    case backup
-//    case powerStation
-//    case peakShaving
-//
-//    public var title: String {
-//        switch self {
-//        case .selfUse:
-//            return "Self Use"
-//        case .feedInFirst:
-//            return "Feed In First"
-//        case .backup:
-//            return "Backup"
-//        case .powerStation:
-//            return "Power Station"
-//        case .peakShaving:
-//            return "Peak Shaving"
-//        }
-//    }
-//
-//    public var subtitle: some View {
-//        switch self {
-//        case .selfUse:
-//            return Text("self_use_mode")
-//
-//        case .feedInFirst:
-//            return Text("feed_in_first_mode")
-//
-//        case .backup:
-//            return Text("backup_mode")
-//
-//        case .powerStation:
-//            return Text("powerstation_mode")
-//
-//        case .peakShaving:
-//            return Text("peak_shaving_mode")
-//        }
-//    }
-//
-//    public func asInverterWorkMode() -> InverterWorkMode {
-//        switch self {
-//        case .selfUse:
-//            return .selfUse
-//        case .feedInFirst:
-//            return .feedInFirst
-//        case .backup:
-//            return .backup
-//        case .powerStation:
-//            return .powerStation
-//        case .peakShaving:
-//            return .peakShaving
-//        }
-//    }
-//}
+public enum WorkMode: String, CaseIterable, Decodable {
+    case SelfUse
+    case FeedIn
+    case Backup
+    case ForceCharge
+    case ForceDischarge
+
+    public var title: String {
+        switch self {
+        case .SelfUse:
+            return "Self Use"
+        case .FeedIn:
+            return "Feed In First"
+        case .Backup:
+            return "Backup"
+        case .ForceCharge:
+            return "Force Charge"
+        case .ForceDischarge:
+            return "Force Discharge"
+        }
+    }
+}
 
 //@available(iOS 16.0, *)
 //extension WorkMode: AppEnum, CaseDisplayRepresentable {

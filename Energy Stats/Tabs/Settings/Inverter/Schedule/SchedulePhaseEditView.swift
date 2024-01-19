@@ -13,7 +13,7 @@ struct SchedulePhaseEditView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var startTime: Date
     @State private var endTime: Date
-    @State private var workMode: SchedulerModeResponse
+    @State private var workMode: WorkMode
     @State private var minSOC: String
     @State private var fdSOC: String
     @State private var fdPower: String
@@ -39,7 +39,7 @@ struct SchedulePhaseEditView: View {
         self._startTime = State(wrappedValue: Date.fromTime(phase.start))
         self._endTime = State(wrappedValue: Date.fromTime(phase.end))
         self._workMode = State(wrappedValue: phase.mode)
-        self._minSOC = State(wrappedValue: String(describing: phase.batterySOC))
+        self._minSOC = State(wrappedValue: String(describing: phase.minSocOnGrid))
         self._fdSOC = State(wrappedValue: String(describing: phase.forceDischargeSOC))
         self._fdPower = State(wrappedValue: String(describing: phase.forceDischargePower))
 
@@ -147,10 +147,10 @@ struct SchedulePhaseEditView: View {
             start: startTime.toTime(),
             end: endTime.toTime(),
             mode: workMode,
+            minSocOnGrid: Int(minSOC) ?? 0,
             forceDischargePower: Int(fdPower) ?? 0,
             forceDischargeSOC: Int(fdSOC) ?? 0,
-            batterySOC: Int(minSOC) ?? 0,
-            color: Color.scheduleColor(named: workMode.key)
+            color: Color.scheduleColor(named: workMode)
         ) {
             onChange(phase)
             presentationMode.wrappedValue.dismiss()
@@ -158,36 +158,27 @@ struct SchedulePhaseEditView: View {
     }
 
     private func minSoCDescription() -> LocalizedStringKey? {
-        switch workMode.key {
-        case "Backup": return nil
-        case "Feedin": return nil
-        case "ForceCharge": return nil
-        case "ForceDischarge": return "The minimum battery state of charge. This must be at most the Force Discharge SOC value."
-        case "SelfUse": return nil
-        default: return nil
+        if case .ForceDischarge = workMode {
+            return "The minimum battery state of charge. This must be at most the Force Discharge SOC value."
         }
+
+        return nil
     }
 
     private func forceDischargeSoCDescription() -> LocalizedStringKey? {
-        switch workMode.key {
-        case "Backup": return nil
-        case "Feedin": return nil
-        case "ForceCharge": return nil
-        case "ForceDischarge": return "When the battery reaches this level, discharging will stop. If you wanted to save some battery power for later, perhaps set it to 50%."
-        case "SelfUse": return nil
-        default: return nil
+        if case .ForceDischarge = workMode {
+            return "When the battery reaches this level, discharging will stop. If you wanted to save some battery power for later, perhaps set it to 50%."
         }
+
+        return nil
     }
 
     private func forceDischargePowerDescription() -> LocalizedStringKey? {
-        switch workMode.key {
-        case "Backup": return nil
-        case "Feedin": return nil
-        case "ForceCharge": return nil
-        case "ForceDischarge": return "The output power level to be delivered, including your house load and grid export. E.g. If you have 5kW inverter then set this to 5000, then if the house load is 750W the other 4.25kW will be exported."
-        case "SelfUse": return nil
-        default: return nil
+        if case .ForceDischarge = workMode {
+            return "The output power level to be delivered, including your house load and grid export. E.g. If you have 5kW inverter then set this to 5000, then if the house load is 750W the other 4.25kW will be exported."
         }
+
+        return nil
     }
 
     private func validate() {
@@ -225,11 +216,11 @@ struct SchedulePhaseEditView: View {
                 hour: 23,
                 minute: 30
             ),
-            mode: SchedulerModeResponse(color: "#ff0000", name: "Force discharge", key: "ForceDischarge"),
+            mode: .ForceDischarge,
+            minSocOnGrid: 10,
             forceDischargePower: 3500,
             forceDischargeSOC: 20,
-            batterySOC: 20,
-            color: Color.scheduleColor(named: "ForceDischarge")
+            color: Color.scheduleColor(named: .ForceDischarge)
         )!,
         onChange: { print($0.id, " changed") },
         onDelete: { print($0, " deleted") }
@@ -245,5 +236,14 @@ extension SchedulerModeResponse {
             SchedulerModeResponse(color: "#80BBE9FB", name: "Force Charge", key: "ForceCharge"),
             SchedulerModeResponse(color: "#8061DDAA", name: "Self-Use", key: "SelfUse")
         ]
+    }
+}
+
+struct FooterSection<V: View>: View {
+    var content: () -> V
+
+    var body: some View {
+        Section {}
+            footer: { content() }
     }
 }

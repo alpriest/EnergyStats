@@ -7,11 +7,6 @@
 
 import Foundation
 
-public struct SchedulerFlagResponse: Decodable {
-    public let enable: Bool
-    public let support: Bool
-}
-
 public struct SchedulerModesResponse: Decodable {
     public let modes: [SchedulerModeResponse]
 }

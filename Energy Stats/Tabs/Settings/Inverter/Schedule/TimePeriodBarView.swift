@@ -68,10 +68,10 @@ extension Schedule {
                         hour: 2,
                         minute: 00
                     ),
-                    mode: SchedulerModeResponse(color: "#00ff00", name: "Force charge", key: "ForceCharge"),
+                    mode: .ForceCharge,
+                    minSocOnGrid: 100,
                     forceDischargePower: 0,
                     forceDischargeSOC: 100,
-                    batterySOC: 100,
                     color: .linesNegative
                 )!,
                 SchedulePhase(
@@ -83,10 +83,10 @@ extension Schedule {
                         hour: 14,
                         minute: 30
                     ),
-                    mode: SchedulerModeResponse(color: "#ff0000", name: "Force discharge", key: "ForceDischarge"),
+                    mode: .ForceDischarge,
+                    minSocOnGrid: 20,
                     forceDischargePower: 3500,
                     forceDischargeSOC: 20,
-                    batterySOC: 20,
                     color: .linesPositive
                 )!,
                 SchedulePhase(
@@ -98,10 +98,10 @@ extension Schedule {
                         hour: 23,
                         minute: 30
                     ),
-                    mode: SchedulerModeResponse(color: "#ff0000", name: "Self Use", key: "SelfUse"),
+                    mode: .SelfUse,
+                    minSocOnGrid: 20,
                     forceDischargePower: 0,
                     forceDischargeSOC: 20,
-                    batterySOC: 20,
                     color: .paleGray
                 )!
             ]

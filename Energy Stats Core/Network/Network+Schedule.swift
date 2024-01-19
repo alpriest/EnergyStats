@@ -8,7 +8,6 @@
 import Foundation
 
 extension URL {
-    static var getSchedulerFlag = URL(string: "https://www.foxesscloud.com/generic/v0/device/scheduler/get/flag")!
     static var schedulerModes = URL(string: "https://www.foxesscloud.com/generic/v0/device/scheduler/modes/get")!
     static var getCurrentSchedule = URL(string: "https://www.foxesscloud.com/generic/v0/device/scheduler/list")!
     static var enableSchedule = URL(string: "https://www.foxesscloud.com/generic/v0/device/scheduler/enable")!
@@ -21,121 +20,107 @@ extension URL {
 }
 
 public extension Network {
-    func deleteScheduleTemplate(templateID: String) async throws {
-        let request = append(
-            queryItems: [
-                URLQueryItem(name: "templateID", value: templateID),
-            ],
-            to: URL.deleteScheduleTemplate
-        )
+//    func deleteScheduleTemplate(templateID: String) async throws {
+//        let request = append(
+//            queryItems: [
+//                URLQueryItem(name: "templateID", value: templateID),
+//            ],
+//            to: URL.deleteScheduleTemplate
+//        )
+//
+//        do {
+//            let _: (String, Data) = try await fetch(request)
+//        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
+//            // Ignore
+//        }
+//    }
 
-        do {
-            let _: (String, Data) = try await fetch(request)
-        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
-            // Ignore
-        }
-    }
+//    func fetchScheduleTemplate(deviceSN: String, templateID: String) async throws -> ScheduleTemplateResponse {
+//        let request = append(
+//            queryItems: [
+//                URLQueryItem(name: "deviceSN", value: deviceSN),
+//                URLQueryItem(name: "templateID", value: templateID),
+//            ],
+//            to: URL.getSchedule
+//        )
+//
+//        let result: (ScheduleTemplateResponse, Data) = try await fetch(request)
+//        return result.0
+//    }
 
-    func fetchScheduleTemplate(deviceSN: String, templateID: String) async throws -> ScheduleTemplateResponse {
-        let request = append(
-            queryItems: [
-                URLQueryItem(name: "deviceSN", value: deviceSN),
-                URLQueryItem(name: "templateID", value: templateID),
-            ],
-            to: URL.getSchedule
-        )
+//    func enableScheduleTemplate(deviceSN: String, templateID: String) async throws {
+//        var request = URLRequest(url: URL.enableSchedule)
+//        request.httpMethod = "POST"
+//        request.httpBody = try! JSONEncoder().encode(ScheduleEnableRequest(templateID: templateID, deviceSN: deviceSN))
+//
+//        do {
+//            let _: (String, Data) = try await fetch(request)
+//        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
+//            // Ignore
+//        }
+//    }
 
-        let result: (ScheduleTemplateResponse, Data) = try await fetch(request)
-        return result.0
-    }
+//    func saveScheduleTemplate(deviceSN: String, template: ScheduleTemplate) async throws {
+//        var request = URLRequest(url: URL.saveScheduleTemplate)
+//        request.httpMethod = "POST"
+//        request.httpBody = try! JSONEncoder().encode(
+//            ScheduleSaveRequest(pollcy: template.phases.map { $0.toPollcy() },
+//                                templateID: template.id,
+//                                deviceSN: deviceSN)
+//        )
+//
+//        do {
+//            let _: (String, Data) = try await fetch(request)
+//        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
+//            // Ignore
+//        }
+//    }
 
-    func enableScheduleTemplate(deviceSN: String, templateID: String) async throws {
-        var request = URLRequest(url: URL.enableSchedule)
-        request.httpMethod = "POST"
-        request.httpBody = try! JSONEncoder().encode(ScheduleEnableRequest(templateID: templateID, deviceSN: deviceSN))
+//    func fetchScheduleTemplates() async throws -> ScheduleTemplateListResponse {
+//        let request = URLRequest(url: URL.fetchScheduleTemplates)
+//
+//        let result: (ScheduleTemplateListResponse, Data) = try await fetch(request)
+//        return result.0
+//    }
 
-        do {
-            let _: (String, Data) = try await fetch(request)
-        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
-            // Ignore
-        }
-    }
+//    func createScheduleTemplate(name: String, description: String) async throws {
+//        var request = URLRequest(url: URL.createScheduleTemplate)
+//        request.httpMethod = "POST"
+//        request.httpBody = try! JSONEncoder().encode(ScheduleTemplateCreateRequest(templateName: name, content: description))
+//
+//        do {
+//            let _: (String, Data) = try await fetch(request)
+//        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
+//            // Ignore
+//        }
+//    }
 
-    func saveScheduleTemplate(deviceSN: String, template: ScheduleTemplate) async throws {
-        var request = URLRequest(url: URL.saveScheduleTemplate)
-        request.httpMethod = "POST"
-        request.httpBody = try! JSONEncoder().encode(
-            ScheduleSaveRequest(pollcy: template.phases.map { $0.toPollcy() },
-                                templateID: template.id,
-                                deviceSN: deviceSN)
-        )
+//    func deleteSchedule(deviceSN: String) async throws {
+//        let request = append(queryItems: [URLQueryItem(name: "deviceSN", value: deviceSN)], to: URL.deleteSchedule)
+//
+//        do {
+//            let _: (String, Data) = try await fetch(request)
+//        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
+//            // Ignore
+//        }
+//    }
 
-        do {
-            let _: (String, Data) = try await fetch(request)
-        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
-            // Ignore
-        }
-    }
+//    func saveSchedule(deviceSN: String, schedule: Schedule) async throws {
+//        var request = URLRequest(url: URL.enableSchedule)
+//        request.httpMethod = "POST"
+//        request.httpBody = try! JSONEncoder().encode(ScheduleSaveRequest(pollcy: schedule.phases.map { $0.toPollcy() }, templateID: nil, deviceSN: deviceSN))
+//
+//        do {
+//            let _: (String, Data) = try await fetch(request)
+//        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
+//            // Ignore
+//        }
+//    }
 
-    func fetchScheduleTemplates() async throws -> ScheduleTemplateListResponse {
-        let request = URLRequest(url: URL.fetchScheduleTemplates)
-
-        let result: (ScheduleTemplateListResponse, Data) = try await fetch(request)
-        return result.0
-    }
-
-    func createScheduleTemplate(name: String, description: String) async throws {
-        var request = URLRequest(url: URL.createScheduleTemplate)
-        request.httpMethod = "POST"
-        request.httpBody = try! JSONEncoder().encode(ScheduleTemplateCreateRequest(templateName: name, content: description))
-
-        do {
-            let _: (String, Data) = try await fetch(request)
-        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
-            // Ignore
-        }
-    }
-
-    func deleteSchedule(deviceSN: String) async throws {
-        let request = append(queryItems: [URLQueryItem(name: "deviceSN", value: deviceSN)], to: URL.deleteSchedule)
-
-        do {
-            let _: (String, Data) = try await fetch(request)
-        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
-            // Ignore
-        }
-    }
-
-    func saveSchedule(deviceSN: String, schedule: Schedule) async throws {
-        var request = URLRequest(url: URL.enableSchedule)
-        request.httpMethod = "POST"
-        request.httpBody = try! JSONEncoder().encode(ScheduleSaveRequest(pollcy: schedule.phases.map { $0.toPollcy() }, templateID: nil, deviceSN: deviceSN))
-
-        do {
-            let _: (String, Data) = try await fetch(request)
-        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
-            // Ignore
-        }
-    }
-
-    func fetchCurrentSchedule(deviceSN: String) async throws -> ScheduleListResponse {
-        let request = append(queryItems: [URLQueryItem(name: "deviceSN", value: deviceSN)], to: URL.getCurrentSchedule)
-
-        let result: (ScheduleListResponse, Data) = try await fetch(request)
-        return result.0
-    }
-
-    func fetchScheduleModes(deviceID: String) async throws -> [SchedulerModeResponse] {
-        let request = append(queryItems: [URLQueryItem(name: "deviceID", value: deviceID)], to: URL.schedulerModes)
-
-        let result: (SchedulerModesResponse, Data) = try await fetch(request)
-        return result.0.modes
-    }
-
-    func fetchSchedulerFlag(deviceSN: String) async throws -> SchedulerFlagResponse {
-        let request = append(queryItems: [URLQueryItem(name: "deviceSN", value: deviceSN)], to: URL.getSchedulerFlag)
-
-        let result: (SchedulerFlagResponse, Data) = try await fetch(request)
-        return result.0
-    }
+//    func fetchScheduleModes(deviceID: String) async throws -> [SchedulerModeResponse] {
+//        let request = append(queryItems: [URLQueryItem(name: "deviceID", value: deviceID)], to: URL.schedulerModes)
+//
+//        let result: (SchedulerModesResponse, Data) = try await fetch(request)
+//        return result.0.modes
+//    }
 }

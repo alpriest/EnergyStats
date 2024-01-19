@@ -45,35 +45,34 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable {
     public let id: String
     public let start: Time
     public let end: Time
-    public let mode: SchedulerModeResponse
+    public let mode: WorkMode
+    public let minSocOnGrid: Int
     public let forceDischargePower: Int
     public let forceDischargeSOC: Int
-    public let batterySOC: Int
     public let color: Color
 
-    public init?(id: String? = nil, start: Time, end: Time, mode: SchedulerModeResponse?, forceDischargePower: Int, forceDischargeSOC: Int, batterySOC: Int, color: Color) {
-        guard let mode else { return nil }
+    public init?(id: String? = nil, start: Time, end: Time, mode: WorkMode, minSocOnGrid: Int, forceDischargePower: Int, forceDischargeSOC: Int, color: Color) {
         guard start < end else { return nil }
 
         self.id = id ?? UUID().uuidString
         self.start = start
         self.end = end
         self.mode = mode
+        self.minSocOnGrid = minSocOnGrid
         self.forceDischargePower = forceDischargePower
         self.forceDischargeSOC = forceDischargeSOC
-        self.batterySOC = batterySOC
         self.color = color
     }
 
-    public init(mode: SchedulerModeResponse, device: Device?) {
+    public init(mode: WorkMode, device: Device?) {
         self.id = UUID().uuidString
         self.start = Date().toTime()
         self.end = Date().toTime().adding(minutes: 1)
         self.mode = mode
         self.forceDischargePower = 0
         self.forceDischargeSOC = Int(device?.battery?.minSOC) ?? 10
-        self.batterySOC = Int(device?.battery?.minSOC) ?? 10
-        self.color = Color.scheduleColor(named: mode.key)
+        self.minSocOnGrid = Int(device?.battery?.minSOC) ?? 10
+        self.color = Color.scheduleColor(named: mode)
     }
 
     public var startPoint: CGFloat { CGFloat(minutesAfterMidnight(start)) / (24 * 60) }
@@ -83,20 +82,7 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable {
         (time.hour * 60) + time.minute
     }
 
-    func toPollcy() -> SchedulePollcy {
-        SchedulePollcy(
-            startH: start.hour,
-            startM: start.minute,
-            endH: end.hour,
-            endM: end.minute,
-            fdpwr: forceDischargePower,
-            workMode: mode.key,
-            fdsoc: forceDischargeSOC,
-            minsocongrid: batterySOC
-        )
-    }
-
     public func isValid() -> Bool {
-        batterySOC <= forceDischargeSOC && end > start
+        end > start
     }
 }

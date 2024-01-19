@@ -35,7 +35,8 @@ class EditScheduleViewModel: ObservableObject {
 
         Task { [self] in
             do {
-                try await networking.saveSchedule(deviceSN: deviceSN, schedule: schedule)
+                // TODO
+//                try await networking.saveSchedule(deviceSN: deviceSN, schedule: schedule)
 
                 Task { @MainActor in
                     self.state = .inactive
@@ -59,7 +60,8 @@ class EditScheduleViewModel: ObservableObject {
 
         Task { [self] in
             do {
-                try await networking.deleteSchedule(deviceSN: deviceSN)
+//                try await networking.deleteSchedule(deviceSN: deviceSN)
+                // TODO: send empty schedule
 
                 Task { @MainActor in
                     self.state = .inactive
@@ -77,9 +79,7 @@ class EditScheduleViewModel: ObservableObject {
     }
 
     func autoFillScheduleGaps() {
-        guard let mode = modes.first else { return }
-
-        self.schedule = SchedulePhaseHelper.appendPhasesInGaps(to: schedule, mode: mode, device: config.currentDevice.value)
+        self.schedule = SchedulePhaseHelper.appendPhasesInGaps(to: schedule, mode: .SelfUse, device: config.currentDevice.value)
     }
 
     func addNewTimePeriod() {
@@ -127,30 +127,5 @@ extension Schedule {
         }
 
         return true
-    }
-}
-
-extension SchedulePollcy {
-    func toSchedulePhase(workModes: [SchedulerModeResponse]) -> SchedulePhase? {
-        SchedulePhase(
-            start: Time(hour: startH, minute: startM),
-            end: Time(hour: endH, minute: endM),
-            mode: workModes.first { $0.key == workMode },
-            forceDischargePower: fdpwr ?? 0,
-            forceDischargeSOC: fdsoc,
-            batterySOC: minsocongrid,
-            color: Color.scheduleColor(named: workMode)
-        )
-    }
-}
-
-private extension Schedule {
-    init(schedule: ScheduleListResponse, workModes: [SchedulerModeResponse]) {
-        let phases = schedule.pollcy.compactMap { $0.toSchedulePhase(workModes: workModes) }
-
-        self.init(
-            name: nil,
-            phases: phases
-        )
     }
 }

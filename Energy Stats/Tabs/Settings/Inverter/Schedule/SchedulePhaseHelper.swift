@@ -10,12 +10,11 @@ import Foundation
 import SwiftUI
 
 enum SchedulePhaseHelper {
+    //TOOD: Remove modes parameter
     static func addNewTimePeriod(to schedule: Schedule, modes: [SchedulerModeResponse], device: Device?) -> Schedule {
-        guard let mode = modes.first else { return schedule }
-
         return Schedule(
             name: schedule.name,
-            phases: schedule.phases + [SchedulePhase(mode: mode, device: device)].sorted { $0.start < $1.start },
+            phases: schedule.phases + [SchedulePhase(mode: .SelfUse, device: device)].sorted { $0.start < $1.start },
             templateID: schedule.templateID
         )
     }
@@ -48,7 +47,7 @@ enum SchedulePhaseHelper {
         )
     }
 
-    static func appendPhasesInGaps(to schedule: Schedule, mode: SchedulerModeResponse, device: Device?) -> Schedule {
+    static func appendPhasesInGaps(to schedule: Schedule, mode: WorkMode, device: Device?) -> Schedule {
         let soc = Int(device?.battery?.minSOC) ?? 10
         let newPhases = schedule.phases + createPhasesInGaps(on: schedule, mode: mode, soc: soc)
 
@@ -59,7 +58,7 @@ enum SchedulePhaseHelper {
         )
     }
 
-    static func createPhasesInGaps(on schedule: Schedule, mode: SchedulerModeResponse, soc: Int) -> [SchedulePhase] {
+    static func createPhasesInGaps(on schedule: Schedule, mode: WorkMode, soc: Int) -> [SchedulePhase] {
         // Ensure the phases are sorted by start time
         let sortedPhases = schedule.phases.sorted { $0.start < $1.start }
 
@@ -100,15 +99,15 @@ enum SchedulePhaseHelper {
         return newPhases
     }
 
-    private static func makePhase(from start: Time, to end: Time, mode: SchedulerModeResponse, soc: Int) -> SchedulePhase {
+    private static func makePhase(from start: Time, to end: Time, mode: WorkMode, soc: Int) -> SchedulePhase {
         SchedulePhase(
             start: start,
             end: end,
             mode: mode,
+            minSocOnGrid: soc,
             forceDischargePower: 0,
             forceDischargeSOC: soc,
-            batterySOC: soc,
-            color: Color.scheduleColor(named: mode.key)
+            color: Color.scheduleColor(named: mode)
         )!
     }
 }

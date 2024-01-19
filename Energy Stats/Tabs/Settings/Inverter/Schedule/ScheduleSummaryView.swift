@@ -81,35 +81,35 @@ struct ScheduleSummaryView: View {
                     }
                 }
 
-                Section {
-                    ForEach(viewModel.templates) { template in
-                        HStack {
-                            Text(template.name)
-
-                            Spacer()
-
-                            Button {
-                                Task { await viewModel.activate(templateID: template.id) }
-                            } label: {
-                                Text("Activate")
-                            }
-                            .buttonStyle(.borderedProminent)
-                        }
-                    }
-                } header: {
-                    Text("Templates")
-                        .padding(.top, 24)
-                } footer: {
-                    VStack {
-                        NavigationLink {
-                            ScheduleTemplateListView(networking: networking, config: config, modes: viewModel.modes)
-                        } label: {
-                            Text("Manage templates")
-                        }.buttonStyle(.borderedProminent)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding(.top)
-                }
+//                Section {
+//                    ForEach(viewModel.templates) { template in
+//                        HStack {
+//                            Text(template.name)
+//
+//                            Spacer()
+//
+//                            Button {
+//                                Task { await viewModel.activate(templateID: template.id) }
+//                            } label: {
+//                                Text("Activate")
+//                            }
+//                            .buttonStyle(.borderedProminent)
+//                        }
+//                    }
+//                } header: {
+//                    Text("Templates")
+//                        .padding(.top, 24)
+//                } footer: {
+//                    VStack {
+//                        NavigationLink {
+//                            ScheduleTemplateListView(networking: networking, config: config, modes: viewModel.modes)
+//                        } label: {
+//                            Text("Manage templates")
+//                        }.buttonStyle(.borderedProminent)
+//                    }
+//                    .frame(maxWidth: .infinity)
+//                    .padding(.top)
+//                }
             }
         }
         .loadable($viewModel.state, retry: { Task { await viewModel.load() } })

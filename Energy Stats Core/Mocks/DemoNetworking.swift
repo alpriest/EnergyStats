@@ -51,20 +51,6 @@ public class DemoNetworking: FoxESSNetworking {
     public func deleteSchedule(deviceSN: String) async throws {}
     public func saveSchedule(deviceSN: String, schedule: Schedule) async throws {}
 
-    public func fetchCurrentSchedule(deviceSN: String) async throws -> ScheduleListResponse {
-        ScheduleListResponse(
-            data: [
-                ScheduleTemplateSummaryResponse(templateName: "Winter charging", enable: false, templateID: "123"),
-                ScheduleTemplateSummaryResponse(templateName: "", enable: true, templateID: "")
-            ],
-            enable: true,
-            pollcy: [
-                SchedulePollcy(startH: 15, startM: 0, endH: 17, endM: 0, fdpwr: 0, workMode: "ForceCharge", fdsoc: 100, minsocongrid: 100),
-                SchedulePollcy(startH: 17, startM: 0, endH: 18, endM: 30, fdpwr: 3500, workMode: "ForceDischarge", fdsoc: 20, minsocongrid: 20)
-            ]
-        )
-    }
-
     public func fetchScheduleModes(deviceID: String) async throws -> [SchedulerModeResponse] {
         [
             SchedulerModeResponse(color: "#80F6BD16", name: "Back Up", key: "Backup"),
@@ -75,7 +61,7 @@ public class DemoNetworking: FoxESSNetworking {
         ]
     }
 
-    public func fetchSchedulerFlag(deviceSN: String) async throws -> SchedulerFlagResponse {
+    public func openapi_fetchSchedulerFlag(deviceSN: String) async throws -> SchedulerFlagResponse {
         SchedulerFlagResponse(enable: true, support: true)
     }
 
@@ -196,6 +182,36 @@ public class DemoNetworking: FoxESSNetworking {
 //
 //        return result
         []
+    }
+
+    public func openapi_fetchCurrentSchedule(deviceSN: String) async throws -> ScheduleDetailListResponse {
+        ScheduleDetailListResponse(
+            enable: false,
+            groups: [
+                ScheduleDetailResponse(
+                    enable: true,
+                    startHour: 15,
+                    startMinute: 0,
+                    endHour: 17,
+                    endMinute: 0,
+                    workMode: .ForceCharge,
+                    minSocOnGrid: 20,
+                    fdsoc: 100,
+                    fdpwr: 0
+                ),
+                ScheduleDetailResponse(
+                    enable: true,
+                    startHour: 17,
+                    startMinute: 0,
+                    endHour: 18,
+                    endMinute: 30,
+                    workMode: .ForceDischarge,
+                    minSocOnGrid: 20,
+                    fdsoc: 20,
+                    fdpwr: 3500
+                )
+            ]
+        )
     }
 }
 
