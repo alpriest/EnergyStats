@@ -23,12 +23,12 @@ public extension Network {
         return result.0
     }
 
-    func openapi_fetchCurrentSchedule(deviceSN: String) async throws -> ScheduleDetailListResponse {
+    func openapi_fetchCurrentSchedule(deviceSN: String) async throws -> ScheduleResponse {
         var request = URLRequest(url: URL.getOpenCurrentSchedule)
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(GetCurrentSchedulerRequest(deviceSN: deviceSN))
 
-        let result: (ScheduleDetailListResponse, Data) = try await fetch(request)
+        let result: (ScheduleResponse, Data) = try await fetch(request)
         return result.0
     }
 

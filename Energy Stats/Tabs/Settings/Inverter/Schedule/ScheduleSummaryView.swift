@@ -59,7 +59,6 @@ struct ScheduleSummaryView: View {
                                                    networking: networking,
                                                    config: config,
                                                    schedule: schedule,
-                                                   modes: viewModel.modes,
                                                    allowDelete: true
                                                )
                                            },
@@ -76,7 +75,6 @@ struct ScheduleSummaryView: View {
                                 networking: networking,
                                 config: config,
                                 schedule: schedule,
-                                modes: viewModel.modes,
                                 allowDelete: false
                             )
                         }, label: {

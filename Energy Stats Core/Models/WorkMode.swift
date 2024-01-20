@@ -9,7 +9,7 @@ import AppIntents
 import Foundation
 import SwiftUI
 
-public enum WorkMode: String, CaseIterable, Decodable {
+public enum WorkMode: String, CaseIterable, Decodable, RawRepresentable {
     case SelfUse
     case FeedIn
     case Backup
@@ -35,8 +35,8 @@ public enum WorkMode: String, CaseIterable, Decodable {
     }
 }
 
-//@available(iOS 16.0, *)
-//extension WorkMode: AppEnum, CaseDisplayRepresentable {
+// @available(iOS 16.0, *)
+// extension WorkMode: AppEnum, CaseDisplayRepresentable {
 //    public static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Work mode")
 //
 //    public static var caseDisplayRepresentations: [Self: DisplayRepresentation] = [
@@ -46,4 +46,4 @@ public enum WorkMode: String, CaseIterable, Decodable {
 //        .powerStation: DisplayRepresentation(title: "Power Station"),
 //        .peakShaving: DisplayRepresentation(title: "Peak Shaving")
 //    ]
-//}
+// }

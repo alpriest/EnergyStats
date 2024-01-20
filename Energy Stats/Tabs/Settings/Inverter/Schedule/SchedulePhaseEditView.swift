@@ -21,17 +21,15 @@ struct SchedulePhaseEditView: View {
     @State private var fdSOCError: LocalizedStringKey?
     @State private var timeError: LocalizedStringKey?
     private let id: String
-    private let modes: [SchedulerModeResponse]
+    private let modes = WorkMode.allCases
     private let onChange: (SchedulePhase) -> Void
     private let onDelete: (String) -> Void
 
     init(
-        modes: [SchedulerModeResponse],
         phase: SchedulePhase,
         onChange: @escaping (SchedulePhase) -> Void,
         onDelete: @escaping (String) -> Void
     ) {
-        self.modes = modes
         self.onChange = onChange
         self.onDelete = onDelete
 
@@ -58,8 +56,7 @@ struct SchedulePhaseEditView: View {
 
                     Picker("Work mode", selection: $workMode) {
                         ForEach(modes, id: \.self) { mode in
-                            Text(mode.name)
-                                .tag(mode.key)
+                            Text(mode.title)
                         }
                     }
                     .pickerStyle(.menu)
@@ -206,7 +203,6 @@ struct SchedulePhaseEditView: View {
 
 #Preview {
     SchedulePhaseEditView(
-        modes: SchedulerModeResponse.preview(),
         phase: SchedulePhase(
             start: Time(
                 hour: 19,
@@ -225,18 +221,6 @@ struct SchedulePhaseEditView: View {
         onChange: { print($0.id, " changed") },
         onDelete: { print($0, " deleted") }
     )
-}
-
-extension SchedulerModeResponse {
-    static func preview() -> [SchedulerModeResponse] {
-        [
-            SchedulerModeResponse(color: "#8065789B", name: "Force Discharge", key: "ForceDischarge"),
-            SchedulerModeResponse(color: "#80F6BD16", name: "Back Up", key: "Backup"),
-            SchedulerModeResponse(color: "#805B8FF9", name: "Feed-in Priority", key: "Feedin"),
-            SchedulerModeResponse(color: "#80BBE9FB", name: "Force Charge", key: "ForceCharge"),
-            SchedulerModeResponse(color: "#8061DDAA", name: "Self-Use", key: "SelfUse")
-        ]
-    }
 }
 
 struct FooterSection<V: View>: View {

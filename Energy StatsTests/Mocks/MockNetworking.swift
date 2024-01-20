@@ -126,7 +126,7 @@ class MockNetworking: FoxESSNetworking {
         SchedulerFlagResponse(enable: true, support: true)
     }
 
-    func openapi_fetchCurrentSchedule(deviceSN: String) async throws -> ScheduleDetailListResponse {
-        ScheduleDetailListResponse(enable: true, groups: [])
+    func openapi_fetchCurrentSchedule(deviceSN: String) async throws -> ScheduleResponse {
+        ScheduleResponse(enable: true, groups: [])
     }
 }

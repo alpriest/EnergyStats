@@ -35,6 +35,6 @@ public protocol FoxESSNetworking {
     func openapi_setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws
     func openapi_fetchDataLoggers() async throws -> [DataLoggerResponse]
     func openapi_fetchSchedulerFlag(deviceSN: String) async throws -> GetSchedulerFlagResponse
-    func openapi_fetchCurrentSchedule(deviceSN: String) async throws -> ScheduleDetailListResponse
+    func openapi_fetchCurrentSchedule(deviceSN: String) async throws -> ScheduleResponse
     func openapi_setScheduleFlag(deviceSN: String, enable: Bool) async throws
 }

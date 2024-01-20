@@ -217,7 +217,7 @@ public class NetworkFacade: FoxESSNetworking {
         }
     }
 
-    public func openapi_fetchCurrentSchedule(deviceSN: String) async throws -> ScheduleDetailListResponse {
+    public func openapi_fetchCurrentSchedule(deviceSN: String) async throws -> ScheduleResponse {
         if isDemoUser {
             return try await network.openapi_fetchCurrentSchedule(deviceSN: deviceSN)
         } else {

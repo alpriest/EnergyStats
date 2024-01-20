@@ -10,8 +10,7 @@ import Foundation
 import SwiftUI
 
 enum SchedulePhaseHelper {
-    //TOOD: Remove modes parameter
-    static func addNewTimePeriod(to schedule: Schedule, modes: [SchedulerModeResponse], device: Device?) -> Schedule {
+    static func addNewTimePeriod(to schedule: Schedule, device: Device?) -> Schedule {
         return Schedule(
             name: schedule.name,
             phases: schedule.phases + [SchedulePhase(mode: .SelfUse, device: device)].sorted { $0.start < $1.start },

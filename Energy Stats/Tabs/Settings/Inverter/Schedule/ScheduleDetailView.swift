@@ -11,7 +11,6 @@ import SwiftUI
 
 struct ScheduleDetailView: View {
     let schedule: Schedule
-    let modes: [SchedulerModeResponse]
     let onUpdate: (SchedulePhase) -> Void
     let onDelete: (String) -> Void
 
@@ -38,8 +37,7 @@ struct ScheduleDetailView: View {
 
         ForEach(schedule.phases) { phase in
             NavigationLink {
-                SchedulePhaseEditView(modes: modes,
-                                      phase: phase,
+                SchedulePhaseEditView(phase: phase,
                                       onChange: onUpdate,
                                       onDelete: onDelete)
             } label: {
@@ -53,7 +51,6 @@ struct ScheduleDetailView: View {
 #Preview {
     ScheduleDetailView(
         schedule: Schedule.preview(),
-        modes: SchedulerModeResponse.preview(),
         onUpdate: { _ in },
         onDelete: { _ in }
     )

@@ -212,7 +212,7 @@ public struct SetSchedulerFlagRequest: Encodable {
     public let enable: Int
 }
 
-public struct ScheduleDetailResponse: Decodable {
+public struct SchedulePhaseResponse: Decodable {
     public let enable: Int
     public let startHour: Int
     public let startMinute: Int
@@ -243,8 +243,7 @@ public struct ScheduleDetailResponse: Decodable {
         self.endHour = try container.decode(Int.self, forKey: .endHour)
         self.endMinute = try container.decode(Int.self, forKey: .endMinute)
         self.fdPwr = try container.decodeIfPresent(Int.self, forKey: .fdPwr)
-        let workMode = try container.decode(String.self, forKey: .workMode)
-        self.workMode = WorkMode(rawValue: workMode.lowercased()) ?? .SelfUse
+        self.workMode = try container.decode(WorkMode.self, forKey: .workMode)
         self.fdSoc = try container.decode(Int.self, forKey: .fdSoc)
         self.minSocOnGrid = try container.decode(Int.self, forKey: .minSocOnGrid)
     }
@@ -262,7 +261,7 @@ public struct ScheduleDetailResponse: Decodable {
     }
 }
 
-public struct ScheduleDetailListResponse: Decodable {
+public struct ScheduleResponse: Decodable {
     public let enable: Int
-    public let groups: [ScheduleDetailResponse]
+    public let groups: [SchedulePhaseResponse]
 }

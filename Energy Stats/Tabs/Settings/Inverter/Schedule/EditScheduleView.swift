@@ -18,15 +18,13 @@ struct EditScheduleView: View {
         networking: FoxESSNetworking,
         config: ConfigManaging,
         schedule: Schedule,
-        modes: [SchedulerModeResponse],
         allowDelete: Bool
     ) {
         _viewModel = StateObject(
             wrappedValue: EditScheduleViewModel(
                 networking: networking,
                 config: config,
-                schedule: schedule,
-                modes: modes
+                schedule: schedule
             )
         )
         self.allowDelete = allowDelete
@@ -37,7 +35,6 @@ struct EditScheduleView: View {
             Form {
                 ScheduleDetailView(
                     schedule: viewModel.schedule,
-                    modes: viewModel.modes,
                     onUpdate: viewModel.updatedPhase,
                     onDelete: viewModel.deletedPhase
                 )
@@ -104,7 +101,6 @@ struct EditScheduleView: View {
             networking: DemoNetworking(),
             config: PreviewConfigManager(),
             schedule: Schedule.preview(),
-            modes: SchedulerModeResponse.preview(),
             allowDelete: true
         )
     }

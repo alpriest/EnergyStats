@@ -7,8 +7,14 @@
 
 import Foundation
 
-extension Bool {
+public extension Bool {
     var intValue: Int {
         self ? 1 : 0
+    }
+}
+
+public extension Int {
+    var boolValue: Bool {
+        self == 1
     }
 }

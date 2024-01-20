@@ -13,15 +13,13 @@ class EditScheduleViewModel: ObservableObject {
     @Published var schedule: Schedule
     @Published var state: LoadState = .inactive
     @Published var alertContent: AlertContent?
-    @Published var modes: [SchedulerModeResponse] = []
     private let networking: FoxESSNetworking
     private let config: ConfigManaging
 
-    init(networking: FoxESSNetworking, config: ConfigManaging, schedule: Schedule, modes: [SchedulerModeResponse]) {
+    init(networking: FoxESSNetworking, config: ConfigManaging, schedule: Schedule) {
         self.networking = networking
         self.config = config
         self.schedule = schedule
-        self.modes = modes
     }
 
     func saveSchedule(onCompletion: @escaping () -> Void) async {
@@ -35,7 +33,7 @@ class EditScheduleViewModel: ObservableObject {
 
         Task { [self] in
             do {
-                // TODO
+                // TODO:
 //                try await networking.saveSchedule(deviceSN: deviceSN, schedule: schedule)
 
                 Task { @MainActor in
@@ -79,19 +77,19 @@ class EditScheduleViewModel: ObservableObject {
     }
 
     func autoFillScheduleGaps() {
-        self.schedule = SchedulePhaseHelper.appendPhasesInGaps(to: schedule, mode: .SelfUse, device: config.currentDevice.value)
+        schedule = SchedulePhaseHelper.appendPhasesInGaps(to: schedule, mode: .SelfUse, device: config.currentDevice.value)
     }
 
     func addNewTimePeriod() {
-        self.schedule = SchedulePhaseHelper.addNewTimePeriod(to: schedule, modes: modes, device: config.currentDevice.value)
+        schedule = SchedulePhaseHelper.addNewTimePeriod(to: schedule, device: config.currentDevice.value)
     }
 
     func updatedPhase(_ phase: SchedulePhase) {
-        self.schedule = SchedulePhaseHelper.updated(phase: phase, on: schedule)
+        schedule = SchedulePhaseHelper.updated(phase: phase, on: schedule)
     }
 
     func deletedPhase(_ id: String) {
-        self.schedule = SchedulePhaseHelper.deleted(phaseID: id, on: schedule)
+        schedule = SchedulePhaseHelper.deleted(phaseID: id, on: schedule)
     }
 
     private func setState(_ state: LoadState) {
