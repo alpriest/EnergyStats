@@ -17,6 +17,13 @@ class ScheduleSummaryViewModel: ObservableObject {
     @Published var templates: [ScheduleTemplateSummary] = []
     @Published var alertContent: AlertContent?
     @Published var schedule: Schedule?
+    @Published var schedulerEnabled: Bool = false {
+        didSet {
+            if case .inactive = state {
+                print("AWP", schedulerEnabled)
+            }
+        }
+    }
 
     init(networking: FoxESSNetworking, config: ConfigManaging) {
         self.networking = networking
@@ -33,8 +40,9 @@ class ScheduleSummaryViewModel: ObservableObject {
         self.state = .active("Loading")
 
         do {
-            let supported = try await networking.openapi_fetchSchedulerFlag(deviceSN: device.deviceSN).support
-            if !supported {
+            let flags = try await networking.openapi_fetchSchedulerFlag(deviceSN: device.deviceSN)
+            schedulerEnabled = flags.enable
+            if !flags.support {
                 let message = String(key: .schedulesUnsupported, arguments: [device.deviceDisplayName, self.config.firmwareVersions?.manager ?? ""])
                 self.state = .error(nil, message)
             } else {

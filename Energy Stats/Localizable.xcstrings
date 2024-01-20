@@ -1556,31 +1556,31 @@
       "localizations" : {
         "de" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Aktiver Zeitplan"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Active schedule"
+            "value" : "Schedule"
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Horario activo"
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Programma attivo"
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Aktywny harmonogram"
           }
         }
@@ -4660,6 +4660,9 @@
           }
         }
       }
+    },
+    "Enable Scheduler" : {
+
     },
     "End" : {
       "localizations" : {

@@ -47,6 +47,10 @@ struct ScheduleSummaryView: View {
     private func content() -> some View {
         VStack(spacing: 0) {
             Form {
+                Toggle(isOn: $viewModel.schedulerEnabled) {
+                    Text("Enable Scheduler")
+                }
+
                 if let schedule = viewModel.schedule {
                     if schedule.phases.count > 0 {
                         Section {
