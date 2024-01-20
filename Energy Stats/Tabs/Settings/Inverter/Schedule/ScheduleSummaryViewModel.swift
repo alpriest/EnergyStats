@@ -143,8 +143,8 @@ extension ScheduleDetailResponse {
             end: Time(hour: endHour, minute: endMinute),
             mode: workMode,
             minSocOnGrid: minSocOnGrid,
-            forceDischargePower: fdpwr ?? 0,
-            forceDischargeSOC: fdsoc,
+            forceDischargePower: fdPwr ?? 0,
+            forceDischargeSOC: fdSoc,
             color: Color.scheduleColor(named: workMode)
         )
     }

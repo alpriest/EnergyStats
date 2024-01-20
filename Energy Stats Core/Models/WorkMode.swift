@@ -15,6 +15,7 @@ public enum WorkMode: String, CaseIterable, Decodable {
     case Backup
     case ForceCharge
     case ForceDischarge
+    case Invalid
 
     public var title: String {
         switch self {
@@ -28,6 +29,8 @@ public enum WorkMode: String, CaseIterable, Decodable {
             return "Force Charge"
         case .ForceDischarge:
             return "Force Discharge"
+        case .Invalid:
+            return "Invalid"
         }
     }
 }

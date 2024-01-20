@@ -208,15 +208,15 @@ public struct SchedulerFlagResponse: Decodable {
 }
 
 public struct ScheduleDetailResponse: Decodable {
-    public let enable: Bool
+    public let enable: Int
     public let startHour: Int
     public let startMinute: Int
     public let endHour: Int
     public let endMinute: Int
     public let workMode: WorkMode
     public let minSocOnGrid: Int
-    public let fdsoc: Int
-    public let fdpwr: Int?
+    public let fdSoc: Int
+    public let fdPwr: Int?
 
     enum CodingKeys: CodingKey {
         case enable
@@ -224,27 +224,27 @@ public struct ScheduleDetailResponse: Decodable {
         case startMinute
         case endHour
         case endMinute
-        case fdpwr
+        case fdPwr
         case workMode
-        case fdsoc
+        case fdSoc
         case minSocOnGrid
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.enable = try container.decode(Bool.self, forKey: .enable)
+        self.enable = try container.decode(Int.self, forKey: .enable)
         self.startHour = try container.decode(Int.self, forKey: .startHour)
         self.startMinute = try container.decode(Int.self, forKey: .startMinute)
         self.endHour = try container.decode(Int.self, forKey: .endHour)
         self.endMinute = try container.decode(Int.self, forKey: .endMinute)
-        self.fdpwr = try container.decodeIfPresent(Int.self, forKey: .fdpwr)
+        self.fdPwr = try container.decodeIfPresent(Int.self, forKey: .fdPwr)
         let workMode = try container.decode(String.self, forKey: .workMode)
         self.workMode = WorkMode(rawValue: workMode.lowercased()) ?? .SelfUse
-        self.fdsoc = try container.decode(Int.self, forKey: .fdsoc)
+        self.fdSoc = try container.decode(Int.self, forKey: .fdSoc)
         self.minSocOnGrid = try container.decode(Int.self, forKey: .minSocOnGrid)
     }
 
-    public init(enable: Bool, startHour: Int, startMinute: Int, endHour: Int, endMinute: Int, workMode: WorkMode, minSocOnGrid: Int, fdsoc: Int, fdpwr: Int?) {
+    public init(enable: Int, startHour: Int, startMinute: Int, endHour: Int, endMinute: Int, workMode: WorkMode, minSocOnGrid: Int, fdSoc: Int, fdPwr: Int?) {
         self.enable = enable
         self.startHour = startHour
         self.startMinute = startMinute
@@ -252,12 +252,12 @@ public struct ScheduleDetailResponse: Decodable {
         self.endMinute = endMinute
         self.workMode = workMode
         self.minSocOnGrid = minSocOnGrid
-        self.fdsoc = fdsoc
-        self.fdpwr = fdpwr
+        self.fdSoc = fdSoc
+        self.fdPwr = fdPwr
     }
 }
 
 public struct ScheduleDetailListResponse: Decodable {
-    public let enable: Bool
+    public let enable: Int
     public let groups: [ScheduleDetailResponse]
 }

@@ -186,29 +186,29 @@ public class DemoNetworking: FoxESSNetworking {
 
     public func openapi_fetchCurrentSchedule(deviceSN: String) async throws -> ScheduleDetailListResponse {
         ScheduleDetailListResponse(
-            enable: false,
+            enable: 0,
             groups: [
                 ScheduleDetailResponse(
-                    enable: true,
+                    enable: 1,
                     startHour: 15,
                     startMinute: 0,
                     endHour: 17,
                     endMinute: 0,
                     workMode: .ForceCharge,
                     minSocOnGrid: 20,
-                    fdsoc: 100,
-                    fdpwr: 0
+                    fdSoc: 100,
+                    fdPwr: 0
                 ),
                 ScheduleDetailResponse(
-                    enable: true,
+                    enable: 1,
                     startHour: 17,
                     startMinute: 0,
                     endHour: 18,
                     endMinute: 30,
                     workMode: .ForceDischarge,
                     minSocOnGrid: 20,
-                    fdsoc: 20,
-                    fdpwr: 3500
+                    fdSoc: 20,
+                    fdPwr: 3500
                 )
             ]
         )
