@@ -97,11 +97,19 @@ public class NetworkFacade: FoxESSNetworking {
 //        }
 //    }
 
-    public func openapi_fetchSchedulerFlag(deviceSN: String) async throws -> SchedulerFlagResponse {
+    public func openapi_fetchSchedulerFlag(deviceSN: String) async throws -> GetSchedulerFlagResponse {
         if isDemoUser {
             try await fakeNetwork.openapi_fetchSchedulerFlag(deviceSN: deviceSN)
         } else {
             try await network.openapi_fetchSchedulerFlag(deviceSN: deviceSN)
+        }
+    }
+
+    public func openapi_setScheduleFlag(deviceSN: String, enable: Bool) async throws {
+        if isDemoUser {
+            try await fakeNetwork.openapi_setScheduleFlag(deviceSN: deviceSN, enable: enable)
+        } else {
+            try await network.openapi_setScheduleFlag(deviceSN: deviceSN, enable: enable)
         }
     }
 

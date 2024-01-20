@@ -52,8 +52,12 @@ public class NetworkValueCleaner: FoxESSNetworking {
 //        try await network.fetchScheduleModes(deviceID: deviceID)
 //    }
 
-    public func openapi_fetchSchedulerFlag(deviceSN: String) async throws -> SchedulerFlagResponse {
+    public func openapi_fetchSchedulerFlag(deviceSN: String) async throws -> GetSchedulerFlagResponse {
         try await network.openapi_fetchSchedulerFlag(deviceSN: deviceSN)
+    }
+
+    public func openapi_setScheduleFlag(deviceSN: String, enable: Bool) async throws {
+        try await network.openapi_setScheduleFlag(deviceSN: deviceSN, enable: enable)
     }
 
     public func openapi_fetchBatterySettings(deviceSN: String) async throws -> BatterySOCResponse {

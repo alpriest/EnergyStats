@@ -10,15 +10,16 @@ import Foundation
 extension URL {
     static var getOpenSchedulerFlag = URL(string: "https://www.foxesscloud.com/op/v0/device/scheduler/get/flag")!
     static var getOpenCurrentSchedule = URL(string: "https://www.foxesscloud.com/op/v0/device/scheduler/get")!
+    static var setOpenSchedulerFlag = URL(string: "https://www.foxesscloud.com/op/v0/device/scheduler/set/flag")!
 }
 
 public extension Network {
-    func openapi_fetchSchedulerFlag(deviceSN: String) async throws -> SchedulerFlagResponse {
+    func openapi_fetchSchedulerFlag(deviceSN: String) async throws -> GetSchedulerFlagResponse {
         var request = URLRequest(url: URL.getOpenSchedulerFlag)
         request.httpMethod = "POST"
-        request.httpBody = try! JSONEncoder().encode(SchedulerFlagRequest(deviceSN: deviceSN))
+        request.httpBody = try! JSONEncoder().encode(GetSchedulerFlagRequest(deviceSN: deviceSN))
 
-        let result: (SchedulerFlagResponse, Data) = try await fetch(request)
+        let result: (GetSchedulerFlagResponse, Data) = try await fetch(request)
         return result.0
     }
 
@@ -29,5 +30,17 @@ public extension Network {
 
         let result: (ScheduleDetailListResponse, Data) = try await fetch(request)
         return result.0
+    }
+
+    func openapi_setScheduleFlag(deviceSN: String, enable: Bool) async throws {
+        var request = URLRequest(url: URL.setOpenSchedulerFlag)
+        request.httpMethod = "POST"
+        request.httpBody = try! JSONEncoder().encode(SetSchedulerFlagRequest(deviceSN: deviceSN, enable: enable.intValue))
+
+        do {
+            let _: (String, Data) = try await fetch(request)
+        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
+            // Ignore
+        }
     }
 }

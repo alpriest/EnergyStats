@@ -20,7 +20,7 @@ class ScheduleSummaryViewModel: ObservableObject {
     @Published var schedulerEnabled: Bool = false {
         didSet {
             if case .inactive = state {
-                print("AWP", schedulerEnabled)
+                Task { await setSchedulerFlag() }
             }
         }
     }
@@ -108,21 +108,20 @@ class ScheduleSummaryViewModel: ObservableObject {
     }
 
     @MainActor
-    func activate(templateID: String) async {
-//        guard
-//            let deviceSN = config.currentDevice.value?.deviceSN,
-//            state == .inactive
-//        else { return }
-//
-//        do {
-//            self.state = .active("Activating")
-//
-//            try await self.networking.enableScheduleTemplate(deviceSN: deviceSN, templateID: templateID)
-//            await self.load()
-//            self.setState(.inactive)
-//        } catch {
-//            self.setState(.error(error, error.localizedDescription))
-//        }
+    func setSchedulerFlag() async {
+        guard
+            let deviceSN = config.currentDevice.value?.deviceSN,
+            state == .inactive
+        else { return }
+
+        do {
+            self.state = .active("Activating")
+
+            try await self.networking.openapi_setScheduleFlag(deviceSN: deviceSN, enable: schedulerEnabled)
+            self.setState(.inactive)
+        } catch {
+            self.setState(.error(error, error.localizedDescription))
+        }
     }
 
     private func setState(_ state: LoadState) {

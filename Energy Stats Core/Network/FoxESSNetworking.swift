@@ -14,15 +14,15 @@ extension URL {
 public protocol FoxESSNetworking {
     func fetchErrorMessages() async
 
-//    func fetchScheduleModes(deviceID: String) async throws -> [SchedulerModeResponse]
-//    func saveSchedule(deviceSN: String, schedule: Schedule) async throws
-//    func saveScheduleTemplate(deviceSN: String, template: ScheduleTemplate) async throws
-//    func deleteSchedule(deviceSN: String) async throws
-//    func createScheduleTemplate(name: String, description: String) async throws
-//    func fetchScheduleTemplates() async throws -> ScheduleTemplateListResponse
-//    func enableScheduleTemplate(deviceSN: String, templateID: String) async throws
-//    func fetchScheduleTemplate(deviceSN: String, templateID: String) async throws -> ScheduleTemplateResponse
-//    func deleteScheduleTemplate(templateID: String) async throws
+    //    func fetchScheduleModes(deviceID: String) async throws -> [SchedulerModeResponse]
+    //    func saveSchedule(deviceSN: String, schedule: Schedule) async throws
+    //    func saveScheduleTemplate(deviceSN: String, template: ScheduleTemplate) async throws
+    //    func deleteSchedule(deviceSN: String) async throws
+    //    func createScheduleTemplate(name: String, description: String) async throws
+    //    func fetchScheduleTemplates() async throws -> ScheduleTemplateListResponse
+    //    func enableScheduleTemplate(deviceSN: String, templateID: String) async throws
+    //    func fetchScheduleTemplate(deviceSN: String, templateID: String) async throws -> ScheduleTemplateResponse
+    //    func deleteScheduleTemplate(templateID: String) async throws
 
     func openapi_fetchDeviceList() async throws -> [DeviceDetailResponse]
     func openapi_fetchRealData(deviceSN: String, variables: [String]) async throws -> OpenQueryResponse
@@ -34,6 +34,7 @@ public protocol FoxESSNetworking {
     func openapi_fetchBatteryTimes(deviceSN: String) async throws -> [ChargeTime]
     func openapi_setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws
     func openapi_fetchDataLoggers() async throws -> [DataLoggerResponse]
-    func openapi_fetchSchedulerFlag(deviceSN: String) async throws -> SchedulerFlagResponse
+    func openapi_fetchSchedulerFlag(deviceSN: String) async throws -> GetSchedulerFlagResponse
     func openapi_fetchCurrentSchedule(deviceSN: String) async throws -> ScheduleDetailListResponse
+    func openapi_setScheduleFlag(deviceSN: String, enable: Bool) async throws
 }

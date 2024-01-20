@@ -61,8 +61,8 @@ public class DemoNetworking: FoxESSNetworking {
         ]
     }
 
-    public func openapi_fetchSchedulerFlag(deviceSN: String) async throws -> SchedulerFlagResponse {
-        SchedulerFlagResponse(enable: true, support: true)
+    public func openapi_fetchSchedulerFlag(deviceSN: String) async throws -> GetSchedulerFlagResponse {
+        GetSchedulerFlagResponse(enable: true, support: true)
     }
 
     public func openapi_fetchBatterySettings(deviceSN: String) async throws -> BatterySOCResponse {
@@ -212,6 +212,9 @@ public class DemoNetworking: FoxESSNetworking {
                 )
             ]
         )
+    }
+
+    public func openapi_setScheduleFlag(deviceSN: String, enable: Bool) async throws {
     }
 }
 

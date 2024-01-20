@@ -198,13 +198,18 @@ public struct GetCurrentSchedulerRequest: Encodable {
     public let deviceSN: String
 }
 
-public struct SchedulerFlagRequest: Encodable {
+public struct GetSchedulerFlagRequest: Encodable {
     public let deviceSN: String
 }
 
-public struct SchedulerFlagResponse: Decodable {
+public struct GetSchedulerFlagResponse: Decodable {
     public let enable: Bool
     public let support: Bool
+}
+
+public struct SetSchedulerFlagRequest: Encodable {
+    public let deviceSN: String
+    public let enable: Int
 }
 
 public struct ScheduleDetailResponse: Decodable {

@@ -214,6 +214,7 @@
 		41D759FD2B5B0E37002C43A7 /* Network+OpenAPI+Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D759FC2B5B0E37002C43A7 /* Network+OpenAPI+Schedule.swift */; };
 		41D759FE2B5B1768002C43A7 /* EditScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419092292B1DE3D90017CB65 /* EditScheduleView.swift */; };
 		41D759FF2B5B176A002C43A7 /* EditScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C09202B18A98400183603 /* EditScheduleViewModel.swift */; };
+		41D75A012B5C0238002C43A7 /* Bool+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D75A002B5C0238002C43A7 /* Bool+Int.swift */; };
 		41D8402D2AB2E0DE00769E81 /* ErrorMessagesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D8402C2AB2E0DE00769E81 /* ErrorMessagesResponse.swift */; };
 		41DB4F2D2B4940A800DAB5BB /* ConfigManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DB4F2C2B4940A800DAB5BB /* ConfigManaging.swift */; };
 		41DC515A2AE2E9DC00FD348B /* NetworkValueCleaner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DC51592AE2E9DC00FD348B /* NetworkValueCleaner.swift */; };
@@ -570,6 +571,7 @@
 		41D286E42AB352AC00B18FEF /* ParameterGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterGroup.swift; sourceTree = "<group>"; };
 		41D6496B28DB321600A24B41 /* DeviceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceList.swift; sourceTree = "<group>"; };
 		41D759FC2B5B0E37002C43A7 /* Network+OpenAPI+Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+OpenAPI+Schedule.swift"; sourceTree = "<group>"; };
+		41D75A002B5C0238002C43A7 /* Bool+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+Int.swift"; sourceTree = "<group>"; };
 		41D7B12328C86E4000E14144 /* FoxEssCloudParseStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoxEssCloudParseStrategy.swift; sourceTree = "<group>"; };
 		41D8402C2AB2E0DE00769E81 /* ErrorMessagesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessagesResponse.swift; sourceTree = "<group>"; };
 		41DB220E2B1F965C00EC4015 /* EditTemplateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTemplateView.swift; sourceTree = "<group>"; };
@@ -694,6 +696,7 @@
 				41E165BC2B0BE33E00B17590 /* Array+Any.swift */,
 				41495F372B211A75004A51C1 /* AlertContentView.swift */,
 				4155D70C2B28FC920071346A /* Optional+Int.swift */,
+				41D75A002B5C0238002C43A7 /* Bool+Int.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1676,6 +1679,7 @@
 				4103D1D729DB6C51001B0BC8 /* FoxESSNetworking.swift in Sources */,
 				4171854229FFCF2500D18CDD /* String+MD5.swift in Sources */,
 				418024E22AD16D00009A2625 /* String+Currency.swift in Sources */,
+				41D75A012B5C0238002C43A7 /* Bool+Int.swift in Sources */,
 				41009A732B02D852009D853B /* SolcastForecastResponse.swift in Sources */,
 				41E3BEC32B1B5A160051C68B /* AppSettingsPublisherFactory.swift in Sources */,
 				4103D1DC29DB6C6D001B0BC8 /* Config.swift in Sources */,
