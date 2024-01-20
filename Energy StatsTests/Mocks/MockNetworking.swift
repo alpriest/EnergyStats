@@ -46,13 +46,6 @@ class MockNetworking: FoxESSNetworking {
 
     func fetchErrorMessages() async {}
 
-    func fetchDataLoggers() async throws -> [DataLoggerResponse] {
-        PagedDataLoggerListResponse(currentPage: 1, pageSize: 10, total: 1, data: [
-            PagedDataLoggerListResponse.DataLogger(moduleSN: "ABC123DEF456", moduleType: "W2", plantName: "John Doe", version: "3.08", signal: 3, communication: 1),
-            PagedDataLoggerListResponse.DataLogger(moduleSN: "123DEF456ABC", moduleType: "W2", plantName: "Jane Doe", version: "3.08", signal: 1, communication: 0)
-        ])
-    }
-
     private func rawData() throws -> Data {
         guard let url = Bundle(for: type(of: self)).url(forResource: "raw-success", withExtension: "json") else {
             return Data()
@@ -61,33 +54,33 @@ class MockNetworking: FoxESSNetworking {
         return try Data(contentsOf: url)
     }
 
-    func fetchSchedulerFlag(deviceSN: String) async throws -> Energy_Stats_Core.SchedulerFlagResponse {
-        SchedulerFlagResponse(enable: true, support: true)
-    }
-
-    func fetchScheduleModes(deviceID: String) async throws -> [Energy_Stats_Core.SchedulerModeResponse] {
-        []
-    }
-
-    func saveSchedule(deviceSN: String, schedule: Energy_Stats_Core.Schedule) async throws {}
-
-    func saveScheduleTemplate(deviceSN: String, template: Energy_Stats_Core.ScheduleTemplate) async throws {}
-
-    func deleteSchedule(deviceSN: String) async throws {}
-
-    func createScheduleTemplate(name: String, description: String) async throws {}
-
-    func fetchScheduleTemplates() async throws -> Energy_Stats_Core.ScheduleTemplateListResponse {
-        ScheduleTemplateListResponse(data: [])
-    }
-
-    func enableScheduleTemplate(deviceSN: String, templateID: String) async throws {}
-
-    func fetchScheduleTemplate(deviceSN: String, templateID: String) async throws -> Energy_Stats_Core.ScheduleTemplateResponse {
-        ScheduleTemplateResponse(templateName: "", enable: false, pollcy: [], content: "")
-    }
-
-    func deleteScheduleTemplate(templateID: String) async throws {}
+//    func fetchSchedulerFlag(deviceSN: String) async throws -> Energy_Stats_Core.SchedulerFlagResponse {
+//        SchedulerFlagResponse(enable: true, support: true)
+//    }
+//
+//    func fetchScheduleModes(deviceID: String) async throws -> [Energy_Stats_Core.SchedulerModeResponse] {
+//        []
+//    }
+//
+//    func saveSchedule(deviceSN: String, schedule: Energy_Stats_Core.Schedule) async throws {}
+//
+//    func saveScheduleTemplate(deviceSN: String, template: Energy_Stats_Core.ScheduleTemplate) async throws {}
+//
+//    func deleteSchedule(deviceSN: String) async throws {}
+//
+//    func createScheduleTemplate(name: String, description: String) async throws {}
+//
+//    func fetchScheduleTemplates() async throws -> Energy_Stats_Core.ScheduleTemplateListResponse {
+//        ScheduleTemplateListResponse(data: [])
+//    }
+//
+//    func enableScheduleTemplate(deviceSN: String, templateID: String) async throws {}
+//
+//    func fetchScheduleTemplate(deviceSN: String, templateID: String) async throws -> Energy_Stats_Core.ScheduleTemplateResponse {
+//        ScheduleTemplateResponse(templateName: "", enable: false, pollcy: [], content: "")
+//    }
+//
+//    func deleteScheduleTemplate(templateID: String) async throws {}
 
     func openapi_fetchDeviceList() async throws -> [Energy_Stats_Core.DeviceDetailResponse] {
         []
@@ -115,12 +108,25 @@ class MockNetworking: FoxESSNetworking {
 
     func openapi_setBatterySoc(deviceSN: String, minSOCOnGrid: Int, minSOC: Int) async throws {}
 
-    func openapi_fetchBatteryTimes(deviceSN: String) async throws -> Energy_Stats_Core.BatteryTimesResponse {
-        BatteryTimesResponse(times: [
-            ChargeTime(enable: false, startTime: Time(hour: 01, minute: 00), endTime: Time(hour: 01, minute: 30)),
-            ChargeTime(enable: false, startTime: Time(hour: 03, minute: 00), endTime: Time(hour: 03, minute: 30))
-        ])
+    func openapi_setBatteryTimes(deviceSN: String, times: [Energy_Stats_Core.ChargeTime]) async throws {}
+
+    func openapi_fetchBatteryTimes(deviceSN: String) async throws -> [Energy_Stats_Core.ChargeTime] {
+        [ChargeTime(enable: false, startTime: Time(hour: 01, minute: 00), endTime: Time(hour: 01, minute: 30)),
+         ChargeTime(enable: false, startTime: Time(hour: 03, minute: 00), endTime: Time(hour: 03, minute: 30))]
     }
 
-    func openapi_setBatteryTimes(deviceSN: String, times: [Energy_Stats_Core.ChargeTime]) async throws {}
+    func openapi_fetchDataLoggers() async throws -> [Energy_Stats_Core.DataLoggerResponse] {
+        [
+            DataLoggerResponse(moduleSN: "ABC123DEF456", stationID: "John Doe 1", status: .online, signal: 3),
+            DataLoggerResponse(moduleSN: "123DEF456ABC", stationID: "Jane Doe 2", status: .online, signal: 1)
+        ]
+    }
+
+    func openapi_fetchSchedulerFlag(deviceSN: String) async throws -> SchedulerFlagResponse {
+        SchedulerFlagResponse(enable: true, support: true)
+    }
+
+    func openapi_fetchCurrentSchedule(deviceSN: String) async throws -> ScheduleDetailListResponse {
+        ScheduleDetailListResponse(enable: true, groups: [])
+    }
 }

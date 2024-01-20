@@ -20,7 +20,7 @@ class MockKeychainStore: KeychainStoring {
         hashedPassword
     }
 
-    func store(apiKey: String?) throws {
+    func store(apiKey: String?, notifyObservers: Bool) throws {
         self.token = apiKey
     }
 
