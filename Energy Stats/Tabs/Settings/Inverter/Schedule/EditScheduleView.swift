@@ -51,16 +51,20 @@ struct EditScheduleView: View {
                         }.buttonStyle(.borderedProminent)
                     }
                 }
+
+                Toggle(isOn: $viewModel.enabled) {
+                    Text("Enabled")
+                }
             }
 
-//            BottomButtonsView(labels: BottomButtonLabels(left: "Cancel", right: "Activate"),
-//                              onApply: {
-//                                  Task {
-//                                      await viewModel.saveSchedule {
-//                                          presentationMode.wrappedValue.dismiss()
-//                                      }
-//                                  }
-//                              })
+            BottomButtonsView(labels: BottomButtonLabels(left: "Cancel", right: "Save"),
+                              onApply: {
+                                  Task {
+                                      await viewModel.saveSchedule {
+                                          presentationMode.wrappedValue.dismiss()
+                                      }
+                                  }
+                              })
         }
         .navigationTitle("Edit schedule")
         .navigationBarTitleDisplayMode(.inline)

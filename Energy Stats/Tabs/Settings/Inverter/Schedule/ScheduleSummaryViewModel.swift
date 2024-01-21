@@ -75,7 +75,7 @@ class ScheduleSummaryViewModel: ObservableObject {
             let scheduleResponse = try await networking.openapi_fetchCurrentSchedule(deviceSN: deviceSN)
             schedulerEnabled = scheduleResponse.enable.boolValue
 
-            self.schedule = Schedule(phases: scheduleResponse.groups.compactMap { $0.toSchedulePhase() })
+            self.schedule = Schedule(enable: scheduleResponse.enable.boolValue, phases: scheduleResponse.groups.compactMap { $0.toSchedulePhase() })
             self.setState(.inactive)
         } catch {
             self.setState(.error(error, error.localizedDescription))

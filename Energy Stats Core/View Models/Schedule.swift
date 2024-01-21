@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-//public struct ScheduleTemplateSummary: Identifiable {
+// public struct ScheduleTemplateSummary: Identifiable {
 //    public let id: String
 //    public let name: String
 //    public let enabled: Bool
@@ -17,9 +17,9 @@ import SwiftUI
 //        self.name = name
 //        self.enabled = enabled
 //    }
-//}
+// }
 //
-//public struct ScheduleTemplate: Identifiable {
+// public struct ScheduleTemplate: Identifiable {
 //    public let id: String
 //    public let phases: [SchedulePhase]
 //
@@ -27,15 +27,21 @@ import SwiftUI
 //        self.id = id
 //        self.phases = phases
 //    }
-//}
+// }
 
 public struct Schedule: Hashable, Equatable {
     public let phases: [SchedulePhase]
+    public let enable: Bool
 //    public let templateID: String?
 
-    public init(phases: [SchedulePhase]) {
+    public init(enable: Bool, phases: [SchedulePhase]) {
+        self.enable = enable
         self.phases = phases
 //        self.templateID = templateID
+    }
+
+    public func copy(enable: Bool) -> Schedule {
+        Schedule(enable: enable, phases: phases)
     }
 }
 
