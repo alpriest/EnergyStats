@@ -12,37 +12,31 @@ import SwiftUI
 enum SchedulePhaseHelper {
     static func addNewTimePeriod(to schedule: Schedule, device: Device?) -> Schedule {
         return Schedule(
-            name: schedule.name,
-            phases: schedule.phases + [SchedulePhase(mode: .SelfUse, device: device)].sorted { $0.start < $1.start },
-            templateID: schedule.templateID
+            phases: schedule.phases + [SchedulePhase(mode: .SelfUse, device: device)].sorted { $0.start < $1.start }
         )
     }
 
     static func updated(phase updatedPhase: SchedulePhase, on schedule: Schedule) -> Schedule {
         return Schedule(
-            name: schedule.name,
             phases: schedule.phases.map {
                 if $0.id == updatedPhase.id {
                     return updatedPhase
                 } else {
                     return $0
                 }
-            },
-            templateID: schedule.templateID
+            }
         )
     }
 
     static func deleted(phaseID id: String, on schedule: Schedule) -> Schedule {
         return Schedule(
-            name: schedule.name,
             phases: schedule.phases.compactMap {
                 if $0.id == id {
                     return nil
                 } else {
                     return $0
                 }
-            },
-            templateID: schedule.templateID
+            }
         )
     }
 
@@ -51,9 +45,7 @@ enum SchedulePhaseHelper {
         let newPhases = schedule.phases + createPhasesInGaps(on: schedule, mode: mode, soc: soc)
 
         return Schedule(
-            name: schedule.name,
-            phases: newPhases.sorted { $0.start < $1.start },
-            templateID: schedule.templateID
+            phases: newPhases.sorted { $0.start < $1.start }
         )
     }
 

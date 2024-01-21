@@ -9,7 +9,7 @@ import AppIntents
 import Foundation
 import SwiftUI
 
-public enum WorkMode: String, CaseIterable, Decodable, RawRepresentable {
+public enum WorkMode: String, CaseIterable, Codable, RawRepresentable {
     case SelfUse
     case FeedIn
     case Backup

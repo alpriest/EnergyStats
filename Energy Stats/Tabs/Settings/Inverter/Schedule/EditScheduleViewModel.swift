@@ -33,8 +33,7 @@ class EditScheduleViewModel: ObservableObject {
 
         Task { [self] in
             do {
-                // TODO:
-//                try await networking.saveSchedule(deviceSN: deviceSN, schedule: schedule)
+                try await networking.openapi_activateSchedule(deviceSN: deviceSN, schedule: schedule)
 
                 Task { @MainActor in
                     self.state = .inactive
@@ -51,29 +50,32 @@ class EditScheduleViewModel: ObservableObject {
         }
     }
 
-    func deleteSchedule(onCompletion: @escaping () -> Void) {
-        guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
+//    func deleteSchedule(onCompletion: @escaping () -> Void) {
+//        guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
+//
+//        setState(.active("Saving"))
+//
+//        Task { [self] in
+//            do {
+//                try await networking.openapi_activateSchedule(deviceSN: deviceSN, schedule: makeEmptySchedule())
+//
+//                Task { @MainActor in
+//                    self.state = .inactive
+//                    alertContent = AlertContent(
+//                        title: "Success",
+//                        message: "inverter_charge_schedule_deleted",
+//                        onDismiss: onCompletion
+//                    )
+//                }
+//            } catch {
+//                self.state = .inactive
+//                alertContent = AlertContent(title: "error_title", message: LocalizedStringKey(stringLiteral: error.localizedDescription))
+//            }
+//        }
+//    }
 
-        setState(.active("Saving"))
-
-        Task { [self] in
-            do {
-//                try await networking.deleteSchedule(deviceSN: deviceSN)
-                // TODO: send empty schedule
-
-                Task { @MainActor in
-                    self.state = .inactive
-                    alertContent = AlertContent(
-                        title: "Success",
-                        message: "inverter_charge_schedule_deleted",
-                        onDismiss: onCompletion
-                    )
-                }
-            } catch {
-                self.state = .inactive
-                alertContent = AlertContent(title: "error_title", message: LocalizedStringKey(stringLiteral: error.localizedDescription))
-            }
-        }
+    private func makeEmptySchedule() -> Schedule {
+        Schedule(phases: [])
     }
 
     func autoFillScheduleGaps() {

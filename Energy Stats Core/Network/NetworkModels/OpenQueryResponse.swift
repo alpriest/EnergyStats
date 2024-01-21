@@ -212,7 +212,7 @@ public struct SetSchedulerFlagRequest: Encodable {
     public let enable: Int
 }
 
-public struct SchedulePhaseResponse: Decodable {
+public struct SchedulePhaseResponse: Codable {
     public let enable: Int
     public let startHour: Int
     public let startMinute: Int
@@ -222,31 +222,6 @@ public struct SchedulePhaseResponse: Decodable {
     public let minSocOnGrid: Int
     public let fdSoc: Int
     public let fdPwr: Int?
-
-    enum CodingKeys: CodingKey {
-        case enable
-        case startHour
-        case startMinute
-        case endHour
-        case endMinute
-        case fdPwr
-        case workMode
-        case fdSoc
-        case minSocOnGrid
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.enable = try container.decode(Int.self, forKey: .enable)
-        self.startHour = try container.decode(Int.self, forKey: .startHour)
-        self.startMinute = try container.decode(Int.self, forKey: .startMinute)
-        self.endHour = try container.decode(Int.self, forKey: .endHour)
-        self.endMinute = try container.decode(Int.self, forKey: .endMinute)
-        self.fdPwr = try container.decodeIfPresent(Int.self, forKey: .fdPwr)
-        self.workMode = try container.decode(WorkMode.self, forKey: .workMode)
-        self.fdSoc = try container.decode(Int.self, forKey: .fdSoc)
-        self.minSocOnGrid = try container.decode(Int.self, forKey: .minSocOnGrid)
-    }
 
     public init(enable: Int, startHour: Int, startMinute: Int, endHour: Int, endMinute: Int, workMode: WorkMode, minSocOnGrid: Int, fdSoc: Int, fdPwr: Int?) {
         self.enable = enable
@@ -261,7 +236,12 @@ public struct SchedulePhaseResponse: Decodable {
     }
 }
 
-public struct ScheduleResponse: Decodable {
+public struct ScheduleResponse: Codable {
     public let enable: Int
+    public let groups: [SchedulePhaseResponse]
+}
+
+public struct SetCurrentSchedulerRequest: Codable {
+    public let deviceSN: String
     public let groups: [SchedulePhaseResponse]
 }

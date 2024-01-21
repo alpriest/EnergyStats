@@ -12,13 +12,11 @@ struct EditScheduleView: View {
     @StateObject private var viewModel: EditScheduleViewModel
     @State private var presentConfirmation = false
     @Environment(\.presentationMode) var presentationMode
-    private let allowDelete: Bool
 
     init(
         networking: FoxESSNetworking,
         config: ConfigManaging,
-        schedule: Schedule,
-        allowDelete: Bool
+        schedule: Schedule
     ) {
         _viewModel = StateObject(
             wrappedValue: EditScheduleViewModel(
@@ -27,7 +25,6 @@ struct EditScheduleView: View {
                 schedule: schedule
             )
         )
-        self.allowDelete = allowDelete
     }
 
     var body: some View {
@@ -52,41 +49,18 @@ struct EditScheduleView: View {
                         } label: {
                             Text("Autofill gaps")
                         }.buttonStyle(.borderedProminent)
-
-                        if allowDelete {
-                            Button(role: .destructive) {
-                                presentConfirmation = true
-                            } label: {
-                                Text("Delete schedule")
-                            }
-                            .buttonStyle(.bordered)
-                            .confirmationDialog("Are you sure you want to delete this schedule?",
-                                                isPresented: $presentConfirmation,
-                                                titleVisibility: .visible)
-                            {
-                                Button("Delete", role: .destructive) {
-                                    viewModel.deleteSchedule {
-                                        presentationMode.wrappedValue.dismiss()
-                                    }
-                                }
-
-                                Button("Cancel", role: .cancel) {
-                                    presentConfirmation = false
-                                }
-                            }
-                        }
                     }
                 }
             }
 
-            BottomButtonsView(labels: BottomButtonLabels(left: "Cancel", right: "Activate"),
-                              onApply: {
-                                  Task {
-                                      await viewModel.saveSchedule {
-                                          presentationMode.wrappedValue.dismiss()
-                                      }
-                                  }
-                              })
+//            BottomButtonsView(labels: BottomButtonLabels(left: "Cancel", right: "Activate"),
+//                              onApply: {
+//                                  Task {
+//                                      await viewModel.saveSchedule {
+//                                          presentationMode.wrappedValue.dismiss()
+//                                      }
+//                                  }
+//                              })
         }
         .navigationTitle("Edit schedule")
         .navigationBarTitleDisplayMode(.inline)
@@ -100,8 +74,7 @@ struct EditScheduleView: View {
         EditScheduleView(
             networking: DemoNetworking(),
             config: PreviewConfigManager(),
-            schedule: Schedule.preview(),
-            allowDelete: true
+            schedule: Schedule.preview()
         )
     }
 }

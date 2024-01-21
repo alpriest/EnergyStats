@@ -228,6 +228,18 @@ public class NetworkFacade: FoxESSNetworking {
             return try await network.openapi_fetchCurrentSchedule(deviceSN: deviceSN)
         }
     }
+
+    public func openapi_activateSchedule(deviceSN: String, schedule: Schedule) async throws {
+        if isDemoUser {
+            return try await network.openapi_activateSchedule(deviceSN: deviceSN, schedule: schedule)
+        } else {
+            defer {
+                throttler.didInvoke(method: #function)
+            }
+            try await throttler.throttle(method: #function)
+            return try await network.openapi_activateSchedule(deviceSN: deviceSN, schedule: schedule)
+        }
+    }
 }
 
 class ThrottleManager {

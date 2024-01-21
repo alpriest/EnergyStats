@@ -164,6 +164,10 @@ public class NetworkCache: FoxESSNetworking {
     public func openapi_fetchCurrentSchedule(deviceSN: String) async throws -> ScheduleResponse {
         try await network.openapi_fetchCurrentSchedule(deviceSN: deviceSN)
     }
+
+    public func openapi_activateSchedule(deviceSN: String, schedule: Schedule) async throws {
+        try await network.openapi_activateSchedule(deviceSN: deviceSN, schedule: schedule)
+    }
 }
 
 private extension NetworkCache {

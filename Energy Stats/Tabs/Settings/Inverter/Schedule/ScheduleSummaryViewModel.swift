@@ -13,7 +13,7 @@ class ScheduleSummaryViewModel: ObservableObject {
     let networking: FoxESSNetworking
     let config: ConfigManaging
     @Published var state: LoadState = .inactive
-    @Published var templates: [ScheduleTemplateSummary] = []
+//    @Published var templates: [ScheduleTemplateSummary] = []
     @Published var alertContent: AlertContent?
     @Published var schedule: Schedule?
     @Published var schedulerEnabled: Bool = false {
@@ -75,7 +75,7 @@ class ScheduleSummaryViewModel: ObservableObject {
             let scheduleResponse = try await networking.openapi_fetchCurrentSchedule(deviceSN: deviceSN)
             schedulerEnabled = scheduleResponse.enable.boolValue
 
-            self.schedule = Schedule(name: "", phases: scheduleResponse.groups.compactMap { $0.toSchedulePhase() })
+            self.schedule = Schedule(phases: scheduleResponse.groups.compactMap { $0.toSchedulePhase() })
             self.setState(.inactive)
         } catch {
             self.setState(.error(error, error.localizedDescription))

@@ -214,8 +214,8 @@ public class DemoNetworking: FoxESSNetworking {
         )
     }
 
-    public func openapi_setScheduleFlag(deviceSN: String, enable: Bool) async throws {
-    }
+    public func openapi_setScheduleFlag(deviceSN: String, enable: Bool) async throws {}
+    public func openapi_activateSchedule(deviceSN: String, schedule: Schedule) async throws {}
 }
 
 public class MockConfig: Config {

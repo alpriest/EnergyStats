@@ -58,8 +58,7 @@ struct ScheduleSummaryView: View {
                                                EditScheduleView(
                                                    networking: networking,
                                                    config: config,
-                                                   schedule: schedule,
-                                                   allowDelete: true
+                                                   schedule: schedule
                                                )
                                            },
                                            label: {
@@ -74,8 +73,7 @@ struct ScheduleSummaryView: View {
                             EditScheduleView(
                                 networking: networking,
                                 config: config,
-                                schedule: schedule,
-                                allowDelete: false
+                                schedule: schedule
                             )
                         }, label: {
                             Text("Create a schedule")

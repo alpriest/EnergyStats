@@ -7,37 +7,35 @@
 
 import SwiftUI
 
-public struct ScheduleTemplateSummary: Identifiable {
-    public let id: String
-    public let name: String
-    public let enabled: Bool
-
-    public init(id: String, name: String, enabled: Bool) {
-        self.id = id
-        self.name = name
-        self.enabled = enabled
-    }
-}
-
-public struct ScheduleTemplate: Identifiable {
-    public let id: String
-    public let phases: [SchedulePhase]
-
-    public init(id: String, phases: [SchedulePhase]) {
-        self.id = id
-        self.phases = phases
-    }
-}
+//public struct ScheduleTemplateSummary: Identifiable {
+//    public let id: String
+//    public let name: String
+//    public let enabled: Bool
+//
+//    public init(id: String, name: String, enabled: Bool) {
+//        self.id = id
+//        self.name = name
+//        self.enabled = enabled
+//    }
+//}
+//
+//public struct ScheduleTemplate: Identifiable {
+//    public let id: String
+//    public let phases: [SchedulePhase]
+//
+//    public init(id: String, phases: [SchedulePhase]) {
+//        self.id = id
+//        self.phases = phases
+//    }
+//}
 
 public struct Schedule: Hashable, Equatable {
-    public let name: String
     public let phases: [SchedulePhase]
-    public let templateID: String?
+//    public let templateID: String?
 
-    public init(name: String?, phases: [SchedulePhase], templateID: String? = nil) {
-        self.name = name ?? "Schedule"
+    public init(phases: [SchedulePhase]) {
         self.phases = phases
-        self.templateID = templateID
+//        self.templateID = templateID
     }
 }
 

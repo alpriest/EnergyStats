@@ -11,6 +11,7 @@ extension URL {
     static var getOpenSchedulerFlag = URL(string: "https://www.foxesscloud.com/op/v0/device/scheduler/get/flag")!
     static var getOpenCurrentSchedule = URL(string: "https://www.foxesscloud.com/op/v0/device/scheduler/get")!
     static var setOpenSchedulerFlag = URL(string: "https://www.foxesscloud.com/op/v0/device/scheduler/set/flag")!
+    static var setOpenCurrentSchedule = URL(string: "https://www.foxesscloud.com/op/v0/device/scheduler/enable")!
 }
 
 public extension Network {
@@ -42,5 +43,33 @@ public extension Network {
         } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
             // Ignore
         }
+    }
+
+    func openapi_activateSchedule(deviceSN: String, schedule: Schedule) async throws {
+        var request = URLRequest(url: URL.setOpenCurrentSchedule)
+        request.httpMethod = "POST"
+        request.httpBody = try! JSONEncoder().encode(SetCurrentSchedulerRequest(deviceSN: deviceSN, groups: schedule.phases.map { $0.toPhaseResponse() }))
+
+        do {
+            let _: (String, Data) = try await fetch(request)
+        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
+            // Ignore
+        }
+    }
+}
+
+extension SchedulePhase {
+    func toPhaseResponse() -> SchedulePhaseResponse {
+        SchedulePhaseResponse(
+            enable: true.intValue,
+            startHour: start.hour,
+            startMinute: start.minute,
+            endHour: end.hour,
+            endMinute: end.minute,
+            workMode: mode,
+            minSocOnGrid: minSocOnGrid,
+            fdSoc: forceDischargeSOC,
+            fdPwr: forceDischargePower
+        )
     }
 }

@@ -17,13 +17,6 @@ struct ScheduleDetailView: View {
     var body: some View {
         Section {
             VStack(alignment: .leading) {
-                if !schedule.name.isEmpty {
-                    Text(schedule.name)
-                        .font(.title2)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.bottom)
-                }
-
                 TimePeriodBarView(phases: schedule.phases)
                     .padding(.bottom, 22)
             }

@@ -1468,6 +1468,7 @@
       }
     },
     "Activate" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1924,6 +1925,7 @@
       }
     },
     "Are you sure you want to delete this schedule?" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4033,6 +4035,7 @@
       }
     },
     "Delete schedule" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -6566,6 +6569,7 @@
       }
     },
     "inverter_charge_schedule_deleted" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

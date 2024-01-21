@@ -37,4 +37,5 @@ public protocol FoxESSNetworking {
     func openapi_fetchSchedulerFlag(deviceSN: String) async throws -> GetSchedulerFlagResponse
     func openapi_fetchCurrentSchedule(deviceSN: String) async throws -> ScheduleResponse
     func openapi_setScheduleFlag(deviceSN: String, enable: Bool) async throws
+    func openapi_activateSchedule(deviceSN: String, schedule: Schedule) async throws
 }
