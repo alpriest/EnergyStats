@@ -41,6 +41,7 @@ struct ErrorAlertView: View {
     @EnvironmentObject var userManager: UserManager
     @State private var buttonWidth: CGFloat = .zero
     @State private var showingFatalError = false
+    @State private var showingUpgradeRequired = false
 
     var body: some View {
         VStack {
@@ -108,6 +109,7 @@ struct ErrorAlertView: View {
             }
         }
         .sheet(isPresented: $showingFatalError, content: { UnsupportedErrorView() })
+        .sheet(isPresented: $showingUpgradeRequired, content: { UpgradeRequiredView(userManager: userManager) })
     }
 
     private func rectReader(_ binding: Binding<CGFloat>) -> some View {
