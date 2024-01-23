@@ -135,10 +135,8 @@ public class NetworkCache: FoxESSNetworking {
         let key = makeKey(base: #function, arguments: deviceSN, variables.joined(separator: "_"), String(start.timeIntervalSince1970), String(end.timeIntervalSince1970))
 
         if let item = cache[key], let cached = item.item as? OpenHistoryResponse, item.isFresherThan(interval: shortCacheDurationInSeconds) {
-            print("AWP", "Return cached")
             return cached
         } else {
-            print("AWP", "Fetch fresh")
             let fresh = try await network.openapi_fetchHistory(deviceSN: deviceSN, variables: variables, start: start, end: end)
             store(key: key, value: CachedItem(fresh))
             return fresh
@@ -150,7 +148,7 @@ public class NetworkCache: FoxESSNetworking {
     }
 
     public func openapi_fetchReport(deviceSN: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [OpenReportResponse] {
-        let key = makeKey(base: #function, arguments: deviceSN, variables.map { $0.networkTitle }.joined(separator: "_"))
+        let key = makeKey(base: #function, arguments: deviceSN, variables.map { $0.networkTitle }.joined(separator: "_"), queryDate.toString(), reportType.rawValue)
 
         if let item = cache[key], let cached = item.item as? [OpenReportResponse], item.isFresherThan(interval: shortCacheDurationInSeconds) {
             return cached
@@ -179,5 +177,11 @@ private extension NetworkCache {
         serialiserQueue.sync {
             cache[key] = value
         }
+    }
+}
+
+extension QueryDate {
+    func toString() -> String {
+        "day_\(day ?? 0)_month_\(month ?? 0)_year_\(year)"
     }
 }

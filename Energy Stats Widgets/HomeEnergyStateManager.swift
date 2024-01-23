@@ -45,21 +45,35 @@ class HomeEnergyStateManager {
         let appSettingsPublisher = AppSettingsPublisherFactory.make(from: config)
         let configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher)
 
-        guard let deviceID = config.selectedDeviceSN else {
+        guard let deviceSN = config.selectedDeviceSN else {
             throw ConfigManager.NoDeviceFoundError()
         }
         guard configManager.hasBattery else {
             throw ConfigManager.NoBattery()
         }
-        // TODO: Fetch from real query
-//        let battery = try await network.fetchBattery(deviceID: deviceID)
-//        let calculator = BatteryCapacityCalculator(capacityW: configManager.batteryCapacityW,
-//                                                   minimumSOC: configManager.minSOC,
-//                                                   bundle: Bundle(for: BundleLocator.self))
-//        let viewModel = BatteryViewModel(from: battery)
-//        let chargeStatusDescription = calculator.batteryChargeStatusDescription(batteryChargePowerkWH: viewModel.chargePower, batteryStateOfCharge: viewModel.chargeLevel)
-//
-//        try update(soc: battery.soc, chargeStatusDescription: chargeStatusDescription)
+
+        let real = try await network.openapi_fetchRealData(
+            deviceSN: deviceSN,
+            variables: ["SoC",
+                        "batChargePower",
+                        "batDischargePower",
+                        "SoC",
+                        "batTemperature",
+                        "ResidualEnergy"]
+        )
+        let soc = Int(real.datas.currentValue(for: "SoC"))
+        let calculator = BatteryCapacityCalculator(capacityW: configManager.batteryCapacityW,
+                                                   minimumSOC: configManager.minSOC,
+                                                   bundle: Bundle(for: BundleLocator.self))
+        let viewModel = BatteryViewModel(
+            power: real.datas.currentValue(for: "batChargePower") - (0 - real.datas.currentValue(for: "batDischargePower")),
+            soc: Int(real.datas.currentValue(for: "SoC")),
+            residual: real.datas.currentValue(for: "ResidualEnergy") * 10.0,
+            temperature: real.datas.currentValue(for: "batTemperature")
+        )
+        let chargeStatusDescription = calculator.batteryChargeStatusDescription(batteryChargePowerkWH: viewModel.chargePower, batteryStateOfCharge: viewModel.chargeLevel)
+
+        try update(soc: soc, chargeStatusDescription: chargeStatusDescription)
     }
 
     @MainActor

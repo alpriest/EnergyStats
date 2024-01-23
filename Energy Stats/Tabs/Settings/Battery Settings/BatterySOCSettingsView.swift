@@ -66,7 +66,7 @@ struct BatterySOCSettingsView: View {
         }
         .navigationTitle("Configure Battery Charge Levels")
         .navigationBarTitleDisplayMode(.inline)
-        .loadable($viewModel.state, retry: { viewModel.load() })
+        .loadable(viewModel.state, retry: { viewModel.load() })
         .alert(alertContent: $viewModel.alertContent)
     }
 }

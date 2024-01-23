@@ -68,7 +68,7 @@ struct EditScheduleView: View {
         }
         .navigationTitle("Edit schedule")
         .navigationBarTitleDisplayMode(.inline)
-        .loadable($viewModel.state, allowRetry: false, retry: { viewModel.unused() })
+        .loadable(viewModel.state, allowRetry: false, retry: { viewModel.unused() })
         .alert(alertContent: $viewModel.alertContent)
     }
 }

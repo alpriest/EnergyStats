@@ -20,14 +20,13 @@ struct CheckBatteryChargeLevelIntent: AppIntent {
         let store = KeychainStore()
         let network = Network(credentials: store, store: InMemoryLoggingNetworkStore())
         let config = UserDefaultsConfig()
-        guard let deviceID = config.selectedDeviceSN else {
+        guard let deviceSN = config.selectedDeviceSN else {
             throw ConfigManager.NoDeviceFoundError()
         }
-        // TODO: Fetch from real query
-//        let battery = try await network.fetchBattery(deviceID: deviceID)
+        let real = try await network.openapi_fetchRealData(deviceSN: deviceSN, variables: ["SoC"])
+        let soc = Int(real.datas.currentValue(for: "SoC"))
 
-//        return .result(value: battery.soc, dialog: IntentDialog(stringLiteral: "\(battery.soc)%"))
-        return .result(value: 0, dialog: IntentDialog(stringLiteral: "\(0)%"))
+        return .result(value: soc, dialog: IntentDialog(stringLiteral: "\(soc)%"))
     }
 }
 

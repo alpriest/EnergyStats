@@ -70,7 +70,7 @@ struct InverterWorkModeView: View {
 
             BottomButtonsView { viewModel.save() }
         }
-        .loadable($viewModel.state) {
+        .loadable(viewModel.state) {
             viewModel.load()
         }
         .alert(alertContent: $viewModel.alertContent)

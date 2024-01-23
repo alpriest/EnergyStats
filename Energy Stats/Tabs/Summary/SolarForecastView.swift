@@ -81,7 +81,7 @@ struct SolarForecastView: View {
                 }
             }
         }
-        .loadable($viewModel.state, retry: { viewModel.load() })
+        .loadable(viewModel.state, retry: { viewModel.load() })
         .onAppear {
             self.viewModel.load()
         }

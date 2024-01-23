@@ -57,6 +57,7 @@ struct APIKeyLoginView: View {
             }
         }
         .padding()
+        .loadable(userManager.state, retry: { Task { await userManager.login(apiKey: apiKey) } })
     }
 }
 

@@ -27,7 +27,7 @@ enum LoadState: Equatable {
 }
 
 struct LoadStateView: ViewModifier {
-    @Binding var loadState: LoadState
+    let loadState: LoadState
     var allowRetry: Bool
     let retry: () -> Void
 
@@ -47,7 +47,7 @@ struct LoadStateView: ViewModifier {
 }
 
 extension View {
-    func loadable(_ state: Binding<LoadState>, allowRetry: Bool = true, retry: @escaping () -> Void) -> some View {
+    func loadable(_ state: LoadState, allowRetry: Bool = true, retry: @escaping () -> Void) -> some View {
         modifier(LoadStateView(loadState: state, allowRetry: allowRetry, retry: retry))
     }
 }
@@ -55,9 +55,9 @@ extension View {
 struct LoadState_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            Text(verbatim: "Hello").loadable(.constant(.active("Loading")), retry: {})
-            Text(verbatim: "Hello").loadable(.constant(.error(nil, "Something went wrong")), retry: {})
-            Text(verbatim: "Hello").loadable(.constant(.inactive), retry: {})
+            Text(verbatim: "Hello").loadable(.active("Loading"), retry: {})
+            Text(verbatim: "Hello").loadable(.error(nil, "Something went wrong"), retry: {})
+            Text(verbatim: "Hello").loadable(.inactive, retry: {})
         }
         .environment(\.locale, .init(identifier: "de"))
     }

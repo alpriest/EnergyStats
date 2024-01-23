@@ -112,7 +112,7 @@ struct ScheduleSummaryView: View {
 //                }
             }
         }
-        .loadable($viewModel.state, retry: { Task { await viewModel.load() } })
+        .loadable(viewModel.state, retry: { Task { await viewModel.load() } })
         .alert(alertContent: $viewModel.alertContent)
     }
 }
