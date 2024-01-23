@@ -41,8 +41,16 @@ struct ParameterGraphValue: Identifiable {
 
     init(date: Date, queryDate: QueryDate, value: Double, variable: Variable) {
         self.date = date
-        self.value = value
-        self.type = variable
+
+        // Rescale values that match 10Wh to kWh
+        switch variable.unit {
+        case "10Wh":
+            self.value = value / 100.0
+            self.type = variable.copy(unit: "kWh")
+        default:
+            self.value = value
+            self.type = variable
+        }
     }
 
     func formatted() -> String {

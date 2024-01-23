@@ -21,7 +21,7 @@
 		4103D1D829DB6C51001B0BC8 /* NetworkFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41777F1428F49C61009944FF /* NetworkFacade.swift */; };
 		4103D1D929DB6C6D001B0BC8 /* ReportVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4103F82F2922BFBA00567B1C /* ReportVariable.swift */; };
 		4103D1DA29DB6C6D001B0BC8 /* DeviceFirmwareVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41626CD129D96AD9003FEB00 /* DeviceFirmwareVersion.swift */; };
-		4103D1DB29DB6C6D001B0BC8 /* RawVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4106A92C28CFCD960009DA28 /* RawVariable.swift */; };
+		4103D1DB29DB6C6D001B0BC8 /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4106A92C28CFCD960009DA28 /* Variable.swift */; };
 		4103D1DC29DB6C6D001B0BC8 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140145D28C70D1400EA5BA1 /* Config.swift */; };
 		4103D1DD29DB6C8C001B0BC8 /* report-day.json in Resources */ = {isa = PBXBuildFile; fileRef = 41F8D8F6292D7650005E2D18 /* report-day.json */; };
 		4103D1DE29DB6C8C001B0BC8 /* raw-f3000-deviceid.json in Resources */ = {isa = PBXBuildFile; fileRef = 41AED86928CDCD94009C6517 /* raw-f3000-deviceid.json */; };
@@ -80,7 +80,6 @@
 		4130364B29B8BE7F006B5CE9 /* InverterChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4130364A29B8BE7F006B5CE9 /* InverterChoiceView.swift */; };
 		4131AF4B2B5288CF00836B77 /* Network+OpenAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4131AF4A2B5288CF00836B77 /* Network+OpenAPI.swift */; };
 		4131AF4D2B5288F400836B77 /* OpenQueryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4131AF4C2B5288F400836B77 /* OpenQueryResponse.swift */; };
-		4131AF4F2B52A37F00836B77 /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4131AF4E2B52A37F00836B77 /* Variable.swift */; };
 		4134ACC42A88A1A800CB4BA8 /* InverterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4134ACC32A88A1A800CB4BA8 /* InverterView.swift */; };
 		413B7A312A4A390C00562A68 /* SelfSufficiencyCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413B7A302A4A390C00562A68 /* SelfSufficiencyCalculator.swift */; };
 		413B7A3A2A4A397000562A68 /* Energy_Stats_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; platformFilter = ios; };
@@ -367,7 +366,7 @@
 		4103D1E029DB6CB9001B0BC8 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
 		4103F82F2922BFBA00567B1C /* ReportVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportVariable.swift; sourceTree = "<group>"; };
 		410484C72AD49D95007F68C0 /* CT2-icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CT2-icon.swift"; sourceTree = "<group>"; };
-		4106A92C28CFCD960009DA28 /* RawVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawVariable.swift; sourceTree = "<group>"; };
+		4106A92C28CFCD960009DA28 /* Variable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
 		4107446028C9EF6B006D5D7D /* LoadedPowerFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadedPowerFlowView.swift; sourceTree = "<group>"; };
 		4107446228CA1C5D006D5D7D /* PowerFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerFlowView.swift; sourceTree = "<group>"; };
 		4107446428CA1D76006D5D7D /* FlowingLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowingLine.swift; sourceTree = "<group>"; };
@@ -413,7 +412,6 @@
 		4130364A29B8BE7F006B5CE9 /* InverterChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterChoiceView.swift; sourceTree = "<group>"; };
 		4131AF4A2B5288CF00836B77 /* Network+OpenAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+OpenAPI.swift"; sourceTree = "<group>"; };
 		4131AF4C2B5288F400836B77 /* OpenQueryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenQueryResponse.swift; sourceTree = "<group>"; };
-		4131AF4E2B52A37F00836B77 /* Variable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
 		41339C7328CC7BA50062B976 /* KeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStore.swift; sourceTree = "<group>"; };
 		4134ACC32A88A1A800CB4BA8 /* InverterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterView.swift; sourceTree = "<group>"; };
 		413B7A302A4A390C00562A68 /* SelfSufficiencyCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSufficiencyCalculator.swift; sourceTree = "<group>"; };
@@ -933,7 +931,7 @@
 			isa = PBXGroup;
 			children = (
 				4140145D28C70D1400EA5BA1 /* Config.swift */,
-				4106A92C28CFCD960009DA28 /* RawVariable.swift */,
+				4106A92C28CFCD960009DA28 /* Variable.swift */,
 				4103F82F2922BFBA00567B1C /* ReportVariable.swift */,
 				41626CD129D96AD9003FEB00 /* DeviceFirmwareVersion.swift */,
 				416AE4472A812876003D0122 /* WorkMode.swift */,
@@ -945,7 +943,6 @@
 				41E165B62B0BAD7400B17590 /* UserDefaultsConfig.swift */,
 				41E165B82B0BAD9500B17590 /* UserDefaultsPropertyWrappers.swift */,
 				41E3BEC02B1B55A30051C68B /* DataCeiling.swift */,
-				4131AF4E2B52A37F00836B77 /* Variable.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1685,7 +1682,7 @@
 				4103D1DC29DB6C6D001B0BC8 /* Config.swift in Sources */,
 				418240782A9A33E300101064 /* TotalsViewModel.swift in Sources */,
 				4103D1E329DB6D03001B0BC8 /* AppSettings.swift in Sources */,
-				4103D1DB29DB6C6D001B0BC8 /* RawVariable.swift in Sources */,
+				4103D1DB29DB6C6D001B0BC8 /* Variable.swift in Sources */,
 				4103D1E529DB6D29001B0BC8 /* Sequence+aysnc.swift in Sources */,
 				416AE44B2A8170E6003D0122 /* SelectableItem.swift in Sources */,
 				4103D1DA29DB6C6D001B0BC8 /* DeviceFirmwareVersion.swift in Sources */,
@@ -1698,7 +1695,6 @@
 				41D8402D2AB2E0DE00769E81 /* ErrorMessagesResponse.swift in Sources */,
 				4103D1D529DB6C51001B0BC8 /* NetworkResponse.swift in Sources */,
 				4192F99B2A8678DB0035DAB8 /* PagedDataLoggerListResponse.swift in Sources */,
-				4131AF4F2B52A37F00836B77 /* Variable.swift in Sources */,
 				410913FD29DB78EF00133CC5 /* PreciseDateTimeFormatter.swift in Sources */,
 				416AE4492A8128B9003D0122 /* OptionalView.swift in Sources */,
 				41E165B52B0B961200B17590 /* SolcastSettings.swift in Sources */,

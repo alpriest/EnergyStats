@@ -141,15 +141,8 @@ class PowerFlowTabViewModel: ObservableObject {
 
             await MainActor.run { self.updateState = "Updating..." }
 
-            var rawVariables = [configManager.variables.named("feedinPower"),
-                                self.configManager.variables.named("gridConsumptionPower"),
-                                self.configManager.variables.named("loadsPower"),
-                                self.configManager.variables.named("generationPower"),
-                                self.configManager.variables.named("pvPower"),
-                                self.configManager.variables.named("meterPower2")]
-
             var reportVariables = [ReportVariable.loads, .feedIn, .gridConsumption]
-            if self.configManager.hasBattery {
+            if currentDevice.hasBattery {
                 reportVariables.append(contentsOf: [.chargeEnergyToTal, .dischargeEnergyToTal])
             }
 
@@ -158,13 +151,6 @@ class PowerFlowTabViewModel: ObservableObject {
                                                                             queryDate: .now(),
                                                                             reportType: .month)
             let totals = TotalsViewModel(reports: reportResponse)
-
-            if self.configManager.appSettingsPublisher.value.showInverterTemperature {
-                rawVariables.append(contentsOf: [
-                    self.configManager.variables.named("ambientTemperation"),
-                    self.configManager.variables.named("invTemperation")
-                ])
-            }
 
             let real = try await self.network.openapi_fetchRealData(
                 deviceSN: currentDeviceSN,

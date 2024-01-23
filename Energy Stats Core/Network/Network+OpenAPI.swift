@@ -161,7 +161,6 @@ public extension Network {
         request.httpBody = try! JSONEncoder().encode(DataLoggerListRequest())
 
         let result: ([DataLoggerResponse], Data) = try await fetch(request)
-//        store.inverterWorkModeResponse = NetworkOperation(description: "inverterWorkModeResponse", value: result.0, raw: result.1)
         return result.0
     }
 }
