@@ -104,8 +104,13 @@ struct ErrorAlertView: View {
             }
             .buttonStyle(EqualWidthButtonStyle(buttonWidth: $buttonWidth))
         }.onAppear {
-            if let cause = cause as? NetworkError, case .requestRequiresSignature = cause {
+            guard let cause = cause as? NetworkError else { return }
+            if case .requestRequiresSignature = cause {
                 showingFatalError = true
+            }
+
+            if case .badCredentials = cause {
+                showingUpgradeRequired = true
             }
         }
         .sheet(isPresented: $showingFatalError, content: { UnsupportedErrorView() })
