@@ -188,6 +188,12 @@ public struct OpenReportResponse: Codable {
         self.values = doubleValues.enumerated().map { ReportData(index: $0 + 1, value: $1) }
     }
 
+    public init(variable: String, unit: String, values: [ReportData]) {
+        self.variable = variable
+        self.unit = unit
+        self.values = values
+    }
+
     public struct ReportData: Codable {
         public let index: Int
         public let value: Double
