@@ -133,7 +133,6 @@ class PowerFlowTabViewModel: ObservableObject {
                 self.state = .failed(nil, "No devices found. Please logout and try logging in again.")
                 return
             }
-            let currentDeviceSN = currentDevice.deviceSN
 
             if case .failed = self.state {
                 state = .unloaded
@@ -141,61 +140,23 @@ class PowerFlowTabViewModel: ObservableObject {
 
             await MainActor.run { self.updateState = "Updating..." }
 
-            var reportVariables = [ReportVariable.loads, .feedIn, .gridConsumption]
-            if currentDevice.hasBattery {
-                reportVariables.append(contentsOf: [.chargeEnergyToTal, .dischargeEnergyToTal])
-            }
+            let totals = try await loadTotals(currentDevice)
+            let real = try await loadRealData(currentDevice)
+            let generation = try await self.loadGeneration(currentDevice)
 
-            let reportResponse = try await self.network.openapi_fetchReport(deviceSN: currentDeviceSN,
-                                                                            variables: reportVariables,
-                                                                            queryDate: .now(),
-                                                                            reportType: .month)
-            let totals = TotalsViewModel(reports: reportResponse)
-
-            let real = try await self.network.openapi_fetchRealData(
-                deviceSN: currentDeviceSN,
-                variables: [
-                    "feedinPower",
-                    "gridConsumptionPower",
-                    "loadsPower",
-                    "generationPower",
-                    "pvPower",
-                    "meterPower2",
-                    "ambientTemperation",
-                    "invTemperation",
-                    "batChargePower",
-                    "batDischargePower",
-                    "SoC",
-                    "batTemperature",
-                    "ResidualEnergy"
-                ]
-            )
             let currentValues = RealQueryResponseMapper.mapCurrentValues(device: currentDevice, response: real)
             let currentViewModel = CurrentStatusCalculator(status: currentValues,
                                                            shouldInvertCT2: self.configManager.shouldInvertCT2,
                                                            shouldCombineCT2WithPVPower: self.configManager.shouldCombineCT2WithPVPower)
 
-            let battery: BatteryViewModel
-            if self.configManager.currentDevice.value?.hasBattery == true {
-                battery = BatteryViewModel(
-                    power: real.datas.currentValue(for: "batChargePower") - (0 - real.datas.currentValue(for: "batDischargePower")),
-                    soc: Int(real.datas.currentValue(for: "SoC")),
-                    residual: real.datas.currentValue(for: "ResidualEnergy") * 10.0,
-                    temperature: real.datas.currentValue(for: "batTemperature")
-                )
-            } else {
-                battery = .noBattery
-            }
-
-            let start = Calendar.current.startOfDay(for: Date())
-            let history = try await network.openapi_fetchHistory(deviceSN: currentDeviceSN, variables: ["pvPower", "meterPower2"], start: start, end: start.addingTimeInterval(86400))
+            let battery = self.makeBatteryViewModel(currentDevice, real)
 
             let summary = HomePowerFlowViewModel(
                 solar: currentViewModel.currentSolarPower,
                 battery: battery,
                 home: currentViewModel.currentHomeConsumption,
                 grid: currentViewModel.currentGrid,
-                todaysGeneration: GenerationViewModel(response: history),
+                todaysGeneration: generation,
                 earnings: EnergyStatsFinancialModel(totalsViewModel: totals, config: self.configManager, currencySymbol: self.configManager.currencySymbol),
                 inverterTemperatures: currentViewModel.currentTemperatures,
                 homeTotal: totals.home,
@@ -214,6 +175,65 @@ class PowerFlowTabViewModel: ObservableObject {
             await self.stopTimer()
             self.state = .failed(error, error.localizedDescription)
         }
+    }
+
+    private func makeBatteryViewModel(_ currentDevice: Device, _ real: OpenQueryResponse) -> BatteryViewModel {
+        if self.configManager.currentDevice.value?.hasBattery == true {
+            BatteryViewModel(
+                power: real.datas.currentValue(for: "batChargePower") - (0 - real.datas.currentValue(for: "batDischargePower")),
+                soc: Int(real.datas.currentValue(for: "SoC")),
+                residual: real.datas.currentValue(for: "ResidualEnergy") * 10.0,
+                temperature: real.datas.currentValue(for: "batTemperature")
+            )
+        } else {
+            .noBattery
+        }
+    }
+
+    private func loadGeneration(_ currentDevice: Device) async throws -> GenerationViewModel {
+        try GenerationViewModel(response: await self.loadHistoryData(currentDevice))
+    }
+
+    private func loadHistoryData(_ currentDevice: Device) async throws -> OpenHistoryResponse {
+        let start = Calendar.current.startOfDay(for: Date())
+        return try await self.network.openapi_fetchHistory(deviceSN: currentDevice.deviceSN, variables: ["pvPower", "meterPower2"], start: start, end: start.addingTimeInterval(86400))
+    }
+
+    private func loadTotals(_ currentDevice: Device) async throws -> TotalsViewModel {
+        try TotalsViewModel(reports: await self.loadReportData(currentDevice))
+    }
+
+    private func loadReportData(_ currentDevice: Device) async throws -> [OpenReportResponse] {
+        var reportVariables = [ReportVariable.loads, .feedIn, .gridConsumption]
+        if currentDevice.hasBattery {
+            reportVariables.append(contentsOf: [.chargeEnergyToTal, .dischargeEnergyToTal])
+        }
+
+        return try await self.network.openapi_fetchReport(deviceSN: currentDevice.deviceSN,
+                                                          variables: reportVariables,
+                                                          queryDate: .now(),
+                                                          reportType: .month)
+    }
+
+    private func loadRealData(_ currentDevice: Device) async throws -> OpenQueryResponse {
+        try await self.network.openapi_fetchRealData(
+            deviceSN: currentDevice.deviceSN,
+            variables: [
+                "feedinPower",
+                "gridConsumptionPower",
+                "loadsPower",
+                "generationPower",
+                "pvPower",
+                "meterPower2",
+                "ambientTemperation",
+                "invTemperation",
+                "batChargePower",
+                "batDischargePower",
+                "SoC",
+                "batTemperature",
+                "ResidualEnergy"
+            ]
+        )
     }
 
     func calculateTicks(historicalViewModel: CurrentStatusCalculator) {

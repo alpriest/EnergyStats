@@ -116,6 +116,7 @@ public class NetworkValueCleaner: FoxESSNetworking {
     }
 
     public func openapi_fetchReport(deviceSN: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [OpenReportResponse] {
+        // TODO Cap values
         try await network.openapi_fetchReport(deviceSN: deviceSN, variables: variables, queryDate: queryDate, reportType: reportType)
     }
 
