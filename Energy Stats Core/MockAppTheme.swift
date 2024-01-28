@@ -41,7 +41,8 @@ public extension AppSettings {
             dataCeiling: DataCeiling.mild,
             showTotalYieldOnPowerFlow: true,
             showFinancialSummaryOnFlowPage: true,
-            separateParameterGraphsByUnit: true
+            separateParameterGraphsByUnit: true,
+            currencySymbol: "£"
         )
     }
 }

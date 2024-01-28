@@ -87,7 +87,7 @@ struct ApproximationsView: View {
                             HStack {
                                 Text("export_income")
                                 Spacer()
-                                Text(financialModel.exportIncome.formattedAmount())
+                                Text(financialModel.exportIncome.formattedAmount(appSettings.currencySymbol))
                             }
                             if showCalculations {
                                 CalculationBreakdownView(breakdown: financialModel.exportBreakdown, decimalPlaces: appSettings.decimalPlaces)
@@ -98,7 +98,7 @@ struct ApproximationsView: View {
                             HStack {
                                 Text("grid_import_avoided")
                                 Spacer()
-                                Text(financialModel.solarSaving.formattedAmount())
+                                Text(financialModel.solarSaving.formattedAmount(appSettings.currencySymbol))
                             }
                             if showCalculations {
                                 CalculationBreakdownView(breakdown: financialModel.solarSavingBreakdown, decimalPlaces: appSettings.decimalPlaces)
@@ -108,7 +108,7 @@ struct ApproximationsView: View {
                         HStack {
                             Text("total_benefit")
                             Spacer()
-                            Text(financialModel.total.formattedAmount())
+                            Text(financialModel.total.formattedAmount(appSettings.currencySymbol))
                         }
                     }
                 }

@@ -5,6 +5,7 @@
 //  Created by Alistair Priest on 07/11/2023.
 //
 
+import Combine
 import Energy_Stats_Core
 import Foundation
 
@@ -14,14 +15,17 @@ class SummaryTabViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var approximationsViewModel: ApproximationsViewModel? = nil
     @Published var oldestDataDate: String = ""
-    let currencySymbol: String
+    @Published var currencySymbol: String = ""
     private let approximationsCalculator: ApproximationsCalculator
+    private var themeChangeCancellable: AnyCancellable?
 
     init(configManager: ConfigManaging, networking: FoxESSNetworking) {
         self.networking = networking
         self.configManager = configManager
         approximationsCalculator = ApproximationsCalculator(configManager: configManager, networking: networking)
-        currencySymbol = self.configManager.currencySymbol
+        self.themeChangeCancellable = self.configManager.appSettingsPublisher.sink { theme in
+            self.currencySymbol = theme.currencySymbol
+        }
     }
 
     func load() {

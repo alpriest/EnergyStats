@@ -38,7 +38,8 @@ public enum AppSettingsPublisherFactory {
                 dataCeiling: config.dataCeiling,
                 showTotalYieldOnPowerFlow: config.showTotalYieldOnPowerFlow,
                 showFinancialSummaryOnFlowPage: config.showFinancialSummaryOnFlowPage,
-                separateParameterGraphsByUnit: config.separateParameterGraphsByUnit
+                separateParameterGraphsByUnit: config.separateParameterGraphsByUnit,
+                currencySymbol: config.currencySymbol
             )
         )
     }

@@ -3636,6 +3636,9 @@
         }
       }
     },
+    "Currency symbol" : {
+
+    },
     "Data Refresh frequency" : {
       "localizations" : {
         "de" : {

@@ -17,7 +17,7 @@ struct EarningsView: View {
         HStack {
             ForEach(viewModel.amounts(), id: \.self) { amount in
                 SubLabelledView(
-                    value: amount.formattedAmount(),
+                    value: amount.formattedAmount(appSettings.currencySymbol),
                     label: String(key: amount.title),
                     alignment: .center
                 )

@@ -27,6 +27,7 @@ struct FinancialsSettingsView: View {
                         Text("Show on flow page")
                     }
 
+                    makeCurrencySymbolField()
                     makeTextField(title: "Feed In Unit price", currencySymbol: viewModel.currencySymbol, text: $viewModel.energyStatsFeedInUnitPrice)
                     makeTextField(title: "Grid Import Unit price", currencySymbol: viewModel.currencySymbol, text: $viewModel.energyStatsGridImportUnitPrice)
                 }
@@ -82,7 +83,7 @@ struct FinancialsSettingsView: View {
         .frame(maxWidth: .infinity)
     }
 
-    func makeTextField(title: LocalizedStringKey, currencySymbol: String, text: Binding<String>) -> some View {
+    private func makeTextField(title: LocalizedStringKey, currencySymbol: String, text: Binding<String>) -> some View {
         HStack {
             Text(title)
                 .multilineTextAlignment(.leading)
@@ -91,6 +92,15 @@ struct FinancialsSettingsView: View {
             TextField(0.roundedToString(decimalPlaces: 2, currencySymbol: currencySymbol), text: text)
                 .frame(width: 60)
                 .monospacedDigit()
+        }
+        .multilineTextAlignment(.trailing)
+    }
+
+    private func makeCurrencySymbolField() -> some View {
+        HStack {
+            Text("Currency symbol")
+            Spacer()
+            TextField("", text: $viewModel.currencySymbol)
         }
         .multilineTextAlignment(.trailing)
     }

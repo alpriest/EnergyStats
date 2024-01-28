@@ -47,6 +47,7 @@ public struct AppSettings {
     public var showTotalYieldOnPowerFlow: Bool
     public var showFinancialSummaryOnFlowPage: Bool
     public var separateParameterGraphsByUnit: Bool
+    public var currencySymbol: String
 
     public init(
         showColouredLines: Bool,
@@ -75,7 +76,8 @@ public struct AppSettings {
         dataCeiling: DataCeiling,
         showTotalYieldOnPowerFlow: Bool,
         showFinancialSummaryOnFlowPage: Bool,
-        separateParameterGraphsByUnit: Bool
+        separateParameterGraphsByUnit: Bool,
+        currencySymbol: String
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -104,6 +106,7 @@ public struct AppSettings {
         self.dataCeiling = dataCeiling
         self.showFinancialSummaryOnFlowPage = showFinancialSummaryOnFlowPage
         self.separateParameterGraphsByUnit = separateParameterGraphsByUnit
+        self.currencySymbol = currencySymbol
     }
 
     public func copy(
@@ -133,7 +136,8 @@ public struct AppSettings {
         dataCeiling: DataCeiling? = nil,
         showTotalYieldOnPowerFlow: Bool? = nil,
         showFinancialSummaryOnFlowPage: Bool? = nil,
-        separateParameterGraphsByUnit: Bool? = nil
+        separateParameterGraphsByUnit: Bool? = nil,
+        currencySymbol: String? = nil
     ) -> AppSettings {
         AppSettings(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -162,7 +166,8 @@ public struct AppSettings {
             dataCeiling: dataCeiling ?? self.dataCeiling,
             showTotalYieldOnPowerFlow: showTotalYieldOnPowerFlow ?? self.showTotalYieldOnPowerFlow,
             showFinancialSummaryOnFlowPage: showFinancialSummaryOnFlowPage ?? self.showFinancialSummaryOnFlowPage,
-            separateParameterGraphsByUnit: separateParameterGraphsByUnit ?? self.separateParameterGraphsByUnit
+            separateParameterGraphsByUnit: separateParameterGraphsByUnit ?? self.separateParameterGraphsByUnit,
+            currencySymbol: currencySymbol ?? self.currencySymbol
         )
     }
 }

@@ -37,7 +37,11 @@ class FinancialsSettingsViewModel: ObservableObject {
         }
     }
 
-    let currencySymbol: String
+    @Published var currencySymbol: String {
+        didSet {
+            configManager.currencySymbol = currencySymbol
+        }
+    }
 
     private(set) var configManager: ConfigManaging
 

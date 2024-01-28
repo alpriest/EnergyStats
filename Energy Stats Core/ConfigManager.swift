@@ -146,6 +146,9 @@ public class ConfigManager: ConfigManaging {
         get { config.currencySymbol }
         set {
             config.currencySymbol = newValue
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+                currencySymbol: config.currencySymbol
+            ))
         }
     }
 

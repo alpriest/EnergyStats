@@ -40,8 +40,7 @@ struct ApproximationsCalculator {
 
         let financialModel = EnergyStatsFinancialModel(
             totalsViewModel: totalsViewModel,
-            config: configManager,
-            currencySymbol: configManager.currencySymbol
+            config: configManager
         )
 
         return ApproximationsViewModel(

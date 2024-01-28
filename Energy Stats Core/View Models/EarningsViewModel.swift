@@ -10,15 +10,13 @@ import Foundation
 public struct FinanceAmount: Hashable, Identifiable {
     public let title: LocalizedString.Key
     public let amount: Double
-    private let currencySymbol: String
 
-    public init(title: LocalizedString.Key, amount: Double, currencySymbol: String) {
+    public init(title: LocalizedString.Key, amount: Double) {
         self.title = title
         self.amount = amount
-        self.currencySymbol = currencySymbol
     }
 
-    public func formattedAmount() -> String {
+    public func formattedAmount(_ currencySymbol: String) -> String {
         amount.roundedToString(decimalPlaces: 2, currencySymbol: currencySymbol)
     }
 
@@ -27,30 +25,28 @@ public struct FinanceAmount: Hashable, Identifiable {
 
 public struct EnergyStatsFinancialModel {
     private let config: FinancialConfigManaging
-    public let currencySymbol: String
     public let exportIncome: FinanceAmount
     public let solarSaving: FinanceAmount
     public let total: FinanceAmount
     public let exportBreakdown: CalculationBreakdown
     public let solarSavingBreakdown: CalculationBreakdown
 
-    public init(totalsViewModel: TotalsViewModel, config: FinancialConfigManaging, currencySymbol: String) {
+    public init(totalsViewModel: TotalsViewModel, config: FinancialConfigManaging) {
         self.config = config
-        self.currencySymbol = currencySymbol
 
-        exportIncome = FinanceAmount(title: .exportedIncomeShortTitle, amount: totalsViewModel.gridExport * config.feedInUnitPrice, currencySymbol: currencySymbol)
+        exportIncome = FinanceAmount(title: .exportedIncomeShortTitle, amount: totalsViewModel.gridExport * config.feedInUnitPrice)
         exportBreakdown = CalculationBreakdown(
             formula: "gridExport * feedInUnitPrice",
             calculation: { dp in "\(totalsViewModel.gridExport.roundedToString(decimalPlaces: dp)) * \(config.feedInUnitPrice.roundedToString(decimalPlaces: dp))" }
         )
 
-        solarSaving = FinanceAmount(title: .gridImportAvoidedShortTitle, amount: (totalsViewModel.solar - totalsViewModel.gridExport) * config.gridImportUnitPrice, currencySymbol: currencySymbol)
+        solarSaving = FinanceAmount(title: .gridImportAvoidedShortTitle, amount: (totalsViewModel.solar - totalsViewModel.gridExport) * config.gridImportUnitPrice)
         solarSavingBreakdown = CalculationBreakdown(
             formula: "(solar - gridExport) * gridImportUnitPrice",
             calculation: { dp in "(\(totalsViewModel.solar.roundedToString(decimalPlaces: dp)) - \(totalsViewModel.gridExport.roundedToString(decimalPlaces: dp))) * \(config.gridImportUnitPrice.roundedToString(decimalPlaces: dp))" }
         )
 
-        total = FinanceAmount(title: .total, amount: exportIncome.amount + solarSaving.amount, currencySymbol: currencySymbol)
+        total = FinanceAmount(title: .total, amount: exportIncome.amount + solarSaving.amount)
     }
 
     public func amounts() -> [FinanceAmount] {
@@ -61,8 +57,7 @@ public struct EnergyStatsFinancialModel {
 public extension EnergyStatsFinancialModel {
     static func any() -> EnergyStatsFinancialModel {
         EnergyStatsFinancialModel(totalsViewModel: TotalsViewModel(reports: []),
-                                  config: PreviewConfigManager(),
-                                  currencySymbol: "£")
+                                  config: PreviewConfigManager())
     }
 
     static func empty() -> EnergyStatsFinancialModel { any() }
