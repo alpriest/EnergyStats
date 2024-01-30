@@ -233,11 +233,7 @@ public class NetworkFacade: FoxESSNetworking {
         if isDemoUser {
             return try await network.openapi_activateSchedule(deviceSN: deviceSN, schedule: schedule)
         } else {
-            defer {
-                throttler.didInvoke(method: #function)
-            }
-            try await throttler.throttle(method: #function)
-            return try await network.openapi_activateSchedule(deviceSN: deviceSN, schedule: schedule)
+            try await network.openapi_activateSchedule(deviceSN: deviceSN, schedule: schedule)
         }
     }
 }

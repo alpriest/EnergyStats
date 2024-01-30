@@ -3637,7 +3637,32 @@
       }
     },
     "Currency symbol" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Währungssymbol"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Símbolo de moneda"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Simbolo di valuta"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Symbol waluty"
+          }
+        }
+      }
     },
     "Data Refresh frequency" : {
       "localizations" : {
@@ -3888,6 +3913,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Moc DC (moduły)"
+          }
+        }
+      }
+    },
+    "Deactivating" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deaktivierend"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desactivando"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disattivando"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dezaktywując"
           }
         }
       }
@@ -11674,6 +11727,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Szablony"
+          }
+        }
+      }
+    },
+    "templates_not_yet_available" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zeitplanvorlagen sind über OpenAPI von FoxESS noch nicht verfügbar. Sie wurden angefordert und werden hinzugefügt, sobald sie verfügbar sind."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schedule templates are not yet available via OpenAPI from FoxESS. They have been requested and will be added as and when available."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Las plantillas de programación aún no están disponibles a través de OpenAPI de FoxESS. Se han solicitado y se agregarán según estén disponibles."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I modelli di pianificazione non sono ancora disponibili tramite OpenAPI da FoxESS. Sono stati richiesti e verranno aggiunti non appena disponibili."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Szablony harmonogramów nie są jeszcze dostępne za pośrednictwem OpenAPI od FoxESS. Zostały zażądane i zostaną dodane, gdy będą dostępne."
           }
         }
       }

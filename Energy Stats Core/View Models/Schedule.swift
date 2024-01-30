@@ -57,6 +57,7 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable {
 
     public init?(id: String? = nil, start: Time, end: Time, mode: WorkMode, minSocOnGrid: Int, forceDischargePower: Int, forceDischargeSOC: Int, color: Color) {
         guard start < end else { return nil }
+        if mode == .Invalid { return nil }
 
         self.id = id ?? UUID().uuidString
         self.start = start

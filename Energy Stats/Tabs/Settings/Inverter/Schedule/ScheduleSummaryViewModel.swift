@@ -90,7 +90,11 @@ class ScheduleSummaryViewModel: ObservableObject {
         else { return }
 
         do {
-            self.state = .active("Activating")
+            if schedulerEnabled {
+                self.state = .active("Activating")
+            } else {
+                self.state = .active("Deactivating")
+            }
 
             try await self.networking.openapi_setScheduleFlag(deviceSN: deviceSN, enable: schedulerEnabled)
             self.setState(.inactive)

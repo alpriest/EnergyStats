@@ -81,6 +81,10 @@ struct ScheduleSummaryView: View {
                     }
                 }
 
+                FooterSection {
+                    Text("templates_not_yet_available")
+                }
+
 //                Section {
 //                    ForEach(viewModel.templates) { template in
 //                        HStack {
