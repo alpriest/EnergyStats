@@ -13,7 +13,6 @@ class EditScheduleViewModel: ObservableObject {
     @Published var schedule: Schedule
     @Published var state: LoadState = .inactive
     @Published var alertContent: AlertContent?
-    @Published var enabled: Bool { didSet { schedule = schedule.copy(enable: enabled) }}
     private let networking: FoxESSNetworking
     private let config: ConfigManaging
 
@@ -21,7 +20,6 @@ class EditScheduleViewModel: ObservableObject {
         self.networking = networking
         self.config = config
         self.schedule = schedule
-        self.enabled = schedule.enable
     }
 
     func saveSchedule(onCompletion: @escaping () -> Void) async {
@@ -77,7 +75,7 @@ class EditScheduleViewModel: ObservableObject {
 //    }
 
     private func makeEmptySchedule() -> Schedule {
-        Schedule(enable: false, phases: [])
+        Schedule(phases: [])
     }
 
     func autoFillScheduleGaps() {

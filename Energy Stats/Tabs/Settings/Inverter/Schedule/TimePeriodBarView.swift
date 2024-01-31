@@ -57,7 +57,6 @@ struct TimePeriodBarView: View {
 extension Schedule {
     static func preview() -> Schedule {
         Schedule(
-            enable: true,
             phases: [
                 SchedulePhase(
                     start: Time(

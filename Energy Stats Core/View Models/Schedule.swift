@@ -31,17 +31,11 @@ import SwiftUI
 
 public struct Schedule: Hashable, Equatable {
     public let phases: [SchedulePhase]
-    public let enable: Bool
 //    public let templateID: String?
 
-    public init(enable: Bool, phases: [SchedulePhase]) {
-        self.enable = enable
+    public init(phases: [SchedulePhase]) {
         self.phases = phases
 //        self.templateID = templateID
-    }
-
-    public func copy(enable: Bool) -> Schedule {
-        Schedule(enable: enable, phases: phases)
     }
 }
 

@@ -51,10 +51,6 @@ struct EditScheduleView: View {
                         }.buttonStyle(.borderedProminent)
                     }
                 }
-
-                Toggle(isOn: $viewModel.enabled) {
-                    Text("Enabled")
-                }
             }
 
             BottomButtonsView(labels: BottomButtonLabels(left: "Cancel", right: "Save"),
