@@ -69,6 +69,7 @@ struct SettingsTabView: View {
 
                     NavigationLink("settings.faq") { FAQView() }
                     NavigationLink("settings.debug") { DebugDataView(networking: networking, configManager: configManager) }
+                    NavigationLink("API Key") { ConfigureAPIKeyView() }
                 }
 
                 SettingsFooterView(onLogout: viewModel.logout, appVersion: viewModel.appVersion)

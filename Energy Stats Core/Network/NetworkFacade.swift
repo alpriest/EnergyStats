@@ -229,11 +229,11 @@ public class NetworkFacade: FoxESSNetworking {
         }
     }
 
-    public func openapi_activateSchedule(deviceSN: String, schedule: Schedule) async throws {
+    public func openapi_saveSchedule(deviceSN: String, schedule: Schedule) async throws {
         if isDemoUser {
-            return try await network.openapi_activateSchedule(deviceSN: deviceSN, schedule: schedule)
+            return try await network.openapi_saveSchedule(deviceSN: deviceSN, schedule: schedule)
         } else {
-            try await network.openapi_activateSchedule(deviceSN: deviceSN, schedule: schedule)
+            try await network.openapi_saveSchedule(deviceSN: deviceSN, schedule: schedule)
         }
     }
 }

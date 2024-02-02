@@ -247,7 +247,7 @@ public struct ScheduleResponse: Codable {
     public let groups: [SchedulePhaseResponse]
 }
 
-public struct SetCurrentSchedulerRequest: Codable {
+public struct SetCurrentScheduleRequest: Codable {
     public let deviceSN: String
     public let groups: [SchedulePhaseResponse]
 }

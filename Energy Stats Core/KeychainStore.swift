@@ -25,7 +25,7 @@ public protocol KeychainStoring {
     var isDemoUser: Bool { get }
 }
 
-public class KeychainStore: KeychainStoring, ObservableObject {
+public class KeychainStore: KeychainStoring {
     struct KeychainError: Error {
         init(_ code: OSStatus? = nil) {
             self.code = code

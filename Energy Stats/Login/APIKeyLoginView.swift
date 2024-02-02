@@ -61,6 +61,8 @@ struct APIKeyLoginView: View {
     }
 }
 
+#if DEBUG
 #Preview {
     APIKeyLoginView(userManager: UserManager.preview())
 }
+#endif

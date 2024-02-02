@@ -67,6 +67,16 @@ struct BatterySettingsView: View {
                     VStack(alignment: .leading) {
                         Text("Tap the capacity above to enter a manual value.")
                     }
+
+                    Button("Recalculate capacity", action: {
+                        viewModel.recalculateBatteryCapacity()
+                    })
+                    .buttonStyle(.borderless)
+                    .padding(.bottom, 4)
+
+                    Text("Calculated as ") +
+                        Text("capacity = residual / (Min SOC / 100)").italic() +
+                        Text(" where residual is estimated by your installation and may not be accurate. Tap the capacity above to enter a manual value.")
                 }
             ).alert("Invalid Battery Capacity", isPresented: $viewModel.showAlert, actions: {
                 Button("OK") {}

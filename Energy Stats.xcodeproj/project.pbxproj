@@ -141,7 +141,7 @@
 		4185474C2A3B1025000128C7 /* SunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4162BC2F2A097C1300DFEDC1 /* SunView.swift */; };
 		418685D52AFE700100355B6D /* AnimatedNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418685D42AFE700100355B6D /* AnimatedNumber.swift */; };
 		418C091D2B17EC0E00183603 /* TimePeriodBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C091C2B17EC0E00183603 /* TimePeriodBarView.swift */; };
-		418C09232B18A9E300183603 /* SchedulerFlagResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C09222B18A9E300183603 /* SchedulerFlagResponse.swift */; };
+		418C09232B18A9E300183603 /* ScheduleResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C09222B18A9E300183603 /* ScheduleResponses.swift */; };
 		418C09252B18FE9A00183603 /* SchedulePhaseEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C09242B18FE9A00183603 /* SchedulePhaseEditView.swift */; };
 		418C6E952AFAC3BF000DE35F /* SummaryTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C6E942AFAC3BF000DE35F /* SummaryTabView.swift */; };
 		418C6E972AFAC7E4000DE35F /* SummaryTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C6E962AFAC7E4000DE35F /* SummaryTabViewModel.swift */; };
@@ -169,6 +169,8 @@
 		419DFA882A12A6DF0067313A /* DatePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419DFA872A12A6DF0067313A /* DatePickerViewModel.swift */; };
 		41A25D3D28CA5CDF00315714 /* ParametersGraphTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A25D3C28CA5CDF00315714 /* ParametersGraphTabView.swift */; };
 		41A25D3F28CA5CFB00315714 /* ParametersGraphTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A25D3E28CA5CFB00315714 /* ParametersGraphTabViewModel.swift */; };
+		41A263222B6AEE9F0027E52A /* ConfigureAPIKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A263212B6AEE9F0027E52A /* ConfigureAPIKeyView.swift */; };
+		41A263242B6AEFCA0027E52A /* PreviewKeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A263232B6AEFCA0027E52A /* PreviewKeychainStore.swift */; };
 		41A95B9729DB3F6A00A35169 /* Energy_Stats_Core.h in Headers */ = {isa = PBXBuildFile; fileRef = 41A95B9629DB3F6A00A35169 /* Energy_Stats_Core.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		41A95B9A29DB3F6A00A35169 /* Energy_Stats_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; };
 		41A95B9B29DB3F6A00A35169 /* Energy_Stats_Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -491,7 +493,7 @@
 		418685D42AFE700100355B6D /* AnimatedNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedNumber.swift; sourceTree = "<group>"; };
 		418C091C2B17EC0E00183603 /* TimePeriodBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePeriodBarView.swift; sourceTree = "<group>"; };
 		418C09202B18A98400183603 /* EditScheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScheduleViewModel.swift; sourceTree = "<group>"; };
-		418C09222B18A9E300183603 /* SchedulerFlagResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulerFlagResponse.swift; sourceTree = "<group>"; };
+		418C09222B18A9E300183603 /* ScheduleResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleResponses.swift; sourceTree = "<group>"; };
 		418C09242B18FE9A00183603 /* SchedulePhaseEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePhaseEditView.swift; sourceTree = "<group>"; };
 		418C6E942AFAC3BF000DE35F /* SummaryTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTabView.swift; sourceTree = "<group>"; };
 		418C6E962AFAC7E4000DE35F /* SummaryTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTabViewModel.swift; sourceTree = "<group>"; };
@@ -524,6 +526,8 @@
 		41A25D3E28CA5CFB00315714 /* ParametersGraphTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersGraphTabViewModel.swift; sourceTree = "<group>"; };
 		41A25D4028CA6E0000315714 /* DemoNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoNetworking.swift; sourceTree = "<group>"; };
 		41A25D4228CA706700315714 /* CountdownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimer.swift; sourceTree = "<group>"; };
+		41A263212B6AEE9F0027E52A /* ConfigureAPIKeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureAPIKeyView.swift; sourceTree = "<group>"; };
+		41A263232B6AEFCA0027E52A /* PreviewKeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewKeychainStore.swift; sourceTree = "<group>"; };
 		41A95B7F29DB2F0900A35169 /* Energy_Stats_Watch_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Energy_Stats_Watch_AppApp.swift; sourceTree = "<group>"; };
 		41A95B8129DB2F0900A35169 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		41A95B8329DB2F0A00A35169 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -906,6 +910,7 @@
 			children = (
 				4140145428C70B3200EA5BA1 /* Preview Assets.xcassets */,
 				41C49EAD2A0398E4003700CB /* PreviewUserManager.swift */,
+				41A263232B6AEFCA0027E52A /* PreviewKeychainStore.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -923,7 +928,7 @@
 				416AE4442A811FBB003D0122 /* DeviceSettingsGetResponse.swift */,
 				4192F99A2A8678DB0035DAB8 /* PagedDataLoggerListResponse.swift */,
 				41D8402C2AB2E0DE00769E81 /* ErrorMessagesResponse.swift */,
-				418C09222B18A9E300183603 /* SchedulerFlagResponse.swift */,
+				418C09222B18A9E300183603 /* ScheduleResponses.swift */,
 				4190921E2B1D25890017CB65 /* Time.swift */,
 				4131AF4C2B5288F400836B77 /* OpenQueryResponse.swift */,
 			);
@@ -977,6 +982,7 @@
 				4160098A2A8D18B10096CCD9 /* SettingsFooterView.swift */,
 				419AB47F2AA36D24002CBC96 /* DisplaySettingsView.swift */,
 				41E8E7232AADFB3900DC4B89 /* SolarBandingSettingsView.swift */,
+				41A263212B6AEE9F0027E52A /* ConfigureAPIKeyView.swift */,
 			);
 			path = "Settings Page";
 			sourceTree = "<group>";
@@ -1584,6 +1590,7 @@
 				41626CD029D969E9003FEB00 /* InverterFirmwareVersionsView.swift in Sources */,
 				4171854C2A01033700D18CDD /* ParameterGraphVariablesToggles.swift in Sources */,
 				41C0923D2B210255001D1E22 /* ScheduleDetailView.swift in Sources */,
+				41A263222B6AEE9F0027E52A /* ConfigureAPIKeyView.swift in Sources */,
 				419092212B1DBF2B0017CB65 /* ScheduleSummaryView.swift in Sources */,
 				417185482A0051CA00D18CDD /* ParameterGraphVariableChooserView.swift in Sources */,
 				41C6AF662A360CF600C88F2B /* CSVTextFile.swift in Sources */,
@@ -1642,6 +1649,7 @@
 				4128E4C128DA5F6600C1D698 /* Date.swift in Sources */,
 				418C09252B18FE9A00183603 /* SchedulePhaseEditView.swift in Sources */,
 				41C19DCF2A4E09F9009883AB /* SelfSufficiencySettingsView.swift in Sources */,
+				41A263242B6AEFCA0027E52A /* PreviewKeychainStore.swift in Sources */,
 				41DD7F3A29C5B8940072CDE8 /* SolarPowerView.swift in Sources */,
 				4107446528CA1D76006D5D7D /* FlowingLine.swift in Sources */,
 				417AA21D2A1245C00073CD34 /* StatsTabViewModel.swift in Sources */,
@@ -1713,7 +1721,7 @@
 				418547492A3A1C7A000128C7 /* PowerAmountView.swift in Sources */,
 				41E8E7262AAE0D0D00DC4B89 /* SolarRangeDefinitions.swift in Sources */,
 				41009A712B02CD59009D853B /* Solcast.swift in Sources */,
-				418C09232B18A9E300183603 /* SchedulerFlagResponse.swift in Sources */,
+				418C09232B18A9E300183603 /* ScheduleResponses.swift in Sources */,
 				416AE4452A811FBB003D0122 /* DeviceSettingsGetResponse.swift in Sources */,
 				41F71ABD2A14FBEC00A8C81B /* Array+Safe.swift in Sources */,
 				4103D1D029DB6C51001B0BC8 /* Report.swift in Sources */,

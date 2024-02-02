@@ -204,4 +204,27 @@ class SettingsTabViewModel: ObservableObject {
         let dictionary = Bundle.main.infoDictionary!
         return dictionary["CFBundleShortVersionString"] as! String
     }
+
+    func recalculateBatteryCapacity() {
+        guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
+        guard let devices = config.devices else { return }
+
+        Task { @MainActor [networking] in
+            let real = try await networking.openapi_fetchRealData(deviceSN: deviceSN, variables: ["SoC", "ResidualEnergy"])
+            let socResponse = try await networking.openapi_fetchBatterySettings(deviceSN: deviceSN)
+            let batteryResponse = BatteryResponseMapper.map(batteryVariables: real, settings: socResponse)
+
+            config.devices = devices.map {
+                if $0.deviceSN == deviceSN {
+                    return $0.copy(battery: batteryResponse)
+                } else {
+                    return $0
+                }
+            }
+            config.select(device: config.devices?.first(where: { $0.deviceSN == deviceSN }))
+            config.clearBatteryOverride(for: deviceSN)
+            batteryCapacity = config.batteryCapacity
+            showRecalculationAlert = true
+        }
+    }
 }

@@ -29,11 +29,11 @@ class EditScheduleViewModel: ObservableObject {
             return
         }
 
-        setState(.active("Activating"))
+        setState(.active("Saving"))
 
         Task { [self] in
             do {
-                try await networking.openapi_activateSchedule(deviceSN: deviceSN, schedule: schedule)
+                try await networking.openapi_saveSchedule(deviceSN: deviceSN, schedule: schedule)
 
                 Task { @MainActor in
                     self.state = .inactive

@@ -45,10 +45,10 @@ public extension Network {
         }
     }
 
-    func openapi_activateSchedule(deviceSN: String, schedule: Schedule) async throws {
+    func openapi_saveSchedule(deviceSN: String, schedule: Schedule) async throws {
         var request = URLRequest(url: URL.setOpenCurrentSchedule)
         request.httpMethod = "POST"
-        request.httpBody = try! JSONEncoder().encode(SetCurrentSchedulerRequest(deviceSN: deviceSN, groups: schedule.phases.map { $0.toPhaseResponse() }))
+        request.httpBody = try! JSONEncoder().encode(SetCurrentScheduleRequest(deviceSN: deviceSN, groups: schedule.phases.map { $0.toPhaseResponse() }))
 
         do {
             let _: (String, Data) = try await fetch(request)

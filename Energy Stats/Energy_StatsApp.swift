@@ -38,6 +38,7 @@ struct Energy_StatsApp: App {
                 )
                 .environmentObject(store)
                 .environmentObject(userManager)
+                .environmentObject(KeychainWrapper(keychainStore))
                 .task {
                     if isRunningScreenshots() {
                         config.showFinancialEarnings = true
@@ -53,5 +54,13 @@ struct Energy_StatsApp: App {
 
     func isRunningScreenshots() -> Bool {
         CommandLine.arguments.contains("screenshots")
+    }
+}
+
+class KeychainWrapper: ObservableObject {
+    var store: KeychainStoring
+
+    init(_ store: KeychainStoring) {
+        self.store = store
     }
 }

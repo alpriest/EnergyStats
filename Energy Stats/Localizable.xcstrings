@@ -198,7 +198,6 @@
       }
     },
     " where residual is estimated by your installation and may not be accurate. Tap the capacity above to enter a manual value." : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -278,6 +277,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "- **Ograniczenie do 1,440 żądań na inwerter na dzień**. Chyba że zostawisz Statystyki Energetyczne włączone przez 24 godziny na dobę, jest to mało prawdopodobne, aby cię to dotyczyło."
+          }
+        }
+      }
+    },
+    "- **Schedule templates are no longer available** as FoxESS have not yet made these available via their OpenAPI. When schedule templates become available support will be added." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "- **Zeitplanvorlagen sind nicht mehr verfügbar**, da FoxESS diese noch nicht über ihr OpenAPI zur Verfügung gestellt hat. Wenn Zeitplanvorlagen verfügbar werden, wird Unterstützung hinzugefügt."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "- **Las plantillas de programación ya no están disponibles** ya que FoxESS aún no las ha puesto a disposición a través de su OpenAPI. Cuando las plantillas de programación estén disponibles, se agregará soporte."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "- **I modelli di pianificazione non sono più disponibili** poiché FoxESS non li ha ancora resi disponibili tramite il loro OpenAPI. Quando i modelli di pianificazione saranno disponibili, verrà aggiunto il supporto."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "- **Szablony harmonogramów nie są już dostępne**, ponieważ FoxESS jeszcze nie udostępnił ich za pośrednictwem swojego OpenAPI. Gdy szablony harmonogramów staną się dostępne, wsparcie zostanie dodane."
           }
         }
       }
@@ -2668,7 +2695,6 @@
       }
     },
     "Calculated as " : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2843,7 +2869,6 @@
       }
     },
     "capacity = residual / (Min SOC / 100)" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -6222,6 +6247,34 @@
         }
       }
     },
+    "If you need to change your API key then you can replace it above without losing your settings." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wenn Sie Ihren API-Schlüssel ändern müssen, können Sie ihn oben ersetzen, ohne Ihre Einstellungen zu verlieren."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Si necesita cambiar su clave API, puede reemplazarla arriba sin perder sus configuraciones."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se devi cambiare la tua chiave API, puoi sostituirla sopra senza perdere le tue impostazioni."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jeśli potrzebujesz zmienić swój klucz API, możesz go zastąpić powyżej, nie tracąc ustawień."
+          }
+        }
+      }
+    },
     "import_total" : {
       "localizations" : {
         "de" : {
@@ -9574,6 +9627,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Stan naładowania akumulatora. Procent pojemności akumulatora, który jest dostępny"
+          }
+        }
+      }
+    },
+    "Recalculate capacity" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kapazität neu berechnen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recalcular capacidad"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ricalcolare la capacità"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Przelicz pojemność"
           }
         }
       }

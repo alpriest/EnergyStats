@@ -5,8 +5,8 @@
 //  Created by Alistair Priest on 04/05/2023.
 //
 
-import Foundation
 import Energy_Stats_Core
+import Foundation
 
 extension UserManager {
     static func preview() -> UserManager {

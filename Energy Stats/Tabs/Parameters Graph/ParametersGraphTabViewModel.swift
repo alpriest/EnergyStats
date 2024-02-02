@@ -84,7 +84,7 @@ class ParametersGraphTabViewModel: ObservableObject {
         haptic.prepare()
 
         cancellable = configManager.currentDevice
-            .map { device in
+            .map { _ in
                 configManager.variables.compactMap { [weak self] variable -> ParameterGraphVariable? in
                     guard let self else { return nil }
 
@@ -96,7 +96,7 @@ class ParametersGraphTabViewModel: ObservableObject {
             .receive(on: RunLoop.main)
             .assign(to: \.graphVariables, on: self)
 
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
     }
 
     @objc
@@ -184,8 +184,12 @@ class ParametersGraphTabViewModel: ObservableObject {
             return ParameterGraphBounds(type: variable.type, min: min, max: max, now: now)
         }
 
-        let start = Calendar.current.startOfDay(for: displayMode.date)
-        xScale = start...Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: displayMode.date))!
+        let start = Swift.max(displayMode.date.addingTimeInterval(0 - (3600 * Double(hours))), Calendar.current.startOfDay(for: displayMode.date))
+        if displayMode.hours < 24 {
+            xScale = start...displayMode.date
+        } else {
+            xScale = start...Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: displayMode.date))!
+        }
 
         data = Dictionary(grouping: refreshedData, by: { $0.type.unit })
 

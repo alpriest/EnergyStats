@@ -136,8 +136,8 @@ public class NetworkValueCleaner: FoxESSNetworking {
         try await network.openapi_fetchCurrentSchedule(deviceSN: deviceSN)
     }
 
-    public func openapi_activateSchedule(deviceSN: String, schedule: Schedule) async throws {
-        try await network.openapi_activateSchedule(deviceSN: deviceSN, schedule: schedule)
+    public func openapi_saveSchedule(deviceSN: String, schedule: Schedule) async throws {
+        try await network.openapi_saveSchedule(deviceSN: deviceSN, schedule: schedule)
     }
 }
 

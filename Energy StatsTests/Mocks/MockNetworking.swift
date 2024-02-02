@@ -54,33 +54,29 @@ class MockNetworking: FoxESSNetworking {
         return try Data(contentsOf: url)
     }
 
-//    func fetchSchedulerFlag(deviceSN: String) async throws -> Energy_Stats_Core.SchedulerFlagResponse {
-//        SchedulerFlagResponse(enable: true, support: true)
-//    }
-//
-//    func fetchScheduleModes(deviceID: String) async throws -> [Energy_Stats_Core.SchedulerModeResponse] {
-//        []
-//    }
-//
-//    func saveSchedule(deviceSN: String, schedule: Energy_Stats_Core.Schedule) async throws {}
-//
-//    func saveScheduleTemplate(deviceSN: String, template: Energy_Stats_Core.ScheduleTemplate) async throws {}
-//
-//    func deleteSchedule(deviceSN: String) async throws {}
-//
-//    func createScheduleTemplate(name: String, description: String) async throws {}
-//
-//    func fetchScheduleTemplates() async throws -> Energy_Stats_Core.ScheduleTemplateListResponse {
-//        ScheduleTemplateListResponse(data: [])
-//    }
-//
-//    func enableScheduleTemplate(deviceSN: String, templateID: String) async throws {}
-//
-//    func fetchScheduleTemplate(deviceSN: String, templateID: String) async throws -> Energy_Stats_Core.ScheduleTemplateResponse {
-//        ScheduleTemplateResponse(templateName: "", enable: false, pollcy: [], content: "")
-//    }
-//
-//    func deleteScheduleTemplate(templateID: String) async throws {}
+    //    func fetchScheduleModes(deviceID: String) async throws -> [Energy_Stats_Core.SchedulerModeResponse] {
+    //        []
+    //    }
+    //
+    //    func saveSchedule(deviceSN: String, schedule: Energy_Stats_Core.Schedule) async throws {}
+    //
+    //    func saveScheduleTemplate(deviceSN: String, template: Energy_Stats_Core.ScheduleTemplate) async throws {}
+    //
+    //    func deleteSchedule(deviceSN: String) async throws {}
+    //
+    //    func createScheduleTemplate(name: String, description: String) async throws {}
+    //
+    //    func fetchScheduleTemplates() async throws -> Energy_Stats_Core.ScheduleTemplateListResponse {
+    //        ScheduleTemplateListResponse(data: [])
+    //    }
+    //
+    //    func enableScheduleTemplate(deviceSN: String, templateID: String) async throws {}
+    //
+    //    func fetchScheduleTemplate(deviceSN: String, templateID: String) async throws -> Energy_Stats_Core.ScheduleTemplateResponse {
+    //        ScheduleTemplateResponse(templateName: "", enable: false, pollcy: [], content: "")
+    //    }
+    //
+    //    func deleteScheduleTemplate(templateID: String) async throws {}
 
     func openapi_fetchDeviceList() async throws -> [Energy_Stats_Core.DeviceDetailResponse] {
         []
@@ -122,11 +118,15 @@ class MockNetworking: FoxESSNetworking {
         ]
     }
 
-    func openapi_fetchSchedulerFlag(deviceSN: String) async throws -> SchedulerFlagResponse {
-        SchedulerFlagResponse(enable: true, support: true)
+    func openapi_fetchSchedulerFlag(deviceSN: String) async throws -> GetSchedulerFlagResponse {
+        GetSchedulerFlagResponse(enable: true, support: true)
     }
 
     func openapi_fetchCurrentSchedule(deviceSN: String) async throws -> ScheduleResponse {
-        ScheduleResponse(enable: true, groups: [])
+        ScheduleResponse(enable: true.intValue, groups: [])
     }
+
+    func openapi_setScheduleFlag(deviceSN: String, enable: Bool) async throws {}
+
+    func openapi_saveSchedule(deviceSN: String, schedule: Energy_Stats_Core.Schedule) async throws {}
 }

@@ -1,5 +1,5 @@
 //
-//  SchedulerFlagResponse.swift
+//  ScheduleResponses.swift
 //  Energy Stats Core
 //
 //  Created by Alistair Priest on 30/11/2023.
