@@ -220,7 +220,8 @@ public class DemoNetworking: FoxESSNetworking {
 
 public class MockConfig: Config {
     public init() {}
-    public func clear() {}
+    public func clearDisplaySettings() {}
+    public func clearDeviceSettings() {}
 
     public var showGraphValueDescriptions: Bool = true
     public var showBatteryEstimate: Bool = true

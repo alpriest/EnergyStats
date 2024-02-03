@@ -16,7 +16,7 @@ public enum RefreshFrequency: Int {
 
 public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging {
     func fetchDevices() async throws
-    func logout()
+    func logout(clearDisplaySettings: Bool, clearDeviceSettings: Bool)
     func select(device: Device?)
     func clearBatteryOverride(for deviceID: String)
     var appSettingsPublisher: LatestAppSettingsPublisher { get }

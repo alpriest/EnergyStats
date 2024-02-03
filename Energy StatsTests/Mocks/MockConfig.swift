@@ -10,7 +10,7 @@ import Energy_Stats_Core
 import Foundation
 
 class MockConfig: Config {
-    func clear() {}
+    func clearDisplaySettings() {}
 
     var currencySymbol: String = ""
     var shouldCombineCT2WithPVPower: Bool = true

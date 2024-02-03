@@ -50,8 +50,8 @@ struct APIKeyLoginView: View {
                 Text("4. Click Generate API key")
                 Text("5. Copy the API key (make a note of it securely)")
                 Text("6. Paste the API key above")
-                
-                Text("This change to API key was required by FoxESS in January 2024. The FoxESS site does not function well on mobile devices. Please do not contact Energy Stats with issues about the FoxESS website, only FoxESS will be able to assist you in any issues with their site. service.uk@fox-ess.com")
+
+                Text("api_key_change_reason")
                     .font(.caption2)
                     .padding(.top)
             }

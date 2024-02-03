@@ -26,7 +26,6 @@ public class ConfigManager: ConfigManaging {
         self.networking = networking
         self.config = config
         self.appSettingsPublisher = appSettingsPublisher
-        selectedDeviceSN = selectedDeviceSN
     }
 
     public func fetchDevices() async throws {
@@ -76,8 +75,14 @@ public class ConfigManager: ConfigManaging {
         }
     }
 
-    public func logout() {
-        config.clear()
+    public func logout(clearDisplaySettings: Bool = true, clearDeviceSettings: Bool = true) {
+        if clearDisplaySettings {
+            config.clearDisplaySettings()
+        }
+
+        if clearDeviceSettings {
+            config.clearDeviceSettings()
+        }
     }
 
     public func select(device: Device?) {

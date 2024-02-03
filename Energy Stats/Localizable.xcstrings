@@ -253,6 +253,34 @@
         }
       }
     },
+    "- **Network calls are throttled to 1 per second**. You may notice some screens load less quickly than before." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "- **Netzwerkanrufe sind auf 1 pro Sekunde gedrosselt**. Sie werden vielleicht bemerken, dass einige Bildschirme langsamer laden als zuvor."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "- **Las llamadas de red están limitadas a 1 por segundo**. Puede notar que algunas pantallas se cargan más lentamente que antes."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "- **Le chiamate di rete sono limitate a 1 al secondo**. Potresti notare che alcune schermate si caricano meno velocemente di prima."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "- **Połączenia sieciowe są ograniczone do 1 na sekundę**. Możesz zauważyć, że niektóre ekrany ładują się wolniej niż wcześniej."
+          }
+        }
+      }
+    },
     "- **Rate limited to 1,440 requests per inverter per day**. Unless you leave Energy Stats on 24 hours a day this is unlikely to affect you." : {
       "localizations" : {
         "de" : {
@@ -305,6 +333,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "- **Szablony harmonogramów nie są już dostępne**, ponieważ FoxESS jeszcze nie udostępnił ich za pośrednictwem swojego OpenAPI. Gdy szablony harmonogramów staną się dostępne, wsparcie zostanie dodane."
+          }
+        }
+      }
+    },
+    "- **Work mode is not configurable**. You will need to use a schedule to change your default inverter work mode." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "- **Der Arbeitsmodus ist nicht konfigurierbar**. Sie müssen einen Zeitplan verwenden, um Ihren Standard-Wechselrichter-Arbeitsmodus zu ändern."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "- **El modo de trabajo no es configurable**. Necesitará usar un horario para cambiar su modo de trabajo predeterminado del inversor."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "- **La modalità di lavoro non è configurabile**. Dovrai utilizzare un programma per cambiare la modalità di lavoro predefinita del tuo inverter."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "- **Tryb pracy nie jest konfigurowalny**. Musisz użyć harmonogramu, aby zmienić domyślny tryb pracy twojego falownika."
           }
         }
       }
@@ -1898,6 +1954,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
+          }
+        }
+      }
+    },
+    "api_key_change_reason" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diese Änderung des API-Schlüssels wurde Anfang 2024 von FoxESS gefordert. Die FoxESS-Website funktioniert auf mobilen Geräten nicht gut. Bitte kontaktieren Sie Energy Stats nicht bei Problemen mit der FoxESS-Website, nur FoxESS kann Ihnen bei Problemen mit ihrer Seite helfen. service.uk@fox-ess.com"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This change to API key was required by FoxESS in early 2024. The FoxESS site does not function well on mobile devices. Please do not contact Energy Stats with issues about the FoxESS website, only FoxESS will be able to assist you in any issues with their site. service.uk@fox-ess.com"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este cambio en la clave API fue requerido por FoxESS a principios de 2024. El sitio de FoxESS no funciona bien en dispositivos móviles. Por favor, no contacte a Energy Stats con problemas sobre el sitio web de FoxESS, solo FoxESS podrá ayudarlo con cualquier problema en su sitio. service.uk@fox-ess.com"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Questa modifica alla chiave API è stata richiesta da FoxESS all'inizio del 2024. Il sito FoxESS non funziona bene sui dispositivi mobili. Si prega di non contattare Energy Stats per problemi relativi al sito web di FoxESS, solo FoxESS potrà assistervi in caso di problemi con il loro sito. service.uk@fox-ess.com"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ta zmiana klucza API była wymagana przez FoxESS na początku 2024 roku. Strona FoxESS nie działa dobrze na urządzeniach mobilnych. Prosimy nie kontaktować się z Energy Stats w sprawie problemów ze stroną internetową FoxESS, tylko FoxESS będzie w stanie pomóc Państwu w przypadku problemów z ich stroną. service.uk@fox-ess.com"
           }
         }
       }
@@ -6337,7 +6427,36 @@
         }
       }
     },
+    "In December 2023, FoxESS asked all 3rd party integrations to migrate access to a new set of services to access customer data. These new services are known by FoxESS as their OpenAPI services. Energy Stats has been changed internally to use these new services (116 files, 3,500 lines of code changed)." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Im Dezember 2023 bat FoxESS alle Drittanbieter-Integrationen, den Zugriff auf eine neue Reihe von Diensten zur Kundendatenabfrage zu migrieren. Diese neuen Dienste sind bei FoxESS als ihre OpenAPI-Dienste bekannt. Energy Stats wurde intern umgestellt, um diese neuen Dienste zu nutzen (116 Dateien, 3.500 Codezeilen geändert)."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En diciembre de 2023, FoxESS solicitó a todas las integraciones de terceros que migraran el acceso a un nuevo conjunto de servicios para acceder a los datos de los clientes. Estos nuevos servicios son conocidos por FoxESS como sus servicios OpenAPI. Energy Stats ha sido modificado internamente para utilizar estos nuevos servicios (116 archivos, 3,500 líneas de código cambiadas)."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nel dicembre 2023, FoxESS ha chiesto a tutte le integrazioni di terze parti di migrare l'accesso a un nuovo insieme di servizi per accedere ai dati dei clienti. Questi nuovi servizi sono conosciuti da FoxESS come i loro servizi OpenAPI. Energy Stats è stato modificato internamente per utilizzare questi nuovi servizi (116 file, 3.500 righe di codice modificate)."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "W grudniu 2023 roku FoxESS poprosił wszystkie integracje stron trzecich o migrację dostępu do nowego zestawu usług w celu dostępu do danych klientów. Te nowe usługi są znane w FoxESS jako ich usługi OpenAPI. Energy Stats zostało zmienione wewnętrznie, aby korzystać z tych nowych usług (zmienionych 116 plików, 3,500 linii kodu)."
+          }
+        }
+      }
+    },
     "In December 2023, FoxESS asked all 3rd party integrations use a migrate access to a new set of services to access customer data. These new services are known by FoxESS as their OpenAPI services." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -11066,6 +11185,7 @@
       }
     },
     "Show inverter plant name" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -11089,6 +11209,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pokaż nazwę elektrowni falownika"
+          }
+        }
+      }
+    },
+    "Show inverter station name" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inverter-Station-Namen anzeigen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar nombre de la estación del inversor"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra il nome della stazione dell'inverter"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pokaż nazwę stacji falownika"
           }
         }
       }
@@ -11966,29 +12114,36 @@
       }
     },
     "This change to API key was required by FoxESS in January 2024. The FoxESS site does not function well on mobile devices. Please do not contact Energy Stats with issues about the FoxESS website, only FoxESS will be able to assist you in any issues with their site. service.uk@fox-ess.com" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Diese Änderung am API-Schlüssel wurde im Januar 2024 von FoxESS gefordert. Die FoxESS-Website funktioniert nicht gut auf mobilen Geräten. Bitte kontaktieren Sie Energy Stats nicht bei Problemen mit der FoxESS-Website, nur FoxESS kann Ihnen bei Problemen mit ihrer Seite helfen. service.uk@fox-ess.com"
+            "value" : "Diese Änderung des API-Schlüssels wurde Anfang 2024 von FoxESS gefordert. Die FoxESS-Website funktioniert auf mobilen Geräten nicht gut. Bitte kontaktieren Sie Energy Stats nicht bei Problemen mit der FoxESS-Website, nur FoxESS kann Ihnen bei Problemen mit ihrer Seite helfen. service.uk@fox-ess.com"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This change to API key was required by FoxESS in early 2024. The FoxESS site does not function well on mobile devices. Please do not contact Energy Stats with issues about the FoxESS website, only FoxESS will be able to assist you in any issues with their site. service.uk@fox-ess.com"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Este cambio en la clave API fue requerido por FoxESS en enero de 2024. El sitio de FoxESS no funciona bien en dispositivos móviles. Por favor, no contacte a Energy Stats con problemas sobre el sitio web de FoxESS, solo FoxESS podrá ayudarle con cualquier problema en su sitio. service.uk@fox-ess.com"
+            "value" : "Este cambio en la clave API fue requerido por FoxESS a principios de 2024. El sitio de FoxESS no funciona bien en dispositivos móviles. Por favor, no contacte a Energy Stats con problemas sobre el sitio web de FoxESS, solo FoxESS podrá ayudarlo con cualquier problema en su sitio. service.uk@fox-ess.com"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Questa modifica alla chiave API è stata richiesta da FoxESS nel gennaio 2024. Il sito di FoxESS non funziona bene sui dispositivi mobili. Si prega di non contattare Energy Stats per problemi relativi al sito web di FoxESS, solo FoxESS potrà assistervi per qualsiasi problema con il loro sito. service.uk@fox-ess.com"
+            "value" : "Questa modifica alla chiave API è stata richiesta da FoxESS all'inizio del 2024. Il sito FoxESS non funziona bene sui dispositivi mobili. Si prega di non contattare Energy Stats per problemi relativi al sito web di FoxESS, solo FoxESS potrà assistervi in caso di problemi con il loro sito. service.uk@fox-ess.com"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ta zmiana klucza API była wymagana przez FoxESS w styczniu 2024 roku. Strona FoxESS nie funkcjonuje dobrze na urządzeniach mobilnych. Prosimy nie kontaktować się z Energy Stats w sprawie problemów ze stroną FoxESS, tylko FoxESS będzie w stanie pomóc w jakichkolwiek problemach z ich stroną. service.uk@fox-ess.com"
+            "value" : "Ta zmiana klucza API była wymagana przez FoxESS na początku 2024 roku. Strona FoxESS nie działa dobrze na urządzeniach mobilnych. Prosimy nie kontaktować się z Energy Stats w sprawie problemów ze stroną internetową FoxESS, tylko FoxESS będzie w stanie pomóc Państwu w przypadku problemów z ich stroną. service.uk@fox-ess.com"
           }
         }
       }

@@ -8,7 +8,8 @@
 import Foundation
 
 public protocol Config {
-    func clear()
+    func clearDisplaySettings()
+    func clearDeviceSettings()
     var isDemoUser: Bool { get set }
     var hasRunBefore: Bool { get set }
     var showColouredLines: Bool { get set }

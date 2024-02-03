@@ -16,7 +16,7 @@ public extension UserDefaults {
 public class UserDefaultsConfig: Config {
     public init() {}
 
-    public func clear() {
+    public func clearDisplaySettings() {
         UserDefaults.shared.removeObject(forKey: "showGraphValueDescriptions")
         UserDefaults.shared.removeObject(forKey: "hasRunBefore")
         UserDefaults.shared.removeObject(forKey: "isDemoUser")
@@ -28,9 +28,6 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "showSunnyBackground")
         UserDefaults.shared.removeObject(forKey: "showUsableBatteryOnly")
         UserDefaults.shared.removeObject(forKey: "showTotalYield")
-        UserDefaults.shared.removeObject(forKey: "devices")
-        UserDefaults.shared.removeObject(forKey: "selectedDeviceID")
-        UserDefaults.shared.removeObject(forKey: "selectedDeviceSN")
         UserDefaults.shared.removeObject(forKey: "displayUnit")
         UserDefaults.shared.removeObject(forKey: "showInverterTemperature")
         UserDefaults.shared.removeObject(forKey: "showHomeTotalOnPowerFlow")
@@ -49,13 +46,17 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "deviceBatteryOverrides")
         UserDefaults.shared.removeObject(forKey: "solarDefinitions")
         UserDefaults.shared.removeObject(forKey: "parameterGroups")
-        UserDefaults.shared.removeObject(forKey: "solcastResourceId") // Remove 2024
-        UserDefaults.shared.removeObject(forKey: "solcastApiKey") // Remove 2024
         UserDefaults.shared.removeObject(forKey: "solcastSettings")
         UserDefaults.shared.removeObject(forKey: "dataCeiling")
         UserDefaults.shared.removeObject(forKey: "showTotalYieldOnPowerFlow")
         UserDefaults.shared.removeObject(forKey: "showFinancialSummaryOnFlowPage")
         UserDefaults.shared.removeObject(forKey: "separateParameterGraphsByUnit")
+    }
+
+    public func clearDeviceSettings() {
+        UserDefaults.shared.removeObject(forKey: "devices")
+        UserDefaults.shared.removeObject(forKey: "selectedDeviceID")
+        UserDefaults.shared.removeObject(forKey: "selectedDeviceSN")
     }
 
     @UserDefaultsStoredBool(key: "showGraphValueDescriptions", defaultValue: true)
@@ -94,7 +95,7 @@ public class UserDefaultsConfig: Config {
     @UserDefaultsStoredData(key: "devices")
     public var devices: Data?
 
-    @UserDefaultsStoredOptionalString(key: "selectedDeviceID")
+    @UserDefaultsStoredOptionalString(key: "selectedDeviceSN")
     public var selectedDeviceSN: String?
 
     @UserDefaultsStoredInt(key: "displayUnit")

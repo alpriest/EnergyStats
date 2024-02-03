@@ -112,9 +112,15 @@ struct ErrorAlertView: View {
             if case .badCredentials = cause {
                 showingUpgradeRequired = true
             }
+
+            if case .invalidToken = cause {
+                showingUpgradeRequired = true
+            }
         }
         .sheet(isPresented: $showingFatalError, content: { UnsupportedErrorView() })
-        .sheet(isPresented: $showingUpgradeRequired, content: { UpgradeRequiredView(userManager: userManager) })
+        .sheet(isPresented: $showingUpgradeRequired, content: { UpgradeRequiredView(userManager: userManager)
+                .interactiveDismissDisabled()
+        })
     }
 
     private func rectReader(_ binding: Binding<CGFloat>) -> some View {

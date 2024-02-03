@@ -42,7 +42,7 @@ struct InverterSettingsView: View {
                 }
 
                 Toggle(isOn: $showInverterStationName) {
-                    Text("Show inverter plant name")
+                    Text("Show inverter station name")
                 }
             } header: {
                 Text("Display Options")
