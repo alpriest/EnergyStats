@@ -6427,30 +6427,30 @@
         }
       }
     },
-    "In December 2023, FoxESS asked all 3rd party integrations to migrate access to a new set of services to access customer data. These new services are known by FoxESS as their OpenAPI services. Energy Stats has been changed internally to use these new services (116 files, 3,500 lines of code changed)." : {
+    "In December 2023, FoxESS asked all 3rd party integrations to migrate access to a new set of services to access customer data. These new services are known by FoxESS as their OpenAPI services. Energy Stats has been changed internally to use these new services (3,500 lines of code changed)." : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Im Dezember 2023 bat FoxESS alle Drittanbieter-Integrationen, den Zugriff auf eine neue Reihe von Diensten zur Kundendatenabfrage zu migrieren. Diese neuen Dienste sind bei FoxESS als ihre OpenAPI-Dienste bekannt. Energy Stats wurde intern umgestellt, um diese neuen Dienste zu nutzen (116 Dateien, 3.500 Codezeilen geändert)."
+            "value" : "Im Dezember 2023 bat FoxESS alle Drittanbieter-Integrationen, den Zugriff auf eine neue Reihe von Diensten zur Kundendatenabfrage zu migrieren. Diese neuen Dienste sind bei FoxESS als ihre OpenAPI-Dienste bekannt. Energy Stats wurde intern umgestellt, um diese neuen Dienste zu nutzen (3.500 Codezeilen geändert)."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "En diciembre de 2023, FoxESS solicitó a todas las integraciones de terceros que migraran el acceso a un nuevo conjunto de servicios para acceder a los datos de los clientes. Estos nuevos servicios son conocidos por FoxESS como sus servicios OpenAPI. Energy Stats ha sido modificado internamente para utilizar estos nuevos servicios (116 archivos, 3,500 líneas de código cambiadas)."
+            "value" : "En diciembre de 2023, FoxESS solicitó a todas las integraciones de terceros que migraran el acceso a un nuevo conjunto de servicios para acceder a los datos de los clientes. Estos nuevos servicios son conocidos por FoxESS como sus servicios OpenAPI. Energy Stats ha sido modificado internamente para utilizar estos nuevos servicios (3,500 líneas de código cambiadas)."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nel dicembre 2023, FoxESS ha chiesto a tutte le integrazioni di terze parti di migrare l'accesso a un nuovo insieme di servizi per accedere ai dati dei clienti. Questi nuovi servizi sono conosciuti da FoxESS come i loro servizi OpenAPI. Energy Stats è stato modificato internamente per utilizzare questi nuovi servizi (116 file, 3.500 righe di codice modificate)."
+            "value" : "Nel dicembre 2023, FoxESS ha chiesto a tutte le integrazioni di terze parti di migrare l'accesso a un nuovo insieme di servizi per accedere ai dati dei clienti. Questi nuovi servizi sono conosciuti da FoxESS come i loro servizi OpenAPI. Energy Stats è stato modificato internamente per utilizzare questi nuovi servizi (3.500 righe di codice modificate)."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "W grudniu 2023 roku FoxESS poprosił wszystkie integracje stron trzecich o migrację dostępu do nowego zestawu usług w celu dostępu do danych klientów. Te nowe usługi są znane w FoxESS jako ich usługi OpenAPI. Energy Stats zostało zmienione wewnętrznie, aby korzystać z tych nowych usług (zmienionych 116 plików, 3,500 linii kodu)."
+            "value" : "W grudniu 2023 roku FoxESS poprosił wszystkie integracje stron trzecich o migrację dostępu do nowego zestawu usług w celu dostępu do danych klientów. Te nowe usługi są znane w FoxESS jako ich usługi OpenAPI. Energy Stats zostało zmienione wewnętrznie, aby korzystać z tych nowych usług (3,500 linii kodu)."
           }
         }
       }
