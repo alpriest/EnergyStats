@@ -398,6 +398,16 @@ public class ConfigManager: ConfigManaging {
         }
     }
 
+    public var showInverterTypeName: Bool {
+        get { config.showInverterTypeName }
+        set {
+            config.showInverterTypeName = newValue
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+                showInverterTypeName: config.showInverterTypeName
+            ))
+        }
+    }
+
     public var showGridTotalsOnPowerFlow: Bool {
         get { config.showGridTotalsOnPowerFlow }
         set {

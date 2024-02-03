@@ -96,7 +96,7 @@ struct DatePickerView: View {
                     }
                 case .year:
                     Picker("Year", selection: $viewModel.year) {
-                        ForEach(Array((1990 ..< Calendar.current.component(.year, from: Date())).reversed()), id: \.self) {
+                        ForEach(Array((2020 ... Calendar.current.component(.year, from: Date())).reversed()), id: \.self) {
                             Text(String(describing: $0))
                         }
                     }.pickerStyle(.menu)

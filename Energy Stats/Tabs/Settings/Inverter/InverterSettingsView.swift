@@ -17,6 +17,7 @@ struct InverterSettingsView: View {
     @Binding var shouldInvertCT2: Bool
     @Binding var showInverterStationName: Bool
     @Binding var shouldCombineCT2WithPVPower: Bool
+    @Binding var showInverterTypeName: Bool
 
     var body: some View {
         Form {
@@ -43,6 +44,10 @@ struct InverterSettingsView: View {
 
                 Toggle(isOn: $showInverterStationName) {
                     Text("Show inverter station name")
+                }
+
+                Toggle(isOn: $showInverterTypeName) {
+                    Text("Show inverter type name")
                 }
             } header: {
                 Text("Display Options")
@@ -105,7 +110,8 @@ struct InverterSettingsView_Previews: PreviewProvider {
                 showInverterIcon: .constant(true),
                 shouldInvertCT2: .constant(true),
                 showInverterStationName: .constant(true),
-                shouldCombineCT2WithPVPower: .constant(true)
+                shouldCombineCT2WithPVPower: .constant(true),
+                showInverterTypeName: .constant(true)
             )
         }
     }

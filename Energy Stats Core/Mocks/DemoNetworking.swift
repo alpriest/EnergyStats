@@ -247,6 +247,7 @@ public class MockConfig: Config {
     public var gridImportUnitPrice: Double = 0.15
     public var feedInUnitPrice: Double = 0.05
     public var showInverterTemperature: Bool = false
+    public var showInverterTypeName: Bool = false
     public var selectedParameterGraphVariables: [String] = []
     public var showHomeTotalOnPowerFlow: Bool = true
     public var showInverterIcon: Bool = true

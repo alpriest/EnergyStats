@@ -42,7 +42,8 @@ public extension AppSettings {
             showTotalYieldOnPowerFlow: true,
             showFinancialSummaryOnFlowPage: true,
             separateParameterGraphsByUnit: true,
-            currencySymbol: "£"
+            currencySymbol: "£",
+            showInverterTypeName: false
         )
     }
 }

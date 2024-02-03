@@ -39,7 +39,8 @@ public enum AppSettingsPublisherFactory {
                 showTotalYieldOnPowerFlow: config.showTotalYieldOnPowerFlow,
                 showFinancialSummaryOnFlowPage: config.showFinancialSummaryOnFlowPage,
                 separateParameterGraphsByUnit: config.separateParameterGraphsByUnit,
-                currencySymbol: config.currencySymbol
+                currencySymbol: config.currencySymbol,
+                showInverterTypeName: config.showInverterTypeName
             )
         )
     }

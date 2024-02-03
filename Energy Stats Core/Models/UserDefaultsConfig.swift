@@ -51,6 +51,7 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "showTotalYieldOnPowerFlow")
         UserDefaults.shared.removeObject(forKey: "showFinancialSummaryOnFlowPage")
         UserDefaults.shared.removeObject(forKey: "separateParameterGraphsByUnit")
+        UserDefaults.shared.removeObject(forKey: "showInverterTypeName")
     }
 
     public func clearDeviceSettings() {
@@ -115,6 +116,9 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredBool(key: "showInverterStationName", defaultValue: false)
     public var showInverterStationName: Bool
+
+    @UserDefaultsStoredBool(key: "showInverterTypeName", defaultValue: false)
+    public var showInverterTypeName: Bool
 
     @UserDefaultsStoredBool(key: "showGridTotalsOnPowerFlow", defaultValue: false)
     public var showGridTotalsOnPowerFlow: Bool

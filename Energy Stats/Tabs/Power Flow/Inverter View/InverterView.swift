@@ -114,6 +114,13 @@ struct InverterView: View {
                                         .font(.caption2)
                                 }
                             }
+
+                            if appSettings.showInverterTypeName {
+                                OptionalView(selectableDevice.device.deviceType) {
+                                    Text($0)
+                                        .font(.caption2)
+                                }
+                            }
                         }
                     }
                 } label: {
@@ -134,9 +141,18 @@ struct InverterView: View {
                 .padding(.top, 5)
             } else {
                 VStack {
-                    OptionalView(viewModel.deviceStationName) {
-                        Text($0)
-                            .font(.caption2)
+                    if appSettings.showInverterStationName {
+                        OptionalView(viewModel.deviceStationName) {
+                            Text($0)
+                                .font(.caption2)
+                        }
+                    }
+
+                    if appSettings.showInverterTypeName {
+                        OptionalView(viewModel.deviceType) {
+                            Text($0)
+                                .font(.caption2)
+                        }
                     }
                 }
                 .padding(2)

@@ -47,6 +47,7 @@ public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging {
     var showInverterIcon: Bool { get set }
     var shouldInvertCT2: Bool { get set }
     var showInverterStationName: Bool { get set }
+    var showInverterTypeName: Bool { get set }
     var showGridTotalsOnPowerFlow: Bool { get set }
     var showLastUpdateTimestamp: Bool { get set }
     var solarDefinitions: SolarRangeDefinitions { get set }

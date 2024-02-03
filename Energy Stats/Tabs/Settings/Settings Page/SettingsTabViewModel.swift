@@ -34,6 +34,12 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
+    @Published var showInverterTypeName: Bool {
+        didSet {
+            config.showInverterTypeName = showInverterTypeName
+        }
+    }
+
     @Published var showColouredLines: Bool {
         didSet {
             config.showColouredLines = showColouredLines
@@ -167,6 +173,7 @@ class SettingsTabViewModel: ObservableObject {
         dataCeiling = config.dataCeiling
         showTotalYieldOnPowerFlow = config.showTotalYieldOnPowerFlow
         separateParameterGraphsByUnit = config.separateParameterGraphsByUnit
+        showInverterTypeName = config.showInverterTypeName
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }

@@ -48,6 +48,7 @@ public struct AppSettings {
     public var showFinancialSummaryOnFlowPage: Bool
     public var separateParameterGraphsByUnit: Bool
     public var currencySymbol: String
+    public var showInverterTypeName: Bool
 
     public init(
         showColouredLines: Bool,
@@ -77,7 +78,8 @@ public struct AppSettings {
         showTotalYieldOnPowerFlow: Bool,
         showFinancialSummaryOnFlowPage: Bool,
         separateParameterGraphsByUnit: Bool,
-        currencySymbol: String
+        currencySymbol: String,
+        showInverterTypeName: Bool
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -107,6 +109,7 @@ public struct AppSettings {
         self.showFinancialSummaryOnFlowPage = showFinancialSummaryOnFlowPage
         self.separateParameterGraphsByUnit = separateParameterGraphsByUnit
         self.currencySymbol = currencySymbol
+        self.showInverterTypeName = showInverterTypeName
     }
 
     public func copy(
@@ -137,7 +140,8 @@ public struct AppSettings {
         showTotalYieldOnPowerFlow: Bool? = nil,
         showFinancialSummaryOnFlowPage: Bool? = nil,
         separateParameterGraphsByUnit: Bool? = nil,
-        currencySymbol: String? = nil
+        currencySymbol: String? = nil,
+        showInverterTypeName: Bool? = nil
     ) -> AppSettings {
         AppSettings(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -167,7 +171,8 @@ public struct AppSettings {
             showTotalYieldOnPowerFlow: showTotalYieldOnPowerFlow ?? self.showTotalYieldOnPowerFlow,
             showFinancialSummaryOnFlowPage: showFinancialSummaryOnFlowPage ?? self.showFinancialSummaryOnFlowPage,
             separateParameterGraphsByUnit: separateParameterGraphsByUnit ?? self.separateParameterGraphsByUnit,
-            currencySymbol: currencySymbol ?? self.currencySymbol
+            currencySymbol: currencySymbol ?? self.currencySymbol,
+            showInverterTypeName: showInverterTypeName ?? self.showInverterTypeName
         )
     }
 }

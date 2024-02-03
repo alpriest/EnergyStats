@@ -6455,35 +6455,6 @@
         }
       }
     },
-    "In December 2023, FoxESS asked all 3rd party integrations use a migrate access to a new set of services to access customer data. These new services are known by FoxESS as their OpenAPI services." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Im Dezember 2023 forderte FoxESS alle Drittanbieter-Integrationen auf, den Zugriff auf eine neue Reihe von Diensten zu migrieren, um auf Kundendaten zuzugreifen. Diese neuen Dienste sind von FoxESS als ihre OpenAPI-Dienste bekannt."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "En diciembre de 2023, FoxESS pidió a todas las integraciones de terceros que migraran el acceso a un nuevo conjunto de servicios para acceder a los datos de los clientes. Estos nuevos servicios son conocidos por FoxESS como sus servicios OpenAPI."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nel dicembre 2023, FoxESS ha chiesto a tutte le integrazioni di terze parti di migrare l'accesso a un nuovo insieme di servizi per accedere ai dati dei clienti. Questi nuovi servizi sono conosciuti da FoxESS come i loro servizi OpenAPI."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "W grudniu 2023 roku FoxESS poprosiło wszystkie integracje stron trzecich o migrację dostępu do nowego zestawu usług, aby uzyskać dostęp do danych klientów. Te nowe usługi są znane w FoxESS jako ich usługi OpenAPI."
-          }
-        }
-      }
-    },
     "Includes data from %@ to Present. Figures are approximate and assume the buy/sell energy prices remained constant throughout the period of ownership." : {
       "localizations" : {
         "de" : {
@@ -11269,6 +11240,34 @@
         }
       }
     },
+    "Show inverter type name" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name des Wechselrichtertyps anzeigen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar el nombre del tipo de inversor"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra il nome del tipo di inverter"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pokaż nazwę typu falownika"
+          }
+        }
+      }
+    },
     "Show last update timestamp" : {
       "localizations" : {
         "de" : {
@@ -12113,41 +12112,6 @@
         }
       }
     },
-    "This change to API key was required by FoxESS in January 2024. The FoxESS site does not function well on mobile devices. Please do not contact Energy Stats with issues about the FoxESS website, only FoxESS will be able to assist you in any issues with their site. service.uk@fox-ess.com" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diese Änderung des API-Schlüssels wurde Anfang 2024 von FoxESS gefordert. Die FoxESS-Website funktioniert auf mobilen Geräten nicht gut. Bitte kontaktieren Sie Energy Stats nicht bei Problemen mit der FoxESS-Website, nur FoxESS kann Ihnen bei Problemen mit ihrer Seite helfen. service.uk@fox-ess.com"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "This change to API key was required by FoxESS in early 2024. The FoxESS site does not function well on mobile devices. Please do not contact Energy Stats with issues about the FoxESS website, only FoxESS will be able to assist you in any issues with their site. service.uk@fox-ess.com"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Este cambio en la clave API fue requerido por FoxESS a principios de 2024. El sitio de FoxESS no funciona bien en dispositivos móviles. Por favor, no contacte a Energy Stats con problemas sobre el sitio web de FoxESS, solo FoxESS podrá ayudarlo con cualquier problema en su sitio. service.uk@fox-ess.com"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Questa modifica alla chiave API è stata richiesta da FoxESS all'inizio del 2024. Il sito FoxESS non funziona bene sui dispositivi mobili. Si prega di non contattare Energy Stats per problemi relativi al sito web di FoxESS, solo FoxESS potrà assistervi in caso di problemi con il loro sito. service.uk@fox-ess.com"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ta zmiana klucza API była wymagana przez FoxESS na początku 2024 roku. Strona FoxESS nie działa dobrze na urządzeniach mobilnych. Prosimy nie kontaktować się z Energy Stats w sprawie problemów ze stroną internetową FoxESS, tylko FoxESS będzie w stanie pomóc Państwu w przypadku problemów z ich stroną. service.uk@fox-ess.com"
-          }
-        }
-      }
-    },
     "This unit price is managed on the FoxESS Cloud." : {
       "extractionState" : "stale",
       "localizations" : {
@@ -12599,35 +12563,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dzisiejsze zużycie"
-          }
-        }
-      }
-    },
-    "Username" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Benutzername"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nombre de usuario"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nome utente"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nazwa użytkownika"
           }
         }
       }

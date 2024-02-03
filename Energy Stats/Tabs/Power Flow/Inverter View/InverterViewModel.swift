@@ -50,4 +50,8 @@ class InverterViewModel: ObservableObject {
     var deviceDisplayName: String? {
         configManager.currentDevice.value?.deviceDisplayName
     }
+
+    var deviceType: String? {
+        configManager.currentDevice.value?.deviceType
+    }
 }
