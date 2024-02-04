@@ -30,8 +30,12 @@ public enum WorkMode: String, CaseIterable, Codable, RawRepresentable {
         case .ForceDischarge:
             return "Force Discharge"
         case .Invalid:
-            return "Invalid"
+            return ""
         }
+    }
+
+    public static var values: [WorkMode] {
+        WorkMode.allCases.filter { $0.title != "" }
     }
 }
 

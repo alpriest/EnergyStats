@@ -21,7 +21,7 @@ struct SchedulePhaseEditView: View {
     @State private var fdSOCError: LocalizedStringKey?
     @State private var timeError: LocalizedStringKey?
     private let id: String
-    private let modes = WorkMode.allCases
+    private let modes = WorkMode.values
     private let onChange: (SchedulePhase) -> Void
     private let onDelete: (String) -> Void
 

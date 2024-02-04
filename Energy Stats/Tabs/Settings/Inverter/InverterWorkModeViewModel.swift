@@ -31,7 +31,7 @@ class InverterWorkModeViewModel: ObservableObject {
 //            do {
 //                let response = try await networking.fetchWorkMode(deviceSN: deviceSN)
 //                let workMode = response.values.operationModeWorkMode.asWorkMode()
-//                self.items = WorkMode.allCases.map { SelectableItem($0, isSelected: $0 == workMode) }
+//                self.items = WorkMode.values.map { SelectableItem($0, isSelected: $0 == workMode) }
 //
 //                state = .inactive
 //            } catch {
