@@ -117,10 +117,13 @@ struct ErrorAlertView: View {
                 showingUpgradeRequired = true
             }
         }
-        .sheet(isPresented: $showingFatalError, content: { UnsupportedErrorView() })
-        .sheet(isPresented: $showingUpgradeRequired, content: { UpgradeRequiredView(userManager: userManager)
+        .sheet(isPresented: $showingFatalError) {
+            UnsupportedErrorView()
+        }
+        .sheet(isPresented: $showingUpgradeRequired) {
+            UpgradeRequiredView(userManager: userManager)
                 .interactiveDismissDisabled()
-        })
+        }
     }
 
     private func rectReader(_ binding: Binding<CGFloat>) -> some View {
