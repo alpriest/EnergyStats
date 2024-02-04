@@ -10,11 +10,6 @@ import Foundation
 struct DeviceListRequest: Encodable {
     let pageSize = 20
     let currentPage = 1
-
-    struct QueryDate: Encodable {
-        let begin = 0
-        let end = 0
-    }
 }
 
 public struct PagedDeviceListResponse: Codable, Hashable {
