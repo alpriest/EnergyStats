@@ -26,6 +26,7 @@ public class ConfigManager: ConfigManaging {
         self.networking = networking
         self.config = config
         self.appSettingsPublisher = appSettingsPublisher
+        selectedDeviceSN = selectedDeviceSN // force the currentDevice to be set
     }
 
     public func fetchDevices() async throws {
