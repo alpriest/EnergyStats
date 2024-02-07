@@ -1931,7 +1931,32 @@
       }
     },
     "API Key" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
     "api_key_change_reason" : {
       "localizations" : {
@@ -6431,7 +6456,6 @@
       }
     },
     "In December 2023, FoxESS asked all 3rd party integrations to migrate access to a new set of services to access customer data. These new services are known by FoxESS as their OpenAPI services. Energy Stats has been changed internally to use these new services (3,500 lines of code changed)." : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -6458,9 +6482,6 @@
           }
         }
       }
-    },
-    "In December 2023, FoxESS asked all 3rd party integrations to migrate access to a new set of services to access customer data. These new services are known by FoxESS as their OpenAPI services. Energy Stats has been changed internally to use these new services (116 files, 3,500 lines of code changed)." : {
-
     },
     "Includes data from %@ to Present. Figures are approximate and assume the buy/sell energy prices remained constant throughout the period of ownership." : {
       "localizations" : {
