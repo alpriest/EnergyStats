@@ -18,12 +18,12 @@ struct APIKeyLoginView: View {
                     .multilineTextAlignment(.center)
                     .font(.headline)
                     .padding()
-                
+
                 TextField("API Key", text: $apiKey)
                     .textFieldStyle(.roundedBorder)
                     .autocapitalization(.none)
                     .autocorrectionDisabled()
-                
+
                 HStack {
                     Button("Try demo") {
                         Task { await userManager.login(apiKey: "demo") }
@@ -31,7 +31,7 @@ struct APIKeyLoginView: View {
                     .accessibilityIdentifier("try_demo")
                     .padding()
                     .buttonStyle(.bordered)
-                    
+
                     Button("Log me in") {
                         Task { await userManager.login(apiKey: apiKey) }
                     }
@@ -39,22 +39,8 @@ struct APIKeyLoginView: View {
                     .buttonStyle(.borderedProminent)
                 }
             }.padding()
-            
-            VStack(alignment: .leading) {
-                Text("To get your API key:")
-                    .padding(.bottom, 8)
-                
-                Text("1. Login at https://www.foxesscloud.com/")
-                Text("2. Click the person icon top-right")
-                Text("3. Click the User Profile menu option")
-                Text("4. Click Generate API key")
-                Text("5. Copy the API key (make a note of it securely)")
-                Text("6. Paste the API key above")
 
-                Text("api_key_change_reason")
-                    .font(.caption2)
-                    .padding(.top)
-            }
+            HowToObtainAPIKeyView()
         }
         .padding()
         .loadable(userManager.state, retry: { Task { await userManager.login(apiKey: apiKey) } })

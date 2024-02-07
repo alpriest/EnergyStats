@@ -196,6 +196,7 @@
 		41BCC1AB2B245C280062084A /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC1AA2B245C280062084A /* Network.swift */; };
 		41C0923B2B20FCB0001D1E22 /* SchedulePhaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0923A2B20FCB0001D1E22 /* SchedulePhaseHelper.swift */; };
 		41C0923D2B210255001D1E22 /* ScheduleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0923C2B210255001D1E22 /* ScheduleDetailView.swift */; };
+		41C1243E2B738B1400B575F2 /* HowToObtainAPIKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C1243D2B738B1400B575F2 /* HowToObtainAPIKeyView.swift */; };
 		41C19DCD2A4DDE46009883AB /* SelfSufficiencyEstimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C19DCC2A4DDE46009883AB /* SelfSufficiencyEstimateView.swift */; };
 		41C19DCF2A4E09F9009883AB /* SelfSufficiencySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C19DCE2A4E09F9009883AB /* SelfSufficiencySettingsView.swift */; };
 		41C249A52A77FC7400D8E9E7 /* FoxESSCloudStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C249A42A77FC7400D8E9E7 /* FoxESSCloudStatusView.swift */; };
@@ -557,6 +558,7 @@
 		41C0923A2B20FCB0001D1E22 /* SchedulePhaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePhaseHelper.swift; sourceTree = "<group>"; };
 		41C0923C2B210255001D1E22 /* ScheduleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailView.swift; sourceTree = "<group>"; };
 		41C0B43329F96D3600CA9462 /* LocalizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedString.swift; sourceTree = "<group>"; };
+		41C1243D2B738B1400B575F2 /* HowToObtainAPIKeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToObtainAPIKeyView.swift; sourceTree = "<group>"; };
 		41C19DCC2A4DDE46009883AB /* SelfSufficiencyEstimateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSufficiencyEstimateView.swift; sourceTree = "<group>"; };
 		41C19DCE2A4E09F9009883AB /* SelfSufficiencySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSufficiencySettingsView.swift; sourceTree = "<group>"; };
 		41C249A42A77FC7400D8E9E7 /* FoxESSCloudStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoxESSCloudStatusView.swift; sourceTree = "<group>"; };
@@ -960,6 +962,7 @@
 			children = (
 				4141B1FF28D86C7200B60157 /* UserManager.swift */,
 				4163CA7B2B4DE46D00FDA232 /* APIKeyLoginView.swift */,
+				41C1243D2B738B1400B575F2 /* HowToObtainAPIKeyView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1593,6 +1596,7 @@
 				41A263222B6AEE9F0027E52A /* ConfigureAPIKeyView.swift in Sources */,
 				419092212B1DBF2B0017CB65 /* ScheduleSummaryView.swift in Sources */,
 				417185482A0051CA00D18CDD /* ParameterGraphVariableChooserView.swift in Sources */,
+				41C1243E2B738B1400B575F2 /* HowToObtainAPIKeyView.swift in Sources */,
 				41C6AF662A360CF600C88F2B /* CSVTextFile.swift in Sources */,
 				41C849692A8BBC3800431410 /* Intents.swift in Sources */,
 				41ACB2C62A51ADEB005831B0 /* ValueBoundsView.swift in Sources */,

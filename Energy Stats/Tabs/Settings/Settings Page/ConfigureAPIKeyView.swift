@@ -24,6 +24,8 @@ struct ConfigureAPIKeyView: View {
                 } footer: {
                     Text("If you need to change your API key then you can replace it above without losing your settings.")
                 }
+
+                HowToObtainAPIKeyView()
             }
 
             BottomButtonsView {
