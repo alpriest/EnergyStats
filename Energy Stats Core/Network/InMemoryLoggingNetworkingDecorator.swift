@@ -11,7 +11,7 @@ public class InMemoryLoggingNetworkStore: ObservableObject {
     public var reportResponse: NetworkOperation<[OpenReportResponse]>?
     public var batterySettingsResponse: NetworkOperation<BatterySOCResponse>?
     public var queryResponse: NetworkOperation<OpenQueryResponse>?
-    public var deviceListResponse: NetworkOperation<[DeviceDetailResponse]>?
+    public var deviceListResponse: NetworkOperation<[DeviceSummaryResponse]>?
     public var variables: NetworkOperation<OpenApiVariableArray>?
     public var batteryTimesResponse: NetworkOperation<BatteryTimesResponse>?
 

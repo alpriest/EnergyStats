@@ -103,7 +103,6 @@ class SettingsTabViewModel: ObservableObject {
     }
 
     @Published var hasBattery: Bool
-    @Published var firmwareVersions: DeviceFirmwareVersion?
 
     @Published var showHomeTotalOnPowerFlow: Bool {
         didSet {
@@ -160,7 +159,6 @@ class SettingsTabViewModel: ObservableObject {
         displayUnit = config.displayUnit
         batteryCapacity = String(describing: config.batteryCapacity)
         hasBattery = config.hasBattery
-        firmwareVersions = config.firmwareVersions
         showInverterTemperature = config.showInverterTemperature
         showHomeTotalOnPowerFlow = config.showHomeTotalOnPowerFlow
         showInverterIcon = config.showInverterIcon
@@ -181,7 +179,6 @@ class SettingsTabViewModel: ObservableObject {
             Task { @MainActor in
                 self.batteryCapacity = String(describing: config.batteryCapacity)
                 self.hasBattery = config.hasBattery
-                self.firmwareVersions = config.firmwareVersions
             }
         }.store(in: &cancellables)
     }

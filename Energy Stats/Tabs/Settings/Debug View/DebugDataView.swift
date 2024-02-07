@@ -67,7 +67,7 @@ struct DebugDataView: View {
                     )
                 }
                 NavigationLink("Device List") {
-                    ResponseDebugView<[DeviceDetailResponse]>(
+                    ResponseDebugView<[DeviceSummaryResponse]>(
                         store: store,
                         title: "Device List",
                         missing: "Device list is fetched and recached on login, logout and login to see the data response.",

@@ -20,7 +20,6 @@ struct SettingsTabView: View {
                 NavigationLink {
                     InverterSettingsView(networking: networking,
                                          configManager: configManager,
-                                         firmwareVersion: viewModel.firmwareVersions,
                                          showInverterTemperature: $viewModel.showInverterTemperature,
                                          showInverterIcon: $viewModel.showInverterIcon,
                                          shouldInvertCT2: $viewModel.shouldInvertCT2,

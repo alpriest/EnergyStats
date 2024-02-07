@@ -134,18 +134,15 @@ public extension Network {
         }
     }
 
-    func openapi_fetchDeviceList() async throws -> [DeviceDetailResponse] {
+    func openapi_fetchDeviceList() async throws -> [DeviceSummaryResponse] {
         var request = URLRequest(url: URL.getOpenDeviceList)
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(DeviceListRequest())
 
         let deviceListResult: (PagedDeviceListResponse, _) = try await fetch(request)
-        let devices = try await deviceListResult.0.data.asyncMap {
-            try await openapi_fetchDevice(deviceSN: $0.deviceSN)
-        }
 
-        store.deviceListResponse = NetworkOperation(description: "fetchDeviceList", value: devices, raw: deviceListResult.1)
-        return devices
+        store.deviceListResponse = NetworkOperation(description: "fetchDeviceList", value: deviceListResult.0.data, raw: deviceListResult.1)
+        return deviceListResult.0.data
     }
 
     func openapi_fetchDevice(deviceSN: String) async throws -> DeviceDetailResponse {

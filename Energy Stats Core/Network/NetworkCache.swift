@@ -87,16 +87,20 @@ public class NetworkCache: FoxESSNetworking {
         }
     }
 
-    public func openapi_fetchDeviceList() async throws -> [DeviceDetailResponse] {
+    public func openapi_fetchDeviceList() async throws -> [DeviceSummaryResponse] {
         let key = makeKey(base: #function)
 
-        if let item = cache[key], let cached = item.item as? [DeviceDetailResponse], item.isFresherThan(interval: shortCacheDurationInSeconds) {
+        if let item = cache[key], let cached = item.item as? [DeviceSummaryResponse], item.isFresherThan(interval: shortCacheDurationInSeconds) {
             return cached
         } else {
             let fresh = try await network.openapi_fetchDeviceList()
             store(key: key, value: CachedItem(fresh))
             return fresh
         }
+    }
+
+    public func openapi_fetchDevice(deviceSN: String) async throws -> DeviceDetailResponse {
+        try await network.openapi_fetchDevice(deviceSN: deviceSN)
     }
 
     public func openapi_setBatterySoc(deviceSN: String, minSOCOnGrid: Int, minSOC: Int) async throws {

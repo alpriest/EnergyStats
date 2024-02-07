@@ -58,10 +58,9 @@ public class ConfigManager: ConfigManaging {
 
             return Device(
                 deviceSN: device.deviceSN,
-                stationName: device.stationName,
+                stationName: nil,
                 stationID: device.stationID,
                 battery: deviceBattery,
-                firmware: DeviceFirmwareVersion(master: device.masterVersion, slave: device.slaveVersion, manager: device.managerVersion),
                 moduleSN: device.moduleSN,
                 deviceType: device.deviceType,
                 hasPV: device.hasPV,
@@ -90,10 +89,6 @@ public class ConfigManager: ConfigManaging {
         guard let device else { return }
 
         selectedDeviceSN = device.deviceSN
-    }
-
-    public var firmwareVersions: DeviceFirmwareVersion? {
-        currentDevice.value?.firmware
     }
 
     public var minSOC: Double { Double(currentDevice.value?.battery?.minSOC ?? "0.2") ?? 0.0 }

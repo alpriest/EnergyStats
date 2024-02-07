@@ -24,7 +24,8 @@ public protocol FoxESSNetworking {
     //    func fetchScheduleTemplate(deviceSN: String, templateID: String) async throws -> ScheduleTemplateResponse
     //    func deleteScheduleTemplate(templateID: String) async throws
 
-    func openapi_fetchDeviceList() async throws -> [DeviceDetailResponse]
+    func openapi_fetchDeviceList() async throws -> [DeviceSummaryResponse]
+    func openapi_fetchDevice(deviceSN: String) async throws -> DeviceDetailResponse
     func openapi_fetchRealData(deviceSN: String, variables: [String]) async throws -> OpenQueryResponse
     func openapi_fetchHistory(deviceSN: String, variables: [String], start: Date, end: Date) async throws -> OpenHistoryResponse
     func openapi_fetchVariables() async throws -> [OpenApiVariable]

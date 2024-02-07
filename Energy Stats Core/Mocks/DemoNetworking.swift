@@ -74,41 +74,48 @@ public class DemoNetworking: FoxESSNetworking {
         }
     }
 
-    public func openapi_fetchDeviceList() async throws -> [DeviceDetailResponse] {
+    public func openapi_fetchDeviceList() async throws -> [DeviceSummaryResponse] {
         [
-            DeviceDetailResponse(
+            DeviceSummaryResponse(
                 deviceSN: "5678",
                 moduleSN: "sn-1",
                 stationID: "p1",
-                stationName: "station 1",
-                managerVersion: "1.0",
-                masterVersion: "2.0",
-                slaveVersion: "3.0",
-                hardwareVersion: "4.0",
-                status: 1,
-                function: DeviceDetailResponse.Function(scheduler: false),
                 productType: "H",
                 deviceType: "h1-3.0",
                 hasBattery: true,
-                hasPV: true
+                hasPV: true,
+                status: 1
             ),
-            DeviceDetailResponse(
+            DeviceSummaryResponse(
                 deviceSN: "1234",
                 moduleSN: "sn-2",
                 stationID: "p2",
-                stationName: "station 2",
-                managerVersion: "1.0",
-                masterVersion: "2.0",
-                slaveVersion: "3.0",
-                hardwareVersion: "4.0",
-                status: 1,
-                function: DeviceDetailResponse.Function(scheduler: false),
                 productType: "H",
                 deviceType: "h1-5.0",
                 hasBattery: true,
-                hasPV: false
+                hasPV: false,
+                status: 1
             )
         ]
+    }
+
+    public func openapi_fetchDevice(deviceSN: String) async throws -> DeviceDetailResponse {
+        DeviceDetailResponse(
+            deviceSN: "5678",
+            moduleSN: "sn-1",
+            stationID: "p1",
+            stationName: "station 1",
+            managerVersion: "1.0",
+            masterVersion: "2.0",
+            slaveVersion: "3.0",
+            hardwareVersion: "4.0",
+            status: 1,
+            function: DeviceDetailResponse.Function(scheduler: false),
+            productType: "H",
+            deviceType: "h1-3.0",
+            hasBattery: true,
+            hasPV: true
+        )
     }
 
     private func data(filename: String) throws -> Data {

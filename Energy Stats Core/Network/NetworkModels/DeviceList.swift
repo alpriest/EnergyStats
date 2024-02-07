@@ -16,18 +16,18 @@ public struct PagedDeviceListResponse: Codable, Hashable {
     let currentPage: Int
     let pageSize: Int
     let total: Int
-    public let data: [PagedDeviceListResponseDevice]
+    public let data: [DeviceSummaryResponse]
+}
 
-    public struct PagedDeviceListResponseDevice: Codable, Hashable {
-        public let deviceSN: String
-        public let moduleSN: String
-        public let stationID: String
-        public let productType: String
-        public let deviceType: String
-        public let hasBattery: Bool
-        public let hasPV: Bool
-        public let status: Int
-    }
+public struct DeviceSummaryResponse: Codable, Hashable {
+    public let deviceSN: String
+    public let moduleSN: String
+    public let stationID: String
+    public let productType: String
+    public let deviceType: String
+    public let hasBattery: Bool
+    public let hasPV: Bool
+    public let status: Int
 }
 
 public struct DeviceDetailResponse: Codable, Hashable {
@@ -58,12 +58,11 @@ struct DeviceList: Codable {
 public struct Device: Codable, Hashable, Identifiable {
     public let deviceSN: String
     public let hasPV: Bool
-    public let stationName: String
+    public let stationName: String?
     public let stationID: String
     public let hasBattery: Bool
     public let deviceType: String
     public let battery: Battery?
-    public let firmware: DeviceFirmwareVersion?
     public let moduleSN: String
 
     public struct Battery: Codable, Hashable {
@@ -83,14 +82,13 @@ public struct Device: Codable, Hashable, Identifiable {
     }
 
     public var deviceSelectorName: String {
-        stationName
+        stationName ?? deviceSN
     }
 
     public init(deviceSN: String,
-                stationName: String,
+                stationName: String?,
                 stationID: String,
                 battery: Battery?,
-                firmware: DeviceFirmwareVersion?,
                 moduleSN: String,
                 deviceType: String,
                 hasPV: Bool,
@@ -100,7 +98,6 @@ public struct Device: Codable, Hashable, Identifiable {
         self.stationName = stationName
         self.stationID = stationID
         self.battery = battery
-        self.firmware = firmware
         self.moduleSN = moduleSN
         self.deviceType = deviceType
         self.hasPV = hasPV
@@ -111,7 +108,6 @@ public struct Device: Codable, Hashable, Identifiable {
                      stationName: String? = nil,
                      stationID: String? = nil,
                      battery: Battery? = nil,
-                     firmware: DeviceFirmwareVersion? = nil,
                      moduleSN: String? = nil,
                      deviceType: String? = nil,
                      hasPV: Bool? = nil,
@@ -122,7 +118,6 @@ public struct Device: Codable, Hashable, Identifiable {
             stationName: stationName ?? self.stationName,
             stationID: stationID ?? self.stationID,
             battery: battery ?? self.battery,
-            firmware: firmware ?? self.firmware,
             moduleSN: moduleSN ?? self.moduleSN,
             deviceType: deviceType ?? self.deviceType,
             hasPV: hasPV ?? self.hasPV,

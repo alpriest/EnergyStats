@@ -18,11 +18,12 @@ class ScheduleSummaryViewModel: ObservableObject {
     @Published var schedule: Schedule?
     @Published var schedulerEnabled: Bool = false {
         didSet {
-            if case .inactive = state {
+            if case .inactive = self.state {
                 Task { await setSchedulerFlag() }
             }
         }
     }
+
     private var hasPreLoaded = false
 
     init(networking: FoxESSNetworking, config: ConfigManaging) {
@@ -46,7 +47,14 @@ class ScheduleSummaryViewModel: ObservableObject {
         do {
             let flags = try await networking.openapi_fetchSchedulerFlag(deviceSN: device.deviceSN)
             if !flags.support {
-                let message = String(key: .schedulesUnsupported, arguments: [device.deviceDisplayName, self.config.firmwareVersions?.manager ?? ""])
+                let firmwareVersions: DeviceFirmwareVersion?
+                if let response = try? await networking.openapi_fetchDevice(deviceSN: device.deviceSN) {
+                    firmwareVersions = DeviceFirmwareVersion(master: response.masterVersion, slave: response.slaveVersion, manager: response.managerVersion)
+                } else {
+                    firmwareVersions = nil
+                }
+
+                let message = String(key: .schedulesUnsupported, arguments: [device.deviceDisplayName, firmwareVersions?.manager ?? ""])
                 self.state = .error(nil, message)
             } else {
                 self.state = .inactive
@@ -63,7 +71,7 @@ class ScheduleSummaryViewModel: ObservableObject {
             state == .inactive
         else { return }
 
-        if !hasPreLoaded {
+        if !self.hasPreLoaded {
             await self.preload()
             if case .error = self.state {
                 return
@@ -73,7 +81,7 @@ class ScheduleSummaryViewModel: ObservableObject {
 
         do {
             let scheduleResponse = try await networking.openapi_fetchCurrentSchedule(deviceSN: deviceSN)
-            schedulerEnabled = scheduleResponse.enable.boolValue
+            self.schedulerEnabled = scheduleResponse.enable.boolValue
 
             self.schedule = Schedule(phases: scheduleResponse.groups.compactMap { $0.toSchedulePhase() })
             self.setState(.inactive)
@@ -90,13 +98,13 @@ class ScheduleSummaryViewModel: ObservableObject {
         else { return }
 
         do {
-            if schedulerEnabled {
+            if self.schedulerEnabled {
                 self.state = .active("Activating")
             } else {
                 self.state = .active("Deactivating")
             }
 
-            try await self.networking.openapi_setScheduleFlag(deviceSN: deviceSN, enable: schedulerEnabled)
+            try await self.networking.openapi_setScheduleFlag(deviceSN: deviceSN, enable: self.schedulerEnabled)
             self.setState(.inactive)
         } catch {
             self.setState(.error(error, error.localizedDescription))

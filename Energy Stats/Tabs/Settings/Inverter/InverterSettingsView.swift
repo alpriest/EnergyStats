@@ -11,13 +11,13 @@ import SwiftUI
 struct InverterSettingsView: View {
     let networking: FoxESSNetworking
     let configManager: ConfigManaging
-    let firmwareVersion: DeviceFirmwareVersion?
     @Binding var showInverterTemperature: Bool
     @Binding var showInverterIcon: Bool
     @Binding var shouldInvertCT2: Bool
     @Binding var showInverterStationName: Bool
     @Binding var shouldCombineCT2WithPVPower: Bool
     @Binding var showInverterTypeName: Bool
+    @State private var firmwareVersions: DeviceFirmwareVersion? = nil
 
     var body: some View {
         Form {
@@ -67,7 +67,18 @@ struct InverterSettingsView: View {
                 Text("invert_ct2_footnote")
             }
 
-            InverterFirmwareVersionsView(viewModel: firmwareVersion)
+            if let firmwareVersions {
+                InverterFirmwareVersionsView(viewModel: firmwareVersions)
+            } else if let selectedDeviceSN = configManager.selectedDeviceSN {
+                Text("Loading")
+                    .onAppear {
+                        Task {
+                            if let response = try? await networking.openapi_fetchDevice(deviceSN: selectedDeviceSN) {
+                                firmwareVersions = DeviceFirmwareVersion(master: response.masterVersion, slave: response.slaveVersion, manager: response.managerVersion)
+                            }
+                        }
+                    }
+            }
 
             if let currentDevice = configManager.currentDevice.value {
                 Section {
@@ -105,7 +116,6 @@ struct InverterSettingsView_Previews: PreviewProvider {
             InverterSettingsView(
                 networking: DemoNetworking(),
                 configManager: PreviewConfigManager(),
-                firmwareVersion: .preview(),
                 showInverterTemperature: .constant(true),
                 showInverterIcon: .constant(true),
                 shouldInvertCT2: .constant(true),

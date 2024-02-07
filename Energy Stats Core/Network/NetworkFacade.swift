@@ -121,11 +121,19 @@ public class NetworkFacade: FoxESSNetworking {
         }
     }
 
-    public func openapi_fetchDeviceList() async throws -> [DeviceDetailResponse] {
+    public func openapi_fetchDeviceList() async throws -> [DeviceSummaryResponse] {
         return if isDemoUser {
             try await fakeNetwork.openapi_fetchDeviceList()
         } else {
             try await network.openapi_fetchDeviceList()
+        }
+    }
+
+    public func openapi_fetchDevice(deviceSN: String) async throws -> DeviceDetailResponse {
+        return if isDemoUser {
+            try await fakeNetwork.openapi_fetchDevice(deviceSN: deviceSN)
+        } else {
+            try await network.openapi_fetchDevice(deviceSN: deviceSN)
         }
     }
 

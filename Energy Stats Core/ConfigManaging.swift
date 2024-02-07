@@ -36,7 +36,6 @@ public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging {
     var showSunnyBackground: Bool { get set }
     var devices: [Device]? { get set }
     var selectedDeviceSN: String? { get }
-    var firmwareVersions: DeviceFirmwareVersion? { get }
     var displayUnit: DisplayUnit { get set }
     var variables: [Variable] { get }
     var currentDevice: CurrentValueSubject<Device?, Never> { get }
