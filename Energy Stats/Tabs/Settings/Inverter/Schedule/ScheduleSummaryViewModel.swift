@@ -47,14 +47,7 @@ class ScheduleSummaryViewModel: ObservableObject {
         do {
             let flags = try await networking.openapi_fetchSchedulerFlag(deviceSN: device.deviceSN)
             if !flags.support {
-                let firmwareVersions: DeviceFirmwareVersion?
-                if let response = try? await networking.openapi_fetchDevice(deviceSN: device.deviceSN) {
-                    firmwareVersions = DeviceFirmwareVersion(master: response.masterVersion, slave: response.slaveVersion, manager: response.managerVersion)
-                } else {
-                    firmwareVersions = nil
-                }
-
-                let message = String(key: .schedulesUnsupported, arguments: [device.deviceDisplayName, firmwareVersions?.manager ?? ""])
+                let message = String(key: .schedulesUnsupported, arguments: [device.deviceDisplayName, config.currentDevice.value?.firmware?.manager ?? ""])
                 self.state = .error(nil, message)
             } else {
                 self.state = .inactive

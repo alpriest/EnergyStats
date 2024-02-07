@@ -41,26 +41,12 @@ public class ConfigManager: ConfigManaging {
         }
 
         let newDevices = await deviceList.asyncMap { device in
-            let deviceBattery: Device.Battery?
-
-            if device.hasBattery {
-                do {
-                    let batteryVariables = try await networking.openapi_fetchRealData(deviceSN: device.deviceSN, variables: ["ResidualEnergy", "SoC"])
-                    let batterySettings = try await networking.openapi_fetchBatterySettings(deviceSN: device.deviceSN)
-
-                    deviceBattery = BatteryResponseMapper.map(batteryVariables: batteryVariables, settings: batterySettings)
-                } catch {
-                    deviceBattery = nil
-                }
-            } else {
-                deviceBattery = nil
-            }
-
-            return Device(
+            Device(
                 deviceSN: device.deviceSN,
                 stationName: nil,
                 stationID: device.stationID,
-                battery: deviceBattery,
+                battery: nil,
+                firmware: nil,
                 moduleSN: device.moduleSN,
                 deviceType: device.deviceType,
                 hasPV: device.hasPV,
@@ -140,6 +126,38 @@ public class ConfigManager: ConfigManaging {
         set {
             config.selectedDeviceSN = newValue
             currentDevice.send(devices?.first(where: { $0.deviceSN == selectedDeviceSN }) ?? devices?.first)
+
+            if let device = currentDevice.value, device.firmware == nil {
+                Task {
+                    if let response = try? await networking.openapi_fetchDevice(deviceSN: device.deviceSN) {
+                        let firmwareVersions = DeviceFirmwareVersion(master: response.masterVersion, slave: response.slaveVersion, manager: response.managerVersion)
+
+                        let deviceBattery: Device.Battery?
+                        if device.hasBattery {
+                            do {
+                                let batteryVariables = try await networking.openapi_fetchRealData(deviceSN: device.deviceSN, variables: ["ResidualEnergy", "SoC"])
+                                let batterySettings = try await networking.openapi_fetchBatterySettings(deviceSN: device.deviceSN)
+
+                                deviceBattery = BatteryResponseMapper.map(batteryVariables: batteryVariables, settings: batterySettings)
+                            } catch {
+                                deviceBattery = nil
+                            }
+                        } else {
+                            deviceBattery = nil
+                        }
+
+                        devices = devices?.map {
+                            if $0.deviceSN == selectedDeviceSN {
+                                return $0.copy(stationName: response.stationName, battery: deviceBattery, firmware: firmwareVersions)
+                            } else {
+                                return $0
+                            }
+                        }
+
+                        currentDevice.send(devices?.first(where: { $0.deviceSN == selectedDeviceSN }) ?? devices?.first)
+                    }
+                }
+            }
         }
     }
 

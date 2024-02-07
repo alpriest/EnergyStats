@@ -67,20 +67,11 @@ struct InverterSettingsView: View {
                 Text("invert_ct2_footnote")
             }
 
-            if let firmwareVersions {
-                InverterFirmwareVersionsView(viewModel: firmwareVersions)
-            } else if let selectedDeviceSN = configManager.selectedDeviceSN {
-                Text("Loading")
-                    .onAppear {
-                        Task {
-                            if let response = try? await networking.openapi_fetchDevice(deviceSN: selectedDeviceSN) {
-                                firmwareVersions = DeviceFirmwareVersion(master: response.masterVersion, slave: response.slaveVersion, manager: response.managerVersion)
-                            }
-                        }
-                    }
-            }
-
             if let currentDevice = configManager.currentDevice.value {
+                if let firmwareVersions = currentDevice.firmware {
+                    InverterFirmwareVersionsView(viewModel: firmwareVersions)
+                }
+
                 Section {
                     ESLabeledText("Device Serial No.", value: currentDevice.deviceSN)
                     ESLabeledText("Module Serial No.", value: currentDevice.moduleSN)
@@ -96,9 +87,9 @@ struct InverterSettingsView: View {
 
     func text(_ currentDevice: Device) -> String {
         [
-            makePair("Station name", value: currentDevice.stationName),
             makePair("Device Serial No.", value: currentDevice.deviceSN),
-            makePair("Module Serial No.", value: currentDevice.moduleSN)
+            makePair("Module Serial No.", value: currentDevice.moduleSN),
+            makePair("Station name", value: currentDevice.stationName)
         ]
         .compactMap { $0 }
         .joined(separator: "\n")
