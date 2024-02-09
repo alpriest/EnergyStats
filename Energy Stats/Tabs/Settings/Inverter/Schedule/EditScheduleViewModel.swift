@@ -9,7 +9,7 @@ import Energy_Stats_Core
 import Foundation
 import SwiftUI
 
-class EditScheduleViewModel: ObservableObject {
+class EditScheduleViewModel: ObservableObject, HasLoadState {
     @Published var schedule: Schedule
     @Published var state: LoadState = .inactive
     @Published var alertContent: AlertContent?
@@ -36,7 +36,7 @@ class EditScheduleViewModel: ObservableObject {
                 try await networking.openapi_saveSchedule(deviceSN: deviceSN, schedule: schedule)
 
                 Task { @MainActor in
-                    self.state = .inactive
+                    setState(.inactive)
                     alertContent = AlertContent(
                         title: "Success",
                         message: "inverter_charge_schedule_settings_saved",
@@ -44,7 +44,7 @@ class EditScheduleViewModel: ObservableObject {
                     )
                 }
             } catch {
-                self.state = .inactive
+                setState(.inactive)
                 alertContent = AlertContent(title: "error_title", message: LocalizedStringKey(stringLiteral: error.localizedDescription))
             }
         }
@@ -92,12 +92,6 @@ class EditScheduleViewModel: ObservableObject {
 
     func deletedPhase(_ id: String) {
         schedule = SchedulePhaseHelper.deleted(phaseID: id, on: schedule)
-    }
-
-    private func setState(_ state: LoadState) {
-        Task { @MainActor in
-            self.state = state
-        }
     }
 
     func unused() {}

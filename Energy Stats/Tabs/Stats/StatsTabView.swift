@@ -47,31 +47,33 @@ struct StatsTabView: View {
                                showingGraph: $showingGraph)
 
                 ScrollView {
-                    if showingGraph {
-                        if #available(iOS 16.0, *) {
-                            HStack {
-                                Group {
-                                    if viewModel.valuesAtTime != nil, let selectedDate = viewModel.selectedDate {
-                                        Text(viewModel.selectedDateFormatted(selectedDate))
+                    VStack {
+                        if showingGraph {
+                            if #available(iOS 16.0, *) {
+                                HStack {
+                                    Group {
+                                        if viewModel.valuesAtTime != nil, let selectedDate = viewModel.selectedDate {
+                                            Text(viewModel.selectedDateFormatted(selectedDate))
 
-                                        Button("Clear graph values", action: {
-                                            self.viewModel.valuesAtTime = nil
-                                            self.viewModel.selectedDate = nil
-                                            self.viewModel.calculateApproximations()
-                                        })
-                                    } else {
-                                        Text("Touch the graph to see values at that time")
-                                    }
-                                }.padding(.vertical)
-                            }.frame(maxWidth: .infinity)
+                                            Button("Clear graph values", action: {
+                                                self.viewModel.valuesAtTime = nil
+                                                self.viewModel.selectedDate = nil
+                                                self.viewModel.calculateApproximations()
+                                            })
+                                        } else {
+                                            Text("Touch the graph to see values at that time")
+                                        }
+                                    }.padding(.vertical)
+                                }.frame(maxWidth: .infinity)
 
-                            StatsGraphView(viewModel: viewModel, selectedDate: $viewModel.selectedDate, valuesAtTime: $viewModel.valuesAtTime)
-                                .frame(height: 250)
-                                .padding(.vertical)
+                                StatsGraphView(viewModel: viewModel, selectedDate: $viewModel.selectedDate, valuesAtTime: $viewModel.valuesAtTime)
+                                    .frame(height: 250)
+                                    .padding(.vertical)
+                            }
+                        } else {
+                            Spacer()
                         }
-                    } else {
-                        Spacer()
-                    }
+                    }.loadable(viewModel.state, overlay: true, retry: { Task { await viewModel.load() } })
 
                     StatsGraphVariableToggles(viewModel: viewModel, selectedDate: $viewModel.selectedDate, valuesAtTime: $viewModel.valuesAtTime, appSettings: appSettingsPublisher.value)
 

@@ -24,7 +24,7 @@ struct GraphDisplayMode: Equatable {
     }
 }
 
-class ParametersGraphTabViewModel: ObservableObject {
+class ParametersGraphTabViewModel: ObservableObject, HasLoadState {
     private let haptic = UIImpactFeedbackGenerator()
     private let networking: FoxESSNetworking
     private var configManager: ConfigManaging
@@ -122,9 +122,7 @@ class ParametersGraphTabViewModel: ObservableObject {
         guard let currentDevice = configManager.currentDevice.value else { return }
         guard let start = queryDate.asDate() else { return }
 
-        Task { @MainActor in
-            state = .active("Loading")
-        }
+        setState(.active("Loading"))
 
         do {
             let rawGraphVariables = graphVariables.filter { $0.isSelected }.compactMap { $0.type }
@@ -143,12 +141,10 @@ class ParametersGraphTabViewModel: ObservableObject {
                 self.rawData = rawData
                 self.refresh()
                 prepareExport()
-                self.state = .inactive
+                setState(.inactive)
             }
         } catch {
-            await MainActor.run {
-                self.state = .error(error, "Could not load, check your connection")
-            }
+            setState(.error(error, "Could not load, check your connection"))
         }
     }
 

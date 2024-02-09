@@ -17,7 +17,7 @@ struct DataLogger: Identifiable {
     var id: String { moduleSN }
 }
 
-class DataLoggersViewModel: ObservableObject {
+class DataLoggersViewModel: ObservableObject, HasLoadState {
     @Published var items: [DataLogger] = []
     @Published var state: LoadState = .inactive
     private let networking: FoxESSNetworking
@@ -29,7 +29,7 @@ class DataLoggersViewModel: ObservableObject {
     func load() {
         Task { @MainActor in
             guard state == .inactive else { return }
-            state = .active("Loading")
+            setState(.active("Loading"))
 
             do {
                 let result = try await networking.openapi_fetchDataLoggers()
@@ -42,9 +42,9 @@ class DataLoggersViewModel: ObservableObject {
                     )
                 }
 
-                state = .inactive
+                setState(.inactive)
             } catch {
-                state = .error(error, "Could not load dataloggers")
+                setState(.error(error, "Could not load dataloggers"))
             }
         }
     }

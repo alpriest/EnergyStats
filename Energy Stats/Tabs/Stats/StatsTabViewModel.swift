@@ -20,7 +20,7 @@ struct ApproximationsViewModel {
     let totalsViewModel: TotalsViewModel?
 }
 
-class StatsTabViewModel: ObservableObject {
+class StatsTabViewModel: ObservableObject, HasLoadState {
     private let haptic = UIImpactFeedbackGenerator()
     private let configManager: ConfigManaging
     private let networking: FoxESSNetworking
@@ -101,6 +101,8 @@ class StatsTabViewModel: ObservableObject {
     func load() async {
         guard let currentDevice = configManager.currentDevice.value else { return }
 
+        setState(.active("Loading"))
+
         if graphVariables.isEmpty {
             await updateGraphVariables(for: currentDevice)
         }
@@ -143,10 +145,11 @@ class StatsTabViewModel: ObservableObject {
                 calculateApproximations()
                 refresh()
                 prepareExport()
+                setState(.inactive)
             }
         } catch {
             await MainActor.run {
-                self.state = .error(error, "Could not load, check your connection")
+                setState(.error(error, "Could not load, check your connection"))
             }
         }
     }

@@ -9,7 +9,7 @@ import Energy_Stats_Core
 import Foundation
 import SwiftUI
 
-class ScheduleSummaryViewModel: ObservableObject {
+class ScheduleSummaryViewModel: ObservableObject, HasLoadState {
     let networking: FoxESSNetworking
     let config: ConfigManaging
     @Published var state: LoadState = .inactive
@@ -42,7 +42,7 @@ class ScheduleSummaryViewModel: ObservableObject {
             hasPreLoaded = true
         }
 
-        self.state = .active("Loading")
+        setState(.active("Loading"))
 
         do {
             let flags = try await networking.openapi_fetchSchedulerFlag(deviceSN: device.deviceSN)
@@ -55,12 +55,12 @@ class ScheduleSummaryViewModel: ObservableObject {
                 }
 
                 let message = String(key: .schedulesUnsupported, arguments: [device.deviceDisplayName, firmwareVersions?.manager ?? ""])
-                self.state = .error(nil, message)
+                setState(.error(nil, message))
             } else {
-                self.state = .inactive
+                setState(.inactive)
             }
         } catch {
-            self.state = LoadState.error(error, error.localizedDescription)
+            setState(.error(error, error.localizedDescription))
         }
     }
 
@@ -77,7 +77,7 @@ class ScheduleSummaryViewModel: ObservableObject {
                 return
             }
         }
-        self.state = .active("Loading")
+        setState(.active("Loading"))
 
         do {
             let scheduleResponse = try await networking.openapi_fetchCurrentSchedule(deviceSN: deviceSN)
@@ -99,21 +99,15 @@ class ScheduleSummaryViewModel: ObservableObject {
 
         do {
             if self.schedulerEnabled {
-                self.state = .active("Activating")
+                setState(.active("Activating"))
             } else {
-                self.state = .active("Deactivating")
+                setState(.active("Deactivating"))
             }
 
             try await self.networking.openapi_setScheduleFlag(deviceSN: deviceSN, enable: self.schedulerEnabled)
             self.setState(.inactive)
         } catch {
             self.setState(.error(error, error.localizedDescription))
-        }
-    }
-
-    private func setState(_ state: LoadState) {
-        Task { @MainActor in
-            self.state = state
         }
     }
 }

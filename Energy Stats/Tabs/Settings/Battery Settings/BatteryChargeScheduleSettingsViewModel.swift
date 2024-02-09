@@ -9,7 +9,7 @@ import Combine
 import Energy_Stats_Core
 import Foundation
 
-class BatteryChargeScheduleSettingsViewModel: ObservableObject {
+class BatteryChargeScheduleSettingsViewModel: ObservableObject, HasLoadState {
     private let networking: FoxESSNetworking
     private let config: ConfigManaging
     private var cancellable: AnyCancellable?
@@ -35,7 +35,7 @@ class BatteryChargeScheduleSettingsViewModel: ObservableObject {
         Task { @MainActor in
             guard state == .inactive else { return }
             guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
-            state = .active("Loading")
+            setState(.active("Loading"))
 
             do {
                 let settings = try await networking.openapi_fetchBatteryTimes(deviceSN: deviceSN)
@@ -47,9 +47,9 @@ class BatteryChargeScheduleSettingsViewModel: ObservableObject {
                     timePeriod2 = ChargeTimePeriod(startTime: second.startTime, endTime: second.endTime, enabled: second.enable)
                 }
 
-                state = .inactive
+                setState(.inactive)
             } catch {
-                state = .error(error, "Could not load settings")
+                setState(.error(error, "Could not load settings"))
             }
         }
     }
@@ -57,7 +57,7 @@ class BatteryChargeScheduleSettingsViewModel: ObservableObject {
     func save() {
         Task { @MainActor in
             guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
-            state = .active("Saving")
+            setState(.active("Saving"))
 
             do {
                 let times: [ChargeTime] = [
@@ -67,12 +67,12 @@ class BatteryChargeScheduleSettingsViewModel: ObservableObject {
 
                 try await networking.openapi_setBatteryTimes(deviceSN: deviceSN, times: times)
                 alertContent = AlertContent(title: "Success", message: "battery_charge_schedule_settings_saved")
-                state = .inactive
+                setState(.inactive)
             } catch NetworkError.foxServerError(let code, _) where code == 44096 {
                 alertContent = AlertContent(title: "Failed", message: "cannot_save_due_to_active_schedule")
-                state = .inactive
+                setState(.inactive)
             } catch {
-                state = .error(error, "Could not save settings")
+                setState(.error(error, "Could not save settings"))
             }
         }
     }

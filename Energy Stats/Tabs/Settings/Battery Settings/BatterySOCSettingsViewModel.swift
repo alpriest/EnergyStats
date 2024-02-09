@@ -9,7 +9,7 @@ import Energy_Stats_Core
 import Foundation
 import SwiftUI
 
-class BatterySOCSettingsViewModel: ObservableObject {
+class BatterySOCSettingsViewModel: ObservableObject, HasLoadState {
     private let networking: FoxESSNetworking
     private let config: ConfigManaging
     private let onSOCchange: () -> Void
@@ -31,16 +31,16 @@ class BatterySOCSettingsViewModel: ObservableObject {
         Task { @MainActor in
             guard state == .inactive else { return }
             guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
-            state = .active("Loading")
+            setState(.active("Loading"))
 
             do {
                 let settings = try await networking.openapi_fetchBatterySettings(deviceSN: deviceSN)
                 self.soc = String(describing: settings.minSoc)
                 self.socOnGrid = String(describing: settings.minSocOnGrid)
 
-                state = .inactive
+                setState(.inactive)
             } catch {
-                state = .error(error, "Could not load settings")
+                setState(.error(error, "Could not load settings"))
             }
         }
     }
@@ -57,7 +57,7 @@ class BatterySOCSettingsViewModel: ObservableObject {
                 return
             }
 
-            state = .active("Saving")
+            setState(.active("Saving"))
 
             do {
                 try await networking.openapi_setBatterySoc(
@@ -69,12 +69,12 @@ class BatterySOCSettingsViewModel: ObservableObject {
                 onSOCchange()
 
                 alertContent = AlertContent(title: "Success", message: "batterySOC_settings_saved")
-                state = .inactive
+                setState(.inactive)
             } catch NetworkError.foxServerError(let code, _) where code == 44096 {
                 alertContent = AlertContent(title: "Failed", message: "cannot_save_due_to_active_schedule")
-                state = .inactive
+                setState(.inactive)
             } catch {
-                state = .error(error, "Could not save settings")
+                setState(.error(error, "Could not save settings"))
             }
         }
     }

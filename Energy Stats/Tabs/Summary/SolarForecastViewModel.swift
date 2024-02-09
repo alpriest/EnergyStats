@@ -24,7 +24,7 @@ struct SolarForecastViewData: Identifiable {
     let resourceId: String
 }
 
-class SolarForecastViewModel: ObservableObject {
+class SolarForecastViewModel: ObservableObject, HasLoadState {
     @Published var data: [SolarForecastViewData] = []
     @Published var state: LoadState = .inactive
     @Published var hasSites: Bool = false
@@ -51,7 +51,7 @@ class SolarForecastViewModel: ObservableObject {
         let today = Calendar.current.startOfDay(for: Date())
         guard let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: today) else { return }
 
-        state = .active("Loading")
+        setState(.active("Loading"))
 
         Task { @MainActor in
             data = await settings.solcastSettings.sites
@@ -93,7 +93,7 @@ class SolarForecastViewModel: ObservableObject {
                     }
                 }
 
-            self.state = .inactive
+            setState(.inactive)
         }
 
         NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)

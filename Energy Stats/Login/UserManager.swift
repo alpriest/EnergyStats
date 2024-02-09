@@ -9,7 +9,7 @@ import Combine
 import Energy_Stats_Core
 import Foundation
 
-class UserManager: ObservableObject {
+class UserManager: ObservableObject, HasLoadState {
     private let networking: FoxESSNetworking
     private var configManager: ConfigManaging
     private let store: KeychainStoring
@@ -60,7 +60,7 @@ class UserManager: ObservableObject {
     @MainActor
     func login(apiKey: String) async {
         do {
-            state = .active("Loading")
+            setState(.active("Loading"))
             if apiKey == "demo" {
                 configManager.isDemoUser = true
                 configManager.appSettingsPublisher.send(AppSettings.mock())
@@ -74,13 +74,13 @@ class UserManager: ObservableObject {
 
             switch error {
             case .badCredentials:
-                self.state = .error(error, String(key: .wrongCredentials))
+                setState(.error(error, String(key: .wrongCredentials)))
             default:
-                self.state = .error(error, String(key: .couldNotLogin))
+                setState(.error(error, String(key: .couldNotLogin)))
             }
         } catch {
             await MainActor.run {
-                self.state = .error(error, String(key: .couldNotLogin))
+                setState(.error(error, String(key: .couldNotLogin)))
             }
         }
     }
@@ -90,6 +90,6 @@ class UserManager: ObservableObject {
         store.logout()
         configManager.logout(clearDisplaySettings: true, clearDeviceSettings: false)
         networkCache.logout()
-        state = .inactive
+        setState(.inactive)
     }
 }
