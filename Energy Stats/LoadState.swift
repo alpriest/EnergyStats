@@ -36,6 +36,29 @@ enum LoadState: Equatable {
             return true
         }
     }
+
+    func opacity() -> Double {
+        switch self {
+        case .active:
+            1.0
+        default:
+            0.0
+        }
+    }
+}
+
+struct LoadingView: View {
+    let message: LocalizedStringKey
+
+    var body: some View {
+        HStack(spacing: 8) {
+            ProgressView()
+            Text(message)
+        }
+        .padding()
+        .border(Color.black)
+        .background(Color.white)
+    }
 }
 
 struct LoadStateView: ViewModifier {
@@ -57,25 +80,16 @@ struct LoadStateView: ViewModifier {
             if overlay {
                 ZStack {
                     content
-                    loading(message)
+                    LoadingView(message: message)
                 }
             } else {
-                loading(message)
+                LoadingView(message: message)
             }
         case .error(let error, let reason):
             ErrorAlertView(cause: error, message: reason, allowRetry: allowRetry, retry: retry)
         case .inactive:
             content
         }
-    }
-
-    private func loading(_ message: LocalizedStringKey) -> some View {
-        HStack(spacing: 8) {
-            Text(message)
-            ProgressView()
-        }
-        .padding()
-        .background(Color.white)
     }
 }
 
