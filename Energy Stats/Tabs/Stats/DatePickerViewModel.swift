@@ -52,7 +52,7 @@ class DatePickerViewModel: ObservableObject {
         }
 
         isInitialised = true
-        updateDisplayMode()
+        updateQuickNavigationButtons(displayMode.wrappedValue)
     }
 
     func increase() {
@@ -99,19 +99,22 @@ class DatePickerViewModel: ObservableObject {
 
             if updatedDisplayMode != displayMode {
                 displayMode = updatedDisplayMode
+                updateQuickNavigationButtons(displayMode)
             }
+        }
+    }
 
-            switch displayMode {
-            case .day(let date):
-                canIncrease = !Calendar.current.isDate(date, inSameDayAs: Date())
-            case .month(let month, let year):
-                let currentMonth = Calendar.current.component(.month, from: Date()) - 1
-                let currentYear = Calendar.current.component(.year, from: Date())
-                canIncrease = (year < currentYear) || (month < currentMonth && year <= currentYear)
-            case .year(let year):
-                let currentYear = Calendar.current.component(.year, from: Date())
-                canIncrease = year < currentYear
-            }
+    private func updateQuickNavigationButtons(_ displayMode: StatsDisplayMode) {
+        switch displayMode {
+        case .day(let date):
+            canIncrease = !Calendar.current.isDate(date, inSameDayAs: Date())
+        case .month(let month, let year):
+            let currentMonth = Calendar.current.component(.month, from: Date()) - 1
+            let currentYear = Calendar.current.component(.year, from: Date())
+            canIncrease = (year < currentYear) || (month < currentMonth && year <= currentYear)
+        case .year(let year):
+            let currentYear = Calendar.current.component(.year, from: Date())
+            canIncrease = year < currentYear
         }
     }
 
