@@ -25,6 +25,19 @@ enum StatsDisplayMode: Equatable {
             return .month
         }
     }
+
+    static func ==(lhs: StatsDisplayMode, rhs: StatsDisplayMode) -> Bool {
+        switch (lhs, rhs) {
+        case let (.day(lDate), .day(rDate)):
+            return lDate.isSame(as: rDate)
+        case let (.month(lMonth, lYear), .month(rMonth, rYear)):
+            return lYear == rYear && lMonth == rMonth
+        case let (.year(lYear), .year(rYear)):
+            return lYear == rYear
+        default:
+            return false
+        }
+    }
 }
 
 struct StatsTabView: View {

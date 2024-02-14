@@ -107,7 +107,7 @@ class DatePickerViewModel: ObservableObject {
             case .month(let month, let year):
                 let currentMonth = Calendar.current.component(.month, from: Date()) - 1
                 let currentYear = Calendar.current.component(.year, from: Date())
-                canIncrease = (month < currentMonth && year <= currentYear) || month == 11 && currentMonth == 0
+                canIncrease = (year < currentYear) || (month < currentMonth && year <= currentYear)
             case .year(let year):
                 let currentYear = Calendar.current.component(.year, from: Date())
                 canIncrease = year < currentYear
