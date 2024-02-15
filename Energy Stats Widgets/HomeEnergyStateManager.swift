@@ -61,7 +61,6 @@ class HomeEnergyStateManager {
                         "batTemperature",
                         "ResidualEnergy"]
         )
-        let soc = Int(real.datas.currentValue(for: "SoC"))
         let calculator = BatteryCapacityCalculator(capacityW: configManager.batteryCapacityW,
                                                    minimumSOC: configManager.minSOC,
                                                    bundle: Bundle(for: BundleLocator.self))
@@ -71,9 +70,14 @@ class HomeEnergyStateManager {
             residual: real.datas.currentValue(for: "ResidualEnergy") * 10.0,
             temperature: real.datas.currentValue(for: "batTemperature")
         )
-        let chargeStatusDescription = calculator.batteryChargeStatusDescription(batteryChargePowerkWH: viewModel.chargePower, batteryStateOfCharge: viewModel.chargeLevel)
+        let soc = calculator.effectiveBatteryStateOfCharge(batteryStateOfCharge: viewModel.chargeLevel, includeUnusableCapacity: !configManager.showUsableBatteryOnly)
 
-        try update(soc: soc, chargeStatusDescription: chargeStatusDescription)
+        let chargeStatusDescription = calculator.batteryChargeStatusDescription(
+            batteryChargePowerkWH: viewModel.chargePower,
+            batteryStateOfCharge: soc
+        )
+
+        try update(soc: Int(soc * 100.0), chargeStatusDescription: chargeStatusDescription)
     }
 
     @MainActor

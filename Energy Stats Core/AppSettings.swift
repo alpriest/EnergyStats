@@ -14,11 +14,6 @@ public enum SelfSufficiencyEstimateMode: Int, RawRepresentable {
     case absolute = 2
 }
 
-public enum TotalSolarYieldModel: Int, RawRepresentable {
-    case off = 0
-    case energyStats = 1
-}
-
 public struct AppSettings {
     public var showColouredLines: Bool
     public var showBatteryTemperature: Bool

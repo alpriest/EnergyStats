@@ -191,7 +191,7 @@ class PowerFlowTabViewModel: ObservableObject {
     }
 
     private func loadGeneration(_ currentDevice: Device) async throws -> GenerationViewModel {
-        try GenerationViewModel(response: await self.loadHistoryData(currentDevice))
+        try GenerationViewModel(response: await self.loadHistoryData(currentDevice), includeCT2: configManager.shouldCombineCT2WithPVPower)
     }
 
     private func loadHistoryData(_ currentDevice: Device) async throws -> OpenHistoryResponse {

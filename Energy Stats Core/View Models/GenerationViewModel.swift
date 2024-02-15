@@ -9,13 +9,15 @@ import Foundation
 
 public struct GenerationViewModel {
     private let response: OpenHistoryResponse
+    private let includeCT2: Bool
 
-    public init(response: OpenHistoryResponse) {
+    public init(response: OpenHistoryResponse, includeCT2: Bool) {
         self.response = response
+        self.includeCT2 = includeCT2
     }
 
     public func todayGeneration() -> Double {
-        let filteredVariables = response.datas.filter { $0.variable == "pvPower" }.flatMap { $0.data }
+        let filteredVariables = response.datas.filter { $0.variable == "pvPower" || ($0.variable == "meterPower2" && includeCT2) }.flatMap { $0.data }
 
         let timeDifferenceInSeconds: TimeInterval
         if let firstTime = filteredVariables[safe: 0]?.time, let secondTime = filteredVariables[safe: 1]?.time {
