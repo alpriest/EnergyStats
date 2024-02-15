@@ -32,7 +32,7 @@ struct ParameterGraphVariable: Identifiable, Equatable, Hashable {
     }
 }
 
-struct ParameterGraphValue: Identifiable {
+struct ParameterGraphValue: Identifiable, Hashable {
     let date: Date
     let value: Double
     let type: Variable

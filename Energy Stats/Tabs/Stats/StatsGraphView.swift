@@ -26,7 +26,7 @@ struct StatsGraphVariable: Identifiable, Equatable, Hashable {
     }
 }
 
-struct StatsGraphValue: Identifiable {
+struct StatsGraphValue: Identifiable, Hashable {
     let date: Date
     let value: Double
     let type: ReportVariable
@@ -118,21 +118,23 @@ struct StatsGraphView: View {
                     )
             }
         }
-        .chartOverlay { chartProxy in
-            GeometryReader { geometryReader in
-                if let date = selectedDate,
-                   let elementLocation = chartProxy.position(forX: date)
-                {
-                    let location = elementLocation - geometryReader[chartProxy.plotAreaFrame].origin.x
+        .chartOverlay { makeHighlightBar(chartProxy: $0) }
+    }
 
-                    if let firstDate = viewModel.data[safe: 0]?.date, let secondDate = viewModel.data.first(where: { $0.date > firstDate })?.date,
-                       let firstPosition = chartProxy.position(forX: firstDate), let secondPosition = chartProxy.position(forX: secondDate)
-                    {
-                        Rectangle()
-                            .fill(Color("graph_highlight"))
-                            .frame(width: secondPosition - firstPosition, height: chartProxy.plotAreaSize.height)
-                            .offset(x: location)
-                    }
+    private func makeHighlightBar(chartProxy: ChartProxy) -> some View {
+        GeometryReader { geometryReader in
+            if let date = selectedDate,
+               let elementLocation = chartProxy.position(forX: date)
+            {
+                let location = elementLocation - geometryReader[chartProxy.plotAreaFrame].origin.x
+
+                if let firstDate = viewModel.data[safe: 0]?.date, let secondDate = viewModel.data.first(where: { $0.date > firstDate })?.date,
+                   let firstPosition = chartProxy.position(forX: firstDate), let secondPosition = chartProxy.position(forX: secondDate)
+                {
+                    Rectangle()
+                        .fill(Color("graph_highlight"))
+                        .frame(width: secondPosition - firstPosition, height: chartProxy.plotAreaSize.height)
+                        .offset(x: location)
                 }
             }
         }
@@ -144,11 +146,13 @@ struct StatsGraphView: View {
 #Preview {
     VStack {
         Text(verbatim: "Day by hours")
+        let viewModel = StatsTabViewModel(networking: DemoNetworking(), configManager: PreviewConfigManager())
+
         StatsGraphView(
-            viewModel: StatsTabViewModel(networking: DemoNetworking(), configManager: PreviewConfigManager()),
+            viewModel: viewModel,
             selectedDate: .constant(nil),
             valuesAtTime: .constant(nil)
-        )
+        ).onAppear { Task { await viewModel.load() } }
     }
 }
 

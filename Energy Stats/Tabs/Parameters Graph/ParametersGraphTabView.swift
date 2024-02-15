@@ -49,27 +49,34 @@ struct ParametersGraphTabView: View {
                             }.padding(.vertical)
                         }.frame(maxWidth: .infinity)
 
-                        ZStack {
-                            if configManager.separateParameterGraphsByUnit {
+                        if configManager.separateParameterGraphsByUnit {
+                            VStack {
                                 ForEach(Array(viewModel.data.keys.sorted { $0 < $1 }), id: \.self) { key in
-                                    ParametersGraphView(key: key,
-                                                        viewModel: viewModel,
-                                                        selectedDate: $selectedDate,
-                                                        valuesAtTime: $valuesAtTime)
-                                        .frame(height: 250)
-                                        .padding(.vertical)
+                                    ZStack {
+                                        ParametersGraphView(key: key,
+                                                            viewModel: viewModel,
+                                                            selectedDate: $selectedDate,
+                                                            valuesAtTime: $valuesAtTime)
+                                            .frame(height: 250)
+                                            .padding(.vertical)
+
+                                        LoadingView(message: "Loading")
+                                            .opacity(viewModel.state.opacity())
+                                    }
                                 }
-                            } else {
+                            }
+                        } else {
+                            ZStack {
                                 ParametersGraphView(key: nil,
                                                     viewModel: viewModel,
                                                     selectedDate: $selectedDate,
                                                     valuesAtTime: $valuesAtTime)
                                     .frame(height: 250)
                                     .padding(.vertical)
-                            }
 
-                            LoadingView(message: "Loading")
-                                .opacity(viewModel.state.opacity())
+                                LoadingView(message: "Loading")
+                                    .opacity(viewModel.state.opacity())
+                            }
                         }
                     }
 

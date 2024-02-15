@@ -17,6 +17,7 @@ struct ParametersGraphView: View {
     @Binding var selectedDate: Date?
     @Binding var valuesAtTime: ValuesAtTime<ParameterGraphValue>?
     private let data: [ParameterGraphValue]
+    @State private var captionBoxSize: CGSize = .zero
 
     init(key: String?, viewModel: ParametersGraphTabViewModel, selectedDate: Binding<Date?>, valuesAtTime: Binding<ValuesAtTime<ParameterGraphValue>?>) {
         self.key = key
@@ -101,18 +102,59 @@ struct ParametersGraphView: View {
                     )
             }
         }
-        .chartOverlay { chartProxy in
-            GeometryReader { geometryReader in
-                if let date = selectedDate,
-                   let elementLocation = chartProxy.position(forX: date)
-                {
-                    let location = elementLocation - geometryReader[chartProxy.plotAreaFrame].origin.x
+        .chartOverlay { makeHighlightBar(chartProxy: $0) }
+        .chartOverlay { makeCaptionBox(chartProxy: $0) }
+    }
 
-                    Rectangle()
-                        .fill(Color("graph_highlight"))
-                        .frame(width: 1, height: chartProxy.plotAreaSize.height)
-                        .offset(x: location)
+    private func makeCaptionBox(chartProxy: ChartProxy) -> some View {
+        GeometryReader { geometryReader in
+            if let date = selectedDate,
+               let elementLocation = chartProxy.position(forX: date)
+            {
+                let location = elementLocation - geometryReader[chartProxy.plotAreaFrame].origin.x
+                let furthestRight = geometryReader[chartProxy.plotAreaFrame].width - captionBoxSize.width
+
+                if let valuesAtTime {
+                    let graphValuesAtTime: [ParameterGraphValue] = valuesAtTime.values.filter { $0.type.unit == key }
+
+                    HStack {
+                        VStack(alignment: .leading) {
+                            ForEach(graphValuesAtTime, id: \.self) { value in
+                                Text(value.type.name)
+                            }
+                        }
+
+                        VStack(alignment: .trailing) {
+                            ForEach(graphValuesAtTime, id: \.self) { value in
+                                Text(value.formatted())
+                                    .monospacedDigit()
+                            }
+                        }
+                    }
+                    .padding(4)
+                    .font(.caption)
+                    .background(Color.white)
+                    .border(Color.gray)
+                    .offset(x: min(location, furthestRight))
+                    .background(GeometryReader { reader in
+                        Color.clear.onAppear { captionBoxSize = reader.size }.onChange(of: reader.size) { newValue in captionBoxSize = newValue }
+                    })
                 }
+            }
+        }
+    }
+
+    private func makeHighlightBar(chartProxy: ChartProxy) -> some View {
+        GeometryReader { geometryReader in
+            if let date = selectedDate,
+               let elementLocation = chartProxy.position(forX: date)
+            {
+                let location = elementLocation - geometryReader[chartProxy.plotAreaFrame].origin.x
+
+                Rectangle()
+                    .fill(Color("graph_highlight"))
+                    .frame(width: 1, height: chartProxy.plotAreaSize.height)
+                    .offset(x: location)
             }
         }
     }
