@@ -17,7 +17,7 @@ public struct BatteryViewModel: Sendable {
 
     public init(power: Double, soc: Int, residual: Double, temperature: Double) {
         chargeLevel = Double(soc) / 100.0
-        chargePower = 0 - power
+        chargePower = power
         hasBattery = true
         self.temperature = temperature
         self.residual = Int(residual)
