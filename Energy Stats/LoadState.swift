@@ -56,8 +56,8 @@ struct LoadingView: View {
             Text(message)
         }
         .padding()
-        .border(Color.black)
-        .background(Color.white)
+        .border(Color("pale_gray"))
+        .background(Color("background"))
     }
 }
 

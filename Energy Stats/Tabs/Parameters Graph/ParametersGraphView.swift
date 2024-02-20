@@ -133,7 +133,7 @@ struct ParametersGraphView: View {
                     }
                     .padding(4)
                     .font(.caption)
-                    .background(Color.white)
+                    .background(Color("background").opacity(0.6))
                     .border(Color.gray)
                     .offset(x: min(location, furthestRight))
                     .background(GeometryReader { reader in
