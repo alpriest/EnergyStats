@@ -15,10 +15,18 @@ class HomeEnergyStateManager {
     static var shared: HomeEnergyStateManager = .init()
 
     let modelContainer: ModelContainer
+    let network: FoxESSNetworking
+    let config: Config
 
     init() {
         do {
             modelContainer = try ModelContainer(for: BatteryWidgetState.self)
+            let keychainStore = KeychainStore()
+            config = UserDefaultsConfig()
+            let store = InMemoryLoggingNetworkStore.shared
+            network = NetworkFacade(network: NetworkCache(network: Network(credentials: keychainStore, store: store)),
+                                    config: config,
+                                    store: keychainStore)
         } catch {
             fatalError("Failed to create the model container: \(error)")
         }
@@ -36,12 +44,6 @@ class HomeEnergyStateManager {
     func update() async throws {
         guard await isStale() else { return }
 
-        let keychainStore = KeychainStore()
-        let config = UserDefaultsConfig()
-        let store = InMemoryLoggingNetworkStore.shared
-        let network = NetworkFacade(network: NetworkCache(network: Network(credentials: keychainStore, store: store)),
-                                    config: config,
-                                    store: keychainStore)
         let appSettingsPublisher = AppSettingsPublisherFactory.make(from: config)
         let configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher)
 
@@ -57,7 +59,6 @@ class HomeEnergyStateManager {
             variables: ["SoC",
                         "batChargePower",
                         "batDischargePower",
-                        "SoC",
                         "batTemperature",
                         "ResidualEnergy"]
         )

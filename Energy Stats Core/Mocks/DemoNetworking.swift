@@ -267,6 +267,7 @@ public class MockConfig: Config {
     public var parameterGroups: [ParameterGroup] = DefaultParameterGroups()
     public var currencySymbol: String = "£"
     public var shouldCombineCT2WithPVPower: Bool = true
+    public var shouldCombineCT2WithLoadsPower: Bool = false
     public var solcastSettings: SolcastSettings = .init(apiKey: nil, sites: [SolcastSite.preview()])
     public var dataCeiling: DataCeiling = .mild
     public var showTotalYieldOnPowerFlow: Bool = true

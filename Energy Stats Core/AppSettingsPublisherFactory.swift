@@ -33,6 +33,7 @@ public enum AppSettingsPublisherFactory {
                 solarDefinitions: config.solarDefinitions,
                 parameterGroups: config.parameterGroups,
                 shouldCombineCT2WithPVPower: config.shouldCombineCT2WithPVPower,
+                shouldCombineCT2WithLoadsPower: config.shouldCombineCT2WithLoadsPower,
                 showGraphValueDescriptions: config.showGraphValueDescriptions,
                 solcastSettings: config.solcastSettings,
                 dataCeiling: config.dataCeiling,

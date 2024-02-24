@@ -136,7 +136,14 @@ public class ConfigManager: ConfigManaging {
     }
 
     public var selectedDeviceSN: String? {
-        get { config.selectedDeviceSN }
+        get {
+            if devices?.first(where: { $0.deviceSN == config.selectedDeviceSN }) != nil {
+                return config.selectedDeviceSN
+            } else {
+                config.selectedDeviceSN = devices?.first?.deviceSN
+                return config.selectedDeviceSN
+            }
+        }
         set {
             config.selectedDeviceSN = newValue
             currentDevice.send(devices?.first(where: { $0.deviceSN == selectedDeviceSN }) ?? devices?.first)
@@ -430,6 +437,16 @@ public class ConfigManager: ConfigManaging {
             config.shouldCombineCT2WithPVPower = newValue
             appSettingsPublisher.send(appSettingsPublisher.value.copy(
                 shouldCombineCT2WithPVPower: config.shouldCombineCT2WithPVPower
+            ))
+        }
+    }
+
+    public var shouldCombineCT2WithLoadsPower: Bool {
+        get { config.shouldCombineCT2WithLoadsPower }
+        set {
+            config.shouldCombineCT2WithLoadsPower = newValue
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+                shouldCombineCT2WithLoadsPower: config.shouldCombineCT2WithLoadsPower
             ))
         }
     }

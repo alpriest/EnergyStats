@@ -36,6 +36,7 @@ public extension AppSettings {
             solarDefinitions: .default(),
             parameterGroups: DefaultParameterGroups(),
             shouldCombineCT2WithPVPower: true,
+            shouldCombineCT2WithLoadsPower: false,
             showGraphValueDescriptions: true,
             solcastSettings: SolcastSettings(apiKey: nil, sites: []),
             dataCeiling: DataCeiling.mild,

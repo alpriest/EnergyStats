@@ -134,6 +134,12 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
+    @Published var shouldCombineCT2WithLoadsPower: Bool {
+        didSet {
+            config.shouldCombineCT2WithLoadsPower = shouldCombineCT2WithLoadsPower
+        }
+    }
+
     @Published var showTotalYieldOnPowerFlow: Bool {
         didSet {
             config.showTotalYieldOnPowerFlow = showTotalYieldOnPowerFlow
@@ -172,6 +178,7 @@ class SettingsTabViewModel: ObservableObject {
         showTotalYieldOnPowerFlow = config.showTotalYieldOnPowerFlow
         separateParameterGraphsByUnit = config.separateParameterGraphsByUnit
         showInverterTypeName = config.showInverterTypeName
+        shouldCombineCT2WithLoadsPower = config.shouldCombineCT2WithLoadsPower
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }

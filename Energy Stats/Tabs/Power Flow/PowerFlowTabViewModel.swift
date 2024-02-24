@@ -144,10 +144,11 @@ class PowerFlowTabViewModel: ObservableObject {
             let real = try await loadRealData(currentDevice)
             let generation = try await self.loadGeneration(currentDevice)
 
-            let currentValues = RealQueryResponseMapper.mapCurrentValues(device: currentDevice, response: real)
-            let currentViewModel = CurrentStatusCalculator(status: currentValues,
+            let currentViewModel = CurrentStatusCalculator(device: currentDevice,
+                                                           response: real,
                                                            shouldInvertCT2: self.configManager.shouldInvertCT2,
-                                                           shouldCombineCT2WithPVPower: self.configManager.shouldCombineCT2WithPVPower)
+                                                           shouldCombineCT2WithPVPower: self.configManager.shouldCombineCT2WithPVPower,
+                                                           shouldCombineCT2WithLoadsPower: self.configManager.shouldCombineCT2WithLoadsPower)
 
             let battery = self.makeBatteryViewModel(currentDevice, real)
 

@@ -53,6 +53,7 @@ public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging {
     var parameterGroups: [ParameterGroup] { get set }
     var currencySymbol: String { get set }
     var shouldCombineCT2WithPVPower: Bool { get set }
+    var shouldCombineCT2WithLoadsPower: Bool { get set }
     var showGraphValueDescriptions: Bool { get set }
     var dataCeiling: DataCeiling { get set }
     var showTotalYieldOnPowerFlow: Bool { get set }

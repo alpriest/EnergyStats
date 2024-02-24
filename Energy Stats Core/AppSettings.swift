@@ -36,6 +36,7 @@ public struct AppSettings {
     public var solarDefinitions: SolarRangeDefinitions
     public var parameterGroups: [ParameterGroup]
     public var shouldCombineCT2WithPVPower: Bool
+    public var shouldCombineCT2WithLoadsPower: Bool
     public var showGraphValueDescriptions: Bool
     public var solcastSettings: SolcastSettings
     public var dataCeiling: DataCeiling
@@ -67,6 +68,7 @@ public struct AppSettings {
         solarDefinitions: SolarRangeDefinitions,
         parameterGroups: [ParameterGroup],
         shouldCombineCT2WithPVPower: Bool,
+        shouldCombineCT2WithLoadsPower: Bool,
         showGraphValueDescriptions: Bool,
         solcastSettings: SolcastSettings,
         dataCeiling: DataCeiling,
@@ -105,6 +107,7 @@ public struct AppSettings {
         self.separateParameterGraphsByUnit = separateParameterGraphsByUnit
         self.currencySymbol = currencySymbol
         self.showInverterTypeName = showInverterTypeName
+        self.shouldCombineCT2WithLoadsPower = shouldCombineCT2WithLoadsPower
     }
 
     public func copy(
@@ -129,6 +132,7 @@ public struct AppSettings {
         solarDefinitions: SolarRangeDefinitions? = nil,
         parameterGroups: [ParameterGroup]? = nil,
         shouldCombineCT2WithPVPower: Bool? = nil,
+        shouldCombineCT2WithLoadsPower: Bool? = nil,
         showGraphValueDescriptions: Bool? = nil,
         solcastSettings: SolcastSettings? = nil,
         dataCeiling: DataCeiling? = nil,
@@ -160,6 +164,7 @@ public struct AppSettings {
             solarDefinitions: solarDefinitions ?? self.solarDefinitions,
             parameterGroups: parameterGroups ?? self.parameterGroups,
             shouldCombineCT2WithPVPower: shouldCombineCT2WithPVPower ?? self.shouldCombineCT2WithPVPower,
+            shouldCombineCT2WithLoadsPower: shouldCombineCT2WithLoadsPower ?? self.shouldCombineCT2WithLoadsPower,
             showGraphValueDescriptions: showGraphValueDescriptions ?? self.showGraphValueDescriptions,
             solcastSettings: solcastSettings ?? self.solcastSettings,
             dataCeiling: dataCeiling ?? self.dataCeiling,

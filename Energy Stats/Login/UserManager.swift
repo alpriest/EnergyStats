@@ -88,7 +88,7 @@ class UserManager: ObservableObject, HasLoadState {
     @MainActor
     func logout(clearDisplaySettings: Bool = true, clearDeviceSettings: Bool = true) {
         store.logout()
-        configManager.logout(clearDisplaySettings: true, clearDeviceSettings: false)
+        configManager.logout(clearDisplaySettings: clearDisplaySettings, clearDeviceSettings: clearDeviceSettings)
         networkCache.logout()
         setState(.inactive)
     }

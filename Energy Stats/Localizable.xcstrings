@@ -3251,6 +3251,34 @@
         }
       }
     },
+    "Combine CT2 with Loads power" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CT2 mit Lastleistung kombinieren"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Combinar CT2 con energía de las cargas"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Combina CT2 con potenza dei carichi"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Połącz CT2 z mocą obciążeń"
+          }
+        }
+      }
+    },
     "Combine CT2 with PV power" : {
       "localizations" : {
         "de" : {

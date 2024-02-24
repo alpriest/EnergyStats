@@ -42,6 +42,7 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "gridImportUnitPrice")
         UserDefaults.shared.removeObject(forKey: "currencySymbol")
         UserDefaults.shared.removeObject(forKey: "shouldCombineCT2WithPVPower")
+        UserDefaults.shared.removeObject(forKey: "shouldCombineCT2WithLoadsPower")
         UserDefaults.shared.removeObject(forKey: "selectedParameterGraphVariables")
         UserDefaults.shared.removeObject(forKey: "deviceBatteryOverrides")
         UserDefaults.shared.removeObject(forKey: "solarDefinitions")
@@ -153,6 +154,9 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredBool(key: "shouldCombineCT2WithPVPower", defaultValue: true)
     public var shouldCombineCT2WithPVPower: Bool
+
+    @UserDefaultsStoredBool(key: "shouldCombineCT2WithLoadsPower", defaultValue: false)
+    public var shouldCombineCT2WithLoadsPower: Bool
 
     public var selectedParameterGraphVariables: [String] {
         get {

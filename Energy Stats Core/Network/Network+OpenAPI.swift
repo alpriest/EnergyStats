@@ -113,7 +113,7 @@ public extension Network {
     }
 
     func openapi_setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws {
-        guard times.count == 2 else { return }
+        guard times.count >= 2 else { return }
 
         var request = URLRequest(url: URL.setOpenBatteryChargeTimes)
         request.httpMethod = "POST"

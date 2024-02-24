@@ -7,22 +7,6 @@
 
 import Foundation
 
-public enum RealQueryResponseMapper {
-    public static func mapCurrentValues(device: Device, response: OpenQueryResponse) -> CurrentValues {
-        CurrentValues(
-            pvPower: response.datas.currentValue(for: "pvPower"),
-            feedinPower: response.datas.currentValue(for: "feedinPower"),
-            gridConsumptionPower: response.datas.currentValue(for: "gridConsumptionPower"),
-            loadsPower: response.datas.currentValue(for: "loadsPower"),
-            ambientTemperation: response.datas.currentValue(for: "ambientTemperation"),
-            invTemperation: response.datas.currentValue(for: "invTemperation"),
-            meterPower2: response.datas.currentValue(for: "meterPower2"),
-            hasPV: device.hasPV,
-            lastUpdate: response.time
-        )
-    }
-}
-
 public extension Array where Element == OpenQueryResponse.Data {
     func current(for key: String) -> Double? {
         first(where: { $0.variable.lowercased() == key.lowercased() })?.value
@@ -41,18 +25,36 @@ public struct CurrentStatusCalculator: Sendable {
     public let lastUpdate: Date
     public let currentCT2: Double
 
-    public init(status: CurrentValues, shouldInvertCT2: Bool, shouldCombineCT2WithPVPower: Bool) {
+    public init(device: Device, response: OpenQueryResponse, shouldInvertCT2: Bool, shouldCombineCT2WithPVPower: Bool, shouldCombineCT2WithLoadsPower: Bool) {
+        let status = Self.mapCurrentValues(device: device, response: response)
+
         self.currentGrid = status.feedinPower - status.gridConsumptionPower
-        self.currentHomeConsumption = status.loadsPower // + raws.currentValue(for: "meterPower2")
+        self.currentHomeConsumption = Self.calculateLoadPower(status: status, shouldCombineCT2WithLoadsPower: shouldCombineCT2WithLoadsPower)
         self.currentTemperatures = InverterTemperatures(ambient: status.ambientTemperation, inverter: status.invTemperation)
         self.lastUpdate = status.lastUpdate
         self.currentCT2 = shouldInvertCT2 ? 0 - status.meterPower2 : status.meterPower2
         self.currentSolarPower = Self.calculateSolarPower(hasPV: status.hasPV, status: status, shouldInvertCT2: shouldInvertCT2, shouldCombineCT2WithPVPower: shouldCombineCT2WithPVPower)
     }
-}
 
-private extension CurrentStatusCalculator {
-    static func calculateSolarPower(hasPV: Bool, status: CurrentValues, shouldInvertCT2: Bool, shouldCombineCT2WithPVPower: Bool) -> Double {
+    static func mapCurrentValues(device: Device, response: OpenQueryResponse) -> CurrentRawValues {
+        CurrentRawValues(
+            pvPower: response.datas.currentValue(for: "pvPower"),
+            feedinPower: response.datas.currentValue(for: "feedinPower"),
+            gridConsumptionPower: response.datas.currentValue(for: "gridConsumptionPower"),
+            loadsPower: response.datas.currentValue(for: "loadsPower"),
+            ambientTemperation: response.datas.currentValue(for: "ambientTemperation"),
+            invTemperation: response.datas.currentValue(for: "invTemperation"),
+            meterPower2: response.datas.currentValue(for: "meterPower2"),
+            hasPV: device.hasPV,
+            lastUpdate: response.time
+        )
+    }
+
+    static func calculateLoadPower(status: CurrentRawValues, shouldCombineCT2WithLoadsPower: Bool) -> Double {
+        max(0, status.loadsPower + (shouldCombineCT2WithLoadsPower ? status.meterPower2 : 0.0))
+    }
+
+    static func calculateSolarPower(hasPV: Bool, status: CurrentRawValues, shouldInvertCT2: Bool, shouldCombineCT2WithPVPower: Bool) -> Double {
         let ct2 = (shouldInvertCT2 ? 0 - status.meterPower2 : status.meterPower2)
 
         if hasPV {
@@ -84,7 +86,7 @@ public extension DateFormatter {
     }
 }
 
-public struct CurrentValues {
+public struct CurrentRawValues {
     let pvPower: Double
     let feedinPower: Double
     let gridConsumptionPower: Double
@@ -95,7 +97,7 @@ public struct CurrentValues {
     let hasPV: Bool
     let lastUpdate: Date
 
-    static func empty() -> CurrentValues {
+    static func empty() -> CurrentRawValues {
         .init(pvPower: 0, feedinPower: 0, gridConsumptionPower: 0, loadsPower: 0, ambientTemperation: 0, invTemperation: 0, meterPower2: 0, hasPV: false, lastUpdate: Date())
     }
 }
