@@ -274,6 +274,7 @@ public class MockConfig: Config {
     public var showFinancialSummaryOnFlowPage: Bool = true
     public var separateParameterGraphsByUnit: Bool = true
     public var variables: [Variable] = []
+    public var showSeparateStringsOnFlowPage: Bool = false
 }
 
 public class PreviewConfigManager: ConfigManager {

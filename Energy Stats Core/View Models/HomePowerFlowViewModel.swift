@@ -19,6 +19,7 @@ public struct InverterTemperatures: Sendable {
 
 public struct HomePowerFlowViewModel: Equatable {
     public let solar: Double
+    public let solarStrings: [Double]
     public let home: Double
     public let grid: Double
     public let todaysGeneration: GenerationViewModel
@@ -31,6 +32,7 @@ public struct HomePowerFlowViewModel: Equatable {
     public let ct2: Double
 
     public init(solar: Double,
+                solarStrings: [Double],
                 battery: BatteryViewModel,
                 home: Double,
                 grid: Double,
@@ -43,6 +45,7 @@ public struct HomePowerFlowViewModel: Equatable {
                 ct2: Double)
     {
         self.solar = solar
+        self.solarStrings = solarStrings
         self.batteryViewModel = battery
         self.home = home
         self.grid = grid
@@ -97,6 +100,7 @@ public struct HomePowerFlowViewModel: Equatable {
 public extension HomePowerFlowViewModel {
     static func empty() -> Self {
         .init(solar: 0,
+              solarStrings: [],
               battery: BatteryViewModel.noBattery,
               home: 0,
               grid: 0,

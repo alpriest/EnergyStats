@@ -19,6 +19,7 @@ public extension Array where Element == OpenQueryResponse.Data {
 
 public struct CurrentStatusCalculator: Sendable {
     public let currentSolarPower: Double
+    public let currentSolarStringsPower: [Double]
     public let currentGrid: Double
     public let currentHomeConsumption: Double
     public let currentTemperatures: InverterTemperatures?
@@ -34,11 +35,13 @@ public struct CurrentStatusCalculator: Sendable {
         self.lastUpdate = status.lastUpdate
         self.currentCT2 = shouldInvertCT2 ? 0 - status.meterPower2 : status.meterPower2
         self.currentSolarPower = Self.calculateSolarPower(hasPV: status.hasPV, status: status, shouldInvertCT2: shouldInvertCT2, shouldCombineCT2WithPVPower: shouldCombineCT2WithPVPower)
+        self.currentSolarStringsPower = Self.calculateSolarStringsPower(hasPV: status.hasPV, status: status, shouldInvertCT2: shouldInvertCT2, shouldCombineCT2WithPVPower: shouldCombineCT2WithPVPower)
     }
 
     static func mapCurrentValues(device: Device, response: OpenQueryResponse) -> CurrentRawValues {
         CurrentRawValues(
             pvPower: response.datas.currentValue(for: "pvPower"),
+            stringsPvPower: [response.datas.currentValue(for: "pv1Power"), response.datas.currentValue(for: "pv2Power")],
             feedinPower: response.datas.currentValue(for: "feedinPower"),
             gridConsumptionPower: response.datas.currentValue(for: "gridConsumptionPower"),
             loadsPower: response.datas.currentValue(for: "loadsPower"),
@@ -61,6 +64,16 @@ public struct CurrentStatusCalculator: Sendable {
             return status.pvPower + (shouldCombineCT2WithPVPower ? ct2 : 0.0)
         } else {
             return ct2
+        }
+    }
+
+    static func calculateSolarStringsPower(hasPV: Bool, status: CurrentRawValues, shouldInvertCT2: Bool, shouldCombineCT2WithPVPower: Bool) -> [Double] {
+        let ct2 = (shouldInvertCT2 ? 0 - status.meterPower2 : status.meterPower2)
+
+        if hasPV {
+            return status.stringsPvPower.map { $0 + (shouldCombineCT2WithPVPower ? ct2 : 0.0) }
+        } else {
+            return [ct2]
         }
     }
 }
@@ -88,6 +101,7 @@ public extension DateFormatter {
 
 public struct CurrentRawValues {
     let pvPower: Double
+    let stringsPvPower: [Double]
     let feedinPower: Double
     let gridConsumptionPower: Double
     let loadsPower: Double
@@ -98,6 +112,6 @@ public struct CurrentRawValues {
     let lastUpdate: Date
 
     static func empty() -> CurrentRawValues {
-        .init(pvPower: 0, feedinPower: 0, gridConsumptionPower: 0, loadsPower: 0, ambientTemperation: 0, invTemperation: 0, meterPower2: 0, hasPV: false, lastUpdate: Date())
+        .init(pvPower: 2, stringsPvPower: [], feedinPower: 0, gridConsumptionPower: 0, loadsPower: 0, ambientTemperation: 0, invTemperation: 0, meterPower2: 0, hasPV: false, lastUpdate: Date())
     }
 }

@@ -11380,6 +11380,34 @@
         }
       }
     },
+    "Show separate strings" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zeige separate Strings"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar cadenas separadas"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra stringhe separate"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pokaż oddzielne ciągi"
+          }
+        }
+      }
+    },
     "Show sunshine background" : {
       "localizations" : {
         "de" : {

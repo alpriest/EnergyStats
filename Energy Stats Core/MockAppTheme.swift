@@ -44,7 +44,8 @@ public extension AppSettings {
             showFinancialSummaryOnFlowPage: true,
             separateParameterGraphsByUnit: true,
             currencySymbol: "£",
-            showInverterTypeName: false
+            showInverterTypeName: false,
+            showSeparateStringsOnFlowPage: false
         )
     }
 }

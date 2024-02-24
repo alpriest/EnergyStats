@@ -56,10 +56,21 @@ struct LoadedPowerFlowView: View {
                                 Spacer().frame(width: horizontalPadding)
                             }
 
-                            SolarPowerView(appSettings: appSettings, viewModel: SolarPowerViewModel(solar: viewModel.solar,
-                                                                                                    earnings: viewModel.earnings))
+                            if appSettings.showSeparateStringsOnFlowPage {
+                                ForEach(Array(viewModel.solarStrings.enumerated()), id: \.offset) {
+                                    SolarPowerView(appSettings: appSettings, viewModel: SolarPowerViewModel(solar: $0.element,
+                                                                                                            stringName: String(describing: $0.offset + 1),
+                                                                                                            earnings: viewModel.earnings))
+
+                                    .frame(width: topColumnWidth, height: size.height * 0.35)
+                                }
+                            } else {
+                                SolarPowerView(appSettings: appSettings, viewModel: SolarPowerViewModel(solar: viewModel.solar,
+                                                                                                        stringName: nil,
+                                                                                                        earnings: viewModel.earnings))
 
                                 .frame(width: topColumnWidth, height: size.height * 0.35)
+                            }
 
                             if !appSettings.shouldCombineCT2WithPVPower {
                                 Spacer().frame(width: horizontalPadding)
@@ -190,7 +201,8 @@ struct PowerSummaryView_Previews: PreviewProvider {
 
 extension HomePowerFlowViewModel {
     static func any(battery: BatteryViewModel = .any()) -> HomePowerFlowViewModel {
-        .init(solar: 2.5,
+        .init(solar: 3.0,
+              solarStrings: [2.5, 0.5],
               battery: battery,
               home: 1.5,
               grid: 0.71,

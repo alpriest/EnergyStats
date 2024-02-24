@@ -45,6 +45,7 @@ public struct AppSettings {
     public var separateParameterGraphsByUnit: Bool
     public var currencySymbol: String
     public var showInverterTypeName: Bool
+    public var showSeparateStringsOnFlowPage: Bool
 
     public init(
         showColouredLines: Bool,
@@ -76,7 +77,8 @@ public struct AppSettings {
         showFinancialSummaryOnFlowPage: Bool,
         separateParameterGraphsByUnit: Bool,
         currencySymbol: String,
-        showInverterTypeName: Bool
+        showInverterTypeName: Bool,
+        showSeparateStringsOnFlowPage: Bool
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -108,6 +110,7 @@ public struct AppSettings {
         self.currencySymbol = currencySymbol
         self.showInverterTypeName = showInverterTypeName
         self.shouldCombineCT2WithLoadsPower = shouldCombineCT2WithLoadsPower
+        self.showSeparateStringsOnFlowPage = showSeparateStringsOnFlowPage
     }
 
     public func copy(
@@ -140,7 +143,8 @@ public struct AppSettings {
         showFinancialSummaryOnFlowPage: Bool? = nil,
         separateParameterGraphsByUnit: Bool? = nil,
         currencySymbol: String? = nil,
-        showInverterTypeName: Bool? = nil
+        showInverterTypeName: Bool? = nil,
+        showSeparateStringsOnFlowPage: Bool? = nil
     ) -> AppSettings {
         AppSettings(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -172,7 +176,8 @@ public struct AppSettings {
             showFinancialSummaryOnFlowPage: showFinancialSummaryOnFlowPage ?? self.showFinancialSummaryOnFlowPage,
             separateParameterGraphsByUnit: separateParameterGraphsByUnit ?? self.separateParameterGraphsByUnit,
             currencySymbol: currencySymbol ?? self.currencySymbol,
-            showInverterTypeName: showInverterTypeName ?? self.showInverterTypeName
+            showInverterTypeName: showInverterTypeName ?? self.showInverterTypeName,
+            showSeparateStringsOnFlowPage: showSeparateStringsOnFlowPage ?? self.showSeparateStringsOnFlowPage
         )
     }
 }

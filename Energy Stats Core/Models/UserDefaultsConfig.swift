@@ -53,6 +53,7 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "showFinancialSummaryOnFlowPage")
         UserDefaults.shared.removeObject(forKey: "separateParameterGraphsByUnit")
         UserDefaults.shared.removeObject(forKey: "showInverterTypeName")
+        UserDefaults.shared.removeObject(forKey: "showSeparateStringsOnFlowPage")
     }
 
     public func clearDeviceSettings() {
@@ -157,6 +158,9 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredBool(key: "shouldCombineCT2WithLoadsPower", defaultValue: false)
     public var shouldCombineCT2WithLoadsPower: Bool
+
+    @UserDefaultsStoredBool(key: "showSeparateStringsOnFlowPage", defaultValue: false)
+    public var showSeparateStringsOnFlowPage: Bool
 
     public var selectedParameterGraphVariables: [String] {
         get {

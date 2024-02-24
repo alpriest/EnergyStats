@@ -154,6 +154,7 @@ class PowerFlowTabViewModel: ObservableObject {
 
             let summary = HomePowerFlowViewModel(
                 solar: currentViewModel.currentSolarPower,
+                solarStrings: currentViewModel.currentSolarStringsPower,
                 battery: battery,
                 home: currentViewModel.currentHomeConsumption,
                 grid: currentViewModel.currentGrid,
@@ -229,6 +230,8 @@ class PowerFlowTabViewModel: ObservableObject {
                 "loadsPower",
                 "generationPower",
                 "pvPower",
+                "pv1Power",
+                "pv2Power",
                 "meterPower2",
                 "ambientTemperation",
                 "invTemperation",

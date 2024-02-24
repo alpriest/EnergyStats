@@ -490,6 +490,16 @@ public class ConfigManager: ConfigManaging {
             ))
         }
     }
+
+    public var showSeparateStringsOnFlowPage: Bool {
+        get { config.showSeparateStringsOnFlowPage }
+        set {
+            config.showSeparateStringsOnFlowPage = newValue
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+                showSeparateStringsOnFlowPage: config.showSeparateStringsOnFlowPage
+            ))
+        }
+    }
 }
 
 public enum BatteryResponseMapper {

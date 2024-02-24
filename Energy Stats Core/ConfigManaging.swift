@@ -59,6 +59,7 @@ public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging {
     var showTotalYieldOnPowerFlow: Bool { get set }
     var showFinancialSummaryOnFlowPage: Bool { get set }
     var separateParameterGraphsByUnit: Bool { get set }
+    var showSeparateStringsOnFlowPage: Bool { get set }
 }
 
 public protocol SolcastConfigManaging {

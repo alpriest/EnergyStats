@@ -146,6 +146,12 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
+    @Published var showSeparateStringsOnFlowPage: Bool {
+        didSet {
+            config.showSeparateStringsOnFlowPage = showSeparateStringsOnFlowPage
+        }
+    }
+
     private(set) var config: ConfigManaging
     private let userManager: UserManager
     private var cancellables = Set<AnyCancellable>()
@@ -179,6 +185,7 @@ class SettingsTabViewModel: ObservableObject {
         separateParameterGraphsByUnit = config.separateParameterGraphsByUnit
         showInverterTypeName = config.showInverterTypeName
         shouldCombineCT2WithLoadsPower = config.shouldCombineCT2WithLoadsPower
+        showSeparateStringsOnFlowPage = config.showSeparateStringsOnFlowPage
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }

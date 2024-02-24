@@ -11,6 +11,7 @@ import SwiftUI
 
 struct SolarPowerViewModel {
     let solar: Double
+    let stringName: String?
     let earnings: EnergyStatsFinancialModel
 }
 
@@ -25,22 +26,29 @@ struct SolarPowerView: View {
 
     var body: some View {
         VStack {
-            switch viewModel.solar {
-            case 0.001 ..< appSettings.solarDefinitions.breakPoint1:
-                SunView(solar: viewModel.solar, glowing: false, glowColor: .clear, sunColor: Color("Sun"))
-                    .frame(width: 40, height: 40)
-            case appSettings.solarDefinitions.breakPoint1 ..< appSettings.solarDefinitions.breakPoint2:
-                SunView(solar: viewModel.solar, glowing: true, glowColor: .yellow.opacity(0.3), sunColor: Color("Sun"))
-                    .frame(width: 40, height: 40)
-            case appSettings.solarDefinitions.breakPoint2 ..< appSettings.solarDefinitions.breakPoint3:
-                SunView(solar: viewModel.solar, glowing: true, glowColor: Color("Sun"), sunColor: .orange)
-                    .frame(width: 40, height: 40)
-            case appSettings.solarDefinitions.breakPoint3 ..< 500:
-                SunView(solar: viewModel.solar, glowing: true, glowColor: .orange, sunColor: .red)
-                    .frame(width: 40, height: 40)
-            default:
-                SunView(solar: viewModel.solar, glowing: false, glowColor: .clear, sunColor: Color("Sun_Zero"))
-                    .frame(width: 40, height: 40)
+            ZStack {
+                switch viewModel.solar {
+                case 0.001 ..< appSettings.solarDefinitions.breakPoint1:
+                    SunView(solar: viewModel.solar, glowing: false, glowColor: .clear, sunColor: Color("Sun"))
+                        .frame(width: 40, height: 40)
+                case appSettings.solarDefinitions.breakPoint1 ..< appSettings.solarDefinitions.breakPoint2:
+                    SunView(solar: viewModel.solar, glowing: true, glowColor: .yellow.opacity(0.3), sunColor: Color("Sun"))
+                        .frame(width: 40, height: 40)
+                case appSettings.solarDefinitions.breakPoint2 ..< appSettings.solarDefinitions.breakPoint3:
+                    SunView(solar: viewModel.solar, glowing: true, glowColor: Color("Sun"), sunColor: .orange)
+                        .frame(width: 40, height: 40)
+                case appSettings.solarDefinitions.breakPoint3 ..< 500:
+                    SunView(solar: viewModel.solar, glowing: true, glowColor: .orange, sunColor: .red)
+                        .frame(width: 40, height: 40)
+                default:
+                    SunView(solar: viewModel.solar, glowing: false, glowColor: .clear, sunColor: Color("Sun_Zero"))
+                        .frame(width: 40, height: 40)
+                }
+
+                if let stringName = viewModel.stringName {
+                    Text(stringName)
+                        .font(.system(size: 10, weight: .bold))
+                }
             }
 
             PowerFlowView(amount: viewModel.solar, appSettings: appSettings, showColouredLines: false, type: .solarFlow)
@@ -56,23 +64,23 @@ struct SolarPowerView_Previews: PreviewProvider {
             HStack {
                 SolarPowerView(
                     appSettings: AppSettings.mock(),
-                    viewModel: SolarPowerViewModel(solar: 0, earnings: .any())
+                    viewModel: SolarPowerViewModel(solar: 0, stringName: "1", earnings: .any())
                 )
                 SolarPowerView(
                     appSettings: AppSettings.mock(),
-                    viewModel: SolarPowerViewModel(solar: 0.5, earnings: .any())
+                    viewModel: SolarPowerViewModel(solar: 0.5, stringName: "2", earnings: .any())
                 )
                 SolarPowerView(
                     appSettings: AppSettings.mock(),
-                    viewModel: SolarPowerViewModel(solar: 1.5, earnings: .any())
+                    viewModel: SolarPowerViewModel(solar: 1.5, stringName: nil, earnings: .any())
                 )
                 SolarPowerView(
                     appSettings: AppSettings.mock(),
-                    viewModel: SolarPowerViewModel(solar: 2.5, earnings: .any())
+                    viewModel: SolarPowerViewModel(solar: 2.5, stringName: nil, earnings: .any())
                 )
                 SolarPowerView(
                     appSettings: AppSettings.mock(),
-                    viewModel: SolarPowerViewModel(solar: 3.5, earnings: .any())
+                    viewModel: SolarPowerViewModel(solar: 3.5, stringName: nil, earnings: .any())
                 )
             }
         }
@@ -99,7 +107,7 @@ struct AdjustableView: View {
     var body: some View {
         VStack {
             Color.clear.overlay(
-                SolarPowerView(appSettings: appSettings, viewModel: SolarPowerViewModel(solar: amount, earnings: .any()))
+                SolarPowerView(appSettings: appSettings, viewModel: SolarPowerViewModel(solar: amount, stringName: nil, earnings: .any()))
             ).frame(height: 100)
 
             Slider(value: $amount, in: 0 ... maximum, step: 0.1, label: {
