@@ -11,7 +11,6 @@ import SwiftUI
 
 struct SolarPowerViewModel {
     let solar: Double
-    let stringName: String?
     let earnings: EnergyStatsFinancialModel
 }
 
@@ -44,11 +43,6 @@ struct SolarPowerView: View {
                     SunView(solar: viewModel.solar, glowing: false, glowColor: .clear, sunColor: Color("Sun_Zero"))
                         .frame(width: 40, height: 40)
                 }
-
-                if let stringName = viewModel.stringName {
-                    Text(stringName)
-                        .font(.system(size: 10, weight: .bold))
-                }
             }
 
             PowerFlowView(amount: viewModel.solar, appSettings: appSettings, showColouredLines: false, type: .solarFlow)
@@ -64,23 +58,23 @@ struct SolarPowerView_Previews: PreviewProvider {
             HStack {
                 SolarPowerView(
                     appSettings: AppSettings.mock(),
-                    viewModel: SolarPowerViewModel(solar: 0, stringName: "1", earnings: .any())
+                    viewModel: SolarPowerViewModel(solar: 0, earnings: .any())
                 )
                 SolarPowerView(
                     appSettings: AppSettings.mock(),
-                    viewModel: SolarPowerViewModel(solar: 0.5, stringName: "2", earnings: .any())
+                    viewModel: SolarPowerViewModel(solar: 0.5, earnings: .any())
                 )
                 SolarPowerView(
                     appSettings: AppSettings.mock(),
-                    viewModel: SolarPowerViewModel(solar: 1.5, stringName: nil, earnings: .any())
+                    viewModel: SolarPowerViewModel(solar: 1.5, earnings: .any())
                 )
                 SolarPowerView(
                     appSettings: AppSettings.mock(),
-                    viewModel: SolarPowerViewModel(solar: 2.5, stringName: nil, earnings: .any())
+                    viewModel: SolarPowerViewModel(solar: 2.5, earnings: .any())
                 )
                 SolarPowerView(
                     appSettings: AppSettings.mock(),
-                    viewModel: SolarPowerViewModel(solar: 3.5, stringName: nil, earnings: .any())
+                    viewModel: SolarPowerViewModel(solar: 3.5, earnings: .any())
                 )
             }
         }
@@ -107,7 +101,7 @@ struct AdjustableView: View {
     var body: some View {
         VStack {
             Color.clear.overlay(
-                SolarPowerView(appSettings: appSettings, viewModel: SolarPowerViewModel(solar: amount, stringName: nil, earnings: .any()))
+                SolarPowerView(appSettings: appSettings, viewModel: SolarPowerViewModel(solar: amount, earnings: .any()))
             ).frame(height: 100)
 
             Slider(value: $amount, in: 0 ... maximum, step: 0.1, label: {

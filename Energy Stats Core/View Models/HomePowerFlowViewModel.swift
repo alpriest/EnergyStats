@@ -17,9 +17,21 @@ public struct InverterTemperatures: Sendable {
     }
 }
 
+public struct StringPower: Identifiable {
+    public let name: String
+    public let amount: Double
+
+    public var id: String { name }
+
+    public init(name: String, amount: Double) {
+        self.name = name
+        self.amount = amount
+    }
+}
+
 public struct HomePowerFlowViewModel: Equatable {
     public let solar: Double
-    public let solarStrings: [Double]
+    public let solarStrings: [StringPower]
     public let home: Double
     public let grid: Double
     public let todaysGeneration: GenerationViewModel
@@ -32,7 +44,7 @@ public struct HomePowerFlowViewModel: Equatable {
     public let ct2: Double
 
     public init(solar: Double,
-                solarStrings: [Double],
+                solarStrings: [StringPower],
                 battery: BatteryViewModel,
                 home: Double,
                 grid: Double,

@@ -40,7 +40,7 @@ struct LoadedPowerFlowView: View {
 
                     if appSettings.showFinancialSummaryOnFlowPage {
                         EarningsView(viewModel: viewModel.earnings, appSettings: appSettings)
-                            .padding(.bottom, 8)
+                            .padding(.bottom, 12)
                     }
 
                     ZStack {
@@ -49,28 +49,32 @@ struct LoadedPowerFlowView: View {
                                 VStack(spacing: 0) {
                                     CT2_icon()
                                     PowerFlowView(amount: viewModel.ct2, appSettings: appSettings, showColouredLines: false, type: .solarFlow)
-                                    Color.clear.frame(height: size.height * 0.1)
+                                    Color.clear.frame(height: size.height * 0.073)
                                 }
                                 .frame(width: topColumnWidth, height: size.height * 0.35)
 
                                 Spacer().frame(width: horizontalPadding)
                             }
 
-                            if appSettings.showSeparateStringsOnFlowPage {
-                                ForEach(Array(viewModel.solarStrings.enumerated()), id: \.offset) {
-                                    SolarPowerView(appSettings: appSettings, viewModel: SolarPowerViewModel(solar: $0.element,
-                                                                                                            stringName: String(describing: $0.offset + 1),
-                                                                                                            earnings: viewModel.earnings))
-
-                                    .frame(width: topColumnWidth, height: size.height * 0.35)
-                                }
-                            } else {
-                                SolarPowerView(appSettings: appSettings, viewModel: SolarPowerViewModel(solar: viewModel.solar,
-                                                                                                        stringName: nil,
-                                                                                                        earnings: viewModel.earnings))
-
-                                .frame(width: topColumnWidth, height: size.height * 0.35)
+                            ZStack {
+                                SolarPowerView(appSettings: appSettings, viewModel: SolarPowerViewModel(solar: viewModel.solar, earnings: viewModel.earnings))
+                                    .overlay(
+                                        VStack(alignment: .leading) {
+                                            if appSettings.showSeparateStringsOnFlowPage {
+                                                ForEach(viewModel.solarStrings) { pvString in
+                                                    HStack {
+                                                        Text(pvString.name)
+                                                            .monospacedDigit()
+                                                        PowerText(amount: pvString.amount, appSettings: appSettings, type: .solarFlow)
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        .font(.caption)
+                                        .offset(x: 60, y: -30)
+                                    )
                             }
+                            .frame(width: topColumnWidth, height: size.height * 0.35)
 
                             if !appSettings.shouldCombineCT2WithPVPower {
                                 Spacer().frame(width: horizontalPadding)
@@ -190,11 +194,12 @@ struct PowerSummaryView_Previews: PreviewProvider {
         LoadedPowerFlowView(configManager: PreviewConfigManager(),
                             viewModel: HomePowerFlowViewModel.any(battery: .any()),
                             appSettingsPublisher: CurrentValueSubject(AppSettings.mock().copy(decimalPlaces: 3,
-                                                                                        displayUnit: .adaptive,
-                                                                                        showFinancialEarnings: true,
-                                                                                        showInverterTemperature: true,
-                                                                                        showHomeTotalOnPowerFlow: true,
-                                                                                        shouldCombineCT2WithPVPower: true)))
+                                                                                              displayUnit: .adaptive,
+                                                                                              showFinancialEarnings: true,
+                                                                                              showInverterTemperature: true,
+                                                                                              showHomeTotalOnPowerFlow: true,
+                                                                                              shouldCombineCT2WithPVPower: true,
+                                                                                              showSeparateStringsOnFlowPage: true)))
             .environment(\.locale, .init(identifier: "en"))
     }
 }
@@ -202,7 +207,7 @@ struct PowerSummaryView_Previews: PreviewProvider {
 extension HomePowerFlowViewModel {
     static func any(battery: BatteryViewModel = .any()) -> HomePowerFlowViewModel {
         .init(solar: 3.0,
-              solarStrings: [2.5, 0.5],
+              solarStrings: [StringPower(name: "PV1", amount: 2.5), StringPower(name: "PV2", amount: 0.5)],
               battery: battery,
               home: 1.5,
               grid: 0.71,

@@ -17,9 +17,9 @@ public extension Array where Element == OpenQueryResponse.Data {
     }
 }
 
-public struct CurrentStatusCalculator: Sendable {
+public struct CurrentStatusCalculator {
     public let currentSolarPower: Double
-    public let currentSolarStringsPower: [Double]
+    public let currentSolarStringsPower: [StringPower]
     public let currentGrid: Double
     public let currentHomeConsumption: Double
     public let currentTemperatures: InverterTemperatures?
@@ -35,13 +35,14 @@ public struct CurrentStatusCalculator: Sendable {
         self.lastUpdate = status.lastUpdate
         self.currentCT2 = shouldInvertCT2 ? 0 - status.meterPower2 : status.meterPower2
         self.currentSolarPower = Self.calculateSolarPower(hasPV: status.hasPV, status: status, shouldInvertCT2: shouldInvertCT2, shouldCombineCT2WithPVPower: shouldCombineCT2WithPVPower)
-        self.currentSolarStringsPower = Self.calculateSolarStringsPower(hasPV: status.hasPV, status: status, shouldInvertCT2: shouldInvertCT2, shouldCombineCT2WithPVPower: shouldCombineCT2WithPVPower)
+        self.currentSolarStringsPower = Self.calculateSolarStringsPower(hasPV: status.hasPV, status: status)
     }
 
     static func mapCurrentValues(device: Device, response: OpenQueryResponse) -> CurrentRawValues {
         CurrentRawValues(
             pvPower: response.datas.currentValue(for: "pvPower"),
-            stringsPvPower: [response.datas.currentValue(for: "pv1Power"), response.datas.currentValue(for: "pv2Power")],
+            stringsPvPower: [StringPower(name: "PV1", amount: response.datas.currentValue(for: "pv1Power")),
+                             StringPower(name: "PV2", amount: response.datas.currentValue(for: "pv2Power"))],
             feedinPower: response.datas.currentValue(for: "feedinPower"),
             gridConsumptionPower: response.datas.currentValue(for: "gridConsumptionPower"),
             loadsPower: response.datas.currentValue(for: "loadsPower"),
@@ -54,7 +55,7 @@ public struct CurrentStatusCalculator: Sendable {
     }
 
     static func calculateLoadPower(status: CurrentRawValues, shouldCombineCT2WithLoadsPower: Bool) -> Double {
-        max(0, status.loadsPower + (shouldCombineCT2WithLoadsPower ? status.meterPower2 : 0.0))
+        status.loadsPower + (shouldCombineCT2WithLoadsPower ? status.meterPower2 : 0.0)
     }
 
     static func calculateSolarPower(hasPV: Bool, status: CurrentRawValues, shouldInvertCT2: Bool, shouldCombineCT2WithPVPower: Bool) -> Double {
@@ -67,13 +68,13 @@ public struct CurrentStatusCalculator: Sendable {
         }
     }
 
-    static func calculateSolarStringsPower(hasPV: Bool, status: CurrentRawValues, shouldInvertCT2: Bool, shouldCombineCT2WithPVPower: Bool) -> [Double] {
-        let ct2 = (shouldInvertCT2 ? 0 - status.meterPower2 : status.meterPower2)
-
+    static func calculateSolarStringsPower(hasPV: Bool, status: CurrentRawValues) -> [StringPower] {
         if hasPV {
-            return status.stringsPvPower.map { $0 + (shouldCombineCT2WithPVPower ? ct2 : 0.0) }
+            return status.stringsPvPower.map {
+                StringPower(name: $0.name, amount: $0.amount)
+            }
         } else {
-            return [ct2]
+            return []
         }
     }
 }
@@ -101,7 +102,7 @@ public extension DateFormatter {
 
 public struct CurrentRawValues {
     let pvPower: Double
-    let stringsPvPower: [Double]
+    let stringsPvPower: [StringPower]
     let feedinPower: Double
     let gridConsumptionPower: Double
     let loadsPower: Double
