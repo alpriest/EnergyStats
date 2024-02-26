@@ -12708,6 +12708,12 @@
         }
       }
     },
+    "Use experimental load formula" : {
+
+    },
+    "Uses a formula to calculate load which should handle +ve/-ve CT2 better in house load. Changes only take effect on next data fetch." : {
+
+    },
     "Version " : {
       "localizations" : {
         "de" : {

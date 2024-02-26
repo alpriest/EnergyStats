@@ -152,6 +152,12 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
+    @Published var useExperimentalLoadFormula: Bool {
+        didSet {
+            config.useExperimentalLoadFormula = useExperimentalLoadFormula
+        }
+    }
+
     private(set) var config: ConfigManaging
     private let userManager: UserManager
     private var cancellables = Set<AnyCancellable>()
@@ -186,6 +192,7 @@ class SettingsTabViewModel: ObservableObject {
         showInverterTypeName = config.showInverterTypeName
         shouldCombineCT2WithLoadsPower = config.shouldCombineCT2WithLoadsPower
         showSeparateStringsOnPowerFlow = config.showSeparateStringsOnFlowPage
+        useExperimentalLoadFormula = config.useExperimentalLoadFormula
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }

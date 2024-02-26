@@ -26,11 +26,18 @@ public struct CurrentStatusCalculator {
     public let lastUpdate: Date
     public let currentCT2: Double
 
-    public init(device: Device, response: OpenQueryResponse, shouldInvertCT2: Bool, shouldCombineCT2WithPVPower: Bool, shouldCombineCT2WithLoadsPower: Bool) {
+    public init(
+        device: Device,
+        response: OpenQueryResponse,
+        shouldInvertCT2: Bool,
+        shouldCombineCT2WithPVPower: Bool,
+        shouldCombineCT2WithLoadsPower: Bool,
+        useExperimentalLoadsFormula: Bool
+    ) {
         let status = Self.mapCurrentValues(device: device, response: response)
 
         self.currentGrid = status.feedinPower - status.gridConsumptionPower
-        self.currentHomeConsumption = Self.calculateLoadPower(status: status, shouldCombineCT2WithLoadsPower: shouldCombineCT2WithLoadsPower)
+        self.currentHomeConsumption = useExperimentalLoadsFormula ? Self.calculateLoadPower(status: status) : Self.loadPower(status: status, shouldCombineCT2WithLoadsPower: shouldCombineCT2WithLoadsPower)
         self.currentTemperatures = InverterTemperatures(ambient: status.ambientTemperation, inverter: status.invTemperation)
         self.lastUpdate = status.lastUpdate
         self.currentCT2 = shouldInvertCT2 ? 0 - status.meterPower2 : status.meterPower2
@@ -46,6 +53,8 @@ public struct CurrentStatusCalculator {
             feedinPower: response.datas.currentValue(for: "feedinPower"),
             gridConsumptionPower: response.datas.currentValue(for: "gridConsumptionPower"),
             loadsPower: response.datas.currentValue(for: "loadsPower"),
+            generationPower: response.datas.currentValue(for: "generationPower"),
+            epsPower: response.datas.currentValue(for: "epsPower"),
             ambientTemperation: response.datas.currentValue(for: "ambientTemperation"),
             invTemperation: response.datas.currentValue(for: "invTemperation"),
             meterPower2: response.datas.currentValue(for: "meterPower2"),
@@ -54,8 +63,12 @@ public struct CurrentStatusCalculator {
         )
     }
 
-    static func calculateLoadPower(status: CurrentRawValues, shouldCombineCT2WithLoadsPower: Bool) -> Double {
+    static func loadPower(status: CurrentRawValues, shouldCombineCT2WithLoadsPower: Bool) -> Double {
         status.loadsPower + (shouldCombineCT2WithLoadsPower ? status.meterPower2 : 0.0)
+    }
+
+    static func calculateLoadPower(status: CurrentRawValues) -> Double {
+        status.gridConsumptionPower + status.generationPower + status.epsPower - status.feedinPower + abs(status.meterPower2)
     }
 
     static func calculateSolarPower(hasPV: Bool, status: CurrentRawValues, shouldInvertCT2: Bool, shouldCombineCT2WithPVPower: Bool) -> Double {
@@ -104,6 +117,8 @@ public struct CurrentRawValues {
     let feedinPower: Double
     let gridConsumptionPower: Double
     let loadsPower: Double
+    let generationPower: Double
+    let epsPower: Double
     let ambientTemperation: Double
     let invTemperation: Double
     let meterPower2: Double
@@ -111,6 +126,6 @@ public struct CurrentRawValues {
     let lastUpdate: Date
 
     static func empty() -> CurrentRawValues {
-        .init(pvPower: 2, stringsPvPower: [], feedinPower: 0, gridConsumptionPower: 0, loadsPower: 0, ambientTemperation: 0, invTemperation: 0, meterPower2: 0, hasPV: false, lastUpdate: Date())
+        .init(pvPower: 2, stringsPvPower: [], feedinPower: 0, gridConsumptionPower: 0, loadsPower: 0, generationPower: 0, epsPower: 0, ambientTemperation: 0, invTemperation: 0, meterPower2: 0, hasPV: false, lastUpdate: Date())
     }
 }

@@ -60,6 +60,7 @@ public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging {
     var showFinancialSummaryOnFlowPage: Bool { get set }
     var separateParameterGraphsByUnit: Bool { get set }
     var showSeparateStringsOnFlowPage: Bool { get set }
+    var useExperimentalLoadFormula: Bool { get set }
 }
 
 public protocol SolcastConfigManaging {

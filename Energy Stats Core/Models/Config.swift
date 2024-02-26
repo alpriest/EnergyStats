@@ -49,6 +49,7 @@ public protocol Config {
     var separateParameterGraphsByUnit: Bool { get set }
     var variables: [Variable] { get set }
     var showSeparateStringsOnFlowPage: Bool { get set }
+    var useExperimentalLoadFormula: Bool { get set }
 }
 
 public func DefaultParameterGroups() -> [ParameterGroup] {

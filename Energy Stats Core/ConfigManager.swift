@@ -500,6 +500,11 @@ public class ConfigManager: ConfigManaging {
             ))
         }
     }
+
+    public var useExperimentalLoadFormula: Bool {
+        get { config.useExperimentalLoadFormula }
+        set { config.useExperimentalLoadFormula = newValue }
+    }
 }
 
 public enum BatteryResponseMapper {

@@ -143,6 +143,14 @@ struct DisplaySettingsView: View {
         } label: {
             Text("Solcast Solar Prediction")
         }
+
+        Section {
+            Toggle(isOn: $viewModel.useExperimentalLoadFormula) {
+                Text("Use experimental load formula")
+            }
+        } footer: {
+            Text("Uses a formula to calculate load which should handle +ve/-ve CT2 better in house load. Changes only take effect on next data fetch.")
+        }
     }
 }
 

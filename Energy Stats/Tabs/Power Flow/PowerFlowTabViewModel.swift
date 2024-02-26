@@ -148,7 +148,8 @@ class PowerFlowTabViewModel: ObservableObject {
                                                            response: real,
                                                            shouldInvertCT2: self.configManager.shouldInvertCT2,
                                                            shouldCombineCT2WithPVPower: self.configManager.shouldCombineCT2WithPVPower,
-                                                           shouldCombineCT2WithLoadsPower: self.configManager.shouldCombineCT2WithLoadsPower)
+                                                           shouldCombineCT2WithLoadsPower: self.configManager.shouldCombineCT2WithLoadsPower,
+                                                           useExperimentalLoadsFormula: self.configManager.useExperimentalLoadFormula)
 
             let battery = self.makeBatteryViewModel(currentDevice, real)
 
@@ -239,7 +240,8 @@ class PowerFlowTabViewModel: ObservableObject {
                 "batDischargePower",
                 "SoC",
                 "batTemperature",
-                "ResidualEnergy"
+                "ResidualEnergy",
+                "epsPower"
             ]
         )
     }

@@ -275,6 +275,7 @@ public class MockConfig: Config {
     public var separateParameterGraphsByUnit: Bool = true
     public var variables: [Variable] = []
     public var showSeparateStringsOnFlowPage: Bool = false
+    public var useExperimentalLoadFormula: Bool = false
 }
 
 public class PreviewConfigManager: ConfigManager {

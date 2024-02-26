@@ -54,6 +54,7 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "separateParameterGraphsByUnit")
         UserDefaults.shared.removeObject(forKey: "showInverterTypeName")
         UserDefaults.shared.removeObject(forKey: "showSeparateStringsOnFlowPage")
+        UserDefaults.shared.removeObject(forKey: "useExperimentalLoadFormula")
     }
 
     public func clearDeviceSettings() {
@@ -220,4 +221,7 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredCodable(key: "variables", defaultValue: [])
     public var variables: [Variable]
+
+    @UserDefaultsStoredBool(key: "useExperimentalLoadFormula", defaultValue: false)
+    public var useExperimentalLoadFormula: Bool
 }
