@@ -146,9 +146,9 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
-    @Published var showSeparateStringsOnFlowPage: Bool {
+    @Published var showSeparateStringsOnPowerFlow: Bool {
         didSet {
-            config.showSeparateStringsOnFlowPage = showSeparateStringsOnFlowPage
+            config.showSeparateStringsOnFlowPage = showSeparateStringsOnPowerFlow
         }
     }
 
@@ -185,7 +185,7 @@ class SettingsTabViewModel: ObservableObject {
         separateParameterGraphsByUnit = config.separateParameterGraphsByUnit
         showInverterTypeName = config.showInverterTypeName
         shouldCombineCT2WithLoadsPower = config.shouldCombineCT2WithLoadsPower
-        showSeparateStringsOnFlowPage = config.showSeparateStringsOnFlowPage
+        showSeparateStringsOnPowerFlow = config.showSeparateStringsOnFlowPage
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }

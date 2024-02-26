@@ -70,9 +70,7 @@ public struct CurrentStatusCalculator {
 
     static func calculateSolarStringsPower(hasPV: Bool, status: CurrentRawValues) -> [StringPower] {
         if hasPV {
-            return status.stringsPvPower.map {
-                StringPower(name: $0.name, amount: $0.amount)
-            }
+            return status.stringsPvPower
         } else {
             return []
         }

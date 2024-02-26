@@ -70,8 +70,10 @@ struct LoadedPowerFlowView: View {
                                                 }
                                             }
                                         }
+                                        .padding(2)
+                                        .background(Color.linesNotFlowing)
                                         .font(.caption)
-                                        .offset(x: 60, y: -30)
+                                        .offset(x: 0, y: -30)
                                     )
                             }
                             .frame(width: topColumnWidth, height: size.height * 0.35)
