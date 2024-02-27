@@ -505,6 +505,11 @@ public class ConfigManager: ConfigManaging {
         get { config.useExperimentalLoadFormula }
         set { config.useExperimentalLoadFormula = newValue }
     }
+
+    public var enabledPowerFlowStrings: PowerFlowStrings {
+        get { config.enabledPowerFlowStrings }
+        set { config.enabledPowerFlowStrings = newValue }
+    }
 }
 
 public enum BatteryResponseMapper {

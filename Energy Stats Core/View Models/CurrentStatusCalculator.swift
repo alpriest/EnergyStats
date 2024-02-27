@@ -29,12 +29,14 @@ public struct CurrentStatusCalculator {
     public init(
         device: Device,
         response: OpenQueryResponse,
-        shouldInvertCT2: Bool,
-        shouldCombineCT2WithPVPower: Bool,
-        shouldCombineCT2WithLoadsPower: Bool,
-        useExperimentalLoadsFormula: Bool
+        config: ConfigManaging
     ) {
-        let status = Self.mapCurrentValues(device: device, response: response)
+        let shouldInvertCT2 = config.shouldInvertCT2
+        let shouldCombineCT2WithPVPower = config.shouldCombineCT2WithPVPower
+        let shouldCombineCT2WithLoadsPower = config.shouldCombineCT2WithLoadsPower
+        let useExperimentalLoadsFormula = config.useExperimentalLoadFormula
+
+        let status = Self.mapCurrentValues(device: device, response: response, config: config)
 
         self.currentGrid = status.feedinPower - status.gridConsumptionPower
         self.currentHomeConsumption = useExperimentalLoadsFormula ? Self.calculateLoadPower(status: status) : Self.loadPower(status: status, shouldCombineCT2WithLoadsPower: shouldCombineCT2WithLoadsPower)
@@ -45,11 +47,15 @@ public struct CurrentStatusCalculator {
         self.currentSolarStringsPower = Self.calculateSolarStringsPower(hasPV: status.hasPV, status: status)
     }
 
-    static func mapCurrentValues(device: Device, response: OpenQueryResponse) -> CurrentRawValues {
-        CurrentRawValues(
+    static func mapCurrentValues(device: Device, response: OpenQueryResponse, config: ConfigManaging) -> CurrentRawValues {
+        var stringsPvPower: [StringPower] = []
+        if config.showSeparateStringsOnFlowPage {
+            stringsPvPower = config.enabledPowerFlowStrings.makeStringPowers(from: response)
+        }
+
+        return CurrentRawValues(
             pvPower: response.datas.currentValue(for: "pvPower"),
-            stringsPvPower: [StringPower(name: "PV1", amount: response.datas.currentValue(for: "pv1Power")),
-                             StringPower(name: "PV2", amount: response.datas.currentValue(for: "pv2Power"))],
+            stringsPvPower: stringsPvPower,
             feedinPower: response.datas.currentValue(for: "feedinPower"),
             gridConsumptionPower: response.datas.currentValue(for: "gridConsumptionPower"),
             loadsPower: response.datas.currentValue(for: "loadsPower"),

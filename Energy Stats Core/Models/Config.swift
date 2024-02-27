@@ -50,6 +50,7 @@ public protocol Config {
     var variables: [Variable] { get set }
     var showSeparateStringsOnFlowPage: Bool { get set }
     var useExperimentalLoadFormula: Bool { get set }
+    var enabledPowerFlowStrings: PowerFlowStrings { get set }
 }
 
 public func DefaultParameterGroups() -> [ParameterGroup] {

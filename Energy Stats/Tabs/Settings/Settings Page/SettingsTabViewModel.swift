@@ -10,6 +10,12 @@ import Energy_Stats_Core
 import SwiftUI
 
 class SettingsTabViewModel: ObservableObject {
+    @Published var enabledPowerFlowStrings: PowerFlowStrings {
+        didSet {
+            config.enabledPowerFlowStrings = enabledPowerFlowStrings
+        }
+    }
+
     @Published var separateParameterGraphsByUnit: Bool {
         didSet {
             config.separateParameterGraphsByUnit = separateParameterGraphsByUnit
@@ -193,6 +199,7 @@ class SettingsTabViewModel: ObservableObject {
         shouldCombineCT2WithLoadsPower = config.shouldCombineCT2WithLoadsPower
         showSeparateStringsOnPowerFlow = config.showSeparateStringsOnFlowPage
         useExperimentalLoadFormula = config.useExperimentalLoadFormula
+        enabledPowerFlowStrings = config.enabledPowerFlowStrings
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }

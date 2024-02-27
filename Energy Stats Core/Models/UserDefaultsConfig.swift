@@ -55,6 +55,7 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "showInverterTypeName")
         UserDefaults.shared.removeObject(forKey: "showSeparateStringsOnFlowPage")
         UserDefaults.shared.removeObject(forKey: "useExperimentalLoadFormula")
+        UserDefaults.shared.removeObject(forKey: "enabledPowerFlowStrings")
     }
 
     public func clearDeviceSettings() {
@@ -224,4 +225,7 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredBool(key: "useExperimentalLoadFormula", defaultValue: false)
     public var useExperimentalLoadFormula: Bool
+
+    @UserDefaultsStoredCodable(key: "enabledPowerFlowStrings", defaultValue: .none)
+    public var enabledPowerFlowStrings: PowerFlowStrings
 }

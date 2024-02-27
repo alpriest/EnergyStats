@@ -276,6 +276,7 @@ public class MockConfig: Config {
     public var variables: [Variable] = []
     public var showSeparateStringsOnFlowPage: Bool = false
     public var useExperimentalLoadFormula: Bool = false
+    public var enabledPowerFlowStrings: PowerFlowStrings = .none
 }
 
 public class PreviewConfigManager: ConfigManager {

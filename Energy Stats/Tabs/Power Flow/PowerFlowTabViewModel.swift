@@ -141,15 +141,12 @@ class PowerFlowTabViewModel: ObservableObject {
             await MainActor.run { self.updateState = "Updating..." }
 
             let totals = try await loadTotals(currentDevice)
-            let real = try await loadRealData(currentDevice)
+            let real = try await loadRealData(currentDevice, config: configManager)
             let generation = try await self.loadGeneration(currentDevice)
 
             let currentViewModel = CurrentStatusCalculator(device: currentDevice,
                                                            response: real,
-                                                           shouldInvertCT2: self.configManager.shouldInvertCT2,
-                                                           shouldCombineCT2WithPVPower: self.configManager.shouldCombineCT2WithPVPower,
-                                                           shouldCombineCT2WithLoadsPower: self.configManager.shouldCombineCT2WithLoadsPower,
-                                                           useExperimentalLoadsFormula: self.configManager.useExperimentalLoadFormula)
+                                                           config: configManager)
 
             let battery = self.makeBatteryViewModel(currentDevice, real)
 
@@ -198,7 +195,7 @@ class PowerFlowTabViewModel: ObservableObject {
     }
 
     private func loadGeneration(_ currentDevice: Device) async throws -> GenerationViewModel {
-        try GenerationViewModel(response: await self.loadHistoryData(currentDevice), includeCT2: configManager.shouldCombineCT2WithPVPower)
+        try GenerationViewModel(response: await self.loadHistoryData(currentDevice), includeCT2: self.configManager.shouldCombineCT2WithPVPower)
     }
 
     private func loadHistoryData(_ currentDevice: Device) async throws -> OpenHistoryResponse {
@@ -222,27 +219,31 @@ class PowerFlowTabViewModel: ObservableObject {
                                                           reportType: .month)
     }
 
-    private func loadRealData(_ currentDevice: Device) async throws -> OpenQueryResponse {
-        try await self.network.openapi_fetchRealData(
+    private func loadRealData(_ currentDevice: Device, config: ConfigManaging) async throws -> OpenQueryResponse {
+        var variables = [
+            "feedinPower",
+            "gridConsumptionPower",
+            "loadsPower",
+            "generationPower",
+            "pvPower",
+            "meterPower2",
+            "ambientTemperation",
+            "invTemperation",
+            "batChargePower",
+            "batDischargePower",
+            "SoC",
+            "batTemperature",
+            "ResidualEnergy",
+            "epsPower"
+        ]
+
+        if config.showSeparateStringsOnFlowPage {
+            variables.append(contentsOf: config.enabledPowerFlowStrings.variableNames())
+        }
+
+        return try await self.network.openapi_fetchRealData(
             deviceSN: currentDevice.deviceSN,
-            variables: [
-                "feedinPower",
-                "gridConsumptionPower",
-                "loadsPower",
-                "generationPower",
-                "pvPower",
-                "pv1Power",
-                "pv2Power",
-                "meterPower2",
-                "ambientTemperation",
-                "invTemperation",
-                "batChargePower",
-                "batDischargePower",
-                "SoC",
-                "batTemperature",
-                "ResidualEnergy",
-                "epsPower"
-            ]
+            variables: variables
         )
     }
 

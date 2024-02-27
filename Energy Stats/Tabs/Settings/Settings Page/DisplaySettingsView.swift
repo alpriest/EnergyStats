@@ -59,7 +59,7 @@ struct DisplaySettingsView: View {
             Text("Display")
         }
 
-        SolarStringsSettingsView()
+        SolarStringsSettingsView(viewModel: viewModel)
 
         Section {
             HStack {
