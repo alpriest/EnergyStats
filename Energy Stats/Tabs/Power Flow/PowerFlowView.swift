@@ -31,7 +31,7 @@ struct PowerFlowView<S: Shape>: View {
 
     var body: some View {
         ZStack(alignment: .center) {
-            if isFlowing {
+            if amount.isFlowing() {
                 ZStack {
                     if amount > 0 {
                         FlowingLine(direction: .down, animationDuration: animationDuration, color: lineColor, shape: shape)
@@ -53,7 +53,7 @@ struct PowerFlowView<S: Shape>: View {
     }
 
     var lineColor: Color {
-        if isFlowing && appSettings.showColouredLines && showColouredLines {
+        if amount.isFlowing() && appSettings.showColouredLines && showColouredLines {
             if amount > 0 {
                 return Color.linesPositive
             } else {
@@ -65,7 +65,7 @@ struct PowerFlowView<S: Shape>: View {
     }
 
     var textColor: Color {
-        if isFlowing && appSettings.showColouredLines && showColouredLines {
+        if amount.isFlowing() && appSettings.showColouredLines && showColouredLines {
             if amount > 0 {
                 return Color.textPositive
             } else {
@@ -74,10 +74,6 @@ struct PowerFlowView<S: Shape>: View {
         } else {
             return Color.textNotFlowing
         }
-    }
-
-    var isFlowing: Bool {
-        amount.rounded(decimalPlaces: 2) != 0.0
     }
 }
 

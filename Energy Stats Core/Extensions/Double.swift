@@ -68,6 +68,10 @@ public extension Double {
         }
     }
 
+    func isFlowing() -> Bool {
+        rounded(decimalPlaces: 2) != 0.0
+    }
+
     func rounded(decimalPlaces: Int) -> Double {
         let power = pow(10, Double(decimalPlaces))
         return (self * power).rounded() / power

@@ -60,13 +60,14 @@ struct LoadedPowerFlowView: View {
                                 SolarPowerView(appSettings: appSettings, viewModel: SolarPowerViewModel(solar: viewModel.solar, earnings: viewModel.earnings))
                                     .overlay(
                                         VStack(alignment: .leading) {
-                                            if appSettings.showSeparateStringsOnFlowPage {
+                                            if appSettings.showSeparateStringsOnFlowPage, viewModel.solar.isFlowing() {
                                                 ForEach(viewModel.solarStrings) { pvString in
                                                     HStack {
                                                         Text(pvString.name)
                                                             .monospacedDigit()
                                                         PowerText(amount: pvString.amount, appSettings: appSettings, type: .solarFlow)
                                                     }
+                                                    .foregroundStyle(Color.textNotFlowing)
                                                 }
                                             }
                                         }
