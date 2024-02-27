@@ -243,6 +243,7 @@
 		41E4B31528DB77E8003F7F47 /* GridPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E4B31428DB77E8003F7F47 /* GridPowerView.swift */; };
 		41E8E7242AADFB3900DC4B89 /* SolarBandingSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E8E7232AADFB3900DC4B89 /* SolarBandingSettingsView.swift */; };
 		41E8E7262AAE0D0D00DC4B89 /* SolarRangeDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E8E7252AAE0D0D00DC4B89 /* SolarRangeDefinitions.swift */; };
+		41EB28032B8E634F00F6127F /* SolarStringsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EB28022B8E634F00F6127F /* SolarStringsSettingsView.swift */; };
 		41ED2EF02B349EF7001CF277 /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41ED2EEF2B349EF7001CF277 /* CustomDatePicker.swift */; };
 		41F71ABD2A14FBEC00A8C81B /* Array+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127910C28E2442100D5F993 /* Array+Safe.swift */; };
 		41F71ABF2A1504C700A8C81B /* report-year.json in Resources */ = {isa = PBXBuildFile; fileRef = 41F71ABE2A1504C700A8C81B /* report-year.json */; };
@@ -606,6 +607,7 @@
 		41E4B31428DB77E8003F7F47 /* GridPowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPowerView.swift; sourceTree = "<group>"; };
 		41E8E7232AADFB3900DC4B89 /* SolarBandingSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarBandingSettingsView.swift; sourceTree = "<group>"; };
 		41E8E7252AAE0D0D00DC4B89 /* SolarRangeDefinitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarRangeDefinitions.swift; sourceTree = "<group>"; };
+		41EB28022B8E634F00F6127F /* SolarStringsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarStringsSettingsView.swift; sourceTree = "<group>"; };
 		41ED2EEF2B349EF7001CF277 /* CustomDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
 		41EDDF6B28CD2A630092C662 /* HomePowerFlowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePowerFlowViewModel.swift; sourceTree = "<group>"; };
 		41EDDF7128CD2ED30092C662 /* Energy StatsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Energy StatsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -986,6 +988,7 @@
 				419AB47F2AA36D24002CBC96 /* DisplaySettingsView.swift */,
 				41E8E7232AADFB3900DC4B89 /* SolarBandingSettingsView.swift */,
 				41A263212B6AEE9F0027E52A /* ConfigureAPIKeyView.swift */,
+				41EB28022B8E634F00F6127F /* SolarStringsSettingsView.swift */,
 			);
 			path = "Settings Page";
 			sourceTree = "<group>";
@@ -1666,6 +1669,7 @@
 				4190922C2B1E49210017CB65 /* ScheduleView.swift in Sources */,
 				41923E3E2916BC6F00D1A8C5 /* ParametersGraphView.swift in Sources */,
 				4163CA7C2B4DE46D00FDA232 /* APIKeyLoginView.swift in Sources */,
+				41EB28032B8E634F00F6127F /* SolarStringsSettingsView.swift in Sources */,
 				41FE6BB12B0CBA7900A66CC3 /* SolcastSiteView.swift in Sources */,
 				41AF2F432AA4C6C1008FCA2E /* HomePowerFooterView.swift in Sources */,
 				41E165BB2B0BE1BD00B17590 /* ForecastView.swift in Sources */,
