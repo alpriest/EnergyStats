@@ -65,8 +65,12 @@ class HomeEnergyStateManager {
         let calculator = BatteryCapacityCalculator(capacityW: configManager.batteryCapacityW,
                                                    minimumSOC: configManager.minSOC,
                                                    bundle: Bundle(for: BundleLocator.self))
+        let chargePower = real.datas.currentValue(for: "batChargePower")
+        let dischargePower = real.datas.currentValue(for: "batDischargePower")
+        let power = chargePower > 0 ? chargePower : -dischargePower
+
         let viewModel = BatteryViewModel(
-            power: real.datas.currentValue(for: "batChargePower") - (0 - real.datas.currentValue(for: "batDischargePower")),
+            power: power,
             soc: Int(real.datas.currentValue(for: "SoC")),
             residual: real.datas.currentValue(for: "ResidualEnergy") * 10.0,
             temperature: real.datas.currentValue(for: "batTemperature")

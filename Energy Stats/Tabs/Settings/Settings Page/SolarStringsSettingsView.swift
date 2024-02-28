@@ -73,6 +73,7 @@ struct SolarStringsSettingsView: View {
     }
 }
 
+#if DEBUG
 #Preview {
     SolarStringsSettingsView(viewModel: SettingsTabViewModel(
         userManager: .preview(),
@@ -80,3 +81,4 @@ struct SolarStringsSettingsView: View {
         networking: DemoNetworking())
     )
 }
+#endif
