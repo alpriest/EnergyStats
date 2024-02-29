@@ -42,7 +42,8 @@ public enum AppSettingsPublisherFactory {
                 separateParameterGraphsByUnit: config.separateParameterGraphsByUnit,
                 currencySymbol: config.currencySymbol,
                 showInverterTypeName: config.showInverterTypeName,
-                showSeparateStringsOnFlowPage: config.showSeparateStringsOnFlowPage
+                showSeparateStringsOnFlowPage: config.showSeparateStringsOnFlowPage,
+                showBatteryPercentageRemaining: config.showBatteryPercentageRemaining
             )
         )
     }

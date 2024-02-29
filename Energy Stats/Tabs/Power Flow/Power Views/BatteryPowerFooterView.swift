@@ -9,21 +9,18 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct BatteryPowerFooterView: View {
-    @AppStorage("showBatteryAsResidual") private var batteryResidual: Bool = false
     let viewModel: BatteryPowerViewModel
     let appSettings: AppSettings
 
     var body: some View {
         VStack {
             Group {
-                if batteryResidual {
-                    EnergyText(amount: viewModel.batteryStoredChargekWh, appSettings: appSettings, type: .batteryCapacity)
-                } else {
+                if appSettings.showBatteryPercentageRemaining {
                     Text(viewModel.batteryStateOfCharge, format: .percent)
                         .accessibilityLabel(String(format: String(accessibilityKey: .batteryCapacityPercentage), String(describing: viewModel.batteryStateOfCharge.percent())))
+                } else {
+                    EnergyText(amount: viewModel.batteryStoredChargekWh, appSettings: appSettings, type: .batteryCapacity)
                 }
-            }.onTapGesture {
-                batteryResidual.toggle()
             }
 
             if appSettings.showBatteryTemperature {

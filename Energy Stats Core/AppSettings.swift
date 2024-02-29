@@ -46,6 +46,7 @@ public struct AppSettings {
     public var currencySymbol: String
     public var showInverterTypeName: Bool
     public var showSeparateStringsOnFlowPage: Bool
+    public var showBatteryPercentageRemaining: Bool
 
     public init(
         showColouredLines: Bool,
@@ -78,7 +79,8 @@ public struct AppSettings {
         separateParameterGraphsByUnit: Bool,
         currencySymbol: String,
         showInverterTypeName: Bool,
-        showSeparateStringsOnFlowPage: Bool
+        showSeparateStringsOnFlowPage: Bool,
+        showBatteryPercentageRemaining: Bool
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -111,6 +113,7 @@ public struct AppSettings {
         self.showInverterTypeName = showInverterTypeName
         self.shouldCombineCT2WithLoadsPower = shouldCombineCT2WithLoadsPower
         self.showSeparateStringsOnFlowPage = showSeparateStringsOnFlowPage
+        self.showBatteryPercentageRemaining = showBatteryPercentageRemaining
     }
 
     public func copy(
@@ -144,7 +147,8 @@ public struct AppSettings {
         separateParameterGraphsByUnit: Bool? = nil,
         currencySymbol: String? = nil,
         showInverterTypeName: Bool? = nil,
-        showSeparateStringsOnFlowPage: Bool? = nil
+        showSeparateStringsOnFlowPage: Bool? = nil,
+        showBatteryPercentageRemaining: Bool? = nil
     ) -> AppSettings {
         AppSettings(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -177,7 +181,8 @@ public struct AppSettings {
             separateParameterGraphsByUnit: separateParameterGraphsByUnit ?? self.separateParameterGraphsByUnit,
             currencySymbol: currencySymbol ?? self.currencySymbol,
             showInverterTypeName: showInverterTypeName ?? self.showInverterTypeName,
-            showSeparateStringsOnFlowPage: showSeparateStringsOnFlowPage ?? self.showSeparateStringsOnFlowPage
+            showSeparateStringsOnFlowPage: showSeparateStringsOnFlowPage ?? self.showSeparateStringsOnFlowPage,
+            showBatteryPercentageRemaining: showBatteryPercentageRemaining ?? self.showBatteryPercentageRemaining
         )
     }
 }

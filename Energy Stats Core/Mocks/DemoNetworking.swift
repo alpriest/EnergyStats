@@ -277,6 +277,7 @@ public class MockConfig: Config {
     public var showSeparateStringsOnFlowPage: Bool = false
     public var useExperimentalLoadFormula: Bool = false
     public var enabledPowerFlowStrings: PowerFlowStrings = .none
+    public var showBatteryPercentageRemaining: Bool = true
 }
 
 public class PreviewConfigManager: ConfigManager {

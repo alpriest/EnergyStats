@@ -45,7 +45,8 @@ public extension AppSettings {
             separateParameterGraphsByUnit: true,
             currencySymbol: "£",
             showInverterTypeName: false,
-            showSeparateStringsOnFlowPage: false
+            showSeparateStringsOnFlowPage: false,
+            showBatteryPercentageRemaining: true
         )
     }
 }

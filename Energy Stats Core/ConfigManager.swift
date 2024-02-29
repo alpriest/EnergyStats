@@ -510,6 +510,16 @@ public class ConfigManager: ConfigManaging {
         get { config.enabledPowerFlowStrings }
         set { config.enabledPowerFlowStrings = newValue }
     }
+
+    public var showBatteryPercentageRemaining: Bool {
+        get { config.showBatteryPercentageRemaining }
+        set {
+            config.showBatteryPercentageRemaining = newValue
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+                showBatteryPercentageRemaining: config.showBatteryPercentageRemaining
+            ))
+        }
+    }
 }
 
 public enum BatteryResponseMapper {

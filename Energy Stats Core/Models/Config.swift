@@ -51,6 +51,7 @@ public protocol Config {
     var showSeparateStringsOnFlowPage: Bool { get set }
     var useExperimentalLoadFormula: Bool { get set }
     var enabledPowerFlowStrings: PowerFlowStrings { get set }
+    var showBatteryPercentageRemaining: Bool { get set }
 }
 
 public func DefaultParameterGroups() -> [ParameterGroup] {

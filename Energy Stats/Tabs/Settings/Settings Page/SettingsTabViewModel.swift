@@ -10,6 +10,12 @@ import Energy_Stats_Core
 import SwiftUI
 
 class SettingsTabViewModel: ObservableObject {
+    @Published var showBatteryPercentageRemaining: Bool {
+        didSet {
+            config.showBatteryPercentageRemaining = showBatteryPercentageRemaining
+        }
+    }
+
     @Published var enabledPowerFlowStrings: PowerFlowStrings {
         didSet {
             config.enabledPowerFlowStrings = enabledPowerFlowStrings
@@ -200,6 +206,7 @@ class SettingsTabViewModel: ObservableObject {
         showSeparateStringsOnPowerFlow = config.showSeparateStringsOnFlowPage
         useExperimentalLoadFormula = config.useExperimentalLoadFormula
         enabledPowerFlowStrings = config.enabledPowerFlowStrings
+        showBatteryPercentageRemaining = config.showBatteryPercentageRemaining
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }

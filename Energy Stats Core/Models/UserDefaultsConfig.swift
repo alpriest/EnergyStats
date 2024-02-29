@@ -56,6 +56,7 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "showSeparateStringsOnFlowPage")
         UserDefaults.shared.removeObject(forKey: "useExperimentalLoadFormula")
         UserDefaults.shared.removeObject(forKey: "enabledPowerFlowStrings")
+        UserDefaults.shared.removeObject(forKey: "showBatteryPercentageRemaining")
     }
 
     public func clearDeviceSettings() {
@@ -228,4 +229,7 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredCodable(key: "enabledPowerFlowStrings", defaultValue: .none)
     public var enabledPowerFlowStrings: PowerFlowStrings
+
+    @UserDefaultsStoredBool(key: "showBatteryPercentageRemaining", defaultValue: true)
+    public var showBatteryPercentageRemaining: Bool
 }

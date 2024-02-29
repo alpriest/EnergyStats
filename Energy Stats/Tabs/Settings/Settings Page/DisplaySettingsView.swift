@@ -54,6 +54,10 @@ struct DisplaySettingsView: View {
                 Toggle(isOn: $viewModel.separateParameterGraphsByUnit) {
                     Text("Separate parameter graphs by unit")
                 }
+
+                Toggle(isOn: $viewModel.showBatteryPercentageRemaining) {
+                    Text("Show battery percentage remaining")
+                }
             }
         } header: {
             Text("Display")
