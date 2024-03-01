@@ -18,32 +18,6 @@ class MockNetworking: FoxESSNetworking {
         self.dateProvider = dateProvider
     }
 
-    func ensureHasToken() async {
-        // Assume valid
-    }
-
-    func fetchBatterySOC() async throws -> BatterySOCResponse {
-        BatterySOCResponse(minSocOnGrid: 15, minSoc: 20)
-    }
-
-    func verifyCredentials(username: String, hashedPassword: String) async throws {
-        if throwOnCall {
-            throw NetworkError.badCredentials
-        }
-    }
-
-    func fetchReport(deviceID: String, variables: [ReportVariable], queryDate: QueryDate) async throws -> [ReportResponse] {
-        if throwOnCall {
-            throw NetworkError.maintenanceMode
-        }
-
-        return [ReportResponse(variable: "feedin", data: [.init(index: 14, value: 1.5)])]
-    }
-
-    func fetchBatterySettings(deviceSN: String) async throws -> BatterySOCResponse {
-        BatterySOCResponse(minSocOnGrid: 15, minSoc: 20)
-    }
-
     func fetchErrorMessages() async {}
 
     private func rawData() throws -> Data {
@@ -53,30 +27,6 @@ class MockNetworking: FoxESSNetworking {
 
         return try Data(contentsOf: url)
     }
-
-    //    func fetchScheduleModes(deviceID: String) async throws -> [Energy_Stats_Core.SchedulerModeResponse] {
-    //        []
-    //    }
-    //
-    //    func saveSchedule(deviceSN: String, schedule: Energy_Stats_Core.Schedule) async throws {}
-    //
-    //    func saveScheduleTemplate(deviceSN: String, template: Energy_Stats_Core.ScheduleTemplate) async throws {}
-    //
-    //    func deleteSchedule(deviceSN: String) async throws {}
-    //
-    //    func createScheduleTemplate(name: String, description: String) async throws {}
-    //
-    //    func fetchScheduleTemplates() async throws -> Energy_Stats_Core.ScheduleTemplateListResponse {
-    //        ScheduleTemplateListResponse(data: [])
-    //    }
-    //
-    //    func enableScheduleTemplate(deviceSN: String, templateID: String) async throws {}
-    //
-    //    func fetchScheduleTemplate(deviceSN: String, templateID: String) async throws -> Energy_Stats_Core.ScheduleTemplateResponse {
-    //        ScheduleTemplateResponse(templateName: "", enable: false, pollcy: [], content: "")
-    //    }
-    //
-    //    func deleteScheduleTemplate(templateID: String) async throws {}
 
     func openapi_fetchDeviceList() async throws -> [Energy_Stats_Core.DeviceDetailResponse] {
         []

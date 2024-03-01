@@ -112,10 +112,6 @@ extension JSONDecoder {
 
 private struct ErrorApiResponse: Decodable {
     let responseStatus: ResponseStatus
-
-    enum CodingKeys: String, CodingKey {
-        case responseStatus = "response_status"
-    }
 }
 
 private struct ResponseStatus: Decodable {

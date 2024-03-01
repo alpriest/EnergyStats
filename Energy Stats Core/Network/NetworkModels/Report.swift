@@ -13,20 +13,6 @@ public enum ReportType: String, RawRepresentable, Encodable {
     case year
 }
 
-struct ReportRequest: Encodable {
-    let deviceID: String
-    let reportType: ReportType
-    let variables: [String]
-    let queryDate: QueryDate
-
-    internal init(deviceID: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) {
-        self.deviceID = deviceID
-        self.variables = variables.map { $0.networkTitle }
-        self.queryDate = queryDate
-        self.reportType = reportType
-    }
-}
-
 public struct QueryDate: Encodable {
     public let year: Int
     public let month: Int?
@@ -54,12 +40,3 @@ public struct QueryDate: Encodable {
 
 extension QueryDate: Equatable {}
 
-public struct ReportResponse: Decodable, Hashable {
-    public let variable: String
-    public let data: [ReportData]
-
-    public struct ReportData: Decodable, Hashable {
-        public let index: Int
-        public let value: Double
-    }
-}

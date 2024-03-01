@@ -10,7 +10,6 @@
 		41009A712B02CD59009D853B /* Solcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41009A702B02CD59009D853B /* Solcast.swift */; };
 		41009A732B02D852009D853B /* SolcastForecastResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41009A722B02D852009D853B /* SolcastForecastResponse.swift */; };
 		41009A752B03B13A009D853B /* SolarForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41009A742B03B13A009D853B /* SolarForecastViewModel.swift */; };
-		4103D1CF29DB6C4D001B0BC8 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146128C7146300EA5BA1 /* Auth.swift */; };
 		4103D1D029DB6C51001B0BC8 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146428C714C000EA5BA1 /* Report.swift */; };
 		4103D1D129DB6C51001B0BC8 /* FoxEssCloudParseStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D7B12328C86E4000E14144 /* FoxEssCloudParseStrategy.swift */; };
 		4103D1D229DB6C51001B0BC8 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41626CCD29D95E9C003FEB00 /* NetworkError.swift */; };
@@ -431,7 +430,6 @@
 		4140145B28C70B4A00EA5BA1 /* PowerFlowTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerFlowTabViewModel.swift; sourceTree = "<group>"; };
 		4140145D28C70D1400EA5BA1 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		4140145F28C70D4700EA5BA1 /* FoxESSNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoxESSNetworking.swift; sourceTree = "<group>"; };
-		4140146128C7146300EA5BA1 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		4140146428C714C000EA5BA1 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		4140146828C7374400EA5BA1 /* CurrentStatusCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentStatusCalculator.swift; sourceTree = "<group>"; };
 		4140146E28C77A3100EA5BA1 /* BatterySOCResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatterySOCResponse.swift; sourceTree = "<group>"; };
@@ -922,7 +920,6 @@
 		4140146328C7146B00EA5BA1 /* NetworkModels */ = {
 			isa = PBXGroup;
 			children = (
-				4140146128C7146300EA5BA1 /* Auth.swift */,
 				4140146428C714C000EA5BA1 /* Report.swift */,
 				4140146E28C77A3100EA5BA1 /* BatterySOCResponse.swift */,
 				41D7B12328C86E4000E14144 /* FoxEssCloudParseStrategy.swift */,
@@ -1718,7 +1715,6 @@
 				410913FD29DB78EF00133CC5 /* PreciseDateTimeFormatter.swift in Sources */,
 				416AE4492A8128B9003D0122 /* OptionalView.swift in Sources */,
 				41E165B52B0B961200B17590 /* SolcastSettings.swift in Sources */,
-				4103D1CF29DB6C4D001B0BC8 /* Auth.swift in Sources */,
 				41CA35732AA8C10900D45734 /* EarningsViewModel.swift in Sources */,
 				410913FF29DB7A2700133CC5 /* CurrentStatusCalculator.swift in Sources */,
 				410913FE29DB791200133CC5 /* CountdownTimer.swift in Sources */,

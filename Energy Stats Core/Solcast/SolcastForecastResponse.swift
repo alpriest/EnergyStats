@@ -35,6 +35,11 @@ public struct SolcastSiteResponseList: Decodable {
     public let sites: [SolcastSiteResponse]
 }
 
+public struct SolcastSiteResponseStatus: Decodable {
+    public let errorCode: String
+    public let message: String
+}
+
 public struct SolcastSiteResponse: Decodable {
     public let name: String
     public let resourceId: String
