@@ -184,8 +184,8 @@ public struct OpenReportResponse: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.variable = try container.decode(String.self, forKey: .variable)
         self.unit = try container.decode(String.self, forKey: .unit)
-        let doubleValues = try container.decode([Double].self, forKey: .values)
-        self.values = doubleValues.enumerated().map { ReportData(index: $0 + 1, value: $1) }
+        let doubleValues = try container.decode([Double?].self, forKey: .values)
+        self.values = doubleValues.enumerated().compactMap { ReportData(index: $0 + 1, value: $1) }
     }
 
     public init(variable: String, unit: String, values: [ReportData]) {
@@ -197,6 +197,12 @@ public struct OpenReportResponse: Codable {
     public struct ReportData: Codable {
         public let index: Int
         public let value: Double
+
+        init?(index: Int, value: Double?) {
+            guard let value else { return nil }
+            self.index = index
+            self.value = value
+        }
     }
 }
 

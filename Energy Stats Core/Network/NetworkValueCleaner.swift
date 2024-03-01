@@ -126,7 +126,7 @@ public class NetworkValueCleaner: FoxESSNetworking {
             OpenReportResponse(
                 variable: $0.variable,
                 unit: $0.unit,
-                values: $0.values.map {
+                values: $0.values.compactMap {
                     OpenReportResponse.ReportData(
                         index: $0.index,
                         value: $0.value.capped(appSettingsPublisher.value.dataCeiling)

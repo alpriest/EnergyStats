@@ -82,6 +82,7 @@ public class ConfigManager: ConfigManaging {
 
         if clearDeviceSettings {
             config.clearDeviceSettings()
+            selectedDeviceSN = nil
         }
     }
 
