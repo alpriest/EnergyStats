@@ -53,9 +53,8 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "showFinancialSummaryOnFlowPage")
         UserDefaults.shared.removeObject(forKey: "separateParameterGraphsByUnit")
         UserDefaults.shared.removeObject(forKey: "showInverterTypeName")
-        UserDefaults.shared.removeObject(forKey: "showSeparateStringsOnFlowPage")
         UserDefaults.shared.removeObject(forKey: "useExperimentalLoadFormula")
-        UserDefaults.shared.removeObject(forKey: "enabledPowerFlowStrings")
+        UserDefaults.shared.removeObject(forKey: "powerFlowStringsSettings")
         UserDefaults.shared.removeObject(forKey: "showBatteryPercentageRemaining")
     }
 
@@ -162,9 +161,6 @@ public class UserDefaultsConfig: Config {
     @UserDefaultsStoredBool(key: "shouldCombineCT2WithLoadsPower", defaultValue: false)
     public var shouldCombineCT2WithLoadsPower: Bool
 
-    @UserDefaultsStoredBool(key: "showSeparateStringsOnFlowPage", defaultValue: false)
-    public var showSeparateStringsOnFlowPage: Bool
-
     public var selectedParameterGraphVariables: [String] {
         get {
             UserDefaults.shared.array(forKey: "selectedParameterGraphVariables") as? [String] ?? []
@@ -227,8 +223,8 @@ public class UserDefaultsConfig: Config {
     @UserDefaultsStoredBool(key: "useExperimentalLoadFormula", defaultValue: false)
     public var useExperimentalLoadFormula: Bool
 
-    @UserDefaultsStoredCodable(key: "enabledPowerFlowStrings", defaultValue: .none)
-    public var enabledPowerFlowStrings: PowerFlowStrings
+    @UserDefaultsStoredCodable(key: "powerFlowStringsSettings", defaultValue: PowerFlowStringsSettings.none)
+    public var powerFlowStrings: PowerFlowStringsSettings
 
     @UserDefaultsStoredBool(key: "showBatteryPercentageRemaining", defaultValue: true)
     public var showBatteryPercentageRemaining: Bool

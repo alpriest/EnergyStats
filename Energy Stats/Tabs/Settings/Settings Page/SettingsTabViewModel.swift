@@ -16,12 +16,6 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
-    @Published var enabledPowerFlowStrings: PowerFlowStrings {
-        didSet {
-            config.enabledPowerFlowStrings = enabledPowerFlowStrings
-        }
-    }
-
     @Published var separateParameterGraphsByUnit: Bool {
         didSet {
             config.separateParameterGraphsByUnit = separateParameterGraphsByUnit
@@ -158,9 +152,9 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
-    @Published var showSeparateStringsOnPowerFlow: Bool {
+    @Published var powerFlowStrings: PowerFlowStringsSettings {
         didSet {
-            config.showSeparateStringsOnFlowPage = showSeparateStringsOnPowerFlow
+            config.powerFlowStrings = powerFlowStrings
         }
     }
 
@@ -203,9 +197,8 @@ class SettingsTabViewModel: ObservableObject {
         separateParameterGraphsByUnit = config.separateParameterGraphsByUnit
         showInverterTypeName = config.showInverterTypeName
         shouldCombineCT2WithLoadsPower = config.shouldCombineCT2WithLoadsPower
-        showSeparateStringsOnPowerFlow = config.showSeparateStringsOnFlowPage
         useExperimentalLoadFormula = config.useExperimentalLoadFormula
-        enabledPowerFlowStrings = config.enabledPowerFlowStrings
+        powerFlowStrings = config.powerFlowStrings
         showBatteryPercentageRemaining = config.showBatteryPercentageRemaining
 
         config.currentDevice.sink { [weak self] _ in
@@ -214,6 +207,14 @@ class SettingsTabViewModel: ObservableObject {
             Task { @MainActor in
                 self.batteryCapacity = String(describing: config.batteryCapacity)
                 self.hasBattery = config.hasBattery
+            }
+        }.store(in: &cancellables)
+
+        config.appSettingsPublisher.sink { [weak self] in
+            guard let self else { return }
+
+            if $0.showBatteryPercentageRemaining != self.showBatteryPercentageRemaining {
+                self.showBatteryPercentageRemaining = $0.showBatteryPercentageRemaining
             }
         }.store(in: &cancellables)
     }

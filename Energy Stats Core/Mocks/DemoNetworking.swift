@@ -274,9 +274,8 @@ public class MockConfig: Config {
     public var showFinancialSummaryOnFlowPage: Bool = true
     public var separateParameterGraphsByUnit: Bool = true
     public var variables: [Variable] = []
-    public var showSeparateStringsOnFlowPage: Bool = false
     public var useExperimentalLoadFormula: Bool = false
-    public var enabledPowerFlowStrings: PowerFlowStrings = .none
+    public var powerFlowStrings: PowerFlowStringsSettings = .none
     public var showBatteryPercentageRemaining: Bool = true
 }
 

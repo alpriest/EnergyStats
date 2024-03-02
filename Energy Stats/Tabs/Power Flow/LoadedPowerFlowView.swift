@@ -59,22 +59,8 @@ struct LoadedPowerFlowView: View {
                             ZStack {
                                 SolarPowerView(appSettings: appSettings, viewModel: SolarPowerViewModel(solar: viewModel.solar, earnings: viewModel.earnings))
                                     .overlay(
-                                        VStack(alignment: .leading) {
-                                            if appSettings.showSeparateStringsOnFlowPage, viewModel.solar.isFlowing() {
-                                                ForEach(viewModel.solarStrings) { pvString in
-                                                    HStack {
-                                                        Text(pvString.name)
-                                                            .monospacedDigit()
-                                                        PowerText(amount: pvString.amount, appSettings: appSettings, type: .solarFlow)
-                                                    }
-                                                    .foregroundStyle(Color.textNotFlowing)
-                                                }
-                                            }
-                                        }
-                                        .padding(2)
-                                        .background(Color.linesNotFlowing)
-                                        .font(.caption)
-                                        .offset(x: 0, y: -30)
+                                        SolarStringsView(viewModel: viewModel, appSettings: appSettings)
+                                            .offset(x: 0, y: -30)
                                     )
                             }
                             .frame(width: topColumnWidth, height: size.height * 0.35)
@@ -193,6 +179,7 @@ struct LoadedPowerFlowView: View {
 }
 
 struct PowerSummaryView_Previews: PreviewProvider {
+    static let strings = PowerFlowStringsSettings.none.copy(enabled: true, pv1Name: "Front", pv2Name: "Rear")
     static var previews: some View {
         LoadedPowerFlowView(configManager: PreviewConfigManager(),
                             viewModel: HomePowerFlowViewModel.any(battery: .any()),
@@ -202,7 +189,7 @@ struct PowerSummaryView_Previews: PreviewProvider {
                                                                                               showInverterTemperature: true,
                                                                                               showHomeTotalOnPowerFlow: true,
                                                                                               shouldCombineCT2WithPVPower: true,
-                                                                                              showSeparateStringsOnFlowPage: true)))
+                                                                                              powerFlowStrings: strings)))
             .environment(\.locale, .init(identifier: "en"))
     }
 }

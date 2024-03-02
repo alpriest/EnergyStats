@@ -9,12 +9,12 @@ import Combine
 import Energy_Stats_Core
 import SwiftUI
 
-struct BatteryPowerViewModel {
+class BatteryPowerViewModel {
     private let actualBatteryStateOfCharge: Double
     private(set) var batteryChargekWh: Double
     private let calculator: BatteryCapacityCalculator
     private(set) var temperature: Double
-    private let configManager: ConfigManaging
+    private var configManager: ConfigManaging
     let residual: Int
     let error: Error?
 
@@ -51,6 +51,10 @@ struct BatteryPowerViewModel {
 
     var hasError: Bool {
         error != nil
+    }
+
+    func showBatteryPercentageRemainingToggle() {
+        configManager.showBatteryPercentageRemaining.toggle()
     }
 }
 

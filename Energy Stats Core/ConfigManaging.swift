@@ -59,9 +59,8 @@ public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging {
     var showTotalYieldOnPowerFlow: Bool { get set }
     var showFinancialSummaryOnFlowPage: Bool { get set }
     var separateParameterGraphsByUnit: Bool { get set }
-    var showSeparateStringsOnFlowPage: Bool { get set }
     var useExperimentalLoadFormula: Bool { get set }
-    var enabledPowerFlowStrings: PowerFlowStrings { get set }
+    var powerFlowStrings: PowerFlowStringsSettings { get set }
     var showBatteryPercentageRemaining: Bool { get set }
 }
 
@@ -75,35 +74,34 @@ public protocol FinancialConfigManaging {
     var gridImportUnitPrice: Double { get set }
 }
 
-public struct PowerFlowStrings: OptionSet, Codable {
-    public let rawValue: Int
-
-    public init(rawValue: Int) {
-        self.rawValue = rawValue
-    }
-
-    public static let none = PowerFlowStrings([])
-    public static let pv1 = PowerFlowStrings(rawValue: 1 << 0)
-    public static let pv2 = PowerFlowStrings(rawValue: 1 << 1)
-    public static let pv3 = PowerFlowStrings(rawValue: 1 << 2)
-    public static let pv4 = PowerFlowStrings(rawValue: 1 << 3)
+public struct PowerFlowStringsSettings: Codable {
+    public let enabled: Bool
+    public let pv1Name: String
+    public let pv1Enabled: Bool
+    public let pv2Name: String
+    public let pv2Enabled: Bool
+    public let pv3Name: String
+    public let pv3Enabled: Bool
+    public let pv4Name: String
+    public let pv4Enabled: Bool
 
     public func variableNames() -> [String] {
+        guard enabled else { return [] }
         var variables = [String]()
 
-        if contains(.pv1) {
+        if pv1Enabled {
             variables.append("pv1Power")
         }
 
-        if contains(.pv2) {
+        if pv2Enabled {
             variables.append("pv2Power")
         }
 
-        if contains(.pv3) {
+        if pv3Enabled {
             variables.append("pv3Power")
         }
 
-        if contains(.pv4) {
+        if pv4Enabled {
             variables.append("pv4Power")
         }
 
@@ -111,24 +109,61 @@ public struct PowerFlowStrings: OptionSet, Codable {
     }
 
     public func makeStringPowers(from response: OpenQueryResponse) -> [StringPower] {
+        guard enabled else { return [] }
         var strings = [StringPower]()
 
-        if contains(.pv1) {
+        if pv1Enabled {
             strings.append(StringPower(name: "PV1", amount: response.datas.currentValue(for: "pv1Power")))
         }
 
-        if contains(.pv2) {
+        if pv2Enabled {
             strings.append(StringPower(name: "PV2", amount: response.datas.currentValue(for: "pv2Power")))
         }
 
-        if contains(.pv3) {
+        if pv3Enabled {
             strings.append(StringPower(name: "PV3", amount: response.datas.currentValue(for: "pv3Power")))
         }
 
-        if contains(.pv4) {
+        if pv4Enabled {
             strings.append(StringPower(name: "PV4", amount: response.datas.currentValue(for: "pv4Power")))
         }
 
         return strings
+    }
+
+    public func copy(
+        enabled: Bool? = nil,
+        pv1Name: String? = nil,
+        pv1Enabled: Bool? = nil,
+        pv2Name: String? = nil,
+        pv2Enabled: Bool? = nil,
+        pv3Name: String? = nil,
+        pv3Enabled: Bool? = nil,
+        pv4Name: String? = nil,
+        pv4Enabled: Bool? = nil) -> PowerFlowStringsSettings
+    {
+        PowerFlowStringsSettings(
+            enabled: enabled ?? self.enabled,
+            pv1Name: pv1Name ?? self.pv1Name,
+            pv1Enabled: pv1Enabled ?? self.pv1Enabled,
+            pv2Name: pv2Name ?? self.pv2Name,
+            pv2Enabled: pv2Enabled ?? self.pv2Enabled,
+            pv3Name: pv3Name ?? self.pv3Name,
+            pv3Enabled: pv3Enabled ?? self.pv3Enabled,
+            pv4Name: pv4Name ?? self.pv4Name,
+            pv4Enabled: pv4Enabled ?? self.pv4Enabled)
+    }
+
+    public static var none: PowerFlowStringsSettings {
+        PowerFlowStringsSettings(
+            enabled: false,
+            pv1Name: "PV1",
+            pv1Enabled: false,
+            pv2Name: "PV2",
+            pv2Enabled: false,
+            pv3Name: "PV3",
+            pv3Enabled: false,
+            pv4Name: "PV4",
+            pv4Enabled: false)
     }
 }

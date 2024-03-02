@@ -45,7 +45,7 @@ public struct AppSettings {
     public var separateParameterGraphsByUnit: Bool
     public var currencySymbol: String
     public var showInverterTypeName: Bool
-    public var showSeparateStringsOnFlowPage: Bool
+    public var powerFlowStrings: PowerFlowStringsSettings
     public var showBatteryPercentageRemaining: Bool
 
     public init(
@@ -79,7 +79,7 @@ public struct AppSettings {
         separateParameterGraphsByUnit: Bool,
         currencySymbol: String,
         showInverterTypeName: Bool,
-        showSeparateStringsOnFlowPage: Bool,
+        powerFlowStrings: PowerFlowStringsSettings,
         showBatteryPercentageRemaining: Bool
     ) {
         self.showColouredLines = showColouredLines
@@ -112,7 +112,7 @@ public struct AppSettings {
         self.currencySymbol = currencySymbol
         self.showInverterTypeName = showInverterTypeName
         self.shouldCombineCT2WithLoadsPower = shouldCombineCT2WithLoadsPower
-        self.showSeparateStringsOnFlowPage = showSeparateStringsOnFlowPage
+        self.powerFlowStrings = powerFlowStrings
         self.showBatteryPercentageRemaining = showBatteryPercentageRemaining
     }
 
@@ -147,7 +147,7 @@ public struct AppSettings {
         separateParameterGraphsByUnit: Bool? = nil,
         currencySymbol: String? = nil,
         showInverterTypeName: Bool? = nil,
-        showSeparateStringsOnFlowPage: Bool? = nil,
+        powerFlowStrings: PowerFlowStringsSettings? = nil,
         showBatteryPercentageRemaining: Bool? = nil
     ) -> AppSettings {
         AppSettings(
@@ -181,7 +181,7 @@ public struct AppSettings {
             separateParameterGraphsByUnit: separateParameterGraphsByUnit ?? self.separateParameterGraphsByUnit,
             currencySymbol: currencySymbol ?? self.currencySymbol,
             showInverterTypeName: showInverterTypeName ?? self.showInverterTypeName,
-            showSeparateStringsOnFlowPage: showSeparateStringsOnFlowPage ?? self.showSeparateStringsOnFlowPage,
+            powerFlowStrings: powerFlowStrings ?? self.powerFlowStrings,
             showBatteryPercentageRemaining: showBatteryPercentageRemaining ?? self.showBatteryPercentageRemaining
         )
     }

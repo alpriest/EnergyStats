@@ -49,8 +49,8 @@ public struct CurrentStatusCalculator {
 
     static func mapCurrentValues(device: Device, response: OpenQueryResponse, config: ConfigManaging) -> CurrentRawValues {
         var stringsPvPower: [StringPower] = []
-        if config.showSeparateStringsOnFlowPage {
-            stringsPvPower = config.enabledPowerFlowStrings.makeStringPowers(from: response)
+        if config.powerFlowStrings.enabled {
+            stringsPvPower = config.powerFlowStrings.makeStringPowers(from: response)
         }
 
         return CurrentRawValues(

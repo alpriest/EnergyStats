@@ -11,52 +11,60 @@ import SwiftUI
 struct SolarStringsSettingsView: View {
     @ObservedObject var viewModel: SettingsTabViewModel
     @State private var showStringSelection: Bool
-    @State private var pv1 = false
-    @State private var pv2 = false
-    @State private var pv3 = false
-    @State private var pv4 = false
+    @State private var pv1: Bool
+    @State private var pv2: Bool
+    @State private var pv3: Bool
+    @State private var pv4: Bool
+    @State private var pv1Name: String
+    @State private var pv2Name: String
+    @State private var pv3Name: String
+    @State private var pv4Name: String
 
     init(viewModel: SettingsTabViewModel) {
         self.viewModel = viewModel
-        self._showStringSelection = State(wrappedValue: viewModel.showSeparateStringsOnPowerFlow)
-        self._pv1 = State(wrappedValue: viewModel.enabledPowerFlowStrings.contains(.pv1))
-        self._pv2 = State(wrappedValue: viewModel.enabledPowerFlowStrings.contains(.pv2))
-        self._pv3 = State(wrappedValue: viewModel.enabledPowerFlowStrings.contains(.pv3))
-        self._pv4 = State(wrappedValue: viewModel.enabledPowerFlowStrings.contains(.pv4))
+        self._showStringSelection = State(wrappedValue: viewModel.powerFlowStrings.enabled)
+        self._pv1 = State(wrappedValue: viewModel.powerFlowStrings.pv1Enabled)
+        self._pv2 = State(wrappedValue: viewModel.powerFlowStrings.pv2Enabled)
+        self._pv3 = State(wrappedValue: viewModel.powerFlowStrings.pv3Enabled)
+        self._pv4 = State(wrappedValue: viewModel.powerFlowStrings.pv4Enabled)
+        self._pv1Name = State(wrappedValue: viewModel.powerFlowStrings.pv1Name)
+        self._pv2Name = State(wrappedValue: viewModel.powerFlowStrings.pv2Name)
+        self._pv3Name = State(wrappedValue: viewModel.powerFlowStrings.pv3Name)
+        self._pv4Name = State(wrappedValue: viewModel.powerFlowStrings.pv4Name)
     }
 
     var body: some View {
         Section {
-            Toggle(isOn: $viewModel.showSeparateStringsOnPowerFlow) {
+            Toggle(isOn: $showStringSelection) {
                 Text("Show PV power by strings")
-            }.onChange(of: viewModel.showSeparateStringsOnPowerFlow) { newValue in
+            }.onChange(of: showStringSelection) { newValue in
                 withAnimation {
-                    showStringSelection = newValue
+                    viewModel.powerFlowStrings = viewModel.powerFlowStrings.copy(enabled: newValue)
                 }
             }
 
             if showStringSelection {
                 VStack {
-                    Toggle(isOn: $pv1) {
-                        Text("PV1")
-                    }
-                    Toggle(isOn: $pv2) {
-                        Text("PV2")
-                    }
-                    Toggle(isOn: $pv3) {
-                        Text("PV3")
-                    }
-                    Toggle(isOn: $pv4) {
-                        Text("PV4")
-                    }
+                    editableStringToggle(for: "PV1", $pv1, $pv1Name)
+                    editableStringToggle(for: "PV2", $pv2, $pv2Name)
+                    editableStringToggle(for: "PV3", $pv3, $pv3Name)
+                    editableStringToggle(for: "PV4", $pv4, $pv4Name)
                 }.onChange(of: pv1) {
-                    toggle(string: .pv1, state: $0)
+                    viewModel.powerFlowStrings = viewModel.powerFlowStrings.copy(pv1Enabled: $0)
                 }.onChange(of: pv2) {
-                    toggle(string: .pv2, state: $0)
+                    viewModel.powerFlowStrings = viewModel.powerFlowStrings.copy(pv2Enabled: $0)
                 }.onChange(of: pv3) {
-                    toggle(string: .pv3, state: $0)
+                    viewModel.powerFlowStrings = viewModel.powerFlowStrings.copy(pv3Enabled: $0)
                 }.onChange(of: pv4) {
-                    toggle(string: .pv4, state: $0)
+                    viewModel.powerFlowStrings = viewModel.powerFlowStrings.copy(pv4Enabled: $0)
+                }.onChange(of: pv1Name) {
+                    viewModel.powerFlowStrings = viewModel.powerFlowStrings.copy(pv1Name: $0)
+                }.onChange(of: pv2Name) {
+                    viewModel.powerFlowStrings = viewModel.powerFlowStrings.copy(pv2Name: $0)
+                }.onChange(of: pv3Name) {
+                    viewModel.powerFlowStrings = viewModel.powerFlowStrings.copy(pv3Name: $0)
+                }.onChange(of: pv4Name) {
+                    viewModel.powerFlowStrings = viewModel.powerFlowStrings.copy(pv4Name: $0)
                 }
             }
         } footer: {
@@ -64,11 +72,11 @@ struct SolarStringsSettingsView: View {
         }
     }
 
-    private func toggle(string: PowerFlowStrings, state: Bool) {
-        if state {
-            viewModel.enabledPowerFlowStrings.insert(string)
-        } else {
-            viewModel.enabledPowerFlowStrings.remove(string)
+    private func editableStringToggle(for title: String, _ enabled: Binding<Bool>, _ name: Binding<String>) -> some View {
+        Toggle(isOn: enabled) {
+            TextField(text: name) {
+                Text(title)
+            }.textFieldStyle(.roundedBorder)
         }
     }
 }

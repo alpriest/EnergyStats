@@ -48,9 +48,8 @@ public protocol Config {
     var showFinancialSummaryOnFlowPage: Bool { get set }
     var separateParameterGraphsByUnit: Bool { get set }
     var variables: [Variable] { get set }
-    var showSeparateStringsOnFlowPage: Bool { get set }
     var useExperimentalLoadFormula: Bool { get set }
-    var enabledPowerFlowStrings: PowerFlowStrings { get set }
+    var powerFlowStrings: PowerFlowStringsSettings { get set }
     var showBatteryPercentageRemaining: Bool { get set }
 }
 

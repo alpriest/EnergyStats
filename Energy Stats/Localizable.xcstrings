@@ -3635,31 +3635,31 @@
       "localizations" : {
         "de" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Anmeldung nicht möglich. Prüfen Sie Ihre Internetverbindung"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Could not login. Check your internet connection"
+            "value" : "Could not login. Check your internet connection, or try logout and then login again."
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Nie można się zalogować. Sprawdź swoje połączenie z internetem"
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Impossibile effettuare il login. Controlla la connessione internet."
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Nie można się zalogować. Sprawdź swoje połączenie z internetem"
           }
         }
@@ -8670,6 +8670,7 @@
       }
     },
     "PV1" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -8704,6 +8705,7 @@
       }
     },
     "PV2" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -8738,6 +8740,7 @@
       }
     },
     "PV3" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -8772,6 +8775,7 @@
       }
     },
     "PV4" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

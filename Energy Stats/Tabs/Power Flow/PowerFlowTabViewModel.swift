@@ -237,8 +237,8 @@ class PowerFlowTabViewModel: ObservableObject {
             "epsPower"
         ]
 
-        if config.showSeparateStringsOnFlowPage {
-            variables.append(contentsOf: config.enabledPowerFlowStrings.variableNames())
+        if config.powerFlowStrings.enabled {
+            variables.append(contentsOf: config.powerFlowStrings.variableNames())
         }
 
         return try await self.network.openapi_fetchRealData(

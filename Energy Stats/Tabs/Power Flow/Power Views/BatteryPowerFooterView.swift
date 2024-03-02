@@ -21,6 +21,8 @@ struct BatteryPowerFooterView: View {
                 } else {
                     EnergyText(amount: viewModel.batteryStoredChargekWh, appSettings: appSettings, type: .batteryCapacity)
                 }
+            }.onTapGesture {
+                viewModel.showBatteryPercentageRemainingToggle()
             }
 
             if appSettings.showBatteryTemperature {

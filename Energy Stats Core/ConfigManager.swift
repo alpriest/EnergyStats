@@ -492,24 +492,19 @@ public class ConfigManager: ConfigManaging {
         }
     }
 
-    public var showSeparateStringsOnFlowPage: Bool {
-        get { config.showSeparateStringsOnFlowPage }
-        set {
-            config.showSeparateStringsOnFlowPage = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
-                showSeparateStringsOnFlowPage: config.showSeparateStringsOnFlowPage
-            ))
-        }
-    }
-
     public var useExperimentalLoadFormula: Bool {
         get { config.useExperimentalLoadFormula }
         set { config.useExperimentalLoadFormula = newValue }
     }
 
-    public var enabledPowerFlowStrings: PowerFlowStrings {
-        get { config.enabledPowerFlowStrings }
-        set { config.enabledPowerFlowStrings = newValue }
+    public var powerFlowStrings: PowerFlowStringsSettings {
+        get { config.powerFlowStrings }
+        set {
+            config.powerFlowStrings = newValue
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+                powerFlowStrings: powerFlowStrings
+            ))
+        }
     }
 
     public var showBatteryPercentageRemaining: Bool {

@@ -27,6 +27,19 @@ public struct StringPower: Identifiable {
         self.name = name
         self.amount = amount
     }
+
+    public func displayName(settings: PowerFlowStringsSettings) -> String {
+        switch name {
+        case "PV1":
+            return settings.pv1Name
+        case "PV2":
+            return settings.pv2Name
+        case "PV3":
+            return settings.pv3Name
+        default:
+            return settings.pv4Name
+        }
+    }
 }
 
 public struct HomePowerFlowViewModel: Equatable {
