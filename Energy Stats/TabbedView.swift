@@ -14,6 +14,7 @@ struct TabbedView: View {
     let userManager: UserManager
     let solarForecastProvider: SolarForecastProviding
     @StateObject var settingsTabViewModel: SettingsTabViewModel
+    @EnvironmentObject var versionChecker: VersionChecker
 
     init(networking: FoxESSNetworking, userManager: UserManager, configManager: ConfigManager, solarForecastProvider: @escaping SolarForecastProviding) {
         self.networking = networking
@@ -72,6 +73,9 @@ struct TabbedView: View {
                         Text("Settings")
                     }
                     .accessibilityIdentifier("settings_tab")
+                }
+                .if(versionChecker.upgradeAvailable) {
+                    $0.badge("")
                 }
                 .if(configManager.isDemoUser) {
                     $0.badge("demo")

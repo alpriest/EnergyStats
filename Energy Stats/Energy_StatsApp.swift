@@ -25,6 +25,7 @@ struct Energy_StatsApp: App {
         let solarForecastProvider: () -> SolarForecasting = {
             config.isDemoUser ? DemoSolcast() : SolcastCache(service: { Solcast() })
         }
+        let versionChecker = VersionChecker()
 
         return WindowGroup {
             if isRunningTests() {
@@ -39,10 +40,13 @@ struct Energy_StatsApp: App {
                 .environmentObject(store)
                 .environmentObject(userManager)
                 .environmentObject(KeychainWrapper(keychainStore))
+                .environmentObject(versionChecker)
                 .task {
                     if isRunningScreenshots() {
                         config.showFinancialEarnings = true
                     }
+
+                    versionChecker.load()
                 }
             }
         }

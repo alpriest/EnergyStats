@@ -38,10 +38,7 @@ struct PowerFlowTabView: View {
                 Spacer()
             case .unloaded:
                 Spacer()
-                HStack(spacing: 8) {
-                    Text("Loading")
-                    ProgressView()
-                }
+                LoadingView(message: "Loading")
                 Spacer()
             }
         }

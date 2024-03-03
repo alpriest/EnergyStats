@@ -75,7 +75,7 @@ struct InverterSettingsView: View {
             if let firmwareVersions {
                 InverterFirmwareVersionsView(viewModel: firmwareVersions)
             } else if let selectedDeviceSN = configManager.selectedDeviceSN {
-                Text("Loading")
+                LoadingView(message: "Loading")
                     .onAppear {
                         Task {
                             if let response = try? await networking.openapi_fetchDevice(deviceSN: selectedDeviceSN) {

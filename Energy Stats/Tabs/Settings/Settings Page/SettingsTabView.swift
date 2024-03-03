@@ -13,10 +13,24 @@ struct SettingsTabView: View {
     let configManager: ConfigManaging
     let networking: FoxESSNetworking
     let solarService: SolarForecastProviding
+    @EnvironmentObject var versionChecker: VersionChecker
 
     var body: some View {
         NavigationView {
             Form {
+                Section {
+                    if versionChecker.upgradeAvailable {
+                        VStack {
+                            Text("App Version \(versionChecker.latestVersion) is available")
+                            Button {
+                                UIApplication.shared.open(versionChecker.appStoreUrl)
+                            } label: {
+                                Text("Upgrade now")
+                            }
+                        }.frame(maxWidth: .infinity)
+                    }
+                }
+
                 NavigationLink {
                     InverterSettingsView(networking: networking,
                                          configManager: configManager,
@@ -92,6 +106,7 @@ struct SettingsTabView_Previews: PreviewProvider {
             configManager: PreviewConfigManager(),
             networking: DemoNetworking(),
             solarService: { DemoSolcast() })
+            .environmentObject(VersionChecker())
     }
 }
 #endif

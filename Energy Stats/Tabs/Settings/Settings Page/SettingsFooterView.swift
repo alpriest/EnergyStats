@@ -5,6 +5,7 @@
 //  Created by Alistair Priest on 16/08/2023.
 //
 
+import Energy_Stats_Core
 import SwiftUI
 
 struct SettingsFooterView: View {

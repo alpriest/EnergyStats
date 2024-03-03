@@ -139,6 +139,7 @@
 		418547492A3A1C7A000128C7 /* PowerAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127690128EC865000D5A094 /* PowerAmountView.swift */; };
 		4185474C2A3B1025000128C7 /* SunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4162BC2F2A097C1300DFEDC1 /* SunView.swift */; };
 		418685D52AFE700100355B6D /* AnimatedNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418685D42AFE700100355B6D /* AnimatedNumber.swift */; };
+		4189B0332B94888F00EC4CB5 /* VersionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4189B0322B94888F00EC4CB5 /* VersionChecker.swift */; };
 		418C091D2B17EC0E00183603 /* TimePeriodBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C091C2B17EC0E00183603 /* TimePeriodBarView.swift */; };
 		418C09232B18A9E300183603 /* ScheduleResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C09222B18A9E300183603 /* ScheduleResponses.swift */; };
 		418C09252B18FE9A00183603 /* SchedulePhaseEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C09242B18FE9A00183603 /* SchedulePhaseEditView.swift */; };
@@ -493,6 +494,7 @@
 		4185FAB52A3B74E60082D53F /* BatteryStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryStatusView.swift; sourceTree = "<group>"; };
 		418685D42AFE700100355B6D /* AnimatedNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedNumber.swift; sourceTree = "<group>"; };
 		4189B0312B9486FE00EC4CB5 /* version.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = version.json; sourceTree = "<group>"; };
+		4189B0322B94888F00EC4CB5 /* VersionChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionChecker.swift; sourceTree = "<group>"; };
 		418C091C2B17EC0E00183603 /* TimePeriodBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePeriodBarView.swift; sourceTree = "<group>"; };
 		418C09202B18A98400183603 /* EditScheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScheduleViewModel.swift; sourceTree = "<group>"; };
 		418C09222B18A9E300183603 /* ScheduleResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleResponses.swift; sourceTree = "<group>"; };
@@ -1159,6 +1161,7 @@
 				41DF51D12AA4CF6D007B5102 /* MockAppTheme.swift */,
 				41E3BEC22B1B5A160051C68B /* AppSettingsPublisherFactory.swift */,
 				41DB4F2C2B4940A800DAB5BB /* ConfigManaging.swift */,
+				4189B0322B94888F00EC4CB5 /* VersionChecker.swift */,
 			);
 			path = "Energy Stats Core";
 			sourceTree = "<group>";
@@ -1735,6 +1738,7 @@
 				416AE4452A811FBB003D0122 /* DeviceSettingsGetResponse.swift in Sources */,
 				41F71ABD2A14FBEC00A8C81B /* Array+Safe.swift in Sources */,
 				4103D1D029DB6C51001B0BC8 /* Report.swift in Sources */,
+				4189B0332B94888F00EC4CB5 /* VersionChecker.swift in Sources */,
 				41DF51D22AA4CF6D007B5102 /* MockAppTheme.swift in Sources */,
 				4109140029DB7AB600133CC5 /* HomePowerFlowViewModel.swift in Sources */,
 				411029192A729F02004018BB /* BatteryTimesResponse.swift in Sources */,
