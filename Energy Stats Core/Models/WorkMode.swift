@@ -11,7 +11,7 @@ import SwiftUI
 
 public enum WorkMode: String, CaseIterable, Codable, RawRepresentable {
     case SelfUse
-    case FeedIn
+    case Feedin
     case Backup
     case ForceCharge
     case ForceDischarge
@@ -21,7 +21,7 @@ public enum WorkMode: String, CaseIterable, Codable, RawRepresentable {
         switch self {
         case .SelfUse:
             return "Self Use"
-        case .FeedIn:
+        case .Feedin:
             return "Feed In First"
         case .Backup:
             return "Backup"

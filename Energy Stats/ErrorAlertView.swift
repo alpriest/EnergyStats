@@ -112,10 +112,6 @@ struct ErrorAlertView: View {
             if case .badCredentials = cause {
                 showingUpgradeRequired = true
             }
-
-            if case .invalidToken = cause {
-                showingUpgradeRequired = true
-            }
         }
         .sheet(isPresented: $showingFatalError) {
             UnsupportedErrorView()

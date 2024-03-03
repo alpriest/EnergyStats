@@ -14,7 +14,7 @@ struct APIKeyLoginView: View {
     var body: some View {
         ScrollView {
             VStack {
-                Text("Enter your FoxESS Cloud details")
+                Text("Enter your FoxESS Cloud API key")
                     .multilineTextAlignment(.center)
                     .font(.headline)
                     .padding()

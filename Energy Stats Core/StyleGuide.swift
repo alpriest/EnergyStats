@@ -18,7 +18,7 @@ public extension Color {
 
     static func scheduleColor(named name: WorkMode) -> Color {
         let mapping: [WorkMode: Color] = [
-            .FeedIn: Color.linesPositive,
+            .Feedin: Color.linesPositive,
             .ForceCharge: Color.linesNegative,
             .ForceDischarge: Color.linesPositive,
             .SelfUse: Color.paleGray
