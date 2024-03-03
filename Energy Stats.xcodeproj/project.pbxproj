@@ -492,6 +492,7 @@
 		4185FAB12A3B6C8D0082D53F /* BatteryWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryWidget.swift; sourceTree = "<group>"; };
 		4185FAB52A3B74E60082D53F /* BatteryStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryStatusView.swift; sourceTree = "<group>"; };
 		418685D42AFE700100355B6D /* AnimatedNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedNumber.swift; sourceTree = "<group>"; };
+		4189B0312B9486FE00EC4CB5 /* version.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = version.json; sourceTree = "<group>"; };
 		418C091C2B17EC0E00183603 /* TimePeriodBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePeriodBarView.swift; sourceTree = "<group>"; };
 		418C09202B18A98400183603 /* EditScheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScheduleViewModel.swift; sourceTree = "<group>"; };
 		418C09222B18A9E300183603 /* ScheduleResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleResponses.swift; sourceTree = "<group>"; };
@@ -905,6 +906,7 @@
 				41C849682A8BBC3800431410 /* Intents.swift */,
 				4149D3AC2B3C4DAA00314449 /* UnsupportedErrorView.swift */,
 				41D75A022B6009D5002C43A7 /* UpgradeRequiredView.swift */,
+				4189B0312B9486FE00EC4CB5 /* version.json */,
 			);
 			path = "Energy Stats";
 			sourceTree = "<group>";
