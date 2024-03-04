@@ -38,7 +38,7 @@ class BatteryPowerViewModel {
     }
 
     var batteryStoredChargekWh: Double {
-        Double(residual) / 1000.0
+        calculator.currentEstimatedChargeAmountWh(batteryStateOfCharge: actualBatteryStateOfCharge, includeUnusableCapacity: !configManager.showUsableBatteryOnly) / 1000.0
     }
 
     var batteryStateOfCharge: Double {

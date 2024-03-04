@@ -5123,30 +5123,30 @@
         }
       }
     },
-    "Enter your FoxESS Cloud details" : {
+    "Enter your FoxESS Cloud API key" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Geben Sie Ihre FoxESS Cloud-Daten ein"
+            "value" : "Geben Sie Ihren FoxESS Cloud API-Schlüssel ein"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ingrese los detalles de su nube FoxESS"
+            "value" : "Introduce tu clave API de FoxESS Cloud"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Inserisci i tuoi dettagli di FoxESS Cloud"
+            "value" : "Inserisci la tua chiave API di FoxESS Cloud"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wprowadź dane do chmury FoxESS"
+            "value" : "Wprowadź swój klucz API FoxESS Cloud"
           }
         }
       }
