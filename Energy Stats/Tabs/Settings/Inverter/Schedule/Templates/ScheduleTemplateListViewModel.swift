@@ -9,12 +9,12 @@ import Energy_Stats_Core
 import Foundation
 
 class ScheduleTemplateListViewModel: ObservableObject {
-    let networking: FoxESSNetworking
+    let networking: Networking
     let config: ConfigManaging
     @Published var templates: [ScheduleTemplateSummary] = []
     @Published var state: LoadState = .inactive
 
-    init(networking: FoxESSNetworking, config: ConfigManaging) {
+    init(networking: Networking, config: ConfigManaging) {
         self.networking = networking
         self.config = config
     }

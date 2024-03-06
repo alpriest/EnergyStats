@@ -10,7 +10,7 @@ import Energy_Stats_Core
 import Foundation
 
 class BatteryChargeScheduleSettingsViewModel: ObservableObject, HasLoadState {
-    private let networking: FoxESSNetworking
+    private let networking: Networking
     private let config: ConfigManaging
     private var cancellable: AnyCancellable?
     @Published var state: LoadState = .inactive
@@ -19,7 +19,7 @@ class BatteryChargeScheduleSettingsViewModel: ObservableObject, HasLoadState {
     @Published var summary = ""
     @Published var alertContent: AlertContent?
 
-    init(networking: FoxESSNetworking, config: ConfigManaging) {
+    init(networking: Networking, config: ConfigManaging) {
         self.networking = networking
         self.config = config
 
@@ -38,7 +38,7 @@ class BatteryChargeScheduleSettingsViewModel: ObservableObject, HasLoadState {
             setState(.active("Loading"))
 
             do {
-                let settings = try await networking.openapi_fetchBatteryTimes(deviceSN: deviceSN)
+                let settings = try await networking.fetchBatteryTimes(deviceSN: deviceSN)
                 if let first = settings[safe: 0] {
                     timePeriod1 = ChargeTimePeriod(startTime: first.startTime, endTime: first.endTime, enabled: first.enable)
                 }
@@ -65,7 +65,7 @@ class BatteryChargeScheduleSettingsViewModel: ObservableObject, HasLoadState {
                     timePeriod2.asChargeTime()
                 ]
 
-                try await networking.openapi_setBatteryTimes(deviceSN: deviceSN, times: times)
+                try await networking.setBatteryTimes(deviceSN: deviceSN, times: times)
                 alertContent = AlertContent(title: "Success", message: "battery_charge_schedule_settings_saved")
                 setState(.inactive)
             } catch NetworkError.foxServerError(let code, _) where code == 44096 {

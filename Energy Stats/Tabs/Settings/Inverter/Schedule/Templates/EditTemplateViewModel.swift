@@ -13,12 +13,12 @@ class EditTemplateViewModel: ObservableObject {
     @Published var state: LoadState = .inactive
     @Published var alertContent: AlertContent?
     @Published var schedule: Schedule?
-    let networking: FoxESSNetworking
+    let networking: Networking
     let config: ConfigManaging
     let modes: [SchedulerModeResponse]
     let templateID: String
 
-    init(networking: FoxESSNetworking, config: ConfigManaging, templateID: String, modes: [SchedulerModeResponse]) {
+    init(networking: Networking, config: ConfigManaging, templateID: String, modes: [SchedulerModeResponse]) {
         self.networking = networking
         self.config = config
         self.modes = modes

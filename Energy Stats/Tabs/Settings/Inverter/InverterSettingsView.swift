@@ -9,7 +9,7 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct InverterSettingsView: View {
-    let networking: FoxESSNetworking
+    let networking: Networking
     let configManager: ConfigManaging
     @Binding var showInverterTemperature: Bool
     @Binding var showInverterIcon: Bool
@@ -78,7 +78,7 @@ struct InverterSettingsView: View {
                 LoadingView(message: "Loading")
                     .onAppear {
                         Task {
-                            if let response = try? await networking.openapi_fetchDevice(deviceSN: selectedDeviceSN) {
+                            if let response = try? await networking.fetchDevice(deviceSN: selectedDeviceSN) {
                                 firmwareVersions = DeviceFirmwareVersion(master: response.masterVersion, slave: response.slaveVersion, manager: response.managerVersion)
                             }
                         }

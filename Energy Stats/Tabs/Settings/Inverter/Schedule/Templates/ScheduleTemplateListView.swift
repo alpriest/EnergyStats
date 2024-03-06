@@ -14,10 +14,10 @@ struct ScheduleTemplateListView: View {
     @State private var newTemplateName: String = ""
     @State private var newTemplateDescription: String = ""
     private let config: ConfigManaging
-    private let networking: FoxESSNetworking
+    private let networking: Networking
     private let modes: [SchedulerModeResponse]
 
-    init(networking: FoxESSNetworking, config: ConfigManaging, modes: [SchedulerModeResponse]) {
+    init(networking: Networking, config: ConfigManaging, modes: [SchedulerModeResponse]) {
         _viewModel = StateObject(wrappedValue: ScheduleTemplateListViewModel(networking: networking, config: config))
         self.networking = networking
         self.config = config

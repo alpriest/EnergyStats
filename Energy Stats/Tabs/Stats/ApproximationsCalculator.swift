@@ -10,7 +10,7 @@ import Foundation
 
 struct ApproximationsCalculator {
     let configManager: ConfigManaging
-    let networking: FoxESSNetworking
+    let networking: Networking
 
     func calculateApproximations(
         grid: Double,
@@ -64,7 +64,7 @@ struct ApproximationsCalculator {
         var totals = [ReportVariable: Double]()
 
         if case .day = reportType {
-            let monthlyReports = try await networking.openapi_fetchReport(deviceSN: currentDevice.deviceSN, variables: reportVariables, queryDate: queryDate, reportType: .month)
+            let monthlyReports = try await networking.fetchReport(deviceSN: currentDevice.deviceSN, variables: reportVariables, queryDate: queryDate, reportType: .month)
 
             monthlyReports.forEach { reportResponse in
                 guard let reportVariable = ReportVariable(rawValue: reportResponse.variable) else { return }

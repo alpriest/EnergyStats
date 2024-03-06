@@ -12,7 +12,7 @@ struct DebugDataView: View {
     struct NoCurrentDeviceFoundError: Error {}
 
     @EnvironmentObject var store: InMemoryLoggingNetworkStore
-    let networking: FoxESSNetworking
+    let networking: Networking
     let configManager: ConfigManaging
 
     var body: some View {
@@ -44,7 +44,7 @@ struct DebugDataView: View {
                         mapper: { $0.batterySettingsResponse },
                         fetcher: {
                             if let deviceSN = configManager.currentDevice.value?.deviceSN {
-                                _ = try await networking.openapi_fetchBatterySettings(deviceSN: deviceSN)
+                                _ = try await networking.fetchBatterySettings(deviceSN: deviceSN)
                             } else {
                                 throw NoCurrentDeviceFoundError()
                             }
@@ -59,7 +59,7 @@ struct DebugDataView: View {
                         mapper: { $0.batteryTimesResponse },
                         fetcher: {
                             if let deviceSN = configManager.currentDevice.value?.deviceSN {
-                                _ = try await networking.openapi_fetchBatteryTimes(deviceSN: deviceSN)
+                                _ = try await networking.fetchBatteryTimes(deviceSN: deviceSN)
                             } else {
                                 throw NoCurrentDeviceFoundError()
                             }
@@ -73,7 +73,7 @@ struct DebugDataView: View {
                         missing: "Device list is fetched and recached on login, logout and login to see the data response.",
                         mapper: { $0.deviceListResponse },
                         fetcher: {
-                            _ = try await networking.openapi_fetchDeviceList()
+                            _ = try await networking.fetchDeviceList()
                         }
                     )
                 }
@@ -87,16 +87,16 @@ struct DebugDataView: View {
 #if DEBUG
 struct DebugDataView_Previews: PreviewProvider {
     static var previews: some View {
-        let network = DemoNetworking()
+        let api = DemoNetworking()
         let store = InMemoryLoggingNetworkStore()
         Task {
-            store.queryResponse = try NetworkOperation(description: "fetchRaw", value: await network.openapi_fetchRealData(deviceSN: "123", variables: [Variable(name: "BatChargePower", variable: "batChargePower", unit: "kW")].map { $0.variable }), raw: "test".data(using: .utf8)!)
-            store.reportResponse = try NetworkOperation(description: "fetchReport", value: await network.openapi_fetchReport(deviceSN: "123", variables: [.chargeEnergyToTal], queryDate: .now(), reportType: .day), raw: "test".data(using: .utf8)!)
-            store.deviceListResponse = try NetworkOperation(description: "fetchDeviceList", value: await network.openapi_fetchDeviceList(), raw: "test".data(using: .utf8)!)
+            store.queryResponse = try NetworkOperation(description: "fetchRaw", value: await api.fetchRealData(deviceSN: "123", variables: [Variable(name: "BatChargePower", variable: "batChargePower", unit: "kW")].map { $0.variable }), raw: "test".data(using: .utf8)!)
+            store.reportResponse = try NetworkOperation(description: "fetchReport", value: await api.fetchReport(deviceSN: "123", variables: [.chargeEnergyToTal], queryDate: .now(), reportType: .day), raw: "test".data(using: .utf8)!)
+            store.deviceListResponse = try NetworkOperation(description: "fetchDeviceList", value: await api.fetchDeviceList(), raw: "test".data(using: .utf8)!)
         }
 
         return NavigationView {
-            DebugDataView(networking: network, configManager: PreviewConfigManager())
+            DebugDataView(networking: api, configManager: PreviewConfigManager())
         }
         .environmentObject(store)
     }

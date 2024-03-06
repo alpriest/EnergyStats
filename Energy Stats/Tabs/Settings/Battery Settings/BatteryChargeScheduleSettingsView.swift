@@ -11,7 +11,7 @@ import SwiftUI
 struct BatteryChargeScheduleSettingsView: View {
     @StateObject var viewModel: BatteryChargeScheduleSettingsViewModel
 
-    init(networking: FoxESSNetworking, config: ConfigManaging) {
+    init(networking: Networking, config: ConfigManaging) {
         _viewModel = StateObject(wrappedValue: BatteryChargeScheduleSettingsViewModel(networking: networking, config: config))
     }
 

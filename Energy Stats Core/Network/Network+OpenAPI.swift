@@ -21,7 +21,7 @@ extension URL {
     static var getOpenModuleList = URL(string: "https://www.foxesscloud.com/op/v0/module/list")!
 }
 
-public extension Network {
+public extension FoxAPIService {
     func openapi_fetchRealData(deviceSN: String, variables: [String]) async throws -> OpenQueryResponse {
         var request = URLRequest(url: URL.getOpenRealData)
         request.httpMethod = "POST"
@@ -159,5 +159,9 @@ public extension Network {
 
         let result: ([DataLoggerResponse], Data) = try await fetch(request)
         return result.0
+    }
+
+    func openapi_fetchPowerStationList() async throws -> PagedStationListResponse {
+        PagedStationListResponse(currentPage: 1, pageSize: 1, total: 1, data: [PowerStationSummaryResponse(stationID: "1234")]) // TODO
     }
 }

@@ -17,14 +17,15 @@ struct Provider: TimelineProvider {
     private let config = UserDefaultsConfig()
     private let configManager: ConfigManaging
     private let keychainStore = KeychainStore()
-    let network: FoxESSNetworking
+    let network: Networking
     private let modelContainer: ModelContainer
 
     init() {
         let store = InMemoryLoggingNetworkStore.shared
-        network = NetworkFacade(network: Network(credentials: keychainStore, store: store),
+        let api = NetworkFacade(api: FoxAPIService(credentials: keychainStore, store: store),
                                 config: config,
                                 store: keychainStore)
+        network = NetworkService(api: api)
         let appSettingsPublisher = AppSettingsPublisherFactory.make(from: config)
         configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher)
         modelContainer = HomeEnergyStateManager.shared.modelContainer

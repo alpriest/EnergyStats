@@ -9,13 +9,13 @@ import Energy_Stats_Core
 import Foundation
 
 class InverterWorkModeViewModel: ObservableObject {
-    private let networking: FoxESSNetworking
+    private let networking: Networking
     private let config: ConfigManaging
     @Published var state: LoadState = .inactive
     @Published var items: [SelectableItem<WorkMode>] = []
     @Published var alertContent: AlertContent?
 
-    init(networking: FoxESSNetworking, config: ConfigManaging) {
+    init(networking: Networking, config: ConfigManaging) {
         self.networking = networking
         self.config = config
 

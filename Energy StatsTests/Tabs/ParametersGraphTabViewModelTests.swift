@@ -13,7 +13,7 @@ import XCTest
 @MainActor
 final class ParametersGraphTabViewModelTests: XCTestCase {
     var sut: ParametersGraphTabViewModel!
-    var networking: FoxESSNetworking!
+    var networking: Networking!
     var config: MockConfig!
 
     override func setUp() async throws {

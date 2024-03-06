@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 
 class PowerFlowTabViewModel: ObservableObject {
-    private let network: FoxESSNetworking
+    private let network: Networking
     private(set) var configManager: ConfigManaging
     private let userManager: UserManager
     private let timer = CountdownTimer()
@@ -43,7 +43,7 @@ class PowerFlowTabViewModel: ObservableObject {
         }
     }
 
-    init(_ network: FoxESSNetworking, configManager: ConfigManaging, userManager: UserManager) {
+    init(_ network: Networking, configManager: ConfigManaging, userManager: UserManager) {
         self.network = network
         self.configManager = configManager
         self.userManager = userManager
@@ -200,7 +200,7 @@ class PowerFlowTabViewModel: ObservableObject {
 
     private func loadHistoryData(_ currentDevice: Device) async throws -> OpenHistoryResponse {
         let start = Calendar.current.startOfDay(for: Date())
-        return try await self.network.openapi_fetchHistory(deviceSN: currentDevice.deviceSN, variables: ["pvPower", "meterPower2"], start: start, end: start.addingTimeInterval(86400))
+        return try await self.network.fetchHistory(deviceSN: currentDevice.deviceSN, variables: ["pvPower", "meterPower2"], start: start, end: start.addingTimeInterval(86400))
     }
 
     private func loadTotals(_ currentDevice: Device) async throws -> TotalsViewModel {
@@ -213,10 +213,10 @@ class PowerFlowTabViewModel: ObservableObject {
             reportVariables.append(contentsOf: [.chargeEnergyToTal, .dischargeEnergyToTal])
         }
 
-        return try await self.network.openapi_fetchReport(deviceSN: currentDevice.deviceSN,
-                                                          variables: reportVariables,
-                                                          queryDate: .now(),
-                                                          reportType: .month)
+        return try await self.network.fetchReport(deviceSN: currentDevice.deviceSN,
+                                                  variables: reportVariables,
+                                                  queryDate: .now(),
+                                                  reportType: .month)
     }
 
     private func loadRealData(_ currentDevice: Device, config: ConfigManaging) async throws -> OpenQueryResponse {
@@ -241,7 +241,7 @@ class PowerFlowTabViewModel: ObservableObject {
             variables.append(contentsOf: config.powerFlowStrings.variableNames())
         }
 
-        return try await self.network.openapi_fetchRealData(
+        return try await self.network.fetchRealData(
             deviceSN: currentDevice.deviceSN,
             variables: variables
         )

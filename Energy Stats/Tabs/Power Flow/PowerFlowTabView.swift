@@ -15,7 +15,7 @@ struct PowerFlowTabView: View {
     private var appSettingsPublisher: LatestAppSettingsPublisher
     @AppStorage("showLastUpdateTimestamp") private var showLastUpdateTimestamp: Bool = false
 
-    init(configManager: ConfigManaging, networking: FoxESSNetworking, userManager: UserManager, appSettingsPublisher: LatestAppSettingsPublisher) {
+    init(configManager: ConfigManaging, networking: Networking, userManager: UserManager, appSettingsPublisher: LatestAppSettingsPublisher) {
         _viewModel = .init(wrappedValue: PowerFlowTabViewModel(networking, configManager: configManager, userManager: userManager))
         self.appSettingsPublisher = appSettingsPublisher
         self.appSettings = appSettingsPublisher.value
@@ -32,7 +32,7 @@ struct PowerFlowTabView: View {
                 updateFooterMessage()
             case let .failed(error, reason):
                 Spacer()
-                ErrorAlertView(cause: error, message: reason, allowRetry: true) {
+                ErrorAlertView(cause: error, message: reason, options: .all) {
                     Task { await viewModel.timerFired() }
                 }
                 Spacer()

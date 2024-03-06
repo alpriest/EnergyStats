@@ -63,13 +63,13 @@ struct LoadingView: View {
 
 struct LoadStateView: ViewModifier {
     let loadState: LoadState
-    var allowRetry: Bool
+    var options: ErrorAlertViewOptions
     let retry: () -> Void
     let overlay: Bool
 
-    init(loadState: LoadState, allowRetry: Bool, retry: @escaping () -> Void, overlay: Bool = false) {
+    init(loadState: LoadState, options: ErrorAlertViewOptions, retry: @escaping () -> Void, overlay: Bool = false) {
         self.loadState = loadState
-        self.allowRetry = allowRetry
+        self.options = options
         self.retry = retry
         self.overlay = overlay
     }
@@ -86,7 +86,7 @@ struct LoadStateView: ViewModifier {
                 LoadingView(message: message)
             }
         case .error(let error, let reason):
-            ErrorAlertView(cause: error, message: reason, allowRetry: allowRetry, retry: retry)
+            ErrorAlertView(cause: error, message: reason, options: options, retry: retry)
         case .inactive:
             content
         }
@@ -94,8 +94,8 @@ struct LoadStateView: ViewModifier {
 }
 
 extension View {
-    func loadable(_ state: LoadState, allowRetry: Bool = true, overlay: Bool = false, retry: @escaping () -> Void) -> some View {
-        modifier(LoadStateView(loadState: state, allowRetry: allowRetry, retry: retry, overlay: overlay))
+    func loadable(_ state: LoadState, options: ErrorAlertViewOptions = .all, overlay: Bool = false, retry: @escaping () -> Void) -> some View {
+        modifier(LoadStateView(loadState: state, options: options, retry: retry, overlay: overlay))
     }
 }
 

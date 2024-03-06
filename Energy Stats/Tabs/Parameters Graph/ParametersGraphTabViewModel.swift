@@ -26,7 +26,7 @@ struct GraphDisplayMode: Equatable {
 
 class ParametersGraphTabViewModel: ObservableObject, HasLoadState {
     private let haptic = UIImpactFeedbackGenerator()
-    private let networking: FoxESSNetworking
+    private let networking: Networking
     private var configManager: ConfigManaging
     private var rawData: [ParameterGraphValue] = [] {
         didSet {
@@ -77,7 +77,7 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState {
 
     private var cancellable: AnyCancellable?
 
-    init(networking: FoxESSNetworking, configManager: ConfigManaging, dateProvider: @escaping () -> Date = { Date() }) {
+    init(networking: Networking, configManager: ConfigManaging, dateProvider: @escaping () -> Date = { Date() }) {
         self.networking = networking
         self.configManager = configManager
         self.dateProvider = dateProvider
@@ -128,7 +128,7 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState {
             let rawGraphVariables = graphVariables.filter { $0.isSelected }.compactMap { $0.type }
             let startDate = Calendar.current.startOfDay(for: start)
             let endDate = Calendar.current.startOfDay(for: start.addingTimeInterval(86400))
-            let raw = try await networking.openapi_fetchHistory(deviceSN: currentDevice.deviceSN, variables: rawGraphVariables.map { $0.variable }, start: startDate, end: endDate)
+            let raw = try await networking.fetchHistory(deviceSN: currentDevice.deviceSN, variables: rawGraphVariables.map { $0.variable }, start: startDate, end: endDate)
             let rawData: [ParameterGraphValue] = raw.datas.flatMap { response -> [ParameterGraphValue] in
                 guard let rawVariable = configManager.variables.first(where: { $0.variable == response.variable }) else { return [] }
 

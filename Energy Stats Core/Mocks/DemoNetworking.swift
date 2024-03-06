@@ -8,19 +8,17 @@
 import Combine
 import Foundation
 
-public class DemoNetworking: FoxESSNetworking {
+public class DemoNetworking: NetworkService {
+    public init() {
+        super.init(api: DemoAPI())
+    }
+}
+
+public class DemoAPI: FoxAPIServicing {
     private let throwOnCall: Bool
 
     public init(throwOnCall: Bool = false) {
         self.throwOnCall = throwOnCall
-    }
-
-    public func ensureHasToken() async {
-        // Do nothing
-    }
-
-    public func verifyCredentials(username: String, hashedPassword: String) async throws {
-        // Assume mock credentials are valid
     }
 
 //    public func deleteScheduleTemplate(templateID: String) async throws {}
@@ -60,6 +58,8 @@ public class DemoNetworking: FoxESSNetworking {
 //            SchedulerModeResponse(color: "#8061DDAA", name: "Self-Use", key: "SelfUse")
 //        ]
 //    }
+
+    public func fetchErrorMessages() async {}
 
     public func openapi_fetchSchedulerFlag(deviceSN: String) async throws -> GetSchedulerFlagResponse {
         GetSchedulerFlagResponse(enable: true, support: true)
@@ -144,7 +144,7 @@ public class DemoNetworking: FoxESSNetworking {
         ]
     }
 
-    public func fetchErrorMessages() async {}
+    public func openapi_fetchErrorMessages() async {}
 
     public func openapi_fetchRealData(deviceSN: String, variables: [String]) async throws -> OpenQueryResponse {
         OpenQueryResponse(time: Date(),
@@ -223,6 +223,9 @@ public class DemoNetworking: FoxESSNetworking {
 
     public func openapi_setScheduleFlag(deviceSN: String, enable: Bool) async throws {}
     public func openapi_saveSchedule(deviceSN: String, schedule: Schedule) async throws {}
+    public func openapi_fetchPowerStationList() async throws -> PagedStationListResponse {
+        PagedStationListResponse(currentPage: 0, pageSize: 0, total: 0, data: [])
+    }
 }
 
 public class MockConfig: Config {

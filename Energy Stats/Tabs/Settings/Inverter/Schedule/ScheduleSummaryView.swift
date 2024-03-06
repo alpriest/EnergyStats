@@ -9,11 +9,11 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct ScheduleSummaryView: View {
-    private let networking: FoxESSNetworking
+    private let networking: Networking
     private let config: ConfigManaging
     @StateObject var viewModel: ScheduleSummaryViewModel
 
-    init(networking: FoxESSNetworking, config: ConfigManaging) {
+    init(networking: Networking, config: ConfigManaging) {
         _viewModel = StateObject(wrappedValue: ScheduleSummaryViewModel(networking: networking, config: config))
         self.networking = networking
         self.config = config

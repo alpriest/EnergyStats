@@ -33,15 +33,26 @@ struct EqualWidthButtonStyle: ButtonStyle {
     }
 }
 
+struct ErrorAlertViewOptions: OptionSet {
+    let rawValue: Int
+
+    static let checkServerStatus = ErrorAlertViewOptions(rawValue: 1 << 0)
+    static let logoutButton = ErrorAlertViewOptions(rawValue: 1 << 1)
+    static let retry = ErrorAlertViewOptions(rawValue: 1 << 2)
+    static let copyDebugData = ErrorAlertViewOptions(rawValue: 1 << 3)
+    static let all: ErrorAlertViewOptions = [.checkServerStatus, .logoutButton, .retry, .copyDebugData]
+}
+
 struct ErrorAlertView: View {
     let cause: Error?
     let message: String
-    let allowRetry: Bool
+    let options: ErrorAlertViewOptions
     let retry: () -> Void
     @EnvironmentObject var userManager: UserManager
     @State private var buttonWidth: CGFloat = .zero
     @State private var showingFatalError = false
     @State private var showingUpgradeRequired = false
+    @State private var alertContent: AlertContent?
 
     var body: some View {
         VStack {
@@ -69,23 +80,26 @@ struct ErrorAlertView: View {
                 .padding(.bottom)
                 .font(.caption)
 
-            Button {
-                UIPasteboard.general.string = debugData
-            } label: {
-                Text("Copy debug data")
-            }
-            .buttonStyle(EqualWidthButtonStyle(buttonWidth: $buttonWidth))
-
-            VStack {
-                if allowRetry {
-                    Button(action: { retry() }) {
-                        Text("Retry")
-                            .background(rectReader($buttonWidth))
-                            .frame(minWidth: buttonWidth)
-                    }
-                    .buttonStyle(EqualWidthButtonStyle(buttonWidth: $buttonWidth))
+            if options.contains(.retry) {
+                Button(action: { retry() }) {
+                    Text("Retry")
+                        .background(rectReader($buttonWidth))
+                        .frame(minWidth: buttonWidth)
                 }
+                .buttonStyle(EqualWidthButtonStyle(buttonWidth: $buttonWidth))
+            }
 
+            if options.contains(.copyDebugData) {
+                Button {
+                    UIPasteboard.general.string = debugData
+                    alertContent = AlertContent(title: "Done", message: "Debug data has been copied to your clipboard.")
+                } label: {
+                    Text("Copy debug data")
+                }
+                .buttonStyle(EqualWidthButtonStyle(buttonWidth: $buttonWidth))
+            }
+
+            if options.contains(.checkServerStatus) {
                 Button {
                     let url = URL(string: "https://monitor.foxesscommunity.com/")!
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -97,12 +111,14 @@ struct ErrorAlertView: View {
                 .buttonStyle(EqualWidthButtonStyle(buttonWidth: $buttonWidth))
             }
 
-            Button(action: { userManager.logout() }) {
-                Text("logout")
-                    .background(rectReader($buttonWidth))
-                    .frame(minWidth: buttonWidth)
+            if options.contains(.logoutButton) {
+                Button(action: { userManager.logout() }) {
+                    Text("Logout")
+                        .background(rectReader($buttonWidth))
+                        .frame(minWidth: buttonWidth)
+                }
+                .buttonStyle(EqualWidthButtonStyle(buttonWidth: $buttonWidth))
             }
-            .buttonStyle(EqualWidthButtonStyle(buttonWidth: $buttonWidth))
         }.onAppear {
             guard let cause = cause as? NetworkError else { return }
             if case .requestRequiresSignature = cause {
@@ -112,14 +128,12 @@ struct ErrorAlertView: View {
             if case .badCredentials = cause {
                 showingUpgradeRequired = true
             }
-        }
-        .sheet(isPresented: $showingFatalError) {
+        }.sheet(isPresented: $showingFatalError) {
             UnsupportedErrorView()
-        }
-        .sheet(isPresented: $showingUpgradeRequired) {
+        }.sheet(isPresented: $showingUpgradeRequired) {
             UpgradeRequiredView(userManager: userManager)
                 .interactiveDismissDisabled()
-        }
+        }.alert(alertContent: $alertContent)
     }
 
     private func rectReader(_ binding: Binding<CGFloat>) -> some View {
@@ -165,7 +179,9 @@ struct ErrorAlertView: View {
     var detailedMessage: String {
         return if let cause, cause is NetworkError {
             message
-        } else if let cause {
+        } else if let cause, cause is DecodingError {
+            String(describing: cause)
+        } else if let cause, cause.localizedDescription != message {
             "\(message)\n\n\(cause.localizedDescription)"
         } else {
             message
@@ -192,12 +208,11 @@ struct ErrorAlertView: View {
 #if DEBUG
 #Preview {
     ErrorAlertView(
-        cause: NetworkError.badCredentials,
+        cause: NetworkError.missingData,
         message: "This is a long message. This is a long message. This is a long message. This is a long message",
-        allowRetry: true,
+        options: .all,
         retry: {}
     )
     .environmentObject(UserManager.preview())
-    .environment(\.locale, .init(identifier: "de"))
 }
 #endif

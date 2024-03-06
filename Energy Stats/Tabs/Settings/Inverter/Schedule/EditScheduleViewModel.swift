@@ -13,10 +13,10 @@ class EditScheduleViewModel: ObservableObject, HasLoadState {
     @Published var schedule: Schedule
     @Published var state: LoadState = .inactive
     @Published var alertContent: AlertContent?
-    private let networking: FoxESSNetworking
+    private let networking: Networking
     private let config: ConfigManaging
 
-    init(networking: FoxESSNetworking, config: ConfigManaging, schedule: Schedule) {
+    init(networking: Networking, config: ConfigManaging, schedule: Schedule) {
         self.networking = networking
         self.config = config
         self.schedule = schedule
@@ -33,7 +33,7 @@ class EditScheduleViewModel: ObservableObject, HasLoadState {
 
         Task { [self] in
             do {
-                try await networking.openapi_saveSchedule(deviceSN: deviceSN, schedule: schedule)
+                try await networking.saveSchedule(deviceSN: deviceSN, schedule: schedule)
 
                 Task { @MainActor in
                     setState(.inactive)

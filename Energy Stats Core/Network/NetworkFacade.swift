@@ -7,16 +7,16 @@
 
 import Foundation
 
-public class NetworkFacade: FoxESSNetworking {
-    private let network: FoxESSNetworking
-    private let fakeNetwork: FoxESSNetworking
+public class NetworkFacade: FoxAPIServicing {
+    private let api: FoxAPIServicing
+    private let demoAPI: FoxAPIServicing
     private let config: Config
     private let store: KeychainStoring
     private let throttler = ThrottleManager()
 
-    public init(network: FoxESSNetworking, config: Config, store: KeychainStoring) {
-        self.network = network
-        self.fakeNetwork = DemoNetworking()
+    public init(api: FoxAPIServicing, config: Config, store: KeychainStoring) {
+        self.api = api
+        self.demoAPI = DemoAPI()
         self.config = config
         self.store = store
     }
@@ -99,149 +99,157 @@ public class NetworkFacade: FoxESSNetworking {
 
     public func openapi_fetchSchedulerFlag(deviceSN: String) async throws -> GetSchedulerFlagResponse {
         if isDemoUser {
-            try await fakeNetwork.openapi_fetchSchedulerFlag(deviceSN: deviceSN)
+            try await demoAPI.openapi_fetchSchedulerFlag(deviceSN: deviceSN)
         } else {
-            try await network.openapi_fetchSchedulerFlag(deviceSN: deviceSN)
+            try await api.openapi_fetchSchedulerFlag(deviceSN: deviceSN)
         }
     }
 
     public func openapi_setScheduleFlag(deviceSN: String, enable: Bool) async throws {
         if isDemoUser {
-            try await fakeNetwork.openapi_setScheduleFlag(deviceSN: deviceSN, enable: enable)
+            try await demoAPI.openapi_setScheduleFlag(deviceSN: deviceSN, enable: enable)
         } else {
-            try await network.openapi_setScheduleFlag(deviceSN: deviceSN, enable: enable)
+            try await api.openapi_setScheduleFlag(deviceSN: deviceSN, enable: enable)
         }
     }
 
     public func openapi_fetchBatterySettings(deviceSN: String) async throws -> BatterySOCResponse {
         return if isDemoUser {
-            try await fakeNetwork.openapi_fetchBatterySettings(deviceSN: deviceSN)
+            try await demoAPI.openapi_fetchBatterySettings(deviceSN: deviceSN)
         } else {
-            try await network.openapi_fetchBatterySettings(deviceSN: deviceSN)
+            try await api.openapi_fetchBatterySettings(deviceSN: deviceSN)
         }
     }
 
     public func openapi_fetchDeviceList() async throws -> [DeviceSummaryResponse] {
         return if isDemoUser {
-            try await fakeNetwork.openapi_fetchDeviceList()
+            try await demoAPI.openapi_fetchDeviceList()
         } else {
-            try await network.openapi_fetchDeviceList()
+            try await api.openapi_fetchDeviceList()
         }
     }
 
     public func openapi_fetchDevice(deviceSN: String) async throws -> DeviceDetailResponse {
         return if isDemoUser {
-            try await fakeNetwork.openapi_fetchDevice(deviceSN: deviceSN)
+            try await demoAPI.openapi_fetchDevice(deviceSN: deviceSN)
         } else {
-            try await network.openapi_fetchDevice(deviceSN: deviceSN)
+            try await api.openapi_fetchDevice(deviceSN: deviceSN)
         }
     }
 
     public func openapi_setBatterySoc(deviceSN: String, minSOCOnGrid: Int, minSOC: Int) async throws {
         return if isDemoUser {
-            try await fakeNetwork.openapi_setBatterySoc(deviceSN: deviceSN, minSOCOnGrid: minSOCOnGrid, minSOC: minSOC)
+            try await demoAPI.openapi_setBatterySoc(deviceSN: deviceSN, minSOCOnGrid: minSOCOnGrid, minSOC: minSOC)
         } else {
-            try await network.openapi_setBatterySoc(deviceSN: deviceSN, minSOCOnGrid: minSOCOnGrid, minSOC: minSOC)
+            try await api.openapi_setBatterySoc(deviceSN: deviceSN, minSOCOnGrid: minSOCOnGrid, minSOC: minSOC)
         }
     }
 
     public func openapi_fetchBatteryTimes(deviceSN: String) async throws -> [ChargeTime] {
         return if isDemoUser {
-            try await fakeNetwork.openapi_fetchBatteryTimes(deviceSN: deviceSN)
+            try await demoAPI.openapi_fetchBatteryTimes(deviceSN: deviceSN)
         } else {
-            try await network.openapi_fetchBatteryTimes(deviceSN: deviceSN)
+            try await api.openapi_fetchBatteryTimes(deviceSN: deviceSN)
         }
     }
 
     public func openapi_setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws {
         return if isDemoUser {
-            try await fakeNetwork.openapi_setBatteryTimes(deviceSN: deviceSN, times: times)
+            try await demoAPI.openapi_setBatteryTimes(deviceSN: deviceSN, times: times)
         } else {
-            try await network.openapi_setBatteryTimes(deviceSN: deviceSN, times: times)
+            try await api.openapi_setBatteryTimes(deviceSN: deviceSN, times: times)
         }
     }
 
     public func openapi_fetchDataLoggers() async throws -> [DataLoggerResponse] {
         return if isDemoUser {
-            try await fakeNetwork.openapi_fetchDataLoggers()
+            try await demoAPI.openapi_fetchDataLoggers()
         } else {
-            try await network.openapi_fetchDataLoggers()
+            try await api.openapi_fetchDataLoggers()
         }
     }
 
     public func fetchErrorMessages() async {
         if isDemoUser {
-            await fakeNetwork.fetchErrorMessages()
+            await demoAPI.fetchErrorMessages()
         } else {
-            await network.fetchErrorMessages()
+            await api.fetchErrorMessages()
         }
     }
 
     public func openapi_fetchRealData(deviceSN: String, variables: [String]) async throws -> OpenQueryResponse {
         if isDemoUser {
-            return try await fakeNetwork.openapi_fetchRealData(deviceSN: deviceSN, variables: variables)
+            return try await demoAPI.openapi_fetchRealData(deviceSN: deviceSN, variables: variables)
         } else {
             defer {
                 throttler.didInvoke(method: #function)
             }
             try await throttler.throttle(method: #function)
-            return try await network.openapi_fetchRealData(deviceSN: deviceSN, variables: variables)
+            return try await api.openapi_fetchRealData(deviceSN: deviceSN, variables: variables)
         }
     }
 
     public func openapi_fetchHistory(deviceSN: String, variables: [String], start: Date, end: Date) async throws -> OpenHistoryResponse {
         if isDemoUser {
-            return try await fakeNetwork.openapi_fetchHistory(deviceSN: deviceSN, variables: variables, start: start, end: end)
+            return try await demoAPI.openapi_fetchHistory(deviceSN: deviceSN, variables: variables, start: start, end: end)
         } else {
             defer {
                 throttler.didInvoke(method: #function)
             }
             try await throttler.throttle(method: #function)
-            return try await network.openapi_fetchHistory(deviceSN: deviceSN, variables: variables, start: start, end: end)
+            return try await api.openapi_fetchHistory(deviceSN: deviceSN, variables: variables, start: start, end: end)
         }
     }
 
     public func openapi_fetchVariables() async throws -> [OpenApiVariable] {
         if isDemoUser {
-            return try await fakeNetwork.openapi_fetchVariables()
+            return try await demoAPI.openapi_fetchVariables()
         } else {
             defer {
                 throttler.didInvoke(method: #function)
             }
             try await throttler.throttle(method: #function)
-            return try await network.openapi_fetchVariables()
+            return try await api.openapi_fetchVariables()
         }
     }
 
     public func openapi_fetchReport(deviceSN: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [OpenReportResponse] {
         if isDemoUser {
-            return try await fakeNetwork.openapi_fetchReport(deviceSN: deviceSN, variables: variables, queryDate: queryDate, reportType: reportType)
+            return try await demoAPI.openapi_fetchReport(deviceSN: deviceSN, variables: variables, queryDate: queryDate, reportType: reportType)
         } else {
             defer {
                 throttler.didInvoke(method: #function)
             }
             try await throttler.throttle(method: #function)
-            return try await network.openapi_fetchReport(deviceSN: deviceSN, variables: variables, queryDate: queryDate, reportType: reportType)
+            return try await api.openapi_fetchReport(deviceSN: deviceSN, variables: variables, queryDate: queryDate, reportType: reportType)
         }
     }
 
     public func openapi_fetchCurrentSchedule(deviceSN: String) async throws -> ScheduleResponse {
         if isDemoUser {
-            return try await network.openapi_fetchCurrentSchedule(deviceSN: deviceSN)
+            return try await demoAPI.openapi_fetchCurrentSchedule(deviceSN: deviceSN)
         } else {
             defer {
                 throttler.didInvoke(method: #function)
             }
             try await throttler.throttle(method: #function)
-            return try await network.openapi_fetchCurrentSchedule(deviceSN: deviceSN)
+            return try await api.openapi_fetchCurrentSchedule(deviceSN: deviceSN)
         }
     }
 
     public func openapi_saveSchedule(deviceSN: String, schedule: Schedule) async throws {
         if isDemoUser {
-            return try await network.openapi_saveSchedule(deviceSN: deviceSN, schedule: schedule)
+            return try await demoAPI.openapi_saveSchedule(deviceSN: deviceSN, schedule: schedule)
         } else {
-            try await network.openapi_saveSchedule(deviceSN: deviceSN, schedule: schedule)
+            try await api.openapi_saveSchedule(deviceSN: deviceSN, schedule: schedule)
+        }
+    }
+
+    public func openapi_fetchPowerStationList() async throws -> PagedStationListResponse {
+        if isDemoUser {
+            try await demoAPI.openapi_fetchPowerStationList()
+        } else {
+            try await api.openapi_fetchPowerStationList()
         }
     }
 }

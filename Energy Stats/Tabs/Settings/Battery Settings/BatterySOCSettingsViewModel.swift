@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 
 class BatterySOCSettingsViewModel: ObservableObject, HasLoadState {
-    private let networking: FoxESSNetworking
+    private let networking: Networking
     private let config: ConfigManaging
     private let onSOCchange: () -> Void
     @Published var soc: String = ""
@@ -19,7 +19,7 @@ class BatterySOCSettingsViewModel: ObservableObject, HasLoadState {
     @Published var state: LoadState = .inactive
     @Published var alertContent: AlertContent?
 
-    init(networking: FoxESSNetworking, config: ConfigManaging, onSOCchange: @escaping () -> Void) {
+    init(networking: Networking, config: ConfigManaging, onSOCchange: @escaping () -> Void) {
         self.networking = networking
         self.config = config
         self.onSOCchange = onSOCchange
@@ -34,7 +34,7 @@ class BatterySOCSettingsViewModel: ObservableObject, HasLoadState {
             setState(.active("Loading"))
 
             do {
-                let settings = try await networking.openapi_fetchBatterySettings(deviceSN: deviceSN)
+                let settings = try await networking.fetchBatterySettings(deviceSN: deviceSN)
                 self.soc = String(describing: settings.minSoc)
                 self.socOnGrid = String(describing: settings.minSocOnGrid)
 
@@ -60,7 +60,7 @@ class BatterySOCSettingsViewModel: ObservableObject, HasLoadState {
             setState(.active("Saving"))
 
             do {
-                try await networking.openapi_setBatterySoc(
+                try await networking.setBatterySoc(
                     deviceSN: deviceSN,
                     minSOCOnGrid: socOnGrid,
                     minSOC: soc
@@ -70,7 +70,7 @@ class BatterySOCSettingsViewModel: ObservableObject, HasLoadState {
 
                 alertContent = AlertContent(title: "Success", message: "batterySOC_settings_saved")
                 setState(.inactive)
-            } catch NetworkError.foxServerError(let code, _) where code == 44096 {
+            } catch let NetworkError.foxServerError(code, _) where code == 44096 {
                 alertContent = AlertContent(title: "Failed", message: "cannot_save_due_to_active_schedule")
                 setState(.inactive)
             } catch {

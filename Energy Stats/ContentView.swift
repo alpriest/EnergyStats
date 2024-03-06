@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var loginManager: UserManager
-    let network: FoxESSNetworking
+    let network: Networking
     let configManager: ConfigManager
     let solarForecastProvider: SolarForecastProviding
     @State private var state = LoadState.inactive

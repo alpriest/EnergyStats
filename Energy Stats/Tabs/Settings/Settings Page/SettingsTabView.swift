@@ -11,7 +11,7 @@ import SwiftUI
 struct SettingsTabView: View {
     @ObservedObject var viewModel: SettingsTabViewModel
     let configManager: ConfigManaging
-    let networking: FoxESSNetworking
+    let networking: Networking
     let solarService: SolarForecastProviding
     @EnvironmentObject var versionChecker: VersionChecker
 

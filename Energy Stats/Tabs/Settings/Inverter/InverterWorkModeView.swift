@@ -11,7 +11,7 @@ import SwiftUI
 struct InverterWorkModeView: View {
     @StateObject var viewModel: InverterWorkModeViewModel
 
-    init(networking: FoxESSNetworking, config: ConfigManaging) {
+    init(networking: Networking, config: ConfigManaging) {
         _viewModel = StateObject(wrappedValue: InverterWorkModeViewModel(networking: networking, config: config))
     }
 

@@ -47,7 +47,7 @@ struct StatsTabView: View {
     private var appSettingsPublisher: LatestAppSettingsPublisher
     @AppStorage("showStatsGraph") private var showingGraph = true
 
-    init(configManager: ConfigManaging, networking: FoxESSNetworking, appSettingsPublisher: LatestAppSettingsPublisher) {
+    init(configManager: ConfigManaging, networking: Networking, appSettingsPublisher: LatestAppSettingsPublisher) {
         _viewModel = .init(wrappedValue: StatsTabViewModel(networking: networking, configManager: configManager))
         self.appSettingsPublisher = appSettingsPublisher
         self.appSettings = appSettingsPublisher.value
@@ -86,7 +86,7 @@ struct StatsTabView: View {
                         } else {
                             Spacer()
                         }
-                    }.loadable(viewModel.state, overlay: true, retry: { Task { await viewModel.load() } })
+                    }.loadable(viewModel.state, options: [.retry], overlay: true, retry: { Task { await viewModel.load() } })
 
                     StatsGraphVariableToggles(viewModel: viewModel, selectedDate: $viewModel.selectedDate, valuesAtTime: $viewModel.valuesAtTime, appSettings: appSettingsPublisher.value)
 

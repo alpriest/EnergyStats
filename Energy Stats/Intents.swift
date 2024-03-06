@@ -18,7 +18,7 @@ struct CheckBatteryChargeLevelIntent: AppIntent {
 
     func perform() async throws -> some ProvidesDialog & ReturnsValue<Int> {
         let store = KeychainStore()
-        let network = Network(credentials: store, store: InMemoryLoggingNetworkStore())
+        let network = FoxAPIService(credentials: store, store: InMemoryLoggingNetworkStore())
         let config = UserDefaultsConfig()
         guard let deviceSN = config.selectedDeviceSN else {
             throw ConfigManager.NoDeviceFoundError()

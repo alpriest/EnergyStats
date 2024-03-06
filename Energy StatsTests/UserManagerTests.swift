@@ -14,7 +14,7 @@ import Energy_Stats_Core
 final class UserManagerTests: XCTestCase {
     private var sut: UserManager!
     private var keychainStore: MockKeychainStore!
-    private var networking: Network!
+    private var networking: FoxAPIService!
     private var config: MockConfig!
     private var configManager: PreviewConfigManager!
 
@@ -22,7 +22,7 @@ final class UserManagerTests: XCTestCase {
         keychainStore = MockKeychainStore()
         config = MockConfig()
         let cache = InMemoryLoggingNetworkStore()
-        networking = Network(credentials: keychainStore,  store: cache)
+        networking = FoxAPIService(credentials: keychainStore,  store: cache)
         configManager = PreviewConfigManager(networking: networking, config: config, appSettingsPublisher: CurrentValueSubject<AppSettings, Never>(AppSettings.mock()))
         sut = UserManager(networking: networking, store: keychainStore, configManager: configManager, networkCache: cache)
     }

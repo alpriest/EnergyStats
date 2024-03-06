@@ -20,9 +20,9 @@ struct DataLogger: Identifiable {
 class DataLoggersViewModel: ObservableObject, HasLoadState {
     @Published var items: [DataLogger] = []
     @Published var state: LoadState = .inactive
-    private let networking: FoxESSNetworking
+    private let networking: Networking
 
-    init(networking: FoxESSNetworking) {
+    init(networking: Networking) {
         self.networking = networking
     }
 
@@ -32,7 +32,7 @@ class DataLoggersViewModel: ObservableObject, HasLoadState {
             setState(.active("Loading"))
 
             do {
-                let result = try await networking.openapi_fetchDataLoggers()
+                let result = try await networking.fetchDataLoggers()
                 self.items = result.map {
                     DataLogger(
                         moduleSN: $0.moduleSN,
@@ -100,7 +100,7 @@ struct DataLoggerView: View {
 struct DataLoggersView: View {
     @StateObject private var viewModel: DataLoggersViewModel
 
-    init(networking: FoxESSNetworking) {
+    init(networking: Networking) {
         self._viewModel = StateObject(wrappedValue: DataLoggersViewModel(networking: networking))
     }
 

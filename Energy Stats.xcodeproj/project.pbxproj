@@ -97,6 +97,9 @@
 		4149D3AD2B3C4DAA00314449 /* UnsupportedErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4149D3AC2B3C4DAA00314449 /* UnsupportedErrorView.swift */; };
 		4149DE9B2B03C3AC004F5FC6 /* SolcastSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4149DE9A2B03C3AC004F5FC6 /* SolcastSettingsView.swift */; };
 		4149DE9D2B04BDE6004F5FC6 /* SolcastCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4149DE9C2B04BDE6004F5FC6 /* SolcastCache.swift */; };
+		414A40BC2B989CB900321AA2 /* PowerStationDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414A40BB2B989CB900321AA2 /* PowerStationDetail.swift */; };
+		414A40BE2B989D1600321AA2 /* PowerStationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414A40BD2B989D1600321AA2 /* PowerStationResponse.swift */; };
+		414A40C02B989D9800321AA2 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414A40BF2B989D9800321AA2 /* NetworkService.swift */; };
 		414BF82829B4918300E2EB51 /* SettingsTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */; };
 		414D7A312AC8CE9C0083923F /* DisplayUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D7A302AC8CE9C0083923F /* DisplayUnit.swift */; };
 		4155D70D2B28FC920071346A /* Optional+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4155D70C2B28FC920071346A /* Optional+Int.swift */; };
@@ -194,7 +197,7 @@
 		41B6910D28E0CD8F0058126E /* raw-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B6910C28E0CD8F0058126E /* raw-success.json */; };
 		41B6910F28E0CDFC0058126E /* devicelist-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B6910E28E0CDFC0058126E /* devicelist-success.json */; };
 		41BCC1A92B245C130062084A /* Network+Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC1A82B245C130062084A /* Network+Schedule.swift */; };
-		41BCC1AB2B245C280062084A /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC1AA2B245C280062084A /* Network.swift */; };
+		41BCC1AB2B245C280062084A /* FoxAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC1AA2B245C280062084A /* FoxAPIService.swift */; };
 		41C0923B2B20FCB0001D1E22 /* SchedulePhaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0923A2B20FCB0001D1E22 /* SchedulePhaseHelper.swift */; };
 		41C0923D2B210255001D1E22 /* ScheduleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0923C2B210255001D1E22 /* ScheduleDetailView.swift */; };
 		41C1243E2B738B1400B575F2 /* HowToObtainAPIKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C1243D2B738B1400B575F2 /* HowToObtainAPIKeyView.swift */; };
@@ -445,6 +448,9 @@
 		4149D3AC2B3C4DAA00314449 /* UnsupportedErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsupportedErrorView.swift; sourceTree = "<group>"; };
 		4149DE9A2B03C3AC004F5FC6 /* SolcastSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolcastSettingsView.swift; sourceTree = "<group>"; };
 		4149DE9C2B04BDE6004F5FC6 /* SolcastCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolcastCache.swift; sourceTree = "<group>"; };
+		414A40BB2B989CB900321AA2 /* PowerStationDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerStationDetail.swift; sourceTree = "<group>"; };
+		414A40BD2B989D1600321AA2 /* PowerStationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerStationResponse.swift; sourceTree = "<group>"; };
+		414A40BF2B989D9800321AA2 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabViewModel.swift; sourceTree = "<group>"; };
 		414D7A302AC8CE9C0083923F /* DisplayUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayUnit.swift; sourceTree = "<group>"; };
 		4155D70C2B28FC920071346A /* Optional+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Int.swift"; sourceTree = "<group>"; };
@@ -558,7 +564,7 @@
 		41B6910C28E0CD8F0058126E /* raw-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "raw-success.json"; sourceTree = "<group>"; };
 		41B6910E28E0CDFC0058126E /* devicelist-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "devicelist-success.json"; sourceTree = "<group>"; };
 		41BCC1A82B245C130062084A /* Network+Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+Schedule.swift"; sourceTree = "<group>"; };
-		41BCC1AA2B245C280062084A /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		41BCC1AA2B245C280062084A /* FoxAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoxAPIService.swift; sourceTree = "<group>"; };
 		41C0923A2B20FCB0001D1E22 /* SchedulePhaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePhaseHelper.swift; sourceTree = "<group>"; };
 		41C0923C2B210255001D1E22 /* ScheduleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailView.swift; sourceTree = "<group>"; };
 		41C0B43329F96D3600CA9462 /* LocalizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedString.swift; sourceTree = "<group>"; };
@@ -938,6 +944,7 @@
 				418C09222B18A9E300183603 /* ScheduleResponses.swift */,
 				4190921E2B1D25890017CB65 /* Time.swift */,
 				4131AF4C2B5288F400836B77 /* OpenQueryResponse.swift */,
+				414A40BD2B989D1600321AA2 /* PowerStationResponse.swift */,
 			);
 			path = NetworkModels;
 			sourceTree = "<group>";
@@ -958,6 +965,7 @@
 				41E165B62B0BAD7400B17590 /* UserDefaultsConfig.swift */,
 				41E165B82B0BAD9500B17590 /* UserDefaultsPropertyWrappers.swift */,
 				41E3BEC02B1B55A30051C68B /* DataCeiling.swift */,
+				414A40BB2B989CB900321AA2 /* PowerStationDetail.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1241,9 +1249,10 @@
 				41B3FFE72AB07FE10020DFC9 /* NetworkCache.swift */,
 				41DC51592AE2E9DC00FD348B /* NetworkValueCleaner.swift */,
 				41BCC1A82B245C130062084A /* Network+Schedule.swift */,
-				41BCC1AA2B245C280062084A /* Network.swift */,
+				41BCC1AA2B245C280062084A /* FoxAPIService.swift */,
 				4131AF4A2B5288CF00836B77 /* Network+OpenAPI.swift */,
 				41D759FC2B5B0E37002C43A7 /* Network+OpenAPI+Schedule.swift */,
+				414A40BF2B989D9800321AA2 /* NetworkService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1707,6 +1716,7 @@
 				41E3BEC32B1B5A160051C68B /* AppSettingsPublisherFactory.swift in Sources */,
 				4103D1DC29DB6C6D001B0BC8 /* Config.swift in Sources */,
 				418240782A9A33E300101064 /* TotalsViewModel.swift in Sources */,
+				414A40C02B989D9800321AA2 /* NetworkService.swift in Sources */,
 				4103D1E329DB6D03001B0BC8 /* AppSettings.swift in Sources */,
 				4103D1DB29DB6C6D001B0BC8 /* Variable.swift in Sources */,
 				4103D1E529DB6D29001B0BC8 /* Sequence+aysnc.swift in Sources */,
@@ -1718,6 +1728,7 @@
 				4190921D2B1D253D0017CB65 /* Schedule.swift in Sources */,
 				416AE4482A812876003D0122 /* WorkMode.swift in Sources */,
 				41A95BA129DB3F7E00A35169 /* PylonView.swift in Sources */,
+				414A40BE2B989D1600321AA2 /* PowerStationResponse.swift in Sources */,
 				41D8402D2AB2E0DE00769E81 /* ErrorMessagesResponse.swift in Sources */,
 				4103D1D529DB6C51001B0BC8 /* NetworkResponse.swift in Sources */,
 				4192F99B2A8678DB0035DAB8 /* PagedDataLoggerListResponse.swift in Sources */,
@@ -1727,7 +1738,7 @@
 				41CA35732AA8C10900D45734 /* EarningsViewModel.swift in Sources */,
 				410913FF29DB7A2700133CC5 /* CurrentStatusCalculator.swift in Sources */,
 				410913FE29DB791200133CC5 /* CountdownTimer.swift in Sources */,
-				41BCC1AB2B245C280062084A /* Network.swift in Sources */,
+				41BCC1AB2B245C280062084A /* FoxAPIService.swift in Sources */,
 				4103D1D929DB6C6D001B0BC8 /* ReportVariable.swift in Sources */,
 				4103D1D129DB6C51001B0BC8 /* FoxEssCloudParseStrategy.swift in Sources */,
 				4103D1D829DB6C51001B0BC8 /* NetworkFacade.swift in Sources */,
@@ -1741,6 +1752,7 @@
 				4189B0332B94888F00EC4CB5 /* VersionChecker.swift in Sources */,
 				41DF51D22AA4CF6D007B5102 /* MockAppTheme.swift in Sources */,
 				4109140029DB7AB600133CC5 /* HomePowerFlowViewModel.swift in Sources */,
+				414A40BC2B989CB900321AA2 /* PowerStationDetail.swift in Sources */,
 				411029192A729F02004018BB /* BatteryTimesResponse.swift in Sources */,
 				4103D1E229DB6CD7001B0BC8 /* ConfigManager.swift in Sources */,
 				41E165B92B0BAD9500B17590 /* UserDefaultsPropertyWrappers.swift in Sources */,

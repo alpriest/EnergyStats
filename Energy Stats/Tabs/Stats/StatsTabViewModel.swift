@@ -23,7 +23,7 @@ struct ApproximationsViewModel {
 class StatsTabViewModel: ObservableObject, HasLoadState {
     private let haptic = UIImpactFeedbackGenerator()
     private let configManager: ConfigManaging
-    private let networking: FoxESSNetworking
+    private let networking: Networking
     private let approximationsCalculator: ApproximationsCalculator
 
     @Published var state = LoadState.inactive
@@ -51,7 +51,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState {
     var exportFile: CSVTextFile?
     private var currentDeviceCancellable: AnyCancellable?
 
-    init(networking: FoxESSNetworking, configManager: ConfigManaging) {
+    init(networking: Networking, configManager: ConfigManaging) {
         self.networking = networking
         self.configManager = configManager
         self.approximationsCalculator = ApproximationsCalculator(configManager: configManager, networking: networking)
@@ -112,7 +112,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState {
         let reportType = makeReportType()
 
         do {
-            let reports = try await networking.openapi_fetchReport(deviceSN: currentDevice.deviceSN, variables: reportVariables, queryDate: queryDate, reportType: reportType)
+            let reports = try await networking.fetchReport(deviceSN: currentDevice.deviceSN, variables: reportVariables, queryDate: queryDate, reportType: reportType)
             totals = try await approximationsCalculator.generateTotals(currentDevice: currentDevice, reportType: reportType, queryDate: queryDate, reports: reports, reportVariables: reportVariables)
 
             let updatedData = reports.flatMap { reportResponse -> [StatsGraphValue] in

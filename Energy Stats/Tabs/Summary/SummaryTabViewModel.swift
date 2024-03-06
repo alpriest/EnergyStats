@@ -10,7 +10,7 @@ import Energy_Stats_Core
 import Foundation
 
 class SummaryTabViewModel: ObservableObject {
-    private let networking: FoxESSNetworking
+    private let networking: Networking
     private let configManager: ConfigManaging
     @Published var isLoading = false
     @Published var approximationsViewModel: ApproximationsViewModel? = nil
@@ -19,11 +19,11 @@ class SummaryTabViewModel: ObservableObject {
     private let approximationsCalculator: ApproximationsCalculator
     private var themeChangeCancellable: AnyCancellable?
 
-    init(configManager: ConfigManaging, networking: FoxESSNetworking) {
+    init(configManager: ConfigManaging, networking: Networking) {
         self.networking = networking
         self.configManager = configManager
         approximationsCalculator = ApproximationsCalculator(configManager: configManager, networking: networking)
-        self.themeChangeCancellable = self.configManager.appSettingsPublisher.sink { theme in
+        themeChangeCancellable = self.configManager.appSettingsPublisher.sink { theme in
             self.currencySymbol = theme.currencySymbol
         }
     }
@@ -86,10 +86,10 @@ class SummaryTabViewModel: ObservableObject {
 
     private func fetchYear(_ year: Int, device: Device) async throws -> ([ReportVariable: Double], Int?) {
         let reportVariables = [ReportVariable.feedIn, .generation, .chargeEnergyToTal, .dischargeEnergyToTal, .gridConsumption, .loads]
-        let reports = try await networking.openapi_fetchReport(deviceSN: device.deviceSN,
-                                                               variables: reportVariables,
-                                                               queryDate: QueryDate(year: year, month: nil, day: nil),
-                                                               reportType: .year)
+        let reports = try await networking.fetchReport(deviceSN: device.deviceSN,
+                                                       variables: reportVariables,
+                                                       queryDate: QueryDate(year: year, month: nil, day: nil),
+                                                       reportType: .year)
 
         var totals = [ReportVariable: Double]()
         reports.forEach { reportResponse in

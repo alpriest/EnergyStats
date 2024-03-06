@@ -14,7 +14,7 @@ struct EditScheduleView: View {
     @Environment(\.presentationMode) var presentationMode
 
     init(
-        networking: FoxESSNetworking,
+        networking: Networking,
         config: ConfigManaging,
         schedule: Schedule
     ) {
@@ -64,7 +64,7 @@ struct EditScheduleView: View {
         }
         .navigationTitle("Edit schedule")
         .navigationBarTitleDisplayMode(.inline)
-        .loadable(viewModel.state, allowRetry: false, retry: { viewModel.unused() })
+        .loadable(viewModel.state, options: .all, retry: { viewModel.unused() })
         .alert(alertContent: $viewModel.alertContent)
     }
 }

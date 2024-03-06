@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 
 class ScheduleSummaryViewModel: ObservableObject, HasLoadState {
-    let networking: FoxESSNetworking
+    let networking: Networking
     let config: ConfigManaging
     @Published var state: LoadState = .inactive
 //    @Published var templates: [ScheduleTemplateSummary] = []
@@ -26,7 +26,7 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState {
 
     private var hasPreLoaded = false
 
-    init(networking: FoxESSNetworking, config: ConfigManaging) {
+    init(networking: Networking, config: ConfigManaging) {
         self.networking = networking
         self.config = config
     }
@@ -45,10 +45,10 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState {
         setState(.active("Loading"))
 
         do {
-            let flags = try await networking.openapi_fetchSchedulerFlag(deviceSN: device.deviceSN)
+            let flags = try await networking.fetchSchedulerFlag(deviceSN: device.deviceSN)
             if !flags.support {
                 let firmwareVersions: DeviceFirmwareVersion?
-                if let response = try? await networking.openapi_fetchDevice(deviceSN: device.deviceSN) {
+                if let response = try? await networking.fetchDevice(deviceSN: device.deviceSN) {
                     firmwareVersions = DeviceFirmwareVersion(master: response.masterVersion, slave: response.slaveVersion, manager: response.managerVersion)
                 } else {
                     firmwareVersions = nil
@@ -80,7 +80,7 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState {
         setState(.active("Loading"))
 
         do {
-            let scheduleResponse = try await networking.openapi_fetchCurrentSchedule(deviceSN: deviceSN)
+            let scheduleResponse = try await networking.fetchCurrentSchedule(deviceSN: deviceSN)
             self.schedulerEnabled = scheduleResponse.enable.boolValue
 
             self.schedule = Schedule(phases: scheduleResponse.groups.compactMap { $0.toSchedulePhase() })
@@ -104,7 +104,7 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState {
                 setState(.active("Deactivating"))
             }
 
-            try await self.networking.openapi_setScheduleFlag(deviceSN: deviceSN, enable: self.schedulerEnabled)
+            try await self.networking.setScheduleFlag(deviceSN: deviceSN, enable: self.schedulerEnabled)
             self.setState(.inactive)
         } catch {
             self.setState(.error(error, error.localizedDescription))

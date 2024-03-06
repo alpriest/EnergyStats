@@ -7,93 +7,93 @@
 
 import Foundation
 
-public class NetworkValueCleaner: FoxESSNetworking {
-    private let network: FoxESSNetworking
+public class NetworkValueCleaner: FoxAPIServicing {
+    private let api: FoxAPIServicing
     private let appSettingsPublisher: LatestAppSettingsPublisher
 
-    public init(network: FoxESSNetworking, appSettingsPublisher: LatestAppSettingsPublisher) {
-        self.network = network
+    public init(api: FoxAPIServicing, appSettingsPublisher: LatestAppSettingsPublisher) {
+        self.api = api
         self.appSettingsPublisher = appSettingsPublisher
     }
 
-//    public func deleteScheduleTemplate(templateID: String) async throws {
-//        try await network.deleteScheduleTemplate(templateID: templateID)
-//    }
-//
-//    public func saveScheduleTemplate(deviceSN: String, template: ScheduleTemplate) async throws {
-//        try await network.saveScheduleTemplate(deviceSN: deviceSN, template: template)
-//    }
-//
-//    public func fetchScheduleTemplate(deviceSN: String, templateID: String) async throws -> ScheduleTemplateResponse {
-//        try await network.fetchScheduleTemplate(deviceSN: deviceSN, templateID: templateID)
-//    }
-//
-//    public func enableScheduleTemplate(deviceSN: String, templateID: String) async throws {
-//        try await network.enableScheduleTemplate(deviceSN: deviceSN, templateID: templateID)
-//    }
-//
-//    public func fetchScheduleTemplates() async throws -> ScheduleTemplateListResponse {
-//        try await network.fetchScheduleTemplates()
-//    }
-//
-//    public func createScheduleTemplate(name: String, description: String) async throws {
-//        try await network.createScheduleTemplate(name: name, description: description)
-//    }
-//
-//    public func deleteSchedule(deviceSN: String) async throws {
-//        try await network.deleteSchedule(deviceSN: deviceSN)
-//    }
-//
-//    public func saveSchedule(deviceSN: String, schedule: Schedule) async throws {
-//        try await network.saveSchedule(deviceSN: deviceSN, schedule: schedule)
-//    }
-//
-//    public func fetchScheduleModes(deviceID: String) async throws -> [SchedulerModeResponse] {
-//        try await network.fetchScheduleModes(deviceID: deviceID)
-//    }
+    //    public func deleteScheduleTemplate(templateID: String) async throws {
+    //        try await network.deleteScheduleTemplate(templateID: templateID)
+    //    }
+    //
+    //    public func saveScheduleTemplate(deviceSN: String, template: ScheduleTemplate) async throws {
+    //        try await network.saveScheduleTemplate(deviceSN: deviceSN, template: template)
+    //    }
+    //
+    //    public func fetchScheduleTemplate(deviceSN: String, templateID: String) async throws -> ScheduleTemplateResponse {
+    //        try await network.fetchScheduleTemplate(deviceSN: deviceSN, templateID: templateID)
+    //    }
+    //
+    //    public func enableScheduleTemplate(deviceSN: String, templateID: String) async throws {
+    //        try await network.enableScheduleTemplate(deviceSN: deviceSN, templateID: templateID)
+    //    }
+    //
+    //    public func fetchScheduleTemplates() async throws -> ScheduleTemplateListResponse {
+    //        try await network.fetchScheduleTemplates()
+    //    }
+    //
+    //    public func createScheduleTemplate(name: String, description: String) async throws {
+    //        try await network.createScheduleTemplate(name: name, description: description)
+    //    }
+    //
+    //    public func deleteSchedule(deviceSN: String) async throws {
+    //        try await network.deleteSchedule(deviceSN: deviceSN)
+    //    }
+    //
+    //    public func saveSchedule(deviceSN: String, schedule: Schedule) async throws {
+    //        try await network.saveSchedule(deviceSN: deviceSN, schedule: schedule)
+    //    }
+    //
+    //    public func fetchScheduleModes(deviceID: String) async throws -> [SchedulerModeResponse] {
+    //        try await network.fetchScheduleModes(deviceID: deviceID)
+    //    }
 
     public func openapi_fetchSchedulerFlag(deviceSN: String) async throws -> GetSchedulerFlagResponse {
-        try await network.openapi_fetchSchedulerFlag(deviceSN: deviceSN)
+        try await api.openapi_fetchSchedulerFlag(deviceSN: deviceSN)
     }
 
     public func openapi_setScheduleFlag(deviceSN: String, enable: Bool) async throws {
-        try await network.openapi_setScheduleFlag(deviceSN: deviceSN, enable: enable)
+        try await api.openapi_setScheduleFlag(deviceSN: deviceSN, enable: enable)
     }
 
     public func openapi_fetchBatterySettings(deviceSN: String) async throws -> BatterySOCResponse {
-        try await network.openapi_fetchBatterySettings(deviceSN: deviceSN)
+        try await api.openapi_fetchBatterySettings(deviceSN: deviceSN)
     }
 
     public func openapi_fetchDeviceList() async throws -> [DeviceSummaryResponse] {
-        try await network.openapi_fetchDeviceList()
+        try await api.openapi_fetchDeviceList()
     }
 
     public func openapi_fetchDevice(deviceSN: String) async throws -> DeviceDetailResponse {
-        try await network.openapi_fetchDevice(deviceSN: deviceSN)
+        try await api.openapi_fetchDevice(deviceSN: deviceSN)
     }
 
     public func openapi_setBatterySoc(deviceSN: String, minSOCOnGrid: Int, minSOC: Int) async throws {
-        try await network.openapi_setBatterySoc(deviceSN: deviceSN, minSOCOnGrid: minSOCOnGrid, minSOC: minSOC)
+        try await api.openapi_setBatterySoc(deviceSN: deviceSN, minSOCOnGrid: minSOCOnGrid, minSOC: minSOC)
     }
 
     public func openapi_fetchBatteryTimes(deviceSN: String) async throws -> [ChargeTime] {
-        try await network.openapi_fetchBatteryTimes(deviceSN: deviceSN)
+        try await api.openapi_fetchBatteryTimes(deviceSN: deviceSN)
     }
 
     public func openapi_setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws {
-        try await network.openapi_setBatteryTimes(deviceSN: deviceSN, times: times)
+        try await api.openapi_setBatteryTimes(deviceSN: deviceSN, times: times)
     }
 
     public func openapi_fetchDataLoggers() async throws -> [DataLoggerResponse] {
-        try await network.openapi_fetchDataLoggers()
+        try await api.openapi_fetchDataLoggers()
     }
 
     public func fetchErrorMessages() async {
-        await network.fetchErrorMessages()
+        await api.fetchErrorMessages()
     }
 
     public func openapi_fetchRealData(deviceSN: String, variables: [String]) async throws -> OpenQueryResponse {
-        let original = try await network.openapi_fetchRealData(deviceSN: deviceSN, variables: variables)
+        let original = try await api.openapi_fetchRealData(deviceSN: deviceSN, variables: variables)
 
         return OpenQueryResponse(time: original.time, deviceSN: deviceSN, datas: original.datas.map { originalData in
             OpenQueryResponse.Data(unit: originalData.unit,
@@ -103,7 +103,7 @@ public class NetworkValueCleaner: FoxESSNetworking {
     }
 
     public func openapi_fetchHistory(deviceSN: String, variables: [String], start: Date, end: Date) async throws -> OpenHistoryResponse {
-        let original = try await network.openapi_fetchHistory(deviceSN: deviceSN, variables: variables, start: start, end: end)
+        let original = try await api.openapi_fetchHistory(deviceSN: deviceSN, variables: variables, start: start, end: end)
 
         return OpenHistoryResponse(deviceSN: original.deviceSN, datas: original.datas.map { originalData in
             OpenHistoryResponse.Data(unit: originalData.unit,
@@ -116,11 +116,11 @@ public class NetworkValueCleaner: FoxESSNetworking {
     }
 
     public func openapi_fetchVariables() async throws -> [OpenApiVariable] {
-        try await network.openapi_fetchVariables()
+        try await api.openapi_fetchVariables()
     }
 
     public func openapi_fetchReport(deviceSN: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [OpenReportResponse] {
-        let original = try await network.openapi_fetchReport(deviceSN: deviceSN, variables: variables, queryDate: queryDate, reportType: reportType)
+        let original = try await api.openapi_fetchReport(deviceSN: deviceSN, variables: variables, queryDate: queryDate, reportType: reportType)
 
         return original.map {
             OpenReportResponse(
@@ -137,11 +137,15 @@ public class NetworkValueCleaner: FoxESSNetworking {
     }
 
     public func openapi_fetchCurrentSchedule(deviceSN: String) async throws -> ScheduleResponse {
-        try await network.openapi_fetchCurrentSchedule(deviceSN: deviceSN)
+        try await api.openapi_fetchCurrentSchedule(deviceSN: deviceSN)
     }
 
     public func openapi_saveSchedule(deviceSN: String, schedule: Schedule) async throws {
-        try await network.openapi_saveSchedule(deviceSN: deviceSN, schedule: schedule)
+        try await api.openapi_saveSchedule(deviceSN: deviceSN, schedule: schedule)
+    }
+
+    public func openapi_fetchPowerStationList() async throws -> PagedStationListResponse {
+        try await api.openapi_fetchPowerStationList()
     }
 }
 

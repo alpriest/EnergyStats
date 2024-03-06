@@ -9,7 +9,7 @@
 @testable import Energy_Stats_Core
 import Foundation
 
-class MockNetworking: FoxESSNetworking {
+class MockNetworking: Networking {
     private let throwOnCall: Bool
     private let dateProvider: () -> Date
 

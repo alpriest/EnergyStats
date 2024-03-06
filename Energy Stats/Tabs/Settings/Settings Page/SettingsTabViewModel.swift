@@ -167,9 +167,9 @@ class SettingsTabViewModel: ObservableObject {
     private(set) var config: ConfigManaging
     private let userManager: UserManager
     private var cancellables = Set<AnyCancellable>()
-    let networking: FoxESSNetworking
+    let networking: Networking
 
-    init(userManager: UserManager, config: ConfigManaging, networking: FoxESSNetworking) {
+    init(userManager: UserManager, config: ConfigManaging, networking: Networking) {
         self.userManager = userManager
         self.config = config
         self.networking = networking
@@ -250,8 +250,8 @@ class SettingsTabViewModel: ObservableObject {
         guard let devices = config.devices else { return }
 
         Task { @MainActor [networking] in
-            let real = try await networking.openapi_fetchRealData(deviceSN: deviceSN, variables: ["SoC", "ResidualEnergy"])
-            let socResponse = try await networking.openapi_fetchBatterySettings(deviceSN: deviceSN)
+            let real = try await networking.fetchRealData(deviceSN: deviceSN, variables: ["SoC", "ResidualEnergy"])
+            let socResponse = try await networking.fetchBatterySettings(deviceSN: deviceSN)
             let batteryResponse = BatteryResponseMapper.map(batteryVariables: real, settings: socResponse)
 
             config.devices = devices.map {

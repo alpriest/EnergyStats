@@ -13,7 +13,7 @@ struct EditTemplateView: View {
     @State private var presentConfirmation = false
     @Environment(\.presentationMode) var presentationMode
 
-    init(networking: FoxESSNetworking, config: ConfigManaging, templateID: String, modes: [SchedulerModeResponse]) {
+    init(networking: Networking, config: ConfigManaging, templateID: String, modes: [SchedulerModeResponse]) {
         _viewModel = StateObject(
             wrappedValue: EditTemplateViewModel(
                 networking: networking,

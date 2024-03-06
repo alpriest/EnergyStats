@@ -4201,6 +4201,9 @@
         }
       }
     },
+    "Debug data has been copied to your clipboard." : {
+
+    },
     "Decimal places" : {
       "localizations" : {
         "de" : {
@@ -4650,6 +4653,9 @@
           }
         }
       }
+    },
+    "Done" : {
+
     },
     "Earnings" : {
       "extractionState" : "manual",
@@ -7258,6 +7264,9 @@
           }
         }
       }
+    },
+    "Logout" : {
+
     },
     "Longitude" : {
       "localizations" : {

@@ -7,7 +7,8 @@
 
 import Foundation
 
-public class Network: FoxESSNetworking {
+// TODO: Make this non-public
+public class FoxAPIService: FoxAPIServicing {
     private var token: String? {
         credentials.getToken()
     }
@@ -33,7 +34,7 @@ public class Network: FoxESSNetworking {
     }
 }
 
-extension Network {
+extension FoxAPIService {
     func append(queryItems: [URLQueryItem], to url: URL) -> URLRequest {
         let request: URLRequest
 

@@ -10,13 +10,13 @@ import SwiftUI
 
 struct TabbedView: View {
     let configManager: ConfigManager
-    let networking: FoxESSNetworking
+    let networking: Networking
     let userManager: UserManager
     let solarForecastProvider: SolarForecastProviding
     @StateObject var settingsTabViewModel: SettingsTabViewModel
     @EnvironmentObject var versionChecker: VersionChecker
 
-    init(networking: FoxESSNetworking, userManager: UserManager, configManager: ConfigManager, solarForecastProvider: @escaping SolarForecastProviding) {
+    init(networking: Networking, userManager: UserManager, configManager: ConfigManager, solarForecastProvider: @escaping SolarForecastProviding) {
         self.networking = networking
         self.userManager = userManager
         self.configManager = configManager

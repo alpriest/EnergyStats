@@ -10,12 +10,12 @@
 import XCTest
 
 final class NetworkTests: XCTestCase {
-    private var sut: FoxESSNetworking!
+    private var sut: Networking!
     private var keychainStore: MockKeychainStore!
 
     override func setUp() {
         keychainStore = MockKeychainStore()
-        sut = Network(credentials: keychainStore, store: InMemoryLoggingNetworkStore())
+        sut = FoxAPIService(credentials: keychainStore, store: InMemoryLoggingNetworkStore())
     }
 
     func test_fetchReport_returns_data_on_success() async throws {

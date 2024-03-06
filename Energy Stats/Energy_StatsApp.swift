@@ -15,11 +15,11 @@ struct Energy_StatsApp: App {
         let keychainStore = KeychainStore()
         let config = UserDefaultsConfig()
         let store = InMemoryLoggingNetworkStore.shared
-        let facade = NetworkFacade(network: NetworkCache(network: Network(credentials: keychainStore, store: store)),
-                                   config: config,
-                                   store: keychainStore)
         let appSettingsPublisher = AppSettingsPublisherFactory.make(from: config)
-        let network = NetworkValueCleaner(network: facade, appSettingsPublisher: appSettingsPublisher)
+        let api = NetworkValueCleaner(api: NetworkFacade(api: NetworkCache(api: FoxAPIService(credentials: keychainStore, store: store)),
+                                                         config: config,
+                                                         store: keychainStore), appSettingsPublisher: appSettingsPublisher)
+        let network = NetworkService(api: api)
         let configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher)
         let userManager = UserManager(networking: network, store: keychainStore, configManager: configManager, networkCache: store)
         let solarForecastProvider: () -> SolarForecasting = {

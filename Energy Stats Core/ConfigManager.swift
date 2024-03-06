@@ -9,7 +9,7 @@ import Combine
 import Foundation
 
 public class ConfigManager: ConfigManaging {
-    private let networking: FoxESSNetworking
+    private let networking: Networking
     private var config: Config
     public var appSettingsPublisher: CurrentValueSubject<AppSettings, Never>
     public var currentDevice = CurrentValueSubject<Device?, Never>(nil)
@@ -22,7 +22,7 @@ public class ConfigManager: ConfigManaging {
         public init() {}
     }
 
-    public init(networking: FoxESSNetworking, config: Config, appSettingsPublisher: CurrentValueSubject<AppSettings, Never>) {
+    public init(networking: Networking, config: Config, appSettingsPublisher: CurrentValueSubject<AppSettings, Never>) {
         self.networking = networking
         self.config = config
         self.appSettingsPublisher = appSettingsPublisher
@@ -30,8 +30,8 @@ public class ConfigManager: ConfigManaging {
     }
 
     public func fetchDevices() async throws {
-        let deviceList = try await networking.openapi_fetchDeviceList()
-        config.variables = try await networking.openapi_fetchVariables().compactMap {
+        let deviceList = try await networking.fetchDeviceList()
+        config.variables = try await networking.fetchVariables().compactMap {
             guard let unit = $0.unit else { return nil }
             return Variable(name: $0.name, variable: $0.variable, unit: unit)
         }
@@ -45,8 +45,8 @@ public class ConfigManager: ConfigManaging {
 
             if device.hasBattery {
                 do {
-                    let batteryVariables = try await networking.openapi_fetchRealData(deviceSN: device.deviceSN, variables: ["ResidualEnergy", "SoC"])
-                    let batterySettings = try await networking.openapi_fetchBatterySettings(deviceSN: device.deviceSN)
+                    let batteryVariables = try await networking.fetchRealData(deviceSN: device.deviceSN, variables: ["ResidualEnergy", "SoC"])
+                    let batterySettings = try await networking.fetchBatterySettings(deviceSN: device.deviceSN)
 
                     deviceBattery = BatteryResponseMapper.map(batteryVariables: batteryVariables, settings: batterySettings)
                 } catch {
