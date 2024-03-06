@@ -43,6 +43,9 @@ struct Energy_StatsApp: App {
                     }
 
                     versionChecker.load()
+                    if config.powerStationDetail == nil {
+                        try? await configManager.fetchPowerStationDetail()
+                    }
                 }
             }
         }

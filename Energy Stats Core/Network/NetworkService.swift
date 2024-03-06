@@ -7,7 +7,6 @@
 
 import Foundation
 
-// This will wrap a Networking instance and allow adaptation from network types to local models
 public protocol Networking {
     func fetchErrorMessages() async
     func fetchDeviceList() async throws -> [DeviceSummaryResponse]
@@ -38,7 +37,7 @@ public class NetworkService: Networking {
         return NetworkService(api: api)
     }
 
-    public init(api: FoxAPIServicing) {
+    init(api: FoxAPIServicing) {
         self.api = api
     }
 
@@ -108,6 +107,10 @@ public class NetworkService: Networking {
 
     public func fetchPowerStationDetail() async throws -> PowerStationDetail? {
         let list = try await api.openapi_fetchPowerStationList()
-        return nil
+        if list.data.count == 1, let station = list.data.first {
+            return try await api.openapi_fetchPowerStationDetail(stationID: station.stationID).toPowerStationDetail()
+        } else {
+            return nil
+        }
     }
 }

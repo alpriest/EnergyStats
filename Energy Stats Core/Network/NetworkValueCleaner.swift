@@ -144,8 +144,12 @@ class NetworkValueCleaner: FoxAPIServicing {
         try await api.openapi_saveSchedule(deviceSN: deviceSN, schedule: schedule)
     }
 
-    func openapi_fetchPowerStationList() async throws -> PagedStationListResponse {
+    func openapi_fetchPowerStationList() async throws -> PagedPowerStationListResponse {
         try await api.openapi_fetchPowerStationList()
+    }
+
+    func openapi_fetchPowerStationDetail(stationID: String) async throws -> PowerStationDetailResponse {
+        try await api.openapi_fetchPowerStationDetail(stationID: stationID)
     }
 }
 

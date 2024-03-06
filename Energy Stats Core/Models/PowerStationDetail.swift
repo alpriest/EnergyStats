@@ -7,8 +7,8 @@
 
 import Foundation
 
-public struct PowerStationDetail {
+public struct PowerStationDetail: Codable {
     public let stationName: String
     public let capacity: Double
-    public let timeZone: String
+    public let timezone: String
 }

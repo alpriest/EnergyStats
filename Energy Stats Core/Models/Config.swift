@@ -51,6 +51,7 @@ public protocol Config {
     var useExperimentalLoadFormula: Bool { get set }
     var powerFlowStrings: PowerFlowStringsSettings { get set }
     var showBatteryPercentageRemaining: Bool { get set }
+    var powerStationDetail: PowerStationDetail? { get set }
 }
 
 public func DefaultParameterGroups() -> [ParameterGroup] {

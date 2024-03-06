@@ -11,7 +11,7 @@ extension URL {
     static var errorMessages = URL(string: "https://www.foxesscloud.com/c/v0/errors/message")!
 }
 
-public protocol FoxAPIServicing {
+protocol FoxAPIServicing {
     func fetchErrorMessages() async
 
     //    func fetchScheduleModes(deviceID: String) async throws -> [SchedulerModeResponse]
@@ -39,5 +39,6 @@ public protocol FoxAPIServicing {
     func openapi_fetchCurrentSchedule(deviceSN: String) async throws -> ScheduleResponse
     func openapi_setScheduleFlag(deviceSN: String, enable: Bool) async throws
     func openapi_saveSchedule(deviceSN: String, schedule: Schedule) async throws
-    func openapi_fetchPowerStationList() async throws -> PagedStationListResponse
+    func openapi_fetchPowerStationList() async throws -> PagedPowerStationListResponse
+    func openapi_fetchPowerStationDetail(stationID: String) async throws -> PowerStationDetailResponse
 }

@@ -51,6 +51,7 @@ class UserManager: ObservableObject, HasLoadState {
 
             try store.store(apiKey: apiKey, notifyObservers: false)
             try await configManager.fetchDevices()
+            try await configManager.fetchPowerStationDetail()
             store.updateHasCredentials()
         } catch let error as NetworkError {
             logout()

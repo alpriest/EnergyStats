@@ -14,58 +14,58 @@ public class DemoNetworking: NetworkService {
     }
 }
 
-public class DemoAPI: FoxAPIServicing {
+class DemoAPI: FoxAPIServicing {
     private let throwOnCall: Bool
 
-    public init(throwOnCall: Bool = false) {
+    init(throwOnCall: Bool = false) {
         self.throwOnCall = throwOnCall
     }
 
-//    public func deleteScheduleTemplate(templateID: String) async throws {}
-//
-//    public func saveScheduleTemplate(deviceSN: String, template: ScheduleTemplate) async throws {}
-//
-//    public func fetchScheduleTemplate(deviceSN: String, templateID: String) async throws -> ScheduleTemplateResponse {
-//        ScheduleTemplateResponse(
-//            templateName: "Template-1",
-//            enable: false,
-//            pollcy: [SchedulePollcy(startH: 15, startM: 0, endH: 17, endM: 0, fdpwr: 0, workMode: "ForceCharge", fdsoc: 100, minsocongrid: 100),
-//                     SchedulePollcy(startH: 17, startM: 0, endH: 18, endM: 30, fdpwr: 3500, workMode: "ForceDischarge", fdsoc: 20, minsocongrid: 20)],
-//            content: "Description of template 1"
-//        )
-//    }
-//
-//    public func enableScheduleTemplate(deviceSN: String, templateID: String) async throws {}
-//
-//    public func fetchScheduleTemplates() async throws -> ScheduleTemplateListResponse {
-//        ScheduleTemplateListResponse(data: [
-//            .init(templateName: "Winter charging", enable: false, templateID: "a"),
-//            .init(templateName: "Saving session", enable: false, templateID: "b"),
-//            .init(templateName: "Summer usage", enable: false, templateID: "c")
-//        ])
-//    }
-//
-//    public func createScheduleTemplate(name: String, description: String) async throws {}
-//    public func deleteSchedule(deviceSN: String) async throws {}
-//    public func saveSchedule(deviceSN: String, schedule: Schedule) async throws {}
-//
-//    public func fetchScheduleModes(deviceID: String) async throws -> [SchedulerModeResponse] {
-//        [
-//            SchedulerModeResponse(color: "#80F6BD16", name: "Back Up", key: "Backup"),
-//            SchedulerModeResponse(color: "#805B8FF9", name: "Feed-in Priority", key: "Feedin"),
-//            SchedulerModeResponse(color: "#80BBE9FB", name: "Force Charge", key: "ForceCharge"),
-//            SchedulerModeResponse(color: "#8065789B", name: "Force Discharge", key: "ForceDischarge"),
-//            SchedulerModeResponse(color: "#8061DDAA", name: "Self-Use", key: "SelfUse")
-//        ]
-//    }
+    //    public func deleteScheduleTemplate(templateID: String) async throws {}
+    //
+    //    public func saveScheduleTemplate(deviceSN: String, template: ScheduleTemplate) async throws {}
+    //
+    //    public func fetchScheduleTemplate(deviceSN: String, templateID: String) async throws -> ScheduleTemplateResponse {
+    //        ScheduleTemplateResponse(
+    //            templateName: "Template-1",
+    //            enable: false,
+    //            pollcy: [SchedulePollcy(startH: 15, startM: 0, endH: 17, endM: 0, fdpwr: 0, workMode: "ForceCharge", fdsoc: 100, minsocongrid: 100),
+    //                     SchedulePollcy(startH: 17, startM: 0, endH: 18, endM: 30, fdpwr: 3500, workMode: "ForceDischarge", fdsoc: 20, minsocongrid: 20)],
+    //            content: "Description of template 1"
+    //        )
+    //    }
+    //
+    //    public func enableScheduleTemplate(deviceSN: String, templateID: String) async throws {}
+    //
+    //    public func fetchScheduleTemplates() async throws -> ScheduleTemplateListResponse {
+    //        ScheduleTemplateListResponse(data: [
+    //            .init(templateName: "Winter charging", enable: false, templateID: "a"),
+    //            .init(templateName: "Saving session", enable: false, templateID: "b"),
+    //            .init(templateName: "Summer usage", enable: false, templateID: "c")
+    //        ])
+    //    }
+    //
+    //    public func createScheduleTemplate(name: String, description: String) async throws {}
+    //    public func deleteSchedule(deviceSN: String) async throws {}
+    //    public func saveSchedule(deviceSN: String, schedule: Schedule) async throws {}
+    //
+    //    public func fetchScheduleModes(deviceID: String) async throws -> [SchedulerModeResponse] {
+    //        [
+    //            SchedulerModeResponse(color: "#80F6BD16", name: "Back Up", key: "Backup"),
+    //            SchedulerModeResponse(color: "#805B8FF9", name: "Feed-in Priority", key: "Feedin"),
+    //            SchedulerModeResponse(color: "#80BBE9FB", name: "Force Charge", key: "ForceCharge"),
+    //            SchedulerModeResponse(color: "#8065789B", name: "Force Discharge", key: "ForceDischarge"),
+    //            SchedulerModeResponse(color: "#8061DDAA", name: "Self-Use", key: "SelfUse")
+    //        ]
+    //    }
 
-    public func fetchErrorMessages() async {}
+    func fetchErrorMessages() async {}
 
-    public func openapi_fetchSchedulerFlag(deviceSN: String) async throws -> GetSchedulerFlagResponse {
+    func openapi_fetchSchedulerFlag(deviceSN: String) async throws -> GetSchedulerFlagResponse {
         GetSchedulerFlagResponse(enable: true, support: true)
     }
 
-    public func openapi_fetchBatterySettings(deviceSN: String) async throws -> BatterySOCResponse {
+    func openapi_fetchBatterySettings(deviceSN: String) async throws -> BatterySOCResponse {
         switch deviceSN {
         case "1234":
             return BatterySOCResponse(minSocOnGrid: 20, minSoc: 20)
@@ -74,7 +74,7 @@ public class DemoAPI: FoxAPIServicing {
         }
     }
 
-    public func openapi_fetchDeviceList() async throws -> [DeviceSummaryResponse] {
+    func openapi_fetchDeviceList() async throws -> [DeviceSummaryResponse] {
         [
             DeviceSummaryResponse(
                 deviceSN: "5678",
@@ -99,7 +99,7 @@ public class DemoAPI: FoxAPIServicing {
         ]
     }
 
-    public func openapi_fetchDevice(deviceSN: String) async throws -> DeviceDetailResponse {
+    func openapi_fetchDevice(deviceSN: String) async throws -> DeviceDetailResponse {
         DeviceDetailResponse(
             deviceSN: "5678",
             moduleSN: "sn-1",
@@ -126,27 +126,27 @@ public class DemoAPI: FoxAPIServicing {
         return try Data(contentsOf: url)
     }
 
-    public func openapi_setBatterySoc(deviceSN: String, minSOCOnGrid: Int, minSOC: Int) async throws {}
+    func openapi_setBatterySoc(deviceSN: String, minSOCOnGrid: Int, minSOC: Int) async throws {}
 
-    public func openapi_fetchBatteryTimes(deviceSN: String) async throws -> [ChargeTime] {
+    func openapi_fetchBatteryTimes(deviceSN: String) async throws -> [ChargeTime] {
         [
             ChargeTime(enable: false, startTime: Time(hour: 01, minute: 00), endTime: Time(hour: 01, minute: 30)),
             ChargeTime(enable: false, startTime: Time(hour: 03, minute: 00), endTime: Time(hour: 03, minute: 30))
         ]
     }
 
-    public func openapi_setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws {}
+    func openapi_setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws {}
 
-    public func openapi_fetchDataLoggers() async throws -> [DataLoggerResponse] {
+    func openapi_fetchDataLoggers() async throws -> [DataLoggerResponse] {
         [
             DataLoggerResponse(moduleSN: "ABC123DEF456", stationID: "John Doe 1", status: .online, signal: 3),
             DataLoggerResponse(moduleSN: "123DEF456ABC", stationID: "Jane Doe 2", status: .online, signal: 1)
         ]
     }
 
-    public func openapi_fetchErrorMessages() async {}
+    func openapi_fetchErrorMessages() async {}
 
-    public func openapi_fetchRealData(deviceSN: String, variables: [String]) async throws -> OpenQueryResponse {
+    func openapi_fetchRealData(deviceSN: String, variables: [String]) async throws -> OpenQueryResponse {
         OpenQueryResponse(time: Date(),
                           deviceSN: deviceSN,
                           datas: [
@@ -161,37 +161,37 @@ public class DemoAPI: FoxAPIServicing {
                           ])
     }
 
-    public func openapi_fetchHistory(deviceSN: String, variables: [String], start: Date, end: Date) async throws -> OpenHistoryResponse {
+    func openapi_fetchHistory(deviceSN: String, variables: [String], start: Date, end: Date) async throws -> OpenHistoryResponse {
         OpenHistoryResponse(deviceSN: deviceSN, datas: [])
     }
 
-    public func openapi_fetchVariables() async throws -> [OpenApiVariable] {
+    func openapi_fetchVariables() async throws -> [OpenApiVariable] {
         []
     }
 
-    public func openapi_fetchReport(deviceSN: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [OpenReportResponse] {
-//        if throwOnCall {
-//            throw NetworkError.foxServerError(0, "Fake thrown error")
-//        }
-//
-//        let data: Data
-//        switch reportType {
-//        case .day:
-//            data = try self.data(filename: "report-day")
-//        case .month:
-//            data = try self.data(filename: "report-month")
-//        case .year:
-//            data = try self.data(filename: "report-year")
-//        }
-//
-//        let response = try JSONDecoder().decode(NetworkResponse<[ReportResponse]>.self, from: data)
-//        guard let result = response.result else { throw NetworkError.invalidToken }
-//
-//        return result
+    func openapi_fetchReport(deviceSN: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [OpenReportResponse] {
+        //        if throwOnCall {
+        //            throw NetworkError.foxServerError(0, "Fake thrown error")
+        //        }
+        //
+        //        let data: Data
+        //        switch reportType {
+        //        case .day:
+        //            data = try self.data(filename: "report-day")
+        //        case .month:
+        //            data = try self.data(filename: "report-month")
+        //        case .year:
+        //            data = try self.data(filename: "report-year")
+        //        }
+        //
+        //        let response = try JSONDecoder().decode(NetworkResponse<[ReportResponse]>.self, from: data)
+        //        guard let result = response.result else { throw NetworkError.invalidToken }
+        //
+        //        return result
         []
     }
 
-    public func openapi_fetchCurrentSchedule(deviceSN: String) async throws -> ScheduleResponse {
+    func openapi_fetchCurrentSchedule(deviceSN: String) async throws -> ScheduleResponse {
         ScheduleResponse(
             enable: 0,
             groups: [
@@ -221,10 +221,14 @@ public class DemoAPI: FoxAPIServicing {
         )
     }
 
-    public func openapi_setScheduleFlag(deviceSN: String, enable: Bool) async throws {}
-    public func openapi_saveSchedule(deviceSN: String, schedule: Schedule) async throws {}
-    public func openapi_fetchPowerStationList() async throws -> PagedStationListResponse {
-        PagedStationListResponse(currentPage: 0, pageSize: 0, total: 0, data: [])
+    func openapi_setScheduleFlag(deviceSN: String, enable: Bool) async throws {}
+    func openapi_saveSchedule(deviceSN: String, schedule: Schedule) async throws {}
+    func openapi_fetchPowerStationList() async throws -> PagedPowerStationListResponse {
+        PagedPowerStationListResponse(currentPage: 0, pageSize: 0, total: 0, data: [])
+    }
+
+    func openapi_fetchPowerStationDetail(stationID: String) async throws -> PowerStationDetailResponse {
+        PowerStationDetailResponse(stationName: "station \(stationID)", capacity: 3500, timezone: "Europe/London")
     }
 }
 
@@ -280,6 +284,7 @@ public class MockConfig: Config {
     public var useExperimentalLoadFormula: Bool = false
     public var powerFlowStrings: PowerFlowStringsSettings = .none
     public var showBatteryPercentageRemaining: Bool = true
+    public var powerStationDetail: PowerStationDetail? = nil
 }
 
 public class PreviewConfigManager: ConfigManager {

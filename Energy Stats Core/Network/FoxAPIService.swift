@@ -7,8 +7,7 @@
 
 import Foundation
 
-// TODO: Make this non-public
-public class FoxAPIService: FoxAPIServicing {
+class FoxAPIService: FoxAPIServicing {
     private var token: String? {
         credentials.getToken()
     }

@@ -14,7 +14,7 @@ extension URL {
     static var setOpenCurrentSchedule = URL(string: "https://www.foxesscloud.com/op/v0/device/scheduler/enable")!
 }
 
-public extension FoxAPIService {
+extension FoxAPIService {
     func openapi_fetchSchedulerFlag(deviceSN: String) async throws -> GetSchedulerFlagResponse {
         var request = URLRequest(url: URL.getOpenSchedulerFlag)
         request.httpMethod = "POST"

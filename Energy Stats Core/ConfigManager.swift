@@ -29,6 +29,11 @@ public class ConfigManager: ConfigManaging {
         selectedDeviceSN = selectedDeviceSN // force the currentDevice to be set
     }
 
+    public func fetchPowerStationDetail() async throws {
+        let detail = try await networking.fetchPowerStationDetail()
+        config.powerStationDetail = detail
+    }
+
     public func fetchDevices() async throws {
         let deviceList = try await networking.fetchDeviceList()
         config.variables = try await networking.fetchVariables().compactMap {

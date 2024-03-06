@@ -7,19 +7,34 @@
 
 import Foundation
 
-public struct PagedStationListResponse: Decodable, Hashable {
+struct PowerStationListRequest: Encodable {
+    let currentPage: Int = 1
+    let pageSize: Int = 100
+}
+
+struct PagedPowerStationListResponse: Decodable, Hashable {
     let currentPage: Int
     let pageSize: Int
     let total: Int
     public let data: [PowerStationSummaryResponse]
 }
 
-public struct PowerStationSummaryResponse: Decodable, Hashable {
+struct PowerStationSummaryResponse: Decodable, Hashable {
     public let stationID: String
 }
 
-public struct PowerStationDetailResponse: Decodable {
+struct PowerStationDetailResponse: Decodable {
     public let stationName: String
     public let capacity: Double
-    public let ianaTimezone: String
+    public let timezone: String
+}
+
+extension PowerStationDetailResponse {
+    func toPowerStationDetail() -> PowerStationDetail {
+        PowerStationDetail(
+            stationName: stationName,
+            capacity: capacity,
+            timezone: timezone
+        )
+    }
 }

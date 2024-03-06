@@ -62,6 +62,7 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "devices")
         UserDefaults.shared.removeObject(forKey: "selectedDeviceID")
         UserDefaults.shared.removeObject(forKey: "selectedDeviceSN")
+        UserDefaults.shared.removeObject(forKey: "powerStationDetail")
     }
 
     @UserDefaultsStoredBool(key: "showGraphValueDescriptions", defaultValue: true)
@@ -228,4 +229,7 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredBool(key: "showBatteryPercentageRemaining", defaultValue: true)
     public var showBatteryPercentageRemaining: Bool
+
+    @UserDefaultsStoredCodable(key: "powerStationDetail", defaultValue: nil)
+    public var powerStationDetail: PowerStationDetail?
 }

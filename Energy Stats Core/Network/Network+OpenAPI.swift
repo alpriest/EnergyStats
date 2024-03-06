@@ -19,9 +19,11 @@ extension URL {
     static var getOpenBatteryChargeTimes = URL(string: "https://www.foxesscloud.com/op/v0/device/battery/forceChargeTime/get")!
     static var setOpenBatteryChargeTimes = URL(string: "https://www.foxesscloud.com/op/v0/device/battery/forceChargeTime/set")!
     static var getOpenModuleList = URL(string: "https://www.foxesscloud.com/op/v0/module/list")!
+    static var getOpenPlantList = URL(string: "https://www.foxesscloud.com/op/v0/plant/list")!
+    static var getOpenPlantDetail = URL(string: "https://www.foxesscloud.com/op/v0/plant/detail")!
 }
 
-public extension FoxAPIService {
+extension FoxAPIService {
     func openapi_fetchRealData(deviceSN: String, variables: [String]) async throws -> OpenQueryResponse {
         var request = URLRequest(url: URL.getOpenRealData)
         request.httpMethod = "POST"
@@ -161,7 +163,19 @@ public extension FoxAPIService {
         return result.0
     }
 
-    func openapi_fetchPowerStationList() async throws -> PagedStationListResponse {
-        PagedStationListResponse(currentPage: 1, pageSize: 1, total: 1, data: [PowerStationSummaryResponse(stationID: "1234")]) // TODO
+    func openapi_fetchPowerStationList() async throws -> PagedPowerStationListResponse {
+        var request = URLRequest(url: URL.getOpenPlantList)
+        request.httpMethod = "POST"
+        request.httpBody = try! JSONEncoder().encode(PowerStationListRequest())
+
+        let result: (PagedPowerStationListResponse, Data) = try await fetch(request)
+        return result.0
+    }
+
+    func openapi_fetchPowerStationDetail(stationID: String) async throws -> PowerStationDetailResponse {
+        let request = append(queryItems: [URLQueryItem(name: "id", value: stationID)], to: URL.getOpenPlantDetail)
+
+        let result: (PowerStationDetailResponse, _) = try await fetch(request)
+        return result.0
     }
 }
