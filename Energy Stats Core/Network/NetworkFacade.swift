@@ -7,14 +7,14 @@
 
 import Foundation
 
-public class NetworkFacade: FoxAPIServicing {
+class NetworkFacade: FoxAPIServicing {
     private let api: FoxAPIServicing
     private let demoAPI: FoxAPIServicing
     private let config: Config
     private let store: KeychainStoring
     private let throttler = ThrottleManager()
 
-    public init(api: FoxAPIServicing, config: Config, store: KeychainStoring) {
+    init(api: FoxAPIServicing, config: Config, store: KeychainStoring) {
         self.api = api
         self.demoAPI = DemoAPI()
         self.config = config
@@ -25,7 +25,7 @@ public class NetworkFacade: FoxAPIServicing {
         config.isDemoUser || store.isDemoUser
     }
 
-//    public func deleteScheduleTemplate(templateID: String) async throws {
+//     func deleteScheduleTemplate(templateID: String) async throws {
 //        if isDemoUser {
 //            try await fakeNetwork.deleteScheduleTemplate(templateID: templateID)
 //        } else {
@@ -33,7 +33,7 @@ public class NetworkFacade: FoxAPIServicing {
 //        }
 //    }
 //
-//    public func fetchScheduleTemplate(deviceSN: String, templateID: String) async throws -> ScheduleTemplateResponse {
+//     func fetchScheduleTemplate(deviceSN: String, templateID: String) async throws -> ScheduleTemplateResponse {
 //        if isDemoUser {
 //            try await fakeNetwork.fetchScheduleTemplate(deviceSN: deviceSN, templateID: templateID)
 //        } else {
@@ -41,7 +41,7 @@ public class NetworkFacade: FoxAPIServicing {
 //        }
 //    }
 //
-//    public func enableScheduleTemplate(deviceSN: String, templateID: String) async throws {
+//     func enableScheduleTemplate(deviceSN: String, templateID: String) async throws {
 //        if isDemoUser {
 //            try await fakeNetwork.enableScheduleTemplate(deviceSN: deviceSN, templateID: templateID)
 //        } else {
@@ -49,7 +49,7 @@ public class NetworkFacade: FoxAPIServicing {
 //        }
 //    }
 //
-//    public func fetchScheduleTemplates() async throws -> ScheduleTemplateListResponse {
+//     func fetchScheduleTemplates() async throws -> ScheduleTemplateListResponse {
 //        if isDemoUser {
 //            try await fakeNetwork.fetchScheduleTemplates()
 //        } else {
@@ -57,7 +57,7 @@ public class NetworkFacade: FoxAPIServicing {
 //        }
 //    }
 //
-//    public func createScheduleTemplate(name: String, description: String) async throws {
+//     func createScheduleTemplate(name: String, description: String) async throws {
 //        if isDemoUser {
 //            try await fakeNetwork.createScheduleTemplate(name: name, description: description)
 //        } else {
@@ -65,7 +65,7 @@ public class NetworkFacade: FoxAPIServicing {
 //        }
 //    }
 //
-//    public func deleteSchedule(deviceSN: String) async throws {
+//     func deleteSchedule(deviceSN: String) async throws {
 //        if isDemoUser {
 //            try await fakeNetwork.deleteSchedule(deviceSN: deviceSN)
 //        } else {
@@ -73,7 +73,7 @@ public class NetworkFacade: FoxAPIServicing {
 //        }
 //    }
 //
-//    public func saveSchedule(deviceSN: String, schedule: Schedule) async throws {
+//     func saveSchedule(deviceSN: String, schedule: Schedule) async throws {
 //        if isDemoUser {
 //            try await fakeNetwork.saveSchedule(deviceSN: deviceSN, schedule: schedule)
 //        } else {
@@ -81,7 +81,7 @@ public class NetworkFacade: FoxAPIServicing {
 //        }
 //    }
 //
-//    public func saveScheduleTemplate(deviceSN: String, template: ScheduleTemplate) async throws {
+//     func saveScheduleTemplate(deviceSN: String, template: ScheduleTemplate) async throws {
 //        if isDemoUser {
 //            try await fakeNetwork.saveScheduleTemplate(deviceSN: deviceSN, template: template)
 //        } else {
@@ -89,7 +89,7 @@ public class NetworkFacade: FoxAPIServicing {
 //        }
 //    }
 //
-//    public func fetchScheduleModes(deviceID: String) async throws -> [SchedulerModeResponse] {
+//     func fetchScheduleModes(deviceID: String) async throws -> [SchedulerModeResponse] {
 //        if isDemoUser {
 //            try await fakeNetwork.fetchScheduleModes(deviceID: deviceID)
 //        } else {
@@ -97,7 +97,7 @@ public class NetworkFacade: FoxAPIServicing {
 //        }
 //    }
 
-    public func openapi_fetchSchedulerFlag(deviceSN: String) async throws -> GetSchedulerFlagResponse {
+    func openapi_fetchSchedulerFlag(deviceSN: String) async throws -> GetSchedulerFlagResponse {
         if isDemoUser {
             try await demoAPI.openapi_fetchSchedulerFlag(deviceSN: deviceSN)
         } else {
@@ -105,7 +105,7 @@ public class NetworkFacade: FoxAPIServicing {
         }
     }
 
-    public func openapi_setScheduleFlag(deviceSN: String, enable: Bool) async throws {
+    func openapi_setScheduleFlag(deviceSN: String, enable: Bool) async throws {
         if isDemoUser {
             try await demoAPI.openapi_setScheduleFlag(deviceSN: deviceSN, enable: enable)
         } else {
@@ -113,7 +113,7 @@ public class NetworkFacade: FoxAPIServicing {
         }
     }
 
-    public func openapi_fetchBatterySettings(deviceSN: String) async throws -> BatterySOCResponse {
+    func openapi_fetchBatterySettings(deviceSN: String) async throws -> BatterySOCResponse {
         return if isDemoUser {
             try await demoAPI.openapi_fetchBatterySettings(deviceSN: deviceSN)
         } else {
@@ -121,7 +121,7 @@ public class NetworkFacade: FoxAPIServicing {
         }
     }
 
-    public func openapi_fetchDeviceList() async throws -> [DeviceSummaryResponse] {
+    func openapi_fetchDeviceList() async throws -> [DeviceSummaryResponse] {
         return if isDemoUser {
             try await demoAPI.openapi_fetchDeviceList()
         } else {
@@ -129,7 +129,7 @@ public class NetworkFacade: FoxAPIServicing {
         }
     }
 
-    public func openapi_fetchDevice(deviceSN: String) async throws -> DeviceDetailResponse {
+    func openapi_fetchDevice(deviceSN: String) async throws -> DeviceDetailResponse {
         return if isDemoUser {
             try await demoAPI.openapi_fetchDevice(deviceSN: deviceSN)
         } else {
@@ -137,7 +137,7 @@ public class NetworkFacade: FoxAPIServicing {
         }
     }
 
-    public func openapi_setBatterySoc(deviceSN: String, minSOCOnGrid: Int, minSOC: Int) async throws {
+    func openapi_setBatterySoc(deviceSN: String, minSOCOnGrid: Int, minSOC: Int) async throws {
         return if isDemoUser {
             try await demoAPI.openapi_setBatterySoc(deviceSN: deviceSN, minSOCOnGrid: minSOCOnGrid, minSOC: minSOC)
         } else {
@@ -145,7 +145,7 @@ public class NetworkFacade: FoxAPIServicing {
         }
     }
 
-    public func openapi_fetchBatteryTimes(deviceSN: String) async throws -> [ChargeTime] {
+    func openapi_fetchBatteryTimes(deviceSN: String) async throws -> [ChargeTime] {
         return if isDemoUser {
             try await demoAPI.openapi_fetchBatteryTimes(deviceSN: deviceSN)
         } else {
@@ -153,7 +153,7 @@ public class NetworkFacade: FoxAPIServicing {
         }
     }
 
-    public func openapi_setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws {
+    func openapi_setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws {
         return if isDemoUser {
             try await demoAPI.openapi_setBatteryTimes(deviceSN: deviceSN, times: times)
         } else {
@@ -161,7 +161,7 @@ public class NetworkFacade: FoxAPIServicing {
         }
     }
 
-    public func openapi_fetchDataLoggers() async throws -> [DataLoggerResponse] {
+    func openapi_fetchDataLoggers() async throws -> [DataLoggerResponse] {
         return if isDemoUser {
             try await demoAPI.openapi_fetchDataLoggers()
         } else {
@@ -169,7 +169,7 @@ public class NetworkFacade: FoxAPIServicing {
         }
     }
 
-    public func fetchErrorMessages() async {
+    func fetchErrorMessages() async {
         if isDemoUser {
             await demoAPI.fetchErrorMessages()
         } else {
@@ -177,7 +177,7 @@ public class NetworkFacade: FoxAPIServicing {
         }
     }
 
-    public func openapi_fetchRealData(deviceSN: String, variables: [String]) async throws -> OpenQueryResponse {
+    func openapi_fetchRealData(deviceSN: String, variables: [String]) async throws -> OpenQueryResponse {
         if isDemoUser {
             return try await demoAPI.openapi_fetchRealData(deviceSN: deviceSN, variables: variables)
         } else {
@@ -189,7 +189,7 @@ public class NetworkFacade: FoxAPIServicing {
         }
     }
 
-    public func openapi_fetchHistory(deviceSN: String, variables: [String], start: Date, end: Date) async throws -> OpenHistoryResponse {
+    func openapi_fetchHistory(deviceSN: String, variables: [String], start: Date, end: Date) async throws -> OpenHistoryResponse {
         if isDemoUser {
             return try await demoAPI.openapi_fetchHistory(deviceSN: deviceSN, variables: variables, start: start, end: end)
         } else {
@@ -201,7 +201,7 @@ public class NetworkFacade: FoxAPIServicing {
         }
     }
 
-    public func openapi_fetchVariables() async throws -> [OpenApiVariable] {
+    func openapi_fetchVariables() async throws -> [OpenApiVariable] {
         if isDemoUser {
             return try await demoAPI.openapi_fetchVariables()
         } else {
@@ -213,7 +213,7 @@ public class NetworkFacade: FoxAPIServicing {
         }
     }
 
-    public func openapi_fetchReport(deviceSN: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [OpenReportResponse] {
+    func openapi_fetchReport(deviceSN: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [OpenReportResponse] {
         if isDemoUser {
             return try await demoAPI.openapi_fetchReport(deviceSN: deviceSN, variables: variables, queryDate: queryDate, reportType: reportType)
         } else {
@@ -225,7 +225,7 @@ public class NetworkFacade: FoxAPIServicing {
         }
     }
 
-    public func openapi_fetchCurrentSchedule(deviceSN: String) async throws -> ScheduleResponse {
+    func openapi_fetchCurrentSchedule(deviceSN: String) async throws -> ScheduleResponse {
         if isDemoUser {
             return try await demoAPI.openapi_fetchCurrentSchedule(deviceSN: deviceSN)
         } else {
@@ -237,7 +237,7 @@ public class NetworkFacade: FoxAPIServicing {
         }
     }
 
-    public func openapi_saveSchedule(deviceSN: String, schedule: Schedule) async throws {
+    func openapi_saveSchedule(deviceSN: String, schedule: Schedule) async throws {
         if isDemoUser {
             return try await demoAPI.openapi_saveSchedule(deviceSN: deviceSN, schedule: schedule)
         } else {
@@ -245,7 +245,7 @@ public class NetworkFacade: FoxAPIServicing {
         }
     }
 
-    public func openapi_fetchPowerStationList() async throws -> PagedStationListResponse {
+    func openapi_fetchPowerStationList() async throws -> PagedStationListResponse {
         if isDemoUser {
             try await demoAPI.openapi_fetchPowerStationList()
         } else {

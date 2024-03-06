@@ -31,6 +31,13 @@ public protocol Networking {
 public class NetworkService: Networking {
     let api: FoxAPIServicing
 
+    public static func standard(keychainStore: KeychainStoring, config: Config) -> Networking {
+        let api = NetworkValueCleaner(api: NetworkFacade(api: NetworkCache(api: FoxAPIService(credentials: keychainStore, store: InMemoryLoggingNetworkStore.shared)),
+                                                         config: config,
+                                                         store: keychainStore), appSettingsPublisher: AppSettingsPublisherFactory.make(from: config))
+        return NetworkService(api: api)
+    }
+
     public init(api: FoxAPIServicing) {
         self.api = api
     }

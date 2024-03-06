@@ -23,11 +23,7 @@ class HomeEnergyStateManager {
             modelContainer = try ModelContainer(for: BatteryWidgetState.self)
             let keychainStore = KeychainStore()
             config = UserDefaultsConfig()
-            let store = InMemoryLoggingNetworkStore.shared
-            let api = NetworkFacade(api: NetworkCache(api: FoxAPIService(credentials: keychainStore, store: store)),
-                                    config: config,
-                                    store: keychainStore)
-            network = NetworkService(api: api)
+            network = NetworkService.standard(keychainStore: keychainStore, config: config)
         } catch {
             fatalError("Failed to create the model container: \(error)")
         }

@@ -21,13 +21,13 @@ struct CachedItem {
     }
 }
 
-public class NetworkCache: FoxAPIServicing {
+class NetworkCache: FoxAPIServicing {
     private let api: FoxAPIServicing
     private var cache: [String: CachedItem] = [:]
     private let shortCacheDurationInSeconds: TimeInterval = 5
     private let serialiserQueue = DispatchQueue(label: "networkcache.write.queue")
 
-    public init(api: FoxAPIServicing) {
+    init(api: FoxAPIServicing) {
         self.api = api
     }
 
@@ -67,15 +67,15 @@ public class NetworkCache: FoxAPIServicing {
     //        try await network.fetchScheduleModes(deviceID: deviceID)
     //    }
 
-    public func openapi_fetchSchedulerFlag(deviceSN: String) async throws -> GetSchedulerFlagResponse {
+    func openapi_fetchSchedulerFlag(deviceSN: String) async throws -> GetSchedulerFlagResponse {
         try await api.openapi_fetchSchedulerFlag(deviceSN: deviceSN)
     }
 
-    public func openapi_setScheduleFlag(deviceSN: String, enable: Bool) async throws {
+    func openapi_setScheduleFlag(deviceSN: String, enable: Bool) async throws {
         try await api.openapi_setScheduleFlag(deviceSN: deviceSN, enable: enable)
     }
 
-    public func openapi_fetchBatterySettings(deviceSN: String) async throws -> BatterySOCResponse {
+    func openapi_fetchBatterySettings(deviceSN: String) async throws -> BatterySOCResponse {
         let key = makeKey(base: #function, arguments: deviceSN)
 
         if let item = cache[key], let cached = item.item as? BatterySOCResponse, item.isFresherThan(interval: shortCacheDurationInSeconds) {
@@ -87,7 +87,7 @@ public class NetworkCache: FoxAPIServicing {
         }
     }
 
-    public func openapi_fetchDeviceList() async throws -> [DeviceSummaryResponse] {
+    func openapi_fetchDeviceList() async throws -> [DeviceSummaryResponse] {
         let key = makeKey(base: #function)
 
         if let item = cache[key], let cached = item.item as? [DeviceSummaryResponse], item.isFresherThan(interval: shortCacheDurationInSeconds) {
@@ -99,31 +99,31 @@ public class NetworkCache: FoxAPIServicing {
         }
     }
 
-    public func openapi_fetchDevice(deviceSN: String) async throws -> DeviceDetailResponse {
+    func openapi_fetchDevice(deviceSN: String) async throws -> DeviceDetailResponse {
         try await api.openapi_fetchDevice(deviceSN: deviceSN)
     }
 
-    public func openapi_setBatterySoc(deviceSN: String, minSOCOnGrid: Int, minSOC: Int) async throws {
+    func openapi_setBatterySoc(deviceSN: String, minSOCOnGrid: Int, minSOC: Int) async throws {
         try await api.openapi_setBatterySoc(deviceSN: deviceSN, minSOCOnGrid: minSOCOnGrid, minSOC: minSOC)
     }
 
-    public func openapi_fetchBatteryTimes(deviceSN: String) async throws -> [ChargeTime] {
+    func openapi_fetchBatteryTimes(deviceSN: String) async throws -> [ChargeTime] {
         try await api.openapi_fetchBatteryTimes(deviceSN: deviceSN)
     }
 
-    public func openapi_setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws {
+    func openapi_setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws {
         try await api.openapi_setBatteryTimes(deviceSN: deviceSN, times: times)
     }
 
-    public func openapi_fetchDataLoggers() async throws -> [DataLoggerResponse] {
+    func openapi_fetchDataLoggers() async throws -> [DataLoggerResponse] {
         try await api.openapi_fetchDataLoggers()
     }
 
-    public func fetchErrorMessages() async {
+    func fetchErrorMessages() async {
         await api.fetchErrorMessages()
     }
 
-    public func openapi_fetchRealData(deviceSN: String, variables: [String]) async throws -> OpenQueryResponse {
+    func openapi_fetchRealData(deviceSN: String, variables: [String]) async throws -> OpenQueryResponse {
         let key = makeKey(base: #function, arguments: deviceSN, variables.joined(separator: "_"))
 
         if let item = cache[key], let cached = item.item as? OpenQueryResponse, item.isFresherThan(interval: shortCacheDurationInSeconds) {
@@ -135,7 +135,7 @@ public class NetworkCache: FoxAPIServicing {
         }
     }
 
-    public func openapi_fetchHistory(deviceSN: String, variables: [String], start: Date, end: Date) async throws -> OpenHistoryResponse {
+    func openapi_fetchHistory(deviceSN: String, variables: [String], start: Date, end: Date) async throws -> OpenHistoryResponse {
         let key = makeKey(base: #function, arguments: deviceSN, variables.joined(separator: "_"), String(start.timeIntervalSince1970), String(end.timeIntervalSince1970))
 
         if let item = cache[key], let cached = item.item as? OpenHistoryResponse, item.isFresherThan(interval: shortCacheDurationInSeconds) {
@@ -147,11 +147,11 @@ public class NetworkCache: FoxAPIServicing {
         }
     }
 
-    public func openapi_fetchVariables() async throws -> [OpenApiVariable] {
+    func openapi_fetchVariables() async throws -> [OpenApiVariable] {
         try await api.openapi_fetchVariables()
     }
 
-    public func openapi_fetchReport(deviceSN: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [OpenReportResponse] {
+    func openapi_fetchReport(deviceSN: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [OpenReportResponse] {
         let key = makeKey(base: #function, arguments: deviceSN, variables.map { $0.networkTitle }.joined(separator: "_"), queryDate.toString(), reportType.rawValue)
 
         if let item = cache[key], let cached = item.item as? [OpenReportResponse], item.isFresherThan(interval: shortCacheDurationInSeconds) {
@@ -163,15 +163,15 @@ public class NetworkCache: FoxAPIServicing {
         }
     }
 
-    public func openapi_fetchCurrentSchedule(deviceSN: String) async throws -> ScheduleResponse {
+    func openapi_fetchCurrentSchedule(deviceSN: String) async throws -> ScheduleResponse {
         try await api.openapi_fetchCurrentSchedule(deviceSN: deviceSN)
     }
 
-    public func openapi_saveSchedule(deviceSN: String, schedule: Schedule) async throws {
+    func openapi_saveSchedule(deviceSN: String, schedule: Schedule) async throws {
         try await api.openapi_saveSchedule(deviceSN: deviceSN, schedule: schedule)
     }
 
-    public func openapi_fetchPowerStationList() async throws -> PagedStationListResponse {
+    func openapi_fetchPowerStationList() async throws -> PagedStationListResponse {
         try await api.openapi_fetchPowerStationList()
     }
 }

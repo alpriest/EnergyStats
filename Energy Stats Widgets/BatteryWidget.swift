@@ -16,11 +16,7 @@ struct BatteryWidget: Widget {
     init() {
         let keychainStore = KeychainStore()
         let config = UserDefaultsConfig()
-        let store = InMemoryLoggingNetworkStore.shared
-        let api = NetworkFacade(api: FoxAPIService(credentials: keychainStore, store: store),
-                                config: config,
-                                store: keychainStore)
-        let network = NetworkService(api: api)
+        let network = NetworkService.standard(keychainStore: keychainStore, config: config)
         let appSettingsPublisher = AppSettingsPublisherFactory.make(from: config)
         configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher)
     }

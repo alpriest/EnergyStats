@@ -14,14 +14,10 @@ struct Energy_StatsApp: App {
     var body: some Scene {
         let keychainStore = KeychainStore()
         let config = UserDefaultsConfig()
-        let store = InMemoryLoggingNetworkStore.shared
         let appSettingsPublisher = AppSettingsPublisherFactory.make(from: config)
-        let api = NetworkValueCleaner(api: NetworkFacade(api: NetworkCache(api: FoxAPIService(credentials: keychainStore, store: store)),
-                                                         config: config,
-                                                         store: keychainStore), appSettingsPublisher: appSettingsPublisher)
-        let network = NetworkService(api: api)
+        let network = NetworkService.standard(keychainStore: keychainStore, config: config)
         let configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher)
-        let userManager = UserManager(networking: network, store: keychainStore, configManager: configManager, networkCache: store)
+        let userManager = UserManager(networking: network, store: keychainStore, configManager: configManager, networkCache: InMemoryLoggingNetworkStore.shared)
         let solarForecastProvider: () -> SolarForecasting = {
             config.isDemoUser ? DemoSolcast() : SolcastCache(service: { Solcast() })
         }
@@ -37,7 +33,7 @@ struct Energy_StatsApp: App {
                     configManager: configManager,
                     solarForecastProvider: solarForecastProvider
                 )
-                .environmentObject(store)
+                .environmentObject(InMemoryLoggingNetworkStore.shared)
                 .environmentObject(userManager)
                 .environmentObject(KeychainWrapper(keychainStore))
                 .environmentObject(versionChecker)

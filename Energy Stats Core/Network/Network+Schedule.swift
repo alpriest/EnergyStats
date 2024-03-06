@@ -19,7 +19,7 @@ extension URL {
     static var deleteScheduleTemplate = URL(string: "https://www.foxesscloud.com/generic/v0/device/scheduler/delete")!
 }
 
-public extension FoxAPIService {
+extension FoxAPIService {
 //    func deleteScheduleTemplate(templateID: String) async throws {
 //        let request = append(
 //            queryItems: [

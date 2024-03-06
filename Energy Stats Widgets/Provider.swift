@@ -21,11 +21,7 @@ struct Provider: TimelineProvider {
     private let modelContainer: ModelContainer
 
     init() {
-        let store = InMemoryLoggingNetworkStore.shared
-        let api = NetworkFacade(api: FoxAPIService(credentials: keychainStore, store: store),
-                                config: config,
-                                store: keychainStore)
-        network = NetworkService(api: api)
+        network = NetworkService.standard(keychainStore: keychainStore, config: config)
         let appSettingsPublisher = AppSettingsPublisherFactory.make(from: config)
         configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher)
         modelContainer = HomeEnergyStateManager.shared.modelContainer
