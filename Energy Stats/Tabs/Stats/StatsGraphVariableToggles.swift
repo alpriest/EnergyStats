@@ -38,7 +38,7 @@ struct StatsGraphVariableToggles: View {
                             Spacer()
 
                             if let valuesAtTime, let graphValue = valuesAtTime.values.first(where: { $0.type == variable.type }) {
-                                Text(graphValue.formatted())
+                                Text(graphValue.formatted(appSettings.decimalPlaces))
                                     .monospacedDigit()
                             } else {
                                 OptionalView(viewModel.total(of: variable.type)) {

@@ -10044,31 +10044,31 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Leistung zum Laden der Batterie"
+            "value" : "Energie zum Laden der Batterie verwendet"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Power charging the battery"
+            "value" : "Energy used to charge the battery"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Potencia de carga de la batería"
+            "value" : "Energía utilizada para cargar la batería"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Potenza di carica della batteria"
+            "value" : "Energia usata per caricare la batteria"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Moc ładowania akumulatora"
+            "value" : "Energia używana do ładowania baterii"
           }
         }
       }
@@ -10079,31 +10079,31 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Leistung vom Entladen der Batterie"
+            "value" : "Energie aus der Batterie entnommen"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Power discharging from the battery"
+            "value" : "Energy taken from the battery"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Potencia de descarga de la batería"
+            "value" : "Energía tomada de la batería"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Potenza scaricata dalla batteria"
+            "value" : "Energia prelevata dalla batteria"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Moc rozładowywania się akumulatora"
+            "value" : "Energia pobrana z baterii"
           }
         }
       }
@@ -10114,31 +10114,31 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Leistung zum Einspeisen ins Netz"
+            "value" : "Energie, die ins Netz eingespeist wurde"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Power being sent to the grid"
+            "value" : "Energy exported to the grid"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Potencia enviada a la red"
+            "value" : "Energía exportada a la red"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Potenza inviata alla rete"
+            "value" : "Energie, die ins Netz eingespeist wurde"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Moc wysyłana do sieci"
+            "value" : "Energia eksportowana do sieci"
           }
         }
       }
@@ -10149,31 +10149,31 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Solar-/Batterieleistung, die vom Wechselrichter geliefert wird"
+            "value" : "Vom Wechselrichter gelieferte Energie"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Solar / Battery power coming through the inverter"
+            "value" : "Energy supplied by the inverter"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Potencia solar / de la batería que pasa a través del inversor"
+            "value" : "Energía suministrada por el inversor"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Potenza solare / batteria che passa attraverso l'inverter"
+            "value" : "Energia fornita dall'inverter"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Moc generacji ze źródeł słonecznych / akumulatora przechodząca przez falownik"
+            "value" : "Energia dostarczana przez falownik"
           }
         }
       }
@@ -10184,31 +10184,31 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Leistung, die vom Netz bezogen wird"
+            "value" : "Energie, die aus dem Netz bezogen wurde"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Power coming from the grid"
+            "value" : "Energy imported from the grid"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Potencia proveniente de la red"
+            "value" : "Energía importada de la red"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Potenza proveniente dalla rete"
+            "value" : "Energia importata dalla rete"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Moc pobierana z sieci"
+            "value" : "Energia importowana z sieci"
           }
         }
       }
@@ -10219,13 +10219,13 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Leistung, die im Haus verbraucht wurde"
+            "value" : "Energie, die vom Haus genutzt wird"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Power used by the house"
+            "value" : "Energy used by the house"
           }
         },
         "es" : {
@@ -10237,13 +10237,13 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Potenza utilizzata dalla casa"
+            "value" : "Energia utilizzata dalla casa"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Moc używana przez dom"
+            "value" : "Energia używana przez dom"
           }
         }
       }

@@ -39,8 +39,8 @@ struct StatsGraphValue: Identifiable, Hashable {
         self.type = type
     }
 
-    func formatted() -> String {
-        value.kW(2)
+    func formatted(_ decimalPlaces: Int) -> String {
+        value.kWh(decimalPlaces)
     }
 }
 
