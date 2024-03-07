@@ -178,7 +178,11 @@ struct ErrorAlertView: View {
 
     var detailedMessage: String {
         return if let cause, cause is NetworkError {
-            message
+            if case NetworkError.invalidToken = cause {
+                "Your API token is invalid. Please logout and follow the instructions to generate a new API token."
+            } else {
+                message
+            }
         } else if let cause, cause is DecodingError {
             String(describing: cause)
         } else if let cause, cause.localizedDescription != message {
@@ -198,10 +202,6 @@ struct ErrorAlertView: View {
 
     var tapIconMessage: String {
         String(key: .tapIconForDetail)
-    }
-
-    var popupMessage: String {
-        cause?.localizedDescription ?? message
     }
 }
 

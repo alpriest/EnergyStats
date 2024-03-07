@@ -16,7 +16,7 @@
 		4103D1D329DB6C51001B0BC8 /* BatterySOCResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146E28C77A3100EA5BA1 /* BatterySOCResponse.swift */; };
 		4103D1D429DB6C51001B0BC8 /* DeviceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D6496B28DB321600A24B41 /* DeviceList.swift */; };
 		4103D1D529DB6C51001B0BC8 /* NetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B690F328DF5C390058126E /* NetworkResponse.swift */; };
-		4103D1D729DB6C51001B0BC8 /* FoxESSNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140145F28C70D4700EA5BA1 /* FoxESSNetworking.swift */; };
+		4103D1D729DB6C51001B0BC8 /* FoxAPIServicing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140145F28C70D4700EA5BA1 /* FoxAPIServicing.swift */; };
 		4103D1D829DB6C51001B0BC8 /* NetworkFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41777F1428F49C61009944FF /* NetworkFacade.swift */; };
 		4103D1D929DB6C6D001B0BC8 /* ReportVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4103F82F2922BFBA00567B1C /* ReportVariable.swift */; };
 		4103D1DA29DB6C6D001B0BC8 /* DeviceFirmwareVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41626CD129D96AD9003FEB00 /* DeviceFirmwareVersion.swift */; };
@@ -434,7 +434,7 @@
 		4140145428C70B3200EA5BA1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4140145B28C70B4A00EA5BA1 /* PowerFlowTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerFlowTabViewModel.swift; sourceTree = "<group>"; };
 		4140145D28C70D1400EA5BA1 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
-		4140145F28C70D4700EA5BA1 /* FoxESSNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoxESSNetworking.swift; sourceTree = "<group>"; };
+		4140145F28C70D4700EA5BA1 /* FoxAPIServicing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoxAPIServicing.swift; sourceTree = "<group>"; };
 		4140146428C714C000EA5BA1 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		4140146828C7374400EA5BA1 /* CurrentStatusCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentStatusCalculator.swift; sourceTree = "<group>"; };
 		4140146E28C77A3100EA5BA1 /* BatterySOCResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatterySOCResponse.swift; sourceTree = "<group>"; };
@@ -1242,14 +1242,14 @@
 			isa = PBXGroup;
 			children = (
 				4140146328C7146B00EA5BA1 /* NetworkModels */,
-				4140145F28C70D4700EA5BA1 /* FoxESSNetworking.swift */,
+				4140145F28C70D4700EA5BA1 /* FoxAPIServicing.swift */,
+				41BCC1AA2B245C280062084A /* FoxAPIService.swift */,
 				41777F1428F49C61009944FF /* NetworkFacade.swift */,
 				41626CCD29D95E9C003FEB00 /* NetworkError.swift */,
 				416318B629DDD2E100C2C285 /* InMemoryLoggingNetworkingDecorator.swift */,
 				41B3FFE72AB07FE10020DFC9 /* NetworkCache.swift */,
 				41DC51592AE2E9DC00FD348B /* NetworkValueCleaner.swift */,
 				41BCC1A82B245C130062084A /* Network+Schedule.swift */,
-				41BCC1AA2B245C280062084A /* FoxAPIService.swift */,
 				4131AF4A2B5288CF00836B77 /* Network+OpenAPI.swift */,
 				41D759FC2B5B0E37002C43A7 /* Network+OpenAPI+Schedule.swift */,
 				414A40BF2B989D9800321AA2 /* NetworkService.swift */,
@@ -1708,7 +1708,7 @@
 				41D759FD2B5B0E37002C43A7 /* Network+OpenAPI+Schedule.swift in Sources */,
 				4109140229DB7AE700133CC5 /* BatteryViewModel.swift in Sources */,
 				41B3FFE82AB07FE10020DFC9 /* NetworkCache.swift in Sources */,
-				4103D1D729DB6C51001B0BC8 /* FoxESSNetworking.swift in Sources */,
+				4103D1D729DB6C51001B0BC8 /* FoxAPIServicing.swift in Sources */,
 				4171854229FFCF2500D18CDD /* String+MD5.swift in Sources */,
 				418024E22AD16D00009A2625 /* String+Currency.swift in Sources */,
 				41D75A012B5C0238002C43A7 /* Bool+Int.swift in Sources */,
@@ -2010,7 +2010,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 2.9;
+				MARKETING_VERSION = 2.10;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2068,7 +2068,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 2.9;
+				MARKETING_VERSION = 2.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
