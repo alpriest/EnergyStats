@@ -10,7 +10,7 @@
 import XCTest
 
 final class NetworkTests: XCTestCase {
-    private var sut: Networking!
+    private var sut: FoxAPIServicing!
     private var keychainStore: MockKeychainStore!
 
     override func setUp() {

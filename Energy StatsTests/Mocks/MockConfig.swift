@@ -11,6 +11,7 @@ import Foundation
 
 class MockConfig: Config {
     func clearDisplaySettings() {}
+    func clearDeviceSettings() { }
 
     var currencySymbol: String = ""
     var shouldCombineCT2WithPVPower: Bool = true
@@ -54,4 +55,10 @@ class MockConfig: Config {
     var showFinancialSummaryOnFlowPage: Bool = false
     var separateParameterGraphsByUnit: Bool = false
     var variables: [Variable] = []
+    var useExperimentalLoadFormula: Bool = false
+    var powerFlowStrings: PowerFlowStringsSettings = PowerFlowStringsSettings.none
+    var showBatteryPercentageRemaining: Bool = false
+    var showInverterTypeName: Bool = false
+    var shouldCombineCT2WithLoadsPower: Bool = false
+    var powerStationDetail: PowerStationDetail? = nil
 }

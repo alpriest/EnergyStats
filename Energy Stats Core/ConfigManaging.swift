@@ -63,6 +63,7 @@ public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging {
     var useExperimentalLoadFormula: Bool { get set }
     var powerFlowStrings: PowerFlowStringsSettings { get set }
     var showBatteryPercentageRemaining: Bool { get set }
+    var powerStationDetail: PowerStationDetail? { get }
 }
 
 public protocol SolcastConfigManaging {

@@ -31,6 +31,14 @@ struct SettingsTabView: View {
                     }
                 }
 
+//                if let powerStation = viewModel.powerStation {
+//                    NavigationLink {
+//                        PowerStationSettingsView(station: powerStation)
+//                    } label: {
+//                        Text("Site")
+//                    }
+//                }
+
                 NavigationLink {
                     InverterSettingsView(networking: networking,
                                          configManager: configManager,

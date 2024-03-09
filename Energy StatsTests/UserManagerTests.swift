@@ -8,13 +8,12 @@
 import Combine
 @testable import Energy_Stats
 import XCTest
-import Energy_Stats_Core
+@testable import Energy_Stats_Core
 
-@MainActor
 final class UserManagerTests: XCTestCase {
     private var sut: UserManager!
     private var keychainStore: MockKeychainStore!
-    private var networking: FoxAPIService!
+    private var networking: Networking!
     private var config: MockConfig!
     private var configManager: PreviewConfigManager!
 
@@ -22,11 +21,12 @@ final class UserManagerTests: XCTestCase {
         keychainStore = MockKeychainStore()
         config = MockConfig()
         let cache = InMemoryLoggingNetworkStore()
-        networking = FoxAPIService(credentials: keychainStore,  store: cache)
+        networking = NetworkService(api: FoxAPIService(credentials: keychainStore,  store: cache))
         configManager = PreviewConfigManager(networking: networking, config: config, appSettingsPublisher: CurrentValueSubject<AppSettings, Never>(AppSettings.mock()))
         sut = UserManager(networking: networking, store: keychainStore, configManager: configManager, networkCache: cache)
     }
 
+    @MainActor
     func test_isLoggedIn_SetsOnInitialisation() {
         let expectation = self.expectation(description: #function)
         keychainStore.updateHasCredentials(value: true)
@@ -43,12 +43,14 @@ final class UserManagerTests: XCTestCase {
         XCTAssertTrue(sut.isLoggedIn)
     }
 
+    @MainActor
     func test_logout_clears_store() {
         sut.logout()
 
         XCTAssertTrue(keychainStore.logoutCalled)
     }
 
+    @MainActor
     func test_logout_clears_config() {
         config.selectedDeviceID = "device"
 

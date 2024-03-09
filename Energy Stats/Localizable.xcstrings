@@ -6325,6 +6325,9 @@
         }
       }
     },
+    "Hello, World!" : {
+
+    },
     "Hide graph" : {
       "localizations" : {
         "de" : {
@@ -11646,6 +11649,9 @@
           }
         }
       }
+    },
+    "Site" : {
+
     },
     "Solar Forecasts" : {
       "localizations" : {

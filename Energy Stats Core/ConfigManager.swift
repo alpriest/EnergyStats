@@ -521,6 +521,10 @@ public class ConfigManager: ConfigManaging {
             ))
         }
     }
+
+    public var powerStationDetail: PowerStationDetail? {
+        get { config.powerStationDetail }
+    }
 }
 
 public enum BatteryResponseMapper {
