@@ -707,30 +707,30 @@
         }
       }
     },
-    "4. Click Generate API key" : {
+    "4. Click API management" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "4. Klicken Sie auf API-Schlüssel generieren"
+            "value" : "4. Klicken Sie auf API-Verwaltung"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "4. Haz clic en Generar clave API"
+            "value" : "4. Haz clic en gestión de API"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "4. Clicca su Genera chiave API"
+            "value" : "4. Clicca su gestione API"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "4. Kliknij Wygeneruj klucz API"
+            "value" : "4. Kliknij zarządzanie API"
           }
         }
       }
@@ -763,30 +763,30 @@
         }
       }
     },
-    "5. Copy the API key (make a note of it securely)" : {
+    "5. Click Generate API key" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "5. Kopiere den API-Schlüssel (notiere ihn sicher)"
+            "value" : "5. Klicken Sie auf API-Schlüssel generieren"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "5. Copia la clave API (anótala de forma segura)"
+            "value" : "5. Haz clic en Generar clave API"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "5. Copia la chiave API (annotala in modo sicuro)"
+            "value" : "5. Clicca su Genera chiave API"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "5. Skopiuj klucz API (zapisz go bezpiecznie)"
+            "value" : "5. Kliknij Generuj klucz API"
           }
         }
       }
@@ -819,58 +819,58 @@
         }
       }
     },
-    "6. Paste the API key above" : {
+    "6. Copy the API key (make a note of it securely)" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "6. Füge den API-Schlüssel oben ein"
+            "value" : "6. Kopieren Sie den API-Schlüssel (notieren Sie ihn sicher)"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "6. Pega la clave API arriba"
+            "value" : "6. Copia la clave API (anótala de forma segura)"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "6. Incolla la chiave API sopra"
+            "value" : "6. Copia la chiave API (annotala in modo sicuro)"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "6. Wklej powyżej klucz API"
+            "value" : "6. Skopiuj klucz API (zapisz go bezpiecznie)"
           }
         }
       }
     },
-    "7. Your API key will be 36 characters long and look something like " : {
+    "7. Paste the API key above" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "7. Ihr API-Schlüssel wird 36 Zeichen lang sein und so etwas ähnlich aussehen wie"
+            "value" : "7. Fügen Sie den API-Schlüssel oben ein"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "7. Tu clave API tendrá 36 caracteres de longitud y se parecerá a algo así como"
+            "value" : "7. Pega la clave API arriba"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "7. La tua chiave API sarà lunga 36 caratteri e assomiglierà a qualcosa del genere"
+            "value" : "7. Incolla la chiave API sopra"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "7. Twój klucz API będzie miał 36 znaków długości i będzie wyglądał mniej więcej tak"
+            "value" : "7. Wklej klucz API powyżej"
           }
         }
       }
@@ -899,6 +899,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
+          }
+        }
+      }
+    },
+    "8. Your API key will be 36 characters long and look something like " : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "8. Ihr API-Schlüssel wird 36 Zeichen lang sein und so aussehen wie"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "8. Tu clave API tendrá 36 caracteres de longitud y se parecerá a algo así como"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "8. La tua chiave API sarà lunga 36 caratteri e assomiglierà a qualcosa del tipo"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "8. Twój klucz API będzie miał 36 znaków długości i będzie wyglądał mniej więcej tak"
           }
         }
       }
