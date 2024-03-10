@@ -3663,31 +3663,31 @@
       "localizations" : {
         "de" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Anmeldung nicht möglich. Prüfen Sie Ihre Internetverbindung"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Could not login. Check your internet connection, or try logout and then login again."
+            "value" : "Could not login. Check your API key connection, or try logout and then login again."
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Nie można się zalogować. Sprawdź swoje połączenie z internetem"
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Impossibile effettuare il login. Controlla la connessione internet."
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Nie można się zalogować. Sprawdź swoje połączenie z internetem"
           }
         }

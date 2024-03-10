@@ -43,6 +43,24 @@ struct ErrorAlertViewOptions: OptionSet {
     static let all: ErrorAlertViewOptions = [.checkServerStatus, .logoutButton, .retry, .copyDebugData]
 }
 
+struct AlertIconView: View {
+    var body: some View {
+        GeometryReader { reader in
+            ZStack {
+                Circle()
+                    .foregroundColor(.red)
+                    .frame(width: reader.size.width, height: reader.size.height)
+
+                Image(systemName: "exclamationmark.circle.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .foregroundColor(.white)
+                    .frame(width: reader.size.width * 0.76, height: reader.size.height * 0.76)
+            }
+        }
+    }
+}
+
 struct ErrorAlertView: View {
     let cause: Error?
     let message: String
@@ -56,18 +74,8 @@ struct ErrorAlertView: View {
 
     var body: some View {
         VStack {
-            ZStack {
-                Circle()
-                    .foregroundColor(.red)
-                    .frame(width: 130, height: 130)
-
-                Image(systemName: "exclamationmark.circle.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .foregroundColor(.white)
-                    .frame(width: 100, height: 100)
-            }
-            .frame(height: 130)
+            AlertIconView()
+                .frame(height: 130)
 
             Text(inlineMessage)
                 .fixedSize(horizontal: false, vertical: true)
