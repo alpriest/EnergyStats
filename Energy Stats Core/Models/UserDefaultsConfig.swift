@@ -53,7 +53,7 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "showFinancialSummaryOnFlowPage")
         UserDefaults.shared.removeObject(forKey: "separateParameterGraphsByUnit")
         UserDefaults.shared.removeObject(forKey: "showInverterTypeName")
-        UserDefaults.shared.removeObject(forKey: "useExperimentalLoadFormula")
+        UserDefaults.shared.removeObject(forKey: "useTraditionalLoadFormula")
         UserDefaults.shared.removeObject(forKey: "powerFlowStringsSettings")
         UserDefaults.shared.removeObject(forKey: "showBatteryPercentageRemaining")
     }
@@ -221,8 +221,8 @@ public class UserDefaultsConfig: Config {
     @UserDefaultsStoredCodable(key: "variables", defaultValue: [])
     public var variables: [Variable]
 
-    @UserDefaultsStoredBool(key: "useExperimentalLoadFormula", defaultValue: true)
-    public var useExperimentalLoadFormula: Bool
+    @UserDefaultsStoredBool(key: "useTraditionalLoadFormula", defaultValue: true)
+    public var useTraditionalLoadFormula: Bool
 
     @UserDefaultsStoredCodable(key: "powerFlowStringsSettings", defaultValue: PowerFlowStringsSettings.none)
     public var powerFlowStrings: PowerFlowStringsSettings

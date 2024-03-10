@@ -15,6 +15,7 @@ languages([
 ])
 
 erase_simulator
+dark_mode(false)
 localize_simulator true
 
 # The name of the scheme which contains the UI Tests

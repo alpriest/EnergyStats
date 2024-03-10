@@ -48,7 +48,7 @@ public protocol Config {
     var showFinancialSummaryOnFlowPage: Bool { get set }
     var separateParameterGraphsByUnit: Bool { get set }
     var variables: [Variable] { get set }
-    var useExperimentalLoadFormula: Bool { get set }
+    var useTraditionalLoadFormula: Bool { get set }
     var powerFlowStrings: PowerFlowStringsSettings { get set }
     var showBatteryPercentageRemaining: Bool { get set }
     var powerStationDetail: PowerStationDetail? { get set }

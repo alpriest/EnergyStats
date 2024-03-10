@@ -55,7 +55,7 @@ class MockConfig: Config {
     var showFinancialSummaryOnFlowPage: Bool = false
     var separateParameterGraphsByUnit: Bool = false
     var variables: [Variable] = []
-    var useExperimentalLoadFormula: Bool = false
+    var useTraditionalLoadFormula: Bool = false
     var powerFlowStrings: PowerFlowStringsSettings = PowerFlowStringsSettings.none
     var showBatteryPercentageRemaining: Bool = false
     var showInverterTypeName: Bool = false

@@ -34,12 +34,12 @@ public struct CurrentStatusCalculator {
         let shouldInvertCT2 = config.shouldInvertCT2
         let shouldCombineCT2WithPVPower = config.shouldCombineCT2WithPVPower
         let shouldCombineCT2WithLoadsPower = config.shouldCombineCT2WithLoadsPower
-        let useExperimentalLoadsFormula = config.useExperimentalLoadFormula
+        let useTraditionalLoadFormula = config.useTraditionalLoadFormula
 
         let status = Self.mapCurrentValues(device: device, response: response, config: config)
 
         self.currentGrid = status.feedinPower - status.gridConsumptionPower
-        self.currentHomeConsumption = useExperimentalLoadsFormula ? Self.calculateLoadPower(status: status) : Self.loadPower(status: status, shouldCombineCT2WithLoadsPower: shouldCombineCT2WithLoadsPower)
+        self.currentHomeConsumption = useTraditionalLoadFormula ? Self.loadPower(status: status, shouldCombineCT2WithLoadsPower: shouldCombineCT2WithLoadsPower) : Self.calculateLoadPower(status: status)
         self.currentTemperatures = InverterTemperatures(ambient: status.ambientTemperation, inverter: status.invTemperation)
         self.lastUpdate = status.lastUpdate
         self.currentCT2 = shouldInvertCT2 ? 0 - status.meterPower2 : status.meterPower2

@@ -3698,7 +3698,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Could not login. Check your API key connection, or try logout and then login again."
+            "value" : "Could not login. Check your API key and try again."
           }
         },
         "es" : {

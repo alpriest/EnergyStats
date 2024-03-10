@@ -497,9 +497,9 @@ public class ConfigManager: ConfigManaging {
         }
     }
 
-    public var useExperimentalLoadFormula: Bool {
-        get { config.useExperimentalLoadFormula }
-        set { config.useExperimentalLoadFormula = newValue }
+    public var useTraditionalLoadFormula: Bool {
+        get { config.useTraditionalLoadFormula }
+        set { config.useTraditionalLoadFormula = newValue }
     }
 
     public var powerFlowStrings: PowerFlowStringsSettings {
