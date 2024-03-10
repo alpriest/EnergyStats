@@ -3996,31 +3996,31 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Die Werte werden unverändert aus dem Datenfeed angezeigt. Sie können abnorm große Zahlen in Ihrer Nutzung sehen, wo die Daten beschädigt werden."
+            "value" : "Werte werden unverändert aus dem Datenfeed angezeigt. Es können abnormal große Zahlen in Ihrer Nutzung auftreten, wo die Daten während der Firmware-Aktualisierungen beschädigt werden."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Values will be shown unmodified from the data feed. You may see abnormally large numbers in your usage where the data gets corrupted."
+            "value" : "Values will be shown unmodified from the data feed. You may see abnormally large numbers in your usage where the data gets corrupted during firmware updates."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Los valores se mostrarán sin modificar desde la fuente de datos. Puede ver números anormalmente grandes en su uso donde los datos se corrompan."
+            "value" : "Los valores se mostrarán sin modificar desde la fuente de datos. Puede ver números anormalmente grandes en su uso donde los datos se corrompen durante las actualizaciones del firmware."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "I valori saranno mostrati senza modifiche dal feed di dati. Potresti vedere numeri anormalmente grandi nel tuo utilizzo dove i dati vengono corrotti."
+            "value" : "I valori verranno mostrati senza modifiche dal flusso di dati. Potresti vedere numeri anormalmente grandi nel tuo utilizzo dove i dati vengono corrotti durante gli aggiornamenti del firmware."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wartości będą wyświetlane bez modyfikacji z kanału danych. Możesz zobaczyć nienormalnie duże liczby w swoim użyciu, gdzie dane zostają uszkodzone."
+            "value" : "Wartości będą wyświetlane niezmienione z kanału danych. Możesz zobaczyć nienormalnie duże liczby w swoim użyciu, gdzie dane ulegają uszkodzeniu podczas aktualizacji firmware'u."
           }
         }
       }
@@ -4202,7 +4202,32 @@
       }
     },
     "Debug data has been copied to your clipboard." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Debug-Daten wurden in Ihre Zwischenablage kopiert."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Los datos de depuración se han copiado a tu portapapeles."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I dati di debug sono stati copiati nella tua appunti."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dane debugowania zostały skopiowane do twojego schowka."
+          }
+        }
+      }
     },
     "Decimal places" : {
       "localizations" : {
@@ -4655,7 +4680,32 @@
       }
     },
     "Done" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fertig"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hecho"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fatto"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zrobione"
+          }
+        }
+      }
     },
     "Earnings" : {
       "extractionState" : "manual",
@@ -5034,35 +5084,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "energia"
-          }
-        }
-      }
-    },
-    "Energy Stats" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
           }
         }
       }
@@ -6325,9 +6346,6 @@
         }
       }
     },
-    "Hello, World!" : {
-
-    },
     "Hide graph" : {
       "localizations" : {
         "de" : {
@@ -7269,7 +7287,32 @@
       }
     },
     "Logout" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abmelden"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerrar sesión"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esci"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wyloguj"
+          }
+        }
+      }
     },
     "Longitude" : {
       "localizations" : {
@@ -8613,6 +8656,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Przepływ mocy"
+          }
+        }
+      }
+    },
+    "Power station" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kraftwerk"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Central eléctrica"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Centrale elettrica"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elektrownia"
           }
         }
       }
@@ -10624,34 +10695,6 @@
         }
       }
     },
-    "Self Sufficiency Estimates" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Schätzungen zur Eigenversorgung"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Estimaciones de Autosuficiencia"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stime di Autosufficienza"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Szacunki Samowystarczalności"
-          }
-        }
-      }
-    },
     "Self Use" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -11052,31 +11095,31 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "PV Ertrag"
+            "value" : "Solarertrag anzeigen"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Solar Yield"
+            "value" : "Show solar yield"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "PV Rendimiento"
+            "value" : "Mostrar rendimiento solar"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "PV Rendimento"
+            "value" : "Mostra rendimento solare"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "PV Wydajność"
+            "value" : "Pokazać wydajność słoneczną"
           }
         }
       }
@@ -11222,34 +11265,6 @@
         }
       }
     },
-    "Show financial summary" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Finanzielle Zusammenfassung anzeigen"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mostrar resumen financiero"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mostra il riepilogo finanziario"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pokaż podsumowanie finansowe"
-          }
-        }
-      }
-    },
     "Show graph" : {
       "localizations" : {
         "de" : {
@@ -11330,35 +11345,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pokaż ikonę falownika"
-          }
-        }
-      }
-    },
-    "Show inverter plant name" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Weise den Wechselrichter Anlagenname aus"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mostrar nombre de la planta inversora"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mostra il nome dell'impianto dell'inverter"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pokaż nazwę elektrowni falownika"
           }
         }
       }
@@ -11447,58 +11433,30 @@
         }
       }
     },
-    "Show last update timestamp" : {
+    "Show on power flow page" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Letzte Aktualisierungszeit anzeigen"
+            "value" : "Auf der Leistungsfluss-Seite anzeigen"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mostrar marca de tiempo de la última actualización"
+            "value" : "Mostrar en la página de flujo de energía"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mostra l'ultima marca di tempo dell'ultimo aggiornamento"
+            "value" : "Mostra nella pagina del flusso di potenza"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pokaż znacznik ostatniej aktualizacji"
-          }
-        }
-      }
-    },
-    "Show on flow page" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Auf Flussseite anzeigen"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mostrar en la página de flujo"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mostra sulla pagina del flusso"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pokaż na stronie przepływu"
+            "value" : "Pokaż na stronie przepływu mocy"
           }
         }
       }
@@ -11555,6 +11513,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pokaż tło z promieniami słonecznymi"
+          }
+        }
+      }
+    },
+    "Show timestamp of last update" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zeitstempel des letzten Updates anzeigen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar marca de tiempo de la última actualización"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra timestamp dell'ultimo aggiornamento"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pokaż znacznik czasu ostatniej aktualizacji"
           }
         }
       }
@@ -11650,9 +11636,6 @@
         }
       }
     },
-    "Site" : {
-
-    },
     "Solar Forecasts" : {
       "localizations" : {
         "de" : {
@@ -11677,6 +11660,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prognozy Solarne"
+          }
+        }
+      }
+    },
+    "Solar today" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PV Ertrag heute"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rendimiento hoy"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resa oggi"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dzisiejszy wydajność"
           }
         }
       }
@@ -11745,6 +11756,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Generowany przez energię słoneczną"
+          }
+        }
+      }
+    },
+    "Solcast solar prediction" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solcast Solarprognose"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solcast solar prediction"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Previsione solare di Solcast"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prognoza słoneczna Solcast"
           }
         }
       }
@@ -12776,58 +12815,58 @@
         }
       }
     },
-    "Use experimental load formula" : {
+    "Use traditional load formula" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ""
+            "value" : "Traditionelle Lastformel verwenden"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ""
+            "value" : "Usar fórmula de carga tradicional"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ""
+            "value" : "Usa la formula di carico tradizionale"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ""
+            "value" : "Użyj tradycyjnej formuły obciążenia"
           }
         }
       }
     },
-    "Uses a formula to calculate load which should handle +ve/-ve CT2 better in house load. Changes only take effect on next data fetch." : {
+    "Uses the FoxESS loads value to show load which doesn't handle +ve/-ve CT2 very well. Changes only take effect on next data fetch." : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ""
+            "value" : "Verwendet den FoxESS-Lastwert, um die Last anzuzeigen, was nicht sehr gut mit +ve/-ve CT2 umgehen kann. Änderungen treten erst bei der nächsten Datenabfrage in Kraft."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ""
+            "value" : "Uses the FoxESS loads value to show load which doesn't handle +ve/-ve CT2 very well. Changes only take effect on next data fetch."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ""
+            "value" : "Utilizza il valore dei carichi di FoxESS per mostrare il carico, il che non gestisce molto bene i CT2 +ve/-ve. Le modifiche avranno effetto solo al prossimo recupero dati."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ""
+            "value" : "Używa wartości obciążeń FoxESS do pokazania obciążenia, co nie radzi sobie zbyt dobrze z CT2 +ve/-ve. Zmiany zostaną wprowadzone przy następnym pobieraniu danych."
           }
         }
       }
@@ -13206,34 +13245,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rok"
-          }
-        }
-      }
-    },
-    "Yield today" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "PV Ertrag heute"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rendimiento hoy"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Resa oggi"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dzisiejszy wydajność"
           }
         }
       }

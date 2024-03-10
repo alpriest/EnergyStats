@@ -19,12 +19,12 @@ struct FinancialsSettingsView: View {
         Form {
             Section {
                 Toggle(isOn: $viewModel.showFinancialSummary) {
-                    Text("Show financial summary")
+                    Text("Show estimated earnings")
                 }.accessibilityIdentifier("toggle_financial_summary")
 
                 if viewModel.showFinancialSummary {
                     Toggle(isOn: $viewModel.showFinancialSummaryOnFlowPage) {
-                        Text("Show on flow page")
+                        Text("Show on power flow page")
                     }
 
                     makeCurrencySymbolField()

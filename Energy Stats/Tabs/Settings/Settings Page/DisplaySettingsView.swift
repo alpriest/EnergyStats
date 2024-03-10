@@ -44,7 +44,7 @@ struct DisplaySettingsView: View {
 
             Group {
                 Toggle(isOn: $viewModel.showLastUpdateTimestamp) {
-                    Text("Show last update timestamp")
+                    Text("Show timestamp of last update")
                 }
 
                 Toggle(isOn: $viewModel.showGraphValueDescriptions) {
@@ -58,6 +58,12 @@ struct DisplaySettingsView: View {
                 Toggle(isOn: $viewModel.showBatteryPercentageRemaining) {
                     Text("Show battery percentage remaining")
                 }
+            }
+
+            NavigationLink {
+                SolarBandingSettingsView(configManager: configManager)
+            } label: {
+                Text("Sun display variation thresholds")
             }
         } header: {
             Text("Display")
@@ -120,34 +126,28 @@ struct DisplaySettingsView: View {
         NavigationLink {
             SelfSufficiencySettingsView(configManager: configManager)
         } label: {
-            Text("Self Sufficiency Estimates")
+            Text("Self sufficiency estimates")
         }
 
         NavigationLink {
             FinancialsSettingsView(configManager: configManager)
         } label: {
-            Text("Financial Model")
+            Text("Earnings")
                 .accessibilityIdentifier("financials")
-        }
-
-        NavigationLink {
-            SolarBandingSettingsView(configManager: configManager)
-        } label: {
-            Text("Sun display variation thresholds")
         }
 
         NavigationLink {
             SolcastSettingsView(configManager: configManager, solarService: solarService)
         } label: {
-            Text("Solcast Solar Prediction")
+            Text("Solcast solar prediction")
         }
 
         Section {
-            Toggle(isOn: $viewModel.useExperimentalLoadFormula) {
-                Text("Use experimental load formula")
+            Toggle(isOn: $viewModel.useTraditionalLoadFormula) {
+                Text("Use traditional load formula")
             }
         } footer: {
-            Text("Uses a formula to calculate load which should handle +ve/-ve CT2 better in house load. Changes only take effect on next data fetch.")
+            Text("Uses the FoxESS loads value to show load which doesn't handle +ve/-ve CT2 very well. Changes only take effect on next data fetch.")
         }
     }
 }

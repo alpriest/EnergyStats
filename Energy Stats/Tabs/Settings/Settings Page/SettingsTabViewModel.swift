@@ -160,9 +160,9 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
-    @Published var useExperimentalLoadFormula: Bool {
+    @Published var useTraditionalLoadFormula: Bool {
         didSet {
-            config.useExperimentalLoadFormula = useExperimentalLoadFormula
+            config.useExperimentalLoadFormula = !useTraditionalLoadFormula
         }
     }
 
@@ -199,7 +199,7 @@ class SettingsTabViewModel: ObservableObject {
         separateParameterGraphsByUnit = config.separateParameterGraphsByUnit
         showInverterTypeName = config.showInverterTypeName
         shouldCombineCT2WithLoadsPower = config.shouldCombineCT2WithLoadsPower
-        useExperimentalLoadFormula = config.useExperimentalLoadFormula
+        useTraditionalLoadFormula = !config.useExperimentalLoadFormula
         powerFlowStrings = config.powerFlowStrings
         showBatteryPercentageRemaining = config.showBatteryPercentageRemaining
         powerStation = config.powerStationDetail

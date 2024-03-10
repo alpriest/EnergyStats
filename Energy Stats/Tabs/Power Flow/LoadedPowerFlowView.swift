@@ -32,7 +32,7 @@ struct LoadedPowerFlowView: View {
                 } else {
                     if appSettings.showTotalYieldOnPowerFlow {
                         HStack(spacing: 0) {
-                            (Text("Yield today") + Text(" ")).accessibilityHidden(true)
+                            (Text("Solar today") + Text(" ")).accessibilityHidden(true)
                             EnergyText(amount: viewModel.todaysGeneration.todayGeneration(), appSettings: appSettings, type: .totalYield)
                         }
                         .padding(.bottom, 8)

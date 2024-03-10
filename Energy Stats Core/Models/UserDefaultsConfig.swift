@@ -221,7 +221,7 @@ public class UserDefaultsConfig: Config {
     @UserDefaultsStoredCodable(key: "variables", defaultValue: [])
     public var variables: [Variable]
 
-    @UserDefaultsStoredBool(key: "useExperimentalLoadFormula", defaultValue: false)
+    @UserDefaultsStoredBool(key: "useExperimentalLoadFormula", defaultValue: true)
     public var useExperimentalLoadFormula: Bool
 
     @UserDefaultsStoredCodable(key: "powerFlowStringsSettings", defaultValue: PowerFlowStringsSettings.none)
