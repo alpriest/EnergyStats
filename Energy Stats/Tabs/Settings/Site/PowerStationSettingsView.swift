@@ -22,7 +22,6 @@ struct PowerStationSettingsView: View {
             }
         }
         .navigationTitle("Power station")
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

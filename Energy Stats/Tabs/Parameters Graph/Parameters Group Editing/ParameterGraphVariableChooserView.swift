@@ -72,7 +72,6 @@ struct ParameterGraphVariableChooserView: View {
                 }
             }
             .navigationTitle("Parameter Groups")
-            .navigationBarTitleDisplayMode(.inline)
             .toolbar { ToolbarItem(placement: .navigationBarTrailing) {
                 NavigationLink(destination: { ParameterVariableGroupEditorView(viewModel: ParameterVariableGroupEditorViewModel(configManager: viewModel.configManager)) },
                                label: { Text("Edit") })

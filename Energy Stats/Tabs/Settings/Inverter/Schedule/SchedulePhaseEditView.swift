@@ -136,6 +136,8 @@ struct SchedulePhaseEditView: View {
         .onChange(of: minSOC) { _ in validate() }
         .onChange(of: fdSOC) { _ in validate() }
         .onChange(of: fdPower) { _ in validate() }
+        .navigationTitle("Edit phase")
+        .navigationBarTitleDisplayMode(.inline)
     }
 
     private func save() {

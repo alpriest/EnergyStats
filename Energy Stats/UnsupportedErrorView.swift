@@ -14,7 +14,6 @@ struct UnsupportedErrorView: View {
         NavigationView {
             RemoteMarkdownView(url: "https://raw.githubusercontent.com/wiki/alpriest/EnergyStats-Android/Unsupported.md")
                 .navigationTitle("Unsupported")
-                .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button {

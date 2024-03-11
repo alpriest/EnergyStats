@@ -39,8 +39,7 @@ struct SolcastSettingsView: View {
                 viewModel.save()
             }
         }
-        .navigationTitle("Solcast Solar Prediction")
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("Solar Prediction")
         .alert(alertContent: $viewModel.alertContent)
     }
 }

@@ -38,7 +38,6 @@ struct FinancialsSettingsView: View {
             }
         }
         .navigationTitle("Financial Model")
-        .navigationBarTitleDisplayMode(.inline)
     }
 
     @ViewBuilder

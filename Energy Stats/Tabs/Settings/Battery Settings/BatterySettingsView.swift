@@ -112,7 +112,6 @@ struct BatterySettingsView: View {
             }
         }
         .navigationTitle("Battery")
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

@@ -113,7 +113,6 @@ struct DataLoggersView: View {
             viewModel.load()
         }
         .navigationTitle("Datalogger")
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

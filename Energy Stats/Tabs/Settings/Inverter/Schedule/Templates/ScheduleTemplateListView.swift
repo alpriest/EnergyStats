@@ -63,7 +63,6 @@ struct ScheduleTemplateListView: View {
         }
         .onAppear { Task { await viewModel.load() } }
         .navigationTitle("Templates")
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

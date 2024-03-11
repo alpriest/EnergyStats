@@ -2511,6 +2511,9 @@
         }
       }
     },
+    "Battery Charge Levels" : {
+
+    },
     "Battery error. Tap for detail" : {
       "localizations" : {
         "de" : {
@@ -2920,34 +2923,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Obliczone jako "
-          }
-        }
-      }
-    },
-    "Calculated as a Riemann sum approximation integration of pvPower. This will be reasonably accurate but only for today." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Berechnet als eine Riemann-Summen-Approximation der Integration von pvPower. Dies wird für heute recht genau sein."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Calculado como una aproximación de la suma de Riemann de la integración de pvPower. Esto será razonablemente preciso, pero solo para hoy."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Calcolato come un'approssimazione della somma di Riemann dell'integrazione di pvPower. Questo sarà ragionevolmente accurato, ma solo per oggi."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Obliczona jako przybliżenie sumy Riemanna całkowania pvPower. Będzie to dość dokładne, ale tylko na dzisiaj."
           }
         }
       }
@@ -3449,6 +3424,7 @@
       }
     },
     "Configure Battery Charge Levels" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -3919,7 +3895,11 @@
         }
       }
     },
+    "Data" : {
+
+    },
     "Data Refresh frequency" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4607,31 +4587,31 @@
       "localizations" : {
         "de" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Die Werte werden in Kilowatt angezeigt, es sei denn, sie sind unter 1 Kilowatt, dann werden sie in Watt angezeigt. Zum Beispiel %1$@, %2$@"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Values are shown as kilowatts unless under 1 kilowatt when they are shown as watts. E.g. %1$@, %2$@"
+            "value" : "Values will be shown as kilowatts unless under 1 kilowatt when they are shown as watts. E.g. %1$@, %2$@"
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Los valores se muestran en kilovatios a menos que sean menores de 1 kilovatio, en cuyo caso se muestran en vatios. Por ejemplo, %1$@, %2$@"
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "I valori vengono espressi in kilowatt a meno che non siano inferiori a 1 kilowatt, momento in cui vengono espressi in watt. Ad esempio, %1$@, %2$@"
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Wartości są wyświetlane w kilowatach, chyba że są mniejsze niż 1 kilowat, wtedy są wyświetlane w watach. Na przykład %1$@, %2$@"
           }
         }
@@ -4642,31 +4622,31 @@
       "localizations" : {
         "de" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Alle Werte werden in Kilowatt angezeigt. Zum Beispiel %1$@, %2$@"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "All values are shown as kilowatts. E.g. %1$@, %2$@"
+            "value" : "All values will be shown as kilowatts. E.g. %1$@, %2$@"
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Todos los valores se muestran en kilovatios. Por ejemplo, %1$@, %2$@"
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Tutti i valori sono espressi in kilowatt. Ad esempio, %1$@, %2$@"
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Wszystkie wartości są wyświetlane w kilowatach. Na przykład %1$@, %2$@"
           }
         }
@@ -4677,31 +4657,31 @@
       "localizations" : {
         "de" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Alle Werte werden in Watt angezeigt. Zum Beispiel %1$@, %2$@"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "All values are shown as watts. E.g. %1$@, %2$@"
+            "value" : "All values will be shown as watts. E.g. %1$@, %2$@"
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Todos los valores se muestran en vatios. Por ejemplo, %1$@, %2$@"
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Tutti i valori sono espressi in watt. Ad esempio, %1$@, %2$@"
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Wszystkie wartości są wyświetlane w watach. Na przykład %1$@, %2$@"
           }
         }
@@ -4825,6 +4805,9 @@
           }
         }
       }
+    },
+    "Edit phase" : {
+
     },
     "Edit schedule" : {
       "localizations" : {
@@ -6532,34 +6515,6 @@
         }
       }
     },
-    "If you have multiple sets of solar panels, e.g. front/rear of your home, this will let you see the power being generated by each set. Setting takes effect on next data fetch." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wenn Sie mehrere Sätze von Solarmodulen haben, z.B. an der Vorder-/Rückseite Ihres Hauses, können Sie damit die von jedem Satz erzeugte Leistung sehen. Die Einstellung wird beim nächsten Datenabruf wirksam."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Si tienes varios conjuntos de paneles solares, por ejemplo, en el frente/trasero de tu casa, esto te permitirá ver la energía generada por cada conjunto. La configuración tendrá efecto en la próxima obtención de datos."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Se hai più set di pannelli solari, ad esempio sul fronte/retro della tua casa, ciò ti permetterà di vedere l'energia generata da ogni set. L'impostazione avrà effetto al prossimo recupero dati."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Jeśli masz kilka zestawów paneli słonecznych, np. na przodzie/tyłach domu, pozwoli Ci to zobaczyć moc generowaną przez każdy zestaw. Ustawienie zacznie obowiązywać przy następnym pobieraniu danych."
-          }
-        }
-      }
-    },
     "If you need to change your API key then you can replace it above without losing your settings." : {
       "localizations" : {
         "de" : {
@@ -6702,6 +6657,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zawiera dane od %@ do teraz. Liczby są przybliżone i zakładają, że ceny kupna/sprzedaży energii pozostały stałe przez cały okres posiadania."
+          }
+        }
+      }
+    },
+    "info" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Info"
           }
         }
       }
@@ -10027,6 +9993,9 @@
         }
       }
     },
+    "Refresh" : {
+
+    },
     "Refresh frequency" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -10844,40 +10813,6 @@
         }
       }
     },
-    "settings.dataRefreshFrequencyHeader" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Datenaktualisierungsfrequenz"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Data Refresh frequency"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Frecuencia de actualización de datos"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Frequenza di aggiornamento dati"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Częstotliwość odświeżania danych"
-          }
-        }
-      }
-    },
     "settings.debug" : {
       "localizations" : {
         "de" : {
@@ -11050,6 +10985,40 @@
         }
       }
     },
+    "settings.pvpower.strings.description" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wenn Sie mehrere Sätze von Solarmodulen haben, z.B. an der Vorder-/Rückseite Ihres Hauses, können Sie damit die von jedem Satz erzeugte Leistung sehen. Die Einstellung wird beim nächsten Datenabruf wirksam."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If you have multiple sets of solar panels, e.g. front/rear of your home, this will let you see the power being generated by each set. Setting takes effect on next data fetch."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Si tienes varios conjuntos de paneles solares, por ejemplo, en el frente/trasero de tu casa, esto te permitirá ver la energía generada por cada conjunto. La configuración tendrá efecto en la próxima obtención de datos."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Se hai più set di pannelli solari, ad esempio sul fronte/retro della tua casa, ciò ti permetterà di vedere l'energia generata da ogni set. L'impostazione avrà effetto al prossimo recupero dati."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Jeśli masz kilka zestawów paneli słonecznych, np. na przodzie/tyłach domu, pozwoli Ci to zobaczyć moc generowaną przez każdy zestaw. Ustawienie zacznie obowiązywać przy następnym pobieraniu danych."
+          }
+        }
+      }
+    },
     "settings.showGridTotalsOnPowerflow" : {
       "localizations" : {
         "de" : {
@@ -11114,6 +11083,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pokaż codzienne sumy w domu"
+          }
+        }
+      }
+    },
+    "settings.yield.description" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Berechnet als eine Riemann-Summen-Approximation der Integration von pvPower. Dies wird für heute recht genau sein."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calculated as a Riemann sum approximation integration of pvPower. This will be reasonably accurate but only for today."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Calculado como una aproximación de la suma de Riemann de la integración de pvPower. Esto será razonablemente preciso, pero solo para hoy."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Calcolato come un'approssimazione della somma di Riemann dell'integrazione di pvPower. Questo sarà ragionevolmente accurato, ma solo per oggi."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Obliczona jako przybliżenie sumy Riemanna całkowania pvPower. Będzie to dość dokładne, ale tylko na dzisiaj."
           }
         }
       }
@@ -11692,6 +11695,9 @@
         }
       }
     },
+    "Solar Prediction" : {
+
+    },
     "Solar today" : {
       "localizations" : {
         "de" : {
@@ -11817,6 +11823,7 @@
       }
     },
     "Solcast Solar Prediction" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -11911,6 +11918,9 @@
           }
         }
       }
+    },
+    "Something" : {
+
     },
     "Start" : {
       "localizations" : {

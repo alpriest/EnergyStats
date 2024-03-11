@@ -4,3 +4,4 @@
 username "alpriest@gmail.com"
 app_identifier "com.alpriest.EnergyStats"
 ignore_language_directory_validation true
+overwrite_screenshots true

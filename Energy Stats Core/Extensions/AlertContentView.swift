@@ -27,7 +27,7 @@ struct AlertContentView: ViewModifier {
         content
             .alert(isPresented: showing) {
                 if let alertContent {
-                    return Alert(title: Text(alertContent.title),
+                    return Alert(title: Text(alertContent.title ?? ""),
                                  message: Text(alertContent.message),
                                  dismissButton: .default(
                                      Text("OK"),

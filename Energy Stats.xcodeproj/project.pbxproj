@@ -79,6 +79,7 @@
 		4130364B29B8BE7F006B5CE9 /* InverterChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4130364A29B8BE7F006B5CE9 /* InverterChoiceView.swift */; };
 		4131AF4B2B5288CF00836B77 /* Network+OpenAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4131AF4A2B5288CF00836B77 /* Network+OpenAPI.swift */; };
 		4131AF4D2B5288F400836B77 /* OpenQueryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4131AF4C2B5288F400836B77 /* OpenQueryResponse.swift */; };
+		413208702B9E3BC400A31873 /* DataSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4132086F2B9E3BC400A31873 /* DataSettingsView.swift */; };
 		4134ACC42A88A1A800CB4BA8 /* InverterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4134ACC32A88A1A800CB4BA8 /* InverterView.swift */; };
 		413B7A312A4A390C00562A68 /* SelfSufficiencyCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413B7A302A4A390C00562A68 /* SelfSufficiencyCalculator.swift */; };
 		413B7A3A2A4A397000562A68 /* Energy_Stats_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; platformFilter = ios; };
@@ -223,6 +224,7 @@
 		41D759FF2B5B176A002C43A7 /* EditScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C09202B18A98400183603 /* EditScheduleViewModel.swift */; };
 		41D75A012B5C0238002C43A7 /* Bool+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D75A002B5C0238002C43A7 /* Bool+Int.swift */; };
 		41D75A032B6009D5002C43A7 /* UpgradeRequiredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D75A022B6009D5002C43A7 /* UpgradeRequiredView.swift */; };
+		41D7AB902B9F1F6C00FFDFC0 /* InfoButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D7AB8F2B9F1F6C00FFDFC0 /* InfoButtonView.swift */; };
 		41D8402D2AB2E0DE00769E81 /* ErrorMessagesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D8402C2AB2E0DE00769E81 /* ErrorMessagesResponse.swift */; };
 		41DB4F2D2B4940A800DAB5BB /* ConfigManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DB4F2C2B4940A800DAB5BB /* ConfigManaging.swift */; };
 		41DC515A2AE2E9DC00FD348B /* NetworkValueCleaner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DC51592AE2E9DC00FD348B /* NetworkValueCleaner.swift */; };
@@ -422,6 +424,7 @@
 		4130364A29B8BE7F006B5CE9 /* InverterChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterChoiceView.swift; sourceTree = "<group>"; };
 		4131AF4A2B5288CF00836B77 /* Network+OpenAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+OpenAPI.swift"; sourceTree = "<group>"; };
 		4131AF4C2B5288F400836B77 /* OpenQueryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenQueryResponse.swift; sourceTree = "<group>"; };
+		4132086F2B9E3BC400A31873 /* DataSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSettingsView.swift; sourceTree = "<group>"; };
 		41339C7328CC7BA50062B976 /* KeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStore.swift; sourceTree = "<group>"; };
 		4134ACC32A88A1A800CB4BA8 /* InverterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterView.swift; sourceTree = "<group>"; };
 		413B7A302A4A390C00562A68 /* SelfSufficiencyCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSufficiencyCalculator.swift; sourceTree = "<group>"; };
@@ -590,6 +593,7 @@
 		41D759FC2B5B0E37002C43A7 /* Network+OpenAPI+Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+OpenAPI+Schedule.swift"; sourceTree = "<group>"; };
 		41D75A002B5C0238002C43A7 /* Bool+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+Int.swift"; sourceTree = "<group>"; };
 		41D75A022B6009D5002C43A7 /* UpgradeRequiredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeRequiredView.swift; sourceTree = "<group>"; };
+		41D7AB8F2B9F1F6C00FFDFC0 /* InfoButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoButtonView.swift; sourceTree = "<group>"; };
 		41D7B12328C86E4000E14144 /* FoxEssCloudParseStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoxEssCloudParseStrategy.swift; sourceTree = "<group>"; };
 		41D8402C2AB2E0DE00769E81 /* ErrorMessagesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessagesResponse.swift; sourceTree = "<group>"; };
 		41DB220E2B1F965C00EC4015 /* EditTemplateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTemplateView.swift; sourceTree = "<group>"; };
@@ -733,6 +737,7 @@
 				4160098C2A8D1A690096CCD9 /* BottomButtonsView.swift */,
 				41CF044B2A95006E00ADCCAD /* ExternalWebNavigationLink.swift */,
 				41ED2EEF2B349EF7001CF277 /* CustomDatePicker.swift */,
+				41D7AB8F2B9F1F6C00FFDFC0 /* InfoButtonView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1010,6 +1015,7 @@
 				41E8E7232AADFB3900DC4B89 /* SolarBandingSettingsView.swift */,
 				41A263212B6AEE9F0027E52A /* ConfigureAPIKeyView.swift */,
 				41EB28022B8E634F00F6127F /* SolarStringsSettingsView.swift */,
+				4132086F2B9E3BC400A31873 /* DataSettingsView.swift */,
 			);
 			path = "Settings Page";
 			sourceTree = "<group>";
@@ -1607,6 +1613,7 @@
 				41AB53402B9319B900B6C371 /* SolarStringsView.swift in Sources */,
 				411DF2742AFD404E00CEEB23 /* SolarForecastView.swift in Sources */,
 				4110290D2A71B713004018BB /* BatteryChargeScheduleSettingsView.swift in Sources */,
+				413208702B9E3BC400A31873 /* DataSettingsView.swift in Sources */,
 				419AB4802AA36D24002CBC96 /* DisplaySettingsView.swift in Sources */,
 				418EEEB52916843A006A8290 /* View+If.swift in Sources */,
 				41C8496B2A8BBF1500431410 /* InverterIconView.swift in Sources */,
@@ -1691,6 +1698,7 @@
 				41E1DFDF28D87781001235B9 /* SettingsTabView.swift in Sources */,
 				41C0923B2B20FCB0001D1E22 /* SchedulePhaseHelper.swift in Sources */,
 				4107446328CA1C5D006D5D7D /* PowerFlowView.swift in Sources */,
+				41D7AB902B9F1F6C00FFDFC0 /* InfoButtonView.swift in Sources */,
 				41A25D3F28CA5CFB00315714 /* ParametersGraphTabViewModel.swift in Sources */,
 				4107446128C9EF6B006D5D7D /* LoadedPowerFlowView.swift in Sources */,
 				4190922C2B1E49210017CB65 /* ScheduleView.swift in Sources */,
