@@ -119,6 +119,7 @@ struct DataSettingsView: View {
     }
 }
 
+#if DEBUG
 #Preview {
     NavigationView {
         DataSettingsView(
@@ -130,3 +131,4 @@ struct DataSettingsView: View {
         )
     }
 }
+#endif
