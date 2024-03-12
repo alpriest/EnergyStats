@@ -2076,6 +2076,40 @@
         }
       }
     },
+    "api_key_change_reason_2" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bitte stellen Sie sicher, dass das Systemdatum/die Systemzeit auf Ihrem Gerät auf 'automatisch' eingestellt ist, da Sie sonst möglicherweise nicht mit Ihrem API-Schlüssel anmelden können."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please ensure the system date/time on your device is set to 'automatic' otherwise you may be unable to login with your API key."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Por favor, asegúrese de que la fecha/hora del sistema en su dispositivo esté configurada en 'automático', de lo contrario, puede que no pueda iniciar sesión con su clave API."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Assicurati che la data/l'ora del sistema sul tuo dispositivo sia impostata su 'automatico', altrimenti potresti non essere in grado di accedere con la tua chiave API."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upewnij się, że data/czas systemu na Twoim urządzeniu jest ustawiona na 'automatyczny', w przeciwnym razie możesz nie być w stanie zalogować się za pomocą klucza API."
+          }
+        }
+      }
+    },
     "App Version %@ is available" : {
       "localizations" : {
         "de" : {
@@ -2512,7 +2546,32 @@
       }
     },
     "Battery Charge Levels" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Batterieladezustände"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Niveles de Carga de la Batería"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Livelli di Carica della Batteria"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poziomy Naładowania Baterii"
+          }
+        }
+      }
     },
     "Battery error. Tap for detail" : {
       "localizations" : {
@@ -3423,35 +3482,6 @@
         }
       }
     },
-    "Configure Battery Charge Levels" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Batterieladepegel konfigurieren"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Configurar niveles de carga de la batería"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Configura i livelli di carica della batteria"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Konfiguruj poziomy naładowania baterii"
-          }
-        }
-      }
-    },
     "Continue" : {
       "localizations" : {
         "de" : {
@@ -3667,7 +3697,7 @@
       "localizations" : {
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Anmeldung nicht möglich. Prüfen Sie Ihre Internetverbindung"
           }
         },
@@ -3679,19 +3709,19 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Nie można się zalogować. Sprawdź swoje połączenie z internetem"
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Impossibile effettuare il login. Controlla la connessione internet."
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Nie można się zalogować. Sprawdź swoje połączenie z internetem"
           }
         }
@@ -3896,33 +3926,29 @@
       }
     },
     "Data" : {
-
-    },
-    "Data Refresh frequency" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Datenaktualisierungshäufigkeit"
+            "value" : "Daten"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Frecuencia de actualización de datos"
+            "value" : "Datos"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Frequenza di aggiornamento dati"
+            "value" : "Dati"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Częstotliwość odświeżania danych"
+            "value" : "Dane"
           }
         }
       }
@@ -4587,7 +4613,7 @@
       "localizations" : {
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Die Werte werden in Kilowatt angezeigt, es sei denn, sie sind unter 1 Kilowatt, dann werden sie in Watt angezeigt. Zum Beispiel %1$@, %2$@"
           }
         },
@@ -4599,19 +4625,19 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Los valores se muestran en kilovatios a menos que sean menores de 1 kilovatio, en cuyo caso se muestran en vatios. Por ejemplo, %1$@, %2$@"
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "I valori vengono espressi in kilowatt a meno che non siano inferiori a 1 kilowatt, momento in cui vengono espressi in watt. Ad esempio, %1$@, %2$@"
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Wartości są wyświetlane w kilowatach, chyba że są mniejsze niż 1 kilowat, wtedy są wyświetlane w watach. Na przykład %1$@, %2$@"
           }
         }
@@ -4622,7 +4648,7 @@
       "localizations" : {
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Alle Werte werden in Kilowatt angezeigt. Zum Beispiel %1$@, %2$@"
           }
         },
@@ -4634,19 +4660,19 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Todos los valores se muestran en kilovatios. Por ejemplo, %1$@, %2$@"
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Tutti i valori sono espressi in kilowatt. Ad esempio, %1$@, %2$@"
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Wszystkie wartości są wyświetlane w kilowatach. Na przykład %1$@, %2$@"
           }
         }
@@ -4657,7 +4683,7 @@
       "localizations" : {
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Alle Werte werden in Watt angezeigt. Zum Beispiel %1$@, %2$@"
           }
         },
@@ -4669,19 +4695,19 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Todos los valores se muestran en vatios. Por ejemplo, %1$@, %2$@"
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Tutti i valori sono espressi in watt. Ad esempio, %1$@, %2$@"
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Wszystkie wartości są wyświetlane w watach. Na przykład %1$@, %2$@"
           }
         }
@@ -4807,7 +4833,32 @@
       }
     },
     "Edit phase" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Phase Bearbeiten"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar Fase"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modifica Fase"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edytuj Fazę"
+          }
+        }
+      }
     },
     "Edit schedule" : {
       "localizations" : {
@@ -6657,17 +6708,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zawiera dane od %@ do teraz. Liczby są przybliżone i zakładają, że ceny kupna/sprzedaży energii pozostały stałe przez cały okres posiadania."
-          }
-        }
-      }
-    },
-    "info" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Info"
           }
         }
       }
@@ -9994,7 +10034,32 @@
       }
     },
     "Refresh" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktualisieren"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actualizar"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggiorna"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Odśwież"
+          }
+        }
+      }
     },
     "Refresh frequency" : {
       "extractionState" : "manual",
@@ -10693,7 +10758,6 @@
       }
     },
     "Self Use" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -10989,7 +11053,7 @@
       "localizations" : {
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Wenn Sie mehrere Sätze von Solarmodulen haben, z.B. an der Vorder-/Rückseite Ihres Hauses, können Sie damit die von jedem Satz erzeugte Leistung sehen. Die Einstellung wird beim nächsten Datenabruf wirksam."
           }
         },
@@ -11001,19 +11065,19 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Si tienes varios conjuntos de paneles solares, por ejemplo, en el frente/trasero de tu casa, esto te permitirá ver la energía generada por cada conjunto. La configuración tendrá efecto en la próxima obtención de datos."
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Se hai più set di pannelli solari, ad esempio sul fronte/retro della tua casa, ciò ti permetterà di vedere l'energia generata da ogni set. L'impostazione avrà effetto al prossimo recupero dati."
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Jeśli masz kilka zestawów paneli słonecznych, np. na przodzie/tyłach domu, pozwoli Ci to zobaczyć moc generowaną przez każdy zestaw. Ustawienie zacznie obowiązywać przy następnym pobieraniu danych."
           }
         }
@@ -11091,7 +11155,7 @@
       "localizations" : {
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Berechnet als eine Riemann-Summen-Approximation der Integration von pvPower. Dies wird für heute recht genau sein."
           }
         },
@@ -11103,19 +11167,19 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Calculado como una aproximación de la suma de Riemann de la integración de pvPower. Esto será razonablemente preciso, pero solo para hoy."
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Calcolato come un'approssimazione della somma di Riemann dell'integrazione di pvPower. Questo sarà ragionevolmente accurato, ma solo per oggi."
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Obliczona jako przybliżenie sumy Riemanna całkowania pvPower. Będzie to dość dokładne, ale tylko na dzisiaj."
           }
         }
@@ -11696,7 +11760,32 @@
       }
     },
     "Solar Prediction" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sonnenvorhersage"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Predicción Solar"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Previsione Solare"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prognoza Słoneczna"
+          }
+        }
+      }
     },
     "Solar today" : {
       "localizations" : {
@@ -11822,35 +11911,6 @@
         }
       }
     },
-    "Solcast Solar Prediction" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Solcast Solarprognose"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Predicción Solar de Solcast"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Previsione Solare di Solcast"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prognoza Solarna Solcast"
-          }
-        }
-      }
-    },
     "Solcast_description" : {
       "localizations" : {
         "de" : {
@@ -11918,9 +11978,6 @@
           }
         }
       }
-    },
-    "Something" : {
-
     },
     "Start" : {
       "localizations" : {

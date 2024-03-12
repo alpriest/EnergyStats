@@ -1,323 +1,114 @@
 {
   "errno": 0,
+  "msg": "success",
   "result": [
-      {
-        "variable": "loads",
-        "data": [
-          {
-            "index": 1,
-            "value": 1.5
-          },
-          {
-            "index": 2,
-            "value": 2.9000000000000057
-          },
-          {
-            "index": 3,
-            "value": 22
-          },
-          {
-            "index": 4,
-            "value": 195.4
-          },
-          {
-            "index": 5,
-            "value": 219.89999999999998
-          },
-          {
-            "index": 6,
-            "value": 0
-          },
-          {
-            "index": 7,
-            "value": 0
-          },
-          {
-            "index": 8,
-            "value": 0
-          },
-          {
-            "index": 9,
-            "value": 0
-          },
-          {
-            "index": 10,
-            "value": 0
-          },
-          {
-            "index": 11,
-            "value": 0
-          },
-          {
-            "index": 12,
-            "value": 0
-          }
-        ]
-      },
-      {
-      "variable": "feedin",
-      "data": [
-        {
-          "index": 1,
-          "value": 1.5
-        },
-        {
-          "index": 2,
-          "value": 2.9000000000000057
-        },
-        {
-          "index": 3,
-          "value": 22
-        },
-        {
-          "index": 4,
-          "value": 195.4
-        },
-        {
-          "index": 5,
-          "value": 219.89999999999998
-        },
-        {
-          "index": 6,
-          "value": 0
-        },
-        {
-          "index": 7,
-          "value": 0
-        },
-        {
-          "index": 8,
-          "value": 0
-        },
-        {
-          "index": 9,
-          "value": 0
-        },
-        {
-          "index": 10,
-          "value": 0
-        },
-        {
-          "index": 11,
-          "value": 0
-        },
-        {
-          "index": 12,
-          "value": 0
-        }
-      ]
+    {
+      "unit": "kWh",
+      "values": [
+        9.0,
+        26.59999999999991,
+        40.40000000000009,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "variable": "feedin"
     },
     {
-      "variable": "generation",
-      "data": [
-        {
-          "index": 1,
-          "value": 101.29999999999995
-        },
-        {
-          "index": 2,
-          "value": 149.80000000000018
-        },
-        {
-          "index": 3,
-          "value": 253.79999999999995
-        },
-        {
-          "index": 4,
-          "value": 446.70000000000005
-        },
-        {
-          "index": 5,
-          "value": 390.7000000000007
-        },
-        {
-          "index": 6,
-          "value": 0
-        },
-        {
-          "index": 7,
-          "value": 0
-        },
-        {
-          "index": 8,
-          "value": 0
-        },
-        {
-          "index": 9,
-          "value": 0
-        },
-        {
-          "index": 10,
-          "value": 0
-        },
-        {
-          "index": 11,
-          "value": 0
-        },
-        {
-          "index": 12,
-          "value": 0
-        }
-      ]
+      "unit": "kWh",
+      "values": [
+        272.0,
+        306.40000000000055,
+        155.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "variable": "generation"
     },
     {
-      "variable": "chargeEnergyToTal",
-      "data": [
-        {
-          "index": 1,
-          "value": 66.79999999999995
-        },
-        {
-          "index": 2,
-          "value": 94.60000000000014
-        },
-        {
-          "index": 3,
-          "value": 154.79999999999995
-        },
-        {
-          "index": 4,
-          "value": 148.30000000000007
-        },
-        {
-          "index": 5,
-          "value": 94.70000000000005
-        },
-        {
-          "index": 6,
-          "value": 0
-        },
-        {
-          "index": 7,
-          "value": 0
-        },
-        {
-          "index": 8,
-          "value": 0
-        },
-        {
-          "index": 9,
-          "value": 0
-        },
-        {
-          "index": 10,
-          "value": 0
-        },
-        {
-          "index": 11,
-          "value": 0
-        },
-        {
-          "index": 12,
-          "value": 0
-        }
-      ]
+      "unit": "kWh",
+      "values": [
+        260.9000000000001,
+        262.0,
+        103.70000000000027,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "variable": "chargeEnergyToTal"
     },
     {
-      "variable": "dischargeEnergyToTal",
-      "data": [
-        {
-          "index": 1,
-          "value": 63.099999999999966
-        },
-        {
-          "index": 2,
-          "value": 89.39999999999998
-        },
-        {
-          "index": 3,
-          "value": 146
-        },
-        {
-          "index": 4,
-          "value": 141.5999999999998
-        },
-        {
-          "index": 5,
-          "value": 86.20000000000016
-        },
-        {
-          "index": 6,
-          "value": 0
-        },
-        {
-          "index": 7,
-          "value": 0
-        },
-        {
-          "index": 8,
-          "value": 0
-        },
-        {
-          "index": 9,
-          "value": 0
-        },
-        {
-          "index": 10,
-          "value": 0
-        },
-        {
-          "index": 11,
-          "value": 0
-        },
-        {
-          "index": 12,
-          "value": 0
-        }
-      ]
+      "unit": "kWh",
+      "values": [
+        248.30000000000064,
+        250.0999999999999,
+        95.90000000000009,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "variable": "dischargeEnergyToTal"
     },
     {
-      "variable": "gridConsumption",
-      "data": [
-        {
-          "index": 1,
-          "value": 272.4999999999999
-        },
-        {
-          "index": 2,
-          "value": 153
-        },
-        {
-          "index": 3,
-          "value": 101.80000000000018
-        },
-        {
-          "index": 4,
-          "value": 19.40000000000009
-        },
-        {
-          "index": 5,
-          "value": 4.7000000000000455
-        },
-        {
-          "index": 6,
-          "value": 0
-        },
-        {
-          "index": 7,
-          "value": 0
-        },
-        {
-          "index": 8,
-          "value": 0
-        },
-        {
-          "index": 9,
-          "value": 0
-        },
-        {
-          "index": 10,
-          "value": 0
-        },
-        {
-          "index": 11,
-          "value": 0
-        },
-        {
-          "index": 12,
-          "value": 0
-        }
-      ]
+      "unit": "kWh",
+      "values": [
+        626.8000000000006,
+        521.5999999999999,
+        252.89999999999964,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "variable": "gridConsumption"
+    },
+    {
+      "unit": "kWh",
+      "values": [
+        644.1000000000022,
+        576.8999999999996,
+        278.3000000000002,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "variable": "loads"
     }
   ]
 }

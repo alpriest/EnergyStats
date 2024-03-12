@@ -25,5 +25,5 @@ struct InfoButtonView: View {
 }
 
 #Preview {
-    InfoButtonView(message: "Something")
+    InfoButtonView(message: "Self Use")
 }

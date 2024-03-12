@@ -1,323 +1,1650 @@
 {
   "errno": 0,
-  "result": {
-    "deviceType": "",
-    "variables": [
-      {
-        "name": "PV1Volt",
-        "variable": "pv1Volt",
-        "unit": "V"
-      },
-      {
-        "name": "PV1Current",
-        "variable": "pv1Current",
-        "unit": "A"
-      },
-      {
-        "name": "PV1Power",
-        "variable": "pv1Power",
-        "unit": "kW"
-      },
-      {
-        "name": "PVPower",
-        "variable": "pvPower",
-        "unit": "kW"
-      },
-      {
-        "name": "PV2Volt",
-        "variable": "pv2Volt",
-        "unit": "V"
-      },
-      {
-        "name": "PV2Current",
-        "variable": "pv2Current",
-        "unit": "A"
-      },
-      {
-        "name": "PV2Power",
-        "variable": "pv2Power",
-        "unit": "kW"
-      },
-      {
-        "name": "PV3Volt",
-        "variable": "pv3Volt",
-        "unit": "V"
-      },
-      {
-        "name": "PV3Current",
-        "variable": "pv3Current",
-        "unit": "A"
-      },
-      {
-        "name": "PV3Power",
-        "variable": "pv3Power",
-        "unit": "kW"
-      },
-      {
-        "name": "PV4Volt",
-        "variable": "pv4Volt",
-        "unit": "V"
-      },
-      {
-        "name": "PV4Current",
-        "variable": "pv4Current",
-        "unit": "A"
-      },
-      {
-        "name": "PV4Power",
-        "variable": "pv4Power",
-        "unit": "kW"
-      },
-      {
-        "name": "EPSPower",
-        "variable": "epsPower",
-        "unit": "kW"
-      },
-      {
-        "name": "EPS-RCurrent",
-        "variable": "epsCurrentR",
-        "unit": "A"
-      },
-      {
-        "name": "EPS-RVolt",
-        "variable": "epsVoltR",
-        "unit": "V"
-      },
-      {
-        "name": "EPS-RPower",
-        "variable": "epsPowerR",
-        "unit": "kW"
-      },
-      {
-        "name": "EPS-SCurrent",
-        "variable": "epsCurrentS",
-        "unit": "A"
-      },
-      {
-        "name": "EPS-SVolt",
-        "variable": "epsVoltS",
-        "unit": "V"
-      },
-      {
-        "name": "EPS-SPower",
-        "variable": "epsPowerS",
-        "unit": "kW"
-      },
-      {
-        "name": "EPS-TCurrent",
-        "variable": "epsCurrentT",
-        "unit": "A"
-      },
-      {
-        "name": "EPS-TVolt",
-        "variable": "epsVoltT",
-        "unit": "V"
-      },
-      {
-        "name": "EPS-TPower",
-        "variable": "epsPowerT",
-        "unit": "kW"
-      },
-      {
-        "name": "RCurrent",
-        "variable": "RCurrent",
-        "unit": "A"
-      },
-      {
-        "name": "RVolt",
-        "variable": "RVolt",
-        "unit": "V"
-      },
-      {
-        "name": "RFreq",
-        "variable": "RFreq",
-        "unit": "Hz"
-      },
-      {
-        "name": "RPower",
-        "variable": "RPower",
-        "unit": "kW"
-      },
-      {
-        "name": "SCurrent",
-        "variable": "SCurrent",
-        "unit": "A"
-      },
-      {
-        "name": "SVolt",
-        "variable": "SVolt",
-        "unit": "V"
-      },
-      {
-        "name": "SFreq",
-        "variable": "SFreq",
-        "unit": "Hz"
-      },
-      {
-        "name": "SPower",
-        "variable": "SPower",
-        "unit": "kW"
-      },
-      {
-        "name": "TCurrent",
-        "variable": "TCurrent",
-        "unit": "A"
-      },
-      {
-        "name": "TVolt",
-        "variable": "TVolt",
-        "unit": "V"
-      },
-      {
-        "name": "TFreq",
-        "variable": "TFreq",
-        "unit": "Hz"
-      },
-      {
-        "name": "TPower",
-        "variable": "TPower",
-        "unit": "kW"
-      },
-      {
-        "name": "AmbientTemperature",
-        "variable": "ambientTemperation",
-        "unit": "℃"
-      },
-      {
-        "name": "BoostTemperature",
-        "variable": "boostTemperation",
-        "unit": "℃"
-      },
-      {
-        "name": "InvTemperation",
-        "variable": "invTemperation",
-        "unit": "℃"
-      },
-      {
-        "name": "ChargeTemperature",
-        "variable": "chargeTemperature",
-        "unit": "℃"
-      },
-      {
-        "name": "batTemperature",
-        "variable": "batTemperature",
-        "unit": "℃"
-      },
-      {
-        "name": "DSPTemperature",
-        "variable": "dspTemperature",
-        "unit": "℃"
-      },
-      {
-        "name": "Load Power",
-        "variable": "loadsPower",
-        "unit": "kW"
-      },
-      {
-        "name": "LoadsRPower",
-        "variable": "loadsPowerR",
-        "unit": "kW"
-      },
-      {
-        "name": "LoadsSPower",
-        "variable": "loadsPowerS",
-        "unit": "kW"
-      },
-      {
-        "name": "LoadsTPower",
-        "variable": "loadsPowerT",
-        "unit": "kW"
-      },
-      {
-        "name": "Output Power",
-        "variable": "generationPower",
-        "unit": "kW"
-      },
-      {
-        "name": "Feed-in Power",
-        "variable": "feedinPower",
-        "unit": "kW"
-      },
-      {
-        "name": "GridConsumption Power",
-        "variable": "gridConsumptionPower",
-        "unit": "kW"
-      },
-      {
-        "name": "InvBatVolt",
-        "variable": "invBatVolt",
-        "unit": "V"
-      },
-      {
-        "name": "InvBatCurrent",
-        "variable": "invBatCurrent",
-        "unit": "A"
-      },
-      {
-        "name": "invBatPower",
-        "variable": "invBatPower",
-        "unit": "kW"
-      },
-      {
-        "name": "Charge Power",
-        "variable": "batChargePower",
-        "unit": "kW"
-      },
-      {
-        "name": "Discharge Power",
-        "variable": "batDischargePower",
-        "unit": "kW"
-      },
-      {
-        "name": "BatVolt",
-        "variable": "batVolt",
-        "unit": "V"
-      },
-      {
-        "name": "BatCurrent",
-        "variable": "batCurrent",
-        "unit": "A"
-      },
-      {
-        "name": "MeterPower",
-        "variable": "meterPower",
-        "unit": "kW"
-      },
-      {
-        "name": "Meter2Power",
-        "variable": "meterPower2",
-        "unit": "kW"
-      },
-      {
-        "name": "MeterRPower",
-        "variable": "meterPowerR",
-        "unit": "kW"
-      },
-      {
-        "name": "MeterSPower",
-        "variable": "meterPowerS",
-        "unit": "kW"
-      },
-      {
-        "name": "MeterTPower",
-        "variable": "meterPowerT",
-        "unit": "kW"
-      },
-      {
-        "name": "SoC",
-        "variable": "SoC",
-        "unit": "%"
-      },
-      {
-        "name": "ReactivePower",
-        "variable": "ReactivePower",
-        "unit": "kVar"
-      },
-      {
-        "name": "PowerFactor",
-        "variable": "PowerFactor",
-        "unit": ""
+  "msg": "success",
+  "result": [
+    {
+      "todayYield": {
+        "unit": "kW",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "Die heutige Stromerzeugung",
+          "pt": "A geração de energia de hoje",
+          "en": "Today’s power generation",
+          "zh_CN": "今日发电量",
+          "pl": "Dzisiejsza produkcja energii",
+          "fr": "La production d’électricité d’aujourd’hui"
+        },
+        "Energy-storage inverter": true
       }
-    ]
-  }
+    },
+    {
+      "pvPower": {
+        "unit": "kW",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV Leistung",
+          "pt": "Potência PV",
+          "en": "PVPower",
+          "zh_CN": "PV功率",
+          "pl": "Moc PV",
+          "fr": "PV Puissance"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv1Volt": {
+        "unit": "V",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV1 Spannung",
+          "pt": "Tensão PV1",
+          "en": "PV1Volt",
+          "zh_CN": "PV1电压",
+          "pl": "Napięcie PV1",
+          "fr": "PV1 Tension"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv1Current": {
+        "unit": "A",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV1 Strom",
+          "pt": "Corrente PV1",
+          "en": "PV1Current",
+          "zh_CN": "PV1电流",
+          "pl": "Prąd PV1",
+          "fr": "PV1 Courant"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv1Power": {
+        "unit": "kW",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV1 Leistung",
+          "pt": "Potência PV1",
+          "en": "PV1Power",
+          "zh_CN": "PV1功率",
+          "pl": "Moc PV1",
+          "fr": "PV1 Puissance"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv2Volt": {
+        "unit": "V",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV2 Spannung",
+          "pt": "Tensão PV2",
+          "en": "PV2Volt",
+          "zh_CN": "PV2电压",
+          "pl": "Napięcie PV2",
+          "fr": "PV2 Tension"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv2Current": {
+        "unit": "A",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV2 Strom",
+          "pt": "Corrente PV2",
+          "en": "PV2Current",
+          "zh_CN": "PV2电流",
+          "pl": "Prąd PV2",
+          "fr": "PV2 Courant"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv2Power": {
+        "unit": "kW",
+        "name": {
+          "de": "PV2 Leistung",
+          "pt": "Potência PV2",
+          "en": "PV2Power",
+          "zh_CN": "PV2功率",
+          "pl": "Moc PV2",
+          "fr": "PV2 Puissance"
+        }
+      }
+    },
+    {
+      "pv3Volt": {
+        "unit": "V",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV3 Spannung",
+          "pt": "Tensão PV3",
+          "en": "PV3Volt",
+          "zh_CN": "PV3电压",
+          "pl": "Napięcie PV3",
+          "fr": "PV3 Tension"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv3Current": {
+        "unit": "A",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV3 Strom",
+          "pt": "Corrente PV3",
+          "en": "PV3Current",
+          "zh_CN": "PV3电流",
+          "pl": "Prąd PV3",
+          "fr": "PV3 Courant"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv3Power": {
+        "unit": "kW",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV3 Leistung",
+          "pt": "Potência PV3",
+          "en": "PV3Power",
+          "zh_CN": "PV3功率",
+          "pl": "Moc PV3",
+          "fr": "PV3 Puissance"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv4Volt": {
+        "unit": "V",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV4 Spannung",
+          "pt": "Tensão PV4",
+          "en": "PV4Volt",
+          "zh_CN": "PV4电压",
+          "pl": "Napięcie PV4",
+          "fr": "PV4 Tension"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv4Current": {
+        "unit": "A",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV4 Strom",
+          "pt": "Corrente PV4",
+          "en": "PV4Current",
+          "zh_CN": "PV4电流",
+          "pl": "Prąd PV4",
+          "fr": "PV4 Courant"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv4Power": {
+        "unit": "kW",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV4 Leistung",
+          "pt": "Potência PV4",
+          "en": "PV4Power",
+          "zh_CN": "PV4功率",
+          "pl": "Moc PV4",
+          "fr": "PV4 Puissance"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv5Volt": {
+        "unit": "V",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV5 Spannung",
+          "pt": "Tensão PV5",
+          "en": "PV5Volt",
+          "zh_CN": "PV5电压",
+          "pl": "Napięcie PV5",
+          "fr": "PV5 Tension"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv5Current": {
+        "unit": "A",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV5 Strom",
+          "pt": "Corrente PV5",
+          "en": "PV5Current",
+          "zh_CN": "PV5电流",
+          "pl": "Prąd PV5",
+          "fr": "PV5 Courant"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv5Power": {
+        "unit": "kW",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV5 Leistung",
+          "pt": "Potência PV5",
+          "en": "PV5Power",
+          "zh_CN": "PV5功率",
+          "pl": "Moc PV5",
+          "fr": "PV5 Puissance"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv6Volt": {
+        "unit": "V",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV6 Spannung",
+          "pt": "Tensão PV6",
+          "en": "PV6Volt",
+          "zh_CN": "PV6电压",
+          "pl": "Napięcie PV6",
+          "fr": "PV6 Tension"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv6Current": {
+        "unit": "A",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV6 Strom",
+          "pt": "Corrente PV6",
+          "en": "PV6Current",
+          "zh_CN": "PV6电流",
+          "pl": "Prąd PV6",
+          "fr": "PV6 Courant"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv6Power": {
+        "unit": "kW",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV6 Leistung",
+          "pt": "Potência PV6",
+          "en": "PV6Power",
+          "zh_CN": "PV6功率",
+          "pl": "Moc PV6",
+          "fr": "PV6 Puissance"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv7Volt": {
+        "unit": "V",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV7 Spannung",
+          "pt": "Tensão PV7",
+          "en": "PV7Volt",
+          "zh_CN": "PV7电压",
+          "pl": "Napięcie PV7",
+          "fr": "PV7 Tension"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv7Current": {
+        "unit": "A",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV7 Strom",
+          "pt": "Corrente PV7",
+          "en": "PV7Current",
+          "zh_CN": "PV7电流",
+          "pl": "Prąd PV7",
+          "fr": "PV7 Courant"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv7Power": {
+        "unit": "kW",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV7 Leistung",
+          "pt": "Potência PV7",
+          "en": "PV7Power",
+          "zh_CN": "PV7功率",
+          "pl": "Moc PV7",
+          "fr": "PV7 Puissance"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv8Volt": {
+        "unit": "V",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV8 Spannung",
+          "pt": "Tensão PV8",
+          "en": "PV8Volt",
+          "zh_CN": "PV8电压",
+          "pl": "Napięcie PV8",
+          "fr": "PV8 Tension"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv8Current": {
+        "unit": "A",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV8 Strom",
+          "pt": "Corrente PV8",
+          "en": "PV8Current",
+          "zh_CN": "PV8电流",
+          "pl": "Prąd PV8",
+          "fr": "PV8 Courant"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv8Power": {
+        "unit": "kW",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV8 Leistung",
+          "pt": "Potência PV8",
+          "en": "PV8Power",
+          "zh_CN": "PV8功率",
+          "pl": "Moc PV8",
+          "fr": "PV8 Puissance"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv9Volt": {
+        "unit": "V",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV9 Spannung",
+          "pt": "Tensão PV9",
+          "en": "PV9Volt",
+          "zh_CN": "PV9电压",
+          "pl": "Napięcie PV9",
+          "fr": "PV9 Tension"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv9Current": {
+        "unit": "A",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV9 Strom",
+          "pt": "Corrente PV9",
+          "en": "PV9Current",
+          "zh_CN": "PV9电流",
+          "pl": "Prąd PV9",
+          "fr": "PV9 Courant"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv9Power": {
+        "unit": "kW",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV9 Leistung",
+          "pt": "Potência PV9",
+          "en": "PV9Power",
+          "zh_CN": "PV9功率",
+          "pl": "Moc PV9",
+          "fr": "PV9 Puissance"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv10Volt": {
+        "unit": "V",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV10 Spannung",
+          "pt": "Tensão PV10",
+          "en": "PV10Volt",
+          "zh_CN": "PV10电压",
+          "pl": "Napięcie PV10",
+          "fr": "PV10 Tension"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv10Current": {
+        "unit": "A",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV10 Strom",
+          "pt": "Corrente PV10",
+          "en": "PV10Current",
+          "zh_CN": "PV10电流",
+          "pl": "Prąd PV10",
+          "fr": "PV10 Courant"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv10Power": {
+        "unit": "kW",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV10 Leistung",
+          "pt": "Potência PV10",
+          "en": "PV10Power",
+          "zh_CN": "PV10功率",
+          "pl": "Moc PV10",
+          "fr": "PV10 Puissance"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv11Volt": {
+        "unit": "V",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV11 Spannung",
+          "pt": "Tensão PV11",
+          "en": "PV11Volt",
+          "zh_CN": "PV11电压",
+          "pl": "Napięcie PV11",
+          "fr": "PV11 Tension"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv11Current": {
+        "unit": "A",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV11 Strom",
+          "pt": "Corrente PV11",
+          "en": "PV11Current",
+          "zh_CN": "PV11电流",
+          "pl": "Prąd PV11",
+          "fr": "PV11 Courant"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv11Power": {
+        "unit": "kW",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV11 Leistung",
+          "pt": "Potência PV11",
+          "en": "PV11Power",
+          "zh_CN": "PV11功率",
+          "pl": "Moc PV11",
+          "fr": "PV11 Puissance"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv12Volt": {
+        "unit": "V",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV12 Spannung",
+          "pt": "Tensão PV12",
+          "en": "PV12Volt",
+          "zh_CN": "PV12电压",
+          "pl": "Napięcie PV12",
+          "fr": "PV12 Tension"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv12Current": {
+        "unit": "A",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV12 Strom",
+          "pt": "Corrente PV12",
+          "en": "PV12Current",
+          "zh_CN": "PV12电流",
+          "pl": "Prąd PV12",
+          "fr": "PV12 Courant"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv12Power": {
+        "unit": "kW",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV12 Leistung",
+          "pt": "Potência PV12",
+          "en": "PV12Power",
+          "zh_CN": "PV12功率",
+          "pl": "Moc PV12",
+          "fr": "PV12 Puissance"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv13Volt": {
+        "unit": "V",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV13 Spannung",
+          "pt": "Tensão PV13",
+          "en": "PV13Volt",
+          "zh_CN": "PV13电压",
+          "pl": "Napięcie PV13",
+          "fr": "PV13 Tension"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv13Current": {
+        "unit": "A",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV13 Strom",
+          "pt": "Corrente PV13",
+          "en": "PV13Current",
+          "zh_CN": "PV13电流",
+          "pl": "Prąd PV13",
+          "fr": "PV13 Courant"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv13Power": {
+        "unit": "kW",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV13 Leistung",
+          "pt": "Potência PV13",
+          "en": "PV13Power",
+          "zh_CN": "PV13功率",
+          "pl": "Moc PV13",
+          "fr": "PV13 Puissance"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv14Volt": {
+        "unit": "V",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV14 Spannung",
+          "pt": "Tensão PV14",
+          "en": "PV14Volt",
+          "zh_CN": "PV14电压",
+          "pl": "Napięcie PV14",
+          "fr": "PV14 Tension"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv14Current": {
+        "unit": "A",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV14 Strom",
+          "pt": "Corrente PV14",
+          "en": "PV14Current",
+          "zh_CN": "PV14电流",
+          "pl": "Prąd PV14",
+          "fr": "PV14 Courant"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv14Power": {
+        "unit": "kW",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV14 Leistung",
+          "pt": "Potência PV14",
+          "en": "PV14Power",
+          "zh_CN": "PV14功率",
+          "pl": "Moc PV14",
+          "fr": "PV14 Puissance"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv15Volt": {
+        "unit": "V",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV15 Spannung",
+          "pt": "Tensão PV15",
+          "en": "PV15Volt",
+          "zh_CN": "PV15电压",
+          "pl": "Napięcie PV15",
+          "fr": "PV15 Tension"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv15Current": {
+        "unit": "A",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV15 Strom",
+          "pt": "Corrente PV15",
+          "en": "PV15Current",
+          "zh_CN": "PV15电流",
+          "pl": "Prąd PV15",
+          "fr": "PV15 Courant"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv15Power": {
+        "unit": "kW",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV15 Leistung",
+          "pt": "Potência PV15",
+          "en": "PV15Power",
+          "zh_CN": "PV15功率",
+          "pl": "Moc PV15",
+          "fr": "PV15 Puissance"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv16Volt": {
+        "unit": "V",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV16 Spannung",
+          "pt": "Tensão PV16",
+          "en": "PV16Volt",
+          "zh_CN": "PV16电压",
+          "pl": "Napięcie PV16",
+          "fr": "PV16 Tension"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv16Current": {
+        "unit": "A",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV16 Strom",
+          "pt": "Corrente PV16",
+          "en": "PV16Current",
+          "zh_CN": "PV16电流",
+          "pl": "Prąd PV16",
+          "fr": "PV16 Courant"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv16Power": {
+        "unit": "kW",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV16 Leistung",
+          "pt": "Potência PV16",
+          "en": "PV16Power",
+          "zh_CN": "PV16功率",
+          "pl": "Moc PV16",
+          "fr": "PV16 Puissance"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv17Volt": {
+        "unit": "V",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV17 Spannung",
+          "pt": "Tensão PV17",
+          "en": "PV17Volt",
+          "zh_CN": "PV17电压",
+          "pl": "Napięcie PV17",
+          "fr": "PV17 Tension"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv17Current": {
+        "unit": "A",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV17 Strom",
+          "pt": "Corrente PV17",
+          "en": "PV17Current",
+          "zh_CN": "PV17电流",
+          "pl": "Prąd PV17",
+          "fr": "PV17 Courant"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv17Power": {
+        "unit": "kW",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV17 Leistung",
+          "pt": "Potência PV17",
+          "en": "PV17Power",
+          "zh_CN": "PV17功率",
+          "pl": "Moc PV17",
+          "fr": "PV17 Puissance"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv18Volt": {
+        "unit": "V",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV18 Spannung",
+          "pt": "Tensão PV18",
+          "en": "PV18Volt",
+          "zh_CN": "PV18电压",
+          "pl": "Napięcie PV18",
+          "fr": "PV18 Tension"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv18Current": {
+        "unit": "A",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV18 Strom",
+          "pt": "Corrente PV18",
+          "en": "PV18Current",
+          "zh_CN": "PV18电流",
+          "pl": "Prąd PV18",
+          "fr": "PV18 Courant"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "pv18Power": {
+        "unit": "kW",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PV18 Leistung",
+          "pt": "Potência PV18",
+          "en": "PV18Power",
+          "zh_CN": "PV18功率",
+          "pl": "Moc PV18",
+          "fr": "PV18 Puissance"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "epsPower": {
+        "unit": "kW",
+        "Grid-tied inverter": false,
+        "name": {
+          "de": "EPSPower",
+          "pt": "EPSPower",
+          "en": "EPSPower",
+          "zh_CN": "EPS功率",
+          "pl": "EPSPower",
+          "fr": "EPSPower"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "epsCurrentR": {
+        "unit": "A",
+        "Grid-tied inverter": false,
+        "name": {
+          "de": "EPS-RCurrent",
+          "pt": "EPS-RCurrent",
+          "en": "EPS-RCurrent",
+          "zh_CN": "EPS-R相电流",
+          "pl": "EPS-RCurrent",
+          "fr": "EPS-RCurrent"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "epsVoltR": {
+        "unit": "V",
+        "Grid-tied inverter": false,
+        "name": {
+          "de": "EPS-RVolt",
+          "pt": "EPS-RVolt",
+          "en": "EPS-RVolt",
+          "zh_CN": "EPS-R相电压",
+          "pl": "EPS-RVolt",
+          "fr": "EPS-RVolt"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "epsPowerR": {
+        "unit": "kW",
+        "Grid-tied inverter": false,
+        "name": {
+          "de": "EPS-RPower",
+          "pt": "EPS-RPower",
+          "en": "EPS-RPower",
+          "zh_CN": "EPS-R相功率",
+          "pl": "EPS-RVolt",
+          "fr": "EPS-RPower"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "epsCurrentS": {
+        "unit": "A",
+        "Grid-tied inverter": false,
+        "name": {
+          "de": "EPS-SCurrent",
+          "pt": "EPS-SCurrent",
+          "en": "EPS-SCurrent",
+          "zh_CN": "EPS-S相电流",
+          "pl": "EPS-SCurrent",
+          "fr": "EPS-SCurrent"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "epsVoltS": {
+        "unit": "V",
+        "Grid-tied inverter": false,
+        "name": {
+          "de": "EPS-SVolt",
+          "pt": "EPS-SVolt",
+          "en": "EPS-SVolt",
+          "zh_CN": "EPS-S相电压",
+          "pl": "EPS-SVolt",
+          "fr": "EPS-SVolt"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "epsPowerS": {
+        "unit": "kW",
+        "Grid-tied inverter": false,
+        "name": {
+          "de": "EPS-SPower",
+          "pt": "EPS-SPower",
+          "en": "EPS-SPower",
+          "zh_CN": "EPS-S相功率",
+          "pl": "EPS-SPower",
+          "fr": "EPS-SPower"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "epsCurrentT": {
+        "unit": "A",
+        "Grid-tied inverter": false,
+        "name": {
+          "de": "EPS-TCurrent",
+          "pt": "EPS-TCurrent",
+          "en": "EPS-TCurrent",
+          "zh_CN": "EPS-T相电流",
+          "pl": "EPS-TCurrent",
+          "fr": "EPS-TCurrent"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "epsVoltT": {
+        "unit": "V",
+        "Grid-tied inverter": false,
+        "name": {
+          "de": "EPS-TVolt",
+          "pt": "EPS-TVolt",
+          "en": "EPS-TVolt",
+          "zh_CN": "EPS-T相电压",
+          "pl": "EPS-TVolt",
+          "fr": "EPS-TVolt"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "epsPowerT": {
+        "unit": "kW",
+        "Grid-tied inverter": false,
+        "name": {
+          "de": "EPS-TPower",
+          "pt": "EPS-TPower",
+          "en": "EPS-TPower",
+          "zh_CN": "EPS-T相功率",
+          "pl": "EPS-TPower",
+          "fr": "EPS-TPower"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "RCurrent": {
+        "unit": "A",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "RCurrent",
+          "pt": "RCurrent",
+          "en": "RCurrent",
+          "zh_CN": "R相电流",
+          "pl": "RCurrent",
+          "fr": "RCurrent"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "RVolt": {
+        "unit": "V",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "RVolt",
+          "pt": "RVolt",
+          "en": "RVolt",
+          "zh_CN": "R相电压",
+          "pl": "RVolt",
+          "fr": "RVolt"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "RFreq": {
+        "unit": "Hz",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "RFreq",
+          "pt": "RFreq",
+          "en": "RFreq",
+          "zh_CN": "R相频率",
+          "pl": "RFreq",
+          "fr": "RFreq"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "RPower": {
+        "unit": "kW",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "RPower",
+          "pt": "RPower",
+          "en": "RPower",
+          "zh_CN": "R相功率",
+          "pl": "RPower",
+          "fr": "RPower"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "SCurrent": {
+        "unit": "A",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "SCurrent",
+          "pt": "SCurrent",
+          "en": "SCurrent",
+          "zh_CN": "S相电流",
+          "pl": "SCurrent",
+          "fr": "SCurrent"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "SVolt": {
+        "unit": "V",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "SVolt",
+          "pt": "SVolt",
+          "en": "SVolt",
+          "zh_CN": "S相电压",
+          "pl": "SVolt",
+          "fr": "SVolt"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "SFreq": {
+        "unit": "Hz",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "SFreq",
+          "pt": "SFreq",
+          "en": "SFreq",
+          "zh_CN": "S相频率",
+          "pl": "SFreq",
+          "fr": "SFreq"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "SPower": {
+        "unit": "kW",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "SPower",
+          "pt": "SPower",
+          "en": "SPower",
+          "zh_CN": "S相功率",
+          "pl": "SPower",
+          "fr": "SPower"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "TCurrent": {
+        "unit": "A",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "TCurrent",
+          "pt": "TCurrent",
+          "en": "TCurrent",
+          "zh_CN": "T相电流",
+          "pl": "TCurrent",
+          "fr": "TCurrent"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "TVolt": {
+        "unit": "V",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "TVolt",
+          "pt": "TVolt",
+          "en": "TVolt",
+          "zh_CN": "T相电压",
+          "pl": "TVolt",
+          "fr": "TVolt"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "TFreq": {
+        "unit": "Hz",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "TFreq",
+          "pt": "TFreq",
+          "en": "TFreq",
+          "zh_CN": "T相频率",
+          "pl": "TFreq",
+          "fr": "TFreq"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "TPower": {
+        "unit": "kW",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "TPower",
+          "pt": "TPower",
+          "en": "TPower",
+          "zh_CN": "T相功率",
+          "pl": "TPower",
+          "fr": "TPower"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "ambientTemperation": {
+        "unit": "℃",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "AmbientTemperature",
+          "pt": "AmbientTemperature",
+          "en": "AmbientTemperature",
+          "zh_CN": "环境温度",
+          "pl": "AmbientTemperature",
+          "fr": "AmbientTemperature"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "boostTemperation": {
+        "unit": "℃",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "BoostTemperature",
+          "pt": "BoostTemperature",
+          "en": "BoostTemperature",
+          "zh_CN": "充电器温度",
+          "pl": "BoostTemperature",
+          "fr": "BoostTemperature"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "invTemperation": {
+        "unit": "℃",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "InvTemperation",
+          "pt": "InvTemperation",
+          "en": "InvTemperation",
+          "zh_CN": "逆变器温度",
+          "pl": "InvTemperation",
+          "fr": "InvTemperation"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "chargeTemperature": {
+        "unit": "℃",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "ChargeTemperature",
+          "pt": "ChargeTemperature",
+          "en": "ChargeTemperature",
+          "zh_CN": "充电温度",
+          "pl": "ChargeTemperature",
+          "fr": "ChargeTemperature"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "batTemperature": {
+        "unit": "℃",
+        "Grid-tied inverter": false,
+        "name": {
+          "de": "batTemperature",
+          "pt": "batTemperature",
+          "en": "batTemperature",
+          "zh_CN": "电池温度",
+          "pl": "batTemperature",
+          "fr": "batTemperature"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "dspTemperature": {
+        "unit": "℃",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "DSPTemperature",
+          "pt": "DSPTemperature",
+          "en": "DSPTemperature",
+          "zh_CN": "DSP温度",
+          "pl": "DSPTemperature",
+          "fr": "DSPTemperature"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "loadsPower": {
+        "unit": "kW",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "LoadsPower",
+          "pt": "LoadsPower",
+          "en": "Load Power",
+          "zh_CN": "负载功率",
+          "pl": "LoadsPower",
+          "fr": "LoadsPower"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "loadsPowerR": {
+        "unit": "kW",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "LoadsRPower",
+          "pt": "LoadsRPower",
+          "en": "LoadsRPower",
+          "zh_CN": "负载R相功率",
+          "pl": "LoadsRPower",
+          "fr": "LoadsRPower"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "loadsPowerS": {
+        "unit": "kW",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "LoadsSPower",
+          "pt": "LoadsSPower",
+          "en": "LoadsSPower",
+          "zh_CN": "负载S相功率",
+          "pl": "LoadsSPower",
+          "fr": "LoadsSPower"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "loadsPowerT": {
+        "unit": "kW",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "LoadsTPower",
+          "pt": "LoadsTPower",
+          "en": "LoadsTPower",
+          "zh_CN": "负载T相功率",
+          "pl": "LoadsTPower",
+          "fr": "LoadsTPower"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "generationPower": {
+        "unit": "kW",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "GenerationPower",
+          "pt": "GenerationPower",
+          "en": "Output Power",
+          "zh_CN": "发电功率",
+          "pl": "GenerationPower",
+          "fr": "GenerationPower"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "feedinPower": {
+        "unit": "kW",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "FeedinPower",
+          "pt": "FeedinPower",
+          "en": "Feed-in Power",
+          "zh_CN": "并网功率",
+          "pl": "FeedinPower",
+          "fr": "FeedinPower"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "gridConsumptionPower": {
+        "unit": "kW",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "GridConsumptionPower",
+          "pt": "GridConsumptionPower",
+          "en": "GridConsumption Power",
+          "zh_CN": "电网损耗功率",
+          "pl": "GridConsumptionPower",
+          "fr": "GridConsumptionPower"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "invBatVolt": {
+        "unit": "V",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "InvBatVolt",
+          "pt": "InvBatVolt",
+          "en": "InvBatVolt",
+          "zh_CN": "逆变侧电池电压",
+          "pl": "InvBatVolt",
+          "fr": "InvBatVolt"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "invBatCurrent": {
+        "unit": "A",
+        "Grid-tied inverter": false,
+        "name": {
+          "de": "InvBatCurrent",
+          "pt": "InvBatCurrent",
+          "en": "InvBatCurrent",
+          "zh_CN": "逆变侧电池电流",
+          "pl": "InvBatCurrent",
+          "fr": "InvBatCurrent"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "invBatPower": {
+        "unit": "kW",
+        "Grid-tied inverter": false,
+        "name": {
+          "de": "invBatPower",
+          "pt": "invBatPower",
+          "en": "invBatPower",
+          "zh_CN": "逆变侧电池功率",
+          "pl": "invBatPower",
+          "fr": "invBatPower"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "batChargePower": {
+        "unit": "kW",
+        "Grid-tied inverter": false,
+        "name": {
+          "de": "BatChargePower",
+          "pt": "BatChargePower",
+          "en": "Charge Power",
+          "zh_CN": "电池充电功率",
+          "pl": "BatChargePower",
+          "fr": "BatChargePower"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "batDischargePower": {
+        "unit": "kW",
+        "Grid-tied inverter": false,
+        "name": {
+          "de": "BatDischargePower",
+          "pt": "BatDischargePower",
+          "en": "Discharge Power",
+          "zh_CN": "电池放电功率",
+          "pl": "BatDischargePower",
+          "fr": "BatDischargePower"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "batVolt": {
+        "unit": "V",
+        "Grid-tied inverter": false,
+        "name": {
+          "de": "BatVolt",
+          "pt": "BatVolt",
+          "en": "BatVolt",
+          "zh_CN": "电池电压",
+          "pl": "BatVolt",
+          "fr": "BatVolt"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "batCurrent": {
+        "unit": "A",
+        "Grid-tied inverter": false,
+        "name": {
+          "de": "BatCurrent",
+          "pt": "BatCurrent",
+          "en": "BatCurrent",
+          "zh_CN": "电池电流",
+          "pl": "BatCurrent",
+          "fr": "BatCurrent"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "meterPower": {
+        "unit": "kW",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "MeterPower",
+          "pt": "MeterPower",
+          "en": "MeterPower",
+          "zh_CN": "电表功率",
+          "pl": "MeterPower",
+          "fr": "MeterPower"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "meterPower2": {
+        "unit": "kW",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "Meter2Power",
+          "pt": "Meter2Power",
+          "en": "Meter2Power",
+          "zh_CN": "电表2功率",
+          "pl": "Meter2Power",
+          "fr": "Meter2Power"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "meterPowerR": {
+        "unit": "kW",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "MeterRPower",
+          "pt": "MeterRPower",
+          "en": "MeterRPower",
+          "zh_CN": "电表功率R",
+          "pl": "MeterRPower",
+          "fr": "MeterRPower"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "meterPowerS": {
+        "unit": "kW",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "MeterSPower",
+          "pt": "MeterSPower",
+          "en": "MeterSPower",
+          "zh_CN": "电表功率S",
+          "pl": "MeterSPower",
+          "fr": "MeterSPower"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "meterPowerT": {
+        "unit": "kW",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "MeterTPower",
+          "pt": "MeterTPower",
+          "en": "MeterTPower",
+          "zh_CN": "电表功率T",
+          "pl": "MeterTPower",
+          "fr": "MeterTPower"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "SoC": {
+        "unit": "%",
+        "Grid-tied inverter": false,
+        "name": {
+          "de": "SoC",
+          "pt": "SoC",
+          "en": "SoC",
+          "zh_CN": "SoC",
+          "pl": "SoC",
+          "fr": "SoC"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "ReactivePower": {
+        "unit": "kVar",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "ReactivePower",
+          "pt": "ReactivePower",
+          "en": "ReactivePower",
+          "zh_CN": "无功功率",
+          "pl": "ReactivePower",
+          "fr": "ReactivePower"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "PowerFactor": {
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "PowerFactor",
+          "pt": "PowerFactor",
+          "en": "PowerFactor",
+          "zh_CN": "功率因数",
+          "pl": "PowerFactor",
+          "fr": "PowerFactor"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "generation": {
+        "unit": "kWh",
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "Cumulative power generation",
+          "pt": "Cumulative power generation",
+          "en": "Cumulative power generation",
+          "zh_CN": "累计发电量",
+          "pl": "Cumulative power generation",
+          "fr": "Cumulative power generation"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "ResidualEnergy": {
+        "unit": "10Wh",
+        "Grid-tied inverter": false,
+        "name": {
+          "de": "Battery Residual Energy",
+          "pt": "Battery Residual Energy",
+          "en": "Battery Residual Energy",
+          "zh_CN": "电池剩余电量",
+          "pl": "Battery Residual Energy",
+          "fr": "Battery Residual Energy"
+        },
+        "Energy-storage inverter": true
+      }
+    },
+    {
+      "runningState": {
+        "Grid-tied inverter": true,
+        "name": {
+          "de": "Running State",
+          "pt": "Running State",
+          "en": "Running State",
+          "zh_CN": "运行状态",
+          "pl": "Running State",
+          "fr": "Running State"
+        },
+        "Energy-storage inverter": true,
+        "enum": {
+          "165": "fault",
+          "166": "permanent-fault",
+          "167": "standby",
+          "168": "upgrading",
+          "169": "fct",
+          "170": "illegal",
+          "160": "self-test",
+          "161": "waiting",
+          "162": "checking",
+          "163": "on-grid",
+          "164": "off-grid"
+        }
+      }
+    }
+  ]
 }

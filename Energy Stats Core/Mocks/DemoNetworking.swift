@@ -162,33 +162,38 @@ class DemoAPI: FoxAPIServicing {
     }
 
     func openapi_fetchHistory(deviceSN: String, variables: [String], start: Date, end: Date) async throws -> OpenHistoryResponse {
-        OpenHistoryResponse(deviceSN: deviceSN, datas: [])
+        let data = try self.data(filename: "history")
+        let response = try JSONDecoder().decode(NetworkResponse<[OpenHistoryResponse]>.self, from: data)
+        guard let result = response.result?.first else { throw NetworkError.invalidToken }
+        return result
     }
 
     func openapi_fetchVariables() async throws -> [OpenApiVariable] {
-        []
+        let data = try self.data(filename: "variables")
+        let response = try JSONDecoder().decode(NetworkResponse<OpenApiVariableArray>.self, from: data)
+        guard let result = response.result else { throw NetworkError.invalidToken }
+        return result.array
     }
 
     func openapi_fetchReport(deviceSN: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [OpenReportResponse] {
-        //        if throwOnCall {
-        //            throw NetworkError.foxServerError(0, "Fake thrown error")
-        //        }
-        //
-        //        let data: Data
-        //        switch reportType {
-        //        case .day:
-        //            data = try self.data(filename: "report-day")
-        //        case .month:
-        //            data = try self.data(filename: "report-month")
-        //        case .year:
-        //            data = try self.data(filename: "report-year")
-        //        }
-        //
-        //        let response = try JSONDecoder().decode(NetworkResponse<[ReportResponse]>.self, from: data)
-        //        guard let result = response.result else { throw NetworkError.invalidToken }
-        //
-        //        return result
-        []
+        if throwOnCall {
+            throw NetworkError.foxServerError(0, "Fake thrown error")
+        }
+
+        let data: Data
+        switch reportType {
+        case .day:
+            data = try self.data(filename: "report-day")
+        case .month:
+            data = try self.data(filename: "report-month")
+        case .year:
+            data = try self.data(filename: "report-year")
+        }
+
+        let response = try JSONDecoder().decode(NetworkResponse<[OpenReportResponse]>.self, from: data)
+        guard let result = response.result else { throw NetworkError.invalidToken }
+
+        return result
     }
 
     func openapi_fetchCurrentSchedule(deviceSN: String) async throws -> ScheduleResponse {

@@ -22,6 +22,10 @@ struct HowToObtainAPIKeyView: View {
             Text("7. Paste the API key above")
             Text("8. Your API key will be 36 characters long and look something like ") + Text("abcde123-4567-8901-2345-6789abcdef01").foregroundColor(Color.red).font(.caption)
 
+            Text("api_key_change_reason_2")
+                .font(.caption2)
+                .padding(.top)
+
             Text("api_key_change_reason")
                 .font(.caption2)
                 .padding(.top)
