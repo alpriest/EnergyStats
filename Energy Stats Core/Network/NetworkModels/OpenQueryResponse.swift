@@ -147,6 +147,10 @@ public struct OpenHistoryResponse: Codable {
                 self.time = time
                 self.value = value
             }
+
+            func copy(time: Date? = nil, value: Double? = nil) -> UnitData {
+                UnitData(time: time ?? self.time, value: value ?? self.value)
+            }
         }
     }
 }
