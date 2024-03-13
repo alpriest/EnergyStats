@@ -19,16 +19,28 @@ public struct GenerationViewModel {
     }
 
     public func todayGeneration() -> Double {
-        var pvPowerVariables = response.datas.filter { $0.variable == "pvPower" }.flatMap { $0.data }.map { $0.copy(value: max(0, $0.value)) }
+        let pvPowerVariables = response.datas.filter { $0.variable == "pvPower" }
+            .flatMap { $0.data }
+            .map { $0.copy(value: max(0, $0.value)) }
+
         let ct2Variables: [OpenHistoryResponse.Data.UnitData]
+
         if includeCT2 {
             ct2Variables = response.datas.filter { $0.variable == "meterPower2" }
                 .flatMap { $0.data }
-                .map {
+                .compactMap {
                     if shouldInvertCT2 {
-                        $0.copy(value: min(0, $0.value))
+                        if $0.value < 0 {
+                            $0.copy(value: abs($0.value))
+                        } else {
+                            nil
+                        }
                     } else {
-                        $0.copy(value: max(0, $0.value))
+                        if $0.value > 0 {
+                            $0.copy(value: $0.value)
+                        } else {
+                            nil
+                        }
                     }
                 }
         } else {
