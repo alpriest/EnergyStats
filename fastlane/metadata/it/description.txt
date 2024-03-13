@@ -9,5 +9,6 @@ Ottieni una panoramica istantanea delle prestazioni della tua installazione FoxE
 - Modifica i valori minimi dello stato di carica (SOC)
 - Modifica le modalità di lavoro dell'inverter
 - Visualizza le informazioni del datalogger
+- Scorciatoie per recuperare il SOC della batteria
 
-Questa app richiede un account con FoxESS Cloud per effettuare l'accesso.
+Questa app richiede di avere un account con FoxESS Cloud e una chiave API per effettuare il login.

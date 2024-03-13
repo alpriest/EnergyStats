@@ -1,13 +1,13 @@
 Erhalten Sie sofort einen Überblick darüber, wie Ihre FoxESS PV/Batterie-Installation funktioniert!
 
-- Wenn Sie eine Batterie haben, können Sie die Dauer bis zur vollen/leeren Ladung sehen.
-- Automatisches erneutes Anmelden
+- Wenn Sie eine Batterie haben, können Sie die Dauer bis voll/leer sehen
+- Automatisches Wiederanmelden
 - Diagramme der Wechselrichterparameter
 - Historische Statistikinformationen
-- Anzeige der Batterietemperatur
-- Ändern Sie die Batterieladezeiten
-- Ändern Sie die minimalen SOC-Werte
-- Ändern Sie die Arbeitsmodi des Wechselrichters
-- Anzeigen von Datalogger-Informationen
+- Batterietemperatur anzeigen
+- Batterieladezeiten ändern
+- Mindest-SOC-Werte ändern
+- Arbeitsplan des Wechselrichters ändern
+- Verknüpfungen, um den SOC der Batterie abzurufen
 
-Für diese App ist ein Konto bei FoxESS Cloud erforderlich, um sich anzumelden.
+Für diese App ist ein Konto bei FoxESS Cloud erforderlich und einen API-Schlüssel haben, um sich anzumelden.
