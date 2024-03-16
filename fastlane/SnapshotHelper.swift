@@ -179,17 +179,17 @@ open class Snapshot: NSObject {
             do {
                 // The simulator name contains "Clone X of " inside the screenshot file when running parallelized UI Tests on concurrent devices
                 let regex = try NSRegularExpression(pattern: "Clone [0-9]+ of ")
-                let custom = NSRange(location: 0, length: simulator.count)
-                simulator = regex.stringByReplacingMatches(in: simulator, custom: custom, withTemplate: "")
+                let range = NSRange(location: 0, length: simulator.count)
+                simulator = regex.stringByReplacingMatches(in: simulator, range: range, withTemplate: "")
 
-                let path = screenshotsDir.appendingPathComponent("\(simulator)-\(dateName).png")
+                let path = screenshotsDir.appendingPathComponent("\(simulator)-\(name).png")
                 #if swift(<5.0)
                     try UIImagePNGRepresentation(image)?.write(to: path, options: .atomic)
                 #else
                     try image.pngData()?.write(to: path, options: .atomic)
                 #endif
             } catch let error {
-                NSLog("Problem writing screenshot: \(dateName) to \(screenshotsDir)/\(simulator)-\(dateName).png")
+                NSLog("Problem writing screenshot: \(name) to \(screenshotsDir)/\(simulator)-\(name).png")
                 NSLog(error.localizedDescription)
             }
         #endif
