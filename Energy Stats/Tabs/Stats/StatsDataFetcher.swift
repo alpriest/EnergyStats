@@ -23,42 +23,17 @@ struct StatsDataFetcher {
         let startDay = Calendar.current.component(.day, from: start)
         let startMonth = Calendar.current.component(.month, from: start)
         let startYear = Calendar.current.component(.year, from: start)
-        let endDay = Calendar.current.component(.day, from: end)
-        let endMonth = Calendar.current.component(.month, from: end)
-        let endYear = Calendar.current.component(.year, from: end)
         let startQueryDate = QueryDate(year: startYear, month: startMonth, day: nil)
-        let endQueryDate = QueryDate(year: endYear, month: endMonth, day: nil)
-
-        let reportType = ReportType.month
         let startReports = try await networking.fetchReport(
             deviceSN: device.deviceSN,
             variables: reportVariables,
             queryDate: startQueryDate,
-            reportType: reportType
+            reportType: .month
         ).map { response in
             response.copy(values: response.values.filter {
                 $0.index >= startDay
             })
         }
-        let endReports = try await networking.fetchReport(
-            deviceSN: device.deviceSN,
-            variables: reportVariables,
-            queryDate: endQueryDate,
-            reportType: reportType
-        ).map { response in
-            response.copy(values: response.values.filter {
-                $0.index <= endDay
-            })
-        }
-
-        let totals = try await approximationsCalculator.generateTotals(
-            currentDevice: device,
-            reportType: reportType,
-            queryDate: startQueryDate,
-            reports: startReports + endReports,
-            reportVariables: reportVariables
-        )
-
         let startData = startReports.flatMap { reportResponse -> [StatsGraphValue] in
             guard let reportVariable = ReportVariable(rawValue: reportResponse.variable) else { return [] }
 
@@ -71,6 +46,20 @@ struct StatsDataFetcher {
             }
         }
 
+        let endDay = Calendar.current.component(.day, from: end)
+        let endMonth = Calendar.current.component(.month, from: end)
+        let endYear = Calendar.current.component(.year, from: end)
+        let endQueryDate = QueryDate(year: endYear, month: endMonth, day: nil)
+        let endReports = try await networking.fetchReport(
+            deviceSN: device.deviceSN,
+            variables: reportVariables,
+            queryDate: endQueryDate,
+            reportType: .month
+        ).map { response in
+            response.copy(values: response.values.filter {
+                $0.index <= endDay
+            })
+        }
         let endData = endReports.flatMap { reportResponse -> [StatsGraphValue] in
             guard let reportVariable = ReportVariable(rawValue: reportResponse.variable) else { return [] }
 
@@ -82,6 +71,14 @@ struct StatsDataFetcher {
                 )
             }
         }
+
+        let totals = try await approximationsCalculator.generateTotals(
+            currentDevice: device,
+            reportType: .month,
+            queryDate: startQueryDate,
+            reports: startReports + endReports,
+            reportVariables: reportVariables
+        )
 
         return (startData + endData, totals)
     }
