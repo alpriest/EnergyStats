@@ -1,5 +1,5 @@
 //
-//  DatePickerView.swift
+//  StatsDatePickerView.swift
 //  Energy Stats
 //
 //  Created by Alistair Priest on 15/05/2023.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DatePickerView: View {
+struct StatsDatePickerView: View {
     @ObservedObject var viewModel: DatePickerViewModel
     @Binding var showingGraph: Bool
 
@@ -33,6 +33,13 @@ struct DatePickerView: View {
                 } label: {
                     Label("Year", systemImage: viewModel.range == .year ? "checkmark" : "")
                         .accessibilityIdentifier("year")
+                }
+
+                Button {
+                    viewModel.range = .custom(.now.addingTimeInterval(0 - (86400 * 35)), .now)
+                } label: {
+                    Label("Custom", systemImage: viewModel.range.isCustom ? "checkmark" : "")
+                        .accessibilityIdentifier("custom")
                 }
 
                 Divider()
@@ -100,6 +107,8 @@ struct DatePickerView: View {
                             Text(String(describing: $0))
                         }
                     }.pickerStyle(.menu)
+                case .custom:
+                    EmptyView()
                 }
             }
 
@@ -112,6 +121,7 @@ struct DatePickerView: View {
                     .frame(minWidth: 22)
             }
             .buttonStyle(.bordered)
+            .disabled(!viewModel.canDecrease)
 
             Button {
                 viewModel.increase()
@@ -128,7 +138,7 @@ struct DatePickerView: View {
 #Preview {
     let model = DatePickerViewModel(.constant(.month(8, 2023)))
 
-    return DatePickerView(viewModel: model, showingGraph: .constant(true))
+    return StatsDatePickerView(viewModel: model, showingGraph: .constant(true))
         .frame(height: 200)
         .previewDevice("iPhone SE (3rd generation)")
 }

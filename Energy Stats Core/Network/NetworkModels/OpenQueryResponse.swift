@@ -208,6 +208,14 @@ public struct OpenReportResponse: Codable {
             self.value = value
         }
     }
+
+    public func copy(variable: String? = nil, unit: String? = nil, values: [ReportData]? = nil) -> OpenReportResponse {
+        OpenReportResponse(
+            variable: variable ?? self.variable,
+            unit: unit ?? self.unit,
+            values: values ?? self.values
+        )
+    }
 }
 
 public struct GetCurrentSchedulerRequest: Encodable {

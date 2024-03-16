@@ -14,6 +14,7 @@ enum StatsDisplayMode: Equatable {
     case day(Date)
     case month(_ month: Int, _ year: Int)
     case year(Int)
+    case custom(_ start: Date, _ end: Date)
 
     func unit() -> Calendar.Component {
         switch self {
@@ -23,6 +24,8 @@ enum StatsDisplayMode: Equatable {
             return .day
         case .year:
             return .month
+        case .custom:
+            return .day
         }
     }
 
@@ -56,7 +59,7 @@ struct StatsTabView: View {
     var body: some View {
         Group {
             VStack {
-                DatePickerView(viewModel: DatePickerViewModel($viewModel.displayMode),
+                StatsDatePickerView(viewModel: DatePickerViewModel($viewModel.displayMode),
                                showingGraph: $showingGraph)
 
                 ScrollView {

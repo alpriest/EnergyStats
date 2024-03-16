@@ -7,10 +7,15 @@
 
 import SwiftUI
 
-enum DatePickerRange {
+enum DatePickerRange: Equatable {
     case day
     case month
     case year
+    case custom(_ start: Date, _ end: Date)
+
+    var isCustom: Bool {
+        self != .day && self != .month && self != .year
+    }
 }
 
 class DatePickerViewModel: ObservableObject {
@@ -29,6 +34,7 @@ class DatePickerViewModel: ObservableObject {
 
     var yearRange = 2000 ... (Calendar.current.component(.year, from: .now))
     @Published var canIncrease = false
+    @Published var canDecrease = true
 
     @MainActor @Binding var displayMode: StatsDisplayMode
     private var isInitialised = false
@@ -49,6 +55,9 @@ class DatePickerViewModel: ObservableObject {
         case .year(let year):
             self.year = year
             range = .year
+        case .custom:
+            // TODO
+            ()
         }
 
         isInitialised = true
@@ -68,6 +77,8 @@ class DatePickerViewModel: ObservableObject {
             }
         case .year:
             year = year + 1
+        case .custom:
+            ()
         }
 
         updateDisplayMode()
@@ -86,6 +97,8 @@ class DatePickerViewModel: ObservableObject {
             }
         case .year:
             year = year - 1
+        case .custom:
+            ()
         }
 
         updateDisplayMode()
@@ -108,24 +121,32 @@ class DatePickerViewModel: ObservableObject {
         switch displayMode {
         case .day(let date):
             canIncrease = !Calendar.current.isDate(date, inSameDayAs: Date())
+            canDecrease = true
         case .month(let month, let year):
             let currentMonth = Calendar.current.component(.month, from: Date()) - 1
             let currentYear = Calendar.current.component(.year, from: Date())
             canIncrease = (year < currentYear) || (month < currentMonth && year <= currentYear)
+            canDecrease = true
         case .year(let year):
             let currentYear = Calendar.current.component(.year, from: Date())
             canIncrease = year < currentYear
+            canDecrease = true
+        case .custom:
+            canIncrease = false
+            canDecrease = false
         }
     }
 
     private func makeUpdatedDisplayMode() -> StatsDisplayMode {
-        switch range {
+        return switch range {
         case .day:
-            return StatsDisplayMode.day(date)
+            StatsDisplayMode.day(date)
         case .month:
-            return StatsDisplayMode.month(month, year)
+            StatsDisplayMode.month(month, year)
         case .year:
-            return StatsDisplayMode.year(year)
+            StatsDisplayMode.year(year)
+        case .custom(let start, let end):
+            StatsDisplayMode.custom(start, end)
         }
     }
 }

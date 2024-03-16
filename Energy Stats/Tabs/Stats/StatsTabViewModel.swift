@@ -50,11 +50,13 @@ class StatsTabViewModel: ObservableObject, HasLoadState {
     private var max: StatsGraphValue?
     var exportFile: CSVTextFile?
     private var currentDeviceCancellable: AnyCancellable?
+    private let fetcher: StatsDataFetcher
 
     init(networking: Networking, configManager: ConfigManaging) {
         self.networking = networking
         self.configManager = configManager
         self.approximationsCalculator = ApproximationsCalculator(configManager: configManager, networking: networking)
+        self.fetcher = StatsDataFetcher(networking: networking, approximationsCalculator: approximationsCalculator)
 
         haptic.prepare()
 
@@ -108,38 +110,31 @@ class StatsTabViewModel: ObservableObject, HasLoadState {
         }
 
         let reportVariables: [ReportVariable] = [.feedIn, .generation, .chargeEnergyToTal, .dischargeEnergyToTal, .gridConsumption, .loads]
-        let queryDate = makeQueryDate()
-        let reportType = makeReportType()
 
         do {
-            let reports = try await networking.fetchReport(deviceSN: currentDevice.deviceSN, variables: reportVariables, queryDate: queryDate, reportType: reportType)
-            totals = try await approximationsCalculator.generateTotals(currentDevice: currentDevice, reportType: reportType, queryDate: queryDate, reports: reports, reportVariables: reportVariables)
+            let updatedData: [StatsGraphValue]
+            let totals: [ReportVariable: Double]
 
-            let updatedData = reports.flatMap { reportResponse -> [StatsGraphValue] in
-                guard let reportVariable = ReportVariable(rawValue: reportResponse.variable) else { return [] }
-
-                return reportResponse.values.map { dataPoint in
-                    var graphPointDate = Date.yesterday()
-
-                    switch displayMode {
-                    case .day(let date):
-                        graphPointDate = Calendar.current.date(from: DateComponents(year: Calendar.current.component(.year, from: date),
-                                                                                    month: Calendar.current.component(.month, from: date),
-                                                                                    day: Calendar.current.component(.day, from: date),
-                                                                                    hour: dataPoint.index - 1, minute: 0))!
-                    case .month(let month, let year):
-                        graphPointDate = Calendar.current.date(from: DateComponents(year: year, month: month + 1, day: dataPoint.index, hour: 0))!
-                    case .year(let year):
-                        graphPointDate = Calendar.current.date(from: DateComponents(year: year, month: dataPoint.index, day: 1, hour: 0))!
-                    }
-
-                    return StatsGraphValue(
-                        date: graphPointDate, value: dataPoint.value, type: reportVariable
-                    )
-                }
+            if case .custom(let start, let end) = displayMode {
+                (updatedData, totals) = try await fetcher.fetchCustomData(
+                    device: currentDevice,
+                    start: start,
+                    end: end,
+                    reportVariables: reportVariables,
+                    approximationsCalculator: approximationsCalculator,
+                    displayMode: displayMode
+                )
+            } else {
+                (updatedData, totals) = try await fetcher.fetchData(
+                    device: currentDevice,
+                    reportVariables: reportVariables,
+                    approximationsCalculator: approximationsCalculator,
+                    displayMode: displayMode
+                )
             }
 
             await MainActor.run {
+                self.totals = totals
                 self.unit = displayMode.unit()
                 self.rawData = updatedData
                 calculateApproximations()
@@ -238,6 +233,8 @@ class StatsTabViewModel: ObservableObject, HasLoadState {
             return DateFormatter.dayMonth.string(from: date)
         case .year:
             return DateFormatter.monthYear.string(from: date)
+        case .custom:
+            return ""
         }
     }
 
@@ -252,19 +249,16 @@ class StatsTabViewModel: ObservableObject, HasLoadState {
 
         switch displayMode {
         case .day(let date):
-            let calendar = Calendar.current
-            let components = calendar.dateComponents([.year, .month, .day], from: date)
-            if let year = components.year, let month = components.month, let day = components.day {
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "MMMM"
-                exportFileName = "energystats_stats_\(year)_\(month)_\(day).csv"
-            } else {
-                exportFileName = "energystats_stats_unknown_date.csv"
-            }
+            let name = dateName(from: date)
+            exportFileName = "energystats_stats_\(name).csv"
         case .month(let month, let year):
             exportFileName = "energystats_stats_\(year)_\(month + 1).csv"
         case .year(let year):
             exportFileName = "energystats_stats_\(year).csv"
+        case .custom(let start, let end):
+            let startName = dateName(from: start)
+            let endName = dateName(from: end)
+            exportFileName = "energystats_stats_\(startName)_\(endName).csv"
         }
 
         exportFile = CSVTextFile(text: text, filename: exportFileName)
@@ -272,27 +266,16 @@ class StatsTabViewModel: ObservableObject, HasLoadState {
 }
 
 private extension StatsTabViewModel {
-    func makeQueryDate() -> QueryDate {
-        switch displayMode {
-        case .day(let date):
-            return QueryDate(year: Calendar.current.component(.year, from: date),
-                             month: Calendar.current.component(.month, from: date),
-                             day: Calendar.current.component(.day, from: date))
-        case .month(let month, let year):
-            return QueryDate(year: year, month: month + 1, day: nil)
-        case .year(let year):
-            return QueryDate(year: year, month: nil, day: nil)
-        }
-    }
+    func dateName(from date: Date) -> String {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day], from: date)
 
-    func makeReportType() -> ReportType {
-        switch displayMode {
-        case .day:
-            return .day
-        case .month:
-            return .month
-        case .year:
-            return .year
+        if let year = components.year, let month = components.month, let day = components.day {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMMM"
+            return "\(year)_\(month)_\(day)"
+        } else {
+            return "unknown_date"
         }
     }
 }

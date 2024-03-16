@@ -120,6 +120,7 @@
 		416AE4492A8128B9003D0122 /* OptionalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41028F9428CDD7A300FB70FD /* OptionalView.swift */; };
 		416AE44B2A8170E6003D0122 /* SelectableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416AE44A2A8170E6003D0122 /* SelectableItem.swift */; };
 		416AE44D2A821E4F003D0122 /* AlertContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416AE44C2A821E4F003D0122 /* AlertContent.swift */; };
+		416D761B2BA60C3500074370 /* StatsDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416D761A2BA60C3500074370 /* StatsDataFetcher.swift */; };
 		417153E429F2BCD700639A7B /* ParameterGraphHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417153E329F2BCD700639A7B /* ParameterGraphHeaderView.swift */; };
 		417153E629F2BD3300639A7B /* LoadState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417153E529F2BD3300639A7B /* LoadState.swift */; };
 		4171854229FFCF2500D18CDD /* String+MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171854129FFCF2500D18CDD /* String+MD5.swift */; };
@@ -169,7 +170,7 @@
 		419AB4802AA36D24002CBC96 /* DisplaySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AB47F2AA36D24002CBC96 /* DisplaySettingsView.swift */; };
 		419B8DEA2B04D6BA0094402C /* SolcastCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419B8DE92B04D6BA0094402C /* SolcastCacheTests.swift */; };
 		419CCB542933BABF00882649 /* ErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419CCB532933BABF00882649 /* ErrorAlertView.swift */; };
-		419DFA862A12930E0067313A /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419DFA842A1292380067313A /* DatePickerView.swift */; };
+		419DFA862A12930E0067313A /* StatsDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419DFA842A1292380067313A /* StatsDatePickerView.swift */; };
 		419DFA882A12A6DF0067313A /* DatePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419DFA872A12A6DF0067313A /* DatePickerViewModel.swift */; };
 		41A25D3D28CA5CDF00315714 /* ParametersGraphTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A25D3C28CA5CDF00315714 /* ParametersGraphTabView.swift */; };
 		41A25D3F28CA5CFB00315714 /* ParametersGraphTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A25D3E28CA5CFB00315714 /* ParametersGraphTabViewModel.swift */; };
@@ -477,6 +478,7 @@
 		416AE4472A812876003D0122 /* WorkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkMode.swift; sourceTree = "<group>"; };
 		416AE44A2A8170E6003D0122 /* SelectableItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectableItem.swift; sourceTree = "<group>"; };
 		416AE44C2A821E4F003D0122 /* AlertContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertContent.swift; sourceTree = "<group>"; };
+		416D761A2BA60C3500074370 /* StatsDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsDataFetcher.swift; sourceTree = "<group>"; };
 		417153E329F2BCD700639A7B /* ParameterGraphHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterGraphHeaderView.swift; sourceTree = "<group>"; };
 		417153E529F2BD3300639A7B /* LoadState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadState.swift; sourceTree = "<group>"; };
 		4171854129FFCF2500D18CDD /* String+MD5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+MD5.swift"; sourceTree = "<group>"; };
@@ -534,7 +536,7 @@
 		419AB47F2AA36D24002CBC96 /* DisplaySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaySettingsView.swift; sourceTree = "<group>"; };
 		419B8DE92B04D6BA0094402C /* SolcastCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolcastCacheTests.swift; sourceTree = "<group>"; };
 		419CCB532933BABF00882649 /* ErrorAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertView.swift; sourceTree = "<group>"; };
-		419DFA842A1292380067313A /* DatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
+		419DFA842A1292380067313A /* StatsDatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsDatePickerView.swift; sourceTree = "<group>"; };
 		419DFA872A12A6DF0067313A /* DatePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewModel.swift; sourceTree = "<group>"; };
 		41A25D3C28CA5CDF00315714 /* ParametersGraphTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersGraphTabView.swift; sourceTree = "<group>"; };
 		41A25D3E28CA5CFB00315714 /* ParametersGraphTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersGraphTabViewModel.swift; sourceTree = "<group>"; };
@@ -1045,13 +1047,14 @@
 				418141442A12BABA00FFC6A6 /* StatsGraphView.swift */,
 				417AA2192A12454A0073CD34 /* StatsTabView.swift */,
 				417AA21C2A1245C00073CD34 /* StatsTabViewModel.swift */,
-				419DFA842A1292380067313A /* DatePickerView.swift */,
+				419DFA842A1292380067313A /* StatsDatePickerView.swift */,
 				419DFA872A12A6DF0067313A /* DatePickerViewModel.swift */,
 				41CD1F312A1414C1006B0C00 /* StatsGraphVariableToggles.swift */,
 				41C6AF652A360CF600C88F2B /* CSVTextFile.swift */,
 				41C19DCC2A4DDE46009883AB /* SelfSufficiencyEstimateView.swift */,
 				413BF2882A99F8A500A32B0D /* ApproximationsView.swift */,
 				418C6E982AFB8A15000DE35F /* ApproximationsCalculator.swift */,
+				416D761A2BA60C3500074370 /* StatsDataFetcher.swift */,
 			);
 			path = Stats;
 			sourceTree = "<group>";
@@ -1654,7 +1657,7 @@
 				41CD1F322A1414C1006B0C00 /* StatsGraphVariableToggles.swift in Sources */,
 				4160098D2A8D1A690096CCD9 /* BottomButtonsView.swift in Sources */,
 				4110291D2A72AFC2004018BB /* BatterySOCSettingsViewModel.swift in Sources */,
-				419DFA862A12930E0067313A /* DatePickerView.swift in Sources */,
+				419DFA862A12930E0067313A /* StatsDatePickerView.swift in Sources */,
 				416318B929DDD44C00C2C285 /* DebugDataView.swift in Sources */,
 				41009A752B03B13A009D853B /* SolarForecastViewModel.swift in Sources */,
 				4149D3AD2B3C4DAA00314449 /* UnsupportedErrorView.swift in Sources */,
@@ -1673,6 +1676,7 @@
 				4110290F2A71B908004018BB /* BatterySOCSettingsView.swift in Sources */,
 				419DFA882A12A6DF0067313A /* DatePickerViewModel.swift in Sources */,
 				4156E7B72B9C839F0000E807 /* PowerStationSettingsView.swift in Sources */,
+				416D761B2BA60C3500074370 /* StatsDataFetcher.swift in Sources */,
 				410FC88A2AB9EAD90004CBC2 /* ParameterVariableGroupEditorViewModel.swift in Sources */,
 				4171854E2A010B6300D18CDD /* ParameterGraphVariableChooserViewModel.swift in Sources */,
 				418199C72A4034530001B5D4 /* FAQView.swift in Sources */,
