@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct StatsDatePickerView: View {
-    @ObservedObject var viewModel: DatePickerViewModel
+    @ObservedObject var viewModel: StatsDatePickerViewModel
     @Binding var showingGraph: Bool
 
     var body: some View {
@@ -136,7 +136,7 @@ struct StatsDatePickerView: View {
 }
 
 #Preview {
-    let model = DatePickerViewModel(.constant(.month(8, 2023)))
+    let model = StatsDatePickerViewModel(.constant(.month(8, 2023)))
 
     return StatsDatePickerView(viewModel: model, showingGraph: .constant(true))
         .frame(height: 200)

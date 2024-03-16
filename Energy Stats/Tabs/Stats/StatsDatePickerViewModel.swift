@@ -1,5 +1,5 @@
 //
-//  DatePickerViewModel.swift
+//  StatsDatePickerViewModel.swift
 //  Energy Stats
 //
 //  Created by Alistair Priest on 15/05/2023.
@@ -18,7 +18,7 @@ enum DatePickerRange: Equatable {
     }
 }
 
-class DatePickerViewModel: ObservableObject {
+class StatsDatePickerViewModel: ObservableObject {
     @Published var range: DatePickerRange = .day {
         didSet { updateDisplayMode() }
     }
@@ -55,9 +55,8 @@ class DatePickerViewModel: ObservableObject {
         case .year(let year):
             self.year = year
             range = .year
-        case .custom:
-            // TODO
-            ()
+        case .custom(let start, let end):
+            range = .custom(start, end)
         }
 
         isInitialised = true

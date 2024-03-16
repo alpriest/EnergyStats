@@ -171,7 +171,7 @@
 		419B8DEA2B04D6BA0094402C /* SolcastCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419B8DE92B04D6BA0094402C /* SolcastCacheTests.swift */; };
 		419CCB542933BABF00882649 /* ErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419CCB532933BABF00882649 /* ErrorAlertView.swift */; };
 		419DFA862A12930E0067313A /* StatsDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419DFA842A1292380067313A /* StatsDatePickerView.swift */; };
-		419DFA882A12A6DF0067313A /* DatePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419DFA872A12A6DF0067313A /* DatePickerViewModel.swift */; };
+		419DFA882A12A6DF0067313A /* StatsDatePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419DFA872A12A6DF0067313A /* StatsDatePickerViewModel.swift */; };
 		41A25D3D28CA5CDF00315714 /* ParametersGraphTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A25D3C28CA5CDF00315714 /* ParametersGraphTabView.swift */; };
 		41A25D3F28CA5CFB00315714 /* ParametersGraphTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A25D3E28CA5CFB00315714 /* ParametersGraphTabViewModel.swift */; };
 		41A263222B6AEE9F0027E52A /* ConfigureAPIKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A263212B6AEE9F0027E52A /* ConfigureAPIKeyView.swift */; };
@@ -537,7 +537,7 @@
 		419B8DE92B04D6BA0094402C /* SolcastCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolcastCacheTests.swift; sourceTree = "<group>"; };
 		419CCB532933BABF00882649 /* ErrorAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertView.swift; sourceTree = "<group>"; };
 		419DFA842A1292380067313A /* StatsDatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsDatePickerView.swift; sourceTree = "<group>"; };
-		419DFA872A12A6DF0067313A /* DatePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewModel.swift; sourceTree = "<group>"; };
+		419DFA872A12A6DF0067313A /* StatsDatePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsDatePickerViewModel.swift; sourceTree = "<group>"; };
 		41A25D3C28CA5CDF00315714 /* ParametersGraphTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersGraphTabView.swift; sourceTree = "<group>"; };
 		41A25D3E28CA5CFB00315714 /* ParametersGraphTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersGraphTabViewModel.swift; sourceTree = "<group>"; };
 		41A25D4028CA6E0000315714 /* DemoNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoNetworking.swift; sourceTree = "<group>"; };
@@ -1048,7 +1048,7 @@
 				417AA2192A12454A0073CD34 /* StatsTabView.swift */,
 				417AA21C2A1245C00073CD34 /* StatsTabViewModel.swift */,
 				419DFA842A1292380067313A /* StatsDatePickerView.swift */,
-				419DFA872A12A6DF0067313A /* DatePickerViewModel.swift */,
+				419DFA872A12A6DF0067313A /* StatsDatePickerViewModel.swift */,
 				41CD1F312A1414C1006B0C00 /* StatsGraphVariableToggles.swift */,
 				41C6AF652A360CF600C88F2B /* CSVTextFile.swift */,
 				41C19DCC2A4DDE46009883AB /* SelfSufficiencyEstimateView.swift */,
@@ -1674,7 +1674,7 @@
 				41C49EAE2A0398E4003700CB /* PreviewUserManager.swift in Sources */,
 				419092232B1DC0070017CB65 /* ScheduleSummaryViewModel.swift in Sources */,
 				4110290F2A71B908004018BB /* BatterySOCSettingsView.swift in Sources */,
-				419DFA882A12A6DF0067313A /* DatePickerViewModel.swift in Sources */,
+				419DFA882A12A6DF0067313A /* StatsDatePickerViewModel.swift in Sources */,
 				4156E7B72B9C839F0000E807 /* PowerStationSettingsView.swift in Sources */,
 				416D761B2BA60C3500074370 /* StatsDataFetcher.swift in Sources */,
 				410FC88A2AB9EAD90004CBC2 /* ParameterVariableGroupEditorViewModel.swift in Sources */,

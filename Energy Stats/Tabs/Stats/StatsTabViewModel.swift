@@ -234,7 +234,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState {
         case .year:
             return DateFormatter.monthYear.string(from: date)
         case .custom:
-            return ""
+            return DateFormatter.dayMonth.string(from: date)
         }
     }
 

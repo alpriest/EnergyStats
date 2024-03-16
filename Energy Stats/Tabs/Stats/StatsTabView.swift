@@ -59,7 +59,7 @@ struct StatsTabView: View {
     var body: some View {
         Group {
             VStack {
-                StatsDatePickerView(viewModel: DatePickerViewModel($viewModel.displayMode),
+                StatsDatePickerView(viewModel: StatsDatePickerViewModel($viewModel.displayMode),
                                showingGraph: $showingGraph)
 
                 ScrollView {
