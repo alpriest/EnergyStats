@@ -90,6 +90,7 @@
 		4140145528C70B3200EA5BA1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4140145428C70B3200EA5BA1 /* Preview Assets.xcassets */; };
 		4140145C28C70B4A00EA5BA1 /* PowerFlowTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140145B28C70B4A00EA5BA1 /* PowerFlowTabViewModel.swift */; };
 		4140ECDA292D58D300992DD8 /* ParameterGraphVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140ECD9292D58D300992DD8 /* ParameterGraphVariable.swift */; };
+		414125992BA6285A00D5A842 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E299D529B78A41001F017B /* SnapshotHelper.swift */; };
 		4141B20028D86C7200B60157 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141B1FF28D86C7200B60157 /* UserManager.swift */; };
 		4141B20228D871B900B60157 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141B20128D871B900B60157 /* ContentView.swift */; };
 		41463D912AC44C7C00B2EB25 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 41463D902AC44C7C00B2EB25 /* Localizable.xcstrings */; };
@@ -242,7 +243,6 @@
 		41E165BD2B0BE33E00B17590 /* Array+Any.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E165BC2B0BE33E00B17590 /* Array+Any.swift */; };
 		41E1DFDF28D87781001235B9 /* SettingsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E1DFDE28D87781001235B9 /* SettingsTabView.swift */; };
 		41E299CF29B7260D001F017B /* Energy_Stats_UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E299CE29B7260D001F017B /* Energy_Stats_UITestsLaunchTests.swift */; };
-		41E299D629B78A42001F017B /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E299D529B78A41001F017B /* SnapshotHelper.swift */; };
 		41E3BEC12B1B55A30051C68B /* DataCeiling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E3BEC02B1B55A30051C68B /* DataCeiling.swift */; };
 		41E3BEC32B1B5A160051C68B /* AppSettingsPublisherFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E3BEC22B1B5A160051C68B /* AppSettingsPublisherFactory.swift */; };
 		41E4B31028DB7666003F7F47 /* BatteryPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E4B30F28DB7666003F7F47 /* BatteryPowerView.swift */; };
@@ -1812,7 +1812,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				41E299CF29B7260D001F017B /* Energy_Stats_UITestsLaunchTests.swift in Sources */,
-				41E299D629B78A42001F017B /* SnapshotHelper.swift in Sources */,
+				414125992BA6285A00D5A842 /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

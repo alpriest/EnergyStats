@@ -1,4 +1,5 @@
 {
+  "originHash" : "9b6ab1cc7ecf64cdfd8508f3b699210c0711605fd97c8f72f803457e714d411b",
   "pins" : [
     {
       "identity" : "markdownui",
@@ -37,5 +38,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

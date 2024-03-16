@@ -36,7 +36,7 @@ struct StatsDatePickerView: View {
                 }
 
                 Button {
-                    viewModel.range = .custom(.now.addingTimeInterval(0 - (86400 * 35)), .now)
+                    viewModel.range = .custom(.now.addingTimeInterval(0 - (86400 * 7)), .now)
                 } label: {
                     Label("Custom", systemImage: viewModel.range.isCustom ? "checkmark" : "")
                         .accessibilityIdentifier("custom")
@@ -108,35 +108,54 @@ struct StatsDatePickerView: View {
                         }
                     }.pickerStyle(.menu)
                 case .custom:
-                    EmptyView()
+                    HStack {
+                        DatePicker("Start", selection: $viewModel.customStartDate, in: ...Date(), displayedComponents: .date)
+                            .datePickerStyle(.compact)
+                            .labelsHidden()
+
+                        Image(systemName: "arrow.right")
+
+                        DatePicker("End", selection: $viewModel.customEndDate, in: ...Date(), displayedComponents: .date)
+                            .datePickerStyle(.compact)
+                            .labelsHidden()
+
+                        Spacer()
+                    }
                 }
             }
 
-            Spacer()
-
-            Button {
-                viewModel.decrease()
-            } label: {
-                Image(systemName: "chevron.left")
-                    .frame(minWidth: 22)
+            if viewModel.range.isCustom == false {
+                incrementDecrementButtons()
             }
-            .buttonStyle(.bordered)
-            .disabled(!viewModel.canDecrease)
-
-            Button {
-                viewModel.increase()
-            } label: {
-                Image(systemName: "chevron.right")
-                    .frame(minWidth: 22)
-            }
-            .buttonStyle(.bordered)
-            .disabled(!viewModel.canIncrease)
         }
+    }
+
+    @ViewBuilder
+    private func incrementDecrementButtons() -> some View {
+        Spacer()
+
+        Button {
+            viewModel.decrease()
+        } label: {
+            Image(systemName: "chevron.left")
+                .frame(minWidth: 22)
+        }
+        .buttonStyle(.bordered)
+        .disabled(!viewModel.canDecrease)
+
+        Button {
+            viewModel.increase()
+        } label: {
+            Image(systemName: "chevron.right")
+                .frame(minWidth: 22)
+        }
+        .buttonStyle(.bordered)
+        .disabled(!viewModel.canIncrease)
     }
 }
 
 #Preview {
-    let model = StatsDatePickerViewModel(.constant(.month(8, 2023)))
+    let model = StatsDatePickerViewModel(.constant(.custom(.now, .now)))
 
     return StatsDatePickerView(viewModel: model, showingGraph: .constant(true))
         .frame(height: 200)

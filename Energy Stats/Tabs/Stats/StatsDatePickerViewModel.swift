@@ -32,6 +32,14 @@ class StatsDatePickerViewModel: ObservableObject {
         didSet { updateDisplayMode() }
     }
 
+    @Published var customStartDate = Date.now {
+        didSet { updateDisplayMode() }
+    }
+
+    @Published var customEndDate = Date.now {
+        didSet { updateDisplayMode() }
+    }
+
     var yearRange = 2000 ... (Calendar.current.component(.year, from: .now))
     @Published var canIncrease = false
     @Published var canDecrease = true
