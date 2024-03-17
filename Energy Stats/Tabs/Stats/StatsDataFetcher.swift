@@ -24,37 +24,47 @@ struct StatsDataFetcher {
         var accumulatedGraphValues: [StatsGraphValue] = []
         var accumulatedReportResponses: [OpenReportResponse] = []
 
-        while current.month <= end.month {
-            let startMonth = Calendar.current.component(.month, from: current)
-            let startYear = Calendar.current.component(.year, from: current)
-            let startQueryDate = QueryDate(year: startYear, month: startMonth, day: nil)
-            let startReports = try await networking.fetchReport(
+        while current.month <= end.month || current.year < end.year {
+            let month = Calendar.current.component(.month, from: current)
+            let year = Calendar.current.component(.year, from: current)
+            let queryDate = QueryDate(year: year, month: month, day: nil)
+            let reports = try await networking.fetchReport(
                 deviceSN: device.deviceSN,
                 variables: reportVariables,
-                queryDate: startQueryDate,
+                queryDate: queryDate,
                 reportType: .month
             ).map { response in
                 response.copy(values: response.values.filter {
-                    let components = DateComponents(year: startYear, month: startMonth, day: $0.index)
+                    let components = DateComponents(year: year, month: month, day: $0.index)
                     guard let dataDate = Calendar.current.date(from: components) else { return false }
 
                     return start.date <= dataDate.date && dataDate.date <= end.date
                 })
             }
-            let startData = startReports.flatMap { reportResponse -> [StatsGraphValue] in
+            let graphValues = reports.flatMap { reportResponse -> [StatsGraphValue] in
                 guard let reportVariable = ReportVariable(rawValue: reportResponse.variable) else { return [] }
 
                 return reportResponse.values.map { dataPoint in
-                    let graphPointDate = Calendar.current.date(from: DateComponents(year: startYear, month: startMonth, day: dataPoint.index, hour: 0))!
+                    let graphPointDate = Calendar.current.date(from: DateComponents(year: year, month: month, day: dataPoint.index, hour: 0))!
 
-                    return StatsGraphValue(
-                        date: graphPointDate, value: dataPoint.value, type: reportVariable
-                    )
+                    return StatsGraphValue(date: graphPointDate, value: dataPoint.value, type: reportVariable)
                 }
             }
 
-            accumulatedReportResponses.append(contentsOf: startReports)
-            accumulatedGraphValues.append(contentsOf: startData)
+            reports.forEach { response in
+                if accumulatedReportResponses.contains(where: { $0.variable == response.variable }) {
+                    accumulatedReportResponses = accumulatedReportResponses.map {
+                        if $0.variable == response.variable {
+                            OpenReportResponse(variable: $0.variable, unit: $0.unit, values: $0.values + response.values)
+                        } else {
+                            $0
+                        }
+                    }
+                } else {
+                    accumulatedReportResponses.append(response)
+                }
+            }
+            accumulatedGraphValues.append(contentsOf: graphValues)
 
             if let nextMonth = Calendar.current.date(byAdding: .month, value: 1, to: current) {
                 current = nextMonth
