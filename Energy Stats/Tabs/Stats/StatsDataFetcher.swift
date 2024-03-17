@@ -20,67 +20,59 @@ struct StatsDataFetcher {
         approximationsCalculator: ApproximationsCalculator,
         displayMode: StatsDisplayMode
     ) async throws -> ([StatsGraphValue], [ReportVariable: Double]) {
-        let startDay = Calendar.current.component(.day, from: start)
-        let startMonth = Calendar.current.component(.month, from: start)
-        let startYear = Calendar.current.component(.year, from: start)
-        let startQueryDate = QueryDate(year: startYear, month: startMonth, day: nil)
-        let startReports = try await networking.fetchReport(
-            deviceSN: device.deviceSN,
-            variables: reportVariables,
-            queryDate: startQueryDate,
-            reportType: .month
-        ).map { response in
-            response.copy(values: response.values.filter {
-                $0.index >= startDay
-            })
-        }
-        let startData = startReports.flatMap { reportResponse -> [StatsGraphValue] in
-            guard let reportVariable = ReportVariable(rawValue: reportResponse.variable) else { return [] }
+        var current = start
+        var accumulatedGraphValues: [StatsGraphValue] = []
+        var accumulatedReportResponses: [OpenReportResponse] = []
 
-            return reportResponse.values.map { dataPoint in
-                let graphPointDate = Calendar.current.date(from: DateComponents(year: startYear, month: startMonth, day: dataPoint.index, hour: 0))!
+        while current.month <= end.month {
+            print("Fetch data for \(current)")
 
-                return StatsGraphValue(
-                    date: graphPointDate, value: dataPoint.value, type: reportVariable
-                )
+            let startMonth = Calendar.current.component(.month, from: current)
+            let startYear = Calendar.current.component(.year, from: current)
+            let startQueryDate = QueryDate(year: startYear, month: startMonth, day: nil)
+            let startReports = try await networking.fetchReport(
+                deviceSN: device.deviceSN,
+                variables: reportVariables,
+                queryDate: startQueryDate,
+                reportType: .month
+            ).map { response in
+                response.copy(values: response.values.filter {
+                    let components = DateComponents(year: startYear, month: startMonth, day: $0.index + 1)
+                    guard let dataDate = Calendar.current.date(from: components) else { return false }
+
+                    return dataDate >= start && dataDate <= end
+                })
             }
-        }
+            let startData = startReports.flatMap { reportResponse -> [StatsGraphValue] in
+                guard let reportVariable = ReportVariable(rawValue: reportResponse.variable) else { return [] }
 
-        let endDay = Calendar.current.component(.day, from: end)
-        let endMonth = Calendar.current.component(.month, from: end)
-        let endYear = Calendar.current.component(.year, from: end)
-        let endQueryDate = QueryDate(year: endYear, month: endMonth, day: nil)
-        let endReports = try await networking.fetchReport(
-            deviceSN: device.deviceSN,
-            variables: reportVariables,
-            queryDate: endQueryDate,
-            reportType: .month
-        ).map { response in
-            response.copy(values: response.values.filter {
-                $0.index <= endDay
-            })
-        }
-        let endData = endReports.flatMap { reportResponse -> [StatsGraphValue] in
-            guard let reportVariable = ReportVariable(rawValue: reportResponse.variable) else { return [] }
+                return reportResponse.values.map { dataPoint in
+                    let graphPointDate = Calendar.current.date(from: DateComponents(year: startYear, month: startMonth, day: dataPoint.index, hour: 0))!
 
-            return reportResponse.values.map { dataPoint in
-                let graphPointDate = Calendar.current.date(from: DateComponents(year: endYear, month: endMonth, day: dataPoint.index, hour: 0))!
+                    return StatsGraphValue(
+                        date: graphPointDate, value: dataPoint.value, type: reportVariable
+                    )
+                }
+            }
 
-                return StatsGraphValue(
-                    date: graphPointDate, value: dataPoint.value, type: reportVariable
-                )
+            accumulatedReportResponses.append(contentsOf: startReports)
+            accumulatedGraphValues.append(contentsOf: startData)
+
+            if let nextMonth = Calendar.current.date(byAdding: .month, value: 1, to: current) {
+                current = nextMonth
+            } else {
+                break // Break the loop if unable to find the next month
             }
         }
 
         let totals = try await approximationsCalculator.generateTotals(
             currentDevice: device,
             reportType: .month,
-            queryDate: startQueryDate,
-            reports: startReports + endReports,
+            reports: accumulatedReportResponses,
             reportVariables: reportVariables
         )
 
-        return (startData + endData, totals)
+        return (accumulatedGraphValues, totals)
     }
 
     func fetchData(

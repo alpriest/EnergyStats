@@ -36,7 +36,7 @@ struct StatsDatePickerView: View {
                 }
 
                 Button {
-                    viewModel.range = .custom(.now.addingTimeInterval(0 - (86400 * 7)), .now)
+                    viewModel.range = .custom(.now.addingTimeInterval(0 - (86400 * 30)), .now)
                 } label: {
                     Label("Custom", systemImage: viewModel.range.isCustom ? "checkmark" : "")
                         .accessibilityIdentifier("custom")
@@ -62,6 +62,7 @@ struct StatsDatePickerView: View {
                 case .day:
                     DatePicker("Choose date", selection: $viewModel.date, in: ...Date(), displayedComponents: .date)
                         .datePickerStyle(.compact)
+                        .id("day_\(viewModel.date)")
                         .labelsHidden()
                 case .month:
                     HStack {
@@ -147,12 +148,14 @@ struct StatsDatePickerView: View {
             DatePicker("Start", selection: $viewModel.customStartDate, in: ...Date(), displayedComponents: .date)
                 .datePickerStyle(.compact)
                 .labelsHidden()
+                .id("customStart_\(viewModel.customStartDate)")
 
             Image(systemName: "arrow.right")
 
             DatePicker("End", selection: $viewModel.customEndDate, in: viewModel.customStartDate...Date(), displayedComponents: .date)
                 .datePickerStyle(.compact)
                 .labelsHidden()
+                .id("customEnd_\(viewModel.customEndDate)")
 
             Spacer()
         }

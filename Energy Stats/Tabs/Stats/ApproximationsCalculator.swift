@@ -57,13 +57,13 @@ struct ApproximationsCalculator {
     func generateTotals(
         currentDevice: Device,
         reportType: ReportType,
-        queryDate: QueryDate,
+        queryDate: QueryDate? = nil,
         reports: [OpenReportResponse],
         reportVariables: [ReportVariable]
     ) async throws -> [ReportVariable: Double] {
         var totals = [ReportVariable: Double]()
 
-        if case .day = reportType {
+        if case .day = reportType, let queryDate {
             let monthlyReports = try await networking.fetchReport(deviceSN: currentDevice.deviceSN, variables: reportVariables, queryDate: queryDate, reportType: .month)
 
             monthlyReports.forEach { reportResponse in

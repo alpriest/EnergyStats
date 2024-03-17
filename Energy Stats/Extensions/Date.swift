@@ -25,6 +25,10 @@ extension Date {
         return formatter.string(from: self)
     }
 
+    var month: Int {
+        Calendar.current.component(.month, from: self)
+    }
+
     static func yesterday() -> Date {
         Calendar.current.date(byAdding: .day, value: -1, to: .now)!
     }
