@@ -38,7 +38,7 @@ struct StatsDatePickerView: View {
                 Button {
                     viewModel.range = .custom(.now.addingTimeInterval(0 - (86400 * 30)), .now)
                 } label: {
-                    Label("Custom", systemImage: viewModel.range.isCustom ? "checkmark" : "")
+                    Label("Custom range", systemImage: viewModel.range.isCustom ? "checkmark" : "")
                         .accessibilityIdentifier("custom")
                 }
 

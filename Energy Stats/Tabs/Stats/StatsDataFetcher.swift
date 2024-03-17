@@ -25,8 +25,6 @@ struct StatsDataFetcher {
         var accumulatedReportResponses: [OpenReportResponse] = []
 
         while current.month <= end.month {
-            print("Fetch data for \(current)")
-
             let startMonth = Calendar.current.component(.month, from: current)
             let startYear = Calendar.current.component(.year, from: current)
             let startQueryDate = QueryDate(year: startYear, month: startMonth, day: nil)
@@ -37,10 +35,10 @@ struct StatsDataFetcher {
                 reportType: .month
             ).map { response in
                 response.copy(values: response.values.filter {
-                    let components = DateComponents(year: startYear, month: startMonth, day: $0.index + 1)
+                    let components = DateComponents(year: startYear, month: startMonth, day: $0.index)
                     guard let dataDate = Calendar.current.date(from: components) else { return false }
 
-                    return dataDate >= start && dataDate <= end
+                    return start.date <= dataDate.date && dataDate.date <= end.date
                 })
             }
             let startData = startReports.flatMap { reportResponse -> [StatsGraphValue] in
