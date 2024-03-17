@@ -33,14 +33,18 @@ class StatsDatePickerViewModel: ObservableObject {
     }
 
     @Published var customStartDate = Date.now {
-        didSet { updateDisplayMode() }
+        didSet {
+            range = .custom(customStartDate, customEndDate)
+        }
     }
 
     @Published var customEndDate = Date.now {
-        didSet { updateDisplayMode() }
+        didSet {
+            range = .custom(customStartDate, customEndDate)
+        }
     }
 
-    var yearRange = 2000 ... (Calendar.current.component(.year, from: .now))
+    var yearRange = 2010 ... (Calendar.current.component(.year, from: .now))
     @Published var canIncrease = false
     @Published var canDecrease = true
 
@@ -65,6 +69,8 @@ class StatsDatePickerViewModel: ObservableObject {
             range = .year
         case .custom(let start, let end):
             range = .custom(start, end)
+            customStartDate = start
+            customEndDate = end
         }
 
         isInitialised = true

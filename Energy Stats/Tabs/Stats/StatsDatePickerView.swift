@@ -108,19 +108,7 @@ struct StatsDatePickerView: View {
                         }
                     }.pickerStyle(.menu)
                 case .custom:
-                    HStack {
-                        DatePicker("Start", selection: $viewModel.customStartDate, in: ...Date(), displayedComponents: .date)
-                            .datePickerStyle(.compact)
-                            .labelsHidden()
-
-                        Image(systemName: "arrow.right")
-
-                        DatePicker("End", selection: $viewModel.customEndDate, in: ...Date(), displayedComponents: .date)
-                            .datePickerStyle(.compact)
-                            .labelsHidden()
-
-                        Spacer()
-                    }
+                    customDatePickers()
                 }
             }
 
@@ -151,6 +139,23 @@ struct StatsDatePickerView: View {
         }
         .buttonStyle(.bordered)
         .disabled(!viewModel.canIncrease)
+    }
+
+    @ViewBuilder
+    private func customDatePickers() -> some View {
+        HStack {
+            DatePicker("Start", selection: $viewModel.customStartDate, in: ...Date(), displayedComponents: .date)
+                .datePickerStyle(.compact)
+                .labelsHidden()
+
+            Image(systemName: "arrow.right")
+
+            DatePicker("End", selection: $viewModel.customEndDate, in: viewModel.customStartDate...Date(), displayedComponents: .date)
+                .datePickerStyle(.compact)
+                .labelsHidden()
+
+            Spacer()
+        }
     }
 }
 
