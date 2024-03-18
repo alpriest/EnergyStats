@@ -17,7 +17,6 @@ struct StatsDataFetcher {
         start: Date,
         end: Date,
         reportVariables: [ReportVariable],
-        approximationsCalculator: ApproximationsCalculator,
         displayMode: StatsDisplayMode
     ) async throws -> ([StatsGraphValue], [ReportVariable: Double]) {
         var current = start
@@ -86,7 +85,6 @@ struct StatsDataFetcher {
     func fetchData(
         device: Device,
         reportVariables: [ReportVariable],
-        approximationsCalculator: ApproximationsCalculator,
         displayMode: StatsDisplayMode
     ) async throws -> ([StatsGraphValue], [ReportVariable: Double]) {
         let queryDate = makeQueryDate(displayMode: displayMode)

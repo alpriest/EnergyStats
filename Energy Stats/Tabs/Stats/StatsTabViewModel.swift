@@ -121,14 +121,12 @@ class StatsTabViewModel: ObservableObject, HasLoadState {
                     start: start,
                     end: end,
                     reportVariables: reportVariables,
-                    approximationsCalculator: approximationsCalculator,
                     displayMode: displayMode
                 )
             } else {
                 (updatedData, totals) = try await fetcher.fetchData(
                     device: currentDevice,
                     reportVariables: reportVariables,
-                    approximationsCalculator: approximationsCalculator,
                     displayMode: displayMode
                 )
             }
