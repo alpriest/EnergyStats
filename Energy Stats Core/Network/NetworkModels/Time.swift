@@ -86,7 +86,13 @@ public extension Time {
     }
 
     func toDate() -> Date {
-        guard let result = Calendar.current.date(bySetting: .hour, value: hour, of: .now) else { return .now }
-        return Calendar.current.date(bySetting: .minute, value: minute, of: result) ?? .now
+        guard let startOfHour = Calendar.current.date(bySetting: .minute, value: 0, of: .now),
+              let result = Calendar.current.date(bySetting: .hour, value: hour, of: startOfHour),
+              let result2 = Calendar.current.date(bySetting: .minute, value: minute, of: result)
+        else {
+            return .now
+        }
+
+        return result2
     }
 }

@@ -23,6 +23,7 @@ public struct DeviceSummaryResponse: Codable, Hashable {
     public let deviceSN: String
     public let moduleSN: String
     public let stationID: String
+    public let stationName: String
     public let productType: String
     public let deviceType: String
     public let hasBattery: Bool

@@ -63,7 +63,7 @@ public class ConfigManager: ConfigManaging {
 
             return Device(
                 deviceSN: device.deviceSN,
-                stationName: nil,
+                stationName: device.stationName,
                 stationID: device.stationID,
                 battery: deviceBattery,
                 moduleSN: device.moduleSN,
