@@ -20,6 +20,7 @@ struct SchedulePhaseEditView: View {
     @State private var minSOCError: LocalizedStringKey?
     @State private var fdSOCError: LocalizedStringKey?
     @State private var timeError: LocalizedStringKey?
+    @State private var forceDischargePowerError: LocalizedStringKey?
     private let id: String
     private let modes = WorkMode.values
     private let onChange: (SchedulePhase) -> Void
@@ -75,12 +76,14 @@ struct SchedulePhaseEditView: View {
                         Text("%")
                     }
                 } footer: {
-                    OptionalView(minSOCError) {
-                        Text($0)
-                            .foregroundStyle(Color.red)
-                    }
-                    OptionalView(minSoCDescription()) {
-                        Text($0)
+                    VStack {
+                        OptionalView(minSOCError) {
+                            Text($0)
+                                .foregroundStyle(Color.red)
+                        }
+                        OptionalView(minSoCDescription()) {
+                            Text($0)
+                        }
                     }
                 }
 
@@ -94,12 +97,14 @@ struct SchedulePhaseEditView: View {
                         Text("%")
                     }
                 } footer: {
-                    OptionalView(fdSOCError) {
-                        Text($0)
-                            .foregroundStyle(Color.red)
-                    }
-                    OptionalView(forceDischargeSoCDescription()) {
-                        Text($0)
+                    VStack {
+                        OptionalView(fdSOCError) {
+                            Text($0)
+                                .foregroundStyle(Color.red)
+                        }
+                        OptionalView(forceDischargeSoCDescription()) {
+                            Text($0)
+                        }
                     }
                 }
 
@@ -113,8 +118,14 @@ struct SchedulePhaseEditView: View {
                         Text("W")
                     }
                 } footer: {
-                    OptionalView(forceDischargePowerDescription()) {
-                        Text($0)
+                    VStack {
+                        OptionalView(forceDischargePowerError) {
+                            Text($0)
+                                .foregroundStyle(Color.red)
+                        }
+                        OptionalView(forceDischargePowerDescription()) {
+                            Text($0)
+                        }
                     }
                 }
 
@@ -184,6 +195,7 @@ struct SchedulePhaseEditView: View {
         minSOCError = nil
         fdSOCError = nil
         timeError = nil
+        forceDischargePowerError = nil
 
         if let minSOC = Int(minSOC), !(10...100 ~= minSOC) {
             minSOCError = "Please enter a number between 10 and 100"
@@ -199,6 +211,10 @@ struct SchedulePhaseEditView: View {
 
         if startTime >= endTime {
             timeError = "End time must be after start time"
+        }
+
+        if case .ForceDischarge = workMode, Int(fdPower) == 0 {
+            forceDischargePowerError = "Force Discharge power needs to be greater than 0 to discharge"
         }
     }
 }

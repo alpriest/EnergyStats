@@ -3926,7 +3926,32 @@
       }
     },
     "Custom range" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Benutzerdefinierter Bereich"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rango personalizado"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intervallo personalizzato"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Niestandardowy zakres"
+          }
+        }
+      }
     },
     "Data" : {
       "localizations" : {
@@ -5778,6 +5803,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wymuś moc rozładowania"
+          }
+        }
+      }
+    },
+    "Force Discharge power needs to be greater than 0 to discharge" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Entladungskraft muss größer als 0 sein, um zu entladen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La fuerza de descarga debe ser mayor que 0 para descargar"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La forza di scarica deve essere maggiore di 0 per scaricare"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moc rozładowania musi być większa niż 0, aby rozładować"
           }
         }
       }

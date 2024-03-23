@@ -264,10 +264,11 @@ class NetworkFacade: FoxAPIServicing {
 
 class ThrottleManager {
     private var lastCallTimes: [String: Date] = [:]
+    private let queue = DispatchQueue(label: "throttle-manager-queue", qos: .utility)
 
     func throttle(method: String) async throws {
-        guard let lastCallTime = lastCallTimes[method] else {
-            lastCallTimes[method] = Date()
+        guard let lastCallTime = self.lastCallTime(for: method) else {
+            didInvoke(method: method)
             return
         }
 
@@ -280,7 +281,15 @@ class ThrottleManager {
         }
     }
 
+    func lastCallTime(for method: String) -> Date? {
+        queue.sync {
+            self.lastCallTimes[method]
+        }
+    }
+
     func didInvoke(method: String) {
-        lastCallTimes[method] = Date()
+        queue.sync {
+            lastCallTimes[method] = Date()
+        }
     }
 }
