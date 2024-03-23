@@ -76,7 +76,7 @@ struct SchedulePhaseEditView: View {
                         Text("%")
                     }
                 } footer: {
-                    VStack {
+                    VStack(alignment: .leading) {
                         OptionalView(minSOCError) {
                             Text($0)
                                 .foregroundStyle(Color.red)
@@ -97,7 +97,7 @@ struct SchedulePhaseEditView: View {
                         Text("%")
                     }
                 } footer: {
-                    VStack {
+                    VStack(alignment: .leading) {
                         OptionalView(fdSOCError) {
                             Text($0)
                                 .foregroundStyle(Color.red)
@@ -118,7 +118,7 @@ struct SchedulePhaseEditView: View {
                         Text("W")
                     }
                 } footer: {
-                    VStack {
+                    VStack(alignment: .leading) {
                         OptionalView(forceDischargePowerError) {
                             Text($0)
                                 .foregroundStyle(Color.red)
