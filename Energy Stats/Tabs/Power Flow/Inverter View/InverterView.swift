@@ -106,21 +106,12 @@ struct InverterView: View {
                         Button {
                             viewModel.select(device: selectableDevice.device)
                         } label: {
-                            Label(selectableDevice.device.deviceDisplayName,
+                            Label(selectableDevice.device.deviceSelectorName,
                                   systemImage: selectableDevice.isSelected ? "checkmark" : "")
 
-                            if appSettings.showInverterStationName {
-                                OptionalView(selectableDevice.device.stationName) {
-                                    Text($0)
-                                        .font(.caption2)
-                                }
-                            }
-
-                            if appSettings.showInverterTypeName {
-                                OptionalView(selectableDevice.device.deviceType) {
-                                    Text($0)
-                                        .font(.caption2)
-                                }
+                            OptionalView(selectableDevice.device.deviceType) {
+                                Text($0)
+                                    .font(.caption2)
                             }
                         }
                     }
@@ -135,6 +126,13 @@ struct InverterView: View {
                             }
                             Image(systemName: "chevron.up.chevron.down")
                                 .font(.caption2)
+                        }
+
+                        if appSettings.showInverterTypeName {
+                            OptionalView(viewModel.deviceType) {
+                                Text($0)
+                                    .font(.caption2)
+                            }
                         }
                     }
                 }
