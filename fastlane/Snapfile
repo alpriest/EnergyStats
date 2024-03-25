@@ -12,6 +12,7 @@ languages([
   "en-GB",
   "de-DE",
   "it-IT",
+  "pl-PL"
 ])
 
 erase_simulator

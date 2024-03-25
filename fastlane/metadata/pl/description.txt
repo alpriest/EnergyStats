@@ -1,0 +1,13 @@
+Uzyskaj natychmiastowy przegląd wydajności instalacji PV/Baterii FoxESS!
+
+- Jeśli masz baterię, możesz zobaczyć czas do pełnego naładowania/rozładowania
+- Automatyczne ponowne logowanie
+- Wykresy parametrów inwertera
+- Informacje o statystykach historycznych
+- Pokaż temperaturę baterii
+- Zmodyfikuj czasy ładowania baterii
+- Zmodyfikuj minimalne wartości SOC
+- Zmodyfikuj harmonogram pracy inwertera
+- Skróty umożliwiające uzyskanie informacji o SOC baterii
+
+Ta aplikacja wymaga posiadania konta w FoxESS Cloud i klucza API, aby się zalogować.
