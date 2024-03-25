@@ -264,7 +264,7 @@ public class MockConfig: Config {
     public var showUsableBatteryOnly: Bool = false
     public var displayUnit: Int = 0
     public var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode = .off
-    public var showFinancialEarnings: Bool = false
+    public var showFinancialEarnings: Bool = true
     public var gridImportUnitPrice: Double = 0.15
     public var feedInUnitPrice: Double = 0.05
     public var showInverterTemperature: Bool = false
@@ -282,7 +282,7 @@ public class MockConfig: Config {
     public var currencySymbol: String = "£"
     public var shouldCombineCT2WithPVPower: Bool = true
     public var shouldCombineCT2WithLoadsPower: Bool = false
-    public var solcastSettings: SolcastSettings = .init(apiKey: nil, sites: [SolcastSite.preview()])
+    public var solcastSettings: SolcastSettings = .init(apiKey: "1234", sites: [SolcastSite.preview()])
     public var dataCeiling: DataCeiling = .mild
     public var showTotalYieldOnPowerFlow: Bool = true
     public var showFinancialSummaryOnFlowPage: Bool = true

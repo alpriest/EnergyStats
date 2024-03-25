@@ -13,7 +13,12 @@ import SwiftUI
 struct Energy_StatsApp: App {
     var body: some Scene {
         let keychainStore = KeychainStore()
-        let config = UserDefaultsConfig()
+        var config: Config
+        if isRunningScreenshots() {
+            config = UserDefaultsConfig()
+        } else {
+            config = MockConfig()
+        }
         let appSettingsPublisher = AppSettingsPublisherFactory.make(from: config)
         let network = NetworkService.standard(keychainStore: keychainStore, config: config)
         let configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher)
@@ -38,10 +43,6 @@ struct Energy_StatsApp: App {
                 .environmentObject(KeychainWrapper(keychainStore))
                 .environmentObject(versionChecker)
                 .task {
-                    if isRunningScreenshots() {
-                        config.showFinancialEarnings = true
-                    }
-
                     versionChecker.load()
                 }
             }
