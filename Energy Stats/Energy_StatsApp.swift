@@ -14,7 +14,7 @@ struct Energy_StatsApp: App {
     var body: some Scene {
         let keychainStore = KeychainStore()
         var config: Config
-        if isRunningScreenshots() || true {
+        if isRunningScreenshots() {
             config = MockConfig()
         } else {
             config = UserDefaultsConfig()
