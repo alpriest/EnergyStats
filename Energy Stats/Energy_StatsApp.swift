@@ -14,10 +14,10 @@ struct Energy_StatsApp: App {
     var body: some Scene {
         let keychainStore = KeychainStore()
         var config: Config
-        if isRunningScreenshots() {
-            config = UserDefaultsConfig()
-        } else {
+        if isRunningScreenshots() || true {
             config = MockConfig()
+        } else {
+            config = UserDefaultsConfig()
         }
         let appSettingsPublisher = AppSettingsPublisherFactory.make(from: config)
         let network = NetworkService.standard(keychainStore: keychainStore, config: config)

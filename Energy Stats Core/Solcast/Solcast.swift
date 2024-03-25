@@ -55,7 +55,6 @@ public class Solcast: SolarForecasting {
             }
 
             let decoder = JSONDecoder.solcast()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
 
             if statusCode == 404 {
                 let errorResponse = try decoder.decode(ErrorApiResponse.self, from: data)
@@ -106,6 +105,7 @@ extension JSONDecoder {
                 throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid date format")
             }
         }
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
         return decoder
     }
 }
@@ -133,29 +133,35 @@ public class DemoSolcast: SolarForecasting {
     public func fetchForecast(for site: SolcastSite, apiKey: String) async throws -> SolcastForecastResponseList {
         let data = try data(filename: "solcast")
         let decoder = JSONDecoder.solcast()
-        let result = try decoder.decode(SolcastForecastResponseList.self, from: data)
-        let day1 = Calendar.current.date(from: DateComponents(year: 2023, month: 11, day: 15))!
-        let today = Date()
-        let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: today)!
+        do {
+            let result = try decoder.decode(SolcastForecastResponseList.self, from: data)
+            let day1 = Calendar.current.date(from: DateComponents(year: 2023, month: 11, day: 15))!
+            let today = Date()
+            let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: today)!
 
-        return SolcastForecastResponseList(forecasts: result.forecasts.map { forecast in
-            let thenComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: forecast.periodEnd)
+            return SolcastForecastResponseList(forecasts: result.forecasts.map { forecast in
+                let thenComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: forecast.periodEnd)
 
-            let date: Date?
-            if forecast.periodEnd.isSame(as: day1) {
-                date = Calendar.current.date(bySettingHour: thenComponents.hour ?? 0, minute: thenComponents.minute ?? 0, second: thenComponents.second ?? 0, of: today)
-            } else {
-                date = Calendar.current.date(bySettingHour: thenComponents.hour ?? 0, minute: thenComponents.minute ?? 0, second: thenComponents.second ?? 0, of: tomorrow)
-            }
+                let date: Date?
+                if forecast.periodEnd.isSame(as: day1) {
+                    date = Calendar.current.date(bySettingHour: thenComponents.hour ?? 0, minute: thenComponents.minute ?? 0, second: thenComponents.second ?? 0, of: today)
+                } else {
+                    date = Calendar.current.date(bySettingHour: thenComponents.hour ?? 0, minute: thenComponents.minute ?? 0, second: thenComponents.second ?? 0, of: tomorrow)
+                }
 
-            return SolcastForecastResponse(
-                pvEstimate: forecast.pvEstimate,
-                pvEstimate10: forecast.pvEstimate10,
-                pvEstimate90: forecast.pvEstimate90,
-                periodEnd: date ?? forecast.periodEnd,
-                period: forecast.period
-            )
-        })
+                return SolcastForecastResponse(
+                    pvEstimate: forecast.pvEstimate,
+                    pvEstimate10: forecast.pvEstimate10,
+                    pvEstimate90: forecast.pvEstimate90,
+                    periodEnd: date ?? forecast.periodEnd,
+                    period: forecast.period
+                )
+            })
+
+        } catch {
+            print(error)
+            throw error
+        }
     }
 
     public var hasValidConfig: Bool { true }

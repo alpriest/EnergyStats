@@ -80,7 +80,7 @@ class DemoAPI: FoxAPIServicing {
                 deviceSN: "5678",
                 moduleSN: "sn-1",
                 stationID: "p1",
-                stationName: "station 1",
+                stationName: "Bloggs Home",
                 productType: "H",
                 deviceType: "h1-3.0",
                 hasBattery: true,
@@ -91,7 +91,7 @@ class DemoAPI: FoxAPIServicing {
                 deviceSN: "1234",
                 moduleSN: "sn-2",
                 stationID: "p2",
-                stationName: "station 2",
+                stationName: "Bloggs Shed",
                 productType: "H",
                 deviceType: "h1-5.0",
                 hasBattery: true,
@@ -167,7 +167,24 @@ class DemoAPI: FoxAPIServicing {
         let data = try self.data(filename: "history")
         let response = try JSONDecoder().decode(NetworkResponse<[OpenHistoryResponse]>.self, from: data)
         guard let result = response.result?.first else { throw NetworkError.invalidToken }
-        return result
+
+        return OpenHistoryResponse(deviceSN: result.deviceSN,
+                                   datas: result.datas.map {
+            OpenHistoryResponse.Data(
+                unit: $0.unit,
+                name: $0.name,
+                variable: $0.variable,
+                data: $0.data.map {
+                    let thenComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: $0.time)
+                    let date = Calendar.current.date(bySettingHour: thenComponents.hour ?? 0, minute: thenComponents.minute ?? 0, second: thenComponents.second ?? 0, of: Date())
+
+                    return OpenHistoryResponse.Data.UnitData(
+                        time: date ?? $0.time,
+                        value: $0.value
+                    )
+                }
+            )
+        })
     }
 
     func openapi_fetchVariables() async throws -> [OpenApiVariable] {
