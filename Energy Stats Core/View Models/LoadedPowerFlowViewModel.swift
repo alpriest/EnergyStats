@@ -21,7 +21,7 @@ public struct StringPower: Identifiable {
     public let name: String
     public let amount: Double
 
-    public var id: String { name }
+    public var id: String { self.name }
 
     public init(name: String, amount: Double) {
         self.name = name
@@ -29,7 +29,7 @@ public struct StringPower: Identifiable {
     }
 
     public func displayName(settings: PowerFlowStringsSettings) -> String {
-        switch name {
+        switch self.name {
         case "PV1":
             return settings.pv1Name
         case "PV2":
@@ -42,7 +42,13 @@ public struct StringPower: Identifiable {
     }
 }
 
-public struct HomePowerFlowViewModel: Equatable {
+public enum DeviceState: Int {
+    case online = 1
+    case fault = 2
+    case offline = 3
+}
+
+public struct LoadedPowerFlowViewModel: Equatable {
     public let solar: Double
     public let solarStrings: [StringPower]
     public let home: Double
@@ -55,6 +61,7 @@ public struct HomePowerFlowViewModel: Equatable {
     public let gridExportTotal: Double
     private let batteryViewModel: BatteryViewModel
     public let ct2: Double
+    public let deviceState: DeviceState
 
     public init(solar: Double,
                 solarStrings: [StringPower],
@@ -67,7 +74,8 @@ public struct HomePowerFlowViewModel: Equatable {
                 homeTotal: Double,
                 gridImportTotal: Double,
                 gridExportTotal: Double,
-                ct2: Double)
+                ct2: Double,
+                deviceState: DeviceState)
     {
         self.solar = solar
         self.solarStrings = solarStrings
@@ -81,9 +89,10 @@ public struct HomePowerFlowViewModel: Equatable {
         self.gridImportTotal = gridImportTotal
         self.gridExportTotal = gridExportTotal
         self.ct2 = ct2
+        self.deviceState = deviceState
     }
 
-    public static func ==(lhs: HomePowerFlowViewModel, rhs: HomePowerFlowViewModel) -> Bool {
+    public static func ==(lhs: LoadedPowerFlowViewModel, rhs: LoadedPowerFlowViewModel) -> Bool {
         lhs.solar == rhs.solar &&
             lhs.home == rhs.home &&
             lhs.grid == rhs.grid
@@ -122,7 +131,7 @@ public struct HomePowerFlowViewModel: Equatable {
     }
 }
 
-public extension HomePowerFlowViewModel {
+public extension LoadedPowerFlowViewModel {
     static func empty() -> Self {
         .init(solar: 0,
               solarStrings: [],
@@ -135,6 +144,7 @@ public extension HomePowerFlowViewModel {
               homeTotal: 0,
               gridImportTotal: 0,
               gridExportTotal: 0,
-              ct2: 0)
+              ct2: 0,
+              deviceState: .offline)
     }
 }

@@ -19,10 +19,12 @@ class InverterViewModel: ObservableObject {
     private var configManager: ConfigManaging
     @Published var devices: [SelectableDevice] = []
     let temperatures: InverterTemperatures?
+    let deviceState: DeviceState
 
-    init(configManager: ConfigManaging, temperatures: InverterTemperatures?) {
+    init(configManager: ConfigManaging, temperatures: InverterTemperatures?, deviceState: DeviceState) {
         self.configManager = configManager
         self.temperatures = temperatures
+        self.deviceState = deviceState
 
         updateDevices()
     }

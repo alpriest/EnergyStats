@@ -22,7 +22,7 @@ struct MaxWidthPreferenceKey: PreferenceKey {
 
 struct SolarStringsView: View {
     @State var maxLabelWidth: CGFloat = 100
-    let viewModel: HomePowerFlowViewModel
+    let viewModel: LoadedPowerFlowViewModel
     let appSettings: AppSettings
 
     var body: some View {

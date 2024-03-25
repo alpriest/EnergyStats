@@ -26,6 +26,17 @@ public extension Color {
 
         return mapping[name] ?? Color.black
     }
+
+    static func deviceStateColor(_ deviceState: DeviceState) -> Color {
+        switch deviceState {
+        case .online:
+            Color.gray
+        case .fault:
+            Color("lines_negative")
+        case .offline:
+            Color("lines_negative")
+        }
+    }
 }
 
 public class BundleLocator {}

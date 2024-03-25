@@ -57,7 +57,8 @@ struct InverterView: View {
 
             if verticalSizeClass == .regular {
                 // Portrait
-                InverterIconView()
+                InverterIconView(deviceState: viewModel.deviceState)
+                    .id(viewModel.deviceState)
                     .frame(width: 50, height: 55)
                     .padding(5)
                     .accessibilityHidden(true)
@@ -166,12 +167,14 @@ struct InverterView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             InverterView(viewModel: InverterViewModel(configManager: PreviewConfigManager(),
-                                                      temperatures: InverterTemperatures.any()),
+                                                      temperatures: InverterTemperatures.any(),
+                                                      deviceState: .online),
                          appSettings: .mock().copy(showInverterTemperature: true, showInverterStationName: true))
                 .background(Color.gray.opacity(0.3))
 
             InverterView(viewModel: InverterViewModel(configManager: PreviewConfigManager(),
-                                                      temperatures: InverterTemperatures.any()),
+                                                      temperatures: InverterTemperatures.any(),
+                                                      deviceState: .fault),
                          appSettings: .mock().copy(showInverterTemperature: false))
                 .background(Color.gray.opacity(0.3))
         }

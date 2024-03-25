@@ -26,7 +26,7 @@ class PowerFlowTabViewModel: ObservableObject {
 
     enum State: Equatable {
         case unloaded
-        case loaded(HomePowerFlowViewModel)
+        case loaded(LoadedPowerFlowViewModel)
         case failed(Error?, String)
 
         static func ==(lhs: State, rhs: State) -> Bool {
@@ -140,6 +140,7 @@ class PowerFlowTabViewModel: ObservableObject {
 
             await MainActor.run { self.updateState = "Updating..." }
 
+            let deviceState = try await loadDeviceStatus(currentDevice)
             let totals = try await loadTotals(currentDevice)
             let real = try await loadRealData(currentDevice, config: configManager)
             let generation = try await self.loadGeneration(currentDevice)
@@ -150,7 +151,7 @@ class PowerFlowTabViewModel: ObservableObject {
 
             let battery = self.makeBatteryViewModel(currentDevice, real)
 
-            let summary = HomePowerFlowViewModel(
+            let summary = LoadedPowerFlowViewModel(
                 solar: currentViewModel.currentSolarPower,
                 solarStrings: currentViewModel.currentSolarStringsPower,
                 battery: battery,
@@ -162,7 +163,8 @@ class PowerFlowTabViewModel: ObservableObject {
                 homeTotal: totals.home,
                 gridImportTotal: totals.gridImport,
                 gridExportTotal: totals.gridExport,
-                ct2: currentViewModel.currentCT2
+                ct2: currentViewModel.currentCT2,
+                deviceState: deviceState
             )
 
             self.state = .loaded(.empty()) // refreshes the marching ants line speed
@@ -201,6 +203,10 @@ class PowerFlowTabViewModel: ObservableObject {
     private func loadHistoryData(_ currentDevice: Device) async throws -> OpenHistoryResponse {
         let start = Calendar.current.startOfDay(for: Date())
         return try await self.network.fetchHistory(deviceSN: currentDevice.deviceSN, variables: ["pvPower", "meterPower2"], start: start, end: start.addingTimeInterval(86400))
+    }
+
+    private func loadDeviceStatus(_ currentDevice: Device) async throws -> DeviceState {
+        try DeviceState(rawValue: await self.network.fetchDevice(deviceSN: currentDevice.deviceSN).status) ?? DeviceState.offline
     }
 
     private func loadTotals(_ currentDevice: Device) async throws -> TotalsViewModel {

@@ -14,10 +14,10 @@ struct LoadedPowerFlowView: View {
     @State private var appSettings: AppSettings
     @State private var size: CGSize = .zero
     private let configManager: ConfigManaging
-    private let viewModel: HomePowerFlowViewModel
+    private let viewModel: LoadedPowerFlowViewModel
     private var appSettingsPublisher: LatestAppSettingsPublisher
 
-    init(configManager: ConfigManaging, viewModel: HomePowerFlowViewModel, appSettingsPublisher: LatestAppSettingsPublisher) {
+    init(configManager: ConfigManaging, viewModel: LoadedPowerFlowViewModel, appSettingsPublisher: LatestAppSettingsPublisher) {
         self.configManager = configManager
         self.viewModel = viewModel
         self.appSettingsPublisher = appSettingsPublisher
@@ -80,11 +80,18 @@ struct LoadedPowerFlowView: View {
                         }
                     }
 
-                    InverterView(viewModel: InverterViewModel(configManager: configManager, temperatures: viewModel.inverterTemperatures), appSettings: appSettings)
-                        .frame(height: 2)
-                        .frame(width: inverterLineWidth)
-                        .padding(.vertical, 2)
-                        .zIndex(1)
+                    InverterView(
+                        viewModel: InverterViewModel(
+                            configManager: configManager,
+                            temperatures: viewModel.inverterTemperatures,
+                            deviceState: viewModel.deviceState
+                        ),
+                        appSettings: appSettings
+                    )
+                    .frame(height: 2)
+                    .frame(width: inverterLineWidth)
+                    .padding(.vertical, 2)
+                    .zIndex(1)
 
                     HStack(alignment: .top) {
                         if viewModel.hasBattery || viewModel.hasBatteryError {
@@ -182,7 +189,7 @@ struct PowerSummaryView_Previews: PreviewProvider {
     static let strings = PowerFlowStringsSettings.none.copy(enabled: true, pv1Name: "Front", pv2Name: "Rear")
     static var previews: some View {
         LoadedPowerFlowView(configManager: PreviewConfigManager(),
-                            viewModel: HomePowerFlowViewModel.any(battery: .any()),
+                            viewModel: LoadedPowerFlowViewModel.any(battery: .any()),
                             appSettingsPublisher: CurrentValueSubject(AppSettings.mock().copy(decimalPlaces: 3,
                                                                                               displayUnit: .adaptive,
                                                                                               showFinancialEarnings: true,
@@ -194,8 +201,8 @@ struct PowerSummaryView_Previews: PreviewProvider {
     }
 }
 
-extension HomePowerFlowViewModel {
-    static func any(battery: BatteryViewModel = .any()) -> HomePowerFlowViewModel {
+extension LoadedPowerFlowViewModel {
+    static func any(battery: BatteryViewModel = .any()) -> LoadedPowerFlowViewModel {
         .init(solar: 3.0,
               solarStrings: [StringPower(name: "PV1", amount: 2.5), StringPower(name: "PV2", amount: 0.5)],
               battery: battery,
@@ -207,7 +214,8 @@ extension HomePowerFlowViewModel {
               homeTotal: 1.0,
               gridImportTotal: 12.0,
               gridExportTotal: 2.4,
-              ct2: 0)
+              ct2: 0,
+              deviceState: .online)
     }
 }
 

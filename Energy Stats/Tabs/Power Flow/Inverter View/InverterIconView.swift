@@ -5,6 +5,7 @@
 //  Created by Alistair Priest on 15/08/2023.
 //
 
+import Energy_Stats_Core
 import SwiftUI
 
 struct InverterIconPath: View {
@@ -12,8 +13,6 @@ struct InverterIconPath: View {
         Canvas { context, size in
             let cablesHeight = size.height * 0.12
             let cablesWidth = size.width * 0.1
-            let panelX = size.width * 0.15
-            let panelY = size.height * 0.2
             let cornerSize = CGSize(width: 3, height: 3)
             let inverterLineWidth: CGFloat = 3
             let cablesLineWidth: CGFloat = 2
@@ -30,33 +29,51 @@ struct InverterIconPath: View {
                 path.addRect(CGRect(x: cablesWidth * 3.5, y: size.height - cablesHeight - cablesLineWidth, width: cablesWidth, height: cablesHeight))
             }
 
-            let screen = Path { path in
-                path.addRect(CGRect(x: panelX, y: panelY, width: panelX * 2.5, height: panelY * 1.5))
-            }
-
             context.fill(inverter, with: .color(Color("background_inverted")))
             context.stroke(inverter, with: .color(Color("background_inverted")), lineWidth: inverterLineWidth)
             context.stroke(cable1, with: .color(Color("background_inverted")), lineWidth: cablesLineWidth)
             context.stroke(cable2, with: .color(Color("background_inverted")), lineWidth: cablesLineWidth)
-            context.fill(screen, with: .color(.gray.opacity(0.5)))
         }
     }
 }
 
 struct InverterIconView: View {
     @State private var size: CGSize = .zero
+    @State private var opacity = 1.0
+    let deviceState: DeviceState
 
     var body: some View {
-        ZStack(alignment: .topTrailing) {
+        ZStack(alignment: .topLeading) {
             InverterIconPath()
+
+            Group {
+                switch deviceState {
+                case .online:
+                    Color.deviceStateColor(deviceState)
+                default:
+                    Color.deviceStateColor(deviceState)
+                        .onAppear {
+                            switch deviceState {
+                            case .online:
+                                opacity = 1.0
+                            default:
+                                withAnimation(.snappy(duration: 0.4).repeatForever(autoreverses: true)) { opacity = 0.2 }
+                            }
+                        }
+                }
+            }
+            .frame(width: (size.width / 13) * 4.8, height: (size.height / 20) * 6)
+            .offset(x: (size.width / 13) * 2, y: (size.height / 20) * 4)
+            .opacity(opacity)
 
             Image(systemName: "bolt.fill")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(height: size.height / 2.5)
-                .offset(x: -size.width / 10, y: size.height * 0.2)
+                .offset(x: (size.width / 5) * 3, y: size.height * 0.2)
                 .foregroundColor(Color("background"))
-        }.background(
+        }
+        .background(
             GeometryReader { reader in
                 Color.clear.onAppear { size = reader.size }
                     .onChange(of: reader.size) { newValue in
@@ -70,6 +87,6 @@ struct InverterIconView: View {
 }
 
 #Preview {
-    InverterIconView()
-        .frame(width: 50, height: 60)
+    InverterIconView(deviceState: .online)
+        .frame(width: 150, height: 180)
 }
