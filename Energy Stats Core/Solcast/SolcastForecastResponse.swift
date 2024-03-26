@@ -47,12 +47,12 @@ public struct SolcastSiteResponse: Decodable {
     public let longitude: Double
     public let latitude: Double
     public let azimuth: Int
-    public let tilt: Int
+    public let tilt: Double
     public let lossFactor: Double?
     public let dcCapacity: Double?
     public let installDate: Date?
 
-    public init(name: String, resourceId: String, capacity: Double, longitude: Double, latitude: Double, azimuth: Int, tilt: Int, lossFactor: Double?, dcCapacity: Double?, installDate: Date?) {
+    public init(name: String, resourceId: String, capacity: Double, longitude: Double, latitude: Double, azimuth: Int, tilt: Double, lossFactor: Double?, dcCapacity: Double?, installDate: Date?) {
         self.name = name
         self.resourceId = resourceId
         self.capacity = capacity

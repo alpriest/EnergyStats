@@ -23,13 +23,13 @@ public struct SolcastSite: Codable {
     public let lng: Double
     public let lat: Double
     public let azimuth: Int
-    public let tilt: Int
+    public let tilt: Double
     public let lossFactor: Double?
     public let acCapacity: Double
     public let dcCapacity: Double?
     public let installDate: Date?
 
-    public init(name: String, resourceId: String, lng: Double, lat: Double, azimuth: Int, tilt: Int, lossFactor: Double?, acCapacity: Double, dcCapacity: Double?, installDate: Date?) {
+    public init(name: String, resourceId: String, lng: Double, lat: Double, azimuth: Int, tilt: Double, lossFactor: Double?, acCapacity: Double, dcCapacity: Double?, installDate: Date?) {
         self.name = name
         self.resourceId = resourceId
         self.lng = lng
