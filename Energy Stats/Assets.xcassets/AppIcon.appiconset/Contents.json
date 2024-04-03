@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "energy_stats_icon.png",
+      "filename" : "icon.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
