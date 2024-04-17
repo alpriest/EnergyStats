@@ -56,6 +56,10 @@ class BatteryPowerViewModel {
     func showBatteryPercentageRemainingToggle() {
         configManager.showBatteryPercentageRemaining.toggle()
     }
+
+    var showUsableBatteryOnly: Bool {
+        configManager.showUsableBatteryOnly
+    }
 }
 
 struct BatteryPowerView: View {
@@ -106,12 +110,16 @@ struct BatteryPowerView: View {
 #Preview {
     struct FakeError: Error {}
 
-    return BatteryPowerView(viewModel: BatteryPowerViewModel.any(error: FakeError()),
-                            appSettings: AppSettings.mock())
+    return BatteryPowerView(
+        viewModel: BatteryPowerViewModel.any(error: nil),
+        appSettings: AppSettings.mock()
+            .copy(showBatteryEstimate: true)
+            .copy(showUsableBatteryOnly: true)
+    )
 }
 
 extension BatteryPowerViewModel {
-    static func any(error: Error?) -> BatteryPowerViewModel {
-        .init(configManager: PreviewConfigManager(), batteryStateOfCharge: 0.99, batteryChargekWH: -0.01, temperature: 15.6, batteryResidual: 5940, error: error)
+    static func any(error: Error?, config: Config = MockConfig()) -> BatteryPowerViewModel {
+        .init(configManager: PreviewConfigManager(config: config), batteryStateOfCharge: 0.99, batteryChargekWH: -0.01, temperature: 15.6, batteryResidual: 5940, error: error)
     }
 }

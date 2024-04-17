@@ -312,8 +312,8 @@ public class MockConfig: Config {
 }
 
 public class PreviewConfigManager: ConfigManager {
-    public convenience init() {
-        self.init(networking: DemoNetworking(), config: MockConfig(), appSettingsPublisher: CurrentValueSubject(AppSettings.mock()))
+    public convenience init(config: Config = MockConfig()) {
+        self.init(networking: DemoNetworking(), config: config, appSettingsPublisher: CurrentValueSubject(AppSettings.mock()))
         Task { try await fetchDevices() }
     }
 }

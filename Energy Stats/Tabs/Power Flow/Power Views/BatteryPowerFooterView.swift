@@ -16,10 +16,11 @@ struct BatteryPowerFooterView: View {
         VStack {
             Group {
                 if appSettings.showBatteryPercentageRemaining {
-                    Text(viewModel.batteryStateOfCharge, format: .percent)
+                    (Text(viewModel.batteryStateOfCharge, format: .percent) + Text(viewModel.showUsableBatteryOnly ? "*" : ""))
                         .accessibilityLabel(String(format: String(accessibilityKey: .batteryCapacityPercentage), String(describing: viewModel.batteryStateOfCharge.percent())))
                 } else {
                     EnergyText(amount: viewModel.batteryStoredChargekWh, appSettings: appSettings, type: .batteryCapacity)
+                        .foregroundStyle(viewModel.showUsableBatteryOnly ? Color.red : Color.black)
                 }
             }.onTapGesture {
                 viewModel.showBatteryPercentageRemainingToggle()
@@ -33,7 +34,7 @@ struct BatteryPowerFooterView: View {
 
             if appSettings.showBatteryEstimate {
                 OptionalView(viewModel.batteryExtra) {
-                    Text($0)
+                    (Text($0) + Text(viewModel.showUsableBatteryOnly ? "*" : ""))
                         .multilineTextAlignment(.center)
                         .font(.caption)
                         .foregroundColor(Color("text_dimmed"))
@@ -47,6 +48,8 @@ struct BatteryPowerFooterView: View {
 }
 
 #Preview {
-    BatteryPowerFooterView(viewModel: BatteryPowerViewModel.any(error: nil),
-                           appSettings: AppSettings.mock())
+    let config = MockConfig()
+    config.showUsableBatteryOnly = true
+    return BatteryPowerFooterView(viewModel: BatteryPowerViewModel.any(error: nil, config: config),
+                                  appSettings: AppSettings.mock())
 }

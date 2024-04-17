@@ -393,6 +393,34 @@
         }
       }
     },
+    "*" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
+    },
     "%" : {
       "localizations" : {
         "de" : {
@@ -11758,31 +11786,31 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zieht den Min SOC-Betrag von der Batterieladung und dem Prozentsatz nur in der Stromflussansicht ab. Aufgrund von Ungenauigkeiten bei der Messung des Batteriestands kann dies gelegentlich zu einer negativen Restmenge führen. Ihr Prozentsatz und die Kapazität werden sich von der FoxESS-App unterscheiden, wenn Sie diese Option auswählen."
+            "value" : "Zieht den Min SOC-Betrag von der Batterieladung und dem Prozentsatz nur in der Stromflussansicht ab. Aufgrund von Ungenauigkeiten bei der Messung des Batteriestands kann dies gelegentlich zu einer negativen Restmenge führen. Ihr Prozentsatz und die Kapazität werden sich von der FoxESS-App unterscheiden, wenn Sie diese Option auswählen. Ein * wird angezeigt, wenn diese Option ausgewählt ist."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Deducts the Min SOC amount from the battery charge level and percentage on the power flow view only. Due to inaccuracies in the way battery levels are measured this may result in occasionally showing a negative amount remaining. Your percentage and capacity will differ from the FoxESS app if you select this option."
+            "value" : "Deducts the Min SOC amount from the battery charge level and percentage on the power flow view only. Due to inaccuracies in the way battery levels are measured this may result in occasionally showing a negative amount remaining. Your percentage and capacity will differ from the FoxESS app if you select this option. A * will be shown when you have this option selected."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Resta la cantidad mínima SOC del nivel de carga y el porcentaje de la batería solo en la vista de flujo de energía. Debido a inexactitudes en la forma en que se miden los niveles de la batería, esto puede resultar ocasionalmente en la visualización de una cantidad negativa restante. Su porcentaje y capacidad diferirán de la aplicación FoxESS si selecciona esta opción."
+            "value" : "Resta la cantidad mínima SOC del nivel de carga y el porcentaje de la batería solo en la vista de flujo de energía. Debido a inexactitudes en la forma en que se miden los niveles de la batería, esto puede resultar ocasionalmente en la visualización de una cantidad negativa restante. Su porcentaje y capacidad diferirán de la aplicación FoxESS si selecciona esta opción. Se mostrará un * cuando tengas esta opción seleccionada."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sottrae l'importo SOC minimo dal livello di carica della batteria e dal percentuale solo nella vista del flusso di energia. A causa di inaccuratezze nella misurazione dei livelli della batteria, ciò può occasionalmente comportare la visualizzazione di un importo negativo rimanente. La percentuale e la capacità differiranno dall'app FoxESS se si seleziona questa opzione."
+            "value" : "Sottrae l'importo SOC minimo dal livello di carica della batteria e dal percentuale solo nella vista del flusso di energia. A causa di inaccuratezze nella misurazione dei livelli della batteria, ciò può occasionalmente comportare la visualizzazione di un importo negativo rimanente. La percentuale e la capacità differiranno dall'app FoxESS se si seleziona questa opzione. Verrà mostrato un * quando hai selezionato questa opzione."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Odejmuje minimalną ilość SOC od poziomu naładowania baterii i procentu tylko w widoku przepływu energii. Ze względu na niedokładności w pomiarze poziomów baterii może to czasami skutkować wyświetlaniem ujemnej pozostałej ilości. Wybranie tej opcji spowoduje różnice w procentach i pojemności w porównaniu do aplikacji FoxESS."
+            "value" : "Odejmuje minimalną ilość SOC od poziomu naładowania baterii i procentu tylko w widoku przepływu energii. Ze względu na niedokładności w pomiarze poziomów baterii może to czasami skutkować wyświetlaniem ujemnej pozostałej ilości. Wybranie tej opcji spowoduje różnice w procentach i pojemności w porównaniu do aplikacji FoxESS. Gwiazdka * będzie wyświetlana, gdy ta opcja będzie zaznaczona."
           }
         }
       }
