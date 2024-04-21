@@ -19,8 +19,7 @@ struct BatteryPowerFooterView: View {
                     (Text(viewModel.batteryStateOfCharge, format: .percent) + Text(viewModel.showUsableBatteryOnly ? "*" : ""))
                         .accessibilityLabel(String(format: String(accessibilityKey: .batteryCapacityPercentage), String(describing: viewModel.batteryStateOfCharge.percent())))
                 } else {
-                    EnergyText(amount: viewModel.batteryStoredChargekWh, appSettings: appSettings, type: .batteryCapacity)
-                        .foregroundStyle(viewModel.showUsableBatteryOnly ? Color.red : Color.black)
+                    EnergyText(amount: viewModel.batteryStoredChargekWh, appSettings: appSettings, type: .batteryCapacity, suffix: viewModel.showUsableBatteryOnly ? "*" : "")
                 }
             }.onTapGesture {
                 viewModel.showBatteryPercentageRemainingToggle()

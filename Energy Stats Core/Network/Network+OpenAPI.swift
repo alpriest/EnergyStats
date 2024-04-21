@@ -86,7 +86,7 @@ extension FoxAPIService {
         let request = append(queryItems: [URLQueryItem(name: "sn", value: deviceSN)], to: URL.getOpenBatterySOC)
 
         let result: (BatterySOCResponse, Data) = try await fetch(request)
-        store.batterySettingsResponse = NetworkOperation(description: "fetchBatterySettings", value: result.0, raw: result.1)
+        storeBatterySettingsResponse(NetworkOperation(description: "fetchBatterySettings", value: result.0, raw: result.1))
         return result.0
     }
 
@@ -106,7 +106,7 @@ extension FoxAPIService {
         let request = append(queryItems: [URLQueryItem(name: "sn", value: deviceSN)], to: URL.getOpenBatteryChargeTimes)
 
         let result: (BatteryTimesResponse, Data) = try await fetch(request)
-        store.batteryTimesResponse = NetworkOperation(description: "batteryTimesResponse", value: result.0, raw: result.1)
+        storeBatteryTimesResponse(NetworkOperation(description: "batteryTimesResponse", value: result.0, raw: result.1))
 
         return [
             ChargeTime(enable: result.0.enable1, startTime: result.0.startTime1, endTime: result.0.endTime1),
@@ -143,7 +143,7 @@ extension FoxAPIService {
 
         let deviceListResult: (PagedDeviceListResponse, _) = try await fetch(request)
 
-        store.deviceListResponse = NetworkOperation(description: "fetchDeviceList", value: deviceListResult.0.data, raw: deviceListResult.1)
+        storeDeviceListResponse(NetworkOperation(description: "fetchDeviceList", value: deviceListResult.0.data, raw: deviceListResult.1))
         return deviceListResult.0.data
     }
 
@@ -177,5 +177,23 @@ extension FoxAPIService {
 
         let result: (PowerStationDetailResponse, _) = try await fetch(request)
         return result.0
+    }
+
+    private func storeBatterySettingsResponse(_ operation: NetworkOperation<BatterySOCResponse>) {
+        Task { @MainActor in
+            store.batterySettingsResponse = operation
+        }
+    }
+
+    private func storeBatteryTimesResponse(_ operation: NetworkOperation<BatteryTimesResponse>) {
+        Task { @MainActor in
+            store.batteryTimesResponse = operation
+        }
+    }
+
+    private func storeDeviceListResponse(_ operation: NetworkOperation<[DeviceSummaryResponse]>) {
+        Task { @MainActor in
+            store.deviceListResponse = operation
+        }
     }
 }

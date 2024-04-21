@@ -8,17 +8,24 @@
 import Foundation
 
 public class InMemoryLoggingNetworkStore: ObservableObject {
+    @MainActor
     public var reportResponse: NetworkOperation<[OpenReportResponse]>?
+    @MainActor
     public var batterySettingsResponse: NetworkOperation<BatterySOCResponse>?
+    @MainActor
     public var queryResponse: NetworkOperation<OpenQueryResponse>?
+    @MainActor
     public var deviceListResponse: NetworkOperation<[DeviceSummaryResponse]>?
+    @MainActor
     public var variables: NetworkOperation<OpenApiVariableArray>?
+    @MainActor
     public var batteryTimesResponse: NetworkOperation<BatteryTimesResponse>?
 
     public static let shared = InMemoryLoggingNetworkStore()
 
     public init() {}
 
+    @MainActor
     public func logout() {
         reportResponse = nil
         batterySettingsResponse = nil
@@ -28,8 +35,11 @@ public class InMemoryLoggingNetworkStore: ObservableObject {
         batteryTimesResponse = nil
     }
 
+    @MainActor
     public var latestRequest: URLRequest?
+    @MainActor
     public var latestData: Data?
+    @MainActor
     public var latestResponse: URLResponse?
 }
 

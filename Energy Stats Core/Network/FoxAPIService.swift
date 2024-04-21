@@ -44,10 +44,28 @@ extension FoxAPIService {
         return request
     }
 
+    private func store(_ latestRequest: URLRequest) {
+        Task { @MainActor in
+            store.latestRequest = latestRequest
+        }
+    }
+
+    private func store(_ latestResponse: URLResponse) {
+        Task { @MainActor in
+            store.latestResponse = latestResponse
+        }
+    }
+
+    private func store(_ latestData: Data) {
+        Task { @MainActor in
+            store.latestData = latestData
+        }
+    }
+
     func fetch<T: Decodable>(_ request: URLRequest, retry: Bool = true) async throws -> (T, Data) {
         var request = request
         addHeaders(to: &request)
-        store.latestRequest = request
+        store(request)
 
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
@@ -55,8 +73,8 @@ extension FoxAPIService {
                 throw NetworkError.unknown("Invalid response type")
             }
 
-            store.latestData = data
-            store.latestResponse = response
+            store(data)
+            store(response)
 
             if statusCode == 406 {
                 throw NetworkError.requestRequiresSignature
