@@ -13,7 +13,7 @@ class FoxAPIService: FoxAPIServicing {
     }
 
     private let credentials: KeychainStoring
-    let store: InMemoryLoggingNetworkStore
+    var store: InMemoryLoggingNetworkStore
     private var errorMessages: [String: String] = [:]
 
     public init(credentials: KeychainStoring, store: InMemoryLoggingNetworkStore) {
@@ -42,6 +42,12 @@ extension FoxAPIService {
         request = URLRequest(url: components!.url!)
 
         return request
+    }
+
+    func store<T: Decodable>(_ operation: NetworkOperation<T>, path: WritableKeyPath<InMemoryLoggingNetworkStore, NetworkOperation<T>?>) {
+        Task { @MainActor in
+            store[keyPath: path] = operation
+        }
     }
 
     private func store(_ latestRequest: URLRequest) {
