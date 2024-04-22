@@ -17,9 +17,11 @@ public class InMemoryLoggingNetworkStore: ObservableObject {
     @MainActor
     public var variables: NetworkOperation<OpenApiVariableArray>?
     @MainActor
-    public var batterySettingsResponse: NetworkOperation<BatterySOCResponse>?
+    public var batterySOCResponse: NetworkOperation<BatterySOCResponse>?
     @MainActor
     public var batteryTimesResponse: NetworkOperation<BatteryTimesResponse>?
+    @MainActor
+    public var dataLoggersResponse: NetworkOperation<DataLoggerResponse>?
     @MainActor
     public var latestRequestResponseData: NetworkOperation<RequestResponseData>?
 
@@ -30,11 +32,12 @@ public class InMemoryLoggingNetworkStore: ObservableObject {
     @MainActor
     public func logout() {
         reportResponse = nil
-        batterySettingsResponse = nil
         queryResponse = nil
         deviceListResponse = nil
         variables = nil
+        batterySOCResponse = nil
         batteryTimesResponse = nil
+        dataLoggersResponse = nil
         latestRequestResponseData = nil
     }
 }

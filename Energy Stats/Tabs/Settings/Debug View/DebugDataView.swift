@@ -59,7 +59,7 @@ struct DebugDataView: View {
                         store: store,
                         title: "device/battery/soc/get",
                         missing: "Battery Settings are fetched and recached on login. Logout and login to see the data response, or tap below",
-                        mapper: { $0.batterySettingsResponse },
+                        mapper: { $0.batterySOCResponse },
                         fetcher: {
                             if let deviceSN = configManager.currentDevice.value?.deviceSN {
                                 _ = try await networking.fetchBatterySettings(deviceSN: deviceSN)

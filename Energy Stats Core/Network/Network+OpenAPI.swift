@@ -89,7 +89,7 @@ extension FoxAPIService {
         let request = append(queryItems: [URLQueryItem(name: "sn", value: deviceSN)], to: URL.getOpenBatterySOC)
 
         let result: (BatterySOCResponse, Data) = try await fetch(request)
-        store(NetworkOperation(description: "fetchBatterySettings", value: result.0, raw: result.1), path: \.batterySettingsResponse)
+        store(NetworkOperation(description: "fetchBatterySettings", value: result.0, raw: result.1), path: \.batterySOCResponse)
         return result.0
     }
 
