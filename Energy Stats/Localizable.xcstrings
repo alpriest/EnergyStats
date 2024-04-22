@@ -2658,6 +2658,7 @@
       }
     },
     "Battery Settings" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2686,6 +2687,7 @@
       }
     },
     "Battery Times" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4523,6 +4525,7 @@
       }
     },
     "Device List" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4577,6 +4580,24 @@
           }
         }
       }
+    },
+    "device/battery/forceChargeTime/get" : {
+
+    },
+    "device/battery/soc/get" : {
+
+    },
+    "device/list" : {
+
+    },
+    "device/real/Query" : {
+
+    },
+    "device/report/Query" : {
+
+    },
+    "device/variable/get" : {
+
     },
     "Discharge " : {
       "extractionState" : "manual",
@@ -7256,6 +7277,9 @@
         }
       }
     },
+    "latest request/response" : {
+
+    },
     "Latitude" : {
       "localizations" : {
         "de" : {
@@ -8955,6 +8979,7 @@
       }
     },
     "Raw" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -10231,6 +10256,7 @@
       }
     },
     "Report" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

@@ -154,34 +154,7 @@ struct ErrorAlertView: View {
     }
 
     private var debugData: String {
-        struct DebugDataText: Encodable {
-            let request: String?
-            let response: String?
-            let data: String?
-        }
-
-        let dataString: String?
-        if let data = InMemoryLoggingNetworkStore.shared.latestData {
-            dataString = (String(data: data, encoding: .utf8) ?? "data could not be parsed")
-        } else {
-            dataString = nil
-        }
-
-        let result = DebugDataText(
-            request: InMemoryLoggingNetworkStore.shared.latestRequest?.debugDescription,
-            response: InMemoryLoggingNetworkStore.shared.latestResponse?.debugDescription,
-            data: dataString
-        )
-
-        do {
-            let encoder = JSONEncoder()
-            encoder.outputFormatting = .prettyPrinted
-
-            let jsonData = try encoder.encode(result)
-            return String(data: jsonData, encoding: .utf8) ?? "Could not generate JSON"
-        } catch {
-            return "Could not generate JSON"
-        }
+        DebugDataText(store: InMemoryLoggingNetworkStore.shared).debugData
     }
 
     var detailedMessage: String {
@@ -210,6 +183,36 @@ struct ErrorAlertView: View {
 
     var tapIconMessage: String {
         String(key: .tapIconForDetail)
+    }
+}
+
+struct DebugDataText: Encodable {
+    let request: String?
+    let responseHeaders: [String]?
+    let data: String?
+
+    @MainActor
+    init(store: InMemoryLoggingNetworkStore) {
+        request = store.latestRequestResponseData?.value.request
+        responseHeaders = store.latestRequestResponseData?.value.responseHeaders
+
+        if let data = store.latestRequestResponseData?.value.responseData {
+            self.data = (String(data: data, encoding: .utf8) ?? "data could not be parsed")
+        } else {
+            data = nil
+        }
+    }
+
+    var debugData: String {
+        do {
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted
+
+            let jsonData = try encoder.encode(self)
+            return jsonData.formattedJSON()
+        } catch {
+            return "Could not generate JSON"
+        }
     }
 }
 

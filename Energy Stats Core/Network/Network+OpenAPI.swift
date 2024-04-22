@@ -32,6 +32,7 @@ extension FoxAPIService {
         do {
             let result: ([OpenQueryResponse], Data) = try await fetch(request)
             if let group = result.0.first(where: { $0.deviceSN == deviceSN }) {
+                store(NetworkOperation(description: "fetchRealData", value: group, raw: result.1), path: \.queryResponse)
                 return group
             } else {
                 throw NetworkError.missingData
@@ -70,6 +71,7 @@ extension FoxAPIService {
     func openapi_fetchVariables() async throws -> [OpenApiVariable] {
         let request = URLRequest(url: URL.getOpenVariables)
         let result: (OpenApiVariableArray, Data) = try await fetch(request)
+        store(NetworkOperation(description: "fetchVariables", value: result.0, raw: result.1), path: \.variables)
         return result.0.array
     }
 
@@ -79,6 +81,7 @@ extension FoxAPIService {
         request.httpBody = try! JSONEncoder().encode(OpenReportRequest(deviceSN: deviceSN, variables: variables, queryDate: queryDate, dimension: reportType))
 
         let result: ([OpenReportResponse], Data) = try await fetch(request)
+        store(NetworkOperation(description: "fetchReport", value: result.0, raw: result.1), path: \.reportResponse)
         return result.0
     }
 

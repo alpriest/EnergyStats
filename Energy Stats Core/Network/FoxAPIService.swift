@@ -50,37 +50,28 @@ extension FoxAPIService {
         }
     }
 
-    private func store(_ latestRequest: URLRequest) {
-        Task { @MainActor in
-            store.latestRequest = latestRequest
-        }
-    }
-
-    private func store(_ latestResponse: URLResponse) {
-        Task { @MainActor in
-            store.latestResponse = latestResponse
-        }
-    }
-
-    private func store(_ latestData: Data) {
-        Task { @MainActor in
-            store.latestData = latestData
-        }
-    }
-
     func fetch<T: Decodable>(_ request: URLRequest, retry: Bool = true) async throws -> (T, Data) {
         var request = request
         addHeaders(to: &request)
-        store(request)
+        let requestResponseData = RequestResponseData(request: request, response: nil, responseData: nil)
+        store(
+            NetworkOperation(description: "latestRequestResponse", value: requestResponseData, raw: requestResponseData.combinedData),
+            path: \.latestRequestResponseData
+        )
 
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
-            guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {
+            guard let httpResponse = (response as? HTTPURLResponse) else {
                 throw NetworkError.unknown("Invalid response type")
             }
 
-            store(data)
-            store(response)
+            let statusCode = httpResponse.statusCode
+
+            let requestResponseData = RequestResponseData(request: request, response: httpResponse, responseData: data)
+            store(
+                NetworkOperation(description: "latestRequestResponse", value: requestResponseData, raw: requestResponseData.combinedData),
+                path: \.latestRequestResponseData
+            )
 
             if statusCode == 406 {
                 throw NetworkError.requestRequiresSignature
@@ -168,5 +159,23 @@ extension LocalizedError where Self: CustomStringConvertible {
 extension URLRequest {
     func header(for field: String) -> String {
         value(forHTTPHeaderField: field) ?? ""
+    }
+}
+
+public class RequestResponseData: Codable {
+    public let request: String
+    public let requestHeaders: [String]
+    public let responseHeaders: [String]
+    public let responseData: Data?
+
+    var combinedData: Data {
+        (try? JSONEncoder().encode(self)) ?? Data()
+    }
+
+    init(request: URLRequest, response: URLResponse?, responseData: Data?) {
+        self.request = request.debugDescription
+        self.requestHeaders = request.allHTTPHeaderFields?.map { "\($0.key) = \($0.value)" } ?? []
+        self.responseHeaders = (response as? HTTPURLResponse)?.allHeaderFields.map { "\($0.key) = \($0.value)" } ?? []
+        self.responseData = responseData
     }
 }

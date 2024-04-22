@@ -8,14 +8,8 @@
 import Energy_Stats_Core
 import SwiftUI
 
-struct ResponseDebugView<T: Decodable>: View {
-    let title: String
-    let missing: String
-    let fetcher: (() async throws -> ())?
-    private let store: InMemoryLoggingNetworkStore
-    @State private var fetchError: String?
-    @State private var mapResult: NetworkOperation<T>?
-    let mapper: (InMemoryLoggingNetworkStore) -> NetworkOperation<T>?
+struct LineSplitTextView: View {
+    let text: String
 
     struct Line: Identifiable {
         let id = UUID()
@@ -25,6 +19,32 @@ struct ResponseDebugView<T: Decodable>: View {
             self.text = String(text)
         }
     }
+
+    var body: some View {
+        ScrollView {
+            LazyVStack(alignment: .leading) {
+                ForEach(lines) { line in
+                    Text(line.text)
+                }
+            }
+            .font(.custom("Courier", size: 12.0))
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
+
+    private var lines: [Line] {
+        text.split(separator: "\n").map(Line.init)
+    }
+}
+
+struct ResponseDebugView<T: Decodable>: View {
+    let title: String
+    let missing: String
+    let fetcher: (() async throws -> ())?
+    private let store: InMemoryLoggingNetworkStore
+    @State private var fetchError: String?
+    @State private var mapResult: NetworkOperation<T>?
+    let mapper: (InMemoryLoggingNetworkStore) -> NetworkOperation<T>?
 
     init(
         store: InMemoryLoggingNetworkStore,
@@ -47,19 +67,12 @@ struct ResponseDebugView<T: Decodable>: View {
     var body: some View {
         VStack {
             if let mapResult {
-                (Text("Last fetched") + Text(" ") + 
+                (Text("Last fetched") + Text(" ") +
                     Text(mapResult.time, formatter: DateFormatter.forDebug()))
                     .padding(.bottom)
+                    .font(.caption)
 
-                ScrollView {
-                    LazyVStack(alignment: .leading) {
-                        ForEach(lines) { line in
-                            Text(line.text)
-                        }
-                    }
-                    .font(.custom("Courier", size: 12.0))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                }
+                LineSplitTextView(text: asText)
             } else {
                 Text(missing)
                     .padding()
@@ -100,10 +113,6 @@ struct ResponseDebugView<T: Decodable>: View {
 
         return data.formattedJSON()
     }
-
-    private var lines: [Line] {
-        asText.split(separator: "\n").map(Line.init)
-    }
 }
 
 struct ResponseDebugView_Previews: PreviewProvider {
@@ -134,9 +143,7 @@ extension Data {
         {
             return String(decoding: jsonData, as: UTF8.self)
         } else {
-            assertionFailure("Malformed JSON")
+            return String(data: self, encoding: .utf8) ?? "Malformed JSON"
         }
-
-        return ""
     }
 }

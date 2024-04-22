@@ -18,28 +18,46 @@ struct DebugDataView: View {
     var body: some View {
         Form {
             Section(content: {
-                NavigationLink("Raw") {
-                    ResponseDebugView<OpenQueryResponse>(
-                        store: store,
-                        title: "Raw",
-                        missing: "Data is fetched and cached on the power flow view.",
-                        mapper: { $0.queryResponse },
-                        fetcher: nil
-                    )
-                }
-                NavigationLink("Report") {
+                NavigationLink("device/report/Query") {
                     ResponseDebugView<[OpenReportResponse]>(
                         store: store,
-                        title: "Report",
+                        title: "device/report/Query",
                         missing: "Data is only fetched and cached on the graph view. Click that page to load report data",
                         mapper: { $0.reportResponse },
                         fetcher: nil
                     )
                 }
-                NavigationLink("Battery Settings") {
+                NavigationLink("device/real/Query") {
+                    ResponseDebugView<OpenQueryResponse>(
+                        store: store,
+                        title: "device/real/Query",
+                        missing: "Data is fetched and cached on the power flow view",
+                        mapper: { $0.queryResponse },
+                        fetcher: nil
+                    )
+                }
+                NavigationLink("device/list") {
+                    ResponseDebugView<[DeviceSummaryResponse]>(
+                        store: store,
+                        title: "device/list",
+                        missing: "Data is fetched and cached on login",
+                        mapper: { $0.deviceListResponse },
+                        fetcher: nil
+                    )
+                }
+                NavigationLink("device/variable/get") {
+                    ResponseDebugView<OpenApiVariableArray>(
+                        store: store,
+                        title: "device/variable/get",
+                        missing: "Data is fetched and cached on login",
+                        mapper: { $0.variables },
+                        fetcher: nil
+                    )
+                }
+                NavigationLink("device/battery/soc/get") {
                     ResponseDebugView<BatterySOCResponse>(
                         store: store,
-                        title: "Battery Settings",
+                        title: "device/battery/soc/get",
                         missing: "Battery Settings are fetched and recached on login. Logout and login to see the data response, or tap below",
                         mapper: { $0.batterySettingsResponse },
                         fetcher: {
@@ -51,11 +69,11 @@ struct DebugDataView: View {
                         }
                     )
                 }
-                NavigationLink("Battery Times") {
+                NavigationLink("device/battery/forceChargeTime/get") {
                     ResponseDebugView<BatteryTimesResponse>(
                         store: store,
-                        title: "Battery Times",
-                        missing: "Battery Times are fetched on demand.",
+                        title: "device/battery/forceChargeTime/get",
+                        missing: "Battery Charge Times are fetched on demand. Tap below to fetch now",
                         mapper: { $0.batteryTimesResponse },
                         fetcher: {
                             if let deviceSN = configManager.currentDevice.value?.deviceSN {
@@ -66,15 +84,13 @@ struct DebugDataView: View {
                         }
                     )
                 }
-                NavigationLink("Device List") {
-                    ResponseDebugView<[DeviceSummaryResponse]>(
+                NavigationLink("latest request/response") {
+                    ResponseDebugView<RequestResponseData>(
                         store: store,
-                        title: "Device List",
-                        missing: "Device list is fetched and recached on login, logout and login to see the data response.",
-                        mapper: { $0.deviceListResponse },
-                        fetcher: {
-                            _ = try await networking.fetchDeviceList()
-                        }
+                        title: "latest request/response",
+                        missing: "No requests made. Seems odd.",
+                        mapper: { $0.latestRequestResponseData },
+                        fetcher: nil
                     )
                 }
             }, footer: {
@@ -90,9 +106,21 @@ struct DebugDataView_Previews: PreviewProvider {
         let api = DemoNetworking()
         let store = InMemoryLoggingNetworkStore()
         Task {
-            store.queryResponse = try NetworkOperation(description: "fetchRaw", value: await api.fetchRealData(deviceSN: "123", variables: [Variable(name: "BatChargePower", variable: "batChargePower", unit: "kW")].map { $0.variable }), raw: "test".data(using: .utf8)!)
-            store.reportResponse = try NetworkOperation(description: "fetchReport", value: await api.fetchReport(deviceSN: "123", variables: [.chargeEnergyToTal], queryDate: .now(), reportType: .day), raw: "test".data(using: .utf8)!)
-            store.deviceListResponse = try NetworkOperation(description: "fetchDeviceList", value: await api.fetchDeviceList(), raw: "test".data(using: .utf8)!)
+            store.queryResponse = try NetworkOperation(
+                description: "fetchRaw",
+                value: await api.fetchRealData(deviceSN: "123", variables: [Variable(name: "BatChargePower", variable: "batChargePower", unit: "kW")].map { $0.variable }),
+                raw: "test".data(using: .utf8)!
+            )
+            store.reportResponse = try NetworkOperation(
+                description: "fetchReport",
+                value: await api.fetchReport(deviceSN: "123", variables: [.chargeEnergyToTal], queryDate: .now(), reportType: .day),
+                raw: "test".data(using: .utf8)!
+            )
+            store.deviceListResponse = try NetworkOperation(
+                description: "fetchDeviceList",
+                value: await api.fetchDeviceList(),
+                raw: "test".data(using: .utf8)!
+            )
         }
 
         return NavigationView {

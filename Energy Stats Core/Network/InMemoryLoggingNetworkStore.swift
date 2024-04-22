@@ -11,15 +11,17 @@ public class InMemoryLoggingNetworkStore: ObservableObject {
     @MainActor
     public var reportResponse: NetworkOperation<[OpenReportResponse]>?
     @MainActor
-    public var batterySettingsResponse: NetworkOperation<BatterySOCResponse>?
-    @MainActor
     public var queryResponse: NetworkOperation<OpenQueryResponse>?
     @MainActor
     public var deviceListResponse: NetworkOperation<[DeviceSummaryResponse]>?
     @MainActor
     public var variables: NetworkOperation<OpenApiVariableArray>?
     @MainActor
+    public var batterySettingsResponse: NetworkOperation<BatterySOCResponse>?
+    @MainActor
     public var batteryTimesResponse: NetworkOperation<BatteryTimesResponse>?
+    @MainActor
+    public var latestRequestResponseData: NetworkOperation<RequestResponseData>?
 
     public static let shared = InMemoryLoggingNetworkStore()
 
@@ -33,14 +35,8 @@ public class InMemoryLoggingNetworkStore: ObservableObject {
         deviceListResponse = nil
         variables = nil
         batteryTimesResponse = nil
+        latestRequestResponseData = nil
     }
-
-    @MainActor
-    public var latestRequest: URLRequest?
-    @MainActor
-    public var latestData: Data?
-    @MainActor
-    public var latestResponse: URLResponse?
 }
 
 public struct NetworkOperation<T: Decodable> {
