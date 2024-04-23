@@ -23,8 +23,8 @@ struct CheckBatteryChargeLevelIntent: AppIntent {
         guard let deviceSN = config.selectedDeviceSN else {
             throw ConfigManager.NoDeviceFoundError()
         }
-        let real = try await network.fetchRealData(deviceSN: deviceSN, variables: ["SoC"])
-        let soc = Int(real.datas.currentValue(for: "SoC"))
+        let real = try await network.fetchRealData(deviceSN: deviceSN, variables: ["SoC", "SoC_1"])
+        let soc = Int(real.datas.SoC() ?? 0)
 
         return .result(value: soc, dialog: IntentDialog(stringLiteral: "\(soc)%"))
     }

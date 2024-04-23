@@ -187,7 +187,7 @@ class PowerFlowTabViewModel: ObservableObject {
 
             return BatteryViewModel(
                 power: power,
-                soc: Int(real.datas.currentValue(for: "SoC")),
+                soc: Int(real.datas.SoC()),
                 residual: real.datas.currentValue(for: "ResidualEnergy") * 10.0,
                 temperature: real.datas.currentValue(for: "batTemperature")
             )
@@ -238,6 +238,7 @@ class PowerFlowTabViewModel: ObservableObject {
             "batChargePower",
             "batDischargePower",
             "SoC",
+            "SoC_1",
             "batTemperature",
             "ResidualEnergy",
             "epsPower"

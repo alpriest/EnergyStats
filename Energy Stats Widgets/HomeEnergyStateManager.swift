@@ -54,6 +54,7 @@ class HomeEnergyStateManager {
         let real = try await network.fetchRealData(
             deviceSN: deviceSN,
             variables: ["SoC",
+                        "SoC_1",
                         "batChargePower",
                         "batDischargePower",
                         "batTemperature",
@@ -68,7 +69,7 @@ class HomeEnergyStateManager {
 
         let viewModel = BatteryViewModel(
             power: power,
-            soc: Int(real.datas.currentValue(for: "SoC")),
+            soc: Int(real.datas.SoC() ?? 0),
             residual: real.datas.currentValue(for: "ResidualEnergy") * 10.0,
             temperature: real.datas.currentValue(for: "batTemperature")
         )

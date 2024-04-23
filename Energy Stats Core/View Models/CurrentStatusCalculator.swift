@@ -15,6 +15,10 @@ public extension Array where Element == OpenQueryResponse.Data {
     func currentValue(for key: String) -> Double {
         current(for: key) ?? 0.0
     }
+
+    func SoC() -> Double {
+        current(for: "SoC") ?? current(for: "SoC_1") ?? 0.0
+    }
 }
 
 public struct CurrentStatusCalculator {
