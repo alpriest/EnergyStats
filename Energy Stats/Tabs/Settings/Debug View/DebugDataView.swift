@@ -18,46 +18,46 @@ struct DebugDataView: View {
     var body: some View {
         Form {
             Section(content: {
-                NavigationLink("device/report/Query") {
+                NavigationLink(String(stringLiteral: "device/report/Query")) {
                     ResponseDebugView<[OpenReportResponse]>(
                         store: store,
-                        title: "device/report/Query",
+                        title: String(stringLiteral: "device/report/Query"),
                         missing: "Data is only fetched and cached on the graph view. Click that page to load report data",
                         mapper: { $0.reportResponse },
                         fetcher: nil
                     )
                 }
-                NavigationLink("device/real/Query") {
+                NavigationLink(String(stringLiteral: "device/real/Query")) {
                     ResponseDebugView<OpenQueryResponse>(
                         store: store,
-                        title: "device/real/Query",
+                        title: String(stringLiteral: "device/real/Query"),
                         missing: "Data is fetched and cached on the power flow view",
                         mapper: { $0.queryResponse },
                         fetcher: nil
                     )
                 }
-                NavigationLink("device/list") {
+                NavigationLink(String(stringLiteral: "device/list")) {
                     ResponseDebugView<[DeviceSummaryResponse]>(
                         store: store,
-                        title: "device/list",
+                        title: String(stringLiteral: "device/list"),
                         missing: "Data is fetched and cached on login",
                         mapper: { $0.deviceListResponse },
                         fetcher: nil
                     )
                 }
-                NavigationLink("device/variable/get") {
+                NavigationLink(String(stringLiteral: "device/variable/get")) {
                     ResponseDebugView<OpenApiVariableArray>(
                         store: store,
-                        title: "device/variable/get",
+                        title: String(stringLiteral: "device/variable/get"),
                         missing: "Data is fetched and cached on login",
                         mapper: { $0.variables },
                         fetcher: nil
                     )
                 }
-                NavigationLink("device/battery/soc/get") {
+                NavigationLink(String(stringLiteral: "device/battery/soc/get")) {
                     ResponseDebugView<BatterySOCResponse>(
                         store: store,
-                        title: "device/battery/soc/get",
+                        title: String(stringLiteral: "device/battery/soc/get"),
                         missing: "Battery Settings are fetched and recached on login. Logout and login to see the data response, or tap below",
                         mapper: { $0.batterySOCResponse },
                         fetcher: {
@@ -69,10 +69,10 @@ struct DebugDataView: View {
                         }
                     )
                 }
-                NavigationLink("device/battery/forceChargeTime/get") {
+                NavigationLink(String(stringLiteral: "device/battery/forceChargeTime/get")) {
                     ResponseDebugView<BatteryTimesResponse>(
                         store: store,
-                        title: "device/battery/forceChargeTime/get",
+                        title: String(stringLiteral: "device/battery/forceChargeTime/get"),
                         missing: "Battery Charge Times are fetched on demand. Tap below to fetch now",
                         mapper: { $0.batteryTimesResponse },
                         fetcher: {
@@ -84,10 +84,10 @@ struct DebugDataView: View {
                         }
                     )
                 }
-                NavigationLink("latest request/response") {
+                NavigationLink(String(stringLiteral: "latest request/response")) {
                     ResponseDebugView<RequestResponseData>(
                         store: store,
-                        title: "latest request/response",
+                        title: String(stringLiteral: "latest request/response"),
                         missing: "No requests made. Seems odd.",
                         mapper: { $0.latestRequestResponseData },
                         fetcher: nil

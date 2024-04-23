@@ -14,6 +14,15 @@ struct APIKeyLoginView: View {
     @State private var errorMessage: String?
 
     var body: some View {
+        switch userManager.state {
+        case .active(let localizedStringKey):
+            LoadingView(message: localizedStringKey)
+        default:
+            loginView()
+        }
+    }
+
+    func loginView() -> some View {
         ScrollView {
             VStack {
                 Text("Enter your FoxESS Cloud API key")

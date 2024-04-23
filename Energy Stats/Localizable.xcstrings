@@ -2657,35 +2657,6 @@
         }
       }
     },
-    "Battery Settings" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Batterieeinstellungen"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Configuración de la batería"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Impostazioni della batteria"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ustawienia baterii"
-          }
-        }
-      }
-    },
     "Battery Times" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -4580,24 +4551,6 @@
           }
         }
       }
-    },
-    "device/battery/forceChargeTime/get" : {
-
-    },
-    "device/battery/soc/get" : {
-
-    },
-    "device/list" : {
-
-    },
-    "device/real/Query" : {
-
-    },
-    "device/report/Query" : {
-
-    },
-    "device/variable/get" : {
-
     },
     "Discharge " : {
       "extractionState" : "manual",
@@ -7276,9 +7229,6 @@
           }
         }
       }
-    },
-    "latest request/response" : {
-
     },
     "Latitude" : {
       "localizations" : {
@@ -10992,31 +10942,31 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Debuggen"
+            "value" : "Debug-Daten anzeigen"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Debug"
+            "value" : "View debug data"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Depuración"
+            "value" : "Ver datos de depuración"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Debug"
+            "value" : "Visualizza dati di debug"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Debugowanie"
+            "value" : "Wyświetl dane debugowania"
           }
         }
       }
