@@ -84,7 +84,8 @@ struct LoadedPowerFlowView: View {
                         viewModel: InverterViewModel(
                             configManager: configManager,
                             temperatures: viewModel.inverterTemperatures,
-                            deviceState: viewModel.deviceState
+                            deviceState: viewModel.deviceState,
+                            faults: viewModel.faults
                         ),
                         appSettings: appSettings
                     )
@@ -215,7 +216,8 @@ extension LoadedPowerFlowViewModel {
               gridImportTotal: 12.0,
               gridExportTotal: 2.4,
               ct2: 0,
-              deviceState: .online)
+              deviceState: .online,
+              faults: [])
     }
 }
 

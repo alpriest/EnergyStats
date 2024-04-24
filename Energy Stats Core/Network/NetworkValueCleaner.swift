@@ -98,7 +98,8 @@ class NetworkValueCleaner: FoxAPIServicing {
         return OpenQueryResponse(time: original.time, deviceSN: deviceSN, datas: original.datas.map { originalData in
             OpenQueryResponse.Data(unit: originalData.unit,
                                    variable: originalData.variable,
-                                   value: originalData.value.capped(appSettingsPublisher.value.dataCeiling))
+                                   value: originalData.value?.capped(appSettingsPublisher.value.dataCeiling),
+                                   stringValue: originalData.stringValue)
         })
     }
 

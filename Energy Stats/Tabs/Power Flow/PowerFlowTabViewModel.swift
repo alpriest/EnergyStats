@@ -164,7 +164,8 @@ class PowerFlowTabViewModel: ObservableObject {
                 gridImportTotal: totals.gridImport,
                 gridExportTotal: totals.gridExport,
                 ct2: currentViewModel.currentCT2,
-                deviceState: deviceState
+                deviceState: deviceState,
+                faults: currentViewModel.currentFaults
             )
 
             self.state = .loaded(.empty()) // refreshes the marching ants line speed
@@ -181,15 +182,15 @@ class PowerFlowTabViewModel: ObservableObject {
 
     private func makeBatteryViewModel(_ currentDevice: Device, _ real: OpenQueryResponse) -> BatteryViewModel {
         if self.configManager.currentDevice.value?.hasBattery == true {
-            let chargePower = real.datas.currentValue(for: "batChargePower")
-            let dischargePower = real.datas.currentValue(for: "batDischargePower")
+            let chargePower = real.datas.currentDouble(for: "batChargePower")
+            let dischargePower = real.datas.currentDouble(for: "batDischargePower")
             let power = chargePower > 0 ? chargePower : -dischargePower
 
             return BatteryViewModel(
                 power: power,
                 soc: Int(real.datas.SoC()),
-                residual: real.datas.currentValue(for: "ResidualEnergy") * 10.0,
-                temperature: real.datas.currentValue(for: "batTemperature")
+                residual: real.datas.currentDouble(for: "ResidualEnergy") * 10.0,
+                temperature: real.datas.currentDouble(for: "batTemperature")
             )
         } else {
             return BatteryViewModel.noBattery
@@ -241,7 +242,8 @@ class PowerFlowTabViewModel: ObservableObject {
             "SoC_1",
             "batTemperature",
             "ResidualEnergy",
-            "epsPower"
+            "epsPower",
+            "currentFault"
         ]
 
         if config.powerFlowStrings.enabled {

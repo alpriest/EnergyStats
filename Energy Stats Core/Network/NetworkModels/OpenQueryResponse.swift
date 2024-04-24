@@ -74,9 +74,26 @@ public struct OpenQueryResponse: Codable {
     public let datas: [Data]
 
     public struct Data: Codable {
-        let unit: String
+        let unit: String?
         let variable: String
-        let value: Double
+        let value: Double?
+        let stringValue: String?
+
+        public init(unit: String?, variable: String, value: Double?, stringValue: String?) {
+            self.unit = unit
+            self.variable = variable
+            self.value = value
+            self.stringValue = stringValue
+        }
+
+        public init(from decoder: any Decoder) throws {
+            let container: KeyedDecodingContainer<OpenQueryResponse.Data.CodingKeys> = try decoder.container(keyedBy: OpenQueryResponse.Data.CodingKeys.self)
+            self.unit = try? container.decode(String.self, forKey: OpenQueryResponse.Data.CodingKeys.unit)
+            self.variable = try container.decode(String.self, forKey: OpenQueryResponse.Data.CodingKeys.variable)
+
+            self.value = try? container.decodeIfPresent(Double.self, forKey: OpenQueryResponse.Data.CodingKeys.value)
+            self.stringValue = try? container.decodeIfPresent(String.self, forKey: OpenQueryResponse.Data.CodingKeys.value)
+        }
     }
 
     enum CodingKeys: CodingKey {

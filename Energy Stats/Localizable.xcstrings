@@ -5492,6 +5492,34 @@
         }
       }
     },
+    "Faults Detected" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fehler Erkannt"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fallas Detectadas"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Difetti Rilevati"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wykryto Usterki"
+          }
+        }
+      }
+    },
     "Feed In First" : {
       "extractionState" : "stale",
       "localizations" : {

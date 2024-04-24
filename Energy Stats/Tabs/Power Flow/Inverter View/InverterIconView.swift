@@ -40,23 +40,32 @@ struct InverterIconPath: View {
 struct InverterIconView: View {
     @State private var size: CGSize = .zero
     @State private var opacity = 1.0
-    let deviceState: DeviceState
+    let deviceFaulty: Bool
+
+    var deviceStateColor: Color {
+        switch deviceFaulty {
+        case false:
+            Color.gray
+        case true:
+            Color("lines_negative")
+        }
+    }
 
     var body: some View {
         ZStack(alignment: .topLeading) {
             InverterIconPath()
 
             Group {
-                switch deviceState {
-                case .online:
-                    Color.deviceStateColor(deviceState)
-                default:
-                    Color.deviceStateColor(deviceState)
+                switch deviceFaulty {
+                case false:
+                    deviceStateColor
+                case true:
+                    deviceStateColor
                         .onAppear {
-                            switch deviceState {
-                            case .online:
+                            switch deviceFaulty {
+                            case false:
                                 opacity = 1.0
-                            default:
+                            case true:
                                 withAnimation(.snappy(duration: 0.4).repeatForever(autoreverses: true)) { opacity = 0.2 }
                             }
                         }
@@ -87,6 +96,6 @@ struct InverterIconView: View {
 }
 
 #Preview {
-    InverterIconView(deviceState: .online)
+    InverterIconView(deviceFaulty: false)
         .frame(width: 150, height: 180)
 }

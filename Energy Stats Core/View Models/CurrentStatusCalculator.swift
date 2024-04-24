@@ -8,16 +8,20 @@
 import Foundation
 
 public extension Array where Element == OpenQueryResponse.Data {
-    func current(for key: String) -> Double? {
-        first(where: { $0.variable.lowercased() == key.lowercased() })?.value
+    func currentDouble(for key: String) -> Double {
+        current(for: key)?.value ?? 0.0
     }
 
-    func currentValue(for key: String) -> Double {
-        current(for: key) ?? 0.0
+    func currentString(for key: String) -> String? {
+        current(for: key)?.stringValue
+    }
+
+    func current(for key: String) -> OpenQueryResponse.Data? {
+        first(where: { $0.variable.lowercased() == key.lowercased() })
     }
 
     func SoC() -> Double {
-        current(for: "SoC") ?? current(for: "SoC_1") ?? 0.0
+        current(for: "SoC")?.value ?? current(for: "SoC_1")?.value ?? 0.0
     }
 }
 
@@ -29,6 +33,7 @@ public struct CurrentStatusCalculator {
     public let currentTemperatures: InverterTemperatures?
     public let lastUpdate: Date
     public let currentCT2: Double
+    public let currentFaults: [String]
 
     public init(
         device: Device,
@@ -49,6 +54,7 @@ public struct CurrentStatusCalculator {
         self.currentCT2 = shouldInvertCT2 ? 0 - status.meterPower2 : status.meterPower2
         self.currentSolarPower = Self.calculateSolarPower(hasPV: status.hasPV, status: status, shouldInvertCT2: shouldInvertCT2, shouldCombineCT2WithPVPower: shouldCombineCT2WithPVPower)
         self.currentSolarStringsPower = Self.calculateSolarStringsPower(hasPV: status.hasPV, status: status)
+        self.currentFaults = Self.currentFaults(real: response)
     }
 
     static func mapCurrentValues(device: Device, response: OpenQueryResponse, config: ConfigManaging) -> CurrentRawValues {
@@ -58,16 +64,16 @@ public struct CurrentStatusCalculator {
         }
 
         return CurrentRawValues(
-            pvPower: response.datas.currentValue(for: "pvPower"),
+            pvPower: response.datas.currentDouble(for: "pvPower"),
             stringsPvPower: stringsPvPower,
-            feedinPower: response.datas.currentValue(for: "feedinPower"),
-            gridConsumptionPower: response.datas.currentValue(for: "gridConsumptionPower"),
-            loadsPower: response.datas.currentValue(for: "loadsPower"),
-            generationPower: response.datas.currentValue(for: "generationPower"),
-            epsPower: response.datas.currentValue(for: "epsPower"),
-            ambientTemperation: response.datas.currentValue(for: "ambientTemperation"),
-            invTemperation: response.datas.currentValue(for: "invTemperation"),
-            meterPower2: response.datas.currentValue(for: "meterPower2"),
+            feedinPower: response.datas.currentDouble(for: "feedinPower"),
+            gridConsumptionPower: response.datas.currentDouble(for: "gridConsumptionPower"),
+            loadsPower: response.datas.currentDouble(for: "loadsPower"),
+            generationPower: response.datas.currentDouble(for: "generationPower"),
+            epsPower: response.datas.currentDouble(for: "epsPower"),
+            ambientTemperation: response.datas.currentDouble(for: "ambientTemperation"),
+            invTemperation: response.datas.currentDouble(for: "invTemperation"),
+            meterPower2: response.datas.currentDouble(for: "meterPower2"),
             hasPV: device.hasPV,
             lastUpdate: response.time
         )
@@ -97,6 +103,12 @@ public struct CurrentStatusCalculator {
         } else {
             return []
         }
+    }
+
+    static func currentFaults(real: OpenQueryResponse) -> [String] {
+        guard let currentFaults = real.datas.currentString(for: "currentFault") else { return [] }
+
+        return currentFaults.split(separator: ",").map { String($0) }
     }
 }
 

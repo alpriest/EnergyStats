@@ -20,11 +20,13 @@ class InverterViewModel: ObservableObject {
     @Published var devices: [SelectableDevice] = []
     let temperatures: InverterTemperatures?
     let deviceState: DeviceState
+    let faults: [String]
 
-    init(configManager: ConfigManaging, temperatures: InverterTemperatures?, deviceState: DeviceState) {
+    init(configManager: ConfigManaging, temperatures: InverterTemperatures?, deviceState: DeviceState, faults: [String]) {
         self.configManager = configManager
         self.temperatures = temperatures
         self.deviceState = deviceState
+        self.faults = faults
 
         updateDevices()
     }
@@ -39,6 +41,14 @@ class InverterViewModel: ObservableObject {
     func select(device: Device) {
         configManager.select(device: device)
         updateDevices()
+    }
+
+    var hasFault: Bool {
+        !faults.isEmpty
+    }
+
+    var faultsMessage: String {
+        faults.joined(separator: "\n")
     }
 
     var hasMultipleDevices: Bool {

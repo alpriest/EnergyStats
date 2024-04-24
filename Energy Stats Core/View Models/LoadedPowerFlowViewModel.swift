@@ -62,6 +62,7 @@ public struct LoadedPowerFlowViewModel: Equatable {
     private let batteryViewModel: BatteryViewModel
     public let ct2: Double
     public let deviceState: DeviceState
+    public let faults: [String]
 
     public init(solar: Double,
                 solarStrings: [StringPower],
@@ -75,7 +76,8 @@ public struct LoadedPowerFlowViewModel: Equatable {
                 gridImportTotal: Double,
                 gridExportTotal: Double,
                 ct2: Double,
-                deviceState: DeviceState)
+                deviceState: DeviceState,
+                faults: [String])
     {
         self.solar = solar
         self.solarStrings = solarStrings
@@ -90,6 +92,7 @@ public struct LoadedPowerFlowViewModel: Equatable {
         self.gridExportTotal = gridExportTotal
         self.ct2 = ct2
         self.deviceState = deviceState
+        self.faults = faults
     }
 
     public static func ==(lhs: LoadedPowerFlowViewModel, rhs: LoadedPowerFlowViewModel) -> Bool {
@@ -145,6 +148,7 @@ public extension LoadedPowerFlowViewModel {
               gridImportTotal: 0,
               gridExportTotal: 0,
               ct2: 0,
-              deviceState: .offline)
+              deviceState: .offline,
+              faults: [])
     }
 }

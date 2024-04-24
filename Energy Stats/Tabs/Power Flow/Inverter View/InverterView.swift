@@ -47,6 +47,7 @@ struct InverterTemperatureView: View {
 struct InverterView: View {
     @ObservedObject var viewModel: InverterViewModel
     @Environment(\.verticalSizeClass) private var verticalSizeClass
+    @State private var alertContent: AlertContent?
     let appSettings: AppSettings
 
     var body: some View {
@@ -57,7 +58,7 @@ struct InverterView: View {
 
             if verticalSizeClass == .regular {
                 // Portrait
-                InverterIconView(deviceState: viewModel.deviceState)
+                InverterIconView(deviceFaulty: viewModel.hasFault)
                     .id(viewModel.deviceState)
                     .frame(width: 50, height: 55)
                     .padding(5)
@@ -80,6 +81,12 @@ struct InverterView: View {
                 }
             }
         }
+        .if(viewModel.hasFault) {
+            $0.onTapGesture {
+                alertContent = AlertContent(title: "Faults Detected", message: LocalizedStringKey(stringLiteral: viewModel.faultsMessage))
+            }
+        }
+        .alert(alertContent: $alertContent)
     }
 
     @ViewBuilder
@@ -166,13 +173,15 @@ struct InverterView_Previews: PreviewProvider {
         VStack {
             InverterView(viewModel: InverterViewModel(configManager: PreviewConfigManager(),
                                                       temperatures: InverterTemperatures.any(),
-                                                      deviceState: .online),
+                                                      deviceState: .online,
+                                                      faults: []),
                          appSettings: .mock().copy(showInverterTemperature: true, showInverterStationName: true))
                 .background(Color.gray.opacity(0.3))
 
             InverterView(viewModel: InverterViewModel(configManager: PreviewConfigManager(),
                                                       temperatures: InverterTemperatures.any(),
-                                                      deviceState: .fault),
+                                                      deviceState: .offline,
+                                                      faults: ["No Utility", "Grid Voltage Fault", "Grid Frequency Fault"]),
                          appSettings: .mock().copy(showInverterTemperature: false))
                 .background(Color.gray.opacity(0.3))
         }

@@ -115,19 +115,19 @@ public struct PowerFlowStringsSettings: Codable {
         var strings = [StringPower]()
 
         if pv1Enabled {
-            strings.append(StringPower(name: "PV1", amount: abs(response.datas.currentValue(for: "pv1Power"))))
+            strings.append(StringPower(name: "PV1", amount: abs(response.datas.currentDouble(for: "pv1Power"))))
         }
 
         if pv2Enabled {
-            strings.append(StringPower(name: "PV2", amount: abs(response.datas.currentValue(for: "pv2Power"))))
+            strings.append(StringPower(name: "PV2", amount: abs(response.datas.currentDouble(for: "pv2Power"))))
         }
 
         if pv3Enabled {
-            strings.append(StringPower(name: "PV3", amount: abs(response.datas.currentValue(for: "pv3Power"))))
+            strings.append(StringPower(name: "PV3", amount: abs(response.datas.currentDouble(for: "pv3Power"))))
         }
 
         if pv4Enabled {
-            strings.append(StringPower(name: "PV4", amount: abs(response.datas.currentValue(for: "pv4Power"))))
+            strings.append(StringPower(name: "PV4", amount: abs(response.datas.currentDouble(for: "pv4Power"))))
         }
 
         return strings

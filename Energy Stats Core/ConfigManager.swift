@@ -527,7 +527,7 @@ public class ConfigManager: ConfigManaging {
 
 public enum BatteryResponseMapper {
     public static func map(batteryVariables: OpenQueryResponse, settings: BatterySOCResponse) -> Device.Battery? {
-        guard let residual = batteryVariables.datas.current(for: "ResidualEnergy") else { return nil }
+        guard let residual = batteryVariables.datas.current(for: "ResidualEnergy")?.value else { return nil }
 
         let batteryCapacity: String
         let minSOC: String
