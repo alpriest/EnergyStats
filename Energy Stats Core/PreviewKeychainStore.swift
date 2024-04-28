@@ -6,33 +6,32 @@
 //
 
 import Combine
-import Energy_Stats_Core
 import Foundation
 
-class PreviewKeychainStore: KeychainStoring {
-    var isDemoUser: Bool = true
-    var hashedPassword: String?
+public class PreviewKeychainStore: KeychainStoring {
+    public var isDemoUser: Bool = true
     var token: String? = "abc-123-def-123-ghi-123-jkl"
     var logoutCalled = false
+    public var selectedDeviceSN: String?
 
-    func store(apiKey: String?, notifyObservers: Bool) throws {
+    public func store(apiKey: String?, notifyObservers: Bool) throws {
         token = apiKey
     }
 
-    func getToken() -> String? {
+    public func getToken() -> String? {
         token
     }
 
-    func logout() {
+    public func logout() {
         logoutCalled = true
     }
 
-    func updateHasCredentials() {}
+    public func updateHasCredentials() {}
 
     let hasCredentialsSubject = CurrentValueSubject<Bool, Never>(false)
-    let hasCredentials: AnyPublisher<Bool, Never>
+    public let hasCredentials: AnyPublisher<Bool, Never>
 
-    init() {
+    public init() {
         hasCredentials = hasCredentialsSubject.eraseToAnyPublisher()
     }
 }

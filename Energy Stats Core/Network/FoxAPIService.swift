@@ -124,7 +124,7 @@ extension FoxAPIService {
         request.setValue(languageCode, forHTTPHeaderField: "lang")
         request.setValue(timezone, forHTTPHeaderField: "timezone")
 
-        let timestamp = Int(round(Date().timeIntervalSince1970 * 1000))
+        let timestamp = Int64(round(Date().timeIntervalSince1970 * 1000))
 
         request.setValue(String(describing: timestamp), forHTTPHeaderField: "timestamp")
         request.setValue(openAPISignature(for: request), forHTTPHeaderField: "signature")

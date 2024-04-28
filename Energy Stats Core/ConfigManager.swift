@@ -10,6 +10,7 @@ import Foundation
 
 public class ConfigManager: ConfigManaging {
     private let networking: Networking
+    private var keychainStore: KeychainStoring
     private var config: Config
     public var appSettingsPublisher: CurrentValueSubject<AppSettings, Never>
     public var currentDevice = CurrentValueSubject<Device?, Never>(nil)
@@ -22,10 +23,11 @@ public class ConfigManager: ConfigManaging {
         public init() {}
     }
 
-    public init(networking: Networking, config: Config, appSettingsPublisher: CurrentValueSubject<AppSettings, Never>) {
+    public init(networking: Networking, config: Config, appSettingsPublisher: CurrentValueSubject<AppSettings, Never>, keychainStore: KeychainStoring) {
         self.networking = networking
         self.config = config
         self.appSettingsPublisher = appSettingsPublisher
+        self.keychainStore = keychainStore
         selectedDeviceSN = selectedDeviceSN // force the currentDevice to be set
     }
 
@@ -152,6 +154,7 @@ public class ConfigManager: ConfigManaging {
         }
         set {
             config.selectedDeviceSN = newValue
+            keychainStore.selectedDeviceSN = newValue
             currentDevice.send(devices?.first(where: { $0.deviceSN == selectedDeviceSN }) ?? devices?.first)
         }
     }

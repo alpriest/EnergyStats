@@ -21,7 +21,7 @@ struct Energy_StatsApp: App {
         }
         let appSettingsPublisher = AppSettingsPublisherFactory.make(from: config)
         let network = NetworkService.standard(keychainStore: keychainStore, config: config)
-        let configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher)
+        let configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
         let userManager = UserManager(networking: network, store: keychainStore, configManager: configManager, networkCache: InMemoryLoggingNetworkStore.shared)
         let solarForecastProvider: () -> SolarForecasting = {
             config.isDemoUser ? DemoSolcast() : SolcastCache(service: { Solcast() })

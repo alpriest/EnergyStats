@@ -158,8 +158,8 @@ extension Double {
     func capped(_ ceiling: DataCeiling) -> Double {
         guard self > 0 else { return self }
 
-        let register = Int(self * 10)
-        let mask = switch ceiling {
+        let register = UInt(self * 10)
+        let mask: UInt = switch ceiling {
         case .none:
             0x0
         case .mild:

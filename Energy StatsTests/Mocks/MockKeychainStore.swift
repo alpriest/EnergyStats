@@ -12,13 +12,8 @@ import Combine
 
 class MockKeychainStore: KeychainStoring {
     var isDemoUser: Bool = true
-    var hashedPassword: String?
     var token: String?
     var logoutCalled = false
-
-    func getHashedPassword() -> String? {
-        hashedPassword
-    }
 
     func store(apiKey: String?, notifyObservers: Bool) throws {
         self.token = apiKey
@@ -44,4 +39,7 @@ class MockKeychainStore: KeychainStoring {
     func updateHasCredentials(value: Bool) {
         hasCredentialsSubject.send(value)
     }
+
+    var selectedDeviceSN: String?
 }
+

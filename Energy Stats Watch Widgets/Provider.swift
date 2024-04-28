@@ -13,19 +13,20 @@ import WidgetKit
 
 public final class BundleLocator {}
 
-// TODO: Consider moving this into Core
 struct Provider: TimelineProvider {
     private let config = UserDefaultsConfig()
     private let configManager: ConfigManaging
     private let keychainStore = KeychainStore()
     let network: Networking
     private let modelContainer: ModelContainer
+    private let deviceSN: String?
 
-    init() {
+    init(deviceSN: String?) {
+        self.deviceSN = deviceSN
         network = NetworkService.standard(keychainStore: keychainStore, config: config)
         let appSettingsPublisher = AppSettingsPublisherFactory.make(from: config)
         configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
-        modelContainer = HomeEnergyStateManager.shared.modelContainer
+        modelContainer = HomeEnergyStateManager2.shared.modelContainer
     }
 
     func placeholder(in context: Context) -> SimpleEntry {
@@ -68,11 +69,13 @@ struct Provider: TimelineProvider {
         var errorMessage: String? = nil
 
         do {
-            try await HomeEnergyStateManager.shared.update()
+            try await HomeEnergyStateManager2.shared.update(deviceSN: deviceSN)
         } catch _ as ConfigManager.NoBattery {
             return .failed(error: "Your selected inverter has no battery connected")
+        } catch _ as ConfigManager.NoDeviceFoundError {
+            return .failed(error: deviceSN ?? "no")
         } catch {
-            errorMessage = error.localizedDescription
+            errorMessage = String(describing: error)
         }
 
         do {
@@ -108,7 +111,7 @@ struct SimpleEntry: TimelineEntry {
     let state: EntryState
     let errorMessage: String?
 
-    private init(date: Date, soc: Int?, chargeStatusDescription: String?, state: EntryState, errorMessage: String?) {
+    init(date: Date, soc: Int?, chargeStatusDescription: String?, state: EntryState, errorMessage: String?) {
         self.date = date
         self.soc = soc
         self.state = state

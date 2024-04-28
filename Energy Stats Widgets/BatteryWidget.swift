@@ -18,7 +18,7 @@ struct BatteryWidget: Widget {
         let config = UserDefaultsConfig()
         let network = NetworkService.standard(keychainStore: keychainStore, config: config)
         let appSettingsPublisher = AppSettingsPublisherFactory.make(from: config)
-        configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher)
+        configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
     }
 
     var body: some WidgetConfiguration {
@@ -115,7 +115,7 @@ struct BatteryWidget_Previews: PreviewProvider {
     static var previews: some View {
         BatteryWidgetView(
             entry: SimpleEntry.failed(error: "Something went wrong"),
-            configManager: ConfigManager(networking: DemoNetworking(), config: MockConfig(), appSettingsPublisher: AppSettingsPublisherFactory.make(from: MockConfig()))
+            configManager: ConfigManager(networking: DemoNetworking(), config: MockConfig(), appSettingsPublisher: AppSettingsPublisherFactory.make(from: MockConfig()), keychainStore: PreviewKeychainStore())
         )
         .previewContext(WidgetPreviewContext(family: .accessoryCircular))
 
@@ -124,7 +124,7 @@ struct BatteryWidget_Previews: PreviewProvider {
                                       soc: 50,
                                       chargeStatusDescription: "Full in 22 minutes",
                                       errorMessage: "Could not refresh"),
-            configManager: ConfigManager(networking: DemoNetworking(), config: MockConfig(), appSettingsPublisher: AppSettingsPublisherFactory.make(from: MockConfig()))
+            configManager: ConfigManager(networking: DemoNetworking(), config: MockConfig(), appSettingsPublisher: AppSettingsPublisherFactory.make(from: MockConfig()), keychainStore: PreviewKeychainStore())
         )
         .previewContext(WidgetPreviewContext(family: .systemSmall))
     }

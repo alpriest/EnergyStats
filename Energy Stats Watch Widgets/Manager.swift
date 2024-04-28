@@ -1,27 +1,25 @@
 //
-//  Intents.swift
-//  Energy Stats Core
+//  Manager.swift
+//  Energy Stats Watch App
 //
-//  Created by Alistair Priest on 24/09/2023.
+//  Created by Alistair Priest on 28/04/2024.
 //
 
-import AppIntents
 import Energy_Stats_Core
 import Foundation
 import SwiftData
-import WidgetKit
 
-class HomeEnergyStateManager {
-    static var shared: HomeEnergyStateManager = .init()
+class HomeEnergyStateManager2 {
+    public static var shared: HomeEnergyStateManager2 = .init()
 
-    let modelContainer: ModelContainer
+    public let modelContainer: ModelContainer
     let network: Networking
     let config: Config
+    let keychainStore = KeychainStore()
 
     init() {
         do {
             modelContainer = try ModelContainer(for: BatteryWidgetState.self)
-            let keychainStore = KeychainStore()
             config = UserDefaultsConfig()
             network = NetworkService.standard(keychainStore: keychainStore, config: config)
         } catch {
@@ -30,7 +28,7 @@ class HomeEnergyStateManager {
     }
 
     @MainActor
-    func isStale() async -> Bool {
+    public func isStale() async -> Bool {
         let fetchDescriptor: FetchDescriptor<BatteryWidgetState> = FetchDescriptor()
         guard let widgetState = (try? modelContainer.mainContext.fetch(fetchDescriptor))?.first else { return true }
 
@@ -38,18 +36,12 @@ class HomeEnergyStateManager {
     }
 
     @MainActor
-    func update() async throws {
-        guard await isStale() else { return }
+    public func update(deviceSN: String?) async throws {
+//        guard await isStale() else { return }
+        guard let deviceSN else { throw ConfigManager.NoDeviceFoundError() }
 
         let appSettingsPublisher = AppSettingsPublisherFactory.make(from: config)
-        let configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher)
-
-        guard let deviceSN = config.selectedDeviceSN else {
-            throw ConfigManager.NoDeviceFoundError()
-        }
-        guard configManager.hasBattery else {
-            throw ConfigManager.NoBattery()
-        }
+        let configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
 
         let real = try await network.fetchRealData(
             deviceSN: deviceSN,
@@ -98,25 +90,6 @@ class HomeEnergyStateManager {
         let fetchDescriptor: FetchDescriptor<BatteryWidgetState> = FetchDescriptor()
         if let widgetState = (try? modelContainer.mainContext.fetch(fetchDescriptor))?.first {
             modelContainer.mainContext.delete(widgetState)
-        }
-    }
-}
-
-@available(iOS 16.0, *)
-struct UpdateBatteryChargeLevelIntent: AppIntent {
-    static var title: LocalizedStringResource = "Update Storage Battery SOC for the widget"
-    static var authenticationPolicy: IntentAuthenticationPolicy = .alwaysAllowed
-    static var openAppWhenRun: Bool = false
-
-    func perform() async throws -> some ReturnsValue<Bool> {
-        do {
-            try await HomeEnergyStateManager.shared.update()
-
-            WidgetCenter.shared.reloadTimelines(ofKind: "BatteryWidget")
-
-            return .result(value: true)
-        } catch {
-            return .result(value: false)
         }
     }
 }

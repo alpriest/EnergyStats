@@ -313,7 +313,7 @@ public class MockConfig: Config {
 
 public class PreviewConfigManager: ConfigManager {
     public convenience init(config: Config = MockConfig()) {
-        self.init(networking: DemoNetworking(), config: config, appSettingsPublisher: CurrentValueSubject(AppSettings.mock()))
+        self.init(networking: DemoNetworking(), config: config, appSettingsPublisher: CurrentValueSubject(AppSettings.mock()), keychainStore: PreviewKeychainStore())
         Task { try await fetchDevices() }
     }
 }
