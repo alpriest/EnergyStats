@@ -24,7 +24,8 @@ public protocol KeychainStoring {
     func getToken() -> String?
     var hasCredentials: AnyPublisher<Bool, Never> { get }
     var isDemoUser: Bool { get }
-    var selectedDeviceSN: String? { get set }
+    func getSelectedDeviceSN() -> String?
+    func store(selectedDeviceSN: String?) throws
 }
 
 public class KeychainStore: KeychainStoring {
@@ -39,13 +40,14 @@ public class KeychainStore: KeychainStoring {
     private let hasCredentialsSubject = CurrentValueSubject<Bool, Never>(false)
     public var hasCredentials: AnyPublisher<Bool, Never>
 
-    public var selectedDeviceSN: String? {
-        get {
-            get(tag: "SelectedDeviceSN")
-        }
-        set {
-            try? set(tag: "SelectedDeviceSN", value: newValue)
-        }
+    public func getSelectedDeviceSN() -> String? {
+        get(tag: "deviceSN")
+    }
+
+    public func store(selectedDeviceSN: String?) throws {
+        guard let selectedDeviceSN else { return }
+
+        try set(tag: "deviceSN", value: selectedDeviceSN)
     }
 
     public init() {
@@ -54,8 +56,6 @@ public class KeychainStore: KeychainStoring {
     }
 
     public func store(apiKey: String?, notifyObservers: Bool) throws {
-        SecItemDelete(makeQuery(tag: "token"))
-
         try set(tag: "token", value: apiKey)
 
         if notifyObservers {
@@ -100,7 +100,7 @@ private extension KeychainStore {
 
     func makeQuery(tag: String) -> CFDictionary {
         [
-            kSecAttrAccessGroup: "group.com.alpriest.EnergyStats",
+            kSecAttrAccessGroup: "885RLNNNK2.com.alpriest.EnergyStats",
             kSecAttrApplicationTag: tag,
             kSecClass: kSecClassKey,
             kSecReturnAttributes: true,
@@ -122,7 +122,7 @@ private extension KeychainStore {
 
         if let data {
             let keychainItemQuery = [
-                kSecAttrAccessGroup: "group.com.alpriest.EnergyStats",
+                kSecAttrAccessGroup: "885RLNNNK2.com.alpriest.EnergyStats",
                 kSecAttrApplicationTag: tag,
                 kSecValueData: data,
                 kSecClass: kSecClassKey,
@@ -148,6 +148,7 @@ class MockKeychainStore: KeychainStoring {
     var hashedPassword: String?
     var token: String?
     var logoutCalled = false
+    var selectedDeviceSN: String? = "abc-123-def-123-ghi-123-jkl"
 
     func getHashedPassword() -> String? {
         hashedPassword
@@ -178,5 +179,11 @@ class MockKeychainStore: KeychainStoring {
         hasCredentialsSubject.send(value)
     }
 
-    var selectedDeviceSN: String?
+    public func store(selectedDeviceSN: String?) throws {
+        self.selectedDeviceSN = selectedDeviceSN
+    }
+
+    public func getSelectedDeviceSN() -> String? {
+        selectedDeviceSN
+    }
 }
