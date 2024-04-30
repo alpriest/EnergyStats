@@ -56,6 +56,7 @@
 		4113708A2AEA48C0003D74AD /* Double+CappedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411370892AEA48C0003D74AD /* Double+CappedTests.swift */; };
 		411B302E2AEAE0DD006A6C02 /* FoxEssCloudParseStrategyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411B302D2AEAE0DD006A6C02 /* FoxEssCloudParseStrategyTests.swift */; };
 		411DF2742AFD404E00CEEB23 /* SolarForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411DF2732AFD404E00CEEB23 /* SolarForecastView.swift */; };
+		41229CBD2BE1217600CFA636 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41229CBC2BE1217600CFA636 /* ContentViewModel.swift */; };
 		412790FF28E1FB9200D5F993 /* UserManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412790FE28E1FB9200D5F993 /* UserManagerTests.swift */; };
 		4127910228E1FBD300D5F993 /* MockKeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127910128E1FBD300D5F993 /* MockKeychainStore.swift */; };
 		4127910628E1FC1D00D5F993 /* MockNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127910528E1FC1D00D5F993 /* MockNetworking.swift */; };
@@ -475,6 +476,7 @@
 		411370892AEA48C0003D74AD /* Double+CappedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+CappedTests.swift"; sourceTree = "<group>"; };
 		411B302D2AEAE0DD006A6C02 /* FoxEssCloudParseStrategyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoxEssCloudParseStrategyTests.swift; sourceTree = "<group>"; };
 		411DF2732AFD404E00CEEB23 /* SolarForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarForecastView.swift; sourceTree = "<group>"; };
+		41229CBC2BE1217600CFA636 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		4127690128EC865000D5A094 /* PowerAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerAmountView.swift; sourceTree = "<group>"; };
 		412790FE28E1FB9200D5F993 /* UserManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManagerTests.swift; sourceTree = "<group>"; };
 		4127910128E1FBD300D5F993 /* MockKeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockKeychainStore.swift; sourceTree = "<group>"; };
@@ -1424,8 +1426,9 @@
 				41F631772BDCD32D00A571C5 /* Energy_Stats_Watch_AppApp.swift */,
 				41F631792BDCD32D00A571C5 /* ContentView.swift */,
 				41F6317B2BDCD32E00A571C5 /* Assets.xcassets */,
-				41F6317D2BDCD32E00A571C5 /* Preview Content */,
 				41A715942BE0CE3400560628 /* LoadStateView.swift */,
+				41229CBC2BE1217600CFA636 /* ContentViewModel.swift */,
+				41F6317D2BDCD32E00A571C5 /* Preview Content */,
 			);
 			path = "Energy Stats Watch App";
 			sourceTree = "<group>";
@@ -2051,6 +2054,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41229CBD2BE1217600CFA636 /* ContentViewModel.swift in Sources */,
 				41F6317A2BDCD32D00A571C5 /* ContentView.swift in Sources */,
 				41A715952BE0CE3400560628 /* LoadStateView.swift in Sources */,
 				41F631782BDCD32D00A571C5 /* Energy_Stats_Watch_AppApp.swift in Sources */,

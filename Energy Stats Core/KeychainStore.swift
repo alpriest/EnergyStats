@@ -114,9 +114,7 @@ private extension KeychainStore {
     func set(tag: String, value: String?) throws {
         SecItemDelete(makeQuery(tag: tag))
 
-        if let value {
-            try set(tag: tag, data: value.data(using: .utf8))
-        }
+        try set(tag: tag, data: value?.data(using: .utf8))
     }
 
     func set(tag: String, data: Data?) throws {

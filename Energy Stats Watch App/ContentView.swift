@@ -9,19 +9,16 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct ContentView: View {
-    let keychainStore: KeychainStoring
-    let network: Networking
-    let configManager: ConfigManaging
     @State private var batterySOC: Double?
-    @State private var solar: Double?
-    @State private var house: Double?
-    @State private var grid: Double?
-    @State private var battery: Double?
-    @State private var loadState: LoadState = .inactive
+    @State private var viewModel: ContentViewModel
 
     private enum Constants {
         static let iconWidth: CGFloat = 34.0
         static let iconHeight: CGFloat = 34.0
+    }
+
+    init(keychainStore: KeychainStoring, network: Networking, configManager: ConfigManaging) {
+        self._viewModel = State(initialValue: ContentViewModel(keychainStore: keychainStore, network: network, configManager: configManager))
     }
 
     var body: some View {
@@ -41,17 +38,23 @@ struct ContentView: View {
                     gridView()
                 }
             }
-            .loadable(loadState, overlay: true, retry: { Task { await loadData() }})
+
+            if let lastUpdated = viewModel.state?.lastUpdated {
+                Text(lastUpdated, format: .dateTime)
+                    .font(.system(size: 8))
+                    .foregroundStyle(Color.gray)
+            }
         }
         .task {
-            Task { await loadData() }
+            await viewModel.loadData()
         }
+        .loadable(viewModel.loadState, overlay: true, retry: { Task { await viewModel.loadData() }})
         .padding()
     }
 
     func solarView() -> some View {
         VStack(alignment: .center) {
-            if let solar {
+            if let solar = viewModel.state?.solar {
                 SunView(solar: solar, sunSize: 18)
                     .frame(width: Constants.iconWidth, height: Constants.iconHeight)
 
@@ -69,13 +72,20 @@ struct ContentView: View {
     }
 
     func batteryView() -> some View {
-        VStack(alignment: .center) {
+        let color: Color
+        if let state = viewModel.state {
+            color = state.battery.tintColor
+        } else {
+            color = Color.gray
+        }
+
+        return VStack(alignment: .center) {
             Image(systemName: "minus.plus.batteryblock.fill")
                 .font(.system(size: 36))
                 .frame(width: Constants.iconWidth, height: Constants.iconHeight)
-                .foregroundStyle(battery.tintColor)
+                .foregroundStyle(color)
 
-            if let batterySOC, let battery {
+            if let batterySOC = viewModel.state?.batterySOC, let battery = viewModel.state?.battery {
                 Text(abs(battery).kWh(2))
                 Text(batterySOC, format: .percent)
             } else {
@@ -92,7 +102,7 @@ struct ContentView: View {
                 .frame(width: Constants.iconWidth, height: Constants.iconHeight)
                 .foregroundStyle(.tint)
 
-            if let house {
+            if let house = viewModel.state?.house {
                 Text(house.kW(2))
             } else {
                 Text("xxxxx")
@@ -102,13 +112,20 @@ struct ContentView: View {
     }
 
     func gridView() -> some View {
-        VStack(alignment: .center) {
+        let color: Color
+        if let state = viewModel.state {
+            color = state.grid.tintColor
+        } else {
+            color = Color.gray
+        }
+
+        return VStack(alignment: .center) {
             PylonView()
                 .frame(width: Constants.iconWidth, height: Constants.iconHeight)
-                .foregroundStyle(grid.tintColor)
+                .foregroundStyle(color)
 
             HStack {
-                if let grid {
+                if let grid = viewModel.state?.grid {
                     Text(abs(grid).kWh(2))
                 } else {
                     Text("xxxxx")
@@ -116,62 +133,6 @@ struct ContentView: View {
                 }
             }
         }
-    }
-
-    private func loadData() async {
-        guard let deviceSN = keychainStore.getSelectedDeviceSN() else { return }
-
-        do {
-            loadState = .active("Loading")
-            let reals = try await network.fetchRealData(
-                deviceSN: deviceSN,
-                variables: [
-                    "SoC",
-                    "SoC_1",
-                    "pvPower",
-                    "feedinPower",
-                    "gridConsumptionPower",
-                    "generationPower",
-                    "meterPower2",
-                    "epsPower",
-                    "batChargePower",
-                    "batDischargePower",
-                    "ResidualEnergy",
-                    "batTemperature"
-                ]
-            )
-
-            let device = Device(deviceSN: deviceSN, stationName: nil, stationID: "", battery: nil, moduleSN: "", deviceType: "", hasPV: true, hasBattery: true)
-            let calculator = CurrentStatusCalculator(device: device,
-                                                     response: reals,
-                                                     config: configManager)
-
-            let batteryViewModel = makeBatteryViewModel(device, reals)
-
-            withAnimation {
-                batterySOC = reals.datas.SoC() / 100.0
-                battery = batteryViewModel.chargePower
-                solar = calculator.currentSolarPower
-                grid = calculator.currentGrid
-                house = calculator.currentHomeConsumption
-                loadState = .inactive
-            }
-        } catch {
-            loadState = .error(error, "Could not load")
-        }
-    }
-
-    private func makeBatteryViewModel(_ currentDevice: Device, _ real: OpenQueryResponse) -> BatteryViewModel {
-        let chargePower = real.datas.currentDouble(for: "batChargePower")
-        let dischargePower = real.datas.currentDouble(for: "batDischargePower")
-        let power = chargePower > 0 ? chargePower : -dischargePower
-
-        return BatteryViewModel(
-            power: power,
-            soc: Int(real.datas.SoC()),
-            residual: real.datas.currentDouble(for: "ResidualEnergy") * 10.0,
-            temperature: real.datas.currentDouble(for: "batTemperature")
-        )
     }
 }
 

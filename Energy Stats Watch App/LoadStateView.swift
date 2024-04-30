@@ -56,6 +56,7 @@ struct LoadingView: View {
         .border(Color("pale_gray", bundle: Bundle(for: BundleLocator.self)))
         .background(Color.black)
         .shadow(color: Color.black, radius: 10)
+        .transition(.opacity)
     }
 }
 
