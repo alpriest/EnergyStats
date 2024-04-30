@@ -17,7 +17,6 @@ struct InverterSettingsView: View {
     @Binding var showInverterStationName: Bool
     @Binding var shouldCombineCT2WithPVPower: Bool
     @Binding var showInverterTypeName: Bool
-    @Binding var shouldCombineCT2WithLoadsPower: Bool
     @State private var firmwareVersions: DeviceFirmwareVersion? = nil
 
     var body: some View {
@@ -61,10 +60,6 @@ struct InverterSettingsView: View {
 
                 Toggle(isOn: $shouldCombineCT2WithPVPower) {
                     Text("Combine CT2 with PV power")
-                }
-
-                Toggle(isOn: $shouldCombineCT2WithLoadsPower) {
-                    Text("Combine CT2 with Loads power")
                 }
             } header: {
                 Text("CT2 Settings")
@@ -125,8 +120,7 @@ struct InverterSettingsView_Previews: PreviewProvider {
                 shouldInvertCT2: .constant(true),
                 showInverterStationName: .constant(true),
                 shouldCombineCT2WithPVPower: .constant(true),
-                showInverterTypeName: .constant(true),
-                shouldCombineCT2WithLoadsPower: .constant(false)
+                showInverterTypeName: .constant(true)
             )
         }
     }

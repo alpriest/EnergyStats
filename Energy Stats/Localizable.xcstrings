@@ -3399,6 +3399,7 @@
       }
     },
     "Combine CT2 with Loads power" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -12152,7 +12153,6 @@
       }
     },
     "Storage Battery SOC" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -13000,6 +13000,7 @@
       }
     },
     "Use traditional load formula" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -13028,6 +13029,7 @@
       }
     },
     "Uses the FoxESS loads value to show load which doesn't handle +ve/-ve CT2 very well. Changes only take effect on next data fetch." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

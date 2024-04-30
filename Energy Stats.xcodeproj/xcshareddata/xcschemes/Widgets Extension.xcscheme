@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "412A266B2AC03B2200F61456"
-               BuildableName = "Energy Stats WidgetsExtension.appex"
-               BlueprintName = "Energy Stats WidgetsExtension"
+               BuildableName = "Energy Stats Phone WidgetsExtension.appex"
+               BlueprintName = "Energy Stats Phone WidgetsExtension"
                ReferencedContainer = "container:Energy Stats.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "412A266B2AC03B2200F61456"
-            BuildableName = "Energy Stats WidgetsExtension.appex"
-            BlueprintName = "Energy Stats WidgetsExtension"
+            BuildableName = "Energy Stats Phone WidgetsExtension.appex"
+            BlueprintName = "Energy Stats Phone WidgetsExtension"
             ReferencedContainer = "container:Energy Stats.xcodeproj">
          </BuildableReference>
       </RemoteRunnable>

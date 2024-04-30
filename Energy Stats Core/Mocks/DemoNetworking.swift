@@ -155,6 +155,9 @@ class DemoAPI: FoxAPIServicing {
                               OpenQueryResponse.Data(unit: "kW", variable: "feedinPower", value: 0.0, stringValue: nil),
                               OpenQueryResponse.Data(unit: "kW", variable: "gridConsumptionPower", value: 2.634, stringValue: nil),
                               OpenQueryResponse.Data(unit: "kW", variable: "loadsPower", value: 2.708, stringValue: nil),
+                              OpenQueryResponse.Data(unit: "kW", variable: "SoC", value: 0.65, stringValue: nil),
+                              OpenQueryResponse.Data(unit: "kW", variable: "batDischargePower", value: 0, stringValue: nil),
+                              OpenQueryResponse.Data(unit: "kW", variable: "batChargePower", value: 1.200, stringValue: nil),
                               OpenQueryResponse.Data(unit: "kW", variable: "generationPower", value: 0.071, stringValue: nil),
                               OpenQueryResponse.Data(unit: "kW", variable: "pvPower", value: 0.111, stringValue: nil),
                               OpenQueryResponse.Data(unit: "kW", variable: "meterPower2", value: 0.0, stringValue: nil),
@@ -298,14 +301,12 @@ public class MockConfig: Config {
     public var parameterGroups: [ParameterGroup] = DefaultParameterGroups()
     public var currencySymbol: String = "£"
     public var shouldCombineCT2WithPVPower: Bool = true
-    public var shouldCombineCT2WithLoadsPower: Bool = false
     public var solcastSettings: SolcastSettings = .init(apiKey: "1234", sites: [SolcastSite.preview()])
     public var dataCeiling: DataCeiling = .mild
     public var showTotalYieldOnPowerFlow: Bool = true
     public var showFinancialSummaryOnFlowPage: Bool = true
     public var separateParameterGraphsByUnit: Bool = true
     public var variables: [Variable] = []
-    public var useTraditionalLoadFormula: Bool = false
     public var powerFlowStrings: PowerFlowStringsSettings = .none
     public var showBatteryPercentageRemaining: Bool = true
     public var powerStationDetail: PowerStationDetail? = nil

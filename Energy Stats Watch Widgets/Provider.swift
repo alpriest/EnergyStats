@@ -26,7 +26,7 @@ struct Provider: TimelineProvider {
         network = NetworkService.standard(keychainStore: keychainStore, config: config)
         let appSettingsPublisher = AppSettingsPublisherFactory.make(from: config)
         configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
-        modelContainer = HomeEnergyStateManager2.shared.modelContainer
+        modelContainer = HomeEnergyStateManager.shared.modelContainer
     }
 
     func placeholder(in context: Context) -> SimpleEntry {
@@ -69,7 +69,7 @@ struct Provider: TimelineProvider {
         var errorMessage: String? = nil
 
         do {
-            try await HomeEnergyStateManager2.shared.update(deviceSN: deviceSN)
+            try await HomeEnergyStateManager.shared.update(deviceSN: deviceSN)
         } catch _ as ConfigManager.NoBattery {
             return .failed(error: "Your selected inverter has no battery connected")
         } catch _ as ConfigManager.NoDeviceFoundError {

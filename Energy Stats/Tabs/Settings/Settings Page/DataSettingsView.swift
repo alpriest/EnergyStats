@@ -106,14 +106,6 @@ struct DataSettingsView: View {
             } footer: {
                 Text("FoxESS Cloud data is updated every 5 minutes. 'Auto' attempts to synchronise data fetches just after the data is uploaded from your inverter to minimise server load.")
             }
-
-            Section {
-                Toggle(isOn: $viewModel.useTraditionalLoadFormula) {
-                    Text("Use traditional load formula")
-                }
-            } footer: {
-                Text("Uses the FoxESS loads value to show load which doesn't handle +ve/-ve CT2 very well. Changes only take effect on next data fetch.")
-            }
         }
         .navigationTitle("Data")
     }

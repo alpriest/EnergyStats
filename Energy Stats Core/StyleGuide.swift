@@ -15,6 +15,7 @@ public extension Color {
     static var linesNotFlowing: Color { Color("lines_not_flowing", bundle: Bundle(for: CountdownTimer.self)) }
     static var textNotFlowing: Color { Color("text_not_flowing", bundle: Bundle(for: CountdownTimer.self)) }
     static var paleGray: Color { Color("pale_gray", bundle: Bundle(for: CountdownTimer.self)) }
+    static var background: Color { Color("background", bundle: Bundle(for: CountdownTimer.self)) }
     #if iOS
     static var label: Color { Color(uiColor: .label) }
     #endif

@@ -12,15 +12,10 @@ import WidgetKit
 struct BatteryStatusWidget: Widget {
     let kind: String = "BatteryCornerWidget"
     @Environment(\.widgetFamily) var family
-    let foo: String?
-
-    init() {
-        foo = KeychainStore().selectedDeviceSN
-    }
 
     var body: some WidgetConfiguration {
 //        AppIntentConfiguration(kind: kind, intent: ConfigurationAppIntent.self, provider: Provider()) { entry in
-        StaticConfiguration(kind: kind, provider: Provider(deviceSN: foo)) { entry in
+        StaticConfiguration(kind: kind, provider: Provider(deviceSN: KeychainStore().getSelectedDeviceSN())) { entry in
             Group {
                 if let soc = entry.soc {
                     Text(soc, format: .percent)

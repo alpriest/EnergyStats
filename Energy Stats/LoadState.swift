@@ -19,48 +19,6 @@ extension HasLoadState {
     }
 }
 
-enum LoadState: Equatable {
-    case inactive
-    case active(LocalizedStringKey)
-    case error(Error?, String)
-
-    static func ==(lhs: LoadState, rhs: LoadState) -> Bool {
-        switch (lhs, rhs) {
-        case (.inactive, .inactive):
-            return true
-        case (.active, .active):
-            return true
-        case (.error, .error):
-            return true
-        default:
-            return true
-        }
-    }
-
-    func opacity() -> Double {
-        switch self {
-        case .active:
-            1.0
-        default:
-            0.0
-        }
-    }
-}
-
-struct LoadingView: View {
-    let message: LocalizedStringKey
-
-    var body: some View {
-        HStack(spacing: 8) {
-            ProgressView()
-            Text(message)
-        }
-        .padding()
-        .border(Color("pale_gray"))
-        .background(Color("background"))
-    }
-}
-
 struct LoadStateView: ViewModifier {
     let loadState: LoadState
     var options: ErrorAlertViewOptions

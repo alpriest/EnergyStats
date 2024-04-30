@@ -26,23 +26,8 @@ struct SolarPowerView: View {
     var body: some View {
         VStack {
             ZStack {
-                switch viewModel.solar {
-                case 0.001 ..< appSettings.solarDefinitions.breakPoint1:
-                    SunView(solar: viewModel.solar, glowing: false, glowColor: .clear, sunColor: Color("Sun"))
-                        .frame(width: 40, height: 40)
-                case appSettings.solarDefinitions.breakPoint1 ..< appSettings.solarDefinitions.breakPoint2:
-                    SunView(solar: viewModel.solar, glowing: true, glowColor: .yellow.opacity(0.3), sunColor: Color("Sun"))
-                        .frame(width: 40, height: 40)
-                case appSettings.solarDefinitions.breakPoint2 ..< appSettings.solarDefinitions.breakPoint3:
-                    SunView(solar: viewModel.solar, glowing: true, glowColor: Color("Sun"), sunColor: .orange)
-                        .frame(width: 40, height: 40)
-                case appSettings.solarDefinitions.breakPoint3 ..< 500:
-                    SunView(solar: viewModel.solar, glowing: true, glowColor: .orange, sunColor: .red)
-                        .frame(width: 40, height: 40)
-                default:
-                    SunView(solar: viewModel.solar, glowing: false, glowColor: .clear, sunColor: Color("Sun_Zero"))
-                        .frame(width: 40, height: 40)
-                }
+                SunView(solar: viewModel.solar)
+                    .frame(width: 40, height: 40)
             }
 
             PowerFlowView(amount: viewModel.solar, appSettings: appSettings, showColouredLines: false, type: .solarFlow)

@@ -154,7 +154,7 @@ public class ConfigManager: ConfigManaging {
         }
         set {
             config.selectedDeviceSN = newValue
-            keychainStore.selectedDeviceSN = newValue
+            try? keychainStore.store(selectedDeviceSN: newValue)
             currentDevice.send(devices?.first(where: { $0.deviceSN == selectedDeviceSN }) ?? devices?.first)
         }
     }
@@ -450,16 +450,6 @@ public class ConfigManager: ConfigManaging {
         }
     }
 
-    public var shouldCombineCT2WithLoadsPower: Bool {
-        get { config.shouldCombineCT2WithLoadsPower }
-        set {
-            config.shouldCombineCT2WithLoadsPower = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
-                shouldCombineCT2WithLoadsPower: config.shouldCombineCT2WithLoadsPower
-            ))
-        }
-    }
-
     public var solcastSettings: SolcastSettings {
         get { config.solcastSettings }
         set {
@@ -498,11 +488,6 @@ public class ConfigManager: ConfigManaging {
                 separateParameterGraphsByUnit: config.separateParameterGraphsByUnit
             ))
         }
-    }
-
-    public var useTraditionalLoadFormula: Bool {
-        get { config.useTraditionalLoadFormula }
-        set { config.useTraditionalLoadFormula = newValue }
     }
 
     public var powerFlowStrings: PowerFlowStringsSettings {

@@ -76,7 +76,7 @@ struct InverterView: View {
                             InverterTemperatureView(value: temperatures.ambient, name: "internal")
                             InverterTemperatureView(value: temperatures.inverter, name: "external")
                         }
-                        .background(Color("background"))
+                        .background(Color.background)
                     }
                 }
             }
@@ -99,7 +99,7 @@ struct InverterView: View {
                     InverterTemperatureView(value: temperatures.ambient, name: "internal")
                     InverterTemperatureView(value: temperatures.inverter, name: "external")
                 }
-                .background(Color("background"))
+                .background(Color.background)
             }
         }
     }
@@ -164,7 +164,7 @@ struct InverterView: View {
                 .padding(2)
             }
         }
-        .background(Color("background"))
+        .background(Color.background)
     }
 }
 

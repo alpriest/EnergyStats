@@ -137,15 +137,5 @@ struct BatteryStatusView_Previews: PreviewProvider {
                     .frame(height: 38)
             }
         }
-
-//        BatteryStatusView(
-//            soc: 0.8,
-//            chargeStatusDescription: "Empty in 15 hours",
-//            lastUpdated: .now,
-//            appTheme: .mock(),
-//            hasError: false
-//        )
-//        .previewContext(WidgetPreviewContext(family: .systemSmall))
-//        .containerBackground(for: .widget) {}
     }
 }

@@ -20,10 +20,6 @@ public struct PylonView: View {
                 .stroke(lineWidth: lineWidth)
                 .padding(2)
                 .clipped()
-
-            Color("background")
-                .frame(maxWidth: .infinity)
-                .frame(height: lineWidth / 2.0)
         }
     }
 }

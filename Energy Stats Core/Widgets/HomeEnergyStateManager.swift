@@ -38,15 +38,12 @@ public class HomeEnergyStateManager {
     }
 
     @MainActor
-    public func update() async throws {
+    public func update(deviceSN: String?) async throws {
         guard await isStale() else { return }
+        guard let deviceSN else { throw ConfigManager.NoDeviceFoundError() }
 
         let appSettingsPublisher = AppSettingsPublisherFactory.make(from: config)
         let configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
-
-        guard let deviceSN = keychainStore.selectedDeviceSN else {
-            throw ConfigManager.NoDeviceFoundError()
-        }
 
         let real = try await network.fetchRealData(
             deviceSN: deviceSN,

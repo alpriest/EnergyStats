@@ -80,7 +80,7 @@ struct InverterIconView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(height: size.height / 2.5)
                 .offset(x: (size.width / 5) * 3, y: size.height * 0.2)
-                .foregroundColor(Color("background"))
+                .foregroundColor(Color.background)
         }
         .background(
             GeometryReader { reader in
@@ -91,7 +91,7 @@ struct InverterIconView: View {
             }
         )
         .padding(2)
-        .background(Color("background"))
+        .background(Color.background)
     }
 }
 

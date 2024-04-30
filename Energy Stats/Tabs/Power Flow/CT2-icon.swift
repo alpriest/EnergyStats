@@ -16,7 +16,7 @@ struct CT2_icon: View {
                 VStack {
                     Text("CT2")
                         .fontWeight(.heavy)
-                        .foregroundStyle(Color("background"))
+                        .foregroundStyle(Color.background)
                 }
             )
     }

@@ -14,9 +14,11 @@ struct Energy_Stats_Watch_App: App {
         let config = UserDefaultsConfig()
         let keychainStore = KeychainStore()
         let network = NetworkService.standard(keychainStore: keychainStore, config: config)
+        let appSettingsPublisher = AppSettingsPublisherFactory.make(from: config)
+        let configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
 
         WindowGroup {
-            ContentView(deviceSN: "66BH3720228D004", token: keychainStore.getToken(), network: network)
+            ContentView(keychainStore: keychainStore, network: network, configManager: configManager)
         }
     }
 }

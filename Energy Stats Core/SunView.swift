@@ -12,26 +12,48 @@ public struct SunView: View {
     let glowing: Bool
     let glowColor: Color
     let sunColor: Color
+    let sunSize: CGFloat
 
-    public init(solar: Double, glowing: Bool, glowColor: Color, sunColor: Color) {
+    public init(solar: Double, sunSize: CGFloat = 23) {
         self.solar = solar
-        self.glowing = glowing
-        self.glowColor = glowColor
-        self.sunColor = sunColor
+        self.sunSize = sunSize
+
+        switch solar {
+        case 0.001 ..< 1.0:
+            self.glowing = false
+            self.glowColor = .clear
+            self.sunColor = Color("Sun", bundle: Bundle(for: BundleLocator.self))
+        case 1.0 ..< 2.0:
+            self.glowing = true
+            self.glowColor = .yellow.opacity(0.3)
+            self.sunColor = Color("Sun", bundle: Bundle(for: BundleLocator.self))
+        case 2.0 ..< 3.0:
+            self.glowing = true
+            self.glowColor = Color("Sun", bundle: Bundle(for: BundleLocator.self))
+            self.sunColor = .orange
+        case 3.0 ..< 500:
+            self.glowing = true
+            self.glowColor = .orange
+            self.sunColor = .red
+        default:
+            self.glowing = false
+            self.glowColor = .clear
+            self.sunColor = Color("Sun_Zero", bundle: Bundle(for: BundleLocator.self))
+        }
     }
 
     public var body: some View {
         ZStack(alignment: .center) {
             Circle()
                 .foregroundColor(sunColor)
-                .frame(width: 23, height: 23)
+                .frame(width: sunSize, height: sunSize)
                 .glow(active: glowing, color: glowColor)
 
             ForEach(Array(stride(from: 0.0, to: .pi * 2, by: .pi / 4)), id: \.self) {
                 RoundedRectangle(cornerRadius: 2.0)
                     .foregroundColor(sunColor)
-                    .frame(width: 9, height: 4)
-                    .offset(x: -20)
+                    .frame(width: sunSize * 0.39, height: sunSize * 0.17)
+                    .offset(x: 0 - (sunSize * 0.86))
                     .rotationEffect(.degrees(($0 * 180) / .pi))
                     .glow(active: glowing, color: glowColor)
             }
