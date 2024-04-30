@@ -24,6 +24,7 @@ class UserManager: ObservableObject, HasLoadState {
         self.configManager = configManager
         self.networkCache = networkCache
 
+        migrateKeychain()
         self.store.hasCredentials
             .assign(to: \.isLoggedIn, on: self)
             .store(in: &cancellables)
@@ -38,6 +39,13 @@ class UserManager: ObservableObject, HasLoadState {
             logout()
             configManager.hasRunBefore = true
         }
+    }
+
+    private func migrateKeychain() {
+        let legacyKeychain = KeychainStore(group: "group.com.alpriest.EnergyStats")
+
+        try? store.store(apiKey: legacyKeychain.getToken(), notifyObservers: false)
+        print("AWP", "Migrated token to new chain")
     }
 
     @MainActor

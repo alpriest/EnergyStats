@@ -68,7 +68,7 @@ struct Provider: TimelineProvider {
         var errorMessage: String? = nil
 
         do {
-            try await HomeEnergyStateManager.shared.update()
+            try await HomeEnergyStateManager.shared.update(deviceSN: config.selectedDeviceSN)
         } catch _ as ConfigManager.NoBattery {
             return .failed(error: "Your selected inverter has no battery connected")
         } catch {

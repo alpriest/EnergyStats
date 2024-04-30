@@ -19,7 +19,7 @@ struct UpdateBatteryChargeLevelIntent: AppIntent {
 
     func perform() async throws -> some ReturnsValue<Bool> {
         do {
-            try await HomeEnergyStateManager.shared.update()
+            try await HomeEnergyStateManager.shared.update(deviceSN: HomeEnergyStateManager.shared.config.selectedDeviceSN)
 
             WidgetCenter.shared.reloadTimelines(ofKind: "BatteryWidget")
 

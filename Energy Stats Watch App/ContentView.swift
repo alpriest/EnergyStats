@@ -41,8 +41,7 @@ struct ContentView: View {
                     gridView()
                 }
             }
-            .toolbar(.hidden, for: .navigationBar)
-            .loadable(loadState, retry: { Task { await loadData() }})
+            .loadable(loadState, overlay: true, retry: { Task { await loadData() }})
         }
         .task {
             Task { await loadData() }
@@ -123,6 +122,7 @@ struct ContentView: View {
         guard let deviceSN = keychainStore.getSelectedDeviceSN() else { return }
 
         do {
+            loadState = .active("Loading")
             let reals = try await network.fetchRealData(
                 deviceSN: deviceSN,
                 variables: [
@@ -154,6 +154,7 @@ struct ContentView: View {
                 solar = calculator.currentSolarPower
                 grid = calculator.currentGrid
                 house = calculator.currentHomeConsumption
+                loadState = .inactive
             }
         } catch {
             loadState = .error(error, "Could not load")

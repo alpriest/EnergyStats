@@ -39,6 +39,7 @@ public class KeychainStore: KeychainStoring {
 
     private let hasCredentialsSubject = CurrentValueSubject<Bool, Never>(false)
     public var hasCredentials: AnyPublisher<Bool, Never>
+    private let group: String
 
     public func getSelectedDeviceSN() -> String? {
         get(tag: "deviceSN")
@@ -50,7 +51,8 @@ public class KeychainStore: KeychainStoring {
         try set(tag: "deviceSN", value: selectedDeviceSN)
     }
 
-    public init() {
+    public init(group: String = "885RLNNNK2.com.alpriest.EnergyStats") {
+        self.group = group
         hasCredentials = hasCredentialsSubject.eraseToAnyPublisher()
         updateHasCredentials()
     }
@@ -100,7 +102,7 @@ private extension KeychainStore {
 
     func makeQuery(tag: String) -> CFDictionary {
         [
-            kSecAttrAccessGroup: "885RLNNNK2.com.alpriest.EnergyStats",
+            kSecAttrAccessGroup: group,
             kSecAttrApplicationTag: tag,
             kSecClass: kSecClassKey,
             kSecReturnAttributes: true,
@@ -122,7 +124,7 @@ private extension KeychainStore {
 
         if let data {
             let keychainItemQuery = [
-                kSecAttrAccessGroup: "885RLNNNK2.com.alpriest.EnergyStats",
+                kSecAttrAccessGroup: group,
                 kSecAttrApplicationTag: tag,
                 kSecValueData: data,
                 kSecClass: kSecClassKey,

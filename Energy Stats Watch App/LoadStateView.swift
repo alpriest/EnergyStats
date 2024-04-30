@@ -39,6 +39,27 @@ struct LoadStateView: ViewModifier {
     }
 }
 
+struct LoadingView: View {
+    public let message: LocalizedStringKey
+
+    public init(message: LocalizedStringKey) {
+        self.message = message
+    }
+
+    public var body: some View {
+        HStack(spacing: 8) {
+            ProgressView()
+                .frame(width: 14, height: 14)
+            Text(message)
+        }
+        .padding()
+        .border(Color("pale_gray", bundle: Bundle(for: BundleLocator.self)))
+        .background(Color.black)
+        .shadow(color: Color.black, radius: 10)
+    }
+}
+
+
 extension View {
     func loadable(_ state: LoadState, overlay: Bool = false, retry: @escaping () -> Void) -> some View {
         modifier(LoadStateView(loadState: state, retry: retry, overlay: overlay))

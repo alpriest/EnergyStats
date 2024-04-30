@@ -33,6 +33,16 @@ struct EqualWidthButtonStyle: ButtonStyle {
     }
 }
 
+struct ErrorAlertViewOptions: OptionSet {
+    let rawValue: Int
+
+    static let checkServerStatus = ErrorAlertViewOptions(rawValue: 1 << 0)
+    static let logoutButton = ErrorAlertViewOptions(rawValue: 1 << 1)
+    static let retry = ErrorAlertViewOptions(rawValue: 1 << 2)
+    static let copyDebugData = ErrorAlertViewOptions(rawValue: 1 << 3)
+    static let all: ErrorAlertViewOptions = [.checkServerStatus, .logoutButton, .retry, .copyDebugData]
+}
+
 struct AlertIconView: View {
     var body: some View {
         GeometryReader { reader in

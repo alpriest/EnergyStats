@@ -16,7 +16,7 @@ public class HomeEnergyStateManager {
 
     public let modelContainer: ModelContainer
     let network: Networking
-    let config: Config
+    public let config: Config
     let keychainStore = KeychainStore()
 
     init() {

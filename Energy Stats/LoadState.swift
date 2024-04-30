@@ -5,6 +5,7 @@
 //  Created by Alistair Priest on 21/04/2023.
 //
 
+import Energy_Stats_Core
 import SwiftUI
 
 protocol HasLoadState: AnyObject {
