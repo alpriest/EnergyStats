@@ -38,7 +38,7 @@ public struct SunView: View {
         default:
             self.glowing = false
             self.glowColor = .clear
-            self.sunColor = Color("Sun_Zero", bundle: Bundle(for: BundleLocator.self))
+            self.sunColor = .iconDisabled
         }
     }
 

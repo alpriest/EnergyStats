@@ -86,7 +86,7 @@ struct ContentView: View {
         if let state = viewModel.state {
             color = state.battery.tintColor
         } else {
-            color = Color.gray
+            color = .iconDisabled
         }
 
         return VStack(alignment: .center) {
@@ -110,7 +110,7 @@ struct ContentView: View {
             Image(systemName: "house.fill")
                 .font(.system(size: 36))
                 .frame(width: Constants.iconWidth, height: Constants.iconHeight)
-                .foregroundStyle(.tint)
+                .foregroundStyle(Color.iconDisabled)
 
             if let house = viewModel.state?.house {
                 Text(house.kW(2))
@@ -126,7 +126,7 @@ struct ContentView: View {
         if let state = viewModel.state {
             color = state.grid.tintColor
         } else {
-            color = Color.gray
+            color = .iconDisabled
         }
 
         return VStack(alignment: .center) {
@@ -151,11 +151,11 @@ extension Double? {
         guard let self else { return Color.primary }
 
         if self < 0 {
-            return Color.linesNegative
+            return .linesNegative
         } else if self > 0 {
-            return Color.linesPositive
+            return .linesPositive
         } else {
-            return Color.linesNotFlowing
+            return .iconDisabled
         }
     }
 }
