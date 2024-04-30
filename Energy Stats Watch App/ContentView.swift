@@ -30,25 +30,35 @@ struct ContentView: View {
                     homeView()
                 }
 
-                Spacer(minLength: 30)
+                Spacer(minLength: 10)
 
                 GridRow(alignment: .top) {
                     batteryView()
                     Spacer(minLength: 15)
                     gridView()
                 }
-            }
+            }.padding(.vertical)
 
-            if let lastUpdated = viewModel.state?.lastUpdated {
-                Text(lastUpdated, format: .dateTime)
-                    .font(.system(size: 8))
-                    .foregroundStyle(Color.gray)
+            HStack {
+                switch viewModel.loadState {
+                case .inactive:
+                    if let lastUpdated = viewModel.state?.lastUpdated {
+                        Text(lastUpdated, format: .dateTime)
+                            .foregroundStyle(Color.gray)
+                    }
+                case .active:
+                    ProgressView()
+                case .error:
+                    Image(systemName: "exclamationmark.triangle.fill")
+                        .foregroundStyle(Color.red)
+                    Text("Failed to load")
+                }
             }
+            .font(.system(size: 10))
         }
         .task {
             await viewModel.loadData()
         }
-        .loadable(viewModel.loadState, overlay: true, retry: { Task { await viewModel.loadData() }})
         .padding()
     }
 
