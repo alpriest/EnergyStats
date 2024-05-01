@@ -28,7 +28,7 @@ struct BatteryStatusWidget: Widget {
                         }.gaugeStyle(CircularGaugeStyle(tint: circularGradient))
                     default:
                         Text(soc, format: .percent)
-                            .widgetLabel("SOC")
+                            .widgetLabel("SoC")
                     }
                 } else {
                     if let errorMessage = entry.errorMessage {
