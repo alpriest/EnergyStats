@@ -14,7 +14,6 @@ struct BatteryStatusWidget: Widget {
     @Environment(\.widgetFamily) var family
 
     var body: some WidgetConfiguration {
-//        AppIntentConfiguration(kind: kind, intent: ConfigurationAppIntent.self, provider: Provider()) { entry in
         StaticConfiguration(kind: kind, provider: Provider(deviceSN: KeychainStore().getSelectedDeviceSN())) { entry in
             Group {
                 if let soc = entry.soc {

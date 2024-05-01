@@ -11,6 +11,7 @@ import SwiftUI
 struct ContentView: View {
     @State private var batterySOC: Double?
     @State private var viewModel: ContentViewModel
+    @State private var alertContent: AlertContent?
 
     private enum Constants {
         static let iconWidth: CGFloat = 34.0
@@ -48,16 +49,20 @@ struct ContentView: View {
                     }
                 case .active:
                     ProgressView()
-                case .error:
+                case .error(_, let message):
                     Image(systemName: "exclamationmark.triangle.fill")
                         .foregroundStyle(Color.red)
-                    Text("Failed to load")
+                    Text("Failed to load - tap for more")
+                        .onTapGesture {
+                            alertContent = AlertContent(title: "Oops", message: LocalizedStringKey(stringLiteral: message))
+                        }
                 }
             }
             .font(.system(size: 10))
         }
-        .task {
-            await viewModel.loadData()
+        .alert(alertContent: $alertContent)
+        .onReceive(NotificationCenter.default.publisher(for: WKApplication.didBecomeActiveNotification)) { _ in
+            Task { await viewModel.loadData() }
         }
         .padding()
     }
@@ -68,7 +73,7 @@ struct ContentView: View {
                 SunView(solar: solar, sunSize: 18)
                     .frame(width: Constants.iconWidth, height: Constants.iconHeight)
 
-                Text(solar.kWh(2))
+                Text(solar.kW(2))
                     .multilineTextAlignment(.center)
             } else {
                 SunView(solar: 0)
@@ -96,7 +101,7 @@ struct ContentView: View {
                 .foregroundStyle(color)
 
             if let batterySOC = viewModel.state?.batterySOC, let battery = viewModel.state?.battery {
-                Text(abs(battery).kWh(2))
+                Text(abs(battery).kW(2))
                 Text(batterySOC, format: .percent)
             } else {
                 Text("xxxxx")
@@ -136,7 +141,7 @@ struct ContentView: View {
 
             HStack {
                 if let grid = viewModel.state?.grid {
-                    Text(abs(grid).kWh(2))
+                    Text(abs(grid).kW(2))
                 } else {
                     Text("xxxxx")
                         .redacted(reason: .placeholder)

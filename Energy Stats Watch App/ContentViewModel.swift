@@ -24,6 +24,7 @@ class ContentViewModel {
     let configManager: ConfigManaging
     var loadState: LoadState = .inactive
     var state: ContentData?
+    private let FOUR_MINUTES_IN_SECONDS = 60.0 * 4.0
 
     init(keychainStore: KeychainStoring, network: Networking, configManager: ConfigManaging) {
         self.keychainStore = keychainStore
@@ -36,6 +37,11 @@ class ContentViewModel {
             loadState = .error(nil, "No Inverter Found\n\nEnsure you are logged in on your iOS app.")
             return
         }
+        guard state.lastRefreshSeconds > FOUR_MINUTES_IN_SECONDS else {
+            print("Data is fresh, not refreshing")
+            return
+        }
+
         defer {
             Task { @MainActor in
                 loadState = .inactive
@@ -95,5 +101,13 @@ class ContentViewModel {
             residual: real.datas.currentDouble(for: "ResidualEnergy") * 10.0,
             temperature: real.datas.currentDouble(for: "batTemperature")
         )
+    }
+}
+
+extension ContentData? {
+    var lastRefreshSeconds: TimeInterval {
+        guard let self else { return .infinity }
+
+        return Date.now.timeIntervalSince(self.lastUpdated)
     }
 }
