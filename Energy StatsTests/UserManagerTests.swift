@@ -7,8 +7,8 @@
 
 import Combine
 @testable import Energy_Stats
-import XCTest
 @testable import Energy_Stats_Core
+import XCTest
 
 final class UserManagerTests: XCTestCase {
     private var sut: UserManager!
@@ -21,8 +21,8 @@ final class UserManagerTests: XCTestCase {
         keychainStore = MockKeychainStore()
         config = MockConfig()
         let cache = InMemoryLoggingNetworkStore()
-        networking = NetworkService(api: FoxAPIService(credentials: keychainStore,  store: cache))
-        configManager = PreviewConfigManager(networking: networking, config: config, appSettingsPublisher: CurrentValueSubject<AppSettings, Never>(AppSettings.mock()))
+        networking = NetworkService(api: FoxAPIService(credentials: keychainStore, store: cache))
+        configManager = PreviewConfigManager(networking: networking, config: config, appSettingsPublisher: CurrentValueSubject<AppSettings, Never>(AppSettings.mock()), keychainStore: MockKeychainStore())
         sut = UserManager(networking: networking, store: keychainStore, configManager: configManager, networkCache: cache)
     }
 
@@ -67,7 +67,6 @@ final class UserManagerTests: XCTestCase {
 
         XCTAssertEqual(received.values, [.inactive, .active("Loading...")])
         XCTAssertEqual(keychainStore.token, "bob")
-        XCTAssertEqual(keychainStore.hashedPassword, "password".md5()!)
         XCTAssertEqual(config.selectedDeviceID, "12345678-0000-0000-1234-aaaabbbbcccc")
         XCTAssertNotNil(config.devices)
     }
@@ -90,7 +89,6 @@ final class UserManagerTests: XCTestCase {
 
         XCTAssertEqual(received.values, [.inactive, .active("Loading..."), .inactive, .error(nil, "Wrong credentials, try again")])
         XCTAssertNil(keychainStore.token)
-        XCTAssertNil(keychainStore.hashedPassword)
         XCTAssertTrue(keychainStore.logoutCalled)
     }
 
@@ -102,7 +100,6 @@ final class UserManagerTests: XCTestCase {
 
         XCTAssertEqual(received.values, [.inactive, .active("Loading..."), .inactive, .error(nil, "Could not login. Check your internet connection")])
         XCTAssertNil(keychainStore.token)
-        XCTAssertNil(keychainStore.hashedPassword)
         XCTAssertTrue(keychainStore.logoutCalled)
     }
 }

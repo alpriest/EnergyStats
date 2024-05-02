@@ -68,14 +68,6 @@ final class NetworkTests: XCTestCase {
             XCTFail()
         }
     }
-
-    func test_fetchReport_withInvalidToken_requestsToken_andRetriesOriginalFetch() async throws {
-        keychainStore.token = "bob"
-        keychainStore.hashedPassword = "secrethash"
-        stubHTTPResponses(with: [.badTokenFailure, .loginSuccess, .reportSuccess])
-
-        _ = try await sut.openapi_fetchReport(deviceSN: "1", variables: [.feedIn, .gridConsumption, .generation, .chargeEnergyToTal], queryDate: QueryDate.any(), reportType: .day)
-    }
 }
 
 extension QueryDate {

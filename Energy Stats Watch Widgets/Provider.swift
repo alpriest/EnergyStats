@@ -85,7 +85,8 @@ struct Provider: TimelineProvider {
                     date: widgetState.lastUpdated,
                     soc: widgetState.batterySOC,
                     chargeStatusDescription: widgetState.chargeStatusDescription,
-                    errorMessage: errorMessage
+                    errorMessage: errorMessage,
+                    batteryPower: widgetState.batteryPower
                 )
             } else {
                 return .failed(error: errorMessage ?? "Could not fetch data")
@@ -110,21 +111,24 @@ struct SimpleEntry: TimelineEntry {
     let chargeStatusDescription: String?
     let state: EntryState
     let errorMessage: String?
+    let batteryPower: Double?
 
-    init(date: Date, soc: Int?, chargeStatusDescription: String?, state: EntryState, errorMessage: String?) {
+    init(date: Date, soc: Int?, chargeStatusDescription: String?, state: EntryState, errorMessage: String?, batteryPower: Double?) {
         self.date = date
         self.soc = soc
         self.state = state
         self.chargeStatusDescription = chargeStatusDescription
         self.errorMessage = errorMessage
+        self.batteryPower = batteryPower
     }
 
-    static func loaded(date: Date, soc: Int, chargeStatusDescription: String?, errorMessage: String?) -> SimpleEntry {
+    static func loaded(date: Date, soc: Int, chargeStatusDescription: String?, errorMessage: String?, batteryPower: Double?) -> SimpleEntry {
         SimpleEntry(date: date,
                     soc: soc,
                     chargeStatusDescription: chargeStatusDescription,
                     state: .loaded,
-                    errorMessage: nil)
+                    errorMessage: nil,
+                    batteryPower: batteryPower)
     }
 
     static func placeholder() -> SimpleEntry {
@@ -132,7 +136,8 @@ struct SimpleEntry: TimelineEntry {
                     soc: 87,
                     chargeStatusDescription: "Full in 25 minutes",
                     state: .placeholder,
-                    errorMessage: nil)
+                    errorMessage: nil,
+                    batteryPower: nil)
     }
 
     static func failed(error: String) -> SimpleEntry {
@@ -140,6 +145,7 @@ struct SimpleEntry: TimelineEntry {
                     soc: nil,
                     chargeStatusDescription: nil,
                     state: .failedWithoutData(reason: error),
-                    errorMessage: error)
+                    errorMessage: error,
+                    batteryPower: nil)
     }
 }

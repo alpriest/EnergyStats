@@ -36,10 +36,7 @@ public class PreviewKeychainStore: KeychainStoring {
 
     public func updateHasCredentials() {}
 
-    let hasCredentialsSubject = CurrentValueSubject<Bool, Never>(false)
-    public let hasCredentials: AnyPublisher<Bool, Never>
+    public let hasCredentials = CurrentValueSubject<Bool, Never>(false)
 
-    public init() {
-        hasCredentials = hasCredentialsSubject.eraseToAnyPublisher()
-    }
+    public init() {}
 }

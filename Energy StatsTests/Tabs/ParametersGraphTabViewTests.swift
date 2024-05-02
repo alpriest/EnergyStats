@@ -16,7 +16,7 @@ import XCTest
 final class ParametersGraphTabViewTests: XCTestCase {
     func test_when_user_arrives() async throws {
         let networking = MockNetworking(throwOnCall: false, dateProvider: { Date(timeIntervalSince1970: 1664127352) })
-        let configManager = ConfigManager(networking: networking, config: MockConfig(), appSettingsPublisher: CurrentValueSubject<AppSettings, Never>(AppSettings.mock()))
+        let configManager = ConfigManager(networking: networking, config: MockConfig(), appSettingsPublisher: CurrentValueSubject<AppSettings, Never>(AppSettings.mock()), keychainStore: MockKeychainStore())
         try await configManager.fetchDevices()
 
         let sut = ParametersGraphTabView(configManager: configManager, networking: networking) { Date(timeIntervalSince1970: 1664127352) }
@@ -29,7 +29,7 @@ final class ParametersGraphTabViewTests: XCTestCase {
 
     func test_with_network_failure() async {
         let networking = MockNetworking(throwOnCall: true)
-        let sut = ParametersGraphTabView(configManager: ConfigManager(networking: networking, config: MockConfig(), appSettingsPublisher: CurrentValueSubject<AppSettings, Never>(AppSettings.mock())), networking: networking)
+        let sut = ParametersGraphTabView(configManager: ConfigManager(networking: networking, config: MockConfig(), appSettingsPublisher: CurrentValueSubject<AppSettings, Never>(AppSettings.mock()), keychainStore: MockKeychainStore()), networking: networking)
         await sut.viewModel.load()
         let view = UIHostingController(rootView: sut)
 

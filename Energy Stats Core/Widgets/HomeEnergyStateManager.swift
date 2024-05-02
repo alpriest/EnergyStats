@@ -21,9 +21,9 @@ public class HomeEnergyStateManager {
 
     init() {
         do {
-            modelContainer = try ModelContainer(for: BatteryWidgetState.self)
             config = UserDefaultsConfig()
             network = NetworkService.standard(keychainStore: keychainStore, config: config)
+            modelContainer = try ModelContainer(for: BatteryWidgetState.self)
         } catch {
             fatalError("Failed to create the model container: \(error)")
         }
@@ -70,16 +70,16 @@ public class HomeEnergyStateManager {
         let soc = calculator.effectiveBatteryStateOfCharge(batteryStateOfCharge: viewModel.chargeLevel, includeUnusableCapacity: !configManager.showUsableBatteryOnly)
 
         let chargeStatusDescription = calculator.batteryChargeStatusDescription(
-            batteryChargePowerkWH: viewModel.chargePower,
+            batteryChargePowerkW: viewModel.chargePower,
             batteryStateOfCharge: soc
         )
 
-        try update(soc: Int(soc * 100.0), chargeStatusDescription: chargeStatusDescription)
+        try update(soc: Int(soc * 100.0), chargeStatusDescription: chargeStatusDescription, batteryPower: viewModel.chargePower)
     }
 
     @MainActor
-    private func update(soc: Int, chargeStatusDescription: String?) throws {
-        let state = BatteryWidgetState(batterySOC: soc, chargeStatusDescription: chargeStatusDescription)
+    private func update(soc: Int, chargeStatusDescription: String?, batteryPower: Double) throws {
+        let state = BatteryWidgetState(batterySOC: soc, chargeStatusDescription: chargeStatusDescription, batteryPower: batteryPower)
 
         deleteEntry()
 

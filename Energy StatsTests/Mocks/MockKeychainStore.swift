@@ -5,18 +5,19 @@
 //  Created by Alistair Priest on 26/09/2022.
 //
 
+import Combine
 @testable import Energy_Stats
 import Energy_Stats_Core
 import Foundation
-import Combine
 
 class MockKeychainStore: KeychainStoring {
     var isDemoUser: Bool = true
     var token: String?
     var logoutCalled = false
+    var selectedDeviceSN: String?
 
     func store(apiKey: String?, notifyObservers: Bool) throws {
-        self.token = apiKey
+        token = apiKey
     }
 
     func getToken() -> String? {
@@ -40,6 +41,11 @@ class MockKeychainStore: KeychainStoring {
         hasCredentialsSubject.send(value)
     }
 
-    var selectedDeviceSN: String?
-}
+    func getSelectedDeviceSN() -> String? {
+        selectedDeviceSN
+    }
 
+    func store(selectedDeviceSN: String?) throws {
+        self.selectedDeviceSN = selectedDeviceSN
+    }
+}

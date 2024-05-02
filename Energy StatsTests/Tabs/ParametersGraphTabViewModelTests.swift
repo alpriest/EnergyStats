@@ -19,7 +19,7 @@ final class ParametersGraphTabViewModelTests: XCTestCase {
     override func setUp() async throws {
         config = MockConfig()
         networking = MockNetworking()
-        let configManager = ConfigManager(networking: networking, config: config, appSettingsPublisher: CurrentValueSubject<AppSettings, Never>(AppSettings.mock()))
+        let configManager = ConfigManager(networking: networking, config: config, appSettingsPublisher: CurrentValueSubject<AppSettings, Never>(AppSettings.mock()), keychainStore: MockKeychainStore())
         sut = ParametersGraphTabViewModel(networking: networking, configManager: configManager) { Date(timeIntervalSince1970: 1669146973) }
 
         try await configManager.fetchDevices()

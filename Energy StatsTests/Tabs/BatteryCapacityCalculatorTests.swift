@@ -14,7 +14,7 @@ final class BatteryCapacityCalculatorTests: XCTestCase {
         let sut = BatteryCapacityCalculator(capacityW: 10000, minimumSOC: 0.2)
 
         let result = sut.batteryChargeStatusDescription(
-            batteryChargePowerkWH: 1.0,
+                        batteryChargePowerkW: 1.0,
             batteryStateOfCharge: 0.5
         )
 
@@ -28,7 +28,7 @@ final class BatteryCapacityCalculatorTests: XCTestCase {
         let sut = BatteryCapacityCalculator(capacityW: 10000, minimumSOC: 0.2)
 
         let result = sut.batteryChargeStatusDescription(
-            batteryChargePowerkWH: 1.0,
+                        batteryChargePowerkW: 1.0,
             batteryStateOfCharge: 0.5
         )
 
@@ -40,14 +40,14 @@ final class BatteryCapacityCalculatorTests: XCTestCase {
 
     func test_CalculatesRemainingTimeUntilFull() {
         let sut = BatteryCapacityCalculator(capacityW: 8000, minimumSOC: 0.2)
-        let result = sut.batteryChargeStatusDescription(batteryChargePowerkWH: 1.0, batteryStateOfCharge: 0.50)
+        let result = sut.batteryChargeStatusDescription(            batteryChargePowerkW: 1.0, batteryStateOfCharge: 0.50)
 
         XCTAssertEqual(result, "Full in 4 hours")
     }
 
     func test_CalculatesRemainingTimeUntilEmpty() {
         let sut = BatteryCapacityCalculator(capacityW: 8000, minimumSOC: 0.2)
-        let result = sut.batteryChargeStatusDescription(batteryChargePowerkWH: -1.0, batteryStateOfCharge: 0.50)
+        let result = sut.batteryChargeStatusDescription(            batteryChargePowerkW: -1.0, batteryStateOfCharge: 0.50)
 
         XCTAssertEqual(result, "Empty in 2 hours")
     }

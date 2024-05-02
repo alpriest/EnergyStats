@@ -22,7 +22,7 @@ public protocol KeychainStoring {
     func logout()
     func updateHasCredentials()
     func getToken() -> String?
-    var hasCredentials: AnyPublisher<Bool, Never> { get }
+    var hasCredentials: CurrentValueSubject<Bool, Never> { get }
     var isDemoUser: Bool { get }
     func getSelectedDeviceSN() -> String?
     func store(selectedDeviceSN: String?) throws
@@ -37,8 +37,7 @@ public class KeychainStore: KeychainStoring {
         let code: OSStatus?
     }
 
-    private let hasCredentialsSubject = CurrentValueSubject<Bool, Never>(false)
-    public var hasCredentials: AnyPublisher<Bool, Never>
+    public let hasCredentials = CurrentValueSubject<Bool, Never>(false)
     private let group: String
 
     public func getSelectedDeviceSN() -> String? {
@@ -53,7 +52,6 @@ public class KeychainStore: KeychainStoring {
 
     public init(group: String = "885RLNNNK2.com.alpriest.EnergyStats") {
         self.group = group
-        hasCredentials = hasCredentialsSubject.eraseToAnyPublisher()
         updateHasCredentials()
     }
 
@@ -70,14 +68,12 @@ public class KeychainStore: KeychainStoring {
     }
 
     public func logout() {
-        SecItemDelete(makeQuery(tag: "username"))
-        SecItemDelete(makeQuery(tag: "password"))
         SecItemDelete(makeQuery(tag: "token"))
         updateHasCredentials()
     }
 
     public func updateHasCredentials() {
-        hasCredentialsSubject.send(getToken() != nil)
+        hasCredentials.value = getToken() != nil
     }
 
     public var isDemoUser: Bool {
@@ -168,15 +164,10 @@ class MockKeychainStore: KeychainStoring {
 
     func updateHasCredentials() {}
 
-    let hasCredentialsSubject = CurrentValueSubject<Bool, Never>(false)
-    let hasCredentials: AnyPublisher<Bool, Never>
-
-    init() {
-        hasCredentials = hasCredentialsSubject.eraseToAnyPublisher()
-    }
+    let hasCredentials = CurrentValueSubject<Bool, Never>(false)
 
     func updateHasCredentials(value: Bool) {
-        hasCredentialsSubject.send(value)
+        hasCredentials.value = value
     }
 
     public func store(selectedDeviceSN: String?) throws {

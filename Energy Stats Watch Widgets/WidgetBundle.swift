@@ -12,5 +12,8 @@ import SwiftUI
 struct WatchWidgetsBundle: WidgetBundle {
     var body: some Widget {
         BatteryStatusWidget()
+        CircularBatteryStatusWidget()
+        CornerBatteryStatusWidget()
+        RectangularBatteryStatusWidget()
     }
 }

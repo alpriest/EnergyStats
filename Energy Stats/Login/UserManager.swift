@@ -28,24 +28,13 @@ class UserManager: ObservableObject, HasLoadState {
         self.store.hasCredentials
             .assign(to: \.isLoggedIn, on: self)
             .store(in: &cancellables)
-
-        signOutIfFirstRun()
-    }
-
-    func signOutIfFirstRun() {
-        if configManager.hasRunBefore { return }
-
-        Task { @MainActor in
-            logout()
-            configManager.hasRunBefore = true
-        }
     }
 
     private func migrateKeychain() {
         let legacyKeychain = KeychainStore(group: "group.com.alpriest.EnergyStats")
 
         if let token = legacyKeychain.getToken() {
-            try? store.store(apiKey: token, notifyObservers: false)
+            try? store.store(apiKey: token, notifyObservers: true)
             try? legacyKeychain.store(apiKey: nil, notifyObservers: false)
             print("AWP", "Migrated token to new chain")
         }

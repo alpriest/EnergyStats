@@ -5,7 +5,7 @@
 //  Created by Alistair Priest on 02/05/2023.
 //
 
-import Foundation
+import SwiftUI
 
 public extension Double {
     func kW(_ places: Int) -> String {
@@ -78,7 +78,7 @@ public extension Double {
     }
 
     func roundedToString(decimalPlaces: Int, currencySymbol: String? = nil) -> String {
-        let roundedNumber = self.rounded(decimalPlaces: decimalPlaces)
+        let roundedNumber = rounded(decimalPlaces: decimalPlaces)
 
         let numberFormatter = NumberFormatter()
         if let currencySymbol {
@@ -103,5 +103,27 @@ public extension Double {
         formatter.maximumIntegerDigits = 3
         formatter.maximumFractionDigits = 2
         return formatter.string(from: NSNumber(value: self))!
+    }
+
+    var tintColor: Color { Int(self).tintColor }
+}
+
+public extension Double? {
+    var tintColor: Color {
+        guard let self else { return Color.primary }
+
+        return if self < 0 {
+            .linesNegative
+        } else if self > 0 {
+            .linesPositive
+        } else {
+            .iconDisabled
+        }
+    }
+}
+
+public extension Int {
+    var tintColor: Color {
+        Double(self).tintColor
     }
 }

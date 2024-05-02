@@ -115,6 +115,7 @@ public struct UserDefaultsStoredCodable<T: Codable> {
             do {
                 let data = try JSONEncoder().encode(newValue)
                 UserDefaults.shared.set(data, forKey: key)
+                UserDefaults.shared.synchronize()
             } catch {
                 print("AWP", "Failed to encode value for \(key) 💥")
             }

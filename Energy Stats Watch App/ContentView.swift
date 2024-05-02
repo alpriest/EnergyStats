@@ -151,20 +151,6 @@ struct ContentView: View {
     }
 }
 
-extension Double? {
-    var tintColor: Color {
-        guard let self else { return Color.primary }
-
-        if self < 0 {
-            return .linesNegative
-        } else if self > 0 {
-            return .linesPositive
-        } else {
-            return .iconDisabled
-        }
-    }
-}
-
 #Preview {
     ContentView(keychainStore: PreviewKeychainStore(), network: DemoNetworking(), configManager: PreviewConfigManager())
 }
