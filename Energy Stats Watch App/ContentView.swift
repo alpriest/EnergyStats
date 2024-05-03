@@ -8,15 +8,15 @@
 import Energy_Stats_Core
 import SwiftUI
 
+enum Constants {
+    static let iconWidth: CGFloat = 34.0
+    static let iconHeight: CGFloat = 34.0
+}
+
 struct ContentView: View {
     @State private var batterySOC: Double?
     @State private var viewModel: ContentViewModel
     @State private var alertContent: AlertContent?
-
-    private enum Constants {
-        static let iconWidth: CGFloat = 34.0
-        static let iconHeight: CGFloat = 34.0
-    }
 
     init(keychainStore: KeychainStoring, network: Networking, configManager: ConfigManaging) {
         self._viewModel = State(initialValue: ContentViewModel(keychainStore: keychainStore, network: network, configManager: configManager))
@@ -26,17 +26,17 @@ struct ContentView: View {
         VStack {
             Grid {
                 GridRow(alignment: .top) {
-                    solarView()
+                    SolarPowerView(value: viewModel.state?.solar)
                     Spacer()
-                    homeView()
+                    HomePowerView(value: viewModel.state?.house)
                 }
 
                 Spacer(minLength: 10)
 
                 GridRow(alignment: .top) {
-                    batteryView()
+                    BatteryPowerView(batterySOC: viewModel.state?.batterySOC, battery: viewModel.state?.battery)
                     Spacer(minLength: 15)
-                    gridView()
+                    GridPowerView(value: viewModel.state?.grid)
                 }
             }.padding(.vertical)
 
@@ -65,89 +65,6 @@ struct ContentView: View {
             Task { await viewModel.loadData() }
         }
         .padding()
-    }
-
-    func solarView() -> some View {
-        VStack(alignment: .center) {
-            if let solar = viewModel.state?.solar {
-                SunView(solar: solar, sunSize: 18)
-                    .frame(width: Constants.iconWidth, height: Constants.iconHeight)
-
-                Text(solar.kW(2))
-                    .multilineTextAlignment(.center)
-            } else {
-                SunView(solar: 0)
-                    .frame(width: Constants.iconWidth, height: Constants.iconHeight)
-                    .redacted(reason: .placeholder)
-
-                Text("xxxxx")
-                    .redacted(reason: .placeholder)
-            }
-        }
-    }
-
-    func batteryView() -> some View {
-        let color: Color
-        if let state = viewModel.state {
-            color = state.battery.tintColor
-        } else {
-            color = .iconDisabled
-        }
-
-        return VStack(alignment: .center) {
-            Image(systemName: "minus.plus.batteryblock.fill")
-                .font(.system(size: 36))
-                .frame(width: Constants.iconWidth, height: Constants.iconHeight)
-                .foregroundStyle(color)
-
-            if let batterySOC = viewModel.state?.batterySOC, let battery = viewModel.state?.battery {
-                Text(abs(battery).kW(2))
-                Text(batterySOC, format: .percent)
-            } else {
-                Text("xxxxx")
-                    .redacted(reason: .placeholder)
-            }
-        }
-    }
-
-    func homeView() -> some View {
-        VStack(alignment: .center) {
-            Image(systemName: "house.fill")
-                .font(.system(size: 36))
-                .frame(width: Constants.iconWidth, height: Constants.iconHeight)
-                .foregroundStyle(Color.iconDisabled)
-
-            if let house = viewModel.state?.house {
-                Text(house.kW(2))
-            } else {
-                Text("xxxxx")
-                    .redacted(reason: .placeholder)
-            }
-        }
-    }
-
-    func gridView() -> some View {
-        let color: Color
-        if let state = viewModel.state {
-            color = state.grid.tintColor
-        } else {
-            color = .iconDisabled
-        }
-
-        return VStack(alignment: .center) {
-            PylonView()
-                .frame(width: Constants.iconWidth, height: Constants.iconHeight)
-                .foregroundStyle(color)
-
-            HStack {
-                if let grid = viewModel.state?.grid {
-                    Text(abs(grid).kW(2))
-                } else {
-                    Text("xxxxx")
-                        .redacted(reason: .placeholder)
-                }
-            }
-        }
     }
 }
 

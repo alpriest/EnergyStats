@@ -189,6 +189,10 @@
 		41AF2F432AA4C6C1008FCA2E /* HomePowerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AF2F422AA4C6C1008FCA2E /* HomePowerFooterView.swift */; };
 		41AF2F452AA4C74F008FCA2E /* GridPowerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AF2F442AA4C74F008FCA2E /* GridPowerFooterView.swift */; };
 		41B3FFE82AB07FE10020DFC9 /* NetworkCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B3FFE72AB07FE10020DFC9 /* NetworkCache.swift */; };
+		41B5F1D02BE4BACF009208FA /* SolarPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B5F1CF2BE4BACF009208FA /* SolarPowerView.swift */; };
+		41B5F1D22BE4BB1A009208FA /* BatteryPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B5F1D12BE4BB1A009208FA /* BatteryPowerView.swift */; };
+		41B5F1D42BE4BD76009208FA /* HomePowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B5F1D32BE4BD76009208FA /* HomePowerView.swift */; };
+		41B5F1D62BE4BDC3009208FA /* GridPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B5F1D52BE4BDC3009208FA /* GridPowerView.swift */; };
 		41B690F628E03EA70058126E /* NetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B690F528E03EA70058126E /* NetworkTests.swift */; };
 		41B690F928E040060058126E /* OHHTTPStubsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 41B690F828E040060058126E /* OHHTTPStubsSwift */; };
 		41B690FD28E042560058126E /* login-failure.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B690FB28E042560058126E /* login-failure.json */; };
@@ -631,6 +635,10 @@
 		41AF2F422AA4C6C1008FCA2E /* HomePowerFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePowerFooterView.swift; sourceTree = "<group>"; };
 		41AF2F442AA4C74F008FCA2E /* GridPowerFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPowerFooterView.swift; sourceTree = "<group>"; };
 		41B3FFE72AB07FE10020DFC9 /* NetworkCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCache.swift; sourceTree = "<group>"; };
+		41B5F1CF2BE4BACF009208FA /* SolarPowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarPowerView.swift; sourceTree = "<group>"; };
+		41B5F1D12BE4BB1A009208FA /* BatteryPowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryPowerView.swift; sourceTree = "<group>"; };
+		41B5F1D32BE4BD76009208FA /* HomePowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePowerView.swift; sourceTree = "<group>"; };
+		41B5F1D52BE4BDC3009208FA /* GridPowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPowerView.swift; sourceTree = "<group>"; };
 		41B690F328DF5C390058126E /* NetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponse.swift; sourceTree = "<group>"; };
 		41B690F528E03EA70058126E /* NetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTests.swift; sourceTree = "<group>"; };
 		41B690FB28E042560058126E /* login-failure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "login-failure.json"; sourceTree = "<group>"; };
@@ -1431,6 +1439,10 @@
 				41A715942BE0CE3400560628 /* LoadStateView.swift */,
 				41229CBC2BE1217600CFA636 /* ContentViewModel.swift */,
 				41F6317D2BDCD32E00A571C5 /* Preview Content */,
+				41B5F1CF2BE4BACF009208FA /* SolarPowerView.swift */,
+				41B5F1D12BE4BB1A009208FA /* BatteryPowerView.swift */,
+				41B5F1D32BE4BD76009208FA /* HomePowerView.swift */,
+				41B5F1D52BE4BDC3009208FA /* GridPowerView.swift */,
 			);
 			path = "Energy Stats Watch App";
 			sourceTree = "<group>";
@@ -2058,8 +2070,12 @@
 			files = (
 				41229CBD2BE1217600CFA636 /* ContentViewModel.swift in Sources */,
 				41F6317A2BDCD32D00A571C5 /* ContentView.swift in Sources */,
+				41B5F1D42BE4BD76009208FA /* HomePowerView.swift in Sources */,
 				41A715952BE0CE3400560628 /* LoadStateView.swift in Sources */,
+				41B5F1D62BE4BDC3009208FA /* GridPowerView.swift in Sources */,
 				41F631782BDCD32D00A571C5 /* Energy_Stats_Watch_AppApp.swift in Sources */,
+				41B5F1D22BE4BB1A009208FA /* BatteryPowerView.swift in Sources */,
+				41B5F1D02BE4BACF009208FA /* SolarPowerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

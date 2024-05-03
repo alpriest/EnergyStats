@@ -30,15 +30,10 @@ class MockKeychainStore: KeychainStoring {
 
     func updateHasCredentials() {}
 
-    let hasCredentialsSubject = CurrentValueSubject<Bool, Never>(false)
-    let hasCredentials: AnyPublisher<Bool, Never>
-
-    init() {
-        hasCredentials = hasCredentialsSubject.eraseToAnyPublisher()
-    }
+    let hasCredentials = CurrentValueSubject<Bool, Never>(false)
 
     func updateHasCredentials(value: Bool) {
-        hasCredentialsSubject.send(value)
+        hasCredentials.send(value)
     }
 
     func getSelectedDeviceSN() -> String? {

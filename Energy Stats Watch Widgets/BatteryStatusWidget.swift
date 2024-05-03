@@ -153,7 +153,7 @@ struct BatteryStatusWidget: Widget {
 #Preview("Rectangular", as: .accessoryRectangular) {
     RectangularBatteryStatusWidget()
 } timeline: {
-    SimpleEntry(date: .now, soc: 30, chargeStatusDescription: "Empty in 0 seconds", state: .loaded, errorMessage: nil, batteryPower: -2.2)
+    SimpleEntry(date: .now, soc: 30, chargeStatusDescription: "Empty in 0 seconds", state: .loaded, errorMessage: nil, batteryPower: 2.0)
 }
 
 #Preview("Circular", as: .accessoryCircular) {
