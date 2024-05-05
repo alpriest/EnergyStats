@@ -14,18 +14,15 @@ public enum RefreshFrequency: Int {
     case FIVE_MINUTES = 5
 }
 
-public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging {
+public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging, BatteryConfigManaging, CurrentStatusCalculatorConfig {
     func fetchPowerStationDetail() async throws
     func fetchDevices() async throws
     func logout(clearDisplaySettings: Bool, clearDeviceSettings: Bool)
     func select(device: Device?)
-    func clearBatteryOverride(for deviceID: String)
     var appSettingsPublisher: LatestAppSettingsPublisher { get }
 
     var hasRunBefore: Bool { get set }
     var minSOC: Double { get }
-    var batteryCapacity: String { get set }
-    var batteryCapacityW: Int { get }
     var isDemoUser: Bool { get set }
     var showColouredLines: Bool { get set }
     var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode { get set }
@@ -45,7 +42,6 @@ public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging {
     var selectedParameterGraphVariables: [String] { get set }
     var showHomeTotalOnPowerFlow: Bool { get set }
     var showInverterIcon: Bool { get set }
-    var shouldInvertCT2: Bool { get set }
     var showInverterStationName: Bool { get set }
     var showInverterTypeName: Bool { get set }
     var showGridTotalsOnPowerFlow: Bool { get set }
@@ -53,15 +49,20 @@ public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging {
     var solarDefinitions: SolarRangeDefinitions { get set }
     var parameterGroups: [ParameterGroup] { get set }
     var currencySymbol: String { get set }
-    var shouldCombineCT2WithPVPower: Bool { get set }
     var showGraphValueDescriptions: Bool { get set }
     var dataCeiling: DataCeiling { get set }
     var showTotalYieldOnPowerFlow: Bool { get set }
     var showFinancialSummaryOnFlowPage: Bool { get set }
     var separateParameterGraphsByUnit: Bool { get set }
-    var powerFlowStrings: PowerFlowStringsSettings { get set }
     var showBatteryPercentageRemaining: Bool { get set }
     var powerStationDetail: PowerStationDetail? { get }
+}
+
+public protocol BatteryConfigManaging {
+    var batteryCapacity: String { get set }
+    var batteryCapacityW: Int { get }
+
+    func clearBatteryOverride(for deviceID: String)
 }
 
 public protocol SolcastConfigManaging {

@@ -25,6 +25,12 @@ public extension Array where Element == OpenQueryResponse.Data {
     }
 }
 
+public protocol CurrentStatusCalculatorConfig {
+    var shouldInvertCT2: Bool { get set }
+    var shouldCombineCT2WithPVPower: Bool { get set }
+    var powerFlowStrings: PowerFlowStringsSettings { get set }
+}
+
 public struct CurrentStatusCalculator {
     public let currentSolarPower: Double
     public let currentSolarStringsPower: [StringPower]
@@ -38,7 +44,7 @@ public struct CurrentStatusCalculator {
     public init(
         device: Device,
         response: OpenQueryResponse,
-        config: ConfigManaging
+        config: CurrentStatusCalculatorConfig
     ) {
         let shouldInvertCT2 = config.shouldInvertCT2
         let shouldCombineCT2WithPVPower = config.shouldCombineCT2WithPVPower
@@ -55,7 +61,7 @@ public struct CurrentStatusCalculator {
         self.currentFaults = Self.currentFaults(real: response)
     }
 
-    static func mapCurrentValues(device: Device, response: OpenQueryResponse, config: ConfigManaging) -> CurrentRawValues {
+    static func mapCurrentValues(device: Device, response: OpenQueryResponse, config: CurrentStatusCalculatorConfig) -> CurrentRawValues {
         var stringsPvPower: [StringPower] = []
         if config.powerFlowStrings.enabled {
             stringsPvPower = config.powerFlowStrings.makeStringPowers(from: response)

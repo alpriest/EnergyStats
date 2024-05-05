@@ -8,9 +8,40 @@
 import Combine
 import Energy_Stats_Core
 import SwiftUI
+import WatchConnectivity
+
+class WatchSessionDelegate: NSObject, WCSessionDelegate {
+    var config: ConfigManaging?
+
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: (any Error)?) {
+        switch activationState {
+        case .notActivated:
+            print("AWP", "activationDidCompleteWith", "notActivated")
+        case .inactive:
+            print("AWP", "activationDidCompleteWith", "inactive")
+        case .activated:
+            print("AWP", "activationDidCompleteWith", "active")
+            if let config {
+                print("AWP", "sent battery capacity", config.batteryCapacity)
+                session.transferUserInfo(["batteryCapacity": config.batteryCapacity])
+            }
+        }
+    }
+
+    func sessionDidBecomeInactive(_ session: WCSession) {
+        print("AWP", "sessionDidBecomeInactive")
+    }
+
+    func sessionDidDeactivate(_ session: WCSession) {
+        print("AWP", "sessionDidDeactivate")
+    }
+}
 
 @main
 struct Energy_StatsApp: App {
+    static let delegate = WatchSessionDelegate()
+    @Environment(\.scenePhase) private var scenePhase
+
     var body: some Scene {
         let keychainStore = KeychainStore()
         var config: Config
@@ -20,7 +51,9 @@ struct Energy_StatsApp: App {
             config = UserDefaultsConfig()
         }
         let appSettingsPublisher = AppSettingsPublisherFactory.make(from: config)
-        let network = NetworkService.standard(keychainStore: keychainStore, config: config)
+        let network = NetworkService.standard(keychainStore: keychainStore,
+                                              isDemoUser: { config.isDemoUser },
+                                              dataCeiling: { config.dataCeiling })
         let configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
         let userManager = UserManager(networking: network, store: keychainStore, configManager: configManager, networkCache: InMemoryLoggingNetworkStore.shared)
         let solarForecastProvider: () -> SolarForecasting = {
@@ -42,6 +75,16 @@ struct Energy_StatsApp: App {
                 .environmentObject(userManager)
                 .environmentObject(KeychainWrapper(keychainStore))
                 .environmentObject(versionChecker)
+                .onChange(of: scenePhase) { phase in
+                    if case .active = phase {
+                        if WCSession.isSupported() {
+                            let session = WCSession.default
+                            session.delegate = Energy_StatsApp.delegate
+                            Energy_StatsApp.delegate.config = configManager
+                            session.activate()
+                        }
+                    }
+                }
                 .task {
                     versionChecker.load()
                 }

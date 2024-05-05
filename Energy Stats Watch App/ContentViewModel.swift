@@ -21,15 +21,15 @@ struct ContentData {
 class ContentViewModel {
     let keychainStore: KeychainStoring
     let network: Networking
-    let configManager: ConfigManaging
+    let config: WatchConfigManaging
     var loadState: LoadState = .inactive
     var state: ContentData?
     private let FOUR_MINUTES_IN_SECONDS = 60.0 * 4.0
 
-    init(keychainStore: KeychainStoring, network: Networking, configManager: ConfigManaging) {
+    init(keychainStore: KeychainStoring, network: Networking, config: WatchConfigManaging) {
         self.keychainStore = keychainStore
         self.network = network
-        self.configManager = configManager
+        self.config = config
     }
 
     func loadData() async {
@@ -41,6 +41,7 @@ class ContentViewModel {
             print("Data is fresh, not refreshing")
             return
         }
+        print("Config Battery Capacity is", config.batteryCapacity)
 
         defer {
             Task { @MainActor in
@@ -71,7 +72,7 @@ class ContentViewModel {
             let device = Device(deviceSN: deviceSN, stationName: nil, stationID: "", battery: nil, moduleSN: "", deviceType: "", hasPV: true, hasBattery: true)
             let calculator = CurrentStatusCalculator(device: device,
                                                      response: reals,
-                                                     config: configManager)
+                                                     config: config)
 
             let batteryViewModel = makeBatteryViewModel(device, reals)
 

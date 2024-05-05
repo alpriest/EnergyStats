@@ -25,7 +25,12 @@ public struct UserDefaultsStoredInt {
 @propertyWrapper
 public struct UserDefaultsStoredDouble {
     var key: String
-    var defaultValue: Double = 0.0
+    var defaultValue: Double
+
+    public init(key: String, defaultValue: Double = 0.0) {
+        self.key = key
+        self.defaultValue = defaultValue
+    }
 
     public var wrappedValue: Double {
         get {
@@ -40,6 +45,10 @@ public struct UserDefaultsStoredDouble {
 @propertyWrapper
 public struct UserDefaultsStoredOptionalString {
     var key: String
+
+    public init(key: String) {
+        self.key = key
+    }
 
     public var wrappedValue: String? {
         get {
@@ -56,6 +65,11 @@ public struct UserDefaultsStoredString {
     var key: String
     var defaultValue: String
 
+    public init(key: String, defaultValue: String) {
+        self.key = key
+        self.defaultValue = defaultValue
+    }
+
     public var wrappedValue: String {
         get {
             UserDefaults.shared.string(forKey: key) ?? defaultValue
@@ -69,7 +83,12 @@ public struct UserDefaultsStoredString {
 @propertyWrapper
 public struct UserDefaultsStoredBool {
     var key: String
-    var defaultValue: Bool = false
+    var defaultValue: Bool
+
+    public init(key: String, defaultValue: Bool = false) {
+        self.key = key
+        self.defaultValue = defaultValue
+    }
 
     public var wrappedValue: Bool {
         get {

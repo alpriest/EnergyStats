@@ -19,19 +19,21 @@ struct CheckBatteryChargeLevelIntent: AppIntent {
     func perform() async throws -> some ProvidesDialog & ReturnsValue<Int> {
         let store = KeychainStore()
         let config = UserDefaultsConfig()
-        let network = NetworkService.standard(keychainStore: store, config: config)
+        let network = NetworkService.standard(keychainStore: store,
+                                              isDemoUser: { false },
+                                              dataCeiling: { .none })
         guard let deviceSN = config.selectedDeviceSN else {
             throw ConfigManager.NoDeviceFoundError()
         }
         let real = try await network.fetchRealData(deviceSN: deviceSN, variables: ["SoC", "SoC_1"])
-        let soc = Int(real.datas.SoC() ?? 0)
+        let soc = Int(real.datas.SoC())
 
         return .result(value: soc, dialog: IntentDialog(stringLiteral: "\(soc)%"))
     }
 }
 
-//@available(iOS 16.0, *)
-//enum IntentsWorkMode: String, AppEnum, CaseDisplayRepresentable, RawRepresentable {
+// @available(iOS 16.0, *)
+// enum IntentsWorkMode: String, AppEnum, CaseDisplayRepresentable, RawRepresentable {
 //    case selfUse
 //    case feedInFirst
 //    case backup
@@ -62,10 +64,10 @@ struct CheckBatteryChargeLevelIntent: AppIntent {
 //            return .peakShaving
 //        }
 //    }
-//}
+// }
 
-//@available(iOS 16.0, *)
-//struct ChangeWorkModeIntent: AppIntent {
+// @available(iOS 16.0, *)
+// struct ChangeWorkModeIntent: AppIntent {
 //    static var title: LocalizedStringResource = "Change inverter work mode"
 //    static var description: IntentDescription? = "Changes the work mode of the inverter"
 //    static var authenticationPolicy: IntentAuthenticationPolicy = .requiresAuthentication
@@ -89,7 +91,7 @@ struct CheckBatteryChargeLevelIntent: AppIntent {
 //
 //        return .result(value: true)
 //    }
-//}
+// }
 
 @available(iOS 16.0, *)
 struct EnergyStatsShortcuts: AppShortcutsProvider {

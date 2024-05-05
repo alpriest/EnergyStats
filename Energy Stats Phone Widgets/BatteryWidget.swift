@@ -16,13 +16,15 @@ struct BatteryWidget: Widget {
     init() {
         let keychainStore = KeychainStore()
         let config = UserDefaultsConfig()
-        let network = NetworkService.standard(keychainStore: keychainStore, config: config)
+        let network = NetworkService.standard(keychainStore: keychainStore,
+                                              isDemoUser: { false },
+                                              dataCeiling: { .none })
         let appSettingsPublisher = AppSettingsPublisherFactory.make(from: config)
         configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
     }
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: Provider()) { entry in
+        StaticConfiguration(kind: kind, provider: Provider(config: HomeEnergyStateManagerConfigAdapter(config: configManager))) { entry in
             BatteryWidgetView(entry: entry, configManager: configManager)
         }
         .configurationDisplayName("Battery Status Widget")
@@ -123,7 +125,8 @@ struct BatteryWidget_Previews: PreviewProvider {
             entry: SimpleEntry.loaded(date: Date(),
                                       soc: 50,
                                       chargeStatusDescription: "Full in 22 minutes",
-                                      errorMessage: "Could not refresh"),
+                                      errorMessage: "Could not refresh",
+                                      batteryPower: 0),
             configManager: ConfigManager(networking: DemoNetworking(), config: MockConfig(), appSettingsPublisher: AppSettingsPublisherFactory.make(from: MockConfig()), keychainStore: PreviewKeychainStore())
         )
         .previewContext(WidgetPreviewContext(family: .systemSmall))

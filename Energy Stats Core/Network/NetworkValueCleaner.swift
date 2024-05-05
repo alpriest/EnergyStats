@@ -9,11 +9,11 @@ import Foundation
 
 class NetworkValueCleaner: FoxAPIServicing {
     private let api: FoxAPIServicing
-    private let appSettingsPublisher: LatestAppSettingsPublisher
+    private let dataCeiling: () -> DataCeiling
 
-    init(api: FoxAPIServicing, appSettingsPublisher: LatestAppSettingsPublisher) {
+    init(api: FoxAPIServicing, dataCeiling: @escaping () -> DataCeiling) {
         self.api = api
-        self.appSettingsPublisher = appSettingsPublisher
+        self.dataCeiling = dataCeiling
     }
 
     //     func deleteScheduleTemplate(templateID: String) async throws {
@@ -98,7 +98,7 @@ class NetworkValueCleaner: FoxAPIServicing {
         return OpenQueryResponse(time: original.time, deviceSN: deviceSN, datas: original.datas.map { originalData in
             OpenQueryResponse.Data(unit: originalData.unit,
                                    variable: originalData.variable,
-                                   value: originalData.value?.capped(appSettingsPublisher.value.dataCeiling),
+                                   value: originalData.value?.capped(dataCeiling()),
                                    stringValue: originalData.stringValue)
         })
     }
@@ -111,7 +111,7 @@ class NetworkValueCleaner: FoxAPIServicing {
                                      name: originalData.name,
                                      variable: originalData.variable,
                                      data: originalData.data.map {
-                                         OpenHistoryResponse.Data.UnitData(time: $0.time, value: $0.value.capped(appSettingsPublisher.value.dataCeiling))
+                                         OpenHistoryResponse.Data.UnitData(time: $0.time, value: $0.value.capped(dataCeiling()))
                                      })
         })
     }
@@ -130,7 +130,7 @@ class NetworkValueCleaner: FoxAPIServicing {
                 values: $0.values.compactMap {
                     OpenReportResponse.ReportData(
                         index: $0.index,
-                        value: $0.value.capped(appSettingsPublisher.value.dataCeiling)
+                        value: $0.value.capped(dataCeiling())
                     )
                 }
             )

@@ -29,7 +29,7 @@ struct CircularBatteryStatusWidget: Widget {
     let kind: String = "BatteryCircularWidget"
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: Provider(deviceSN: KeychainStore().getSelectedDeviceSN())) { entry in
+        StaticConfiguration(kind: kind, provider: Provider(config: HomeEnergyStateManagerConfigManager())) { entry in
             Group {
                 if let soc = entry.soc {
                     BatteryGaugeView(value: soc, batteryPower: entry.batteryPower)
@@ -57,7 +57,7 @@ struct CornerBatteryStatusWidget: Widget {
     let kind: String = "BatteryCornerWidget"
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: Provider(deviceSN: KeychainStore().getSelectedDeviceSN())) { entry in
+        StaticConfiguration(kind: kind, provider: Provider(config: HomeEnergyStateManagerConfigManager())) { entry in
             Group {
                 if let soc = entry.soc {
                     Text(soc, format: .percent)
@@ -86,19 +86,20 @@ struct RectangularBatteryStatusWidget: Widget {
     let kind: String = "BatteryCornerWidget"
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: Provider(deviceSN: KeychainStore().getSelectedDeviceSN())) { entry in
+        StaticConfiguration(kind: kind, provider: Provider(config: HomeEnergyStateManagerConfigManager())) { entry in
             Group {
                 if let soc = entry.soc {
                     HStack {
                         BatteryGaugeView(value: soc, batteryPower: entry.batteryPower)
 
-//                        if let power = entry.batteryPower {
+                        if let power = entry.chargeStatusDescription {
+                            Text(power)
 //                            HStack(alignment: .center) {
 //                                Text("\(Image(systemName: power > 0 ? "square.and.arrow.down" : "square.and.arrow.up")) \(power.kW(2))")
 //                                    .foregroundStyle(power.tintColor)
 //                                    .font(.footnote)
 //                            }
-//                        }
+                        }
                     }
                 } else {
                     if let errorMessage = entry.errorMessage {
@@ -123,7 +124,7 @@ struct BatteryStatusWidget: Widget {
     let kind: String = "BatteryCornerWidget"
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: Provider(deviceSN: KeychainStore().getSelectedDeviceSN())) { entry in
+        StaticConfiguration(kind: kind, provider: Provider(config: HomeEnergyStateManagerConfigManager())) { entry in
             Group {
                 if let soc = entry.soc {
                     Text(soc, format: .percent)

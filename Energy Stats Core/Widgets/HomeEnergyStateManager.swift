@@ -9,6 +9,15 @@ import AppIntents
 import SwiftData
 import WidgetKit
 
+public protocol HomeEnergyStateManagerConfig {
+    var batteryCapacityW: Int { get }
+    var minSOC: Double { get }
+    var showUsableBatteryOnly: Bool { get }
+    var selectedDeviceSN: String? { get }
+    var dataCeiling: DataCeiling { get }
+    var isDemoUser: Bool { get }
+}
+
 @available(iOS 17.0, *)
 @available(watchOS 9.0, *)
 public class HomeEnergyStateManager {
@@ -16,13 +25,15 @@ public class HomeEnergyStateManager {
 
     public let modelContainer: ModelContainer
     let network: Networking
-    public let config: Config
     let keychainStore = KeychainStore()
 
     init() {
         do {
-            config = UserDefaultsConfig()
-            network = NetworkService.standard(keychainStore: keychainStore, config: config)
+            network = NetworkService.standard(keychainStore: keychainStore,
+                                              isDemoUser: {
+                                                  false
+                                              },
+                                              dataCeiling: { .none })
             modelContainer = try ModelContainer(for: BatteryWidgetState.self)
         } catch {
             fatalError("Failed to create the model container: \(error)")
@@ -38,12 +49,9 @@ public class HomeEnergyStateManager {
     }
 
     @MainActor
-    public func update(deviceSN: String?) async throws {
+    public func update(config: HomeEnergyStateManagerConfig) async throws {
         guard await isStale() else { return }
-        guard let deviceSN else { throw ConfigManager.NoDeviceFoundError() }
-
-        let appSettingsPublisher = AppSettingsPublisherFactory.make(from: config)
-        let configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
+        guard let deviceSN = config.selectedDeviceSN else { throw ConfigManager.NoDeviceFoundError() }
 
         let real = try await network.fetchRealData(
             deviceSN: deviceSN,
@@ -54,8 +62,8 @@ public class HomeEnergyStateManager {
                         "batTemperature",
                         "ResidualEnergy"]
         )
-        let calculator = BatteryCapacityCalculator(capacityW: configManager.batteryCapacityW,
-                                                   minimumSOC: configManager.minSOC,
+        let calculator = BatteryCapacityCalculator(capacityW: config.batteryCapacityW,
+                                                   minimumSOC: config.minSOC,
                                                    bundle: Bundle(for: BundleLocator.self))
         let chargePower = real.datas.currentDouble(for: "batChargePower")
         let dischargePower = real.datas.currentDouble(for: "batDischargePower")
@@ -67,7 +75,7 @@ public class HomeEnergyStateManager {
             residual: real.datas.currentDouble(for: "ResidualEnergy") * 10.0,
             temperature: real.datas.currentDouble(for: "batTemperature")
         )
-        let soc = calculator.effectiveBatteryStateOfCharge(batteryStateOfCharge: viewModel.chargeLevel, includeUnusableCapacity: !configManager.showUsableBatteryOnly)
+        let soc = calculator.effectiveBatteryStateOfCharge(batteryStateOfCharge: viewModel.chargeLevel, includeUnusableCapacity: !config.showUsableBatteryOnly)
 
         let chargeStatusDescription = calculator.batteryChargeStatusDescription(
             batteryChargePowerkW: viewModel.chargePower,

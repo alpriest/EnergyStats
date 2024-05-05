@@ -18,8 +18,8 @@ struct ContentView: View {
     @State private var viewModel: ContentViewModel
     @State private var alertContent: AlertContent?
 
-    init(keychainStore: KeychainStoring, network: Networking, configManager: ConfigManaging) {
-        self._viewModel = State(initialValue: ContentViewModel(keychainStore: keychainStore, network: network, configManager: configManager))
+    init(keychainStore: KeychainStoring, network: Networking, config: WatchConfigManaging) {
+        self._viewModel = State(initialValue: ContentViewModel(keychainStore: keychainStore, network: network, config: config))
     }
 
     var body: some View {
@@ -69,5 +69,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView(keychainStore: PreviewKeychainStore(), network: DemoNetworking(), configManager: PreviewConfigManager())
+    ContentView(keychainStore: PreviewKeychainStore(), network: DemoNetworking(), config: PreviewWatchConfig())
 }

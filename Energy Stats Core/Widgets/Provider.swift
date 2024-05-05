@@ -5,35 +5,27 @@
 //  Created by Alistair Priest on 14/06/2023.
 //
 
-import Energy_Stats_Core
 import Intents
 import SwiftData
 import SwiftUI
 import WidgetKit
 
-public final class BundleLocator {}
-
-struct Provider: TimelineProvider {
-    private let config = UserDefaultsConfig()
-    private let configManager: ConfigManaging
+@available(iOS 17.0, *)
+public struct Provider: TimelineProvider {
+    private let config: HomeEnergyStateManagerConfig
     private let keychainStore = KeychainStore()
-    let network: Networking
     private let modelContainer: ModelContainer
-    private let deviceSN: String?
 
-    init(deviceSN: String?) {
-        self.deviceSN = deviceSN
-        network = NetworkService.standard(keychainStore: keychainStore, config: config)
-        let appSettingsPublisher = AppSettingsPublisherFactory.make(from: config)
-        configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
+    public init(config: HomeEnergyStateManagerConfig) {
+        self.config = config
         modelContainer = HomeEnergyStateManager.shared.modelContainer
     }
 
-    func placeholder(in context: Context) -> SimpleEntry {
+    public func placeholder(in context: Context) -> SimpleEntry {
         SimpleEntry.placeholder()
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
+    public func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
         if context.isPreview {
             let entry = SimpleEntry.placeholder()
             completion(entry)
@@ -45,7 +37,7 @@ struct Provider: TimelineProvider {
         }
     }
 
-    func getTimeline(in context: Context, completion: @escaping (Timeline<SimpleEntry>) -> ()) {
+    public func getTimeline(in context: Context, completion: @escaping (Timeline<SimpleEntry>) -> ()) {
         Task { @MainActor in
             let entry = await getCurrentState()
 
@@ -69,13 +61,22 @@ struct Provider: TimelineProvider {
         var errorMessage: String? = nil
 
         do {
-            try await HomeEnergyStateManager.shared.update(deviceSN: deviceSN)
+//            let config = UserDefaultsConfig()
+//            let keychainStore = KeychainStore()
+//            let appSettingsPublisher = AppSettingsPublisherFactory.make(from: config)
+//            let network = NetworkService.standard(keychainStore: keychainStore,
+//                                                  isDemoUser: {
+//                                                      false
+//                                                  },
+//                                                  dataCeiling: { .none })
+//
+//            let configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
+
+            try await HomeEnergyStateManager.shared.update(config: config)
         } catch _ as ConfigManager.NoBattery {
             return .failed(error: "Your selected inverter has no battery connected")
-        } catch _ as ConfigManager.NoDeviceFoundError {
-            return .failed(error: deviceSN ?? "no")
         } catch {
-            errorMessage = String(describing: error)
+            errorMessage = error.localizedDescription
         }
 
         do {
@@ -99,21 +100,21 @@ struct Provider: TimelineProvider {
     }
 }
 
-enum EntryState: Equatable {
+public enum EntryState: Equatable {
     case loaded
     case placeholder
     case failedWithoutData(reason: String)
 }
 
-struct SimpleEntry: TimelineEntry {
-    let date: Date
-    let soc: Int?
-    let chargeStatusDescription: String?
-    let state: EntryState
-    let errorMessage: String?
-    let batteryPower: Double?
+public struct SimpleEntry: TimelineEntry {
+    public let date: Date
+    public let soc: Int?
+    public let chargeStatusDescription: String?
+    public let state: EntryState
+    public let errorMessage: String?
+    public let batteryPower: Double?
 
-    init(date: Date, soc: Int?, chargeStatusDescription: String?, state: EntryState, errorMessage: String?, batteryPower: Double?) {
+    public init(date: Date, soc: Int?, chargeStatusDescription: String?, state: EntryState, errorMessage: String?, batteryPower: Double?) {
         self.date = date
         self.soc = soc
         self.state = state
@@ -122,7 +123,7 @@ struct SimpleEntry: TimelineEntry {
         self.batteryPower = batteryPower
     }
 
-    static func loaded(date: Date, soc: Int, chargeStatusDescription: String?, errorMessage: String?, batteryPower: Double?) -> SimpleEntry {
+    public static func loaded(date: Date, soc: Int, chargeStatusDescription: String?, errorMessage: String?, batteryPower: Double?) -> SimpleEntry {
         SimpleEntry(date: date,
                     soc: soc,
                     chargeStatusDescription: chargeStatusDescription,
@@ -131,7 +132,7 @@ struct SimpleEntry: TimelineEntry {
                     batteryPower: batteryPower)
     }
 
-    static func placeholder() -> SimpleEntry {
+    public static func placeholder() -> SimpleEntry {
         SimpleEntry(date: Date(),
                     soc: 87,
                     chargeStatusDescription: "Full in 25 minutes",
@@ -140,7 +141,7 @@ struct SimpleEntry: TimelineEntry {
                     batteryPower: nil)
     }
 
-    static func failed(error: String) -> SimpleEntry {
+    public static func failed(error: String) -> SimpleEntry {
         SimpleEntry(date: Date(),
                     soc: nil,
                     chargeStatusDescription: nil,

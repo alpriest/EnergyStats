@@ -10,19 +10,19 @@ import Foundation
 class NetworkFacade: FoxAPIServicing {
     private let api: FoxAPIServicing
     private let demoAPI: FoxAPIServicing
-    private let config: Config
+    private let isDemoUserProvider: () -> Bool
     private let store: KeychainStoring
     private let throttler = ThrottleManager()
 
-    init(api: FoxAPIServicing, config: Config, store: KeychainStoring) {
+    init(api: FoxAPIServicing, isDemoUser provider: @escaping () -> Bool, store: KeychainStoring) {
         self.api = api
         self.demoAPI = DemoAPI()
-        self.config = config
+        self.isDemoUserProvider = provider
         self.store = store
     }
 
     private var isDemoUser: Bool {
-        config.isDemoUser || store.isDemoUser
+        isDemoUserProvider() || store.isDemoUser
     }
 
     //     func deleteScheduleTemplate(templateID: String) async throws {

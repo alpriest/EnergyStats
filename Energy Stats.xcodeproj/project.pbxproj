@@ -64,6 +64,10 @@
 		4127910B28E241E700D5F993 /* XCTestCase+OHHTTPStubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127910A28E241E700D5F993 /* XCTestCase+OHHTTPStubs.swift */; };
 		4127911028E38EFB00D5F993 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 4127910F28E38EFB00D5F993 /* SnapshotTesting */; };
 		4127911228E38F1400D5F993 /* LoginViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127911128E38F1400D5F993 /* LoginViewTests.swift */; };
+		412887472BE7BCAD007E9532 /* WatchConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412887462BE7BCAD007E9532 /* WatchConfigManager.swift */; };
+		4128874A2BE7CCC0007E9532 /* HomeEnergyStateManagerConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412887482BE7CBCC007E9532 /* HomeEnergyStateManagerConfigManager.swift */; };
+		4128874C2BE7CE9B007E9532 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418547382A3A1623000128C7 /* Provider.swift */; };
+		4128874E2BE7CFD5007E9532 /* HomeEnergyStateManagerConfigAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4128874D2BE7CFD5007E9532 /* HomeEnergyStateManagerConfigAdapter.swift */; };
 		4128E4C128DA5F6600C1D698 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4128E4C028DA5F6600C1D698 /* Date.swift */; };
 		412A266D2AC03B2300F61456 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 418547162A3A1530000128C7 /* WidgetKit.framework */; };
 		412A266E2AC03B2300F61456 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 418547182A3A1530000128C7 /* SwiftUI.framework */; };
@@ -71,7 +75,6 @@
 		412A26752AC03B2400F61456 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 412A26742AC03B2400F61456 /* Assets.xcassets */; };
 		412A26792AC03B2400F61456 /* Energy Stats Phone WidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 412A266C2AC03B2200F61456 /* Energy Stats Phone WidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		412A267E2AC03B4B00F61456 /* BatteryWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4185FAB12A3B6C8D0082D53F /* BatteryWidget.swift */; };
-		412A267F2AC03B4E00F61456 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418547382A3A1623000128C7 /* Provider.swift */; };
 		412A26832AC03BF000F61456 /* BatteryStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4185FAB52A3B74E60082D53F /* BatteryStatusView.swift */; };
 		412A26882AC07FC800F61456 /* BatteryCapacityCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E4B30D28DB7511003F7F47 /* BatteryCapacityCalculator.swift */; };
 		4130364929B86F66006B5CE9 /* BatterySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4130364829B86F66006B5CE9 /* BatterySettingsView.swift */; };
@@ -266,9 +269,8 @@
 		41EE90B12BDEB6FB006412FB /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE90B02BDEB6FB006412FB /* AppIntent.swift */; };
 		41EE90B32BDEB6FC006412FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41EE90B22BDEB6FC006412FB /* Assets.xcassets */; };
 		41EE90B72BDEB6FC006412FB /* Energy Stats Watch WidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 41EE90AA2BDEB6FB006412FB /* Energy Stats Watch WidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		41EE90BC2BDEB702006412FB /* BatteryStatusWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE90A02BDEAC00006412FB /* BatteryStatusWidget.swift */; };
+		41EE90BC2BDEB702006412FB /* WatchWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE90A02BDEAC00006412FB /* WatchWidgets.swift */; };
 		41EE90BD2BDEB704006412FB /* WidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE909E2BDEAB9A006412FB /* WidgetBundle.swift */; };
-		41EE90BE2BDEB70A006412FB /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE90A22BDEB380006412FB /* Provider.swift */; };
 		41EE90BF2BDED138006412FB /* Energy_Stats_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; };
 		41EE90C42BDEDC1F006412FB /* PreviewKeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A263232B6AEFCA0027E52A /* PreviewKeychainStore.swift */; };
 		41F631782BDCD32D00A571C5 /* Energy_Stats_Watch_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F631772BDCD32D00A571C5 /* Energy_Stats_Watch_AppApp.swift */; };
@@ -489,6 +491,9 @@
 		4127910A28E241E700D5F993 /* XCTestCase+OHHTTPStubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+OHHTTPStubs.swift"; sourceTree = "<group>"; };
 		4127910C28E2442100D5F993 /* Array+Safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Safe.swift"; sourceTree = "<group>"; };
 		4127911128E38F1400D5F993 /* LoginViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewTests.swift; sourceTree = "<group>"; };
+		412887462BE7BCAD007E9532 /* WatchConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConfigManager.swift; sourceTree = "<group>"; };
+		412887482BE7CBCC007E9532 /* HomeEnergyStateManagerConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEnergyStateManagerConfigManager.swift; sourceTree = "<group>"; };
+		4128874D2BE7CFD5007E9532 /* HomeEnergyStateManagerConfigAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEnergyStateManagerConfigAdapter.swift; sourceTree = "<group>"; };
 		4128E4C028DA5F6600C1D698 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		412A266C2AC03B2200F61456 /* Energy Stats Phone WidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Energy Stats Phone WidgetsExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		412A26702AC03B2300F61456 /* Energy_Stats_WidgetsBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Energy_Stats_WidgetsBundle.swift; sourceTree = "<group>"; };
@@ -710,8 +715,7 @@
 		41EDDF7128CD2ED30092C662 /* Energy StatsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Energy StatsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		41EE909B2BDEA98B006412FB /* HomeEnergyStateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeEnergyStateManager.swift; sourceTree = "<group>"; };
 		41EE909E2BDEAB9A006412FB /* WidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetBundle.swift; sourceTree = "<group>"; };
-		41EE90A02BDEAC00006412FB /* BatteryStatusWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryStatusWidget.swift; sourceTree = "<group>"; };
-		41EE90A22BDEB380006412FB /* Provider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
+		41EE90A02BDEAC00006412FB /* WatchWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchWidgets.swift; sourceTree = "<group>"; };
 		41EE90A42BDEB4D3006412FB /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS10.4.sdk/System/Library/Frameworks/WidgetKit.framework; sourceTree = DEVELOPER_DIR; };
 		41EE90AA2BDEB6FB006412FB /* Energy Stats Watch WidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Energy Stats Watch WidgetsExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		41EE90B02BDEB6FB006412FB /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
@@ -943,7 +947,6 @@
 			children = (
 				41A715912BDFCA8B00560628 /* Energy Stats Phone WidgetsExtension.entitlements */,
 				412A26852AC05D1200F61456 /* UpdateBatteryChargeLevelIntent.swift */,
-				418547382A3A1623000128C7 /* Provider.swift */,
 				4185FAB12A3B6C8D0082D53F /* BatteryWidget.swift */,
 				4185FAB52A3B74E60082D53F /* BatteryStatusView.swift */,
 				412A26702AC03B2300F61456 /* Energy_Stats_WidgetsBundle.swift */,
@@ -1409,7 +1412,9 @@
 		41EE909A2BDEA97C006412FB /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				418547382A3A1623000128C7 /* Provider.swift */,
 				41EE909B2BDEA98B006412FB /* HomeEnergyStateManager.swift */,
+				4128874D2BE7CFD5007E9532 /* HomeEnergyStateManagerConfigAdapter.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -1418,10 +1423,10 @@
 			isa = PBXGroup;
 			children = (
 				41A715902BDFCA6F00560628 /* Energy Stats Watch WidgetsExtension.entitlements */,
-				41EE90A22BDEB380006412FB /* Provider.swift */,
 				41EE909E2BDEAB9A006412FB /* WidgetBundle.swift */,
-				41EE90A02BDEAC00006412FB /* BatteryStatusWidget.swift */,
+				41EE90A02BDEAC00006412FB /* WatchWidgets.swift */,
 				41EE90B02BDEB6FB006412FB /* AppIntent.swift */,
+				412887482BE7CBCC007E9532 /* HomeEnergyStateManagerConfigManager.swift */,
 				41EE90B22BDEB6FC006412FB /* Assets.xcassets */,
 				41EE90B42BDEB6FC006412FB /* Info.plist */,
 			);
@@ -1443,6 +1448,7 @@
 				41B5F1D12BE4BB1A009208FA /* BatteryPowerView.swift */,
 				41B5F1D32BE4BD76009208FA /* HomePowerView.swift */,
 				41B5F1D52BE4BDC3009208FA /* GridPowerView.swift */,
+				412887462BE7BCAD007E9532 /* WatchConfigManager.swift */,
 			);
 			path = "Energy Stats Watch App";
 			sourceTree = "<group>";
@@ -1800,7 +1806,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				41EE909D2BDEAA27006412FB /* UpdateBatteryChargeLevelIntent.swift in Sources */,
-				412A267F2AC03B4E00F61456 /* Provider.swift in Sources */,
 				412A26832AC03BF000F61456 /* BatteryStatusView.swift in Sources */,
 				412A26712AC03B2300F61456 /* Energy_Stats_WidgetsBundle.swift in Sources */,
 				412A267E2AC03B4B00F61456 /* BatteryWidget.swift in Sources */,
@@ -1993,6 +1998,7 @@
 				414A40BC2B989CB900321AA2 /* PowerStationDetail.swift in Sources */,
 				411029192A729F02004018BB /* BatteryTimesResponse.swift in Sources */,
 				4103D1E229DB6CD7001B0BC8 /* ConfigManager.swift in Sources */,
+				4128874C2BE7CE9B007E9532 /* Provider.swift in Sources */,
 				41E165B92B0BAD9500B17590 /* UserDefaultsPropertyWrappers.swift in Sources */,
 				416AE44D2A821E4F003D0122 /* AlertContent.swift in Sources */,
 				4149DE9D2B04BDE6004F5FC6 /* SolcastCache.swift in Sources */,
@@ -2001,6 +2007,7 @@
 				41BCC1A92B245C130062084A /* Network+Schedule.swift in Sources */,
 				4131AF4D2B5288F400836B77 /* OpenQueryResponse.swift in Sources */,
 				413B7A312A4A390C00562A68 /* SelfSufficiencyCalculator.swift in Sources */,
+				4128874E2BE7CFD5007E9532 /* HomeEnergyStateManagerConfigAdapter.swift in Sources */,
 				4155D70D2B28FC920071346A /* Optional+Int.swift in Sources */,
 				41E165BD2B0BE33E00B17590 /* Array+Any.swift in Sources */,
 				41A715932BE0CD4700560628 /* LoadState.swift in Sources */,
@@ -2057,10 +2064,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41EE90BC2BDEB702006412FB /* BatteryStatusWidget.swift in Sources */,
+				41EE90BC2BDEB702006412FB /* WatchWidgets.swift in Sources */,
 				41EE90B12BDEB6FB006412FB /* AppIntent.swift in Sources */,
-				41EE90BE2BDEB70A006412FB /* Provider.swift in Sources */,
 				41EE90BD2BDEB704006412FB /* WidgetBundle.swift in Sources */,
+				4128874A2BE7CCC0007E9532 /* HomeEnergyStateManagerConfigManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2071,6 +2078,7 @@
 				41229CBD2BE1217600CFA636 /* ContentViewModel.swift in Sources */,
 				41F6317A2BDCD32D00A571C5 /* ContentView.swift in Sources */,
 				41B5F1D42BE4BD76009208FA /* HomePowerView.swift in Sources */,
+				412887472BE7BCAD007E9532 /* WatchConfigManager.swift in Sources */,
 				41A715952BE0CE3400560628 /* LoadStateView.swift in Sources */,
 				41B5F1D62BE4BDC3009208FA /* GridPowerView.swift in Sources */,
 				41F631782BDCD32D00A571C5 /* Energy_Stats_Watch_AppApp.swift in Sources */,
