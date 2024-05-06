@@ -62,27 +62,34 @@ public class HomeEnergyStateManager {
                         "batTemperature",
                         "ResidualEnergy"]
         )
-        let calculator = BatteryCapacityCalculator(capacityW: config.batteryCapacityW,
-                                                   minimumSOC: config.minSOC,
-                                                   bundle: Bundle(for: BundleLocator.self))
-        let chargePower = real.datas.currentDouble(for: "batChargePower")
-        let dischargePower = real.datas.currentDouble(for: "batDischargePower")
-        let power = chargePower > 0 ? chargePower : -dischargePower
 
-        let viewModel = BatteryViewModel(
-            power: power,
-            soc: Int(real.datas.SoC()),
-            residual: real.datas.currentDouble(for: "ResidualEnergy") * 10.0,
-            temperature: real.datas.currentDouble(for: "batTemperature")
+        try update(
+            openQueryResponse: real,
+            batteryCapacityW: config.batteryCapacityW,
+            minSOC: config.minSOC,
+            showUsableBatteryOnly: config.showUsableBatteryOnly
         )
-        let soc = calculator.effectiveBatteryStateOfCharge(batteryStateOfCharge: viewModel.chargeLevel, includeUnusableCapacity: !config.showUsableBatteryOnly)
+    }
+
+    @MainActor
+    public func update(
+        openQueryResponse: OpenQueryResponse,
+        batteryCapacityW: Int,
+        minSOC: Double,
+        showUsableBatteryOnly: Bool
+    ) throws {
+        let batteryViewModel = openQueryResponse.makeBatteryViewModel()
+        let calculator = BatteryCapacityCalculator(capacityW: batteryCapacityW,
+                                                   minimumSOC: minSOC,
+                                                   bundle: Bundle(for: BundleLocator.self))
+        let soc = calculator.effectiveBatteryStateOfCharge(batteryStateOfCharge: batteryViewModel.chargeLevel, includeUnusableCapacity: !showUsableBatteryOnly)
 
         let chargeStatusDescription = calculator.batteryChargeStatusDescription(
-            batteryChargePowerkW: viewModel.chargePower,
+            batteryChargePowerkW: batteryViewModel.chargePower,
             batteryStateOfCharge: soc
         )
 
-        try update(soc: Int(soc * 100.0), chargeStatusDescription: chargeStatusDescription, batteryPower: viewModel.chargePower)
+        try update(soc: Int(soc * 100.0), chargeStatusDescription: chargeStatusDescription, batteryPower: batteryViewModel.chargePower)
     }
 
     @MainActor
@@ -101,5 +108,20 @@ public class HomeEnergyStateManager {
         if let widgetState = (try? modelContainer.mainContext.fetch(fetchDescriptor))?.first {
             modelContainer.mainContext.delete(widgetState)
         }
+    }
+}
+
+public extension OpenQueryResponse {
+    func makeBatteryViewModel() -> BatteryViewModel {
+        let chargePower = datas.currentDouble(for: "batChargePower")
+        let dischargePower = datas.currentDouble(for: "batDischargePower")
+        let power = chargePower > 0 ? chargePower : -dischargePower
+
+        return BatteryViewModel(
+            power: power,
+            soc: Int(datas.SoC()),
+            residual: datas.currentDouble(for: "ResidualEnergy") * 10.0,
+            temperature: datas.currentDouble(for: "batTemperature")
+        )
     }
 }

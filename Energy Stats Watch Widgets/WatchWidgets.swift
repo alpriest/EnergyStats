@@ -83,7 +83,7 @@ struct CornerBatteryStatusWidget: Widget {
 }
 
 struct RectangularBatteryStatusWidget: Widget {
-    let kind: String = "BatteryCornerWidget"
+    let kind: String = "BatteryRectangularWidget"
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider(config: HomeEnergyStateManagerConfigManager())) { entry in
@@ -121,7 +121,7 @@ struct RectangularBatteryStatusWidget: Widget {
 }
 
 struct BatteryStatusWidget: Widget {
-    let kind: String = "BatteryCornerWidget"
+    let kind: String = "BatteryStatusWidget"
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider(config: HomeEnergyStateManagerConfigManager())) { entry in

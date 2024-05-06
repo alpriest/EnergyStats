@@ -32,27 +32,3 @@ struct Energy_Stats_Watch_App: App {
         }
     }
 }
-
-class EnergyStatsWatchAppDelegate: NSObject, WKApplicationDelegate {
-    func applicationDidBecomeActive() {
-        if WCSession.isSupported() {
-            let session = WCSession.default
-            session.delegate = Energy_Stats_Watch_App.delegate
-            session.activate()
-        }
-    }
-}
-
-class WatchSessionDelegate: NSObject, WCSessionDelegate {
-    var config: WatchConfigManaging?
-
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: (any Error)?) {}
-
-    func session(_ session: WCSession, didReceiveUserInfo userInfo: [String: Any] = [:]) {
-        print("AWP", "Received data")
-        if let batteryCapacity = userInfo["batteryCapacity"] as? String {
-            print("AWP", "Setting battery capacity", batteryCapacity)
-            config?.batteryCapacity = batteryCapacity
-        }
-    }
-}

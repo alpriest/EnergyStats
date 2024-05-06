@@ -10,33 +10,6 @@ import Energy_Stats_Core
 import SwiftUI
 import WatchConnectivity
 
-class WatchSessionDelegate: NSObject, WCSessionDelegate {
-    var config: ConfigManaging?
-
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: (any Error)?) {
-        switch activationState {
-        case .notActivated:
-            print("AWP", "activationDidCompleteWith", "notActivated")
-        case .inactive:
-            print("AWP", "activationDidCompleteWith", "inactive")
-        case .activated:
-            print("AWP", "activationDidCompleteWith", "active")
-            if let config {
-                print("AWP", "sent battery capacity", config.batteryCapacity)
-                session.transferUserInfo(["batteryCapacity": config.batteryCapacity])
-            }
-        }
-    }
-
-    func sessionDidBecomeInactive(_ session: WCSession) {
-        print("AWP", "sessionDidBecomeInactive")
-    }
-
-    func sessionDidDeactivate(_ session: WCSession) {
-        print("AWP", "sessionDidDeactivate")
-    }
-}
-
 @main
 struct Energy_StatsApp: App {
     static let delegate = WatchSessionDelegate()

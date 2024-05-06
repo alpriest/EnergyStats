@@ -27,6 +27,12 @@ class WatchConfigManager: WatchConfigManaging {
     var shouldCombineCT2WithPVPower: Bool
 
     var powerFlowStrings: PowerFlowStringsSettings = .none
+
+    @UserDefaultsStoredDouble(key: "minSOC")
+    var minSOC: Double
+
+    @UserDefaultsStoredBool(key: "showUsableBatteryOnly", defaultValue: false)
+    var showUsableBatteryOnly: Bool
 }
 
 class PreviewWatchConfig: WatchConfigManaging {
@@ -37,4 +43,6 @@ class PreviewWatchConfig: WatchConfigManaging {
     var shouldInvertCT2: Bool = false
     var shouldCombineCT2WithPVPower: Bool = false
     var powerFlowStrings: PowerFlowStringsSettings = .none
+    var minSOC: Double = 0.0
+    var showUsableBatteryOnly: Bool = false
 }

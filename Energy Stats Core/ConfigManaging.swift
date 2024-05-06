@@ -61,6 +61,8 @@ public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging, 
 public protocol BatteryConfigManaging {
     var batteryCapacity: String { get set }
     var batteryCapacityW: Int { get }
+    var minSOC: Double { get }
+    var showUsableBatteryOnly: Bool { get set }
 
     func clearBatteryOverride(for deviceID: String)
 }

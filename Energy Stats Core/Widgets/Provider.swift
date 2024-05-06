@@ -61,17 +61,6 @@ public struct Provider: TimelineProvider {
         var errorMessage: String? = nil
 
         do {
-//            let config = UserDefaultsConfig()
-//            let keychainStore = KeychainStore()
-//            let appSettingsPublisher = AppSettingsPublisherFactory.make(from: config)
-//            let network = NetworkService.standard(keychainStore: keychainStore,
-//                                                  isDemoUser: {
-//                                                      false
-//                                                  },
-//                                                  dataCeiling: { .none })
-//
-//            let configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
-
             try await HomeEnergyStateManager.shared.update(config: config)
         } catch _ as ConfigManager.NoBattery {
             return .failed(error: "Your selected inverter has no battery connected")

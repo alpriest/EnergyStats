@@ -68,6 +68,9 @@
 		4128874A2BE7CCC0007E9532 /* HomeEnergyStateManagerConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412887482BE7CBCC007E9532 /* HomeEnergyStateManagerConfigManager.swift */; };
 		4128874C2BE7CE9B007E9532 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418547382A3A1623000128C7 /* Provider.swift */; };
 		4128874E2BE7CFD5007E9532 /* HomeEnergyStateManagerConfigAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4128874D2BE7CFD5007E9532 /* HomeEnergyStateManagerConfigAdapter.swift */; };
+		412887512BE7D603007E9532 /* EnergyStatsWatchAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412887502BE7D603007E9532 /* EnergyStatsWatchAppDelegate.swift */; };
+		412887532BE7D617007E9532 /* WatchSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412887522BE7D617007E9532 /* WatchSessionDelegate.swift */; };
+		412887562BE8B861007E9532 /* WatchSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412887552BE8B861007E9532 /* WatchSessionDelegate.swift */; };
 		4128E4C128DA5F6600C1D698 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4128E4C028DA5F6600C1D698 /* Date.swift */; };
 		412A266D2AC03B2300F61456 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 418547162A3A1530000128C7 /* WidgetKit.framework */; };
 		412A266E2AC03B2300F61456 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 418547182A3A1530000128C7 /* SwiftUI.framework */; };
@@ -494,6 +497,9 @@
 		412887462BE7BCAD007E9532 /* WatchConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConfigManager.swift; sourceTree = "<group>"; };
 		412887482BE7CBCC007E9532 /* HomeEnergyStateManagerConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEnergyStateManagerConfigManager.swift; sourceTree = "<group>"; };
 		4128874D2BE7CFD5007E9532 /* HomeEnergyStateManagerConfigAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEnergyStateManagerConfigAdapter.swift; sourceTree = "<group>"; };
+		412887502BE7D603007E9532 /* EnergyStatsWatchAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnergyStatsWatchAppDelegate.swift; sourceTree = "<group>"; };
+		412887522BE7D617007E9532 /* WatchSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionDelegate.swift; sourceTree = "<group>"; };
+		412887552BE8B861007E9532 /* WatchSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionDelegate.swift; sourceTree = "<group>"; };
 		4128E4C028DA5F6600C1D698 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		412A266C2AC03B2200F61456 /* Energy Stats Phone WidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Energy Stats Phone WidgetsExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		412A26702AC03B2300F61456 /* Energy_Stats_WidgetsBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Energy_Stats_WidgetsBundle.swift; sourceTree = "<group>"; };
@@ -942,6 +948,23 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		4128874F2BE7D5F7007E9532 /* App Communication */ = {
+			isa = PBXGroup;
+			children = (
+				412887502BE7D603007E9532 /* EnergyStatsWatchAppDelegate.swift */,
+				412887522BE7D617007E9532 /* WatchSessionDelegate.swift */,
+			);
+			path = "App Communication";
+			sourceTree = "<group>";
+		};
+		412887542BE8B852007E9532 /* Watch Communication */ = {
+			isa = PBXGroup;
+			children = (
+				412887552BE8B861007E9532 /* WatchSessionDelegate.swift */,
+			);
+			path = "Watch Communication";
+			sourceTree = "<group>";
+		};
 		412A266F2AC03B2300F61456 /* Energy Stats Phone Widgets */ = {
 			isa = PBXGroup;
 			children = (
@@ -1027,6 +1050,7 @@
 		4140144C28C70B3200EA5BA1 /* Energy Stats */ = {
 			isa = PBXGroup;
 			children = (
+				412887542BE8B852007E9532 /* Watch Communication */,
 				4185474B2A3A59E4000128C7 /* Energy Stats.entitlements */,
 				418EB4882ACC10220021B87A /* Localizable.xcstrings */,
 				4140145128C70B3200EA5BA1 /* Assets.xcassets */,
@@ -1436,6 +1460,7 @@
 		41F631762BDCD32D00A571C5 /* Energy Stats Watch App */ = {
 			isa = PBXGroup;
 			children = (
+				4128874F2BE7D5F7007E9532 /* App Communication */,
 				41355C9D2BE25812001DED7C /* Energy-Stats-Watch-App-Info.plist */,
 				41F631862BDCD3E800A571C5 /* Energy Stats Watch App.entitlements */,
 				41F631772BDCD32D00A571C5 /* Energy_Stats_Watch_AppApp.swift */,
@@ -1854,6 +1879,7 @@
 				419092212B1DBF2B0017CB65 /* ScheduleSummaryView.swift in Sources */,
 				417185482A0051CA00D18CDD /* ParameterGraphVariableChooserView.swift in Sources */,
 				41C1243E2B738B1400B575F2 /* HowToObtainAPIKeyView.swift in Sources */,
+				412887562BE8B861007E9532 /* WatchSessionDelegate.swift in Sources */,
 				41C6AF662A360CF600C88F2B /* CSVTextFile.swift in Sources */,
 				41C849692A8BBC3800431410 /* Intents.swift in Sources */,
 				41ACB2C62A51ADEB005831B0 /* ValueBoundsView.swift in Sources */,
@@ -2079,6 +2105,8 @@
 				41F6317A2BDCD32D00A571C5 /* ContentView.swift in Sources */,
 				41B5F1D42BE4BD76009208FA /* HomePowerView.swift in Sources */,
 				412887472BE7BCAD007E9532 /* WatchConfigManager.swift in Sources */,
+				412887512BE7D603007E9532 /* EnergyStatsWatchAppDelegate.swift in Sources */,
+				412887532BE7D617007E9532 /* WatchSessionDelegate.swift in Sources */,
 				41A715952BE0CE3400560628 /* LoadStateView.swift in Sources */,
 				41B5F1D62BE4BDC3009208FA /* GridPowerView.swift in Sources */,
 				41F631782BDCD32D00A571C5 /* Energy_Stats_Watch_AppApp.swift in Sources */,
@@ -2308,7 +2336,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 2.23;
+				MARKETING_VERSION = 2.24;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2366,7 +2394,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 2.23;
+				MARKETING_VERSION = 2.24;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -2701,7 +2729,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.23;
+				MARKETING_VERSION = 2.24;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats.watchkitapp;
 				PRODUCT_NAME = "Energy Stats";
 				SDKROOT = watchos;
@@ -2736,7 +2764,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.23;
+				MARKETING_VERSION = 2.24;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats.watchkitapp;
 				PRODUCT_NAME = "Energy Stats";
 				SDKROOT = watchos;

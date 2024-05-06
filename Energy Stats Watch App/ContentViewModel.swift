@@ -7,6 +7,7 @@
 
 import Energy_Stats_Core
 import SwiftUI
+import WidgetKit
 
 struct ContentData {
     let batterySOC: Double?
@@ -74,11 +75,12 @@ class ContentViewModel {
                                                      response: reals,
                                                      config: config)
 
-            let batteryViewModel = makeBatteryViewModel(device, reals)
+            let batteryViewModel = reals.makeBatteryViewModel()
+            let batterySOC = reals.datas.SoC() / 100.0
 
             withAnimation {
                 self.state = ContentData(
-                    batterySOC: reals.datas.SoC() / 100.0,
+                    batterySOC: batterySOC,
                     solar: calculator.currentSolarPower,
                     house: calculator.currentHomeConsumption,
                     grid: calculator.currentGrid,
@@ -86,12 +88,20 @@ class ContentViewModel {
                     lastUpdated: Date.now
                 )
             }
+
+            try? await HomeEnergyStateManager.shared.update(
+                openQueryResponse: reals,
+                batteryCapacityW: config.batteryCapacityW,
+                minSOC: config.minSOC,
+                showUsableBatteryOnly: config.showUsableBatteryOnly
+            )
+            WidgetCenter.shared.reloadAllTimelines()
         } catch {
             loadState = .error(error, "Could not load")
         }
     }
 
-    private func makeBatteryViewModel(_ currentDevice: Device, _ real: OpenQueryResponse) -> BatteryViewModel {
+    private func makeBatteryViewModel(_ real: OpenQueryResponse) -> BatteryViewModel {
         let chargePower = real.datas.currentDouble(for: "batChargePower")
         let dischargePower = real.datas.currentDouble(for: "batDischargePower")
         let power = chargePower > 0 ? chargePower : -dischargePower
