@@ -44,8 +44,10 @@ struct ApproximationsCalculator {
         )
 
         return ApproximationsViewModel(
+            netSelfSufficiencyEstimateValue: netResult,
             netSelfSufficiencyEstimate: asPercent(netResult),
             netSelfSufficiencyEstimateCalculationBreakdown: netResultCalculationBreakdown,
+            absoluteSelfSufficiencyEstimateValue: absoluteResult,
             absoluteSelfSufficiencyEstimate: asPercent(absoluteResult),
             absoluteSelfSufficiencyEstimateCalculationBreakdown: absoluteResultCalculationBreakdown,
             financialModel: financialModel,

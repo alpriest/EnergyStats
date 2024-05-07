@@ -11,8 +11,10 @@ import Foundation
 import SwiftUI
 
 struct ApproximationsViewModel {
+    let netSelfSufficiencyEstimateValue: Double?
     let netSelfSufficiencyEstimate: String?
     let netSelfSufficiencyEstimateCalculationBreakdown: CalculationBreakdown
+    let absoluteSelfSufficiencyEstimateValue: Double?
     let absoluteSelfSufficiencyEstimate: String?
     let absoluteSelfSufficiencyEstimateCalculationBreakdown: CalculationBreakdown
     let financialModel: EnergyStatsFinancialModel?
@@ -51,6 +53,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState {
     var exportFile: CSVTextFile?
     private var currentDeviceCancellable: AnyCancellable?
     private let fetcher: StatsDataFetcher
+    @Published var selfSufficiencyAtDateTime: [SelfSufficiencyGraphVariable] = []
 
     init(networking: Networking, configManager: ConfigManaging) {
         self.networking = networking
@@ -160,6 +163,37 @@ class StatsTabViewModel: ObservableObject, HasLoadState {
                                                                                    loads: loads,
                                                                                    batteryCharge: batteryCharge ?? 0,
                                                                                    batteryDischarge: batteryDischarge ?? 0)
+
+        selfSufficiencyAtDateTime = calculateSelfSufficiencyAcrossTimePeriod()
+    }
+
+    func calculateSelfSufficiencyAcrossTimePeriod() -> [SelfSufficiencyGraphVariable] {
+        let dates = Set(rawData.map { $0.date })
+        var selfSufficiencyAtDateTime: [Date: Double] = [:]
+
+        for date in dates {
+            let valuesAtTime = ValuesAtTime(values: rawData.filter { $0.date == date })
+
+            if let grid = valuesAtTime.values.first(where: { $0.type == .gridConsumption })?.value,
+               let feedIn = valuesAtTime.values.first(where: { $0.type == .feedIn })?.value,
+               let loads = valuesAtTime.values.first(where: { $0.type == .loads })?.value,
+               let batteryCharge = valuesAtTime.values.first(where: { $0.type == .chargeEnergyToTal })?.value,
+               let batteryDischarge = valuesAtTime.values.first(where: { $0.type == .dischargeEnergyToTal })?.value,
+                let selfSufficiency = approximationsCalculator.calculateApproximations(
+                    grid: grid,
+                    feedIn: feedIn,
+                    loads: loads,
+                    batteryCharge: batteryCharge,
+                    batteryDischarge: batteryDischarge
+                ).netSelfSufficiencyEstimateValue {
+                selfSufficiencyAtDateTime[date] = selfSufficiency
+            }
+        }
+
+        return selfSufficiencyAtDateTime.map {
+            SelfSufficiencyGraphVariable(date: $0.key, value: $0.value)
+        }
+        .sorted(by: { $1.date > $0.date })
     }
 
     func refresh() {

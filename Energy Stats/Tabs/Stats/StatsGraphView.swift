@@ -53,72 +53,91 @@ struct StatsGraphView: View {
     @Binding var valuesAtTime: ValuesAtTime<StatsGraphValue>?
 
     var body: some View {
-        Chart(viewModel.data, id: \.type.title) {
-            BarMark(
-                x: .value("hour", $0.date, unit: viewModel.unit),
-                y: .value("Amount", $0.value)
-            )
-            .position(by: .value("parameter", $0.type.networkTitle))
-            .foregroundStyle($0.type.colour)
-        }
-        .chartPlotStyle { content in
-            content.background(Color.gray.gradient.opacity(0.04))
-        }
-        .chartXAxis {
-            AxisMarks(values: .stride(by: viewModel.unit, count: viewModel.stride)) { value in
-                if let date = value.as(Date.self) {
-                    AxisTick(centered: true)
-                    AxisValueLabel(centered: false) {
-                        switch viewModel.unit {
-                        case .month:
-                            Text(date, format: .dateTime.month())
-                        case .day:
-                            Text(date, format: .dateTime.day())
-                        case .hour:
-                            Text(date, format: .dateTime.hour())
-                        default:
-                            EmptyView()
+        ZStack {
+            Chart(viewModel.selfSufficiencyAtDateTime) {
+                LineMark(
+                    x: .value("hour", $0.date, unit: viewModel.unit),
+                    y: .value("Amount", $0.value)
+                )
+                .lineStyle(StrokeStyle(lineWidth: 2, dash: [5, 10]))
+                .foregroundStyle(Color.black)
+            }
+            .chartYAxis(.hidden)
+            .chartXAxis {
+                AxisMarks(position: .bottom, values: .automatic) { value in
+                    AxisValueLabel {
+                        Text("")
+                    }
+                }
+            }
+
+            Chart(viewModel.data, id: \.type.title) {
+                BarMark(
+                    x: .value("hour", $0.date, unit: viewModel.unit),
+                    y: .value("Amount", $0.value)
+                )
+                .position(by: .value("parameter", $0.type.networkTitle))
+                .foregroundStyle($0.type.colour)
+            }
+            .chartPlotStyle { content in
+                content.background(Color.gray.gradient.opacity(0.04))
+            }
+            .chartXAxis {
+                AxisMarks(values: .stride(by: viewModel.unit, count: viewModel.stride)) { value in
+                    if let date = value.as(Date.self) {
+                        AxisTick(centered: true)
+                        AxisValueLabel(centered: false) {
+                            switch viewModel.unit {
+                            case .month:
+                                Text(date, format: .dateTime.month())
+                            case .day:
+                                Text(date, format: .dateTime.day())
+                            case .hour:
+                                Text(date, format: .dateTime.hour())
+                            default:
+                                EmptyView()
+                            }
                         }
                     }
                 }
             }
-        }
-        .chartOverlay { chartProxy in
-            GeometryReader { geometryProxy in
-                Rectangle().fill(.clear).contentShape(Rectangle())
-                    .gesture(DragGesture()
-                        .updating($isDetectingPress) { currentState, _, _ in
-                            let xLocation = currentState.location.x - geometryProxy[chartProxy.plotAreaFrame].origin.x
+            .chartOverlay { chartProxy in
+                GeometryReader { geometryProxy in
+                    Rectangle().fill(.clear).contentShape(Rectangle())
+                        .gesture(DragGesture()
+                            .updating($isDetectingPress) { currentState, _, _ in
+                                let xLocation = currentState.location.x - geometryProxy[chartProxy.plotAreaFrame].origin.x
 
-                            if let plotElement = chartProxy.value(atX: xLocation, as: Date.self) {
-                                if let graphValue = viewModel.data.reversed().first(where: { plotElement > $0.date }),
-                                   selectedDate != graphValue.date
-                                {
-                                    Task { @MainActor in
-                                        selectedDate = graphValue.date
-                                        valuesAtTime = viewModel.data(at: graphValue.date)
+                                if let plotElement = chartProxy.value(atX: xLocation, as: Date.self) {
+                                    if let graphValue = viewModel.data.reversed().first(where: { plotElement > $0.date }),
+                                       selectedDate != graphValue.date
+                                    {
+                                        Task { @MainActor in
+                                            selectedDate = graphValue.date
+                                            valuesAtTime = viewModel.data(at: graphValue.date)
+                                        }
                                     }
                                 }
                             }
-                        }
-                    )
-                    .gesture(SpatialTapGesture()
-                        .onEnded { value in
-                            let xLocation = value.location.x - geometryProxy[chartProxy.plotAreaFrame].origin.x
+                        )
+                        .gesture(SpatialTapGesture()
+                            .onEnded { value in
+                                let xLocation = value.location.x - geometryProxy[chartProxy.plotAreaFrame].origin.x
 
-                            if let plotElement = chartProxy.value(atX: xLocation, as: Date.self),
-                               let graphValue = viewModel.data.reversed().first(where: { plotElement > $0.date })
-                            {
-                                Task { @MainActor in
-                                    selectedDate = graphValue.date
-                                    valuesAtTime = viewModel.data(at: selectedDate)
+                                if let plotElement = chartProxy.value(atX: xLocation, as: Date.self),
+                                   let graphValue = viewModel.data.reversed().first(where: { plotElement > $0.date })
+                                {
+                                    Task { @MainActor in
+                                        selectedDate = graphValue.date
+                                        valuesAtTime = viewModel.data(at: selectedDate)
+                                    }
                                 }
                             }
-                        }
-                    )
+                        )
+                }
             }
+            .chartOverlay { makeHighlightBar(chartProxy: $0) }
         }
-        .chartOverlay { makeHighlightBar(chartProxy: $0) }
     }
 
     private func makeHighlightBar(chartProxy: ChartProxy) -> some View {

@@ -92,13 +92,15 @@ struct RectangularBatteryStatusWidget: Widget {
                     HStack {
                         BatteryGaugeView(value: soc, batteryPower: entry.batteryPower)
 
-                        if let power = entry.chargeStatusDescription {
-                            Text(power)
-//                            HStack(alignment: .center) {
-//                                Text("\(Image(systemName: power > 0 ? "square.and.arrow.down" : "square.and.arrow.up")) \(power.kW(2))")
-//                                    .foregroundStyle(power.tintColor)
-//                                    .font(.footnote)
-//                            }
+                        VStack(alignment: .leading) {
+                            if let power = entry.chargeStatusDescription {
+                                Text(power)
+                                //                            HStack(alignment: .center) {
+                                //                                Text("\(Image(systemName: power > 0 ? "square.and.arrow.down" : "square.and.arrow.up")) \(power.kW(2))")
+                                //                                    .foregroundStyle(power.tintColor)
+                                //                                    .font(.footnote)
+                                //                            }
+                            }
                         }
                     }
                 } else {
@@ -116,7 +118,7 @@ struct RectangularBatteryStatusWidget: Widget {
         }
         .configurationDisplayName("Battery Status")
         .description("Shows the status of your home battery")
-        .supportedFamilies([.accessoryRectangular, .accessoryInline])
+        .supportedFamilies([.accessoryRectangular])
     }
 }
 

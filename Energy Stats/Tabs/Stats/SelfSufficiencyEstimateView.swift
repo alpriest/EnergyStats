@@ -65,8 +65,10 @@ struct SelfSufficiencyEstimateView: View {
 extension ApproximationsViewModel {
     static func any() -> ApproximationsViewModel {
         ApproximationsViewModel(
+            netSelfSufficiencyEstimateValue: 0.95,
             netSelfSufficiencyEstimate: "95%",
             netSelfSufficiencyEstimateCalculationBreakdown: CalculationBreakdown(formula: "x * b", calculation: { _ in "1 * 5" }),
+            absoluteSelfSufficiencyEstimateValue: 1.0,
             absoluteSelfSufficiencyEstimate: "100%",
             absoluteSelfSufficiencyEstimateCalculationBreakdown: CalculationBreakdown(formula: "x * b / c", calculation: { _ in "1 * 5 / 8.9" }),
             financialModel: nil,
@@ -80,4 +82,10 @@ extension TotalsViewModel {
     static func any() -> TotalsViewModel {
         TotalsViewModel(grid: 1.0, feedIn: 2.0, loads: 5.0, batteryCharge: 2.3, batteryDischarge: 1.2)
     }
+}
+
+struct SelfSufficiencyGraphVariable: Identifiable, Equatable, Hashable {
+    let date: Date
+    let value: Double
+    var id: String { date.iso8601() }
 }
