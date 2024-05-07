@@ -72,7 +72,7 @@ struct StatsGraphView: View {
                             y: .value("Amount", $0.value)
                         )
                         .lineStyle(StrokeStyle(lineWidth: 2, dash: [2, 4]))
-                        .foregroundStyle(Color.black)
+                        .foregroundStyle(Color("background_inverted"))
                     }
                 }
             }
