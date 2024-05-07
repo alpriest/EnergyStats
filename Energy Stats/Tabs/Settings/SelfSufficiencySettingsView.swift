@@ -15,11 +15,18 @@ class SelfSufficiencySettingsViewModel: ObservableObject {
         }
     }
 
+    @Published var showSelfSufficiencyStatsGraphOverlay: Bool {
+        didSet {
+            configManager.showSelfSufficiencyStatsGraphOverlay = showSelfSufficiencyStatsGraphOverlay
+        }
+    }
+
     private(set) var configManager: ConfigManaging
 
     init(configManager: ConfigManaging) {
         self.configManager = configManager
         selfSufficiencyEstimateMode = configManager.selfSufficiencyEstimateMode
+        showSelfSufficiencyStatsGraphOverlay = configManager.showSelfSufficiencyStatsGraphOverlay
     }
 }
 

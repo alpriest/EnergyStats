@@ -49,7 +49,8 @@ public enum AppSettingsPublisherFactory {
                     currencySymbol: config.currencySymbol,
                     showInverterTypeName: config.showInverterTypeName,
                     powerFlowStrings: config.powerFlowStrings,
-                    showBatteryPercentageRemaining: config.showBatteryPercentageRemaining
+                    showBatteryPercentageRemaining: config.showBatteryPercentageRemaining,
+                    showSelfSufficiencyStatsGraphOverlay: config.showSelfSufficiencyStatsGraphOverlay
                 )
             )
 

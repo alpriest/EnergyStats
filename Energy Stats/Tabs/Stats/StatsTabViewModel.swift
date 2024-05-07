@@ -54,7 +54,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState {
     private var currentDeviceCancellable: AnyCancellable?
     private let fetcher: StatsDataFetcher
     @Published var selfSufficiencyAtDateTime: [SelfSufficiencyGraphVariable] = []
-    @Published var scale: ClosedRange<Date> = ClosedRange(uncheckedBounds: (lower: Date.now, upper: Date.now))
+    @Published var yScale: ClosedRange<Double> = ClosedRange(uncheckedBounds: (lower: 0, upper: 0))
 
     init(networking: Networking, configManager: ConfigManaging) {
         self.networking = networking
@@ -171,6 +171,8 @@ class StatsTabViewModel: ObservableObject, HasLoadState {
     func calculateSelfSufficiencyAcrossTimePeriod() -> [SelfSufficiencyGraphVariable] {
         let dates = Set(rawData.map { $0.date })
         var selfSufficiencyAtDateTime: [Date: Double] = [:]
+        let actualMax = rawData.max(by: { $0.value < $1.value })?.value ?? 0
+        let scaleMax = (actualMax + Swift.max(actualMax * 0.1, 0.5)).roundUpToNearestHalf()
 
         for date in dates {
             let valuesAtTime = ValuesAtTime(values: rawData.filter { $0.date == date })
@@ -179,23 +181,38 @@ class StatsTabViewModel: ObservableObject, HasLoadState {
                let feedIn = valuesAtTime.values.first(where: { $0.type == .feedIn })?.value,
                let loads = valuesAtTime.values.first(where: { $0.type == .loads })?.value,
                let batteryCharge = valuesAtTime.values.first(where: { $0.type == .chargeEnergyToTal })?.value,
-               let batteryDischarge = valuesAtTime.values.first(where: { $0.type == .dischargeEnergyToTal })?.value,
-                let selfSufficiency = approximationsCalculator.calculateApproximations(
+               let batteryDischarge = valuesAtTime.values.first(where: { $0.type == .dischargeEnergyToTal })?.value
+            {
+                let approximations = approximationsCalculator.calculateApproximations(
                     grid: grid,
                     feedIn: feedIn,
                     loads: loads,
                     batteryCharge: batteryCharge,
                     batteryDischarge: batteryDischarge
-                ).netSelfSufficiencyEstimateValue {
-                selfSufficiencyAtDateTime[date] = selfSufficiency
+                )
+
+                switch configManager.selfSufficiencyEstimateMode {
+                case .absolute:
+                    if let value = approximations.absoluteSelfSufficiencyEstimateValue {
+                        selfSufficiencyAtDateTime[date] = value
+                    }
+                case .net:
+                    if let value = approximations.netSelfSufficiencyEstimateValue {
+                        selfSufficiencyAtDateTime[date] = value
+                    }
+                default:
+                    ()
+                }
             }
         }
 
+        yScale = ClosedRange(uncheckedBounds: (lower: 0, upper: scaleMax))
+
         return selfSufficiencyAtDateTime.map {
-            SelfSufficiencyGraphVariable(date: $0.key, value: $0.value)
+            SelfSufficiencyGraphVariable(date: $0.key, value: scaleMax * $0.value) // Normalise amount to be on the same scale as the stats
         }
-        .filter { $0.date <= Date.now }
         .sorted(by: { $1.date > $0.date })
+        .filter { $0.date <= Date.now }
     }
 
     func refresh() {
@@ -210,10 +227,6 @@ class StatsTabViewModel: ObservableObject, HasLoadState {
         max = refreshedData.max(by: { lhs, rhs in
             lhs.value < rhs.value
         })
-        if let min = refreshedData.min(by: { $0.date < $1.date }),
-           let max = refreshedData.max(by: { $0.date < $1.date }) {
-            scale = ClosedRange(uncheckedBounds: (min.date, max.date))
-        }
         data = refreshedData
     }
 

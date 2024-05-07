@@ -46,6 +46,7 @@ public struct AppSettings {
     public var showInverterTypeName: Bool
     public var powerFlowStrings: PowerFlowStringsSettings
     public var showBatteryPercentageRemaining: Bool
+    public var showSelfSufficiencyStatsGraphOverlay: Bool
 
     public init(
         showColouredLines: Bool,
@@ -78,7 +79,8 @@ public struct AppSettings {
         currencySymbol: String,
         showInverterTypeName: Bool,
         powerFlowStrings: PowerFlowStringsSettings,
-        showBatteryPercentageRemaining: Bool
+        showBatteryPercentageRemaining: Bool,
+        showSelfSufficiencyStatsGraphOverlay: Bool
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -111,6 +113,7 @@ public struct AppSettings {
         self.showInverterTypeName = showInverterTypeName
         self.powerFlowStrings = powerFlowStrings
         self.showBatteryPercentageRemaining = showBatteryPercentageRemaining
+        self.showSelfSufficiencyStatsGraphOverlay = showSelfSufficiencyStatsGraphOverlay
     }
 
     public func copy(
@@ -144,7 +147,8 @@ public struct AppSettings {
         currencySymbol: String? = nil,
         showInverterTypeName: Bool? = nil,
         powerFlowStrings: PowerFlowStringsSettings? = nil,
-        showBatteryPercentageRemaining: Bool? = nil
+        showBatteryPercentageRemaining: Bool? = nil,
+        showSelfSufficiencyStatsGraphOverlay: Bool? = nil
     ) -> AppSettings {
         AppSettings(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -177,7 +181,8 @@ public struct AppSettings {
             currencySymbol: currencySymbol ?? self.currencySymbol,
             showInverterTypeName: showInverterTypeName ?? self.showInverterTypeName,
             powerFlowStrings: powerFlowStrings ?? self.powerFlowStrings,
-            showBatteryPercentageRemaining: showBatteryPercentageRemaining ?? self.showBatteryPercentageRemaining
+            showBatteryPercentageRemaining: showBatteryPercentageRemaining ?? self.showBatteryPercentageRemaining,
+            showSelfSufficiencyStatsGraphOverlay: showSelfSufficiencyStatsGraphOverlay ?? self.showSelfSufficiencyStatsGraphOverlay
         )
     }
 }

@@ -45,7 +45,8 @@ public extension AppSettings {
             currencySymbol: "£",
             showInverterTypeName: false,
             powerFlowStrings: .none,
-            showBatteryPercentageRemaining: true
+            showBatteryPercentageRemaining: true,
+            showSelfSufficiencyStatsGraphOverlay: true
         )
     }
 }

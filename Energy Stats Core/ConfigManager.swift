@@ -511,6 +511,16 @@ public class ConfigManager: ConfigManaging {
     }
 
     public var powerStationDetail: PowerStationDetail? { config.powerStationDetail }
+
+    public var showSelfSufficiencyStatsGraphOverlay: Bool {
+        get { config.showSelfSufficiencyStatsGraphOverlay }
+        set {
+            config.showBatteryPercentageRemaining = newValue
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+                showSelfSufficiencyStatsGraphOverlay: config.showSelfSufficiencyStatsGraphOverlay
+            ))
+        }
+    }
 }
 
 public enum BatteryResponseMapper {

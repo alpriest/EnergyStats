@@ -310,6 +310,7 @@ public class MockConfig: Config {
     public var powerFlowStrings: PowerFlowStringsSettings = .none
     public var showBatteryPercentageRemaining: Bool = true
     public var powerStationDetail: PowerStationDetail? = nil
+    public var showSelfSufficiencyStatsGraphOverlay: Bool = true
 }
 
 public class PreviewConfigManager: ConfigManager {

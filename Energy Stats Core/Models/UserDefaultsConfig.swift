@@ -54,6 +54,7 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "showInverterTypeName")
         UserDefaults.shared.removeObject(forKey: "powerFlowStringsSettings")
         UserDefaults.shared.removeObject(forKey: "showBatteryPercentageRemaining")
+        UserDefaults.shared.removeObject(forKey: "showSelfSufficiencyStatsGraphOverlay")
         UserDefaults.shared.synchronize()
     }
 
@@ -229,4 +230,7 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredCodable(key: "powerStationDetail", defaultValue: nil)
     public var powerStationDetail: PowerStationDetail?
+
+    @UserDefaultsStoredBool(key: "showSelfSufficiencyStatsGraphOverlay", defaultValue: true)
+    public var showSelfSufficiencyStatsGraphOverlay: Bool
 }

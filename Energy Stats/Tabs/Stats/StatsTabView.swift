@@ -82,7 +82,12 @@ struct StatsTabView: View {
                                     }.padding(.vertical)
                                 }.frame(maxWidth: .infinity)
 
-                                StatsGraphView(viewModel: viewModel, selectedDate: $viewModel.selectedDate, valuesAtTime: $viewModel.valuesAtTime)
+                                StatsGraphView(
+                                    viewModel: viewModel,
+                                    selectedDate: $viewModel.selectedDate,
+                                    valuesAtTime: $viewModel.valuesAtTime,
+                                    appSettings: appSettings
+                                )
                                     .frame(height: 250)
                                     .padding(.vertical)
                             }

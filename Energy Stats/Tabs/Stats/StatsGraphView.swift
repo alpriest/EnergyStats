@@ -51,37 +51,43 @@ struct StatsGraphView: View {
     @Binding var selectedDate: Date?
     @State private var nextDate: Date?
     @Binding var valuesAtTime: ValuesAtTime<StatsGraphValue>?
+    let appSettings: AppSettings
 
     var body: some View {
         ZStack {
-            Chart(viewModel.selfSufficiencyAtDateTime) {
-                LineMark(
-                    x: .value("hour", $0.date, unit: viewModel.unit),
-                    y: .value("Amount", $0.value)
-                )
-                .lineStyle(StrokeStyle(lineWidth: 1, dash: [2,4]))
-                .foregroundStyle(Color.pink)
-            }
-            .chartYAxis(.hidden)
-            .chartXAxis {
-                AxisMarks(position: .bottom, values: .automatic) { _ in
-                    AxisValueLabel {
-                        Text("")
+            Chart {
+                ForEach(viewModel.data, id: \.type.title) {
+                    BarMark(
+                        x: .value("hour", $0.date, unit: viewModel.unit),
+                        y: .value("Amount", $0.value)
+                    )
+                    .position(by: .value("parameter", $0.type.networkTitle))
+                    .foregroundStyle($0.type.colour)
+                }
+
+                if appSettings.showSelfSufficiencyStatsGraphOverlay {
+                    ForEach(viewModel.selfSufficiencyAtDateTime) {
+                        LineMark(
+                            x: .value("hour", $0.date, unit: viewModel.unit),
+                            y: .value("Amount", $0.value)
+                        )
+                        .lineStyle(StrokeStyle(lineWidth: 2, dash: [2, 4]))
+                        .foregroundStyle(Color.black)
                     }
                 }
             }
-            .chartXScale(domain: viewModel.scale)
-
-            Chart(viewModel.data, id: \.type.title) {
-                BarMark(
-                    x: .value("hour", $0.date, unit: viewModel.unit),
-                    y: .value("Amount", $0.value)
-                )
-                .position(by: .value("parameter", $0.type.networkTitle))
-                .foregroundStyle($0.type.colour)
-            }
+            .chartYScale(domain: viewModel.yScale)
             .chartPlotStyle { content in
                 content.background(Color.gray.gradient.opacity(0.04))
+            }
+            .chartYAxis {
+                AxisMarks(position: .trailing, values: .automatic) { value in
+                    if let value = value.as(Int.self) {
+                        AxisValueLabel {
+                            Text(value, format: .number)
+                        }
+                    }
+                }
             }
             .chartXAxis {
                 AxisMarks(values: .stride(by: viewModel.unit, count: viewModel.stride)) { value in
@@ -171,7 +177,8 @@ struct StatsGraphView: View {
         StatsGraphView(
             viewModel: viewModel,
             selectedDate: .constant(nil),
-            valuesAtTime: .constant(nil)
+            valuesAtTime: .constant(nil),
+            appSettings: AppSettings.mock()
         ).onAppear { Task { await viewModel.load() } }
     }
 }

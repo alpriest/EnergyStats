@@ -105,6 +105,10 @@ public extension Double {
         return formatter.string(from: NSNumber(value: self))!
     }
 
+    func roundUpToNearestHalf() -> Double {
+        ceil(self * 2) / 2
+    }
+
     var tintColor: Color { Int(self).tintColor }
 }
 

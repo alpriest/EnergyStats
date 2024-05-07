@@ -50,6 +50,7 @@ public protocol Config {
     var powerFlowStrings: PowerFlowStringsSettings { get set }
     var showBatteryPercentageRemaining: Bool { get set }
     var powerStationDetail: PowerStationDetail? { get set }
+    var showSelfSufficiencyStatsGraphOverlay: Bool { get set }
 }
 
 public func DefaultParameterGroups() -> [ParameterGroup] {
