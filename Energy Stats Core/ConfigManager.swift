@@ -515,7 +515,7 @@ public class ConfigManager: ConfigManaging {
     public var showSelfSufficiencyStatsGraphOverlay: Bool {
         get { config.showSelfSufficiencyStatsGraphOverlay }
         set {
-            config.showBatteryPercentageRemaining = newValue
+            config.showSelfSufficiencyStatsGraphOverlay = newValue
             appSettingsPublisher.send(appSettingsPublisher.value.copy(
                 showSelfSufficiencyStatsGraphOverlay: config.showSelfSufficiencyStatsGraphOverlay
             ))

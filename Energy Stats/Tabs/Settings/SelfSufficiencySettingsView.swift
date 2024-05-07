@@ -59,6 +59,14 @@ struct SelfSufficiencySettingsView: View {
             }.onChange(of: internalMode) { newValue in
                 viewModel.selfSufficiencyEstimateMode = SelfSufficiencyEstimateMode(rawValue: newValue) ?? .off
             }
+
+            if internalMode != SelfSufficiencyEstimateMode.off.rawValue {
+                Section {
+                    Toggle(isOn: $viewModel.showSelfSufficiencyStatsGraphOverlay) {
+                        Text("Show self sufficiency percentage on stats graph")
+                    }
+                }
+            }
         }
         .navigationTitle("Self sufficiency estimates")
         .navigationBarTitleDisplayMode(.inline)
@@ -67,8 +75,6 @@ struct SelfSufficiencySettingsView: View {
 
 struct SelfSufficiencySettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        Form {
-            SelfSufficiencySettingsView(configManager: PreviewConfigManager())
-        }
+        SelfSufficiencySettingsView(configManager: PreviewConfigManager())
     }
 }

@@ -59,4 +59,5 @@ class MockConfig: Config {
     var showBatteryPercentageRemaining: Bool = false
     var showInverterTypeName: Bool = false
     var powerStationDetail: PowerStationDetail? = nil
+    var showSelfSufficiencyStatsGraphOverlay: Bool = false
 }

@@ -11673,6 +11673,34 @@
         }
       }
     },
+    "Show self sufficiency percentage on stats graph" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eigenversorgungsquote im Statistikdiagramm anzeigen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar el porcentaje de autosuficiencia en el gráfico de estadísticas"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra la percentuale di autosufficienza sul grafico delle statistiche"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pokaż procent samowystarczalności na wykresie statystyk"
+          }
+        }
+      }
+    },
     "Show sunshine background" : {
       "localizations" : {
         "de" : {
