@@ -107,6 +107,7 @@
 		414A40BC2B989CB900321AA2 /* PowerStationDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414A40BB2B989CB900321AA2 /* PowerStationDetail.swift */; };
 		414A40BE2B989D1600321AA2 /* PowerStationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414A40BD2B989D1600321AA2 /* PowerStationResponse.swift */; };
 		414A40C02B989D9800321AA2 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414A40BF2B989D9800321AA2 /* NetworkService.swift */; };
+		414ACCA52BEAC2D700617EED /* StubKeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414ACCA42BEAC2D700617EED /* StubKeychainStore.swift */; };
 		414BF82829B4918300E2EB51 /* SettingsTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */; };
 		414D7A312AC8CE9C0083923F /* DisplayUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D7A302AC8CE9C0083923F /* DisplayUnit.swift */; };
 		4155D70D2B28FC920071346A /* Optional+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4155D70C2B28FC920071346A /* Optional+Int.swift */; };
@@ -543,6 +544,7 @@
 		414A40BB2B989CB900321AA2 /* PowerStationDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerStationDetail.swift; sourceTree = "<group>"; };
 		414A40BD2B989D1600321AA2 /* PowerStationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerStationResponse.swift; sourceTree = "<group>"; };
 		414A40BF2B989D9800321AA2 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		414ACCA42BEAC2D700617EED /* StubKeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubKeychainStore.swift; sourceTree = "<group>"; };
 		414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabViewModel.swift; sourceTree = "<group>"; };
 		414D7A302AC8CE9C0083923F /* DisplayUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayUnit.swift; sourceTree = "<group>"; };
 		4155D70C2B28FC920071346A /* Optional+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Int.swift"; sourceTree = "<group>"; };
@@ -1474,6 +1476,7 @@
 				41B5F1D32BE4BD76009208FA /* HomePowerView.swift */,
 				41B5F1D52BE4BDC3009208FA /* GridPowerView.swift */,
 				412887462BE7BCAD007E9532 /* WatchConfigManager.swift */,
+				414ACCA42BEAC2D700617EED /* StubKeychainStore.swift */,
 			);
 			path = "Energy Stats Watch App";
 			sourceTree = "<group>";
@@ -2102,6 +2105,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				41229CBD2BE1217600CFA636 /* ContentViewModel.swift in Sources */,
+				414ACCA52BEAC2D700617EED /* StubKeychainStore.swift in Sources */,
 				41F6317A2BDCD32D00A571C5 /* ContentView.swift in Sources */,
 				41B5F1D42BE4BD76009208FA /* HomePowerView.swift in Sources */,
 				412887472BE7BCAD007E9532 /* WatchConfigManager.swift in Sources */,
@@ -2336,7 +2340,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 2.24;
+				MARKETING_VERSION = 2.25;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2394,7 +2398,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 2.24;
+				MARKETING_VERSION = 2.25;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -2729,7 +2733,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.24;
+				MARKETING_VERSION = 2.25;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats.watchkitapp;
 				PRODUCT_NAME = "Energy Stats";
 				SDKROOT = watchos;
@@ -2764,7 +2768,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.24;
+				MARKETING_VERSION = 2.25;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats.watchkitapp;
 				PRODUCT_NAME = "Energy Stats";
 				SDKROOT = watchos;

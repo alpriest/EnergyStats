@@ -14,12 +14,25 @@ struct Energy_Stats_Watch_App: App {
     static let delegate = WatchSessionDelegate()
     @Environment(\.scenePhase) private var scenePhase
     @WKApplicationDelegateAdaptor var appDelegate: EnergyStatsWatchAppDelegate
+    var keychainStore: KeychainStoring = {
+        if ProcessInfo().arguments.contains("mockDevice") {
+            StubKeychainStore()
+        } else {
+            KeychainStore()
+        }
+    }()
+
+    var network: Networking = {
+        if ProcessInfo().arguments.contains("mockDevice") {
+            DemoNetworking()
+        } else {
+            NetworkService.standard(keychainStore: KeychainStore(),
+                                    isDemoUser: { false },
+                                    dataCeiling: { .none })
+        }
+    }()
 
     var body: some Scene {
-        let keychainStore = KeychainStore()
-        let network = NetworkService.standard(keychainStore: keychainStore,
-                                              isDemoUser: { false },
-                                              dataCeiling: { .none })
         let configManager = WatchConfigManager()
 
         WindowGroup {
