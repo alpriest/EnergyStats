@@ -54,6 +54,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState {
     private var currentDeviceCancellable: AnyCancellable?
     private let fetcher: StatsDataFetcher
     @Published var selfSufficiencyAtDateTime: [SelfSufficiencyGraphVariable] = []
+    @Published var scale: ClosedRange<Date> = ClosedRange(uncheckedBounds: (lower: Date.now, upper: Date.now))
 
     init(networking: Networking, configManager: ConfigManaging) {
         self.networking = networking
@@ -193,6 +194,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState {
         return selfSufficiencyAtDateTime.map {
             SelfSufficiencyGraphVariable(date: $0.key, value: $0.value)
         }
+        .filter { $0.date <= Date.now }
         .sorted(by: { $1.date > $0.date })
     }
 
@@ -208,6 +210,10 @@ class StatsTabViewModel: ObservableObject, HasLoadState {
         max = refreshedData.max(by: { lhs, rhs in
             lhs.value < rhs.value
         })
+        if let min = refreshedData.min(by: { $0.date < $1.date }),
+           let max = refreshedData.max(by: { $0.date < $1.date }) {
+            scale = ClosedRange(uncheckedBounds: (min.date, max.date))
+        }
         data = refreshedData
     }
 

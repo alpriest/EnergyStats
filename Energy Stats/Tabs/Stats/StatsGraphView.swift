@@ -59,17 +59,18 @@ struct StatsGraphView: View {
                     x: .value("hour", $0.date, unit: viewModel.unit),
                     y: .value("Amount", $0.value)
                 )
-                .lineStyle(StrokeStyle(lineWidth: 2, dash: [5, 10]))
-                .foregroundStyle(Color.black)
+                .lineStyle(StrokeStyle(lineWidth: 1, dash: [2,4]))
+                .foregroundStyle(Color.pink)
             }
             .chartYAxis(.hidden)
             .chartXAxis {
-                AxisMarks(position: .bottom, values: .automatic) { value in
+                AxisMarks(position: .bottom, values: .automatic) { _ in
                     AxisValueLabel {
                         Text("")
                     }
                 }
             }
+            .chartXScale(domain: viewModel.scale)
 
             Chart(viewModel.data, id: \.type.title) {
                 BarMark(
