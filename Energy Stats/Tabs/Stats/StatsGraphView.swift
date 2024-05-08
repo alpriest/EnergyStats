@@ -65,7 +65,7 @@ struct StatsGraphView: View {
                     .foregroundStyle($0.type.colour)
                 }
 
-                if appSettings.showSelfSufficiencyStatsGraphOverlay {
+                if appSettings.showSelfSufficiencyStatsGraphOverlay && appSettings.selfSufficiencyEstimateMode != .off {
                     ForEach(viewModel.selfSufficiencyAtDateTime) {
                         LineMark(
                             x: .value("hour", $0.date, unit: viewModel.unit),

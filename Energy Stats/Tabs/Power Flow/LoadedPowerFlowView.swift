@@ -165,7 +165,7 @@ struct LoadedPowerFlowView: View {
 
     private var topColumnWidth: CGFloat {
         let spacerCount: CGFloat = 4
-        return (UIScreen.main.bounds.width - (horizontalPadding * spacerCount)) / 3
+        return (UIScreen.main.bounds.width - (horizontalPadding * spacerCount)) / (showingCT2Column ? 2.8 : 2)
     }
 
     private var columnCount: CGFloat {
@@ -178,6 +178,10 @@ struct LoadedPowerFlowView: View {
 
     private var showingBatteryColumn: Bool {
         viewModel.hasBattery || viewModel.hasBatteryError
+    }
+
+    private var showingCT2Column: Bool {
+        viewModel.showCT2
     }
 
     private var inverterLineWidth: CGFloat {
@@ -196,7 +200,7 @@ struct PowerSummaryView_Previews: PreviewProvider {
                                                                                               showFinancialEarnings: true,
                                                                                               showInverterTemperature: true,
                                                                                               showHomeTotalOnPowerFlow: true,
-                                                                                              shouldCombineCT2WithPVPower: true,
+                                                                                              shouldCombineCT2WithPVPower: false,
                                                                                               powerFlowStrings: strings)))
             .environment(\.locale, .init(identifier: "en"))
     }
@@ -215,7 +219,7 @@ extension LoadedPowerFlowViewModel {
               homeTotal: 1.0,
               gridImportTotal: 12.0,
               gridExportTotal: 2.4,
-              ct2: 0,
+              ct2: 2.5,
               deviceState: .online,
               faults: [])
     }
