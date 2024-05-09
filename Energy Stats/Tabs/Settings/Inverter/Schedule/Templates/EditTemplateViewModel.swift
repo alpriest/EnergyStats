@@ -13,44 +13,50 @@ class EditTemplateViewModel: ObservableObject {
     @Published var state: LoadState = .inactive
     @Published var alertContent: AlertContent?
     @Published var schedule: Schedule?
-    let networking: Networking
-    let config: ConfigManaging
-    let modes: [SchedulerModeResponse]
-    let templateID: String
+    private let config: ConfigManaging
+    private let modes: [WorkMode] = WorkMode.allCases
+    private let templateStore: TemplateStoring
+    private let networking: Networking
+    private var template: ScheduleTemplate
 
-    init(networking: Networking, config: ConfigManaging, templateID: String, modes: [SchedulerModeResponse]) {
+    init(networking: Networking, templateStore: TemplateStoring, config: ConfigManaging, template: ScheduleTemplate) {
         self.networking = networking
+        self.templateStore = templateStore
         self.config = config
-        self.modes = modes
-        self.templateID = templateID
-
-        Task {
-            await load()
-        }
-    }
-
-    func load() async {
-        guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
-
-        do {
-            let template = try await networking.fetchScheduleTemplate(deviceSN: deviceSN, templateID: templateID)
-
-            Task { @MainActor in
-                schedule = Schedule(name: template.templateName,
-                                    phases: template.pollcy.compactMap {
-                                        $0.toSchedulePhase(workModes: modes)
-                                    },
-                                    templateID: templateID)
-            }
-        } catch {
-            setState(.error(error, error.localizedDescription))
-        }
+        self.template = template
+        self.schedule = template.asSchedule()
     }
 
     func saveTemplate(onCompletion: @escaping () -> Void) {
         guard let schedule else { return }
-        guard let templateID = schedule.templateID else { return }
+        self.template = template.copy(phases: schedule.phases)
+        guard template.asSchedule().isValid() else {
+            alertContent = AlertContent(title: "error_title", message: "overlapping_time_periods")
+            return
+        }
+
+        templateStore.save(template: template)
+
+        alertContent = AlertContent(
+            title: "Success",
+            message: "Your template was saved",
+            onDismiss: onCompletion
+        )
+    }
+
+    func deleteTemplate(onCompletion: @escaping () -> Void) {
+        templateStore.delete(template: template)
+
+        alertContent = AlertContent(
+            title: "Success",
+            message: "inverter_charge_template_deleted",
+            onDismiss: onCompletion
+        )
+    }
+
+    func activate(onCompletion: @escaping () -> Void) {
         guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
+        guard let schedule else { return }
         guard schedule.isValid() else {
             alertContent = AlertContent(title: "error_title", message: "overlapping_time_periods")
             return
@@ -58,77 +64,24 @@ class EditTemplateViewModel: ObservableObject {
 
         setState(.active("Saving"))
 
-        Task { [self] in
-            do {
-                try await networking.saveScheduleTemplate(deviceSN: deviceSN,
-                                                          template: ScheduleTemplate(id: templateID, phases: schedule.phases))
-
-                Task { @MainActor in
-                    self.state = .inactive
-                    alertContent = AlertContent(
-                        title: "Success",
-                        message: "Your template was saved",
-                        onDismiss: onCompletion
-                    )
-                }
-            } catch {
-                self.state = .inactive
-                alertContent = AlertContent(title: "error_title", message: LocalizedStringKey(stringLiteral: error.localizedDescription))
-            }
-        }
-    }
-
-    func deleteTemplate(onCompletion: @escaping () -> Void) {
-        setState(.active("Deleting"))
-
-        Task { [self] in
-            do {
-                try await networking.deleteScheduleTemplate(templateID: templateID)
-
-                Task { @MainActor in
-                    self.state = .inactive
-                    alertContent = AlertContent(
-                        title: "Success",
-                        message: "inverter_charge_template_deleted",
-                        onDismiss: onCompletion
-                    )
-                }
-            } catch {
-                self.state = .inactive
-                alertContent = AlertContent(title: "error_title", message: LocalizedStringKey(stringLiteral: error.localizedDescription))
-            }
-        }
-    }
-
-    func activate(onCompletion: @escaping () -> Void) {
-        guard let schedule else { return }
-        guard let templateID = schedule.templateID else { return }
-        guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
-        guard state == .inactive else { return }
-        guard schedule.isValid() else {
-            alertContent = AlertContent(title: "error_title", message: "overlapping_time_periods")
-            return
-        }
-
         Task { @MainActor in
             do {
                 state = .active("Saving")
-                try await networking.saveScheduleTemplate(deviceSN: deviceSN,
-                                                          template: ScheduleTemplate(id: templateID, phases: schedule.phases))
+                try await networking.saveSchedule(deviceSN: deviceSN, schedule: schedule)
 
                 state = .active("Activating")
-                try await networking.enableScheduleTemplate(deviceSN: deviceSN, templateID: templateID)
+                try await networking.setScheduleFlag(deviceSN: deviceSN, enable: true)
 
                 Task { @MainActor in
-                    self.state = .inactive
-                    alertContent = AlertContent(
+                    setState(.inactive)
+                    self.alertContent = AlertContent(
                         title: "Success",
-                        message: "Your template was activated",
-                        onDismiss: onCompletion
+                        message: "Your template was activated"
                     )
                 }
             } catch {
-                setState(.error(error, error.localizedDescription))
+                setState(.inactive)
+                alertContent = AlertContent(title: "error_title", message: LocalizedStringKey(stringLiteral: error.localizedDescription))
             }
         }
     }
@@ -143,7 +96,7 @@ class EditTemplateViewModel: ObservableObject {
     func addNewTimePeriod() {
         guard let schedule else { return }
 
-        self.schedule = SchedulePhaseHelper.addNewTimePeriod(to: schedule, modes: modes, device: config.currentDevice.value)
+        self.schedule = SchedulePhaseHelper.addNewTimePeriod(to: schedule, device: config.currentDevice.value)
     }
 
     func updatedPhase(_ phase: SchedulePhase) {

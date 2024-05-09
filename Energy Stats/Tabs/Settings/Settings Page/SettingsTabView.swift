@@ -13,10 +13,11 @@ struct SettingsTabView: View {
     let configManager: ConfigManaging
     let networking: Networking
     let solarService: SolarForecastProviding
+    let templateStore: TemplateStoring
     @EnvironmentObject var versionChecker: VersionChecker
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section {
                     if versionChecker.upgradeAvailable {
@@ -42,6 +43,7 @@ struct SettingsTabView: View {
                 NavigationLink {
                     InverterSettingsView(networking: networking,
                                          configManager: configManager,
+                                         templateStore: templateStore,
                                          showInverterTemperature: $viewModel.showInverterTemperature,
                                          showInverterIcon: $viewModel.showInverterIcon,
                                          shouldInvertCT2: $viewModel.shouldInvertCT2,
@@ -95,11 +97,14 @@ struct SettingsTabView_Previews: PreviewProvider {
             viewModel: SettingsTabViewModel(
                 userManager: .preview(),
                 config: PreviewConfigManager(),
-                networking: DemoNetworking()),
+                networking: DemoNetworking()
+            ),
             configManager: PreviewConfigManager(),
             networking: DemoNetworking(),
-            solarService: { DemoSolcast() })
-            .environmentObject(VersionChecker())
+            solarService: { DemoSolcast() },
+            templateStore: PreviewTemplateStore()
+        )
+        .environmentObject(VersionChecker())
     }
 }
 #endif

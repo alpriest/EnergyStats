@@ -11,6 +11,7 @@ import SwiftUI
 struct InverterSettingsView: View {
     let networking: Networking
     let configManager: ConfigManaging
+    let templateStore: TemplateStoring
     @Binding var showInverterTemperature: Bool
     @Binding var showInverterIcon: Bool
     @Binding var shouldInvertCT2: Bool
@@ -24,12 +25,8 @@ struct InverterSettingsView: View {
             InverterChoiceView(viewModel: InverterChoiceViewModel(configManager: configManager))
 
             Section {
-//                NavigationLink("Configure Work Mode") {
-//                    InverterWorkModeView(networking: networking, config: configManager)
-//                }
-
                 NavigationLink("Manage schedules") {
-                    ScheduleSummaryView(networking: networking, config: configManager)
+                    ScheduleSummaryView(networking: networking, config: configManager, templateStore: templateStore)
                 }
             }
 
@@ -115,6 +112,7 @@ struct InverterSettingsView_Previews: PreviewProvider {
             InverterSettingsView(
                 networking: DemoNetworking(),
                 configManager: PreviewConfigManager(),
+                templateStore: PreviewTemplateStore(),
                 showInverterTemperature: .constant(true),
                 showInverterIcon: .constant(true),
                 shouldInvertCT2: .constant(true),

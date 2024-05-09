@@ -52,6 +52,7 @@ extension FoxAPIService {
 
     func fetch<T: Decodable>(_ request: URLRequest, retry: Bool = true) async throws -> (T, Data) {
         var request = request
+        request.timeoutInterval = 10 //TODO: Test
         addHeaders(to: &request)
         let requestResponseData = RequestResponseData(request: request, response: nil, responseData: nil)
         store(

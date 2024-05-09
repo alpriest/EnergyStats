@@ -1839,6 +1839,12 @@
         }
       }
     },
+    "Activate" : {
+
+    },
+    "Activate template" : {
+
+    },
     "Activating" : {
       "localizations" : {
         "de" : {
@@ -2335,7 +2341,6 @@
       }
     },
     "Are you sure you want to delete this template?" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2932,6 +2937,7 @@
       }
     },
     "Buy me a coffee" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -3786,7 +3792,6 @@
       }
     },
     "Create new template" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4440,6 +4445,9 @@
         }
       }
     },
+    "Delete template" : {
+
+    },
     "Delete time period" : {
       "localizations" : {
         "de" : {
@@ -4495,6 +4503,9 @@
           }
         }
       }
+    },
+    "Description" : {
+
     },
     "Device List" : {
       "extractionState" : "stale",
@@ -4920,7 +4931,6 @@
       }
     },
     "Edit template" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -7050,7 +7060,6 @@
       }
     },
     "inverter_charge_template_deleted" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -7588,7 +7597,6 @@
       }
     },
     "Manage templates" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -8024,6 +8032,9 @@
         }
       }
     },
+    "Name" : {
+
+    },
     "Net" : {
       "localizations" : {
         "de" : {
@@ -8115,7 +8126,6 @@
       }
     },
     "New template" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -10670,6 +10680,9 @@
         }
       }
     },
+    "Save template" : {
+
+    },
     "Saving" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -11001,6 +11014,7 @@
       }
     },
     "settings.donateVia" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -12393,7 +12407,6 @@
       }
     },
     "Templates" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -12421,36 +12434,12 @@
         }
       }
     },
-    "templates_not_yet_available" : {
+    "templates_not_synced" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zeitplanvorlagen sind über OpenAPI von FoxESS noch nicht verfügbar. Sie wurden angefordert und werden hinzugefügt, sobald sie verfügbar sind."
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Schedule templates are not yet available via OpenAPI from FoxESS. They have been requested and will be added as and when available."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Las plantillas de programación aún no están disponibles a través de OpenAPI de FoxESS. Se han solicitado y se agregarán según estén disponibles."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "I modelli di pianificazione non sono ancora disponibili tramite OpenAPI da FoxESS. Sono stati richiesti e verranno aggiunti non appena disponibili."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Szablony harmonogramów nie są jeszcze dostępne za pośrednictwem OpenAPI od FoxESS. Zostały zażądane i zostaną dodane, gdy będą dostępne."
+            "value" : "Schedule Templates are local to your device and will not be visible on Fox Cloud. This was a limitation imposed by FoxESS."
           }
         }
       }
@@ -13562,7 +13551,6 @@
       }
     },
     "Your template was activated" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -13591,7 +13579,6 @@
       }
     },
     "Your template was saved" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

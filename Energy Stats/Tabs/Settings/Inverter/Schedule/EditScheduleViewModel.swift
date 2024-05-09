@@ -50,30 +50,6 @@ class EditScheduleViewModel: ObservableObject, HasLoadState {
         }
     }
 
-//    func deleteSchedule(onCompletion: @escaping () -> Void) {
-//        guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
-//
-//        setState(.active("Saving"))
-//
-//        Task { [self] in
-//            do {
-//                try await networking.openapi_activateSchedule(deviceSN: deviceSN, schedule: makeEmptySchedule())
-//
-//                Task { @MainActor in
-//                    self.state = .inactive
-//                    alertContent = AlertContent(
-//                        title: "Success",
-//                        message: "inverter_charge_schedule_deleted",
-//                        onDismiss: onCompletion
-//                    )
-//                }
-//            } catch {
-//                self.state = .inactive
-//                alertContent = AlertContent(title: "error_title", message: LocalizedStringKey(stringLiteral: error.localizedDescription))
-//            }
-//        }
-//    }
-
     private func makeEmptySchedule() -> Schedule {
         Schedule(phases: [])
     }
@@ -97,29 +73,3 @@ class EditScheduleViewModel: ObservableObject, HasLoadState {
     func unused() {}
 }
 
-extension Schedule {
-    func isValid() -> Bool {
-        for (index, phase) in phases.enumerated() {
-            let phaseStart = phase.start.toMinutes()
-            let phaseEnd = phase.end.toMinutes()
-
-            // Check for overlap with other phases
-            for otherPhase in phases[(index + 1)...] {
-                let otherStart = otherPhase.start.toMinutes()
-                let otherEnd = otherPhase.end.toMinutes()
-
-                // Check if the time periods overlap
-                // Updated to ensure periods must start/end on different minutes
-                if phaseStart <= otherEnd && otherStart < phaseEnd {
-                    return false
-                }
-
-                if !phase.isValid() {
-                    return false
-                }
-            }
-        }
-
-        return true
-    }
-}

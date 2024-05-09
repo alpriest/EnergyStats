@@ -13,13 +13,13 @@ struct EditTemplateView: View {
     @State private var presentConfirmation = false
     @Environment(\.presentationMode) var presentationMode
 
-    init(networking: Networking, config: ConfigManaging, templateID: String, modes: [SchedulerModeResponse]) {
+    init(networking: Networking, templateStore: TemplateStoring, config: ConfigManaging, template: ScheduleTemplate) {
         _viewModel = StateObject(
             wrappedValue: EditTemplateViewModel(
                 networking: networking,
+                templateStore: templateStore,
                 config: config,
-                templateID: templateID,
-                modes: modes
+                template: template
             )
         )
     }
@@ -29,7 +29,6 @@ struct EditTemplateView: View {
             OptionalView(viewModel.schedule) { schedule in
                 ScheduleDetailView(
                     schedule: schedule,
-                    modes: viewModel.modes,
                     onUpdate: viewModel.updatedPhase,
                     onDelete: viewModel.deletedPhase
                 )
@@ -93,7 +92,7 @@ struct EditTemplateView: View {
             }
         }
         .navigationTitle("Edit template")
-        .loadable(viewModel.state, retry: { Task { await viewModel.load() } })
+        .loadable(viewModel.state, retry: {  })
         .alert(alertContent: $viewModel.alertContent)
     }
 }
@@ -102,9 +101,9 @@ struct EditTemplateView: View {
     NavigationView {
         EditTemplateView(
             networking: DemoNetworking(),
+            templateStore: PreviewTemplateStore(),
             config: PreviewConfigManager(),
-            templateID: "abc",
-            modes: SchedulerModeResponse.preview()
+            template: ScheduleTemplate.preview()
         )
     }
 }

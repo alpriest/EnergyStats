@@ -33,6 +33,7 @@ struct Energy_StatsApp: App {
             config.isDemoUser ? DemoSolcast() : SolcastCache(service: { Solcast() })
         }
         let versionChecker = VersionChecker()
+        let templateStore = TemplateStore()
 
         return WindowGroup {
             if isRunningTests() {
@@ -42,7 +43,8 @@ struct Energy_StatsApp: App {
                     loginManager: userManager,
                     network: network,
                     configManager: configManager,
-                    solarForecastProvider: solarForecastProvider
+                    solarForecastProvider: solarForecastProvider,
+                    templateStore: templateStore
                 )
                 .environmentObject(InMemoryLoggingNetworkStore.shared)
                 .environmentObject(userManager)

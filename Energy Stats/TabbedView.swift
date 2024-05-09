@@ -13,13 +13,15 @@ struct TabbedView: View {
     let networking: Networking
     let userManager: UserManager
     let solarForecastProvider: SolarForecastProviding
+    let templateStore: TemplateStoring
     @StateObject var settingsTabViewModel: SettingsTabViewModel
 
-    init(networking: Networking, userManager: UserManager, configManager: ConfigManager, solarForecastProvider: @escaping SolarForecastProviding) {
+    init(networking: Networking, userManager: UserManager, configManager: ConfigManager, solarForecastProvider: @escaping SolarForecastProviding, templateStore: TemplateStoring) {
         self.networking = networking
         self.userManager = userManager
         self.configManager = configManager
         self.solarForecastProvider = solarForecastProvider
+        self.templateStore = templateStore
         _settingsTabViewModel = .init(wrappedValue: SettingsTabViewModel(userManager: userManager, config: configManager, networking: networking))
     }
 
@@ -65,7 +67,7 @@ struct TabbedView: View {
                     .accessibilityIdentifier("summary_tab")
                 }
 
-            SettingsTabView(viewModel: settingsTabViewModel, configManager: configManager, networking: networking, solarService: solarForecastProvider)
+            SettingsTabView(viewModel: settingsTabViewModel, configManager: configManager, networking: networking, solarService: solarForecastProvider, templateStore: templateStore)
                 .tabItem {
                     VStack {
                         Image(systemName: "gearshape")
@@ -86,6 +88,7 @@ struct TabbedView: View {
     TabbedView(networking: DemoNetworking(),
                userManager: .preview(),
                configManager: PreviewConfigManager(),
-               solarForecastProvider: { DemoSolcast() })
+               solarForecastProvider: { DemoSolcast() },
+               templateStore: PreviewTemplateStore())
 }
 #endif

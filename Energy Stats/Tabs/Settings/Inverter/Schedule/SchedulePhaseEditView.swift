@@ -209,7 +209,7 @@ struct SchedulePhaseEditView: View {
             minSOCError = "Min SoC must be less than or equal to Force Discharge SoC"
         }
 
-        if startTime >= endTime {
+        if startTime.toTime() >= endTime.toTime() {
             timeError = "End time must be after start time"
         }
 

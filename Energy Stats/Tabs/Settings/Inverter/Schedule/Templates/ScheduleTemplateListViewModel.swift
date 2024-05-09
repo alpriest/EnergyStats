@@ -9,37 +9,24 @@ import Energy_Stats_Core
 import Foundation
 
 class ScheduleTemplateListViewModel: ObservableObject {
-    let networking: Networking
+    let templateStore: TemplateStoring
     let config: ConfigManaging
-    @Published var templates: [ScheduleTemplateSummary] = []
+    @Published var templates: [ScheduleTemplate] = []
     @Published var state: LoadState = .inactive
 
-    init(networking: Networking, config: ConfigManaging) {
-        self.networking = networking
+    init(templateStore: TemplateStoring, config: ConfigManaging) {
+        self.templateStore = templateStore
         self.config = config
     }
 
     @MainActor
-    func load() async {
-        do {
-            let templatesResponse = try await networking.fetchScheduleTemplates()
-            self.templates = templatesResponse.data.compactMap { $0.toScheduleTemplate() }
-        } catch {
-            state = LoadState.error(error, error.localizedDescription)
-        }
+    func load() {
+        templates = templateStore.load()
     }
 
     @MainActor
-    func createTemplate(name: String, description: String) async {
-        guard state == .inactive else { return }
-
-        state = .active("Saving")
-
-        do {
-            try await self.networking.createScheduleTemplate(name: name, description: description)
-            await self.load()
-        } catch {
-            self.state = LoadState.error(error, error.localizedDescription)
-        }
+    func createTemplate(name: String) async {
+        templateStore.create(named: name)
+        load()
     }
 }

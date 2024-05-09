@@ -7,35 +7,101 @@
 
 import SwiftUI
 
-// public struct ScheduleTemplateSummary: Identifiable {
-//    public let id: String
-//    public let name: String
-//    public let enabled: Bool
-//
-//    public init(id: String, name: String, enabled: Bool) {
-//        self.id = id
-//        self.name = name
-//        self.enabled = enabled
-//    }
-// }
-//
-// public struct ScheduleTemplate: Identifiable {
-//    public let id: String
-//    public let phases: [SchedulePhase]
-//
-//    public init(id: String, phases: [SchedulePhase]) {
-//        self.id = id
-//        self.phases = phases
-//    }
-// }
+public struct ScheduleTemplate: Identifiable, Hashable {
+    public let id: String
+    public let name: String
+    public let phases: [SchedulePhase]
+
+    public init(id: String, name: String, phases: [SchedulePhase]) {
+        self.id = id
+        self.name = name
+        self.phases = phases
+    }
+
+    public func asSchedule() -> Schedule {
+        Schedule(phases: phases)
+    }
+
+    public func copy(phases: [SchedulePhase]) -> ScheduleTemplate {
+        ScheduleTemplate(
+            id: id,
+            name: name,
+            phases: phases
+        )
+    }
+
+    public var isValid: Bool {
+        asSchedule().isValid()
+    }
+}
+
+public extension ScheduleTemplate {
+    static func preview() -> ScheduleTemplate {
+        ScheduleTemplate(id: "1", name: "Force discharge", phases: [
+            SchedulePhase(
+                start: Time(
+                    hour: 1,
+                    minute: 00
+                ),
+                end: Time(
+                    hour: 2,
+                    minute: 00
+                ),
+                mode: .ForceCharge,
+                minSocOnGrid: 100,
+                forceDischargePower: 0,
+                forceDischargeSOC: 100,
+                color: .linesNegative
+            )!,
+            SchedulePhase(
+                start: Time(
+                    hour: 10,
+                    minute: 30
+                ),
+                end: Time(
+                    hour: 14,
+                    minute: 30
+                ),
+                mode: .ForceDischarge,
+                minSocOnGrid: 20,
+                forceDischargePower: 3500,
+                forceDischargeSOC: 20,
+                color: .linesPositive
+            )!,
+        ])
+    }
+}
 
 public struct Schedule: Hashable, Equatable {
     public let phases: [SchedulePhase]
-//    public let templateID: String?
 
     public init(phases: [SchedulePhase]) {
         self.phases = phases
-//        self.templateID = templateID
+    }
+
+    public func isValid() -> Bool {
+        for (index, phase) in phases.enumerated() {
+            let phaseStart = phase.start.toMinutes()
+            let phaseEnd = phase.end.toMinutes()
+
+            // Check for overlap with other phases
+            for otherPhase in phases[(index + 1)...] {
+                let otherStart = otherPhase.start.toMinutes()
+                let otherEnd = otherPhase.end.toMinutes()
+
+                // Check if the time periods overlap
+                // Updated to ensure periods must start/end on different minutes
+                if phaseStart <= otherEnd && otherStart < phaseEnd {
+                    return false
+                }
+
+                if !phase.isValid() {
+                    return false
+                }
+            }
+        }
+
+        return true
     }
 }
 

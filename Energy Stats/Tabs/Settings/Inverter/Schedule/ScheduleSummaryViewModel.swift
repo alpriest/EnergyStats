@@ -12,8 +12,9 @@ import SwiftUI
 class ScheduleSummaryViewModel: ObservableObject, HasLoadState {
     let networking: Networking
     let config: ConfigManaging
+    let templateStore: TemplateStoring
     @Published var state: LoadState = .inactive
-//    @Published var templates: [ScheduleTemplateSummary] = []
+    @Published var templates: [ScheduleTemplate] = []
     @Published var alertContent: AlertContent?
     @Published var schedule: Schedule?
     @Published var schedulerEnabled: Bool = false {
@@ -26,9 +27,10 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState {
 
     private var hasPreLoaded = false
 
-    init(networking: Networking, config: ConfigManaging) {
+    init(networking: Networking, config: ConfigManaging, templateStore: TemplateStoring) {
         self.networking = networking
         self.config = config
+        self.templateStore = templateStore
     }
 
     @MainActor
@@ -80,6 +82,7 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState {
         setState(.active("Loading"))
 
         do {
+            self.templates = templateStore.load()
             let scheduleResponse = try await networking.fetchCurrentSchedule(deviceSN: deviceSN)
             self.schedulerEnabled = scheduleResponse.enable.boolValue
 
@@ -108,6 +111,32 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState {
             self.setState(.inactive)
         } catch {
             self.setState(.error(error, error.localizedDescription))
+        }
+    }
+
+    func activate(_ template: ScheduleTemplate) async {
+        guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
+        let schedule = template.asSchedule()
+        guard schedule.isValid() else {
+            self.alertContent = AlertContent(title: "error_title", message: "overlapping_time_periods")
+            return
+        }
+
+        setState(.active("Saving"))
+
+        do {
+            try await self.networking.saveSchedule(deviceSN: deviceSN, schedule: schedule)
+
+            Task { @MainActor in
+                setState(.inactive)
+                self.alertContent = AlertContent(
+                    title: "Success",
+                    message: "inverter_charge_schedule_settings_saved"
+                )
+            }
+        } catch {
+            setState(.inactive)
+            self.alertContent = AlertContent(title: "error_title", message: LocalizedStringKey(stringLiteral: error.localizedDescription))
         }
     }
 }

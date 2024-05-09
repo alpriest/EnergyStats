@@ -13,11 +13,12 @@ struct ContentView: View {
     let network: Networking
     let configManager: ConfigManager
     let solarForecastProvider: SolarForecastProviding
+    let templateStore: TemplateStoring
     @State private var state = LoadState.inactive
 
     var body: some View {
         if loginManager.isLoggedIn {
-            TabbedView(networking: network, userManager: loginManager, configManager: configManager, solarForecastProvider: solarForecastProvider)
+            TabbedView(networking: network, userManager: loginManager, configManager: configManager, solarForecastProvider: solarForecastProvider, templateStore: templateStore)
                 .task { await network.fetchErrorMessages() }
         } else {
             APIKeyLoginView(userManager: loginManager)
@@ -31,7 +32,8 @@ struct ContentView: View {
         loginManager: .preview(),
         network: DemoNetworking(),
         configManager: PreviewConfigManager(),
-        solarForecastProvider: { DemoSolcast() }
+        solarForecastProvider: { DemoSolcast() },
+        templateStore: PreviewTemplateStore()
     )
 }
 #endif

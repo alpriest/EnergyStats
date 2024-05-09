@@ -15,13 +15,14 @@ struct ScheduleTemplateListView: View {
     @State private var newTemplateDescription: String = ""
     private let config: ConfigManaging
     private let networking: Networking
-    private let modes: [SchedulerModeResponse]
+    private let templateStore: TemplateStoring
+    private let modes: [WorkMode] = WorkMode.allCases
 
-    init(networking: Networking, config: ConfigManaging, modes: [SchedulerModeResponse]) {
-        _viewModel = StateObject(wrappedValue: ScheduleTemplateListViewModel(networking: networking, config: config))
+    init(networking: Networking, templateStore: TemplateStoring, config: ConfigManaging) {
+        _viewModel = StateObject(wrappedValue: ScheduleTemplateListViewModel(templateStore: templateStore, config: config))
         self.networking = networking
+        self.templateStore = templateStore
         self.config = config
-        self.modes = modes
     }
 
     var body: some View {
@@ -30,9 +31,9 @@ struct ScheduleTemplateListView: View {
                 ForEach(viewModel.templates) { template in
                     NavigationLink(destination: {
                         EditTemplateView(networking: networking,
+                                         templateStore: templateStore,
                                          config: config,
-                                         templateID: template.id,
-                                         modes: modes)
+                                         template: template)
                     }, label: {
                         Text(template.name)
                     })
@@ -43,14 +44,12 @@ struct ScheduleTemplateListView: View {
 
             Section {
                 TextField("Name", text: $newTemplateName)
-                TextField("Description", text: $newTemplateDescription)
-
             } header: {
                 Text("New template")
             } footer: {
                 Button {
                     Task {
-                        await viewModel.createTemplate(name: newTemplateName, description: newTemplateDescription)
+                        await viewModel.createTemplate(name: newTemplateName)
                         newTemplateName = ""
                         newTemplateDescription = ""
                     }
@@ -61,7 +60,7 @@ struct ScheduleTemplateListView: View {
                 .padding(.top)
             }
         }
-        .onAppear { Task { await viewModel.load() } }
+        .onAppear { viewModel.load() }
         .navigationTitle("Templates")
     }
 }
@@ -70,8 +69,8 @@ struct ScheduleTemplateListView: View {
     NavigationView {
         ScheduleTemplateListView(
             networking: DemoNetworking(),
-            config: PreviewConfigManager(),
-            modes: SchedulerModeResponse.preview()
+            templateStore: PreviewTemplateStore(),
+            config: PreviewConfigManager()
         )
     }
 }

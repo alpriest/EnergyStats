@@ -42,26 +42,6 @@ struct SettingsFooterView: View {
                             .multilineTextAlignment(.center)
                     }
 
-                    Button {
-                        let url = URL(string: "https://buymeacoffee.com/alpriest")!
-                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                    } label: {
-                        Image(systemName: "cup.and.saucer")
-                        Text("Buy me a coffee")
-                    }
-
-                    Button {
-                        let url = URL(string: "https://paypal.me/alpriest")!
-                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                    } label: {
-                        Text("settings.donateVia")
-                        Image("paypal_logo")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 16)
-                            .accessibilityHidden(true)
-                    }
-
                     Text("Version ") + Text(appVersion)
                 }
                 .frame(minWidth: 0, maxWidth: .infinity)
