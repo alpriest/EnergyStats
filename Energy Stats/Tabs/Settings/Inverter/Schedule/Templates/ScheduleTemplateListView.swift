@@ -27,8 +27,8 @@ struct ScheduleTemplateListView: View {
 
     var body: some View {
         Form {
-            Section {
-                ForEach(viewModel.templates) { template in
+            ForEach(viewModel.templates) { template in
+                Section {
                     NavigationLink(destination: {
                         EditTemplateView(networking: networking,
                                          templateStore: templateStore,
@@ -37,15 +37,16 @@ struct ScheduleTemplateListView: View {
                     }, label: {
                         VStack(alignment: .leading) {
                             Text(template.name)
-                                .font(.title2)
 
                             ScheduleView(schedule: template.asSchedule(), includePhaseDetail: true)
                                 .padding(.vertical, 4)
                         }
                     })
+                } header: {
+                    if template == viewModel.templates.first {
+                        Text("Templates")
+                    }
                 }
-            } header: {
-                Text("Templates")
             }
 
             Section {
