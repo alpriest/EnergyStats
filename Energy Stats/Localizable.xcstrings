@@ -1877,31 +1877,31 @@
       "localizations" : {
         "de" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Zeitplan"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Schedule"
+            "value" : "Active schedule"
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Horario"
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Programma"
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Harmonogram"
           }
         }
@@ -6774,6 +6774,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "W grudniu 2023 roku FoxESS poprosił wszystkie integracje stron trzecich o migrację dostępu do nowego zestawu usług w celu dostępu do danych klientów. Te nowe usługi są znane w FoxESS jako ich usługi OpenAPI. Energy Stats zostało zmienione wewnętrznie, aby korzystać z tych nowych usług (3,500 linii kodu)."
+          }
+        }
+      }
+    },
+    "inactive_schedule_title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inactive schedule"
           }
         }
       }

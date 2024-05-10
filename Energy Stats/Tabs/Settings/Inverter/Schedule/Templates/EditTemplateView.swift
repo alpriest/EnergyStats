@@ -94,7 +94,7 @@ struct EditTemplateView: View {
             }
         }
         .navigationTitle("Edit template")
-        .loadable(viewModel.state, retry: {  })
+        .loadable(viewModel.state, retry: { })
         .alert(alertContent: $viewModel.alertContent)
     }
 }

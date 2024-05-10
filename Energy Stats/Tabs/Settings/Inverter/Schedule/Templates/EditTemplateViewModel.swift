@@ -66,10 +66,10 @@ class EditTemplateViewModel: ObservableObject {
 
         Task { @MainActor in
             do {
-                state = .active("Saving")
+                setState(.active("Saving"))
                 try await networking.saveSchedule(deviceSN: deviceSN, schedule: schedule)
 
-                state = .active("Activating")
+                setState(.active("Activating"))
                 try await networking.setScheduleFlag(deviceSN: deviceSN, enable: true)
 
                 Task { @MainActor in

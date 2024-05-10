@@ -122,13 +122,14 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState {
             return
         }
 
-        setState(.active("Saving"))
+        setState(.active("Activating"))
 
         do {
             try await self.networking.saveSchedule(deviceSN: deviceSN, schedule: schedule)
 
             Task { @MainActor in
                 setState(.inactive)
+                await load()
                 self.alertContent = AlertContent(
                     title: "Success",
                     message: "inverter_charge_schedule_settings_saved"

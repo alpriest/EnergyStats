@@ -67,7 +67,7 @@ struct ScheduleSummaryView: View {
                                     .padding(.vertical, 4)
                             }
                         } header: {
-                            Text("active_schedule_title")
+                            Text(viewModel.schedulerEnabled ? "active_schedule_title" : "inactive_schedule_title")
                         }
                     } else {
                         NavigationLink(value: schedule) {
