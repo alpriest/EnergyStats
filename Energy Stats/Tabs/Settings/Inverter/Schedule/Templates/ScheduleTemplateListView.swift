@@ -39,7 +39,7 @@ struct ScheduleTemplateListView: View {
                             Text(template.name)
                                 .font(.title2)
 
-                            ScheduleView(schedule: template.asSchedule())
+                            ScheduleView(schedule: template.asSchedule(), includePhaseDetail: true)
                                 .padding(.vertical, 4)
                         }
                     })

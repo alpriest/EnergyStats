@@ -10,15 +10,18 @@ import SwiftUI
 
 struct ScheduleView: View {
     let schedule: Schedule
+    let includePhaseDetail: Bool
 
     var body: some View {
         VStack(alignment: .leading) {
             TimePeriodBarView(phases: schedule.phases)
                 .padding(.bottom, 8)
 
-            ForEach(schedule.phases) { phase in
-                SchedulePhaseListItemView(phase: phase)
-                    .frame(maxWidth: .infinity)
+            if includePhaseDetail {
+                ForEach(schedule.phases) { phase in
+                    SchedulePhaseListItemView(phase: phase)
+                        .frame(maxWidth: .infinity)
+                }
             }
         }
     }
@@ -26,6 +29,7 @@ struct ScheduleView: View {
 
 #Preview {
     ScheduleView(
-        schedule: Schedule.preview()
+        schedule: Schedule.preview(),
+        includePhaseDetail: true
     )
 }

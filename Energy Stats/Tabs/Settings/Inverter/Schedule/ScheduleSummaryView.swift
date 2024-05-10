@@ -63,7 +63,7 @@ struct ScheduleSummaryView: View {
                                     schedule: schedule
                                 )
                             } label: {
-                                ScheduleView(schedule: schedule)
+                                ScheduleView(schedule: schedule, includePhaseDetail: true)
                                     .padding(.vertical, 4)
                             }
                         } header: {
@@ -76,27 +76,31 @@ struct ScheduleSummaryView: View {
                     }
                 }
 
-                Section {
-                    ForEach(viewModel.templates) {
-                        TemplateSummaryListRow(template: $0,
+                ForEach(viewModel.templates) { template in
+                    Section {
+                        TemplateSummaryListRow(template: template,
                                                networking: networking,
                                                config: config,
                                                templateStore: templateStore,
                                                viewModel: viewModel)
+                    } header: {
+                        if template == viewModel.templates.first {
+                            Text("Templates")
+                                .padding(.top, 24)
+                        }
+                    } footer: {
+                        if template == viewModel.templates.last {
+                            VStack {
+                                NavigationLink {
+                                    ScheduleTemplateListView(networking: networking, templateStore: templateStore, config: config)
+                                } label: {
+                                    Text("Manage templates")
+                                }.buttonStyle(.borderedProminent)
+                            }
+                            .frame(maxWidth: .infinity)
+                            .padding(.top)
+                        }
                     }
-                } header: {
-                    Text("Templates")
-                        .padding(.top, 24)
-                } footer: {
-                    VStack {
-                        NavigationLink {
-                            ScheduleTemplateListView(networking: networking, templateStore: templateStore, config: config)
-                        } label: {
-                            Text("Manage templates")
-                        }.buttonStyle(.borderedProminent)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding(.top)
                 }
 
                 FooterSection {
@@ -110,7 +114,6 @@ struct ScheduleSummaryView: View {
 }
 
 struct TemplateSummaryListRow: View {
-    @State private var isActive: Bool = false
     let template: ScheduleTemplate
     let networking: Networking
     let config: ConfigManaging
@@ -118,25 +121,22 @@ struct TemplateSummaryListRow: View {
     @ObservedObject var viewModel: ScheduleSummaryViewModel
 
     var body: some View {
-        HStack {
-            Text(template.name)
-
-            Spacer()
-
-            Button {
-                isActive = true
-            } label: {
-                Text("Edit")
-            }
-            .buttonStyle(.borderedProminent)
-            .navigationDestination(isPresented: $isActive, destination: {
+        List {
+            NavigationLink {
                 EditTemplateView(
                     networking: networking,
                     templateStore: templateStore,
                     config: config,
                     template: template
                 )
-            })
+            } label: {
+                VStack(alignment: .leading) {
+                    Text(template.name)
+
+                    ScheduleView(schedule: template.asSchedule(), includePhaseDetail: false)
+                        .padding(.vertical, 4)
+                }
+            }
 
             Button {
                 Task { await viewModel.activate(template) }
