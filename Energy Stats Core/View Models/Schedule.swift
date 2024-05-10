@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct ScheduleTemplate: Identifiable, Hashable {
+public struct ScheduleTemplate: Identifiable, Hashable, Codable {
     public let id: String
     public let name: String
     public let phases: [SchedulePhase]
@@ -105,7 +105,7 @@ public struct Schedule: Hashable, Equatable {
     }
 }
 
-public struct SchedulePhase: Identifiable, Hashable, Equatable {
+public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {
     public let id: String
     public let start: Time
     public let end: Time
@@ -138,6 +138,40 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable {
         self.forceDischargeSOC = Int(device?.battery?.minSOC) ?? 10
         self.minSocOnGrid = Int(device?.battery?.minSOC) ?? 10
         self.color = Color.scheduleColor(named: mode)
+    }
+
+    private enum CodingKeys: CodingKey {
+        case id
+        case start
+        case end
+        case mode
+        case minSocOnGrid
+        case forceDischargePower
+        case forceDischargeSOC
+        case color
+    }
+
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(String.self, forKey: .id)
+        self.start = try container.decode(Time.self, forKey: .start)
+        self.end = try container.decode(Time.self, forKey: .end)
+        self.mode = try container.decode(WorkMode.self, forKey: .mode)
+        self.minSocOnGrid = try container.decode(Int.self, forKey: .minSocOnGrid)
+        self.forceDischargePower = try container.decode(Int.self, forKey: .forceDischargePower)
+        self.forceDischargeSOC = try container.decode(Int.self, forKey: .forceDischargeSOC)
+        self.color = Color.scheduleColor(named: mode)
+    }
+
+    public func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(self.id, forKey: .id)
+        try container.encode(self.start, forKey: .start)
+        try container.encode(self.end, forKey: .end)
+        try container.encode(self.mode, forKey: .mode)
+        try container.encode(self.minSocOnGrid, forKey: .minSocOnGrid)
+        try container.encode(self.forceDischargePower, forKey: .forceDischargePower)
+        try container.encode(self.forceDischargeSOC, forKey: .forceDischargeSOC)
     }
 
     public var startPoint: CGFloat { CGFloat(minutesAfterMidnight(start)) / (24 * 60) }

@@ -4504,9 +4504,6 @@
         }
       }
     },
-    "Description" : {
-
-    },
     "Device List" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -10679,9 +10676,6 @@
           }
         }
       }
-    },
-    "Save template" : {
-
     },
     "Saving" : {
       "extractionState" : "manual",

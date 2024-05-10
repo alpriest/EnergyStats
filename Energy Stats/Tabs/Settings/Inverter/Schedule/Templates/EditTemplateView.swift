@@ -48,16 +48,6 @@ struct EditTemplateView: View {
                         }.buttonStyle(.borderedProminent)
 
                         Button {
-                            viewModel.saveTemplate {
-                                presentationMode.wrappedValue.dismiss()
-                            }
-                        } label: {
-                            Text("Save template")
-                        }
-                        .buttonStyle(.borderedProminent)
-                        .disabled(schedule.phases.count == 0)
-
-                        Button {
                             viewModel.activate {
                                 presentationMode.wrappedValue.dismiss()
                             }
@@ -89,6 +79,18 @@ struct EditTemplateView: View {
                         }
                     }
                 }
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button {
+                            viewModel.saveTemplate {
+                                presentationMode.wrappedValue.dismiss()
+                            }
+                        } label: {
+                            Text("Save")
+                        }
+                        .disabled(schedule.phases.count == 0)
+                    }
+                }
             }
         }
         .navigationTitle("Edit template")
@@ -98,7 +100,7 @@ struct EditTemplateView: View {
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         EditTemplateView(
             networking: DemoNetworking(),
             templateStore: PreviewTemplateStore(),

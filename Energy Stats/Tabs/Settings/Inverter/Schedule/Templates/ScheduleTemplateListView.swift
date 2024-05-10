@@ -35,7 +35,13 @@ struct ScheduleTemplateListView: View {
                                          config: config,
                                          template: template)
                     }, label: {
-                        Text(template.name)
+                        VStack(alignment: .leading) {
+                            Text(template.name)
+                                .font(.title2)
+
+                            ScheduleView(schedule: template.asSchedule())
+                                .padding(.vertical, 4)
+                        }
                     })
                 }
             } header: {

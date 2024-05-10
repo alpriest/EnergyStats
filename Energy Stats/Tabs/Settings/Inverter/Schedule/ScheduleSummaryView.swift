@@ -129,18 +129,14 @@ struct TemplateSummaryListRow: View {
                 Text("Edit")
             }
             .buttonStyle(.borderedProminent)
-            .background(
-                NavigationLink(destination:
-                    EditTemplateView(
-                        networking: networking,
-                        templateStore: templateStore,
-                        config: config,
-                        template: template
-                    ), isActive: $isActive) {
-                        EmptyView()
-                    }
-                    .hidden()
-            )
+            .navigationDestination(isPresented: $isActive, destination: {
+                EditTemplateView(
+                    networking: networking,
+                    templateStore: templateStore,
+                    config: config,
+                    template: template
+                )
+            })
 
             Button {
                 Task { await viewModel.activate(template) }
