@@ -60,4 +60,5 @@ class MockConfig: Config {
     var showInverterTypeName: Bool = false
     var powerStationDetail: PowerStationDetail? = nil
     var showSelfSufficiencyStatsGraphOverlay: Bool = false
+    var scheduleTemplates: [ScheduleTemplate] = []
 }

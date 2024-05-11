@@ -552,7 +552,7 @@ public extension ConfigManager {
         PreviewConfigManager(config: config)
     }
 
-    class PreviewConfigManager: ConfigManager {
+    internal class PreviewConfigManager: ConfigManager {
         convenience init(config: Config) {
             self.init(
                 networking: NetworkService.preview(),

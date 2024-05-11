@@ -12,8 +12,8 @@ import SnapshotTesting
 import SwiftUI
 import XCTest
 
-@MainActor
 final class ParametersGraphTabViewTests: XCTestCase {
+    @MainActor
     func test_when_user_arrives() async throws {
         let networking = MockNetworking(throwOnCall: false, dateProvider: { Date(timeIntervalSince1970: 1664127352) })
         let configManager = ConfigManager(networking: networking, config: MockConfig(), appSettingsPublisher: CurrentValueSubject<AppSettings, Never>(AppSettings.mock()), keychainStore: MockKeychainStore())
@@ -27,9 +27,10 @@ final class ParametersGraphTabViewTests: XCTestCase {
         assertSnapshot(matching: view, as: .image(on: .iPhone13Pro))
     }
 
+    @MainActor
     func test_with_network_failure() async {
         let networking = MockNetworking(throwOnCall: true)
-        let sut = ParametersGraphTabView(configManager: ConfigManaging(networking: networking, config: MockConfig(), appSettingsPublisher: CurrentValueSubject<AppSettings, Never>(AppSettings.mock()), keychainStore: MockKeychainStore()), networking: networking)
+        let sut = ParametersGraphTabView(configManager: ConfigManager(networking: networking, config: MockConfig(), appSettingsPublisher: CurrentValueSubject<AppSettings, Never>(AppSettings.mock()), keychainStore: MockKeychainStore()), networking: networking)
         await sut.viewModel.load()
         let view = UIHostingController(rootView: sut)
 

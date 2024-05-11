@@ -15,14 +15,14 @@ final class UserManagerTests: XCTestCase {
     private var keychainStore: MockKeychainStore!
     private var networking: Networking!
     private var config: MockConfig!
-    private var configManager: PreviewConfigManager!
+    private var configManager: ConfigManager!
 
     override func setUp() {
         keychainStore = MockKeychainStore()
         config = MockConfig()
         let cache = InMemoryLoggingNetworkStore()
         networking = NetworkService(api: FoxAPIService(credentials: keychainStore, store: cache))
-        configManager = PreviewConfigManager(networking: networking, config: config, appSettingsPublisher: CurrentValueSubject<AppSettings, Never>(AppSettings.mock()), keychainStore: MockKeychainStore())
+        configManager = ConfigManager(networking: networking, config: config, appSettingsPublisher: CurrentValueSubject<AppSettings, Never>(AppSettings.mock()), keychainStore: MockKeychainStore())
         sut = UserManager(networking: networking, store: keychainStore, configManager: configManager, networkCache: cache)
     }
 
