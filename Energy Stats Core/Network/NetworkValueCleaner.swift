@@ -16,42 +16,6 @@ class NetworkValueCleaner: FoxAPIServicing {
         self.dataCeiling = dataCeiling
     }
 
-    //     func deleteScheduleTemplate(templateID: String) async throws {
-    //        try await network.deleteScheduleTemplate(templateID: templateID)
-    //    }
-    //
-    //     func saveScheduleTemplate(deviceSN: String, template: ScheduleTemplate) async throws {
-    //        try await network.saveScheduleTemplate(deviceSN: deviceSN, template: template)
-    //    }
-    //
-    //     func fetchScheduleTemplate(deviceSN: String, templateID: String) async throws -> ScheduleTemplateResponse {
-    //        try await network.fetchScheduleTemplate(deviceSN: deviceSN, templateID: templateID)
-    //    }
-    //
-    //     func enableScheduleTemplate(deviceSN: String, templateID: String) async throws {
-    //        try await network.enableScheduleTemplate(deviceSN: deviceSN, templateID: templateID)
-    //    }
-    //
-    //     func fetchScheduleTemplates() async throws -> ScheduleTemplateListResponse {
-    //        try await network.fetchScheduleTemplates()
-    //    }
-    //
-    //     func createScheduleTemplate(name: String, description: String) async throws {
-    //        try await network.createScheduleTemplate(name: name, description: description)
-    //    }
-    //
-    //     func deleteSchedule(deviceSN: String) async throws {
-    //        try await network.deleteSchedule(deviceSN: deviceSN)
-    //    }
-    //
-    //     func saveSchedule(deviceSN: String, schedule: Schedule) async throws {
-    //        try await network.saveSchedule(deviceSN: deviceSN, schedule: schedule)
-    //    }
-    //
-    //     func fetchScheduleModes(deviceID: String) async throws -> [SchedulerModeResponse] {
-    //        try await network.fetchScheduleModes(deviceID: deviceID)
-    //    }
-
     func openapi_fetchSchedulerFlag(deviceSN: String) async throws -> GetSchedulerFlagResponse {
         try await api.openapi_fetchSchedulerFlag(deviceSN: deviceSN)
     }

@@ -16,13 +16,19 @@ final class ParametersGraphTabViewTests: XCTestCase {
     @MainActor
     func test_when_user_arrives() async throws {
         let networking = MockNetworking(throwOnCall: false, dateProvider: { Date(timeIntervalSince1970: 1664127352) })
-        let configManager = ConfigManager(networking: networking, config: MockConfig(), appSettingsPublisher: CurrentValueSubject<AppSettings, Never>(AppSettings.mock()), keychainStore: MockKeychainStore())
+        let configManager = ConfigManager(
+            networking: networking,
+            config: MockConfig(),
+            appSettingsPublisher: CurrentValueSubject<AppSettings, Never>(AppSettings.mock()),
+            keychainStore: MockKeychainStore()
+        )
         try await configManager.fetchDevices()
 
         let sut = ParametersGraphTabView(configManager: configManager, networking: networking) { Date(timeIntervalSince1970: 1664127352) }
         let view = UIHostingController(rootView: sut)
 
         await sut.viewModel.load()
+        await propertyOn(sut.viewModel, keyPath: \.state) { $0 == .inactive }
 
         assertSnapshot(matching: view, as: .image(on: .iPhone13Pro))
     }

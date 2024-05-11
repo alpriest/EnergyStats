@@ -111,9 +111,7 @@ struct ParametersGraphTabView: View {
             ParameterGraphVariableChooserView(viewModel: ParameterGraphVariableChooserViewModel(variables: viewModel.graphVariables, configManager: configManager, onApply: { viewModel.set(graphVariables: $0) }))
         }
         .task {
-            Task {
-                await viewModel.load()
-            }
+            await viewModel.load()
         }
         .onReceive(appSettingsPublisher) {
             self.appSettings = $0

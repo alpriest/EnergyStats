@@ -57,11 +57,34 @@ class MockNetworking: Networking {
     }
 
     func fetchHistory(deviceSN: String, variables: [String], start: Date, end: Date) async throws -> OpenHistoryResponse {
-        OpenHistoryResponse(deviceSN: "", datas: [])
+        let data = try self.data(filename: "parameters-history-success")
+        let response = try JSONDecoder().decode(NetworkResponse<[OpenHistoryResponse]>.self, from: data)
+        guard let result = response.result?.first else { throw NetworkError.invalidToken }
+
+        return OpenHistoryResponse(deviceSN: result.deviceSN,
+                                   datas: result.datas.map {
+            OpenHistoryResponse.Data(
+                unit: $0.unit,
+                name: $0.name,
+                variable: $0.variable,
+                data: $0.data.map {
+                    let thenComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: $0.time)
+                    let date = Calendar.current.date(bySettingHour: thenComponents.hour ?? 0, minute: thenComponents.minute ?? 0, second: thenComponents.second ?? 0, of: Date())
+
+                    return OpenHistoryResponse.Data.UnitData(
+                        time: date ?? $0.time,
+                        value: $0.value
+                    )
+                }
+            )
+        })
     }
 
     func fetchVariables() async throws -> [OpenApiVariable] {
-        []
+        let data = try self.data(filename: "variables-success")
+        let response = try JSONDecoder().decode(NetworkResponse<OpenApiVariableArray>.self, from: data)
+        guard let result = response.result else { throw NetworkError.invalidToken }
+        return result.array
     }
 
     func fetchReport(deviceSN: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [OpenReportResponse] {
@@ -102,5 +125,13 @@ class MockNetworking: Networking {
 
     func fetchPowerStationDetail() async throws -> PowerStationDetail? {
         nil
+    }
+
+    private func data(filename: String) throws -> Data {
+        guard let url = Bundle(for: type(of: self)).url(forResource: filename, withExtension: "json") else {
+            return Data()
+        }
+
+        return try Data(contentsOf: url)
     }
 }

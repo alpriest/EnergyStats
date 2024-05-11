@@ -25,78 +25,6 @@ class NetworkFacade: FoxAPIServicing {
         isDemoUserProvider() || store.isDemoUser
     }
 
-    //     func deleteScheduleTemplate(templateID: String) async throws {
-    //        if isDemoUser {
-    //            try await fakeNetwork.deleteScheduleTemplate(templateID: templateID)
-    //        } else {
-    //            try await network.deleteScheduleTemplate(templateID: templateID)
-    //        }
-    //    }
-    //
-    //     func fetchScheduleTemplate(deviceSN: String, templateID: String) async throws -> ScheduleTemplateResponse {
-    //        if isDemoUser {
-    //            try await fakeNetwork.fetchScheduleTemplate(deviceSN: deviceSN, templateID: templateID)
-    //        } else {
-    //            try await network.fetchScheduleTemplate(deviceSN: deviceSN, templateID: templateID)
-    //        }
-    //    }
-    //
-    //     func enableScheduleTemplate(deviceSN: String, templateID: String) async throws {
-    //        if isDemoUser {
-    //            try await fakeNetwork.enableScheduleTemplate(deviceSN: deviceSN, templateID: templateID)
-    //        } else {
-    //            try await network.enableScheduleTemplate(deviceSN: deviceSN, templateID: templateID)
-    //        }
-    //    }
-    //
-    //     func fetchScheduleTemplates() async throws -> ScheduleTemplateListResponse {
-    //        if isDemoUser {
-    //            try await fakeNetwork.fetchScheduleTemplates()
-    //        } else {
-    //            try await network.fetchScheduleTemplates()
-    //        }
-    //    }
-    //
-    //     func createScheduleTemplate(name: String, description: String) async throws {
-    //        if isDemoUser {
-    //            try await fakeNetwork.createScheduleTemplate(name: name, description: description)
-    //        } else {
-    //            try await network.createScheduleTemplate(name: name, description: description)
-    //        }
-    //    }
-    //
-    //     func deleteSchedule(deviceSN: String) async throws {
-    //        if isDemoUser {
-    //            try await fakeNetwork.deleteSchedule(deviceSN: deviceSN)
-    //        } else {
-    //            try await network.deleteSchedule(deviceSN: deviceSN)
-    //        }
-    //    }
-    //
-    //     func saveSchedule(deviceSN: String, schedule: Schedule) async throws {
-    //        if isDemoUser {
-    //            try await fakeNetwork.saveSchedule(deviceSN: deviceSN, schedule: schedule)
-    //        } else {
-    //            try await network.saveSchedule(deviceSN: deviceSN, schedule: schedule)
-    //        }
-    //    }
-    //
-    //     func saveScheduleTemplate(deviceSN: String, template: ScheduleTemplate) async throws {
-    //        if isDemoUser {
-    //            try await fakeNetwork.saveScheduleTemplate(deviceSN: deviceSN, template: template)
-    //        } else {
-    //            try await network.saveScheduleTemplate(deviceSN: deviceSN, template: template)
-    //        }
-    //    }
-    //
-    //     func fetchScheduleModes(deviceID: String) async throws -> [SchedulerModeResponse] {
-    //        if isDemoUser {
-    //            try await fakeNetwork.fetchScheduleModes(deviceID: deviceID)
-    //        } else {
-    //            try await network.fetchScheduleModes(deviceID: deviceID)
-    //        }
-    //    }
-
     func openapi_fetchSchedulerFlag(deviceSN: String) async throws -> GetSchedulerFlagResponse {
         if isDemoUser {
             try await demoAPI.openapi_fetchSchedulerFlag(deviceSN: deviceSN)
@@ -267,7 +195,7 @@ class ThrottleManager {
     private let queue = DispatchQueue(label: "throttle-manager-queue", qos: .utility)
 
     func throttle(method: String) async throws {
-        guard let lastCallTime = self.lastCallTime(for: method) else {
+        guard let lastCallTime = lastCallTime(for: method) else {
             didInvoke(method: method)
             return
         }

@@ -47,7 +47,7 @@ class MockConfig: Config {
     var showBatteryEstimate: Bool = false
     var devices: Data? = nil
     var showInverterTemperature: Bool = false
-    var selectedDeviceSN: String? = nil
+    var selectedDeviceSN: String? = "DEVICESN"
     var solcastSettings: SolcastSettings = SolcastSettings(apiKey: nil, sites: [])
     var dataCeiling: DataCeiling = .none
     var showTotalYieldOnPowerFlow: Bool = false

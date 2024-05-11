@@ -63,6 +63,7 @@
 		411542F32BEF480500BDE56D /* XCTestCase+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411542F22BEF480500BDE56D /* XCTestCase+Async.swift */; };
 		411542F62BEF4E6F00BDE56D /* plantlist-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 411542F42BEF4E6F00BDE56D /* plantlist-success.json */; };
 		411542F72BEF4E6F00BDE56D /* plantdetail-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 411542F52BEF4E6F00BDE56D /* plantdetail-success.json */; };
+		411542F92BEF583100BDE56D /* parameters-history-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 411542F82BEF583100BDE56D /* parameters-history-success.json */; };
 		411B302E2AEAE0DD006A6C02 /* FoxEssCloudParseStrategyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411B302D2AEAE0DD006A6C02 /* FoxEssCloudParseStrategyTests.swift */; };
 		411DF2742AFD404E00CEEB23 /* SolarForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411DF2732AFD404E00CEEB23 /* SolarForecastView.swift */; };
 		41229CBD2BE1217600CFA636 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41229CBC2BE1217600CFA636 /* ContentViewModel.swift */; };
@@ -162,7 +163,6 @@
 		418805952BA04FAA00055EDA /* history.json in Resources */ = {isa = PBXBuildFile; fileRef = 418805942BA04FAA00055EDA /* history.json */; };
 		4189B0332B94888F00EC4CB5 /* VersionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4189B0322B94888F00EC4CB5 /* VersionChecker.swift */; };
 		418C091D2B17EC0E00183603 /* TimePeriodBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C091C2B17EC0E00183603 /* TimePeriodBarView.swift */; };
-		418C09232B18A9E300183603 /* ScheduleResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C09222B18A9E300183603 /* ScheduleResponses.swift */; };
 		418C09252B18FE9A00183603 /* SchedulePhaseEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C09242B18FE9A00183603 /* SchedulePhaseEditView.swift */; };
 		418C6E952AFAC3BF000DE35F /* SummaryTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C6E942AFAC3BF000DE35F /* SummaryTabView.swift */; };
 		418C6E972AFAC7E4000DE35F /* SummaryTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C6E962AFAC7E4000DE35F /* SummaryTabViewModel.swift */; };
@@ -218,7 +218,6 @@
 		41B6910B28E0CD370058126E /* battery-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B6910A28E0CD370058126E /* battery-success.json */; };
 		41B6910D28E0CD8F0058126E /* raw-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B6910C28E0CD8F0058126E /* raw-success.json */; };
 		41B6910F28E0CDFC0058126E /* devicelist-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B6910E28E0CDFC0058126E /* devicelist-success.json */; };
-		41BCC1A92B245C130062084A /* Network+Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC1A82B245C130062084A /* Network+Schedule.swift */; };
 		41BCC1AB2B245C280062084A /* FoxAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC1AA2B245C280062084A /* FoxAPIService.swift */; };
 		41C0923B2B20FCB0001D1E22 /* SchedulePhaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0923A2B20FCB0001D1E22 /* SchedulePhaseHelper.swift */; };
 		41C0923D2B210255001D1E22 /* ScheduleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0923C2B210255001D1E22 /* ScheduleDetailView.swift */; };
@@ -494,6 +493,7 @@
 		411542F22BEF480500BDE56D /* XCTestCase+Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Async.swift"; sourceTree = "<group>"; };
 		411542F42BEF4E6F00BDE56D /* plantlist-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "plantlist-success.json"; sourceTree = "<group>"; };
 		411542F52BEF4E6F00BDE56D /* plantdetail-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "plantdetail-success.json"; sourceTree = "<group>"; };
+		411542F82BEF583100BDE56D /* parameters-history-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "parameters-history-success.json"; sourceTree = "<group>"; };
 		411B302D2AEAE0DD006A6C02 /* FoxEssCloudParseStrategyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoxEssCloudParseStrategyTests.swift; sourceTree = "<group>"; };
 		411DF2732AFD404E00CEEB23 /* SolarForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarForecastView.swift; sourceTree = "<group>"; };
 		41229CBC2BE1217600CFA636 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
@@ -606,7 +606,6 @@
 		4189B0322B94888F00EC4CB5 /* VersionChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionChecker.swift; sourceTree = "<group>"; };
 		418C091C2B17EC0E00183603 /* TimePeriodBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePeriodBarView.swift; sourceTree = "<group>"; };
 		418C09202B18A98400183603 /* EditScheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScheduleViewModel.swift; sourceTree = "<group>"; };
-		418C09222B18A9E300183603 /* ScheduleResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleResponses.swift; sourceTree = "<group>"; };
 		418C09242B18FE9A00183603 /* SchedulePhaseEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePhaseEditView.swift; sourceTree = "<group>"; };
 		418C6E942AFAC3BF000DE35F /* SummaryTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTabView.swift; sourceTree = "<group>"; };
 		418C6E962AFAC7E4000DE35F /* SummaryTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTabViewModel.swift; sourceTree = "<group>"; };
@@ -667,7 +666,6 @@
 		41B6910A28E0CD370058126E /* battery-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "battery-success.json"; sourceTree = "<group>"; };
 		41B6910C28E0CD8F0058126E /* raw-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "raw-success.json"; sourceTree = "<group>"; };
 		41B6910E28E0CDFC0058126E /* devicelist-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "devicelist-success.json"; sourceTree = "<group>"; };
-		41BCC1A82B245C130062084A /* Network+Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+Schedule.swift"; sourceTree = "<group>"; };
 		41BCC1AA2B245C280062084A /* FoxAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoxAPIService.swift; sourceTree = "<group>"; };
 		41C0923A2B20FCB0001D1E22 /* SchedulePhaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePhaseHelper.swift; sourceTree = "<group>"; };
 		41C0923C2B210255001D1E22 /* ScheduleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailView.swift; sourceTree = "<group>"; };
@@ -1110,7 +1108,6 @@
 				416AE4442A811FBB003D0122 /* DeviceSettingsGetResponse.swift */,
 				4192F99A2A8678DB0035DAB8 /* PagedDataLoggerListResponse.swift */,
 				41D8402C2AB2E0DE00769E81 /* ErrorMessagesResponse.swift */,
-				418C09222B18A9E300183603 /* ScheduleResponses.swift */,
 				4190921E2B1D25890017CB65 /* Time.swift */,
 				4131AF4C2B5288F400836B77 /* OpenQueryResponse.swift */,
 				414A40BD2B989D1600321AA2 /* PowerStationResponse.swift */,
@@ -1335,6 +1332,7 @@
 		41B690FA28E041E00058126E /* Responses */ = {
 			isa = PBXGroup;
 			children = (
+				411542F82BEF583100BDE56D /* parameters-history-success.json */,
 				411542F52BEF4E6F00BDE56D /* plantdetail-success.json */,
 				411542F42BEF4E6F00BDE56D /* plantlist-success.json */,
 				41B6910828E0BA340058126E /* badtoken.json */,
@@ -1409,7 +1407,6 @@
 				416318B629DDD2E100C2C285 /* InMemoryLoggingNetworkStore.swift */,
 				41B3FFE72AB07FE10020DFC9 /* NetworkCache.swift */,
 				41DC51592AE2E9DC00FD348B /* NetworkValueCleaner.swift */,
-				41BCC1A82B245C130062084A /* Network+Schedule.swift */,
 				4131AF4A2B5288CF00836B77 /* Network+OpenAPI.swift */,
 				41D759FC2B5B0E37002C43A7 /* Network+OpenAPI+Schedule.swift */,
 				414A40BF2B989D9800321AA2 /* NetworkService.swift */,
@@ -1810,6 +1807,7 @@
 				41B6910728E0B5F30058126E /* trylater.json in Resources */,
 				411542F72BEF4E6F00BDE56D /* plantdetail-success.json in Resources */,
 				41B6910F28E0CDFC0058126E /* devicelist-success.json in Resources */,
+				411542F92BEF583100BDE56D /* parameters-history-success.json in Resources */,
 				41B690FD28E042560058126E /* login-failure.json in Resources */,
 				41B6910D28E0CD8F0058126E /* raw-success.json in Resources */,
 				411542F62BEF4E6F00BDE56D /* plantlist-success.json in Resources */,
@@ -2031,7 +2029,6 @@
 				418547492A3A1C7A000128C7 /* PowerAmountView.swift in Sources */,
 				41E8E7262AAE0D0D00DC4B89 /* SolarRangeDefinitions.swift in Sources */,
 				41009A712B02CD59009D853B /* Solcast.swift in Sources */,
-				418C09232B18A9E300183603 /* ScheduleResponses.swift in Sources */,
 				416AE4452A811FBB003D0122 /* DeviceSettingsGetResponse.swift in Sources */,
 				41F71ABD2A14FBEC00A8C81B /* Array+Safe.swift in Sources */,
 				4103D1D029DB6C51001B0BC8 /* Report.swift in Sources */,
@@ -2048,7 +2045,6 @@
 				4149DE9D2B04BDE6004F5FC6 /* SolcastCache.swift in Sources */,
 				4171854429FFCF9500D18CDD /* Color+Hex.swift in Sources */,
 				418685D52AFE700100355B6D /* AnimatedNumber.swift in Sources */,
-				41BCC1A92B245C130062084A /* Network+Schedule.swift in Sources */,
 				4131AF4D2B5288F400836B77 /* OpenQueryResponse.swift in Sources */,
 				413B7A312A4A390C00562A68 /* SelfSufficiencyCalculator.swift in Sources */,
 				4128874E2BE7CFD5007E9532 /* HomeEnergyStateManagerConfigAdapter.swift in Sources */,
