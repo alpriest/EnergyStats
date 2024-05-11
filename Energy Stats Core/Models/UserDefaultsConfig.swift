@@ -60,7 +60,6 @@ public class UserDefaultsConfig: Config {
 
     public func clearDeviceSettings() {
         UserDefaults.shared.removeObject(forKey: "devices")
-        UserDefaults.shared.removeObject(forKey: "selectedDeviceID")
         UserDefaults.shared.removeObject(forKey: "selectedDeviceSN")
         UserDefaults.shared.removeObject(forKey: "powerStationDetail")
         UserDefaults.shared.synchronize()

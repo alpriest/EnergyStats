@@ -1,0 +1,30 @@
+{
+  "errno": 0,
+  "msg": "success",
+  "result": {
+    "country": "GB",
+    "address": "Lymm",
+    "installer": {
+      "phone": "",
+      "name": "",
+      "email": ""
+    },
+    "city": "Cheshire ",
+    "timezone": "Europe/London",
+    "postcode": "WA13",
+    "stationName": "Alistair Priest",
+    "user": {
+      "phone": "",
+      "name": "Al Priest",
+      "email": "alpriest@gmail.com"
+    },
+    "modules": [
+      {
+        "moduleSN": "MODULESN",
+        "deviceSN": "DEVICESN"
+      }
+    ],
+    "capacity": 5.67,
+    "createDate": "2022-08-12 12:58:10 BST+0100"
+  }
+}

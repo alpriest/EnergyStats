@@ -61,6 +61,8 @@
 		411542EE2BED447C00BDE56D /* EditTemplateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DB22102B1F967500EC4015 /* EditTemplateViewModel.swift */; };
 		411542F12BEF424200BDE56D /* MockKeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411542F02BEF424200BDE56D /* MockKeychainStore.swift */; };
 		411542F32BEF480500BDE56D /* XCTestCase+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411542F22BEF480500BDE56D /* XCTestCase+Async.swift */; };
+		411542F62BEF4E6F00BDE56D /* plantlist-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 411542F42BEF4E6F00BDE56D /* plantlist-success.json */; };
+		411542F72BEF4E6F00BDE56D /* plantdetail-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 411542F52BEF4E6F00BDE56D /* plantdetail-success.json */; };
 		411B302E2AEAE0DD006A6C02 /* FoxEssCloudParseStrategyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411B302D2AEAE0DD006A6C02 /* FoxEssCloudParseStrategyTests.swift */; };
 		411DF2742AFD404E00CEEB23 /* SolarForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411DF2732AFD404E00CEEB23 /* SolarForecastView.swift */; };
 		41229CBD2BE1217600CFA636 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41229CBC2BE1217600CFA636 /* ContentViewModel.swift */; };
@@ -144,7 +146,6 @@
 		4171854A2A01006000D18CDD /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417185492A01006000D18CDD /* Double.swift */; };
 		4171854C2A01033700D18CDD /* ParameterGraphVariablesToggles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171854B2A01033700D18CDD /* ParameterGraphVariablesToggles.swift */; };
 		4171854E2A010B6300D18CDD /* ParameterGraphVariableChooserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171854D2A010B6300D18CDD /* ParameterGraphVariableChooserViewModel.swift */; };
-		417185502A01188300D18CDD /* firmware-version-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 4171854F2A01188300D18CDD /* firmware-version-success.json */; };
 		417185522A0119F300D18CDD /* variables-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 417185512A0119F300D18CDD /* variables-success.json */; };
 		41757BBC2A90A05E00573FB4 /* AmountType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41757BBB2A90A05E00573FB4 /* AmountType.swift */; };
 		41757BBD2A90A06E00573FB4 /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0B43329F96D3600CA9462 /* LocalizedString.swift */; };
@@ -210,7 +211,6 @@
 		41B690F628E03EA70058126E /* NetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B690F528E03EA70058126E /* NetworkTests.swift */; };
 		41B690F928E040060058126E /* OHHTTPStubsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 41B690F828E040060058126E /* OHHTTPStubsSwift */; };
 		41B690FD28E042560058126E /* login-failure.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B690FB28E042560058126E /* login-failure.json */; };
-		41B690FE28E042560058126E /* login-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B690FC28E042560058126E /* login-success.json */; };
 		41B6910128E043A10058126E /* OHHTTPStubs in Frameworks */ = {isa = PBXBuildFile; productRef = 41B6910028E043A10058126E /* OHHTTPStubs */; };
 		41B6910528E047DD0058126E /* report-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B6910428E047DD0058126E /* report-success.json */; };
 		41B6910728E0B5F30058126E /* trylater.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B6910628E0B5F30058126E /* trylater.json */; };
@@ -492,6 +492,8 @@
 		411542EB2BED310200BDE56D /* TemplateStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateStore.swift; sourceTree = "<group>"; };
 		411542F02BEF424200BDE56D /* MockKeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockKeychainStore.swift; sourceTree = "<group>"; };
 		411542F22BEF480500BDE56D /* XCTestCase+Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Async.swift"; sourceTree = "<group>"; };
+		411542F42BEF4E6F00BDE56D /* plantlist-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "plantlist-success.json"; sourceTree = "<group>"; };
+		411542F52BEF4E6F00BDE56D /* plantdetail-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "plantdetail-success.json"; sourceTree = "<group>"; };
 		411B302D2AEAE0DD006A6C02 /* FoxEssCloudParseStrategyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoxEssCloudParseStrategyTests.swift; sourceTree = "<group>"; };
 		411DF2732AFD404E00CEEB23 /* SolarForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarForecastView.swift; sourceTree = "<group>"; };
 		41229CBC2BE1217600CFA636 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
@@ -583,7 +585,6 @@
 		417185492A01006000D18CDD /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		4171854B2A01033700D18CDD /* ParameterGraphVariablesToggles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterGraphVariablesToggles.swift; sourceTree = "<group>"; };
 		4171854D2A010B6300D18CDD /* ParameterGraphVariableChooserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterGraphVariableChooserViewModel.swift; sourceTree = "<group>"; };
-		4171854F2A01188300D18CDD /* firmware-version-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "firmware-version-success.json"; sourceTree = "<group>"; };
 		417185512A0119F300D18CDD /* variables-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "variables-success.json"; sourceTree = "<group>"; };
 		41757BBB2A90A05E00573FB4 /* AmountType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountType.swift; sourceTree = "<group>"; };
 		41777F1428F49C61009944FF /* NetworkFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFacade.swift; sourceTree = "<group>"; };
@@ -660,7 +661,6 @@
 		41B690F328DF5C390058126E /* NetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponse.swift; sourceTree = "<group>"; };
 		41B690F528E03EA70058126E /* NetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTests.swift; sourceTree = "<group>"; };
 		41B690FB28E042560058126E /* login-failure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "login-failure.json"; sourceTree = "<group>"; };
-		41B690FC28E042560058126E /* login-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "login-success.json"; sourceTree = "<group>"; };
 		41B6910428E047DD0058126E /* report-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "report-success.json"; sourceTree = "<group>"; };
 		41B6910628E0B5F30058126E /* trylater.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = trylater.json; sourceTree = "<group>"; };
 		41B6910828E0BA340058126E /* badtoken.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = badtoken.json; sourceTree = "<group>"; };
@@ -1335,13 +1335,13 @@
 		41B690FA28E041E00058126E /* Responses */ = {
 			isa = PBXGroup;
 			children = (
+				411542F52BEF4E6F00BDE56D /* plantdetail-success.json */,
+				411542F42BEF4E6F00BDE56D /* plantlist-success.json */,
 				41B6910828E0BA340058126E /* badtoken.json */,
 				41923E3B2916B8A800D1A8C5 /* battery-soc-success.json */,
 				41B6910A28E0CD370058126E /* battery-success.json */,
 				41B6910E28E0CDFC0058126E /* devicelist-success.json */,
-				4171854F2A01188300D18CDD /* firmware-version-success.json */,
 				41B690FB28E042560058126E /* login-failure.json */,
-				41B690FC28E042560058126E /* login-success.json */,
 				41B6910C28E0CD8F0058126E /* raw-success.json */,
 				41B6910428E047DD0058126E /* report-success.json */,
 				41B6910628E0B5F30058126E /* trylater.json */,
@@ -1808,13 +1808,13 @@
 			files = (
 				41923E3C2916B8A800D1A8C5 /* battery-soc-success.json in Resources */,
 				41B6910728E0B5F30058126E /* trylater.json in Resources */,
+				411542F72BEF4E6F00BDE56D /* plantdetail-success.json in Resources */,
 				41B6910F28E0CDFC0058126E /* devicelist-success.json in Resources */,
 				41B690FD28E042560058126E /* login-failure.json in Resources */,
 				41B6910D28E0CD8F0058126E /* raw-success.json in Resources */,
+				411542F62BEF4E6F00BDE56D /* plantlist-success.json in Resources */,
 				41B6910528E047DD0058126E /* report-success.json in Resources */,
-				41B690FE28E042560058126E /* login-success.json in Resources */,
 				417185522A0119F300D18CDD /* variables-success.json in Resources */,
-				417185502A01188300D18CDD /* firmware-version-success.json in Resources */,
 				41B6910928E0BA340058126E /* badtoken.json in Resources */,
 				41B6910B28E0CD370058126E /* battery-success.json in Resources */,
 			);

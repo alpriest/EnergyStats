@@ -1,0 +1,16 @@
+{
+  "errno": 0,
+  "msg": "success",
+  "result": {
+    "total": 1,
+    "data": [
+      {
+        "name": "Alistair Priest",
+        "ianaTimezone": "Europe/London",
+        "stationID": "STATION-ID"
+      }
+    ],
+    "pageSize": 100,
+    "currentPage": 1
+  }
+}

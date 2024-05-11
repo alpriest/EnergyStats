@@ -1,13 +1,24 @@
 {
   "errno": 0,
-  "result": {
-    "status": 1,
-    "soc": 23,
-    "volt": 159.2,
-    "current": -6.5,
-    "power": -1.065,
-    "residual": 1860,
-    "temperature": 19.3,
-    "timestamp": ""
-  }
+  "msg": "success",
+  "result": [
+    {
+      "datas": [
+        {
+          "unit": "0.01kWh",
+          "name": "Battery Residual Energy",
+          "variable": "ResidualEnergy",
+          "value": 1012.0
+        },
+        {
+          "unit": "%",
+          "name": "SoC",
+          "variable": "SoC",
+          "value": 98.0
+        }
+      ],
+      "time": "2024-05-11 07:52:58 BST+0100",
+      "deviceSN": "DEVICESN"
+    }
+  ]
 }

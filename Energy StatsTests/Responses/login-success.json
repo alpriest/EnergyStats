@@ -1,8 +1,0 @@
-{
-  "errno": 0,
-  "result": {
-    "token": "DummyUserToken",
-    "access": 1,
-    "user": "demo"
-  }
-}

@@ -26,9 +26,12 @@ class MockKeychainStore: KeychainStoring {
 
     func logout() {
         logoutCalled = true
+        token = nil
     }
 
-    func updateHasCredentials() {}
+    func updateHasCredentials() {
+        hasCredentials.value = true
+    }
 
     let hasCredentials = CurrentValueSubject<Bool, Never>(false)
 

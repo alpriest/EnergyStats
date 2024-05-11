@@ -1,29 +1,22 @@
 {
   "errno": 0,
+  "msg": "success",
   "result": {
-    "currentPage": 1,
-    "pageSize": 1,
     "total": 1,
-    "devices": [
+    "data": [
       {
-        "deviceID": "12345678-0000-0000-1234-aaaabbbbcccc",
-        "deviceSN": "1234567890",
-        "moduleSN": "9990008881",
-        "plantName": "Dummy User",
         "deviceType": "H1-3.7-E",
-        "country": "United Kingdom (the)",
-        "countryCode": "",
-        "feedinDate": "2022-02-22 21:46:27 GMT+0000",
-        "status": 1,
-        "power": 0.252,
-        "generationToday": 4.399999999999977,
-        "generationTotal": 517.9,
-        "productType": "H",
-        "flowType": 2,
-        "hasBattery": false,
+        "hasBattery": true,
         "hasPV": true,
-        "dataLatestUploadDate": "2022-09-25 18:50:50 BST+0100"
+        "stationName": "Alistair Priest",
+        "moduleSN": "MODULESN",
+        "deviceSN": "DEVICESN",
+        "productType": "H",
+        "stationID": "STATIONID",
+        "status": 1
       }
-    ]
+    ],
+    "pageSize": 20,
+    "currentPage": 1
   }
 }
