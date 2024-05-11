@@ -29,7 +29,11 @@ class MockNetworking: Networking {
     }
 
     func fetchDeviceList() async throws -> [DeviceSummaryResponse] {
-        []
+        if throwOnCall {
+            throw NetworkError.badCredentials
+        }
+
+        return []
     }
 
     func fetchDevice(deviceSN: String) async throws -> DeviceDetailResponse {

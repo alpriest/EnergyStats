@@ -21,7 +21,18 @@ final class NetworkTests: XCTestCase {
     func test_fetchReport_returns_data_on_success() async throws {
         stubHTTPResponse(with: .reportSuccess)
 
-        let report = try await sut.openapi_fetchReport(deviceSN: "any", variables: [.feedIn, .gridConsumption, .generation, .chargeEnergyToTal, .dischargeEnergyToTal], queryDate: QueryDate.any(), reportType: .day)
+        let report = try await sut.openapi_fetchReport(
+            deviceSN: "any",
+            variables: [
+                .feedIn,
+                .gridConsumption,
+                .generation,
+                .chargeEnergyToTal,
+                .dischargeEnergyToTal
+            ],
+            queryDate: QueryDate.any(),
+            reportType: .day
+        )
 
         XCTAssertEqual(report.count, 5)
     }

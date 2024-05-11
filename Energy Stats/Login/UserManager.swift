@@ -10,7 +10,6 @@ import Energy_Stats_Core
 import Foundation
 
 class UserManager: ObservableObject, HasLoadState {
-    private let networking: Networking
     private var configManager: ConfigManaging
     private let store: KeychainStoring
     private var cancellables = Set<AnyCancellable>()
@@ -18,8 +17,7 @@ class UserManager: ObservableObject, HasLoadState {
     @MainActor @Published var state = LoadState.inactive
     @MainActor @Published var isLoggedIn: Bool = false
 
-    init(networking: Networking, store: KeychainStoring, configManager: ConfigManaging, networkCache: InMemoryLoggingNetworkStore) {
-        self.networking = networking
+    init(store: KeychainStoring, configManager: ConfigManaging, networkCache: InMemoryLoggingNetworkStore) {
         self.store = store
         self.configManager = configManager
         self.networkCache = networkCache
@@ -83,7 +81,6 @@ class UserManager: ObservableObject, HasLoadState {
 extension UserManager {
     static func preview() -> UserManager {
         UserManager(
-            networking: NetworkService.preview(),
             store: KeychainStore(),
             configManager: ConfigManager.preview(),
             networkCache: InMemoryLoggingNetworkStore()

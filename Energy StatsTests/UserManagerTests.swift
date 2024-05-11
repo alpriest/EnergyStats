@@ -23,7 +23,7 @@ final class UserManagerTests: XCTestCase {
         let cache = InMemoryLoggingNetworkStore()
         networking = NetworkService(api: FoxAPIService(credentials: keychainStore, store: cache))
         configManager = ConfigManager(networking: networking, config: config, appSettingsPublisher: CurrentValueSubject<AppSettings, Never>(AppSettings.mock()), keychainStore: MockKeychainStore())
-        sut = UserManager(networking: networking, store: keychainStore, configManager: configManager, networkCache: cache)
+        sut = UserManager(store: keychainStore, configManager: configManager, networkCache: cache)
     }
 
     @MainActor

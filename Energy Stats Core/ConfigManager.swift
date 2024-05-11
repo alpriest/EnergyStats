@@ -548,14 +548,14 @@ public enum BatteryResponseMapper {
 }
 
 public extension ConfigManager {
-    static func preview(config: Config = MockConfig()) -> ConfigManaging {
-        PreviewConfigManager(config: config)
+    static func preview(config: Config = MockConfig(), networking: Networking = NetworkService.preview()) -> ConfigManaging {
+        PreviewConfigManager(config: config, networking: networking)
     }
 
     internal class PreviewConfigManager: ConfigManager {
-        convenience init(config: Config) {
+        convenience init(config: Config, networking: Networking) {
             self.init(
-                networking: NetworkService.preview(),
+                networking: networking,
                 config: config,
                 appSettingsPublisher: CurrentValueSubject(AppSettings.mock()),
                 keychainStore: KeychainStore.preview()
