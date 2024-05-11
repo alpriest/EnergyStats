@@ -33,7 +33,19 @@ class MockNetworking: Networking {
             throw NetworkError.badCredentials
         }
 
-        return []
+        return [
+            DeviceSummaryResponse(
+                deviceSN: "1",
+                moduleSN: "moduleSN",
+                stationID: "stationID",
+                stationName: "stationName",
+                productType: "productType",
+                deviceType: "deviceType",
+                hasBattery: true,
+                hasPV: true,
+                status: 1
+            )
+        ]
     }
 
     func fetchDevice(deviceSN: String) async throws -> DeviceDetailResponse {
