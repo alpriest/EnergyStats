@@ -119,7 +119,7 @@ struct ResponseDebugView_Previews: PreviewProvider {
     struct TestError: Error {}
 
     static var previews: some View {
-        let network = DemoNetworking()
+        let network = NetworkService.preview()
         let store = InMemoryLoggingNetworkStore()
         Task {
             store.reportResponse = try NetworkOperation(description: "fetchReport", value: await network.fetchReport(deviceSN: "123", variables: [.chargeEnergyToTal], queryDate: .now(), reportType: .day), raw: "Report is only fetched and cached on the graph view. Click that page to load report data\nClick that page to load report data".data(using: .utf8)!)

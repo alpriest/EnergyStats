@@ -18,3 +18,9 @@ public struct DeviceFirmwareVersion: Codable, Equatable, Hashable {
         self.manager = manager
     }
 }
+
+public extension DeviceFirmwareVersion {
+    static func preview() -> DeviceFirmwareVersion {
+        DeviceFirmwareVersion(master: "1.54", slave: "1.01", manager: "1.27")
+    }
+}

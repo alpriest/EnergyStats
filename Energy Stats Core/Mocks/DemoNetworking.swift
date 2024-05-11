@@ -8,8 +8,8 @@
 import Combine
 import Foundation
 
-public class DemoNetworking: NetworkService {
-    public init() {
+class DemoNetworking: NetworkService {
+    init() {
         super.init(api: DemoAPI())
     }
 }
@@ -20,44 +20,6 @@ class DemoAPI: FoxAPIServicing {
     init(throwOnCall: Bool = false) {
         self.throwOnCall = throwOnCall
     }
-
-    //    public func deleteScheduleTemplate(templateID: String) async throws {}
-    //
-    //    public func saveScheduleTemplate(deviceSN: String, template: ScheduleTemplate) async throws {}
-    //
-    //    public func fetchScheduleTemplate(deviceSN: String, templateID: String) async throws -> ScheduleTemplateResponse {
-    //        ScheduleTemplateResponse(
-    //            templateName: "Template-1",
-    //            enable: false,
-    //            pollcy: [SchedulePollcy(startH: 15, startM: 0, endH: 17, endM: 0, fdpwr: 0, workMode: "ForceCharge", fdsoc: 100, minsocongrid: 100),
-    //                     SchedulePollcy(startH: 17, startM: 0, endH: 18, endM: 30, fdpwr: 3500, workMode: "ForceDischarge", fdsoc: 20, minsocongrid: 20)],
-    //            content: "Description of template 1"
-    //        )
-    //    }
-    //
-    //    public func enableScheduleTemplate(deviceSN: String, templateID: String) async throws {}
-    //
-    //    public func fetchScheduleTemplates() async throws -> ScheduleTemplateListResponse {
-    //        ScheduleTemplateListResponse(data: [
-    //            .init(templateName: "Winter charging", enable: false, templateID: "a"),
-    //            .init(templateName: "Saving session", enable: false, templateID: "b"),
-    //            .init(templateName: "Summer usage", enable: false, templateID: "c")
-    //        ])
-    //    }
-    //
-    //    public func createScheduleTemplate(name: String, description: String) async throws {}
-    //    public func deleteSchedule(deviceSN: String) async throws {}
-    //    public func saveSchedule(deviceSN: String, schedule: Schedule) async throws {}
-    //
-    //    public func fetchScheduleModes(deviceID: String) async throws -> [SchedulerModeResponse] {
-    //        [
-    //            SchedulerModeResponse(color: "#80F6BD16", name: "Back Up", key: "Backup"),
-    //            SchedulerModeResponse(color: "#805B8FF9", name: "Feed-in Priority", key: "Feedin"),
-    //            SchedulerModeResponse(color: "#80BBE9FB", name: "Force Charge", key: "ForceCharge"),
-    //            SchedulerModeResponse(color: "#8065789B", name: "Force Discharge", key: "ForceDischarge"),
-    //            SchedulerModeResponse(color: "#8061DDAA", name: "Self-Use", key: "SelfUse")
-    //        ]
-    //    }
 
     func fetchErrorMessages() async {}
 

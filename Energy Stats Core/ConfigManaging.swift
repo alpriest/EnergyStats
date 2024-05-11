@@ -1,5 +1,5 @@
 //
-//  ConfigManaging.swift
+//  ConfigManager.swift
 //  Energy Stats Core
 //
 //  Created by Alistair Priest on 06/01/2024.
@@ -14,7 +14,7 @@ public enum RefreshFrequency: Int {
     case FIVE_MINUTES = 5
 }
 
-public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging, BatteryConfigManaging, CurrentStatusCalculatorConfig, ScheduleTemplateConfigManaging {
+public protocol ConfigManaging: FinancialConfigManager, SolcastConfigManager, BatteryConfigManager, CurrentStatusCalculatorConfig, ScheduleTemplateConfigManager {
     func fetchPowerStationDetail() async throws
     func fetchDevices() async throws
     func logout(clearDisplaySettings: Bool, clearDeviceSettings: Bool)
@@ -59,7 +59,7 @@ public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging, 
     var showSelfSufficiencyStatsGraphOverlay: Bool { get set }
 }
 
-public protocol BatteryConfigManaging {
+public protocol BatteryConfigManager {
     var batteryCapacity: String { get set }
     var batteryCapacityW: Int { get }
     var minSOC: Double { get }
@@ -68,17 +68,17 @@ public protocol BatteryConfigManaging {
     func clearBatteryOverride(for deviceID: String)
 }
 
-public protocol SolcastConfigManaging {
+public protocol SolcastConfigManager {
     var solcastSettings: SolcastSettings { get set }
 }
 
-public protocol FinancialConfigManaging {
+public protocol FinancialConfigManager {
     var showFinancialEarnings: Bool { get set }
     var feedInUnitPrice: Double { get set }
     var gridImportUnitPrice: Double { get set }
 }
 
-public protocol ScheduleTemplateConfigManaging {
+public protocol ScheduleTemplateConfigManager {
     var scheduleTemplates: [ScheduleTemplate] { get set }
 }
 

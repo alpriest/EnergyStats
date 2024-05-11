@@ -103,7 +103,7 @@ struct DebugDataView: View {
 #if DEBUG
 struct DebugDataView_Previews: PreviewProvider {
     static var previews: some View {
-        let api = DemoNetworking()
+        let api = NetworkService.preview()
         let store = InMemoryLoggingNetworkStore()
         Task {
             store.queryResponse = try NetworkOperation(

@@ -24,7 +24,7 @@ struct Energy_Stats_Watch_App: App {
 
     var network: Networking = {
         if ProcessInfo().arguments.contains("mockDevice") {
-            DemoNetworking()
+            NetworkService.preview()
         } else {
             NetworkService.standard(keychainStore: KeychainStore(),
                                     isDemoUser: { false },

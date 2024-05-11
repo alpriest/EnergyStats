@@ -139,7 +139,7 @@ struct StatsTabView: View {
 #if DEBUG
 @available(iOS 16.0, *)
 #Preview {
-    StatsTabView(configManager: ConfigManager.preview(), networking: DemoNetworking(), appSettingsPublisher: CurrentValueSubject(.mock()))
+    StatsTabView(configManager: ConfigManager.preview(), networking: NetworkService.preview(), appSettingsPublisher: CurrentValueSubject(.mock()))
         .previewDevice("iPhone 13 Mini")
 }
 #endif

@@ -72,7 +72,12 @@ struct BatterySOCSettingsView: View {
 }
 
 #Preview {
-    BatterySOCSettingsView(networking: DemoNetworking(),
-                           config: ConfigManager(networking: DemoNetworking(), config: MockConfig(), appSettingsPublisher: AppSettingsPublisherFactory.make(from: MockConfig()), keychainStore: PreviewKeychainStore()),
+    BatterySOCSettingsView(networking: NetworkService.preview(),
+                           config: ConfigManager(
+                               networking: NetworkService.preview(),
+                               config: MockConfig(),
+                               appSettingsPublisher: AppSettingsPublisherFactory.make(from: MockConfig()),
+                               keychainStore: KeychainStore.preview()
+                           ),
                            onSOCchange: {})
 }

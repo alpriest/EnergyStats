@@ -51,8 +51,15 @@ struct BatteryChargeScheduleSettingsView: View {
 struct BatteryForceChargeSettingsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            BatteryChargeScheduleSettingsView(networking: DemoNetworking(),
-                                              config: ConfigManager(networking: DemoNetworking(), config: MockConfig(), appSettingsPublisher: AppSettingsPublisherFactory.make(from: MockConfig()), keychainStore: PreviewKeychainStore()))
+            BatteryChargeScheduleSettingsView(
+                networking: NetworkService.preview(),
+                config: ConfigManager(
+                    networking: NetworkService.preview(),
+                    config: MockConfig(),
+                    appSettingsPublisher: AppSettingsPublisherFactory.make(from: MockConfig()),
+                    keychainStore: KeychainStore.preview()
+                )
+            )
         }
     }
 }

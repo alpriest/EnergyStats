@@ -9,7 +9,7 @@ import Foundation
 import WatchConnectivity
 
 class WatchSessionDelegate: NSObject, WCSessionDelegate {
-    var config: WatchConfigManaging?
+    var config: WatchConfigManager?
 
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: (any Error)?) {}
 

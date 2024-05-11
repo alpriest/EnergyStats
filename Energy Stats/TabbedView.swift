@@ -85,7 +85,7 @@ struct TabbedView: View {
 
 #if DEBUG
 #Preview {
-    TabbedView(networking: DemoNetworking(),
+    TabbedView(networking: NetworkService.preview(),
                userManager: .preview(),
                configManager: ConfigManager.preview(),
                solarForecastProvider: { DemoSolcast() },

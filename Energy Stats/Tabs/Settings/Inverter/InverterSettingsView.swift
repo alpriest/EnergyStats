@@ -110,7 +110,7 @@ struct InverterSettingsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             InverterSettingsView(
-                networking: DemoNetworking(),
+                networking: NetworkService.preview(),
                 configManager: ConfigManager.preview(),
                 templateStore: TemplateStore.preview(),
                 showInverterTemperature: .constant(true),

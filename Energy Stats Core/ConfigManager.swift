@@ -551,11 +551,16 @@ public extension ConfigManager {
     static func preview(config: Config = MockConfig()) -> ConfigManaging {
         PreviewConfigManager(config: config)
     }
-}
 
-class PreviewConfigManager: ConfigManager {
-    convenience init(config: Config) {
-        self.init(networking: DemoNetworking(), config: config, appSettingsPublisher: CurrentValueSubject(AppSettings.mock()), keychainStore: PreviewKeychainStore())
-        Task { try await fetchDevices() }
+    class PreviewConfigManager: ConfigManager {
+        convenience init(config: Config) {
+            self.init(
+                networking: NetworkService.preview(),
+                config: config,
+                appSettingsPublisher: CurrentValueSubject(AppSettings.mock()),
+                keychainStore: KeychainStore.preview()
+            )
+            Task { try await fetchDevices() }
+        }
     }
 }

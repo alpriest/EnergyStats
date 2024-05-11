@@ -59,6 +59,7 @@
 		411542EC2BED310200BDE56D /* TemplateStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411542EB2BED310200BDE56D /* TemplateStore.swift */; };
 		411542ED2BED447A00BDE56D /* EditTemplateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DB220E2B1F965C00EC4015 /* EditTemplateView.swift */; };
 		411542EE2BED447C00BDE56D /* EditTemplateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DB22102B1F967500EC4015 /* EditTemplateViewModel.swift */; };
+		411542F12BEF424200BDE56D /* MockKeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411542F02BEF424200BDE56D /* MockKeychainStore.swift */; };
 		411B302E2AEAE0DD006A6C02 /* FoxEssCloudParseStrategyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411B302D2AEAE0DD006A6C02 /* FoxEssCloudParseStrategyTests.swift */; };
 		411DF2742AFD404E00CEEB23 /* SolarForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411DF2732AFD404E00CEEB23 /* SolarForecastView.swift */; };
 		41229CBD2BE1217600CFA636 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41229CBC2BE1217600CFA636 /* ContentViewModel.swift */; };
@@ -224,7 +225,6 @@
 		41C19DCD2A4DDE46009883AB /* SelfSufficiencyEstimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C19DCC2A4DDE46009883AB /* SelfSufficiencyEstimateView.swift */; };
 		41C19DCF2A4E09F9009883AB /* SelfSufficiencySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C19DCE2A4E09F9009883AB /* SelfSufficiencySettingsView.swift */; };
 		41C249A52A77FC7400D8E9E7 /* FoxESSCloudStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C249A42A77FC7400D8E9E7 /* FoxESSCloudStatusView.swift */; };
-		41C49EAE2A0398E4003700CB /* PreviewUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C49EAD2A0398E4003700CB /* PreviewUserManager.swift */; };
 		41C6AF662A360CF600C88F2B /* CSVTextFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C6AF652A360CF600C88F2B /* CSVTextFile.swift */; };
 		41C849692A8BBC3800431410 /* Intents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C849682A8BBC3800431410 /* Intents.swift */; };
 		41C8496B2A8BBF1500431410 /* InverterIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C8496A2A8BBF1500431410 /* InverterIconView.swift */; };
@@ -281,7 +281,6 @@
 		41EE90BC2BDEB702006412FB /* WatchWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE90A02BDEAC00006412FB /* WatchWidgets.swift */; };
 		41EE90BD2BDEB704006412FB /* WidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE909E2BDEAB9A006412FB /* WidgetBundle.swift */; };
 		41EE90BF2BDED138006412FB /* Energy_Stats_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; };
-		41EE90C42BDEDC1F006412FB /* PreviewKeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A263232B6AEFCA0027E52A /* PreviewKeychainStore.swift */; };
 		41F631782BDCD32D00A571C5 /* Energy_Stats_Watch_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F631772BDCD32D00A571C5 /* Energy_Stats_Watch_AppApp.swift */; };
 		41F6317A2BDCD32D00A571C5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F631792BDCD32D00A571C5 /* ContentView.swift */; };
 		41F6317C2BDCD32E00A571C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41F6317B2BDCD32E00A571C5 /* Assets.xcassets */; };
@@ -490,6 +489,7 @@
 		4111333529B7D61200972935 /* Sequence+aysnc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+aysnc.swift"; sourceTree = "<group>"; };
 		411370892AEA48C0003D74AD /* Double+CappedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+CappedTests.swift"; sourceTree = "<group>"; };
 		411542EB2BED310200BDE56D /* TemplateStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateStore.swift; sourceTree = "<group>"; };
+		411542F02BEF424200BDE56D /* MockKeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockKeychainStore.swift; sourceTree = "<group>"; };
 		411B302D2AEAE0DD006A6C02 /* FoxEssCloudParseStrategyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoxEssCloudParseStrategyTests.swift; sourceTree = "<group>"; };
 		411DF2732AFD404E00CEEB23 /* SolarForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarForecastView.swift; sourceTree = "<group>"; };
 		41229CBC2BE1217600CFA636 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
@@ -637,7 +637,6 @@
 		41A25D4028CA6E0000315714 /* DemoNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoNetworking.swift; sourceTree = "<group>"; };
 		41A25D4228CA706700315714 /* CountdownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimer.swift; sourceTree = "<group>"; };
 		41A263212B6AEE9F0027E52A /* ConfigureAPIKeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureAPIKeyView.swift; sourceTree = "<group>"; };
-		41A263232B6AEFCA0027E52A /* PreviewKeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewKeychainStore.swift; sourceTree = "<group>"; };
 		41A715902BDFCA6F00560628 /* Energy Stats Watch WidgetsExtension.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "Energy Stats Watch WidgetsExtension.entitlements"; sourceTree = "<group>"; };
 		41A715912BDFCA8B00560628 /* Energy Stats Phone WidgetsExtension.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "Energy Stats Phone WidgetsExtension.entitlements"; sourceTree = "<group>"; };
 		41A715922BE0CD4700560628 /* LoadState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadState.swift; sourceTree = "<group>"; };
@@ -675,7 +674,6 @@
 		41C19DCC2A4DDE46009883AB /* SelfSufficiencyEstimateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSufficiencyEstimateView.swift; sourceTree = "<group>"; };
 		41C19DCE2A4E09F9009883AB /* SelfSufficiencySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSufficiencySettingsView.swift; sourceTree = "<group>"; };
 		41C249A42A77FC7400D8E9E7 /* FoxESSCloudStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoxESSCloudStatusView.swift; sourceTree = "<group>"; };
-		41C49EAD2A0398E4003700CB /* PreviewUserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewUserManager.swift; sourceTree = "<group>"; };
 		41C6AF652A360CF600C88F2B /* CSVTextFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVTextFile.swift; sourceTree = "<group>"; };
 		41C849682A8BBC3800431410 /* Intents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intents.swift; sourceTree = "<group>"; };
 		41C8496A2A8BBF1500431410 /* InverterIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterIconView.swift; sourceTree = "<group>"; };
@@ -936,6 +934,14 @@
 			path = "Battery Settings";
 			sourceTree = "<group>";
 		};
+		411542EF2BEF423800BDE56D /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				41339C7328CC7BA50062B976 /* KeychainStore.swift */,
+			);
+			path = Keychain;
+			sourceTree = "<group>";
+		};
 		4127910028E1FBCC00D5F993 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
@@ -999,6 +1005,8 @@
 		413745072919022C00D351F1 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				411542F02BEF424200BDE56D /* MockKeychainStore.swift */,
+				41DF51D12AA4CF6D007B5102 /* MockAppTheme.swift */,
 				418805942BA04FAA00055EDA /* history.json */,
 				41DCF5412B06C20B0010843F /* solcast.json */,
 				41F71ABE2A1504C700A8C81B /* report-year.json */,
@@ -1082,7 +1090,6 @@
 			isa = PBXGroup;
 			children = (
 				4140145428C70B3200EA5BA1 /* Preview Assets.xcassets */,
-				41C49EAD2A0398E4003700CB /* PreviewUserManager.swift */,
 				41E3B76B2BBDD345005A9F80 /* Icon.swift */,
 			);
 			path = "Preview Content";
@@ -1293,7 +1300,6 @@
 		41A95B9529DB3F6A00A35169 /* Energy Stats Core */ = {
 			isa = PBXGroup;
 			children = (
-				41A263232B6AEFCA0027E52A /* PreviewKeychainStore.swift */,
 				41757BBB2A90A05E00573FB4 /* AmountType.swift */,
 				410AA38729D96F6D00CD107C /* AppSettings.swift */,
 				41E3BEC22B1B5A160051C68B /* AppSettingsPublisherFactory.swift */,
@@ -1304,8 +1310,7 @@
 				41A25D4228CA706700315714 /* CountdownTimer.swift */,
 				41A95B9629DB3F6A00A35169 /* Energy_Stats_Core.h */,
 				4103D1E629DB6D2C001B0BC8 /* Extensions */,
-				41339C7328CC7BA50062B976 /* KeychainStore.swift */,
-				41DF51D12AA4CF6D007B5102 /* MockAppTheme.swift */,
+				411542EF2BEF423800BDE56D /* Keychain */,
 				413745072919022C00D351F1 /* Mocks */,
 				4140146728C7373A00EA5BA1 /* Models */,
 				41E4B30C28DB670C003F7F47 /* Network */,
@@ -1927,7 +1932,6 @@
 				41CA35712AA8C02C00D45734 /* EarningsView.swift in Sources */,
 				4192F9992A8674990035DAB8 /* DataLoggersView.swift in Sources */,
 				411542EE2BED447C00BDE56D /* EditTemplateViewModel.swift in Sources */,
-				41C49EAE2A0398E4003700CB /* PreviewUserManager.swift in Sources */,
 				419092232B1DC0070017CB65 /* ScheduleSummaryViewModel.swift in Sources */,
 				4110290F2A71B908004018BB /* BatterySOCSettingsView.swift in Sources */,
 				419DFA882A12A6DF0067313A /* StatsDatePickerViewModel.swift in Sources */,
@@ -2002,6 +2006,7 @@
 				4103D1DA29DB6C6D001B0BC8 /* DeviceFirmwareVersion.swift in Sources */,
 				41DCF5442B06CBD40010843F /* Date.swift in Sources */,
 				4131AF4B2B5288CF00836B77 /* Network+OpenAPI.swift in Sources */,
+				411542F12BEF424200BDE56D /* MockKeychainStore.swift in Sources */,
 				41495F382B211A75004A51C1 /* AlertContentView.swift in Sources */,
 				4190921D2B1D253D0017CB65 /* Schedule.swift in Sources */,
 				416AE4482A812876003D0122 /* WorkMode.swift in Sources */,
@@ -2020,7 +2025,6 @@
 				4103D1D929DB6C6D001B0BC8 /* ReportVariable.swift in Sources */,
 				4103D1D129DB6C51001B0BC8 /* FoxEssCloudParseStrategy.swift in Sources */,
 				4103D1D829DB6C51001B0BC8 /* NetworkFacade.swift in Sources */,
-				41EE90C42BDEDC1F006412FB /* PreviewKeychainStore.swift in Sources */,
 				418547492A3A1C7A000128C7 /* PowerAmountView.swift in Sources */,
 				41E8E7262AAE0D0D00DC4B89 /* SolarRangeDefinitions.swift in Sources */,
 				41009A712B02CD59009D853B /* Solcast.swift in Sources */,

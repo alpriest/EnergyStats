@@ -79,3 +79,14 @@ class UserManager: ObservableObject, HasLoadState {
         setState(.inactive)
     }
 }
+
+extension UserManager {
+    static func preview() -> UserManager {
+        UserManager(
+            networking: NetworkService.preview(),
+            store: KeychainStore(),
+            configManager: ConfigManager.preview(),
+            networkCache: InMemoryLoggingNetworkStore()
+        )
+    }
+}

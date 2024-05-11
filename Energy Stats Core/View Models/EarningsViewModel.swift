@@ -24,14 +24,14 @@ public struct FinanceAmount: Hashable, Identifiable {
 }
 
 public struct EnergyStatsFinancialModel {
-    private let config: FinancialConfigManaging
+    private let config: FinancialConfigManager
     public let exportIncome: FinanceAmount
     public let solarSaving: FinanceAmount
     public let total: FinanceAmount
     public let exportBreakdown: CalculationBreakdown
     public let solarSavingBreakdown: CalculationBreakdown
 
-    public init(totalsViewModel: TotalsViewModel, config: FinancialConfigManaging) {
+    public init(totalsViewModel: TotalsViewModel, config: FinancialConfigManager) {
         self.config = config
 
         exportIncome = FinanceAmount(title: .exportedIncomeShortTitle, amount: totalsViewModel.gridExport * config.feedInUnitPrice)

@@ -75,7 +75,7 @@ struct StatsGraphVariableToggles: View {
 struct StatsGraphVariableToggles_Previews: PreviewProvider {
     static var previews: some View {
         StatsGraphVariableToggles(
-            viewModel: StatsTabViewModel(networking: DemoNetworking(), configManager: ConfigManager.preview()),
+            viewModel: StatsTabViewModel(networking: NetworkService.preview(), configManager: ConfigManager.preview()),
             selectedDate: .constant(nil),
             valuesAtTime: .constant(nil),
             appSettings: .mock()

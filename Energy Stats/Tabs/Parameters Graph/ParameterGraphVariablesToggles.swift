@@ -80,7 +80,7 @@ struct ParameterGraphVariablesToggles: View {
 @available(iOS 16.0, *)
 #Preview {
     ParameterGraphVariablesToggles(
-        viewModel: ParametersGraphTabViewModel(networking: DemoNetworking(), configManager: ConfigManager.preview()),
+        viewModel: ParametersGraphTabViewModel(networking: NetworkService.preview(), configManager: ConfigManager.preview()),
         selectedDate: .constant(nil),
         valuesAtTime: .constant(nil),
         appSettings: .mock()

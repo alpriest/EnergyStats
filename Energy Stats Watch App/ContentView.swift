@@ -69,5 +69,9 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView(keychainStore: PreviewKeychainStore(), network: DemoNetworking(), config: PreviewWatchConfig())
+    ContentView(
+        keychainStore: KeychainStore.preview(),
+        network: NetworkService.preview(),
+        config: PreviewWatchConfig()
+    )
 }

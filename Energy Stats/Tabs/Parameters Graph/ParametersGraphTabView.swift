@@ -125,7 +125,7 @@ struct ParametersGraphTabView: View {
 struct GraphTabView_Previews: PreviewProvider {
     static var previews: some View {
         ParametersGraphTabView(configManager: ConfigManager.preview(),
-                               networking: DemoNetworking())
+                               networking: NetworkService.preview())
             .previewDevice("iPhone 13 Mini")
     }
 }

@@ -151,7 +151,7 @@ struct TemplateSummaryListRow: View {
 #Preview {
     NavigationStack {
         ScheduleSummaryView(
-            networking: DemoNetworking(),
+            networking: NetworkService.preview(),
             config: ConfigManager.preview(),
             templateStore: TemplateStore.preview()
         )

@@ -8,7 +8,7 @@
 import Energy_Stats_Core
 import Foundation
 
-protocol WatchConfigManaging: CurrentStatusCalculatorConfig, BatteryConfigManaging {}
+protocol WatchConfigManaging: CurrentStatusCalculatorConfig, BatteryConfigManager {}
 
 class WatchConfigManager: WatchConfigManaging {
     @UserDefaultsStoredString(key: "batteryCapacity", defaultValue: "0")

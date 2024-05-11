@@ -122,3 +122,9 @@ public class NetworkService: Networking {
         }
     }
 }
+
+public extension NetworkService {
+    static func preview() -> Networking {
+        DemoNetworking()
+    }
+}

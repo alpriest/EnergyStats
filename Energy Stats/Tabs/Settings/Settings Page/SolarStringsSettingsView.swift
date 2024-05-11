@@ -87,7 +87,7 @@ struct SolarStringsSettingsView: View {
     SolarStringsSettingsView(viewModel: SettingsTabViewModel(
         userManager: .preview(),
         config: ConfigManager.preview(),
-        networking: DemoNetworking())
+        networking: NetworkService.preview())
     )
 }
 #endif

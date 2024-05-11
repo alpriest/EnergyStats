@@ -75,7 +75,7 @@ struct ScheduleTemplateListView: View {
 #Preview {
     NavigationView {
         ScheduleTemplateListView(
-            networking: DemoNetworking(),
+            networking: NetworkService.preview(),
             templateStore: TemplateStore.preview(),
             config: ConfigManager.preview()
         )

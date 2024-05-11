@@ -40,6 +40,6 @@ struct ConfigureAPIKeyView: View {
 #if DEBUG
 #Preview {
     ConfigureAPIKeyView()
-        .environmentObject(KeychainWrapper(PreviewKeychainStore()))
+        .environmentObject(KeychainWrapper(KeychainStore.preview()))
 }
 #endif

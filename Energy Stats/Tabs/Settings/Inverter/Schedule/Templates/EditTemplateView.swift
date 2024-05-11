@@ -102,7 +102,7 @@ struct EditTemplateView: View {
 #Preview {
     NavigationStack {
         EditTemplateView(
-            networking: DemoNetworking(),
+            networking: NetworkService.preview(),
             templateStore: TemplateStore.preview(),
             config: ConfigManager.preview(),
             template: ScheduleTemplate.preview()
