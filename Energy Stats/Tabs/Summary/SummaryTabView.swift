@@ -114,7 +114,7 @@ struct SummaryTabView: View {
 }
 
 #Preview {
-    SummaryTabView(configManager: PreviewConfigManager(),
+    SummaryTabView(configManager: ConfigManager.preview(),
                    networking: DemoNetworking(),
                    appSettingsPublisher: CurrentValueSubject(.mock()),
                    solarForecastProvider: { DemoSolcast() })

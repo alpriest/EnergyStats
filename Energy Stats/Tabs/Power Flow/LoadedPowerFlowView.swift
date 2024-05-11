@@ -193,7 +193,7 @@ struct LoadedPowerFlowView: View {
 struct PowerSummaryView_Previews: PreviewProvider {
     static let strings = PowerFlowStringsSettings.none.copy(enabled: true, pv1Name: "Front", pv2Name: "Rear")
     static var previews: some View {
-        LoadedPowerFlowView(configManager: PreviewConfigManager(),
+        LoadedPowerFlowView(configManager: ConfigManager.preview(),
                             viewModel: LoadedPowerFlowViewModel.any(battery: .any()),
                             appSettingsPublisher: CurrentValueSubject(AppSettings.mock().copy(decimalPlaces: 3,
                                                                                               displayUnit: .adaptive,

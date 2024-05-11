@@ -103,8 +103,8 @@ struct EditTemplateView: View {
     NavigationStack {
         EditTemplateView(
             networking: DemoNetworking(),
-            templateStore: PreviewTemplateStore(),
-            config: PreviewConfigManager(),
+            templateStore: TemplateStore.preview(),
+            config: ConfigManager.preview(),
             template: ScheduleTemplate.preview()
         )
     }

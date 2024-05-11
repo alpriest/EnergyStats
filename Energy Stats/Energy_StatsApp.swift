@@ -33,14 +33,14 @@ struct Energy_StatsApp: App {
             config.isDemoUser ? DemoSolcast() : SolcastCache(service: { Solcast() })
         }
         let versionChecker = VersionChecker()
-        let templateStore = TemplateStore()
+        let templateStore = TemplateStore(config: configManager)
 
         return WindowGroup {
             if isRunningTests() {
                 Text("Tests")
             } else {
                 ContentView(
-                    loginManager: userManager,
+                    userManager: userManager,
                     network: network,
                     configManager: configManager,
                     solarForecastProvider: solarForecastProvider,

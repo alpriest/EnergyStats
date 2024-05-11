@@ -172,7 +172,7 @@ struct StatsGraphView: View {
 #Preview {
     VStack {
         Text(verbatim: "Day by hours")
-        let viewModel = StatsTabViewModel(networking: DemoNetworking(), configManager: PreviewConfigManager())
+        let viewModel = StatsTabViewModel(networking: DemoNetworking(), configManager: ConfigManager.preview())
 
         StatsGraphView(
             viewModel: viewModel,

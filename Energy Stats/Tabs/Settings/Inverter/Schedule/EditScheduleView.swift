@@ -73,7 +73,7 @@ struct EditScheduleView: View {
     NavigationView {
         EditScheduleView(
             networking: DemoNetworking(),
-            config: PreviewConfigManager(),
+            config: ConfigManager.preview(),
             schedule: Schedule.preview()
         )
     }

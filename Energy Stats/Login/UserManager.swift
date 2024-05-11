@@ -18,7 +18,7 @@ class UserManager: ObservableObject, HasLoadState {
     @MainActor @Published var state = LoadState.inactive
     @MainActor @Published var isLoggedIn: Bool = false
 
-    init(networking: Networking, store: KeychainStoring, configManager: ConfigManager, networkCache: InMemoryLoggingNetworkStore) {
+    init(networking: Networking, store: KeychainStoring, configManager: ConfigManaging, networkCache: InMemoryLoggingNetworkStore) {
         self.networking = networking
         self.store = store
         self.configManager = configManager
@@ -26,6 +26,8 @@ class UserManager: ObservableObject, HasLoadState {
 
         migrateKeychain()
         self.store.hasCredentials
+            .receive(on: RunLoop.main)
+            .print()
             .assign(to: \.isLoggedIn, on: self)
             .store(in: &cancellables)
     }
@@ -70,7 +72,7 @@ class UserManager: ObservableObject, HasLoadState {
     }
 
     @MainActor
-    func logout(clearDisplaySettings: Bool = true, clearDeviceSettings: Bool = true) {
+    func logout(clearDisplaySettings: Bool = false, clearDeviceSettings: Bool = true) {
         store.logout()
         configManager.logout(clearDisplaySettings: clearDisplaySettings, clearDeviceSettings: clearDeviceSettings)
         networkCache.logout()

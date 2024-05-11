@@ -75,6 +75,6 @@ struct SelfSufficiencySettingsView: View {
 
 struct SelfSufficiencySettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SelfSufficiencySettingsView(configManager: PreviewConfigManager())
+        SelfSufficiencySettingsView(configManager: ConfigManager.preview())
     }
 }

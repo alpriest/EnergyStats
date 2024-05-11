@@ -51,6 +51,7 @@ public protocol Config {
     var showBatteryPercentageRemaining: Bool { get set }
     var powerStationDetail: PowerStationDetail? { get set }
     var showSelfSufficiencyStatsGraphOverlay: Bool { get set }
+    var scheduleTemplates: [ScheduleTemplate] { get set }
 }
 
 public func DefaultParameterGroups() -> [ParameterGroup] {

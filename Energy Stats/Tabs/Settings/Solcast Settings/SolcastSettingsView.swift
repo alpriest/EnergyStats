@@ -46,6 +46,6 @@ struct SolcastSettingsView: View {
 
 #Preview {
     NavigationView {
-        SolcastSettingsView(configManager: PreviewConfigManager()) { DemoSolcast() }
+        SolcastSettingsView(configManager: ConfigManager.preview()) { DemoSolcast() }
     }
 }

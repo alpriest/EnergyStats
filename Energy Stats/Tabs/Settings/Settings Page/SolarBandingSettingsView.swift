@@ -153,7 +153,7 @@ struct SolarBandingSettingsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             SolarBandingSettingsView(
-                configManager: PreviewConfigManager()
+                configManager: ConfigManager.preview()
             )
         }
         .environment(\.locale, .init(identifier: "en"))

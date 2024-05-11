@@ -124,7 +124,7 @@ struct DebugDataView_Previews: PreviewProvider {
         }
 
         return NavigationView {
-            DebugDataView(networking: api, configManager: PreviewConfigManager())
+            DebugDataView(networking: api, configManager: ConfigManager.preview())
         }
         .environmentObject(store)
     }

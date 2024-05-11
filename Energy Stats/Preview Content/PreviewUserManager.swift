@@ -10,7 +10,12 @@ import Foundation
 
 extension UserManager {
     static func preview() -> UserManager {
-        UserManager(networking: DemoNetworking(), store: KeychainStore(), configManager: PreviewConfigManager(), networkCache: InMemoryLoggingNetworkStore())
+        UserManager(
+            networking: DemoNetworking(),
+            store: KeychainStore(),
+            configManager: ConfigManager.preview(),
+            networkCache: InMemoryLoggingNetworkStore()
+        )
     }
 }
 

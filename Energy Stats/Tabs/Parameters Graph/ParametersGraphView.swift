@@ -163,7 +163,7 @@ struct ParametersGraphView: View {
 @available(iOS 16.0, *)
 struct UsageGraphView_Previews: PreviewProvider {
     static var previews: some View {
-        let model = ParametersGraphTabViewModel(networking: DemoNetworking(), configManager: PreviewConfigManager())
+        let model = ParametersGraphTabViewModel(networking: DemoNetworking(), configManager: ConfigManager.preview())
         Task { await model.load() }
         return ParametersGraphView(
             key: "℃",

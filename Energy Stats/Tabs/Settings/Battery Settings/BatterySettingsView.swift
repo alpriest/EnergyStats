@@ -121,7 +121,7 @@ struct BatterySettingsView_Previews: PreviewProvider {
         NavigationView {
             BatterySettingsView(viewModel: SettingsTabViewModel(
                 userManager: .preview(),
-                config: PreviewConfigManager(),
+                config: ConfigManager.preview(),
                 networking: DemoNetworking()
             ))
         }

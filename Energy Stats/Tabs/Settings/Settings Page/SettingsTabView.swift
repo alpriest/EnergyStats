@@ -96,13 +96,13 @@ struct SettingsTabView_Previews: PreviewProvider {
         SettingsTabView(
             viewModel: SettingsTabViewModel(
                 userManager: .preview(),
-                config: PreviewConfigManager(),
+                config: ConfigManager.preview(),
                 networking: DemoNetworking()
             ),
-            configManager: PreviewConfigManager(),
+            configManager: ConfigManager.preview(),
             networking: DemoNetworking(),
             solarService: { DemoSolcast() },
-            templateStore: PreviewTemplateStore()
+            templateStore: TemplateStore.preview()
         )
         .environmentObject(VersionChecker())
     }

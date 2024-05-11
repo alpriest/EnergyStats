@@ -82,7 +82,7 @@ public class ConfigManager: ConfigManaging {
         }
     }
 
-    public func logout(clearDisplaySettings: Bool = true, clearDeviceSettings: Bool = true) {
+    public func logout(clearDisplaySettings: Bool, clearDeviceSettings: Bool) {
         if clearDisplaySettings {
             config.clearDisplaySettings()
         }
@@ -521,6 +521,11 @@ public class ConfigManager: ConfigManaging {
             ))
         }
     }
+
+    public var scheduleTemplates: [ScheduleTemplate] {
+        get { config.scheduleTemplates }
+        set { config.scheduleTemplates = newValue }
+    }
 }
 
 public enum BatteryResponseMapper {
@@ -539,5 +544,18 @@ public enum BatteryResponseMapper {
         minSOC = String(Double(settings.minSocOnGrid) / 100.0)
 
         return Device.Battery(capacity: batteryCapacity, minSOC: minSOC)
+    }
+}
+
+public extension ConfigManager {
+    static func preview(config: Config = MockConfig()) -> ConfigManaging {
+        PreviewConfigManager(config: config)
+    }
+}
+
+class PreviewConfigManager: ConfigManager {
+    convenience init(config: Config) {
+        self.init(networking: DemoNetworking(), config: config, appSettingsPublisher: CurrentValueSubject(AppSettings.mock()), keychainStore: PreviewKeychainStore())
+        Task { try await fetchDevices() }
     }
 }

@@ -50,7 +50,7 @@ struct InverterChoiceView: View {
 struct InverterChoiceView_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = InverterChoiceViewModel(
-            configManager: PreviewConfigManager()
+            configManager: ConfigManager.preview()
         )
 
         return Form {

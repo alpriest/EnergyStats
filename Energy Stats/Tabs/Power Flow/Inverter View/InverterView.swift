@@ -171,14 +171,14 @@ struct InverterView: View {
 struct InverterView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            InverterView(viewModel: InverterViewModel(configManager: PreviewConfigManager(),
+            InverterView(viewModel: InverterViewModel(configManager: ConfigManager.preview(),
                                                       temperatures: InverterTemperatures.any(),
                                                       deviceState: .online,
                                                       faults: []),
                          appSettings: .mock().copy(showInverterTemperature: true, showInverterStationName: true))
                 .background(Color.gray.opacity(0.3))
 
-            InverterView(viewModel: InverterViewModel(configManager: PreviewConfigManager(),
+            InverterView(viewModel: InverterViewModel(configManager: ConfigManager.preview(),
                                                       temperatures: InverterTemperatures.any(),
                                                       deviceState: .offline,
                                                       faults: ["No Utility", "Grid Voltage Fault", "Grid Frequency Fault"]),

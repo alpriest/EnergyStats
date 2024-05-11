@@ -14,7 +14,7 @@ public enum RefreshFrequency: Int {
     case FIVE_MINUTES = 5
 }
 
-public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging, BatteryConfigManaging, CurrentStatusCalculatorConfig {
+public protocol ConfigManaging: FinancialConfigManaging, SolcastConfigManaging, BatteryConfigManaging, CurrentStatusCalculatorConfig, ScheduleTemplateConfigManaging {
     func fetchPowerStationDetail() async throws
     func fetchDevices() async throws
     func logout(clearDisplaySettings: Bool, clearDeviceSettings: Bool)
@@ -76,6 +76,10 @@ public protocol FinancialConfigManaging {
     var showFinancialEarnings: Bool { get set }
     var feedInUnitPrice: Double { get set }
     var gridImportUnitPrice: Double { get set }
+}
+
+public protocol ScheduleTemplateConfigManaging {
+    var scheduleTemplates: [ScheduleTemplate] { get set }
 }
 
 public struct PowerFlowStringsSettings: Codable {

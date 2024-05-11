@@ -114,9 +114,9 @@ struct DisplaySettingsView_Previews: PreviewProvider {
             DisplaySettingsView(
                 viewModel: SettingsTabViewModel(
                     userManager: .preview(),
-                    config: PreviewConfigManager(),
+                    config: ConfigManager.preview(),
                     networking: DemoNetworking()),
-                configManager: PreviewConfigManager(),
+                configManager: ConfigManager.preview(),
                 solarService: { DemoSolcast() })
         }
     }

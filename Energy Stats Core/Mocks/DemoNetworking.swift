@@ -311,13 +311,7 @@ public class MockConfig: Config {
     public var showBatteryPercentageRemaining: Bool = true
     public var powerStationDetail: PowerStationDetail? = nil
     public var showSelfSufficiencyStatsGraphOverlay: Bool = true
-}
-
-public class PreviewConfigManager: ConfigManager {
-    public convenience init(config: Config = MockConfig()) {
-        self.init(networking: DemoNetworking(), config: config, appSettingsPublisher: CurrentValueSubject(AppSettings.mock()), keychainStore: PreviewKeychainStore())
-        Task { try await fetchDevices() }
-    }
+    public var scheduleTemplates: [ScheduleTemplate] = []
 }
 
 public extension SolcastSite {

@@ -104,7 +104,7 @@ struct PowerFlowTabView: View {
 
 #if DEBUG
 #Preview {
-    PowerFlowTabView(configManager: PreviewConfigManager(),
+    PowerFlowTabView(configManager: ConfigManager.preview(),
                      networking: DemoNetworking(),
                      userManager: UserManager.preview(),
                      appSettingsPublisher: CurrentValueSubject(AppSettings.mock()))

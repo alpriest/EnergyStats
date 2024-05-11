@@ -124,7 +124,7 @@ struct ParametersGraphTabView: View {
 @available(iOS 16.0, *)
 struct GraphTabView_Previews: PreviewProvider {
     static var previews: some View {
-        ParametersGraphTabView(configManager: PreviewConfigManager(),
+        ParametersGraphTabView(configManager: ConfigManager.preview(),
                                networking: DemoNetworking())
             .previewDevice("iPhone 13 Mini")
     }

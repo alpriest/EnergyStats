@@ -9,19 +9,19 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var loginManager: UserManager
+    @ObservedObject var userManager: UserManager
     let network: Networking
-    let configManager: ConfigManager
+    let configManager: ConfigManaging
     let solarForecastProvider: SolarForecastProviding
     let templateStore: TemplateStoring
     @State private var state = LoadState.inactive
 
     var body: some View {
-        if loginManager.isLoggedIn {
-            TabbedView(networking: network, userManager: loginManager, configManager: configManager, solarForecastProvider: solarForecastProvider, templateStore: templateStore)
+        if userManager.isLoggedIn {
+            TabbedView(networking: network, userManager: userManager, configManager: configManager, solarForecastProvider: solarForecastProvider, templateStore: templateStore)
                 .task { await network.fetchErrorMessages() }
         } else {
-            APIKeyLoginView(userManager: loginManager)
+            APIKeyLoginView(userManager: userManager)
         }
     }
 }
@@ -29,11 +29,11 @@ struct ContentView: View {
 #if DEBUG
 #Preview {
     ContentView(
-        loginManager: .preview(),
+        userManager: .preview(),
         network: DemoNetworking(),
-        configManager: PreviewConfigManager(),
+        configManager: ConfigManager.preview(),
         solarForecastProvider: { DemoSolcast() },
-        templateStore: PreviewTemplateStore()
+        templateStore: TemplateStore.preview()
     )
 }
 #endif

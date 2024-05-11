@@ -15,39 +15,29 @@ public protocol TemplateStoring {
 }
 
 public class TemplateStore: TemplateStoring {
-    private let defaultsKey = "scheduleTemplates"
-    private var store: [ScheduleTemplate] {
-        get {
-            guard let data = UserDefaults.standard.data(forKey: defaultsKey) else { return [] }
-            let templates = (try? JSONDecoder().decode([ScheduleTemplate].self, from: data)) ?? []
-            return templates
-        }
-        set {
-            let data = try? JSONEncoder().encode(newValue)
-            UserDefaults.standard.set(data, forKey: defaultsKey)
-        }
+    private var config: ScheduleTemplateConfigManaging
+    public init(config: ScheduleTemplateConfigManaging) {
+        self.config = config
     }
 
-    public init() {}
-
     public func load() -> [ScheduleTemplate] {
-        store
+        config.scheduleTemplates
     }
 
     public func save(template: ScheduleTemplate) {
-        if let index = store.firstIndex(where: { $0.id == template.id }) {
-            store[index] = template
+        if let index = config.scheduleTemplates.firstIndex(where: { $0.id == template.id }) {
+            config.scheduleTemplates[index] = template
         } else {
-            store.append(template)
+            config.scheduleTemplates.append(template)
         }
     }
 
     public func delete(template: ScheduleTemplate) {
-        store = store.filter { $0.id != template.id }
+        config.scheduleTemplates = config.scheduleTemplates.filter { $0.id != template.id }
     }
 
     public func create(named name: String) {
-        store.append(ScheduleTemplate(
+        config.scheduleTemplates.append(ScheduleTemplate(
             id: UUID().uuidString,
             name: name,
             phases: []
@@ -55,8 +45,13 @@ public class TemplateStore: TemplateStoring {
     }
 }
 
-public class PreviewTemplateStore: TemplateStoring {
-    public init() {}
+public extension TemplateStore {
+    static func preview() -> TemplateStoring {
+        PreviewTemplateStore()
+    }
+}
+
+class PreviewTemplateStore: TemplateStoring {
     public func load() -> [ScheduleTemplate] {
         [
             ScheduleTemplate(id: "1", name: "Force discharge", phases: [

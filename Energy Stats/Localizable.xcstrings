@@ -12443,7 +12443,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Schedule Templates are local to your device and will not be visible on Fox Cloud. This was a limitation imposed by FoxESS."
+            "value" : "Schedule Templates are local to your device and will not be visible on Fox Cloud. This is a limitation imposed by FoxESS. They will not be removed if you log out."
           }
         }
       }

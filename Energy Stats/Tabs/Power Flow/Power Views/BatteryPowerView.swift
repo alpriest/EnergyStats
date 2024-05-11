@@ -120,6 +120,6 @@ struct BatteryPowerView: View {
 
 extension BatteryPowerViewModel {
     static func any(error: Error?, config: Config = MockConfig()) -> BatteryPowerViewModel {
-        .init(configManager: PreviewConfigManager(config: config), batteryStateOfCharge: 0.99, batteryChargekWH: -0.01, temperature: 15.6, batteryResidual: 5940, error: error)
+        .init(configManager: ConfigManager.preview(config: config), batteryStateOfCharge: 0.99, batteryChargekWH: -0.01, temperature: 15.6, batteryResidual: 5940, error: error)
     }
 }

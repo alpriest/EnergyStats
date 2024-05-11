@@ -89,7 +89,7 @@ struct ParameterGraphVariableChooserView: View {
 
     return ParameterGraphVariableChooserView(
         viewModel: ParameterGraphVariableChooserViewModel(variables: variables,
-                                                          configManager: PreviewConfigManager(),
+                                                          configManager: ConfigManager.preview(),
                                                           onApply: { _ in }))
 }
 

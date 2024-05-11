@@ -117,7 +117,7 @@ struct DataSettingsView: View {
         DataSettingsView(
             viewModel: SettingsTabViewModel(
                 userManager: .preview(),
-                config: PreviewConfigManager(),
+                config: ConfigManager.preview(),
                 networking: DemoNetworking()
             )
         )

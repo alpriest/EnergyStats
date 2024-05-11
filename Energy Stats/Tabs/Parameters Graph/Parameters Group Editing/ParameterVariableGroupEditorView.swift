@@ -98,7 +98,7 @@ struct ParameterVariableGroupEditorView: View {
 #Preview {
     ParameterVariableGroupEditorView(
         viewModel: ParameterVariableGroupEditorViewModel(
-            configManager: PreviewConfigManager()
+            configManager: ConfigManager.preview()
         )
     )
 }

@@ -9,14 +9,14 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct TabbedView: View {
-    let configManager: ConfigManager
+    let configManager: ConfigManaging
     let networking: Networking
     let userManager: UserManager
     let solarForecastProvider: SolarForecastProviding
     let templateStore: TemplateStoring
     @StateObject var settingsTabViewModel: SettingsTabViewModel
 
-    init(networking: Networking, userManager: UserManager, configManager: ConfigManager, solarForecastProvider: @escaping SolarForecastProviding, templateStore: TemplateStoring) {
+    init(networking: Networking, userManager: UserManager, configManager: ConfigManaging, solarForecastProvider: @escaping SolarForecastProviding, templateStore: TemplateStoring) {
         self.networking = networking
         self.userManager = userManager
         self.configManager = configManager
@@ -87,8 +87,8 @@ struct TabbedView: View {
 #Preview {
     TabbedView(networking: DemoNetworking(),
                userManager: .preview(),
-               configManager: PreviewConfigManager(),
+               configManager: ConfigManager.preview(),
                solarForecastProvider: { DemoSolcast() },
-               templateStore: PreviewTemplateStore())
+               templateStore: TemplateStore.preview())
 }
 #endif

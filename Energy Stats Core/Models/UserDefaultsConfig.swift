@@ -233,4 +233,16 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredBool(key: "showSelfSufficiencyStatsGraphOverlay", defaultValue: true)
     public var showSelfSufficiencyStatsGraphOverlay: Bool
+
+    public var scheduleTemplates: [ScheduleTemplate] {
+        get {
+            guard let data = UserDefaults.shared.data(forKey: "scheduleTemplates") else { return [] }
+            let templates = (try? JSONDecoder().decode([ScheduleTemplate].self, from: data)) ?? []
+            return templates
+        }
+        set {
+            let data = try? JSONEncoder().encode(newValue)
+            UserDefaults.shared.set(data, forKey: "scheduleTemplates")
+        }
+    }
 }

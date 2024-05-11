@@ -106,5 +106,5 @@ struct FinancialsSettingsView: View {
 }
 
 #Preview {
-    FinancialsSettingsView(configManager: PreviewConfigManager())
+    FinancialsSettingsView(configManager: ConfigManager.preview())
 }

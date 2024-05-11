@@ -111,8 +111,8 @@ struct InverterSettingsView_Previews: PreviewProvider {
         NavigationView {
             InverterSettingsView(
                 networking: DemoNetworking(),
-                configManager: PreviewConfigManager(),
-                templateStore: PreviewTemplateStore(),
+                configManager: ConfigManager.preview(),
+                templateStore: TemplateStore.preview(),
                 showInverterTemperature: .constant(true),
                 showInverterIcon: .constant(true),
                 shouldInvertCT2: .constant(true),
