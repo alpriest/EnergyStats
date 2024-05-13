@@ -22,7 +22,7 @@ final class LoginViewTests: XCTestCase {
 
     @MainActor
     func test_with_wrong_credentials() async {
-        let networking = MockNetworking(throwOnCall: true)
+        let networking = MockNetworking(callsToThrow: [.openapi_fetchDeviceList])
         let userManager = UserManager(
             store: MockKeychainStore(),
             configManager: ConfigManager.preview(networking: networking),

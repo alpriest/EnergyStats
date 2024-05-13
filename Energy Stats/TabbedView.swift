@@ -45,7 +45,7 @@ struct TabbedView: View {
                     .accessibilityIdentifier("stats_tab")
                 }
 
-            ParametersGraphTabView(configManager: configManager, networking: networking)
+            ParametersGraphTabView(configManager: configManager, viewModel: ParametersGraphTabViewModel(networking: networking, configManager: configManager))
                 .tabItem {
                     VStack {
                         Image(systemName: "chart.xyaxis.line")

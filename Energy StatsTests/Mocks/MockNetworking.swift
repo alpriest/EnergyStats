@@ -10,11 +10,11 @@
 import Foundation
 
 class MockNetworking: Networking {
-    private let throwOnCall: Bool
     private let dateProvider: () -> Date
+    private let callsToThrow: Set<DemoAPIRequest>
 
-    init(throwOnCall: Bool = false, dateProvider: @escaping () -> Date = { Date() }) {
-        self.throwOnCall = throwOnCall
+    init(callsToThrow: Set<DemoAPIRequest> = Set(), dateProvider: @escaping () -> Date = { Date() }) {
+        self.callsToThrow = callsToThrow
         self.dateProvider = dateProvider
     }
 
@@ -29,7 +29,7 @@ class MockNetworking: Networking {
     }
 
     func fetchDeviceList() async throws -> [DeviceSummaryResponse] {
-        if throwOnCall {
+        if callsToThrow.contains(.openapi_fetchDeviceList) {
             throw NetworkError.badCredentials
         }
 
@@ -57,6 +57,10 @@ class MockNetworking: Networking {
     }
 
     func fetchHistory(deviceSN: String, variables: [String], start: Date, end: Date) async throws -> OpenHistoryResponse {
+        if callsToThrow.contains(.openapi_fetchHistory) {
+            throw NetworkError.badCredentials
+        }
+
         let data = try self.data(filename: "parameters-history-success")
         let response = try JSONDecoder().decode(NetworkResponse<[OpenHistoryResponse]>.self, from: data)
         guard let result = response.result?.first else { throw NetworkError.invalidToken }

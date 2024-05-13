@@ -11,7 +11,6 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct ParametersGraphTabView: View {
-    @StateObject var viewModel: ParametersGraphTabViewModel
     @State private var valuesAtTime: ValuesAtTime<ParameterGraphValue>?
     @State private var selectedDate: Date?
     @State private var showingVariables = false
@@ -19,9 +18,10 @@ struct ParametersGraphTabView: View {
     @State private var appSettings: AppSettings = .mock()
     private let appSettingsPublisher: LatestAppSettingsPublisher
     private let configManager: ConfigManaging
+    @ObservedObject var viewModel: ParametersGraphTabViewModel
 
-    init(configManager: ConfigManaging, networking: Networking, dateProvider: @escaping () -> Date = { Date() }) {
-        _viewModel = .init(wrappedValue: ParametersGraphTabViewModel(networking: networking, configManager: configManager, dateProvider: dateProvider))
+    init(configManager: ConfigManaging, viewModel: ParametersGraphTabViewModel) {
+        self.viewModel = viewModel
         self.configManager = configManager
         self.appSettingsPublisher = configManager.appSettingsPublisher
         self.appSettings = appSettingsPublisher.value
@@ -123,7 +123,7 @@ struct ParametersGraphTabView: View {
 struct GraphTabView_Previews: PreviewProvider {
     static var previews: some View {
         ParametersGraphTabView(configManager: ConfigManager.preview(),
-                               networking: NetworkService.preview())
+                               viewModel: ParametersGraphTabViewModel(networking: NetworkService.preview(), configManager: ConfigManager.preview()))
             .previewDevice("iPhone 13 Mini")
     }
 }

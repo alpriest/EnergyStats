@@ -84,8 +84,10 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState {
         haptic.prepare()
 
         cancellable = configManager.currentDevice
-            .map { _ in
-                configManager.variables.compactMap { [weak self] variable -> ParameterGraphVariable? in
+            .map { [weak self] _ in
+                guard let self else { return [] }
+
+                return configManager.variables.compactMap { [weak self] variable -> ParameterGraphVariable? in
                     guard let self else { return nil }
 
                     return ParameterGraphVariable(variable,
