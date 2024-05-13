@@ -47,7 +47,7 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState {
     var exportFile: CSVTextFile?
     @Published var xScale: ClosedRange<Date> = Calendar.current.startOfDay(for: Date())...Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))!
 
-    @Published var displayMode = GraphDisplayMode(date: .now, hours: 24) {
+    @Published var displayMode: GraphDisplayMode {
         didSet {
             let previousHours = hours
 
@@ -81,6 +81,7 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState {
         self.networking = networking
         self.configManager = configManager
         self.dateProvider = dateProvider
+        self.displayMode = GraphDisplayMode(date: dateProvider(), hours: 24)
         haptic.prepare()
 
         cancellable = configManager.currentDevice

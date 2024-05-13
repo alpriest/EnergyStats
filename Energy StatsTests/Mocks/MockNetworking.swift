@@ -53,7 +53,7 @@ class MockNetworking: Networking {
     }
 
     func fetchRealData(deviceSN: String, variables: [String]) async throws -> OpenQueryResponse {
-        OpenQueryResponse(time: Date(), deviceSN: "", datas: [])
+        OpenQueryResponse(time: dateProvider(), deviceSN: "", datas: [])
     }
 
     func fetchHistory(deviceSN: String, variables: [String], start: Date, end: Date) async throws -> OpenHistoryResponse {
@@ -73,7 +73,7 @@ class MockNetworking: Networking {
                 variable: $0.variable,
                 data: $0.data.map {
                     let thenComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: $0.time)
-                    let date = Calendar.current.date(bySettingHour: thenComponents.hour ?? 0, minute: thenComponents.minute ?? 0, second: thenComponents.second ?? 0, of: Date())
+                    let date = Calendar.current.date(bySettingHour: thenComponents.hour ?? 0, minute: thenComponents.minute ?? 0, second: thenComponents.second ?? 0, of: dateProvider())
 
                     return OpenHistoryResponse.Data.UnitData(
                         time: date ?? $0.time,

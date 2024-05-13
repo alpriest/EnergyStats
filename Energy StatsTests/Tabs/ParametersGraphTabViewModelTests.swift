@@ -17,7 +17,7 @@ final class ParametersGraphTabViewModelTests: XCTestCase {
 
     override func setUp() async throws {
         config = MockConfig()
-        networking = MockNetworking()
+        networking = MockNetworking(dateProvider: { Date(timeIntervalSince1970: 1669146973) })
         let configManager = ConfigManager(
             networking: networking,
             config: config,
@@ -34,7 +34,7 @@ final class ParametersGraphTabViewModelTests: XCTestCase {
 
     func test_initial_values() {
         XCTAssertEqual(sut.data.count, 0)
-        XCTAssertEqual(sut.displayMode, GraphDisplayMode(date: .now, hours: 24))
+        XCTAssertEqual(sut.displayMode, GraphDisplayMode(date: Date(timeIntervalSince1970: 1669146973), hours: 24))
         XCTAssertEqual(sut.stride, 3)
     }
 
@@ -55,13 +55,13 @@ final class ParametersGraphTabViewModelTests: XCTestCase {
     func test_filters_when_display_mode_changed() async throws {
         await sut.load()
 
-        sut.displayMode = GraphDisplayMode(date: .now, hours: 12) // don't use now
+        sut.displayMode = GraphDisplayMode(date: Date(timeIntervalSince1970: 1669146973), hours: 12)
 
         let key = try XCTUnwrap(sut.data.keys.first)
         let kwhData = sut.data[key]!
         let feedinPowerData = kwhData.filter { $0.type.variable == "feedinPower" }
 
         XCTAssertEqual(sut.stride, 2)
-        XCTAssertEqual(feedinPowerData.count, 11)
+        XCTAssertEqual(feedinPowerData.count, 13)
     }
 }
