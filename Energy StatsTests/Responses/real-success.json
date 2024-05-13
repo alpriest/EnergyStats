@@ -1,0 +1,42 @@
+{
+  "errno": 0,
+  "msg": "success",
+  "result": [
+    {
+      "datas": [
+        {
+          "unit": "kW",
+          "name": "Feed-in Power",
+          "variable": "feedinPower",
+          "value": 0.0
+        },
+        {
+          "unit": "kW",
+          "name": "GridConsumption Power",
+          "variable": "gridConsumptionPower",
+          "value": 0.009
+        },
+        {
+          "unit": "kW",
+          "name": "Output Power",
+          "variable": "generationPower",
+          "value": 2.609
+        },
+        {
+          "unit": "kW",
+          "name": "Charge Power",
+          "variable": "batChargePower",
+          "value": 0.0
+        },
+        {
+          "unit": "kW",
+          "name": "Discharge Power",
+          "variable": "batDischargePower",
+          "value": 2.304
+        },
+      ],
+      "time": "2024-05-13 17:23:13 BST+0100",
+      "deviceSN": "DEVICESN"
+    }
+  ]
+}

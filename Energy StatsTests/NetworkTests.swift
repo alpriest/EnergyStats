@@ -38,9 +38,9 @@ final class NetworkTests: XCTestCase {
     }
 
     func test_fetchReal_returns_data_on_success() async throws {
-        stubHTTPResponse(with: .rawSuccess)
+        stubHTTPResponse(with: .realSuccess)
 
-        let raw = try await sut.openapi_fetchRealData(deviceSN: "1", variables: [
+        let raw = try await sut.openapi_fetchRealData(deviceSN: "DEVICESN", variables: [
             Variable(name: "feedinPower", variable: "feedinPower", unit: "kWH"),
             Variable(name: "gridConsumptionPower", variable: "gridConsumptionPower", unit: "kWH"),
             Variable(name: "batChargePower", variable: "batChargePower", unit: "kWH"),
@@ -55,7 +55,7 @@ final class NetworkTests: XCTestCase {
 
         let devices = try await sut.openapi_fetchDeviceList()
 
-        XCTAssertEqual(devices.first?.deviceSN, "12345678-0000-0000-1234-aaaabbbbcccc")
+        XCTAssertEqual(devices.first?.deviceSN, "DEVICESN")
     }
 
     func test_fetchReport_throws_when_offline() async {

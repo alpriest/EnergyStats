@@ -44,7 +44,7 @@ extension XCTestCase {
 enum FoxEssHTTPResponse: String {
     case deviceListSuccess = "devicelist-success.json"
     case variablesSuccess = "variables-success.json"
-    case rawSuccess = "raw-success.json"
+    case realSuccess = "real-success.json"
     case plantListSuccess = "plantlist-success.json"
     case plantDetailSuccess = "plantdetail-success.json"
     case batterySuccess = "battery-success.json"

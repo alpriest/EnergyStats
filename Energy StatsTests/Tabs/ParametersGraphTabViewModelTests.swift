@@ -39,7 +39,7 @@ final class ParametersGraphTabViewModelTests: XCTestCase {
     }
 
     func test_fetches_data_on_start() async {
-        stubHTTPResponses(with: [.rawSuccess, .reportSuccess, .rawSuccess])
+        stubHTTPResponses(with: [.realSuccess, .reportSuccess, .realSuccess])
 
         await sut.load()
 
@@ -47,7 +47,7 @@ final class ParametersGraphTabViewModelTests: XCTestCase {
     }
 
     func test_filters_when_display_mode_changed() async {
-        stubHTTPResponses(with: [.rawSuccess, .reportSuccess, .rawSuccess])
+        stubHTTPResponses(with: [.realSuccess, .reportSuccess, .realSuccess])
         await sut.load()
 
         sut.displayMode = GraphDisplayMode(date: .now, hours: 12)

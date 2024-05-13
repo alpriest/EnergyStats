@@ -35,7 +35,7 @@ class MockNetworking: Networking {
 
         return [
             DeviceSummaryResponse(
-                deviceSN: "1",
+                deviceSN: "DEVICESN",
                 moduleSN: "moduleSN",
                 stationID: "stationID",
                 stationName: "stationName",
