@@ -8,6 +8,7 @@
 import Foundation
 import OHHTTPStubs
 import OHHTTPStubsSwift
+import OSLog
 import XCTest
 
 extension XCTestCase {
@@ -18,7 +19,7 @@ extension XCTestCase {
     func stubHTTPResponses(with filenames: [FoxEssHTTPResponse]) {
         var callCount = 0
 
-        stub(condition: isHost("www.foxesscloud.com")) { _ in
+        stub(condition: isHost("www.foxesscloud.com")) { request in
             callCount += 1
 
             let filename: FoxEssHTTPResponse
@@ -45,6 +46,7 @@ enum FoxEssHTTPResponse: String {
     case deviceListSuccess = "devicelist-success.json"
     case variablesSuccess = "variables-success.json"
     case realSuccess = "real-success.json"
+    case parametersHistorySuccess = "parameters-history-success.json"
     case plantListSuccess = "plantlist-success.json"
     case plantDetailSuccess = "plantdetail-success.json"
     case batterySuccess = "battery-success.json"

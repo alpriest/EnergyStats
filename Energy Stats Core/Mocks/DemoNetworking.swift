@@ -9,25 +9,53 @@ import Combine
 import Foundation
 
 class DemoNetworking: NetworkService {
-    init() {
-        super.init(api: DemoAPI())
+    init(callsToThrow: Set<DemoAPIRequest> = Set()) {
+        super.init(api: DemoAPI(callsToThrow: callsToThrow))
     }
 }
 
-class DemoAPI: FoxAPIServicing {
-    private let throwOnCall: Bool
+public enum DemoAPIRequest {
+    case openapi_fetchDeviceList
+    case openapi_fetchDevice
+    case openapi_fetchRealData
+    case openapi_fetchHistory
+    case openapi_fetchVariables
+    case openapi_fetchReport
+    case openapi_fetchBatterySettings
+    case openapi_setBatterySoc
+    case openapi_fetchBatteryTimes
+    case openapi_setBatteryTimes
+    case openapi_fetchDataLoggers
+    case openapi_fetchSchedulerFlag
+    case openapi_fetchCurrentSchedule
+    case openapi_setScheduleFlag
+    case openapi_saveSchedule
+    case openapi_fetchPowerStationList
+    case openapi_fetchPowerStationDetail
+}
 
-    init(throwOnCall: Bool = false) {
-        self.throwOnCall = throwOnCall
+class DemoAPI: FoxAPIServicing {
+    private let callsToThrow: Set<DemoAPIRequest>
+
+    init(callsToThrow: Set<DemoAPIRequest> = Set()) {
+        self.callsToThrow = callsToThrow
     }
 
     func fetchErrorMessages() async {}
 
     func openapi_fetchSchedulerFlag(deviceSN: String) async throws -> GetSchedulerFlagResponse {
-        GetSchedulerFlagResponse(enable: true, support: true)
+        if callsToThrow.contains(.openapi_fetchSchedulerFlag) {
+            throw NetworkError.missingData
+        }
+
+        return GetSchedulerFlagResponse(enable: true, support: true)
     }
 
     func openapi_fetchBatterySettings(deviceSN: String) async throws -> BatterySOCResponse {
+        if callsToThrow.contains(.openapi_fetchBatterySettings) {
+            throw NetworkError.missingData
+        }
+
         switch deviceSN {
         case "1234":
             return BatterySOCResponse(minSocOnGrid: 20, minSoc: 20)
@@ -37,7 +65,11 @@ class DemoAPI: FoxAPIServicing {
     }
 
     func openapi_fetchDeviceList() async throws -> [DeviceSummaryResponse] {
-        [
+        if callsToThrow.contains(.openapi_fetchDeviceList) {
+            throw NetworkError.missingData
+        }
+
+        return [
             DeviceSummaryResponse(
                 deviceSN: "5678",
                 moduleSN: "sn-1",
@@ -64,7 +96,11 @@ class DemoAPI: FoxAPIServicing {
     }
 
     func openapi_fetchDevice(deviceSN: String) async throws -> DeviceDetailResponse {
-        DeviceDetailResponse(
+        if callsToThrow.contains(.openapi_fetchDevice) {
+            throw NetworkError.missingData
+        }
+
+        return DeviceDetailResponse(
             deviceSN: "5678",
             moduleSN: "sn-1",
             stationID: "p1",
@@ -90,69 +126,95 @@ class DemoAPI: FoxAPIServicing {
         return try Data(contentsOf: url)
     }
 
-    func openapi_setBatterySoc(deviceSN: String, minSOCOnGrid: Int, minSOC: Int) async throws {}
+    func openapi_setBatterySoc(deviceSN: String, minSOCOnGrid: Int, minSOC: Int) async throws {
+        if callsToThrow.contains(.openapi_setBatterySoc) {
+            throw NetworkError.missingData
+        }
+    }
 
     func openapi_fetchBatteryTimes(deviceSN: String) async throws -> [ChargeTime] {
-        [
+        if callsToThrow.contains(.openapi_fetchBatteryTimes) {
+            throw NetworkError.missingData
+        }
+
+        return [
             ChargeTime(enable: false, startTime: Time(hour: 01, minute: 00), endTime: Time(hour: 01, minute: 30)),
             ChargeTime(enable: false, startTime: Time(hour: 03, minute: 00), endTime: Time(hour: 03, minute: 30))
         ]
     }
 
-    func openapi_setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws {}
+    func openapi_setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws {
+        if callsToThrow.contains(.openapi_setBatteryTimes) {
+            throw NetworkError.missingData
+        }
+    }
 
     func openapi_fetchDataLoggers() async throws -> [DataLoggerResponse] {
-        [
+        if callsToThrow.contains(.openapi_fetchDataLoggers) {
+            throw NetworkError.missingData
+        }
+
+        return [
             DataLoggerResponse(moduleSN: "ABC123DEF456", stationID: "John Doe 1", status: .online, signal: 3),
             DataLoggerResponse(moduleSN: "123DEF456ABC", stationID: "Jane Doe 2", status: .online, signal: 1)
         ]
     }
 
-    func openapi_fetchErrorMessages() async {}
-
     func openapi_fetchRealData(deviceSN: String, variables: [String]) async throws -> OpenQueryResponse {
-        OpenQueryResponse(time: Date(),
-                          deviceSN: deviceSN,
-                          datas: [
-                              OpenQueryResponse.Data(unit: "kW", variable: "feedinPower", value: 0.0, stringValue: nil),
-                              OpenQueryResponse.Data(unit: "kW", variable: "gridConsumptionPower", value: 2.634, stringValue: nil),
-                              OpenQueryResponse.Data(unit: "kW", variable: "loadsPower", value: 2.708, stringValue: nil),
-                              OpenQueryResponse.Data(unit: "kW", variable: "SoC", value: 0.65, stringValue: nil),
-                              OpenQueryResponse.Data(unit: "kW", variable: "batDischargePower", value: 0, stringValue: nil),
-                              OpenQueryResponse.Data(unit: "kW", variable: "batChargePower", value: 1.200, stringValue: nil),
-                              OpenQueryResponse.Data(unit: "kW", variable: "generationPower", value: 0.071, stringValue: nil),
-                              OpenQueryResponse.Data(unit: "kW", variable: "pvPower", value: 0.111, stringValue: nil),
-                              OpenQueryResponse.Data(unit: "kW", variable: "meterPower2", value: 0.0, stringValue: nil),
-                              OpenQueryResponse.Data(unit: "℃", variable: "ambientTemperation", value: 32.5, stringValue: nil),
-                              OpenQueryResponse.Data(unit: "℃", variable: "invTemperation", value: 23.2, stringValue: nil)
-                          ])
+        if callsToThrow.contains(.openapi_fetchRealData) {
+            throw NetworkError.missingData
+        }
+
+        return OpenQueryResponse(time: Date(),
+                                 deviceSN: deviceSN,
+                                 datas: [
+                                     OpenQueryResponse.Data(unit: "kW", variable: "feedinPower", value: 0.0, stringValue: nil),
+                                     OpenQueryResponse.Data(unit: "kW", variable: "gridConsumptionPower", value: 2.634, stringValue: nil),
+                                     OpenQueryResponse.Data(unit: "kW", variable: "loadsPower", value: 2.708, stringValue: nil),
+                                     OpenQueryResponse.Data(unit: "kW", variable: "SoC", value: 0.65, stringValue: nil),
+                                     OpenQueryResponse.Data(unit: "kW", variable: "batDischargePower", value: 0, stringValue: nil),
+                                     OpenQueryResponse.Data(unit: "kW", variable: "batChargePower", value: 1.200, stringValue: nil),
+                                     OpenQueryResponse.Data(unit: "kW", variable: "generationPower", value: 0.071, stringValue: nil),
+                                     OpenQueryResponse.Data(unit: "kW", variable: "pvPower", value: 0.111, stringValue: nil),
+                                     OpenQueryResponse.Data(unit: "kW", variable: "meterPower2", value: 0.0, stringValue: nil),
+                                     OpenQueryResponse.Data(unit: "℃", variable: "ambientTemperation", value: 32.5, stringValue: nil),
+                                     OpenQueryResponse.Data(unit: "℃", variable: "invTemperation", value: 23.2, stringValue: nil)
+                                 ])
     }
 
     func openapi_fetchHistory(deviceSN: String, variables: [String], start: Date, end: Date) async throws -> OpenHistoryResponse {
+        if callsToThrow.contains(.openapi_fetchHistory) {
+            throw NetworkError.missingData
+        }
+
         let data = try self.data(filename: "history")
         let response = try JSONDecoder().decode(NetworkResponse<[OpenHistoryResponse]>.self, from: data)
         guard let result = response.result?.first else { throw NetworkError.invalidToken }
 
         return OpenHistoryResponse(deviceSN: result.deviceSN,
                                    datas: result.datas.map {
-            OpenHistoryResponse.Data(
-                unit: $0.unit,
-                name: $0.name,
-                variable: $0.variable,
-                data: $0.data.map {
-                    let thenComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: $0.time)
-                    let date = Calendar.current.date(bySettingHour: thenComponents.hour ?? 0, minute: thenComponents.minute ?? 0, second: thenComponents.second ?? 0, of: Date())
+                                       OpenHistoryResponse.Data(
+                                           unit: $0.unit,
+                                           name: $0.name,
+                                           variable: $0.variable,
+                                           data: $0.data.map {
+                                               let thenComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: $0.time)
+                                               let date = Calendar.current.date(bySettingHour: thenComponents.hour ?? 0, minute: thenComponents.minute ?? 0, second: thenComponents.second ?? 0, of: Date())
 
-                    return OpenHistoryResponse.Data.UnitData(
-                        time: date ?? $0.time,
-                        value: $0.value
-                    )
-                }
-            )
-        })
+                                               return OpenHistoryResponse.Data.UnitData(
+                                                   time: date ?? $0.time,
+                                                   value: $0.value
+                                               )
+                                           }
+                                       )
+                                   })
     }
 
     func openapi_fetchVariables() async throws -> [OpenApiVariable] {
+        if callsToThrow.contains(.openapi_fetchVariables) {
+            throw NetworkError.missingData
+        }
+
         let data = try self.data(filename: "variables")
         let response = try JSONDecoder().decode(NetworkResponse<OpenApiVariableArray>.self, from: data)
         guard let result = response.result else { throw NetworkError.invalidToken }
@@ -160,8 +222,8 @@ class DemoAPI: FoxAPIServicing {
     }
 
     func openapi_fetchReport(deviceSN: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [OpenReportResponse] {
-        if throwOnCall {
-            throw NetworkError.foxServerError(0, "Fake thrown error")
+        if callsToThrow.contains(.openapi_fetchReport) {
+            throw NetworkError.missingData
         }
 
         let data: Data
@@ -181,7 +243,11 @@ class DemoAPI: FoxAPIServicing {
     }
 
     func openapi_fetchCurrentSchedule(deviceSN: String) async throws -> ScheduleResponse {
-        ScheduleResponse(
+        if callsToThrow.contains(.openapi_fetchCurrentSchedule) {
+            throw NetworkError.missingData
+        }
+
+        return ScheduleResponse(
             enable: 0,
             groups: [
                 SchedulePhaseResponse(
@@ -210,14 +276,32 @@ class DemoAPI: FoxAPIServicing {
         )
     }
 
-    func openapi_setScheduleFlag(deviceSN: String, enable: Bool) async throws {}
-    func openapi_saveSchedule(deviceSN: String, schedule: Schedule) async throws {}
+    func openapi_setScheduleFlag(deviceSN: String, enable: Bool) async throws {
+        if callsToThrow.contains(.openapi_setScheduleFlag) {
+            throw NetworkError.missingData
+        }
+    }
+
+    func openapi_saveSchedule(deviceSN: String, schedule: Schedule) async throws {
+        if callsToThrow.contains(.openapi_saveSchedule) {
+            throw NetworkError.missingData
+        }
+    }
+
     func openapi_fetchPowerStationList() async throws -> PagedPowerStationListResponse {
-        PagedPowerStationListResponse(currentPage: 0, pageSize: 0, total: 0, data: [])
+        if callsToThrow.contains(.openapi_fetchPowerStationList) {
+            throw NetworkError.missingData
+        }
+
+        return PagedPowerStationListResponse(currentPage: 0, pageSize: 0, total: 0, data: [])
     }
 
     func openapi_fetchPowerStationDetail(stationID: String) async throws -> PowerStationDetailResponse {
-        PowerStationDetailResponse(stationName: "station \(stationID)", capacity: 3500, timezone: "Europe/London")
+        if callsToThrow.contains(.openapi_fetchPowerStationDetail) {
+            throw NetworkError.missingData
+        }
+
+        return PowerStationDetailResponse(stationName: "station \(stationID)", capacity: 3500, timezone: "Europe/London")
     }
 }
 

@@ -7,6 +7,7 @@
 
 @testable import Energy_Stats
 @testable import Energy_Stats_Core
+import OHHTTPStubs
 import XCTest
 
 final class NetworkTests: XCTestCase {
@@ -16,6 +17,10 @@ final class NetworkTests: XCTestCase {
     override func setUp() {
         keychainStore = MockKeychainStore()
         sut = FoxAPIService(credentials: keychainStore, store: InMemoryLoggingNetworkStore())
+    }
+
+    override func tearDown() {
+        HTTPStubs.removeAllStubs()
     }
 
     func test_fetchReport_returns_data_on_success() async throws {
@@ -45,7 +50,7 @@ final class NetworkTests: XCTestCase {
             Variable(name: "gridConsumptionPower", variable: "gridConsumptionPower", unit: "kWH"),
             Variable(name: "batChargePower", variable: "batChargePower", unit: "kWH"),
             Variable(name: "batDischargePower", variable: "batDischargePower", unit: "kWH"),
-            Variable(name: "generationPower", variable: "generationPower", unit: "kWH")].map { $0.variable})
+            Variable(name: "generationPower", variable: "generationPower", unit: "kWH")].map { $0.variable })
 
         XCTAssertEqual(raw.datas.count, 5)
     }

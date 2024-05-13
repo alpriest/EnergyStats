@@ -38,21 +38,30 @@ final class ParametersGraphTabViewModelTests: XCTestCase {
         XCTAssertEqual(sut.stride, 3)
     }
 
-    func test_fetches_data_on_start() async {
-        stubHTTPResponses(with: [.realSuccess, .reportSuccess, .realSuccess])
-
+    func test_fetches_data_on_load() async throws {
         await sut.load()
 
-        XCTAssertEqual(sut.data.count, 1130)
+        let key = try XCTUnwrap(sut.data.keys.first)
+        let kwhData = sut.data[key]!
+        let types = Set(kwhData.map { $0.type.name })
+        let feedinPowerData = kwhData.filter { $0.type.variable == "feedinPower" }
+
+        XCTAssertEqual(key, "kW")
+        XCTAssertEqual(sut.data.count, 1)
+        XCTAssertEqual(types.count, 5)
+        XCTAssertEqual(feedinPowerData.count, 108)
     }
 
-    func test_filters_when_display_mode_changed() async {
-        stubHTTPResponses(with: [.realSuccess, .reportSuccess, .realSuccess])
+    func test_filters_when_display_mode_changed() async throws {
         await sut.load()
 
-        sut.displayMode = GraphDisplayMode(date: .now, hours: 12)
+        sut.displayMode = GraphDisplayMode(date: .now, hours: 12) // don't use now
+
+        let key = try XCTUnwrap(sut.data.keys.first)
+        let kwhData = sut.data[key]!
+        let feedinPowerData = kwhData.filter { $0.type.variable == "feedinPower" }
 
         XCTAssertEqual(sut.stride, 2)
-        XCTAssertEqual(sut.data.count, 1130)
+        XCTAssertEqual(feedinPowerData.count, 11)
     }
 }

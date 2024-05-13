@@ -86,5 +86,4 @@ struct ParameterGraphVariablesToggles: View {
         appSettings: .mock()
     )
 }
-
 #endif

@@ -124,7 +124,7 @@ public class NetworkService: Networking {
 }
 
 public extension NetworkService {
-    static func preview() -> Networking {
-        DemoNetworking()
+    static func preview(callsToThrow: Set<DemoAPIRequest> = Set()) -> Networking {
+        DemoNetworking(callsToThrow: callsToThrow)
     }
 }
