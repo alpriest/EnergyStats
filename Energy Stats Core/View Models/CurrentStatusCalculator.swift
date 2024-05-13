@@ -84,7 +84,7 @@ public struct CurrentStatusCalculator {
     }
 
     static func calculateLoadPower(status: CurrentRawValues) -> Double {
-        status.gridConsumptionPower + status.generationPower + status.epsPower - status.feedinPower + abs(status.meterPower2)
+        status.gridConsumptionPower + status.generationPower + status.feedinPower + abs(status.meterPower2)
     }
 
     static func calculateSolarPower(hasPV: Bool, status: CurrentRawValues, shouldInvertCT2: Bool, shouldCombineCT2WithPVPower: Bool) -> Double {

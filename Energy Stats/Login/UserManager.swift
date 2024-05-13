@@ -25,7 +25,6 @@ class UserManager: ObservableObject, HasLoadState {
         migrateKeychain()
         self.store.hasCredentials
             .receive(on: RunLoop.main)
-            .print()
             .assign(to: \.isLoggedIn, on: self)
             .store(in: &cancellables)
     }
