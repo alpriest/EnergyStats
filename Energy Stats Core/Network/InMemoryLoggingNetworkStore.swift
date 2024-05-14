@@ -15,6 +15,8 @@ public class InMemoryLoggingNetworkStore: ObservableObject {
     @MainActor
     public var deviceListResponse: NetworkOperation<[DeviceSummaryResponse]>?
     @MainActor
+    public var deviceDetailResponse: NetworkOperation<DeviceDetailResponse>?
+    @MainActor
     public var variables: NetworkOperation<OpenApiVariableArray>?
     @MainActor
     public var batterySOCResponse: NetworkOperation<BatterySOCResponse>?
@@ -34,6 +36,7 @@ public class InMemoryLoggingNetworkStore: ObservableObject {
         reportResponse = nil
         queryResponse = nil
         deviceListResponse = nil
+        deviceDetailResponse = nil
         variables = nil
         batterySOCResponse = nil
         batteryTimesResponse = nil

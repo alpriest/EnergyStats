@@ -15,6 +15,7 @@ public enum NetworkError: LocalizedError, CustomStringConvertible, Equatable {
     case invalidToken
     case tryLater
     case offline
+    case timedOut
     case maintenanceMode
     case missingData
     case unknown(_ message: String)
@@ -46,6 +47,8 @@ public enum NetworkError: LocalizedError, CustomStringConvertible, Equatable {
             builder.append(String(localized: "No data was returned"))
         case .requestRequiresSignature:
             builder.append(String(localized: "Fox no longer permits these requests."))
+        case .timedOut:
+            builder.append(String(localized: "Request timed out"))
         case .unknown(let message):
             builder.append(message)
         }

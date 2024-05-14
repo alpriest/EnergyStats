@@ -52,7 +52,7 @@ extension FoxAPIService {
 
     func fetch<T: Decodable>(_ request: URLRequest, retry: Bool = true) async throws -> (T, Data) {
         var request = request
-        request.timeoutInterval = 10 //TODO: Test
+        request.timeoutInterval = 30
         addHeaders(to: &request)
         let requestResponseData = RequestResponseData(request: request, response: nil, responseData: nil)
         store(
@@ -105,6 +105,8 @@ extension FoxAPIService {
             print(error)
             if error.domain == NSURLErrorDomain, error.code == URLError.notConnectedToInternet.rawValue {
                 throw NetworkError.offline
+            } else if error.domain == NSURLErrorDomain, error.code == URLError.timedOut.rawValue {
+                throw NetworkError.timedOut
             } else {
                 throw error
             }

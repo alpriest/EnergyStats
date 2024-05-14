@@ -9,7 +9,8 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct PowerStationSettingsView: View {
-    let station: PowerStationDetail
+    @State var station: PowerStationDetail
+    let configManager: ConfigManaging
 
     var body: some View {
         Form {
@@ -21,12 +22,23 @@ struct PowerStationSettingsView: View {
                 ESLabeledText("Timezone", value: station.timezone)
             }
         }
+        .task {
+            Task {
+                try await configManager.fetchPowerStationDetail()
+                if let station = configManager.powerStationDetail {
+                    self.station = station
+                }
+            }
+        }
         .navigationTitle("Power station")
     }
 }
 
 #Preview {
     NavigationView {
-        PowerStationSettingsView(station: PowerStationDetail(stationName: "station 1", capacity: 5700.0, timezone: "Europe/London"))
+        PowerStationSettingsView(
+            station: PowerStationDetail(stationName: "station 1", capacity: 5700.0, timezone: "Europe/London"),
+            configManager: ConfigManager.preview()
+        )
     }
 }

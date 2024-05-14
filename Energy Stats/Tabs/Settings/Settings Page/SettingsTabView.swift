@@ -32,9 +32,9 @@ struct SettingsTabView: View {
                     }
                 }
 
-                if let powerStation = viewModel.powerStation {
+                if let powerStation = configManager.powerStationDetail {
                     NavigationLink {
-                        PowerStationSettingsView(station: powerStation)
+                        PowerStationSettingsView(station: powerStation, configManager: configManager)
                     } label: {
                         Text("Power station")
                     }

@@ -1840,10 +1840,60 @@
       }
     },
     "Activate" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktivieren"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activar"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attiva"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktywuj"
+          }
+        }
+      }
     },
     "Activate template" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vorlage aktivieren"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activar plantilla"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attiva modello"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktywuj szablon"
+          }
+        }
+      }
     },
     "Activating" : {
       "localizations" : {
@@ -1877,8 +1927,8 @@
       "localizations" : {
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Zeitplan"
+            "state" : "translated",
+            "value" : "Aktiver Zeitplan"
           }
         },
         "en" : {
@@ -1889,20 +1939,20 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Horario"
+            "state" : "translated",
+            "value" : "Horario activo"
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Programma"
+            "state" : "translated",
+            "value" : "Programma attivo"
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Harmonogram"
+            "state" : "translated",
+            "value" : "Aktywny harmonogram"
           }
         }
       }
@@ -2662,35 +2712,6 @@
         }
       }
     },
-    "Battery Times" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Batteriezeiten"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tiempos de la batería"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tempi di carica della batteria"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Czasy pracy baterii"
-          }
-        }
-      }
-    },
     "battery_charge_range" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2932,35 +2953,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Twoja bateria nie będzie się ładować ani rozładowywać między %1$@ a %2$@. Energia słoneczna zostanie przekierowana do ładowania baterii. Wszelkie obciążenia domowe będą pochodzić z sieci w tych godzinach. Zresetuj okresy czasu, aby to wyłączyć."
-          }
-        }
-      }
-    },
-    "Buy me a coffee" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kaufen Sie mir einen Kaffee"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Invítame un café"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Offrimi un caffè"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zrób mi kawę"
           }
         }
       }
@@ -3400,35 +3392,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wyczyść"
-          }
-        }
-      }
-    },
-    "Combine CT2 with Loads power" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "CT2 mit Lastleistung kombinieren"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Combinar CT2 con energía de las cargas"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Combina CT2 con potenza dei carichi"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Połącz CT2 z mocą obciążeń"
           }
         }
       }
@@ -4416,37 +4379,33 @@
         }
       }
     },
-    "Delete schedule" : {
-      "extractionState" : "stale",
+    "Delete template" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zeitplan löschen"
+            "value" : "Vorlage löschen"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Eliminar horario"
+            "value" : "Eliminar plantilla"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Elimina programma"
+            "value" : "Elimina modello"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Usuń harmonogram"
+            "value" : "Usuń szablon"
           }
         }
       }
-    },
-    "Delete template" : {
-
     },
     "Delete time period" : {
       "localizations" : {
@@ -4500,35 +4459,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
-          }
-        }
-      }
-    },
-    "Device List" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Geräteliste"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lista de dispositivos"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Elenco dispositivi"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lista urządzeń"
           }
         }
       }
@@ -5074,35 +5004,6 @@
         }
       }
     },
-    "Enabled" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aktiviert"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activado"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Abilitato"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Włączone"
-          }
-        }
-      }
-    },
     "End" : {
       "localizations" : {
         "de" : {
@@ -5524,35 +5425,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wykryto Usterki"
-          }
-        }
-      }
-    },
-    "Feed In First" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Einspeisung zuerst"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Inyección Prioritaria"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Alimentazione in Primo Luogo"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wprowadź najpierw"
           }
         }
       }
@@ -6780,10 +6652,34 @@
     },
     "inactive_schedule_title" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inaktiver Zeitplan"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Inactive schedule"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Horario inactivo"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Programma inattivo"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nieaktywny harmonogram"
           }
         }
       }
@@ -6993,41 +6889,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Falownik"
-          }
-        }
-      }
-    },
-    "inverter_charge_schedule_deleted" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ihr Zeitplan wurde gelöscht"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your schedule was deleted"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tu horario fue eliminado"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Il tuo programma è stato eliminato"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Twój harmonogram został usunięty"
           }
         }
       }
@@ -8040,7 +7901,32 @@
       }
     },
     "Name" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nome"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imię"
+          }
+        }
+      }
     },
     "Net" : {
       "localizations" : {
@@ -8970,35 +8856,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Oceń tę aplikację"
-          }
-        }
-      }
-    },
-    "Raw" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Roh"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Crudo"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Grezzo"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Surowe dane"
           }
         }
       }
@@ -10251,35 +10108,6 @@
         }
       }
     },
-    "Report" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bericht"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Informe"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rapporto"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Raport"
-          }
-        }
-      }
-    },
     "reportvariable_chargeenergytotal" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -11013,41 +10841,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wyświetl dane debugowania"
-          }
-        }
-      }
-    },
-    "settings.donateVia" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Spenden über"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Donate via"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Donar a través de"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dona tramite"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wpłata za pośrednictwem"
           }
         }
       }
@@ -12440,10 +12233,34 @@
     },
     "templates_not_synced" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zeitplanvorlagen sind nur lokal auf deinem Gerät und werden nicht in der Fox Cloud sichtbar sein. Dies ist eine Einschränkung, die von FoxESS auferlegt wurde. Sie werden nicht entfernt, wenn du dich abmeldest."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Schedule Templates are local to your device and will not be visible on Fox Cloud. This is a limitation imposed by FoxESS. They will not be removed if you log out."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Las plantillas de horarios son locales a tu dispositivo y no serán visibles en Fox Cloud. Esta es una limitación impuesta por FoxESS. No se eliminarán si cierras sesión."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I modelli di programma sono locali al tuo dispositivo e non saranno visibili su Fox Cloud. Questa è una limitazione imposta da FoxESS. Non saranno rimossi se esci."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Szablony harmonogramów są lokalne na Twoim urządzeniu i nie będą widoczne w Fox Cloud. Jest to ograniczenie narzucone przez FoxESS. Nie zostaną usunięte, jeśli się wylogujesz."
           }
         }
       }
@@ -12478,6 +12295,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
+          }
+        }
+      }
+    },
+    "The FoxESS OpenAPI failed to respond quickly enough. Please try again or raise an issue with FoxESS if you often see this." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die FoxESS OpenAPI hat nicht schnell genug geantwortet. Bitte versuche es erneut oder melde ein Problem bei FoxESS, wenn du dies häufig siehst."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FoxESS OpenAPI no respondió lo suficientemente rápido. Por favor, inténtalo de nuevo o informa un problema a FoxESS si ves esto a menudo."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FoxESS OpenAPI non ha risposto abbastanza velocemente. Riprova o segnala un problema a FoxESS se vedi spesso questo messaggio."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FoxESS OpenAPI nie odpowiedział wystarczająco szybko. Spróbuj ponownie lub zgłoś problem do FoxESS, jeśli często widzisz ten komunikat."
           }
         }
       }
@@ -13020,64 +12865,6 @@
         }
       }
     },
-    "Use traditional load formula" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Traditionelle Lastformel verwenden"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Usar fórmula de carga tradicional"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Usa la formula di carico tradizionale"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Użyj tradycyjnej formuły obciążenia"
-          }
-        }
-      }
-    },
-    "Uses the FoxESS loads value to show load which doesn't handle +ve/-ve CT2 very well. Changes only take effect on next data fetch." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verwendet den FoxESS-Lastwert, um die Last anzuzeigen, was nicht sehr gut mit +ve/-ve CT2 umgehen kann. Änderungen treten erst bei der nächsten Datenabfrage in Kraft."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Uses the FoxESS loads value to show load which doesn't handle +ve/-ve CT2 very well. Changes only take effect on next data fetch."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Utilizza il valore dei carichi di FoxESS per mostrare il carico, il che non gestisce molto bene i CT2 +ve/-ve. Le modifiche avranno effetto solo al prossimo recupero dati."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Używa wartości obciążeń FoxESS do pokazania obciążenia, co nie radzi sobie zbyt dobrze z CT2 +ve/-ve. Zmiany zostaną wprowadzone przy następnym pobieraniu danych."
-          }
-        }
-      }
-    },
     "Version " : {
       "localizations" : {
         "de" : {
@@ -13550,6 +13337,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Osiągnięto limit prędkości serwera. Proszę spróbować później."
+          }
+        }
+      }
+    },
+    "Your API token is invalid. Please logout and follow the instructions to generate a new API token." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dein API-Token ist ungültig. Bitte melde dich ab und folge den Anweisungen, um ein neues API-Token zu generieren."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu token de API no es válido. Por favor, cierra sesión y sigue las instrucciones para generar un nuevo token de API."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il tuo token API non è valido. Effettua il logout e segui le istruzioni per generare un nuovo token API."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Twój token API jest nieprawidłowy. Wyloguj się i postępuj zgodnie z instrukcjami, aby wygenerować nowy token API."
           }
         }
       }

@@ -45,6 +45,19 @@ struct DebugDataView: View {
                         fetcher: nil
                     )
                 }
+                NavigationLink(String(stringLiteral: "device/detail")) {
+                    ResponseDebugView<DeviceDetailResponse>(
+                        store: store,
+                        title: String(stringLiteral: "device/detail"),
+                        missing: "Data is fetched and cached on login",
+                        mapper: { $0.deviceDetailResponse },
+                        fetcher: {
+                            guard let selectedDeviceSN = configManager.selectedDeviceSN else { return }
+
+                            _ = try await networking.fetchDevice(deviceSN: selectedDeviceSN)
+                        }
+                    )
+                }
                 NavigationLink(String(stringLiteral: "device/variable/get")) {
                     ResponseDebugView<OpenApiVariableArray>(
                         store: store,

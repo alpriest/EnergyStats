@@ -154,6 +154,7 @@ extension FoxAPIService {
         let request = append(queryItems: [URLQueryItem(name: "sn", value: deviceSN)], to: URL.getOpenDeviceDetail)
 
         let result: (DeviceDetailResponse, _) = try await fetch(request)
+        store(NetworkOperation(description: "fetchDevice", value: result.0, raw: result.1), path: \.deviceDetailResponse)
         return result.0
     }
 
