@@ -88,20 +88,15 @@ struct ScheduleSummaryView: View {
                             Text("Templates")
                                 .padding(.top, 24)
                         }
-                    } footer: {
-                        if template == viewModel.templates.last {
-                            VStack {
-                                NavigationLink {
-                                    ScheduleTemplateListView(networking: networking, templateStore: templateStore, config: config)
-                                } label: {
-                                    Text("Manage templates")
-                                }.buttonStyle(.borderedProminent)
-                            }
-                            .frame(maxWidth: .infinity)
-                            .padding(.top)
-                        }
                     }
                 }
+
+                NavigationLink {
+                    ScheduleTemplateListView(networking: networking, templateStore: templateStore, config: config)
+                } label: {
+                    Text("Manage templates")
+                }
+                .frame(maxWidth: .infinity)
 
                 FooterSection {
                     Text("templates_not_synced")

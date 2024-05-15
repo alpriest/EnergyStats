@@ -7,6 +7,7 @@
 
 import Energy_Stats_Core
 import Foundation
+#if canImport(WatchConnectivity)
 import WatchConnectivity
 
 class WatchSessionDelegate: NSObject, WCSessionDelegate {
@@ -27,3 +28,4 @@ class WatchSessionDelegate: NSObject, WCSessionDelegate {
 
     func sessionDidDeactivate(_ session: WCSession) {}
 }
+#endif

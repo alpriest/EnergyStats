@@ -194,8 +194,8 @@
 		41A715932BE0CD4700560628 /* LoadState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A715922BE0CD4700560628 /* LoadState.swift */; };
 		41A715952BE0CE3400560628 /* LoadStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A715942BE0CE3400560628 /* LoadStateView.swift */; };
 		41A95B9729DB3F6A00A35169 /* Energy_Stats_Core.h in Headers */ = {isa = PBXBuildFile; fileRef = 41A95B9629DB3F6A00A35169 /* Energy_Stats_Core.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		41A95B9A29DB3F6A00A35169 /* Energy_Stats_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; };
-		41A95B9B29DB3F6A00A35169 /* Energy_Stats_Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		41A95B9A29DB3F6A00A35169 /* Energy_Stats_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; platformFilters = (ios, macos, ); };
+		41A95B9B29DB3F6A00A35169 /* Energy_Stats_Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; platformFilters = (ios, macos, ); settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		41A95BA129DB3F7E00A35169 /* PylonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A95BA029DB3F7E00A35169 /* PylonView.swift */; };
 		41AB53402B9319B900B6C371 /* SolarStringsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AB533F2B9319B900B6C371 /* SolarStringsView.swift */; };
 		41ACB2C42A51832E005831B0 /* ParameterGraphHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41ACB2C32A51832E005831B0 /* ParameterGraphHeaderViewModel.swift */; };
@@ -2147,6 +2147,10 @@
 		};
 		41A95B9929DB3F6A00A35169 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilters = (
+				ios,
+				macos,
+			);
 			target = 41A95B9329DB3F6A00A35169 /* Energy Stats Core */;
 			targetProxy = 41A95B9829DB3F6A00A35169 /* PBXContainerItemProxy */;
 		};
@@ -2352,7 +2356,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 2.26;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 2.27;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2410,7 +2415,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 2.26;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 2.27;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -2444,9 +2450,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -2478,9 +2485,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -2516,7 +2524,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
@@ -2564,7 +2572,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
@@ -2747,7 +2755,6 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.26;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats.watchkitapp;
 				PRODUCT_NAME = "Energy Stats";
 				SDKROOT = watchos;
@@ -2782,7 +2789,6 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.26;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats.watchkitapp;
 				PRODUCT_NAME = "Energy Stats";
 				SDKROOT = watchos;
