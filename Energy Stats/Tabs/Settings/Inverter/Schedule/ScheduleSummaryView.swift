@@ -70,7 +70,13 @@ struct ScheduleSummaryView: View {
                             Text(viewModel.schedulerEnabled ? "active_schedule_title" : "inactive_schedule_title")
                         }
                     } else {
-                        NavigationLink(value: schedule) {
+                        NavigationLink {
+                            EditScheduleView(
+                                networking: networking,
+                                config: config,
+                                schedule: schedule
+                            )
+                        } label: {
                             Text("Create a schedule")
                         }
                     }

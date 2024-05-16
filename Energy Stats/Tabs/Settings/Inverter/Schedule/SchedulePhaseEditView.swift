@@ -133,6 +133,7 @@ struct SchedulePhaseEditView: View {
                     footer: {
                         Button(role: .destructive) {
                             onDelete(id)
+                            presentationMode.wrappedValue.dismiss()
                         } label: {
                             Text("Delete time period")
                         }.buttonStyle(.bordered)
