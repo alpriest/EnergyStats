@@ -11,7 +11,7 @@ import Foundation
 import SwiftData
 import WidgetKit
 
-@available(iOS 16.0, *)
+@available(iOS 17.0, *)
 struct UpdateBatteryChargeLevelIntent: AppIntent {
     static var title: LocalizedStringResource = "Update Storage Battery SOC for the widget"
     static var authenticationPolicy: IntentAuthenticationPolicy = .alwaysAllowed
