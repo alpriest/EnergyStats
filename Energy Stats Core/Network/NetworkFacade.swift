@@ -13,6 +13,7 @@ class NetworkFacade: FoxAPIServicing {
     private let isDemoUserProvider: () -> Bool
     private let store: KeychainStoring
     private let throttler = ThrottleManager()
+    private let writeAPIkey = "writeable-method" // All inverter write methods must delay 2s between each call, so use a shared key
 
     init(api: FoxAPIServicing, isDemoUser provider: @escaping () -> Bool, store: KeychainStoring) {
         self.api = api
@@ -37,6 +38,10 @@ class NetworkFacade: FoxAPIServicing {
         if isDemoUser {
             try await demoAPI.openapi_setScheduleFlag(deviceSN: deviceSN, enable: enable)
         } else {
+            defer {
+                throttler.didInvoke(method: writeAPIkey)
+            }
+            try await throttler.throttle(method: writeAPIkey, minimumDuration: 2.0)
             try await api.openapi_setScheduleFlag(deviceSN: deviceSN, enable: enable)
         }
     }
@@ -66,10 +71,14 @@ class NetworkFacade: FoxAPIServicing {
     }
 
     func openapi_setBatterySoc(deviceSN: String, minSOCOnGrid: Int, minSOC: Int) async throws {
-        return if isDemoUser {
-            try await demoAPI.openapi_setBatterySoc(deviceSN: deviceSN, minSOCOnGrid: minSOCOnGrid, minSOC: minSOC)
+        if isDemoUser {
+            return try await demoAPI.openapi_setBatterySoc(deviceSN: deviceSN, minSOCOnGrid: minSOCOnGrid, minSOC: minSOC)
         } else {
-            try await api.openapi_setBatterySoc(deviceSN: deviceSN, minSOCOnGrid: minSOCOnGrid, minSOC: minSOC)
+            defer {
+                throttler.didInvoke(method: writeAPIkey)
+            }
+            try await throttler.throttle(method: writeAPIkey, minimumDuration: 2.0)
+            return try await api.openapi_setBatterySoc(deviceSN: deviceSN, minSOCOnGrid: minSOCOnGrid, minSOC: minSOC)
         }
     }
 
@@ -82,10 +91,14 @@ class NetworkFacade: FoxAPIServicing {
     }
 
     func openapi_setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws {
-        return if isDemoUser {
-            try await demoAPI.openapi_setBatteryTimes(deviceSN: deviceSN, times: times)
+        if isDemoUser {
+            return try await demoAPI.openapi_setBatteryTimes(deviceSN: deviceSN, times: times)
         } else {
-            try await api.openapi_setBatteryTimes(deviceSN: deviceSN, times: times)
+            defer {
+                throttler.didInvoke(method: writeAPIkey)
+            }
+            try await throttler.throttle(method: writeAPIkey, minimumDuration: 2.0)
+            return try await api.openapi_setBatteryTimes(deviceSN: deviceSN, times: times)
         }
     }
 
@@ -169,6 +182,10 @@ class NetworkFacade: FoxAPIServicing {
         if isDemoUser {
             return try await demoAPI.openapi_saveSchedule(deviceSN: deviceSN, schedule: schedule)
         } else {
+            defer {
+                throttler.didInvoke(method: writeAPIkey)
+            }
+            try await throttler.throttle(method: writeAPIkey, minimumDuration: 2.0)
             try await api.openapi_saveSchedule(deviceSN: deviceSN, schedule: schedule)
         }
     }
@@ -194,7 +211,7 @@ class ThrottleManager {
     private var lastCallTimes: [String: Date] = [:]
     private let queue = DispatchQueue(label: "throttle-manager-queue", qos: .utility)
 
-    func throttle(method: String) async throws {
+    func throttle(method: String, minimumDuration: TimeInterval = 1.0) async throws {
         guard let lastCallTime = lastCallTime(for: method) else {
             didInvoke(method: method)
             return
@@ -203,8 +220,8 @@ class ThrottleManager {
         let now = Date()
         let timeSinceLastCall = now.timeIntervalSince(lastCallTime)
 
-        if timeSinceLastCall < 1.0 {
-            let waitTime = UInt64((1.0 - timeSinceLastCall) * 1_000_000_000) // Convert seconds to nanoseconds
+        if timeSinceLastCall < minimumDuration {
+            let waitTime = UInt64((minimumDuration - timeSinceLastCall) * 1_000_000_000) // Convert seconds to nanoseconds
             try await Task.sleep(nanoseconds: waitTime)
         }
     }

@@ -93,7 +93,7 @@
 		412A26882AC07FC800F61456 /* BatteryCapacityCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E4B30D28DB7511003F7F47 /* BatteryCapacityCalculator.swift */; };
 		4130364929B86F66006B5CE9 /* BatterySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4130364829B86F66006B5CE9 /* BatterySettingsView.swift */; };
 		4130364B29B8BE7F006B5CE9 /* InverterChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4130364A29B8BE7F006B5CE9 /* InverterChoiceView.swift */; };
-		4131AF4B2B5288CF00836B77 /* Network+OpenAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4131AF4A2B5288CF00836B77 /* Network+OpenAPI.swift */; };
+		4131AF4B2B5288CF00836B77 /* FoxAPIService+OpenAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4131AF4A2B5288CF00836B77 /* FoxAPIService+OpenAPI.swift */; };
 		4131AF4D2B5288F400836B77 /* OpenQueryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4131AF4C2B5288F400836B77 /* OpenQueryResponse.swift */; };
 		413208702B9E3BC400A31873 /* DataSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4132086F2B9E3BC400A31873 /* DataSettingsView.swift */; };
 		4134ACC42A88A1A800CB4BA8 /* InverterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4134ACC32A88A1A800CB4BA8 /* InverterView.swift */; };
@@ -238,7 +238,7 @@
 		41CD1F342A141F81006B0C00 /* NonFunctionalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CD1F332A141F81006B0C00 /* NonFunctionalButton.swift */; };
 		41CF044C2A95006E00ADCCAD /* ExternalWebNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CF044B2A95006E00ADCCAD /* ExternalWebNavigationLink.swift */; };
 		41D286E52AB352AC00B18FEF /* ParameterGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D286E42AB352AC00B18FEF /* ParameterGroup.swift */; };
-		41D759FD2B5B0E37002C43A7 /* Network+OpenAPI+Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D759FC2B5B0E37002C43A7 /* Network+OpenAPI+Schedule.swift */; };
+		41D759FD2B5B0E37002C43A7 /* FoxAPIService+OpenAPI+Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D759FC2B5B0E37002C43A7 /* FoxAPIService+OpenAPI+Schedule.swift */; };
 		41D759FE2B5B1768002C43A7 /* EditScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419092292B1DE3D90017CB65 /* EditScheduleView.swift */; };
 		41D759FF2B5B176A002C43A7 /* EditScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C09202B18A98400183603 /* EditScheduleViewModel.swift */; };
 		41D75A012B5C0238002C43A7 /* Bool+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D75A002B5C0238002C43A7 /* Bool+Int.swift */; };
@@ -522,7 +522,7 @@
 		412E3C7D28D2519B004A0DCF /* Energy-Stats-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Energy-Stats-Info.plist"; sourceTree = SOURCE_ROOT; };
 		4130364829B86F66006B5CE9 /* BatterySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatterySettingsView.swift; sourceTree = "<group>"; };
 		4130364A29B8BE7F006B5CE9 /* InverterChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterChoiceView.swift; sourceTree = "<group>"; };
-		4131AF4A2B5288CF00836B77 /* Network+OpenAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+OpenAPI.swift"; sourceTree = "<group>"; };
+		4131AF4A2B5288CF00836B77 /* FoxAPIService+OpenAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoxAPIService+OpenAPI.swift"; sourceTree = "<group>"; };
 		4131AF4C2B5288F400836B77 /* OpenQueryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenQueryResponse.swift; sourceTree = "<group>"; };
 		4132086F2B9E3BC400A31873 /* DataSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSettingsView.swift; sourceTree = "<group>"; };
 		41339C7328CC7BA50062B976 /* KeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStore.swift; sourceTree = "<group>"; };
@@ -688,7 +688,7 @@
 		41CF044B2A95006E00ADCCAD /* ExternalWebNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWebNavigationLink.swift; sourceTree = "<group>"; };
 		41D286E42AB352AC00B18FEF /* ParameterGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterGroup.swift; sourceTree = "<group>"; };
 		41D6496B28DB321600A24B41 /* DeviceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceList.swift; sourceTree = "<group>"; };
-		41D759FC2B5B0E37002C43A7 /* Network+OpenAPI+Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+OpenAPI+Schedule.swift"; sourceTree = "<group>"; };
+		41D759FC2B5B0E37002C43A7 /* FoxAPIService+OpenAPI+Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoxAPIService+OpenAPI+Schedule.swift"; sourceTree = "<group>"; };
 		41D75A002B5C0238002C43A7 /* Bool+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+Int.swift"; sourceTree = "<group>"; };
 		41D75A022B6009D5002C43A7 /* UpgradeRequiredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeRequiredView.swift; sourceTree = "<group>"; };
 		41D7AB8F2B9F1F6C00FFDFC0 /* InfoButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoButtonView.swift; sourceTree = "<group>"; };
@@ -1406,13 +1406,13 @@
 				4140146328C7146B00EA5BA1 /* NetworkModels */,
 				4140145F28C70D4700EA5BA1 /* FoxAPIServicing.swift */,
 				41BCC1AA2B245C280062084A /* FoxAPIService.swift */,
+				4131AF4A2B5288CF00836B77 /* FoxAPIService+OpenAPI.swift */,
+				41D759FC2B5B0E37002C43A7 /* FoxAPIService+OpenAPI+Schedule.swift */,
 				41777F1428F49C61009944FF /* NetworkFacade.swift */,
 				41626CCD29D95E9C003FEB00 /* NetworkError.swift */,
 				416318B629DDD2E100C2C285 /* InMemoryLoggingNetworkStore.swift */,
 				41B3FFE72AB07FE10020DFC9 /* NetworkCache.swift */,
 				41DC51592AE2E9DC00FD348B /* NetworkValueCleaner.swift */,
-				4131AF4A2B5288CF00836B77 /* Network+OpenAPI.swift */,
-				41D759FC2B5B0E37002C43A7 /* Network+OpenAPI+Schedule.swift */,
 				414A40BF2B989D9800321AA2 /* NetworkService.swift */,
 			);
 			path = Network;
@@ -1992,7 +1992,7 @@
 			files = (
 				41DC515A2AE2E9DC00FD348B /* NetworkValueCleaner.swift in Sources */,
 				41757BBC2A90A05E00573FB4 /* AmountType.swift in Sources */,
-				41D759FD2B5B0E37002C43A7 /* Network+OpenAPI+Schedule.swift in Sources */,
+				41D759FD2B5B0E37002C43A7 /* FoxAPIService+OpenAPI+Schedule.swift in Sources */,
 				4109140229DB7AE700133CC5 /* BatteryViewModel.swift in Sources */,
 				41B3FFE82AB07FE10020DFC9 /* NetworkCache.swift in Sources */,
 				4103D1D729DB6C51001B0BC8 /* FoxAPIServicing.swift in Sources */,
@@ -2010,7 +2010,7 @@
 				416AE44B2A8170E6003D0122 /* SelectableItem.swift in Sources */,
 				4103D1DA29DB6C6D001B0BC8 /* DeviceFirmwareVersion.swift in Sources */,
 				41DCF5442B06CBD40010843F /* Date.swift in Sources */,
-				4131AF4B2B5288CF00836B77 /* Network+OpenAPI.swift in Sources */,
+				4131AF4B2B5288CF00836B77 /* FoxAPIService+OpenAPI.swift in Sources */,
 				411542F12BEF424200BDE56D /* MockKeychainStore.swift in Sources */,
 				41495F382B211A75004A51C1 /* AlertContentView.swift in Sources */,
 				4190921D2B1D253D0017CB65 /* Schedule.swift in Sources */,
