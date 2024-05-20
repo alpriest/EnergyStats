@@ -16,6 +16,7 @@ public protocol TemplateStoring {
 
 public class TemplateStore: TemplateStoring {
     private var config: ScheduleTemplateConfigManager
+
     public init(config: ScheduleTemplateConfigManager) {
         self.config = config
     }
