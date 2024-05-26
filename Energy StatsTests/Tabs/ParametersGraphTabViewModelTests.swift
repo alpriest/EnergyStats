@@ -43,8 +43,8 @@ final class ParametersGraphTabViewModelTests: XCTestCase {
 
         let key = try XCTUnwrap(sut.data.keys.first)
         let kwhData = sut.data[key]!
-        let types = Set(kwhData.map { $0.type.name })
-        let feedinPowerData = kwhData.filter { $0.type.variable == "feedinPower" }
+        let types = Set(kwhData.values.map { $0.type.name })
+        let feedinPowerData = kwhData.values.filter { $0.type.variable == "feedinPower" }
 
         XCTAssertEqual(key, "kW")
         XCTAssertEqual(sut.data.count, 1)
@@ -59,7 +59,7 @@ final class ParametersGraphTabViewModelTests: XCTestCase {
 
         let key = try XCTUnwrap(sut.data.keys.first)
         let kwhData = sut.data[key]!
-        let feedinPowerData = kwhData.filter { $0.type.variable == "feedinPower" }
+        let feedinPowerData = kwhData.values.filter { $0.type.variable == "feedinPower" }
 
         XCTAssertEqual(sut.stride, 2)
         XCTAssertEqual(feedinPowerData.count, 13)

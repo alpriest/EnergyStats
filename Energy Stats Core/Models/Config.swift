@@ -52,6 +52,7 @@ public protocol Config {
     var powerStationDetail: PowerStationDetail? { get set }
     var showSelfSufficiencyStatsGraphOverlay: Bool { get set }
     var scheduleTemplates: [ScheduleTemplate] { get set }
+    var truncatedYAxisOnParameterGraphs: Bool { get set }
 }
 
 public func DefaultParameterGroups() -> [ParameterGroup] {

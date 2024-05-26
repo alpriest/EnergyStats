@@ -71,7 +71,7 @@ struct ParameterGraphVariableChooserView: View {
                     Text("Note that not all parameters contain values")
                 }
             }
-            .navigationTitle("Parameter Groups")
+            .navigationTitle("Parameters")
             .toolbar { ToolbarItem(placement: .navigationBarTrailing) {
                 NavigationLink(destination: { ParameterVariableGroupEditorView(viewModel: ParameterVariableGroupEditorViewModel(configManager: viewModel.configManager)) },
                                label: { Text("Edit") })

@@ -151,6 +151,7 @@
 		417185522A0119F300D18CDD /* variables-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 417185512A0119F300D18CDD /* variables-success.json */; };
 		41757BBC2A90A05E00573FB4 /* AmountType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41757BBB2A90A05E00573FB4 /* AmountType.swift */; };
 		41757BBD2A90A06E00573FB4 /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0B43329F96D3600CA9462 /* LocalizedString.swift */; };
+		417747F92C0379080023A51C /* history-temp.json in Resources */ = {isa = PBXBuildFile; fileRef = 417747F82C0379080023A51C /* history-temp.json */; };
 		417AA21A2A12454A0073CD34 /* StatsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AA2192A12454A0073CD34 /* StatsTabView.swift */; };
 		417AA21D2A1245C00073CD34 /* StatsTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AA21C2A1245C00073CD34 /* StatsTabViewModel.swift */; };
 		418024E22AD16D00009A2625 /* String+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418024E12AD16D00009A2625 /* String+Currency.swift */; };
@@ -589,6 +590,7 @@
 		4171854D2A010B6300D18CDD /* ParameterGraphVariableChooserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterGraphVariableChooserViewModel.swift; sourceTree = "<group>"; };
 		417185512A0119F300D18CDD /* variables-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "variables-success.json"; sourceTree = "<group>"; };
 		41757BBB2A90A05E00573FB4 /* AmountType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountType.swift; sourceTree = "<group>"; };
+		417747F82C0379080023A51C /* history-temp.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "history-temp.json"; sourceTree = "<group>"; };
 		41777F1428F49C61009944FF /* NetworkFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFacade.swift; sourceTree = "<group>"; };
 		417AA2192A12454A0073CD34 /* StatsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTabView.swift; sourceTree = "<group>"; };
 		417AA21C2A1245C00073CD34 /* StatsTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTabViewModel.swift; sourceTree = "<group>"; };
@@ -1009,6 +1011,7 @@
 		413745072919022C00D351F1 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				417747F82C0379080023A51C /* history-temp.json */,
 				411542F02BEF424200BDE56D /* MockKeychainStore.swift */,
 				41DF51D12AA4CF6D007B5102 /* MockAppTheme.swift */,
 				418805942BA04FAA00055EDA /* history.json */,
@@ -1789,6 +1792,7 @@
 				418805952BA04FAA00055EDA /* history.json in Resources */,
 				41F71ABF2A1504C700A8C81B /* report-year.json in Resources */,
 				41DCF5422B06C20B0010843F /* solcast.json in Resources */,
+				417747F92C0379080023A51C /* history-temp.json in Resources */,
 				41F71AC12A1504D900A8C81B /* report-month.json in Resources */,
 				41FDAD502A01604F00EDACF3 /* variables.json in Resources */,
 				41CB71482A3B1A2800199415 /* Assets.xcassets in Resources */,
@@ -2361,7 +2365,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.29;
+				MARKETING_VERSION = 2.30;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2420,7 +2424,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.29;
+				MARKETING_VERSION = 2.30;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

@@ -24,13 +24,22 @@ struct GraphDisplayMode: Equatable {
     }
 }
 
+struct ParametersGraphViewData {
+    let values: [ParameterGraphValue]
+    let yScale: ClosedRange<Double>
+
+    static func empty() -> ParametersGraphViewData {
+        ParametersGraphViewData(values: [], yScale: 0...0)
+    }
+}
+
 class ParametersGraphTabViewModel: ObservableObject, HasLoadState {
     private let haptic = UIImpactFeedbackGenerator()
     private let networking: Networking
     private var configManager: ConfigManaging
     private var rawData: [ParameterGraphValue] = [] {
         didSet {
-            data = Dictionary(grouping: rawData, by: { $0.type.unit })
+            assignData(from: rawData)
         }
     }
 
@@ -38,7 +47,7 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState {
     @Published var state = LoadState.inactive
 
     @Published private(set) var stride = 3
-    @Published private(set) var data: [String: [ParameterGraphValue]] = [:]
+    @Published private(set) var data: [String: ParametersGraphViewData] = [:]
     @Published var graphVariables: [ParameterGraphVariable] = []
     @Published var graphVariableBounds: [ParameterGraphBounds] = []
     private var queryDate = QueryDate.now()
@@ -81,7 +90,7 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState {
         self.networking = networking
         self.configManager = configManager
         self.dateProvider = dateProvider
-        self.displayMode = GraphDisplayMode(date: dateProvider(), hours: 24)
+        displayMode = GraphDisplayMode(date: dateProvider(), hours: 24)
         haptic.prepare()
 
         cancellable = configManager.currentDevice
@@ -190,7 +199,7 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState {
             xScale = start...Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: displayMode.date))!
         }
 
-        data = Dictionary(grouping: refreshedData, by: { $0.type.unit })
+        assignData(from: refreshedData)
 
         storeVariables()
     }
@@ -251,6 +260,15 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState {
 
     private func storeVariables() {
         configManager.selectedParameterGraphVariables = graphVariables.filter { $0.isSelected }.map { $0.type.variable }
+    }
+
+    private func assignData(from grouped: [ParameterGraphValue]) {
+        let rawGrouped = Dictionary(grouping: grouped, by: { $0.type.unit })
+        var updated = [String: ParametersGraphViewData]()
+        for item in rawGrouped {
+            updated[item.key] = ParametersGraphViewData(values: item.value, yScale: 1...3)
+        }
+        data = updated
     }
 }
 

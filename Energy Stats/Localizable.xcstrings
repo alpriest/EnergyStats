@@ -4577,6 +4577,9 @@
         }
       }
     },
+    "Display truncated Y axis" : {
+
+    },
     "display_unit_adaptive_description" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -8452,6 +8455,7 @@
       }
     },
     "Parameter Groups" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -8534,6 +8538,9 @@
           }
         }
       }
+    },
+    "Parameters..." : {
+
     },
     "peak_shaving_mode" : {
       "extractionState" : "manual",

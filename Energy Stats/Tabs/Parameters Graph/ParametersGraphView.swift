@@ -16,24 +16,28 @@ struct ParametersGraphView: View {
     @GestureState var isDetectingPress = true
     @Binding var selectedDate: Date?
     @Binding var valuesAtTime: ValuesAtTime<ParameterGraphValue>?
-    private let data: [ParameterGraphValue]
+    private let data: ParametersGraphViewData
     @State private var captionBoxSize: CGSize = .zero
+    private let truncateYAxis: Bool
 
-    init(key: String?, viewModel: ParametersGraphTabViewModel, selectedDate: Binding<Date?>, valuesAtTime: Binding<ValuesAtTime<ParameterGraphValue>?>) {
+    init(key: String?, viewModel: ParametersGraphTabViewModel, selectedDate: Binding<Date?>, valuesAtTime: Binding<ValuesAtTime<ParameterGraphValue>?>, truncateYAxis: Bool) {
         self.key = key
         self.viewModel = viewModel
         self._selectedDate = selectedDate
         self._valuesAtTime = valuesAtTime
+        self.truncateYAxis = truncateYAxis
 
         if let key {
-            self.data = viewModel.data[key] ?? []
+            self.data = viewModel.data[key] ?? .empty()
+        } else if let key = viewModel.data.keys.first {
+            self.data = viewModel.data[key] ?? .empty()
         } else {
-            self.data = viewModel.data.values.flatMap { $0 }
+            self.data = .empty()
         }
     }
 
     var body: some View {
-        Chart(data, id: \.type.variable) {
+        Chart(data.values, id: \.type.variable) {
             LineMark(
                 x: .value("hour", $0.date),
                 y: .value("", $0.value),
@@ -45,6 +49,7 @@ struct ParametersGraphView: View {
             content.background(Color.gray.gradient.opacity(0.04))
         }
         .chartXScale(domain: viewModel.xScale)
+        .chartYScale(domain: .automatic(includesZero: !truncateYAxis))
         .chartXAxis {
             AxisMarks(values: .stride(by: .hour, count: viewModel.stride)) { value in
                 if let date = value.as(Date.self) {
@@ -77,7 +82,7 @@ struct ParametersGraphView: View {
                             let xLocation = currentState.location.x - geometryProxy[chartProxy.plotAreaFrame].origin.x
 
                             if let plotElement = chartProxy.value(atX: xLocation, as: Date.self) {
-                                if let graphValue = data.first(where: {
+                                if let graphValue = data.values.first(where: {
                                     $0.date > plotElement
                                 }), selectedDate != graphValue.date {
                                     selectedDate = graphValue.date
@@ -91,7 +96,7 @@ struct ParametersGraphView: View {
                             let xLocation = value.location.x - geometryProxy[chartProxy.plotAreaFrame].origin.x
 
                             if let plotElement = chartProxy.value(atX: xLocation, as: Date.self) {
-                                if let graphValue = data.first(where: {
+                                if let graphValue = data.values.first(where: {
                                     $0.date > plotElement
                                 }) {
                                     selectedDate = graphValue.date
@@ -169,7 +174,8 @@ struct UsageGraphView_Previews: PreviewProvider {
             key: "℃",
             viewModel: model,
             selectedDate: .constant(nil),
-            valuesAtTime: .constant(nil)
+            valuesAtTime: .constant(nil),
+            truncateYAxis: false
         )
     }
 }

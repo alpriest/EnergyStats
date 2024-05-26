@@ -15,12 +15,18 @@ class ParameterGraphVariableChooserViewModel: ObservableObject {
     private(set) var configManager: ConfigManaging
     @Published var groups: [ParameterGroup]
     @Published var selected: UUID?
+    @Published var truncatedYAxis: Bool {
+        didSet {
+            configManager.truncatedYAxisOnParameterGraphs = truncatedYAxis
+        }
+    }
 
     init(variables: [ParameterGraphVariable], configManager: ConfigManaging, onApply: @escaping ([ParameterGraphVariable]) -> Void) {
         self.variables = variables.sorted(by: { $0.type.name.lowercased() < $1.type.name.lowercased() })
         self.configManager = configManager
         self.onApply = onApply
         self.groups = configManager.parameterGroups
+        self.truncatedYAxis = configManager.truncatedYAxisOnParameterGraphs
         haptic.prepare()
     }
 

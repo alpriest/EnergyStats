@@ -50,7 +50,8 @@ public enum AppSettingsPublisherFactory {
                     showInverterTypeName: config.showInverterTypeName,
                     powerFlowStrings: config.powerFlowStrings,
                     showBatteryPercentageRemaining: config.showBatteryPercentageRemaining,
-                    showSelfSufficiencyStatsGraphOverlay: config.showSelfSufficiencyStatsGraphOverlay
+                    showSelfSufficiencyStatsGraphOverlay: config.showSelfSufficiencyStatsGraphOverlay,
+                    truncatedYAxisOnParameterGraphs: config.truncatedYAxisOnParameterGraphs
                 )
             )
 

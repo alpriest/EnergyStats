@@ -47,6 +47,7 @@ public struct AppSettings {
     public var powerFlowStrings: PowerFlowStringsSettings
     public var showBatteryPercentageRemaining: Bool
     public var showSelfSufficiencyStatsGraphOverlay: Bool
+    public var truncatedYAxisOnParameterGraphs: Bool
 
     public init(
         showColouredLines: Bool,
@@ -80,7 +81,8 @@ public struct AppSettings {
         showInverterTypeName: Bool,
         powerFlowStrings: PowerFlowStringsSettings,
         showBatteryPercentageRemaining: Bool,
-        showSelfSufficiencyStatsGraphOverlay: Bool
+        showSelfSufficiencyStatsGraphOverlay: Bool,
+        truncatedYAxisOnParameterGraphs: Bool
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -114,6 +116,7 @@ public struct AppSettings {
         self.powerFlowStrings = powerFlowStrings
         self.showBatteryPercentageRemaining = showBatteryPercentageRemaining
         self.showSelfSufficiencyStatsGraphOverlay = showSelfSufficiencyStatsGraphOverlay
+        self.truncatedYAxisOnParameterGraphs = truncatedYAxisOnParameterGraphs
     }
 
     public func copy(
@@ -148,7 +151,8 @@ public struct AppSettings {
         showInverterTypeName: Bool? = nil,
         powerFlowStrings: PowerFlowStringsSettings? = nil,
         showBatteryPercentageRemaining: Bool? = nil,
-        showSelfSufficiencyStatsGraphOverlay: Bool? = nil
+        showSelfSufficiencyStatsGraphOverlay: Bool? = nil,
+        truncatedYAxisOnParameterGraphs: Bool? = nil
     ) -> AppSettings {
         AppSettings(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -182,7 +186,8 @@ public struct AppSettings {
             showInverterTypeName: showInverterTypeName ?? self.showInverterTypeName,
             powerFlowStrings: powerFlowStrings ?? self.powerFlowStrings,
             showBatteryPercentageRemaining: showBatteryPercentageRemaining ?? self.showBatteryPercentageRemaining,
-            showSelfSufficiencyStatsGraphOverlay: showSelfSufficiencyStatsGraphOverlay ?? self.showSelfSufficiencyStatsGraphOverlay
+            showSelfSufficiencyStatsGraphOverlay: showSelfSufficiencyStatsGraphOverlay ?? self.showSelfSufficiencyStatsGraphOverlay,
+            truncatedYAxisOnParameterGraphs: truncatedYAxisOnParameterGraphs ?? self.truncatedYAxisOnParameterGraphs
         )
     }
 }

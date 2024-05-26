@@ -46,7 +46,8 @@ public extension AppSettings {
             showInverterTypeName: false,
             powerFlowStrings: .none,
             showBatteryPercentageRemaining: true,
-            showSelfSufficiencyStatsGraphOverlay: true
+            showSelfSufficiencyStatsGraphOverlay: true,
+            truncatedYAxisOnParameterGraphs: true
         )
     }
 }

@@ -5,6 +5,7 @@
 //  Created by Alistair Priest on 02/07/2023.
 //
 
+import Energy_Stats_Core
 import SwiftUI
 
 class ParameterGraphHeaderViewModel: ObservableObject {
@@ -23,13 +24,21 @@ class ParameterGraphHeaderViewModel: ObservableObject {
 
     @Published var canChangeHours: Bool = true
     @Published var canIncrease = false
+    @Published var truncatedYAxis: Bool = false {
+        didSet {
+            configManager.truncatedYAxisOnParameterGraphs = truncatedYAxis
+        }
+    }
 
     private var isInitialised = false
+    private var configManager: ConfigManaging
 
-    init(displayMode: Binding<GraphDisplayMode>) {
+    init(displayMode: Binding<GraphDisplayMode>, configManager: ConfigManaging) {
         self._displayMode = displayMode
         self.candidateQueryDate = displayMode.wrappedValue.date
         self.hours = displayMode.wrappedValue.hours
+        self.configManager = configManager
+        self.truncatedYAxis = configManager.truncatedYAxisOnParameterGraphs
 
         self.isInitialised = true
     }

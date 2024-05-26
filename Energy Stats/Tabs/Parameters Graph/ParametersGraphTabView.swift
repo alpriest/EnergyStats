@@ -30,8 +30,7 @@ struct ParametersGraphTabView: View {
     var body: some View {
         Group {
             VStack {
-                ParameterGraphHeaderView(viewModel: ParameterGraphHeaderViewModel(displayMode: $viewModel.displayMode), showingVariables: $showingVariables)
-                    .padding(.horizontal)
+                ParameterGraphHeaderView(viewModel: ParameterGraphHeaderViewModel(displayMode: $viewModel.displayMode, configManager: configManager), showingVariables: $showingVariables)
 
                 ScrollView {
                     if #available(iOS 16.0, *) {
@@ -56,7 +55,8 @@ struct ParametersGraphTabView: View {
                                         ParametersGraphView(key: key,
                                                             viewModel: viewModel,
                                                             selectedDate: $selectedDate,
-                                                            valuesAtTime: $valuesAtTime)
+                                                            valuesAtTime: $valuesAtTime,
+                                                            truncateYAxis: appSettings.truncatedYAxisOnParameterGraphs)
                                             .frame(height: 250)
                                             .padding(.vertical)
 
@@ -70,7 +70,8 @@ struct ParametersGraphTabView: View {
                                 ParametersGraphView(key: nil,
                                                     viewModel: viewModel,
                                                     selectedDate: $selectedDate,
-                                                    valuesAtTime: $valuesAtTime)
+                                                    valuesAtTime: $valuesAtTime,
+                                                    truncateYAxis: appSettings.truncatedYAxisOnParameterGraphs)
                                     .frame(height: 250)
                                     .padding(.vertical)
 
@@ -122,8 +123,10 @@ struct ParametersGraphTabView: View {
 @available(iOS 16.0, *)
 struct GraphTabView_Previews: PreviewProvider {
     static var previews: some View {
-        ParametersGraphTabView(configManager: ConfigManager.preview(),
-                               viewModel: ParametersGraphTabViewModel(networking: NetworkService.preview(), configManager: ConfigManager.preview()))
+        let viewModel = ParametersGraphTabViewModel(networking: NetworkService.preview(), configManager: ConfigManager.preview())
+
+        return ParametersGraphTabView(configManager: ConfigManager.preview(),
+                                      viewModel: viewModel)
             .previewDevice("iPhone 13 Mini")
     }
 }

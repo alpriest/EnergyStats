@@ -526,6 +526,16 @@ public class ConfigManager: ConfigManaging {
         get { config.scheduleTemplates }
         set { config.scheduleTemplates = newValue }
     }
+
+    public var truncatedYAxisOnParameterGraphs: Bool {
+        get { config.truncatedYAxisOnParameterGraphs }
+        set {
+            config.truncatedYAxisOnParameterGraphs = newValue
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+                truncatedYAxisOnParameterGraphs: config.truncatedYAxisOnParameterGraphs
+            ))
+        }
+    }
 }
 
 public enum BatteryResponseMapper {

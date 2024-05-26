@@ -19,7 +19,6 @@ public class UserDefaultsConfig: Config {
     public func clearDisplaySettings() {
         UserDefaults.shared.removeObject(forKey: "showGraphValueDescriptions")
         UserDefaults.shared.removeObject(forKey: "hasRunBefore")
-        UserDefaults.shared.removeObject(forKey: "isDemoUser")
         UserDefaults.shared.removeObject(forKey: "showColouredLines")
         UserDefaults.shared.removeObject(forKey: "showBatteryTemperature")
         UserDefaults.shared.removeObject(forKey: "showBatteryEstimate")
@@ -55,10 +54,12 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "powerFlowStringsSettings")
         UserDefaults.shared.removeObject(forKey: "showBatteryPercentageRemaining")
         UserDefaults.shared.removeObject(forKey: "showSelfSufficiencyStatsGraphOverlay")
+        UserDefaults.shared.removeObject(forKey: "truncatedYAxisOnParameterGraphs")
         UserDefaults.shared.synchronize()
     }
 
     public func clearDeviceSettings() {
+        UserDefaults.shared.removeObject(forKey: "isDemoUser")
         UserDefaults.shared.removeObject(forKey: "devices")
         UserDefaults.shared.removeObject(forKey: "selectedDeviceSN")
         UserDefaults.shared.removeObject(forKey: "powerStationDetail")
@@ -244,4 +245,7 @@ public class UserDefaultsConfig: Config {
             UserDefaults.shared.set(data, forKey: "scheduleTemplates")
         }
     }
+
+    @UserDefaultsStoredBool(key: "truncatedYAxisOnParameterGraphs", defaultValue: false)
+    public var truncatedYAxisOnParameterGraphs: Bool
 }

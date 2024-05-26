@@ -118,14 +118,6 @@ class DemoAPI: FoxAPIServicing {
         )
     }
 
-    private func data(filename: String) throws -> Data {
-        guard let url = Bundle(for: type(of: self)).url(forResource: filename, withExtension: "json") else {
-            return Data()
-        }
-
-        return try Data(contentsOf: url)
-    }
-
     func openapi_setBatterySoc(deviceSN: String, minSOCOnGrid: Int, minSOC: Int) async throws {
         if callsToThrow.contains(.openapi_setBatterySoc) {
             throw NetworkError.missingData
@@ -187,7 +179,7 @@ class DemoAPI: FoxAPIServicing {
             throw NetworkError.missingData
         }
 
-        let data = try self.data(filename: "history")
+        let data = try self.data(filename: "history-temp")
         let response = try JSONDecoder().decode(NetworkResponse<[OpenHistoryResponse]>.self, from: data)
         guard let result = response.result?.first else { throw NetworkError.invalidToken }
 
@@ -303,6 +295,14 @@ class DemoAPI: FoxAPIServicing {
 
         return PowerStationDetailResponse(stationName: "station \(stationID)", capacity: 3500, timezone: "Europe/London")
     }
+
+    private func data(filename: String) throws -> Data {
+        guard let url = Bundle(for: type(of: self)).url(forResource: filename, withExtension: "json") else {
+            return Data()
+        }
+
+        return try Data(contentsOf: url)
+    }
 }
 
 public class MockConfig: Config {
@@ -335,7 +335,7 @@ public class MockConfig: Config {
     public var feedInUnitPrice: Double = 0.05
     public var showInverterTemperature: Bool = false
     public var showInverterTypeName: Bool = false
-    public var selectedParameterGraphVariables: [String] = []
+    public var selectedParameterGraphVariables: [String] = ["ambientTemperation", "invTemperation", "batTemperature"]
     public var showHomeTotalOnPowerFlow: Bool = true
     public var showInverterIcon: Bool = true
     public var shouldInvertCT2: Bool = true
@@ -358,6 +358,7 @@ public class MockConfig: Config {
     public var powerStationDetail: PowerStationDetail? = nil
     public var showSelfSufficiencyStatsGraphOverlay: Bool = true
     public var scheduleTemplates: [ScheduleTemplate] = []
+    public var truncatedYAxisOnParameterGraphs: Bool = false
 }
 
 public extension SolcastSite {

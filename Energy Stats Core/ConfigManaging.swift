@@ -57,6 +57,7 @@ public protocol ConfigManaging: FinancialConfigManager, SolcastConfigManager, Ba
     var showBatteryPercentageRemaining: Bool { get set }
     var powerStationDetail: PowerStationDetail? { get }
     var showSelfSufficiencyStatsGraphOverlay: Bool { get set }
+    var truncatedYAxisOnParameterGraphs: Bool { get set }
 }
 
 public protocol BatteryConfigManager {
