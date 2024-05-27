@@ -4578,7 +4578,32 @@
       }
     },
     "Display truncated Y axis" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abgeschnittene Y-Achse anzeigen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar eje Y truncado"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visualizza asse Y troncato"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wyświetl skróconą oś Y"
+          }
+        }
+      }
     },
     "display_unit_adaptive_description" : {
       "extractionState" : "manual",
@@ -8454,35 +8479,6 @@
         }
       }
     },
-    "Parameter Groups" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Parametergruppen"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Grupos de parámetros"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gruppi di parametri"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Grupy parametrów"
-          }
-        }
-      }
-    },
     "Parameters" : {
       "localizations" : {
         "de" : {
@@ -8540,7 +8536,32 @@
       }
     },
     "Parameters..." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parameter..."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parámetros..."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parametri..."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parametry..."
+          }
+        }
+      }
     },
     "peak_shaving_mode" : {
       "extractionState" : "manual",
