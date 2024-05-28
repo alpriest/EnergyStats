@@ -18,36 +18,7 @@ struct StatsGraphVariableToggles: View {
         VStack(alignment: .leading) {
             ForEach(viewModel.graphVariables, id: \.self) { variable in
                 HStack {
-                    row(variable) {
-                        HStack(alignment: .top) {
-                            Circle()
-                                .foregroundColor(variable.type.colour)
-                                .frame(width: 15, height: 15)
-                                .padding(.top, 5)
-
-                            VStack(alignment: .leading) {
-                                Text(variable.type.title)
-
-                                if variable.type.title != variable.type.description, appSettings.showGraphValueDescriptions {
-                                    Text(variable.type.description)
-                                        .font(.system(size: 10))
-                                        .foregroundColor(Color("text_dimmed"))
-                                }
-                            }
-
-                            Spacer()
-
-                            if let valuesAtTime, let graphValue = valuesAtTime.values.first(where: { $0.type == variable.type }) {
-                                Text(graphValue.formatted(appSettings.decimalPlaces))
-                                    .monospacedDigit()
-                            } else {
-                                OptionalView(viewModel.total(of: variable.type)) {
-                                    EnergyText(amount: $0, appSettings: appSettings, type: .default)
-                                }
-                            }
-                        }
-                        .opacity(variable.enabled ? 1.0 : 0.5)
-                    }
+                    row(variable)
                 }
                 .listRowSeparator(.hidden)
             }
@@ -58,20 +29,42 @@ struct StatsGraphVariableToggles: View {
     }
 
     @ViewBuilder
-    private func row(_ variable: StatsGraphVariable, _ content: () -> some View) -> some View {
-        if #available(iOS 16.0, *) {
-            Button(action: { viewModel.toggle(visibilityOf: variable) }) {
-                content()
+    private func row(_ variable: StatsGraphVariable) -> some View {
+        Button(action: { viewModel.toggle(visibilityOf: variable) }) {
+            HStack(alignment: .top) {
+                Circle()
+                    .foregroundColor(variable.type.colour)
+                    .frame(width: 15, height: 15)
+                    .padding(.top, 5)
+
+                VStack(alignment: .leading) {
+                    Text(variable.type.title)
+
+                    if variable.type.title != variable.type.description, appSettings.showGraphValueDescriptions {
+                        Text(variable.type.description)
+                            .font(.system(size: 10))
+                            .foregroundColor(Color("text_dimmed"))
+                    }
+                }
+
+                Spacer()
+
+                if let valuesAtTime, let graphValue = valuesAtTime.values.first(where: { $0.type == variable.type }) {
+                    Text(graphValue.formatted(appSettings.decimalPlaces))
+                        .monospacedDigit()
+                } else {
+                    OptionalView(viewModel.total(of: variable.type)) {
+                        EnergyText(amount: $0, appSettings: appSettings, type: .default)
+                    }
+                }
             }
-            .buttonStyle(.plain)
-        } else {
-            content()
+            .opacity(variable.enabled ? 1.0 : 0.5)
         }
+        .buttonStyle(.plain)
     }
 }
 
 #if DEBUG
-@available(iOS 16.0, *)
 struct StatsGraphVariableToggles_Previews: PreviewProvider {
     static var previews: some View {
         StatsGraphVariableToggles(

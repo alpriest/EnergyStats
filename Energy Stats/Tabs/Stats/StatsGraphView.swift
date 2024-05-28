@@ -44,7 +44,6 @@ struct StatsGraphValue: Identifiable, Hashable {
     }
 }
 
-@available(iOS 16.0, *)
 struct StatsGraphView: View {
     let viewModel: StatsTabViewModel
     @GestureState var isDetectingPress = true
@@ -168,7 +167,6 @@ struct StatsGraphView: View {
 }
 
 #if DEBUG
-@available(iOS 16.0, *)
 #Preview {
     VStack {
         Text(verbatim: "Day by hours")

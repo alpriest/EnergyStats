@@ -54,7 +54,6 @@ struct SelfSufficiencyEstimateView: View {
     }
 }
 
-@available(iOS 16.0, *)
 #Preview {
     SelfSufficiencyEstimateView(ApproximationsViewModel.any(),
                                 mode: .absolute,

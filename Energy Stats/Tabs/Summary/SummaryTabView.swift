@@ -59,10 +59,8 @@ struct SummaryTabView: View {
                             Text("Could not load approximations")
                         }
 
-                        if #available(iOS 16.0, *) {
-                            Divider()
-                            SolarForecastView(appSettings: appSettings, viewModel: solarForecastViewModel)
-                        }
+                        Divider()
+                        SolarForecastView(appSettings: appSettings, viewModel: solarForecastViewModel)
                     }
                 }
                 .padding()

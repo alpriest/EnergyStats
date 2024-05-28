@@ -6080,6 +6080,7 @@
       }
     },
     "Graph functionality requires iOS 16 or newer" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

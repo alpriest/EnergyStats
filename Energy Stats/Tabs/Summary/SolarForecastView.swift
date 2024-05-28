@@ -14,7 +14,6 @@ extension SolcastForecastResponse: Identifiable {
     public var id: Double { periodEnd.timeIntervalSince1970 }
 }
 
-@available(iOS 16.0, *)
 struct SolarForecastView: View {
     let appSettings: AppSettings
     @ObservedObject var viewModel: SolarForecastViewModel

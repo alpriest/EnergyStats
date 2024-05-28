@@ -33,51 +33,49 @@ struct ParametersGraphTabView: View {
                 ParameterGraphHeaderView(viewModel: ParameterGraphHeaderViewModel(displayMode: $viewModel.displayMode, configManager: configManager), showingVariables: $showingVariables)
 
                 ScrollView {
-                    if #available(iOS 16.0, *) {
-                        HStack {
-                            Group {
-                                if let selectedDate {
-                                    Text(selectedDate, format: .dateTime)
-                                    Button("Clear graph values", action: {
-                                        self.valuesAtTime = nil
-                                        self.selectedDate = nil
-                                    })
-                                } else {
-                                    Text("Touch the graph to see values at that time")
-                                }
-                            }.padding(.vertical)
-                        }.frame(maxWidth: .infinity)
+                    HStack {
+                        Group {
+                            if let selectedDate {
+                                Text(selectedDate, format: .dateTime)
+                                Button("Clear graph values", action: {
+                                    self.valuesAtTime = nil
+                                    self.selectedDate = nil
+                                })
+                            } else {
+                                Text("Touch the graph to see values at that time")
+                            }
+                        }.padding(.vertical)
+                    }.frame(maxWidth: .infinity)
 
-                        if configManager.separateParameterGraphsByUnit {
-                            VStack {
-                                ForEach(Array(viewModel.data.keys.sorted { $0 < $1 }), id: \.self) { key in
-                                    ZStack {
-                                        ParametersGraphView(key: key,
-                                                            viewModel: viewModel,
-                                                            selectedDate: $selectedDate,
-                                                            valuesAtTime: $valuesAtTime,
-                                                            truncateYAxis: appSettings.truncatedYAxisOnParameterGraphs)
-                                            .frame(height: 250)
-                                            .padding(.vertical)
+                    if configManager.separateParameterGraphsByUnit {
+                        VStack {
+                            ForEach(Array(viewModel.data.keys.sorted { $0 < $1 }), id: \.self) { key in
+                                ZStack {
+                                    ParametersGraphView(key: key,
+                                                        viewModel: viewModel,
+                                                        selectedDate: $selectedDate,
+                                                        valuesAtTime: $valuesAtTime,
+                                                        truncateYAxis: appSettings.truncatedYAxisOnParameterGraphs)
+                                        .frame(height: 250)
+                                        .padding(.vertical)
 
-                                        LoadingView(message: "Loading")
-                                            .opacity(viewModel.state.opacity())
-                                    }
+                                    LoadingView(message: "Loading")
+                                        .opacity(viewModel.state.opacity())
                                 }
                             }
-                        } else {
-                            ZStack {
-                                ParametersGraphView(key: nil,
-                                                    viewModel: viewModel,
-                                                    selectedDate: $selectedDate,
-                                                    valuesAtTime: $valuesAtTime,
-                                                    truncateYAxis: appSettings.truncatedYAxisOnParameterGraphs)
-                                    .frame(height: 250)
-                                    .padding(.vertical)
+                        }
+                    } else {
+                        ZStack {
+                            ParametersGraphView(key: nil,
+                                                viewModel: viewModel,
+                                                selectedDate: $selectedDate,
+                                                valuesAtTime: $valuesAtTime,
+                                                truncateYAxis: appSettings.truncatedYAxisOnParameterGraphs)
+                                .frame(height: 250)
+                                .padding(.vertical)
 
-                                LoadingView(message: "Loading")
-                                    .opacity(viewModel.state.opacity())
-                            }
+                            LoadingView(message: "Loading")
+                                .opacity(viewModel.state.opacity())
                         }
                     }
 
@@ -89,20 +87,10 @@ struct ParametersGraphTabView: View {
                         .multilineTextAlignment(.center)
                         .padding(.vertical, 28)
 
-                    if #available(iOS 16.0, *) {
-                        if let url = viewModel.exportFile?.url {
-                            ShareLink(item: url) {
-                                Label("Export graph data", systemImage: "square.and.arrow.up")
-                            }
+                    if let url = viewModel.exportFile?.url {
+                        ShareLink(item: url) {
+                            Label("Export graph data", systemImage: "square.and.arrow.up")
                         }
-                    }
-
-                    if #available(iOS 16.0, *) {
-                    } else {
-                        Text("Graph functionality requires iOS 16 or newer")
-                            .font(.footnote)
-                            .foregroundColor(Color("text_dimmed"))
-                            .multilineTextAlignment(.center)
                     }
                 }
             }
@@ -120,7 +108,6 @@ struct ParametersGraphTabView: View {
     }
 }
 
-@available(iOS 16.0, *)
 struct GraphTabView_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = ParametersGraphTabViewModel(networking: NetworkService.preview(), configManager: ConfigManager.preview())

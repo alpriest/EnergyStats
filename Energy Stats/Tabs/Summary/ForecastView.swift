@@ -9,7 +9,6 @@ import Charts
 import Energy_Stats_Core
 import SwiftUI
 
-@available(iOS 16.0, *)
 struct ForecastView: View {
     @State private var size: CGSize = .zero
     private let data: [SolcastForecastResponse]
@@ -149,7 +148,6 @@ struct ForecastView: View {
     }
 }
 
-@available(iOS 16.0, *)
 #Preview {
     VStack(alignment: .leading, spacing: 16) {
         VStack(spacing: 8) {

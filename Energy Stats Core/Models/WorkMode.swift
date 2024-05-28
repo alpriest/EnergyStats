@@ -39,7 +39,6 @@ public enum WorkMode: String, CaseIterable, Codable, RawRepresentable {
     }
 }
 
-// @available(iOS 16.0, *)
 // extension WorkMode: AppEnum, CaseDisplayRepresentable {
 //    public static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Work mode")
 //

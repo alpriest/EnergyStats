@@ -136,15 +136,7 @@ struct ESLabeledContent<Content: View>: View {
 
     var body: some View {
         Group {
-            if #available(iOS 16, *) {
-                LabeledContent(title, content: content)
-            } else {
-                HStack {
-                    Text(title)
-                    Spacer()
-                    content()
-                }
-            }
+            LabeledContent(title, content: content)
         }
     }
 }
@@ -161,16 +153,7 @@ struct ESLabeledText: View {
     var body: some View {
         Group {
             if let value {
-                if #available(iOS 16, *) {
-                    LabeledContent(title, value: value)
-                } else {
-                    HStack {
-                        Text(title)
-                        Spacer()
-                        Text(value)
-                            .foregroundColor(.gray)
-                    }
-                }
+                LabeledContent(title, value: value)
             }
         }
     }

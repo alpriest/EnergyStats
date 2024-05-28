@@ -9,7 +9,6 @@ import Charts
 import Energy_Stats_Core
 import SwiftUI
 
-@available(iOS 16.0, *)
 struct ParametersGraphView: View {
     private let key: String?
     @ObservedObject var viewModel: ParametersGraphTabViewModel
@@ -165,7 +164,6 @@ struct ParametersGraphView: View {
     }
 }
 
-@available(iOS 16.0, *)
 struct UsageGraphView_Previews: PreviewProvider {
     static var previews: some View {
         let model = ParametersGraphTabViewModel(networking: NetworkService.preview(), configManager: ConfigManager.preview())

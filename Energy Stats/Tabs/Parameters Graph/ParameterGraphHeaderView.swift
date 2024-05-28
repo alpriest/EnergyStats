@@ -88,7 +88,6 @@ struct ParameterGraphHeaderView: View {
     }
 }
 
-@available(iOS 16.0, *)
 #Preview {
     VStack {
         ParameterGraphHeaderView(viewModel: ParameterGraphHeaderViewModel(displayMode: .constant(.init(date: .now, hours: 6)), configManager: ConfigManager.preview()), showingVariables: .constant(false))
