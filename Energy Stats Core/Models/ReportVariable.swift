@@ -14,6 +14,7 @@ public enum ReportVariable: String, RawRepresentable {
     case chargeEnergyToTal
     case dischargeEnergyToTal
     case loads
+    case selfSufficiency
 
     public var networkTitle: String {
         switch self {
@@ -63,12 +64,19 @@ public enum ReportVariable: String, RawRepresentable {
             return String(localized: "Grid consumption ") + usage.title()
         case .loads:
             return String(localized: "Loads ") + usage.title()
+        case .selfSufficiency:
+            return String(localized: "Self sufficiency")
         }
     }
 
     public var description: String {
-        let key = "reportvariable_\(self.networkTitle.lowercased())"
-        return NSLocalizedString(key, comment: "")
+        switch self {
+        case .selfSufficiency:
+            return ""
+        default:
+            let key = "reportvariable_\(self.networkTitle.lowercased())"
+            return NSLocalizedString(key, comment: "")
+        }
     }
 
     public var colour: Color {
@@ -85,6 +93,8 @@ public enum ReportVariable: String, RawRepresentable {
             return .red.opacity(0.8)
         case .loads:
             return Color("loads_power").opacity(0.8)
+        case .selfSufficiency:
+            return .black
         }
     }
 }

@@ -28,19 +28,26 @@ struct StatsGraphVariable: Identifiable, Equatable, Hashable {
 
 struct StatsGraphValue: Identifiable, Hashable {
     let date: Date
-    let value: Double
+    let graphValue: Double
     let type: ReportVariable
+    let displayValue: Double?
 
     var id: String { "\(date.iso8601())_\(type.networkTitle)" }
 
-    init(date: Date, value: Double, type: ReportVariable) {
-        self.date = date
-        self.value = value
+    init(type: ReportVariable, date: Date, graphValue: Double, displayValue: Double?) {
         self.type = type
+        self.date = date
+        self.graphValue = graphValue
+        self.displayValue = displayValue
     }
 
     func formatted(_ decimalPlaces: Int) -> String {
-        value.kWh(decimalPlaces)
+        switch type {
+        case .selfSufficiency:
+            (displayValue ?? graphValue).percent()
+        default:
+            (displayValue ?? graphValue).kWh(decimalPlaces)
+        }
     }
 }
 
@@ -55,20 +62,20 @@ struct StatsGraphView: View {
     var body: some View {
         ZStack {
             Chart {
-                ForEach(viewModel.data, id: \.type.title) {
+                ForEach(viewModel.data.filter { $0.type != .selfSufficiency }, id: \.type.title) {
                     BarMark(
                         x: .value("hour", $0.date, unit: viewModel.unit),
-                        y: .value("Amount", $0.value)
+                        y: .value("Amount", $0.graphValue)
                     )
                     .position(by: .value("parameter", $0.type.networkTitle))
                     .foregroundStyle($0.type.colour)
                 }
 
                 if appSettings.showSelfSufficiencyStatsGraphOverlay && appSettings.selfSufficiencyEstimateMode != .off {
-                    ForEach(viewModel.selfSufficiencyAtDateTime) {
+                    ForEach(viewModel.data.filter { $0.type == .selfSufficiency }) {
                         LineMark(
                             x: .value("hour", $0.date, unit: viewModel.unit),
-                            y: .value("Amount", $0.value)
+                            y: .value("Amount", $0.graphValue)
                         )
                         .lineStyle(StrokeStyle(lineWidth: 2, dash: [2, 4]))
                         .foregroundStyle(Color("background_inverted"))

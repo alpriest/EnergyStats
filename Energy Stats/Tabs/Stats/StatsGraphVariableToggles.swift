@@ -35,7 +35,7 @@ struct StatsGraphVariableToggles: View {
                 Circle()
                     .foregroundColor(variable.type.colour)
                     .frame(width: 15, height: 15)
-                    .padding(.top, 5)
+                    .padding(.top, 3)
 
                 VStack(alignment: .leading) {
                     Text(variable.type.title)

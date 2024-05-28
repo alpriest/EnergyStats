@@ -46,7 +46,7 @@ struct StatsDataFetcher {
                 return reportResponse.values.map { dataPoint in
                     let graphPointDate = Calendar.current.date(from: DateComponents(year: year, month: month, day: dataPoint.index, hour: 0))!
 
-                    return StatsGraphValue(date: graphPointDate, value: dataPoint.value, type: reportVariable)
+                    return StatsGraphValue(type: reportVariable, date: graphPointDate, graphValue: dataPoint.value, displayValue: nil)
                 }
             }
 
@@ -124,7 +124,10 @@ struct StatsDataFetcher {
                 }
 
                 return StatsGraphValue(
-                    date: graphPointDate, value: dataPoint.value, type: reportVariable
+                    type: reportVariable,
+                    date: graphPointDate,
+                    graphValue: dataPoint.value,
+                    displayValue: nil
                 )
             }
         }

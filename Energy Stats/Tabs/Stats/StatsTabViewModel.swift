@@ -53,8 +53,9 @@ class StatsTabViewModel: ObservableObject, HasLoadState {
     var exportFile: CSVTextFile?
     private var currentDeviceCancellable: AnyCancellable?
     private let fetcher: StatsDataFetcher
-    @Published var selfSufficiencyAtDateTime: [SelfSufficiencyGraphVariable] = []
+    @Published var selfSufficiencyAtDateTime: [StatsGraphValue] = []
     @Published var yScale: ClosedRange<Double> = ClosedRange(uncheckedBounds: (lower: 0, upper: 0))
+    private var themeCancellable: AnyCancellable?
 
     init(networking: Networking, configManager: ConfigManaging) {
         self.networking = networking
@@ -66,15 +67,26 @@ class StatsTabViewModel: ObservableObject, HasLoadState {
 
         NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
         addDeviceChangeObserver()
+        addThemeChangeObserver()
     }
 
-    func addDeviceChangeObserver() {
+    private func addDeviceChangeObserver() {
         guard currentDeviceCancellable == nil else { return }
 
         currentDeviceCancellable = configManager.currentDevice.sink { device in
             guard let device else { return }
 
             Task { await self.updateGraphVariables(for: device) }
+        }
+    }
+
+    private func addThemeChangeObserver() {
+        themeCancellable = configManager.appSettingsPublisher.sink { [weak self] _ in
+            guard let self else { return }
+
+            if let device = configManager.currentDevice.value {
+                Task { await self.updateGraphVariables(for: device) }
+            }
         }
     }
 
@@ -96,7 +108,8 @@ class StatsTabViewModel: ObservableObject, HasLoadState {
                               .gridConsumption,
                               configManager.hasBattery ? .chargeEnergyToTal : nil,
                               configManager.hasBattery ? .dischargeEnergyToTal : nil,
-                              .loads]
+                              .loads,
+                              (configManager.selfSufficiencyEstimateMode != .off && configManager.showSelfSufficiencyStatsGraphOverlay) ? .selfSufficiency : nil]
                 .compactMap { $0 }
                 .map {
                     StatsGraphVariable($0)
@@ -138,7 +151,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState {
             await MainActor.run {
                 self.totals = totals
                 self.unit = displayMode.unit()
-                self.rawData = updatedData
+                self.rawData = updatedData + calculateSelfSufficiencyAcrossTimePeriod(updatedData)
                 calculateApproximations()
                 refresh()
                 prepareExport()
@@ -164,24 +177,22 @@ class StatsTabViewModel: ObservableObject, HasLoadState {
                                                                                    loads: loads,
                                                                                    batteryCharge: batteryCharge ?? 0,
                                                                                    batteryDischarge: batteryDischarge ?? 0)
-
-        selfSufficiencyAtDateTime = calculateSelfSufficiencyAcrossTimePeriod()
     }
 
-    func calculateSelfSufficiencyAcrossTimePeriod() -> [SelfSufficiencyGraphVariable] {
+    func calculateSelfSufficiencyAcrossTimePeriod(_ rawData: [StatsGraphValue]) -> [StatsGraphValue] {
         let dates = Set(rawData.map { $0.date })
         var selfSufficiencyAtDateTime: [Date: Double] = [:]
-        let actualMax = rawData.max(by: { $0.value < $1.value })?.value ?? 0
+        let actualMax = rawData.max(by: { $0.graphValue < $1.graphValue })?.graphValue ?? 0
         let scaleMax = (actualMax + Swift.max(actualMax * 0.1, 0.5)).roundUpToNearestHalf()
 
         for date in dates {
             let valuesAtTime = ValuesAtTime(values: rawData.filter { $0.date == date })
 
-            if let grid = valuesAtTime.values.first(where: { $0.type == .gridConsumption })?.value,
-               let feedIn = valuesAtTime.values.first(where: { $0.type == .feedIn })?.value,
-               let loads = valuesAtTime.values.first(where: { $0.type == .loads })?.value,
-               let batteryCharge = valuesAtTime.values.first(where: { $0.type == .chargeEnergyToTal })?.value,
-               let batteryDischarge = valuesAtTime.values.first(where: { $0.type == .dischargeEnergyToTal })?.value
+            if let grid = valuesAtTime.values.first(where: { $0.type == .gridConsumption })?.graphValue,
+               let feedIn = valuesAtTime.values.first(where: { $0.type == .feedIn })?.graphValue,
+               let loads = valuesAtTime.values.first(where: { $0.type == .loads })?.graphValue,
+               let batteryCharge = valuesAtTime.values.first(where: { $0.type == .chargeEnergyToTal })?.graphValue,
+               let batteryDischarge = valuesAtTime.values.first(where: { $0.type == .dischargeEnergyToTal })?.graphValue
             {
                 let approximations = approximationsCalculator.calculateApproximations(
                     grid: grid,
@@ -209,7 +220,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState {
         yScale = ClosedRange(uncheckedBounds: (lower: 0, upper: scaleMax))
 
         return selfSufficiencyAtDateTime.map {
-            SelfSufficiencyGraphVariable(date: $0.key, value: scaleMax * $0.value) // Normalise amount to be on the same scale as the stats
+            StatsGraphValue(type: .selfSufficiency, date: $0.key, graphValue: scaleMax * $0.value, displayValue: $0.value) // Normalise amount to be on the same scale as the stats
         }
         .sorted(by: { $1.date > $0.date })
         .filter { $0.date <= Date.now }
@@ -225,7 +236,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState {
             })
 
         max = refreshedData.max(by: { lhs, rhs in
-            lhs.value < rhs.value
+            lhs.graphValue < rhs.graphValue
         })
         data = refreshedData
     }
@@ -258,11 +269,11 @@ class StatsTabViewModel: ObservableObject, HasLoadState {
             haptic.impactOccurred()
         }
 
-        if let grid = result.values.first(where: { $0.type == .gridConsumption })?.value,
-           let feedIn = result.values.first(where: { $0.type == .feedIn })?.value,
-           let loads = result.values.first(where: { $0.type == .loads })?.value,
-           let batteryCharge = result.values.first(where: { $0.type == .chargeEnergyToTal })?.value,
-           let batteryDischarge = result.values.first(where: { $0.type == .dischargeEnergyToTal })?.value
+        if let grid = result.values.first(where: { $0.type == .gridConsumption })?.graphValue,
+           let feedIn = result.values.first(where: { $0.type == .feedIn })?.graphValue,
+           let loads = result.values.first(where: { $0.type == .loads })?.graphValue,
+           let batteryCharge = result.values.first(where: { $0.type == .chargeEnergyToTal })?.graphValue,
+           let batteryDischarge = result.values.first(where: { $0.type == .dischargeEnergyToTal })?.graphValue
         {
             approximationsViewModel = approximationsCalculator.calculateApproximations(
                 grid: grid,
@@ -292,7 +303,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState {
     func prepareExport() {
         let headers = ["Type", "Date", "Value"].lazy.joined(separator: ",")
         let rows = rawData.map {
-            [$0.type.networkTitle, $0.date.iso8601(), String(describing: $0.value)].lazy.joined(separator: ",")
+            [$0.type.networkTitle, $0.date.iso8601(), $0.formatted(2)].lazy.joined(separator: ",")
         }
 
         let text = ([headers] + rows).joined(separator: "\n")
