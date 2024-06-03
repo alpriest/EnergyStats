@@ -83,7 +83,7 @@ struct InverterView: View {
         }
         .if(viewModel.hasFault) {
             $0.onTapGesture {
-                alertContent = AlertContent(title: "Faults Detected", message: LocalizedStringKey(stringLiteral: viewModel.faultsMessage))
+                alertContent = AlertContent(title: nil, message: LocalizedStringKey(stringLiteral: viewModel.faultsMessage))
             }
         }
         .alert(alertContent: $alertContent)

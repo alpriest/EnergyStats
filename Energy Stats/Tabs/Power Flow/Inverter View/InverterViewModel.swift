@@ -48,7 +48,17 @@ class InverterViewModel: ObservableObject {
     }
 
     var faultsMessage: String {
-        faults.joined(separator: "\n")
+        var messages: [String] = []
+        messages.append(String(localized: "Your inverter state is reported as being") + "'\(deviceState)'.")
+        if faults.any {
+            messages.append(String(localized: "Reasons reported:"))
+            messages.append(contentsOf: faults)
+        } else {
+            messages.append("\n")
+            messages.append(String(localized: "No reason was given. Check the front screen of your inverter."))
+        }
+
+        return messages.joined(separator: "\n")
     }
 
     var hasMultipleDevices: Bool {

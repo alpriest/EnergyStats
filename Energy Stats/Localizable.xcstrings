@@ -5429,34 +5429,6 @@
         }
       }
     },
-    "Faults Detected" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fehler Erkannt"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fallas Detectadas"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Difetti Rilevati"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wykryto Usterki"
-          }
-        }
-      }
-    },
     "Feed In Unit price" : {
       "localizations" : {
         "de" : {
@@ -6075,35 +6047,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Skontaktuj się"
-          }
-        }
-      }
-    },
-    "Graph functionality requires iOS 16 or newer" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Die Grafikfunktionalität erfordert iOS 16 oder neuer"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "La funcionalidad del gráfico requiere iOS 16 o más reciente"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "La funzionalità del grafico richiede iOS 16 o più recente"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Funkcjonalność grafu wymaga systemu iOS 16 lub nowszego."
           }
         }
       }
@@ -8110,6 +8053,34 @@
         }
       }
     },
+    "No reason was given. Check the front screen of your inverter." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Es wurde kein Grund angegeben. Überprüfen Sie den vorderen Bildschirm Ihres Wechselrichters."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se dio ninguna razón. Verifique la pantalla frontal de su inversor."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non è stata fornita alcuna ragione. Controlla lo schermo frontale del tuo inverter."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nie podano powodu. Sprawdź przedni ekran swojego inwertera."
+          }
+        }
+      }
+    },
     "no_battery_charge" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -9964,6 +9935,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Stan naładowania akumulatora. Procent pojemności akumulatora, który jest dostępny"
+          }
+        }
+      }
+    },
+    "Reasons reported:" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gemeldete Gründe:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Razones reportadas:"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ragioni riportate:"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zgłoszone powody:"
           }
         }
       }
@@ -13394,6 +13393,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Twój token API jest nieprawidłowy. Wyloguj się i postępuj zgodnie z instrukcjami, aby wygenerować nowy token API."
+          }
+        }
+      }
+    },
+    "Your inverter state is reported as being" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Zustand Ihres Wechselrichters wird als"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your inverter state is reported as being"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lo stato del tuo inverter è segnalato come"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stan Twojego inwertera jest zgłaszany jako"
           }
         }
       }

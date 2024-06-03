@@ -44,7 +44,7 @@ class SolarForecastViewModel: ObservableObject, HasLoadState {
 
     func load() {
         guard state == .inactive else { return }
-        guard settings.solcastSettings.sites.any() else { return }
+        guard settings.solcastSettings.sites.any else { return }
         guard let apiKey = settings.solcastSettings.apiKey else { return }
 
         let service = solarForecastProvider()

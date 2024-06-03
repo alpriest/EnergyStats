@@ -8,7 +8,7 @@
 import Foundation
 
 public extension Array {
-    func any() -> Bool {
+    var any: Bool {
         !isEmpty
     }
 
