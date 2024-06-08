@@ -87,9 +87,9 @@ struct StatsGraphView: View {
                 content.background(Color.gray.gradient.opacity(0.04))
             }
             .chartYAxis {
-                AxisMarks(position: .trailing, values: .automatic) { value in
+                AxisMarks { value in
                     if let value = value.as(Int.self) {
-                        AxisValueLabel {
+                        AxisValueLabel(multiLabelAlignment: .trailing) {
                             Text(value, format: .number)
                         }
                     }

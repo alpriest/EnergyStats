@@ -7,14 +7,14 @@
 
 import Foundation
 
-public struct DataLoggerResponse: Decodable, Hashable {
+public struct DataLoggerResponse: Codable, Hashable {
     public let moduleSN: String
     public let stationID: String
     public let status: DataLoggerStatus
     public let signal: Int
 }
 
-public enum DataLoggerStatus: Int, RawRepresentable, Decodable {
+public enum DataLoggerStatus: Int, RawRepresentable, Codable {
     case unknown = 0
     case online = 1
     case offline = 2

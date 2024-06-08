@@ -63,7 +63,7 @@ struct ParametersGraphView: View {
             AxisMarks { value in
                 if let amount = value.as(Double.self) {
                     AxisGridLine()
-                    AxisValueLabel {
+                    AxisValueLabel(multiLabelAlignment: .trailing) {
                         if let key {
                             Text("\(amount, format: .number) \(key)")
                         } else {

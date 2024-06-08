@@ -23,6 +23,7 @@ class PowerFlowTabViewModel: ObservableObject {
     private var currentDeviceCancellable: AnyCancellable?
     private var themeChangeCancellable: AnyCancellable?
     private var latestAppTheme: AppSettings
+    private var latestDeviceSN: String?
 
     enum State: Equatable {
         case unloaded
@@ -90,6 +91,8 @@ class PowerFlowTabViewModel: ObservableObject {
 
         self.currentDeviceCancellable = self.configManager.currentDevice
             .removeDuplicates()
+            .drop { _ in self.latestDeviceSN == nil }
+            .drop { self.latestDeviceSN == $0?.deviceSN }
             .sink { device in
                 guard device != nil else { return }
 
@@ -133,6 +136,8 @@ class PowerFlowTabViewModel: ObservableObject {
                 self.state = .failed(nil, "No devices found. Please logout and try logging in again.")
                 return
             }
+
+            self.latestDeviceSN = currentDevice.deviceSN
 
             if case .failed = self.state {
                 state = .unloaded

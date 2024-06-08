@@ -12,18 +12,18 @@ struct PowerStationListRequest: Encodable {
     let pageSize: Int = 100
 }
 
-struct PagedPowerStationListResponse: Decodable, Hashable {
+struct PagedPowerStationListResponse: Codable, Hashable {
     let currentPage: Int
     let pageSize: Int
     let total: Int
     public let data: [PowerStationSummaryResponse]
 }
 
-struct PowerStationSummaryResponse: Decodable, Hashable {
+struct PowerStationSummaryResponse: Codable, Hashable {
     public let stationID: String
 }
 
-struct PowerStationDetailResponse: Decodable {
+struct PowerStationDetailResponse: Codable {
     public let stationName: String
     public let capacity: Double
     public let timezone: String

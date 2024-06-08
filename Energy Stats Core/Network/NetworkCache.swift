@@ -24,7 +24,8 @@ struct CachedItem {
 class NetworkCache: FoxAPIServicing {
     private let api: FoxAPIServicing
     private var cache: [String: CachedItem] = [:]
-    private let shortCacheDurationInSeconds: TimeInterval = 5
+    private let shortCacheDurationInSeconds: TimeInterval = 30
+    private let longCacheDurationInSeconds: TimeInterval = 300
     private let serialiserQueue = DispatchQueue(label: "networkcache.write.queue")
 
     init(api: FoxAPIServicing) {
@@ -40,21 +41,13 @@ class NetworkCache: FoxAPIServicing {
     }
 
     func openapi_fetchBatterySettings(deviceSN: String) async throws -> BatterySOCResponse {
-        let key = makeKey(base: #function, arguments: deviceSN)
-
-        if let item = cache[key], let cached = item.item as? BatterySOCResponse, item.isFresherThan(interval: shortCacheDurationInSeconds) {
-            return cached
-        } else {
-            let fresh = try await api.openapi_fetchBatterySettings(deviceSN: deviceSN)
-            store(key: key, value: CachedItem(fresh))
-            return fresh
-        }
+        try await api.openapi_fetchBatterySettings(deviceSN: deviceSN)
     }
 
     func openapi_fetchDeviceList() async throws -> [DeviceSummaryResponse] {
         let key = makeKey(base: #function)
 
-        if let item = cache[key], let cached = item.item as? [DeviceSummaryResponse], item.isFresherThan(interval: shortCacheDurationInSeconds) {
+        if let item = cache[key], let cached = item.item as? [DeviceSummaryResponse], item.isFresherThan(interval: longCacheDurationInSeconds) {
             return cached
         } else {
             let fresh = try await api.openapi_fetchDeviceList()
@@ -64,7 +57,15 @@ class NetworkCache: FoxAPIServicing {
     }
 
     func openapi_fetchDevice(deviceSN: String) async throws -> DeviceDetailResponse {
-        try await api.openapi_fetchDevice(deviceSN: deviceSN)
+        let key = makeKey(base: #function)
+
+        if let item = cache[key], let cached = item.item as? DeviceDetailResponse, item.isFresherThan(interval: longCacheDurationInSeconds) {
+            return cached
+        } else {
+            let fresh = try await api.openapi_fetchDevice(deviceSN: deviceSN)
+            store(key: key, value: CachedItem(fresh))
+            return fresh
+        }
     }
 
     func openapi_setBatterySoc(deviceSN: String, minSOCOnGrid: Int, minSOC: Int) async throws {
@@ -80,7 +81,15 @@ class NetworkCache: FoxAPIServicing {
     }
 
     func openapi_fetchDataLoggers() async throws -> [DataLoggerResponse] {
-        try await api.openapi_fetchDataLoggers()
+        let key = makeKey(base: #function)
+
+        if let item = cache[key], let cached = item.item as? [DataLoggerResponse], item.isFresherThan(interval: longCacheDurationInSeconds) {
+            return cached
+        } else {
+            let fresh = try await api.openapi_fetchDataLoggers()
+            store(key: key, value: CachedItem(fresh))
+            return fresh
+        }
     }
 
     func fetchErrorMessages() async {
@@ -88,7 +97,7 @@ class NetworkCache: FoxAPIServicing {
     }
 
     func openapi_fetchRealData(deviceSN: String, variables: [String]) async throws -> OpenQueryResponse {
-        let key = makeKey(base: #function, arguments: deviceSN, variables.joined(separator: "_"))
+        let key = makeKey(base: #function, arguments: deviceSN, variables.sorted().joined(separator: "_"))
 
         if let item = cache[key], let cached = item.item as? OpenQueryResponse, item.isFresherThan(interval: shortCacheDurationInSeconds) {
             return cached
@@ -100,7 +109,7 @@ class NetworkCache: FoxAPIServicing {
     }
 
     func openapi_fetchHistory(deviceSN: String, variables: [String], start: Date, end: Date) async throws -> OpenHistoryResponse {
-        let key = makeKey(base: #function, arguments: deviceSN, variables.joined(separator: "_"), String(start.timeIntervalSince1970), String(end.timeIntervalSince1970))
+        let key = makeKey(base: #function, arguments: deviceSN, variables.sorted().joined(separator: "_"), String(start.timeIntervalSince1970), String(end.timeIntervalSince1970))
 
         if let item = cache[key], let cached = item.item as? OpenHistoryResponse, item.isFresherThan(interval: shortCacheDurationInSeconds) {
             return cached
@@ -116,7 +125,7 @@ class NetworkCache: FoxAPIServicing {
     }
 
     func openapi_fetchReport(deviceSN: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [OpenReportResponse] {
-        let key = makeKey(base: #function, arguments: deviceSN, variables.map { $0.networkTitle }.joined(separator: "_"), queryDate.toString(), reportType.rawValue)
+        let key = makeKey(base: #function, arguments: deviceSN, variables.map { $0.networkTitle }.sorted().joined(separator: "_"), queryDate.toString(), reportType.rawValue)
 
         if let item = cache[key], let cached = item.item as? [OpenReportResponse], item.isFresherThan(interval: shortCacheDurationInSeconds) {
             return cached
@@ -136,11 +145,27 @@ class NetworkCache: FoxAPIServicing {
     }
 
     func openapi_fetchPowerStationList() async throws -> PagedPowerStationListResponse {
-        try await api.openapi_fetchPowerStationList()
+        let key = makeKey(base: #function)
+
+        if let item = cache[key], let cached = item.item as? PagedPowerStationListResponse, item.isFresherThan(interval: longCacheDurationInSeconds) {
+            return cached
+        } else {
+            let fresh = try await api.openapi_fetchPowerStationList()
+            store(key: key, value: CachedItem(fresh))
+            return fresh
+        }
     }
 
     func openapi_fetchPowerStationDetail(stationID: String) async throws -> PowerStationDetailResponse {
-        try await api.openapi_fetchPowerStationDetail(stationID: stationID)
+        let key = makeKey(base: #function)
+
+        if let item = cache[key], let cached = item.item as? PowerStationDetailResponse, item.isFresherThan(interval: longCacheDurationInSeconds) {
+            return cached
+        } else {
+            let fresh = try await api.openapi_fetchPowerStationDetail(stationID: stationID)
+            store(key: key, value: CachedItem(fresh))
+            return fresh
+        }
     }
 }
 

@@ -22,6 +22,8 @@ class FoxAPIService: FoxAPIServicing {
     }
 
     public func fetchErrorMessages() async {
+        guard self.errorMessages.isEmpty else { return }
+        
         let request = URLRequest(url: URL.errorMessages)
 
         do {
