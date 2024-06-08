@@ -48,7 +48,7 @@ public struct OpenApiVariableArray: Decodable {
     }
 }
 
-public struct OpenApiVariable: Decodable {
+public struct OpenApiVariable: Codable {
     let name: String
     let variable: String
     let unit: String?
