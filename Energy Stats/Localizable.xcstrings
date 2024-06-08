@@ -5932,6 +5932,40 @@
         }
       }
     },
+    "foxess_timeout" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die FoxESS OpenAPI hat nicht schnell genug reagiert. Bitte versuchen Sie es erneut oder melden Sie ein Problem bei FoxESS bezüglich der Leistung ihrer OpenAPI unter https://www.foxesscloud.com/bus/workorder/list, wenn Sie dies häufig sehen."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The FoxESS OpenAPI failed to respond quickly enough. Please try again or raise an issue with FoxESS about their OpenAPI performance at https://www.foxesscloud.com/bus/workorder/list if you often see this."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El OpenAPI de FoxESS no respondió lo suficientemente rápido. Por favor, inténtalo de nuevo o informa un problema a FoxESS sobre el rendimiento de su OpenAPI en https://www.foxesscloud.com/bus/workorder/list si ves esto con frecuencia."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'OpenAPI di FoxESS non ha risposto abbastanza velocemente. Per favore, riprova o segnala un problema a FoxESS riguardo alle prestazioni della loro OpenAPI su https://www.foxesscloud.com/bus/workorder/list se vedi spesso questo messaggio."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Interfejs OpenAPI firmy FoxESS nie odpowiedział wystarczająco szybko. Spróbuj ponownie lub zgłoś problem dotyczący wydajności ich interfejsu OpenAPI na https://www.foxesscloud.com/bus/workorder/list, jeśli często widzisz ten komunikat."
+          }
+        }
+      }
+    },
     "foxesscommunity.com" : {
       "localizations" : {
         "de" : {
@@ -12323,34 +12357,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
-          }
-        }
-      }
-    },
-    "The FoxESS OpenAPI failed to respond quickly enough. Please try again or raise an issue with FoxESS about their OpenAPI performance at https://www.foxesscloud.com/bus/workorder/list if you often see this." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Die FoxESS OpenAPI hat nicht schnell genug reagiert. Bitte versuchen Sie es erneut oder melden Sie ein Problem bei FoxESS bezüglich der Leistung ihrer OpenAPI unter https://www.foxesscloud.com/bus/workorder/list, wenn Sie dies häufig sehen."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "El OpenAPI de FoxESS no respondió lo suficientemente rápido. Por favor, inténtalo de nuevo o informa un problema a FoxESS sobre el rendimiento de su OpenAPI en https://www.foxesscloud.com/bus/workorder/list si ves esto con frecuencia."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "L'OpenAPI di FoxESS non ha risposto abbastanza velocemente. Per favore, riprova o segnala un problema a FoxESS riguardo alle prestazioni della loro OpenAPI su https://www.foxesscloud.com/bus/workorder/list se vedi spesso questo messaggio."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Interfejs OpenAPI firmy FoxESS nie odpowiedział wystarczająco szybko. Spróbuj ponownie lub zgłoś problem dotyczący wydajności ich interfejsu OpenAPI na https://www.foxesscloud.com/bus/workorder/list, jeśli często widzisz ten komunikat."
           }
         }
       }

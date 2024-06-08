@@ -163,7 +163,7 @@ struct ErrorAlertView: View {
             case .invalidToken:
                 String(localized: "Your API token is invalid. Please logout and follow the instructions to generate a new API token.")
             case .timedOut:
-                String(localized: "The FoxESS OpenAPI failed to respond quickly enough. Please try again or raise an issue with FoxESS if you often see this.")
+                String(localized: "foxess_timeout")
             default:
                 message
             }
