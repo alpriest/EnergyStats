@@ -44,7 +44,7 @@ class InverterViewModel: ObservableObject {
     }
 
     var hasFault: Bool {
-        deviceState != .online || !faults.isEmpty
+        deviceState == .offline || deviceState == .fault || !faults.isEmpty
     }
 
     var faultsMessage: String {

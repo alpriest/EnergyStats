@@ -108,10 +108,10 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
     }
 
     private func loadTotals() {
-        guard configManager.showHomeTotalOnPowerFlow || configManager.showGridTotalsOnPowerFlow || configManager.showFinancialEarnings else { return }
+        guard self.configManager.showHomeTotalOnPowerFlow || self.configManager.showGridTotalsOnPowerFlow || self.configManager.showFinancialEarnings else { return }
 
         Task {
-            let totals = try await loadTotals(currentDevice)
+            let totals = try TotalsViewModel(reports: await self.loadReportData(self.currentDevice))
 
             await MainActor.run {
                 self.earnings = EnergyStatsFinancialModel(totalsViewModel: totals, config: self.configManager)
@@ -120,24 +120,6 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
                 self.gridExportTotal = totals.gridExport
             }
         }
-    }
-
-    private func loadGeneration() {
-        Task {
-            let generation = try GenerationViewModel(
-                response: await self.loadHistoryData(currentDevice),
-                includeCT2: self.configManager.shouldCombineCT2WithPVPower,
-                shouldInvertCT2: self.configManager.shouldInvertCT2
-            )
-
-            await MainActor.run {
-                self.todaysGeneration = generation
-            }
-        }
-    }
-
-    private func loadTotals(_ currentDevice: Device) async throws -> TotalsViewModel {
-        try TotalsViewModel(reports: await self.loadReportData(currentDevice))
     }
 
     private func loadReportData(_ currentDevice: Device) async throws -> [OpenReportResponse] {
@@ -150,6 +132,22 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
                                                   variables: reportVariables,
                                                   queryDate: .now(),
                                                   reportType: .month)
+    }
+
+    private func loadGeneration() {
+        guard self.configManager.showTotalYieldOnPowerFlow else { return }
+
+        Task {
+            let generation = try GenerationViewModel(
+                response: await self.loadHistoryData(self.currentDevice),
+                includeCT2: self.configManager.shouldCombineCT2WithPVPower,
+                shouldInvertCT2: self.configManager.shouldInvertCT2
+            )
+
+            await MainActor.run {
+                self.todaysGeneration = generation
+            }
+        }
     }
 
     private func loadHistoryData(_ currentDevice: Device) async throws -> OpenHistoryResponse {
