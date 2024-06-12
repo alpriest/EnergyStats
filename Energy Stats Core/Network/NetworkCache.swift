@@ -175,6 +175,10 @@ class NetworkCache: FoxAPIServicing {
             return fresh
         }
     }
+
+    func openapi_fetchRequestCount() async throws -> ApiRequestCountResponse {
+        try await api.openapi_fetchRequestCount()
+    }
 }
 
 private extension NetworkCache {

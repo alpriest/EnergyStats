@@ -10,6 +10,7 @@ import SwiftUI
 
 struct DebugDataView: View {
     struct NoCurrentDeviceFoundError: Error {}
+    @State private var alert: AlertContent?
 
     @EnvironmentObject var store: InMemoryLoggingNetworkStore
     let networking: Networking
@@ -27,6 +28,7 @@ struct DebugDataView: View {
                         fetcher: nil
                     )
                 }
+
                 NavigationLink(String(stringLiteral: "device/real/Query")) {
                     ResponseDebugView<OpenQueryResponse>(
                         store: store,
@@ -36,6 +38,7 @@ struct DebugDataView: View {
                         fetcher: nil
                     )
                 }
+
                 NavigationLink(String(stringLiteral: "device/list")) {
                     ResponseDebugView<[DeviceSummaryResponse]>(
                         store: store,
@@ -45,6 +48,7 @@ struct DebugDataView: View {
                         fetcher: nil
                     )
                 }
+
                 NavigationLink(String(stringLiteral: "device/detail")) {
                     ResponseDebugView<DeviceDetailResponse>(
                         store: store,
@@ -58,6 +62,7 @@ struct DebugDataView: View {
                         }
                     )
                 }
+
                 NavigationLink(String(stringLiteral: "device/variable/get")) {
                     ResponseDebugView<OpenApiVariableArray>(
                         store: store,
@@ -67,6 +72,7 @@ struct DebugDataView: View {
                         fetcher: nil
                     )
                 }
+
                 NavigationLink(String(stringLiteral: "device/battery/soc/get")) {
                     ResponseDebugView<BatterySOCResponse>(
                         store: store,
@@ -82,6 +88,7 @@ struct DebugDataView: View {
                         }
                     )
                 }
+
                 NavigationLink(String(stringLiteral: "device/battery/forceChargeTime/get")) {
                     ResponseDebugView<BatteryTimesResponse>(
                         store: store,
@@ -97,6 +104,7 @@ struct DebugDataView: View {
                         }
                     )
                 }
+
                 NavigationLink(String(stringLiteral: "latest request/response")) {
                     ResponseDebugView<RequestResponseData>(
                         store: store,
@@ -106,10 +114,21 @@ struct DebugDataView: View {
                         fetcher: nil
                     )
                 }
+
+                Button {
+                    Task {
+                        let counts = try await networking.fetchRequestCount()
+                        alert = AlertContent(title: nil, message: LocalizedStringKey("\(counts.remaining) remaining out of \(counts.total) total"))
+                    }
+                } label: {
+                    Text("View request count")
+                }
             }, footer: {
                 Text("Having problems? View the most recent data logs above to help diagnose issues")
             })
-        }.navigationTitle("Network logs")
+        }
+        .navigationTitle("Network logs")
+        .alert(alertContent: $alert)
     }
 }
 

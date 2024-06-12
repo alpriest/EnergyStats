@@ -296,6 +296,10 @@ class DemoAPI: FoxAPIServicing {
         return PowerStationDetailResponse(stationName: "station \(stationID)", capacity: 3500, timezone: "Europe/London")
     }
 
+    func openapi_fetchRequestCount() async throws -> ApiRequestCountResponse {
+        ApiRequestCountResponse(total: "10", remaining: "5")
+    }
+
     private func data(filename: String) throws -> Data {
         guard let url = Bundle(for: type(of: self)).url(forResource: filename, withExtension: "json") else {
             return Data()

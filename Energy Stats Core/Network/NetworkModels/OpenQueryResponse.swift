@@ -286,3 +286,8 @@ public struct SetCurrentScheduleRequest: Codable {
     public let deviceSN: String
     public let groups: [SchedulePhaseResponse]
 }
+
+public struct ApiRequestCountResponse: Decodable {
+    public let total: String
+    public let remaining: String
+}

@@ -31,4 +31,5 @@ protocol FoxAPIServicing {
     func openapi_saveSchedule(deviceSN: String, schedule: Schedule) async throws
     func openapi_fetchPowerStationList() async throws -> PagedPowerStationListResponse
     func openapi_fetchPowerStationDetail(stationID: String) async throws -> PowerStationDetailResponse
+    func openapi_fetchRequestCount() async throws -> ApiRequestCountResponse
 }

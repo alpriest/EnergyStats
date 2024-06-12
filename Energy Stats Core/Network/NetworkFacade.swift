@@ -205,6 +205,14 @@ class NetworkFacade: FoxAPIServicing {
             try await api.openapi_fetchPowerStationDetail(stationID: stationID)
         }
     }
+
+    func openapi_fetchRequestCount() async throws -> ApiRequestCountResponse {
+        if isDemoUser {
+            try await demoAPI.openapi_fetchRequestCount()
+        } else {
+            try await api.openapi_fetchRequestCount()
+        }
+    }
 }
 
 class ThrottleManager {

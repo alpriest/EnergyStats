@@ -25,6 +25,7 @@ public protocol Networking {
     func setScheduleFlag(deviceSN: String, enable: Bool) async throws
     func saveSchedule(deviceSN: String, schedule: Schedule) async throws
     func fetchPowerStationDetail() async throws -> PowerStationDetail?
+    func fetchRequestCount() async throws -> ApiRequestCountResponse
 }
 
 public class NetworkService: Networking {
@@ -120,6 +121,10 @@ public class NetworkService: Networking {
         } else {
             return nil
         }
+    }
+
+    public func fetchRequestCount() async throws -> ApiRequestCountResponse {
+        try await api.openapi_fetchRequestCount()
     }
 }
 

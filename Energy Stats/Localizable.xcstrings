@@ -511,6 +511,16 @@
         }
       }
     },
+    "%@ remaining out of %@ total" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ remaining out of %2$@ total"
+          }
+        }
+      }
+    },
     "°C" : {
       "localizations" : {
         "de" : {
@@ -12899,6 +12909,41 @@
         }
       }
     },
+    "Used %@ of %@" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ von %2$@ verwendet"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Used %1$@ of %2$@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usado %1$@ de %2$@"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usati %1$@ di %1$@"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Użyto %1$@ z %1$@"
+          }
+        }
+      }
+    },
     "Version " : {
       "localizations" : {
         "de" : {
@@ -12923,6 +12968,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wersja "
+          }
+        }
+      }
+    },
+    "View request count" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anfrageanzahl anzeigen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ver conteo de solicitudes"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visualizza conteggio delle richieste"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zobacz liczbę żądań"
           }
         }
       }

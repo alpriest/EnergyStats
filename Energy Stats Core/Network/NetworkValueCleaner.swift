@@ -116,6 +116,10 @@ class NetworkValueCleaner: FoxAPIServicing {
     func openapi_fetchPowerStationDetail(stationID: String) async throws -> PowerStationDetailResponse {
         try await api.openapi_fetchPowerStationDetail(stationID: stationID)
     }
+
+    func openapi_fetchRequestCount() async throws -> ApiRequestCountResponse {
+        try await api.openapi_fetchRequestCount()
+    }
 }
 
 extension Double {

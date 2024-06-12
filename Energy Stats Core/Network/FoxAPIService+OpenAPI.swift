@@ -21,6 +21,7 @@ extension URL {
     static var getOpenModuleList = URL(string: "https://www.foxesscloud.com/op/v0/module/list")!
     static var getOpenPlantList = URL(string: "https://www.foxesscloud.com/op/v0/plant/list")!
     static var getOpenPlantDetail = URL(string: "https://www.foxesscloud.com/op/v0/plant/detail")!
+    static var getRequestCount = URL(string: "https://www.foxesscloud.com/op/v0/user/getAccessCount")!
 }
 
 extension FoxAPIService {
@@ -180,6 +181,13 @@ extension FoxAPIService {
         let request = append(queryItems: [URLQueryItem(name: "id", value: stationID)], to: URL.getOpenPlantDetail)
 
         let result: (PowerStationDetailResponse, _) = try await fetch(request)
+        return result.0
+    }
+
+    func openapi_fetchRequestCount() async throws -> ApiRequestCountResponse {
+        let request = URLRequest(url: URL.getRequestCount)
+
+        let result: (ApiRequestCountResponse, _) = try await fetch(request)
         return result.0
     }
 }
