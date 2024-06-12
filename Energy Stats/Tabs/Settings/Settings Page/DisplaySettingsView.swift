@@ -78,6 +78,8 @@ struct DisplaySettingsView: View {
 
         } header: {
             Text("Display")
+        } footer: {
+            Text("Some settings will only take effect on the next data refresh")
         }
 
         NavigationLink {
