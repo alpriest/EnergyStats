@@ -51,4 +51,14 @@ public extension BatteryViewModel {
     static var noBattery: BatteryViewModel {
         BatteryViewModel()
     }
+
+    static func any() -> BatteryViewModel {
+        BatteryViewModel(
+            hasBattery: true,
+            chargeLevel: 0.99,
+            chargePower: 0.1,
+            temperature: 15.6,
+            residual: 5678
+        )
+    }
 }

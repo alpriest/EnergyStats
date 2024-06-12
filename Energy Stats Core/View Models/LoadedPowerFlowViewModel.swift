@@ -46,9 +46,10 @@ public enum DeviceState: Int {
     case online = 1
     case fault = 2
     case offline = 3
+    case unknown = 99
 }
 
-public struct LoadedPowerFlowViewModel: Equatable {
+public class LoadedPowerFlowViewModel: Equatable, Observable {
     public let solar: Double
     public let solarStrings: [StringPower]
     public let home: Double
@@ -61,8 +62,10 @@ public struct LoadedPowerFlowViewModel: Equatable {
     public let gridExportTotal: Double
     private let batteryViewModel: BatteryViewModel
     public let ct2: Double
-    public let deviceState: DeviceState
+    @Published public var deviceState: DeviceState = .unknown
     public let faults: [String]
+    private let currentDevice: Device
+    private let network: Networking
 
     public init(solar: Double,
                 solarStrings: [StringPower],
@@ -76,8 +79,9 @@ public struct LoadedPowerFlowViewModel: Equatable {
                 gridImportTotal: Double,
                 gridExportTotal: Double,
                 ct2: Double,
-                deviceState: DeviceState,
-                faults: [String])
+                faults: [String],
+                currentDevice: Device,
+                network: Networking)
     {
         self.solar = solar
         self.solarStrings = solarStrings
@@ -91,8 +95,21 @@ public struct LoadedPowerFlowViewModel: Equatable {
         self.gridImportTotal = gridImportTotal
         self.gridExportTotal = gridExportTotal
         self.ct2 = ct2
-        self.deviceState = deviceState
         self.faults = faults
+        self.currentDevice = currentDevice
+        self.network = network
+
+        self.loadDeviceStatus()
+    }
+
+    private func loadDeviceStatus() {
+        Task {
+            let deviceState = try DeviceState(rawValue: await self.network.fetchDevice(deviceSN: self.currentDevice.deviceSN).status) ?? DeviceState.offline
+
+            await MainActor.run {
+                self.deviceState = deviceState
+            }
+        }
     }
 
     public static func ==(lhs: LoadedPowerFlowViewModel, rhs: LoadedPowerFlowViewModel) -> Bool {
@@ -135,20 +152,45 @@ public struct LoadedPowerFlowViewModel: Equatable {
 }
 
 public extension LoadedPowerFlowViewModel {
-    static func empty() -> Self {
-        .init(solar: 0,
-              solarStrings: [],
-              battery: BatteryViewModel.noBattery,
-              home: 0,
-              grid: 0,
+    static func empty() -> LoadedPowerFlowViewModel {
+        LoadedPowerFlowViewModel(solar: 0,
+                                 solarStrings: [],
+                                 battery: BatteryViewModel.noBattery,
+                                 home: 0,
+                                 grid: 0,
+                                 todaysGeneration: GenerationViewModel(response: OpenHistoryResponse(deviceSN: "abc123", datas: []), includeCT2: false, shouldInvertCT2: false),
+                                 earnings: .empty(),
+                                 inverterTemperatures: InverterTemperatures(ambient: 0.0, inverter: 0.0),
+                                 homeTotal: 0,
+                                 gridImportTotal: 0,
+                                 gridExportTotal: 0,
+                                 ct2: 0,
+                                 faults: [],
+                                 currentDevice: Device.preview(),
+                                 network: DemoNetworking())
+    }
+
+    static func any(battery: BatteryViewModel = .any()) -> LoadedPowerFlowViewModel {
+        .init(solar: 3.0,
+              solarStrings: [StringPower(name: "PV1", amount: 2.5), StringPower(name: "PV2", amount: 0.5)],
+              battery: battery,
+              home: 1.5,
+              grid: 0.71,
               todaysGeneration: GenerationViewModel(response: OpenHistoryResponse(deviceSN: "abc123", datas: []), includeCT2: false, shouldInvertCT2: false),
-              earnings: .empty(),
-              inverterTemperatures: InverterTemperatures(ambient: 0.0, inverter: 0.0),
-              homeTotal: 0,
-              gridImportTotal: 0,
-              gridExportTotal: 0,
-              ct2: 0,
-              deviceState: .offline,
-              faults: [])
+              earnings: .any(),
+              inverterTemperatures: InverterTemperatures(ambient: 4.0, inverter: 9.0),
+              homeTotal: 1.0,
+              gridImportTotal: 12.0,
+              gridExportTotal: 2.4,
+              ct2: 2.5,
+              faults: [],
+              currentDevice: .preview(),
+              network: DemoNetworking())
+    }
+}
+
+public extension Device {
+    static func preview() -> Device {
+        Device(deviceSN: "", stationName: "", stationID: "", battery: nil, moduleSN: "", deviceType: "", hasPV: true, hasBattery: true)
     }
 }

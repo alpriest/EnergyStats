@@ -206,33 +206,3 @@ struct PowerSummaryView_Previews: PreviewProvider {
     }
 }
 
-extension LoadedPowerFlowViewModel {
-    static func any(battery: BatteryViewModel = .any()) -> LoadedPowerFlowViewModel {
-        .init(solar: 3.0,
-              solarStrings: [StringPower(name: "PV1", amount: 2.5), StringPower(name: "PV2", amount: 0.5)],
-              battery: battery,
-              home: 1.5,
-              grid: 0.71,
-              todaysGeneration: GenerationViewModel(response: OpenHistoryResponse(deviceSN: "abc123", datas: []), includeCT2: false, shouldInvertCT2: false),
-              earnings: .any(),
-              inverterTemperatures: InverterTemperatures(ambient: 4.0, inverter: 9.0),
-              homeTotal: 1.0,
-              gridImportTotal: 12.0,
-              gridExportTotal: 2.4,
-              ct2: 2.5,
-              deviceState: .online,
-              faults: [])
-    }
-}
-
-extension BatteryViewModel {
-    static func any() -> BatteryViewModel {
-        BatteryViewModel(
-            hasBattery: true,
-            chargeLevel: 0.99,
-            chargePower: 0.1,
-            temperature: 15.6,
-            residual: 5678
-        )
-    }
-}
