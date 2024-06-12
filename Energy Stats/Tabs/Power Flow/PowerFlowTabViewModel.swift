@@ -145,10 +145,7 @@ class PowerFlowTabViewModel: ObservableObject {
 
             await MainActor.run { self.updateState = "Updating..." }
 
-            let totals = try await loadTotals(currentDevice)
             let real = try await loadRealData(currentDevice, config: configManager)
-            let generation = try await self.loadGeneration(currentDevice)
-
             let currentViewModel = CurrentStatusCalculator(device: currentDevice,
                                                            response: real,
                                                            config: configManager)
@@ -161,16 +158,12 @@ class PowerFlowTabViewModel: ObservableObject {
                 battery: battery,
                 home: currentViewModel.currentHomeConsumption,
                 grid: currentViewModel.currentGrid,
-                todaysGeneration: generation,
-                earnings: EnergyStatsFinancialModel(totalsViewModel: totals, config: self.configManager),
                 inverterTemperatures: currentViewModel.currentTemperatures,
-                homeTotal: totals.home,
-                gridImportTotal: totals.gridImport,
-                gridExportTotal: totals.gridExport,
                 ct2: currentViewModel.currentCT2,
                 faults: currentViewModel.currentFaults,
                 currentDevice: currentDevice,
-                network: network
+                network: network,
+                configManager: configManager
             )
 
             self.state = .loaded(.empty()) // refreshes the marching ants line speed
@@ -200,31 +193,6 @@ class PowerFlowTabViewModel: ObservableObject {
         } else {
             return BatteryViewModel.noBattery
         }
-    }
-
-    private func loadGeneration(_ currentDevice: Device) async throws -> GenerationViewModel {
-        try GenerationViewModel(response: await self.loadHistoryData(currentDevice), includeCT2: self.configManager.shouldCombineCT2WithPVPower, shouldInvertCT2: self.configManager.shouldInvertCT2)
-    }
-
-    private func loadHistoryData(_ currentDevice: Device) async throws -> OpenHistoryResponse {
-        let start = Calendar.current.startOfDay(for: Date())
-        return try await self.network.fetchHistory(deviceSN: currentDevice.deviceSN, variables: ["pvPower", "meterPower2"], start: start, end: start.addingTimeInterval(86400))
-    }
-
-    private func loadTotals(_ currentDevice: Device) async throws -> TotalsViewModel {
-        try TotalsViewModel(reports: await self.loadReportData(currentDevice))
-    }
-
-    private func loadReportData(_ currentDevice: Device) async throws -> [OpenReportResponse] {
-        var reportVariables = [ReportVariable.loads, .feedIn, .gridConsumption]
-        if currentDevice.hasBattery {
-            reportVariables.append(contentsOf: [.chargeEnergyToTal, .dischargeEnergyToTal])
-        }
-
-        return try await self.network.fetchReport(deviceSN: currentDevice.deviceSN,
-                                                  variables: reportVariables,
-                                                  queryDate: .now(),
-                                                  reportType: .month)
     }
 
     private func loadRealData(_ currentDevice: Device, config: ConfigManaging) async throws -> OpenQueryResponse {

@@ -111,7 +111,7 @@ public class UserDefaultsConfig: Config {
     @UserDefaultsStoredBool(key: "showInverterTemperature", defaultValue: false)
     public var showInverterTemperature: Bool
 
-    @UserDefaultsStoredBool(key: "showHomeTotal", defaultValue: false)
+    @UserDefaultsStoredBool(key: "showHomeTotalOnPowerFlow", defaultValue: false)
     public var showHomeTotalOnPowerFlow: Bool
 
     @UserDefaultsStoredBool(key: "showInverterIcon", defaultValue: true)

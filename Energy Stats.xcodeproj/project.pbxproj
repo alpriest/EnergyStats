@@ -123,6 +123,7 @@
 		414D7A312AC8CE9C0083923F /* DisplayUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D7A302AC8CE9C0083923F /* DisplayUnit.swift */; };
 		4155D70D2B28FC920071346A /* Optional+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4155D70C2B28FC920071346A /* Optional+Int.swift */; };
 		4156E7B72B9C839F0000E807 /* PowerStationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156E7B62B9C839F0000E807 /* PowerStationSettingsView.swift */; };
+		415AE7EB2C1A158A00E23684 /* Shimmering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415AE7EA2C1A158A00E23684 /* Shimmering.swift */; };
 		4160098B2A8D18B10096CCD9 /* SettingsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4160098A2A8D18B10096CCD9 /* SettingsFooterView.swift */; };
 		4160098D2A8D1A690096CCD9 /* BottomButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4160098C2A8D1A690096CCD9 /* BottomButtonsView.swift */; };
 		41626CD029D969E9003FEB00 /* InverterFirmwareVersionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41626CCF29D969E9003FEB00 /* InverterFirmwareVersionsView.swift */; };
@@ -561,6 +562,7 @@
 		414D7A302AC8CE9C0083923F /* DisplayUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayUnit.swift; sourceTree = "<group>"; };
 		4155D70C2B28FC920071346A /* Optional+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Int.swift"; sourceTree = "<group>"; };
 		4156E7B62B9C839F0000E807 /* PowerStationSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerStationSettingsView.swift; sourceTree = "<group>"; };
+		415AE7EA2C1A158A00E23684 /* Shimmering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shimmering.swift; sourceTree = "<group>"; };
 		4160098A2A8D18B10096CCD9 /* SettingsFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFooterView.swift; sourceTree = "<group>"; };
 		4160098C2A8D1A690096CCD9 /* BottomButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButtonsView.swift; sourceTree = "<group>"; };
 		41626CCD29D95E9C003FEB00 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -873,6 +875,7 @@
 				41CF044B2A95006E00ADCCAD /* ExternalWebNavigationLink.swift */,
 				41ED2EEF2B349EF7001CF277 /* CustomDatePicker.swift */,
 				41D7AB8F2B9F1F6C00FFDFC0 /* InfoButtonView.swift */,
+				415AE7EA2C1A158A00E23684 /* Shimmering.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1934,6 +1937,7 @@
 				41E165B32B0A877100B17590 /* SolcastSettingsViewModel.swift in Sources */,
 				41C249A52A77FC7400D8E9E7 /* FoxESSCloudStatusView.swift in Sources */,
 				41A25D3D28CA5CDF00315714 /* ParametersGraphTabView.swift in Sources */,
+				415AE7EB2C1A158A00E23684 /* Shimmering.swift in Sources */,
 				4140ECDA292D58D300992DD8 /* ParameterGraphVariable.swift in Sources */,
 				41E4B31028DB7666003F7F47 /* BatteryPowerView.swift in Sources */,
 				4140144E28C70B3200EA5BA1 /* Energy_StatsApp.swift in Sources */,

@@ -334,13 +334,13 @@ public class MockConfig: Config {
     public var showUsableBatteryOnly: Bool = false
     public var displayUnit: Int = 0
     public var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode = .off
-    public var showFinancialEarnings: Bool = true
+    public var showFinancialEarnings: Bool = false
     public var gridImportUnitPrice: Double = 0.15
     public var feedInUnitPrice: Double = 0.05
     public var showInverterTemperature: Bool = false
     public var showInverterTypeName: Bool = false
     public var selectedParameterGraphVariables: [String] = ["ambientTemperation", "invTemperation", "batTemperature"]
-    public var showHomeTotalOnPowerFlow: Bool = true
+    public var showHomeTotalOnPowerFlow: Bool = false
     public var showInverterIcon: Bool = true
     public var shouldInvertCT2: Bool = true
     public var showInverterStationName: Bool = false

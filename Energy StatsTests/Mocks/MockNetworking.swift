@@ -10,6 +10,10 @@
 import Foundation
 
 class MockNetworking: Networking {
+    func fetchRequestCount() async throws -> ApiRequestCountResponse {
+        ApiRequestCountResponse(total: "5", remaining: "0")
+    }
+    
     private let dateProvider: () -> Date
     private let callsToThrow: Set<DemoAPIRequest>
 

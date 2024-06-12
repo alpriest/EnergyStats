@@ -14,7 +14,7 @@ struct LoadedPowerFlowView: View {
     @State private var appSettings: AppSettings
     @State private var size: CGSize = .zero
     private let configManager: ConfigManaging
-    private let viewModel: LoadedPowerFlowViewModel
+    @ObservedObject var viewModel: LoadedPowerFlowViewModel
     private var appSettingsPublisher: LatestAppSettingsPublisher
 
     init(configManager: ConfigManaging, viewModel: LoadedPowerFlowViewModel, appSettingsPublisher: LatestAppSettingsPublisher) {
@@ -33,13 +33,15 @@ struct LoadedPowerFlowView: View {
                     if appSettings.showTotalYieldOnPowerFlow {
                         HStack(spacing: 0) {
                             (Text("Solar today") + Text(" ")).accessibilityHidden(true)
-                            EnergyText(amount: viewModel.todaysGeneration.todayGeneration(), appSettings: appSettings, type: .totalYield)
+
+                            EnergyText(amount: viewModel.todaysGeneration?.todayGeneration() ?? 0, appSettings: appSettings, type: .totalYield)
+                                .redactedShimmer(when: viewModel.todaysGeneration == nil)
                         }
                         .padding(.bottom, 8)
                     }
 
-                    if appSettings.showFinancialSummaryOnFlowPage {
-                        EarningsView(viewModel: viewModel.earnings, appSettings: appSettings)
+                    if appSettings.showFinancialSummaryOnFlowPage, let earnings = viewModel.earnings {
+                        EarningsView(viewModel: earnings, appSettings: appSettings)
                             .padding(.bottom, 12)
                     }
 
@@ -57,7 +59,7 @@ struct LoadedPowerFlowView: View {
                             }
 
                             ZStack {
-                                SolarPowerView(appSettings: appSettings, viewModel: SolarPowerViewModel(solar: viewModel.solar, earnings: viewModel.earnings))
+                                SolarPowerView(appSettings: appSettings, viewModel: SolarPowerViewModel(solar: viewModel.solar))
                                     .overlay(
                                         SolarStringsView(viewModel: viewModel, appSettings: appSettings)
                                             .offset(x: 0, y: -30)
@@ -134,15 +136,17 @@ struct LoadedPowerFlowView: View {
                             Spacer().frame(width: horizontalPadding)
                         }
 
-                        HomePowerFooterView(amount: viewModel.homeTotal, appSettings: appSettings)
+                        HomePowerFooterView(amount: viewModel.homeTotal ?? 0, appSettings: appSettings)
                             .frame(width: bottomColumnWidth)
+                            .redactedShimmer(when: viewModel.homeTotal == nil)
 
                         Spacer().frame(width: horizontalPadding)
 
-                        GridPowerFooterView(importTotal: viewModel.gridImportTotal,
-                                            exportTotal: viewModel.gridExportTotal,
+                        GridPowerFooterView(importTotal: viewModel.gridImportTotal ?? 0,
+                                            exportTotal: viewModel.gridExportTotal ?? 0,
                                             appSettings: appSettings)
                             .frame(width: bottomColumnWidth)
+                            .redactedShimmer(when: viewModel.gridImportTotal == nil)
                     }
                     .padding(.bottom, 16)
                     .padding(.horizontal, horizontalPadding)
@@ -205,4 +209,3 @@ struct PowerSummaryView_Previews: PreviewProvider {
             .environment(\.locale, .init(identifier: "en"))
     }
 }
-

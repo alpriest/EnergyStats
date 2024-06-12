@@ -11,7 +11,6 @@ import SwiftUI
 
 struct SolarPowerViewModel {
     let solar: Double
-    let earnings: EnergyStatsFinancialModel
 }
 
 struct SolarPowerView: View {
@@ -43,23 +42,23 @@ struct SolarPowerView_Previews: PreviewProvider {
             HStack {
                 SolarPowerView(
                     appSettings: AppSettings.mock(),
-                    viewModel: SolarPowerViewModel(solar: 0, earnings: .any())
+                    viewModel: SolarPowerViewModel(solar: 0)
                 )
                 SolarPowerView(
                     appSettings: AppSettings.mock(),
-                    viewModel: SolarPowerViewModel(solar: 0.5, earnings: .any())
+                    viewModel: SolarPowerViewModel(solar: 0.5)
                 )
                 SolarPowerView(
                     appSettings: AppSettings.mock(),
-                    viewModel: SolarPowerViewModel(solar: 1.5, earnings: .any())
+                    viewModel: SolarPowerViewModel(solar: 1.5)
                 )
                 SolarPowerView(
                     appSettings: AppSettings.mock(),
-                    viewModel: SolarPowerViewModel(solar: 2.5, earnings: .any())
+                    viewModel: SolarPowerViewModel(solar: 2.5)
                 )
                 SolarPowerView(
                     appSettings: AppSettings.mock(),
-                    viewModel: SolarPowerViewModel(solar: 3.5, earnings: .any())
+                    viewModel: SolarPowerViewModel(solar: 3.5)
                 )
             }
         }
@@ -86,7 +85,7 @@ struct AdjustableView: View {
     var body: some View {
         VStack {
             Color.clear.overlay(
-                SolarPowerView(appSettings: appSettings, viewModel: SolarPowerViewModel(solar: amount, earnings: .any()))
+                SolarPowerView(appSettings: appSettings, viewModel: SolarPowerViewModel(solar: amount))
             ).frame(height: 100)
 
             Slider(value: $amount, in: 0 ... maximum, step: 0.1, label: {

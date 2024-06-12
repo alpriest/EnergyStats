@@ -49,57 +49,52 @@ public enum DeviceState: Int {
     case unknown = 99
 }
 
-public class LoadedPowerFlowViewModel: Equatable, Observable {
+public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
     public let solar: Double
     public let solarStrings: [StringPower]
     public let home: Double
     public let grid: Double
-    public let todaysGeneration: GenerationViewModel
-    public let earnings: EnergyStatsFinancialModel
+    @Published public var todaysGeneration: GenerationViewModel?
+    @Published public var earnings: EnergyStatsFinancialModel?
     public let inverterTemperatures: InverterTemperatures?
-    public let homeTotal: Double
-    public let gridImportTotal: Double
-    public let gridExportTotal: Double
+    @Published public var homeTotal: Double?
+    @Published public var gridImportTotal: Double?
+    @Published public var gridExportTotal: Double?
     private let batteryViewModel: BatteryViewModel
     public let ct2: Double
     @Published public var deviceState: DeviceState = .unknown
     public let faults: [String]
     private let currentDevice: Device
     private let network: Networking
+    private let configManager: ConfigManaging
 
     public init(solar: Double,
                 solarStrings: [StringPower],
                 battery: BatteryViewModel,
                 home: Double,
                 grid: Double,
-                todaysGeneration: GenerationViewModel,
-                earnings: EnergyStatsFinancialModel,
                 inverterTemperatures: InverterTemperatures?,
-                homeTotal: Double,
-                gridImportTotal: Double,
-                gridExportTotal: Double,
                 ct2: Double,
                 faults: [String],
                 currentDevice: Device,
-                network: Networking)
+                network: Networking,
+                configManager: ConfigManaging)
     {
         self.solar = solar
         self.solarStrings = solarStrings
         self.batteryViewModel = battery
         self.home = home
         self.grid = grid
-        self.todaysGeneration = todaysGeneration
-        self.earnings = earnings
         self.inverterTemperatures = inverterTemperatures
-        self.homeTotal = homeTotal
-        self.gridImportTotal = gridImportTotal
-        self.gridExportTotal = gridExportTotal
         self.ct2 = ct2
         self.faults = faults
         self.currentDevice = currentDevice
         self.network = network
+        self.configManager = configManager
 
         self.loadDeviceStatus()
+        self.loadTotals()
+        self.loadGeneration()
     }
 
     private func loadDeviceStatus() {
@@ -110,6 +105,56 @@ public class LoadedPowerFlowViewModel: Equatable, Observable {
                 self.deviceState = deviceState
             }
         }
+    }
+
+    private func loadTotals() {
+        guard configManager.showHomeTotalOnPowerFlow || configManager.showGridTotalsOnPowerFlow || configManager.showFinancialEarnings else { return }
+
+        Task {
+            let totals = try await loadTotals(currentDevice)
+
+            await MainActor.run {
+                self.earnings = EnergyStatsFinancialModel(totalsViewModel: totals, config: self.configManager)
+                self.homeTotal = totals.home
+                self.gridImportTotal = totals.gridImport
+                self.gridExportTotal = totals.gridExport
+            }
+        }
+    }
+
+    private func loadGeneration() {
+        Task {
+            let generation = try GenerationViewModel(
+                response: await self.loadHistoryData(currentDevice),
+                includeCT2: self.configManager.shouldCombineCT2WithPVPower,
+                shouldInvertCT2: self.configManager.shouldInvertCT2
+            )
+
+            await MainActor.run {
+                self.todaysGeneration = generation
+            }
+        }
+    }
+
+    private func loadTotals(_ currentDevice: Device) async throws -> TotalsViewModel {
+        try TotalsViewModel(reports: await self.loadReportData(currentDevice))
+    }
+
+    private func loadReportData(_ currentDevice: Device) async throws -> [OpenReportResponse] {
+        var reportVariables = [ReportVariable.loads, .feedIn, .gridConsumption]
+        if currentDevice.hasBattery {
+            reportVariables.append(contentsOf: [.chargeEnergyToTal, .dischargeEnergyToTal])
+        }
+
+        return try await self.network.fetchReport(deviceSN: currentDevice.deviceSN,
+                                                  variables: reportVariables,
+                                                  queryDate: .now(),
+                                                  reportType: .month)
+    }
+
+    private func loadHistoryData(_ currentDevice: Device) async throws -> OpenHistoryResponse {
+        let start = Calendar.current.startOfDay(for: Date())
+        return try await self.network.fetchHistory(deviceSN: currentDevice.deviceSN, variables: ["pvPower", "meterPower2"], start: start, end: start.addingTimeInterval(86400))
     }
 
     public static func ==(lhs: LoadedPowerFlowViewModel, rhs: LoadedPowerFlowViewModel) -> Bool {
@@ -158,16 +203,12 @@ public extension LoadedPowerFlowViewModel {
                                  battery: BatteryViewModel.noBattery,
                                  home: 0,
                                  grid: 0,
-                                 todaysGeneration: GenerationViewModel(response: OpenHistoryResponse(deviceSN: "abc123", datas: []), includeCT2: false, shouldInvertCT2: false),
-                                 earnings: .empty(),
                                  inverterTemperatures: InverterTemperatures(ambient: 0.0, inverter: 0.0),
-                                 homeTotal: 0,
-                                 gridImportTotal: 0,
-                                 gridExportTotal: 0,
                                  ct2: 0,
                                  faults: [],
                                  currentDevice: Device.preview(),
-                                 network: DemoNetworking())
+                                 network: DemoNetworking(),
+                                 configManager: ConfigManager.preview())
     }
 
     static func any(battery: BatteryViewModel = .any()) -> LoadedPowerFlowViewModel {
@@ -176,16 +217,12 @@ public extension LoadedPowerFlowViewModel {
               battery: battery,
               home: 1.5,
               grid: 0.71,
-              todaysGeneration: GenerationViewModel(response: OpenHistoryResponse(deviceSN: "abc123", datas: []), includeCT2: false, shouldInvertCT2: false),
-              earnings: .any(),
               inverterTemperatures: InverterTemperatures(ambient: 4.0, inverter: 9.0),
-              homeTotal: 1.0,
-              gridImportTotal: 12.0,
-              gridExportTotal: 2.4,
               ct2: 2.5,
               faults: [],
               currentDevice: .preview(),
-              network: DemoNetworking())
+              network: DemoNetworking(),
+              configManager: ConfigManager.preview())
     }
 }
 
