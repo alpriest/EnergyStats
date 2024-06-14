@@ -9,8 +9,8 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct GridPowerFooterView: View {
-    let importTotal: Double
-    let exportTotal: Double
+    let importTotal: Double?
+    let exportTotal: Double?
     let appSettings: AppSettings
 
     var body: some View {

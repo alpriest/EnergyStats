@@ -136,17 +136,15 @@ struct LoadedPowerFlowView: View {
                             Spacer().frame(width: horizontalPadding)
                         }
 
-                        HomePowerFooterView(amount: viewModel.homeTotal ?? 0, appSettings: appSettings)
+                        HomePowerFooterView(amount: viewModel.homeTotal, appSettings: appSettings)
                             .frame(width: bottomColumnWidth)
-                            .redactedShimmer(when: viewModel.homeTotal == nil)
 
                         Spacer().frame(width: horizontalPadding)
 
-                        GridPowerFooterView(importTotal: viewModel.gridImportTotal ?? 0,
-                                            exportTotal: viewModel.gridExportTotal ?? 0,
+                        GridPowerFooterView(importTotal: viewModel.gridImportTotal,
+                                            exportTotal: viewModel.gridExportTotal,
                                             appSettings: appSettings)
                             .frame(width: bottomColumnWidth)
-                            .redactedShimmer(when: viewModel.gridImportTotal == nil)
                     }
                     .padding(.bottom, 16)
                     .padding(.horizontal, horizontalPadding)

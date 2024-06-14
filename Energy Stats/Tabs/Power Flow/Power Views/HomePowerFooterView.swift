@@ -9,13 +9,14 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct HomePowerFooterView: View {
-    let amount: Double
+    let amount: Double?
     let appSettings: AppSettings
 
     var body: some View {
         VStack(alignment: .center) {
             if appSettings.showHomeTotalOnPowerFlow {
                 EnergyText(amount: amount, appSettings: appSettings, type: .homeUsage)
+
                 Text("Usage today")
                     .multilineTextAlignment(.center)
                     .font(.caption)

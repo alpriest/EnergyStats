@@ -44,13 +44,13 @@ public struct PowerText: View {
 }
 
 public struct EnergyText: View {
-    let amount: Double
+    let amount: Double?
     let appSettings: AppSettings
     let type: AmountType
     let decimalPlaceOverride: Int?
     let suffix: String
 
-    public init(amount: Double, appSettings: AppSettings, type: AmountType, decimalPlaceOverride: Int? = nil, suffix: String = "") {
+    public init(amount: Double?, appSettings: AppSettings, type: AmountType, decimalPlaceOverride: Int? = nil, suffix: String = "") {
         self.amount = amount
         self.appSettings = appSettings
         self.type = type
@@ -60,22 +60,25 @@ public struct EnergyText: View {
 
     public var body: some View {
         Text(amountWithUnit + suffix)
-            .accessibilityLabel(type.accessibilityLabel(amount: amount, amountWithUnit: amountWithUnit))
+            .accessibilityLabel(type.accessibilityLabel(amount: amount ?? 0, amountWithUnit: amountWithUnit))
             .monospacedDigit()
+            .redactedShimmer(when: self.amount == nil)
     }
 
     private var amountWithUnit: String {
+        let amountToUse = amount ?? 0
+
         switch appSettings.displayUnit {
         case .adaptive:
-            if abs(amount) < 1 {
-                return amount.wh()
+            if abs(amountToUse) < 1 {
+                return amountToUse.wh()
             } else {
-                return amount.kWh(decimalPlaceOverride ?? appSettings.decimalPlaces)
+                return amountToUse.kWh(decimalPlaceOverride ?? appSettings.decimalPlaces)
             }
         case .kilowatt:
-            return amount.kWh(decimalPlaceOverride ?? appSettings.decimalPlaces)
+            return amountToUse.kWh(decimalPlaceOverride ?? appSettings.decimalPlaces)
         case .watt:
-            return amount.wh()
+            return amountToUse.wh()
         }
     }
 }
@@ -107,10 +110,6 @@ public struct PowerAmountView: View {
     }
 }
 
-struct EnergyAmountView_Previews: PreviewProvider {
-    static var previews: some View {
-//        PowerAmountView(amount: 0.310, backgroundColor: .red, textColor: .black, appSettings: AppSettings.mock(), type: .solarFlow)
-        EnergyText(amount: 0.310, appSettings: AppSettings.mock(), type: .solarFlow)
-            .background(Color.red)
-    }
+#Preview {
+    EnergyText(amount: nil, appSettings: .mock(), type: .default)
 }

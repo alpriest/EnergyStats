@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-extension View {
+public extension View {
     /// Applies the given transform if the given condition evaluates to `true`.
     /// - Parameters:
     ///   - condition: The condition to evaluate.
