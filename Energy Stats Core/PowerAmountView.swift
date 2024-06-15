@@ -9,12 +9,12 @@ import Combine
 import SwiftUI
 
 public struct PowerText: View {
-    let amount: Double
+    let amount: Double?
     let appSettings: AppSettings
     let type: AmountType
     let decimalPlaceOverride: Int?
 
-    public init(amount: Double, appSettings: AppSettings, type: AmountType, decimalPlaceOverride: Int? = nil) {
+    public init(amount: Double?, appSettings: AppSettings, type: AmountType, decimalPlaceOverride: Int? = nil) {
         self.amount = amount
         self.appSettings = appSettings
         self.type = type
@@ -23,22 +23,25 @@ public struct PowerText: View {
 
     public var body: some View {
         Text(amountWithUnit)
-            .accessibilityLabel(type.accessibilityLabel(amount: amount, amountWithUnit: amountWithUnit))
+            .accessibilityLabel(type.accessibilityLabel(amount: amount ?? 0, amountWithUnit: amountWithUnit))
             .monospacedDigit()
+            .redactedShimmer(when: self.amount == nil)
     }
 
     private var amountWithUnit: String {
+        let amountToUse = amount ?? 0
+
         switch appSettings.displayUnit {
         case .adaptive:
-            if abs(amount) < 1 {
-                return amount.w()
+            if abs(amountToUse) < 1 {
+                return amountToUse.w()
             } else {
-                return amount.kW(decimalPlaceOverride ?? appSettings.decimalPlaces)
+                return amountToUse.kW(decimalPlaceOverride ?? appSettings.decimalPlaces)
             }
         case .kilowatt:
-            return amount.kW(decimalPlaceOverride ?? appSettings.decimalPlaces)
+            return amountToUse.kW(decimalPlaceOverride ?? appSettings.decimalPlaces)
         case .watt:
-            return amount.w()
+            return amountToUse.w()
         }
     }
 }
@@ -111,5 +114,8 @@ public struct PowerAmountView: View {
 }
 
 #Preview {
-    EnergyText(amount: nil, appSettings: .mock(), type: .default)
+    VStack {
+        PowerText(amount: nil, appSettings: .mock(), type: .default)
+        EnergyText(amount: nil, appSettings: .mock(), type: .default)
+    }
 }

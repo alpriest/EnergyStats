@@ -92,9 +92,9 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
         self.network = network
         self.configManager = configManager
 
-//        self.loadDeviceStatus()
-//        self.loadTotals()
-//        self.loadGeneration()
+        self.loadDeviceStatus()
+        self.loadTotals()
+        self.loadGeneration()
     }
 
     private func loadDeviceStatus() {
