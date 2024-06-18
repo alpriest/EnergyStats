@@ -8,7 +8,7 @@
 import Foundation
 
 extension URL {
-    static var errorMessages = URL(string: "https://www.foxesscloud.com/c/v0/errors/message")!
+    static let errorMessages = URL(string: "https://www.foxesscloud.com/c/v0/errors/message")!
 }
 
 protocol FoxAPIServicing {

@@ -8,20 +8,20 @@
 import Foundation
 
 extension URL {
-    static var getOpenRealData = URL(string: "https://www.foxesscloud.com/op/v0/device/real/query")!
-    static var getOpenHistoryData = URL(string: "https://www.foxesscloud.com/op/v0/device/history/query")!
-    static var getOpenVariables = URL(string: "https://www.foxesscloud.com/op/v0/device/variable/get")!
-    static var getOpenReportData = URL(string: "https://www.foxesscloud.com/op/v0/device/report/query")!
-    static var getOpenBatterySOC = URL(string: "https://www.foxesscloud.com/op/v0/device/battery/soc/get")!
-    static var getOpenDeviceList = URL(string: "https://www.foxesscloud.com/op/v0/device/list")!
-    static var getOpenDeviceDetail = URL(string: "https://www.foxesscloud.com/op/v0/device/detail")!
-    static var setOpenBatterySOC = URL(string: "https://www.foxesscloud.com/op/v0/device/battery/soc/set")!
-    static var getOpenBatteryChargeTimes = URL(string: "https://www.foxesscloud.com/op/v0/device/battery/forceChargeTime/get")!
-    static var setOpenBatteryChargeTimes = URL(string: "https://www.foxesscloud.com/op/v0/device/battery/forceChargeTime/set")!
-    static var getOpenModuleList = URL(string: "https://www.foxesscloud.com/op/v0/module/list")!
-    static var getOpenPlantList = URL(string: "https://www.foxesscloud.com/op/v0/plant/list")!
-    static var getOpenPlantDetail = URL(string: "https://www.foxesscloud.com/op/v0/plant/detail")!
-    static var getRequestCount = URL(string: "https://www.foxesscloud.com/op/v0/user/getAccessCount")!
+    static let getOpenRealData = URL(string: "https://www.foxesscloud.com/op/v0/device/real/query")!
+    static let getOpenHistoryData = URL(string: "https://www.foxesscloud.com/op/v0/device/history/query")!
+    static let getOpenVariables = URL(string: "https://www.foxesscloud.com/op/v0/device/variable/get")!
+    static let getOpenReportData = URL(string: "https://www.foxesscloud.com/op/v0/device/report/query")!
+    static let getOpenBatterySOC = URL(string: "https://www.foxesscloud.com/op/v0/device/battery/soc/get")!
+    static let getOpenDeviceList = URL(string: "https://www.foxesscloud.com/op/v0/device/list")!
+    static let getOpenDeviceDetail = URL(string: "https://www.foxesscloud.com/op/v0/device/detail")!
+    static let setOpenBatterySOC = URL(string: "https://www.foxesscloud.com/op/v0/device/battery/soc/set")!
+    static let getOpenBatteryChargeTimes = URL(string: "https://www.foxesscloud.com/op/v0/device/battery/forceChargeTime/get")!
+    static let setOpenBatteryChargeTimes = URL(string: "https://www.foxesscloud.com/op/v0/device/battery/forceChargeTime/set")!
+    static let getOpenModuleList = URL(string: "https://www.foxesscloud.com/op/v0/module/list")!
+    static let getOpenPlantList = URL(string: "https://www.foxesscloud.com/op/v0/plant/list")!
+    static let getOpenPlantDetail = URL(string: "https://www.foxesscloud.com/op/v0/plant/detail")!
+    static let getRequestCount = URL(string: "https://www.foxesscloud.com/op/v0/user/getAccessCount")!
 }
 
 extension FoxAPIService {
@@ -72,7 +72,7 @@ extension FoxAPIService {
     func openapi_fetchVariables() async throws -> [OpenApiVariable] {
         let request = URLRequest(url: URL.getOpenVariables)
         let result: (OpenApiVariableArray, Data) = try await fetch(request)
-        store(NetworkOperation(description: "fetchVariables", value: result.0, raw: result.1), path: \.variables)
+        await store(NetworkOperation(description: "fetchVariables", value: result.0, raw: result.1), path: \.variables)
         return result.0.array
     }
 
@@ -82,7 +82,7 @@ extension FoxAPIService {
         request.httpBody = try! JSONEncoder().encode(OpenReportRequest(deviceSN: deviceSN, variables: variables, queryDate: queryDate, dimension: reportType))
 
         let result: ([OpenReportResponse], Data) = try await fetch(request)
-        store(NetworkOperation(description: "fetchReport", value: result.0, raw: result.1), path: \.reportResponse)
+        await store(NetworkOperation(description: "fetchReport", value: result.0, raw: result.1), path: \.reportResponse)
         return result.0
     }
 
@@ -90,7 +90,7 @@ extension FoxAPIService {
         let request = append(queryItems: [URLQueryItem(name: "sn", value: deviceSN)], to: URL.getOpenBatterySOC)
 
         let result: (BatterySOCResponse, Data) = try await fetch(request)
-        store(NetworkOperation(description: "fetchBatterySettings", value: result.0, raw: result.1), path: \.batterySOCResponse)
+        await store(NetworkOperation(description: "fetchBatterySettings", value: result.0, raw: result.1), path: \.batterySOCResponse)
         return result.0
     }
 
@@ -110,7 +110,7 @@ extension FoxAPIService {
         let request = append(queryItems: [URLQueryItem(name: "sn", value: deviceSN)], to: URL.getOpenBatteryChargeTimes)
 
         let result: (BatteryTimesResponse, Data) = try await fetch(request)
-        store(NetworkOperation(description: "batteryTimesResponse", value: result.0, raw: result.1), path: \.batteryTimesResponse)
+        await store(NetworkOperation(description: "batteryTimesResponse", value: result.0, raw: result.1), path: \.batteryTimesResponse)
 
         return [
             ChargeTime(enable: result.0.enable1, startTime: result.0.startTime1, endTime: result.0.endTime1),
@@ -147,7 +147,7 @@ extension FoxAPIService {
 
         let deviceListResult: (PagedDeviceListResponse, _) = try await fetch(request)
 
-        store(NetworkOperation(description: "fetchDeviceList", value: deviceListResult.0.data, raw: deviceListResult.1), path: \.deviceListResponse)
+        await store(NetworkOperation(description: "fetchDeviceList", value: deviceListResult.0.data, raw: deviceListResult.1), path: \.deviceListResponse)
         return deviceListResult.0.data
     }
 
@@ -155,7 +155,7 @@ extension FoxAPIService {
         let request = append(queryItems: [URLQueryItem(name: "sn", value: deviceSN)], to: URL.getOpenDeviceDetail)
 
         let result: (DeviceDetailResponse, _) = try await fetch(request)
-        store(NetworkOperation(description: "fetchDevice", value: result.0, raw: result.1), path: \.deviceDetailResponse)
+        await store(NetworkOperation(description: "fetchDevice", value: result.0, raw: result.1), path: \.deviceDetailResponse)
         return result.0
     }
 

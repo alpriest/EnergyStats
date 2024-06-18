@@ -21,7 +21,7 @@ public enum PreciseDateTimeFormatter {
 }
 
 public extension DateFormatter {
-    static var fullTime: DateFormatter = {
+    static let fullTime: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
         return formatter
