@@ -94,7 +94,7 @@ struct ParametersGraphTabView: View {
                     }
                 }
             }
-            .padding()
+            .padding(.horizontal)
         }
         .sheet(isPresented: $showingVariables) {
             ParameterGraphVariableChooserView(viewModel: ParameterGraphVariableChooserViewModel(variables: viewModel.graphVariables, configManager: configManager, onApply: { viewModel.set(graphVariables: $0) }))

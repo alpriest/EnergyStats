@@ -63,7 +63,7 @@ struct SummaryTabView: View {
                         SolarForecastView(appSettings: appSettings, viewModel: solarForecastViewModel)
                     }
                 }
-                .padding()
+                .padding(.horizontal)
             }
             .navigationTitle("Summary")
         }

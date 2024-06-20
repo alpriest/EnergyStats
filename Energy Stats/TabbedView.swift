@@ -35,6 +35,7 @@ struct TabbedView: View {
                     }
                     .accessibilityIdentifier("power_flow_tab")
                 }
+                .toolbarBackground(.visible, for: .tabBar)
 
             StatsTabView(configManager: configManager, networking: networking, appSettingsPublisher: configManager.appSettingsPublisher)
                 .tabItem {
@@ -44,6 +45,7 @@ struct TabbedView: View {
                     }
                     .accessibilityIdentifier("stats_tab")
                 }
+                .toolbarBackground(.visible, for: .tabBar)
 
             ParametersGraphTabView(configManager: configManager, viewModel: ParametersGraphTabViewModel(networking: networking, configManager: configManager))
                 .tabItem {
@@ -53,6 +55,7 @@ struct TabbedView: View {
                     }
                     .accessibilityIdentifier("parameters_tab")
                 }
+                .toolbarBackground(.visible, for: .tabBar)
 
             SummaryTabView(configManager: configManager, networking: networking, appSettingsPublisher: configManager.appSettingsPublisher, solarForecastProvider: solarForecastProvider)
                 .tabItem {
@@ -66,6 +69,7 @@ struct TabbedView: View {
                     }
                     .accessibilityIdentifier("summary_tab")
                 }
+                .toolbarBackground(.visible, for: .tabBar)
 
             SettingsTabView(viewModel: settingsTabViewModel, configManager: configManager, networking: networking, solarService: solarForecastProvider, templateStore: templateStore)
                 .tabItem {
@@ -78,6 +82,7 @@ struct TabbedView: View {
                 .if(configManager.isDemoUser) {
                     $0.badge("demo")
                 }
+                .toolbarBackground(.visible, for: .tabBar)
         }
         .edgesIgnoringSafeArea(.all)
     }
@@ -90,5 +95,6 @@ struct TabbedView: View {
                configManager: ConfigManager.preview(),
                solarForecastProvider: { DemoSolcast() },
                templateStore: TemplateStore.preview())
+        .environmentObject(VersionChecker())
 }
 #endif

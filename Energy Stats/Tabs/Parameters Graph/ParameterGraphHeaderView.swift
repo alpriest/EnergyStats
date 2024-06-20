@@ -53,7 +53,6 @@ struct ParameterGraphHeaderView: View {
                 } label: {
                     Label("Display truncated Y axis", systemImage: viewModel.truncatedYAxis ? "checkmark" : "")
                 }
-                .disabled(!viewModel.canChangeHours)
             } label: {
                 NonFunctionalButton {
                     Image(systemName: "list.bullet")
