@@ -8,12 +8,14 @@
 import Combine
 import Energy_Stats_Core
 import SwiftUI
+import TipKit
 import WatchConnectivity
 
 @main
 struct Energy_StatsApp: App {
     static let delegate = WatchSessionDelegate()
     @Environment(\.scenePhase) private var scenePhase
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
     var body: some Scene {
         let keychainStore = KeychainStore()
@@ -62,6 +64,22 @@ struct Energy_StatsApp: App {
                 }
                 .task {
                     versionChecker.load()
+//                    Scheduler.scheduleRefresh()
+                }
+                .task {
+                    // Configure and load your tips at app launch.
+                    if #available(iOS 17.0, *) {
+                        do {
+                            try? Tips.resetDatastore() // AWP for testing
+                            try Tips.configure([
+                                .displayFrequency(.immediate),
+                                .datastoreLocation(.applicationDefault)
+                            ])
+                        } catch {
+                            // Handle TipKit errors
+                            print("Error initializing TipKit \(error.localizedDescription)")
+                        }
+                    }
                 }
             }
         }

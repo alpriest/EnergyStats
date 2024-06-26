@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>com.alpriest.EnergyStats.refresh</string>
+	</array>
 	<key>INIntentsSupported</key>
 	<array>
 		<string>CheckBatteryChargeLevelIntent</string>
@@ -11,6 +15,11 @@
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>CheckBatterySOCIntent</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>processing</string>
 	</array>
 	<key>UILaunchScreen</key>
 	<dict>

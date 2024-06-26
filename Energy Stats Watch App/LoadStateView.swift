@@ -68,6 +68,6 @@ extension View {
 }
 
 #Preview {
-    Text("Hello")
+    Text(verbatim: "Hello")
         .loadable(.active("Loading..."), retry: {})
 }

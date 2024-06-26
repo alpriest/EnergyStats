@@ -7,6 +7,7 @@
 
 import Energy_Stats_Core
 import SwiftUI
+import TipKit
 
 struct ContentView: View {
     @ObservedObject var userManager: UserManager
@@ -18,8 +19,15 @@ struct ContentView: View {
 
     var body: some View {
         if userManager.isLoggedIn {
-            TabbedView(networking: network, userManager: userManager, configManager: configManager, solarForecastProvider: solarForecastProvider, templateStore: templateStore)
-                .task { await network.fetchErrorMessages() }
+            ZStack {
+                TabbedView(networking: network, userManager: userManager, configManager: configManager, solarForecastProvider: solarForecastProvider, templateStore: templateStore)
+
+                if #available(iOS 17.0, *) {
+                    TipView(SlowServerTip())
+                        .tipViewStyle(SlowServerTipStyle())
+                }
+            }
+            .task { await network.fetchErrorMessages() }
         } else {
             APIKeyLoginView(userManager: userManager)
         }

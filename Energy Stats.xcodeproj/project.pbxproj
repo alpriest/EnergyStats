@@ -122,6 +122,7 @@
 		414BF82829B4918300E2EB51 /* SettingsTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */; };
 		414D7A312AC8CE9C0083923F /* DisplayUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D7A302AC8CE9C0083923F /* DisplayUnit.swift */; };
 		4155D70D2B28FC920071346A /* Optional+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4155D70C2B28FC920071346A /* Optional+Int.swift */; };
+		415641F72C2BEDA90004679C /* SlowServerTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415641F62C2BEDA90004679C /* SlowServerTip.swift */; };
 		4156E7B72B9C839F0000E807 /* PowerStationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156E7B62B9C839F0000E807 /* PowerStationSettingsView.swift */; };
 		4160098B2A8D18B10096CCD9 /* SettingsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4160098A2A8D18B10096CCD9 /* SettingsFooterView.swift */; };
 		4160098D2A8D1A690096CCD9 /* BottomButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4160098C2A8D1A690096CCD9 /* BottomButtonsView.swift */; };
@@ -204,6 +205,7 @@
 		41AF2F412AA4C674008FCA2E /* BatteryPowerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AF2F402AA4C674008FCA2E /* BatteryPowerFooterView.swift */; };
 		41AF2F432AA4C6C1008FCA2E /* HomePowerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AF2F422AA4C6C1008FCA2E /* HomePowerFooterView.swift */; };
 		41AF2F452AA4C74F008FCA2E /* GridPowerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AF2F442AA4C74F008FCA2E /* GridPowerFooterView.swift */; };
+		41B0BCD72C221B0500AD440F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B0BCD62C221B0500AD440F /* AppDelegate.swift */; };
 		41B3FFE82AB07FE10020DFC9 /* NetworkCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B3FFE72AB07FE10020DFC9 /* NetworkCache.swift */; };
 		41B5F1D02BE4BACF009208FA /* SolarPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B5F1CF2BE4BACF009208FA /* SolarPowerView.swift */; };
 		41B5F1D22BE4BB1A009208FA /* BatteryPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B5F1D12BE4BB1A009208FA /* BatteryPowerView.swift */; };
@@ -561,6 +563,7 @@
 		414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabViewModel.swift; sourceTree = "<group>"; };
 		414D7A302AC8CE9C0083923F /* DisplayUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayUnit.swift; sourceTree = "<group>"; };
 		4155D70C2B28FC920071346A /* Optional+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Int.swift"; sourceTree = "<group>"; };
+		415641F62C2BEDA90004679C /* SlowServerTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlowServerTip.swift; sourceTree = "<group>"; };
 		4156E7B62B9C839F0000E807 /* PowerStationSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerStationSettingsView.swift; sourceTree = "<group>"; };
 		4160098A2A8D18B10096CCD9 /* SettingsFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFooterView.swift; sourceTree = "<group>"; };
 		4160098C2A8D1A690096CCD9 /* BottomButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButtonsView.swift; sourceTree = "<group>"; };
@@ -657,6 +660,7 @@
 		41AF2F402AA4C674008FCA2E /* BatteryPowerFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryPowerFooterView.swift; sourceTree = "<group>"; };
 		41AF2F422AA4C6C1008FCA2E /* HomePowerFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePowerFooterView.swift; sourceTree = "<group>"; };
 		41AF2F442AA4C74F008FCA2E /* GridPowerFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPowerFooterView.swift; sourceTree = "<group>"; };
+		41B0BCD62C221B0500AD440F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		41B3FFE72AB07FE10020DFC9 /* NetworkCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCache.swift; sourceTree = "<group>"; };
 		41B5F1CF2BE4BACF009208FA /* SolarPowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarPowerView.swift; sourceTree = "<group>"; };
 		41B5F1D12BE4BB1A009208FA /* BatteryPowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryPowerView.swift; sourceTree = "<group>"; };
@@ -1092,6 +1096,8 @@
 				4149D3AC2B3C4DAA00314449 /* UnsupportedErrorView.swift */,
 				41D75A022B6009D5002C43A7 /* UpgradeRequiredView.swift */,
 				4189B0312B9486FE00EC4CB5 /* version.json */,
+				41B0BCD62C221B0500AD440F /* AppDelegate.swift */,
+				415641F62C2BEDA90004679C /* SlowServerTip.swift */,
 			);
 			path = "Energy Stats";
 			sourceTree = "<group>";
@@ -1943,6 +1949,7 @@
 				41CA35712AA8C02C00D45734 /* EarningsView.swift in Sources */,
 				4192F9992A8674990035DAB8 /* DataLoggersView.swift in Sources */,
 				411542EE2BED447C00BDE56D /* EditTemplateViewModel.swift in Sources */,
+				41B0BCD72C221B0500AD440F /* AppDelegate.swift in Sources */,
 				419092232B1DC0070017CB65 /* ScheduleSummaryViewModel.swift in Sources */,
 				4110290F2A71B908004018BB /* BatterySOCSettingsView.swift in Sources */,
 				419DFA882A12A6DF0067313A /* StatsDatePickerViewModel.swift in Sources */,
@@ -1985,6 +1992,7 @@
 				410484C82AD49D95007F68C0 /* CT2-icon.swift in Sources */,
 				416318BE29DDD80E00C2C285 /* View+Copy.swift in Sources */,
 				418C6E952AFAC3BF000DE35F /* SummaryTabView.swift in Sources */,
+				415641F72C2BEDA90004679C /* SlowServerTip.swift in Sources */,
 				411542E92BED30D200BDE56D /* ScheduleTemplateListView.swift in Sources */,
 				4107446728CA22B3006D5D7D /* InverterViewModel.swift in Sources */,
 				410FC8862AB98F020004CBC2 /* ParameterVariableGroupEditorView.swift in Sources */,

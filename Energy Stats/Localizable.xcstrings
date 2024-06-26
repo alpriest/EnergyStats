@@ -6414,6 +6414,40 @@
         }
       }
     },
+    "Hello" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hello"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
+    },
     "Hide graph" : {
       "localizations" : {
         "de" : {
@@ -11751,6 +11785,68 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Odejmuje minimalną ilość SOC od poziomu naładowania baterii i procentu tylko w widoku przepływu energii. Ze względu na niedokładności w pomiarze poziomów baterii może to czasami skutkować wyświetlaniem ujemnej pozostałej ilości. Wybranie tej opcji spowoduje różnice w procentach i pojemności w porównaniu do aplikacji FoxESS. Gwiazdka * będzie wyświetlana, gdy ta opcja będzie zaznaczona."
+          }
+        }
+      }
+    },
+    "Slow performance" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Langsame Leistung"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rendimiento lento"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prestazioni lente"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wolne działanie"
+          }
+        }
+      }
+    },
+    "slow-performance-message" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sie haben den Ladekreisel wahrscheinlich immer häufiger gesehen. Energy Stats nutzt öffentliche Server (OpenAPI), die von FoxESS bereitgestellt werden und schlecht funktionieren. FoxESS wurde Anfang Mai informiert und hat sich verpflichtet, das Problem zu lösen, aber es wurde kein Zeitrahmen angegeben. Diese Server unterscheiden sich von denen, die von den FoxCloud-Apps verwendet werden, weshalb die FoxCloud-Apps oft laden.\n\nSiehe untenstehendes Diagramm, das die Antwortzeiten über einen Zeitraum von 48 Stunden zeigt."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You have probably seen the loading spinner more and more frequently. Energy Stats uses public servers (OpenAPI) provided by FoxESS which are performing poorly. FoxESS have were informed at the beginning of May and have committed to resolving the issue but no timescale has been provided. These servers are different from the ones that are used by the FoxCloud apps which is why the FoxCloud apps often load.\\n\\nSee graph below showing response times across a 48hr period."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Probablemente hayas visto el cargador giratorio con más frecuencia. Energy Stats utiliza servidores públicos (OpenAPI) proporcionados por FoxESS que están funcionando mal. FoxESS fue informado a principios de mayo y se ha comprometido a resolver el problema, pero no se ha proporcionado un plazo. Estos servidores son diferentes de los que usan las aplicaciones de FoxCloud, por lo que las aplicaciones de FoxCloud suelen cargarse.\n\nVea el gráfico a continuación que muestra los tiempos de respuesta durante un período de 48 horas."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Probabilmente hai visto il caricamento più frequentemente. Energy Stats utilizza server pubblici (OpenAPI) forniti da FoxESS che stanno funzionando male. FoxESS è stata informata all'inizio di maggio e si è impegnata a risolvere il problema, ma non è stato fornito alcun tempo di risoluzione. Questi server sono diversi da quelli utilizzati dalle app FoxCloud, motivo per cui le app FoxCloud si caricano spesso.\n\nVedi il grafico sotto che mostra i tempi di risposta su un periodo di 48 ore."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prawdopodobnie coraz częściej widzisz kręcący się wskaźnik ładowania. Energy Stats korzysta z publicznych serwerów (OpenAPI) udostępnianych przez FoxESS, które działają słabo. FoxESS zostało poinformowane na początku maja i zobowiązało się do rozwiązania problemu, ale nie podano żadnego terminu. Te serwery są inne niż te używane przez aplikacje FoxCloud, dlatego aplikacje FoxCloud często się ładują.\n\nZobacz poniższy wykres pokazujący czasy odpowiedzi w okresie 48 godzin."
           }
         }
       }
