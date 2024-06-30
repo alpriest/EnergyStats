@@ -57,6 +57,7 @@ struct SlowServerTipStyle: TipViewStyle {
             }
         }
         .padding()
+        .padding()
     }
 }
 

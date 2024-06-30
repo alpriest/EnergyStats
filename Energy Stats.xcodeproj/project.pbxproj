@@ -185,6 +185,7 @@
 		4192F9992A8674990035DAB8 /* DataLoggersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4192F9982A8674990035DAB8 /* DataLoggersView.swift */; };
 		4192F99B2A8678DB0035DAB8 /* PagedDataLoggerListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4192F99A2A8678DB0035DAB8 /* PagedDataLoggerListResponse.swift */; };
 		419576172AC2F29600EB7362 /* BatteryWidgetState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419576162AC2F29600EB7362 /* BatteryWidgetState.swift */; };
+		41965EDF2C31EE9B004F9D9A /* SecureTextEntryField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41965EDE2C31EE9B004F9D9A /* SecureTextEntryField.swift */; };
 		419AB4802AA36D24002CBC96 /* DisplaySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AB47F2AA36D24002CBC96 /* DisplaySettingsView.swift */; };
 		419B8DEA2B04D6BA0094402C /* SolcastCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419B8DE92B04D6BA0094402C /* SolcastCacheTests.swift */; };
 		419CCB542933BABF00882649 /* ErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419CCB532933BABF00882649 /* ErrorAlertView.swift */; };
@@ -637,6 +638,7 @@
 		4192F9982A8674990035DAB8 /* DataLoggersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoggersView.swift; sourceTree = "<group>"; };
 		4192F99A2A8678DB0035DAB8 /* PagedDataLoggerListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagedDataLoggerListResponse.swift; sourceTree = "<group>"; };
 		419576162AC2F29600EB7362 /* BatteryWidgetState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryWidgetState.swift; sourceTree = "<group>"; };
+		41965EDE2C31EE9B004F9D9A /* SecureTextEntryField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureTextEntryField.swift; sourceTree = "<group>"; };
 		419AB47F2AA36D24002CBC96 /* DisplaySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaySettingsView.swift; sourceTree = "<group>"; };
 		419B8DE92B04D6BA0094402C /* SolcastCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolcastCacheTests.swift; sourceTree = "<group>"; };
 		419CCB532933BABF00882649 /* ErrorAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertView.swift; sourceTree = "<group>"; };
@@ -880,6 +882,7 @@
 				41CF044B2A95006E00ADCCAD /* ExternalWebNavigationLink.swift */,
 				41ED2EEF2B349EF7001CF277 /* CustomDatePicker.swift */,
 				41D7AB8F2B9F1F6C00FFDFC0 /* InfoButtonView.swift */,
+				41965EDE2C31EE9B004F9D9A /* SecureTextEntryField.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1888,6 +1891,7 @@
 				41AB53402B9319B900B6C371 /* SolarStringsView.swift in Sources */,
 				411DF2742AFD404E00CEEB23 /* SolarForecastView.swift in Sources */,
 				4110290D2A71B713004018BB /* BatteryChargeScheduleSettingsView.swift in Sources */,
+				41965EDF2C31EE9B004F9D9A /* SecureTextEntryField.swift in Sources */,
 				413208702B9E3BC400A31873 /* DataSettingsView.swift in Sources */,
 				419AB4802AA36D24002CBC96 /* DisplaySettingsView.swift in Sources */,
 				41C8496B2A8BBF1500431410 /* InverterIconView.swift in Sources */,

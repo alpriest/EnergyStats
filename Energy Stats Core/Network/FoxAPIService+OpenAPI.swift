@@ -72,7 +72,7 @@ extension FoxAPIService {
     func openapi_fetchVariables() async throws -> [OpenApiVariable] {
         let request = URLRequest(url: URL.getOpenVariables)
         let result: (OpenApiVariableArray, Data) = try await fetch(request)
-        await store(NetworkOperation(description: "fetchVariables", value: result.0, raw: result.1), path: \.variables)
+        store(NetworkOperation(description: "fetchVariables", value: result.0, raw: result.1), path: \.variables)
         return result.0.array
     }
 
@@ -82,7 +82,7 @@ extension FoxAPIService {
         request.httpBody = try! JSONEncoder().encode(OpenReportRequest(deviceSN: deviceSN, variables: variables, queryDate: queryDate, dimension: reportType))
 
         let result: ([OpenReportResponse], Data) = try await fetch(request)
-        await store(NetworkOperation(description: "fetchReport", value: result.0, raw: result.1), path: \.reportResponse)
+        store(NetworkOperation(description: "fetchReport", value: result.0, raw: result.1), path: \.reportResponse)
         return result.0
     }
 
@@ -90,7 +90,7 @@ extension FoxAPIService {
         let request = append(queryItems: [URLQueryItem(name: "sn", value: deviceSN)], to: URL.getOpenBatterySOC)
 
         let result: (BatterySOCResponse, Data) = try await fetch(request)
-        await store(NetworkOperation(description: "fetchBatterySettings", value: result.0, raw: result.1), path: \.batterySOCResponse)
+        store(NetworkOperation(description: "fetchBatterySettings", value: result.0, raw: result.1), path: \.batterySOCResponse)
         return result.0
     }
 
@@ -110,7 +110,7 @@ extension FoxAPIService {
         let request = append(queryItems: [URLQueryItem(name: "sn", value: deviceSN)], to: URL.getOpenBatteryChargeTimes)
 
         let result: (BatteryTimesResponse, Data) = try await fetch(request)
-        await store(NetworkOperation(description: "batteryTimesResponse", value: result.0, raw: result.1), path: \.batteryTimesResponse)
+        store(NetworkOperation(description: "batteryTimesResponse", value: result.0, raw: result.1), path: \.batteryTimesResponse)
 
         return [
             ChargeTime(enable: result.0.enable1, startTime: result.0.startTime1, endTime: result.0.endTime1),
@@ -147,7 +147,7 @@ extension FoxAPIService {
 
         let deviceListResult: (PagedDeviceListResponse, _) = try await fetch(request)
 
-        await store(NetworkOperation(description: "fetchDeviceList", value: deviceListResult.0.data, raw: deviceListResult.1), path: \.deviceListResponse)
+        store(NetworkOperation(description: "fetchDeviceList", value: deviceListResult.0.data, raw: deviceListResult.1), path: \.deviceListResponse)
         return deviceListResult.0.data
     }
 
@@ -155,7 +155,7 @@ extension FoxAPIService {
         let request = append(queryItems: [URLQueryItem(name: "sn", value: deviceSN)], to: URL.getOpenDeviceDetail)
 
         let result: (DeviceDetailResponse, _) = try await fetch(request)
-        await store(NetworkOperation(description: "fetchDevice", value: result.0, raw: result.1), path: \.deviceDetailResponse)
+        store(NetworkOperation(description: "fetchDevice", value: result.0, raw: result.1), path: \.deviceDetailResponse)
         return result.0
     }
 

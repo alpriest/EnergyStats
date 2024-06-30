@@ -30,7 +30,7 @@ struct APIKeyLoginView: View {
                     .font(.headline)
                     .padding()
 
-                TextField("API Key", text: $apiKey)
+                SecureTextField("API Key", text: $apiKey)
                     .textFieldStyle(.roundedBorder)
                     .autocapitalization(.none)
                     .autocorrectionDisabled()

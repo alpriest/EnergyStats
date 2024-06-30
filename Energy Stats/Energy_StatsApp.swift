@@ -68,18 +68,18 @@ struct Energy_StatsApp: App {
                 }
                 .task {
                     // Configure and load your tips at app launch.
-                    if #available(iOS 17.0, *) {
-                        do {
-                            try? Tips.resetDatastore() // AWP for testing
-                            try Tips.configure([
-                                .displayFrequency(.immediate),
-                                .datastoreLocation(.applicationDefault)
-                            ])
-                        } catch {
-                            // Handle TipKit errors
-                            print("Error initializing TipKit \(error.localizedDescription)")
-                        }
-                    }
+//                    if #available(iOS 17.0, *) {
+//                        do {
+//                            try? Tips.resetDatastore() // AWP for testing
+//                            try Tips.configure([
+//                                .displayFrequency(.immediate),
+//                                .datastoreLocation(.applicationDefault)
+//                            ])
+//                        } catch {
+//                            // Handle TipKit errors
+//                            print("Error initializing TipKit \(error.localizedDescription)")
+//                        }
+//                    }
                 }
             }
         }
