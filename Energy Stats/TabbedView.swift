@@ -15,6 +15,7 @@ struct TabbedView: View {
     let solarForecastProvider: SolarForecastProviding
     let templateStore: TemplateStoring
     @StateObject var settingsTabViewModel: SettingsTabViewModel
+    @StateObject var parametersGraphTabViewModel: ParametersGraphTabViewModel
 
     init(networking: Networking, userManager: UserManager, configManager: ConfigManaging, solarForecastProvider: @escaping SolarForecastProviding, templateStore: TemplateStoring) {
         self.networking = networking
@@ -23,6 +24,7 @@ struct TabbedView: View {
         self.solarForecastProvider = solarForecastProvider
         self.templateStore = templateStore
         _settingsTabViewModel = .init(wrappedValue: SettingsTabViewModel(userManager: userManager, config: configManager, networking: networking))
+        _parametersGraphTabViewModel = .init(wrappedValue: ParametersGraphTabViewModel(networking: networking, configManager: configManager))
     }
 
     var body: some View {
@@ -47,7 +49,7 @@ struct TabbedView: View {
                 }
                 .toolbarBackground(.visible, for: .tabBar)
 
-            ParametersGraphTabView(configManager: configManager, viewModel: ParametersGraphTabViewModel(networking: networking, configManager: configManager))
+            ParametersGraphTabView(configManager: configManager, viewModel: parametersGraphTabViewModel)
                 .tabItem {
                     VStack {
                         Image(systemName: "chart.xyaxis.line")

@@ -46,6 +46,7 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
     private let dateProvider: () -> Date
     @Published var state = LoadState.inactive
     var visible: Bool = false
+    var lastLoadState: LastLoadState<GraphDisplayMode>?
 
     @Published private(set) var stride = 3
     @Published private(set) var data: [String: ParametersGraphViewData] = [:]
@@ -134,6 +135,7 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
     func load() async {
         guard let currentDevice = configManager.currentDevice.value else { return }
         guard let start = queryDate.asDate() else { return }
+        guard requiresLoad() else { return }
 
         setState(.active("Loading"))
 
@@ -155,6 +157,7 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
                 self.refresh()
                 prepareExport()
                 setState(.inactive)
+                self.lastLoadState = LastLoadState(lastLoadTime: .now, loadState: displayMode)
             }
         } catch {
             setState(.error(error, "Could not load, check your connection"))
@@ -270,6 +273,17 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
             updated[item.key] = ParametersGraphViewData(values: item.value, yScale: 1...3)
         }
         data = updated
+    }
+}
+
+extension ParametersGraphTabViewModel: LoadTracking {
+    func requiresLoad() -> Bool {
+        guard let lastLoadState else { return true }
+
+        let sufficientTimeHasPassed = lastLoadState.lastLoadTime.timeIntervalSinceNow > (5 * 60)
+        let viewDataHasChanged = lastLoadState.loadState != displayMode
+
+        return sufficientTimeHasPassed || viewDataHasChanged
     }
 }
 
