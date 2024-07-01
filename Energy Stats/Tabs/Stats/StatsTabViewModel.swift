@@ -22,7 +22,7 @@ struct ApproximationsViewModel {
     let totalsViewModel: TotalsViewModel?
 }
 
-class StatsTabViewModel: ObservableObject, HasLoadState {
+class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
     private let haptic = UIImpactFeedbackGenerator()
     private let configManager: ConfigManaging
     private let networking: Networking
@@ -56,6 +56,8 @@ class StatsTabViewModel: ObservableObject, HasLoadState {
     @Published var selfSufficiencyAtDateTime: [StatsGraphValue] = []
     @Published var yScale: ClosedRange<Double> = ClosedRange(uncheckedBounds: (lower: 0, upper: 0))
     private var themeCancellable: AnyCancellable?
+    var visible = false
+    var lastLoadState: LastLoadState<StatsDisplayMode>?
 
     init(networking: Networking, configManager: ConfigManaging) {
         self.networking = networking
@@ -92,7 +94,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState {
 
     @objc
     func didBecomeActiveNotification() {
-        if hasData {
+        if hasData, visible {
             Task { await self.load() }
         }
     }
@@ -119,6 +121,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState {
 
     func load() async {
         guard let currentDevice = configManager.currentDevice.value else { return }
+        guard requiresLoad() else { return }
 
         setState(.active("Loading"))
 
@@ -156,6 +159,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState {
                 refresh()
                 prepareExport()
                 setState(.inactive)
+                self.lastLoadState = LastLoadState(lastLoadTime: .now, loadState: displayMode)
             }
         } catch {
             await MainActor.run {
@@ -324,6 +328,21 @@ class StatsTabViewModel: ObservableObject, HasLoadState {
         }
 
         exportFile = CSVTextFile(text: text, filename: exportFileName)
+    }
+}
+
+extension StatsTabViewModel: LoadTracking {
+    func requiresLoad() -> Bool {
+        guard let lastLoadState else { return true }
+
+        let calendar = Calendar.current
+        let lastLoadHour = calendar.dateComponents([.hour], from: lastLoadState.lastLoadTime).hour ?? 0
+        let currentHour = calendar.dateComponents([.hour], from: .now).hour ?? 0
+
+        let sufficientTimeHasPassed = !calendar.isDateInToday(lastLoadState.lastLoadTime) || lastLoadHour != currentHour
+        let viewDataHasChanged = lastLoadState.loadState != displayMode
+
+        return sufficientTimeHasPassed || viewDataHasChanged
     }
 }
 

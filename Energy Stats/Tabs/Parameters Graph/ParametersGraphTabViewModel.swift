@@ -33,7 +33,7 @@ struct ParametersGraphViewData {
     }
 }
 
-class ParametersGraphTabViewModel: ObservableObject, HasLoadState {
+class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
     private let haptic = UIImpactFeedbackGenerator()
     private let networking: Networking
     private var configManager: ConfigManaging
@@ -45,6 +45,7 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState {
 
     private let dateProvider: () -> Date
     @Published var state = LoadState.inactive
+    var visible: Bool = false
 
     @Published private(set) var stride = 3
     @Published private(set) var data: [String: ParametersGraphViewData] = [:]
@@ -113,7 +114,7 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState {
 
     @objc
     func didBecomeActiveNotification() {
-        if hasData {
+        if hasData, visible {
             Task { await self.load() }
         }
     }

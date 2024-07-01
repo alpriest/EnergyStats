@@ -105,6 +105,7 @@ struct ParametersGraphTabView: View {
         .onReceive(appSettingsPublisher) {
             self.appSettings = $0
         }
+        .trackVisibility(on: viewModel)
     }
 }
 

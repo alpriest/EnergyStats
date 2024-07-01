@@ -10,7 +10,7 @@ import Energy_Stats_Core
 import Foundation
 import UIKit
 
-class PowerFlowTabViewModel: ObservableObject {
+class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
     private let network: Networking
     private(set) var configManager: ConfigManaging
     private let userManager: UserManager
@@ -24,6 +24,7 @@ class PowerFlowTabViewModel: ObservableObject {
     private var themeChangeCancellable: AnyCancellable?
     private var latestAppTheme: AppSettings
     private var latestDeviceSN: String?
+    var visible: Bool = false
 
     enum State: Equatable {
         case unloaded
@@ -245,7 +246,9 @@ class PowerFlowTabViewModel: ObservableObject {
 
     @objc
     func didBecomeActiveNotification() {
-        Task { await self.timerFired() }
+        if visible {
+            Task { await self.timerFired() }
+        }
     }
 
     @objc
