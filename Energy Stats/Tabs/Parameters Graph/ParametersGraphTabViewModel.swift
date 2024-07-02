@@ -14,11 +14,11 @@ struct ValuesAtTime<T> {
     let values: [T]
 }
 
-struct GraphDisplayMode: Equatable {
+struct ParametersGraphDisplayMode: Equatable {
     let date: Date
     let hours: Int
 
-    static func ==(lhs: GraphDisplayMode, rhs: GraphDisplayMode) -> Bool {
+    static func ==(lhs: ParametersGraphDisplayMode, rhs: ParametersGraphDisplayMode) -> Bool {
         lhs.hours == rhs.hours &&
             lhs.date.iso8601() == rhs.date.iso8601()
     }
@@ -46,7 +46,7 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
     private let dateProvider: () -> Date
     @Published var state = LoadState.inactive
     var visible: Bool = false
-    var lastLoadState: LastLoadState<GraphDisplayMode>?
+    var lastLoadState: LastLoadState<ParametersGraphLoadState>?
 
     @Published private(set) var stride = 3
     @Published private(set) var data: [String: ParametersGraphViewData] = [:]
@@ -58,7 +58,7 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
     var exportFile: CSVTextFile?
     @Published var xScale: ClosedRange<Date> = Calendar.current.startOfDay(for: Date())...Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))!
 
-    @Published var displayMode: GraphDisplayMode {
+    @Published var displayMode: ParametersGraphDisplayMode {
         didSet {
             let previousHours = hours
 
@@ -92,7 +92,7 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
         self.networking = networking
         self.configManager = configManager
         self.dateProvider = dateProvider
-        displayMode = GraphDisplayMode(date: dateProvider(), hours: 24)
+        displayMode = ParametersGraphDisplayMode(date: dateProvider(), hours: 24)
         haptic.prepare()
 
         cancellable = configManager.currentDevice
@@ -157,7 +157,7 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
                 self.refresh()
                 prepareExport()
                 setState(.inactive)
-                self.lastLoadState = LastLoadState(lastLoadTime: .now, loadState: displayMode)
+                self.lastLoadState = LastLoadState(lastLoadTime: .now, loadState: ParametersGraphLoadState(displayMode: displayMode, variables: graphVariables))
             }
         } catch {
             setState(.error(error, "Could not load, check your connection"))
@@ -281,7 +281,8 @@ extension ParametersGraphTabViewModel: LoadTracking {
         guard let lastLoadState else { return true }
 
         let sufficientTimeHasPassed = lastLoadState.lastLoadTime.timeIntervalSinceNow > (5 * 60)
-        let viewDataHasChanged = lastLoadState.loadState != displayMode
+        let viewDataHasChanged = lastLoadState.loadState.displayMode != displayMode ||
+            lastLoadState.loadState.variables != graphVariables
 
         return sufficientTimeHasPassed || viewDataHasChanged
     }
@@ -290,4 +291,9 @@ extension ParametersGraphTabViewModel: LoadTracking {
 enum AxisUnit {
     case mixed
     case consistent(String)
+}
+
+struct ParametersGraphLoadState {
+    let displayMode: ParametersGraphDisplayMode
+    let variables: [ParameterGraphVariable]
 }

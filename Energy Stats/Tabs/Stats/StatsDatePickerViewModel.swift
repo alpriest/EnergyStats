@@ -48,10 +48,10 @@ class StatsDatePickerViewModel: ObservableObject {
     @Published var canIncrease = false
     @Published var canDecrease = true
 
-    @MainActor @Binding var displayMode: StatsDisplayMode
+    @MainActor @Binding var displayMode: StatsGraphDisplayMode
     private var isInitialised = false
 
-    init(_ displayMode: Binding<StatsDisplayMode>) {
+    init(_ displayMode: Binding<StatsGraphDisplayMode>) {
         _displayMode = displayMode
         year = Calendar.current.component(.year, from: .now)
         month = Calendar.current.component(.month, from: .now) - 1
@@ -130,7 +130,7 @@ class StatsDatePickerViewModel: ObservableObject {
         }
     }
 
-    private func updateQuickNavigationButtons(_ displayMode: StatsDisplayMode) {
+    private func updateQuickNavigationButtons(_ displayMode: StatsGraphDisplayMode) {
         switch displayMode {
         case .day(let date):
             canIncrease = !Calendar.current.isDate(date, inSameDayAs: Date())
@@ -150,16 +150,16 @@ class StatsDatePickerViewModel: ObservableObject {
         }
     }
 
-    private func makeUpdatedDisplayMode() -> StatsDisplayMode {
+    private func makeUpdatedDisplayMode() -> StatsGraphDisplayMode {
         return switch range {
         case .day:
-            StatsDisplayMode.day(date)
+            StatsGraphDisplayMode.day(date)
         case .month:
-            StatsDisplayMode.month(month, year)
+            StatsGraphDisplayMode.month(month, year)
         case .year:
-            StatsDisplayMode.year(year)
+            StatsGraphDisplayMode.year(year)
         case .custom(let start, let end):
-            StatsDisplayMode.custom(start, end)
+            StatsGraphDisplayMode.custom(start, end)
         }
     }
 }

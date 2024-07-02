@@ -17,7 +17,7 @@ struct StatsDataFetcher {
         start: Date,
         end: Date,
         reportVariables: [ReportVariable],
-        displayMode: StatsDisplayMode
+        displayMode: StatsGraphDisplayMode
     ) async throws -> ([StatsGraphValue], [ReportVariable: Double]) {
         var current = start
         var accumulatedGraphValues: [StatsGraphValue] = []
@@ -85,7 +85,7 @@ struct StatsDataFetcher {
     func fetchData(
         device: Device,
         reportVariables: [ReportVariable],
-        displayMode: StatsDisplayMode
+        displayMode: StatsGraphDisplayMode
     ) async throws -> ([StatsGraphValue], [ReportVariable: Double]) {
         let queryDate = makeQueryDate(displayMode: displayMode)
         let reportType = makeReportType(displayMode: displayMode)
@@ -135,7 +135,7 @@ struct StatsDataFetcher {
         return (updatedData, totals)
     }
 
-    private func makeReportType(displayMode: StatsDisplayMode) -> ReportType {
+    private func makeReportType(displayMode: StatsGraphDisplayMode) -> ReportType {
         switch displayMode {
         case .day:
             return .day
@@ -148,7 +148,7 @@ struct StatsDataFetcher {
         }
     }
 
-    private func makeQueryDate(displayMode: StatsDisplayMode) -> QueryDate {
+    private func makeQueryDate(displayMode: StatsGraphDisplayMode) -> QueryDate {
         switch displayMode {
         case .day(let date):
             return QueryDate(year: Calendar.current.component(.year, from: date),

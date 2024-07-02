@@ -10,7 +10,7 @@ import Combine
 import Energy_Stats_Core
 import SwiftUI
 
-enum StatsDisplayMode: Equatable {
+enum StatsGraphDisplayMode: Equatable {
     case day(Date)
     case month(_ month: Int, _ year: Int)
     case year(Int)
@@ -29,7 +29,7 @@ enum StatsDisplayMode: Equatable {
         }
     }
 
-    static func ==(lhs: StatsDisplayMode, rhs: StatsDisplayMode) -> Bool {
+    static func ==(lhs: StatsGraphDisplayMode, rhs: StatsGraphDisplayMode) -> Bool {
         switch (lhs, rhs) {
         case let (.day(lDate), .day(rDate)):
             return lDate.isSame(as: rDate)

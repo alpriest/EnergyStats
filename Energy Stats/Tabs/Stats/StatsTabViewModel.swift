@@ -29,7 +29,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
     private let approximationsCalculator: ApproximationsCalculator
 
     @Published var state = LoadState.inactive
-    @Published var displayMode: StatsDisplayMode = .day(Date()) {
+    @Published var displayMode: StatsGraphDisplayMode = .day(Date()) {
         didSet {
             Task { @MainActor in
                 selectedDate = nil
@@ -57,7 +57,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
     @Published var yScale: ClosedRange<Double> = ClosedRange(uncheckedBounds: (lower: 0, upper: 0))
     private var themeCancellable: AnyCancellable?
     var visible = false
-    var lastLoadState: LastLoadState<StatsDisplayMode>?
+    var lastLoadState: LastLoadState<StatsGraphDisplayMode>?
 
     init(networking: Networking, configManager: ConfigManaging) {
         self.networking = networking

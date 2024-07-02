@@ -15,7 +15,7 @@ class ParameterGraphHeaderViewModel: ObservableObject {
         }
     }
 
-    @Binding private var displayMode: GraphDisplayMode
+    @Binding private var displayMode: ParametersGraphDisplayMode
     @Published var candidateQueryDate = Date() {
         didSet {
             updateDisplayMode()
@@ -33,7 +33,7 @@ class ParameterGraphHeaderViewModel: ObservableObject {
     private var isInitialised = false
     private var configManager: ConfigManaging
 
-    init(displayMode: Binding<GraphDisplayMode>, configManager: ConfigManaging) {
+    init(displayMode: Binding<ParametersGraphDisplayMode>, configManager: ConfigManaging) {
         self._displayMode = displayMode
         self.candidateQueryDate = displayMode.wrappedValue.date
         self.hours = displayMode.wrappedValue.hours

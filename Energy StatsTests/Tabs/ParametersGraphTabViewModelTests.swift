@@ -34,7 +34,7 @@ final class ParametersGraphTabViewModelTests: XCTestCase {
 
     func test_initial_values() {
         XCTAssertEqual(sut.data.count, 0)
-        XCTAssertEqual(sut.displayMode, GraphDisplayMode(date: Date(timeIntervalSince1970: 1669146973), hours: 24))
+        XCTAssertEqual(sut.displayMode, ParametersGraphDisplayMode(date: Date(timeIntervalSince1970: 1669146973), hours: 24))
         XCTAssertEqual(sut.stride, 3)
     }
 
@@ -55,7 +55,7 @@ final class ParametersGraphTabViewModelTests: XCTestCase {
     func test_filters_when_display_mode_changed() async throws {
         await sut.load()
 
-        sut.displayMode = GraphDisplayMode(date: Date(timeIntervalSince1970: 1669146973), hours: 12)
+        sut.displayMode = ParametersGraphDisplayMode(date: Date(timeIntervalSince1970: 1669146973), hours: 12)
 
         let key = try XCTUnwrap(sut.data.keys.first)
         let kwhData = sut.data[key]!
