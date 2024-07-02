@@ -24,7 +24,9 @@ class SummaryTabViewModel: ObservableObject {
         self.configManager = configManager
         approximationsCalculator = ApproximationsCalculator(configManager: configManager, networking: networking)
         themeChangeCancellable = self.configManager.appSettingsPublisher.sink { theme in
-            self.currencySymbol = theme.currencySymbol
+            Task { @MainActor in
+                self.currencySymbol = theme.currencySymbol
+            }
         }
     }
 

@@ -32,7 +32,9 @@ class SolarForecastViewModel: ObservableObject, HasLoadState {
     private let configManager: ConfigManaging
     private let solarForecastProvider: () -> SolarForecasting
     private var settings: AppSettings { didSet {
-        hasSites = !settings.solcastSettings.sites.isEmpty
+        Task { @MainActor in
+            hasSites = !settings.solcastSettings.sites.isEmpty
+        }
     }}
 
     init(configManager: ConfigManaging, appSettingsPublisher: LatestAppSettingsPublisher, solarForecastProvider: @escaping SolarForecastProviding) {
@@ -80,7 +82,7 @@ class SolarForecastViewModel: ObservableObject, HasLoadState {
                             name: site.name,
                             resourceId: site.resourceId
                         )
-                    } catch let error {
+                    } catch {
                         return SolarForecastViewData(
                             error: error.localizedDescription,
                             today: [],

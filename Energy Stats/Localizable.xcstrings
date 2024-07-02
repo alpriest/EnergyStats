@@ -7238,6 +7238,34 @@
         }
       }
     },
+    "Load firmware versions" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Firmware-Versionen laden"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cargar versiones del firmware"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caricare versioni del firmware"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Załaduj wersje oprogramowania układowego"
+          }
+        }
+      }
+    },
     "Loading" : {
       "comment" : "Localizable.strings\n  Energy Stats\n\n  Created by Alistair Priest on 26/04/2023.",
       "localizations" : {
