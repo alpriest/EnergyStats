@@ -57,6 +57,16 @@ struct EditTemplateView: View {
                         .buttonStyle(.borderedProminent)
                         .disabled(schedule.phases.count == 0)
 
+                        CreateTemplateButtonView(
+                            action: {
+                                viewModel.duplicate(as: $0)
+                                presentationMode.wrappedValue.dismiss()
+
+                            },
+                            label: "Duplicate template"
+                        )
+                        .buttonStyle(.borderedProminent)
+
                         Button(role: .destructive) {
                             presentConfirmation = true
                         } label: {
@@ -94,7 +104,7 @@ struct EditTemplateView: View {
             }
         }
         .navigationTitle("Edit template")
-        .loadable(viewModel.state, retry: { })
+        .loadable(viewModel.state, retry: {})
         .alert(alertContent: $viewModel.alertContent)
     }
 }

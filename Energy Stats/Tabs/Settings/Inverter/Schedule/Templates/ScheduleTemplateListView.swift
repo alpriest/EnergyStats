@@ -11,8 +11,6 @@ import SwiftUI
 struct ScheduleTemplateListView: View {
     @StateObject var viewModel: ScheduleTemplateListViewModel
     @State private var selectedTemplateID: String?
-    @State private var newTemplateName: String = ""
-    @State private var newTemplateDescription: String = ""
     private let config: ConfigManaging
     private let networking: Networking
     private let templateStore: TemplateStoring
@@ -50,21 +48,10 @@ struct ScheduleTemplateListView: View {
             }
 
             Section {
-                TextField("Name", text: $newTemplateName)
-            } header: {
-                Text("New template")
-            } footer: {
-                Button {
-                    Task {
-                        await viewModel.createTemplate(name: newTemplateName)
-                        newTemplateName = ""
-                        newTemplateDescription = ""
-                    }
-                } label: {
-                    Text("Create new template")
-                }
+                CreateTemplateButtonView(action: {
+                    await viewModel.createTemplate(name: $0)
+                })
                 .buttonStyle(.borderedProminent)
-                .padding(.top)
             }
         }
         .onAppear { viewModel.load() }

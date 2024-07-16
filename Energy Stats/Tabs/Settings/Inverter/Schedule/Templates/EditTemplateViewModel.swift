@@ -86,6 +86,10 @@ class EditTemplateViewModel: ObservableObject {
         }
     }
 
+    func duplicate(as name: String) {
+        templateStore.duplicate(template: template, named: name)
+    }
+
     func autoFillScheduleGaps() {
         guard let schedule else { return }
         guard let mode = modes.first else { return }

@@ -62,9 +62,16 @@ struct SchedulePhaseEditView: View {
                     }
                     .pickerStyle(.menu)
                 } footer: {
-                    OptionalView(timeError) {
-                        Text($0)
-                            .foregroundStyle(Color.red)
+                    VStack {
+                        OptionalView(workModeDescription()) {
+                            Text($0)
+                                .monospacedDigit()
+                        }
+
+                        OptionalView(timeError) {
+                            Text($0)
+                                .foregroundStyle(Color.red)
+                        }
                     }
                 }
 
@@ -190,6 +197,23 @@ struct SchedulePhaseEditView: View {
         }
 
         return nil
+    }
+
+    private func workModeDescription() -> LocalizedStringKey? {
+        switch workMode {
+        case .SelfUse:
+            "workmode.self_use_mode.description"
+        case .Feedin:
+            "workmode.feed_in_first_mode.description"
+        case .Backup:
+            "workmode.backup_mode.description"
+        case .ForceCharge:
+            "workmode.force_charge_mode.description"
+        case .ForceDischarge:
+            "workmode.forceDischarge.description"
+        case .Invalid:
+            nil
+        }
     }
 
     private func validate() {

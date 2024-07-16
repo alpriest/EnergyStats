@@ -2536,41 +2536,6 @@
         }
       }
     },
-    "backup_mode" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "In diesem Modus priorisiert der Wechselrichter die Stromzuweisung wie folgt:\n\n1. Batterieladung\n2. Hauslast\n3. Einspeisung"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "In this mode, the inverter prioritises power allocation as follows:\n\n1. Battery Charging\n2. House Load\n3. Export"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "En este modo, el inversor prioriza la asignación de energía de la siguiente manera:\n\n1. Carga de batería\n2. Carga de la casa\n3. Exportar"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "In questa modalità, l'inverter assegna prioritariamente la potenza come segue:\n\n1. Carica della batteria\n2. Carico della casa\n3. Esportazione"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "W tym trybie inwerter priorytetowo alokuje moc zgodnie z następującym porządkiem:\n\n1. Ładowanie baterii\n2. Obciążenie domu\n3. Eksport"
-          }
-        }
-      }
-    },
     "Bad credentials" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -4772,6 +4737,34 @@
         }
       }
     },
+    "Duplicate template" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vorlage duplizieren"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Duplicar plantilla"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Duplica modello"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zduplikuj szablon"
+          }
+        }
+      }
+    },
     "Earnings" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -5487,41 +5480,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cena za oddawaną energię"
-          }
-        }
-      }
-    },
-    "feed_in_first_mode" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "In diesem Modus priorisiert der Wechselrichter die Stromzuweisung wie folgt:\n\n1. Hauslast\n2. Einspeisung\n3. Batterieladung"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "In this mode, the inverter prioritises power allocation as follows:\n\n1. House Load\n2. Export\n3. Battery Charging"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "En este modo, el inversor prioriza la asignación de energía de la siguiente manera:\n\n1. Carga de la casa\n2. Exportar\n3. Carga de batería"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "In questa modalità, l'inverter assegna prioritariamente la potenza come segue:\n\n1. Carico della casa\n2. Esportazione\n3. Carica della batteria"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "W tym trybie inwerter priorytetowo alokuje moc zgodnie z następującym porządkiem:\n\n1. Obciążenie domu\n2. Eksport\n3. Ładowanie baterii"
           }
         }
       }
@@ -10877,42 +10835,6 @@
         }
       }
     },
-    "self_use_mode" : {
-      "comment" : "Inverter page",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "In diesem Modus priorisiert der Wechselrichter die Stromzuweisung wie folgt:\n\n1. Hauslast\n2. Batterieladung\n3. Einspeisung"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "In this mode, the inverter prioritises power allocation as follows:\n\n1. House Load\n2. Battery Charging\n3. Export"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "En este modo, el inversor prioriza la asignación de energía de la siguiente manera:\n\n1. Carga de la casa\n2. Carga de batería\n3. Exportar"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "In questa modalità, l'inverter assegna prioritariamente la potenza come segue:\n\n1. Carico della casa\n2. Carica della batteria\n3. Esportazione"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "W tym trybie inwerter priorytetowo alokuje moc zgodnie z następującym porządkiem:\n\n1. Obciążenie domu\n2. Ładowanie baterii\n3. Eksport"
-          }
-        }
-      }
-    },
     "Separate parameter graphs by unit" : {
       "localizations" : {
         "de" : {
@@ -13389,6 +13311,180 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Strategia pracy"
+          }
+        }
+      }
+    },
+    "workmode.backup_mode.description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "In diesem Modus priorisiert der Wechselrichter die Stromzuweisung wie folgt:\n\n1. Batterieladung\n2. Hauslast\n3. Einspeisung"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In this mode, the inverter prioritises power allocation as follows:\n\n1. Battery Charging\n2. House Load\n3. Export\n\nSimilar to Self Use, except the battery is not discharged."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "En este modo, el inversor prioriza la asignación de energía de la siguiente manera:\n\n1. Carga de batería\n2. Carga de la casa\n3. Exportar"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "In questa modalità, l'inverter assegna prioritariamente la potenza come segue:\n\n1. Carica della batteria\n2. Carico della casa\n3. Esportazione"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "W tym trybie inwerter priorytetowo alokuje moc zgodnie z następującym porządkiem:\n\n1. Ładowanie baterii\n2. Obciążenie domu\n3. Eksport"
+          }
+        }
+      }
+    },
+    "workmode.feed_in_first_mode.description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In diesem Modus priorisiert der Wechselrichter die Stromzuweisung wie folgt:\n\n1. Hauslast\n2. Einspeisung\n3. Batterieladung"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In this mode, the inverter prioritises power allocation as follows:\n\n1. House Load\n2. Export\n3. Battery Charging"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En este modo, el inversor prioriza la asignación de energía de la siguiente manera:\n\n1. Carga de la casa\n2. Exportar\n3. Carga de batería"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In questa modalità, l'inverter assegna prioritariamente la potenza come segue:\n\n1. Carico della casa\n2. Esportazione\n3. Carica della batteria"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "W tym trybie inwerter priorytetowo alokuje moc zgodnie z następującym porządkiem:\n\n1. Obciążenie domu\n2. Eksport\n3. Ładowanie baterii"
+          }
+        }
+      }
+    },
+    "workmode.force_charge_mode.description" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lädt die Batterie aus dem Netz"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Charges the battery from the grid"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carga la batería desde la red"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carica la batteria dalla rete"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ładuje baterię z sieci"
+          }
+        }
+      }
+    },
+    "workmode.forceDischarge.description" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entlädt die Batterie ins Netz"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Discharges the battery to the grid"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descarga la batería a la red"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scarica la batteria nella rete"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rozładowuje baterię do sieci"
+          }
+        }
+      }
+    },
+    "workmode.self_use_mode.description" : {
+      "comment" : "Inverter page",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In diesem Modus priorisiert der Wechselrichter die Stromzuweisung wie folgt:\n\n1. Hauslast\n2. Batterieladung\n3. Einspeisung"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In this mode, the inverter prioritises power allocation as follows:\n\n1. House Load\n2. Battery Charging\n3. Export"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En este modo, el inversor prioriza la asignación de energía de la siguiente manera:\n\n1. Carga de la casa\n2. Carga de batería\n3. Exportar"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In questa modalità, l'inverter assegna prioritariamente la potenza come segue:\n\n1. Carico della casa\n2. Carica della batteria\n3. Esportazione"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "W tym trybie inwerter priorytetowo alokuje moc zgodnie z następującym porządkiem:\n\n1. Obciążenie domu\n2. Ładowanie baterii\n3. Eksport"
           }
         }
       }

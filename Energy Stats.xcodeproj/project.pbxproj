@@ -272,6 +272,8 @@
 		41E4B31028DB7666003F7F47 /* BatteryPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E4B30F28DB7666003F7F47 /* BatteryPowerView.swift */; };
 		41E4B31328DB77A3003F7F47 /* HomePowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E4B31228DB77A3003F7F47 /* HomePowerView.swift */; };
 		41E4B31528DB77E8003F7F47 /* GridPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E4B31428DB77E8003F7F47 /* GridPowerView.swift */; };
+		41E672002C456BB2003D7D44 /* AsyncButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E671FF2C456BB2003D7D44 /* AsyncButton.swift */; };
+		41E6720B2C456D51003D7D44 /* CreateTemplateButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E6720A2C456D51003D7D44 /* CreateTemplateButtonView.swift */; };
 		41E8E7242AADFB3900DC4B89 /* SolarBandingSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E8E7232AADFB3900DC4B89 /* SolarBandingSettingsView.swift */; };
 		41E8E7262AAE0D0D00DC4B89 /* SolarRangeDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E8E7252AAE0D0D00DC4B89 /* SolarRangeDefinitions.swift */; };
 		41EB28032B8E634F00F6127F /* SolarStringsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EB28022B8E634F00F6127F /* SolarStringsSettingsView.swift */; };
@@ -732,6 +734,8 @@
 		41E4B30F28DB7666003F7F47 /* BatteryPowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryPowerView.swift; sourceTree = "<group>"; };
 		41E4B31228DB77A3003F7F47 /* HomePowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePowerView.swift; sourceTree = "<group>"; };
 		41E4B31428DB77E8003F7F47 /* GridPowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPowerView.swift; sourceTree = "<group>"; };
+		41E671FF2C456BB2003D7D44 /* AsyncButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncButton.swift; sourceTree = "<group>"; };
+		41E6720A2C456D51003D7D44 /* CreateTemplateButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTemplateButtonView.swift; sourceTree = "<group>"; };
 		41E8E7232AADFB3900DC4B89 /* SolarBandingSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarBandingSettingsView.swift; sourceTree = "<group>"; };
 		41E8E7252AAE0D0D00DC4B89 /* SolarRangeDefinitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarRangeDefinitions.swift; sourceTree = "<group>"; };
 		41EB28022B8E634F00F6127F /* SolarStringsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarStringsSettingsView.swift; sourceTree = "<group>"; };
@@ -869,6 +873,7 @@
 				4155D70C2B28FC920071346A /* Optional+Int.swift */,
 				41D75A002B5C0238002C43A7 /* Bool+Int.swift */,
 				41F5A3632C1B563D00CA1120 /* Shimmering.swift */,
+				41E671FF2C456BB2003D7D44 /* AsyncButton.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1390,6 +1395,7 @@
 				419092272B1DDFE60017CB65 /* ScheduleTemplateListViewModel.swift */,
 				41DB220E2B1F965C00EC4015 /* EditTemplateView.swift */,
 				41DB22102B1F967500EC4015 /* EditTemplateViewModel.swift */,
+				41E6720A2C456D51003D7D44 /* CreateTemplateButtonView.swift */,
 			);
 			path = Templates;
 			sourceTree = "<group>";
@@ -1978,6 +1984,7 @@
 				418C091D2B17EC0E00183603 /* TimePeriodBarView.swift in Sources */,
 				4140145C28C70B4A00EA5BA1 /* PowerFlowTabViewModel.swift in Sources */,
 				4128E4C128DA5F6600C1D698 /* Date.swift in Sources */,
+				41E6720B2C456D51003D7D44 /* CreateTemplateButtonView.swift in Sources */,
 				418C09252B18FE9A00183603 /* SchedulePhaseEditView.swift in Sources */,
 				41C19DCF2A4E09F9009883AB /* SelfSufficiencySettingsView.swift in Sources */,
 				41DD7F3A29C5B8940072CDE8 /* SolarPowerView.swift in Sources */,
@@ -2038,6 +2045,7 @@
 				4103D1DA29DB6C6D001B0BC8 /* DeviceFirmwareVersion.swift in Sources */,
 				41DCF5442B06CBD40010843F /* Date.swift in Sources */,
 				4131AF4B2B5288CF00836B77 /* FoxAPIService+OpenAPI.swift in Sources */,
+				41E672002C456BB2003D7D44 /* AsyncButton.swift in Sources */,
 				411542F12BEF424200BDE56D /* MockKeychainStore.swift in Sources */,
 				41495F382B211A75004A51C1 /* AlertContentView.swift in Sources */,
 				4190921D2B1D253D0017CB65 /* Schedule.swift in Sources */,
@@ -2389,7 +2397,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.39;
+				MARKETING_VERSION = 2.40;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2448,7 +2456,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.39;
+				MARKETING_VERSION = 2.40;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
