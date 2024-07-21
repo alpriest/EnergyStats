@@ -12,6 +12,8 @@ struct EditTemplateView: View {
     @StateObject private var viewModel: EditTemplateViewModel
     @State private var presentConfirmation = false
     @Environment(\.presentationMode) var presentationMode
+    @State private var newTemplateName: String = ""
+    @State private var newTemplateAlertIsPresented = false
 
     init(networking: Networking, templateStore: TemplateStoring, config: ConfigManaging, template: ScheduleTemplate) {
         _viewModel = StateObject(
@@ -57,13 +59,11 @@ struct EditTemplateView: View {
                         .buttonStyle(.borderedProminent)
                         .disabled(schedule.phases.count == 0)
 
-                        CreateTemplateButtonView(
-                            action: {
-                                viewModel.duplicate(as: $0)
-                                presentationMode.wrappedValue.dismiss()
-                            },
-                            label: "Duplicate template"
-                        )
+                        AsyncButton {
+                            newTemplateAlertIsPresented.toggle()
+                        } label: {
+                            Text("Duplicate template")
+                        }
                         .buttonStyle(.borderedProminent)
 
                         Button(role: .destructive) {
@@ -101,6 +101,10 @@ struct EditTemplateView: View {
                     }
                 }
             }
+        }
+        .createTemplateAlert(newTemplateName: $newTemplateName, isPresented: $newTemplateAlertIsPresented) {
+            viewModel.duplicate(as: $0)
+            presentationMode.wrappedValue.dismiss()
         }
         .navigationTitle("Edit template")
         .loadable(viewModel.state, retry: {})

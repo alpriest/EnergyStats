@@ -3754,6 +3754,7 @@
       }
     },
     "Create new template" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -3780,6 +3781,9 @@
           }
         }
       }
+    },
+    "Create template" : {
+
     },
     "CT2" : {
       "localizations" : {
