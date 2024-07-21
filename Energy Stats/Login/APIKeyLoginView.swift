@@ -31,6 +31,7 @@ struct APIKeyLoginView: View {
                     .padding()
 
                 SecureTextField("API Key", text: $apiKey)
+                    .font(.system(size: 13))
                     .textFieldStyle(.roundedBorder)
                     .autocapitalization(.none)
                     .autocorrectionDisabled()
@@ -59,7 +60,7 @@ struct APIKeyLoginView: View {
                     .padding()
                     .buttonStyle(.borderedProminent)
                 }
-            }.padding()
+            }
 
             HowToObtainAPIKeyView()
         }

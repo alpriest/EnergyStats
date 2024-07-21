@@ -61,7 +61,6 @@ struct EditTemplateView: View {
                             action: {
                                 viewModel.duplicate(as: $0)
                                 presentationMode.wrappedValue.dismiss()
-
                             },
                             label: "Duplicate template"
                         )

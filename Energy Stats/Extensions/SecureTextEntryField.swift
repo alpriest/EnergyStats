@@ -18,37 +18,34 @@ struct SecureTextField: View {
     }
 
     var body: some View {
-        Group {
-            if isSecure {
-                SecureField(text: $text) {
-                    Text(title)
-                }
-            } else {
-                TextField(text: $text) {
-                    Text(title)
+        HStack {
+            Group {
+                if isSecure {
+                    SecureField(text: $text) {
+                        Text(title)
+                    }
+                } else {
+                    TextField(text: $text) {
+                        Text(title)
+                    }
                 }
             }
+            .frame(minWidth: 0, maxWidth: .infinity)
+
+            Button(action: {
+                isSecure.toggle()
+            }, label: {
+                Image(systemName: isSecure ? "eye.slash" : "eye")
+                    .resizable()
+                    .frame(height: isSecure ? 20 : 16)
+                    .aspectRatio(contentMode: .fit)
+            })
+            .padding(.trailing)
+            .frame(width: 40)
         }
         .textFieldStyle(.roundedBorder)
         .frame(minWidth: 0, maxWidth: .infinity)
-        .padding()
-        .overlay(
-            HStack {
-                Spacer()
-
-                Button(action: {
-                    isSecure.toggle()
-                }, label: {
-                    Image(systemName: isSecure ? "eye.slash" : "eye")
-                        .resizable()
-                        .frame(height: isSecure ? 20 : 16)
-                        .aspectRatio(contentMode: .fit)
-                })
-                .padding(.trailing)
-            }
-            .padding(.trailing, 6)
-            .frame(minWidth: 0, maxWidth: .infinity)
-        )
+        .padding(.vertical)
     }
 }
 
