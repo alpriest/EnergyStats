@@ -3753,37 +3753,33 @@
         }
       }
     },
-    "Create new template" : {
-      "extractionState" : "stale",
+    "Create template" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Neue Vorlage erstellen"
+            "value" : "Vorlage erstellen"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Crear una nueva plantilla"
+            "value" : "Crear plantilla"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Crea un nuovo modello"
+            "value" : "Crea modello"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Utwórz nowy szablon"
+            "value" : "Utwórz szablon"
           }
         }
       }
-    },
-    "Create template" : {
-
     },
     "CT2" : {
       "localizations" : {
@@ -13324,8 +13320,8 @@
       "localizations" : {
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "In diesem Modus priorisiert der Wechselrichter die Stromzuweisung wie folgt:\n\n1. Batterieladung\n2. Hauslast\n3. Einspeisung"
+            "state" : "translated",
+            "value" : "In diesem Modus priorisiert der Wechselrichter die Energiezuweisung wie folgt:\n\n1. Batterieladung\n2. Hauslast\n3. Export\n\nÄhnlich wie beim Eigenverbrauch, außer dass die Batterie nicht entladen wird."
           }
         },
         "en" : {
@@ -13336,20 +13332,20 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "En este modo, el inversor prioriza la asignación de energía de la siguiente manera:\n\n1. Carga de batería\n2. Carga de la casa\n3. Exportar"
+            "state" : "translated",
+            "value" : "En este modo, el inversor prioriza la asignación de energía de la siguiente manera:\n\n1. Carga de la batería\n2. Carga de la casa\n3. Exportación\n\nSimilar al modo de Autoconsumo, excepto que la batería no se descarga."
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "In questa modalità, l'inverter assegna prioritariamente la potenza come segue:\n\n1. Carica della batteria\n2. Carico della casa\n3. Esportazione"
+            "state" : "translated",
+            "value" : "In questa modalità, l'inverter dà priorità all'allocazione della potenza come segue:\n\n1. Carica della batteria\n2. Carico della casa\n3. Esportazione\n\nSimile a Auto Utilizzo, tranne per il fatto che la batteria non viene scaricata."
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "W tym trybie inwerter priorytetowo alokuje moc zgodnie z następującym porządkiem:\n\n1. Ładowanie baterii\n2. Obciążenie domu\n3. Eksport"
+            "state" : "translated",
+            "value" : "W tym trybie falownik priorytetowo przydziela moc w następujący sposób:\n\n1. Ładowanie baterii\n2. Obciążenie domu\n3. Eksport\n\nPodobnie jak w trybie Autokonsumpcji, z tą różnicą, że bateria nie jest rozładowywana."
           }
         }
       }
