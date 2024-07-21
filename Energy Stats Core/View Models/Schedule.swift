@@ -22,11 +22,11 @@ public struct ScheduleTemplate: Identifiable, Hashable, Codable {
         Schedule(phases: phases)
     }
 
-    public func copy(phases: [SchedulePhase]) -> ScheduleTemplate {
+    public func copy(phases: [SchedulePhase]? = nil, name: String? = nil) -> ScheduleTemplate {
         ScheduleTemplate(
             id: id,
-            name: name,
-            phases: phases
+            name: name ?? self.name,
+            phases: phases ?? self.phases
         )
     }
 

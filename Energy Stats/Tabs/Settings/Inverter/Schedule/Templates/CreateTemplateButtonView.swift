@@ -8,12 +8,42 @@
 import Energy_Stats_Core
 import SwiftUI
 
-struct CreateTemplateAlertViewModifier: ViewModifier {
+enum AlertConfiguration {
+    case duplicateTemplate
+    case createTemplate
+    case renameTemplate
+
+    var title: LocalizedStringKey {
+        switch self {
+        case .createTemplate:
+            return "Create template"
+        case .duplicateTemplate:
+            return "Duplicate template"
+        case .renameTemplate:
+            return "Rename template"
+        }
+    }
+
+    var actionButton: LocalizedStringKey {
+        switch self {
+        case .createTemplate:
+            return "Create"
+        case .duplicateTemplate:
+            return "Duplicate"
+        case .renameTemplate:
+            return "Rename"
+        }
+    }
+}
+
+struct TemplateAlertViewModifier: ViewModifier {
     private var newTemplateName: Binding<String>
     private var isPresented: Binding<Bool>
     private let action: (String) async -> Void
+    private let configuration: AlertConfiguration
 
-    init(newTemplateName: Binding<String>, isPresented: Binding<Bool>, action: @escaping (String) async -> Void) {
+    init(configuration: AlertConfiguration, newTemplateName: Binding<String>, isPresented: Binding<Bool>, action: @escaping (String) async -> Void) {
+        self.configuration = configuration
         self.newTemplateName = newTemplateName
         self.isPresented = isPresented
         self.action = action
@@ -21,10 +51,10 @@ struct CreateTemplateAlertViewModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .alert("New template", isPresented: isPresented, actions: {
+            .alert(configuration.title, isPresented: isPresented, actions: {
                 TextField("Name", text: newTemplateName)
 
-                Button("Create", action: {
+                Button(configuration.actionButton, action: {
                     Task {
                         await action(newTemplateName.wrappedValue)
                         newTemplateName.wrappedValue = ""
@@ -36,7 +66,14 @@ struct CreateTemplateAlertViewModifier: ViewModifier {
 }
 
 extension View {
-    func createTemplateAlert(newTemplateName: Binding<String>, isPresented: Binding<Bool>, action: @escaping (String) async -> Void) -> some View {
-        modifier(CreateTemplateAlertViewModifier(newTemplateName: newTemplateName, isPresented: isPresented, action: action))
+    func templateAlert(configuration: AlertConfiguration, newTemplateName: Binding<String>, isPresented: Binding<Bool>, action: @escaping (String) async -> Void) -> some View {
+        modifier(
+            TemplateAlertViewModifier(
+                configuration: configuration,
+                newTemplateName: newTemplateName,
+                isPresented: isPresented,
+                action: action
+            )
+        )
     }
 }

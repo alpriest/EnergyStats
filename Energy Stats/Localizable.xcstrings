@@ -1902,6 +1902,7 @@
       }
     },
     "Activate template" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4379,6 +4380,7 @@
       }
     },
     "Delete template" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4736,6 +4738,9 @@
           }
         }
       }
+    },
+    "Duplicate" : {
+
     },
     "Duplicate template" : {
       "localizations" : {
@@ -8079,6 +8084,7 @@
       }
     },
     "New template" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -10223,6 +10229,9 @@
           }
         }
       }
+    },
+    "Rename template" : {
+
     },
     "reportvariable_chargeenergytotal" : {
       "extractionState" : "manual",

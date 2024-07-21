@@ -13,6 +13,7 @@ public protocol TemplateStoring {
     func delete(template: ScheduleTemplate)
     func create(named name: String)
     func duplicate(template: ScheduleTemplate, named name: String)
+    func rename(template: ScheduleTemplate, to name: String)
 }
 
 public class TemplateStore: TemplateStoring {
@@ -50,6 +51,10 @@ public class TemplateStore: TemplateStoring {
         config.scheduleTemplates.append(ScheduleTemplate(id: UUID().uuidString,
                                                          name: name,
                                                          phases: template.phases))
+    }
+
+    public func rename(template: ScheduleTemplate, to name: String) {
+        save(template: template.copy(name: name))
     }
 }
 
@@ -136,4 +141,6 @@ class PreviewTemplateStore: TemplateStoring {
     public func create(named name: String) {}
 
     public func duplicate(template: ScheduleTemplate, named name: String) {}
+
+    func rename(template: ScheduleTemplate, to name: String) {}
 }

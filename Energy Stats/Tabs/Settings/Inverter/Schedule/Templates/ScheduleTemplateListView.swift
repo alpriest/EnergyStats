@@ -16,7 +16,7 @@ struct ScheduleTemplateListView: View {
     private let templateStore: TemplateStoring
     private let modes: [WorkMode] = WorkMode.allCases
     @State private var newTemplateName: String = ""
-    @State private var newTemplateAlertIsPresented = false
+    @State private var createTemplateAlertIsPresented = false
 
     init(networking: Networking, templateStore: TemplateStoring, config: ConfigManaging) {
         _viewModel = StateObject(wrappedValue: ScheduleTemplateListViewModel(templateStore: templateStore, config: config))
@@ -49,16 +49,20 @@ struct ScheduleTemplateListView: View {
                 }
             }
 
-            Section {
+            FooterSection {
                 AsyncButton {
-                    newTemplateAlertIsPresented.toggle()
+                    createTemplateAlertIsPresented.toggle()
                 } label: {
                     Text("Create template")
                 }
                 .buttonStyle(.borderedProminent)
             }
         }
-        .createTemplateAlert(newTemplateName: $newTemplateName, isPresented: $newTemplateAlertIsPresented) {
+        .templateAlert(
+            configuration: .createTemplate,
+            newTemplateName: $newTemplateName,
+            isPresented: $createTemplateAlertIsPresented
+        ) {
             await viewModel.createTemplate(name: $0)
         }
         .onAppear { viewModel.load() }

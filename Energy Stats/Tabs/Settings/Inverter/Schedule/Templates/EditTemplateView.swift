@@ -13,7 +13,9 @@ struct EditTemplateView: View {
     @State private var presentConfirmation = false
     @Environment(\.presentationMode) var presentationMode
     @State private var newTemplateName: String = ""
-    @State private var newTemplateAlertIsPresented = false
+    @State private var duplicateTemplateAlertIsPresented = false
+    @State private var renameTemplateName: String = ""
+    @State private var renameTemplateAlertIsPresented = false
 
     init(networking: Networking, templateStore: TemplateStoring, config: ConfigManaging, template: ScheduleTemplate) {
         _viewModel = StateObject(
@@ -37,53 +39,76 @@ struct EditTemplateView: View {
 
                 FooterSection {
                     VStack(alignment: .leading) {
-                        Button {
-                            viewModel.addNewTimePeriod()
-                        } label: {
-                            Text("Add time period")
-                        }.buttonStyle(.borderedProminent)
-
-                        Button {
-                            viewModel.autoFillScheduleGaps()
-                        } label: {
-                            Text("Autofill gaps")
-                        }.buttonStyle(.borderedProminent)
-
-                        Button {
-                            viewModel.activate {
-                                presentationMode.wrappedValue.dismiss()
+                        HStack {
+                            Button {
+                                viewModel.addNewTimePeriod()
+                            } label: {
+                                Text("Add time period")
+                                    .frame(minWidth: 0, maxWidth: .infinity)
                             }
-                        } label: {
-                            Text("Activate template")
-                        }
-                        .buttonStyle(.borderedProminent)
-                        .disabled(schedule.phases.count == 0)
+                            .buttonStyle(.borderedProminent)
 
-                        AsyncButton {
-                            newTemplateAlertIsPresented.toggle()
-                        } label: {
-                            Text("Duplicate template")
+                            Button {
+                                viewModel.autoFillScheduleGaps()
+                            } label: {
+                                Text("Autofill gaps")
+                                    .frame(minWidth: 0, maxWidth: .infinity)
+                            }
+                            .buttonStyle(.borderedProminent)
                         }
-                        .buttonStyle(.borderedProminent)
 
-                        Button(role: .destructive) {
-                            presentConfirmation = true
-                        } label: {
-                            Text("Delete template")
-                        }
-                        .buttonStyle(.bordered)
-                        .confirmationDialog("Are you sure you want to delete this template?",
-                                            isPresented: $presentConfirmation,
-                                            titleVisibility: .visible)
-                        {
-                            Button("Delete", role: .destructive) {
-                                viewModel.deleteTemplate {
+                        HStack {
+                            Button {
+                                viewModel.activate {
                                     presentationMode.wrappedValue.dismiss()
                                 }
+                            } label: {
+                                Image(systemName: "play")
+                                    .frame(height: 24)
+                                    .frame(minWidth: 0, maxWidth: .infinity)
                             }
+                            .buttonStyle(.borderedProminent)
+                            .disabled(schedule.phases.count == 0)
 
-                            Button("Cancel", role: .cancel) {
-                                presentConfirmation = false
+                            Button {
+                                duplicateTemplateAlertIsPresented.toggle()
+                            } label: {
+                                Image(systemName: "doc.on.doc")
+                                    .frame(height: 24)
+                                    .frame(minWidth: 0, maxWidth: .infinity)
+                            }
+                            .buttonStyle(.borderedProminent)
+
+                            Button {
+                                renameTemplateAlertIsPresented.toggle()
+                            } label: {
+                                Image(systemName: "pencil")
+                                    .frame(height: 24)
+                                    .frame(minWidth: 0, maxWidth: .infinity)
+                            }
+                            .buttonStyle(.borderedProminent)
+
+                            Button(role: .destructive) {
+                                presentConfirmation = true
+                            } label: {
+                                Image(systemName: "trash")
+                                    .frame(height: 24)
+                                    .frame(minWidth: 0, maxWidth: .infinity)
+                            }
+                            .buttonStyle(.bordered)
+                            .confirmationDialog("Are you sure you want to delete this template?",
+                                                isPresented: $presentConfirmation,
+                                                titleVisibility: .visible)
+                            {
+                                Button("Delete", role: .destructive) {
+                                    viewModel.deleteTemplate {
+                                        presentationMode.wrappedValue.dismiss()
+                                    }
+                                }
+
+                                Button("Cancel", role: .cancel) {
+                                    presentConfirmation = false
+                                }
                             }
                         }
                     }
@@ -102,11 +127,24 @@ struct EditTemplateView: View {
                 }
             }
         }
-        .createTemplateAlert(newTemplateName: $newTemplateName, isPresented: $newTemplateAlertIsPresented) {
+        .templateAlert(
+            configuration: .duplicateTemplate,
+            newTemplateName: $newTemplateName,
+            isPresented: $duplicateTemplateAlertIsPresented
+        ) {
             viewModel.duplicate(as: $0)
             presentationMode.wrappedValue.dismiss()
         }
-        .navigationTitle("Edit template")
+        .templateAlert(
+            configuration: .renameTemplate,
+            newTemplateName: $newTemplateName,
+            isPresented: $renameTemplateAlertIsPresented
+        ) {
+            viewModel.rename(as: $0)
+            presentationMode.wrappedValue.dismiss()
+        }
+        .toolbarRole(.editor)
+        .navigationTitle(viewModel.name ?? "Edit template")
         .loadable(viewModel.state, retry: {})
         .alert(alertContent: $viewModel.alertContent)
     }

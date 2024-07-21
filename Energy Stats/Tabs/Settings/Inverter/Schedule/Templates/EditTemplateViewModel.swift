@@ -13,6 +13,7 @@ class EditTemplateViewModel: ObservableObject {
     @Published var state: LoadState = .inactive
     @Published var alertContent: AlertContent?
     @Published var schedule: Schedule?
+    @Published var name: String?
     private let config: ConfigManaging
     private let modes: [WorkMode] = WorkMode.allCases
     private let templateStore: TemplateStoring
@@ -25,6 +26,7 @@ class EditTemplateViewModel: ObservableObject {
         self.config = config
         self.template = template
         self.schedule = template.asSchedule()
+        self.name = template.name
     }
 
     func saveTemplate(onCompletion: @escaping () -> Void) {
@@ -88,6 +90,11 @@ class EditTemplateViewModel: ObservableObject {
 
     func duplicate(as name: String) {
         templateStore.duplicate(template: template, named: name)
+    }
+
+    func rename(as name: String) {
+        templateStore.rename(template: template, to: name)
+        self.name = name
     }
 
     func autoFillScheduleGaps() {
