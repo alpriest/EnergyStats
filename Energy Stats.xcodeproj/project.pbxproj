@@ -122,8 +122,8 @@
 		414BF82829B4918300E2EB51 /* SettingsTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */; };
 		414D7A312AC8CE9C0083923F /* DisplayUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D7A302AC8CE9C0083923F /* DisplayUnit.swift */; };
 		4155D70D2B28FC920071346A /* Optional+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4155D70C2B28FC920071346A /* Optional+Int.swift */; };
-		415641F72C2BEDA90004679C /* SlowServerTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415641F62C2BEDA90004679C /* SlowServerTip.swift */; };
 		4156E7B72B9C839F0000E807 /* PowerStationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156E7B62B9C839F0000E807 /* PowerStationSettingsView.swift */; };
+		415AFA832C597DD800691852 /* SlowServerBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415AFA822C597DD800691852 /* SlowServerBannerView.swift */; };
 		4160098B2A8D18B10096CCD9 /* SettingsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4160098A2A8D18B10096CCD9 /* SettingsFooterView.swift */; };
 		4160098D2A8D1A690096CCD9 /* BottomButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4160098C2A8D1A690096CCD9 /* BottomButtonsView.swift */; };
 		41626CD029D969E9003FEB00 /* InverterFirmwareVersionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41626CCF29D969E9003FEB00 /* InverterFirmwareVersionsView.swift */; };
@@ -568,8 +568,8 @@
 		414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabViewModel.swift; sourceTree = "<group>"; };
 		414D7A302AC8CE9C0083923F /* DisplayUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayUnit.swift; sourceTree = "<group>"; };
 		4155D70C2B28FC920071346A /* Optional+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Int.swift"; sourceTree = "<group>"; };
-		415641F62C2BEDA90004679C /* SlowServerTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlowServerTip.swift; sourceTree = "<group>"; };
 		4156E7B62B9C839F0000E807 /* PowerStationSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerStationSettingsView.swift; sourceTree = "<group>"; };
+		415AFA822C597DD800691852 /* SlowServerBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlowServerBannerView.swift; sourceTree = "<group>"; };
 		4160098A2A8D18B10096CCD9 /* SettingsFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFooterView.swift; sourceTree = "<group>"; };
 		4160098C2A8D1A690096CCD9 /* BottomButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButtonsView.swift; sourceTree = "<group>"; };
 		41626CCD29D95E9C003FEB00 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -904,6 +904,7 @@
 				41E1DFDD28D87778001235B9 /* Settings */,
 				417AA21B2A1245AE0073CD34 /* Stats */,
 				418C6E932AFAC3B1000DE35F /* Summary */,
+				415AFA822C597DD800691852 /* SlowServerBannerView.swift */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -1109,7 +1110,6 @@
 				41D75A022B6009D5002C43A7 /* UpgradeRequiredView.swift */,
 				4189B0312B9486FE00EC4CB5 /* version.json */,
 				41B0BCD62C221B0500AD440F /* AppDelegate.swift */,
-				415641F62C2BEDA90004679C /* SlowServerTip.swift */,
 				41965EE02C3284E6004F9D9A /* VisibilityTracking.swift */,
 				41965EE22C3286C9004F9D9A /* LoadTracking.swift */,
 			);
@@ -2000,6 +2000,7 @@
 				4190922C2B1E49210017CB65 /* ScheduleView.swift in Sources */,
 				41923E3E2916BC6F00D1A8C5 /* ParametersGraphView.swift in Sources */,
 				4163CA7C2B4DE46D00FDA232 /* APIKeyLoginView.swift in Sources */,
+				415AFA832C597DD800691852 /* SlowServerBannerView.swift in Sources */,
 				41EB28032B8E634F00F6127F /* SolarStringsSettingsView.swift in Sources */,
 				41FE6BB12B0CBA7900A66CC3 /* SolcastSiteView.swift in Sources */,
 				41AF2F432AA4C6C1008FCA2E /* HomePowerFooterView.swift in Sources */,
@@ -2011,7 +2012,6 @@
 				410484C82AD49D95007F68C0 /* CT2-icon.swift in Sources */,
 				416318BE29DDD80E00C2C285 /* View+Copy.swift in Sources */,
 				418C6E952AFAC3BF000DE35F /* SummaryTabView.swift in Sources */,
-				415641F72C2BEDA90004679C /* SlowServerTip.swift in Sources */,
 				411542E92BED30D200BDE56D /* ScheduleTemplateListView.swift in Sources */,
 				4107446728CA22B3006D5D7D /* InverterViewModel.swift in Sources */,
 				410FC8862AB98F020004CBC2 /* ParameterVariableGroupEditorView.swift in Sources */,
@@ -2395,7 +2395,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.43;
+				MARKETING_VERSION = 2.44;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2454,7 +2454,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.43;
+				MARKETING_VERSION = 2.44;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

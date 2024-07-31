@@ -7,7 +7,6 @@
 
 import Energy_Stats_Core
 import SwiftUI
-import TipKit
 
 struct ContentView: View {
     @ObservedObject var userManager: UserManager
@@ -16,15 +15,15 @@ struct ContentView: View {
     let solarForecastProvider: SolarForecastProviding
     let templateStore: TemplateStoring
     @State private var state = LoadState.inactive
+    @EnvironmentObject var alertManager: SlowServerBannerAlertManager
 
     var body: some View {
         if userManager.isLoggedIn {
             ZStack {
                 TabbedView(networking: network, userManager: userManager, configManager: configManager, solarForecastProvider: solarForecastProvider, templateStore: templateStore)
 
-                if #available(iOS 17.0, *) {
-                    TipView(SlowServerTip())
-                        .tipViewStyle(SlowServerTipStyle())
+                if alertManager.isShowingAlert {
+                    SlowServerMessageView()
                 }
             }
             .task { await network.fetchErrorMessages() }

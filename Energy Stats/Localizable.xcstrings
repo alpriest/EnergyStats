@@ -1901,35 +1901,6 @@
         }
       }
     },
-    "Activate template" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vorlage aktivieren"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activar plantilla"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Attiva modello"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aktywuj szablon"
-          }
-        }
-      }
-    },
     "Activating" : {
       "localizations" : {
         "de" : {
@@ -2076,6 +2047,9 @@
           }
         }
       }
+    },
+    "Always loading? Tap for details" : {
+
     },
     "Amount" : {
       "localizations" : {
@@ -4379,35 +4353,6 @@
         }
       }
     },
-    "Delete template" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vorlage löschen"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eliminar plantilla"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Elimina modello"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Usuń szablon"
-          }
-        }
-      }
-    },
     "Delete time period" : {
       "localizations" : {
         "de" : {
@@ -4740,7 +4685,32 @@
       }
     },
     "Duplicate" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Duplizieren"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Duplicar"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Duplica"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Duplikuj"
+          }
+        }
+      }
     },
     "Duplicate template" : {
       "localizations" : {
@@ -8083,35 +8053,6 @@
         }
       }
     },
-    "New template" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Neue Vorlage"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nueva plantilla"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nuovo modello"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nowy szablon"
-          }
-        }
-      }
-    },
     "Next update in" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -10231,7 +10172,32 @@
       }
     },
     "Rename template" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vorlage umbenennen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Renombrar plantilla"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rinomina modello"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zmień nazwę szablonu"
+          }
+        }
+      }
     },
     "reportvariable_chargeenergytotal" : {
       "extractionState" : "manual",
@@ -11776,6 +11742,35 @@
         }
       }
     },
+    "Slow performance? Tap for details" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Langsame Leistung? Tippen für Details"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Rendimiento lento? Toca para más detalles"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prestazioni lente? Tocca per dettagli"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wolne działanie? Stuknij, aby uzyskać więcej informacji"
+          }
+        }
+      }
+    },
     "slow-performance-message" : {
       "localizations" : {
         "de" : {
@@ -11787,7 +11782,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You have probably seen the loading spinner more and more frequently. Energy Stats uses public servers (OpenAPI) provided by FoxESS which are performing poorly. FoxESS have were informed at the beginning of May and have committed to resolving the issue but no timescale has been provided. These servers are different from the ones that are used by the FoxCloud apps which is why the FoxCloud apps often load.\\n\\nSee graph below showing response times across a 48hr period."
+            "value" : "You have probably seen the loading spinner more and more frequently. Energy Stats uses public servers (OpenAPI) provided by FoxESS which are performing poorly. FoxESS have were informed at the beginning of May and have committed to resolving the issue but no timescale has been provided. These servers are different from the ones that are used by the FoxCloud apps which is why the FoxCloud apps often load.\n\nSee graph below showing response times across a 48hr period."
           }
         },
         "es" : {
