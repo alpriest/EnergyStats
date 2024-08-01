@@ -17,7 +17,9 @@ struct SlowServerBannerView: View {
 
     var body: some View {
         Button {
-            alertManager.isShowingAlert = true
+            withAnimation {
+                alertManager.isShowingAlert.toggle()
+            }
         } label: {
             Text("Always loading? Tap for details")
                 .font(.footnote)
@@ -32,46 +34,55 @@ struct SlowServerMessageView: View {
     @EnvironmentObject var alertManager: SlowServerBannerAlertManager
 
     var body: some View {
-        Group {
-            VStack(alignment: .leading, spacing: 16) {
-                HStack {
-                    Text("Slow performance")
-                        .font(.title2)
-                        .fontWeight(.bold)
+        if alertManager.isShowingAlert {
+            Group {
+                VStack(alignment: .leading, spacing: 16) {
+                    HStack {
+                        Text("Slow performance")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                    }
+                    .frame(minWidth: 0, maxWidth: .infinity)
+
+                    Text("slow-performance-message")
+                        .font(.body)
+                        .fontWeight(.regular)
+                        .foregroundStyle(.secondary)
+
+                    Image("server-performance")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+
+                    Button(action: {
+                        withAnimation {
+                            alertManager.isShowingAlert.toggle()
+                        }
+                    }, label: {
+                        Text("OK")
+                            .frame(minWidth: 100)
+                    })
+                    .buttonStyle(.bordered)
+                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
                 }
-                .frame(minWidth: 0, maxWidth: .infinity)
-
-                Text("slow-performance-message")
-                    .font(.body)
-                    .fontWeight(.regular)
-                    .foregroundStyle(.secondary)
-
-                Image("server-performance")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-
-                Button(action: {
-                    alertManager.isShowingAlert = false
-                }, label: {
-                    Text("OK")
-                        .frame(minWidth: 100)
-                })
-                .buttonStyle(.bordered)
-                .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
+                .padding()
             }
             .padding()
+            .background(
+                Color.background.shadow(radius: 3)
+                    .padding()
+            )
+            .transition(.move(edge: .top))
+            .animation(Animation.snappy, value: alertManager.isShowingAlert)
         }
-        .padding()
-        .background(
-            Color.white.shadow(radius: 3)
-                .padding()
-        )
     }
 }
 
 #Preview {
-//    SlowServerBannerView()
-//        .environmentObject(SlowServerBannerAlertManager())
+    VStack {
+        SlowServerBannerView()
+        Spacer()
 
-    SlowServerMessageView()
+        SlowServerMessageView()
+    }
+    .environmentObject(SlowServerBannerAlertManager())
 }

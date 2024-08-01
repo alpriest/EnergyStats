@@ -2049,7 +2049,32 @@
       }
     },
     "Always loading? Tap for details" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Immer am Laden? Tippen für Details"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Siempre cargando? Toca para más detalles"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sempre in caricamento? Tocca per i dettagli"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zawsze ładuje? Dotknij, aby uzyskać szczegóły"
+          }
+        }
+      }
     },
     "Amount" : {
       "localizations" : {
@@ -11738,35 +11763,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wolne działanie"
-          }
-        }
-      }
-    },
-    "Slow performance? Tap for details" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Langsame Leistung? Tippen für Details"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "¿Rendimiento lento? Toca para más detalles"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prestazioni lente? Tocca per dettagli"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wolne działanie? Stuknij, aby uzyskać więcej informacji"
           }
         }
       }
