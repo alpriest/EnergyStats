@@ -34,49 +34,24 @@ struct ParametersGraphTabView: View {
 
                 ScrollView {
                     HStack {
-                        Group {
-                            if let selectedDate {
-                                Text(selectedDate, format: .dateTime)
-                                Button("Clear graph values", action: {
-                                    self.valuesAtTime = nil
-                                    self.selectedDate = nil
-                                })
-                            } else {
-                                Text("Touch the graph to see values at that time")
-                            }
-                        }.padding(.vertical)
-                    }.frame(maxWidth: .infinity)
-
-                    if configManager.separateParameterGraphsByUnit {
-                        VStack {
-                            ForEach(Array(viewModel.data.keys.sorted { $0 < $1 }), id: \.self) { key in
-                                ZStack {
-                                    ParametersGraphView(key: key,
-                                                        viewModel: viewModel,
-                                                        selectedDate: $selectedDate,
-                                                        valuesAtTime: $valuesAtTime,
-                                                        truncateYAxis: appSettings.truncatedYAxisOnParameterGraphs)
-                                        .frame(height: 250)
-                                        .padding(.vertical)
-
-                                    LoadingView(message: "Loading")
-                                        .opacity(viewModel.state.opacity())
-                                }
-                            }
+                        if let selectedDate {
+                            Text(selectedDate, format: .dateTime)
+                            Button("Clear graph values", action: {
+                                self.valuesAtTime = nil
+                                self.selectedDate = nil
+                            })
+                        } else {
+                            Text("Touch the graph to see values at that time")
                         }
+                    }
+                    .padding(.vertical)
+                    .frame(maxWidth: .infinity)
+
+                    if viewModel.hasLoaded {
+                        graphs()
                     } else {
-                        ZStack {
-                            ParametersGraphView(key: nil,
-                                                viewModel: viewModel,
-                                                selectedDate: $selectedDate,
-                                                valuesAtTime: $valuesAtTime,
-                                                truncateYAxis: appSettings.truncatedYAxisOnParameterGraphs)
-                                .frame(height: 250)
-                                .padding(.vertical)
-
-                            LoadingView(message: "Loading")
-                                .opacity(viewModel.state.opacity())
-                        }
+                        LoadingView(message: "Loading")
+                            .loadable(viewModel.state, options: [.retry], overlay: true, retry: { Task { await viewModel.load() } })
                     }
 
                     ParameterGraphVariablesToggles(viewModel: viewModel, selectedDate: $selectedDate, valuesAtTime: $valuesAtTime, appSettings: appSettings)
@@ -106,6 +81,42 @@ struct ParametersGraphTabView: View {
             self.appSettings = $0
         }
         .trackVisibility(on: viewModel)
+    }
+
+    private func graphs() -> some View {
+        Group {
+            if configManager.separateParameterGraphsByUnit {
+                VStack {
+                    ForEach(Array(viewModel.data.keys.sorted { $0 < $1 }), id: \.self) { key in
+                        ZStack {
+                            ParametersGraphView(key: key,
+                                                viewModel: viewModel,
+                                                selectedDate: $selectedDate,
+                                                valuesAtTime: $valuesAtTime,
+                                                truncateYAxis: appSettings.truncatedYAxisOnParameterGraphs)
+                                .frame(height: 250)
+                                .padding(.vertical)
+
+                            LoadingView(message: "Loading")
+                                .opacity(viewModel.state.opacity())
+                        }
+                    }
+                }
+            } else {
+                ZStack {
+                    ParametersGraphView(key: nil,
+                                        viewModel: viewModel,
+                                        selectedDate: $selectedDate,
+                                        valuesAtTime: $valuesAtTime,
+                                        truncateYAxis: appSettings.truncatedYAxisOnParameterGraphs)
+                        .frame(height: 250)
+                        .padding(.vertical)
+
+                    LoadingView(message: "Loading")
+                        .opacity(viewModel.state.opacity())
+                }
+            }
+        }
     }
 }
 

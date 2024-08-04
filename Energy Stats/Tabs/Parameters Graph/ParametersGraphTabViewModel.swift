@@ -57,6 +57,7 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
     private var max: ParameterGraphValue?
     var exportFile: CSVTextFile?
     @Published var xScale: ClosedRange<Date> = Calendar.current.startOfDay(for: Date())...Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))!
+    @Published var hasLoaded: Bool = false
 
     @Published var displayMode: ParametersGraphDisplayMode {
         didSet {
@@ -158,6 +159,7 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
                 prepareExport()
                 setState(.inactive)
                 self.lastLoadState = LastLoadState(lastLoadTime: .now, loadState: ParametersGraphLoadState(displayMode: displayMode, variables: graphVariables))
+                self.hasLoaded = true
             }
         } catch {
             setState(.error(error, "Could not load, check your connection"))
