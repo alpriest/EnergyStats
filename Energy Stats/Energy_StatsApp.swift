@@ -41,7 +41,6 @@ struct Energy_StatsApp: App {
                 Text("Tests")
             } else {
                 ContentView(
-                    userManager: userManager,
                     network: network,
                     configManager: configManager,
                     solarForecastProvider: solarForecastProvider,

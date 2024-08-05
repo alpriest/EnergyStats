@@ -23,7 +23,7 @@ struct PowerFlowTabView: View {
 
     var body: some View {
         VStack {
-            SlowServerBannerView()
+//            SlowServerBannerView()
             
             switch viewModel.state {
             case let .loaded(summary):

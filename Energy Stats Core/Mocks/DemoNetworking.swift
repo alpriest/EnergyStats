@@ -163,14 +163,16 @@ class DemoAPI: FoxAPIServicing {
                                      OpenQueryResponse.Data(unit: "kW", variable: "feedinPower", value: 0.0, stringValue: nil),
                                      OpenQueryResponse.Data(unit: "kW", variable: "gridConsumptionPower", value: 2.634, stringValue: nil),
                                      OpenQueryResponse.Data(unit: "kW", variable: "loadsPower", value: 2.708, stringValue: nil),
-                                     OpenQueryResponse.Data(unit: "kW", variable: "SoC", value: 0.65, stringValue: nil),
+                                     OpenQueryResponse.Data(unit: "kW", variable: "SoC", value: 65, stringValue: nil),
                                      OpenQueryResponse.Data(unit: "kW", variable: "batDischargePower", value: 0, stringValue: nil),
                                      OpenQueryResponse.Data(unit: "kW", variable: "batChargePower", value: 1.200, stringValue: nil),
                                      OpenQueryResponse.Data(unit: "kW", variable: "generationPower", value: 0.071, stringValue: nil),
                                      OpenQueryResponse.Data(unit: "kW", variable: "pvPower", value: 0.111, stringValue: nil),
                                      OpenQueryResponse.Data(unit: "kW", variable: "meterPower2", value: 0.0, stringValue: nil),
                                      OpenQueryResponse.Data(unit: "℃", variable: "ambientTemperation", value: 32.5, stringValue: nil),
-                                     OpenQueryResponse.Data(unit: "℃", variable: "invTemperation", value: 23.2, stringValue: nil)
+                                     OpenQueryResponse.Data(unit: "℃", variable: "invTemperation", value: 23.2, stringValue: nil),
+                                     OpenQueryResponse.Data(unit: "℃", variable: "batTemperature", value: 26.5, stringValue: nil),
+                                     OpenQueryResponse.Data(unit: "0.01kWh", variable: "ResidualEnergy", value: 1087, stringValue: nil)
                                  ])
     }
 

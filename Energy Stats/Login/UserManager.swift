@@ -70,11 +70,20 @@ class UserManager: ObservableObject, HasLoadState {
 
     @MainActor
     func logout(clearDisplaySettings: Bool = false, clearDeviceSettings: Bool = true) {
-        configManager.logout(clearDisplaySettings: clearDisplaySettings, clearDeviceSettings: clearDeviceSettings)
+        if configManager.isDemoUser {
+            configManager.logout(clearDisplaySettings: true, clearDeviceSettings: true)
+        } else {
+            configManager.logout(clearDisplaySettings: clearDisplaySettings, clearDeviceSettings: clearDeviceSettings)
+        }
         store.logout()
         networkCache.logout()
         setState(.inactive)
-        isLoggedIn = false
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            Task { @MainActor in
+                self.isLoggedIn = false
+            }
+        }
     }
 }
 

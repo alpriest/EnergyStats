@@ -9,7 +9,7 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var userManager: UserManager
+    @EnvironmentObject var userManager: UserManager
     let network: Networking
     let configManager: ConfigManaging
     let solarForecastProvider: SolarForecastProviding
@@ -36,11 +36,11 @@ struct ContentView: View {
 #if DEBUG
 #Preview {
     ContentView(
-        userManager: .preview(),
         network: NetworkService.preview(),
         configManager: ConfigManager.preview(),
         solarForecastProvider: { DemoSolcast() },
         templateStore: TemplateStore.preview()
     )
+    .environmentObject(UserManager.preview())
 }
 #endif

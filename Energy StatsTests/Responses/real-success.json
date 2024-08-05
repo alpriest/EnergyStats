@@ -34,6 +34,18 @@
           "variable": "batDischargePower",
           "value": 2.304
         },
+        {
+          "unit": "0.01kWh",
+          "name": "Battery Residual Energy",
+          "variable": "ResidualEnergy",
+          "value": 1087.0
+        },
+        {
+          "unit": "℃",
+          "name": "batTemperature",
+          "variable": "batTemperature",
+          "value": 26.5
+        },
       ],
       "time": "2024-05-13 17:23:13 BST+0100",
       "deviceSN": "DEVICESN"
