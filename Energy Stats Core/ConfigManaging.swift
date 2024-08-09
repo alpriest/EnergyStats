@@ -93,6 +93,10 @@ public struct PowerFlowStringsSettings: Codable {
     public let pv3Enabled: Bool
     public let pv4Name: String
     public let pv4Enabled: Bool
+    public let pv5Name: String
+    public let pv5Enabled: Bool
+    public let pv6Name: String
+    public let pv6Enabled: Bool
 
     public func variableNames() -> [String] {
         guard enabled else { return [] }
@@ -112,6 +116,14 @@ public struct PowerFlowStringsSettings: Codable {
 
         if pv4Enabled {
             variables.append("pv4Power")
+        }
+
+        if pv5Enabled {
+            variables.append("pv5Power")
+        }
+
+        if pv6Enabled {
+            variables.append("pv6Power")
         }
 
         return variables
@@ -137,6 +149,14 @@ public struct PowerFlowStringsSettings: Codable {
             strings.append(StringPower(name: "PV4", amount: abs(response.datas.currentDouble(for: "pv4Power"))))
         }
 
+        if pv5Enabled {
+            strings.append(StringPower(name: "PV5", amount: abs(response.datas.currentDouble(for: "pv5Power"))))
+        }
+
+        if pv6Enabled {
+            strings.append(StringPower(name: "PV6", amount: abs(response.datas.currentDouble(for: "pv6Power"))))
+        }
+
         return strings
     }
 
@@ -149,7 +169,12 @@ public struct PowerFlowStringsSettings: Codable {
         pv3Name: String? = nil,
         pv3Enabled: Bool? = nil,
         pv4Name: String? = nil,
-        pv4Enabled: Bool? = nil) -> PowerFlowStringsSettings
+        pv4Enabled: Bool? = nil,
+        pv5Name: String? = nil,
+        pv5Enabled: Bool? = nil,
+        pv6Name: String? = nil,
+        pv6Enabled: Bool? = nil
+    ) -> PowerFlowStringsSettings
     {
         PowerFlowStringsSettings(
             enabled: enabled ?? self.enabled,
@@ -160,7 +185,12 @@ public struct PowerFlowStringsSettings: Codable {
             pv3Name: pv3Name ?? self.pv3Name,
             pv3Enabled: pv3Enabled ?? self.pv3Enabled,
             pv4Name: pv4Name ?? self.pv4Name,
-            pv4Enabled: pv4Enabled ?? self.pv4Enabled)
+            pv4Enabled: pv4Enabled ?? self.pv4Enabled,
+            pv5Name: pv5Name ?? self.pv5Name,
+            pv5Enabled: pv5Enabled ?? self.pv5Enabled,
+            pv6Name: pv6Name ?? self.pv6Name,
+            pv6Enabled: pv6Enabled ?? self.pv6Enabled
+        )
     }
 
     public static var none: PowerFlowStringsSettings {
@@ -173,6 +203,11 @@ public struct PowerFlowStringsSettings: Codable {
             pv3Name: "PV3",
             pv3Enabled: false,
             pv4Name: "PV4",
-            pv4Enabled: false)
+            pv4Enabled: false,
+            pv5Name: "PV5",
+            pv5Enabled: false,
+            pv6Name: "PV6",
+            pv6Enabled: false
+        )
     }
 }
