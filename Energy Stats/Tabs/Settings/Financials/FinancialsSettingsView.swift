@@ -22,17 +22,33 @@ struct FinancialsSettingsView: View {
                     Text("Show estimated earnings")
                 }.accessibilityIdentifier("toggle_financial_summary")
 
-                if viewModel.showFinancialSummary {
+            } footer: {
+                Text("energy_stats_earnings_calculation_description")
+            }
+
+            if viewModel.showFinancialSummary {
+                Section {
                     Toggle(isOn: $viewModel.showFinancialSummaryOnFlowPage) {
                         Text("Show on power flow page")
                     }
 
                     makeCurrencySymbolField()
-                    makeTextField(title: "Feed In Unit price", currencySymbol: viewModel.currencySymbol, text: $viewModel.energyStatsFeedInUnitPrice)
-                    makeTextField(title: "Grid Import Unit price", currencySymbol: viewModel.currencySymbol, text: $viewModel.energyStatsGridImportUnitPrice)
                 }
-            } footer: {
-                if viewModel.showFinancialSummary {
+
+                makeTextField(
+                    title: "Feed In Unit price",
+                    currencySymbol: viewModel.currencySymbol,
+                    text: $viewModel.energyStatsFeedInUnitPrice,
+                    footer: "Enter the price you are paid per kWh for exporting electricity"
+                )
+                makeTextField(
+                    title: "Grid Import Unit price",
+                    currencySymbol: viewModel.currencySymbol,
+                    text: $viewModel.energyStatsGridImportUnitPrice,
+                    footer: "Enter the price you pay for kWh for importing electricity"
+                )
+
+                Section {} footer: {
                     energyStatsFooter()
                 }
             }
@@ -43,9 +59,6 @@ struct FinancialsSettingsView: View {
     @ViewBuilder
     func energyStatsFooter() -> some View {
         VStack(alignment: .leading) {
-            Text("energy_stats_earnings_calculation_description")
-                .padding(.bottom, 24)
-
             VStack(alignment: .leading) {
                 Text("exported_income_short_title").bold()
 
@@ -82,17 +95,26 @@ struct FinancialsSettingsView: View {
         .frame(maxWidth: .infinity)
     }
 
-    private func makeTextField(title: LocalizedStringKey, currencySymbol: String, text: Binding<String>) -> some View {
-        HStack {
-            Text(title)
-                .multilineTextAlignment(.leading)
-            Spacer()
-            Text(currencySymbol)
-            TextField(0.roundedToString(decimalPlaces: 2, currencySymbol: currencySymbol), text: text)
-                .frame(width: 60)
-                .monospacedDigit()
+    private func makeTextField(
+        title: LocalizedStringKey,
+        currencySymbol: String,
+        text: Binding<String>,
+        footer: String
+    ) -> some View {
+        Section {
+            HStack {
+                Text(title)
+                    .multilineTextAlignment(.leading)
+                Spacer()
+                Text(currencySymbol)
+                TextField(0.roundedToString(decimalPlaces: 2, currencySymbol: currencySymbol), text: text)
+                    .frame(width: 60)
+                    .monospacedDigit()
+            }
+            .multilineTextAlignment(.trailing)
+        } footer: {
+            Text(footer)
         }
-        .multilineTextAlignment(.trailing)
     }
 
     private func makeCurrencySymbolField() -> some View {
