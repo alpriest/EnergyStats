@@ -13,28 +13,41 @@ import WatchConnectivity
 @main
 struct Energy_StatsApp: App {
     static let delegate = WatchSessionDelegate()
-    @Environment(\.scenePhase) private var scenePhase
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    let keychainStore = KeychainStore()
 
-    var body: some Scene {
-        let keychainStore = KeychainStore()
+    let appSettingsPublisher: LatestAppSettingsPublisher
+    let config: Config
+    let network: Networking
+    let configManager: ConfigManaging
+    let userManager: UserManager
+    let versionChecker = VersionChecker()
+    let templateStore: TemplateStoring
+
+    @Environment(\.scenePhase) private var scenePhase
+
+    init() {
         var config: Config
-        if isRunningScreenshots() {
+        if Self.isRunningScreenshots() {
             config = MockConfig()
         } else {
             config = UserDefaultsConfig()
         }
-        let appSettingsPublisher = AppSettingsPublisherFactory.make(from: config)
-        let network = NetworkService.standard(keychainStore: keychainStore,
-                                              isDemoUser: { config.isDemoUser },
-                                              dataCeiling: { config.dataCeiling })
-        let configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
-        let userManager = UserManager(store: keychainStore, configManager: configManager, networkCache: InMemoryLoggingNetworkStore.shared)
+
+        self.config = config
+        network = NetworkService.standard(keychainStore: keychainStore,
+                                          isDemoUser: { config.isDemoUser },
+                                          dataCeiling: { config.dataCeiling })
+        appSettingsPublisher = AppSettingsPublisherFactory.make(from: config)
+
+        configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
+        userManager = .init(store: keychainStore, configManager: configManager, networkCache: InMemoryLoggingNetworkStore.shared)
+        templateStore = TemplateStore(config: configManager)
+    }
+
+    var body: some Scene {
         let solarForecastProvider: () -> SolarForecasting = {
             config.isDemoUser ? DemoSolcast() : SolcastCache(service: { Solcast() })
         }
-        let versionChecker = VersionChecker()
-        let templateStore = TemplateStore(config: configManager)
 
         return WindowGroup {
             if isRunningTests() {
@@ -73,7 +86,7 @@ struct Energy_StatsApp: App {
         CommandLine.arguments.contains("-TESTING=1")
     }
 
-    func isRunningScreenshots() -> Bool {
+    static func isRunningScreenshots() -> Bool {
         CommandLine.arguments.contains("screenshots")
     }
 }

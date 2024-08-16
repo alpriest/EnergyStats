@@ -35,9 +35,10 @@ public class NetworkService: Networking {
                                 isDemoUser: @escaping () -> Bool,
                                 dataCeiling: @escaping () -> DataCeiling) -> Networking
     {
+        let service = FoxAPIService(credentials: keychainStore, store: .shared)
         let api = NetworkValueCleaner(
             api: NetworkFacade(
-                api: NetworkCache(api: FoxAPIService(credentials: keychainStore, store: InMemoryLoggingNetworkStore.shared)),
+                api: NetworkCache(api: service),
                 isDemoUser: isDemoUser,
                 store: keychainStore
             ),
