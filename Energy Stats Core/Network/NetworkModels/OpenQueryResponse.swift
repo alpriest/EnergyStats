@@ -157,7 +157,14 @@ public struct OpenHistoryResponse: Codable {
                 let container: KeyedDecodingContainer<UnitData.CodingKeys> = try decoder.container(keyedBy: UnitData.CodingKeys.self)
                 let timeString = try container.decode(String.self, forKey: CodingKeys.time)
                 self.time = try Date(timeString, strategy: FoxEssCloudParseStrategy())
-                self.value = try container.decode(Double.self, forKey: UnitData.CodingKeys.value)
+
+                if let result = try? container.decode(Double.self, forKey: UnitData.CodingKeys.value) {
+                    self.value = result
+                } else if let result = try? container.decode(String.self, forKey: UnitData.CodingKeys.value), let doubleResult = Double(result) {
+                    self.value = doubleResult
+                } else {
+                    self.value = 0
+                }
             }
 
             public init(time: Date, value: Double) {

@@ -19,13 +19,9 @@ struct ConfigureAPIKeyView: View {
                     TextField(text: $apiKey) {
                         Text("API Key")
                     }
-                } header: {
-                    Text("API Key")
                 } footer: {
                     Text("If you need to change your API key then you can replace it above without losing your settings.")
                 }
-
-                HowToObtainAPIKeyView()
             }
 
             BottomButtonsView {
@@ -33,13 +29,15 @@ struct ConfigureAPIKeyView: View {
             }
         }.onAppear {
             apiKey = wrapper.store.getToken() ?? ""
-        }
+        }.navigationTitle("API Key")
     }
 }
 
 #if DEBUG
 #Preview {
-    ConfigureAPIKeyView()
-        .environmentObject(KeychainWrapper(KeychainStore.preview()))
+    NavigationView {
+        ConfigureAPIKeyView()
+            .environmentObject(KeychainWrapper(KeychainStore.preview()))
+    }
 }
 #endif
