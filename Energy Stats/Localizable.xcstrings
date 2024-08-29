@@ -5457,6 +5457,7 @@
       }
     },
     "Feed In Unit price" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

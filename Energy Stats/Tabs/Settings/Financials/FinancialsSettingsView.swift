@@ -35,18 +35,39 @@ struct FinancialsSettingsView: View {
                     makeCurrencySymbolField()
                 }
 
-                makeTextField(
-                    title: "Feed In Unit price",
-                    currencySymbol: viewModel.currencySymbol,
-                    text: $viewModel.energyStatsFeedInUnitPrice,
-                    footer: "Enter the price you are paid per kWh for exporting electricity"
-                )
-                makeTextField(
-                    title: "Grid Import Unit price",
-                    currencySymbol: viewModel.currencySymbol,
-                    text: $viewModel.energyStatsGridImportUnitPrice,
-                    footer: "Enter the price you pay for kWh for importing electricity"
-                )
+                Section {
+                    makeTextField(
+                        title: "Unit price",
+                        currencySymbol: viewModel.currencySymbol,
+                        text: $viewModel.energyStatsFeedInUnitPrice
+                    )
+
+                    HStack {
+                        Text("I am paid for")
+                        Picker("Payment model", selection: $viewModel.earningsModel) {
+                            Text("exporting").tag(EarningsModel.exported)
+                            Text("generating").tag(EarningsModel.generated)
+                        }.pickerStyle(.segmented)
+                    }
+
+                } footer: {
+                    switch viewModel.earningsModel {
+                    case .generated:
+                        Text("Enter the unit price you are paid per kWh for generating electricity")
+                    case .exported:
+                        Text("Enter the unit price you are paid per kWh for exporting electricity")
+                    }
+                }
+
+                Section {
+                    makeTextField(
+                        title: "Grid Import Unit price",
+                        currencySymbol: viewModel.currencySymbol,
+                        text: $viewModel.energyStatsGridImportUnitPrice
+                    )
+                } footer: {
+                    Text("Enter the price you pay for kWh for importing electricity")
+                }
 
                 Section {} footer: {
                     energyStatsFooter()
@@ -98,23 +119,18 @@ struct FinancialsSettingsView: View {
     private func makeTextField(
         title: LocalizedStringKey,
         currencySymbol: String,
-        text: Binding<String>,
-        footer: String
+        text: Binding<String>
     ) -> some View {
-        Section {
-            HStack {
-                Text(title)
-                    .multilineTextAlignment(.leading)
-                Spacer()
-                Text(currencySymbol)
-                TextField(0.roundedToString(decimalPlaces: 2, currencySymbol: currencySymbol), text: text)
-                    .frame(width: 60)
-                    .monospacedDigit()
-            }
-            .multilineTextAlignment(.trailing)
-        } footer: {
-            Text(footer)
+        HStack {
+            Text(title)
+                .multilineTextAlignment(.leading)
+            Spacer()
+            Text(currencySymbol)
+            TextField(0.roundedToString(decimalPlaces: 2, currencySymbol: currencySymbol), text: text)
+                .frame(width: 60)
+                .monospacedDigit()
         }
+        .multilineTextAlignment(.trailing)
     }
 
     private func makeCurrencySymbolField() -> some View {
