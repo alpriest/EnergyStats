@@ -7,6 +7,10 @@
 
 import Foundation
 
+public struct PagedDataLoggerResponse: Codable {
+    public let data: [DataLoggerResponse]
+}
+
 public struct DataLoggerResponse: Codable, Hashable {
     public let moduleSN: String
     public let stationID: String

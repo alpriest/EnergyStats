@@ -164,8 +164,8 @@ extension FoxAPIService {
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(DataLoggerListRequest())
 
-        let result: ([DataLoggerResponse], Data) = try await fetch(request)
-        return result.0
+        let result: (PagedDataLoggerResponse, Data) = try await fetch(request)
+        return result.0.data
     }
 
     func openapi_fetchPowerStationList() async throws -> PagedPowerStationListResponse {
