@@ -48,6 +48,7 @@ public struct AppSettings {
     public var showBatteryPercentageRemaining: Bool
     public var showSelfSufficiencyStatsGraphOverlay: Bool
     public var truncatedYAxisOnParameterGraphs: Bool
+    public var earningsModel: EarningsModel
 
     public init(
         showColouredLines: Bool,
@@ -82,7 +83,8 @@ public struct AppSettings {
         powerFlowStrings: PowerFlowStringsSettings,
         showBatteryPercentageRemaining: Bool,
         showSelfSufficiencyStatsGraphOverlay: Bool,
-        truncatedYAxisOnParameterGraphs: Bool
+        truncatedYAxisOnParameterGraphs: Bool,
+        earningsModel: EarningsModel
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -117,6 +119,7 @@ public struct AppSettings {
         self.showBatteryPercentageRemaining = showBatteryPercentageRemaining
         self.showSelfSufficiencyStatsGraphOverlay = showSelfSufficiencyStatsGraphOverlay
         self.truncatedYAxisOnParameterGraphs = truncatedYAxisOnParameterGraphs
+        self.earningsModel = earningsModel
     }
 
     public func copy(
@@ -152,7 +155,8 @@ public struct AppSettings {
         powerFlowStrings: PowerFlowStringsSettings? = nil,
         showBatteryPercentageRemaining: Bool? = nil,
         showSelfSufficiencyStatsGraphOverlay: Bool? = nil,
-        truncatedYAxisOnParameterGraphs: Bool? = nil
+        truncatedYAxisOnParameterGraphs: Bool? = nil,
+        earningsModel: EarningsModel? = nil
     ) -> AppSettings {
         AppSettings(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -187,7 +191,8 @@ public struct AppSettings {
             powerFlowStrings: powerFlowStrings ?? self.powerFlowStrings,
             showBatteryPercentageRemaining: showBatteryPercentageRemaining ?? self.showBatteryPercentageRemaining,
             showSelfSufficiencyStatsGraphOverlay: showSelfSufficiencyStatsGraphOverlay ?? self.showSelfSufficiencyStatsGraphOverlay,
-            truncatedYAxisOnParameterGraphs: truncatedYAxisOnParameterGraphs ?? self.truncatedYAxisOnParameterGraphs
+            truncatedYAxisOnParameterGraphs: truncatedYAxisOnParameterGraphs ?? self.truncatedYAxisOnParameterGraphs,
+            earningsModel: earningsModel ?? self.earningsModel
         )
     }
 }

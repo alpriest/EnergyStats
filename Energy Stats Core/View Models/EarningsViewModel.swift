@@ -34,7 +34,12 @@ public struct EnergyStatsFinancialModel {
     public init(totalsViewModel: TotalsViewModel, config: FinancialConfigManager) {
         self.config = config
 
-        exportIncome = FinanceAmount(title: .exportedIncomeShortTitle, amount: totalsViewModel.gridExport * config.feedInUnitPrice)
+        let amountForIncomeCalculation = config.earningsModel == .exported ? totalsViewModel.gridExport : totalsViewModel.solar
+
+        exportIncome = FinanceAmount(
+            title: .exportedIncomeShortTitle,
+            amount: amountForIncomeCalculation * config.feedInUnitPrice
+        )
         exportBreakdown = CalculationBreakdown(
             formula: "gridExport * feedInUnitPrice",
             calculation: { dp in "\(totalsViewModel.gridExport.roundedToString(decimalPlaces: dp)) * \(config.feedInUnitPrice.roundedToString(decimalPlaces: dp))" }

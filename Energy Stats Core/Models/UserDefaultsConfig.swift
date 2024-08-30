@@ -55,6 +55,7 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "showBatteryPercentageRemaining")
         UserDefaults.shared.removeObject(forKey: "showSelfSufficiencyStatsGraphOverlay")
         UserDefaults.shared.removeObject(forKey: "truncatedYAxisOnParameterGraphs")
+        UserDefaults.shared.removeObject(forKey: "earningsModel")
         UserDefaults.shared.synchronize()
     }
 
@@ -248,4 +249,14 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredBool(key: "truncatedYAxisOnParameterGraphs", defaultValue: false)
     public var truncatedYAxisOnParameterGraphs: Bool
+
+    public var earningsModel: EarningsModel {
+        get {
+            let rawValue = UserDefaults.shared.integer(forKey: "earningsModel")
+            return EarningsModel(rawValue: rawValue) ?? .exported
+        }
+        set {
+            UserDefaults.shared.set(newValue.rawValue, forKey: "earningsModel")
+        }
+    }
 }

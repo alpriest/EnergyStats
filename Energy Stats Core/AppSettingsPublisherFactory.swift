@@ -51,7 +51,8 @@ public enum AppSettingsPublisherFactory {
                     powerFlowStrings: config.powerFlowStrings,
                     showBatteryPercentageRemaining: config.showBatteryPercentageRemaining,
                     showSelfSufficiencyStatsGraphOverlay: config.showSelfSufficiencyStatsGraphOverlay,
-                    truncatedYAxisOnParameterGraphs: config.truncatedYAxisOnParameterGraphs
+                    truncatedYAxisOnParameterGraphs: config.truncatedYAxisOnParameterGraphs,
+                    earningsModel: config.earningsModel
                 )
             )
 

@@ -53,6 +53,7 @@ public protocol Config {
     var showSelfSufficiencyStatsGraphOverlay: Bool { get set }
     var scheduleTemplates: [ScheduleTemplate] { get set }
     var truncatedYAxisOnParameterGraphs: Bool { get set }
+    var earningsModel: EarningsModel { get set }
 }
 
 public func DefaultParameterGroups() -> [ParameterGroup] {

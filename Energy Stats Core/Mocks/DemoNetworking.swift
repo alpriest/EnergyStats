@@ -365,6 +365,7 @@ public class MockConfig: Config {
     public var showSelfSufficiencyStatsGraphOverlay: Bool = true
     public var scheduleTemplates: [ScheduleTemplate] = []
     public var truncatedYAxisOnParameterGraphs: Bool = false
+    public var earningsModel: EarningsModel = .exported
 }
 
 public extension SolcastSite {

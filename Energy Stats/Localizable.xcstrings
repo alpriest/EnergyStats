@@ -5206,6 +5206,15 @@
         }
       }
     },
+    "Enter the price you pay for kWh for importing electricity" : {
+
+    },
+    "Enter the unit price you are paid per kWh for exporting electricity" : {
+
+    },
+    "Enter the unit price you are paid per kWh for generating electricity" : {
+
+    },
     "Enter your FoxESS Cloud API key" : {
       "localizations" : {
         "de" : {
@@ -5427,6 +5436,9 @@
           }
         }
       }
+    },
+    "exporting" : {
+
     },
     "Failed" : {
       "localizations" : {
@@ -6050,6 +6062,9 @@
         }
       }
     },
+    "generating" : {
+
+    },
     "Get in touch" : {
       "localizations" : {
         "de" : {
@@ -6564,6 +6579,9 @@
           }
         }
       }
+    },
+    "I am paid for" : {
+
     },
     "If you need to change your API key then you can replace it above without losing your settings." : {
       "localizations" : {
@@ -8595,6 +8613,9 @@
           }
         }
       }
+    },
+    "Payment model" : {
+
     },
     "peak_shaving_mode" : {
       "extractionState" : "manual",
@@ -12860,6 +12881,9 @@
           }
         }
       }
+    },
+    "Unit price" : {
+
     },
     "Units" : {
       "localizations" : {

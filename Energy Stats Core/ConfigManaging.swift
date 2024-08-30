@@ -77,6 +77,7 @@ public protocol FinancialConfigManager {
     var showFinancialEarnings: Bool { get set }
     var feedInUnitPrice: Double { get set }
     var gridImportUnitPrice: Double { get set }
+    var earningsModel: EarningsModel { get set }
 }
 
 public protocol ScheduleTemplateConfigManager {

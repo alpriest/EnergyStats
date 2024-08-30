@@ -536,6 +536,16 @@ public class ConfigManager: ConfigManaging {
             ))
         }
     }
+
+    public var earningsModel: EarningsModel {
+        get { config.earningsModel }
+        set { 
+            config.earningsModel = newValue
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+                earningsModel: config.earningsModel
+            ))
+        }
+    }
 }
 
 public enum BatteryResponseMapper {

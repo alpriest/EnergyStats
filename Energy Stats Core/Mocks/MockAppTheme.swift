@@ -47,7 +47,8 @@ public extension AppSettings {
             powerFlowStrings: .none,
             showBatteryPercentageRemaining: true,
             showSelfSufficiencyStatsGraphOverlay: true,
-            truncatedYAxisOnParameterGraphs: true
+            truncatedYAxisOnParameterGraphs: true,
+            earningsModel: .exported
         )
     }
 }

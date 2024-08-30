@@ -9,7 +9,11 @@ import Energy_Stats_Core
 import Foundation
 
 class FinancialsSettingsViewModel: ObservableObject {
-    @Published var earningsModel: EarningsModel
+    @Published var earningsModel: EarningsModel {
+        didSet {
+            configManager.earningsModel = earningsModel
+        }
+    }
 
     @Published var showFinancialSummary: Bool {
         didSet {
@@ -54,6 +58,6 @@ class FinancialsSettingsViewModel: ObservableObject {
         energyStatsFeedInUnitPrice = configManager.feedInUnitPrice.roundedToString(decimalPlaces: 3)
         energyStatsGridImportUnitPrice = configManager.gridImportUnitPrice.roundedToString(decimalPlaces: 3)
         currencySymbol = configManager.currencySymbol
-        earningsModel = .generated
+        earningsModel = configManager.earningsModel
     }
 }
