@@ -8,19 +8,25 @@
 import Foundation
 
 public struct FinanceAmount: Hashable, Identifiable {
-    public let title: LocalizedString.Key
+    public let shortTitle: LocalizedString.Key
+    public let longTitle: LocalizedString.Key
     public let amount: Double
 
-    public init(title: LocalizedString.Key, amount: Double) {
-        self.title = title
+    public init(shortTitle: LocalizedString.Key, longTitle: LocalizedString.Key, amount: Double) {
+        self.shortTitle = shortTitle
+        self.longTitle = longTitle
         self.amount = amount
+    }
+
+    public init(title: LocalizedString.Key, amount: Double) {
+        self.init(shortTitle: title, longTitle: title, amount: amount)
     }
 
     public func formattedAmount(_ currencySymbol: String) -> String {
         amount.roundedToString(decimalPlaces: 2, currencySymbol: currencySymbol)
     }
 
-    public var id: String { title.rawValue }
+    public var id: String { shortTitle.rawValue }
 }
 
 public struct EnergyStatsFinancialModel {
@@ -35,9 +41,10 @@ public struct EnergyStatsFinancialModel {
         self.config = config
 
         let amountForIncomeCalculation = config.earningsModel == .exported ? totalsViewModel.gridExport : totalsViewModel.solar
-
+        
         exportIncome = FinanceAmount(
-            title: .exportedIncomeShortTitle,
+            shortTitle: config.earningsModel == .exported ? .exportedIncomeShortTitle : .generatedIncomeShortTitle,
+            longTitle: config.earningsModel == .exported ? .exportedIncomeLongTitle : .generationIncomeLongTitle,
             amount: amountForIncomeCalculation * config.feedInUnitPrice
         )
         exportBreakdown = CalculationBreakdown(

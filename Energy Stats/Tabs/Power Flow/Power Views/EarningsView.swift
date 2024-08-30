@@ -18,7 +18,7 @@ struct EarningsView: View {
             ForEach(viewModel.amounts(), id: \.self) { amount in
                 SubLabelledView(
                     value: amount.formattedAmount(appSettings.currencySymbol),
-                    label: String(key: amount.title),
+                    label: String(key: amount.shortTitle),
                     alignment: .center
                 )
             }

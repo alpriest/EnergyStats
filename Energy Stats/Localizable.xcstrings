@@ -6062,8 +6062,30 @@
         }
       }
     },
+    "generated_income_short_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "generated"
+          }
+        }
+      }
+    },
     "generating" : {
 
+    },
+    "generation_income" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Generation income"
+          }
+        }
+      }
     },
     "Get in touch" : {
       "localizations" : {

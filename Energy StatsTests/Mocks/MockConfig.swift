@@ -61,4 +61,5 @@ class MockConfig: Config {
     var showSelfSufficiencyStatsGraphOverlay: Bool = false
     var scheduleTemplates: [ScheduleTemplate] = []
     var truncatedYAxisOnParameterGraphs: Bool = false
+    var earningsModel: EarningsModel = .exported
 }
