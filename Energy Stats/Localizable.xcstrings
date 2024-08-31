@@ -2340,6 +2340,34 @@
         }
       }
     },
+    "Approximate income received from generating electricity." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ungefähres Einkommen aus der Stromerzeugung."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingreso aproximado recibido por la generación de electricidad."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reddito approssimativo ricevuto dalla generazione di elettricità."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Przybliżony dochód uzyskany z wytwarzania energii elektrycznej."
+          }
+        }
+      }
+    },
     "Approximate total benefit of having your solar/battery installation." : {
       "localizations" : {
         "de" : {
@@ -12193,6 +12221,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Generowany przez energię słoneczną"
+          }
+        }
+      }
+    },
+    "SolarGeneration kWh * Unit Price" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SolarGeneration kWh * Stückpreis"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SolarGeneration kWh * Precio unitario"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SolarGeneration kWh * Prezzo unitario"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SolarGeneration kWh * Cena jednostkowa"
           }
         }
       }

@@ -81,12 +81,22 @@ struct FinancialsSettingsView: View {
     func energyStatsFooter() -> some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
-                Text("exported_income_short_title").bold()
-
-                Text("Approximate income received from exporting energy to the grid.")
+                switch viewModel.earningsModel {
+                case .generated:
+                    Text("generated_income_short_title").bold()
+                    Text("Approximate income received from generating electricity.")
+                case .exported:
+                    Text("exported_income_short_title").bold()
+                    Text("Approximate income received from exporting energy to the grid.")
+                }
 
                 VStack(alignment: .center) {
-                    Text("Feed-In kWh * FeedInUnitPrice").italic()
+                    switch viewModel.earningsModel {
+                    case .generated:
+                        Text("Feed-In kWh * FeedInUnitPrice").italic()
+                    case .exported:
+                        Text("SolarGeneration kWh * Unit Price").italic()
+                    }
                 }.frame(maxWidth: .infinity)
             }
             .padding(.bottom, 16)
