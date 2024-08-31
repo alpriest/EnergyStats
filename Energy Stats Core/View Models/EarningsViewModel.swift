@@ -48,8 +48,8 @@ public struct EnergyStatsFinancialModel {
             amount: amountForIncomeCalculation * config.feedInUnitPrice
         )
         exportBreakdown = CalculationBreakdown(
-            formula: "gridExport * feedInUnitPrice",
-            calculation: { dp in "\(totalsViewModel.gridExport.roundedToString(decimalPlaces: dp)) * \(config.feedInUnitPrice.roundedToString(decimalPlaces: dp))" }
+            formula: "\(String(key: config.earningsModel == .exported ? .exportedIncomeShortTitle : .generatedIncomeShortTitle)) * feedInUnitPrice",
+            calculation: { dp in "\(amountForIncomeCalculation.roundedToString(decimalPlaces: dp)) * \(config.feedInUnitPrice.roundedToString(decimalPlaces: dp))" }
         )
 
         solarSaving = FinanceAmount(title: .gridImportAvoidedShortTitle, amount: (totalsViewModel.solar - totalsViewModel.gridExport) * config.gridImportUnitPrice)
