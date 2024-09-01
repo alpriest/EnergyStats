@@ -6583,6 +6583,7 @@
       }
     },
     "Hello" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -11080,6 +11081,7 @@
       }
     },
     "Self Use" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
