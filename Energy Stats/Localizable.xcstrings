@@ -1643,6 +1643,31 @@
         }
       }
     },
+    "accessibility.stats.datepicker.date" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select a different date"
+          }
+        }
+      }
+    },
+    "accessibility.stats.datepicker.day" : {
+
+    },
+    "accessibility.stats.timeperiodpicker" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time period selector"
+          }
+        }
+      }
+    },
     "accessibility.temperature" : {
       "localizations" : {
         "de" : {
@@ -7311,6 +7336,9 @@
         }
       }
     },
+    "Key" : {
+      "extractionState" : "manual"
+    },
     "Kilowatts" : {
       "localizations" : {
         "de" : {
@@ -8242,6 +8270,9 @@
           }
         }
       }
+    },
+    "Month picker" : {
+
     },
     "Name" : {
       "localizations" : {
@@ -13960,6 +13991,9 @@
           }
         }
       }
+    },
+    "Year picker" : {
+
     },
     "You appear to be offline. Please check your connection." : {
       "extractionState" : "manual",

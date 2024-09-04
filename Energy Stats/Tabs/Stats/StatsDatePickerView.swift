@@ -55,7 +55,9 @@ struct StatsDatePickerView: View {
                 NonFunctionalButton {
                     Image(systemName: "calendar.badge.clock")
                 }
-            }.accessibilityIdentifier("stats_datepicker")
+            }
+            .accessibilityLabel("accessibility.stats.timeperiodpicker")
+            .accessibilityIdentifier("stats_datepicker")
 
             HStack {
                 switch viewModel.range {
@@ -64,6 +66,7 @@ struct StatsDatePickerView: View {
                         .datePickerStyle(.compact)
                         .id("day_\(viewModel.date)")
                         .labelsHidden()
+                        .accessibilityLabel("accessibility.stats.datepicker.day")
                 case .month:
                     HStack {
                         Menu {
@@ -80,6 +83,8 @@ struct StatsDatePickerView: View {
                                     .font(.footnote)
                             }
                         }
+                        .accessibilityLabel("Month picker")
+                        .accessibilityValue(Calendar.current.monthSymbols[viewModel.month])
                         .onChange(of: viewModel.month) { _ in
                             viewModel.updateDisplayMode()
                         }
@@ -98,16 +103,32 @@ struct StatsDatePickerView: View {
                                     .font(.footnote)
                             }
                         }
+                        .accessibilityLabel("Year picker")
+                        .accessibilityValue(String(viewModel.year))
                         .onChange(of: viewModel.year) { _ in
                             viewModel.updateDisplayMode()
                         }
                     }
                 case .year:
-                    Picker("Year", selection: $viewModel.year) {
-                        ForEach(Array((2020 ... Calendar.current.component(.year, from: Date())).reversed()), id: \.self) {
-                            Text(String(describing: $0))
+                    Menu {
+                        Picker("Year", selection: $viewModel.year) {
+                            ForEach(Array(viewModel.yearRange.reversed()), id: \.self) {
+                                Text(String(describing: $0))
+                            }
                         }
-                    }.pickerStyle(.menu)
+                    } label: {
+                        NonFunctionalButton {
+                            Text("\(String(describing: viewModel.year))")
+                                .frame(minWidth: 30)
+                            Image(systemName: "chevron.up.chevron.down")
+                                .font(.footnote)
+                        }
+                    }
+                    .accessibilityLabel("Year picker")
+                    .accessibilityValue(String(viewModel.year))
+                    .onChange(of: viewModel.year) { _ in
+                        viewModel.updateDisplayMode()
+                    }
                 case .custom:
                     customDatePickers()
                 }
@@ -152,7 +173,7 @@ struct StatsDatePickerView: View {
 
             Image(systemName: "arrow.right")
 
-            DatePicker("End", selection: $viewModel.customEndDate, in: viewModel.customStartDate...Date(), displayedComponents: .date)
+            DatePicker("End", selection: $viewModel.customEndDate, in: viewModel.customStartDate ... Date(), displayedComponents: .date)
                 .datePickerStyle(.compact)
                 .labelsHidden()
                 .id("customEnd_\(viewModel.customEndDate)")
