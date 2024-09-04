@@ -77,6 +77,32 @@ class StatsDatePickerViewModel: ObservableObject {
         updateQuickNavigationButtons(displayMode.wrappedValue)
     }
 
+    func increaseAccessibilityLabel() -> String {
+        switch range {
+        case .day:
+            "Next day" // TODO: Localise
+        case .month:
+            "Next month" // TODO: Localise
+        case .year:
+            "Next year" // TODO: Localise
+        case .custom:
+            ""
+        }
+    }
+
+    func decreaseAccessibilityLabel() -> String {
+        switch range {
+        case .day:
+            "Previous day" // TODO: Localise
+        case .month:
+            "Previous month" // TODO: Localise
+        case .year:
+            "Previous year" // TODO: Localise
+        case .custom:
+            ""
+        }
+    }
+
     func increase() {
         switch range {
         case .day:

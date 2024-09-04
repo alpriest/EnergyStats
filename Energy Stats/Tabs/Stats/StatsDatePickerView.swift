@@ -152,6 +152,7 @@ struct StatsDatePickerView: View {
         }
         .buttonStyle(.bordered)
         .disabled(!viewModel.canDecrease)
+        .accessibilityLabel(viewModel.decreaseAccessibilityLabel())
 
         Button {
             viewModel.increase()
@@ -161,6 +162,7 @@ struct StatsDatePickerView: View {
         }
         .buttonStyle(.bordered)
         .disabled(!viewModel.canIncrease)
+        .accessibilityLabel(viewModel.increaseAccessibilityLabel())
     }
 
     @ViewBuilder
