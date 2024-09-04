@@ -8,6 +8,31 @@
 import Energy_Stats_Core
 import SwiftUI
 
+struct AStack<T: View>: View {
+    @Environment(\.dynamicTypeSize) var dynamicTypeSize
+    private let content: T
+    private let horizontalAlignment: HorizontalAlignment
+    private let verticalAlignment: VerticalAlignment
+
+    init(horizontalAlignment: HorizontalAlignment = .leading, verticalAlignment: VerticalAlignment = .top, @ViewBuilder _ content: () -> T) {
+        self.horizontalAlignment = horizontalAlignment
+        self.verticalAlignment = verticalAlignment
+        self.content = content()
+    }
+
+    var body: some View {
+        if dynamicTypeSize.isAccessibilitySize {
+            VStack(alignment: horizontalAlignment) {
+                content
+            }
+        } else {
+            HStack(alignment: verticalAlignment) {
+                content
+            }
+        }
+    }
+}
+
 struct StatsGraphVariableToggles: View {
     @ObservedObject var viewModel: StatsTabViewModel
     @Binding var selectedDate: Date?
@@ -31,30 +56,36 @@ struct StatsGraphVariableToggles: View {
     @ViewBuilder
     private func row(_ variable: StatsGraphVariable) -> some View {
         Button(action: { viewModel.toggle(visibilityOf: variable) }) {
-            HStack(alignment: .top) {
-                Circle()
-                    .foregroundColor(variable.type.colour)
-                    .frame(width: 15, height: 15)
-                    .padding(.top, 3)
+            AStack {
+                VStack(alignment: .leading, spacing: 2) {
+                    HStack {
+                        Circle()
+                            .foregroundColor(variable.type.colour)
+                            .frame(width: 15, height: 15)
+                            .padding(.top, 3)
 
-                VStack(alignment: .leading) {
-                    Text(variable.type.title)
+                        Text(variable.type.title)
+                    }
 
                     if variable.type.title != variable.type.description, appSettings.showGraphValueDescriptions {
                         Text(variable.type.description)
-                            .font(.system(size: 10))
+                            .font(.caption)
                             .foregroundColor(Color("text_dimmed"))
+                            .padding(.leading, 23)
                     }
                 }
+                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
 
                 Spacer()
 
-                if let valuesAtTime, let graphValue = valuesAtTime.values.first(where: { $0.type == variable.type }) {
-                    Text(graphValue.formatted(appSettings.decimalPlaces))
-                        .monospacedDigit()
-                } else {
-                    OptionalView(viewModel.total(of: variable.type)) {
-                        EnergyText(amount: $0, appSettings: appSettings, type: .default)
+                VStack {
+                    if let valuesAtTime, let graphValue = valuesAtTime.values.first(where: { $0.type == variable.type }) {
+                        Text(graphValue.formatted(appSettings.decimalPlaces))
+                            .monospacedDigit()
+                    } else {
+                        OptionalView(viewModel.total(of: variable.type)) {
+                            EnergyText(amount: $0, appSettings: appSettings, type: .default)
+                        }
                     }
                 }
             }
