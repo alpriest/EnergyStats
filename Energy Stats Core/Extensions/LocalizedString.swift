@@ -67,6 +67,10 @@ public struct LocalizedString {
             case totalSolarGenerated = "accessibility.totalSolarGenerated"
             case totalImportedToday = "accessibility.totalImportedToday"
             case totalExportedToday = "accessibility.totalExportedToday"
+            case totalExportIncomeToday = "accessibility.totalExportIncomeToday"
+            case totalGeneratedIncomeToday = "accessibility.totalGeneratedIncomeToday"
+            case totalAvoidedCostsToday = "accessibility.totalAvoidedCostsToday"
+            case totalIncomeToday = "accessibility.totalIncomeToday"
         }
     }
 }
@@ -80,7 +84,7 @@ public extension String {
         self = String(format: NSLocalizedString(key.rawValue, bundle: bundle, comment: ""), arguments: arguments)
     }
 
-    init(accessibilityKey key: LocalizedString.Key.Accessibility) {
-        self = NSLocalizedString(key.rawValue, comment: "")
+    init(accessibilityKey key: LocalizedString.Key.Accessibility, bundle: Bundle = .main) {
+        self = NSLocalizedString(key.rawValue, bundle: bundle, comment: "")
     }
 }

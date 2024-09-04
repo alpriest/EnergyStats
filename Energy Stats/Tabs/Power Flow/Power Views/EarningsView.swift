@@ -21,6 +21,8 @@ struct EarningsView: View {
                     label: String(key: amount.shortTitle),
                     alignment: .center
                 )
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel(amount.accessibilityLabel(appSettings.currencySymbol))
             }
         }
     }

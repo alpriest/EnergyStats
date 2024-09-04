@@ -283,7 +283,6 @@
 		41EE90A52BDEB4D3006412FB /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41EE90A42BDEB4D3006412FB /* WidgetKit.framework */; };
 		41EE90AB2BDEB6FB006412FB /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 418547162A3A1530000128C7 /* WidgetKit.framework */; };
 		41EE90AC2BDEB6FB006412FB /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 418547182A3A1530000128C7 /* SwiftUI.framework */; };
-		41EE90B12BDEB6FB006412FB /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE90B02BDEB6FB006412FB /* AppIntent.swift */; };
 		41EE90B32BDEB6FC006412FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41EE90B22BDEB6FC006412FB /* Assets.xcassets */; };
 		41EE90B72BDEB6FC006412FB /* Energy Stats Watch WidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 41EE90AA2BDEB6FB006412FB /* Energy Stats Watch WidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		41EE90BC2BDEB702006412FB /* WatchWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE90A02BDEAC00006412FB /* WatchWidgets.swift */; };
@@ -747,7 +746,6 @@
 		41EE90A02BDEAC00006412FB /* WatchWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchWidgets.swift; sourceTree = "<group>"; };
 		41EE90A42BDEB4D3006412FB /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS10.4.sdk/System/Library/Frameworks/WidgetKit.framework; sourceTree = DEVELOPER_DIR; };
 		41EE90AA2BDEB6FB006412FB /* Energy Stats Watch WidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Energy Stats Watch WidgetsExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		41EE90B02BDEB6FB006412FB /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
 		41EE90B22BDEB6FC006412FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		41EE90B42BDEB6FC006412FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41F5A3632C1B563D00CA1120 /* Shimmering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shimmering.swift; sourceTree = "<group>"; };
@@ -1490,7 +1488,6 @@
 				41A715902BDFCA6F00560628 /* Energy Stats Watch WidgetsExtension.entitlements */,
 				41EE909E2BDEAB9A006412FB /* WidgetBundle.swift */,
 				41EE90A02BDEAC00006412FB /* WatchWidgets.swift */,
-				41EE90B02BDEB6FB006412FB /* AppIntent.swift */,
 				412887482BE7CBCC007E9532 /* HomeEnergyStateManagerConfigManager.swift */,
 				41EE90B22BDEB6FC006412FB /* Assets.xcassets */,
 				41EE90B42BDEB6FC006412FB /* Info.plist */,
@@ -2146,7 +2143,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				41EE90BC2BDEB702006412FB /* WatchWidgets.swift in Sources */,
-				41EE90B12BDEB6FB006412FB /* AppIntent.swift in Sources */,
 				41EE90BD2BDEB704006412FB /* WidgetBundle.swift in Sources */,
 				4128874A2BE7CCC0007E9532 /* HomeEnergyStateManagerConfigManager.swift in Sources */,
 			);

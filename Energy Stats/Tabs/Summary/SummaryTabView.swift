@@ -88,7 +88,7 @@ struct SummaryTabView: View {
     @ViewBuilder
     private func moneySummaryRow(title: LocalizedStringKey, amount: Double?) -> some View {
         summaryRow(title: title, amount: amount) {
-            Text(FinanceAmount(title: .total, amount: $0).formattedAmount(viewModel.currencySymbol))
+            Text(FinanceAmount(title: .total, accessibilityKey: .totalIncomeToday, amount: $0).formattedAmount(viewModel.currencySymbol))
                 .font(.title2)
                 .monospacedDigit()
         }

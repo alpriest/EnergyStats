@@ -5,7 +5,6 @@
 //  Created by Alistair Priest on 07/08/2023.
 //
 
-import AppIntents
 import Foundation
 import SwiftUI
 
@@ -38,15 +37,3 @@ public enum WorkMode: String, CaseIterable, Codable, RawRepresentable {
         WorkMode.allCases.filter { $0.title != "" }
     }
 }
-
-// extension WorkMode: AppEnum, CaseDisplayRepresentable {
-//    public static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Work mode")
-//
-//    public static var caseDisplayRepresentations: [Self: DisplayRepresentation] = [
-//        .selfUse: DisplayRepresentation(title: "Self Use"),
-//        .feedInFirst: DisplayRepresentation(title: "Feed In First"),
-//        .backup: DisplayRepresentation(title: "Backup"),
-//        .powerStation: DisplayRepresentation(title: "Power Station"),
-//        .peakShaving: DisplayRepresentation(title: "Peak Shaving")
-//    ]
-// }

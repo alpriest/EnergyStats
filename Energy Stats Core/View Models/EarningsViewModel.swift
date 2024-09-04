@@ -10,20 +10,26 @@ import Foundation
 public struct FinanceAmount: Hashable, Identifiable {
     public let shortTitle: LocalizedString.Key
     public let longTitle: LocalizedString.Key
+    public let accessibilityKey: LocalizedString.Key.Accessibility
     public let amount: Double
 
-    public init(shortTitle: LocalizedString.Key, longTitle: LocalizedString.Key, amount: Double) {
+    public init(shortTitle: LocalizedString.Key, longTitle: LocalizedString.Key, accessibilityKey: LocalizedString.Key.Accessibility, amount: Double) {
         self.shortTitle = shortTitle
         self.longTitle = longTitle
+        self.accessibilityKey = accessibilityKey
         self.amount = amount
     }
 
-    public init(title: LocalizedString.Key, amount: Double) {
-        self.init(shortTitle: title, longTitle: title, amount: amount)
+    public init(title: LocalizedString.Key, accessibilityKey: LocalizedString.Key.Accessibility, amount: Double) {
+        self.init(shortTitle: title, longTitle: title, accessibilityKey: accessibilityKey, amount: amount)
     }
 
     public func formattedAmount(_ currencySymbol: String) -> String {
         amount.roundedToString(decimalPlaces: 2, currencySymbol: currencySymbol)
+    }
+
+    public func accessibilityLabel(_ currencySymbol: String) -> String {
+        String(format: String(accessibilityKey: accessibilityKey), arguments: [formattedAmount(currencySymbol)])
     }
 
     public var id: String { shortTitle.rawValue }
@@ -45,6 +51,7 @@ public struct EnergyStatsFinancialModel {
         exportIncome = FinanceAmount(
             shortTitle: config.earningsModel == .exported ? .exportedIncomeShortTitle : .generatedIncomeShortTitle,
             longTitle: config.earningsModel == .exported ? .exportedIncomeLongTitle : .generationIncomeLongTitle,
+            accessibilityKey: config.earningsModel == .exported ? .totalExportIncomeToday : .totalGeneratedIncomeToday,
             amount: amountForIncomeCalculation * config.feedInUnitPrice
         )
         exportBreakdown = CalculationBreakdown(
@@ -52,13 +59,21 @@ public struct EnergyStatsFinancialModel {
             calculation: { dp in "\(amountForIncomeCalculation.roundedToString(decimalPlaces: dp)) * \(config.feedInUnitPrice.roundedToString(decimalPlaces: dp))" }
         )
 
-        solarSaving = FinanceAmount(title: .gridImportAvoidedShortTitle, amount: (totalsViewModel.solar - totalsViewModel.gridExport) * config.gridImportUnitPrice)
+        solarSaving = FinanceAmount(
+            title: .gridImportAvoidedShortTitle,
+            accessibilityKey: .totalAvoidedCostsToday,
+            amount: (totalsViewModel.solar - totalsViewModel.gridExport) * config.gridImportUnitPrice
+        )
         solarSavingBreakdown = CalculationBreakdown(
             formula: "(solar - gridExport) * gridImportUnitPrice",
             calculation: { dp in "(\(totalsViewModel.solar.roundedToString(decimalPlaces: dp)) - \(totalsViewModel.gridExport.roundedToString(decimalPlaces: dp))) * \(config.gridImportUnitPrice.roundedToString(decimalPlaces: dp))" }
         )
 
-        total = FinanceAmount(title: .total, amount: exportIncome.amount + solarSaving.amount)
+        total = FinanceAmount(
+            title: .total,
+            accessibilityKey: .totalIncomeToday,
+            amount: exportIncome.amount + solarSaving.amount
+        )
     }
 
     public func amounts() -> [FinanceAmount] {

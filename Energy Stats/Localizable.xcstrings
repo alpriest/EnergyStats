@@ -1677,6 +1677,17 @@
         }
       }
     },
+    "accessibility.totalAvoidedCostsToday" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ avoided expenditure"
+          }
+        }
+      }
+    },
     "accessibility.totalExportedToday" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1712,6 +1723,28 @@
         }
       }
     },
+    "accessibility.totalExportIncomeToday" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ income from exporting"
+          }
+        }
+      }
+    },
+    "accessibility.totalGeneratedIncomeToday" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ income from generating"
+          }
+        }
+      }
+    },
     "accessibility.totalImportedToday" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1743,6 +1776,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Łącznie importowane dzisiaj %1$@"
+          }
+        }
+      }
+    },
+    "accessibility.totalIncomeToday" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ total"
           }
         }
       }
