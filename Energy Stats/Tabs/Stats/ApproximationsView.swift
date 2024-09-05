@@ -32,6 +32,7 @@ struct ApproximationsView: View {
                     .font(.caption2.weight(.bold))
                     .offset(x: 8, y: -8)
                     .foregroundColor(Color.white.opacity(colorScheme == .dark ? 0.8 : 1.0))
+                    .accessibilityAddTraits(.isHeader)
 
                 Spacer()
 
@@ -50,6 +51,7 @@ struct ApproximationsView: View {
                             showCalculations.toggle()
                         }
                     }
+                    .accessibilityLabel(showCalculations ? "accessibility.hideCalculations" : "accessibility.showCalculations")
             }
 
             ZStack {
@@ -61,9 +63,9 @@ struct ApproximationsView: View {
                     if let home = viewModel.homeUsage {
                         HStack {
                             Text("home_usage")
-                                .accessibilityElement(children: .ignore)
+                                .accessibilityHidden(true)
                             Spacer()
-                            EnergyText(amount: home, appSettings: appSettings, type: .selfSufficiency, decimalPlaceOverride: decimalPlaceOverride)
+                            EnergyText(amount: home, appSettings: appSettings, type: .homeUsage, decimalPlaceOverride: decimalPlaceOverride)
                         }
                     }
 
@@ -71,7 +73,7 @@ struct ApproximationsView: View {
                         VStack(spacing: 2) {
                             HStack {
                                 Text("solar_generated")
-                                    .accessibilityElement(children: .ignore)
+                                    .accessibilityHidden(true)
                                 Spacer()
                                 EnergyText(amount: totals.solar, appSettings: appSettings, type: .totalSolarGenerated, decimalPlaceOverride: decimalPlaceOverride)
                             }
@@ -86,8 +88,10 @@ struct ApproximationsView: View {
                         VStack(spacing: 2) {
                             HStack {
                                 Text(String(key: financialModel.exportIncome.longTitle))
+                                    .accessibilityHidden(true)
                                 Spacer()
                                 Text(financialModel.exportIncome.formattedAmount(appSettings.currencySymbol))
+                                    .accessibilityLabel(financialModel.exportIncome.accessibilityLabel(appSettings.currencySymbol))
                             }
                             if showCalculations {
                                 CalculationBreakdownView(breakdown: financialModel.exportBreakdown, decimalPlaces: appSettings.decimalPlaces)
@@ -97,8 +101,10 @@ struct ApproximationsView: View {
                         VStack(spacing: 2) {
                             HStack {
                                 Text("grid_import_avoided")
+                                    .accessibilityHidden(true)
                                 Spacer()
                                 Text(financialModel.solarSaving.formattedAmount(appSettings.currencySymbol))
+                                    .accessibilityLabel(financialModel.solarSaving.accessibilityLabel(appSettings.currencySymbol))
                             }
                             if showCalculations {
                                 CalculationBreakdownView(breakdown: financialModel.solarSavingBreakdown, decimalPlaces: appSettings.decimalPlaces)
@@ -107,8 +113,10 @@ struct ApproximationsView: View {
 
                         HStack {
                             Text("total_benefit")
+                                .accessibilityHidden(true)
                             Spacer()
                             Text(financialModel.total.formattedAmount(appSettings.currencySymbol))
+                                .accessibilityLabel(financialModel.total.accessibilityLabel(appSettings.currencySymbol))
                         }
                     }
                 }

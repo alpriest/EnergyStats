@@ -134,6 +134,7 @@ struct InverterView: View {
                             Image(systemName: "chevron.up.chevron.down")
                                 .font(.caption2)
                         }
+                        .foregroundStyle(Color.textNotFlowing)
 
                         if appSettings.showInverterTypeName {
                             OptionalView(viewModel.deviceType) {

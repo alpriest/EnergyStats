@@ -1503,6 +1503,17 @@
         }
       }
     },
+    "accessibility.hideCalculations" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hide calculations"
+          }
+        }
+      }
+    },
     "accessibility.homeConsumptionRate" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1608,6 +1619,94 @@
         }
       }
     },
+    "accessibility.menu" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Menu"
+          }
+        }
+      }
+    },
+    "accessibility.next.day" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next day"
+          }
+        }
+      }
+    },
+    "accessibility.next.month" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next month"
+          }
+        }
+      }
+    },
+    "accessibility.next.year" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next year"
+          }
+        }
+      }
+    },
+    "accessibility.previous.day" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Previous day"
+          }
+        }
+      }
+    },
+    "accessibility.previous.month" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Previous month"
+          }
+        }
+      }
+    },
+    "accessibility.previous.year" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Previous year"
+          }
+        }
+      }
+    },
+    "accessibility.showCalculations" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show calculations"
+          }
+        }
+      }
+    },
     "accessibility.solarGeneration" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1643,8 +1742,7 @@
         }
       }
     },
-    "accessibility.stats.datepicker.date" : {
-      "extractionState" : "manual",
+    "accessibility.stats.datepicker.day" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1653,9 +1751,6 @@
           }
         }
       }
-    },
-    "accessibility.stats.datepicker.day" : {
-
     },
     "accessibility.stats.timeperiodpicker" : {
       "extractionState" : "manual",
@@ -7337,6 +7432,9 @@
       }
     },
     "Key" : {
+      "extractionState" : "manual"
+    },
+    "Key 1" : {
       "extractionState" : "manual"
     },
     "Kilowatts" : {

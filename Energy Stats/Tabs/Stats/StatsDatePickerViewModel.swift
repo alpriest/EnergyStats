@@ -80,11 +80,11 @@ class StatsDatePickerViewModel: ObservableObject {
     func increaseAccessibilityLabel() -> String {
         switch range {
         case .day:
-            "Next day" // TODO: Localise
+            "accessibility.next.day"
         case .month:
-            "Next month" // TODO: Localise
+            "accessibility.next.month"
         case .year:
-            "Next year" // TODO: Localise
+            "accessibility.next.year"
         case .custom:
             ""
         }
@@ -93,11 +93,11 @@ class StatsDatePickerViewModel: ObservableObject {
     func decreaseAccessibilityLabel() -> String {
         switch range {
         case .day:
-            "Previous day" // TODO: Localise
+            "accessibility.previous.day"
         case .month:
-            "Previous month" // TODO: Localise
+            "accessibility.previous.month"
         case .year:
-            "Previous year" // TODO: Localise
+            "accessibility.previous.year"
         case .custom:
             ""
         }

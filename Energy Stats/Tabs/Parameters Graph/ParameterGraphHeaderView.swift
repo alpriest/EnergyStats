@@ -21,6 +21,7 @@ struct ParameterGraphHeaderView: View {
                     Text("Parameters...")
                 }
                 .buttonStyle(.bordered)
+                .accessibilityLabel("accessibility.menu")
                 .accessibilityIdentifier("variable_chooser")
 
                 Divider()
@@ -65,6 +66,7 @@ struct ParameterGraphHeaderView: View {
                 .datePickerStyle(.compact)
                 .frame(height: 23)
                 .labelsHidden()
+                .accessibilityLabel("accessibility.stats.datepicker.day")
 
             Spacer()
 
@@ -73,7 +75,9 @@ struct ParameterGraphHeaderView: View {
             } label: {
                 Image(systemName: "chevron.left")
                     .frame(minWidth: 22)
-            }.buttonStyle(.bordered)
+            }
+            .buttonStyle(.bordered)
+            .accessibilityLabel("accessibility.previous.day")
 
             Button {
                 viewModel.increase()
@@ -83,6 +87,7 @@ struct ParameterGraphHeaderView: View {
             }
             .buttonStyle(.bordered)
             .disabled(!viewModel.canIncrease)
+            .accessibilityLabel("accessibility.next.day")
         }
     }
 }
