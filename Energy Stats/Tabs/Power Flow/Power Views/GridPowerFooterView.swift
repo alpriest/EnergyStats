@@ -14,8 +14,8 @@ struct GridPowerFooterView: View {
     let appSettings: AppSettings
 
     var body: some View {
-        VStack(alignment: .center) {
-            if appSettings.showGridTotalsOnPowerFlow {
+        if appSettings.showGridTotalsOnPowerFlow {
+            VStack(alignment: .center) {
                 EnergyText(amount: importTotal, appSettings: appSettings, type: .totalImport)
                 Text("import_total")
                     .font(.caption)
@@ -28,8 +28,10 @@ struct GridPowerFooterView: View {
                     .foregroundColor(Color("text_dimmed"))
                     .accessibilityHidden(true)
             }
+            .accessibilityElement(children: .combine)
+        } else {
+            VStack {}
         }
-        .accessibilityElement(children: .combine)
     }
 }
 

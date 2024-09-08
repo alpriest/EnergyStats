@@ -71,6 +71,8 @@ public struct LocalizedString {
             case totalGeneratedIncomeToday = "accessibility.totalGeneratedIncomeToday"
             case totalAvoidedCostsToday = "accessibility.totalAvoidedCostsToday"
             case totalIncomeToday = "accessibility.totalIncomeToday"
+            case minutes = "accessibility.minutes"
+            case seconds = "accessibility.seconds"
         }
     }
 }

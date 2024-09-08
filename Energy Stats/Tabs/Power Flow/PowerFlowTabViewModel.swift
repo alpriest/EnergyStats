@@ -10,13 +10,27 @@ import Energy_Stats_Core
 import Foundation
 import UIKit
 
+struct UpdateState {
+    let text: String
+    let accessibilityText: String
+
+    init(text: String, accessibilityText: String) {
+        self.text = text
+        self.accessibilityText = accessibilityText
+    }
+
+    init(_ text: String) {
+        self.init(text: text, accessibilityText: text)
+    }
+}
+
 class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
     private let network: Networking
     private(set) var configManager: ConfigManaging
     private let userManager: UserManager
     private let timer = CountdownTimer()
     @MainActor @Published private(set) var lastUpdated = Date()
-    @MainActor @Published private(set) var updateState: String = "Updating..."
+    @MainActor @Published private(set) var updateState: UpdateState = .init("Updating...")
     @MainActor @Published private(set) var state: State = .unloaded
     private(set) var isLoading = false
     private var totalTicks = 60
@@ -58,7 +72,10 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
     func startTimer() async {
         await self.timer.start(totalTicks: self.totalTicks) { ticksRemaining in
             Task { @MainActor in
-                self.updateState = String(key: .nextUpdateIn) + " \(PreciseDateTimeFormatter.localizedString(from: ticksRemaining))"
+                self.updateState = UpdateState(
+                    text: String(key: .nextUpdateIn) + " \(PreciseDateTimeFormatter.localizedString(from: ticksRemaining))",
+                    accessibilityText: String(key: .nextUpdateIn) + " \(PreciseDateTimeFormatter.localizedAccessibilityString(from: ticksRemaining))"
+                )
             }
         } onCompletion: {
             Task {
@@ -144,7 +161,7 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
                 state = .unloaded
             }
 
-            await MainActor.run { self.updateState = "Updating..." }
+            await MainActor.run { self.updateState = UpdateState("Updating...") }
 
             let real = try await loadRealData(currentDevice, config: configManager)
             let currentViewModel = CurrentStatusCalculator(device: currentDevice,
@@ -163,8 +180,8 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
                 ct2: currentViewModel.currentCT2,
                 faults: currentViewModel.currentFaults,
                 currentDevice: currentDevice,
-                network: network,
-                configManager: configManager
+                network: self.network,
+                configManager: self.configManager
             )
 
             self.state = .loaded(.empty()) // refreshes the marching ants line speed
@@ -172,7 +189,7 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
             self.state = .loaded(summary)
             self.lastUpdated = currentViewModel.lastUpdate
             self.calculateTicks(historicalViewModel: currentViewModel)
-            self.updateState = " "
+            self.updateState = UpdateState(" ")
         } catch {
             await self.stopTimer()
             self.state = .failed(error, error.localizedDescription)
@@ -246,7 +263,7 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
 
     @objc
     func didBecomeActiveNotification() {
-        if visible {
+        if self.visible {
             Task { await self.timerFired() }
         }
     }

@@ -25,7 +25,11 @@ class UserManager: ObservableObject, HasLoadState {
         migrateKeychain()
         self.store.hasCredentials
             .receive(on: RunLoop.main)
-            .assign(to: \.isLoggedIn, on: self)
+            .sink(receiveValue: { [weak self] newValue in
+                Task { @MainActor in
+                    self?.isLoggedIn = newValue
+                }
+            })
             .store(in: &cancellables)
     }
 

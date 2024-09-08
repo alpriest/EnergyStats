@@ -130,6 +130,5 @@ struct StatsTabView: View {
 #if DEBUG
 #Preview {
     StatsTabView(configManager: ConfigManager.preview(), networking: NetworkService.preview(), appSettingsPublisher: CurrentValueSubject(.mock()))
-        .previewDevice("iPhone 13 Mini")
 }
 #endif

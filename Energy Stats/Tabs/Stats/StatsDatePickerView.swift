@@ -190,5 +190,4 @@ struct StatsDatePickerView: View {
 
     return StatsDatePickerView(viewModel: model, showingGraph: .constant(true))
         .frame(height: 200)
-        .previewDevice("iPhone SE (3rd generation)")
 }

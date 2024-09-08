@@ -10,10 +10,6 @@ import Combine
 import Energy_Stats_Core
 import SwiftUI
 
-extension SolcastForecastResponse: Identifiable {
-    public var id: Double { periodEnd.timeIntervalSince1970 }
-}
-
 struct SolarForecastView: View {
     let appSettings: AppSettings
     @ObservedObject var viewModel: SolarForecastViewModel

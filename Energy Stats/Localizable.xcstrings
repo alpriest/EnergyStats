@@ -1585,7 +1585,6 @@
       }
     },
     "accessibility.inverter" : {
-      "comment" : "Accessibility",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1626,6 +1625,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Menu"
+          }
+        }
+      }
+    },
+    "accessibility.minutes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "minutes"
           }
         }
       }
@@ -1692,6 +1702,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Previous year"
+          }
+        }
+      }
+    },
+    "accessibility.seconds" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "seconds"
           }
         }
       }
@@ -8306,6 +8327,17 @@
         }
       }
     },
+    "minutes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "minutes"
+          }
+        }
+      }
+    },
     "month" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -11165,6 +11197,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Harmonogramy nie są obsługiwane na twoim %1$@ z wersją oprogramowania układowego, którą masz %2$@."
+          }
+        }
+      }
+    },
+    "seconds" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "seconds"
           }
         }
       }

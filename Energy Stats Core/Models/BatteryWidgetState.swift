@@ -11,10 +11,10 @@ import SwiftData
 @available(iOS 17.0, *)
 @Model
 public class BatteryWidgetState {
-    public let batterySOC: Int
-    public let lastUpdated: Date
-    public let chargeStatusDescription: String?
-    public let batteryPower: Double?
+    public var batterySOC: Int
+    public var lastUpdated: Date
+    public var chargeStatusDescription: String?
+    public var batteryPower: Double?
 
     public init(batterySOC: Int, lastUpdated: Date = Date(), chargeStatusDescription: String?, batteryPower: Double) {
         self.batterySOC = batterySOC

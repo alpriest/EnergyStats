@@ -31,6 +31,10 @@ public struct SolcastForecastResponse: Codable {
     }
 }
 
+extension SolcastForecastResponse: Identifiable {
+    public var id: Double { periodEnd.timeIntervalSince1970 }
+}
+
 public struct SolcastSiteResponseList: Decodable {
     public let sites: [SolcastSiteResponse]
 }

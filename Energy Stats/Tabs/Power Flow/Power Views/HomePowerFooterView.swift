@@ -13,8 +13,8 @@ struct HomePowerFooterView: View {
     let appSettings: AppSettings
 
     var body: some View {
-        VStack(alignment: .center) {
-            if appSettings.showHomeTotalOnPowerFlow {
+        if appSettings.showHomeTotalOnPowerFlow {
+            VStack(alignment: .center) {
                 EnergyText(amount: amount, appSettings: appSettings, type: .homeUsage)
 
                 Text("Usage today")
@@ -23,8 +23,10 @@ struct HomePowerFooterView: View {
                     .foregroundColor(Color("text_dimmed"))
                     .accessibilityHidden(true)
             }
+            .accessibilityElement(children: .combine)
+        } else {
+            VStack {}
         }
-        .accessibilityElement(children: .combine)
     }
 }
 
