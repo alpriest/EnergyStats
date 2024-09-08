@@ -2133,10 +2133,34 @@
     "accessibility.totalAvoidedCostsToday" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ vermiedene Ausgaben"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%1$@ avoided expenditure"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ avoided expenditure"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ spesa evitata"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ uniknięty wydatek"
           }
         }
       }
@@ -2179,10 +2203,34 @@
     "accessibility.totalExportIncomeToday" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ einkommen aus Exporten"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%1$@ income from exporting"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ de ingresos por exportación"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ di reddito dalle esportazioni"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ dochodu z eksportu"
           }
         }
       }
@@ -2190,10 +2238,34 @@
     "accessibility.totalGeneratedIncomeToday" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ Einkommen aus Erzeugung"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%1$@ income from generating"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ de ingresos por generación"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ di reddito dalla generazione"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ dochodu z generowania"
           }
         }
       }
@@ -2236,10 +2308,34 @@
     "accessibility.totalIncomeToday" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ insgesamt"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%1$@ total"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ total"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ totale"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ łącznie"
           }
         }
       }
@@ -2777,34 +2873,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zastosuj"
-          }
-        }
-      }
-    },
-    "Approximate expenditure avoided by generating your own solar power." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ungefähre eingesparte Ausgaben durch die Erzeugung Ihrer eigenen Solarenergie."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gasto aproximado evitado al generar tu propia energía solar."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Spesa approssimativa evitata generando la tua energia solare."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Przybliżone wydatki uniknięte dzięki własnemu wytwarzaniu energii słonecznej."
           }
         }
       }
@@ -4781,6 +4849,108 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dane debugowania zostały skopiowane do twojego schowka."
+          }
+        }
+      }
+    },
+    "debug.footer_text" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haben Sie Probleme? Sehen Sie sich die neuesten Datenprotokolle oben an, um bei der Fehlerdiagnose zu helfen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Having problems? View the most recent data logs above to help diagnose issues"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Tienes problemas? Vea los registros de datos más recientes arriba para ayudar a diagnosticar problemas"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hai problemi? Visualizza i registri dei dati più recenti sopra per aiutare a diagnosticare i problemi"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Masz problemy? Wyświetl najnowsze dzienniki danych powyżej, aby pomóc w diagnozowaniu problemów"
+          }
+        }
+      }
+    },
+    "debug.navigation_title" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Netzwerkprotokolle"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Network logs"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Registros de red"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Registri di rete"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dzienniki sieciowe"
+          }
+        }
+      }
+    },
+    "debug.view_request_count" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anfrageanzahl anzeigen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View request count"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ver conteo de solicitudes"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visualizza conteggio delle richieste"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zobacz liczbę żądań"
           }
         }
       }
@@ -6904,6 +7074,40 @@
         }
       }
     },
+    "grid_import_avoided_long_description" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ungefähre eingesparte Ausgaben durch die Erzeugung Ihrer eigenen Solarenergie."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Approximate expenditure avoided by generating your own solar power."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gasto aproximado evitado al generar tu propia energía solar."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spesa approssimativa evitata generando la tua energia solare."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Przybliżone wydatki uniknięte dzięki własnemu wytwarzaniu energii słonecznej."
+          }
+        }
+      }
+    },
     "grid_import_avoided_short_title" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -7047,34 +7251,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Co pół godziny"
-          }
-        }
-      }
-    },
-    "Having problems? View the most recent data logs above to help diagnose issues" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Haben Sie Probleme? Sehen Sie sich die neuesten Datenprotokolle oben an, um bei der Fehlerdiagnose zu helfen"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "¿Tienes problemas? Vea los registros de datos más recientes arriba para ayudar a diagnosticar problemas"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hai problemi? Visualizza i registri dei dati più recenti sopra per aiutare a diagnosticare i problemi"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Masz problemy? Wyświetl najnowsze dzienniki danych powyżej, aby pomóc w diagnozowaniu problemów"
           }
         }
       }
@@ -8775,34 +8951,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zakłada, że jeśli Twoje zużycie netto jest dodatnie, to jesteś samowystarczalny.\n\nSamowystarczalność = (eksport - import + ładowanieBaterii - rozładowanieBaterii) / zużycieDom"
-          }
-        }
-      }
-    },
-    "Network logs" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Netzwerkprotokolle"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Registros de red"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Registri di rete"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dzienniki sieciowe"
           }
         }
       }
@@ -13822,34 +13970,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wersja "
-          }
-        }
-      }
-    },
-    "View request count" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Anfrageanzahl anzeigen"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ver conteo de solicitudes"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Visualizza conteggio delle richieste"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zobacz liczbę żądań"
           }
         }
       }

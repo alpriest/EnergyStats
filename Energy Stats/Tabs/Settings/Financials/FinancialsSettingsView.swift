@@ -104,7 +104,7 @@ struct FinancialsSettingsView: View {
             VStack(alignment: .leading) {
                 Text("grid_import_avoided_short_title").bold()
 
-                Text("Approximate expenditure avoided by generating your own solar power.")
+                Text("grid_import_avoided_long_description")
 
                 VStack(alignment: .center) {
                     Text("(SolarGeneration kWh - Feed-In kWh) * ImportUnitPrice").italic()

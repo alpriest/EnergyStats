@@ -121,13 +121,13 @@ struct DebugDataView: View {
                         alert = AlertContent(title: nil, message: LocalizedStringKey("\(counts.remaining) remaining out of \(counts.total) total"))
                     }
                 } label: {
-                    Text("View request count")
+                    Text("debug.view_request_count")
                 }
             }, footer: {
-                Text("Having problems? View the most recent data logs above to help diagnose issues")
+                Text("debug.footer_text")
             })
         }
-        .navigationTitle("Network logs")
+        .navigationTitle("debug.navigation_title")
         .alert(alertContent: $alert)
     }
 }
