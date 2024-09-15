@@ -332,6 +332,41 @@ private extension View {
     }
 }
 
+struct WelcomeLogoView: View {
+    var body: some View {
+        VStack {
+            VStack {
+                ZStack {
+                    HStack {
+                        Text(verbatim: "E")
+                        Spacer()
+                    }
+                    .foregroundStyle(Color("background_inverted").opacity(0.3))
+                    .font(.system(size: 430, weight: .bold))
+
+                    HStack {
+                        Spacer()
+                        Text(verbatim: "S")
+                    }
+                    .foregroundStyle(Color("background_inverted").opacity(0.3))
+                    .font(.system(size: 418, weight: .bold))
+                }
+                .frame(width: 390)
+            }
+
+            Button {
+                saveImage(self.asImage(), fileName: "es-icon.png")
+            } label: {
+                Text(String(stringLiteral: "Save Image"))
+            }
+        }
+    }
+}
+
+#Preview {
+    WelcomeLogoView()
+}
+
 #Preview {
     VStack {
         _IconView()

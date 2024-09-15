@@ -13,11 +13,12 @@ struct WelcomeView: View {
     @State private var size: CGSize = .zero
     @State private var showingAPIKey = false
     @Environment(\.verticalSizeClass) var verticalSizeClass
+    @State private var logoSize: CGRect = .zero
+    private let yellowBackground = Color.yellow.opacity(0.2)
 
     var body: some View {
         if verticalSizeClass == .regular {
             portraitView()
-                .ignoresSafeArea()
         } else {
             landscapeView()
         }
@@ -25,27 +26,11 @@ struct WelcomeView: View {
 
     func landscapeView() -> some View {
         HStack(spacing: 0) {
-            VStack {
-                ZStack {
-                    HStack {
-                        Text(verbatim: "E")
-                        Spacer()
-                    }
-                    .foregroundStyle(Color("background_inverted").opacity(0.3))
-                    .font(.system(size: 230, weight: .bold))
-
-                    HStack {
-                        Spacer()
-                        Text(verbatim: "S")
-                    }
-                    .foregroundStyle(Color("background_inverted").opacity(0.3))
-                    .font(.system(size: 218, weight: .bold))
-                }
-                .frame(maxWidth: 210, maxHeight: 240)
-            }
-            .frame(width: 300)
-            .frame(maxHeight: .infinity)
-            .background(Color.yellow.opacity(0.1))
+            portraitLogo()
+                .padding(.trailing)
+                .frame(width: 300)
+                .frame(maxHeight: .infinity)
+                .background(yellowBackground)
 
             Spacer()
 
@@ -60,71 +45,44 @@ struct WelcomeView: View {
         }
     }
 
-    func logo() -> some View {
-        VStack {
-            ZStack {
-                HStack {
-                    Text(verbatim: "E")
-                    Spacer()
-                }
-                .foregroundStyle(Color("background_inverted").opacity(0.3))
-                .font(.system(size: showingAPIKey ? 230 : 430, weight: .bold))
-
-                HStack {
-                    Spacer()
-                    Text(verbatim: "S")
-                }
-                .foregroundStyle(Color("background_inverted").opacity(0.3))
-                .font(.system(size: showingAPIKey ? 218 : 418, weight: .bold))
-            }
-            .frame(maxWidth: showingAPIKey ? 200 : 430, maxHeight: showingAPIKey ? 200 : 340)
-        }
-        .frame(maxWidth: .infinity, maxHeight: showingAPIKey ? 280 : 380)
-        .background(Color.yellow.opacity(0.1))
+    func portraitLogo() -> some View {
+        Image("es-icon")
+            .resizable()
+            .aspectRatio(contentMode: .fit)
     }
 
     func portraitView() -> some View {
-        Group {
+        VStack(spacing: 0) {
+            portraitLogo()
+                .frame(minWidth: 0, maxWidth: showingAPIKey ? 150 : .infinity)
+                .padding(.bottom)
+                .frame(minWidth: 0, maxWidth: .infinity)
+                .background(yellowBackground.ignoresSafeArea())
+
             if showingAPIKey {
                 ScrollView {
-                    VStack(spacing: 0) {
-                        Spacer()
-                            .frame(maxHeight: 44)
-                            .frame(maxWidth: .infinity)
-                            .background(Color.yellow.opacity(0.1))
-
-                        logo()
-
-                        APIKeyLoginView(userManager: userManager)
-                    }
+                    APIKeyLoginView(userManager: userManager)
                 }
             } else {
-                VStack(spacing: 0) {
-                    Spacer()
-                        .frame(maxHeight: 44)
-                        .frame(maxWidth: .infinity)
-                        .background(Color.yellow.opacity(0.1))
+                Spacer()
 
-                    logo()
+                welcomeMessage()
+                    .padding([.bottom, .horizontal])
 
-                    Spacer()
-
-                    welcomeMessage()
-                        .padding([.bottom, .horizontal])
-
-                    Spacer()
-                }
+                Spacer()
             }
         }
+        .frame(minWidth: 0, maxWidth: .infinity)
     }
 
     func welcomeMessage() -> some View {
-        VStack(alignment: .leading, spacing: 44) {
+        VStack(alignment: .center, spacing: 44) {
             Text("Energy management at your fingertips")
                 .font(.system(size: 48, weight: .bold))
+                .multilineTextAlignment(.center)
 
             Button {
-                withAnimation(.easeIn) {
+                withAnimation(.easeIn(duration: 0.2)) {
                     showingAPIKey = true
                 }
             } label: {
