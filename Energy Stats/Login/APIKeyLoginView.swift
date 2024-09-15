@@ -15,7 +15,7 @@ struct APIKeyLoginView: View {
 
     var body: some View {
         switch userManager.state {
-        case .active(let localizedStringKey):
+        case let .active(localizedStringKey):
             LoadingView(message: localizedStringKey)
         default:
             loginView()
@@ -23,43 +23,41 @@ struct APIKeyLoginView: View {
     }
 
     func loginView() -> some View {
-        ScrollView {
-            VStack {
-                Text("Enter your FoxESS Cloud API key")
-                    .multilineTextAlignment(.center)
-                    .font(.headline)
-                    .padding()
+        VStack {
+            Text("Enter your FoxESS Cloud API key")
+                .multilineTextAlignment(.center)
+                .font(.headline)
+                .padding()
 
-                SecureTextField("API Key", text: $apiKey)
-                    .font(.system(size: 13))
-                    .textFieldStyle(.roundedBorder)
-                    .autocapitalization(.none)
-                    .autocorrectionDisabled()
+            SecureTextField("API Key", text: $apiKey)
+                .font(.system(size: 13))
+                .textFieldStyle(.roundedBorder)
+                .autocapitalization(.none)
+                .autocorrectionDisabled()
 
-                if let errorMessage {
-                    HStack {
-                        AlertIconView()
-                            .frame(width: 30, height: 30)
-
-                        Text(errorMessage)
-                    }
-                    .padding(.vertical)
-                }
-
+            if let errorMessage {
                 HStack {
-                    Button("Try demo") {
-                        Task { await userManager.login(apiKey: "demo") }
-                    }
-                    .accessibilityIdentifier("try_demo")
-                    .padding()
-                    .buttonStyle(.bordered)
+                    AlertIconView()
+                        .frame(width: 30, height: 30)
 
-                    Button("Log me in") {
-                        Task { await userManager.login(apiKey: apiKey) }
-                    }
-                    .padding()
-                    .buttonStyle(.borderedProminent)
+                    Text(errorMessage)
                 }
+                .padding(.vertical)
+            }
+
+            HStack {
+                Button("Try demo") {
+                    Task { await userManager.login(apiKey: "demo") }
+                }
+                .accessibilityIdentifier("try_demo")
+                .padding()
+                .buttonStyle(.bordered)
+
+                Button("Log me in") {
+                    Task { await userManager.login(apiKey: apiKey) }
+                }
+                .padding()
+                .buttonStyle(.borderedProminent)
             }
 
             HowToObtainAPIKeyView()

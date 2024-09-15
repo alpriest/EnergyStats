@@ -629,34 +629,6 @@
         }
       }
     },
-    "1. Login at https://www.foxesscloud.com/" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "1. Anmelden unter https://www.foxesscloud.com/"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "1. Inicia sesión en https://www.foxesscloud.com/"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "1. Accedi su https://www.foxesscloud.com/"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "1. Zaloguj się na https://www.foxesscloud.com/"
-          }
-        }
-      }
-    },
     "2" : {
       "localizations" : {
         "de" : {
@@ -681,34 +653,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
-          }
-        }
-      }
-    },
-    "2. Click the person icon top-right" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "2. Klicken Sie oben rechts auf das Personensymbol"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "2. Haz clic en el icono de persona en la parte superior derecha"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "2. Clicca sull'icona della persona in alto a destra"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "2. Kliknij ikonę osoby w prawym górnym rogu"
           }
         }
       }
@@ -741,62 +685,6 @@
         }
       }
     },
-    "3. Click the User Profile menu option" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "3. Klicken Sie auf die Menüoption Benutzerprofil"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "3. Haz clic en la opción del menú Perfil de Usuario"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "3. Clicca sull'opzione del menu Profilo Utente"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "3. Kliknij opcję menu Profil Użytkownika"
-          }
-        }
-      }
-    },
-    "4. Click API management" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "4. Klicken Sie auf API-Verwaltung"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "4. Haz clic en gestión de API"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "4. Clicca su gestione API"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "4. Kliknij zarządzanie API"
-          }
-        }
-      }
-    },
     "5 mins" : {
       "localizations" : {
         "de" : {
@@ -821,34 +709,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "5 min"
-          }
-        }
-      }
-    },
-    "5. Click Generate API key" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "5. Klicken Sie auf API-Schlüssel generieren"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "5. Haz clic en Generar clave API"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "5. Clicca su Genera chiave API"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "5. Kliknij Generuj klucz API"
           }
         }
       }
@@ -881,62 +741,6 @@
         }
       }
     },
-    "6. Copy the API key (make a note of it securely)" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "6. Kopieren Sie den API-Schlüssel (notieren Sie ihn sicher)"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "6. Copia la clave API (anótala de forma segura)"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "6. Copia la chiave API (annotala in modo sicuro)"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "6. Skopiuj klucz API (zapisz go bezpiecznie)"
-          }
-        }
-      }
-    },
-    "7. Paste the API key above" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "7. Fügen Sie den API-Schlüssel oben ein"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "7. Pega la clave API arriba"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "7. Incolla la chiave API sopra"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "7. Wklej klucz API powyżej"
-          }
-        }
-      }
-    },
     "08:00" : {
       "localizations" : {
         "de" : {
@@ -961,34 +765,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
-          }
-        }
-      }
-    },
-    "8. Your API key will be 36 characters long and look something like " : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "8. Ihr API-Schlüssel wird 36 Zeichen lang sein und so aussehen wie"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "8. Tu clave API tendrá 36 caracteres de longitud y se parecerá a algo así como"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "8. La tua chiave API sarà lunga 36 caratteri e assomiglierà a qualcosa del tipo"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "8. Twój klucz API będzie miał 36 znaków długości i będzie wyglądał mniej więcej tak"
           }
         }
       }
@@ -1078,34 +854,6 @@
       }
     },
     "24:00" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        }
-      }
-    },
-    "abcde123-4567-8901-2345-6789abcdef01" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2758,31 +2506,31 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Diese Änderung des API-Schlüssels wurde Anfang 2024 von FoxESS gefordert. Die FoxESS-Website funktioniert auf mobilen Geräten nicht gut. Bitte kontaktieren Sie Energy Stats nicht bei Problemen mit der FoxESS-Website, nur FoxESS kann Ihnen bei Problemen mit ihrer Seite helfen. service.uk@fox-ess.com"
+            "value" : "Bitte beachten. Die FoxESS-Website funktioniert nicht gut auf mobilen Geräten. Bitte wenden Sie sich an service.uk@fox-ess.com, wenn Sie Probleme beim Erhalten Ihres API-Schlüssels haben."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "This change to API key was required by FoxESS in early 2024. The FoxESS site does not function well on mobile devices. Please do not contact Energy Stats with issues about the FoxESS website, only FoxESS will be able to assist you in any issues with their site. service.uk@fox-ess.com"
+            "value" : "Please note. The FoxESS site does not function well on mobile devices. Please contact service.uk@fox-ess.com for issues obtaining your API key."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Este cambio en la clave API fue requerido por FoxESS a principios de 2024. El sitio de FoxESS no funciona bien en dispositivos móviles. Por favor, no contacte a Energy Stats con problemas sobre el sitio web de FoxESS, solo FoxESS podrá ayudarlo con cualquier problema en su sitio. service.uk@fox-ess.com"
+            "value" : "Tenga en cuenta. El sitio de FoxESS no funciona bien en dispositivos móviles. Por favor, contacte con service.uk@fox-ess.com si tiene problemas para obtener su clave API."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Questa modifica alla chiave API è stata richiesta da FoxESS all'inizio del 2024. Il sito FoxESS non funziona bene sui dispositivi mobili. Si prega di non contattare Energy Stats per problemi relativi al sito web di FoxESS, solo FoxESS potrà assistervi in caso di problemi con il loro sito. service.uk@fox-ess.com"
+            "value" : "Si prega di notare. Il sito FoxESS non funziona bene sui dispositivi mobili. Si prega di contattare service.uk@fox-ess.com per problemi nel ottenere la tua chiave API."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ta zmiana klucza API była wymagana przez FoxESS na początku 2024 roku. Strona FoxESS nie działa dobrze na urządzeniach mobilnych. Prosimy nie kontaktować się z Energy Stats w sprawie problemów ze stroną internetową FoxESS, tylko FoxESS będzie w stanie pomóc Państwu w przypadku problemów z ich stroną. service.uk@fox-ess.com"
+            "value" : "Proszę zauważyć. Strona FoxESS nie działa dobrze na urządzeniach mobilnych. W przypadku problemów z uzyskaniem klucza API prosimy o kontakt pod adresem service.uk@fox-ess.com."
           }
         }
       }
@@ -3988,6 +3736,118 @@
         }
       }
     },
+    "Click API management" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Klicken Sie auf API-Verwaltung"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haz clic en gestión de API"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clicca su gestione API"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kliknij zarządzanie API"
+          }
+        }
+      }
+    },
+    "Click Generate API key" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Klicken Sie auf API-Schlüssel generieren"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haz clic en Generar clave API"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clicca su Genera chiave API"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kliknij Generuj klucz API"
+          }
+        }
+      }
+    },
+    "Click the person icon top-right" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Klicken Sie oben rechts auf das Personensymbol"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haz clic en el icono de persona en la parte superior derecha"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clicca sull'icona della persona in alto a destra"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kliknij ikonę osoby w prawym górnym rogu"
+          }
+        }
+      }
+    },
+    "Click the User Profile menu option" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Klicken Sie auf die Menüoption Benutzerprofil"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haz clic en la opción del menú Perfil de Usuario"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clicca sull'opzione del menu Profilo Utente"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kliknij opcję menu Profil Użytkownika"
+          }
+        }
+      }
+    },
     "Combine CT2 with PV power" : {
       "localizations" : {
         "de" : {
@@ -4125,6 +3985,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kopiuj dane debugowania"
+          }
+        }
+      }
+    },
+    "Copy the API key (make a note of it securely)" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kopieren Sie den API-Schlüssel (notieren Sie ihn sicher)"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copia la clave API (anótala de forma segura)"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copia la chiave API (annotala in modo sicuro)"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skopiuj klucz API (zapisz go bezpiecznie)"
           }
         }
       }
@@ -5839,6 +5727,34 @@
         }
       }
     },
+    "Energy management at your fingertips" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Energiemanagement direkt zur Hand"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gestión de energía al alcance de tu mano"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gestione dell'energia a portata di mano"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zarządzanie energią na wyciągnięcie ręki"
+          }
+        }
+      }
+    },
     "energy_stats_earnings_calculation_description" : {
       "localizations" : {
         "de" : {
@@ -6950,6 +6866,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Skontaktuj się"
+          }
+        }
+      }
+    },
+    "Get started" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loslegen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comenzar"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inizia"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rozpocznij"
           }
         }
       }
@@ -8189,6 +8133,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zaloguj mnie"
+          }
+        }
+      }
+    },
+    "Login at https://www.foxesscloud.com/" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anmelden unter https://www.foxesscloud.com/"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inicia sesión en https://www.foxesscloud.com/"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accedi su https://www.foxesscloud.com/"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zaloguj się na https://www.foxesscloud.com/"
           }
         }
       }
@@ -9468,6 +9440,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Parametry..."
+          }
+        }
+      }
+    },
+    "Paste the API key above" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fügen Sie den API-Schlüssel oben ein"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pega la clave API arriba"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Incolla la chiave API sopra"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wklej klucz API powyżej"
           }
         }
       }
@@ -14620,6 +14620,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Osiągnięto limit prędkości serwera. Proszę spróbować później."
+          }
+        }
+      }
+    },
+    "Your API key will be 36 characters long and look something like abcde123-4567-8901-2345-6789abcdef01" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ihr API-Schlüssel wird 36 Zeichen lang sein und sieht in etwa so aus: abcde123-4567-8901-2345-6789abcdef01"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu clave API tendrá 36 caracteres de longitud y se verá algo así: abcde123-4567-8901-2345-6789abcdef01"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La tua chiave API sarà lunga 36 caratteri e avrà un aspetto simile a questo: abcde123-4567-8901-2345-6789abcdef01"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Twój klucz API będzie miał 36 znaków i będzie wyglądał mniej więcej tak: abcde123-4567-8901-2345-6789abcdef01"
           }
         }
       }

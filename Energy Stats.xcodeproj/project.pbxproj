@@ -239,6 +239,7 @@
 		41CA35762AA8C52100D45734 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 41CA35752AA8C52100D45734 /* OrderedCollections */; };
 		41CB71482A3B1A2800199415 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41CB71472A3B1A2800199415 /* Assets.xcassets */; };
 		41CB714A2A3B1B6C00199415 /* StyleGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CB71492A3B1B6C00199415 /* StyleGuide.swift */; };
+		41CBDC102C96222D001B4A49 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CBDC0F2C96222A001B4A49 /* WelcomeView.swift */; };
 		41CD1F322A1414C1006B0C00 /* StatsGraphVariableToggles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CD1F312A1414C1006B0C00 /* StatsGraphVariableToggles.swift */; };
 		41CD1F342A141F81006B0C00 /* NonFunctionalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CD1F332A141F81006B0C00 /* NonFunctionalButton.swift */; };
 		41CF044C2A95006E00ADCCAD /* ExternalWebNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CF044B2A95006E00ADCCAD /* ExternalWebNavigationLink.swift */; };
@@ -697,6 +698,7 @@
 		41CA35722AA8C10900D45734 /* EarningsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarningsViewModel.swift; sourceTree = "<group>"; };
 		41CB71472A3B1A2800199415 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "Energy Stats/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
 		41CB71492A3B1B6C00199415 /* StyleGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleGuide.swift; sourceTree = "<group>"; };
+		41CBDC0F2C96222A001B4A49 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		41CD1F312A1414C1006B0C00 /* StatsGraphVariableToggles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGraphVariableToggles.swift; sourceTree = "<group>"; };
 		41CD1F332A141F81006B0C00 /* NonFunctionalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonFunctionalButton.swift; sourceTree = "<group>"; };
 		41CF044B2A95006E00ADCCAD /* ExternalWebNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWebNavigationLink.swift; sourceTree = "<group>"; };
@@ -1166,6 +1168,7 @@
 		4141B1FE28D86C5B00B60157 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				41CBDC0F2C96222A001B4A49 /* WelcomeView.swift */,
 				4141B1FF28D86C7200B60157 /* UserManager.swift */,
 				4163CA7B2B4DE46D00FDA232 /* APIKeyLoginView.swift */,
 				41C1243D2B738B1400B575F2 /* HowToObtainAPIKeyView.swift */,
@@ -2008,6 +2011,7 @@
 				410484C82AD49D95007F68C0 /* CT2-icon.swift in Sources */,
 				416318BE29DDD80E00C2C285 /* View+Copy.swift in Sources */,
 				418C6E952AFAC3BF000DE35F /* SummaryTabView.swift in Sources */,
+				41CBDC102C96222D001B4A49 /* WelcomeView.swift in Sources */,
 				411542E92BED30D200BDE56D /* ScheduleTemplateListView.swift in Sources */,
 				4107446728CA22B3006D5D7D /* InverterViewModel.swift in Sources */,
 				410FC8862AB98F020004CBC2 /* ParameterVariableGroupEditorView.swift in Sources */,
@@ -2391,7 +2395,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.49;
+				MARKETING_VERSION = 2.50;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2450,7 +2454,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.49;
+				MARKETING_VERSION = 2.50;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

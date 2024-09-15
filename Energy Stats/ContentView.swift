@@ -28,7 +28,7 @@ struct ContentView: View {
             }
             .task { await network.fetchErrorMessages() }
         } else {
-            APIKeyLoginView(userManager: userManager)
+            WelcomeView(userManager: userManager)
         }
     }
 }
