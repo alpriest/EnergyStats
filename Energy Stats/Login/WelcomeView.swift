@@ -55,7 +55,7 @@ struct WelcomeView: View {
         VStack(spacing: 0) {
             portraitLogo()
                 .frame(minWidth: 0, maxWidth: showingAPIKey ? 150 : .infinity)
-                .padding(.bottom)
+                .padding(.bottom, showingAPIKey ? 12 : 0)
                 .frame(minWidth: 0, maxWidth: .infinity)
                 .background(yellowBackground.ignoresSafeArea())
 
