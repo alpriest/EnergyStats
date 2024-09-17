@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct HowToObtainAPIKeyView: View {
+    @State private var showing = false
+
     var body: some View {
         VStack(alignment: .leading) {
             Text("To get your API key:")
@@ -20,16 +22,31 @@ struct HowToObtainAPIKeyView: View {
             step(5, text: "Click Generate API key")
             step(6, text: "Copy the API key (make a note of it securely)")
             step(7, text: "Paste the API key above")
-            step(8, text: "Your API key will be 36 characters long and look something like abcde123-4567-8901-2345-6789abcdef01")
 
-            Text("api_key_change_reason_2")
-                .font(.caption2)
-                .padding(.top)
+            Button {
+                withAnimation {
+                    showing.toggle()
+                }
+            } label: {
+                Text("What is my API key?")
+            }
+            .buttonStyle(.bordered)
+            .padding(.top)
+            .frame(minWidth: 0, maxWidth: .infinity)
 
-            Text("api_key_change_reason")
-                .font(.caption2)
-                .padding(.top)
+            if showing {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("what_is_api_key_1")
+                    Text("what_is_api_key_2")
+                    Text("what_is_api_key_3")
+                    Text("what_is_api_key_4")
+                    Text("what_is_api_key_5")
+                }
+                .animation(.easeIn, value: showing)
+            }
         }
+        .frame(minWidth: 0, maxWidth: .infinity)
+        .padding(.horizontal)
     }
 
     func step(_ count: Int, text: LocalizedStringKey) -> some View {
@@ -50,5 +67,10 @@ struct HowToObtainAPIKeyView: View {
 }
 
 #Preview {
-    HowToObtainAPIKeyView()
+    ScrollView {
+        VStack {
+            HowToObtainAPIKeyView()
+            Spacer()
+        }
+    }
 }

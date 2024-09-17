@@ -59,7 +59,7 @@ struct _DarkIconView: View {
 
                     sunOuterRing(outerWidthPoint: widthPoint)
 
-                    sunInnerRing(outerWidthPoint: widthPoint, color: true)
+                    sunInnerCircle(outerWidthPoint: widthPoint, fillStyle: Gradient(colors: [Color.yellow, Color.yellow, Color.orange]))
 
                     sunShimmerLine(widthPoint: widthPoint, heightPoint: heightPoint)
                 }
@@ -113,7 +113,7 @@ struct _MonochromeIconView: View {
 
                     sunOuterRing(outerWidthPoint: widthPoint)
 
-                    sunInnerRing(outerWidthPoint: widthPoint, color: false)
+                    sunInnerCircle(outerWidthPoint: widthPoint, fillStyle: Color.black)
                 }
             }
         }
@@ -168,7 +168,7 @@ struct _IconView: View {
 
                     sunOuterRing(outerWidthPoint: widthPoint)
 
-                    sunInnerRing(outerWidthPoint: widthPoint, color: true)
+                    sunInnerCircle(outerWidthPoint: widthPoint, fillStyle: Gradient(colors: [Color.yellow, Color.yellow, Color.orange]))
 
                     sunShimmerLine(widthPoint: widthPoint, heightPoint: heightPoint)
                 }
@@ -211,15 +211,10 @@ private func sunShimmerLine(widthPoint: CGFloat, heightPoint: CGFloat) -> some V
         }
 }
 
-private func sunInnerRing(outerWidthPoint: CGFloat, color: Bool) -> some View {
+private func sunInnerCircle<S>(outerWidthPoint: CGFloat, fillStyle: S) -> some View where S: ShapeStyle {
     Group {
-        if color {
-            Circle()
-                .fill(Gradient(colors: [Color.yellow, Color.yellow, Color.orange]))
-        } else {
-            Circle()
-                .fill()
-        }
+        Circle()
+            .fill(fillStyle)
     }
     .frame(width: outerWidthPoint * 40)
     .rotationEffect(Angle(degrees: 280))
@@ -364,13 +359,11 @@ struct WelcomeLogoView: View {
 }
 
 #Preview {
-    WelcomeLogoView()
-}
-
-#Preview {
-    VStack {
-        _IconView()
-        _DarkIconView()
-        _MonochromeIconView()
+    ScrollView {
+        VStack {
+            //        _IconView()
+            _DarkIconView()
+            //        _MonochromeIconView()
+        }
     }
 }

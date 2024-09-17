@@ -2501,74 +2501,6 @@
         }
       }
     },
-    "api_key_change_reason" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bitte beachten. Die FoxESS-Website funktioniert nicht gut auf mobilen Geräten. Bitte wenden Sie sich an service.uk@fox-ess.com, wenn Sie Probleme beim Erhalten Ihres API-Schlüssels haben."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please note. The FoxESS site does not function well on mobile devices. Please contact service.uk@fox-ess.com for issues obtaining your API key."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tenga en cuenta. El sitio de FoxESS no funciona bien en dispositivos móviles. Por favor, contacte con service.uk@fox-ess.com si tiene problemas para obtener su clave API."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Si prega di notare. Il sito FoxESS non funziona bene sui dispositivi mobili. Si prega di contattare service.uk@fox-ess.com per problemi nel ottenere la tua chiave API."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Proszę zauważyć. Strona FoxESS nie działa dobrze na urządzeniach mobilnych. W przypadku problemów z uzyskaniem klucza API prosimy o kontakt pod adresem service.uk@fox-ess.com."
-          }
-        }
-      }
-    },
-    "api_key_change_reason_2" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bitte stellen Sie sicher, dass das Systemdatum/die Systemzeit auf Ihrem Gerät auf 'automatisch' eingestellt ist, da Sie sonst möglicherweise nicht mit Ihrem API-Schlüssel anmelden können."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please ensure the system date/time on your device is set to 'automatic' otherwise you may be unable to login with your API key."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Por favor, asegúrese de que la fecha/hora del sistema en su dispositivo esté configurada en 'automático', de lo contrario, puede que no pueda iniciar sesión con su clave API."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Assicurati che la data/l'ora del sistema sul tuo dispositivo sia impostata su 'automatico', altrimenti potresti non essere in grado di accedere con la tua chiave API."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Upewnij się, że data/czas systemu na Twoim urządzeniu jest ustawiona na 'automatyczny', w przeciwnym razie możesz nie być w stanie zalogować się za pomocą klucza API."
-          }
-        }
-      }
-    },
     "App Version %@ is available" : {
       "localizations" : {
         "de" : {
@@ -14114,6 +14046,64 @@
         }
       }
     },
+    "What is my API key?" : {
+
+    },
+    "what_is_api_key_1" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An API key is like a single additional password for your account that you can give to non-Fox apps (like Energy Stats!) which they can use to access your account."
+          }
+        }
+      }
+    },
+    "what_is_api_key_2" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If you want to stop apps from accessing your account you can regenerate your API key. Anything using the old key will immediately be denied access."
+          }
+        }
+      }
+    },
+    "what_is_api_key_3" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your API key will be 36 characters long and look something like abcde123-4567-8901-2345-6789abcdef01."
+          }
+        }
+      }
+    },
+    "what_is_api_key_4" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please ensure the system date/time on your phone is set to 'automatic' otherwise you may be unable to login with your API key."
+          }
+        }
+      }
+    },
+    "what_is_api_key_5" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The FoxESS website may have issues on mobile devices. If you experience any problems retrieving your API key, please reach out to service.uk@fox-ess.com for assistance."
+          }
+        }
+      }
+    },
     "What's changed?" : {
       "localizations" : {
         "de" : {
@@ -14625,6 +14615,7 @@
       }
     },
     "Your API key will be 36 characters long and look something like abcde123-4567-8901-2345-6789abcdef01" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
