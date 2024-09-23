@@ -122,32 +122,32 @@ struct LoadedPowerFlowView: View {
                     .padding(.horizontal, horizontalPadding)
 
                     // Totals
-//                    HStack(alignment: .top) {
-//                        if viewModel.hasBattery || viewModel.hasBatteryError {
-//                            BatteryPowerFooterView(viewModel: BatteryPowerViewModel(configManager: configManager,
-//                                                                                    batteryStateOfCharge: viewModel.batteryStateOfCharge,
-//                                                                                    batteryChargekWH: viewModel.battery,
-//                                                                                    temperature: viewModel.batteryTemperature,
-//                                                                                    batteryResidual: viewModel.batteryResidual,
-//                                                                                    error: viewModel.batteryError),
-//                                                   appSettings: appSettings)
-//                                .frame(width: bottomColumnWidth)
-//
-//                            Spacer().frame(width: horizontalPadding)
-//                        }
-//
-//                        HomePowerFooterView(amount: viewModel.homeTotal, appSettings: appSettings)
-//                            .frame(width: bottomColumnWidth)
-//
-//                        Spacer().frame(width: horizontalPadding)
-//
-//                        GridPowerFooterView(importTotal: viewModel.gridImportTotal,
-//                                            exportTotal: viewModel.gridExportTotal,
-//                                            appSettings: appSettings)
-//                            .frame(width: bottomColumnWidth)
-//                    }
-//                    .padding(.bottom, 16)
-//                    .padding(.horizontal, horizontalPadding)
+                    HStack(alignment: .top) {
+                        if viewModel.hasBattery || viewModel.hasBatteryError {
+                            BatteryPowerFooterView(viewModel: BatteryPowerViewModel(configManager: configManager,
+                                                                                    batteryStateOfCharge: viewModel.batteryStateOfCharge,
+                                                                                    batteryChargekWH: viewModel.battery,
+                                                                                    temperature: viewModel.batteryTemperature,
+                                                                                    batteryResidual: viewModel.batteryResidual,
+                                                                                    error: viewModel.batteryError),
+                                                   appSettings: appSettings)
+                                .frame(width: bottomColumnWidth)
+
+                            Spacer().frame(width: horizontalPadding)
+                        }
+
+                        HomePowerFooterView(amount: viewModel.homeTotal, appSettings: appSettings)
+                            .frame(width: bottomColumnWidth)
+
+                        Spacer().frame(width: horizontalPadding)
+
+                        GridPowerFooterView(importTotal: viewModel.gridImportTotal,
+                                            exportTotal: viewModel.gridExportTotal,
+                                            appSettings: appSettings)
+                            .frame(width: bottomColumnWidth)
+                    }
+                    .padding(.bottom, 16)
+                    .padding(.horizontal, horizontalPadding)
                 }
 
             }.background(GeometryReader { reader in
@@ -172,7 +172,8 @@ struct LoadedPowerFlowView: View {
 
     private var width: Double {
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let window = windowScene.windows.first {
+           let window = windowScene.windows.first
+        {
             return window.frame.size.width
         } else {
             return UIScreen.main.bounds.width
