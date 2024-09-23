@@ -42,7 +42,6 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "currencySymbol")
         UserDefaults.shared.removeObject(forKey: "shouldCombineCT2WithPVPower")
         UserDefaults.shared.removeObject(forKey: "selectedParameterGraphVariables")
-        UserDefaults.shared.removeObject(forKey: "deviceBatteryOverrides")
         UserDefaults.shared.removeObject(forKey: "solarDefinitions")
         UserDefaults.shared.removeObject(forKey: "parameterGroups")
         UserDefaults.shared.removeObject(forKey: "solcastSettings")
@@ -64,6 +63,7 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "devices")
         UserDefaults.shared.removeObject(forKey: "selectedDeviceSN")
         UserDefaults.shared.removeObject(forKey: "powerStationDetail")
+        UserDefaults.shared.removeObject(forKey: "deviceBatteryOverrides")
         UserDefaults.shared.synchronize()
     }
 

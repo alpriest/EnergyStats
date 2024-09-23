@@ -116,9 +116,9 @@ public extension Double? {
     var tintColor: Color {
         guard let self else { return Color.primary }
 
-        return if self < 0 {
+        return if self < -0.02 {
             .linesNegative
-        } else if self > 0 {
+        } else if self > 0.02 {
             .linesPositive
         } else {
             .iconDisabled

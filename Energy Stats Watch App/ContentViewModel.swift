@@ -16,6 +16,7 @@ struct ContentData {
     let grid: Double?
     let battery: Double?
     let lastUpdated: Date
+    let totalExport: Double?
 }
 
 @Observable
@@ -78,6 +79,8 @@ class ContentViewModel {
             let batteryViewModel = reals.makeBatteryViewModel()
             let batterySOC = reals.datas.SoC() / 100.0
 
+            let totals = await loadTotals(device)
+
             withAnimation {
                 self.state = ContentData(
                     batterySOC: batterySOC,
@@ -85,7 +88,8 @@ class ContentViewModel {
                     house: calculator.currentHomeConsumption,
                     grid: calculator.currentGrid,
                     battery: batteryViewModel.chargePower,
-                    lastUpdated: Date.now
+                    lastUpdated: Date.now,
+                    totalExport: totals?.gridExport
                 )
             }
 
@@ -112,6 +116,21 @@ class ContentViewModel {
             residual: real.datas.currentDouble(for: "ResidualEnergy") * 10.0,
             temperature: real.datas.currentDouble(for: "batTemperature")
         )
+    }
+
+    private func loadTotals(_ device: Device) async -> TotalsViewModel? {
+        guard config.showGridTotalsOnPowerFlow else { return nil }
+
+        return try? TotalsViewModel(reports: await loadReportData(device))
+    }
+
+    private func loadReportData(_ currentDevice: Device) async throws -> [OpenReportResponse] {
+        var reportVariables = [ReportVariable.feedIn]
+
+        return try await network.fetchReport(deviceSN: currentDevice.deviceSN,
+                                             variables: reportVariables,
+                                             queryDate: .now(),
+                                             reportType: .month)
     }
 }
 

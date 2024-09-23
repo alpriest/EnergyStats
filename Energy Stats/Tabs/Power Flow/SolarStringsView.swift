@@ -26,8 +26,8 @@ struct SolarStringsView: View {
     let appSettings: AppSettings
 
     var body: some View {
-        VStack(alignment: .leading) {
-            if appSettings.powerFlowStrings.enabled, viewModel.solar.isFlowing() {
+        if appSettings.powerFlowStrings.enabled, viewModel.solar.isFlowing(), viewModel.solarStrings.count > 0 {
+            VStack(alignment: .leading) {
                 ForEach(viewModel.solarStrings) { pvString in
                     HStack {
                         Text(pvString.displayName(settings: appSettings.powerFlowStrings))
@@ -42,10 +42,10 @@ struct SolarStringsView: View {
                 }
                 .foregroundStyle(Color.textNotFlowing)
             }
+            .font(.caption)
+            .padding(2)
+            .background(Color.linesNotFlowing)
         }
-        .padding(2)
-        .background(Color.linesNotFlowing)
-        .font(.caption)
     }
 }
 

@@ -146,6 +146,7 @@ struct InverterView: View {
                 }
                 .buttonStyle(.bordered)
                 .padding(.top, 5)
+                .background(Color.background)
             } else {
                 VStack {
                     if appSettings.showInverterStationName {
@@ -163,9 +164,11 @@ struct InverterView: View {
                     }
                 }
                 .padding(2)
+                .if(appSettings.showInverterStationName || appSettings.showInverterTypeName) {
+                    $0.background(Color.background)
+                }
             }
         }
-        .background(Color.background)
     }
 }
 

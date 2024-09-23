@@ -19,14 +19,20 @@ struct ContentView: View {
 
     var body: some View {
         if userManager.isLoggedIn {
-            ZStack {
-                TabbedView(networking: network, userManager: userManager, configManager: configManager, solarForecastProvider: solarForecastProvider, templateStore: templateStore)
-
-                if alertManager.isShowingAlert {
-                    SlowServerMessageView()
+            Group {
+#if targetEnvironment(macCatalyst)
+                LeftTabbedView(networking: network, userManager: userManager, configManager: configManager, solarForecastProvider: solarForecastProvider, templateStore: templateStore)
+#else
+                ZStack {
+                    TabbedView(networking: network, userManager: userManager, configManager: configManager, solarForecastProvider: solarForecastProvider, templateStore: templateStore)
+                    if alertManager.isShowingAlert {
+                        SlowServerMessageView()
+                    }
                 }
+#endif
             }
             .task { await network.fetchErrorMessages() }
+
         } else {
             WelcomeView(userManager: userManager)
         }

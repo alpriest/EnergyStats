@@ -36,7 +36,7 @@ struct ContentView: View {
                 GridRow(alignment: .top) {
                     BatteryPowerView(batterySOC: viewModel.state?.batterySOC, battery: viewModel.state?.battery)
                     Spacer(minLength: 15)
-                    GridPowerView(value: viewModel.state?.grid)
+                    GridPowerView(value: viewModel.state?.grid, totalExport: viewModel.state?.totalExport)
                 }
             }.padding(.vertical)
 

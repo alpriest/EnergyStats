@@ -10,6 +10,7 @@ import SwiftUI
 
 struct GridPowerView: View {
     let value: Double?
+    let totalExport: Double?
 
     var body: some View {
         return VStack(alignment: .center) {
@@ -25,10 +26,14 @@ struct GridPowerView: View {
                         .redacted(reason: .placeholder)
                 }
             }
+
+            if let totalExport {
+                Text(totalExport.kWh(2))
+            }
         }
     }
 }
 
 #Preview {
-    GridPowerView(value: 2.0)
+    GridPowerView(value: 2.0, totalExport: 3.4)
 }

@@ -33,6 +33,9 @@ class WatchConfigManager: WatchConfigManaging {
 
     @UserDefaultsStoredBool(key: "showUsableBatteryOnly", defaultValue: false)
     var showUsableBatteryOnly: Bool
+
+    @UserDefaultsStoredBool(key: "showGridTotalsOnPowerFlow", defaultValue: false)
+    var showGridTotalsOnPowerFlow: Bool
 }
 
 class PreviewWatchConfig: WatchConfigManaging {
@@ -45,4 +48,5 @@ class PreviewWatchConfig: WatchConfigManaging {
     var powerFlowStrings: PowerFlowStringsSettings = .none
     var minSOC: Double = 0.0
     var showUsableBatteryOnly: Bool = false
+    var showGridTotalsOnPowerFlow: Bool = true
 }

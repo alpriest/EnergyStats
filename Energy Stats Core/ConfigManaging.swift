@@ -65,6 +65,7 @@ public protocol BatteryConfigManager {
     var batteryCapacityW: Int { get }
     var minSOC: Double { get }
     var showUsableBatteryOnly: Bool { get set }
+    var showGridTotalsOnPowerFlow: Bool { get set }
 
     func clearBatteryOverride(for deviceID: String)
 }
