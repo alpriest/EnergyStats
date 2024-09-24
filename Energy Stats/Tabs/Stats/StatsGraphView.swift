@@ -117,7 +117,7 @@ struct StatsGraphView: View {
             .chartOverlay { chartProxy in
                 GeometryReader { geometryProxy in
                     Rectangle().fill(.clear).contentShape(Rectangle())
-                        .gesture(DragGesture()
+                        .gesture(DragGesture(minimumDistance: 20)
                             .updating($isDetectingPress) { currentState, _, _ in
                                 let xLocation = currentState.location.x - geometryProxy[chartProxy.plotAreaFrame].origin.x
 
