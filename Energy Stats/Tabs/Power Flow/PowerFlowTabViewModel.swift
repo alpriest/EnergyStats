@@ -112,7 +112,7 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
             .drop { _ in self.latestDeviceSN == nil }
             .drop { self.latestDeviceSN == $0?.deviceSN }
             .sink { device in
-                guard device != nil else { return }
+                guard let device else { return }
 
                 Task {
                     await self.timerFired()
@@ -178,7 +178,6 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
                 grid: currentViewModel.currentGrid,
                 inverterTemperatures: currentViewModel.currentTemperatures,
                 ct2: currentViewModel.currentCT2,
-                faults: currentViewModel.currentFaults,
                 currentDevice: currentDevice,
                 network: self.network,
                 configManager: self.configManager
@@ -229,8 +228,7 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
             "SoC_1",
             "batTemperature",
             "ResidualEnergy",
-            "epsPower",
-            "currentFault"
+            "epsPower"
         ]
 
         if config.powerFlowStrings.enabled {

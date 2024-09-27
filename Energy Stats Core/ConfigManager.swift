@@ -47,32 +47,8 @@ public class ConfigManager: ConfigManaging {
             throw NoDeviceFoundError()
         }
 
-        let newDevices = await deviceList.asyncMap { device in
-            let deviceBattery: Device.Battery?
-
-            if device.hasBattery {
-                do {
-                    let batteryVariables = try await networking.fetchRealData(deviceSN: device.deviceSN, variables: ["ResidualEnergy", "SoC", "SoC_1"])
-                    let batterySettings = try await networking.fetchBatterySettings(deviceSN: device.deviceSN)
-
-                    deviceBattery = BatteryResponseMapper.map(batteryVariables: batteryVariables, settings: batterySettings)
-                } catch {
-                    deviceBattery = nil
-                }
-            } else {
-                deviceBattery = nil
-            }
-
-            return Device(
-                deviceSN: device.deviceSN,
-                stationName: device.stationName,
-                stationID: device.stationID,
-                battery: deviceBattery,
-                moduleSN: device.moduleSN,
-                deviceType: device.deviceType,
-                hasPV: device.hasPV,
-                hasBattery: device.hasBattery
-            )
+        let newDevices = try await deviceList.asyncMap { device in
+            try await loadDevice(device: device)
         }
         devices = newDevices
         if selectedDeviceSN == nil {
@@ -81,6 +57,38 @@ public class ConfigManager: ConfigManaging {
             select(device: devices?.first(where: { $0.deviceSN == selectedDeviceSN }))
         }
     }
+
+    func loadDevice(device: DeviceSummaryResponse) async throws -> Device {
+        let deviceBattery: Device.Battery?
+
+        if device.hasBattery {
+            do {
+                let batteryVariables = try await networking.fetchRealData(deviceSN: device.deviceSN, variables: ["ResidualEnergy", "SoC", "SoC_1"])
+                let batterySettings = try await networking.fetchBatterySettings(deviceSN: device.deviceSN)
+
+                deviceBattery = BatteryResponseMapper.map(batteryVariables: batteryVariables, settings: batterySettings)
+            } catch {
+                deviceBattery = nil
+            }
+        } else {
+            deviceBattery = nil
+        }
+
+        return Device(
+            deviceSN: device.deviceSN,
+            stationName: device.stationName,
+            stationID: device.stationID,
+            battery: deviceBattery,
+            moduleSN: device.moduleSN,
+            deviceType: device.deviceType,
+            hasPV: device.hasPV,
+            hasBattery: device.hasBattery
+        )
+    }
+
+//    public func refreshDevice(deviceSN: String) async {
+//        devices = try await network.fetchDevice(deviceSN: deviceSN)
+//    }
 
     public func logout(clearDisplaySettings: Bool, clearDeviceSettings: Bool) {
         if clearDisplaySettings {

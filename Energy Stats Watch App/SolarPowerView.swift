@@ -10,17 +10,18 @@ import SwiftUI
 
 struct SolarPowerView: View {
     let value: Double?
+    let solarDefinitions: SolarRangeDefinitions
 
     var body: some View {
         VStack(alignment: .center) {
             if let solar = value {
-                SunView(solar: solar, sunSize: 18)
+                SunView(solar: solar, solarDefinitions: solarDefinitions, sunSize: 18)
                     .frame(width: Constants.iconWidth, height: Constants.iconHeight)
 
                 Text(solar.kW(2))
                     .multilineTextAlignment(.center)
             } else {
-                SunView(solar: 0)
+                SunView(solar: 0, solarDefinitions: solarDefinitions)
                     .frame(width: Constants.iconWidth, height: Constants.iconHeight)
                     .redacted(reason: .placeholder)
 
@@ -32,5 +33,5 @@ struct SolarPowerView: View {
 }
 
 #Preview {
-    SolarPowerView(value: 0.0)
+    SolarPowerView(value: 0.0, solarDefinitions: AppSettings.mock().solarDefinitions)
 }

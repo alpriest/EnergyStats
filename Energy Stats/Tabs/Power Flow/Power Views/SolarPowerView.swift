@@ -25,7 +25,7 @@ struct SolarPowerView: View {
     var body: some View {
         VStack {
             ZStack {
-                SunView(solar: viewModel.solar)
+                SunView(solar: viewModel.solar, solarDefinitions: appSettings.solarDefinitions)
                     .frame(width: 40, height: 40)
             }
 

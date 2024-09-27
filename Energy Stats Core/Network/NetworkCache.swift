@@ -57,9 +57,9 @@ class NetworkCache: FoxAPIServicing {
     }
 
     func openapi_fetchDevice(deviceSN: String) async throws -> DeviceDetailResponse {
-        let key = makeKey(base: #function)
+        let key = makeKey(base: #function, arguments: deviceSN)
 
-        if let item = cache[key], let cached = item.item as? DeviceDetailResponse, item.isFresherThan(interval: longCacheDurationInSeconds) {
+        if let item = cache[key], let cached = item.item as? DeviceDetailResponse, item.isFresherThan(interval: shortCacheDurationInSeconds) {
             return cached
         } else {
             let fresh = try await api.openapi_fetchDevice(deviceSN: deviceSN)
@@ -165,7 +165,7 @@ class NetworkCache: FoxAPIServicing {
     }
 
     func openapi_fetchPowerStationDetail(stationID: String) async throws -> PowerStationDetailResponse {
-        let key = makeKey(base: #function)
+        let key = makeKey(base: #function, arguments: stationID)
 
         if let item = cache[key], let cached = item.item as? PowerStationDetailResponse, item.isFresherThan(interval: longCacheDurationInSeconds) {
             return cached

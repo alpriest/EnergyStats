@@ -17,16 +17,18 @@ struct ContentView: View {
     @State private var batterySOC: Double?
     @State private var viewModel: ContentViewModel
     @State private var alertContent: AlertContent?
+    let solarDefinitions: SolarRangeDefinitions
 
     init(keychainStore: KeychainStoring, network: Networking, config: WatchConfigManaging) {
         self._viewModel = State(initialValue: ContentViewModel(keychainStore: keychainStore, network: network, config: config))
+        self.solarDefinitions = config.solarDefinitions
     }
 
     var body: some View {
         VStack {
             Grid {
                 GridRow(alignment: .top) {
-                    SolarPowerView(value: viewModel.state?.solar)
+                    SolarPowerView(value: viewModel.state?.solar, solarDefinitions: solarDefinitions)
                     Spacer()
                     HomePowerView(value: viewModel.state?.house)
                 }

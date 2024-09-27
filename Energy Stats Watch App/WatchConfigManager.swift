@@ -8,7 +8,9 @@
 import Energy_Stats_Core
 import Foundation
 
-protocol WatchConfigManaging: CurrentStatusCalculatorConfig, BatteryConfigManager {}
+protocol WatchConfigManaging: CurrentStatusCalculatorConfig, BatteryConfigManager {
+    var solarDefinitions: SolarRangeDefinitions { get }
+}
 
 class WatchConfigManager: WatchConfigManaging {
     @UserDefaultsStoredString(key: "batteryCapacity", defaultValue: "0")
@@ -36,6 +38,17 @@ class WatchConfigManager: WatchConfigManaging {
 
     @UserDefaultsStoredBool(key: "showGridTotalsOnPowerFlow", defaultValue: false)
     var showGridTotalsOnPowerFlow: Bool
+
+    var solarDefinitions: SolarRangeDefinitions {
+        get {
+            guard let solarDefinitions = UserDefaults.shared.data(forKey: "solarDefinitions") else { return .default() }
+            do {
+                return try JSONDecoder().decode(SolarRangeDefinitions.self, from: solarDefinitions)
+            } catch {
+                return .default()
+            }
+        }
+    }
 }
 
 class PreviewWatchConfig: WatchConfigManaging {
@@ -49,4 +62,5 @@ class PreviewWatchConfig: WatchConfigManaging {
     var minSOC: Double = 0.0
     var showUsableBatteryOnly: Bool = false
     var showGridTotalsOnPowerFlow: Bool = true
+    var solarDefinitions: SolarRangeDefinitions = .default()
 }

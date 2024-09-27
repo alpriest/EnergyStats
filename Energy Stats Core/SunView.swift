@@ -8,30 +8,30 @@
 import SwiftUI
 
 public struct SunView: View {
-    var solar: Double
-    let glowing: Bool
-    let glowColor: Color
-    let sunColor: Color
-    let sunSize: CGFloat
+    private let solar: Double
+    private let glowing: Bool
+    private let glowColor: Color
+    private let sunColor: Color
+    private let sunSize: CGFloat
 
-    public init(solar: Double, sunSize: CGFloat = 23) {
+    public init(solar: Double, solarDefinitions: SolarRangeDefinitions, sunSize: CGFloat = 23) {
         self.solar = solar
         self.sunSize = sunSize
 
         switch solar {
-        case 0.001 ..< 1.0:
+        case 0.001 ..< solarDefinitions.breakPoint1:
             self.glowing = false
             self.glowColor = .clear
             self.sunColor = Color("Sun", bundle: Bundle(for: BundleLocator.self))
-        case 1.0 ..< 2.0:
+        case solarDefinitions.breakPoint1 ..< solarDefinitions.breakPoint2:
             self.glowing = true
             self.glowColor = .yellow.opacity(0.3)
             self.sunColor = Color("Sun", bundle: Bundle(for: BundleLocator.self))
-        case 2.0 ..< 3.0:
+        case solarDefinitions.breakPoint2 ..< solarDefinitions.breakPoint3:
             self.glowing = true
             self.glowColor = Color("Sun", bundle: Bundle(for: BundleLocator.self))
             self.sunColor = .orange
-        case 3.0 ..< 500:
+        case solarDefinitions.breakPoint3 ..< 500:
             self.glowing = true
             self.glowColor = .orange
             self.sunColor = .red

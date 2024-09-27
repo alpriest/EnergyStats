@@ -63,7 +63,7 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
     private let batteryViewModel: BatteryViewModel
     public let ct2: Double
     @Published public var deviceState: DeviceState = .unknown
-    public let faults: [String]
+    @Published public var faults: [String] = []
     private let currentDevice: Device
     private let network: Networking
     private let configManager: ConfigManaging
@@ -75,7 +75,6 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
                 grid: Double,
                 inverterTemperatures: InverterTemperatures?,
                 ct2: Double,
-                faults: [String],
                 currentDevice: Device,
                 network: Networking,
                 configManager: ConfigManaging)
@@ -87,7 +86,6 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
         self.grid = grid
         self.inverterTemperatures = inverterTemperatures
         self.ct2 = ct2
-        self.faults = faults
         self.currentDevice = currentDevice
         self.network = network
         self.configManager = configManager
@@ -101,10 +99,26 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
         Task {
             let deviceState = try DeviceState(rawValue: await self.network.fetchDevice(deviceSN: self.currentDevice.deviceSN).status) ?? DeviceState.offline
 
+            if deviceState == .fault {
+                self.faults = try await self.loadCurrentFaults()
+            } else {
+                self.faults = []
+            }
+
             await MainActor.run {
                 self.deviceState = deviceState
             }
         }
+    }
+
+    private func loadCurrentFaults() async throws -> [String] {
+        guard let result = try? await self.network.fetchRealData(
+            deviceSN: currentDevice.deviceSN,
+            variables: ["currentFault"]
+        ), let currentFaults = result.datas.currentString(for: "currentFault")
+        else { return [] }
+
+        return currentFaults.split(separator: ",").map { String($0) }
     }
 
     private func loadTotals() {
@@ -203,7 +217,6 @@ public extension LoadedPowerFlowViewModel {
                                  grid: 0,
                                  inverterTemperatures: InverterTemperatures(ambient: 0.0, inverter: 0.0),
                                  ct2: 0,
-                                 faults: [],
                                  currentDevice: Device.preview(),
                                  network: DemoNetworking(),
                                  configManager: ConfigManager.preview())
@@ -217,7 +230,6 @@ public extension LoadedPowerFlowViewModel {
               grid: 0.71,
               inverterTemperatures: InverterTemperatures(ambient: 4.0, inverter: 9.0),
               ct2: 2.5,
-              faults: [],
               currentDevice: .preview(),
               network: DemoNetworking(),
               configManager: ConfigManager.preview())

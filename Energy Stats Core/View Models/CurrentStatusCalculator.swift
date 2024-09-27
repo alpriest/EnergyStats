@@ -39,7 +39,6 @@ public struct CurrentStatusCalculator {
     public let currentTemperatures: InverterTemperatures?
     public let lastUpdate: Date
     public let currentCT2: Double
-    public let currentFaults: [String]
 
     public init(
         device: Device,
@@ -58,7 +57,6 @@ public struct CurrentStatusCalculator {
         self.currentCT2 = shouldInvertCT2 ? 0 - status.meterPower2 : status.meterPower2
         self.currentSolarPower = Self.calculateSolarPower(hasPV: status.hasPV, status: status, shouldInvertCT2: shouldInvertCT2, shouldCombineCT2WithPVPower: shouldCombineCT2WithPVPower)
         self.currentSolarStringsPower = Self.calculateSolarStringsPower(hasPV: status.hasPV, status: status)
-        self.currentFaults = Self.currentFaults(real: response)
     }
 
     static func mapCurrentValues(device: Device, response: OpenQueryResponse, config: CurrentStatusCalculatorConfig) -> CurrentRawValues {
@@ -103,12 +101,6 @@ public struct CurrentStatusCalculator {
         } else {
             return []
         }
-    }
-
-    static func currentFaults(real: OpenQueryResponse) -> [String] {
-        guard let currentFaults = real.datas.currentString(for: "currentFault") else { return [] }
-
-        return currentFaults.split(separator: ",").map { String($0) }
     }
 }
 
