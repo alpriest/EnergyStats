@@ -86,10 +86,6 @@ public class ConfigManager: ConfigManaging {
         )
     }
 
-//    public func refreshDevice(deviceSN: String) async {
-//        devices = try await network.fetchDevice(deviceSN: deviceSN)
-//    }
-
     public func logout(clearDisplaySettings: Bool, clearDeviceSettings: Bool) {
         if clearDisplaySettings {
             config.clearDisplaySettings()
