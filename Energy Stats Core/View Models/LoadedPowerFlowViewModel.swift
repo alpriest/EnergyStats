@@ -98,14 +98,16 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
     private func loadDeviceStatus() {
         Task {
             let deviceState = try DeviceState(rawValue: await self.network.fetchDevice(deviceSN: self.currentDevice.deviceSN).status) ?? DeviceState.offline
+            let faults: [String]
 
             if deviceState == .fault {
-                self.faults = try await self.loadCurrentFaults()
+                faults = try await self.loadCurrentFaults()
             } else {
-                self.faults = []
+                faults = []
             }
 
             await MainActor.run {
+                self.faults = faults
                 self.deviceState = deviceState
             }
         }
