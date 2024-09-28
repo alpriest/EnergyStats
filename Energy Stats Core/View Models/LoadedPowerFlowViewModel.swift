@@ -36,8 +36,12 @@ public struct StringPower: Identifiable {
             return settings.pv2Name
         case "PV3":
             return settings.pv3Name
-        default:
+        case "PV4":
             return settings.pv4Name
+        case "PV5":
+            return settings.pv5Name
+        default:
+            return settings.pv6Name
         }
     }
 }
