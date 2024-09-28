@@ -15,6 +15,7 @@ struct SummaryTabView: View {
     private var appSettingsPublisher: LatestAppSettingsPublisher
     private let configManager: ConfigManaging
     @StateObject private var solarForecastViewModel: SolarForecastViewModel
+    @State private var presentSheet = false
 
     init(configManager: ConfigManaging, networking: Networking, appSettingsPublisher: LatestAppSettingsPublisher, solarForecastProvider: @escaping SolarForecastProviding) {
         self.configManager = configManager
@@ -25,7 +26,7 @@ struct SummaryTabView: View {
     }
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 VStack(alignment: .leading) {
                     if viewModel.isLoading {
@@ -51,7 +52,7 @@ struct SummaryTabView: View {
                                 moneySummaryRow(title: "total_benefit", amount: model.total.amount)
                             }
 
-                            Text("Includes data from \(viewModel.oldestDataDate) to Present. Figures are approximate and assume the buy/sell energy prices remained constant throughout the period of ownership.")
+                            Text("Includes data from \(viewModel.oldestDataDate) to \(viewModel.latestDataDate). Figures are approximate and assume the buy/sell energy prices remained constant throughout the period of ownership.")
                                 .font(.caption2)
                                 .padding(.vertical)
                                 .foregroundStyle(.secondary)
@@ -66,8 +67,18 @@ struct SummaryTabView: View {
                 .padding(.horizontal)
             }
             .navigationTitle("Summary")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: { presentSheet.toggle() },
+                           label: { Text("Edit") })
+                }
+            }
+            .sheet(isPresented: $presentSheet) {
+                SummaryDateRange()
+                    .presentationDetents([.medium, .large])
+                    .presentationDragIndicator(.visible)
+            }
         }
-        .navigationViewStyle(StackNavigationViewStyle())
         .onAppear {
             viewModel.load()
         }

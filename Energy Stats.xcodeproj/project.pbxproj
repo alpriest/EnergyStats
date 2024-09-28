@@ -124,6 +124,7 @@
 		4155D70D2B28FC920071346A /* Optional+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4155D70C2B28FC920071346A /* Optional+Int.swift */; };
 		4156E7B72B9C839F0000E807 /* PowerStationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156E7B62B9C839F0000E807 /* PowerStationSettingsView.swift */; };
 		415AFA832C597DD800691852 /* SlowServerBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415AFA822C597DD800691852 /* SlowServerBannerView.swift */; };
+		415F2C742CA7E4AA00B9CE0D /* SummaryDateRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415F2C732CA7E4A300B9CE0D /* SummaryDateRange.swift */; };
 		4160098B2A8D18B10096CCD9 /* SettingsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4160098A2A8D18B10096CCD9 /* SettingsFooterView.swift */; };
 		4160098D2A8D1A690096CCD9 /* BottomButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4160098C2A8D1A690096CCD9 /* BottomButtonsView.swift */; };
 		41626CD029D969E9003FEB00 /* InverterFirmwareVersionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41626CCF29D969E9003FEB00 /* InverterFirmwareVersionsView.swift */; };
@@ -572,6 +573,7 @@
 		4155D70C2B28FC920071346A /* Optional+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Int.swift"; sourceTree = "<group>"; };
 		4156E7B62B9C839F0000E807 /* PowerStationSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerStationSettingsView.swift; sourceTree = "<group>"; };
 		415AFA822C597DD800691852 /* SlowServerBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlowServerBannerView.swift; sourceTree = "<group>"; };
+		415F2C732CA7E4A300B9CE0D /* SummaryDateRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryDateRange.swift; sourceTree = "<group>"; };
 		4160098A2A8D18B10096CCD9 /* SettingsFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFooterView.swift; sourceTree = "<group>"; };
 		4160098C2A8D1A690096CCD9 /* BottomButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButtonsView.swift; sourceTree = "<group>"; };
 		41626CCD29D95E9C003FEB00 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -1272,6 +1274,7 @@
 		418C6E932AFAC3B1000DE35F /* Summary */ = {
 			isa = PBXGroup;
 			children = (
+				415F2C732CA7E4A300B9CE0D /* SummaryDateRange.swift */,
 				418C6E942AFAC3BF000DE35F /* SummaryTabView.swift */,
 				418C6E962AFAC7E4000DE35F /* SummaryTabViewModel.swift */,
 				411DF2732AFD404E00CEEB23 /* SolarForecastView.swift */,
@@ -1942,6 +1945,7 @@
 				41C849692A8BBC3800431410 /* Intents.swift in Sources */,
 				41ACB2C62A51ADEB005831B0 /* ValueBoundsView.swift in Sources */,
 				41E3B76C2BBDD345005A9F80 /* Icon.swift in Sources */,
+				415F2C742CA7E4AA00B9CE0D /* SummaryDateRange.swift in Sources */,
 				41E4B31528DB77E8003F7F47 /* GridPowerView.swift in Sources */,
 				41D759FE2B5B1768002C43A7 /* EditScheduleView.swift in Sources */,
 				41FCE06B2CA170930046ABF6 /* LeftTabbedView.swift in Sources */,

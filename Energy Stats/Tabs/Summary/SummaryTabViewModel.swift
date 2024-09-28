@@ -15,6 +15,7 @@ class SummaryTabViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var approximationsViewModel: ApproximationsViewModel? = nil
     @Published var oldestDataDate: String = ""
+    @Published var latestDataDate: String = ""
     @Published var currencySymbol: String = ""
     private let approximationsCalculator: ApproximationsCalculator
     private var themeChangeCancellable: AnyCancellable?
@@ -68,8 +69,10 @@ class SummaryTabViewModel: ObservableObject {
                             let dateFormatter = DateFormatter()
                             dateFormatter.dateFormat = "MMMM YYYY"
                             oldestDataDate = dateFormatter.string(from: date)
+                            latestDataDate = "present"
                         } else {
                             oldestDataDate = "\(emptyMonth) \(year)"
+                            latestDataDate = "present"
                         }
                     }
                     hasFinished = true

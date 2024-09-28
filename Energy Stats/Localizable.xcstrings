@@ -2781,6 +2781,9 @@
         }
       }
     },
+    "Automatic" : {
+
+    },
     "Azimuth" : {
       "localizations" : {
         "de" : {
@@ -3633,6 +3636,9 @@
           }
         }
       }
+    },
+    "Choose summary date range" : {
+
     },
     "Clear graph values" : {
       "localizations" : {
@@ -4949,6 +4955,9 @@
         }
       }
     },
+    "Detail" : {
+
+    },
     "Device selection" : {
       "localizations" : {
         "de" : {
@@ -5005,6 +5014,9 @@
           }
         }
       }
+    },
+    "Dismiss" : {
+
     },
     "Display" : {
       "comment" : "Settings page",
@@ -6641,6 +6653,9 @@
         }
       }
     },
+    "From" : {
+
+    },
     "Full" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -7469,7 +7484,18 @@
         }
       }
     },
+    "Includes data from %@ to %@. Figures are approximate and assume the buy/sell energy prices remained constant throughout the period of ownership." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Includes data from %1$@ to %2$@. Figures are approximate and assume the buy/sell energy prices remained constant throughout the period of ownership."
+          }
+        }
+      }
+    },
     "Includes data from %@ to Present. Figures are approximate and assume the buy/sell energy prices remained constant throughout the period of ownership." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -13549,6 +13575,9 @@
           }
         }
       }
+    },
+    "To" : {
+
     },
     "To get your API key:" : {
       "localizations" : {
