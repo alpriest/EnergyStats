@@ -4955,9 +4955,6 @@
         }
       }
     },
-    "Detail" : {
-
-    },
     "Device selection" : {
       "localizations" : {
         "de" : {
@@ -5014,9 +5011,6 @@
           }
         }
       }
-    },
-    "Dismiss" : {
-
     },
     "Display" : {
       "comment" : "Settings page",

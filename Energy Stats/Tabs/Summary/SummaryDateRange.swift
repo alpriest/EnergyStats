@@ -37,7 +37,7 @@ struct SummaryDateRange: View {
                 }
             }
             .disabled(automatic)
-            .foregroundStyle(automatic ? Color.secondary : .primary)
+            .foregroundStyle(automatic ? Color.primary.opacity(0.25) : .primary)
 
             Spacer()
 
@@ -68,7 +68,7 @@ struct YearMonthPickerView: View {
                         Text(months[month - 1]).tag(month)
                     }
                 }
-                .pickerStyle(WheelPickerStyle())
+                .pickerStyle(.menu)
                 .frame(width: 150)
                 .clipped()
 
@@ -78,7 +78,7 @@ struct YearMonthPickerView: View {
                         Text(String(describing: year)).tag(year)
                     }
                 }
-                .pickerStyle(WheelPickerStyle())
+                .pickerStyle(.menu)
                 .frame(width: 100)
                 .clipped()
             }
