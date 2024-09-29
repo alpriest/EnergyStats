@@ -366,6 +366,7 @@ public class MockConfig: Config {
     public var scheduleTemplates: [ScheduleTemplate] = []
     public var truncatedYAxisOnParameterGraphs: Bool = false
     public var earningsModel: EarningsModel = .exported
+    public var summaryDateRange: SummaryDateRange = .automatic
 }
 
 public extension SolcastSite {

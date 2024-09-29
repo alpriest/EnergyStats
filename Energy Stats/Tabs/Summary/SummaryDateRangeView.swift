@@ -1,17 +1,31 @@
 //
-//  SummaryDateRange.swift
+//  SummaryDateRangeView.swift
 //  Energy Stats
 //
 //  Created by Alistair Priest on 28/09/2024.
 //
 
 import SwiftUI
+import Energy_Stats_Core
 
-struct SummaryDateRange: View {
+struct SummaryDateRangeView: View {
     @State private var automatic = false
     @State private var from: Date = .distantPast
     @State private var to: Date = .now
     @Environment(\.presentationMode) var presentationMode
+    let onApply: (SummaryDateRange) -> Void
+
+    init(initial: SummaryDateRange, onApply: @escaping (SummaryDateRange) -> Void) {
+        switch initial {
+        case .automatic:
+            self.automatic = true
+        case let .manual(from: from, to: to):
+            self.automatic = false
+            self.from = from
+            self.to = to
+        }
+        self.onApply = onApply
+    }
 
     var body: some View {
         VStack {
@@ -42,12 +56,21 @@ struct SummaryDateRange: View {
             Spacer()
 
             Button {
+                onApply(makeDateRange())
                 presentationMode.wrappedValue.dismiss()
             } label: {
                 Text("Apply")
                     .frame(minWidth: 0, maxWidth: .infinity)
             }.buttonStyle(.borderedProminent)
         }.padding()
+    }
+
+    func makeDateRange() -> SummaryDateRange {
+        if automatic {
+            SummaryDateRange.automatic
+        } else {
+            SummaryDateRange.manual(from: from, to: to)
+        }
     }
 }
 
@@ -88,5 +111,5 @@ struct YearMonthPickerView: View {
 }
 
 #Preview {
-    SummaryDateRange()
+    SummaryDateRangeView(initial: .automatic, onApply: { _ in })
 }

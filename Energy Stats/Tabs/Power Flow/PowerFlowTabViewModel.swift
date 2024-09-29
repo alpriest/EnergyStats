@@ -111,9 +111,7 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
             .removeDuplicates()
             .drop { _ in self.latestDeviceSN == nil }
             .drop { self.latestDeviceSN == $0?.deviceSN }
-            .sink { device in
-                guard let device else { return }
-
+            .sink { _ in
                 Task {
                     await self.timerFired()
                 }

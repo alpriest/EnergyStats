@@ -54,6 +54,7 @@ public protocol Config {
     var scheduleTemplates: [ScheduleTemplate] { get set }
     var truncatedYAxisOnParameterGraphs: Bool { get set }
     var earningsModel: EarningsModel { get set }
+    var summaryDateRange: SummaryDateRange { get set }
 }
 
 public func DefaultParameterGroups() -> [ParameterGroup] {

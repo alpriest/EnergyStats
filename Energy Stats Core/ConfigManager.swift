@@ -543,12 +543,17 @@ public class ConfigManager: ConfigManaging {
 
     public var earningsModel: EarningsModel {
         get { config.earningsModel }
-        set { 
+        set {
             config.earningsModel = newValue
             appSettingsPublisher.send(appSettingsPublisher.value.copy(
                 earningsModel: config.earningsModel
             ))
         }
+    }
+
+    public var summaryDateRange: SummaryDateRange {
+        get { config.summaryDateRange }
+        set { config.summaryDateRange = newValue }
     }
 }
 

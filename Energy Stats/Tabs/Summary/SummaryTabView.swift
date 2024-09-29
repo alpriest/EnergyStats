@@ -74,9 +74,11 @@ struct SummaryTabView: View {
                 }
             }
             .sheet(isPresented: $presentSheet) {
-                SummaryDateRange()
-                    .presentationDetents([.medium, .large])
-                    .presentationDragIndicator(.visible)
+                SummaryDateRangeView(initial: viewModel.summaryDateRange, onApply: { dateRange in
+                    viewModel.setDateRange(dateRange: dateRange)
+                })
+                .presentationDetents([.medium, .large])
+                .presentationDragIndicator(.visible)
             }
         }
         .onAppear {

@@ -55,6 +55,7 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "showSelfSufficiencyStatsGraphOverlay")
         UserDefaults.shared.removeObject(forKey: "truncatedYAxisOnParameterGraphs")
         UserDefaults.shared.removeObject(forKey: "earningsModel")
+        UserDefaults.shared.removeObject(forKey: "summaryDateRange")
         UserDefaults.shared.synchronize()
     }
 
@@ -259,4 +260,7 @@ public class UserDefaultsConfig: Config {
             UserDefaults.shared.set(newValue.rawValue, forKey: "earningsModel")
         }
     }
+
+    @UserDefaultsStoredCodable(key: "summaryDateRange", defaultValue: SummaryDateRange.automatic)
+    public var summaryDateRange: SummaryDateRange
 }

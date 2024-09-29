@@ -58,6 +58,7 @@ public protocol ConfigManaging: FinancialConfigManager, SolcastConfigManager, Ba
     var powerStationDetail: PowerStationDetail? { get }
     var showSelfSufficiencyStatsGraphOverlay: Bool { get set }
     var truncatedYAxisOnParameterGraphs: Bool { get set }
+    var summaryDateRange: SummaryDateRange { get set }
 }
 
 public protocol BatteryConfigManager {
@@ -176,8 +177,7 @@ public struct PowerFlowStringsSettings: Codable {
         pv5Enabled: Bool? = nil,
         pv6Name: String? = nil,
         pv6Enabled: Bool? = nil
-    ) -> PowerFlowStringsSettings
-    {
+    ) -> PowerFlowStringsSettings {
         PowerFlowStringsSettings(
             enabled: enabled ?? self.enabled,
             pv1Name: pv1Name ?? self.pv1Name,
@@ -211,5 +211,17 @@ public struct PowerFlowStringsSettings: Codable {
             pv6Name: "PV6",
             pv6Enabled: false
         )
+    }
+}
+
+public enum SummaryDateRange: Codable, Equatable {
+    case automatic
+    case manual(from: Date, to: Date)
+
+    public static func == (lhs: SummaryDateRange, rhs: SummaryDateRange) -> Bool {
+        switch (lhs, rhs) {
+        case (.automatic, .automatic): return true
+        default: return false
+        }
     }
 }

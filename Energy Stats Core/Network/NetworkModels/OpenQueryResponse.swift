@@ -226,7 +226,7 @@ public struct OpenReportResponse: Codable {
         public let index: Int
         public let value: Double
 
-        init?(index: Int, value: Double?) {
+        public init?(index: Int, value: Double?) {
             guard let value else { return nil }
             self.index = index
             self.value = value
