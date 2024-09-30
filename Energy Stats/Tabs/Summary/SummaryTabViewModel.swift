@@ -50,6 +50,7 @@ class SummaryTabViewModel: ObservableObject {
     func setDateRange(dateRange: SummaryDateRange) {
         configManager.summaryDateRange = dateRange
         summaryDateRange = dateRange
+        approximationsViewModel = nil
         load()
     }
 
@@ -71,9 +72,30 @@ class SummaryTabViewModel: ObservableObject {
         }
     }
 
+    private var toDateDescription: String {
+        switch configManager.summaryDateRange {
+        case .automatic:
+            "present"
+        case .manual(_, let to):
+            "\(to.monthYear()) (manually selected)"
+        }
+    }
+
+    private var fromDateDescription: String {
+        switch configManager.summaryDateRange {
+        case .automatic:
+            "present"
+        case .manual(_, let to):
+            "\(to.monthYear()) (manually selected)"
+        }
+    }
+
     private func fetchAllYears(device: Device) async throws -> [ReportVariable: Double] {
         var totals = [ReportVariable: Double]()
         var hasFinished = false
+        await MainActor.run {
+            latestDataDate = toDateDescription
+        }
 
         for year in (fromYear ... toYear).reversed() {
             if hasFinished {
@@ -85,18 +107,11 @@ class SummaryTabViewModel: ObservableObject {
 
                 if let emptyMonth {
                     await MainActor.run {
-                        var components = DateComponents()
-                        components.year = year
-                        components.month = emptyMonth
-                        components.day = 1
-                        if let date = Calendar.current.date(from: components) {
-                            let dateFormatter = DateFormatter()
-                            dateFormatter.dateFormat = "MMMM YYYY"
-                            oldestDataDate = dateFormatter.string(from: date)
-                            latestDataDate = "present"
-                        } else {
-                            oldestDataDate = "\(emptyMonth) \(year)"
-                            latestDataDate = "present"
+                        switch configManager.summaryDateRange {
+                        case .automatic:
+                            oldestDataDate = Date.from(year: year, month: emptyMonth).monthYear()
+                        case .manual(let from, let to):
+                            oldestDataDate = "\(from.monthYear())"
                         }
                     }
                     hasFinished = true
@@ -115,11 +130,11 @@ class SummaryTabViewModel: ObservableObject {
 
     private func fetchYear(_ year: Int, device: Device) async throws -> ([ReportVariable: Double], Int?) {
         let reportVariables = [ReportVariable.feedIn, .generation, .chargeEnergyToTal, .dischargeEnergyToTal, .gridConsumption, .loads]
-        let reports = try await networking.fetchReport(deviceSN: device.deviceSN,
+        let rawReports = try await networking.fetchReport(deviceSN: device.deviceSN,
                                                           variables: reportVariables,
                                                           queryDate: QueryDate(year: year, month: nil, day: nil),
                                                           reportType: .year)
-//        let reports = filterUnrequestedMonths(year: year, reports: rawReports)
+        let reports = filterUnrequestedMonths(year: year, reports: rawReports)
 
         var totals = [ReportVariable: Double]()
         reports.forEach { reportResponse in

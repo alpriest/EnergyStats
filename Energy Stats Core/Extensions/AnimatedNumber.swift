@@ -21,7 +21,7 @@ public struct AnimatedNumber<T: View>: View {
         text(target)
             .opacity(0)
             .modifier(AnimatableNumberModifier(number: amount, text: text))
-            .onAppear { withAnimation(.easeOut(duration: 1.0)) { amount = target }}
+            .onAppear { withAnimation(.easeOut(duration: 0.5)) { amount = target }}
     }
 }
 

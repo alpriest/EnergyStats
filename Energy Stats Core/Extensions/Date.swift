@@ -20,8 +20,8 @@ public extension Date {
         let otherDate = Calendar.current.dateComponents([.day, .month, .year], from: rhs)
 
         if let lhsDate = Calendar.current.date(from: myDate),
-           let rhsDate = Calendar.current.date(from: otherDate) {
-
+           let rhsDate = Calendar.current.date(from: otherDate)
+        {
             return lhsDate < rhsDate
         } else {
             return false
@@ -33,8 +33,8 @@ public extension Date {
         let otherDate = Calendar.current.dateComponents([.day, .month, .year], from: rhs)
 
         if let lhsDate = Calendar.current.date(from: myDate),
-           let rhsDate = Calendar.current.date(from: otherDate) {
-
+           let rhsDate = Calendar.current.date(from: otherDate)
+        {
             return lhsDate > rhsDate
         } else {
             return false
@@ -48,5 +48,15 @@ public extension Date {
         } else {
             return self
         }
+    }
+
+    static func from(year: Int, month: Int) -> Date {
+        var components = DateComponents()
+        components.year = year
+        components.month = month
+        components.day = 1
+
+        let calendar = Calendar.current
+        return calendar.date(from: components) ?? Date()
     }
 }
