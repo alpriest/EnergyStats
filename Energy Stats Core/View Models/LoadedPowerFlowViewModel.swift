@@ -110,6 +110,8 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
                 faults = []
             }
 
+            if Task.isCancelled { return }
+
             await MainActor.run {
                 self.faults = faults
                 self.deviceState = deviceState
@@ -132,6 +134,8 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
 
         Task {
             let totals = try TotalsViewModel(reports: await self.loadReportData(self.currentDevice))
+
+            if Task.isCancelled { return }
 
             await MainActor.run {
                 self.earnings = EnergyStatsFinancialModel(totalsViewModel: totals, config: self.configManager)
@@ -163,6 +167,8 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
                 includeCT2: self.configManager.shouldCombineCT2WithPVPower,
                 shouldInvertCT2: self.configManager.shouldInvertCT2
             )
+
+            if Task.isCancelled { return }
 
             await MainActor.run {
                 self.todaysGeneration = generation

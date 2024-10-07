@@ -58,6 +58,7 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
     var exportFile: CSVTextFile?
     @Published var xScale: ClosedRange<Date> = Calendar.current.startOfDay(for: Date())...Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))!
     @Published var hasLoaded: Bool = false
+    private var loadTask: Task<Void, Never>?
 
     @Published var displayMode: ParametersGraphDisplayMode {
         didSet {
@@ -66,9 +67,7 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
             let updatedDate = QueryDate(from: displayMode.date)
             if queryDate != updatedDate {
                 queryDate = updatedDate
-                Task { @MainActor in
-                    await load()
-                }
+                performLoad()
             }
             if displayMode.hours != previousHours {
                 hours = displayMode.hours
@@ -117,7 +116,7 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
     @objc
     func didBecomeActiveNotification() {
         if hasData, visible {
-            Task { await self.load() }
+            performLoad()
         }
     }
 
@@ -131,6 +130,11 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
         } else {
             return configManager.selectedParameterGraphVariables
         }
+    }
+
+    private func performLoad() {
+        self.loadTask?.cancel()
+        self.loadTask = Task { await self.load() }
     }
 
     func load() async {
@@ -152,6 +156,8 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
                     ParameterGraphValue(date: $0.time, queryDate: queryDate, value: $0.value, variable: rawVariable)
                 }
             }
+
+            if Task.isCancelled { return }
 
             await MainActor.run {
                 self.rawData = rawData
@@ -235,7 +241,7 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
 
     func set(graphVariables: [ParameterGraphVariable]) {
         self.graphVariables = graphVariables
-        Task { await load() }
+        performLoad()
     }
 
     var axisType: AxisUnit = .consistent("kW")

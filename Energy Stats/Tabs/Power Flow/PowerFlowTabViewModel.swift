@@ -181,6 +181,8 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
                 configManager: self.configManager
             )
 
+            if Task.isCancelled { return }
+
             self.state = .loaded(.empty()) // refreshes the marching ants line speed
             try await Task.sleep(nanoseconds: 1000)
             self.state = .loaded(summary)

@@ -34,7 +34,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
             Task { @MainActor in
                 selectedDate = nil
                 valuesAtTime = nil
-                await load()
+                self.performLoad()
             }
         }
     }
@@ -58,6 +58,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
     private var themeCancellable: AnyCancellable?
     var visible = false
     var lastLoadState: LastLoadState<StatsGraphDisplayMode>?
+    private var loadTask: Task<Void, Never>?
 
     init(networking: Networking, configManager: ConfigManaging) {
         self.networking = networking
@@ -95,7 +96,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
     @objc
     func didBecomeActiveNotification() {
         if hasData, visible {
-            Task { await self.load() }
+            performLoad()
         }
     }
 
@@ -117,6 +118,11 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
                     StatsGraphVariable($0)
                 }
         }
+    }
+
+    func performLoad() {
+        self.loadTask?.cancel()
+        self.loadTask = Task { @MainActor in await self.load() }
     }
 
     func load() async {
@@ -151,6 +157,8 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
                 )
             }
 
+            if Task.isCancelled { return }
+
             await MainActor.run {
                 self.totals = totals
                 self.unit = displayMode.unit()
@@ -162,6 +170,8 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
                 self.lastLoadState = LastLoadState(lastLoadTime: .now, loadState: displayMode)
             }
         } catch {
+            if Task.isCancelled { return }
+            
             await MainActor.run {
                 setState(.error(error, "Could not load, check your connection"))
             }
@@ -223,11 +233,12 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
 
         yScale = ClosedRange(uncheckedBounds: (lower: 0, upper: scaleMax))
 
-        return selfSufficiencyAtDateTime.map {
-            StatsGraphValue(type: .selfSufficiency, date: $0.key, graphValue: scaleMax * $0.value, displayValue: $0.value) // Normalise amount to be on the same scale as the stats
-        }
-        .sorted(by: { $1.date > $0.date })
-        .filter { $0.date <= Date.now }
+        return selfSufficiencyAtDateTime
+            .map {
+                StatsGraphValue(type: .selfSufficiency, date: $0.key, graphValue: scaleMax * $0.value, displayValue: $0.value) // Normalise amount to be on the same scale as the stats
+            }
+            .sorted(by: { $1.date > $0.date })
+            .filter { $0.date <= Date.now }
     }
 
     func refresh() {
