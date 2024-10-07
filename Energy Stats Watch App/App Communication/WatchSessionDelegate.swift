@@ -5,6 +5,7 @@
 //  Created by Alistair Priest on 05/05/2024.
 //
 
+import Energy_Stats_Core
 import Foundation
 import WatchConnectivity
 
@@ -25,6 +26,11 @@ class WatchSessionDelegate: NSObject, WCSessionDelegate {
             config?.shouldInvertCT2 = value
         }
 
+        if let value = userInfo["minSOC"] as? Double {
+            print("AWP", "Setting minSOC", value)
+            config?.minSOC = value
+        }
+
         if let value = userInfo["shouldCombineCT2WithPVPower"] as? Bool {
             print("AWP", "Setting shouldCombineCT2WithPVPower", value)
             config?.shouldCombineCT2WithPVPower = value
@@ -38,6 +44,11 @@ class WatchSessionDelegate: NSObject, WCSessionDelegate {
         if let value = userInfo["showGridTotalsOnPowerFlow"] as? Bool {
             print("AWP", "Setting showGridTotalsOnPowerFlow", value)
             config?.showGridTotalsOnPowerFlow = value
+        }
+
+        if let value = userInfo["solarDefinitions"] as? SolarRangeDefinitions {
+            print("AWP", "Setting solarDefinitions", value)
+            config?.solarDefinitions = value
         }
     }
 }

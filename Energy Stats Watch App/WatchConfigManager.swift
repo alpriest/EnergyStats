@@ -48,6 +48,9 @@ class WatchConfigManager: WatchConfigManaging {
                 return .default()
             }
         }
+        set {
+            UserDefaults.shared.set(newValue, forKey: "solarDefinitions")
+        }
     }
 }
 

@@ -20,7 +20,9 @@ class WatchSessionDelegate: NSObject, WCSessionDelegate {
                 "shouldInvertCT2": config.shouldInvertCT2,
                 "shouldCombineCT2WithPVPower": config.shouldCombineCT2WithPVPower,
                 "showUsableBatteryOnly": config.showUsableBatteryOnly,
-                "showGridTotalsOnPowerFlow": config.showGridTotalsOnPowerFlow
+                "showGridTotalsOnPowerFlow": config.showGridTotalsOnPowerFlow,
+                "minSOC": config.minSOC,
+                "solarDefinitions": config.solarDefinitions
             ])
         }
     }
