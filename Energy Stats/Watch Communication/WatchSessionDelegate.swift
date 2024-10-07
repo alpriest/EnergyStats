@@ -19,7 +19,8 @@ class WatchSessionDelegate: NSObject, WCSessionDelegate {
                 "batteryCapacity": config.batteryCapacity,
                 "shouldInvertCT2": config.shouldInvertCT2,
                 "shouldCombineCT2WithPVPower": config.shouldCombineCT2WithPVPower,
-                "showUsableBatteryOnly": config.showUsableBatteryOnly
+                "showUsableBatteryOnly": config.showUsableBatteryOnly,
+                "showGridTotalsOnPowerFlow": config.showGridTotalsOnPowerFlow
             ])
         }
     }

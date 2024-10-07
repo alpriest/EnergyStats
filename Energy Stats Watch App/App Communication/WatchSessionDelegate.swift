@@ -34,5 +34,10 @@ class WatchSessionDelegate: NSObject, WCSessionDelegate {
             print("AWP", "Setting showUsableBatteryOnly", value)
             config?.showUsableBatteryOnly = value
         }
+
+        if let value = userInfo["showGridTotalsOnPowerFlow"] as? Bool {
+            print("AWP", "Setting showGridTotalsOnPowerFlow", value)
+            config?.showGridTotalsOnPowerFlow = value
+        }
     }
 }

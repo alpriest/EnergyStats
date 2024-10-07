@@ -17,6 +17,7 @@ struct ContentData {
     let battery: Double?
     let lastUpdated: Date
     let totalExport: Double?
+    let totalImport: Double?
 }
 
 @Observable
@@ -89,7 +90,8 @@ class ContentViewModel {
                     grid: calculator.currentGrid,
                     battery: batteryViewModel.chargePower,
                     lastUpdated: Date.now,
-                    totalExport: totals?.gridExport
+                    totalExport: totals?.gridExport,
+                    totalImport: totals?.gridImport
                 )
             }
 
@@ -125,7 +127,7 @@ class ContentViewModel {
     }
 
     private func loadReportData(_ currentDevice: Device) async throws -> [OpenReportResponse] {
-        let reportVariables = [ReportVariable.feedIn]
+        let reportVariables = [ReportVariable.feedIn, ReportVariable.gridConsumption]
 
         return try await network.fetchReport(deviceSN: currentDevice.deviceSN,
                                              variables: reportVariables,
