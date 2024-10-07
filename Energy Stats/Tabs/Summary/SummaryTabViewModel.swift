@@ -81,15 +81,6 @@ class SummaryTabViewModel: ObservableObject {
         }
     }
 
-    private var fromDateDescription: String {
-        switch configManager.summaryDateRange {
-        case .automatic:
-            "present"
-        case .manual(_, let to):
-            "\(to.monthYear()) (manually selected)"
-        }
-    }
-
     private func fetchAllYears(device: Device) async throws -> [ReportVariable: Double] {
         var totals = [ReportVariable: Double]()
         var hasFinished = false
@@ -110,7 +101,7 @@ class SummaryTabViewModel: ObservableObject {
                         switch configManager.summaryDateRange {
                         case .automatic:
                             oldestDataDate = Date.from(year: year, month: emptyMonth).monthYear()
-                        case .manual(let from, let to):
+                        case .manual(let from, _):
                             oldestDataDate = "\(from.monthYear())"
                         }
                     }
