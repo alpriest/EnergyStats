@@ -18,23 +18,37 @@ struct ContentView: View {
     @EnvironmentObject var alertManager: SlowServerBannerAlertManager
 
     var body: some View {
-        if userManager.isLoggedIn {
-            Group {
+        Group {
+            if userManager.isLoggedIn {
+                Group {
 #if targetEnvironment(macCatalyst)
-                LeftTabbedView(networking: network, userManager: userManager, configManager: configManager, solarForecastProvider: solarForecastProvider, templateStore: templateStore)
+                    LeftTabbedView(networking: network, userManager: userManager, configManager: configManager, solarForecastProvider: solarForecastProvider, templateStore: templateStore)
 #else
-                ZStack {
-                    TabbedView(networking: network, userManager: userManager, configManager: configManager, solarForecastProvider: solarForecastProvider, templateStore: templateStore)
-                    if alertManager.isShowingAlert {
-                        SlowServerMessageView()
+                    ZStack {
+                        TabbedView(networking: network, userManager: userManager, configManager: configManager, solarForecastProvider: solarForecastProvider, templateStore: templateStore)
+                        if alertManager.isShowingAlert {
+                            SlowServerMessageView()
+                        }
                     }
-                }
 #endif
-            }
-            .task { await network.fetchErrorMessages() }
+                }
+                .task { await network.fetchErrorMessages() }
 
-        } else {
-            WelcomeView(userManager: userManager)
+            } else {
+                WelcomeView(userManager: userManager)
+            }
+        }
+        .preferredColorScheme(colorScheme())
+    }
+
+    private func colorScheme() -> ColorScheme? {
+        switch configManager.colorScheme {
+        case .dark:
+            .dark
+        case .light:
+            .light
+        default:
+            nil
         }
     }
 }

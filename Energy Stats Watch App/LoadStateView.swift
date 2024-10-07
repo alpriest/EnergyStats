@@ -30,9 +30,8 @@ struct LoadStateView: ViewModifier {
             } else {
                 LoadingView(message: message)
             }
-        case .error(let error, let reason):
+        case .error(_, let reason):
             Text(reason)
-//            ErrorAlertView(cause: error, message: reason, options: options, retry: retry)
         case .inactive:
             content
         }

@@ -28,7 +28,7 @@ final class ParametersGraphTabViewTests: XCTestCase {
             configManager: configManager,
             viewModel: ParametersGraphTabViewModel(networking: networking, configManager: configManager, dateProvider: { Date(timeIntervalSince1970: 1664127352) })
         )
-        let view = UIHostingController(rootView: sut)
+        let view = UIHostingController(rootView: sut.environmentObject(UserManager(store: MockKeychainStore(), configManager: configManager, networkCache: InMemoryLoggingNetworkStore())))
 
         await sut.viewModel.load()
         await propertyOn(sut.viewModel, keyPath: \.state) { $0 == .inactive }
@@ -51,7 +51,7 @@ final class ParametersGraphTabViewTests: XCTestCase {
             viewModel: ParametersGraphTabViewModel(networking: networking, configManager: configManager, dateProvider: { Date(timeIntervalSince1970: 1664127352) })
         )
 
-        let view = UIHostingController(rootView: sut)
+        let view = UIHostingController(rootView: sut.environmentObject(UserManager(store: MockKeychainStore(), configManager: configManager, networkCache: InMemoryLoggingNetworkStore())))
 
         await sut.viewModel.load()
         await propertyOn(sut.viewModel, keyPath: \.state) { $0 == .error(nil, "") }

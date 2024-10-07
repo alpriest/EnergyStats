@@ -56,6 +56,7 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "truncatedYAxisOnParameterGraphs")
         UserDefaults.shared.removeObject(forKey: "earningsModel")
         UserDefaults.shared.removeObject(forKey: "summaryDateRange")
+        UserDefaults.shared.removeObject(forKey: "colorScheme")
         UserDefaults.shared.synchronize()
     }
 
@@ -263,4 +264,7 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredCodable(key: "summaryDateRange", defaultValue: SummaryDateRange.automatic)
     public var summaryDateRange: SummaryDateRange
+
+    @UserDefaultsStoredCodable(key: "colorScheme", defaultValue: ForcedColorScheme.auto)
+    public var colorScheme: ForcedColorScheme
 }

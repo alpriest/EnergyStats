@@ -55,6 +55,7 @@ public protocol Config {
     var truncatedYAxisOnParameterGraphs: Bool { get set }
     var earningsModel: EarningsModel { get set }
     var summaryDateRange: SummaryDateRange { get set }
+    var colorScheme: ForcedColorScheme { get set }
 }
 
 public func DefaultParameterGroups() -> [ParameterGroup] {

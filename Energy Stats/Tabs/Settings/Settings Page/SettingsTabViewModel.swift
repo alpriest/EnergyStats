@@ -154,6 +154,12 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
+    @Published var colorScheme: ForcedColorScheme {
+        didSet {
+            config.colorScheme = colorScheme
+        }
+    }
+
     private(set) var config: ConfigManaging
     private let userManager: UserManager
     private var cancellables = Set<AnyCancellable>()
@@ -189,6 +195,7 @@ class SettingsTabViewModel: ObservableObject {
         powerFlowStrings = config.powerFlowStrings
         showBatteryPercentageRemaining = config.showBatteryPercentageRemaining
         powerStation = config.powerStationDetail
+        colorScheme = config.colorScheme
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }

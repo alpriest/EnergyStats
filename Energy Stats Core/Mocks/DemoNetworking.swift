@@ -367,6 +367,7 @@ public class MockConfig: Config {
     public var truncatedYAxisOnParameterGraphs: Bool = false
     public var earningsModel: EarningsModel = .exported
     public var summaryDateRange: SummaryDateRange = .automatic
+    public var colorScheme: ForcedColorScheme = .auto
 }
 
 public extension SolcastSite {

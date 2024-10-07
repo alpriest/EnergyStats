@@ -14,6 +14,12 @@ public enum RefreshFrequency: Int {
     case FIVE_MINUTES = 5
 }
 
+public enum ForcedColorScheme: Int, Codable {
+    case auto = 0
+    case light = 1
+    case dark = 2
+}
+
 public protocol ConfigManaging: FinancialConfigManager, SolcastConfigManager, BatteryConfigManager, CurrentStatusCalculatorConfig, ScheduleTemplateConfigManager {
     func fetchPowerStationDetail() async throws
     func fetchDevices() async throws
@@ -59,6 +65,7 @@ public protocol ConfigManaging: FinancialConfigManager, SolcastConfigManager, Ba
     var showSelfSufficiencyStatsGraphOverlay: Bool { get set }
     var truncatedYAxisOnParameterGraphs: Bool { get set }
     var summaryDateRange: SummaryDateRange { get set }
+    var colorScheme: ForcedColorScheme { get set }
 }
 
 public protocol BatteryConfigManager {

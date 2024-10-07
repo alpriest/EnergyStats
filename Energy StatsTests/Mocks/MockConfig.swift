@@ -62,4 +62,6 @@ class MockConfig: Config {
     var scheduleTemplates: [ScheduleTemplate] = []
     var truncatedYAxisOnParameterGraphs: Bool = false
     var earningsModel: EarningsModel = .exported
+    var summaryDateRange: SummaryDateRange = .automatic
+    var colorScheme: ForcedColorScheme = .auto
 }

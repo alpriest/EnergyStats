@@ -555,6 +555,11 @@ public class ConfigManager: ConfigManaging {
         get { config.summaryDateRange }
         set { config.summaryDateRange = newValue }
     }
+
+    public var colorScheme: ForcedColorScheme {
+        get { config.colorScheme }
+        set { config.colorScheme = newValue }
+    }
 }
 
 public enum BatteryResponseMapper {

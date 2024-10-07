@@ -3836,6 +3836,9 @@
         }
       }
     },
+    "Color scheme" : {
+
+    },
     "Combine CT2 with PV power" : {
       "localizations" : {
         "de" : {
@@ -4390,6 +4393,9 @@
           }
         }
       }
+    },
+    "Dark" : {
+
     },
     "Data" : {
       "localizations" : {
@@ -8038,6 +8044,9 @@
           }
         }
       }
+    },
+    "Light" : {
+
     },
     "Load firmware versions" : {
       "localizations" : {
@@ -13213,6 +13222,9 @@
           }
         }
       }
+    },
+    "System" : {
+
     },
     "Tap the capacity above to enter a manual value." : {
       "localizations" : {

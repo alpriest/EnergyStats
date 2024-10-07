@@ -76,6 +76,16 @@ struct DisplaySettingsView: View {
                 Text("Sun display variation thresholds")
             }
 
+            HStack {
+                Text("Color scheme").padding(.trailing)
+                Spacer()
+                Picker("Color scheme", selection: $viewModel.colorScheme) {
+                    Text("Light").tag(ForcedColorScheme.light)
+                    Text("Dark").tag(ForcedColorScheme.dark)
+                    Text("System").tag(ForcedColorScheme.auto)
+                }.pickerStyle(.segmented)
+            }
+
         } header: {
             Text("Display")
         } footer: {
