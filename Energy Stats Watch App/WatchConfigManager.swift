@@ -13,6 +13,12 @@ protocol WatchConfigManaging: CurrentStatusCalculatorConfig, BatteryConfigManage
 }
 
 class WatchConfigManager: WatchConfigManaging {
+    private let keychainStore: KeychainStoring
+
+    init(keychainStore: KeychainStoring) {
+        self.keychainStore = keychainStore
+    }
+
     @UserDefaultsStoredString(key: "batteryCapacity", defaultValue: "0")
     var batteryCapacity: String
 
@@ -36,8 +42,14 @@ class WatchConfigManager: WatchConfigManaging {
     @UserDefaultsStoredBool(key: "showUsableBatteryOnly", defaultValue: false)
     var showUsableBatteryOnly: Bool
 
-    @UserDefaultsStoredBool(key: "showGridTotalsOnPowerFlow", defaultValue: false)
-    var showGridTotalsOnPowerFlow: Bool
+    var showGridTotalsOnPowerFlow: Bool {
+        get {
+            keychainStore.get(key: .showGridTotalsOnPowerFlow)
+        }
+        set {
+            try? keychainStore.store(key: .showGridTotalsOnPowerFlow, value: newValue)
+        }
+    }
 
     var solarDefinitions: SolarRangeDefinitions {
         get {

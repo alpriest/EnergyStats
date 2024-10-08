@@ -29,7 +29,7 @@ class HomeEnergyStateManagerConfigManager: HomeEnergyStateManagerConfig {
     var showUsableBatteryOnly: Bool
     
     var selectedDeviceSN: String? {
-        keychainStore.getSelectedDeviceSN()
+        keychainStore.get(key: .deviceSN)
     }
 
     var dataCeiling: DataCeiling {

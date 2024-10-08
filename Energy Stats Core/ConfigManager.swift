@@ -158,7 +158,7 @@ public class ConfigManager: ConfigManaging {
         }
         set {
             config.selectedDeviceSN = newValue
-            try? keychainStore.store(selectedDeviceSN: newValue)
+            try? keychainStore.store(key: .deviceSN, value: newValue)
             currentDevice.send(devices?.first(where: { $0.deviceSN == selectedDeviceSN }) ?? devices?.first)
         }
     }
@@ -596,5 +596,24 @@ public extension ConfigManager {
             )
             Task { try await fetchDevices() }
         }
+    }
+}
+
+extension Bool {
+    var stringValue: String {
+        self ? "true" : "false"
+    }
+}
+
+extension String {
+    var boolValue: Bool {
+        self == "true"
+    }
+}
+
+extension Optional where Wrapped == String {
+    var boolValue: Bool {
+        guard let self else { return false }
+        return self.boolValue
     }
 }

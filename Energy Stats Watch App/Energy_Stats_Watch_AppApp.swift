@@ -14,6 +14,7 @@ struct Energy_Stats_Watch_App: App {
     static let delegate = WatchSessionDelegate()
     @Environment(\.scenePhase) private var scenePhase
     @WKApplicationDelegateAdaptor var appDelegate: EnergyStatsWatchAppDelegate
+
     var keychainStore: KeychainStoring = {
         if ProcessInfo().arguments.contains("mockDevice") {
             StubKeychainStore()
@@ -33,7 +34,7 @@ struct Energy_Stats_Watch_App: App {
     }()
 
     var body: some Scene {
-        let configManager = WatchConfigManager()
+        let configManager = WatchConfigManager(keychainStore: keychainStore)
 
         WindowGroup {
             ContentView(keychainStore: keychainStore, network: network, config: configManager)

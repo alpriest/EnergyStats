@@ -44,11 +44,27 @@ class MockKeychainStore: KeychainStoring {
         hasCredentials.value = value
     }
 
-    public func store(selectedDeviceSN: String?) throws {
-        self.selectedDeviceSN = selectedDeviceSN
+    func get(key: KeychainItemKey) -> Bool {
+        false
     }
 
-    public func getSelectedDeviceSN() -> String? {
-        selectedDeviceSN
+    func store(key: KeychainItemKey, value: Bool) throws {}
+
+    func get(key: KeychainItemKey) -> String? {
+        switch key {
+        case .showGridTotalsOnPowerFlow:
+            nil
+        case .deviceSN:
+            selectedDeviceSN
+        }
+    }
+
+    func store(key: KeychainItemKey, value: String?) throws {
+        switch key {
+        case .showGridTotalsOnPowerFlow:
+            ()
+        case .deviceSN:
+            selectedDeviceSN = value
+        }
     }
 }

@@ -17,6 +17,11 @@ public struct KeychainError: Error {
     let code: OSStatus?
 }
 
+public enum KeychainItemKey: String {
+    case showGridTotalsOnPowerFlow
+    case deviceSN
+}
+
 public protocol KeychainStoring {
     func store(apiKey: String?, notifyObservers: Bool) throws
     func logout()
@@ -24,8 +29,10 @@ public protocol KeychainStoring {
     func getToken() -> String?
     var hasCredentials: CurrentValueSubject<Bool, Never> { get }
     var isDemoUser: Bool { get }
-    func getSelectedDeviceSN() -> String?
-    func store(selectedDeviceSN: String?) throws
+    func store(key: KeychainItemKey, value: Bool) throws
+    func store(key: KeychainItemKey, value: String?) throws
+    func get(key: KeychainItemKey) -> Bool
+    func get(key: KeychainItemKey) -> String?
 }
 
 public class KeychainStore: KeychainStoring {
@@ -39,16 +46,6 @@ public class KeychainStore: KeychainStoring {
 
     public let hasCredentials = CurrentValueSubject<Bool, Never>(false)
     private let group: String
-
-    public func getSelectedDeviceSN() -> String? {
-        get(tag: "deviceSN")
-    }
-
-    public func store(selectedDeviceSN: String?) throws {
-        guard let selectedDeviceSN else { return }
-
-        try set(tag: "deviceSN", value: selectedDeviceSN)
-    }
 
     public init(group: String = "885RLNNNK2.com.alpriest.EnergyStats") {
         self.group = group
@@ -78,6 +75,22 @@ public class KeychainStore: KeychainStoring {
 
     public var isDemoUser: Bool {
         getToken() == "demo"
+    }
+
+    public func get(key: KeychainItemKey) -> String? {
+        get(tag: key.rawValue)
+    }
+
+    public func store(key: KeychainItemKey, value: String?) throws {
+        try set(tag: key.rawValue, value: value)
+    }
+
+    public func get(key: KeychainItemKey) -> Bool {
+        get(tag: key.rawValue).boolValue
+    }
+
+    public func store(key: KeychainItemKey, value: Bool) throws {
+        try set(tag: key.rawValue, value: value.stringValue)
     }
 }
 

@@ -22,6 +22,7 @@ struct Energy_StatsApp: App {
     let userManager: UserManager
     let versionChecker = VersionChecker()
     let templateStore: TemplateStoring
+    private var cancellables = Set<AnyCancellable>()
 
     @Environment(\.scenePhase) private var scenePhase
 
@@ -42,6 +43,10 @@ struct Energy_StatsApp: App {
         configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
         userManager = .init(store: keychainStore, configManager: configManager, networkCache: InMemoryLoggingNetworkStore.shared)
         templateStore = TemplateStore(config: configManager)
+        appSettingsPublisher
+            .sink { [keychainStore] settings in
+                Self.updateKeychainSettingsForWatch(keychainStore: keychainStore, settings: settings)
+            }.store(in: &cancellables)
     }
 
     var body: some Scene {
@@ -88,6 +93,10 @@ struct Energy_StatsApp: App {
 
     static func isRunningScreenshots() -> Bool {
         CommandLine.arguments.contains("screenshots")
+    }
+
+    private static func updateKeychainSettingsForWatch(keychainStore: KeychainStoring, settings: AppSettings) {
+        try? keychainStore.store(key: .showGridTotalsOnPowerFlow, value: settings.showGridTotalsOnPowerFlow)
     }
 }
 
