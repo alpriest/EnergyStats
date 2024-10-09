@@ -97,6 +97,7 @@ struct SolarStringsSettingsView: View {
                 Text(title)
             }.textFieldStyle(.roundedBorder)
         }
+        .accessibilityLabel(title)
     }
 }
 
