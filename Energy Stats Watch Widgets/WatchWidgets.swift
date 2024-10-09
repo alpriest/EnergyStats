@@ -29,7 +29,7 @@ struct CircularBatteryStatusWidget: Widget {
     let kind: String = "BatteryCircularWidget"
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: Provider(config: HomeEnergyStateManagerConfigManager())) { entry in
+        StaticConfiguration(kind: kind, provider: BatteryTimelineProvider(config: HomeEnergyStateManagerConfigManager())) { entry in
             Group {
                 if let soc = entry.soc {
                     BatteryGaugeView(value: soc, batteryPower: entry.batteryPower)
@@ -57,7 +57,7 @@ struct CornerBatteryStatusWidget: Widget {
     let kind: String = "BatteryCornerWidget"
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: Provider(config: HomeEnergyStateManagerConfigManager())) { entry in
+        StaticConfiguration(kind: kind, provider: BatteryTimelineProvider(config: HomeEnergyStateManagerConfigManager())) { entry in
             Group {
                 if let soc = entry.soc {
                     Text(soc, format: .percent)
@@ -86,7 +86,7 @@ struct RectangularBatteryStatusWidget: Widget {
     let kind: String = "BatteryRectangularWidget"
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: Provider(config: HomeEnergyStateManagerConfigManager())) { entry in
+        StaticConfiguration(kind: kind, provider: BatteryTimelineProvider(config: HomeEnergyStateManagerConfigManager())) { entry in
             Group {
                 if let soc = entry.soc {
                     HStack {
@@ -126,7 +126,7 @@ struct BatteryStatusWidget: Widget {
     let kind: String = "BatteryStatusWidget"
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: Provider(config: HomeEnergyStateManagerConfigManager())) { entry in
+        StaticConfiguration(kind: kind, provider: BatteryTimelineProvider(config: HomeEnergyStateManagerConfigManager())) { entry in
             Group {
                 if let soc = entry.soc {
                     Text(soc, format: .percent)
@@ -156,23 +156,23 @@ struct BatteryStatusWidget: Widget {
 #Preview("Rectangular", as: .accessoryRectangular) {
     RectangularBatteryStatusWidget()
 } timeline: {
-    SimpleEntry(date: .now, soc: 30, chargeStatusDescription: "Empty in 0 seconds", state: .loaded, errorMessage: nil, batteryPower: 2.0)
+    BatteryTimelineEntry(date: .now, soc: 30, chargeStatusDescription: "Empty in 0 seconds", state: .loaded, errorMessage: nil, batteryPower: 2.0)
 }
 
 #Preview("Circular", as: .accessoryCircular) {
     CircularBatteryStatusWidget()
 } timeline: {
-    SimpleEntry(date: .now, soc: 30, chargeStatusDescription: "Empty in 0 seconds", state: .loaded, errorMessage: nil, batteryPower: 2.2)
+    BatteryTimelineEntry(date: .now, soc: 30, chargeStatusDescription: "Empty in 0 seconds", state: .loaded, errorMessage: nil, batteryPower: 2.2)
 }
 
 #Preview("Inline", as: .accessoryInline) {
     BatteryStatusWidget()
 } timeline: {
-    SimpleEntry(date: .now, soc: 30, chargeStatusDescription: "Empty in 0 seconds", state: .loaded, errorMessage: nil, batteryPower: 2.2)
+    BatteryTimelineEntry(date: .now, soc: 30, chargeStatusDescription: "Empty in 0 seconds", state: .loaded, errorMessage: nil, batteryPower: 2.2)
 }
 
 #Preview("Corner", as: .accessoryCorner) {
     CornerBatteryStatusWidget()
 } timeline: {
-    SimpleEntry(date: .now, soc: 30, chargeStatusDescription: "Empty in 0 seconds", state: .loaded, errorMessage: nil, batteryPower: 2.2)
+    BatteryTimelineEntry(date: .now, soc: 30, chargeStatusDescription: "Empty in 0 seconds", state: .loaded, errorMessage: nil, batteryPower: 2.2)
 }

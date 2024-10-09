@@ -77,7 +77,7 @@
 		4127911228E38F1400D5F993 /* LoginViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127911128E38F1400D5F993 /* LoginViewTests.swift */; };
 		412887472BE7BCAD007E9532 /* WatchConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412887462BE7BCAD007E9532 /* WatchConfigManager.swift */; };
 		4128874A2BE7CCC0007E9532 /* HomeEnergyStateManagerConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412887482BE7CBCC007E9532 /* HomeEnergyStateManagerConfigManager.swift */; };
-		4128874C2BE7CE9B007E9532 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418547382A3A1623000128C7 /* Provider.swift */; };
+		4128874C2BE7CE9B007E9532 /* BatteryTimelineProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418547382A3A1623000128C7 /* BatteryTimelineProvider.swift */; };
 		4128874E2BE7CFD5007E9532 /* HomeEnergyStateManagerConfigAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4128874D2BE7CFD5007E9532 /* HomeEnergyStateManagerConfigAdapter.swift */; };
 		412887512BE7D603007E9532 /* EnergyStatsWatchAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412887502BE7D603007E9532 /* EnergyStatsWatchAppDelegate.swift */; };
 		412887532BE7D617007E9532 /* WatchSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412887522BE7D617007E9532 /* WatchSessionDelegate.swift */; };
@@ -157,6 +157,9 @@
 		41757BBC2A90A05E00573FB4 /* AmountType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41757BBB2A90A05E00573FB4 /* AmountType.swift */; };
 		41757BBD2A90A06E00573FB4 /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0B43329F96D3600CA9462 /* LocalizedString.swift */; };
 		417747F92C0379080023A51C /* history-temp.json in Resources */ = {isa = PBXBuildFile; fileRef = 417747F82C0379080023A51C /* history-temp.json */; };
+		41777F5B2CB6CD5900507E4B /* StatsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41777F5A2CB6CD4C00507E4B /* StatsWidget.swift */; };
+		41777F5D2CB6D63A00507E4B /* StatsTimelineProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41777F5C2CB6D63500507E4B /* StatsTimelineProvider.swift */; };
+		41777F5F2CB6D70B00507E4B /* StatsGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41777F5E2CB6D70A00507E4B /* StatsGraphView.swift */; };
 		417AA21A2A12454A0073CD34 /* StatsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AA2192A12454A0073CD34 /* StatsTabView.swift */; };
 		417AA21D2A1245C00073CD34 /* StatsTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AA21C2A1245C00073CD34 /* StatsTabViewModel.swift */; };
 		418024E22AD16D00009A2625 /* String+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418024E12AD16D00009A2625 /* String+Currency.swift */; };
@@ -611,6 +614,9 @@
 		41757BBB2A90A05E00573FB4 /* AmountType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountType.swift; sourceTree = "<group>"; };
 		417747F82C0379080023A51C /* history-temp.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "history-temp.json"; sourceTree = "<group>"; };
 		41777F1428F49C61009944FF /* NetworkFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFacade.swift; sourceTree = "<group>"; };
+		41777F5A2CB6CD4C00507E4B /* StatsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsWidget.swift; sourceTree = "<group>"; };
+		41777F5C2CB6D63500507E4B /* StatsTimelineProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTimelineProvider.swift; sourceTree = "<group>"; };
+		41777F5E2CB6D70A00507E4B /* StatsGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGraphView.swift; sourceTree = "<group>"; };
 		417AA2192A12454A0073CD34 /* StatsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTabView.swift; sourceTree = "<group>"; };
 		417AA21C2A1245C00073CD34 /* StatsTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTabViewModel.swift; sourceTree = "<group>"; };
 		418024E12AD16D00009A2625 /* String+Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Currency.swift"; sourceTree = "<group>"; };
@@ -620,7 +626,7 @@
 		418240772A9A33E300101064 /* TotalsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalsViewModel.swift; sourceTree = "<group>"; };
 		418547162A3A1530000128C7 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		418547182A3A1530000128C7 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		418547382A3A1623000128C7 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
+		418547382A3A1623000128C7 /* BatteryTimelineProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryTimelineProvider.swift; sourceTree = "<group>"; };
 		4185474B2A3A59E4000128C7 /* Energy Stats.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Energy Stats.entitlements"; sourceTree = "<group>"; };
 		4185FAB12A3B6C8D0082D53F /* BatteryWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryWidget.swift; sourceTree = "<group>"; };
 		4185FAB52A3B74E60082D53F /* BatteryStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryStatusView.swift; sourceTree = "<group>"; };
@@ -1019,6 +1025,8 @@
 		412A266F2AC03B2300F61456 /* Energy Stats Phone Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				41777F5E2CB6D70A00507E4B /* StatsGraphView.swift */,
+				41777F5A2CB6CD4C00507E4B /* StatsWidget.swift */,
 				41A715912BDFCA8B00560628 /* Energy Stats Phone WidgetsExtension.entitlements */,
 				412A26852AC05D1200F61456 /* UpdateBatteryChargeLevelIntent.swift */,
 				4185FAB12A3B6C8D0082D53F /* BatteryWidget.swift */,
@@ -1494,7 +1502,8 @@
 		41EE909A2BDEA97C006412FB /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
-				418547382A3A1623000128C7 /* Provider.swift */,
+				41777F5C2CB6D63500507E4B /* StatsTimelineProvider.swift */,
+				418547382A3A1623000128C7 /* BatteryTimelineProvider.swift */,
 				41EE909B2BDEA98B006412FB /* HomeEnergyStateManager.swift */,
 				4128874D2BE7CFD5007E9532 /* HomeEnergyStateManagerConfigAdapter.swift */,
 			);
@@ -1901,6 +1910,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				41EE909D2BDEAA27006412FB /* UpdateBatteryChargeLevelIntent.swift in Sources */,
+				41777F5F2CB6D70B00507E4B /* StatsGraphView.swift in Sources */,
+				41777F5B2CB6CD5900507E4B /* StatsWidget.swift in Sources */,
 				412A26832AC03BF000F61456 /* BatteryStatusView.swift in Sources */,
 				412A26712AC03B2300F61456 /* Energy_Stats_WidgetsBundle.swift in Sources */,
 				412A267E2AC03B4B00F61456 /* BatteryWidget.swift in Sources */,
@@ -2106,7 +2117,7 @@
 				414A40BC2B989CB900321AA2 /* PowerStationDetail.swift in Sources */,
 				411029192A729F02004018BB /* BatteryTimesResponse.swift in Sources */,
 				4103D1E229DB6CD7001B0BC8 /* ConfigManager.swift in Sources */,
-				4128874C2BE7CE9B007E9532 /* Provider.swift in Sources */,
+				4128874C2BE7CE9B007E9532 /* BatteryTimelineProvider.swift in Sources */,
 				41E165B92B0BAD9500B17590 /* UserDefaultsPropertyWrappers.swift in Sources */,
 				411542EC2BED310200BDE56D /* TemplateStore.swift in Sources */,
 				4156A2312CB6773300099A6A /* ErrorAlertViewManufacturing.swift in Sources */,
@@ -2131,6 +2142,7 @@
 				41CB714A2A3B1B6C00199415 /* StyleGuide.swift in Sources */,
 				4190921F2B1D25890017CB65 /* Time.swift in Sources */,
 				412A26882AC07FC800F61456 /* BatteryCapacityCalculator.swift in Sources */,
+				41777F5D2CB6D63A00507E4B /* StatsTimelineProvider.swift in Sources */,
 				41EE909C2BDEA98B006412FB /* HomeEnergyStateManager.swift in Sources */,
 				4156A2332CB67EF500099A6A /* UserAgent.swift in Sources */,
 				41E165B72B0BAD7400B17590 /* UserDefaultsConfig.swift in Sources */,

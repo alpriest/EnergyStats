@@ -29,7 +29,7 @@ struct UpdateBatteryChargeLevelIntent: AppIntent {
                                                   dataCeiling: { .none })
 
             let configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
-            try await HomeEnergyStateManager.shared.update(config: HomeEnergyStateManagerConfigAdapter(config: configManager))
+            try await HomeEnergyStateManager.shared.updateBatteryState(config: HomeEnergyStateManagerConfigAdapter(config: configManager))
 
             WidgetCenter.shared.reloadTimelines(ofKind: "BatteryWidget")
 

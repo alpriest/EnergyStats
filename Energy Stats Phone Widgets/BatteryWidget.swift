@@ -24,7 +24,7 @@ struct BatteryWidget: Widget {
     }
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: Provider(config: HomeEnergyStateManagerConfigAdapter(config: configManager))) { entry in
+        StaticConfiguration(kind: kind, provider: BatteryTimelineProvider(config: HomeEnergyStateManagerConfigAdapter(config: configManager))) { entry in
             BatteryWidgetView(entry: entry, configManager: configManager)
         }
         .configurationDisplayName("Battery Status Widget")
@@ -37,7 +37,7 @@ struct BatteryWidget: Widget {
 }
 
 struct BatteryWidgetView: View {
-    var entry: Provider.Entry
+    var entry: BatteryTimelineProvider.Entry
     let configManager: ConfigManaging
     @Environment(\.widgetFamily) var family
     @Environment(\.colorScheme) var colorScheme
@@ -116,7 +116,7 @@ struct BatteryWidgetView: View {
 struct BatteryWidget_Previews: PreviewProvider {
     static var previews: some View {
         BatteryWidgetView(
-            entry: SimpleEntry.failed(error: "Something went wrong"),
+            entry: BatteryTimelineEntry.failed(error: "Something went wrong"),
             configManager: ConfigManager(
                 networking: NetworkService.preview(),
                 config: MockConfig(),
@@ -127,7 +127,7 @@ struct BatteryWidget_Previews: PreviewProvider {
         .previewContext(WidgetPreviewContext(family: .accessoryCircular))
 
         BatteryWidgetView(
-            entry: SimpleEntry.loaded(date: Date(),
+            entry: BatteryTimelineEntry.loaded(date: Date(),
                                       soc: 50,
                                       chargeStatusDescription: "Full in 22 minutes",
                                       errorMessage: "Could not refresh",

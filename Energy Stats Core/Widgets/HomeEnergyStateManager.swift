@@ -30,18 +30,20 @@ public class HomeEnergyStateManager {
     init() {
         do {
             network = NetworkService.standard(keychainStore: keychainStore,
-                                              isDemoUser: {
-                                                  false
-                                              },
+                                              isDemoUser: { false },
                                               dataCeiling: { .none })
             modelContainer = try ModelContainer(for: BatteryWidgetState.self)
         } catch {
             fatalError("Failed to create the model container: \(error)")
         }
     }
+}
 
+@available(iOS 17.0, *)
+@available(watchOS 9.0, *)
+extension HomeEnergyStateManager {
     @MainActor
-    public func isStale() async -> Bool {
+    public func isBatteryStateStale() async -> Bool {
         let fetchDescriptor: FetchDescriptor<BatteryWidgetState> = FetchDescriptor()
         guard let widgetState = (try? modelContainer.mainContext.fetch(fetchDescriptor))?.first else { return true }
 
@@ -49,8 +51,8 @@ public class HomeEnergyStateManager {
     }
 
     @MainActor
-    public func update(config: HomeEnergyStateManagerConfig) async throws {
-        guard await isStale() else { return }
+    public func updateBatteryState(config: HomeEnergyStateManagerConfig) async throws {
+        guard await isBatteryStateStale() else { return }
         guard let deviceSN = config.selectedDeviceSN else { throw ConfigManager.NoDeviceFoundError() }
 
         let real = try await network.fetchRealData(
@@ -63,7 +65,7 @@ public class HomeEnergyStateManager {
                         "ResidualEnergy"]
         )
 
-        try update(
+        try calculateBatteryState(
             openQueryResponse: real,
             batteryCapacityW: config.batteryCapacityW,
             minSOC: config.minSOC,
@@ -72,7 +74,7 @@ public class HomeEnergyStateManager {
     }
 
     @MainActor
-    public func update(
+    public func calculateBatteryState(
         openQueryResponse: OpenQueryResponse,
         batteryCapacityW: Int,
         minSOC: Double,
@@ -89,21 +91,21 @@ public class HomeEnergyStateManager {
             batteryStateOfCharge: soc
         )
 
-        try update(soc: Int(soc * 100.0), chargeStatusDescription: chargeStatusDescription, batteryPower: batteryViewModel.chargePower)
+        try storeBatteryModel(soc: Int(soc * 100.0), chargeStatusDescription: chargeStatusDescription, batteryPower: batteryViewModel.chargePower)
     }
 
     @MainActor
-    private func update(soc: Int, chargeStatusDescription: String?, batteryPower: Double) throws {
+    private func storeBatteryModel(soc: Int, chargeStatusDescription: String?, batteryPower: Double) throws {
         let state = BatteryWidgetState(batterySOC: soc, chargeStatusDescription: chargeStatusDescription, batteryPower: batteryPower)
 
-        deleteEntry()
+        deleteBatteryStateEntry()
 
         modelContainer.mainContext.insert(state)
         modelContainer.mainContext.processPendingChanges()
     }
 
     @MainActor
-    private func deleteEntry() {
+    private func deleteBatteryStateEntry() {
         let fetchDescriptor: FetchDescriptor<BatteryWidgetState> = FetchDescriptor()
         if let widgetState = (try? modelContainer.mainContext.fetch(fetchDescriptor))?.first {
             modelContainer.mainContext.delete(widgetState)
@@ -123,5 +125,36 @@ public extension OpenQueryResponse {
             residual: datas.currentDouble(for: "ResidualEnergy") * 10.0,
             temperature: datas.currentDouble(for: "batTemperature")
         )
+    }
+}
+
+@available(iOS 17.0, *)
+@available(watchOS 9.0, *)
+extension HomeEnergyStateManager {
+    @MainActor
+    public func isStatsStateStale() async -> Bool {
+        let fetchDescriptor: FetchDescriptor<StatsWidgetState> = FetchDescriptor()
+        guard let widgetState = (try? modelContainer.mainContext.fetch(fetchDescriptor))?.first else { return true }
+
+        return widgetState.lastUpdated.timeIntervalSinceNow < -60
+    }
+
+    @MainActor
+    public func updateStatsState(config: HomeEnergyStateManagerConfig) async throws {
+        guard await isBatteryStateStale() else { return }
+        guard let deviceSN = config.selectedDeviceSN else { throw ConfigManager.NoDeviceFoundError() }
+
+        let report = try await network.fetchReport(
+            deviceSN: deviceSN,
+            variables: [.loads,
+                        .feedIn,
+                        .gridConsumption,
+                        .chargeEnergyToTal,
+                        .dischargeEnergyToTal],
+            queryDate: QueryDate(from: .now),
+            reportType: .day
+        )
+
+//        try calculateStatsState(openQueryResponse: report)
     }
 }

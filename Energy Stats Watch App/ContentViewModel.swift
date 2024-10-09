@@ -95,7 +95,7 @@ class ContentViewModel {
                 )
             }
 
-            try? await HomeEnergyStateManager.shared.update(
+            try? await HomeEnergyStateManager.shared.calculateBatteryState(
                 openQueryResponse: reals,
                 batteryCapacityW: config.batteryCapacityW,
                 minSOC: config.minSOC,

@@ -31,3 +31,31 @@ public class BatteryWidgetState {
         BatteryWidgetState(batterySOC: 55, lastUpdated: .now, chargeStatusDescription: "Full in 23 minutes", batteryPower: 2.2)
     }
 }
+
+@available(iOS 17.0, *)
+@Model
+public class StatsWidgetState {
+    public var lastUpdated: Date
+    public var home: Double
+    public var gridExport: Double
+    public var gridImport: Double
+    public var batteryCharge: Double
+    public var batteryDischarge: Double
+
+    public init(lastUpdated: Date = Date(), home: Double, gridExport: Double, gridImport: Double, batteryCharge: Double, batteryDischarge: Double) {
+        self.lastUpdated = lastUpdated
+        self.home = home
+        self.gridExport = gridExport
+        self.gridImport = gridImport
+        self.batteryCharge = batteryCharge
+        self.batteryDischarge = batteryDischarge
+    }
+
+    public static func empty() -> StatsWidgetState {
+        StatsWidgetState(home: 0, gridExport: 0, gridImport: 0, batteryCharge: 0, batteryDischarge: 0)
+    }
+
+    static var preview: StatsWidgetState {
+        StatsWidgetState(home: 2.4, gridExport: 1.0, gridImport: 2.0, batteryCharge: 2.4, batteryDischarge: 0.9)
+    }
+}

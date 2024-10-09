@@ -11,7 +11,7 @@ import SwiftUI
 import WidgetKit
 
 @available(iOS 17.0, *)
-public struct Provider: TimelineProvider {
+public struct BatteryTimelineProvider: TimelineProvider {
     private let config: HomeEnergyStateManagerConfig
     private let keychainStore = KeychainStore()
     private let modelContainer: ModelContainer
@@ -21,13 +21,13 @@ public struct Provider: TimelineProvider {
         modelContainer = HomeEnergyStateManager.shared.modelContainer
     }
 
-    public func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry.placeholder()
+    public func placeholder(in context: Context) -> BatteryTimelineEntry {
+        BatteryTimelineEntry.placeholder()
     }
 
-    public func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
+    public func getSnapshot(in context: Context, completion: @escaping (BatteryTimelineEntry) -> ()) {
         if context.isPreview {
-            let entry = SimpleEntry.placeholder()
+            let entry = BatteryTimelineEntry.placeholder()
             completion(entry)
         } else {
             Task { @MainActor in
@@ -37,7 +37,7 @@ public struct Provider: TimelineProvider {
         }
     }
 
-    public func getTimeline(in context: Context, completion: @escaping (Timeline<SimpleEntry>) -> ()) {
+    public func getTimeline(in context: Context, completion: @escaping (Timeline<BatteryTimelineEntry>) -> ()) {
         Task { @MainActor in
             let entry = await getCurrentState()
 
@@ -57,11 +57,11 @@ public struct Provider: TimelineProvider {
     }
 
     @MainActor
-    private func getCurrentState() async -> SimpleEntry {
+    private func getCurrentState() async -> BatteryTimelineEntry {
         var errorMessage: String? = nil
 
         do {
-            try await HomeEnergyStateManager.shared.update(config: config)
+            try await HomeEnergyStateManager.shared.updateBatteryState(config: config)
         } catch _ as ConfigManager.NoBattery {
             return .failed(error: "Your selected inverter has no battery connected")
         } catch {
@@ -71,7 +71,7 @@ public struct Provider: TimelineProvider {
         do {
             let fetchDescriptor: FetchDescriptor<BatteryWidgetState> = FetchDescriptor()
             if let widgetState = try (modelContainer.mainContext.fetch(fetchDescriptor)).first {
-                return SimpleEntry.loaded(
+                return BatteryTimelineEntry.loaded(
                     date: widgetState.lastUpdated,
                     soc: widgetState.batterySOC,
                     chargeStatusDescription: widgetState.chargeStatusDescription,
@@ -95,7 +95,7 @@ public enum EntryState: Equatable {
     case failedWithoutData(reason: String)
 }
 
-public struct SimpleEntry: TimelineEntry {
+public struct BatteryTimelineEntry: TimelineEntry {
     public let date: Date
     public let soc: Int?
     public let chargeStatusDescription: String?
@@ -112,8 +112,8 @@ public struct SimpleEntry: TimelineEntry {
         self.batteryPower = batteryPower
     }
 
-    public static func loaded(date: Date, soc: Int, chargeStatusDescription: String?, errorMessage: String?, batteryPower: Double?) -> SimpleEntry {
-        SimpleEntry(date: date,
+    public static func loaded(date: Date, soc: Int, chargeStatusDescription: String?, errorMessage: String?, batteryPower: Double?) -> BatteryTimelineEntry {
+        BatteryTimelineEntry(date: date,
                     soc: soc,
                     chargeStatusDescription: chargeStatusDescription,
                     state: .loaded,
@@ -121,8 +121,8 @@ public struct SimpleEntry: TimelineEntry {
                     batteryPower: batteryPower)
     }
 
-    public static func placeholder() -> SimpleEntry {
-        SimpleEntry(date: Date(),
+    public static func placeholder() -> BatteryTimelineEntry {
+        BatteryTimelineEntry(date: Date(),
                     soc: 87,
                     chargeStatusDescription: "Full in 25 minutes",
                     state: .placeholder,
@@ -130,8 +130,8 @@ public struct SimpleEntry: TimelineEntry {
                     batteryPower: nil)
     }
 
-    public static func failed(error: String) -> SimpleEntry {
-        SimpleEntry(date: Date(),
+    public static func failed(error: String) -> BatteryTimelineEntry {
+        BatteryTimelineEntry(date: Date(),
                     soc: nil,
                     chargeStatusDescription: nil,
                     state: .failedWithoutData(reason: error),
