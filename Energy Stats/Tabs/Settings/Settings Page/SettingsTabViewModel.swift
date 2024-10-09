@@ -237,8 +237,7 @@ class SettingsTabViewModel: ObservableObject {
     }
 
     var appVersion: String {
-        let dictionary = Bundle.main.infoDictionary!
-        return dictionary["CFBundleShortVersionString"] as! String
+        UserAgent.description()
     }
 
     func recalculateBatteryCapacity() {

@@ -79,11 +79,10 @@ public class Solcast: SolarForecasting {
     }
 
     private func append(queryItems: [URLQueryItem], to url: URL) -> URLRequest {
-        let request: URLRequest
-
         var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
         components?.queryItems = queryItems
-        request = URLRequest(url: components!.url!)
+        var request = URLRequest(url: components!.url!)
+        request.setValue(UserAgent.description(), forHTTPHeaderField: "User-Agent")
 
         return request
     }

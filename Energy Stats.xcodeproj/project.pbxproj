@@ -124,6 +124,7 @@
 		4155D70D2B28FC920071346A /* Optional+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4155D70C2B28FC920071346A /* Optional+Int.swift */; };
 		4156A22F2CB6770A00099A6A /* SolcastErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156A22E2CB6770700099A6A /* SolcastErrorAlertView.swift */; };
 		4156A2312CB6773300099A6A /* ErrorAlertViewManufacturing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156A2302CB6772D00099A6A /* ErrorAlertViewManufacturing.swift */; };
+		4156A2332CB67EF500099A6A /* UserAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156A2322CB67EF400099A6A /* UserAgent.swift */; };
 		4156E7B72B9C839F0000E807 /* PowerStationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156E7B62B9C839F0000E807 /* PowerStationSettingsView.swift */; };
 		415AFA832C597DD800691852 /* SlowServerBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415AFA822C597DD800691852 /* SlowServerBannerView.swift */; };
 		415F2C742CA7E4AA00B9CE0D /* SummaryDateRangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415F2C732CA7E4A300B9CE0D /* SummaryDateRangeView.swift */; };
@@ -575,6 +576,7 @@
 		4155D70C2B28FC920071346A /* Optional+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Int.swift"; sourceTree = "<group>"; };
 		4156A22E2CB6770700099A6A /* SolcastErrorAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolcastErrorAlertView.swift; sourceTree = "<group>"; };
 		4156A2302CB6772D00099A6A /* ErrorAlertViewManufacturing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertViewManufacturing.swift; sourceTree = "<group>"; };
+		4156A2322CB67EF400099A6A /* UserAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgent.swift; sourceTree = "<group>"; };
 		4156E7B62B9C839F0000E807 /* PowerStationSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerStationSettingsView.swift; sourceTree = "<group>"; };
 		415AFA822C597DD800691852 /* SlowServerBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlowServerBannerView.swift; sourceTree = "<group>"; };
 		415F2C732CA7E4A300B9CE0D /* SummaryDateRangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryDateRangeView.swift; sourceTree = "<group>"; };
@@ -1444,6 +1446,7 @@
 		41E4B30C28DB670C003F7F47 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				4156A2322CB67EF400099A6A /* UserAgent.swift */,
 				4140146328C7146B00EA5BA1 /* NetworkModels */,
 				4140145F28C70D4700EA5BA1 /* FoxAPIServicing.swift */,
 				41BCC1AA2B245C280062084A /* FoxAPIService.swift */,
@@ -2129,6 +2132,7 @@
 				4190921F2B1D25890017CB65 /* Time.swift in Sources */,
 				412A26882AC07FC800F61456 /* BatteryCapacityCalculator.swift in Sources */,
 				41EE909C2BDEA98B006412FB /* HomeEnergyStateManager.swift in Sources */,
+				4156A2332CB67EF500099A6A /* UserAgent.swift in Sources */,
 				41E165B72B0BAD7400B17590 /* UserDefaultsConfig.swift in Sources */,
 				41FF14ED2B432EEC00FAAF1D /* GenerationViewModel.swift in Sources */,
 				4103D1D329DB6C51001B0BC8 /* BatterySOCResponse.swift in Sources */,

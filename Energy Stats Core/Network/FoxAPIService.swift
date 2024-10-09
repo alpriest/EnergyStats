@@ -23,7 +23,7 @@ class FoxAPIService: FoxAPIServicing {
 
     public func fetchErrorMessages() async {
         guard self.errorMessages.isEmpty else { return }
-        
+
         let request = URLRequest(url: URL.errorMessages)
 
         do {
@@ -128,6 +128,7 @@ extension FoxAPIService {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue(languageCode, forHTTPHeaderField: "lang")
         request.setValue(timezone, forHTTPHeaderField: "timezone")
+        request.setValue(UserAgent.description(), forHTTPHeaderField: "User-Agent")
 
         let timestamp = Int64(round(Date().timeIntervalSince1970 * 1000))
 
