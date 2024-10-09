@@ -122,6 +122,8 @@
 		414BF82829B4918300E2EB51 /* SettingsTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */; };
 		414D7A312AC8CE9C0083923F /* DisplayUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D7A302AC8CE9C0083923F /* DisplayUnit.swift */; };
 		4155D70D2B28FC920071346A /* Optional+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4155D70C2B28FC920071346A /* Optional+Int.swift */; };
+		4156A22F2CB6770A00099A6A /* SolcastErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156A22E2CB6770700099A6A /* SolcastErrorAlertView.swift */; };
+		4156A2312CB6773300099A6A /* ErrorAlertViewManufacturing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156A2302CB6772D00099A6A /* ErrorAlertViewManufacturing.swift */; };
 		4156E7B72B9C839F0000E807 /* PowerStationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156E7B62B9C839F0000E807 /* PowerStationSettingsView.swift */; };
 		415AFA832C597DD800691852 /* SlowServerBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415AFA822C597DD800691852 /* SlowServerBannerView.swift */; };
 		415F2C742CA7E4AA00B9CE0D /* SummaryDateRangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415F2C732CA7E4A300B9CE0D /* SummaryDateRangeView.swift */; };
@@ -571,6 +573,8 @@
 		414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabViewModel.swift; sourceTree = "<group>"; };
 		414D7A302AC8CE9C0083923F /* DisplayUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayUnit.swift; sourceTree = "<group>"; };
 		4155D70C2B28FC920071346A /* Optional+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Int.swift"; sourceTree = "<group>"; };
+		4156A22E2CB6770700099A6A /* SolcastErrorAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolcastErrorAlertView.swift; sourceTree = "<group>"; };
+		4156A2302CB6772D00099A6A /* ErrorAlertViewManufacturing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertViewManufacturing.swift; sourceTree = "<group>"; };
 		4156E7B62B9C839F0000E807 /* PowerStationSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerStationSettingsView.swift; sourceTree = "<group>"; };
 		415AFA822C597DD800691852 /* SlowServerBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlowServerBannerView.swift; sourceTree = "<group>"; };
 		415F2C732CA7E4A300B9CE0D /* SummaryDateRangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryDateRangeView.swift; sourceTree = "<group>"; };
@@ -851,6 +855,7 @@
 		41009A6F2B02CD50009D853B /* Solcast */ = {
 			isa = PBXGroup;
 			children = (
+				4156A22E2CB6770700099A6A /* SolcastErrorAlertView.swift */,
 				41009A702B02CD59009D853B /* Solcast.swift */,
 				41009A722B02D852009D853B /* SolcastForecastResponse.swift */,
 				4149DE9C2B04BDE6004F5FC6 /* SolcastCache.swift */,
@@ -1337,6 +1342,7 @@
 		41A95B9529DB3F6A00A35169 /* Energy Stats Core */ = {
 			isa = PBXGroup;
 			children = (
+				4156A2302CB6772D00099A6A /* ErrorAlertViewManufacturing.swift */,
 				41757BBB2A90A05E00573FB4 /* AmountType.swift */,
 				410AA38729D96F6D00CD107C /* AppSettings.swift */,
 				41E3BEC22B1B5A160051C68B /* AppSettingsPublisherFactory.swift */,
@@ -2100,6 +2106,7 @@
 				4128874C2BE7CE9B007E9532 /* Provider.swift in Sources */,
 				41E165B92B0BAD9500B17590 /* UserDefaultsPropertyWrappers.swift in Sources */,
 				411542EC2BED310200BDE56D /* TemplateStore.swift in Sources */,
+				4156A2312CB6773300099A6A /* ErrorAlertViewManufacturing.swift in Sources */,
 				416AE44D2A821E4F003D0122 /* AlertContent.swift in Sources */,
 				41F5A3652C1C630600CA1120 /* View+If.swift in Sources */,
 				4149DE9D2B04BDE6004F5FC6 /* SolcastCache.swift in Sources */,
@@ -2110,6 +2117,7 @@
 				413B7A312A4A390C00562A68 /* SelfSufficiencyCalculator.swift in Sources */,
 				4128874E2BE7CFD5007E9532 /* HomeEnergyStateManagerConfigAdapter.swift in Sources */,
 				4155D70D2B28FC920071346A /* Optional+Int.swift in Sources */,
+				4156A22F2CB6770A00099A6A /* SolcastErrorAlertView.swift in Sources */,
 				41E165BD2B0BE33E00B17590 /* Array+Any.swift in Sources */,
 				41A715932BE0CD4700560628 /* LoadState.swift in Sources */,
 				41757BBD2A90A06E00573FB4 /* LocalizedString.swift in Sources */,

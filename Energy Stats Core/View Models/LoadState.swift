@@ -21,7 +21,7 @@ public enum LoadState: Equatable {
         case (.error, .error):
             return true
         default:
-            return true
+            return false
         }
     }
 

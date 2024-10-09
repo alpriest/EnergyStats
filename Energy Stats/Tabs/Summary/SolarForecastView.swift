@@ -76,7 +76,7 @@ struct SolarForecastView: View {
                 }
             }
         }
-        .loadable(viewModel.state, retry: { viewModel.load() })
+        .loadable(viewModel.state, options: [], errorAlertType: .solcast, retry: { viewModel.load() })
         .onAppear {
             self.viewModel.load()
         }

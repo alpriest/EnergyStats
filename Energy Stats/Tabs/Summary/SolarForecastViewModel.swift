@@ -28,6 +28,12 @@ class SolarForecastViewModel: ObservableObject, HasLoadState {
     @Published var data: [SolarForecastViewData] = []
     @Published var state: LoadState = .inactive
     @Published var hasSites: Bool = false
+    private var privateState: LoadState = .inactive {
+        didSet {
+            setState(privateState)
+        }
+    }
+
     private var cancellable: AnyCancellable?
     private let configManager: ConfigManaging
     private let solarForecastProvider: () -> SolarForecasting
@@ -37,6 +43,11 @@ class SolarForecastViewModel: ObservableObject, HasLoadState {
         }
     }}
 
+    private struct SolcastFetchError: Error {
+        let site: SolcastSite
+        let innerError: Error
+    }
+
     init(configManager: ConfigManaging, appSettingsPublisher: LatestAppSettingsPublisher, solarForecastProvider: @escaping SolarForecastProviding) {
         self.configManager = configManager
         self.solarForecastProvider = solarForecastProvider
@@ -45,7 +56,7 @@ class SolarForecastViewModel: ObservableObject, HasLoadState {
     }
 
     func load() {
-        guard state == .inactive else { return }
+        guard privateState == .inactive else { return }
         guard settings.solcastSettings.sites.any else { return }
         guard let apiKey = settings.solcastSettings.apiKey else { return }
 
@@ -53,49 +64,35 @@ class SolarForecastViewModel: ObservableObject, HasLoadState {
         let today = Calendar.current.startOfDay(for: Date())
         guard let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: today) else { return }
 
-        setState(.active("Loading"))
-
         Task { @MainActor in
-            data = await settings.solcastSettings.sites
-                .asyncMap { site in
-                    do {
-                        let data = try await service.fetchForecast(for: site, apiKey: apiKey).forecasts
-                        let todayData = data.filter { $0.periodEnd.isSame(as: today) }
-                        let tomorrowData = data.filter { $0.periodEnd.isSame(as: tomorrow) }
+            guard privateState == .inactive else { return }
+            privateState = .active("Loading")
 
-                        return SolarForecastViewData(
-                            error: nil,
-                            today: todayData,
-                            todayTotal: total(forecasts: todayData),
-                            tomorrow: tomorrowData,
-                            tomorrowTotal: total(forecasts: tomorrowData),
-                            name: site.name,
-                            resourceId: site.resourceId
-                        )
-                    } catch NetworkError.tryLater {
-                        return SolarForecastViewData(
-                            error: "You have exceeded your free daily limit.",
-                            today: [],
-                            todayTotal: 0.0,
-                            tomorrow: [],
-                            tomorrowTotal: 0.0,
-                            name: site.name,
-                            resourceId: site.resourceId
-                        )
-                    } catch {
-                        return SolarForecastViewData(
-                            error: error.localizedDescription,
-                            today: [],
-                            todayTotal: 0.0,
-                            tomorrow: [],
-                            tomorrowTotal: 0.0,
-                            name: site.name,
-                            resourceId: site.resourceId
-                        )
-                    }
+            do {
+                data = try await settings.solcastSettings.sites.asyncMap { site in
+                    let data = try await service.fetchForecast(for: site, apiKey: apiKey).forecasts
+                    let todayData = data.filter { $0.periodEnd.isSame(as: today) }
+                    let tomorrowData = data.filter { $0.periodEnd.isSame(as: tomorrow) }
+
+                    return SolarForecastViewData(
+                        error: nil,
+                        today: todayData,
+                        todayTotal: total(forecasts: todayData),
+                        tomorrow: tomorrowData,
+                        tomorrowTotal: total(forecasts: tomorrowData),
+                        name: site.name,
+                        resourceId: site.resourceId
+                    )
                 }
 
-            setState(.inactive)
+                setState(.inactive)
+            } catch NetworkError.tryLater {
+                privateState = .error(nil, "You have exceeded your free daily limit.")
+                data = []
+            } catch {
+                privateState = .error(error, error.localizedDescription)
+                data = []
+            }
         }
 
         NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)

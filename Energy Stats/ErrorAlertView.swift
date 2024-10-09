@@ -33,16 +33,6 @@ struct EqualWidthButtonStyle: ButtonStyle {
     }
 }
 
-struct ErrorAlertViewOptions: OptionSet {
-    let rawValue: Int
-
-    static let checkServerStatus = ErrorAlertViewOptions(rawValue: 1 << 0)
-    static let logoutButton = ErrorAlertViewOptions(rawValue: 1 << 1)
-    static let retry = ErrorAlertViewOptions(rawValue: 1 << 2)
-    static let copyDebugData = ErrorAlertViewOptions(rawValue: 1 << 3)
-    static let all: ErrorAlertViewOptions = [.checkServerStatus, .logoutButton, .retry, .copyDebugData]
-}
-
 struct AlertIconView: View {
     var body: some View {
         GeometryReader { reader in
@@ -61,6 +51,17 @@ struct AlertIconView: View {
     }
 }
 
+enum ErrorAlertType {
+    case fox
+    case solcast
+}
+
+final class FoxErrorAlertViewManufacturing: ErrorAlertViewManufacturing {
+    func make(cause: Error?, message: String, options: ErrorAlertViewOptions, retry: @escaping () -> Void) -> any View {
+        ErrorAlertView(cause: cause, message: message, options: options, retry: retry)
+    }
+}
+
 struct ErrorAlertView: View {
     let cause: Error?
     let message: String
@@ -71,6 +72,13 @@ struct ErrorAlertView: View {
     @State private var showingFatalError = false
     @State private var showingUpgradeRequired = false
     @State private var alertContent: AlertContent?
+
+    init(cause: Error?, message: String, options: ErrorAlertViewOptions, retry: @escaping () -> Void) {
+        self.cause = cause
+        self.message = message
+        self.options = options
+        self.retry = retry
+    }
 
     var body: some View {
         VStack {
