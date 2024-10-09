@@ -8,6 +8,7 @@
 import Foundation
 
 public enum AmountType {
+    case solarString
     case solarFlow
     case batteryFlow
     case batteryCapacity
@@ -22,9 +23,11 @@ public enum AmountType {
     case `default`
 }
 
-extension AmountType {
+public extension AmountType {
     func accessibilityLabel(amount: Double, amountWithUnit: String) -> String {
         switch self {
+        case .solarString:
+            return String(format: String(accessibilityKey: .currentSolarStringGenerationAmount), arguments: [amountWithUnit])
         case .solarFlow:
             return String(format: String(accessibilityKey: .currentSolarGenerationAmount), arguments: [amountWithUnit])
         case .batteryFlow:

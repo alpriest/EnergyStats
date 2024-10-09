@@ -39,6 +39,8 @@ struct SolarStringsView: View {
 
                         PowerText(amount: pvString.amount, appSettings: appSettings, type: .solarFlow)
                     }
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityLabel(pvString.displayName(settings: appSettings.powerFlowStrings) + " " + AmountType.solarString.accessibilityLabel(amount: pvString.amount, amountWithUnit: pvString.amount.kWh(2)))
                 }
                 .foregroundStyle(Color.textNotFlowing)
             }

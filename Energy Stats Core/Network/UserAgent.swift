@@ -9,7 +9,15 @@ import Foundation
 
 public enum UserAgent {
     public static func description() -> String {
-        "Energy-Stats/iOS/\(UserAgent.appVersion)"
+        "Energy-Stats/\(platform)/\(UserAgent.appVersion)"
+    }
+
+    private static var platform: String {
+#if targetEnvironment(macCatalyst)
+        "macOS"
+#else
+        "iOS"
+#endif
     }
 
     private static var appVersion: String {

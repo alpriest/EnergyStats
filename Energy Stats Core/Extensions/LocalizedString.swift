@@ -52,6 +52,7 @@ public struct LocalizedString {
         public enum Accessibility: String, RawRepresentable {
             case inverter = "accessibility.inverter"
             case temperature = "accessibility.temperature"
+            case currentSolarStringGenerationAmount = "accessibility.solarStringGeneration"
             case currentSolarGenerationAmount = "accessibility.solarGeneration"
             case batteryStoringRate = "accessibility.batteryStoringRate"
             case batteryEmptyingRate = "accessibility.batteryEmptyingRate"
