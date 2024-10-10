@@ -31,7 +31,9 @@ public class VersionChecker: ObservableObject {
                         upgradeAvailable = true
                     }
                 }
-            } catch {}
+            } catch {
+                print(error)
+            }
         }
     }
 
