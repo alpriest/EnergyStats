@@ -32,7 +32,7 @@ class BatteryPowerViewModel {
 
     var batteryExtra: String? {
         calculator.batteryChargeStatusDescription(
-                        batteryChargePowerkW: batteryChargekWh,
+            batteryChargePowerkW: batteryChargekWh,
             batteryStateOfCharge: actualBatteryStateOfCharge
         )
     }

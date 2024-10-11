@@ -1,5 +1,5 @@
 //
-//  Intents.swift
+//  UpdateBatteryChargeLevelIntent.swift
 //  Energy Stats Core
 //
 //  Created by Alistair Priest on 24/09/2023.

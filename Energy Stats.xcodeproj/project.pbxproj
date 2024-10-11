@@ -157,9 +157,9 @@
 		41757BBC2A90A05E00573FB4 /* AmountType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41757BBB2A90A05E00573FB4 /* AmountType.swift */; };
 		41757BBD2A90A06E00573FB4 /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0B43329F96D3600CA9462 /* LocalizedString.swift */; };
 		417747F92C0379080023A51C /* history-temp.json in Resources */ = {isa = PBXBuildFile; fileRef = 417747F82C0379080023A51C /* history-temp.json */; };
-		41777F5B2CB6CD5900507E4B /* StatsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41777F5A2CB6CD4C00507E4B /* StatsWidget.swift */; };
+		41777F5B2CB6CD5900507E4B /* TodayStatsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41777F5A2CB6CD4C00507E4B /* TodayStatsWidget.swift */; };
 		41777F5D2CB6D63A00507E4B /* StatsTimelineProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41777F5C2CB6D63500507E4B /* StatsTimelineProvider.swift */; };
-		41777F5F2CB6D70B00507E4B /* StatsGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41777F5E2CB6D70A00507E4B /* StatsGraphView.swift */; };
+		41777F5F2CB6D70B00507E4B /* StatsWidgetGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41777F5E2CB6D70A00507E4B /* StatsWidgetGraphView.swift */; };
 		417AA21A2A12454A0073CD34 /* StatsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AA2192A12454A0073CD34 /* StatsTabView.swift */; };
 		417AA21D2A1245C00073CD34 /* StatsTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AA21C2A1245C00073CD34 /* StatsTabViewModel.swift */; };
 		418024E22AD16D00009A2625 /* String+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418024E12AD16D00009A2625 /* String+Currency.swift */; };
@@ -296,6 +296,7 @@
 		41EE90BC2BDEB702006412FB /* WatchWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE90A02BDEAC00006412FB /* WatchWidgets.swift */; };
 		41EE90BD2BDEB704006412FB /* WidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE909E2BDEAB9A006412FB /* WidgetBundle.swift */; };
 		41EE90BF2BDED138006412FB /* Energy_Stats_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; };
+		41F3596C2CB96858002DC9F4 /* UpdateTodayStatsIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F3596B2CB9684F002DC9F4 /* UpdateTodayStatsIntent.swift */; };
 		41F5A3642C1B563D00CA1120 /* Shimmering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F5A3632C1B563D00CA1120 /* Shimmering.swift */; };
 		41F5A3652C1C630600CA1120 /* View+If.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418EEEB42916843A006A8290 /* View+If.swift */; };
 		41F631782BDCD32D00A571C5 /* Energy_Stats_Watch_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F631772BDCD32D00A571C5 /* Energy_Stats_Watch_AppApp.swift */; };
@@ -614,9 +615,9 @@
 		41757BBB2A90A05E00573FB4 /* AmountType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountType.swift; sourceTree = "<group>"; };
 		417747F82C0379080023A51C /* history-temp.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "history-temp.json"; sourceTree = "<group>"; };
 		41777F1428F49C61009944FF /* NetworkFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFacade.swift; sourceTree = "<group>"; };
-		41777F5A2CB6CD4C00507E4B /* StatsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsWidget.swift; sourceTree = "<group>"; };
+		41777F5A2CB6CD4C00507E4B /* TodayStatsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayStatsWidget.swift; sourceTree = "<group>"; };
 		41777F5C2CB6D63500507E4B /* StatsTimelineProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTimelineProvider.swift; sourceTree = "<group>"; };
-		41777F5E2CB6D70A00507E4B /* StatsGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGraphView.swift; sourceTree = "<group>"; };
+		41777F5E2CB6D70A00507E4B /* StatsWidgetGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsWidgetGraphView.swift; sourceTree = "<group>"; };
 		417AA2192A12454A0073CD34 /* StatsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTabView.swift; sourceTree = "<group>"; };
 		417AA21C2A1245C00073CD34 /* StatsTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTabViewModel.swift; sourceTree = "<group>"; };
 		418024E12AD16D00009A2625 /* String+Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Currency.swift"; sourceTree = "<group>"; };
@@ -766,6 +767,7 @@
 		41EE90AA2BDEB6FB006412FB /* Energy Stats Watch WidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Energy Stats Watch WidgetsExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		41EE90B22BDEB6FC006412FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		41EE90B42BDEB6FC006412FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		41F3596B2CB9684F002DC9F4 /* UpdateTodayStatsIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTodayStatsIntent.swift; sourceTree = "<group>"; };
 		41F5A3632C1B563D00CA1120 /* Shimmering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shimmering.swift; sourceTree = "<group>"; };
 		41F631752BDCD32D00A571C5 /* Energy Stats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Energy Stats.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		41F631772BDCD32D00A571C5 /* Energy_Stats_Watch_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Energy_Stats_Watch_AppApp.swift; sourceTree = "<group>"; };
@@ -1025,16 +1027,13 @@
 		412A266F2AC03B2300F61456 /* Energy Stats Phone Widgets */ = {
 			isa = PBXGroup;
 			children = (
-				41777F5E2CB6D70A00507E4B /* StatsGraphView.swift */,
-				41777F5A2CB6CD4C00507E4B /* StatsWidget.swift */,
-				41A715912BDFCA8B00560628 /* Energy Stats Phone WidgetsExtension.entitlements */,
-				412A26852AC05D1200F61456 /* UpdateBatteryChargeLevelIntent.swift */,
-				4185FAB12A3B6C8D0082D53F /* BatteryWidget.swift */,
-				4185FAB52A3B74E60082D53F /* BatteryStatusView.swift */,
-				412A26702AC03B2300F61456 /* Energy_Stats_WidgetsBundle.swift */,
 				412A26742AC03B2400F61456 /* Assets.xcassets */,
+				41F359692CB9682D002DC9F4 /* Battery Widget */,
+				41A715912BDFCA8B00560628 /* Energy Stats Phone WidgetsExtension.entitlements */,
+				412A26702AC03B2300F61456 /* Energy_Stats_WidgetsBundle.swift */,
 				412A26762AC03B2400F61456 /* Info.plist */,
 				41463D902AC44C7C00B2EB25 /* Localizable.xcstrings */,
+				41F3596A2CB96833002DC9F4 /* Today Stats Widget */,
 			);
 			path = "Energy Stats Phone Widgets";
 			sourceTree = "<group>";
@@ -1352,7 +1351,6 @@
 		41A95B9529DB3F6A00A35169 /* Energy Stats Core */ = {
 			isa = PBXGroup;
 			children = (
-				4156A2302CB6772D00099A6A /* ErrorAlertViewManufacturing.swift */,
 				41757BBB2A90A05E00573FB4 /* AmountType.swift */,
 				410AA38729D96F6D00CD107C /* AppSettings.swift */,
 				41E3BEC22B1B5A160051C68B /* AppSettingsPublisherFactory.swift */,
@@ -1362,6 +1360,7 @@
 				41DB4F2C2B4940A800DAB5BB /* ConfigManaging.swift */,
 				41A25D4228CA706700315714 /* CountdownTimer.swift */,
 				41A95B9629DB3F6A00A35169 /* Energy_Stats_Core.h */,
+				4156A2302CB6772D00099A6A /* ErrorAlertViewManufacturing.swift */,
 				4103D1E629DB6D2C001B0BC8 /* Extensions */,
 				411542EF2BEF423800BDE56D /* Keychain */,
 				413745072919022C00D351F1 /* Mocks */,
@@ -1374,10 +1373,10 @@
 				41009A6F2B02CD50009D853B /* Solcast */,
 				41CB71492A3B1B6C00199415 /* StyleGuide.swift */,
 				4162BC2F2A097C1300DFEDC1 /* SunView.swift */,
+				411542EB2BED310200BDE56D /* TemplateStore.swift */,
 				4189B0322B94888F00EC4CB5 /* VersionChecker.swift */,
 				4109140129DB7AB900133CC5 /* View Models */,
 				41EE909A2BDEA97C006412FB /* Widgets */,
-				411542EB2BED310200BDE56D /* TemplateStore.swift */,
 			);
 			path = "Energy Stats Core";
 			sourceTree = "<group>";
@@ -1521,6 +1520,26 @@
 				41EE90B42BDEB6FC006412FB /* Info.plist */,
 			);
 			path = "Energy Stats Watch Widgets";
+			sourceTree = "<group>";
+		};
+		41F359692CB9682D002DC9F4 /* Battery Widget */ = {
+			isa = PBXGroup;
+			children = (
+				4185FAB52A3B74E60082D53F /* BatteryStatusView.swift */,
+				4185FAB12A3B6C8D0082D53F /* BatteryWidget.swift */,
+				412A26852AC05D1200F61456 /* UpdateBatteryChargeLevelIntent.swift */,
+			);
+			path = "Battery Widget";
+			sourceTree = "<group>";
+		};
+		41F3596A2CB96833002DC9F4 /* Today Stats Widget */ = {
+			isa = PBXGroup;
+			children = (
+				41F3596B2CB9684F002DC9F4 /* UpdateTodayStatsIntent.swift */,
+				41777F5E2CB6D70A00507E4B /* StatsWidgetGraphView.swift */,
+				41777F5A2CB6CD4C00507E4B /* TodayStatsWidget.swift */,
+			);
+			path = "Today Stats Widget";
 			sourceTree = "<group>";
 		};
 		41F631762BDCD32D00A571C5 /* Energy Stats Watch App */ = {
@@ -1910,11 +1929,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				41EE909D2BDEAA27006412FB /* UpdateBatteryChargeLevelIntent.swift in Sources */,
-				41777F5F2CB6D70B00507E4B /* StatsGraphView.swift in Sources */,
-				41777F5B2CB6CD5900507E4B /* StatsWidget.swift in Sources */,
+				41777F5F2CB6D70B00507E4B /* StatsWidgetGraphView.swift in Sources */,
+				41777F5B2CB6CD5900507E4B /* TodayStatsWidget.swift in Sources */,
 				412A26832AC03BF000F61456 /* BatteryStatusView.swift in Sources */,
 				412A26712AC03B2300F61456 /* Energy_Stats_WidgetsBundle.swift in Sources */,
 				412A267E2AC03B4B00F61456 /* BatteryWidget.swift in Sources */,
+				41F3596C2CB96858002DC9F4 /* UpdateTodayStatsIntent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

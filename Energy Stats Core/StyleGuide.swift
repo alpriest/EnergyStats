@@ -17,6 +17,7 @@ public extension Color {
     static var paleGray: Color { Color("pale_gray", bundle: Bundle(for: CountdownTimer.self)) }
     static var background: Color { Color("background", bundle: Bundle(for: CountdownTimer.self)) }
     static var iconDisabled: Color { Color("Sun_Zero", bundle: Bundle(for: CountdownTimer.self)) }
+    static var loadsPower: Color { Color("loads_power", bundle: Bundle(for: CountdownTimer.self)) }
     #if iOS
     static var label: Color { Color(uiColor: .label) }
     #endif

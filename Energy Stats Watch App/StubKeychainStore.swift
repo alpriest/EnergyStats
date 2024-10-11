@@ -32,12 +32,18 @@ struct StubKeychainStore: KeychainStoring {
 
     func get(key: KeychainItemKey) -> String? {
         switch key {
-        case .showGridTotalsOnPowerFlow:
-            nil
         case .deviceSN:
             "66BH3720228D004"
+        default:
+            nil
         }
     }
 
     func store(key: KeychainItemKey, value: String?) throws {}
+
+    func get(key: KeychainItemKey) -> Double? {
+        nil
+    }
+
+    func store(key: KeychainItemKey, value: Double) throws {}
 }

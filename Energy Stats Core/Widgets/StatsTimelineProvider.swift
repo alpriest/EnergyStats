@@ -61,7 +61,7 @@ public struct StatsTimelineProvider: TimelineProvider {
         var errorMessage: String? = nil
 
         do {
-            try await HomeEnergyStateManager.shared.updateStatsState(config: config)
+            try await HomeEnergyStateManager.shared.updateTodayStatsState(config: config)
         } catch {
             errorMessage = error.localizedDescription
         }
@@ -71,9 +71,9 @@ public struct StatsTimelineProvider: TimelineProvider {
             if let widgetState = try (modelContainer.mainContext.fetch(fetchDescriptor)).first {
                 return StatsTimelineEntry.loaded(
                     date: .now,
+                    home: widgetState.home,
                     gridImport: widgetState.gridImport,
                     gridExport: widgetState.gridExport,
-                    home: widgetState.home,
                     batteryCharge: widgetState.batteryCharge,
                     batteryDischarge: widgetState.batteryDischarge,
                     errorMessage: errorMessage
@@ -89,41 +89,42 @@ public struct StatsTimelineProvider: TimelineProvider {
     }
 }
 
+@available(iOS 17.0, *)
 public struct StatsTimelineEntry: TimelineEntry {
     public let date: Date
-    public let gridImport: Double?
-    public let gridExport: Double?
-    public let home: Double?
-    public let batteryCharge: Double?
-    public let batteryDischarge: Double?
+    public let gridImport: [Double]?
+    public let gridExport: [Double]?
+    public let home: [Double]?
+    public let batteryCharge: [Double]?
+    public let batteryDischarge: [Double]?
     public let state: EntryState
     public let errorMessage: String?
 
     public init(
         date: Date,
-        gridImport: Double?,
-        gridExport: Double?,
-        home: Double?,
-        batteryCharge: Double?,
-        batteryDischarge: Double?,
+        home: [Double]?,
+        gridImport: [Double]?,
+        gridExport: [Double]?,
+        batteryCharge: [Double]?,
+        batteryDischarge: [Double]?,
         state: EntryState,
         errorMessage: String?
     ) {
         self.date = date
+        self.home = home
         self.gridImport = gridImport
         self.gridExport = gridExport
-        self.home = home
         self.batteryCharge = batteryCharge
         self.batteryDischarge = batteryDischarge
         self.state = state
         self.errorMessage = errorMessage
     }
 
-    public static func loaded(date: Date, gridImport: Double?, gridExport: Double?, home: Double?, batteryCharge: Double?, batteryDischarge: Double?, errorMessage: String?) -> StatsTimelineEntry {
+    public static func loaded(date: Date, home: [Double]?, gridImport: [Double]?, gridExport: [Double]?, batteryCharge: [Double]?, batteryDischarge: [Double]?, errorMessage: String?) -> StatsTimelineEntry {
         StatsTimelineEntry(date: date,
+                           home: home,
                            gridImport: gridImport,
                            gridExport: gridExport,
-                           home: home,
                            batteryCharge: batteryCharge,
                            batteryDischarge: batteryDischarge,
                            state: .loaded,
@@ -132,20 +133,20 @@ public struct StatsTimelineEntry: TimelineEntry {
 
     public static func placeholder() -> StatsTimelineEntry {
         StatsTimelineEntry(date: Date(),
-                           gridImport: 1.4,
-                           gridExport: 0.0,
-                           home: 3.2,
-                           batteryCharge: 0.0,
-                           batteryDischarge: 0,
+                           home: StatsWidgetState.preview.home,
+                           gridImport: StatsWidgetState.preview.gridImport,
+                           gridExport: StatsWidgetState.preview.gridExport,
+                           batteryCharge: StatsWidgetState.preview.batteryCharge,
+                           batteryDischarge: StatsWidgetState.preview.batteryDischarge,
                            state: .placeholder,
                            errorMessage: nil)
     }
 
     public static func failed(error: String) -> StatsTimelineEntry {
         StatsTimelineEntry(date: Date(),
+                           home: nil,
                            gridImport: nil,
                            gridExport: nil,
-                           home: nil,
                            batteryCharge: nil,
                            batteryDischarge: nil,
                            state: .failedWithoutData(reason: error),

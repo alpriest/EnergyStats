@@ -32,7 +32,7 @@ public class HomeEnergyStateManager {
             network = NetworkService.standard(keychainStore: keychainStore,
                                               isDemoUser: { false },
                                               dataCeiling: { .none })
-            modelContainer = try ModelContainer(for: BatteryWidgetState.self)
+            modelContainer = try ModelContainer(for: BatteryWidgetState.self, StatsWidgetState.self)
         } catch {
             fatalError("Failed to create the model container: \(error)")
         }
@@ -41,9 +41,9 @@ public class HomeEnergyStateManager {
 
 @available(iOS 17.0, *)
 @available(watchOS 9.0, *)
-extension HomeEnergyStateManager {
+public extension HomeEnergyStateManager {
     @MainActor
-    public func isBatteryStateStale() async -> Bool {
+    func isBatteryStateStale() async -> Bool {
         let fetchDescriptor: FetchDescriptor<BatteryWidgetState> = FetchDescriptor()
         guard let widgetState = (try? modelContainer.mainContext.fetch(fetchDescriptor))?.first else { return true }
 
@@ -51,7 +51,7 @@ extension HomeEnergyStateManager {
     }
 
     @MainActor
-    public func updateBatteryState(config: HomeEnergyStateManagerConfig) async throws {
+    func updateBatteryState(config: HomeEnergyStateManagerConfig) async throws {
         guard await isBatteryStateStale() else { return }
         guard let deviceSN = config.selectedDeviceSN else { throw ConfigManager.NoDeviceFoundError() }
 
@@ -74,7 +74,7 @@ extension HomeEnergyStateManager {
     }
 
     @MainActor
-    public func calculateBatteryState(
+    func calculateBatteryState(
         openQueryResponse: OpenQueryResponse,
         batteryCapacityW: Int,
         minSOC: Double,
@@ -132,7 +132,7 @@ public extension OpenQueryResponse {
 @available(watchOS 9.0, *)
 extension HomeEnergyStateManager {
     @MainActor
-    public func isStatsStateStale() async -> Bool {
+    public func isTodayStatsStateStale() async -> Bool {
         let fetchDescriptor: FetchDescriptor<StatsWidgetState> = FetchDescriptor()
         guard let widgetState = (try? modelContainer.mainContext.fetch(fetchDescriptor))?.first else { return true }
 
@@ -140,8 +140,8 @@ extension HomeEnergyStateManager {
     }
 
     @MainActor
-    public func updateStatsState(config: HomeEnergyStateManagerConfig) async throws {
-        guard await isBatteryStateStale() else { return }
+    public func updateTodayStatsState(config: HomeEnergyStateManagerConfig) async throws {
+        guard await isTodayStatsStateStale() else { return }
         guard let deviceSN = config.selectedDeviceSN else { throw ConfigManager.NoDeviceFoundError() }
 
         let report = try await network.fetchReport(
@@ -155,6 +155,46 @@ extension HomeEnergyStateManager {
             reportType: .day
         )
 
-//        try calculateStatsState(openQueryResponse: report)
+        try calculateTodayStatsState(openReportResponse: report)
+    }
+
+    @MainActor
+    public func calculateTodayStatsState(openReportResponse: [OpenReportResponse]) throws {
+        let mapped: [ReportVariable: [OpenReportResponse.ReportData]] = openReportResponse.reduce(into: [:]) { result, response in
+            guard let reportVariable = ReportVariable(rawValue: response.variable) else { return }
+
+            result[reportVariable] = response.values
+        }
+
+        try storeTodayStatsModel(reports: mapped)
+    }
+
+    @MainActor
+    private func storeTodayStatsModel(reports: [ReportVariable: [OpenReportResponse.ReportData]]) throws {
+        let state = StatsWidgetState(
+            home: doubles(from: reports[.loads]),
+            gridExport: doubles(from: reports[.feedIn]),
+            gridImport: doubles(from: reports[.gridConsumption]),
+            batteryCharge: doubles(from: reports[.chargeEnergyToTal]),
+            batteryDischarge: doubles(from: reports[.dischargeEnergyToTal])
+        )
+
+        deleteTodayStatsStateEntry()
+
+        modelContainer.mainContext.insert(state)
+        modelContainer.mainContext.processPendingChanges()
+    }
+
+    @MainActor
+    private func deleteTodayStatsStateEntry() {
+        let fetchDescriptor: FetchDescriptor<StatsWidgetState> = FetchDescriptor()
+        if let widgetState = (try? modelContainer.mainContext.fetch(fetchDescriptor))?.first {
+            modelContainer.mainContext.delete(widgetState)
+        }
+    }
+
+    private func doubles(from data: [OpenReportResponse.ReportData]?) -> [Double] {
+        guard let data else { return [] }
+        return data.map { $0.value }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  StatsWidget.swift
+//  TodayStatsWidget.swift
 //  Energy Stats
 //
 //  Created by Alistair Priest on 09/10/2024.
@@ -9,14 +9,31 @@ import Energy_Stats_Core
 import SwiftUI
 import WidgetKit
 
-// struct StatsWidget: Widget {
-//
-//    var body: some WidgetConfiguration {
-//        StaticConfiguration(kind: kind, provider: )
-//    }
-// }
+struct TodayStatsWidget: Widget {
+    private let kind: String = "TodayStatsWidget"
+    private let configManager: ConfigManaging
 
-struct StatsWidgetView: View {
+    init() {
+        let keychainStore = KeychainStore()
+        let config = UserDefaultsConfig()
+        let network = NetworkService.standard(keychainStore: keychainStore,
+                                              isDemoUser: { false },
+                                              dataCeiling: { .none })
+        let appSettingsPublisher = AppSettingsPublisherFactory.make(from: config)
+        configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
+    }
+
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: kind, provider: StatsTimelineProvider(config: HomeEnergyStateManagerConfigAdapter(config: configManager))) { entry in
+            TodayStatsWidgetView(entry: entry, configManager: configManager)
+        }
+        .configurationDisplayName("Today Stats Widget")
+        .description("Shows the stats of your installation for the day.")
+        .supportedFamilies([.systemMedium])
+    }
+}
+
+struct TodayStatsWidgetView: View {
     var entry: StatsTimelineProvider.Entry
     let configManager: ConfigManaging
     @Environment(\.widgetFamily) var family
@@ -44,23 +61,19 @@ struct StatsWidgetView: View {
                             Text(reason)
                         }.padding(.bottom)
 
-                        // TODO:
-                        //                        Button(intent: UpdateBatteryChargeLevelIntent()) {
-                        //                            Text("Tap to retry")
-                        //                        }.buttonStyle(.bordered)
+                        Button(intent: UpdateTodayStatsIntent()) {
+                            Text("Tap to retry")
+                        }.buttonStyle(.bordered)
                     }
                 }
             } else {
-                StatsGraphView(
+                StatsWidgetGraphView(
+                    home: entry.home,
                     gridImport: entry.gridImport,
                     gridExport: entry.gridExport,
-                    home: entry.home,
                     batteryCharge: entry.batteryCharge,
                     batteryDischarge: entry.batteryDischarge,
                     lastUpdated: entry.date
-//                    soc: Double(entry.soc ?? 0) / 100.0,
-//                    chargeStatusDescription: entry.chargeStatusDescription,
-//                    appSettings: configManager.appSettingsPublisher.value,
 //                    hasError: entry.errorMessage != nil
                 )
             }

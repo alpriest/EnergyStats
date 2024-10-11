@@ -71,6 +71,9 @@
     "No device" : {
 
     },
+    "Shows the stats of your installation for the day." : {
+
+    },
     "Shows the status of your battery storage" : {
 
     },
@@ -101,6 +104,9 @@
           }
         }
       }
+    },
+    "Today Stats Widget" : {
+
     },
     "Update failed" : {
       "localizations" : {
@@ -157,6 +163,9 @@
           }
         }
       }
+    },
+    "Update Today Stats for the widget" : {
+
     }
   },
   "version" : "1.0"

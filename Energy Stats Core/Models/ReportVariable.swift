@@ -92,7 +92,7 @@ public enum ReportVariable: String, RawRepresentable {
         case .gridConsumption:
             return .red.opacity(0.8)
         case .loads:
-            return Color("loads_power").opacity(0.8)
+            return Color.loadsPower.opacity(0.8)
         case .selfSufficiency:
             return .black
         }

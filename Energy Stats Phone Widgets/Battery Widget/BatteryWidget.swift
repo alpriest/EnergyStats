@@ -10,8 +10,8 @@ import SwiftUI
 import WidgetKit
 
 struct BatteryWidget: Widget {
-    let kind: String = "BatteryWidget"
-    let configManager: ConfigManaging
+    private let kind: String = "BatteryWidget"
+    private let configManager: ConfigManaging
 
     init() {
         let keychainStore = KeychainStore()

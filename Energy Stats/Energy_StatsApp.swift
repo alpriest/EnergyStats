@@ -44,8 +44,8 @@ struct Energy_StatsApp: App {
         userManager = .init(store: keychainStore, configManager: configManager, networkCache: InMemoryLoggingNetworkStore.shared)
         templateStore = TemplateStore(config: configManager)
         appSettingsPublisher
-            .sink { [keychainStore] settings in
-                Self.updateKeychainSettingsForWatch(keychainStore: keychainStore, settings: settings)
+            .sink { [keychainStore, configManager] _ in
+                Self.updateKeychainSettingsForWatch(keychainStore: keychainStore, configManager: configManager)
             }.store(in: &cancellables)
     }
 
@@ -81,7 +81,7 @@ struct Energy_StatsApp: App {
                 }
                 .task {
                     versionChecker.load()
-//                    Scheduler.scheduleRefresh()
+                    //                    Scheduler.scheduleRefresh()
                 }
             }
         }
@@ -95,8 +95,14 @@ struct Energy_StatsApp: App {
         CommandLine.arguments.contains("screenshots")
     }
 
-    private static func updateKeychainSettingsForWatch(keychainStore: KeychainStoring, settings: AppSettings) {
-        try? keychainStore.store(key: .showGridTotalsOnPowerFlow, value: settings.showGridTotalsOnPowerFlow)
+    private static func updateKeychainSettingsForWatch(keychainStore: KeychainStoring, configManager: ConfigManaging) {
+        try? keychainStore.store(key: .deviceSN, value: configManager.selectedDeviceSN)
+        try? keychainStore.store(key: .showGridTotalsOnPowerFlow, value: configManager.showGridTotalsOnPowerFlow)
+        try? keychainStore.store(key: .batteryCapacity, value: configManager.batteryCapacity)
+        try? keychainStore.store(key: .shouldInvertCT2, value: configManager.shouldInvertCT2)
+        try? keychainStore.store(key: .minSOC, value: configManager.minSOC)
+        try? keychainStore.store(key: .shouldCombineCT2WithPVPower, value: configManager.shouldCombineCT2WithPVPower)
+        try? keychainStore.store(key: .showUsableBatteryOnly, value: configManager.showUsableBatteryOnly)
     }
 }
 

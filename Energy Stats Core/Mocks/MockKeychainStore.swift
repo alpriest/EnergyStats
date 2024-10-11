@@ -50,21 +50,27 @@ class MockKeychainStore: KeychainStoring {
 
     func store(key: KeychainItemKey, value: Bool) throws {}
 
+    func get(key: KeychainItemKey) -> Double? {
+        nil
+    }
+
+    func store(key: KeychainItemKey, value: Double) throws {}
+
     func get(key: KeychainItemKey) -> String? {
         switch key {
-        case .showGridTotalsOnPowerFlow:
-            nil
         case .deviceSN:
             selectedDeviceSN
+        default:
+            nil
         }
     }
 
     func store(key: KeychainItemKey, value: String?) throws {
         switch key {
-        case .showGridTotalsOnPowerFlow:
-            ()
         case .deviceSN:
             selectedDeviceSN = value
+        default:
+            ()
         }
     }
 }

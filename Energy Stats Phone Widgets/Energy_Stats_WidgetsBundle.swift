@@ -12,5 +12,6 @@ import SwiftUI
 struct Energy_Stats_WidgetsBundle: WidgetBundle {
     var body: some Widget {
         BatteryWidget()
+        TodayStatsWidget()
     }
 }

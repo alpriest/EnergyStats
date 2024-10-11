@@ -20,6 +20,11 @@ public struct KeychainError: Error {
 public enum KeychainItemKey: String {
     case showGridTotalsOnPowerFlow
     case deviceSN
+    case batteryCapacity
+    case shouldInvertCT2
+    case minSOC
+    case shouldCombineCT2WithPVPower
+    case showUsableBatteryOnly
 }
 
 public protocol KeychainStoring {
@@ -31,8 +36,10 @@ public protocol KeychainStoring {
     var isDemoUser: Bool { get }
     func store(key: KeychainItemKey, value: Bool) throws
     func store(key: KeychainItemKey, value: String?) throws
+    func store(key: KeychainItemKey, value: Double) throws
     func get(key: KeychainItemKey) -> Bool
     func get(key: KeychainItemKey) -> String?
+    func get(key: KeychainItemKey) -> Double?
 }
 
 public class KeychainStore: KeychainStoring {
@@ -91,6 +98,15 @@ public class KeychainStore: KeychainStoring {
 
     public func store(key: KeychainItemKey, value: Bool) throws {
         try set(tag: key.rawValue, value: value.stringValue)
+    }
+
+    public func get(key: KeychainItemKey) -> Double? {
+        guard let result = get(tag: key.rawValue) else { return nil }
+        return Double(result)
+    }
+
+    public func store(key: KeychainItemKey, value: Double) throws {
+        try set(tag: key.rawValue, value: "\(value)")
     }
 }
 
