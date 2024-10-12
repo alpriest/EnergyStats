@@ -59,4 +59,8 @@ public extension Date {
         let calendar = Calendar.current
         return calendar.date(from: components) ?? Date()
     }
+
+    func hour() -> Int {
+        Calendar.current.component(.hour, from: self)
+    }
 }

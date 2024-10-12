@@ -51,12 +51,14 @@ public struct TotalsViewModel {
     public let solarBreakdown: CalculationBreakdown
 }
 
-private extension Array where Element == OpenReportResponse {
+extension Array where Element == OpenReportResponse {
     func today(for key: ReportVariable) -> OpenReportResponse.ReportData? {
         guard let currentDateIndex = Calendar.current.dateComponents([.day], from: Date()).day else { return nil }
         return first(where: { $0.variable.lowercased() == key.networkTitle.lowercased() })?.values.first(where: { $0.index == currentDateIndex })
     }
+}
 
+private extension Array where Element == OpenReportResponse {
     func todayValue(for key: ReportVariable) -> Double {
         today(for: key)?.value ?? 0.0
     }

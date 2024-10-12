@@ -144,7 +144,7 @@ extension HomeEnergyStateManager {
         guard await isTodayStatsStateStale() else { return }
         guard let deviceSN = config.selectedDeviceSN else { throw ConfigManager.NoDeviceFoundError() }
 
-        let report = try await network.fetchReport(
+        let hourlyReports = try await network.fetchReport(
             deviceSN: deviceSN,
             variables: [.loads,
                         .feedIn,
@@ -155,28 +155,56 @@ extension HomeEnergyStateManager {
             reportType: .day
         )
 
-        try calculateTodayStatsState(openReportResponse: report)
+        let dailyTotalReports = try await network.fetchReport(
+            deviceSN: deviceSN,
+            variables: [.loads,
+                        .feedIn,
+                        .gridConsumption,
+                        .chargeEnergyToTal,
+                        .dischargeEnergyToTal],
+            queryDate: thisMonth(),
+            reportType: .month
+        )
+
+        try calculateTodayStatsState(hourlyReports: hourlyReports, dailyTotalReports: dailyTotalReports)
     }
 
     @MainActor
-    public func calculateTodayStatsState(openReportResponse: [OpenReportResponse]) throws {
-        let mapped: [ReportVariable: [OpenReportResponse.ReportData]] = openReportResponse.reduce(into: [:]) { result, response in
+    public func calculateTodayStatsState(hourlyReports: [OpenReportResponse], dailyTotalReports: [OpenReportResponse]) throws {
+        let mapped: [ReportVariable: [OpenReportResponse.ReportData]] = hourlyReports.reduce(into: [:]) { result, response in
             guard let reportVariable = ReportVariable(rawValue: response.variable) else { return }
 
-            result[reportVariable] = response.values
+            result[reportVariable] = response.values.filter { $0.index < Date().hour() }
         }
 
-        try storeTodayStatsModel(reports: mapped)
+        try storeTodayStatsModel(reports: mapped,
+                                 totalHome: dailyTotalReports.todayValue(for: .loads) ?? 0.0,
+                                 totalGridImport: dailyTotalReports.todayValue(for: .gridConsumption) ?? 0.0,
+                                 totalGridExport: dailyTotalReports.todayValue(for: .feedIn) ?? 0.0,
+                                 totalBatteryCharge: dailyTotalReports.todayValue(for: .chargeEnergyToTal),
+                                 totalBatteryDischarge: dailyTotalReports.todayValue(for: .dischargeEnergyToTal))
     }
 
     @MainActor
-    private func storeTodayStatsModel(reports: [ReportVariable: [OpenReportResponse.ReportData]]) throws {
+    private func storeTodayStatsModel(
+        reports: [ReportVariable: [OpenReportResponse.ReportData]],
+        totalHome: Double,
+        totalGridImport: Double,
+        totalGridExport: Double,
+        totalBatteryCharge: Double?,
+        totalBatteryDischarge: Double?
+    ) throws {
         let state = StatsWidgetState(
             home: doubles(from: reports[.loads]),
             gridExport: doubles(from: reports[.feedIn]),
             gridImport: doubles(from: reports[.gridConsumption]),
             batteryCharge: doubles(from: reports[.chargeEnergyToTal]),
-            batteryDischarge: doubles(from: reports[.dischargeEnergyToTal])
+            batteryDischarge: doubles(from: reports[.dischargeEnergyToTal]),
+            totalHome: totalHome,
+            totalGridImport: totalGridImport,
+            totalGridExport: totalGridExport,
+            totalBatteryCharge: totalBatteryCharge,
+            totalBatteryDischarge: totalBatteryDischarge
         )
 
         deleteTodayStatsStateEntry()
@@ -196,5 +224,19 @@ extension HomeEnergyStateManager {
     private func doubles(from data: [OpenReportResponse.ReportData]?) -> [Double] {
         guard let data else { return [] }
         return data.map { $0.value }
+    }
+
+    private func thisMonth() -> QueryDate {
+        let current = Date()
+        let month = Calendar.current.component(.month, from: current)
+        let year = Calendar.current.component(.year, from: current)
+        let queryDate = QueryDate(year: year, month: month, day: nil)
+        return queryDate
+    }
+}
+
+private extension Array where Element == OpenReportResponse {
+    func todayValue(for key: ReportVariable) -> Double? {
+        today(for: key)?.value
     }
 }

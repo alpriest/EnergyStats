@@ -73,6 +73,11 @@ struct TodayStatsWidgetView: View {
                     gridExport: entry.gridExport,
                     batteryCharge: entry.batteryCharge,
                     batteryDischarge: entry.batteryDischarge,
+                    totalHome: entry.totalHome,
+                    totalGridImport: entry.totalGridImport,
+                    totalGridExport: entry.totalGridExport,
+                    totalBatteryCharge: entry.totalBatteryCharge,
+                    totalBatteryDischarge: entry.totalBatteryDischarge,
                     lastUpdated: entry.date
 //                    hasError: entry.errorMessage != nil
                 )

@@ -76,6 +76,11 @@ public struct StatsTimelineProvider: TimelineProvider {
                     gridExport: widgetState.gridExport,
                     batteryCharge: widgetState.batteryCharge,
                     batteryDischarge: widgetState.batteryDischarge,
+                    totalHome: widgetState.totalHome,
+                    totalGridImport: widgetState.totalGridImport,
+                    totalGridExport: widgetState.totalGridExport,
+                    totalBatteryCharge: widgetState.totalBatteryCharge,
+                    totalBatteryDischarge: widgetState.totalBatteryDischarge,
                     errorMessage: errorMessage
                 )
             } else {
@@ -97,6 +102,11 @@ public struct StatsTimelineEntry: TimelineEntry {
     public let home: [Double]?
     public let batteryCharge: [Double]?
     public let batteryDischarge: [Double]?
+    public var totalHome: Double
+    public var totalGridImport: Double
+    public var totalGridExport: Double
+    public var totalBatteryCharge: Double?
+    public var totalBatteryDischarge: Double?
     public let state: EntryState
     public let errorMessage: String?
 
@@ -107,6 +117,11 @@ public struct StatsTimelineEntry: TimelineEntry {
         gridExport: [Double]?,
         batteryCharge: [Double]?,
         batteryDischarge: [Double]?,
+        totalHome: Double,
+        totalGridImport: Double,
+        totalGridExport: Double,
+        totalBatteryCharge: Double?,
+        totalBatteryDischarge: Double?,
         state: EntryState,
         errorMessage: String?
     ) {
@@ -116,17 +131,40 @@ public struct StatsTimelineEntry: TimelineEntry {
         self.gridExport = gridExport
         self.batteryCharge = batteryCharge
         self.batteryDischarge = batteryDischarge
+        self.totalHome = totalHome
+        self.totalGridImport = totalGridImport
+        self.totalGridExport = totalGridExport
+        self.totalBatteryCharge = totalBatteryCharge
+        self.totalBatteryDischarge = totalBatteryDischarge
         self.state = state
         self.errorMessage = errorMessage
     }
 
-    public static func loaded(date: Date, home: [Double]?, gridImport: [Double]?, gridExport: [Double]?, batteryCharge: [Double]?, batteryDischarge: [Double]?, errorMessage: String?) -> StatsTimelineEntry {
+    public static func loaded(
+        date: Date,
+        home: [Double]?,
+        gridImport: [Double]?,
+        gridExport: [Double]?,
+        batteryCharge: [Double]?,
+        batteryDischarge: [Double]?,
+        totalHome: Double,
+        totalGridImport: Double,
+        totalGridExport: Double,
+        totalBatteryCharge: Double?,
+        totalBatteryDischarge: Double?,
+        errorMessage: String?
+    ) -> StatsTimelineEntry {
         StatsTimelineEntry(date: date,
                            home: home,
                            gridImport: gridImport,
                            gridExport: gridExport,
                            batteryCharge: batteryCharge,
                            batteryDischarge: batteryDischarge,
+                           totalHome: totalHome,
+                           totalGridImport: totalGridImport,
+                           totalGridExport: totalGridExport,
+                           totalBatteryCharge: totalBatteryCharge,
+                           totalBatteryDischarge: totalBatteryDischarge,
                            state: .loaded,
                            errorMessage: nil)
     }
@@ -138,6 +176,11 @@ public struct StatsTimelineEntry: TimelineEntry {
                            gridExport: StatsWidgetState.preview.gridExport,
                            batteryCharge: StatsWidgetState.preview.batteryCharge,
                            batteryDischarge: StatsWidgetState.preview.batteryDischarge,
+                           totalHome: 0,
+                           totalGridImport: 0,
+                           totalGridExport: 0,
+                           totalBatteryCharge: nil,
+                           totalBatteryDischarge: nil,
                            state: .placeholder,
                            errorMessage: nil)
     }
@@ -149,6 +192,11 @@ public struct StatsTimelineEntry: TimelineEntry {
                            gridExport: nil,
                            batteryCharge: nil,
                            batteryDischarge: nil,
+                           totalHome: 0,
+                           totalGridImport: 0,
+                           totalGridExport: 0,
+                           totalBatteryCharge: nil,
+                           totalBatteryDischarge: nil,
                            state: .failedWithoutData(reason: error),
                            errorMessage: error)
     }

@@ -41,6 +41,11 @@ public class StatsWidgetState {
     public var gridExport: [Double]
     public var batteryCharge: [Double]
     public var batteryDischarge: [Double]
+    public var totalHome: Double
+    public var totalGridImport: Double
+    public var totalGridExport: Double
+    public var totalBatteryCharge: Double?
+    public var totalBatteryDischarge: Double?
 
     public init(
         lastUpdated: Date = Date(),
@@ -48,7 +53,12 @@ public class StatsWidgetState {
         gridExport: [Double],
         gridImport: [Double],
         batteryCharge: [Double],
-        batteryDischarge: [Double]
+        batteryDischarge: [Double],
+        totalHome: Double,
+        totalGridImport: Double,
+        totalGridExport: Double,
+        totalBatteryCharge: Double?,
+        totalBatteryDischarge: Double?
     ) {
         self.lastUpdated = lastUpdated
         self.home = home
@@ -56,19 +66,46 @@ public class StatsWidgetState {
         self.gridImport = gridImport
         self.batteryCharge = batteryCharge
         self.batteryDischarge = batteryDischarge
+        self.totalHome = totalHome
+        self.totalGridImport = totalGridImport
+        self.totalGridExport = totalGridExport
+        self.totalBatteryCharge = totalBatteryCharge
+        self.totalBatteryDischarge = totalBatteryDischarge
     }
 
     public static func empty() -> StatsWidgetState {
-        StatsWidgetState(home: [0], gridExport: [0], gridImport: [0], batteryCharge: [0], batteryDischarge: [0])
+        StatsWidgetState(
+            home: [0],
+            gridExport: [0],
+            gridImport: [0],
+            batteryCharge: [0],
+            batteryDischarge: [0],
+            totalHome: 0,
+            totalGridImport: 0,
+            totalGridExport: 0,
+            totalBatteryCharge: nil,
+            totalBatteryDischarge: nil
+        )
     }
 
     static var preview: StatsWidgetState {
-        StatsWidgetState(
-            home: [0.0, 0.5, 0.9, 1.2, 1.5, 1.8, 1.3, 0.7, 0.3, 1.0, 1.6, 0.2],
-            gridExport: [1.0, 1.2, 1.8, 0.4, 0.9, 0.7, 1.3, 1.5, 0.2, 1.1, 1.9, 0.6],
-            gridImport: [2.0, 1.9, 1.8, 0.3, 0.5, 0.7, 1.0, 1.2, 1.7, 0.8, 1.5, 0.6],
-            batteryCharge: [2.4, 1.6, 0.9, 0.2, 1.3, 1.9, 0.7, 1.1, 0.5, 1.8, 1.0, 0.4],
-            batteryDischarge: [0.9, 0.2, 1.3, 1.5, 0.7, 0.8, 1.6, 0.3, 0.6, 1.9, 0.4, 1.2]
+        let homeValues = [0.0, 0.5, 0.9, 1.2, 1.5, 1.8, 1.3, 0.7, 0.3, 1.0, 1.6, 0.2]
+        let gridExportValues = [1.0, 1.2, 1.8, 0.4, 0.9, 0.7, 1.3, 1.5, 0.2, 1.1, 1.9, 0.6]
+        let gridImportValues = [2.0, 1.9, 1.8, 0.3, 0.5, 0.7, 1.0, 1.2, 1.7, 0.8, 1.5, 0.6]
+        let batteryChargeValues = [2.4, 1.6, 0.9, 0.2, 1.3, 1.9, 0.7, 1.1, 0.5, 1.8, 1.0, 0.4]
+        let batteryDischargeValues = [0.9, 0.2, 1.3, 1.5, 0.7, 0.8, 1.6, 0.3, 0.6, 1.9, 0.4, 1.2]
+
+        return StatsWidgetState(
+            home: homeValues,
+            gridExport: gridExportValues,
+            gridImport: gridImportValues,
+            batteryCharge: batteryChargeValues,
+            batteryDischarge: batteryDischargeValues,
+            totalHome: homeValues.reduce(0, +),
+            totalGridImport: gridImportValues.reduce(0, +),
+            totalGridExport: gridExportValues.reduce(0, +),
+            totalBatteryCharge: batteryChargeValues.reduce(0, +),
+            totalBatteryDischarge: batteryDischargeValues.reduce(0, +)
         )
     }
 }
