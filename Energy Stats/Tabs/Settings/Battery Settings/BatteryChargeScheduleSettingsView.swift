@@ -7,9 +7,11 @@
 
 import Energy_Stats_Core
 import SwiftUI
+import StoreKit
 
 struct BatteryChargeScheduleSettingsView: View {
     @StateObject var viewModel: BatteryChargeScheduleSettingsViewModel
+    @Environment(\.requestReview) private var requestReview
 
     init(networking: Networking, config: ConfigManaging) {
         _viewModel = StateObject(wrappedValue: BatteryChargeScheduleSettingsViewModel(networking: networking, config: config))
@@ -33,7 +35,10 @@ struct BatteryChargeScheduleSettingsView: View {
                 })
             }
 
-            BottomButtonsView { viewModel.save() }
+            BottomButtonsView {
+                viewModel.save()
+                requestReview()
+            }
         }
         .navigationTitle("Battery Schedule")
         .navigationBarTitleDisplayMode(.inline)

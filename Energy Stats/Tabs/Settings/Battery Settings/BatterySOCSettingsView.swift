@@ -6,10 +6,12 @@
 //
 
 import Energy_Stats_Core
+import StoreKit
 import SwiftUI
 
 struct BatterySOCSettingsView: View {
     @StateObject var viewModel: BatterySOCSettingsViewModel
+    @Environment(\.requestReview) private var requestReview
 
     init(networking: Networking, config: ConfigManaging, onSOCchange: @escaping () -> Void) {
         self._viewModel = StateObject(wrappedValue: BatterySOCSettingsViewModel(networking: networking, config: config, onSOCchange: onSOCchange))
@@ -62,7 +64,10 @@ struct BatterySOCSettingsView: View {
                 })
             }
 
-            BottomButtonsView { viewModel.save() }
+            BottomButtonsView {
+                viewModel.save()
+                requestReview()
+            }
         }
         .navigationTitle("Battery Charge Levels")
         .navigationBarTitleDisplayMode(.inline)

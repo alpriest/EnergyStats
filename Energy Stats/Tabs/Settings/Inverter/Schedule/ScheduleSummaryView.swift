@@ -6,6 +6,7 @@
 //
 
 import Energy_Stats_Core
+import StoreKit
 import SwiftUI
 
 struct ScheduleSummaryView: View {
@@ -111,41 +112,6 @@ struct ScheduleSummaryView: View {
         }
         .loadable(viewModel.state, retry: { Task { await viewModel.load() } })
         .alert(alertContent: $viewModel.alertContent)
-    }
-}
-
-struct TemplateSummaryListRow: View {
-    let template: ScheduleTemplate
-    let networking: Networking
-    let config: ConfigManaging
-    let templateStore: TemplateStoring
-    @ObservedObject var viewModel: ScheduleSummaryViewModel
-
-    var body: some View {
-        List {
-            NavigationLink {
-                EditTemplateView(
-                    networking: networking,
-                    templateStore: templateStore,
-                    config: config,
-                    template: template
-                )
-            } label: {
-                VStack(alignment: .leading) {
-                    Text(template.name)
-
-                    ScheduleView(schedule: template.asSchedule(), includePhaseDetail: false)
-                        .padding(.vertical, 4)
-                }
-            }
-
-            Button {
-                Task { await viewModel.activate(template) }
-            } label: {
-                Text("Activate")
-            }
-            .buttonStyle(.borderedProminent)
-        }
     }
 }
 
