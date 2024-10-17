@@ -166,7 +166,7 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
                                                            response: real,
                                                            config: configManager)
 
-            let battery = self.makeBatteryViewModel(currentDevice, real)
+            let battery = BatteryViewModel.make(currentDevice: currentDevice, real: real)
 
             let summary = LoadedPowerFlowViewModel(
                 solar: currentViewModel.currentSolarPower,
@@ -192,23 +192,6 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
         } catch {
             await self.stopTimer()
             self.state = .failed(error, error.localizedDescription)
-        }
-    }
-
-    private func makeBatteryViewModel(_ currentDevice: Device, _ real: OpenQueryResponse) -> BatteryViewModel {
-        if self.configManager.currentDevice.value?.hasBattery == true {
-            let chargePower = real.datas.currentDouble(for: "batChargePower")
-            let dischargePower = real.datas.currentDouble(for: "batDischargePower")
-            let power = chargePower > 0 ? chargePower : -dischargePower
-
-            return BatteryViewModel(
-                power: power,
-                soc: Int(real.datas.SoC()),
-                residual: real.datas.currentDouble(for: "ResidualEnergy") * 10.0,
-                temperature: real.datas.currentDouble(for: "batTemperature")
-            )
-        } else {
-            return BatteryViewModel.noBattery
         }
     }
 
@@ -275,5 +258,24 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
         do {
             try await Task.sleep(nanoseconds: 1000000000)
         } catch {}
+    }
+}
+
+extension BatteryViewModel {
+    static func make(currentDevice: Device, real: OpenQueryResponse) -> BatteryViewModel {
+        if currentDevice.hasBattery == true {
+            let chargePower = real.datas.currentDouble(for: "batChargePower")
+            let dischargePower = real.datas.currentDouble(for: "batDischargePower")
+            let power = chargePower > 0 ? chargePower : -dischargePower
+
+            return BatteryViewModel(
+                power: power,
+                soc: Int(real.datas.SoC()),
+                residual: real.datas.currentDouble(for: "ResidualEnergy") * 10.0,
+                temperature: real.datas.currentDouble(for: "batTemperature")
+            )
+        } else {
+            return BatteryViewModel.noBattery
+        }
     }
 }

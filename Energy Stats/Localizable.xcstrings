@@ -881,6 +881,9 @@
         }
       }
     },
+    "ABS Battery power: %@" : {
+
+    },
     "Absolute" : {
       "localizations" : {
         "de" : {
@@ -2935,6 +2938,9 @@
         }
       }
     },
+    "Battery Calculations" : {
+
+    },
     "Battery capacity recalculated" : {
       "localizations" : {
         "de" : {
@@ -2962,6 +2968,9 @@
           }
         }
       }
+    },
+    "Battery capacity: %lldW" : {
+
     },
     "Battery Charge Levels" : {
       "localizations" : {
@@ -3019,6 +3028,9 @@
         }
       }
     },
+    "Battery power: %@" : {
+
+    },
     "Battery Schedule" : {
       "localizations" : {
         "de" : {
@@ -3046,6 +3058,9 @@
           }
         }
       }
+    },
+    "Battery SoC: %@" : {
+
     },
     "battery_charge_range" : {
       "extractionState" : "manual",
@@ -5096,6 +5111,9 @@
         }
       }
     },
+    "Description: %@" : {
+
+    },
     "Device selection" : {
       "localizations" : {
         "de" : {
@@ -5123,6 +5141,9 @@
           }
         }
       }
+    },
+    "Device SN: %@" : {
+
     },
     "Discharge " : {
       "extractionState" : "manual",
@@ -8721,6 +8742,9 @@
           }
         }
       }
+    },
+    "Min SoC: %@" : {
+
     },
     "Minimum charge levels" : {
       "comment" : "Battery Charge Pages",
