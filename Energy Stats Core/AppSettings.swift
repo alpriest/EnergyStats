@@ -49,6 +49,7 @@ public struct AppSettings {
     public var showSelfSufficiencyStatsGraphOverlay: Bool
     public var truncatedYAxisOnParameterGraphs: Bool
     public var earningsModel: EarningsModel
+    public var minSOC: Double
 
     public init(
         showColouredLines: Bool,
@@ -84,7 +85,8 @@ public struct AppSettings {
         showBatteryPercentageRemaining: Bool,
         showSelfSufficiencyStatsGraphOverlay: Bool,
         truncatedYAxisOnParameterGraphs: Bool,
-        earningsModel: EarningsModel
+        earningsModel: EarningsModel,
+        minSOC: Double
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -120,6 +122,7 @@ public struct AppSettings {
         self.showSelfSufficiencyStatsGraphOverlay = showSelfSufficiencyStatsGraphOverlay
         self.truncatedYAxisOnParameterGraphs = truncatedYAxisOnParameterGraphs
         self.earningsModel = earningsModel
+        self.minSOC = minSOC
     }
 
     public func copy(
@@ -156,7 +159,8 @@ public struct AppSettings {
         showBatteryPercentageRemaining: Bool? = nil,
         showSelfSufficiencyStatsGraphOverlay: Bool? = nil,
         truncatedYAxisOnParameterGraphs: Bool? = nil,
-        earningsModel: EarningsModel? = nil
+        earningsModel: EarningsModel? = nil,
+        minSOC: Double? = nil
     ) -> AppSettings {
         AppSettings(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -192,7 +196,8 @@ public struct AppSettings {
             showBatteryPercentageRemaining: showBatteryPercentageRemaining ?? self.showBatteryPercentageRemaining,
             showSelfSufficiencyStatsGraphOverlay: showSelfSufficiencyStatsGraphOverlay ?? self.showSelfSufficiencyStatsGraphOverlay,
             truncatedYAxisOnParameterGraphs: truncatedYAxisOnParameterGraphs ?? self.truncatedYAxisOnParameterGraphs,
-            earningsModel: earningsModel ?? self.earningsModel
+            earningsModel: earningsModel ?? self.earningsModel,
+            minSOC: minSOC ?? self.minSOC
         )
     }
 }

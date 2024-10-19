@@ -12,22 +12,20 @@ import SwiftUI
 class BatteryPowerViewModel {
     private let actualBatteryStateOfCharge: Double
     private(set) var batteryChargekWh: Double
-    private let calculator: BatteryCapacityCalculator
     private(set) var temperature: Double
     private var configManager: ConfigManaging
     let residual: Int
     let error: Error?
+    private let minSOC: Double
 
-    init(configManager: ConfigManaging, batteryStateOfCharge: Double, batteryChargekWH: Double, temperature: Double, batteryResidual: Int, error: Error?) {
+    init(configManager: ConfigManaging, batteryStateOfCharge: Double, batteryChargekWH: Double, temperature: Double, batteryResidual: Int, error: Error?, minSOC: Double) {
         actualBatteryStateOfCharge = batteryStateOfCharge
         batteryChargekWh = batteryChargekWH
         self.temperature = temperature
         self.configManager = configManager
         residual = batteryResidual
         self.error = error
-
-        calculator = BatteryCapacityCalculator(capacityW: configManager.batteryCapacityW,
-                                               minimumSOC: configManager.minSOC)
+        self.minSOC = minSOC
     }
 
     var batteryExtra: String? {
@@ -59,6 +57,11 @@ class BatteryPowerViewModel {
 
     var showUsableBatteryOnly: Bool {
         configManager.showUsableBatteryOnly
+    }
+
+    var calculator: BatteryCapacityCalculator {
+        BatteryCapacityCalculator(capacityW: configManager.batteryCapacityW,
+                                  minimumSOC: minSOC)
     }
 }
 
@@ -120,6 +123,14 @@ struct BatteryPowerView: View {
 
 extension BatteryPowerViewModel {
     static func any(error: Error?, config: Config = MockConfig()) -> BatteryPowerViewModel {
-        .init(configManager: ConfigManager.preview(config: config), batteryStateOfCharge: 0.99, batteryChargekWH: -0.01, temperature: 15.6, batteryResidual: 5940, error: error)
+        .init(
+            configManager: ConfigManager.preview(config: config),
+            batteryStateOfCharge: 0.99,
+            batteryChargekWH: -0.01,
+            temperature: 15.6,
+            batteryResidual: 5940,
+            error: error,
+            minSOC: 0.2
+        )
     }
 }

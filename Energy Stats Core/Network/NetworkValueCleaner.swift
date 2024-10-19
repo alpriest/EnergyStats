@@ -24,8 +24,8 @@ class NetworkValueCleaner: FoxAPIServicing {
         try await api.openapi_setScheduleFlag(deviceSN: deviceSN, enable: enable)
     }
 
-    func openapi_fetchBatterySettings(deviceSN: String) async throws -> BatterySOCResponse {
-        try await api.openapi_fetchBatterySettings(deviceSN: deviceSN)
+    func openapi_fetchBatterySoc(deviceSN: String) async throws -> BatterySOCResponse {
+        try await api.openapi_fetchBatterySoc(deviceSN: deviceSN)
     }
 
     func openapi_fetchDeviceList() async throws -> [DeviceSummaryResponse] {

@@ -38,9 +38,9 @@ struct Energy_StatsApp: App {
         network = NetworkService.standard(keychainStore: keychainStore,
                                           isDemoUser: { config.isDemoUser },
                                           dataCeiling: { config.dataCeiling })
-        appSettingsPublisher = AppSettingsPublisherFactory.make(from: config)
-
+        appSettingsPublisher = AppSettingsPublisherFactory.make()
         configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
+        AppSettingsPublisherFactory.update(from: configManager)
         userManager = .init(store: keychainStore, configManager: configManager, networkCache: InMemoryLoggingNetworkStore.shared)
         templateStore = TemplateStore(config: configManager)
         appSettingsPublisher

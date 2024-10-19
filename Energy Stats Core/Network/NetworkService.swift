@@ -80,7 +80,7 @@ public class NetworkService: Networking {
     }
 
     public func fetchBatterySettings(deviceSN: String) async throws -> BatterySOCResponse {
-        try await api.openapi_fetchBatterySettings(deviceSN: deviceSN)
+        try await api.openapi_fetchBatterySoc(deviceSN: deviceSN)
     }
 
     public func setBatterySoc(deviceSN: String, minSOCOnGrid: Int, minSOC: Int) async throws {

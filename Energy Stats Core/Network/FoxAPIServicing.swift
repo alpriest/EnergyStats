@@ -20,7 +20,7 @@ protocol FoxAPIServicing {
     func openapi_fetchHistory(deviceSN: String, variables: [String], start: Date, end: Date) async throws -> OpenHistoryResponse
     func openapi_fetchVariables() async throws -> [OpenApiVariable]
     func openapi_fetchReport(deviceSN: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [OpenReportResponse]
-    func openapi_fetchBatterySettings(deviceSN: String) async throws -> BatterySOCResponse
+    func openapi_fetchBatterySoc(deviceSN: String) async throws -> BatterySOCResponse
     func openapi_setBatterySoc(deviceSN: String, minSOCOnGrid: Int, minSOC: Int) async throws
     func openapi_fetchBatteryTimes(deviceSN: String) async throws -> [ChargeTime]
     func openapi_setBatteryTimes(deviceSN: String, times: [ChargeTime]) async throws

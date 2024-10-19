@@ -51,7 +51,7 @@ class DemoAPI: FoxAPIServicing {
         return GetSchedulerFlagResponse(enable: true, support: true)
     }
 
-    func openapi_fetchBatterySettings(deviceSN: String) async throws -> BatterySOCResponse {
+    func openapi_fetchBatterySoc(deviceSN: String) async throws -> BatterySOCResponse {
         if callsToThrow.contains(.openapi_fetchBatterySettings) {
             throw NetworkError.missingData
         }

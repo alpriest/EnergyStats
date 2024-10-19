@@ -66,7 +66,7 @@ public class ConfigManager: ConfigManaging {
                 let batteryVariables = try await networking.fetchRealData(deviceSN: device.deviceSN, variables: ["ResidualEnergy", "SoC", "SoC_1"])
                 let batterySettings = try await networking.fetchBatterySettings(deviceSN: device.deviceSN)
 
-                deviceBattery = BatteryResponseMapper.map(batteryVariables: batteryVariables, settings: batterySettings)
+                deviceBattery = BatteryResponseMapper.map(batteryVariables: batteryVariables, socResponse: batterySettings)
             } catch {
                 deviceBattery = nil
             }
@@ -103,7 +103,24 @@ public class ConfigManager: ConfigManaging {
         selectedDeviceSN = device.deviceSN
     }
 
-    public var minSOC: Double { Double(currentDevice.value?.battery?.minSOC ?? "0.2") ?? 0.0 }
+    public var minSOC: Double {
+        get {
+            guard let battery = currentDevice.value?.battery else { return 0.0 }
+            return Double(battery.minSOC ?? "0.0") ?? 0.0
+        }
+        set {
+            guard let device = currentDevice.value else { return }
+            guard let battery = device.battery else { return }
+
+            let updatedDevice = device.copy(battery: battery.copy(minSOC: newValue.roundedToString(decimalPlaces: 2)))
+            devices = devices?.map {
+                $0.deviceSN == device.deviceSN ? updatedDevice : $0
+            }
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+                minSOC: newValue
+            ))
+        }
+    }
 
     public var variables: [Variable] {
         config.variables
@@ -563,7 +580,7 @@ public class ConfigManager: ConfigManaging {
 }
 
 public enum BatteryResponseMapper {
-    public static func map(batteryVariables: OpenQueryResponse, settings: BatterySOCResponse) -> Device.Battery? {
+    public static func map(batteryVariables: OpenQueryResponse, socResponse: BatterySOCResponse) -> Device.Battery? {
         guard let residual = batteryVariables.datas.current(for: "ResidualEnergy")?.value else { return nil }
 
         let batteryCapacity: String
@@ -575,7 +592,7 @@ public enum BatteryResponseMapper {
         } else {
             batteryCapacity = "0"
         }
-        minSOC = String(Double(settings.minSocOnGrid) / 100.0)
+        minSOC = String(Double(socResponse.minSocOnGrid) / 100.0)
 
         return Device.Battery(capacity: batteryCapacity, minSOC: minSOC)
     }

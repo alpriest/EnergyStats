@@ -46,11 +46,11 @@ class NetworkFacade: FoxAPIServicing {
         }
     }
 
-    func openapi_fetchBatterySettings(deviceSN: String) async throws -> BatterySOCResponse {
+    func openapi_fetchBatterySoc(deviceSN: String) async throws -> BatterySOCResponse {
         return if isDemoUser {
-            try await demoAPI.openapi_fetchBatterySettings(deviceSN: deviceSN)
+            try await demoAPI.openapi_fetchBatterySoc(deviceSN: deviceSN)
         } else {
-            try await api.openapi_fetchBatterySettings(deviceSN: deviceSN)
+            try await api.openapi_fetchBatterySoc(deviceSN: deviceSN)
         }
     }
 

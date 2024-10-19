@@ -21,7 +21,7 @@ struct UpdateTodayStatsIntent: AppIntent {
         do {
             let config = UserDefaultsConfig()
             let keychainStore = KeychainStore()
-            let appSettingsPublisher = AppSettingsPublisherFactory.make(from: config)
+            let appSettingsPublisher = AppSettingsPublisherFactory.make()
             let network = NetworkService.standard(keychainStore: keychainStore,
                                                   isDemoUser: {
                                                       false
@@ -29,6 +29,7 @@ struct UpdateTodayStatsIntent: AppIntent {
                                                   dataCeiling: { .none })
 
             let configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
+            AppSettingsPublisherFactory.update(from: configManager)
             try await HomeEnergyStateManager.shared.updateTodayStatsState(config: HomeEnergyStateManagerConfigAdapter(config: configManager))
 
             WidgetCenter.shared.reloadTimelines(ofKind: "TodayStatsWidget")

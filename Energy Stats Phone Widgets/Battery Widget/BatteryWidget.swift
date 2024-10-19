@@ -19,8 +19,9 @@ struct BatteryWidget: Widget {
         let network = NetworkService.standard(keychainStore: keychainStore,
                                               isDemoUser: { false },
                                               dataCeiling: { .none })
-        let appSettingsPublisher = AppSettingsPublisherFactory.make(from: config)
+        let appSettingsPublisher = AppSettingsPublisherFactory.make()
         configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
+        AppSettingsPublisherFactory.update(from: configManager)
     }
 
     var body: some WidgetConfiguration {
@@ -120,7 +121,7 @@ struct BatteryWidget_Previews: PreviewProvider {
             configManager: ConfigManager(
                 networking: NetworkService.preview(),
                 config: MockConfig(),
-                appSettingsPublisher: AppSettingsPublisherFactory.make(from: MockConfig()),
+                appSettingsPublisher: AppSettingsPublisherFactory.make(),
                 keychainStore: KeychainStore.preview()
             )
         )
@@ -135,7 +136,7 @@ struct BatteryWidget_Previews: PreviewProvider {
             configManager: ConfigManager(
                 networking: NetworkService.preview(),
                 config: MockConfig(),
-                appSettingsPublisher: AppSettingsPublisherFactory.make(from: MockConfig()),
+                appSettingsPublisher: AppSettingsPublisherFactory.make(),
                 keychainStore: KeychainStore.preview()
             )
         )

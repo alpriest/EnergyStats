@@ -74,6 +74,13 @@ public struct Device: Codable, Hashable, Identifiable {
             self.capacity = capacity
             self.minSOC = minSOC
         }
+
+        public func copy(capacity: String? = nil, minSOC: String? = nil) -> Self {
+            Self(
+                capacity: capacity ?? self.capacity,
+                minSOC: minSOC ?? self.minSOC
+            )
+        }
     }
 
     public var id: String { deviceSN }

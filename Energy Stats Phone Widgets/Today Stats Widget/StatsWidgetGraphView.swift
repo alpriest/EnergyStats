@@ -35,7 +35,7 @@ struct StatsWidgetGraphView: View {
 
             Text(lastUpdated, format: .dateTime)
                 .font(.system(size: 8.0, weight: .light))
-                .padding(.top, 12)
+                .padding(.top, 10)
         }
     }
 

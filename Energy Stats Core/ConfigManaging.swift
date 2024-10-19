@@ -28,7 +28,7 @@ public protocol ConfigManaging: FinancialConfigManager, SolcastConfigManager, Ba
     var appSettingsPublisher: LatestAppSettingsPublisher { get }
 
     var hasRunBefore: Bool { get set }
-    var minSOC: Double { get }
+    var minSOC: Double { get set }
     var isDemoUser: Bool { get set }
     var showColouredLines: Bool { get set }
     var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode { get set }

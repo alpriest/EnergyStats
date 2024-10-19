@@ -48,7 +48,8 @@ public extension AppSettings {
             showBatteryPercentageRemaining: true,
             showSelfSufficiencyStatsGraphOverlay: true,
             truncatedYAxisOnParameterGraphs: true,
-            earningsModel: .exported
+            earningsModel: .exported,
+            minSOC: 0.2
         )
     }
 }

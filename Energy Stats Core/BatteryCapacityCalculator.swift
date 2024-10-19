@@ -30,15 +30,12 @@ public class BatteryCapacityCalculator {
         let currentEstimatedCharge = capacityW * batteryStateOfCharge
 
         if batteryChargePowerkW > 0 { // battery charging
-            if batteryStateOfCharge >= percentageConsideredFull { return nil }
-
             let capacityRemaining = capacityW - currentEstimatedCharge
             let minsToFullCharge = (capacityRemaining / (batteryChargePowerkW * 1000.0)) * 60 * 60
             let duration = formatter.localizedString(fromTimeInterval: minsToFullCharge)
 
             return String(key: .full, bundle: bundle) + " \(duration)"
         } else { // battery discharging
-            if batteryStateOfCharge <= (minimumSOC * 1.02) { return nil }
             let chargeRemaining = currentEstimatedCharge - minimumCharge
             let minsUntilEmpty = (chargeRemaining / abs(batteryChargePowerkW * 1000.0)) * 60 * 60
             let duration = formatter.localizedString(fromTimeInterval: minsUntilEmpty)

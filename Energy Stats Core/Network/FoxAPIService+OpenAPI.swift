@@ -86,7 +86,7 @@ extension FoxAPIService {
         return result.0
     }
 
-    func openapi_fetchBatterySettings(deviceSN: String) async throws -> BatterySOCResponse {
+    func openapi_fetchBatterySoc(deviceSN: String) async throws -> BatterySOCResponse {
         let request = append(queryItems: [URLQueryItem(name: "sn", value: deviceSN)], to: URL.getOpenBatterySOC)
 
         let result: (BatterySOCResponse, Data) = try await fetch(request)

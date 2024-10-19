@@ -103,7 +103,8 @@ struct LoadedPowerFlowView: View {
                                                                               batteryChargekWH: viewModel.battery,
                                                                               temperature: viewModel.batteryTemperature,
                                                                               batteryResidual: viewModel.batteryResidual,
-                                                                              error: viewModel.batteryError),
+                                                                              error: viewModel.batteryError,
+                                                                              minSOC: appSettings.minSOC),
                                              appSettings: appSettings)
                                 .frame(width: bottomColumnWidth)
 
@@ -129,7 +130,8 @@ struct LoadedPowerFlowView: View {
                                                                                     batteryChargekWH: viewModel.battery,
                                                                                     temperature: viewModel.batteryTemperature,
                                                                                     batteryResidual: viewModel.batteryResidual,
-                                                                                    error: viewModel.batteryError),
+                                                                                    error: viewModel.batteryError,
+                                                                                    minSOC: appSettings.minSOC),
                                                    appSettings: appSettings)
                                 .frame(width: bottomColumnWidth)
 

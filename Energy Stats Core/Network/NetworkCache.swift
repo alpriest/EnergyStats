@@ -40,10 +40,6 @@ class NetworkCache: FoxAPIServicing {
         try await api.openapi_setScheduleFlag(deviceSN: deviceSN, enable: enable)
     }
 
-    func openapi_fetchBatterySettings(deviceSN: String) async throws -> BatterySOCResponse {
-        try await api.openapi_fetchBatterySettings(deviceSN: deviceSN)
-    }
-
     func openapi_fetchDeviceList() async throws -> [DeviceSummaryResponse] {
         let key = makeKey(base: #function)
 
@@ -68,7 +64,22 @@ class NetworkCache: FoxAPIServicing {
         }
     }
 
+    func openapi_fetchBatterySoc(deviceSN: String) async throws -> BatterySOCResponse {
+        let key = makeKey(base: "openapi_fetchBatterySoc", arguments: deviceSN)
+
+        if let item = cache[key], let cached = item.item as? BatterySOCResponse, item.isFresherThan(interval: shortCacheDurationInSeconds) {
+            return cached
+        } else {
+            let fresh = try await api.openapi_fetchBatterySoc(deviceSN: deviceSN)
+            store(key: key, value: CachedItem(fresh))
+            return fresh
+        }
+    }
+
     func openapi_setBatterySoc(deviceSN: String, minSOCOnGrid: Int, minSOC: Int) async throws {
+        let key = makeKey(base: "openapi_fetchBatterySoc", arguments: deviceSN)
+        cache.removeValue(forKey: key)
+
         try await api.openapi_setBatterySoc(deviceSN: deviceSN, minSOCOnGrid: minSOCOnGrid, minSOC: minSOC)
     }
 

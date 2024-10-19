@@ -247,7 +247,7 @@ class SettingsTabViewModel: ObservableObject {
         Task { @MainActor [networking] in
             let real = try await networking.fetchRealData(deviceSN: deviceSN, variables: ["SoC", "SoC_1", "ResidualEnergy"])
             let socResponse = try await networking.fetchBatterySettings(deviceSN: deviceSN)
-            let batteryResponse = BatteryResponseMapper.map(batteryVariables: real, settings: socResponse)
+            let batteryResponse = BatteryResponseMapper.map(batteryVariables: real, socResponse: socResponse)
 
             config.devices = devices.map {
                 if $0.deviceSN == deviceSN {

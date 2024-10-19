@@ -21,14 +21,15 @@ struct UpdateBatteryChargeLevelIntent: AppIntent {
         do {
             let config = UserDefaultsConfig()
             let keychainStore = KeychainStore()
-            let appSettingsPublisher = AppSettingsPublisherFactory.make(from: config)
             let network = NetworkService.standard(keychainStore: keychainStore,
                                                   isDemoUser: {
                                                       false
                                                   },
                                                   dataCeiling: { .none })
 
+            let appSettingsPublisher = AppSettingsPublisherFactory.make()
             let configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
+            AppSettingsPublisherFactory.update(from: configManager)
             try await HomeEnergyStateManager.shared.updateBatteryState(config: HomeEnergyStateManagerConfigAdapter(config: configManager))
 
             WidgetCenter.shared.reloadTimelines(ofKind: "BatteryWidget")
