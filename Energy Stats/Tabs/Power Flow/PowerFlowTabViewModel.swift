@@ -167,8 +167,9 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
                                                            config: configManager)
 
             let battery = BatteryViewModel.make(currentDevice: currentDevice, real: real)
-            let batterySettings = try await network.fetchBatterySettings(deviceSN: currentDevice.deviceSN)
-            self.configManager.minSOC = batterySettings.minSocOnGridPercent
+            if battery.hasBattery, let batterySettings = try? await network.fetchBatterySettings(deviceSN: currentDevice.deviceSN) {
+                self.configManager.minSOC = batterySettings.minSocOnGridPercent
+            }
 
             let summary = LoadedPowerFlowViewModel(
                 solar: currentViewModel.currentSolarPower,
