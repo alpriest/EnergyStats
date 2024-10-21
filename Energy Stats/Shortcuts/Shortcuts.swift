@@ -14,22 +14,26 @@ struct EnergyStatsShortcuts: AppShortcutsProvider {
         AppShortcut(
             intent: CheckBatteryChargeLevelIntent(),
             phrases: ["Check my storage battery SOC on \(.applicationName)"],
-            shortTitle: "Storage Battery SOC"
+            shortTitle: "Storage Battery SOC",
+            systemImageName: "minus.plus.batteryblock.fill"
         )
         AppShortcut(
             intent: CheckCurrentSolarGenerationIntent(),
             phrases: ["Check my current solar generation"],
-            shortTitle: "Solar Generation"
+            shortTitle: "Solar Generation",
+            systemImageName: "sun.max"
         )
         AppShortcut(
             intent: CheckCurrentHouseLoadIntent(),
             phrases: ["Check my current house load"],
-            shortTitle: "House Load"
+            shortTitle: "House Load",
+            systemImageName: "house.fill"
         )
         AppShortcut(
             intent: CheckCurrentGridLoadIntent(),
             phrases: ["Check my current grid load"],
-            shortTitle: "Grid Load"
+            shortTitle: "Grid Load",
+            systemImageName: "bolt.fill"
         )
     }
 }
