@@ -3572,6 +3572,15 @@
         }
       }
     },
+    "Check Current Grid Load" : {
+
+    },
+    "Check Current House Load" : {
+
+    },
+    "Check Current Solar Generation" : {
+
+    },
     "Check FoxESS Server status" : {
       "localizations" : {
         "de" : {
@@ -7112,6 +7121,9 @@
         }
       }
     },
+    "Grid Load" : {
+
+    },
     "grid_import_avoided" : {
       "localizations" : {
         "de" : {
@@ -7484,6 +7496,9 @@
           }
         }
       }
+    },
+    "House Load" : {
+
     },
     "I am paid for" : {
       "localizations" : {
@@ -11679,6 +11694,15 @@
         }
       }
     },
+    "Returns the current grid load in Watts. Negative is import, positive is export." : {
+
+    },
+    "Returns the current house load in Watts" : {
+
+    },
+    "Returns the solar being generated in Watts" : {
+
+    },
     "Save" : {
       "localizations" : {
         "de" : {
@@ -11770,31 +11794,31 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zeitpläne werden auf Ihrem %1$@ mit der Firmware-Version, die Sie haben %2$@, nicht unterstützt."
+            "value" : "Zeitpläne werden auf Ihrem %1$@ mit der Firmware-Version, die Sie haben v%2$@, nicht unterstützt."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Schedules are not supported on your %1$@ with the firmware version you have %2$@."
+            "value" : "Schedules are not supported on your %1$@ with the firmware version you have v%2$@."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Los horarios no son compatibles con su %1$@ con la versión de firmware que tiene %2$@."
+            "value" : "Los horarios no son compatibles con su %1$@ con la versión de firmware que tiene v%2$@."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gli orari non sono supportati sul tuo %1$@ con la versione del firmware che hai %2$@."
+            "value" : "Gli orari non sono supportati sul tuo %1$@ con la versione del firmware che hai v%2$@."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Harmonogramy nie są obsługiwane na twoim %1$@ z wersją oprogramowania układowego, którą masz %2$@."
+            "value" : "Harmonogramy nie są obsługiwane na twoim %1$@ z wersją oprogramowania układowego, którą masz v%2$@."
           }
         }
       }
@@ -12876,6 +12900,9 @@
           }
         }
       }
+    },
+    "Solar Generation" : {
+
     },
     "Solar Prediction" : {
       "localizations" : {

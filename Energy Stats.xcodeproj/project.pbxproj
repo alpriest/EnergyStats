@@ -241,7 +241,7 @@
 		41C19DCF2A4E09F9009883AB /* SelfSufficiencySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C19DCE2A4E09F9009883AB /* SelfSufficiencySettingsView.swift */; };
 		41C249A52A77FC7400D8E9E7 /* FoxESSCloudStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C249A42A77FC7400D8E9E7 /* FoxESSCloudStatusView.swift */; };
 		41C6AF662A360CF600C88F2B /* CSVTextFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C6AF652A360CF600C88F2B /* CSVTextFile.swift */; };
-		41C849692A8BBC3800431410 /* Intents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C849682A8BBC3800431410 /* Intents.swift */; };
+		41C849692A8BBC3800431410 /* Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C849682A8BBC3800431410 /* Shortcuts.swift */; };
 		41C8496B2A8BBF1500431410 /* InverterIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C8496A2A8BBF1500431410 /* InverterIconView.swift */; };
 		41CA35712AA8C02C00D45734 /* EarningsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CA35702AA8C02C00D45734 /* EarningsView.swift */; };
 		41CA35732AA8C10900D45734 /* EarningsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CA35722AA8C10900D45734 /* EarningsViewModel.swift */; };
@@ -268,6 +268,11 @@
 		41DE1B512ACD57A8001BB2D1 /* Energy_Stats_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; platformFilter = ios; };
 		41DE1B522ACD57A8001BB2D1 /* Energy_Stats_Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		41DF51D22AA4CF6D007B5102 /* MockAppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DF51D12AA4CF6D007B5102 /* MockAppTheme.swift */; };
+		41E12E842CC6597A001F3839 /* CheckBatteryChargeLevelIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E12E832CC6597A001F3839 /* CheckBatteryChargeLevelIntent.swift */; };
+		41E12E862CC659E4001F3839 /* CheckCurrentSolarGenerationIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E12E852CC659E4001F3839 /* CheckCurrentSolarGenerationIntent.swift */; };
+		41E12E882CC666C9001F3839 /* ServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E12E872CC666C9001F3839 /* ServiceFactory.swift */; };
+		41E12E8A2CC66737001F3839 /* CheckCurrentLoadIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E12E892CC66737001F3839 /* CheckCurrentLoadIntent.swift */; };
+		41E12E8C2CC66893001F3839 /* CheckCurrentGridLoadIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E12E8B2CC66893001F3839 /* CheckCurrentGridLoadIntent.swift */; };
 		41E165B32B0A877100B17590 /* SolcastSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E165B22B0A877100B17590 /* SolcastSettingsViewModel.swift */; };
 		41E165B52B0B961200B17590 /* SolcastSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E165B42B0B961200B17590 /* SolcastSettings.swift */; };
 		41E165B72B0BAD7400B17590 /* UserDefaultsConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E165B62B0BAD7400B17590 /* UserDefaultsConfig.swift */; };
@@ -713,7 +718,7 @@
 		41C19DCE2A4E09F9009883AB /* SelfSufficiencySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSufficiencySettingsView.swift; sourceTree = "<group>"; };
 		41C249A42A77FC7400D8E9E7 /* FoxESSCloudStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoxESSCloudStatusView.swift; sourceTree = "<group>"; };
 		41C6AF652A360CF600C88F2B /* CSVTextFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVTextFile.swift; sourceTree = "<group>"; };
-		41C849682A8BBC3800431410 /* Intents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intents.swift; sourceTree = "<group>"; };
+		41C849682A8BBC3800431410 /* Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shortcuts.swift; sourceTree = "<group>"; };
 		41C8496A2A8BBF1500431410 /* InverterIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterIconView.swift; sourceTree = "<group>"; };
 		41CA35702AA8C02C00D45734 /* EarningsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarningsView.swift; sourceTree = "<group>"; };
 		41CA35722AA8C10900D45734 /* EarningsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarningsViewModel.swift; sourceTree = "<group>"; };
@@ -739,6 +744,11 @@
 		41DCF5432B06CBD40010843F /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		41DD7F3929C5B8940072CDE8 /* SolarPowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarPowerView.swift; sourceTree = "<group>"; };
 		41DF51D12AA4CF6D007B5102 /* MockAppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAppTheme.swift; sourceTree = "<group>"; };
+		41E12E832CC6597A001F3839 /* CheckBatteryChargeLevelIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBatteryChargeLevelIntent.swift; sourceTree = "<group>"; };
+		41E12E852CC659E4001F3839 /* CheckCurrentSolarGenerationIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckCurrentSolarGenerationIntent.swift; sourceTree = "<group>"; };
+		41E12E872CC666C9001F3839 /* ServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFactory.swift; sourceTree = "<group>"; };
+		41E12E892CC66737001F3839 /* CheckCurrentLoadIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckCurrentLoadIntent.swift; sourceTree = "<group>"; };
+		41E12E8B2CC66893001F3839 /* CheckCurrentGridLoadIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckCurrentGridLoadIntent.swift; sourceTree = "<group>"; };
 		41E165B22B0A877100B17590 /* SolcastSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolcastSettingsViewModel.swift; sourceTree = "<group>"; };
 		41E165B42B0B961200B17590 /* SolcastSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolcastSettings.swift; sourceTree = "<group>"; };
 		41E165B62B0BAD7400B17590 /* UserDefaultsConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsConfig.swift; sourceTree = "<group>"; };
@@ -1129,7 +1139,7 @@
 				4107446A28CA57A1006D5D7D /* Tabs */,
 				419CCB532933BABF00882649 /* ErrorAlertView.swift */,
 				417153E529F2BD3300639A7B /* LoadState.swift */,
-				41C849682A8BBC3800431410 /* Intents.swift */,
+				41E12E822CC65973001F3839 /* Shortcuts */,
 				4149D3AC2B3C4DAA00314449 /* UnsupportedErrorView.swift */,
 				41D75A022B6009D5002C43A7 /* UpgradeRequiredView.swift */,
 				4189B0312B9486FE00EC4CB5 /* version.json */,
@@ -1427,6 +1437,19 @@
 				41E6720A2C456D51003D7D44 /* CreateTemplateButtonView.swift */,
 			);
 			path = Templates;
+			sourceTree = "<group>";
+		};
+		41E12E822CC65973001F3839 /* Shortcuts */ = {
+			isa = PBXGroup;
+			children = (
+				41E12E832CC6597A001F3839 /* CheckBatteryChargeLevelIntent.swift */,
+				41E12E852CC659E4001F3839 /* CheckCurrentSolarGenerationIntent.swift */,
+				41E12E892CC66737001F3839 /* CheckCurrentLoadIntent.swift */,
+				41E12E8B2CC66893001F3839 /* CheckCurrentGridLoadIntent.swift */,
+				41E12E872CC666C9001F3839 /* ServiceFactory.swift */,
+				41C849682A8BBC3800431410 /* Shortcuts.swift */,
+			);
+			path = Shortcuts;
 			sourceTree = "<group>";
 		};
 		41E1DFDD28D87778001235B9 /* Settings */ = {
@@ -1983,12 +2006,13 @@
 				4171854C2A01033700D18CDD /* ParameterGraphVariablesToggles.swift in Sources */,
 				41C0923D2B210255001D1E22 /* ScheduleDetailView.swift in Sources */,
 				41A263222B6AEE9F0027E52A /* ConfigureAPIKeyView.swift in Sources */,
+				41E12E882CC666C9001F3839 /* ServiceFactory.swift in Sources */,
 				419092212B1DBF2B0017CB65 /* ScheduleSummaryView.swift in Sources */,
 				417185482A0051CA00D18CDD /* ParameterGraphVariableChooserView.swift in Sources */,
 				41C1243E2B738B1400B575F2 /* HowToObtainAPIKeyView.swift in Sources */,
 				412887562BE8B861007E9532 /* WatchSessionDelegate.swift in Sources */,
 				41C6AF662A360CF600C88F2B /* CSVTextFile.swift in Sources */,
-				41C849692A8BBC3800431410 /* Intents.swift in Sources */,
+				41C849692A8BBC3800431410 /* Shortcuts.swift in Sources */,
 				41ACB2C62A51ADEB005831B0 /* ValueBoundsView.swift in Sources */,
 				41E3B76C2BBDD345005A9F80 /* Icon.swift in Sources */,
 				415F2C742CA7E4AA00B9CE0D /* SummaryDateRangeView.swift in Sources */,
@@ -2014,6 +2038,7 @@
 				418EB4852ACC012C0021B87A /* FinancialsSettingsView.swift in Sources */,
 				416D61362CC14A8600197822 /* BatteryFullEmptyCalculationDebugView.swift in Sources */,
 				414BF82829B4918300E2EB51 /* SettingsTabViewModel.swift in Sources */,
+				41E12E8C2CC66893001F3839 /* CheckCurrentGridLoadIntent.swift in Sources */,
 				41CD1F322A1414C1006B0C00 /* StatsGraphVariableToggles.swift in Sources */,
 				4160098D2A8D1A690096CCD9 /* BottomButtonsView.swift in Sources */,
 				4110291D2A72AFC2004018BB /* BatterySOCSettingsViewModel.swift in Sources */,
@@ -2047,6 +2072,7 @@
 				41C19DCD2A4DDE46009883AB /* SelfSufficiencyEstimateView.swift in Sources */,
 				4130364B29B8BE7F006B5CE9 /* InverterChoiceView.swift in Sources */,
 				41FCE06E2CA175AA0046ABF6 /* TabItems.swift in Sources */,
+				41E12E8A2CC66737001F3839 /* CheckCurrentLoadIntent.swift in Sources */,
 				41E8E7242AADFB3900DC4B89 /* SolarBandingSettingsView.swift in Sources */,
 				418C091D2B17EC0E00183603 /* TimePeriodBarView.swift in Sources */,
 				4140145C28C70B4A00EA5BA1 /* PowerFlowTabViewModel.swift in Sources */,
@@ -2058,6 +2084,7 @@
 				4107446528CA1D76006D5D7D /* FlowingLine.swift in Sources */,
 				417AA21D2A1245C00073CD34 /* StatsTabViewModel.swift in Sources */,
 				418C6E992AFB8A15000DE35F /* ApproximationsCalculator.swift in Sources */,
+				41E12E862CC659E4001F3839 /* CheckCurrentSolarGenerationIntent.swift in Sources */,
 				41E1DFDF28D87781001235B9 /* SettingsTabView.swift in Sources */,
 				41C0923B2B20FCB0001D1E22 /* SchedulePhaseHelper.swift in Sources */,
 				4107446328CA1C5D006D5D7D /* PowerFlowView.swift in Sources */,
@@ -2070,6 +2097,7 @@
 				415AFA832C597DD800691852 /* SlowServerBannerView.swift in Sources */,
 				41EB28032B8E634F00F6127F /* SolarStringsSettingsView.swift in Sources */,
 				41FE6BB12B0CBA7900A66CC3 /* SolcastSiteView.swift in Sources */,
+				41E12E842CC6597A001F3839 /* CheckBatteryChargeLevelIntent.swift in Sources */,
 				41AF2F432AA4C6C1008FCA2E /* HomePowerFooterView.swift in Sources */,
 				41E165BB2B0BE1BD00B17590 /* ForecastView.swift in Sources */,
 				413BF2892A99F8A500A32B0D /* ApproximationsView.swift in Sources */,
@@ -2317,7 +2345,6 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "Energy Stats Phone Widgets/Energy Stats Phone WidgetsExtension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2351,7 +2378,6 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "Energy Stats Phone Widgets/Energy Stats Phone WidgetsExtension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2381,7 +2407,6 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
@@ -2399,7 +2424,6 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
@@ -2445,6 +2469,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 9;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -2466,7 +2491,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.61;
+				MARKETING_VERSION = 2.62;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2510,6 +2535,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 9;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2525,7 +2551,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.61;
+				MARKETING_VERSION = 2.62;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -2543,7 +2569,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Energy Stats/Energy Stats.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_ASSET_PATHS = "\"Energy Stats/Preview Content\"";
 				DEVELOPMENT_TEAM = 885RLNNNK2;
@@ -2579,7 +2604,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Energy Stats/Energy Stats.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"Energy Stats/Preview Content\"";
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				ENABLE_PREVIEWS = YES;
@@ -2613,7 +2637,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 885RLNNNK2;
@@ -2660,7 +2683,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 885RLNNNK2;
@@ -2703,7 +2725,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -2720,7 +2741,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -2738,7 +2758,6 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -2756,7 +2775,6 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -2777,7 +2795,6 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "Energy Stats Watch Widgets/Energy Stats Watch WidgetsExtension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2810,7 +2827,6 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "Energy Stats Watch Widgets/Energy Stats Watch WidgetsExtension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2843,7 +2859,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Energy Stats Watch App/Energy Stats Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"Energy Stats Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				ENABLE_PREVIEWS = YES;
@@ -2877,7 +2892,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Energy Stats Watch App/Energy Stats Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"Energy Stats Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				ENABLE_PREVIEWS = YES;

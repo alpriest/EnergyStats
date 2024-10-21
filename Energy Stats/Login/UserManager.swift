@@ -46,7 +46,7 @@ class UserManager: ObservableObject, HasLoadState {
     @MainActor
     func login(apiKey: String) async {
         do {
-            setState(.active("Loading"))
+            await setState(.active("Loading"))
             if apiKey == "demo" {
                 configManager.isDemoUser = true
                 configManager.appSettingsPublisher.send(AppSettings.mock())
@@ -61,14 +61,12 @@ class UserManager: ObservableObject, HasLoadState {
 
             switch error {
             case .badCredentials:
-                setState(.error(error, String(key: .wrongCredentials)))
+                await setState(.error(error, String(key: .wrongCredentials)))
             default:
-                setState(.error(error, String(key: .couldNotLogin)))
+                await setState(.error(error, String(key: .couldNotLogin)))
             }
         } catch {
-            await MainActor.run {
-                setState(.error(error, String(key: .couldNotLogin)))
-            }
+            await setState(.error(error, String(key: .couldNotLogin)))
         }
     }
 
@@ -81,7 +79,9 @@ class UserManager: ObservableObject, HasLoadState {
         }
         store.logout()
         networkCache.logout()
-        setState(.inactive)
+        Task {
+            await setState(.inactive)
+        }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             Task { @MainActor in

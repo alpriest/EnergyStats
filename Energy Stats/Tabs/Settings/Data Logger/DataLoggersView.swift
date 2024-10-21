@@ -29,7 +29,7 @@ class DataLoggersViewModel: ObservableObject, HasLoadState {
     func load() {
         Task { @MainActor in
             guard state == .inactive else { return }
-            setState(.active("Loading"))
+            await setState(.active("Loading"))
 
             do {
                 let result = try await networking.fetchDataLoggers()
@@ -42,9 +42,9 @@ class DataLoggersViewModel: ObservableObject, HasLoadState {
                     )
                 }
 
-                setState(.inactive)
+                await setState(.inactive)
             } catch {
-                setState(.error(error, "Could not load dataloggers"))
+                await setState(.error(error, "Could not load dataloggers"))
             }
         }
     }

@@ -13,10 +13,9 @@ protocol HasLoadState: AnyObject {
 }
 
 extension HasLoadState {
-    func setState(_ state: LoadState) {
-        Task { @MainActor in
-            self.state = state
-        }
+    @MainActor
+    func setState(_ state: LoadState) async {
+        self.state = state
     }
 }
 

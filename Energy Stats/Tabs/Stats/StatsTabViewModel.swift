@@ -129,7 +129,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
         guard let currentDevice = configManager.currentDevice.value else { return }
         guard requiresLoad() else { return }
 
-        setState(.active("Loading"))
+        await setState(.active("Loading"))
 
         if graphVariables.isEmpty {
             await updateGraphVariables(for: currentDevice)
@@ -166,15 +166,13 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
                 calculateApproximations()
                 refresh()
                 prepareExport()
-                setState(.inactive)
+                Task { await setState(.inactive) }
                 self.lastLoadState = LastLoadState(lastLoadTime: .now, loadState: displayMode)
             }
         } catch {
             if Task.isCancelled { return }
             
-            await MainActor.run {
-                setState(.error(error, "Could not load, check your connection"))
-            }
+            await setState(.error(error, "Could not load, check your connection"))
         }
     }
 

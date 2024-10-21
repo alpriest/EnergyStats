@@ -62,6 +62,7 @@ struct WelcomeView: View {
             if showingAPIKey {
                 ScrollView {
                     APIKeyLoginView(userManager: userManager)
+                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 400, maxHeight: .infinity)
                 }
             } else {
                 Spacer()

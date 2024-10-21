@@ -44,7 +44,7 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState {
             hasPreLoaded = true
         }
 
-        setState(.active("Loading"))
+        await setState(.active("Loading"))
 
         do {
             let flags = try await networking.fetchSchedulerFlag(deviceSN: device.deviceSN)
@@ -57,12 +57,12 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState {
                 }
 
                 let message = String(key: .schedulesUnsupported, arguments: [device.deviceDisplayName, firmwareVersions?.manager ?? ""])
-                setState(.error(nil, message))
+                await setState(.error(nil, message))
             } else {
-                setState(.inactive)
+                await setState(.inactive)
             }
         } catch {
-            setState(.error(error, error.localizedDescription))
+            await setState(.error(error, error.localizedDescription))
         }
     }
 
@@ -79,7 +79,7 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState {
                 return
             }
         }
-        setState(.active("Loading"))
+        await setState(.active("Loading"))
 
         do {
             self.templates = templateStore.load()
@@ -87,9 +87,9 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState {
             self.schedulerEnabled = scheduleResponse.enable.boolValue
 
             self.schedule = Schedule(phases: scheduleResponse.groups.filter { $0.enable == 1 }.compactMap { $0.toSchedulePhase() })
-            self.setState(.inactive)
+            await self.setState(.inactive)
         } catch {
-            self.setState(.error(error, error.localizedDescription))
+            await self.setState(.error(error, error.localizedDescription))
         }
     }
 
@@ -102,15 +102,15 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState {
 
         do {
             if self.schedulerEnabled {
-                setState(.active("Activating"))
+                await setState(.active("Activating"))
             } else {
-                setState(.active("Deactivating"))
+                await setState(.active("Deactivating"))
             }
 
             try await self.networking.setScheduleFlag(deviceSN: deviceSN, enable: self.schedulerEnabled)
-            self.setState(.inactive)
+            await self.setState(.inactive)
         } catch {
-            self.setState(.error(error, error.localizedDescription))
+            await self.setState(.error(error, error.localizedDescription))
         }
     }
 
@@ -122,13 +122,13 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState {
             return
         }
 
-        setState(.active("Activating"))
+        await setState(.active("Activating"))
 
         do {
             try await self.networking.saveSchedule(deviceSN: deviceSN, schedule: schedule)
 
             Task { @MainActor in
-                setState(.inactive)
+                await setState(.inactive)
                 await load()
                 self.alertContent = AlertContent(
                     title: "Success",
@@ -136,7 +136,7 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState {
                 )
             }
         } catch {
-            setState(.inactive)
+            await setState(.inactive)
             self.alertContent = AlertContent(title: "error_title", message: LocalizedStringKey(stringLiteral: error.localizedDescription))
         }
     }

@@ -30,7 +30,9 @@ class SolarForecastViewModel: ObservableObject, HasLoadState {
     @Published var hasSites: Bool = false
     private var privateState: LoadState = .inactive {
         didSet {
-            setState(privateState)
+            Task {
+                await setState(privateState)
+            }
         }
     }
 
@@ -85,7 +87,7 @@ class SolarForecastViewModel: ObservableObject, HasLoadState {
                     )
                 }
 
-                setState(.inactive)
+                await setState(.inactive)
             } catch NetworkError.tryLater {
                 privateState = .error(nil, "You have exceeded your free daily limit.")
                 data = []

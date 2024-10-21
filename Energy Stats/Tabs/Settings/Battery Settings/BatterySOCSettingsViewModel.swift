@@ -31,16 +31,16 @@ class BatterySOCSettingsViewModel: ObservableObject, HasLoadState {
         Task { @MainActor in
             guard state == .inactive else { return }
             guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
-            setState(.active("Loading"))
+            await setState(.active("Loading"))
 
             do {
                 let settings = try await networking.fetchBatterySettings(deviceSN: deviceSN)
                 self.soc = String(describing: settings.minSoc)
                 self.socOnGrid = String(describing: settings.minSocOnGrid)
 
-                setState(.inactive)
+                await setState(.inactive)
             } catch {
-                setState(.error(error, "Could not load settings"))
+                await setState(.error(error, "Could not load settings"))
             }
         }
     }
@@ -57,7 +57,7 @@ class BatterySOCSettingsViewModel: ObservableObject, HasLoadState {
                 return
             }
 
-            setState(.active("Saving"))
+            await setState(.active("Saving"))
 
             do {
                 try await networking.setBatterySoc(
@@ -69,12 +69,12 @@ class BatterySOCSettingsViewModel: ObservableObject, HasLoadState {
                 onSOCchange()
 
                 alertContent = AlertContent(title: "Success", message: "batterySOC_settings_saved")
-                setState(.inactive)
+                await setState(.inactive)
             } catch let NetworkError.foxServerError(code, _) where code == 44096 {
                 alertContent = AlertContent(title: "Failed", message: "cannot_save_due_to_active_schedule")
-                setState(.inactive)
+                await setState(.inactive)
             } catch {
-                setState(.error(error, "Could not save settings"))
+                await setState(.error(error, "Could not save settings"))
             }
         }
     }

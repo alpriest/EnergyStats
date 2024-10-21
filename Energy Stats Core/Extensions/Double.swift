@@ -130,4 +130,8 @@ public extension Int {
     var tintColor: Color {
         Double(self).tintColor
     }
+
+    func w() -> String {
+        return "\(self) W"
+    }
 }

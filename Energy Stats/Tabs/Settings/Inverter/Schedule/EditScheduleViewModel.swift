@@ -29,14 +29,15 @@ class EditScheduleViewModel: ObservableObject, HasLoadState {
             return
         }
 
-        setState(.active("Saving"))
+        await setState(.active("Saving"))
 
         Task { [self] in
             do {
                 try await networking.saveSchedule(deviceSN: deviceSN, schedule: schedule)
 
+                await setState(.inactive)
+
                 Task { @MainActor in
-                    setState(.inactive)
                     alertContent = AlertContent(
                         title: "Success",
                         message: "inverter_charge_schedule_settings_saved",
@@ -44,7 +45,7 @@ class EditScheduleViewModel: ObservableObject, HasLoadState {
                     )
                 }
             } catch {
-                setState(.inactive)
+                await setState(.inactive)
                 alertContent = AlertContent(title: "error_title", message: LocalizedStringKey(stringLiteral: error.localizedDescription))
             }
         }

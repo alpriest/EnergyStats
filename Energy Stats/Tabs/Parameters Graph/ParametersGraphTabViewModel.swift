@@ -133,8 +133,8 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
     }
 
     private func performLoad() {
-        self.loadTask?.cancel()
-        self.loadTask = Task { await self.load() }
+        loadTask?.cancel()
+        loadTask = Task { await self.load() }
     }
 
     func load() async {
@@ -142,7 +142,7 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
         guard let start = queryDate.asDate() else { return }
         guard requiresLoad() else { return }
 
-        setState(.active("Loading"))
+        await setState(.active("Loading"))
 
         do {
             let rawGraphVariables = graphVariables.filter { $0.isSelected }.compactMap { $0.type }
@@ -163,12 +163,14 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
                 self.rawData = rawData
                 self.refresh()
                 prepareExport()
-                setState(.inactive)
+                Task {
+                    await setState(.inactive)
+                }
                 self.lastLoadState = LastLoadState(lastLoadTime: .now, loadState: ParametersGraphLoadState(displayMode: displayMode, variables: graphVariables))
                 self.hasLoaded = true
             }
         } catch {
-            setState(.error(error, "Could not load, check your connection"))
+            await setState(.error(error, "Could not load, check your connection"))
         }
     }
 
