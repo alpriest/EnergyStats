@@ -9,6 +9,7 @@ import Combine
 import Energy_Stats_Core
 import SwiftUI
 import WatchConnectivity
+import WidgetKit
 
 @main
 struct Energy_StatsApp: App {
@@ -47,6 +48,8 @@ struct Energy_StatsApp: App {
             .sink { [keychainStore, configManager] _ in
                 Self.updateKeychainSettingsForWatch(keychainStore: keychainStore, configManager: configManager)
             }.store(in: &cancellables)
+
+        WidgetCenter.shared.reloadAllTimelines()
     }
 
     var body: some Scene {

@@ -198,6 +198,7 @@
 		41965EDF2C31EE9B004F9D9A /* SecureTextEntryField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41965EDE2C31EE9B004F9D9A /* SecureTextEntryField.swift */; };
 		41965EE12C3284E6004F9D9A /* VisibilityTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41965EE02C3284E6004F9D9A /* VisibilityTracking.swift */; };
 		41965EE32C3286C9004F9D9A /* LoadTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41965EE22C3286C9004F9D9A /* LoadTracking.swift */; };
+		4197A0DC2CC6901A00913823 /* SyncRequiredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4197A0DB2CC6901A00913823 /* SyncRequiredView.swift */; };
 		419AB4802AA36D24002CBC96 /* DisplaySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AB47F2AA36D24002CBC96 /* DisplaySettingsView.swift */; };
 		419B8DEA2B04D6BA0094402C /* SolcastCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419B8DE92B04D6BA0094402C /* SolcastCacheTests.swift */; };
 		419CCB542933BABF00882649 /* ErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419CCB532933BABF00882649 /* ErrorAlertView.swift */; };
@@ -672,6 +673,7 @@
 		41965EDE2C31EE9B004F9D9A /* SecureTextEntryField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureTextEntryField.swift; sourceTree = "<group>"; };
 		41965EE02C3284E6004F9D9A /* VisibilityTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibilityTracking.swift; sourceTree = "<group>"; };
 		41965EE22C3286C9004F9D9A /* LoadTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadTracking.swift; sourceTree = "<group>"; };
+		4197A0DB2CC6901A00913823 /* SyncRequiredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncRequiredView.swift; sourceTree = "<group>"; };
 		419AB47F2AA36D24002CBC96 /* DisplaySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaySettingsView.swift; sourceTree = "<group>"; };
 		419B8DE92B04D6BA0094402C /* SolcastCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolcastCacheTests.swift; sourceTree = "<group>"; };
 		419CCB532933BABF00882649 /* ErrorAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertView.swift; sourceTree = "<group>"; };
@@ -1555,6 +1557,7 @@
 			isa = PBXGroup;
 			children = (
 				4185FAB52A3B74E60082D53F /* BatteryStatusView.swift */,
+				4197A0DB2CC6901A00913823 /* SyncRequiredView.swift */,
 				4185FAB12A3B6C8D0082D53F /* BatteryWidget.swift */,
 				412A26852AC05D1200F61456 /* UpdateBatteryChargeLevelIntent.swift */,
 			);
@@ -1797,7 +1800,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1530;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					412A266B2AC03B2200F61456 = {
 						CreatedOnToolsVersion = 15.0;
@@ -1959,6 +1962,7 @@
 			files = (
 				41EE909D2BDEAA27006412FB /* UpdateBatteryChargeLevelIntent.swift in Sources */,
 				41777F5F2CB6D70B00507E4B /* StatsWidgetGraphView.swift in Sources */,
+				4197A0DC2CC6901A00913823 /* SyncRequiredView.swift in Sources */,
 				41777F5B2CB6CD5900507E4B /* TodayStatsWidget.swift in Sources */,
 				412A26832AC03BF000F61456 /* BatteryStatusView.swift in Sources */,
 				412A26712AC03B2300F61456 /* Energy_Stats_WidgetsBundle.swift in Sources */,
@@ -2469,7 +2473,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -2535,7 +2539,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2564,7 +2568,6 @@
 		4140145928C70B3200EA5BA1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Energy Stats/Energy Stats.entitlements";
@@ -2599,7 +2602,6 @@
 		4140145A28C70B3200EA5BA1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Energy Stats/Energy Stats.entitlements";
@@ -2643,7 +2645,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_MODULE_VERIFIER = NO;
+				ENABLE_MODULE_VERIFIER = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -2853,7 +2855,6 @@
 		41F631842BDCD32E00A571C5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2886,7 +2887,6 @@
 		41F631852BDCD32E00A571C5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

@@ -5,6 +5,7 @@
 //  Created by Alistair Priest on 14/06/2023.
 //
 
+import CoreData
 import Intents
 import SwiftData
 import SwiftUI
@@ -64,6 +65,8 @@ public struct BatteryTimelineProvider: TimelineProvider {
             try await HomeEnergyStateManager.shared.updateBatteryState(config: config)
         } catch _ as ConfigManager.NoBattery {
             return .failed(error: "Your selected inverter has no battery connected")
+        } catch _ as ConfigManager.NoDeviceFoundError {
+            return .syncRequired()
         } catch {
             errorMessage = error.localizedDescription
         }
@@ -84,7 +87,7 @@ public struct BatteryTimelineProvider: TimelineProvider {
         } catch _ as ConfigManager.NoBattery {
             return .failed(error: "Your selected inverter has no battery connected")
         } catch {
-            return .failed(error: "Could not load \(error.localizedDescription)")
+            return .syncRequired()
         }
     }
 }
@@ -93,6 +96,7 @@ public enum EntryState: Equatable {
     case loaded
     case placeholder
     case failedWithoutData(reason: String)
+    case syncRequired
 }
 
 public struct BatteryTimelineEntry: TimelineEntry {
@@ -114,28 +118,37 @@ public struct BatteryTimelineEntry: TimelineEntry {
 
     public static func loaded(date: Date, soc: Int, chargeStatusDescription: String?, errorMessage: String?, batteryPower: Double?) -> BatteryTimelineEntry {
         BatteryTimelineEntry(date: date,
-                    soc: soc,
-                    chargeStatusDescription: chargeStatusDescription,
-                    state: .loaded,
-                    errorMessage: nil,
-                    batteryPower: batteryPower)
+                             soc: soc,
+                             chargeStatusDescription: chargeStatusDescription,
+                             state: .loaded,
+                             errorMessage: nil,
+                             batteryPower: batteryPower)
     }
 
     public static func placeholder() -> BatteryTimelineEntry {
         BatteryTimelineEntry(date: Date(),
-                    soc: 87,
-                    chargeStatusDescription: "Full in 25 minutes",
-                    state: .placeholder,
-                    errorMessage: nil,
-                    batteryPower: nil)
+                             soc: 87,
+                             chargeStatusDescription: "Full in 25 minutes",
+                             state: .placeholder,
+                             errorMessage: nil,
+                             batteryPower: nil)
     }
 
     public static func failed(error: String) -> BatteryTimelineEntry {
         BatteryTimelineEntry(date: Date(),
-                    soc: nil,
-                    chargeStatusDescription: nil,
-                    state: .failedWithoutData(reason: error),
-                    errorMessage: error,
-                    batteryPower: nil)
+                             soc: nil,
+                             chargeStatusDescription: nil,
+                             state: .failedWithoutData(reason: error),
+                             errorMessage: error,
+                             batteryPower: nil)
+    }
+
+    public static func syncRequired() -> BatteryTimelineEntry {
+        BatteryTimelineEntry(date: Date(),
+                             soc: nil,
+                             chargeStatusDescription: nil,
+                             state: .syncRequired,
+                             errorMessage: nil,
+                             batteryPower: nil)
     }
 }

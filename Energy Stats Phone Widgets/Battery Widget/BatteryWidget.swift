@@ -12,6 +12,7 @@ import WidgetKit
 struct BatteryWidget: Widget {
     private let kind: String = "BatteryWidget"
     private let configManager: ConfigManaging
+    private let keychainStore: KeychainStoring
 
     init() {
         let keychainStore = KeychainStore()
@@ -21,11 +22,12 @@ struct BatteryWidget: Widget {
                                               dataCeiling: { .none })
         let appSettingsPublisher = AppSettingsPublisherFactory.make()
         configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
+        self.keychainStore = keychainStore
         AppSettingsPublisherFactory.update(from: configManager)
     }
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: BatteryTimelineProvider(config: HomeEnergyStateManagerConfigAdapter(config: configManager))) { entry in
+        StaticConfiguration(kind: kind, provider: BatteryTimelineProvider(config: HomeEnergyStateManagerConfigAdapter(config: configManager, keychainStore: keychainStore))) { entry in
             BatteryWidgetView(entry: entry, configManager: configManager)
         }
         .configurationDisplayName("Battery Status Widget")
@@ -70,6 +72,8 @@ struct BatteryWidgetView: View {
                         }.buttonStyle(.bordered)
                     }
                 }
+            } else if case .syncRequired = entry.state {
+                SyncRequiredView()
             } else {
                 BatteryStatusView(
                     soc: Double(entry.soc ?? 0) / 100.0,
@@ -83,7 +87,7 @@ struct BatteryWidgetView: View {
         .redacted(reason: entry.state == .placeholder ? [.placeholder] : [])
         .containerBackground(for: .widget) {
             switch entry.state {
-            case .failedWithoutData:
+            case .failedWithoutData, .syncRequired:
                 Color.clear
             default:
                 if colorScheme == .dark {
@@ -129,10 +133,10 @@ struct BatteryWidget_Previews: PreviewProvider {
 
         BatteryWidgetView(
             entry: BatteryTimelineEntry.loaded(date: Date(),
-                                      soc: 50,
-                                      chargeStatusDescription: "Full in 22 minutes",
-                                      errorMessage: "Could not refresh",
-                                      batteryPower: 0),
+                                               soc: 50,
+                                               chargeStatusDescription: "Full in 22 minutes",
+                                               errorMessage: "Could not refresh",
+                                               batteryPower: 0),
             configManager: ConfigManager(
                 networking: NetworkService.preview(),
                 config: MockConfig(),

@@ -9,18 +9,20 @@ import Foundation
 
 public class HomeEnergyStateManagerConfigAdapter: HomeEnergyStateManagerConfig {
     private let config: ConfigManaging
+    private let keychainStore: KeychainStoring
 
-    public init(config: ConfigManaging) {
+    public init(config: ConfigManaging, keychainStore: KeychainStoring) {
         self.config = config
+        self.keychainStore = keychainStore
     }
 
-    public var batteryCapacityW: Int { config.batteryCapacityW }
+    public var batteryCapacityW: Int { Int(keychainStore.get(key: .batteryCapacity) ?? 0.0) }
 
-    public var minSOC: Double { config.minSOC }
+    public var minSOC: Double { keychainStore.get(key: .minSOC) ?? 0.0 }
 
-    public var showUsableBatteryOnly: Bool { config.showUsableBatteryOnly }
+    public var showUsableBatteryOnly: Bool { keychainStore.get(key: .showUsableBatteryOnly) }
 
-    public var selectedDeviceSN: String? { config.selectedDeviceSN }
+    public var selectedDeviceSN: String? { keychainStore.get(key: .deviceSN) }
 
     public var dataCeiling: DataCeiling { config.dataCeiling }
 

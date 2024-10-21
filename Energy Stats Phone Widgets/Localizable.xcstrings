@@ -71,10 +71,16 @@
     "No device" : {
 
     },
+    "Please open Energy Stats to synchronise data" : {
+
+    },
     "Shows the stats of your installation for the day." : {
 
     },
     "Shows the status of your battery storage" : {
+
+    },
+    "Sync Required" : {
 
     },
     "Tap to retry" : {

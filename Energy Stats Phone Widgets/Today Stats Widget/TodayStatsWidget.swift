@@ -12,6 +12,7 @@ import WidgetKit
 struct TodayStatsWidget: Widget {
     private let kind: String = "TodayStatsWidget"
     private let configManager: ConfigManaging
+    private let keychainStore: KeychainStoring
 
     init() {
         let keychainStore = KeychainStore()
@@ -21,11 +22,12 @@ struct TodayStatsWidget: Widget {
                                               dataCeiling: { .none })
         let appSettingsPublisher = AppSettingsPublisherFactory.make()
         configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
+        self.keychainStore = keychainStore
         AppSettingsPublisherFactory.update(from: configManager)
     }
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: StatsTimelineProvider(config: HomeEnergyStateManagerConfigAdapter(config: configManager))) { entry in
+        StaticConfiguration(kind: kind, provider: StatsTimelineProvider(config: HomeEnergyStateManagerConfigAdapter(config: configManager, keychainStore: keychainStore))) { entry in
             TodayStatsWidgetView(entry: entry, configManager: configManager)
         }
         .configurationDisplayName("Today Stats Widget")
@@ -67,6 +69,8 @@ struct TodayStatsWidgetView: View {
                         }.buttonStyle(.bordered)
                     }
                 }
+            } else if case .syncRequired = entry.state {
+                SyncRequiredView()
             } else {
                 StatsWidgetGraphView(
                     home: entry.home,
@@ -80,14 +84,13 @@ struct TodayStatsWidgetView: View {
                     totalBatteryCharge: entry.totalBatteryCharge,
                     totalBatteryDischarge: entry.totalBatteryDischarge,
                     lastUpdated: entry.date
-//                    hasError: entry.errorMessage != nil
                 )
             }
         }
         .redacted(reason: entry.state == .placeholder ? [.placeholder] : [])
         .containerBackground(for: .widget) {
             switch entry.state {
-            case .failedWithoutData:
+            case .failedWithoutData, .syncRequired:
                 Color.clear
             default:
                 if colorScheme == .dark {

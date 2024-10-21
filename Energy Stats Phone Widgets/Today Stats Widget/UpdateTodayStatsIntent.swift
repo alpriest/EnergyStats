@@ -30,7 +30,7 @@ struct UpdateTodayStatsIntent: AppIntent {
 
             let configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
             AppSettingsPublisherFactory.update(from: configManager)
-            try await HomeEnergyStateManager.shared.updateTodayStatsState(config: HomeEnergyStateManagerConfigAdapter(config: configManager))
+            try await HomeEnergyStateManager.shared.updateTodayStatsState(config: HomeEnergyStateManagerConfigAdapter(config: configManager, keychainStore: keychainStore))
 
             WidgetCenter.shared.reloadTimelines(ofKind: "TodayStatsWidget")
 
