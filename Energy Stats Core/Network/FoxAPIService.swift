@@ -57,10 +57,9 @@ extension FoxAPIService {
         request.timeoutInterval = 30
         addHeaders(to: &request)
         let requestResponseData = RequestResponseData(request: request, response: nil, responseData: nil)
-        store(
-            NetworkOperation(description: "latestRequestResponse", value: requestResponseData, raw: requestResponseData.combinedData),
-            path: \.latestRequestResponseData
-        )
+        await MainActor.run {
+            store.latestRequestResponseData = NetworkOperation(description: "latestRequestResponse", value: requestResponseData, raw: requestResponseData.combinedData)
+        }
 
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
@@ -71,10 +70,9 @@ extension FoxAPIService {
             let statusCode = httpResponse.statusCode
 
             let requestResponseData = RequestResponseData(request: request, response: httpResponse, responseData: data)
-            store(
-                NetworkOperation(description: "latestRequestResponse", value: requestResponseData, raw: requestResponseData.combinedData),
-                path: \.latestRequestResponseData
-            )
+            await MainActor.run {
+                store.latestRequestResponseData = NetworkOperation(description: "latestRequestResponse", value: requestResponseData, raw: requestResponseData.combinedData)
+            }
 
             if statusCode == 406 {
                 throw NetworkError.requestRequiresSignature

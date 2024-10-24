@@ -33,7 +33,9 @@ extension FoxAPIService {
         do {
             let result: ([OpenQueryResponse], Data) = try await fetch(request)
             if let group = result.0.first(where: { $0.deviceSN == deviceSN }) {
-                store(NetworkOperation(description: "fetchRealData", value: group, raw: result.1), path: \.queryResponse)
+                await MainActor.run {
+                    store.queryResponse = NetworkOperation(description: "fetchRealData", value: group, raw: result.1)
+                }
                 return group
             } else {
                 throw NetworkError.missingData
@@ -72,7 +74,9 @@ extension FoxAPIService {
     func openapi_fetchVariables() async throws -> [OpenApiVariable] {
         let request = URLRequest(url: URL.getOpenVariables)
         let result: (OpenApiVariableArray, Data) = try await fetch(request)
-        store(NetworkOperation(description: "fetchVariables", value: result.0, raw: result.1), path: \.variables)
+        await MainActor.run {
+            store.variables = NetworkOperation(description: "fetchVariables", value: result.0, raw: result.1)
+        }
         return result.0.array
     }
 
@@ -82,7 +86,9 @@ extension FoxAPIService {
         request.httpBody = try! JSONEncoder().encode(OpenReportRequest(deviceSN: deviceSN, variables: variables, queryDate: queryDate, dimension: reportType))
 
         let result: ([OpenReportResponse], Data) = try await fetch(request)
-        store(NetworkOperation(description: "fetchReport", value: result.0, raw: result.1), path: \.reportResponse)
+        await MainActor.run {
+            store.reportResponse = NetworkOperation(description: "fetchReport", value: result.0, raw: result.1)
+        }
         return result.0
     }
 
@@ -90,7 +96,9 @@ extension FoxAPIService {
         let request = append(queryItems: [URLQueryItem(name: "sn", value: deviceSN)], to: URL.getOpenBatterySOC)
 
         let result: (BatterySOCResponse, Data) = try await fetch(request)
-        store(NetworkOperation(description: "fetchBatterySettings", value: result.0, raw: result.1), path: \.batterySOCResponse)
+        await MainActor.run {
+            store.batterySOCResponse = NetworkOperation(description: "fetchBatterySettings", value: result.0, raw: result.1)
+        }
         return result.0
     }
 
@@ -110,7 +118,9 @@ extension FoxAPIService {
         let request = append(queryItems: [URLQueryItem(name: "sn", value: deviceSN)], to: URL.getOpenBatteryChargeTimes)
 
         let result: (BatteryTimesResponse, Data) = try await fetch(request)
-        store(NetworkOperation(description: "batteryTimesResponse", value: result.0, raw: result.1), path: \.batteryTimesResponse)
+        await MainActor.run {
+            store.batteryTimesResponse = NetworkOperation(description: "batteryTimesResponse", value: result.0, raw: result.1)
+        }
 
         return [
             ChargeTime(enable: result.0.enable1, startTime: result.0.startTime1, endTime: result.0.endTime1),
@@ -145,17 +155,20 @@ extension FoxAPIService {
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(DeviceListRequest())
 
-        let deviceListResult: (PagedDeviceListResponse, _) = try await fetch(request)
-
-        store(NetworkOperation(description: "fetchDeviceList", value: deviceListResult.0.data, raw: deviceListResult.1), path: \.deviceListResponse)
-        return deviceListResult.0.data
+        let result: (PagedDeviceListResponse, _) = try await fetch(request)
+        await MainActor.run {
+            store.deviceListResponse = NetworkOperation(description: "fetchDeviceList", value: result.0.data, raw: result.1)
+        }
+        return result.0.data
     }
 
     func openapi_fetchDevice(deviceSN: String) async throws -> DeviceDetailResponse {
         let request = append(queryItems: [URLQueryItem(name: "sn", value: deviceSN)], to: URL.getOpenDeviceDetail)
 
         let result: (DeviceDetailResponse, _) = try await fetch(request)
-        store(NetworkOperation(description: "fetchDevice", value: result.0, raw: result.1), path: \.deviceDetailResponse)
+        await MainActor.run {
+            store.deviceDetailResponse = NetworkOperation(description: "fetchDevice", value: result.0, raw: result.1)
+        }
         return result.0
     }
 
