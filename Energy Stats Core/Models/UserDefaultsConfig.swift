@@ -57,6 +57,7 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "earningsModel")
         UserDefaults.shared.removeObject(forKey: "summaryDateRange")
         UserDefaults.shared.removeObject(forKey: "colorScheme")
+        UserDefaults.shared.removeObject(forKey: "lastSolcastRefresh")
         UserDefaults.shared.synchronize()
     }
 
@@ -267,4 +268,13 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredCodable(key: "colorScheme", defaultValue: ForcedColorScheme.auto)
     public var colorScheme: ForcedColorScheme
+
+    public var lastSolcastRefresh: Date? {
+        get {
+            UserDefaults.shared.object(forKey: "lastSolcastRefresh") as? Date
+        }
+        set {
+            UserDefaults.shared.set(newValue, forKey: "lastSolcastRefresh")
+        }
+    }
 }

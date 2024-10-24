@@ -368,6 +368,7 @@ public class MockConfig: Config {
     public var earningsModel: EarningsModel = .exported
     public var summaryDateRange: SummaryDateRange = .automatic
     public var colorScheme: ForcedColorScheme = .auto
+    public var lastSolcastRefresh: Date? = nil
 }
 
 public extension SolcastSite {

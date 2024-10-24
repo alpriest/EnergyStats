@@ -74,6 +74,8 @@ struct SolarForecastView: View {
                     .padding(.top)
                     .font(.footnote)
                 }
+
+                refreshSolcastButton()
             }
         }
         .loadable(viewModel.state, options: [], errorAlertType: .solcast, retry: { viewModel.load() })
@@ -81,4 +83,35 @@ struct SolarForecastView: View {
             self.viewModel.load()
         }
     }
+
+    private func refreshSolcastButton() -> some View {
+        VStack(alignment: .leading) {
+            if viewModel.tooManyRequests {
+                Text("You have exceeded your free daily limit of requests. Please try tomorrow.")
+            } else if !viewModel.canRefresh {
+                Button {
+                    viewModel.refetchSolcast()
+                } label: {
+                    Text("Refresh Solcast now")
+                }
+                .buttonStyle(.bordered)
+                .disabled(!viewModel.canRefresh)
+
+                Text("Due to Solcast API rate limiting, please wait for an hour before refreshing again.")
+                    .font(.caption)
+            }
+        }
+        .padding(.vertical, 32)
+    }
+}
+
+#Preview {
+    SolarForecastView(
+        appSettings: AppSettings.mock(),
+        viewModel: SolarForecastViewModel(
+            configManager: ConfigManager.preview(),
+            appSettingsPublisher: AppSettingsPublisherFactory.make(),
+            solarForecastProvider: { PreviewSolcast() }
+        )
+    )
 }

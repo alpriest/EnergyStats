@@ -66,6 +66,7 @@ public protocol ConfigManaging: FinancialConfigManager, SolcastConfigManager, Ba
     var truncatedYAxisOnParameterGraphs: Bool { get set }
     var summaryDateRange: SummaryDateRange { get set }
     var colorScheme: ForcedColorScheme { get set }
+    var lastSolcastRefresh: Date? { get set }
 }
 
 public protocol BatteryConfigManager {

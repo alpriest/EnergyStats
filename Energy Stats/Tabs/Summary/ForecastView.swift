@@ -165,7 +165,30 @@ struct ForecastView: View {
     }.padding()
 }
 
-private class PreviewSolcast {
+class PreviewSolcast: SolcastCaching {
+    func fetchSites(apiKey: String) async throws -> SolcastSiteResponseList {
+        SolcastSiteResponseList(
+            sites: [
+                SolcastSiteResponse(
+                    name: "name",
+                    resourceId: "resourceId",
+                    capacity: 0.0,
+                    longitude: 0.0,
+                    latitude: 0.0,
+                    azimuth: 1,
+                    tilt: 0.0,
+                    lossFactor: nil,
+                    dcCapacity: nil,
+                    installDate: nil
+                )
+            ]
+        )
+    }
+
+    func fetchForecast(for site: SolcastSite, apiKey: String, ignoreCache: Bool) async throws -> SolcastForecastList {
+        SolcastForecastList(tooManyRequests: false, forecasts: [])
+    }
+
     func fetchForecast() -> SolcastForecastResponseList {
         SolcastForecastResponseList(forecasts: [
             SolcastForecastResponse(pvEstimate: 0, pvEstimate10: 0, pvEstimate90: 0, periodEnd: ISO8601DateFormatter().date(from: "2023-11-14T06:00:00Z")!, period: "PT30M"),

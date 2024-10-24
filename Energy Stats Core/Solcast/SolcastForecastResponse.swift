@@ -37,6 +37,10 @@ extension SolcastForecastResponse: Identifiable {
 
 public struct SolcastSiteResponseList: Decodable {
     public let sites: [SolcastSiteResponse]
+
+    public init(sites: [SolcastSiteResponse]) {
+        self.sites = sites
+    }
 }
 
 public struct SolcastSiteResponseStatus: Decodable {

@@ -10,7 +10,7 @@ import Energy_Stats_Core
 import Foundation
 import UIKit
 
-typealias SolarForecastProviding = () -> SolarForecasting
+typealias SolarForecastProviding = () -> SolcastCaching
 
 struct SolarForecastViewData: Identifiable {
     let id: String = UUID().uuidString
@@ -27,7 +27,9 @@ struct SolarForecastViewData: Identifiable {
 class SolarForecastViewModel: ObservableObject, HasLoadState {
     @Published var data: [SolarForecastViewData] = []
     @Published var state: LoadState = .inactive
+    @Published var tooManyRequests: Bool = false
     @Published var hasSites: Bool = false
+    @Published var canRefresh = true
     private var privateState: LoadState = .inactive {
         didSet {
             Task {
@@ -37,8 +39,8 @@ class SolarForecastViewModel: ObservableObject, HasLoadState {
     }
 
     private var cancellable: AnyCancellable?
-    private let configManager: ConfigManaging
-    private let solarForecastProvider: () -> SolarForecasting
+    private var configManager: ConfigManaging
+    private let solarForecastProvider: () -> SolcastCaching
     private var settings: AppSettings { didSet {
         Task { @MainActor in
             hasSites = !settings.solcastSettings.sites.isEmpty
@@ -57,7 +59,8 @@ class SolarForecastViewModel: ObservableObject, HasLoadState {
         self.cancellable = appSettingsPublisher.assign(to: \.settings, on: self)
     }
 
-    func load() {
+    func load(ignoreCache: Bool = false) {
+        updateCanRefresh(lastRefreshedAt: configManager.lastSolcastRefresh)
         guard privateState == .inactive else { return }
         guard settings.solcastSettings.sites.any else { return }
         guard let apiKey = settings.solcastSettings.apiKey else { return }
@@ -72,9 +75,11 @@ class SolarForecastViewModel: ObservableObject, HasLoadState {
 
             do {
                 data = try await settings.solcastSettings.sites.asyncMap { site in
-                    let data = try await service.fetchForecast(for: site, apiKey: apiKey).forecasts
-                    let todayData = data.filter { $0.periodEnd.isSame(as: today) }
-                    let tomorrowData = data.filter { $0.periodEnd.isSame(as: tomorrow) }
+                    let data = try await service.fetchForecast(for: site, apiKey: apiKey, ignoreCache: ignoreCache)
+                    let forecasts = data.forecasts
+                    self.tooManyRequests = data.tooManyRequests
+                    let todayData = forecasts.filter { $0.periodEnd.isSame(as: today) }
+                    let tomorrowData = forecasts.filter { $0.periodEnd.isSame(as: tomorrow) }
 
                     return SolarForecastViewData(
                         error: nil,
@@ -85,9 +90,9 @@ class SolarForecastViewModel: ObservableObject, HasLoadState {
                         name: site.name,
                         resourceId: site.resourceId
                     )
-                }
+                }.filter { $0.today.count > 0 || $0.tomorrow.count > 0 }
 
-                await setState(.inactive)
+                privateState = .inactive
             } catch NetworkError.tryLater {
                 privateState = .error(nil, "You have exceeded your free daily limit.")
                 data = []
@@ -98,6 +103,28 @@ class SolarForecastViewModel: ObservableObject, HasLoadState {
         }
 
         NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
+    }
+
+    func refetchSolcast() {
+        guard let lastSolcastRefresh = configManager.lastSolcastRefresh else {
+            load(ignoreCache: true)
+            configManager.lastSolcastRefresh = .now
+            return
+        }
+
+        configManager.lastSolcastRefresh = .now
+        updateCanRefresh(lastRefreshedAt: configManager.lastSolcastRefresh)
+    }
+
+    private func updateCanRefresh(lastRefreshedAt date: Date?) {
+        guard let lastSolcastRefresh = date else { return }
+
+        let oneHour: Double = 3_600
+        if Date.now.timeIntervalSince(lastSolcastRefresh) > oneHour {
+            load(ignoreCache: true)
+        } else {
+            canRefresh = false
+        }
     }
 
     @objc

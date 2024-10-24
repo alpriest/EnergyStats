@@ -577,6 +577,11 @@ public class ConfigManager: ConfigManaging {
         get { config.colorScheme }
         set { config.colorScheme = newValue }
     }
+
+    public var lastSolcastRefresh: Date? {
+        get { config.lastSolcastRefresh }
+        set { config.lastSolcastRefresh = newValue }
+    }
 }
 
 public enum BatteryResponseMapper {

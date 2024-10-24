@@ -5401,6 +5401,9 @@
         }
       }
     },
+    "Due to Solcast API rate limiting, please wait for an hour before refreshing again." : {
+
+    },
     "Duplicate" : {
       "localizations" : {
         "de" : {
@@ -11231,6 +11234,9 @@
         }
       }
     },
+    "Refresh Solcast now" : {
+
+    },
     "Remove key" : {
       "localizations" : {
         "de" : {
@@ -14223,6 +14229,7 @@
       }
     },
     "Visit the settings tab to configure Solcast" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -15011,6 +15018,9 @@
           }
         }
       }
+    },
+    "You have exceeded your free daily limit of requests. Please try tomorrow." : {
+
     },
     "You have no time periods defined. Add a time period to define how you'd like your inverter to behave during specific hours." : {
       "localizations" : {

@@ -56,6 +56,7 @@ public protocol Config {
     var earningsModel: EarningsModel { get set }
     var summaryDateRange: SummaryDateRange { get set }
     var colorScheme: ForcedColorScheme { get set }
+    var lastSolcastRefresh: Date? { get set }
 }
 
 public func DefaultParameterGroups() -> [ParameterGroup] {

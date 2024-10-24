@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol SolarForecasting {
+public protocol SolcastFetching {
     func fetchSites(apiKey: String) async throws -> SolcastSiteResponseList
     func fetchForecast(for site: SolcastSite, apiKey: String) async throws -> SolcastForecastResponseList
 }
@@ -19,7 +19,7 @@ private extension URL {
 
 public struct ConfigMissingError: Error {}
 
-public class Solcast: SolarForecasting {
+public class Solcast: SolcastFetching {
     public init() {}
 
     public func fetchSites(apiKey: String) async throws -> SolcastSiteResponseList {
@@ -117,7 +117,7 @@ private struct ResponseStatus: Decodable {
     let message: String
 }
 
-public class DemoSolcast: SolarForecasting {
+public class DemoSolcast: SolcastCaching {
     public init() {}
 
     public func fetchSites(apiKey: String) async throws -> SolcastSiteResponseList {
@@ -129,7 +129,7 @@ public class DemoSolcast: SolarForecasting {
         ])
     }
 
-    public func fetchForecast(for site: SolcastSite, apiKey: String) async throws -> SolcastForecastResponseList {
+    public func fetchForecast(for site: SolcastSite, apiKey: String, ignoreCache: Bool) async throws -> SolcastForecastList {
         let data = try data(filename: "solcast")
         let decoder = JSONDecoder.solcast()
         do {
@@ -138,7 +138,7 @@ public class DemoSolcast: SolarForecasting {
             let today = Date()
             let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: today)!
 
-            return SolcastForecastResponseList(forecasts: result.forecasts.map { forecast in
+            return SolcastForecastList(tooManyRequests: false, forecasts: result.forecasts.map { forecast in
                 let thenComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: forecast.periodEnd)
 
                 let date: Date?

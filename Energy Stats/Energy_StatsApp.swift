@@ -53,7 +53,7 @@ struct Energy_StatsApp: App {
     }
 
     var body: some Scene {
-        let solarForecastProvider: () -> SolarForecasting = {
+        let solarForecastProvider: () -> SolcastCaching = {
             config.isDemoUser ? DemoSolcast() : SolcastCache(service: { Solcast() })
         }
 

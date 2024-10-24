@@ -37,7 +37,9 @@ public extension AppSettings {
             parameterGroups: DefaultParameterGroups(),
             shouldCombineCT2WithPVPower: true,
             showGraphValueDescriptions: true,
-            solcastSettings: SolcastSettings(apiKey: nil, sites: []),
+            solcastSettings: SolcastSettings(apiKey: "1234", sites: [
+                SolcastSite(name: "name", resourceId: "res123", lng: 53.3, lat: -2.48, azimuth: 1, tilt: 0.0, lossFactor: nil, acCapacity: 2.0, dcCapacity: nil, installDate: nil)
+            ]),
             dataCeiling: DataCeiling.mild,
             showTotalYieldOnPowerFlow: true,
             showFinancialSummaryOnFlowPage: true,
