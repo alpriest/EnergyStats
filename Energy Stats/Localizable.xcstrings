@@ -881,9 +881,6 @@
         }
       }
     },
-    "ABS Battery power: %@" : {
-
-    },
     "Absolute" : {
       "localizations" : {
         "de" : {
@@ -2938,9 +2935,6 @@
         }
       }
     },
-    "Battery Calculations" : {
-
-    },
     "Battery capacity recalculated" : {
       "localizations" : {
         "de" : {
@@ -2968,9 +2962,6 @@
           }
         }
       }
-    },
-    "Battery capacity: %lldW" : {
-
     },
     "Battery Charge Levels" : {
       "localizations" : {
@@ -3028,9 +3019,6 @@
         }
       }
     },
-    "Battery power: %@" : {
-
-    },
     "Battery Schedule" : {
       "localizations" : {
         "de" : {
@@ -3058,9 +3046,6 @@
           }
         }
       }
-    },
-    "Battery SoC: %@" : {
-
     },
     "battery_charge_range" : {
       "extractionState" : "manual",
@@ -3573,13 +3558,88 @@
       }
     },
     "Check Current Grid Load" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Checke aktuelle Netzlast"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verifica la carga actual de la red"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Controlla il carico attuale della rete"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sprawdź bieżące obciążenie sieci"
+          }
+        }
+      }
     },
     "Check Current House Load" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Checke aktuellen Hausverbrauch"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verifica la carga actual de la casa"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Controlla il carico attuale della casa"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sprawdź bieżące obciążenie domu"
+          }
+        }
+      }
     },
     "Check Current Solar Generation" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Checke aktuelle Solarerzeugung"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verifica la generación solar actual"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Controlla l’attuale produzione solare"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sprawdź bieżącą produkcję energii słonecznej"
+          }
+        }
+      }
     },
     "Check FoxESS Server status" : {
       "localizations" : {
@@ -5120,9 +5180,6 @@
         }
       }
     },
-    "Description: %@" : {
-
-    },
     "Device selection" : {
       "localizations" : {
         "de" : {
@@ -5150,9 +5207,6 @@
           }
         }
       }
-    },
-    "Device SN: %@" : {
-
     },
     "Discharge " : {
       "extractionState" : "manual",
@@ -5402,7 +5456,32 @@
       }
     },
     "Due to Solcast API rate limiting, please wait for an hour before refreshing again." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aufgrund der API-Ratenbegrenzung von Solcast, bitte eine Stunde warten, bevor erneut aktualisiert wird."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Debido a la limitación de tasa de la API de Solcast, espere una hora antes de actualizar nuevamente."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A causa del rate limiting dell’API di Solcast, attendere un’ora prima di aggiornare nuovamente."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ze względu na ograniczenie szybkości API Solcast, proszę poczekać godzinę przed ponownym odświeżeniem."
+          }
+        }
+      }
     },
     "Duplicate" : {
       "localizations" : {
@@ -7125,7 +7204,32 @@
       }
     },
     "Grid Load" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Netzlast"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carga de la red"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carico della rete"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obciążenie sieci"
+          }
+        }
+      }
     },
     "grid_import_avoided" : {
       "localizations" : {
@@ -7501,7 +7605,32 @@
       }
     },
     "House Load" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hausverbrauch"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carga de la casa"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carico della casa"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obciążenie domu"
+          }
+        }
+      }
     },
     "I am paid for" : {
       "localizations" : {
@@ -8760,9 +8889,6 @@
           }
         }
       }
-    },
-    "Min SoC: %@" : {
-
     },
     "Minimum charge levels" : {
       "comment" : "Battery Charge Pages",
@@ -11235,7 +11361,32 @@
       }
     },
     "Refresh Solcast now" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solcast jetzt aktualisieren"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actualizar Solcast ahora"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggiorna Solcast ora"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Odśwież Solcast teraz"
+          }
+        }
+      }
     },
     "Remove key" : {
       "localizations" : {
@@ -11701,13 +11852,88 @@
       }
     },
     "Returns the current grid load in Watts. Negative is import, positive is export." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gibt die aktuelle Netzlast in Watt zurück. Negativ bedeutet Import, positiv bedeutet Export."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Devuelve la carga actual de la red en vatios. Negativo es importación, positivo es exportación."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restituisce il carico attuale della rete in Watt. Negativo significa importazione, positivo significa esportazione."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zwraca bieżące obciążenie sieci w watach. Wartość ujemna oznacza import, dodatnia oznacza eksport."
+          }
+        }
+      }
     },
     "Returns the current house load in Watts" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gibt den aktuellen Hausverbrauch in Watt zurück."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Devuelve la carga actual de la casa en vatios."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restituisce il carico attuale della casa in Watt."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zwraca bieżące obciążenie domu w watach."
+          }
+        }
+      }
     },
     "Returns the solar being generated in Watts" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gibt die aktuell erzeugte Solarenergie in Watt zurück."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Devuelve la energía solar que se está generando en vatios."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restituisce l’energia solare attualmente generata in Watt."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zwraca energię słoneczną generowaną w watach."
+          }
+        }
+      }
     },
     "Save" : {
       "localizations" : {
@@ -12908,7 +13134,32 @@
       }
     },
     "Solar Generation" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solarerzeugung"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Generación solar"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Generazione solare"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Produkcja energii słonecznej"
+          }
+        }
+      }
     },
     "Solar Prediction" : {
       "localizations" : {
@@ -14229,7 +14480,6 @@
       }
     },
     "Visit the settings tab to configure Solcast" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -15020,7 +15270,32 @@
       }
     },
     "You have exceeded your free daily limit of requests. Please try tomorrow." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sie haben Ihr tägliches Freikontingent an Anfragen überschritten. Bitte versuchen Sie es morgen erneut."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Has superado tu límite diario de solicitudes gratuitas. Por favor, inténtalo de nuevo mañana."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hai superato il limite giornaliero di richieste gratuite. Per favore riprova domani."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Przekroczyłeś swój dzienny limit bezpłatnych zapytań. Spróbuj ponownie jutro."
+          }
+        }
+      }
     },
     "You have no time periods defined. Add a time period to define how you'd like your inverter to behave during specific hours." : {
       "localizations" : {

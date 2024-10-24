@@ -116,13 +116,6 @@ struct DebugDataView: View {
                         )
                     }
                     
-                    NavigationLink(String(stringLiteral: "Battery empty/full calcs")) {
-                        BatteryFullEmptyCalculationDebugView(
-                            config: configManager,
-                            network: networking
-                        )
-                    }
-                    
                     Button {
                         Task {
                             let counts = try await networking.fetchRequestCount()
