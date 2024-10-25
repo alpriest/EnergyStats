@@ -106,7 +106,7 @@ class SolarForecastViewModel: ObservableObject, HasLoadState {
     }
 
     func refetchSolcast() {
-        guard let lastSolcastRefresh = configManager.lastSolcastRefresh else {
+        guard configManager.lastSolcastRefresh != nil else {
             load(ignoreCache: true)
             configManager.lastSolcastRefresh = .now
             return
