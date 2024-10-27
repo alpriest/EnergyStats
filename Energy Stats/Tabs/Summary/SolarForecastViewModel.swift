@@ -106,25 +106,18 @@ class SolarForecastViewModel: ObservableObject, HasLoadState {
     }
 
     func refetchSolcast() {
-        guard configManager.lastSolcastRefresh != nil else {
-            load(ignoreCache: true)
-            configManager.lastSolcastRefresh = .now
-            return
-        }
-
         configManager.lastSolcastRefresh = .now
-        updateCanRefresh(lastRefreshedAt: configManager.lastSolcastRefresh)
+        load(ignoreCache: true)
     }
 
     private func updateCanRefresh(lastRefreshedAt date: Date?) {
-        guard let lastSolcastRefresh = date else { return }
+        guard let lastSolcastRefresh = date else {
+            canRefresh = true
+            return
+        }
 
         let oneHour: Double = 3_600
-        if Date.now.timeIntervalSince(lastSolcastRefresh) > oneHour {
-            load(ignoreCache: true)
-        } else {
-            canRefresh = false
-        }
+        canRefresh = Date.now.timeIntervalSince(lastSolcastRefresh) > oneHour
     }
 
     @objc
