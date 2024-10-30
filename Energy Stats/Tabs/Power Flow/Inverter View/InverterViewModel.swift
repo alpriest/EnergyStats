@@ -76,4 +76,14 @@ class InverterViewModel: ObservableObject {
     var deviceType: String? {
         configManager.currentDevice.value?.deviceType
     }
+
+    var deviceSelectorAccessibilityLabel: String {
+        var label = ""
+        if let name = deviceStationName {
+            label += "Inverter '\(name)' currently selected"
+        } else {
+            label = "Choose inverter"
+        }
+        return label
+    }
 }

@@ -275,8 +275,8 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
 
     func data(at date: Date?) -> ValuesAtTime<StatsGraphValue> {
         guard let date else { return ValuesAtTime(values: []) }
-        let visibleVariableTypes = graphVariables.filter { $0.enabled }.map { $0.type }
-        let result = ValuesAtTime(values: rawData.filter { $0.date == date && visibleVariableTypes.contains($0.type) })
+        let variableTypes = graphVariables.map { $0.type }
+        let result = ValuesAtTime(values: rawData.filter { $0.date == date && variableTypes.contains($0.type) })
 
         if let maxDate = max?.date, date == maxDate {
             haptic.impactOccurred()

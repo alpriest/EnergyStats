@@ -144,6 +144,7 @@ struct InverterView: View {
                         }
                     }
                 }
+                .accessibilityLabel(viewModel.deviceSelectorAccessibilityLabel)
                 .buttonStyle(.bordered)
                 .padding(.top, 5)
                 .background(Color.background)
