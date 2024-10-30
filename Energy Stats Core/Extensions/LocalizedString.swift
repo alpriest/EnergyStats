@@ -54,6 +54,7 @@ public struct LocalizedString {
             case temperature = "accessibility.temperature"
             case currentSolarStringGenerationAmount = "accessibility.solarStringGeneration"
             case currentSolarGenerationAmount = "accessibility.solarGeneration"
+            case currentSolarCT2GenerationAmount = "accessibility.solarCT2Generation"
             case batteryStoringRate = "accessibility.batteryStoringRate"
             case batteryEmptyingRate = "accessibility.batteryEmptyingRate"
             case batteryCapacityPercentage = "accessibility.batteryCapacityPercentage"

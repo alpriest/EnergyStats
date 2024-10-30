@@ -1740,6 +1740,41 @@
         }
       }
     },
+    "accessibility.solarCT2Generation" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CT2 Solaranlage erzeugt derzeit %1$@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CT2 Solar currently generating %1$@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CT2 Generación solar actual: %1$@"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CT2 Generazione solare attuale: %1$@"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CT2 Aktualna produkcja energii słonecznej: %1$@"
+          }
+        }
+      }
+    },
     "accessibility.solarGeneration" : {
       "extractionState" : "manual",
       "localizations" : {

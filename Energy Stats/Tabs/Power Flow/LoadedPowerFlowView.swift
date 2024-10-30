@@ -50,7 +50,7 @@ struct LoadedPowerFlowView: View {
                             if !appSettings.shouldCombineCT2WithPVPower {
                                 VStack(spacing: 0) {
                                     CT2_icon()
-                                    PowerFlowView(amount: viewModel.ct2, appSettings: appSettings, showColouredLines: false, type: .solarFlow)
+                                    PowerFlowView(amount: viewModel.ct2, appSettings: appSettings, showColouredLines: false, type: .solarFlowCT2)
                                     Color.clear.frame(height: size.height * 0.073)
                                 }
                                 .frame(width: topColumnWidth, height: size.height * 0.35)
