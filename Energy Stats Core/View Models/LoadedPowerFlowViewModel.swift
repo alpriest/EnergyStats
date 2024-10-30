@@ -199,7 +199,7 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
         self.batteryError != nil
     }
 
-    public var batteryTemperature: Double {
+    public var batteryTemperature: [Double] {
         self.batteryViewModel.temperature
     }
 

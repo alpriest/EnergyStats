@@ -62,6 +62,8 @@ public extension HomeEnergyStateManager {
                         "batChargePower",
                         "batDischargePower",
                         "batTemperature",
+                        "batTemperature_1",
+                        "batTemperature_2",
                         "ResidualEnergy"]
         )
 
@@ -118,12 +120,17 @@ public extension OpenQueryResponse {
         let chargePower = datas.currentDouble(for: "batChargePower")
         let dischargePower = datas.currentDouble(for: "batDischargePower")
         let power = chargePower > 0 ? chargePower : -dischargePower
+        let temps: [Double] = [
+            datas.current(for: "batTemperature"),
+            datas.current(for: "batTemperature_1"),
+            datas.current(for: "batTemperature_2")
+        ].compactMap { $0?.value }
 
         return BatteryViewModel(
             power: power,
             soc: Int(datas.SoC()),
             residual: datas.currentDouble(for: "ResidualEnergy") * 10.0,
-            temperature: datas.currentDouble(for: "batTemperature")
+            temperature: temps
         )
     }
 }

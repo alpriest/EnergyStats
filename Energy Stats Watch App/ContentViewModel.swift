@@ -68,7 +68,9 @@ class ContentViewModel {
                     "batChargePower",
                     "batDischargePower",
                     "ResidualEnergy",
-                    "batTemperature"
+                    "batTemperature",
+                    "batTemperature_1",
+                    "batTemperature_2",
                 ]
             )
 

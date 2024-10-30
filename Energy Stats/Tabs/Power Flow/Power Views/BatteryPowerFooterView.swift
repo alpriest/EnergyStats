@@ -26,9 +26,13 @@ struct BatteryPowerFooterView: View {
             }
 
             if appSettings.showBatteryTemperature {
-                (Text(viewModel.temperature, format: .number) + Text("°C"))
-                    .accessibilityElement(children: .ignore)
-                    .accessibilityLabel(String(format: String(accessibilityKey: .batteryTemperature), viewModel.temperature.roundedToString(decimalPlaces: 2)))
+                HStack {
+                    ForEach(viewModel.temperature, id: \.self) { temperature in
+                        (Text(temperature, format: .number) + Text("°C"))
+                            .accessibilityElement(children: .ignore)
+                            .accessibilityLabel(String(format: String(accessibilityKey: .batteryTemperature), temperature.roundedToString(decimalPlaces: 2)))
+                    }
+                }
             }
 
             if appSettings.showBatteryEstimate {

@@ -213,6 +213,8 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
             "SoC",
             "SoC_1",
             "batTemperature",
+            "batTemperature_1",
+            "batTemperature_2",
             "ResidualEnergy",
             "epsPower"
         ]
@@ -267,16 +269,7 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
 extension BatteryViewModel {
     static func make(currentDevice: Device, real: OpenQueryResponse) -> BatteryViewModel {
         if currentDevice.hasBattery == true {
-            let chargePower = real.datas.currentDouble(for: "batChargePower")
-            let dischargePower = real.datas.currentDouble(for: "batDischargePower")
-            let power = chargePower > 0 ? chargePower : -dischargePower
-
-            return BatteryViewModel(
-                power: power,
-                soc: Int(real.datas.SoC()),
-                residual: real.datas.currentDouble(for: "ResidualEnergy") * 10.0,
-                temperature: real.datas.currentDouble(for: "batTemperature")
-            )
+            return real.makeBatteryViewModel()
         } else {
             return BatteryViewModel.noBattery
         }
