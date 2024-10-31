@@ -109,19 +109,6 @@ class ContentViewModel {
         }
     }
 
-    private func makeBatteryViewModel(_ real: OpenQueryResponse) -> BatteryViewModel {
-        let chargePower = real.datas.currentDouble(for: "batChargePower")
-        let dischargePower = real.datas.currentDouble(for: "batDischargePower")
-        let power = chargePower > 0 ? chargePower : -dischargePower
-
-        return BatteryViewModel(
-            power: power,
-            soc: Int(real.datas.SoC()),
-            residual: real.datas.currentDouble(for: "ResidualEnergy") * 10.0,
-            temperature: real.datas.currentDouble(for: "batTemperature")
-        )
-    }
-
     private func loadTotals(_ device: Device) async -> TotalsViewModel? {
         guard config.showGridTotalsOnPowerFlow else { return nil }
 
