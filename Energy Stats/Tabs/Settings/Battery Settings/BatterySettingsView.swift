@@ -129,11 +129,11 @@ struct BatterySettingsView: View {
     private var batteryDisplayModeText: String {
         switch viewModel.batteryTemperatureDisplayMode {
         case .automatic:
-            "All battery temperatures will be displayed."
+            String(key: .batteryTemperatureDisplayMode_automatic)
         case .battery1:
-            "Only the temperature of battery 1 on a multi-battery system will be displayed. If not found, no battery temperature will be displayed."
+            String(key: .batteryTemperatureDisplayMode_batteryN, arguments: "1")
         case .battery2:
-            "Only the temperature of battery 2 on a multi-battery system will be displayed. If not found, no battery temperature will be displayed."
+            String(key: .batteryTemperatureDisplayMode_batteryN, arguments: "2")
         }
     }
 }

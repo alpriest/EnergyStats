@@ -48,6 +48,8 @@ public struct LocalizedString {
         case dataCeilingMild = "data_ceiling_mild"
         case dataCeilingEnhanced = "data_ceiling_enhanced"
         case schedulesUnsupported = "schedules_unsupported"
+        case batteryTemperatureDisplayMode_automatic = "batteryTemperatureDisplayMode_automatic"
+        case batteryTemperatureDisplayMode_batteryN = "batteryTemperatureDisplayMode_batteryN"
 
         public enum Accessibility: String, RawRepresentable {
             case inverter = "accessibility.inverter"
@@ -84,7 +86,7 @@ public extension String {
         self = NSLocalizedString(key.rawValue, bundle: bundle, comment: "")
     }
 
-    init(key: LocalizedString.Key, bundle: Bundle = .main, arguments: [CVarArg]) {
+    init(key: LocalizedString.Key, bundle: Bundle = .main, arguments: CVarArg...) {
         self = String(format: NSLocalizedString(key.rawValue, bundle: bundle, comment: ""), arguments: arguments)
     }
 

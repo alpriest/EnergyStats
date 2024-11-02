@@ -3260,6 +3260,28 @@
         }
       }
     },
+    "batteryTemperatureDisplayMode_automatic" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All battery temperatures will be displayed."
+          }
+        }
+      }
+    },
+    "batteryTemperatureDisplayMode_batteryN" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Only the temperature of battery %1$@ on a multi-battery system will be displayed. If not found, no battery temperature will be displayed."
+          }
+        }
+      }
+    },
     "both_battery_charge_periods" : {
       "extractionState" : "manual",
       "localizations" : {
