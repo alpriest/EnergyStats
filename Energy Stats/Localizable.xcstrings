@@ -602,7 +602,7 @@
       }
     },
     "1" : {
-
+      "shouldTranslate" : false
     },
     "1 min" : {
       "localizations" : {
@@ -3263,10 +3263,34 @@
     "batteryTemperatureDisplayMode_automatic" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alle Batterietemperaturen werden angezeigt."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "All battery temperatures will be displayed."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se mostrarán todas las temperaturas de la batería."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tutte le temperature della batteria saranno visualizzate."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wszystkie temperatury baterii zostaną wyświetlone."
           }
         }
       }
@@ -3274,10 +3298,34 @@
     "batteryTemperatureDisplayMode_batteryN" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nur die Temperatur der Batterie %1$@ in einem Mehrbatteriesystem wird angezeigt. Falls nicht gefunden, wird keine Batterietemperatur angezeigt."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Only the temperature of battery %1$@ on a multi-battery system will be displayed. If not found, no battery temperature will be displayed."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solo se mostrará la temperatura de la batería %1$@ en un sistema con varias baterías. Si no se encuentra, no se mostrará ninguna temperatura de la batería."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verrà visualizzata solo la temperatura della batteria %1$@ in un sistema a più batterie. Se non trovata, non verrà visualizzata alcuna temperatura della batteria."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wyświetlana będzie tylko temperatura baterii %1$@ w systemie z wieloma bateriami. Jeśli nie zostanie znaleziona, nie zostanie wyświetlona żadna temperatura baterii."
           }
         }
       }
@@ -5327,7 +5375,32 @@
       }
     },
     "Display battery" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Batterie anzeigen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar batería"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra batteria"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wyświetl baterię"
+          }
+        }
+      }
     },
     "Display Options" : {
       "localizations" : {
