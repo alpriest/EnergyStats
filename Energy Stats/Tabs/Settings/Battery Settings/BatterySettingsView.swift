@@ -111,14 +111,14 @@ struct BatterySettingsView: View {
                 }
 
                 HStack {
-                    Text("Display battery").padding(.trailing)
+                    Text("Display battery stack").padding(.trailing)
                     Spacer()
-                    Picker("Display battery", selection: $viewModel.batteryTemperatureDisplayMode) {
+                    Picker("Display battery stack", selection: $viewModel.batteryTemperatureDisplayMode) {
                         Text("Auto").tag(BatteryTemperatureDisplayMode.automatic)
                         Text("1").tag(BatteryTemperatureDisplayMode.battery1)
                         Text("2").tag(BatteryTemperatureDisplayMode.battery2)
                     }.pickerStyle(.segmented)
-                }
+                }.disabled(!viewModel.showBatteryTemperature)
             } footer: {
                 Text(batteryDisplayModeText)
             }

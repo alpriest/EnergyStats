@@ -3301,31 +3301,31 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nur die Temperatur der Batterie %1$@ in einem Mehrbatteriesystem wird angezeigt. Falls nicht gefunden, wird keine Batterietemperatur angezeigt."
+            "value" : "Nur die Temperatur des Batteriestapels %1$@ wird angezeigt (z. B. H3 Pro). Falls nicht gefunden, wird keine Batterietemperatur angezeigt."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Only the temperature of battery %1$@ on a multi-battery system will be displayed. If not found, no battery temperature will be displayed."
+            "value" : "Only the temperature of battery stack %1$@ will be displayed (e.g H3 Pro). If not found, no battery temperature will be displayed."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Solo se mostrará la temperatura de la batería %1$@ en un sistema con varias baterías. Si no se encuentra, no se mostrará ninguna temperatura de la batería."
+            "value" : "Solo se mostrará la temperatura del conjunto de baterías %1$@ (por ejemplo, H3 Pro). Si no se encuentra, no se mostrará ninguna temperatura de la batería."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Verrà visualizzata solo la temperatura della batteria %1$@ in un sistema a più batterie. Se non trovata, non verrà visualizzata alcuna temperatura della batteria."
+            "value" : "Verrà visualizzata solo la temperatura del gruppo di batterie %1$@ (ad es. H3 Pro). Se non trovata, non verrà visualizzata alcuna temperatura della batteria."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wyświetlana będzie tylko temperatura baterii %1$@ w systemie z wieloma bateriami. Jeśli nie zostanie znaleziona, nie zostanie wyświetlona żadna temperatura baterii."
+            "value" : "Wyświetlana będzie tylko temperatura zestawu baterii %1$@ (np. H3 Pro). Jeśli nie zostanie znaleziona, nie zostanie wyświetlona żadna temperatura baterii."
           }
         }
       }
@@ -5374,30 +5374,30 @@
         }
       }
     },
-    "Display battery" : {
+    "Display battery stack" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Batterie anzeigen"
+            "value" : "Batteriestapel anzeigen"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mostrar batería"
+            "value" : "Mostrar conjunto de baterías"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mostra batteria"
+            "value" : "Mostra gruppo di batterie"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wyświetl baterię"
+            "value" : "Wyświetl zestaw baterii"
           }
         }
       }
