@@ -582,6 +582,16 @@ public class ConfigManager: ConfigManaging {
         get { config.lastSolcastRefresh }
         set { config.lastSolcastRefresh = newValue }
     }
+
+    public var batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode {
+        get { config.batteryTemperatureDisplayMode }
+        set {
+            config.batteryTemperatureDisplayMode = newValue
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+                batteryTemperatureDisplayMode: config.batteryTemperatureDisplayMode
+            ))
+        }
+    }
 }
 
 public enum BatteryResponseMapper {

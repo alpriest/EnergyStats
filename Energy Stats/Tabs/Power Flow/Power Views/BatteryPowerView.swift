@@ -12,20 +12,35 @@ import SwiftUI
 class BatteryPowerViewModel {
     private let actualBatteryStateOfCharge: Double
     private(set) var batteryChargekWh: Double
-    private(set) var temperature: [Double]
+    private(set) var temperatures: [Double]
     private var configManager: ConfigManaging
     let residual: Int
     let error: Error?
     private let minSOC: Double
 
-    init(configManager: ConfigManaging, batteryStateOfCharge: Double, batteryChargekWH: Double, temperature: [Double], batteryResidual: Int, error: Error?, minSOC: Double) {
+    init(configManager: ConfigManaging, batteryStateOfCharge: Double, batteryChargekWH: Double, temperatures: BatteryTemperatures, batteryResidual: Int, error: Error?, minSOC: Double) {
         actualBatteryStateOfCharge = batteryStateOfCharge
         batteryChargekWh = batteryChargekWH
-        self.temperature = temperature
+        self.temperatures = Self.makeTemperatures(batteryTemperatureDisplayMode: configManager.batteryTemperatureDisplayMode, temperatures: temperatures)
         self.configManager = configManager
         residual = batteryResidual
         self.error = error
         self.minSOC = minSOC
+    }
+
+    private static func makeTemperatures(batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode, temperatures: BatteryTemperatures) -> [Double] {
+        var result: [Double]
+
+        switch batteryTemperatureDisplayMode {
+        case .automatic:
+            result = [temperatures.batTemperature, temperatures.batTemperature_1, temperatures.batTemperature_2].compactMap(\.self)
+        case .battery1:
+            result = [temperatures.batTemperature_1].compactMap(\.self)
+        case .battery2:
+            result = [temperatures.batTemperature_2].compactMap(\.self)
+        }
+
+        return result
     }
 
     var batteryExtra: String? {
@@ -127,7 +142,7 @@ extension BatteryPowerViewModel {
             configManager: ConfigManager.preview(config: config),
             batteryStateOfCharge: 0.99,
             batteryChargekWH: -0.01,
-            temperature: [15.6],
+            temperatures: BatteryTemperatures(batTemperature: 23.0, batTemperature_1: nil, batTemperature_2: nil),
             batteryResidual: 5940,
             error: error,
             minSOC: 0.2

@@ -369,6 +369,7 @@ public class MockConfig: Config {
     public var summaryDateRange: SummaryDateRange = .automatic
     public var colorScheme: ForcedColorScheme = .auto
     public var lastSolcastRefresh: Date? = nil
+    public var batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode = .automatic
 }
 
 public extension SolcastSite {

@@ -11,15 +11,15 @@ public struct BatteryViewModel: Sendable {
     public let hasBattery: Bool
     public let chargeLevel: Double
     public let chargePower: Double
-    public let temperature: [Double]
+    public let temperatures: BatteryTemperatures
     public let residual: Int
     public let error: Error?
 
-    public init(power: Double, soc: Int, residual: Double, temperature: [Double]) {
+    public init(power: Double, soc: Int, residual: Double, temperatures: BatteryTemperatures) {
         chargeLevel = Double(soc) / 100.0
         chargePower = power
         hasBattery = true
-        self.temperature = temperature
+        self.temperatures = temperatures
         self.residual = Int(residual)
         error = nil
     }
@@ -27,12 +27,13 @@ public struct BatteryViewModel: Sendable {
     public init(hasBattery: Bool = false,
                 chargeLevel: Double = 0,
                 chargePower: Double = 0,
-                temperature: [Double] = [0],
-                residual: Int = 0) {
+                temperatures: BatteryTemperatures = BatteryTemperatures(batTemperature: 0.0, batTemperature_1: nil, batTemperature_2: nil),
+                residual: Int = 0)
+    {
         self.hasBattery = hasBattery
         self.chargeLevel = chargeLevel
         self.chargePower = chargePower
-        self.temperature = temperature
+        self.temperatures = temperatures
         self.residual = residual
         error = nil
     }
@@ -42,7 +43,7 @@ public struct BatteryViewModel: Sendable {
         hasBattery = false
         chargeLevel = 0
         chargePower = 0
-        temperature = [0]
+        temperatures = BatteryTemperatures(batTemperature: 0.0, batTemperature_1: nil, batTemperature_2: nil)
         residual = 0
     }
 }
@@ -57,8 +58,48 @@ public extension BatteryViewModel {
             hasBattery: true,
             chargeLevel: 0.99,
             chargePower: 0.1,
-            temperature: [15.6],
+            temperatures: BatteryTemperatures(batTemperature: 15.6, batTemperature_1: nil, batTemperature_2: nil),
             residual: 5678
         )
+    }
+
+    static func make(currentDevice: Device, real: OpenQueryResponse) -> BatteryViewModel {
+        if currentDevice.hasBattery == true {
+            return real.makeBatteryViewModel()
+        } else {
+            return BatteryViewModel.noBattery
+        }
+    }
+}
+
+extension OpenQueryResponse {
+    func makeBatteryViewModel() -> BatteryViewModel {
+        let chargePower = datas.currentDouble(for: "batChargePower")
+        let dischargePower = datas.currentDouble(for: "batDischargePower")
+        let power = chargePower > 0 ? chargePower : -dischargePower
+        let temps = BatteryTemperatures(
+            batTemperature: datas.current(for: "batTemperature")?.value,
+            batTemperature_1: datas.current(for: "batTemperature_1")?.value,
+            batTemperature_2: datas.current(for: "batTemperature_2")?.value
+        )
+
+        return BatteryViewModel(
+            power: power,
+            soc: Int(datas.SoC()),
+            residual: datas.currentDouble(for: "ResidualEnergy") * 10.0,
+            temperatures: temps
+        )
+    }
+}
+
+public struct BatteryTemperatures: Sendable {
+    public let batTemperature: Double?
+    public let batTemperature_1: Double?
+    public let batTemperature_2: Double?
+
+    public init(batTemperature: Double?, batTemperature_1: Double?, batTemperature_2: Double?) {
+        self.batTemperature = batTemperature
+        self.batTemperature_1 = batTemperature_1
+        self.batTemperature_2 = batTemperature_2
     }
 }

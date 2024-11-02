@@ -109,9 +109,32 @@ struct BatterySettingsView: View {
                 Toggle(isOn: $viewModel.showBatteryTemperature) {
                     Text("Show battery temperature")
                 }
+
+                HStack {
+                    Text("Display battery").padding(.trailing)
+                    Spacer()
+                    Picker("Display battery", selection: $viewModel.batteryTemperatureDisplayMode) {
+                        Text("Auto").tag(BatteryTemperatureDisplayMode.automatic)
+                        Text("1").tag(BatteryTemperatureDisplayMode.battery1)
+                        Text("2").tag(BatteryTemperatureDisplayMode.battery2)
+                    }.pickerStyle(.segmented)
+                }
+            } footer: {
+                Text(batteryDisplayModeText)
             }
         }
         .navigationTitle("Battery")
+    }
+
+    private var batteryDisplayModeText: String {
+        switch viewModel.batteryTemperatureDisplayMode {
+        case .automatic:
+            "All battery temperatures will be displayed."
+        case .battery1:
+            "Only the temperature of battery 1 on a multi-battery system will be displayed. If not found, no battery temperature will be displayed."
+        case .battery2:
+            "Only the temperature of battery 2 on a multi-battery system will be displayed. If not found, no battery temperature will be displayed."
+        }
     }
 }
 

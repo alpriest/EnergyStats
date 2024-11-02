@@ -57,6 +57,7 @@ public protocol Config {
     var summaryDateRange: SummaryDateRange { get set }
     var colorScheme: ForcedColorScheme { get set }
     var lastSolcastRefresh: Date? { get set }
+    var batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode { get set }
 }
 
 public func DefaultParameterGroups() -> [ParameterGroup] {

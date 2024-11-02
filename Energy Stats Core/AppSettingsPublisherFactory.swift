@@ -59,7 +59,8 @@ public enum AppSettingsPublisherFactory {
             showSelfSufficiencyStatsGraphOverlay: config.showSelfSufficiencyStatsGraphOverlay,
             truncatedYAxisOnParameterGraphs: config.truncatedYAxisOnParameterGraphs,
             earningsModel: config.earningsModel,
-            minSOC: config.minSOC
+            minSOC: config.minSOC,
+            batteryTemperatureDisplayMode: config.batteryTemperatureDisplayMode
         )
     }
 }

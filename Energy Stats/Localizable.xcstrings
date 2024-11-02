@@ -601,6 +601,9 @@
         }
       }
     },
+    "1" : {
+
+    },
     "1 min" : {
       "localizations" : {
         "de" : {
@@ -5300,6 +5303,9 @@
           }
         }
       }
+    },
+    "Display battery" : {
+
     },
     "Display Options" : {
       "localizations" : {

@@ -79,14 +79,12 @@ class ContentViewModel {
                                                      response: reals,
                                                      config: config)
 
-            let batteryViewModel = reals.makeBatteryViewModel()
-            let batterySOC = reals.datas.SoC() / 100.0
-
+            let batteryViewModel = BatteryViewModel.make(currentDevice: device, real: reals)
             let totals = await loadTotals(device)
 
             withAnimation {
                 self.state = ContentData(
-                    batterySOC: batterySOC,
+                    batterySOC: batteryViewModel.chargeLevel,
                     solar: calculator.currentSolarPower,
                     house: calculator.currentHomeConsumption,
                     grid: calculator.currentGrid,

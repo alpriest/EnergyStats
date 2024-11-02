@@ -67,6 +67,7 @@ public protocol ConfigManaging: FinancialConfigManager, SolcastConfigManager, Ba
     var summaryDateRange: SummaryDateRange { get set }
     var colorScheme: ForcedColorScheme { get set }
     var lastSolcastRefresh: Date? { get set }
+    var batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode { get set }
 }
 
 public protocol BatteryConfigManager {
@@ -232,4 +233,10 @@ public enum SummaryDateRange: Codable, Equatable {
         default: return false
         }
     }
+}
+
+public enum BatteryTemperatureDisplayMode: Int, Codable, Equatable {
+    case automatic = 0
+    case battery1 = 1
+    case battery2 = 2
 }

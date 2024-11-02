@@ -27,7 +27,7 @@ struct BatteryPowerFooterView: View {
 
             if appSettings.showBatteryTemperature {
                 HStack {
-                    ForEach(viewModel.temperature, id: \.self) { temperature in
+                    ForEach(viewModel.temperatures, id: \.self) { temperature in
                         (Text(temperature, format: .number) + Text("°C"))
                             .accessibilityElement(children: .ignore)
                             .accessibilityLabel(String(format: String(accessibilityKey: .batteryTemperature), temperature.roundedToString(decimalPlaces: 2)))

@@ -50,6 +50,7 @@ public struct AppSettings {
     public var truncatedYAxisOnParameterGraphs: Bool
     public var earningsModel: EarningsModel
     public var minSOC: Double
+    public var batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode
 
     public init(
         showColouredLines: Bool,
@@ -86,7 +87,8 @@ public struct AppSettings {
         showSelfSufficiencyStatsGraphOverlay: Bool,
         truncatedYAxisOnParameterGraphs: Bool,
         earningsModel: EarningsModel,
-        minSOC: Double
+        minSOC: Double,
+        batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -123,6 +125,7 @@ public struct AppSettings {
         self.truncatedYAxisOnParameterGraphs = truncatedYAxisOnParameterGraphs
         self.earningsModel = earningsModel
         self.minSOC = minSOC
+        self.batteryTemperatureDisplayMode = batteryTemperatureDisplayMode
     }
 
     public func copy(
@@ -160,7 +163,8 @@ public struct AppSettings {
         showSelfSufficiencyStatsGraphOverlay: Bool? = nil,
         truncatedYAxisOnParameterGraphs: Bool? = nil,
         earningsModel: EarningsModel? = nil,
-        minSOC: Double? = nil
+        minSOC: Double? = nil,
+        batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode? = nil
     ) -> AppSettings {
         AppSettings(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -197,7 +201,8 @@ public struct AppSettings {
             showSelfSufficiencyStatsGraphOverlay: showSelfSufficiencyStatsGraphOverlay ?? self.showSelfSufficiencyStatsGraphOverlay,
             truncatedYAxisOnParameterGraphs: truncatedYAxisOnParameterGraphs ?? self.truncatedYAxisOnParameterGraphs,
             earningsModel: earningsModel ?? self.earningsModel,
-            minSOC: minSOC ?? self.minSOC
+            minSOC: minSOC ?? self.minSOC,
+            batteryTemperatureDisplayMode: batteryTemperatureDisplayMode ?? self.batteryTemperatureDisplayMode
         )
     }
 }

@@ -265,13 +265,3 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
         } catch {}
     }
 }
-
-extension BatteryViewModel {
-    static func make(currentDevice: Device, real: OpenQueryResponse) -> BatteryViewModel {
-        if currentDevice.hasBattery == true {
-            return real.makeBatteryViewModel()
-        } else {
-            return BatteryViewModel.noBattery
-        }
-    }
-}

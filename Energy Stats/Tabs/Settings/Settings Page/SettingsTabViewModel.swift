@@ -160,6 +160,12 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
+    @Published var batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode {
+        didSet {
+            config.batteryTemperatureDisplayMode = batteryTemperatureDisplayMode
+        }
+    }
+
     private(set) var config: ConfigManaging
     private let userManager: UserManager
     private var cancellables = Set<AnyCancellable>()
@@ -196,6 +202,7 @@ class SettingsTabViewModel: ObservableObject {
         showBatteryPercentageRemaining = config.showBatteryPercentageRemaining
         powerStation = config.powerStationDetail
         colorScheme = config.colorScheme
+        batteryTemperatureDisplayMode = config.batteryTemperatureDisplayMode
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }
