@@ -15,7 +15,6 @@ struct ContentView: View {
     let solarForecastProvider: SolarForecastProviding
     let templateStore: TemplateStoring
     @State private var state = LoadState.inactive
-    @EnvironmentObject var alertManager: SlowServerBannerAlertManager
 
     var body: some View {
         Group {
@@ -26,9 +25,8 @@ struct ContentView: View {
 #else
                     ZStack {
                         TabbedView(networking: network, userManager: userManager, configManager: configManager, solarForecastProvider: solarForecastProvider, templateStore: templateStore)
-                        if alertManager.isShowingAlert {
-                            SlowServerMessageView()
-                        }
+
+                        BannerAlertView()
                     }
 #endif
                 }

@@ -104,9 +104,15 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
             let deviceState = try DeviceState(rawValue: await self.network.fetchDevice(deviceSN: self.currentDevice.deviceSN).status) ?? DeviceState.offline
             let faults: [String]
 
-            if deviceState != .online {
+            switch deviceState {
+            case .online:
+                faults = []
+            case .fault:
                 faults = try await self.loadCurrentFaults()
-            } else {
+            case .offline:
+                NotificationCenter.default.post(name: .deviceIsOffline, object: nil)
+                faults = try await self.loadCurrentFaults()
+            case .unknown:
                 faults = []
             }
 

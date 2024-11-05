@@ -94,7 +94,14 @@ struct ParameterGraphHeaderView: View {
 
 #Preview {
     VStack {
-        ParameterGraphHeaderView(viewModel: ParameterGraphHeaderViewModel(displayMode: .constant(.init(date: .now, hours: 6)), configManager: ConfigManager.preview()), showingVariables: .constant(false))
+        ParameterGraphHeaderView(
+            viewModel: ParameterGraphHeaderViewModel(
+                displayMode: .init(date: .now, hours: 6),
+                configManager: ConfigManager.preview(),
+                onChange: { _ in }
+            ),
+            showingVariables: .constant(false)
+        )
         Spacer()
     }
 }

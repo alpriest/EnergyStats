@@ -15,7 +15,11 @@ class ParameterGraphHeaderViewModel: ObservableObject {
         }
     }
 
-    @Binding private var displayMode: ParametersGraphDisplayMode
+    @Published private var displayMode: ParametersGraphDisplayMode {
+        didSet {
+            onGraphDisplayModeChange(displayMode)
+        }
+    }
     @Published var candidateQueryDate = Date() {
         didSet {
             updateDisplayMode()
@@ -32,13 +36,15 @@ class ParameterGraphHeaderViewModel: ObservableObject {
 
     private var isInitialised = false
     private var configManager: ConfigManaging
+    private let onGraphDisplayModeChange: (ParametersGraphDisplayMode) -> Void
 
-    init(displayMode: Binding<ParametersGraphDisplayMode>, configManager: ConfigManaging) {
-        self._displayMode = displayMode
-        self.candidateQueryDate = displayMode.wrappedValue.date
-        self.hours = displayMode.wrappedValue.hours
+    init(displayMode: ParametersGraphDisplayMode, configManager: ConfigManaging, onChange onGraphDisplayModeChange: @escaping (ParametersGraphDisplayMode) -> Void) {
+        self.displayMode = displayMode
+        self.candidateQueryDate = displayMode.date
+        self.hours = displayMode.hours
         self.configManager = configManager
         self.truncatedYAxis = configManager.truncatedYAxisOnParameterGraphs
+        self.onGraphDisplayModeChange = onGraphDisplayModeChange
 
         self.isInitialised = true
     }

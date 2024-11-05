@@ -2463,6 +2463,7 @@
       }
     },
     "Always loading? Tap for details" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -5345,6 +5346,9 @@
         }
       }
     },
+    "Dismiss" : {
+
+    },
     "Display" : {
       "comment" : "Settings page",
       "localizations" : {
@@ -7824,6 +7828,9 @@
         }
       }
     },
+    "If you’ve recently updated your WiFi settings and need help reconnecting your inverter, click below to watch a step-by-step video tutorial." : {
+
+    },
     "import_total" : {
       "localizations" : {
         "de" : {
@@ -9615,6 +9622,9 @@
           }
         }
       }
+    },
+    "Offline Device" : {
+
     },
     "OK" : {
       "localizations" : {
@@ -13180,6 +13190,7 @@
       }
     },
     "Slow performance" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -13208,6 +13219,7 @@
       }
     },
     "slow-performance-message" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -14671,6 +14683,9 @@
         }
       }
     },
+    "Watch" : {
+
+    },
     "Watts" : {
       "localizations" : {
         "de" : {
@@ -15404,6 +15419,9 @@
           }
         }
       }
+    },
+    "You can also find this video link in the Settings FAQ section" : {
+
     },
     "You have exceeded your free daily limit of requests. Please try tomorrow." : {
       "localizations" : {

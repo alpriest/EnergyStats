@@ -47,6 +47,7 @@ struct InverterTemperatureView: View {
 struct InverterView: View {
     @ObservedObject var viewModel: InverterViewModel
     @Environment(\.verticalSizeClass) private var verticalSizeClass
+    @EnvironmentObject var alertManager: BannerAlertManager
     @State private var alertContent: AlertContent?
     let appSettings: AppSettings
 

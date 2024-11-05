@@ -30,7 +30,10 @@ struct ParametersGraphTabView: View {
     var body: some View {
         Group {
             VStack {
-                ParameterGraphHeaderView(viewModel: ParameterGraphHeaderViewModel(displayMode: $viewModel.displayMode, configManager: configManager), showingVariables: $showingVariables)
+                ParameterGraphHeaderView(
+                    viewModel: ParameterGraphHeaderViewModel(displayMode: viewModel.displayMode, configManager: configManager, onChange: { viewModel.displayMode = $0 }),
+                    showingVariables: $showingVariables
+                )
 
                 ScrollView {
                     HStack {

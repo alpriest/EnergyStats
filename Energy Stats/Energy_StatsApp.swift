@@ -23,6 +23,7 @@ struct Energy_StatsApp: App {
     let userManager: UserManager
     let versionChecker = VersionChecker()
     let templateStore: TemplateStoring
+    let bannerAlertManager = BannerAlertManager()
     private var cancellables = Set<AnyCancellable>()
 
     @Environment(\.scenePhase) private var scenePhase
@@ -71,7 +72,7 @@ struct Energy_StatsApp: App {
                 .environmentObject(userManager)
                 .environmentObject(KeychainWrapper(keychainStore))
                 .environmentObject(versionChecker)
-                .environmentObject(SlowServerBannerAlertManager())
+                .environmentObject(bannerAlertManager)
                 .onChange(of: scenePhase) { phase in
                     if case .active = phase {
                         if WCSession.isSupported() {
