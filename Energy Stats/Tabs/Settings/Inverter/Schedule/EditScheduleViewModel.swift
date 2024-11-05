@@ -25,7 +25,7 @@ class EditScheduleViewModel: ObservableObject, HasLoadState {
     func saveSchedule(onCompletion: @escaping () -> Void) async {
         guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
         guard schedule.isValid() else {
-            alertContent = AlertContent(title: "error_title", message: "overlapping_time_periods")
+            await setAlertContent(AlertContent(title: "error_title", message: "overlapping_time_periods"))
             return
         }
 
@@ -44,9 +44,12 @@ class EditScheduleViewModel: ObservableObject, HasLoadState {
                         onDismiss: onCompletion
                     )
                 }
+            } catch NetworkError.foxServerError(44098, _) {
+                await setState(.inactive)
+                await setAlertContent(AlertContent(title: "error_title", message: LocalizedStringKey(stringLiteral: "fox_cloud_44098")))
             } catch {
                 await setState(.inactive)
-                alertContent = AlertContent(title: "error_title", message: LocalizedStringKey(stringLiteral: error.localizedDescription))
+                await setAlertContent(AlertContent(title: "error_title", message: LocalizedStringKey(stringLiteral: error.localizedDescription)))
             }
         }
     }
@@ -72,5 +75,9 @@ class EditScheduleViewModel: ObservableObject, HasLoadState {
     }
 
     func unused() {}
-}
 
+    @MainActor
+    func setAlertContent(_ alertContent: AlertContent) async {
+        self.alertContent = alertContent
+    }
+}

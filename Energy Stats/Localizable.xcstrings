@@ -2462,35 +2462,6 @@
         }
       }
     },
-    "Always loading? Tap for details" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Immer am Laden? Tippen für Details"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "¿Siempre cargando? Toca para más detalles"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sempre in caricamento? Tocca per i dettagli"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zawsze ładuje? Dotknij, aby uzyskać szczegóły"
-          }
-        }
-      }
-    },
     "Amount" : {
       "localizations" : {
         "de" : {
@@ -5347,7 +5318,32 @@
       }
     },
     "Dismiss" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schließen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerrar"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chiudi"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zamknij"
+          }
+        }
+      }
     },
     "Display" : {
       "comment" : "Settings page",
@@ -6894,6 +6890,41 @@
         }
       }
     },
+    "fox_cloud_44098" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fox Cloud-Fehler 44098. Der Zeitplan konnte nicht gespeichert werden. Dies kann daran liegen, dass Fox MaxSOC auf OpenAPI nicht unterstützt."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fox Cloud error 44098. Could not save schedule. This may be because Fox do not support MaxSOC on OpenAPI."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error de Fox Cloud 44098. No se pudo guardar el horario. Esto puede deberse a que Fox no admite MaxSOC en OpenAPI."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Errore Fox Cloud 44098. Impossibile salvare il programma. Questo potrebbe essere dovuto al fatto che Fox non supporta MaxSOC su OpenAPI."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Błąd Fox Cloud 44098. Nie można zapisać harmonogramu. Może to być spowodowane brakiem obsługi MaxSOC przez Fox na OpenAPI."
+          }
+        }
+      }
+    },
     "FoxESS Cloud data is updated every 5 minutes. 'Auto' attempts to synchronise data fetches just after the data is uploaded from your inverter to minimise server load." : {
       "localizations" : {
         "de" : {
@@ -7829,7 +7860,32 @@
       }
     },
     "If you’ve recently updated your WiFi settings and need help reconnecting your inverter, click below to watch a step-by-step video tutorial." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wenn Sie kürzlich Ihre WLAN-Einstellungen aktualisiert haben und Hilfe bei der erneuten Verbindung Ihres Wechselrichters benötigen, klicken Sie unten, um ein Schritt-für-Schritt-Video-Tutorial anzusehen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Si has actualizado recientemente la configuración de WiFi y necesitas ayuda para volver a conectar tu inversor, haz clic abajo para ver un tutorial en video paso a paso."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se hai recentemente aggiornato le impostazioni WiFi e hai bisogno di aiuto per ricollegare il tuo inverter, fai clic qui sotto per guardare un video tutorial passo dopo passo."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jeśli niedawno zaktualizowałeś ustawienia WiFi i potrzebujesz pomocy w ponownym połączeniu inwertera, kliknij poniżej, aby obejrzeć szczegółowy poradnik wideo."
+          }
+        }
+      }
     },
     "import_total" : {
       "localizations" : {
@@ -9624,7 +9680,32 @@
       }
     },
     "Offline Device" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Offline-Gerät"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dispositivo sin conexión"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dispositivo offline"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Urządzenie offline"
+          }
+        }
+      }
     },
     "OK" : {
       "localizations" : {
@@ -13189,70 +13270,6 @@
         }
       }
     },
-    "Slow performance" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Langsame Leistung"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rendimiento lento"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prestazioni lente"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wolne działanie"
-          }
-        }
-      }
-    },
-    "slow-performance-message" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sie haben den Ladekreisel wahrscheinlich immer häufiger gesehen. Energy Stats nutzt öffentliche Server (OpenAPI), die von FoxESS bereitgestellt werden und schlecht funktionieren. FoxESS wurde Anfang Mai informiert und hat sich verpflichtet, das Problem zu lösen, aber es wurde kein Zeitrahmen angegeben. Diese Server unterscheiden sich von denen, die von den FoxCloud-Apps verwendet werden, weshalb die FoxCloud-Apps oft laden.\n\nSiehe untenstehendes Diagramm, das die Antwortzeiten über einen Zeitraum von 48 Stunden zeigt."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You have probably seen the loading spinner more and more frequently. Energy Stats uses public servers (OpenAPI) provided by FoxESS which are performing poorly. FoxESS have were informed at the beginning of May and have committed to resolving the issue but no timescale has been provided. These servers are different from the ones that are used by the FoxCloud apps which is why the FoxCloud apps often load.\n\nSee graph below showing response times across a 48hr period."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Probablemente hayas visto el cargador giratorio con más frecuencia. Energy Stats utiliza servidores públicos (OpenAPI) proporcionados por FoxESS que están funcionando mal. FoxESS fue informado a principios de mayo y se ha comprometido a resolver el problema, pero no se ha proporcionado un plazo. Estos servidores son diferentes de los que usan las aplicaciones de FoxCloud, por lo que las aplicaciones de FoxCloud suelen cargarse.\n\nVea el gráfico a continuación que muestra los tiempos de respuesta durante un período de 48 horas."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Probabilmente hai visto il caricamento più frequentemente. Energy Stats utilizza server pubblici (OpenAPI) forniti da FoxESS che stanno funzionando male. FoxESS è stata informata all'inizio di maggio e si è impegnata a risolvere il problema, ma non è stato fornito alcun tempo di risoluzione. Questi server sono diversi da quelli utilizzati dalle app FoxCloud, motivo per cui le app FoxCloud si caricano spesso.\n\nVedi il grafico sotto che mostra i tempi di risposta su un periodo di 48 ore."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prawdopodobnie coraz częściej widzisz kręcący się wskaźnik ładowania. Energy Stats korzysta z publicznych serwerów (OpenAPI) udostępnianych przez FoxESS, które działają słabo. FoxESS zostało poinformowane na początku maja i zobowiązało się do rozwiązania problemu, ale nie podano żadnego terminu. Te serwery są inne niż te używane przez aplikacje FoxCloud, dlatego aplikacje FoxCloud często się ładują.\n\nZobacz poniższy wykres pokazujący czasy odpowiedzi w okresie 48 godzin."
-          }
-        }
-      }
-    },
     "Solar Forecasts" : {
       "localizations" : {
         "de" : {
@@ -14684,7 +14701,32 @@
       }
     },
     "Watch" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ansehen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ver"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guarda"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obejrzyj"
+          }
+        }
+      }
     },
     "Watts" : {
       "localizations" : {
@@ -15421,7 +15463,32 @@
       }
     },
     "You can also find this video link in the Settings FAQ section" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diesen Videolink finden Sie auch im FAQ-Bereich der Einstellungen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "También puedes encontrar este enlace de video en la sección de preguntas frecuentes de Configuración."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Puoi trovare questo link al video anche nella sezione FAQ delle Impostazioni."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ten link do wideo znajdziesz również w sekcji FAQ w Ustawieniach."
+          }
+        }
+      }
     },
     "You have exceeded your free daily limit of requests. Please try tomorrow." : {
       "localizations" : {
