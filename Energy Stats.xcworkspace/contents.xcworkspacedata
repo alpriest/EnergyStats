@@ -7,7 +7,4 @@
    <FileRef
       location = "group:Energy Stats Core/Energy Stats Core.xctestplan">
    </FileRef>
-   <FileRef
-      location = "group:OfflineDeviceBannerView.swift">
-   </FileRef>
 </Workspace>

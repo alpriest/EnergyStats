@@ -319,6 +319,9 @@
 		41F71ABD2A14FBEC00A8C81B /* Array+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127910C28E2442100D5F993 /* Array+Safe.swift */; };
 		41F71ABF2A1504C700A8C81B /* report-year.json in Resources */ = {isa = PBXBuildFile; fileRef = 41F71ABE2A1504C700A8C81B /* report-year.json */; };
 		41F71AC12A1504D900A8C81B /* report-month.json in Resources */ = {isa = PBXBuildFile; fileRef = 41F71AC02A1504D900A8C81B /* report-month.json */; };
+		41F80BAF2CE2AE3100C6776B /* FirebaseInAppMessaging-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 41F80BAE2CE2AE3100C6776B /* FirebaseInAppMessaging-Beta */; };
+		41F80BB12CE2AEC100C6776B /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 41F80BB02CE2AEC100C6776B /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		41F80BB32CE2AFAC00C6776B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 41F80BB22CE2AFAC00C6776B /* GoogleService-Info.plist */; };
 		41FB0D272AC19150002C8FED /* Energy_Stats_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; platformFilters = (ios, watchos, ); };
 		41FCE06B2CA170930046ABF6 /* LeftTabbedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FCE06A2CA1708D0046ABF6 /* LeftTabbedView.swift */; };
 		41FCE06E2CA175AA0046ABF6 /* TabItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FCE06D2CA175A70046ABF6 /* TabItems.swift */; };
@@ -797,6 +800,7 @@
 		41F631862BDCD3E800A571C5 /* Energy Stats Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Energy Stats Watch App.entitlements"; sourceTree = "<group>"; };
 		41F71ABE2A1504C700A8C81B /* report-year.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "report-year.json"; sourceTree = "<group>"; };
 		41F71AC02A1504D900A8C81B /* report-month.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "report-month.json"; sourceTree = "<group>"; };
+		41F80BB22CE2AFAC00C6776B /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		41F8D8F6292D7650005E2D18 /* report-day.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "report-day.json"; sourceTree = "<group>"; };
 		41FCE06A2CA1708D0046ABF6 /* LeftTabbedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftTabbedView.swift; sourceTree = "<group>"; };
 		41FCE06D2CA175A70046ABF6 /* TabItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItems.swift; sourceTree = "<group>"; };
@@ -829,9 +833,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				418199CA2A4035F40001B5D4 /* MarkdownUI in Frameworks */,
+				41F80BB12CE2AEC100C6776B /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				41B6910128E043A10058126E /* OHHTTPStubs in Frameworks */,
 				41CA35762AA8C52100D45734 /* OrderedCollections in Frameworks */,
 				41A95B9A29DB3F6A00A35169 /* Energy_Stats_Core.framework in Frameworks */,
+				41F80BAF2CE2AE3100C6776B /* FirebaseInAppMessaging-Beta in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1132,26 +1138,27 @@
 		4140144C28C70B3200EA5BA1 /* Energy Stats */ = {
 			isa = PBXGroup;
 			children = (
-				41FCE06C2CA1758B0046ABF6 /* Tab Definitions */,
-				412887542BE8B852007E9532 /* Watch Communication */,
 				4185474B2A3A59E4000128C7 /* Energy Stats.entitlements */,
-				418EB4882ACC10220021B87A /* Localizable.xcstrings */,
-				4140145128C70B3200EA5BA1 /* Assets.xcassets */,
+				4189B0312B9486FE00EC4CB5 /* version.json */,
+				412E3C7D28D2519B004A0DCF /* Energy-Stats-Info.plist */,
+				41F80BB22CE2AFAC00C6776B /* GoogleService-Info.plist */,
 				4141B20128D871B900B60157 /* ContentView.swift */,
 				4140144D28C70B3200EA5BA1 /* Energy_StatsApp.swift */,
-				412E3C7D28D2519B004A0DCF /* Energy-Stats-Info.plist */,
+				419CCB532933BABF00882649 /* ErrorAlertView.swift */,
+				417153E529F2BD3300639A7B /* LoadState.swift */,
+				41965EE22C3286C9004F9D9A /* LoadTracking.swift */,
+				4149D3AC2B3C4DAA00314449 /* UnsupportedErrorView.swift */,
+				41D75A022B6009D5002C43A7 /* UpgradeRequiredView.swift */,
+				41965EE02C3284E6004F9D9A /* VisibilityTracking.swift */,
+				4140145128C70B3200EA5BA1 /* Assets.xcassets */,
+				418EB4882ACC10220021B87A /* Localizable.xcstrings */,
 				4106A92E28D05EC10009DA28 /* Extensions */,
 				4141B1FE28D86C5B00B60157 /* Login */,
 				4140145328C70B3200EA5BA1 /* Preview Content */,
-				4107446A28CA57A1006D5D7D /* Tabs */,
-				419CCB532933BABF00882649 /* ErrorAlertView.swift */,
-				417153E529F2BD3300639A7B /* LoadState.swift */,
 				41E12E822CC65973001F3839 /* Shortcuts */,
-				4149D3AC2B3C4DAA00314449 /* UnsupportedErrorView.swift */,
-				41D75A022B6009D5002C43A7 /* UpgradeRequiredView.swift */,
-				4189B0312B9486FE00EC4CB5 /* version.json */,
-				41965EE02C3284E6004F9D9A /* VisibilityTracking.swift */,
-				41965EE22C3286C9004F9D9A /* LoadTracking.swift */,
+				41FCE06C2CA1758B0046ABF6 /* Tab Definitions */,
+				4107446A28CA57A1006D5D7D /* Tabs */,
+				412887542BE8B852007E9532 /* Watch Communication */,
 			);
 			path = "Energy Stats";
 			sourceTree = "<group>";
@@ -1702,6 +1709,8 @@
 				41B6910028E043A10058126E /* OHHTTPStubs */,
 				418199C92A4035F40001B5D4 /* MarkdownUI */,
 				41CA35752AA8C52100D45734 /* OrderedCollections */,
+				41F80BAE2CE2AE3100C6776B /* FirebaseInAppMessaging-Beta */,
+				41F80BB02CE2AEC100C6776B /* FirebaseAnalyticsWithoutAdIdSupport */,
 			);
 			productName = "PV Stats";
 			productReference = 4140144A28C70B3200EA5BA1 /* Energy Stats.app */;
@@ -1864,6 +1873,7 @@
 				4127910E28E38EFB00D5F993 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 				418199C82A4035F40001B5D4 /* XCRemoteSwiftPackageReference "MarkdownUI" */,
 				41CA35742AA8C52100D45734 /* XCRemoteSwiftPackageReference "swift-collections" */,
+				41F80BAD2CE2AE3100C6776B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 4140144B28C70B3200EA5BA1 /* Products */;
 			projectDirPath = "";
@@ -1903,6 +1913,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4140145528C70B3200EA5BA1 /* Preview Assets.xcassets in Resources */,
+				41F80BB32CE2AFAC00C6776B /* GoogleService-Info.plist in Resources */,
 				418EB4892ACC10220021B87A /* Localizable.xcstrings in Resources */,
 				4140145228C70B3200EA5BA1 /* Assets.xcassets in Resources */,
 			);
@@ -2489,7 +2500,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 19;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -2511,7 +2522,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.66;
+				MARKETING_VERSION = 2.67;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2555,7 +2566,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 19;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2571,7 +2582,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.66;
+				MARKETING_VERSION = 2.67;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -2604,6 +2615,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -2637,6 +2649,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -3050,6 +3063,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		41F80BAD2CE2AE3100C6776B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.4.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -3077,6 +3098,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 41CA35742AA8C52100D45734 /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = OrderedCollections;
+		};
+		41F80BAE2CE2AE3100C6776B /* FirebaseInAppMessaging-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 41F80BAD2CE2AE3100C6776B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseInAppMessaging-Beta";
+		};
+		41F80BB02CE2AEC100C6776B /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 41F80BAD2CE2AE3100C6776B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

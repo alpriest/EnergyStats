@@ -7,12 +7,23 @@
 
 import Combine
 import Energy_Stats_Core
+import Firebase
 import SwiftUI
 import WatchConnectivity
 import WidgetKit
 
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool
+    {
+        FirebaseApp.configure()
+        return true
+    }
+}
+
 @main
 struct Energy_StatsApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     static let delegate = WatchSessionDelegate()
     let keychainStore = KeychainStore()
 
@@ -49,8 +60,6 @@ struct Energy_StatsApp: App {
             .sink { [keychainStore, configManager] _ in
                 Self.updateKeychainSettingsForWatch(keychainStore: keychainStore, configManager: configManager)
             }.store(in: &cancellables)
-
-        WidgetCenter.shared.reloadAllTimelines()
     }
 
     var body: some Scene {
