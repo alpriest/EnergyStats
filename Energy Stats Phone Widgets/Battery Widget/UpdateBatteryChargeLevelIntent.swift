@@ -32,7 +32,10 @@ struct UpdateBatteryChargeLevelIntent: AppIntent {
             AppSettingsPublisherFactory.update(from: configManager)
             try await HomeEnergyStateManager.shared.updateBatteryState(config: HomeEnergyStateManagerConfigAdapter(config: configManager, keychainStore: keychainStore))
 
-            WidgetCenter.shared.reloadTimelines(ofKind: "BatteryWidget")
+            WidgetCenter.shared.reloadTimelines(ofKind: "BatteryCircularWidget")
+            WidgetCenter.shared.reloadTimelines(ofKind: "BatteryCornerWidget")
+            WidgetCenter.shared.reloadTimelines(ofKind: "BatteryRectangularWidget")
+            WidgetCenter.shared.reloadTimelines(ofKind: "BatteryStatusWidget")
 
             return .result(value: true)
         } catch {

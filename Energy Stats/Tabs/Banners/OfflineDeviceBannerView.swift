@@ -24,7 +24,6 @@ struct OfflineDeviceBannerView: View {
                 Text("If you’ve recently updated your WiFi settings and need help reconnecting your inverter, click below to watch a step-by-step video tutorial.")
                     .font(.body)
                     .fontWeight(.regular)
-                    .foregroundStyle(.secondary)
 
                 HStack {
                     Button(action: {
@@ -60,9 +59,14 @@ struct OfflineDeviceBannerView: View {
             .padding()
         }
         .background(Color.background)
-        .border(Color.black, width: 2.0)
+        .border(Color.backgroundInverted, width: 2.0)
         .padding()
         .transition(.move(edge: .top).combined(with: .opacity))
         .animation(Animation.easeOut, value: alertManager.bannerAlert == .offline)
     }
+}
+
+#Preview {
+    OfflineDeviceBannerView()
+        .environmentObject(BannerAlertManager())
 }
