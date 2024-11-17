@@ -67,6 +67,8 @@ public struct BatteryTimelineProvider: TimelineProvider {
             return .failed(error: "Your selected inverter has no battery connected")
         } catch _ as ConfigManager.NoDeviceFoundError {
             return .syncRequired()
+        } catch let ex as KeychainError {
+            errorMessage = ex.code?.description ?? "no description"
         } catch {
             errorMessage = error.localizedDescription
         }
@@ -86,8 +88,11 @@ public struct BatteryTimelineProvider: TimelineProvider {
             }
         } catch _ as ConfigManager.NoBattery {
             return .failed(error: "Your selected inverter has no battery connected")
+        } catch let ex as KeychainError {
+            return .failed(error: ex.code?.description ?? "no description")
         } catch {
-            return .syncRequired()
+            print("AWP", error.localizedDescription)
+            return .failed(error: error.localizedDescription)
         }
     }
 }

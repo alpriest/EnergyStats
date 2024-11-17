@@ -44,7 +44,7 @@ class WatchConfigManager: WatchConfigManaging {
 
     var showGridTotalsOnPowerFlow: Bool {
         get {
-            keychainStore.get(key: .showGridTotalsOnPowerFlow)
+            (try? keychainStore.get(key: .showGridTotalsOnPowerFlow)) ?? false
         }
         set {
             try? keychainStore.store(key: .showGridTotalsOnPowerFlow, value: newValue)

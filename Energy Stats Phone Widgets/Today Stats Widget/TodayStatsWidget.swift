@@ -6,6 +6,7 @@
 //
 
 import Energy_Stats_Core
+import SwiftData
 import SwiftUI
 import WidgetKit
 
@@ -13,6 +14,7 @@ struct TodayStatsWidget: Widget {
     private let kind: String = "TodayStatsWidget"
     private let configManager: ConfigManaging
     private let keychainStore: KeychainStoring
+    private var container: ModelContainer
 
     init() {
         let keychainStore = KeychainStore()
@@ -24,11 +26,13 @@ struct TodayStatsWidget: Widget {
         configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
         self.keychainStore = keychainStore
         AppSettingsPublisherFactory.update(from: configManager)
+        container = try! ModelContainer(for: BatteryWidgetState.self, StatsWidgetState.self)
     }
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: StatsTimelineProvider(config: HomeEnergyStateManagerConfigAdapter(config: configManager, keychainStore: keychainStore))) { entry in
             TodayStatsWidgetView(entry: entry, configManager: configManager)
+                .modelContainer(container)
         }
         .configurationDisplayName("Today Stats Widget")
         .description("Shows the stats of your installation for the day.")
@@ -108,7 +112,6 @@ struct TodayStatsWidgetView: View {
                 }
             }
         }
-        .modelContainer(for: StatsWidgetState.self)
     }
 
     var footerHeight: CGFloat {

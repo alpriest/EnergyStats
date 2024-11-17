@@ -28,7 +28,7 @@ struct ConfigureAPIKeyView: View {
                 try? wrapper.store.store(apiKey: apiKey, notifyObservers: true)
             }
         }.onAppear {
-            apiKey = wrapper.store.getToken() ?? ""
+            apiKey = (try? wrapper.store.getToken()) ?? ""
         }.navigationTitle("API Key")
     }
 }

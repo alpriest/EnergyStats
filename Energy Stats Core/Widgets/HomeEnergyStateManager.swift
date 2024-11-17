@@ -10,12 +10,12 @@ import SwiftData
 import WidgetKit
 
 public protocol HomeEnergyStateManagerConfig {
-    var batteryCapacityW: Int { get }
-    var minSOC: Double { get }
-    var showUsableBatteryOnly: Bool { get }
-    var selectedDeviceSN: String? { get }
-    var dataCeiling: DataCeiling { get }
-    var isDemoUser: Bool { get }
+    func batteryCapacityW() throws -> Int
+    func minSOC() throws -> Double
+    func showUsableBatteryOnly() throws -> Bool
+    func selectedDeviceSN() throws -> String?
+    func dataCeiling() throws -> DataCeiling
+    func isDemoUser() throws -> Bool
 }
 
 @available(iOS 17.0, *)
@@ -53,7 +53,7 @@ public extension HomeEnergyStateManager {
     @MainActor
     func updateBatteryState(config: HomeEnergyStateManagerConfig) async throws {
         guard await isBatteryStateStale() else { return }
-        guard let deviceSN = config.selectedDeviceSN else { throw ConfigManager.NoDeviceFoundError() }
+        guard let deviceSN = try config.selectedDeviceSN() else { throw ConfigManager.NoDeviceFoundError() }
 
         let real = try await network.fetchRealData(
             deviceSN: deviceSN,
@@ -69,9 +69,9 @@ public extension HomeEnergyStateManager {
 
         try calculateBatteryState(
             openQueryResponse: real,
-            batteryCapacityW: config.batteryCapacityW,
-            minSOC: config.minSOC,
-            showUsableBatteryOnly: config.showUsableBatteryOnly
+            batteryCapacityW: config.batteryCapacityW(),
+            minSOC: config.minSOC(),
+            showUsableBatteryOnly: config.showUsableBatteryOnly()
         )
     }
 
@@ -129,7 +129,7 @@ extension HomeEnergyStateManager {
     @MainActor
     public func updateTodayStatsState(config: HomeEnergyStateManagerConfig) async throws {
         guard await isTodayStatsStateStale() else { return }
-        guard let deviceSN = config.selectedDeviceSN else { throw ConfigManager.NoDeviceFoundError() }
+        guard let deviceSN = try config.selectedDeviceSN() else { throw ConfigManager.NoDeviceFoundError() }
 
         let hourlyReports = try await network.fetchReport(
             deviceSN: deviceSN,

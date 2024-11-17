@@ -6,6 +6,7 @@
 //
 
 import Energy_Stats_Core
+import SwiftData
 import SwiftUI
 import WidgetKit
 
@@ -13,6 +14,7 @@ struct BatteryWidget: Widget {
     private let kind: String = "BatteryWidget"
     private let configManager: ConfigManaging
     private let keychainStore: KeychainStoring
+    private var container: ModelContainer
 
     init() {
         let keychainStore = KeychainStore()
@@ -24,11 +26,13 @@ struct BatteryWidget: Widget {
         configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
         self.keychainStore = keychainStore
         AppSettingsPublisherFactory.update(from: configManager)
+        container = try! ModelContainer(for: BatteryWidgetState.self, StatsWidgetState.self)
     }
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: BatteryTimelineProvider(config: HomeEnergyStateManagerConfigAdapter(config: configManager, keychainStore: keychainStore))) { entry in
             BatteryWidgetView(entry: entry, configManager: configManager)
+                .modelContainer(container)
         }
         .configurationDisplayName("Battery Status Widget")
         .description("Shows the status of your battery storage")
@@ -105,7 +109,6 @@ struct BatteryWidgetView: View {
                 }
             }
         }
-        .modelContainer(for: BatteryWidgetState.self)
     }
 
     var footerHeight: CGFloat {

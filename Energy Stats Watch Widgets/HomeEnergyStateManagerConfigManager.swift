@@ -18,25 +18,28 @@ class HomeEnergyStateManagerConfigManager: HomeEnergyStateManagerConfig {
     @UserDefaultsStoredString(key: "batteryCapacity", defaultValue: "0")
     private var batteryCapacity: String
 
-    var batteryCapacityW: Int {
+    func batteryCapacityW() -> Int {
         Int(batteryCapacity) ?? 0
     }
 
-    @UserDefaultsStoredDouble(key: "minSOC")
-    var minSOC: Double
-    
-    @UserDefaultsStoredBool(key: "showUsableBatteryOnly", defaultValue: false)
-    var showUsableBatteryOnly: Bool
-    
-    var selectedDeviceSN: String? {
-        keychainStore.get(key: .deviceSN)
+    func minSOC() -> Double {
+        UserDefaultsStoredDouble(key: "minSOC").wrappedValue
     }
 
-    var dataCeiling: DataCeiling {
+
+    func showUsableBatteryOnly() -> Bool {
+        UserDefaultsStoredBool(key: "showUsableBatteryOnly", defaultValue: false).wrappedValue
+    }
+
+    func selectedDeviceSN() -> String? {
+        try? keychainStore.get(key: .deviceSN)
+    }
+
+    func dataCeiling() -> DataCeiling {
         .none
     }
 
-    var isDemoUser: Bool {
+    func isDemoUser() -> Bool {
         false
     }
 }

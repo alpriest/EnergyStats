@@ -36,7 +36,7 @@ class ContentViewModel {
     }
 
     func loadData() async {
-        guard let deviceSN: String = keychainStore.get(key: .deviceSN) else {
+        guard let deviceSN: String = try? keychainStore.get(key: .deviceSN) else {
             loadState = .error(nil, "No Inverter Found\n\nEnsure you are logged in on your iOS app.")
             return
         }

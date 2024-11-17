@@ -16,15 +16,15 @@ public class HomeEnergyStateManagerConfigAdapter: HomeEnergyStateManagerConfig {
         self.keychainStore = keychainStore
     }
 
-    public var batteryCapacityW: Int { Int(keychainStore.get(key: .batteryCapacity) ?? 0.0) }
+    public func batteryCapacityW() throws -> Int { try Int(keychainStore.get(key: .batteryCapacity) ?? 0.0) }
 
-    public var minSOC: Double { keychainStore.get(key: .minSOC) ?? 0.0 }
+    public func minSOC() throws -> Double { try keychainStore.get(key: .minSOC) ?? 0.0 }
 
-    public var showUsableBatteryOnly: Bool { keychainStore.get(key: .showUsableBatteryOnly) }
+    public func showUsableBatteryOnly() throws -> Bool { try keychainStore.get(key: .showUsableBatteryOnly) }
 
-    public var selectedDeviceSN: String? { keychainStore.get(key: .deviceSN) }
+    public func selectedDeviceSN() throws -> String? { try keychainStore.get(key: .deviceSN) }
 
-    public var dataCeiling: DataCeiling { config.dataCeiling }
+    public func dataCeiling() throws -> DataCeiling { config.dataCeiling }
 
-    public var isDemoUser: Bool { config.isDemoUser }
+    public func isDemoUser() throws -> Bool { config.isDemoUser }
 }

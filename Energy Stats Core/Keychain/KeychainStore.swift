@@ -14,7 +14,7 @@ public struct KeychainError: Error {
         self.code = code
     }
 
-    let code: OSStatus?
+    public let code: OSStatus?
 }
 
 public enum KeychainItemKey: String {
@@ -31,15 +31,15 @@ public protocol KeychainStoring {
     func store(apiKey: String?, notifyObservers: Bool) throws
     func logout()
     func updateHasCredentials()
-    func getToken() -> String?
+    func getToken() throws -> String?
     var hasCredentials: CurrentValueSubject<Bool, Never> { get }
     var isDemoUser: Bool { get }
     func store(key: KeychainItemKey, value: Bool) throws
     func store(key: KeychainItemKey, value: String?) throws
     func store(key: KeychainItemKey, value: Double) throws
-    func get(key: KeychainItemKey) -> Bool
-    func get(key: KeychainItemKey) -> String?
-    func get(key: KeychainItemKey) -> Double?
+    func get(key: KeychainItemKey) throws -> Bool
+    func get(key: KeychainItemKey) throws -> String?
+    func get(key: KeychainItemKey) throws -> Double?
 }
 
 public class KeychainStore: KeychainStoring {
@@ -67,8 +67,8 @@ public class KeychainStore: KeychainStoring {
         }
     }
 
-    public func getToken() -> String? {
-        get(tag: "token")
+    public func getToken() throws -> String? {
+        try get(tag: "token")
     }
 
     public func logout() {
@@ -77,31 +77,37 @@ public class KeychainStore: KeychainStoring {
     }
 
     public func updateHasCredentials() {
-        hasCredentials.value = getToken() != nil
+        do {
+            hasCredentials.value = try getToken() != nil
+        } catch { }
     }
 
     public var isDemoUser: Bool {
-        getToken() == "demo"
+        do {
+            return try getToken() == "demo"
+        } catch {
+            return false
+        }
     }
 
-    public func get(key: KeychainItemKey) -> String? {
-        get(tag: key.rawValue)
+    public func get(key: KeychainItemKey) throws -> String? {
+        try get(tag: key.rawValue)
     }
 
     public func store(key: KeychainItemKey, value: String?) throws {
         try set(tag: key.rawValue, value: value)
     }
 
-    public func get(key: KeychainItemKey) -> Bool {
-        get(tag: key.rawValue).boolValue
+    public func get(key: KeychainItemKey) throws -> Bool {
+        try get(tag: key.rawValue).boolValue
     }
 
     public func store(key: KeychainItemKey, value: Bool) throws {
         try set(tag: key.rawValue, value: value.stringValue)
     }
 
-    public func get(key: KeychainItemKey) -> Double? {
-        guard let result = get(tag: key.rawValue) else { return nil }
+    public func get(key: KeychainItemKey) throws -> Double? {
+        guard let result = try get(tag: key.rawValue) else { return nil }
         return Double(result)
     }
 
@@ -111,11 +117,11 @@ public class KeychainStore: KeychainStoring {
 }
 
 private extension KeychainStore {
-    func get(tag: String) -> String? {
+    func get(tag: String) throws -> String? {
         var result: AnyObject?
         let status = SecItemCopyMatching(makeQuery(tag: tag), &result)
         guard status == 0 else {
-            return nil
+            throw KeychainError(status)
         }
 
         guard let dict = result as? NSDictionary else { return nil }
@@ -151,7 +157,8 @@ private extension KeychainStore {
                 kSecAttrApplicationTag: tag,
                 kSecValueData: data,
                 kSecClass: kSecClassKey,
-                kSecAttrSynchronizable: kCFBooleanTrue!
+                kSecAttrSynchronizable: kCFBooleanTrue!,
+                kSecAttrAccessible: kSecAttrAccessibleAfterFirstUnlock
             ] as [CFString: Any] as CFDictionary
 
             let result = SecItemAdd(keychainItemQuery, nil)

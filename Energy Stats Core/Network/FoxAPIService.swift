@@ -9,7 +9,7 @@ import Foundation
 
 class FoxAPIService: FoxAPIServicing {
     private var token: String? {
-        credentials.getToken()
+        try? credentials.getToken()
     }
 
     private let credentials: KeychainStoring

@@ -5,8 +5,9 @@
 //  Created by Alistair Priest on 24/09/2023.
 //
 
-import WidgetKit
+import Energy_Stats_Core
 import SwiftUI
+import WidgetKit
 
 @main
 struct Energy_Stats_WidgetsBundle: WidgetBundle {
