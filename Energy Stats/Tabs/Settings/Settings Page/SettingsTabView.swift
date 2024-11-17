@@ -36,7 +36,7 @@ struct SettingsTabView: View {
                     NavigationLink {
                         PowerStationSettingsView(station: powerStation, configManager: configManager)
                     } label: {
-                        Text("Power station")
+                        Text("Power Station")
                     }
                 }
 
@@ -84,7 +84,7 @@ struct SettingsTabView: View {
 
                 SettingsFooterView(onLogout: viewModel.logout, appVersion: viewModel.appVersion)
             }
-            .navigationTitle("Settings")
+            .navigationTitle(.settings)
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }

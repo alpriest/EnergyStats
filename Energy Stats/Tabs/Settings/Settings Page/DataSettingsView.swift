@@ -107,7 +107,7 @@ struct DataSettingsView: View {
                 Text("FoxESS Cloud data is updated every 5 minutes. 'Auto' attempts to synchronise data fetches just after the data is uploaded from your inverter to minimise server load.")
             }
         }
-        .navigationTitle("Data")
+        .navigationTitle(.data)
     }
 }
 

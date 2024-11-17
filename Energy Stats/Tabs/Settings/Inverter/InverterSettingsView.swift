@@ -111,7 +111,7 @@ struct InverterSettingsView: View {
                 .alertCopy(text(currentDevice))
             }
         }
-        .navigationTitle("Inverter")
+        .navigationTitle(.inverter)
     }
 
     func text(_ currentDevice: Device) -> String {

@@ -125,7 +125,7 @@ struct SolarBandingSettingsView: View {
                                  breakpoint3: breakpoint3)
             }
         }
-        .navigationTitle("Sun display variation thresholds")
+        .navigationTitle(.sunDisplayVariationThresholds)
         .navigationBarTitleDisplayMode(.inline)
     }
 

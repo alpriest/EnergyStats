@@ -66,7 +66,7 @@ struct ScheduleTemplateListView: View {
             await viewModel.createTemplate(name: $0)
         }
         .onAppear { viewModel.load() }
-        .navigationTitle("Templates")
+        .navigationTitle(.templates)
     }
 }
 

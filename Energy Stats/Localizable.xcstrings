@@ -5794,30 +5794,31 @@
         }
       }
     },
-    "Edit schedule" : {
+    "Edit Schedule" : {
+      "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zeitplan bearbeiten"
+            "value" : "Zeitplan Bearbeiten"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Editar horario"
+            "value" : "Editar Horario"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Modifica programma"
+            "value" : "Modifica Programma"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Edytuj harmonogram"
+            "value" : "Edytuj Harmonogram"
           }
         }
       }
@@ -10191,7 +10192,7 @@
         }
       }
     },
-    "Power station" : {
+    "Power Station" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -15099,7 +15100,8 @@
         }
       }
     },
-    "Work schedule" : {
+    "Work Schedule" : {
+      "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {

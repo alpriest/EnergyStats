@@ -112,7 +112,7 @@ struct DataLoggersView: View {
         }.task {
             viewModel.load()
         }
-        .navigationTitle("Datalogger")
+        .navigationTitle(.dataLogger)
     }
 }
 

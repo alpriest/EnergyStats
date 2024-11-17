@@ -29,7 +29,7 @@ struct ConfigureAPIKeyView: View {
             }
         }.onAppear {
             apiKey = (try? wrapper.store.getToken()) ?? ""
-        }.navigationTitle("API Key")
+        }.navigationTitle(.apiKey)
     }
 }
 

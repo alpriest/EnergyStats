@@ -30,7 +30,7 @@ struct PowerStationSettingsView: View {
                 }
             }
         }
-        .navigationTitle("Power station")
+        .navigationTitle(.powerStation)
     }
 }
 

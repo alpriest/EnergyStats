@@ -130,6 +130,7 @@ struct DebugDataView: View {
             })
         }
         .navigationTitle("debug.navigation_title")
+        .analyticsScreen2(.debug)
         .alert(alertContent: $alert)
     }
 }

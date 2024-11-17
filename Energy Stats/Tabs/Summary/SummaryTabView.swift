@@ -66,7 +66,7 @@ struct SummaryTabView: View {
                 }
                 .padding(.horizontal)
             }
-            .navigationTitle("Summary")
+            .navigationTitle(.summary)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: { presentSheet.toggle() },

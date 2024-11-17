@@ -236,6 +236,7 @@
 		41B6910B28E0CD370058126E /* battery-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B6910A28E0CD370058126E /* battery-success.json */; };
 		41B6910D28E0CD8F0058126E /* real-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B6910C28E0CD8F0058126E /* real-success.json */; };
 		41B6910F28E0CDFC0058126E /* devicelist-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B6910E28E0CDFC0058126E /* devicelist-success.json */; };
+		41BB29C62CEA89F600F8FDE4 /* View+Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BB29C52CEA89F300F8FDE4 /* View+Analytics.swift */; };
 		41BCC1AB2B245C280062084A /* FoxAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC1AA2B245C280062084A /* FoxAPIService.swift */; };
 		41C0923B2B20FCB0001D1E22 /* SchedulePhaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0923A2B20FCB0001D1E22 /* SchedulePhaseHelper.swift */; };
 		41C0923D2B210255001D1E22 /* ScheduleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0923C2B210255001D1E22 /* ScheduleDetailView.swift */; };
@@ -718,6 +719,7 @@
 		41B6910A28E0CD370058126E /* battery-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "battery-success.json"; sourceTree = "<group>"; };
 		41B6910C28E0CD8F0058126E /* real-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "real-success.json"; sourceTree = "<group>"; };
 		41B6910E28E0CDFC0058126E /* devicelist-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "devicelist-success.json"; sourceTree = "<group>"; };
+		41BB29C52CEA89F300F8FDE4 /* View+Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Analytics.swift"; sourceTree = "<group>"; };
 		41BCC1AA2B245C280062084A /* FoxAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoxAPIService.swift; sourceTree = "<group>"; };
 		41C0923A2B20FCB0001D1E22 /* SchedulePhaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePhaseHelper.swift; sourceTree = "<group>"; };
 		41C0923C2B210255001D1E22 /* ScheduleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailView.swift; sourceTree = "<group>"; };
@@ -928,6 +930,7 @@
 		4106A92E28D05EC10009DA28 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				41BB29C52CEA89F300F8FDE4 /* View+Analytics.swift */,
 				416AE4372A7D956E003D0122 /* AlertCopy.swift */,
 				4160098C2A8D1A690096CCD9 /* BottomButtonsView.swift */,
 				41ED2EEF2B349EF7001CF277 /* CustomDatePicker.swift */,
@@ -1823,7 +1826,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1530;
-				LastUpgradeCheck = 1600;
+				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					412A266B2AC03B2200F61456 = {
 						CreatedOnToolsVersion = 15.0;
@@ -2068,6 +2071,7 @@
 				414BF82829B4918300E2EB51 /* SettingsTabViewModel.swift in Sources */,
 				41E12E8C2CC66893001F3839 /* CheckCurrentGridLoadIntent.swift in Sources */,
 				41CD1F322A1414C1006B0C00 /* StatsGraphVariableToggles.swift in Sources */,
+				41BB29C62CEA89F600F8FDE4 /* View+Analytics.swift in Sources */,
 				4160098D2A8D1A690096CCD9 /* BottomButtonsView.swift in Sources */,
 				4110291D2A72AFC2004018BB /* BatterySOCSettingsViewModel.swift in Sources */,
 				419DFA862A12930E0067313A /* StatsDatePickerView.swift in Sources */,

@@ -42,7 +42,7 @@ struct ScheduleSummaryView: View {
         .onAppear {
             Task { await self.viewModel.load() }
         }
-        .navigationTitle("Work schedule")
+        .navigationTitle(.workSchedule)
         .navigationBarTitleDisplayMode(.inline)
     }
 

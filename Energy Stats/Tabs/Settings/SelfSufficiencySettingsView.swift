@@ -68,7 +68,7 @@ struct SelfSufficiencySettingsView: View {
                 }
             }
         }
-        .navigationTitle("Self sufficiency estimates")
+        .navigationTitle(.selfSufficiencyEstimates)
         .navigationBarTitleDisplayMode(.inline)
     }
 }

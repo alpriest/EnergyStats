@@ -84,6 +84,7 @@ struct ParametersGraphTabView: View {
             self.appSettings = $0
         }
         .trackVisibility(on: viewModel)
+        .navigationTitle(.parametersTab)
     }
 
     private func graphs() -> some View {

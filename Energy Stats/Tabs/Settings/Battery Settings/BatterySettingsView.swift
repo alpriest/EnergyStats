@@ -123,7 +123,7 @@ struct BatterySettingsView: View {
                 Text(batteryDisplayModeText)
             }
         }
-        .navigationTitle("Battery")
+        .navigationTitle(.battery)
     }
 
     private var batteryDisplayModeText: String {

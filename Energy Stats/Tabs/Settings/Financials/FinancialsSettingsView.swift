@@ -74,7 +74,7 @@ struct FinancialsSettingsView: View {
                 }
             }
         }
-        .navigationTitle("Financial Model")
+        .navigationTitle(.financialModel)
     }
 
     @ViewBuilder

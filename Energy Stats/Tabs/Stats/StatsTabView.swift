@@ -116,6 +116,7 @@ struct StatsTabView: View {
                 }
             }
             .padding(.horizontal)
+            .navigationTitle(.statsTab)
         }
         .task {
             await viewModel.load()
