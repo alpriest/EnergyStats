@@ -55,11 +55,11 @@ extension View {
     func navigationTitle(_ type: ScreenName) -> some View {
         modifier(AnalyticsNavigationTitleViewModifier(
             navigationTitle: type.localized,
-            analyticsTitle: type.localized
+            analyticsTitle: type.rawValue
         ))
     }
 
-    func analyticsScreen2(_ type: ScreenName) -> some View {
+    func analyticsScreen(_ type: ScreenName) -> some View {
         analyticsScreen(name: type.rawValue)
     }
 }
