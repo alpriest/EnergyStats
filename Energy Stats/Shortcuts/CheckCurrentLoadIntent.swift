@@ -25,5 +25,3 @@ struct CheckCurrentHouseLoadIntent: AppIntent {
         return .result(value: current, dialog: IntentDialog(stringLiteral: current.w()))
     }
 }
-
-

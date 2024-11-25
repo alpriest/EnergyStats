@@ -2315,6 +2315,12 @@
         }
       }
     },
+    "Activate inverter mode schedule" : {
+
+    },
+    "Activates the named inverter mode schedule" : {
+
+    },
     "Activating" : {
       "localizations" : {
         "de" : {
@@ -6897,31 +6903,31 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fox Cloud-Fehler 44098. Der Zeitplan konnte nicht gespeichert werden. Dies kann daran liegen, dass Fox MaxSOC auf OpenAPI nicht unterstützt."
+            "value" : "Fox Cloud-Fehler 44098. Zeitplan konnte nicht gespeichert werden. Dies könnte daran liegen, dass Ihre Wechselrichter-Firmware einen MaxSOC-Wert erwartet, aber Fox derzeit MaxSOC in ihrem OpenAPI-System, das von Energy Stats verwendet wird, noch nicht unterstützt. Sie müssen vorerst FoxCloud 2.0 verwenden, um Ihre Zeitpläne zu verwalten."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fox Cloud error 44098. Could not save schedule. This may be because Fox do not support MaxSOC on OpenAPI."
+            "value" : "Fox Cloud error 44098. Could not save schedule. This may be because your inverter firmware expects a MaxSOC value, but Fox do not yet support MaxSOC on their OpenAPI system which is used by Energy Stats. You will need to use FoxCloud 2.0 to manage your schedules for now."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Error de Fox Cloud 44098. No se pudo guardar el horario. Esto puede deberse a que Fox no admite MaxSOC en OpenAPI."
+            "value" : "Error de Fox Cloud 44098. No se pudo guardar el horario. Esto puede deberse a que el firmware de su inversor espera un valor MaxSOC, pero Fox aún no admite MaxSOC en su sistema OpenAPI, que es utilizado por Energy Stats. Deberá usar FoxCloud 2.0 para gestionar sus horarios por ahora."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Errore Fox Cloud 44098. Impossibile salvare il programma. Questo potrebbe essere dovuto al fatto che Fox non supporta MaxSOC su OpenAPI."
+            "value" : "Errore Fox Cloud 44098. Impossibile salvare il programma. Ciò potrebbe essere dovuto al fatto che il firmware del tuo inverter si aspetta un valore MaxSOC, ma Fox non supporta ancora MaxSOC nel loro sistema OpenAPI utilizzato da Energy Stats. Dovrai utilizzare FoxCloud 2.0 per gestire i tuoi programmi per il momento."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Błąd Fox Cloud 44098. Nie można zapisać harmonogramu. Może to być spowodowane brakiem obsługi MaxSOC przez Fox na OpenAPI."
+            "value" : "Błąd Fox Cloud 44098. Nie udało się zapisać harmonogramu. Może to być spowodowane tym, że oprogramowanie inwertera wymaga wartości MaxSOC, ale Fox jeszcze nie obsługuje MaxSOC w swoim systemie OpenAPI używanym przez Energy Stats. Na razie musisz użyć FoxCloud 2.0 do zarządzania swoimi harmonogramami."
           }
         }
       }
@@ -13926,6 +13932,9 @@
           }
         }
       }
+    },
+    "Template name" : {
+
     },
     "Templates" : {
       "localizations" : {

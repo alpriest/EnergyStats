@@ -59,7 +59,6 @@ struct LoadingView: View {
     }
 }
 
-
 extension View {
     func loadable(_ state: LoadState, overlay: Bool = false, retry: @escaping () -> Void) -> some View {
         modifier(LoadStateView(loadState: state, retry: retry, overlay: overlay))

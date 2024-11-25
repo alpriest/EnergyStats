@@ -9,6 +9,13 @@ import Energy_Stats_Core
 import SwiftUI
 import WidgetKit
 
+public enum WidgetKinds: String, CaseIterable {
+    case circularWidget = "BatteryCircularWidget"
+    case cornerWidget = "BatteryCornerWidget"
+    case rectangularWidget = "BatteryRectangularWidget"
+    case statusWidget = "BatteryStatusWidget"
+}
+
 struct BatteryGaugeView: View {
     let circularGradient = Gradient(colors: [.red, .orange, .yellow, .green])
     let value: Int
@@ -26,7 +33,7 @@ struct BatteryGaugeView: View {
 }
 
 struct CircularBatteryStatusWidget: Widget {
-    let kind: String = "BatteryCircularWidget"
+    let kind: String = WidgetKinds.circularWidget.rawValue
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: BatteryTimelineProvider(config: HomeEnergyStateManagerConfigManager())) { entry in
@@ -54,7 +61,7 @@ struct CircularBatteryStatusWidget: Widget {
 }
 
 struct CornerBatteryStatusWidget: Widget {
-    let kind: String = "BatteryCornerWidget"
+    let kind: String = WidgetKinds.cornerWidget.rawValue
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: BatteryTimelineProvider(config: HomeEnergyStateManagerConfigManager())) { entry in
@@ -83,7 +90,7 @@ struct CornerBatteryStatusWidget: Widget {
 }
 
 struct RectangularBatteryStatusWidget: Widget {
-    let kind: String = "BatteryRectangularWidget"
+    let kind: String = WidgetKinds.rectangularWidget.rawValue
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: BatteryTimelineProvider(config: HomeEnergyStateManagerConfigManager())) { entry in
@@ -123,7 +130,7 @@ struct RectangularBatteryStatusWidget: Widget {
 }
 
 struct BatteryStatusWidget: Widget {
-    let kind: String = "BatteryStatusWidget"
+    let kind: String = WidgetKinds.statusWidget.rawValue
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: BatteryTimelineProvider(config: HomeEnergyStateManagerConfigManager())) { entry in

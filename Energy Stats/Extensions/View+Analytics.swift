@@ -22,7 +22,6 @@ enum ScreenName: String {
     case parameters = "Parameters"
     case statsTab = "Stats Tab"
     case parametersTab = "Parameters Tab"
-    case summaryTab = "Summary Tab"
     case inverter = "Inverter"
     case summary = "Summary"
     case selfSufficiencyEstimates = "Self sufficiency estimates"

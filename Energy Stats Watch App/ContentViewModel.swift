@@ -101,6 +101,7 @@ class ContentViewModel {
                 minSOC: config.minSOC,
                 showUsableBatteryOnly: config.showUsableBatteryOnly
             )
+
             WidgetCenter.shared.reloadAllTimelines()
         } catch {
             loadState = .error(error, "Could not load")
