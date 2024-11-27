@@ -19,7 +19,7 @@ struct ActiveScheduleIntent: AppIntent {
 
     func perform() async throws -> some ProvidesDialog & ReturnsValue<Bool> {
         let services = try ServiceFactory.makeAppIntentInitialisedServices()
-        if let schedule = services.configManager.scheduleTemplates.first(where: { $0.name == template }) {
+        if let schedule = services.configManager.scheduleTemplates.first(where: { $0.name.lowercased() == template.lowercased() }) {
             do {
                 try await services.network.saveSchedule(deviceSN: services.device.deviceSN, schedule: schedule.asSchedule())
 

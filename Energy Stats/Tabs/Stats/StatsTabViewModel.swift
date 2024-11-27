@@ -172,7 +172,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
         } catch {
             if Task.isCancelled { return }
             
-            await setState(.error(error, "Could not load, check your connection"))
+            await setState(.error(error, "Could not load from Fox OpenAPI"))
         }
     }
 

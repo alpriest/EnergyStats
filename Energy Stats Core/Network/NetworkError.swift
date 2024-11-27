@@ -34,12 +34,7 @@ public enum NetworkError: LocalizedError, CustomStringConvertible, Equatable {
         case .badCredentials:
             builder.append(String(localized: "Bad credentials"))
         case .foxServerError(let code, let message):
-            switch code {
-            case 44098:
-                builder.append(String("Code: \(code) \(message)"))
-            default:
-                builder.append(String("Code: \(code) \(message)"))
-            }
+            builder.append(String("Fox OpenAPI servers returned error code: \(code) \(message)"))
         case .invalidToken:
             builder.append(String(localized: "Invalid token. Please logout and login again."))
         case .tryLater:
