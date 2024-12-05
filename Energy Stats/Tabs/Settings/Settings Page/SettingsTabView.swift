@@ -82,7 +82,7 @@ struct SettingsTabView: View {
                     NavigationLink("Edit API Key") { ConfigureAPIKeyView() }
                 }
 
-                SettingsFooterView(onLogout: viewModel.logout, appVersion: viewModel.appVersion)
+                SettingsFooterView(onLogout: { Task { await viewModel.logout() } }, appVersion: viewModel.appVersion)
             }
             .navigationTitle(.settings)
         }

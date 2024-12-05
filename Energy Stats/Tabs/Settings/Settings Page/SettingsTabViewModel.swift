@@ -233,8 +233,8 @@ class SettingsTabViewModel: ObservableObject {
     @Published var showRecalculationAlert = false
 
     @MainActor
-    func logout() {
-        userManager.logout()
+    func logout() async {
+        await userManager.logout()
     }
 
     func saveBatteryCapacity() {

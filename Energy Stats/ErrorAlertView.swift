@@ -128,7 +128,7 @@ struct ErrorAlertView: View {
             }
 
             if options.contains(.logoutButton) {
-                Button(action: { userManager.logout() }) {
+                Button(action: { Task { await userManager.logout() } }) {
                     Text("Logout")
                         .background(rectReader($buttonWidth))
                         .frame(minWidth: buttonWidth)

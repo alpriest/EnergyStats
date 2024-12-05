@@ -57,7 +57,7 @@ class UserManager: ObservableObject, HasLoadState {
             try? await configManager.fetchPowerStationDetail()
             store.updateHasCredentials()
         } catch let error as NetworkError {
-            logout()
+            await logout()
 
             switch error {
             case .badCredentials:
@@ -71,7 +71,7 @@ class UserManager: ObservableObject, HasLoadState {
     }
 
     @MainActor
-    func logout(clearDisplaySettings: Bool = false, clearDeviceSettings: Bool = true) {
+    func logout(clearDisplaySettings: Bool = false, clearDeviceSettings: Bool = true) async {
         if configManager.isDemoUser {
             configManager.logout(clearDisplaySettings: true, clearDeviceSettings: true)
         } else {
@@ -79,9 +79,7 @@ class UserManager: ObservableObject, HasLoadState {
         }
         store.logout()
         networkCache.logout()
-        Task {
-            await setState(.inactive)
-        }
+        await setState(.inactive)
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             Task { @MainActor in

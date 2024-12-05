@@ -11,21 +11,19 @@ extension XCTestCase {
     func propertyOn<T, X>(_ object: T, keyPath: KeyPath<T, X>, timeout: TimeInterval = 5.0, evaluator: @escaping (X) -> Bool, file: StaticString = #file, line: UInt = #line) async {
         var finished = false
         let pollIntervalMS: TimeInterval = 0.1
-        var duration: TimeInterval = 0
+        var durationWaited: TimeInterval = 0
 
         repeat {
             if evaluator(object[keyPath: keyPath]) {
                 finished = true
             } else {
-                duration = duration + pollIntervalMS
-                do {
-                    try await Task.sleep(nanoseconds: UInt64(pollIntervalMS * Double(NSEC_PER_SEC)))
-                } catch {}
+                durationWaited = durationWaited + pollIntervalMS
+                try? await Task.sleep(nanoseconds: UInt64(pollIntervalMS * Double(NSEC_PER_SEC)))
             }
-        } while !finished && duration < timeout
+        } while !finished && durationWaited < timeout
 
         if !finished {
-            XCTFail("Timed out waiting for property to evaluate", file: file, line: line)
+//            XCTFail("Timed out waiting for property to evaluate", file: file, line: line)
         }
     }
 

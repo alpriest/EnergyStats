@@ -44,17 +44,17 @@ final class UserManagerTests: XCTestCase {
     }
 
     @MainActor
-    func test_logout_clears_store() {
-        sut.logout()
+    func test_logout_clears_store() async {
+        await sut.logout()
 
         XCTAssertTrue(keychainStore.logoutCalled)
     }
 
     @MainActor
-    func test_logout_clears_config() {
+    func test_logout_clears_config() async {
         config.selectedDeviceSN = "device"
 
-        sut.logout()
+        await sut.logout()
 
         XCTAssertNil(config.selectedDeviceSN)
     }
@@ -78,7 +78,7 @@ final class UserManagerTests: XCTestCase {
 
         await sut.login(apiKey: "bob")
 
-        await propertyOn(received, keyPath: \.values) { $0 == [.inactive, .active("Loading..."), .inactive, .error(nil, "Could not login. Check your internet connection")] }
+        await propertyOn(received, keyPath: \.values) { $0 == [.inactive, .active("Loading..."), .inactive, .error(NetworkError.tryLater, "Could not login. Check your internet connection")] }
         XCTAssertTrue(keychainStore.logoutCalled)
     }
 
@@ -111,9 +111,12 @@ class ValueReceiver<T> {
 
     init(_ publisher: Published<T>.Publisher) {
         cancellable = publisher
+            .print("AWP")
             .sink(
                 receiveCompletion: { _ in },
-                receiveValue: { self.values.append($0) }
+                receiveValue: {
+                    self.values.append($0)
+                }
             )
     }
 }

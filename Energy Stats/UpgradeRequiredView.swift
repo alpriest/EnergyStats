@@ -49,7 +49,7 @@ struct UpgradeRequiredView: View {
                     .frame(maxWidth: .infinity)
 
                 Button("Continue") {
-                    userManager.logout(clearDisplaySettings: true, clearDeviceSettings: false)
+                    Task { await userManager.logout(clearDisplaySettings: true, clearDeviceSettings: false) }
                 }
                 .buttonStyle(.borderedProminent)
                 .padding()
