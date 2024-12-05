@@ -18,32 +18,6 @@ struct InverterPath: Shape {
     }
 }
 
-struct InverterTemperatureView: View {
-    let value: Double?
-    let name: String
-
-    var body: some View {
-        if let formattedValue {
-            VStack(alignment: .center) {
-                Text(formattedValue + "℃")
-                    .font(.caption)
-                Text(name.uppercased())
-                    .font(.system(size: 8.0))
-            }
-            .accessibilityElement(children: .ignore)
-            .accessibilityLabel(Text("accessibility.inverter") + Text(" \(name) ") + Text("accessibility.temperature") + Text(" \(formattedValue) ℃"))
-        }
-    }
-
-    var formattedValue: String? {
-        guard let value else { return "" }
-
-        let formatter = NumberFormatter()
-        formatter.maximumFractionDigits = 1
-        return formatter.string(from: NSNumber(value: value)) ?? ""
-    }
-}
-
 struct InverterView: View {
     @ObservedObject var viewModel: InverterViewModel
     @Environment(\.verticalSizeClass) private var verticalSizeClass
@@ -74,8 +48,8 @@ struct InverterView: View {
 
                     if appSettings.showInverterTemperature, let temperatures = viewModel.temperatures {
                         HStack {
-                            InverterTemperatureView(value: temperatures.ambient, name: "internal")
-                            InverterTemperatureView(value: temperatures.inverter, name: "external")
+                            TemperatureView(value: temperatures.ambient, name: "internal", accessibilityLabel: "accessibility.inverter", showName: true) // TODO: Verify
+                            TemperatureView(value: temperatures.inverter, name: "external", accessibilityLabel: "accessibility.inverter", showName: true) // TODO: Verify
                         }
                         .background(Color.background)
                     }
@@ -97,8 +71,8 @@ struct InverterView: View {
 
             if appSettings.showInverterTemperature, let temperatures = viewModel.temperatures {
                 HStack {
-                    InverterTemperatureView(value: temperatures.ambient, name: "internal")
-                    InverterTemperatureView(value: temperatures.inverter, name: "external")
+                    TemperatureView(value: temperatures.ambient, name: "internal", accessibilityLabel: "accessibility.inverter", showName: true) // TODO: Verify
+                    TemperatureView(value: temperatures.inverter, name: "external", accessibilityLabel: "accessibility.inverter", showName: true) // TODO: Verify
                 }
                 .background(Color.background)
             }

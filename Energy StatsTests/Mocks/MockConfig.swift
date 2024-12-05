@@ -40,6 +40,7 @@ class MockConfig: Config {
     var isDemoUser: Bool = false
     var showColouredLines: Bool = true
     var showBatteryTemperature: Bool = true
+    var showBatteryLowestCellTemperature: Bool = false
     var refreshFrequency: Int = 0
     var decimalPlaces: Int = 2
     var showSunnyBackground: Bool = true
@@ -64,4 +65,6 @@ class MockConfig: Config {
     var earningsModel: EarningsModel = .exported
     var summaryDateRange: SummaryDateRange = .automatic
     var colorScheme: ForcedColorScheme = .auto
+    var lastSolcastRefresh: Date? = nil
+    var batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode = BatteryTemperatureDisplayMode.automatic
 }

@@ -328,6 +328,7 @@ public class MockConfig: Config {
     public var hasRunBefore: Bool = true
     public var showColouredLines: Bool = true
     public var showBatteryTemperature: Bool = true
+    public var showBatteryLowestCellTemperature: Bool = false
     public var refreshFrequency: Int = 0
     public var decimalPlaces: Int = 3
     public var showSunnyBackground: Bool = true

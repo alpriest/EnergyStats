@@ -25,12 +25,19 @@ struct BatteryPowerFooterView: View {
                 viewModel.showBatteryPercentageRemainingToggle()
             }
 
-            if appSettings.showBatteryTemperature {
-                HStack {
-                    ForEach(viewModel.temperatures, id: \.self) { temperature in
-                        (Text(temperature, format: .number) + Text("°C"))
-                            .accessibilityElement(children: .ignore)
-                            .accessibilityLabel(String(format: String(accessibilityKey: .batteryTemperature), temperature.roundedToString(decimalPlaces: 2)))
+            HStack {
+                if appSettings.showBatteryTemperature {
+                    ForEach(viewModel.temperatures, id: \.id) { temperature in
+                        TemperatureView(
+                            value: temperature.value,
+                            name: temperature.name,
+                            accessibilityLabel: String(accessibilityKey: .batteryTemperature),
+                            showName: viewModel.temperatures.count > 1
+                        )
+
+//                        (Text(temperature, format: .number) + Text("°C"))
+//                            .accessibilityElement(children: .ignore)
+//                            .accessibilityLabel(String(format: String(accessibilityKey: .batteryTemperature), temperature.roundedToString(decimalPlaces: 2)))
                     }
                 }
             }

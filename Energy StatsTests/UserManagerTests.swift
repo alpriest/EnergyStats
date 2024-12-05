@@ -29,7 +29,7 @@ final class UserManagerTests: XCTestCase {
     @MainActor
     func test_isLoggedIn_SetsOnInitialisation() {
         let expectation = self.expectation(description: #function)
-        keychainStore.updateHasCredentials(value: true)
+        keychainStore.updateHasCredentials()
 
         sut.$isLoggedIn
             .receive(subscriber: Subscribers.Sink(receiveCompletion: { _ in

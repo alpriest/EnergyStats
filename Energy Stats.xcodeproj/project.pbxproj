@@ -244,6 +244,7 @@
 		41C19DCD2A4DDE46009883AB /* SelfSufficiencyEstimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C19DCC2A4DDE46009883AB /* SelfSufficiencyEstimateView.swift */; };
 		41C19DCF2A4E09F9009883AB /* SelfSufficiencySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C19DCE2A4E09F9009883AB /* SelfSufficiencySettingsView.swift */; };
 		41C249A52A77FC7400D8E9E7 /* FoxESSCloudStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C249A42A77FC7400D8E9E7 /* FoxESSCloudStatusView.swift */; };
+		41C55ABF2D0242750035A002 /* TemperatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C55ABE2D0242750035A002 /* TemperatureView.swift */; };
 		41C6AF662A360CF600C88F2B /* CSVTextFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C6AF652A360CF600C88F2B /* CSVTextFile.swift */; };
 		41C849692A8BBC3800431410 /* Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C849682A8BBC3800431410 /* Shortcuts.swift */; };
 		41C8496B2A8BBF1500431410 /* InverterIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C8496A2A8BBF1500431410 /* InverterIconView.swift */; };
@@ -729,6 +730,7 @@
 		41C19DCC2A4DDE46009883AB /* SelfSufficiencyEstimateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSufficiencyEstimateView.swift; sourceTree = "<group>"; };
 		41C19DCE2A4E09F9009883AB /* SelfSufficiencySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSufficiencySettingsView.swift; sourceTree = "<group>"; };
 		41C249A42A77FC7400D8E9E7 /* FoxESSCloudStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoxESSCloudStatusView.swift; sourceTree = "<group>"; };
+		41C55ABE2D0242750035A002 /* TemperatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureView.swift; sourceTree = "<group>"; };
 		41C6AF652A360CF600C88F2B /* CSVTextFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVTextFile.swift; sourceTree = "<group>"; };
 		41C849682A8BBC3800431410 /* Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shortcuts.swift; sourceTree = "<group>"; };
 		41C8496A2A8BBF1500431410 /* InverterIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterIconView.swift; sourceTree = "<group>"; };
@@ -1075,6 +1077,7 @@
 			children = (
 				4107446628CA22B3006D5D7D /* InverterViewModel.swift */,
 				4134ACC32A88A1A800CB4BA8 /* InverterView.swift */,
+				41C55ABE2D0242750035A002 /* TemperatureView.swift */,
 				41C8496A2A8BBF1500431410 /* InverterIconView.swift */,
 			);
 			path = "Inverter View";
@@ -2018,6 +2021,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				41ED2EF02B349EF7001CF277 /* CustomDatePicker.swift in Sources */,
+				41C55ABF2D0242750035A002 /* TemperatureView.swift in Sources */,
 				4107446C28CA57A9006D5D7D /* PowerFlowTabView.swift in Sources */,
 				4190922E2B1E4B250017CB65 /* SchedulePhaseListItemView.swift in Sources */,
 				418C6E972AFAC7E4000DE35F /* SummaryTabViewModel.swift in Sources */,

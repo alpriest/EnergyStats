@@ -546,6 +546,7 @@
       }
     },
     "°C" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -12737,6 +12738,9 @@
         }
       }
     },
+    "Show battery (BMS) temperature" : {
+
+    },
     "Show battery full/empty estimate" : {
       "localizations" : {
         "de" : {
@@ -12794,6 +12798,7 @@
       }
     },
     "Show battery temperature" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -12990,7 +12995,11 @@
         }
       }
     },
+    "Show inverter temperature" : {
+
+    },
     "Show inverter temperatures" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

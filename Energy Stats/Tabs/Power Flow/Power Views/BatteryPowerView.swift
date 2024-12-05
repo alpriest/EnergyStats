@@ -12,7 +12,7 @@ import SwiftUI
 class BatteryPowerViewModel {
     private let actualBatteryStateOfCharge: Double
     private(set) var batteryChargekWh: Double
-    private(set) var temperatures: [Double]
+    private(set) var temperatures: [TemperatureData]
     private var configManager: ConfigManaging
     let residual: Int
     let error: Error?
@@ -28,8 +28,8 @@ class BatteryPowerViewModel {
         self.minSOC = minSOC
     }
 
-    private static func makeTemperatures(batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode, temperatures: BatteryTemperatures) -> [Double] {
-        var result: [Double]
+    private static func makeTemperatures(batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode, temperatures: BatteryTemperatures) -> [TemperatureData] {
+        var result: [TemperatureData]
 
         switch batteryTemperatureDisplayMode {
         case .automatic:
@@ -142,7 +142,7 @@ extension BatteryPowerViewModel {
             configManager: ConfigManager.preview(config: config),
             batteryStateOfCharge: 0.99,
             batteryChargekWH: -0.01,
-            temperatures: BatteryTemperatures(batTemperature: 23.0, batTemperature_1: nil, batTemperature_2: nil),
+            temperatures: BatteryTemperatures(batTemperature: TemperatureData(value: 23.0, name: "BMS"), batTemperature_1: nil, batTemperature_2: nil),
             batteryResidual: 5940,
             error: error,
             minSOC: 0.2

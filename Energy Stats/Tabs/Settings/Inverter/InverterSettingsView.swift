@@ -67,7 +67,7 @@ struct InverterSettingsView: View {
 
             Section {
                 Toggle(isOn: $showInverterTemperature) {
-                    Text("Show inverter temperatures")
+                    Text("Show inverter temperature")
                 }
 
                 Toggle(isOn: $showInverterIcon) {
@@ -81,9 +81,22 @@ struct InverterSettingsView: View {
                 Toggle(isOn: $showInverterTypeName) {
                     Text("Show inverter type name")
                 }
+
             } header: {
                 Text("Display Options")
             }
+
+//            Section {
+//                Toggle(isOn: $showInverterTemperature) {
+//                    Text("Show BMS temperature")
+//                }
+//
+//                Toggle(isOn: $showInverterTemperature) {
+//                    Text("Show inverter temperature")
+//                }
+//            } header: {
+//                Text("Inverter temperatures")
+//            }
 
             Section {
                 Toggle(isOn: $shouldInvertCT2) {

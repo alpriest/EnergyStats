@@ -21,6 +21,7 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "hasRunBefore")
         UserDefaults.shared.removeObject(forKey: "showColouredLines")
         UserDefaults.shared.removeObject(forKey: "showBatteryTemperature")
+        UserDefaults.shared.removeObject(forKey: "showBatteryLowestCellTemperature")
         UserDefaults.shared.removeObject(forKey: "showBatteryEstimate")
         UserDefaults.shared.removeObject(forKey: "refreshFrequency")
         UserDefaults.shared.removeObject(forKey: "decimalPlaces")
@@ -85,6 +86,9 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredBool(key: "showBatteryTemperature")
     public var showBatteryTemperature: Bool
+
+    @UserDefaultsStoredBool(key: "showBatteryLowestCellTemperature")
+    public var showBatteryLowestCellTemperature: Bool
 
     @UserDefaultsStoredBool(key: "showBatteryEstimate", defaultValue: true)
     public var showBatteryEstimate: Bool

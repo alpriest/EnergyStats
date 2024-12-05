@@ -24,11 +24,17 @@ public struct BatteryViewModel: Sendable {
         error = nil
     }
 
-    public init(hasBattery: Bool = false,
-                chargeLevel: Double = 0,
-                chargePower: Double = 0,
-                temperatures: BatteryTemperatures = BatteryTemperatures(batTemperature: 0.0, batTemperature_1: nil, batTemperature_2: nil),
-                residual: Int = 0)
+    public init(
+        hasBattery: Bool = false,
+        chargeLevel: Double = 0,
+        chargePower: Double = 0,
+        temperatures: BatteryTemperatures = BatteryTemperatures(
+            batTemperature: nil,
+            batTemperature_1: nil,
+            batTemperature_2: nil
+        ),
+        residual: Int = 0
+    )
     {
         self.hasBattery = hasBattery
         self.chargeLevel = chargeLevel
@@ -43,7 +49,7 @@ public struct BatteryViewModel: Sendable {
         hasBattery = false
         chargeLevel = 0
         chargePower = 0
-        temperatures = BatteryTemperatures(batTemperature: 0.0, batTemperature_1: nil, batTemperature_2: nil)
+        temperatures = BatteryTemperatures(batTemperature: nil, batTemperature_1: nil, batTemperature_2: nil)
         residual = 0
     }
 }
@@ -58,7 +64,7 @@ public extension BatteryViewModel {
             hasBattery: true,
             chargeLevel: 0.99,
             chargePower: 0.1,
-            temperatures: BatteryTemperatures(batTemperature: 15.6, batTemperature_1: nil, batTemperature_2: nil),
+            temperatures: BatteryTemperatures(batTemperature: TemperatureData(value: 15.6, name: "BMS"), batTemperature_1: nil, batTemperature_2: nil),
             residual: 5678
         )
     }
@@ -78,9 +84,9 @@ extension OpenQueryResponse {
         let dischargePower = datas.currentDouble(for: "batDischargePower")
         let power = chargePower > 0 ? chargePower : -dischargePower
         let temps = BatteryTemperatures(
-            batTemperature: datas.current(for: "batTemperature")?.value,
-            batTemperature_1: datas.current(for: "batTemperature_1")?.value,
-            batTemperature_2: datas.current(for: "batTemperature_2")?.value
+            batTemperature: TemperatureData(value: datas.current(for: "batTemperature")?.value, name: "BMS"),
+            batTemperature_1: TemperatureData(value: datas.current(for: "batTemperature_1")?.value, name: "BMS1"),
+            batTemperature_2: TemperatureData(value: datas.current(for: "batTemperature_2")?.value, name: "BMS2")
         )
 
         return BatteryViewModel(
@@ -93,13 +99,27 @@ extension OpenQueryResponse {
 }
 
 public struct BatteryTemperatures: Sendable {
-    public let batTemperature: Double?
-    public let batTemperature_1: Double?
-    public let batTemperature_2: Double?
+    public let batTemperature: TemperatureData?
+    public let batTemperature_1: TemperatureData?
+    public let batTemperature_2: TemperatureData?
 
-    public init(batTemperature: Double?, batTemperature_1: Double?, batTemperature_2: Double?) {
+    public init(batTemperature: TemperatureData?, batTemperature_1: TemperatureData?, batTemperature_2: TemperatureData?) {
         self.batTemperature = batTemperature
         self.batTemperature_1 = batTemperature_1
         self.batTemperature_2 = batTemperature_2
+    }
+}
+
+public struct TemperatureData: Sendable, Identifiable {
+    public let value: Double
+    public let name: String
+
+    public var id: String { name }
+
+    public init?(value: Double?, name: String) {
+        guard let value else { return nil }
+
+        self.value = value
+        self.name = name
     }
 }

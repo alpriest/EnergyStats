@@ -20,10 +20,6 @@ class MockKeychainStore: KeychainStoring {
         token = apiKey
     }
 
-    func getToken() -> String? {
-        token
-    }
-
     func logout() {
         logoutCalled = true
         token = nil
@@ -33,17 +29,30 @@ class MockKeychainStore: KeychainStoring {
         hasCredentials.value = true
     }
 
+    func getToken() -> String? {
+        token
+    }
+
     let hasCredentials = CurrentValueSubject<Bool, Never>(false)
 
-    func updateHasCredentials(value: Bool) {
-        hasCredentials.send(value)
+    func store(key: KeychainItemKey, value: Bool) throws {
     }
 
-    func getSelectedDeviceSN() -> String? {
-        selectedDeviceSN
+    func store(key: KeychainItemKey, value: String?) throws {
     }
 
-    func store(selectedDeviceSN: String?) throws {
-        self.selectedDeviceSN = selectedDeviceSN
+    func store(key: KeychainItemKey, value: Double) throws {
+    }
+
+    func get(key: KeychainItemKey) throws -> Bool {
+        false
+    }
+
+    func get(key: KeychainItemKey) throws -> String? {
+        nil
+    }
+
+    func get(key: KeychainItemKey) throws -> Double? {
+        nil
     }
 }
