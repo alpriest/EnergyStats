@@ -217,16 +217,6 @@ public class ConfigManager: ConfigManaging {
         }
     }
 
-    public var showBatteryLowestCellTemperature: Bool {
-        get { config.showBatteryLowestCellTemperature }
-        set {
-            config.showBatteryLowestCellTemperature = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
-                showBatteryLowestCellTemperature: config.showBatteryLowestCellTemperature
-            ))
-        }
-    }
-
     public var showBatteryEstimate: Bool {
         get { config.showBatteryEstimate }
         set {

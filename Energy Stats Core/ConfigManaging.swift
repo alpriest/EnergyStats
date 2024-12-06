@@ -33,7 +33,6 @@ public protocol ConfigManaging: FinancialConfigManager, SolcastConfigManager, Ba
     var showColouredLines: Bool { get set }
     var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode { get set }
     var showBatteryTemperature: Bool { get set }
-    var showBatteryLowestCellTemperature: Bool { get set }
     var showBatteryEstimate: Bool { get set }
     var showUsableBatteryOnly: Bool { get set }
     var refreshFrequency: RefreshFrequency { get set }

@@ -62,12 +62,6 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
-    @Published var showBatteryLowestCellTemperature: Bool {
-        didSet {
-            config.showBatteryLowestCellTemperature = showBatteryLowestCellTemperature
-        }
-    }
-
     @Published var showBatteryEstimate: Bool {
         didSet {
             config.showBatteryEstimate = showBatteryEstimate
@@ -209,7 +203,6 @@ class SettingsTabViewModel: ObservableObject {
         powerStation = config.powerStationDetail
         colorScheme = config.colorScheme
         batteryTemperatureDisplayMode = config.batteryTemperatureDisplayMode
-        showBatteryLowestCellTemperature = config.showBatteryLowestCellTemperature
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }

@@ -14,7 +14,6 @@ public protocol Config {
     var hasRunBefore: Bool { get set }
     var showColouredLines: Bool { get set }
     var showBatteryTemperature: Bool { get set }
-    var showBatteryLowestCellTemperature: Bool { get set }
     var showBatteryEstimate: Bool { get set }
     var refreshFrequency: Int { get set }
     var decimalPlaces: Int { get set }

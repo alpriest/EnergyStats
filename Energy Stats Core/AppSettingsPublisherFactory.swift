@@ -27,7 +27,6 @@ public enum AppSettingsPublisherFactory {
         AppSettingsPublisherFactory.shared?.value = AppSettings(
             showColouredLines: config.showColouredLines,
             showBatteryTemperature: config.showBatteryTemperature,
-            showBatteryLowestCellTemperature: config.showBatteryLowestCellTemperature,
             showSunnyBackground: config.showSunnyBackground,
             decimalPlaces: config.decimalPlaces,
             showBatteryEstimate: config.showBatteryEstimate,

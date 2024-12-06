@@ -11,7 +11,7 @@ import SwiftUI
 struct TemperatureView: View {
     let value: Double?
     let name: String
-    let accessibilityLabel: String
+    let accessibilityName: String
     let showName: Bool
 
     var body: some View {
@@ -26,7 +26,7 @@ struct TemperatureView: View {
                 }
             }
             .accessibilityElement(children: .ignore)
-            .accessibilityLabel(Text(accessibilityLabel) + Text(" \(name) ") + Text("accessibility.temperature") + Text(" \(formattedValue) ℃"))
+            .accessibilityLabel(Text(accessibilityName) + Text(" \(name) ") + Text("accessibility.temperature") + Text(" \(formattedValue) ℃"))
         }
     }
 

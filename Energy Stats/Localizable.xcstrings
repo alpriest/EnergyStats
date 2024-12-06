@@ -545,35 +545,6 @@
         }
       }
     },
-    "°C" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        }
-      }
-    },
     "00:00" : {
       "localizations" : {
         "de" : {
@@ -2317,10 +2288,60 @@
       }
     },
     "Activate inverter mode schedule" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wechselrichtermodus-Zeitplan aktivieren"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activar el horario del modo inversor"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attiva il programma della modalità inverter"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktywuj harmonogram trybu inwertera"
+          }
+        }
+      }
     },
     "Activates the named inverter mode schedule" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktiviert den benannten Wechselrichtermodus-Zeitplan"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activa el horario del modo inversor nombrado"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attiva il programma della modalità inverter nominata"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktywuje nazwany harmonogram trybu inwertera"
+          }
+        }
+      }
     },
     "Activating" : {
       "localizations" : {
@@ -12739,7 +12760,32 @@
       }
     },
     "Show battery (BMS) temperature" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Batterie (BMS)-Temperatur anzeigen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar la temperatura de la batería (BMS)"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra la temperatura della batteria (BMS)"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pokaż temperaturę baterii (BMS)"
+          }
+        }
+      }
     },
     "Show battery full/empty estimate" : {
       "localizations" : {
@@ -12793,35 +12839,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pokaż pozostały procent baterii\n"
-          }
-        }
-      }
-    },
-    "Show battery temperature" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zeige die Batterie-Temperatur"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mostrar temperatura de la batería"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mostra temperatura batteria"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pokaż temperaturę baterii"
           }
         }
       }
@@ -12996,10 +13013,6 @@
       }
     },
     "Show inverter temperature" : {
-
-    },
-    "Show inverter temperatures" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -13010,19 +13023,19 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mostrar temperaturas del inversor"
+            "value" : "Mostrar la temperatura del inversor"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mostra temperature dell'inverter"
+            "value" : "Mostra la temperatura dell'inverter"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pokaż temperatury falownika"
+            "value" : "Pokaż temperaturę inwertera"
           }
         }
       }
@@ -13943,7 +13956,32 @@
       }
     },
     "Template name" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vorlagenname"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre de la plantilla"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nome del modello"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nazwa szablonu"
+          }
+        }
+      }
     },
     "Templates" : {
       "localizations" : {

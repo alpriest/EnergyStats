@@ -17,7 +17,6 @@ public enum SelfSufficiencyEstimateMode: Int, RawRepresentable {
 public struct AppSettings {
     public var showColouredLines: Bool
     public var showBatteryTemperature: Bool
-    public var showBatteryLowestCellTemperature: Bool
     public var showSunnyBackground: Bool
     public var decimalPlaces: Int
     public var showBatteryEstimate: Bool
@@ -56,7 +55,6 @@ public struct AppSettings {
     public init(
         showColouredLines: Bool,
         showBatteryTemperature: Bool,
-        showBatteryLowestCellTemperature: Bool,
         showSunnyBackground: Bool,
         decimalPlaces: Int,
         showBatteryEstimate: Bool,
@@ -94,7 +92,6 @@ public struct AppSettings {
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
-        self.showBatteryLowestCellTemperature = showBatteryLowestCellTemperature
         self.showSunnyBackground = showSunnyBackground
         self.decimalPlaces = decimalPlaces
         self.showBatteryEstimate = showBatteryEstimate
@@ -134,7 +131,6 @@ public struct AppSettings {
     public func copy(
         showColouredLines: Bool? = nil,
         showBatteryTemperature: Bool? = nil,
-        showBatteryLowestCellTemperature: Bool? = nil,
         showSunnyBackground: Bool? = nil,
         decimalPlaces: Int? = nil,
         showBatteryEstimate: Bool? = nil,
@@ -173,7 +169,6 @@ public struct AppSettings {
         AppSettings(
             showColouredLines: showColouredLines ?? self.showColouredLines,
             showBatteryTemperature: showBatteryTemperature ?? self.showBatteryTemperature,
-            showBatteryLowestCellTemperature: showBatteryLowestCellTemperature ?? self.showBatteryLowestCellTemperature,
             showSunnyBackground: showSunnyBackground ?? self.showSunnyBackground,
             decimalPlaces: decimalPlaces ?? self.decimalPlaces,
             showBatteryEstimate: showBatteryEstimate ?? self.showBatteryEstimate,

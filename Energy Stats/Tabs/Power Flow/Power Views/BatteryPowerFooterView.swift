@@ -31,13 +31,9 @@ struct BatteryPowerFooterView: View {
                         TemperatureView(
                             value: temperature.value,
                             name: temperature.name,
-                            accessibilityLabel: String(accessibilityKey: .batteryTemperature),
+                            accessibilityName: String(accessibilityKey: .batteryTemperature),
                             showName: viewModel.temperatures.count > 1
                         )
-
-//                        (Text(temperature, format: .number) + Text("°C"))
-//                            .accessibilityElement(children: .ignore)
-//                            .accessibilityLabel(String(format: String(accessibilityKey: .batteryTemperature), temperature.roundedToString(decimalPlaces: 2)))
                     }
                 }
             }

@@ -33,11 +33,11 @@ class BatteryPowerViewModel {
 
         switch batteryTemperatureDisplayMode {
         case .automatic:
-            result = [temperatures.batTemperature, temperatures.batTemperature_1, temperatures.batTemperature_2].compactMap(\.self)
+            result = [temperatures.bmsTemperature, temperatures.bmsTemperature_1, temperatures.bmsTemperature_2].compactMap(\.self)
         case .battery1:
-            result = [temperatures.batTemperature_1].compactMap(\.self)
+            result = [temperatures.bmsTemperature_1].compactMap(\.self)
         case .battery2:
-            result = [temperatures.batTemperature_2].compactMap(\.self)
+            result = [temperatures.bmsTemperature_2].compactMap(\.self)
         }
 
         return result
@@ -142,7 +142,7 @@ extension BatteryPowerViewModel {
             configManager: ConfigManager.preview(config: config),
             batteryStateOfCharge: 0.99,
             batteryChargekWH: -0.01,
-            temperatures: BatteryTemperatures(batTemperature: TemperatureData(value: 23.0, name: "BMS"), batTemperature_1: nil, batTemperature_2: nil),
+            temperatures: BatteryTemperatures(bmsTemperature: TemperatureData(value: 23.0, name: "BMS"), bmsTemperature_1: nil, bmsTemperature_2: nil),
             batteryResidual: 5940,
             error: error,
             minSOC: 0.2

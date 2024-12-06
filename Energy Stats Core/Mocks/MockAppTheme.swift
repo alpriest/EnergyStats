@@ -17,7 +17,6 @@ public extension AppSettings {
         AppSettings(
             showColouredLines: true,
             showBatteryTemperature: true,
-            showBatteryLowestCellTemperature: true,
             showSunnyBackground: true,
             decimalPlaces: decimalPlaces,
             showBatteryEstimate: true,
