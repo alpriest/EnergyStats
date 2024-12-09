@@ -8,6 +8,7 @@
 import Combine
 import Energy_Stats_Core
 import Firebase
+import FirebaseAnalytics
 import SwiftUI
 import WatchConnectivity
 import WidgetKit
@@ -16,7 +17,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool
     {
-        FirebaseApp.configure()
+        if !isRunningTests() || !isRunningScreenshots() {
+            FirebaseApp.configure()
+        }
+
         return true
     }
 }
@@ -41,7 +45,7 @@ struct Energy_StatsApp: App {
 
     init() {
         var config: Config
-        if Self.isRunningScreenshots() {
+        if isRunningScreenshots() {
             config = MockConfig()
         } else {
             config = UserDefaultsConfig()
@@ -100,14 +104,6 @@ struct Energy_StatsApp: App {
         }
     }
 
-    func isRunningTests() -> Bool {
-        CommandLine.arguments.contains("-TESTING=1")
-    }
-
-    static func isRunningScreenshots() -> Bool {
-        CommandLine.arguments.contains("screenshots")
-    }
-
     private static func updateKeychainSettingsForWatch(keychainStore: KeychainStoring, configManager: ConfigManaging) {
         try? keychainStore.store(key: .deviceSN, value: configManager.selectedDeviceSN)
         try? keychainStore.store(key: .showGridTotalsOnPowerFlow, value: configManager.showGridTotalsOnPowerFlow)
@@ -125,4 +121,12 @@ class KeychainWrapper: ObservableObject {
     init(_ store: KeychainStoring) {
         self.store = store
     }
+}
+
+func isRunningTests() -> Bool {
+    CommandLine.arguments.contains("-TESTING=1")
+}
+
+func isRunningScreenshots() -> Bool {
+    CommandLine.arguments.contains("screenshots")
 }

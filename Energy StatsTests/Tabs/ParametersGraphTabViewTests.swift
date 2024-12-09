@@ -12,6 +12,7 @@ import SnapshotTesting
 import SwiftUI
 import XCTest
 
+// Record these on iPhone 16 Pro
 final class ParametersGraphTabViewTests: XCTestCase {
     @MainActor
     func test_when_user_arrives() async throws {

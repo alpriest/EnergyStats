@@ -50,9 +50,12 @@ final class NetworkTests: XCTestCase {
             Variable(name: "gridConsumptionPower", variable: "gridConsumptionPower", unit: "kWH"),
             Variable(name: "batChargePower", variable: "batChargePower", unit: "kWH"),
             Variable(name: "batDischargePower", variable: "batDischargePower", unit: "kWH"),
-            Variable(name: "generationPower", variable: "generationPower", unit: "kWH")].map { $0.variable })
+            Variable(name: "generationPower", variable: "generationPower", unit: "kWH"),
+            Variable(name: "ResidualEnergy", variable: "ResidualEnergy", unit: "kWH"),
+            Variable(name: "batTemperature", variable: "batTemperature", unit: "℃"),
+        ].map { $0.variable })
 
-        XCTAssertEqual(raw.datas.count, 5)
+        XCTAssertEqual(raw.datas.count, 7)
     }
 
     func test_fetchDeviceList_returns_data_on_success() async throws {
