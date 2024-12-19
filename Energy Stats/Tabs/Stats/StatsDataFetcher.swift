@@ -23,7 +23,7 @@ struct StatsDataFetcher {
         var accumulatedGraphValues: [StatsGraphValue] = []
         var accumulatedReportResponses: [OpenReportResponse] = []
 
-        while current.month <= end.month || current.year < end.year {
+        while (current.year < end.year || (current.year == end.year && current.month <= end.month)) {
             let month = Calendar.current.component(.month, from: current)
             let year = Calendar.current.component(.year, from: current)
             let queryDate = QueryDate(year: year, month: month, day: nil)
