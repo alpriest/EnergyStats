@@ -60,7 +60,8 @@ public enum AppSettingsPublisherFactory {
             truncatedYAxisOnParameterGraphs: config.truncatedYAxisOnParameterGraphs,
             earningsModel: config.earningsModel,
             minSOC: config.minSOC,
-            batteryTemperatureDisplayMode: config.batteryTemperatureDisplayMode
+            batteryTemperatureDisplayMode: config.batteryTemperatureDisplayMode,
+            showInverterScheduleQuickLink: config.showInverterScheduleQuickLink
         )
     }
 }

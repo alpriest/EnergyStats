@@ -68,6 +68,7 @@ public protocol ConfigManaging: FinancialConfigManager, SolcastConfigManager, Ba
     var colorScheme: ForcedColorScheme { get set }
     var lastSolcastRefresh: Date? { get set }
     var batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode { get set }
+    var showInverterScheduleQuickLink: Bool { get set }
 }
 
 public protocol BatteryConfigManager {

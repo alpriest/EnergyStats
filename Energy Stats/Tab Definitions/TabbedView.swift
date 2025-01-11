@@ -29,11 +29,17 @@ struct TabbedView: View {
 
     var body: some View {
         TabView {
-            PowerFlowTabView(configManager: configManager, networking: networking, userManager: userManager, appSettingsPublisher: configManager.appSettingsPublisher)
-                .tabItem {
-                    PowerFlowTabItem()
-                }
-                .toolbarBackground(.visible, for: .tabBar)
+            PowerFlowTabView(
+                configManager: configManager,
+                networking: networking,
+                userManager: userManager,
+                appSettingsPublisher: configManager.appSettingsPublisher,
+                templateStore: templateStore
+            )
+            .tabItem {
+                PowerFlowTabItem()
+            }
+            .toolbarBackground(.visible, for: .tabBar)
 
             StatsTabView(configManager: configManager, networking: networking, appSettingsPublisher: configManager.appSettingsPublisher)
                 .tabItem {

@@ -111,6 +111,7 @@
 		414125992BA6285A00D5A842 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E299D529B78A41001F017B /* SnapshotHelper.swift */; };
 		4141B20028D86C7200B60157 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141B1FF28D86C7200B60157 /* UserManager.swift */; };
 		4141B20228D871B900B60157 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141B20128D871B900B60157 /* ContentView.swift */; };
+		414536D32D3190E700AE4A29 /* FirmwareLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414536D22D3190E700AE4A29 /* FirmwareLoadingView.swift */; };
 		41463D912AC44C7C00B2EB25 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 41463D902AC44C7C00B2EB25 /* Localizable.xcstrings */; };
 		41495F382B211A75004A51C1 /* AlertContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41495F372B211A75004A51C1 /* AlertContentView.swift */; };
 		4149D3AD2B3C4DAA00314449 /* UnsupportedErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4149D3AC2B3C4DAA00314449 /* UnsupportedErrorView.swift */; };
@@ -583,6 +584,7 @@
 		4140ECD9292D58D300992DD8 /* ParameterGraphVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterGraphVariable.swift; sourceTree = "<group>"; };
 		4141B1FF28D86C7200B60157 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		4141B20128D871B900B60157 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		414536D22D3190E700AE4A29 /* FirmwareLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirmwareLoadingView.swift; sourceTree = "<group>"; };
 		41463D902AC44C7C00B2EB25 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		41495F372B211A75004A51C1 /* AlertContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertContentView.swift; sourceTree = "<group>"; };
 		4149D3AC2B3C4DAA00314449 /* UnsupportedErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsupportedErrorView.swift; sourceTree = "<group>"; };
@@ -1291,6 +1293,7 @@
 				4130364A29B8BE7F006B5CE9 /* InverterChoiceView.swift */,
 				41626CCF29D969E9003FEB00 /* InverterFirmwareVersionsView.swift */,
 				416AE4352A7D2C8B003D0122 /* InverterSettingsView.swift */,
+				414536D22D3190E700AE4A29 /* FirmwareLoadingView.swift */,
 			);
 			path = Inverter;
 			sourceTree = "<group>";
@@ -2104,6 +2107,7 @@
 				419DFA882A12A6DF0067313A /* StatsDatePickerViewModel.swift in Sources */,
 				4156E7B72B9C839F0000E807 /* PowerStationSettingsView.swift in Sources */,
 				416D761B2BA60C3500074370 /* StatsDataFetcher.swift in Sources */,
+				414536D32D3190E700AE4A29 /* FirmwareLoadingView.swift in Sources */,
 				416163952CDA6D4A0084DCF1 /* String+URL.swift in Sources */,
 				410FC88A2AB9EAD90004CBC2 /* ParameterVariableGroupEditorViewModel.swift in Sources */,
 				4171854E2A010B6300D18CDD /* ParameterGraphVariableChooserViewModel.swift in Sources */,

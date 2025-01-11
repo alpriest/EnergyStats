@@ -58,6 +58,7 @@ public protocol Config {
     var colorScheme: ForcedColorScheme { get set }
     var lastSolcastRefresh: Date? { get set }
     var batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode { get set }
+    var showInverterScheduleQuickLink: Bool { get set }
 }
 
 public func DefaultParameterGroups() -> [ParameterGroup] {

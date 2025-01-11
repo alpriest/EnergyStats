@@ -13124,6 +13124,9 @@
         }
       }
     },
+    "Show schedule quick link" : {
+
+    },
     "Show self sufficiency percentage on stats graph" : {
       "localizations" : {
         "de" : {

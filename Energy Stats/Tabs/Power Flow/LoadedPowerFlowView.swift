@@ -16,16 +16,27 @@ struct LoadedPowerFlowView: View {
     private let configManager: ConfigManaging
     @ObservedObject var viewModel: LoadedPowerFlowViewModel
     private var appSettingsPublisher: LatestAppSettingsPublisher
+    @State private var showSchedule = false
+    private let networking: Networking
+    private let templateStore: TemplateStoring
 
-    init(configManager: ConfigManaging, viewModel: LoadedPowerFlowViewModel, appSettingsPublisher: LatestAppSettingsPublisher) {
+    init(
+        configManager: ConfigManaging,
+        viewModel: LoadedPowerFlowViewModel,
+        appSettingsPublisher: LatestAppSettingsPublisher,
+        networking: Networking,
+        templateStore: TemplateStoring
+    ) {
         self.configManager = configManager
         self.viewModel = viewModel
+        self.networking = networking
+        self.templateStore = templateStore
         self.appSettingsPublisher = appSettingsPublisher
         self._appSettings = State(wrappedValue: appSettingsPublisher.value)
     }
 
     var body: some View {
-        Group {
+        ZStack(alignment: .topTrailing) {
             VStack(alignment: .center, spacing: 0) {
                 if size == .zero {
                     Color.clear.frame(minWidth: 0, maxWidth: .infinity)
@@ -155,9 +166,32 @@ struct LoadedPowerFlowView: View {
             }.background(GeometryReader { reader in
                 Color.clear.onAppear { size = reader.size }.onChange(of: reader.size) { newValue in size = newValue }
             })
+
+            inverterScheduleQuickLink()
         }
         .onReceive(appSettingsPublisher) {
             self.appSettings = $0
+        }
+        .sheet(isPresented: $showSchedule) {
+            NavigationStack {
+                ScheduleSummaryView(
+                    networking: networking,
+                    config: configManager,
+                    templateStore: templateStore
+                )
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func inverterScheduleQuickLink() -> some View {
+        if appSettings.showInverterScheduleQuickLink {
+            Button {
+                showSchedule.toggle()
+            } label: {
+                Image(systemName: "calendar")
+                    .padding(.horizontal)
+            }
         }
     }
 
@@ -215,7 +249,9 @@ struct PowerSummaryView_Previews: PreviewProvider {
                                                                                               showInverterTemperature: true,
                                                                                               showHomeTotalOnPowerFlow: true,
                                                                                               shouldCombineCT2WithPVPower: false,
-                                                                                              powerFlowStrings: strings)))
+                                                                                              powerFlowStrings: strings)),
+                            networking: NetworkService.preview(),
+                            templateStore: TemplateStore.preview())
             .environment(\.locale, .init(identifier: "en"))
     }
 }

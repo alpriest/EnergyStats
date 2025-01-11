@@ -370,6 +370,7 @@ public class MockConfig: Config {
     public var colorScheme: ForcedColorScheme = .auto
     public var lastSolcastRefresh: Date? = nil
     public var batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode = .automatic
+    public var showInverterScheduleQuickLink: Bool = true
 }
 
 public extension SolcastSite {

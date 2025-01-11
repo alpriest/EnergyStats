@@ -8,42 +8,6 @@
 import Energy_Stats_Core
 import SwiftUI
 
-struct FirmwareLoadingView: View {
-    @State private var loading = false
-    @State private var firmwareVersions: DeviceFirmwareVersion? = nil
-    let configManager: ConfigManaging
-    let networking: Networking
-
-    var body: some View {
-        if let firmwareVersions {
-            InverterFirmwareVersionsView(viewModel: firmwareVersions)
-        } else if let selectedDeviceSN = configManager.selectedDeviceSN {
-            if loading {
-                HStack {
-                    Text("Loading")
-                    Spacer()
-                    ProgressView()
-                }
-            } else {
-                Button {
-                    Task {
-                        defer {
-                            loading = false
-                        }
-
-                        loading = true
-                        if let response = try? await networking.fetchDevice(deviceSN: selectedDeviceSN) {
-                            firmwareVersions = DeviceFirmwareVersion(master: response.masterVersion, slave: response.slaveVersion, manager: response.managerVersion)
-                        }
-                    }
-                } label: {
-                    Text("Load firmware versions")
-                }
-            }
-        }
-    }
-}
-
 struct InverterSettingsView: View {
     let networking: Networking
     let configManager: ConfigManaging
@@ -54,6 +18,7 @@ struct InverterSettingsView: View {
     @Binding var showInverterStationName: Bool
     @Binding var shouldCombineCT2WithPVPower: Bool
     @Binding var showInverterTypeName: Bool
+    @Binding var showInverterScheduleQuickLink: Bool
 
     var body: some View {
         Form {
@@ -80,6 +45,10 @@ struct InverterSettingsView: View {
 
                 Toggle(isOn: $showInverterTypeName) {
                     Text("Show inverter type name")
+                }
+
+                Toggle(isOn: $showInverterScheduleQuickLink) {
+                    Text("Show schedule quick link")
                 }
 
             } header: {
@@ -155,7 +124,8 @@ struct InverterSettingsView_Previews: PreviewProvider {
                 shouldInvertCT2: .constant(true),
                 showInverterStationName: .constant(true),
                 shouldCombineCT2WithPVPower: .constant(true),
-                showInverterTypeName: .constant(true)
+                showInverterTypeName: .constant(true),
+                showInverterScheduleQuickLink: .constant(true)
             )
         }
     }

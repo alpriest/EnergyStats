@@ -14,18 +14,34 @@ struct PowerFlowTabView: View {
     @State private var appSettings: AppSettings
     private var appSettingsPublisher: LatestAppSettingsPublisher
     @AppStorage("showLastUpdateTimestamp") private var showLastUpdateTimestamp: Bool = false
+    private let templateStore: TemplateStoring
+    private let networking: Networking
 
-    init(configManager: ConfigManaging, networking: Networking, userManager: UserManager, appSettingsPublisher: LatestAppSettingsPublisher) {
+    init(
+        configManager: ConfigManaging,
+        networking: Networking,
+        userManager: UserManager,
+        appSettingsPublisher: LatestAppSettingsPublisher,
+        templateStore: TemplateStoring
+    ) {
         _viewModel = .init(wrappedValue: PowerFlowTabViewModel(networking, configManager: configManager, userManager: userManager))
         self.appSettingsPublisher = appSettingsPublisher
         self.appSettings = appSettingsPublisher.value
+        self.templateStore = templateStore
+        self.networking = networking
     }
 
     var body: some View {
         VStack {
             switch viewModel.state {
             case let .loaded(summary):
-                LoadedPowerFlowView(configManager: viewModel.configManager, viewModel: summary, appSettingsPublisher: appSettingsPublisher)
+                LoadedPowerFlowView(
+                    configManager: viewModel.configManager,
+                    viewModel: summary,
+                    appSettingsPublisher: appSettingsPublisher,
+                    networking: networking,
+                    templateStore: templateStore
+                )
 
                 Spacer()
 
@@ -114,6 +130,7 @@ struct PowerFlowTabView: View {
     PowerFlowTabView(configManager: ConfigManager.preview(),
                      networking: NetworkService.preview(),
                      userManager: UserManager.preview(),
-                     appSettingsPublisher: CurrentValueSubject(AppSettings.mock()))
+                     appSettingsPublisher: CurrentValueSubject(AppSettings.mock()),
+                     templateStore: TemplateStore.preview())
 }
 #endif

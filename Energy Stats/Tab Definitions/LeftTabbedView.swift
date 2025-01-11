@@ -36,41 +36,56 @@ struct LeftTabbedView: View {
     }
 
     var body: some View {
-        NavigationSplitView(sidebar: {
-            List {
-                NavigationLink {
-                    PowerFlowTabView(configManager: configManager, networking: networking, userManager: userManager, appSettingsPublisher: configManager.appSettingsPublisher)
-                } label: {
-                    PowerFlowTabItem()
-                }
+        NavigationSplitView(
+            sidebar: {
+                List {
+                    NavigationLink {
+                        PowerFlowTabView(
+                            configManager: configManager,
+                            networking: networking,
+                            userManager: userManager,
+                            appSettingsPublisher: configManager.appSettingsPublisher,
+                            templateStore: templateStore
+                        )
+                    } label: {
+                        PowerFlowTabItem()
+                    }
 
-                NavigationLink {
-                    StatsTabView(configManager: configManager, networking: networking, appSettingsPublisher: configManager.appSettingsPublisher)
-                } label: {
-                    StatsTabItem()
-                }
+                    NavigationLink {
+                        StatsTabView(configManager: configManager, networking: networking, appSettingsPublisher: configManager.appSettingsPublisher)
+                    } label: {
+                        StatsTabItem()
+                    }
 
-                NavigationLink {
-                    ParametersGraphTabView(configManager: configManager, viewModel: parametersGraphTabViewModel)
-                } label: {
-                    ParametersTabItem()
-                }
+                    NavigationLink {
+                        ParametersGraphTabView(configManager: configManager, viewModel: parametersGraphTabViewModel)
+                    } label: {
+                        ParametersTabItem()
+                    }
 
-                NavigationLink {
-                    SummaryTabView(configManager: configManager, networking: networking, appSettingsPublisher: configManager.appSettingsPublisher, solarForecastProvider: solarForecastProvider)
-                } label: {
-                    SummaryTabItem()
-                }
+                    NavigationLink {
+                        SummaryTabView(configManager: configManager, networking: networking, appSettingsPublisher: configManager.appSettingsPublisher, solarForecastProvider: solarForecastProvider)
+                    } label: {
+                        SummaryTabItem()
+                    }
 
-                NavigationLink {
-                    SettingsTabView(viewModel: settingsTabViewModel, configManager: configManager, networking: networking, solarService: solarForecastProvider, templateStore: templateStore)
-                } label: {
-                    SettingsTabItem(configManager: configManager)
+                    NavigationLink {
+                        SettingsTabView(viewModel: settingsTabViewModel, configManager: configManager, networking: networking, solarService: solarForecastProvider, templateStore: templateStore)
+                    } label: {
+                        SettingsTabItem(configManager: configManager)
+                    }
                 }
+            },
+            detail: {
+                PowerFlowTabView(
+                    configManager: configManager,
+                    networking: networking,
+                    userManager: userManager,
+                    appSettingsPublisher: configManager.appSettingsPublisher,
+                    templateStore: templateStore
+                )
             }
-        }, detail: {
-            PowerFlowTabView(configManager: configManager, networking: networking, userManager: userManager, appSettingsPublisher: configManager.appSettingsPublisher)
-        })
+        )
     }
 }
 

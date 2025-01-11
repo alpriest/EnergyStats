@@ -51,6 +51,7 @@ public struct AppSettings {
     public var earningsModel: EarningsModel
     public var minSOC: Double
     public var batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode
+    public var showInverterScheduleQuickLink: Bool
 
     public init(
         showColouredLines: Bool,
@@ -88,7 +89,8 @@ public struct AppSettings {
         truncatedYAxisOnParameterGraphs: Bool,
         earningsModel: EarningsModel,
         minSOC: Double,
-        batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode
+        batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode,
+        showInverterScheduleQuickLink: Bool
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -126,6 +128,7 @@ public struct AppSettings {
         self.earningsModel = earningsModel
         self.minSOC = minSOC
         self.batteryTemperatureDisplayMode = batteryTemperatureDisplayMode
+        self.showInverterScheduleQuickLink = showInverterScheduleQuickLink
     }
 
     public func copy(
@@ -164,7 +167,8 @@ public struct AppSettings {
         truncatedYAxisOnParameterGraphs: Bool? = nil,
         earningsModel: EarningsModel? = nil,
         minSOC: Double? = nil,
-        batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode? = nil
+        batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode? = nil,
+        showInverterScheduleQuickLink: Bool? = nil
     ) -> AppSettings {
         AppSettings(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -202,7 +206,8 @@ public struct AppSettings {
             truncatedYAxisOnParameterGraphs: truncatedYAxisOnParameterGraphs ?? self.truncatedYAxisOnParameterGraphs,
             earningsModel: earningsModel ?? self.earningsModel,
             minSOC: minSOC ?? self.minSOC,
-            batteryTemperatureDisplayMode: batteryTemperatureDisplayMode ?? self.batteryTemperatureDisplayMode
+            batteryTemperatureDisplayMode: batteryTemperatureDisplayMode ?? self.batteryTemperatureDisplayMode,
+            showInverterScheduleQuickLink: showInverterScheduleQuickLink ?? self.showInverterScheduleQuickLink
         )
     }
 }

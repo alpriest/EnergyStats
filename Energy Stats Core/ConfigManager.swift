@@ -592,6 +592,16 @@ public class ConfigManager: ConfigManaging {
             ))
         }
     }
+
+    public var showInverterScheduleQuickLink: Bool {
+        get { config.showInverterScheduleQuickLink }
+        set {
+            config.showInverterScheduleQuickLink = newValue
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+                showInverterScheduleQuickLink: showInverterScheduleQuickLink
+            ))
+        }
+    }
 }
 
 public enum BatteryResponseMapper {

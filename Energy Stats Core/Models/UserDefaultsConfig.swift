@@ -59,6 +59,7 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "colorScheme")
         UserDefaults.shared.removeObject(forKey: "lastSolcastRefresh")
         UserDefaults.shared.removeObject(forKey: "batteryTemperatureDisplayMode")
+        UserDefaults.shared.removeObject(forKey: "showInverterScheduleQuickLink")
         UserDefaults.shared.synchronize()
     }
 
@@ -281,4 +282,7 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredCodable(key: "batteryTemperatureDisplayMode", defaultValue: BatteryTemperatureDisplayMode.automatic)
     public var batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode
+
+    @UserDefaultsStoredBool(key: "showInverterScheduleQuickLink")
+    public var showInverterScheduleQuickLink: Bool
 }

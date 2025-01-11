@@ -166,6 +166,12 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
+    @Published var showInverterScheduleQuickLink: Bool {
+        didSet {
+            config.showInverterScheduleQuickLink = showInverterScheduleQuickLink
+        }
+    }
+
     private(set) var config: ConfigManaging
     private let userManager: UserManager
     private var cancellables = Set<AnyCancellable>()
@@ -203,6 +209,7 @@ class SettingsTabViewModel: ObservableObject {
         powerStation = config.powerStationDetail
         colorScheme = config.colorScheme
         batteryTemperatureDisplayMode = config.batteryTemperatureDisplayMode
+        showInverterScheduleQuickLink = config.showInverterScheduleQuickLink
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }

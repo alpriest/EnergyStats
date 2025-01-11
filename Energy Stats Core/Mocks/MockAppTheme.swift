@@ -52,7 +52,8 @@ public extension AppSettings {
             truncatedYAxisOnParameterGraphs: true,
             earningsModel: .exported,
             minSOC: 0.2,
-            batteryTemperatureDisplayMode: .automatic
+            batteryTemperatureDisplayMode: .automatic,
+            showInverterScheduleQuickLink: true
         )
     }
 }
