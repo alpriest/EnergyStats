@@ -97,6 +97,7 @@
 		4131AF4D2B5288F400836B77 /* OpenQueryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4131AF4C2B5288F400836B77 /* OpenQueryResponse.swift */; };
 		413208702B9E3BC400A31873 /* DataSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4132086F2B9E3BC400A31873 /* DataSettingsView.swift */; };
 		4134ACC42A88A1A800CB4BA8 /* InverterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4134ACC32A88A1A800CB4BA8 /* InverterView.swift */; };
+		4134EE642D37CB8200291F15 /* ExportParameterDataIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4134EE632D37CB8200291F15 /* ExportParameterDataIntent.swift */; };
 		4139CD982CC0023600DFB2C4 /* TemplateSummaryListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4139CD972CC0023400DFB2C4 /* TemplateSummaryListRow.swift */; };
 		413B7A312A4A390C00562A68 /* SelfSufficiencyCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413B7A302A4A390C00562A68 /* SelfSufficiencyCalculator.swift */; };
 		413B7A3A2A4A397000562A68 /* Energy_Stats_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; platformFilter = ios; };
@@ -563,6 +564,7 @@
 		4132086F2B9E3BC400A31873 /* DataSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSettingsView.swift; sourceTree = "<group>"; };
 		41339C7328CC7BA50062B976 /* KeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStore.swift; sourceTree = "<group>"; };
 		4134ACC32A88A1A800CB4BA8 /* InverterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterView.swift; sourceTree = "<group>"; };
+		4134EE632D37CB8200291F15 /* ExportParameterDataIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportParameterDataIntent.swift; sourceTree = "<group>"; };
 		41355C9D2BE25812001DED7C /* Energy-Stats-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Energy-Stats-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 		4139CD972CC0023400DFB2C4 /* TemplateSummaryListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateSummaryListRow.swift; sourceTree = "<group>"; };
 		413B7A302A4A390C00562A68 /* SelfSufficiencyCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSufficiencyCalculator.swift; sourceTree = "<group>"; };
@@ -1477,6 +1479,7 @@
 			isa = PBXGroup;
 			children = (
 				41DAAC262CF52BDD0096DF20 /* ActiveScheduleIntent.swift */,
+				4134EE632D37CB8200291F15 /* ExportParameterDataIntent.swift */,
 				41E12E832CC6597A001F3839 /* CheckBatteryChargeLevelIntent.swift */,
 				41E12E8B2CC66893001F3839 /* CheckCurrentGridLoadIntent.swift */,
 				41E12E892CC66737001F3839 /* CheckCurrentLoadIntent.swift */,
@@ -2048,6 +2051,7 @@
 				4171854C2A01033700D18CDD /* ParameterGraphVariablesToggles.swift in Sources */,
 				41C0923D2B210255001D1E22 /* ScheduleDetailView.swift in Sources */,
 				41A263222B6AEE9F0027E52A /* ConfigureAPIKeyView.swift in Sources */,
+				4134EE642D37CB8200291F15 /* ExportParameterDataIntent.swift in Sources */,
 				41E12E882CC666C9001F3839 /* ServiceFactory.swift in Sources */,
 				419092212B1DBF2B0017CB65 /* ScheduleSummaryView.swift in Sources */,
 				417185482A0051CA00D18CDD /* ParameterGraphVariableChooserView.swift in Sources */,
@@ -2516,7 +2520,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 27;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -2538,7 +2542,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.72;
+				MARKETING_VERSION = 2.73;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2582,7 +2586,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 27;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2598,7 +2602,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.72;
+				MARKETING_VERSION = 2.73;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

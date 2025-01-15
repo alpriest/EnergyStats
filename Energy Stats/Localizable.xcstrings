@@ -4871,6 +4871,9 @@
         }
       }
     },
+    "Date" : {
+
+    },
     "Day" : {
       "localizations" : {
         "de" : {
@@ -6376,6 +6379,9 @@
         }
       }
     },
+    "Export parameter data" : {
+
+    },
     "export_income" : {
       "localizations" : {
         "de" : {
@@ -6444,6 +6450,9 @@
         }
       }
     },
+    "Exported" : {
+
+    },
     "exported_income_short_title" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -6506,6 +6515,9 @@
           }
         }
       }
+    },
+    "Exports all parameter data for the specified date using the currently selected parameter group" : {
+
     },
     "Failed" : {
       "localizations" : {

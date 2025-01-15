@@ -39,7 +39,7 @@ struct ParameterGraphValue: Identifiable, Hashable {
 
     var id: String { "\(date.iso8601())_\(type.variable)" }
 
-    init(date: Date, queryDate: QueryDate, value: Double, variable: Variable) {
+    init(date: Date, value: Double, variable: Variable) {
         self.date = date
 
         // Rescale values that match 10Wh to kWh

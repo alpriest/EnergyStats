@@ -153,7 +153,7 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
                 guard let rawVariable = configManager.variables.first(where: { $0.variable == response.variable }) else { return [] }
 
                 return response.data.compactMap {
-                    ParameterGraphValue(date: $0.time, queryDate: queryDate, value: $0.value, variable: rawVariable)
+                    ParameterGraphValue(date: $0.time, value: $0.value, variable: rawVariable)
                 }
             }
 
