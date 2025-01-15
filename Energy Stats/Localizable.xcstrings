@@ -4872,7 +4872,32 @@
       }
     },
     "Date" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Datum"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fecha"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data"
+          }
+        }
+      }
     },
     "Day" : {
       "localizations" : {
@@ -6380,7 +6405,32 @@
       }
     },
     "Export parameter data" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parameterdaten exportieren"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exportar datos de parámetros"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esporta dati dei parametri"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eksportuj dane parametrów"
+          }
+        }
+      }
     },
     "export_income" : {
       "localizations" : {
@@ -6451,7 +6501,32 @@
       }
     },
     "Exported" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exportiert"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exportado"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esportato"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wyeksportowano"
+          }
+        }
+      }
     },
     "exported_income_short_title" : {
       "extractionState" : "manual",
@@ -6517,7 +6592,32 @@
       }
     },
     "Exports all parameter data for the specified date using the currently selected parameter group" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exportiert alle Parameterdaten für das angegebene Datum unter Verwendung der aktuell ausgewählten Parametergruppe."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exporta todos los datos de parámetros para la fecha especificada utilizando el grupo de parámetros seleccionado actualmente."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esporta tutti i dati dei parametri per la data specificata utilizzando il gruppo di parametri attualmente selezionato."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eksportuje wszystkie dane parametrów dla określonej daty, używając aktualnie wybranej grupy parametrów."
+          }
+        }
+      }
     },
     "Failed" : {
       "localizations" : {
@@ -13137,7 +13237,32 @@
       }
     },
     "Show schedule quick link" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schnellzugriff auf Zeitplan anzeigen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar enlace rápido al horario"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra collegamento rapido al programma"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pokaż szybki link do harmonogramu"
+          }
+        }
+      }
     },
     "Show self sufficiency percentage on stats graph" : {
       "localizations" : {
