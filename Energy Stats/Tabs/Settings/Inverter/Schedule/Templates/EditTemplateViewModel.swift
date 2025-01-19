@@ -9,7 +9,7 @@ import Energy_Stats_Core
 import Foundation
 import SwiftUI
 
-class EditTemplateViewModel: ObservableObject {
+class EditTemplateViewModel: ObservableObject, HasLoadState, HasAlertContent {
     @Published var state: LoadState = .inactive
     @Published var alertContent: AlertContent?
     @Published var schedule: Schedule?
@@ -31,7 +31,7 @@ class EditTemplateViewModel: ObservableObject {
 
     func saveTemplate(onCompletion: @escaping () -> Void) {
         guard let schedule else { return }
-        self.template = template.copy(phases: schedule.phases)
+        template = template.copy(phases: schedule.phases)
         guard template.asSchedule().isValid() else {
             alertContent = AlertContent(title: "error_title", message: "overlapping_time_periods")
             return
@@ -64,26 +64,29 @@ class EditTemplateViewModel: ObservableObject {
             return
         }
 
-        setState(.active("Saving"))
-
         Task { @MainActor in
+            await setState(.active("Saving"))
+
             do {
-                setState(.active("Saving"))
+                await setState(.active("Saving"))
                 try await networking.saveSchedule(deviceSN: deviceSN, schedule: schedule)
 
-                setState(.active("Activating"))
+                await setState(.active("Activating"))
                 try await networking.setScheduleFlag(deviceSN: deviceSN, enable: true)
 
                 Task { @MainActor in
-                    setState(.inactive)
-                    self.alertContent = AlertContent(
+                    await setState(.inactive)
+                    await setAlertContent(AlertContent(
                         title: "Success",
                         message: "Your template was activated"
-                    )
+                    ))
                 }
+            } catch NetworkError.foxServerError(44098, _) {
+                await setState(.inactive)
+                await setAlertContent(AlertContent(title: "error_title", message: LocalizedStringKey(stringLiteral: "fox_cloud_44098")))
             } catch {
-                setState(.inactive)
-                alertContent = AlertContent(title: "error_title", message: LocalizedStringKey(stringLiteral: error.localizedDescription))
+                await setState(.inactive)
+                await setAlertContent(AlertContent(title: "error_title", message: LocalizedStringKey(stringLiteral: error.localizedDescription)))
             }
         }
     }
@@ -120,11 +123,5 @@ class EditTemplateViewModel: ObservableObject {
         guard let schedule else { return }
 
         self.schedule = SchedulePhaseHelper.deleted(phaseID: id, on: schedule)
-    }
-
-    private func setState(_ state: LoadState) {
-        Task { @MainActor in
-            self.state = state
-        }
     }
 }

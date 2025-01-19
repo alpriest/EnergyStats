@@ -9,7 +9,7 @@ import Energy_Stats_Core
 import Foundation
 import SwiftUI
 
-class ScheduleSummaryViewModel: ObservableObject, HasLoadState {
+class ScheduleSummaryViewModel: ObservableObject, HasLoadState, HasAlertContent {
     let networking: Networking
     let config: ConfigManaging
     let templateStore: TemplateStoring
@@ -109,6 +109,9 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState {
 
             try await self.networking.setScheduleFlag(deviceSN: deviceSN, enable: self.schedulerEnabled)
             await self.setState(.inactive)
+        } catch NetworkError.foxServerError(44098, _) {
+            await setState(.inactive)
+            await setAlertContent(AlertContent(title: "error_title", message: LocalizedStringKey(stringLiteral: "fox_cloud_44098")))
         } catch {
             await self.setState(.error(error, error.localizedDescription))
         }
@@ -118,7 +121,7 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState {
         guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
         let schedule = template.asSchedule()
         guard schedule.isValid() else {
-            self.alertContent = AlertContent(title: "error_title", message: "overlapping_time_periods")
+            await setAlertContent(AlertContent(title: "error_title", message: "overlapping_time_periods"))
             return
         }
 
@@ -135,9 +138,12 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState {
                     message: "inverter_charge_schedule_settings_saved"
                 )
             }
+        } catch NetworkError.foxServerError(44098, _) {
+            await setState(.inactive)
+            await setAlertContent(AlertContent(title: "error_title", message: LocalizedStringKey(stringLiteral: "fox_cloud_44098")))
         } catch {
             await setState(.inactive)
-            self.alertContent = AlertContent(title: "error_title", message: LocalizedStringKey(stringLiteral: error.localizedDescription))
+            await setAlertContent(AlertContent(title: "error_title", message: LocalizedStringKey(stringLiteral: error.localizedDescription)))
         }
     }
 }

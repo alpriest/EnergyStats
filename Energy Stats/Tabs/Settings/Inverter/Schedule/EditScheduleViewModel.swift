@@ -9,7 +9,7 @@ import Energy_Stats_Core
 import Foundation
 import SwiftUI
 
-class EditScheduleViewModel: ObservableObject, HasLoadState {
+class EditScheduleViewModel: ObservableObject, HasLoadState, HasAlertContent {
     @Published var schedule: Schedule
     @Published var state: LoadState = .inactive
     @Published var alertContent: AlertContent?
@@ -75,9 +75,4 @@ class EditScheduleViewModel: ObservableObject, HasLoadState {
     }
 
     func unused() {}
-
-    @MainActor
-    func setAlertContent(_ alertContent: AlertContent) async {
-        self.alertContent = alertContent
-    }
 }

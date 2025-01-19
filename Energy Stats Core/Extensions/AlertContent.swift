@@ -7,6 +7,17 @@
 
 import SwiftUI
 
+public protocol HasAlertContent: AnyObject {
+    var alertContent: AlertContent? { get set }
+}
+
+public extension HasAlertContent {
+    @MainActor
+    func setAlertContent(_ alertContent: AlertContent) async {
+        self.alertContent = alertContent
+    }
+}
+
 public struct AlertContent {
     public let title: LocalizedStringKey?
     public let message: LocalizedStringKey
