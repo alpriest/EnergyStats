@@ -80,7 +80,11 @@ struct ParameterGraphVariablesToggles: View {
 
 #Preview {
     ParameterGraphVariablesToggles(
-        viewModel: ParametersGraphTabViewModel(networking: NetworkService.preview(), configManager: ConfigManager.preview()),
+        viewModel: ParametersGraphTabViewModel(
+            networking: NetworkService.preview(),
+            configManager: ConfigManager.preview(),
+            solarForecastProvider: { PreviewSolcast() }
+        ),
         selectedDate: .constant(nil),
         valuesAtTime: .constant(nil),
         appSettings: .mock()

@@ -130,6 +130,10 @@ struct StatsTabView: View {
 
 #if DEBUG
 #Preview {
-    StatsTabView(configManager: ConfigManager.preview(), networking: NetworkService.preview(), appSettingsPublisher: CurrentValueSubject(.mock()))
+    StatsTabView(
+        configManager: ConfigManager.preview(),
+        networking: NetworkService.preview(),
+        appSettingsPublisher: CurrentValueSubject(.mock())
+    )
 }
 #endif

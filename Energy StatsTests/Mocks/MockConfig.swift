@@ -10,8 +10,10 @@ import Energy_Stats_Core
 import Foundation
 
 class MockConfig: Config {
+    var showInverterScheduleQuickLink: Bool = true
+
     func clearDisplaySettings() {}
-    func clearDeviceSettings() { }
+    func clearDeviceSettings() {}
 
     var currencySymbol: String = ""
     var shouldCombineCT2WithPVPower: Bool = true
@@ -48,13 +50,13 @@ class MockConfig: Config {
     var devices: Data? = nil
     var showInverterTemperature: Bool = false
     var selectedDeviceSN: String? = "DEVICESN"
-    var solcastSettings: SolcastSettings = SolcastSettings(apiKey: nil, sites: [])
+    var solcastSettings: SolcastSettings = .init(apiKey: nil, sites: [])
     var dataCeiling: DataCeiling = .none
     var showTotalYieldOnPowerFlow: Bool = false
     var showFinancialSummaryOnFlowPage: Bool = false
     var separateParameterGraphsByUnit: Bool = false
     var variables: [Variable] = []
-    var powerFlowStrings: PowerFlowStringsSettings = PowerFlowStringsSettings.none
+    var powerFlowStrings: PowerFlowStringsSettings = .none
     var showBatteryPercentageRemaining: Bool = false
     var showInverterTypeName: Bool = false
     var powerStationDetail: PowerStationDetail? = nil
@@ -65,5 +67,5 @@ class MockConfig: Config {
     var summaryDateRange: SummaryDateRange = .automatic
     var colorScheme: ForcedColorScheme = .auto
     var lastSolcastRefresh: Date? = nil
-    var batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode = BatteryTemperatureDisplayMode.automatic
+    var batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode = .automatic
 }

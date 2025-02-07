@@ -84,9 +84,9 @@ class SolarForecastViewModel: ObservableObject, HasLoadState {
                     return SolarForecastViewData(
                         error: nil,
                         today: todayData,
-                        todayTotal: total(forecasts: todayData),
+                        todayTotal: todayData.total(),
                         tomorrow: tomorrowData,
-                        tomorrowTotal: total(forecasts: tomorrowData),
+                        tomorrowTotal: tomorrowData.total(),
                         name: site.name,
                         resourceId: site.resourceId
                     )
@@ -124,23 +124,23 @@ class SolarForecastViewModel: ObservableObject, HasLoadState {
     func didBecomeActiveNotification() {
         load()
     }
+}
 
-    func total(forecasts: [SolcastForecastResponse]) -> Double {
-        let totalPVOutput = forecasts.reduce(0.0) { total, forecast in
+extension Array where Element == SolcastForecastResponse {
+    func total() -> Double {
+        func convertPeriodToHours(period: String) -> Double {
+            // Extract the numeric value from the period string (assuming format "PT30M")
+            if let range = period.range(of: #"(\d+)"#, options: .regularExpression),
+               let periodMinutes = Double(period[range])
+            {
+                return periodMinutes / 60.0 // Convert minutes to hours
+            }
+            return 0.0
+        }
+
+        return reduce(0.0) { total, forecast in
             let periodHours = convertPeriodToHours(period: forecast.period)
             return total + (forecast.pvEstimate * periodHours)
         }
-
-        return totalPVOutput
-    }
-
-    func convertPeriodToHours(period: String) -> Double {
-        // Extract the numeric value from the period string (assuming format "PT30M")
-        if let range = period.range(of: #"(\d+)"#, options: .regularExpression),
-           let periodMinutes = Double(period[range])
-        {
-            return periodMinutes / 60.0 // Convert minutes to hours
-        }
-        return 0.0
     }
 }

@@ -26,8 +26,10 @@ final class ParametersGraphTabViewModelTests: XCTestCase {
         )
         sut = ParametersGraphTabViewModel(
             networking: networking,
-            configManager: configManager
-        ) { Date(timeIntervalSince1970: 1669146973) }
+            configManager: configManager,
+            dateProvider: { Date(timeIntervalSince1970: 1669146973) },
+            solarForecastProvider: { MockSolcast() }
+        )
 
         try await configManager.fetchDevices()
     }

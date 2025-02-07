@@ -77,7 +77,8 @@ public class SolcastCache: SolcastCaching {
         }
 
         let previous = previous?.forecasts ?? []
-        let todayStart = Calendar.current.startOfDay(for: today())
+        let earliestDateToRetain = Calendar.current.date(byAdding: .day, value: -5, to: today()) ?? today() // Keep 5 days of history
+        let earliestDateToRetainStart = Calendar.current.startOfDay(for: earliestDateToRetain)
 
         var merged = previous.map { p in
             if let indexOfLatestForecastPeriod = latest.firstIndex(where: { $0.periodEnd == p.periodEnd }) {
@@ -87,7 +88,7 @@ public class SolcastCache: SolcastCaching {
         }
 
         merged.append(contentsOf: latest)
-        merged = merged.filter { $0.periodEnd >= todayStart }
+        merged = merged.filter { $0.periodEnd >= earliestDateToRetainStart }
 
         if merged.isEmpty {
             try? fileManager.removeItem(at: fileURL)

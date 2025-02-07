@@ -24,7 +24,7 @@ struct TabbedView: View {
         self.solarForecastProvider = solarForecastProvider
         self.templateStore = templateStore
         _settingsTabViewModel = .init(wrappedValue: SettingsTabViewModel(userManager: userManager, config: configManager, networking: networking))
-        _parametersGraphTabViewModel = .init(wrappedValue: ParametersGraphTabViewModel(networking: networking, configManager: configManager))
+        _parametersGraphTabViewModel = .init(wrappedValue: ParametersGraphTabViewModel(networking: networking, configManager: configManager, solarForecastProvider: solarForecastProvider))
     }
 
     var body: some View {

@@ -59,6 +59,7 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
     @Published var xScale: ClosedRange<Date> = Calendar.current.startOfDay(for: Date())...Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))!
     @Published var hasLoaded: Bool = false
     private var loadTask: Task<Void, Never>?
+    private let solarForecastProvider: SolarForecastProviding
 
     @Published var displayMode: ParametersGraphDisplayMode {
         didSet {
@@ -88,10 +89,16 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
 
     private var cancellable: AnyCancellable?
 
-    init(networking: Networking, configManager: ConfigManaging, dateProvider: @escaping () -> Date = { Date() }) {
+    init(
+        networking: Networking,
+        configManager: ConfigManaging,
+        dateProvider: @escaping () -> Date = { Date() },
+        solarForecastProvider: @escaping SolarForecastProviding
+    ) {
         self.networking = networking
         self.configManager = configManager
         self.dateProvider = dateProvider
+        self.solarForecastProvider = solarForecastProvider
         displayMode = ParametersGraphDisplayMode(date: dateProvider(), hours: 24)
         haptic.prepare()
 
@@ -156,11 +163,12 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
                     ParameterGraphValue(date: $0.time, value: $0.value, variable: rawVariable)
                 }
             }
+            let solarData = await fetchSolarForecasts()
 
             if Task.isCancelled { return }
 
             await MainActor.run {
-                self.rawData = rawData
+                self.rawData = rawData + solarData
                 self.refresh()
                 prepareExport()
                 Task {
@@ -295,6 +303,87 @@ extension ParametersGraphTabViewModel: LoadTracking {
             lastLoadState.loadState.variables != graphVariables
 
         return sufficientTimeHasPassed || viewDataHasChanged
+    }
+}
+
+// Solar
+extension ParametersGraphTabViewModel {
+    func fetchSolarForecasts() async -> [ParameterGraphValue] {
+        guard let apiKey = configManager.solcastSettings.apiKey else { return [] }
+        guard let requestedDate = queryDate.asDate() else { return [] }
+        let today = Calendar.current.startOfDay(for: requestedDate)
+        let service = solarForecastProvider()
+
+        do {
+            let data = try await configManager.solcastSettings.sites.asyncMap { site in
+                let data = try await service.fetchForecast(for: site, apiKey: apiKey, ignoreCache: false)
+                let todayData = data.forecasts.filter { $0.periodEnd.isSame(as: today) }
+
+                return todayData
+            }.flatMap { $0 }
+
+            let groupedForecasts = aggregateAndIntegrateForecasts(data)
+
+            return groupedForecasts.map { solcastResponse in
+                ParameterGraphValue(
+                    date: solcastResponse.periodEnd,
+                    value: solcastResponse.pvEstimate,
+                    variable: Variable(name: "Solar", variable: "solar-estimate", unit: "kW")
+                )
+            }.sorted(by: { $0.date < $1.date })
+        } catch {
+            return []
+        }
+    }
+
+    func aggregateAndIntegrateForecasts(_ forecasts: [SolcastForecastResponse]) -> [SolcastForecastResponse] {
+        let calendar = Calendar.current
+
+        // Step 1: Sum duplicate periodEnds
+        let summedForecasts = Dictionary(grouping: forecasts, by: { $0.periodEnd })
+            .map { periodEnd, entries in
+                SolcastForecastResponse(
+                    pvEstimate: entries.reduce(0) { $0 + $1.pvEstimate },
+                    pvEstimate10: entries.reduce(0) { $0 + $1.pvEstimate10 },
+                    pvEstimate90: entries.reduce(0) { $0 + $1.pvEstimate90 },
+                    periodEnd: periodEnd,
+                    period: entries.first?.period ?? ""
+                )
+            }
+
+        // Step 2: Group by hour
+        let hourlyGrouped = Dictionary(grouping: summedForecasts) { forecast in
+            calendar.date(bySetting: .minute, value: 0, of: forecast.periodEnd)!
+        }
+
+        // Step 3: Perform Riemann sum integration for each hour
+        return hourlyGrouped.map { periodStart, forecastsInHour in
+            let sorted = forecastsInHour.sorted(by: { $0.periodEnd < $1.periodEnd })
+
+            var totalPvEstimate: Double = 0
+            var totalPvEstimate10: Double = 0
+            var totalPvEstimate90: Double = 0
+
+            for i in 0 ..< sorted.count - 1 {
+                let left = sorted[i]
+                let right = sorted[i + 1]
+
+                let timeDiff = right.periodEnd.timeIntervalSince(left.periodEnd) / 3600.0 // Convert to hours
+
+                // Trapezoidal Riemann sum integration
+                totalPvEstimate += 0.5 * timeDiff * (left.pvEstimate + right.pvEstimate)
+                totalPvEstimate10 += 0.5 * timeDiff * (left.pvEstimate10 + right.pvEstimate10)
+                totalPvEstimate90 += 0.5 * timeDiff * (left.pvEstimate90 + right.pvEstimate90)
+            }
+
+            return SolcastForecastResponse(
+                pvEstimate: totalPvEstimate,
+                pvEstimate10: totalPvEstimate10,
+                pvEstimate90: totalPvEstimate90,
+                periodEnd: periodStart, // Use the start of the hour as reference
+                period: "1h"
+            )
+        }.sorted(by: { $0.periodEnd < $1.periodEnd }) // Ensure chronological order
     }
 }
 

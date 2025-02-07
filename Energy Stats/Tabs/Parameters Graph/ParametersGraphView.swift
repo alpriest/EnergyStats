@@ -166,7 +166,11 @@ struct ParametersGraphView: View {
 
 struct UsageGraphView_Previews: PreviewProvider {
     static var previews: some View {
-        let model = ParametersGraphTabViewModel(networking: NetworkService.preview(), configManager: ConfigManager.preview())
+        let model = ParametersGraphTabViewModel(
+            networking: NetworkService.preview(),
+            configManager: ConfigManager.preview(),
+            solarForecastProvider: { PreviewSolcast() }
+        )
         Task { await model.load() }
         return ParametersGraphView(
             key: "℃",

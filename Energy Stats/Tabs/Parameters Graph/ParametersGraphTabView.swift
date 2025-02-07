@@ -126,7 +126,11 @@ struct ParametersGraphTabView: View {
 
 struct GraphTabView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = ParametersGraphTabViewModel(networking: NetworkService.preview(), configManager: ConfigManager.preview())
+        let viewModel = ParametersGraphTabViewModel(
+            networking: NetworkService.preview(),
+            configManager: ConfigManager.preview(),
+            solarForecastProvider: { PreviewSolcast() }
+        )
 
         return ParametersGraphTabView(configManager: ConfigManager.preview(),
                                       viewModel: viewModel)

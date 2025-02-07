@@ -121,8 +121,8 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
     }
 
     func performLoad() {
-        self.loadTask?.cancel()
-        self.loadTask = Task { @MainActor in await self.load() }
+        loadTask?.cancel()
+        loadTask = Task { @MainActor in await self.load() }
     }
 
     func load() async {
@@ -171,7 +171,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
             }
         } catch {
             if Task.isCancelled { return }
-            
+
             await setState(.error(error, "Could not load from Fox OpenAPI"))
         }
     }

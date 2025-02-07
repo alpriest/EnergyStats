@@ -32,7 +32,7 @@ struct LeftTabbedView: View {
         self.solarForecastProvider = solarForecastProvider
         self.templateStore = templateStore
         _settingsTabViewModel = .init(wrappedValue: SettingsTabViewModel(userManager: userManager, config: configManager, networking: networking))
-        _parametersGraphTabViewModel = .init(wrappedValue: ParametersGraphTabViewModel(networking: networking, configManager: configManager))
+        _parametersGraphTabViewModel = .init(wrappedValue: ParametersGraphTabViewModel(networking: networking, configManager: configManager, solarForecastProvider: solarForecastProvider))
     }
 
     var body: some View {
@@ -52,7 +52,11 @@ struct LeftTabbedView: View {
                     }
 
                     NavigationLink {
-                        StatsTabView(configManager: configManager, networking: networking, appSettingsPublisher: configManager.appSettingsPublisher)
+                        StatsTabView(
+                            configManager: configManager,
+                            networking: networking,
+                            appSettingsPublisher: configManager.appSettingsPublisher
+                        )
                     } label: {
                         StatsTabItem()
                     }

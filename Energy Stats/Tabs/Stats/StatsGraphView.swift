@@ -49,6 +49,14 @@ struct StatsGraphValue: Identifiable, Hashable {
             (displayValue ?? graphValue).kWh(decimalPlaces)
         }
     }
+
+    var isForNormalGraph: Bool {
+        type != .selfSufficiency
+    }
+
+    var isForSelfSufficiencyGraph: Bool {
+        type == .selfSufficiency
+    }
 }
 
 struct StatsGraphView: View {
@@ -62,7 +70,7 @@ struct StatsGraphView: View {
     var body: some View {
         ZStack {
             Chart {
-                ForEach(viewModel.data.filter { $0.type != .selfSufficiency }, id: \.type.title) {
+                ForEach(viewModel.data.filter { $0.isForNormalGraph }, id: \.type.title) {
                     BarMark(
                         x: .value("hour", $0.date, unit: viewModel.unit),
                         y: .value("Amount", $0.graphValue)
@@ -72,7 +80,7 @@ struct StatsGraphView: View {
                 }
 
                 if appSettings.showSelfSufficiencyStatsGraphOverlay && appSettings.selfSufficiencyEstimateMode != .off {
-                    ForEach(viewModel.data.filter { $0.type == .selfSufficiency }) {
+                    ForEach(viewModel.data.filter { $0.isForSelfSufficiencyGraph }) {
                         LineMark(
                             x: .value("hour", $0.date, unit: viewModel.unit),
                             y: .value("Amount", $0.graphValue)
@@ -177,7 +185,10 @@ struct StatsGraphView: View {
 #Preview {
     VStack {
         Text(verbatim: "Day by hours")
-        let viewModel = StatsTabViewModel(networking: NetworkService.preview(), configManager: ConfigManager.preview())
+        let viewModel = StatsTabViewModel(
+            networking: NetworkService.preview(),
+            configManager: ConfigManager.preview()
+        )
 
         StatsGraphView(
             viewModel: viewModel,

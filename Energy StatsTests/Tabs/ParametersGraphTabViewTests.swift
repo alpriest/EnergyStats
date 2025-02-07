@@ -11,6 +11,7 @@ import Energy_Stats_Core
 import SnapshotTesting
 import SwiftUI
 import XCTest
+import Energy_Stats_UITestsw
 
 // Record these on iPhone 16 Pro
 final class ParametersGraphTabViewTests: XCTestCase {
@@ -27,7 +28,14 @@ final class ParametersGraphTabViewTests: XCTestCase {
 
         let sut = ParametersGraphTabView(
             configManager: configManager,
-            viewModel: ParametersGraphTabViewModel(networking: networking, configManager: configManager, dateProvider: { Date(timeIntervalSince1970: 1664127352) })
+            viewModel: ParametersGraphTabViewModel(
+                networking: networking,
+                configManager: configManager,
+                dateProvider: {
+                    Date(timeIntervalSince1970: 1664127352)
+                },
+                solarForecastProvider: { MockSolcast() }
+            )
         )
         let view = UIHostingController(rootView: sut.environmentObject(UserManager(store: MockKeychainStore(), configManager: configManager, networkCache: InMemoryLoggingNetworkStore())))
 
@@ -49,7 +57,12 @@ final class ParametersGraphTabViewTests: XCTestCase {
         try await configManager.fetchDevices()
         let sut = ParametersGraphTabView(
             configManager: configManager,
-            viewModel: ParametersGraphTabViewModel(networking: networking, configManager: configManager, dateProvider: { Date(timeIntervalSince1970: 1664127352) })
+            viewModel: ParametersGraphTabViewModel(
+                networking: networking,
+                configManager: configManager,
+                dateProvider: { Date(timeIntervalSince1970: 1664127352) },
+                solarForecastProvider: { MockSolcast() }
+            )
         )
 
         let view = UIHostingController(rootView: sut.environmentObject(UserManager(store: MockKeychainStore(), configManager: configManager, networkCache: InMemoryLoggingNetworkStore())))
