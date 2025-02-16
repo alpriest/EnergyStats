@@ -52,6 +52,7 @@ public struct AppSettings {
     public var minSOC: Double
     public var batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode
     public var showInverterScheduleQuickLink: Bool
+    public var showSolcastOnParametersPage: Bool
 
     public init(
         showColouredLines: Bool,
@@ -90,7 +91,8 @@ public struct AppSettings {
         earningsModel: EarningsModel,
         minSOC: Double,
         batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode,
-        showInverterScheduleQuickLink: Bool
+        showInverterScheduleQuickLink: Bool,
+        showSolcastOnParametersPage: Bool
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -129,6 +131,7 @@ public struct AppSettings {
         self.minSOC = minSOC
         self.batteryTemperatureDisplayMode = batteryTemperatureDisplayMode
         self.showInverterScheduleQuickLink = showInverterScheduleQuickLink
+        self.showSolcastOnParametersPage = showSolcastOnParametersPage
     }
 
     public func copy(
@@ -168,7 +171,8 @@ public struct AppSettings {
         earningsModel: EarningsModel? = nil,
         minSOC: Double? = nil,
         batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode? = nil,
-        showInverterScheduleQuickLink: Bool? = nil
+        showInverterScheduleQuickLink: Bool? = nil,
+        showSolcastOnParametersPage: Bool? = nil
     ) -> AppSettings {
         AppSettings(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -207,7 +211,8 @@ public struct AppSettings {
             earningsModel: earningsModel ?? self.earningsModel,
             minSOC: minSOC ?? self.minSOC,
             batteryTemperatureDisplayMode: batteryTemperatureDisplayMode ?? self.batteryTemperatureDisplayMode,
-            showInverterScheduleQuickLink: showInverterScheduleQuickLink ?? self.showInverterScheduleQuickLink
+            showInverterScheduleQuickLink: showInverterScheduleQuickLink ?? self.showInverterScheduleQuickLink,
+            showSolcastOnParametersPage: showSolcastOnParametersPage ?? self.showSolcastOnParametersPage
         )
     }
 }

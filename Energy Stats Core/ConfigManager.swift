@@ -602,6 +602,16 @@ public class ConfigManager: ConfigManaging {
             ))
         }
     }
+
+    public var showSolcastOnParametersPage: Bool {
+        get { config.showSolcastOnParametersPage }
+        set {
+            config.showSolcastOnParametersPage = newValue
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+                showSolcastOnParametersPage: config.showSolcastOnParametersPage
+            ))
+        }
+    }
 }
 
 public enum BatteryResponseMapper {

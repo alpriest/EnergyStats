@@ -23,6 +23,14 @@ struct SolcastSettingsView: View {
                     SecureField("API Key", text: $viewModel.apiKey)
                 }
 
+                Section {
+                    Toggle(isOn: $viewModel.showSolcastOnParametersPage) {
+                        Text("Show solar forecast on parameters page")
+                    }
+                } footer: {
+                    Text("Solcast provides only future data, which is fetched when the app is launched. To view today’s prediction, you must have opened the app yesterday")
+                }
+
                 ForEach(viewModel.sites, id: \.resourceId) { site in
                     Section {
                         SolcastSiteView(site: site)

@@ -53,7 +53,8 @@ public extension AppSettings {
             earningsModel: .exported,
             minSOC: 0.2,
             batteryTemperatureDisplayMode: .automatic,
-            showInverterScheduleQuickLink: true
+            showInverterScheduleQuickLink: true,
+            showSolcastOnParametersPage: false
         )
     }
 }

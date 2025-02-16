@@ -60,6 +60,7 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "lastSolcastRefresh")
         UserDefaults.shared.removeObject(forKey: "batteryTemperatureDisplayMode")
         UserDefaults.shared.removeObject(forKey: "showInverterScheduleQuickLink")
+        UserDefaults.shared.removeObject(forKey: "showSolcastOnParametersPage")
         UserDefaults.shared.synchronize()
     }
 
@@ -285,4 +286,7 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredBool(key: "showInverterScheduleQuickLink")
     public var showInverterScheduleQuickLink: Bool
+
+    @UserDefaultsStoredBool(key: "showSolcastOnParametersPage")
+    public var showSolcastOnParametersPage: Bool
 }

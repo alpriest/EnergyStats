@@ -371,6 +371,7 @@ public class MockConfig: Config {
     public var lastSolcastRefresh: Date? = nil
     public var batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode = .automatic
     public var showInverterScheduleQuickLink: Bool = true
+    public var showSolcastOnParametersPage: Bool = false
 }
 
 public extension SolcastSite {

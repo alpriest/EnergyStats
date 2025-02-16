@@ -13292,6 +13292,9 @@
         }
       }
     },
+    "Show solar forecast on parameters page" : {
+
+    },
     "Show sunshine background" : {
       "localizations" : {
         "de" : {
@@ -13646,6 +13649,9 @@
           }
         }
       }
+    },
+    "Solcast provides only future data, which is fetched when the app is launched. To view today’s prediction, you must have opened the app yesterday" : {
+
     },
     "Solcast solar prediction" : {
       "localizations" : {

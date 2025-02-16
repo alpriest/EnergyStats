@@ -61,7 +61,8 @@ public enum AppSettingsPublisherFactory {
             earningsModel: config.earningsModel,
             minSOC: config.minSOC,
             batteryTemperatureDisplayMode: config.batteryTemperatureDisplayMode,
-            showInverterScheduleQuickLink: config.showInverterScheduleQuickLink
+            showInverterScheduleQuickLink: config.showInverterScheduleQuickLink,
+            showSolcastOnParametersPage: config.showSolcastOnParametersPage
         )
     }
 }
