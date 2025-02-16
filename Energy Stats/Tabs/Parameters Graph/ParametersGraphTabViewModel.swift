@@ -88,7 +88,6 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
     }
 
     private var cancellable: AnyCancellable?
-    private let solarVariable = Variable(name: String(key: .solcastPrediction), variable: "solar-estimate", unit: "kW")
 
     init(
         networking: Networking,
@@ -117,7 +116,10 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
 
                 let solarGraphVariable: [ParameterGraphVariable]
                 if configManager.showSolcastOnParametersPage {
-                    solarGraphVariable = [ParameterGraphVariable(solarVariable, isSelected: selectedGraphVariables.contains(solarVariable.variable))]
+                    solarGraphVariable = [ParameterGraphVariable(
+                        Variable.solcastPredictionVariable,
+                        isSelected: selectedGraphVariables.contains(Variable.solcastPredictionVariable.variable)
+                    )]
                 } else {
                     solarGraphVariable = []
                 }
@@ -338,7 +340,7 @@ extension ParametersGraphTabViewModel {
                 ParameterGraphValue(
                     date: solcastResponse.periodEnd,
                     value: solcastResponse.pvEstimate,
-                    variable: solarVariable
+                    variable: Variable.solcastPredictionVariable
                 )
             }.sorted(by: { $0.date < $1.date })
         } catch {

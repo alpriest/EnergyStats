@@ -47,6 +47,10 @@ public struct Variable: Codable, Equatable, Hashable {
     public static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.variable == rhs.variable
     }
+
+    public static var solcastPredictionVariable: Variable {
+        Variable(name: String(key: .solcastPrediction), variable: "solcast-prediction", unit: "kW")
+    }
 }
 
 public extension Variable {
@@ -100,6 +104,8 @@ public extension Variable {
             return .purple.opacity(0.8)
         case "loadsPower":
             return Color("loads_power").opacity(0.2)
+        case Variable.solcastPredictionVariable.variable:
+            return .blue
         default:
             if let md5 = self.variable.md5() {
                 return Color(hex: String(md5.prefix(6)))

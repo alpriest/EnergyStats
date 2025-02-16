@@ -37,12 +37,22 @@ struct ParametersGraphView: View {
 
     var body: some View {
         Chart(data.values, id: \.type.variable) {
-            LineMark(
-                x: .value("hour", $0.date),
-                y: .value("", $0.value),
-                series: .value("Title", $0.type.title(as: .snapshot))
-            )
-            .foregroundStyle($0.type.colour)
+            if $0.type.variable == Variable.solcastPredictionVariable.variable {
+                LineMark(
+                    x: .value("hour", $0.date),
+                    y: .value("", $0.value),
+                    series: .value("Title", $0.type.title(as: .snapshot))
+                )
+                .foregroundStyle($0.type.colour)
+                .lineStyle(StrokeStyle(lineWidth: 2, dash: [5, 5], dashPhase: 0))
+            } else {
+                LineMark(
+                    x: .value("hour", $0.date),
+                    y: .value("", $0.value),
+                    series: .value("Title", $0.type.title(as: .snapshot))
+                )
+                .foregroundStyle($0.type.colour)
+            }
         }
         .chartPlotStyle { content in
             content.background(Color.gray.gradient.opacity(0.04))
