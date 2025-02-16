@@ -54,7 +54,7 @@ public extension AppSettings {
             minSOC: 0.2,
             batteryTemperatureDisplayMode: .automatic,
             showInverterScheduleQuickLink: true,
-            showSolcastOnParametersPage: false
+            fetchSolcastOnAppLaunch: false
         )
     }
 }

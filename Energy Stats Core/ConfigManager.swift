@@ -603,12 +603,12 @@ public class ConfigManager: ConfigManaging {
         }
     }
 
-    public var showSolcastOnParametersPage: Bool {
-        get { config.showSolcastOnParametersPage }
+    public var fetchSolcastOnAppLaunch: Bool {
+        get { config.fetchSolcastOnAppLaunch }
         set {
-            config.showSolcastOnParametersPage = newValue
+            config.fetchSolcastOnAppLaunch = newValue
             appSettingsPublisher.send(appSettingsPublisher.value.copy(
-                showSolcastOnParametersPage: config.showSolcastOnParametersPage
+                fetchSolcastOnAppLaunch: config.fetchSolcastOnAppLaunch
             ))
         }
     }

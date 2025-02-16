@@ -114,15 +114,10 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
                                                   enabled: selectedGraphVariables.contains(variable.variable))
                 }
 
-                let solarGraphVariable: [ParameterGraphVariable]
-                if configManager.showSolcastOnParametersPage {
-                    solarGraphVariable = [ParameterGraphVariable(
-                        Variable.solcastPredictionVariable,
-                        isSelected: selectedGraphVariables.contains(Variable.solcastPredictionVariable.variable)
-                    )]
-                } else {
-                    solarGraphVariable = []
-                }
+                let solarGraphVariable = [ParameterGraphVariable(
+                    Variable.solcastPredictionVariable,
+                    isSelected: selectedGraphVariables.contains(Variable.solcastPredictionVariable.variable)
+                )]
 
                 return configVariables + solarGraphVariable
             }
@@ -175,7 +170,7 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
                     ParameterGraphValue(date: $0.time, value: $0.value, variable: rawVariable)
                 }
             }
-            let solarData = configManager.showSolcastOnParametersPage ? await fetchSolarForecasts() : []
+            let solarData = configManager.fetchSolcastOnAppLaunch ? await fetchSolarForecasts() : []
 
             if Task.isCancelled { return }
 

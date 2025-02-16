@@ -52,7 +52,7 @@ public struct AppSettings {
     public var minSOC: Double
     public var batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode
     public var showInverterScheduleQuickLink: Bool
-    public var showSolcastOnParametersPage: Bool
+    public var fetchSolcastOnAppLaunch: Bool
 
     public init(
         showColouredLines: Bool,
@@ -92,7 +92,7 @@ public struct AppSettings {
         minSOC: Double,
         batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode,
         showInverterScheduleQuickLink: Bool,
-        showSolcastOnParametersPage: Bool
+        fetchSolcastOnAppLaunch: Bool
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -131,7 +131,7 @@ public struct AppSettings {
         self.minSOC = minSOC
         self.batteryTemperatureDisplayMode = batteryTemperatureDisplayMode
         self.showInverterScheduleQuickLink = showInverterScheduleQuickLink
-        self.showSolcastOnParametersPage = showSolcastOnParametersPage
+        self.fetchSolcastOnAppLaunch = fetchSolcastOnAppLaunch
     }
 
     public func copy(
@@ -172,7 +172,7 @@ public struct AppSettings {
         minSOC: Double? = nil,
         batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode? = nil,
         showInverterScheduleQuickLink: Bool? = nil,
-        showSolcastOnParametersPage: Bool? = nil
+        fetchSolcastOnAppLaunch: Bool? = nil
     ) -> AppSettings {
         AppSettings(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -212,7 +212,7 @@ public struct AppSettings {
             minSOC: minSOC ?? self.minSOC,
             batteryTemperatureDisplayMode: batteryTemperatureDisplayMode ?? self.batteryTemperatureDisplayMode,
             showInverterScheduleQuickLink: showInverterScheduleQuickLink ?? self.showInverterScheduleQuickLink,
-            showSolcastOnParametersPage: showSolcastOnParametersPage ?? self.showSolcastOnParametersPage
+            fetchSolcastOnAppLaunch: fetchSolcastOnAppLaunch ?? self.fetchSolcastOnAppLaunch
         )
     }
 }

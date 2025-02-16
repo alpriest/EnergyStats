@@ -24,12 +24,12 @@ struct SolcastSettingsView: View {
                 }
 
                 Section {
-                    Toggle(isOn: $viewModel.showSolcastOnParametersPage) {
-                        Text("Show solar forecast on parameters page")
+                    Toggle(isOn: $viewModel.fetchSolcastOnAppLaunch) {
+                        Text("Fetch solar forecast on app launch")
                     }
                 } footer: {
-                    if viewModel.showSolcastOnParametersPage {
-                        Text("Your Solcast predictions are fetched when Energy Stats loads (at most once every 8 hours). Since Solcast only provides future data, you must have opened the app yesterday to view today’s prediction. Add the 'Solcast solar prediction' parameter on the parameters graph variable selector.")
+                    if viewModel.fetchSolcastOnAppLaunch {
+                        Text("Your Solcast predictions are fetched when Energy Stats loads (at most once every 8 hours). Add the 'Solcast solar prediction' parameter on the parameters graph variable selector. Since Solcast only provides future data, you must have opened the app yesterday to view today’s prediction.")
                     } else {
                         Text("Your Solcast predictions are fetched when you visit the Summary tab (at most once every 8 hours). Note that Solcast only provides future data.")
                     }

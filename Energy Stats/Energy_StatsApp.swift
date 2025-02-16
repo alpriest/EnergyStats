@@ -119,7 +119,7 @@ struct Energy_StatsApp: App {
     }
 
     private func refreshSolcast(solarForecastProvider: SolarForecastProviding) async {
-        guard configManager.showSolcastOnParametersPage else { return }
+        guard configManager.fetchSolcastOnAppLaunch else { return }
         guard let apiKey = configManager.solcastSettings.apiKey else { return }
 
         let service = solarForecastProvider()

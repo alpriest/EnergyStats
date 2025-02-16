@@ -69,7 +69,7 @@ public protocol ConfigManaging: FinancialConfigManager, SolcastConfigManager, Ba
     var lastSolcastRefresh: Date? { get set }
     var batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode { get set }
     var showInverterScheduleQuickLink: Bool { get set }
-    var showSolcastOnParametersPage: Bool { get set }
+    var fetchSolcastOnAppLaunch: Bool { get set }
 }
 
 public protocol BatteryConfigManager {
