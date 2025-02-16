@@ -94,6 +94,10 @@ struct Energy_StatsApp: App {
                             Energy_StatsApp.delegate.config = configManager
                             session.activate()
                         }
+
+                        Task {
+                            await refreshSolcast(solarForecastProvider: solarForecastProvider)
+                        }
                     }
                 }
                 .task {
@@ -112,6 +116,21 @@ struct Energy_StatsApp: App {
         try? keychainStore.store(key: .minSOC, value: configManager.minSOC)
         try? keychainStore.store(key: .shouldCombineCT2WithPVPower, value: configManager.shouldCombineCT2WithPVPower)
         try? keychainStore.store(key: .showUsableBatteryOnly, value: configManager.showUsableBatteryOnly)
+    }
+
+    private func refreshSolcast(solarForecastProvider: SolarForecastProviding) async {
+        guard configManager.showSolcastOnParametersPage else { return }
+        guard let apiKey = configManager.solcastSettings.apiKey else { return }
+
+        let service = solarForecastProvider()
+
+        do {
+            _ = try await configManager.solcastSettings.sites.asyncMap { site in
+                _ = try await service.fetchForecast(for: site, apiKey: apiKey, ignoreCache: false)
+            }
+        } catch {
+            // Ignore
+        }
     }
 }
 

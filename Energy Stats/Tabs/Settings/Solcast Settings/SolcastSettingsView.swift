@@ -28,7 +28,11 @@ struct SolcastSettingsView: View {
                         Text("Show solar forecast on parameters page")
                     }
                 } footer: {
-                    Text("Solcast provides only future data, which is fetched when the app is launched. To view today’s prediction, you must have opened the app yesterday")
+                    if viewModel.showSolcastOnParametersPage {
+                        Text("Your Solcast predictions are fetched when Energy Stats loads (at most once every 8 hours). Since Solcast only provides future data, you must have opened the app yesterday to view today’s prediction. Add the 'Solcast solar prediction' parameter on the parameters graph variable selector.")
+                    } else {
+                        Text("Your Solcast predictions are fetched when you visit the Summary tab (at most once every 8 hours). Note that Solcast only provides future data.")
+                    }
                 }
 
                 ForEach(viewModel.sites, id: \.resourceId) { site in

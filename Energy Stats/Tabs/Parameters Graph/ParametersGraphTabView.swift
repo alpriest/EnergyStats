@@ -57,7 +57,12 @@ struct ParametersGraphTabView: View {
                             .loadable(viewModel.state, options: [.retry], overlay: true, retry: { Task { await viewModel.load() } })
                     }
 
-                    ParameterGraphVariablesToggles(viewModel: viewModel, selectedDate: $selectedDate, valuesAtTime: $valuesAtTime, appSettings: appSettings)
+                    ParameterGraphVariablesToggles(
+                        viewModel: viewModel,
+                        selectedDate: $selectedDate,
+                        valuesAtTime: $valuesAtTime,
+                        appSettings: appSettings
+                    )
 
                     Text("Parameters are updated every 5 minutes by FoxESS and only available for a single day at a time")
                         .font(.footnote)

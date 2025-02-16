@@ -13293,7 +13293,32 @@
       }
     },
     "Show solar forecast on parameters page" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zeige die Solarprognose auf der Parameterseite"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar la previsión solar en la página de parámetros"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra la previsione solare nella pagina dei parametri"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pokaż prognozę słoneczną na stronie parametrów"
+          }
+        }
+      }
     },
     "Show sunshine background" : {
       "localizations" : {
@@ -13649,9 +13674,6 @@
           }
         }
       }
-    },
-    "Solcast provides only future data, which is fetched when the app is launched. To view today’s prediction, you must have opened the app yesterday" : {
-
     },
     "Solcast solar prediction" : {
       "localizations" : {
@@ -15837,6 +15859,62 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Stan Twojego inwertera jest zgłaszany jako"
+          }
+        }
+      }
+    },
+    "Your Solcast predictions are fetched when Energy Stats loads (at most once every 8 hours). Since Solcast only provides future data, you must have opened the app yesterday to view today’s prediction. Add the 'Solcast solar prediction' parameter on the parameters graph variable selector." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deine Solcast-Vorhersagen werden abgerufen, wenn Energy Stats geladen wird (höchstens einmal alle 8 Stunden). Da Solcast nur zukünftige Daten bereitstellt, musst du die App gestern geöffnet haben, um die heutige Vorhersage zu sehen. Füge den Parameter „Solcast-Solarprognose“ im Variablenauswahlmenü des Parameterdiagramms hinzu."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tus predicciones de Solcast se obtienen cuando Energy Stats se carga (como máximo una vez cada 8 horas). Como Solcast solo proporciona datos futuros, debes haber abierto la aplicación ayer para ver la predicción de hoy. Agrega el parámetro “Predicción solar de Solcast” en el selector de variables del gráfico de parámetros."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le tue previsioni Solcast vengono recuperate quando Energy Stats si carica (al massimo una volta ogni 8 ore). Poiché Solcast fornisce solo dati futuri, devi aver aperto l’app ieri per visualizzare la previsione di oggi. Aggiungi il parametro “Previsione solare Solcast” nel selettore di variabili del grafico dei parametri."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Twoje prognozy Solcast są pobierane podczas ładowania Energy Stats (maksymalnie raz na 8 godzin). Ponieważ Solcast dostarcza tylko dane przyszłe, aby zobaczyć dzisiejszą prognozę, musiałeś otworzyć aplikację wczoraj. Dodaj parametr „Prognoza słoneczna Solcast” w selektorze zmiennych wykresu parametrów."
+          }
+        }
+      }
+    },
+    "Your Solcast predictions are fetched when you visit the Summary tab (at most once every 8 hours). Note that Solcast only provides future data." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deine Solcast-Vorhersagen werden abgerufen, wenn du den Zusammenfassungs-Tab besuchst (höchstens einmal alle 8 Stunden). Bitte beachte, dass Solcast nur zukünftige Daten bereitstellt."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tus predicciones de Solcast se obtienen cuando visitas la pestaña Resumen (como máximo una vez cada 8 horas). Ten en cuenta que Solcast solo proporciona datos futuros."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le tue previsioni Solcast vengono recuperate quando visiti la scheda Riepilogo (al massimo una volta ogni 8 ore). Tieni presente che Solcast fornisce solo dati futuri."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Twoje prognozy Solcast są pobierane, gdy odwiedzasz kartę Podsumowanie (maksymalnie raz na 8 godzin). Pamiętaj, że Solcast dostarcza tylko dane przyszłe."
           }
         }
       }

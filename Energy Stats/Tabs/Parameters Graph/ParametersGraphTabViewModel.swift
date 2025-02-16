@@ -88,6 +88,7 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
     }
 
     private var cancellable: AnyCancellable?
+    private let solarVariable = Variable(name: String(key: .solcastPrediction), variable: "solar-estimate", unit: "kW")
 
     init(
         networking: Networking,
@@ -106,13 +107,22 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
             .map { [weak self] _ in
                 guard let self else { return [] }
 
-                return configManager.variables.compactMap { [weak self] variable -> ParameterGraphVariable? in
+                let configVariables = configManager.variables.compactMap { [weak self] variable -> ParameterGraphVariable? in
                     guard let self else { return nil }
 
                     return ParameterGraphVariable(variable,
                                                   isSelected: selectedGraphVariables.contains(variable.variable),
                                                   enabled: selectedGraphVariables.contains(variable.variable))
                 }
+
+                let solarGraphVariable: [ParameterGraphVariable]
+                if configManager.showSolcastOnParametersPage {
+                    solarGraphVariable = [ParameterGraphVariable(solarVariable, isSelected: selectedGraphVariables.contains(solarVariable.variable))]
+                } else {
+                    solarGraphVariable = []
+                }
+
+                return configVariables + solarGraphVariable
             }
             .receive(on: RunLoop.main)
             .assign(to: \.graphVariables, on: self)
@@ -163,7 +173,7 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
                     ParameterGraphValue(date: $0.time, value: $0.value, variable: rawVariable)
                 }
             }
-            let solarData = await fetchSolarForecasts()
+            let solarData = configManager.showSolcastOnParametersPage ? await fetchSolarForecasts() : []
 
             if Task.isCancelled { return }
 
@@ -328,7 +338,7 @@ extension ParametersGraphTabViewModel {
                 ParameterGraphValue(
                     date: solcastResponse.periodEnd,
                     value: solcastResponse.pvEstimate,
-                    variable: Variable(name: "Solar", variable: "solar-estimate", unit: "kW")
+                    variable: solarVariable
                 )
             }.sorted(by: { $0.date < $1.date })
         } catch {

@@ -15,7 +15,11 @@ class SolcastSettingsViewModel: ObservableObject {
     @Published var alertContent: AlertContent?
     private let solarService: SolarForecastProviding
     @Published var sites: [SolcastSite] = []
-    @Published var showSolcastOnParametersPage: Bool = false
+    @Published var showSolcastOnParametersPage: Bool = false {
+        didSet {
+            configManager.showSolcastOnParametersPage = showSolcastOnParametersPage
+        }
+    }
 
     init(configManager: ConfigManaging, solarService: @escaping SolarForecastProviding) {
         self.configManager = configManager
