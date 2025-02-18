@@ -159,7 +159,10 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
         await setState(.active("Loading"))
 
         do {
-            let rawGraphVariables = graphVariables.filter { $0.isSelected }.compactMap { $0.type }
+            let rawGraphVariables = graphVariables
+                .filter { $0.isSelected }
+                .filter { $0.type.variable != Variable.solcastPredictionVariable.variable }
+                .compactMap { $0.type }
             let startDate = Calendar.current.startOfDay(for: start)
             let endDate = Calendar.current.date(byAdding: .day, value: 1, to: startDate) ?? startDate
             let raw = try await networking.fetchHistory(deviceSN: currentDevice.deviceSN, variables: rawGraphVariables.map { $0.variable }, start: startDate, end: endDate)
@@ -170,7 +173,7 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
                     ParameterGraphValue(date: $0.time, value: $0.value, variable: rawVariable)
                 }
             }
-            let solarData = configManager.fetchSolcastOnAppLaunch ? await fetchSolarForecasts() : []
+            let solarData = selectedGraphVariables.contains(Variable.solcastPredictionVariable.variable) ? await fetchSolarForecasts() : []
 
             if Task.isCancelled { return }
 
