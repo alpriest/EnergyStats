@@ -332,7 +332,7 @@ extension ParametersGraphTabViewModel {
                 return todayData
             }.flatMap { $0 }
 
-            let groupedForecasts = aggregateAndIntegrateForecasts(data)
+            let groupedForecasts = aggregateForecasts(data)
 
             return groupedForecasts.map { solcastResponse in
                 ParameterGraphValue(
@@ -346,11 +346,8 @@ extension ParametersGraphTabViewModel {
         }
     }
 
-    func aggregateAndIntegrateForecasts(_ forecasts: [SolcastForecastResponse]) -> [SolcastForecastResponse] {
-        let calendar = Calendar.current
-
-        // Step 1: Sum duplicate periodEnds
-        let summedForecasts = Dictionary(grouping: forecasts, by: { $0.periodEnd })
+    func aggregateForecasts(_ forecasts: [SolcastForecastResponse]) -> [SolcastForecastResponse] {
+        Dictionary(grouping: forecasts, by: { $0.periodEnd })
             .map { periodEnd, entries in
                 SolcastForecastResponse(
                     pvEstimate: entries.reduce(0) { $0 + $1.pvEstimate },
@@ -359,41 +356,7 @@ extension ParametersGraphTabViewModel {
                     periodEnd: periodEnd,
                     period: entries.first?.period ?? ""
                 )
-            }
-
-        // Step 2: Group by hour
-        let hourlyGrouped = Dictionary(grouping: summedForecasts) { forecast in
-            calendar.date(bySetting: .minute, value: 0, of: forecast.periodEnd)!
-        }
-
-        // Step 3: Perform Riemann sum integration for each hour
-        return hourlyGrouped.map { periodStart, forecastsInHour in
-            let sorted = forecastsInHour.sorted(by: { $0.periodEnd < $1.periodEnd })
-
-            var totalPvEstimate: Double = 0
-            var totalPvEstimate10: Double = 0
-            var totalPvEstimate90: Double = 0
-
-            for i in 0 ..< sorted.count - 1 {
-                let left = sorted[i]
-                let right = sorted[i + 1]
-
-                let timeDiff = right.periodEnd.timeIntervalSince(left.periodEnd) / 3600.0 // Convert to hours
-
-                // Trapezoidal Riemann sum integration
-                totalPvEstimate += 0.5 * timeDiff * (left.pvEstimate + right.pvEstimate)
-                totalPvEstimate10 += 0.5 * timeDiff * (left.pvEstimate10 + right.pvEstimate10)
-                totalPvEstimate90 += 0.5 * timeDiff * (left.pvEstimate90 + right.pvEstimate90)
-            }
-
-            return SolcastForecastResponse(
-                pvEstimate: totalPvEstimate,
-                pvEstimate10: totalPvEstimate10,
-                pvEstimate90: totalPvEstimate90,
-                periodEnd: periodStart, // Use the start of the hour as reference
-                period: "1h"
-            )
-        }.sorted(by: { $0.periodEnd < $1.periodEnd }) // Ensure chronological order
+            }.sorted(by: { $0.periodEnd < $1.periodEnd }) // Ensure chronological order
     }
 }
 

@@ -11615,6 +11615,41 @@
         }
       }
     },
+    "rawvariable_solar_prediction" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gesamte Solarenergieerzeugung, prognostiziert von Solcast"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total solar energy generation predicted by Solcast"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Generación total de energía solar prevista por Solcast"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Produzione totale di energia solare prevista da Solcast"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Całkowita przewidywana produkcja energii słonecznej według Solcast"
+          }
+        }
+      }
+    },
     "Reasons reported:" : {
       "localizations" : {
         "de" : {
