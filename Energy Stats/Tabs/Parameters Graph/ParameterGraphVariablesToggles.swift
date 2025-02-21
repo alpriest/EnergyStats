@@ -45,8 +45,8 @@ struct ParameterGraphVariablesToggles: View {
                         Text(title)
                     }
 
-                    if title != variable.type.description, appSettings.showGraphValueDescriptions {
-                        Text(variable.type.description)
+                    if let description = variable.type.description, title != description, appSettings.showGraphValueDescriptions {
+                        Text(description)
                             .font(.system(size: 10))
                             .foregroundColor(Color("text_dimmed"))
                             .padding(.leading, 23)

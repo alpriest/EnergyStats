@@ -49,7 +49,7 @@ public struct Variable: Codable, Equatable, Hashable {
     }
 
     public static var solcastPredictionVariable: Variable {
-        Variable(name: String(key: .solcastPrediction), variable: "solcast-prediction", unit: "kW")
+        Variable(name: String(key: .solcastPrediction), variable: "solcast_prediction", unit: "kW")
     }
 }
 
@@ -115,11 +115,11 @@ public extension Variable {
         }
     }
 
-    var description: String {
+    var description: String? {
         let key = "rawvariable_\(self.variable.lowercased())"
         let localized = NSLocalizedString(key, comment: "")
         if localized.isEmpty || localized == key {
-            return self.name
+            return nil
         } else {
             return localized
         }

@@ -11615,7 +11615,7 @@
         }
       }
     },
-    "rawvariable_solar_prediction" : {
+    "rawvariable_solcast_prediction" : {
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
