@@ -38,17 +38,6 @@
                ReferencedContainer = "container:Energy Stats.xcodeproj">
             </BuildableReference>
          </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "41D8E38829DC5E9E00012416"
-               BuildableName = "Energy StatsTests2.xctest"
-               BlueprintName = "Energy StatsTests2"
-               ReferencedContainer = "container:Energy Stats.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

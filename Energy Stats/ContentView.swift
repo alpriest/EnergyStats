@@ -18,7 +18,13 @@ struct ContentView: View {
 
     var body: some View {
         Group {
-            if userManager.isLoggedIn {
+            switch userManager.isLoggedIn {
+            case nil:
+                TabView{
+                    LoadingView(message: "Loading")
+                        .transition(.opacity)
+                }
+            case .some(true):
                 Group {
 #if targetEnvironment(macCatalyst)
                     LeftTabbedView(networking: network, userManager: userManager, configManager: configManager, solarForecastProvider: solarForecastProvider, templateStore: templateStore)
@@ -31,8 +37,7 @@ struct ContentView: View {
 #endif
                 }
                 .task { await network.fetchErrorMessages() }
-
-            } else {
+            case .some(false):
                 WelcomeView(userManager: userManager)
             }
         }

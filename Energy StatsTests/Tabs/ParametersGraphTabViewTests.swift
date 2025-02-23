@@ -11,7 +11,6 @@ import Energy_Stats_Core
 import SnapshotTesting
 import SwiftUI
 import XCTest
-import Energy_Stats_UITestsw
 
 // Record these on iPhone 16 Pro
 final class ParametersGraphTabViewTests: XCTestCase {

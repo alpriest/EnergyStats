@@ -10,8 +10,6 @@ import Energy_Stats_Core
 import Foundation
 
 class MockConfig: Config {
-    var showInverterScheduleQuickLink: Bool = true
-
     func clearDisplaySettings() {}
     func clearDeviceSettings() {}
 
@@ -68,4 +66,6 @@ class MockConfig: Config {
     var colorScheme: ForcedColorScheme = .auto
     var lastSolcastRefresh: Date? = nil
     var batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode = .automatic
+    var fetchSolcastOnAppLaunch: Bool = false
+    var showInverterScheduleQuickLink: Bool = true
 }

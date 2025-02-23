@@ -8,6 +8,7 @@
 import Combine
 import Energy_Stats_Core
 import Foundation
+import SwiftUI
 
 class UserManager: ObservableObject, HasLoadState {
     private var configManager: ConfigManaging
@@ -15,7 +16,7 @@ class UserManager: ObservableObject, HasLoadState {
     private var cancellables = Set<AnyCancellable>()
     private let networkCache: InMemoryLoggingNetworkStore
     @MainActor @Published var state = LoadState.inactive
-    @MainActor @Published var isLoggedIn: Bool = false
+    @MainActor @Published var isLoggedIn: Bool?
 
     init(store: KeychainStoring, configManager: ConfigManaging, networkCache: InMemoryLoggingNetworkStore) {
         self.store = store
@@ -27,7 +28,9 @@ class UserManager: ObservableObject, HasLoadState {
             .receive(on: RunLoop.main)
             .sink(receiveValue: { [weak self] newValue in
                 Task { @MainActor in
-                    self?.isLoggedIn = newValue
+                    withAnimation {
+                        self?.isLoggedIn = newValue
+                    }
                 }
             })
             .store(in: &cancellables)

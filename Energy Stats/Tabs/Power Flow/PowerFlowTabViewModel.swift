@@ -87,7 +87,7 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
     func viewAppeared() {
         Task { @MainActor [weak self] in
             guard let self else { return }
-            guard self.userManager.isLoggedIn else { return }
+            guard self.userManager.isLoggedIn == true else { return }
 
             if self.timer.isTicking == false {
                 await self.timerFired()
