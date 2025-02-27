@@ -57,13 +57,6 @@ struct ParametersGraphTabView: View {
                             .loadable(viewModel.state, options: [.retry], overlay: true, retry: { Task { await viewModel.load() } })
                     }
 
-                    ParameterGraphVariablesToggles(
-                        viewModel: viewModel,
-                        selectedDate: $selectedDate,
-                        valuesAtTime: $valuesAtTime,
-                        appSettings: appSettings
-                    )
-
                     Text("Parameters are updated every 5 minutes by FoxESS and only available for a single day at a time")
                         .font(.footnote)
                         .foregroundColor(Color("text_dimmed"))
@@ -98,13 +91,23 @@ struct ParametersGraphTabView: View {
                 VStack {
                     ForEach(Array(viewModel.data.keys.sorted { $0 < $1 }), id: \.self) { key in
                         ZStack {
-                            ParametersGraphView(key: key,
-                                                viewModel: viewModel,
-                                                selectedDate: $selectedDate,
-                                                valuesAtTime: $valuesAtTime,
-                                                truncateYAxis: appSettings.truncatedYAxisOnParameterGraphs)
-                                .frame(height: 250)
-                                .padding(.vertical)
+                            VStack {
+                                ParametersGraphView(key: key,
+                                                    viewModel: viewModel,
+                                                    selectedDate: $selectedDate,
+                                                    valuesAtTime: $valuesAtTime,
+                                                    truncateYAxis: appSettings.truncatedYAxisOnParameterGraphs)
+                                    .frame(height: 250)
+                                    .padding(.vertical)
+
+                                ParameterGraphVariablesToggles(
+                                    viewModel: viewModel,
+                                    selectedDate: $selectedDate,
+                                    valuesAtTime: $valuesAtTime,
+                                    appSettings: appSettings,
+                                    filter: key
+                                )
+                            }
 
                             LoadingView(message: "Loading")
                                 .opacity(viewModel.state.opacity())
@@ -113,13 +116,23 @@ struct ParametersGraphTabView: View {
                 }
             } else {
                 ZStack {
-                    ParametersGraphView(key: nil,
-                                        viewModel: viewModel,
-                                        selectedDate: $selectedDate,
-                                        valuesAtTime: $valuesAtTime,
-                                        truncateYAxis: appSettings.truncatedYAxisOnParameterGraphs)
-                        .frame(height: 250)
-                        .padding(.vertical)
+                    VStack {
+                        ParametersGraphView(key: nil,
+                                            viewModel: viewModel,
+                                            selectedDate: $selectedDate,
+                                            valuesAtTime: $valuesAtTime,
+                                            truncateYAxis: appSettings.truncatedYAxisOnParameterGraphs)
+                            .frame(height: 250)
+                            .padding(.vertical)
+
+                        ParameterGraphVariablesToggles(
+                            viewModel: viewModel,
+                            selectedDate: $selectedDate,
+                            valuesAtTime: $valuesAtTime,
+                            appSettings: appSettings,
+                            filter: nil
+                        )
+                    }
 
                     LoadingView(message: "Loading")
                         .opacity(viewModel.state.opacity())

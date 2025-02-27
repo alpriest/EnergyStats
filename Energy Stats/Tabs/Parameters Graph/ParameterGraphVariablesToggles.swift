@@ -9,14 +9,33 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct ParameterGraphVariablesToggles: View {
-    @ObservedObject var viewModel: ParametersGraphTabViewModel
-    @Binding var selectedDate: Date?
-    @Binding var valuesAtTime: ValuesAtTime<ParameterGraphValue>?
-    let appSettings: AppSettings
+    @ObservedObject private var viewModel: ParametersGraphTabViewModel
+    @Binding private var selectedDate: Date?
+    @Binding private var valuesAtTime: ValuesAtTime<ParameterGraphValue>?
+    private let appSettings: AppSettings
+    private let filter: String?
+
+    init(
+        viewModel: ParametersGraphTabViewModel,
+        selectedDate: Binding<Date?>,
+        valuesAtTime: Binding<ValuesAtTime<ParameterGraphValue>?>,
+        appSettings: AppSettings,
+        filter: String? = nil
+    ) {
+        self.viewModel = viewModel
+        self._selectedDate = selectedDate
+        self._valuesAtTime = valuesAtTime
+        self.appSettings = appSettings
+        self.filter = filter
+    }
+
+    private var graphVariables: [ParameterGraphVariable] {
+        viewModel.graphVariables.filter { filter == nil || $0.type.unit == filter }
+    }
 
     var body: some View {
         VStack(alignment: .leading) {
-            ForEach(viewModel.graphVariables, id: \.self) { variable in
+            ForEach(graphVariables, id: \.self) { variable in
                 if variable.isSelected {
                     HStack {
                         row(variable)
@@ -87,7 +106,8 @@ struct ParameterGraphVariablesToggles: View {
         ),
         selectedDate: .constant(nil),
         valuesAtTime: .constant(nil),
-        appSettings: .mock()
+        appSettings: .mock(),
+        filter: nil
     )
 }
 #endif

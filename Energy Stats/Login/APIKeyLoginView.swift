@@ -54,7 +54,7 @@ struct APIKeyLoginView: View {
                 .buttonStyle(.bordered)
 
                 Button("Log me in") {
-                    Task { await userManager.login(apiKey: apiKey) }
+                    Task { await userManager.login(apiKey: apiKey.trimmingCharacters(in: .whitespaces)) }
                 }
                 .padding()
                 .buttonStyle(.borderedProminent)
