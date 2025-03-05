@@ -36,8 +36,6 @@ struct ApproximationsCalculator {
         let totalsViewModel = TotalsViewModel(grid: grid,
                                               feedIn: feedIn,
                                               loads: loads,
-                                              batteryCharge: batteryCharge,
-                                              batteryDischarge: batteryDischarge,
                                               solar: solar)
 
         let financialModel = EnergyStatsFinancialModel(

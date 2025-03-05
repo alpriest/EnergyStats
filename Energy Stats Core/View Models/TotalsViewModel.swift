@@ -22,18 +22,14 @@ public struct TotalsViewModel {
         let home = reports.todayValue(for: ReportVariable.loads)
         let gridExport = reports.todayValue(for: ReportVariable.feedIn)
         let gridImport = reports.todayValue(for: ReportVariable.gridConsumption)
-        let batteryCharge = reports.todayValue(for: ReportVariable.chargeEnergyToTal)
-        let batteryDischarge = reports.todayValue(for: ReportVariable.dischargeEnergyToTal)
         let solar = reports.todayValue(for: ReportVariable.pvEnergyTotal)
 
-        self.init(grid: gridImport, feedIn: gridExport, loads: home, batteryCharge: batteryCharge, batteryDischarge: batteryDischarge, solar: solar)
+        self.init(grid: gridImport, feedIn: gridExport, loads: home, solar: solar)
     }
 
     public init(grid: Double,
                 feedIn: Double,
                 loads: Double,
-                batteryCharge: Double,
-                batteryDischarge: Double,
                 solar: Double)
     {
         self.home = loads

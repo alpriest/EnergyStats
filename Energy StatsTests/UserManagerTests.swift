@@ -34,13 +34,13 @@ final class UserManagerTests: XCTestCase {
         sut.$isLoggedIn
             .receive(subscriber: Subscribers.Sink(receiveCompletion: { _ in
             }, receiveValue: { value in
-                if value {
+                if value == true {
                     expectation.fulfill()
                 }
             }))
 
         wait(for: [expectation], timeout: 1.0)
-        XCTAssertTrue(sut.isLoggedIn)
+        XCTAssertEqual(sut.isLoggedIn, true)
     }
 
     @MainActor
