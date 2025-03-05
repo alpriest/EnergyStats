@@ -15,6 +15,7 @@ public enum ReportVariable: String, RawRepresentable {
     case dischargeEnergyToTal
     case loads
     case selfSufficiency
+    case pvEnergyTotal
 
     public var networkTitle: String {
         switch self {
@@ -24,6 +25,8 @@ public enum ReportVariable: String, RawRepresentable {
             return "chargeEnergyToTal"
         case .dischargeEnergyToTal:
             return "dischargeEnergyToTal"
+        case .pvEnergyTotal:
+            return "PVEnergyTotal"
         default:
             return self.rawValue
         }
@@ -31,18 +34,20 @@ public enum ReportVariable: String, RawRepresentable {
 
     public init?(rawValue: String) {
         switch rawValue {
-        case "generation":
+        case Self.generation.networkTitle:
             self = .generation
-        case "feedin":
+        case Self.feedIn.networkTitle:
             self = .feedIn
-        case "gridConsumption":
+        case Self.gridConsumption.networkTitle:
             self = .gridConsumption
-        case "chargeEnergyToTal":
+        case Self.chargeEnergyToTal.networkTitle:
             self = .chargeEnergyToTal
-        case "dischargeEnergyToTal":
+        case Self.dischargeEnergyToTal.networkTitle:
             self = .dischargeEnergyToTal
-        case "loads":
+        case Self.loads.networkTitle:
             self = .loads
+        case Self.pvEnergyTotal.networkTitle:
+            self = .pvEnergyTotal
         default:
             return nil
         }
@@ -66,6 +71,8 @@ public enum ReportVariable: String, RawRepresentable {
             return String(localized: "Loads ") + usage.title()
         case .selfSufficiency:
             return String(localized: "Self sufficiency")
+        case .pvEnergyTotal:
+            return String(localized: "Solar ") + usage.title()
         }
     }
 
@@ -95,6 +102,8 @@ public enum ReportVariable: String, RawRepresentable {
             return Color.loadsPower.opacity(0.8)
         case .selfSufficiency:
             return .black
+        case .pvEnergyTotal:
+            return .yellow.opacity(0.8)
         }
     }
 }

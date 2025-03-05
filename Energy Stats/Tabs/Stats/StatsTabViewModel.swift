@@ -112,7 +112,8 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
                               configManager.hasBattery ? .chargeEnergyToTal : nil,
                               configManager.hasBattery ? .dischargeEnergyToTal : nil,
                               .loads,
-                              (configManager.selfSufficiencyEstimateMode != .off && configManager.showSelfSufficiencyStatsGraphOverlay) ? .selfSufficiency : nil]
+                              (configManager.selfSufficiencyEstimateMode != .off && configManager.showSelfSufficiencyStatsGraphOverlay) ? .selfSufficiency : nil,
+                              .pvEnergyTotal]
                 .compactMap { $0 }
                 .map {
                     StatsGraphVariable($0)
@@ -135,7 +136,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
             await updateGraphVariables(for: currentDevice)
         }
 
-        let reportVariables: [ReportVariable] = [.feedIn, .generation, .chargeEnergyToTal, .dischargeEnergyToTal, .gridConsumption, .loads]
+        let reportVariables: [ReportVariable] = [.feedIn, .generation, .chargeEnergyToTal, .dischargeEnergyToTal, .gridConsumption, .loads, .pvEnergyTotal]
 
         do {
             let updatedData: [StatsGraphValue]
@@ -179,7 +180,8 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
     func calculateApproximations() {
         guard let grid = totals[ReportVariable.gridConsumption],
               let feedIn = totals[ReportVariable.feedIn],
-              let loads = totals[ReportVariable.loads] else { return }
+              let loads = totals[ReportVariable.loads],
+              let solar = totals[ReportVariable.pvEnergyTotal] else { return }
 
         let batteryCharge = totals[ReportVariable.chargeEnergyToTal]
         let batteryDischarge = totals[ReportVariable.dischargeEnergyToTal]
@@ -188,7 +190,8 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
                                                                                    feedIn: feedIn,
                                                                                    loads: loads,
                                                                                    batteryCharge: batteryCharge ?? 0,
-                                                                                   batteryDischarge: batteryDischarge ?? 0)
+                                                                                   batteryDischarge: batteryDischarge ?? 0,
+                                                                                   solar: solar)
     }
 
     func calculateSelfSufficiencyAcrossTimePeriod(_ rawData: [StatsGraphValue]) -> [StatsGraphValue] {
@@ -204,14 +207,16 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
                let feedIn = valuesAtTime.values.first(where: { $0.type == .feedIn })?.graphValue,
                let loads = valuesAtTime.values.first(where: { $0.type == .loads })?.graphValue,
                let batteryCharge = valuesAtTime.values.first(where: { $0.type == .chargeEnergyToTal })?.graphValue,
-               let batteryDischarge = valuesAtTime.values.first(where: { $0.type == .dischargeEnergyToTal })?.graphValue
+               let batteryDischarge = valuesAtTime.values.first(where: { $0.type == .dischargeEnergyToTal })?.graphValue,
+               let solar = valuesAtTime.values.first(where: { $0.type == .pvEnergyTotal })?.graphValue
             {
                 let approximations = approximationsCalculator.calculateApproximations(
                     grid: grid,
                     feedIn: feedIn,
                     loads: loads,
                     batteryCharge: batteryCharge,
-                    batteryDischarge: batteryDischarge
+                    batteryDischarge: batteryDischarge,
+                    solar: solar
                 )
 
                 switch configManager.selfSufficiencyEstimateMode {
@@ -286,14 +291,16 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
            let feedIn = result.values.first(where: { $0.type == .feedIn })?.graphValue,
            let loads = result.values.first(where: { $0.type == .loads })?.graphValue,
            let batteryCharge = result.values.first(where: { $0.type == .chargeEnergyToTal })?.graphValue,
-           let batteryDischarge = result.values.first(where: { $0.type == .dischargeEnergyToTal })?.graphValue
+           let batteryDischarge = result.values.first(where: { $0.type == .dischargeEnergyToTal })?.graphValue,
+           let solar = result.values.first(where: { $0.type == .pvEnergyTotal })?.graphValue
         {
             approximationsViewModel = approximationsCalculator.calculateApproximations(
                 grid: grid,
                 feedIn: feedIn,
                 loads: loads,
                 batteryCharge: batteryCharge,
-                batteryDischarge: batteryDischarge
+                batteryDischarge: batteryDischarge,
+                solar: solar
             )
         }
 

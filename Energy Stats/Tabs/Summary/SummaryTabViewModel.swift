@@ -120,7 +120,7 @@ class SummaryTabViewModel: ObservableObject {
     }
 
     private func fetchYear(_ year: Int, device: Device) async throws -> ([ReportVariable: Double], Int?) {
-        let reportVariables = [ReportVariable.feedIn, .generation, .chargeEnergyToTal, .dischargeEnergyToTal, .gridConsumption, .loads]
+        let reportVariables = [ReportVariable.feedIn, .generation, .chargeEnergyToTal, .dischargeEnergyToTal, .gridConsumption, .loads, .pvEnergyTotal]
         let rawReports = try await networking.fetchReport(deviceSN: device.deviceSN,
                                                           variables: reportVariables,
                                                           queryDate: QueryDate(year: year, month: nil, day: nil),
@@ -187,7 +187,8 @@ class SummaryTabViewModel: ObservableObject {
               let feedIn = totals[ReportVariable.feedIn],
               let loads = totals[ReportVariable.loads],
               let batteryCharge = totals[ReportVariable.chargeEnergyToTal],
-              let batteryDischarge = totals[ReportVariable.dischargeEnergyToTal]
+              let batteryDischarge = totals[ReportVariable.dischargeEnergyToTal],
+              let solar = totals[ReportVariable.pvEnergyTotal]
         else {
             return nil
         }
@@ -196,6 +197,7 @@ class SummaryTabViewModel: ObservableObject {
                                                                 feedIn: feedIn,
                                                                 loads: loads,
                                                                 batteryCharge: batteryCharge,
-                                                                batteryDischarge: batteryDischarge)
+                                                                batteryDischarge: batteryDischarge,
+                                                                solar: solar)
     }
 }

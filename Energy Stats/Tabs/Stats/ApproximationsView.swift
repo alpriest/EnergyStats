@@ -69,21 +69,6 @@ struct ApproximationsView: View {
                         }
                     }
 
-                    if let totals = viewModel.totalsViewModel {
-                        VStack(spacing: 2) {
-                            HStack {
-                                Text("solar_generated")
-                                    .accessibilityHidden(true)
-                                Spacer()
-                                EnergyText(amount: totals.solar, appSettings: appSettings, type: .totalSolarGenerated, decimalPlaceOverride: decimalPlaceOverride)
-                            }
-
-                            if showCalculations {
-                                CalculationBreakdownView(breakdown: totals.solarBreakdown, decimalPlaces: appSettings.decimalPlaces)
-                            }
-                        }
-                    }
-
                     if let financialModel = viewModel.financialModel {
                         VStack(spacing: 2) {
                             HStack {

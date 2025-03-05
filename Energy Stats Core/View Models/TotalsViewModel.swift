@@ -24,31 +24,28 @@ public struct TotalsViewModel {
         let gridImport = reports.todayValue(for: ReportVariable.gridConsumption)
         let batteryCharge = reports.todayValue(for: ReportVariable.chargeEnergyToTal)
         let batteryDischarge = reports.todayValue(for: ReportVariable.dischargeEnergyToTal)
+        let solar = reports.todayValue(for: ReportVariable.pvEnergyTotal)
 
-        self.init(grid: gridImport, feedIn: gridExport, loads: home, batteryCharge: batteryCharge, batteryDischarge: batteryDischarge)
+        self.init(grid: gridImport, feedIn: gridExport, loads: home, batteryCharge: batteryCharge, batteryDischarge: batteryDischarge, solar: solar)
     }
 
     public init(grid: Double,
                 feedIn: Double,
                 loads: Double,
                 batteryCharge: Double,
-                batteryDischarge: Double)
+                batteryDischarge: Double,
+                solar: Double)
     {
         self.home = loads
         self.gridExport = feedIn
         self.gridImport = grid
-        self.solar = max(0, batteryCharge - batteryDischarge - gridImport + home + gridExport)
-        self.solarBreakdown = CalculationBreakdown(formula: "max(0, batteryCharge - batteryDischarge - gridImport + home + gridExport)",
-                                                   calculation: { dp in
-                                                       "max(0, \(batteryCharge.roundedToString(decimalPlaces: dp)) - \(batteryDischarge.roundedToString(decimalPlaces: dp)) - \(grid.roundedToString(decimalPlaces: dp)) + \(loads.roundedToString(decimalPlaces: dp)) + \(feedIn.roundedToString(decimalPlaces: dp)))"
-                                                   })
+        self.solar = solar
     }
 
     public let home: Double
     public let gridImport: Double
     public let gridExport: Double
     public let solar: Double
-    public let solarBreakdown: CalculationBreakdown
 }
 
 extension Array where Element == OpenReportResponse {

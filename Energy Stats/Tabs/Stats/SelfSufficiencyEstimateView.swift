@@ -79,7 +79,7 @@ extension ApproximationsViewModel {
 
 extension TotalsViewModel {
     static func any() -> TotalsViewModel {
-        TotalsViewModel(grid: 1.0, feedIn: 2.0, loads: 5.0, batteryCharge: 2.3, batteryDischarge: 1.2)
+        TotalsViewModel(grid: 1.0, feedIn: 2.0, loads: 5.0, batteryCharge: 2.3, batteryDischarge: 1.2, solar: 0.9)
     }
 }
 
