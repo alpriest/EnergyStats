@@ -62,11 +62,11 @@ public struct EnergyStatsFinancialModel {
         solarSaving = FinanceAmount(
             title: .gridImportAvoidedShortTitle,
             accessibilityKey: .totalAvoidedCostsToday,
-            amount: (totalsViewModel.solar - totalsViewModel.gridExport) * config.gridImportUnitPrice
+            amount: max(0, (totalsViewModel.solar - totalsViewModel.gridExport)) * config.gridImportUnitPrice
         )
         solarSavingBreakdown = CalculationBreakdown(
-            formula: "(solar - gridExport) * gridImportUnitPrice",
-            calculation: { dp in "(\(totalsViewModel.solar.roundedToString(decimalPlaces: dp)) - \(totalsViewModel.gridExport.roundedToString(decimalPlaces: dp))) * \(config.gridImportUnitPrice.roundedToString(decimalPlaces: dp))" }
+            formula: "max(0, solar - gridExport) * gridImportUnitPrice",
+            calculation: { dp in "max (0, \(totalsViewModel.solar.roundedToString(decimalPlaces: dp)) - \(totalsViewModel.gridExport.roundedToString(decimalPlaces: dp))) * \(config.gridImportUnitPrice.roundedToString(decimalPlaces: dp))" }
         )
 
         total = FinanceAmount(
