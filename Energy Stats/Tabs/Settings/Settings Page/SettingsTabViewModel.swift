@@ -172,6 +172,12 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
+    @Published var showCT2ValueAsString: Bool {
+        didSet {
+            config.showCT2ValueAsString = showCT2ValueAsString
+        }
+    }
+
     private(set) var config: ConfigManaging
     private let userManager: UserManager
     private var cancellables = Set<AnyCancellable>()
@@ -210,6 +216,7 @@ class SettingsTabViewModel: ObservableObject {
         colorScheme = config.colorScheme
         batteryTemperatureDisplayMode = config.batteryTemperatureDisplayMode
         showInverterScheduleQuickLink = config.showInverterScheduleQuickLink
+        showCT2ValueAsString = config.showCT2ValueAsString
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }

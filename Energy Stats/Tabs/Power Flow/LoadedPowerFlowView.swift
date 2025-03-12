@@ -69,14 +69,21 @@ struct LoadedPowerFlowView: View {
                                 Spacer().frame(width: horizontalPadding)
                             }
 
-                            ZStack {
-                                SolarPowerView(appSettings: appSettings, viewModel: SolarPowerViewModel(solar: viewModel.solar))
-                                    .overlay(
-                                        SolarStringsView(viewModel: viewModel, appSettings: appSettings)
-                                            .offset(x: 0, y: -30)
-                                    )
-                            }
-                            .frame(width: topColumnWidth, height: size.height * 0.35)
+                            SolarPowerView(appSettings: appSettings, viewModel: SolarPowerViewModel(solar: viewModel.solar))
+                                .overlay(
+                                    SolarStringsView(viewModel: viewModel, appSettings: appSettings)
+                                        .offset(x: 0, y: -40)
+                                )
+                                .frame(width: topColumnWidth, height: size.height * 0.35)
+                                .overlay(
+                                    Group {
+                                        if !appSettings.shouldCombineCT2WithPVPower {
+                                            PowerAmountView(amount: viewModel.solar + viewModel.ct2, backgroundColor: .linesNotFlowing, textColor: .textNotFlowing, appSettings: appSettings, type: .solarFlow)
+                                                .font(.body.bold())
+                                                .offset(x: 0, y: 100)
+                                        }
+                                    }
+                                )
 
                             if !appSettings.shouldCombineCT2WithPVPower {
                                 Spacer().frame(width: horizontalPadding)
@@ -229,7 +236,7 @@ struct LoadedPowerFlowView: View {
     }
 
     private var showingCT2Column: Bool {
-        viewModel.showCT2
+        !appSettings.shouldCombineCT2WithPVPower
     }
 
     private var inverterLineWidth: CGFloat {
@@ -241,14 +248,16 @@ struct LoadedPowerFlowView: View {
 struct PowerSummaryView_Previews: PreviewProvider {
     static let strings = PowerFlowStringsSettings.none.copy(enabled: true, pv1Name: "Front", pv2Name: "Rear")
     static var previews: some View {
+        let appSettings = AppSettings.mock().copy(powerFlowStrings: PowerFlowStringsSettings.none.copy(enabled: true, pv1Name: "Front", pv2Name: "To"))
+
         LoadedPowerFlowView(configManager: ConfigManager.preview(),
-                            viewModel: LoadedPowerFlowViewModel.any(battery: .any()),
-                            appSettingsPublisher: CurrentValueSubject(AppSettings.mock().copy(decimalPlaces: 3,
+                            viewModel: LoadedPowerFlowViewModel.any(battery: .any(), appSettings: appSettings),
+                            appSettingsPublisher: CurrentValueSubject(appSettings.copy(decimalPlaces: 3,
                                                                                               displayUnit: .adaptive,
                                                                                               showFinancialEarnings: true,
                                                                                               showInverterTemperature: true,
                                                                                               showHomeTotalOnPowerFlow: true,
-                                                                                              shouldCombineCT2WithPVPower: false,
+                                                                                              shouldCombineCT2WithPVPower: true,
                                                                                               powerFlowStrings: strings)),
                             networking: NetworkService.preview(),
                             templateStore: TemplateStore.preview())

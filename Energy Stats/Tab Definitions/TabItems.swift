@@ -49,15 +49,10 @@ struct SummaryTabItem: View {
 }
 
 struct SettingsTabItem: View {
-    let configManager: ConfigManaging
-
     var body: some View {
         TabItem(accessibilityIdentifier: "settings_tab") {
             Image(systemName: "gearshape")
             Text("Settings")
-        }
-        .if(configManager.isDemoUser) {
-            $0.badge("demo")
         }
     }
 }

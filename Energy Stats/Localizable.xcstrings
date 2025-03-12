@@ -8898,6 +8898,9 @@
         }
       }
     },
+    "logout from demo" : {
+
+    },
     "Longitude" : {
       "localizations" : {
         "de" : {
@@ -13080,6 +13083,9 @@
           }
         }
       }
+    },
+    "Show CT2 value" : {
+
     },
     "Show estimated earnings" : {
       "extractionState" : "manual",

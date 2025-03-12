@@ -62,7 +62,8 @@ public enum AppSettingsPublisherFactory {
             minSOC: config.minSOC,
             batteryTemperatureDisplayMode: config.batteryTemperatureDisplayMode,
             showInverterScheduleQuickLink: config.showInverterScheduleQuickLink,
-            fetchSolcastOnAppLaunch: config.fetchSolcastOnAppLaunch
+            fetchSolcastOnAppLaunch: config.fetchSolcastOnAppLaunch,
+            showCT2ValueAsString: config.showCT2ValueAsString
         )
     }
 }

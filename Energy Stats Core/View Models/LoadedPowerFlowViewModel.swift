@@ -5,6 +5,7 @@
 //  Created by Alistair Priest on 10/09/2022.
 //
 
+import Combine
 import Foundation
 
 public struct InverterTemperatures: Sendable {
@@ -17,35 +18,6 @@ public struct InverterTemperatures: Sendable {
     }
 }
 
-public struct StringPower: Identifiable {
-    public let name: String
-    public let amount: Double
-
-    public var id: String { self.name }
-
-    public init(name: String, amount: Double) {
-        self.name = name
-        self.amount = amount
-    }
-
-    public func displayName(settings: PowerFlowStringsSettings) -> String {
-        switch self.name {
-        case "PV1":
-            return settings.pv1Name
-        case "PV2":
-            return settings.pv2Name
-        case "PV3":
-            return settings.pv3Name
-        case "PV4":
-            return settings.pv4Name
-        case "PV5":
-            return settings.pv5Name
-        default:
-            return settings.pv6Name
-        }
-    }
-}
-
 public enum DeviceState: Int {
     case online = 1
     case fault = 2
@@ -55,7 +27,7 @@ public enum DeviceState: Int {
 
 public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
     public let solar: Double
-    public let solarStrings: [StringPower]
+    @Published public var displayStrings: [StringPower] = []
     public let home: Double
     public let grid: Double
     @Published public var todaysGeneration: GenerationViewModel?
@@ -68,9 +40,13 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
     public let ct2: Double
     @Published public var deviceState: DeviceState = .unknown
     @Published public var faults: [String] = []
+    @Published public var showCT2: Bool = false
     private let currentDevice: Device
     private let network: Networking
     private let configManager: ConfigManaging
+    @Published public var showSolarStringsView: Bool = false
+    private let solarStrings: [StringPower]
+    private var cancellables = Set<AnyCancellable>()
 
     public init(solar: Double,
                 solarStrings: [StringPower],
@@ -84,7 +60,6 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
                 configManager: ConfigManaging)
     {
         self.solar = solar
-        self.solarStrings = solarStrings
         self.batteryViewModel = battery
         self.home = home
         self.grid = grid
@@ -93,10 +68,25 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
         self.currentDevice = currentDevice
         self.network = network
         self.configManager = configManager
+        self.solarStrings = solarStrings
 
         self.loadDeviceStatus()
         self.loadTotals()
         self.loadGeneration()
+
+        configManager.appSettingsPublisher.sink { [weak self] settings in
+            guard let self else { return }
+
+            self.displayStrings = []
+
+            if settings.shouldCombineCT2WithPVPower && settings.showCT2ValueAsString {
+                displayStrings.append(StringPower(name: "CT2", amount: ct2))
+            }
+
+            displayStrings.append(contentsOf: self.solarStrings)
+        }.store(in: &cancellables)
+
+        self.showSolarStringsView = configManager.powerFlowStrings.enabled && solar.isFlowing() && solarStrings.count > 0
     }
 
     private func loadDeviceStatus() {
@@ -153,7 +143,7 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
     }
 
     private func loadReportData(_ currentDevice: Device) async throws -> [OpenReportResponse] {
-        var reportVariables = [ReportVariable.loads, .feedIn, .gridConsumption]
+        var reportVariables = [ReportVariable.loads, .feedIn, .gridConsumption, .pvEnergyTotal]
         if currentDevice.hasBattery {
             reportVariables.append(contentsOf: [.chargeEnergyToTal, .dischargeEnergyToTal])
         }
@@ -220,10 +210,6 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
     public var batteryError: Error? {
         self.batteryViewModel.error
     }
-
-    public var showCT2: Bool {
-        self.ct2 > 0
-    }
 }
 
 public extension LoadedPowerFlowViewModel {
@@ -240,7 +226,7 @@ public extension LoadedPowerFlowViewModel {
                                  configManager: ConfigManager.preview())
     }
 
-    static func any(battery: BatteryViewModel = .any()) -> LoadedPowerFlowViewModel {
+    static func any(battery: BatteryViewModel = .any(), appSettings: AppSettings = .mock()) -> LoadedPowerFlowViewModel {
         .init(solar: 3.0,
               solarStrings: [StringPower(name: "PV1", amount: 2.5), StringPower(name: "PV2", amount: 0.5)],
               battery: battery,
@@ -250,7 +236,7 @@ public extension LoadedPowerFlowViewModel {
               ct2: 2.5,
               currentDevice: .preview(),
               network: DemoNetworking(),
-              configManager: ConfigManager.preview())
+              configManager: ConfigManager.preview(appSettings: appSettings))
     }
 }
 

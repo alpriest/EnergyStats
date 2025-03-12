@@ -50,7 +50,8 @@ struct SettingsTabView: View {
                                          showInverterStationName: $viewModel.showInverterStationName,
                                          shouldCombineCT2WithPVPower: $viewModel.shouldCombineCT2WithPVPower,
                                          showInverterTypeName: $viewModel.showInverterTypeName,
-                                         showInverterScheduleQuickLink: $viewModel.showInverterScheduleQuickLink)
+                                         showInverterScheduleQuickLink: $viewModel.showInverterScheduleQuickLink,
+                                         showCT2ValueAsString: $viewModel.showCT2ValueAsString)
                 } label: {
                     Text("Inverter")
                 }
@@ -83,7 +84,14 @@ struct SettingsTabView: View {
                     NavigationLink("Edit API Key") { ConfigureAPIKeyView() }
                 }
 
-                SettingsFooterView(onLogout: { Task { await viewModel.logout() } }, appVersion: viewModel.appVersion)
+                SettingsFooterView(
+                    configManager: configManager,
+                    onLogout: {
+                        Task {
+                            await viewModel.logout()
+                        }
+                    },
+                    appVersion: viewModel.appVersion)
             }
             .navigationTitle(.settings)
         }

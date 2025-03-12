@@ -61,7 +61,10 @@ struct TabbedView: View {
 
             SettingsTabView(viewModel: settingsTabViewModel, configManager: configManager, networking: networking, solarService: solarForecastProvider, templateStore: templateStore)
                 .tabItem {
-                    SettingsTabItem(configManager: configManager)
+                    SettingsTabItem()
+                }
+                .if(configManager.isDemoUser) {
+                    $0.badge("demo")
                 }
                 .toolbarBackground(.visible, for: .tabBar)
         }

@@ -167,8 +167,10 @@ class DemoAPI: FoxAPIServicing {
                                      OpenQueryResponse.Data(unit: "kW", variable: "batDischargePower", value: 0, stringValue: nil),
                                      OpenQueryResponse.Data(unit: "kW", variable: "batChargePower", value: 1.200, stringValue: nil),
                                      OpenQueryResponse.Data(unit: "kW", variable: "generationPower", value: 0.071, stringValue: nil),
-                                     OpenQueryResponse.Data(unit: "kW", variable: "pvPower", value: 0.111, stringValue: nil),
-                                     OpenQueryResponse.Data(unit: "kW", variable: "meterPower2", value: 0.0, stringValue: nil),
+                                     OpenQueryResponse.Data(unit: "kW", variable: "pvPower", value: 0.222, stringValue: nil),
+                                     OpenQueryResponse.Data(unit: "kW", variable: "meterPower2", value: 0.222, stringValue: nil),
+                                     OpenQueryResponse.Data(unit: "kW", variable: "pv1Power", value: 0.111, stringValue: nil),
+                                     OpenQueryResponse.Data(unit: "kW", variable: "pv2Power", value: 0.111, stringValue: nil),
                                      OpenQueryResponse.Data(unit: "℃", variable: "ambientTemperation", value: 32.5, stringValue: nil),
                                      OpenQueryResponse.Data(unit: "℃", variable: "invTemperation", value: 23.2, stringValue: nil),
                                      OpenQueryResponse.Data(unit: "℃", variable: "batTemperature", value: 26.5, stringValue: nil),
@@ -372,6 +374,7 @@ public class MockConfig: Config {
     public var batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode = .automatic
     public var showInverterScheduleQuickLink: Bool = true
     public var fetchSolcastOnAppLaunch: Bool = false
+    public var showCT2ValueAsString: Bool = false
 }
 
 public extension SolcastSite {

@@ -26,9 +26,9 @@ struct SolarStringsView: View {
     let appSettings: AppSettings
 
     var body: some View {
-        if appSettings.powerFlowStrings.enabled, viewModel.solar.isFlowing(), viewModel.solarStrings.count > 0 {
+        if (appSettings.powerFlowStrings.enabled || appSettings.showCT2ValueAsString) && viewModel.displayStrings.count > 0 {
             VStack(alignment: .leading) {
-                ForEach(viewModel.solarStrings) { pvString in
+                ForEach(viewModel.displayStrings) { pvString in
                     HStack {
                         Text(pvString.displayName(settings: appSettings.powerFlowStrings))
                             .background(BackgroundSizeReader())
@@ -62,8 +62,9 @@ struct BackgroundSizeReader: View {
 }
 
 #Preview {
+    let appSettings = AppSettings.mock().copy(powerFlowStrings: PowerFlowStringsSettings.none.copy(enabled: true, pv1Name: "Front", pv2Name: "To"))
     SolarStringsView(
-        viewModel: .any(),
-        appSettings: .mock().copy(powerFlowStrings: PowerFlowStringsSettings.none.copy(enabled: true, pv1Name: "Front", pv2Name: "To"))
+        viewModel: .any(appSettings: appSettings),
+        appSettings: appSettings
     )
 }

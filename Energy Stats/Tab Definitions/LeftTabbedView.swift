@@ -76,7 +76,7 @@ struct LeftTabbedView: View {
                     NavigationLink {
                         SettingsTabView(viewModel: settingsTabViewModel, configManager: configManager, networking: networking, solarService: solarForecastProvider, templateStore: templateStore)
                     } label: {
-                        SettingsTabItem(configManager: configManager)
+                        SettingsTabItem()
                     }
                 }
             },

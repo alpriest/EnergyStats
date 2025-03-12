@@ -53,6 +53,7 @@ public struct AppSettings {
     public var batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode
     public var showInverterScheduleQuickLink: Bool
     public var fetchSolcastOnAppLaunch: Bool
+    public var showCT2ValueAsString: Bool
 
     public init(
         showColouredLines: Bool,
@@ -92,7 +93,8 @@ public struct AppSettings {
         minSOC: Double,
         batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode,
         showInverterScheduleQuickLink: Bool,
-        fetchSolcastOnAppLaunch: Bool
+        fetchSolcastOnAppLaunch: Bool,
+        showCT2ValueAsString: Bool
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -132,6 +134,7 @@ public struct AppSettings {
         self.batteryTemperatureDisplayMode = batteryTemperatureDisplayMode
         self.showInverterScheduleQuickLink = showInverterScheduleQuickLink
         self.fetchSolcastOnAppLaunch = fetchSolcastOnAppLaunch
+        self.showCT2ValueAsString = showCT2ValueAsString
     }
 
     public func copy(
@@ -172,7 +175,8 @@ public struct AppSettings {
         minSOC: Double? = nil,
         batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode? = nil,
         showInverterScheduleQuickLink: Bool? = nil,
-        fetchSolcastOnAppLaunch: Bool? = nil
+        fetchSolcastOnAppLaunch: Bool? = nil,
+        showCT2ValueAsString: Bool? = nil
     ) -> AppSettings {
         AppSettings(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -212,7 +216,8 @@ public struct AppSettings {
             minSOC: minSOC ?? self.minSOC,
             batteryTemperatureDisplayMode: batteryTemperatureDisplayMode ?? self.batteryTemperatureDisplayMode,
             showInverterScheduleQuickLink: showInverterScheduleQuickLink ?? self.showInverterScheduleQuickLink,
-            fetchSolcastOnAppLaunch: fetchSolcastOnAppLaunch ?? self.fetchSolcastOnAppLaunch
+            fetchSolcastOnAppLaunch: fetchSolcastOnAppLaunch ?? self.fetchSolcastOnAppLaunch,
+            showCT2ValueAsString: showCT2ValueAsString ?? self.showCT2ValueAsString
         )
     }
 }

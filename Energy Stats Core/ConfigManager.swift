@@ -612,6 +612,16 @@ public class ConfigManager: ConfigManaging {
             ))
         }
     }
+
+    public var showCT2ValueAsString: Bool {
+        get { config.showCT2ValueAsString }
+        set {
+            config.showCT2ValueAsString = newValue
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+                showCT2ValueAsString: config.showCT2ValueAsString
+            ))
+        }
+    }
 }
 
 public enum BatteryResponseMapper {
@@ -634,16 +644,20 @@ public enum BatteryResponseMapper {
 }
 
 public extension ConfigManager {
-    static func preview(config: Config = MockConfig(), networking: Networking = NetworkService.preview()) -> ConfigManaging {
-        PreviewConfigManager(config: config, networking: networking)
+    static func preview(
+        config: Config = MockConfig(),
+        networking: Networking = NetworkService.preview(),
+        appSettings: AppSettings = .mock()
+    ) -> ConfigManaging {
+        PreviewConfigManager(config: config, networking: networking, appSettings: appSettings)
     }
 
     internal class PreviewConfigManager: ConfigManager {
-        convenience init(config: Config, networking: Networking) {
+        convenience init(config: Config, networking: Networking, appSettings: AppSettings = .mock()) {
             self.init(
                 networking: networking,
                 config: config,
-                appSettingsPublisher: CurrentValueSubject(AppSettings.mock()),
+                appSettingsPublisher: CurrentValueSubject(appSettings),
                 keychainStore: KeychainStore.preview()
             )
             Task { try await fetchDevices() }

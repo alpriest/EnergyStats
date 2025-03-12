@@ -9,6 +9,7 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct SettingsFooterView: View {
+    let configManager: ConfigManaging
     let onLogout: @MainActor () -> Void
     let appVersion: String
 
@@ -16,7 +17,9 @@ struct SettingsFooterView: View {
         Section(
             content: {
                 VStack {
-                    Button("logout") {
+                    Button(
+                        configManager.isDemoUser ? "logout from demo" : "logout"
+                    ) {
                         onLogout()
                     }.buttonStyle(.bordered)
                 }.frame(maxWidth: .infinity)
@@ -45,14 +48,16 @@ struct SettingsFooterView: View {
                     Text("Version ") + Text(appVersion)
                 }
                 .frame(minWidth: 0, maxWidth: .infinity)
-            })
+            }
+        )
     }
 }
 
 struct SettingsFooterView_Previews: PreviewProvider {
     static var previews: some View {
         Form {
-            SettingsFooterView(onLogout: {},
+            SettingsFooterView(configManager: ConfigManager.preview(),
+                               onLogout: {},
                                appVersion: "1.23")
         }
     }
