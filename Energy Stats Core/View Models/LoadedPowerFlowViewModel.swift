@@ -44,7 +44,6 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
     private let currentDevice: Device
     private let network: Networking
     private let configManager: ConfigManaging
-    @Published public var showSolarStringsView: Bool = false
     private let solarStrings: [StringPower]
     private var cancellables = Set<AnyCancellable>()
 
@@ -83,10 +82,10 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
                 displayStrings.append(StringPower(name: "CT2", amount: ct2))
             }
 
-            displayStrings.append(contentsOf: self.solarStrings)
+            if settings.powerFlowStrings.enabled {
+                displayStrings.append(contentsOf: self.solarStrings)
+            }
         }.store(in: &cancellables)
-
-        self.showSolarStringsView = configManager.powerFlowStrings.enabled && solar.isFlowing() && solarStrings.count > 0
     }
 
     private func loadDeviceStatus() {
