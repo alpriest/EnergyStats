@@ -19,6 +19,7 @@ struct LoadedPowerFlowView: View {
     @State private var showSchedule = false
     private let networking: Networking
     private let templateStore: TemplateStoring
+    @Environment(\.verticalSizeClass) var verticalSizeClass
 
     init(
         configManager: ConfigManaging,
@@ -166,7 +167,7 @@ struct LoadedPowerFlowView: View {
                                             appSettings: appSettings)
                             .frame(width: bottomColumnWidth)
                     }
-                    .padding(.bottom, 16)
+                    .padding(.bottom, verticalSizeClass == .regular ? 16 : 4)
                     .padding(.horizontal, horizontalPadding)
                 }
 

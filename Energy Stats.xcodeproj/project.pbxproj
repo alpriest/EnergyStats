@@ -110,6 +110,7 @@
 		4140145C28C70B4A00EA5BA1 /* PowerFlowTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140145B28C70B4A00EA5BA1 /* PowerFlowTabViewModel.swift */; };
 		4140ECDA292D58D300992DD8 /* ParameterGraphVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140ECD9292D58D300992DD8 /* ParameterGraphVariable.swift */; };
 		414125992BA6285A00D5A842 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E299D529B78A41001F017B /* SnapshotHelper.swift */; };
+		414160292D85CABE009E0096 /* View+IconSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414160282D85CABC009E0096 /* View+IconSize.swift */; };
 		4141B20028D86C7200B60157 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141B1FF28D86C7200B60157 /* UserManager.swift */; };
 		4141B20228D871B900B60157 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141B20128D871B900B60157 /* ContentView.swift */; };
 		414536D32D3190E700AE4A29 /* FirmwareLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414536D22D3190E700AE4A29 /* FirmwareLoadingView.swift */; };
@@ -588,6 +589,7 @@
 		4140146E28C77A3100EA5BA1 /* BatterySOCResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatterySOCResponse.swift; sourceTree = "<group>"; };
 		4140147028C77AAA00EA5BA1 /* BatteryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryViewModel.swift; sourceTree = "<group>"; };
 		4140ECD9292D58D300992DD8 /* ParameterGraphVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterGraphVariable.swift; sourceTree = "<group>"; };
+		414160282D85CABC009E0096 /* View+IconSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+IconSize.swift"; sourceTree = "<group>"; };
 		4141B1FF28D86C7200B60157 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		4141B20128D871B900B60157 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		414536D22D3190E700AE4A29 /* FirmwareLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirmwareLoadingView.swift; sourceTree = "<group>"; };
@@ -920,6 +922,7 @@
 		4103D1E629DB6D2C001B0BC8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				414160282D85CABC009E0096 /* View+IconSize.swift */,
 				416AE44C2A821E4F003D0122 /* AlertContent.swift */,
 				41495F372B211A75004A51C1 /* AlertContentView.swift */,
 				418685D42AFE700100355B6D /* AnimatedNumber.swift */,
@@ -2207,6 +2210,7 @@
 				418240782A9A33E300101064 /* TotalsViewModel.swift in Sources */,
 				414A40C02B989D9800321AA2 /* NetworkService.swift in Sources */,
 				4103D1E329DB6D03001B0BC8 /* AppSettings.swift in Sources */,
+				414160292D85CABE009E0096 /* View+IconSize.swift in Sources */,
 				4103D1DB29DB6C6D001B0BC8 /* Variable.swift in Sources */,
 				4103D1E529DB6D29001B0BC8 /* Sequence+aysnc.swift in Sources */,
 				416AE44B2A8170E6003D0122 /* SelectableItem.swift in Sources */,

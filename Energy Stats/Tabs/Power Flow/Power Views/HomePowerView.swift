@@ -9,9 +9,10 @@ import Combine
 import Energy_Stats_Core
 import SwiftUI
 
-struct HomePowerView: View {
+struct HomePowerView: View, VerticalSizeClassProviding {
     let amount: Double
     let appSettings: AppSettings
+    @Environment(\.verticalSizeClass) public var verticalSizeClass
 
     var body: some View {
         VStack {
@@ -19,10 +20,14 @@ struct HomePowerView: View {
 
             Image(systemName: "house.fill")
                 .resizable()
-                .frame(width: 50, height: 45)
+                .frame(width: length, height: length)
                 .accessibilityHidden(true)
                 .padding(.bottom, 1)
         }
+    }
+
+    private var length: CGFloat {
+        shouldReduceIconSize ? 40 : 50
     }
 }
 

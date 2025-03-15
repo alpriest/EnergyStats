@@ -9,16 +9,21 @@ import Combine
 import Energy_Stats_Core
 import SwiftUI
 
-struct GridPowerView: View {
+struct GridPowerView: View, VerticalSizeClassProviding {
     let amount: Double
     let appSettings: AppSettings
+    @Environment(\.verticalSizeClass) public var verticalSizeClass
 
     var body: some View {
         VStack {
             PowerFlowView(amount: amount, appSettings: appSettings, showColouredLines: true, type: .gridFlow)
             PylonView(lineWidth: 3)
-                .frame(width: 45, height: 45)
+                .frame(width: length, height: length)
         }
+    }
+
+    private var length: CGFloat {
+        shouldReduceIconSize ? 36 : 45
     }
 }
 

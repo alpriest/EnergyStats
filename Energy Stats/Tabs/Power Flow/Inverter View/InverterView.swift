@@ -31,18 +31,25 @@ struct InverterView: View {
                 .stroke(lineWidth: 4)
                 .foregroundColor(Color.linesNotFlowing)
 
-            AdaptiveStackView {
-                Group {
-                    InverterIconView(deviceFaulty: viewModel.hasFault)
-                        .id(viewModel.deviceState)
-                        .frame(width: 50, height: 55)
-                        .padding(5)
-                        .accessibilityHidden(true)
-                        .opacity(appSettings.showInverterIcon ? 1 : 0)
+            InverterIconView(deviceFaulty: viewModel.hasFault)
+                .id(viewModel.deviceState)
+                .frame(width: 50, height: 55)
+                .padding(5)
+                .accessibilityHidden(true)
+                .opacity(appSettings.showInverterIcon ? 1 : 0)
 
-                    verticalDeviceDetail()
-                }.offset(y: appSettings.showInverterIcon && verticalSizeClass == .regular ? 40 : 0)
+            AdaptiveStackView {
+                deviceNameSelector()
+
+                if appSettings.showInverterTemperature, let temperatures = viewModel.temperatures {
+                    HStack {
+                        TemperatureView(value: temperatures.ambient, name: "internal", accessibilityName: "accessibility.inverter", showName: true) // TODO: Verify
+                        TemperatureView(value: temperatures.inverter, name: "external", accessibilityName: "accessibility.inverter", showName: true) // TODO: Verify
+                    }
+                    .background(Color.background)
+                }
             }
+            .offset(y: verticalSizeClass == .regular && appSettings.showInverterIcon ? 55 : 0)
         }
         .if(viewModel.hasFault) {
             $0.onTapGesture {
@@ -50,21 +57,6 @@ struct InverterView: View {
             }
         }
         .alert(alertContent: $alertContent)
-    }
-
-    @ViewBuilder
-    func verticalDeviceDetail() -> some View {
-        AdaptiveStackView {
-            deviceNameSelector()
-
-            if appSettings.showInverterTemperature, let temperatures = viewModel.temperatures {
-                HStack {
-                    TemperatureView(value: temperatures.ambient, name: "internal", accessibilityName: "accessibility.inverter", showName: true) // TODO: Verify
-                    TemperatureView(value: temperatures.inverter, name: "external", accessibilityName: "accessibility.inverter", showName: true) // TODO: Verify
-                }
-                .background(Color.background)
-            }
-        }
     }
 
     @ViewBuilder
