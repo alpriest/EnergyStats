@@ -31,29 +31,17 @@ struct InverterView: View {
                 .stroke(lineWidth: 4)
                 .foregroundColor(Color.linesNotFlowing)
 
-            if verticalSizeClass == .regular {
-                // Portrait
-                InverterIconView(deviceFaulty: viewModel.hasFault)
-                    .id(viewModel.deviceState)
-                    .frame(width: 50, height: 55)
-                    .padding(5)
-                    .accessibilityHidden(true)
-                    .opacity(appSettings.showInverterIcon ? 1 : 0)
+            AdaptiveStackView {
+                Group {
+                    InverterIconView(deviceFaulty: viewModel.hasFault)
+                        .id(viewModel.deviceState)
+                        .frame(width: 50, height: 55)
+                        .padding(5)
+                        .accessibilityHidden(true)
+                        .opacity(appSettings.showInverterIcon ? 1 : 0)
 
-                verticalDeviceDetail().offset(y: appSettings.showInverterIcon ? 45 : 0)
-            } else {
-                // Landscape
-                HStack {
-                    deviceNameSelector()
-
-                    if appSettings.showInverterTemperature, let temperatures = viewModel.temperatures {
-                        HStack {
-                            TemperatureView(value: temperatures.ambient, name: "internal", accessibilityName: "accessibility.inverter", showName: true) // TODO: Verify
-                            TemperatureView(value: temperatures.inverter, name: "external", accessibilityName: "accessibility.inverter", showName: true) // TODO: Verify
-                        }
-                        .background(Color.background)
-                    }
-                }
+                    verticalDeviceDetail()
+                }.offset(y: appSettings.showInverterIcon && verticalSizeClass == .regular ? 40 : 0)
             }
         }
         .if(viewModel.hasFault) {
@@ -66,7 +54,7 @@ struct InverterView: View {
 
     @ViewBuilder
     func verticalDeviceDetail() -> some View {
-        VStack {
+        AdaptiveStackView {
             deviceNameSelector()
 
             if appSettings.showInverterTemperature, let temperatures = viewModel.temperatures {

@@ -8,32 +8,55 @@
 import Energy_Stats_Core
 import SwiftUI
 
+struct AdaptiveStackView<S: View>: View {
+    @Environment(\.verticalSizeClass) var verticalSizeClass
+    private let content: () -> S
+
+    init(@ViewBuilder content: @escaping () -> S) {
+        self.content = content
+    }
+
+    var body: some View {
+        if verticalSizeClass == .regular {
+            VStack {
+                content()
+            }
+        } else {
+            HStack {
+                content()
+            }
+        }
+    }
+}
+
 struct BatteryPowerFooterView: View {
     let viewModel: BatteryPowerViewModel
     let appSettings: AppSettings
 
     var body: some View {
         VStack {
-            Group {
-                if appSettings.showBatteryPercentageRemaining {
-                    (Text(viewModel.batteryStateOfCharge, format: .percent) + Text(viewModel.showUsableBatteryOnly ? "*" : ""))
-                        .accessibilityLabel(String(format: String(accessibilityKey: .batteryCapacityPercentage), String(describing: viewModel.batteryStateOfCharge.percent())))
-                } else {
-                    EnergyText(amount: viewModel.batteryStoredChargekWh, appSettings: appSettings, type: .batteryCapacity, suffix: viewModel.showUsableBatteryOnly ? "*" : "")
+            AdaptiveStackView {
+                Group {
+                    if appSettings.showBatteryPercentageRemaining {
+                        (Text(viewModel.batteryStateOfCharge, format: .percent) + Text(viewModel.showUsableBatteryOnly ? "*" : ""))
+                            .accessibilityLabel(String(format: String(accessibilityKey: .batteryCapacityPercentage), String(describing: viewModel.batteryStateOfCharge.percent())))
+                    } else {
+                        EnergyText(amount: viewModel.batteryStoredChargekWh, appSettings: appSettings, type: .batteryCapacity, suffix: viewModel.showUsableBatteryOnly ? "*" : "")
+                    }
+                }.onTapGesture {
+                    viewModel.showBatteryPercentageRemainingToggle()
                 }
-            }.onTapGesture {
-                viewModel.showBatteryPercentageRemainingToggle()
-            }
 
-            HStack {
-                if appSettings.showBatteryTemperature {
-                    ForEach(viewModel.temperatures, id: \.id) { temperature in
-                        TemperatureView(
-                            value: temperature.value,
-                            name: temperature.name,
-                            accessibilityName: String(accessibilityKey: .batteryTemperature),
-                            showName: viewModel.temperatures.count > 1
-                        )
+                HStack {
+                    if appSettings.showBatteryTemperature {
+                        ForEach(viewModel.temperatures, id: \.id) { temperature in
+                            TemperatureView(
+                                value: temperature.value,
+                                name: temperature.name,
+                                accessibilityName: String(accessibilityKey: .batteryTemperature),
+                                showName: viewModel.temperatures.count > 1
+                            )
+                        }
                     }
                 }
             }

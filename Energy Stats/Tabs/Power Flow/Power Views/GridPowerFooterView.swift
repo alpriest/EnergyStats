@@ -15,18 +15,22 @@ struct GridPowerFooterView: View {
 
     var body: some View {
         if appSettings.showGridTotalsOnPowerFlow {
-            VStack(alignment: .center) {
-                EnergyText(amount: importTotal, appSettings: appSettings, type: .totalImport)
-                Text("import_total")
-                    .font(.caption)
-                    .foregroundColor(Color("text_dimmed"))
-                    .accessibilityHidden(true)
+            AdaptiveStackView {
+                VStack {
+                    EnergyText(amount: importTotal, appSettings: appSettings, type: .totalImport)
+                    Text("import_total")
+                        .font(.caption)
+                        .foregroundColor(Color("text_dimmed"))
+                        .accessibilityHidden(true)
+                }
 
-                EnergyText(amount: exportTotal, appSettings: appSettings, type: .totalExport)
-                Text("export_total")
-                    .font(.caption)
-                    .foregroundColor(Color("text_dimmed"))
-                    .accessibilityHidden(true)
+                VStack {
+                    EnergyText(amount: exportTotal, appSettings: appSettings, type: .totalExport)
+                    Text("export_total")
+                        .font(.caption)
+                        .foregroundColor(Color("text_dimmed"))
+                        .accessibilityHidden(true)
+                }
             }
             .accessibilityElement(children: .combine)
         } else {
