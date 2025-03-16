@@ -8180,36 +8180,36 @@
         }
       }
     },
-    "Includes data from %@ to %@. Figures are approximate and assume the buy/sell energy prices remained constant throughout the period of ownership." : {
+    "Includes data from %@ to %@. Figures are approximate and assume the buy/sell energy prices remained constant throughout the period of ownership. FoxESS only makes data available for the last 12 months." : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Beinhaltet Daten von %1$@ bis %2$@. Die Zahlen sind annähernd und gehen davon aus, dass die Energiekauf-/verkaufspreise während des gesamten Besitzzeitraums konstant blieben."
+            "value" : "Beinhaltet Daten von %1$@ bis %2$@. Die Zahlen sind annähernd und gehen davon aus, dass die Energiekauf-/verkaufspreise während des gesamten Besitzzeitraums konstant blieben. FoxESS stellt Daten nur für die letzten 12 Monate zur Verfügung."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Includes data from %1$@ to %2$@. Figures are approximate and assume the buy/sell energy prices remained constant throughout the period of ownership."
+            "value" : "Includes data from %1$@ to %2$@. Figures are approximate and assume the buy/sell energy prices remained constant throughout the period of ownership. FoxESS only makes data available for the last 12 months."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Incluye datos desde %1$@ hasta %2$@. Las cifras son aproximadas y suponen que los precios de compra/venta de energía se mantuvieron constantes durante todo el período de propiedad."
+            "value" : "Incluye datos desde %1$@ hasta %2$@. Las cifras son aproximadas y suponen que los precios de compra/venta de energía se mantuvieron constantes durante todo el período de propiedad. FoxESS solo pone a disposición los datos de los últimos 12 meses."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Include dati dal %1$@ al %2$@. Le cifre sono approssimative e presuppongono che i prezzi di acquisto/vendita dell'energia siano rimasti costanti durante tutto il periodo di proprietà."
+            "value" : "Include dati dal %1$@ al %2$@. Le cifre sono approssimative e presuppongono che i prezzi di acquisto/vendita dell'energia siano rimasti costanti durante tutto il periodo di proprietà. FoxESS rende disponibili i dati solo degli ultimi 12 mesi."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zawiera dane od %1$@ do %2$@. Dane są przybliżone i zakładają, że ceny kupna/sprzedaży energii pozostawały stałe przez cały okres posiadania."
+            "value" : "Zawiera dane od %1$@ do %2$@. Dane są przybliżone i zakładają, że ceny kupna/sprzedaży energii pozostawały stałe przez cały okres posiadania. FoxESS udostępnia dane tylko z ostatnich 12 miesięcy."
           }
         }
       }
@@ -13981,30 +13981,30 @@
         }
       }
     },
-    "Stats are aggregated by FoxESS into 1 hr, 1 day or 1 month totals" : {
+    "Stats are aggregated by FoxESS into 1 hr, 1 day or 1 month totals. FoxESS only makes data available for the last 12 months." : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Statistiken werden von FoxESS für jeweils 1 Stunde, 1 Tag oder 1 Monat aufsummiert"
+            "value" : "Statistiken werden von FoxESS für jeweils 1 Stunde, 1 Tag oder 1 Monat aufsummiert. FoxESS stellt Daten nur für die letzten 12 Monate zur Verfügung."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Las estadísticas se agregan por FoxESS en totales de 1 hora, 1 día o 1 mes"
+            "value" : "Las estadísticas se agregan por FoxESS en totales de 1 hora, 1 día o 1 mes. FoxESS solo pone a disposición los datos de los últimos 12 meses."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Le statistiche vengono aggregate da FoxESS in totali ogni 1 ora, 1 giorno o 1 mese."
+            "value" : "Le statistiche vengono aggregate da FoxESS in totali ogni 1 ora, 1 giorno o 1 mese. FoxESS rende disponibili i dati solo degli ultimi 12 mesi."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Statystyki są agregowane przez FoxESS w sumy 1 godz., 1 dzień lub 1 miesiąc"
+            "value" : "Statystyki są agregowane przez FoxESS w sumy 1 godz., 1 dzień lub 1 miesiąc. FoxESS udostępnia dane tylko z ostatnich 12 miesięcy."
           }
         }
       }
