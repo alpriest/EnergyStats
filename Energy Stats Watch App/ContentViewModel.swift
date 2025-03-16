@@ -41,10 +41,10 @@ class ContentViewModel {
             return
         }
         guard state.lastRefreshSeconds > FOUR_MINUTES_IN_SECONDS else {
-            print("Data is fresh, not refreshing")
+            print("AWP", "Data is fresh, not refreshing")
             return
         }
-        print("Config Battery Capacity is", config.batteryCapacity)
+        print("AWP", "Config Battery Capacity is", config.batteryCapacity)
 
         defer {
             Task { @MainActor in

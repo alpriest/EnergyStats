@@ -98,19 +98,28 @@ public extension HomeEnergyStateManager {
 
     @MainActor
     private func storeBatteryModel(soc: Int, chargeStatusDescription: String?, batteryPower: Double) throws {
-        let state = BatteryWidgetState(batterySOC: soc, chargeStatusDescription: chargeStatusDescription, batteryPower: batteryPower)
+        let state = BatteryWidgetState(
+            batterySOC: soc,
+            chargeStatusDescription: chargeStatusDescription,
+            batteryPower: batteryPower
+        )
 
-        deleteBatteryStateEntry()
+        deleteOldBatteryStateEntries()
 
         modelContainer.mainContext.insert(state)
         modelContainer.mainContext.processPendingChanges()
     }
 
     @MainActor
-    private func deleteBatteryStateEntry() {
+    private func deleteOldBatteryStateEntries() {
         let fetchDescriptor: FetchDescriptor<BatteryWidgetState> = FetchDescriptor()
-        if let widgetState = (try? modelContainer.mainContext.fetch(fetchDescriptor))?.first {
-            modelContainer.mainContext.delete(widgetState)
+        do {
+            for entry in try modelContainer.mainContext.fetch(fetchDescriptor) {
+                modelContainer.mainContext.delete(entry)
+            }
+            try modelContainer.mainContext.save()
+        } catch {
+            print("AWP", "Could not delete entry")
         }
     }
 }

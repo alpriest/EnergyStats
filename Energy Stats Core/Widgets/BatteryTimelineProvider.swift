@@ -74,7 +74,7 @@ public struct BatteryTimelineProvider: TimelineProvider {
         }
 
         do {
-            let fetchDescriptor: FetchDescriptor<BatteryWidgetState> = FetchDescriptor()
+            let fetchDescriptor: FetchDescriptor<BatteryWidgetState> = FetchDescriptor(sortBy: [SortDescriptor(\.lastUpdated, order: .reverse)])
             if let widgetState = try (modelContainer.mainContext.fetch(fetchDescriptor)).first {
                 return BatteryTimelineEntry.loaded(
                     date: widgetState.lastUpdated,
