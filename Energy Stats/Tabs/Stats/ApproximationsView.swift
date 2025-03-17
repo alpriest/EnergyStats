@@ -60,15 +60,6 @@ struct ApproximationsView: View {
                         SelfSufficiencyEstimateView(viewModel, mode: appSettings.selfSufficiencyEstimateMode, showCalculations: showCalculations, decimalPlaces: appSettings.decimalPlaces)
                     }
 
-                    if let home = viewModel.homeUsage {
-                        HStack {
-                            Text("home_usage")
-                                .accessibilityHidden(true)
-                            Spacer()
-                            EnergyText(amount: home, appSettings: appSettings, type: .homeUsage, decimalPlaceOverride: decimalPlaceOverride)
-                        }
-                    }
-
                     if let financialModel = viewModel.financialModel {
                         VStack(spacing: 2) {
                             HStack {

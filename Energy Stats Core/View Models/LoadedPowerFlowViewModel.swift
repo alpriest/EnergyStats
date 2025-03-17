@@ -71,7 +71,6 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
 
         self.loadDeviceStatus()
         self.loadTotals()
-        self.loadGeneration()
 
         configManager.appSettingsPublisher.sink { [weak self] settings in
             guard let self else { return }
@@ -79,13 +78,13 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
             self.displayStrings = []
 
             if settings.shouldCombineCT2WithPVPower && settings.showCT2ValueAsString {
-                displayStrings.append(StringPower(name: "CT2", amount: ct2))
+                self.displayStrings.append(StringPower(name: "CT2", amount: ct2))
             }
 
             if settings.powerFlowStrings.enabled {
-                displayStrings.append(contentsOf: self.solarStrings)
+                self.displayStrings.append(contentsOf: self.solarStrings)
             }
-        }.store(in: &cancellables)
+        }.store(in: &self.cancellables)
     }
 
     private func loadDeviceStatus() {
@@ -125,7 +124,10 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
     }
 
     private func loadTotals() {
-        guard self.configManager.showHomeTotalOnPowerFlow || self.configManager.showGridTotalsOnPowerFlow || self.configManager.showFinancialEarnings else { return }
+        guard self.configManager.showHomeTotalOnPowerFlow ||
+            self.configManager.showGridTotalsOnPowerFlow ||
+            self.configManager.showFinancialEarnings ||
+            self.configManager.showTotalYieldOnPowerFlow else { return }
 
         Task {
             let totals = try TotalsViewModel(reports: await self.loadReportData(self.currentDevice))
@@ -138,6 +140,8 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
                 self.gridImportTotal = totals.gridImport
                 self.gridExportTotal = totals.gridExport
             }
+
+            loadGeneration(using: totals)
         }
     }
 
@@ -153,11 +157,12 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
                                                   reportType: .month)
     }
 
-    private func loadGeneration() {
+    private func loadGeneration(using totals: TotalsViewModel) {
         guard self.configManager.showTotalYieldOnPowerFlow else { return }
 
         Task {
             let generation = try GenerationViewModel(
+                pvTotal: totals.solar,
                 response: await self.loadHistoryData(self.currentDevice),
                 includeCT2: self.configManager.shouldCombineCT2WithPVPower,
                 shouldInvertCT2: self.configManager.shouldInvertCT2
@@ -173,7 +178,7 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
 
     private func loadHistoryData(_ currentDevice: Device) async throws -> OpenHistoryResponse {
         let start = Calendar.current.startOfDay(for: Date())
-        return try await self.network.fetchHistory(deviceSN: currentDevice.deviceSN, variables: ["pvPower", "meterPower2"], start: start, end: start.addingTimeInterval(86400))
+        return try await self.network.fetchHistory(deviceSN: currentDevice.deviceSN, variables: ["meterPower2"], start: start, end: start.addingTimeInterval(86400))
     }
 
     public static func ==(lhs: LoadedPowerFlowViewModel, rhs: LoadedPowerFlowViewModel) -> Bool {
