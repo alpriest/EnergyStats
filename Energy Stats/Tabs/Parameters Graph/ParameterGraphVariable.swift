@@ -61,6 +61,14 @@ struct ParameterGraphValue: Identifiable, Hashable {
             return "\(value) \(type.unit)"
         }
     }
+
+    func copy(invertValue: Bool) -> ParameterGraphValue {
+        ParameterGraphValue(
+            date: date,
+            value: invertValue ? 0 - value : value,
+            variable: type
+        )
+    }
 }
 
 struct ParameterGraphBounds {

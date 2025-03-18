@@ -60,6 +60,7 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
     @Published var hasLoaded: Bool = false
     private var loadTask: Task<Void, Never>?
     private let solarForecastProvider: SolarForecastProviding
+    private let adjuster: ParameterValueAdjuster
 
     @Published var displayMode: ParametersGraphDisplayMode {
         didSet {
@@ -99,6 +100,7 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
         self.configManager = configManager
         self.dateProvider = dateProvider
         self.solarForecastProvider = solarForecastProvider
+        self.adjuster = ParameterValueAdjuster(config: configManager)
         displayMode = ParametersGraphDisplayMode(date: dateProvider(), hours: 24)
         haptic.prepare()
 
@@ -166,19 +168,20 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
             let startDate = Calendar.current.startOfDay(for: start)
             let endDate = Calendar.current.date(byAdding: .day, value: 1, to: startDate) ?? startDate
             let raw = try await networking.fetchHistory(deviceSN: currentDevice.deviceSN, variables: rawGraphVariables.map { $0.variable }, start: startDate, end: endDate)
-            let rawData: [ParameterGraphValue] = raw.datas.flatMap { response -> [ParameterGraphValue] in
+            let rawGraphValues: [ParameterGraphValue] = raw.datas.flatMap { response -> [ParameterGraphValue] in
                 guard let rawVariable = configManager.variables.first(where: { $0.variable == response.variable }) else { return [] }
 
                 return response.data.compactMap {
                     ParameterGraphValue(date: $0.time, value: $0.value, variable: rawVariable)
                 }
             }
+            let adjustedGraphValues = adjuster.adjust(variables: rawGraphValues)
             let solarData = selectedGraphVariables.contains(Variable.solcastPredictionVariable.variable) ? await fetchSolarForecasts() : []
 
             if Task.isCancelled { return }
 
             await MainActor.run {
-                self.rawData = rawData + solarData
+                self.rawData = adjustedGraphValues + solarData
                 self.refresh()
                 prepareExport()
                 Task {
