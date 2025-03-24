@@ -62,6 +62,7 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "showInverterScheduleQuickLink")
         UserDefaults.shared.removeObject(forKey: "fetchSolcastOnAppLaunch")
         UserDefaults.shared.removeObject(forKey: "showCT2ValueAsString")
+        UserDefaults.shared.removeObject(forKey: "seenTips")
         UserDefaults.shared.synchronize()
     }
 
@@ -293,4 +294,7 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredBool(key: "showCT2ValueAsString", defaultValue: false)
     public var showCT2ValueAsString: Bool
+
+    @UserDefaultsStoredCodable(key: "seenTips", defaultValue: [])
+    public var seenTips: [TipType]
 }

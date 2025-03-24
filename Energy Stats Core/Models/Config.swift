@@ -61,6 +61,7 @@ public protocol Config {
     var showInverterScheduleQuickLink: Bool { get set }
     var fetchSolcastOnAppLaunch: Bool { get set }
     var showCT2ValueAsString: Bool { get set }
+    var seenTips: [TipType] { get set }
 }
 
 public func DefaultParameterGroups() -> [ParameterGroup] {

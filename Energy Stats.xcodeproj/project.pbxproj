@@ -243,6 +243,10 @@
 		41B6910B28E0CD370058126E /* battery-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B6910A28E0CD370058126E /* battery-success.json */; };
 		41B6910D28E0CD8F0058126E /* real-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B6910C28E0CD8F0058126E /* real-success.json */; };
 		41B6910F28E0CDFC0058126E /* devicelist-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B6910E28E0CDFC0058126E /* devicelist-success.json */; };
+		41BACC042D90AE3F00C9C718 /* TipType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BACC032D90AE3C00C9C718 /* TipType.swift */; };
+		41BACC072D91401E00C9C718 /* TipType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BACC062D91401C00C9C718 /* TipType.swift */; };
+		41BACC0C2D9142B700C9C718 /* TipKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BACC0A2D91420F00C9C718 /* TipKitManager.swift */; };
+		41BACC0D2D9142D600C9C718 /* TipKitViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BACC082D9141F200C9C718 /* TipKitViewModifier.swift */; };
 		41BB29C62CEA89F600F8FDE4 /* View+Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BB29C52CEA89F300F8FDE4 /* View+Analytics.swift */; };
 		41BCC1AB2B245C280062084A /* FoxAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC1AA2B245C280062084A /* FoxAPIService.swift */; };
 		41C0923B2B20FCB0001D1E22 /* SchedulePhaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0923A2B20FCB0001D1E22 /* SchedulePhaseHelper.swift */; };
@@ -736,6 +740,10 @@
 		41B6910A28E0CD370058126E /* battery-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "battery-success.json"; sourceTree = "<group>"; };
 		41B6910C28E0CD8F0058126E /* real-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "real-success.json"; sourceTree = "<group>"; };
 		41B6910E28E0CDFC0058126E /* devicelist-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "devicelist-success.json"; sourceTree = "<group>"; };
+		41BACC032D90AE3C00C9C718 /* TipType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipType.swift; sourceTree = "<group>"; };
+		41BACC062D91401C00C9C718 /* TipType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipType.swift; sourceTree = "<group>"; };
+		41BACC082D9141F200C9C718 /* TipKitViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipKitViewModifier.swift; sourceTree = "<group>"; };
+		41BACC0A2D91420F00C9C718 /* TipKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipKitManager.swift; sourceTree = "<group>"; };
 		41BB29C52CEA89F300F8FDE4 /* View+Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Analytics.swift"; sourceTree = "<group>"; };
 		41BCC1AA2B245C280062084A /* FoxAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoxAPIService.swift; sourceTree = "<group>"; };
 		41C0923A2B20FCB0001D1E22 /* SchedulePhaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePhaseHelper.swift; sourceTree = "<group>"; };
@@ -971,6 +979,7 @@
 		4107446A28CA57A1006D5D7D /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
+				41BACC022D90AE2C00C9C718 /* TipKit */,
 				41A25D3B28CA5CBD00315714 /* Parameters Graph */,
 				41A25D3A28CA5CB700315714 /* Power Flow */,
 				41E1DFDD28D87778001235B9 /* Settings */,
@@ -1429,6 +1438,7 @@
 		41A95B9529DB3F6A00A35169 /* Energy Stats Core */ = {
 			isa = PBXGroup;
 			children = (
+				41BACC052D91401500C9C718 /* TipKit */,
 				41757BBB2A90A05E00573FB4 /* AmountType.swift */,
 				410AA38729D96F6D00CD107C /* AppSettings.swift */,
 				41E3BEC22B1B5A160051C68B /* AppSettingsPublisherFactory.swift */,
@@ -1487,6 +1497,24 @@
 				418547182A3A1530000128C7 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		41BACC022D90AE2C00C9C718 /* TipKit */ = {
+			isa = PBXGroup;
+			children = (
+				41BACC082D9141F200C9C718 /* TipKitViewModifier.swift */,
+				41BACC032D90AE3C00C9C718 /* TipType.swift */,
+			);
+			path = TipKit;
+			sourceTree = "<group>";
+		};
+		41BACC052D91401500C9C718 /* TipKit */ = {
+			isa = PBXGroup;
+			children = (
+				41BACC062D91401C00C9C718 /* TipType.swift */,
+				41BACC0A2D91420F00C9C718 /* TipKitManager.swift */,
+			);
+			path = TipKit;
 			sourceTree = "<group>";
 		};
 		41DB220D2B1F964D00EC4015 /* Templates */ = {
@@ -2070,6 +2098,7 @@
 				418EB4872ACC019A0021B87A /* FinancialsSettingsViewModel.swift in Sources */,
 				411029132A71C066004018BB /* Tintable.swift in Sources */,
 				4141B20028D86C7200B60157 /* UserManager.swift in Sources */,
+				41BACC0D2D9142D600C9C718 /* TipKitViewModifier.swift in Sources */,
 				41AF2F412AA4C674008FCA2E /* BatteryPowerFooterView.swift in Sources */,
 				41CD1F342A141F81006B0C00 /* NonFunctionalButton.swift in Sources */,
 				41CF044C2A95006E00ADCCAD /* ExternalWebNavigationLink.swift in Sources */,
@@ -2102,6 +2131,7 @@
 				4160098B2A8D18B10096CCD9 /* SettingsFooterView.swift in Sources */,
 				41965EE12C3284E6004F9D9A /* VisibilityTracking.swift in Sources */,
 				411029172A71C975004018BB /* ChargeTimePeriod.swift in Sources */,
+				41BACC042D90AE3F00C9C718 /* TipType.swift in Sources */,
 				4141B20228D871B900B60157 /* ContentView.swift in Sources */,
 				418141452A12BABA00FFC6A6 /* StatsGraphView.swift in Sources */,
 				4134ACC42A88A1A800CB4BA8 /* InverterView.swift in Sources */,
@@ -2207,6 +2237,7 @@
 				4171854229FFCF2500D18CDD /* String+MD5.swift in Sources */,
 				418024E22AD16D00009A2625 /* String+Currency.swift in Sources */,
 				41F5A3642C1B563D00CA1120 /* Shimmering.swift in Sources */,
+				41BACC0C2D9142B700C9C718 /* TipKitManager.swift in Sources */,
 				41D75A012B5C0238002C43A7 /* Bool+Int.swift in Sources */,
 				41009A732B02D852009D853B /* SolcastForecastResponse.swift in Sources */,
 				41E3BEC32B1B5A160051C68B /* AppSettingsPublisherFactory.swift in Sources */,
@@ -2265,6 +2296,7 @@
 				4171854429FFCF9500D18CDD /* Color+Hex.swift in Sources */,
 				418045C62C80D8090006A6E0 /* EarningsModel.swift in Sources */,
 				418685D52AFE700100355B6D /* AnimatedNumber.swift in Sources */,
+				41BACC072D91401E00C9C718 /* TipType.swift in Sources */,
 				4131AF4D2B5288F400836B77 /* OpenQueryResponse.swift in Sources */,
 				413B7A312A4A390C00562A68 /* SelfSufficiencyCalculator.swift in Sources */,
 				4128874E2BE7CFD5007E9532 /* HomeEnergyStateManagerConfigAdapter.swift in Sources */,

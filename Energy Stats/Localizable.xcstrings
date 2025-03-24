@@ -12930,6 +12930,7 @@
       }
     },
     "settings.yield.description" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -14579,6 +14580,76 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wymuś okres ładowania 2"
+          }
+        }
+      }
+    },
+    "tip.statsGraphDecimalPlacesFixedTo1.body" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stats numbers are now rounded to a single decimal place as Fox systems have always only been accurate to a single decimal place."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Statistikzahlen werden jetzt auf eine Nachkommastelle gerundet, da Fox-Systeme schon immer nur auf eine Nachkommastelle genau waren."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los números de las estadísticas ahora se redondean a un solo decimal, ya que los sistemas Fox siempre han sido precisos solo hasta una cifra decimal."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I numeri delle statistiche sono ora arrotondati a una sola cifra decimale, poiché i sistemi Fox sono sempre stati precisi solo a una cifra decimale."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Liczby w statystykach są teraz zaokrąglane do jednego miejsca po przecinku, ponieważ systemy Fox od zawsze były dokładne tylko do jednej cyfry po przecinku."
+          }
+        }
+      }
+    },
+    "tip.statsGraphDecimalPlacesFixedTo1.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Decimal places"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nachkommastellen"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Decimales"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cifre decimali"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Miejsca po przecinku"
           }
         }
       }

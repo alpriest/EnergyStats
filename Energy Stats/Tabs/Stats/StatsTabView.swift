@@ -125,6 +125,7 @@ struct StatsTabView: View {
             self.appSettings = $0
         }
         .trackVisibility(on: viewModel)
+        .tipKit(tip: .statsGraphDecimalPlacesFixedTo1)
     }
 }
 

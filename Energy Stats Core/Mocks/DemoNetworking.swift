@@ -375,6 +375,7 @@ public class MockConfig: Config {
     public var showInverterScheduleQuickLink: Bool = true
     public var fetchSolcastOnAppLaunch: Bool = false
     public var showCT2ValueAsString: Bool = false
+    public var seenTips: [TipType] = []
 }
 
 public extension SolcastSite {
