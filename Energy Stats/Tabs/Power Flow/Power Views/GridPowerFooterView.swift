@@ -17,7 +17,7 @@ struct GridPowerFooterView: View {
         if appSettings.showGridTotalsOnPowerFlow {
             AdaptiveStackView {
                 VStack {
-                    EnergyText(amount: importTotal, appSettings: appSettings, type: .totalImport)
+                    EnergyText(amount: importTotal, appSettings: appSettings, type: .totalImport, decimalPlaceOverride: 1)
                     Text("import_total")
                         .font(.caption)
                         .foregroundColor(Color("text_dimmed"))
@@ -25,7 +25,7 @@ struct GridPowerFooterView: View {
                 }
 
                 VStack {
-                    EnergyText(amount: exportTotal, appSettings: appSettings, type: .totalExport)
+                    EnergyText(amount: exportTotal, appSettings: appSettings, type: .totalExport, decimalPlaceOverride: 1)
                     Text("export_total")
                         .font(.caption)
                         .foregroundColor(Color("text_dimmed"))

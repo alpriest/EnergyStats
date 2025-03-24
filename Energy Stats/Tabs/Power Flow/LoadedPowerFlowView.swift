@@ -46,7 +46,7 @@ struct LoadedPowerFlowView: View {
                         HStack(spacing: 0) {
                             (Text("Solar today") + Text(" ")).accessibilityHidden(true)
 
-                            EnergyText(amount: viewModel.todaysGeneration?.todayGeneration() ?? 0, appSettings: appSettings, type: .totalYield)
+                            EnergyText(amount: viewModel.todaysGeneration?.todayGeneration() ?? 0, appSettings: appSettings, type: .totalYield, decimalPlaceOverride: 1)
                                 .redactedShimmer(when: viewModel.todaysGeneration == nil)
                         }
                         .padding(.bottom, 8)

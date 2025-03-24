@@ -24,7 +24,7 @@ public struct GenerationViewModel {
         let ct2Total: Double
 
         if includeCT2 {
-            let ct2Variables = response.datas.filter { $0.variable == "meterPower2" }
+            ct2Total = response.datas.filter { $0.variable == "meterPower2" }
                 .flatMap { $0.data }
                 .compactMap {
                     if shouldInvertCT2 {
@@ -41,20 +41,25 @@ public struct GenerationViewModel {
                         }
                     }
                 }
-
-            let timeDifferenceInSeconds: TimeInterval
-            if let firstTime = ct2Variables[safe: 0]?.time, let secondTime = ct2Variables[safe: 1]?.time {
-                timeDifferenceInSeconds = (secondTime.timeIntervalSince1970 - firstTime.timeIntervalSince1970)
-            } else {
-                timeDifferenceInSeconds = 5.0 * 60.0
-            }
-
-            ct2Total = Double(ct2Variables.reduce(0) { $0 + $1.value })
-                * (timeDifferenceInSeconds / 3600.0)
+                .sorted { $0.time < $1.time }
+                .adjacentPairs()
+                .map { (a, b) -> Double in
+                    let dt = b.time.timeIntervalSince(a.time)
+                    let averageValue = (a.value + b.value) / 2.0
+                    return averageValue * dt / 3600.0
+                }
+                .reduce(0, +)
         } else {
             ct2Total = 0
         }
 
         return pvTotal + ct2Total
+    }
+}
+
+private extension Array {
+    func adjacentPairs() -> [(Element, Element)] {
+        guard count >= 2 else { return [] }
+        return (0..<(count - 1)).map { (self[$0], self[$0 + 1]) }
     }
 }

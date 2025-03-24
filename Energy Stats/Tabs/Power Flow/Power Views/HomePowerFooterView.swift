@@ -15,7 +15,7 @@ struct HomePowerFooterView: View {
     var body: some View {
         if appSettings.showHomeTotalOnPowerFlow {
             VStack(alignment: .center) {
-                EnergyText(amount: amount, appSettings: appSettings, type: .homeUsage)
+                EnergyText(amount: amount, appSettings: appSettings, type: .homeUsage, decimalPlaceOverride: 1)
 
                 Text("Usage today")
                     .multilineTextAlignment(.center)
