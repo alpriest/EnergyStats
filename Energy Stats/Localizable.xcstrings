@@ -2799,7 +2799,32 @@
       }
     },
     "As string" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Als String"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Como cadena"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Come stringa"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jako ciąg znaków"
+          }
+        }
+      }
     },
     "Auto" : {
       "localizations" : {
@@ -4095,7 +4120,32 @@
       }
     },
     "Combine CT2 with Loads power" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CT2 mit Verbrauch kombinieren"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Combinar CT2 con cargas"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Combina CT2 con i carichi"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Połącz CT2 z zużyciem"
+          }
+        }
+      }
     },
     "Combine CT2 with PV power" : {
       "localizations" : {
@@ -4540,7 +4590,32 @@
       }
     },
     "CT2 Display mode" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CT2-Anzeigemodus"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modo de visualización de CT2"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modalità di visualizzazione CT2"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tryb wyświetlania CT2"
+          }
+        }
+      }
     },
     "CT2 Settings" : {
       "localizations" : {
@@ -7796,7 +7871,32 @@
       }
     },
     "Hidden" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ausgeblendet"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oculto"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nascosto"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ukryte"
+          }
+        }
+      }
     },
     "Hide graph" : {
       "localizations" : {
@@ -8013,7 +8113,32 @@
       }
     },
     "Icon" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Symbol"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Icono"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Icona"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ikona"
+          }
+        }
+      }
     },
     "If you need to change your API key then you can replace it above without losing your settings." : {
       "localizations" : {
@@ -12944,41 +13069,6 @@
         }
       }
     },
-    "settings.yield.description" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Berechnet als eine Riemann-Summen-Approximation der Integration von pvPower. Dies wird für heute recht genau sein."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Calculated as a Riemann sum approximation integration of pvPower. This will be reasonably accurate but only for today."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Calculado como una aproximación de la suma de Riemann de la integración de pvPower. Esto será razonablemente preciso, pero solo para hoy."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Calcolato come un'approssimazione della somma di Riemann dell'integrazione di pvPower. Questo sarà ragionevolmente accurato, ma solo per oggi."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Obliczona jako przybliżenie sumy Riemanna całkowania pvPower. Będzie to dość dokładne, ale tylko na dzisiaj."
-          }
-        }
-      }
-    },
     "settings.yield.title" : {
       "localizations" : {
         "de" : {
@@ -13121,35 +13211,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pokaż kolorowe linie przepływu"
-          }
-        }
-      }
-    },
-    "Show CT2 value" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "CT2-Wert anzeigen"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mostrar el valor de CT2"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mostra il valore CT2"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pokaż wartość CT2"
           }
         }
       }
@@ -16049,7 +16110,32 @@
       }
     },
     "Your inverter doesn't store PV generation data so we can't show historic solar data." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dein Wechselrichter speichert keine PV-Erzeugungsdaten, daher können wir keine historischen Solardaten anzeigen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu inversor no almacena datos de generación fotovoltaica, así que no podemos mostrar datos solares históricos."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il tuo inverter non memorizza i dati di generazione fotovoltaica, quindi non possiamo mostrare i dati storici del solare."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Twój falownik nie zapisuje danych o produkcji energii z PV, więc nie możemy wyświetlić historycznych danych słonecznych."
+          }
+        }
+      }
     },
     "Your inverter state is reported as being" : {
       "localizations" : {
