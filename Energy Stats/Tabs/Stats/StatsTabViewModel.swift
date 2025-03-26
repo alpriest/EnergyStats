@@ -113,7 +113,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
                               configManager.hasBattery ? .dischargeEnergyToTal : nil,
                               .loads,
                               (configManager.selfSufficiencyEstimateMode != .off && configManager.showSelfSufficiencyStatsGraphOverlay) ? .selfSufficiency : nil,
-                              .pvEnergyTotal]
+                              device.hasPV ? .pvEnergyTotal : nil]
                 .compactMap { $0 }
                 .map {
                     StatsGraphVariable($0)

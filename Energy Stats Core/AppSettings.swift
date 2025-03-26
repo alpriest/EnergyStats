@@ -53,7 +53,8 @@ public struct AppSettings {
     public var batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode
     public var showInverterScheduleQuickLink: Bool
     public var fetchSolcastOnAppLaunch: Bool
-    public var showCT2ValueAsString: Bool
+    public var ct2DisplayMode: CT2DisplayMode
+    public var shouldCombineCT2WithLoadsPower: Bool
 
     public init(
         showColouredLines: Bool,
@@ -94,7 +95,8 @@ public struct AppSettings {
         batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode,
         showInverterScheduleQuickLink: Bool,
         fetchSolcastOnAppLaunch: Bool,
-        showCT2ValueAsString: Bool
+        ct2DisplayMode: CT2DisplayMode,
+        shouldCombineCT2WithLoadsPower: Bool
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -134,7 +136,8 @@ public struct AppSettings {
         self.batteryTemperatureDisplayMode = batteryTemperatureDisplayMode
         self.showInverterScheduleQuickLink = showInverterScheduleQuickLink
         self.fetchSolcastOnAppLaunch = fetchSolcastOnAppLaunch
-        self.showCT2ValueAsString = showCT2ValueAsString
+        self.ct2DisplayMode = ct2DisplayMode
+        self.shouldCombineCT2WithLoadsPower = shouldCombineCT2WithLoadsPower
     }
 
     public func copy(
@@ -176,7 +179,8 @@ public struct AppSettings {
         batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode? = nil,
         showInverterScheduleQuickLink: Bool? = nil,
         fetchSolcastOnAppLaunch: Bool? = nil,
-        showCT2ValueAsString: Bool? = nil
+        ct2DisplayMode: CT2DisplayMode? = nil,
+        shouldCombineCT2WithLoadsPower: Bool? = nil
     ) -> AppSettings {
         AppSettings(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -217,7 +221,8 @@ public struct AppSettings {
             batteryTemperatureDisplayMode: batteryTemperatureDisplayMode ?? self.batteryTemperatureDisplayMode,
             showInverterScheduleQuickLink: showInverterScheduleQuickLink ?? self.showInverterScheduleQuickLink,
             fetchSolcastOnAppLaunch: fetchSolcastOnAppLaunch ?? self.fetchSolcastOnAppLaunch,
-            showCT2ValueAsString: showCT2ValueAsString ?? self.showCT2ValueAsString
+            ct2DisplayMode: ct2DisplayMode ?? self.ct2DisplayMode,
+            shouldCombineCT2WithLoadsPower: shouldCombineCT2WithLoadsPower ?? self.shouldCombineCT2WithLoadsPower
         )
     }
 }

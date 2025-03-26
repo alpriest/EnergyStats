@@ -59,7 +59,7 @@ struct LoadedPowerFlowView: View {
 
                     ZStack {
                         HStack {
-                            if !appSettings.shouldCombineCT2WithPVPower {
+                            if appSettings.ct2DisplayMode == .separateIcon {
                                 VStack(spacing: 0) {
                                     CT2_icon()
                                     PowerFlowView(amount: viewModel.ct2, appSettings: appSettings, showColouredLines: false, type: .solarFlowCT2)
@@ -78,7 +78,7 @@ struct LoadedPowerFlowView: View {
                                 .frame(width: topColumnWidth, height: size.height * 0.35)
                                 .overlay(
                                     Group {
-                                        if !appSettings.shouldCombineCT2WithPVPower {
+                                        if !appSettings.shouldCombineCT2WithPVPower && appSettings.ct2DisplayMode == .separateIcon {
                                             PowerAmountView(amount: viewModel.solar + viewModel.ct2, backgroundColor: .linesNotFlowing, textColor: .textNotFlowing, appSettings: appSettings, type: .solarFlow)
                                                 .font(.body.bold())
                                                 .offset(x: 0, y: 100)
@@ -86,7 +86,7 @@ struct LoadedPowerFlowView: View {
                                     }
                                 )
 
-                            if !appSettings.shouldCombineCT2WithPVPower {
+                            if appSettings.ct2DisplayMode == .separateIcon {
                                 Spacer().frame(width: horizontalPadding)
 
                                 Color.clear
@@ -94,7 +94,7 @@ struct LoadedPowerFlowView: View {
                             }
                         }
 
-                        if !appSettings.shouldCombineCT2WithPVPower {
+                        if appSettings.ct2DisplayMode == .separateIcon {
                             PowerFlowView(amount: viewModel.ct2, appSettings: appSettings, showColouredLines: false, type: .solarFlow, shape: MidYHorizontalLine(), showAmount: false)
                                 .offset(x: -0.5 * topColumnWidth - (horizontalPadding / 2.0), y: size.height * 0.1)
                                 .frame(width: topColumnWidth + horizontalPadding)
@@ -237,7 +237,7 @@ struct LoadedPowerFlowView: View {
     }
 
     private var showingCT2Column: Bool {
-        !appSettings.shouldCombineCT2WithPVPower
+        appSettings.ct2DisplayMode == .separateIcon
     }
 
     private var inverterLineWidth: CGFloat {

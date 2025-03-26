@@ -330,6 +330,7 @@
 		41F631822BDCD32E00A571C5 /* Energy Stats.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 41F631752BDCD32D00A571C5 /* Energy Stats.app */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		41F631872BDCD6B100A571C5 /* Energy_Stats_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; };
 		41F631882BDCD6B100A571C5 /* Energy_Stats_Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		41F6C6512D935108001EBAA5 /* CT2DisplayMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F6C64F2D935044001EBAA5 /* CT2DisplayMode.swift */; };
 		41F71ABD2A14FBEC00A8C81B /* Array+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127910C28E2442100D5F993 /* Array+Safe.swift */; };
 		41F71ABF2A1504C700A8C81B /* report-year.json in Resources */ = {isa = PBXBuildFile; fileRef = 41F71ABE2A1504C700A8C81B /* report-year.json */; };
 		41F71AC12A1504D900A8C81B /* report-month.json in Resources */ = {isa = PBXBuildFile; fileRef = 41F71AC02A1504D900A8C81B /* report-month.json */; };
@@ -827,6 +828,7 @@
 		41F6317B2BDCD32E00A571C5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		41F6317E2BDCD32E00A571C5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		41F631862BDCD3E800A571C5 /* Energy Stats Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Energy Stats Watch App.entitlements"; sourceTree = "<group>"; };
+		41F6C64F2D935044001EBAA5 /* CT2DisplayMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CT2DisplayMode.swift; sourceTree = "<group>"; };
 		41F71ABE2A1504C700A8C81B /* report-year.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "report-year.json"; sourceTree = "<group>"; };
 		41F71AC02A1504D900A8C81B /* report-month.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "report-month.json"; sourceTree = "<group>"; };
 		41F80BB22CE2AFAC00C6776B /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -1230,6 +1232,7 @@
 		4140146728C7373A00EA5BA1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				41F6C64F2D935044001EBAA5 /* CT2DisplayMode.swift */,
 				41FBE9012D816F6700CEC645 /* StringPower.swift */,
 				416163912CDA5E490084DCF1 /* Notifications.swift */,
 				4140145D28C70D1400EA5BA1 /* Config.swift */,
@@ -2324,6 +2327,7 @@
 				4171854A2A01006000D18CDD /* Double.swift in Sources */,
 				41D286E52AB352AC00B18FEF /* ParameterGroup.swift in Sources */,
 				41E3BEC12B1B55A30051C68B /* DataCeiling.swift in Sources */,
+				41F6C6512D935108001EBAA5 /* CT2DisplayMode.swift in Sources */,
 				416318B729DDD2E100C2C285 /* InMemoryLoggingNetworkStore.swift in Sources */,
 				4185474C2A3B1025000128C7 /* SunView.swift in Sources */,
 			);

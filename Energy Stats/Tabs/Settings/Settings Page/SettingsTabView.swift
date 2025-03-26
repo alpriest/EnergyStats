@@ -51,7 +51,8 @@ struct SettingsTabView: View {
                                          shouldCombineCT2WithPVPower: $viewModel.shouldCombineCT2WithPVPower,
                                          showInverterTypeName: $viewModel.showInverterTypeName,
                                          showInverterScheduleQuickLink: $viewModel.showInverterScheduleQuickLink,
-                                         showCT2ValueAsString: $viewModel.showCT2ValueAsString)
+                                         ct2DisplayMode: $viewModel.ct2DisplayMode,
+                                         shouldCombineCT2WithLoadsPower: $viewModel.shouldCombineCT2WithLoadsPower)
                 } label: {
                     Text("Inverter")
                 }

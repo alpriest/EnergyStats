@@ -2798,6 +2798,9 @@
         }
       }
     },
+    "As string" : {
+
+    },
     "Auto" : {
       "localizations" : {
         "de" : {
@@ -4091,6 +4094,9 @@
         }
       }
     },
+    "Combine CT2 with Loads power" : {
+
+    },
     "Combine CT2 with PV power" : {
       "localizations" : {
         "de" : {
@@ -4532,6 +4538,9 @@
           }
         }
       }
+    },
+    "CT2 Display mode" : {
+
     },
     "CT2 Settings" : {
       "localizations" : {
@@ -7786,6 +7795,9 @@
         }
       }
     },
+    "Hidden" : {
+
+    },
     "Hide graph" : {
       "localizations" : {
         "de" : {
@@ -7999,6 +8011,9 @@
           }
         }
       }
+    },
+    "Icon" : {
+
     },
     "If you need to change your API key then you can replace it above without losing your settings." : {
       "localizations" : {
@@ -13111,6 +13126,7 @@
       }
     },
     "Show CT2 value" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -14587,34 +14603,34 @@
     "tip.statsGraphDecimalPlacesFixedTo1.body" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Statistikzahlen werden jetzt auf eine Nachkommastelle gerundet, da Fox-Systeme schon immer nur auf eine Nachkommastelle genau waren."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Stats numbers are now rounded to a single decimal place as Fox systems have always only been accurate to a single decimal place."
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Statistikzahlen werden jetzt auf eine Nachkommastelle gerundet, da Fox-Systeme schon immer nur auf eine Nachkommastelle genau waren."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Los números de las estadísticas ahora se redondean a un solo decimal, ya que los sistemas Fox siempre han sido precisos solo hasta una cifra decimal."
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Los números de las estadísticas ahora se redondean a un solo decimal, ya que los sistemas Fox siempre han sido precisos solo hasta una cifra decimal."
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I numeri delle statistiche sono ora arrotondati a una sola cifra decimale, poiché i sistemi Fox sono sempre stati precisi solo a una cifra decimale."
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "I numeri delle statistiche sono ora arrotondati a una sola cifra decimale, poiché i sistemi Fox sono sempre stati precisi solo a una cifra decimale."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Liczby w statystykach są teraz zaokrąglane do jednego miejsca po przecinku, ponieważ systemy Fox od zawsze były dokładne tylko do jednej cyfry po przecinku."
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Liczby w statystykach są teraz zaokrąglane do jednego miejsca po przecinku, ponieważ systemy Fox od zawsze były dokładne tylko do jednej cyfry po przecinku."
           }
         }
       }
@@ -14622,34 +14638,34 @@
     "tip.statsGraphDecimalPlacesFixedTo1.title" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nachkommastellen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Decimal places"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nachkommastellen"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Decimales"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Decimales"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cifre decimali"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cifre decimali"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Miejsca po przecinku"
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Miejsca po przecinku"
           }
         }
       }
@@ -16031,6 +16047,9 @@
           }
         }
       }
+    },
+    "Your inverter doesn't store PV generation data so we can't show historic solar data." : {
+
     },
     "Your inverter state is reported as being" : {
       "localizations" : {

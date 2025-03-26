@@ -61,8 +61,9 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "batteryTemperatureDisplayMode")
         UserDefaults.shared.removeObject(forKey: "showInverterScheduleQuickLink")
         UserDefaults.shared.removeObject(forKey: "fetchSolcastOnAppLaunch")
-        UserDefaults.shared.removeObject(forKey: "showCT2ValueAsString")
+        UserDefaults.shared.removeObject(forKey: "ct2DisplayMode")
         UserDefaults.shared.removeObject(forKey: "seenTips")
+        UserDefaults.shared.removeObject(forKey: "shouldCombineCT2WithLoadsPower")
         UserDefaults.shared.synchronize()
     }
 
@@ -292,9 +293,19 @@ public class UserDefaultsConfig: Config {
     @UserDefaultsStoredBool(key: "fetchSolcastOnAppLaunch")
     public var fetchSolcastOnAppLaunch: Bool
 
-    @UserDefaultsStoredBool(key: "showCT2ValueAsString", defaultValue: false)
-    public var showCT2ValueAsString: Bool
+    public var ct2DisplayMode: CT2DisplayMode {
+        get {
+            let rawValue = UserDefaults.shared.integer(forKey: "ct2DisplayMode")
+            return CT2DisplayMode(rawValue: rawValue) ?? .hidden
+        }
+        set {
+            UserDefaults.shared.set(newValue.rawValue, forKey: "ct2DisplayMode")
+        }
+    }
 
     @UserDefaultsStoredCodable(key: "seenTips", defaultValue: [])
     public var seenTips: [TipType]
+
+    @UserDefaultsStoredBool(key: "shouldCombineCT2WithLoadsPower", defaultValue: false)
+    public var shouldCombineCT2WithLoadsPower: Bool
 }

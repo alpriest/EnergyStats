@@ -374,8 +374,9 @@ public class MockConfig: Config {
     public var batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode = .automatic
     public var showInverterScheduleQuickLink: Bool = true
     public var fetchSolcastOnAppLaunch: Bool = false
-    public var showCT2ValueAsString: Bool = false
+    public var ct2DisplayMode: CT2DisplayMode = .hidden
     public var seenTips: [TipType] = []
+    public var shouldCombineCT2WithLoadsPower: Bool = false
 }
 
 public extension SolcastSite {

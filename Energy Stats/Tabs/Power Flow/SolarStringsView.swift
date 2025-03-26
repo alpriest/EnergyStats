@@ -26,7 +26,7 @@ struct SolarStringsView: View {
     let appSettings: AppSettings
 
     var body: some View {
-        if (appSettings.powerFlowStrings.enabled || appSettings.showCT2ValueAsString) && viewModel.displayStrings.count > 0 {
+        if (appSettings.powerFlowStrings.enabled || appSettings.ct2DisplayMode == .asPowerString) && viewModel.displayStrings.count > 0 {
             VStack(alignment: .leading) {
                 ForEach(viewModel.displayStrings) { pvString in
                     HStack {

@@ -70,7 +70,8 @@ public protocol ConfigManaging: FinancialConfigManager, SolcastConfigManager, Ba
     var batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode { get set }
     var showInverterScheduleQuickLink: Bool { get set }
     var fetchSolcastOnAppLaunch: Bool { get set }
-    var showCT2ValueAsString: Bool { get set }
+    var ct2DisplayMode: CT2DisplayMode { get set }
+    var shouldCombineCT2WithLoadsPower: Bool { get set }
 }
 
 public protocol BatteryConfigManager {

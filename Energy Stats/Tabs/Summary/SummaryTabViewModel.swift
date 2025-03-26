@@ -20,6 +20,7 @@ class SummaryTabViewModel: ObservableObject {
     private let approximationsCalculator: ApproximationsCalculator
     private var themeChangeCancellable: AnyCancellable?
     @Published var summaryDateRange: SummaryDateRange
+    @Published var hasPV: Bool = false
 
     init(configManager: ConfigManaging, networking: Networking) {
         self.networking = networking
@@ -31,6 +32,7 @@ class SummaryTabViewModel: ObservableObject {
                 self.currencySymbol = theme.currencySymbol
             }
         }
+        self.hasPV = configManager.currentDevice.value?.hasPV ?? false
     }
 
     func load() {

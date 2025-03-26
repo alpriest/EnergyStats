@@ -42,7 +42,14 @@ struct SummaryTabView: View {
                     } else {
                         if let approximationsViewModel = viewModel.approximationsViewModel {
                             energySummaryRow(title: "home_usage", amount: approximationsViewModel.homeUsage)
-                            energySummaryRow(title: "solar_generated", amount: approximationsViewModel.totalsViewModel?.solar)
+
+                            if viewModel.hasPV {
+                                energySummaryRow(title: "solar_generated", amount: approximationsViewModel.totalsViewModel?.solar)
+                            } else {
+                                Text("Your inverter doesn't store PV generation data so we can't show historic solar data.")
+                                    .font(.caption2)
+                                    .foregroundStyle(.secondary)
+                            }
 
                             Spacer(minLength: 22)
 

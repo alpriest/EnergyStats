@@ -613,12 +613,22 @@ public class ConfigManager: ConfigManaging {
         }
     }
 
-    public var showCT2ValueAsString: Bool {
-        get { config.showCT2ValueAsString }
+    public var ct2DisplayMode: CT2DisplayMode {
+        get { config.ct2DisplayMode }
         set {
-            config.showCT2ValueAsString = newValue
+            config.ct2DisplayMode = newValue
             appSettingsPublisher.send(appSettingsPublisher.value.copy(
-                showCT2ValueAsString: config.showCT2ValueAsString
+                ct2DisplayMode: config.ct2DisplayMode
+            ))
+        }
+    }
+
+    public var shouldCombineCT2WithLoadsPower: Bool {
+        get { config.shouldCombineCT2WithLoadsPower }
+        set {
+            config.shouldCombineCT2WithLoadsPower = newValue
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+                shouldCombineCT2WithLoadsPower: config.shouldCombineCT2WithLoadsPower
             ))
         }
     }

@@ -55,7 +55,8 @@ public extension AppSettings {
             batteryTemperatureDisplayMode: .automatic,
             showInverterScheduleQuickLink: true,
             fetchSolcastOnAppLaunch: false,
-            showCT2ValueAsString: false
+            ct2DisplayMode: .hidden,
+            shouldCombineCT2WithLoadsPower: false
         )
     }
 }

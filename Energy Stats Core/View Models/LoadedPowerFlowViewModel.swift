@@ -77,7 +77,7 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
 
             self.displayStrings = []
 
-            if settings.shouldCombineCT2WithPVPower && settings.showCT2ValueAsString {
+            if settings.ct2DisplayMode == .asPowerString {
                 self.displayStrings.append(StringPower(name: "CT2", amount: ct2))
             }
 

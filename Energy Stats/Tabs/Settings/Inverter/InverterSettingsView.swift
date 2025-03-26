@@ -19,7 +19,8 @@ struct InverterSettingsView: View {
     @Binding var shouldCombineCT2WithPVPower: Bool
     @Binding var showInverterTypeName: Bool
     @Binding var showInverterScheduleQuickLink: Bool
-    @Binding var showCT2ValueAsString: Bool
+    @Binding var ct2DisplayMode: CT2DisplayMode
+    @Binding var shouldCombineCT2WithLoadsPower: Bool
 
     var body: some View {
         Form {
@@ -77,9 +78,19 @@ struct InverterSettingsView: View {
                     Text("Combine CT2 with PV power")
                 }
 
-                Toggle(isOn: $showCT2ValueAsString) {
-                    Text("Show CT2 value")
-                }.disabled(!shouldCombineCT2WithPVPower)
+                Toggle(isOn: $shouldCombineCT2WithLoadsPower) {
+                    Text("Combine CT2 with Loads power")
+                }
+
+                HStack {
+                    Text("CT2")
+                    Spacer()
+                    Picker("CT2 Display mode", selection: $ct2DisplayMode) {
+                        Text("Hidden").tag(CT2DisplayMode.hidden)
+                        Text("Icon").tag(CT2DisplayMode.separateIcon)
+                        Text("As string").tag(CT2DisplayMode.asPowerString)
+                    }.pickerStyle(.segmented)
+                }
             } header: {
                 Text("CT2 Settings")
             } footer: {
@@ -131,7 +142,8 @@ struct InverterSettingsView_Previews: PreviewProvider {
                 shouldCombineCT2WithPVPower: .constant(true),
                 showInverterTypeName: .constant(true),
                 showInverterScheduleQuickLink: .constant(true),
-                showCT2ValueAsString: .constant(true)
+                ct2DisplayMode: .constant(.asPowerString),
+                shouldCombineCT2WithLoadsPower: .constant(false)
             )
         }
     }

@@ -34,6 +34,9 @@ class WatchConfigManager: WatchConfigManaging {
     @UserDefaultsStoredBool(key: "shouldCombineCT2WithPVPower", defaultValue: true)
     var shouldCombineCT2WithPVPower: Bool
 
+    @UserDefaultsStoredBool(key: "shouldCombineCT2WithLoadsPower", defaultValue: false)
+    var shouldCombineCT2WithLoadsPower: Bool
+
     var powerFlowStrings: PowerFlowStringsSettings = .none
 
     @UserDefaultsStoredDouble(key: "minSOC")
@@ -78,4 +81,5 @@ class PreviewWatchConfig: WatchConfigManaging {
     var showUsableBatteryOnly: Bool = false
     var showGridTotalsOnPowerFlow: Bool = true
     var solarDefinitions: SolarRangeDefinitions = .default()
+    var shouldCombineCT2WithLoadsPower: Bool = false
 }

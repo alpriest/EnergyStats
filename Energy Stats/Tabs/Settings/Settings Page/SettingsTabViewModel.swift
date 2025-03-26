@@ -172,9 +172,15 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
-    @Published var showCT2ValueAsString: Bool {
+    @Published var ct2DisplayMode: CT2DisplayMode {
         didSet {
-            config.showCT2ValueAsString = showCT2ValueAsString
+            config.ct2DisplayMode = ct2DisplayMode
+        }
+    }
+
+    @Published var shouldCombineCT2WithLoadsPower: Bool {
+        didSet {
+            config.shouldCombineCT2WithLoadsPower = shouldCombineCT2WithLoadsPower
         }
     }
 
@@ -216,7 +222,8 @@ class SettingsTabViewModel: ObservableObject {
         colorScheme = config.colorScheme
         batteryTemperatureDisplayMode = config.batteryTemperatureDisplayMode
         showInverterScheduleQuickLink = config.showInverterScheduleQuickLink
-        showCT2ValueAsString = config.showCT2ValueAsString
+        ct2DisplayMode = config.ct2DisplayMode
+        shouldCombineCT2WithLoadsPower = config.shouldCombineCT2WithLoadsPower
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }
