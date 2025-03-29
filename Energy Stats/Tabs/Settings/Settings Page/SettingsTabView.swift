@@ -83,6 +83,7 @@ struct SettingsTabView: View {
                     NavigationLink("settings.faq") { FAQView() }
                     NavigationLink("settings.debug") { DebugDataView(networking: networking, configManager: configManager) }
                     NavigationLink("Edit API Key") { ConfigureAPIKeyView() }
+//                    NavigationLink("Invert - automation made easy") { InvertView() }
                 }
 
                 SettingsFooterView(
@@ -103,18 +104,20 @@ struct SettingsTabView: View {
 #if DEBUG
 struct SettingsTabView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsTabView(
-            viewModel: SettingsTabViewModel(
-                userManager: .preview(),
-                config: ConfigManager.preview(),
-                networking: NetworkService.preview()
-            ),
-            configManager: ConfigManager.preview(),
-            networking: NetworkService.preview(),
-            solarService: { DemoSolcast() },
-            templateStore: TemplateStore.preview()
-        )
-        .environmentObject(VersionChecker())
+        NavigationView {
+            SettingsTabView(
+                viewModel: SettingsTabViewModel(
+                    userManager: .preview(),
+                    config: ConfigManager.preview(),
+                    networking: NetworkService.preview()
+                ),
+                configManager: ConfigManager.preview(),
+                networking: NetworkService.preview(),
+                solarService: { DemoSolcast() },
+                templateStore: TemplateStore.preview()
+            )
+            .environmentObject(VersionChecker())
+        }
     }
 }
 #endif

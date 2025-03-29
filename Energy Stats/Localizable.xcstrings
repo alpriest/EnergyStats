@@ -6223,6 +6223,9 @@
         }
       }
     },
+    "Energy Stats is not affiliated with Invert, but we believe their service may help users of Fox ESS inverters optimise energy usage and save money." : {
+
+    },
     "energy_stats_earnings_calculation_description" : {
       "localizations" : {
         "de" : {
@@ -8084,6 +8087,9 @@
         }
       }
     },
+    "https:\\/\\/invert.energy" : {
+
+    },
     "I am paid for" : {
       "localizations" : {
         "de" : {
@@ -8444,6 +8450,12 @@
           }
         }
       }
+    },
+    "Invert" : {
+
+    },
+    "Invert - automation made easy" : {
+
     },
     "Invert CT2 values when detected" : {
       "localizations" : {
@@ -15142,6 +15154,9 @@
           }
         }
       }
+    },
+    "Visit Invert" : {
+
     },
     "Visit the settings tab to configure Solcast" : {
       "localizations" : {
