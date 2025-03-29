@@ -75,9 +75,10 @@ class ContentViewModel {
             )
 
             let device = Device(deviceSN: deviceSN, stationName: nil, stationID: "", battery: nil, moduleSN: "", deviceType: "", hasPV: true, hasBattery: true)
-            let calculator = CurrentStatusCalculator(device: device,
-                                                     response: reals,
-                                                     config: config)
+            let currentStatusCalculator = CurrentStatusCalculator(device: device,
+                                                                  response: reals,
+                                                                  config: config)
+            let values = currentStatusCalculator.currentValues()
 
             let batteryViewModel = BatteryViewModel.make(currentDevice: device, real: reals)
             let totals = await loadTotals(device)
@@ -85,9 +86,9 @@ class ContentViewModel {
             withAnimation {
                 self.state = ContentData(
                     batterySOC: batteryViewModel.chargeLevel,
-                    solar: calculator.currentSolarPower,
-                    house: calculator.currentHomeConsumption,
-                    grid: calculator.currentGrid,
+                    solar: values.solarPower,
+                    house: values.homeConsumption,
+                    grid: values.grid,
                     battery: batteryViewModel.chargePower,
                     lastUpdated: Date.now,
                     totalExport: totals?.gridExport,

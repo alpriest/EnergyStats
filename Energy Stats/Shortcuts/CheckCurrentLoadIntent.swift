@@ -17,11 +17,12 @@ struct CheckCurrentHouseLoadIntent: AppIntent {
     func perform() async throws -> some ProvidesDialog & ReturnsValue<Int> {
         let services = try ServiceFactory.makeAppIntentInitialisedServices()
         let real = try await services.network.fetchRealData(deviceSN: services.device.deviceSN, variables: ["gridConsumptionPower", "generationPower", "feedinPower", "meterPower2"])
-        let currentViewModel = CurrentStatusCalculator(device: services.device,
-                                                       response: real,
-                                                       config: services.configManager)
+        let currentStatusCalculator = CurrentStatusCalculator(device: services.device,
+                                                              response: real,
+                                                              config: services.configManager)
 
-        let current = Int(currentViewModel.currentHomeConsumption * 1000.0)
+        let values = currentStatusCalculator.currentValues()
+        let current = Int(values.homeConsumption * 1000.0)
         return .result(value: current, dialog: IntentDialog(stringLiteral: current.w()))
     }
 }

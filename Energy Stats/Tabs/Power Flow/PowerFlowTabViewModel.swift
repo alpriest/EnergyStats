@@ -39,6 +39,7 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
     private var latestAppTheme: AppSettings
     private var latestDeviceSN: String?
     var visible: Bool = false
+    private var currentStatusCalculator: CurrentStatusCalculator?
 
     enum State: Equatable {
         case unloaded
@@ -162,9 +163,10 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
             await MainActor.run { self.updateState = UpdateState("Updating...") }
 
             let real = try await loadRealData(currentDevice, config: configManager)
-            let currentViewModel = CurrentStatusCalculator(device: currentDevice,
-                                                           response: real,
-                                                           config: configManager)
+            let currentStatusCalculator = CurrentStatusCalculator(device: currentDevice,
+                                                                  response: real,
+                                                                  config: configManager)
+            self.currentStatusCalculator = currentStatusCalculator
 
             let battery = BatteryViewModel.make(currentDevice: currentDevice, real: real)
             if battery.hasBattery, let batterySettings = try? await network.fetchBatterySettings(deviceSN: currentDevice.deviceSN) {
@@ -172,13 +174,8 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
             }
 
             let summary = LoadedPowerFlowViewModel(
-                solar: currentViewModel.currentSolarPower,
-                solarStrings: currentViewModel.currentSolarStringsPower,
+                currentValuesPublisher: currentStatusCalculator.currentValuesPublisher,
                 battery: battery,
-                home: currentViewModel.currentHomeConsumption,
-                grid: currentViewModel.currentGrid,
-                inverterTemperatures: currentViewModel.currentTemperatures,
-                ct2: currentViewModel.currentCT2,
                 currentDevice: currentDevice,
                 network: self.network,
                 configManager: self.configManager
@@ -189,8 +186,8 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
             self.state = .loaded(.empty()) // refreshes the marching ants line speed
             try await Task.sleep(nanoseconds: 1000)
             self.state = .loaded(summary)
-            self.lastUpdated = currentViewModel.lastUpdate
-            self.calculateTicks(historicalViewModel: currentViewModel)
+            self.lastUpdated = currentStatusCalculator.lastUpdate
+            self.calculateTicks(historicalViewModel: currentStatusCalculator)
             self.updateState = UpdateState(" ")
         } catch {
             await self.stopTimer()

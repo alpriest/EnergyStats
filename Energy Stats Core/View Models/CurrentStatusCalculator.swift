@@ -5,6 +5,7 @@
 //  Created by Alistair Priest on 06/09/2022.
 //
 
+import Combine
 import Foundation
 
 public extension Array where Element == OpenQueryResponse.Data {
@@ -26,38 +27,73 @@ public extension Array where Element == OpenQueryResponse.Data {
 }
 
 public protocol CurrentStatusCalculatorConfig {
+    var appSettingsPublisher: LatestAppSettingsPublisher { get }
     var shouldInvertCT2: Bool { get set }
     var shouldCombineCT2WithPVPower: Bool { get set }
     var powerFlowStrings: PowerFlowStringsSettings { get set }
     var shouldCombineCT2WithLoadsPower: Bool { get set }
 }
 
-public struct CurrentStatusCalculator {
-    public let currentSolarPower: Double
-    public let currentSolarStringsPower: [StringPower]
-    public let currentGrid: Double
-    public let currentHomeConsumption: Double
-    public let currentTemperatures: InverterTemperatures?
-    public let lastUpdate: Date
-    public let currentCT2: Double
+public struct CurrentValues {
+    public let solarPower: Double
+    public let solarStringsPower: [StringPower]
+    public let grid: Double
+    public let homeConsumption: Double
+    public let temperatures: InverterTemperatures?
+    public let ct2: Double
+}
+
+public class CurrentStatusCalculator {
+    public var lastUpdate: Date = Date()
+    private let currentValuesSubject = CurrentValueSubject<CurrentValues, Never>(CurrentValues(solarPower: 0, solarStringsPower: [], grid: 0, homeConsumption: 0, temperatures: nil, ct2: 0))
+    public var currentValuesPublisher: AnyPublisher<CurrentValues, Never> { currentValuesSubject.eraseToAnyPublisher() }
+    private let config: CurrentStatusCalculatorConfig
+    private let device: Device
+    private let response: OpenQueryResponse
+    private var cancellables = Set<AnyCancellable>()
 
     public init(
         device: Device,
         response: OpenQueryResponse,
         config: CurrentStatusCalculatorConfig
     ) {
+        self.device = device
+        self.response = response
+        self.config = config
+
+        config.appSettingsPublisher.sink { _ in
+            self.updateCurrentValues()
+        }.store(in: &cancellables)
+
+        updateCurrentValues()
+    }
+
+    public func currentValues() -> CurrentValues {
+        currentValuesSubject.value
+    }
+
+    private func updateCurrentValues() {
         let shouldInvertCT2 = config.shouldInvertCT2
         let shouldCombineCT2WithPVPower = config.shouldCombineCT2WithPVPower
-
         let status = Self.mapCurrentValues(device: device, response: response, config: config)
-
-        self.currentGrid = status.feedinPower - status.gridConsumptionPower
-        self.currentHomeConsumption = Self.calculateLoadPower(status: status, shouldCombineCT2WithLoadsPower: config.shouldCombineCT2WithLoadsPower)
-        self.currentTemperatures = InverterTemperatures(ambient: status.ambientTemperation, inverter: status.invTemperation)
+        let currentGrid = status.feedinPower - status.gridConsumptionPower
+        let currentHomeConsumption = Self.calculateLoadPower(status: status, shouldCombineCT2WithLoadsPower: config.shouldCombineCT2WithLoadsPower)
+        let currentTemperatures = InverterTemperatures(ambient: status.ambientTemperation, inverter: status.invTemperation)
         self.lastUpdate = status.lastUpdate
-        self.currentCT2 = shouldInvertCT2 ? 0 - status.meterPower2 : status.meterPower2
-        self.currentSolarPower = Self.calculateSolarPower(hasPV: status.hasPV, status: status, shouldInvertCT2: shouldInvertCT2, shouldCombineCT2WithPVPower: shouldCombineCT2WithPVPower)
-        self.currentSolarStringsPower = Self.calculateSolarStringsPower(hasPV: status.hasPV, status: status)
+        let currentCT2 = shouldInvertCT2 ? 0 - status.meterPower2 : status.meterPower2
+        let currentSolarPower = Self.calculateSolarPower(hasPV: status.hasPV, status: status, shouldInvertCT2: shouldInvertCT2, shouldCombineCT2WithPVPower: shouldCombineCT2WithPVPower)
+        let currentSolarStringsPower = Self.calculateSolarStringsPower(hasPV: status.hasPV, status: status)
+
+        currentValuesSubject.send(
+            CurrentValues(
+                solarPower: currentSolarPower,
+                solarStringsPower: currentSolarStringsPower,
+                grid: currentGrid,
+                homeConsumption: currentHomeConsumption,
+                temperatures: currentTemperatures,
+                ct2: currentCT2
+            )
+        )
     }
 
     static func mapCurrentValues(device: Device, response: OpenQueryResponse, config: CurrentStatusCalculatorConfig) -> CurrentRawValues {

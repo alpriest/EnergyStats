@@ -13,6 +13,7 @@ protocol WatchConfigManaging: CurrentStatusCalculatorConfig, BatteryConfigManage
 }
 
 class WatchConfigManager: WatchConfigManaging {
+    var appSettingsPublisher: LatestAppSettingsPublisher = .init(.mock())
     private let keychainStore: KeychainStoring
 
     init(keychainStore: KeychainStoring) {
@@ -70,6 +71,7 @@ class WatchConfigManager: WatchConfigManaging {
 }
 
 class PreviewWatchConfig: WatchConfigManaging {
+    var appSettingsPublisher: LatestAppSettingsPublisher = .init(.mock())
     var batteryCapacity: String = ""
     var batteryCapacityW: Int = 0
     func clearBatteryOverride(for deviceID: String) {}

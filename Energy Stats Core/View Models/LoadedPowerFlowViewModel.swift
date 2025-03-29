@@ -26,48 +26,50 @@ public enum DeviceState: Int {
 }
 
 public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
-    public let solar: Double
+    @Published public var solar: Double = 0
     @Published public var displayStrings: [StringPower] = []
-    public let home: Double
-    public let grid: Double
+    @Published public var home: Double = 0
+    @Published public var grid: Double = 0
     @Published public var todaysGeneration: GenerationViewModel?
     @Published public var earnings: EnergyStatsFinancialModel?
-    public let inverterTemperatures: InverterTemperatures?
+    @Published public var inverterTemperatures: InverterTemperatures?
     @Published public var homeTotal: Double?
     @Published public var gridImportTotal: Double?
     @Published public var gridExportTotal: Double?
     private let batteryViewModel: BatteryViewModel
-    public let ct2: Double
+    @Published public var ct2: Double = 0
     @Published public var deviceState: DeviceState = .unknown
     @Published public var faults: [String] = []
     @Published public var showCT2: Bool = false
     private let currentDevice: Device
     private let network: Networking
     private let configManager: ConfigManaging
-    private let solarStrings: [StringPower]
+    @Published private var solarStrings: [StringPower] = []
     private var cancellables = Set<AnyCancellable>()
 
-    public init(solar: Double,
-                solarStrings: [StringPower],
+    public init(currentValuesPublisher: AnyPublisher<CurrentValues, Never>,
                 battery: BatteryViewModel,
-                home: Double,
-                grid: Double,
-                inverterTemperatures: InverterTemperatures?,
-                ct2: Double,
                 currentDevice: Device,
                 network: Networking,
                 configManager: ConfigManaging)
     {
-        self.solar = solar
         self.batteryViewModel = battery
-        self.home = home
-        self.grid = grid
-        self.inverterTemperatures = inverterTemperatures
-        self.ct2 = ct2
         self.currentDevice = currentDevice
         self.network = network
         self.configManager = configManager
-        self.solarStrings = solarStrings
+
+        currentValuesPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] values in
+                self?.solar = values.solarPower
+                self?.solarStrings = values.solarStringsPower
+                self?.home = values.homeConsumption
+                self?.grid = values.grid
+                self?.ct2 = values.ct2
+                self?.inverterTemperatures = values.temperatures
+            }
+            .store(in: &self.cancellables)
+
 
         self.loadDeviceStatus()
         self.loadTotals()
@@ -78,7 +80,7 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
             self.displayStrings = []
 
             if settings.ct2DisplayMode == .asPowerString {
-                self.displayStrings.append(StringPower(name: "CT2", amount: ct2))
+                self.displayStrings.append(StringPower(name: "CT2", amount: self.ct2))
             }
 
             if settings.powerFlowStrings.enabled {
@@ -141,7 +143,7 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
                 self.gridExportTotal = totals.gridExport
             }
 
-            loadGeneration(using: totals)
+            self.loadGeneration(using: totals)
         }
     }
 
@@ -218,29 +220,39 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
 
 public extension LoadedPowerFlowViewModel {
     static func empty() -> LoadedPowerFlowViewModel {
-        LoadedPowerFlowViewModel(solar: 0,
-                                 solarStrings: [],
-                                 battery: BatteryViewModel.noBattery,
-                                 home: 0,
-                                 grid: 0,
-                                 inverterTemperatures: InverterTemperatures(ambient: 0.0, inverter: 0.0),
-                                 ct2: 0,
-                                 currentDevice: Device.preview(),
-                                 network: DemoNetworking(),
-                                 configManager: ConfigManager.preview())
+        let values = CurrentValues(
+            solarPower: 0,
+            solarStringsPower: [],
+            grid: 0,
+            homeConsumption: 0,
+            temperatures: InverterTemperatures(ambient: 0, inverter: 0),
+            ct2: 0
+        )
+        return LoadedPowerFlowViewModel(
+            currentValuesPublisher: Just(values).eraseToAnyPublisher(),
+            battery: BatteryViewModel.noBattery,
+            currentDevice: Device.preview(),
+            network: DemoNetworking(),
+            configManager: ConfigManager.preview()
+        )
     }
 
     static func any(battery: BatteryViewModel = .any(), appSettings: AppSettings = .mock()) -> LoadedPowerFlowViewModel {
-        .init(solar: 3.0,
-              solarStrings: [StringPower(name: "PV1", amount: 2.5), StringPower(name: "PV2", amount: 0.5)],
-              battery: battery,
-              home: 1.5,
-              grid: 0.71,
-              inverterTemperatures: InverterTemperatures(ambient: 4.0, inverter: 9.0),
-              ct2: 2.5,
-              currentDevice: .preview(),
-              network: DemoNetworking(),
-              configManager: ConfigManager.preview(appSettings: appSettings))
+        let values = CurrentValues(
+            solarPower: 3.0,
+            solarStringsPower: [StringPower(name: "PV1", amount: 2.5), StringPower(name: "PV2", amount: 0.5)],
+            grid: 0.71,
+            homeConsumption: 1.5,
+            temperatures: InverterTemperatures(ambient: 4.0, inverter: 9.0),
+            ct2: 2.5
+        )
+        return LoadedPowerFlowViewModel(
+            currentValuesPublisher: Just(values).eraseToAnyPublisher(),
+            battery: battery,
+            currentDevice: .preview(),
+            network: DemoNetworking(),
+            configManager: ConfigManager.preview(appSettings: appSettings)
+        )
     }
 }
 

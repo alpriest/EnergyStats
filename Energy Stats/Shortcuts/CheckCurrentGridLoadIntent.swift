@@ -6,6 +6,7 @@
 //
 
 import AppIntents
+import Combine
 import Energy_Stats_Core
 
 struct CheckCurrentGridLoadIntent: AppIntent {
@@ -17,11 +18,13 @@ struct CheckCurrentGridLoadIntent: AppIntent {
     func perform() async throws -> some ProvidesDialog & ReturnsValue<Int> {
         let services = try ServiceFactory.makeAppIntentInitialisedServices()
         let real = try await services.network.fetchRealData(deviceSN: services.device.deviceSN, variables: ["gridConsumptionPower", "feedinPower"])
-        let currentViewModel = CurrentStatusCalculator(device: services.device,
-                                                       response: real,
-                                                       config: services.configManager)
+        let currentStatusCalculator = CurrentStatusCalculator(device: services.device,
+                                                              response: real,
+                                                              config: services.configManager)
 
-        let current = Int(currentViewModel.currentGrid * 1000.0)
+        let values = currentStatusCalculator.currentValues()
+
+        let current = Int(values.grid * 1000.0)
         return .result(value: current, dialog: IntentDialog(stringLiteral: current.w()))
     }
 }
