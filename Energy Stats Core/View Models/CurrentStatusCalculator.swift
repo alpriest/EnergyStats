@@ -61,8 +61,8 @@ public class CurrentStatusCalculator {
         self.response = response
         self.config = config
 
-        config.appSettingsPublisher.sink { _ in
-            self.updateCurrentValues()
+        config.appSettingsPublisher.sink { [weak self] _ in
+            self?.updateCurrentValues()
         }.store(in: &cancellables)
 
         updateCurrentValues()
