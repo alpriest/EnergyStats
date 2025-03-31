@@ -44,7 +44,7 @@ public struct CurrentValues {
 }
 
 public class CurrentStatusCalculator {
-    public var lastUpdate: Date = Date()
+    public var lastUpdate: Date = .init()
     private let currentValuesSubject = CurrentValueSubject<CurrentValues, Never>(CurrentValues(solarPower: 0, solarStringsPower: [], grid: 0, homeConsumption: 0, temperatures: nil, ct2: 0))
     public var currentValuesPublisher: AnyPublisher<CurrentValues, Never> { currentValuesSubject.eraseToAnyPublisher() }
     private let config: CurrentStatusCalculatorConfig
@@ -79,7 +79,7 @@ public class CurrentStatusCalculator {
         let currentGrid = status.feedinPower - status.gridConsumptionPower
         let currentHomeConsumption = Self.calculateLoadPower(status: status, shouldCombineCT2WithLoadsPower: config.shouldCombineCT2WithLoadsPower)
         let currentTemperatures = InverterTemperatures(ambient: status.ambientTemperation, inverter: status.invTemperation)
-        self.lastUpdate = status.lastUpdate
+        lastUpdate = status.lastUpdate
         let currentCT2 = shouldInvertCT2 ? 0 - status.meterPower2 : status.meterPower2
         let currentSolarPower = Self.calculateSolarPower(hasPV: status.hasPV, status: status, shouldInvertCT2: shouldInvertCT2, shouldCombineCT2WithPVPower: shouldCombineCT2WithPVPower)
         let currentSolarStringsPower = Self.calculateSolarStringsPower(hasPV: status.hasPV, status: status)

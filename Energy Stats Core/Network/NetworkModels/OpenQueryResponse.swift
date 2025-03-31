@@ -106,7 +106,7 @@ public struct OpenQueryResponse: Codable {
         let container: KeyedDecodingContainer<OpenQueryResponse.CodingKeys> = try decoder.container(keyedBy: OpenQueryResponse.CodingKeys.self)
         self.datas = try container.decode([Data].self, forKey: CodingKeys.datas)
         let timeString = try container.decode(String.self, forKey: CodingKeys.time)
-        self.time = try Date(timeString, strategy: FoxEssCloudParseStrategy())
+        self.time = (try? Date(timeString, strategy: FoxEssCloudParseStrategy())) ?? Date()
         self.deviceSN = try container.decode(String.self, forKey: OpenQueryResponse.CodingKeys.deviceSN)
     }
 

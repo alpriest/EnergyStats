@@ -59,34 +59,36 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
         self.configManager = configManager
 
         currentValuesPublisher
+            .combineLatest(configManager.appSettingsPublisher)
             .receive(on: RunLoop.main)
-            .sink { [weak self] values in
+            .sink { [weak self] values, appSettings in
                 self?.solar = values.solarPower
                 self?.solarStrings = values.solarStringsPower
                 self?.home = values.homeConsumption
                 self?.grid = values.grid
                 self?.ct2 = values.ct2
                 self?.inverterTemperatures = values.temperatures
+
+                self?.updateDisplayStrings(appSettings)
             }
             .store(in: &self.cancellables)
 
-
         self.loadDeviceStatus()
         self.loadTotals()
+    }
 
-        configManager.appSettingsPublisher.sink { [weak self] settings in
-            guard let self else { return }
+    private func updateDisplayStrings(_ settings: AppSettings) {
+        var displayStrings: [StringPower] = []
 
-            self.displayStrings = []
+        if settings.ct2DisplayMode == .asPowerString {
+            displayStrings.append(StringPower(name: "CT2", amount: self.ct2))
+        }
 
-            if settings.ct2DisplayMode == .asPowerString {
-                self.displayStrings.append(StringPower(name: "CT2", amount: self.ct2))
-            }
+        if settings.powerFlowStrings.enabled {
+            displayStrings.append(contentsOf: self.solarStrings)
+        }
 
-            if settings.powerFlowStrings.enabled {
-                self.displayStrings.append(contentsOf: self.solarStrings)
-            }
-        }.store(in: &self.cancellables)
+        self.displayStrings = displayStrings
     }
 
     private func loadDeviceStatus() {
