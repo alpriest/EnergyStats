@@ -75,7 +75,7 @@ struct LoadedPowerFlowView: View {
                                     SolarStringsView(viewModel: viewModel, appSettings: appSettings)
                                         .offset(x: 0, y: -40)
                                 )
-                                .frame(width: topColumnWidth, height: size.height * 0.35)
+                                .frame(width: topColumnWidth, height: size.height * 0.40)
                                 .overlay(
                                     Group {
                                         if !appSettings.shouldCombineCT2WithPVPower && appSettings.ct2DisplayMode == .separateIcon {
