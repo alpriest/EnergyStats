@@ -12,9 +12,7 @@ struct InvertView: View {
         Form {
             Section {
                 VStack {
-                    Text("Energy Stats is not affiliated with Invert, but we believe their service may help users of Fox ESS inverters optimise energy usage and save money.")
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal)
+                    Text("invert_summary")
                         .padding(.bottom, 48)
 
                     Button {
@@ -25,7 +23,7 @@ struct InvertView: View {
                                 .font(.headline)
 
                             Text("https:\\/\\/invert.energy\\/fox-ess")
-                        }.frame(maxWidth: .infinity)
+                        }
                     }
                     .buttonStyle(.borderedProminent)
                     .padding(.bottom)

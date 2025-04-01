@@ -6223,9 +6223,6 @@
         }
       }
     },
-    "Energy Stats is not affiliated with Invert, but we believe their service may help users of Fox ESS inverters optimise energy usage and save money." : {
-
-    },
     "energy_stats_earnings_calculation_description" : {
       "localizations" : {
         "de" : {
@@ -8088,7 +8085,7 @@
       }
     },
     "https:\\/\\/invert.energy\\/fox-ess" : {
-
+      "shouldTranslate" : false
     },
     "I am paid for" : {
       "localizations" : {
@@ -8452,7 +8449,7 @@
       }
     },
     "Invert" : {
-
+      "shouldTranslate" : false
     },
     "Invert CT2 values when detected" : {
       "localizations" : {
@@ -8512,6 +8509,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jeśli masz kilka inwerterów i wartości generacji PV są nieprawidłowe, spróbuj dostosować te ustawienia."
+          }
+        }
+      }
+    },
+    "invert_summary" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Energy Stats ist nicht mit Invert verbunden, aber deren Service könnte für Besitzer von Fox ESS-Wechselrichtern interessant sein, um den Energieverbrauch zu optimieren und Geld zu sparen."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Energy Stats is not affiliated with Invert, but their service may be of interest to owners of Fox ESS inverters to optimise energy usage and save money."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Energy Stats no está afiliado con Invert, pero su servicio puede ser de interés para los propietarios de inversores Fox ESS que deseen optimizar el uso de energía y ahorrar dinero."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Energy Stats non è affiliato con Invert, ma il loro servizio potrebbe interessare ai proprietari di inverter Fox ESS per ottimizzare l'uso dell'energia e risparmiare denaro."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Energy Stats nie jest powiązany z Invert, ale ich usługa może zainteresować właścicieli falowników Fox ESS, którzy chcą zoptymalizować zużycie energii i zaoszczędzić pieniądze."
           }
         }
       }
@@ -15153,7 +15184,32 @@
       }
     },
     "Visit Invert" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Besuchen Invert"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visitar Invert"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visita Invert"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Odwiedź Invert"
+          }
+        }
+      }
     },
     "Visit the settings tab to configure Solcast" : {
       "localizations" : {

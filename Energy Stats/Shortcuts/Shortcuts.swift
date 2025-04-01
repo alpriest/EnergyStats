@@ -19,19 +19,19 @@ struct EnergyStatsShortcuts: AppShortcutsProvider {
         )
         AppShortcut(
             intent: CheckCurrentSolarGenerationIntent(),
-            phrases: ["Check my current solar generation"],
+            phrases: ["Check my current solar generation on \(.applicationName)"],
             shortTitle: "Solar Generation",
             systemImageName: "sun.max"
         )
         AppShortcut(
             intent: CheckCurrentHouseLoadIntent(),
-            phrases: ["Check my current house load"],
+            phrases: ["Check my current house load on \(.applicationName)"],
             shortTitle: "House Load",
             systemImageName: "house.fill"
         )
         AppShortcut(
             intent: CheckCurrentGridLoadIntent(),
-            phrases: ["Check my current grid load"],
+            phrases: ["Check my current grid load on \(.applicationName)"],
             shortTitle: "Grid Load",
             systemImageName: "bolt.fill"
         )
