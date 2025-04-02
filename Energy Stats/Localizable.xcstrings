@@ -365,6 +365,9 @@
         }
       }
     },
+    ": " : {
+      "shouldTranslate" : false
+    },
     "(SolarGeneration kWh - Feed-In kWh) * ImportUnitPrice" : {
       "localizations" : {
         "de" : {
@@ -2974,7 +2977,32 @@
       }
     },
     "Batteries" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Batterien"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Baterías"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Batterie"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Baterie"
+          }
+        }
+      }
     },
     "Battery" : {
       "localizations" : {
@@ -3117,7 +3145,32 @@
       }
     },
     "Battery versions" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Batterieversionen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Versiones de batería"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Versioni della batteria"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wersje baterii"
+          }
+        }
+      }
     },
     "battery_charge_range" : {
       "extractionState" : "manual",
@@ -9854,7 +9907,32 @@
       }
     },
     "No battery information available" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine Batterieinformationen verfügbar"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No hay información de batería disponible"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nessuna informazione sulla batteria disponibile"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Brak dostępnych informacji o baterii"
+          }
+        }
+      }
     },
     "No reason was given. Check the front screen of your inverter." : {
       "localizations" : {
@@ -13720,9 +13798,6 @@
         }
       }
     },
-    "SN: %@" : {
-
-    },
     "Solar Forecasts" : {
       "localizations" : {
         "de" : {
@@ -14992,8 +15067,33 @@
         }
       }
     },
-    "Type: " : {
-
+    "Type" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Typ"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tipo"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tipo"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Typ"
+          }
+        }
+      }
     },
     "Unit price" : {
       "localizations" : {
@@ -15170,6 +15270,34 @@
         }
       }
     },
+    "Version" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Version"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Versión"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Versione"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wersja"
+          }
+        }
+      }
+    },
     "Version " : {
       "localizations" : {
         "de" : {
@@ -15197,9 +15325,6 @@
           }
         }
       }
-    },
-    "Version: " : {
-
     },
     "Visit Invert" : {
       "localizations" : {

@@ -27,9 +27,9 @@ struct BatteryFirmwareVersionsView: View {
                         .font(.headline)
 
                     HStack {
-                        labelled(title: "Type", value: module.type)
+                        labelled(title: String(localized: "Type"), value: module.type)
                         Spacer()
-                        labelled(title: "Version", value: module.version)
+                        labelled(title: String(localized: "Version"), value: module.version)
                     }
                     .foregroundColor(.secondary)
                 }
@@ -44,10 +44,13 @@ struct BatteryFirmwareVersionsView: View {
     }
 
     private func labelled(title: String, value: String) -> some View {
-        Text(title) + Text(": ") + Text(value)
+        Text(title.localised()) + Text(": ") + Text(value)
     }
 }
 
 #Preview {
-    BatteryFirmwareVersionsView(network: NetworkService.preview(), config: ConfigManager.preview())
+    BatteryFirmwareVersionsView(
+        network: NetworkService.preview(),
+        config: ConfigManager.preview()
+    )
 }

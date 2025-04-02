@@ -133,6 +133,7 @@
 		415AFA832C597DD800691852 /* BannerAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415AFA822C597DD800691852 /* BannerAlertManager.swift */; };
 		415F0BD72D9C5E57003EB760 /* BatteryFirmwareVersionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415F0BD62D9C5E57003EB760 /* BatteryFirmwareVersionsView.swift */; };
 		415F0BD92D9C869F003EB760 /* BatteryFirmwareVersionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415F0BD82D9C869F003EB760 /* BatteryFirmwareVersionsViewModel.swift */; };
+		415F0BDB2D9D5422003EB760 /* String+Localised.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415F0BDA2D9D541F003EB760 /* String+Localised.swift */; };
 		415F2C742CA7E4AA00B9CE0D /* SummaryDateRangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415F2C732CA7E4A300B9CE0D /* SummaryDateRangeView.swift */; };
 		4160098B2A8D18B10096CCD9 /* SettingsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4160098A2A8D18B10096CCD9 /* SettingsFooterView.swift */; };
 		4160098D2A8D1A690096CCD9 /* BottomButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4160098C2A8D1A690096CCD9 /* BottomButtonsView.swift */; };
@@ -621,6 +622,7 @@
 		415AFA822C597DD800691852 /* BannerAlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAlertManager.swift; sourceTree = "<group>"; };
 		415F0BD62D9C5E57003EB760 /* BatteryFirmwareVersionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryFirmwareVersionsView.swift; sourceTree = "<group>"; };
 		415F0BD82D9C869F003EB760 /* BatteryFirmwareVersionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryFirmwareVersionsViewModel.swift; sourceTree = "<group>"; };
+		415F0BDA2D9D541F003EB760 /* String+Localised.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localised.swift"; sourceTree = "<group>"; };
 		415F2C732CA7E4A300B9CE0D /* SummaryDateRangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryDateRangeView.swift; sourceTree = "<group>"; };
 		4160098A2A8D18B10096CCD9 /* SettingsFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFooterView.swift; sourceTree = "<group>"; };
 		4160098C2A8D1A690096CCD9 /* BottomButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButtonsView.swift; sourceTree = "<group>"; };
@@ -940,6 +942,7 @@
 		4103D1E629DB6D2C001B0BC8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				415F0BDA2D9D541F003EB760 /* String+Localised.swift */,
 				414160282D85CABC009E0096 /* View+IconSize.swift */,
 				416AE44C2A821E4F003D0122 /* AlertContent.swift */,
 				41495F372B211A75004A51C1 /* AlertContentView.swift */,
@@ -2282,6 +2285,7 @@
 				41E165B52B0B961200B17590 /* SolcastSettings.swift in Sources */,
 				41CA35732AA8C10900D45734 /* EarningsViewModel.swift in Sources */,
 				410913FF29DB7A2700133CC5 /* CurrentStatusCalculator.swift in Sources */,
+				415F0BDB2D9D5422003EB760 /* String+Localised.swift in Sources */,
 				410913FE29DB791200133CC5 /* CountdownTimer.swift in Sources */,
 				41BCC1AB2B245C280062084A /* FoxAPIService.swift in Sources */,
 				4103D1D929DB6C6D001B0BC8 /* ReportVariable.swift in Sources */,
