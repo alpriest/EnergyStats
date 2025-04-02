@@ -122,6 +122,12 @@ struct BatterySettingsView: View {
             } footer: {
                 Text(batteryDisplayModeText)
             }
+
+            NavigationLink {
+                BatteryFirmwareVersionsView(network: viewModel.networking, config: viewModel.config)
+            } label: {
+                Text("Battery versions")
+            }
         }
         .navigationTitle(.battery)
     }

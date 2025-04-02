@@ -2973,6 +2973,9 @@
         }
       }
     },
+    "Batteries" : {
+
+    },
     "Battery" : {
       "localizations" : {
         "de" : {
@@ -3112,6 +3115,9 @@
           }
         }
       }
+    },
+    "Battery versions" : {
+
     },
     "battery_charge_range" : {
       "extractionState" : "manual",
@@ -9847,6 +9853,9 @@
         }
       }
     },
+    "No battery information available" : {
+
+    },
     "No reason was given. Check the front screen of your inverter." : {
       "localizations" : {
         "de" : {
@@ -13711,6 +13720,9 @@
         }
       }
     },
+    "SN: %@" : {
+
+    },
     "Solar Forecasts" : {
       "localizations" : {
         "de" : {
@@ -14980,6 +14992,9 @@
         }
       }
     },
+    "Type: %@" : {
+
+    },
     "Unit price" : {
       "localizations" : {
         "de" : {
@@ -15182,6 +15197,9 @@
           }
         }
       }
+    },
+    "Version: %@" : {
+
     },
     "Visit Invert" : {
       "localizations" : {

@@ -65,8 +65,13 @@ public class ConfigManager: ConfigManaging {
             do {
                 let batteryVariables = try await networking.fetchRealData(deviceSN: device.deviceSN, variables: ["ResidualEnergy", "SoC", "SoC_1"])
                 let batterySettings = try await networking.fetchBatterySettings(deviceSN: device.deviceSN)
+                let batteryDetail = try await networking.fetchDevice(deviceSN: device.deviceSN)
 
-                deviceBattery = BatteryResponseMapper.map(batteryVariables: batteryVariables, socResponse: batterySettings)
+                deviceBattery = BatteryResponseMapper.map(
+                    batteryVariables: batteryVariables,
+                    socResponse: batterySettings,
+                    modules: batteryDetail.batteryList
+                )
             } catch {
                 deviceBattery = nil
             }
@@ -635,7 +640,7 @@ public class ConfigManager: ConfigManaging {
 }
 
 public enum BatteryResponseMapper {
-    public static func map(batteryVariables: OpenQueryResponse, socResponse: BatterySOCResponse) -> Device.Battery? {
+    public static func map(batteryVariables: OpenQueryResponse, socResponse: BatterySOCResponse, modules: [DeviceBatteryResponse]?) -> Device.Battery? {
         guard let residual = batteryVariables.datas.current(for: "ResidualEnergy")?.value else { return nil }
 
         let batteryCapacity: String
@@ -649,7 +654,9 @@ public enum BatteryResponseMapper {
         }
         minSOC = String(Double(socResponse.minSocOnGrid) / 100.0)
 
-        return Device.Battery(capacity: batteryCapacity, minSOC: minSOC)
+        let modules = modules?.map { DeviceBatteryModule(batterySN: $0.batterySN, type: $0.type, version: $0.version) }
+
+        return Device.Battery(capacity: batteryCapacity, minSOC: minSOC, modules: modules)
     }
 }
 

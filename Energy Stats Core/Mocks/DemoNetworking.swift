@@ -114,7 +114,12 @@ class DemoAPI: FoxAPIServicing {
             productType: "H",
             deviceType: "h1-3.0",
             hasBattery: true,
-            hasPV: true
+            hasPV: true,
+            batteryList: [
+                .init(batterySN: "ABC1", type: "master", version: "1.020"),
+                .init(batterySN: "ABC2", type: "slave", version: "1.020"),
+                .init(batterySN: "ABC3", type: "slave", version: "1.020")
+            ]
         )
     }
 

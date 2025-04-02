@@ -46,10 +46,17 @@ public struct DeviceDetailResponse: Codable, Hashable {
     public let deviceType: String
     public let hasBattery: Bool
     public let hasPV: Bool
+    public let batteryList: [DeviceBatteryResponse]?
 
     public struct Function: Codable, Hashable {
         public let scheduler: Bool
     }
+}
+
+public struct DeviceBatteryResponse: Codable, Hashable {
+    public let batterySN: String
+    public let type: String
+    public let version: String
 }
 
 struct DeviceList: Codable {
@@ -69,16 +76,19 @@ public struct Device: Codable, Hashable, Identifiable {
     public struct Battery: Codable, Hashable {
         public let capacity: String?
         public let minSOC: String?
+        public let modules: [DeviceBatteryModule]?
 
-        public init(capacity: String?, minSOC: String?) {
+        public init(capacity: String?, minSOC: String?, modules: [DeviceBatteryModule]?) {
             self.capacity = capacity
             self.minSOC = minSOC
+            self.modules = modules
         }
 
         public func copy(capacity: String? = nil, minSOC: String? = nil) -> Self {
             Self(
                 capacity: capacity ?? self.capacity,
-                minSOC: minSOC ?? self.minSOC
+                minSOC: minSOC ?? self.minSOC,
+                modules: modules
             )
         }
     }
@@ -131,5 +141,18 @@ public struct Device: Codable, Hashable, Identifiable {
             hasPV: hasPV ?? self.hasPV,
             hasBattery: hasBattery ?? self.hasBattery
         )
+    }
+}
+
+public struct DeviceBatteryModule: Codable, Hashable, Identifiable {
+    public var id: String { batterySN }
+    public let batterySN: String
+    public let type: String
+    public let version: String
+
+    public init(batterySN: String, type: String, version: String) {
+        self.batterySN = batterySN
+        self.type = type
+        self.version = version
     }
 }

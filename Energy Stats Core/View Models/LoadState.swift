@@ -33,6 +33,15 @@ public enum LoadState: Equatable {
             0.0
         }
     }
+
+    public var isError: Bool {
+        switch self {
+        case .error:
+            true
+        default:
+            false
+        }
+    }
 }
 
 public struct LoadingView: View {
