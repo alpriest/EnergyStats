@@ -14992,7 +14992,7 @@
         }
       }
     },
-    "Type: %@" : {
+    "Type: " : {
 
     },
     "Unit price" : {
@@ -15198,7 +15198,7 @@
         }
       }
     },
-    "Version: %@" : {
+    "Version: " : {
 
     },
     "Visit Invert" : {

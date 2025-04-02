@@ -20,16 +20,17 @@ struct BatteryFirmwareVersionsView: View {
             if viewModel.modules.isEmpty {
                 Text("No battery information available")
             }
+
             List(viewModel.modules) { module in
                 VStack(alignment: .leading) {
-                    Text("SN: \(module.batterySN)")
+                    labelled(title: "SN", value: module.batterySN)
                         .font(.headline)
+
                     HStack {
-                        Text("Type: \(module.type)")
+                        labelled(title: "Type", value: module.type)
                         Spacer()
-                        Text("Version: \(module.version)")
+                        labelled(title: "Version", value: module.version)
                     }
-                    .font(.subheadline)
                     .foregroundColor(.secondary)
                 }
                 .padding(.vertical, 4)
@@ -40,6 +41,10 @@ struct BatteryFirmwareVersionsView: View {
         }
         .navigationTitle("Batteries")
         .loadable(viewModel.state, retry: { Task { await viewModel.load() } })
+    }
+
+    private func labelled(title: String, value: String) -> some View {
+        Text(title) + Text(": ") + Text(value)
     }
 }
 
