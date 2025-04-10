@@ -260,6 +260,6 @@ public extension LoadedPowerFlowViewModel {
 
 public extension Device {
     static func preview() -> Device {
-        Device(deviceSN: "", stationName: "", stationID: "", battery: nil, moduleSN: "", deviceType: "", hasPV: true, hasBattery: true)
+        Device(deviceSN: "", stationName: "", stationID: "", battery: nil, moduleSN: "", deviceType: "", hasPV: true, hasBattery: true, productType: nil)
     }
 }

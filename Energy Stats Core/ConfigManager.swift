@@ -87,7 +87,8 @@ public class ConfigManager: ConfigManaging {
             moduleSN: device.moduleSN,
             deviceType: device.deviceType,
             hasPV: device.hasPV,
-            hasBattery: device.hasBattery
+            hasBattery: device.hasBattery,
+            productType: device.productType
         )
     }
 

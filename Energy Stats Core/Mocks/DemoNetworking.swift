@@ -32,6 +32,7 @@ public enum DemoAPIRequest {
     case openapi_saveSchedule
     case openapi_fetchPowerStationList
     case openapi_fetchPowerStationDetail
+    case openapi_fetchDeviceSettingsItem
 }
 
 class DemoAPI: FoxAPIServicing {
@@ -307,6 +308,19 @@ class DemoAPI: FoxAPIServicing {
 
     func openapi_fetchRequestCount() async throws -> ApiRequestCountResponse {
         ApiRequestCountResponse(total: "10", remaining: "5")
+    }
+
+    func openapi_fetchDeviceSettingsItem(_ item: DeviceSettingsItem, deviceSN: String) async throws -> FetchDeviceSettingsItemResponse {
+        if callsToThrow.contains(.openapi_fetchDeviceSettingsItem) {
+            throw NetworkError.missingData
+        }
+
+        return FetchDeviceSettingsItemResponse(
+            value: "1.0",
+            unit: "kWh",
+            precision: 1.0,
+            range: FetchDeviceSettingsItemResponse.Range(min: 0, max: 100)
+        )
     }
 
     private func data(filename: String) throws -> Data {

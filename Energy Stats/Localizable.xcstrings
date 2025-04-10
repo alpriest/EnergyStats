@@ -2464,6 +2464,12 @@
         }
       }
     },
+    "Advanced Inverter Settings" : {
+
+    },
+    "Advanced settings" : {
+
+    },
     "All" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -6282,6 +6288,9 @@
         }
       }
     },
+    "Energy Stats cannot be held responsible for any damage caused by changing these settings." : {
+
+    },
     "energy_stats_earnings_calculation_description" : {
       "localizations" : {
         "de" : {
@@ -6546,6 +6555,9 @@
           }
         }
       }
+    },
+    "Export limit" : {
+
     },
     "Export parameter data" : {
       "localizations" : {
@@ -9344,6 +9356,9 @@
           }
         }
       }
+    },
+    "Max SOC" : {
+
     },
     "medium_threshold" : {
       "localizations" : {
@@ -14661,6 +14676,9 @@
           }
         }
       }
+    },
+    "These settings control the behaviour of the inverter. Please be cautious and only change them if you know what you are doing." : {
+
     },
     "Tilt" : {
       "localizations" : {

@@ -22,6 +22,8 @@ extension URL {
     static let getOpenPlantList = URL(string: "https://www.foxesscloud.com/op/v0/plant/list")!
     static let getOpenPlantDetail = URL(string: "https://www.foxesscloud.com/op/v0/plant/detail")!
     static let getRequestCount = URL(string: "https://www.foxesscloud.com/op/v0/user/getAccessCount")!
+    static let fetchDeviceSettingsItem = URL(string: "https://www.foxesscloud.com/op/v0/device/setting/get")!
+    static let setDeviceSettingsItem = URL(string: "https://www.foxesscloud.com/op/v0/device/setting/get")!
 }
 
 extension FoxAPIService {
@@ -201,6 +203,15 @@ extension FoxAPIService {
         let request = URLRequest(url: URL.getRequestCount)
 
         let result: (ApiRequestCountResponse, _) = try await fetch(request)
+        return result.0
+    }
+
+    func openapi_fetchDeviceSettingsItem(_ item: DeviceSettingsItem, deviceSN: String) async throws -> FetchDeviceSettingsItemResponse {
+        var request = URLRequest(url: URL.fetchDeviceSettingsItem)
+        request.httpMethod = "POST"
+        request.httpBody = try! JSONEncoder().encode(FetchDeviceSettingsItemRequest(sn: deviceSN, key: item.rawValue))
+
+        let result: (FetchDeviceSettingsItemResponse, _) = try await fetch(request)
         return result.0
     }
 }

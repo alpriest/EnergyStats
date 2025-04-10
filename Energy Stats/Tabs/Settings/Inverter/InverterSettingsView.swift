@@ -108,6 +108,12 @@ struct InverterSettingsView: View {
                 .contentShape(Rectangle())
                 .alertCopy(text(currentDevice))
             }
+
+            Section {
+                NavigationLink("Advanced settings") {
+                    AdvancedInverterSettingsView(config: configManager, networking: networking)
+                }
+            }
         }
         .navigationTitle(.inverter)
     }
@@ -149,37 +155,3 @@ struct InverterSettingsView_Previews: PreviewProvider {
     }
 }
 #endif
-
-struct ESLabeledContent<Content: View>: View {
-    let title: String
-    let content: () -> Content
-
-    init(_ title: String, @ViewBuilder content: @escaping () -> Content) {
-        self.title = title
-        self.content = content
-    }
-
-    var body: some View {
-        Group {
-            LabeledContent(title, content: content)
-        }
-    }
-}
-
-struct ESLabeledText: View {
-    let title: String
-    let value: String?
-
-    init(_ title: String, value: String?) {
-        self.title = title
-        self.value = value
-    }
-
-    var body: some View {
-        Group {
-            if let value {
-                LabeledContent(title, value: value)
-            }
-        }
-    }
-}

@@ -306,6 +306,6 @@ public class UserDefaultsConfig: Config {
     @UserDefaultsStoredCodable(key: "seenTips", defaultValue: [])
     public var seenTips: [TipType]
 
-    @UserDefaultsStoredBool(key: "shouldCombineCT2WithLoadsPower", defaultValue: false)
+    @UserDefaultsStoredBool(key: "shouldCombineCT2WithLoadsPower", defaultValue: true)
     public var shouldCombineCT2WithLoadsPower: Bool
 }

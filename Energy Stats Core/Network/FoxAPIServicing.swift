@@ -32,4 +32,5 @@ protocol FoxAPIServicing {
     func openapi_fetchPowerStationList() async throws -> PagedPowerStationListResponse
     func openapi_fetchPowerStationDetail(stationID: String) async throws -> PowerStationDetailResponse
     func openapi_fetchRequestCount() async throws -> ApiRequestCountResponse
+    func openapi_fetchDeviceSettingsItem(_ item: DeviceSettingsItem, deviceSN: String) async throws -> FetchDeviceSettingsItemResponse
 }

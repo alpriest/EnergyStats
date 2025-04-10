@@ -213,6 +213,14 @@ class NetworkFacade: FoxAPIServicing {
             try await api.openapi_fetchRequestCount()
         }
     }
+
+    func openapi_fetchDeviceSettingsItem(_ item: DeviceSettingsItem, deviceSN: String) async throws -> FetchDeviceSettingsItemResponse {
+        if isDemoUser {
+            try await demoAPI.openapi_fetchDeviceSettingsItem(item, deviceSN: deviceSN)
+        } else {
+            try await api.openapi_fetchDeviceSettingsItem(item, deviceSN: deviceSN)
+        }
+    }
 }
 
 class ThrottleManager {

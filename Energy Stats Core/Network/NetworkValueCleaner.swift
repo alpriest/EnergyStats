@@ -120,6 +120,10 @@ class NetworkValueCleaner: FoxAPIServicing {
     func openapi_fetchRequestCount() async throws -> ApiRequestCountResponse {
         try await api.openapi_fetchRequestCount()
     }
+
+    func openapi_fetchDeviceSettingsItem(_ item: DeviceSettingsItem, deviceSN: String) async throws -> FetchDeviceSettingsItemResponse {
+        try await api.openapi_fetchDeviceSettingsItem(item, deviceSN: deviceSN)
+    }
 }
 
 extension Double {

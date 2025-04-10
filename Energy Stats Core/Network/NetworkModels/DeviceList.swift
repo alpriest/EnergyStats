@@ -72,6 +72,7 @@ public struct Device: Codable, Hashable, Identifiable {
     public let deviceType: String
     public let battery: Battery?
     public let moduleSN: String
+    public let productType: String?
 
     public struct Battery: Codable, Hashable {
         public let capacity: String?
@@ -110,7 +111,8 @@ public struct Device: Codable, Hashable, Identifiable {
                 moduleSN: String,
                 deviceType: String,
                 hasPV: Bool,
-                hasBattery: Bool)
+                hasBattery: Bool,
+                productType: String?)
     {
         self.deviceSN = deviceSN
         self.stationName = stationName
@@ -120,6 +122,7 @@ public struct Device: Codable, Hashable, Identifiable {
         self.deviceType = deviceType
         self.hasPV = hasPV
         self.hasBattery = hasBattery
+        self.productType = productType
     }
 
     public func copy(deviceSN: String? = nil,
@@ -129,7 +132,8 @@ public struct Device: Codable, Hashable, Identifiable {
                      moduleSN: String? = nil,
                      deviceType: String? = nil,
                      hasPV: Bool? = nil,
-                     hasBattery: Bool? = nil) -> Device
+                     hasBattery: Bool? = nil,
+                     productType: String? = nil) -> Device
     {
         Device(
             deviceSN: deviceSN ?? self.deviceSN,
@@ -139,7 +143,8 @@ public struct Device: Codable, Hashable, Identifiable {
             moduleSN: moduleSN ?? self.moduleSN,
             deviceType: deviceType ?? self.deviceType,
             hasPV: hasPV ?? self.hasPV,
-            hasBattery: hasBattery ?? self.hasBattery
+            hasBattery: hasBattery ?? self.hasBattery,
+            productType: productType ?? self.productType
         )
     }
 }
