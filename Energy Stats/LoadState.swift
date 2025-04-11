@@ -46,10 +46,10 @@ struct LoadStateView: ViewModifier {
             if overlay {
                 ZStack {
                     content
-                    LoadingView(message: message)
+                    LoadingView(message: message.rawValue)
                 }
             } else {
-                LoadingView(message: message)
+                LoadingView(message: message.rawValue)
             }
         case .error(let error, let reason):
             AnyView(errorAlert.make(cause: error, message: reason, options: options, retry: retry))
@@ -82,7 +82,7 @@ extension View {
 struct LoadState_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            Text(verbatim: "Hello world how are you").loadable(.active("Loading"), overlay: true, retry: {})
+            Text(verbatim: "Hello world how are you").loadable(.active(.loading), overlay: true, retry: {})
             Text(verbatim: "Hello").loadable(.error(nil, "Something went wrong"), retry: {})
             Text(verbatim: "Hello").loadable(.inactive, retry: {})
         }

@@ -13,12 +13,10 @@ class FoxAPIService: FoxAPIServicing {
     }
 
     private let credentials: KeychainStoring
-    var store: InMemoryLoggingNetworkStore
     private var errorMessages: [String: String] = [:]
 
-    public init(credentials: KeychainStoring, store: InMemoryLoggingNetworkStore) {
+    public init(credentials: KeychainStoring) {
         self.credentials = credentials
-        self.store = store
     }
 
     public func fetchErrorMessages() async {
@@ -46,20 +44,10 @@ extension FoxAPIService {
         return request
     }
 
-    func store<T: Decodable>(_ operation: NetworkOperation<T>, path: WritableKeyPath<InMemoryLoggingNetworkStore, NetworkOperation<T>?>) {
-        Task { @MainActor in
-            store[keyPath: path] = operation
-        }
-    }
-
     func fetch<T: Decodable>(_ request: URLRequest, retry: Bool = true) async throws -> (T, Data) {
         var request = request
         request.timeoutInterval = 30
         addHeaders(to: &request)
-        let requestResponseData = RequestResponseData(request: request, response: nil, responseData: nil)
-        await MainActor.run {
-            store.latestRequestResponseData = NetworkOperation(description: "latestRequestResponse", value: requestResponseData, raw: requestResponseData.combinedData)
-        }
 
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
@@ -68,12 +56,6 @@ extension FoxAPIService {
             }
 
             let statusCode = httpResponse.statusCode
-
-            let requestResponseData = RequestResponseData(request: request, response: httpResponse, responseData: data)
-            await MainActor.run {
-                store.latestRequestResponseData = NetworkOperation(description: "latestRequestResponse", value: requestResponseData, raw: requestResponseData.combinedData)
-            }
-
             if statusCode == 406 {
                 throw NetworkError.requestRequiresSignature
             }

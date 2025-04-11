@@ -44,7 +44,7 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState, HasAlertContent 
             hasPreLoaded = true
         }
 
-        await setState(.active("Loading"))
+        await setState(.active(.loading))
 
         do {
             let flags = try await networking.fetchSchedulerFlag(deviceSN: device.deviceSN)
@@ -79,7 +79,7 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState, HasAlertContent 
                 return
             }
         }
-        await setState(.active("Loading"))
+        await setState(.active(.loading))
 
         do {
             self.templates = templateStore.load()
@@ -102,9 +102,9 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState, HasAlertContent 
 
         do {
             if self.schedulerEnabled {
-                await setState(.active("Activating"))
+                await setState(.active(.activating))
             } else {
-                await setState(.active("Deactivating"))
+                await setState(.active(.deactivating))
             }
 
             try await self.networking.setScheduleFlag(deviceSN: deviceSN, enable: self.schedulerEnabled)
@@ -125,7 +125,7 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState, HasAlertContent 
             return
         }
 
-        await setState(.active("Activating"))
+        await setState(.active(.activating))
 
         do {
             try await self.networking.saveSchedule(deviceSN: deviceSN, schedule: schedule)

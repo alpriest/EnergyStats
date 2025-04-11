@@ -8,53 +8,11 @@
 import Energy_Stats_Core
 import SwiftUI
 
-class DeviceSettingItemViewModel: ObservableObject, HasLoadState {
-    private let item: DeviceSettingsItem
-    private let networking: Networking
-    private let config: ConfigManaging
-    var title: String { item.title }
-    var description: String { item.description }
-    var behaviour: String { item.behaviour }
-    @Published var value: String = ""
-    @Published var unit: String = ""
-    @Published var state = LoadState.inactive
-
-    init(item: DeviceSettingsItem, networking: Networking, config: ConfigManaging) {
-        self.item = item
-        self.config = config
-        self.networking = networking
-
-        load()
-    }
-
-    func load() {
-        guard state == .inactive else { return }
-
-        Task {
-            guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
-            await setState(.active("Loading"))
-
-            do {
-                let item = try await networking.fetchDeviceSettingsItem(item, deviceSN: deviceSN)
-
-                Task { @MainActor in
-                    self.value = item.value
-                    self.unit = item.unit
-                }
-
-                await setState(.inactive)
-            } catch {
-                state = .error(error, "Could not fetch setting")
-            }
-        }
-    }
-}
-
 struct DeviceSettingItemView: View {
     @StateObject var viewModel: DeviceSettingItemViewModel
 
-    init(item: DeviceSettingsItem, networking: Networking, config: ConfigManaging) {
-        _viewModel = StateObject(wrappedValue: DeviceSettingItemViewModel(item: item, networking: networking, config: config))
+    init(item: DeviceSettingsItem, networking: Networking, configManager: ConfigManaging) {
+        _viewModel = StateObject(wrappedValue: DeviceSettingItemViewModel(item: item, networking: networking, configManager: configManager))
     }
 
     var body: some View {
@@ -71,18 +29,28 @@ struct DeviceSettingItemView: View {
                     VStack(alignment: .leading, spacing: 22) {
                         Text(viewModel.description)
                         Text(viewModel.behaviour)
+
+                        Text("These settings control the behaviour of the inverter. Please be cautious and only change them if you know what you are doing.")
+                            .foregroundStyle(Color.red)
+
+                        Text("Energy Stats cannot be held responsible for any damage caused by changing these settings.")
+                            .foregroundStyle(Color.red)
                     }
                 }
             }
 
             BottomButtonsView {
-                // TODO:
+                viewModel.save()
             }
         }
-        .loadable(viewModel.state, retry: { viewModel.load() } )
+        .loadable(viewModel.state, retry: { viewModel.load() })
     }
 }
 
 #Preview {
-    DeviceSettingItemView(item: .exportLimit, networking: NetworkService.preview(), config: ConfigManager.preview())
+    DeviceSettingItemView(
+        item: .exportLimit,
+        networking: NetworkService.preview(),
+        configManager: ConfigManager.preview()
+    )
 }

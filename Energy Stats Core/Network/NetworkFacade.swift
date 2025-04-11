@@ -214,11 +214,19 @@ class NetworkFacade: FoxAPIServicing {
         }
     }
 
-    func openapi_fetchDeviceSettingsItem(_ item: DeviceSettingsItem, deviceSN: String) async throws -> FetchDeviceSettingsItemResponse {
+    func openapi_fetchDeviceSettingsItem(deviceSN: String, item: DeviceSettingsItem) async throws -> FetchDeviceSettingsItemResponse {
         if isDemoUser {
-            try await demoAPI.openapi_fetchDeviceSettingsItem(item, deviceSN: deviceSN)
+            try await demoAPI.openapi_fetchDeviceSettingsItem(deviceSN: deviceSN, item: item)
         } else {
-            try await api.openapi_fetchDeviceSettingsItem(item, deviceSN: deviceSN)
+            try await api.openapi_fetchDeviceSettingsItem(deviceSN: deviceSN, item: item)
+        }
+    }
+
+    func openapi_setDeviceSettingsItem(deviceSN: String, item: DeviceSettingsItem, value: String) async throws {
+        if isDemoUser {
+            try await demoAPI.openapi_setDeviceSettingsItem(deviceSN: deviceSN, item: item, value: value)
+        } else {
+            try await api.openapi_setDeviceSettingsItem(deviceSN: deviceSN, item: item, value: value)
         }
     }
 }

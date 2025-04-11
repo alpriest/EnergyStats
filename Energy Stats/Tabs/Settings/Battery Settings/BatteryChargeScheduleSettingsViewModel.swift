@@ -35,7 +35,7 @@ class BatteryChargeScheduleSettingsViewModel: ObservableObject, HasLoadState {
         Task { @MainActor in
             guard state == .inactive else { return }
             guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
-            await setState(.active("Loading"))
+            await setState(.active(.loading))
 
             do {
                 let settings = try await networking.fetchBatteryTimes(deviceSN: deviceSN)
@@ -57,7 +57,7 @@ class BatteryChargeScheduleSettingsViewModel: ObservableObject, HasLoadState {
     func save() {
         Task { @MainActor in
             guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
-            await setState(.active("Saving"))
+            await setState(.active(.saving))
 
             do {
                 let times: [ChargeTime] = [

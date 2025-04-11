@@ -130,7 +130,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
         guard let currentDevice = configManager.currentDevice.value else { return }
         guard requiresLoad() else { return }
 
-        await setState(.active("Loading"))
+        await setState(.active(.loading))
 
         if graphVariables.isEmpty {
             await updateGraphVariables(for: currentDevice)

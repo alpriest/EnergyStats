@@ -7,9 +7,16 @@
 
 import SwiftUI
 
+public enum LoadStateActivity: LocalizedStringKey {
+    case loading = "Loading"
+    case saving = "Saving"
+    case activating = "Activating"
+    case deactivating = "Deactivating"
+}
+
 public enum LoadState: Equatable {
     case inactive
-    case active(LocalizedStringKey)
+    case active(_ type: LoadStateActivity)
     case error(Error?, String)
 
     public static func ==(lhs: LoadState, rhs: LoadState) -> Bool {

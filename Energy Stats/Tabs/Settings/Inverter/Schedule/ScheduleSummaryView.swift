@@ -33,7 +33,7 @@ struct ScheduleSummaryView: View {
             case let .active(reason):
                 Spacer()
                 HStack(spacing: 8) {
-                    Text(reason)
+                    Text(reason.rawValue)
                     ProgressView()
                 }
                 Spacer()

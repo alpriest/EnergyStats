@@ -58,7 +58,7 @@ struct Energy_StatsApp: App {
         appSettingsPublisher = AppSettingsPublisherFactory.make()
         configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
         AppSettingsPublisherFactory.update(from: configManager)
-        userManager = .init(store: keychainStore, configManager: configManager, networkCache: InMemoryLoggingNetworkStore.shared)
+        userManager = .init(store: keychainStore, configManager: configManager)
         templateStore = TemplateStore(config: configManager)
         appSettingsPublisher
             .sink { [keychainStore, configManager] _ in
@@ -81,7 +81,6 @@ struct Energy_StatsApp: App {
                     solarForecastProvider: solarForecastProvider,
                     templateStore: templateStore
                 )
-                .environmentObject(InMemoryLoggingNetworkStore.shared)
                 .environmentObject(userManager)
                 .environmentObject(KeychainWrapper(keychainStore))
                 .environmentObject(versionChecker)

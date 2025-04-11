@@ -150,7 +150,7 @@ public struct Device: Codable, Hashable, Identifiable {
 }
 
 public struct DeviceBatteryModule: Codable, Hashable, Identifiable {
-    public var id: String { batterySN }
+    public var id: String { batterySN + type + version }
     public let batterySN: String
     public let type: String
     public let version: String

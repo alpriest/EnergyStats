@@ -41,7 +41,6 @@ class ContentViewModel {
             return
         }
         guard state.lastRefreshSeconds > FOUR_MINUTES_IN_SECONDS else {
-            print("AWP", "Data is fresh, not refreshing")
             return
         }
         print("AWP", "Config Battery Capacity is", config.batteryCapacity)
@@ -53,7 +52,7 @@ class ContentViewModel {
         }
 
         do {
-            loadState = .active("Loading")
+            loadState = .active(.loading)
             let reals = try await network.fetchRealData(
                 deviceSN: deviceSN,
                 variables: [

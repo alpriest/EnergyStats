@@ -31,7 +31,7 @@ class BatterySOCSettingsViewModel: ObservableObject, HasLoadState {
         Task { @MainActor in
             guard state == .inactive else { return }
             guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
-            await setState(.active("Loading"))
+            await setState(.active(.loading))
 
             do {
                 let settings = try await networking.fetchBatterySettings(deviceSN: deviceSN)
@@ -57,7 +57,7 @@ class BatterySOCSettingsViewModel: ObservableObject, HasLoadState {
                 return
             }
 
-            await setState(.active("Saving"))
+            await setState(.active(.saving))
 
             do {
                 try await networking.setBatterySoc(

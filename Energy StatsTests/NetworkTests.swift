@@ -16,7 +16,7 @@ final class NetworkTests: XCTestCase {
 
     override func setUp() {
         keychainStore = MockKeychainStore()
-        sut = FoxAPIService(credentials: keychainStore, store: InMemoryLoggingNetworkStore())
+        sut = FoxAPIService(credentials: keychainStore)
     }
 
     override func tearDown() {

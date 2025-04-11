@@ -31,3 +31,9 @@ public struct FetchDeviceSettingsItemResponse: Decodable {
     public let precision: Double
     public let range: Range
 }
+
+public struct SetDeviceSettingsItemRequest: Encodable {
+    let sn: String
+    let key: String
+    let value: String
+}

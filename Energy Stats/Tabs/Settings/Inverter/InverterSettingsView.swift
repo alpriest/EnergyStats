@@ -110,8 +110,10 @@ struct InverterSettingsView: View {
             }
 
             Section {
-                NavigationLink("Advanced settings") {
-                    AdvancedInverterSettingsView(config: configManager, networking: networking)
+                NavigationLink {
+                    DeviceSettingItemView(item: .exportLimit, networking: networking, configManager: configManager)
+                } label: {
+                    Text(DeviceSettingsItem.exportLimit.title)
                 }
             }
         }

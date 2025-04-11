@@ -29,7 +29,7 @@ class EditScheduleViewModel: ObservableObject, HasLoadState, HasAlertContent {
             return
         }
 
-        await setState(.active("Saving"))
+        await setState(.active(.saving))
 
         Task { [self] in
             do {

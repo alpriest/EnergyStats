@@ -65,13 +65,13 @@ class EditTemplateViewModel: ObservableObject, HasLoadState, HasAlertContent {
         }
 
         Task { @MainActor in
-            await setState(.active("Saving"))
+            await setState(.active(.saving))
 
             do {
-                await setState(.active("Saving"))
+                await setState(.active(.saving))
                 try await networking.saveSchedule(deviceSN: deviceSN, schedule: schedule)
 
-                await setState(.active("Activating"))
+                await setState(.active(.activating))
                 try await networking.setScheduleFlag(deviceSN: deviceSN, enable: true)
 
                 Task { @MainActor in

@@ -515,6 +515,7 @@
       }
     },
     "%@ remaining out of %@ total" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2347,6 +2348,7 @@
       }
     },
     "Activating" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2463,12 +2465,6 @@
           }
         }
       }
-    },
-    "Advanced Inverter Settings" : {
-
-    },
-    "Advanced settings" : {
-
     },
     "All" : {
       "extractionState" : "manual",
@@ -4240,6 +4236,9 @@
         }
       }
     },
+    "Coming soon..." : {
+
+    },
     "Compare strings" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -4326,6 +4325,7 @@
       }
     },
     "Copy debug data" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -5105,6 +5105,7 @@
       }
     },
     "Deactivating" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -5162,6 +5163,7 @@
       }
     },
     "Debug data has been copied to your clipboard." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -5190,6 +5192,7 @@
       }
     },
     "debug.footer_text" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -5224,6 +5227,7 @@
       }
     },
     "debug.navigation_title" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -5258,6 +5262,7 @@
       }
     },
     "debug.view_request_count" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -5769,6 +5774,7 @@
       }
     },
     "Done" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -6556,9 +6562,6 @@
         }
       }
     },
-    "Export limit" : {
-
-    },
     "Export parameter data" : {
       "localizations" : {
         "de" : {
@@ -6860,6 +6863,7 @@
       }
     },
     "Fetch now" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -8834,6 +8838,7 @@
       }
     },
     "Last fetched" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -9356,9 +9361,6 @@
           }
         }
       }
-    },
-    "Max SOC" : {
-
     },
     "medium_threshold" : {
       "localizations" : {

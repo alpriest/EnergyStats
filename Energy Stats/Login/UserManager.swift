@@ -14,14 +14,12 @@ class UserManager: ObservableObject, HasLoadState {
     private var configManager: ConfigManaging
     private let store: KeychainStoring
     private var cancellables = Set<AnyCancellable>()
-    private let networkCache: InMemoryLoggingNetworkStore
     @MainActor @Published var state = LoadState.inactive
     @MainActor @Published var isLoggedIn: Bool?
 
-    init(store: KeychainStoring, configManager: ConfigManaging, networkCache: InMemoryLoggingNetworkStore) {
+    init(store: KeychainStoring, configManager: ConfigManaging) {
         self.store = store
         self.configManager = configManager
-        self.networkCache = networkCache
 
         migrateKeychain()
         self.store.hasCredentials
@@ -49,7 +47,7 @@ class UserManager: ObservableObject, HasLoadState {
     @MainActor
     func login(apiKey: String) async {
         do {
-            await setState(.active("Loading"))
+            await setState(.active(.loading))
             if apiKey == "demo" {
                 configManager.isDemoUser = true
                 configManager.appSettingsPublisher.send(AppSettings.mock())
@@ -81,7 +79,6 @@ class UserManager: ObservableObject, HasLoadState {
             configManager.logout(clearDisplaySettings: clearDisplaySettings, clearDeviceSettings: clearDeviceSettings)
         }
         store.logout()
-        networkCache.logout()
         await setState(.inactive)
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -96,8 +93,7 @@ extension UserManager {
     static func preview() -> UserManager {
         UserManager(
             store: KeychainStore(),
-            configManager: ConfigManager.preview(),
-            networkCache: InMemoryLoggingNetworkStore()
+            configManager: ConfigManager.preview()
         )
     }
 }

@@ -158,7 +158,7 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
         guard let start = queryDate.asDate() else { return }
         guard requiresLoad() else { return }
 
-        await setState(.active("Loading"))
+        await setState(.active(.loading))
 
         do {
             let rawGraphVariables = graphVariables

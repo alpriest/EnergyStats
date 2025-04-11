@@ -14,7 +14,7 @@ import XCTest
 final class LoginViewTests: XCTestCase {
     @MainActor
     func test_when_user_arrives() {
-        let sut = APIKeyLoginView(userManager: UserManager(store: MockKeychainStore(), configManager: ConfigManager.preview(), networkCache: InMemoryLoggingNetworkStore()))
+        let sut = APIKeyLoginView(userManager: UserManager(store: MockKeychainStore(), configManager: ConfigManager.preview()))
         let view = UIHostingController(rootView: sut)
 
         assertSnapshot(matching: view, as: .image(on: .iPhone13Pro))
@@ -25,8 +25,7 @@ final class LoginViewTests: XCTestCase {
         let networking = MockNetworking(callsToThrow: [.openapi_fetchDeviceList])
         let userManager = UserManager(
             store: MockKeychainStore(),
-            configManager: ConfigManager.preview(networking: networking),
-            networkCache: InMemoryLoggingNetworkStore()
+            configManager: ConfigManager.preview(networking: networking)
         )
         let sut = APIKeyLoginView(userManager: userManager)
         let view = UIHostingController(rootView: sut)

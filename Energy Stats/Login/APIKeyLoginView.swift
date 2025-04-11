@@ -16,7 +16,7 @@ struct APIKeyLoginView: View {
     var body: some View {
         switch userManager.state {
         case let .active(localizedStringKey):
-            LoadingView(message: localizedStringKey)
+            LoadingView(message: localizedStringKey.rawValue)
         default:
             loginView()
         }

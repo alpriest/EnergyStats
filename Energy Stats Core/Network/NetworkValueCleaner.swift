@@ -121,8 +121,12 @@ class NetworkValueCleaner: FoxAPIServicing {
         try await api.openapi_fetchRequestCount()
     }
 
-    func openapi_fetchDeviceSettingsItem(_ item: DeviceSettingsItem, deviceSN: String) async throws -> FetchDeviceSettingsItemResponse {
-        try await api.openapi_fetchDeviceSettingsItem(item, deviceSN: deviceSN)
+    func openapi_fetchDeviceSettingsItem(deviceSN: String, item: DeviceSettingsItem) async throws -> FetchDeviceSettingsItemResponse {
+        try await api.openapi_fetchDeviceSettingsItem(deviceSN: deviceSN, item: item)
+    }
+
+    func openapi_setDeviceSettingsItem(deviceSN: String, item: DeviceSettingsItem, value: String) async throws {
+        try await api.openapi_setDeviceSettingsItem(deviceSN: deviceSN, item: item, value: value)
     }
 }
 

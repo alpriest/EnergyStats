@@ -36,7 +36,7 @@ final class ParametersGraphTabViewTests: XCTestCase {
                 solarForecastProvider: { MockSolcast() }
             )
         )
-        let view = UIHostingController(rootView: sut.environmentObject(UserManager(store: MockKeychainStore(), configManager: configManager, networkCache: InMemoryLoggingNetworkStore())))
+        let view = UIHostingController(rootView: sut.environmentObject(UserManager(store: MockKeychainStore(), configManager: configManager)))
 
         await sut.viewModel.load()
         await propertyOn(sut.viewModel, keyPath: \.state) { $0 == .inactive }

@@ -26,7 +26,8 @@ public protocol Networking {
     func saveSchedule(deviceSN: String, schedule: Schedule) async throws
     func fetchPowerStationDetail() async throws -> PowerStationDetail?
     func fetchRequestCount() async throws -> ApiRequestCountResponse
-    func fetchDeviceSettingsItem(_ item: DeviceSettingsItem, deviceSN: String) async throws -> FetchDeviceSettingsItemResponse
+    func fetchDeviceSettingsItem(deviceSN: String, item: DeviceSettingsItem) async throws -> FetchDeviceSettingsItemResponse
+    func setDeviceSettingsItem(deviceSN: String, item: DeviceSettingsItem, value: String) async throws
 }
 
 public class NetworkService: Networking {
@@ -36,7 +37,7 @@ public class NetworkService: Networking {
                                 isDemoUser: @escaping () -> Bool,
                                 dataCeiling: @escaping () -> DataCeiling) -> Networking
     {
-        let service = FoxAPIService(credentials: keychainStore, store: .shared)
+        let service = FoxAPIService(credentials: keychainStore)
         let api = NetworkValueCleaner(
             api: NetworkFacade(
                 api: NetworkCache(api: service),
@@ -129,8 +130,12 @@ public class NetworkService: Networking {
         try await api.openapi_fetchRequestCount()
     }
 
-    public func fetchDeviceSettingsItem(_ item: DeviceSettingsItem, deviceSN: String) async throws -> FetchDeviceSettingsItemResponse {
-        try await api.openapi_fetchDeviceSettingsItem(item, deviceSN: deviceSN)
+    public func fetchDeviceSettingsItem(deviceSN: String, item: DeviceSettingsItem) async throws -> FetchDeviceSettingsItemResponse {
+        try await api.openapi_fetchDeviceSettingsItem(deviceSN: deviceSN, item: item)
+    }
+
+    public func setDeviceSettingsItem(deviceSN: String, item: DeviceSettingsItem, value: String) async throws {
+        try await api.openapi_setDeviceSettingsItem(deviceSN: deviceSN, item: item, value: value)
     }
 }
 

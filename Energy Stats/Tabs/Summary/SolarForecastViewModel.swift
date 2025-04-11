@@ -71,7 +71,7 @@ class SolarForecastViewModel: ObservableObject, HasLoadState {
 
         Task { @MainActor in
             guard privateState == .inactive else { return }
-            privateState = .active("Loading")
+            privateState = .active(.loading)
 
             do {
                 data = try await settings.solcastSettings.sites.asyncMap { site in

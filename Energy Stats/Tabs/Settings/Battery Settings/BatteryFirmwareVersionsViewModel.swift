@@ -23,7 +23,7 @@ class BatteryFirmwareVersionsViewModel: ObservableObject, HasLoadState {
         guard let selectedDeviceSN = config.selectedDeviceSN else { return }
         guard modules.isEmpty || state.isError else { return }
 
-        await setState(.active("Loading"))
+        await setState(.active(.loading))
 
         Task {
             let device = try await network.fetchDevice(deviceSN: selectedDeviceSN)

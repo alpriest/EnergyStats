@@ -105,16 +105,6 @@ struct ErrorAlertView: View {
                 .buttonStyle(EqualWidthButtonStyle(buttonWidth: $buttonWidth))
             }
 
-            if options.contains(.copyDebugData) {
-                Button {
-                    UIPasteboard.general.string = debugData
-                    alertContent = AlertContent(title: "Done", message: "Debug data has been copied to your clipboard.")
-                } label: {
-                    Text("Copy debug data")
-                }
-                .buttonStyle(EqualWidthButtonStyle(buttonWidth: $buttonWidth))
-            }
-
             if options.contains(.checkServerStatus) {
                 Button {
                     let url = URL(string: "https://monitor.foxesscommunity.com/")!
@@ -161,10 +151,6 @@ struct ErrorAlertView: View {
         }
     }
 
-    private var debugData: String {
-        DebugDataText(store: InMemoryLoggingNetworkStore.shared).debugData
-    }
-
     var detailedMessage: String {
         return if let cause = cause as? NetworkError {
             switch cause {
@@ -194,36 +180,6 @@ struct ErrorAlertView: View {
 
     var tapIconMessage: String {
         String(key: .tapIconForDetail)
-    }
-}
-
-struct DebugDataText: Encodable {
-    let request: String?
-    let responseHeaders: [String]?
-    let data: String?
-
-    @MainActor
-    init(store: InMemoryLoggingNetworkStore) {
-        request = store.latestRequestResponseData?.value.request
-        responseHeaders = store.latestRequestResponseData?.value.responseHeaders
-
-        if let data = store.latestRequestResponseData?.value.responseData {
-            self.data = (String(data: data, encoding: .utf8) ?? "data could not be parsed")
-        } else {
-            data = nil
-        }
-    }
-
-    var debugData: String {
-        do {
-            let encoder = JSONEncoder()
-            encoder.outputFormatting = .prettyPrinted
-
-            let jsonData = try encoder.encode(self)
-            return jsonData.formattedJSON()
-        } catch {
-            return "Could not generate JSON"
-        }
     }
 }
 
