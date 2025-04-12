@@ -514,6 +514,40 @@
         }
       }
     },
+    "%@ remaining out of %@ total" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ verbleibend von insgesamt %2$@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ remaining out of %2$@ total"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ restantes de un total de %2$@"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ rimanenti su un totale di %2$@"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pozostało %1$@ z %2$@ łącznie"
+          }
+        }
+      }
+    },
     "00:00" : {
       "localizations" : {
         "de" : {
@@ -4171,9 +4205,6 @@
           }
         }
       }
-    },
-    "Coming soon..." : {
-
     },
     "Compare strings" : {
       "extractionState" : "manual",
@@ -8628,6 +8659,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Szerokość geograficzna"
+          }
+        }
+      }
+    },
+    "Launch Wormholy" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wormholy starten"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iniciar Wormholy"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avvia Wormholy"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uruchom Wormholy"
           }
         }
       }
@@ -15109,6 +15168,62 @@
         }
       }
     },
+    "View Debug Data" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Debug-Daten anzeigen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ver datos de depuración"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visualizza dati di debug"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zobacz dane debugowania"
+          }
+        }
+      }
+    },
+    "View request count" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anzahl der Anfragen anzeigen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ver número de solicitudes"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visualizza numero di richieste"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zobacz liczbę żądań"
+          }
+        }
+      }
+    },
     "Visit Invert" : {
       "localizations" : {
         "de" : {
@@ -15791,6 +15906,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "W tym trybie inwerter priorytetowo alokuje moc zgodnie z następującym porządkiem:\n\n1. Obciążenie domu\n2. Ładowanie baterii\n3. Eksport"
+          }
+        }
+      }
+    },
+    "Wormholy is included in the app to help with issues. It allows users to view their own network activity — like what data the app sends or receives — and optionally export it to share with the development team. This tool is only for troubleshooting and has no effect on how you use the app." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wormholy ist in der App enthalten, um bei Problemen zu helfen. Es ermöglicht Nutzern, ihre eigene Netzwerkaktivität – also welche Daten die App sendet oder empfängt – anzusehen und bei Bedarf zu exportieren, um sie dem Entwicklungsteam zur Verfügung zu stellen. Dieses Tool dient ausschließlich zur Fehlerbehebung und hat keinen Einfluss auf die Nutzung der App."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wormholy está incluido en la aplicación para ayudar con la resolución de problemas. Permite a los usuarios ver su propia actividad de red —como los datos que la app envía o recibe— y exportarla opcionalmente para compartirla con el equipo de desarrollo. Esta herramienta es solo para diagnóstico y no afecta al uso normal de la aplicación."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wormholy è incluso nell'app per aiutare a risolvere eventuali problemi. Consente agli utenti di visualizzare la propria attività di rete, come i dati inviati o ricevuti dall'app, e di esportarla facoltativamente per condividerla con il team di sviluppo. Questo strumento è solo per la risoluzione dei problemi e non influisce sull'utilizzo dell'app."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wormholy jest zawarty w aplikacji, aby pomóc w rozwiązywaniu problemów. Umożliwia użytkownikom przeglądanie własnej aktywności sieciowej – takich jak dane wysyłane lub odbierane przez aplikację – oraz opcjonalnie eksportowanie tych informacji w celu udostępnienia zespołowi deweloperskiemu. To narzędzie służy wyłącznie do diagnozowania problemów i nie ma wpływu na korzystanie z aplikacji."
           }
         }
       }

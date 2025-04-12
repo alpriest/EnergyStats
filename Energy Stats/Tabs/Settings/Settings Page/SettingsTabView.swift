@@ -81,7 +81,7 @@ struct SettingsTabView: View {
                     ExternalWebNavigationLink(url: "https://www.facebook.com/groups/foxessownersgroup", title: .facebookGroup)
 
                     NavigationLink("settings.faq") { FAQView() }
-                    NavigationLink("settings.debug") { Text("Coming soon...") }
+                    NavigationLink("settings.debug") { DebugSettingsView(networking: networking) }
                     NavigationLink("Edit API Key") { ConfigureAPIKeyView() }
 //                    NavigationLink("Invert - automation made easy") { InvertView() }
                 }
@@ -93,7 +93,8 @@ struct SettingsTabView: View {
                             await viewModel.logout()
                         }
                     },
-                    appVersion: viewModel.appVersion)
+                    appVersion: viewModel.appVersion
+                )
             }
             .navigationTitle(.settings)
         }

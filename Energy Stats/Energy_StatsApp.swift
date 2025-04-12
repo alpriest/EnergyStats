@@ -12,6 +12,7 @@ import FirebaseAnalytics
 import SwiftUI
 import WatchConnectivity
 import WidgetKit
+import WormholySwift
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
@@ -64,6 +65,7 @@ struct Energy_StatsApp: App {
             .sink { [keychainStore, configManager] _ in
                 Self.updateKeychainSettingsForWatch(keychainStore: keychainStore, configManager: configManager)
             }.store(in: &cancellables)
+        Wormholy.shakeEnabled = false
     }
 
     var body: some Scene {

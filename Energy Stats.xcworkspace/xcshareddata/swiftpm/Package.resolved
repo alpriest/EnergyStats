@@ -1,5 +1,5 @@
 {
-  "originHash" : "8f4a3869d911b8ca5e284c9645bdfe19e9047b3ae751913e593d1d92560cf884",
+  "originHash" : "028956c628690099bb2edfb7bfc6671fdf3b932f5ff40aac86cadf983a973506",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -170,6 +170,15 @@
       "state" : {
         "revision" : "303e5c5c36d6a558407d364878df131c3546fad8",
         "version" : "510.0.2"
+      }
+    },
+    {
+      "identity" : "wormholy",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pmusolino/Wormholy",
+      "state" : {
+        "revision" : "ec88235e969315ed86ec873f314188558b564b63",
+        "version" : "2.1.0"
       }
     }
   ],

@@ -195,6 +195,8 @@
 		418C6E952AFAC3BF000DE35F /* SummaryTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C6E942AFAC3BF000DE35F /* SummaryTabView.swift */; };
 		418C6E972AFAC7E4000DE35F /* SummaryTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C6E962AFAC7E4000DE35F /* SummaryTabViewModel.swift */; };
 		418C6E992AFB8A15000DE35F /* ApproximationsCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C6E982AFB8A15000DE35F /* ApproximationsCalculator.swift */; };
+		418DC9D72DAA46E1005613AB /* Wormholy in Frameworks */ = {isa = PBXBuildFile; productRef = 418DC9D62DAA46E1005613AB /* Wormholy */; };
+		418DC9D92DAA47AD005613AB /* DebugSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418DC9D82DAA47AD005613AB /* DebugSettingsView.swift */; };
 		418EB4852ACC012C0021B87A /* FinancialsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418EB4842ACC012C0021B87A /* FinancialsSettingsView.swift */; };
 		418EB4872ACC019A0021B87A /* FinancialsSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418EB4862ACC019A0021B87A /* FinancialsSettingsViewModel.swift */; };
 		418EB4892ACC10220021B87A /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 418EB4882ACC10220021B87A /* Localizable.xcstrings */; };
@@ -693,6 +695,7 @@
 		418C6E942AFAC3BF000DE35F /* SummaryTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTabView.swift; sourceTree = "<group>"; };
 		418C6E962AFAC7E4000DE35F /* SummaryTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTabViewModel.swift; sourceTree = "<group>"; };
 		418C6E982AFB8A15000DE35F /* ApproximationsCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproximationsCalculator.swift; sourceTree = "<group>"; };
+		418DC9D82DAA47AD005613AB /* DebugSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugSettingsView.swift; sourceTree = "<group>"; };
 		418EB4842ACC012C0021B87A /* FinancialsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancialsSettingsView.swift; sourceTree = "<group>"; };
 		418EB4862ACC019A0021B87A /* FinancialsSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancialsSettingsViewModel.swift; sourceTree = "<group>"; };
 		418EB4882ACC10220021B87A /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
@@ -880,6 +883,7 @@
 				41F80BB12CE2AEC100C6776B /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				41B6910128E043A10058126E /* OHHTTPStubs in Frameworks */,
 				41CA35762AA8C52100D45734 /* OrderedCollections in Frameworks */,
+				418DC9D72DAA46E1005613AB /* Wormholy in Frameworks */,
 				41A95B9A29DB3F6A00A35169 /* Energy_Stats_Core.framework in Frameworks */,
 				41F80BAF2CE2AE3100C6776B /* FirebaseInAppMessaging-Beta in Frameworks */,
 			);
@@ -1311,6 +1315,7 @@
 		416009892A8D18540096CCD9 /* Settings Page */ = {
 			isa = PBXGroup;
 			children = (
+				418DC9D82DAA47AD005613AB /* DebugSettingsView.swift */,
 				417759F92D970360000A0642 /* InvertView.swift */,
 				41E1DFDE28D87781001235B9 /* SettingsTabView.swift */,
 				414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */,
@@ -1801,6 +1806,7 @@
 				41CA35752AA8C52100D45734 /* OrderedCollections */,
 				41F80BAE2CE2AE3100C6776B /* FirebaseInAppMessaging-Beta */,
 				41F80BB02CE2AEC100C6776B /* FirebaseAnalyticsWithoutAdIdSupport */,
+				418DC9D62DAA46E1005613AB /* Wormholy */,
 			);
 			productName = "PV Stats";
 			productReference = 4140144A28C70B3200EA5BA1 /* Energy Stats.app */;
@@ -1964,6 +1970,7 @@
 				418199C82A4035F40001B5D4 /* XCRemoteSwiftPackageReference "MarkdownUI" */,
 				41CA35742AA8C52100D45734 /* XCRemoteSwiftPackageReference "swift-collections" */,
 				41F80BAD2CE2AE3100C6776B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				418DC9D52DAA46E1005613AB /* XCRemoteSwiftPackageReference "Wormholy" */,
 			);
 			productRefGroup = 4140144B28C70B3200EA5BA1 /* Products */;
 			projectDirPath = "";
@@ -2142,6 +2149,7 @@
 				41C849692A8BBC3800431410 /* Shortcuts.swift in Sources */,
 				41ACB2C62A51ADEB005831B0 /* ValueBoundsView.swift in Sources */,
 				41E3B76C2BBDD345005A9F80 /* Icon.swift in Sources */,
+				418DC9D92DAA47AD005613AB /* DebugSettingsView.swift in Sources */,
 				415F2C742CA7E4AA00B9CE0D /* SummaryDateRangeView.swift in Sources */,
 				41E4B31528DB77E8003F7F47 /* GridPowerView.swift in Sources */,
 				410F415C2DA8112F00DEE2F4 /* DeviceSettingItemViewModel.swift in Sources */,
@@ -3145,6 +3153,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		418DC9D52DAA46E1005613AB /* XCRemoteSwiftPackageReference "Wormholy" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pmusolino/Wormholy";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.0;
+			};
+		};
 		41B690F728E040060058126E /* XCRemoteSwiftPackageReference "OHHTTPStubs" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AliSoftware/OHHTTPStubs";
@@ -3181,6 +3197,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 418199C82A4035F40001B5D4 /* XCRemoteSwiftPackageReference "MarkdownUI" */;
 			productName = MarkdownUI;
+		};
+		418DC9D62DAA46E1005613AB /* Wormholy */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 418DC9D52DAA46E1005613AB /* XCRemoteSwiftPackageReference "Wormholy" */;
+			productName = Wormholy;
 		};
 		41B690F828E040060058126E /* OHHTTPStubsSwift */ = {
 			isa = XCSwiftPackageProductDependency;
