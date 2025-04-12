@@ -18,6 +18,7 @@ class DeviceSettingItemViewModel: ObservableObject, HasLoadState {
     @Published var value: String = ""
     @Published var unit: String = ""
     @Published var state = LoadState.inactive
+    @Published var alertContent: AlertContent?
 
     init(item: DeviceSettingsItem, networking: Networking, configManager: ConfigManaging) {
         self.item = item
@@ -35,16 +36,16 @@ class DeviceSettingItemViewModel: ObservableObject, HasLoadState {
             await setState(.active(.loading))
 
             do {
-                let item = try await networking.fetchDeviceSettingsItem(deviceSN: deviceSN, item: item)
+                let response = try await networking.fetchDeviceSettingsItem(deviceSN: deviceSN, item: item)
 
                 Task { @MainActor in
-                    self.value = item.value
-                    self.unit = item.unit
+                    self.value = response.value
+                    self.unit = response.unit ?? item.fallbackUnit
                 }
 
                 await setState(.inactive)
             } catch {
-                state = .error(error, "Could not fetch setting")
+                alertContent = AlertContent(title: "error_title", message: "Could not load settings")
             }
         }
     }
@@ -59,8 +60,12 @@ class DeviceSettingItemViewModel: ObservableObject, HasLoadState {
             do {
                 try await networking.setDeviceSettingsItem(deviceSN: deviceSN, item: item, value: value)
                 await setState(.inactive)
+                alertContent = AlertContent(title: "Success", message: "inverter_settings_saved")
+            } catch let NetworkError.foxServerError(code, _) where code == 44096 {
+                alertContent = AlertContent(title: "Failed", message: "cannot_save_due_to_active_schedule")
+                await setState(.inactive)
             } catch {
-                state = .error(error, "Could not save setting")
+                await setState(.error(error, "Could not save setting"))
             }
         }
     }

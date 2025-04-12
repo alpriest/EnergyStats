@@ -30,10 +30,10 @@ struct DeviceSettingItemView: View {
                         Text(viewModel.description)
                         Text(viewModel.behaviour)
 
-                        Text("These settings control the behaviour of the inverter. Please be cautious and only change them if you know what you are doing.")
+                        Text("Please be cautious and only change this setting if you know what you are doing.")
                             .foregroundStyle(Color.red)
 
-                        Text("Energy Stats cannot be held responsible for any damage caused by changing these settings.")
+                        Text("Energy Stats cannot be held responsible for any damage caused by changing this.")
                             .foregroundStyle(Color.red)
                     }
                 }
@@ -44,12 +44,13 @@ struct DeviceSettingItemView: View {
             }
         }
         .loadable(viewModel.state, retry: { viewModel.load() })
+        .alert(alertContent: $viewModel.alertContent)
     }
 }
 
 #Preview {
     DeviceSettingItemView(
-        item: .exportLimit,
+        item: .maxSoc,
         networking: NetworkService.preview(),
         configManager: ConfigManager.preview()
     )

@@ -14,7 +14,7 @@ extension DeviceSettingsItem {
         case .exportLimit:
             "Export Limit"
         case .maxSoc:
-            "Max"
+            "Max SoC"
         case .minSoc, .minSocOnGrid, .gridCode:
             ""
         }
@@ -25,7 +25,7 @@ extension DeviceSettingsItem {
         case .exportLimit:
             "Sets the maximum power that the inverter can export to the grid."
         case .maxSoc:
-            "Maximum SoC"
+            "Sets the highest charge level the battery is allowed to reach, expressed as a percentage."
         case .minSoc, .minSocOnGrid, .gridCode:
             ""
         }
@@ -36,8 +36,17 @@ extension DeviceSettingsItem {
         case .exportLimit:
             "By configuring this setting, you can control the amount of energy sent back to the grid, ensuring compliance with local regulations or personal preferences. For example, if local regulations limit export capacity, setting this value ensures the inverter does not exceed the specified limit."
         case .maxSoc:
-            "Maximum SoC"
+            "Charging stops once the battery hits the Max SoC. Can be adjusted based on usage patterns or to align with energy tariffs and solar availability."
         case .minSoc, .minSocOnGrid, .gridCode:
+            ""
+        }
+    }
+
+    var fallbackUnit: String {
+        switch self {
+        case .maxSoc:
+            "%"
+        default:
             ""
         }
     }

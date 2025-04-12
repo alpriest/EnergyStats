@@ -21,6 +21,12 @@ struct BatterySettingsView: View {
                                        onSOCchange: {})
             }.accessibilityIdentifier("minimum charge levels")
 
+            NavigationLink {
+                DeviceSettingItemView(item: .maxSoc, networking: viewModel.networking, configManager: viewModel.config)
+            } label: {
+                Text("Maximum charge level")
+            }
+
             NavigationLink("Charge times") {
                 BatteryChargeScheduleSettingsView(networking: viewModel.networking, config: viewModel.config)
             }.accessibilityIdentifier("charge schedule")
@@ -128,6 +134,7 @@ struct BatterySettingsView: View {
             } label: {
                 Text("Battery versions")
             }
+
         }
         .navigationTitle(.battery)
     }

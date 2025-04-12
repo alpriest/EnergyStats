@@ -514,41 +514,6 @@
         }
       }
     },
-    "%@ remaining out of %@ total" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$@ verbleibend von insgesamt %2$@"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ remaining out of %2$@ total"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quedan %1$@ de un total de %2$@"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$@ rimanenti su un totale di %2$@"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pozostało %1$@ z %2$@ ogółem"
-          }
-        }
-      }
-    },
     "00:00" : {
       "localizations" : {
         "de" : {
@@ -2343,35 +2308,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aktywuje nazwany harmonogram trybu inwertera"
-          }
-        }
-      }
-    },
-    "Activating" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aktivierung"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activando"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Attivando"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aktywowanie"
           }
         }
       }
@@ -4324,35 +4260,6 @@
         }
       }
     },
-    "Copy debug data" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Debug-Daten kopieren"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copiar datos de depuración"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copia dati di debug"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kopiuj dane debugowania"
-          }
-        }
-      }
-    },
     "Copy the API key (make a note of it securely)" : {
       "localizations" : {
         "de" : {
@@ -4433,6 +4340,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nie można załadować przybliżeń"
+          }
+        }
+      }
+    },
+    "Could not load settings" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einstellungen konnten nicht geladen werden"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pudieron cargar los ajustes"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile caricare le impostazioni"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nie można załadować ustawień"
           }
         }
       }
@@ -5104,35 +5039,6 @@
         }
       }
     },
-    "Deactivating" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Deaktivierend"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Desactivando"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disattivando"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dezaktywując"
-          }
-        }
-      }
-    },
     "Debug" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -5158,140 +5064,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Debugowanie"
-          }
-        }
-      }
-    },
-    "Debug data has been copied to your clipboard." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Debug-Daten wurden in Ihre Zwischenablage kopiert."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Los datos de depuración se han copiado a tu portapapeles."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "I dati di debug sono stati copiati nella tua appunti."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dane debugowania zostały skopiowane do twojego schowka."
-          }
-        }
-      }
-    },
-    "debug.footer_text" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Haben Sie Probleme? Sehen Sie sich die neuesten Datenprotokolle oben an, um bei der Fehlerdiagnose zu helfen"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Having problems? View the most recent data logs above to help diagnose issues"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "¿Tienes problemas? Vea los registros de datos más recientes arriba para ayudar a diagnosticar problemas"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hai problemi? Visualizza i registri dei dati più recenti sopra per aiutare a diagnosticare i problemi"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Masz problemy? Wyświetl najnowsze dzienniki danych powyżej, aby pomóc w diagnozowaniu problemów"
-          }
-        }
-      }
-    },
-    "debug.navigation_title" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Netzwerkprotokolle"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Network logs"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Registros de red"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Registri di rete"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dzienniki sieciowe"
-          }
-        }
-      }
-    },
-    "debug.view_request_count" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Anfrageanzahl anzeigen"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "View request count"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ver conteo de solicitudes"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Visualizza conteggio delle richieste"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zobacz liczbę żądań"
           }
         }
       }
@@ -5769,35 +5541,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wszystkie wartości są wyświetlane w watach. Na przykład %1$@, %2$@"
-          }
-        }
-      }
-    },
-    "Done" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fertig"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hecho"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fatto"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zrobione"
           }
         }
       }
@@ -6294,8 +6037,33 @@
         }
       }
     },
-    "Energy Stats cannot be held responsible for any damage caused by changing these settings." : {
-
+    "Energy Stats cannot be held responsible for any damage caused by changing this." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Energy Stats kann für Schäden, die durch diese Änderung entstehen, keine Verantwortung übernehmen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Energy Stats no se hace responsable de los daños ocasionados por este cambio."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Energy Stats non può essere ritenuta responsabile per eventuali danni causati da questa modifica."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Energy Stats nie ponosi odpowiedzialności za jakiekolwiek szkody spowodowane tą zmianą."
+          }
+        }
+      }
     },
     "energy_stats_earnings_calculation_description" : {
       "localizations" : {
@@ -6858,35 +6626,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
-          }
-        }
-      }
-    },
-    "Fetch now" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Jetzt abrufen"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Obtener ahora"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Recupera ora"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pobierz teraz"
           }
         }
       }
@@ -8837,35 +8576,6 @@
         }
       }
     },
-    "Last fetched" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zuletzt abgerufen"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Última descarga"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ultimo recupero"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ostatnie pobranie"
-          }
-        }
-      }
-    },
     "Last update" : {
       "localizations" : {
         "de" : {
@@ -9358,6 +9068,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zarządzaj szablonami"
+          }
+        }
+      }
+    },
+    "Maximum charge level" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maximale Ladegrenze"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nivel máximo de carga"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Livello massimo di carica"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maksymalny poziom naładowania"
           }
         }
       }
@@ -10554,6 +10292,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ten tryb ma nieznane zachowanie"
+          }
+        }
+      }
+    },
+    "Please be cautious and only change this setting if you know what you are doing." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bitte seien Sie vorsichtig und ändern Sie diese Einstellung nur, wenn Sie wissen, was Sie tun."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Por favor, ten cuidado y cambia esta configuración solo si sabes lo que estás haciendo."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Si prega di fare attenzione e modificare questa impostazione solo se si sa cosa si sta facendo."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zachowaj ostrożność i zmieniaj to ustawienie tylko, jeśli wiesz, co robisz."
           }
         }
       }
@@ -14678,9 +14444,6 @@
           }
         }
       }
-    },
-    "These settings control the behaviour of the inverter. Please be cautious and only change them if you know what you are doing." : {
-
     },
     "Tilt" : {
       "localizations" : {
