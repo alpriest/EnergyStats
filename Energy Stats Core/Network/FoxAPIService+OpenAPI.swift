@@ -194,7 +194,6 @@ extension FoxAPIService {
         return result.0
     }
 
-
     func openapi_setDeviceSettingsItem(deviceSN: String, item: DeviceSettingsItem, value: String) async throws {
         var request = URLRequest(url: URL.setDeviceSettingsItem)
         request.httpMethod = "POST"

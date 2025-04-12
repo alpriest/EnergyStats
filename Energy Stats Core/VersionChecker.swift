@@ -14,7 +14,11 @@ public class VersionChecker: ObservableObject {
     @Published public var upgradeAvailable: Bool = false
     public let appStoreUrl = URL(string: "https://itunes.apple.com/app/id1644492526?mt=8")!
 
-    public init() {}
+    private let urlSession: URLSessionProtocol
+
+    public init(urlSession: URLSessionProtocol) {
+        self.urlSession = urlSession
+    }
 
     public func load() {
         guard let updateURL = URL(string: "https://raw.githubusercontent.com/alpriest/EnergyStats/main/Energy%20Stats/version.json") else { return }
@@ -22,7 +26,7 @@ public class VersionChecker: ObservableObject {
         Task {
             do {
                 let request = URLRequest(url: updateURL)
-                let (data, _) = try await URLSession.shared.data(for: request)
+                let (data, _) = try await urlSession.data(for: request, delegate: nil)
 
                 try await MainActor.run {
                     latestVersion = try JSONDecoder().decode(VersionData.self, from: data).latest

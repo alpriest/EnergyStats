@@ -20,6 +20,7 @@ struct BatteryWidget: Widget {
         let keychainStore = KeychainStore()
         let config = UserDefaultsConfig()
         let network = NetworkService.standard(keychainStore: keychainStore,
+                                              urlSession: URLSession.shared,
                                               isDemoUser: { false },
                                               dataCeiling: { .none })
         let appSettingsPublisher = AppSettingsPublisherFactory.make()

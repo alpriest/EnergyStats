@@ -34,10 +34,11 @@ public class NetworkService: Networking {
     let api: FoxAPIServicing
 
     public static func standard(keychainStore: KeychainStoring,
+                                urlSession: URLSessionProtocol,
                                 isDemoUser: @escaping () -> Bool,
                                 dataCeiling: @escaping () -> DataCeiling) -> Networking
     {
-        let service = FoxAPIService(credentials: keychainStore)
+        let service = FoxAPIService(credentials: keychainStore, urlSession: urlSession)
         let api = NetworkValueCleaner(
             api: NetworkFacade(
                 api: NetworkCache(api: service),

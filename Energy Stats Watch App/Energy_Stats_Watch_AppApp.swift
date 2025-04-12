@@ -28,6 +28,7 @@ struct Energy_Stats_Watch_App: App {
             NetworkService.preview()
         } else {
             NetworkService.standard(keychainStore: KeychainStore(),
+                                    urlSession: URLSession.shared,
                                     isDemoUser: { false },
                                     dataCeiling: { .none })
         }

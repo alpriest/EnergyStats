@@ -12,7 +12,7 @@ import FirebaseAnalytics
 import SwiftUI
 import WatchConnectivity
 import WidgetKit
-import WormholySwift
+import Pulse
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
@@ -32,12 +32,13 @@ struct Energy_StatsApp: App {
     static let delegate = WatchSessionDelegate()
     let keychainStore = KeychainStore()
 
+    let urlSession = URLSessionProxy(configuration: .default)
     let appSettingsPublisher: LatestAppSettingsPublisher
     let config: Config
     let network: Networking
     let configManager: ConfigManaging
     let userManager: UserManager
-    let versionChecker = VersionChecker()
+    let versionChecker: VersionChecker
     let templateStore: TemplateStoring
     let bannerAlertManager = BannerAlertManager()
     private var cancellables = Set<AnyCancellable>()
@@ -54,6 +55,7 @@ struct Energy_StatsApp: App {
 
         self.config = config
         network = NetworkService.standard(keychainStore: keychainStore,
+                                          urlSession: urlSession,
                                           isDemoUser: { config.isDemoUser },
                                           dataCeiling: { config.dataCeiling })
         appSettingsPublisher = AppSettingsPublisherFactory.make()
@@ -65,12 +67,12 @@ struct Energy_StatsApp: App {
             .sink { [keychainStore, configManager] _ in
                 Self.updateKeychainSettingsForWatch(keychainStore: keychainStore, configManager: configManager)
             }.store(in: &cancellables)
-        Wormholy.shakeEnabled = false
+        versionChecker = VersionChecker(urlSession: urlSession)
     }
 
     var body: some Scene {
         let solarForecastProvider: () -> SolcastCaching = {
-            config.isDemoUser ? DemoSolcast() : SolcastCache(service: { Solcast() })
+            config.isDemoUser ? DemoSolcast() : SolcastCache(service: { Solcast(urlSession: urlSession) })
         }
 
         return WindowGroup {

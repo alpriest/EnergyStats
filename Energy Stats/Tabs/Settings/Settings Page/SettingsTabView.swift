@@ -117,7 +117,7 @@ struct SettingsTabView_Previews: PreviewProvider {
                 solarService: { DemoSolcast() },
                 templateStore: TemplateStore.preview()
             )
-            .environmentObject(VersionChecker())
+            .environmentObject(VersionChecker(urlSession: URLSession.shared))
         }
     }
 }

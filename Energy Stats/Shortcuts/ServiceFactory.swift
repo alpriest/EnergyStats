@@ -13,6 +13,7 @@ enum ServiceFactory {
         let store = KeychainStore()
         let config = UserDefaultsConfig()
         let network = NetworkService.standard(keychainStore: store,
+                                              urlSession: URLSession.shared,
                                               isDemoUser: { false },
                                               dataCeiling: { .none })
         let appSettingsPublisher = AppSettingsPublisherFactory.make()

@@ -7,23 +7,24 @@
 
 import Energy_Stats_Core
 import SwiftUI
-import WormholySwift
+import PulseUI
 
 struct DebugSettingsView: View {
     @State private var alert: AlertContent?
+    @State private var isPulseShowing = false
     let networking: Networking
 
     var body: some View {
         Form {
             Section {
                 Button {
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "wormholy_fire"), object: nil)
+                    isPulseShowing.toggle()
                 } label: {
-                    Text("Launch Wormholy")
+                    Text("Launch Pulse")
                 }
                 .buttonStyle(.borderedProminent)
             } footer: {
-                Text("Wormholy is included in the app to help with issues. It allows users to view their own network activity — like what data the app sends or receives — and optionally export it to share with the development team. This tool is only for troubleshooting and has no effect on how you use the app.")
+                Text("Pulse is included in the app to help with issues. It allows users to view their own network activity — like what data the app sends or receives — and optionally export it to share with the development team. This tool is only for troubleshooting and has no effect on how you use the app.")
             }
 
             Section {
@@ -36,6 +37,11 @@ struct DebugSettingsView: View {
                     Text("View request count")
                 }
                 .buttonStyle(.borderedProminent)
+            }
+        }
+        .sheet(isPresented: $isPulseShowing) {
+            NavigationView {
+                ConsoleView()
             }
         }
         .navigationTitle("View Debug Data")

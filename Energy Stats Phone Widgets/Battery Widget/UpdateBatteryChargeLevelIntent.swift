@@ -22,6 +22,7 @@ struct UpdateBatteryChargeLevelIntent: AppIntent {
             let config = UserDefaultsConfig()
             let keychainStore = KeychainStore()
             let network = NetworkService.standard(keychainStore: keychainStore,
+                                                  urlSession: URLSession.shared,
                                                   isDemoUser: {
                                                       false
                                                   },

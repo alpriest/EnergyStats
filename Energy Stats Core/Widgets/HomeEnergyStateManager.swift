@@ -30,6 +30,7 @@ public class HomeEnergyStateManager {
     init() {
         do {
             network = NetworkService.standard(keychainStore: keychainStore,
+                                              urlSession: URLSession.shared,
                                               isDemoUser: { false },
                                               dataCeiling: { .none })
             modelContainer = try ModelContainer(for: BatteryWidgetState.self, StatsWidgetState.self)

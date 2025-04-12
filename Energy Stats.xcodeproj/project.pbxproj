@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -40,7 +40,7 @@
 		410913FF29DB7A2700133CC5 /* CurrentStatusCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146828C7374400EA5BA1 /* CurrentStatusCalculator.swift */; };
 		4109140029DB7AB600133CC5 /* LoadedPowerFlowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EDDF6B28CD2A630092C662 /* LoadedPowerFlowViewModel.swift */; };
 		4109140229DB7AE700133CC5 /* BatteryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140147028C77AAA00EA5BA1 /* BatteryViewModel.swift */; };
-		410F41272DA5B95400DEE2F4 /* DeviceSettingsItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410F41262DA5B94F00DEE2F4 /* DeviceSettingsItems.swift */; };
+		410F41272DA5B95400DEE2F4 /* DeviceSettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410F41262DA5B94F00DEE2F4 /* DeviceSettingsItem.swift */; };
 		410F41292DA5BD3C00DEE2F4 /* ESLabeledContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410F41282DA5BD3C00DEE2F4 /* ESLabeledContent.swift */; };
 		410F412B2DA5BD5D00DEE2F4 /* ESLabeledText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410F412A2DA5BD5D00DEE2F4 /* ESLabeledText.swift */; };
 		410F41582DA80D7500DEE2F4 /* DeviceSettingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410F41562DA80D7500DEE2F4 /* DeviceSettingItemView.swift */; };
@@ -195,7 +195,6 @@
 		418C6E952AFAC3BF000DE35F /* SummaryTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C6E942AFAC3BF000DE35F /* SummaryTabView.swift */; };
 		418C6E972AFAC7E4000DE35F /* SummaryTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C6E962AFAC7E4000DE35F /* SummaryTabViewModel.swift */; };
 		418C6E992AFB8A15000DE35F /* ApproximationsCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C6E982AFB8A15000DE35F /* ApproximationsCalculator.swift */; };
-		418DC9D72DAA46E1005613AB /* Wormholy in Frameworks */ = {isa = PBXBuildFile; productRef = 418DC9D62DAA46E1005613AB /* Wormholy */; };
 		418DC9D92DAA47AD005613AB /* DebugSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418DC9D82DAA47AD005613AB /* DebugSettingsView.swift */; };
 		418EB4852ACC012C0021B87A /* FinancialsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418EB4842ACC012C0021B87A /* FinancialsSettingsView.swift */; };
 		418EB4872ACC019A0021B87A /* FinancialsSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418EB4862ACC019A0021B87A /* FinancialsSettingsViewModel.swift */; };
@@ -347,6 +346,9 @@
 		41F80BB32CE2AFAC00C6776B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 41F80BB22CE2AFAC00C6776B /* GoogleService-Info.plist */; };
 		41FB0D272AC19150002C8FED /* Energy_Stats_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; platformFilters = (ios, watchos, ); };
 		41FBE9022D816F6700CEC645 /* StringPower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FBE9012D816F6700CEC645 /* StringPower.swift */; };
+		41FBF3FE2DAA574D00EBD4D5 /* Pulse in Frameworks */ = {isa = PBXBuildFile; productRef = 41FBF3FD2DAA574D00EBD4D5 /* Pulse */; };
+		41FBF4002DAA574D00EBD4D5 /* PulseUI in Frameworks */ = {isa = PBXBuildFile; productRef = 41FBF3FF2DAA574D00EBD4D5 /* PulseUI */; };
+		41FBF4042DAA5A5A00EBD4D5 /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FBF4032DAA5A5600EBD4D5 /* URLSessionProtocol.swift */; };
 		41FCE06B2CA170930046ABF6 /* LeftTabbedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FCE06A2CA1708D0046ABF6 /* LeftTabbedView.swift */; };
 		41FCE06E2CA175AA0046ABF6 /* TabItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FCE06D2CA175A70046ABF6 /* TabItems.swift */; };
 		41FDAD502A01604F00EDACF3 /* variables.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FDAD4F2A01604F00EDACF3 /* variables.json */; };
@@ -530,7 +532,7 @@
 		41075D5F29DC392E007F897A /* BatteryCapacityCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryCapacityCalculatorTests.swift; sourceTree = "<group>"; };
 		410913FC29DB78EF00133CC5 /* PreciseDateTimeFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreciseDateTimeFormatter.swift; sourceTree = "<group>"; };
 		410AA38729D96F6D00CD107C /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
-		410F41262DA5B94F00DEE2F4 /* DeviceSettingsItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSettingsItems.swift; sourceTree = "<group>"; };
+		410F41262DA5B94F00DEE2F4 /* DeviceSettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSettingsItem.swift; sourceTree = "<group>"; };
 		410F41282DA5BD3C00DEE2F4 /* ESLabeledContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESLabeledContent.swift; sourceTree = "<group>"; };
 		410F412A2DA5BD5D00DEE2F4 /* ESLabeledText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESLabeledText.swift; sourceTree = "<group>"; };
 		410F41552DA80D7500DEE2F4 /* DeviceSettingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSettingItem.swift; sourceTree = "<group>"; };
@@ -849,12 +851,17 @@
 		41F80BB22CE2AFAC00C6776B /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		41F8D8F6292D7650005E2D18 /* report-day.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "report-day.json"; sourceTree = "<group>"; };
 		41FBE9012D816F6700CEC645 /* StringPower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringPower.swift; sourceTree = "<group>"; };
+		41FBF4032DAA5A5600EBD4D5 /* URLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
 		41FCE06A2CA1708D0046ABF6 /* LeftTabbedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftTabbedView.swift; sourceTree = "<group>"; };
 		41FCE06D2CA175A70046ABF6 /* TabItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItems.swift; sourceTree = "<group>"; };
 		41FDAD4F2A01604F00EDACF3 /* variables.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = variables.json; sourceTree = "<group>"; };
 		41FE6BB02B0CBA7900A66CC3 /* SolcastSiteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolcastSiteView.swift; sourceTree = "<group>"; };
 		41FF14EC2B432EEC00FAAF1D /* GenerationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		41FBF4052DAA5B3200EBD4D5 /* Pulse */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Pulse; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		412A26692AC03B2200F61456 /* Frameworks */ = {
@@ -882,9 +889,10 @@
 				418199CA2A4035F40001B5D4 /* MarkdownUI in Frameworks */,
 				41F80BB12CE2AEC100C6776B /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				41B6910128E043A10058126E /* OHHTTPStubs in Frameworks */,
+				41FBF3FE2DAA574D00EBD4D5 /* Pulse in Frameworks */,
 				41CA35762AA8C52100D45734 /* OrderedCollections in Frameworks */,
-				418DC9D72DAA46E1005613AB /* Wormholy in Frameworks */,
 				41A95B9A29DB3F6A00A35169 /* Energy_Stats_Core.framework in Frameworks */,
+				41FBF4002DAA574D00EBD4D5 /* PulseUI in Frameworks */,
 				41F80BAF2CE2AE3100C6776B /* FirebaseInAppMessaging-Beta in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1205,6 +1213,7 @@
 		4140144C28C70B3200EA5BA1 /* Energy Stats */ = {
 			isa = PBXGroup;
 			children = (
+				41FBF4052DAA5B3200EBD4D5 /* Pulse */,
 				4185474B2A3A59E4000128C7 /* Energy Stats.entitlements */,
 				4189B0312B9486FE00EC4CB5 /* version.json */,
 				412E3C7D28D2519B004A0DCF /* Energy-Stats-Info.plist */,
@@ -1242,7 +1251,7 @@
 		4140146328C7146B00EA5BA1 /* NetworkModels */ = {
 			isa = PBXGroup;
 			children = (
-				410F41262DA5B94F00DEE2F4 /* DeviceSettingsItems.swift */,
+				410F41262DA5B94F00DEE2F4 /* DeviceSettingsItem.swift */,
 				4140146428C714C000EA5BA1 /* Report.swift */,
 				4140146E28C77A3100EA5BA1 /* BatterySOCResponse.swift */,
 				41D7B12328C86E4000E14144 /* FoxEssCloudParseStrategy.swift */,
@@ -1261,6 +1270,7 @@
 		4140146728C7373A00EA5BA1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				41FBF4032DAA5A5600EBD4D5 /* URLSessionProtocol.swift */,
 				41F6C64F2D935044001EBAA5 /* CT2DisplayMode.swift */,
 				41FBE9012D816F6700CEC645 /* StringPower.swift */,
 				416163912CDA5E490084DCF1 /* Notifications.swift */,
@@ -1799,6 +1809,9 @@
 				412A26782AC03B2400F61456 /* PBXTargetDependency */,
 				41F631812BDCD32E00A571C5 /* PBXTargetDependency */,
 			);
+			fileSystemSynchronizedGroups = (
+				41FBF4052DAA5B3200EBD4D5 /* Pulse */,
+			);
 			name = "Energy Stats";
 			packageProductDependencies = (
 				41B6910028E043A10058126E /* OHHTTPStubs */,
@@ -1806,7 +1819,8 @@
 				41CA35752AA8C52100D45734 /* OrderedCollections */,
 				41F80BAE2CE2AE3100C6776B /* FirebaseInAppMessaging-Beta */,
 				41F80BB02CE2AEC100C6776B /* FirebaseAnalyticsWithoutAdIdSupport */,
-				418DC9D62DAA46E1005613AB /* Wormholy */,
+				41FBF3FD2DAA574D00EBD4D5 /* Pulse */,
+				41FBF3FF2DAA574D00EBD4D5 /* PulseUI */,
 			);
 			productName = "PV Stats";
 			productReference = 4140144A28C70B3200EA5BA1 /* Energy Stats.app */;
@@ -1970,7 +1984,7 @@
 				418199C82A4035F40001B5D4 /* XCRemoteSwiftPackageReference "MarkdownUI" */,
 				41CA35742AA8C52100D45734 /* XCRemoteSwiftPackageReference "swift-collections" */,
 				41F80BAD2CE2AE3100C6776B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				418DC9D52DAA46E1005613AB /* XCRemoteSwiftPackageReference "Wormholy" */,
+				41FBF3FC2DAA574D00EBD4D5 /* XCRemoteSwiftPackageReference "Pulse" */,
 			);
 			productRefGroup = 4140144B28C70B3200EA5BA1 /* Products */;
 			projectDirPath = "";
@@ -2298,7 +2312,7 @@
 				4103D1D529DB6C51001B0BC8 /* NetworkResponse.swift in Sources */,
 				4192F99B2A8678DB0035DAB8 /* PagedDataLoggerListResponse.swift in Sources */,
 				410913FD29DB78EF00133CC5 /* PreciseDateTimeFormatter.swift in Sources */,
-				410F41272DA5B95400DEE2F4 /* DeviceSettingsItems.swift in Sources */,
+				410F41272DA5B95400DEE2F4 /* DeviceSettingsItem.swift in Sources */,
 				416AE4492A8128B9003D0122 /* OptionalView.swift in Sources */,
 				41E165B52B0B961200B17590 /* SolcastSettings.swift in Sources */,
 				41CA35732AA8C10900D45734 /* EarningsViewModel.swift in Sources */,
@@ -2343,6 +2357,7 @@
 				41757BBD2A90A06E00573FB4 /* LocalizedString.swift in Sources */,
 				4103D1E429DB6D12001B0BC8 /* KeychainStore.swift in Sources */,
 				41DB4F2D2B4940A800DAB5BB /* ConfigManaging.swift in Sources */,
+				41FBF4042DAA5A5A00EBD4D5 /* URLSessionProtocol.swift in Sources */,
 				419576172AC2F29600EB7362 /* BatteryWidgetState.swift in Sources */,
 				4103D1DF29DB6C8C001B0BC8 /* DemoNetworking.swift in Sources */,
 				41CB714A2A3B1B6C00199415 /* StyleGuide.swift in Sources */,
@@ -2616,7 +2631,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 47;
+				CURRENT_PROJECT_VERSION = 48;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2683,7 +2698,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 47;
+				CURRENT_PROJECT_VERSION = 48;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -3153,14 +3168,6 @@
 				minimumVersion = 2.0.0;
 			};
 		};
-		418DC9D52DAA46E1005613AB /* XCRemoteSwiftPackageReference "Wormholy" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/pmusolino/Wormholy";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.1.0;
-			};
-		};
 		41B690F728E040060058126E /* XCRemoteSwiftPackageReference "OHHTTPStubs" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AliSoftware/OHHTTPStubs";
@@ -3185,6 +3192,14 @@
 				minimumVersion = 11.4.0;
 			};
 		};
+		41FBF3FC2DAA574D00EBD4D5 /* XCRemoteSwiftPackageReference "Pulse" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Pulse";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -3197,11 +3212,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 418199C82A4035F40001B5D4 /* XCRemoteSwiftPackageReference "MarkdownUI" */;
 			productName = MarkdownUI;
-		};
-		418DC9D62DAA46E1005613AB /* Wormholy */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 418DC9D52DAA46E1005613AB /* XCRemoteSwiftPackageReference "Wormholy" */;
-			productName = Wormholy;
 		};
 		41B690F828E040060058126E /* OHHTTPStubsSwift */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -3227,6 +3237,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 41F80BAD2CE2AE3100C6776B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		41FBF3FD2DAA574D00EBD4D5 /* Pulse */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 41FBF3FC2DAA574D00EBD4D5 /* XCRemoteSwiftPackageReference "Pulse" */;
+			productName = Pulse;
+		};
+		41FBF3FF2DAA574D00EBD4D5 /* PulseUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 41FBF3FC2DAA574D00EBD4D5 /* XCRemoteSwiftPackageReference "Pulse" */;
+			productName = PulseUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -20,7 +20,11 @@ private extension URL {
 public struct ConfigMissingError: Error {}
 
 public class Solcast: SolcastFetching {
-    public init() {}
+    private let urlSession: URLSessionProtocol
+
+    public init(urlSession: URLSessionProtocol) {
+        self.urlSession = urlSession
+    }
 
     public func fetchSites(apiKey: String) async throws -> SolcastSiteResponseList {
         let url = URL(string: URL.rooftopSites)!

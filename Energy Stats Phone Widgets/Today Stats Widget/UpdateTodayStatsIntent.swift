@@ -23,6 +23,7 @@ struct UpdateTodayStatsIntent: AppIntent {
             let keychainStore = KeychainStore()
             let appSettingsPublisher = AppSettingsPublisherFactory.make()
             let network = NetworkService.standard(keychainStore: keychainStore,
+                                                  urlSession: URLSession.shared,
                                                   isDemoUser: {
                                                       false
                                                   },

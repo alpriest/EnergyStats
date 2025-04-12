@@ -99,5 +99,5 @@ struct LeftTabbedView: View {
                    configManager: ConfigManager.preview(),
                    solarForecastProvider: { DemoSolcast() },
                    templateStore: TemplateStore.preview())
-        .environmentObject(VersionChecker())
+        .environmentObject(VersionChecker(urlSession: URLSession.shared))
 }

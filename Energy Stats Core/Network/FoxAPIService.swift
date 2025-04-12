@@ -14,9 +14,11 @@ class FoxAPIService: FoxAPIServicing {
 
     private let credentials: KeychainStoring
     private var errorMessages: [String: String] = [:]
+    private let urlSession: URLSessionProtocol
 
-    public init(credentials: KeychainStoring) {
+    public init(credentials: KeychainStoring, urlSession: URLSessionProtocol) {
         self.credentials = credentials
+        self.urlSession = urlSession
     }
 
     public func fetchErrorMessages() async {
@@ -50,7 +52,7 @@ extension FoxAPIService {
         addHeaders(to: &request)
 
         do {
-            let (data, response) = try await URLSession.shared.data(for: request)
+            let (data, response) = try await urlSession.data(for: request, delegate: nil)
             guard let httpResponse = (response as? HTTPURLResponse) else {
                 throw NetworkError.unknown("Invalid response type")
             }
