@@ -8664,33 +8664,29 @@
       }
     },
     "Launch Pulse" : {
-
-    },
-    "Launch Wormholy" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wormholy starten"
+            "value" : "Pulse starten"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Iniciar Wormholy"
+            "value" : "Iniciar Pulse"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avvia Wormholy"
+            "value" : "Avvia Pulse"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Uruchom Wormholy"
+            "value" : "Uruchom Pulse"
           }
         }
       }
@@ -10622,7 +10618,32 @@
       }
     },
     "Pulse is included in the app to help with issues. It allows users to view their own network activity — like what data the app sends or receives — and optionally export it to share with the development team. This tool is only for troubleshooting and has no effect on how you use the app." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pulse ist in der App enthalten, um bei Problemen zu helfen. Es ermöglicht Nutzern, ihre eigene Netzwerkaktivität – also welche Daten die App sendet oder empfängt – anzusehen und bei Bedarf zu exportieren, um sie dem Entwicklungsteam zur Verfügung zu stellen. Dieses Tool dient ausschließlich zur Fehlerbehebung und hat keinen Einfluss auf die Nutzung der App."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pulse está incluido en la aplicación para ayudar con la resolución de problemas. Permite a los usuarios ver su propia actividad de red —como los datos que la app envía o recibe— y exportarla opcionalmente para compartirla con el equipo de desarrollo. Esta herramienta es solo para diagnóstico y no afecta al uso normal de la aplicación."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pulse è incluso nell'app per aiutare a risolvere eventuali problemi. Consente agli utenti di visualizzare la propria attività di rete, come i dati inviati o ricevuti dall'app, e di esportarla facoltativamente per condividerla con il team di sviluppo. Questo strumento è solo per la risoluzione dei problemi e non influisce sull'utilizzo dell'app."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pulse jest zawarty w aplikacji, aby pomóc w rozwiązywaniu problemów. Umożliwia użytkownikom przeglądanie własnej aktywności sieciowej – takich jak dane wysyłane lub odbierane przez aplikację – oraz opcjonalnie eksportowanie tych informacji w celu udostępnienia zespołowi deweloperskiemu. To narzędzie służy wyłącznie do diagnozowania problemów i nie ma wpływu na korzystanie z aplikacji."
+          }
+        }
+      }
     },
     "Range of confidence" : {
       "localizations" : {
@@ -15913,35 +15934,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "W tym trybie inwerter priorytetowo alokuje moc zgodnie z następującym porządkiem:\n\n1. Obciążenie domu\n2. Ładowanie baterii\n3. Eksport"
-          }
-        }
-      }
-    },
-    "Wormholy is included in the app to help with issues. It allows users to view their own network activity — like what data the app sends or receives — and optionally export it to share with the development team. This tool is only for troubleshooting and has no effect on how you use the app." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wormholy ist in der App enthalten, um bei Problemen zu helfen. Es ermöglicht Nutzern, ihre eigene Netzwerkaktivität – also welche Daten die App sendet oder empfängt – anzusehen und bei Bedarf zu exportieren, um sie dem Entwicklungsteam zur Verfügung zu stellen. Dieses Tool dient ausschließlich zur Fehlerbehebung und hat keinen Einfluss auf die Nutzung der App."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wormholy está incluido en la aplicación para ayudar con la resolución de problemas. Permite a los usuarios ver su propia actividad de red —como los datos que la app envía o recibe— y exportarla opcionalmente para compartirla con el equipo de desarrollo. Esta herramienta es solo para diagnóstico y no afecta al uso normal de la aplicación."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wormholy è incluso nell'app per aiutare a risolvere eventuali problemi. Consente agli utenti di visualizzare la propria attività di rete, come i dati inviati o ricevuti dall'app, e di esportarla facoltativamente per condividerla con il team di sviluppo. Questo strumento è solo per la risoluzione dei problemi e non influisce sull'utilizzo dell'app."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wormholy jest zawarty w aplikacji, aby pomóc w rozwiązywaniu problemów. Umożliwia użytkownikom przeglądanie własnej aktywności sieciowej – takich jak dane wysyłane lub odbierane przez aplikację – oraz opcjonalnie eksportowanie tych informacji w celu udostępnienia zespołowi deweloperskiemu. To narzędzie służy wyłącznie do diagnozowania problemów i nie ma wpływu na korzystanie z aplikacji."
           }
         }
       }
