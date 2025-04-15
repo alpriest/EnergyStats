@@ -30,6 +30,9 @@ struct InverterSettingsView: View {
                 NavigationLink("Manage schedules") {
                     ScheduleSummaryView(networking: networking, config: configManager, templateStore: templateStore)
                 }
+                NavigationLink(DeviceSettingsItem.exportLimit.title) {
+                    DeviceSettingItemView(item: .exportLimit, networking: networking, configManager: configManager)
+                }
             }
 
             Section {
@@ -109,13 +112,6 @@ struct InverterSettingsView: View {
                 .alertCopy(text(currentDevice))
             }
 
-            Section {
-                NavigationLink {
-                    DeviceSettingItemView(item: .exportLimit, networking: networking, configManager: configManager)
-                } label: {
-                    Text(DeviceSettingsItem.exportLimit.title)
-                }
-            }
         }
         .navigationTitle(.inverter)
     }
