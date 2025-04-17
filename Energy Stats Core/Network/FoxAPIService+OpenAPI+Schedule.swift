@@ -8,10 +8,10 @@
 import Foundation
 
 extension URL {
-    static let getOpenSchedulerFlag = URL(string: "https://www.foxesscloud.com/op/v0/device/scheduler/get/flag")!
-    static let getOpenCurrentSchedule = URL(string: "https://www.foxesscloud.com/op/v0/device/scheduler/get")!
-    static let setOpenSchedulerFlag = URL(string: "https://www.foxesscloud.com/op/v0/device/scheduler/set/flag")!
-    static let setOpenCurrentSchedule = URL(string: "https://www.foxesscloud.com/op/v0/device/scheduler/enable")!
+    static let getOpenSchedulerFlag = URL(string: "https://www.foxesscloud.com/op/v1/device/scheduler/get/flag")!
+    static let getOpenCurrentSchedule = URL(string: "https://www.foxesscloud.com/op/v1/device/scheduler/get")!
+    static let setOpenSchedulerFlag = URL(string: "https://www.foxesscloud.com/op/v1/device/scheduler/set/flag")!
+    static let setOpenCurrentSchedule = URL(string: "https://www.foxesscloud.com/op/v1/device/scheduler/enable")!
 }
 
 extension FoxAPIService {
