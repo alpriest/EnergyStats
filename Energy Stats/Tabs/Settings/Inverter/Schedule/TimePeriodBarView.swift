@@ -43,7 +43,7 @@ struct TimePeriodBarView: View {
 
                 Spacer()
 
-                Text("24:00")
+                Text("23:59")
             }
             .font(.caption2)
         }
@@ -75,8 +75,8 @@ extension Schedule {
                 )!,
                 SchedulePhase(
                     start: Time(
-                        hour: 10,
-                        minute: 30
+                        hour: 08,
+                        minute: 00
                     ),
                     end: Time(
                         hour: 14,
