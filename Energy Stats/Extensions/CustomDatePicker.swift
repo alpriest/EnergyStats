@@ -20,8 +20,8 @@ struct CustomDatePicker: View {
 
     var body: some View {
         VStack {
-            SinglePickerView(label: "Start", date: $start)
-            SinglePickerView(label: "End", date: $end)
+            SinglePickerView(label: "Start", date: $start, timeType: .start)
+            SinglePickerView(label: "End", date: $end, timeType: .end)
         }
     }
 }
@@ -30,10 +30,12 @@ struct SinglePickerView: View {
     let label: LocalizedStringKey
     @Binding var date: Date
     @State private var showing = false
+    private let timeType: TimeType
 
-    init(label: LocalizedStringKey, date: Binding<Date>) {
+    init(label: LocalizedStringKey, date: Binding<Date>, timeType: TimeType) {
         self.label = label
         self._date = date
+        self.timeType = timeType
     }
 
     var body: some View {
@@ -43,7 +45,7 @@ struct SinglePickerView: View {
             Button(action: {
                 showing = true
             }) {
-                Text(date, formatter: DateFormatter.fullTime)
+                Text(date, formatter: DateFormatter.fullTime) + Text(":") + Text(timeType.appendage())
             }.buttonStyle(.bordered)
         }.onTapGesture {
             showing = true
@@ -86,7 +88,7 @@ struct DatePickerSheet: View {
             case false:
                 Picker(label, selection: $date) {
                     ForEach(timeSlots, id: \.self) {
-                        Text($0.formatted).tag($0.toDate())
+                        Text($0.formatted(type: nil)).tag($0.toDate())
                     }
                 }.pickerStyle(.wheel)
             }

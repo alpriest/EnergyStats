@@ -267,7 +267,7 @@ class DemoAPI: FoxAPIServicing {
                 SchedulePhaseResponse(
                     enable: 1,
                     startHour: 17,
-                    startMinute: 0,
+                    startMinute: 1,
                     endHour: 18,
                     endMinute: 30,
                     workMode: .ForceDischarge,

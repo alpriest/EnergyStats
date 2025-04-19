@@ -7,6 +7,20 @@
 
 import Foundation
 
+public enum TimeType {
+    case start
+    case end
+
+    public func appendage() -> String {
+        switch self {
+        case .start:
+            "00"
+        case .end:
+            "59"
+        }
+    }
+}
+
 public struct Time: Codable, Hashable, Equatable, Comparable {
     public let hour: Int
     public let minute: Int
@@ -39,14 +53,17 @@ public struct Time: Codable, Hashable, Equatable, Comparable {
         }
     }
 
-    public var formatted: String {
+    public func formatted(type: TimeType?) -> String {
         let formatter = NumberFormatter()
         formatter.minimumIntegerDigits = 2
 
-        let hour = formatter.string(from: NSNumber(value: hour)) ?? ""
-        let minute = formatter.string(from: NSNumber(value: minute)) ?? ""
+        let parts: [String] = [
+            formatter.string(from: NSNumber(value: hour)) ?? "",
+            formatter.string(from: NSNumber(value: minute)) ?? "",
+            type?.appendage() ?? nil
+        ].compactMap { $0 }
 
-        return "\(hour):\(minute)"
+        return parts.joined(separator: ":")
     }
 
     public func toMinutes() -> Int {

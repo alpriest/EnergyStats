@@ -19,7 +19,7 @@ struct SchedulePhaseListItemView: View {
                 .padding(.vertical, 4)
 
             VStack(alignment: .leading) {
-                (Text(phase.start.formatted) + Text(" - ") + Text(phase.end.formatted)).bold()
+                (Text(phase.start.formatted(type: .start)) + Text(" - ") + Text(phase.end.formatted(type: .end))).bold()
 
                 (Text(phase.mode.title) + Text(extra(for: phase)))
                     .foregroundStyle(Color.primary.opacity(0.5))
