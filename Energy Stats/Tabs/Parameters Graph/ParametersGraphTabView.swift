@@ -89,10 +89,10 @@ struct ParametersGraphTabView: View {
         Group {
             if configManager.separateParameterGraphsByUnit {
                 VStack {
-                    ForEach(Array(viewModel.data.keys.sorted { $0 < $1 }), id: \.self) { key in
+                    ForEach(Array(viewModel.uniqueSelectedUnits()), id: \.self) { key in
                         ZStack {
                             VStack {
-                                ParametersGraphView(key: key,
+                                ParametersGraphView(unit: key,
                                                     viewModel: viewModel,
                                                     selectedDate: $selectedDate,
                                                     valuesAtTime: $valuesAtTime,
@@ -117,7 +117,7 @@ struct ParametersGraphTabView: View {
             } else {
                 ZStack {
                     VStack {
-                        ParametersGraphView(key: nil,
+                        ParametersGraphView(unit: nil,
                                             viewModel: viewModel,
                                             selectedDate: $selectedDate,
                                             valuesAtTime: $valuesAtTime,

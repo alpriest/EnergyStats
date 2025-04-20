@@ -361,6 +361,10 @@ extension ParametersGraphTabViewModel {
                 )
             }.sorted(by: { $0.periodEnd < $1.periodEnd }) // Ensure chronological order
     }
+
+    func uniqueSelectedUnits() -> Array<String> {
+        Set(graphVariables.filter { $0.isSelected }.map { $0.type.unit }).sorted { $0 < $1 }
+    }
 }
 
 enum AxisUnit {

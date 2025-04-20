@@ -365,6 +365,9 @@
         }
       }
     },
+    ":" : {
+      "shouldTranslate" : false
+    },
     ": " : {
       "shouldTranslate" : false
     },

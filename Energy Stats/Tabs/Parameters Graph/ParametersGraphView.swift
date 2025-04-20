@@ -10,7 +10,7 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct ParametersGraphView: View {
-    private let key: String?
+    private let unit: String?
     @ObservedObject var viewModel: ParametersGraphTabViewModel
     @GestureState var isDetectingPress = true
     @Binding var selectedDate: Date?
@@ -19,17 +19,17 @@ struct ParametersGraphView: View {
     @State private var captionBoxSize: CGSize = .zero
     private let truncateYAxis: Bool
 
-    init(key: String?, viewModel: ParametersGraphTabViewModel, selectedDate: Binding<Date?>, valuesAtTime: Binding<ValuesAtTime<ParameterGraphValue>?>, truncateYAxis: Bool) {
-        self.key = key
+    init(unit: String?, viewModel: ParametersGraphTabViewModel, selectedDate: Binding<Date?>, valuesAtTime: Binding<ValuesAtTime<ParameterGraphValue>?>, truncateYAxis: Bool) {
+        self.unit = unit
         self.viewModel = viewModel
         self._selectedDate = selectedDate
         self._valuesAtTime = valuesAtTime
         self.truncateYAxis = truncateYAxis
 
-        if let key {
-            self.data = viewModel.data[key] ?? .empty()
-        } else if let key = viewModel.data.keys.first {
-            self.data = viewModel.data[key] ?? .empty()
+        if let unit {
+            self.data = viewModel.data[unit] ?? .empty()
+        } else if let unit = viewModel.data.keys.first {
+            self.data = viewModel.data[unit] ?? .empty()
         } else {
             self.data = .empty()
         }
@@ -74,8 +74,8 @@ struct ParametersGraphView: View {
                 if let amount = value.as(Double.self) {
                     AxisGridLine()
                     AxisValueLabel(multiLabelAlignment: .trailing) {
-                        if let key {
-                            Text("\(amount, format: .number) \(key)")
+                        if let unit {
+                            Text("\(amount, format: .number) \(unit)")
                         } else {
                             Text("\(amount, format: .number)")
                         }
@@ -129,7 +129,7 @@ struct ParametersGraphView: View {
                 let furthestRight = geometryReader[chartProxy.plotAreaFrame].width - captionBoxSize.width
 
                 if let valuesAtTime {
-                    let graphValuesAtTime: [ParameterGraphValue] = valuesAtTime.values.filter { $0.type.unit == key }
+                    let graphValuesAtTime: [ParameterGraphValue] = valuesAtTime.values.filter { $0.type.unit == unit }
 
                     HStack {
                         VStack(alignment: .leading) {
@@ -183,7 +183,7 @@ struct UsageGraphView_Previews: PreviewProvider {
         )
         Task { await model.load() }
         return ParametersGraphView(
-            key: "℃",
+            unit: "℃",
             viewModel: model,
             selectedDate: .constant(nil),
             valuesAtTime: .constant(nil),
