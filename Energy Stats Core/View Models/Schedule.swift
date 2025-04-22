@@ -51,6 +51,7 @@ public extension ScheduleTemplate {
                 minSocOnGrid: 100,
                 forceDischargePower: 0,
                 forceDischargeSOC: 100,
+                maxSOC: 100,
                 color: .linesNegative
             )!,
             SchedulePhase(
@@ -66,6 +67,7 @@ public extension ScheduleTemplate {
                 minSocOnGrid: 20,
                 forceDischargePower: 3500,
                 forceDischargeSOC: 20,
+                maxSOC: 100,
                 color: .linesPositive
             )!,
         ])
@@ -114,8 +116,19 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {
     public let forceDischargePower: Int
     public let forceDischargeSOC: Int
     public let color: Color
+    public let maxSOC: Int?
 
-    public init?(id: String? = nil, start: Time, end: Time, mode: WorkMode, minSocOnGrid: Int, forceDischargePower: Int, forceDischargeSOC: Int, color: Color) {
+    public init?(
+        id: String? = nil,
+        start: Time,
+        end: Time,
+        mode: WorkMode,
+        minSocOnGrid: Int,
+        forceDischargePower: Int,
+        forceDischargeSOC: Int,
+        maxSOC: Int?,
+        color: Color
+    ) {
         guard start < end else { return nil }
         if mode == .Invalid { return nil }
 
@@ -127,9 +140,10 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {
         self.forceDischargePower = forceDischargePower
         self.forceDischargeSOC = forceDischargeSOC
         self.color = color
+        self.maxSOC = maxSOC
     }
 
-    public init(mode: WorkMode, device: Device?) {
+    public init(mode: WorkMode, device: Device?, initialiseMaxSOC: Bool) {
         self.id = UUID().uuidString
         self.start = Date().toTime()
         self.end = Date().toTime().adding(minutes: 1)
@@ -138,6 +152,7 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {
         self.forceDischargeSOC = Int(device?.battery?.minSOC) ?? 10
         self.minSocOnGrid = Int(device?.battery?.minSOC) ?? 10
         self.color = Color.scheduleColor(named: mode)
+        self.maxSOC = initialiseMaxSOC ? 100 : nil
     }
 
     private enum CodingKeys: CodingKey {
@@ -149,6 +164,7 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {
         case forceDischargePower
         case forceDischargeSOC
         case color
+        case maxSOC
     }
 
     public init(from decoder: any Decoder) throws {
@@ -160,6 +176,7 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {
         self.minSocOnGrid = try container.decode(Int.self, forKey: .minSocOnGrid)
         self.forceDischargePower = try container.decode(Int.self, forKey: .forceDischargePower)
         self.forceDischargeSOC = try container.decode(Int.self, forKey: .forceDischargeSOC)
+        self.maxSOC = try container.decode(Int?.self, forKey: .maxSOC)
         self.color = Color.scheduleColor(named: mode)
     }
 
@@ -172,6 +189,7 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {
         try container.encode(self.minSocOnGrid, forKey: .minSocOnGrid)
         try container.encode(self.forceDischargePower, forKey: .forceDischargePower)
         try container.encode(self.forceDischargeSOC, forKey: .forceDischargeSOC)
+        try container.encode(self.maxSOC, forKey: .maxSOC)
     }
 
     public var startPoint: CGFloat { CGFloat(minutesAfterMidnight(start)) / (24 * 60) }

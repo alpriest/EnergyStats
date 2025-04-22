@@ -33,9 +33,25 @@ struct SchedulePhaseListItemView: View {
         case .ForceDischarge:
             return " at \(phase.forceDischargePower)W down to \(phase.forceDischargeSOC)%"
         case .ForceCharge:
-            return ""
+            if let maxSOC = phase.maxSOC {
+                return " with max SOC \(maxSOC)%"
+            } else {
+                return ""
+            }
         case .SelfUse:
-            return " with \(phase.minSocOnGrid)% min SOC"
+            var result = " with \(phase.minSocOnGrid)% min SOC"
+
+            if let maxSOC = phase.maxSOC {
+                result += " and max SOC \(maxSOC)%"
+            }
+
+            return result
+        case .Backup:
+            if let maxSOC = phase.maxSOC {
+                return " with max SOC \(maxSOC)%"
+            } else {
+                return ""
+            }
         default:
             return ""
         }

@@ -8,8 +8,8 @@
 import Foundation
 
 extension URL {
-    static let getOpenSchedulerFlag = URL(string: "https://www.foxesscloud.com/op/v0/device/scheduler/get/flag")!
-    static let getOpenCurrentSchedule = URL(string: "https://www.foxesscloud.com/op/v0/device/scheduler/get")!
+    static let getOpenSchedulerFlag = URL(string: "https://www.foxesscloud.com/op/v1/device/scheduler/get/flag")!
+    static let getOpenCurrentSchedule = URL(string: "https://www.foxesscloud.com/op/v1/device/scheduler/get")!
     static let setOpenSchedulerFlag = URL(string: "https://www.foxesscloud.com/op/v0/device/scheduler/set/flag")!
     static let setOpenCurrentSchedule = URL(string: "https://www.foxesscloud.com/op/v0/device/scheduler/enable")!
 }
@@ -59,8 +59,8 @@ extension FoxAPIService {
 }
 
 extension SchedulePhase {
-    func toPhaseResponse() -> SchedulePhaseResponse {
-        SchedulePhaseResponse(
+    func toPhaseResponse() -> SchedulePhaseNetworkModel {
+        SchedulePhaseNetworkModel(
             enable: true.intValue,
             startHour: start.hour,
             startMinute: start.minute,
@@ -69,7 +69,8 @@ extension SchedulePhase {
             workMode: mode,
             minSocOnGrid: minSocOnGrid,
             fdSoc: forceDischargeSOC,
-            fdPwr: forceDischargePower
+            fdPwr: forceDischargePower,
+            maxSoc: maxSOC
         )
     }
 }

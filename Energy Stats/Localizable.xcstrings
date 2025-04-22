@@ -8402,31 +8402,31 @@
       "localizations" : {
         "de" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Ihre Wechselrichter-Zeitplaneinstellungen wurden gespeichert. Bitte beachten Sie, dass Ihre Zeitplaneinstellungen Vorrang vor jedem Batterieladeplan, Mindest-SoC und zuvor konfiguriertem Wechselrichter-Arbeitsmodus haben werden."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your inverter schedule settings were saved. Please be aware that your schedule settings will take priority over any battery charge schedule, min SOC and inverter work mode you had previously configured."
+            "value" : "Your inverter schedule settings were saved. Please be aware that your schedule settings will take priority over any battery schedule you had previously configured."
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Los ajustes de horario de tu inversor han sido guardados. Ten en cuenta que tus ajustes de horario tendrán prioridad sobre cualquier horario de carga de batería, min SOC y modo de trabajo del inversor que hayas configurado anteriormente."
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Le impostazioni del programma del tuo inverter sono state salvate. Si prega di essere consapevoli che le impostazioni del programma avranno la priorità su qualsiasi programma di carica della batteria, min SOC e modalità di lavoro dell'inverter che avevi precedentemente configurato."
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Ustawienia harmonogramu Twojego falownika zostały zapisane. Należy pamiętać, że ustawienia harmonogramu będą miały priorytet nad wszelkimi wcześniej skonfigurowanymi harmonogramami ładowania baterii, min SOC i trybem pracy falownika."
           }
         }
@@ -9108,6 +9108,9 @@
           }
         }
       }
+    },
+    "Max SoC" : {
+
     },
     "Maximum charge level" : {
       "localizations" : {

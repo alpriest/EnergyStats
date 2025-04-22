@@ -81,6 +81,7 @@ class PreviewTemplateStore: TemplateStoring {
                     minSocOnGrid: 100,
                     forceDischargePower: 0,
                     forceDischargeSOC: 100,
+                    maxSOC: 100,
                     color: .linesNegative
                 )!,
                 SchedulePhase(
@@ -96,6 +97,7 @@ class PreviewTemplateStore: TemplateStoring {
                     minSocOnGrid: 20,
                     forceDischargePower: 3500,
                     forceDischargeSOC: 20,
+                    maxSOC: 100,
                     color: .linesPositive
                 )!,
             ]),
@@ -113,6 +115,7 @@ class PreviewTemplateStore: TemplateStoring {
                     minSocOnGrid: 100,
                     forceDischargePower: 0,
                     forceDischargeSOC: 100,
+                    maxSOC: 100,
                     color: .linesNegative
                 )!,
                 SchedulePhase(
@@ -128,6 +131,7 @@ class PreviewTemplateStore: TemplateStoring {
                     minSocOnGrid: 20,
                     forceDischargePower: 3500,
                     forceDischargeSOC: 20,
+                    maxSOC: 100,
                     color: .linesPositive
                 )!,
             ]),

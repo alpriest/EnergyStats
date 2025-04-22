@@ -64,6 +64,7 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "ct2DisplayMode")
         UserDefaults.shared.removeObject(forKey: "seenTips")
         UserDefaults.shared.removeObject(forKey: "shouldCombineCT2WithLoadsPower")
+        UserDefaults.shared.removeObject(forKey: "deviceSupportsScheduleMaxSOC")
         UserDefaults.shared.synchronize()
     }
 
@@ -308,4 +309,7 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredBool(key: "shouldCombineCT2WithLoadsPower", defaultValue: true)
     public var shouldCombineCT2WithLoadsPower: Bool
+
+    @UserDefaultsStoredCodable(key: "deviceSupportsScheduleMaxSOC", defaultValue: [:])
+    public var deviceSupportsScheduleMaxSOC: [String: Bool]
 }

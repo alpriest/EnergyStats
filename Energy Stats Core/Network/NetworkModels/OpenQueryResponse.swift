@@ -260,7 +260,7 @@ public struct SetSchedulerFlagRequest: Encodable {
     public let enable: Int
 }
 
-public struct SchedulePhaseResponse: Codable {
+public struct SchedulePhaseNetworkModel: Codable {
     public let enable: Int
     public let startHour: Int
     public let startMinute: Int
@@ -270,8 +270,20 @@ public struct SchedulePhaseResponse: Codable {
     public let minSocOnGrid: Int
     public let fdSoc: Int
     public let fdPwr: Int?
+    public let maxSoc: Int?
 
-    public init(enable: Int, startHour: Int, startMinute: Int, endHour: Int, endMinute: Int, workMode: WorkMode, minSocOnGrid: Int, fdSoc: Int, fdPwr: Int?) {
+    public init(
+        enable: Int,
+        startHour: Int,
+        startMinute: Int,
+        endHour: Int,
+        endMinute: Int,
+        workMode: WorkMode,
+        minSocOnGrid: Int,
+        fdSoc: Int,
+        fdPwr: Int?,
+        maxSoc: Int?
+    ) {
         self.enable = enable
         self.startHour = startHour
         self.startMinute = startMinute
@@ -281,17 +293,18 @@ public struct SchedulePhaseResponse: Codable {
         self.minSocOnGrid = minSocOnGrid
         self.fdSoc = fdSoc
         self.fdPwr = fdPwr
+        self.maxSoc = maxSoc
     }
 }
 
 public struct ScheduleResponse: Codable {
     public let enable: Int
-    public let groups: [SchedulePhaseResponse]
+    public let groups: [SchedulePhaseNetworkModel]
 }
 
 public struct SetCurrentScheduleRequest: Codable {
     public let deviceSN: String
-    public let groups: [SchedulePhaseResponse]
+    public let groups: [SchedulePhaseNetworkModel]
 }
 
 public struct ApiRequestCountResponse: Decodable {

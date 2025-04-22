@@ -59,11 +59,24 @@ class EditScheduleViewModel: ObservableObject, HasLoadState, HasAlertContent {
     }
 
     func autoFillScheduleGaps() {
-        schedule = SchedulePhaseHelper.appendPhasesInGaps(to: schedule, mode: .SelfUse, device: config.currentDevice.value)
+        guard let device = config.currentDevice.value else { return }
+
+        schedule = SchedulePhaseHelper.appendPhasesInGaps(
+            to: schedule,
+            mode: .SelfUse,
+            device: device,
+            initialiseMaxSOC: config.getDeviceSupportScheduleMaxSOC(deviceSN: device.deviceSN)
+        )
     }
 
     func addNewTimePeriod() {
-        schedule = SchedulePhaseHelper.addNewTimePeriod(to: schedule, device: config.currentDevice.value)
+        guard let device = config.currentDevice.value else { return }
+
+        schedule = SchedulePhaseHelper.addNewTimePeriod(
+            to: schedule,
+            device: device,
+            initialiseMaxSOC: config.getDeviceSupportScheduleMaxSOC(deviceSN: device.deviceSN)
+        )
     }
 
     func updatedPhase(_ phase: SchedulePhase) {

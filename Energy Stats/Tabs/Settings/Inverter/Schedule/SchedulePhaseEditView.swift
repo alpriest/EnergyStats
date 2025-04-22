@@ -21,6 +21,9 @@ struct SchedulePhaseEditView: View {
     @State private var fdSOCError: LocalizedStringKey?
     @State private var timeError: LocalizedStringKey?
     @State private var forceDischargePowerError: LocalizedStringKey?
+    @State private var maxSOC: String
+    @State private var maxSOCError: LocalizedStringKey?
+    private let showMaxSOC: Bool
     private let id: String
     private let modes = WorkMode.values
     private let onChange: (SchedulePhase) -> Void
@@ -41,6 +44,14 @@ struct SchedulePhaseEditView: View {
         self._minSOC = State(wrappedValue: String(describing: phase.minSocOnGrid))
         self._fdSOC = State(wrappedValue: String(describing: phase.forceDischargeSOC))
         self._fdPower = State(wrappedValue: String(describing: phase.forceDischargePower))
+
+        if let maxSOC = phase.maxSOC {
+            showMaxSOC = true
+            self._maxSOC = State(wrappedValue: String(describing: maxSOC))
+        } else {
+            showMaxSOC = false
+            self.maxSOC = ""
+        }
 
         validate()
     }
@@ -90,6 +101,24 @@ struct SchedulePhaseEditView: View {
                         }
                         OptionalView(minSoCDescription()) {
                             Text($0)
+                        }
+                    }
+                }
+
+                Section {
+                    HStack {
+                        Text("Max SoC")
+                        Spacer()
+                        NumberTextField("Max SoC", text: $maxSOC)
+                            .multilineTextAlignment(.trailing)
+                            .frame(width: 100)
+                        Text("%")
+                    }
+                } footer: {
+                    VStack(alignment: .leading) {
+                        OptionalView(maxSOCError) {
+                            Text($0)
+                                .foregroundStyle(Color.red)
                         }
                     }
                 }
@@ -168,6 +197,7 @@ struct SchedulePhaseEditView: View {
             minSocOnGrid: Int(minSOC) ?? 0,
             forceDischargePower: Int(fdPower) ?? 0,
             forceDischargeSOC: Int(fdSOC) ?? 0,
+            maxSOC: showMaxSOC ? (Int(maxSOC) ?? 0) : nil,
             color: Color.scheduleColor(named: workMode)
         ) {
             onChange(phase)
@@ -241,6 +271,10 @@ struct SchedulePhaseEditView: View {
         if case .ForceDischarge = workMode, Int(fdPower) == 0 {
             forceDischargePowerError = "Force Discharge power needs to be greater than 0 to discharge"
         }
+
+        if showMaxSOC, let maxSOC = Int(maxSOC), !(10...100 ~= maxSOC) {
+            maxSOCError = "Please enter a number between 10 and 100"
+        }
     }
 }
 
@@ -259,6 +293,7 @@ struct SchedulePhaseEditView: View {
             minSocOnGrid: 10,
             forceDischargePower: 3500,
             forceDischargeSOC: 20,
+            maxSOC: 100,
             color: Color.scheduleColor(named: .ForceDischarge)
         )!,
         onChange: { print($0.id, " changed") },

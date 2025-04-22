@@ -638,6 +638,16 @@ public class ConfigManager: ConfigManaging {
             ))
         }
     }
+
+    public func getDeviceSupportScheduleMaxSOC(deviceSN: String) -> Bool {
+        config.deviceSupportsScheduleMaxSOC[deviceSN] ?? false
+    }
+
+    public func setDeviceSupportScheduleMaxSOC(deviceSN: String) {
+        var current = config.deviceSupportsScheduleMaxSOC
+        current[deviceSN] = true
+        config.deviceSupportsScheduleMaxSOC = current
+    }
 }
 
 public enum BatteryResponseMapper {

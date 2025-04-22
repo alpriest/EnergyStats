@@ -103,14 +103,25 @@ class EditTemplateViewModel: ObservableObject, HasLoadState, HasAlertContent {
     func autoFillScheduleGaps() {
         guard let schedule else { return }
         guard let mode = modes.first else { return }
+        guard let device = config.currentDevice.value else { return }
 
-        self.schedule = SchedulePhaseHelper.appendPhasesInGaps(to: schedule, mode: mode, device: config.currentDevice.value)
+        self.schedule = SchedulePhaseHelper.appendPhasesInGaps(
+            to: schedule,
+            mode: mode,
+            device: device,
+            initialiseMaxSOC: config.getDeviceSupportScheduleMaxSOC(deviceSN: device.deviceSN)
+        )
     }
 
     func addNewTimePeriod() {
         guard let schedule else { return }
+        guard let device = config.currentDevice.value else { return }
 
-        self.schedule = SchedulePhaseHelper.addNewTimePeriod(to: schedule, device: config.currentDevice.value)
+        self.schedule = SchedulePhaseHelper.addNewTimePeriod(
+            to: schedule,
+            device: device,
+            initialiseMaxSOC: config.getDeviceSupportScheduleMaxSOC(deviceSN: device.deviceSN)
+        )
     }
 
     func updatedPhase(_ phase: SchedulePhase) {

@@ -87,6 +87,9 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState, HasAlertContent 
             self.schedulerEnabled = scheduleResponse.enable.boolValue
 
             self.schedule = Schedule(phases: scheduleResponse.groups.filter { $0.enable == 1 }.compactMap { $0.toSchedulePhase() })
+            if let schedule, schedule.supportsMaxSOC() {
+                config.setDeviceSupportScheduleMaxSOC(deviceSN: deviceSN)
+            }
             await self.setState(.inactive)
         } catch {
             await self.setState(.error(error, error.localizedDescription))
@@ -148,7 +151,7 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState, HasAlertContent 
     }
 }
 
-extension SchedulePhaseResponse {
+extension SchedulePhaseNetworkModel {
     func toSchedulePhase() -> SchedulePhase? {
         SchedulePhase(
             start: Time(hour: startHour, minute: startMinute),
@@ -157,7 +160,14 @@ extension SchedulePhaseResponse {
             minSocOnGrid: minSocOnGrid,
             forceDischargePower: fdPwr ?? 0,
             forceDischargeSOC: fdSoc,
+            maxSOC: maxSoc,
             color: Color.scheduleColor(named: workMode)
         )
+    }
+}
+
+extension Schedule {
+    func supportsMaxSOC() -> Bool {
+        phases.anySatisfy { $0.maxSOC != nil }
     }
 }

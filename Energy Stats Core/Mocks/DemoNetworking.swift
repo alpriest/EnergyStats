@@ -253,7 +253,7 @@ class DemoAPI: FoxAPIServicing {
         return ScheduleResponse(
             enable: 0,
             groups: [
-                SchedulePhaseResponse(
+                SchedulePhaseNetworkModel(
                     enable: 1,
                     startHour: 15,
                     startMinute: 0,
@@ -262,9 +262,10 @@ class DemoAPI: FoxAPIServicing {
                     workMode: .ForceCharge,
                     minSocOnGrid: 20,
                     fdSoc: 100,
-                    fdPwr: 0
+                    fdPwr: 0,
+                    maxSoc: 100
                 ),
-                SchedulePhaseResponse(
+                SchedulePhaseNetworkModel(
                     enable: 1,
                     startHour: 17,
                     startMinute: 1,
@@ -273,7 +274,8 @@ class DemoAPI: FoxAPIServicing {
                     workMode: .ForceDischarge,
                     minSocOnGrid: 20,
                     fdSoc: 20,
-                    fdPwr: 3500
+                    fdPwr: 3500,
+                    maxSoc: 100
                 )
             ]
         )
@@ -403,6 +405,7 @@ public class MockConfig: Config {
     public var ct2DisplayMode: CT2DisplayMode = .hidden
     public var seenTips: [TipType] = []
     public var shouldCombineCT2WithLoadsPower: Bool = false
+    public var deviceSupportsScheduleMaxSOC: [String : Bool] = [:]
 }
 
 public extension SolcastSite {

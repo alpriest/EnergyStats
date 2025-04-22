@@ -71,6 +71,7 @@ extension Schedule {
                     minSocOnGrid: 100,
                     forceDischargePower: 0,
                     forceDischargeSOC: 100,
+                    maxSOC: 100,
                     color: .linesNegative
                 )!,
                 SchedulePhase(
@@ -86,6 +87,7 @@ extension Schedule {
                     minSocOnGrid: 20,
                     forceDischargePower: 3500,
                     forceDischargeSOC: 20,
+                    maxSOC: 100,
                     color: .linesPositive
                 )!,
                 SchedulePhase(
@@ -101,6 +103,7 @@ extension Schedule {
                     minSocOnGrid: 20,
                     forceDischargePower: 0,
                     forceDischargeSOC: 20,
+                    maxSOC: 100,
                     color: .paleGray
                 )!
             ]
