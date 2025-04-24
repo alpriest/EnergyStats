@@ -8402,8 +8402,8 @@
       "localizations" : {
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Ihre Wechselrichter-Zeitplaneinstellungen wurden gespeichert. Bitte beachten Sie, dass Ihre Zeitplaneinstellungen Vorrang vor jedem Batterieladeplan, Mindest-SoC und zuvor konfiguriertem Wechselrichter-Arbeitsmodus haben werden."
+            "state" : "translated",
+            "value" : "Ihre Wechselrichter-Zeitplaneinstellungen wurden gespeichert. Bitte beachten Sie, dass diese Einstellungen Vorrang vor zuvor konfigurierten Batterieplänen, Mindest-SoC und Wechselrichter-Arbeitsmodi haben."
           }
         },
         "en" : {
@@ -8414,20 +8414,20 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Los ajustes de horario de tu inversor han sido guardados. Ten en cuenta que tus ajustes de horario tendrán prioridad sobre cualquier horario de carga de batería, min SOC y modo de trabajo del inversor que hayas configurado anteriormente."
+            "state" : "translated",
+            "value" : "Se han guardado los ajustes de horario de tu inversor. Ten en cuenta que estos ajustes tendrán prioridad sobre cualquier horario de carga de batería, SoC mínimo y modo de funcionamiento del inversor que hayas configurado previamente."
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Le impostazioni del programma del tuo inverter sono state salvate. Si prega di essere consapevoli che le impostazioni del programma avranno la priorità su qualsiasi programma di carica della batteria, min SOC e modalità di lavoro dell'inverter che avevi precedentemente configurato."
+            "state" : "translated",
+            "value" : "Le impostazioni dell'orario del tuo inverter sono state salvate. Tieni presente che queste impostazioni avranno la priorità su qualsiasi programma di carica della batteria, SoC minimo e modalità operativa dell'inverter configurati in precedenza."
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Ustawienia harmonogramu Twojego falownika zostały zapisane. Należy pamiętać, że ustawienia harmonogramu będą miały priorytet nad wszelkimi wcześniej skonfigurowanymi harmonogramami ładowania baterii, min SOC i trybem pracy falownika."
+            "state" : "translated",
+            "value" : "Ustawienia harmonogramu falownika zostały zapisane. Pamiętaj, że te ustawienia mają pierwszeństwo przed wcześniej skonfigurowanymi harmonogramami ładowania baterii, minimalnym SoC i trybem pracy falownika."
           }
         }
       }
@@ -9110,7 +9110,12 @@
       }
     },
     "Max SoC" : {
-
+        "localizations": {
+            "de": { "stringUnit": { "state": "translated", "value": "Max. SoC" } },
+            "es": { "stringUnit": { "state": "translated", "value": "SoC máx." } },
+            "it": { "stringUnit": { "state": "translated", "value": "SoC massimo" } },
+            "pl": { "stringUnit": { "state": "translated", "value": "Maks. PoC" } }
+        }
     },
     "Maximum charge level" : {
       "localizations" : {

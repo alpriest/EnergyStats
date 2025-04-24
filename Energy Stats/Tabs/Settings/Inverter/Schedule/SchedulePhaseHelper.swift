@@ -12,7 +12,7 @@ import SwiftUI
 enum SchedulePhaseHelper {
     static func addNewTimePeriod(to schedule: Schedule, device: Device?, initialiseMaxSOC: Bool) -> Schedule {
         Schedule(
-            phases: schedule.phases + [SchedulePhase(mode: .SelfUse, device: device, initialiseMaxSOC: initialiseMaxSOC)].sorted { $0.start < $1.start }
+            phases: (schedule.phases + [SchedulePhase(mode: .SelfUse, device: device, initialiseMaxSOC: initialiseMaxSOC)]).sorted { $0.start < $1.start }
         )
     }
 
@@ -44,9 +44,7 @@ enum SchedulePhaseHelper {
         let soc = Int(device?.battery?.minSOC) ?? 10
         let newPhases = schedule.phases + createPhasesInGaps(on: schedule, mode: mode, soc: soc, initialiseMaxSOC: initialiseMaxSOC)
 
-        return Schedule(
-            phases: newPhases.sorted { $0.start < $1.start }
-        )
+        return Schedule(phases: newPhases.sorted { $0.start < $1.start })
     }
 
     static func createPhasesInGaps(on schedule: Schedule, mode: WorkMode, soc: Int, initialiseMaxSOC: Bool) -> [SchedulePhase] {
