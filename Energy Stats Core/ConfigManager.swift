@@ -14,6 +14,7 @@ public class ConfigManager: ConfigManaging {
     private var config: Config
     public var appSettingsPublisher: CurrentValueSubject<AppSettings, Never>
     public var currentDevice = CurrentValueSubject<Device?, Never>(nil)
+    private var deviceSupportsScheduleMaxSOC: [String: Bool] = [:] // In-memory only
 
     public struct NoDeviceFoundError: Error {
         public init() {}
@@ -640,13 +641,11 @@ public class ConfigManager: ConfigManaging {
     }
 
     public func getDeviceSupportScheduleMaxSOC(deviceSN: String) -> Bool {
-        config.deviceSupportsScheduleMaxSOC[deviceSN] ?? false
+        deviceSupportsScheduleMaxSOC[deviceSN] ?? false
     }
 
     public func setDeviceSupportScheduleMaxSOC(deviceSN: String) {
-        var current = config.deviceSupportsScheduleMaxSOC
-        current[deviceSN] = true
-        config.deviceSupportsScheduleMaxSOC = current
+        deviceSupportsScheduleMaxSOC[deviceSN] = true
     }
 }
 

@@ -63,7 +63,6 @@ public protocol Config {
     var ct2DisplayMode: CT2DisplayMode { get set }
     var seenTips: [TipType] { get set }
     var shouldCombineCT2WithLoadsPower: Bool { get set }
-    var deviceSupportsScheduleMaxSOC: [String: Bool] { get set }
 }
 
 public func DefaultParameterGroups() -> [ParameterGroup] {

@@ -309,7 +309,4 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredBool(key: "shouldCombineCT2WithLoadsPower", defaultValue: true)
     public var shouldCombineCT2WithLoadsPower: Bool
-
-    @UserDefaultsStoredCodable(key: "deviceSupportsScheduleMaxSOC", defaultValue: [:])
-    public var deviceSupportsScheduleMaxSOC: [String: Bool]
 }
