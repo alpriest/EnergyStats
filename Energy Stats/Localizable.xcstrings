@@ -14042,30 +14042,30 @@
         }
       }
     },
-    "Stats are aggregated by FoxESS into 1 hr, 1 day or 1 month totals. FoxESS only makes data available for the last 12 months." : {
+    "Stats are aggregated by FoxESS into 1 hr, 1 day or 1 month totals. FoxESS only makes data available for the last 12 months to Energy Stats." : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Statistiken werden von FoxESS für jeweils 1 Stunde, 1 Tag oder 1 Monat aufsummiert. FoxESS stellt Daten nur für die letzten 12 Monate zur Verfügung."
+            "value" : "Statistiken werden von FoxESS in 1-Stunden-, 1-Tages- oder 1-Monats-Summen aggregiert. FoxESS stellt Energy Stats nur Daten der letzten 12 Monate zur Verfügung."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Las estadísticas se agregan por FoxESS en totales de 1 hora, 1 día o 1 mes. FoxESS solo pone a disposición los datos de los últimos 12 meses."
+            "value" : "Las estadísticas se agregan por FoxESS en totales de 1 hora, 1 día o 1 mes. FoxESS solo pone a disposición de Energy Stats los datos de los últimos 12 meses."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Le statistiche vengono aggregate da FoxESS in totali ogni 1 ora, 1 giorno o 1 mese. FoxESS rende disponibili i dati solo degli ultimi 12 mesi."
+            "value" : "Le statistiche vengono aggregate da FoxESS in totali di 1 ora, 1 giorno o 1 mese. FoxESS rende disponibili a Energy Stats solo i dati degli ultimi 12 mesi."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Statystyki są agregowane przez FoxESS w sumy 1 godz., 1 dzień lub 1 miesiąc. FoxESS udostępnia dane tylko z ostatnich 12 miesięcy."
+            "value" : "Statystyki są agregowane przez FoxESS do sum godzinowych, dziennych lub miesięcznych. FoxESS udostępnia Energy Stats tylko dane z ostatnich 12 miesięcy."
           }
         }
       }
