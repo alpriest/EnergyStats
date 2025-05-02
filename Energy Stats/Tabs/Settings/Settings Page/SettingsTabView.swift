@@ -83,7 +83,6 @@ struct SettingsTabView: View {
                     NavigationLink("settings.faq") { FAQView() }
                     NavigationLink("settings.debug") { DebugSettingsView(networking: networking) }
                     NavigationLink("Edit API Key") { ConfigureAPIKeyView() }
-//                    NavigationLink("Invert - automation made easy") { InvertView() }
                 }
 
                 SettingsFooterView(

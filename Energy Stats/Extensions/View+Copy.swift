@@ -19,15 +19,3 @@ extension View {
         }
     }
 }
-
-struct CopyButton: View {
-    let text: String
-
-    var body: some View {
-        Button(action: {
-            UIPasteboard.general.string = text
-        }) {
-            Image(systemName: "doc.on.doc")
-        }
-    }
-}

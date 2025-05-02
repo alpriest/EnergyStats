@@ -173,7 +173,6 @@
 		41757BBC2A90A05E00573FB4 /* AmountType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41757BBB2A90A05E00573FB4 /* AmountType.swift */; };
 		41757BBD2A90A06E00573FB4 /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0B43329F96D3600CA9462 /* LocalizedString.swift */; };
 		417747F92C0379080023A51C /* history-temp.json in Resources */ = {isa = PBXBuildFile; fileRef = 417747F82C0379080023A51C /* history-temp.json */; };
-		417759FA2D970363000A0642 /* InvertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417759F92D970360000A0642 /* InvertView.swift */; };
 		41777F5B2CB6CD5900507E4B /* TodayStatsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41777F5A2CB6CD4C00507E4B /* TodayStatsWidget.swift */; };
 		41777F5D2CB6D63A00507E4B /* StatsTimelineProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41777F5C2CB6D63500507E4B /* StatsTimelineProvider.swift */; };
 		41777F5F2CB6D70B00507E4B /* StatsWidgetGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41777F5E2CB6D70A00507E4B /* StatsWidgetGraphView.swift */; };
@@ -669,7 +668,6 @@
 		417185512A0119F300D18CDD /* variables-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "variables-success.json"; sourceTree = "<group>"; };
 		41757BBB2A90A05E00573FB4 /* AmountType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountType.swift; sourceTree = "<group>"; };
 		417747F82C0379080023A51C /* history-temp.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "history-temp.json"; sourceTree = "<group>"; };
-		417759F92D970360000A0642 /* InvertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvertView.swift; sourceTree = "<group>"; };
 		41777F1428F49C61009944FF /* NetworkFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFacade.swift; sourceTree = "<group>"; };
 		41777F5A2CB6CD4C00507E4B /* TodayStatsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayStatsWidget.swift; sourceTree = "<group>"; };
 		41777F5C2CB6D63500507E4B /* StatsTimelineProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTimelineProvider.swift; sourceTree = "<group>"; };
@@ -1326,7 +1324,6 @@
 			isa = PBXGroup;
 			children = (
 				418DC9D82DAA47AD005613AB /* DebugSettingsView.swift */,
-				417759F92D970360000A0642 /* InvertView.swift */,
 				41E1DFDE28D87781001235B9 /* SettingsTabView.swift */,
 				414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */,
 				4160098A2A8D18B10096CCD9 /* SettingsFooterView.swift */,
@@ -2226,7 +2223,6 @@
 				410FC8882AB9B5450004CBC2 /* ParameterVariableListView.swift in Sources */,
 				41C19DCD2A4DDE46009883AB /* SelfSufficiencyEstimateView.swift in Sources */,
 				4130364B29B8BE7F006B5CE9 /* InverterChoiceView.swift in Sources */,
-				417759FA2D970363000A0642 /* InvertView.swift in Sources */,
 				41FCE06E2CA175AA0046ABF6 /* TabItems.swift in Sources */,
 				41E12E8A2CC66737001F3839 /* CheckCurrentLoadIntent.swift in Sources */,
 				41E8E7242AADFB3900DC4B89 /* SolarBandingSettingsView.swift in Sources */,

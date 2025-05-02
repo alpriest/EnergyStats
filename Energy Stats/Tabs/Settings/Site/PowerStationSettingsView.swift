@@ -16,11 +16,10 @@ struct PowerStationSettingsView: View {
         Form {
             Section {
                 ESLabeledText("Name", value: station.stationName)
-
                 ESLabeledText("Capacity", value: station.capacity.w())
-
                 ESLabeledText("Timezone", value: station.timezone)
             }
+            .alertCopy(copyText)
         }
         .task {
             Task {
@@ -31,6 +30,12 @@ struct PowerStationSettingsView: View {
             }
         }
         .navigationTitle(.powerStation)
+    }
+
+    private var copyText: String {
+        "Name: " + station.stationName +
+        "Capacity: " + station.capacity.w() +
+        "Timezone: " + station.timezone
     }
 }
 

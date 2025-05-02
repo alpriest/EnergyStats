@@ -31,6 +31,7 @@ struct InverterFirmwareVersionsView: View {
                         UIApplication.shared.open(URL(string: "https://foxesscommunity.com/viewforum.php?f=29")!)
                     }
                 }
+                .contentShape(Rectangle())
                 .alertCopy(text(version))
             }
         }

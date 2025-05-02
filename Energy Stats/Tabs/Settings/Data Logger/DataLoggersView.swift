@@ -79,8 +79,8 @@ struct DataLoggerView: View {
 
     var body: some View {
         Section {
-            ESLabeledText("Module SN", value: item.moduleSN)
-            ESLabeledText("Station ID", value: item.stationID)
+            ESLabeledText("Module SN", value: item.moduleSN, copiable: true)
+            ESLabeledText("Station ID", value: item.stationID, copiable: true)
             ESLabeledContent("Signal") {
                 SignalView(amount: item.signal)
             }

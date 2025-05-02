@@ -13,7 +13,9 @@ struct AlertCopy: ViewModifier {
 
     func body(content: Content) -> some View {
         content
+            .copy(text: text)
             .onTapGesture {
+                UIPasteboard.general.string = text
                 showAlert.toggle()
             }
             .alert("Copied!", isPresented: $showAlert, actions: {})
