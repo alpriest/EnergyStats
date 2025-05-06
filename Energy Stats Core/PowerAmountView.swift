@@ -51,18 +51,20 @@ public struct EnergyText: View {
     let appSettings: AppSettings
     let type: AmountType
     let decimalPlaceOverride: Int?
+    let prefix: String
     let suffix: String
 
-    public init(amount: Double?, appSettings: AppSettings, type: AmountType, decimalPlaceOverride: Int? = nil, suffix: String = "") {
+    public init(amount: Double?, appSettings: AppSettings, type: AmountType, decimalPlaceOverride: Int? = nil, prefix: String = "", suffix: String = "") {
         self.amount = amount
         self.appSettings = appSettings
         self.type = type
         self.decimalPlaceOverride = decimalPlaceOverride
+        self.prefix = prefix
         self.suffix = suffix
     }
 
     public var body: some View {
-        Text(amountWithUnit + suffix)
+        Text(prefix + amountWithUnit + suffix)
             .accessibilityLabel(type.accessibilityLabel(amount: amount ?? 0, amountWithUnit: amountWithUnit))
             .monospacedDigit()
             .redactedShimmer(when: self.amount == nil)

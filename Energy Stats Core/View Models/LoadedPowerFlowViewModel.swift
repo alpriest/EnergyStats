@@ -182,7 +182,7 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
 
     private func loadHistoryData(_ currentDevice: Device) async throws -> OpenHistoryResponse {
         let start = Calendar.current.startOfDay(for: Date())
-        return try await self.network.fetchHistory(deviceSN: currentDevice.deviceSN, variables: ["meterPower2"], start: start, end: start.addingTimeInterval(86400))
+        return try await self.network.fetchHistory(deviceSN: currentDevice.deviceSN, variables: ["meterPower2", "pv1Power", "pv2Power", "pv3Power", "pv4Power", "pv5Power", "pv6Power"], start: start, end: start.addingTimeInterval(86400))
     }
 
     public static func ==(lhs: LoadedPowerFlowViewModel, rhs: LoadedPowerFlowViewModel) -> Bool {

@@ -8,6 +8,7 @@
 import Foundation
 
 public enum AmountType {
+    case solarStringTotal
     case solarString
     case solarFlow
     case solarFlowCT2
@@ -29,6 +30,8 @@ public extension AmountType {
         switch self {
         case .solarString:
             return String(format: String(accessibilityKey: .currentSolarStringGenerationAmount), arguments: [amountWithUnit])
+        case .solarStringTotal:
+            return String(format: String(accessibilityKey: .currentSolarStringTotalGenerationAmount), arguments: [amountWithUnit])
         case .solarFlow:
             return String(format: String(accessibilityKey: .currentSolarGenerationAmount), arguments: [amountWithUnit])
         case .solarFlowCT2:

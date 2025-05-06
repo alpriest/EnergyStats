@@ -36,4 +36,23 @@ public struct StringPower: Identifiable {
             return settings.pv6Name
         }
     }
+
+    public var stringType: StringType {
+        switch name {
+        case "PV1":
+            return .pv1
+        case "PV2":
+            return .pv2
+        case "PV3":
+            return .pv3
+        case "PV4":
+            return .pv4
+        case "PV5":
+            return .pv5
+        case "CT2":
+            return .ct2
+        default:
+            return .pv6
+        }
+    }
 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Energy_Stats_Core
 
 enum BoundType: String, RawRepresentable {
     case min
@@ -33,6 +34,24 @@ struct SubLabelledView: View {
     let value: String
     let label: String
     let alignment: HorizontalAlignment
+
+    init(value: String, label: String, alignment: HorizontalAlignment) {
+        self.value = value
+        self.label = label
+        self.alignment = alignment
+    }
+
+    init(
+        value: Double?,
+        label: String,
+        appSettings: AppSettings,
+        alignment: HorizontalAlignment,
+        decimalPlaceOverride: Int
+    ) {
+        self.value = value?.roundedToString(decimalPlaces: decimalPlaceOverride) ?? ""
+        self.label = label
+        self.alignment = alignment
+    }
 
     var body: some View {
         VStack(alignment: alignment) {

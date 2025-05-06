@@ -8,7 +8,7 @@
 import Energy_Stats_Core
 import SwiftUI
 
-struct MaxWidthPreferenceKey: PreferenceKey {
+struct LabelWidthPreferenceKey: PreferenceKey {
     static var defaultValue: CGFloat = .zero
 
     static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
@@ -21,8 +21,8 @@ struct MaxWidthPreferenceKey: PreferenceKey {
 }
 
 struct SolarStringsView: View {
-    @State var maxLabelWidth: CGFloat = 100
-    let viewModel: LoadedPowerFlowViewModel
+    @State var pvLabelWidth: CGFloat = 100
+    @ObservedObject var viewModel: LoadedPowerFlowViewModel
     let appSettings: AppSettings
 
     var body: some View {
@@ -31,13 +31,26 @@ struct SolarStringsView: View {
                 ForEach(viewModel.displayStrings) { pvString in
                     HStack {
                         Text(pvString.displayName(settings: appSettings.powerFlowStrings))
-                            .background(BackgroundSizeReader())
-                            .onPreferenceChange(MaxWidthPreferenceKey.self, perform: { value in
-                                maxLabelWidth = value
+                            .background(LabelWidthBackgroundSizeReader())
+                            .frame(width: self.pvLabelWidth, alignment: .leading)
+                            .onPreferenceChange(LabelWidthPreferenceKey.self, perform: { value in
+                                DispatchQueue.main.async {
+                                    pvLabelWidth = value
+                                }
                             })
-                            .frame(width: self.maxLabelWidth, alignment: .leading)
 
                         PowerText(amount: pvString.amount, appSettings: appSettings, type: .solarFlow)
+
+                        if appSettings.showTotalYieldOnPowerFlow {
+                            EnergyText(
+                                amount: viewModel.todaysGeneration?.estimatedTotal(string: pvString.stringType),
+                                appSettings: appSettings,
+                                type: .solarStringTotal,
+                                decimalPlaceOverride: 1,
+                                prefix: "(",
+                                suffix: ")"
+                            )
+                        }
                     }
                     .accessibilityElement(children: .ignore)
                     .accessibilityLabel(pvString.displayName(settings: appSettings.powerFlowStrings) + " " + AmountType.solarString.accessibilityLabel(amount: pvString.amount, amountWithUnit: pvString.amount.kWh(2)))
@@ -51,11 +64,11 @@ struct SolarStringsView: View {
     }
 }
 
-struct BackgroundSizeReader: View {
+struct LabelWidthBackgroundSizeReader: View {
     var body: some View {
         GeometryReader { geometry in
             Color.clear
-                .preference(key: MaxWidthPreferenceKey.self, value: geometry.size.width)
+                .preference(key: LabelWidthPreferenceKey.self, value: geometry.size.width)
         }
         .scaledToFill()
     }

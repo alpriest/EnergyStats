@@ -1801,6 +1801,41 @@
         }
       }
     },
+    "accessibility.solarStringTotalGeneration" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "generated %1$@ today"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ heute erzeugt"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ generados hoy"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ generati oggi"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ wygenerowano dzisiaj"
+          }
+        }
+      }
+    },
     "accessibility.stats.datepicker.day" : {
       "localizations" : {
         "de" : {

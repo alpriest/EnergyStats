@@ -13,6 +13,7 @@ public struct ShimmerConfiguration {
     public let finalLocation: (start: UnitPoint, end: UnitPoint)
     public let duration: TimeInterval
     public let opacity: Double
+    public let delay: TimeInterval
 
     public static let `default` = ShimmerConfiguration(
         gradient: Gradient(stops: [
@@ -21,10 +22,11 @@ public struct ShimmerConfiguration {
             .init(color: .white, location: 0.7),
             .init(color: .black, location: 1),
         ]),
-        initialLocation: (start: UnitPoint(x: -1, y: 0.3), end: .leading),
-        finalLocation: (start: .trailing, end: UnitPoint(x: 2, y: 0.5)),
+        initialLocation: (start: UnitPoint(x: -1, y: 0.4), end: .leading),
+        finalLocation: (start: .trailing, end: UnitPoint(x: 2, y: 0.3)),
         duration: 2,
-        opacity: 0.6
+        opacity: 0.6,
+        delay: 1.5
     )
 }
 
@@ -53,7 +55,7 @@ public struct ShimmeringView<Content: View>: View {
                 .opacity(configuration.opacity)
                 .blendMode(colorScheme == .dark ? .multiply : .screen)
                 .onAppear {
-                    withAnimation(Animation.linear(duration: configuration.duration).repeatForever(autoreverses: false)) {
+                    withAnimation(Animation.linear(duration: configuration.duration).delay(configuration.delay).repeatForever(autoreverses: false)) {
                         startPoint = configuration.finalLocation.start
                         endPoint = configuration.finalLocation.end
                     }
