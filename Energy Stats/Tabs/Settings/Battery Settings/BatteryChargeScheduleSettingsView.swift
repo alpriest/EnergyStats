@@ -30,6 +30,10 @@ struct BatteryChargeScheduleSettingsView: View {
 
                         Text(viewModel.summary)
                             .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+
+                        Text("about_59_seconds")
+                            .padding(.top)
+                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                     }
                     .frame(minWidth: 0, maxWidth: .infinity)
                 })

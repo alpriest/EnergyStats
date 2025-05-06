@@ -24,7 +24,7 @@ struct ChargeTimePeriod: Equatable {
     }
 
     var description: String {
-        String(format: String(key: .chargeTimeSummary), arguments: [start.militaryTime(), end.militaryTime()])
+        String(format: String(key: .chargeTimeSummary), arguments: [start.militaryTime() + ":00", end.militaryTime() + ":59"])
     }
 
     var hasTimes: Bool {

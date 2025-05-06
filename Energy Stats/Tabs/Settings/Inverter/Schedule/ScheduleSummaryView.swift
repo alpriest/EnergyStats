@@ -106,7 +106,13 @@ struct ScheduleSummaryView: View {
                 .frame(maxWidth: .infinity)
 
                 FooterSection {
-                    Text("templates_not_synced")
+                    VStack(spacing: 14) {
+                        Text("templates_not_synced")
+                            .frame(minWidth: 0, maxWidth: .infinity)
+
+                        Text("about_59_seconds")
+                            .frame(minWidth: 0, maxWidth: .infinity)
+                    }
                 }
             }
         }

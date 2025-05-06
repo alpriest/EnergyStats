@@ -837,6 +837,40 @@
         }
       }
     },
+    "about_59_seconds" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The 59 seconds is set by the way the inverter firmware works. This is because the end times include the minute that you set so your time slot will run up to 59th second of the minute.\n\ne.g. If you want the time slot to end by 05:30, you have to set 05:29:59. If you set 05:30, the inverter will continue up to 05:30:59 and you will get 1 minute where your energy use is not as expected."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die 59 Sekunden sind durch die Funktionsweise der Wechselrichter-Firmware bedingt. Dies liegt daran, dass die Endzeiten die eingestellte Minute einschließen, sodass Ihr Zeitfenster bis zur 59. Sekunde dieser Minute läuft.\n\nz. B. Wenn das Zeitfenster um 05:30 enden soll, müssen Sie 05:29:59 einstellen. Wenn Sie 05:30 einstellen, läuft der Wechselrichter bis 05:30:59 weiter, was eine Minute unerwarteter Energienutzung bedeutet."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Los 59 segundos están determinados por el funcionamiento del firmware del inversor. Esto se debe a que las horas de finalización incluyen el minuto que configures, por lo que tu intervalo de tiempo se ejecutará hasta el segundo 59 de ese minuto.\n\nEjemplo: si deseas que el intervalo termine a las 05:30, debes establecerlo en 05:29:59. Si lo configuras en 05:30, el inversor continuará hasta las 05:30:59 y tendrás un minuto en el que el uso de energía no será el esperado."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I 59 secondi sono impostati dal funzionamento del firmware dell’inverter. Questo perché gli orari di fine includono il minuto impostato, quindi la fascia oraria si estenderà fino al 59º secondo di quel minuto.\n\nAd es. se desideri che l’intervallo termini alle 05:30, devi impostarlo alle 05:29:59. Se imposti 05:30, l’inverter continuerà fino alle 05:30:59 e avrai un minuto in cui l’uso dell’energia non sarà come previsto."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "59 sekund wynika z działania oprogramowania falownika. Czas końcowy obejmuje pełną minutę, którą ustawisz, więc przedział czasowy będzie trwał do 59 sekundy tej minuty.\n\nNp. jeśli chcesz, aby przedział zakończył się o 05:30, ustaw 05:29:59. Jeśli ustawisz 05:30, falownik będzie działał do 05:30:59 i przez jedną minutę zużycie energii może być inne niż oczekiwano."
+          }
+        }
+      }
+    },
     "Absolute" : {
       "localizations" : {
         "de" : {
@@ -1804,16 +1838,16 @@
     "accessibility.solarStringTotalGeneration" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "generated %1$@ today"
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%1$@ heute erzeugt"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "generated %1$@ today"
           }
         },
         "es" : {
