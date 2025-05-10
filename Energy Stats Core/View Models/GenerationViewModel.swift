@@ -19,7 +19,6 @@ public enum StringType {
 
 public struct GenerationViewModel {
     private let pvTotal: Double
-    private let response: OpenHistoryResponse
     private let includeCT2: Bool
     private let shouldInvertCT2: Bool
     public let pv1Total: Double
@@ -32,7 +31,6 @@ public struct GenerationViewModel {
 
     public init(pvTotal: Double, response: OpenHistoryResponse, includeCT2: Bool, shouldInvertCT2: Bool) {
         self.pvTotal = pvTotal
-        self.response = response
         self.includeCT2 = includeCT2
         self.shouldInvertCT2 = shouldInvertCT2
         pv1Total = response.trapezoidalAverage(key: "pv1Power")
