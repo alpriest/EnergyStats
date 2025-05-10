@@ -62,7 +62,10 @@ struct DisplaySettingsView: View {
             }
 
             Toggle(isOn: $viewModel.showTotalYieldOnPowerFlow) {
-                Text("settings.yield.title")
+                HStack {
+                    Text("settings.yield.title")
+                    InfoButtonView(message: "settings.yield.description")
+                }
             }
 
             SolarStringsSettingsView(viewModel: viewModel)

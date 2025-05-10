@@ -839,16 +839,16 @@
     },
     "about_59_seconds" : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The 59 seconds is set by the way the inverter firmware works. This is because the end times include the minute that you set so your time slot will run up to 59th second of the minute.\n\ne.g. If you want the time slot to end by 05:30, you have to set 05:29:59. If you set 05:30, the inverter will continue up to 05:30:59 and you will get 1 minute where your energy use is not as expected."
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Die 59 Sekunden sind durch die Funktionsweise der Wechselrichter-Firmware bedingt. Dies liegt daran, dass die Endzeiten die eingestellte Minute einschließen, sodass Ihr Zeitfenster bis zur 59. Sekunde dieser Minute läuft.\n\nz. B. Wenn das Zeitfenster um 05:30 enden soll, müssen Sie 05:29:59 einstellen. Wenn Sie 05:30 einstellen, läuft der Wechselrichter bis 05:30:59 weiter, was eine Minute unerwarteter Energienutzung bedeutet."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The 59 seconds is set by the way the inverter firmware works. This is because the end times include the minute that you set so your time slot will run up to 59th second of the minute.\n\ne.g. If you want the time slot to end by 05:30, you have to set 05:29:59. If you set 05:30, the inverter will continue up to 05:30:59 and you will get 1 minute where your energy use is not as expected."
           }
         },
         "es" : {
@@ -13097,6 +13097,41 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pokaż codzienne sumy w domu"
+          }
+        }
+      }
+    },
+    "settings.yield.description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your total daily generation will be displayed. If you have ‘Show PV power by strings’ enabled, an estimate of daily generation by string will also be displayed."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ihre gesamte tägliche Erzeugung wird angezeigt. Wenn Sie „PV-Leistung nach Strings anzeigen“ aktiviert haben, wird auch eine Schätzung der täglichen Erzeugung pro String angezeigt."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Su generación diaria total se mostrará. Si tiene activada la opción 'Mostrar la potencia fotovoltaica por cadenas', también se mostrará una estimación de la generación diaria por cadena."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La tua produzione giornaliera totale verrà visualizzata. Se hai abilitato 'Mostra la potenza PV per stringhe', verrà mostrata anche una stima della produzione giornaliera per stringa."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Twoja całkowita dzienna generacja zostanie wyświetlona. Jeśli masz włączoną opcję 'Pokaż moc PV według ciągów', zostanie również wyświetlone oszacowanie dziennej generacji dla każdego ciągu."
           }
         }
       }

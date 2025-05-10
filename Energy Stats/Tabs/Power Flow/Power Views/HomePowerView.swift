@@ -27,7 +27,7 @@ struct HomePowerView: View, VerticalSizeClassProviding {
     }
 
     private var length: CGFloat {
-        shouldReduceIconSize ? 40 : 50
+        shouldReduceIconSize ? 40 : 45
     }
 }
 
