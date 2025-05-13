@@ -13131,7 +13131,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Twoja całkowita dzienna generacja zostanie wyświetlona. Jeśli masz włączoną opcję 'Pokaż moc PV według ciągów', zostanie również wyświetlone oszacowanie dziennej generacji dla każdego ciągu."
+            "value" : "La tua produzione giornaliera totale verrà visualizzata. Se hai abilitato 'Mostra la potenza PV per stringhe', verrà mostrata anche una stima della produzione giornaliera per stringa."
           }
         }
       }

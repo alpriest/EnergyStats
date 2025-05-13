@@ -13,6 +13,7 @@ import SwiftUI
 import WatchConnectivity
 import WidgetKit
 import Pulse
+import PulseUI
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
@@ -52,6 +53,8 @@ struct Energy_StatsApp: App {
         } else {
             config = UserDefaultsConfig()
         }
+
+        UserSettings.shared.allowedShareStoreOutputs = [.har]
 
         self.config = config
         network = NetworkService.standard(keychainStore: keychainStore,
