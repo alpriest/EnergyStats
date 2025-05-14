@@ -83,7 +83,7 @@ public struct EnergyStatsFinancialModel {
 
 public extension EnergyStatsFinancialModel {
     static func any() -> EnergyStatsFinancialModel {
-        EnergyStatsFinancialModel(totalsViewModel: TotalsViewModel(reports: []),
+        EnergyStatsFinancialModel(totalsViewModel: TotalsViewModel(reports: [], deviceHasPV: true),
                                   config: ConfigManager.preview())
     }
 

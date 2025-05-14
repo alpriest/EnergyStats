@@ -109,7 +109,6 @@ public class CurrentStatusCalculator {
             gridConsumptionPower: response.datas.currentDouble(for: "gridConsumptionPower"),
             loadsPower: response.datas.currentDouble(for: "loadsPower"),
             generationPower: response.datas.currentDouble(for: "generationPower"),
-            epsPower: response.datas.currentDouble(for: "epsPower"),
             ambientTemperation: response.datas.currentDouble(for: "ambientTemperation"),
             invTemperation: response.datas.currentDouble(for: "invTemperation"),
             meterPower2: response.datas.currentDouble(for: "meterPower2"),
@@ -119,7 +118,7 @@ public class CurrentStatusCalculator {
     }
 
     static func calculateLoadPower(status: CurrentRawValues, shouldCombineCT2WithLoadsPower: Bool) -> Double {
-        status.gridConsumptionPower + status.generationPower - status.feedinPower + (shouldCombineCT2WithLoadsPower ? abs(status.meterPower2) : 0)
+        abs(status.gridConsumptionPower + status.generationPower - status.feedinPower + (shouldCombineCT2WithLoadsPower ? abs(status.meterPower2) : 0))
     }
 
     static func calculateSolarPower(hasPV: Bool, status: CurrentRawValues, shouldInvertCT2: Bool, shouldCombineCT2WithPVPower: Bool) -> Double {
@@ -169,7 +168,6 @@ public struct CurrentRawValues {
     let gridConsumptionPower: Double
     let loadsPower: Double
     let generationPower: Double
-    let epsPower: Double
     let ambientTemperation: Double
     let invTemperation: Double
     let meterPower2: Double
@@ -177,6 +175,6 @@ public struct CurrentRawValues {
     let lastUpdate: Date
 
     static func empty() -> CurrentRawValues {
-        .init(pvPower: 2, stringsPvPower: [], feedinPower: 0, gridConsumptionPower: 0, loadsPower: 0, generationPower: 0, epsPower: 0, ambientTemperation: 0, invTemperation: 0, meterPower2: 0, hasPV: false, lastUpdate: Date())
+        .init(pvPower: 2, stringsPvPower: [], feedinPower: 0, gridConsumptionPower: 0, loadsPower: 0, generationPower: 0, ambientTemperation: 0, invTemperation: 0, meterPower2: 0, hasPV: false, lastUpdate: Date())
     }
 }

@@ -134,7 +134,7 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
             self.configManager.showTotalYieldOnPowerFlow else { return }
 
         Task {
-            let totals = try TotalsViewModel(reports: await self.loadReportData(self.currentDevice))
+            let totals = try TotalsViewModel(reports: await self.loadReportData(self.currentDevice), deviceHasPV: self.currentDevice.hasPV)
 
             if Task.isCancelled { return }
 
