@@ -75,7 +75,7 @@ struct Energy_StatsApp: App {
 
     var body: some Scene {
         let solarForecastProvider: () -> SolcastCaching = {
-            config.isDemoUser ? DemoSolcast() : SolcastCache(service: { Solcast(urlSession: urlSession) })
+            config.isDemoUser ? DemoSolcast() : SolcastCache(service: { Solcast(urlSession: urlSession, configManager: configManager) })
         }
 
         return WindowGroup {

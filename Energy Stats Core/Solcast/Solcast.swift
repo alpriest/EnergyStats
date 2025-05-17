@@ -21,9 +21,11 @@ public struct ConfigMissingError: Error {}
 
 public class Solcast: SolcastFetching {
     private let urlSession: URLSessionProtocol
+    private var configManager: ConfigManaging
 
-    public init(urlSession: URLSessionProtocol) {
+    public init(urlSession: URLSessionProtocol, configManager: ConfigManaging) {
         self.urlSession = urlSession
+        self.configManager = configManager
     }
 
     public func fetchSites(apiKey: String) async throws -> SolcastSiteResponseList {
@@ -72,6 +74,7 @@ public class Solcast: SolcastFetching {
             }
 
             let networkResponse: T = try decoder.decode(T.self, from: data)
+            configManager.lastSolcastRefresh = .now
             return networkResponse
         } catch let error as NSError {
             if error.domain == NSURLErrorDomain, error.code == URLError.notConnectedToInternet.rawValue {

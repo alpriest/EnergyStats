@@ -25,6 +25,7 @@ struct SolarForecastViewData: Identifiable {
 }
 
 class SolarForecastViewModel: ObservableObject, HasLoadState {
+    @Published var lastFetched: Date?
     @Published var data: [SolarForecastViewData] = []
     @Published var state: LoadState = .inactive
     @Published var tooManyRequests: Bool = false
@@ -68,6 +69,7 @@ class SolarForecastViewModel: ObservableObject, HasLoadState {
         let service = solarForecastProvider()
         let today = Calendar.current.startOfDay(for: Date())
         guard let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: today) else { return }
+        self.lastFetched = configManager.lastSolcastRefresh
 
         Task { @MainActor in
             guard privateState == .inactive else { return }
@@ -80,6 +82,7 @@ class SolarForecastViewModel: ObservableObject, HasLoadState {
                     self.tooManyRequests = data.tooManyRequests
                     let todayData = forecasts.filter { $0.periodEnd.isSame(as: today) }
                     let tomorrowData = forecasts.filter { $0.periodEnd.isSame(as: tomorrow) }
+                    self.lastFetched = configManager.lastSolcastRefresh
 
                     return SolarForecastViewData(
                         error: nil,
@@ -106,7 +109,6 @@ class SolarForecastViewModel: ObservableObject, HasLoadState {
     }
 
     func refetchSolcast() {
-        configManager.lastSolcastRefresh = .now
         load(ignoreCache: true)
     }
 

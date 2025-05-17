@@ -57,24 +57,30 @@ struct SolarForecastView: View {
                 }
 
                 if viewModel.data.anySatisfy({ $0.error == nil }) {
-                    HStack {
-                        MidYHorizontalLine()
-                            .stroke(style: StrokeStyle(lineWidth: 2, dash: [5, 5], dashPhase: 0))
-                            .foregroundStyle(Color.blue)
-                            .frame(width: 20, height: 5)
+                    VStack(alignment: .center) {
+                        HStack {
+                            MidYHorizontalLine()
+                                .stroke(style: StrokeStyle(lineWidth: 2, dash: [5, 5], dashPhase: 0))
+                                .foregroundStyle(Color.blue)
+                                .frame(width: 20, height: 5)
 
-                        Text("Prediction")
+                            Text("Prediction")
 
-                        Rectangle()
-                            .foregroundStyle(Color.yellow.gradient.opacity(0.2))
-                            .frame(width: 20, height: 15)
+                            Rectangle()
+                                .foregroundStyle(Color.yellow.gradient.opacity(0.2))
+                                .frame(width: 20, height: 15)
 
-                        Text("Range of confidence")
+                            Text("Range of confidence")
+                        }
+                        .padding(.top)
+
+                        if let date = viewModel.lastFetched {
+                            Text("Last update") + Text(" ") + Text(date, format: .dateTime)
+                        }
                     }
-                    .padding(.top)
+                    .frame(minWidth: 0, maxWidth: .infinity)
                     .font(.footnote)
                 }
-
                 refreshSolcastButton()
             }
         }

@@ -13104,16 +13104,16 @@
     "settings.yield.description" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your total daily generation will be displayed. If you have ‘Show PV power by strings’ enabled, an estimate of daily generation by string will also be displayed."
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ihre gesamte tägliche Erzeugung wird angezeigt. Wenn Sie „PV-Leistung nach Strings anzeigen“ aktiviert haben, wird auch eine Schätzung der täglichen Erzeugung pro String angezeigt."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your total daily generation will be displayed. If you have ‘Show PV power by strings’ enabled, an estimate of daily generation by string will also be displayed."
           }
         },
         "es" : {
