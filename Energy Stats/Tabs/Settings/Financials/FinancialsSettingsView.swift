@@ -47,7 +47,7 @@ struct FinancialsSettingsView: View {
                         Picker("Payment model", selection: $viewModel.earningsModel) {
                             Text("exporting").tag(EarningsModel.exported)
                             Text("generating").tag(EarningsModel.generated)
-                            Text("ct2").tag(EarningsModel.ct2)
+                            Text("CT2").tag(EarningsModel.ct2)
                         }.pickerStyle(.segmented)
                     }
 

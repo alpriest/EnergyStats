@@ -34,7 +34,7 @@ struct BatterySettingsView: View {
             Section(
                 content: {
                     HStack(alignment: .top) {
-                        Text("Capacity")
+                        Text("Storage capacity")
                         Spacer()
                         HStack(alignment: .top) {
                             if isEditingCapacity {
@@ -70,19 +70,17 @@ struct BatterySettingsView: View {
                 },
                 header: { Text("Display Options") },
                 footer: {
-                    VStack(alignment: .leading) {
-                        Text("Tap the capacity above to enter a manual value.")
-                    }
+                    VStack {
+                        Button("Recalculate capacity", action: {
+                            viewModel.recalculateBatteryCapacity()
+                        })
+                        .buttonStyle(.borderless)
+                        .padding(.bottom, 4)
 
-                    Button("Recalculate capacity", action: {
-                        viewModel.recalculateBatteryCapacity()
-                    })
-                    .buttonStyle(.borderless)
-                    .padding(.bottom, 4)
-
-                    Text("Calculated as ") +
+                        Text("Calculated as ") +
                         Text("capacity = residual / (Min SOC / 100)").italic() +
-                        Text(" where residual is estimated by your installation and may not be accurate. Tap the capacity above to enter a manual value.")
+                        Text(" where residual is estimated by your installation and may not be accurate. Tap the capacity above to enter a manual value for the size of your battery if the value shown is incorrect.")
+                    }
                 }
             ).alert("Invalid Battery Capacity", isPresented: $viewModel.showAlert, actions: {
                 Button("OK") {}

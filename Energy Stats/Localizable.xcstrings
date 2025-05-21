@@ -197,30 +197,30 @@
         }
       }
     },
-    " where residual is estimated by your installation and may not be accurate. Tap the capacity above to enter a manual value." : {
+    " where residual is estimated by your installation and may not be accurate. Tap the capacity above to enter a manual value for the size of your battery if the value shown is incorrect." : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : " wobei die Restladung durch Ihre Installation geschätzt wird und nicht akkurat sein könnte. Klicken Sie oben auf 'Kapazität', um einen manuellen Wert einzugeben."
+            "value" : " wobei der Restwert von Ihrer Installation geschätzt wird und möglicherweise nicht genau ist. Tippen Sie oben auf die Kapazität, um einen manuellen Wert für die Größe Ihres Akkus einzugeben, falls der angezeigte Wert nicht korrekt ist."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : " donde el residual es una estimación realizada por tu instalación y puede no ser precisa. Toca la capacidad anterior para ingresar un valor manual."
+            "value" : " donde el valor residual es estimado por tu instalación y puede no ser preciso. Toca la capacidad de arriba para introducir manualmente el tamaño de tu batería si el valor mostrado es incorrecto."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : " dove il residuo è stimato dalla tua installazione e potrebbe non essere preciso. Tocca la capacità sopra per inserire un valore manuale."
+            "value" : " dove il valore residuo è stimato dal tuo impianto e potrebbe non essere accurato. Tocca la capacità sopra per inserire manualmente il valore della dimensione della tua batteria se il valore mostrato non è corretto."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : " gdzie resztkowa jest szacowana przez Twoją instalację i może nie być dokładna. Dotknij powyższą pojemność, aby wprowadzić wartość ręcznie."
+            "value" : " gdzie wartość rezydualna jest szacowana przez twoją instalację i może być niedokładna. Stuknij powyższą pojemność, aby ręcznie wprowadzić rozmiar swojej baterii, jeśli wyświetlana wartość jest nieprawidłowa."
           }
         }
       }
@@ -2011,10 +2011,34 @@
     "accessibility.totalCT2IncomeToday" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ Einkommen aus CT2-Erzeugung"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%1$@ income from CT2 generation"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ de ingresos por generación CT2"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ di reddito dalla generazione CT2"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ dochodu z generowania CT2"
           }
         }
       }
@@ -2664,7 +2688,32 @@
       }
     },
     "Approximate income received from exporting energy to the grid via another inverter tracked by CT2." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ungefähres Einkommen aus der Einspeisung von Energie ins Netz über einen anderen Wechselrichter, der von CT2 erfasst wird."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingresos aproximados por exportar energía a la red a través de otro inversor monitorizado por CT2."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reddito approssimativo ricevuto dall’esportazione di energia alla rete tramite un altro inverter monitorato da CT2."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Przybliżony dochód uzyskany z eksportu energii do sieci przez inny falownik monitorowany przez CT2."
+          }
+        }
+      }
     },
     "Approximate income received from exporting energy to the grid." : {
       "localizations" : {
@@ -4653,9 +4702,6 @@
         }
       }
     },
-    "ct2" : {
-
-    },
     "CT2" : {
       "localizations" : {
         "de" : {
@@ -4713,7 +4759,7 @@
       }
     },
     "CT2 kWh * Unit Price" : {
-
+      "shouldTranslate" : false
     },
     "CT2 Settings" : {
       "localizations" : {
@@ -6249,37 +6295,33 @@
         }
       }
     },
-    "Enter the price you pay for kWh for importing electricity" : {
-      "extractionState" : "stale",
+    "Enter the price you pay per kWh for importing electricity" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Geben Sie den Preis ein, den Sie pro kWh für den Import von Strom zahlen"
+            "value" : "Geben Sie den Preis ein, den Sie pro kWh für importierten Strom zahlen"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Introduzca el precio que paga por kWh por importar electricidad"
+            "value" : "Introduce el precio que pagas por kWh por importar electricidad"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Inserisci il prezzo che paghi per kWh per importare elettricità"
+            "value" : "Inserisci il prezzo che paghi per kWh per l'importazione di elettricità"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wprowadź cenę, którą płacisz za kWh za import energii elektrycznej"
+            "value" : "Wprowadź cenę, jaką płacisz za 1 kWh importowanej energii elektrycznej"
           }
         }
       }
-    },
-    "Enter the price you pay per kWh for importing electricity" : {
-
     },
     "Enter the unit price you are paid per kWh for exporting electricity" : {
       "localizations" : {
@@ -6310,7 +6352,32 @@
       }
     },
     "Enter the unit price you are paid per kWh for exporting electricity via another inverter tracked via CT2. This will only show earnings data on the power flow page because Fox do not store historical CT2 statistics." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geben Sie den Stückpreis ein, den Sie pro kWh für die Einspeisung von Strom über einen anderen Wechselrichter erhalten, der über CT2 erfasst wird. Dies zeigt nur Ertragsdaten auf der Leistungsfluss-Seite an, da Fox keine historischen CT2-Statistiken speichert."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Introduce el precio unitario que recibes por kWh por exportar electricidad mediante otro inversor monitorizado a través de CT2. Esto solo mostrará datos de ganancias en la página de flujo de energía porque Fox no almacena estadísticas históricas de CT2."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inserisci il prezzo unitario che ricevi per kWh per l'esportazione di elettricità tramite un altro inverter monitorato tramite CT2. Questo mostrerà solo i dati sui guadagni nella pagina del flusso di potenza, poiché Fox non memorizza le statistiche storiche di CT2."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wprowadź cenę jednostkową, jaką otrzymujesz za 1 kWh eksportowanej energii elektrycznej przez inny falownik monitorowany przez CT2. Dane o zarobkach będą widoczne tylko na stronie przepływu mocy, ponieważ Fox nie przechowuje historycznych statystyk CT2."
+          }
+        }
+      }
     },
     "Enter the unit price you are paid per kWh for generating electricity" : {
       "localizations" : {
@@ -8898,7 +8965,32 @@
       }
     },
     "Logging out..." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abmeldung..."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerrando sesión..."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disconnessione in corso..."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wylogowywanie..."
+          }
+        }
+      }
     },
     "Login at https://www.foxesscloud.com/" : {
       "localizations" : {
@@ -14236,6 +14328,34 @@
         }
       }
     },
+    "Storage capacity" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Speicherkapazität"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Capacidad de almacenamiento"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Capacità di archiviazione"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pojemność pamięci"
+          }
+        }
+      }
+    },
     "Success" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -14352,34 +14472,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Systemowy"
-          }
-        }
-      }
-    },
-    "Tap the capacity above to enter a manual value." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tippen Sie oben auf die Kapazität, um einen manuellen Wert einzugeben."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Toca la capacidad arriba para ingresar un valor manual."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tocca la capacità sopra per inserire un valore manuale."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dotknij powyższej pojemności, aby wprowadzić wartość ręczną."
           }
         }
       }
