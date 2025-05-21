@@ -47,6 +47,7 @@ struct FinancialsSettingsView: View {
                         Picker("Payment model", selection: $viewModel.earningsModel) {
                             Text("exporting").tag(EarningsModel.exported)
                             Text("generating").tag(EarningsModel.generated)
+                            Text("ct2").tag(EarningsModel.ct2)
                         }.pickerStyle(.segmented)
                     }
 
@@ -56,6 +57,8 @@ struct FinancialsSettingsView: View {
                         Text("Enter the unit price you are paid per kWh for generating electricity")
                     case .exported:
                         Text("Enter the unit price you are paid per kWh for exporting electricity")
+                    case .ct2:
+                        Text("Enter the unit price you are paid per kWh for exporting electricity via another inverter tracked via CT2. This will only show earnings data on the power flow page because Fox do not store historical CT2 statistics.")
                     }
                 }
 
@@ -66,7 +69,7 @@ struct FinancialsSettingsView: View {
                         text: $viewModel.energyStatsGridImportUnitPrice
                     )
                 } footer: {
-                    Text("Enter the price you pay for kWh for importing electricity")
+                    Text("Enter the price you pay per kWh for importing electricity")
                 }
 
                 Section {} footer: {
@@ -81,21 +84,25 @@ struct FinancialsSettingsView: View {
     func energyStatsFooter() -> some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
+                Text("exported_income_short_title").bold()
+
                 switch viewModel.earningsModel {
                 case .generated:
-                    Text("generated_income_short_title").bold()
                     Text("Approximate income received from generating electricity.")
                 case .exported:
-                    Text("exported_income_short_title").bold()
                     Text("Approximate income received from exporting energy to the grid.")
+                case .ct2:
+                    Text("Approximate income received from exporting energy to the grid via another inverter tracked by CT2.")
                 }
 
                 VStack(alignment: .center) {
                     switch viewModel.earningsModel {
                     case .generated:
-                        Text("Feed-In kWh * FeedInUnitPrice").italic()
-                    case .exported:
                         Text("SolarGeneration kWh * Unit Price").italic()
+                    case .exported:
+                        Text("Feed-In kWh * FeedInUnitPrice").italic()
+                    case .ct2:
+                        Text("CT2 kWh * Unit Price").italic()
                     }
                 }.frame(maxWidth: .infinity)
             }

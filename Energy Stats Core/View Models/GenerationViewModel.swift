@@ -17,8 +17,8 @@ public enum StringType {
     case ct2
 }
 
-public struct GenerationViewModel {
-    private let pvTotal: Double
+public class GenerationViewModel {
+    private var pvTotal: Double = 0
     private let includeCT2: Bool
     private let shouldInvertCT2: Bool
     public let pv1Total: Double
@@ -27,10 +27,9 @@ public struct GenerationViewModel {
     public let pv4Total: Double
     public let pv5Total: Double
     public let pv6Total: Double
-    private let ct2Total: Double
+    public let ct2Total: Double
 
-    public init(pvTotal: Double, response: OpenHistoryResponse, includeCT2: Bool, shouldInvertCT2: Bool) {
-        self.pvTotal = pvTotal
+    public init(response: OpenHistoryResponse, includeCT2: Bool, shouldInvertCT2: Bool) {
         self.includeCT2 = includeCT2
         self.shouldInvertCT2 = shouldInvertCT2
         pv1Total = response.trapezoidalAverage(key: "pv1Power")
@@ -64,6 +63,10 @@ public struct GenerationViewModel {
                 return averageValue * dt / 3600.0
             }
             .reduce(0, +)
+    }
+
+    public func updatePvTotal(_ amount: Double) {
+        self.pvTotal = amount
     }
 
     public var todayGeneration: Double {
@@ -109,5 +112,24 @@ private extension OpenHistoryResponse {
                 return averageValue * dt / 3600.0
             }
             .reduce(0, +)
+    }
+}
+
+public enum GenerationViewModelBuilder {
+    public static func build(
+        configManager: ConfigManaging,
+        network: Networking,
+        device: Device
+    ) async throws -> GenerationViewModel {
+        try GenerationViewModel(
+            response: await Self.loadHistoryData(device: device, network: network),
+            includeCT2: configManager.shouldCombineCT2WithPVPower,
+            shouldInvertCT2: configManager.shouldInvertCT2
+        )
+    }
+
+    private static func loadHistoryData(device: Device, network: Networking) async throws -> OpenHistoryResponse {
+        let start = Calendar.current.startOfDay(for: Date())
+        return try await network.fetchHistory(deviceSN: device.deviceSN, variables: ["meterPower2", "pv1Power", "pv2Power", "pv3Power", "pv4Power", "pv5Power", "pv6Power"], start: start, end: start.addingTimeInterval(86400))
     }
 }

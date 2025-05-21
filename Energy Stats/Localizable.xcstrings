@@ -2652,6 +2652,9 @@
         }
       }
     },
+    "Approximate income received from exporting energy to the grid via another inverter tracked by CT2." : {
+
+    },
     "Approximate income received from exporting energy to the grid." : {
       "localizations" : {
         "de" : {
@@ -4639,6 +4642,9 @@
         }
       }
     },
+    "ct2" : {
+
+    },
     "CT2" : {
       "localizations" : {
         "de" : {
@@ -4694,6 +4700,9 @@
           }
         }
       }
+    },
+    "CT2 kWh * Unit Price" : {
+
     },
     "CT2 Settings" : {
       "localizations" : {
@@ -6206,6 +6215,7 @@
       }
     },
     "Enter the price you pay for kWh for importing electricity" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -6232,6 +6242,9 @@
           }
         }
       }
+    },
+    "Enter the price you pay per kWh for importing electricity" : {
+
     },
     "Enter the unit price you are paid per kWh for exporting electricity" : {
       "localizations" : {
@@ -6260,6 +6273,9 @@
           }
         }
       }
+    },
+    "Enter the unit price you are paid per kWh for exporting electricity via another inverter tracked via CT2. This will only show earnings data on the power flow page because Fox do not store historical CT2 statistics." : {
+
     },
     "Enter the unit price you are paid per kWh for generating electricity" : {
       "localizations" : {

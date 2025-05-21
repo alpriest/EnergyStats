@@ -36,7 +36,8 @@ struct ApproximationsCalculator {
         let totalsViewModel = TotalsViewModel(grid: grid,
                                               feedIn: feedIn,
                                               loads: loads,
-                                              solar: solar)
+                                              solar: solar,
+                                              ct2: 0) // ApproximationsCalculator is always called from places where we're looking at historical data, and ct2 isn't available
 
         let financialModel = EnergyStatsFinancialModel(
             totalsViewModel: totalsViewModel,

@@ -18,37 +18,33 @@ public struct CalculationBreakdown {
 }
 
 public struct TotalsViewModel {
-    public init(reports: [OpenReportResponse], deviceHasPV: Bool) {
+    public init(reports: [OpenReportResponse], generationViewModel: GenerationViewModel?) {
         let home = reports.todayValue(for: ReportVariable.loads)
         let gridExport = reports.todayValue(for: ReportVariable.feedIn)
         let gridImport = reports.todayValue(for: ReportVariable.gridConsumption)
-        let solar: Double
-        if deviceHasPV {
-            solar = reports.todayValue(for: ReportVariable.pvEnergyTotal)
-        } else {
-            let batteryCharge = reports.todayValue(for: ReportVariable.chargeEnergyToTal)
-            let batteryDischarge = reports.todayValue(for: ReportVariable.dischargeEnergyToTal)
-            solar = max(0, batteryCharge - batteryDischarge - gridImport + home + gridExport)
-        }
+        let solar = reports.todayValue(for: ReportVariable.pvEnergyTotal)
 
-        self.init(grid: gridImport, feedIn: gridExport, loads: home, solar: solar)
+        self.init(grid: gridImport, feedIn: gridExport, loads: home, solar: solar, ct2: generationViewModel?.ct2Total ?? 0)
     }
 
     public init(grid: Double,
                 feedIn: Double,
                 loads: Double,
-                solar: Double)
+                solar: Double,
+                ct2: Double)
     {
         self.home = loads
         self.gridExport = feedIn
         self.gridImport = grid
         self.solar = solar
+        self.ct2 = ct2
     }
 
     public let home: Double
     public let gridImport: Double
     public let gridExport: Double
     public let solar: Double
+    public let ct2: Double
 }
 
 extension Array where Element == OpenReportResponse {

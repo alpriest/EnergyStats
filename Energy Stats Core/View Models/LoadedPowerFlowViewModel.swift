@@ -134,7 +134,8 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
             self.configManager.showTotalYieldOnPowerFlow else { return }
 
         Task {
-            let totals = try TotalsViewModel(reports: await self.loadReportData(self.currentDevice), deviceHasPV: self.currentDevice.hasPV)
+            let generation = try await self.loadGeneration()
+            let totals = try TotalsViewModel(reports: await self.loadReportData(self.currentDevice), generationViewModel: generation)
 
             if Task.isCancelled { return }
 
@@ -143,9 +144,9 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
                 self.homeTotal = totals.home
                 self.gridImportTotal = totals.gridImport
                 self.gridExportTotal = totals.gridExport
+                generation?.updatePvTotal(totals.solar)
+                self.todaysGeneration = generation
             }
-
-            self.loadGeneration(using: totals)
         }
     }
 
@@ -161,28 +162,14 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
                                                   reportType: .month)
     }
 
-    private func loadGeneration(using totals: TotalsViewModel) {
-        guard self.configManager.showTotalYieldOnPowerFlow else { return }
+    private func loadGeneration() async throws -> GenerationViewModel? {
+        guard self.configManager.showTotalYieldOnPowerFlow else { return nil }
 
-        Task {
-            let generation = try GenerationViewModel(
-                pvTotal: totals.solar,
-                response: await self.loadHistoryData(self.currentDevice),
-                includeCT2: self.configManager.shouldCombineCT2WithPVPower,
-                shouldInvertCT2: self.configManager.shouldInvertCT2
-            )
-
-            if Task.isCancelled { return }
-
-            await MainActor.run {
-                self.todaysGeneration = generation
-            }
-        }
-    }
-
-    private func loadHistoryData(_ currentDevice: Device) async throws -> OpenHistoryResponse {
-        let start = Calendar.current.startOfDay(for: Date())
-        return try await self.network.fetchHistory(deviceSN: currentDevice.deviceSN, variables: ["meterPower2", "pv1Power", "pv2Power", "pv3Power", "pv4Power", "pv5Power", "pv6Power"], start: start, end: start.addingTimeInterval(86400))
+        return try await GenerationViewModelBuilder.build(
+            configManager: self.configManager,
+            network: self.network,
+            device: self.currentDevice
+        )
     }
 
     public static func ==(lhs: LoadedPowerFlowViewModel, rhs: LoadedPowerFlowViewModel) -> Bool {

@@ -110,7 +110,7 @@ class ContentViewModel {
     private func loadTotals(_ device: Device) async -> TotalsViewModel? {
         guard config.showGridTotalsOnPowerFlow else { return nil }
 
-        return try? TotalsViewModel(reports: await loadReportData(device), deviceHasPV: device.hasPV)
+        return try? TotalsViewModel(reports: await loadReportData(device), generationViewModel: nil)
     }
 
     private func loadReportData(_ currentDevice: Device) async throws -> [OpenReportResponse] {
