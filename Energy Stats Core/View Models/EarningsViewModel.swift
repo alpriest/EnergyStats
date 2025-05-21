@@ -72,7 +72,7 @@ public struct EnergyStatsFinancialModel {
         FinanceAmount(
             title: .gridImportAvoidedShortTitle,
             accessibilityKey: .totalAvoidedCostsToday,
-            amount: max(0, amountForIncomeCalculation - totalsViewModel.gridExport) * config.gridImportUnitPrice
+            amount: max(0, totalsViewModel.solar - totalsViewModel.gridExport) * config.gridImportUnitPrice
         )
     }
 

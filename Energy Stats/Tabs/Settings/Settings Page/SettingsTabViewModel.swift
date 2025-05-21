@@ -184,6 +184,8 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
+    @Published var isLoggingOut: Bool = false
+
     private(set) var config: ConfigManaging
     private let userManager: UserManager
     private var cancellables = Set<AnyCancellable>()
@@ -248,6 +250,7 @@ class SettingsTabViewModel: ObservableObject {
 
     @MainActor
     func logout() async {
+        isLoggingOut = true
         await userManager.logout()
     }
 
