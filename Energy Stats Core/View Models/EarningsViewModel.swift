@@ -37,6 +37,74 @@ public struct FinanceAmount: Hashable, Identifiable {
 
 public struct EnergyStatsFinancialModel {
     private let config: FinancialConfigManager
+    public var exportIncome: FinanceAmount {
+        let shortTitle: LocalizedString.Key = switch config.earningsModel {
+        case .exported: .exportedIncomeShortTitle
+        case .generated: .generatedIncomeShortTitle
+        case .ct2: .ct2IncomeShortTitle
+        }
+
+        let longTitle: LocalizedString.Key = switch config.earningsModel {
+        case .exported: .exportedIncomeLongTitle
+        case .generated: .generationIncomeLongTitle
+        case .ct2: .ct2IncomeLongTitle
+        }
+
+        let accessibilityKey: LocalizedString.Key.Accessibility = switch config.earningsModel {
+        case .exported: .totalExportIncomeToday
+        case .generated: .totalGeneratedIncomeToday
+        case .ct2: .totalCT2IncomeToday
+        }
+
+        return FinanceAmount(
+            shortTitle: shortTitle,
+            longTitle: longTitle,
+            accessibilityKey: accessibilityKey,
+            amount: amountForIncomeCalculation * config.feedInUnitPrice
+        )
+    }
+
+    public var exportBreakdown: CalculationBreakdown {
+        CalculationBreakdown(
+            formula: "\(nameForIncomeCalculationBreakdown) * feedInUnitPrice",
+            calculation: { dp in "\(amountForIncomeCalculation.roundedToString(decimalPlaces: dp)) * \(config.feedInUnitPrice.roundedToString(decimalPlaces: dp))" }
+        )
+    }
+
+    public var solarSaving: FinanceAmount {
+        FinanceAmount(
+            title: .gridImportAvoidedShortTitle,
+            accessibilityKey: .totalAvoidedCostsToday,
+            amount: max(0, totalsViewModel.solar - totalsViewModel.gridExport) * config.gridImportUnitPrice
+        )
+    }
+
+    public var solarSavingBreakdown: CalculationBreakdown {
+        CalculationBreakdown(
+            formula: "max(0, solar - gridExport) * gridImportUnitPrice",
+            calculation: { dp in "max (0, \(totalsViewModel.solar.roundedToString(decimalPlaces: dp)) - \(totalsViewModel.gridExport.roundedToString(decimalPlaces: dp))) * \(config.gridImportUnitPrice.roundedToString(decimalPlaces: dp))" }
+        )
+    }
+
+    public var total: FinanceAmount {
+        FinanceAmount(
+            title: .total,
+            accessibilityKey: .totalIncomeToday,
+            amount: exportIncome.amount + solarSaving.amount
+        )
+    }
+
+    private let totalsViewModel: TotalsViewModel
+
+    public init(totalsViewModel: TotalsViewModel, config: FinancialConfigManager) {
+        self.totalsViewModel = totalsViewModel
+        self.config = config
+    }
+
+    public func amounts() -> [FinanceAmount] {
+        [exportIncome, solarSaving, total]
+    }
+
     private var amountForIncomeCalculation: Double {
         switch config.earningsModel {
         case .exported:
@@ -57,56 +125,6 @@ public struct EnergyStatsFinancialModel {
         case .ct2:
             "CT2"
         }
-    }
-
-    public var exportIncome: FinanceAmount {
-        FinanceAmount(
-            shortTitle: config.earningsModel == .exported ? .exportedIncomeShortTitle : .generatedIncomeShortTitle,
-            longTitle: config.earningsModel == .exported ? .exportedIncomeLongTitle : .generationIncomeLongTitle,
-            accessibilityKey: config.earningsModel == .exported ? .totalExportIncomeToday : .totalGeneratedIncomeToday,
-            amount: amountForIncomeCalculation * config.feedInUnitPrice
-        )
-    }
-
-    public var solarSaving: FinanceAmount {
-        FinanceAmount(
-            title: .gridImportAvoidedShortTitle,
-            accessibilityKey: .totalAvoidedCostsToday,
-            amount: max(0, totalsViewModel.solar - totalsViewModel.gridExport) * config.gridImportUnitPrice
-        )
-    }
-
-    public var total: FinanceAmount {
-        FinanceAmount(
-            title: .total,
-            accessibilityKey: .totalIncomeToday,
-            amount: exportIncome.amount + solarSaving.amount
-        )
-    }
-
-    public var exportBreakdown: CalculationBreakdown {
-        CalculationBreakdown(
-            formula: "\(nameForIncomeCalculationBreakdown) * feedInUnitPrice",
-            calculation: { dp in "\(amountForIncomeCalculation.roundedToString(decimalPlaces: dp)) * \(config.feedInUnitPrice.roundedToString(decimalPlaces: dp))" }
-        )
-    }
-
-    public var solarSavingBreakdown: CalculationBreakdown {
-        CalculationBreakdown(
-            formula: "max(0, solar - gridExport) * gridImportUnitPrice",
-            calculation: { dp in "max (0, \(amountForIncomeCalculation.roundedToString(decimalPlaces: dp)) - \(totalsViewModel.gridExport.roundedToString(decimalPlaces: dp))) * \(config.gridImportUnitPrice.roundedToString(decimalPlaces: dp))" }
-        )
-    }
-
-    private let totalsViewModel: TotalsViewModel
-
-    public init(totalsViewModel: TotalsViewModel, config: FinancialConfigManager) {
-        self.totalsViewModel = totalsViewModel
-        self.config = config
-    }
-
-    public func amounts() -> [FinanceAmount] {
-        [exportIncome, solarSaving, total]
     }
 }
 

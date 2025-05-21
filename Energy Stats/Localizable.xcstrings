@@ -2008,6 +2008,17 @@
         }
       }
     },
+    "accessibility.totalCT2IncomeToday" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ income from CT2 generation"
+          }
+        }
+      }
+    },
     "accessibility.totalExportedToday" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -4731,6 +4742,30 @@
           }
         }
       }
+    },
+    "ct2_income" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CT2"
+          }
+        }
+      },
+      "shouldTranslate" : false
+    },
+    "ct2_income_short_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CT2"
+          }
+        }
+      },
+      "shouldTranslate" : false
     },
     "cumulate" : {
       "extractionState" : "manual",
