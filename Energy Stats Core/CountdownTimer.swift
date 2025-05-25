@@ -8,43 +8,42 @@
 import Foundation
 
 public class CountdownTimer {
+    private var task: Task<Void, Never>?
     private var ticksRemaining: Int = 0
-    @MainActor private var timer: Timer?
 
     public init() {}
 
     deinit {
-        timer?.invalidate()
+        task = nil
     }
 
-    @MainActor
     public func start(totalTicks: Int, onTick: @escaping (Int) -> Void, onCompletion: @escaping () -> Void) {
         stop()
         ticksRemaining = totalTicks
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
-            guard let self = self else { return }
+        task = Task {
+            while ticksRemaining > 0 {
+                if Task.isCancelled {
+                    return
+                }
 
-            self.ticksRemaining -= 1
+                try? await Task.sleep(for: .seconds(1))
+                ticksRemaining -= 1
+                onTick(ticksRemaining)
 
-            onTick(self.ticksRemaining)
-
-            if self.ticksRemaining <= 0 {
-                timer.invalidate()
-                onCompletion()
-                return
+                if ticksRemaining <= 0 {
+                    onCompletion()
+                }
             }
         }
     }
 
-    @MainActor
     public func stop() {
-        timer?.invalidate()
-        timer = nil
+        task?.cancel()
+        task = nil
         ticksRemaining = 0
     }
 
-    @MainActor
     public var isTicking: Bool {
-        ticksRemaining > 0 && timer != nil
+        ticksRemaining > 0 && task != nil
     }
 }

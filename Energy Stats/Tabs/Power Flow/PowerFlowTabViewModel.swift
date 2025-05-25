@@ -71,7 +71,7 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
     }
 
     func startTimer() async {
-        await self.timer.start(totalTicks: self.totalTicks) { ticksRemaining in
+        self.timer.start(totalTicks: self.totalTicks) { ticksRemaining in
             Task { @MainActor in
                 self.updateState = UpdateState(
                     text: String(key: .nextUpdateIn) + " \(PreciseDateTimeFormatter.localizedString(from: ticksRemaining))",
@@ -134,7 +134,7 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
     }
 
     func stopTimer() async {
-        await self.timer.stop()
+        self.timer.stop()
     }
 
     @MainActor
