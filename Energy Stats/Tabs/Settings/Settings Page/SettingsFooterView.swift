@@ -18,7 +18,7 @@ struct SettingsFooterView: View {
             content: {
                 VStack {
                     Button(
-                        configManager.isDemoUser ? "logout from demo" : "logout"
+                        configManager.isDemoUser ? "Logout from demo" : "Logout"
                     ) {
                         onLogout()
                     }.buttonStyle(.bordered)

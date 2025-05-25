@@ -9,11 +9,11 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct ESLabeledText: View {
-    let title: String
+    let title: LocalizedStringKey
     let value: String?
     let copiable: Bool
 
-    init(_ title: String, value: String?, copiable: Bool = false) {
+    init(_ title: LocalizedStringKey, value: String?, copiable: Bool = false) {
         self.title = title
         self.value = value
         self.copiable = copiable
@@ -24,7 +24,7 @@ struct ESLabeledText: View {
             if let value {
                 LabeledContent(title, value: value)
                     .if(copiable) {
-                        $0.alertCopy(title + ": " + value)
+                        $0.alertCopy("\(title): \(value)")
                     }
             }
         }

@@ -24,10 +24,22 @@ extension URL {
     static let getRequestCount = URL(string: "https://www.foxesscloud.com/op/v0/user/getAccessCount")!
     static let fetchDeviceSettingsItem = URL(string: "https://www.foxesscloud.com/op/v0/device/setting/get")!
     static let setDeviceSettingsItem = URL(string: "https://www.foxesscloud.com/op/v0/device/setting/set")!
+//    static let getDevicePeakShavingSettings = URL(string: "https://www.foxesscloud.com/op/v0/device/peakShaving/get")!
 }
+
+//struct OpenPeakShavingRequest: Encodable {
+//    let sn: String
+//}
 
 extension FoxAPIService {
     func openapi_fetchRealData(deviceSN: String, variables: [String]) async throws -> OpenQueryResponse {
+
+        /* Dummy */
+//        var request2 = URLRequest(url: URL.getDevicePeakShavingSettings)
+//        request2.httpMethod = "POST"
+//        request2.httpBody = try! JSONEncoder().encode(OpenPeakShavingRequest(sn: deviceSN))
+//        let t: ([OpenQueryResponse], Data) = try await fetch(request2)
+
         var request = URLRequest(url: URL.getOpenRealData)
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(OpenQueryRequest(deviceSN: deviceSN, variables: variables))

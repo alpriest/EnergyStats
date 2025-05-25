@@ -135,4 +135,5 @@ struct SummaryTabView: View {
                    networking: NetworkService.preview(),
                    appSettingsPublisher: CurrentValueSubject(.mock()),
                    solarForecastProvider: { DemoSolcast() })
+    .environment(\.locale, .init(identifier: "de"))
 }
