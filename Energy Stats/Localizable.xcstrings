@@ -7908,6 +7908,9 @@
         }
       }
     },
+    "Hello, World!" : {
+
+    },
     "Hidden" : {
       "localizations" : {
         "de" : {
@@ -10562,6 +10565,9 @@
           }
         }
       }
+    },
+    "Peak Shaving" : {
+
     },
     "peak_shaving_mode" : {
       "extractionState" : "manual",

@@ -34,4 +34,5 @@ protocol FoxAPIServicing {
     func openapi_fetchRequestCount() async throws -> ApiRequestCountResponse
     func openapi_fetchDeviceSettingsItem(deviceSN: String, item: DeviceSettingsItem) async throws -> FetchDeviceSettingsItemResponse
     func openapi_setDeviceSettingsItem(deviceSN: String, item: DeviceSettingsItem, value: String) async throws
+    func openapi_fetchPeakShavingSettings(deviceSN: String) async throws -> PeakShavingResponse
 }

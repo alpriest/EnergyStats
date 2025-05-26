@@ -28,6 +28,7 @@ public protocol Networking {
     func fetchRequestCount() async throws -> ApiRequestCountResponse
     func fetchDeviceSettingsItem(deviceSN: String, item: DeviceSettingsItem) async throws -> FetchDeviceSettingsItemResponse
     func setDeviceSettingsItem(deviceSN: String, item: DeviceSettingsItem, value: String) async throws
+    func fetchPeakShavingSettings(deviceSN: String) async throws -> PeakShavingResponse
 }
 
 public class NetworkService: Networking {
@@ -137,6 +138,10 @@ public class NetworkService: Networking {
 
     public func setDeviceSettingsItem(deviceSN: String, item: DeviceSettingsItem, value: String) async throws {
         try await api.openapi_setDeviceSettingsItem(deviceSN: deviceSN, item: item, value: value)
+    }
+
+    public func fetchPeakShavingSettings(deviceSN: String) async throws -> PeakShavingResponse {
+        try await api.openapi_fetchPeakShavingSettings(deviceSN: deviceSN)
     }
 }
 

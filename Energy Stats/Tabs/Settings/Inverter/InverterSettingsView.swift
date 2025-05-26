@@ -33,6 +33,9 @@ struct InverterSettingsView: View {
                 NavigationLink(DeviceSettingsItem.exportLimit.title) {
                     DeviceSettingItemView(item: .exportLimit, networking: networking, configManager: configManager)
                 }
+                NavigationLink("Peak Shaving") {
+                    PeakShavingView(networking: networking, config: configManager)
+                }
             }
 
             Section {

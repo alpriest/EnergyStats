@@ -229,6 +229,14 @@ class NetworkFacade: FoxAPIServicing {
             try await api.openapi_setDeviceSettingsItem(deviceSN: deviceSN, item: item, value: value)
         }
     }
+
+    func openapi_fetchPeakShavingSettings(deviceSN: String) async throws -> PeakShavingResponse {
+        if isDemoUser {
+            try await demoAPI.openapi_fetchPeakShavingSettings(deviceSN: deviceSN)
+        } else {
+            try await api.openapi_fetchPeakShavingSettings(deviceSN: deviceSN)
+        }
+    }
 }
 
 class ThrottleManager {

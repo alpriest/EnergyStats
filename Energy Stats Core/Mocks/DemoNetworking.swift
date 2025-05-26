@@ -332,6 +332,11 @@ class DemoAPI: FoxAPIServicing {
         }
     }
 
+    func openapi_fetchPeakShavingSettings(deviceSN: String) async throws -> PeakShavingResponse {
+        PeakShavingResponse(importLimit: .init(precision: 0.001, range: .init(min: 0.0, max: 10000.0), unit: "kW", value: "1000.000"),
+                            soc: .init(precision: 1.0, range: .init(min: 10.0, max: 100.0), unit: "%", value: "40"))
+    }
+
     private func data(filename: String) throws -> Data {
         guard let url = Bundle(for: type(of: self)).url(forResource: filename, withExtension: "json") else {
             return Data()

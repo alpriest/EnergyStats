@@ -33,6 +33,7 @@ enum ScreenName: String {
     case templates = "Templates"
     case workSchedule = "Work Schedule"
     case editPhase = "Edit phase"
+    case peakShaving = "Peak Shaving"
 
     var localized: String {
         NSLocalizedString(self.rawValue, comment: "")

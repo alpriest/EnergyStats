@@ -198,6 +198,10 @@ class NetworkCache: FoxAPIServicing {
     func openapi_setDeviceSettingsItem(deviceSN: String, item: DeviceSettingsItem, value: String) async throws {
         try await api.openapi_setDeviceSettingsItem(deviceSN: deviceSN, item: item, value: value)
     }
+
+    func openapi_fetchPeakShavingSettings(deviceSN: String) async throws -> PeakShavingResponse {
+        try await api.openapi_fetchPeakShavingSettings(deviceSN: deviceSN)
+    }
 }
 
 private extension NetworkCache {
