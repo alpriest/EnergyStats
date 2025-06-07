@@ -243,6 +243,8 @@ struct SchedulePhaseEditView: View {
             "workmode.forceDischarge.description"
         case .Invalid:
             nil
+        case .PeakShaving:
+            "workmode.peak_shaving.description"
         }
     }
 

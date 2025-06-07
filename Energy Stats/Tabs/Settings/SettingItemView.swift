@@ -9,7 +9,6 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct SettingItemView: View {
-    @State private var isValid: Bool = false
     let name: String
     let item: SettingItem
     let onChange: (String) -> Void
@@ -18,41 +17,25 @@ struct SettingItemView: View {
         self.name = name
         self.item = item
         self.onChange = onChange
-
-        isValid = validate(item.value)
     }
 
     var body: some View {
         let textBinding = Binding<String>(
             get: { self.item.value },
-            set: { newValue in
-                isValid = validate(newValue)
-                if isValid {
-                    onChange(newValue)
-                }
-            }
+            set: { onChange($0) }
         )
 
-        HStack {
+        HStack(spacing: 0) {
             Text(name)
             Spacer()
-            Group {
-                NumberTextField(name, text: textBinding)
+            HStack {
+                NumberTextField("", text: textBinding)
+                    .frame(width: 100)
                     .multilineTextAlignment(.trailing)
                 Text(item.unit)
+                    .frame(width: 30, alignment: .leading)
             }
-            .foregroundStyle(textColor)
         }
-    }
-
-    private func validate(_ newValue: String) -> Bool {
-        guard let doubleValue = Double(newValue) else { return false }
-        return item.range.min <= doubleValue &&
-            doubleValue <= item.range.max
-    }
-
-    var textColor: Color {
-        isValid ? Color.textNotFlowing : Color.linesNegative
     }
 }
 

@@ -181,6 +181,7 @@
 		41777F5F2CB6D70B00507E4B /* StatsWidgetGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41777F5E2CB6D70A00507E4B /* StatsWidgetGraphView.swift */; };
 		417AA21A2A12454A0073CD34 /* StatsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AA2192A12454A0073CD34 /* StatsTabView.swift */; };
 		417AA21D2A1245C00073CD34 /* StatsTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AA21C2A1245C00073CD34 /* StatsTabViewModel.swift */; };
+		417CE6EF2DE660B9003D5F64 /* String+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417CE6EE2DE660B4003D5F64 /* String+Double.swift */; };
 		418024E22AD16D00009A2625 /* String+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418024E12AD16D00009A2625 /* String+Currency.swift */; };
 		418045C62C80D8090006A6E0 /* EarningsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418045C52C80D8090006A6E0 /* EarningsModel.swift */; };
 		418141452A12BABA00FFC6A6 /* StatsGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418141442A12BABA00FFC6A6 /* StatsGraphView.swift */; };
@@ -680,6 +681,7 @@
 		41777F5E2CB6D70A00507E4B /* StatsWidgetGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsWidgetGraphView.swift; sourceTree = "<group>"; };
 		417AA2192A12454A0073CD34 /* StatsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTabView.swift; sourceTree = "<group>"; };
 		417AA21C2A1245C00073CD34 /* StatsTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTabViewModel.swift; sourceTree = "<group>"; };
+		417CE6EE2DE660B4003D5F64 /* String+Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Double.swift"; sourceTree = "<group>"; };
 		418024E12AD16D00009A2625 /* String+Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Currency.swift"; sourceTree = "<group>"; };
 		418045C52C80D8090006A6E0 /* EarningsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarningsModel.swift; sourceTree = "<group>"; };
 		418141442A12BABA00FFC6A6 /* StatsGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGraphView.swift; sourceTree = "<group>"; };
@@ -962,6 +964,7 @@
 		4103D1E629DB6D2C001B0BC8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				417CE6EE2DE660B4003D5F64 /* String+Double.swift */,
 				415F0BDA2D9D541F003EB760 /* String+Localised.swift */,
 				414160282D85CABC009E0096 /* View+IconSize.swift */,
 				416AE44C2A821E4F003D0122 /* AlertContent.swift */,
@@ -2359,6 +2362,7 @@
 				4128874E2BE7CFD5007E9532 /* HomeEnergyStateManagerConfigAdapter.swift in Sources */,
 				4155D70D2B28FC920071346A /* Optional+Int.swift in Sources */,
 				4156A22F2CB6770A00099A6A /* SolcastErrorAlertView.swift in Sources */,
+				417CE6EF2DE660B9003D5F64 /* String+Double.swift in Sources */,
 				41E165BD2B0BE33E00B17590 /* Array+Any.swift in Sources */,
 				41A715932BE0CD4700560628 /* LoadState.swift in Sources */,
 				41757BBD2A90A06E00573FB4 /* LocalizedString.swift in Sources */,

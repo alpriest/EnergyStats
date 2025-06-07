@@ -297,9 +297,40 @@ public struct SchedulePhaseNetworkModel: Codable {
     }
 }
 
-public struct ScheduleResponse: Codable {
+public struct ScheduleResponse: Decodable {
     public let enable: Int
     public let groups: [SchedulePhaseNetworkModel]
+    public let workmodes: [WorkMode]
+
+    enum CodingKeys: CodingKey {
+        case enable
+        case groups
+        case properties
+    }
+
+    private enum PropertiesCodingKeys: CodingKey {
+        case workmode
+    }
+
+    private enum WorkmodeCodingKeys: String, CodingKey {
+        case enumList
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.enable = try container.decode(Int.self, forKey: .enable)
+        self.groups = try container.decode([SchedulePhaseNetworkModel].self, forKey: .groups)
+
+        let properties = try container.nestedContainer(keyedBy: PropertiesCodingKeys.self, forKey: .properties)
+        let workmodeContainer = try properties.nestedContainer(keyedBy: WorkmodeCodingKeys.self, forKey: .workmode)
+        self.workmodes = try workmodeContainer.decode([WorkMode].self, forKey: .enumList)
+    }
+
+    public init(enable: Int, groups: [SchedulePhaseNetworkModel], workmodes: [WorkMode]) {
+        self.enable = enable
+        self.groups = groups
+        self.workmodes = workmodes
+    }
 }
 
 public struct SetCurrentScheduleRequest: Codable {

@@ -73,6 +73,8 @@ extension FoxAPIService {
                     throw NetworkError.badCredentials
                 } else if networkResponse.errno == 40401 {
                     throw NetworkError.tryLater
+                } else if networkResponse.errno == 40402 {
+                    throw NetworkError.apiRequestLimitExhausted
                 } else if networkResponse.errno == 30000 {
                     throw NetworkError.maintenanceMode
                 } else {

@@ -3226,6 +3226,34 @@
         }
       }
     },
+    "Battery threshold SOC" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Batterieschwellenwert SOC"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Umbral de batería SOC"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Soglia della batteria SOC"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Próg baterii SOC"
+          }
+        }
+      }
+    },
     "Battery versions" : {
       "localizations" : {
         "de" : {
@@ -7908,9 +7936,6 @@
         }
       }
     },
-    "Hello, World!" : {
-
-    },
     "Hidden" : {
       "localizations" : {
         "de" : {
@@ -8233,6 +8258,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jeśli niedawno zaktualizowałeś ustawienia WiFi i potrzebujesz pomocy w ponownym połączeniu inwertera, kliknij poniżej, aby obejrzeć szczegółowy poradnik wideo."
+          }
+        }
+      }
+    },
+    "Import limit" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importlimit"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Límite de importación"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Limite di importazione"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Limit importu"
           }
         }
       }
@@ -8706,6 +8759,9 @@
           }
         }
       }
+    },
+    "kW" : {
+      "shouldTranslate" : false
     },
     "kWh" : {
       "localizations" : {
@@ -10567,7 +10623,60 @@
       }
     },
     "Peak Shaving" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lastspitzenkappung"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reducción de picos"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Taglio dei picchi"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ograniczanie szczytów zużycia"
+          }
+        }
+      }
+    },
+    "Peak shaving is not available. This could be due to your inverter firmware or model.\n\nPlease contact FoxESS for further information." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lastspitzenkappung ist nicht verfügbar. Dies könnte an der Firmware oder dem Modell Ihres Wechselrichters liegen.\n\nBitte kontaktieren Sie FoxESS für weitere Informationen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La reducción de picos no está disponible. Esto podría deberse al firmware o modelo de su inversor.\n\nPóngase en contacto con FoxESS para obtener más información."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il taglio dei picchi non è disponibile. Questo potrebbe dipendere dal firmware o dal modello del tuo inverter.\n\nContatta FoxESS per ulteriori informazioni."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ograniczanie szczytów zużycia jest niedostępne. Może to być spowodowane oprogramowaniem układowym lub modelem falownika.\n\nSkontaktuj się z FoxESS, aby uzyskać więcej informacji."
+          }
+        }
+      }
     },
     "peak_shaving_mode" : {
       "extractionState" : "manual",
@@ -16245,6 +16354,41 @@
         }
       }
     },
+    "workmode.peak_shaving.description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dieser Modus ermöglicht es Ihnen, Ihre maximale Netzbezugslast zu begrenzen, indem Sie einen Schwellenwert für den SoC und eine Leistungsgrenze festlegen. Wenn der Batterie-SoC höher ist als der von Ihnen festgelegte Schwellenwert, arbeitet der Wechselrichter im Selbstverbrauchsmodus und nutzt die Batterie zur Deckung Ihres Verbrauchs, wodurch Ihr Netzbezug reduziert wird.\n\nWenn der Batterie-SoC dem Schwellenwert entspricht oder darunter liegt, wird Ihr Verbrauch durch das Netz gedeckt, solange dieser unterhalb der festgelegten Leistungsgrenze bleibt. Überschreitet Ihr Verbrauch die Leistungsgrenze, springt der Wechselrichter ein und liefert die Differenz zwischen Ihrem Verbrauch und der Leistungsgrenze. Dies reduziert Verbrauchsspitzen und wird in Regionen eingesetzt, in denen es eine Strafe gibt, wenn Ihr maximaler Netzbezug die zugewiesene Leistungsgrenze überschreitet.\n\nWenn der Batterie-SoC unter dem Schwellenwert liegt und Ihr Verbrauch unter der Leistungsgrenze bleibt, lädt der Wechselrichter die Batterie mithilfe von Netzstrom wieder auf, bis der Schwellenwert erreicht ist. Auf diese Weise hält der Wechselrichter den Ladezustand aufrecht, um weiterhin Lastspitzen zu kappen.\n\nWenn die Batterie den minimalen SoC (im Netzbetrieb) erreicht, beendet der Wechselrichter die Lastspitzenkappung und Ihr gesamter Verbrauch wird vom Netz gedeckt."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This mode allows you to limit your peak grid import by setting a threshold SoC and a power limit. When the battery SoC is greater than the threshold SoC you have set, the inverter operates in Self Use mode, using the battery to supply your consumption, reducing your import.\n\nWhen the battery SoC is at, or below the threshold SoC, your consumption is supplied by the grid as long as this consumption is below the power limit. If your consumption goes above the set power limit, the inverter steps in to supply the difference between your consumption and the power limit. This reduces the peaks in your consumption and is used in regions where there is a penalty if your peak import exceeds your allocated power limit.\n\nWhen the battery SoC is below the threshold SoC and your consumption is less than the power limit, the inverter will consume grid power to recharge the battery back up to your threshold SoC. In this way, the inverter maintains the battery charge to allow it to continue peak shaving.\n\nIf the battery drops to Min SoC (on grid), the inverter stops peak shaving and all of your consumption is drawn from the grid."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este modo permite limitar el pico de importación desde la red configurando un umbral de SoC y un límite de potencia. Cuando el SoC de la batería es superior al umbral configurado, el inversor funciona en modo Autoconsumo, utilizando la batería para cubrir el consumo y reducir la importación desde la red.\n\nCuando el SoC de la batería está en o por debajo del umbral, el consumo se suministra desde la red mientras esté por debajo del límite de potencia. Si el consumo supera ese límite, el inversor se activa para suministrar la diferencia entre el consumo total y el límite de potencia. Esto reduce los picos de consumo y se utiliza en regiones donde hay penalizaciones si el pico de importación supera el límite asignado.\n\nCuando el SoC de la batería está por debajo del umbral y el consumo es inferior al límite de potencia, el inversor utilizará energía de la red para recargar la batería hasta alcanzar el umbral. De este modo, el inversor mantiene la carga de la batería para seguir reduciendo los picos.\n\nSi la batería cae hasta el SoC mínimo (en red), el inversor deja de reducir los picos y todo el consumo se toma de la red."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Questa modalità consente di limitare l'importazione massima dalla rete impostando una soglia di SoC e un limite di potenza. Quando il SoC della batteria è superiore alla soglia impostata, l'inverter opera in modalità Autoconsumo, utilizzando la batteria per soddisfare i consumi e ridurre l'importazione dalla rete.\n\nQuando il SoC della batteria è pari o inferiore alla soglia, il consumo viene alimentato dalla rete finché rimane al di sotto del limite di potenza impostato. Se il consumo supera tale limite, l'inverter interviene per fornire la differenza tra il consumo effettivo e il limite di potenza, riducendo così i picchi di consumo. Questo è utile in regioni dove si applicano penalità se l'importazione supera il limite assegnato.\n\nQuando il SoC della batteria è inferiore alla soglia ma il consumo è inferiore al limite di potenza, l'inverter utilizza l'energia della rete per ricaricare la batteria fino al raggiungimento della soglia impostata. In questo modo, l'inverter mantiene la carica della batteria per continuare il taglio dei picchi.\n\nSe la batteria scende al SoC minimo (in modalità rete), l'inverter interrompe il taglio dei picchi e tutto il consumo viene prelevato dalla rete."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ten tryb umożliwia ograniczenie maksymalnego importu energii z sieci poprzez ustawienie progu SoC i limitu mocy. Gdy poziom naładowania baterii (SoC) jest wyższy niż ustawiony próg, falownik działa w trybie autokonsumpcji, wykorzystując baterię do zasilania zużycia i zmniejszając pobór z sieci.\n\nGdy SoC baterii jest równy progowi lub niższy, zużycie jest pokrywane z sieci, o ile mieści się w limicie mocy. Jeśli zużycie przekroczy ten limit, falownik włącza się i dostarcza różnicę między zużyciem a limitem mocy. Redukuje to szczytowe wartości zużycia i jest stosowane w regionach, gdzie przekroczenie przydzielonego limitu importu wiąże się z karami.\n\nGdy SoC baterii jest poniżej progu, ale zużycie jest niższe niż limit mocy, falownik pobiera energię z sieci, aby naładować baterię z powrotem do progu. W ten sposób utrzymuje naładowanie baterii, aby kontynuować ograniczanie szczytów.\n\nJeśli bateria spadnie do minimalnego SoC (przy pracy z siecią), falownik przestaje ograniczać szczyty, a całe zużycie pochodzi z sieci."
+          }
+        }
+      }
+    },
     "workmode.self_use_mode.description" : {
       "comment" : "Inverter page",
       "extractionState" : "manual",
@@ -16697,6 +16841,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Twoje prognozy Solcast są pobierane, gdy odwiedzasz kartę Podsumowanie (maksymalnie raz na 8 godzin). Pamiętaj, że Solcast dostarcza tylko dane przyszłe."
+          }
+        }
+      }
+    },
+    "Your system monitors the power being imported from the grid. If the import exceeds your Import Limit of %@ and your battery's state of charge (SOC) is above %@%%, the system discharges the battery to supply the excess demand, thereby “shaving” the peak load from the grid.\n\nThis operation continues as long as the battery’s state of charge (SOC) is above a certain threshold SOC." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ihr System überwacht die aus dem Netz importierte Leistung. Wenn der Import Ihr Importlimit von %1$@ überschreitet und der Ladezustand (SOC) Ihrer Batterie über %2$@%% liegt, entlädt das System die Batterie, um den überschüssigen Bedarf zu decken und so die Spitzenlast vom Netz zu „kappen“.\n\nDieser Vorgang wird fortgesetzt, solange der Ladezustand (SOC) der Batterie über einem bestimmten Schwellenwert liegt."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Your system monitors the power being imported from the grid. If the import exceeds your Import Limit of %1$@ and your battery's state of charge (SOC) is above %2$@%%, the system discharges the battery to supply the excess demand, thereby “shaving” the peak load from the grid.\n\nThis operation continues as long as the battery’s state of charge (SOC) is above a certain threshold SOC."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu sistema supervisa la energía importada de la red. Si la importación supera tu Límite de importación de %1$@ y el estado de carga (SOC) de la batería está por encima de %2$@%%, el sistema descargará la batería para satisfacer la demanda adicional, “recortando” así la carga pico de la red.\n\nEsta operación continúa mientras el estado de carga (SOC) de la batería se mantenga por encima de un umbral determinado."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il tuo sistema monitora l'energia importata dalla rete. Se l'importazione supera il tuo Limite di importazione di %1$@ e lo stato di carica (SOC) della batteria è superiore a %2$@%%, il sistema scarica la batteria per soddisfare la domanda in eccesso, \"tagliando\" così il carico di picco dalla rete.\n\nQuesta operazione continua finché lo stato di carica (SOC) della batteria rimane al di sopra di una certa soglia."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Twój system monitoruje moc pobieraną z sieci. Jeśli import przekroczy limit importu wynoszący %1$@, a stan naładowania baterii (SOC) będzie wyższy niż %2$@%%, system zacznie rozładowywać baterię, aby pokryć nadmiarowe zapotrzebowanie i tym samym „ściąć” szczytowe obciążenie z sieci.\n\nTa operacja trwa tak długo, jak długo stan naładowania baterii (SOC) pozostaje powyżej określonego progu."
           }
         }
       }

@@ -277,6 +277,14 @@ class DemoAPI: FoxAPIServicing {
                     fdPwr: 3500,
                     maxSoc: 100
                 )
+            ],
+            workmodes: [
+                WorkMode.ForceDischarge,
+                .PeakShaving,
+                .Feedin,
+                .Backup,
+                .SelfUse,
+                .ForceCharge
             ]
         )
     }

@@ -65,10 +65,13 @@ struct APIKeyLoginView: View {
         .padding()
         .onReceive(userManager.$state) { state in
             if case let .error(error, message) = state {
-                if let cause = error as? NetworkError,
-                   case NetworkError.invalidToken = cause
-                {
-                    errorMessage = "Your API token is invalid."
+                if let cause = error as? NetworkError {
+                    switch cause {
+                    case .invalidToken:
+                        errorMessage = "Your API token is invalid."
+                    default:
+                        errorMessage = cause.errorDescription
+                    }
                 } else {
                     errorMessage = message
                 }

@@ -15,6 +15,7 @@ public enum WorkMode: String, CaseIterable, Codable, RawRepresentable {
     case ForceCharge
     case ForceDischarge
     case Invalid
+    case PeakShaving
 
     public var title: String {
         switch self {
@@ -28,6 +29,8 @@ public enum WorkMode: String, CaseIterable, Codable, RawRepresentable {
             return "Force Charge"
         case .ForceDischarge:
             return "Force Discharge"
+        case .PeakShaving:
+            return "Peak Shaving"
         case .Invalid:
             return ""
         }

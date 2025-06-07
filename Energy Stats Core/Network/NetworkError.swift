@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUICore
 
 public enum NetworkError: LocalizedError, CustomStringConvertible, Equatable {
     case invalidResponse(_ url: URL?, _ responseCode: Int?)
@@ -20,6 +21,7 @@ public enum NetworkError: LocalizedError, CustomStringConvertible, Equatable {
     case missingData
     case unknown(_ message: String)
     case requestRequiresSignature
+    case apiRequestLimitExhausted
 
     public var description: String {
         let builder = PartBuilder()
@@ -32,25 +34,27 @@ public enum NetworkError: LocalizedError, CustomStringConvertible, Equatable {
         case .invalidConfiguration(let reason):
             builder.append("Invalid configuration", reason)
         case .badCredentials:
-            builder.append(String(localized: "Bad credentials"))
+            builder.append("Bad credentials")
         case .foxServerError(let code, let message):
-            builder.append(String("Fox OpenAPI servers returned error code: \(code) \(message)"))
+            builder.append(String("Fox OpenAPI servers returned error code: ") + String("\(code) \(message)"))
         case .invalidToken:
-            builder.append(String(localized: "Invalid token. Please logout and login again."))
+            builder.append("Invalid token. Please logout and login again.")
         case .tryLater:
-            builder.append(String(localized: "You've hit the server rate limit. Please try later."))
+            builder.append("You've hit the server rate limit. Please try later.")
         case .offline:
-            builder.append(String(localized: "You appear to be offline. Please check your connection."))
+            builder.append("You appear to be offline. Please check your connection.")
         case .maintenanceMode:
-            builder.append(String(localized: "Fox servers are offline. Please try later."))
+            builder.append("Fox servers are offline. Please try later.")
         case .missingData:
-            builder.append(String(localized: "No data was returned"))
+            builder.append("No data was returned")
         case .requestRequiresSignature:
-            builder.append(String(localized: "Fox no longer permits these requests."))
+            builder.append("Fox no longer permits these requests")
         case .timedOut:
-            builder.append(String(localized: "Request timed out"))
+            builder.append("Request timed out")
         case .unknown(let message):
             builder.append(message)
+        case .apiRequestLimitExhausted:
+            builder.append("You have no more OpenAPI requests left. If this is unexpected please check the 'number of calls per day' on the API Management page of https://www.foxesscloud.com")
         }
 
         return builder.formatted()

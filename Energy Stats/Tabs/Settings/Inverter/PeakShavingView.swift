@@ -12,8 +12,9 @@ class PeakShavingViewModel: ObservableObject, HasLoadState {
     let networking: Networking
     let config: ConfigManaging
     @Published var state: LoadState = .inactive
-    @Published var importLimit: SettingItem?
-    @Published var soc: SettingItem?
+    @Published var importLimit: String = ""
+    @Published var soc: String = ""
+    @Published var supported = false
 
     init(networking: Networking, config: ConfigManaging) {
         self.networking = networking
@@ -31,8 +32,9 @@ class PeakShavingViewModel: ObservableObject, HasLoadState {
             do {
                 let settings = try await networking.fetchPeakShavingSettings(deviceSN: deviceSN)
 
-                self.importLimit = settings.importLimit
-                self.soc = settings.soc
+                self.importLimit = settings.importLimit.value.removingEmptyDecimals()
+                self.soc = settings.soc.value
+                self.supported = true
 
                 await setState(.inactive)
             } catch {
@@ -54,27 +56,43 @@ struct PeakShavingView: View {
     }
 
     var body: some View {
-        Form {
-            Section {
-                VStack {
-                    if let importLimit = viewModel.importLimit {
-                        SettingItemView(
-                            name: "Import limit",
-                            item: importLimit,
-                            onChange: { _ in }
-                        )
-                    }
+        VStack(spacing: 0) {
+            Form {
+                if viewModel.supported {
+                    Section {
+                        VStack {
+                            HStack {
+                                Text("Import limit")
+                                Spacer()
+                                NumberTextField("Import limit", text: $viewModel.importLimit)
+                                    .frame(width: 80)
+                                    .multilineTextAlignment(.trailing)
+                                Text("kW")
+                                    .frame(width: 30)
+                            }
 
-                    if let soc = viewModel.soc {
-                        SettingItemView(
-                            name: "Threshold SOC",
-                            item: soc,
-                            onChange: { _ in }
-                        )
+                            HStack {
+                                Text("Battery threshold SOC")
+                                Spacer()
+                                NumberTextField("Battery threshold SOC", text: $viewModel.soc)
+                                    .frame(width: 80)
+                                    .multilineTextAlignment(.trailing)
+                                Text("%")
+                                    .frame(width: 30)
+                            }
+                        }
+                    } footer: {
+                        VStack(alignment: .leading) {
+                            Text("Your system monitors the power being imported from the grid. If the import exceeds your Import Limit of \(viewModel.importLimit) and your battery's state of charge (SOC) is above \(viewModel.soc)%, the system discharges the battery to supply the excess demand, thereby “shaving” the peak load from the grid.\n\nThis operation continues as long as the battery’s state of charge (SOC) is above a certain threshold SOC.\n\nPeak shaving only operates when you have the Peak Shaving mode enabled from the Inverter scheduler.")
+                        }
                     }
+                } else {
+                    Text("Peak shaving is not available. This could be due to your inverter firmware or model.\n\nPlease contact FoxESS for further information.")
                 }
-            } footer: {
-                Text("When peak shaving is enabled, the system monitors the power being imported from the grid. If the import exceeds a predefined Import Limit, the system discharges the battery to supply the excess demand, thereby “shaving” the peak load from the grid. This operation continues as long as the battery’s state of charge (SOC) is above a certain Threshold SOC.")
+            }
+
+            BottomButtonsView {
+                // TODO:
             }
         }
         .navigationTitle(.peakShaving)
@@ -84,6 +102,8 @@ struct PeakShavingView: View {
 }
 
 #Preview {
-    PeakShavingView(networking: NetworkService.preview(),
-                    config: ConfigManager.preview())
+    NavigationStack {
+        PeakShavingView(networking: NetworkService.preview(),
+                        config: ConfigManager.preview())
+    }
 }
