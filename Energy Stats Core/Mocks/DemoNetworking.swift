@@ -34,6 +34,7 @@ public enum DemoAPIRequest {
     case openapi_fetchPowerStationDetail
     case openapi_fetchDeviceSettingsItem
     case openapi_setDeviceSettingsItem
+    case openapi_setPeakShavingSettings
 }
 
 class DemoAPI: FoxAPIServicing {
@@ -340,9 +341,15 @@ class DemoAPI: FoxAPIServicing {
         }
     }
 
-    func openapi_fetchPeakShavingSettings(deviceSN: String) async throws -> PeakShavingResponse {
-        PeakShavingResponse(importLimit: .init(precision: 0.001, range: .init(min: 0.0, max: 10000.0), unit: "kW", value: "1000.000"),
-                            soc: .init(precision: 1.0, range: .init(min: 10.0, max: 100.0), unit: "%", value: "40"))
+    func openapi_fetchPeakShavingSettings(deviceSN: String) async throws -> FetchPeakShavingSettingsResponse {
+        FetchPeakShavingSettingsResponse(importLimit: .init(precision: 0.001, range: .init(min: 0.0, max: 10000.0), unit: "kW", value: "1000.000"),
+                                         soc: .init(precision: 1.0, range: .init(min: 10.0, max: 100.0), unit: "%", value: "40"))
+    }
+
+    func openapi_setPeakShavingSettings(deviceSN: String, importLimit: Double, soc: Int) async throws {
+        if callsToThrow.contains(.openapi_setPeakShavingSettings) {
+            throw NetworkError.missingData
+        }
     }
 
     private func data(filename: String) throws -> Data {
@@ -418,7 +425,7 @@ public class MockConfig: Config {
     public var ct2DisplayMode: CT2DisplayMode = .hidden
     public var seenTips: [TipType] = []
     public var shouldCombineCT2WithLoadsPower: Bool = false
-    public var deviceSupportsScheduleMaxSOC: [String : Bool] = [:]
+    public var deviceSupportsScheduleMaxSOC: [String: Bool] = [:]
 }
 
 public extension SolcastSite {

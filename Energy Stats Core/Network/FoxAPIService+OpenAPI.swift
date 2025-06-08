@@ -25,7 +25,7 @@ extension URL {
     static let fetchDeviceSettingsItem = URL(string: "https://www.foxesscloud.com/op/v0/device/setting/get")!
     static let setDeviceSettingsItem = URL(string: "https://www.foxesscloud.com/op/v0/device/setting/set")!
     static let getDevicePeakShavingSettings = URL(string: "https://www.foxesscloud.com/op/v0/device/peakShaving/get")!
-    static let setDevicePeakShavingSettings = URL(string: "https://www.foxesscloud.com/op/v0/device/peakShaving/get")!
+    static let setDevicePeakShavingSettings = URL(string: "https://www.foxesscloud.com/op/v0/device/peakShaving/set")!
 }
 
 extension FoxAPIService {
@@ -208,12 +208,24 @@ extension FoxAPIService {
         }
     }
 
-    func openapi_fetchPeakShavingSettings(deviceSN: String) async throws -> PeakShavingResponse {
+    func openapi_fetchPeakShavingSettings(deviceSN: String) async throws -> FetchPeakShavingSettingsResponse {
         var request = URLRequest(url: URL.getDevicePeakShavingSettings)
         request.httpMethod = "POST"
-        request.httpBody = try! JSONEncoder().encode(PeakShavingRequest(sn: deviceSN))
+        request.httpBody = try! JSONEncoder().encode(FetchPeakShavingSettingsRequest(sn: deviceSN))
 
-        let result: (PeakShavingResponse, Data) = try await fetch(request)
+        let result: (FetchPeakShavingSettingsResponse, Data) = try await fetch(request)
         return result.0
+    }
+
+    func openapi_setPeakShavingSettings(deviceSN: String, importLimit: Double, soc: Int) async throws {
+        var request = URLRequest(url: URL.setDevicePeakShavingSettings)
+        request.httpMethod = "POST"
+        request.httpBody = try! JSONEncoder().encode(SetPeakShavingSettingsRequest(sn: deviceSN, importLimit: importLimit, soc: soc))
+
+        do {
+            let _: (String, Data) = try await fetch(request)
+        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
+            // Ignore
+        }
     }
 }

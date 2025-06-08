@@ -15,6 +15,7 @@ class PeakShavingViewModel: ObservableObject, HasLoadState {
     @Published var importLimit: String = ""
     @Published var soc: String = ""
     @Published var supported = false
+    @Published var alertContent: AlertContent?
 
     init(networking: Networking, config: ConfigManaging) {
         self.networking = networking
@@ -43,6 +44,27 @@ class PeakShavingViewModel: ObservableObject, HasLoadState {
                 } else {
                     await setState(.error(error, "Could not load settings"))
                 }
+            }
+        }
+    }
+
+    func save() {
+        Task { @MainActor in
+            guard state == .inactive else { return }
+            guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
+            guard let importLimit = Double(importLimit), let soc = Int(soc) else { return }
+            await setState(.active(.saving))
+
+            do {
+                try await networking.setPeakShavingSettings(
+                    deviceSN: deviceSN,
+                    importLimit: importLimit,
+                    soc: soc
+                )
+                alertContent = AlertContent(title: "Success", message: "peak_shaving_settings_saved")
+                await setState(.inactive)
+            } catch {
+                await setState(.error(error, "Could not save settings"))
             }
         }
     }
@@ -92,12 +114,13 @@ struct PeakShavingView: View {
             }
 
             BottomButtonsView {
-                // TODO:
+                viewModel.save()
             }
         }
         .navigationTitle(.peakShaving)
         .navigationBarTitleDisplayMode(.inline)
         .loadable(viewModel.state, retry: { viewModel.load() })
+        .alert(alertContent: $viewModel.alertContent)
     }
 }
 

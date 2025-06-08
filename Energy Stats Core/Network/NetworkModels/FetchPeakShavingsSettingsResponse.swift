@@ -1,15 +1,21 @@
 //
-//  Untitled.swift
+//  FetchPeakShavingsSettingsResponse.swift
 //  Energy Stats
 //
 //  Created by Alistair Priest on 25/05/2025.
 //
 
-struct PeakShavingRequest: Encodable {
+struct SetPeakShavingSettingsRequest: Encodable {
+    let sn: String
+    let importLimit: Double
+    let soc: Int
+}
+
+struct FetchPeakShavingSettingsRequest: Encodable {
     let sn: String
 }
 
-public struct PeakShavingResponse: Decodable {
+public struct FetchPeakShavingSettingsResponse: Decodable {
     public let importLimit: SettingItem
     public let soc: SettingItem
 

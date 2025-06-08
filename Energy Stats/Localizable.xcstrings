@@ -10713,6 +10713,41 @@
         }
       }
     },
+    "peak_shaving_settings_saved" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ihre Peak-Shaving-Einstellungen wurden gespeichert"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your peak shaving settings were saved"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se guardaron tus ajustes de reducción de picos"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le impostazioni di peak shaving sono state salvate"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Twoje ustawienia ograniczania szczytów zostały zapisane"
+          }
+        }
+      }
+    },
     "Please be cautious and only change this setting if you know what you are doing." : {
       "localizations" : {
         "de" : {
@@ -16845,47 +16880,36 @@
         }
       }
     },
-    "Your system monitors the power being imported from the grid. If the import exceeds your Import Limit of %@ and your battery's state of charge (SOC) is above %@%%, the system discharges the battery to supply the excess demand, thereby “shaving” the peak load from the grid.\n\nThis operation continues as long as the battery’s state of charge (SOC) is above a certain threshold SOC." : {
-      "extractionState" : "stale",
+    "Your system monitors the power being imported from the grid. If the import exceeds your Import Limit of %@ and your battery's state of charge (SOC) is above %@%%, the system discharges the battery to supply the excess demand, thereby “shaving” the peak load from the grid.\n\nThis operation continues as long as the battery’s state of charge (SOC) is above a certain threshold SOC.\n\nPeak shaving only operates when you have the Peak Shaving mode enabled from the Inverter scheduler." : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ihr System überwacht die aus dem Netz importierte Leistung. Wenn der Import Ihr Importlimit von %1$@ überschreitet und der Ladezustand (SOC) Ihrer Batterie über %2$@%% liegt, entlädt das System die Batterie, um den überschüssigen Bedarf zu decken und so die Spitzenlast vom Netz zu „kappen“.\n\nDieser Vorgang wird fortgesetzt, solange der Ladezustand (SOC) der Batterie über einem bestimmten Schwellenwert liegt."
+            "value" : "Ihr System überwacht den Strom, der aus dem Netz importiert wird. Wenn der Import Ihren Importgrenzwert von %1$@ überschreitet und der Ladezustand (SOC) Ihrer Batterie über %2$@%% liegt, entlädt das System die Batterie, um den zusätzlichen Bedarf zu decken und so die Spitzenlast vom Netz zu „kappen“.\n\nDieser Vorgang wird fortgesetzt, solange der Ladezustand (SOC) der Batterie über einem bestimmten Schwellenwert liegt.\n\nPeak Shaving funktioniert nur, wenn der Modus „Peak Shaving“ im Wechselrichter-Zeitplan aktiviert ist."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Your system monitors the power being imported from the grid. If the import exceeds your Import Limit of %1$@ and your battery's state of charge (SOC) is above %2$@%%, the system discharges the battery to supply the excess demand, thereby “shaving” the peak load from the grid.\n\nThis operation continues as long as the battery’s state of charge (SOC) is above a certain threshold SOC."
+            "value" : "Your system monitors the power being imported from the grid. If the import exceeds your Import Limit of %1$@ and your battery's state of charge (SOC) is above %2$@%%, the system discharges the battery to supply the excess demand, thereby “shaving” the peak load from the grid.\n\nThis operation continues as long as the battery’s state of charge (SOC) is above a certain threshold SOC.\n\nPeak shaving only operates when you have the Peak Shaving mode enabled from the Inverter scheduler."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tu sistema supervisa la energía importada de la red. Si la importación supera tu Límite de importación de %1$@ y el estado de carga (SOC) de la batería está por encima de %2$@%%, el sistema descargará la batería para satisfacer la demanda adicional, “recortando” así la carga pico de la red.\n\nEsta operación continúa mientras el estado de carga (SOC) de la batería se mantenga por encima de un umbral determinado."
+            "value" : "Tu sistema monitorea la energía importada de la red. Si la importación supera tu Límite de Importación de %1$@ y el estado de carga (SOC) de la batería está por encima de %2$@%%, el sistema descarga la batería para suministrar la demanda adicional, reduciendo así el pico de carga desde la red.\n\nEsta operación continúa mientras el estado de carga (SOC) de la batería esté por encima de un umbral determinado.\n\nEl Peak Shaving solo funciona cuando el modo Peak Shaving está activado desde el programador del inversor."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Il tuo sistema monitora l'energia importata dalla rete. Se l'importazione supera il tuo Limite di importazione di %1$@ e lo stato di carica (SOC) della batteria è superiore a %2$@%%, il sistema scarica la batteria per soddisfare la domanda in eccesso, \"tagliando\" così il carico di picco dalla rete.\n\nQuesta operazione continua finché lo stato di carica (SOC) della batteria rimane al di sopra di una certa soglia."
+            "value" : "Il tuo sistema monitora l’energia importata dalla rete. Se l’importazione supera il tuo limite di importazione di %1$@ e lo stato di carica (SOC) della batteria è superiore a %2$@%%, il sistema scarica la batteria per soddisfare la domanda in eccesso, riducendo così il carico di picco dalla rete.\n\nQuesta operazione continua finché lo stato di carica (SOC) della batteria rimane sopra una certa soglia.\n\nIl Peak Shaving funziona solo quando la modalità Peak Shaving è attivata dal pianificatore dell’inverter."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Twój system monitoruje moc pobieraną z sieci. Jeśli import przekroczy limit importu wynoszący %1$@, a stan naładowania baterii (SOC) będzie wyższy niż %2$@%%, system zacznie rozładowywać baterię, aby pokryć nadmiarowe zapotrzebowanie i tym samym „ściąć” szczytowe obciążenie z sieci.\n\nTa operacja trwa tak długo, jak długo stan naładowania baterii (SOC) pozostaje powyżej określonego progu."
-          }
-        }
-      }
-    },
-    "Your system monitors the power being imported from the grid. If the import exceeds your Import Limit of %@ and your battery's state of charge (SOC) is above %@%%, the system discharges the battery to supply the excess demand, thereby “shaving” the peak load from the grid.\n\nThis operation continues as long as the battery’s state of charge (SOC) is above a certain threshold SOC.\n\nPeak shaving only operates when you have the Peak Shaving mode enabled from the Inverter scheduler." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Your system monitors the power being imported from the grid. If the import exceeds your Import Limit of %1$@ and your battery's state of charge (SOC) is above %2$@%%, the system discharges the battery to supply the excess demand, thereby “shaving” the peak load from the grid.\n\nThis operation continues as long as the battery’s state of charge (SOC) is above a certain threshold SOC.\n\nPeak shaving only operates when you have the Peak Shaving mode enabled from the Inverter scheduler."
+            "value" : "Twój system monitoruje moc importowaną z sieci. Jeśli import przekracza Twój limit importu wynoszący %1$@, a poziom naładowania baterii (SOC) przekracza %2$@%%, system rozładowuje baterię, aby zaspokoić nadmiarowe zapotrzebowanie, tym samym „ścina” szczytowe obciążenie z sieci.\n\nTa operacja trwa, dopóki poziom naładowania baterii (SOC) pozostaje powyżej określonego progu.\n\nFunkcja Peak Shaving działa tylko wtedy, gdy tryb Peak Shaving jest włączony w harmonogramie falownika."
           }
         }
       }

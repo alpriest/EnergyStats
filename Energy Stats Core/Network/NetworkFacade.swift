@@ -230,11 +230,19 @@ class NetworkFacade: FoxAPIServicing {
         }
     }
 
-    func openapi_fetchPeakShavingSettings(deviceSN: String) async throws -> PeakShavingResponse {
+    func openapi_fetchPeakShavingSettings(deviceSN: String) async throws -> FetchPeakShavingSettingsResponse {
         if isDemoUser {
             try await demoAPI.openapi_fetchPeakShavingSettings(deviceSN: deviceSN)
         } else {
             try await api.openapi_fetchPeakShavingSettings(deviceSN: deviceSN)
+        }
+    }
+
+    func openapi_setPeakShavingSettings(deviceSN: String, importLimit: Double, soc: Int) async throws {
+        if isDemoUser {
+            try await demoAPI.openapi_setPeakShavingSettings(deviceSN: deviceSN, importLimit: importLimit, soc: soc)
+        } else {
+            try await api.openapi_setPeakShavingSettings(deviceSN: deviceSN, importLimit: importLimit, soc: soc)
         }
     }
 }
