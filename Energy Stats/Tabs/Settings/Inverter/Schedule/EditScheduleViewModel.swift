@@ -14,16 +14,16 @@ class EditScheduleViewModel: ObservableObject, HasLoadState, HasAlertContent {
     @Published var state: LoadState = .inactive
     @Published var alertContent: AlertContent?
     private let networking: Networking
-    private let config: ConfigManaging
+    private let configManager: ConfigManaging
 
-    init(networking: Networking, config: ConfigManaging, schedule: Schedule) {
+    init(networking: Networking, configManager: ConfigManaging, schedule: Schedule) {
         self.networking = networking
-        self.config = config
+        self.configManager = configManager
         self.schedule = schedule
     }
 
     func saveSchedule(onCompletion: @escaping () -> Void) async {
-        guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
+        guard let deviceSN = configManager.currentDevice.value?.deviceSN else { return }
         guard schedule.isValid() else {
             await setAlertContent(AlertContent(title: "error_title", message: "overlapping_time_periods"))
             return
@@ -59,23 +59,23 @@ class EditScheduleViewModel: ObservableObject, HasLoadState, HasAlertContent {
     }
 
     func autoFillScheduleGaps() {
-        guard let device = config.currentDevice.value else { return }
+        guard let device = configManager.currentDevice.value else { return }
 
         schedule = SchedulePhaseHelper.appendPhasesInGaps(
             to: schedule,
             mode: .SelfUse,
             device: device,
-            initialiseMaxSOC: config.getDeviceSupportScheduleMaxSOC(deviceSN: device.deviceSN)
+            initialiseMaxSOC: configManager.getDeviceSupports(capability: .scheduleMaxSOC, deviceSN: device.deviceSN)
         )
     }
 
     func addNewTimePeriod() {
-        guard let device = config.currentDevice.value else { return }
+        guard let device = configManager.currentDevice.value else { return }
 
         schedule = SchedulePhaseHelper.addNewTimePeriod(
             to: schedule,
             device: device,
-            initialiseMaxSOC: config.getDeviceSupportScheduleMaxSOC(deviceSN: device.deviceSN)
+            initialiseMaxSOC: configManager.getDeviceSupports(capability: .scheduleMaxSOC, deviceSN: device.deviceSN)
         )
     }
 

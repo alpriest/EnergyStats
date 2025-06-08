@@ -22,7 +22,7 @@ struct TemplateSummaryListRow: View {
                 EditTemplateView(
                     networking: networking,
                     templateStore: templateStore,
-                    config: config,
+                    configManager: config,
                     template: template
                 )
             } label: {

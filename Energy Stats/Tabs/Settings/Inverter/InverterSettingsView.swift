@@ -28,7 +28,7 @@ struct InverterSettingsView: View {
 
             Section {
                 NavigationLink("Manage schedules") {
-                    ScheduleSummaryView(networking: networking, config: configManager, templateStore: templateStore)
+                    ScheduleSummaryView(networking: networking, configManager: configManager, templateStore: templateStore)
                 }
                 NavigationLink(DeviceSettingsItem.exportLimit.title) {
                     DeviceSettingItemView(item: .exportLimit, networking: networking, configManager: configManager)

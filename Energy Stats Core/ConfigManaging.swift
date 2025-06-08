@@ -72,8 +72,13 @@ public protocol ConfigManaging: FinancialConfigManager, SolcastConfigManager, Ba
     var fetchSolcastOnAppLaunch: Bool { get set }
     var ct2DisplayMode: CT2DisplayMode { get set }
     var shouldCombineCT2WithLoadsPower: Bool { get set }
-    func getDeviceSupportScheduleMaxSOC(deviceSN: String) -> Bool
-    func setDeviceSupportScheduleMaxSOC(deviceSN: String)
+    func getDeviceSupports(capability: DeviceCapability, deviceSN: String) -> Bool
+    func setDeviceSupports(capability: DeviceCapability, deviceSN: String)
+}
+
+public enum DeviceCapability {
+    case scheduleMaxSOC
+    case peakShaving
 }
 
 public protocol BatteryConfigManager {

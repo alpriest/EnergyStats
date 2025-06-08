@@ -11,14 +11,14 @@ import SwiftUI
 
 struct ScheduleSummaryView: View {
     private let networking: Networking
-    private let config: ConfigManaging
+    private let configManager: ConfigManaging
     private let templateStore: TemplateStoring
     @StateObject var viewModel: ScheduleSummaryViewModel
 
-    init(networking: Networking, config: ConfigManaging, templateStore: TemplateStoring) {
-        _viewModel = StateObject(wrappedValue: ScheduleSummaryViewModel(networking: networking, config: config, templateStore: templateStore))
+    init(networking: Networking, configManager: ConfigManaging, templateStore: TemplateStoring) {
+        _viewModel = StateObject(wrappedValue: ScheduleSummaryViewModel(networking: networking, configManager: configManager, templateStore: templateStore))
         self.networking = networking
-        self.config = config
+        self.configManager = configManager
         self.templateStore = templateStore
     }
 
@@ -60,7 +60,7 @@ struct ScheduleSummaryView: View {
                             NavigationLink {
                                 EditScheduleView(
                                     networking: networking,
-                                    config: config,
+                                    configManager: configManager,
                                     schedule: schedule
                                 )
                             } label: {
@@ -74,7 +74,7 @@ struct ScheduleSummaryView: View {
                         NavigationLink {
                             EditScheduleView(
                                 networking: networking,
-                                config: config,
+                                configManager: configManager,
                                 schedule: schedule
                             )
                         } label: {
@@ -87,7 +87,7 @@ struct ScheduleSummaryView: View {
                     Section {
                         TemplateSummaryListRow(template: template,
                                                networking: networking,
-                                               config: config,
+                                               config: configManager,
                                                templateStore: templateStore,
                                                viewModel: viewModel)
                     } header: {
@@ -99,7 +99,7 @@ struct ScheduleSummaryView: View {
                 }
 
                 NavigationLink {
-                    ScheduleTemplateListView(networking: networking, templateStore: templateStore, config: config)
+                    ScheduleTemplateListView(networking: networking, templateStore: templateStore, config: configManager)
                 } label: {
                     Text("Manage templates")
                 }
@@ -125,7 +125,7 @@ struct ScheduleSummaryView: View {
     NavigationStack {
         ScheduleSummaryView(
             networking: NetworkService.preview(),
-            config: ConfigManager.preview(),
+            configManager: ConfigManager.preview(),
             templateStore: TemplateStore.preview()
         )
     }

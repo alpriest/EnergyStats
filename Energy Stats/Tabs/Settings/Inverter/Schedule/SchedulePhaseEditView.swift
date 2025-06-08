@@ -25,12 +25,13 @@ struct SchedulePhaseEditView: View {
     @State private var maxSOCError: LocalizedStringKey?
     private let showMaxSOC: Bool
     private let id: String
-    private let modes = WorkMode.values
+    private let modes: [WorkMode]
     private let onChange: (SchedulePhase) -> Void
     private let onDelete: (String) -> Void
 
     init(
         phase: SchedulePhase,
+        configManager: ConfigManaging,
         onChange: @escaping (SchedulePhase) -> Void,
         onDelete: @escaping (String) -> Void
     ) {
@@ -51,6 +52,18 @@ struct SchedulePhaseEditView: View {
         } else {
             showMaxSOC = false
             self.maxSOC = ""
+        }
+
+        if let deviceSN = configManager.selectedDeviceSN {
+            self.modes = WorkMode.values.filter {
+                if $0 == .PeakShaving {
+                    configManager.getDeviceSupports(capability: .peakShaving, deviceSN: deviceSN)
+                } else {
+                    true
+                }
+            }
+        } else {
+            self.modes = []
         }
 
         validate()
@@ -298,6 +311,7 @@ struct SchedulePhaseEditView: View {
             maxSOC: 100,
             color: Color.scheduleColor(named: .ForceDischarge)
         )!,
+        configManager: ConfigManager.preview(),
         onChange: { print($0.id, " changed") },
         onDelete: { print($0, " deleted") }
     )

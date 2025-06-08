@@ -11,7 +11,7 @@ import SwiftUI
 
 class ScheduleSummaryViewModel: ObservableObject, HasLoadState, HasAlertContent {
     let networking: Networking
-    let config: ConfigManaging
+    let configManager: ConfigManaging
     let templateStore: TemplateStoring
     @Published var state: LoadState = .inactive
     @Published var templates: [ScheduleTemplate] = []
@@ -27,16 +27,16 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState, HasAlertContent 
 
     private var hasPreLoaded = false
 
-    init(networking: Networking, config: ConfigManaging, templateStore: TemplateStoring) {
+    init(networking: Networking, configManager: ConfigManaging, templateStore: TemplateStoring) {
         self.networking = networking
-        self.config = config
+        self.configManager = configManager
         self.templateStore = templateStore
     }
 
     @MainActor
     func preload() async {
         guard
-            let device = config.currentDevice.value,
+            let device = configManager.currentDevice.value,
             state == .inactive
         else { return }
 
@@ -69,7 +69,7 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState, HasAlertContent 
     @MainActor
     func load() async {
         guard
-            let deviceSN = config.currentDevice.value?.deviceSN,
+            let deviceSN = configManager.currentDevice.value?.deviceSN,
             state == .inactive
         else { return }
 
@@ -88,7 +88,10 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState, HasAlertContent 
 
             self.schedule = Schedule(phases: scheduleResponse.groups.filter { $0.enable == 1 }.compactMap { $0.toSchedulePhase() })
             if let schedule, schedule.supportsMaxSOC() {
-                config.setDeviceSupportScheduleMaxSOC(deviceSN: deviceSN)
+                configManager.setDeviceSupports(capability: .scheduleMaxSOC, deviceSN: deviceSN)
+            }
+            if scheduleResponse.supportsPeakShaving() {
+                configManager.setDeviceSupports(capability: .peakShaving, deviceSN: deviceSN)
             }
             await self.setState(.inactive)
         } catch {
@@ -99,7 +102,7 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState, HasAlertContent 
     @MainActor
     func setSchedulerFlag() async {
         guard
-            let deviceSN = config.currentDevice.value?.deviceSN,
+            let deviceSN = configManager.currentDevice.value?.deviceSN,
             state == .inactive
         else { return }
 
@@ -121,7 +124,7 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState, HasAlertContent 
     }
 
     func activate(_ template: ScheduleTemplate) async {
-        guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
+        guard let deviceSN = configManager.currentDevice.value?.deviceSN else { return }
         let schedule = template.asSchedule()
         guard schedule.isValid() else {
             await setAlertContent(AlertContent(title: "error_title", message: "overlapping_time_periods"))
@@ -169,5 +172,11 @@ extension SchedulePhaseNetworkModel {
 extension Schedule {
     func supportsMaxSOC() -> Bool {
         phases.anySatisfy { $0.maxSOC != nil }
+    }
+}
+
+private extension ScheduleResponse {
+    func supportsPeakShaving() -> Bool {
+        workmodes.contains(where: { $0 == WorkMode.PeakShaving })
     }
 }

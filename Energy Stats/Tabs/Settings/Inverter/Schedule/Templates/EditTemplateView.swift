@@ -16,16 +16,18 @@ struct EditTemplateView: View {
     @State private var duplicateTemplateAlertIsPresented = false
     @State private var renameTemplateName: String = ""
     @State private var renameTemplateAlertIsPresented = false
+    private let configManager: ConfigManaging
 
-    init(networking: Networking, templateStore: TemplateStoring, config: ConfigManaging, template: ScheduleTemplate) {
+    init(networking: Networking, templateStore: TemplateStoring, configManager: ConfigManaging, template: ScheduleTemplate) {
         _viewModel = StateObject(
             wrappedValue: EditTemplateViewModel(
                 networking: networking,
                 templateStore: templateStore,
-                config: config,
+                config: configManager,
                 template: template
             )
         )
+        self.configManager = configManager
     }
 
     var body: some View {
@@ -33,6 +35,7 @@ struct EditTemplateView: View {
             OptionalView(viewModel.schedule) { schedule in
                 ScheduleDetailView(
                     schedule: schedule,
+                    configManager: configManager,
                     onUpdate: viewModel.updatedPhase,
                     onDelete: viewModel.deletedPhase
                 )
@@ -155,7 +158,7 @@ struct EditTemplateView: View {
         EditTemplateView(
             networking: NetworkService.preview(),
             templateStore: TemplateStore.preview(),
-            config: ConfigManager.preview(),
+            configManager: ConfigManager.preview(),
             template: ScheduleTemplate.preview()
         )
     }

@@ -12,19 +12,21 @@ struct EditScheduleView: View {
     @StateObject private var viewModel: EditScheduleViewModel
     @State private var presentConfirmation = false
     @Environment(\.presentationMode) var presentationMode
+    private let configManager: ConfigManaging
 
     init(
         networking: Networking,
-        config: ConfigManaging,
+        configManager: ConfigManaging,
         schedule: Schedule
     ) {
         _viewModel = StateObject(
             wrappedValue: EditScheduleViewModel(
                 networking: networking,
-                config: config,
+                configManager: configManager,
                 schedule: schedule
             )
         )
+        self.configManager = configManager
     }
 
     var body: some View {
@@ -32,6 +34,7 @@ struct EditScheduleView: View {
             Form {
                 ScheduleDetailView(
                     schedule: viewModel.schedule,
+                    configManager: configManager,
                     onUpdate: viewModel.updatedPhase,
                     onDelete: viewModel.deletedPhase
                 )
@@ -73,7 +76,7 @@ struct EditScheduleView: View {
     NavigationView {
         EditScheduleView(
             networking: NetworkService.preview(),
-            config: ConfigManager.preview(),
+            configManager: ConfigManager.preview(),
             schedule: Schedule.preview()
         )
     }

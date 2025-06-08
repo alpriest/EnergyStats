@@ -32,7 +32,7 @@ struct ScheduleTemplateListView: View {
                     NavigationLink(destination: {
                         EditTemplateView(networking: networking,
                                          templateStore: templateStore,
-                                         config: config,
+                                         configManager: config,
                                          template: template)
                     }, label: {
                         VStack(alignment: .leading) {

@@ -187,7 +187,7 @@ struct LoadedPowerFlowView: View {
             NavigationStack {
                 ScheduleSummaryView(
                     networking: networking,
-                    config: configManager,
+                    configManager: configManager,
                     templateStore: templateStore
                 )
             }
