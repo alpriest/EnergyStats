@@ -15,8 +15,8 @@ struct FirmwareLoadingView: View {
     let networking: Networking
 
     var body: some View {
-        if let firmwareVersions {
-            InverterFirmwareVersionsView(viewModel: firmwareVersions)
+        if let firmwareVersions, let device = configManager.currentDevice.value {
+            InverterFirmwareVersionsView(viewModel: firmwareVersions, device: device)
         } else if let selectedDeviceSN = configManager.selectedDeviceSN {
             if loading {
                 HStack {

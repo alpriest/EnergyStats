@@ -10,11 +10,13 @@ import SwiftUI
 
 struct InverterFirmwareVersionsView: View {
     let viewModel: DeviceFirmwareVersion?
+    let device: Device
 
     var body: some View {
         Group {
             if let version = viewModel {
                 Section {
+                    ESLabeledText("Model", value: device.deviceType)
                     ESLabeledText("Manager", value: version.manager)
                     ESLabeledText("Slave", value: version.slave)
                     ESLabeledText("Master", value: version.master)
@@ -46,7 +48,10 @@ struct InverterFirmwareVersionsView: View {
 struct InverterFirmwareVersionsView_Previews: PreviewProvider {
     static var previews: some View {
         Form {
-            InverterFirmwareVersionsView(viewModel: DeviceFirmwareVersion.preview())
+            InverterFirmwareVersionsView(
+                viewModel: DeviceFirmwareVersion.preview(),
+                device: Device.preview()
+            )
         }
     }
 }
