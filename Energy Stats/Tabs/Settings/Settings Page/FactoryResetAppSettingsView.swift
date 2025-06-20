@@ -15,13 +15,10 @@ struct FactoryResetAppSettingsView: View {
     private let xmark = StepViewStyle.custom("xmark.circle.fill", Color.linesNegative)
 
     var body: some View {
-        FullWidthVStack {
-            ScrollView {
-                FullWidthVStack(spacing: 32) {
+        VStack(spacing: 0) {
+            Form {
+                Section("Will be reset:") {
                     FullWidthVStack {
-                        Text("Will be reset:")
-                            .font(.title)
-
                         StepView(text: "Display settings", style: checkmark)
                         StepView(text: "Data settings", style: checkmark)
                         StepView(text: "Earnings settings", style: checkmark)
@@ -30,22 +27,18 @@ struct FactoryResetAppSettingsView: View {
                         StepView(text: "Battery display settings", style: checkmark)
                         StepView(text: "Custom parameter groups", style: checkmark)
                     }
+                }
 
+                Section("Will not be reset:") {
                     FullWidthVStack {
-                        Text("Will not be reset:")
-                            .font(.title)
-
                         StepView(text: "Inverter schedules", style: xmark)
                         StepView(text: "Battery schedule", style: xmark)
                         StepView(text: "Battery charge levels", style: xmark)
                         StepView(text: "FoxESS API key", style: xmark)
                         StepView(text: "Solcast API key", style: xmark)
                     }
-
-                    Spacer()
                 }
             }
-            .padding(.horizontal)
 
             BottomButtonsView(labels: BottomButtonLabels(
                 left: "Cancel",
