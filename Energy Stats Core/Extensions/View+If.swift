@@ -20,4 +20,17 @@ public extension View {
             self
         }
     }
+
+    /// Applies the given transform if the given value is non-nil
+    /// - Parameters:
+    ///   - condition: The condition to evaluate.
+    ///   - transform: The transform to apply to the source `View`.
+    /// - Returns: Either the original `View` or the modified `View` if the condition is `true`.
+    @ViewBuilder func ifLet<Content: View, Value: Any>(_ value: Value?, transform: (Self, Value) -> Content) -> some View {
+        if let value {
+            transform(self, value)
+        } else {
+            self
+        }
+    }
 }

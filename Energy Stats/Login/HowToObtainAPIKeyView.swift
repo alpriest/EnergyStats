@@ -15,13 +15,13 @@ struct HowToObtainAPIKeyView: View {
             Text("To get your API key:")
                 .padding(.bottom, 8)
 
-            step(1, text: "Login at https://www.foxesscloud.com/")
-            step(2, text: "Click the person icon top-right")
-            step(3, text: "Click the User Profile menu option")
-            step(4, text: "Click API management")
-            step(5, text: "Click Generate API key")
-            step(6, text: "Copy the API key (make a note of it securely)")
-            step(7, text: "Paste the API key above")
+            StepView(text: "Login at https://www.foxesscloud.com/", style: .circle(1))
+            StepView(text: "Click the person icon top-right", style: .circle(2))
+            StepView(text: "Click the User Profile menu option", style: .circle(3))
+            StepView(text: "Click API management", style: .circle(4))
+            StepView(text: "Click Generate API key", style: .circle(5))
+            StepView(text: "Copy the API key (make a note of it securely)", style: .circle(6))
+            StepView(text: "Paste the API key above", style: .circle(7))
 
             Button {
                 withAnimation {
@@ -47,22 +47,6 @@ struct HowToObtainAPIKeyView: View {
         }
         .frame(minWidth: 0, maxWidth: .infinity)
         .padding(.horizontal)
-    }
-
-    func step(_ count: Int, text: LocalizedStringKey) -> some View {
-        HStack(alignment: .top) {
-            Circle()
-                .fill(Color.yellow.opacity(0.7))
-                .overlay(
-                    Text(count, format: .number)
-                        .font(.caption)
-                )
-                .frame(width: 18)
-                .padding(.top, 1)
-
-            Text(text)
-                .frame(alignment: .top)
-        }
     }
 }
 

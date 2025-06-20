@@ -319,6 +319,9 @@
 		41E8E7242AADFB3900DC4B89 /* SolarBandingSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E8E7232AADFB3900DC4B89 /* SolarBandingSettingsView.swift */; };
 		41E8E7262AAE0D0D00DC4B89 /* SolarRangeDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E8E7252AAE0D0D00DC4B89 /* SolarRangeDefinitions.swift */; };
 		41EB28032B8E634F00F6127F /* SolarStringsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EB28022B8E634F00F6127F /* SolarStringsSettingsView.swift */; };
+		41EB65F92E05BB7400F53573 /* FactoryResetAppSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EB65F82E05BB7400F53573 /* FactoryResetAppSettingsView.swift */; };
+		41EB65FB2E05BD8900F53573 /* StepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EB65FA2E05BD8900F53573 /* StepView.swift */; };
+		41EB65FD2E05C00600F53573 /* FullWidthVStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EB65FC2E05C00600F53573 /* FullWidthVStack.swift */; };
 		41ED2EF02B349EF7001CF277 /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41ED2EEF2B349EF7001CF277 /* CustomDatePicker.swift */; };
 		41EE909C2BDEA98B006412FB /* HomeEnergyStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE909B2BDEA98B006412FB /* HomeEnergyStateManager.swift */; };
 		41EE909D2BDEAA27006412FB /* UpdateBatteryChargeLevelIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412A26852AC05D1200F61456 /* UpdateBatteryChargeLevelIntent.swift */; };
@@ -833,6 +836,9 @@
 		41E8E7232AADFB3900DC4B89 /* SolarBandingSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarBandingSettingsView.swift; sourceTree = "<group>"; };
 		41E8E7252AAE0D0D00DC4B89 /* SolarRangeDefinitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarRangeDefinitions.swift; sourceTree = "<group>"; };
 		41EB28022B8E634F00F6127F /* SolarStringsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarStringsSettingsView.swift; sourceTree = "<group>"; };
+		41EB65F82E05BB7400F53573 /* FactoryResetAppSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryResetAppSettingsView.swift; sourceTree = "<group>"; };
+		41EB65FA2E05BD8900F53573 /* StepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepView.swift; sourceTree = "<group>"; };
+		41EB65FC2E05C00600F53573 /* FullWidthVStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullWidthVStack.swift; sourceTree = "<group>"; };
 		41ED2EEF2B349EF7001CF277 /* CustomDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
 		41EDDF6B28CD2A630092C662 /* LoadedPowerFlowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadedPowerFlowViewModel.swift; sourceTree = "<group>"; };
 		41EDDF7128CD2ED30092C662 /* Energy StatsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Energy StatsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1006,6 +1012,7 @@
 				416163932CDA6C970084DCF1 /* String+URL.swift */,
 				411029122A71C066004018BB /* Tintable.swift */,
 				416318BD29DDD80E00C2C285 /* View+Copy.swift */,
+				41EB65FC2E05C00600F53573 /* FullWidthVStack.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1308,6 +1315,7 @@
 				4141B1FF28D86C7200B60157 /* UserManager.swift */,
 				4163CA7B2B4DE46D00FDA232 /* APIKeyLoginView.swift */,
 				41C1243D2B738B1400B575F2 /* HowToObtainAPIKeyView.swift */,
+				41EB65FA2E05BD8900F53573 /* StepView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1342,6 +1350,7 @@
 				41A263212B6AEE9F0027E52A /* ConfigureAPIKeyView.swift */,
 				41EB28022B8E634F00F6127F /* SolarStringsSettingsView.swift */,
 				4132086F2B9E3BC400A31873 /* DataSettingsView.swift */,
+				41EB65F82E05BB7400F53573 /* FactoryResetAppSettingsView.swift */,
 			);
 			path = "Settings Page";
 			sourceTree = "<group>";
@@ -2184,6 +2193,7 @@
 				417AA21A2A12454A0073CD34 /* StatsTabView.swift in Sources */,
 				4130364929B86F66006B5CE9 /* BatterySettingsView.swift in Sources */,
 				4160098B2A8D18B10096CCD9 /* SettingsFooterView.swift in Sources */,
+				41EB65FD2E05C00600F53573 /* FullWidthVStack.swift in Sources */,
 				41965EE12C3284E6004F9D9A /* VisibilityTracking.swift in Sources */,
 				411029172A71C975004018BB /* ChargeTimePeriod.swift in Sources */,
 				41BACC042D90AE3F00C9C718 /* TipType.swift in Sources */,
@@ -2212,6 +2222,7 @@
 				41E165B32B0A877100B17590 /* SolcastSettingsViewModel.swift in Sources */,
 				41C249A52A77FC7400D8E9E7 /* WebView.swift in Sources */,
 				41A25D3D28CA5CDF00315714 /* ParametersGraphTabView.swift in Sources */,
+				41EB65FB2E05BD8900F53573 /* StepView.swift in Sources */,
 				4140ECDA292D58D300992DD8 /* ParameterGraphVariable.swift in Sources */,
 				415F0BD92D9C869F003EB760 /* BatteryFirmwareVersionsViewModel.swift in Sources */,
 				41E4B31028DB7666003F7F47 /* BatteryPowerView.swift in Sources */,
@@ -2246,6 +2257,7 @@
 				41E6720B2C456D51003D7D44 /* CreateTemplateButtonView.swift in Sources */,
 				418C09252B18FE9A00183603 /* SchedulePhaseEditView.swift in Sources */,
 				410F41582DA80D7500DEE2F4 /* DeviceSettingItemView.swift in Sources */,
+				41EB65F92E05BB7400F53573 /* FactoryResetAppSettingsView.swift in Sources */,
 				410F41592DA80D7500DEE2F4 /* DeviceSettingItem.swift in Sources */,
 				41C19DCF2A4E09F9009883AB /* SelfSufficiencySettingsView.swift in Sources */,
 				41DD7F3A29C5B8940072CDE8 /* SolarPowerView.swift in Sources */,

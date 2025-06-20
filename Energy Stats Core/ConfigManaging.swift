@@ -25,6 +25,7 @@ public protocol ConfigManaging: FinancialConfigManager, SolcastConfigManager, Ba
     func fetchDevices() async throws
     func logout(clearDisplaySettings: Bool, clearDeviceSettings: Bool)
     func select(device: Device?)
+    func resetDisplaySettings()
     var appSettingsPublisher: LatestAppSettingsPublisher { get }
 
     var hasRunBefore: Bool { get set }

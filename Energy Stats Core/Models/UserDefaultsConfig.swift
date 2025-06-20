@@ -44,7 +44,6 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "selectedParameterGraphVariables")
         UserDefaults.shared.removeObject(forKey: "solarDefinitions")
         UserDefaults.shared.removeObject(forKey: "parameterGroups")
-        UserDefaults.shared.removeObject(forKey: "solcastSettings")
         UserDefaults.shared.removeObject(forKey: "dataCeiling")
         UserDefaults.shared.removeObject(forKey: "showTotalYieldOnPowerFlow")
         UserDefaults.shared.removeObject(forKey: "showFinancialSummaryOnFlowPage")
@@ -64,7 +63,6 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "ct2DisplayMode")
         UserDefaults.shared.removeObject(forKey: "seenTips")
         UserDefaults.shared.removeObject(forKey: "shouldCombineCT2WithLoadsPower")
-        UserDefaults.shared.removeObject(forKey: "deviceSupportsScheduleMaxSOC")
         UserDefaults.shared.synchronize()
     }
 
@@ -74,6 +72,7 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "selectedDeviceSN")
         UserDefaults.shared.removeObject(forKey: "powerStationDetail")
         UserDefaults.shared.removeObject(forKey: "deviceBatteryOverrides")
+        UserDefaults.shared.removeObject(forKey: "solcastSettings")
         UserDefaults.shared.synchronize()
     }
 

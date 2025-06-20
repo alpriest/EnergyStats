@@ -35,5 +35,11 @@ struct EnergyStatsShortcuts: AppShortcutsProvider {
             shortTitle: "Grid Load",
             systemImageName: "bolt.fill"
         )
+        AppShortcut(
+            intent: ExportParameterDataIntent(),
+            phrases: ["Export my parameter data on \(.applicationName)"],
+            shortTitle: "Export Parameter Data",
+            systemImageName: "square.and.arrow.up.fill"
+        )
     }
 }

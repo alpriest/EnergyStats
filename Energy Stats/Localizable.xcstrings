@@ -3142,6 +3142,34 @@
         }
       }
     },
+    "Battery charge levels" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Akkuladestände"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Niveles de carga de la batería"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Livelli di carica della batteria"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poziomy naładowania baterii"
+          }
+        }
+      }
+    },
     "Battery Charge Levels" : {
       "localizations" : {
         "de" : {
@@ -3170,6 +3198,34 @@
         }
       }
     },
+    "Battery display settings" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anzeigeeinstellungen für Akku"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configuración de visualización de la batería"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impostazioni di visualizzazione della batteria"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ustawienia wyświetlania baterii"
+          }
+        }
+      }
+    },
     "Battery error. Tap for detail" : {
       "localizations" : {
         "de" : {
@@ -3194,6 +3250,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Błąd baterii. Dotknij, aby zobaczyć szczegóły"
+          }
+        }
+      }
+    },
+    "Battery schedule" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Akkuladeplan"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Horario de carga de la batería"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Programma di carica della batteria"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Harmonogram ładowania baterii"
           }
         }
       }
@@ -4898,6 +4982,34 @@
         }
       }
     },
+    "Custom parameter groups" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Benutzerdefinierte Parametergruppen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Grupos de parámetros personalizados"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gruppi di parametri personalizzati"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Niestandardowe grupy parametrów"
+          }
+        }
+      }
+    },
     "Custom range" : {
       "localizations" : {
         "de" : {
@@ -4978,6 +5090,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dane"
+          }
+        }
+      }
+    },
+    "Data settings" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dateneinstellungen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configuración de datos"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impostazioni dei dati"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ustawienia danych"
           }
         }
       }
@@ -5636,6 +5776,34 @@
         }
       }
     },
+    "Display settings" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anzeigeeinstellungen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configuración de visualización"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impostazioni di visualizzazione"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ustawienia wyświetlania"
+          }
+        }
+      }
+    },
     "Display truncated Y axis" : {
       "localizations" : {
         "de" : {
@@ -5884,6 +6052,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zyski"
+          }
+        }
+      }
+    },
+    "Earnings settings" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einnahmeneinstellungen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configuración de ganancias"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impostazioni dei guadagni"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ustawienia zarobków"
           }
         }
       }
@@ -6610,6 +6806,34 @@
         }
       }
     },
+    "Export Parameter Data" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parameterdaten exportieren"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exportar datos de parámetros"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esporta dati dei parametri"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eksportuj dane parametrów"
+          }
+        }
+      }
+    },
     "export_income" : {
       "localizations" : {
         "de" : {
@@ -7240,6 +7464,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Błąd Fox Cloud 44098. Nie udało się zapisać harmonogramu. Może to być spowodowane tym, że oprogramowanie inwertera wymaga wartości MaxSOC, ale Fox jeszcze nie obsługuje MaxSOC w swoim systemie OpenAPI używanym przez Energy Stats. Na razie musisz użyć FoxCloud 2.0 do zarządzania swoimi harmonogramami."
+          }
+        }
+      }
+    },
+    "FoxESS API key" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FoxESS-API-Schlüssel"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clave API de FoxESS"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chiave API FoxESS"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Klucz API FoxESS"
           }
         }
       }
@@ -8629,6 +8881,62 @@
         }
       }
     },
+    "Inverter display settings, CT2 settings" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anzeigeeinstellungen des Wechselrichters, CT2-Einstellungen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configuración de visualización del inversor, configuración de CT2"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impostazioni di visualizzazione dell'inverter, impostazioni CT2"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ustawienia wyświetlania falownika, ustawienia CT2"
+          }
+        }
+      }
+    },
+    "Inverter schedules" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wechselrichter-Zeitpläne"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Horarios del inversor"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Programmi dell'inverter"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Harmonogramy falownika"
+          }
+        }
+      }
+    },
     "inverter_charge_schedule_settings_saved" : {
       "localizations" : {
         "de" : {
@@ -9751,7 +10059,32 @@
       }
     },
     "Model" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modell"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modelo"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modello"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Model"
+          }
+        }
+      }
     },
     "Module Serial No." : {
       "localizations" : {
@@ -12709,6 +13042,34 @@
         }
       }
     },
+    "Reset app settings" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App-Einstellungen zurücksetzen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restablecer la configuración de la aplicación"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reimposta le impostazioni dell'app"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zresetuj ustawienia aplikacji"
+          }
+        }
+      }
+    },
     "Reset times" : {
       "localizations" : {
         "de" : {
@@ -12733,6 +13094,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Czasy resetowania"
+          }
+        }
+      }
+    },
+    "Reset..." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zurücksetzen..."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restablecer..."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reimposta..."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resetuj..."
           }
         }
       }
@@ -13162,6 +13551,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Oceny samowystarczalności"
+          }
+        }
+      }
+    },
+    "Self sufficiency settings" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einstellungen zur Eigenversorgung"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configuración de autosuficiencia"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impostazioni di autosufficienza"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ustawienia samowystarczalności"
           }
         }
       }
@@ -14306,6 +14723,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "SolarGeneration kWh * Cena jednostkowa"
+          }
+        }
+      }
+    },
+    "Solcast API key" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solcast-API-Schlüssel"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clave API de Solcast"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chiave API Solcast"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Klucz API Solcast"
           }
         }
       }
@@ -16197,6 +16642,62 @@
         }
       }
     },
+    "Will be reset:" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wird zurückgesetzt:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se restablecerá:"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verrà reimpostato:"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zostanie zresetowane:"
+          }
+        }
+      }
+    },
+    "Will not be reset:" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wird nicht zurückgesetzt:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se restablecerá:"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non verrà reimpostato:"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nie zostanie zresetowane:"
+          }
+        }
+      }
+    },
     "Work mode" : {
       "localizations" : {
         "de" : {
@@ -16648,6 +17149,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ten link do wideo znajdziesz również w sekcji FAQ w Ustawieniach."
+          }
+        }
+      }
+    },
+    "You cannot undo this action" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diese Aktion kann nicht rückgängig gemacht werden"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esta acción no se puede deshacer"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Questa azione non può essere annullata"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "\n"
           }
         }
       }

@@ -105,6 +105,10 @@ public class ConfigManager: ConfigManaging {
         }
     }
 
+    public func resetDisplaySettings() {
+        config.clearDisplaySettings()
+    }
+
     public func select(device: Device?) {
         guard let device else { return }
 
