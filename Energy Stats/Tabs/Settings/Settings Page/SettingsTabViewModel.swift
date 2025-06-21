@@ -271,6 +271,38 @@ class SettingsTabViewModel: ObservableObject {
         UserAgent.description()
     }
 
+    func update(from appSettings: AppSettings) {
+        showColouredLines = appSettings.showColouredLines
+        showBatteryTemperature = appSettings.showBatteryTemperature
+        refreshFrequency = appSettings.refreshFrequency
+        decimalPlaces = appSettings.decimalPlaces
+        showSunnyBackground = appSettings.showSunnyBackground
+        showBatteryEstimate = appSettings.showBatteryEstimate
+        showUsableBatteryOnly = appSettings.showUsableBatteryOnly
+        displayUnit = appSettings.displayUnit
+        showInverterTemperature = appSettings.showInverterTemperature
+        showHomeTotalOnPowerFlow = appSettings.showHomeTotalOnPowerFlow
+        showInverterIcon = appSettings.showInverterIcon
+        shouldInvertCT2 = appSettings.shouldInvertCT2
+        showInverterStationName = appSettings.showInverterStationName
+        showGridTotalsOnPowerFlow = appSettings.showGridTotalsOnPowerFlow
+        showLastUpdateTimestamp = appSettings.showLastUpdateTimestamp
+        shouldCombineCT2WithPVPower = appSettings.shouldCombineCT2WithPVPower
+        showGraphValueDescriptions = appSettings.showGraphValueDescriptions
+        dataCeiling = config.dataCeiling
+        showTotalYieldOnPowerFlow = appSettings.showTotalYieldOnPowerFlow
+        separateParameterGraphsByUnit = appSettings.separateParameterGraphsByUnit
+        showInverterTypeName = appSettings.showInverterTypeName
+        powerFlowStrings = config.powerFlowStrings
+        showBatteryPercentageRemaining = config.showBatteryPercentageRemaining
+        powerStation = config.powerStationDetail
+        colorScheme = config.colorScheme
+        batteryTemperatureDisplayMode = config.batteryTemperatureDisplayMode
+        showInverterScheduleQuickLink = config.showInverterScheduleQuickLink
+        ct2DisplayMode = config.ct2DisplayMode
+        shouldCombineCT2WithLoadsPower = config.shouldCombineCT2WithLoadsPower
+    }
+
     func recalculateBatteryCapacity() {
         guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
         guard let devices = config.devices else { return }

@@ -15,6 +15,7 @@ struct ContentView: View {
     let solarForecastProvider: SolarForecastProviding
     let templateStore: TemplateStoring
     @State private var state = LoadState.inactive
+    @State private var lastSettingsResetTime: Date? = nil
 
     var body: some View {
         Group {
@@ -42,6 +43,11 @@ struct ContentView: View {
             }
         }
         .preferredColorScheme(colorScheme())
+        .onReceive(configManager.lastSettingsResetTime) {
+            guard $0 != nil else { return }
+            lastSettingsResetTime = $0
+        }
+        .id(lastSettingsResetTime)
     }
 
     private func colorScheme() -> ColorScheme? {

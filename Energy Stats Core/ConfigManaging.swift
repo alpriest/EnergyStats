@@ -26,6 +26,7 @@ public protocol ConfigManaging: FinancialConfigManager, SolcastConfigManager, Ba
     func logout(clearDisplaySettings: Bool, clearDeviceSettings: Bool)
     func select(device: Device?)
     func resetDisplaySettings()
+    var lastSettingsResetTime: CurrentValueSubject<Date?, Never> { get }
     var appSettingsPublisher: LatestAppSettingsPublisher { get }
 
     var hasRunBefore: Bool { get set }

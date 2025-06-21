@@ -17,6 +17,7 @@ public enum SelfSufficiencyEstimateMode: Int, RawRepresentable {
 public struct AppSettings {
     public var showColouredLines: Bool
     public var showBatteryTemperature: Bool
+    public var refreshFrequency: RefreshFrequency
     public var showSunnyBackground: Bool
     public var decimalPlaces: Int
     public var showBatteryEstimate: Bool
@@ -59,6 +60,7 @@ public struct AppSettings {
     public init(
         showColouredLines: Bool,
         showBatteryTemperature: Bool,
+        refreshFrequency: RefreshFrequency,
         showSunnyBackground: Bool,
         decimalPlaces: Int,
         showBatteryEstimate: Bool,
@@ -100,6 +102,7 @@ public struct AppSettings {
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
+        self.refreshFrequency = refreshFrequency
         self.showSunnyBackground = showSunnyBackground
         self.decimalPlaces = decimalPlaces
         self.showBatteryEstimate = showBatteryEstimate
@@ -143,6 +146,7 @@ public struct AppSettings {
     public func copy(
         showColouredLines: Bool? = nil,
         showBatteryTemperature: Bool? = nil,
+        refreshFrequency: RefreshFrequency? = nil,
         showSunnyBackground: Bool? = nil,
         decimalPlaces: Int? = nil,
         showBatteryEstimate: Bool? = nil,
@@ -185,6 +189,7 @@ public struct AppSettings {
         AppSettings(
             showColouredLines: showColouredLines ?? self.showColouredLines,
             showBatteryTemperature: showBatteryTemperature ?? self.showBatteryTemperature,
+            refreshFrequency: refreshFrequency ?? self.refreshFrequency,
             showSunnyBackground: showSunnyBackground ?? self.showSunnyBackground,
             decimalPlaces: decimalPlaces ?? self.decimalPlaces,
             showBatteryEstimate: showBatteryEstimate ?? self.showBatteryEstimate,
@@ -223,6 +228,52 @@ public struct AppSettings {
             fetchSolcastOnAppLaunch: fetchSolcastOnAppLaunch ?? self.fetchSolcastOnAppLaunch,
             ct2DisplayMode: ct2DisplayMode ?? self.ct2DisplayMode,
             shouldCombineCT2WithLoadsPower: shouldCombineCT2WithLoadsPower ?? self.shouldCombineCT2WithLoadsPower
+        )
+    }
+
+    public static func make(from config: ConfigManaging) -> AppSettings {
+        AppSettings(
+            showColouredLines: config.showColouredLines,
+            showBatteryTemperature: config.showBatteryTemperature,
+            refreshFrequency: config.refreshFrequency,
+            showSunnyBackground: config.showSunnyBackground,
+            decimalPlaces: config.decimalPlaces,
+            showBatteryEstimate: config.showBatteryEstimate,
+            showUsableBatteryOnly: config.showUsableBatteryOnly,
+            displayUnit: config.displayUnit,
+            selfSufficiencyEstimateMode: config.selfSufficiencyEstimateMode,
+            showFinancialEarnings: config.showFinancialEarnings,
+            feedInUnitPrice: config.feedInUnitPrice,
+            gridImportUnitPrice: config.gridImportUnitPrice,
+            showInverterTemperature: config.showInverterTemperature,
+            showHomeTotalOnPowerFlow: config.showHomeTotalOnPowerFlow,
+            showInverterIcon: config.showInverterIcon,
+            shouldInvertCT2: config.shouldInvertCT2,
+            showInverterStationName: config.showInverterStationName,
+            showGridTotalsOnPowerFlow: config.showGridTotalsOnPowerFlow,
+            showLastUpdateTimestamp: config.showLastUpdateTimestamp,
+            solarDefinitions: config.solarDefinitions,
+            parameterGroups: config.parameterGroups,
+            shouldCombineCT2WithPVPower: config.shouldCombineCT2WithPVPower,
+            showGraphValueDescriptions: config.showGraphValueDescriptions,
+            solcastSettings: config.solcastSettings,
+            dataCeiling: config.dataCeiling,
+            showTotalYieldOnPowerFlow: config.showTotalYieldOnPowerFlow,
+            showFinancialSummaryOnFlowPage: config.showFinancialSummaryOnFlowPage,
+            separateParameterGraphsByUnit: config.separateParameterGraphsByUnit,
+            currencySymbol: config.currencySymbol,
+            showInverterTypeName: config.showInverterTypeName,
+            powerFlowStrings: config.powerFlowStrings,
+            showBatteryPercentageRemaining: config.showBatteryPercentageRemaining,
+            showSelfSufficiencyStatsGraphOverlay: config.showSelfSufficiencyStatsGraphOverlay,
+            truncatedYAxisOnParameterGraphs: config.truncatedYAxisOnParameterGraphs,
+            earningsModel: config.earningsModel,
+            minSOC: config.minSOC,
+            batteryTemperatureDisplayMode: config.batteryTemperatureDisplayMode,
+            showInverterScheduleQuickLink: config.showInverterScheduleQuickLink,
+            fetchSolcastOnAppLaunch: config.fetchSolcastOnAppLaunch,
+            ct2DisplayMode: config.ct2DisplayMode,
+            shouldCombineCT2WithLoadsPower: config.shouldCombineCT2WithLoadsPower
         )
     }
 }

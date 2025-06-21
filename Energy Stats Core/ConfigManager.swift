@@ -16,6 +16,7 @@ public class ConfigManager: ConfigManaging {
     public var currentDevice = CurrentValueSubject<Device?, Never>(nil)
     private var deviceSupportsScheduleMaxSOC: [String: Bool] = [:] // In-memory only
     private var deviceSupportsPeakShaving: [String: Bool] = [:] // In-memory only
+    public var lastSettingsResetTime = CurrentValueSubject<Date?, Never>(nil)
 
     public struct NoDeviceFoundError: Error {
         public init() {}
@@ -107,6 +108,8 @@ public class ConfigManager: ConfigManaging {
 
     public func resetDisplaySettings() {
         config.clearDisplaySettings()
+        appSettingsPublisher.send(AppSettings.make(from: self))
+        lastSettingsResetTime.send(.now)
     }
 
     public func select(device: Device?) {
@@ -251,7 +254,12 @@ public class ConfigManager: ConfigManaging {
 
     public var refreshFrequency: RefreshFrequency {
         get { RefreshFrequency(rawValue: config.refreshFrequency) ?? .AUTO }
-        set { config.refreshFrequency = newValue.rawValue }
+        set {
+            config.refreshFrequency = newValue.rawValue
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+                refreshFrequency: refreshFrequency
+            ))
+        }
     }
 
     public var showSunnyBackground: Bool {
