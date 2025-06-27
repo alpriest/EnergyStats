@@ -265,6 +265,7 @@
 		41C19DCD2A4DDE46009883AB /* SelfSufficiencyEstimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C19DCC2A4DDE46009883AB /* SelfSufficiencyEstimateView.swift */; };
 		41C19DCF2A4E09F9009883AB /* SelfSufficiencySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C19DCE2A4E09F9009883AB /* SelfSufficiencySettingsView.swift */; };
 		41C249A52A77FC7400D8E9E7 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C249A42A77FC7400D8E9E7 /* WebView.swift */; };
+		41C3B7F32E0EFA0B00A9EA58 /* ExportStatsDataIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3B7F22E0EFA0B00A9EA58 /* ExportStatsDataIntent.swift */; };
 		41C55ABF2D0242750035A002 /* TemperatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C55ABE2D0242750035A002 /* TemperatureView.swift */; };
 		41C6AF662A360CF600C88F2B /* CSVTextFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C6AF652A360CF600C88F2B /* CSVTextFile.swift */; };
 		41C849692A8BBC3800431410 /* Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C849682A8BBC3800431410 /* Shortcuts.swift */; };
@@ -780,6 +781,7 @@
 		41C19DCC2A4DDE46009883AB /* SelfSufficiencyEstimateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSufficiencyEstimateView.swift; sourceTree = "<group>"; };
 		41C19DCE2A4E09F9009883AB /* SelfSufficiencySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSufficiencySettingsView.swift; sourceTree = "<group>"; };
 		41C249A42A77FC7400D8E9E7 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		41C3B7F22E0EFA0B00A9EA58 /* ExportStatsDataIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportStatsDataIntent.swift; sourceTree = "<group>"; };
 		41C55ABE2D0242750035A002 /* TemperatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureView.swift; sourceTree = "<group>"; };
 		41C6AF652A360CF600C88F2B /* CSVTextFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVTextFile.swift; sourceTree = "<group>"; };
 		41C849682A8BBC3800431410 /* Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shortcuts.swift; sourceTree = "<group>"; };
@@ -1589,6 +1591,7 @@
 			children = (
 				41DAAC262CF52BDD0096DF20 /* ActiveScheduleIntent.swift */,
 				4134EE632D37CB8200291F15 /* ExportParameterDataIntent.swift */,
+				41C3B7F22E0EFA0B00A9EA58 /* ExportStatsDataIntent.swift */,
 				41E12E832CC6597A001F3839 /* CheckBatteryChargeLevelIntent.swift */,
 				41E12E8B2CC66893001F3839 /* CheckCurrentGridLoadIntent.swift */,
 				41E12E892CC66737001F3839 /* CheckCurrentLoadIntent.swift */,
@@ -2245,6 +2248,7 @@
 				418199C72A4034530001B5D4 /* FAQView.swift in Sources */,
 				4139CD982CC0023600DFB2C4 /* TemplateSummaryListRow.swift in Sources */,
 				417153E629F2BD3300639A7B /* LoadState.swift in Sources */,
+				41C3B7F32E0EFA0B00A9EA58 /* ExportStatsDataIntent.swift in Sources */,
 				410FC8882AB9B5450004CBC2 /* ParameterVariableListView.swift in Sources */,
 				41C19DCD2A4DDE46009883AB /* SelfSufficiencyEstimateView.swift in Sources */,
 				4130364B29B8BE7F006B5CE9 /* InverterChoiceView.swift in Sources */,

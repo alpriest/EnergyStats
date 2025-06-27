@@ -6834,6 +6834,9 @@
         }
       }
     },
+    "Export stats day data" : {
+
+    },
     "export_income" : {
       "localizations" : {
         "de" : {
@@ -7020,6 +7023,9 @@
           }
         }
       }
+    },
+    "Exports stats data for the specified date that you would usually see on the stats page" : {
+
     },
     "Failed" : {
       "localizations" : {
@@ -12712,6 +12718,9 @@
           }
         }
       }
+    },
+    "Reload devices from FoxESS Cloud" : {
+
     },
     "Remove key" : {
       "localizations" : {
