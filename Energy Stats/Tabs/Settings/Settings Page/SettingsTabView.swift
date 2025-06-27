@@ -93,6 +93,7 @@ struct SettingsTabView: View {
                 NavigationLink("settings.faq") { FAQView() }
                 NavigationLink("settings.debug") { DebugSettingsView(networking: networking) }
                 NavigationLink("Edit API Key") { ConfigureAPIKeyView() }
+                ReloadDevicesButton(viewModel: viewModel)
                 NavigationLink("Reset app settings") { FactoryResetAppSettingsView(configManager: configManager) }
             }
 
@@ -128,3 +129,29 @@ struct SettingsTabView: View {
     }
 }
 #endif
+
+struct ReloadDevicesButton: View {
+    @State private var isLoading = false
+    let viewModel: SettingsTabViewModel
+
+    var body: some View {
+        Button {
+            Task {
+                isLoading = true
+                try await viewModel.reloadDevices()
+                isLoading = false
+            }
+        } label: {
+            HStack {
+                if isLoading {
+                    ProgressView()
+                } else {
+                    Text("Reload devices from FoxESS Cloud").padding(.trailing)
+                    Spacer()
+                    Image(systemName: "arrow.clockwise")
+                        .foregroundStyle(.tertiary)
+                }
+            }.frame(maxWidth: .infinity)
+        }.buttonStyle(.plain)
+    }
+}

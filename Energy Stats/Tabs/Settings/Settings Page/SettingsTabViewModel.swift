@@ -271,6 +271,10 @@ class SettingsTabViewModel: ObservableObject {
         UserAgent.description()
     }
 
+    func reloadDevices() async throws {
+        try await config.fetchDevices()
+    }
+
     func update(from appSettings: AppSettings) {
         showColouredLines = appSettings.showColouredLines
         showBatteryTemperature = appSettings.showBatteryTemperature
