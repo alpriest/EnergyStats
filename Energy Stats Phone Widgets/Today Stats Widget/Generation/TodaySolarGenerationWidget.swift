@@ -1,5 +1,5 @@
 //
-//  TodayStatsWidget.swift
+//  TodaySolarGenerationWidget.swift
 //  Energy Stats
 //
 //  Created by Alistair Priest on 09/10/2024.
@@ -10,8 +10,8 @@ import SwiftData
 import SwiftUI
 import WidgetKit
 
-struct TodayStatsWidget: Widget {
-    private let kind: String = "TodayStatsWidget"
+struct TodaySolarGenerationWidget: Widget {
+    private let kind: String = "SolarGenerationWidget"
     private let configManager: ConfigManaging
     private let keychainStore: KeychainStoring
     private var container: ModelContainer
@@ -32,16 +32,16 @@ struct TodayStatsWidget: Widget {
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: StatsTimelineProvider(config: HomeEnergyStateManagerConfigAdapter(config: configManager, keychainStore: keychainStore))) { entry in
-            TodayStatsWidgetView(entry: entry, configManager: configManager)
+            TodaySolarGenerationWidgetView(entry: entry, configManager: configManager)
                 .modelContainer(container)
         }
-        .configurationDisplayName("Today Stats Widget")
-        .description("Shows the stats of your installation for the day.")
+        .configurationDisplayName("Today Solar Generation Widget")
+        .description("Shows the solar generation graph of your installation for today.")
         .supportedFamilies([.systemMedium])
     }
 }
 
-struct TodayStatsWidgetView: View {
+struct TodaySolarGenerationWidgetView: View {
     var entry: StatsTimelineProvider.Entry
     let configManager: ConfigManaging
     @Environment(\.widgetFamily) var family
@@ -77,22 +77,13 @@ struct TodayStatsWidgetView: View {
             } else if case .syncRequired = entry.state {
                 SyncRequiredView()
             } else {
-                StatsWidgetGraphView(
-                    home: entry.home,
-                    gridImport: entry.gridImport,
-                    gridExport: entry.gridExport,
-                    batteryCharge: entry.batteryCharge,
-                    batteryDischarge: entry.batteryDischarge,
-                    totalHome: entry.totalHome,
-                    totalGridImport: entry.totalGridImport,
-                    totalGridExport: entry.totalGridExport,
-                    totalBatteryCharge: entry.totalBatteryCharge,
-                    totalBatteryDischarge: entry.totalBatteryDischarge,
+                TodaySolarGenerationWidgetGraphView(
+                    PVEnergy: entry.pvEnergy,
+                    totalPVEnergy: entry.totalPVEnergy,
                     lastUpdated: entry.date
                 )
             }
         }
-        .redacted(reason: entry.state == .placeholder ? [.placeholder] : [])
         .containerBackground(for: .widget) {
             switch entry.state {
             case .failedWithoutData, .syncRequired:

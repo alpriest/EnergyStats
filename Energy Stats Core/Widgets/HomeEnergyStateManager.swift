@@ -147,7 +147,8 @@ extension HomeEnergyStateManager {
                         .feedIn,
                         .gridConsumption,
                         .chargeEnergyToTal,
-                        .dischargeEnergyToTal],
+                        .dischargeEnergyToTal,
+                        .pvEnergyTotal],
             queryDate: QueryDate(from: .now),
             reportType: .day
         )
@@ -158,7 +159,8 @@ extension HomeEnergyStateManager {
                         .feedIn,
                         .gridConsumption,
                         .chargeEnergyToTal,
-                        .dischargeEnergyToTal],
+                        .dischargeEnergyToTal,
+                        .pvEnergyTotal],
             queryDate: thisMonth(),
             reportType: .month
         )
@@ -179,7 +181,9 @@ extension HomeEnergyStateManager {
                                  totalGridImport: dailyTotalReports.todayValue(for: .gridConsumption) ?? 0.0,
                                  totalGridExport: dailyTotalReports.todayValue(for: .feedIn) ?? 0.0,
                                  totalBatteryCharge: dailyTotalReports.todayValue(for: .chargeEnergyToTal),
-                                 totalBatteryDischarge: dailyTotalReports.todayValue(for: .dischargeEnergyToTal))
+                                 totalBatteryDischarge: dailyTotalReports.todayValue(for: .dischargeEnergyToTal),
+                                 totalPVEnergy: dailyTotalReports.todayValue(for: .pvEnergyTotal)
+        )
     }
 
     @MainActor
@@ -189,7 +193,8 @@ extension HomeEnergyStateManager {
         totalGridImport: Double,
         totalGridExport: Double,
         totalBatteryCharge: Double?,
-        totalBatteryDischarge: Double?
+        totalBatteryDischarge: Double?,
+        totalPVEnergy: Double?
     ) throws {
         let state = StatsWidgetState(
             home: doubles(from: reports[.loads]),
@@ -197,11 +202,13 @@ extension HomeEnergyStateManager {
             gridImport: doubles(from: reports[.gridConsumption]),
             batteryCharge: doubles(from: reports[.chargeEnergyToTal]),
             batteryDischarge: doubles(from: reports[.dischargeEnergyToTal]),
+            pvEnergy: doubles(from: reports[.pvEnergyTotal]),
             totalHome: totalHome,
             totalGridImport: totalGridImport,
             totalGridExport: totalGridExport,
             totalBatteryCharge: totalBatteryCharge,
-            totalBatteryDischarge: totalBatteryDischarge
+            totalBatteryDischarge: totalBatteryDischarge,
+            totalPVEnergy: totalPVEnergy
         )
 
         deleteTodayStatsStateEntry()

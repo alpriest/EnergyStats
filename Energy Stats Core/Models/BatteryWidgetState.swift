@@ -41,11 +41,13 @@ public class StatsWidgetState {
     public var gridExport: [Double]
     public var batteryCharge: [Double]
     public var batteryDischarge: [Double]
+    public var pvEnergy: [Double]
     public var totalHome: Double
     public var totalGridImport: Double
     public var totalGridExport: Double
     public var totalBatteryCharge: Double?
     public var totalBatteryDischarge: Double?
+    public var totalPVEnergy: Double?
 
     public init(
         lastUpdated: Date = Date(),
@@ -54,11 +56,13 @@ public class StatsWidgetState {
         gridImport: [Double],
         batteryCharge: [Double],
         batteryDischarge: [Double],
+        pvEnergy: [Double],
         totalHome: Double,
         totalGridImport: Double,
         totalGridExport: Double,
         totalBatteryCharge: Double?,
-        totalBatteryDischarge: Double?
+        totalBatteryDischarge: Double?,
+        totalPVEnergy: Double?
     ) {
         self.lastUpdated = lastUpdated
         self.home = home
@@ -66,11 +70,13 @@ public class StatsWidgetState {
         self.gridImport = gridImport
         self.batteryCharge = batteryCharge
         self.batteryDischarge = batteryDischarge
+        self.pvEnergy = pvEnergy
         self.totalHome = totalHome
         self.totalGridImport = totalGridImport
         self.totalGridExport = totalGridExport
         self.totalBatteryCharge = totalBatteryCharge
         self.totalBatteryDischarge = totalBatteryDischarge
+        self.totalPVEnergy = totalPVEnergy
     }
 
     public static func empty() -> StatsWidgetState {
@@ -80,11 +86,13 @@ public class StatsWidgetState {
             gridImport: [0],
             batteryCharge: [0],
             batteryDischarge: [0],
+            pvEnergy: [],
             totalHome: 0,
             totalGridImport: 0,
             totalGridExport: 0,
             totalBatteryCharge: nil,
-            totalBatteryDischarge: nil
+            totalBatteryDischarge: nil,
+            totalPVEnergy: nil
         )
     }
 
@@ -94,6 +102,7 @@ public class StatsWidgetState {
         let gridImportValues = [2.0, 1.9, 1.8, 0.3, 0.5, 0.7, 1.0, 1.2, 1.7, 0.8, 1.5, 0.6]
         let batteryChargeValues = [2.4, 1.6, 0.9, 0.2, 1.3, 1.9, 0.7, 1.1, 0.5, 1.8, 1.0, 0.4]
         let batteryDischargeValues = [0.9, 0.2, 1.3, 1.5, 0.7, 0.8, 1.6, 0.3, 0.6, 1.9, 0.4, 1.2]
+        let pvEnergyValues = [0.0, 0.5, 0.9, 1.2, 1.5, 1.8, 1.3, 0.7, 0.3, 1.0, 1.6, 0.2]
 
         return StatsWidgetState(
             home: homeValues,
@@ -101,11 +110,13 @@ public class StatsWidgetState {
             gridImport: gridImportValues,
             batteryCharge: batteryChargeValues,
             batteryDischarge: batteryDischargeValues,
+            pvEnergy: pvEnergyValues,
             totalHome: homeValues.reduce(0, +),
             totalGridImport: gridImportValues.reduce(0, +),
             totalGridExport: gridExportValues.reduce(0, +),
             totalBatteryCharge: batteryChargeValues.reduce(0, +),
-            totalBatteryDischarge: batteryDischargeValues.reduce(0, +)
+            totalBatteryDischarge: batteryDischargeValues.reduce(0, +),
+            totalPVEnergy: pvEnergyValues.reduce(0, +)
         )
     }
 }

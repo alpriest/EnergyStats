@@ -74,6 +74,9 @@
     "Please open Energy Stats to synchronise data" : {
 
     },
+    "Shows the solar generation graph of your installation for today." : {
+
+    },
     "Shows the stats of your installation for the day." : {
 
     },
@@ -110,6 +113,9 @@
           }
         }
       }
+    },
+    "Today Solar Generation Widget" : {
+
     },
     "Today Stats Widget" : {
 

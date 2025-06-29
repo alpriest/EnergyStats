@@ -1,8 +1,8 @@
 //
-//  BatteryWidget.swift
-//  WidgetExtension
+//  TodayStatsWidget.swift
+//  Energy Stats
 //
-//  Created by Alistair Priest on 15/06/2023.
+//  Created by Alistair Priest on 09/10/2024.
 //
 
 import Energy_Stats_Core
@@ -10,8 +10,8 @@ import SwiftData
 import SwiftUI
 import WidgetKit
 
-struct BatteryWidget: Widget {
-    private let kind: String = "BatteryWidget"
+struct TodayStatsWidget: Widget {
+    private let kind: String = "TodayStatsWidget"
     private let configManager: ConfigManaging
     private let keychainStore: KeychainStoring
     private var container: ModelContainer
@@ -31,21 +31,18 @@ struct BatteryWidget: Widget {
     }
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: BatteryTimelineProvider(config: HomeEnergyStateManagerConfigAdapter(config: configManager, keychainStore: keychainStore))) { entry in
-            BatteryWidgetView(entry: entry, configManager: configManager)
+        StaticConfiguration(kind: kind, provider: StatsTimelineProvider(config: HomeEnergyStateManagerConfigAdapter(config: configManager, keychainStore: keychainStore))) { entry in
+            TodayStatsWidgetView(entry: entry, configManager: configManager)
                 .modelContainer(container)
         }
-        .configurationDisplayName("Battery Status Widget")
-        .description("Shows the status of your battery storage")
-        .supportedFamilies([.accessoryCircular,
-                            .accessoryInline,
-                            .systemSmall,
-                            .systemMedium])
+        .configurationDisplayName("Today Stats Widget")
+        .description("Shows the stats of your installation for the day.")
+        .supportedFamilies([.systemMedium])
     }
 }
 
-struct BatteryWidgetView: View {
-    var entry: BatteryTimelineProvider.Entry
+struct TodayStatsWidgetView: View {
+    var entry: StatsTimelineProvider.Entry
     let configManager: ConfigManaging
     @Environment(\.widgetFamily) var family
     @Environment(\.colorScheme) var colorScheme
@@ -72,7 +69,7 @@ struct BatteryWidgetView: View {
                             Text(reason)
                         }.padding(.bottom)
 
-                        Button(intent: UpdateBatteryChargeLevelIntent()) {
+                        Button(intent: UpdateTodayStatsIntent()) {
                             Text("Tap to retry")
                         }.buttonStyle(.bordered)
                     }
@@ -80,12 +77,18 @@ struct BatteryWidgetView: View {
             } else if case .syncRequired = entry.state {
                 SyncRequiredView()
             } else {
-                BatteryStatusView(
-                    soc: Double(entry.soc ?? 0) / 100.0,
-                    chargeStatusDescription: entry.chargeStatusDescription,
-                    lastUpdated: entry.date,
-                    appSettings: configManager.appSettingsPublisher.value,
-                    hasError: entry.errorMessage != nil
+                StatsWidgetGraphView(
+                    home: entry.home,
+                    gridImport: entry.gridImport,
+                    gridExport: entry.gridExport,
+                    batteryCharge: entry.batteryCharge,
+                    batteryDischarge: entry.batteryDischarge,
+                    totalHome: entry.totalHome,
+                    totalGridImport: entry.totalGridImport,
+                    totalGridExport: entry.totalGridExport,
+                    totalBatteryCharge: entry.totalBatteryCharge,
+                    totalBatteryDischarge: entry.totalBatteryDischarge,
+                    lastUpdated: entry.date
                 )
             }
         }
@@ -118,35 +121,5 @@ struct BatteryWidgetView: View {
         default:
             return 38
         }
-    }
-}
-
-struct BatteryWidget_Previews: PreviewProvider {
-    static var previews: some View {
-        BatteryWidgetView(
-            entry: BatteryTimelineEntry.failed(error: "Something went wrong"),
-            configManager: ConfigManager(
-                networking: NetworkService.preview(),
-                config: MockConfig(),
-                appSettingsPublisher: AppSettingsPublisherFactory.make(),
-                keychainStore: KeychainStore.preview()
-            )
-        )
-        .previewContext(WidgetPreviewContext(family: .accessoryCircular))
-
-        BatteryWidgetView(
-            entry: BatteryTimelineEntry.loaded(date: Date(),
-                                               soc: 50,
-                                               chargeStatusDescription: "Full in 22 minutes",
-                                               errorMessage: "Could not refresh",
-                                               batteryPower: 0),
-            configManager: ConfigManager(
-                networking: NetworkService.preview(),
-                config: MockConfig(),
-                appSettingsPublisher: AppSettingsPublisherFactory.make(),
-                keychainStore: KeychainStore.preview()
-            )
-        )
-        .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }

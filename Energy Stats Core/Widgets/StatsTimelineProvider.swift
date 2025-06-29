@@ -76,11 +76,13 @@ public struct StatsTimelineProvider: TimelineProvider {
                     gridExport: widgetState.gridExport,
                     batteryCharge: widgetState.batteryCharge,
                     batteryDischarge: widgetState.batteryDischarge,
+                    pvEnergy: widgetState.pvEnergy,
                     totalHome: widgetState.totalHome,
                     totalGridImport: widgetState.totalGridImport,
                     totalGridExport: widgetState.totalGridExport,
                     totalBatteryCharge: widgetState.totalBatteryCharge,
                     totalBatteryDischarge: widgetState.totalBatteryDischarge,
+                    totalPVEnergy: widgetState.totalPVEnergy,
                     errorMessage: errorMessage
                 )
             } else {
@@ -102,11 +104,13 @@ public struct StatsTimelineEntry: TimelineEntry {
     public let home: [Double]?
     public let batteryCharge: [Double]?
     public let batteryDischarge: [Double]?
+    public let pvEnergy: [Double]?
     public var totalHome: Double
     public var totalGridImport: Double
     public var totalGridExport: Double
     public var totalBatteryCharge: Double?
     public var totalBatteryDischarge: Double?
+    public let totalPVEnergy: Double?
     public let state: EntryState
     public let errorMessage: String?
 
@@ -117,11 +121,13 @@ public struct StatsTimelineEntry: TimelineEntry {
         gridExport: [Double]?,
         batteryCharge: [Double]?,
         batteryDischarge: [Double]?,
+        pvEnergy: [Double]?,
         totalHome: Double,
         totalGridImport: Double,
         totalGridExport: Double,
         totalBatteryCharge: Double?,
         totalBatteryDischarge: Double?,
+        totalPVEnergy: Double?,
         state: EntryState,
         errorMessage: String?
     ) {
@@ -131,11 +137,13 @@ public struct StatsTimelineEntry: TimelineEntry {
         self.gridExport = gridExport
         self.batteryCharge = batteryCharge
         self.batteryDischarge = batteryDischarge
+        self.pvEnergy = pvEnergy
         self.totalHome = totalHome
         self.totalGridImport = totalGridImport
         self.totalGridExport = totalGridExport
         self.totalBatteryCharge = totalBatteryCharge
         self.totalBatteryDischarge = totalBatteryDischarge
+        self.totalPVEnergy = totalPVEnergy
         self.state = state
         self.errorMessage = errorMessage
     }
@@ -147,11 +155,13 @@ public struct StatsTimelineEntry: TimelineEntry {
         gridExport: [Double]?,
         batteryCharge: [Double]?,
         batteryDischarge: [Double]?,
+        pvEnergy: [Double]?,
         totalHome: Double,
         totalGridImport: Double,
         totalGridExport: Double,
         totalBatteryCharge: Double?,
         totalBatteryDischarge: Double?,
+        totalPVEnergy: Double?,
         errorMessage: String?
     ) -> StatsTimelineEntry {
         StatsTimelineEntry(date: date,
@@ -160,11 +170,13 @@ public struct StatsTimelineEntry: TimelineEntry {
                            gridExport: gridExport,
                            batteryCharge: batteryCharge,
                            batteryDischarge: batteryDischarge,
+                           pvEnergy: pvEnergy,
                            totalHome: totalHome,
                            totalGridImport: totalGridImport,
                            totalGridExport: totalGridExport,
                            totalBatteryCharge: totalBatteryCharge,
                            totalBatteryDischarge: totalBatteryDischarge,
+                           totalPVEnergy: totalPVEnergy,
                            state: .loaded,
                            errorMessage: nil)
     }
@@ -176,11 +188,13 @@ public struct StatsTimelineEntry: TimelineEntry {
                            gridExport: StatsWidgetState.preview.gridExport,
                            batteryCharge: StatsWidgetState.preview.batteryCharge,
                            batteryDischarge: StatsWidgetState.preview.batteryDischarge,
+                           pvEnergy: StatsWidgetState.preview.pvEnergy,
                            totalHome: 0,
                            totalGridImport: 0,
                            totalGridExport: 0,
                            totalBatteryCharge: nil,
                            totalBatteryDischarge: nil,
+                           totalPVEnergy: 4.0,
                            state: .placeholder,
                            errorMessage: nil)
     }
@@ -192,11 +206,13 @@ public struct StatsTimelineEntry: TimelineEntry {
                            gridExport: nil,
                            batteryCharge: nil,
                            batteryDischarge: nil,
+                           pvEnergy: nil,
                            totalHome: 0,
                            totalGridImport: 0,
                            totalGridExport: 0,
                            totalBatteryCharge: nil,
                            totalBatteryDischarge: nil,
+                           totalPVEnergy: nil,
                            state: .failedWithoutData(reason: error),
                            errorMessage: error)
     }

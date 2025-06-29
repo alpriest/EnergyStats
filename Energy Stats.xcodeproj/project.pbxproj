@@ -176,9 +176,7 @@
 		41757BBC2A90A05E00573FB4 /* AmountType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41757BBB2A90A05E00573FB4 /* AmountType.swift */; };
 		41757BBD2A90A06E00573FB4 /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0B43329F96D3600CA9462 /* LocalizedString.swift */; };
 		417747F92C0379080023A51C /* history-temp.json in Resources */ = {isa = PBXBuildFile; fileRef = 417747F82C0379080023A51C /* history-temp.json */; };
-		41777F5B2CB6CD5900507E4B /* TodayStatsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41777F5A2CB6CD4C00507E4B /* TodayStatsWidget.swift */; };
 		41777F5D2CB6D63A00507E4B /* StatsTimelineProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41777F5C2CB6D63500507E4B /* StatsTimelineProvider.swift */; };
-		41777F5F2CB6D70B00507E4B /* StatsWidgetGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41777F5E2CB6D70A00507E4B /* StatsWidgetGraphView.swift */; };
 		417AA21A2A12454A0073CD34 /* StatsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AA2192A12454A0073CD34 /* StatsTabView.swift */; };
 		417AA21D2A1245C00073CD34 /* StatsTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AA21C2A1245C00073CD34 /* StatsTabViewModel.swift */; };
 		417CE6EF2DE660B9003D5F64 /* String+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417CE6EE2DE660B4003D5F64 /* String+Double.swift */; };
@@ -680,9 +678,7 @@
 		41757BBB2A90A05E00573FB4 /* AmountType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountType.swift; sourceTree = "<group>"; };
 		417747F82C0379080023A51C /* history-temp.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "history-temp.json"; sourceTree = "<group>"; };
 		41777F1428F49C61009944FF /* NetworkFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFacade.swift; sourceTree = "<group>"; };
-		41777F5A2CB6CD4C00507E4B /* TodayStatsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayStatsWidget.swift; sourceTree = "<group>"; };
 		41777F5C2CB6D63500507E4B /* StatsTimelineProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTimelineProvider.swift; sourceTree = "<group>"; };
-		41777F5E2CB6D70A00507E4B /* StatsWidgetGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsWidgetGraphView.swift; sourceTree = "<group>"; };
 		417AA2192A12454A0073CD34 /* StatsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTabView.swift; sourceTree = "<group>"; };
 		417AA21C2A1245C00073CD34 /* StatsTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTabViewModel.swift; sourceTree = "<group>"; };
 		417CE6EE2DE660B4003D5F64 /* String+Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Double.swift"; sourceTree = "<group>"; };
@@ -874,6 +870,8 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		41C3B7F62E0F004200A9EA58 /* Stats */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Stats; sourceTree = "<group>"; };
+		41C3B7F72E0F004A00A9EA58 /* Generation */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Generation; sourceTree = "<group>"; };
 		41FBF4052DAA5B3200EBD4D5 /* Pulse */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Pulse; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -1715,8 +1713,8 @@
 			isa = PBXGroup;
 			children = (
 				41F3596B2CB9684F002DC9F4 /* UpdateTodayStatsIntent.swift */,
-				41777F5E2CB6D70A00507E4B /* StatsWidgetGraphView.swift */,
-				41777F5A2CB6CD4C00507E4B /* TodayStatsWidget.swift */,
+				41C3B7F62E0F004200A9EA58 /* Stats */,
+				41C3B7F72E0F004A00A9EA58 /* Generation */,
 			);
 			path = "Today Stats Widget";
 			sourceTree = "<group>";
@@ -1787,6 +1785,10 @@
 			);
 			dependencies = (
 				41FB0D2A2AC19150002C8FED /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				41C3B7F62E0F004200A9EA58 /* Stats */,
+				41C3B7F72E0F004A00A9EA58 /* Generation */,
 			);
 			name = "Energy Stats Phone WidgetsExtension";
 			productName = "Energy Stats WidgetsExtension";
@@ -2118,9 +2120,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				41EE909D2BDEAA27006412FB /* UpdateBatteryChargeLevelIntent.swift in Sources */,
-				41777F5F2CB6D70B00507E4B /* StatsWidgetGraphView.swift in Sources */,
 				4197A0DC2CC6901A00913823 /* SyncRequiredView.swift in Sources */,
-				41777F5B2CB6CD5900507E4B /* TodayStatsWidget.swift in Sources */,
 				412A26832AC03BF000F61456 /* BatteryStatusView.swift in Sources */,
 				412A26712AC03B2300F61456 /* Energy_Stats_WidgetsBundle.swift in Sources */,
 				412A267E2AC03B4B00F61456 /* BatteryWidget.swift in Sources */,

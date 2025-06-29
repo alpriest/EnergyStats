@@ -6835,7 +6835,32 @@
       }
     },
     "Export stats day data" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tagesstatistiken exportieren"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exportar datos diarios de estadísticas"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esporta dati statistici giornalieri"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eksportuj dane dzienne statystyk"
+          }
+        }
+      }
     },
     "export_income" : {
       "localizations" : {
@@ -7025,7 +7050,32 @@
       }
     },
     "Exports stats data for the specified date that you would usually see on the stats page" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exportiert Statistikdaten für das angegebene Datum, wie sie normalerweise auf der Statistikseite angezeigt werden."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exporta los datos estadísticos para la fecha especificada, tal como se muestran normalmente en la página de estadísticas."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esporta i dati statistici per la data specificata, come normalmente visualizzati nella pagina delle statistiche."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eksportuje dane statystyczne dla określonej daty, które zwykle są widoczne na stronie statystyk."
+          }
+        }
+      }
     },
     "Failed" : {
       "localizations" : {
@@ -12720,7 +12770,32 @@
       }
     },
     "Reload devices from FoxESS Cloud" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geräte aus der FoxESS Cloud neu laden"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recargar dispositivos desde la nube de FoxESS"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ricarica i dispositivi dal cloud FoxESS"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wczytaj ponownie urządzenia z chmury FoxESS"
+          }
+        }
+      }
     },
     "Remove key" : {
       "localizations" : {
