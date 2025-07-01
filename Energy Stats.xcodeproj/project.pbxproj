@@ -72,6 +72,7 @@
 		411542F92BEF583100BDE56D /* parameters-history-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 411542F82BEF583100BDE56D /* parameters-history-success.json */; };
 		411B302E2AEAE0DD006A6C02 /* FoxEssCloudParseStrategyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411B302D2AEAE0DD006A6C02 /* FoxEssCloudParseStrategyTests.swift */; };
 		411DF2742AFD404E00CEEB23 /* SolarForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411DF2732AFD404E00CEEB23 /* SolarForecastView.swift */; };
+		411F46062E13B678005992C8 /* IconScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411F46052E13B678005992C8 /* IconScale.swift */; };
 		412087FB2BF5DDBE00E4899E /* SwiftData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 412087F92BF5DDA400E4899E /* SwiftData.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		41229CBD2BE1217600CFA636 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41229CBC2BE1217600CFA636 /* ContentViewModel.swift */; };
 		412790FF28E1FB9200D5F993 /* UserManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412790FE28E1FB9200D5F993 /* UserManagerTests.swift */; };
@@ -237,10 +238,6 @@
 		41AF2F432AA4C6C1008FCA2E /* HomePowerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AF2F422AA4C6C1008FCA2E /* HomePowerFooterView.swift */; };
 		41AF2F452AA4C74F008FCA2E /* GridPowerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AF2F442AA4C74F008FCA2E /* GridPowerFooterView.swift */; };
 		41B3FFE82AB07FE10020DFC9 /* NetworkCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B3FFE72AB07FE10020DFC9 /* NetworkCache.swift */; };
-		41B5F1D02BE4BACF009208FA /* SolarPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B5F1CF2BE4BACF009208FA /* SolarPowerView.swift */; };
-		41B5F1D22BE4BB1A009208FA /* BatteryPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B5F1D12BE4BB1A009208FA /* BatteryPowerView.swift */; };
-		41B5F1D42BE4BD76009208FA /* HomePowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B5F1D32BE4BD76009208FA /* HomePowerView.swift */; };
-		41B5F1D62BE4BDC3009208FA /* GridPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B5F1D52BE4BDC3009208FA /* GridPowerView.swift */; };
 		41B690F628E03EA70058126E /* NetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B690F528E03EA70058126E /* NetworkTests.swift */; };
 		41B690F928E040060058126E /* OHHTTPStubsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 41B690F828E040060058126E /* OHHTTPStubsSwift */; };
 		41B690FD28E042560058126E /* login-failure.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B690FB28E042560058126E /* login-failure.json */; };
@@ -566,6 +563,7 @@
 		411542F82BEF583100BDE56D /* parameters-history-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "parameters-history-success.json"; sourceTree = "<group>"; };
 		411B302D2AEAE0DD006A6C02 /* FoxEssCloudParseStrategyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoxEssCloudParseStrategyTests.swift; sourceTree = "<group>"; };
 		411DF2732AFD404E00CEEB23 /* SolarForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarForecastView.swift; sourceTree = "<group>"; };
+		411F46052E13B678005992C8 /* IconScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconScale.swift; sourceTree = "<group>"; };
 		412087F92BF5DDA400E4899E /* SwiftData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftData.framework; path = System/Library/Frameworks/SwiftData.framework; sourceTree = SDKROOT; };
 		41229CBC2BE1217600CFA636 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		4127690128EC865000D5A094 /* PowerAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerAmountView.swift; sourceTree = "<group>"; };
@@ -751,10 +749,6 @@
 		41AF2F422AA4C6C1008FCA2E /* HomePowerFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePowerFooterView.swift; sourceTree = "<group>"; };
 		41AF2F442AA4C74F008FCA2E /* GridPowerFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPowerFooterView.swift; sourceTree = "<group>"; };
 		41B3FFE72AB07FE10020DFC9 /* NetworkCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCache.swift; sourceTree = "<group>"; };
-		41B5F1CF2BE4BACF009208FA /* SolarPowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarPowerView.swift; sourceTree = "<group>"; };
-		41B5F1D12BE4BB1A009208FA /* BatteryPowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryPowerView.swift; sourceTree = "<group>"; };
-		41B5F1D32BE4BD76009208FA /* HomePowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePowerView.swift; sourceTree = "<group>"; };
-		41B5F1D52BE4BDC3009208FA /* GridPowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPowerView.swift; sourceTree = "<group>"; };
 		41B690F328DF5C390058126E /* NetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponse.swift; sourceTree = "<group>"; };
 		41B690F528E03EA70058126E /* NetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTests.swift; sourceTree = "<group>"; };
 		41B690FB28E042560058126E /* login-failure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "login-failure.json"; sourceTree = "<group>"; };
@@ -870,6 +864,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		411F46022E133126005992C8 /* Icons */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Icons; sourceTree = "<group>"; };
 		41C3B7F62E0F004200A9EA58 /* Stats */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Stats; sourceTree = "<group>"; };
 		41C3B7F72E0F004A00A9EA58 /* Generation */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Generation; sourceTree = "<group>"; };
 		41FBF4052DAA5B3200EBD4D5 /* Pulse */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Pulse; sourceTree = "<group>"; };
@@ -1723,20 +1718,18 @@
 			isa = PBXGroup;
 			children = (
 				4128874F2BE7D5F7007E9532 /* App Communication */,
-				41355C9D2BE25812001DED7C /* Energy-Stats-Watch-App-Info.plist */,
+				41F6317B2BDCD32E00A571C5 /* Assets.xcassets */,
+				411F46022E133126005992C8 /* Icons */,
+				41F631792BDCD32D00A571C5 /* ContentView.swift */,
+				41229CBC2BE1217600CFA636 /* ContentViewModel.swift */,
 				41F631862BDCD3E800A571C5 /* Energy Stats Watch App.entitlements */,
 				41F631772BDCD32D00A571C5 /* Energy_Stats_Watch_AppApp.swift */,
-				41F631792BDCD32D00A571C5 /* ContentView.swift */,
-				41F6317B2BDCD32E00A571C5 /* Assets.xcassets */,
+				41355C9D2BE25812001DED7C /* Energy-Stats-Watch-App-Info.plist */,
+				411F46052E13B678005992C8 /* IconScale.swift */,
 				41A715942BE0CE3400560628 /* LoadStateView.swift */,
-				41229CBC2BE1217600CFA636 /* ContentViewModel.swift */,
 				41F6317D2BDCD32E00A571C5 /* Preview Content */,
-				41B5F1CF2BE4BACF009208FA /* SolarPowerView.swift */,
-				41B5F1D12BE4BB1A009208FA /* BatteryPowerView.swift */,
-				41B5F1D32BE4BD76009208FA /* HomePowerView.swift */,
-				41B5F1D52BE4BDC3009208FA /* GridPowerView.swift */,
-				412887462BE7BCAD007E9532 /* WatchConfigManager.swift */,
 				414ACCA42BEAC2D700617EED /* StubKeychainStore.swift */,
+				412887462BE7BCAD007E9532 /* WatchConfigManager.swift */,
 			);
 			path = "Energy Stats Watch App";
 			sourceTree = "<group>";
@@ -1942,6 +1935,9 @@
 			dependencies = (
 				41F6318A2BDCD6B100A571C5 /* PBXTargetDependency */,
 				41EE90B62BDEB6FC006412FB /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				411F46022E133126005992C8 /* Icons */,
 			);
 			name = "Energy Stats Watch App";
 			productName = "Energy Stats Watch App Watch App";
@@ -2453,15 +2449,12 @@
 				41229CBD2BE1217600CFA636 /* ContentViewModel.swift in Sources */,
 				414ACCA52BEAC2D700617EED /* StubKeychainStore.swift in Sources */,
 				41F6317A2BDCD32D00A571C5 /* ContentView.swift in Sources */,
-				41B5F1D42BE4BD76009208FA /* HomePowerView.swift in Sources */,
 				412887472BE7BCAD007E9532 /* WatchConfigManager.swift in Sources */,
 				412887512BE7D603007E9532 /* EnergyStatsWatchAppDelegate.swift in Sources */,
 				412887532BE7D617007E9532 /* WatchSessionDelegate.swift in Sources */,
 				41A715952BE0CE3400560628 /* LoadStateView.swift in Sources */,
-				41B5F1D62BE4BDC3009208FA /* GridPowerView.swift in Sources */,
 				41F631782BDCD32D00A571C5 /* Energy_Stats_Watch_AppApp.swift in Sources */,
-				41B5F1D22BE4BB1A009208FA /* BatteryPowerView.swift in Sources */,
-				41B5F1D02BE4BACF009208FA /* SolarPowerView.swift in Sources */,
+				411F46062E13B678005992C8 /* IconScale.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2659,7 +2652,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 57;
+				CURRENT_PROJECT_VERSION = 59;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2682,7 +2675,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.90;
+				MARKETING_VERSION = 2.91;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2726,7 +2719,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 57;
+				CURRENT_PROJECT_VERSION = 59;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2743,7 +2736,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.90;
+				MARKETING_VERSION = 2.91;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
