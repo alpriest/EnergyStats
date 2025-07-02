@@ -18,30 +18,38 @@ struct BatteryPowerView: View {
         FullPageStatusView(
             iconScale: iconScale,
             icon: {
-                ZStack(alignment: .bottom) {
-                    Image(systemName: "minus.plus.batteryblock.fill")
-                        .font(iconScale.iconFont)
-                        .opacity(0)
-                        .readSize { batterySize = $0 }
+                Group {
+                    if iconScale.isLarge {
+                        ZStack(alignment: .bottom) {
+                            Image(systemName: "minus.plus.batteryblock.fill")
+                                .font(iconScale.iconFont)
+                                .opacity(0)
+                                .readSize { batterySize = $0 }
 
-                    Color.iconDisabled
+                            Color.iconDisabled
 
-                    if let batterySOC = batterySOC {
-                        battery.tintColor
-                            .opacity(0.5)
-                            .frame(height: batterySize.height * 0.87 * batterySOC)
-                            .padding(.bottom, 7)
+                            if let batterySOC = batterySOC {
+                                battery.tintColor
+                                    .opacity(0.5)
+                                    .frame(height: batterySize.height * batterySOC)
+                                    .padding(.bottom, 7)
+                            }
+                        }
+                        .mask(
+                            Image(systemName: "minus.plus.batteryblock.fill")
+                                .font(iconScale.iconFont)
+                        )
+                    } else {
+                        Image(systemName: "minus.plus.batteryblock.fill")
+                            .font(iconScale.iconFont)
+                            .foregroundStyle(battery == nil ? Color.iconDisabled : battery.tintColor)
                     }
                 }
-                .mask(
-                    Image(systemName: "minus.plus.batteryblock.fill")
-                        .font(iconScale.iconFont)
-                )
             },
             line1: {
                 Group {
                     if let battery {
-                        Text(abs(battery).kW(2))
+                        Text(battery.kW(2))
                     } else {
                         Text("xxxxx")
                             .redacted(reason: .placeholder)
@@ -62,7 +70,7 @@ struct BatteryPowerView: View {
 }
 
 #Preview {
-    BatteryPowerView(batterySOC: 0.5, battery: 8.4, iconScale: .large)
+    BatteryPowerView(batterySOC: 1.0, battery: 8.4, iconScale: .large)
 }
 
 #Preview {

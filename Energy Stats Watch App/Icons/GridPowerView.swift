@@ -52,49 +52,6 @@ struct GridPowerView: View {
                 }
             }
         )
-
-//        VStack(alignment: .center, spacing: 0) {
-//            ZStack(alignment: .bottom) {
-//                Color.clear
-//
-//                PylonView(lineWidth: lineWidth)
-//                    .frame(width: iconScale.size.width * iconScaleFactor, height: iconScale.size.height * iconScaleFactor)
-//                    .foregroundStyle(value == nil ? .iconDisabled : value.tintColor)
-//                    .padding(.bottom, 12)
-//            }
-//            .background(Color.yellow)
-//            .frame(height: iconScale.size.height)
-//
-//            HStack {
-//                if let value {
-//                    Text(abs(value).kW(2))
-//                } else {
-//                    Text("xxxxx")
-//                        .redacted(reason: .placeholder)
-//                }
-//            }.font(iconScale.line1Font)
-//
-//            if let totalExport, let totalImport {
-//                HStack(spacing: 2) {
-//                    Text(totalImport.roundedToString(decimalPlaces: 1))
-//                        .foregroundStyle(Color.linesNegative)
-//                    Text("/")
-//                        .foregroundStyle(Color.linesNotFlowing)
-//                    Text(totalExport.kWh(1))
-//                        .foregroundStyle(Color.linesPositive)
-//                }
-//                .font(iconScale.line2Font)
-//            }
-//        }
-    }
-
-    private var iconSize: CGFloat {
-        switch iconScale {
-        case .small:
-            36
-        case .large:
-            108
-        }
     }
 
     private var lineWidth: CGFloat {

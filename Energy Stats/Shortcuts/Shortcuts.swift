@@ -41,5 +41,11 @@ struct EnergyStatsShortcuts: AppShortcutsProvider {
             shortTitle: "Export Parameter Data",
             systemImageName: "square.and.arrow.up.fill"
         )
+        AppShortcut(
+            intent: ExportStatsDataIntent(),
+            phrases: ["Export my stats data on \(.applicationName)"],
+            shortTitle: "Export Stats Data",
+            systemImageName: "square.and.arrow.up.fill"
+        )
     }
 }

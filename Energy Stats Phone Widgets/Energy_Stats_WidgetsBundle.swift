@@ -11,6 +11,8 @@ import WidgetKit
 
 @main
 struct Energy_Stats_WidgetsBundle: WidgetBundle {
+
+    @WidgetBundleBuilder
     var body: some Widget {
         BatteryWidget()
         TodayStatsWidget()

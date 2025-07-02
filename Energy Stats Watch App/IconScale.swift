@@ -47,4 +47,13 @@ enum IconScale {
             .system(size: 20, weight: .bold)
         }
     }
+
+    var isLarge: Bool {
+        switch self {
+        case .small:
+            false
+        case .large:
+            true
+        }
+    }
 }

@@ -86,7 +86,7 @@ public class StatsWidgetState {
             gridImport: [0],
             batteryCharge: [0],
             batteryDischarge: [0],
-            pvEnergy: [],
+            pvEnergy: [0],
             totalHome: 0,
             totalGridImport: 0,
             totalGridExport: 0,
