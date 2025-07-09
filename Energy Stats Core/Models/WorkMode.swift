@@ -36,6 +36,25 @@ public enum WorkMode: String, CaseIterable, Codable, RawRepresentable {
         }
     }
 
+    public var networkTitle: String {
+        switch self {
+        case .SelfUse:
+            "SelfUse"
+        case .Feedin:
+            "Feedin"
+        case .Backup:
+            "Backup"
+        case .ForceCharge:
+            "ForceCharge"
+        case .ForceDischarge:
+            "ForceDischarge"
+        case .Invalid:
+            ""
+        case .PeakShaving:
+            ""
+        }
+    }
+
     public static var values: [WorkMode] {
         WorkMode.allCases.filter { $0.title != "" }
     }

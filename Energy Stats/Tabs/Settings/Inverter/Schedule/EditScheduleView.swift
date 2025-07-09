@@ -52,6 +52,8 @@ struct EditScheduleView: View {
                         } label: {
                             Text("Autofill gaps")
                         }.buttonStyle(.borderedProminent)
+
+                        Text("Any time periods not specified above will default to Self Use mode, using the min SOC from the most recent active period.")
                     }
                 }
             }

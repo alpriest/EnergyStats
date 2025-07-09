@@ -26,6 +26,7 @@ struct InverterSettingsView: View {
         Form {
             InverterChoiceView(viewModel: InverterChoiceViewModel(configManager: configManager))
 
+            
             Section {
                 NavigationLink("Manage schedules") {
                     ScheduleSummaryView(networking: networking, configManager: configManager, templateStore: templateStore)

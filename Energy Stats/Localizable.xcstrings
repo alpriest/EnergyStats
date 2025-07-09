@@ -2603,6 +2603,9 @@
         }
       }
     },
+    "Any time periods not specified above will default to Self Use mode, using the min SOC from the most recent active period." : {
+
+    },
     "API Key" : {
       "localizations" : {
         "de" : {
@@ -3022,6 +3025,9 @@
           }
         }
       }
+    },
+    "Backup" : {
+
     },
     "Bad credentials" : {
       "extractionState" : "manual",
@@ -3882,6 +3888,12 @@
           }
         }
       }
+    },
+    "Change inverter work mode" : {
+
+    },
+    "Changes the work mode of the inverter" : {
+
     },
     "Charge " : {
       "extractionState" : "manual",
@@ -7108,6 +7120,9 @@
         }
       }
     },
+    "Feed In First" : {
+
+    },
     "Feed-in " : {
       "extractionState" : "manual",
       "localizations" : {
@@ -7304,6 +7319,12 @@
           }
         }
       }
+    },
+    "Force Charge" : {
+
+    },
+    "Force Discharge" : {
+
     },
     "Force Discharge Power" : {
       "localizations" : {
@@ -13670,6 +13691,9 @@
         }
       }
     },
+    "Self Use" : {
+
+    },
     "Separate parameter graphs by unit" : {
       "localizations" : {
         "de" : {
@@ -15498,6 +15522,9 @@
         }
       }
     },
+    "The mode the inverter should switch to" : {
+
+    },
     "The output power level to be delivered, including your house load and grid export. E.g. If you have 5kW inverter then set this to 5000, then if the house load is 750W the other 4.25kW will be exported." : {
       "localizations" : {
         "de" : {
@@ -16728,6 +16755,9 @@
           }
         }
       }
+    },
+    "Which work mode would you like to set?" : {
+
     },
     "Will be reset:" : {
       "localizations" : {

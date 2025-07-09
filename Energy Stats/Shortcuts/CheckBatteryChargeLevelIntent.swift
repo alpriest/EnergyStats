@@ -22,3 +22,4 @@ struct CheckBatteryChargeLevelIntent: AppIntent {
         return .result(value: soc, dialog: IntentDialog(stringLiteral: "\(soc)%"))
     }
 }
+

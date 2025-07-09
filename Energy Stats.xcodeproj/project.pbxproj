@@ -181,6 +181,7 @@
 		417AA21A2A12454A0073CD34 /* StatsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AA2192A12454A0073CD34 /* StatsTabView.swift */; };
 		417AA21D2A1245C00073CD34 /* StatsTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AA21C2A1245C00073CD34 /* StatsTabViewModel.swift */; };
 		417CE6EF2DE660B9003D5F64 /* String+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417CE6EE2DE660B4003D5F64 /* String+Double.swift */; };
+		417E1CE02E1D9A41009E8374 /* ChangeWorkModeIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417E1CDF2E1D9A41009E8374 /* ChangeWorkModeIntent.swift */; };
 		418024E22AD16D00009A2625 /* String+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418024E12AD16D00009A2625 /* String+Currency.swift */; };
 		418045C62C80D8090006A6E0 /* EarningsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418045C52C80D8090006A6E0 /* EarningsModel.swift */; };
 		418141452A12BABA00FFC6A6 /* StatsGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418141442A12BABA00FFC6A6 /* StatsGraphView.swift */; };
@@ -680,6 +681,7 @@
 		417AA2192A12454A0073CD34 /* StatsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTabView.swift; sourceTree = "<group>"; };
 		417AA21C2A1245C00073CD34 /* StatsTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTabViewModel.swift; sourceTree = "<group>"; };
 		417CE6EE2DE660B4003D5F64 /* String+Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Double.swift"; sourceTree = "<group>"; };
+		417E1CDF2E1D9A41009E8374 /* ChangeWorkModeIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeWorkModeIntent.swift; sourceTree = "<group>"; };
 		418024E12AD16D00009A2625 /* String+Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Currency.swift"; sourceTree = "<group>"; };
 		418045C52C80D8090006A6E0 /* EarningsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarningsModel.swift; sourceTree = "<group>"; };
 		418141442A12BABA00FFC6A6 /* StatsGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGraphView.swift; sourceTree = "<group>"; };
@@ -1582,6 +1584,7 @@
 		41E12E822CC65973001F3839 /* Shortcuts */ = {
 			isa = PBXGroup;
 			children = (
+				417E1CDF2E1D9A41009E8374 /* ChangeWorkModeIntent.swift */,
 				41DAAC262CF52BDD0096DF20 /* ActiveScheduleIntent.swift */,
 				4134EE632D37CB8200291F15 /* ExportParameterDataIntent.swift */,
 				41C3B7F22E0EFA0B00A9EA58 /* ExportStatsDataIntent.swift */,
@@ -1952,7 +1955,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1530;
-				LastUpgradeCheck = 1630;
+				LastUpgradeCheck = 1640;
 				TargetAttributes = {
 					412A266B2AC03B2200F61456 = {
 						CreatedOnToolsVersion = 15.0;
@@ -2269,6 +2272,7 @@
 				41C0923B2B20FCB0001D1E22 /* SchedulePhaseHelper.swift in Sources */,
 				4107446328CA1C5D006D5D7D /* PowerFlowView.swift in Sources */,
 				41D7AB902B9F1F6C00FFDFC0 /* InfoButtonView.swift in Sources */,
+				417E1CE02E1D9A41009E8374 /* ChangeWorkModeIntent.swift in Sources */,
 				41A25D3F28CA5CFB00315714 /* ParametersGraphTabViewModel.swift in Sources */,
 				4107446128C9EF6B006D5D7D /* LoadedPowerFlowView.swift in Sources */,
 				4190922C2B1E49210017CB65 /* ScheduleView.swift in Sources */,
@@ -2622,6 +2626,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -2689,6 +2694,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;

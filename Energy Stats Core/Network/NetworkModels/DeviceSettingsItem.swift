@@ -13,6 +13,7 @@ public enum DeviceSettingsItem: String, RawRepresentable {
     case minSocOnGrid = "MinSocOnGrid"
     case maxSoc = "MaxSoc"
     case gridCode = "GridCode"
+    case workMode = "WorkMode"
 }
 
 public struct FetchDeviceSettingsItemRequest: Encodable {
