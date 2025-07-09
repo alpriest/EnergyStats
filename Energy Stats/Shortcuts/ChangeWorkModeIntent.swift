@@ -15,7 +15,7 @@ struct ChangeWorkModeIntent: AppIntent {
     static var openAppWhenRun: Bool = false
 
     @Parameter(
-        title: "Work mode",
+        title: "Work Mode",
         description: "The mode the inverter should switch to",
         requestValueDialog: IntentDialog("Which work mode would you like to set?")
     )
@@ -40,7 +40,7 @@ enum IntentsWorkMode: String, AppEnum, CaseDisplayRepresentable, RawRepresentabl
     case ForceCharge
     case ForceDischarge
 
-    public static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Work mode")
+    public static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Work Mode")
 
     public static var caseDisplayRepresentations: [Self: DisplayRepresentation] = [
         .SelfUse: DisplayRepresentation(stringLiteral: "Self Use"),

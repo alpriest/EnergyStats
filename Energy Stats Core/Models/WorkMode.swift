@@ -58,4 +58,24 @@ public enum WorkMode: String, CaseIterable, Codable, RawRepresentable, Describab
     public static var values: [WorkMode] {
         WorkMode.allCases.filter { $0.title != "" }
     }
+
+    @ViewBuilder
+    public var subtitle: some View {
+        switch self {
+        case .SelfUse:
+            Text("workmode.self_use_mode.description")
+        case .Feedin:
+            Text("workmode.feed_in_first_mode.description")
+        case .Backup:
+            Text("workmode.backup_mode.description")
+        case .ForceCharge:
+            Text("workmode.force_charge_mode.description")
+        case .ForceDischarge:
+            Text("workmode.forceDischarge.description")
+        case .Invalid:
+            EmptyView()
+        case .PeakShaving:
+            Text("workmode.peak_shaving.description")
+        }
+    }
 }

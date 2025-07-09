@@ -23,14 +23,14 @@ struct InverterFirmwareVersionsView: View {
                 } header: {
                     Text("Firmware Versions")
                 } footer: {
-                    VStack(alignment: .leading) {
-                        Text("Find out more about firmware versions from the ") +
-                            Text("foxesscommunity.com")
-                            .foregroundColor(Color.blue) +
-                            Text(" ") + Text("website")
-                    }
-                    .onTapGesture {
-                        UIApplication.shared.open(URL(string: "https://foxesscommunity.com/viewforum.php?f=29")!)
+                    Link(destination: URL(string: "https://foxesscommunity.com/viewforum.php?f=29")!) {
+                        HStack {
+                            Text("Find out more")
+                            Image(systemName: "rectangle.portrait.and.arrow.right")
+                        }
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .font(.caption)
                     }
                 }
                 .contentShape(Rectangle())

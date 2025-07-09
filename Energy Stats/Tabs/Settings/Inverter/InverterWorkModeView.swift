@@ -42,23 +42,11 @@ struct InverterWorkModeView: View {
                             .buttonStyle(PlainButtonStyle())
                         }
                     }
-                } header: {
-                    HStack {
-                        Image(systemName: "exclamationmark.triangle.fill")
-                            .font(.title)
-                            .foregroundColor(.red)
-
-                        Text("Inverter change warning")
-
-                        Image(systemName: "exclamationmark.triangle.fill")
-                            .font(.title)
-                            .foregroundColor(.red)
-                    }
-                    .padding(.vertical)
-                } footer: {
+                }
+                footer: {
                     Link(destination: URL(string: "https://github.com/TonyM1958/HA-FoxESS-Modbus/wiki/Inverter-Work-Modes")!) {
                         HStack {
-                            Text("Find out more about work modes")
+                            Text("Find out more")
                             Image(systemName: "rectangle.portrait.and.arrow.right")
                         }
                         .padding()
@@ -74,7 +62,8 @@ struct InverterWorkModeView: View {
             viewModel.load()
         }
         .alert(alertContent: $viewModel.alertContent)
-        .navigationTitle("Configure Work Mode")
+        .navigationTitle("Work Mode")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

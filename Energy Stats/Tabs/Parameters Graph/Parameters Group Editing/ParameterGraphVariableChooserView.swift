@@ -49,7 +49,7 @@ struct ParameterGraphVariableChooserView: View {
                     } footer: {
                         Link(destination: URL(string: "https://github.com/TonyM1958/HA-FoxESS-Modbus/wiki/Fox-ESS-Cloud#search-parameters")!) {
                             HStack {
-                                Text("Find out more about these variables")
+                                Text("Find out more")
                                 Image(systemName: "rectangle.portrait.and.arrow.right")
                             }
                             .padding()

@@ -79,7 +79,7 @@ struct SchedulePhaseEditView: View {
                 Section {
                     CustomDatePicker(start: $startTime, end: $endTime)
 
-                    Picker("Work mode", selection: $workMode) {
+                    Picker("Work Mode", selection: $workMode) {
                         ForEach(modes, id: \.self) { mode in
                             Text(mode.title)
                         }

@@ -2604,7 +2604,32 @@
       }
     },
     "Any time periods not specified above will default to Self Use mode, using the min SOC from the most recent active period." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alle oben nicht angegebenen Zeiträume werden standardmäßig im Selbstverbrauchsmodus betrieben, wobei der minimale Ladezustand (SOC) aus dem zuletzt aktiven Zeitraum verwendet wird."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cualquier período no especificado anteriormente se establecerá por defecto en el modo de Autoconsumo, utilizando el SOC mínimo del periodo activo más reciente."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tutti i periodi non specificati sopra utilizzeranno per impostazione predefinita la modalità di Autoconsumo, utilizzando il SOC minimo del periodo attivo più recente."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wszystkie okresy niewymienione powyżej domyślnie przejdą w tryb Autokonsumpcji, wykorzystując minimalny poziom naładowania (SOC) z ostatniego aktywnego okresu."
+          }
+        }
+      }
     },
     "API Key" : {
       "localizations" : {
@@ -3027,7 +3052,7 @@
       }
     },
     "Backup" : {
-
+      "shouldTranslate" : false
     },
     "Bad credentials" : {
       "extractionState" : "manual",
@@ -3890,10 +3915,60 @@
       }
     },
     "Change inverter work mode" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wechselrichter-Betriebsmodus ändern"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cambiar modo de funcionamiento del inversor"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cambia modalità di funzionamento dell'inverter"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zmień tryb pracy falownika"
+          }
+        }
+      }
     },
     "Changes the work mode of the inverter" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ändert den Betriebsmodus des Wechselrichters"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cambia el modo de funcionamiento del inversor"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modifica la modalità di funzionamento dell'inverter"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zmienia tryb pracy falownika"
+          }
+        }
+      }
     },
     "Charge " : {
       "extractionState" : "manual",
@@ -6847,7 +6922,32 @@
       }
     },
     "Export Stats Data" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Statistiken exportieren"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exportar datos estadísticos"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esporta dati statistici"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eksportuj dane statystyczne"
+          }
+        }
+      }
     },
     "Export stats day data" : {
       "localizations" : {
@@ -7121,7 +7221,7 @@
       }
     },
     "Feed In First" : {
-
+      "shouldTranslate" : false
     },
     "Feed-in " : {
       "extractionState" : "manual",
@@ -7236,58 +7336,30 @@
         }
       }
     },
-    "Find out more about firmware versions from the " : {
+    "Find out more" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mehr Informationen über Firmware-Versionen gibt es auf der "
+            "value" : "Weitere Informationen"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Obtén más información sobre las versiones de firmware en "
+            "value" : "Más información"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Per saperne di più sulle versioni del firmware da parte del"
+            "value" : "Scopri di più"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dowiedz się więcej o wersjach oprogramowania na stronie "
-          }
-        }
-      }
-    },
-    "Find out more about these variables" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mehr Informationen über diese Variablen"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Obtén más información sobre estas variables"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Per saperne di più su queste variabili"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dowiedz się więcej o tych zmiennych"
+            "value" : "Dowiedz się więcej"
           }
         }
       }
@@ -7321,10 +7393,10 @@
       }
     },
     "Force Charge" : {
-
+      "shouldTranslate" : false
     },
     "Force Discharge" : {
-
+      "shouldTranslate" : false
     },
     "Force Discharge Power" : {
       "localizations" : {
@@ -7662,34 +7734,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Interfejs OpenAPI firmy FoxESS nie odpowiedział wystarczająco szybko. Spróbuj ponownie lub zgłoś problem dotyczący wydajności ich interfejsu OpenAPI na https://www.foxesscloud.com/bus/workorder/list, jeśli często widzisz ten komunikat."
-          }
-        }
-      }
-    },
-    "foxesscommunity.com" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
           }
         }
       }
@@ -13692,7 +13736,7 @@
       }
     },
     "Self Use" : {
-
+      "shouldTranslate" : false
     },
     "Separate parameter graphs by unit" : {
       "localizations" : {
@@ -15523,7 +15567,32 @@
       }
     },
     "The mode the inverter should switch to" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Modus, in den der Wechselrichter wechseln soll"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El modo al que debe cambiar el inversor"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La modalità a cui l'inverter deve passare"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tryb, na który falownik powinien się przełączyć"
+          }
+        }
+      }
     },
     "The output power level to be delivered, including your house load and grid export. E.g. If you have 5kW inverter then set this to 5000, then if the house load is 750W the other 4.25kW will be exported." : {
       "localizations" : {
@@ -16469,34 +16538,6 @@
         }
       }
     },
-    "website" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Webseite"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "sitio web"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "sito web"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Strona internetowa"
-          }
-        }
-      }
-    },
     "What is my API key?" : {
       "localizations" : {
         "de" : {
@@ -16757,7 +16798,32 @@
       }
     },
     "Which work mode would you like to set?" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Welchen Betriebsmodus möchten Sie einstellen?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Qué modo de funcionamiento deseas configurar?"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quale modalità di funzionamento desideri impostare?"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jaki tryb pracy chcesz ustawić?"
+          }
+        }
+      }
     },
     "Will be reset:" : {
       "localizations" : {
@@ -16815,7 +16881,7 @@
         }
       }
     },
-    "Work mode" : {
+    "Work Mode" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -16878,31 +16944,31 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "In diesem Modus priorisiert der Wechselrichter die Energiezuweisung wie folgt:\n\n1. Batterieladung\n2. Hauslast\n3. Export\n\nÄhnlich wie beim Eigenverbrauch, außer dass die Batterie nicht entladen wird."
+            "value" : "Dieser Arbeitsmodus ist auf einigen Wechselrichtern verfügbar. In diesem Modus verteilt der Wechselrichter die PV-Stromerzeugung wie folgt:\n\n1. Hausverbrauch\n2. Batterieladung\n3. Einspeisung\n\nDas Hauptziel dieses Modus besteht darin, die Batterien geladen zu halten, damit sie im Falle eines Netzausfalls als EPS verwendet werden können."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "In this mode, the inverter prioritises power allocation as follows:\n\n1. Battery Charging\n2. House Load\n3. Export\n\nSimilar to Self Use, except the battery is not discharged."
+            "value" : "This work mode is available on some inverters. In this mode, the inverter allocates PV power generation as follows:\n\n1. House Load\n2. Battery Charging\n3. Export\n\nThe main goal of this mode is to keep the batteries charged so they can be used as EPS in the event of a grid supply failure."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "En este modo, el inversor prioriza la asignación de energía de la siguiente manera:\n\n1. Carga de la batería\n2. Carga de la casa\n3. Exportación\n\nSimilar al modo de Autoconsumo, excepto que la batería no se descarga."
+            "value" : "Este modo de funcionamiento está disponible en algunos inversores. En este modo, el inversor asigna la generación de energía fotovoltaica de la siguiente manera:\n\n1. Consumo del hogar\n2. Carga de batería\n3. Exportación\n\nEl objetivo principal de este modo es mantener las baterías cargadas para que puedan usarse como EPS en caso de un fallo en el suministro eléctrico."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "In questa modalità, l'inverter dà priorità all'allocazione della potenza come segue:\n\n1. Carica della batteria\n2. Carico della casa\n3. Esportazione\n\nSimile a Auto Utilizzo, tranne per il fatto che la batteria non viene scaricata."
+            "value" : "Questa modalità di funzionamento è disponibile su alcuni inverter. In questa modalità, l'inverter assegna la produzione di energia fotovoltaica come segue:\n\n1. Carico della casa\n2. Carica della batteria\n3. Esportazione\n\nL'obiettivo principale di questa modalità è mantenere le batterie cariche in modo che possano essere utilizzate come EPS in caso di interruzione della rete elettrica."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "W tym trybie falownik priorytetowo przydziela moc w następujący sposób:\n\n1. Ładowanie baterii\n2. Obciążenie domu\n3. Eksport\n\nPodobnie jak w trybie Autokonsumpcji, z tą różnicą, że bateria nie jest rozładowywana."
+            "value" : "Ten tryb pracy jest dostępny w niektórych falownikach. W tym trybie falownik przydziela energię z PV w następujący sposób:\n\n1. Zużycie domowe\n2. Ładowanie baterii\n3. Eksport\n\nGłównym celem tego trybu jest utrzymanie naładowanych baterii, aby mogły być użyte jako EPS w przypadku awarii zasilania z sieci."
           }
         }
       }

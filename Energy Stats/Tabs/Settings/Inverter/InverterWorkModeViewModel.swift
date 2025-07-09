@@ -26,12 +26,12 @@ class InverterWorkModeViewModel: ObservableObject {
         Task { @MainActor in
             guard state == .inactive else { return }
             guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
-            state = .active(.loading)
+//            state = .active(.loading)
 
 //            do {
 //                let response = try await networking.fetchWorkMode(deviceSN: deviceSN)
-//                let workMode = response.values.operationModeWorkMode.asWorkMode()
-//                self.items = WorkMode.values.map { SelectableItem($0, isSelected: $0 == workMode) }
+            let workMode = WorkMode.SelfUse
+                self.items = WorkMode.values.map { SelectableItem($0, isSelected: $0 == workMode) }
 //
 //                state = .inactive
 //            } catch {
