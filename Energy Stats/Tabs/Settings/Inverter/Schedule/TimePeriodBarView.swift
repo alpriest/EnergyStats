@@ -5,8 +5,8 @@
 //  Created by Alistair Priest on 29/11/2023.
 //
 
-import SwiftUI
 import Energy_Stats_Core
+import SwiftUI
 
 struct TimePeriodBarView: View {
     let phases: [SchedulePhase]
@@ -105,6 +105,70 @@ extension Schedule {
                     forceDischargeSOC: 20,
                     maxSOC: 100,
                     color: .paleGray
+                )!,
+                SchedulePhase(
+                    start: Time(
+                        hour: 1,
+                        minute: 00
+                    ),
+                    end: Time(
+                        hour: 2,
+                        minute: 00
+                    ),
+                    mode: .ForceCharge,
+                    minSocOnGrid: 100,
+                    forceDischargePower: 0,
+                    forceDischargeSOC: 100,
+                    maxSOC: 100,
+                    color: .linesNegative
+                )!,
+                SchedulePhase(
+                    start: Time(
+                        hour: 08,
+                        minute: 00
+                    ),
+                    end: Time(
+                        hour: 14,
+                        minute: 30
+                    ),
+                    mode: .ForceDischarge,
+                    minSocOnGrid: 20,
+                    forceDischargePower: 3500,
+                    forceDischargeSOC: 20,
+                    maxSOC: 100,
+                    color: .linesPositive
+                )!,
+                SchedulePhase(
+                    start: Time(
+                        hour: 19,
+                        minute: 30
+                    ),
+                    end: Time(
+                        hour: 23,
+                        minute: 30
+                    ),
+                    mode: .SelfUse,
+                    minSocOnGrid: 20,
+                    forceDischargePower: 0,
+                    forceDischargeSOC: 20,
+                    maxSOC: 100,
+                    color: .paleGray
+                )!,
+                SchedulePhase(
+                    start: Time(
+                        hour: 1,
+                        minute: 00
+                    ),
+                    end: Time(
+                        hour: 2,
+                        minute: 00
+                    ),
+                    mode: .ForceCharge,
+                    minSocOnGrid: 100,
+                    forceDischargePower: 0,
+                    forceDischargeSOC: 100,
+                    maxSOC: 100,
+                    color: .linesNegative
                 )!
             ]
         )

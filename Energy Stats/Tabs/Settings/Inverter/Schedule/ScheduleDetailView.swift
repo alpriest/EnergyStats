@@ -29,7 +29,7 @@ struct ScheduleDetailView: View {
             }
         }
 
-        ForEach(schedule.phases) { phase in
+        ForEachIndexed(schedule.phases) { index, phase in
             NavigationLink {
                 SchedulePhaseEditView(phase: phase,
                                       configManager: configManager,
@@ -37,6 +37,12 @@ struct ScheduleDetailView: View {
                                       onDelete: onDelete)
             } label: {
                 SchedulePhaseListItemView(phase: phase)
+                    .if(index >= Schedule.maxPhasesCount) {
+                        $0.overlay(
+                            // Diagonal stripes
+                            CrossHatchView()
+                        )
+                    }
             }
         }
         .frame(maxWidth: .infinity)
@@ -50,4 +56,20 @@ struct ScheduleDetailView: View {
         onUpdate: { _ in },
         onDelete: { _ in }
     )
+}
+
+struct ForEachIndexed<Data: RandomAccessCollection, Content: View>: View where Data.Element: Identifiable {
+    let data: Data
+    let content: (Data.Index, Data.Element) -> Content
+
+    init(_ data: Data, @ViewBuilder content: @escaping (Data.Index, Data.Element) -> Content) {
+        self.data = data
+        self.content = content
+    }
+
+    var body: some View {
+        ForEach(Array(zip(data.indices, data)), id: \.1.id) { index, element in
+            content(index, element)
+        }
+    }
 }

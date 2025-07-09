@@ -54,6 +54,17 @@ struct EditScheduleView: View {
                         }.buttonStyle(.borderedProminent)
 
                         Text("Any time periods not specified above will default to Self Use mode, using the min SOC from the most recent active period.")
+
+                        if viewModel.schedule.hasTooManyPhases {
+                            HStack(alignment: .top) {
+                                Color.white.overlay(
+                                    CrossHatchView()
+                                )
+                                .frame(width: 30, height: 30)
+
+                                Text("Period will not be used by FoxESS if you activate this template as there is a maximum of 8 periods.")
+                            }
+                        }
                     }
                 }
             }

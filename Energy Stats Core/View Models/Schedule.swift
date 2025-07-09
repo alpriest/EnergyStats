@@ -105,6 +105,12 @@ public struct Schedule: Hashable, Equatable {
 
         return true
     }
+
+    public static let maxPhasesCount = 8
+
+    public var hasTooManyPhases: Bool {
+        phases.count > Schedule.maxPhasesCount
+    }
 }
 
 public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {

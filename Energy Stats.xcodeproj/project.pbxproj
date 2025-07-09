@@ -105,6 +105,7 @@
 		413208702B9E3BC400A31873 /* DataSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4132086F2B9E3BC400A31873 /* DataSettingsView.swift */; };
 		4134ACC42A88A1A800CB4BA8 /* InverterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4134ACC32A88A1A800CB4BA8 /* InverterView.swift */; };
 		4134EE642D37CB8200291F15 /* ExportParameterDataIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4134EE632D37CB8200291F15 /* ExportParameterDataIntent.swift */; };
+		413715AD2E1EFDFB00505496 /* CrossHatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413715AC2E1EFDF800505496 /* CrossHatchView.swift */; };
 		4139CD982CC0023600DFB2C4 /* TemplateSummaryListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4139CD972CC0023400DFB2C4 /* TemplateSummaryListRow.swift */; };
 		413B7A312A4A390C00562A68 /* SelfSufficiencyCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413B7A302A4A390C00562A68 /* SelfSufficiencyCalculator.swift */; };
 		413B7A3A2A4A397000562A68 /* Energy_Stats_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; platformFilter = ios; };
@@ -601,6 +602,7 @@
 		4134ACC32A88A1A800CB4BA8 /* InverterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterView.swift; sourceTree = "<group>"; };
 		4134EE632D37CB8200291F15 /* ExportParameterDataIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportParameterDataIntent.swift; sourceTree = "<group>"; };
 		41355C9D2BE25812001DED7C /* Energy-Stats-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Energy-Stats-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
+		413715AC2E1EFDF800505496 /* CrossHatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossHatchView.swift; sourceTree = "<group>"; };
 		4139CD972CC0023400DFB2C4 /* TemplateSummaryListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateSummaryListRow.swift; sourceTree = "<group>"; };
 		413B7A302A4A390C00562A68 /* SelfSufficiencyCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSufficiencyCalculator.swift; sourceTree = "<group>"; };
 		413B7A362A4A397000562A68 /* Energy Stats Core Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Energy Stats Core Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1419,6 +1421,7 @@
 		417E1CE92E1E5E99009E8374 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				413715AC2E1EFDF800505496 /* CrossHatchView.swift */,
 				417E1CEA2E1E5EA4009E8374 /* EnergyText.swift */,
 				417E1CEB2E1E5EA4009E8374 /* FindOutMoreView.swift */,
 				417E1CEC2E1E5EA4009E8374 /* PowerAmountView.swift */,
@@ -2366,6 +2369,7 @@
 				410F41272DA5B95400DEE2F4 /* DeviceSettingsItem.swift in Sources */,
 				416AE4492A8128B9003D0122 /* OptionalView.swift in Sources */,
 				41E165B52B0B961200B17590 /* SolcastSettings.swift in Sources */,
+				413715AD2E1EFDFB00505496 /* CrossHatchView.swift in Sources */,
 				41CA35732AA8C10900D45734 /* EarningsViewModel.swift in Sources */,
 				410913FF29DB7A2700133CC5 /* CurrentStatusCalculator.swift in Sources */,
 				415F0BDB2D9D5422003EB760 /* String+Localised.swift in Sources */,
