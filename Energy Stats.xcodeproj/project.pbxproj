@@ -182,6 +182,8 @@
 		417AA21D2A1245C00073CD34 /* StatsTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417AA21C2A1245C00073CD34 /* StatsTabViewModel.swift */; };
 		417CE6EF2DE660B9003D5F64 /* String+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417CE6EE2DE660B4003D5F64 /* String+Double.swift */; };
 		417E1CE02E1D9A41009E8374 /* ChangeWorkModeIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417E1CDF2E1D9A41009E8374 /* ChangeWorkModeIntent.swift */; };
+		417E1CE22E1E4732009E8374 /* InverterWorkModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417E1CE12E1E472D009E8374 /* InverterWorkModeView.swift */; };
+		417E1CE42E1E473F009E8374 /* InverterWorkModeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417E1CE32E1E473A009E8374 /* InverterWorkModeViewModel.swift */; };
 		418024E22AD16D00009A2625 /* String+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418024E12AD16D00009A2625 /* String+Currency.swift */; };
 		418045C62C80D8090006A6E0 /* EarningsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418045C52C80D8090006A6E0 /* EarningsModel.swift */; };
 		418141452A12BABA00FFC6A6 /* StatsGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418141442A12BABA00FFC6A6 /* StatsGraphView.swift */; };
@@ -682,6 +684,8 @@
 		417AA21C2A1245C00073CD34 /* StatsTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTabViewModel.swift; sourceTree = "<group>"; };
 		417CE6EE2DE660B4003D5F64 /* String+Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Double.swift"; sourceTree = "<group>"; };
 		417E1CDF2E1D9A41009E8374 /* ChangeWorkModeIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeWorkModeIntent.swift; sourceTree = "<group>"; };
+		417E1CE12E1E472D009E8374 /* InverterWorkModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterWorkModeView.swift; sourceTree = "<group>"; };
+		417E1CE32E1E473A009E8374 /* InverterWorkModeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterWorkModeViewModel.swift; sourceTree = "<group>"; };
 		418024E12AD16D00009A2625 /* String+Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Currency.swift"; sourceTree = "<group>"; };
 		418045C52C80D8090006A6E0 /* EarningsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarningsModel.swift; sourceTree = "<group>"; };
 		418141442A12BABA00FFC6A6 /* StatsGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGraphView.swift; sourceTree = "<group>"; };
@@ -1373,6 +1377,8 @@
 		416AE4342A7D2C67003D0122 /* Inverter */ = {
 			isa = PBXGroup;
 			children = (
+				417E1CE32E1E473A009E8374 /* InverterWorkModeViewModel.swift */,
+				417E1CE12E1E472D009E8374 /* InverterWorkModeView.swift */,
 				410F41572DA80D7500DEE2F4 /* Advanced */,
 				410F412A2DA5BD5D00DEE2F4 /* ESLabeledText.swift */,
 				418C09172B1783F300183603 /* Schedule */,
@@ -2153,6 +2159,7 @@
 				41AB53402B9319B900B6C371 /* SolarStringsView.swift in Sources */,
 				411DF2742AFD404E00CEEB23 /* SolarForecastView.swift in Sources */,
 				4110290D2A71B713004018BB /* BatteryChargeScheduleSettingsView.swift in Sources */,
+				417E1CE22E1E4732009E8374 /* InverterWorkModeView.swift in Sources */,
 				41965EDF2C31EE9B004F9D9A /* SecureTextEntryField.swift in Sources */,
 				413208702B9E3BC400A31873 /* DataSettingsView.swift in Sources */,
 				419AB4802AA36D24002CBC96 /* DisplaySettingsView.swift in Sources */,
@@ -2190,6 +2197,7 @@
 				41D759FE2B5B1768002C43A7 /* EditScheduleView.swift in Sources */,
 				41FCE06B2CA170930046ABF6 /* LeftTabbedView.swift in Sources */,
 				417153E429F2BCD700639A7B /* ParameterGraphHeaderView.swift in Sources */,
+				417E1CE42E1E473F009E8374 /* InverterWorkModeViewModel.swift in Sources */,
 				41D75A032B6009D5002C43A7 /* UpgradeRequiredView.swift in Sources */,
 				416AE4362A7D2C8B003D0122 /* InverterSettingsView.swift in Sources */,
 				417AA21A2A12454A0073CD34 /* StatsTabView.swift in Sources */,
@@ -2823,6 +2831,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -2868,6 +2877,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;

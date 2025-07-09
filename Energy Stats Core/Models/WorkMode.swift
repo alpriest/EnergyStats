@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-public enum WorkMode: String, CaseIterable, Codable, RawRepresentable {
+public enum WorkMode: String, CaseIterable, Codable, RawRepresentable, Describable {
     case SelfUse
     case Feedin
     case Backup

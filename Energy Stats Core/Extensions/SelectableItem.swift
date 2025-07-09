@@ -8,10 +8,7 @@
 import SwiftUI
 
 public protocol Describable {
-    associatedtype ExtraContent: View
-
     var title: String { get }
-    var subtitle: ExtraContent { get }
 }
 
 public typealias Selectable = Describable & Hashable
