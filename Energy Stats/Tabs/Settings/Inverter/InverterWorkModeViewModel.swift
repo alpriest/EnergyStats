@@ -26,39 +26,39 @@ class InverterWorkModeViewModel: ObservableObject {
         Task { @MainActor in
             guard state == .inactive else { return }
             guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
-//            state = .active(.loading)
+            state = .active(.loading)
 
-//            do {
-//                let response = try await networking.fetchWorkMode(deviceSN: deviceSN)
-            let workMode = WorkMode.SelfUse
+            do {
+                let response = try await networking.fetchDeviceSettingsItem(deviceSN: deviceSN, item: .workMode)
+                let workMode = WorkMode(rawValue: response.value)
                 self.items = WorkMode.values.map { SelectableItem($0, isSelected: $0 == workMode) }
-//
-//                state = .inactive
-//            } catch {
-//                state = .error(error, "Could not load work mode")
-//            }
+
+                state = .inactive
+            } catch {
+                state = .error(error, "Could not load work mode")
+            }
         }
     }
 
     func save() {
         guard let mode = selected else { return }
 
-//        Task { @MainActor in
-//            guard state == .inactive else { return }
-//            guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
-//            state = .active("Saving")
-//
-//            do {
-//                try await networking.setWorkMode(deviceSN: deviceSN, workMode: mode.asInverterWorkMode())
-//                alertContent = AlertContent(title: "Success", message: "inverter_settings_saved")
-//                state = .inactive
-//            } catch let NetworkError.foxServerError(code, _) where code == 44096 {
-//                alertContent = AlertContent(title: "Failed", message: "cannot_save_due_to_active_schedule")
-//                state = .inactive
-//            } catch {
-//                state = .error(error, "Could not save work mode")
-//            }
-//        }
+        Task { @MainActor in
+            guard state == .inactive else { return }
+            guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
+            state = .active(.saving)
+
+            do {
+                try await networking.setDeviceSettingsItem(deviceSN: deviceSN, item: .workMode, value: mode.networkTitle)
+                alertContent = AlertContent(title: "Success", message: "inverter_settings_saved")
+                state = .inactive
+            } catch let NetworkError.foxServerError(code, _) where code == 44096 {
+                alertContent = AlertContent(title: "Failed", message: "cannot_save_due_to_active_schedule")
+                state = .inactive
+            } catch {
+                state = .error(error, "Could not save work mode")
+            }
+        }
     }
 
     func toggle(updating: SelectableItem<WorkMode>) {
