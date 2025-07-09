@@ -47,18 +47,7 @@ struct ParameterGraphVariableChooserView: View {
                     } header: {
                         Text("Parameters")
                     } footer: {
-                        Link(destination: URL(string: "https://github.com/TonyM1958/HA-FoxESS-Modbus/wiki/Fox-ESS-Cloud#search-parameters")!) {
-                            HStack {
-                                Text("Find out more")
-                                Image(systemName: "rectangle.portrait.and.arrow.right")
-                            }
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .font(.caption)
-                        }
-
-                        Button("Restore defaults") {}
-                            .buttonStyle(.borderedProminent)
+                        FindOutMoreView(urlString: "https://github.com/TonyM1958/HA-FoxESS-Modbus/wiki/Fox-ESS-Cloud#search-parameters")
                     }
                 }
 

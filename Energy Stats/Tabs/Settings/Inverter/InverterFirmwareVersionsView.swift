@@ -23,15 +23,7 @@ struct InverterFirmwareVersionsView: View {
                 } header: {
                     Text("Firmware Versions")
                 } footer: {
-                    Link(destination: URL(string: "https://foxesscommunity.com/viewforum.php?f=29")!) {
-                        HStack {
-                            Text("Find out more")
-                            Image(systemName: "rectangle.portrait.and.arrow.right")
-                        }
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .font(.caption)
-                    }
+                    FindOutMoreView(urlString: "https://foxesscommunity.com/viewforum.php?f=29")
                 }
                 .contentShape(Rectangle())
                 .alertCopy(text(version))

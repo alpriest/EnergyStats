@@ -184,14 +184,17 @@
 		417E1CE02E1D9A41009E8374 /* ChangeWorkModeIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417E1CDF2E1D9A41009E8374 /* ChangeWorkModeIntent.swift */; };
 		417E1CE22E1E4732009E8374 /* InverterWorkModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417E1CE12E1E472D009E8374 /* InverterWorkModeView.swift */; };
 		417E1CE42E1E473F009E8374 /* InverterWorkModeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417E1CE32E1E473A009E8374 /* InverterWorkModeViewModel.swift */; };
+		417E1CEF2E1E5EA4009E8374 /* SunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417E1CEE2E1E5EA4009E8374 /* SunView.swift */; };
+		417E1CF02E1E5EA4009E8374 /* FindOutMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417E1CEB2E1E5EA4009E8374 /* FindOutMoreView.swift */; };
+		417E1CF12E1E5EA4009E8374 /* PowerText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417E1CED2E1E5EA4009E8374 /* PowerText.swift */; };
+		417E1CF22E1E5EA4009E8374 /* EnergyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417E1CEA2E1E5EA4009E8374 /* EnergyText.swift */; };
+		417E1CF32E1E5EA4009E8374 /* PowerAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417E1CEC2E1E5EA4009E8374 /* PowerAmountView.swift */; };
 		418024E22AD16D00009A2625 /* String+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418024E12AD16D00009A2625 /* String+Currency.swift */; };
 		418045C62C80D8090006A6E0 /* EarningsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418045C52C80D8090006A6E0 /* EarningsModel.swift */; };
 		418141452A12BABA00FFC6A6 /* StatsGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418141442A12BABA00FFC6A6 /* StatsGraphView.swift */; };
 		418199C72A4034530001B5D4 /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418199C62A4034530001B5D4 /* FAQView.swift */; };
 		418199CA2A4035F40001B5D4 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 418199C92A4035F40001B5D4 /* MarkdownUI */; };
 		418240782A9A33E300101064 /* TotalsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418240772A9A33E300101064 /* TotalsViewModel.swift */; };
-		418547492A3A1C7A000128C7 /* PowerAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127690128EC865000D5A094 /* PowerAmountView.swift */; };
-		4185474C2A3B1025000128C7 /* SunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4162BC2F2A097C1300DFEDC1 /* SunView.swift */; };
 		418685D52AFE700100355B6D /* AnimatedNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418685D42AFE700100355B6D /* AnimatedNumber.swift */; };
 		418805952BA04FAA00055EDA /* history.json in Resources */ = {isa = PBXBuildFile; fileRef = 418805942BA04FAA00055EDA /* history.json */; };
 		4189B0332B94888F00EC4CB5 /* VersionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4189B0322B94888F00EC4CB5 /* VersionChecker.swift */; };
@@ -569,7 +572,6 @@
 		411F46052E13B678005992C8 /* IconScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconScale.swift; sourceTree = "<group>"; };
 		412087F92BF5DDA400E4899E /* SwiftData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftData.framework; path = System/Library/Frameworks/SwiftData.framework; sourceTree = SDKROOT; };
 		41229CBC2BE1217600CFA636 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
-		4127690128EC865000D5A094 /* PowerAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerAmountView.swift; sourceTree = "<group>"; };
 		412790FE28E1FB9200D5F993 /* UserManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManagerTests.swift; sourceTree = "<group>"; };
 		4127910128E1FBD300D5F993 /* MockKeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockKeychainStore.swift; sourceTree = "<group>"; };
 		4127910528E1FC1D00D5F993 /* MockNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworking.swift; sourceTree = "<group>"; };
@@ -654,7 +656,6 @@
 		41626CCF29D969E9003FEB00 /* InverterFirmwareVersionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterFirmwareVersionsView.swift; sourceTree = "<group>"; };
 		41626CD129D96AD9003FEB00 /* DeviceFirmwareVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceFirmwareVersion.swift; sourceTree = "<group>"; };
 		4162BC2B2A09772C00DFEDC1 /* earnings.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = earnings.json; sourceTree = "<group>"; };
-		4162BC2F2A097C1300DFEDC1 /* SunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunView.swift; sourceTree = "<group>"; };
 		416318BD29DDD80E00C2C285 /* View+Copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Copy.swift"; sourceTree = "<group>"; };
 		4163CA7B2B4DE46D00FDA232 /* APIKeyLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeyLoginView.swift; sourceTree = "<group>"; };
 		416AE4352A7D2C8B003D0122 /* InverterSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterSettingsView.swift; sourceTree = "<group>"; };
@@ -686,6 +687,11 @@
 		417E1CDF2E1D9A41009E8374 /* ChangeWorkModeIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeWorkModeIntent.swift; sourceTree = "<group>"; };
 		417E1CE12E1E472D009E8374 /* InverterWorkModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterWorkModeView.swift; sourceTree = "<group>"; };
 		417E1CE32E1E473A009E8374 /* InverterWorkModeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterWorkModeViewModel.swift; sourceTree = "<group>"; };
+		417E1CEA2E1E5EA4009E8374 /* EnergyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnergyText.swift; sourceTree = "<group>"; };
+		417E1CEB2E1E5EA4009E8374 /* FindOutMoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindOutMoreView.swift; sourceTree = "<group>"; };
+		417E1CEC2E1E5EA4009E8374 /* PowerAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerAmountView.swift; sourceTree = "<group>"; };
+		417E1CED2E1E5EA4009E8374 /* PowerText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerText.swift; sourceTree = "<group>"; };
+		417E1CEE2E1E5EA4009E8374 /* SunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunView.swift; sourceTree = "<group>"; };
 		418024E12AD16D00009A2625 /* String+Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Currency.swift"; sourceTree = "<group>"; };
 		418045C52C80D8090006A6E0 /* EarningsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarningsModel.swift; sourceTree = "<group>"; };
 		418141442A12BABA00FFC6A6 /* StatsGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGraphView.swift; sourceTree = "<group>"; };
@@ -1410,6 +1416,18 @@
 			path = Stats;
 			sourceTree = "<group>";
 		};
+		417E1CE92E1E5E99009E8374 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				417E1CEA2E1E5EA4009E8374 /* EnergyText.swift */,
+				417E1CEB2E1E5EA4009E8374 /* FindOutMoreView.swift */,
+				417E1CEC2E1E5EA4009E8374 /* PowerAmountView.swift */,
+				417E1CED2E1E5EA4009E8374 /* PowerText.swift */,
+				417E1CEE2E1E5EA4009E8374 /* SunView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		418C09172B1783F300183603 /* Schedule */ = {
 			isa = PBXGroup;
 			children = (
@@ -1496,7 +1514,6 @@
 		41A95B9529DB3F6A00A35169 /* Energy Stats Core */ = {
 			isa = PBXGroup;
 			children = (
-				41BACC052D91401500C9C718 /* TipKit */,
 				41757BBB2A90A05E00573FB4 /* AmountType.swift */,
 				410AA38729D96F6D00CD107C /* AppSettings.swift */,
 				41E3BEC22B1B5A160051C68B /* AppSettingsPublisherFactory.swift */,
@@ -1512,16 +1529,16 @@
 				413745072919022C00D351F1 /* Mocks */,
 				4140146728C7373A00EA5BA1 /* Models */,
 				41E4B30C28DB670C003F7F47 /* Network */,
-				4127690128EC865000D5A094 /* PowerAmountView.swift */,
 				410913FC29DB78EF00133CC5 /* PreciseDateTimeFormatter.swift */,
 				41A95BA029DB3F7E00A35169 /* PylonView.swift */,
 				413B7A302A4A390C00562A68 /* SelfSufficiencyCalculator.swift */,
 				41009A6F2B02CD50009D853B /* Solcast */,
 				41CB71492A3B1B6C00199415 /* StyleGuide.swift */,
-				4162BC2F2A097C1300DFEDC1 /* SunView.swift */,
 				411542EB2BED310200BDE56D /* TemplateStore.swift */,
+				41BACC052D91401500C9C718 /* TipKit */,
 				4189B0322B94888F00EC4CB5 /* VersionChecker.swift */,
 				4109140129DB7AB900133CC5 /* View Models */,
+				417E1CE92E1E5E99009E8374 /* Views */,
 				41EE909A2BDEA97C006412FB /* Widgets */,
 			);
 			path = "Energy Stats Core";
@@ -2357,7 +2374,6 @@
 				4103D1D929DB6C6D001B0BC8 /* ReportVariable.swift in Sources */,
 				4103D1D129DB6C51001B0BC8 /* FoxEssCloudParseStrategy.swift in Sources */,
 				4103D1D829DB6C51001B0BC8 /* NetworkFacade.swift in Sources */,
-				418547492A3A1C7A000128C7 /* PowerAmountView.swift in Sources */,
 				41E8E7262AAE0D0D00DC4B89 /* SolarRangeDefinitions.swift in Sources */,
 				41009A712B02CD59009D853B /* Solcast.swift in Sources */,
 				41FBE9022D816F6700CEC645 /* StringPower.swift in Sources */,
@@ -2392,6 +2408,11 @@
 				41757BBD2A90A06E00573FB4 /* LocalizedString.swift in Sources */,
 				4103D1E429DB6D12001B0BC8 /* KeychainStore.swift in Sources */,
 				41DB4F2D2B4940A800DAB5BB /* ConfigManaging.swift in Sources */,
+				417E1CEF2E1E5EA4009E8374 /* SunView.swift in Sources */,
+				417E1CF02E1E5EA4009E8374 /* FindOutMoreView.swift in Sources */,
+				417E1CF12E1E5EA4009E8374 /* PowerText.swift in Sources */,
+				417E1CF22E1E5EA4009E8374 /* EnergyText.swift in Sources */,
+				417E1CF32E1E5EA4009E8374 /* PowerAmountView.swift in Sources */,
 				416E032E2DE3764B0059CE42 /* FetchPeakShavingsSettingsResponse.swift in Sources */,
 				41FBF4042DAA5A5A00EBD4D5 /* URLSessionProtocol.swift in Sources */,
 				419576172AC2F29600EB7362 /* BatteryWidgetState.swift in Sources */,
@@ -2412,7 +2433,6 @@
 				41D286E52AB352AC00B18FEF /* ParameterGroup.swift in Sources */,
 				41E3BEC12B1B55A30051C68B /* DataCeiling.swift in Sources */,
 				41F6C6512D935108001EBAA5 /* CT2DisplayMode.swift in Sources */,
-				4185474C2A3B1025000128C7 /* SunView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

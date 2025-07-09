@@ -44,15 +44,7 @@ struct InverterWorkModeView: View {
                     }
                 }
                 footer: {
-                    Link(destination: URL(string: "https://github.com/TonyM1958/HA-FoxESS-Modbus/wiki/Inverter-Work-Modes")!) {
-                        HStack {
-                            Text("Find out more")
-                            Image(systemName: "rectangle.portrait.and.arrow.right")
-                        }
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .font(.caption)
-                    }
+                    FindOutMoreView(urlString: "https://github.com/TonyM1958/HA-FoxESS-Modbus/wiki/Inverter-Work-Modes")
                 }
             }
 
