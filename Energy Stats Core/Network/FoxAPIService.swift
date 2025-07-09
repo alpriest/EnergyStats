@@ -62,6 +62,10 @@ extension FoxAPIService {
                 throw NetworkError.requestRequiresSignature
             }
 
+            if statusCode == 401 {
+                throw NetworkError.badCredentials
+            }
+
             guard 200 ... 300 ~= statusCode else { throw NetworkError.invalidResponse(request.url, statusCode) }
 
             let networkResponse: NetworkResponse<T> = try JSONDecoder().decode(NetworkResponse<T>.self, from: data)
