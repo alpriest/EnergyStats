@@ -27,7 +27,7 @@ struct TodaySolarGenerationWidget: Widget {
         configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
         self.keychainStore = keychainStore
         AppSettingsPublisherFactory.update(from: configManager)
-        container = try! ModelContainer(for: BatteryWidgetState.self, StatsWidgetState.self)
+        container = try! ModelContainer(for: StatsWidgetState.self)
     }
 
     var body: some WidgetConfiguration {

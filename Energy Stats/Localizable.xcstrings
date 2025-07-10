@@ -2603,8 +2603,7 @@
         }
       }
     },
-    "Any time periods not specified above will default to Self Use mode, using the min SOC from the most recent active period." : {
-      "extractionState" : "stale",
+    "Any times not covered by periods above will default to Self Use mode, using the min SOC from the most recent active period." : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2631,9 +2630,6 @@
           }
         }
       }
-    },
-    "Any times not covered by periods above will default to Self Use mode, using the min SOC from the most recent active period." : {
-
     },
     "API Key" : {
       "localizations" : {
@@ -7341,29 +7337,28 @@
       }
     },
     "Find out more" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Weitere Informationen"
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Más información"
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Scopri di più"
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Dowiedz się więcej"
           }
         }
@@ -7426,7 +7421,32 @@
       }
     },
     "Force Discharge" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erzwungene Entladung"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descarga forzada"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scarica forzata"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wymuszone rozładowanie"
+          }
+        }
+      }
     },
     "Force Discharge Power" : {
       "localizations" : {
@@ -16912,7 +16932,32 @@
       }
     },
     "Will not be used by FoxESS if this template is activated (max 8 periods)." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wird von FoxESS nicht verwendet, wenn diese Vorlage aktiviert ist (max. 8 Zeiträume)."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No será utilizado por FoxESS si esta plantilla está activada (máximo 8 periodos)."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non verrà utilizzato da FoxESS se questo modello è attivato (massimo 8 periodi)."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nie będzie używane przez FoxESS, jeśli ten szablon zostanie aktywowany (maks. 8 okresów)."
+          }
+        }
+      }
     },
     "Work Mode" : {
       "localizations" : {

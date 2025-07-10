@@ -7,18 +7,18 @@
 
 import SwiftUI
 
-public struct FindOutMoreView: View {
+struct FindOutMoreView: View {
     private let url: URL
 
-    public init(url: URL) {
+    init(url: URL) {
         self.url = url
     }
 
-    public init(urlString: String) {
+    init(urlString: String) {
         self.url = URL(string: urlString)!
     }
 
-    public var body: some View {
+    var body: some View {
         Link(destination: url) {
             HStack {
                 Text("Find out more")

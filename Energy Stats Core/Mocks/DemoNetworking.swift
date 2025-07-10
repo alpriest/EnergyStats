@@ -352,6 +352,14 @@ class DemoAPI: FoxAPIServicing {
         }
     }
 
+    func openapi_getPowerGeneration(deviceSN: String) async throws -> GetPowerGenerationResponse {
+        GetPowerGenerationResponse(
+            today: 4.5,
+            month: 28.9,
+            cumulative: 244.0
+        )
+    }
+
     private func data(filename: String) throws -> Data {
         guard let url = Bundle(for: type(of: self)).url(forResource: filename, withExtension: "json") else {
             return Data()

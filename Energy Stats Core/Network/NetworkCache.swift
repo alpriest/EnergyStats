@@ -206,6 +206,10 @@ class NetworkCache: FoxAPIServicing {
     func openapi_setPeakShavingSettings(deviceSN: String, importLimit: Double, soc: Int) async throws {
         try await api.openapi_setPeakShavingSettings(deviceSN: deviceSN, importLimit: importLimit, soc: soc)
     }
+
+    func openapi_getPowerGeneration(deviceSN: String) async throws -> GetPowerGenerationResponse {
+        try await api.openapi_getPowerGeneration(deviceSN: deviceSN)
+    }
 }
 
 private extension NetworkCache {

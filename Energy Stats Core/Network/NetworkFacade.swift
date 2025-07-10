@@ -245,6 +245,14 @@ class NetworkFacade: FoxAPIServicing {
             try await api.openapi_setPeakShavingSettings(deviceSN: deviceSN, importLimit: importLimit, soc: soc)
         }
     }
+
+    func openapi_getPowerGeneration(deviceSN: String) async throws -> GetPowerGenerationResponse {
+        if isDemoUser {
+            try await demoAPI.openapi_getPowerGeneration(deviceSN: deviceSN)
+        } else {
+            try await api.openapi_getPowerGeneration(deviceSN: deviceSN)
+        }
+    }
 }
 
 class ThrottleManager {

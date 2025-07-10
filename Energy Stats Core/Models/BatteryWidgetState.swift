@@ -120,3 +120,32 @@ public class StatsWidgetState {
         )
     }
 }
+
+@available(iOS 17.0, *)
+@Model
+public class GenerationStatsWidgetState {
+    public var lastUpdated: Date
+    public var today: Double
+    public var month: Double
+    public var cumulative: Double
+
+    public init(
+        lastUpdated: Date = Date(),
+        today: Double,
+        month: Double,
+        cumulative: Double
+    ) {
+        self.lastUpdated = lastUpdated
+        self.today = today
+        self.month = month
+        self.cumulative = cumulative
+    }
+
+    static var preview: GenerationStatsWidgetState {
+        GenerationStatsWidgetState(
+            today: 4.0,
+            month: 11.5,
+            cumulative: 234.0
+        )
+    }
+}

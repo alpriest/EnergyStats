@@ -87,6 +87,9 @@
         }
       }
     },
+    "Generation Stats Widget" : {
+
+    },
     "hour" : {
       "localizations" : {
         "de" : {
@@ -173,6 +176,9 @@
           }
         }
       }
+    },
+    "Shows the generation stats of your installation." : {
+
     },
     "Shows the solar generation graph of your installation for today." : {
       "localizations" : {

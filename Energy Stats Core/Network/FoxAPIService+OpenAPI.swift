@@ -26,6 +26,7 @@ extension URL {
     static let setDeviceSettingsItem = URL(string: "https://www.foxesscloud.com/op/v0/device/setting/set")!
     static let getDevicePeakShavingSettings = URL(string: "https://www.foxesscloud.com/op/v0/device/peakShaving/get")!
     static let setDevicePeakShavingSettings = URL(string: "https://www.foxesscloud.com/op/v0/device/peakShaving/set")!
+    static let getPowerGeneration = URL(string: "https://www.foxesscloud.com/op/v0/device/generation")!
 }
 
 extension FoxAPIService {
@@ -227,5 +228,12 @@ extension FoxAPIService {
         } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
             // Ignore
         }
+    }
+
+    func openapi_getPowerGeneration(deviceSN: String) async throws -> GetPowerGenerationResponse {
+        let request = URLRequest(url: URL.getPowerGeneration)
+
+        let result: (GetPowerGenerationResponse, Data) = try await fetch(request)
+        return result.0
     }
 }
