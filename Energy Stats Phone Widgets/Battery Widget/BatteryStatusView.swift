@@ -80,7 +80,7 @@ struct BatteryStatusView: View {
     }
 
     private func gaugeView(scale: Bool = true) -> some View {
-        Button(intent: UpdateBatteryChargeLevelIntent()) {
+        Button(intent: UpdateStatsIntent()) {
             VStack {
                 Gauge(value: soc) {
                     Image(systemName: "minus.plus.batteryblock.fill")

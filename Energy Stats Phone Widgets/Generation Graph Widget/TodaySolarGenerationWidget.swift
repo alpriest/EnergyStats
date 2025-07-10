@@ -69,7 +69,7 @@ struct TodaySolarGenerationWidgetView: View {
                             Text(reason)
                         }.padding(.bottom)
 
-                        Button(intent: UpdateTodayStatsIntent()) {
+                        Button(intent: UpdateStatsIntent()) {
                             Text("Tap to retry")
                         }.buttonStyle(.bordered)
                     }

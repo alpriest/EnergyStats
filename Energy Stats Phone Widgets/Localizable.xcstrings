@@ -404,7 +404,11 @@
         }
       }
     },
+    "Update Stats for the widget" : {
+
+    },
     "Update Storage Battery SOC for the widget" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -433,6 +437,7 @@
       }
     },
     "Update Today Stats for the widget" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -459,6 +464,9 @@
           }
         }
       }
+    },
+    "values here" : {
+
     }
   },
   "version" : "1.0"

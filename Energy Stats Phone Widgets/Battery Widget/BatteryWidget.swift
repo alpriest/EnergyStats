@@ -72,7 +72,7 @@ struct BatteryWidgetView: View {
                             Text(reason)
                         }.padding(.bottom)
 
-                        Button(intent: UpdateBatteryChargeLevelIntent()) {
+                        Button(intent: UpdateStatsIntent()) {
                             Text("Tap to retry")
                         }.buttonStyle(.bordered)
                     }

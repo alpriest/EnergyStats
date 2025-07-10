@@ -12,8 +12,8 @@ import SwiftData
 import WidgetKit
 
 @available(iOS 17.0, *)
-struct UpdateTodayStatsIntent: AppIntent {
-    static var title: LocalizedStringResource = "Update Today Stats for the widget"
+struct UpdateStatsIntent: AppIntent {
+    static var title: LocalizedStringResource = "Update Stats for the widget"
     static var authenticationPolicy: IntentAuthenticationPolicy = .alwaysAllowed
     static var openAppWhenRun: Bool = false
 
@@ -31,9 +31,12 @@ struct UpdateTodayStatsIntent: AppIntent {
 
             let configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
             AppSettingsPublisherFactory.update(from: configManager)
-            try await HomeEnergyStateManager.shared.updateTodayStatsState(config: HomeEnergyStateManagerConfigAdapter(config: configManager, keychainStore: keychainStore))
+            let configAdapter = HomeEnergyStateManagerConfigAdapter(config: configManager, keychainStore: keychainStore)
+            try await HomeEnergyStateManager.shared.updateTodayStatsState(config: configAdapter)
+            try await HomeEnergyStateManager.shared.updateGenerationStatsState(config: configAdapter)
+            try await HomeEnergyStateManager.shared.updateBatteryState(config: HomeEnergyStateManagerConfigAdapter(config: configManager, keychainStore: keychainStore))
 
-            WidgetCenter.shared.reloadTimelines(ofKind: "TodayStatsWidget")
+            WidgetCenter.shared.reloadAllTimelines()
 
             return .result(value: true)
         } catch {
@@ -44,6 +47,6 @@ struct UpdateTodayStatsIntent: AppIntent {
 
 class foo {
     func aa() async {
-        _ = try? await UpdateTodayStatsIntent().perform()
+        _ = try? await UpdateStatsIntent().perform()
     }
 }

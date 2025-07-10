@@ -48,6 +48,55 @@ struct GenerationStatsWidgetView: View {
     @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
-        EmptyView()
+        VStack {
+            if case let .failedWithoutData(reason) = entry.state {
+                VStack {
+                    HStack(alignment: .center) {
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .foregroundStyle(Color.red)
+                            .font(.title)
+
+                        Text(reason)
+                    }.padding(.bottom)
+
+                    Button(intent: UpdateStatsIntent()) {
+                        Text("Tap to retry")
+                    }.buttonStyle(.bordered)
+                }
+            } else if case .syncRequired = entry.state {
+                SyncRequiredView()
+            } else {
+                Text("values here")
+            }
+        }
+        .containerBackground(for: .widget) {
+            switch entry.state {
+            case .failedWithoutData, .syncRequired:
+                Color.clear
+            default:
+                if colorScheme == .dark {
+                    VStack {
+                        Color.clear
+                        Color.white.opacity(0.2)
+                            .frame(height: footerHeight)
+                    }
+                } else {
+                    VStack {
+                        Color.clear
+                        Color.paleGray.opacity(0.6)
+                            .frame(height: footerHeight)
+                    }
+                }
+            }
+        }
+
+        var footerHeight: CGFloat {
+            switch family {
+            case .systemSmall:
+                return 32
+            default:
+                return 38
+            }
+        }
     }
 }

@@ -17,5 +17,6 @@ struct Energy_Stats_WidgetsBundle: WidgetBundle {
         BatteryWidget()
         TodayStatsWidget()
         TodaySolarGenerationWidget()
+        GenerationStatsWidget()
     }
 }
