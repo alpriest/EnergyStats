@@ -2604,32 +2604,36 @@
       }
     },
     "Any time periods not specified above will default to Self Use mode, using the min SOC from the most recent active period." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Alle oben nicht angegebenen Zeiträume werden standardmäßig im Selbstverbrauchsmodus betrieben, wobei der minimale Ladezustand (SOC) aus dem zuletzt aktiven Zeitraum verwendet wird."
+            "value" : "Alle oben nicht angegebenen Zeiträume werden standardmäßig im Eigenverbrauchsmodus betrieben, wobei der minimale SOC aus dem zuletzt aktiven Zeitraum verwendet wird."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cualquier período no especificado anteriormente se establecerá por defecto en el modo de Autoconsumo, utilizando el SOC mínimo del periodo activo más reciente."
+            "value" : "Cualquier periodo no especificado arriba se configurará por defecto en modo de autoconsumo, utilizando el SOC mínimo del periodo activo más reciente."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tutti i periodi non specificati sopra utilizzeranno per impostazione predefinita la modalità di Autoconsumo, utilizzando il SOC minimo del periodo attivo più recente."
+            "value" : "Tutti i periodi non specificati sopra verranno impostati di default sulla modalità di autoconsumo, utilizzando il SOC minimo del periodo attivo più recente."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wszystkie okresy niewymienione powyżej domyślnie przejdą w tryb Autokonsumpcji, wykorzystując minimalny poziom naładowania (SOC) z ostatniego aktywnego okresu."
+            "value" : "Wszystkie okresy czasu niewymienione powyżej domyślnie przejdą w tryb własnego zużycia, używając minimalnego SOC z ostatniego aktywnego okresu."
           }
         }
       }
+    },
+    "Any times not covered by periods above will default to Self Use mode, using the min SOC from the most recent active period." : {
+
     },
     "API Key" : {
       "localizations" : {
@@ -7341,25 +7345,25 @@
       "localizations" : {
         "de" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Weitere Informationen"
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Más información"
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Scopri di più"
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Dowiedz się więcej"
           }
         }

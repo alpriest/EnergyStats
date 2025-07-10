@@ -55,7 +55,7 @@ struct EditScheduleView: View {
                             }.buttonStyle(.borderedProminent)
                         }
 
-                        Text("Any time periods not specified above will default to Self Use mode, using the min SOC from the most recent active period.")
+                        Text("Any times not covered by periods above will default to Self Use mode, using the min SOC from the most recent active period.")
 
                         if viewModel.schedule.hasTooManyPhases {
                             HStack(alignment: .top) {
