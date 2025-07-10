@@ -41,17 +41,19 @@ struct EditScheduleView: View {
 
                 FooterSection {
                     VStack(alignment: .leading) {
-                        Button {
-                            viewModel.addNewTimePeriod()
-                        } label: {
-                            Text("Add time period")
-                        }.buttonStyle(.borderedProminent)
+                        HStack {
+                            Button {
+                                viewModel.addNewTimePeriod()
+                            } label: {
+                                Text("Add time period")
+                            }.buttonStyle(.borderedProminent)
 
-                        Button {
-                            viewModel.autoFillScheduleGaps()
-                        } label: {
-                            Text("Autofill gaps")
-                        }.buttonStyle(.borderedProminent)
+                            Button {
+                                viewModel.autoFillScheduleGaps()
+                            } label: {
+                                Text("Autofill gaps")
+                            }.buttonStyle(.borderedProminent)
+                        }
 
                         Text("Any time periods not specified above will default to Self Use mode, using the min SOC from the most recent active period.")
 
@@ -62,7 +64,7 @@ struct EditScheduleView: View {
                                 )
                                 .frame(width: 30, height: 30)
 
-                                Text("Period will not be used by FoxESS if you activate this template as there is a maximum of 8 periods.")
+                                Text("Will not be used by FoxESS if this template is activated (max 8 periods).")
                             }
                         }
                     }

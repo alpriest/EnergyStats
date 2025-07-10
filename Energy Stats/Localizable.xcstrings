@@ -7394,10 +7394,35 @@
       }
     },
     "Force Charge" : {
-      "shouldTranslate" : false
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erzwungenes Laden"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carga forzada"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carica forzata"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wymuszone ładowanie"
+          }
+        }
+      }
     },
     "Force Discharge" : {
-      "shouldTranslate" : false
+
     },
     "Force Discharge Power" : {
       "localizations" : {
@@ -16882,6 +16907,9 @@
         }
       }
     },
+    "Will not be used by FoxESS if this template is activated (max 8 periods)." : {
+
+    },
     "Work Mode" : {
       "localizations" : {
         "de" : {
@@ -17360,7 +17388,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "\n"
+            "value" : "Nie można cofnąć tej operacji"
           }
         }
       }

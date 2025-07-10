@@ -39,7 +39,6 @@ struct ScheduleDetailView: View {
                 SchedulePhaseListItemView(phase: phase)
                     .if(index >= Schedule.maxPhasesCount) {
                         $0.overlay(
-                            // Diagonal stripes
                             CrossHatchView()
                         )
                     }

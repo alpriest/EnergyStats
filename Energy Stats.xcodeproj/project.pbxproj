@@ -1008,20 +1008,21 @@
 		4106A92E28D05EC10009DA28 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				41BB29C52CEA89F300F8FDE4 /* View+Analytics.swift */,
 				416AE4372A7D956E003D0122 /* AlertCopy.swift */,
 				4160098C2A8D1A690096CCD9 /* BottomButtonsView.swift */,
 				41ED2EEF2B349EF7001CF277 /* CustomDatePicker.swift */,
 				4128E4C028DA5F6600C1D698 /* Date.swift */,
 				41CF044B2A95006E00ADCCAD /* ExternalWebNavigationLink.swift */,
+				417E1CEB2E1E5EA4009E8374 /* FindOutMoreView.swift */,
+				41EB65FC2E05C00600F53573 /* FullWidthVStack.swift */,
 				41D7AB8F2B9F1F6C00FFDFC0 /* InfoButtonView.swift */,
 				41CD1F332A141F81006B0C00 /* NonFunctionalButton.swift */,
 				411029142A71C4F2004018BB /* NumberTextField.swift */,
 				41965EDE2C31EE9B004F9D9A /* SecureTextEntryField.swift */,
 				416163932CDA6C970084DCF1 /* String+URL.swift */,
 				411029122A71C066004018BB /* Tintable.swift */,
+				41BB29C52CEA89F300F8FDE4 /* View+Analytics.swift */,
 				416318BD29DDD80E00C2C285 /* View+Copy.swift */,
-				41EB65FC2E05C00600F53573 /* FullWidthVStack.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1423,7 +1424,6 @@
 			children = (
 				413715AC2E1EFDF800505496 /* CrossHatchView.swift */,
 				417E1CEA2E1E5EA4009E8374 /* EnergyText.swift */,
-				417E1CEB2E1E5EA4009E8374 /* FindOutMoreView.swift */,
 				417E1CEC2E1E5EA4009E8374 /* PowerAmountView.swift */,
 				417E1CED2E1E5EA4009E8374 /* PowerText.swift */,
 				417E1CEE2E1E5EA4009E8374 /* SunView.swift */,
