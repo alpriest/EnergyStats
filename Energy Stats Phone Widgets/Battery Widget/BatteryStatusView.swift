@@ -14,33 +14,28 @@ struct BatteryStatusView: View {
     @Environment(\.redactionReasons) var redactionReasons
     let soc: Double
     let chargeStatusDescription: String?
-    let lastUpdated: Date
     let appSettings: AppSettings
     let hasError: Bool
 
     var body: some View {
         switch self.family {
         case .systemSmall:
-            VStack(alignment: .center) {
-                gaugeView()
+            ZStack(alignment: .bottom) {
+                VStack(alignment: .center) {
+                    gaugeView()
 
-                descriptionView()
-                    .font(.caption)
-                    .frame(minWidth: 0, maxWidth: .infinity)
-
-                Group {
-                    Spacer()
-
-                    HStack {
-                        if hasError {
-                            Image(systemName: "exclamationmark.triangle.fill")
-                                .foregroundStyle(Color.red)
-                        }
-
-                        Text(lastUpdated, format: .dateTime)
-                    }
-                    .font(.system(size: 8.0, weight: .light))
+                    descriptionView()
+                        .font(.caption)
+                        .frame(minWidth: 0, maxWidth: .infinity)
                 }
+
+                HStack {
+                    if hasError {
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .foregroundStyle(Color.red)
+                    }
+                }
+                .font(.system(size: 8.0, weight: .light))
             }
         case .accessoryInline:
             HStack {
@@ -54,6 +49,7 @@ struct BatteryStatusView: View {
                 HStack(spacing: 44) {
                     gaugeView()
                         .padding(.leading)
+                        .padding(.top)
 
                     descriptionView()
                         .font(.title)
@@ -64,8 +60,6 @@ struct BatteryStatusView: View {
                     Spacer()
 
                     HStack {
-                        Text(lastUpdated, format: .dateTime)
-
                         if hasError {
                             Image(systemName: "exclamationmark.triangle.fill")
                                 .foregroundStyle(Color.red)
@@ -125,7 +119,6 @@ struct BatteryStatusView_Previews: PreviewProvider {
         BatteryStatusView(
             soc: 0.8,
             chargeStatusDescription: "Full in 22 minutes",
-            lastUpdated: .now,
             appSettings: .mock(),
             hasError: false
         )

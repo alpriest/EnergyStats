@@ -137,8 +137,8 @@ class NetworkValueCleaner: FoxAPIServicing {
         try await api.openapi_setPeakShavingSettings(deviceSN: deviceSN, importLimit: importLimit, soc: soc)
     }
 
-    func openapi_getPowerGeneration(deviceSN: String) async throws -> GetPowerGenerationResponse {
-        try await api.openapi_getPowerGeneration(deviceSN: deviceSN)
+    func openapi_fetchPowerGeneration(deviceSN: String) async throws -> PowerGenerationResponse {
+        try await api.openapi_fetchPowerGeneration(deviceSN: deviceSN)
     }
 }
 

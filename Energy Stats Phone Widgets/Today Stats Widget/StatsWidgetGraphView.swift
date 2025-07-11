@@ -21,22 +21,15 @@ struct StatsWidgetGraphView: View {
     let totalGridExport: Double?
     let totalBatteryCharge: Double?
     let totalBatteryDischarge: Double?
-    let lastUpdated: Date
 
     var body: some View {
-        VStack {
-            Grid(alignment: .leading) {
-                labelledAmount("Home", amounts: home, total: totalHome, type: .loads)
-                labelledAmount("Grid Import", amounts: gridImport, total: totalGridImport, type: .gridConsumption)
-                labelledAmount("Grid Export", amounts: gridExport, total: totalGridExport, type: .feedIn)
-                labelledAmount("Battery Charge", amounts: batteryCharge, total: totalBatteryCharge, type: .chargeEnergyToTal)
-                labelledAmount("Battery Discharge", amounts: batteryDischarge, total: totalBatteryDischarge, type: .dischargeEnergyToTal)
-            }.font(.caption)
-
-            Text(lastUpdated, format: .dateTime)
-                .font(.system(size: 8.0, weight: .light))
-                .padding(.top, 10)
-        }
+        Grid(alignment: .leading) {
+            labelledAmount("Home", amounts: home, total: totalHome, type: .loads)
+            labelledAmount("Grid Import", amounts: gridImport, total: totalGridImport, type: .gridConsumption)
+            labelledAmount("Grid Export", amounts: gridExport, total: totalGridExport, type: .feedIn)
+            labelledAmount("Battery Charge", amounts: batteryCharge, total: totalBatteryCharge, type: .chargeEnergyToTal)
+            labelledAmount("Battery Discharge", amounts: batteryDischarge, total: totalBatteryDischarge, type: .dischargeEnergyToTal)
+        }.font(.caption)
     }
 
     private func labelledAmount(_ label: String, amounts: [Double]?, total: Double?, type: ReportVariable) -> some View {
@@ -94,8 +87,7 @@ struct StatsGraphView_Previews: PreviewProvider {
             totalGridImport: gridImportValues.reduce(0, +),
             totalGridExport: gridExportValues.reduce(0, +),
             totalBatteryCharge: batteryChargeValues.reduce(0, +),
-            totalBatteryDischarge: batteryDischargeValues.reduce(0, +),
-            lastUpdated: .now
+            totalBatteryDischarge: batteryDischargeValues.reduce(0, +)
         )
         .previewContext(WidgetPreviewContext(family: .systemMedium))
         .containerBackground(for: .widget) {

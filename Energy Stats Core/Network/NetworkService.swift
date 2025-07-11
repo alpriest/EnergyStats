@@ -30,7 +30,7 @@ public protocol Networking {
     func setDeviceSettingsItem(deviceSN: String, item: DeviceSettingsItem, value: String) async throws
     func fetchPeakShavingSettings(deviceSN: String) async throws -> FetchPeakShavingSettingsResponse
     func setPeakShavingSettings(deviceSN: String, importLimit: Double, soc: Int) async throws
-    func getPowerGeneration(deviceSN: String) async throws -> GetPowerGenerationResponse
+    func fetchPowerGeneration(deviceSN: String) async throws -> PowerGenerationResponse
 }
 
 public class NetworkService: Networking {
@@ -154,8 +154,8 @@ public class NetworkService: Networking {
         )
     }
 
-    public func getPowerGeneration(deviceSN: String) async throws -> GetPowerGenerationResponse {
-        try await api.openapi_getPowerGeneration(deviceSN: deviceSN)
+    public func fetchPowerGeneration(deviceSN: String) async throws -> PowerGenerationResponse {
+        try await api.openapi_fetchPowerGeneration(deviceSN: deviceSN)
     }
 }
 

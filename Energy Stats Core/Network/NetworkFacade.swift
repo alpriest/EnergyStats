@@ -246,11 +246,11 @@ class NetworkFacade: FoxAPIServicing {
         }
     }
 
-    func openapi_getPowerGeneration(deviceSN: String) async throws -> GetPowerGenerationResponse {
+    func openapi_fetchPowerGeneration(deviceSN: String) async throws -> PowerGenerationResponse {
         if isDemoUser {
-            try await demoAPI.openapi_getPowerGeneration(deviceSN: deviceSN)
+            try await demoAPI.openapi_fetchPowerGeneration(deviceSN: deviceSN)
         } else {
-            try await api.openapi_getPowerGeneration(deviceSN: deviceSN)
+            try await api.openapi_fetchPowerGeneration(deviceSN: deviceSN)
         }
     }
 }

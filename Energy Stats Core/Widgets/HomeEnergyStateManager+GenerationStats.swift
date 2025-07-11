@@ -13,6 +13,16 @@ import WidgetKit
 @available(watchOS 9.0, *)
 extension HomeEnergyStateManager {
     @MainActor
+    public func updateGenerationStatsState(config: HomeEnergyStateManagerConfig) async throws {
+        guard await isGenerationStatsStateStale() else { return }
+        guard let deviceSN = try config.selectedDeviceSN() else { throw ConfigManager.NoDeviceFoundError() }
+
+        let result = try await network.fetchPowerGeneration(deviceSN: deviceSN)
+
+        try store(model: result)
+    }
+
+    @MainActor
     public func isGenerationStatsStateStale() async -> Bool {
         let fetchDescriptor: FetchDescriptor<GenerationStatsWidgetState> = FetchDescriptor()
         guard let widgetState = (try? modelContainer.mainContext.fetch(fetchDescriptor))?.first else { return true }
@@ -21,17 +31,7 @@ extension HomeEnergyStateManager {
     }
 
     @MainActor
-    public func updateGenerationStatsState(config: HomeEnergyStateManagerConfig) async throws {
-        guard await isGenerationStatsStateStale() else { return }
-        guard let deviceSN = try config.selectedDeviceSN() else { throw ConfigManager.NoDeviceFoundError() }
-
-        let result = try await network.getPowerGeneration(deviceSN: deviceSN)
-
-        try store(model: result)
-    }
-
-    @MainActor
-    private func store(model: GetPowerGenerationResponse) throws {
+    private func store(model: PowerGenerationResponse) throws {
         let state = GenerationStatsWidgetState(
             today: model.today,
             month: model.month,

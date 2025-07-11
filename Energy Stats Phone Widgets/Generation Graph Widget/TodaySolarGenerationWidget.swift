@@ -35,8 +35,8 @@ struct TodaySolarGenerationWidget: Widget {
             TodaySolarGenerationWidgetView(entry: entry, configManager: configManager)
                 .modelContainer(container)
         }
-        .configurationDisplayName("Today Solar Generation Widget")
-        .description("Shows the solar generation graph of your installation for today.")
+        .configurationDisplayName("Solar Generation Widget")
+        .description("Shows a graph of your solar generation over today")
         .supportedFamilies([.systemMedium])
     }
 }
@@ -79,8 +79,7 @@ struct TodaySolarGenerationWidgetView: View {
             } else {
                 TodaySolarGenerationWidgetGraphView(
                     PVEnergy: entry.pvEnergy,
-                    totalPVEnergy: entry.totalPVEnergy,
-                    lastUpdated: entry.date
+                    totalPVEnergy: entry.totalPVEnergy
                 )
             }
         }
@@ -89,19 +88,7 @@ struct TodaySolarGenerationWidgetView: View {
             case .failedWithoutData, .syncRequired:
                 Color.clear
             default:
-                if colorScheme == .dark {
-                    VStack {
-                        Color.clear
-                        Color.white.opacity(0.2)
-                            .frame(height: footerHeight)
-                    }
-                } else {
-                    VStack {
-                        Color.clear
-                        Color.paleGray.opacity(0.6)
-                            .frame(height: footerHeight)
-                    }
-                }
+                GradientContainerBackground(date: entry.date)
             }
         }
     }

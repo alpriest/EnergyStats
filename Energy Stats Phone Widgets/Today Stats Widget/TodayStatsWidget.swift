@@ -87,8 +87,7 @@ struct TodayStatsWidgetView: View {
                     totalGridImport: entry.totalGridImport,
                     totalGridExport: entry.totalGridExport,
                     totalBatteryCharge: entry.totalBatteryCharge,
-                    totalBatteryDischarge: entry.totalBatteryDischarge,
-                    lastUpdated: entry.date
+                    totalBatteryDischarge: entry.totalBatteryDischarge
                 )
             }
         }
@@ -97,29 +96,8 @@ struct TodayStatsWidgetView: View {
             case .failedWithoutData, .syncRequired:
                 Color.clear
             default:
-                if colorScheme == .dark {
-                    VStack {
-                        Color.clear
-                        Color.white.opacity(0.2)
-                            .frame(height: footerHeight)
-                    }
-                } else {
-                    VStack {
-                        Color.clear
-                        Color.paleGray.opacity(0.6)
-                            .frame(height: footerHeight)
-                    }
-                }
+                GradientContainerBackground(date: entry.date)
             }
-        }
-    }
-
-    var footerHeight: CGFloat {
-        switch family {
-        case .systemSmall:
-            return 32
-        default:
-            return 38
         }
     }
 }

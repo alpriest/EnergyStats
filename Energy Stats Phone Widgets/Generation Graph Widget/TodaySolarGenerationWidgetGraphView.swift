@@ -13,18 +13,11 @@ import WidgetKit
 struct TodaySolarGenerationWidgetGraphView: View {
     let PVEnergy: [Double]?
     let totalPVEnergy: Double?
-    let lastUpdated: Date
 
     var body: some View {
-        VStack {
-            Grid(alignment: .leading) {
-                labelledAmount("PV Generation", amounts: PVEnergy, total: totalPVEnergy, type: .pvEnergyTotal)
-            }.font(.caption)
-
-            Text(lastUpdated, format: .dateTime)
-                .font(.system(size: 8.0, weight: .light))
-                .padding(.top, 10)
-        }
+        Grid(alignment: .leading) {
+            labelledAmount("PV Generation", amounts: PVEnergy, total: totalPVEnergy, type: .pvEnergyTotal)
+        }.font(.caption)
     }
 
     private func labelledAmount(_ label: String, amounts: [Double]?, total: Double?, type: ReportVariable) -> some View {
@@ -94,8 +87,7 @@ struct TodaySolarGenerationWidgetGraphView_Previews: PreviewProvider {
         ]
         return TodaySolarGenerationWidgetGraphView(
             PVEnergy: pvValues,
-            totalPVEnergy: pvValues.reduce(0, +),
-            lastUpdated: .now
+            totalPVEnergy: pvValues.reduce(0, +)
         )
         .previewContext(WidgetPreviewContext(family: .systemMedium))
         .containerBackground(for: .widget) {

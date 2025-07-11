@@ -352,8 +352,8 @@ class DemoAPI: FoxAPIServicing {
         }
     }
 
-    func openapi_getPowerGeneration(deviceSN: String) async throws -> GetPowerGenerationResponse {
-        GetPowerGenerationResponse(
+    func openapi_fetchPowerGeneration(deviceSN: String) async throws -> PowerGenerationResponse {
+        PowerGenerationResponse(
             today: 4.5,
             month: 28.9,
             cumulative: 244.0

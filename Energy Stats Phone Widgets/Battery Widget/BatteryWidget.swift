@@ -83,7 +83,6 @@ struct BatteryWidgetView: View {
                 BatteryStatusView(
                     soc: Double(entry.soc ?? 0) / 100.0,
                     chargeStatusDescription: entry.chargeStatusDescription,
-                    lastUpdated: entry.date,
                     appSettings: configManager.appSettingsPublisher.value,
                     hasError: entry.errorMessage != nil
                 )
@@ -94,19 +93,7 @@ struct BatteryWidgetView: View {
             case .failedWithoutData, .syncRequired:
                 Color.clear
             default:
-                if colorScheme == .dark {
-                    VStack {
-                        Color.clear
-                        Color.white.opacity(0.2)
-                            .frame(height: footerHeight)
-                    }
-                } else {
-                    VStack {
-                        Color.clear
-                        Color.paleGray.opacity(0.6)
-                            .frame(height: footerHeight)
-                    }
-                }
+                GradientContainerBackground(date: entry.date)
             }
         }
     }

@@ -13,7 +13,7 @@ import WidgetKit
 
 @available(iOS 17.0, *)
 struct UpdateStatsIntent: AppIntent {
-    static var title: LocalizedStringResource = "Update Stats for the widget"
+    static var title: LocalizedStringResource = "Update data for the widget"
     static var authenticationPolicy: IntentAuthenticationPolicy = .alwaysAllowed
     static var openAppWhenRun: Bool = false
 
@@ -24,9 +24,7 @@ struct UpdateStatsIntent: AppIntent {
             let appSettingsPublisher = AppSettingsPublisherFactory.make()
             let network = NetworkService.standard(keychainStore: keychainStore,
                                                   urlSession: URLSession.shared,
-                                                  isDemoUser: {
-                                                      false
-                                                  },
+                                                  isDemoUser: {  false },
                                                   dataCeiling: { .none })
 
             let configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
@@ -34,7 +32,7 @@ struct UpdateStatsIntent: AppIntent {
             let configAdapter = HomeEnergyStateManagerConfigAdapter(config: configManager, keychainStore: keychainStore)
             try await HomeEnergyStateManager.shared.updateTodayStatsState(config: configAdapter)
             try await HomeEnergyStateManager.shared.updateGenerationStatsState(config: configAdapter)
-            try await HomeEnergyStateManager.shared.updateBatteryState(config: HomeEnergyStateManagerConfigAdapter(config: configManager, keychainStore: keychainStore))
+            try await HomeEnergyStateManager.shared.updateBatteryState(config: configAdapter)
 
             WidgetCenter.shared.reloadAllTimelines()
 

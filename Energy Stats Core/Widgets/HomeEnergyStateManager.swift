@@ -33,7 +33,7 @@ public class HomeEnergyStateManager {
                                               urlSession: URLSession.shared,
                                               isDemoUser: { false },
                                               dataCeiling: { .none })
-            modelContainer = try ModelContainer(for: BatteryWidgetState.self, StatsWidgetState.self)
+            modelContainer = try ModelContainer(for: BatteryWidgetState.self, StatsWidgetState.self, GenerationStatsWidgetState.self)
         } catch {
             fatalError("Failed to create the model container: \(error)")
         }
