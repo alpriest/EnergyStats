@@ -144,6 +144,8 @@ struct Energy_StatsApp: App {
     }
 
     private func fetchCurrentInverterSchedule() {
+        guard configManager.showInverterScheduleQuickLink else { return }
+
         Task {
             guard let deviceSN = configManager.selectedDeviceSN else { return }
             let scheduleResponse = try await network.fetchCurrentSchedule(deviceSN: deviceSN)
