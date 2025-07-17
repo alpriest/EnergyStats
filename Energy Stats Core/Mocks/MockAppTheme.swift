@@ -57,7 +57,8 @@ public extension AppSettings {
             showInverterScheduleQuickLink: true,
             fetchSolcastOnAppLaunch: false,
             ct2DisplayMode: .hidden,
-            shouldCombineCT2WithLoadsPower: false
+            shouldCombineCT2WithLoadsPower: false,
+            detectedActiveTemplate: nil
         )
     }
 }

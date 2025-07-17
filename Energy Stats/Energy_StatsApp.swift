@@ -9,11 +9,11 @@ import Combine
 import Energy_Stats_Core
 import Firebase
 import FirebaseAnalytics
+import Pulse
+import PulseUI
 import SwiftUI
 import WatchConnectivity
 import WidgetKit
-import Pulse
-import PulseUI
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
@@ -94,21 +94,11 @@ struct Energy_StatsApp: App {
                 .environmentObject(bannerAlertManager)
                 .onChange(of: scenePhase) { phase in
                     if case .active = phase {
-                        if WCSession.isSupported() {
-                            let session = WCSession.default
-                            session.delegate = Energy_StatsApp.delegate
-                            Energy_StatsApp.delegate.config = configManager
-                            session.activate()
-                        }
-
-                        Task {
-                            await refreshSolcast(solarForecastProvider: solarForecastProvider)
-                        }
+                        performOnActivationTasks(solarForecastProvider: solarForecastProvider)
                     }
                 }
                 .task {
                     versionChecker.load()
-                    //                    Scheduler.scheduleRefresh()
                 }
             }
         }
@@ -124,18 +114,54 @@ struct Energy_StatsApp: App {
         try? keychainStore.store(key: .showUsableBatteryOnly, value: configManager.showUsableBatteryOnly)
     }
 
-    private func refreshSolcast(solarForecastProvider: SolarForecastProviding) async {
+    private func performOnActivationTasks(solarForecastProvider: SolarForecastProviding) {
+        if WCSession.isSupported() {
+            let session = WCSession.default
+            session.delegate = Energy_StatsApp.delegate
+            Energy_StatsApp.delegate.config = configManager
+            session.activate()
+        }
+
+        refreshSolcast(solarForecastProvider: solarForecastProvider)
+        fetchCurrentInverterSchedule()
+    }
+
+    private func refreshSolcast(solarForecastProvider: SolarForecastProviding) {
         guard configManager.fetchSolcastOnAppLaunch else { return }
         guard let apiKey = configManager.solcastSettings.apiKey else { return }
 
         let service = solarForecastProvider()
 
-        do {
-            _ = try await configManager.solcastSettings.sites.asyncMap { site in
-                _ = try await service.fetchForecast(for: site, apiKey: apiKey, ignoreCache: false)
+        Task {
+            do {
+                _ = try await configManager.solcastSettings.sites.asyncMap { site in
+                    _ = try await service.fetchForecast(for: site, apiKey: apiKey, ignoreCache: false)
+                }
+            } catch {
+                // Ignore
             }
-        } catch {
-            // Ignore
+        }
+    }
+
+    private func fetchCurrentInverterSchedule() {
+        Task {
+            guard let deviceSN = configManager.selectedDeviceSN else { return }
+            let scheduleResponse = try await network.fetchCurrentSchedule(deviceSN: deviceSN)
+            let schedule = Schedule(scheduleResponse: scheduleResponse)
+
+            configManager.scheduleTemplates.forEach { template in
+                let templatePhases = template.asSchedule().phases
+                    .sorted { first, second in
+                        first.start < second.start
+                    }
+                let match = zip(templatePhases, schedule.phases).allSatisfy { templatePhase, schedulePhase in
+                    templatePhase.isEqualConfiguration(to: schedulePhase)
+                }
+                if match {
+                    let appSettings = appSettingsPublisher.value.copy(detectedActiveTemplate: template.name)
+                    appSettingsPublisher.send(appSettings)
+                }
+            }
         }
     }
 }

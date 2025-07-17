@@ -200,8 +200,19 @@ struct LoadedPowerFlowView: View {
             Button {
                 showSchedule.toggle()
             } label: {
-                Image(systemName: "calendar")
-                    .padding(.horizontal)
+                VStack(alignment: .trailing) {
+                    Image(systemName: "calendar")
+
+                    if let detectedActiveTemplate = appSettings.detectedActiveTemplate {
+                        Text(detectedActiveTemplate)
+                            .font(.caption2)
+                            .lineLimit(1)
+                            .truncationMode(.tail)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .frame(maxWidth: 100, alignment: .trailing)
+                    }
+                }
+                .padding(.trailing)
             }
         }
     }

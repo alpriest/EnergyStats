@@ -82,16 +82,16 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState, HasAlertContent 
         await setState(.active(.loading))
 
         do {
-            self.templates = templateStore.load()
+            self.templates = self.templateStore.load()
             let scheduleResponse = try await networking.fetchCurrentSchedule(deviceSN: deviceSN)
             self.schedulerEnabled = scheduleResponse.enable.boolValue
 
-            self.schedule = Schedule(phases: scheduleResponse.groups.filter { $0.enable == 1 }.compactMap { $0.toSchedulePhase() })
+            self.schedule = Schedule(scheduleResponse: scheduleResponse)
             if let schedule, schedule.supportsMaxSOC() {
-                configManager.setDeviceSupports(capability: .scheduleMaxSOC, deviceSN: deviceSN)
+                self.configManager.setDeviceSupports(capability: .scheduleMaxSOC, deviceSN: deviceSN)
             }
             if scheduleResponse.supportsPeakShaving() {
-                configManager.setDeviceSupports(capability: .peakShaving, deviceSN: deviceSN)
+                self.configManager.setDeviceSupports(capability: .peakShaving, deviceSN: deviceSN)
             }
             await self.setState(.inactive)
         } catch {
@@ -138,7 +138,7 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState, HasAlertContent 
 
             Task { @MainActor in
                 await setState(.inactive)
-                await load()
+                await self.load()
                 self.alertContent = AlertContent(
                     title: "Success",
                     message: "inverter_charge_schedule_settings_saved"
@@ -172,6 +172,12 @@ extension SchedulePhaseNetworkModel {
 extension Schedule {
     func supportsMaxSOC() -> Bool {
         phases.anySatisfy { $0.maxSOC != nil }
+    }
+
+    init(scheduleResponse: ScheduleResponse) {
+        self.init(phases: scheduleResponse.groups
+            .filter { $0.enable == 1 }
+            .compactMap { $0.toSchedulePhase() })
     }
 }
 

@@ -19,19 +19,19 @@ public struct ScheduleTemplate: Identifiable, Hashable, Codable {
     }
 
     public func asSchedule() -> Schedule {
-        Schedule(phases: phases)
+        Schedule(phases: self.phases)
     }
 
     public func copy(phases: [SchedulePhase]? = nil, name: String? = nil) -> ScheduleTemplate {
         ScheduleTemplate(
-            id: id,
+            id: self.id,
             name: name ?? self.name,
             phases: phases ?? self.phases
         )
     }
 
     public var isValid: Bool {
-        asSchedule().isValid()
+        self.asSchedule().isValid()
     }
 }
 
@@ -82,12 +82,12 @@ public struct Schedule: Hashable, Equatable {
     }
 
     public func isValid() -> Bool {
-        for (index, phase) in phases.enumerated() {
+        for (index, phase) in self.phases.enumerated() {
             let phaseStart = phase.start.toMinutes()
             let phaseEnd = phase.end.toMinutes()
 
             // Check for overlap with other phases
-            for otherPhase in phases[(index + 1)...] {
+            for otherPhase in self.phases[(index + 1)...] {
                 let otherStart = otherPhase.start.toMinutes()
                 let otherEnd = otherPhase.end.toMinutes()
 
@@ -109,7 +109,7 @@ public struct Schedule: Hashable, Equatable {
     public static let maxPhasesCount = 8
 
     public var hasTooManyPhases: Bool {
-        phases.count > Schedule.maxPhasesCount
+        self.phases.count > Schedule.maxPhasesCount
     }
 }
 
@@ -183,7 +183,7 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {
         self.forceDischargePower = try container.decode(Int.self, forKey: .forceDischargePower)
         self.forceDischargeSOC = try container.decode(Int.self, forKey: .forceDischargeSOC)
         self.maxSOC = try container.decode(Int?.self, forKey: .maxSOC)
-        self.color = Color.scheduleColor(named: mode)
+        self.color = Color.scheduleColor(named: self.mode)
     }
 
     public func encode(to encoder: any Encoder) throws {
@@ -198,14 +198,24 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {
         try container.encode(self.maxSOC, forKey: .maxSOC)
     }
 
-    public var startPoint: CGFloat { CGFloat(minutesAfterMidnight(start)) / (24 * 60) }
-    public var endPoint: CGFloat { CGFloat(minutesAfterMidnight(end)) / (24 * 60) }
+    public var startPoint: CGFloat { CGFloat(self.minutesAfterMidnight(self.start)) / (24 * 60) }
+    public var endPoint: CGFloat { CGFloat(self.minutesAfterMidnight(self.end)) / (24 * 60) }
 
     private func minutesAfterMidnight(_ time: Time) -> Int {
         (time.hour * 60) + time.minute
     }
 
     public func isValid() -> Bool {
-        end > start
+        self.end > self.start
+    }
+
+    public func isEqualConfiguration(to other: SchedulePhase) -> Bool {
+        self.start == other.start &&
+            self.end == other.end &&
+            self.mode == other.mode &&
+            self.minSocOnGrid == other.minSocOnGrid &&
+            self.forceDischargePower == other.forceDischargePower &&
+            self.forceDischargeSOC == other.forceDischargeSOC &&
+            self.maxSOC == other.maxSOC
     }
 }

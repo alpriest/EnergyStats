@@ -56,6 +56,7 @@ public struct AppSettings {
     public var fetchSolcastOnAppLaunch: Bool
     public var ct2DisplayMode: CT2DisplayMode
     public var shouldCombineCT2WithLoadsPower: Bool
+    public var detectedActiveTemplate: String?
 
     public init(
         showColouredLines: Bool,
@@ -98,7 +99,8 @@ public struct AppSettings {
         showInverterScheduleQuickLink: Bool,
         fetchSolcastOnAppLaunch: Bool,
         ct2DisplayMode: CT2DisplayMode,
-        shouldCombineCT2WithLoadsPower: Bool
+        shouldCombineCT2WithLoadsPower: Bool,
+        detectedActiveTemplate: String?
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -141,6 +143,7 @@ public struct AppSettings {
         self.fetchSolcastOnAppLaunch = fetchSolcastOnAppLaunch
         self.ct2DisplayMode = ct2DisplayMode
         self.shouldCombineCT2WithLoadsPower = shouldCombineCT2WithLoadsPower
+        self.detectedActiveTemplate = detectedActiveTemplate
     }
 
     public func copy(
@@ -184,7 +187,8 @@ public struct AppSettings {
         showInverterScheduleQuickLink: Bool? = nil,
         fetchSolcastOnAppLaunch: Bool? = nil,
         ct2DisplayMode: CT2DisplayMode? = nil,
-        shouldCombineCT2WithLoadsPower: Bool? = nil
+        shouldCombineCT2WithLoadsPower: Bool? = nil,
+        detectedActiveTemplate: String? = nil
     ) -> AppSettings {
         AppSettings(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -227,7 +231,8 @@ public struct AppSettings {
             showInverterScheduleQuickLink: showInverterScheduleQuickLink ?? self.showInverterScheduleQuickLink,
             fetchSolcastOnAppLaunch: fetchSolcastOnAppLaunch ?? self.fetchSolcastOnAppLaunch,
             ct2DisplayMode: ct2DisplayMode ?? self.ct2DisplayMode,
-            shouldCombineCT2WithLoadsPower: shouldCombineCT2WithLoadsPower ?? self.shouldCombineCT2WithLoadsPower
+            shouldCombineCT2WithLoadsPower: shouldCombineCT2WithLoadsPower ?? self.shouldCombineCT2WithLoadsPower,
+            detectedActiveTemplate: detectedActiveTemplate ?? self.detectedActiveTemplate
         )
     }
 
@@ -273,7 +278,8 @@ public struct AppSettings {
             showInverterScheduleQuickLink: config.showInverterScheduleQuickLink,
             fetchSolcastOnAppLaunch: config.fetchSolcastOnAppLaunch,
             ct2DisplayMode: config.ct2DisplayMode,
-            shouldCombineCT2WithLoadsPower: config.shouldCombineCT2WithLoadsPower
+            shouldCombineCT2WithLoadsPower: config.shouldCombineCT2WithLoadsPower,
+            detectedActiveTemplate: nil
         )
     }
 }
