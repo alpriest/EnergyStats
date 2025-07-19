@@ -190,11 +190,11 @@ public class UserDefaultsConfig: Config {
 
     public var solarDefinitions: SolarRangeDefinitions {
         get {
-            guard let solarDefinitions = UserDefaults.shared.data(forKey: "solarDefinitions") else { return .default() }
+            guard let solarDefinitions = UserDefaults.shared.data(forKey: "solarDefinitions") else { return .default }
             do {
                 return try JSONDecoder().decode(SolarRangeDefinitions.self, from: solarDefinitions)
             } catch {
-                return .default()
+                return .default
             }
         }
         set {

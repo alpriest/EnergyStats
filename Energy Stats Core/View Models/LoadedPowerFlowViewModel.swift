@@ -163,7 +163,11 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
     }
 
     private func loadGeneration() async throws -> GenerationViewModel? {
-        guard self.configManager.showTotalYieldOnPowerFlow else { return nil }
+        guard self.configManager.showTotalYieldOnPowerFlow ||
+                self.configManager.powerFlowStrings.enabled ||
+                self.configManager.ct2DisplayMode != .hidden ||
+                self.configManager.shouldCombineCT2WithPVPower
+        else { return nil }
 
         return try await GenerationViewModelBuilder.build(
             configManager: self.configManager,

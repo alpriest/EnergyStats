@@ -407,7 +407,7 @@ public class MockConfig: Config {
     public var showGridTotalsOnPowerFlow: Bool = false
     public var deviceBatteryOverrides: [String: String] = [:]
     public var showLastUpdateTimestamp: Bool = false
-    public var solarDefinitions: SolarRangeDefinitions = .default()
+    public var solarDefinitions: SolarRangeDefinitions = .default
     public var parameterGroups: [ParameterGroup] = DefaultParameterGroups()
     public var currencySymbol: String = "£"
     public var shouldCombineCT2WithPVPower: Bool = true

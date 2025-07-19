@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftUICore
 
 public enum NetworkError: LocalizedError, CustomStringConvertible, Equatable {
     case invalidResponse(_ url: URL?, _ responseCode: Int?)

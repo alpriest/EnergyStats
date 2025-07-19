@@ -34,7 +34,7 @@ public extension AppSettings {
             showInverterStationName: showInverterStationName,
             showGridTotalsOnPowerFlow: true,
             showLastUpdateTimestamp: false,
-            solarDefinitions: .default(),
+            solarDefinitions: .default,
             parameterGroups: DefaultParameterGroups(),
             shouldCombineCT2WithPVPower: true,
             showGraphValueDescriptions: true,

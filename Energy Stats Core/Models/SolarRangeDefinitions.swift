@@ -12,7 +12,7 @@ public struct SolarRangeDefinitions: Codable {
     public let breakPoint2: Double
     public let breakPoint3: Double
 
-    public static func `default`() -> SolarRangeDefinitions {
+    public static var `default`: SolarRangeDefinitions {
         SolarRangeDefinitions(
             breakPoint1: 1.0,
             breakPoint2: 2.0,

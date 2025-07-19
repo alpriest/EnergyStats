@@ -92,12 +92,15 @@ struct SolarBandingSettingsView: View {
                     Text("solar_example_description")
                 }
 
-                Button {
-                    breakpoint1 = 1
-                    breakpoint2 = 2
-                    breakpoint3 = 3
-                } label: {
-                    Text("Restore defaults")
+                FooterSection {
+                    Button {
+                        breakpoint1 = 1
+                        breakpoint2 = 2
+                        breakpoint3 = 3
+                    } label: {
+                        Text("Restore defaults")
+                    }
+                    .buttonStyle(.bordered)
                 }
             }.onChange(of: breakpoint1) { newValue in
                 if breakpoint1 >= breakpoint2 {

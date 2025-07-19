@@ -258,9 +258,7 @@
 		41AF2F452AA4C74F008FCA2E /* GridPowerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AF2F442AA4C74F008FCA2E /* GridPowerFooterView.swift */; };
 		41B3FFE82AB07FE10020DFC9 /* NetworkCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B3FFE72AB07FE10020DFC9 /* NetworkCache.swift */; };
 		41B690F628E03EA70058126E /* NetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B690F528E03EA70058126E /* NetworkTests.swift */; };
-		41B690F928E040060058126E /* OHHTTPStubsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 41B690F828E040060058126E /* OHHTTPStubsSwift */; };
 		41B690FD28E042560058126E /* login-failure.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B690FB28E042560058126E /* login-failure.json */; };
-		41B6910128E043A10058126E /* OHHTTPStubs in Frameworks */ = {isa = PBXBuildFile; productRef = 41B6910028E043A10058126E /* OHHTTPStubs */; };
 		41B6910528E047DD0058126E /* report-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B6910428E047DD0058126E /* report-success.json */; };
 		41B6910728E0B5F30058126E /* trylater.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B6910628E0B5F30058126E /* trylater.json */; };
 		41B6910928E0BA340058126E /* badtoken.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B6910828E0BA340058126E /* badtoken.json */; };
@@ -273,6 +271,8 @@
 		41BACC0D2D9142D600C9C718 /* TipKitViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BACC082D9141F200C9C718 /* TipKitViewModifier.swift */; };
 		41BB29C62CEA89F600F8FDE4 /* View+Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BB29C52CEA89F300F8FDE4 /* View+Analytics.swift */; };
 		41BCC1AB2B245C280062084A /* FoxAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC1AA2B245C280062084A /* FoxAPIService.swift */; };
+		41BF88AB2E2B993A00AB5E9D /* OHHTTPStubs in Frameworks */ = {isa = PBXBuildFile; productRef = 41BF88AA2E2B993A00AB5E9D /* OHHTTPStubs */; };
+		41BF88AD2E2B993A00AB5E9D /* OHHTTPStubsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 41BF88AC2E2B993A00AB5E9D /* OHHTTPStubsSwift */; };
 		41C0923B2B20FCB0001D1E22 /* SchedulePhaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0923A2B20FCB0001D1E22 /* SchedulePhaseHelper.swift */; };
 		41C0923D2B210255001D1E22 /* ScheduleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0923C2B210255001D1E22 /* ScheduleDetailView.swift */; };
 		41C1243E2B738B1400B575F2 /* HowToObtainAPIKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C1243D2B738B1400B575F2 /* HowToObtainAPIKeyView.swift */; };
@@ -929,7 +929,6 @@
 			files = (
 				418199CA2A4035F40001B5D4 /* MarkdownUI in Frameworks */,
 				41F80BB12CE2AEC100C6776B /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
-				41B6910128E043A10058126E /* OHHTTPStubs in Frameworks */,
 				41FBF3FE2DAA574D00EBD4D5 /* Pulse in Frameworks */,
 				41CA35762AA8C52100D45734 /* OrderedCollections in Frameworks */,
 				41A95B9A29DB3F6A00A35169 /* Energy_Stats_Core.framework in Frameworks */,
@@ -957,8 +956,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41B690F928E040060058126E /* OHHTTPStubsSwift in Frameworks */,
 				41DE1B512ACD57A8001BB2D1 /* Energy_Stats_Core.framework in Frameworks */,
+				41BF88AD2E2B993A00AB5E9D /* OHHTTPStubsSwift in Frameworks */,
+				41BF88AB2E2B993A00AB5E9D /* OHHTTPStubs in Frameworks */,
 				4127911028E38EFB00D5F993 /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1900,7 +1900,6 @@
 			);
 			name = "Energy Stats";
 			packageProductDependencies = (
-				41B6910028E043A10058126E /* OHHTTPStubs */,
 				418199C92A4035F40001B5D4 /* MarkdownUI */,
 				41CA35752AA8C52100D45734 /* OrderedCollections */,
 				41F80BAE2CE2AE3100C6776B /* FirebaseInAppMessaging-Beta */,
@@ -1965,8 +1964,9 @@
 			);
 			name = "Energy StatsTests";
 			packageProductDependencies = (
-				41B690F828E040060058126E /* OHHTTPStubsSwift */,
 				4127910F28E38EFB00D5F993 /* SnapshotTesting */,
+				41BF88AA2E2B993A00AB5E9D /* OHHTTPStubs */,
+				41BF88AC2E2B993A00AB5E9D /* OHHTTPStubsSwift */,
 			);
 			productName = "Energy StatsTests";
 			productReference = 41EDDF7128CD2ED30092C662 /* Energy StatsTests.xctest */;
@@ -2068,12 +2068,12 @@
 			);
 			mainGroup = 4140144128C70B3200EA5BA1;
 			packageReferences = (
-				41B690F728E040060058126E /* XCRemoteSwiftPackageReference "OHHTTPStubs" */,
 				4127910E28E38EFB00D5F993 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 				418199C82A4035F40001B5D4 /* XCRemoteSwiftPackageReference "MarkdownUI" */,
 				41CA35742AA8C52100D45734 /* XCRemoteSwiftPackageReference "swift-collections" */,
 				41F80BAD2CE2AE3100C6776B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				41FBF3FC2DAA574D00EBD4D5 /* XCRemoteSwiftPackageReference "Pulse" */,
+				41BF88A92E2B993A00AB5E9D /* XCRemoteSwiftPackageReference "OHHTTPStubs" */,
 			);
 			productRefGroup = 4140144B28C70B3200EA5BA1 /* Products */;
 			projectDirPath = "";
@@ -3281,12 +3281,12 @@
 				minimumVersion = 2.0.0;
 			};
 		};
-		41B690F728E040060058126E /* XCRemoteSwiftPackageReference "OHHTTPStubs" */ = {
+		41BF88A92E2B993A00AB5E9D /* XCRemoteSwiftPackageReference "OHHTTPStubs" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AliSoftware/OHHTTPStubs";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
+				minimumVersion = 9.1.0;
 			};
 		};
 		41CA35742AA8C52100D45734 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
@@ -3326,15 +3326,15 @@
 			package = 418199C82A4035F40001B5D4 /* XCRemoteSwiftPackageReference "MarkdownUI" */;
 			productName = MarkdownUI;
 		};
-		41B690F828E040060058126E /* OHHTTPStubsSwift */ = {
+		41BF88AA2E2B993A00AB5E9D /* OHHTTPStubs */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 41B690F728E040060058126E /* XCRemoteSwiftPackageReference "OHHTTPStubs" */;
-			productName = OHHTTPStubsSwift;
-		};
-		41B6910028E043A10058126E /* OHHTTPStubs */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 41B690F728E040060058126E /* XCRemoteSwiftPackageReference "OHHTTPStubs" */;
+			package = 41BF88A92E2B993A00AB5E9D /* XCRemoteSwiftPackageReference "OHHTTPStubs" */;
 			productName = OHHTTPStubs;
+		};
+		41BF88AC2E2B993A00AB5E9D /* OHHTTPStubsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 41BF88A92E2B993A00AB5E9D /* XCRemoteSwiftPackageReference "OHHTTPStubs" */;
+			productName = OHHTTPStubsSwift;
 		};
 		41CA35752AA8C52100D45734 /* OrderedCollections */ = {
 			isa = XCSwiftPackageProductDependency;

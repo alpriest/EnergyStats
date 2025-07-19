@@ -53,7 +53,7 @@ class MockNetworking: Networking {
     }
 
     func fetchDevice(deviceSN: String) async throws -> DeviceDetailResponse {
-        DeviceDetailResponse(deviceSN: "", moduleSN: "", stationID: "", stationName: "", managerVersion: "", masterVersion: "", slaveVersion: "", hardwareVersion: "", status: 0, function: DeviceDetailResponse.Function(scheduler: false), productType: "", deviceType: "", hasBattery: false, hasPV: false)
+        DeviceDetailResponse(deviceSN: "", moduleSN: "", stationID: "", stationName: "", managerVersion: "", masterVersion: "", slaveVersion: "", hardwareVersion: "", status: 0, function: DeviceDetailResponse.Function(scheduler: false), productType: "", deviceType: "", hasBattery: false, hasPV: false, batteryList: nil)
     }
 
     func fetchRealData(deviceSN: String, variables: [String]) async throws -> OpenQueryResponse {
@@ -124,7 +124,7 @@ class MockNetworking: Networking {
     }
 
     func fetchCurrentSchedule(deviceSN: String) async throws -> ScheduleResponse {
-        ScheduleResponse(enable: true.intValue, groups: [])
+        ScheduleResponse(enable: true.intValue, groups: [], workmodes: [])
     }
 
     func setScheduleFlag(deviceSN: String, enable: Bool) async throws {}
@@ -133,6 +133,27 @@ class MockNetworking: Networking {
 
     func fetchPowerStationDetail() async throws -> PowerStationDetail? {
         nil
+    }
+
+    func fetchDeviceSettingsItem(deviceSN: String, item: Energy_Stats_Core.DeviceSettingsItem) async throws -> FetchDeviceSettingsItemResponse {
+        FetchDeviceSettingsItemResponse(value: "1.0", unit: nil, precision: nil, range: nil)
+    }
+
+    func setDeviceSettingsItem(deviceSN: String, item: DeviceSettingsItem, value: String) async throws {
+    }
+
+    func fetchPeakShavingSettings(deviceSN: String) async throws -> FetchPeakShavingSettingsResponse {
+        FetchPeakShavingSettingsResponse(
+            importLimit: .init(precision: 1.0, range: SettingItem.Range(min: 0, max: 1), unit: "", value: ""),
+            soc: .init(precision: 0, range: SettingItem.Range(min: 0, max: 100), unit: "%", value: "50")
+        )
+    }
+
+    func setPeakShavingSettings(deviceSN: String, importLimit: Double, soc: Int) async throws {
+    }
+
+    func fetchPowerGeneration(deviceSN: String) async throws -> PowerGenerationResponse {
+        PowerGenerationResponse(today: 1.0, month: 5.0, cumulative: 50.0)
     }
 
     private func data(filename: String) throws -> Data {

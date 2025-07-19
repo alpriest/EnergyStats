@@ -20,10 +20,9 @@ final class UserManagerTests: XCTestCase {
     override func setUp() {
         keychainStore = MockKeychainStore()
         config = MockConfig()
-        let cache = InMemoryLoggingNetworkStore()
-        networking = NetworkService(api: FoxAPIService(credentials: keychainStore, store: cache))
+        networking = NetworkService(api: FoxAPIService(credentials: keychainStore, urlSession: URLSession.shared))
         configManager = ConfigManager(networking: networking, config: config, appSettingsPublisher: CurrentValueSubject<AppSettings, Never>(AppSettings.mock()), keychainStore: MockKeychainStore())
-        sut = UserManager(store: keychainStore, configManager: configManager, networkCache: cache)
+        sut = UserManager(store: keychainStore, configManager: configManager)
     }
 
     @MainActor
@@ -66,7 +65,7 @@ final class UserManagerTests: XCTestCase {
         await sut.login(apiKey: "bob")
         await propertyOn(keychainStore, keyPath: \.hasCredentials) { $0.value }
 
-        await propertyOn(received, keyPath: \.values) { $0 == [.inactive, .active("Loading...")] }
+        await propertyOn(received, keyPath: \.values) { $0 == [.inactive, .active(.loading)] }
         XCTAssertEqual(keychainStore.token, "bob")
         XCTAssertEqual(config.selectedDeviceSN, "DEVICESN")
         XCTAssertNotNil(config.devices)
@@ -78,7 +77,7 @@ final class UserManagerTests: XCTestCase {
 
         await sut.login(apiKey: "bob")
 
-        await propertyOn(received, keyPath: \.values) { $0 == [.inactive, .active("Loading..."), .inactive, .error(NetworkError.tryLater, "Could not login. Check your internet connection")] }
+        await propertyOn(received, keyPath: \.values) { $0 == [.inactive, .active(.loading), .inactive, .error(NetworkError.tryLater, "Could not login. Check your internet connection")] }
         XCTAssertTrue(keychainStore.logoutCalled)
     }
 
@@ -88,7 +87,7 @@ final class UserManagerTests: XCTestCase {
 
         await sut.login(apiKey: "bob")
 
-        await propertyOn(received, keyPath: \.values) { $0 == [.inactive, .active("Loading..."), .inactive, .error(nil, "Wrong credentials, try again")] }
+        await propertyOn(received, keyPath: \.values) { $0 == [.inactive, .active(.loading), .inactive, .error(nil, "Wrong credentials, try again")] }
         XCTAssertNil(keychainStore.token)
         XCTAssertTrue(keychainStore.logoutCalled)
     }
@@ -98,7 +97,7 @@ final class UserManagerTests: XCTestCase {
         stubOffline()
 
         await sut.login(apiKey: "bob")
-        await propertyOn(received, keyPath: \.values) { $0 == [.inactive, .active("Loading..."), .inactive, .error(nil, "Could not login. Check your internet connection")] }
+        await propertyOn(received, keyPath: \.values) { $0 == [.inactive, .active(.loading), .inactive, .error(nil, "Could not login. Check your internet connection")] }
 
         XCTAssertNil(keychainStore.token)
         XCTAssertTrue(keychainStore.logoutCalled)

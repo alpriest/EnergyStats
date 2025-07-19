@@ -57,11 +57,11 @@ class WatchConfigManager: WatchConfigManaging {
 
     var solarDefinitions: SolarRangeDefinitions {
         get {
-            guard let solarDefinitions = UserDefaults.shared.data(forKey: "solarDefinitions") else { return .default() }
+            guard let solarDefinitions = UserDefaults.shared.data(forKey: "solarDefinitions") else { return .default }
             do {
                 return try JSONDecoder().decode(SolarRangeDefinitions.self, from: solarDefinitions)
             } catch {
-                return .default()
+                return .default
             }
         }
         set {
@@ -82,6 +82,6 @@ class PreviewWatchConfig: WatchConfigManaging {
     var minSOC: Double = 0.0
     var showUsableBatteryOnly: Bool = false
     var showGridTotalsOnPowerFlow: Bool = true
-    var solarDefinitions: SolarRangeDefinitions = .default()
+    var solarDefinitions: SolarRangeDefinitions = .default
     var shouldCombineCT2WithLoadsPower: Bool = false
 }
