@@ -9,6 +9,7 @@ import Combine
 import Energy_Stats_Core
 import Firebase
 import FirebaseAnalytics
+import Network
 import Pulse
 import PulseUI
 import SwiftUI
@@ -47,6 +48,8 @@ struct Energy_StatsApp: App {
     @Environment(\.scenePhase) private var scenePhase
 
     init() {
+        nw_tls_create_options()
+
         var config: Config
         if isRunningScreenshots() {
             config = MockConfig()
