@@ -28,10 +28,22 @@ struct ContentView: View {
             case .some(true):
                 Group {
 #if targetEnvironment(macCatalyst)
-                    LeftTabbedView(networking: network, userManager: userManager, configManager: configManager, solarForecastProvider: solarForecastProvider, templateStore: templateStore)
+                    LeftTabbedView(
+                        networking: network,
+                        userManager: userManager,
+                        configManager: configManager,
+                        solarForecastProvider: solarForecastProvider,
+                        templateStore: templateStore
+                    )
 #else
                     ZStack {
-                        TabbedView(networking: network, userManager: userManager, configManager: configManager, solarForecastProvider: solarForecastProvider, templateStore: templateStore)
+                        TabbedView(
+                            networking: network,
+                            userManager: userManager,
+                            configManager: configManager,
+                            solarForecastProvider: solarForecastProvider,
+                            templateStore: templateStore
+                        )
 
                         BannerAlertView()
                     }
