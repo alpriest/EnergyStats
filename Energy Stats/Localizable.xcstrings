@@ -14294,6 +14294,9 @@
         }
       }
     },
+    "Show estimated inverter consumption" : {
+
+    },
     "Show graph" : {
       "localizations" : {
         "de" : {

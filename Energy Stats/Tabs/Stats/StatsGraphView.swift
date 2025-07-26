@@ -51,11 +51,15 @@ struct StatsGraphValue: Identifiable, Hashable {
     }
 
     var isForNormalGraph: Bool {
-        type != .selfSufficiency
+        type != .selfSufficiency && type != .inverterConsumption
     }
 
     var isForSelfSufficiencyGraph: Bool {
         type == .selfSufficiency
+    }
+
+    var isForInverterConsumptionGraph: Bool {
+        type == .inverterConsumption
     }
 }
 
@@ -87,6 +91,17 @@ struct StatsGraphView: View {
                         )
                         .lineStyle(StrokeStyle(lineWidth: 2, dash: [2, 4]))
                         .foregroundStyle(Color("background_inverted"))
+                    }
+                }
+
+                if appSettings.showInverterConsumption {
+                    ForEach(viewModel.data.filter { $0.isForInverterConsumptionGraph }) {
+                        LineMark(
+                            x: .value("hour", $0.date, unit: viewModel.unit),
+                            y: .value("Amount", $0.graphValue)
+                        )
+                        .lineStyle(StrokeStyle(lineWidth: 3))
+                        .foregroundStyle(Color.pink)
                     }
                 }
             }

@@ -57,6 +57,7 @@ public struct AppSettings {
     public var ct2DisplayMode: CT2DisplayMode
     public var shouldCombineCT2WithLoadsPower: Bool
     public var detectedActiveTemplate: String?
+    public var showInverterConsumption: Bool
 
     public init(
         showColouredLines: Bool,
@@ -100,7 +101,8 @@ public struct AppSettings {
         fetchSolcastOnAppLaunch: Bool,
         ct2DisplayMode: CT2DisplayMode,
         shouldCombineCT2WithLoadsPower: Bool,
-        detectedActiveTemplate: String?
+        detectedActiveTemplate: String?,
+        showInverterConsumption: Bool
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -144,6 +146,7 @@ public struct AppSettings {
         self.ct2DisplayMode = ct2DisplayMode
         self.shouldCombineCT2WithLoadsPower = shouldCombineCT2WithLoadsPower
         self.detectedActiveTemplate = detectedActiveTemplate
+        self.showInverterConsumption = showInverterConsumption
     }
 
     public func copy(
@@ -188,7 +191,8 @@ public struct AppSettings {
         fetchSolcastOnAppLaunch: Bool? = nil,
         ct2DisplayMode: CT2DisplayMode? = nil,
         shouldCombineCT2WithLoadsPower: Bool? = nil,
-        detectedActiveTemplate: String? = nil
+        detectedActiveTemplate: String? = nil,
+        showInverterConsumption: Bool? = nil
     ) -> AppSettings {
         AppSettings(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -232,7 +236,8 @@ public struct AppSettings {
             fetchSolcastOnAppLaunch: fetchSolcastOnAppLaunch ?? self.fetchSolcastOnAppLaunch,
             ct2DisplayMode: ct2DisplayMode ?? self.ct2DisplayMode,
             shouldCombineCT2WithLoadsPower: shouldCombineCT2WithLoadsPower ?? self.shouldCombineCT2WithLoadsPower,
-            detectedActiveTemplate: detectedActiveTemplate ?? self.detectedActiveTemplate
+            detectedActiveTemplate: detectedActiveTemplate ?? self.detectedActiveTemplate,
+            showInverterConsumption: showInverterConsumption ?? self.showInverterConsumption
         )
     }
 
@@ -279,7 +284,8 @@ public struct AppSettings {
             fetchSolcastOnAppLaunch: config.fetchSolcastOnAppLaunch,
             ct2DisplayMode: config.ct2DisplayMode,
             shouldCombineCT2WithLoadsPower: config.shouldCombineCT2WithLoadsPower,
-            detectedActiveTemplate: nil
+            detectedActiveTemplate: nil,
+            showInverterConsumption: config.showInverterConsumption
         )
     }
 }

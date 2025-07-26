@@ -21,6 +21,7 @@ struct InverterSettingsView: View {
     @Binding var showInverterScheduleQuickLink: Bool
     @Binding var ct2DisplayMode: CT2DisplayMode
     @Binding var shouldCombineCT2WithLoadsPower: Bool
+    @Binding var showInverterConsumption: Bool
 
     var body: some View {
         Form {
@@ -61,6 +62,10 @@ struct InverterSettingsView: View {
 
                 Toggle(isOn: $showInverterScheduleQuickLink) {
                     Text("Show schedule quick link")
+                }
+
+                Toggle(isOn: $showInverterConsumption) {
+                    Text("Show estimated inverter consumption")
                 }
 
             } header: {
@@ -154,7 +159,8 @@ struct InverterSettingsView_Previews: PreviewProvider {
                 showInverterTypeName: .constant(true),
                 showInverterScheduleQuickLink: .constant(true),
                 ct2DisplayMode: .constant(.asPowerString),
-                shouldCombineCT2WithLoadsPower: .constant(false)
+                shouldCombineCT2WithLoadsPower: .constant(false),
+                showInverterConsumption: .constant(false)
             )
         }
     }

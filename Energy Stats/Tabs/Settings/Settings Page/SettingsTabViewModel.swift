@@ -185,6 +185,11 @@ class SettingsTabViewModel: ObservableObject {
     }
 
     @Published var isLoggingOut: Bool = false
+    @Published var showInverterConsumption: Bool {
+        didSet {
+            config.showInverterConsumption = showInverterConsumption
+        }
+    }
 
     private(set) var config: ConfigManaging
     private let userManager: UserManager
@@ -226,6 +231,7 @@ class SettingsTabViewModel: ObservableObject {
         showInverterScheduleQuickLink = config.showInverterScheduleQuickLink
         ct2DisplayMode = config.ct2DisplayMode
         shouldCombineCT2WithLoadsPower = config.shouldCombineCT2WithLoadsPower
+        showInverterConsumption = config.showInverterConsumption
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }
@@ -273,38 +279,6 @@ class SettingsTabViewModel: ObservableObject {
 
     func reloadDevices() async throws {
         try await config.fetchDevices()
-    }
-
-    func update(from appSettings: AppSettings) {
-        showColouredLines = appSettings.showColouredLines
-        showBatteryTemperature = appSettings.showBatteryTemperature
-        refreshFrequency = appSettings.refreshFrequency
-        decimalPlaces = appSettings.decimalPlaces
-        showSunnyBackground = appSettings.showSunnyBackground
-        showBatteryEstimate = appSettings.showBatteryEstimate
-        showUsableBatteryOnly = appSettings.showUsableBatteryOnly
-        displayUnit = appSettings.displayUnit
-        showInverterTemperature = appSettings.showInverterTemperature
-        showHomeTotalOnPowerFlow = appSettings.showHomeTotalOnPowerFlow
-        showInverterIcon = appSettings.showInverterIcon
-        shouldInvertCT2 = appSettings.shouldInvertCT2
-        showInverterStationName = appSettings.showInverterStationName
-        showGridTotalsOnPowerFlow = appSettings.showGridTotalsOnPowerFlow
-        showLastUpdateTimestamp = appSettings.showLastUpdateTimestamp
-        shouldCombineCT2WithPVPower = appSettings.shouldCombineCT2WithPVPower
-        showGraphValueDescriptions = appSettings.showGraphValueDescriptions
-        dataCeiling = config.dataCeiling
-        showTotalYieldOnPowerFlow = appSettings.showTotalYieldOnPowerFlow
-        separateParameterGraphsByUnit = appSettings.separateParameterGraphsByUnit
-        showInverterTypeName = appSettings.showInverterTypeName
-        powerFlowStrings = config.powerFlowStrings
-        showBatteryPercentageRemaining = config.showBatteryPercentageRemaining
-        powerStation = config.powerStationDetail
-        colorScheme = config.colorScheme
-        batteryTemperatureDisplayMode = config.batteryTemperatureDisplayMode
-        showInverterScheduleQuickLink = config.showInverterScheduleQuickLink
-        ct2DisplayMode = config.ct2DisplayMode
-        shouldCombineCT2WithLoadsPower = config.shouldCombineCT2WithLoadsPower
     }
 
     func recalculateBatteryCapacity() {

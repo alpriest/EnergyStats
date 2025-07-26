@@ -76,6 +76,7 @@ public protocol ConfigManaging: FinancialConfigManager, SolcastConfigManager, Ba
     var shouldCombineCT2WithLoadsPower: Bool { get set }
     func getDeviceSupports(capability: DeviceCapability, deviceSN: String) -> Bool
     func setDeviceSupports(capability: DeviceCapability, deviceSN: String)
+    var showInverterConsumption: Bool { get set }
 }
 
 public enum DeviceCapability {

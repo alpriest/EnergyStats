@@ -434,6 +434,7 @@ public class MockConfig: Config {
     public var seenTips: [TipType] = []
     public var shouldCombineCT2WithLoadsPower: Bool = false
     public var deviceSupportsScheduleMaxSOC: [String: Bool] = [:]
+    public var showInverterConsumption: Bool = false
 }
 
 public extension SolcastSite {

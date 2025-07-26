@@ -670,6 +670,11 @@ public class ConfigManager: ConfigManaging {
             deviceSupportsPeakShaving[deviceSN] = true
         }
     }
+
+    public var showInverterConsumption: Bool {
+        get { config.showInverterConsumption }
+        set { config.showInverterConsumption = newValue }
+    }
 }
 
 public enum BatteryResponseMapper {

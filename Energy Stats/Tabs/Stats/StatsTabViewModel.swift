@@ -113,11 +113,13 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
                               configManager.hasBattery ? .chargeEnergyToTal : nil,
                               configManager.hasBattery ? .dischargeEnergyToTal : nil,
                               .loads,
-                              (configManager.selfSufficiencyEstimateMode != .off && configManager.showSelfSufficiencyStatsGraphOverlay) ? .selfSufficiency : nil]
+                              (configManager.selfSufficiencyEstimateMode != .off && configManager.showSelfSufficiencyStatsGraphOverlay) ? .selfSufficiency : nil,
+                              configManager.showInverterConsumption ? .inverterConsumption : nil]
                 .compactMap { $0 }
                 .map {
                     StatsGraphVariable($0)
                 }
+            print("AWP", graphVariables.count)
         }
     }
 
@@ -163,7 +165,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
             await MainActor.run {
                 self.totals = totals
                 self.unit = displayMode.unit()
-                self.rawData = updatedData + calculateSelfSufficiencyAcrossTimePeriod(updatedData)
+                self.rawData = updatedData + calculateSelfSufficiencyAcrossTimePeriod(updatedData) + calculateInverterConsumptionAcrossTimePeriod(updatedData)
                 calculateApproximations()
                 refresh()
                 prepareExport()
@@ -278,10 +280,50 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
         }
     }
 
+    func calculateInverterConsumptionAcrossTimePeriod(_ rawData: [StatsGraphValue]) -> [StatsGraphValue] {
+        let dates = Set(rawData.map { $0.date })
+        var inverterConsumptionAtDateTime: [Date: Double] = [:]
+
+        for date in dates {
+            let valuesAtTime = ValuesAtTime(values: rawData.filter { $0.date == date })
+
+            if let grid = valuesAtTime.values.first(where: { $0.type == .gridConsumption })?.graphValue,
+               let feedIn = valuesAtTime.values.first(where: { $0.type == .feedIn })?.graphValue,
+               let loads = valuesAtTime.values.first(where: { $0.type == .loads })?.graphValue,
+               let batteryCharge = valuesAtTime.values.first(where: { $0.type == .chargeEnergyToTal })?.graphValue,
+               let batteryDischarge = valuesAtTime.values.first(where: { $0.type == .dischargeEnergyToTal })?.graphValue,
+               let solar = valuesAtTime.values.first(where: { $0.type == .pvEnergyTotal })?.graphValue
+            {
+                inverterConsumptionAtDateTime[date] = Swift.max((solar + grid + batteryDischarge) - (feedIn + batteryCharge + loads), 0)
+            }
+        }
+
+        totals[.inverterConsumption] = inverterConsumptionAtDateTime.values.reduce(0, +)
+
+        return inverterConsumptionAtDateTime
+            .map {
+                StatsGraphValue(
+                    type: .inverterConsumption,
+                    date: $0.key,
+                    graphValue: $0.value,
+                    displayValue: $0.value
+                )
+            }
+            .sorted(by: { $1.date > $0.date })
+            .filter { $0.date <= Date.now }
+    }
+
     func data(at date: Date?) -> ValuesAtTime<StatsGraphValue> {
         guard let date else { return ValuesAtTime(values: []) }
         let variableTypes = graphVariables.map { $0.type }
-        let result = ValuesAtTime(values: rawData.filter { $0.date == date && variableTypes.contains($0.type) })
+        var filteredRawData = rawData.filter {
+            $0.date == date && variableTypes.contains($0.type)
+        }
+
+        if !filteredRawData.contains(where: { $0.isForInverterConsumptionGraph }) {
+            filteredRawData += [StatsGraphValue(type: .inverterConsumption, date: date, graphValue: 0, displayValue: 0)]
+        }
+        let result = ValuesAtTime(values: filteredRawData)
 
         if let maxDate = max?.date, date == maxDate {
             haptic.impactOccurred()

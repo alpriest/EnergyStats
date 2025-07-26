@@ -58,7 +58,8 @@ public extension AppSettings {
             fetchSolcastOnAppLaunch: false,
             ct2DisplayMode: .hidden,
             shouldCombineCT2WithLoadsPower: false,
-            detectedActiveTemplate: nil
+            detectedActiveTemplate: nil,
+            showInverterConsumption: false
         )
     }
 }

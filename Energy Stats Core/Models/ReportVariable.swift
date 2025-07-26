@@ -16,6 +16,7 @@ public enum ReportVariable: String, RawRepresentable {
     case loads
     case selfSufficiency
     case pvEnergyTotal
+    case inverterConsumption
 
     public var networkTitle: String {
         switch self {
@@ -27,6 +28,8 @@ public enum ReportVariable: String, RawRepresentable {
             return "dischargeEnergyToTal"
         case .pvEnergyTotal:
             return "PVEnergyTotal"
+        case .inverterConsumption:
+            return String(localized: "Inverter consumption")
         default:
             return self.rawValue
         }
@@ -73,6 +76,8 @@ public enum ReportVariable: String, RawRepresentable {
             return String(localized: "Self sufficiency")
         case .pvEnergyTotal:
             return String(localized: "Solar ") + usage.title()
+        case .inverterConsumption:
+            return String(localized: "Inverter consumption")
         }
     }
 
@@ -104,6 +109,8 @@ public enum ReportVariable: String, RawRepresentable {
             return .black
         case .pvEnergyTotal:
             return .yellow.opacity(0.8)
+        case .inverterConsumption:
+            return .pink.opacity(0.8)
         }
     }
 }

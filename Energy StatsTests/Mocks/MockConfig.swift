@@ -71,4 +71,5 @@ class MockConfig: Config {
     var displayUnit: Int = 0
     var solarDefinitions: SolarRangeDefinitions = SolarRangeDefinitions.default
     var gridImportUnitPrice: Double = 0.0
+    var showInverterConsumption: Bool = false
 }

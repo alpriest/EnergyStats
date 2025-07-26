@@ -89,6 +89,7 @@ struct StatsGraphVariableToggles: View {
                     }
                 }
             }
+            .contentShape(Rectangle())
             .opacity(variable.enabled ? 1.0 : 0.5)
         }
         .buttonStyle(.plain)
