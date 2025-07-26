@@ -673,7 +673,12 @@ public class ConfigManager: ConfigManaging {
 
     public var showInverterConsumption: Bool {
         get { config.showInverterConsumption }
-        set { config.showInverterConsumption = newValue }
+        set {
+            config.showInverterConsumption = newValue
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+                showInverterConsumption: config.showInverterConsumption
+            ))
+        }
     }
 }
 

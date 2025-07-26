@@ -9055,6 +9055,34 @@
         }
       }
     },
+    "Inverter Consumption" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wechselrichterverbrauch"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Consumo del inversor"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Consumo dell'inverter"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zużycie falownika"
+          }
+        }
+      }
+    },
     "Inverter display settings, CT2 settings" : {
       "localizations" : {
         "de" : {
@@ -13174,6 +13202,41 @@
         }
       }
     },
+    "reportvariable_inverter consumption" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geschätzte vom Wechselrichter verbrauchte Energie"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estimated energy used by the inverter"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Energía estimada utilizada por el inversor"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Energia stimata utilizzata dall'inverter"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Szacowana energia zużyta przez falownik"
+          }
+        }
+      }
+    },
     "reportvariable_loads" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -13719,6 +13782,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Auto-sufficienza"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Samowystarczalność"
+          }
+        }
+      }
+    },
+    "Self Sufficiency" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eigenversorgung"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autosuficiencia"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autosufficienza"
           }
         },
         "pl" : {
@@ -14295,7 +14386,32 @@
       }
     },
     "Show estimated inverter consumption" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geschätzten Wechselrichterverbrauch anzeigen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar el consumo estimado del inversor"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra il consumo stimato dell'inverter"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pokaż szacowane zużycie falownika"
+          }
+        }
+      }
     },
     "Show graph" : {
       "localizations" : {

@@ -87,7 +87,8 @@ struct StatsGraphView: View {
                     ForEach(viewModel.data.filter { $0.isForSelfSufficiencyGraph }) {
                         LineMark(
                             x: .value("hour", $0.date, unit: viewModel.unit),
-                            y: .value("Amount", $0.graphValue)
+                            y: .value("Amount", $0.graphValue),
+                            series: .value("Self Sufficiency", "Self Sufficiency")
                         )
                         .lineStyle(StrokeStyle(lineWidth: 2, dash: [2, 4]))
                         .foregroundStyle(Color("background_inverted"))
@@ -98,7 +99,8 @@ struct StatsGraphView: View {
                     ForEach(viewModel.data.filter { $0.isForInverterConsumptionGraph }) {
                         LineMark(
                             x: .value("hour", $0.date, unit: viewModel.unit),
-                            y: .value("Amount", $0.graphValue)
+                            y: .value("Amount", $0.graphValue),
+                            series: .value("Inverter Consumption", "Inverter Consumption")
                         )
                         .lineStyle(StrokeStyle(lineWidth: 3))
                         .foregroundStyle(Color.pink)
