@@ -36,7 +36,7 @@ struct ApproximationsView: View {
 
                 Spacer()
 
-                Image(systemName: showCalculations ? "eye" : "eye.slash")
+                Image(systemName: showCalculations ? "chevron.up" : "chevron.down")
                     .padding(2)
                     .background(
                         RoundedRectangle(cornerRadius: 3)
