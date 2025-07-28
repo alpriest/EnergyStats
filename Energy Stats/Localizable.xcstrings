@@ -226,6 +226,7 @@
       }
     },
     "- **Login is via an API key**. Instructions for finding your API key are on the login page." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -254,6 +255,7 @@
       }
     },
     "- **Network calls are throttled to 1 per second**. You may notice some screens load less quickly than before." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -282,6 +284,7 @@
       }
     },
     "- **Rate limited to 1,440 requests per inverter per day**. Unless you leave Energy Stats on 24 hours a day this is unlikely to affect you." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -310,6 +313,7 @@
       }
     },
     "- **Schedule templates are no longer available** as FoxESS have not yet made these available via their OpenAPI. When schedule templates become available support will be added." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -338,6 +342,7 @@
       }
     },
     "- **Work mode is not configurable**. You will need to use a schedule to change your default inverter work mode." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4545,6 +4550,7 @@
       }
     },
     "Continue" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -8751,6 +8757,7 @@
       }
     },
     "IMPORTANT" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -8779,6 +8786,7 @@
       }
     },
     "In December 2023, FoxESS asked all 3rd party integrations to migrate access to a new set of services to access customer data. These new services are known by FoxESS as their OpenAPI services. Energy Stats has been changed internally to use these new services (3,500 lines of code changed)." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -15792,6 +15800,7 @@
       }
     },
     "These new services are different from those used by the Fox apps and have some notable differences." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -16680,6 +16689,7 @@
       }
     },
     "We've updated the login process for Energy Stats" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -16911,6 +16921,7 @@
       }
     },
     "What's changed?" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

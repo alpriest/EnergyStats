@@ -70,7 +70,6 @@ struct ErrorAlertView: View {
     @EnvironmentObject var userManager: UserManager
     @State private var buttonWidth: CGFloat = .zero
     @State private var showingFatalError = false
-    @State private var showingUpgradeRequired = false
     @State private var alertContent: AlertContent?
 
     init(cause: Error?, message: String, options: ErrorAlertViewOptions, retry: @escaping () -> Void) {
@@ -130,15 +129,8 @@ struct ErrorAlertView: View {
             if case .requestRequiresSignature = cause {
                 showingFatalError = true
             }
-
-            if case .badCredentials = cause {
-                showingUpgradeRequired = true
-            }
         }.sheet(isPresented: $showingFatalError) {
             UnsupportedErrorView()
-        }.sheet(isPresented: $showingUpgradeRequired) {
-            UpgradeRequiredView(userManager: userManager)
-                .interactiveDismissDisabled()
         }.alert(alertContent: $alertContent)
     }
 

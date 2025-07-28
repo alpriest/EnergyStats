@@ -298,7 +298,6 @@
 		41D759FE2B5B1768002C43A7 /* EditScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419092292B1DE3D90017CB65 /* EditScheduleView.swift */; };
 		41D759FF2B5B176A002C43A7 /* EditScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C09202B18A98400183603 /* EditScheduleViewModel.swift */; };
 		41D75A012B5C0238002C43A7 /* Bool+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D75A002B5C0238002C43A7 /* Bool+Int.swift */; };
-		41D75A032B6009D5002C43A7 /* UpgradeRequiredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D75A022B6009D5002C43A7 /* UpgradeRequiredView.swift */; };
 		41D7AB902B9F1F6C00FFDFC0 /* InfoButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D7AB8F2B9F1F6C00FFDFC0 /* InfoButtonView.swift */; };
 		41D8402D2AB2E0DE00769E81 /* ErrorMessagesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D8402C2AB2E0DE00769E81 /* ErrorMessagesResponse.swift */; };
 		41DAAC272CF52BDD0096DF20 /* ActiveScheduleIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DAAC262CF52BDD0096DF20 /* ActiveScheduleIntent.swift */; };
@@ -824,7 +823,6 @@
 		41D6496B28DB321600A24B41 /* DeviceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceList.swift; sourceTree = "<group>"; };
 		41D759FC2B5B0E37002C43A7 /* FoxAPIService+OpenAPI+Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoxAPIService+OpenAPI+Schedule.swift"; sourceTree = "<group>"; };
 		41D75A002B5C0238002C43A7 /* Bool+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+Int.swift"; sourceTree = "<group>"; };
-		41D75A022B6009D5002C43A7 /* UpgradeRequiredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeRequiredView.swift; sourceTree = "<group>"; };
 		41D7AB8F2B9F1F6C00FFDFC0 /* InfoButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoButtonView.swift; sourceTree = "<group>"; };
 		41D7B12328C86E4000E14144 /* FoxEssCloudParseStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoxEssCloudParseStrategy.swift; sourceTree = "<group>"; };
 		41D8402C2AB2E0DE00769E81 /* ErrorMessagesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessagesResponse.swift; sourceTree = "<group>"; };
@@ -1289,7 +1287,6 @@
 				417153E529F2BD3300639A7B /* LoadState.swift */,
 				41965EE22C3286C9004F9D9A /* LoadTracking.swift */,
 				4149D3AC2B3C4DAA00314449 /* UnsupportedErrorView.swift */,
-				41D75A022B6009D5002C43A7 /* UpgradeRequiredView.swift */,
 				41965EE02C3284E6004F9D9A /* VisibilityTracking.swift */,
 				4140145128C70B3200EA5BA1 /* Assets.xcassets */,
 				418EB4882ACC10220021B87A /* Localizable.xcstrings */,
@@ -2265,7 +2262,6 @@
 				41FCE06B2CA170930046ABF6 /* LeftTabbedView.swift in Sources */,
 				417153E429F2BCD700639A7B /* ParameterGraphHeaderView.swift in Sources */,
 				417E1CE42E1E473F009E8374 /* InverterWorkModeViewModel.swift in Sources */,
-				41D75A032B6009D5002C43A7 /* UpgradeRequiredView.swift in Sources */,
 				416AE4362A7D2C8B003D0122 /* InverterSettingsView.swift in Sources */,
 				417AA21A2A12454A0073CD34 /* StatsTabView.swift in Sources */,
 				4130364929B86F66006B5CE9 /* BatterySettingsView.swift in Sources */,
