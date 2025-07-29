@@ -137,7 +137,7 @@ struct StatsDatePickerView: View {
             if viewModel.range.isCustom == false {
                 incrementDecrementButtons()
             }
-        }
+        }.applyGlassEffect()
     }
 
     @ViewBuilder

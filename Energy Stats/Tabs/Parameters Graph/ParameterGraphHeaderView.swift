@@ -89,6 +89,7 @@ struct ParameterGraphHeaderView: View {
             .disabled(!viewModel.canIncrease)
             .accessibilityLabel("accessibility.next.day")
         }
+        .applyGlassEffect()
     }
 }
 

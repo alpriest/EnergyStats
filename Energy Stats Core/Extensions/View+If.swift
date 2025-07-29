@@ -34,3 +34,14 @@ public extension View {
         }
     }
 }
+
+public extension View {
+    @ViewBuilder
+    func applyGlassEffect() -> some View {
+        if #available(iOS 26, watchOS 26, *) {
+            glassEffect()
+        } else {
+            self
+        }
+    }
+}
