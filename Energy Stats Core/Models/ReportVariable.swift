@@ -17,6 +17,7 @@ public enum ReportVariable: String, RawRepresentable {
     case selfSufficiency
     case pvEnergyTotal
     case inverterConsumption
+    case batterySOC
 
     public var networkTitle: String {
         switch self {
@@ -78,6 +79,8 @@ public enum ReportVariable: String, RawRepresentable {
             return String(localized: "Solar ") + usage.title()
         case .inverterConsumption:
             return String(localized: "Inverter consumption")
+        case .batterySOC:
+            return String(localized: "Battery SOC")
         }
     }
 
@@ -111,6 +114,8 @@ public enum ReportVariable: String, RawRepresentable {
             return .yellow.opacity(0.8)
         case .inverterConsumption:
             return .pink.opacity(0.8)
+        case .batterySOC:
+            return .cyan
         }
     }
 }

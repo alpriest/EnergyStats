@@ -191,6 +191,12 @@ class SettingsTabViewModel: ObservableObject {
         }
     }
 
+    @Published var showBatterySOCOnDailyStats: Bool {
+        didSet {
+            config.showBatterySOCOnDailyStats = showBatterySOCOnDailyStats
+        }
+    }
+
     private(set) var config: ConfigManaging
     private let userManager: UserManager
     private var cancellables = Set<AnyCancellable>()
@@ -232,6 +238,7 @@ class SettingsTabViewModel: ObservableObject {
         ct2DisplayMode = config.ct2DisplayMode
         shouldCombineCT2WithLoadsPower = config.shouldCombineCT2WithLoadsPower
         showInverterConsumption = config.showInverterConsumption
+        showBatterySOCOnDailyStats = config.showBatterySOCOnDailyStats
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }

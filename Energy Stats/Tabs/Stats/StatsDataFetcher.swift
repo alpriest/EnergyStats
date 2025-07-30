@@ -12,7 +12,7 @@ struct StatsDataFetcher {
     let networking: Networking
     let approximationsCalculator: ApproximationsCalculator
 
-    func fetchCustomData(
+    func fetchCustomDateRangeData(
         device: Device,
         start: Date,
         end: Date,

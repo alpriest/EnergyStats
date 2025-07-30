@@ -435,6 +435,7 @@ public class MockConfig: Config {
     public var shouldCombineCT2WithLoadsPower: Bool = false
     public var deviceSupportsScheduleMaxSOC: [String: Bool] = [:]
     public var showInverterConsumption: Bool = false
+    public var showBatterySOCOnDailyStats: Bool = false
 }
 
 public extension SolcastSite {

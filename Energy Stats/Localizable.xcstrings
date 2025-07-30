@@ -225,151 +225,6 @@
         }
       }
     },
-    "- **Login is via an API key**. Instructions for finding your API key are on the login page." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "- **Anmeldung erfolgt über einen API-Schlüssel**. Anweisungen zum Finden Ihres API-Schlüssels finden Sie auf der Anmeldeseite."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "- **El inicio de sesión es a través de una clave API**. Las instrucciones para encontrar tu clave API están en la página de inicio de sesión."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "- **L'accesso avviene tramite una chiave API**. Le istruzioni per trovare la tua chiave API sono sulla pagina di accesso."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "- **Logowanie odbywa się za pomocą klucza API**. Instrukcje dotyczące znajdowania klucza API znajdują się na stronie logowania."
-          }
-        }
-      }
-    },
-    "- **Network calls are throttled to 1 per second**. You may notice some screens load less quickly than before." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "- **Netzwerkanrufe sind auf 1 pro Sekunde gedrosselt**. Sie werden vielleicht bemerken, dass einige Bildschirme langsamer laden als zuvor."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "- **Las llamadas de red están limitadas a 1 por segundo**. Puede notar que algunas pantallas se cargan más lentamente que antes."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "- **Le chiamate di rete sono limitate a 1 al secondo**. Potresti notare che alcune schermate si caricano meno velocemente di prima."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "- **Połączenia sieciowe są ograniczone do 1 na sekundę**. Możesz zauważyć, że niektóre ekrany ładują się wolniej niż wcześniej."
-          }
-        }
-      }
-    },
-    "- **Rate limited to 1,440 requests per inverter per day**. Unless you leave Energy Stats on 24 hours a day this is unlikely to affect you." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "- **Auf 1.440 Anfragen pro Wechselrichter pro Tag begrenzt**. Es sei denn, Sie lassen Energiestatistiken 24 Stunden am Tag laufen, wird dies Sie wahrscheinlich nicht betreffen."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "- **Limitado a 1,440 solicitudes por inversor por día**. A menos que dejes Estadísticas de Energía encendido las 24 horas del día, es poco probable que esto te afecte."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "- **Limitato a 1.440 richieste per inverter al giorno**. A meno che tu non lasci Statistiche Energetiche acceso 24 ore al giorno, è improbabile che questo ti riguardi."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "- **Ograniczenie do 1,440 żądań na inwerter na dzień**. Chyba że zostawisz Statystyki Energetyczne włączone przez 24 godziny na dobę, jest to mało prawdopodobne, aby cię to dotyczyło."
-          }
-        }
-      }
-    },
-    "- **Schedule templates are no longer available** as FoxESS have not yet made these available via their OpenAPI. When schedule templates become available support will be added." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "- **Zeitplanvorlagen sind nicht mehr verfügbar**, da FoxESS diese noch nicht über ihr OpenAPI zur Verfügung gestellt hat. Wenn Zeitplanvorlagen verfügbar werden, wird Unterstützung hinzugefügt."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "- **Las plantillas de programación ya no están disponibles** ya que FoxESS aún no las ha puesto a disposición a través de su OpenAPI. Cuando las plantillas de programación estén disponibles, se agregará soporte."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "- **I modelli di pianificazione non sono più disponibili** poiché FoxESS non li ha ancora resi disponibili tramite il loro OpenAPI. Quando i modelli di pianificazione saranno disponibili, verrà aggiunto il supporto."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "- **Szablony harmonogramów nie są już dostępne**, ponieważ FoxESS jeszcze nie udostępnił ich za pośrednictwem swojego OpenAPI. Gdy szablony harmonogramów staną się dostępne, wsparcie zostanie dodane."
-          }
-        }
-      }
-    },
-    "- **Work mode is not configurable**. You will need to use a schedule to change your default inverter work mode." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "- **Der Arbeitsmodus ist nicht konfigurierbar**. Sie müssen einen Zeitplan verwenden, um Ihren Standard-Wechselrichter-Arbeitsmodus zu ändern."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "- **El modo de trabajo no es configurable**. Necesitará usar un horario para cambiar su modo de trabajo predeterminado del inversor."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "- **La modalità di lavoro non è configurabile**. Dovrai utilizzare un programma per cambiare la modalità di lavoro predefinita del tuo inverter."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "- **Tryb pracy nie jest konfigurowalny**. Musisz użyć harmonogramu, aby zmienić domyślny tryb pracy twojego falownika."
-          }
-        }
-      }
-    },
     ":" : {
       "shouldTranslate" : false
     },
@@ -3346,6 +3201,34 @@
         }
       }
     },
+    "Battery SOC" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Batterie-Ladezustand"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estado de carga de la batería"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stato di carica della batteria"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stan naładowania baterii"
+          }
+        }
+      }
+    },
     "Battery threshold SOC" : {
       "localizations" : {
         "de" : {
@@ -4545,35 +4428,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Porównaj ciągi"
-          }
-        }
-      }
-    },
-    "Continue" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fortsetzen"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Continuar"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Continua"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kontynuuj"
           }
         }
       }
@@ -8752,64 +8606,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Import całkowity"
-          }
-        }
-      }
-    },
-    "IMPORTANT" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "WICHTIG"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "IMPORTANTE"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "IMPORTANTE"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "WAŻNE"
-          }
-        }
-      }
-    },
-    "In December 2023, FoxESS asked all 3rd party integrations to migrate access to a new set of services to access customer data. These new services are known by FoxESS as their OpenAPI services. Energy Stats has been changed internally to use these new services (3,500 lines of code changed)." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Im Dezember 2023 bat FoxESS alle Drittanbieter-Integrationen, den Zugriff auf eine neue Reihe von Diensten zur Kundendatenabfrage zu migrieren. Diese neuen Dienste sind bei FoxESS als ihre OpenAPI-Dienste bekannt. Energy Stats wurde intern umgestellt, um diese neuen Dienste zu nutzen (3.500 Codezeilen geändert)."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "En diciembre de 2023, FoxESS solicitó a todas las integraciones de terceros que migraran el acceso a un nuevo conjunto de servicios para acceder a los datos de los clientes. Estos nuevos servicios son conocidos por FoxESS como sus servicios OpenAPI. Energy Stats ha sido modificado internamente para utilizar estos nuevos servicios (3,500 líneas de código cambiadas)."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nel dicembre 2023, FoxESS ha chiesto a tutte le integrazioni di terze parti di migrare l'accesso a un nuovo insieme di servizi per accedere ai dati dei clienti. Questi nuovi servizi sono conosciuti da FoxESS come i loro servizi OpenAPI. Energy Stats è stato modificato internamente per utilizzare questi nuovi servizi (3.500 righe di codice modificate)."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "W grudniu 2023 roku FoxESS poprosił wszystkie integracje stron trzecich o migrację dostępu do nowego zestawu usług w celu dostępu do danych klientów. Te nowe usługi są znane w FoxESS jako ich usługi OpenAPI. Energy Stats zostało zmienione wewnętrznie, aby korzystać z tych nowych usług (3,500 linii kodu)."
           }
         }
       }
@@ -14336,6 +14132,34 @@
         }
       }
     },
+    "Show battery SOC on daily stats" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Batterie-Ladezustand in der Tagesstatistik anzeigen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar el estado de carga de la batería en las estadísticas diarias"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra lo stato di carica della batteria nelle statistiche giornaliere"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pokaż stan naładowania baterii w dziennych statystykach"
+          }
+        }
+      }
+    },
     "Show coloured flow lines" : {
       "localizations" : {
         "de" : {
@@ -14810,6 +14634,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pokaż wartości w watach"
+          }
+        }
+      }
+    },
+    "show_battery_soc_on_daily_stats" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zeigt den Ladezustand der Batterie in der Tagesansicht der Statistiken an."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shows the battery charge level when looking at the daily stats view."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Muestra el nivel de carga de la batería en la vista diaria de estadísticas."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra il livello di carica della batteria nella visualizzazione giornaliera delle statistiche."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pokazuje poziom naładowania baterii w widoku dziennych statystyk."
           }
         }
       }
@@ -15799,35 +15657,6 @@
         }
       }
     },
-    "These new services are different from those used by the Fox apps and have some notable differences." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diese neuen Dienste unterscheiden sich von denen, die von den Fox-Apps verwendet werden, und weisen einige bemerkenswerte Unterschiede auf."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Estos nuevos servicios son diferentes a los utilizados por las aplicaciones de Fox y tienen algunas diferencias notables."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Questi nuovi servizi sono diversi da quelli usati dalle app Fox e presentano alcune differenze notevoli."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Te nowe usługi różnią się od tych używanych przez aplikacje Fox i mają kilka znaczących różnic."
-          }
-        }
-      }
-    },
     "Tilt" : {
       "localizations" : {
         "de" : {
@@ -16688,35 +16517,6 @@
         }
       }
     },
-    "We've updated the login process for Energy Stats" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wir haben den Anmeldeprozess für Energiestatistiken aktualisiert"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hemos actualizado el proceso de inicio de sesión para Estadísticas de Energía"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Abbiamo aggiornato il processo di accesso per Statistiche Energetiche"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zaktualizowaliśmy proces logowania do Statystyk Energetycznych"
-          }
-        }
-      }
-    },
     "What is my API key?" : {
       "localizations" : {
         "de" : {
@@ -16916,35 +16716,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Strona internetowa FoxESS może mieć problemy na urządzeniach mobilnych. Jeśli napotkasz problemy z uzyskaniem klucza API, skontaktuj się z service.uk@fox-ess.com, aby uzyskać pomoc."
-          }
-        }
-      }
-    },
-    "What's changed?" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Was hat sich geändert?"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "¿Qué ha cambiado?"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cosa è cambiato?"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Co się zmieniło?"
           }
         }
       }

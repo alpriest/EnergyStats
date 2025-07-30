@@ -127,6 +127,14 @@ struct BatterySettingsView: View {
                 Text(batteryDisplayModeText)
             }
 
+            Section {
+                Toggle(isOn: $viewModel.showBatterySOCOnDailyStats) {
+                    Text("Show battery SOC on daily stats")
+                }
+            } footer: {
+                Text("show_battery_soc_on_daily_stats")
+            }
+
             NavigationLink {
                 BatteryFirmwareVersionsView(network: viewModel.networking, config: viewModel.config)
             } label: {

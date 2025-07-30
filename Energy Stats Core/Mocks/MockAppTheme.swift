@@ -59,7 +59,8 @@ public extension AppSettings {
             ct2DisplayMode: .hidden,
             shouldCombineCT2WithLoadsPower: false,
             detectedActiveTemplate: nil,
-            showInverterConsumption: false
+            showInverterConsumption: false,
+            showBatterySOCOnDailyStats: false
         )
     }
 }

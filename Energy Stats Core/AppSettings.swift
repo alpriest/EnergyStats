@@ -58,6 +58,7 @@ public struct AppSettings {
     public var shouldCombineCT2WithLoadsPower: Bool
     public var detectedActiveTemplate: String?
     public var showInverterConsumption: Bool
+    public var showBatterySOCOnDailyStats: Bool
 
     public init(
         showColouredLines: Bool,
@@ -102,7 +103,8 @@ public struct AppSettings {
         ct2DisplayMode: CT2DisplayMode,
         shouldCombineCT2WithLoadsPower: Bool,
         detectedActiveTemplate: String?,
-        showInverterConsumption: Bool
+        showInverterConsumption: Bool,
+        showBatterySOCOnDailyStats: Bool
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -147,6 +149,7 @@ public struct AppSettings {
         self.shouldCombineCT2WithLoadsPower = shouldCombineCT2WithLoadsPower
         self.detectedActiveTemplate = detectedActiveTemplate
         self.showInverterConsumption = showInverterConsumption
+        self.showBatterySOCOnDailyStats = showBatterySOCOnDailyStats
     }
 
     public func copy(
@@ -192,7 +195,8 @@ public struct AppSettings {
         ct2DisplayMode: CT2DisplayMode? = nil,
         shouldCombineCT2WithLoadsPower: Bool? = nil,
         detectedActiveTemplate: String? = nil,
-        showInverterConsumption: Bool? = nil
+        showInverterConsumption: Bool? = nil,
+        showBatterySOCOnDailyStats: Bool? = nil
     ) -> AppSettings {
         AppSettings(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -237,7 +241,8 @@ public struct AppSettings {
             ct2DisplayMode: ct2DisplayMode ?? self.ct2DisplayMode,
             shouldCombineCT2WithLoadsPower: shouldCombineCT2WithLoadsPower ?? self.shouldCombineCT2WithLoadsPower,
             detectedActiveTemplate: detectedActiveTemplate ?? self.detectedActiveTemplate,
-            showInverterConsumption: showInverterConsumption ?? self.showInverterConsumption
+            showInverterConsumption: showInverterConsumption ?? self.showInverterConsumption,
+            showBatterySOCOnDailyStats: showBatterySOCOnDailyStats ?? self.showBatterySOCOnDailyStats
         )
     }
 
@@ -285,7 +290,8 @@ public struct AppSettings {
             ct2DisplayMode: config.ct2DisplayMode,
             shouldCombineCT2WithLoadsPower: config.shouldCombineCT2WithLoadsPower,
             detectedActiveTemplate: nil,
-            showInverterConsumption: config.showInverterConsumption
+            showInverterConsumption: config.showInverterConsumption,
+            showBatterySOCOnDailyStats: config.showBatterySOCOnDailyStats
         )
     }
 }

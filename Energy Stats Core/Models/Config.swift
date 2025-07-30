@@ -64,6 +64,7 @@ public protocol Config {
     var seenTips: [TipType] { get set }
     var shouldCombineCT2WithLoadsPower: Bool { get set }
     var showInverterConsumption: Bool { get set }
+    var showBatterySOCOnDailyStats: Bool { get set }
 }
 
 public func DefaultParameterGroups() -> [ParameterGroup] {

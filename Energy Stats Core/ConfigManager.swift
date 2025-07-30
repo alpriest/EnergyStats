@@ -680,6 +680,16 @@ public class ConfigManager: ConfigManaging {
             ))
         }
     }
+
+    public var showBatterySOCOnDailyStats: Bool {
+        get { config.showBatterySOCOnDailyStats }
+        set {
+            config.showBatterySOCOnDailyStats = newValue
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+                showBatterySOCOnDailyStats: config.showBatterySOCOnDailyStats
+            ))
+        }
+    }
 }
 
 public enum BatteryResponseMapper {

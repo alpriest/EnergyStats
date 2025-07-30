@@ -51,7 +51,7 @@ struct StatsGraphValue: Identifiable, Hashable {
     }
 
     var isForNormalGraph: Bool {
-        type != .selfSufficiency && type != .inverterConsumption
+        type != .selfSufficiency && type != .inverterConsumption && type != .batterySOC
     }
 
     var isForSelfSufficiencyGraph: Bool {
@@ -60,6 +60,10 @@ struct StatsGraphValue: Identifiable, Hashable {
 
     var isForInverterConsumptionGraph: Bool {
         type == .inverterConsumption
+    }
+
+    var isForBatterySOCGraph: Bool {
+        type == .batterySOC
     }
 }
 
@@ -104,6 +108,18 @@ struct StatsGraphView: View {
                         )
                         .lineStyle(StrokeStyle(lineWidth: 3))
                         .foregroundStyle(Color.pink)
+                    }
+                }
+
+                if appSettings.showBatterySOCOnDailyStats {
+                    ForEach(viewModel.data.filter { $0.isForBatterySOCGraph }) {
+                        LineMark(
+                            x: .value("hour", $0.date, unit: .hour),
+                            y: .value("Amount", $0.graphValue),
+                            series: .value("Battery SOC", "Battery SOC")
+                        )
+                        .lineStyle(StrokeStyle(lineWidth: 3))
+                        .foregroundStyle(Color.cyan)
                     }
                 }
             }
