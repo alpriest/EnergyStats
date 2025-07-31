@@ -114,7 +114,8 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
                               configManager.hasBattery ? .dischargeEnergyToTal : nil,
                               .loads,
                               (configManager.selfSufficiencyEstimateMode != .off && configManager.showSelfSufficiencyStatsGraphOverlay) ? .selfSufficiency : nil,
-                              configManager.showInverterConsumption ? .inverterConsumption : nil]
+                              configManager.showInverterConsumption ? .inverterConsumption : nil,
+                              configManager.showBatterySOCOnDailyStats ? .batterySOC : nil]
                 .compactMap { $0 }
                 .map {
                     StatsGraphVariable($0)
@@ -198,7 +199,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
                     type: .batterySOC,
                     date: unitData.time,
                     graphValue: unitData.value,
-                    displayValue: unitData.value
+                    displayValue: unitData.value / 100.0
                 )
             }
             .sorted(by: { $0.date < $1.date })
@@ -384,6 +385,13 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
         if !filteredRawData.contains(where: { $0.isForInverterConsumptionGraph }) {
             filteredRawData += [StatsGraphValue(type: .inverterConsumption, date: date, graphValue: 0, displayValue: 0)]
         }
+
+        if !filteredRawData.contains(where: { $0.isForBatterySOCGraph }) {
+            if let nearest = rawData.filter({ $0.isForBatterySOCGraph }).nearestTo(date: date) {
+                filteredRawData += [nearest]
+            }
+        }
+
         let result = ValuesAtTime(values: filteredRawData)
 
         if let maxDate = max?.date, date == maxDate {
@@ -477,5 +485,21 @@ private extension StatsTabViewModel {
         } else {
             return "unknown_date"
         }
+    }
+}
+
+extension [StatsGraphValue] {
+    func nearestTo(date: Date) -> StatsGraphValue? {
+        var nearestTimeInterval: TimeInterval = .infinity
+        var nearestData: StatsGraphValue?
+
+        forEach { value in
+            if abs(value.date.timeIntervalSince(date)) < nearestTimeInterval {
+                nearestData = value
+                nearestTimeInterval = abs(value.date.timeIntervalSince(date))
+            }
+        }
+
+        return nearestData
     }
 }

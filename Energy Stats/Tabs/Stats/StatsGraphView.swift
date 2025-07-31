@@ -43,7 +43,7 @@ struct StatsGraphValue: Identifiable, Hashable {
 
     func formatted(_ decimalPlaces: Int) -> String {
         switch type {
-        case .selfSufficiency:
+        case .selfSufficiency, .batterySOC:
             (displayValue ?? graphValue).percent()
         default:
             (displayValue ?? graphValue).kWh(decimalPlaces)
@@ -163,7 +163,7 @@ struct StatsGraphView: View {
                                 let xLocation = currentState.location.x - geometryProxy[chartProxy.plotAreaFrame].origin.x
 
                                 if let plotElement = chartProxy.value(atX: xLocation, as: Date.self) {
-                                    if let graphValue = viewModel.data.reversed().first(where: { plotElement > $0.date }),
+                                    if let graphValue = viewModel.data.filter({ $0.isForNormalGraph }).reversed().first(where: { plotElement > $0.date }),
                                        selectedDate != graphValue.date
                                     {
                                         Task { @MainActor in
@@ -179,7 +179,7 @@ struct StatsGraphView: View {
                                 let xLocation = value.location.x - geometryProxy[chartProxy.plotAreaFrame].origin.x
 
                                 if let plotElement = chartProxy.value(atX: xLocation, as: Date.self),
-                                   let graphValue = viewModel.data.reversed().first(where: { plotElement > $0.date })
+                                   let graphValue = viewModel.data.filter({ $0.isForNormalGraph }).reversed().first(where: { plotElement > $0.date })
                                 {
                                     Task { @MainActor in
                                         selectedDate = graphValue.date
@@ -200,9 +200,12 @@ struct StatsGraphView: View {
                let elementLocation = chartProxy.position(forX: date)
             {
                 let location = elementLocation - geometryReader[chartProxy.plotAreaFrame].origin.x
+                let filteredData = viewModel.data.filter({ $0.isForNormalGraph })
 
-                if let firstDate = viewModel.data[safe: 0]?.date, let secondDate = viewModel.data.first(where: { $0.date > firstDate })?.date,
-                   let firstPosition = chartProxy.position(forX: firstDate), let secondPosition = chartProxy.position(forX: secondDate)
+                if let firstDate = filteredData.first?.date,
+                   let secondDate = filteredData.first(where: { $0.date > firstDate })?.date,
+                   let firstPosition = chartProxy.position(forX: firstDate),
+                   let secondPosition = chartProxy.position(forX: secondDate)
                 {
                     Rectangle()
                         .fill(Color("graph_highlight"))
