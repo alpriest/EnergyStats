@@ -47,5 +47,17 @@ struct EnergyStatsShortcuts: AppShortcutsProvider {
             shortTitle: "Export Stats Data",
             systemImageName: "square.and.arrow.up.fill"
         )
+        AppShortcut(
+            intent: ActiveScheduleIntent(),
+            phrases: ["Activate an inverter template on \(.applicationName)"],
+            shortTitle: "Activate template",
+            systemImageName: "calendar"
+        )
+        AppShortcut(
+            intent: ChangeWorkModeIntent(),
+            phrases: ["Change inverter work mode on \(.applicationName)"],
+            shortTitle: "Change work mode",
+            systemImageName: "list.clipboard"
+        )
     }
 }

@@ -2260,6 +2260,9 @@
         }
       }
     },
+    "Activate template" : {
+
+    },
     "Activates the named inverter mode schedule" : {
       "localizations" : {
         "de" : {
@@ -3829,6 +3832,9 @@
           }
         }
       }
+    },
+    "Change work mode" : {
+
     },
     "Changes the work mode of the inverter" : {
       "localizations" : {
