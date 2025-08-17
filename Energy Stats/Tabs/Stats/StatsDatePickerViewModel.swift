@@ -34,13 +34,17 @@ class StatsDatePickerViewModel: ObservableObject {
 
     @Published var customStartDate = Date.now {
         didSet {
-            range = .custom(customStartDate, customEndDate)
+            if case let .custom(start, end) = range, start != customStartDate {
+                range = .custom(customStartDate, customEndDate)
+            }
         }
     }
 
     @Published var customEndDate = Date.now {
         didSet {
-            range = .custom(customStartDate, customEndDate)
+            if case let .custom(start, end) = range, end != customEndDate {
+                range = .custom(customStartDate, customEndDate)
+            }
         }
     }
 
