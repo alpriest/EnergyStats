@@ -8,13 +8,8 @@
 import SwiftUI
 
 struct StatsDatePickerView: View {
-    @StateObject var viewModel: StatsDatePickerViewModel
+    @ObservedObject var viewModel: StatsDatePickerViewModel
     @Binding var showingGraph: Bool
-    
-    init(displayMode: Binding<StatsGraphDisplayMode>, showingGraph: Binding<Bool>) {
-        self._viewModel = .init(wrappedValue: StatsDatePickerViewModel(displayMode))
-        self._showingGraph = showingGraph
-    }
 
     var body: some View {
         HStack {
@@ -191,6 +186,8 @@ struct StatsDatePickerView: View {
 }
 
 #Preview {
-    StatsDatePickerView(displayMode: .constant(.custom(.now, .now)), showingGraph: .constant(true))
+    let model = StatsDatePickerViewModel(.constant(.custom(.now, .now)))
+
+    return StatsDatePickerView(viewModel: model, showingGraph: .constant(true))
         .frame(height: 200)
 }
