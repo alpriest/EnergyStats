@@ -171,14 +171,12 @@ struct StatsDatePickerView: View {
             DatePicker("Start", selection: $viewModel.customStartDate, in: ...Date(), displayedComponents: .date)
                 .datePickerStyle(.compact)
                 .labelsHidden()
-                .id("customStart_\(viewModel.customStartDate)")
 
             Image(systemName: "arrow.right")
 
             DatePicker("End", selection: $viewModel.customEndDate, in: viewModel.customStartDate ... Date(), displayedComponents: .date)
                 .datePickerStyle(.compact)
                 .labelsHidden()
-                .id("customEnd_\(viewModel.customEndDate)")
 
             Spacer()
         }
