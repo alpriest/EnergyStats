@@ -69,7 +69,8 @@ struct BatterySOCSettingsView: View {
                 requestReview()
             }
         }
-        .navigationTitle(.batteryChargeLevel)
+        .navigationTitle(ScreenName.batteryChargeLevel.localized)
+        .analyticsScreen(.batteryChargeLevel)
         .navigationBarTitleDisplayMode(.inline)
         .loadable(viewModel.state, retry: { viewModel.load() })
         .alert(alertContent: $viewModel.alertContent)

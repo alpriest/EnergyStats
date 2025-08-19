@@ -36,7 +36,8 @@ struct RemoteMarkdownView: View {
 struct FAQView: View {
     var body: some View {
         RemoteMarkdownView(url: "https://raw.githubusercontent.com/wiki/alpriest/EnergyStats/FAQ.md")
-            .navigationTitle(.faq)
+            .navigationTitle("FAQ")
+            .analyticsScreen(.faq)
     }
 }
 

@@ -15,11 +15,11 @@ enum ScreenName: String {
     case battery = "Battery"
     case dataLogger = "Datalogger"
     case settings = "Settings"
-    case powerFlowTab = "Power Flow Tab"
     case financialModel = "Financial Model"
     case solarPrediction = "Solar Prediction"
     case powerStation = "Power Station"
     case parameters = "Parameters"
+    case powerFlowTab = "Power Flow Tab"
     case statsTab = "Stats Tab"
     case parametersTab = "Parameters Tab"
     case inverter = "Inverter"
@@ -36,7 +36,7 @@ enum ScreenName: String {
     case peakShaving = "Peak Shaving"
 
     var localized: String {
-        NSLocalizedString(self.rawValue, comment: "")
+        NSLocalizedString(rawValue, comment: "")
     }
 }
 

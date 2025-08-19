@@ -73,7 +73,8 @@ struct SummaryTabView: View {
                 }
                 .padding(.horizontal)
             }
-            .navigationTitle(.summary)
+            .navigationTitle("Summary: Past Year")
+            .analyticsScreen(.summary)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: { presentSheet.toggle() },

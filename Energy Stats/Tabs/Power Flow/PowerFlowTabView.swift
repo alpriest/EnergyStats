@@ -68,7 +68,7 @@ struct PowerFlowTabView: View {
             self.appSettings = $0
         }
         .trackVisibility(on: viewModel)
-        .navigationTitle(.powerFlowTab)
+        .analyticsScreen(.powerFlowTab)
     }
 
     @ViewBuilder func background() -> some View {
