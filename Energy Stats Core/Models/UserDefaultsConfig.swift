@@ -65,6 +65,7 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "shouldCombineCT2WithLoadsPower")
         UserDefaults.shared.removeObject(forKey: "showInverterConsumption")
         UserDefaults.shared.removeObject(forKey: "showBatterySOCOnDailyStats")
+        UserDefaults.shared.removeObject(forKey: "allowNegativeLoad")
         UserDefaults.shared.synchronize()
     }
 
@@ -316,4 +317,7 @@ public class UserDefaultsConfig: Config {
 
     @UserDefaultsStoredBool(key: "showBatterySOCOnDailyStats", defaultValue: false)
     public var showBatterySOCOnDailyStats: Bool
+    
+    @UserDefaultsStoredBool(key: "allowNegativeLoad", defaultValue: false)
+    public var allowNegativeLoad: Bool
 }

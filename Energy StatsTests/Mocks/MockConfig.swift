@@ -73,4 +73,5 @@ class MockConfig: Config {
     var gridImportUnitPrice: Double = 0.0
     var showInverterConsumption: Bool = false
     var showBatterySOCOnDailyStats: Bool = false
+    var allowNegativeLoad: Bool = false
 }

@@ -59,6 +59,7 @@ public struct AppSettings {
     public var detectedActiveTemplate: String?
     public var showInverterConsumption: Bool
     public var showBatterySOCOnDailyStats: Bool
+    public var allowNegativeLoad: Bool
 
     public init(
         showColouredLines: Bool,
@@ -104,7 +105,8 @@ public struct AppSettings {
         shouldCombineCT2WithLoadsPower: Bool,
         detectedActiveTemplate: String?,
         showInverterConsumption: Bool,
-        showBatterySOCOnDailyStats: Bool
+        showBatterySOCOnDailyStats: Bool,
+        allowNegativeLoad: Bool
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -150,6 +152,7 @@ public struct AppSettings {
         self.detectedActiveTemplate = detectedActiveTemplate
         self.showInverterConsumption = showInverterConsumption
         self.showBatterySOCOnDailyStats = showBatterySOCOnDailyStats
+        self.allowNegativeLoad = allowNegativeLoad
     }
 
     public func copy(
@@ -196,7 +199,8 @@ public struct AppSettings {
         shouldCombineCT2WithLoadsPower: Bool? = nil,
         detectedActiveTemplate: String? = nil,
         showInverterConsumption: Bool? = nil,
-        showBatterySOCOnDailyStats: Bool? = nil
+        showBatterySOCOnDailyStats: Bool? = nil,
+        allowNegativeLoad: Bool? = nil
     ) -> AppSettings {
         AppSettings(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -242,7 +246,8 @@ public struct AppSettings {
             shouldCombineCT2WithLoadsPower: shouldCombineCT2WithLoadsPower ?? self.shouldCombineCT2WithLoadsPower,
             detectedActiveTemplate: detectedActiveTemplate ?? self.detectedActiveTemplate,
             showInverterConsumption: showInverterConsumption ?? self.showInverterConsumption,
-            showBatterySOCOnDailyStats: showBatterySOCOnDailyStats ?? self.showBatterySOCOnDailyStats
+            showBatterySOCOnDailyStats: showBatterySOCOnDailyStats ?? self.showBatterySOCOnDailyStats,
+            allowNegativeLoad: allowNegativeLoad ?? self.allowNegativeLoad
         )
     }
 
@@ -291,7 +296,8 @@ public struct AppSettings {
             shouldCombineCT2WithLoadsPower: config.shouldCombineCT2WithLoadsPower,
             detectedActiveTemplate: nil,
             showInverterConsumption: config.showInverterConsumption,
-            showBatterySOCOnDailyStats: config.showBatterySOCOnDailyStats
+            showBatterySOCOnDailyStats: config.showBatterySOCOnDailyStats,
+            allowNegativeLoad: config.allowNegativeLoad
         )
     }
 }

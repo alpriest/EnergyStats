@@ -60,7 +60,8 @@ public extension AppSettings {
             shouldCombineCT2WithLoadsPower: false,
             detectedActiveTemplate: nil,
             showInverterConsumption: false,
-            showBatterySOCOnDailyStats: false
+            showBatterySOCOnDailyStats: false,
+            allowNegativeLoad: false
         )
     }
 }

@@ -68,6 +68,7 @@ struct TabbedView: View {
                 }
                 .toolbarBackground(.visible, for: .tabBar)
         }
+        .applyTabBarMinimizeBehavior()
         .edgesIgnoringSafeArea(.all)
     }
 }

@@ -196,6 +196,12 @@ class SettingsTabViewModel: ObservableObject {
             config.showBatterySOCOnDailyStats = showBatterySOCOnDailyStats
         }
     }
+    
+    @Published var allowNegativeLoad: Bool {
+        didSet {
+            config.allowNegativeLoad = allowNegativeLoad
+        }
+    }
 
     private(set) var config: ConfigManaging
     private let userManager: UserManager
@@ -239,6 +245,7 @@ class SettingsTabViewModel: ObservableObject {
         shouldCombineCT2WithLoadsPower = config.shouldCombineCT2WithLoadsPower
         showInverterConsumption = config.showInverterConsumption
         showBatterySOCOnDailyStats = config.showBatterySOCOnDailyStats
+        allowNegativeLoad = config.allowNegativeLoad
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }

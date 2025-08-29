@@ -161,7 +161,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
                 )
             }
 
-            let socGraphData = try await fetchBatterySOC(for: currentDevice, displayMode: displayMode, updatedData: updatedData)
+            let socGraphData = try await fetchBatterySOC(for: currentDevice, displayMode: displayMode)
 
             if Task.isCancelled { return }
 
@@ -182,7 +182,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
         }
     }
 
-    private func fetchBatterySOC(for device: Device, displayMode: StatsGraphDisplayMode, updatedData: [StatsGraphValue]) async throws -> [StatsGraphValue] {
+    private func fetchBatterySOC(for device: Device, displayMode: StatsGraphDisplayMode) async throws -> [StatsGraphValue] {
         guard configManager.showBatterySOCOnDailyStats else { return []}
 
         let socData: [StatsGraphValue]

@@ -65,6 +65,7 @@ public protocol Config {
     var shouldCombineCT2WithLoadsPower: Bool { get set }
     var showInverterConsumption: Bool { get set }
     var showBatterySOCOnDailyStats: Bool { get set }
+    var allowNegativeLoad: Bool { get set }
 }
 
 public func DefaultParameterGroups() -> [ParameterGroup] {

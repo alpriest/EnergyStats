@@ -436,6 +436,7 @@ public class MockConfig: Config {
     public var deviceSupportsScheduleMaxSOC: [String: Bool] = [:]
     public var showInverterConsumption: Bool = false
     public var showBatterySOCOnDailyStats: Bool = false
+    public var allowNegativeLoad: Bool = false
 }
 
 public extension SolcastSite {

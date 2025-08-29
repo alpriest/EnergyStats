@@ -690,6 +690,16 @@ public class ConfigManager: ConfigManaging {
             ))
         }
     }
+    
+    public var allowNegativeLoad: Bool {
+        get { config.allowNegativeLoad }
+        set {
+            config.allowNegativeLoad = newValue
+            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+                allowNegativeLoad: config.allowNegativeLoad
+            ))
+        }
+    }
 }
 
 public enum BatteryResponseMapper {

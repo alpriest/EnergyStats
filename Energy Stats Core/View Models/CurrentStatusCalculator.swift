@@ -32,6 +32,7 @@ public protocol CurrentStatusCalculatorConfig {
     var shouldCombineCT2WithPVPower: Bool { get set }
     var powerFlowStrings: PowerFlowStringsSettings { get set }
     var shouldCombineCT2WithLoadsPower: Bool { get set }
+    var allowNegativeLoad: Bool { get set }
 }
 
 public struct CurrentValues {
@@ -77,7 +78,7 @@ public class CurrentStatusCalculator {
         let shouldCombineCT2WithPVPower = config.shouldCombineCT2WithPVPower
         let status = Self.mapCurrentValues(device: device, response: response, config: config)
         let currentGrid = status.feedinPower - status.gridConsumptionPower
-        let currentHomeConsumption = Self.calculateLoadPower(status: status, shouldCombineCT2WithLoadsPower: config.shouldCombineCT2WithLoadsPower)
+        let currentHomeConsumption = calculateLoadPower(status: status)
         let currentTemperatures = InverterTemperatures(ambient: status.ambientTemperation, inverter: status.invTemperation)
         lastUpdate = status.lastUpdate
         let currentCT2 = shouldInvertCT2 ? 0 - status.meterPower2 : status.meterPower2
@@ -117,8 +118,10 @@ public class CurrentStatusCalculator {
         )
     }
 
-    static func calculateLoadPower(status: CurrentRawValues, shouldCombineCT2WithLoadsPower: Bool) -> Double {
-        abs(status.gridConsumptionPower + status.generationPower - status.feedinPower + (shouldCombineCT2WithLoadsPower ? abs(status.meterPower2) : 0))
+    func calculateLoadPower(status: CurrentRawValues) -> Double {
+        let actual = status.gridConsumptionPower + status.generationPower - status.feedinPower + (config.shouldCombineCT2WithLoadsPower ? abs(status.meterPower2) : 0)
+        
+        if config.allowNegativeLoad { return actual } else { return abs(actual) }
     }
 
     static func calculateSolarPower(hasPV: Bool, status: CurrentRawValues, shouldInvertCT2: Bool, shouldCombineCT2WithPVPower: Bool) -> Double {

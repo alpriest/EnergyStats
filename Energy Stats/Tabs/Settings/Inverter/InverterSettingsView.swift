@@ -22,6 +22,7 @@ struct InverterSettingsView: View {
     @Binding var ct2DisplayMode: CT2DisplayMode
     @Binding var shouldCombineCT2WithLoadsPower: Bool
     @Binding var showInverterConsumption: Bool
+    @Binding var allowNegativeLoad: Bool
 
     var body: some View {
         Form {
@@ -66,6 +67,10 @@ struct InverterSettingsView: View {
 
                 Toggle(isOn: $showInverterConsumption) {
                     Text("Show estimated inverter consumption")
+                }
+
+                Toggle(isOn: $allowNegativeLoad) {
+                    Text("Allow negative house load")
                 }
 
             } header: {
@@ -160,7 +165,8 @@ struct InverterSettingsView_Previews: PreviewProvider {
                 showInverterScheduleQuickLink: .constant(true),
                 ct2DisplayMode: .constant(.asPowerString),
                 shouldCombineCT2WithLoadsPower: .constant(false),
-                showInverterConsumption: .constant(false)
+                showInverterConsumption: .constant(false),
+                allowNegativeLoad: .constant(false)
             )
         }
     }
