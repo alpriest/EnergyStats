@@ -17,14 +17,24 @@ struct PowerFlowView<S: Shape>: View {
     private let type: AmountType
     private let shape: S
     private let showAmount: Bool
+    private let verticalAlignment: Alignment
 
-    init(amount: Double, appSettings: AppSettings, showColouredLines: Bool, type: AmountType, shape: S = Line(), showAmount: Bool = true) {
+    init(
+        amount: Double,
+        appSettings: AppSettings,
+        showColouredLines: Bool,
+        type: AmountType,
+        shape: S = Line(),
+        showAmount: Bool = true,
+        verticalAlignment: Alignment = .bottom
+    ) {
         self.amount = amount
         self.appSettings = appSettings
         self.showColouredLines = showColouredLines
         self.type = type
         self.shape = shape
         self.showAmount = showAmount
+        self.verticalAlignment = verticalAlignment
 
         animationDuration = max(0.4, 2.7 - abs(amount))
     }
@@ -32,7 +42,7 @@ struct PowerFlowView<S: Shape>: View {
     var body: some View {
         ZStack(alignment: .center) {
             if amount.isFlowing() {
-                ZStack {
+                ZStack(alignment: verticalAlignment) {
                     if amount > 0 {
                         FlowingLine(direction: .down, animationDuration: animationDuration, color: lineColor, shape: shape)
                     } else {

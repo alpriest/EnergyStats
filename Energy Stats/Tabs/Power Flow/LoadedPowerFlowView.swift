@@ -56,52 +56,7 @@ struct LoadedPowerFlowView: View {
 
                 ZStack {
                     VStack(spacing: 0) {
-                        if size == .zero {
-                            Color.clear.frame(minWidth: 0, maxWidth: .infinity)
-                        } else {
-                            ZStack {
-                                HStack {
-                                    if appSettings.ct2DisplayMode == .separateIcon {
-                                        VStack(spacing: 0) {
-                                            CT2_icon()
-                                            PowerFlowView(amount: viewModel.ct2, appSettings: appSettings, showColouredLines: false, type: .solarFlowCT2)
-                                            Color.clear.frame(height: size.height * 0.073)
-                                        }
-                                        .frame(width: topColumnWidth, height: size.height * aboveInverterHeightPercentage)
-
-                                        Spacer().frame(width: horizontalPadding)
-                                    }
-
-                                    SolarPowerView(appSettings: appSettings, viewModel: SolarPowerViewModel(solar: viewModel.solar))
-                                        .frame(width: topColumnWidth, height: size.height * aboveInverterHeightPercentage)
-                                        .overlay(
-                                            Group {
-                                                if !appSettings.shouldCombineCT2WithPVPower, appSettings.ct2DisplayMode == .separateIcon {
-                                                    PowerAmountView(amount: viewModel.solar + viewModel.ct2, backgroundColor: .linesNotFlowing, textColor: .textNotFlowing, appSettings: appSettings, type: .solarFlow)
-                                                        .font(.body.bold())
-                                                        .offset(x: 0, y: 100)
-                                                }
-                                            }
-                                        )
-
-                                    if appSettings.ct2DisplayMode == .separateIcon {
-                                        Spacer().frame(width: horizontalPadding)
-
-                                        Color.clear
-                                            .frame(width: topColumnWidth, height: size.height * aboveInverterHeightPercentage)
-                                    }
-                                }
-
-                                SolarStringsView(viewModel: viewModel, appSettings: appSettings)
-                                    .offset(x: 0, y: -20)
-
-                                if appSettings.ct2DisplayMode == .separateIcon {
-                                    PowerFlowView(amount: viewModel.ct2, appSettings: appSettings, showColouredLines: false, type: .solarFlow, shape: MidYHorizontalLine(), showAmount: false)
-                                        .offset(x: -0.5 * topColumnWidth - (horizontalPadding / 2.0), y: size.height * 0.1)
-                                        .frame(width: topColumnWidth + horizontalPadding)
-                                }
-                            }
-                        }
+                        topFlowLines()
 
                         InverterView(
                             viewModel: InverterViewModel(
@@ -117,60 +72,8 @@ struct LoadedPowerFlowView: View {
                         .padding(.vertical, 1)
                         .zIndex(1)
 
-                        HStack(alignment: .top) {
-                            if viewModel.hasBattery || viewModel.hasBatteryError {
-                                BatteryPowerView(viewModel: BatteryPowerViewModel(configManager: configManager,
-                                                                                  batteryStateOfCharge: viewModel.batteryStateOfCharge,
-                                                                                  batteryChargekWH: viewModel.battery,
-                                                                                  temperatures: viewModel.batteryTemperatures,
-                                                                                  batteryResidual: viewModel.batteryResidual,
-                                                                                  error: viewModel.batteryError,
-                                                                                  minSOC: appSettings.minSOC),
-                                                 appSettings: appSettings)
-                                    .frame(width: bottomColumnWidth)
-
-                                Spacer().frame(width: horizontalPadding)
-                            }
-
-                            HomePowerView(amount: viewModel.home, appSettings: appSettings)
-                                .frame(width: bottomColumnWidth)
-
-                            Spacer().frame(width: horizontalPadding)
-
-                            GridPowerView(amount: viewModel.grid, appSettings: appSettings)
-                                .frame(width: bottomColumnWidth)
-                        }
-                        .padding(.bottom, 4)
-                        .padding(.horizontal, horizontalPadding)
-
-                        // Totals
-                        HStack(alignment: .top) {
-                            if viewModel.hasBattery || viewModel.hasBatteryError {
-                                BatteryPowerFooterView(viewModel: BatteryPowerViewModel(configManager: configManager,
-                                                                                        batteryStateOfCharge: viewModel.batteryStateOfCharge,
-                                                                                        batteryChargekWH: viewModel.battery,
-                                                                                        temperatures: viewModel.batteryTemperatures,
-                                                                                        batteryResidual: viewModel.batteryResidual,
-                                                                                        error: viewModel.batteryError,
-                                                                                        minSOC: appSettings.minSOC),
-                                                       appSettings: appSettings)
-                                    .frame(width: bottomColumnWidth)
-
-                                Spacer().frame(width: horizontalPadding)
-                            }
-
-                            HomePowerFooterView(amount: viewModel.homeTotal, appSettings: appSettings)
-                                .frame(width: bottomColumnWidth)
-
-                            Spacer().frame(width: horizontalPadding)
-
-                            GridPowerFooterView(importTotal: viewModel.gridImportTotal,
-                                                exportTotal: viewModel.gridExportTotal,
-                                                appSettings: appSettings)
-                                .frame(width: bottomColumnWidth)
-                        }
-                        .padding(.bottom, verticalSizeClass == .regular ? 16 : 4)
-                        .padding(.horizontal, horizontalPadding)
+                        bottomFlowLines()
+                        bottomTotals()
                     }
                 }
                 .background(GeometryReader { reader in
@@ -192,6 +95,130 @@ struct LoadedPowerFlowView: View {
                 )
             }
         }
+    }
+
+    @ViewBuilder
+    func topFlowLines() -> some View {
+        if size == .zero {
+            Color.clear.frame(minWidth: 0, maxWidth: .infinity)
+        } else {
+            ZStack {
+                HStack {
+                    if appSettings.ct2DisplayMode == .separateIcon {
+                        VStack(spacing: 0) {
+                            CT2_icon()
+                            PowerFlowView(amount: viewModel.ct2, appSettings: appSettings, showColouredLines: false, type: .solarFlowCT2)
+                            Color.clear.frame(height: size.height * 0.073)
+                        }
+                        .frame(width: topColumnWidth, height: size.height * aboveInverterHeightPercentage)
+
+                        Spacer().frame(width: horizontalPadding)
+                    }
+
+                    SolarPowerView(appSettings: appSettings, viewModel: SolarPowerViewModel(solar: viewModel.solar))
+                        .frame(width: topColumnWidth, height: size.height * aboveInverterHeightPercentage)
+                        .overlay(
+                            Group {
+                                if !appSettings.shouldCombineCT2WithPVPower,
+                                   appSettings.ct2DisplayMode == .separateIcon {
+                                    PowerAmountView(
+                                        amount: viewModel.solar + viewModel.ct2,
+                                        backgroundColor: .linesNotFlowing,
+                                        textColor: .textNotFlowing,
+                                        appSettings: appSettings,
+                                        type: .solarFlow
+                                    )
+                                        .font(.body.bold())
+                                        .offset(x: 0, y: 100)
+                                }
+                            }
+                        )
+
+                    if appSettings.ct2DisplayMode == .separateIcon {
+                        Spacer().frame(width: horizontalPadding)
+
+                        Color.clear
+                            .frame(width: topColumnWidth, height: size.height * aboveInverterHeightPercentage)
+                    }
+                }
+
+                SolarStringsView(viewModel: viewModel, appSettings: appSettings)
+                    .offset(x: 0, y: -20)
+
+                if appSettings.ct2DisplayMode == .separateIcon {
+                    PowerFlowView(
+                        amount: viewModel.ct2,
+                        appSettings: appSettings,
+                        showColouredLines: false,
+                        type: .solarFlow,
+                        shape: MidYHorizontalLine(),
+                        showAmount: false
+                    )
+                    .offset(x: -0.5 * topColumnWidth - (horizontalPadding / 2.0), y: size.height * 0.1)
+                    .frame(width: topColumnWidth + horizontalPadding)
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    func bottomFlowLines() -> some View {
+        HStack(alignment: .top) {
+            if viewModel.hasBattery || viewModel.hasBatteryError {
+                BatteryPowerView(viewModel: BatteryPowerViewModel(configManager: configManager,
+                                                                  batteryStateOfCharge: viewModel.batteryStateOfCharge,
+                                                                  batteryChargekWH: viewModel.battery,
+                                                                  temperatures: viewModel.batteryTemperatures,
+                                                                  batteryResidual: viewModel.batteryResidual,
+                                                                  error: viewModel.batteryError,
+                                                                  minSOC: appSettings.minSOC),
+                                 appSettings: appSettings)
+                    .frame(width: bottomColumnWidth)
+
+                Spacer().frame(width: horizontalPadding)
+            }
+
+            HomePowerView(amount: viewModel.home, appSettings: appSettings)
+                .frame(width: bottomColumnWidth)
+
+            Spacer().frame(width: horizontalPadding)
+
+            GridPowerView(amount: viewModel.grid, appSettings: appSettings)
+                .frame(width: bottomColumnWidth)
+        }
+        .padding(.bottom, 4)
+        .padding(.horizontal, horizontalPadding)
+    }
+
+    @ViewBuilder
+    func bottomTotals() -> some View {
+        HStack(alignment: .top) {
+            if viewModel.hasBattery || viewModel.hasBatteryError {
+                BatteryPowerFooterView(viewModel: BatteryPowerViewModel(configManager: configManager,
+                                                                        batteryStateOfCharge: viewModel.batteryStateOfCharge,
+                                                                        batteryChargekWH: viewModel.battery,
+                                                                        temperatures: viewModel.batteryTemperatures,
+                                                                        batteryResidual: viewModel.batteryResidual,
+                                                                        error: viewModel.batteryError,
+                                                                        minSOC: appSettings.minSOC),
+                                       appSettings: appSettings)
+                    .frame(width: bottomColumnWidth)
+
+                Spacer().frame(width: horizontalPadding)
+            }
+
+            HomePowerFooterView(amount: viewModel.homeTotal, appSettings: appSettings)
+                .frame(width: bottomColumnWidth)
+
+            Spacer().frame(width: horizontalPadding)
+
+            GridPowerFooterView(importTotal: viewModel.gridImportTotal,
+                                exportTotal: viewModel.gridExportTotal,
+                                appSettings: appSettings)
+                .frame(width: bottomColumnWidth)
+        }
+        .padding(.bottom, verticalSizeClass == .regular ? 16 : 4)
+        .padding(.horizontal, horizontalPadding)
     }
 
     @ViewBuilder
@@ -220,22 +247,12 @@ struct LoadedPowerFlowView: View {
     private let horizontalPadding: CGFloat = 14
     private var bottomColumnWidth: CGFloat {
         let spacerCount: CGFloat = 3 + (showingBatteryColumn ? 1 : 0)
-        return (width - (horizontalPadding * spacerCount)) / (showingBatteryColumn ? 3 : 2)
+        return (UIWindowScene.width - (horizontalPadding * spacerCount)) / (showingBatteryColumn ? 3 : 2)
     }
 
     private var topColumnWidth: CGFloat {
         let spacerCount: CGFloat = 4
-        return (width - (horizontalPadding * spacerCount)) / (showingCT2Column ? 2.8 : 2)
-    }
-
-    private var width: Double {
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let window = windowScene.windows.first
-        {
-            return window.frame.size.width
-        } else {
-            return UIScreen.main.bounds.width
-        }
+        return (UIWindowScene.width - (horizontalPadding * spacerCount)) / (showingCT2Column ? 2.8 : 2)
     }
 
     private var columnCount: CGFloat {
@@ -282,5 +299,31 @@ struct PowerSummaryView_Previews: PreviewProvider {
                             networking: NetworkService.preview(),
                             templateStore: TemplateStore.preview())
             .environment(\.locale, .init(identifier: "en"))
+    }
+}
+
+extension UIWindowScene {
+    static var isVerticallyConstrained: Bool {
+        height < 740
+    }
+
+    static var width: Double {
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first
+        {
+            return window.frame.size.width
+        } else {
+            return UIScreen.main.bounds.width
+        }
+    }
+
+    private static var height: Double {
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first
+        {
+            return window.frame.size.height
+        } else {
+            return UIScreen.main.bounds.width
+        }
     }
 }

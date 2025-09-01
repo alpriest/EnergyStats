@@ -89,8 +89,14 @@ struct BatteryPowerView: View, VerticalSizeClassProviding {
     var body: some View {
         ZStack {
             VStack {
-                PowerFlowView(amount: viewModel.batteryChargekWh, appSettings: appSettings, showColouredLines: true, type: .batteryFlow)
-                    .opacity(viewModel.hasError ? 0.2 : 1.0)
+                PowerFlowView(
+                    amount: viewModel.batteryChargekWh,
+                    appSettings: appSettings,
+                    showColouredLines: true,
+                    type: .batteryFlow,
+                    verticalAlignment: UIWindowScene.isVerticallyConstrained ? .bottom : .center
+                )
+                .opacity(viewModel.hasError ? 0.2 : 1.0)
 
                 Image(systemName: "minus.plus.batteryblock.fill")
                     .font(.system(size: shouldReduceIconSize ? 36 : 48))

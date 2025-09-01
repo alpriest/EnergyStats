@@ -16,7 +16,13 @@ struct GridPowerView: View, VerticalSizeClassProviding {
 
     var body: some View {
         VStack {
-            PowerFlowView(amount: amount, appSettings: appSettings, showColouredLines: true, type: .gridFlow)
+            PowerFlowView(
+                amount: amount,
+                appSettings: appSettings,
+                showColouredLines: true,
+                type: .gridFlow,
+                verticalAlignment: UIWindowScene.isVerticallyConstrained ? .bottom : .center
+            )
             PylonView(lineWidth: 3)
                 .frame(width: length, height: length)
         }

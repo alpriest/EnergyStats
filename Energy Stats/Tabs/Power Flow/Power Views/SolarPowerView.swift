@@ -29,7 +29,13 @@ struct SolarPowerView: View {
                     .frame(width: 40, height: 40)
             }
 
-            PowerFlowView(amount: viewModel.solar, appSettings: appSettings, showColouredLines: false, type: .solarFlow)
+            PowerFlowView(
+                amount: viewModel.solar,
+                appSettings: appSettings,
+                showColouredLines: false,
+                type: .solarFlow,
+                verticalAlignment: UIWindowScene.isVerticallyConstrained ? .top : .center
+            )
         }
     }
 }

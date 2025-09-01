@@ -16,7 +16,13 @@ struct HomePowerView: View, VerticalSizeClassProviding {
 
     var body: some View {
         VStack {
-            PowerFlowView(amount: amount, appSettings: appSettings, showColouredLines: false, type: .homeFlow)
+            PowerFlowView(
+                amount: amount,
+                appSettings: appSettings,
+                showColouredLines: false,
+                type: .homeFlow,
+                verticalAlignment: UIWindowScene.isVerticallyConstrained ? .bottom : .center
+            )
 
             Image(systemName: "house.fill")
                 .resizable()
