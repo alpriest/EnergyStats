@@ -10,6 +10,8 @@
 		41009A712B02CD59009D853B /* Solcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41009A702B02CD59009D853B /* Solcast.swift */; };
 		41009A732B02D852009D853B /* SolcastForecastResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41009A722B02D852009D853B /* SolcastForecastResponse.swift */; };
 		41009A752B03B13A009D853B /* SolarForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41009A742B03B13A009D853B /* SolarForecastViewModel.swift */; };
+		41038F962E6C3360008A74C6 /* CalculationBreakdownRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41038F952E6C3360008A74C6 /* CalculationBreakdownRectangle.swift */; };
+		41038F982E6C37C1008A74C6 /* ApproximationsBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41038F972E6C37C1008A74C6 /* ApproximationsBackgroundView.swift */; };
 		4103D1D029DB6C51001B0BC8 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146428C714C000EA5BA1 /* Report.swift */; };
 		4103D1D129DB6C51001B0BC8 /* FoxEssCloudParseStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D7B12328C86E4000E14144 /* FoxEssCloudParseStrategy.swift */; };
 		4103D1D229DB6C51001B0BC8 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41626CCD29D95E9C003FEB00 /* NetworkError.swift */; };
@@ -239,7 +241,7 @@
 		419AB4802AA36D24002CBC96 /* DisplaySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AB47F2AA36D24002CBC96 /* DisplaySettingsView.swift */; };
 		419B8DEA2B04D6BA0094402C /* SolcastCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419B8DE92B04D6BA0094402C /* SolcastCacheTests.swift */; };
 		419CCB542933BABF00882649 /* ErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419CCB532933BABF00882649 /* ErrorAlertView.swift */; };
-		419DFA862A12930E0067313A /* StatsDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419DFA842A1292380067313A /* StatsDatePickerView.swift */; };
+		419DFA862A12930E0067313A /* StatsGraphHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419DFA842A1292380067313A /* StatsGraphHeaderView.swift */; };
 		419DFA882A12A6DF0067313A /* StatsDatePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419DFA872A12A6DF0067313A /* StatsDatePickerViewModel.swift */; };
 		41A25D3D28CA5CDF00315714 /* ParametersGraphTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A25D3C28CA5CDF00315714 /* ParametersGraphTabView.swift */; };
 		41A25D3F28CA5CFB00315714 /* ParametersGraphTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A25D3E28CA5CFB00315714 /* ParametersGraphTabViewModel.swift */; };
@@ -539,6 +541,8 @@
 		41009A722B02D852009D853B /* SolcastForecastResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolcastForecastResponse.swift; sourceTree = "<group>"; };
 		41009A742B03B13A009D853B /* SolarForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarForecastViewModel.swift; sourceTree = "<group>"; };
 		41028F9428CDD7A300FB70FD /* OptionalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalView.swift; sourceTree = "<group>"; };
+		41038F952E6C3360008A74C6 /* CalculationBreakdownRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationBreakdownRectangle.swift; sourceTree = "<group>"; };
+		41038F972E6C37C1008A74C6 /* ApproximationsBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproximationsBackgroundView.swift; sourceTree = "<group>"; };
 		4103D1E029DB6CB9001B0BC8 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
 		4103F82F2922BFBA00567B1C /* ReportVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportVariable.swift; sourceTree = "<group>"; };
 		410484C72AD49D95007F68C0 /* CT2-icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CT2-icon.swift"; sourceTree = "<group>"; };
@@ -763,7 +767,7 @@
 		419AB47F2AA36D24002CBC96 /* DisplaySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaySettingsView.swift; sourceTree = "<group>"; };
 		419B8DE92B04D6BA0094402C /* SolcastCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolcastCacheTests.swift; sourceTree = "<group>"; };
 		419CCB532933BABF00882649 /* ErrorAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertView.swift; sourceTree = "<group>"; };
-		419DFA842A1292380067313A /* StatsDatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsDatePickerView.swift; sourceTree = "<group>"; };
+		419DFA842A1292380067313A /* StatsGraphHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsGraphHeaderView.swift; sourceTree = "<group>"; };
 		419DFA872A12A6DF0067313A /* StatsDatePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsDatePickerViewModel.swift; sourceTree = "<group>"; };
 		41A25D3C28CA5CDF00315714 /* ParametersGraphTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersGraphTabView.swift; sourceTree = "<group>"; };
 		41A25D3E28CA5CFB00315714 /* ParametersGraphTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersGraphTabViewModel.swift; sourceTree = "<group>"; };
@@ -1042,6 +1046,7 @@
 				411029122A71C066004018BB /* Tintable.swift */,
 				41BB29C52CEA89F300F8FDE4 /* View+Analytics.swift */,
 				416318BD29DDD80E00C2C285 /* View+Copy.swift */,
+				41038F952E6C3360008A74C6 /* CalculationBreakdownRectangle.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1446,12 +1451,13 @@
 				418141442A12BABA00FFC6A6 /* StatsGraphView.swift */,
 				417AA2192A12454A0073CD34 /* StatsTabView.swift */,
 				417AA21C2A1245C00073CD34 /* StatsTabViewModel.swift */,
-				419DFA842A1292380067313A /* StatsDatePickerView.swift */,
+				419DFA842A1292380067313A /* StatsGraphHeaderView.swift */,
 				419DFA872A12A6DF0067313A /* StatsDatePickerViewModel.swift */,
 				41CD1F312A1414C1006B0C00 /* StatsGraphVariableToggles.swift */,
 				41C6AF652A360CF600C88F2B /* CSVTextFile.swift */,
 				41C19DCC2A4DDE46009883AB /* SelfSufficiencyEstimateView.swift */,
 				413BF2882A99F8A500A32B0D /* ApproximationsView.swift */,
+				41038F972E6C37C1008A74C6 /* ApproximationsBackgroundView.swift */,
 				418C6E982AFB8A15000DE35F /* ApproximationsCalculator.swift */,
 				416D761A2BA60C3500074370 /* StatsDataFetcher.swift */,
 			);
@@ -2247,6 +2253,7 @@
 				41E12E882CC666C9001F3839 /* ServiceFactory.swift in Sources */,
 				419092212B1DBF2B0017CB65 /* ScheduleSummaryView.swift in Sources */,
 				417185482A0051CA00D18CDD /* ParameterGraphVariableChooserView.swift in Sources */,
+				41038F962E6C3360008A74C6 /* CalculationBreakdownRectangle.swift in Sources */,
 				41C1243E2B738B1400B575F2 /* HowToObtainAPIKeyView.swift in Sources */,
 				412887562BE8B861007E9532 /* WatchSessionDelegate.swift in Sources */,
 				41702E132D8954C80067A0E4 /* ParameterValueAdjuster.swift in Sources */,
@@ -2288,7 +2295,7 @@
 				4160098D2A8D1A690096CCD9 /* BottomButtonsView.swift in Sources */,
 				41DAAC272CF52BDD0096DF20 /* ActiveScheduleIntent.swift in Sources */,
 				4110291D2A72AFC2004018BB /* BatterySOCSettingsViewModel.swift in Sources */,
-				419DFA862A12930E0067313A /* StatsDatePickerView.swift in Sources */,
+				419DFA862A12930E0067313A /* StatsGraphHeaderView.swift in Sources */,
 				41009A752B03B13A009D853B /* SolarForecastViewModel.swift in Sources */,
 				4149D3AD2B3C4DAA00314449 /* UnsupportedErrorView.swift in Sources */,
 				41E4B31328DB77A3003F7F47 /* HomePowerView.swift in Sources */,
@@ -2335,6 +2342,7 @@
 				410F41592DA80D7500DEE2F4 /* DeviceSettingItem.swift in Sources */,
 				41C19DCF2A4E09F9009883AB /* SelfSufficiencySettingsView.swift in Sources */,
 				41DD7F3A29C5B8940072CDE8 /* SolarPowerView.swift in Sources */,
+				41038F982E6C37C1008A74C6 /* ApproximationsBackgroundView.swift in Sources */,
 				4107446528CA1D76006D5D7D /* FlowingLine.swift in Sources */,
 				417AA21D2A1245C00073CD34 /* StatsTabViewModel.swift in Sources */,
 				418C6E992AFB8A15000DE35F /* ApproximationsCalculator.swift in Sources */,
@@ -2848,7 +2856,6 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2881,7 +2888,6 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

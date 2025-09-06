@@ -62,7 +62,8 @@ struct SummaryDateRangeView: View {
                 presentationMode.wrappedValue.dismiss()
             } label: {
                 Text("Apply")
-                    .frame(minWidth: 0, maxWidth: .infinity)
+                    .padding(.vertical, 4)
+                    .frame(maxWidth: .infinity)
             }.buttonStyle(.borderedProminent)
         }.padding()
     }
@@ -99,6 +100,7 @@ struct YearMonthPickerView: View {
                     Text(months[month - 1]).tag(month)
                 }
             }
+            .frame(minWidth: 170)
             .pickerStyle(.menu)
             .clipped()
 

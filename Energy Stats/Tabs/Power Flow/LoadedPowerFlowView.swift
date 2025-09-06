@@ -39,20 +39,21 @@ struct LoadedPowerFlowView: View {
     var body: some View {
         ZStack(alignment: .topTrailing) {
             VStack(alignment: .center, spacing: 0) {
-                if appSettings.showTotalYieldOnPowerFlow {
-                    HStack(spacing: 0) {
-                        (Text("Solar today") + Text(" ")).accessibilityHidden(true)
+                AdaptiveStackView(verticalSpacing: 0, horizontalSpacing: 12) {
+                    if appSettings.showTotalYieldOnPowerFlow {
+                        HStack(spacing: 0) {
+                            (Text("Solar today") + Text(" ")).accessibilityHidden(true)
 
-                        EnergyText(amount: viewModel.todaysGeneration?.todayGeneration ?? 0, appSettings: appSettings, type: .totalYield, decimalPlaceOverride: 1)
-                            .redactedShimmer(when: viewModel.todaysGeneration == nil)
+                            EnergyText(amount: viewModel.todaysGeneration?.todayGeneration ?? 0, appSettings: appSettings, type: .totalYield, decimalPlaceOverride: 1)
+                                .redactedShimmer(when: viewModel.todaysGeneration == nil)
+                        }
                     }
-                    .padding(.bottom, 8)
-                }
 
-                if appSettings.showFinancialSummaryOnFlowPage, let earnings = viewModel.earnings {
-                    EarningsView(viewModel: earnings, appSettings: appSettings)
-                        .padding(.bottom, 12)
+                    if appSettings.showFinancialSummaryOnFlowPage, let earnings = viewModel.earnings {
+                        EarningsView(viewModel: earnings, appSettings: appSettings)
+                    }
                 }
+                .padding(.bottom, 12)
 
                 ZStack {
                     VStack(spacing: 0) {
@@ -120,7 +121,8 @@ struct LoadedPowerFlowView: View {
                         .overlay(
                             Group {
                                 if !appSettings.shouldCombineCT2WithPVPower,
-                                   appSettings.ct2DisplayMode == .separateIcon {
+                                   appSettings.ct2DisplayMode == .separateIcon
+                                {
                                     PowerAmountView(
                                         amount: viewModel.solar + viewModel.ct2,
                                         backgroundColor: .linesNotFlowing,
@@ -128,8 +130,8 @@ struct LoadedPowerFlowView: View {
                                         appSettings: appSettings,
                                         type: .solarFlow
                                     )
-                                        .font(.body.bold())
-                                        .offset(x: 0, y: 100)
+                                    .font(.body.bold())
+                                    .offset(x: 0, y: 100)
                                 }
                             }
                         )
@@ -291,8 +293,9 @@ struct PowerSummaryView_Previews: PreviewProvider {
                             appSettingsPublisher: CurrentValueSubject(appSettings.copy(decimalPlaces: 3,
                                                                                        displayUnit: .adaptive,
                                                                                        showFinancialEarnings: true,
-                                                                                       showInverterTemperature: true,
+                                                                                       showInverterTemperature: false,
                                                                                        showHomeTotalOnPowerFlow: true,
+                                                                                       showInverterIcon: false,
                                                                                        shouldCombineCT2WithPVPower: true,
                                                                                        powerFlowStrings: strings,
                                                                                        ct2DisplayMode: .separateIcon)),

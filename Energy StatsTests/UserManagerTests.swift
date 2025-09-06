@@ -110,7 +110,6 @@ class ValueReceiver<T> {
 
     init(_ publisher: Published<T>.Publisher) {
         cancellable = publisher
-            .print("AWP")
             .sink(
                 receiveCompletion: { _ in },
                 receiveValue: {

@@ -11,18 +11,22 @@ import SwiftUI
 struct AdaptiveStackView<S: View>: View {
     @Environment(\.verticalSizeClass) var verticalSizeClass
     private let content: () -> S
+    private let horizontalSpacing: CGFloat?
+    private let verticalSpacing: CGFloat?
 
-    init(@ViewBuilder content: @escaping () -> S) {
+    init(verticalSpacing: CGFloat? = nil, horizontalSpacing: CGFloat? = nil, @ViewBuilder content: @escaping () -> S) {
+        self.verticalSpacing = verticalSpacing
+        self.horizontalSpacing = horizontalSpacing
         self.content = content
     }
 
     var body: some View {
         if verticalSizeClass == .regular {
-            VStack {
+            VStack(spacing: verticalSpacing) {
                 content()
             }
         } else {
-            HStack {
+            HStack(spacing: horizontalSpacing) {
                 content()
             }
         }

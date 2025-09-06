@@ -63,7 +63,7 @@ struct ParameterGraphVariableChooserView: View {
             .navigationTitle(.parameters)
             .toolbar { ToolbarItem(placement: .navigationBarTrailing) {
                 NavigationLink(destination: { ParameterVariableGroupEditorView(viewModel: ParameterVariableGroupEditorViewModel(configManager: viewModel.configManager)) },
-                               label: { Text("Edit") })
+                               label: { Text("Edit groups") })
             } }
         }
     }

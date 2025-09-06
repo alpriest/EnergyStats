@@ -14,37 +14,37 @@ struct ApproximationsView: View {
     @Environment(\.colorScheme) var colorScheme
     @State private var showCalculations = false
     let decimalPlaceOverride: Int?
+    private let headerLabelHeight: CGFloat = 14
 
     var body: some View {
         ZStack(alignment: .topLeading) {
-            RoundedRectangle(cornerRadius: 6)
-                .stroke(Color("highlight_box"), lineWidth: 1)
-                .background(Color("highlight_box").opacity(0.1))
-                .padding(1)
+            ApproximationsBackgroundView()
 
             HStack {
                 Text("Approximations")
+                    .frame(height: headerLabelHeight)
                     .padding(2)
+                    .padding(.horizontal, 3)
                     .background(
-                        RoundedRectangle(cornerRadius: 3)
-                            .fill(Color("highlight_box"))
+                        ApproximationsHighlightBox()
                     )
                     .font(.caption2.weight(.bold))
-                    .offset(x: 8, y: -8)
+                    .offset(x: 16, y: -8)
                     .foregroundColor(Color.white.opacity(colorScheme == .dark ? 0.8 : 1.0))
                     .accessibilityAddTraits(.isHeader)
 
                 Spacer()
 
                 Image(systemName: showCalculations ? "chevron.up" : "chevron.down")
+                    .frame(height: headerLabelHeight)
                     .padding(2)
+                    .padding(.horizontal, 3)
                     .background(
-                        RoundedRectangle(cornerRadius: 3)
-                            .fill(Color("highlight_box"))
+                        ApproximationsHighlightBox()
                     )
                     .multilineTextAlignment(.trailing)
                     .font(.caption2.weight(.bold))
-                    .offset(x: -8, y: -8)
+                    .offset(x: -16, y: -8)
                     .foregroundColor(Color.white.opacity(colorScheme == .dark ? 0.8 : 1.0))
                     .onTapGesture {
                         withAnimation {
@@ -100,6 +100,9 @@ struct ApproximationsView: View {
                 .monospacedDigit()
             }
         }
+        .containerShape(
+            .rect(cornerRadius: 24)
+        )
         .padding(.top)
     }
 }
@@ -110,9 +113,7 @@ struct CalculationBreakdownView: View {
 
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 6)
-                .stroke(Color("highlight_box"), lineWidth: 1)
-                .background(Color("highlight_box").opacity(0.1))
+            CalculationBreakdownRectangle()
 
             VStack(alignment: .leading, spacing: 8) {
                 Text(breakdown.formula)
@@ -146,3 +147,15 @@ struct CalculationBreakdownView: View {
     )
 }
 #endif
+
+struct ApproximationsHighlightBox: View {
+    var body: some View {
+        if #available(iOS 26.0, *) {
+            ConcentricRectangle()
+                .fill(Color("highlight_box"))
+        } else {
+            RoundedRectangle(cornerRadius: 3)
+                .fill(Color("highlight_box"))
+        }
+    }
+}

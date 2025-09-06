@@ -59,6 +59,7 @@ struct ParameterGraphHeaderView: View {
                     Image(systemName: "list.bullet")
                         .frame(minWidth: 22)
                         .frame(height: 20)
+                        .foregroundStyle(Color.primary)
                 }
             }
 
@@ -75,6 +76,7 @@ struct ParameterGraphHeaderView: View {
             } label: {
                 Image(systemName: "chevron.left")
                     .frame(minWidth: 22)
+                    .foregroundStyle(Color.primary)
             }
             .buttonStyle(.bordered)
             .accessibilityLabel("accessibility.previous.day")
@@ -84,6 +86,7 @@ struct ParameterGraphHeaderView: View {
             } label: {
                 Image(systemName: "chevron.right")
                     .frame(minWidth: 22)
+                    .foregroundStyle(Color.primary)
             }
             .buttonStyle(.bordered)
             .disabled(!viewModel.canIncrease)

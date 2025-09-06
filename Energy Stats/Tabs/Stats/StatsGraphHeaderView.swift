@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct StatsDatePickerView: View {
+struct StatsGraphHeaderView: View {
     @ObservedObject var viewModel: StatsDatePickerViewModel
     @Binding var showingGraph: Bool
 
@@ -54,6 +54,7 @@ struct StatsDatePickerView: View {
             } label: {
                 NonFunctionalButton {
                     Image(systemName: "calendar.badge.clock")
+                        .foregroundStyle(Color.primary)
                 }
             }
             .accessibilityLabel("accessibility.stats.timeperiodpicker")
@@ -149,6 +150,7 @@ struct StatsDatePickerView: View {
         } label: {
             Image(systemName: "chevron.left")
                 .frame(minWidth: 22)
+                .foregroundStyle(Color.primary)
         }
         .buttonStyle(.bordered)
         .disabled(!viewModel.canDecrease)
@@ -159,6 +161,7 @@ struct StatsDatePickerView: View {
         } label: {
             Image(systemName: "chevron.right")
                 .frame(minWidth: 22)
+                .foregroundStyle(Color.primary)
         }
         .buttonStyle(.bordered)
         .disabled(!viewModel.canIncrease)
@@ -186,6 +189,6 @@ struct StatsDatePickerView: View {
 #Preview {
     let model = StatsDatePickerViewModel(.constant(.custom(.now, .now)))
 
-    return StatsDatePickerView(viewModel: model, showingGraph: .constant(true))
+    return StatsGraphHeaderView(viewModel: model, showingGraph: .constant(true))
         .frame(height: 200)
 }

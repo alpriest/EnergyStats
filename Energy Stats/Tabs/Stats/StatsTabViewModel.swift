@@ -120,7 +120,6 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
                 .map {
                     StatsGraphVariable($0)
                 }
-            print("AWP", graphVariables.count)
         }
     }
 

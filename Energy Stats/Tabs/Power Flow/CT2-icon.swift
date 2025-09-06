@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CT2_icon: View {
     var body: some View {
-        RoundedRectangle(cornerRadius: 5)
+        RoundedRectangle(cornerRadius: 6)
             .fill(Color("background_inverted"))
             .frame(width: 42, height: 42)
             .overlay(
