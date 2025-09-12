@@ -35,29 +35,24 @@ struct TabbedView: View {
                 userManager: userManager,
                 appSettingsPublisher: configManager.appSettingsPublisher,
                 templateStore: templateStore
-            )
-            .tabItem {
+            ).tabItem {
                 PowerFlowTabItem()
             }
-            .toolbarBackground(.visible, for: .tabBar)
 
             StatsTabView(configManager: configManager, networking: networking, appSettingsPublisher: configManager.appSettingsPublisher)
                 .tabItem {
                     StatsTabItem()
                 }
-                .toolbarBackground(.visible, for: .tabBar)
 
             ParametersGraphTabView(configManager: configManager, viewModel: parametersGraphTabViewModel)
                 .tabItem {
                     ParametersTabItem()
                 }
-                .toolbarBackground(.visible, for: .tabBar)
 
             SummaryTabView(configManager: configManager, networking: networking, appSettingsPublisher: configManager.appSettingsPublisher, solarForecastProvider: solarForecastProvider)
                 .tabItem {
                     SummaryTabItem()
                 }
-                .toolbarBackground(.visible, for: .tabBar)
 
             SettingsTabView(viewModel: settingsTabViewModel, configManager: configManager, networking: networking, solarService: solarForecastProvider, templateStore: templateStore)
                 .tabItem {
@@ -66,9 +61,7 @@ struct TabbedView: View {
                 .if(configManager.isDemoUser) {
                     $0.badge("demo")
                 }
-                .toolbarBackground(.visible, for: .tabBar)
         }
-        .applyTabBarMinimizeBehavior()
         .edgesIgnoringSafeArea(.all)
     }
 }

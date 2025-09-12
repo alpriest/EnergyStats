@@ -55,7 +55,7 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
     private var queryDate = QueryDate.now()
     private var hours: Int = 24
     private var max: ParameterGraphValue?
-    var exportFile: CSVTextFile?
+    var exportFile: TextFile?
     @Published var xScale: ClosedRange<Date> = Calendar.current.startOfDay(for: Date())...Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))!
     @Published var hasLoaded: Bool = false
     private var loadTask: Task<Void, Never>?
@@ -290,7 +290,7 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
             exportFileName = "energystats_parameters_unknown_date.csv"
         }
 
-        exportFile = CSVTextFile(text: text, filename: exportFileName)
+        exportFile = TextFile(text: text, filename: exportFileName)
     }
 
     private func storeVariables() {

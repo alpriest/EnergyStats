@@ -283,7 +283,7 @@
 		41C249A52A77FC7400D8E9E7 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C249A42A77FC7400D8E9E7 /* WebView.swift */; };
 		41C3B7F32E0EFA0B00A9EA58 /* ExportStatsDataIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3B7F22E0EFA0B00A9EA58 /* ExportStatsDataIntent.swift */; };
 		41C55ABF2D0242750035A002 /* TemperatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C55ABE2D0242750035A002 /* TemperatureView.swift */; };
-		41C6AF662A360CF600C88F2B /* CSVTextFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C6AF652A360CF600C88F2B /* CSVTextFile.swift */; };
+		41C6AF662A360CF600C88F2B /* TextFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C6AF652A360CF600C88F2B /* TextFile.swift */; };
 		41C849692A8BBC3800431410 /* Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C849682A8BBC3800431410 /* Shortcuts.swift */; };
 		41C8496B2A8BBF1500431410 /* InverterIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C8496A2A8BBF1500431410 /* InverterIconView.swift */; };
 		41CA35712AA8C02C00D45734 /* EarningsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CA35702AA8C02C00D45734 /* EarningsView.swift */; };
@@ -812,7 +812,7 @@
 		41C249A42A77FC7400D8E9E7 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		41C3B7F22E0EFA0B00A9EA58 /* ExportStatsDataIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportStatsDataIntent.swift; sourceTree = "<group>"; };
 		41C55ABE2D0242750035A002 /* TemperatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureView.swift; sourceTree = "<group>"; };
-		41C6AF652A360CF600C88F2B /* CSVTextFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVTextFile.swift; sourceTree = "<group>"; };
+		41C6AF652A360CF600C88F2B /* TextFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFile.swift; sourceTree = "<group>"; };
 		41C849682A8BBC3800431410 /* Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shortcuts.swift; sourceTree = "<group>"; };
 		41C8496A2A8BBF1500431410 /* InverterIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterIconView.swift; sourceTree = "<group>"; };
 		41CA35702AA8C02C00D45734 /* EarningsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarningsView.swift; sourceTree = "<group>"; };
@@ -1454,7 +1454,7 @@
 				419DFA842A1292380067313A /* StatsGraphHeaderView.swift */,
 				419DFA872A12A6DF0067313A /* StatsDatePickerViewModel.swift */,
 				41CD1F312A1414C1006B0C00 /* StatsGraphVariableToggles.swift */,
-				41C6AF652A360CF600C88F2B /* CSVTextFile.swift */,
+				41C6AF652A360CF600C88F2B /* TextFile.swift */,
 				41C19DCC2A4DDE46009883AB /* SelfSufficiencyEstimateView.swift */,
 				413BF2882A99F8A500A32B0D /* ApproximationsView.swift */,
 				41038F972E6C37C1008A74C6 /* ApproximationsBackgroundView.swift */,
@@ -2257,7 +2257,7 @@
 				41C1243E2B738B1400B575F2 /* HowToObtainAPIKeyView.swift in Sources */,
 				412887562BE8B861007E9532 /* WatchSessionDelegate.swift in Sources */,
 				41702E132D8954C80067A0E4 /* ParameterValueAdjuster.swift in Sources */,
-				41C6AF662A360CF600C88F2B /* CSVTextFile.swift in Sources */,
+				41C6AF662A360CF600C88F2B /* TextFile.swift in Sources */,
 				41C849692A8BBC3800431410 /* Shortcuts.swift in Sources */,
 				41ACB2C62A51ADEB005831B0 /* ValueBoundsView.swift in Sources */,
 				41E3B76C2BBDD345005A9F80 /* Icon.swift in Sources */,
@@ -2745,7 +2745,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 72;
+				CURRENT_PROJECT_VERSION = 73;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2768,7 +2768,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.98;
+				MARKETING_VERSION = 2.99;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2813,7 +2813,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 72;
+				CURRENT_PROJECT_VERSION = 73;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2830,7 +2830,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.98;
+				MARKETING_VERSION = 2.99;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

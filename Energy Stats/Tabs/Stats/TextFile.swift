@@ -8,11 +8,11 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
-struct CSVTextFile {
+struct TextFile {
     let url: URL?
 
     init?(text: String, filename: String) {
-        self.url = CSVTextFile.save(filename: filename, text: text)
+        self.url = TextFile.save(filename: filename, text: text)
 
         if self.url == nil {
             return nil

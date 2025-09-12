@@ -17,6 +17,9 @@ struct ScheduleTemplateListView: View {
     private let modes: [WorkMode] = WorkMode.allCases
     @State private var newTemplateName: String = ""
     @State private var createTemplateAlertIsPresented = false
+    @State private var isImporting = false
+    @State private var isConfirming = false
+    @State private var replaceExistingTemplates = false
 
     init(networking: Networking, templateStore: TemplateStoring, config: ConfigManaging) {
         _viewModel = StateObject(wrappedValue: ScheduleTemplateListViewModel(templateStore: templateStore, config: config))
@@ -50,12 +53,14 @@ struct ScheduleTemplateListView: View {
             }
 
             FooterSection {
-                AsyncButton {
-                    createTemplateAlertIsPresented.toggle()
-                } label: {
-                    Text("Create template")
-                }
-                .buttonStyle(.borderedProminent)
+                VStack(alignment: .center) {
+                    AsyncButton {
+                        createTemplateAlertIsPresented.toggle()
+                    } label: {
+                        Text("Create template")
+                    }
+                    .buttonStyle(.borderedProminent)
+                }.frame(minWidth: 0, maxWidth: .infinity)
             }
         }
         .templateAlert(
@@ -67,6 +72,46 @@ struct ScheduleTemplateListView: View {
         }
         .onAppear { viewModel.load() }
         .navigationTitle(.templates)
+    }
+
+    @ViewBuilder
+    private func exportImportViews() -> some View {
+        if let url = viewModel.exportFile?.url {
+            ShareLink(item: url) {
+                Label("Export templates", systemImage: "square.and.arrow.up")
+            }.padding(.top)
+        }
+
+        Button {
+            isConfirming = true
+        } label: {
+            Text("Import templates")
+        }.confirmationDialog(
+            "Do you want delete your existing templates before importing templates?",
+            isPresented: $isConfirming,
+            titleVisibility: .visible,
+            actions: {
+                Button("Yes", role: .destructive) {
+                    replaceExistingTemplates = true
+                    isImporting = true
+                }
+                Button("No") {
+                    replaceExistingTemplates = false
+                    isImporting = true
+                }
+                Button("Cancel", role: .cancel) {
+                    isConfirming = false
+                }
+            }
+        )
+        .fileImporter(isPresented: $isImporting, allowedContentTypes: [.json]) {
+            if case let .success(file) = $0 {
+                viewModel.importTemplates(
+                    from: file,
+                    replaceExistingTemplates: replaceExistingTemplates
+                )
+            }
+        }
     }
 }
 

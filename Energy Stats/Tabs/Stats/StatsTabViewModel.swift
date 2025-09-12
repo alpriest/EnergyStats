@@ -50,7 +50,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
     @Published var approximationsViewModel: ApproximationsViewModel? = nil
     private var totals: [ReportVariable: Double] = [:]
     private var max: StatsGraphValue?
-    var exportFile: CSVTextFile?
+    var exportFile: TextFile?
     private var currentDeviceCancellable: AnyCancellable?
     private let fetcher: StatsDataFetcher
     @Published var selfSufficiencyAtDateTime: [StatsGraphValue] = []
@@ -453,7 +453,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
             exportFileName = "energystats_stats_\(startName)_\(endName).csv"
         }
 
-        exportFile = CSVTextFile(text: text, filename: exportFileName)
+        exportFile = TextFile(text: text, filename: exportFileName)
     }
 }
 

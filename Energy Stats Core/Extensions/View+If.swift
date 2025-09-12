@@ -34,25 +34,3 @@ public extension View {
         }
     }
 }
-
-public extension View {
-    @ViewBuilder
-    func applyGlassEffect() -> some View {
-        if #available(iOS 26, watchOS 26, *) {
-            self // glassEffect()
-        } else {
-            self
-        }
-    }
-    
-    @ViewBuilder
-    func applyTabBarMinimizeBehavior() -> some View {
-        #if os(iOS)
-        if #available(iOS 26, *) {
-            self // tabBarMinimizeBehavior(.onScrollDown)
-        } else {
-            self
-        }
-        #endif
-    }
-}
