@@ -65,63 +65,6 @@ struct FlowingLine<S: Shape>: View {
     }
 }
 
-// struct DirectionalArrow: View {
-//    @State var yOffset: Double = 0
-//    @State private var timer: Timer?
-//    private let totalPhase: CGFloat = 20
-//    let direction: Direction
-//    let animationDuration: Double
-//
-//        enum Direction {
-//            case down
-//            case up
-//        }
-//
-//    var body: some View {
-//        GeometryReader { reader in
-//            Color.clear
-//                .background(
-//                    Line()
-//                        .stroke(style: StrokeStyle(lineWidth: 4.0, dash: [totalPhase / 2.0], dashPhase: 0))
-//                        .frame(height: reader.size.height * 3.0)
-//                        .foregroundColor(Color("lines"))
-//                        .offset(y: yOffset)
-//                        .onAppear {
-//                            timer?.invalidate()
-//                            setupTimer()
-//                        }
-//                        .onChange(of: animationDuration) { newValue in
-//                            timer?.invalidate()
-//                            setupTimer()
-//                        }
-//                        .onChange(of: yOffset) { newValue in
-//                            switch direction {
-//                            case .down:
-//                                if yOffset >= reader.size.height {
-//                                    yOffset = 0
-//                                }
-//                            case .up:
-//                                if yOffset <= 0 {
-//                                    yOffset = reader.size.height
-//                                }
-//                            }
-//                        }
-//                ).clipped()
-//        }
-//    }
-//
-//    func setupTimer() {
-//        timer = Timer.scheduledTimer(withTimeInterval: animationDuration / 20, repeats: true) { _ in
-//            switch direction {
-//            case .down:
-//                yOffset += 1
-//            case .up:
-//                yOffset -= 1
-//            }
-//        }
-//    }
-// }
-
 #Preview {
     HStack {
         FlowingLine(direction: .up, animationDuration: 1.5, color: .red, shape: MidYHorizontalLine())

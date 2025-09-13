@@ -62,7 +62,7 @@ struct PowerFlowTabView: View {
         .padding()
         .background(background().edgesIgnoringSafeArea(.all))
         .onAppear {
-            viewModel.viewAppeared()
+            Task { await viewModel.viewAppeared() }
         }
         .onReceive(appSettingsPublisher) {
             self.appSettings = $0

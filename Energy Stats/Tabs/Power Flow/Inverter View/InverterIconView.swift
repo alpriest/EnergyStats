@@ -83,11 +83,10 @@ struct InverterIconView: View {
                 .foregroundColor(Color.background)
         }
         .background(
-            GeometryReader { reader in
-                Color.clear.onAppear { size = reader.size }
-                    .onChange(of: reader.size) { newValue in
-                        size = newValue
-                    }
+            Color.clear.onGeometryChange(for: CGSize.self) { proxy in
+                proxy.size
+            } action: {
+                size = $0
             }
         )
         .padding(2)

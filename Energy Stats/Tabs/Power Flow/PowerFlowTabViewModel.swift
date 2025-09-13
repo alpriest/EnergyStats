@@ -58,6 +58,14 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
                 return false
             }
         }
+        
+        var isLoaded: Bool {
+            if case .loaded = self {
+                return true
+            } else {
+                return false
+            }
+        }
     }
 
     init(_ network: Networking, configManager: ConfigManaging, userManager: UserManager) {
@@ -85,24 +93,25 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
         }
     }
 
-    func viewAppeared() {
-        Task { @MainActor [weak self] in
-            guard let self else { return }
-            guard self.userManager.isLoggedIn == true else { return }
+    @MainActor
+    func viewAppeared() async {
+        guard self.userManager.isLoggedIn == true else { return }
 
-            if self.timer.isTicking == false {
-                await self.timerFired()
-            }
-            self.addDeviceChangeObserver()
-            self.addThemeChangeObserver()
+        if self.timer.isTicking == false {
+            try? await Task.sleep(nanoseconds: 1 * 1_000_000_000)
+            await self.timerFired()
         }
+        self.addDeviceChangeObserver()
+        self.addThemeChangeObserver()
     }
 
     @MainActor
     func timerFired() async {
         self.timer.stop()
         await self.loadData()
-        await self.startTimer()
+        if state.isLoaded {
+            await self.startTimer()
+        }
     }
 
     func addDeviceChangeObserver() {
@@ -183,8 +192,8 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
 
             if Task.isCancelled { return }
 
-            self.state = .loaded(.empty()) // refreshes the marching ants line speed
-            try await Task.sleep(nanoseconds: 1000)
+//            self.state = .loaded(.empty()) // refreshes the marching ants line speed
+//            try await Task.sleep(nanoseconds: 10000)
             self.state = .loaded(summary)
             self.lastUpdated = currentStatusCalculator.lastUpdate
             self.calculateTicks(historicalViewModel: currentStatusCalculator)

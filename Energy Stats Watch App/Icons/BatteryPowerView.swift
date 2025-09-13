@@ -24,7 +24,13 @@ struct BatteryPowerView: View {
                             Image(systemName: "minus.plus.batteryblock.fill")
                                 .font(iconScale.iconFont)
                                 .opacity(0)
-                                .readSize { batterySize = $0 }
+                                .background(
+                                    Color.clear.onGeometryChange(for: CGSize.self) { proxy in
+                                        proxy.size
+                                    } action: {
+                                        batterySize = $0
+                                    }
+                                )
 
                             Color.iconDisabled
 

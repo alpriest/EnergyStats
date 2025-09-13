@@ -55,31 +55,33 @@ struct LoadedPowerFlowView: View {
                 }
                 .padding(.bottom, 12)
 
-                ZStack {
-                    VStack(spacing: 0) {
-                        topFlowLines()
+                VStack(spacing: 0) {
+                    topFlowLines()
 
-                        InverterView(
-                            viewModel: InverterViewModel(
-                                configManager: configManager,
-                                temperatures: viewModel.inverterTemperatures,
-                                deviceState: viewModel.deviceState,
-                                faults: viewModel.faults
-                            ),
-                            appSettings: appSettings
-                        )
-                        .frame(height: 2)
-                        .frame(width: inverterLineWidth)
-                        .padding(.vertical, 1)
-                        .zIndex(1)
+                    InverterView(
+                        viewModel: InverterViewModel(
+                            configManager: configManager,
+                            temperatures: viewModel.inverterTemperatures,
+                            deviceState: viewModel.deviceState,
+                            faults: viewModel.faults
+                        ),
+                        appSettings: appSettings
+                    )
+                    .frame(height: 2)
+                    .frame(width: inverterLineWidth)
+                    .padding(.vertical, 1)
+                    .zIndex(1)
 
-                        bottomFlowLines()
-                        bottomTotals()
-                    }
+                    bottomFlowLines()
+                    bottomTotals()
                 }
-                .background(GeometryReader { reader in
-                    Color.clear.onAppear { size = reader.size }.onChange(of: reader.size) { newValue in size = newValue }
-                })
+                .background(
+                    Color.clear.onGeometryChange(for: CGSize.self) { proxy in
+                        proxy.size
+                    } action: {
+                        size = $0
+                    }
+                )
             }
 
             inverterScheduleQuickLink()

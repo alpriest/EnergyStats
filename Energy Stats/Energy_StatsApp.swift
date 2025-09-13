@@ -15,6 +15,7 @@ import PulseUI
 import SwiftUI
 import WatchConnectivity
 import WidgetKit
+import os
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
@@ -43,6 +44,7 @@ struct Energy_StatsApp: App {
     let versionChecker: VersionChecker
     let templateStore: TemplateStoring
     let bannerAlertManager = BannerAlertManager()
+    let watchKeychainSynchroniser: WatchKeychainSynchroniser
     private var cancellables = Set<AnyCancellable>()
 
     @Environment(\.scenePhase) private var scenePhase
@@ -69,9 +71,10 @@ struct Energy_StatsApp: App {
         AppSettingsPublisherFactory.update(from: configManager)
         userManager = .init(store: keychainStore, configManager: configManager)
         templateStore = TemplateStore(config: configManager)
+        watchKeychainSynchroniser = WatchKeychainSynchroniser(keychainStore: keychainStore, configManager: configManager)
         appSettingsPublisher
-            .sink { [keychainStore, configManager] _ in
-                Self.updateKeychainSettingsForWatch(keychainStore: keychainStore, configManager: configManager)
+            .sink { [watchKeychainSynchroniser] _ in
+                watchKeychainSynchroniser.updateKeychainSettingsForWatch()
             }.store(in: &cancellables)
         versionChecker = VersionChecker(urlSession: urlSession)
     }
@@ -105,16 +108,6 @@ struct Energy_StatsApp: App {
                 }
             }
         }
-    }
-
-    private static func updateKeychainSettingsForWatch(keychainStore: KeychainStoring, configManager: ConfigManaging) {
-        try? keychainStore.store(key: .deviceSN, value: configManager.selectedDeviceSN)
-        try? keychainStore.store(key: .showGridTotalsOnPowerFlow, value: configManager.showGridTotalsOnPowerFlow)
-        try? keychainStore.store(key: .batteryCapacity, value: configManager.batteryCapacity)
-        try? keychainStore.store(key: .shouldInvertCT2, value: configManager.shouldInvertCT2)
-        try? keychainStore.store(key: .minSOC, value: configManager.minSOC)
-        try? keychainStore.store(key: .shouldCombineCT2WithPVPower, value: configManager.shouldCombineCT2WithPVPower)
-        try? keychainStore.store(key: .showUsableBatteryOnly, value: configManager.showUsableBatteryOnly)
     }
 
     private func performOnActivationTasks(solarForecastProvider: SolarForecastProviding) {
@@ -185,4 +178,27 @@ func isRunningTests() -> Bool {
 
 func isRunningScreenshots() -> Bool {
     CommandLine.arguments.contains("screenshots")
+}
+
+struct WatchKeychainSynchroniser {
+    private var keychainLock = OSAllocatedUnfairLock()
+    private let keychainStore: KeychainStoring
+    private let configManager: ConfigManaging
+    
+    init(keychainStore: KeychainStoring, configManager: ConfigManaging) {
+        self.keychainStore = keychainStore
+        self.configManager = configManager
+    }
+
+    func updateKeychainSettingsForWatch() {
+        keychainLock.withLock {
+            try? keychainStore.store(key: .deviceSN, value: configManager.selectedDeviceSN)
+            try? keychainStore.store(key: .showGridTotalsOnPowerFlow, value: configManager.showGridTotalsOnPowerFlow)
+            try? keychainStore.store(key: .batteryCapacity, value: configManager.batteryCapacity)
+            try? keychainStore.store(key: .shouldInvertCT2, value: configManager.shouldInvertCT2)
+            try? keychainStore.store(key: .minSOC, value: configManager.minSOC)
+            try? keychainStore.store(key: .shouldCombineCT2WithPVPower, value: configManager.shouldCombineCT2WithPVPower)
+            try? keychainStore.store(key: .showUsableBatteryOnly, value: configManager.showUsableBatteryOnly)
+        }
+    }
 }
