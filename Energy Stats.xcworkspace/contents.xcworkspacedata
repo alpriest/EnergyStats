@@ -10,4 +10,7 @@
    <FileRef
       location = "group:IconScale.swift">
    </FileRef>
+   <FileRef
+      location = "group:ContainerFactory.swift">
+   </FileRef>
 </Workspace>

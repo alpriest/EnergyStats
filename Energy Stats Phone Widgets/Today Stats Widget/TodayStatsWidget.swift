@@ -14,7 +14,7 @@ struct TodayStatsWidget: Widget {
     private let kind: String = "TodayStatsWidget"
     private let configManager: ConfigManaging
     private let keychainStore: KeychainStoring
-    private var container: ModelContainer
+    private var container = ContainerFactory.makeBatteryStatsContainer()
 
     init() {
         let keychainStore = KeychainStore()
@@ -27,7 +27,6 @@ struct TodayStatsWidget: Widget {
         configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
         self.keychainStore = keychainStore
         AppSettingsPublisherFactory.update(from: configManager)
-        container = try! ModelContainer(for: BatteryWidgetState.self, StatsWidgetState.self)
     }
 
     var body: some WidgetConfiguration {
