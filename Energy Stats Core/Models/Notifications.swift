@@ -9,4 +9,5 @@ import Foundation
 
 public extension Notification.Name {
     static let deviceIsOffline = Notification.Name("deviceIsOffline")
+    static let unexpectedServerData = Notification.Name("unexpectedServerData")
 }

@@ -75,8 +75,8 @@ class NetworkValueCleaner: FoxAPIServicing {
                                      name: originalData.name,
                                      variable: originalData.variable,
                                      data: originalData.data.map {
-                OpenHistoryResponse.Data.UnitData(time: $0.time, value: $0.value.capped(dataCeiling()))
-            })
+                                         OpenHistoryResponse.Data.UnitData(time: $0.time, value: $0.value.capped(dataCeiling()))
+                                     })
         })
     }
 
@@ -87,11 +87,19 @@ class NetworkValueCleaner: FoxAPIServicing {
     func openapi_fetchReport(deviceSN: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [OpenReportResponse] {
         let original = try await api.openapi_fetchReport(deviceSN: deviceSN, variables: variables, queryDate: queryDate, reportType: reportType)
 
-        return original.map {
-            OpenReportResponse(
-                variable: $0.variable,
-                unit: $0.unit,
-                values: $0.values.compactMap {
+        return original.enumerated().map { index, originalData in
+            if originalData.variable != variables[index].networkTitle {
+                CoreBus.onUnexpectedServerData(
+                    api: "fetchReport",
+                    expected: variables[index].networkTitle,
+                    actual: originalData.variable
+                )
+            }
+
+            return OpenReportResponse(
+                variable: variables[index].networkTitle,
+                unit: originalData.unit,
+                values: originalData.values.compactMap {
                     OpenReportResponse.ReportData(
                         index: $0.index,
                         value: $0.value.capped(dataCeiling())

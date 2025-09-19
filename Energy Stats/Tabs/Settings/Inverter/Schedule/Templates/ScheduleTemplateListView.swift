@@ -85,9 +85,9 @@ struct ScheduleTemplateListView: View {
         Button {
             isConfirming = true
         } label: {
-            Text("Import templates")
+            Label("Import templates", systemImage: "square.and.arrow.down")
         }.confirmationDialog(
-            "Do you want delete your existing templates before importing templates?",
+            "Do you want to replace your existing templates with the imported templates?",
             isPresented: $isConfirming,
             titleVisibility: .visible,
             actions: {

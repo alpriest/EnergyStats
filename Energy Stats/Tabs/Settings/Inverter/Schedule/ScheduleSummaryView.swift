@@ -112,7 +112,7 @@ struct ScheduleSummaryView: View {
 
                         Text("about_59_seconds")
                             .frame(minWidth: 0, maxWidth: .infinity)
-                    }
+                    }.frame(minWidth: 0, maxWidth: .infinity)
                 }
             }
         }

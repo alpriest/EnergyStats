@@ -13,4 +13,7 @@
    <FileRef
       location = "group:ContainerFactory.swift">
    </FileRef>
+   <FileRef
+      location = "group:CoreBus.swift">
+   </FileRef>
 </Workspace>

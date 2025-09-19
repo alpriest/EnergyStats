@@ -10,12 +10,12 @@ import Energy_Stats_Core
 import Firebase
 import FirebaseAnalytics
 import Network
+import os
 import Pulse
 import PulseUI
 import SwiftUI
 import WatchConnectivity
 import WidgetKit
-import os
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
@@ -23,6 +23,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     {
         if !isRunningTests() || !isRunningScreenshots() {
             FirebaseApp.configure()
+            CoreBusReceiver.observeAnalyticsEvent()
         }
 
         return true
@@ -184,7 +185,7 @@ struct WatchKeychainSynchroniser {
     private var keychainLock = OSAllocatedUnfairLock()
     private let keychainStore: KeychainStoring
     private let configManager: ConfigManaging
-    
+
     init(keychainStore: KeychainStoring, configManager: ConfigManaging) {
         self.keychainStore = keychainStore
         self.configManager = configManager

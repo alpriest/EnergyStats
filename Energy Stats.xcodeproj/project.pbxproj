@@ -10,6 +10,8 @@
 		41009A712B02CD59009D853B /* Solcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41009A702B02CD59009D853B /* Solcast.swift */; };
 		41009A732B02D852009D853B /* SolcastForecastResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41009A722B02D852009D853B /* SolcastForecastResponse.swift */; };
 		41009A752B03B13A009D853B /* SolarForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41009A742B03B13A009D853B /* SolarForecastViewModel.swift */; };
+		410183A02E7DB26B001EFE8D /* CoreBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4101839F2E7DB26B001EFE8D /* CoreBus.swift */; };
+		410183A22E7DB42F001EFE8D /* CoreBusReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410183A12E7DB42F001EFE8D /* CoreBusReceiver.swift */; };
 		41038F962E6C3360008A74C6 /* CalculationBreakdownRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41038F952E6C3360008A74C6 /* CalculationBreakdownRectangle.swift */; };
 		41038F982E6C37C1008A74C6 /* ApproximationsBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41038F972E6C37C1008A74C6 /* ApproximationsBackgroundView.swift */; };
 		4103D1D029DB6C51001B0BC8 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140146428C714C000EA5BA1 /* Report.swift */; };
@@ -541,6 +543,8 @@
 		41009A702B02CD59009D853B /* Solcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Solcast.swift; sourceTree = "<group>"; };
 		41009A722B02D852009D853B /* SolcastForecastResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolcastForecastResponse.swift; sourceTree = "<group>"; };
 		41009A742B03B13A009D853B /* SolarForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarForecastViewModel.swift; sourceTree = "<group>"; };
+		4101839F2E7DB26B001EFE8D /* CoreBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreBus.swift; sourceTree = "<group>"; };
+		410183A12E7DB42F001EFE8D /* CoreBusReceiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreBusReceiver.swift; sourceTree = "<group>"; };
 		41028F9428CDD7A300FB70FD /* OptionalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalView.swift; sourceTree = "<group>"; };
 		41038F952E6C3360008A74C6 /* CalculationBreakdownRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationBreakdownRectangle.swift; sourceTree = "<group>"; };
 		41038F972E6C37C1008A74C6 /* ApproximationsBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproximationsBackgroundView.swift; sourceTree = "<group>"; };
@@ -1291,6 +1295,7 @@
 				41F80BB22CE2AFAC00C6776B /* GoogleService-Info.plist */,
 				4141B20128D871B900B60157 /* ContentView.swift */,
 				4140144D28C70B3200EA5BA1 /* Energy_StatsApp.swift */,
+				410183A12E7DB42F001EFE8D /* CoreBusReceiver.swift */,
 				419CCB532933BABF00882649 /* ErrorAlertView.swift */,
 				417153E529F2BD3300639A7B /* LoadState.swift */,
 				41965EE22C3286C9004F9D9A /* LoadTracking.swift */,
@@ -1572,6 +1577,7 @@
 				41E4B30D28DB7511003F7F47 /* BatteryCapacityCalculator.swift */,
 				4103D1E029DB6CB9001B0BC8 /* ConfigManager.swift */,
 				41DB4F2C2B4940A800DAB5BB /* ConfigManaging.swift */,
+				4101839F2E7DB26B001EFE8D /* CoreBus.swift */,
 				41A25D4228CA706700315714 /* CountdownTimer.swift */,
 				41A95B9629DB3F6A00A35169 /* Energy_Stats_Core.h */,
 				4156A2302CB6772D00099A6A /* ErrorAlertViewManufacturing.swift */,
@@ -2301,6 +2307,7 @@
 				4110291D2A72AFC2004018BB /* BatterySOCSettingsViewModel.swift in Sources */,
 				419DFA862A12930E0067313A /* StatsGraphHeaderView.swift in Sources */,
 				41009A752B03B13A009D853B /* SolarForecastViewModel.swift in Sources */,
+				410183A22E7DB42F001EFE8D /* CoreBusReceiver.swift in Sources */,
 				4149D3AD2B3C4DAA00314449 /* UnsupportedErrorView.swift in Sources */,
 				41E4B31328DB77A3003F7F47 /* HomePowerView.swift in Sources */,
 				41E165B32B0A877100B17590 /* SolcastSettingsViewModel.swift in Sources */,
@@ -2461,6 +2468,7 @@
 				41BACC072D91401E00C9C718 /* TipType.swift in Sources */,
 				4131AF4D2B5288F400836B77 /* OpenQueryResponse.swift in Sources */,
 				413B7A312A4A390C00562A68 /* SelfSufficiencyCalculator.swift in Sources */,
+				410183A02E7DB26B001EFE8D /* CoreBus.swift in Sources */,
 				4128874E2BE7CFD5007E9532 /* HomeEnergyStateManagerConfigAdapter.swift in Sources */,
 				413715B72E200EF400505496 /* GenerationTimelineProvider.swift in Sources */,
 				4155D70D2B28FC920071346A /* Optional+Int.swift in Sources */,
@@ -2851,6 +2859,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Energy Stats/Energy Stats.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 75;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_ASSET_PATHS = "\"Energy Stats/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
@@ -2865,6 +2874,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 2.100;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2884,6 +2894,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Energy Stats/Energy Stats.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 75;
 				DEVELOPMENT_ASSET_PATHS = "\"Energy Stats/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2897,6 +2908,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 2.100;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStats;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -21,6 +21,7 @@ class SummaryTabViewModel: ObservableObject {
     private var themeChangeCancellable: AnyCancellable?
     @Published var summaryDateRange: SummaryDateRange
     @Published var hasPV: Bool = false
+    private let reportVariables = [ReportVariable.feedIn, .generation, .chargeEnergyToTal, .dischargeEnergyToTal, .gridConsumption, .loads, .pvEnergyTotal]
 
     init(configManager: ConfigManaging, networking: Networking) {
         self.networking = networking
@@ -122,7 +123,6 @@ class SummaryTabViewModel: ObservableObject {
     }
 
     private func fetchYear(_ year: Int, device: Device) async throws -> ([ReportVariable: Double], Int?) {
-        let reportVariables = [ReportVariable.feedIn, .generation, .chargeEnergyToTal, .dischargeEnergyToTal, .gridConsumption, .loads, .pvEnergyTotal]
         let rawReports = try await networking.fetchReport(deviceSN: device.deviceSN,
                                                           variables: reportVariables,
                                                           queryDate: QueryDate(year: year, month: nil, day: nil),
