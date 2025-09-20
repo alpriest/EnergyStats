@@ -62,7 +62,19 @@ struct TabbedView: View {
                     $0.badge("demo")
                 }
         }
+        .applyGlassEffect()
         .edgesIgnoringSafeArea(.all)
+    }
+}
+
+extension View {
+    @ViewBuilder
+    func applyGlassEffect() -> some View {
+        if #available(iOS 26, watchOS 26, *) {
+            glassEffect()
+        } else {
+            self
+        }
     }
 }
 

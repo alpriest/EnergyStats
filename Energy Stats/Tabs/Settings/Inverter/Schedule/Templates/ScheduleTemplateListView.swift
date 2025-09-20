@@ -60,6 +60,9 @@ struct ScheduleTemplateListView: View {
                         Text("Create template")
                     }
                     .buttonStyle(.borderedProminent)
+
+                    exportImportViews()
+
                 }.frame(minWidth: 0, maxWidth: .infinity)
             }
         }
@@ -79,7 +82,9 @@ struct ScheduleTemplateListView: View {
         if let url = viewModel.exportFile?.url {
             ShareLink(item: url) {
                 Label("Export templates", systemImage: "square.and.arrow.up")
-            }.padding(.top)
+            }
+            .buttonStyle(.bordered)
+            .padding(.top)
         }
 
         Button {
@@ -104,6 +109,7 @@ struct ScheduleTemplateListView: View {
                 }
             }
         )
+        .buttonStyle(.bordered)
         .fileImporter(isPresented: $isImporting, allowedContentTypes: [.json]) {
             if case let .success(file) = $0 {
                 viewModel.importTemplates(
