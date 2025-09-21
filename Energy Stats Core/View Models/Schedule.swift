@@ -182,7 +182,7 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {
         self.minSocOnGrid = try container.decode(Int.self, forKey: .minSocOnGrid)
         self.forceDischargePower = try container.decode(Int.self, forKey: .forceDischargePower)
         self.forceDischargeSOC = try container.decode(Int.self, forKey: .forceDischargeSOC)
-        self.maxSOC = try container.decode(Int?.self, forKey: .maxSOC)
+        self.maxSOC = try? container.decode(Int?.self, forKey: .maxSOC)
         self.color = Color.scheduleColor(named: self.mode)
     }
 

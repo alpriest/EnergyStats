@@ -51,7 +51,6 @@ class ScheduleTemplateListViewModel: ObservableObject {
     
     @MainActor
     func importTemplates(from url: URL, replaceExistingTemplates: Bool) {
-        // If this URL came from a fileImporter or an external provider, it may be security-scoped
         let needsStop = url.startAccessingSecurityScopedResource()
         defer { if needsStop { url.stopAccessingSecurityScopedResource() } }
 
@@ -73,6 +72,7 @@ class ScheduleTemplateListViewModel: ObservableObject {
 
             // Update state and persist
             if replaceExistingTemplates {
+                templates.forEach { templateStore.delete(template: $0) }
                 templates = remappedTemplates
             } else {
                 templates = templates + remappedTemplates
