@@ -7,6 +7,7 @@
 
 import Combine
 import Foundation
+import os
 
 public class ConfigManager: ConfigManaging {
     private let networking: Networking
@@ -17,6 +18,8 @@ public class ConfigManager: ConfigManaging {
     private var deviceSupportsScheduleMaxSOC: [String: Bool] = [:] // In-memory only
     private var deviceSupportsPeakShaving: [String: Bool] = [:] // In-memory only
     public var lastSettingsResetTime = CurrentValueSubject<Date?, Never>(nil)
+    private var fetchDeviceLock = OSAllocatedUnfairLock()
+    private var isFetching = false
 
     public struct NoDeviceFoundError: Error {
         public init() {}
@@ -40,13 +43,26 @@ public class ConfigManager: ConfigManaging {
     }
 
     public func fetchDevices() async throws {
+        // Attempt to acquire the fetch; bail out if another fetch is in-flight
+        let shouldStart: Bool = fetchDeviceLock.withLock {
+            if isFetching { return false }
+            isFetching = true
+            return true
+        }
+        guard shouldStart else { return }
+
+        // Ensure we always clear the flag, even on early returns or thrown errors
+        defer {
+            fetchDeviceLock.withLock { isFetching = false }
+        }
+
         let deviceList = try await networking.fetchDeviceList()
         config.variables = try await networking.fetchVariables().compactMap {
             guard let unit = $0.unit else { return nil }
             return Variable(name: $0.name, variable: $0.variable, unit: unit)
         }
 
-        guard deviceList.count > 0 else {
+        guard !deviceList.isEmpty else {
             throw NoDeviceFoundError()
         }
 
@@ -54,6 +70,7 @@ public class ConfigManager: ConfigManaging {
             try await loadDevice(device: device)
         }
         devices = newDevices
+
         if selectedDeviceSN == nil {
             select(device: devices?.first)
         } else if currentDevice.value == nil {

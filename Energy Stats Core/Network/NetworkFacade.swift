@@ -38,9 +38,7 @@ class NetworkFacade: FoxAPIServicing {
         if isDemoUser {
             try await demoAPI.openapi_setScheduleFlag(deviceSN: deviceSN, enable: enable)
         } else {
-            defer {
-                throttler.didInvoke(method: writeAPIkey)
-            }
+            defer { throttler.didInvoke(method: writeAPIkey) }
             try await throttler.throttle(method: writeAPIkey, minimumDuration: 2.0)
             try await api.openapi_setScheduleFlag(deviceSN: deviceSN, enable: enable)
         }
@@ -55,10 +53,12 @@ class NetworkFacade: FoxAPIServicing {
     }
 
     func openapi_fetchDeviceList() async throws -> [DeviceSummaryResponse] {
-        return if isDemoUser {
-            try await demoAPI.openapi_fetchDeviceList()
+        if isDemoUser {
+            return try await demoAPI.openapi_fetchDeviceList()
         } else {
-            try await api.openapi_fetchDeviceList()
+            defer { throttler.didInvoke(method: #function) }
+            try await throttler.throttle(method: #function, minimumDuration: 2.0)
+            return try await api.openapi_fetchDeviceList()
         }
     }
 
@@ -74,9 +74,7 @@ class NetworkFacade: FoxAPIServicing {
         if isDemoUser {
             return try await demoAPI.openapi_setBatterySoc(deviceSN: deviceSN, minSOCOnGrid: minSOCOnGrid, minSOC: minSOC)
         } else {
-            defer {
-                throttler.didInvoke(method: writeAPIkey)
-            }
+            defer { throttler.didInvoke(method: writeAPIkey) }
             try await throttler.throttle(method: writeAPIkey, minimumDuration: 2.0)
             return try await api.openapi_setBatterySoc(deviceSN: deviceSN, minSOCOnGrid: minSOCOnGrid, minSOC: minSOC)
         }
@@ -103,10 +101,12 @@ class NetworkFacade: FoxAPIServicing {
     }
 
     func openapi_fetchDataLoggers() async throws -> [DataLoggerResponse] {
-        return if isDemoUser {
-            try await demoAPI.openapi_fetchDataLoggers()
+        if isDemoUser {
+            return try await demoAPI.openapi_fetchDataLoggers()
         } else {
-            try await api.openapi_fetchDataLoggers()
+            defer { throttler.didInvoke(method: #function) }
+            try await throttler.throttle(method: #function, minimumDuration: 2.0)
+            return try await api.openapi_fetchDataLoggers()
         }
     }
 
@@ -122,9 +122,7 @@ class NetworkFacade: FoxAPIServicing {
         if isDemoUser {
             return try await demoAPI.openapi_fetchRealData(deviceSN: deviceSN, variables: variables)
         } else {
-            defer {
-                throttler.didInvoke(method: #function)
-            }
+            defer { throttler.didInvoke(method: #function) }
             try await throttler.throttle(method: #function)
             return try await api.openapi_fetchRealData(deviceSN: deviceSN, variables: variables)
         }
@@ -134,9 +132,7 @@ class NetworkFacade: FoxAPIServicing {
         if isDemoUser {
             return try await demoAPI.openapi_fetchHistory(deviceSN: deviceSN, variables: variables, start: start, end: end)
         } else {
-            defer {
-                throttler.didInvoke(method: #function)
-            }
+            defer { throttler.didInvoke(method: #function) }
             try await throttler.throttle(method: #function)
             return try await api.openapi_fetchHistory(deviceSN: deviceSN, variables: variables, start: start, end: end)
         }
@@ -146,9 +142,7 @@ class NetworkFacade: FoxAPIServicing {
         if isDemoUser {
             return try await demoAPI.openapi_fetchVariables()
         } else {
-            defer {
-                throttler.didInvoke(method: #function)
-            }
+            defer { throttler.didInvoke(method: #function) }
             try await throttler.throttle(method: #function)
             return try await api.openapi_fetchVariables()
         }
@@ -182,9 +176,7 @@ class NetworkFacade: FoxAPIServicing {
         if isDemoUser {
             return try await demoAPI.openapi_saveSchedule(deviceSN: deviceSN, schedule: schedule)
         } else {
-            defer {
-                throttler.didInvoke(method: writeAPIkey)
-            }
+            defer { throttler.didInvoke(method: writeAPIkey) }
             try await throttler.throttle(method: writeAPIkey, minimumDuration: 2.0)
             try await api.openapi_saveSchedule(deviceSN: deviceSN, schedule: schedule)
         }
@@ -192,9 +184,11 @@ class NetworkFacade: FoxAPIServicing {
 
     func openapi_fetchPowerStationList() async throws -> PagedPowerStationListResponse {
         if isDemoUser {
-            try await demoAPI.openapi_fetchPowerStationList()
+            return try await demoAPI.openapi_fetchPowerStationList()
         } else {
-            try await api.openapi_fetchPowerStationList()
+            defer { throttler.didInvoke(method: #function) }
+            try await throttler.throttle(method: #function, minimumDuration: 2.0)
+            return try await api.openapi_fetchPowerStationList()
         }
     }
 
@@ -226,6 +220,8 @@ class NetworkFacade: FoxAPIServicing {
         if isDemoUser {
             try await demoAPI.openapi_setDeviceSettingsItem(deviceSN: deviceSN, item: item, value: value)
         } else {
+            defer { throttler.didInvoke(method: writeAPIkey) }
+            try await throttler.throttle(method: writeAPIkey, minimumDuration: 2.0)
             try await api.openapi_setDeviceSettingsItem(deviceSN: deviceSN, item: item, value: value)
         }
     }
@@ -242,6 +238,8 @@ class NetworkFacade: FoxAPIServicing {
         if isDemoUser {
             try await demoAPI.openapi_setPeakShavingSettings(deviceSN: deviceSN, importLimit: importLimit, soc: soc)
         } else {
+            defer { throttler.didInvoke(method: writeAPIkey) }
+            try await throttler.throttle(method: writeAPIkey, minimumDuration: 2.0)
             try await api.openapi_setPeakShavingSettings(deviceSN: deviceSN, importLimit: importLimit, soc: soc)
         }
     }
@@ -260,10 +258,7 @@ class ThrottleManager {
     private let queue = DispatchQueue(label: "throttle-manager-queue", qos: .utility)
 
     func throttle(method: String, minimumDuration: TimeInterval = 1.0) async throws {
-        guard let lastCallTime = lastCallTime(for: method) else {
-            didInvoke(method: method)
-            return
-        }
+        guard let lastCallTime = lastCallTime(for: method) else { return }
 
         let now = Date()
         let timeSinceLastCall = now.timeIntervalSince(lastCallTime)

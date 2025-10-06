@@ -36,7 +36,7 @@ struct PowerFlowView<S: Shape>: View {
         self.showAmount = showAmount
         self.verticalAlignment = verticalAlignment
 
-        animationDuration = max(0.4, 2.7 - abs(amount))
+        animationDuration = (0.4 + abs(amount)) * 10.0
     }
 
     var body: some View {
@@ -44,9 +44,11 @@ struct PowerFlowView<S: Shape>: View {
             if amount.isFlowing() {
                 ZStack(alignment: verticalAlignment) {
                     if amount > 0 {
-                        FlowingLine(direction: .down, animationDuration: animationDuration, color: lineColor, shape: shape)
+                        MovingDashesView(color: lineColor, direction: .down, speed: animationDuration)
+                            .frame(width: 4)
                     } else {
-                        FlowingLine(direction: .up, animationDuration: animationDuration, color: lineColor, shape: shape)
+                        MovingDashesView(color: lineColor, direction: .up, speed: animationDuration)
+                            .frame(width: 4)
                     }
 
                     if showAmount {
@@ -87,42 +89,42 @@ struct PowerFlowView<S: Shape>: View {
     }
 }
 
-#Preview {
-    return AdjustableView(config: MockConfig())
+private struct AdjustableViewPreview: View {
+    @State private var amount: Double = 2.0
+    @State private var visible = true
+    let config: Config
 
-    struct AdjustableView: View {
-        @State private var amount: Double = 2.0
-        @State private var visible = true
-        let config: Config
-
-        var body: some View {
-            VStack {
-                Color.clear.overlay(
-                    Group {
-                        if visible {
-                            PowerFlowView(amount: amount, appSettings: AppSettings.mock(), showColouredLines: true, type: .solarFlow)
-                        }
+    var body: some View {
+        VStack {
+            Color.clear.overlay(
+                Group {
+                    if visible {
+                        PowerFlowView(amount: amount, appSettings: AppSettings.mock(), showColouredLines: true, type: .solarFlow)
                     }
-                ).frame(height: 100)
-
-                Slider(value: $amount, in: 0 ... 5.0, step: 0.1, label: {
-                    Text("kWH")
-                }, onEditingChanged: { _ in
-                    visible.toggle()
-
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-                        visible.toggle()
-                    }
-                })
-
-                Text(amount, format: .number)
-
-                Button {
-                    visible.toggle()
-                } label: {
-                    Text(verbatim: "Toggle")
                 }
+            ).frame(height: 100)
+
+            Slider(value: $amount, in: 0 ... 5.0, step: 0.1, label: {
+                Text("kWH")
+            }, onEditingChanged: { _ in
+                visible.toggle()
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                    visible.toggle()
+                }
+            })
+
+            Text(amount, format: .number)
+
+            Button {
+                visible.toggle()
+            } label: {
+                Text(verbatim: "Toggle")
             }
         }
     }
+}
+
+#Preview {
+    AdjustableViewPreview(config: MockConfig())
 }

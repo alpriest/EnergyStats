@@ -14,7 +14,6 @@ struct TodaySolarGenerationWidget: Widget {
     private let kind: String = "SolarGenerationWidget"
     private let configManager: ConfigManaging
     private let keychainStore: KeychainStoring
-    private var container = ContainerFactory.makeStatsWidgetContainer()
 
     init() {
         let keychainStore = KeychainStore()
@@ -32,7 +31,7 @@ struct TodaySolarGenerationWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: StatsTimelineProvider(config: HomeEnergyStateManagerConfigAdapter(config: configManager, keychainStore: keychainStore))) { entry in
             TodaySolarGenerationWidgetView(entry: entry, configManager: configManager)
-                .modelContainer(container)
+                .modelContainer(HomeEnergyStateManager.shared.modelContainer)
         }
         .configurationDisplayName("Solar Generation Widget")
         .description("Shows a graph of your solar generation over today")

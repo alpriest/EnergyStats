@@ -9,6 +9,7 @@ import Combine
 import Energy_Stats_Core
 import Foundation
 import UIKit
+import os
 
 struct UpdateState {
     let text: String
@@ -40,6 +41,7 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
     private var latestDeviceSN: String?
     var visible: Bool = false
     private var currentStatusCalculator: CurrentStatusCalculator?
+    private var loadLock = OSAllocatedUnfairLock()
 
     enum State: Equatable {
         case unloaded
@@ -148,9 +150,11 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
 
     @MainActor
     func loadData() async {
-        guard self.isLoading == false else { return }
+        loadLock.withLock {
+            guard self.isLoading == false else { return }
+            self.isLoading = true
+        }
 
-        self.isLoading = true
         defer { isLoading = false }
 
         do {
