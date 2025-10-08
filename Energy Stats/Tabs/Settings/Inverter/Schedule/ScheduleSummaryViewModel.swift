@@ -56,7 +56,7 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState, HasAlertContent 
                     firmwareVersions = nil
                 }
 
-                let message = String(key: .schedulesUnsupported, arguments: [device.deviceDisplayName, firmwareVersions?.manager ?? ""])
+                let message = String(key: .schedulesUnsupported, arguments: device.deviceDisplayName, firmwareVersions?.manager ?? "")
                 await setState(.error(nil, message))
             } else {
                 await setState(.inactive)

@@ -52,7 +52,7 @@ class UserManager: ObservableObject, HasLoadState {
                 configManager.isDemoUser = true
                 configManager.appSettingsPublisher.send(AppSettings.mock())
             }
-
+            
             try store.store(apiKey: apiKey, notifyObservers: false)
             try await configManager.fetchDevices()
             try? await configManager.fetchPowerStationDetail()
@@ -62,6 +62,11 @@ class UserManager: ObservableObject, HasLoadState {
 
             switch error {
             case .badCredentials:
+                if !apiKey.isValidAPIKey {
+                    await setState(.error(error, String(key: .invalidApiKeyFormat) + "\n\n" + String(key: .what_is_api_key_3)))
+                    return
+                }
+
                 await setState(.error(error, String(key: .wrongCredentials)))
             default:
                 await setState(.error(error, String(key: .couldNotLogin)))
@@ -95,5 +100,12 @@ extension UserManager {
             store: KeychainStore(),
             configManager: ConfigManager.preview()
         )
+    }
+}
+
+private extension String {
+    var isValidAPIKey: Bool {
+        let pattern = #"^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"#
+        return range(of: pattern, options: .regularExpression) != nil
     }
 }

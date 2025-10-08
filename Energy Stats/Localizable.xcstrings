@@ -8980,6 +8980,41 @@
         }
       }
     },
+    "invalid_api_key_format" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ihr API-Schlüssel scheint das falsche Format zu haben."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your API key appears to be in the wrong format."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu clave API parece tener un formato incorrecto."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La tua chiave API sembra avere un formato errato."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Twój klucz API wydaje się mieć nieprawidłowy format."
+          }
+        }
+      }
+    },
     "Invert CT2 values when detected" : {
       "localizations" : {
         "de" : {

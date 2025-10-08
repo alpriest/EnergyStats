@@ -11,7 +11,9 @@ public struct LocalizedString {
     public enum Key: String, RawRepresentable {
         case success = "Success"
         case couldNotLogin = "Could not login. Check your internet connection"
-        case wrongCredentials = "Wrong credentials, try again"
+        case wrongCredentials = "Invalid credentials, try again"
+        case invalidApiKeyFormat = "invalid_api_key_format"
+        case what_is_api_key_3 = "what_is_api_key_3"
         case empty = "Empty"
         case full = "Full"
         case nextUpdateIn = "Next update in"

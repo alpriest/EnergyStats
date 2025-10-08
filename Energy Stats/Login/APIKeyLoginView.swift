@@ -69,6 +69,8 @@ struct APIKeyLoginView: View {
                     switch cause {
                     case .invalidToken:
                         errorMessage = "Your API token is invalid."
+                    case .badCredentials:
+                        errorMessage = message
                     default:
                         errorMessage = cause.errorDescription
                     }

@@ -16,7 +16,6 @@ struct TabbedView: View {
     let templateStore: TemplateStoring
     @StateObject var settingsTabViewModel: SettingsTabViewModel
     @StateObject var parametersGraphTabViewModel: ParametersGraphTabViewModel
-    @Environment(\.accessibilityShowButtonShapes) var accessibilityShowButtonShapes
 
     init(networking: Networking, userManager: UserManager, configManager: ConfigManaging, solarForecastProvider: @escaping SolarForecastProviding, templateStore: TemplateStoring) {
         self.networking = networking
@@ -62,9 +61,6 @@ struct TabbedView: View {
                 .if(configManager.isDemoUser) {
                     $0.badge("demo")
                 }
-        }
-        .if(accessibilityShowButtonShapes == false) {
-            $0.applyGlassEffect()
         }
         .edgesIgnoringSafeArea(.all)
     }
