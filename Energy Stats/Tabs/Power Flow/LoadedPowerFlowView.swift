@@ -234,7 +234,7 @@ struct LoadedPowerFlowView: View {
                 VStack(alignment: .trailing) {
                     Image(systemName: "calendar")
 
-                    if let detectedActiveTemplate = appSettings.detectedActiveTemplate {
+                    if let detectedActiveTemplate = appSettings.detectedActiveTemplate, detectedActiveTemplate.isNotEmpty {
                         Text(detectedActiveTemplate)
                             .font(.caption2)
                             .lineLimit(1)

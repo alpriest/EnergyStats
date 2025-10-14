@@ -7,6 +7,7 @@
 
 import Combine
 import Foundation
+import SwiftUI
 
 public struct InverterTemperatures: Sendable {
     public let ambient: Double
@@ -51,7 +52,10 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
                 battery: BatteryViewModel,
                 currentDevice: Device,
                 network: Networking,
-                configManager: ConfigManaging)
+                configManager: ConfigManaging,
+                totals: TotalsViewModel?,
+                financialModel: EnergyStatsFinancialModel?,
+                generation: GenerationViewModel?)
     {
         self.batteryViewModel = battery
         self.currentDevice = currentDevice
@@ -72,9 +76,17 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
                 self?.updateDisplayStrings(appSettings)
             }
             .store(in: &self.cancellables)
+        
+        // Update totals
+        self.earnings = financialModel
+        self.homeTotal = totals?.home
+        self.gridImportTotal = totals?.gridImport
+        self.gridExportTotal = totals?.gridExport
+        self.todaysGeneration = generation
 
-        self.loadDeviceStatus()
-        self.loadTotals()
+        Task {
+            try await self.loadDeviceStatus()
+        }
     }
 
     private func updateDisplayStrings(_ settings: AppSettings) {
@@ -91,29 +103,27 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
         self.displayStrings = displayStrings
     }
 
-    private func loadDeviceStatus() {
-        Task {
-            let deviceState = try DeviceState(rawValue: await self.network.fetchDevice(deviceSN: self.currentDevice.deviceSN).status) ?? DeviceState.offline
-            let faults: [String]
+    private func loadDeviceStatus() async throws {
+        let deviceState = try DeviceState(rawValue: await self.network.fetchDevice(deviceSN: self.currentDevice.deviceSN).status) ?? DeviceState.offline
+        let faults: [String]
 
-            switch deviceState {
-            case .online:
-                faults = []
-            case .fault:
-                faults = try await self.loadCurrentFaults()
-            case .offline:
-                NotificationCenter.default.post(name: .deviceIsOffline, object: nil)
-                faults = try await self.loadCurrentFaults()
-            case .unknown:
-                faults = []
-            }
+        switch deviceState {
+        case .online:
+            faults = []
+        case .fault:
+            faults = try await self.loadCurrentFaults()
+        case .offline:
+            NotificationCenter.default.post(name: .deviceIsOffline, object: nil)
+            faults = try await self.loadCurrentFaults()
+        case .unknown:
+            faults = []
+        }
 
-            if Task.isCancelled { return }
+        if Task.isCancelled { return }
 
-            await MainActor.run {
-                self.faults = faults
-                self.deviceState = deviceState
-            }
+        await MainActor.run {
+            self.faults = faults
+            self.deviceState = deviceState
         }
     }
 
@@ -127,54 +137,27 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
         return currentFaults.split(separator: ",").map { String($0) }
     }
 
-    private func loadTotals() {
-        guard self.configManager.showHomeTotalOnPowerFlow ||
-            self.configManager.showGridTotalsOnPowerFlow ||
-            self.configManager.showFinancialEarnings ||
-            self.configManager.showTotalYieldOnPowerFlow else { return }
-
-        Task {
-            let generation = try await self.loadGeneration()
-            let totals = try TotalsViewModel(reports: await self.loadReportData(self.currentDevice), generationViewModel: generation)
-
-            if Task.isCancelled { return }
-
-            await MainActor.run {
-                self.earnings = EnergyStatsFinancialModel(totalsViewModel: totals, config: self.configManager)
-                self.homeTotal = totals.home
-                self.gridImportTotal = totals.gridImport
-                self.gridExportTotal = totals.gridExport
-                generation?.updatePvTotal(totals.solar)
-                self.todaysGeneration = generation
-            }
-        }
-    }
-
-    private func loadReportData(_ currentDevice: Device) async throws -> [OpenReportResponse] {
-        var reportVariables = [ReportVariable.loads, .feedIn, .gridConsumption, .pvEnergyTotal]
-        if currentDevice.hasBattery {
-            reportVariables.append(contentsOf: [.chargeEnergyToTal, .dischargeEnergyToTal])
-        }
-
-        return try await self.network.fetchReport(deviceSN: currentDevice.deviceSN,
-                                                  variables: reportVariables,
-                                                  queryDate: .now(),
-                                                  reportType: .month)
-    }
-
-    private func loadGeneration() async throws -> GenerationViewModel? {
-        guard self.configManager.showTotalYieldOnPowerFlow ||
-                self.configManager.powerFlowStrings.enabled ||
-                self.configManager.ct2DisplayMode != .hidden ||
-                self.configManager.shouldCombineCT2WithPVPower
-        else { return nil }
-
-        return try await GenerationViewModelBuilder.build(
-            configManager: self.configManager,
-            network: self.network,
-            device: self.currentDevice
-        )
-    }
+//    private func loadTotals() async throws {
+//        guard self.configManager.showHomeTotalOnPowerFlow ||
+//            self.configManager.showGridTotalsOnPowerFlow ||
+//            self.configManager.showFinancialEarnings ||
+//            self.configManager.showTotalYieldOnPowerFlow else { return }
+//
+//        let generation = try await self.loadGeneration()
+//        let totals = try TotalsViewModel(reports: await self.loadReportData(self.currentDevice), generationViewModel: generation)
+//
+//        if Task.isCancelled { return }
+//
+//        await MainActor.run {
+//            self.earnings = EnergyStatsFinancialModel(totalsViewModel: totals, config: self.configManager)
+//            self.homeTotal = totals.home
+//            self.gridImportTotal = totals.gridImport
+//            self.gridExportTotal = totals.gridExport
+//            generation?.updatePvTotal(totals.solar)
+//            self.todaysGeneration = generation
+//        }
+//    }
+//
 
     public static func ==(lhs: LoadedPowerFlowViewModel, rhs: LoadedPowerFlowViewModel) -> Bool {
         lhs.solar == rhs.solar &&
@@ -226,7 +209,10 @@ public extension LoadedPowerFlowViewModel {
             battery: BatteryViewModel.noBattery,
             currentDevice: Device.preview(),
             network: DemoNetworking(),
-            configManager: ConfigManager.preview()
+            configManager: ConfigManager.preview(),
+            totals: nil,
+            financialModel: nil,
+            generation: nil
         )
     }
 
@@ -244,7 +230,10 @@ public extension LoadedPowerFlowViewModel {
             battery: battery,
             currentDevice: .preview(),
             network: DemoNetworking(),
-            configManager: ConfigManager.preview(appSettings: appSettings)
+            configManager: ConfigManager.preview(appSettings: appSettings),
+            totals: nil,
+            financialModel: nil,
+            generation: nil
         )
     }
 }

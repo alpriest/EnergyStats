@@ -11,4 +11,8 @@ public extension String {
     func localised() -> LocalizedStringKey {
         return LocalizedStringKey(self)
     }
+    
+    var isNotEmpty: Bool {
+        !isEmpty
+    }
 }

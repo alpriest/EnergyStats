@@ -42,6 +42,7 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
     var visible: Bool = false
     private var currentStatusCalculator: CurrentStatusCalculator?
     private var loadLock = OSAllocatedUnfairLock()
+    @Published public var earnings: EnergyStatsFinancialModel?
 
     enum State: Equatable {
         case unloaded
@@ -186,18 +187,21 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
                 self.configManager.minSOC = batterySettings.minSocOnGridPercent
             }
 
+            let (totals, financialModel, generation) = try await self.loadTotals(for: currentDevice)
+            
             let summary = LoadedPowerFlowViewModel(
                 currentValuesPublisher: currentStatusCalculator.currentValuesPublisher,
                 battery: battery,
                 currentDevice: currentDevice,
                 network: self.network,
-                configManager: self.configManager
+                configManager: self.configManager,
+                totals: totals,
+                financialModel: financialModel,
+                generation: generation
             )
 
             if Task.isCancelled { return }
 
-//            self.state = .loaded(.empty()) // refreshes the marching ants line speed
-//            try await Task.sleep(nanoseconds: 10000)
             self.state = .loaded(summary)
             self.lastUpdated = currentStatusCalculator.lastUpdate
             self.calculateTicks(historicalViewModel: currentStatusCalculator)
@@ -206,6 +210,48 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
             await self.stopTimer()
             self.state = .failed(error, error.localizedDescription)
         }
+    }
+
+    private func loadTotals(for device: Device) async throws -> (TotalsViewModel?, EnergyStatsFinancialModel?, GenerationViewModel?) {
+        guard self.configManager.showHomeTotalOnPowerFlow ||
+            self.configManager.showGridTotalsOnPowerFlow ||
+            self.configManager.showFinancialEarnings ||
+            self.configManager.showTotalYieldOnPowerFlow else { return (nil, nil, nil) }
+
+        let generation = try await self.loadGeneration(for: device)
+        let totals = try TotalsViewModel(reports: await self.loadReportData(device), generationViewModel: generation)
+        generation?.updatePvTotal(totals.solar)
+        let financialModel = EnergyStatsFinancialModel(totalsViewModel: totals, config: self.configManager)
+
+        if Task.isCancelled { return (nil, nil, nil) }
+
+        return (totals, financialModel, generation)
+    }
+
+    private func loadGeneration(for device: Device) async throws -> GenerationViewModel? {
+        guard self.configManager.showTotalYieldOnPowerFlow ||
+            self.configManager.powerFlowStrings.enabled ||
+            self.configManager.ct2DisplayMode != .hidden ||
+            self.configManager.shouldCombineCT2WithPVPower
+        else { return nil }
+
+        return try await GenerationViewModelBuilder.build(
+            configManager: self.configManager,
+            network: self.network,
+            device: device
+        )
+    }
+
+    private func loadReportData(_ currentDevice: Device) async throws -> [OpenReportResponse] {
+        var reportVariables = [ReportVariable.loads, .feedIn, .gridConsumption, .pvEnergyTotal]
+        if currentDevice.hasBattery {
+            reportVariables.append(contentsOf: [.chargeEnergyToTal, .dischargeEnergyToTal])
+        }
+
+        return try await self.network.fetchReport(deviceSN: currentDevice.deviceSN,
+                                                  variables: reportVariables,
+                                                  queryDate: .now(),
+                                                  reportType: .month)
     }
 
     private func loadRealData(_ currentDevice: Device, config: ConfigManaging) async throws -> OpenQueryResponse {
