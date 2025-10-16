@@ -12,16 +12,18 @@ import SwiftUI
 struct CustomDatePicker: View {
     @Binding var start: Date
     @Binding var end: Date
+    private let includeSeconds: Bool
 
-    init(start: Binding<Date>, end: Binding<Date>) {
+    init(start: Binding<Date>, end: Binding<Date>, includeSeconds: Bool) {
         self._start = start
         self._end = end
+        self.includeSeconds = includeSeconds
     }
 
     var body: some View {
         VStack {
-            SinglePickerView(label: "Start", date: $start, timeType: .start)
-            SinglePickerView(label: "End", date: $end, timeType: .end)
+            SinglePickerView(label: "Start", date: $start, timeType: .start, includeAppendage: includeSeconds)
+            SinglePickerView(label: "End", date: $end, timeType: .end, includeAppendage: includeSeconds)
         }
     }
 }
@@ -31,11 +33,13 @@ struct SinglePickerView: View {
     @Binding var date: Date
     @State private var showing = false
     private let timeType: TimeType
+    private let includeAppendage: Bool
 
-    init(label: LocalizedStringKey, date: Binding<Date>, timeType: TimeType) {
+    init(label: LocalizedStringKey, date: Binding<Date>, timeType: TimeType, includeAppendage: Bool) {
         self.label = label
         self._date = date
         self.timeType = timeType
+        self.includeAppendage = includeAppendage
     }
 
     var body: some View {
@@ -45,7 +49,7 @@ struct SinglePickerView: View {
             Button(action: {
                 showing = true
             }) {
-                Text(date, formatter: DateFormatter.fullTime) + Text(":") + Text(timeType.appendage())
+                Text(date, formatter: DateFormatter.fullTime) + Text(includeAppendage ? ":" + timeType.appendage() : "")
             }.buttonStyle(.bordered)
         }.onTapGesture {
             showing = true
@@ -127,6 +131,7 @@ struct MediumPresentationDetentsViewModifier: ViewModifier {
         start: .constant(Date()),
         end: .constant(
             Date()
-        )
+        ),
+        includeSeconds: true
     )
 }

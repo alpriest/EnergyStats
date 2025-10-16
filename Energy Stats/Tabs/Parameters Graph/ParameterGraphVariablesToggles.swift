@@ -51,7 +51,7 @@ struct ParameterGraphVariablesToggles: View {
     @ViewBuilder
     private func row(_ variable: ParameterGraphVariable) -> some View {
         Button(action: { viewModel.toggle(visibilityOf: variable) }) {
-            let title = valuesAtTime == nil ? variable.type.title(as: .total) : variable.type.title(as: .snapshot)
+            let title = variable.type.title(as: .snapshot)
 
             AStack {
                 VStack(alignment: .leading) {

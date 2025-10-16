@@ -77,7 +77,7 @@ struct SchedulePhaseEditView: View {
                 }
 
                 Section {
-                    CustomDatePicker(start: $startTime, end: $endTime)
+                    CustomDatePicker(start: $startTime, end: $endTime, includeSeconds: true)
 
                     Picker("Work Mode", selection: $workMode) {
                         ForEach(modes, id: \.self) { mode in
