@@ -43,7 +43,6 @@ class ContentViewModel {
         guard state.lastRefreshSeconds > FOUR_MINUTES_IN_SECONDS else {
             return
         }
-        print("AWP", "Config Battery Capacity is", config.batteryCapacity)
 
         defer {
             Task { @MainActor in
