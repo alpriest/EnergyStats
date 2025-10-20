@@ -10,7 +10,7 @@ import SwiftData
 import WidgetKit
 
 @available(iOS 17.0, *)
-@available(watchOS 9.0, *)
+@available(watchOS 10.0, *)
 extension HomeEnergyStateManager {
     @MainActor
     public func updateGenerationStatsState(config: HomeEnergyStateManagerConfig) async throws {

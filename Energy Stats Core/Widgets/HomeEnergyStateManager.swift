@@ -8,6 +8,7 @@
 import AppIntents
 import SwiftData
 import WidgetKit
+import OSLog
 
 public protocol HomeEnergyStateManagerConfig {
     func batteryCapacityW() throws -> Int
@@ -19,7 +20,7 @@ public protocol HomeEnergyStateManagerConfig {
 }
 
 @available(iOS 17.0, *)
-@available(watchOS 9.0, *)
+@available(watchOS 10.0, *)
 public class HomeEnergyStateManager {
     public static var shared: HomeEnergyStateManager = .init()
 
@@ -35,7 +36,20 @@ public class HomeEnergyStateManager {
                                               dataCeiling: { .none })
             modelContainer = try ModelContainer(for: BatteryWidgetState.self, StatsWidgetState.self, GenerationStatsWidgetState.self)
         } catch {
-            fatalError("Failed to create the model container: \(error)")
+            // Log everything we can
+            let ns = error as NSError
+            Logger(subsystem: "EnergyStats", category: "SwiftData")
+                .error("ModelContainer init failed: \(ns.localizedDescription, privacy: .public) (\(ns.domain, privacy: .public)) code=\(ns.code, privacy: .public) userInfo=\(ns.userInfo as NSDictionary, privacy: .public)")
+
+            // In debug, crash loudly with details. In release, fall back to in-memory so the app keeps working.
+            #if DEBUG
+            fatalError("ModelContainer failed: \(error)")
+            #else
+            modelContainer = try! ModelContainer(
+                for: BatteryWidgetState.self, StatsWidgetState.self, GenerationStatsWidgetState.self,
+                configurations: ModelConfiguration(isStoredInMemoryOnly: true)
+            )
+            #endif
         }
     }
 }

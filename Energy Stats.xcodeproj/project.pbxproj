@@ -32,7 +32,6 @@
 		4103D1E329DB6D03001B0BC8 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410AA38729D96F6D00CD107C /* AppSettings.swift */; };
 		4103D1E429DB6D12001B0BC8 /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41339C7328CC7BA50062B976 /* KeychainStore.swift */; };
 		4103D1E529DB6D29001B0BC8 /* Sequence+aysnc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4111333529B7D61200972935 /* Sequence+aysnc.swift */; };
-		41047B452E7C1FB6009720D3 /* ContainerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41047B442E7C1FB6009720D3 /* ContainerFactory.swift */; };
 		410484C82AD49D95007F68C0 /* CT2-icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410484C72AD49D95007F68C0 /* CT2-icon.swift */; };
 		4107446128C9EF6B006D5D7D /* LoadedPowerFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446028C9EF6B006D5D7D /* LoadedPowerFlowView.swift */; };
 		4107446328CA1C5D006D5D7D /* PowerFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4107446228CA1C5D006D5D7D /* PowerFlowView.swift */; };
@@ -550,7 +549,6 @@
 		41038F972E6C37C1008A74C6 /* ApproximationsBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproximationsBackgroundView.swift; sourceTree = "<group>"; };
 		4103D1E029DB6CB9001B0BC8 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
 		4103F82F2922BFBA00567B1C /* ReportVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportVariable.swift; sourceTree = "<group>"; };
-		41047B442E7C1FB6009720D3 /* ContainerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerFactory.swift; sourceTree = "<group>"; };
 		410484C72AD49D95007F68C0 /* CT2-icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CT2-icon.swift"; sourceTree = "<group>"; };
 		4106A92C28CFCD960009DA28 /* Variable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
 		4107446028C9EF6B006D5D7D /* LoadedPowerFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadedPowerFlowView.swift; sourceTree = "<group>"; };
@@ -1181,7 +1179,6 @@
 		412A266F2AC03B2300F61456 /* Energy Stats Phone Widgets */ = {
 			isa = PBXGroup;
 			children = (
-				41047B442E7C1FB6009720D3 /* ContainerFactory.swift */,
 				413715B52E200DE900505496 /* Generation Graph Widget */,
 				413715B42E200DC200505496 /* Generation Stats Widget */,
 				412A26742AC03B2400F61456 /* Assets.xcassets */,
@@ -2201,7 +2198,6 @@
 				4137159B2E1EF93500505496 /* StatsWidgetGraphView.swift in Sources */,
 				4197A0DC2CC6901A00913823 /* SyncRequiredView.swift in Sources */,
 				412A26832AC03BF000F61456 /* BatteryStatusView.swift in Sources */,
-				41047B452E7C1FB6009720D3 /* ContainerFactory.swift in Sources */,
 				4137159E2E1EF93500505496 /* TodaySolarGenerationWidget.swift in Sources */,
 				4137159F2E1EF93500505496 /* TodaySolarGenerationWidgetGraphView.swift in Sources */,
 				412A26712AC03B2300F61456 /* Energy_Stats_WidgetsBundle.swift in Sources */,

@@ -7,13 +7,4 @@
    <FileRef
       location = "group:Energy Stats Core/Energy Stats Core.xctestplan">
    </FileRef>
-   <FileRef
-      location = "group:IconScale.swift">
-   </FileRef>
-   <FileRef
-      location = "group:ContainerFactory.swift">
-   </FileRef>
-   <FileRef
-      location = "group:CoreBus.swift">
-   </FileRef>
 </Workspace>
