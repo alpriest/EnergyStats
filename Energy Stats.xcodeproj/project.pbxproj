@@ -178,6 +178,7 @@
 		416AE4492A8128B9003D0122 /* OptionalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41028F9428CDD7A300FB70FD /* OptionalView.swift */; };
 		416AE44B2A8170E6003D0122 /* SelectableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416AE44A2A8170E6003D0122 /* SelectableItem.swift */; };
 		416AE44D2A821E4F003D0122 /* AlertContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416AE44C2A821E4F003D0122 /* AlertContent.swift */; };
+		416C66292EA7BAF40013FDE3 /* View+ReadSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416C66282EA7BAF40013FDE3 /* View+ReadSize.swift */; };
 		416D761B2BA60C3500074370 /* StatsDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416D761A2BA60C3500074370 /* StatsDataFetcher.swift */; };
 		416E032E2DE3764B0059CE42 /* FetchPeakShavingsSettingsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416E032D2DE3764A0059CE42 /* FetchPeakShavingsSettingsResponse.swift */; };
 		416E03302DE3815B0059CE42 /* PeakShavingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416E032F2DE3815B0059CE42 /* PeakShavingView.swift */; };
@@ -694,6 +695,7 @@
 		416AE4472A812876003D0122 /* WorkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkMode.swift; sourceTree = "<group>"; };
 		416AE44A2A8170E6003D0122 /* SelectableItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectableItem.swift; sourceTree = "<group>"; };
 		416AE44C2A821E4F003D0122 /* AlertContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertContent.swift; sourceTree = "<group>"; };
+		416C66282EA7BAF40013FDE3 /* View+ReadSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ReadSize.swift"; sourceTree = "<group>"; };
 		416D761A2BA60C3500074370 /* StatsDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsDataFetcher.swift; sourceTree = "<group>"; };
 		416E032D2DE3764A0059CE42 /* FetchPeakShavingsSettingsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchPeakShavingsSettingsResponse.swift; sourceTree = "<group>"; };
 		416E032F2DE3815B0059CE42 /* PeakShavingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeakShavingView.swift; sourceTree = "<group>"; };
@@ -1005,10 +1007,6 @@
 		4103D1E629DB6D2C001B0BC8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				413715BE2E205C9800505496 /* SubLabelledView.swift */,
-				417CE6EE2DE660B4003D5F64 /* String+Double.swift */,
-				415F0BDA2D9D541F003EB760 /* String+Localised.swift */,
-				414160282D85CABC009E0096 /* View+IconSize.swift */,
 				416AE44C2A821E4F003D0122 /* AlertContent.swift */,
 				41495F372B211A75004A51C1 /* AlertContentView.swift */,
 				418685D42AFE700100355B6D /* AnimatedNumber.swift */,
@@ -1026,8 +1024,13 @@
 				4111333529B7D61200972935 /* Sequence+aysnc.swift */,
 				41F5A3632C1B563D00CA1120 /* Shimmering.swift */,
 				418024E12AD16D00009A2625 /* String+Currency.swift */,
+				417CE6EE2DE660B4003D5F64 /* String+Double.swift */,
+				415F0BDA2D9D541F003EB760 /* String+Localised.swift */,
 				4171854129FFCF2500D18CDD /* String+MD5.swift */,
+				413715BE2E205C9800505496 /* SubLabelledView.swift */,
+				414160282D85CABC009E0096 /* View+IconSize.swift */,
 				418EEEB42916843A006A8290 /* View+If.swift */,
+				416C66282EA7BAF40013FDE3 /* View+ReadSize.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2031,7 +2034,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1530;
-				LastUpgradeCheck = 1640;
+				LastUpgradeCheck = 2600;
 				TargetAttributes = {
 					412A266B2AC03B2200F61456 = {
 						CreatedOnToolsVersion = 15.0;
@@ -2349,6 +2352,7 @@
 				410F41592DA80D7500DEE2F4 /* DeviceSettingItem.swift in Sources */,
 				41C19DCF2A4E09F9009883AB /* SelfSufficiencySettingsView.swift in Sources */,
 				41DD7F3A29C5B8940072CDE8 /* SolarPowerView.swift in Sources */,
+				416C66292EA7BAF40013FDE3 /* View+ReadSize.swift in Sources */,
 				41038F982E6C37C1008A74C6 /* ApproximationsBackgroundView.swift in Sources */,
 				4107446528CA1D76006D5D7D /* FlowingLine.swift in Sources */,
 				417AA21D2A1245C00073CD34 /* StatsTabViewModel.swift in Sources */,
@@ -2632,6 +2636,8 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "Energy Stats Phone Widgets/Energy Stats Phone WidgetsExtension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Energy Stats Phone Widgets/Info.plist";
@@ -2664,6 +2670,8 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "Energy Stats Phone Widgets/Energy Stats Phone WidgetsExtension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Energy Stats Phone Widgets/Info.plist";
@@ -2753,7 +2761,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 82;
+				CURRENT_PROJECT_VERSION = 83;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2776,11 +2784,12 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.105;
+				MARKETING_VERSION = 2.106;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -2821,7 +2830,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 82;
+				CURRENT_PROJECT_VERSION = 83;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2838,10 +2847,11 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.105;
+				MARKETING_VERSION = 2.106;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
@@ -2857,6 +2867,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_ASSET_PATHS = "\"Energy Stats/Preview Content\"";
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Energy-Stats-Info.plist";
@@ -2889,6 +2901,8 @@
 				CODE_SIGN_ENTITLEMENTS = "Energy Stats/Energy Stats.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Energy Stats/Preview Content\"";
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Energy-Stats-Info.plist";

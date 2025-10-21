@@ -114,9 +114,7 @@ struct ForecastView: View {
                         .offset(x: location, y: chartProxy.plotAreaSize.height * 0.07)
 
                     Text("now")
-                        .background(GeometryReader(content: { reader in
-                            Color.clear.onAppear { size = reader.size }.onChange(of: reader.size) { newValue in size = newValue }
-                        }))
+                        .readSize(into: $size)
                         .font(.caption2)
                         .foregroundStyle(Color.pink.opacity(0.5))
                         .offset(x: location - size.width / 2, y: 0)

@@ -75,13 +75,7 @@ struct LoadedPowerFlowView: View {
                     bottomFlowLines()
                     bottomTotals()
                 }
-                .background(
-                    Color.clear.onGeometryChange(for: CGSize.self) { proxy in
-                        proxy.size
-                    } action: {
-                        size = $0
-                    }
-                )
+                .readSize(into: $size)
             }
 
             inverterScheduleQuickLink()
@@ -332,3 +326,4 @@ extension UIWindowScene {
         }
     }
 }
+

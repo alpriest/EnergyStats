@@ -150,9 +150,7 @@ struct ParametersGraphView: View {
                     .background(Color.background.opacity(0.6))
                     .border(Color.gray)
                     .offset(x: min(location, furthestRight))
-                    .background(GeometryReader { reader in
-                        Color.clear.onAppear { captionBoxSize = reader.size }.onChange(of: reader.size) { newValue in captionBoxSize = newValue }
-                    })
+                    .readSize(into: $captionBoxSize)
                 }
             }
         }
