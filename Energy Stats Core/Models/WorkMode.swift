@@ -16,6 +16,7 @@ public enum WorkMode: String, CaseIterable, Codable, RawRepresentable, Describab
     case ForceDischarge
     case Invalid
     case PeakShaving
+    case Unsupported
 
     public var title: String {
         switch self {
@@ -31,7 +32,7 @@ public enum WorkMode: String, CaseIterable, Codable, RawRepresentable, Describab
             return "Force Discharge"
         case .PeakShaving:
             return "Peak Shaving"
-        case .Invalid:
+        case .Invalid, .Unsupported:
             return ""
         }
     }
@@ -48,9 +49,7 @@ public enum WorkMode: String, CaseIterable, Codable, RawRepresentable, Describab
             "ForceCharge"
         case .ForceDischarge:
             "ForceDischarge"
-        case .Invalid:
-            ""
-        case .PeakShaving:
+        case .Invalid, .PeakShaving, .Unsupported:
             ""
         }
     }
@@ -72,10 +71,16 @@ public enum WorkMode: String, CaseIterable, Codable, RawRepresentable, Describab
             Text("workmode.force_charge_mode.description")
         case .ForceDischarge:
             Text("workmode.forceDischarge.description")
-        case .Invalid:
+        case .Invalid, .Unsupported:
             EmptyView()
         case .PeakShaving:
             Text("workmode.peak_shaving.description")
         }
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let value = try? container.decode(String.self)
+        self = WorkMode(rawValue: value ?? "") ?? .Unsupported
     }
 }
