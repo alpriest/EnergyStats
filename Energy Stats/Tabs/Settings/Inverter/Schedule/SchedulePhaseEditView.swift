@@ -25,7 +25,7 @@ struct SchedulePhaseEditView: View {
     @State private var maxSOCError: LocalizedStringKey?
     private let showMaxSOC: Bool
     private let id: String
-    private let modes: [WorkMode]
+    private let modes: [String]
     private let onChange: (SchedulePhase) -> Void
     private let onDelete: (String) -> Void
 
@@ -54,17 +54,7 @@ struct SchedulePhaseEditView: View {
             self.maxSOC = ""
         }
 
-        if let deviceSN = configManager.selectedDeviceSN {
-            self.modes = WorkMode.values.filter {
-                if $0 == .PeakShaving {
-                    configManager.getDeviceSupports(capability: .peakShaving, deviceSN: deviceSN)
-                } else {
-                    true
-                }
-            }
-        } else {
-            self.modes = []
-        }
+        self.modes = configManager.workModes
 
         validate()
     }
@@ -81,7 +71,7 @@ struct SchedulePhaseEditView: View {
 
                     Picker("Work Mode", selection: $workMode) {
                         ForEach(modes, id: \.self) { mode in
-                            Text(mode.title)
+                            Text(WorkMode.title(for: mode))
                         }
                     }
                     .pickerStyle(.menu)
@@ -244,20 +234,20 @@ struct SchedulePhaseEditView: View {
 
     private func workModeDescription() -> LocalizedStringKey? {
         switch workMode {
-        case .SelfUse:
+        case WorkMode.SelfUse:
             "workmode.self_use_mode.description"
-        case .Feedin:
+        case WorkMode.Feedin:
             "workmode.feed_in_first_mode.description"
-        case .Backup:
+        case WorkMode.Backup:
             "workmode.backup_mode.description"
-        case .ForceCharge:
+        case WorkMode.ForceCharge:
             "workmode.force_charge_mode.description"
-        case .ForceDischarge:
+        case WorkMode.ForceDischarge:
             "workmode.forceDischarge.description"
-        case .Invalid:
-            nil
-        case .PeakShaving:
+        case WorkMode.PeakShaving:
             "workmode.peak_shaving.description"
+        default:
+            nil
         }
     }
 
@@ -304,12 +294,12 @@ struct SchedulePhaseEditView: View {
                 hour: 23,
                 minute: 30
             ),
-            mode: .ForceDischarge,
+            mode: "ForceDischarge",
             minSocOnGrid: 10,
             forceDischargePower: 3500,
             forceDischargeSOC: 20,
             maxSOC: 100,
-            color: Color.scheduleColor(named: .ForceDischarge)
+            color: Color.scheduleColor(named: "ForceDischarge")
         )!,
         configManager: ConfigManager.preview(),
         onChange: { print($0.id, " changed") },

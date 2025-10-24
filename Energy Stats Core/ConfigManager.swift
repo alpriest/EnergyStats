@@ -717,6 +717,11 @@ public class ConfigManager: ConfigManaging {
             ))
         }
     }
+    
+    public var workModes: [WorkMode] {
+        get { config.workModes }
+        set { config.workModes = newValue }
+    }
 }
 
 public enum BatteryResponseMapper {

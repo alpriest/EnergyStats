@@ -21,7 +21,7 @@ struct SchedulePhaseListItemView: View {
             VStack(alignment: .leading) {
                 (Text(phase.start.formatted(type: .start)) + Text(" - ") + Text(phase.end.formatted(type: .end))).bold()
 
-                (Text(phase.mode.title) + Text(extra(for: phase)))
+                (Text(WorkMode.title(for: phase.mode)) + Text(extra(for: phase)))
                     .foregroundStyle(Color.primary.opacity(0.5))
                     .font(.caption)
             }.frame(maxWidth: .infinity, alignment: .leading)
@@ -30,15 +30,15 @@ struct SchedulePhaseListItemView: View {
 
     private func extra(for phase: SchedulePhase) -> String {
         switch phase.mode {
-        case .ForceDischarge:
+        case "ForceDischarge":
             return " at \(phase.forceDischargePower)W down to \(phase.forceDischargeSOC)%"
-        case .ForceCharge:
+        case "ForceCharge":
             if let maxSOC = phase.maxSOC {
                 return " with \(maxSOC)% max SOC"
             } else {
                 return ""
             }
-        case .SelfUse:
+        case "SelfUse":
             var result = " with \(phase.minSocOnGrid)% min SOC"
 
             if let maxSOC = phase.maxSOC {
@@ -46,7 +46,7 @@ struct SchedulePhaseListItemView: View {
             }
 
             return result
-        case .Backup:
+        case "Backup":
             if let maxSOC = phase.maxSOC {
                 return " with \(maxSOC)% max SOC"
             } else {

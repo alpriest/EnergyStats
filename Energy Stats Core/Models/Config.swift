@@ -66,6 +66,7 @@ public protocol Config {
     var showInverterConsumption: Bool { get set }
     var showBatterySOCOnDailyStats: Bool { get set }
     var allowNegativeLoad: Bool { get set }
+    var workModes: [WorkMode] { get set }
 }
 
 public func DefaultParameterGroups() -> [ParameterGroup] {

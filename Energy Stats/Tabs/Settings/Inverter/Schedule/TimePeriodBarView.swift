@@ -67,7 +67,7 @@ extension Schedule {
                         hour: 2,
                         minute: 00
                     ),
-                    mode: .ForceCharge,
+                    mode: "ForceCharge",
                     minSocOnGrid: 100,
                     forceDischargePower: 0,
                     forceDischargeSOC: 100,
@@ -83,7 +83,7 @@ extension Schedule {
                         hour: 14,
                         minute: 30
                     ),
-                    mode: .ForceDischarge,
+                    mode: "ForceDischarge",
                     minSocOnGrid: 20,
                     forceDischargePower: 3500,
                     forceDischargeSOC: 20,
@@ -99,7 +99,7 @@ extension Schedule {
                         hour: 23,
                         minute: 30
                     ),
-                    mode: .SelfUse,
+                    mode: "SelfUse",
                     minSocOnGrid: 20,
                     forceDischargePower: 0,
                     forceDischargeSOC: 20,
@@ -115,7 +115,7 @@ extension Schedule {
                         hour: 2,
                         minute: 00
                     ),
-                    mode: .ForceCharge,
+                    mode: "ForceCharge",
                     minSocOnGrid: 100,
                     forceDischargePower: 0,
                     forceDischargeSOC: 100,
@@ -131,7 +131,7 @@ extension Schedule {
                         hour: 14,
                         minute: 30
                     ),
-                    mode: .ForceDischarge,
+                    mode: "ForceDischarge",
                     minSocOnGrid: 20,
                     forceDischargePower: 3500,
                     forceDischargeSOC: 20,
@@ -147,7 +147,7 @@ extension Schedule {
                         hour: 23,
                         minute: 30
                     ),
-                    mode: .SelfUse,
+                    mode: "SelfUse",
                     minSocOnGrid: 20,
                     forceDischargePower: 0,
                     forceDischargeSOC: 20,
@@ -163,7 +163,7 @@ extension Schedule {
                         hour: 2,
                         minute: 00
                     ),
-                    mode: .ForceCharge,
+                    mode: "ForceCharge",
                     minSocOnGrid: 100,
                     forceDischargePower: 0,
                     forceDischargeSOC: 100,

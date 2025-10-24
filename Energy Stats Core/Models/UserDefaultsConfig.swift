@@ -66,6 +66,7 @@ public class UserDefaultsConfig: Config {
         UserDefaults.shared.removeObject(forKey: "showInverterConsumption")
         UserDefaults.shared.removeObject(forKey: "showBatterySOCOnDailyStats")
         UserDefaults.shared.removeObject(forKey: "allowNegativeLoad")
+        UserDefaults.shared.removeObject(forKey: "workModes")
         UserDefaults.shared.synchronize()
     }
 
@@ -320,4 +321,7 @@ public class UserDefaultsConfig: Config {
     
     @UserDefaultsStoredBool(key: "allowNegativeLoad", defaultValue: false)
     public var allowNegativeLoad: Bool
+    
+    @UserDefaultsStoredCodable(key: "workModes", defaultValue: [])
+    public var workModes: [WorkMode]
 }

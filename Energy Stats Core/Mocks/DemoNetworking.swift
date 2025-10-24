@@ -260,7 +260,7 @@ class DemoAPI: FoxAPIServicing {
                     startMinute: 0,
                     endHour: 17,
                     endMinute: 0,
-                    workMode: .ForceCharge,
+                    workMode: "ForceCharge",
                     minSocOnGrid: 20,
                     fdSoc: 100,
                     fdPwr: 0,
@@ -272,7 +272,7 @@ class DemoAPI: FoxAPIServicing {
                     startMinute: 1,
                     endHour: 18,
                     endMinute: 30,
-                    workMode: .ForceDischarge,
+                    workMode: "ForceDischarge",
                     minSocOnGrid: 20,
                     fdSoc: 20,
                     fdPwr: 3500,
@@ -280,12 +280,10 @@ class DemoAPI: FoxAPIServicing {
                 )
             ],
             workmodes: [
-                WorkMode.ForceDischarge,
-                .PeakShaving,
-                .Feedin,
-                .Backup,
-                .SelfUse,
-                .ForceCharge
+                "SelfUse",
+                "Feedin",
+                "Backup",
+                "ForceCharge"
             ]
         )
     }
@@ -437,6 +435,7 @@ public class MockConfig: Config {
     public var showInverterConsumption: Bool = false
     public var showBatterySOCOnDailyStats: Bool = false
     public var allowNegativeLoad: Bool = false
+    public var workModes: [WorkMode] = []
 }
 
 public extension SolcastSite {

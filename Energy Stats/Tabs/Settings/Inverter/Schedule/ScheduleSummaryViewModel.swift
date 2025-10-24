@@ -11,7 +11,7 @@ import SwiftUI
 
 class ScheduleSummaryViewModel: ObservableObject, HasLoadState, HasAlertContent {
     let networking: Networking
-    let configManager: ConfigManaging
+    private var configManager: ConfigManaging
     let templateStore: TemplateStoring
     @Published var state: LoadState = .inactive
     @Published var templates: [ScheduleTemplate] = []
@@ -85,6 +85,7 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState, HasAlertContent 
             self.templates = self.templateStore.load()
             let scheduleResponse = try await networking.fetchCurrentSchedule(deviceSN: deviceSN)
             self.schedulerEnabled = scheduleResponse.enable.boolValue
+            self.configManager.workModes = scheduleResponse.workmodes
 
             self.schedule = Schedule(scheduleResponse: scheduleResponse)
             if let schedule, schedule.supportsMaxSOC() {
@@ -183,6 +184,6 @@ extension Schedule {
 
 private extension ScheduleResponse {
     func supportsPeakShaving() -> Bool {
-        workmodes.contains(where: { $0 == WorkMode.PeakShaving })
+        workmodes.contains(where: { $0 == "PeakShaving" })
     }
 }

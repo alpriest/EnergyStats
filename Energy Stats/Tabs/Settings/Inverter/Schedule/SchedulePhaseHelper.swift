@@ -12,7 +12,7 @@ import SwiftUI
 enum SchedulePhaseHelper {
     static func addNewTimePeriod(to schedule: Schedule, device: Device?, initialiseMaxSOC: Bool) -> Schedule {
         Schedule(
-            phases: (schedule.phases + [SchedulePhase(mode: .SelfUse, device: device, initialiseMaxSOC: initialiseMaxSOC)]).sorted { $0.start < $1.start }
+            phases: (schedule.phases + [SchedulePhase(mode: "SelfUse", device: device, initialiseMaxSOC: initialiseMaxSOC)]).sorted { $0.start < $1.start }
         )
     }
 

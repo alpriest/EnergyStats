@@ -77,7 +77,7 @@ class PreviewTemplateStore: TemplateStoring {
                         hour: 2,
                         minute: 00
                     ),
-                    mode: .ForceCharge,
+                    mode: "ForceCharge",
                     minSocOnGrid: 100,
                     forceDischargePower: 0,
                     forceDischargeSOC: 100,
@@ -93,7 +93,7 @@ class PreviewTemplateStore: TemplateStoring {
                         hour: 14,
                         minute: 30
                     ),
-                    mode: .ForceDischarge,
+                    mode: "ForceDischarge",
                     minSocOnGrid: 20,
                     forceDischargePower: 3500,
                     forceDischargeSOC: 20,
@@ -111,7 +111,7 @@ class PreviewTemplateStore: TemplateStoring {
                         hour: 2,
                         minute: 00
                     ),
-                    mode: .ForceCharge,
+                    mode: "ForceCharge",
                     minSocOnGrid: 100,
                     forceDischargePower: 0,
                     forceDischargeSOC: 100,
@@ -127,7 +127,7 @@ class PreviewTemplateStore: TemplateStoring {
                         hour: 14,
                         minute: 30
                     ),
-                    mode: .ForceDischarge,
+                    mode: "ForceDischarge",
                     minSocOnGrid: 20,
                     forceDischargePower: 3500,
                     forceDischargeSOC: 20,

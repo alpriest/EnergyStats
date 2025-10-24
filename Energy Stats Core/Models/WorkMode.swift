@@ -8,7 +8,90 @@
 import Foundation
 import SwiftUI
 
-public enum WorkMode: String, CaseIterable, Codable, RawRepresentable, Describable {
+public typealias WorkMode = String
+
+public extension WorkMode {
+    static var allCases: [WorkMode] {
+        [
+            SelfUse,
+            Feedin,
+            Backup,
+            ForceCharge,
+            ForceDischarge,
+            PeakShaving
+        ]
+    }
+    static var SelfUse = "SelfUse"
+    static var Feedin = "Feedin"
+    static var Backup = "Backup"
+    static var ForceCharge = "ForceCharge"
+    static var ForceDischarge = "ForceDischarge"
+    static var PeakShaving = "PeakShaving"
+    
+    static func title(for workmode: WorkMode) -> String {
+        switch workmode {
+        case "SelfUse":
+            return "Self Use"
+        case "Feedin":
+            return "Feed In First"
+        case "Backup":
+            return "Backup"
+        case "ForceCharge":
+            return "Force Charge"
+        case "ForceDischarge":
+            return "Force Discharge"
+        case "PeakShaving":
+            return "Peak Shaving"
+        default:
+            return workmode
+        }
+    }
+    
+    static func networkTitle(for workMode: WorkMode) -> String {
+        switch workMode {
+        case .SelfUse:
+            "SelfUse"
+        case .Feedin:
+            "Feedin"
+        case .Backup:
+            "Backup"
+        case .ForceCharge:
+            "ForceCharge"
+        case .ForceDischarge:
+            "ForceDischarge"
+        default:
+            workMode
+        }
+    }
+}
+
+extension WorkMode {    
+    public var title: String {
+        WorkMode.title(for: self)
+    }
+    
+    @ViewBuilder
+    public var subtitle: some View {
+        switch self {
+        case "SelfUse":
+            Text("workmode.self_use_mode.description")
+        case "Feedin":
+            Text("workmode.feed_in_first_mode.description")
+        case "Backup":
+            Text("workmode.backup_mode.description")
+        case "ForceCharge":
+            Text("workmode.force_charge_mode.description")
+        case "ForceDischarge":
+            Text("workmode.forceDischarge.description")
+        case "PeakShaving":
+            Text("workmode.peak_shaving.description")
+        default:
+            EmptyView()
+        }
+    }
+}
+
+public enum UNUSED_WorkMode: String, Codable, RawRepresentable {
     case SelfUse
     case Feedin
     case Backup
@@ -17,25 +100,6 @@ public enum WorkMode: String, CaseIterable, Codable, RawRepresentable, Describab
     case Invalid
     case PeakShaving
     case Unsupported
-
-    public var title: String {
-        switch self {
-        case .SelfUse:
-            return "Self Use"
-        case .Feedin:
-            return "Feed In First"
-        case .Backup:
-            return "Backup"
-        case .ForceCharge:
-            return "Force Charge"
-        case .ForceDischarge:
-            return "Force Discharge"
-        case .PeakShaving:
-            return "Peak Shaving"
-        case .Invalid, .Unsupported:
-            return ""
-        }
-    }
 
     public var networkTitle: String {
         switch self {
@@ -52,10 +116,6 @@ public enum WorkMode: String, CaseIterable, Codable, RawRepresentable, Describab
         case .Invalid, .PeakShaving, .Unsupported:
             ""
         }
-    }
-
-    public static var values: [WorkMode] {
-        WorkMode.allCases.filter { $0.title != "" }
     }
 
     @ViewBuilder
@@ -81,6 +141,7 @@ public enum WorkMode: String, CaseIterable, Codable, RawRepresentable, Describab
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         let value = try? container.decode(String.self)
-        self = WorkMode(rawValue: value ?? "") ?? .Unsupported
+        self = UNUSED_WorkMode(rawValue: value ?? "") ?? .Unsupported
     }
 }
+

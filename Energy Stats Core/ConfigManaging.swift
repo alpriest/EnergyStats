@@ -78,6 +78,7 @@ public protocol ConfigManaging: FinancialConfigManager, SolcastConfigManager, Ba
     func setDeviceSupports(capability: DeviceCapability, deviceSN: String)
     var showInverterConsumption: Bool { get set }
     var showBatterySOCOnDailyStats: Bool { get set }
+    var workModes: [WorkMode] { get set }
 }
 
 public enum DeviceCapability {

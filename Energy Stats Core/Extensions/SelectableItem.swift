@@ -7,21 +7,12 @@
 
 import SwiftUI
 
-public protocol Describable {
-    associatedtype ExtraContent: View
-
-    var title: String { get }
-    var subtitle: ExtraContent { get }
-}
-
-public typealias Selectable = Describable & Hashable
-
-public struct SelectableItem<T: Selectable>: Identifiable, Equatable, Hashable {
-    public let item: T
+public struct SelectableItem: Identifiable, Equatable, Hashable {
+    public let item: WorkMode
     public var isSelected: Bool
     public var id: String { item.title }
 
-    public init(_ item: T, isSelected: Bool = false) {
+    public init(_ item: WorkMode, isSelected: Bool = false) {
         self.item = item
         self.isSelected = isSelected
     }

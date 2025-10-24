@@ -26,7 +26,7 @@ struct ChangeWorkModeIntent: AppIntent {
         try await services.network.setDeviceSettingsItem(
             deviceSN: services.device.deviceSN,
             item: DeviceSettingsItem.workMode,
-            value: workMode.asWorkMode().networkTitle
+            value: WorkMode.networkTitle(for: workMode.asWorkMode())
         )
 
         return .result(value: true)

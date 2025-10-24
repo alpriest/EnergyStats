@@ -50,6 +50,7 @@ struct BatterySettingsView: View {
                                             isEditingCapacity = false
                                             focused = false
                                         }.buttonStyle(.bordered)
+
                                         Button("Cancel") {
                                             viewModel.revertBatteryCapacityEdits()
                                             isEditingCapacity = false

@@ -23,12 +23,12 @@ public extension Color {
     static var label: Color { Color(uiColor: .label) }
     #endif
 
-    static func scheduleColor(named name: WorkMode) -> Color {
-        let mapping: [WorkMode: Color] = [
-            .Feedin: Color.linesPositive,
-            .ForceCharge: Color.linesNegative,
-            .ForceDischarge: Color.linesPositive,
-            .SelfUse: Color.paleGray
+    static func scheduleColor(named name: String) -> Color {
+        let mapping: [String: Color] = [
+            "Feedin": Color.linesPositive,
+            "ForceCharge": Color.linesNegative,
+            "ForceDischarge": Color.linesPositive,
+            "SelfUse": Color.paleGray
         ]
 
         return mapping[name] ?? Color.black

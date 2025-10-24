@@ -12,7 +12,7 @@ class InverterWorkModeViewModel: ObservableObject {
     private let networking: Networking
     private let config: ConfigManaging
     @Published var state: LoadState = .inactive
-    @Published var items: [SelectableItem<WorkMode>] = []
+    @Published var items: [SelectableItem] = []
     @Published var alertContent: AlertContent?
 
     init(networking: Networking, config: ConfigManaging) {
@@ -30,8 +30,8 @@ class InverterWorkModeViewModel: ObservableObject {
 
             do {
                 let response = try await networking.fetchDeviceSettingsItem(deviceSN: deviceSN, item: .workMode)
-                let workMode = WorkMode(rawValue: response.value)
-                self.items = [WorkMode.SelfUse, WorkMode.Feedin, WorkMode.Backup, WorkMode.ForceCharge, WorkMode.ForceDischarge].map { SelectableItem($0, isSelected: $0 == workMode) }
+                let workMode = response.value
+                self.items = config.workModes.map { SelectableItem($0, isSelected: $0 == workMode) }
 
                 state = .inactive
             } catch {
@@ -49,7 +49,7 @@ class InverterWorkModeViewModel: ObservableObject {
             state = .active(.saving)
 
             do {
-                try await networking.setDeviceSettingsItem(deviceSN: deviceSN, item: .workMode, value: mode.networkTitle)
+                try await networking.setDeviceSettingsItem(deviceSN: deviceSN, item: .workMode, value: WorkMode.networkTitle(for: mode))
                 alertContent = AlertContent(title: "Success", message: "inverter_settings_saved")
                 state = .inactive
             } catch let NetworkError.foxServerError(code, _) where code == 44096 {
@@ -61,7 +61,7 @@ class InverterWorkModeViewModel: ObservableObject {
         }
     }
 
-    func toggle(updating: SelectableItem<WorkMode>) {
+    func toggle(updating: SelectableItem) {
         items = items.map { existingVariable in
             var existingVariable = existingVariable
 

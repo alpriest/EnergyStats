@@ -63,7 +63,7 @@ class EditScheduleViewModel: ObservableObject, HasLoadState, HasAlertContent {
 
         schedule = SchedulePhaseHelper.appendPhasesInGaps(
             to: schedule,
-            mode: .SelfUse,
+            mode: WorkMode.SelfUse,
             device: device,
             initialiseMaxSOC: configManager.getDeviceSupports(capability: .scheduleMaxSOC, deviceSN: device.deviceSN)
         )

@@ -278,7 +278,7 @@ class SettingsTabViewModel: ObservableObject {
         if let int = Int(batteryCapacity), int > 0 {
             config.batteryCapacity = batteryCapacity
         } else {
-            batteryCapacity = config.batteryCapacity
+            revertBatteryCapacityEdits()
             showAlert = true
         }
     }

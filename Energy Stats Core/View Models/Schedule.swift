@@ -47,7 +47,7 @@ public extension ScheduleTemplate {
                     hour: 2,
                     minute: 00
                 ),
-                mode: .ForceCharge,
+                mode: "ForceCharge",
                 minSocOnGrid: 100,
                 forceDischargePower: 0,
                 forceDischargeSOC: 100,
@@ -63,7 +63,7 @@ public extension ScheduleTemplate {
                     hour: 14,
                     minute: 30
                 ),
-                mode: .ForceDischarge,
+                mode: "ForceDischarge",
                 minSocOnGrid: 20,
                 forceDischargePower: 3500,
                 forceDischargeSOC: 20,
@@ -136,7 +136,7 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {
         color: Color
     ) {
         guard start < end else { return nil }
-        if mode == .Invalid { return nil }
+        if mode == "Invalid" { return nil }
 
         self.id = id ?? UUID().uuidString
         self.start = start
@@ -149,7 +149,7 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {
         self.maxSOC = maxSOC
     }
 
-    public init(mode: WorkMode, device: Device?, initialiseMaxSOC: Bool) {
+    public init(mode: String, device: Device?, initialiseMaxSOC: Bool) {
         self.id = UUID().uuidString
         self.start = Date().toTime()
         self.end = Date().toTime().adding(minutes: 1)
@@ -178,7 +178,12 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {
         self.id = try container.decode(String.self, forKey: .id)
         self.start = try container.decode(Time.self, forKey: .start)
         self.end = try container.decode(Time.self, forKey: .end)
-        self.mode = try container.decode(WorkMode.self, forKey: .mode)
+        // Migrate users from WorkMode to String
+        if let mode = try? container.decode(UNUSED_WorkMode.self, forKey: .mode) {
+            self.mode = mode.networkTitle
+        } else {
+            self.mode = try container.decode(String.self, forKey: .mode)
+        }
         self.minSocOnGrid = try container.decode(Int.self, forKey: .minSocOnGrid)
         self.forceDischargePower = try container.decode(Int.self, forKey: .forceDischargePower)
         self.forceDischargeSOC = try container.decode(Int.self, forKey: .forceDischargeSOC)

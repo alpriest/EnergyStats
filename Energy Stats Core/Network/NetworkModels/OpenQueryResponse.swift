@@ -266,7 +266,7 @@ public struct SchedulePhaseNetworkModel: Codable {
     public let startMinute: Int
     public let endHour: Int
     public let endMinute: Int
-    public let workMode: WorkMode
+    public let workMode: String
     public let minSocOnGrid: Int
     public let fdSoc: Int
     public let fdPwr: Int?
@@ -278,7 +278,7 @@ public struct SchedulePhaseNetworkModel: Codable {
         startMinute: Int,
         endHour: Int,
         endMinute: Int,
-        workMode: WorkMode,
+        workMode: String,
         minSocOnGrid: Int,
         fdSoc: Int,
         fdPwr: Int?,
@@ -300,7 +300,7 @@ public struct SchedulePhaseNetworkModel: Codable {
 public struct ScheduleResponse: Decodable {
     public let enable: Int
     public let groups: [SchedulePhaseNetworkModel]
-    public let workmodes: [WorkMode]
+    public let workmodes: [String]
 
     enum CodingKeys: CodingKey {
         case enable
@@ -323,10 +323,10 @@ public struct ScheduleResponse: Decodable {
 
         let properties = try container.nestedContainer(keyedBy: PropertiesCodingKeys.self, forKey: .properties)
         let workmodeContainer = try properties.nestedContainer(keyedBy: WorkmodeCodingKeys.self, forKey: .workmode)
-        self.workmodes = try workmodeContainer.decode([WorkMode].self, forKey: .enumList)
+        self.workmodes = try workmodeContainer.decode([String].self, forKey: .enumList)
     }
 
-    public init(enable: Int, groups: [SchedulePhaseNetworkModel], workmodes: [WorkMode]) {
+    public init(enable: Int, groups: [SchedulePhaseNetworkModel], workmodes: [String]) {
         self.enable = enable
         self.groups = groups
         self.workmodes = workmodes
