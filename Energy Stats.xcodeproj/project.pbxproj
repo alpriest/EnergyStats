@@ -154,6 +154,7 @@
 		4156A22F2CB6770A00099A6A /* SolcastErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156A22E2CB6770700099A6A /* SolcastErrorAlertView.swift */; };
 		4156A2312CB6773300099A6A /* ErrorAlertViewManufacturing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156A2302CB6772D00099A6A /* ErrorAlertViewManufacturing.swift */; };
 		4156A2332CB67EF500099A6A /* UserAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156A2322CB67EF400099A6A /* UserAgent.swift */; };
+		4156B3512EACD56900C589BB /* NumberRollerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156B3502EACD56600C589BB /* NumberRollerView.swift */; };
 		4156E7B72B9C839F0000E807 /* PowerStationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156E7B62B9C839F0000E807 /* PowerStationSettingsView.swift */; };
 		415AFA832C597DD800691852 /* BannerAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415AFA822C597DD800691852 /* BannerAlertManager.swift */; };
 		415F0BD72D9C5E57003EB760 /* BatteryFirmwareVersionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415F0BD62D9C5E57003EB760 /* BatteryFirmwareVersionsView.swift */; };
@@ -670,6 +671,7 @@
 		4156A22E2CB6770700099A6A /* SolcastErrorAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolcastErrorAlertView.swift; sourceTree = "<group>"; };
 		4156A2302CB6772D00099A6A /* ErrorAlertViewManufacturing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertViewManufacturing.swift; sourceTree = "<group>"; };
 		4156A2322CB67EF400099A6A /* UserAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgent.swift; sourceTree = "<group>"; };
+		4156B3502EACD56600C589BB /* NumberRollerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberRollerView.swift; sourceTree = "<group>"; };
 		4156E7B62B9C839F0000E807 /* PowerStationSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerStationSettingsView.swift; sourceTree = "<group>"; };
 		415AFA822C597DD800691852 /* BannerAlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAlertManager.swift; sourceTree = "<group>"; };
 		415F0BD62D9C5E57003EB760 /* BatteryFirmwareVersionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryFirmwareVersionsView.swift; sourceTree = "<group>"; };
@@ -1007,6 +1009,7 @@
 		4103D1E629DB6D2C001B0BC8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				4156B3502EACD56600C589BB /* NumberRollerView.swift */,
 				416AE44C2A821E4F003D0122 /* AlertContent.swift */,
 				41495F372B211A75004A51C1 /* AlertContentView.swift */,
 				418685D42AFE700100355B6D /* AnimatedNumber.swift */,
@@ -2394,6 +2397,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				41DC515A2AE2E9DC00FD348B /* NetworkValueCleaner.swift in Sources */,
+				4156B3512EACD56900C589BB /* NumberRollerView.swift in Sources */,
 				41757BBC2A90A05E00573FB4 /* AmountType.swift in Sources */,
 				41D759FD2B5B0E37002C43A7 /* FoxAPIService+OpenAPI+Schedule.swift in Sources */,
 				4109140229DB7AE700133CC5 /* BatteryViewModel.swift in Sources */,

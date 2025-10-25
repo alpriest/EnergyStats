@@ -101,23 +101,19 @@ struct SummaryTabView: View {
     @ViewBuilder
     private func energySummaryRow(title: LocalizedStringKey, amount: Double?) -> some View {
         summaryRow(title: title, amount: amount) {
-            EnergyText(amount: $0, appSettings: appSettings, type: .default, decimalPlaceOverride: 0)
-                .font(.title2)
-                .monospacedDigit()
+            $0.withUnit(appSettings, decimalPlaceOverride: 0)
         }
     }
 
     @ViewBuilder
     private func moneySummaryRow(title: LocalizedStringKey, amount: Double?) -> some View {
         summaryRow(title: title, amount: amount) {
-            Text(FinanceAmount(title: .total, accessibilityKey: .totalIncomeToday, amount: $0).formattedAmount(viewModel.currencySymbol))
-                .font(.title2)
-                .monospacedDigit()
+            FinanceAmount(title: .total, accessibilityKey: .totalIncomeToday, amount: $0).formattedAmount(viewModel.currencySymbol)
         }
     }
 
     @ViewBuilder
-    private func summaryRow(title: LocalizedStringKey, amount: Double?, text: @escaping (Double) -> some View) -> some View {
+    private func summaryRow(title: LocalizedStringKey, amount: Double?, text: @escaping (Double) -> String) -> some View {
         if let amount {
             HStack {
                 Text(title)
@@ -125,9 +121,7 @@ struct SummaryTabView: View {
 
                 Spacer()
 
-                AnimatedNumber(target: amount) {
-                    text($0)
-                }
+                NumberRollerView(text: text(amount))
             }
         }
     }
