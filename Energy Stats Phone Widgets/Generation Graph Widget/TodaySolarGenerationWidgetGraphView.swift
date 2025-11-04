@@ -31,8 +31,8 @@ struct TodaySolarGenerationWidgetGraphView: View {
 
                     Chart(Array(amounts.enumerated()), id: \.offset) {
                         LineMark(
-                            x: .value("hour", $0.0),
-                            y: .value("kWh", $0.1)
+                            x: .value("hour", $0.offset),
+                            y: .value("kWh", $0.element)
                         )
                         .lineStyle(StrokeStyle(lineWidth: 1))
                         .foregroundStyle(type.colour)

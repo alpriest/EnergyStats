@@ -1185,14 +1185,14 @@
 		412A266F2AC03B2300F61456 /* Energy Stats Phone Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				41A715912BDFCA8B00560628 /* Energy Stats Phone WidgetsExtension.entitlements */,
+				412A26762AC03B2400F61456 /* Info.plist */,
+				412A26702AC03B2300F61456 /* Energy_Stats_WidgetsBundle.swift */,
+				412A26742AC03B2400F61456 /* Assets.xcassets */,
+				41463D902AC44C7C00B2EB25 /* Localizable.xcstrings */,
+				41F359692CB9682D002DC9F4 /* Battery Widget */,
 				413715B52E200DE900505496 /* Generation Graph Widget */,
 				413715B42E200DC200505496 /* Generation Stats Widget */,
-				412A26742AC03B2400F61456 /* Assets.xcassets */,
-				41F359692CB9682D002DC9F4 /* Battery Widget */,
-				41A715912BDFCA8B00560628 /* Energy Stats Phone WidgetsExtension.entitlements */,
-				412A26702AC03B2300F61456 /* Energy_Stats_WidgetsBundle.swift */,
-				412A26762AC03B2400F61456 /* Info.plist */,
-				41463D902AC44C7C00B2EB25 /* Localizable.xcstrings */,
 				41F3596A2CB96833002DC9F4 /* Today Stats Widget */,
 			);
 			path = "Energy Stats Phone Widgets";
