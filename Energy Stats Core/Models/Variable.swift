@@ -51,6 +51,13 @@ public struct Variable: Codable, Equatable, Hashable {
     public static var solcastPredictionVariable: Variable {
         Variable(name: String(key: .solcastPrediction), variable: "solcast_prediction", unit: "kW")
     }
+    
+    public func fuzzyNameMatches(other: String) -> Bool {
+        // Systems with multiple batteries can return the raw variable name with a numbering appended
+        return "\(variable)_1" == other ||
+                "\(variable)_2" == other ||
+                "\(variable)_3" == other
+    }
 }
 
 public extension Variable {

@@ -178,7 +178,7 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {
         self.id = try container.decode(String.self, forKey: .id)
         self.start = try container.decode(Time.self, forKey: .start)
         self.end = try container.decode(Time.self, forKey: .end)
-        // Migrate users from WorkMode to String
+        // Migrate users from UNUSED_WorkMode to String -- written Nov 2025
         if let mode = try? container.decode(UNUSED_WorkMode.self, forKey: .mode) {
             self.mode = mode.networkTitle
         } else {

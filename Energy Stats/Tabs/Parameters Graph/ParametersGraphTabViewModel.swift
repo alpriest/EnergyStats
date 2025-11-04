@@ -169,7 +169,7 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
             let endDate = Calendar.current.date(byAdding: .day, value: 1, to: startDate) ?? startDate
             let raw = try await networking.fetchHistory(deviceSN: currentDevice.deviceSN, variables: rawGraphVariables.map { $0.variable }, start: startDate, end: endDate)
             let rawGraphValues: [ParameterGraphValue] = raw.datas.flatMap { response -> [ParameterGraphValue] in
-                guard let rawVariable = configManager.variables.first(where: { $0.variable == response.variable }) else { return [] }
+                guard let rawVariable = configManager.variables.first(where: { $0.fuzzyNameMatches(other: response.variable) }) else { return [] }
 
                 return response.data.compactMap {
                     ParameterGraphValue(date: $0.time, value: $0.value, variable: rawVariable)
