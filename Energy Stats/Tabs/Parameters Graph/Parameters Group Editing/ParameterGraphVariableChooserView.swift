@@ -13,6 +13,7 @@ struct ParameterGraphVariableChooserView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var editMode = EditMode.inactive
     @State private var groupName = ""
+    @State private var showAllParameters = false
 
     var body: some View {
         NavigationView {
@@ -39,13 +40,29 @@ struct ParameterGraphVariableChooserView: View {
                             }
                         }
                     } header: {
-                        Text("Groups")
+                        VStack(alignment: .leading) {
+                            Text("Select a group below to focus on commonly used parameters, or create your own using the Manage groups button.")
+                            
+                            Text("Groups")
+                                .padding(.top)
+                        }
                     }
 
                     Section {
-                        ParameterVariableListView(variables: viewModel.variables, onTap: viewModel.toggle)
+                        ParameterVariableListView(
+                            variables: viewModel.variables.filter { showAllParameters || $0.isSelected },
+                            onTap: viewModel.toggle
+                        )
                     } header: {
-                        Text("Parameters")
+                        HStack {
+                            Text("Parameters")
+                            Spacer()
+                            Button {
+                                showAllParameters.toggle()
+                            } label: {
+                                Text(showAllParameters ? "Show only selected" : "Show all")
+                            }
+                        }
                     } footer: {
                         FindOutMoreView(urlString: "https://github.com/TonyM1958/HA-FoxESS-Modbus/wiki/Fox-ESS-Cloud#search-parameters")
                     }
@@ -63,7 +80,7 @@ struct ParameterGraphVariableChooserView: View {
             .navigationTitle(.parameters)
             .toolbar { ToolbarItem(placement: .navigationBarTrailing) {
                 NavigationLink(destination: { ParameterVariableGroupEditorView(viewModel: ParameterVariableGroupEditorViewModel(configManager: viewModel.configManager)) },
-                               label: { Text("Edit groups") })
+                               label: { Text("Manage groups") })
             } }
         }
     }

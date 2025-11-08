@@ -46,11 +46,11 @@ class ParameterGraphVariableChooserViewModel: ObservableObject {
         onApply(variables)
     }
 
-    static let DefaultGraphVariables = ["generationPower",
-                                        "batChargePower",
-                                        "batDischargePower",
-                                        "feedinPower",
-                                        "gridConsumptionPower"]
+    static let DefaultGraphVariables = ["invBatPower",
+                                        "meterPower",
+                                        "loadsPower",
+                                        "pvPower",
+                                        "SoC"]
 
     func chooseDefaultVariables() {
         select(just: Self.DefaultGraphVariables)
