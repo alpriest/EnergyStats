@@ -77,6 +77,7 @@
 		411B302E2AEAE0DD006A6C02 /* FoxEssCloudParseStrategyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411B302D2AEAE0DD006A6C02 /* FoxEssCloudParseStrategyTests.swift */; };
 		411DF2742AFD404E00CEEB23 /* SolarForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411DF2732AFD404E00CEEB23 /* SolarForecastView.swift */; };
 		411F46062E13B678005992C8 /* IconScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411F46052E13B678005992C8 /* IconScale.swift */; };
+		412018062EC0E0C6007D6643 /* GraphColoursSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412018052EC0E0C6007D6643 /* GraphColoursSettingsView.swift */; };
 		412087FB2BF5DDBE00E4899E /* SwiftData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 412087F92BF5DDA400E4899E /* SwiftData.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		41229CBD2BE1217600CFA636 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41229CBC2BE1217600CFA636 /* ContentViewModel.swift */; };
 		412790FF28E1FB9200D5F993 /* UserManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412790FE28E1FB9200D5F993 /* UserManagerTests.swift */; };
@@ -591,6 +592,7 @@
 		411B302D2AEAE0DD006A6C02 /* FoxEssCloudParseStrategyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoxEssCloudParseStrategyTests.swift; sourceTree = "<group>"; };
 		411DF2732AFD404E00CEEB23 /* SolarForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarForecastView.swift; sourceTree = "<group>"; };
 		411F46052E13B678005992C8 /* IconScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconScale.swift; sourceTree = "<group>"; };
+		412018052EC0E0C6007D6643 /* GraphColoursSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphColoursSettingsView.swift; sourceTree = "<group>"; };
 		412087F92BF5DDA400E4899E /* SwiftData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftData.framework; path = System/Library/Frameworks/SwiftData.framework; sourceTree = SDKROOT; };
 		41229CBC2BE1217600CFA636 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		412790FE28E1FB9200D5F993 /* UserManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManagerTests.swift; sourceTree = "<group>"; };
@@ -1416,6 +1418,7 @@
 				41EB28022B8E634F00F6127F /* SolarStringsSettingsView.swift */,
 				4132086F2B9E3BC400A31873 /* DataSettingsView.swift */,
 				41EB65F82E05BB7400F53573 /* FactoryResetAppSettingsView.swift */,
+				412018052EC0E0C6007D6643 /* GraphColoursSettingsView.swift */,
 			);
 			path = "Settings Page";
 			sourceTree = "<group>";
@@ -2261,6 +2264,7 @@
 				4171854C2A01033700D18CDD /* ParameterGraphVariablesToggles.swift in Sources */,
 				41C0923D2B210255001D1E22 /* ScheduleDetailView.swift in Sources */,
 				41A263222B6AEE9F0027E52A /* ConfigureAPIKeyView.swift in Sources */,
+				412018062EC0E0C6007D6643 /* GraphColoursSettingsView.swift in Sources */,
 				4134EE642D37CB8200291F15 /* ExportParameterDataIntent.swift in Sources */,
 				41E12E882CC666C9001F3839 /* ServiceFactory.swift in Sources */,
 				419092212B1DBF2B0017CB65 /* ScheduleSummaryView.swift in Sources */,

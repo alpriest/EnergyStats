@@ -10,7 +10,7 @@ import Foundation
 
 class InverterWorkModeViewModel: ObservableObject {
     private let networking: Networking
-    private let config: ConfigManaging
+    private var config: ConfigManaging
     @Published var state: LoadState = .inactive
     @Published var items: [SelectableItem] = []
     @Published var alertContent: AlertContent?
@@ -24,13 +24,16 @@ class InverterWorkModeViewModel: ObservableObject {
 
     func load() {
         Task { @MainActor in
-            guard state == .inactive else { return }
+            guard !state.isActive else { return }
             guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
             state = .active(.loading)
 
             do {
                 let response = try await networking.fetchDeviceSettingsItem(deviceSN: deviceSN, item: .workMode)
                 let workMode = response.value
+                if config.workModes.count == 0 {
+                    config.workModes = try await fetchWorkmodes(deviceSN: deviceSN)
+                }
                 self.items = config.workModes.map { SelectableItem($0, isSelected: $0 == workMode) }
 
                 state = .inactive
@@ -38,6 +41,11 @@ class InverterWorkModeViewModel: ObservableObject {
                 state = .error(error, "Could not load work mode")
             }
         }
+    }
+
+    private func fetchWorkmodes(deviceSN: String) async throws -> [String] {
+        let scheduleResponse = try await networking.fetchCurrentSchedule(deviceSN: deviceSN)
+        return scheduleResponse.workmodes
     }
 
     func save() {

@@ -85,6 +85,12 @@ struct DisplaySettingsView: View {
                     Text("System").tag(ForcedColorScheme.auto)
                 }.pickerStyle(.segmented)
             }
+            
+//            NavigationLink {
+//                GraphColoursSettingsView(viewModel: GraphColoursSettingsViewModel(configManager: configManager))
+//            } label: {
+//                Text("Graph colours")
+//            }
 
         } header: {
             Text("Display")
@@ -122,14 +128,16 @@ struct DisplaySettingsView: View {
 #if DEBUG
 struct DisplaySettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        Form {
-            DisplaySettingsView(
-                viewModel: SettingsTabViewModel(
-                    userManager: .preview(),
-                    config: ConfigManager.preview(),
-                    networking: NetworkService.preview()),
-                configManager: ConfigManager.preview(),
-                solarService: { DemoSolcast() })
+        NavigationStack {
+            Form {
+                DisplaySettingsView(
+                    viewModel: SettingsTabViewModel(
+                        userManager: .preview(),
+                        config: ConfigManager.preview(),
+                        networking: NetworkService.preview()),
+                    configManager: ConfigManager.preview(),
+                    solarService: { DemoSolcast() })
+            }
         }
     }
 }

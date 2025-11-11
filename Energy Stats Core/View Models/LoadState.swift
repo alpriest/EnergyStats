@@ -49,6 +49,15 @@ public enum LoadState: Equatable {
             false
         }
     }
+    
+    public var isActive: Bool {
+        switch self {
+        case .active:
+            true
+        default:
+            false
+        }
+    }
 }
 
 public struct LoadingView: View {

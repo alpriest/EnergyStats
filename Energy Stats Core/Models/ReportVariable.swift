@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public enum ReportVariable: String, RawRepresentable {
+public enum ReportVariable: String, RawRepresentable, CaseIterable {
     case feedIn
     case generation
     case gridConsumption
