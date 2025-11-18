@@ -248,6 +248,7 @@
 		419CCB542933BABF00882649 /* ErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419CCB532933BABF00882649 /* ErrorAlertView.swift */; };
 		419DFA862A12930E0067313A /* StatsGraphHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419DFA842A1292380067313A /* StatsGraphHeaderView.swift */; };
 		419DFA882A12A6DF0067313A /* StatsDatePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419DFA872A12A6DF0067313A /* StatsDatePickerViewModel.swift */; };
+		419E5D832ECCE16D00CE67B4 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 419E5D822ECCE16D00CE67B4 /* FirebasePerformance */; };
 		41A25D3D28CA5CDF00315714 /* ParametersGraphTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A25D3C28CA5CDF00315714 /* ParametersGraphTabView.swift */; };
 		41A25D3F28CA5CFB00315714 /* ParametersGraphTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A25D3E28CA5CFB00315714 /* ParametersGraphTabViewModel.swift */; };
 		41A263222B6AEE9F0027E52A /* ConfigureAPIKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A263212B6AEE9F0027E52A /* ConfigureAPIKeyView.swift */; };
@@ -947,6 +948,7 @@
 				41CA35762AA8C52100D45734 /* OrderedCollections in Frameworks */,
 				41A95B9A29DB3F6A00A35169 /* Energy_Stats_Core.framework in Frameworks */,
 				41FBF4002DAA574D00EBD4D5 /* PulseUI in Frameworks */,
+				419E5D832ECCE16D00CE67B4 /* FirebasePerformance in Frameworks */,
 				41F80BAF2CE2AE3100C6776B /* FirebaseInAppMessaging-Beta in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1927,6 +1929,7 @@
 				41F80BB02CE2AEC100C6776B /* FirebaseAnalyticsWithoutAdIdSupport */,
 				41FBF3FD2DAA574D00EBD4D5 /* Pulse */,
 				41FBF3FF2DAA574D00EBD4D5 /* PulseUI */,
+				419E5D822ECCE16D00CE67B4 /* FirebasePerformance */,
 			);
 			productName = "PV Stats";
 			productReference = 4140144A28C70B3200EA5BA1 /* Energy Stats.app */;
@@ -3361,6 +3364,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 418199C82A4035F40001B5D4 /* XCRemoteSwiftPackageReference "MarkdownUI" */;
 			productName = MarkdownUI;
+		};
+		419E5D822ECCE16D00CE67B4 /* FirebasePerformance */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 41F80BAD2CE2AE3100C6776B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebasePerformance;
 		};
 		41BF88AA2E2B993A00AB5E9D /* OHHTTPStubs */ = {
 			isa = XCSwiftPackageProductDependency;
