@@ -14,7 +14,7 @@ struct HowToObtainAPIKeyView: View {
                 .padding(.bottom, 8)
 
             StepView(text: "Login at https://www.foxesscloud.com/", style: .circle(1))
-            Text(DIsp)
+            Text("** Do not use the V2 website yet.**")
             StepView(text: "Click the person icon top-right", style: .circle(2))
             StepView(text: "Click the User Profile menu option", style: .circle(3))
             StepView(text: "Click API management", style: .circle(4))

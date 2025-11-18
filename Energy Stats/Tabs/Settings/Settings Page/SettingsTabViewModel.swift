@@ -202,6 +202,12 @@ class SettingsTabViewModel: ObservableObject {
             config.allowNegativeLoad = allowNegativeLoad
         }
     }
+    
+    @Published var currencySymbol: String {
+        didSet {
+            config.currencySymbol = currencySymbol
+        }
+    }
 
     private(set) var config: ConfigManaging
     private let userManager: UserManager
@@ -246,6 +252,7 @@ class SettingsTabViewModel: ObservableObject {
         showInverterConsumption = config.showInverterConsumption
         showBatterySOCOnDailyStats = config.showBatterySOCOnDailyStats
         allowNegativeLoad = config.allowNegativeLoad
+        currencySymbol = config.currencySymbol
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }

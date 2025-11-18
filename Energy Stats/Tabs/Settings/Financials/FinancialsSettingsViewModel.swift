@@ -43,12 +43,6 @@ class FinancialsSettingsViewModel: ObservableObject {
         }
     }
 
-    @Published var currencySymbol: String {
-        didSet {
-            configManager.currencySymbol = currencySymbol
-        }
-    }
-
     private(set) var configManager: ConfigManaging
 
     init(configManager: ConfigManaging) {
@@ -57,7 +51,6 @@ class FinancialsSettingsViewModel: ObservableObject {
         showFinancialSummaryOnFlowPage = configManager.showFinancialSummaryOnFlowPage
         energyStatsFeedInUnitPrice = configManager.feedInUnitPrice.roundedToString(decimalPlaces: 3)
         energyStatsGridImportUnitPrice = configManager.gridImportUnitPrice.roundedToString(decimalPlaces: 3)
-        currencySymbol = configManager.currencySymbol
         earningsModel = configManager.earningsModel
     }
 }

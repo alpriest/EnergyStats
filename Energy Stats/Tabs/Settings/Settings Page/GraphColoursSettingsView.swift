@@ -14,7 +14,7 @@ class GraphColoursSettingsViewModel: ObservableObject {
 
     init(configManager: ConfigManaging) {
         parameters = Dictionary(uniqueKeysWithValues: configManager.variables.map { variable in
-            (variable.name, variable.colour)
+            (variable.title(as: .total), variable.colour)
         })
 
         stats = Dictionary(uniqueKeysWithValues: ReportVariable.allCases.map {
@@ -35,39 +35,63 @@ struct GraphColoursSettingsView: View {
                         set: { newValue in viewModel.stats[key] = newValue }
                     )
 
-                    HStack {
-                        Text(key)
-                        Spacer()
-                        ColorPicker(key, selection: binding)
-                            .labelsHidden()
-                    }
+                    ColorPickerView(title: key, color: binding)
                 }
             } header: {
                 Text("Stats")
-            }
-
-            Section {
-                ForEach(viewModel.parameters.keys.sorted(), id: \.self) { key in
-                    let binding = Binding<Color>(
-                        get: { viewModel.parameters[key] ?? .accentColor },
-                        set: { newValue in viewModel.parameters[key] = newValue }
-                    )
-
-                    HStack {
-                        Text(key)
-                        Spacer()
-                        ColorPicker(key, selection: binding)
-                            .labelsHidden()
-                    }
-                }
-            } header: {
-                Text("Parameters")
             }
         }
     }
 }
 
+private struct ColorPickerView: View {
+    @Binding var color: Color
+    @State private var title: String
+    @State private var showPicker = false
+
+    init(title: String, color: Binding<Color>) {
+        self.title = title
+        self._color = color
+    }
+
+    private var uiColorBinding: Binding<UIColor> {
+        Binding<UIColor>(
+            get: {
+                UIColor(self.color)
+            },
+            set: { newUIColor in
+                self.color = Color(newUIColor)
+            }
+        )
+    }
+
+    var body: some View {
+        HStack {
+            GraphVariableColourIndicator(color: color)
+            Text(title)
+                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+            Button {
+                showPicker = true
+            } label: {
+                Text("Change")
+            }
+        }
+        .frame(minWidth: 0, maxWidth: .infinity)
+        .contentShape(Rectangle())
+        .onTapGesture {
+            showPicker = true
+        }
+        .sheet(isPresented: $showPicker) {
+            UIKitColorPicker(color: uiColorBinding) {
+                showPicker = false
+            }
+        }
+    }
+}
+
+
 #Preview {
     let vm = GraphColoursSettingsViewModel(configManager: ConfigManager.preview())
     return GraphColoursSettingsView(viewModel: vm)
+        .environment(\.locale, .init(identifier: "de"))
 }

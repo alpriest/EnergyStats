@@ -31,14 +31,12 @@ struct FinancialsSettingsView: View {
                     Toggle(isOn: $viewModel.showFinancialSummaryOnFlowPage) {
                         Text("Show on power flow page")
                     }
-
-                    makeCurrencySymbolField()
                 }
 
                 Section {
                     makeTextField(
                         title: "Unit price",
-                        currencySymbol: viewModel.currencySymbol,
+                        currencySymbol: viewModel.configManager.currencySymbol,
                         text: $viewModel.energyStatsFeedInUnitPrice
                     )
 
@@ -65,7 +63,7 @@ struct FinancialsSettingsView: View {
                 Section {
                     makeTextField(
                         title: "Grid Import Unit price",
-                        currencySymbol: viewModel.currencySymbol,
+                        currencySymbol: viewModel.configManager.currencySymbol,
                         text: $viewModel.energyStatsGridImportUnitPrice
                     )
                 } footer: {
@@ -146,15 +144,6 @@ struct FinancialsSettingsView: View {
             TextField(0.roundedToString(decimalPlaces: 2, currencySymbol: currencySymbol), text: text)
                 .frame(width: 60)
                 .monospacedDigit()
-        }
-        .multilineTextAlignment(.trailing)
-    }
-
-    private func makeCurrencySymbolField() -> some View {
-        HStack {
-            Text("Currency symbol")
-            Spacer()
-            TextField("", text: $viewModel.currencySymbol)
         }
         .multilineTextAlignment(.trailing)
     }
