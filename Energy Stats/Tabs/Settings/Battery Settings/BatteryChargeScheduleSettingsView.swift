@@ -20,22 +20,22 @@ struct BatteryChargeScheduleSettingsView: View {
     var body: some View {
         VStack(spacing: 0) {
             Form {
-                BatteryTimePeriodView(timePeriod: $viewModel.timePeriod1, title: "Time period 1")
-                BatteryTimePeriodView(timePeriod: $viewModel.timePeriod2, title: "Time period 2")
+                BatteryTimePeriodView(timePeriod: $viewModel.viewData.timePeriod1, title: "Time period 1")
+                BatteryTimePeriodView(timePeriod: $viewModel.viewData.timePeriod2, title: "Time period 2")
 
                 Section(content: {}, footer: {
                     VStack(alignment: .leading) {
                         Text("Schedule summary")
                             .font(.headline)
 
-                        Text(viewModel.summary)
+                        Text(viewModel.viewData.summary)
                             .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                     }
                     .frame(minWidth: 0, maxWidth: .infinity)
                 })
             }
 
-            BottomButtonsView(dirty: true) {
+            BottomButtonsView(dirty: viewModel.isDirty) {
                 viewModel.save()
                 requestReview()
             }
@@ -43,11 +43,11 @@ struct BatteryChargeScheduleSettingsView: View {
         .navigationTitle(.batterySchedule)
         .navigationBarTitleDisplayMode(.inline)
         .loadable(viewModel.state, retry: { viewModel.load() })
-        .onChange(of: viewModel.timePeriod1) { newValue in
-            viewModel.generateSummary(period1: newValue, period2: viewModel.timePeriod2)
+        .onChange(of: viewModel.viewData.timePeriod1) { newValue in
+            viewModel.generateSummary(period1: newValue, period2: viewModel.viewData.timePeriod2)
         }
-        .onChange(of: viewModel.timePeriod2) { newValue in
-            viewModel.generateSummary(period1: viewModel.timePeriod1, period2: newValue)
+        .onChange(of: viewModel.viewData.timePeriod2) { newValue in
+            viewModel.generateSummary(period1: viewModel.viewData.timePeriod1, period2: newValue)
         }
         .alert(alertContent: $viewModel.alertContent)
     }
