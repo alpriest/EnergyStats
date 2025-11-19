@@ -67,9 +67,12 @@ struct DatePickerSheet: View {
     @State var date: Date
     let onSelect: (Date) -> Void
     @AppStorage("timeStyleAccurate") private var timeStyleAccurate = true
+    private let originalValue: Date
+    @State private var isDirty = false
 
     init(label: LocalizedStringKey, date: Date, onSelect: @escaping (Date) -> Void) {
         self.label = label
+        originalValue = date
         self._date = State(wrappedValue: date)
         self.onSelect = onSelect
     }
@@ -99,9 +102,12 @@ struct DatePickerSheet: View {
 
             Spacer()
 
-            BottomButtonsView(dirty: true) {
+            BottomButtonsView(dirty: isDirty) {
                 onSelect(date)
             }
+        }
+        .onChange(of: date) { newValue in
+            isDirty = newValue != originalValue
         }
         .padding()
         .modifier(MediumPresentationDetentsViewModifier())
