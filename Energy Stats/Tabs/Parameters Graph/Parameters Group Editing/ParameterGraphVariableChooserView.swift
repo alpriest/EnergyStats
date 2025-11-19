@@ -72,9 +72,9 @@ struct ParameterGraphVariableChooserView: View {
                                   onApply: {
                                       viewModel.apply()
                                       dismiss()
-                                  }, onCancel: {
-                                      dismiss()
-                                  }, footer: {
+                                  },
+                                  onCancel: { dismiss() },
+                                  footer: {
                                       Text("Note that not all parameters contain values")
                                   })
             }

@@ -8,21 +8,53 @@
 import Energy_Stats_Core
 import SwiftUI
 
+struct SolarBandingSettingsViewData: Copiable, Equatable {
+    var solarDefinitions: SolarRangeDefinitions
+    
+    func create(copying previous: SolarBandingSettingsViewData) -> SolarBandingSettingsViewData {
+        SolarBandingSettingsViewData(solarDefinitions: previous.solarDefinitions)
+    }
+    
+    private static func approxEqual(_ a: Double, _ b: Double, epsilon: Double = 0.0001) -> Bool {
+        return abs(a - b) < epsilon
+    }
+    
+    static func ==(lhs: Self, rhs: Self) -> Bool {
+        approxEqual(lhs.solarDefinitions.breakPoint1, rhs.solarDefinitions.breakPoint1) &&
+        approxEqual(lhs.solarDefinitions.breakPoint2, rhs.solarDefinitions.breakPoint2) &&
+        approxEqual(lhs.solarDefinitions.breakPoint3, rhs.solarDefinitions.breakPoint3)
+    }
+}
+
 class SolarBandingSettingsViewModel: ObservableObject {
     private var configManager: ConfigManaging
     let haptic = UIImpactFeedbackGenerator()
+    @Published var viewData: SolarBandingSettingsViewData { didSet {
+        isDirty = viewData != originalValue
+    }}
+    @Published var isDirty = false
+    private var originalValue: SolarBandingSettingsViewData?
 
     init(configManager: ConfigManaging) {
         self.configManager = configManager
         haptic.prepare()
+        let viewData = SolarBandingSettingsViewData(solarDefinitions: configManager.solarDefinitions)
+        originalValue = viewData
+        self.viewData = viewData
     }
 
-    func update(breakpoint1: Double, breakpoint2: Double, breakpoint3: Double) {
+    func save(breakpoint1: Double, breakpoint2: Double, breakpoint3: Double) {
         configManager.solarDefinitions = SolarRangeDefinitions(
             breakPoint1: breakpoint1,
             breakPoint2: breakpoint2,
             breakPoint3: breakpoint3
         )
+    }
+    
+    func didUpdate(breakpoint1: Double, breakpoint2: Double, breakpoint3: Double) {
+        viewData = viewData.copy {
+            $0.solarDefinitions = SolarRangeDefinitions(breakPoint1: breakpoint1, breakPoint2: breakpoint2, breakPoint3: breakpoint3)
+        }
     }
 }
 
@@ -97,6 +129,7 @@ struct SolarBandingSettingsView: View {
                         breakpoint1 = 1
                         breakpoint2 = 2
                         breakpoint3 = 3
+                        verifyThresholds()
                     } label: {
                         Text("Restore defaults")
                     }
@@ -107,6 +140,7 @@ struct SolarBandingSettingsView: View {
                     breakpoint1 = breakpoint2 - 0.1
                 }
 
+                verifyThresholds()
                 modifiedAppTheme = makeAppTheme()
             }
             .onChange(of: breakpoint2) { newValue in
@@ -122,8 +156,8 @@ struct SolarBandingSettingsView: View {
                 modifiedAppTheme = makeAppTheme()
             }
 
-            BottomButtonsView(dirty: true) {
-                viewModel.update(breakpoint1: breakpoint1,
+            BottomButtonsView(dirty: viewModel.isDirty) {
+                viewModel.save(breakpoint1: breakpoint1,
                                  breakpoint2: breakpoint2,
                                  breakpoint3: breakpoint3)
             }
@@ -140,6 +174,8 @@ struct SolarBandingSettingsView: View {
         if breakpoint3 <= breakpoint2 {
             breakpoint3 = breakpoint2 + 0.1
         }
+        
+        viewModel.didUpdate(breakpoint1: breakpoint1, breakpoint2: breakpoint2, breakpoint3: breakpoint3)
     }
 
     func makeAppTheme() -> AppSettings {
