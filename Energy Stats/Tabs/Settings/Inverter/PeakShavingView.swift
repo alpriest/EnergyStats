@@ -113,7 +113,7 @@ struct PeakShavingView: View {
                 }
             }
 
-            BottomButtonsView {
+            BottomButtonsView(dirty: true) {
                 viewModel.save()
             }
         }

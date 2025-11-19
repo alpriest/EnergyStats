@@ -179,7 +179,7 @@ struct SchedulePhaseEditView: View {
                     }
             }
 
-            BottomButtonsView { save() }
+            BottomButtonsView(dirty: true) { save() }
         }
         .onChange(of: startTime) { _ in validate() }
         .onChange(of: endTime) { _ in validate() }

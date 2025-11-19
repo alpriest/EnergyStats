@@ -71,7 +71,7 @@ struct EditScheduleView: View {
                 }
             }
 
-            BottomButtonsView(labels: BottomButtonLabels(left: "Cancel", right: "Save"),
+            BottomButtonsView(labels: BottomButtonLabels(left: "Cancel", right: "Save"), dirty: true,
                               onApply: {
                                   Task {
                                       await viewModel.saveSchedule {

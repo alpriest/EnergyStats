@@ -48,7 +48,7 @@ struct InverterWorkModeView: View {
                 }
             }
 
-            BottomButtonsView { viewModel.save() }
+            BottomButtonsView(dirty: true) { viewModel.save() }
         }
         .loadable(viewModel.state) {
             viewModel.load()

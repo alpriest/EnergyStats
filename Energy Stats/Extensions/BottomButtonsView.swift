@@ -26,7 +26,7 @@ struct BottomButtonsView<Content: View>: View {
 
     init(
         labels: BottomButtonLabels = .defaults,
-        dirty: Bool = true,
+        dirty: Bool,
         onApply: @escaping () -> Void,
         onCancel: (() -> Void)? = nil,
         @ViewBuilder footer: @escaping () -> Content = { EmptyView() }
@@ -72,5 +72,5 @@ struct BottomButtonsView<Content: View>: View {
 }
 
 #Preview {
-    BottomButtonsView {}
+    BottomButtonsView(dirty: true) {}
 }

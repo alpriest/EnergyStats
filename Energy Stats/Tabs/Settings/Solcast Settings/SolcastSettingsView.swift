@@ -47,7 +47,7 @@ struct SolcastSettingsView: View {
                 }
             }
 
-            BottomButtonsView {
+            BottomButtonsView(dirty: true) {
                 viewModel.save()
             }
         }

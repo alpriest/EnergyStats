@@ -24,7 +24,7 @@ struct ConfigureAPIKeyView: View {
                 }
             }
 
-            BottomButtonsView {
+            BottomButtonsView(dirty: true) {
                 try? wrapper.store.store(apiKey: apiKey, notifyObservers: true)
             }
         }.onAppear {

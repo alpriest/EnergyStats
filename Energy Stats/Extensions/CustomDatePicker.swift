@@ -99,7 +99,7 @@ struct DatePickerSheet: View {
 
             Spacer()
 
-            BottomButtonsView {
+            BottomButtonsView(dirty: true) {
                 onSelect(date)
             }
         }

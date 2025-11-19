@@ -39,7 +39,7 @@ struct DeviceSettingItemView: View {
                 }
             }
 
-            BottomButtonsView {
+            BottomButtonsView(dirty: true) {
                 viewModel.save()
             }
         }

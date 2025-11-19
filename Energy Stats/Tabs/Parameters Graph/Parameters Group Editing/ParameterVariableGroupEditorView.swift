@@ -88,7 +88,7 @@ struct ParameterVariableGroupEditorView: View {
                 }
             }
 
-            BottomButtonsView {
+            BottomButtonsView(dirty: true) {
                 viewModel.apply()
             }
         }

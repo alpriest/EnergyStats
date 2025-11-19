@@ -42,7 +42,7 @@ struct ParameterGraphVariableChooserView: View {
                     } header: {
                         VStack(alignment: .leading) {
                             Text("Select a group below to focus on commonly used parameters, or create your own using the Manage groups button.")
-                            
+
                             Text("Groups")
                                 .padding(.top)
                         }
@@ -68,14 +68,15 @@ struct ParameterGraphVariableChooserView: View {
                     }
                 }
 
-                BottomButtonsView {
-                    viewModel.apply()
-                    dismiss()
-                } onCancel: {
-                    dismiss()
-                } footer: {
-                    Text("Note that not all parameters contain values")
-                }
+                BottomButtonsView(dirty: true,
+                                  onApply: {
+                                      viewModel.apply()
+                                      dismiss()
+                                  }, onCancel: {
+                                      dismiss()
+                                  }, footer: {
+                                      Text("Note that not all parameters contain values")
+                                  })
             }
             .navigationTitle(.parameters)
             .toolbar { ToolbarItem(placement: .navigationBarTrailing) {

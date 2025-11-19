@@ -122,7 +122,7 @@ struct SolarBandingSettingsView: View {
                 modifiedAppTheme = makeAppTheme()
             }
 
-            BottomButtonsView {
+            BottomButtonsView(dirty: true) {
                 viewModel.update(breakpoint1: breakpoint1,
                                  breakpoint2: breakpoint2,
                                  breakpoint3: breakpoint3)

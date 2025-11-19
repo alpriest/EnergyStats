@@ -43,7 +43,7 @@ struct FactoryResetAppSettingsView: View {
             BottomButtonsView(labels: BottomButtonLabels(
                 left: "Cancel",
                 right: "Reset..."
-            )) {
+            ), dirty: true) {
                 confirmationShowing.toggle()
             }
         }

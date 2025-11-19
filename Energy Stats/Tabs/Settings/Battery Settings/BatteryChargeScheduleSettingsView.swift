@@ -35,7 +35,7 @@ struct BatteryChargeScheduleSettingsView: View {
                 })
             }
 
-            BottomButtonsView {
+            BottomButtonsView(dirty: true) {
                 viewModel.save()
                 requestReview()
             }
