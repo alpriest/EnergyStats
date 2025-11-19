@@ -339,6 +339,7 @@
 		41E4B31528DB77E8003F7F47 /* GridPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E4B31428DB77E8003F7F47 /* GridPowerView.swift */; };
 		41E672002C456BB2003D7D44 /* AsyncButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E671FF2C456BB2003D7D44 /* AsyncButton.swift */; };
 		41E6720B2C456D51003D7D44 /* CreateTemplateButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E6720A2C456D51003D7D44 /* CreateTemplateButtonView.swift */; };
+		41E8016A2ECDCF9C00CB5777 /* Copiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E801692ECDCF9B00CB5777 /* Copiable.swift */; };
 		41E8E7242AADFB3900DC4B89 /* SolarBandingSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E8E7232AADFB3900DC4B89 /* SolarBandingSettingsView.swift */; };
 		41E8E7262AAE0D0D00DC4B89 /* SolarRangeDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E8E7252AAE0D0D00DC4B89 /* SolarRangeDefinitions.swift */; };
 		41EB28032B8E634F00F6127F /* SolarStringsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EB28022B8E634F00F6127F /* SolarStringsSettingsView.swift */; };
@@ -876,6 +877,7 @@
 		41E4B31428DB77E8003F7F47 /* GridPowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPowerView.swift; sourceTree = "<group>"; };
 		41E671FF2C456BB2003D7D44 /* AsyncButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncButton.swift; sourceTree = "<group>"; };
 		41E6720A2C456D51003D7D44 /* CreateTemplateButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTemplateButtonView.swift; sourceTree = "<group>"; };
+		41E801692ECDCF9B00CB5777 /* Copiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Copiable.swift; sourceTree = "<group>"; };
 		41E8E7232AADFB3900DC4B89 /* SolarBandingSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarBandingSettingsView.swift; sourceTree = "<group>"; };
 		41E8E7252AAE0D0D00DC4B89 /* SolarRangeDefinitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarRangeDefinitions.swift; sourceTree = "<group>"; };
 		41EB28022B8E634F00F6127F /* SolarStringsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarStringsSettingsView.swift; sourceTree = "<group>"; };
@@ -1581,6 +1583,7 @@
 		41A95B9529DB3F6A00A35169 /* Energy Stats Core */ = {
 			isa = PBXGroup;
 			children = (
+				41E801692ECDCF9B00CB5777 /* Copiable.swift */,
 				41757BBB2A90A05E00573FB4 /* AmountType.swift */,
 				410AA38729D96F6D00CD107C /* AppSettings.swift */,
 				41E3BEC22B1B5A160051C68B /* AppSettingsPublisherFactory.swift */,
@@ -2487,6 +2490,7 @@
 				4128874E2BE7CFD5007E9532 /* HomeEnergyStateManagerConfigAdapter.swift in Sources */,
 				413715B72E200EF400505496 /* GenerationTimelineProvider.swift in Sources */,
 				4155D70D2B28FC920071346A /* Optional+Int.swift in Sources */,
+				41E8016A2ECDCF9C00CB5777 /* Copiable.swift in Sources */,
 				4156A22F2CB6770A00099A6A /* SolcastErrorAlertView.swift in Sources */,
 				413715AF2E20099400505496 /* GetPowerGenerationResponse.swift in Sources */,
 				417CE6EF2DE660B9003D5F64 /* String+Double.swift in Sources */,
@@ -2776,7 +2780,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 85;
+				CURRENT_PROJECT_VERSION = 86;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2799,7 +2803,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.107;
+				MARKETING_VERSION = 2.108;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2845,7 +2849,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 85;
+				CURRENT_PROJECT_VERSION = 86;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2862,7 +2866,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.107;
+				MARKETING_VERSION = 2.108;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

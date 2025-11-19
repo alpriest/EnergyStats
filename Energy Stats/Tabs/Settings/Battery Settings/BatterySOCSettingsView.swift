@@ -24,7 +24,7 @@ struct BatterySOCSettingsView: View {
                     content: {
                         HStack {
                             Text("Min SoC")
-                            NumberTextField("Min SoC", text: $viewModel.soc)
+                            NumberTextField("Min SoC", text: $viewModel.viewData.soc)
                                 .multilineTextAlignment(.trailing)
                             Text("%")
                         }
@@ -38,7 +38,7 @@ struct BatterySOCSettingsView: View {
                     content: {
                         HStack {
                             Text("Min SoC on Grid")
-                            NumberTextField("Min SoC on Grid", text: $viewModel.socOnGrid)
+                            NumberTextField("Min SoC on Grid", text: $viewModel.viewData.socOnGrid)
                                 .multilineTextAlignment(.trailing)
                             Text("%")
                         }
@@ -56,7 +56,7 @@ struct BatterySOCSettingsView: View {
 
                 Section(content: {}, footer: {
                     VStack {
-                        OptionalView(viewModel.errorMessage) {
+                        OptionalView(viewModel.viewData.errorMessage) {
                             Text($0)
                                 .foregroundColor(Color.red)
                         }
@@ -64,7 +64,7 @@ struct BatterySOCSettingsView: View {
                 })
             }
 
-            BottomButtonsView {
+            BottomButtonsView(dirty: viewModel.isDirty) {
                 viewModel.save()
                 requestReview()
             }

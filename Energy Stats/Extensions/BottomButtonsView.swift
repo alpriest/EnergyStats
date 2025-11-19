@@ -22,13 +22,16 @@ struct BottomButtonsView<Content: View>: View {
     private let onCancel: (() -> Void)?
     private let footer: () -> Content
     private let labels: BottomButtonLabels
+    private let dirty: Bool
 
     init(
         labels: BottomButtonLabels = .defaults,
+        dirty: Bool = true,
         onApply: @escaping () -> Void,
         onCancel: (() -> Void)? = nil,
         @ViewBuilder footer: @escaping () -> Content = { EmptyView() }
     ) {
+        self.dirty = dirty
         self.onApply = onApply
         self.onCancel = onCancel
         self.footer = footer
@@ -58,6 +61,7 @@ struct BottomButtonsView<Content: View>: View {
                     Text(labels.right)
                         .frame(maxWidth: .infinity)
                 }
+                .disabled(!dirty)
                 .padding()
                 .buttonStyle(.borderedProminent)
             }
