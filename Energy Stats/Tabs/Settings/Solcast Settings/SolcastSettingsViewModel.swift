@@ -9,25 +9,50 @@ import Energy_Stats_Core
 import Foundation
 import SwiftUI
 
+struct SolcastSettingsViewData: Copiable {
+    var sites: [SolcastSite]
+    var apiKey: String
+
+    func create(copying previous: SolcastSettingsViewData) -> SolcastSettingsViewData {
+        SolcastSettingsViewData(
+            sites: previous.sites,
+            apiKey: previous.apiKey
+        )
+    }
+
+    static func ==(lhs: Self, rhs: Self) -> Bool {
+        let lhsNames = lhs.sites.map { $0.name }
+        let rhsNames = rhs.sites.map { $0.name }
+        return lhs.apiKey == rhs.apiKey && lhsNames == rhsNames
+    }
+}
+
 class SolcastSettingsViewModel: ObservableObject {
     private var configManager: ConfigManaging
-    @MainActor @Published var apiKey: String = ""
     @Published var alertContent: AlertContent?
     private let solarService: SolarForecastProviding
-    @Published var sites: [SolcastSite] = []
     @Published var fetchSolcastOnAppLaunch: Bool = false {
         didSet {
             configManager.fetchSolcastOnAppLaunch = fetchSolcastOnAppLaunch
         }
     }
 
+    @Published var viewData: SolcastSettingsViewData = .init(sites: [], apiKey: "") { didSet {
+        isDirty = viewData != originalValue
+    }}
+    @Published var isDirty = false
+    private var originalValue: SolcastSettingsViewData? = nil
+
     init(configManager: ConfigManaging, solarService: @escaping SolarForecastProviding) {
         self.configManager = configManager
         self.solarService = solarService
 
+        let viewData = SolcastSettingsViewData(sites: configManager.solcastSettings.sites,
+                                               apiKey: configManager.solcastSettings.apiKey ?? "")
+        self.originalValue = viewData
+
         Task { @MainActor in
-            apiKey = configManager.solcastSettings.apiKey ?? ""
-            sites = configManager.solcastSettings.sites
+            self.viewData = viewData
             fetchSolcastOnAppLaunch = configManager.fetchSolcastOnAppLaunch
         }
     }
@@ -37,9 +62,11 @@ class SolcastSettingsViewModel: ObservableObject {
         Task { @MainActor in
             do {
                 let service = solarService()
-                let response = try await service.fetchSites(apiKey: apiKey)
-                configManager.solcastSettings = SolcastSettings(apiKey: apiKey, sites: response.sites.map { SolcastSite(site: $0) })
-                self.sites = configManager.solcastSettings.sites
+                let response = try await service.fetchSites(apiKey: viewData.apiKey)
+                configManager.solcastSettings = SolcastSettings(apiKey: viewData.apiKey, sites: response.sites.map { SolcastSite(site: $0) })
+                self.viewData = viewData.copy {
+                    $0.sites = configManager.solcastSettings.sites
+                }
 
                 alertContent = AlertContent(title: "Success", message: "solcast_settings_saved")
             } catch let NetworkError.invalidConfiguration(reason) {
@@ -54,8 +81,10 @@ class SolcastSettingsViewModel: ObservableObject {
         configManager.solcastSettings = SolcastSettings(apiKey: nil, sites: [])
 
         Task { @MainActor in
-            apiKey = ""
-            sites = []
+            viewData = viewData.copy {
+                $0.apiKey = ""
+                $0.sites = []
+            }
         }
     }
 }

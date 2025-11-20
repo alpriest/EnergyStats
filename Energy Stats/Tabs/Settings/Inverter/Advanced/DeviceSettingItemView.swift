@@ -21,9 +21,9 @@ struct DeviceSettingItemView: View {
                 Section {
                     HStack {
                         Text(viewModel.title)
-                        NumberTextField(viewModel.title, text: $viewModel.value)
+                        NumberTextField(viewModel.title, text: $viewModel.viewData.value)
                             .multilineTextAlignment(.trailing)
-                        Text(viewModel.unit)
+                        Text(viewModel.viewData.unit)
                     }
                 } footer: {
                     VStack(alignment: .leading, spacing: 22) {
@@ -39,10 +39,12 @@ struct DeviceSettingItemView: View {
                 }
             }
 
-            BottomButtonsView(dirty: true) {
+            BottomButtonsView(dirty: viewModel.isDirty) {
                 viewModel.save()
             }
         }
+        .navigationTitle(viewModel.title)
+        .navigationBarTitleDisplayMode(.inline)
         .loadable(viewModel.state, retry: { viewModel.load() })
         .alert(alertContent: $viewModel.alertContent)
     }

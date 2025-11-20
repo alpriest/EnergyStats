@@ -20,7 +20,7 @@ struct SolcastSettingsView: View {
             Form {
                 Section {
                     Text("Solcast_description")
-                    SecureField("API Key", text: $viewModel.apiKey)
+                    SecureField("API Key", text: $viewModel.viewData.apiKey)
                 }
 
                 Section {
@@ -35,7 +35,7 @@ struct SolcastSettingsView: View {
                     }
                 }
 
-                ForEach(viewModel.sites, id: \.resourceId) { site in
+                ForEach(viewModel.viewData.sites, id: \.resourceId) { site in
                     Section {
                         SolcastSiteView(site: site)
                     }
@@ -47,7 +47,7 @@ struct SolcastSettingsView: View {
                 }
             }
 
-            BottomButtonsView(dirty: true) {
+            BottomButtonsView(dirty: viewModel.isDirty) {
                 viewModel.save()
             }
         }

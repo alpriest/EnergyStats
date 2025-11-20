@@ -5,7 +5,7 @@
 //  Created by Alistair Priest on 19/11/2025.
 //
 
-public protocol Copiable {
+public protocol Copiable: Equatable {
     func copy(_ updates: (inout Self) -> Void) -> Self
     func create(copying previous: Self) -> Self
 }

@@ -23,5 +23,18 @@ enum CoreBusReceiver {
             let params = note.userInfo?[CoreBus.Keys.params] as? [String: Any]
             Analytics.logEvent(name, parameters: params)
         }
+        
+        NotificationCenter.default.addObserver(
+            forName: .foxNetworkError,
+            object: nil,
+            queue: .main
+        ) { note in
+            guard
+                let name = note.userInfo?[CoreBus.Keys.name] as? String
+            else { return }
+
+            let params = note.userInfo?[CoreBus.Keys.params] as? [String: Any]
+            Analytics.logEvent(name, parameters: params)
+        }
     }
 }

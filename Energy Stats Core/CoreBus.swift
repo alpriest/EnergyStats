@@ -27,4 +27,17 @@ public enum CoreBus {
 
         NotificationCenter.default.post(name: .unexpectedServerData, object: nil, userInfo: info)
     }
+    
+    public static func onFoxAPIError(
+        api: String,
+        errNo: Int
+    ) {
+        let info: [String: Any] = [
+            Keys.name: "server_error",
+            Keys.params: ["endpoint": api,
+                          "errNo": errNo]
+        ]
+
+        NotificationCenter.default.post(name: .foxNetworkError, object: nil, userInfo: info)
+    }
 }

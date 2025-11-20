@@ -71,6 +71,8 @@ extension FoxAPIService {
             let networkResponse: NetworkResponse<T> = try JSONDecoder().decode(NetworkResponse<T>.self, from: data)
 
             if networkResponse.errno > 0 {
+                CoreBus.onFoxAPIError(api: request.url?.absoluteString ?? "unknown API", errNo: networkResponse.errno)
+                
                 if [41808, 41809, 41810].contains(networkResponse.errno) {
                     throw NetworkError.invalidToken
                 } else if networkResponse.errno == 41807 {

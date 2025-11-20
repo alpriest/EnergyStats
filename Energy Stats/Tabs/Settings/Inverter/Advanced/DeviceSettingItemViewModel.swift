@@ -8,6 +8,32 @@
 import Energy_Stats_Core
 import SwiftUI
 
+struct DeviceSettingItemViewData: Copiable, Equatable {
+    var value: String
+    var unit: String
+    var title: String
+    var description: String
+    var behaviour: String
+
+    init(value: String, unit: String, title: String, description: String, behaviour: String) {
+        self.value = value
+        self.unit = unit
+        self.title = title
+        self.description = description
+        self.behaviour = behaviour
+    }
+
+    func create(copying previous: DeviceSettingItemViewData) -> DeviceSettingItemViewData {
+        DeviceSettingItemViewData(
+            value: previous.value,
+            unit: previous.unit,
+            title: previous.title,
+            description: previous.description,
+            behaviour: previous.behaviour
+        )
+    }
+}
+
 class DeviceSettingItemViewModel: ObservableObject, HasLoadState {
     private let item: DeviceSettingsItem
     private let networking: Networking
@@ -15,21 +41,36 @@ class DeviceSettingItemViewModel: ObservableObject, HasLoadState {
     var title: String { item.title }
     var description: String { item.description }
     var behaviour: String { item.behaviour }
-    @Published var value: String = ""
-    @Published var unit: String = ""
     @Published var state = LoadState.inactive
     @Published var alertContent: AlertContent?
+    @Published var viewData: DeviceSettingItemViewData = .init(
+        value: "",
+        unit: "",
+        title: "",
+        description: "",
+        behaviour: ""
+    ) { didSet {
+        isDirty = viewData != originalValue
+    }}
+    @Published var isDirty = false
+    private var originalValue: DeviceSettingItemViewData?
 
     init(item: DeviceSettingsItem, networking: Networking, configManager: ConfigManaging) {
         self.item = item
         self.configManager = configManager
         self.networking = networking
+        
+        self.viewData = viewData.copy {
+            $0.title = item.title
+            $0.description = item.description
+            $0.behaviour = item.behaviour
+        }
 
         load()
     }
 
     func load() {
-        guard state == .inactive else { return }
+        guard !state.isActive else { return }
         guard let deviceSN = configManager.currentDevice.value?.deviceSN else { return }
 
         Task {
@@ -38,14 +79,21 @@ class DeviceSettingItemViewModel: ObservableObject, HasLoadState {
             do {
                 let response = try await networking.fetchDeviceSettingsItem(deviceSN: deviceSN, item: item)
 
+                let viewData = DeviceSettingItemViewData(
+                    value: response.value,
+                    unit: response.unit ?? item.fallbackUnit,
+                    title: item.title,
+                    description: item.description,
+                    behaviour: item.behaviour
+                )
+                originalValue = viewData
                 Task { @MainActor in
-                    self.value = response.value
-                    self.unit = response.unit ?? item.fallbackUnit
+                    self.viewData = viewData
                 }
 
                 await setState(.inactive)
             } catch {
-                alertContent = AlertContent(title: "error_title", message: "Could not load settings")
+                await setState(.error(error, "Could not load settings"))
             }
         }
     }
@@ -58,7 +106,7 @@ class DeviceSettingItemViewModel: ObservableObject, HasLoadState {
             await setState(.active(.saving))
 
             do {
-                try await networking.setDeviceSettingsItem(deviceSN: deviceSN, item: item, value: value)
+                try await networking.setDeviceSettingsItem(deviceSN: deviceSN, item: item, value: viewData.value)
                 await setState(.inactive)
                 alertContent = AlertContent(title: "Success", message: "inverter_settings_saved")
             } catch let NetworkError.foxServerError(code, _) where code == 44096 {
@@ -68,5 +116,10 @@ class DeviceSettingItemViewModel: ObservableObject, HasLoadState {
                 await setState(.error(error, "Could not save setting"))
             }
         }
+    }
+
+    func resetDirtyState() {
+        originalValue = viewData
+        isDirty = false
     }
 }
