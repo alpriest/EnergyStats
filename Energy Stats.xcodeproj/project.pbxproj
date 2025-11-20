@@ -340,6 +340,8 @@
 		41E672002C456BB2003D7D44 /* AsyncButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E671FF2C456BB2003D7D44 /* AsyncButton.swift */; };
 		41E6720B2C456D51003D7D44 /* CreateTemplateButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E6720A2C456D51003D7D44 /* CreateTemplateButtonView.swift */; };
 		41E8016A2ECDCF9C00CB5777 /* Copiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E801692ECDCF9B00CB5777 /* Copiable.swift */; };
+		41E8016C2ECF5FE200CB5777 /* SchedulePhaseEditViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E8016B2ECF5FE200CB5777 /* SchedulePhaseEditViewData.swift */; };
+		41E8016F2ECF601600CB5777 /* SchedulePhaseEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E8016E2ECF601600CB5777 /* SchedulePhaseEditViewModel.swift */; };
 		41E8E7242AADFB3900DC4B89 /* SolarBandingSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E8E7232AADFB3900DC4B89 /* SolarBandingSettingsView.swift */; };
 		41E8E7262AAE0D0D00DC4B89 /* SolarRangeDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E8E7252AAE0D0D00DC4B89 /* SolarRangeDefinitions.swift */; };
 		41EB28032B8E634F00F6127F /* SolarStringsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EB28022B8E634F00F6127F /* SolarStringsSettingsView.swift */; };
@@ -878,6 +880,8 @@
 		41E671FF2C456BB2003D7D44 /* AsyncButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncButton.swift; sourceTree = "<group>"; };
 		41E6720A2C456D51003D7D44 /* CreateTemplateButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTemplateButtonView.swift; sourceTree = "<group>"; };
 		41E801692ECDCF9B00CB5777 /* Copiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Copiable.swift; sourceTree = "<group>"; };
+		41E8016B2ECF5FE200CB5777 /* SchedulePhaseEditViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePhaseEditViewData.swift; sourceTree = "<group>"; };
+		41E8016E2ECF601600CB5777 /* SchedulePhaseEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePhaseEditViewModel.swift; sourceTree = "<group>"; };
 		41E8E7232AADFB3900DC4B89 /* SolarBandingSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarBandingSettingsView.swift; sourceTree = "<group>"; };
 		41E8E7252AAE0D0D00DC4B89 /* SolarRangeDefinitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarRangeDefinitions.swift; sourceTree = "<group>"; };
 		41EB28022B8E634F00F6127F /* SolarStringsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarStringsSettingsView.swift; sourceTree = "<group>"; };
@@ -1503,9 +1507,7 @@
 				419092292B1DE3D90017CB65 /* EditScheduleView.swift */,
 				418C09202B18A98400183603 /* EditScheduleViewModel.swift */,
 				41C0923C2B210255001D1E22 /* ScheduleDetailView.swift */,
-				418C09242B18FE9A00183603 /* SchedulePhaseEditView.swift */,
-				41C0923A2B20FCB0001D1E22 /* SchedulePhaseHelper.swift */,
-				4190922D2B1E4B250017CB65 /* SchedulePhaseListItemView.swift */,
+				41E8016D2ECF5FE900CB5777 /* Phase */,
 				419092202B1DBF2B0017CB65 /* ScheduleSummaryView.swift */,
 				419092222B1DC0070017CB65 /* ScheduleSummaryViewModel.swift */,
 				4190922B2B1E49210017CB65 /* ScheduleView.swift */,
@@ -1750,6 +1752,18 @@
 				41CA35702AA8C02C00D45734 /* EarningsView.swift */,
 			);
 			path = "Power Views";
+			sourceTree = "<group>";
+		};
+		41E8016D2ECF5FE900CB5777 /* Phase */ = {
+			isa = PBXGroup;
+			children = (
+				418C09242B18FE9A00183603 /* SchedulePhaseEditView.swift */,
+				41E8016B2ECF5FE200CB5777 /* SchedulePhaseEditViewData.swift */,
+				41C0923A2B20FCB0001D1E22 /* SchedulePhaseHelper.swift */,
+				4190922D2B1E4B250017CB65 /* SchedulePhaseListItemView.swift */,
+				41E8016E2ECF601600CB5777 /* SchedulePhaseEditViewModel.swift */,
+			);
+			path = Phase;
 			sourceTree = "<group>";
 		};
 		41EDDF7228CD2ED30092C662 /* Energy StatsTests */ = {
@@ -2278,6 +2292,7 @@
 				41E12E882CC666C9001F3839 /* ServiceFactory.swift in Sources */,
 				419092212B1DBF2B0017CB65 /* ScheduleSummaryView.swift in Sources */,
 				417185482A0051CA00D18CDD /* ParameterGraphVariableChooserView.swift in Sources */,
+				41E8016C2ECF5FE200CB5777 /* SchedulePhaseEditViewData.swift in Sources */,
 				41038F962E6C3360008A74C6 /* CalculationBreakdownRectangle.swift in Sources */,
 				41C1243E2B738B1400B575F2 /* HowToObtainAPIKeyView.swift in Sources */,
 				412887562BE8B861007E9532 /* WatchSessionDelegate.swift in Sources */,
@@ -2376,6 +2391,7 @@
 				418C6E992AFB8A15000DE35F /* ApproximationsCalculator.swift in Sources */,
 				41E12E862CC659E4001F3839 /* CheckCurrentSolarGenerationIntent.swift in Sources */,
 				41E1DFDF28D87781001235B9 /* SettingsTabView.swift in Sources */,
+				41E8016F2ECF601600CB5777 /* SchedulePhaseEditViewModel.swift in Sources */,
 				41C0923B2B20FCB0001D1E22 /* SchedulePhaseHelper.swift in Sources */,
 				4107446328CA1C5D006D5D7D /* PowerFlowView.swift in Sources */,
 				41D7AB902B9F1F6C00FFDFC0 /* InfoButtonView.swift in Sources */,

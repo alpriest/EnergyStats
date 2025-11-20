@@ -11,23 +11,8 @@ import SwiftUI
 
 struct SchedulePhaseEditView: View {
     @Environment(\.presentationMode) var presentationMode
-    @State private var startTime: Date
-    @State private var endTime: Date
-    @State private var workMode: WorkMode
-    @State private var minSOC: String
-    @State private var fdSOC: String
-    @State private var fdPower: String
-    @State private var minSOCError: LocalizedStringKey?
-    @State private var fdSOCError: LocalizedStringKey?
-    @State private var timeError: LocalizedStringKey?
-    @State private var forceDischargePowerError: LocalizedStringKey?
-    @State private var maxSOC: String
-    @State private var maxSOCError: LocalizedStringKey?
-    private let showMaxSOC: Bool
-    private let id: String
-    private let modes: [String]
-    private let onChange: (SchedulePhase) -> Void
     private let onDelete: (String) -> Void
+    @StateObject private var viewModel: SchedulePhaseEditViewModel
 
     init(
         phase: SchedulePhase,
@@ -35,28 +20,15 @@ struct SchedulePhaseEditView: View {
         onChange: @escaping (SchedulePhase) -> Void,
         onDelete: @escaping (String) -> Void
     ) {
-        self.onChange = onChange
         self.onDelete = onDelete
-
-        self.id = phase.id
-        self._startTime = State(wrappedValue: Date.fromTime(phase.start))
-        self._endTime = State(wrappedValue: Date.fromTime(phase.end))
-        self._workMode = State(wrappedValue: phase.mode)
-        self._minSOC = State(wrappedValue: String(describing: phase.minSocOnGrid))
-        self._fdSOC = State(wrappedValue: String(describing: phase.forceDischargeSOC))
-        self._fdPower = State(wrappedValue: String(describing: phase.forceDischargePower))
-
-        if let maxSOC = phase.maxSOC {
-            showMaxSOC = true
-            self._maxSOC = State(wrappedValue: String(describing: maxSOC))
-        } else {
-            showMaxSOC = false
-            self.maxSOC = ""
-        }
-
-        self.modes = configManager.workModes
-
-        validate()
+        self._viewModel = StateObject(
+            wrappedValue: SchedulePhaseEditViewModel(
+                configManager: configManager,
+                phase: phase,
+                onChange: onChange,
+                onDelete: onDelete
+            )
+        )
     }
 
     var body: some View {
@@ -67,10 +39,10 @@ struct SchedulePhaseEditView: View {
                 }
 
                 Section {
-                    CustomDatePicker(start: $startTime, end: $endTime, includeSeconds: true)
+                    CustomDatePicker(start: $viewModel.viewData.startTime, end: $viewModel.viewData.endTime, includeSeconds: true)
 
-                    Picker("Work Mode", selection: $workMode) {
-                        ForEach(modes, id: \.self) { mode in
+                    Picker("Work Mode", selection: $viewModel.viewData.workMode) {
+                        ForEach(viewModel.viewData.modes, id: \.self) { mode in
                             Text(WorkMode.title(for: mode))
                         }
                     }
@@ -82,7 +54,7 @@ struct SchedulePhaseEditView: View {
                                 .monospacedDigit()
                         }
 
-                        OptionalView(timeError) {
+                        OptionalView(viewModel.timeError) {
                             Text($0)
                                 .foregroundStyle(Color.red)
                         }
@@ -92,13 +64,13 @@ struct SchedulePhaseEditView: View {
                 Section {
                     HStack {
                         Text("Min SoC")
-                        NumberTextField("SoC", text: $minSOC)
+                        NumberTextField("SoC", text: $viewModel.viewData.minSOC)
                             .multilineTextAlignment(.trailing)
                         Text("%")
                     }
                 } footer: {
                     VStack(alignment: .leading) {
-                        OptionalView(minSOCError) {
+                        OptionalView(viewModel.minSOCError) {
                             Text($0)
                                 .foregroundStyle(Color.red)
                         }
@@ -112,14 +84,14 @@ struct SchedulePhaseEditView: View {
                     HStack {
                         Text("Max SoC")
                         Spacer()
-                        NumberTextField("Max SoC", text: $maxSOC)
+                        NumberTextField("Max SoC", text: $viewModel.viewData.maxSOC)
                             .multilineTextAlignment(.trailing)
                             .frame(width: 100)
                         Text("%")
                     }
                 } footer: {
                     VStack(alignment: .leading) {
-                        OptionalView(maxSOCError) {
+                        OptionalView(viewModel.maxSOCError) {
                             Text($0)
                                 .foregroundStyle(Color.red)
                         }
@@ -130,14 +102,14 @@ struct SchedulePhaseEditView: View {
                     HStack {
                         Text("Force Discharge SoC")
                         Spacer()
-                        NumberTextField("SoC", text: $fdSOC)
+                        NumberTextField("SoC", text: $viewModel.viewData.fdSOC)
                             .multilineTextAlignment(.trailing)
                             .frame(width: 100)
                         Text("%")
                     }
                 } footer: {
                     VStack(alignment: .leading) {
-                        OptionalView(fdSOCError) {
+                        OptionalView(viewModel.fdSOCError) {
                             Text($0)
                                 .foregroundStyle(Color.red)
                         }
@@ -151,14 +123,14 @@ struct SchedulePhaseEditView: View {
                     HStack {
                         Text("Force Discharge Power")
                         Spacer()
-                        NumberTextField("Power", text: $fdPower)
+                        NumberTextField("Power", text: $viewModel.viewData.fdPower)
                             .multilineTextAlignment(.trailing)
                             .frame(width: 100)
                         Text("W")
                     }
                 } footer: {
                     VStack(alignment: .leading) {
-                        OptionalView(forceDischargePowerError) {
+                        OptionalView(viewModel.forceDischargePowerError) {
                             Text($0)
                                 .foregroundStyle(Color.red)
                         }
@@ -171,7 +143,7 @@ struct SchedulePhaseEditView: View {
                 Section {}
                     footer: {
                         Button(role: .destructive) {
-                            onDelete(id)
+                            onDelete(viewModel.viewData.id)
                             presentationMode.wrappedValue.dismiss()
                         } label: {
                             Text("Delete time period")
@@ -179,37 +151,16 @@ struct SchedulePhaseEditView: View {
                     }
             }
 
-            BottomButtonsView(dirty: true) { save() }
+            BottomButtonsView(dirty: viewModel.isDirty) { viewModel.save {
+                presentationMode.wrappedValue.dismiss()
+            } }
         }
-        .onChange(of: startTime) { _ in validate() }
-        .onChange(of: endTime) { _ in validate() }
-        .onChange(of: workMode) { _ in validate() }
-        .onChange(of: minSOC) { _ in validate() }
-        .onChange(of: fdSOC) { _ in validate() }
-        .onChange(of: fdPower) { _ in validate() }
         .navigationTitle(.editPhase)
         .navigationBarTitleDisplayMode(.inline)
     }
 
-    private func save() {
-        if let phase = SchedulePhase(
-            id: id,
-            start: startTime.toTime(),
-            end: endTime.toTime(),
-            mode: workMode,
-            minSocOnGrid: Int(minSOC) ?? 0,
-            forceDischargePower: Int(fdPower) ?? 0,
-            forceDischargeSOC: Int(fdSOC) ?? 0,
-            maxSOC: showMaxSOC ? (Int(maxSOC) ?? 0) : nil,
-            color: Color.scheduleColor(named: workMode)
-        ) {
-            onChange(phase)
-            presentationMode.wrappedValue.dismiss()
-        }
-    }
-
     private func minSoCDescription() -> LocalizedStringKey? {
-        if case .ForceDischarge = workMode {
+        if case .ForceDischarge = viewModel.viewData.workMode {
             return "The minimum battery state of charge. This must be at most the Force Discharge SOC value."
         }
 
@@ -217,7 +168,7 @@ struct SchedulePhaseEditView: View {
     }
 
     private func forceDischargeSoCDescription() -> LocalizedStringKey? {
-        if case .ForceDischarge = workMode {
+        if case .ForceDischarge = viewModel.viewData.workMode {
             return "When the battery reaches this level, discharging will stop. If you wanted to save some battery power for later, perhaps set it to 50%."
         }
 
@@ -225,7 +176,7 @@ struct SchedulePhaseEditView: View {
     }
 
     private func forceDischargePowerDescription() -> LocalizedStringKey? {
-        if case .ForceDischarge = workMode {
+        if case .ForceDischarge = viewModel.viewData.workMode {
             return "The output power level to be delivered, including your house load and grid export. E.g. If you have 5kW inverter then set this to 5000, then if the house load is 750W the other 4.25kW will be exported."
         }
 
@@ -233,7 +184,7 @@ struct SchedulePhaseEditView: View {
     }
 
     private func workModeDescription() -> LocalizedStringKey? {
-        switch workMode {
+        switch viewModel.viewData.workMode {
         case WorkMode.SelfUse:
             "workmode.self_use_mode.description"
         case WorkMode.Feedin:
@@ -248,37 +199,6 @@ struct SchedulePhaseEditView: View {
             "workmode.peak_shaving.description"
         default:
             nil
-        }
-    }
-
-    private func validate() {
-        minSOCError = nil
-        fdSOCError = nil
-        timeError = nil
-        forceDischargePowerError = nil
-
-        if let minSOC = Int(minSOC), !(10...100 ~= minSOC) {
-            minSOCError = "Please enter a number between 10 and 100"
-        }
-
-        if let fdSOC = Int(fdSOC), !(10...100 ~= fdSOC) {
-            fdSOCError = "Please enter a number between 10 and 100"
-        }
-
-        if let minSOC = Int(minSOC), let fdSOC = Int(fdSOC), minSOC > fdSOC {
-            minSOCError = "Min SoC must be less than or equal to Force Discharge SoC"
-        }
-
-        if startTime.toTime() >= endTime.toTime() {
-            timeError = "End time must be after start time"
-        }
-
-        if case .ForceDischarge = workMode, Int(fdPower) == 0 {
-            forceDischargePowerError = "Force Discharge power needs to be greater than 0 to discharge"
-        }
-
-        if showMaxSOC, let maxSOC = Int(maxSOC), !(10...100 ~= maxSOC) {
-            maxSOCError = "Please enter a number between 10 and 100"
         }
     }
 }
