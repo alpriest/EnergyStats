@@ -11,6 +11,8 @@ import SwiftUI
 struct ConfigureAPIKeyView: View {
     @EnvironmentObject var wrapper: KeychainWrapper
     @State private var apiKey: String = ""
+    @State private var originalValue: String = ""
+    @State private var isDirty = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -24,11 +26,15 @@ struct ConfigureAPIKeyView: View {
                 }
             }
 
-            BottomButtonsView(dirty: true) {
+            BottomButtonsView(dirty: isDirty) {
                 try? wrapper.store.store(apiKey: apiKey, notifyObservers: true)
             }
         }.onAppear {
-            apiKey = (try? wrapper.store.getToken()) ?? ""
+            let apiKey = (try? wrapper.store.getToken()) ?? ""
+            self.originalValue = apiKey
+            self.apiKey = apiKey
+        }.onChange(of: apiKey) {
+            isDirty = $0 != originalValue
         }.navigationTitle(.apiKey)
     }
 }
