@@ -8,12 +8,24 @@
 import Energy_Stats_Core
 import Foundation
 
+struct InverterWorkModeViewData: Copiable {
+    var items: [SelectableItem]
+    
+    func create(copying previous: InverterWorkModeViewData) -> InverterWorkModeViewData {
+        .init(items: previous.items)
+    }
+}
+
 class InverterWorkModeViewModel: ObservableObject {
     private let networking: Networking
     private var config: ConfigManaging
     @Published var state: LoadState = .inactive
-    @Published var items: [SelectableItem] = []
     @Published var alertContent: AlertContent?
+    @Published var viewData: InverterWorkModeViewData = InverterWorkModeViewData(items: []) { didSet {
+        isDirty = viewData != originalValue
+    }}
+    private var originalValue: InverterWorkModeViewData?
+    @Published var isDirty = false
 
     init(networking: Networking, config: ConfigManaging) {
         self.networking = networking
@@ -34,7 +46,9 @@ class InverterWorkModeViewModel: ObservableObject {
                 if config.workModes.count == 0 {
                     config.workModes = try await fetchWorkmodes(deviceSN: deviceSN)
                 }
-                self.items = config.workModes.map { SelectableItem($0, isSelected: $0 == workMode) }
+                let viewData = InverterWorkModeViewData(items: config.workModes.map { SelectableItem($0, isSelected: $0 == workMode) })
+                self.originalValue = viewData
+                self.viewData = viewData
 
                 state = .inactive
             } catch {
@@ -70,20 +84,22 @@ class InverterWorkModeViewModel: ObservableObject {
     }
 
     func toggle(updating: SelectableItem) {
-        items = items.map { existingVariable in
-            var existingVariable = existingVariable
-
-            if existingVariable.id == updating.id {
-                existingVariable.setSelected(true)
-            } else {
-                existingVariable.setSelected(false)
+        viewData = viewData.copy {
+            $0.items = viewData.items.map { existingVariable in
+                var existingVariable = existingVariable
+                
+                if existingVariable.id == updating.id {
+                    existingVariable.setSelected(true)
+                } else {
+                    existingVariable.setSelected(false)
+                }
+                
+                return existingVariable
             }
-
-            return existingVariable
         }
     }
 
     var selected: WorkMode? {
-        items.first(where: { $0.isSelected })?.item
+        viewData.items.first(where: { $0.isSelected })?.item
     }
 }

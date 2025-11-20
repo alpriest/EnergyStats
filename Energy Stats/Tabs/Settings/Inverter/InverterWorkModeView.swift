@@ -20,7 +20,7 @@ struct InverterWorkModeView: View {
             Form {
                 Section {
                     List {
-                        ForEach(viewModel.items, id: \.self) { item in
+                        ForEach(viewModel.viewData.items, id: \.self) { item in
                             Button {
                                 viewModel.toggle(updating: item)
                             } label: {
@@ -48,7 +48,7 @@ struct InverterWorkModeView: View {
                 }
             }
 
-            BottomButtonsView(dirty: true) { viewModel.save() }
+            BottomButtonsView(dirty: viewModel.isDirty) { viewModel.save() }
         }
         .loadable(viewModel.state) {
             viewModel.load()
