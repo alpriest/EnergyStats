@@ -9,10 +9,9 @@ import Combine
 import Energy_Stats_Core
 import Foundation
 
-class SummaryTabViewModel: ObservableObject {
+class SummaryTabViewModel: ObservableObject, HasLoadState {
     private let networking: Networking
     private var configManager: ConfigManaging
-    @Published var isLoading = false
     @Published var approximationsViewModel: ApproximationsViewModel? = nil
     @Published var oldestDataDate: String = ""
     @Published var latestDataDate: String = ""
@@ -22,6 +21,7 @@ class SummaryTabViewModel: ObservableObject {
     @Published var summaryDateRange: SummaryDateRange
     @Published var hasPV: Bool = false
     private let reportVariables = [ReportVariable.feedIn, .generation, .chargeEnergyToTal, .dischargeEnergyToTal, .gridConsumption, .loads, .pvEnergyTotal]
+    @Published var state: LoadState = .inactive
 
     init(configManager: ConfigManaging, networking: Networking) {
         self.networking = networking
@@ -39,14 +39,16 @@ class SummaryTabViewModel: ObservableObject {
     func load() {
         guard approximationsViewModel == nil else { return }
         guard let currentDevice = configManager.currentDevice.value else { return }
+        guard !state.isActive else { return }
 
         Task { @MainActor in
-            isLoading = true
+            await setState(.active(.loading))
+
             let totals = try await fetchAllYears(device: currentDevice)
 
             self.approximationsViewModel = makeApproximationsViewModel(totals: totals)
 
-            isLoading = false
+            await setState(.inactive)
         }
     }
 

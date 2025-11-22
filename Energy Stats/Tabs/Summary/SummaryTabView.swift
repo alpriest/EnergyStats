@@ -27,60 +27,46 @@ struct SummaryTabView: View {
 
     var body: some View {
         NavigationStack {
-            Group {
-                if viewModel.isLoading {
-                    VStack {
-                        if #available(iOS 17.0, *) {
-                            Image(systemName: "chart.bar.xaxis.ascending")
-                                .font(.system(size: 72))
-                                .symbolEffect(.variableColor.iterative, options: .repeating)
+            ScrollView {
+                VStack(alignment: .leading) {
+                    if let approximationsViewModel = viewModel.approximationsViewModel {
+                        energySummaryRow(title: "home_usage", amount: approximationsViewModel.homeUsage)
+
+                        if viewModel.hasPV {
+                            energySummaryRow(title: "solar_generated", amount: approximationsViewModel.totalsViewModel?.solar)
                         } else {
-                            Image(systemName: "chart.bar.xaxis.ascending")
+                            Text("Your inverter doesn't store PV generation data so we can't show historic solar data.")
+                                .font(.caption2)
+                                .foregroundStyle(.secondary)
                         }
-                    }
-                } else {
-                    ScrollView {
-                        VStack(alignment: .leading) {
-                            if let approximationsViewModel = viewModel.approximationsViewModel {
-                                energySummaryRow(title: "home_usage", amount: approximationsViewModel.homeUsage)
 
-                                if viewModel.hasPV {
-                                    energySummaryRow(title: "solar_generated", amount: approximationsViewModel.totalsViewModel?.solar)
-                                } else {
-                                    Text("Your inverter doesn't store PV generation data so we can't show historic solar data.")
-                                        .font(.caption2)
-                                        .foregroundStyle(.secondary)
-                                }
+                        Spacer(minLength: 22)
 
-                                Spacer(minLength: 22)
-
-                                if let model = approximationsViewModel.financialModel {
-                                    moneySummaryRow(title: "export_income", amount: model.exportIncome.amount)
-                                    moneySummaryRow(title: "grid_import_avoided", amount: model.solarSaving.amount)
-                                    moneySummaryRow(title: "total_benefit", amount: model.total.amount)
-                                }
-
-                                Text("Includes data from \(viewModel.oldestDataDate) to \(viewModel.latestDataDate). Figures are approximate and assume the buy/sell energy prices remained constant throughout the period of ownership. FoxESS only makes data available for the last 12 months.")
-                                    .font(.caption2)
-                                    .padding(.vertical)
-                                    .foregroundStyle(.secondary)
-                            } else {
-                                Text("Could not load approximations")
-                            }
-
-                            Divider()
-                            SolarForecastView(appSettings: appSettings, viewModel: solarForecastViewModel)
+                        if let model = approximationsViewModel.financialModel {
+                            moneySummaryRow(title: "export_income", amount: model.exportIncome.amount)
+                            moneySummaryRow(title: "grid_import_avoided", amount: model.solarSaving.amount)
+                            moneySummaryRow(title: "total_benefit", amount: model.total.amount)
                         }
+
+                        Text("Includes data from \(viewModel.oldestDataDate) to \(viewModel.latestDataDate). Figures are approximate and assume the buy/sell energy prices remained constant throughout the period of ownership. FoxESS only makes data available for the last 12 months.")
+                            .font(.caption2)
+                            .padding(.vertical)
+                            .foregroundStyle(.secondary)
+                    } else {
+                        Text("Could not load approximations")
                     }
-                    .padding(.horizontal)
+
+                    Divider()
+                    SolarForecastView(appSettings: appSettings, viewModel: solarForecastViewModel)
                 }
             }
+            .padding(.horizontal)
             .navigationTitle("summary_title")
             .analyticsScreen(.summary)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: { presentSheet.toggle() },
-                           label: { Text("Edit") })
+                           label: { Text("Edit") }).buttonStyle(.plain)
                 }
             }
             .sheet(isPresented: $presentSheet) {
@@ -89,10 +75,9 @@ struct SummaryTabView: View {
                 })
                 .presentationDetents([.medium])
             }
+            .loadable(viewModel.state, retry: { viewModel.load() })
         }
-        .onAppear {
-            viewModel.load()
-        }
+        .onAppear { viewModel.load() }
         .onReceive(appSettingsPublisher) {
             self.appSettings = $0
         }
