@@ -8,7 +8,7 @@
 import Energy_Stats_Core
 import SwiftUI
 
-struct DeviceSettingItemViewData: Copiable, Equatable {
+struct DeviceSettingItemViewData: Copiable {
     var value: String
     var unit: String
     var title: String

@@ -8,7 +8,7 @@
 import Energy_Stats_Core
 import SwiftUI
 
-struct SolarBandingSettingsViewData: Copiable, Equatable {
+struct SolarBandingSettingsViewData: Copiable {
     var solarDefinitions: SolarRangeDefinitions
     
     func create(copying previous: SolarBandingSettingsViewData) -> SolarBandingSettingsViewData {

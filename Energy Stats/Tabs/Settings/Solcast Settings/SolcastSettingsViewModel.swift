@@ -9,7 +9,7 @@ import Energy_Stats_Core
 import Foundation
 import SwiftUI
 
-struct SolcastSettingsViewData: Copiable {
+struct SolcastSettingsViewData: Copiable, Equatable {
     var sites: [SolcastSite]
     var apiKey: String
 

@@ -9,7 +9,7 @@ import Combine
 import Energy_Stats_Core
 import Foundation
 
-struct BatteryChargeScheduleSettingsViewData: Copiable, Equatable {
+struct BatteryChargeScheduleSettingsViewData: Copiable {
     var timePeriod1: ChargeTimePeriod
     var timePeriod2: ChargeTimePeriod
     var summary: String

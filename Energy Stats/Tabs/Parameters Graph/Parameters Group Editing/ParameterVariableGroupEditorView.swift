@@ -19,8 +19,8 @@ struct ParameterVariableGroupEditorView: View {
         VStack(spacing: 0) {
             Form {
                 Section {
-                    Picker("Group", selection: $viewModel.selected) {
-                        ForEach(viewModel.groups) { group in
+                    Picker("Group", selection: $viewModel.viewData.selected) {
+                        ForEach(viewModel.viewData.groups) { group in
                             Text(group.title)
                                 .tag(Optional(group.id))
                         }
@@ -51,7 +51,7 @@ struct ParameterVariableGroupEditorView: View {
                             presentConfirmation = true
                         }
                         .buttonStyle(.bordered)
-                        .disabled(viewModel.groups.count == 1)
+                        .disabled(viewModel.viewData.groups.count == 1)
                     }
                     .alert("Group name", isPresented: $presentAlert, actions: {
                         TextField("Group name", text: $renameText)
@@ -82,13 +82,13 @@ struct ParameterVariableGroupEditorView: View {
                 }
 
                 Section {
-                    ParameterVariableListView(variables: viewModel.variables, onTap: viewModel.toggle)
+                    ParameterVariableListView(variables: viewModel.viewData.variables, onTap: viewModel.toggle)
                 } header: {
                     Text("Choose Parameters")
                 }
             }
 
-            BottomButtonsView(dirty: true) {
+            BottomButtonsView(dirty: viewModel.isDirty) {
                 viewModel.apply()
             }
         }
