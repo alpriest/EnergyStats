@@ -57,7 +57,7 @@ struct EditScheduleView: View {
 
                         Text("Any times not covered by periods above will default to Self Use mode, using the min SOC from the most recent active period.")
 
-                        if viewModel.schedule.hasTooManyPhases {
+                        if viewModel.viewData.schedule.hasTooManyPhases {
                             HStack(alignment: .top) {
                                 Color.white.overlay(
                                     CrossHatchView()

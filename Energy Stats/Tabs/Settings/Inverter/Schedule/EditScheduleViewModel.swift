@@ -25,7 +25,7 @@ class EditScheduleViewModel: ObservableObject, HasLoadState, HasAlertContent, Vi
     @Published var state: LoadState = .inactive
     @Published var alertContent: AlertContent?
     @Published var viewData: ViewData
-    @Published var isDirty: Bool
+    @Published var isDirty = false
     var originalValue: ViewData?
     
     init(networking: Networking, configManager: ConfigManaging, schedule: Schedule) {
