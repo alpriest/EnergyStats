@@ -114,7 +114,11 @@ struct BatterySettingsView: View {
                 Toggle(isOn: $viewModel.showBatteryTemperature) {
                     Text("Show battery (BMS) temperature")
                 }
-
+            } footer: {
+                Text("show_battery_bms_temperature_description")
+            }
+            
+            Section {
                 HStack {
                     Text("Display battery stack").padding(.trailing)
                     Spacer()

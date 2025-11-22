@@ -98,7 +98,7 @@ struct SolarLoadingView: View {
     private var backgroundGradient: some View {
         LinearGradient(
             gradient: Gradient(colors: [
-                Color(.white),
+                Color(.background),
                 Color(.gray).opacity(0.05)
             ]),
             startPoint: .top,
@@ -133,3 +133,14 @@ struct SolarLoadingView: View {
         }
     }
 }
+
+#Preview {
+    SolarLoadingView()
+        .frame(width: 200, height: 80)
+        .environment(\.colorScheme, .dark)
+    
+    SolarLoadingView()
+        .frame(width: 200, height: 80)
+        .environment(\.colorScheme, .light)
+}
+
