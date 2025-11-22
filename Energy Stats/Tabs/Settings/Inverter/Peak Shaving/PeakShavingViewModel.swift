@@ -18,7 +18,7 @@ struct PeakShavingViewData: Copiable {
     }
 }
 
-class PeakShavingViewModel: ObservableObject, HasLoadState {
+class PeakShavingViewModel: ObservableObject, HasLoadState, ViewDataProviding {
     typealias ViewData = PeakShavingViewData
 
     private let networking: Networking
@@ -29,7 +29,7 @@ class PeakShavingViewModel: ObservableObject, HasLoadState {
         isDirty = originalValue != viewData
     }}
     @Published var isDirty = false
-    private var originalValue: ViewData?
+    var originalValue: ViewData?
 
     init(networking: Networking, config: ConfigManaging) {
         self.networking = networking
@@ -79,8 +79,7 @@ class PeakShavingViewModel: ObservableObject, HasLoadState {
                     importLimit: importLimit,
                     soc: soc
                 )
-                originalValue = viewData
-                isDirty = false
+                resetDirtyState()
                 alertContent = AlertContent(title: "Success", message: "peak_shaving_settings_saved")
                 await setState(.inactive)
             } catch {

@@ -266,6 +266,7 @@
 		41AF2F452AA4C74F008FCA2E /* GridPowerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AF2F442AA4C74F008FCA2E /* GridPowerFooterView.swift */; };
 		41B3FFE82AB07FE10020DFC9 /* NetworkCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B3FFE72AB07FE10020DFC9 /* NetworkCache.swift */; };
 		41B5910D2ED1BBDF005B34D5 /* PeakShavingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B5910C2ED1BBDF005B34D5 /* PeakShavingViewModel.swift */; };
+		41B591102ED1C107005B34D5 /* ViewDataProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B5910F2ED1C103005B34D5 /* ViewDataProviding.swift */; };
 		41B690F628E03EA70058126E /* NetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B690F528E03EA70058126E /* NetworkTests.swift */; };
 		41B690FD28E042560058126E /* login-failure.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B690FB28E042560058126E /* login-failure.json */; };
 		41B6910528E047DD0058126E /* report-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B6910428E047DD0058126E /* report-success.json */; };
@@ -807,6 +808,7 @@
 		41AF2F442AA4C74F008FCA2E /* GridPowerFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPowerFooterView.swift; sourceTree = "<group>"; };
 		41B3FFE72AB07FE10020DFC9 /* NetworkCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCache.swift; sourceTree = "<group>"; };
 		41B5910C2ED1BBDF005B34D5 /* PeakShavingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeakShavingViewModel.swift; sourceTree = "<group>"; };
+		41B5910F2ED1C103005B34D5 /* ViewDataProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDataProviding.swift; sourceTree = "<group>"; };
 		41B690F328DF5C390058126E /* NetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponse.swift; sourceTree = "<group>"; };
 		41B690F528E03EA70058126E /* NetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTests.swift; sourceTree = "<group>"; };
 		41B690FB28E042560058126E /* login-failure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "login-failure.json"; sourceTree = "<group>"; };
@@ -1059,6 +1061,7 @@
 		4106A92E28D05EC10009DA28 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				41B5910F2ED1C103005B34D5 /* ViewDataProviding.swift */,
 				41DFC5FC2EC3D3A000DE5A36 /* ColorPicker.swift */,
 				416AE4372A7D956E003D0122 /* AlertCopy.swift */,
 				4160098C2A8D1A690096CCD9 /* BottomButtonsView.swift */,
@@ -2337,6 +2340,7 @@
 				41BACC042D90AE3F00C9C718 /* TipType.swift in Sources */,
 				4141B20228D871B900B60157 /* ContentView.swift in Sources */,
 				418141452A12BABA00FFC6A6 /* StatsGraphView.swift in Sources */,
+				41B591102ED1C107005B34D5 /* ViewDataProviding.swift in Sources */,
 				4134ACC42A88A1A800CB4BA8 /* InverterView.swift in Sources */,
 				411029112A71B95F004018BB /* BatteryTimePeriodView.swift in Sources */,
 				41AF2F452AA4C74F008FCA2E /* GridPowerFooterView.swift in Sources */,

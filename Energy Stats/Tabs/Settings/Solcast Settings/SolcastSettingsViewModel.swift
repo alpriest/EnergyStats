@@ -27,7 +27,7 @@ struct SolcastSettingsViewData: Copiable {
     }
 }
 
-class SolcastSettingsViewModel: ObservableObject {
+class SolcastSettingsViewModel: ObservableObject, ViewDataProviding {
     typealias ViewData = SolcastSettingsViewData
     
     private var configManager: ConfigManaging
@@ -43,7 +43,7 @@ class SolcastSettingsViewModel: ObservableObject {
         isDirty = viewData != originalValue
     }}
     @Published var isDirty = false
-    private var originalValue: ViewData? = nil
+    var originalValue: ViewData? = nil
 
     init(configManager: ConfigManaging, solarService: @escaping SolarForecastProviding) {
         self.configManager = configManager
@@ -69,8 +69,7 @@ class SolcastSettingsViewModel: ObservableObject {
                 self.viewData = viewData.copy {
                     $0.sites = configManager.solcastSettings.sites
                 }
-                originalValue = self.viewData
-                isDirty = false
+                resetDirtyState()
 
                 alertContent = AlertContent(title: "Success", message: "solcast_settings_saved")
             } catch let NetworkError.invalidConfiguration(reason) {

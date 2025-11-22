@@ -16,7 +16,7 @@ struct InverterWorkModeViewData: Copiable {
     }
 }
 
-class InverterWorkModeViewModel: ObservableObject {
+class InverterWorkModeViewModel: ObservableObject, ViewDataProviding {
     typealias ViewData = InverterWorkModeViewData
     
     private let networking: Networking
@@ -26,7 +26,7 @@ class InverterWorkModeViewModel: ObservableObject {
     @Published var viewData: ViewData = ViewData(items: []) { didSet {
         isDirty = viewData != originalValue
     }}
-    private var originalValue: ViewData?
+    var originalValue: ViewData?
     @Published var isDirty = false
 
     init(networking: Networking, config: ConfigManaging) {
@@ -74,8 +74,7 @@ class InverterWorkModeViewModel: ObservableObject {
 
             do {
                 try await networking.setDeviceSettingsItem(deviceSN: deviceSN, item: .workMode, value: WorkMode.networkTitle(for: mode))
-                originalValue = viewData
-                isDirty = false
+                resetDirtyState()
                 alertContent = AlertContent(title: "Success", message: "inverter_settings_saved")
                 state = .inactive
             } catch let NetworkError.foxServerError(code, _) where code == 44096 {

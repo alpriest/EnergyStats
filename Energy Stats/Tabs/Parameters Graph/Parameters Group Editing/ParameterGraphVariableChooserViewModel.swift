@@ -22,7 +22,7 @@ struct ParameterGraphVariableChooserViewData: Copiable {
     }
 }
 
-class ParameterGraphVariableChooserViewModel: ObservableObject {
+class ParameterGraphVariableChooserViewModel: ObservableObject, ViewDataProviding {
     typealias ViewData = ParameterGraphVariableChooserViewData
     
     private let onApply: ([ParameterGraphVariable]) -> Void
@@ -31,7 +31,7 @@ class ParameterGraphVariableChooserViewModel: ObservableObject {
     @Published var viewData: ViewData { didSet {
         isDirty = originalValue != viewData
     }}
-    private var originalValue: ViewData?
+    var originalValue: ViewData?
     @Published var isDirty = false
 
     init(variables: [ParameterGraphVariable], configManager: ConfigManaging, onApply: @escaping ([ParameterGraphVariable]) -> Void) {
@@ -64,6 +64,7 @@ class ParameterGraphVariableChooserViewModel: ObservableObject {
 
     func apply() {
         onApply(viewData.variables)
+        resetDirtyState()
     }
 
     static let DefaultGraphVariables = ["invBatPower",

@@ -26,7 +26,7 @@ struct SolarBandingSettingsViewData: Copiable, Equatable {
     }
 }
 
-class SolarBandingSettingsViewModel: ObservableObject {
+class SolarBandingSettingsViewModel: ObservableObject, ViewDataProviding {
     typealias ViewData = SolarBandingSettingsViewData
     
     private var configManager: ConfigManaging
@@ -35,7 +35,7 @@ class SolarBandingSettingsViewModel: ObservableObject {
         isDirty = viewData != originalValue
     }}
     @Published var isDirty = false
-    private var originalValue: ViewData?
+    var originalValue: ViewData?
 
     init(configManager: ConfigManaging) {
         self.configManager = configManager
@@ -51,8 +51,7 @@ class SolarBandingSettingsViewModel: ObservableObject {
             breakPoint2: breakpoint2,
             breakPoint3: breakpoint3
         )
-        originalValue = viewData
-        isDirty = false
+        resetDirtyState()
     }
     
     func didUpdate(breakpoint1: Double, breakpoint2: Double, breakpoint3: Double) {

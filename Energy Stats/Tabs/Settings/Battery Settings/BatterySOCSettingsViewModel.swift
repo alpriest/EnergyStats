@@ -25,7 +25,7 @@ struct BatterySOCSettingsViewData: Copiable, Equatable {
     }
 }
 
-class BatterySOCSettingsViewModel: ObservableObject, HasLoadState {
+class BatterySOCSettingsViewModel: ObservableObject, HasLoadState, ViewDataProviding {
     typealias ViewData = BatterySOCSettingsViewData
     
     private let networking: Networking
@@ -37,7 +37,7 @@ class BatterySOCSettingsViewModel: ObservableObject, HasLoadState {
         isDirty = viewData != originalValue
     }}
     @Published var isDirty = false
-    private var originalValue: ViewData?
+    var originalValue: ViewData?
 
     init(networking: Networking, config: ConfigManaging, onSOCchange: @escaping () -> Void) {
         self.networking = networking
@@ -94,8 +94,7 @@ class BatterySOCSettingsViewModel: ObservableObject, HasLoadState {
 
                 onSOCchange()
 
-                originalValue = viewData
-                isDirty = false
+                resetDirtyState()
                 alertContent = AlertContent(title: "Success", message: "batterySOC_settings_saved")
                 await setState(.inactive)
             } catch let NetworkError.foxServerError(code, _) where code == 44096 {

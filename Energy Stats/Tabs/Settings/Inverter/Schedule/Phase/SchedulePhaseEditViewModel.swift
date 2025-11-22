@@ -9,9 +9,9 @@ import Combine
 import Energy_Stats_Core
 import SwiftUI
 
-class SchedulePhaseEditViewModel: ObservableObject {
+class SchedulePhaseEditViewModel: ObservableObject, ViewDataProviding {
     typealias ViewData = SchedulePhaseEditViewData
-    
+
     private let configManager: ConfigManaging
     @Published var viewData = ViewData(
         id: "",
@@ -31,7 +31,7 @@ class SchedulePhaseEditViewModel: ObservableObject {
     private let onChange: (SchedulePhase) -> Void
     private let onDelete: (String) -> Void
     @Published var isDirty = false
-    private var originalValue: ViewData?
+    var originalValue: ViewData?
     @Published var minSOCError: LocalizedStringKey?
     @Published var fdSOCError: LocalizedStringKey?
     @Published var timeError: LocalizedStringKey?
@@ -128,8 +128,7 @@ class SchedulePhaseEditViewModel: ObservableObject {
             color: Color.scheduleColor(named: viewData.workMode)
         ) {
             onChange(phase)
-            originalValue = viewData
-            isDirty = false
+            resetDirtyState()
             onSuccess()
         }
     }

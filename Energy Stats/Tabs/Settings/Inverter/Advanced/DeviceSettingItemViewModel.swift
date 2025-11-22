@@ -34,7 +34,7 @@ struct DeviceSettingItemViewData: Copiable, Equatable {
     }
 }
 
-class DeviceSettingItemViewModel: ObservableObject, HasLoadState {
+class DeviceSettingItemViewModel: ObservableObject, HasLoadState, ViewDataProviding {
     typealias ViewData = DeviceSettingItemViewData
     
     private let item: DeviceSettingsItem
@@ -55,7 +55,7 @@ class DeviceSettingItemViewModel: ObservableObject, HasLoadState {
         isDirty = viewData != originalValue
     }}
     @Published var isDirty = false
-    private var originalValue: ViewData?
+    var originalValue: ViewData?
 
     init(item: DeviceSettingsItem, networking: Networking, configManager: ConfigManaging) {
         self.item = item
@@ -109,8 +109,7 @@ class DeviceSettingItemViewModel: ObservableObject, HasLoadState {
 
             do {
                 try await networking.setDeviceSettingsItem(deviceSN: deviceSN, item: item, value: viewData.value)
-                originalValue = viewData
-                isDirty = false
+                resetDirtyState()
                 await setState(.inactive)
                 alertContent = AlertContent(title: "Success", message: "inverter_settings_saved")
             } catch let NetworkError.foxServerError(code, _) where code == 44096 {
@@ -120,10 +119,5 @@ class DeviceSettingItemViewModel: ObservableObject, HasLoadState {
                 await setState(.error(error, "Could not save setting"))
             }
         }
-    }
-
-    func resetDirtyState() {
-        originalValue = viewData
-        isDirty = false
     }
 }

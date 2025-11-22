@@ -23,7 +23,7 @@ struct BatteryChargeScheduleSettingsViewData: Copiable, Equatable {
     }
 }
 
-class BatteryChargeScheduleSettingsViewModel: ObservableObject, HasLoadState {
+class BatteryChargeScheduleSettingsViewModel: ObservableObject, HasLoadState, ViewDataProviding {
     typealias ViewData = BatteryChargeScheduleSettingsViewData
     
     private let networking: Networking
@@ -39,7 +39,7 @@ class BatteryChargeScheduleSettingsViewModel: ObservableObject, HasLoadState {
     ) { didSet {
         isDirty = viewData != originalValue
     }}
-    @Published var originalValue: ViewData?
+    var originalValue: ViewData?
 
     init(networking: Networking, config: ConfigManaging) {
         self.networking = networking
@@ -98,8 +98,7 @@ class BatteryChargeScheduleSettingsViewModel: ObservableObject, HasLoadState {
                 ]
 
                 try await networking.setBatteryTimes(deviceSN: deviceSN, times: times)
-                originalValue = viewData
-                isDirty = false
+                resetDirtyState()
                 alertContent = AlertContent(title: "Success", message: "battery_charge_schedule_settings_saved")
                 await setState(.inactive)
             } catch let NetworkError.foxServerError(code, _) where code == 44096 {
