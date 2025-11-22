@@ -109,10 +109,12 @@ struct DataLoggersView: View {
             List(viewModel.items) {
                 DataLoggerView(item: $0)
             }
-        }.task {
+        }
+        .loadable(viewModel.state, retry: { viewModel.load() })
+        .navigationTitle(.dataLogger)
+        .task {
             viewModel.load()
         }
-        .navigationTitle(.dataLogger)
     }
 }
 

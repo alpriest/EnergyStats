@@ -23,27 +23,13 @@ struct ScheduleSummaryView: View {
     }
 
     var body: some View {
-        Group {
-            switch viewModel.state {
-            case .inactive:
-                content()
-            case let .error(_, reason):
-                Text(reason)
-                    .multilineTextAlignment(.center)
-            case let .active(reason):
-                Spacer()
-                HStack(spacing: 8) {
-                    Text(reason.rawValue)
-                    ProgressView()
-                }
-                Spacer()
+        content()
+            .onAppear {
+                Task { await viewModel.load() }
             }
-        }
-        .onAppear {
-            Task { await self.viewModel.load() }
-        }
-        .navigationTitle(.workSchedule)
-        .navigationBarTitleDisplayMode(.inline)
+            .loadable(viewModel.state, retry: { Task { await viewModel.load() }})
+            .navigationTitle(.workSchedule)
+            .navigationBarTitleDisplayMode(.inline)
     }
 
     @ViewBuilder
