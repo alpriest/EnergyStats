@@ -15,10 +15,12 @@ class FoxAPIService: FoxAPIServicing {
     private let credentials: KeychainStoring
     private var errorMessages: [String: String] = [:]
     private let urlSession: URLSessionProtocol
+    private let tracer: NetworkTracing?
 
-    public init(credentials: KeychainStoring, urlSession: URLSessionProtocol) {
+    public init(credentials: KeychainStoring, urlSession: URLSessionProtocol, tracer: NetworkTracing?) {
         self.credentials = credentials
         self.urlSession = urlSession
+        self.tracer = tracer
     }
 
     public func fetchErrorMessages() async {
@@ -50,12 +52,14 @@ extension FoxAPIService {
         var request = request
         request.timeoutInterval = 30
         addHeaders(to: &request)
+        tracer?.didStartRequest(urlRequest: request)
 
         do {
             let (data, response) = try await urlSession.data(for: request, delegate: nil)
             guard let httpResponse = (response as? HTTPURLResponse) else {
                 throw NetworkError.unknown("Invalid response type")
             }
+            tracer?.didEndRequest(responseCode: httpResponse.statusCode)
 
             let statusCode = httpResponse.statusCode
             if statusCode == 406 {
@@ -94,6 +98,7 @@ extension FoxAPIService {
 
             throw NetworkError.invalidResponse(request.url, statusCode)
         } catch let error as NSError {
+            tracer?.didEndRequestWithError(errorCode: error.code)
             print(error)
             if error.domain == NSURLErrorDomain, error.code == URLError.notConnectedToInternet.rawValue {
                 throw NetworkError.offline

@@ -65,6 +65,7 @@ struct Energy_StatsApp: App {
         self.config = config
         network = NetworkService.standard(keychainStore: keychainStore,
                                           urlSession: urlSession,
+                                          tracer: FirebaseNetworkTracer(),
                                           isDemoUser: { config.isDemoUser },
                                           dataCeiling: { config.dataCeiling })
         appSettingsPublisher = AppSettingsPublisherFactory.make()

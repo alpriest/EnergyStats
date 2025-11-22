@@ -342,6 +342,8 @@
 		41E8016A2ECDCF9C00CB5777 /* Copiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E801692ECDCF9B00CB5777 /* Copiable.swift */; };
 		41E8016C2ECF5FE200CB5777 /* SchedulePhaseEditViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E8016B2ECF5FE200CB5777 /* SchedulePhaseEditViewData.swift */; };
 		41E8016F2ECF601600CB5777 /* SchedulePhaseEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E8016E2ECF601600CB5777 /* SchedulePhaseEditViewModel.swift */; };
+		41E801732ED0668A00CB5777 /* NetworkPerformanceMonitoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E801722ED0668600CB5777 /* NetworkPerformanceMonitoring.swift */; };
+		41E801792ED07A8700CB5777 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 41E801782ED07A8700CB5777 /* FirebaseRemoteConfig */; };
 		41E8E7242AADFB3900DC4B89 /* SolarBandingSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E8E7232AADFB3900DC4B89 /* SolarBandingSettingsView.swift */; };
 		41E8E7262AAE0D0D00DC4B89 /* SolarRangeDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E8E7252AAE0D0D00DC4B89 /* SolarRangeDefinitions.swift */; };
 		41EB28032B8E634F00F6127F /* SolarStringsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EB28022B8E634F00F6127F /* SolarStringsSettingsView.swift */; };
@@ -882,6 +884,7 @@
 		41E801692ECDCF9B00CB5777 /* Copiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Copiable.swift; sourceTree = "<group>"; };
 		41E8016B2ECF5FE200CB5777 /* SchedulePhaseEditViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePhaseEditViewData.swift; sourceTree = "<group>"; };
 		41E8016E2ECF601600CB5777 /* SchedulePhaseEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePhaseEditViewModel.swift; sourceTree = "<group>"; };
+		41E801722ED0668600CB5777 /* NetworkPerformanceMonitoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkPerformanceMonitoring.swift; sourceTree = "<group>"; };
 		41E8E7232AADFB3900DC4B89 /* SolarBandingSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarBandingSettingsView.swift; sourceTree = "<group>"; };
 		41E8E7252AAE0D0D00DC4B89 /* SolarRangeDefinitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarRangeDefinitions.swift; sourceTree = "<group>"; };
 		41EB28022B8E634F00F6127F /* SolarStringsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarStringsSettingsView.swift; sourceTree = "<group>"; };
@@ -956,6 +959,7 @@
 				41FBF4002DAA574D00EBD4D5 /* PulseUI in Frameworks */,
 				419E5D832ECCE16D00CE67B4 /* FirebasePerformance in Frameworks */,
 				41F80BAF2CE2AE3100C6776B /* FirebaseInAppMessaging-Beta in Frameworks */,
+				41E801792ED07A8700CB5777 /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1304,6 +1308,7 @@
 		4140144C28C70B3200EA5BA1 /* Energy Stats */ = {
 			isa = PBXGroup;
 			children = (
+				41E801722ED0668600CB5777 /* NetworkPerformanceMonitoring.swift */,
 				41FBF4052DAA5B3200EBD4D5 /* Pulse */,
 				4185474B2A3A59E4000128C7 /* Energy Stats.entitlements */,
 				4189B0312B9486FE00EC4CB5 /* version.json */,
@@ -1947,6 +1952,7 @@
 				41FBF3FD2DAA574D00EBD4D5 /* Pulse */,
 				41FBF3FF2DAA574D00EBD4D5 /* PulseUI */,
 				419E5D822ECCE16D00CE67B4 /* FirebasePerformance */,
+				41E801782ED07A8700CB5777 /* FirebaseRemoteConfig */,
 			);
 			productName = "PV Stats";
 			productReference = 4140144A28C70B3200EA5BA1 /* Energy Stats.app */;
@@ -2299,6 +2305,7 @@
 				41702E132D8954C80067A0E4 /* ParameterValueAdjuster.swift in Sources */,
 				41C6AF662A360CF600C88F2B /* TextFile.swift in Sources */,
 				41C849692A8BBC3800431410 /* Shortcuts.swift in Sources */,
+				41E801732ED0668A00CB5777 /* NetworkPerformanceMonitoring.swift in Sources */,
 				41ACB2C62A51ADEB005831B0 /* ValueBoundsView.swift in Sources */,
 				41E3B76C2BBDD345005A9F80 /* Icon.swift in Sources */,
 				418DC9D92DAA47AD005613AB /* DebugSettingsView.swift in Sources */,
@@ -3404,6 +3411,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 41CA35742AA8C52100D45734 /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = OrderedCollections;
+		};
+		41E801782ED07A8700CB5777 /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 41F80BAD2CE2AE3100C6776B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
 		};
 		41F80BAE2CE2AE3100C6776B /* FirebaseInAppMessaging-Beta */ = {
 			isa = XCSwiftPackageProductDependency;

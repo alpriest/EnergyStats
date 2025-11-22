@@ -6,9 +6,9 @@
 //
 
 import AppIntents
+import OSLog
 import SwiftData
 import WidgetKit
-import OSLog
 
 public protocol HomeEnergyStateManagerConfig {
     func batteryCapacityW() throws -> Int

@@ -24,7 +24,7 @@ struct ParameterGraphVariableChooserView: View {
                             Button("Default") { viewModel.chooseDefaultVariables() }
                             Button("None") { viewModel.select(just: []) }
 
-                            ForEach(viewModel.groups, id: \.title) { group in
+                            ForEach(viewModel.viewData.groups, id: \.title) { group in
                                 Button {
                                     viewModel.select(group)
                                 } label: {
@@ -32,7 +32,7 @@ struct ParameterGraphVariableChooserView: View {
                                         Text(group.title)
                                         Spacer()
 
-                                        if viewModel.selected == group.id {
+                                        if viewModel.viewData.selected == group.id {
                                             Image(systemName: "checkmark")
                                         }
                                     }
@@ -50,9 +50,8 @@ struct ParameterGraphVariableChooserView: View {
 
                     Section {
                         ParameterVariableListView(
-                            variables: viewModel.variables.filter { showAllParameters || $0.isSelected },
-                            onTap: viewModel.toggle
-                        )
+                            variables: viewModel.viewData.variables.filter { showAllParameters || $0.isSelected },
+                            onTap: viewModel.toggle)
                     } header: {
                         HStack {
                             Text("Parameters")
@@ -68,21 +67,25 @@ struct ParameterGraphVariableChooserView: View {
                     }
                 }
 
-                BottomButtonsView(dirty: true,
-                                  onApply: {
-                                      viewModel.apply()
-                                      dismiss()
-                                  },
-                                  onCancel: { dismiss() },
-                                  footer: {
-                                      Text("Note that not all parameters contain values")
-                                  })
+                BottomButtonsView(
+                    dirty: viewModel.isDirty,
+                    onApply: {
+                        viewModel.apply()
+                        dismiss()
+                    },
+                    onCancel: { dismiss() },
+                    footer: {
+                        Text("Note that not all parameters contain values")
+                    })
             }
             .navigationTitle(.parameters)
-            .toolbar { ToolbarItem(placement: .navigationBarTrailing) {
-                NavigationLink(destination: { ParameterVariableGroupEditorView(viewModel: ParameterVariableGroupEditorViewModel(configManager: viewModel.configManager)) },
-                               label: { Text("Manage groups") })
-            } }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(
+                        destination: { ParameterVariableGroupEditorView(viewModel: ParameterVariableGroupEditorViewModel(configManager: viewModel.configManager)) },
+                        label: { Text("Manage groups") }).buttonStyle(.plain)
+                }
+            }
         }
     }
 

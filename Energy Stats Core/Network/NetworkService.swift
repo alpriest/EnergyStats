@@ -33,15 +33,22 @@ public protocol Networking {
     func fetchPowerGeneration(deviceSN: String) async throws -> PowerGenerationResponse
 }
 
+public protocol NetworkTracing {
+    func didStartRequest(urlRequest: URLRequest)
+    func didEndRequest(responseCode: Int)
+    func didEndRequestWithError(errorCode: Int)
+}
+
 public class NetworkService: Networking {
     let api: FoxAPIServicing
 
     public static func standard(keychainStore: KeychainStoring,
                                 urlSession: URLSessionProtocol,
+                                tracer: NetworkTracing? = nil,
                                 isDemoUser: @escaping () -> Bool,
                                 dataCeiling: @escaping () -> DataCeiling) -> Networking
     {
-        let service = FoxAPIService(credentials: keychainStore, urlSession: urlSession)
+        let service = FoxAPIService(credentials: keychainStore, urlSession: urlSession, tracer: tracer)
         let api = NetworkValueCleaner(
             api: NetworkFacade(
                 api: NetworkCache(api: service),
