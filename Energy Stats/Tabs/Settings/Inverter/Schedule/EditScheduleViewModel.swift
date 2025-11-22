@@ -9,22 +9,36 @@ import Energy_Stats_Core
 import Foundation
 import SwiftUI
 
-class EditScheduleViewModel: ObservableObject, HasLoadState, HasAlertContent {
-    @Published var schedule: Schedule
-    @Published var state: LoadState = .inactive
-    @Published var alertContent: AlertContent?
+struct EditScheduleViewData: Copiable {
+    var schedule: Schedule
+
+    func create(copying previous: EditScheduleViewData) -> EditScheduleViewData {
+        .init(schedule: previous.schedule)
+    }
+}
+
+class EditScheduleViewModel: ObservableObject, HasLoadState, HasAlertContent, ViewDataProviding {
+    typealias ViewData = EditScheduleViewData
+    
     private let networking: Networking
     private let configManager: ConfigManaging
-
+    @Published var state: LoadState = .inactive
+    @Published var alertContent: AlertContent?
+    @Published var viewData: ViewData
+    @Published var isDirty: Bool
+    var originalValue: ViewData?
+    
     init(networking: Networking, configManager: ConfigManaging, schedule: Schedule) {
         self.networking = networking
         self.configManager = configManager
-        self.schedule = schedule
+        let viewData = ViewData(schedule: schedule)
+        self.originalValue = viewData
+        self.viewData = viewData
     }
 
     func saveSchedule(onCompletion: @escaping () -> Void) async {
         guard let deviceSN = configManager.currentDevice.value?.deviceSN else { return }
-        guard schedule.isValid() else {
+        guard viewData.schedule.isValid() else {
             await setAlertContent(AlertContent(title: "error_title", message: "overlapping_time_periods"))
             return
         }
@@ -33,9 +47,10 @@ class EditScheduleViewModel: ObservableObject, HasLoadState, HasAlertContent {
 
         Task { [self] in
             do {
-                try await networking.saveSchedule(deviceSN: deviceSN, schedule: schedule)
+                try await networking.saveSchedule(deviceSN: deviceSN, schedule: viewData.schedule)
 
                 await setState(.inactive)
+                resetDirtyState()
 
                 Task { @MainActor in
                     alertContent = AlertContent(
@@ -61,31 +76,39 @@ class EditScheduleViewModel: ObservableObject, HasLoadState, HasAlertContent {
     func autoFillScheduleGaps() {
         guard let device = configManager.currentDevice.value else { return }
 
-        schedule = SchedulePhaseHelper.appendPhasesInGaps(
-            to: schedule,
-            mode: WorkMode.SelfUse,
-            device: device,
-            initialiseMaxSOC: configManager.getDeviceSupports(capability: .scheduleMaxSOC, deviceSN: device.deviceSN)
-        )
+        viewData = viewData.copy {
+            $0.schedule = SchedulePhaseHelper.appendPhasesInGaps(
+                to: viewData.schedule,
+                mode: WorkMode.SelfUse,
+                device: device,
+                initialiseMaxSOC: configManager.getDeviceSupports(capability: .scheduleMaxSOC, deviceSN: device.deviceSN)
+            )
+        }
     }
 
     func addNewTimePeriod() {
         guard let device = configManager.currentDevice.value else { return }
 
-        schedule = SchedulePhaseHelper.addNewTimePeriod(
-            to: schedule,
-            device: device,
-            initialiseMaxSOC: configManager.getDeviceSupports(capability: .scheduleMaxSOC, deviceSN: device.deviceSN)
-        )
+        viewData = viewData.copy {
+            $0.schedule = SchedulePhaseHelper.addNewTimePeriod(
+                to: $0.schedule,
+                device: device,
+                initialiseMaxSOC: configManager.getDeviceSupports(capability: .scheduleMaxSOC, deviceSN: device.deviceSN)
+            )
+        }
     }
 
     func updatedPhase(_ phase: SchedulePhase) {
-        schedule = SchedulePhaseHelper.updated(phase: phase, on: schedule)
+        viewData = viewData.copy {
+            $0.schedule = SchedulePhaseHelper.updated(phase: phase, on: $0.schedule)
+        }
     }
 
     func deletedPhase(_ id: String) {
-        schedule = SchedulePhaseHelper.deleted(phaseID: id, on: schedule)
+        viewData = viewData.copy {
+            $0.schedule = SchedulePhaseHelper.deleted(phaseID: id, on: $0.schedule)
+        }
     }
 
-    func unused() {}
+    func retryNoOp() {}
 }

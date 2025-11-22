@@ -33,7 +33,7 @@ struct EditScheduleView: View {
         VStack(spacing: 0) {
             Form {
                 ScheduleDetailView(
-                    schedule: viewModel.schedule,
+                    schedule: viewModel.viewData.schedule,
                     configManager: configManager,
                     onUpdate: viewModel.updatedPhase,
                     onDelete: viewModel.deletedPhase
@@ -82,7 +82,7 @@ struct EditScheduleView: View {
         }
         .navigationTitle(.editSchedule)
         .navigationBarTitleDisplayMode(.inline)
-        .loadable(viewModel.state, options: .all, retry: { viewModel.unused() })
+        .loadable(viewModel.state, options: .all, retry: { viewModel.retryNoOp() })
         .alert(alertContent: $viewModel.alertContent)
     }
 }
