@@ -265,6 +265,7 @@
 		41AF2F432AA4C6C1008FCA2E /* HomePowerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AF2F422AA4C6C1008FCA2E /* HomePowerFooterView.swift */; };
 		41AF2F452AA4C74F008FCA2E /* GridPowerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AF2F442AA4C74F008FCA2E /* GridPowerFooterView.swift */; };
 		41B3FFE82AB07FE10020DFC9 /* NetworkCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B3FFE72AB07FE10020DFC9 /* NetworkCache.swift */; };
+		41B5910D2ED1BBDF005B34D5 /* PeakShavingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B5910C2ED1BBDF005B34D5 /* PeakShavingViewModel.swift */; };
 		41B690F628E03EA70058126E /* NetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B690F528E03EA70058126E /* NetworkTests.swift */; };
 		41B690FD28E042560058126E /* login-failure.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B690FB28E042560058126E /* login-failure.json */; };
 		41B6910528E047DD0058126E /* report-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 41B6910428E047DD0058126E /* report-success.json */; };
@@ -805,6 +806,7 @@
 		41AF2F422AA4C6C1008FCA2E /* HomePowerFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePowerFooterView.swift; sourceTree = "<group>"; };
 		41AF2F442AA4C74F008FCA2E /* GridPowerFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPowerFooterView.swift; sourceTree = "<group>"; };
 		41B3FFE72AB07FE10020DFC9 /* NetworkCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCache.swift; sourceTree = "<group>"; };
+		41B5910C2ED1BBDF005B34D5 /* PeakShavingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeakShavingViewModel.swift; sourceTree = "<group>"; };
 		41B690F328DF5C390058126E /* NetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponse.swift; sourceTree = "<group>"; };
 		41B690F528E03EA70058126E /* NetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTests.swift; sourceTree = "<group>"; };
 		41B690FB28E042560058126E /* login-failure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "login-failure.json"; sourceTree = "<group>"; };
@@ -1470,7 +1472,7 @@
 				416AE4352A7D2C8B003D0122 /* InverterSettingsView.swift */,
 				410F41282DA5BD3C00DEE2F4 /* ESLabeledContent.swift */,
 				414536D22D3190E700AE4A29 /* FirmwareLoadingView.swift */,
-				416E032F2DE3815B0059CE42 /* PeakShavingView.swift */,
+				41B5910E2ED1BBFE005B34D5 /* Peak Shaving */,
 			);
 			path = Inverter;
 			sourceTree = "<group>";
@@ -1620,6 +1622,15 @@
 				41EE909A2BDEA97C006412FB /* Widgets */,
 			);
 			path = "Energy Stats Core";
+			sourceTree = "<group>";
+		};
+		41B5910E2ED1BBFE005B34D5 /* Peak Shaving */ = {
+			isa = PBXGroup;
+			children = (
+				41B5910C2ED1BBDF005B34D5 /* PeakShavingViewModel.swift */,
+				416E032F2DE3815B0059CE42 /* PeakShavingView.swift */,
+			);
+			path = "Peak Shaving";
 			sourceTree = "<group>";
 		};
 		41B690FA28E041E00058126E /* Responses */ = {
@@ -2401,6 +2412,7 @@
 				41E8016F2ECF601600CB5777 /* SchedulePhaseEditViewModel.swift in Sources */,
 				41C0923B2B20FCB0001D1E22 /* SchedulePhaseHelper.swift in Sources */,
 				4107446328CA1C5D006D5D7D /* PowerFlowView.swift in Sources */,
+				41B5910D2ED1BBDF005B34D5 /* PeakShavingViewModel.swift in Sources */,
 				41D7AB902B9F1F6C00FFDFC0 /* InfoButtonView.swift in Sources */,
 				417E1CE02E1D9A41009E8374 /* ChangeWorkModeIntent.swift in Sources */,
 				41A25D3F28CA5CFB00315714 /* ParametersGraphTabViewModel.swift in Sources */,

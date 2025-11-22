@@ -12,33 +12,22 @@ struct ParameterGraphVariableChooserViewData: Copiable {
     var groups: [ParameterGroup]
     var variables: [ParameterGraphVariable]
     var selected: UUID?
-    var truncatedYAxis: Bool
 
     func create(copying previous: ParameterGraphVariableChooserViewData) -> ParameterGraphVariableChooserViewData {
         .init(
             groups: previous.groups,
             variables: previous.variables,
-            selected: previous.selected,
-            truncatedYAxis: previous.truncatedYAxis
+            selected: previous.selected
         )
     }
 }
 
 class ParameterGraphVariableChooserViewModel: ObservableObject {
-//    @Published var variables: [ParameterGraphVariable] = [] { didSet { determineSelectedGroup() }}
     private let onApply: ([ParameterGraphVariable]) -> Void
     private let haptic = UIImpactFeedbackGenerator()
     private(set) var configManager: ConfigManaging
-//    @Published var groups: [ParameterGroup]
-//    @Published var selected: UUID?
-//    @Published var truncatedYAxis: Bool {
-//        didSet {
-//            configManager.truncatedYAxisOnParameterGraphs = truncatedYAxis
-//        }
-//    }
     @Published var viewData: ParameterGraphVariableChooserViewData { didSet {
         isDirty = originalValue != viewData
-        configManager.truncatedYAxisOnParameterGraphs = viewData.truncatedYAxis
     }}
     private var originalValue: ParameterGraphVariableChooserViewData?
     @Published var isDirty = false
@@ -47,15 +36,13 @@ class ParameterGraphVariableChooserViewModel: ObservableObject {
         let viewData = ParameterGraphVariableChooserViewData(
             groups: configManager.parameterGroups,
             variables: variables.sorted(by: { $0.type.name.lowercased() < $1.type.name.lowercased() }),
-            selected: nil,
-            truncatedYAxis: configManager.truncatedYAxisOnParameterGraphs
+            selected: nil
         )
         originalValue = viewData
         self.viewData = viewData
 
         self.configManager = configManager
         self.onApply = onApply
-//        self.truncatedYAxis = configManager.truncatedYAxisOnParameterGraphs
         haptic.prepare()
     }
 
