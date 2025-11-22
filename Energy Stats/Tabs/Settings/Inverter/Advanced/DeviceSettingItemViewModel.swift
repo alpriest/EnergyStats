@@ -35,6 +35,8 @@ struct DeviceSettingItemViewData: Copiable, Equatable {
 }
 
 class DeviceSettingItemViewModel: ObservableObject, HasLoadState {
+    typealias ViewData = DeviceSettingItemViewData
+    
     private let item: DeviceSettingsItem
     private let networking: Networking
     private let configManager: ConfigManaging
@@ -43,7 +45,7 @@ class DeviceSettingItemViewModel: ObservableObject, HasLoadState {
     var behaviour: String { item.behaviour }
     @Published var state = LoadState.inactive
     @Published var alertContent: AlertContent?
-    @Published var viewData: DeviceSettingItemViewData = .init(
+    @Published var viewData: ViewData = .init(
         value: "",
         unit: "",
         title: "",
@@ -53,7 +55,7 @@ class DeviceSettingItemViewModel: ObservableObject, HasLoadState {
         isDirty = viewData != originalValue
     }}
     @Published var isDirty = false
-    private var originalValue: DeviceSettingItemViewData?
+    private var originalValue: ViewData?
 
     init(item: DeviceSettingsItem, networking: Networking, configManager: ConfigManaging) {
         self.item = item
@@ -79,7 +81,7 @@ class DeviceSettingItemViewModel: ObservableObject, HasLoadState {
             do {
                 let response = try await networking.fetchDeviceSettingsItem(deviceSN: deviceSN, item: item)
 
-                let viewData = DeviceSettingItemViewData(
+                let viewData = ViewData(
                     value: response.value,
                     unit: response.unit ?? item.fallbackUnit,
                     title: item.title,
@@ -107,6 +109,8 @@ class DeviceSettingItemViewModel: ObservableObject, HasLoadState {
 
             do {
                 try await networking.setDeviceSettingsItem(deviceSN: deviceSN, item: item, value: viewData.value)
+                originalValue = viewData
+                isDirty = false
                 await setState(.inactive)
                 alertContent = AlertContent(title: "Success", message: "inverter_settings_saved")
             } catch let NetworkError.foxServerError(code, _) where code == 44096 {

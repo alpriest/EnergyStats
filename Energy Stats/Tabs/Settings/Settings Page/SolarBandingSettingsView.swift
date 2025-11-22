@@ -27,18 +27,20 @@ struct SolarBandingSettingsViewData: Copiable, Equatable {
 }
 
 class SolarBandingSettingsViewModel: ObservableObject {
+    typealias ViewData = SolarBandingSettingsViewData
+    
     private var configManager: ConfigManaging
     let haptic = UIImpactFeedbackGenerator()
-    @Published var viewData: SolarBandingSettingsViewData { didSet {
+    @Published var viewData: ViewData { didSet {
         isDirty = viewData != originalValue
     }}
     @Published var isDirty = false
-    private var originalValue: SolarBandingSettingsViewData?
+    private var originalValue: ViewData?
 
     init(configManager: ConfigManaging) {
         self.configManager = configManager
         haptic.prepare()
-        let viewData = SolarBandingSettingsViewData(solarDefinitions: configManager.solarDefinitions)
+        let viewData = ViewData(solarDefinitions: configManager.solarDefinitions)
         originalValue = viewData
         self.viewData = viewData
     }
@@ -49,6 +51,8 @@ class SolarBandingSettingsViewModel: ObservableObject {
             breakPoint2: breakpoint2,
             breakPoint3: breakpoint3
         )
+        originalValue = viewData
+        isDirty = false
     }
     
     func didUpdate(breakpoint1: Double, breakpoint2: Double, breakpoint3: Double) {

@@ -24,20 +24,22 @@ struct BatteryChargeScheduleSettingsViewData: Copiable, Equatable {
 }
 
 class BatteryChargeScheduleSettingsViewModel: ObservableObject, HasLoadState {
+    typealias ViewData = BatteryChargeScheduleSettingsViewData
+    
     private let networking: Networking
     private let config: ConfigManaging
     private var cancellable: AnyCancellable?
     @Published var state: LoadState = .inactive
     @Published var alertContent: AlertContent?
     @Published var isDirty = false
-    @Published var viewData = BatteryChargeScheduleSettingsViewData(
+    @Published var viewData = ViewData(
         timePeriod1: .init(start: Date(), end: Date(), enabled: false),
         timePeriod2: .init(start: Date(), end: Date(), enabled: false),
         summary: ""
     ) { didSet {
         isDirty = viewData != originalValue
     }}
-    @Published var originalValue: BatteryChargeScheduleSettingsViewData?
+    @Published var originalValue: ViewData?
 
     init(networking: Networking, config: ConfigManaging) {
         self.networking = networking
@@ -69,7 +71,7 @@ class BatteryChargeScheduleSettingsViewModel: ObservableObject, HasLoadState {
                     timePeriod2 = .now()
                 }
                 
-                let viewData = BatteryChargeScheduleSettingsViewData(
+                let viewData = ViewData(
                     timePeriod1: timePeriod1,
                     timePeriod2: timePeriod2,
                     summary: generateSummary(period1: timePeriod1, period2: timePeriod2)
@@ -96,6 +98,8 @@ class BatteryChargeScheduleSettingsViewModel: ObservableObject, HasLoadState {
                 ]
 
                 try await networking.setBatteryTimes(deviceSN: deviceSN, times: times)
+                originalValue = viewData
+                isDirty = false
                 alertContent = AlertContent(title: "Success", message: "battery_charge_schedule_settings_saved")
                 await setState(.inactive)
             } catch let NetworkError.foxServerError(code, _) where code == 44096 {

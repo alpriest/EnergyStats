@@ -23,17 +23,19 @@ struct ParameterGraphVariableChooserViewData: Copiable {
 }
 
 class ParameterGraphVariableChooserViewModel: ObservableObject {
+    typealias ViewData = ParameterGraphVariableChooserViewData
+    
     private let onApply: ([ParameterGraphVariable]) -> Void
     private let haptic = UIImpactFeedbackGenerator()
     private(set) var configManager: ConfigManaging
-    @Published var viewData: ParameterGraphVariableChooserViewData { didSet {
+    @Published var viewData: ViewData { didSet {
         isDirty = originalValue != viewData
     }}
-    private var originalValue: ParameterGraphVariableChooserViewData?
+    private var originalValue: ViewData?
     @Published var isDirty = false
 
     init(variables: [ParameterGraphVariable], configManager: ConfigManaging, onApply: @escaping ([ParameterGraphVariable]) -> Void) {
-        let viewData = ParameterGraphVariableChooserViewData(
+        let viewData = ViewData(
             groups: configManager.parameterGroups,
             variables: variables.sorted(by: { $0.type.name.lowercased() < $1.type.name.lowercased() }),
             selected: nil

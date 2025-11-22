@@ -10,8 +10,10 @@ import Energy_Stats_Core
 import SwiftUI
 
 class SchedulePhaseEditViewModel: ObservableObject {
+    typealias ViewData = SchedulePhaseEditViewData
+    
     private let configManager: ConfigManaging
-    @Published var viewData = SchedulePhaseEditViewData(
+    @Published var viewData = ViewData(
         id: "",
         startTime: .now,
         endTime: .now,
@@ -29,7 +31,7 @@ class SchedulePhaseEditViewModel: ObservableObject {
     private let onChange: (SchedulePhase) -> Void
     private let onDelete: (String) -> Void
     @Published var isDirty = false
-    private let originalValue: SchedulePhaseEditViewData?
+    private var originalValue: ViewData?
     @Published var minSOCError: LocalizedStringKey?
     @Published var fdSOCError: LocalizedStringKey?
     @Published var timeError: LocalizedStringKey?
@@ -57,7 +59,7 @@ class SchedulePhaseEditViewModel: ObservableObject {
             maxSOC = ""
         }
 
-        let viewData = SchedulePhaseEditViewData(
+        let viewData = ViewData(
             id: phase.id,
             startTime: Date.fromTime(phase.start),
             endTime: Date.fromTime(phase.end),
@@ -126,6 +128,8 @@ class SchedulePhaseEditViewModel: ObservableObject {
             color: Color.scheduleColor(named: viewData.workMode)
         ) {
             onChange(phase)
+            originalValue = viewData
+            isDirty = false
             onSuccess()
         }
     }

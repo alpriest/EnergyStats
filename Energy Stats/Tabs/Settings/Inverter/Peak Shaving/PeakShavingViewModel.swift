@@ -79,6 +79,8 @@ class PeakShavingViewModel: ObservableObject, HasLoadState {
                     importLimit: importLimit,
                     soc: soc
                 )
+                originalValue = viewData
+                isDirty = false
                 alertContent = AlertContent(title: "Success", message: "peak_shaving_settings_saved")
                 await setState(.inactive)
             } catch {
