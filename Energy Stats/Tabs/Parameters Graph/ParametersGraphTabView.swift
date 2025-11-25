@@ -53,7 +53,7 @@ struct ParametersGraphTabView: View {
                     if viewModel.hasLoaded {
                         graphs()
                     } else {
-                        LoadingView(message: "Loading")
+                        LoadingView(message: .loading)
                             .loadable(viewModel.state, options: [.retry], overlay: true, retry: { Task { await viewModel.load() } })
                     }
 
@@ -109,7 +109,7 @@ struct ParametersGraphTabView: View {
                                 )
                             }
 
-                            LoadingView(message: "Loading")
+                            LoadingView(message: .loading)
                                 .opacity(viewModel.state.opacity())
                         }
                     }
@@ -134,7 +134,7 @@ struct ParametersGraphTabView: View {
                         )
                     }
 
-                    LoadingView(message: "Loading")
+                    LoadingView(message: .loading)
                         .opacity(viewModel.state.opacity())
                 }
             }

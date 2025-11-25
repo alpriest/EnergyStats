@@ -88,7 +88,7 @@ class NetworkValueCleaner: FoxAPIServicing {
         let original = try await api.openapi_fetchReport(deviceSN: deviceSN, variables: variables, queryDate: queryDate, reportType: reportType)
 
         return original.enumerated().map { index, originalData in
-            if originalData.variable != variables[index].networkTitle {
+            if originalData.variable != variables[safe: index]?.networkTitle {
                 CoreBus.onUnexpectedServerData(
                     api: "fetchReport",
                     expected: variables[index].networkTitle,

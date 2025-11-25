@@ -46,10 +46,10 @@ struct LoadStateView: ViewModifier {
             if overlay {
                 ZStack {
                     content
-                    LoadingView(message: message.rawValue)
+                    LoadingView(message: message)
                 }
             } else {
-                LoadingView(message: message.rawValue)
+                LoadingView(message: message)
             }
         case .error(let error, let reason):
             AnyView(errorAlert.make(cause: error, message: reason, options: options, retry: retry))

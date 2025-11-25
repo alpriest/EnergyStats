@@ -54,7 +54,7 @@ struct PowerFlowTabView: View {
                 Spacer()
             case .unloaded:
                 Spacer()
-                LoadingView(message: "Loading")
+                LoadingView(message: .loading)
                 Spacer()
             }
         }

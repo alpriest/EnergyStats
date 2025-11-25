@@ -19,7 +19,7 @@ struct SettingsTabView: View {
     var body: some View {
         NavigationStack {
             if viewModel.isLoggingOut {
-                LoadingView(message: "Logging out...")
+                LoadingView(message: .loggingOut)
             } else {
                 contentView
             }

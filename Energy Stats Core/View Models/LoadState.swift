@@ -7,11 +7,32 @@
 
 import SwiftUI
 
-public enum LoadStateActivity: LocalizedStringKey {
-    case loading = "Loading"
-    case saving = "Saving"
-    case activating = "Activating"
-    case deactivating = "Deactivating"
+public enum LoadStateActivity {
+    case loading
+    case saving
+    case activating
+    case deactivating
+    case loggingOut
+
+    public var title: LocalizedStringKey {
+        switch self {
+        case .loading: return "Loading"
+        case .saving: return "Saving"
+        case .activating: return "Activating"
+        case .deactivating: return "Deactivating"
+        case .loggingOut: return "Logging out"
+        }
+    }
+
+    public var longOperationTitle: LocalizedStringKey {
+        switch self {
+        case .loading: return "Still loading"
+        case .saving: return "Still saving"
+        case .activating: return "Still activating"
+        case .deactivating: return "Still deactivating"
+        case .loggingOut: return "Still logging out"
+        }
+    }
 }
 
 public enum LoadState: Equatable {
@@ -49,7 +70,7 @@ public enum LoadState: Equatable {
             false
         }
     }
-    
+
     public var isActive: Bool {
         switch self {
         case .active:
@@ -61,20 +82,27 @@ public enum LoadState: Equatable {
 }
 
 public struct LoadingView: View {
-    public let message: LocalizedStringKey
+    @State private var message: LocalizedStringKey
+    private let activity: LoadStateActivity
 
-    public init(message: LocalizedStringKey) {
-        self.message = message
+    public init(message: LoadStateActivity) {
+        self.activity = message
+        self.message = message.title
     }
 
     public var body: some View {
-        SolarLoadingView()
+        SolarLoadingView(message: message)
             .frame(width: 200, height: 80)
+            .task {
+                try? await Task.sleep(for: .seconds(10))
+                self.message = activity.longOperationTitle
+            }
     }
 }
 
 struct SolarLoadingView: View {
     @State private var sunRotation: Double = 0
+    let message: LocalizedStringKey
 
     var body: some View {
         ZStack {
@@ -98,7 +126,7 @@ struct SolarLoadingView: View {
     private var backgroundGradient: some View {
         LinearGradient(
             gradient: Gradient(colors: [
-                Color(.background),
+                Color(.loadingBackground),
                 Color(.gray).opacity(0.05)
             ]),
             startPoint: .top,
@@ -115,7 +143,7 @@ struct SolarLoadingView: View {
 
     @ViewBuilder
     private func loadingText() -> some View {
-        Text("Loading...")
+        Text(message)
     }
 
     @ViewBuilder
@@ -135,12 +163,17 @@ struct SolarLoadingView: View {
 }
 
 #Preview {
-    SolarLoadingView()
-        .frame(width: 200, height: 80)
-        .environment(\.colorScheme, .dark)
-    
-    SolarLoadingView()
-        .frame(width: 200, height: 80)
-        .environment(\.colorScheme, .light)
-}
+    Color.black.overlay(
+        SolarLoadingView(message: "Loading")
+            .frame(width: 200, height: 80)
+            .environment(\.colorScheme, .dark)
+            .environment(\.locale, Locale(identifier: "de"))
+    )
 
+    Color.white.overlay(
+        SolarLoadingView(message: "Loading")
+            .frame(width: 200, height: 80)
+            .environment(\.colorScheme, .light)
+            .environment(\.locale, Locale(identifier: "de"))
+    )
+}

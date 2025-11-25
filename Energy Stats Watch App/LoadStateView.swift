@@ -25,10 +25,10 @@ struct LoadStateView: ViewModifier {
             if overlay {
                 ZStack {
                     content
-                    LoadingView(message: message.rawValue)
+                    LoadingView(message: message)
                 }
             } else {
-                LoadingView(message: message.rawValue)
+                LoadingView(message: message)
             }
         case .error(_, let reason):
             Text(reason)
@@ -39,9 +39,9 @@ struct LoadStateView: ViewModifier {
 }
 
 struct LoadingView: View {
-    public let message: LocalizedStringKey
+    public let message: LoadStateActivity
 
-    public init(message: LocalizedStringKey) {
+    public init(message: LoadStateActivity) {
         self.message = message
     }
 
@@ -49,7 +49,7 @@ struct LoadingView: View {
         HStack(spacing: 8) {
             ProgressView()
                 .frame(width: 14, height: 14)
-            Text(message)
+            Text(message.title)
         }
         .padding()
         .border(Color("pale_gray", bundle: Bundle(for: BundleLocator.self)))

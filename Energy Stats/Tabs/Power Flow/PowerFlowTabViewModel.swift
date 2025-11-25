@@ -183,8 +183,12 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
             self.currentStatusCalculator = currentStatusCalculator
 
             let battery = BatteryViewModel.make(currentDevice: currentDevice, real: real)
-            if battery.hasBattery, let batterySettings = try? await network.fetchBatterySettings(deviceSN: currentDevice.deviceSN) {
-                self.configManager.minSOC = batterySettings.minSocOnGridPercent
+            if battery.hasBattery {
+                Task {
+                    if let batterySettings = try? await network.fetchBatterySettings(deviceSN: currentDevice.deviceSN) {
+                        self.configManager.minSOC = batterySettings.minSocOnGridPercent
+                    }
+                }
             }
 
             let (totals, financialModel, generation) = try await self.loadTotals(for: currentDevice)

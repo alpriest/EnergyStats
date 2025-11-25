@@ -22,7 +22,7 @@ struct ContentView: View {
             switch userManager.isLoggedIn {
             case nil:
                 TabView{
-                    LoadingView(message: "Loading")
+                    LoadingView(message: .loading)
                         .transition(.opacity)
                 }
             case .some(true):
