@@ -21,7 +21,7 @@ struct OfflineDeviceBannerView: View {
                 }
                 .frame(minWidth: 0, maxWidth: .infinity)
 
-                Text("If you’ve recently updated your WiFi settings and need help reconnecting your inverter, click below to watch a step-by-step video tutorial.")
+                Text("If you’ve recently changed your WiFi settings and need help reconnecting your inverter, click below to watch a step-by-step video tutorial.")
                     .font(.body)
                     .fontWeight(.regular)
 

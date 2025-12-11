@@ -24,10 +24,10 @@ struct ScheduleSummaryView: View {
 
     var body: some View {
         content()
+            .loadable(viewModel.state, retry: { Task { await viewModel.load() }})
             .onAppear {
                 Task { await viewModel.load() }
             }
-            .loadable(viewModel.state, retry: { Task { await viewModel.load() }})
             .navigationTitle(.workSchedule)
             .navigationBarTitleDisplayMode(.inline)
     }

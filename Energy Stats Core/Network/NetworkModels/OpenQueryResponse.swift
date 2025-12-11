@@ -339,6 +339,6 @@ public struct SetCurrentScheduleRequest: Codable {
 }
 
 public struct ApiRequestCountResponse: Decodable {
-    public let total: String
-    public let remaining: String
+    public let total: Int
+    public let remaining: Int
 }

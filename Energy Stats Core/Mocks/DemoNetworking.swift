@@ -317,7 +317,7 @@ class DemoAPI: FoxAPIServicing {
     }
 
     func openapi_fetchRequestCount() async throws -> ApiRequestCountResponse {
-        ApiRequestCountResponse(total: "10", remaining: "5")
+        ApiRequestCountResponse(total: 10, remaining: 5)
     }
 
     func openapi_fetchDeviceSettingsItem(deviceSN: String, item: DeviceSettingsItem) async throws -> FetchDeviceSettingsItemResponse {

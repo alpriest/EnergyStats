@@ -31,7 +31,9 @@ struct DebugSettingsView: View {
                 Button {
                     Task {
                         let counts = try await networking.fetchRequestCount()
-                        alert = AlertContent(title: nil, message: LocalizedStringKey("\(counts.remaining) remaining out of \(counts.total) total"))
+                        await MainActor.run {
+                            alert = AlertContent(title: nil, message: LocalizedStringKey("\(counts.remaining) remaining out of \(counts.total) total"))
+                        }
                     }
                 } label: {
                     Text("View request count")
