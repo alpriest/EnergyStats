@@ -25,7 +25,7 @@ struct BatteryTimePeriodView: View {
             content: {
                 Toggle(isOn: $timePeriod.enabled, label: { Text("Enable charge from grid") })
 
-                CustomDatePicker(start: $timePeriod.start, end: $timePeriod.end, includeSeconds: false)
+                CustomTimePicker(start: $timePeriod.start, end: $timePeriod.end, includeSeconds: false)
             },
             header: {
                 Text(title)

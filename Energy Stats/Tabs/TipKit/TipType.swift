@@ -22,8 +22,8 @@ extension TipType {
 
     var storageKey: String {
         switch self {
-        case .statsGraphDecimalPlacesFixedTo1:
-            "statsGraphDecimalPlacesFixedTo1"
+        case .placeholder:
+            fatalError("Do not try to display this tip")
         }
     }
 }

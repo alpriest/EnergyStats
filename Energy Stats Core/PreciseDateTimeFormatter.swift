@@ -35,3 +35,7 @@ public extension DateFormatter {
         return formatter
     }()
 }
+
+public let dayMonthFormat: Date.FormatStyle = .dateTime
+    .day(.twoDigits)
+    .month(.abbreviated)

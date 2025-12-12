@@ -11,7 +11,7 @@ enum DatePickerRange: Equatable {
     case day
     case month
     case year
-    case custom(_ start: Date, _ end: Date)
+    case custom(_ start: Date, _ end: Date, _ unit: CustomDateRangeDisplayUnit)
 
     var isCustom: Bool {
         self != .day && self != .month && self != .year
@@ -32,17 +32,9 @@ class StatsDatePickerViewModel: ObservableObject {
         didSet { updateDisplayMode() }
     }
 
-    @Published var customStartDate = Date.now {
-        didSet {
-            range = .custom(customStartDate, customEndDate)
-        }
-    }
-
-    @Published var customEndDate = Date.now {
-        didSet {
-            range = .custom(customStartDate, customEndDate)
-        }
-    }
+    @Published private(set) var customStartDate = Date.now
+    @Published private(set) var customEndDate = Date.now
+    @Published private(set) var customDateRangeDisplayUnit: CustomDateRangeDisplayUnit = .days
 
     var yearRange = 2010 ... (Calendar.current.component(.year, from: .now))
     @Published var canIncrease = false
@@ -67,14 +59,22 @@ class StatsDatePickerViewModel: ObservableObject {
         case .year(let year):
             self.year = year
             range = .year
-        case .custom(let start, let end):
-            range = .custom(start, end)
+        case .custom(let start, let end, let unit):
+            range = .custom(start, end, unit)
             customStartDate = start
             customEndDate = end
+            customDateRangeDisplayUnit = unit
         }
 
         isInitialised = true
         updateQuickNavigationButtons(displayMode.wrappedValue)
+    }
+    
+    func updateCustomDateRange(start: Date, end: Date, unit: CustomDateRangeDisplayUnit) {
+        range = .custom(start, end, unit)
+        self.customStartDate = start
+        self.customEndDate = end
+        self.customDateRangeDisplayUnit = unit
     }
 
     func increaseAccessibilityLabel() -> String {
@@ -184,8 +184,8 @@ class StatsDatePickerViewModel: ObservableObject {
             StatsGraphDisplayMode.month(month, year)
         case .year:
             StatsGraphDisplayMode.year(year)
-        case .custom(let start, let end):
-            StatsGraphDisplayMode.custom(start, end)
+        case .custom(let start, let end, let unit):
+            StatsGraphDisplayMode.custom(start, end, unit)
         }
     }
 }

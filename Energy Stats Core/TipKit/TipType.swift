@@ -7,5 +7,5 @@
 
 // cases must be uniquely numbered
 public enum TipType: Int, Codable {
-    case statsGraphDecimalPlacesFixedTo1 = 0
+    case placeholder = 0
 }

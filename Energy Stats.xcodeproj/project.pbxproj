@@ -319,6 +319,7 @@
 		41DE1B512ACD57A8001BB2D1 /* Energy_Stats_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; platformFilter = ios; };
 		41DE1B522ACD57A8001BB2D1 /* Energy_Stats_Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		41DF51D22AA4CF6D007B5102 /* MockAppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DF51D12AA4CF6D007B5102 /* MockAppTheme.swift */; };
+		41DF87272EEB2A7E00F6EDF2 /* CustomDateRangePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DF87262EEB2A7E00F6EDF2 /* CustomDateRangePickerView.swift */; };
 		41DFC5FD2EC3D3A600DE5A36 /* ColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DFC5FC2EC3D3A000DE5A36 /* ColorPicker.swift */; };
 		41E12E842CC6597A001F3839 /* CheckBatteryChargeLevelIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E12E832CC6597A001F3839 /* CheckBatteryChargeLevelIntent.swift */; };
 		41E12E862CC659E4001F3839 /* CheckCurrentSolarGenerationIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E12E852CC659E4001F3839 /* CheckCurrentSolarGenerationIntent.swift */; };
@@ -352,7 +353,7 @@
 		41EB65F92E05BB7400F53573 /* FactoryResetAppSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EB65F82E05BB7400F53573 /* FactoryResetAppSettingsView.swift */; };
 		41EB65FB2E05BD8900F53573 /* StepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EB65FA2E05BD8900F53573 /* StepView.swift */; };
 		41EB65FD2E05C00600F53573 /* FullWidthVStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EB65FC2E05C00600F53573 /* FullWidthVStack.swift */; };
-		41ED2EF02B349EF7001CF277 /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41ED2EEF2B349EF7001CF277 /* CustomDatePicker.swift */; };
+		41ED2EF02B349EF7001CF277 /* CustomTimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41ED2EEF2B349EF7001CF277 /* CustomTimePicker.swift */; };
 		41EE909C2BDEA98B006412FB /* HomeEnergyStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE909B2BDEA98B006412FB /* HomeEnergyStateManager.swift */; };
 		41EE90A52BDEB4D3006412FB /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41EE90A42BDEB4D3006412FB /* WidgetKit.framework */; };
 		41EE90AB2BDEB6FB006412FB /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 418547162A3A1530000128C7 /* WidgetKit.framework */; };
@@ -860,6 +861,7 @@
 		41DCF5432B06CBD40010843F /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		41DD7F3929C5B8940072CDE8 /* SolarPowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarPowerView.swift; sourceTree = "<group>"; };
 		41DF51D12AA4CF6D007B5102 /* MockAppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAppTheme.swift; sourceTree = "<group>"; };
+		41DF87262EEB2A7E00F6EDF2 /* CustomDateRangePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDateRangePickerView.swift; sourceTree = "<group>"; };
 		41DFC5FC2EC3D3A000DE5A36 /* ColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPicker.swift; sourceTree = "<group>"; };
 		41E12E832CC6597A001F3839 /* CheckBatteryChargeLevelIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBatteryChargeLevelIntent.swift; sourceTree = "<group>"; };
 		41E12E852CC659E4001F3839 /* CheckCurrentSolarGenerationIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckCurrentSolarGenerationIntent.swift; sourceTree = "<group>"; };
@@ -895,7 +897,7 @@
 		41EB65F82E05BB7400F53573 /* FactoryResetAppSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryResetAppSettingsView.swift; sourceTree = "<group>"; };
 		41EB65FA2E05BD8900F53573 /* StepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepView.swift; sourceTree = "<group>"; };
 		41EB65FC2E05C00600F53573 /* FullWidthVStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullWidthVStack.swift; sourceTree = "<group>"; };
-		41ED2EEF2B349EF7001CF277 /* CustomDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
+		41ED2EEF2B349EF7001CF277 /* CustomTimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTimePicker.swift; sourceTree = "<group>"; };
 		41EDDF6B28CD2A630092C662 /* LoadedPowerFlowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadedPowerFlowViewModel.swift; sourceTree = "<group>"; };
 		41EDDF7128CD2ED30092C662 /* Energy StatsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Energy StatsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		41EE909B2BDEA98B006412FB /* HomeEnergyStateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeEnergyStateManager.swift; sourceTree = "<group>"; };
@@ -1065,7 +1067,7 @@
 				41DFC5FC2EC3D3A000DE5A36 /* ColorPicker.swift */,
 				416AE4372A7D956E003D0122 /* AlertCopy.swift */,
 				4160098C2A8D1A690096CCD9 /* BottomButtonsView.swift */,
-				41ED2EEF2B349EF7001CF277 /* CustomDatePicker.swift */,
+				41ED2EEF2B349EF7001CF277 /* CustomTimePicker.swift */,
 				4128E4C028DA5F6600C1D698 /* Date.swift */,
 				41CF044B2A95006E00ADCCAD /* ExternalWebNavigationLink.swift */,
 				417E1CEB2E1E5EA4009E8374 /* FindOutMoreView.swift */,
@@ -1487,6 +1489,7 @@
 				417AA2192A12454A0073CD34 /* StatsTabView.swift */,
 				417AA21C2A1245C00073CD34 /* StatsTabViewModel.swift */,
 				419DFA842A1292380067313A /* StatsGraphHeaderView.swift */,
+				41DF87262EEB2A7E00F6EDF2 /* CustomDateRangePickerView.swift */,
 				419DFA872A12A6DF0067313A /* StatsDatePickerViewModel.swift */,
 				41CD1F312A1414C1006B0C00 /* StatsGraphVariableToggles.swift */,
 				41C6AF652A360CF600C88F2B /* TextFile.swift */,
@@ -2277,7 +2280,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41ED2EF02B349EF7001CF277 /* CustomDatePicker.swift in Sources */,
+				41ED2EF02B349EF7001CF277 /* CustomTimePicker.swift in Sources */,
 				41C55ABF2D0242750035A002 /* TemperatureView.swift in Sources */,
 				4107446C28CA57A9006D5D7D /* PowerFlowTabView.swift in Sources */,
 				415F0BD72D9C5E57003EB760 /* BatteryFirmwareVersionsView.swift in Sources */,
@@ -2387,6 +2390,7 @@
 				410FC88A2AB9EAD90004CBC2 /* ParameterVariableGroupEditorViewModel.swift in Sources */,
 				4171854E2A010B6300D18CDD /* ParameterGraphVariableChooserViewModel.swift in Sources */,
 				418199C72A4034530001B5D4 /* FAQView.swift in Sources */,
+				41DF87272EEB2A7E00F6EDF2 /* CustomDateRangePickerView.swift in Sources */,
 				4139CD982CC0023600DFB2C4 /* TemplateSummaryListRow.swift in Sources */,
 				417153E629F2BD3300639A7B /* LoadState.swift in Sources */,
 				41C3B7F32E0EFA0B00A9EA58 /* ExportStatsDataIntent.swift in Sources */,

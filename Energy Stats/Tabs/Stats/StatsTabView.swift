@@ -14,7 +14,7 @@ enum StatsGraphDisplayMode: Equatable {
     case day(Date)
     case month(_ month: Int, _ year: Int)
     case year(Int)
-    case custom(_ start: Date, _ end: Date)
+    case custom(_ start: Date, _ end: Date, _ unit: CustomDateRangeDisplayUnit)
 
     func unit() -> Calendar.Component {
         switch self {
@@ -125,7 +125,6 @@ struct StatsTabView: View {
             self.appSettings = $0
         }
         .trackVisibility(on: viewModel)
-        .tipKit(tip: .statsGraphDecimalPlacesFixedTo1)
     }
 }
 

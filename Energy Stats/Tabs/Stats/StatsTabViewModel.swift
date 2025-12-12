@@ -144,13 +144,13 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
             let updatedData: [StatsGraphValue]
             let totals: [ReportVariable: Double]
 
-            if case .custom(let start, let end) = displayMode {
+            if case .custom(let start, let end, let unit) = displayMode {
                 (updatedData, totals) = try await fetcher.fetchCustomDateRangeData(
                     device: currentDevice,
                     start: start,
                     end: end,
                     reportVariables: reportVariables,
-                    displayMode: displayMode
+                    unit: unit
                 )
             } else {
                 (updatedData, totals) = try await fetcher.fetchData(
@@ -447,7 +447,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
             exportFileName = "energystats_stats_\(year)_\(month + 1).csv"
         case .year(let year):
             exportFileName = "energystats_stats_\(year).csv"
-        case .custom(let start, let end):
+        case .custom(let start, let end, _):
             let startName = dateName(from: start)
             let endName = dateName(from: end)
             exportFileName = "energystats_stats_\(startName)_\(endName).csv"

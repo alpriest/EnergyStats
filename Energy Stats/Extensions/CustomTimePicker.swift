@@ -9,7 +9,7 @@ import Combine
 import Energy_Stats_Core
 import SwiftUI
 
-struct CustomDatePicker: View {
+struct CustomTimePicker: View {
     @Binding var start: Date
     @Binding var end: Date
     private let includeSeconds: Bool
@@ -22,13 +22,13 @@ struct CustomDatePicker: View {
 
     var body: some View {
         VStack {
-            SinglePickerView(label: "Start", date: $start, timeType: .start, includeAppendage: includeSeconds)
-            SinglePickerView(label: "End", date: $end, timeType: .end, includeAppendage: includeSeconds)
+            SingleTimePickerView(label: "Start", date: $start, timeType: .start, includeAppendage: includeSeconds)
+            SingleTimePickerView(label: "End", date: $end, timeType: .end, includeAppendage: includeSeconds)
         }
     }
 }
 
-struct SinglePickerView: View {
+private struct SingleTimePickerView: View {
     let label: LocalizedStringKey
     @Binding var date: Date
     @State private var showing = false
@@ -54,7 +54,7 @@ struct SinglePickerView: View {
         }.onTapGesture {
             showing = true
         }.sheet(isPresented: $showing, content: {
-            DatePickerSheet(label: label, date: date) {
+            TimePickerSheet(label: label, date: date) {
                 date = $0
                 showing = false
             }
@@ -62,7 +62,7 @@ struct SinglePickerView: View {
     }
 }
 
-struct DatePickerSheet: View {
+private struct TimePickerSheet: View {
     let label: LocalizedStringKey
     @State var date: Date
     let onSelect: (Date) -> Void
@@ -133,7 +133,7 @@ struct MediumPresentationDetentsViewModifier: ViewModifier {
 }
 
 #Preview {
-    CustomDatePicker(
+    CustomTimePicker(
         start: .constant(Date()),
         end: .constant(
             Date()

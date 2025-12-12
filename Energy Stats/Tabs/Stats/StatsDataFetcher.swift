@@ -17,11 +17,13 @@ struct StatsDataFetcher {
         start: Date,
         end: Date,
         reportVariables: [ReportVariable],
-        displayMode: StatsGraphDisplayMode
+        unit: CustomDateRangeDisplayUnit
     ) async throws -> ([StatsGraphValue], [ReportVariable: Double]) {
         var current = start
         var accumulatedGraphValues: [StatsGraphValue] = []
         var accumulatedReportResponses: [OpenReportResponse] = []
+        
+        // TODO: Fetch by month if unit == .days, or year if unit == .months
 
         while (current.year < end.year || (current.year == end.year && current.month <= end.month)) {
             let month = Calendar.current.component(.month, from: current)

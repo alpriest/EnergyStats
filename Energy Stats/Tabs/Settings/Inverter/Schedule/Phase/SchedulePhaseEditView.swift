@@ -39,7 +39,7 @@ struct SchedulePhaseEditView: View {
                 }
 
                 Section {
-                    CustomDatePicker(start: $viewModel.viewData.startTime, end: $viewModel.viewData.endTime, includeSeconds: true)
+                    CustomTimePicker(start: $viewModel.viewData.startTime, end: $viewModel.viewData.endTime, includeSeconds: true)
 
                     Picker("Work Mode", selection: $viewModel.viewData.workMode) {
                         ForEach(viewModel.viewData.modes, id: \.self) { mode in

@@ -75,6 +75,15 @@ extension View {
             self
         }
     }
+    
+    @ViewBuilder
+    func hideGlassEffect() -> some View {
+        if #available(iOS 26, watchOS 26, *) {
+            glassEffect(.clear)
+        } else {
+            self
+        }
+    }
 }
 
 #if DEBUG
