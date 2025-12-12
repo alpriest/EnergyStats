@@ -16,8 +16,15 @@ struct CustomDateRangePickerView: View {
     private let initialEnd: Date
     private let initialDisplayUnit: CustomDateRangeDisplayUnit
     private let onUpdate: (Date, Date, CustomDateRangeDisplayUnit) -> Void
+    private let onCancel: () -> Void
 
-    init(start: Date, end: Date, displayUnit: CustomDateRangeDisplayUnit, onUpdate: @escaping (Date, Date, CustomDateRangeDisplayUnit) -> Void) {
+    init(
+        start: Date,
+        end: Date,
+        displayUnit: CustomDateRangeDisplayUnit,
+        onUpdate: @escaping (Date, Date, CustomDateRangeDisplayUnit) -> Void,
+        onCancel: @escaping () -> Void
+    ) {
         self.start = start
         self.end = end
         self.displayUnit = displayUnit
@@ -25,6 +32,7 @@ struct CustomDateRangePickerView: View {
         self.initialEnd = end
         self.initialDisplayUnit = displayUnit
         self.onUpdate = onUpdate
+        self.onCancel = onCancel
     }
 
     var body: some View {
@@ -75,7 +83,8 @@ struct CustomDateRangePickerView: View {
         end: Date.now,
         displayUnit: .days,
         onUpdate: { _, _, _ in
-        }
+        },
+        onCancel: { }
     )
 }
 

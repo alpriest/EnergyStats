@@ -72,10 +72,15 @@ struct StatsGraphHeaderView: View {
                 end: viewModel.customEndDate,
                 displayUnit: viewModel.customDateRangeDisplayUnit,
                 onUpdate: { _, _, _ in
-                })
+                    showingCustomRangePicker.toggle()
+                },
+                onCancel: {
+                    showingCustomRangePicker.toggle()
+                }
+            )
         }
     }
-    
+
     @ViewBuilder
     private func title() -> some View {
         HStack {
@@ -189,7 +194,7 @@ struct StatsGraphHeaderView: View {
             Image(systemName: "arrow.right")
             Text(viewModel.customEndDate, format: dayMonthFormat)
             Spacer()
-            
+
             Button {
                 showingCustomRangePicker = true
             } label: {
