@@ -64,8 +64,8 @@ struct StatsTabView: View {
     var body: some View {
         Group {
             VStack {
-                StatsGraphHeaderView(viewModel: StatsDatePickerViewModel($viewModel.displayMode),
-                                     showingGraph: $showingGraph)
+                StatsDatePickerHeaderView(viewModel: StatsDatePickerHeaderViewModel($viewModel.displayMode),
+                                          showingGraph: $showingGraph)
 
                 ScrollView {
                     VStack {

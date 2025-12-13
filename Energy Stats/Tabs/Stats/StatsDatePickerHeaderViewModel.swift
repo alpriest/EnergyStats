@@ -18,7 +18,7 @@ enum DatePickerRange: Equatable {
     }
 }
 
-class StatsDatePickerViewModel: ObservableObject {
+class StatsDatePickerHeaderViewModel: ObservableObject {
     @Published var range: DatePickerRange = .day {
         didSet { updateDisplayMode() }
     }
@@ -32,8 +32,16 @@ class StatsDatePickerViewModel: ObservableObject {
         didSet { updateDisplayMode() }
     }
 
-    @Published private(set) var customStartDate = Date.now
-    @Published private(set) var customEndDate = Date.now
+    @Published private(set) var customStartDateString: String = ""
+    @Published private(set) var customEndDateString: String = ""
+    @Published private(set) var customStartDate: Date = .now { didSet {
+        guard case .custom(_, _, let unit) = range else { return }
+        customStartDateString = Self.format(customStartDate, unit: unit)
+    }}
+    @Published private(set) var customEndDate: Date = .now { didSet {
+        guard case .custom(_, _, let unit) = range else { return }
+        customEndDateString = Self.format(customEndDate, unit: unit)
+    }}
 
     var yearRange = 2010 ... (Calendar.current.component(.year, from: .now))
     @Published var canIncrease = false
@@ -68,13 +76,29 @@ class StatsDatePickerViewModel: ObservableObject {
         updateQuickNavigationButtons(displayMode.wrappedValue)
     }
     
-    func updateCustomDateRange(start: Date, end: Date) {
+    private static func format(_ date: Date, unit: CustomDateRangeDisplayUnit) -> String {
+        let formatter = switch unit {
+        case .days:
+            DateFormatter.dayMonth
+        case .months:
+            DateFormatter.monthYear
+        }
+
+        return formatter.string(from: date)
+    }
+    
+    func updateCustomDateRange(start: Date, end: Date) async {
         guard end > start else { return }
         let days = Calendar.current.dateComponents([.day], from: start, to: end).day ?? 0
-        let chosenUnit: CustomDateRangeDisplayUnit = days > 31 ? .months : .days
-        range = .custom(start, end, chosenUnit)
-        self.customStartDate = start
-        self.customEndDate = end
+        let unit: CustomDateRangeDisplayUnit = days > 31 ? .months : .days
+
+        await MainActor.run {
+            range = .custom(start, end, unit)
+            customStartDate = start
+            customEndDate = end
+
+            displayMode = .custom(start, end, unit)
+        }
     }
 
     func increaseAccessibilityLabel() -> String {

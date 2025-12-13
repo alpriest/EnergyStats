@@ -53,13 +53,13 @@ struct CustomDateRangePickerView: View {
                 }
 
                 Section {
-                    Picker("Choose by", selection: $chooseBy) {
+                    Picker("View by", selection: $chooseBy) {
                         ForEach(CustomDateRangeDisplayUnit.allCases, id: \.self) {
                             Text($0.title).tag($0)
                         }
                     }.pickerStyle(.segmented)
                 } header: {
-                    Text("Choose by")
+                    Text("View by")
                 }
 
                 if chooseBy == .days {

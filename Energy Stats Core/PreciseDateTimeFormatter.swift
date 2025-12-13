@@ -34,8 +34,16 @@ public extension DateFormatter {
         formatter.dateFormat = "HH:mm"
         return formatter
     }()
+    
+    static let dayMonthFormat: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMM"
+        return formatter
+    }()
+    
+    static let monthYearFormat: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM yyyy"
+        return formatter
+    }()
 }
-
-public let dayMonthFormat: Date.FormatStyle = .dateTime
-    .day(.twoDigits)
-    .month(.abbreviated)

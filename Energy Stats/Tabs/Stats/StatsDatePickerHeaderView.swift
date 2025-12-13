@@ -8,8 +8,8 @@
 import Energy_Stats_Core
 import SwiftUI
 
-struct StatsGraphHeaderView: View {
-    @ObservedObject var viewModel: StatsDatePickerViewModel
+struct StatsDatePickerHeaderView: View {
+    @ObservedObject var viewModel: StatsDatePickerHeaderViewModel
     @Binding var showingGraph: Bool
     @State private var showingCustomRangePicker = false
 
@@ -38,11 +38,7 @@ struct StatsGraphHeaderView: View {
                 }
 
                 Button {
-                    viewModel.range = .custom(
-                        .now.addingTimeInterval(0 - (86400 * 30) * 6),
-                        .now,
-                        .months
-                    )
+                    showingCustomRangePicker = true
                 } label: {
                     Label("Custom range", systemImage: viewModel.range.isCustom ? "checkmark" : "")
                         .accessibilityIdentifier("custom")
@@ -75,8 +71,10 @@ struct StatsGraphHeaderView: View {
                 start: viewModel.customStartDate,
                 end: viewModel.customEndDate,
                 onUpdate: { start, end in
-                    viewModel.updateCustomDateRange(start: start, end: end)
-                    showingCustomRangePicker.toggle()
+                    Task {
+                        await viewModel.updateCustomDateRange(start: start, end: end)
+                        showingCustomRangePicker.toggle()
+                    }
                 },
                 onCancel: {
                     showingCustomRangePicker.toggle()
@@ -194,9 +192,9 @@ struct StatsGraphHeaderView: View {
     private func customDateRangeTitle() -> some View {
         HStack {
             Spacer()
-            Text(viewModel.customStartDate, format: dayMonthFormat)
+            Text(viewModel.customStartDateString)
             Image(systemName: "arrow.right")
-            Text(viewModel.customEndDate, format: dayMonthFormat)
+            Text(viewModel.customEndDateString)
             Spacer()
 
             Button {
@@ -209,7 +207,6 @@ struct StatsGraphHeaderView: View {
 }
 
 #Preview {
-    StatsGraphHeaderView(viewModel: StatsDatePickerViewModel(.constant(.custom(.now, .now, .days))), showingGraph: .constant(true))
+    StatsDatePickerHeaderView(viewModel: StatsDatePickerHeaderViewModel(.constant(.custom(.now, .now, .days))), showingGraph: .constant(true))
         .frame(height: 200)
 }
-

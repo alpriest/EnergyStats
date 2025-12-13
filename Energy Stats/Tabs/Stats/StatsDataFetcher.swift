@@ -44,22 +44,7 @@ struct StatsDataFetcher {
                 variables: reportVariables,
                 queryDate: queryDate,
                 reportType: reportType
-            ).map { response in
-                response.copy(values: response.values.filter {
-                    let components: DateComponents
-                    
-                    switch unit {
-                    case .days:
-                        components = DateComponents(year: year, month: month, day: $0.index)
-                    case .months:
-                        components = DateComponents(year: year, month: $0.index, day: 1)
-                    }
-                    
-                    guard let dataDate = Calendar.current.date(from: components) else { return false }
-
-                    return start.date <= dataDate.date && dataDate.date <= end.date
-                })
-            }
+            )
             let graphValues = reports.flatMap { reportResponse -> [StatsGraphValue] in
                 guard let reportVariable = ReportVariable(rawValue: reportResponse.variable) else { return [] }
 
@@ -68,11 +53,13 @@ struct StatsDataFetcher {
                     case .days:
                         Calendar.current.date(from: DateComponents(year: year, month: month, day: dataPoint.index, hour: 0))!
                     case .months:
-                        Calendar.current.date(from: DateComponents(year: year, month: month + dataPoint.index, day: 1, hour: 0))!
+                        Calendar.current.date(from: DateComponents(year: year, month: dataPoint.index, day: 1, hour: 0))!
                     }
 
                     return StatsGraphValue(type: reportVariable, date: graphPointDate, graphValue: dataPoint.value, displayValue: nil)
                 }
+            }.filter {
+                $0.date.date >= start.date && $0.date.date <= end.date
             }
 
             reports.forEach { response in

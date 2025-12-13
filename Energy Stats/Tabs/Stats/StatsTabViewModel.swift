@@ -425,7 +425,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
             return DateFormatter.dayMonth.string(from: date)
         case .year:
             return DateFormatter.monthYear.string(from: date)
-        case let .custom(start, end, unit):
+        case let .custom(_, _, unit):
             switch unit {
             case .days:
                 return DateFormatter.dayMonth.string(from: date)
