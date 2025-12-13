@@ -34,7 +34,6 @@ class StatsDatePickerViewModel: ObservableObject {
 
     @Published private(set) var customStartDate = Date.now
     @Published private(set) var customEndDate = Date.now
-    @Published private(set) var customDateRangeDisplayUnit: CustomDateRangeDisplayUnit = .days
 
     var yearRange = 2010 ... (Calendar.current.component(.year, from: .now))
     @Published var canIncrease = false
@@ -63,18 +62,19 @@ class StatsDatePickerViewModel: ObservableObject {
             range = .custom(start, end, unit)
             customStartDate = start
             customEndDate = end
-            customDateRangeDisplayUnit = unit
         }
 
         isInitialised = true
         updateQuickNavigationButtons(displayMode.wrappedValue)
     }
     
-    func updateCustomDateRange(start: Date, end: Date, unit: CustomDateRangeDisplayUnit) {
-        range = .custom(start, end, unit)
+    func updateCustomDateRange(start: Date, end: Date) {
+        guard end > start else { return }
+        let days = Calendar.current.dateComponents([.day], from: start, to: end).day ?? 0
+        let chosenUnit: CustomDateRangeDisplayUnit = days > 31 ? .months : .days
+        range = .custom(start, end, chosenUnit)
         self.customStartDate = start
         self.customEndDate = end
-        self.customDateRangeDisplayUnit = unit
     }
 
     func increaseAccessibilityLabel() -> String {

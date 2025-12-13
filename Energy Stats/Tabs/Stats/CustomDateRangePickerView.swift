@@ -11,55 +11,43 @@ struct CustomDateRangePickerView: View {
     @State var start: Date
     @State var end: Date
     @State private var dirty = false
-    @State var displayUnit: CustomDateRangeDisplayUnit
     private let initialStart: Date
     private let initialEnd: Date
-    private let initialDisplayUnit: CustomDateRangeDisplayUnit
-    private let onUpdate: (Date, Date, CustomDateRangeDisplayUnit) -> Void
+    private let onUpdate: (Date, Date) -> Void
     private let onCancel: () -> Void
 
     init(
         start: Date,
         end: Date,
-        displayUnit: CustomDateRangeDisplayUnit,
-        onUpdate: @escaping (Date, Date, CustomDateRangeDisplayUnit) -> Void,
+        onUpdate: @escaping (Date, Date) -> Void,
         onCancel: @escaping () -> Void
     ) {
         self.start = start
         self.end = end
-        self.displayUnit = displayUnit
         self.initialStart = start
         self.initialEnd = end
-        self.initialDisplayUnit = displayUnit
         self.onUpdate = onUpdate
         self.onCancel = onCancel
     }
 
     var body: some View {
         VStack {
-            ScrollView {
-                VStack {
+            Form {
+                Section {
                     SingleDatePickerView(label: "Start", date: $start)
-                    SingleDatePickerView(label: "End", date: $end)
-
-                    HStack {
-                        Text("View as")
-
-                        Picker("View as", selection: $displayUnit) {
-                            ForEach(CustomDateRangeDisplayUnit.allCases, id: \.self) {
-                                Text($0.title)
-                            }
-                        }.pickerStyle(.segmented)
-                    }
+                } header: {
+                    Text("Start")
                 }
-                .padding()
+                
+                Section {
+                    SingleDatePickerView(label: "End", date: $end)
+                } header: {
+                    Text("End")
+                }
             }.onChange(of: start) { _ in
                 recomputeDirty()
             }
             .onChange(of: end) { _ in
-                recomputeDirty()
-            }
-            .onChange(of: displayUnit) { _ in
                 recomputeDirty()
             }
             .onAppear {
@@ -67,23 +55,21 @@ struct CustomDateRangePickerView: View {
             }
 
             BottomButtonsView(dirty: dirty) {
-                onUpdate(start, end, displayUnit)
+                onUpdate(start, end)
             }
         }
     }
 
     private func recomputeDirty() {
-        dirty = (start != initialStart) || (end != initialEnd) || (displayUnit != initialDisplayUnit)
+        dirty = (start != initialStart) || (end != initialEnd)
     }
 }
 
 #Preview {
     CustomDateRangePickerView(
-        start: Date.now,
+        start: Date.now.addingTimeInterval(0 - (31 * 86400)),
         end: Date.now,
-        displayUnit: .days,
-        onUpdate: { _, _, _ in
-        },
+        onUpdate: { _, _ in },
         onCancel: { }
     )
 }
@@ -91,21 +77,11 @@ struct CustomDateRangePickerView: View {
 enum CustomDateRangeDisplayUnit: CaseIterable {
     case days
     case months
-
-    var title: String {
-        switch self {
-        case .days:
-            "Days"
-        case .months:
-            "Months"
-        }
-    }
 }
 
 private struct SingleDatePickerView: View {
     let label: LocalizedStringKey
     @Binding var date: Date
-    @State private var showing = false
 
     init(label: LocalizedStringKey, date: Binding<Date>) {
         self.label = label
@@ -113,11 +89,7 @@ private struct SingleDatePickerView: View {
     }
 
     var body: some View {
-        HStack(alignment: .center) {
-            Text(label)
-
-            DatePicker(label, selection: $date, displayedComponents: [.date])
-                .datePickerStyle(.graphical)
-        }
+        DatePicker(label, selection: $date, displayedComponents: [.date])
+            .datePickerStyle(.graphical)
     }
 }

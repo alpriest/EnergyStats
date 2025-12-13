@@ -74,9 +74,8 @@ struct StatsGraphHeaderView: View {
             CustomDateRangePickerView(
                 start: viewModel.customStartDate,
                 end: viewModel.customEndDate,
-                displayUnit: viewModel.customDateRangeDisplayUnit,
-                onUpdate: { start, end, unit in
-                    viewModel.displayMode = .custom(start, end, unit)
+                onUpdate: { start, end in
+                    viewModel.updateCustomDateRange(start: start, end: end)
                     showingCustomRangePicker.toggle()
                 },
                 onCancel: {
@@ -213,3 +212,4 @@ struct StatsGraphHeaderView: View {
     StatsGraphHeaderView(viewModel: StatsDatePickerViewModel(.constant(.custom(.now, .now, .days))), showingGraph: .constant(true))
         .frame(height: 200)
 }
+
