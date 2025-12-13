@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct CustomDateRangePickerView: View {
-    @State var start: Date
+    @State var from: Date
     @State var end: Date
     @State private var dirty = false
     private let initialStart: Date
     private let initialEnd: Date
     private let onUpdate: (Date, Date) -> Void
     private let onCancel: () -> Void
+    @State private var chooseBy = CustomDateRangeDisplayUnit.months
 
     init(
         start: Date,
@@ -22,7 +23,7 @@ struct CustomDateRangePickerView: View {
         onUpdate: @escaping (Date, Date) -> Void,
         onCancel: @escaping () -> Void
     ) {
-        self.start = start
+        self.from = start
         self.end = end
         self.initialStart = start
         self.initialEnd = end
@@ -34,17 +35,84 @@ struct CustomDateRangePickerView: View {
         VStack {
             Form {
                 Section {
-                    SingleDatePickerView(label: "Start", date: $start)
+                    Button {
+                        end = .now
+                        from = Calendar.current.date(byAdding: .month, value: -12, to: end) ?? end
+                    } label: {
+                        Text("Last 12 months")
+                    }
+
+                    Button {
+                        end = .now
+                        from = Calendar.current.date(byAdding: .month, value: -6, to: end) ?? end
+                    } label: {
+                        Text("Last 6 months")
+                    }
                 } header: {
-                    Text("Start")
+                    Text("Quick choice")
                 }
-                
+
                 Section {
-                    SingleDatePickerView(label: "End", date: $end)
+                    Picker("Choose by", selection: $chooseBy) {
+                        ForEach(CustomDateRangeDisplayUnit.allCases, id: \.self) {
+                            Text($0.title).tag($0)
+                        }
+                    }.pickerStyle(.segmented)
                 } header: {
-                    Text("End")
+                    Text("Choose by")
                 }
-            }.onChange(of: start) { _ in
+
+                if chooseBy == .days {
+                    Group {
+                        Section {
+                            SingleDatePickerView(label: "Start", date: $from)
+                        } header: {
+                            Text("Start")
+                        }
+
+                        Section {
+                            SingleDatePickerView(label: "End", date: $end)
+                        } header: {
+                            Text("End")
+                        }
+                    }
+                } else if chooseBy == .months {
+                    Group {
+                        Section {
+                            YearMonthPickerView(
+                                selectedYear: .init(
+                                    get: { from.year },
+                                    set: { from = Date.from(year: $0, month: from.month) }
+                                ),
+                                selectedMonth: .init(
+                                    get: { from.month },
+                                    set: { from = Date.from(year: from.year, month: $0) }
+                                )
+                            )
+                            .labelsHidden()
+                        } header: {
+                            Text("Start")
+                        }
+
+                        Section {
+                            YearMonthPickerView(
+                                selectedYear: .init(
+                                    get: { end.year },
+                                    set: { end = Date.from(year: $0, month: end.month) }
+                                ),
+                                selectedMonth: .init(
+                                    get: { end.month },
+                                    set: { end = Date.from(year: end.year, month: $0) }
+                                )
+                            )
+                            .labelsHidden()
+                        } header: {
+                            Text("End")
+                        }
+                    }
+                }
+
+            }.onChange(of: from) { _ in
                 recomputeDirty()
             }
             .onChange(of: end) { _ in
@@ -55,13 +123,13 @@ struct CustomDateRangePickerView: View {
             }
 
             BottomButtonsView(dirty: dirty) {
-                onUpdate(start, end)
+                onUpdate(from, end)
             }
         }
     }
 
     private func recomputeDirty() {
-        dirty = (start != initialStart) || (end != initialEnd)
+        dirty = (from != initialStart) || (end != initialEnd)
     }
 }
 
@@ -70,13 +138,22 @@ struct CustomDateRangePickerView: View {
         start: Date.now.addingTimeInterval(0 - (31 * 86400)),
         end: Date.now,
         onUpdate: { _, _ in },
-        onCancel: { }
+        onCancel: {}
     )
 }
 
 enum CustomDateRangeDisplayUnit: CaseIterable {
     case days
     case months
+
+    var title: String {
+        switch self {
+        case .days:
+            "Days"
+        case .months:
+            "Months"
+        }
+    }
 }
 
 private struct SingleDatePickerView: View {

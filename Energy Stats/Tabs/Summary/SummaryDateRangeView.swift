@@ -42,14 +42,32 @@ struct SummaryDateRangeView: View {
                     Text("From")
                     Spacer()
 
-                    YearMonthPickerView(date: $from)
+                    YearMonthPickerView(
+                        selectedYear: .init(
+                            get: { from.year },
+                            set: { from = Date.from(year: $0, month: from.month) }
+                        ),
+                        selectedMonth: .init(
+                            get: { from.month },
+                            set: { from = Date.from(year: from.year, month: $0) }
+                        )
+                    )
                 }
 
                 HStack {
                     Text("To")
                     Spacer()
 
-                    YearMonthPickerView(date: $to)
+                    YearMonthPickerView(
+                        selectedYear: .init(
+                            get: { to.year },
+                            set: { to = Date.from(year: $0, month: to.month) }
+                        ),
+                        selectedMonth: .init(
+                            get: { to.month },
+                            set: { to = Date.from(year: to.year, month: $0) }
+                        )
+                    )
                 }
             }
             .disabled(automatic)
@@ -78,25 +96,16 @@ struct SummaryDateRangeView: View {
 }
 
 struct YearMonthPickerView: View {
-    @State private var selectedYear: Int
-    @State private var selectedMonth: Int
-    @Binding private var date: Date
+    @Binding var selectedYear: Int
+    @Binding var selectedMonth: Int
 
-    init(date: Binding<Date>) {
-        self._date = date
-        self.selectedYear = date.wrappedValue.year
-        self.selectedMonth = date.wrappedValue.month
-    }
-
-    // Define range for years and months
-    let years = 2020 ... (Calendar.current.component(.year, from: .now))
-    let months: [String] = DateFormatter().monthSymbols
+    var months: [String] { DateFormatter().monthSymbols }
+    let years = 2020 ... Calendar.current.component(.year, from: .now)
 
     var body: some View {
         HStack {
-            // Month Picker
             Picker("Month", selection: $selectedMonth) {
-                ForEach(1 ..< 13) { month in
+                ForEach(1..<13) { month in
                     Text(months[month - 1]).tag(month)
                 }
             }
@@ -104,7 +113,6 @@ struct YearMonthPickerView: View {
             .pickerStyle(.menu)
             .clipped()
 
-            // Year Picker
             Picker("Year", selection: $selectedYear) {
                 ForEach(years, id: \.self) { year in
                     Text(String(describing: year)).tag(year)
@@ -113,10 +121,6 @@ struct YearMonthPickerView: View {
             .pickerStyle(.menu)
             .frame(width: 100)
             .clipped()
-        }.onChange(of: selectedYear) {
-            self.date = Date.from(year: $0, month: selectedMonth)
-        }.onChange(of: selectedMonth) {
-            self.date = Date.from(year: selectedYear, month: $0)
         }
     }
 }
