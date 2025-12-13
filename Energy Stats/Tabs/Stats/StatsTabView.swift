@@ -19,13 +19,18 @@ enum StatsGraphDisplayMode: Equatable {
     func unit() -> Calendar.Component {
         switch self {
         case .day:
-            return .hour
+            .hour
         case .month:
-            return .day
+            .day
         case .year:
-            return .month
-        case .custom:
-            return .day
+            .month
+        case let .custom(_, _, unit):
+            switch unit {
+            case .days:
+                .day
+            case .months:
+                .month
+            }
         }
     }
 
@@ -60,7 +65,7 @@ struct StatsTabView: View {
         Group {
             VStack {
                 StatsGraphHeaderView(viewModel: StatsDatePickerViewModel($viewModel.displayMode),
-                                    showingGraph: $showingGraph)
+                                     showingGraph: $showingGraph)
 
                 ScrollView {
                     VStack {

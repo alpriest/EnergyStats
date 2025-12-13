@@ -19,13 +19,23 @@ struct StatsDataFetcher {
         reportVariables: [ReportVariable],
         unit: CustomDateRangeDisplayUnit
     ) async throws -> ([StatsGraphValue], [ReportVariable: Double]) {
+        let calendarComponent: Calendar.Component
+        let reportType: ReportType
+
+        switch unit {
+        case .days:
+            calendarComponent = Calendar.Component.month
+            reportType = .month
+        case .months:
+            calendarComponent = Calendar.Component.year
+            reportType = .year
+        }
+
         var current = start
         var accumulatedGraphValues: [StatsGraphValue] = []
         var accumulatedReportResponses: [OpenReportResponse] = []
-        
-        // TODO: Fetch by month if unit == .days, or year if unit == .months
 
-        while (current.year < end.year || (current.year == end.year && current.month <= end.month)) {
+        while current.year < end.year || (current.year == end.year && current.month <= end.month) {
             let month = Calendar.current.component(.month, from: current)
             let year = Calendar.current.component(.year, from: current)
             let queryDate = QueryDate(year: year, month: month, day: nil)
@@ -33,10 +43,18 @@ struct StatsDataFetcher {
                 deviceSN: device.deviceSN,
                 variables: reportVariables,
                 queryDate: queryDate,
-                reportType: .month
+                reportType: reportType
             ).map { response in
                 response.copy(values: response.values.filter {
-                    let components = DateComponents(year: year, month: month, day: $0.index)
+                    let components: DateComponents
+                    
+                    switch unit {
+                    case .days:
+                        components = DateComponents(year: year, month: month, day: $0.index)
+                    case .months:
+                        components = DateComponents(year: year, month: $0.index, day: 1)
+                    }
+                    
                     guard let dataDate = Calendar.current.date(from: components) else { return false }
 
                     return start.date <= dataDate.date && dataDate.date <= end.date
@@ -46,7 +64,12 @@ struct StatsDataFetcher {
                 guard let reportVariable = ReportVariable(rawValue: reportResponse.variable) else { return [] }
 
                 return reportResponse.values.map { dataPoint in
-                    let graphPointDate = Calendar.current.date(from: DateComponents(year: year, month: month, day: dataPoint.index, hour: 0))!
+                    let graphPointDate = switch unit {
+                    case .days:
+                        Calendar.current.date(from: DateComponents(year: year, month: month, day: dataPoint.index, hour: 0))!
+                    case .months:
+                        Calendar.current.date(from: DateComponents(year: year, month: month + dataPoint.index, day: 1, hour: 0))!
+                    }
 
                     return StatsGraphValue(type: reportVariable, date: graphPointDate, graphValue: dataPoint.value, displayValue: nil)
                 }
@@ -67,10 +90,10 @@ struct StatsDataFetcher {
             }
             accumulatedGraphValues.append(contentsOf: graphValues)
 
-            if let nextMonth = Calendar.current.date(byAdding: .month, value: 1, to: current) {
-                current = nextMonth
+            if let next = Calendar.current.date(byAdding: calendarComponent, value: 1, to: current) {
+                current = next
             } else {
-                break // Break the loop if unable to find the next month
+                break // Break the loop if unable to find the next date
             }
         }
 

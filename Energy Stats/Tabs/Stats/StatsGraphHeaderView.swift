@@ -38,7 +38,11 @@ struct StatsGraphHeaderView: View {
                 }
 
                 Button {
-                    viewModel.range = .custom(.now.addingTimeInterval(0 - (86400 * 30)), .now, .days)
+                    viewModel.range = .custom(
+                        .now.addingTimeInterval(0 - (86400 * 30) * 6),
+                        .now,
+                        .months
+                    )
                 } label: {
                     Label("Custom range", systemImage: viewModel.range.isCustom ? "checkmark" : "")
                         .accessibilityIdentifier("custom")
@@ -71,7 +75,8 @@ struct StatsGraphHeaderView: View {
                 start: viewModel.customStartDate,
                 end: viewModel.customEndDate,
                 displayUnit: viewModel.customDateRangeDisplayUnit,
-                onUpdate: { _, _, _ in
+                onUpdate: { start, end, unit in
+                    viewModel.displayMode = .custom(start, end, unit)
                     showingCustomRangePicker.toggle()
                 },
                 onCancel: {

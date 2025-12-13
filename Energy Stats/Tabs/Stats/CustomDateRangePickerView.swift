@@ -90,13 +90,13 @@ struct CustomDateRangePickerView: View {
 
 enum CustomDateRangeDisplayUnit: CaseIterable {
     case days
-    case month
+    case months
 
     var title: String {
         switch self {
         case .days:
             "Days"
-        case .month:
+        case .months:
             "Months"
         }
     }
