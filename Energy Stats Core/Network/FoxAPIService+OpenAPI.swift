@@ -14,7 +14,7 @@ extension URL {
     static let getOpenReportData = URL(string: "https://www.foxesscloud.com/op/v0/device/report/query")!
     static let getOpenBatterySOC = URL(string: "https://www.foxesscloud.com/op/v0/device/battery/soc/get")!
     static let getOpenDeviceList = URL(string: "https://www.foxesscloud.com/op/v0/device/list")!
-    static let getOpenDeviceDetail = URL(string: "https://www.foxesscloud.com/op/v0/device/detail")!
+    static let getOpenDeviceDetail = URL(string: "https://www.foxesscloud.com/op/v1/device/detail")!
     static let setOpenBatterySOC = URL(string: "https://www.foxesscloud.com/op/v0/device/battery/soc/set")!
     static let getOpenBatteryChargeTimes = URL(string: "https://www.foxesscloud.com/op/v0/device/battery/forceChargeTime/get")!
     static let setOpenBatteryChargeTimes = URL(string: "https://www.foxesscloud.com/op/v0/device/battery/forceChargeTime/set")!
