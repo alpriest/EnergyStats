@@ -137,7 +137,7 @@ struct StatsGraphView: View {
                 }
             }
             .chartXAxis {
-                AxisMarks(values: .stride(by: viewModel.unit, count: viewModel.stride)) { value in
+                AxisMarks(values: .stride(by: viewModel.unit, count: 3)) { value in
                     if let date = value.as(Date.self) {
                         AxisTick(centered: true)
                         AxisValueLabel(centered: false) {

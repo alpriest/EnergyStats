@@ -42,7 +42,6 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
     @Published var valuesAtTime: ValuesAtTime<StatsGraphValue>?
     @Published var selectedDate: Date?
 
-    var stride: Int = 3
     private var rawData: [StatsGraphValue] = []
     @Published var data: [StatsGraphValue] = []
     @Published var unit: Calendar.Component = .hour
@@ -420,17 +419,17 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
     func selectedDateFormatted(_ date: Date) -> String {
         switch displayMode {
         case .day:
-            return DateFormatter.dayHour.string(from: date)
+            return date.dayHourString()
         case .month:
-            return DateFormatter.dayMonth.string(from: date)
+            return date.dayMonthString()
         case .year:
-            return DateFormatter.monthYear.string(from: date)
+            return date.monthYearString()
         case let .custom(_, _, unit):
             switch unit {
             case .days:
-                return DateFormatter.dayMonth.string(from: date)
+                return date.dayMonthString()
             case .months:
-                return DateFormatter.monthYear.string(from: date)
+                return date.monthYearString()
             }
         }
     }

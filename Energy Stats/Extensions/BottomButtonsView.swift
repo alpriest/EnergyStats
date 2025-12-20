@@ -44,6 +44,8 @@ struct BottomButtonsView<Content: View>: View {
                 .frame(height: 1)
                 .frame(maxWidth: .infinity)
 
+            footer()
+
             HStack {
                 Button(action: {
                     if let onCancel { onCancel() } else { dismiss() }
@@ -65,8 +67,6 @@ struct BottomButtonsView<Content: View>: View {
                 .padding()
                 .buttonStyle(.borderedProminent)
             }
-
-            footer()
         }
     }
 }

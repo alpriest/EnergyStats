@@ -19,6 +19,7 @@ public extension Color {
     static var backgroundInverted: Color { Color("background_inverted", bundle: Bundle(for: CountdownTimer.self)) }
     static var iconDisabled: Color { Color("Sun_Zero", bundle: Bundle(for: CountdownTimer.self)) }
     static var loadsPower: Color { Color("loads_power", bundle: Bundle(for: CountdownTimer.self)) }
+    static var errorText: Color { Color("lines_negative", bundle: Bundle(for: CountdownTimer.self)) }
     #if iOS
     static var label: Color { Color(uiColor: .label) }
     #endif

@@ -34,7 +34,7 @@ class StatsDatePickerHeaderViewModel: ObservableObject {
 
     @Published private(set) var customStartDateString: String = ""
     @Published private(set) var customEndDateString: String = ""
-    @Published private(set) var customStartDate: Date = .now { didSet {
+    @Published private(set) var customStartDate: Date = .now.addingTimeInterval(-86400 * 31) { didSet {
         guard case .custom(_, _, let unit) = range else { return }
         customStartDateString = Self.format(customStartDate, unit: unit)
     }}
@@ -77,20 +77,16 @@ class StatsDatePickerHeaderViewModel: ObservableObject {
     }
     
     private static func format(_ date: Date, unit: CustomDateRangeDisplayUnit) -> String {
-        let formatter = switch unit {
+        switch unit {
         case .days:
-            DateFormatter.dayMonth
+            date.dayMonthString()
         case .months:
-            DateFormatter.monthYear
+            date.monthYearString()
         }
-
-        return formatter.string(from: date)
     }
     
-    func updateCustomDateRange(start: Date, end: Date) async {
+    func updateCustomDateRange(start: Date, end: Date, unit: CustomDateRangeDisplayUnit) async {
         guard end > start else { return }
-        let days = Calendar.current.dateComponents([.day], from: start, to: end).day ?? 0
-        let unit: CustomDateRangeDisplayUnit = days > 31 ? .months : .days
 
         await MainActor.run {
             range = .custom(start, end, unit)

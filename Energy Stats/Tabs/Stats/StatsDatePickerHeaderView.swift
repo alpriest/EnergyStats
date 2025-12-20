@@ -70,9 +70,9 @@ struct StatsDatePickerHeaderView: View {
             CustomDateRangePickerView(
                 start: viewModel.customStartDate,
                 end: viewModel.customEndDate,
-                onUpdate: { start, end in
+                onUpdate: { start, end, unit in
                     Task {
-                        await viewModel.updateCustomDateRange(start: start, end: end)
+                        await viewModel.updateCustomDateRange(start: start, end: end, unit: unit)
                         showingCustomRangePicker.toggle()
                     }
                 },

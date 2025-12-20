@@ -37,7 +37,7 @@ struct SolcastSiteView: View {
                             row(title: "Loss Factor", value: $0)
                         }
                         OptionalView(site.installDate) {
-                            row(title: "Install Date", value: $0.monthYear())
+                            row(title: "Install Date", value: $0.monthYearString())
                         }
                     }
                     .font(.caption)

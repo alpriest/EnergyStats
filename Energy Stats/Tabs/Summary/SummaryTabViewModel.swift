@@ -82,7 +82,7 @@ class SummaryTabViewModel: ObservableObject, HasLoadState {
         case .automatic:
             "present"
         case .manual(_, let to):
-            "\(to.monthYear()) (manually selected)"
+            "\(to.monthYearString()) (manually selected)"
         }
     }
 
@@ -105,9 +105,9 @@ class SummaryTabViewModel: ObservableObject, HasLoadState {
                     await MainActor.run {
                         switch configManager.summaryDateRange {
                         case .automatic:
-                            oldestDataDate = Date.from(year: year, month: emptyMonth).monthYear()
+                            oldestDataDate = Date.from(year: year, month: emptyMonth).monthYearString()
                         case .manual(let from, _):
-                            oldestDataDate = "\(from.monthYear())"
+                            oldestDataDate = "\(from.monthYearString())"
                         }
                     }
                     hasFinished = true
