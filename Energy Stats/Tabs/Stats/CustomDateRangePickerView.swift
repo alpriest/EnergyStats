@@ -15,9 +15,8 @@ struct CustomDateRangePickerView: View {
     @State private var chooseBy = CustomDateRangeDisplayUnit.months
     @State private var startHeader: LocalizedStringKey = ""
     @State private var endHeader: LocalizedStringKey = ""
-    @State private var viewByFooter: String = ""
-    @State private var errorMessage: String? = nil
-    @State private var footerMessage: String = ""
+    @State private var viewByFooter: LocalizedStringKey = ""
+    @State private var errorMessage: LocalizedStringKey? = nil
     private let initialStart: Date
     private let initialEnd: Date
     private let onUpdate: (Date, Date, CustomDateRangeDisplayUnit) -> Void
@@ -139,21 +138,20 @@ struct CustomDateRangePickerView: View {
 
             BottomButtonsView(dirty: dirty, onApply: {
                 onUpdate(start, end, chooseBy)
-            }, footer: {
-                Text(footerMessage)
-                    .foregroundStyle(datesAreValid() ? Color.primary : Color.errorText)
-            })
+            }, footer: makeFooter)
         }
     }
 
-    private func makeFooter() -> String {
-        var message = "Range: \(chooseBy.formatted(start)) - \(chooseBy.formatted(end))"
-        
-        if let error = makeErrorMessage() {
-            message += " - " + error
+    @ViewBuilder
+    private func makeFooter() -> some View {
+        VStack {
+            Text("\(chooseBy.formatted(start)) - \(chooseBy.formatted(end))")
+            
+            if let errorMessage {
+                Text(errorMessage)
+                    .foregroundStyle(datesAreValid() ? Color.primary : Color.errorText)
+            }
         }
-                
-        return message
     }
 
     private func recompute() {
@@ -163,11 +161,11 @@ struct CustomDateRangePickerView: View {
             endHeader = "End day"
             viewByFooter = "Shows a range of days. Maximum of 45 days"
         case .months:
-            startHeader = "Start year"
-            endHeader = "End year"
+            startHeader = "Start month"
+            endHeader = "End month"
             viewByFooter = "Shows a range of months"
         }
-        footerMessage = makeFooter()
+        errorMessage = makeErrorMessage()
 
         recomputeDirty()
     }
@@ -180,7 +178,7 @@ struct CustomDateRangePickerView: View {
         makeErrorMessage() == nil
     }
 
-    private func makeErrorMessage() -> String? {
+    private func makeErrorMessage() -> LocalizedStringKey? {
         guard end > start else { return "Please ensure the start date is before the end date." }
         let days = Calendar.current.dateComponents([.day], from: start, to: end).day ?? 0
 
@@ -199,13 +197,14 @@ struct CustomDateRangePickerView: View {
         onUpdate: { _, _, _ in },
         onCancel: {}
     )
+    .environment(\.locale, .init(identifier: "de"))
 }
 
 enum CustomDateRangeDisplayUnit: CaseIterable {
     case days
     case months
 
-    var title: String {
+    var title: LocalizedStringKey {
         switch self {
         case .days:
             "Days"
