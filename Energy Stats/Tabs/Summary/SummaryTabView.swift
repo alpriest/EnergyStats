@@ -48,7 +48,7 @@ struct SummaryTabView: View {
                             moneySummaryRow(title: "total_benefit", amount: model.total.amount)
                         }
 
-                        Text("Includes data from \(viewModel.oldestDataDate) to \(viewModel.latestDataDate). Figures are approximate and assume the buy/sell energy prices remained constant throughout the period of ownership. FoxESS only makes data available for the last 12 months.")
+                        Text("Includes data from \(viewModel.oldestDataDate) to \(viewModel.latestDataDate). Figures are approximate and assume the buy/sell energy prices remained constant throughout the period of ownership.")
                             .font(.caption2)
                             .padding(.vertical)
                             .foregroundStyle(.secondary)

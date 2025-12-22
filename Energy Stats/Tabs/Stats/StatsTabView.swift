@@ -106,7 +106,7 @@ struct StatsTabView: View {
                         ApproximationsView(viewModel: approximationsViewModel, appSettings: appSettingsPublisher.value, decimalPlaceOverride: nil)
                     }
 
-                    Text("Stats are aggregated by FoxESS into 1 hr, 1 day or 1 month totals. FoxESS only makes data available for the last 12 months to Energy Stats.")
+                    Text("Stats are aggregated by FoxESS into 1 hr, 1 day or 1 month totals.")
                         .font(.footnote)
                         .foregroundColor(Color("text_dimmed"))
                         .multilineTextAlignment(.center)

@@ -40,7 +40,7 @@ struct StatsDatePickerHeaderView: View {
                 Button {
                     showingCustomRangePicker = true
                 } label: {
-                    Label("Custom range", systemImage: viewModel.range.isCustom ? "checkmark" : "")
+                    Label("Custom range…", systemImage: viewModel.range.isCustom ? "checkmark" : "")
                         .accessibilityIdentifier("custom")
                 }
 

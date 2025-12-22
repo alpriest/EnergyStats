@@ -130,6 +130,7 @@ struct StatsGraphView: View {
             .chartYAxis {
                 AxisMarks { value in
                     if let value = value.as(Int.self) {
+                        AxisGridLine()
                         AxisValueLabel(multiLabelAlignment: .trailing) {
                             Text(value, format: .number)
                         }
