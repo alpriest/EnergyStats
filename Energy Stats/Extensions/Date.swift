@@ -8,12 +8,6 @@
 import Foundation
 
 extension Date {
-    func militaryTimeWithoutMinutes() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:00"
-        return formatter.string(from: self)
-    }
-
     func militaryTime() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"

@@ -8,49 +8,6 @@
 import Energy_Stats_Core
 import SwiftUI
 
-struct EqualWidthButtonStyle: ButtonStyle {
-    @Binding var buttonWidth: CGFloat
-    @Environment(\.colorScheme) var colorScheme
-
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .background(rectReader($buttonWidth))
-            .frame(minWidth: buttonWidth)
-            .padding(.horizontal, 8)
-            .padding(.vertical, 7)
-            .background(colorScheme == .dark ? Color.white.opacity(0.14) : Color.paleGray)
-            .foregroundStyle(Color.accentColor)
-            .cornerRadius(6)
-    }
-
-    private func rectReader(_ binding: Binding<CGFloat>) -> some View {
-        GeometryReader { gr -> Color in
-            DispatchQueue.main.async {
-                binding.wrappedValue = max(binding.wrappedValue, gr.frame(in: .local).width)
-            }
-            return Color.clear
-        }
-    }
-}
-
-struct AlertIconView: View {
-    var body: some View {
-        GeometryReader { reader in
-            ZStack {
-                Circle()
-                    .foregroundColor(.red)
-                    .frame(width: reader.size.width, height: reader.size.height)
-
-                Image(systemName: "exclamationmark.circle.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .foregroundColor(.white)
-                    .frame(width: reader.size.width * 0.76, height: reader.size.height * 0.76)
-            }
-        }
-    }
-}
-
 enum ErrorAlertType {
     case fox
     case solcast

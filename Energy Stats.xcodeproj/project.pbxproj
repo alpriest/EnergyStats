@@ -354,6 +354,8 @@
 		41EB65F92E05BB7400F53573 /* FactoryResetAppSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EB65F82E05BB7400F53573 /* FactoryResetAppSettingsView.swift */; };
 		41EB65FB2E05BD8900F53573 /* StepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EB65FA2E05BD8900F53573 /* StepView.swift */; };
 		41EB65FD2E05C00600F53573 /* FullWidthVStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EB65FC2E05C00600F53573 /* FullWidthVStack.swift */; };
+		41EB8A1E2EF9E4050012CD25 /* EqualWidthButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EB8A1D2EF9E4050012CD25 /* EqualWidthButtonStyle.swift */; };
+		41EB8A202EF9E4100012CD25 /* AlertIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EB8A1F2EF9E4100012CD25 /* AlertIconView.swift */; };
 		41ED2EF02B349EF7001CF277 /* CustomTimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41ED2EEF2B349EF7001CF277 /* CustomTimePicker.swift */; };
 		41EE909C2BDEA98B006412FB /* HomeEnergyStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE909B2BDEA98B006412FB /* HomeEnergyStateManager.swift */; };
 		41EE90A52BDEB4D3006412FB /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41EE90A42BDEB4D3006412FB /* WidgetKit.framework */; };
@@ -899,6 +901,8 @@
 		41EB65F82E05BB7400F53573 /* FactoryResetAppSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryResetAppSettingsView.swift; sourceTree = "<group>"; };
 		41EB65FA2E05BD8900F53573 /* StepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepView.swift; sourceTree = "<group>"; };
 		41EB65FC2E05C00600F53573 /* FullWidthVStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullWidthVStack.swift; sourceTree = "<group>"; };
+		41EB8A1D2EF9E4050012CD25 /* EqualWidthButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualWidthButtonStyle.swift; sourceTree = "<group>"; };
+		41EB8A1F2EF9E4100012CD25 /* AlertIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertIconView.swift; sourceTree = "<group>"; };
 		41ED2EEF2B349EF7001CF277 /* CustomTimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTimePicker.swift; sourceTree = "<group>"; };
 		41EDDF6B28CD2A630092C662 /* LoadedPowerFlowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadedPowerFlowViewModel.swift; sourceTree = "<group>"; };
 		41EDDF7128CD2ED30092C662 /* Energy StatsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Energy StatsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1065,6 +1069,7 @@
 		4106A92E28D05EC10009DA28 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				41EB8A1B2EF9E3A90012CD25 /* Loading */,
 				41B5910F2ED1C103005B34D5 /* ViewDataProviding.swift */,
 				41DFC5FC2EC3D3A000DE5A36 /* ColorPicker.swift */,
 				416AE4372A7D956E003D0122 /* AlertCopy.swift */,
@@ -1083,6 +1088,7 @@
 				41BB29C52CEA89F300F8FDE4 /* View+Analytics.swift */,
 				416318BD29DDD80E00C2C285 /* View+Copy.swift */,
 				41038F952E6C3360008A74C6 /* CalculationBreakdownRectangle.swift */,
+				41EB8A1D2EF9E4050012CD25 /* EqualWidthButtonStyle.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1326,11 +1332,8 @@
 				4141B20128D871B900B60157 /* ContentView.swift */,
 				4140144D28C70B3200EA5BA1 /* Energy_StatsApp.swift */,
 				410183A12E7DB42F001EFE8D /* CoreBusReceiver.swift */,
-				419CCB532933BABF00882649 /* ErrorAlertView.swift */,
-				417153E529F2BD3300639A7B /* LoadState.swift */,
-				41965EE22C3286C9004F9D9A /* LoadTracking.swift */,
+				41EB8A1C2EF9E3FC0012CD25 /* Error Alert */,
 				4149D3AC2B3C4DAA00314449 /* UnsupportedErrorView.swift */,
-				41965EE02C3284E6004F9D9A /* VisibilityTracking.swift */,
 				4140145128C70B3200EA5BA1 /* Assets.xcassets */,
 				418EB4882ACC10220021B87A /* Localizable.xcstrings */,
 				4106A92E28D05EC10009DA28 /* Extensions */,
@@ -1797,6 +1800,25 @@
 				41E8016E2ECF601600CB5777 /* SchedulePhaseEditViewModel.swift */,
 			);
 			path = Phase;
+			sourceTree = "<group>";
+		};
+		41EB8A1B2EF9E3A90012CD25 /* Loading */ = {
+			isa = PBXGroup;
+			children = (
+				417153E529F2BD3300639A7B /* LoadState.swift */,
+				41965EE22C3286C9004F9D9A /* LoadTracking.swift */,
+				41965EE02C3284E6004F9D9A /* VisibilityTracking.swift */,
+			);
+			path = Loading;
+			sourceTree = "<group>";
+		};
+		41EB8A1C2EF9E3FC0012CD25 /* Error Alert */ = {
+			isa = PBXGroup;
+			children = (
+				419CCB532933BABF00882649 /* ErrorAlertView.swift */,
+				41EB8A1F2EF9E4100012CD25 /* AlertIconView.swift */,
+			);
+			path = "Error Alert";
 			sourceTree = "<group>";
 		};
 		41EDDF7228CD2ED30092C662 /* Energy StatsTests */ = {
@@ -2353,6 +2375,7 @@
 				411029172A71C975004018BB /* ChargeTimePeriod.swift in Sources */,
 				41BACC042D90AE3F00C9C718 /* TipType.swift in Sources */,
 				4141B20228D871B900B60157 /* ContentView.swift in Sources */,
+				41EB8A202EF9E4100012CD25 /* AlertIconView.swift in Sources */,
 				418141452A12BABA00FFC6A6 /* StatsGraphView.swift in Sources */,
 				41B591102ED1C107005B34D5 /* ViewDataProviding.swift in Sources */,
 				4134ACC42A88A1A800CB4BA8 /* InverterView.swift in Sources */,
@@ -2376,6 +2399,7 @@
 				41009A752B03B13A009D853B /* SolarForecastViewModel.swift in Sources */,
 				410183A22E7DB42F001EFE8D /* CoreBusReceiver.swift in Sources */,
 				4149D3AD2B3C4DAA00314449 /* UnsupportedErrorView.swift in Sources */,
+				41EB8A1E2EF9E4050012CD25 /* EqualWidthButtonStyle.swift in Sources */,
 				41E4B31328DB77A3003F7F47 /* HomePowerView.swift in Sources */,
 				41E165B32B0A877100B17590 /* SolcastSettingsViewModel.swift in Sources */,
 				41C249A52A77FC7400D8E9E7 /* WebView.swift in Sources */,
