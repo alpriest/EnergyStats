@@ -15,7 +15,6 @@ class EditTemplateViewModel: ObservableObject, HasLoadState, HasAlertContent {
     @Published var schedule: Schedule?
     @Published var name: String?
     private let config: ConfigManaging
-    private let modes: [WorkMode] = WorkMode.allCases
     private let templateStore: TemplateStoring
     private let networking: Networking
     private var template: ScheduleTemplate
@@ -102,12 +101,11 @@ class EditTemplateViewModel: ObservableObject, HasLoadState, HasAlertContent {
 
     func autoFillScheduleGaps() {
         guard let schedule else { return }
-        guard let mode = modes.first else { return }
         guard let device = config.currentDevice.value else { return }
 
         self.schedule = SchedulePhaseHelper.appendPhasesInGaps(
             to: schedule,
-            mode: mode,
+            mode: WorkMode.SelfUse,
             device: device,
             initialiseMaxSOC: config.getDeviceSupports(capability: .scheduleMaxSOC, deviceSN: device.deviceSN)
         )

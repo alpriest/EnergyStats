@@ -11,16 +11,6 @@ import SwiftUI
 public typealias WorkMode = String
 
 public extension WorkMode {
-    static var allCases: [WorkMode] {
-        [
-            SelfUse,
-            Feedin,
-            Backup,
-            ForceCharge,
-            ForceDischarge,
-            PeakShaving
-        ]
-    }
     static var SelfUse = "SelfUse"
     static var Feedin = "Feedin"
     static var Backup = "Backup"
@@ -79,12 +69,16 @@ extension WorkMode {
             Text("workmode.feed_in_first_mode.description")
         case "Backup":
             Text("workmode.backup_mode.description")
-        case "ForceCharge":
-            Text("workmode.force_charge_mode.description")
-        case "ForceDischarge":
-            Text("workmode.forceDischarge.description")
+        case "ForceCharge(AC)":
+            Text("workmode.force_charge_mode_ac.description")
+        case "ForceDischarge(AC)":
+            Text("workmode.force_discharge_mode_ac.description")
         case "PeakShaving":
             Text("workmode.peak_shaving.description")
+        case "ForceCharge(BAT)":
+            Text("workmode.force_charge_mode_bat.description")
+        case "ForceDischarge(BAT)":
+            Text("workmode.force_discharge_mode_bat.description")
         default:
             EmptyView()
         }

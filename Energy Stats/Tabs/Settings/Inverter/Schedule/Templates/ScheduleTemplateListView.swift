@@ -14,7 +14,6 @@ struct ScheduleTemplateListView: View {
     private let config: ConfigManaging
     private let networking: Networking
     private let templateStore: TemplateStoring
-    private let modes: [WorkMode] = WorkMode.allCases
     @State private var newTemplateName: String = ""
     @State private var createTemplateAlertIsPresented = false
     @State private var isImporting = false

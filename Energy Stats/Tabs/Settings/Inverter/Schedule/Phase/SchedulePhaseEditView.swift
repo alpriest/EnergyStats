@@ -191,12 +191,16 @@ struct SchedulePhaseEditView: View {
             "workmode.feed_in_first_mode.description"
         case WorkMode.Backup:
             "workmode.backup_mode.description"
-        case WorkMode.ForceCharge:
-            "workmode.force_charge_mode.description"
-        case WorkMode.ForceDischarge:
-            "workmode.forceDischarge.description"
         case WorkMode.PeakShaving:
             "workmode.peak_shaving.description"
+        case "ForceCharge(AC)":
+            "workmode.force_charge_mode_ac.description"
+        case "ForceDischarge(AC)":
+            "workmode.force_discharge_mode_ac.description"
+        case "ForceCharge(BAT)":
+            "workmode.force_charge_mode_bat.description"
+        case "ForceDischarge(BAT)":
+            "workmode.force_discharge_mode_bat.description"
         default:
             nil
         }
