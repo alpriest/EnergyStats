@@ -17998,7 +17998,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Falownik kontroluje moc ładowania do akumulatora. Na przykład, jeśli ustawisz moc na 10 kW, oznacza to, że maksymalna moc wejściowa do akumulatora wynosi 10 kW. Służy to do kontrolowania wejścia akumulatora."
+            "value" : "Falownik steruje mocą ładowania akumulatora. Na przykład, jeśli ustawisz moc na 10 kW, oznacza to, że maksymalna moc wejściowa do akumulatora wynosi 10 kW. Służy to do kontrolowania mocy ładowania akumulatora."
           }
         }
       }
