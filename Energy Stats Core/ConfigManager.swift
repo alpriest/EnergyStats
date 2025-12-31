@@ -12,7 +12,7 @@ import os
 public class ConfigManager: ConfigManaging {
     private let networking: Networking
     private var keychainStore: KeychainStoring
-    private var config: Config
+    private var config: StoredConfig
     public var appSettingsPublisher: CurrentValueSubject<AppSettings, Never>
     public var currentDevice = CurrentValueSubject<Device?, Never>(nil)
     private var deviceSupportsScheduleMaxSOC: [String: Bool] = [:] // In-memory only
@@ -29,7 +29,7 @@ public class ConfigManager: ConfigManaging {
         public init() {}
     }
 
-    public init(networking: Networking, config: Config, appSettingsPublisher: CurrentValueSubject<AppSettings, Never>, keychainStore: KeychainStoring) {
+    public init(networking: Networking, config: StoredConfig, appSettingsPublisher: CurrentValueSubject<AppSettings, Never>, keychainStore: KeychainStoring) {
         self.networking = networking
         self.config = config
         self.appSettingsPublisher = appSettingsPublisher
@@ -747,7 +747,7 @@ public enum BatteryResponseMapper {
 
 public extension ConfigManager {
     static func preview(
-        config: Config = MockConfig(),
+        config: StoredConfig = MockConfig(),
         networking: Networking = NetworkService.preview(),
         appSettings: AppSettings = .mock()
     ) -> ConfigManaging {
@@ -755,7 +755,7 @@ public extension ConfigManager {
     }
 
     internal class PreviewConfigManager: ConfigManager {
-        convenience init(config: Config, networking: Networking, appSettings: AppSettings = .mock()) {
+        convenience init(config: StoredConfig, networking: Networking, appSettings: AppSettings = .mock()) {
             self.init(
                 networking: networking,
                 config: config,

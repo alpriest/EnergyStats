@@ -144,9 +144,9 @@ struct BatteryPowerView: View, VerticalSizeClassProviding {
 }
 
 extension BatteryPowerViewModel {
-    static func any(error: Error?, config: Config = MockConfig()) -> BatteryPowerViewModel {
+    static func any(error: Error?) -> BatteryPowerViewModel {
         .init(
-            configManager: ConfigManager.preview(config: config),
+            configManager: ConfigManager.preview(config: MockConfig()),
             batteryStateOfCharge: 0.99,
             batteryChargekWH: -0.01,
             temperatures: BatteryTemperatures(bmsTemperature: TemperatureData(value: 23.0, name: "BMS"), bmsTemperature_1: nil, bmsTemperature_2: nil),

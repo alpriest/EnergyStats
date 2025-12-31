@@ -367,7 +367,7 @@ class DemoAPI: FoxAPIServicing {
     }
 }
 
-public class MockConfig: Config {
+public class MockConfig: StoredConfig {
     public init() {}
     public func clearDisplaySettings() {}
     public func clearDeviceSettings() {}

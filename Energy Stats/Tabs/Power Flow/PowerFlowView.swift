@@ -92,7 +92,6 @@ struct PowerFlowView<S: Shape>: View {
 private struct AdjustableViewPreview: View {
     @State private var amount: Double = 2.0
     @State private var visible = true
-    let config: Config
 
     var body: some View {
         VStack {
@@ -126,5 +125,5 @@ private struct AdjustableViewPreview: View {
 }
 
 #Preview {
-    AdjustableViewPreview(config: MockConfig())
+    AdjustableViewPreview()
 }

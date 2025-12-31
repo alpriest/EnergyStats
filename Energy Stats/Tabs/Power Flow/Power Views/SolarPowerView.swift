@@ -43,7 +43,7 @@ struct SolarPowerView: View {
 struct SolarPowerView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            AdjustableView(appSettings: .mock(), config: MockConfig(), maximum: 5.0, thresholds: [])
+            AdjustableView(appSettings: .mock(), maximum: 5.0, thresholds: [])
 
             HStack {
                 SolarPowerView(
@@ -75,14 +75,12 @@ struct AdjustableView: View {
     @State private var amount: Double = 3.0
     @State private var visible = true
     let appSettings: AppSettings
-    let config: Config
     let maximum: Double
     let thresholds: [Double]
     private let haptic = UISelectionFeedbackGenerator()
 
-    init(appSettings: AppSettings, config: Config, maximum: Double, thresholds: [Double]) {
+    init(appSettings: AppSettings, maximum: Double, thresholds: [Double]) {
         self.appSettings = appSettings
-        self.config = config
         self.maximum = maximum
         self.thresholds = thresholds
         haptic.prepare()

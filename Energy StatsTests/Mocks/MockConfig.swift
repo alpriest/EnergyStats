@@ -9,7 +9,7 @@
 import Energy_Stats_Core
 import Foundation
 
-class MockConfig: Config {
+class MockConfig: StoredConfig {
     func clearDisplaySettings() {}
     func clearDeviceSettings() {}
 

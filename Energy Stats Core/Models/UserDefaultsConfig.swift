@@ -13,7 +13,7 @@ public extension UserDefaults {
     }
 }
 
-public class UserDefaultsConfig: Config {
+public class UserDefaultsConfig: StoredConfig {
     public init() {}
 
     public func clearDisplaySettings() {

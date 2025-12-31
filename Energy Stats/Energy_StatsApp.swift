@@ -38,7 +38,7 @@ struct Energy_StatsApp: App {
 
     let urlSession = URLSessionProxy(configuration: .default)
     let appSettingsPublisher: LatestAppSettingsPublisher
-    let config: Config
+    let config: StoredConfig
     let network: Networking
     let configManager: ConfigManaging
     let userManager: UserManager
@@ -53,16 +53,15 @@ struct Energy_StatsApp: App {
     init() {
         nw_tls_create_options()
 
-        var config: Config
-        if isRunningScreenshots() {
-            config = MockConfig()
+        let config: StoredConfig = if isRunningScreenshots() {
+            MockConfig()
         } else {
-            config = UserDefaultsConfig()
+            UserDefaultsConfig()
         }
+        self.config = config
 
         UserSettings.shared.allowedShareStoreOutputs = [.har]
 
-        self.config = config
         network = NetworkService.standard(keychainStore: keychainStore,
                                           urlSession: urlSession,
                                           tracer: FirebaseNetworkTracer(),

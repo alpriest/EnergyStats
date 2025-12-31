@@ -6,10 +6,10 @@
 //
 
 public final class TipKitManager {
-    private var config: Config
+    private var config: StoredConfig
     public static var shared = TipKitManager(config: UserDefaultsConfig())
 
-    private init(config: Config) {
+    private init(config: StoredConfig) {
         self.config = config
     }
 

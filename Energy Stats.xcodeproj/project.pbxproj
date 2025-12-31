@@ -25,7 +25,7 @@
 		4103D1D929DB6C6D001B0BC8 /* ReportVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4103F82F2922BFBA00567B1C /* ReportVariable.swift */; };
 		4103D1DA29DB6C6D001B0BC8 /* DeviceFirmwareVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41626CD129D96AD9003FEB00 /* DeviceFirmwareVersion.swift */; };
 		4103D1DB29DB6C6D001B0BC8 /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4106A92C28CFCD960009DA28 /* Variable.swift */; };
-		4103D1DC29DB6C6D001B0BC8 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140145D28C70D1400EA5BA1 /* Config.swift */; };
+		4103D1DC29DB6C6D001B0BC8 /* StoredConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140145D28C70D1400EA5BA1 /* StoredConfig.swift */; };
 		4103D1DD29DB6C8C001B0BC8 /* report-day.json in Resources */ = {isa = PBXBuildFile; fileRef = 41F8D8F6292D7650005E2D18 /* report-day.json */; };
 		4103D1DF29DB6C8C001B0BC8 /* DemoNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A25D4028CA6E0000315714 /* DemoNetworking.swift */; };
 		4103D1E229DB6CD7001B0BC8 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4103D1E029DB6CB9001B0BC8 /* ConfigManager.swift */; };
@@ -660,7 +660,7 @@
 		4140145128C70B3200EA5BA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4140145428C70B3200EA5BA1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4140145B28C70B4A00EA5BA1 /* PowerFlowTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerFlowTabViewModel.swift; sourceTree = "<group>"; };
-		4140145D28C70D1400EA5BA1 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		4140145D28C70D1400EA5BA1 /* StoredConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredConfig.swift; sourceTree = "<group>"; };
 		4140145F28C70D4700EA5BA1 /* FoxAPIServicing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoxAPIServicing.swift; sourceTree = "<group>"; };
 		4140146428C714C000EA5BA1 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		4140146828C7374400EA5BA1 /* CurrentStatusCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentStatusCalculator.swift; sourceTree = "<group>"; };
@@ -1384,7 +1384,7 @@
 				41F6C64F2D935044001EBAA5 /* CT2DisplayMode.swift */,
 				41FBE9012D816F6700CEC645 /* StringPower.swift */,
 				416163912CDA5E490084DCF1 /* Notifications.swift */,
-				4140145D28C70D1400EA5BA1 /* Config.swift */,
+				4140145D28C70D1400EA5BA1 /* StoredConfig.swift */,
 				4106A92C28CFCD960009DA28 /* Variable.swift */,
 				4103F82F2922BFBA00567B1C /* ReportVariable.swift */,
 				41626CD129D96AD9003FEB00 /* DeviceFirmwareVersion.swift */,
@@ -2503,7 +2503,7 @@
 				41D75A012B5C0238002C43A7 /* Bool+Int.swift in Sources */,
 				41009A732B02D852009D853B /* SolcastForecastResponse.swift in Sources */,
 				41E3BEC32B1B5A160051C68B /* AppSettingsPublisherFactory.swift in Sources */,
-				4103D1DC29DB6C6D001B0BC8 /* Config.swift in Sources */,
+				4103D1DC29DB6C6D001B0BC8 /* StoredConfig.swift in Sources */,
 				418240782A9A33E300101064 /* TotalsViewModel.swift in Sources */,
 				414A40C02B989D9800321AA2 /* NetworkService.swift in Sources */,
 				4103D1E329DB6D03001B0BC8 /* AppSettings.swift in Sources */,

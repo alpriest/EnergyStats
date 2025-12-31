@@ -118,7 +118,6 @@ struct SolarBandingSettingsView: View {
 
                 Section {
                     AdjustableView(appSettings: modifiedAppTheme, 
-                                   config: MockConfig(),
                                    maximum: breakpoint3 + 0.500,
                                    thresholds: [breakpoint1, breakpoint2, breakpoint3])
                 } header: {

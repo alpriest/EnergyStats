@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol Config {
+public protocol StoredConfig {
     func clearDisplaySettings()
     func clearDeviceSettings()
     var isDemoUser: Bool { get set }

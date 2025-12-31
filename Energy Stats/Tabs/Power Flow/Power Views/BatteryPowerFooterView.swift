@@ -81,8 +81,5 @@ struct BatteryPowerFooterView: View {
 }
 
 #Preview {
-    let config = MockConfig()
-    config.showUsableBatteryOnly = true
-    return BatteryPowerFooterView(viewModel: BatteryPowerViewModel.any(error: nil, config: config),
-                                  appSettings: AppSettings.mock())
+    BatteryPowerFooterView(viewModel: BatteryPowerViewModel.any(error: nil), appSettings: AppSettings.mock())
 }
