@@ -24,18 +24,7 @@ struct SettingsFooterView: View {
                     }.buttonStyle(.bordered)
                 }.frame(maxWidth: .infinity)
             }, footer: {
-                VStack(alignment: .center, spacing: 44) {
-                    HStack {
-                        Button {
-                            let url = URL(string: "mailto:energystatsapp@gmail.com?subject=iOS%20App%20\(appVersion)")!
-                            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                        } label: {
-                            Image(systemName: "envelope")
-                            Text("Get in touch")
-                        }
-                    }
-                    .padding(.top, 88)
-
+                VStack(alignment: .center, spacing: 22) {
                     Button {
                         let url = URL(string: "itms-apps://itunes.apple.com/app/id1644492526?action=write-review")!
                         UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -44,6 +33,7 @@ struct SettingsFooterView: View {
                         Text("Rate this app")
                             .multilineTextAlignment(.center)
                     }
+                    .padding(.top, 88)
 
                     Text("Version ") + Text(appVersion)
                 }

@@ -25,15 +25,15 @@ class MockKeychainStore: KeychainStoring {
         token = nil
     }
 
-    func updateHasCredentials() {
-        hasCredentials.value = true
+    func updateHasApiKey() {
+        hasApiKey.value = true
     }
 
     func getToken() -> String? {
         token
     }
 
-    let hasCredentials = CurrentValueSubject<Bool, Never>(false)
+    let hasApiKey = CurrentValueSubject<Bool, Never>(false)
 
     func store(key: KeychainItemKey, value: Bool) throws {
     }

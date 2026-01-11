@@ -36,12 +36,12 @@ class MockKeychainStore: KeychainStoring {
         logoutCalled = true
     }
 
-    func updateHasCredentials() {}
+    func updateHasApiKey() {}
 
-    let hasCredentials = CurrentValueSubject<Bool, Never>(false)
+    let hasApiKey = CurrentValueSubject<Bool, Never>(false)
 
     func updateHasCredentials(value: Bool) {
-        hasCredentials.value = value
+        hasApiKey.value = value
     }
 
     func get(key: KeychainItemKey) -> Bool {

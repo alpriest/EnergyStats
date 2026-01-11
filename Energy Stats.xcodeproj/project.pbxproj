@@ -91,7 +91,6 @@
 		4128874A2BE7CCC0007E9532 /* HomeEnergyStateManagerConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412887482BE7CBCC007E9532 /* HomeEnergyStateManagerConfigManager.swift */; };
 		4128874C2BE7CE9B007E9532 /* BatteryTimelineProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418547382A3A1623000128C7 /* BatteryTimelineProvider.swift */; };
 		4128874E2BE7CFD5007E9532 /* HomeEnergyStateManagerConfigAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4128874D2BE7CFD5007E9532 /* HomeEnergyStateManagerConfigAdapter.swift */; };
-		412887512BE7D603007E9532 /* EnergyStatsWatchAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412887502BE7D603007E9532 /* EnergyStatsWatchAppDelegate.swift */; };
 		412887532BE7D617007E9532 /* WatchSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412887522BE7D617007E9532 /* WatchSessionDelegate.swift */; };
 		412887562BE8B861007E9532 /* WatchSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412887552BE8B861007E9532 /* WatchSessionDelegate.swift */; };
 		4128E4C128DA5F6600C1D698 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4128E4C028DA5F6600C1D698 /* Date.swift */; };
@@ -180,6 +179,7 @@
 		416AE4492A8128B9003D0122 /* OptionalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41028F9428CDD7A300FB70FD /* OptionalView.swift */; };
 		416AE44B2A8170E6003D0122 /* SelectableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416AE44A2A8170E6003D0122 /* SelectableItem.swift */; };
 		416AE44D2A821E4F003D0122 /* AlertContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416AE44C2A821E4F003D0122 /* AlertContent.swift */; };
+		416B8F1A2F12552600C73AB0 /* ContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416B8F192F12552600C73AB0 /* ContactView.swift */; };
 		416C66292EA7BAF40013FDE3 /* View+ReadSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416C66282EA7BAF40013FDE3 /* View+ReadSize.swift */; };
 		416D761B2BA60C3500074370 /* StatsDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416D761A2BA60C3500074370 /* StatsDataFetcher.swift */; };
 		416E032E2DE3764B0059CE42 /* FetchPeakShavingsSettingsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416E032D2DE3764A0059CE42 /* FetchPeakShavingsSettingsResponse.swift */; };
@@ -618,7 +618,6 @@
 		412887462BE7BCAD007E9532 /* WatchConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConfigManager.swift; sourceTree = "<group>"; };
 		412887482BE7CBCC007E9532 /* HomeEnergyStateManagerConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEnergyStateManagerConfigManager.swift; sourceTree = "<group>"; };
 		4128874D2BE7CFD5007E9532 /* HomeEnergyStateManagerConfigAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEnergyStateManagerConfigAdapter.swift; sourceTree = "<group>"; };
-		412887502BE7D603007E9532 /* EnergyStatsWatchAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnergyStatsWatchAppDelegate.swift; sourceTree = "<group>"; };
 		412887522BE7D617007E9532 /* WatchSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionDelegate.swift; sourceTree = "<group>"; };
 		412887552BE8B861007E9532 /* WatchSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionDelegate.swift; sourceTree = "<group>"; };
 		4128E4C028DA5F6600C1D698 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
@@ -712,6 +711,7 @@
 		416AE4472A812876003D0122 /* WorkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkMode.swift; sourceTree = "<group>"; };
 		416AE44A2A8170E6003D0122 /* SelectableItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectableItem.swift; sourceTree = "<group>"; };
 		416AE44C2A821E4F003D0122 /* AlertContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertContent.swift; sourceTree = "<group>"; };
+		416B8F192F12552600C73AB0 /* ContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactView.swift; sourceTree = "<group>"; };
 		416C66282EA7BAF40013FDE3 /* View+ReadSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ReadSize.swift"; sourceTree = "<group>"; };
 		416D761A2BA60C3500074370 /* StatsDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsDataFetcher.swift; sourceTree = "<group>"; };
 		416E032D2DE3764A0059CE42 /* FetchPeakShavingsSettingsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchPeakShavingsSettingsResponse.swift; sourceTree = "<group>"; };
@@ -1200,7 +1200,6 @@
 		4128874F2BE7D5F7007E9532 /* App Communication */ = {
 			isa = PBXGroup;
 			children = (
-				412887502BE7D603007E9532 /* EnergyStatsWatchAppDelegate.swift */,
 				412887522BE7D617007E9532 /* WatchSessionDelegate.swift */,
 			);
 			path = "App Communication";
@@ -1447,6 +1446,7 @@
 				4132086F2B9E3BC400A31873 /* DataSettingsView.swift */,
 				41EB65F82E05BB7400F53573 /* FactoryResetAppSettingsView.swift */,
 				412018052EC0E0C6007D6643 /* GraphColoursSettingsView.swift */,
+				416B8F192F12552600C73AB0 /* ContactView.swift */,
 			);
 			path = "Settings Page";
 			sourceTree = "<group>";
@@ -2379,6 +2379,7 @@
 				418141452A12BABA00FFC6A6 /* StatsGraphView.swift in Sources */,
 				41B591102ED1C107005B34D5 /* ViewDataProviding.swift in Sources */,
 				4134ACC42A88A1A800CB4BA8 /* InverterView.swift in Sources */,
+				416B8F1A2F12552600C73AB0 /* ContactView.swift in Sources */,
 				411029112A71B95F004018BB /* BatteryTimePeriodView.swift in Sources */,
 				41AF2F452AA4C74F008FCA2E /* GridPowerFooterView.swift in Sources */,
 				4110291B2A72AFAA004018BB /* BatteryChargeScheduleSettingsViewModel.swift in Sources */,
@@ -2652,7 +2653,6 @@
 				414ACCA52BEAC2D700617EED /* StubKeychainStore.swift in Sources */,
 				41F6317A2BDCD32D00A571C5 /* ContentView.swift in Sources */,
 				412887472BE7BCAD007E9532 /* WatchConfigManager.swift in Sources */,
-				412887512BE7D603007E9532 /* EnergyStatsWatchAppDelegate.swift in Sources */,
 				412887532BE7D617007E9532 /* WatchSessionDelegate.swift in Sources */,
 				41A715952BE0CE3400560628 /* LoadStateView.swift in Sources */,
 				41F631782BDCD32D00A571C5 /* Energy_Stats_Watch_AppApp.swift in Sources */,
@@ -2859,7 +2859,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 93;
+				CURRENT_PROJECT_VERSION = 94;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2882,7 +2882,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.113;
+				MARKETING_VERSION = 2.114;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2928,7 +2928,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 93;
+				CURRENT_PROJECT_VERSION = 94;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2945,7 +2945,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.113;
+				MARKETING_VERSION = 2.114;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

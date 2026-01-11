@@ -89,14 +89,11 @@ struct SettingsTabView: View {
             Section {
                 NavigationLink("FoxESS Cloud Status") { WebView(url: URL(string: "https://monitor.foxesscommunity.com/status/foxess")!) }
 
-                ExternalWebNavigationLink(url: "https://www.foxesscommunity.com", title: .foxessCommunity)
-                ExternalWebNavigationLink(url: "https://www.facebook.com/groups/foxessownersgroup", title: .facebookGroup)
-
-                NavigationLink("settings.faq") { FAQView() }
                 NavigationLink("settings.debug") { DebugSettingsView(networking: networking) }
                 NavigationLink("Edit API Key") { ConfigureAPIKeyView() }
                 ReloadDevicesButton(viewModel: viewModel)
                 NavigationLink("Reset app settings") { FactoryResetAppSettingsView(configManager: configManager) }
+                NavigationLink("Contact") { ContactView(appVersion: viewModel.appVersion) }
             }
 
             SettingsFooterView(

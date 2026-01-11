@@ -5,6 +5,7 @@
 //  Created by Alistair Priest on 30/04/2024.
 //
 
+import Combine
 import Energy_Stats_Core
 import SwiftUI
 import WidgetKit
@@ -22,22 +23,41 @@ struct ContentData {
 
 @Observable
 class ContentViewModel {
-    let keychainStore: KeychainStoring
     let network: Networking
     let config: WatchConfigManaging
     var loadState: LoadState = .inactive
     var state: ContentData?
+    var deviceSN: String?
     private let FOUR_MINUTES_IN_SECONDS = 60.0 * 4.0
+    private var cancellables = Set<AnyCancellable>()
 
-    init(keychainStore: KeychainStoring, network: Networking, config: WatchConfigManaging) {
-        self.keychainStore = keychainStore
+    init(network: Networking, config: WatchConfigManaging) {
         self.network = network
         self.config = config
+        self.deviceSN = config.deviceSN
+
+        config.isLoggedInPublisher
+            .removeDuplicates()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isLoggedIn in
+                guard let self else { return }
+
+                if isLoggedIn {
+                    if deviceSN != config.deviceSN {
+                        self.deviceSN = config.deviceSN
+                        Task { await self.loadData() }
+                    }
+                } else {
+                    loadState = .error(nil, "No device/API key found. Open Energy Stats on your phone to sync.2")
+                    state = nil
+                }
+            }
+            .store(in: &cancellables)
     }
 
     func loadData() async {
-        guard let deviceSN: String = try? keychainStore.get(key: .deviceSN) else {
-            loadState = .error(nil, "No Inverter Found\n\nEnsure you are logged in on your iOS app.")
+        guard let deviceSN, config.isLoggedIn else {
+            loadState = .error(nil, "No device/API key found. Open Energy Stats on your phone to sync.3")
             return
         }
         guard state.lastRefreshSeconds > FOUR_MINUTES_IN_SECONDS else {

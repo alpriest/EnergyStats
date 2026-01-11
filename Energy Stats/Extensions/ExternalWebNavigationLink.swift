@@ -8,9 +8,14 @@
 import Energy_Stats_Core
 import SwiftUI
 
-struct ExternalWebNavigationLink: View {
+struct ExternalWebNavigationLink<Content: View>: View {
     let url: String
-    let title: LocalizedString.Key
+    let title: () -> Content
+    
+    init(url: String, @ViewBuilder title: @escaping () -> Content) {
+        self.url = url
+        self.title = title
+    }
 
     var body: some View {
         Button {
@@ -20,7 +25,7 @@ struct ExternalWebNavigationLink: View {
             NavigationLink {
                 EmptyView()
             } label: {
-                Text(String(key: title))
+                title()
             }
         }
         .buttonStyle(.automatic)
@@ -31,10 +36,9 @@ struct ExternalWebNavigationLink: View {
 #if DEBUG
 struct ExternalWebNavigationLink_Previews: PreviewProvider {
     static var previews: some View {
-        ExternalWebNavigationLink(
-            url: "https://www.foxesscommunity.com",
-            title: .foxessCommunity
-        )
+        ExternalWebNavigationLink(url: "https://www.foxesscommunity.com") {
+            Text(String(key: .foxessCommunity))
+        }
     }
 }
 #endif

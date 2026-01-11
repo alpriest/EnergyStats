@@ -5,56 +5,79 @@
 //  Created by Alistair Priest on 05/05/2024.
 //
 
+import Combine
 import Energy_Stats_Core
 import Foundation
 
 protocol WatchConfigManaging: CurrentStatusCalculatorConfig, BatteryConfigManager {
+    var isLoggedInPublisher: AnyPublisher<Bool, Never> { get }
     var solarDefinitions: SolarRangeDefinitions { get }
+    var deviceSN: String? { get }
+    var apiKey: String? { get }
+    var isLoggedIn: Bool { get }
 }
 
 class WatchConfigManager: WatchConfigManaging {
-    var appSettingsPublisher: LatestAppSettingsPublisher = .init(.mock())
+    var appSettingsPublisher: LatestAppSettingsPublisher = .init(.mock()) // do not use, here because of protocol dependency
     private let keychainStore: KeychainStoring
-    
+
+    private let _isLoggedInSubject = CurrentValueSubject<Bool, Never>(false)
+    var isLoggedInPublisher: AnyPublisher<Bool, Never> { _isLoggedInSubject.eraseToAnyPublisher() }
+
     init(keychainStore: KeychainStoring) {
         self.keychainStore = keychainStore
+        _isLoggedInSubject.send(isLoggedIn)
     }
-    
+
+    var isLoggedIn: Bool {
+        apiKey != nil && deviceSN != nil
+    }
+
     @UserDefaultsStoredString(key: "batteryCapacity", defaultValue: "0")
     var batteryCapacity: String
-    
+
     var batteryCapacityW: Int {
         Int(batteryCapacity) ?? 0
     }
-    
+
     func clearBatteryOverride(for deviceID: String) {}
-    
+
     @UserDefaultsStoredBool(key: "shouldInvertCT2", defaultValue: true)
     var shouldInvertCT2: Bool
-    
+
     @UserDefaultsStoredBool(key: "shouldCombineCT2WithPVPower", defaultValue: true)
     var shouldCombineCT2WithPVPower: Bool
-    
+
     @UserDefaultsStoredBool(key: "shouldCombineCT2WithLoadsPower", defaultValue: false)
     var shouldCombineCT2WithLoadsPower: Bool
-    
+
     var powerFlowStrings: PowerFlowStringsSettings = .none
-    
+
     @UserDefaultsStoredDouble(key: "minSOC")
     var minSOC: Double
-    
+
     @UserDefaultsStoredBool(key: "showUsableBatteryOnly", defaultValue: false)
     var showUsableBatteryOnly: Bool
-    
-    var showGridTotalsOnPowerFlow: Bool {
+
+    @UserDefaultsStoredOptionalString(key: "deviceSN")
+    var deviceSN: String?
+
+    var apiKey: String? {
         get {
-            (try? keychainStore.get(key: .showGridTotalsOnPowerFlow)) ?? false
+            try? keychainStore.getToken()
         }
         set {
-            try? keychainStore.store(key: .showGridTotalsOnPowerFlow, value: newValue)
+            if let newValue {
+                try? keychainStore.store(apiKey: newValue, notifyObservers: false)
+            } else {
+                keychainStore.logout()
+            }
         }
     }
-    
+
+    @UserDefaultsStoredBool(key: "showGridTotalsOnPowerFlow", defaultValue: false)
+    var showGridTotalsOnPowerFlow: Bool
+
     var solarDefinitions: SolarRangeDefinitions {
         get {
             guard let solarDefinitions = UserDefaults.shared.data(forKey: "solarDefinitions") else { return .default }
@@ -68,9 +91,14 @@ class WatchConfigManager: WatchConfigManaging {
             UserDefaults.shared.set(newValue, forKey: "solarDefinitions")
         }
     }
-    
+
     @UserDefaultsStoredBool(key: "allowNegativeLoad", defaultValue: false)
     var allowNegativeLoad: Bool
+    
+    func applyUpdatesThenNotify(_ apply: (WatchConfigManager) -> Void) {
+        apply(self)
+        _isLoggedInSubject.send(isLoggedIn)
+    }
 }
 
 class PreviewWatchConfig: WatchConfigManaging {
@@ -88,4 +116,9 @@ class PreviewWatchConfig: WatchConfigManaging {
     var solarDefinitions: SolarRangeDefinitions = .default
     var shouldCombineCT2WithLoadsPower: Bool = false
     var allowNegativeLoad: Bool = false
+
+    var deviceSN: String? = "abc123"
+    var apiKey: String? = "api123"
+    var isLoggedIn: Bool = false
+    var isLoggedInPublisher: AnyPublisher<Bool, Never> { Just(isLoggedIn).eraseToAnyPublisher() }
 }

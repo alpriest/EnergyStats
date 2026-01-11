@@ -22,7 +22,7 @@ class UserManager: ObservableObject, HasLoadState {
         self.configManager = configManager
 
         migrateKeychain()
-        self.store.hasCredentials
+        self.store.hasApiKey
             .receive(on: RunLoop.main)
             .sink(receiveValue: { [weak self] newValue in
                 Task { @MainActor in
@@ -56,7 +56,7 @@ class UserManager: ObservableObject, HasLoadState {
             try store.store(apiKey: apiKey, notifyObservers: false)
             try await configManager.fetchDevices()
             try? await configManager.fetchPowerStationDetail()
-            store.updateHasCredentials()
+            store.updateHasApiKey()
         } catch let error as NetworkError {
             await logout()
 

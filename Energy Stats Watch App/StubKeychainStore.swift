@@ -14,11 +14,11 @@ struct StubKeychainStore: KeychainStoring {
 
     func logout() {}
 
-    func updateHasCredentials() {}
+    func updateHasApiKey() {}
 
     func getToken() -> String? { "863c6969-5d74-450b-b4d4-1c446fb21c81" }
 
-    var hasCredentials = CurrentValueSubject<Bool, Never>(true)
+    var hasApiKey = CurrentValueSubject<Bool, Never>(true)
 
     var isDemoUser: Bool = false
 

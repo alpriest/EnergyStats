@@ -11,9 +11,9 @@ import WatchConnectivity
 
 @main
 struct Energy_Stats_Watch_App: App {
-    static let delegate = WatchSessionDelegate()
+    let delegate = WatchToPhoneSessionDelegate()
+    let configManager: WatchConfigManager
     @Environment(\.scenePhase) private var scenePhase
-    @WKApplicationDelegateAdaptor var appDelegate: EnergyStatsWatchAppDelegate
 
     var keychainStore: KeychainStoring = {
         if ProcessInfo().arguments.contains("mockDevice") {
@@ -33,17 +33,18 @@ struct Energy_Stats_Watch_App: App {
                                     dataCeiling: { .none })
         }
     }()
+    
+    init() {
+        WCSession.default.delegate = delegate
+        delegate.activateIfNeeded()
+
+        configManager = WatchConfigManager(keychainStore: keychainStore)
+        delegate.config = configManager
+    }
 
     var body: some Scene {
-        let configManager = WatchConfigManager(keychainStore: keychainStore)
-
         WindowGroup {
-            ContentView(keychainStore: keychainStore, network: network, config: configManager)
-                .onChange(of: scenePhase) { _, phase in
-                    if case .active = phase {
-                        Energy_Stats_Watch_App.delegate.config = configManager
-                    }
-                }
+            ContentView(network: network, config: configManager)
         }
     }
 }

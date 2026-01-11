@@ -28,7 +28,7 @@ final class UserManagerTests: XCTestCase {
     @MainActor
     func test_isLoggedIn_SetsOnInitialisation() {
         let expectation = self.expectation(description: #function)
-        keychainStore.updateHasCredentials()
+        keychainStore.updateHasApiKey()
 
         sut.$isLoggedIn
             .receive(subscriber: Subscribers.Sink(receiveCompletion: { _ in
@@ -63,7 +63,7 @@ final class UserManagerTests: XCTestCase {
         stubHTTPResponses(with: [.deviceListSuccess, .variablesSuccess, .batterySuccess, .batterySocSuccess, .plantListSuccess, .plantDetailSuccess])
 
         await sut.login(apiKey: "bob")
-        await propertyOn(keychainStore, keyPath: \.hasCredentials) { $0.value }
+        await propertyOn(keychainStore, keyPath: \.hasApiKey) { $0.value }
 
         await propertyOn(received, keyPath: \.values) { $0 == [.inactive, .active(.loading)] }
         XCTAssertEqual(keychainStore.token, "bob")

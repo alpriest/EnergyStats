@@ -30,9 +30,9 @@ public enum KeychainItemKey: String {
 public protocol KeychainStoring {
     func store(apiKey: String?, notifyObservers: Bool) throws
     func logout()
-    func updateHasCredentials()
+    func updateHasApiKey()
     func getToken() throws -> String?
-    var hasCredentials: CurrentValueSubject<Bool, Never> { get }
+    var hasApiKey: CurrentValueSubject<Bool, Never> { get }
     var isDemoUser: Bool { get }
     func store(key: KeychainItemKey, value: Bool) throws
     func store(key: KeychainItemKey, value: String?) throws
@@ -51,19 +51,19 @@ public class KeychainStore: KeychainStoring {
         let code: OSStatus?
     }
 
-    public let hasCredentials = CurrentValueSubject<Bool, Never>(false)
+    public let hasApiKey = CurrentValueSubject<Bool, Never>(false)
     private let group: String
 
     public init(group: String = "885RLNNNK2.com.alpriest.EnergyStats") {
         self.group = group
-        updateHasCredentials()
+        updateHasApiKey()
     }
 
     public func store(apiKey: String?, notifyObservers: Bool) throws {
         try set(tag: "token", value: apiKey)
 
         if notifyObservers {
-            updateHasCredentials()
+            updateHasApiKey()
         }
     }
 
@@ -73,12 +73,12 @@ public class KeychainStore: KeychainStoring {
 
     public func logout() {
         SecItemDelete(makeQuery(tag: "token"))
-        updateHasCredentials()
+        updateHasApiKey()
     }
 
-    public func updateHasCredentials() {
+    public func updateHasApiKey() {
         do {
-            hasCredentials.value = try getToken() != nil
+            hasApiKey.value = try getToken() != nil
         } catch { }
     }
 

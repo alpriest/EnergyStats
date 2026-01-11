@@ -33,7 +33,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct Energy_StatsApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    static let delegate = WatchSessionDelegate()
+    static let watchDelegate = PhoneToWatchSessionDelegate()
     let keychainStore = KeychainStore()
 
     let urlSession = URLSessionProxy(configuration: .default)
@@ -45,7 +45,7 @@ struct Energy_StatsApp: App {
     let versionChecker: VersionChecker
     let templateStore: TemplateStoring
     let bannerAlertManager = BannerAlertManager()
-    let watchKeychainSynchroniser: WatchKeychainSynchroniser
+//    let watchKeychainSynchroniser: WatchKeychainSynchroniser
     private var cancellables = Set<AnyCancellable>()
 
     @Environment(\.scenePhase) private var scenePhase
@@ -72,10 +72,14 @@ struct Energy_StatsApp: App {
         AppSettingsPublisherFactory.update(from: configManager)
         userManager = .init(store: keychainStore, configManager: configManager)
         templateStore = TemplateStore(config: configManager)
-        watchKeychainSynchroniser = WatchKeychainSynchroniser(keychainStore: keychainStore, configManager: configManager)
-        appSettingsPublisher
-            .sink { [watchKeychainSynchroniser] _ in
-                watchKeychainSynchroniser.updateKeychainSettingsForWatch()
+        userManager.$isLoggedIn
+            .combineLatest(appSettingsPublisher)
+            .sink { [keychainStore] isLoggedIn, _ in
+                let apiKey = try? keychainStore.getToken()
+                
+                if let isLoggedIn {
+                    Self.watchDelegate.sendCurrentConfig(apiKey: apiKey, isLoggedIn: isLoggedIn)
+                }
             }.store(in: &cancellables)
         versionChecker = VersionChecker(urlSession: urlSession)
     }
@@ -114,8 +118,9 @@ struct Energy_StatsApp: App {
     private func performOnActivationTasks(solarForecastProvider: SolarForecastProviding) {
         if WCSession.isSupported() {
             let session = WCSession.default
-            session.delegate = Energy_StatsApp.delegate
-            Energy_StatsApp.delegate.config = configManager
+            session.delegate = Energy_StatsApp.watchDelegate
+            Energy_StatsApp.watchDelegate.config = configManager
+            Energy_StatsApp.watchDelegate.userManager = userManager
             session.activate()
         }
 
