@@ -17,12 +17,12 @@ struct SummaryTabView: View {
     @StateObject private var solarForecastViewModel: SolarForecastViewModel
     @State private var presentSheet = false
 
-    init(configManager: ConfigManaging, networking: Networking, appSettingsPublisher: LatestAppSettingsPublisher, solarForecastProvider: @escaping SolarForecastProviding) {
+    init(configManager: ConfigManaging, networking: Networking, solarForecastProvider: @escaping SolarForecastProviding) {
         self.configManager = configManager
         _viewModel = .init(wrappedValue: SummaryTabViewModel(configManager: configManager, networking: networking))
-        _solarForecastViewModel = .init(wrappedValue: SolarForecastViewModel(configManager: configManager, appSettingsPublisher: appSettingsPublisher, solarForecastProvider: solarForecastProvider))
-        _appSettings = State(initialValue: appSettingsPublisher.value)
-        self.appSettingsPublisher = appSettingsPublisher
+        _solarForecastViewModel = .init(wrappedValue: SolarForecastViewModel(configManager: configManager, solarForecastProvider: solarForecastProvider))
+        self.appSettingsPublisher = configManager.appSettingsPublisher
+        self.appSettings = configManager.currentAppSettings
     }
 
     var body: some View {
@@ -115,7 +115,6 @@ struct SummaryTabView: View {
 #Preview {
     SummaryTabView(configManager: ConfigManager.preview(),
                    networking: NetworkService.preview(),
-                   appSettingsPublisher: CurrentValueSubject(.mock()),
                    solarForecastProvider: { DemoSolcast() })
         .environment(\.locale, .init(identifier: "de"))
 }

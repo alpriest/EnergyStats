@@ -16,14 +16,14 @@ enum ServiceFactory {
                                               urlSession: URLSession.shared,
                                               isDemoUser: { false },
                                               dataCeiling: { .none })
-        let appSettingsPublisher = AppSettingsPublisherFactory.make()
+        let appSettingsStore = AppSettingsStoreFactory.make()
         let configManager = ConfigManager(
             networking: network,
             config: config,
-            appSettingsPublisher: appSettingsPublisher,
+            appSettingsStore: appSettingsStore,
             keychainStore: store
         )
-        AppSettingsPublisherFactory.update(from: configManager)
+        AppSettingsStoreFactory.update(from: configManager)
 
         guard let device = configManager.currentDevice.value else {
             throw ConfigManager.NoDeviceFoundError()

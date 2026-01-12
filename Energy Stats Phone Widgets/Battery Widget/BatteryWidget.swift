@@ -22,10 +22,10 @@ struct BatteryWidget: Widget {
                                               urlSession: URLSession.shared,
                                               isDemoUser: { false },
                                               dataCeiling: { .none })
-        let appSettingsPublisher = AppSettingsPublisherFactory.make()
-        configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
+        let appSettingsStore = AppSettingsStoreFactory.make()
+        configManager = ConfigManager(networking: network, config: config, appSettingsStore: appSettingsStore, keychainStore: keychainStore)
         self.keychainStore = keychainStore
-        AppSettingsPublisherFactory.update(from: configManager)
+        AppSettingsStoreFactory.update(from: configManager)
     }
 
     var body: some WidgetConfiguration {
@@ -81,7 +81,7 @@ struct BatteryWidgetView: View {
                 BatteryStatusView(
                     soc: Double(entry.soc ?? 0) / 100.0,
                     chargeStatusDescription: entry.chargeStatusDescription,
-                    appSettings: configManager.appSettingsPublisher.value,
+                    appSettings: configManager.currentAppSettings,
                     hasError: entry.errorMessage != nil
                 )
             }
@@ -113,7 +113,7 @@ struct BatteryWidget_Previews: PreviewProvider {
             configManager: ConfigManager(
                 networking: NetworkService.preview(),
                 config: MockConfig(),
-                appSettingsPublisher: AppSettingsPublisherFactory.make(),
+                appSettingsStore: AppSettingsStoreFactory.make(),
                 keychainStore: KeychainStore.preview()
             )
         )
@@ -125,12 +125,7 @@ struct BatteryWidget_Previews: PreviewProvider {
                                                chargeStatusDescription: "Full in 22 minutes",
                                                errorMessage: "Could not refresh",
                                                batteryPower: 0),
-            configManager: ConfigManager(
-                networking: NetworkService.preview(),
-                config: MockConfig(),
-                appSettingsPublisher: AppSettingsPublisherFactory.make(),
-                keychainStore: KeychainStore.preview()
-            )
+            configManager: ConfigManager.preview()
         )
         .previewContext(WidgetPreviewContext(family: .systemSmall))
     }

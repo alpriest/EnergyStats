@@ -55,10 +55,10 @@ struct StatsTabView: View {
     private var appSettingsPublisher: LatestAppSettingsPublisher
     @AppStorage("showStatsGraph") private var showingGraph = true
 
-    init(configManager: ConfigManaging, networking: Networking, appSettingsPublisher: LatestAppSettingsPublisher) {
+    init(configManager: ConfigManaging, networking: Networking) {
         _viewModel = .init(wrappedValue: StatsTabViewModel(networking: networking, configManager: configManager))
-        self.appSettingsPublisher = appSettingsPublisher
-        self.appSettings = appSettingsPublisher.value
+        self.appSettingsPublisher = configManager.appSettingsPublisher
+        self.appSettings = configManager.currentAppSettings
     }
 
     var body: some View {
@@ -100,10 +100,10 @@ struct StatsTabView: View {
                         }
                     }.loadable(viewModel.state, options: [.retry], overlay: true, retry: { Task { await viewModel.load() } })
 
-                    StatsGraphVariableToggles(viewModel: viewModel, selectedDate: $viewModel.selectedDate, valuesAtTime: $viewModel.valuesAtTime, appSettings: appSettingsPublisher.value)
+                    StatsGraphVariableToggles(viewModel: viewModel, selectedDate: $viewModel.selectedDate, valuesAtTime: $viewModel.valuesAtTime, appSettings: appSettings)
 
                     if let approximationsViewModel = viewModel.approximationsViewModel {
-                        ApproximationsView(viewModel: approximationsViewModel, appSettings: appSettingsPublisher.value, decimalPlaceOverride: nil)
+                        ApproximationsView(viewModel: approximationsViewModel, appSettings: appSettings, decimalPlaceOverride: nil)
                     }
 
                     Text("Stats are aggregated by FoxESS into 1 hr, 1 day or 1 month totals.")
@@ -137,8 +137,7 @@ struct StatsTabView: View {
 #Preview {
     StatsTabView(
         configManager: ConfigManager.preview(),
-        networking: NetworkService.preview(),
-        appSettingsPublisher: CurrentValueSubject(.mock())
+        networking: NetworkService.preview()
     )
 }
 #endif

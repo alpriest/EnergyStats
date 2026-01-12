@@ -44,7 +44,6 @@ struct LeftTabbedView: View {
                             configManager: configManager,
                             networking: networking,
                             userManager: userManager,
-                            appSettingsPublisher: configManager.appSettingsPublisher,
                             templateStore: templateStore
                         )
                     } label: {
@@ -54,8 +53,7 @@ struct LeftTabbedView: View {
                     NavigationLink {
                         StatsTabView(
                             configManager: configManager,
-                            networking: networking,
-                            appSettingsPublisher: configManager.appSettingsPublisher
+                            networking: networking
                         )
                     } label: {
                         StatsTabItem()
@@ -68,7 +66,7 @@ struct LeftTabbedView: View {
                     }
 
                     NavigationLink {
-                        SummaryTabView(configManager: configManager, networking: networking, appSettingsPublisher: configManager.appSettingsPublisher, solarForecastProvider: solarForecastProvider)
+                        SummaryTabView(configManager: configManager, networking: networking, solarForecastProvider: solarForecastProvider)
                     } label: {
                         SummaryTabItem()
                     }
@@ -85,7 +83,6 @@ struct LeftTabbedView: View {
                     configManager: configManager,
                     networking: networking,
                     userManager: userManager,
-                    appSettingsPublisher: configManager.appSettingsPublisher,
                     templateStore: templateStore
                 )
             }

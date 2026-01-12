@@ -24,7 +24,6 @@ struct LoadedPowerFlowView: View {
     init(
         configManager: ConfigManaging,
         viewModel: LoadedPowerFlowViewModel,
-        appSettingsPublisher: LatestAppSettingsPublisher,
         networking: Networking,
         templateStore: TemplateStoring
     ) {
@@ -32,8 +31,8 @@ struct LoadedPowerFlowView: View {
         self.viewModel = viewModel
         self.networking = networking
         self.templateStore = templateStore
-        self.appSettingsPublisher = appSettingsPublisher
-        self._appSettings = State(wrappedValue: appSettingsPublisher.value)
+        self.appSettingsPublisher = configManager.appSettingsPublisher
+        self.appSettings = configManager.currentAppSettings
     }
 
     var body: some View {
@@ -286,15 +285,6 @@ struct PowerSummaryView_Previews: PreviewProvider {
 
         LoadedPowerFlowView(configManager: ConfigManager.preview(),
                             viewModel: LoadedPowerFlowViewModel.any(battery: .any(), appSettings: appSettings),
-                            appSettingsPublisher: CurrentValueSubject(appSettings.copy(decimalPlaces: 3,
-                                                                                       displayUnit: .adaptive,
-                                                                                       showFinancialEarnings: true,
-                                                                                       showInverterTemperature: false,
-                                                                                       showHomeTotalOnPowerFlow: true,
-                                                                                       showInverterIcon: false,
-                                                                                       shouldCombineCT2WithPVPower: true,
-                                                                                       powerFlowStrings: strings,
-                                                                                       ct2DisplayMode: .separateIcon)),
                             networking: NetworkService.preview(),
                             templateStore: TemplateStore.preview())
             .environment(\.locale, .init(identifier: "en"))

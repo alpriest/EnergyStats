@@ -53,11 +53,11 @@ class SolarForecastViewModel: ObservableObject, HasLoadState {
         let innerError: Error
     }
 
-    init(configManager: ConfigManaging, appSettingsPublisher: LatestAppSettingsPublisher, solarForecastProvider: @escaping SolarForecastProviding) {
+    init(configManager: ConfigManaging, solarForecastProvider: @escaping SolarForecastProviding) {
         self.configManager = configManager
         self.solarForecastProvider = solarForecastProvider
-        self.settings = appSettingsPublisher.value
-        self.cancellable = appSettingsPublisher.assign(to: \.settings, on: self)
+        self.settings = configManager.currentAppSettings
+        self.cancellable = configManager.appSettingsPublisher.assign(to: \.settings, on: self)
     }
 
     func load(ignoreCache: Bool = false) {

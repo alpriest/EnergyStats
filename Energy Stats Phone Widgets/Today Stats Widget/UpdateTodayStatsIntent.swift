@@ -21,14 +21,14 @@ struct UpdateStatsIntent: AppIntent {
         do {
             let config = UserDefaultsConfig()
             let keychainStore = KeychainStore()
-            let appSettingsPublisher = AppSettingsPublisherFactory.make()
+            let appSettingsStore = AppSettingsStoreFactory.make()
             let network = NetworkService.standard(keychainStore: keychainStore,
                                                   urlSession: URLSession.shared,
                                                   isDemoUser: {  false },
                                                   dataCeiling: { .none })
 
-            let configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
-            AppSettingsPublisherFactory.update(from: configManager)
+            let configManager = ConfigManager(networking: network, config: config, appSettingsStore: appSettingsStore, keychainStore: keychainStore)
+            AppSettingsStoreFactory.update(from: configManager)
             let configAdapter = HomeEnergyStateManagerConfigAdapter(config: configManager, keychainStore: keychainStore)
             try await HomeEnergyStateManager.shared.updateTodayStatsState(config: configAdapter)
             try await HomeEnergyStateManager.shared.updateGenerationStatsState(config: configAdapter)

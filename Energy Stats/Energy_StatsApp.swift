@@ -37,7 +37,7 @@ struct Energy_StatsApp: App {
     let keychainStore = KeychainStore()
 
     let urlSession = URLSessionProxy(configuration: .default)
-    let appSettingsPublisher: LatestAppSettingsPublisher
+    let appSettingsStore: AppSettingsStore
     let config: StoredConfig
     let network: Networking
     let configManager: ConfigManaging
@@ -66,13 +66,13 @@ struct Energy_StatsApp: App {
                                           tracer: FirebaseNetworkTracer(),
                                           isDemoUser: { config.isDemoUser },
                                           dataCeiling: { config.dataCeiling })
-        appSettingsPublisher = AppSettingsPublisherFactory.make()
-        configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
-        AppSettingsPublisherFactory.update(from: configManager)
+        appSettingsStore = AppSettingsStoreFactory.make()
+        configManager = ConfigManager(networking: network, config: config, appSettingsStore: appSettingsStore, keychainStore: keychainStore)
+        AppSettingsStoreFactory.update(from: configManager)
         userManager = .init(store: keychainStore, configManager: configManager)
         templateStore = TemplateStore(config: configManager)
         userManager.$isLoggedIn
-            .combineLatest(appSettingsPublisher)
+            .combineLatest(appSettingsStore.publisher)
             .sink { [keychainStore] isLoggedIn, _ in
                 let apiKey = try? keychainStore.getToken()
                 
@@ -161,8 +161,8 @@ struct Energy_StatsApp: App {
                     templatePhase.isEqualConfiguration(to: schedulePhase)
                 }
                 if match {
-                    let appSettings = appSettingsPublisher.value.copy(detectedActiveTemplate: template.name)
-                    appSettingsPublisher.send(appSettings)
+                    let appSettings = appSettingsStore.currentValue.copy(detectedActiveTemplate: template.name)
+                    appSettingsStore.update(appSettings)
                 }
             }
         }

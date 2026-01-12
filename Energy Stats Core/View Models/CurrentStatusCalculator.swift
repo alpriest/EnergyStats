@@ -27,7 +27,7 @@ public extension Array where Element == OpenQueryResponse.Data {
 }
 
 public protocol CurrentStatusCalculatorConfig {
-    var appSettingsPublisher: LatestAppSettingsPublisher { get }
+    var appSettingsPublisher: AnyPublisher<AppSettings, Never> { get }
     var shouldInvertCT2: Bool { get set }
     var shouldCombineCT2WithPVPower: Bool { get set }
     var powerFlowStrings: PowerFlowStringsSettings { get set }

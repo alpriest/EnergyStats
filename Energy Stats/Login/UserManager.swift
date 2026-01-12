@@ -50,7 +50,7 @@ class UserManager: ObservableObject, HasLoadState {
             await setState(.active(.loading))
             if apiKey == "demo" {
                 configManager.isDemoUser = true
-                configManager.appSettingsPublisher.send(AppSettings.mock())
+                configManager.loginAsDemo()
             }
             
             try store.store(apiKey: apiKey, notifyObservers: false)

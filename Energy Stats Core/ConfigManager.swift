@@ -13,13 +13,15 @@ public class ConfigManager: ConfigManaging {
     private let networking: Networking
     private var keychainStore: KeychainStoring
     private var config: StoredConfig
-    public var appSettingsPublisher: CurrentValueSubject<AppSettings, Never>
+    public var appSettingsPublisher: AnyPublisher<AppSettings, Never> { appSettingsStore.publisher }
     public var currentDevice = CurrentValueSubject<Device?, Never>(nil)
     private var deviceSupportsScheduleMaxSOC: [String: Bool] = [:] // In-memory only
     private var deviceSupportsPeakShaving: [String: Bool] = [:] // In-memory only
     public var lastSettingsResetTime = CurrentValueSubject<Date?, Never>(nil)
     private var fetchDeviceLock = OSAllocatedUnfairLock()
     private var isFetching = false
+    private let appSettingsStore: AppSettingsStore
+    public var currentAppSettings: AppSettings { appSettingsStore.currentValue }
 
     public struct NoDeviceFoundError: Error {
         public init() {}
@@ -29,10 +31,10 @@ public class ConfigManager: ConfigManaging {
         public init() {}
     }
 
-    public init(networking: Networking, config: StoredConfig, appSettingsPublisher: CurrentValueSubject<AppSettings, Never>, keychainStore: KeychainStoring) {
+    public init(networking: Networking, config: StoredConfig, appSettingsStore: AppSettingsStore, keychainStore: KeychainStoring) {
         self.networking = networking
         self.config = config
-        self.appSettingsPublisher = appSettingsPublisher
+        self.appSettingsStore = appSettingsStore
         self.keychainStore = keychainStore
         selectedDeviceSN = selectedDeviceSN // force the currentDevice to be set
     }
@@ -122,10 +124,14 @@ public class ConfigManager: ConfigManaging {
             selectedDeviceSN = nil
         }
     }
+    
+    public func loginAsDemo() {
+        appSettingsStore.update(.mock())
+    }
 
     public func resetDisplaySettings() {
         config.clearDisplaySettings()
-        appSettingsPublisher.send(AppSettings.make(from: self))
+        appSettingsStore.update(AppSettings.make(from: self))
         lastSettingsResetTime.send(.now)
     }
 
@@ -148,7 +154,7 @@ public class ConfigManager: ConfigManaging {
             devices = devices?.map {
                 $0.deviceSN == device.deviceSN ? updatedDevice : $0
             }
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 minSOC: newValue
             ))
         }
@@ -216,7 +222,7 @@ public class ConfigManager: ConfigManaging {
         get { config.currencySymbol }
         set {
             config.currencySymbol = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 currencySymbol: config.currencySymbol
             ))
         }
@@ -233,7 +239,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showColouredLines }
         set {
             config.showColouredLines = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 showColouredLines: config.showColouredLines
             ))
         }
@@ -243,7 +249,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showBatteryTemperature }
         set {
             config.showBatteryTemperature = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 showBatteryTemperature: config.showBatteryTemperature
             ))
         }
@@ -253,7 +259,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showBatteryEstimate }
         set {
             config.showBatteryEstimate = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 showBatteryEstimate: config.showBatteryEstimate
             ))
         }
@@ -263,7 +269,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showUsableBatteryOnly }
         set {
             config.showUsableBatteryOnly = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 showUsableBatteryOnly: config.showUsableBatteryOnly
             ))
         }
@@ -273,7 +279,7 @@ public class ConfigManager: ConfigManaging {
         get { RefreshFrequency(rawValue: config.refreshFrequency) ?? .AUTO }
         set {
             config.refreshFrequency = newValue.rawValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 refreshFrequency: refreshFrequency
             ))
         }
@@ -283,7 +289,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showSunnyBackground }
         set {
             config.showSunnyBackground = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 showSunnyBackground: config.showSunnyBackground
             ))
         }
@@ -293,7 +299,7 @@ public class ConfigManager: ConfigManaging {
         get { config.selfSufficiencyEstimateMode }
         set {
             config.selfSufficiencyEstimateMode = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 selfSufficiencyEstimateMode: config.selfSufficiencyEstimateMode
             ))
         }
@@ -303,7 +309,7 @@ public class ConfigManager: ConfigManaging {
         get { config.decimalPlaces }
         set {
             config.decimalPlaces = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 decimalPlaces: config.decimalPlaces
             ))
         }
@@ -313,7 +319,7 @@ public class ConfigManager: ConfigManaging {
         get { DisplayUnit(rawValue: config.displayUnit) ?? .kilowatt }
         set {
             config.displayUnit = newValue.rawValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 displayUnit: newValue
             ))
         }
@@ -323,7 +329,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showFinancialEarnings }
         set {
             config.showFinancialEarnings = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 showFinancialEarnings: config.showFinancialEarnings
             ))
         }
@@ -333,7 +339,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showFinancialSummaryOnFlowPage }
         set {
             config.showFinancialSummaryOnFlowPage = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 showFinancialSummaryOnFlowPage: config.showFinancialSummaryOnFlowPage
             ))
         }
@@ -343,7 +349,7 @@ public class ConfigManager: ConfigManaging {
         get { config.feedInUnitPrice }
         set {
             config.feedInUnitPrice = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 feedInUnitPrice: config.feedInUnitPrice
             ))
         }
@@ -353,7 +359,7 @@ public class ConfigManager: ConfigManaging {
         get { config.gridImportUnitPrice }
         set {
             config.gridImportUnitPrice = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 feedInUnitPrice: config.gridImportUnitPrice
             ))
         }
@@ -363,7 +369,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showInverterTemperature }
         set {
             config.showInverterTemperature = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 showInverterTemperature: config.showInverterTemperature
             ))
         }
@@ -373,7 +379,7 @@ public class ConfigManager: ConfigManaging {
         get { config.solarDefinitions }
         set {
             config.solarDefinitions = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 solarDefinitions: config.solarDefinitions
             ))
         }
@@ -383,7 +389,7 @@ public class ConfigManager: ConfigManaging {
         get { config.parameterGroups }
         set {
             config.parameterGroups = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 parameterGroups: config.parameterGroups
             ))
         }
@@ -393,7 +399,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showGraphValueDescriptions }
         set {
             config.showGraphValueDescriptions = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 showGraphValueDescriptions: config.showGraphValueDescriptions
             ))
         }
@@ -432,7 +438,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showHomeTotalOnPowerFlow }
         set {
             config.showHomeTotalOnPowerFlow = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 showHomeTotalOnPowerFlow: config.showHomeTotalOnPowerFlow
             ))
         }
@@ -442,7 +448,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showInverterIcon }
         set {
             config.showInverterIcon = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 showInverterIcon: config.showInverterIcon
             ))
         }
@@ -452,7 +458,7 @@ public class ConfigManager: ConfigManaging {
         get { config.shouldInvertCT2 }
         set {
             config.shouldInvertCT2 = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 shouldInvertCT2: config.shouldInvertCT2
             ))
         }
@@ -462,7 +468,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showInverterStationName }
         set {
             config.showInverterStationName = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 showInverterStationName: config.showInverterStationName
             ))
         }
@@ -472,7 +478,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showInverterTypeName }
         set {
             config.showInverterTypeName = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 showInverterTypeName: config.showInverterTypeName
             ))
         }
@@ -482,7 +488,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showGridTotalsOnPowerFlow }
         set {
             config.showGridTotalsOnPowerFlow = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 showGridTotalsOnPowerFlow: config.showGridTotalsOnPowerFlow
             ))
         }
@@ -492,7 +498,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showLastUpdateTimestamp }
         set {
             config.showLastUpdateTimestamp = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 showLastUpdateTimestamp: config.showLastUpdateTimestamp
             ))
         }
@@ -502,7 +508,7 @@ public class ConfigManager: ConfigManaging {
         get { config.shouldCombineCT2WithPVPower }
         set {
             config.shouldCombineCT2WithPVPower = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 shouldCombineCT2WithPVPower: config.shouldCombineCT2WithPVPower
             ))
         }
@@ -512,7 +518,7 @@ public class ConfigManager: ConfigManaging {
         get { config.solcastSettings }
         set {
             config.solcastSettings = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 solcastSettings: config.solcastSettings
             ))
         }
@@ -522,7 +528,7 @@ public class ConfigManager: ConfigManaging {
         get { config.dataCeiling }
         set {
             config.dataCeiling = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 dataCeiling: config.dataCeiling
             ))
         }
@@ -532,7 +538,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showTotalYieldOnPowerFlow }
         set {
             config.showTotalYieldOnPowerFlow = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 showTotalYieldOnPowerFlow: showTotalYieldOnPowerFlow
             ))
         }
@@ -542,7 +548,7 @@ public class ConfigManager: ConfigManaging {
         get { config.separateParameterGraphsByUnit }
         set {
             config.separateParameterGraphsByUnit = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 separateParameterGraphsByUnit: config.separateParameterGraphsByUnit
             ))
         }
@@ -552,7 +558,7 @@ public class ConfigManager: ConfigManaging {
         get { config.powerFlowStrings }
         set {
             config.powerFlowStrings = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 powerFlowStrings: powerFlowStrings
             ))
         }
@@ -562,7 +568,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showBatteryPercentageRemaining }
         set {
             config.showBatteryPercentageRemaining = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 showBatteryPercentageRemaining: config.showBatteryPercentageRemaining
             ))
         }
@@ -574,7 +580,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showSelfSufficiencyStatsGraphOverlay }
         set {
             config.showSelfSufficiencyStatsGraphOverlay = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 showSelfSufficiencyStatsGraphOverlay: config.showSelfSufficiencyStatsGraphOverlay
             ))
         }
@@ -589,7 +595,7 @@ public class ConfigManager: ConfigManaging {
         get { config.truncatedYAxisOnParameterGraphs }
         set {
             config.truncatedYAxisOnParameterGraphs = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 truncatedYAxisOnParameterGraphs: config.truncatedYAxisOnParameterGraphs
             ))
         }
@@ -599,7 +605,7 @@ public class ConfigManager: ConfigManaging {
         get { config.earningsModel }
         set {
             config.earningsModel = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 earningsModel: config.earningsModel
             ))
         }
@@ -624,7 +630,7 @@ public class ConfigManager: ConfigManaging {
         get { config.batteryTemperatureDisplayMode }
         set {
             config.batteryTemperatureDisplayMode = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 batteryTemperatureDisplayMode: config.batteryTemperatureDisplayMode
             ))
         }
@@ -634,7 +640,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showInverterScheduleQuickLink }
         set {
             config.showInverterScheduleQuickLink = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 showInverterScheduleQuickLink: showInverterScheduleQuickLink
             ))
         }
@@ -644,7 +650,7 @@ public class ConfigManager: ConfigManaging {
         get { config.fetchSolcastOnAppLaunch }
         set {
             config.fetchSolcastOnAppLaunch = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 fetchSolcastOnAppLaunch: config.fetchSolcastOnAppLaunch
             ))
         }
@@ -654,7 +660,7 @@ public class ConfigManager: ConfigManaging {
         get { config.ct2DisplayMode }
         set {
             config.ct2DisplayMode = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 ct2DisplayMode: config.ct2DisplayMode
             ))
         }
@@ -664,7 +670,7 @@ public class ConfigManager: ConfigManaging {
         get { config.shouldCombineCT2WithLoadsPower }
         set {
             config.shouldCombineCT2WithLoadsPower = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 shouldCombineCT2WithLoadsPower: config.shouldCombineCT2WithLoadsPower
             ))
         }
@@ -692,7 +698,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showInverterConsumption }
         set {
             config.showInverterConsumption = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 showInverterConsumption: config.showInverterConsumption
             ))
         }
@@ -702,7 +708,7 @@ public class ConfigManager: ConfigManaging {
         get { config.showBatterySOCOnDailyStats }
         set {
             config.showBatterySOCOnDailyStats = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 showBatterySOCOnDailyStats: config.showBatterySOCOnDailyStats
             ))
         }
@@ -712,7 +718,7 @@ public class ConfigManager: ConfigManaging {
         get { config.allowNegativeLoad }
         set {
             config.allowNegativeLoad = newValue
-            appSettingsPublisher.send(appSettingsPublisher.value.copy(
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
                 allowNegativeLoad: config.allowNegativeLoad
             ))
         }
@@ -759,7 +765,7 @@ public extension ConfigManager {
             self.init(
                 networking: networking,
                 config: config,
-                appSettingsPublisher: CurrentValueSubject(appSettings),
+                appSettingsStore: AppSettingsStore(),
                 keychainStore: KeychainStore.preview()
             )
             Task { try await fetchDevices() }

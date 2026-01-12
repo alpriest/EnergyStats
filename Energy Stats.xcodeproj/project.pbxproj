@@ -337,7 +337,7 @@
 		41E299CF29B7260D001F017B /* Energy_Stats_UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E299CE29B7260D001F017B /* Energy_Stats_UITestsLaunchTests.swift */; };
 		41E3B76C2BBDD345005A9F80 /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E3B76B2BBDD345005A9F80 /* Icon.swift */; };
 		41E3BEC12B1B55A30051C68B /* DataCeiling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E3BEC02B1B55A30051C68B /* DataCeiling.swift */; };
-		41E3BEC32B1B5A160051C68B /* AppSettingsPublisherFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E3BEC22B1B5A160051C68B /* AppSettingsPublisherFactory.swift */; };
+		41E3BEC32B1B5A160051C68B /* AppSettingsStoreFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E3BEC22B1B5A160051C68B /* AppSettingsStoreFactory.swift */; };
 		41E4B31028DB7666003F7F47 /* BatteryPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E4B30F28DB7666003F7F47 /* BatteryPowerView.swift */; };
 		41E4B31328DB77A3003F7F47 /* HomePowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E4B31228DB77A3003F7F47 /* HomePowerView.swift */; };
 		41E4B31528DB77E8003F7F47 /* GridPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E4B31428DB77E8003F7F47 /* GridPowerView.swift */; };
@@ -885,7 +885,7 @@
 		41E299D529B78A41001F017B /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
 		41E3B76B2BBDD345005A9F80 /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		41E3BEC02B1B55A30051C68B /* DataCeiling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCeiling.swift; sourceTree = "<group>"; };
-		41E3BEC22B1B5A160051C68B /* AppSettingsPublisherFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsPublisherFactory.swift; sourceTree = "<group>"; };
+		41E3BEC22B1B5A160051C68B /* AppSettingsStoreFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsStoreFactory.swift; sourceTree = "<group>"; };
 		41E4B30D28DB7511003F7F47 /* BatteryCapacityCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryCapacityCalculator.swift; sourceTree = "<group>"; };
 		41E4B30F28DB7666003F7F47 /* BatteryPowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryPowerView.swift; sourceTree = "<group>"; };
 		41E4B31228DB77A3003F7F47 /* HomePowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePowerView.swift; sourceTree = "<group>"; };
@@ -1618,7 +1618,7 @@
 				41E801692ECDCF9B00CB5777 /* Copiable.swift */,
 				41757BBB2A90A05E00573FB4 /* AmountType.swift */,
 				410AA38729D96F6D00CD107C /* AppSettings.swift */,
-				41E3BEC22B1B5A160051C68B /* AppSettingsPublisherFactory.swift */,
+				41E3BEC22B1B5A160051C68B /* AppSettingsStoreFactory.swift */,
 				41CB71472A3B1A2800199415 /* Assets.xcassets */,
 				41E4B30D28DB7511003F7F47 /* BatteryCapacityCalculator.swift */,
 				4103D1E029DB6CB9001B0BC8 /* ConfigManager.swift */,
@@ -2506,7 +2506,7 @@
 				41BACC0C2D9142B700C9C718 /* TipKitManager.swift in Sources */,
 				41D75A012B5C0238002C43A7 /* Bool+Int.swift in Sources */,
 				41009A732B02D852009D853B /* SolcastForecastResponse.swift in Sources */,
-				41E3BEC32B1B5A160051C68B /* AppSettingsPublisherFactory.swift in Sources */,
+				41E3BEC32B1B5A160051C68B /* AppSettingsStoreFactory.swift in Sources */,
 				4103D1DC29DB6C6D001B0BC8 /* StoredConfig.swift in Sources */,
 				418240782A9A33E300101064 /* TotalsViewModel.swift in Sources */,
 				414A40C02B989D9800321AA2 /* NetworkService.swift in Sources */,

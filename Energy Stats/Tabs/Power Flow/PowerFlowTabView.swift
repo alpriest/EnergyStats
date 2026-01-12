@@ -21,12 +21,11 @@ struct PowerFlowTabView: View {
         configManager: ConfigManaging,
         networking: Networking,
         userManager: UserManager,
-        appSettingsPublisher: LatestAppSettingsPublisher,
         templateStore: TemplateStoring
     ) {
         _viewModel = .init(wrappedValue: PowerFlowTabViewModel(networking, configManager: configManager, userManager: userManager))
-        self.appSettingsPublisher = appSettingsPublisher
-        self.appSettings = appSettingsPublisher.value
+        self.appSettingsPublisher = configManager.appSettingsPublisher
+        self.appSettings = configManager.currentAppSettings
         self.templateStore = templateStore
         self.networking = networking
     }
@@ -38,7 +37,6 @@ struct PowerFlowTabView: View {
                 LoadedPowerFlowView(
                     configManager: viewModel.configManager,
                     viewModel: summary,
-                    appSettingsPublisher: appSettingsPublisher,
                     networking: networking,
                     templateStore: templateStore
                 )
@@ -130,7 +128,6 @@ struct PowerFlowTabView: View {
     PowerFlowTabView(configManager: ConfigManager.preview(),
                      networking: NetworkService.preview(),
                      userManager: UserManager.preview(),
-                     appSettingsPublisher: CurrentValueSubject(AppSettings.mock()),
                      templateStore: TemplateStore.preview())
 }
 #endif

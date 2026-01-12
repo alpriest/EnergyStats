@@ -37,7 +37,7 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
     private var totalTicks = 60
     private var currentDeviceCancellable: AnyCancellable?
     private var themeChangeCancellable: AnyCancellable?
-    private var latestAppTheme: AppSettings
+    private var appSettings: AppSettings
     private var latestDeviceSN: String?
     var visible: Bool = false
     private var currentStatusCalculator: CurrentStatusCalculator?
@@ -75,7 +75,7 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
         self.network = network
         self.configManager = configManager
         self.userManager = userManager
-        self.latestAppTheme = configManager.appSettingsPublisher.value
+        self.appSettings = configManager.currentAppSettings
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.willResignActiveNotification), name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
@@ -135,11 +135,11 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
         guard self.themeChangeCancellable == nil else { return }
 
         self.themeChangeCancellable = self.configManager.appSettingsPublisher.sink { theme in
-            if self.latestAppTheme.showInverterTemperature != theme.showInverterTemperature ||
-                self.latestAppTheme.shouldInvertCT2 != theme.shouldInvertCT2 ||
-                self.latestAppTheme.shouldCombineCT2WithPVPower != theme.shouldCombineCT2WithPVPower
+            if self.appSettings.showInverterTemperature != theme.showInverterTemperature ||
+                self.appSettings.shouldInvertCT2 != theme.shouldInvertCT2 ||
+                self.appSettings.shouldCombineCT2WithPVPower != theme.shouldCombineCT2WithPVPower
             {
-                self.latestAppTheme = theme
+                self.appSettings = theme
                 Task { await self.loadData() }
             }
         }

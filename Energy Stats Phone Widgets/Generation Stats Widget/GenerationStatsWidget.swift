@@ -22,10 +22,10 @@ struct GenerationStatsWidget: Widget {
                                               urlSession: URLSession.shared,
                                               isDemoUser: { false },
                                               dataCeiling: { .none })
-        let appSettingsPublisher = AppSettingsPublisherFactory.make()
-        configManager = ConfigManager(networking: network, config: config, appSettingsPublisher: appSettingsPublisher, keychainStore: keychainStore)
+        let appSettingsStore = AppSettingsStoreFactory.make()
+        configManager = ConfigManager(networking: network, config: config, appSettingsStore: appSettingsStore, keychainStore: keychainStore)
         self.keychainStore = keychainStore
-        AppSettingsPublisherFactory.update(from: configManager)
+        AppSettingsStoreFactory.update(from: configManager)
     }
 
     var body: some WidgetConfiguration {

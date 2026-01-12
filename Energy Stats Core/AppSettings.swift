@@ -302,4 +302,4 @@ public struct AppSettings {
     }
 }
 
-public typealias LatestAppSettingsPublisher = CurrentValueSubject<AppSettings, Never>
+public typealias LatestAppSettingsPublisher = AnyPublisher<AppSettings, Never>

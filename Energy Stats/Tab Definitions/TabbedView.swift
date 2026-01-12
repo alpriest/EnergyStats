@@ -33,13 +33,12 @@ struct TabbedView: View {
                 configManager: configManager,
                 networking: networking,
                 userManager: userManager,
-                appSettingsPublisher: configManager.appSettingsPublisher,
                 templateStore: templateStore
             ).tabItem {
                 PowerFlowTabItem()
             }
 
-            StatsTabView(configManager: configManager, networking: networking, appSettingsPublisher: configManager.appSettingsPublisher)
+            StatsTabView(configManager: configManager, networking: networking)
                 .tabItem {
                     StatsTabItem()
                 }
@@ -49,7 +48,7 @@ struct TabbedView: View {
                     ParametersTabItem()
                 }
 
-            SummaryTabView(configManager: configManager, networking: networking, appSettingsPublisher: configManager.appSettingsPublisher, solarForecastProvider: solarForecastProvider)
+            SummaryTabView(configManager: configManager, networking: networking, solarForecastProvider: solarForecastProvider)
                 .tabItem {
                     SummaryTabItem()
                 }

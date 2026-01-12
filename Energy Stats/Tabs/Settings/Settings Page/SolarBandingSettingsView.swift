@@ -75,7 +75,7 @@ struct SolarBandingSettingsView: View {
         self.breakpoint1 = configManager.solarDefinitions.breakPoint1
         self.breakpoint2 = configManager.solarDefinitions.breakPoint2
         self.breakpoint3 = configManager.solarDefinitions.breakPoint3
-        self.appSettings = configManager.appSettingsPublisher.value
+        self.appSettings = configManager.currentAppSettings
         self.modifiedAppTheme = appSettings
         self.modifiedAppTheme = makeAppTheme()
     }

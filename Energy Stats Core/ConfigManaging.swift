@@ -26,8 +26,10 @@ public protocol ConfigManaging: FinancialConfigManager, SolcastConfigManager, Ba
     func logout(clearDisplaySettings: Bool, clearDeviceSettings: Bool)
     func select(device: Device?)
     func resetDisplaySettings()
+    func loginAsDemo()
     var lastSettingsResetTime: CurrentValueSubject<Date?, Never> { get }
-    var appSettingsPublisher: LatestAppSettingsPublisher { get }
+    var appSettingsPublisher: AnyPublisher<AppSettings, Never> { get }
+    var currentAppSettings: AppSettings { get }
 
     var hasRunBefore: Bool { get set }
     var minSOC: Double { get set }
@@ -106,7 +108,7 @@ public protocol FinancialConfigManager {
     var gridImportUnitPrice: Double { get set }
     var earningsModel: EarningsModel { get set }
     
-    var appSettingsPublisher: CurrentValueSubject<AppSettings, Never> { get }
+    var appSettingsPublisher: AnyPublisher<AppSettings, Never> { get }
 }
 
 public protocol ScheduleTemplateConfigManager {

@@ -118,7 +118,6 @@ struct SolarForecastView: View {
         appSettings: AppSettings.mock(),
         viewModel: SolarForecastViewModel(
             configManager: ConfigManager.preview(),
-            appSettingsPublisher: AppSettingsPublisherFactory.make(),
             solarForecastProvider: { PreviewSolcast() }
         )
     )

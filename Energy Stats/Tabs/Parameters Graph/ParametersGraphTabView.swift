@@ -24,7 +24,7 @@ struct ParametersGraphTabView: View {
         self.viewModel = viewModel
         self.configManager = configManager
         self.appSettingsPublisher = configManager.appSettingsPublisher
-        self.appSettings = appSettingsPublisher.value
+        self.appSettings = configManager.currentAppSettings
     }
 
     var body: some View {

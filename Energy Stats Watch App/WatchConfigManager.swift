@@ -18,7 +18,7 @@ protocol WatchConfigManaging: CurrentStatusCalculatorConfig, BatteryConfigManage
 }
 
 class WatchConfigManager: WatchConfigManaging {
-    var appSettingsPublisher: LatestAppSettingsPublisher = .init(.mock()) // do not use, here because of protocol dependency
+    var appSettingsPublisher: AnyPublisher<AppSettings, Never> = Just(.mock()).eraseToAnyPublisher()
     private let keychainStore: KeychainStoring
 
     private let _isLoggedInSubject = CurrentValueSubject<Bool, Never>(false)
@@ -102,7 +102,7 @@ class WatchConfigManager: WatchConfigManaging {
 }
 
 class PreviewWatchConfig: WatchConfigManaging {
-    var appSettingsPublisher: LatestAppSettingsPublisher = .init(.mock())
+    var appSettingsPublisher: AnyPublisher<AppSettings, Never> = Just(.mock()).eraseToAnyPublisher()
     var batteryCapacity: String = ""
     var batteryCapacityW: Int = 0
     func clearBatteryOverride(for deviceID: String) {}
