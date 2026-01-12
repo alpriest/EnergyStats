@@ -10,12 +10,12 @@ import OrderedCollections
 import SwiftUI
 
 struct EarningsView: View {
-    let viewModel: EnergyStatsFinancialModel
+    @State var viewModel: EnergyStatsFinancialModel
     let appSettings: AppSettings
 
     var body: some View {
         HStack {
-            ForEach(viewModel.amounts(), id: \.self) { amount in
+            ForEach(viewModel.amounts, id: \.self) { amount in
                 SubLabelledView(
                     value: amount.formattedAmount(appSettings.currencySymbol),
                     label: String(key: amount.shortTitle),

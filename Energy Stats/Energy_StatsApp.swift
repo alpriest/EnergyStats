@@ -45,7 +45,6 @@ struct Energy_StatsApp: App {
     let versionChecker: VersionChecker
     let templateStore: TemplateStoring
     let bannerAlertManager = BannerAlertManager()
-//    let watchKeychainSynchroniser: WatchKeychainSynchroniser
     private var cancellables = Set<AnyCancellable>()
 
     @Environment(\.scenePhase) private var scenePhase

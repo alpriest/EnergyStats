@@ -343,6 +343,7 @@
 		41E4B31528DB77E8003F7F47 /* GridPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E4B31428DB77E8003F7F47 /* GridPowerView.swift */; };
 		41E672002C456BB2003D7D44 /* AsyncButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E671FF2C456BB2003D7D44 /* AsyncButton.swift */; };
 		41E6720B2C456D51003D7D44 /* CreateTemplateButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E6720A2C456D51003D7D44 /* CreateTemplateButtonView.swift */; };
+		41E6FE752F1570000080CFCF /* FinanceAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E6FE742F1570000080CFCF /* FinanceAmount.swift */; };
 		41E8016A2ECDCF9C00CB5777 /* Copiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E801692ECDCF9B00CB5777 /* Copiable.swift */; };
 		41E8016C2ECF5FE200CB5777 /* SchedulePhaseEditViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E8016B2ECF5FE200CB5777 /* SchedulePhaseEditViewData.swift */; };
 		41E8016F2ECF601600CB5777 /* SchedulePhaseEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E8016E2ECF601600CB5777 /* SchedulePhaseEditViewModel.swift */; };
@@ -891,6 +892,7 @@
 		41E4B31428DB77E8003F7F47 /* GridPowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPowerView.swift; sourceTree = "<group>"; };
 		41E671FF2C456BB2003D7D44 /* AsyncButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncButton.swift; sourceTree = "<group>"; };
 		41E6720A2C456D51003D7D44 /* CreateTemplateButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTemplateButtonView.swift; sourceTree = "<group>"; };
+		41E6FE742F1570000080CFCF /* FinanceAmount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceAmount.swift; sourceTree = "<group>"; };
 		41E801692ECDCF9B00CB5777 /* Copiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Copiable.swift; sourceTree = "<group>"; };
 		41E8016B2ECF5FE200CB5777 /* SchedulePhaseEditViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePhaseEditViewData.swift; sourceTree = "<group>"; };
 		41E8016E2ECF601600CB5777 /* SchedulePhaseEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePhaseEditViewModel.swift; sourceTree = "<group>"; };
@@ -1115,6 +1117,7 @@
 				41EDDF6B28CD2A630092C662 /* LoadedPowerFlowViewModel.swift */,
 				418240772A9A33E300101064 /* TotalsViewModel.swift */,
 				41CA35722AA8C10900D45734 /* EarningsViewModel.swift */,
+				41E6FE742F1570000080CFCF /* FinanceAmount.swift */,
 				4190921C2B1D253D0017CB65 /* Schedule.swift */,
 				41FF14EC2B432EEC00FAAF1D /* GenerationViewModel.swift */,
 				41A715922BE0CD4700560628 /* LoadState.swift */,
@@ -2579,6 +2582,7 @@
 				41757BBD2A90A06E00573FB4 /* LocalizedString.swift in Sources */,
 				4103D1E429DB6D12001B0BC8 /* KeychainStore.swift in Sources */,
 				41DB4F2D2B4940A800DAB5BB /* ConfigManaging.swift in Sources */,
+				41E6FE752F1570000080CFCF /* FinanceAmount.swift in Sources */,
 				417E1CEF2E1E5EA4009E8374 /* SunView.swift in Sources */,
 				417E1CF12E1E5EA4009E8374 /* PowerText.swift in Sources */,
 				417E1CF22E1E5EA4009E8374 /* EnergyText.swift in Sources */,

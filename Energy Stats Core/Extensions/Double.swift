@@ -8,6 +8,13 @@
 import SwiftUI
 
 public extension Double {
+    func approxEqual(_ b: Double, relativeTolerance: Double = 1e-12, absoluteTolerance: Double = Double.ulpOfOne) -> Bool {
+        if self == b { return true } // handles infinities and exact equality quickly
+        let diff = abs(self - b)
+        // Scale the relative tolerance with the larger magnitude and add an absolute floor
+        return diff <= max(relativeTolerance * max(abs(self), abs(b)), absoluteTolerance)
+    }
+    
     func kW(_ places: Int) -> String {
         let divisor = pow(10.0, Double(places))
         let divided = (self * divisor).rounded() / divisor
@@ -115,7 +122,7 @@ public extension Double {
 public extension Double? {
     var tintColor: Color {
         guard let self else { return Color.primary }
-
+        
         return if self < -0.02 {
             .linesNegative
         } else if self > 0.02 {
@@ -123,6 +130,19 @@ public extension Double? {
         } else {
             .iconDisabled
         }
+    }
+    
+    func approxEqual(other: Double) -> Bool {
+        guard let self else { return false }
+        
+        return self.approxEqual(other)
+    }
+    
+    func approxEqual(other: Double?) -> Bool {
+        guard let self else { return false }
+        guard let other else { return false}
+        
+        return self.approxEqual(other)
     }
 }
 

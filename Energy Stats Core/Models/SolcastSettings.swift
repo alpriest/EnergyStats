@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct SolcastSettings: Codable {
+public struct SolcastSettings: Codable, Equatable {
     public let apiKey: String?
     public let sites: [SolcastSite]
 
@@ -17,7 +17,7 @@ public struct SolcastSettings: Codable {
     }
 }
 
-public struct SolcastSite: Codable {
+public struct SolcastSite: Codable, Equatable {
     public let name: String
     public let resourceId: String
     public let lng: Double
@@ -53,5 +53,22 @@ public struct SolcastSite: Codable {
                   acCapacity: site.capacity,
                   dcCapacity: site.dcCapacity,
                   installDate: site.installDate)
+    }
+
+    public static func == (lhs: SolcastSite, rhs: SolcastSite) -> Bool {
+        // Compare non-floating properties with strict equality
+        guard lhs.name == rhs.name,
+              lhs.resourceId == rhs.resourceId,
+              lhs.azimuth == rhs.azimuth,
+              lhs.installDate == rhs.installDate else { return false }
+
+        // Compare Double properties using approxEquals
+        guard lhs.lng.approxEqual(rhs.lng),
+              lhs.lat.approxEqual(rhs.lat),
+              lhs.tilt.approxEqual(rhs.tilt),
+              lhs.acCapacity.approxEqual(rhs.acCapacity) else { return false }
+
+        return lhs.lossFactor.approxEqual(other: rhs.lossFactor) &&
+            lhs.dcCapacity.approxEqual(other: rhs.dcCapacity)
     }
 }

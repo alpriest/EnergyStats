@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct SolarRangeDefinitions: Codable {
+public struct SolarRangeDefinitions: Codable, Equatable {
     public let breakPoint1: Double
     public let breakPoint2: Double
     public let breakPoint3: Double
@@ -24,5 +24,11 @@ public struct SolarRangeDefinitions: Codable {
         self.breakPoint1 = breakPoint1
         self.breakPoint2 = breakPoint2
         self.breakPoint3 = breakPoint3
+    }
+
+    public static func == (lhs: SolarRangeDefinitions, rhs: SolarRangeDefinitions) -> Bool {
+        return lhs.breakPoint1.approxEqual(rhs.breakPoint1)
+        && lhs.breakPoint2.approxEqual(rhs.breakPoint2)
+        && lhs.breakPoint3.approxEqual(rhs.breakPoint3)
     }
 }

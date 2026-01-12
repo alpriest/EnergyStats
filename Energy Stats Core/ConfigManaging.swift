@@ -105,6 +105,8 @@ public protocol FinancialConfigManager {
     var feedInUnitPrice: Double { get set }
     var gridImportUnitPrice: Double { get set }
     var earningsModel: EarningsModel { get set }
+    
+    var appSettingsPublisher: CurrentValueSubject<AppSettings, Never> { get }
 }
 
 public protocol ScheduleTemplateConfigManager {
