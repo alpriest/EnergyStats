@@ -23,7 +23,7 @@ public extension HomeEnergyStateManager {
     @MainActor
     func updateBatteryState(config: HomeEnergyStateManagerConfig) async throws {
         guard await isBatteryStateStale() else { return }
-        guard let deviceSN = try config.selectedDeviceSN() else { throw ConfigManager.NoDeviceFoundError() }
+        guard let deviceSN = config.selectedDeviceSN() else { throw ConfigManager.NoDeviceFoundError() }
 
         let real = try await network.fetchRealData(
             deviceSN: deviceSN,

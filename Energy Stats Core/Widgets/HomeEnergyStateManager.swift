@@ -11,12 +11,12 @@ import SwiftData
 import WidgetKit
 
 public protocol HomeEnergyStateManagerConfig {
-    func batteryCapacityW() throws -> Int
-    func minSOC() throws -> Double
-    func showUsableBatteryOnly() throws -> Bool
-    func selectedDeviceSN() throws -> String?
-    func dataCeiling() throws -> DataCeiling
-    func isDemoUser() throws -> Bool
+    func batteryCapacityW() -> Int
+    func minSOC() -> Double
+    func showUsableBatteryOnly() -> Bool
+    func selectedDeviceSN() -> String?
+    func dataCeiling() -> DataCeiling
+    func isDemoUser() -> Bool
 }
 
 @available(iOS 17.0, *)
