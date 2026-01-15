@@ -8,6 +8,7 @@
 import Combine
 import Foundation
 import os
+import WidgetKit
 
 public class ConfigManager: ConfigManaging {
     private let networking: Networking
@@ -215,6 +216,7 @@ public class ConfigManager: ConfigManaging {
             config.selectedDeviceSN = newValue
             try? keychainStore.store(key: .deviceSN, value: newValue)
             currentDevice.send(devices?.first(where: { $0.deviceSN == selectedDeviceSN }) ?? devices?.first)
+            WidgetCenter.shared.reloadAllTimelines()
         }
     }
 
@@ -232,6 +234,7 @@ public class ConfigManager: ConfigManaging {
         get { config.isDemoUser }
         set {
             config.isDemoUser = newValue
+            WidgetCenter.shared.reloadAllTimelines()
         }
     }
 
@@ -272,6 +275,7 @@ public class ConfigManager: ConfigManaging {
             appSettingsStore.update(appSettingsStore.currentValue.copy(
                 showUsableBatteryOnly: config.showUsableBatteryOnly
             ))
+            WidgetCenter.shared.reloadAllTimelines()
         }
     }
 
@@ -531,6 +535,7 @@ public class ConfigManager: ConfigManaging {
             appSettingsStore.update(appSettingsStore.currentValue.copy(
                 dataCeiling: config.dataCeiling
             ))
+            WidgetCenter.shared.reloadAllTimelines()
         }
     }
 
