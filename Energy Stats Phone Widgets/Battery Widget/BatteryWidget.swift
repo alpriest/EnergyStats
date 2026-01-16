@@ -29,7 +29,7 @@ struct BatteryWidget: Widget {
     }
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: BatteryTimelineProvider(config: HomeEnergyStateManagerConfigAdapter(config: configManager, keychainStore: keychainStore))) { entry in
+        StaticConfiguration(kind: kind, provider: BatteryTimelineProvider(config: HomeEnergyStateManagerConfigAdapter(config: configManager))) { entry in
             BatteryWidgetView(entry: entry, configManager: configManager)
                 .modelContainer(HomeEnergyStateManager.shared.modelContainer)
         }

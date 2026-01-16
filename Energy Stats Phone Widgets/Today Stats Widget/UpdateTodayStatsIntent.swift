@@ -29,7 +29,7 @@ struct UpdateStatsIntent: AppIntent {
 
             let configManager = ConfigManager(networking: network, config: config, appSettingsStore: appSettingsStore, keychainStore: keychainStore)
             AppSettingsStoreFactory.update(from: configManager)
-            let configAdapter = HomeEnergyStateManagerConfigAdapter(config: configManager, keychainStore: keychainStore)
+            let configAdapter = HomeEnergyStateManagerConfigAdapter(config: configManager)
             try await HomeEnergyStateManager.shared.updateTodayStatsState(config: configAdapter)
             try await HomeEnergyStateManager.shared.updateGenerationStatsState(config: configAdapter)
             try await HomeEnergyStateManager.shared.updateBatteryState(config: configAdapter)

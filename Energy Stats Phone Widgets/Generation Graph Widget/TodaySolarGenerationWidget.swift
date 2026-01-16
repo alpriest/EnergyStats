@@ -29,7 +29,7 @@ struct TodaySolarGenerationWidget: Widget {
     }
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: StatsTimelineProvider(config: HomeEnergyStateManagerConfigAdapter(config: configManager, keychainStore: keychainStore))) { entry in
+        StaticConfiguration(kind: kind, provider: StatsTimelineProvider(config: HomeEnergyStateManagerConfigAdapter(config: configManager))) { entry in
             TodaySolarGenerationWidgetView(entry: entry, configManager: configManager)
                 .modelContainer(HomeEnergyStateManager.shared.modelContainer)
         }

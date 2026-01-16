@@ -31,7 +31,7 @@ struct GenerationStatsWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(
             kind: kind,
-            provider: GenerationStatsTimelineProvider(config: HomeEnergyStateManagerConfigAdapter(config: configManager, keychainStore: keychainStore))
+            provider: GenerationStatsTimelineProvider(config: HomeEnergyStateManagerConfigAdapter(config: configManager))
         ) { entry in
             GenerationStatsWidgetView(entry: entry, configManager: configManager)
                 .modelContainer(HomeEnergyStateManager.shared.modelContainer)
