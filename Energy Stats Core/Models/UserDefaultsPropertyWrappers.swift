@@ -18,6 +18,7 @@ public struct UserDefaultsStoredInt {
         }
         set {
             UserDefaults.shared.set(newValue, forKey: key)
+            UserDefaults.shared.synchronize()
         }
     }
 }
@@ -38,6 +39,7 @@ public struct UserDefaultsStoredDouble {
         }
         set {
             UserDefaults.shared.set(newValue, forKey: key)
+            UserDefaults.shared.synchronize()
         }
     }
 }
@@ -56,6 +58,7 @@ public struct UserDefaultsStoredOptionalString {
         }
         set {
             UserDefaults.shared.set(newValue, forKey: key)
+            UserDefaults.shared.synchronize()
         }
     }
 }
@@ -76,6 +79,7 @@ public struct UserDefaultsStoredString {
         }
         set {
             UserDefaults.shared.set(newValue, forKey: key)
+            UserDefaults.shared.synchronize()
         }
     }
 }
@@ -96,6 +100,7 @@ public struct UserDefaultsStoredBool {
         }
         set {
             UserDefaults.shared.set(newValue, forKey: key)
+            UserDefaults.shared.synchronize()
         }
     }
 }
@@ -110,6 +115,7 @@ public struct UserDefaultsStoredData {
         }
         set {
             UserDefaults.shared.set(newValue, forKey: key)
+            UserDefaults.shared.synchronize()
         }
     }
 }

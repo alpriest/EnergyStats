@@ -9,11 +9,9 @@ import Foundation
 
 public class HomeEnergyStateManagerConfigAdapter: HomeEnergyStateManagerConfig {
     private let config: ConfigManaging
-    private let keychainStore: KeychainStoring
 
-    public init(config: ConfigManaging, keychainStore: KeychainStoring) {
+    public init(config: ConfigManaging) {
         self.config = config
-        self.keychainStore = keychainStore
     }
 
     public func batteryCapacityW() -> Int { config.batteryCapacityW }

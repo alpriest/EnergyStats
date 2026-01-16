@@ -58,7 +58,8 @@ struct Energy_StatsApp: App {
             UserDefaultsConfig()
         }
         self.config = config
-
+        
+        // Pulse
         UserSettings.shared.allowedShareStoreOutputs = [.har]
 
         network = NetworkService.standard(keychainStore: keychainStore,
