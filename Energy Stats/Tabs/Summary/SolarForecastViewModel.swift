@@ -40,8 +40,8 @@ class SolarForecastViewModel: ObservableObject, HasLoadState {
     }
 
     private var cancellable: AnyCancellable?
-    private var configManager: ConfigManaging
-    private let solarForecastProvider: () -> SolcastCaching
+    let configManager: ConfigManaging
+    let solarForecastProvider: () -> SolcastCaching
     private var settings: AppSettings { didSet {
         Task { @MainActor in
             hasSites = !settings.solcastSettings.sites.isEmpty

@@ -21,7 +21,6 @@ class UserManager: ObservableObject, HasLoadState {
         self.store = store
         self.configManager = configManager
 
-        migrateKeychain()
         self.store.hasApiKey
             .receive(on: RunLoop.main)
             .sink(receiveValue: { [weak self] newValue in
@@ -32,16 +31,6 @@ class UserManager: ObservableObject, HasLoadState {
                 }
             })
             .store(in: &cancellables)
-    }
-
-    private func migrateKeychain() {
-        let legacyKeychain = KeychainStore(group: "group.com.alpriest.EnergyStats")
-
-        if let token = try? legacyKeychain.getToken() {
-            try? store.store(apiKey: token, notifyObservers: true)
-            try? legacyKeychain.store(apiKey: nil, notifyObservers: false)
-            print("AWP", "Migrated token to new chain")
-        }
     }
 
     @MainActor

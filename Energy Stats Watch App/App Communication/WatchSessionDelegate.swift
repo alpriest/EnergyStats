@@ -15,9 +15,6 @@ class WatchToPhoneSessionDelegate: NSObject, WCSessionDelegate {
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: (any Error)?) {}
 
     func session(_ session: WCSession, didReceiveUserInfo userInfo: [String: Any] = [:]) {
-        print("AWP", "received")
-        print("AWP", userInfo)
-
         config?.applyUpdatesThenNotify {
             $0.apiKey = userInfo["apiKey"] as? String
             

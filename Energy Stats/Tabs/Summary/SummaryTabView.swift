@@ -57,7 +57,11 @@ struct SummaryTabView: View {
                     }
 
                     Divider()
-                    SolarForecastView(appSettings: appSettings, viewModel: solarForecastViewModel)
+
+                    SolarForecastView(
+                        appSettings: appSettings,
+                        viewModel: solarForecastViewModel
+                    )
                 }
             }
             .padding(.horizontal)

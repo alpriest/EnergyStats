@@ -15,7 +15,7 @@ extension HomeEnergyStateManager {
     @MainActor
     public func updateGenerationStatsState(config: HomeEnergyStateManagerConfig) async throws {
         guard await isGenerationStatsStateStale() else { return }
-        guard let deviceSN = try config.selectedDeviceSN() else { throw ConfigManager.NoDeviceFoundError() }
+        guard let deviceSN = config.selectedDeviceSN() else { throw ConfigManager.NoDeviceFoundError() }
 
         let result = try await network.fetchPowerGeneration(deviceSN: deviceSN)
 

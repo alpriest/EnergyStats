@@ -62,18 +62,8 @@ class WatchConfigManager: WatchConfigManaging {
     @UserDefaultsStoredOptionalString(key: "deviceSN")
     var deviceSN: String?
 
-    var apiKey: String? {
-        get {
-            try? keychainStore.getToken()
-        }
-        set {
-            if let newValue {
-                try? keychainStore.store(apiKey: newValue, notifyObservers: false)
-            } else {
-                keychainStore.logout()
-            }
-        }
-    }
+    @UserDefaultsStoredOptionalString(key: "apiKey")
+    var apiKey: String?
 
     @UserDefaultsStoredBool(key: "showGridTotalsOnPowerFlow", defaultValue: false)
     var showGridTotalsOnPowerFlow: Bool

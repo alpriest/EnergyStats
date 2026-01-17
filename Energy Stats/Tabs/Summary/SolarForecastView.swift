@@ -13,6 +13,7 @@ import SwiftUI
 struct SolarForecastView: View {
     let appSettings: AppSettings
     @ObservedObject var viewModel: SolarForecastViewModel
+    @State private var showSolcastConfiguration = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -22,8 +23,16 @@ struct SolarForecastView: View {
             if viewModel.hasSites {
                 loadedView()
             } else {
-                Text("Visit the settings tab to configure Solcast")
+                Text("solcast_configuration_motivation")
+                Button(action: {showSolcastConfiguration.toggle()}) {
+                    Text("Configure Solcast now")
+                }
             }
+        }.sheet(isPresented: $showSolcastConfiguration) {
+            SolcastSettingsView(
+                configManager: viewModel.configManager,
+                solarService: viewModel.solarForecastProvider
+            )
         }
     }
 

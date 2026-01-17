@@ -23,7 +23,7 @@ extension HomeEnergyStateManager {
     @MainActor
     public func updateTodayStatsState(config: HomeEnergyStateManagerConfig) async throws {
         guard await isTodayStatsStateStale() else { return }
-        guard let deviceSN = try config.selectedDeviceSN() else { throw ConfigManager.NoDeviceFoundError() }
+        guard let deviceSN = config.selectedDeviceSN() else { throw ConfigManager.NoDeviceFoundError() }
 
         let hourlyReports = try await network.fetchReport(
             deviceSN: deviceSN,
