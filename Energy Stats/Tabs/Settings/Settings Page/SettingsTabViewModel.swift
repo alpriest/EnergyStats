@@ -295,7 +295,7 @@ class SettingsTabViewModel: ObservableObject {
     }
 
     var appVersion: String {
-        UserAgent.description()
+        AppVersion.description
     }
 
     func reloadDevices() async throws {

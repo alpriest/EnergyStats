@@ -36,6 +36,8 @@ struct ContactView: View {
                         Text("Send an email")
                     }
                 }
+                
+                Section(footer: Text("contact.footer.author")) { }
             }
             .navigationTitle("Contact")
         }

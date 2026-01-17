@@ -89,7 +89,6 @@ private struct ColorPickerView: View {
     }
 }
 
-
 #Preview {
     let vm = GraphColoursSettingsViewModel(configManager: ConfigManager.preview())
     return GraphColoursSettingsView(viewModel: vm)

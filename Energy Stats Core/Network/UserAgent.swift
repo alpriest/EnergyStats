@@ -9,7 +9,7 @@ import Foundation
 
 public enum UserAgent {
     public static func description() -> String {
-        "Energy-Stats/\(platform)/\(UserAgent.appVersion)"
+        "Energy-Stats/\(platform)/\(AppVersion.description)"
     }
 
     private static var platform: String {
@@ -19,8 +19,10 @@ public enum UserAgent {
         "iOS"
 #endif
     }
+}
 
-    private static var appVersion: String {
+public enum AppVersion {
+    public static var description: String {
         let dictionary = Bundle.main.infoDictionary!
         return dictionary["CFBundleShortVersionString"] as! String
     }
