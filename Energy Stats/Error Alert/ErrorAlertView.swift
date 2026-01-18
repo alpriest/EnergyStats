@@ -120,7 +120,7 @@ struct ErrorAlertView: View {
     }
 
     var inlineMessage: String {
-        if let cause, cause is NetworkError {
+        if let cause, cause is NetworkError, cause.localizedDescription != message {
             return cause.localizedDescription
         }
 
