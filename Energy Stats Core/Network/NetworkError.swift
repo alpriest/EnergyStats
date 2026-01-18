@@ -8,7 +8,7 @@
 import Foundation
 
 public enum NetworkError: LocalizedError, CustomStringConvertible, Equatable {
-    case invalidResponse(_ url: URL?, _ responseCode: Int?)
+    case invalidResponse(_ url: URL?, _ responseCode: Int)
     case invalidConfiguration(_ reason: String)
     case badCredentials
     case foxServerError(_ errNo: Int, _ message: String)
@@ -27,9 +27,7 @@ public enum NetworkError: LocalizedError, CustomStringConvertible, Equatable {
 
         switch self {
         case .invalidResponse(let url, let responseCode):
-            builder.append("Network Error")
-            builder.append("Could not fetch from", url)
-            builder.append("Response code", responseCode)
+            builder.append("HTTP \(responseCode) from \(url?.absoluteString ?? "Unknown URL")")
         case .invalidConfiguration(let reason):
             builder.append("Invalid configuration", reason)
         case .badCredentials:
