@@ -40,7 +40,7 @@ struct BatteryChargeScheduleSettingsView: View {
                 requestReview()
             }
         }
-        .navigationTitle(.batterySchedule)
+        .navigationTitle(.batteryChargeSchedule)
         .navigationBarTitleDisplayMode(.inline)
         .loadable(viewModel.state, retry: { viewModel.load() })
         .onChange(of: viewModel.viewData.timePeriod1) { newValue in

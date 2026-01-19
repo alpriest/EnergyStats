@@ -11,7 +11,8 @@ import SwiftUI
 enum ScreenName: String {
     case editSchedule = "Edit Schedule"
     case batteryChargeLevel = "Battery Charge Levels"
-    case batterySchedule = "Battery Schedule"
+    case batteryChargeSchedule = "Battery Charge Schedule"
+    case batteryHeatingSchedule = "Battery Heating Schedule"
     case battery = "Battery"
     case dataLogger = "Datalogger"
     case settings = "Settings"

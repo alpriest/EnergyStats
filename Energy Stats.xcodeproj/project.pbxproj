@@ -288,6 +288,7 @@
 		41BCC2452F1EAB7200FB883E /* BatteryHeatingScheduleSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC2442F1EAB7200FB883E /* BatteryHeatingScheduleSettingsView.swift */; };
 		41BCC2472F1EACBD00FB883E /* BatteryHeatingScheduleSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC2462F1EACBD00FB883E /* BatteryHeatingScheduleSettingsViewModel.swift */; };
 		41BCC2492F1EB00400FB883E /* BatteryHeatingTimePeriodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC2482F1EAFFE00FB883E /* BatteryHeatingTimePeriodView.swift */; };
+		41BCC24B2F1EBAAB00FB883E /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC24A2F1EBAAB00FB883E /* RangeSlider.swift */; };
 		41BF88AB2E2B993A00AB5E9D /* OHHTTPStubs in Frameworks */ = {isa = PBXBuildFile; productRef = 41BF88AA2E2B993A00AB5E9D /* OHHTTPStubs */; };
 		41BF88AD2E2B993A00AB5E9D /* OHHTTPStubsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 41BF88AC2E2B993A00AB5E9D /* OHHTTPStubsSwift */; };
 		41C0923B2B20FCB0001D1E22 /* SchedulePhaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0923A2B20FCB0001D1E22 /* SchedulePhaseHelper.swift */; };
@@ -842,6 +843,7 @@
 		41BCC2442F1EAB7200FB883E /* BatteryHeatingScheduleSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryHeatingScheduleSettingsView.swift; sourceTree = "<group>"; };
 		41BCC2462F1EACBD00FB883E /* BatteryHeatingScheduleSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryHeatingScheduleSettingsViewModel.swift; sourceTree = "<group>"; };
 		41BCC2482F1EAFFE00FB883E /* BatteryHeatingTimePeriodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryHeatingTimePeriodView.swift; sourceTree = "<group>"; };
+		41BCC24A2F1EBAAB00FB883E /* RangeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeSlider.swift; sourceTree = "<group>"; };
 		41C0923A2B20FCB0001D1E22 /* SchedulePhaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePhaseHelper.swift; sourceTree = "<group>"; };
 		41C0923C2B210255001D1E22 /* ScheduleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailView.swift; sourceTree = "<group>"; };
 		41C0B43329F96D3600CA9462 /* LocalizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedString.swift; sourceTree = "<group>"; };
@@ -1183,6 +1185,7 @@
 				4110290E2A71B908004018BB /* BatterySOCSettingsView.swift */,
 				4110291C2A72AFC2004018BB /* BatterySOCSettingsViewModel.swift */,
 				411029162A71C975004018BB /* ChargeTimePeriod.swift */,
+				41BCC24A2F1EBAAB00FB883E /* RangeSlider.swift */,
 			);
 			path = "Battery Settings";
 			sourceTree = "<group>";
@@ -2430,6 +2433,7 @@
 				41C249A52A77FC7400D8E9E7 /* WebView.swift in Sources */,
 				41A25D3D28CA5CDF00315714 /* ParametersGraphTabView.swift in Sources */,
 				41EB65FB2E05BD8900F53573 /* StepView.swift in Sources */,
+				41BCC24B2F1EBAAB00FB883E /* RangeSlider.swift in Sources */,
 				4140ECDA292D58D300992DD8 /* ParameterGraphVariable.swift in Sources */,
 				415F0BD92D9C869F003EB760 /* BatteryFirmwareVersionsViewModel.swift in Sources */,
 				41E4B31028DB7666003F7F47 /* BatteryPowerView.swift in Sources */,

@@ -7,6 +7,7 @@
 
 public struct BatteryHeatingSchedule {
     public let enabled: Bool
+    public let warmUpState: String?
     public let period1Start: Time
     public let period1End: Time
     public let period1Enabled: Bool
@@ -16,8 +17,10 @@ public struct BatteryHeatingSchedule {
     public let period3Start: Time
     public let period3End: Time
     public let period3Enabled: Bool
-    public let minTemperature: Double
-    public let maxTemperature: Double
+    public let minStartTemperature: Double
+    public let maxStartTemperature: Double
+    public let minEndTemperature: Double
+    public let maxEndTemperature: Double
 
     enum ParseError: Error {
         case missingResult
@@ -90,11 +93,14 @@ public struct BatteryHeatingSchedule {
         let dict = try dictionary(from: response)
 
         let enabled = try bool("batteryWarmUpEnable", in: dict)
-        let minTemperature = try double("startTemperature", in: dict)
-        let maxTemperature = try double("endTemperature", in: dict)
+        let minStartTemperature = try double("minStartTemperatureRange", in: dict)
+        let maxStartTemperature = try double("maxStartTemperatureRange", in: dict)
+        let minEndTemperature = try double("minEndTemperatureRange", in: dict)
+        let maxEndTemperature = try double("maxEndTemperatureRange", in: dict)
         let period1Enabled = try bool("time1Enable", in: dict)
         let period2Enabled = try bool("time2Enable", in: dict)
         let period3Enabled = try bool("time3Enable", in: dict)
+        let warmUpState = dict["batteryWarmUpState"]
 
         let period1 = try time(
             startHourKey: "time1StartHour",
@@ -122,6 +128,7 @@ public struct BatteryHeatingSchedule {
 
         return BatteryHeatingSchedule(
             enabled: enabled,
+            warmUpState: warmUpState,
             period1Start: period1.start,
             period1End: period1.end,
             period1Enabled: period1Enabled,
@@ -131,8 +138,10 @@ public struct BatteryHeatingSchedule {
             period3Start: period3.start,
             period3End: period3.end,
             period3Enabled: period3Enabled,
-            minTemperature: minTemperature,
-            maxTemperature: maxTemperature
+            minStartTemperature: minStartTemperature,
+            maxStartTemperature: maxStartTemperature,
+            minEndTemperature: minEndTemperature,
+            maxEndTemperature: maxEndTemperature
         )
     }
 }

@@ -13,9 +13,9 @@ struct BatteryHeatingTimePeriodView: View {
     @Binding var timePeriod: ChargeTimePeriod
     @State private var errorMessage: String?
 
-    private let title: String
+    private let title: LocalizedStringKey
 
-    init(timePeriod: Binding<ChargeTimePeriod>, title: String) {
+    init(timePeriod: Binding<ChargeTimePeriod>, title: LocalizedStringKey) {
         self._timePeriod = timePeriod
         self.title = title
     }
@@ -23,9 +23,11 @@ struct BatteryHeatingTimePeriodView: View {
     var body: some View {
         Section(
             content: {
-                Toggle(isOn: $timePeriod.enabled, label: { Text("Enable heating") })
+                Toggle(isOn: $timePeriod.enabled.animation(), label: { Text("Enable heating") })
 
-                CustomTimePicker(start: $timePeriod.start, end: $timePeriod.end, includeSeconds: false)
+                if timePeriod.enabled {
+                    CustomTimePicker(start: $timePeriod.start, end: $timePeriod.end, includeSeconds: false)
+                }
             },
             header: {
                 Text(title)

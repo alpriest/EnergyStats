@@ -13,9 +13,9 @@ struct BatteryChargeTimePeriodView: View {
     @Binding var timePeriod: ChargeTimePeriod
     @State private var errorMessage: String?
 
-    private let title: String
+    private let title: LocalizedStringKey
 
-    init(timePeriod: Binding<ChargeTimePeriod>, title: String) {
+    init(timePeriod: Binding<ChargeTimePeriod>, title: LocalizedStringKey) {
         self._timePeriod = timePeriod
         self.title = title
     }

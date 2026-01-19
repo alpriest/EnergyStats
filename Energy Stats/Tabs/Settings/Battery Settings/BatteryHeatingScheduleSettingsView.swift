@@ -6,8 +6,8 @@
 //
 
 import Energy_Stats_Core
-import SwiftUI
 import StoreKit
+import SwiftUI
 
 struct BatteryHeatingScheduleSettingsView: View {
     @StateObject var viewModel: BatteryHeatingScheduleSettingsViewModel
@@ -20,17 +20,43 @@ struct BatteryHeatingScheduleSettingsView: View {
     var body: some View {
         VStack(spacing: 0) {
             Form {
-                BatteryHeatingTimePeriodView(timePeriod: $viewModel.viewData.timePeriod1, title: "Time period 1")
-                BatteryHeatingTimePeriodView(timePeriod: $viewModel.viewData.timePeriod2, title: "Time period 2")
-                BatteryHeatingTimePeriodView(timePeriod: $viewModel.viewData.timePeriod3, title: "Time period 3")
+                if let currentState = viewModel.viewData.currentState {
+                    Text(currentState)
+                }
+                BatteryHeatingTimePeriodView(
+                    timePeriod: $viewModel.viewData.timePeriod1,
+                    title: "Time period 1"
+                )
+                BatteryHeatingTimePeriodView(
+                    timePeriod: $viewModel.viewData.timePeriod2,
+                    title: "Time period 2"
+                )
+                BatteryHeatingTimePeriodView(
+                    timePeriod: $viewModel.viewData.timePeriod3,
+                    title: "Time period 3"
+                )
 
-                Section(content: {}, footer: {
-                    VStack(alignment: .leading) {
-                        Text("Schedule summary")
-                            .font(.headline)
+                Section(
+                    header: Text("Start temperature range"),
+                    content: {
+                        RangeSlider(
+                            lower: $viewModel.viewData.minStartTemperature,
+                            upper: $viewModel.viewData.maxStartTemperature,
+                            bounds: -30 ... 30
+                        )
                     }
-                    .frame(minWidth: 0, maxWidth: .infinity)
-                })
+                )
+                
+                Section(
+                    header: Text("End temperature range"),
+                    content: {
+                        RangeSlider(
+                            lower: $viewModel.viewData.minEndTemperature,
+                            upper: $viewModel.viewData.maxEndTemperature,
+                            bounds: -30 ... 30
+                        )
+                    }
+                )
             }
 
             BottomButtonsView(dirty: viewModel.isDirty) {
@@ -38,7 +64,7 @@ struct BatteryHeatingScheduleSettingsView: View {
                 requestReview()
             }
         }
-        .navigationTitle(.batterySchedule)
+        .navigationTitle(.batteryHeatingSchedule)
         .navigationBarTitleDisplayMode(.inline)
         .loadable(viewModel.state, retry: { viewModel.load() })
         .alert(alertContent: $viewModel.alertContent)
