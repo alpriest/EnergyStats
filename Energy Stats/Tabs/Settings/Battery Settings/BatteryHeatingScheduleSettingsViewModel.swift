@@ -14,27 +14,33 @@ struct BatteryHeatingScheduleSettingsViewData: Copiable {
     var timePeriod1: ChargeTimePeriod
     var timePeriod2: ChargeTimePeriod
     var timePeriod3: ChargeTimePeriod
+    var startTemperature: Double
+    var endTemperature: Double
     var minStartTemperature: Double
     var maxStartTemperature: Double
     var minEndTemperature: Double
     var maxEndTemperature: Double
+    var summary: String
 
     func create(copying previous: BatteryHeatingScheduleSettingsViewData) -> BatteryHeatingScheduleSettingsViewData {
         BatteryHeatingScheduleSettingsViewData(
             timePeriod1: previous.timePeriod1,
             timePeriod2: previous.timePeriod2,
             timePeriod3: previous.timePeriod3,
+            startTemperature: previous.startTemperature,
+            endTemperature: previous.endTemperature,
             minStartTemperature: previous.minStartTemperature,
             maxStartTemperature: previous.maxStartTemperature,
             minEndTemperature: previous.minEndTemperature,
-            maxEndTemperature: previous.maxEndTemperature
+            maxEndTemperature: previous.maxEndTemperature,
+            summary: previous.summary
         )
     }
 }
 
 class BatteryHeatingScheduleSettingsViewModel: ObservableObject, HasLoadState, ViewDataProviding {
     typealias ViewData = BatteryHeatingScheduleSettingsViewData
-    
+
     private let networking: Networking
     private let config: ConfigManaging
     private var cancellable: AnyCancellable?
@@ -42,14 +48,17 @@ class BatteryHeatingScheduleSettingsViewModel: ObservableObject, HasLoadState, V
     @Published var alertContent: AlertContent?
     @Published var isDirty = false
     @Published var viewData = ViewData(
-        currentState: "The battery is in a stopped warm up state", //TODO: nil
+        currentState: "The battery is in a stopped warm up state", // TODO: nil
         timePeriod1: .init(start: Date(), end: Date(), enabled: false),
         timePeriod2: .init(start: Date(), end: Date(), enabled: false),
         timePeriod3: .init(start: Date(), end: Date(), enabled: false),
-        minStartTemperature: -30.0,
-        maxStartTemperature: 0.0,
+        startTemperature: 1,
+        endTemperature: 10,
+        minStartTemperature: 1.0,
+        maxStartTemperature: 9.0,
         minEndTemperature: 10.0,
-        maxEndTemperature: 20.0
+        maxEndTemperature: 15.0,
+        summary: ""
     ) { didSet {
         isDirty = viewData != originalValue
     }}
@@ -74,15 +83,24 @@ class BatteryHeatingScheduleSettingsViewModel: ObservableObject, HasLoadState, V
                 let timePeriod1 = ChargeTimePeriod(startTime: settings.period1Start, endTime: settings.period1End, enabled: settings.period1Enabled)
                 let timePeriod2 = ChargeTimePeriod(startTime: settings.period2Start, endTime: settings.period2End, enabled: settings.period2Enabled)
                 let timePeriod3 = ChargeTimePeriod(startTime: settings.period3Start, endTime: settings.period3End, enabled: settings.period3Enabled)
-                
+
                 let viewData = ViewData(
                     timePeriod1: timePeriod1,
                     timePeriod2: timePeriod2,
                     timePeriod3: timePeriod3,
+                    startTemperature: settings.startTemperature,
+                    endTemperature: settings.endTemperature,
                     minStartTemperature: settings.minStartTemperature,
                     maxStartTemperature: settings.maxStartTemperature,
                     minEndTemperature: settings.minEndTemperature,
-                    maxEndTemperature: settings.maxEndTemperature
+                    maxEndTemperature: settings.maxEndTemperature,
+                    summary: generateSummary(
+                        period1: timePeriod1,
+                        period2: timePeriod2,
+                        period3: timePeriod3,
+                        startTemperature: settings.startTemperature,
+                        endTemperature: settings.endTemperature
+                    )
                 )
                 self.originalValue = viewData
                 self.viewData = viewData
@@ -124,5 +142,40 @@ class BatteryHeatingScheduleSettingsViewModel: ObservableObject, HasLoadState, V
             $0.timePeriod2 = ChargeTimePeriod(start: .zero(), end: .zero(), enabled: false)
             $0.timePeriod3 = ChargeTimePeriod(start: .zero(), end: .zero(), enabled: false)
         }
+    }
+
+    func updateSummary() {
+        viewData = viewData.copy {
+            $0.summary = generateSummary(
+                period1: viewData.timePeriod1,
+                period2: viewData.timePeriod2,
+                period3: viewData.timePeriod3,
+                startTemperature: viewData.startTemperature,
+                endTemperature: viewData.endTemperature
+            )
+        }
+    }
+
+    private func generateSummary(
+        period1: ChargeTimePeriod,
+        period2: ChargeTimePeriod,
+        period3: ChargeTimePeriod,
+        startTemperature: Double,
+        endTemperature: Double
+    ) -> String {
+        let times = [
+            period1.enabled ? period1.description : nil,
+            period2.enabled ? period2.description : nil
+        ].compactMap { $0 }.joined(separator: ", ")
+
+        let generated = "If the battery temperature is between \(range(startTemperature, endTemperature)) the battery heater will be active during the following times: \(times)."
+        
+        let footnote = "Stuff about the battery heater. Maybe some more text about how it works or something."
+        
+        return [generated, footnote].joined(separator: "\n\n")
+    }
+    
+    private func range(_ lower: Double, _ upper: Double) -> String {
+        lower.celsius + " to " + upper.celsius
     }
 }

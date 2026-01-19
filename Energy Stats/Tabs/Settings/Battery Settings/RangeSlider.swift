@@ -11,7 +11,13 @@ import SwiftUI
 struct RangeSlider: View {
     @Binding var lower: Double
     @Binding var upper: Double
-    let bounds: ClosedRange<Double>
+    let lowerBounds: ClosedRange<Double>
+    let upperBounds: ClosedRange<Double>
+
+    private var overallBounds: ClosedRange<Double> {
+        min(lowerBounds.lowerBound, upperBounds.lowerBound) ... max(lowerBounds.upperBound, upperBounds.upperBound)
+    }
+
     private let step: Double = 1
 
     var body: some View {
@@ -37,16 +43,16 @@ struct RangeSlider: View {
             }
 
             HStack {
-                Text("\(Int(bounds.lowerBound))")
+                Text(String(describing: overallBounds.lowerBound.celsius))
                 Spacer()
-                Text("\(Int(bounds.upperBound))")
+                Text(String(describing: overallBounds.upperBound.celsius))
             }
         }
         .frame(height: 32)
     }
 
     private func position(for value: Double, in geo: GeometryProxy) -> CGFloat {
-        let percent = (value - bounds.lowerBound) / (bounds.upperBound - bounds.lowerBound)
+        let percent = (value - overallBounds.lowerBound) / (overallBounds.upperBound - overallBounds.lowerBound)
         return percent * geo.size.width
     }
 
@@ -64,22 +70,21 @@ struct RangeSlider: View {
                 DragGesture()
                     .onChanged { g in
                         let percent = min(max(0, g.location.x / geo.size.width), 1)
-                        let rawValue = bounds.lowerBound +
-                            percent * (bounds.upperBound - bounds.lowerBound)
+                        let rawValue = overallBounds.lowerBound +
+                            percent * (overallBounds.upperBound - overallBounds.lowerBound)
 
                         let snapped = (rawValue / step).rounded() * step
-                        let clamped = min(max(snapped, bounds.lowerBound), bounds.upperBound)
 
                         if value.wrappedValue == lower {
-                            // Dragging lower thumb – it cannot exceed (upper - step)
-                            lower = min(clamped, upper - step)
-                            // Also ensure we don't go out of bounds if bounds are tight
-                            lower = max(lower, bounds.lowerBound)
+                            // Lower thumb: respect lowerBounds and ordering against upper
+                            var clamped = min(max(snapped, lowerBounds.lowerBound), lowerBounds.upperBound)
+                            clamped = min(clamped, upper - step)
+                            lower = clamped
                         } else {
-                            // Dragging upper thumb – it cannot go below (lower + step)
-                            upper = max(clamped, lower + step)
-                            // Also ensure we don't go out of bounds if bounds are tight
-                            upper = min(upper, bounds.upperBound)
+                            // Upper thumb: respect upperBounds and ordering against lower
+                            var clamped = min(max(snapped, upperBounds.lowerBound), upperBounds.upperBound)
+                            clamped = max(clamped, lower + step)
+                            upper = clamped
                         }
                     }
             )
@@ -93,7 +98,7 @@ struct RangeSlider_Previews: PreviewProvider {
         @State var upper: Double = 5
 
         var body: some View {
-            RangeSlider(lower: $lower, upper: $upper, bounds: -10 ... 10)
+            RangeSlider(lower: $lower, upper: $upper, lowerBounds: -10 ... 10, upperBounds: -10 ... 10)
         }
     }
 

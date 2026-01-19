@@ -21,7 +21,9 @@ struct BatteryHeatingScheduleSettingsView: View {
         VStack(spacing: 0) {
             Form {
                 if let currentState = viewModel.viewData.currentState {
-                    Text(currentState)
+                    Section(header: Text("Curerent heater state")) {
+                        Text(currentState)
+                    }
                 }
                 BatteryHeatingTimePeriodView(
                     timePeriod: $viewModel.viewData.timePeriod1,
@@ -37,32 +39,47 @@ struct BatteryHeatingScheduleSettingsView: View {
                 )
 
                 Section(
-                    header: Text("Start temperature range"),
-                    content: {
-                        RangeSlider(
-                            lower: $viewModel.viewData.minStartTemperature,
-                            upper: $viewModel.viewData.maxStartTemperature,
-                            bounds: -30 ... 30
-                        )
+                    header: Text("Temperatures"),
+                ) {
+                    RangeSlider(
+                        lower: $viewModel.viewData.startTemperature,
+                        upper: $viewModel.viewData.endTemperature,
+                        lowerBounds: viewModel.viewData.minStartTemperature ... viewModel.viewData.maxStartTemperature,
+                        upperBounds: viewModel.viewData.minEndTemperature ... viewModel.viewData.maxEndTemperature
+                    )
+                }
+
+                Section(content: {}, footer: {
+                    VStack(alignment: .leading) {
+                        Text("Schedule summary")
+                            .font(.headline)
+
+                        Text(viewModel.viewData.summary)
+                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                     }
-                )
-                
-                Section(
-                    header: Text("End temperature range"),
-                    content: {
-                        RangeSlider(
-                            lower: $viewModel.viewData.minEndTemperature,
-                            upper: $viewModel.viewData.maxEndTemperature,
-                            bounds: -30 ... 30
-                        )
-                    }
-                )
+                    .frame(minWidth: 0, maxWidth: .infinity)
+                })
             }
 
             BottomButtonsView(dirty: viewModel.isDirty) {
                 viewModel.save()
                 requestReview()
             }
+        }
+        .onChange(of: viewModel.viewData.timePeriod1) { _ in
+            viewModel.updateSummary()
+        }
+        .onChange(of: viewModel.viewData.timePeriod2) { _ in
+            viewModel.updateSummary()
+        }
+        .onChange(of: viewModel.viewData.timePeriod3) { _ in
+            viewModel.updateSummary()
+        }
+        .onChange(of: viewModel.viewData.startTemperature) { _ in
+            viewModel.updateSummary()
+        }
+        .onChange(of: viewModel.viewData.endTemperature) { _ in
+            viewModel.updateSummary()
         }
         .navigationTitle(.batteryHeatingSchedule)
         .navigationBarTitleDisplayMode(.inline)

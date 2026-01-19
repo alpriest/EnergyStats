@@ -17,6 +17,8 @@ public struct BatteryHeatingSchedule {
     public let period3Start: Time
     public let period3End: Time
     public let period3Enabled: Bool
+    public let startTemperature: Double
+    public let endTemperature: Double
     public let minStartTemperature: Double
     public let maxStartTemperature: Double
     public let minEndTemperature: Double
@@ -101,6 +103,8 @@ public struct BatteryHeatingSchedule {
         let period2Enabled = try bool("time2Enable", in: dict)
         let period3Enabled = try bool("time3Enable", in: dict)
         let warmUpState = dict["batteryWarmUpState"]
+        let startTemperature = try double("startTemperature", in: dict)
+        let endTemperature = try double("endTemperature", in: dict)
 
         let period1 = try time(
             startHourKey: "time1StartHour",
@@ -138,6 +142,8 @@ public struct BatteryHeatingSchedule {
             period3Start: period3.start,
             period3End: period3.end,
             period3Enabled: period3Enabled,
+            startTemperature: startTemperature,
+            endTemperature: endTemperature,
             minStartTemperature: minStartTemperature,
             maxStartTemperature: maxStartTemperature,
             minEndTemperature: minEndTemperature,
