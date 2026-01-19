@@ -8,7 +8,7 @@
 import Foundation
 
 extension URL {
-    static let getOpenRealData = URL(string: "https://www.foxesscloud.com/op/v0/device/real/query")!
+    static let getOpenRealData = URL(string: "https://www.foxesscloud.com/op/v1/device/real/query")!
     static let getOpenHistoryData = URL(string: "https://www.foxesscloud.com/op/v0/device/history/query")!
     static let getOpenVariables = URL(string: "https://www.foxesscloud.com/op/v0/device/variable/get")!
     static let getOpenReportData = URL(string: "https://www.foxesscloud.com/op/v0/device/report/query")!
@@ -33,7 +33,7 @@ extension FoxAPIService {
     func openapi_fetchRealData(deviceSN: String, variables: [String]) async throws -> OpenQueryResponse {
         var request = URLRequest(url: URL.getOpenRealData)
         request.httpMethod = "POST"
-        request.httpBody = try! JSONEncoder().encode(OpenQueryRequest(deviceSN: deviceSN, variables: variables))
+        request.httpBody = try! JSONEncoder().encode(OpenQueryRequest(sns: [deviceSN], variables: variables))
 
         do {
             let result: ([OpenQueryResponse], Data) = try await fetch(request)
