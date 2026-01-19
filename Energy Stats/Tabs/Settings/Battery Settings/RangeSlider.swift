@@ -41,6 +41,7 @@ struct RangeSlider: View {
                     thumb(value: $upper, geo: geo)
                 }
             }
+            .frame(height: 32)
 
             HStack {
                 Text(String(describing: overallBounds.lowerBound.celsius))
@@ -48,7 +49,6 @@ struct RangeSlider: View {
                 Text(String(describing: overallBounds.upperBound.celsius))
             }
         }
-        .frame(height: 32)
     }
 
     private func position(for value: Double, in geo: GeometryProxy) -> CGFloat {

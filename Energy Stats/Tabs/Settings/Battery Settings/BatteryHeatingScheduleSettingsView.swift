@@ -40,6 +40,7 @@ struct BatteryHeatingScheduleSettingsView: View {
 
                 Section(
                     header: Text("Temperatures"),
+                    footer: Text("Temperature ranges are controlled by FoxESS.")
                 ) {
                     RangeSlider(
                         lower: $viewModel.viewData.startTemperature,
