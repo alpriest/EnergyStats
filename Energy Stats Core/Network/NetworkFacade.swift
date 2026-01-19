@@ -251,6 +251,14 @@ class NetworkFacade: FoxAPIServicing {
             try await api.openapi_fetchPowerGeneration(deviceSN: deviceSN)
         }
     }
+    
+    func openapi_getBatteryHeatingSchedule(deviceSN: String) async throws -> BatteryHeatingScheduleResponse {
+        if isDemoUser {
+            try await demoAPI.openapi_getBatteryHeatingSchedule(deviceSN: deviceSN)
+        } else {
+            try await api.openapi_getBatteryHeatingSchedule(deviceSN: deviceSN)
+        }
+    }
 }
 
 class ThrottleManager {

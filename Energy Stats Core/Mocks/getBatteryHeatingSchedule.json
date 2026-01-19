@@ -1,0 +1,227 @@
+{
+    "errno": 0,
+    "msg": "Operation successful",
+    "result": {
+        "dataList": [
+            {
+                "unit": "",
+                "precision": 1.0,
+                "name": "time1EndHour",
+                "range": {
+                    "min": 0.0,
+                    "max": 23.0
+                },
+                "value": "0"
+            },
+            {
+                "unit": "",
+                "precision": 1.0,
+                "name": "minEndTemperatureRange",
+                "value": "10"
+            },
+            {
+                "unit": "",
+                "precision": 1.0,
+                "name": "maxStartTemperatureRange",
+                "value": "9"
+            },
+            {
+                "unit": "",
+                "precision": 1.0,
+                "name": "time2StartHour",
+                "range": {
+                    "min": 0.0,
+                    "max": 23.0
+                },
+                "value": "0"
+            },
+            {
+                "unit": "",
+                "precision": 1.0,
+                "name": "time1EndMinute",
+                "range": {
+                    "min": 0.0,
+                    "max": 59.0
+                },
+                "value": "0"
+            },
+            {
+                "unit": "",
+                "precision": 1.0,
+                "name": "time3StartHour",
+                "range": {
+                    "min": 0.0,
+                    "max": 23.0
+                },
+                "value": "0"
+            },
+            {
+                "unit": "",
+                "precision": 1.0,
+                "name": "minStartTemperatureRange",
+                "value": "1"
+            },
+            {
+                "enumList": [
+                    "disable",
+                    "enable"
+                ],
+                "unit": "℃",
+                "precision": 1.0,
+                "name": "time2Enable",
+                "value": "disable"
+            },
+            {
+                "enumList": [
+                    "disable",
+                    "enable"
+                ],
+                "unit": "",
+                "precision": 1.0,
+                "name": "batteryWarmUpFunctionEnableFlag",
+                "value": "disable"
+            },
+            {
+                "unit": "",
+                "precision": 1.0,
+                "name": "time3EndMinute",
+                "range": {
+                    "min": 0.0,
+                    "max": 59.0
+                },
+                "value": "0"
+            },
+            {
+                "unit": "",
+                "precision": 1.0,
+                "name": "time2EndHour",
+                "range": {
+                    "min": 0.0,
+                    "max": 23.0
+                },
+                "value": "0"
+            },
+            {
+                "enumList": [
+                    "disable",
+                    "enable"
+                ],
+                "unit": "℃",
+                "precision": 1.0,
+                "name": "time3Enable",
+                "value": "disable"
+            },
+            {
+                "unit": "",
+                "precision": 1.0,
+                "name": "time1StartHour",
+                "range": {
+                    "min": 0.0,
+                    "max": 23.0
+                },
+                "value": "0"
+            },
+            {
+                "unit": "℃",
+                "precision": 1.0,
+                "name": "startTemperature",
+                "value": "1"
+            },
+            {
+                "enumList": [
+                    "disable",
+                    "enable"
+                ],
+                "unit": "",
+                "precision": 1.0,
+                "name": "time1Enable",
+                "value": "disable"
+            },
+            {
+                "enumList": [
+                    "disable",
+                    "enable"
+                ],
+                "unit": "",
+                "precision": 1.0,
+                "name": "batteryWarmUpEnable",
+                "value": "disable"
+            },
+            {
+                "unit": "℃",
+                "precision": 1.0,
+                "name": "endTemperature",
+                "value": "10"
+            },
+            {
+                "unit": "",
+                "precision": 1.0,
+                "name": "time3EndHour",
+                "range": {
+                    "min": 0.0,
+                    "max": 23.0
+                },
+                "value": "0"
+            },
+            {
+                "unit": "",
+                "precision": 1.0,
+                "name": "maxEndTemperatureRange",
+                "value": "15"
+            },
+            {
+                "unit": "",
+                "precision": 1.0,
+                "name": "time2StartMinute",
+                "range": {
+                    "min": 0.0,
+                    "max": 59.0
+                },
+                "value": "0"
+            },
+            {
+                "unit": "",
+                "precision": 1.0,
+                "name": "time2EndMinute",
+                "range": {
+                    "min": 0.0,
+                    "max": 59.0
+                },
+                "value": "0"
+            },
+            {
+                "unit": "",
+                "precision": 1.0,
+                "name": "time1StartMinute",
+                "range": {
+                    "min": 0.0,
+                    "max": 59.0
+                },
+                "value": "0"
+            },
+            {
+                "enumList": [
+                    "The battery is in a stopped warm up state",
+                    "The battery is in a ready warm up state",
+                    "The battery is in the warm up state",
+                    "Battery is in self warm up state",
+                    "The battery is in a ready stopped warm up state"
+                ],
+                "unit": "",
+                "precision": 1.0,
+                "name": "batteryWarmUpState",
+                "value": "The battery is in a stopped warm up state"
+            },
+            {
+                "unit": "",
+                "precision": 1.0,
+                "name": "time3StartMinute",
+                "range": {
+                    "min": 0.0,
+                    "max": 59.0
+                },
+                "value": "0"
+            }
+        ]
+    }
+}

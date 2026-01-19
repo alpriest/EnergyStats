@@ -148,6 +148,10 @@ class NetworkValueCleaner: FoxAPIServicing {
     func openapi_fetchPowerGeneration(deviceSN: String) async throws -> PowerGenerationResponse {
         try await api.openapi_fetchPowerGeneration(deviceSN: deviceSN)
     }
+    
+    func openapi_getBatteryHeatingSchedule(deviceSN: String) async throws -> BatteryHeatingScheduleResponse {
+        try await api.openapi_getBatteryHeatingSchedule(deviceSN: deviceSN)
+    }
 }
 
 extension Double {

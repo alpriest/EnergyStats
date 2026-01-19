@@ -56,7 +56,7 @@
 		4110065B28E890E40018C3DF /* ParametersGraphTabViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4110065A28E890E40018C3DF /* ParametersGraphTabViewModelTests.swift */; };
 		4110290D2A71B713004018BB /* BatteryChargeScheduleSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4110290C2A71B713004018BB /* BatteryChargeScheduleSettingsView.swift */; };
 		4110290F2A71B908004018BB /* BatterySOCSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4110290E2A71B908004018BB /* BatterySOCSettingsView.swift */; };
-		411029112A71B95F004018BB /* BatteryTimePeriodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411029102A71B95F004018BB /* BatteryTimePeriodView.swift */; };
+		411029112A71B95F004018BB /* BatteryChargeTimePeriodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411029102A71B95F004018BB /* BatteryChargeTimePeriodView.swift */; };
 		411029132A71C066004018BB /* Tintable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411029122A71C066004018BB /* Tintable.swift */; };
 		411029152A71C4F2004018BB /* NumberTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411029142A71C4F2004018BB /* NumberTextField.swift */; };
 		411029172A71C975004018BB /* ChargeTimePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411029162A71C975004018BB /* ChargeTimePeriod.swift */; };
@@ -282,6 +282,12 @@
 		41BACC0D2D9142D600C9C718 /* TipKitViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BACC082D9141F200C9C718 /* TipKitViewModifier.swift */; };
 		41BB29C62CEA89F600F8FDE4 /* View+Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BB29C52CEA89F300F8FDE4 /* View+Analytics.swift */; };
 		41BCC1AB2B245C280062084A /* FoxAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC1AA2B245C280062084A /* FoxAPIService.swift */; };
+		41BCC23F2F1E9BE500FB883E /* BatteryHeatingScheduleResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC23E2F1E9BE000FB883E /* BatteryHeatingScheduleResponse.swift */; };
+		41BCC2412F1E9F4700FB883E /* BatteryHeatingSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC2402F1E9F4500FB883E /* BatteryHeatingSchedule.swift */; };
+		41BCC2432F1EA9DF00FB883E /* getBatteryHeatingSchedule.json in Resources */ = {isa = PBXBuildFile; fileRef = 41BCC2422F1EA9DC00FB883E /* getBatteryHeatingSchedule.json */; };
+		41BCC2452F1EAB7200FB883E /* BatteryHeatingScheduleSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC2442F1EAB7200FB883E /* BatteryHeatingScheduleSettingsView.swift */; };
+		41BCC2472F1EACBD00FB883E /* BatteryHeatingScheduleSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC2462F1EACBD00FB883E /* BatteryHeatingScheduleSettingsViewModel.swift */; };
+		41BCC2492F1EB00400FB883E /* BatteryHeatingTimePeriodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC2482F1EAFFE00FB883E /* BatteryHeatingTimePeriodView.swift */; };
 		41BF88AB2E2B993A00AB5E9D /* OHHTTPStubs in Frameworks */ = {isa = PBXBuildFile; productRef = 41BF88AA2E2B993A00AB5E9D /* OHHTTPStubs */; };
 		41BF88AD2E2B993A00AB5E9D /* OHHTTPStubsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 41BF88AC2E2B993A00AB5E9D /* OHHTTPStubsSwift */; };
 		41C0923B2B20FCB0001D1E22 /* SchedulePhaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0923A2B20FCB0001D1E22 /* SchedulePhaseHelper.swift */; };
@@ -588,7 +594,7 @@
 		4110065A28E890E40018C3DF /* ParametersGraphTabViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersGraphTabViewModelTests.swift; sourceTree = "<group>"; };
 		4110290C2A71B713004018BB /* BatteryChargeScheduleSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryChargeScheduleSettingsView.swift; sourceTree = "<group>"; };
 		4110290E2A71B908004018BB /* BatterySOCSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatterySOCSettingsView.swift; sourceTree = "<group>"; };
-		411029102A71B95F004018BB /* BatteryTimePeriodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryTimePeriodView.swift; sourceTree = "<group>"; };
+		411029102A71B95F004018BB /* BatteryChargeTimePeriodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryChargeTimePeriodView.swift; sourceTree = "<group>"; };
 		411029122A71C066004018BB /* Tintable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tintable.swift; sourceTree = "<group>"; };
 		411029142A71C4F2004018BB /* NumberTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberTextField.swift; sourceTree = "<group>"; };
 		411029162A71C975004018BB /* ChargeTimePeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargeTimePeriod.swift; sourceTree = "<group>"; };
@@ -830,6 +836,12 @@
 		41BACC0A2D91420F00C9C718 /* TipKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipKitManager.swift; sourceTree = "<group>"; };
 		41BB29C52CEA89F300F8FDE4 /* View+Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Analytics.swift"; sourceTree = "<group>"; };
 		41BCC1AA2B245C280062084A /* FoxAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoxAPIService.swift; sourceTree = "<group>"; };
+		41BCC23E2F1E9BE000FB883E /* BatteryHeatingScheduleResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryHeatingScheduleResponse.swift; sourceTree = "<group>"; };
+		41BCC2402F1E9F4500FB883E /* BatteryHeatingSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryHeatingSchedule.swift; sourceTree = "<group>"; };
+		41BCC2422F1EA9DC00FB883E /* getBatteryHeatingSchedule.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = getBatteryHeatingSchedule.json; sourceTree = "<group>"; };
+		41BCC2442F1EAB7200FB883E /* BatteryHeatingScheduleSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryHeatingScheduleSettingsView.swift; sourceTree = "<group>"; };
+		41BCC2462F1EACBD00FB883E /* BatteryHeatingScheduleSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryHeatingScheduleSettingsViewModel.swift; sourceTree = "<group>"; };
+		41BCC2482F1EAFFE00FB883E /* BatteryHeatingTimePeriodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryHeatingTimePeriodView.swift; sourceTree = "<group>"; };
 		41C0923A2B20FCB0001D1E22 /* SchedulePhaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePhaseHelper.swift; sourceTree = "<group>"; };
 		41C0923C2B210255001D1E22 /* ScheduleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailView.swift; sourceTree = "<group>"; };
 		41C0B43329F96D3600CA9462 /* LocalizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedString.swift; sourceTree = "<group>"; };
@@ -1159,15 +1171,18 @@
 		4110290B2A71B704004018BB /* Battery Settings */ = {
 			isa = PBXGroup;
 			children = (
-				4130364829B86F66006B5CE9 /* BatterySettingsView.swift */,
-				411029102A71B95F004018BB /* BatteryTimePeriodView.swift */,
-				411029162A71C975004018BB /* ChargeTimePeriod.swift */,
 				4110290C2A71B713004018BB /* BatteryChargeScheduleSettingsView.swift */,
 				4110291A2A72AFAA004018BB /* BatteryChargeScheduleSettingsViewModel.swift */,
-				4110290E2A71B908004018BB /* BatterySOCSettingsView.swift */,
-				4110291C2A72AFC2004018BB /* BatterySOCSettingsViewModel.swift */,
+				411029102A71B95F004018BB /* BatteryChargeTimePeriodView.swift */,
 				415F0BD62D9C5E57003EB760 /* BatteryFirmwareVersionsView.swift */,
 				415F0BD82D9C869F003EB760 /* BatteryFirmwareVersionsViewModel.swift */,
+				41BCC2442F1EAB7200FB883E /* BatteryHeatingScheduleSettingsView.swift */,
+				41BCC2462F1EACBD00FB883E /* BatteryHeatingScheduleSettingsViewModel.swift */,
+				41BCC2482F1EAFFE00FB883E /* BatteryHeatingTimePeriodView.swift */,
+				4130364829B86F66006B5CE9 /* BatterySettingsView.swift */,
+				4110290E2A71B908004018BB /* BatterySOCSettingsView.swift */,
+				4110291C2A72AFC2004018BB /* BatterySOCSettingsViewModel.swift */,
+				411029162A71C975004018BB /* ChargeTimePeriod.swift */,
 			);
 			path = "Battery Settings";
 			sourceTree = "<group>";
@@ -1264,6 +1279,7 @@
 		413745072919022C00D351F1 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				41BCC2422F1EA9DC00FB883E /* getBatteryHeatingSchedule.json */,
 				417747F82C0379080023A51C /* history-temp.json */,
 				411542F02BEF424200BDE56D /* MockKeychainStore.swift */,
 				41DF51D12AA4CF6D007B5102 /* MockAppTheme.swift */,
@@ -1361,6 +1377,7 @@
 		4140146328C7146B00EA5BA1 /* NetworkModels */ = {
 			isa = PBXGroup;
 			children = (
+				41BCC23E2F1E9BE000FB883E /* BatteryHeatingScheduleResponse.swift */,
 				413715AE2E20099200505496 /* GetPowerGenerationResponse.swift */,
 				416E032D2DE3764A0059CE42 /* FetchPeakShavingsSettingsResponse.swift */,
 				410F41262DA5B94F00DEE2F4 /* DeviceSettingsItem.swift */,
@@ -1382,6 +1399,7 @@
 		4140146728C7373A00EA5BA1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				41BCC2402F1E9F4500FB883E /* BatteryHeatingSchedule.swift */,
 				41FBF4032DAA5A5600EBD4D5 /* URLSessionProtocol.swift */,
 				41F6C64F2D935044001EBAA5 /* CT2DisplayMode.swift */,
 				41FBE9012D816F6700CEC645 /* StringPower.swift */,
@@ -2231,6 +2249,7 @@
 				41F71AC12A1504D900A8C81B /* report-month.json in Resources */,
 				41FDAD502A01604F00EDACF3 /* variables.json in Resources */,
 				41CB71482A3B1A2800199415 /* Assets.xcassets in Resources */,
+				41BCC2432F1EA9DF00FB883E /* getBatteryHeatingSchedule.json in Resources */,
 				4103D1DD29DB6C8C001B0BC8 /* report-day.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2323,6 +2342,7 @@
 				4190922E2B1E4B250017CB65 /* SchedulePhaseListItemView.swift in Sources */,
 				418C6E972AFAC7E4000DE35F /* SummaryTabViewModel.swift in Sources */,
 				41AB53402B9319B900B6C371 /* SolarStringsView.swift in Sources */,
+				41BCC2492F1EB00400FB883E /* BatteryHeatingTimePeriodView.swift in Sources */,
 				411DF2742AFD404E00CEEB23 /* SolarForecastView.swift in Sources */,
 				4110290D2A71B713004018BB /* BatteryChargeScheduleSettingsView.swift in Sources */,
 				417E1CE22E1E4732009E8374 /* InverterWorkModeView.swift in Sources */,
@@ -2343,6 +2363,7 @@
 				411029152A71C4F2004018BB /* NumberTextField.swift in Sources */,
 				419CCB542933BABF00882649 /* ErrorAlertView.swift in Sources */,
 				41626CD029D969E9003FEB00 /* InverterFirmwareVersionsView.swift in Sources */,
+				41BCC2472F1EACBD00FB883E /* BatteryHeatingScheduleSettingsViewModel.swift in Sources */,
 				4171854C2A01033700D18CDD /* ParameterGraphVariablesToggles.swift in Sources */,
 				41C0923D2B210255001D1E22 /* ScheduleDetailView.swift in Sources */,
 				41A263222B6AEE9F0027E52A /* ConfigureAPIKeyView.swift in Sources */,
@@ -2383,7 +2404,7 @@
 				41B591102ED1C107005B34D5 /* ViewDataProviding.swift in Sources */,
 				4134ACC42A88A1A800CB4BA8 /* InverterView.swift in Sources */,
 				416B8F1A2F12552600C73AB0 /* ContactView.swift in Sources */,
-				411029112A71B95F004018BB /* BatteryTimePeriodView.swift in Sources */,
+				411029112A71B95F004018BB /* BatteryChargeTimePeriodView.swift in Sources */,
 				41AF2F452AA4C74F008FCA2E /* GridPowerFooterView.swift in Sources */,
 				4110291B2A72AFAA004018BB /* BatteryChargeScheduleSettingsViewModel.swift in Sources */,
 				41D759FF2B5B176A002C43A7 /* EditScheduleViewModel.swift in Sources */,
@@ -2434,6 +2455,7 @@
 				4139CD982CC0023600DFB2C4 /* TemplateSummaryListRow.swift in Sources */,
 				417153E629F2BD3300639A7B /* LoadState.swift in Sources */,
 				41C3B7F32E0EFA0B00A9EA58 /* ExportStatsDataIntent.swift in Sources */,
+				41BCC2452F1EAB7200FB883E /* BatteryHeatingScheduleSettingsView.swift in Sources */,
 				410FC8882AB9B5450004CBC2 /* ParameterVariableListView.swift in Sources */,
 				41C19DCD2A4DDE46009883AB /* SelfSufficiencyEstimateView.swift in Sources */,
 				4130364B29B8BE7F006B5CE9 /* InverterChoiceView.swift in Sources */,
@@ -2503,6 +2525,7 @@
 				4171854229FFCF2500D18CDD /* String+MD5.swift in Sources */,
 				418024E22AD16D00009A2625 /* String+Currency.swift in Sources */,
 				41F5A3642C1B563D00CA1120 /* Shimmering.swift in Sources */,
+				41BCC23F2F1E9BE500FB883E /* BatteryHeatingScheduleResponse.swift in Sources */,
 				41BACC0C2D9142B700C9C718 /* TipKitManager.swift in Sources */,
 				41D75A012B5C0238002C43A7 /* Bool+Int.swift in Sources */,
 				41009A732B02D852009D853B /* SolcastForecastResponse.swift in Sources */,
@@ -2561,6 +2584,7 @@
 				411542EC2BED310200BDE56D /* TemplateStore.swift in Sources */,
 				4156A2312CB6773300099A6A /* ErrorAlertViewManufacturing.swift in Sources */,
 				416AE44D2A821E4F003D0122 /* AlertContent.swift in Sources */,
+				41BCC2412F1E9F4700FB883E /* BatteryHeatingSchedule.swift in Sources */,
 				41F5A3652C1C630600CA1120 /* View+If.swift in Sources */,
 				4149DE9D2B04BDE6004F5FC6 /* SolcastCache.swift in Sources */,
 				4171854429FFCF9500D18CDD /* Color+Hex.swift in Sources */,

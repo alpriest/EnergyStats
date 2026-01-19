@@ -27,6 +27,7 @@ extension URL {
     static let getDevicePeakShavingSettings = URL(string: "https://www.foxesscloud.com/op/v0/device/peakShaving/get")!
     static let setDevicePeakShavingSettings = URL(string: "https://www.foxesscloud.com/op/v0/device/peakShaving/set")!
     static let fetchPowerGeneration = URL(string: "https://www.foxesscloud.com/op/v0/device/generation")!
+    static let getBatteryHeatingSchedule = URL(string: "https://www.foxesscloud.com/op/v0/device/batteryHeating/get")!
 }
 
 extension FoxAPIService {
@@ -234,6 +235,15 @@ extension FoxAPIService {
         let request = append(queryItems: [URLQueryItem(name: "sn", value: deviceSN)], to: URL.fetchPowerGeneration)
 
         let result: (PowerGenerationResponse, Data) = try await fetch(request)
+        return result.0
+    }
+    
+    func openapi_getBatteryHeatingSchedule(deviceSN: String) async throws -> BatteryHeatingScheduleResponse {
+        var request = URLRequest(url: URL.getBatteryHeatingSchedule)
+        request.httpMethod = "POST"
+        request.httpBody = try! JSONEncoder().encode(GetBatteryHeatingScheduleRequest(sn: deviceSN))
+        
+        let result: (BatteryHeatingScheduleResponse, Data) = try await fetch(request)
         return result.0
     }
 }

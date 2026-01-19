@@ -357,6 +357,14 @@ class DemoAPI: FoxAPIServicing {
             cumulative: 244.0
         )
     }
+    
+    func openapi_getBatteryHeatingSchedule(deviceSN: String) async throws -> BatteryHeatingScheduleResponse {
+        let data = try self.data(filename: "getBatteryHeatingScheduleResponse")
+        let response = try JSONDecoder().decode(NetworkResponse<BatteryHeatingScheduleResponse>.self, from: data)
+        guard let result = response.result else { throw NetworkError.invalidToken }
+
+        return result
+    }
 
     private func data(filename: String) throws -> Data {
         guard let url = Bundle(for: type(of: self)).url(forResource: filename, withExtension: "json") else {

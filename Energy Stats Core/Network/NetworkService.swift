@@ -31,6 +31,7 @@ public protocol Networking {
     func fetchPeakShavingSettings(deviceSN: String) async throws -> FetchPeakShavingSettingsResponse
     func setPeakShavingSettings(deviceSN: String, importLimit: Double, soc: Int) async throws
     func fetchPowerGeneration(deviceSN: String) async throws -> PowerGenerationResponse
+    func fetchBatteryHeatingSchedule(deviceSN: String) async throws -> BatteryHeatingSchedule
 }
 
 public protocol NetworkTracing {
@@ -164,6 +165,11 @@ public class NetworkService: Networking {
 
     public func fetchPowerGeneration(deviceSN: String) async throws -> PowerGenerationResponse {
         try await api.openapi_fetchPowerGeneration(deviceSN: deviceSN)
+    }
+    
+    public func fetchBatteryHeatingSchedule(deviceSN: String) async throws -> BatteryHeatingSchedule {
+        let response = try await api.openapi_getBatteryHeatingSchedule(deviceSN: deviceSN)
+        return try BatteryHeatingSchedule.from(response: response)
     }
 }
 

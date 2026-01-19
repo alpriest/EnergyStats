@@ -1,15 +1,15 @@
 //
-//  BatteryTimePeriodView.swift
+//  BatteryHeatingTimePeriodView.swift
 //  Energy Stats
 //
-//  Created by Alistair Priest on 26/07/2023.
+//  Created by Alistair Priest on 19/01/2026.
 //
 
 import Combine
 import Energy_Stats_Core
 import SwiftUI
 
-struct BatteryTimePeriodView: View {
+struct BatteryHeatingTimePeriodView: View {
     @Binding var timePeriod: ChargeTimePeriod
     @State private var errorMessage: String?
 
@@ -23,26 +23,18 @@ struct BatteryTimePeriodView: View {
     var body: some View {
         Section(
             content: {
-                Toggle(isOn: $timePeriod.enabled, label: { Text("Enable charge from grid") })
+                Toggle(isOn: $timePeriod.enabled, label: { Text("Enable heating") })
 
                 CustomTimePicker(start: $timePeriod.start, end: $timePeriod.end, includeSeconds: false)
             },
             header: {
                 Text(title)
-            },
-            footer: {
-                VStack(alignment: .leading) {
-                    Button("Reset times") {
-                        timePeriod.start = Date.fromTime(Time.zero())
-                        timePeriod.end = Date.fromTime(Time.zero())
-                    }.buttonStyle(.bordered)
-                }
             }
         )
     }
 }
 
-struct BatteryTimePeriodView_Previews: PreviewProvider {
+struct BatteryHeatingTimePeriodView_Previews: PreviewProvider {
     static var previews: some View {
         Preview()
     }
@@ -51,7 +43,7 @@ struct BatteryTimePeriodView_Previews: PreviewProvider {
         @State private var period = ChargeTimePeriod(start: Date(), end: Date(), enabled: true)
         var body: some View {
             Form {
-                BatteryTimePeriodView(
+                BatteryHeatingTimePeriodView(
                     timePeriod: $period,
                     title: "Period 1"
                 )
