@@ -31,7 +31,7 @@ struct BatterySettingsView: View {
                 BatteryChargeScheduleSettingsView(networking: viewModel.networking, config: viewModel.config)
             }.accessibilityIdentifier("charge schedule")
             
-            NavigationLink("Battery heating schedule") {
+            NavigationLink("Heating schedule") {
                 BatteryHeatingScheduleSettingsView(networking: viewModel.networking, config: viewModel.config)
             }
 

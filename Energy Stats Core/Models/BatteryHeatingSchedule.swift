@@ -60,9 +60,9 @@ public struct BatteryHeatingSchedule {
     private static func bool(_ key: String, in dict: [String: String]) throws -> Bool {
         let raw = try required(key, in: dict)
         switch raw.lowercased() {
-        case "true", "1", "on", "yes":
+        case "true", "1", "on", "yes", "enable":
             return true
-        case "false", "0", "off", "no":
+        case "false", "0", "off", "no", "disable":
             return false
         default:
             throw ParseError.invalidBool(key, raw)

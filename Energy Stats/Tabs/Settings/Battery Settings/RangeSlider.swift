@@ -19,6 +19,7 @@ struct RangeSlider: View {
     }
 
     private let step: Double = 1
+    private let tickCount: Int = 10
 
     var body: some View {
         VStack {
@@ -27,6 +28,8 @@ struct RangeSlider: View {
                     Capsule()
                         .fill(.gray.opacity(0.3))
                         .frame(height: 6)
+
+                    tickMarks(in: geo)
 
                     Capsule()
                         .fill(.blue)
@@ -54,6 +57,22 @@ struct RangeSlider: View {
     private func position(for value: Double, in geo: GeometryProxy) -> CGFloat {
         let percent = (value - overallBounds.lowerBound) / (overallBounds.upperBound - overallBounds.lowerBound)
         return percent * geo.size.width
+    }
+
+    private func tickMarks(in geo: GeometryProxy) -> some View {
+        let total = tickCount - 1
+        return ZStack {
+            ForEach(0..<tickCount, id: \.self) { index in
+                let fraction = CGFloat(index) / CGFloat(total)
+                Rectangle()
+                    .fill(Color.gray.opacity(0.6))
+                    .frame(width: 1, height: 10)
+                    .position(
+                        x: fraction * geo.size.width,
+                        y: geo.size.height / 2
+                    )
+            }
+        }
     }
 
     private func thumb(value: Binding<Double>, geo: GeometryProxy) -> some View {

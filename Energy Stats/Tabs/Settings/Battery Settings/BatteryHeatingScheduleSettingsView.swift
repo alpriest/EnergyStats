@@ -20,8 +20,19 @@ struct BatteryHeatingScheduleSettingsView: View {
     var body: some View {
         VStack(spacing: 0) {
             Form {
+                Section(
+                    header: Text("Schedule summary")
+                ) {
+                    Text(viewModel.viewData.summary)
+                        .transition(.opacity)
+                }
+
+                Toggle(isOn: $viewModel.viewData.enabled.animation()) {
+                    Text("Heating schedule enabled")
+                }
+
                 if let currentState = viewModel.viewData.currentState {
-                    Section(header: Text("Curerent heater state")) {
+                    Section(header: Text("Current heater state")) {
                         Text(currentState)
                     }
                 }
@@ -40,7 +51,7 @@ struct BatteryHeatingScheduleSettingsView: View {
 
                 Section(
                     header: Text("Temperatures"),
-                    footer: Text("Temperature ranges are controlled by FoxESS.")
+                    footer: Text("Minimum and maximum temperature ranges are controlled by your inverter firmware.")
                 ) {
                     RangeSlider(
                         lower: $viewModel.viewData.startTemperature,
@@ -49,23 +60,18 @@ struct BatteryHeatingScheduleSettingsView: View {
                         upperBounds: viewModel.viewData.minEndTemperature ... viewModel.viewData.maxEndTemperature
                     )
                 }
-
-                Section(content: {}, footer: {
-                    VStack(alignment: .leading) {
-                        Text("Schedule summary")
-                            .font(.headline)
-
-                        Text(viewModel.viewData.summary)
-                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                    }
-                    .frame(minWidth: 0, maxWidth: .infinity)
-                })
+                
+                Section(footer: Text("Solar generation can be used for heating. If the SoC is above 40% the battery can be used for heating. If the SoC is below 40%, the grid is used for heating. When the battery is being used for heating, it can discharge but won't charge. When grid or solar is being used for heating, the battery won't charge or discharge."))
+                {}
             }
 
             BottomButtonsView(dirty: viewModel.isDirty) {
                 viewModel.save()
                 requestReview()
             }
+        }
+        .onChange(of: viewModel.viewData.enabled) { _ in
+            viewModel.updateSummary()
         }
         .onChange(of: viewModel.viewData.timePeriod1) { _ in
             viewModel.updateSummary()

@@ -119,7 +119,7 @@ public extension Double {
     var tintColor: Color { Int(self).tintColor }
     
     var celsius: String {
-        "\(Int(self)) °C"
+        "\(Int(self))°C"
     }
 }
 

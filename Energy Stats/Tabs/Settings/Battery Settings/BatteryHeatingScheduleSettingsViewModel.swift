@@ -10,6 +10,7 @@ import Energy_Stats_Core
 import Foundation
 
 struct BatteryHeatingScheduleSettingsViewData: Copiable {
+    var enabled: Bool
     var currentState: String?
     var timePeriod1: ChargeTimePeriod
     var timePeriod2: ChargeTimePeriod
@@ -24,6 +25,7 @@ struct BatteryHeatingScheduleSettingsViewData: Copiable {
 
     func create(copying previous: BatteryHeatingScheduleSettingsViewData) -> BatteryHeatingScheduleSettingsViewData {
         BatteryHeatingScheduleSettingsViewData(
+            enabled: previous.enabled,
             timePeriod1: previous.timePeriod1,
             timePeriod2: previous.timePeriod2,
             timePeriod3: previous.timePeriod3,
@@ -48,6 +50,7 @@ class BatteryHeatingScheduleSettingsViewModel: ObservableObject, HasLoadState, V
     @Published var alertContent: AlertContent?
     @Published var isDirty = false
     @Published var viewData = ViewData(
+        enabled: false,
         currentState: "The battery is in a stopped warm up state", // TODO: nil
         timePeriod1: .init(start: Date(), end: Date(), enabled: false),
         timePeriod2: .init(start: Date(), end: Date(), enabled: false),
@@ -85,6 +88,7 @@ class BatteryHeatingScheduleSettingsViewModel: ObservableObject, HasLoadState, V
                 let timePeriod3 = ChargeTimePeriod(startTime: settings.period3Start, endTime: settings.period3End, enabled: settings.period3Enabled)
 
                 let viewData = ViewData(
+                    enabled: settings.enabled,
                     timePeriod1: timePeriod1,
                     timePeriod2: timePeriod2,
                     timePeriod3: timePeriod3,
@@ -95,6 +99,7 @@ class BatteryHeatingScheduleSettingsViewModel: ObservableObject, HasLoadState, V
                     minEndTemperature: settings.minEndTemperature,
                     maxEndTemperature: settings.maxEndTemperature,
                     summary: generateSummary(
+                        enabled: settings.enabled,
                         period1: timePeriod1,
                         period2: timePeriod2,
                         period3: timePeriod3,
@@ -147,6 +152,7 @@ class BatteryHeatingScheduleSettingsViewModel: ObservableObject, HasLoadState, V
     func updateSummary() {
         viewData = viewData.copy {
             $0.summary = generateSummary(
+                enabled: viewData.enabled,
                 period1: viewData.timePeriod1,
                 period2: viewData.timePeriod2,
                 period3: viewData.timePeriod3,
@@ -157,25 +163,42 @@ class BatteryHeatingScheduleSettingsViewModel: ObservableObject, HasLoadState, V
     }
 
     private func generateSummary(
+        enabled: Bool,
         period1: ChargeTimePeriod,
         period2: ChargeTimePeriod,
         period3: ChargeTimePeriod,
         startTemperature: Double,
         endTemperature: Double
     ) -> String {
-        let times = [
-            period1.enabled ? period1.description : nil,
-            period2.enabled ? period2.description : nil
-        ].compactMap { $0 }.joined(separator: ", ")
+        guard enabled else {
+            return "Your battery heater is not enabled."
+        }
 
-        let generated = "If the battery temperature is between \(range(startTemperature, endTemperature)) the battery heater will be active during the following times: \(times)."
+        let times = [
+            period1.enabled ? period1 : nil,
+            period2.enabled ? period2 : nil,
+            period3.enabled ? period3 : nil
+        ]
+            .compactMap { $0 }
+            .sorted { first, second in
+                first.start < second.start
+            }
+            .map { $0.description }
         
-        let footnote = "Stuff about the battery heater. Maybe some more text about how it works or something."
-        
-        return [generated, footnote].joined(separator: "\n\n")
+        if times.isEmpty {
+            return "Your battery heater is enabled, but you do not have any time periods enabled. It won’t run until you enable at least one time period."
+        }
+
+        return "When the battery temperature is between \(range(startTemperature, endTemperature)) the battery heater will be active during \(times.commaSeperated())."
     }
-    
+
     private func range(_ lower: Double, _ upper: Double) -> String {
-        lower.celsius + " to " + upper.celsius
+        lower.celsius + " and " + upper.celsius
+    }
+}
+
+extension [String] {
+    func commaSeperated() -> String {
+        self.joined(separator: ", ")
     }
 }
