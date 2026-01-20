@@ -12,12 +12,27 @@ import SwiftUI
 struct BatteryHeatingScheduleSettingsView: View {
     @StateObject var viewModel: BatteryHeatingScheduleSettingsViewModel
     @Environment(\.requestReview) private var requestReview
-
+    
     init(networking: Networking, config: ConfigManaging) {
         _viewModel = StateObject(wrappedValue: BatteryHeatingScheduleSettingsViewModel(networking: networking, config: config))
     }
-
+    
     var body: some View {
+        Group {
+            switch viewModel.viewData.available {
+            case true:
+                scheduleAvailable()
+            case false:
+                Text("Battery heating is not available")
+            }
+        }
+        .navigationTitle(.batteryHeatingSchedule)
+        .navigationBarTitleDisplayMode(.inline)
+        .loadable(viewModel.state, retry: { viewModel.load() })
+        .alert(alertContent: $viewModel.alertContent)
+    }
+
+    private func scheduleAvailable() -> some View {
         VStack(spacing: 0) {
             Form {
                 Section(
@@ -88,10 +103,6 @@ struct BatteryHeatingScheduleSettingsView: View {
         .onChange(of: viewModel.viewData.endTemperature) { _ in
             viewModel.updateSummary()
         }
-        .navigationTitle(.batteryHeatingSchedule)
-        .navigationBarTitleDisplayMode(.inline)
-        .loadable(viewModel.state, retry: { viewModel.load() })
-        .alert(alertContent: $viewModel.alertContent)
     }
 }
 

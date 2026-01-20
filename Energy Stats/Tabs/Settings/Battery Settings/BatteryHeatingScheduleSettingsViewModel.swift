@@ -10,6 +10,7 @@ import Energy_Stats_Core
 import Foundation
 
 struct BatteryHeatingScheduleSettingsViewData: Copiable {
+    var available: Bool
     var enabled: Bool
     var currentState: String?
     var timePeriod1: ChargeTimePeriod
@@ -25,6 +26,7 @@ struct BatteryHeatingScheduleSettingsViewData: Copiable {
 
     func create(copying previous: BatteryHeatingScheduleSettingsViewData) -> BatteryHeatingScheduleSettingsViewData {
         BatteryHeatingScheduleSettingsViewData(
+            available: previous.available,
             enabled: previous.enabled,
             timePeriod1: previous.timePeriod1,
             timePeriod2: previous.timePeriod2,
@@ -50,6 +52,7 @@ class BatteryHeatingScheduleSettingsViewModel: ObservableObject, HasLoadState, V
     @Published var alertContent: AlertContent?
     @Published var isDirty = false
     @Published var viewData = ViewData(
+        available: false,
         enabled: false,
         currentState: "The battery is in a stopped warm up state", // TODO: nil
         timePeriod1: .init(start: Date(), end: Date(), enabled: false),
@@ -82,12 +85,13 @@ class BatteryHeatingScheduleSettingsViewModel: ObservableObject, HasLoadState, V
 
             do {
                 let settings = try await networking.fetchBatteryHeatingSchedule(deviceSN: deviceSN)
-
+                
                 let timePeriod1 = ChargeTimePeriod(startTime: settings.period1Start, endTime: settings.period1End, enabled: settings.period1Enabled)
                 let timePeriod2 = ChargeTimePeriod(startTime: settings.period2Start, endTime: settings.period2End, enabled: settings.period2Enabled)
                 let timePeriod3 = ChargeTimePeriod(startTime: settings.period3Start, endTime: settings.period3End, enabled: settings.period3Enabled)
-
+                
                 let viewData = ViewData(
+                    available: true,
                     enabled: settings.enabled,
                     timePeriod1: timePeriod1,
                     timePeriod2: timePeriod2,
@@ -109,7 +113,10 @@ class BatteryHeatingScheduleSettingsViewModel: ObservableObject, HasLoadState, V
                 )
                 self.originalValue = viewData
                 self.viewData = viewData
-
+                
+                await setState(.inactive)
+            } catch NetworkError.foxServerError(41200, _) {
+                self.viewData = viewData.copy { $0.available = false }
                 await setState(.inactive)
             } catch {
                 await setState(.error(error, "Could not load settings"))
