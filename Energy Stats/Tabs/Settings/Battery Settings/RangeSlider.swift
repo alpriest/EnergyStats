@@ -11,15 +11,21 @@ import SwiftUI
 struct RangeSlider: View {
     @Binding var lower: Double
     @Binding var upper: Double
-    let lowerBounds: ClosedRange<Double>
-    let upperBounds: ClosedRange<Double>
+    private let lowerBounds: ClosedRange<Double>
+    private let upperBounds: ClosedRange<Double>
 
     private var overallBounds: ClosedRange<Double> {
         min(lowerBounds.lowerBound, upperBounds.lowerBound) ... max(lowerBounds.upperBound, upperBounds.upperBound)
     }
 
     private let step: Double = 1
-    private let tickCount: Int = 10
+    
+    init(lower: Binding<Double>, upper: Binding<Double>, lowerBounds: ClosedRange<Double>, upperBounds: ClosedRange<Double>) {
+        self._lower = lower
+        self._upper = upper
+        self.lowerBounds = lowerBounds
+        self.upperBounds = upperBounds
+    }
 
     var body: some View {
         VStack {
@@ -60,15 +66,15 @@ struct RangeSlider: View {
     }
 
     private func tickMarks(in geo: GeometryProxy) -> some View {
-        let total = tickCount - 1
+        let values = Array(stride(from: overallBounds.lowerBound, through: overallBounds.upperBound, by: step))
+
         return ZStack {
-            ForEach(0..<tickCount, id: \.self) { index in
-                let fraction = CGFloat(index) / CGFloat(total)
+            ForEach(values, id: \.self) { value in
                 Rectangle()
                     .fill(Color.gray.opacity(0.6))
                     .frame(width: 1, height: 10)
                     .position(
-                        x: fraction * geo.size.width,
+                        x: position(for: value, in: geo),
                         y: geo.size.height / 2
                     )
             }

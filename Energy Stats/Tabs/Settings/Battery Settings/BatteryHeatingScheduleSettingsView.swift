@@ -12,21 +12,21 @@ import SwiftUI
 struct BatteryHeatingScheduleSettingsView: View {
     @StateObject var viewModel: BatteryHeatingScheduleSettingsViewModel
     @Environment(\.requestReview) private var requestReview
-    
+
     init(networking: Networking, config: ConfigManaging) {
         _viewModel = StateObject(wrappedValue: BatteryHeatingScheduleSettingsViewModel(networking: networking, config: config))
     }
-    
+
     var body: some View {
         Group {
             switch viewModel.viewData.available {
             case true:
                 scheduleAvailable()
+                    .navigationTitle(.batteryHeatingSchedule)
             case false:
                 Text("Battery heating is not available")
             }
         }
-        .navigationTitle(.batteryHeatingSchedule)
         .navigationBarTitleDisplayMode(.inline)
         .loadable(viewModel.state, retry: { viewModel.load() })
         .alert(alertContent: $viewModel.alertContent)
@@ -75,9 +75,9 @@ struct BatteryHeatingScheduleSettingsView: View {
                         upperBounds: viewModel.viewData.minEndTemperature ... viewModel.viewData.maxEndTemperature
                     )
                 }
-                
+
                 Section(footer: Text("Solar generation can be used for heating. If the SoC is above 40% the battery can be used for heating. If the SoC is below 40%, the grid is used for heating. When the battery is being used for heating, it can discharge but won't charge. When grid or solar is being used for heating, the battery won't charge or discharge."))
-                {}
+                    {}
             }
 
             BottomButtonsView(dirty: viewModel.isDirty) {
