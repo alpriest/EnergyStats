@@ -23,7 +23,7 @@ public struct BatteryHeatingSchedule {
     public let maxStartTemperature: Double
     public let minEndTemperature: Double
     public let maxEndTemperature: Double
-
+    
     enum ParseError: Error {
         case missingResult
         case missingValue(String)
@@ -31,7 +31,7 @@ public struct BatteryHeatingSchedule {
         case invalidDouble(String, String)
         case invalidBool(String, String)
     }
-
+    
     private static func dictionary(from response: BatteryHeatingScheduleResponse) throws -> [String: String] {
         var dict: [String: String] = [:]
         for item in response.dataList {
@@ -39,24 +39,24 @@ public struct BatteryHeatingSchedule {
         }
         return dict
     }
-
+    
     private static func required(_ key: String, in dict: [String: String]) throws -> String {
         guard let value = dict[key] else { throw ParseError.missingValue(key) }
         return value
     }
-
+    
     private static func int(_ key: String, in dict: [String: String]) throws -> Int {
         let raw = try required(key, in: dict)
         guard let value = Int(raw) else { throw ParseError.invalidInt(key, raw) }
         return value
     }
-
+    
     private static func double(_ key: String, in dict: [String: String]) throws -> Double {
         let raw = try required(key, in: dict)
         guard let value = Double(raw) else { throw ParseError.invalidDouble(key, raw) }
         return value
     }
-
+    
     private static func bool(_ key: String, in dict: [String: String]) throws -> Bool {
         let raw = try required(key, in: dict)
         switch raw.lowercased() {
@@ -68,7 +68,7 @@ public struct BatteryHeatingSchedule {
             throw ParseError.invalidBool(key, raw)
         }
     }
-
+    
     private static func time(startHourKey: String, startMinuteKey: String, endHourKey: String, endMinuteKey: String, in dict: [String: String]) throws -> (start: Time, end: Time) {
         let sh = try int(startHourKey, in: dict)
         let sm = try int(startMinuteKey, in: dict)
@@ -76,7 +76,7 @@ public struct BatteryHeatingSchedule {
         let em = try int(endMinuteKey, in: dict)
         return (Time(hour: sh, minute: sm), Time(hour: eh, minute: em))
     }
-
+    
     private static func optionalTime(startHourKey: String, startMinuteKey: String, endHourKey: String, endMinuteKey: String, in dict: [String: String]) -> (start: Time, end: Time)? {
         guard let shRaw = dict[startHourKey],
               let smRaw = dict[startMinuteKey],
@@ -90,7 +90,9 @@ public struct BatteryHeatingSchedule {
         }
         return (Time(hour: sh, minute: sm), Time(hour: eh, minute: em))
     }
+}
 
+public extension BatteryHeatingSchedule {
     static func from(response: BatteryHeatingScheduleResponse) throws -> Self {
         let dict = try dictionary(from: response)
 

@@ -152,6 +152,10 @@ class NetworkValueCleaner: FoxAPIServicing {
     func openapi_getBatteryHeatingSchedule(deviceSN: String) async throws -> BatteryHeatingScheduleResponse {
         try await api.openapi_getBatteryHeatingSchedule(deviceSN: deviceSN)
     }
+    
+    func openapi_setBatteryHeatingSchedule(heatingScheduleRequest: BatteryHeatingScheduleRequest) async throws {
+        try await api.openapi_setBatteryHeatingSchedule(heatingScheduleRequest: heatingScheduleRequest)
+    }
 }
 
 extension Double {

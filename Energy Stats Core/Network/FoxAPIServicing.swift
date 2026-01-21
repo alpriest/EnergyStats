@@ -38,4 +38,5 @@ protocol FoxAPIServicing {
     func openapi_setPeakShavingSettings(deviceSN: String, importLimit: Double, soc: Int) async throws
     func openapi_fetchPowerGeneration(deviceSN: String) async throws -> PowerGenerationResponse
     func openapi_getBatteryHeatingSchedule(deviceSN: String) async throws -> BatteryHeatingScheduleResponse
+    func openapi_setBatteryHeatingSchedule(heatingScheduleRequest: BatteryHeatingScheduleRequest) async throws
 }

@@ -790,6 +790,12 @@ extension String {
     }
 }
 
+extension Int {
+    var stringValue: String {
+        String(describing: self)
+    }
+}
+
 extension Optional where Wrapped == String {
     var boolValue: Bool {
         guard let self else { return false }

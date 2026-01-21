@@ -32,6 +32,21 @@ public protocol Networking {
     func setPeakShavingSettings(deviceSN: String, importLimit: Double, soc: Int) async throws
     func fetchPowerGeneration(deviceSN: String) async throws -> PowerGenerationResponse
     func fetchBatteryHeatingSchedule(deviceSN: String) async throws -> BatteryHeatingSchedule
+    func setBatteryHeatingSchedule(
+        deviceSN: String,
+        enabled: Bool,
+        period1Start: Time,
+        period1End: Time,
+        period1Enabled: Bool,
+        period2Start: Time,
+        period2End: Time,
+        period2Enabled: Bool,
+        period3Start: Time,
+        period3End: Time,
+        period3Enabled: Bool,
+        startTemperature: Double,
+        endTemperature: Double
+    ) async throws
 }
 
 public protocol NetworkTracing {
@@ -43,12 +58,13 @@ public protocol NetworkTracing {
 public class NetworkService: Networking {
     let api: FoxAPIServicing
 
-    public static func standard(keychainStore: KeychainStoring,
-                                urlSession: URLSessionProtocol,
-                                tracer: NetworkTracing? = nil,
-                                isDemoUser: @escaping () -> Bool,
-                                dataCeiling: @escaping () -> DataCeiling) -> Networking
-    {
+    public static func standard(
+        keychainStore: KeychainStoring,
+        urlSession: URLSessionProtocol,
+        tracer: NetworkTracing? = nil,
+        isDemoUser: @escaping () -> Bool,
+        dataCeiling: @escaping () -> DataCeiling
+    ) -> Networking {
         let service = FoxAPIService(credentials: keychainStore, urlSession: urlSession, tracer: tracer)
         let api = NetworkValueCleaner(
             api: NetworkFacade(
@@ -166,10 +182,49 @@ public class NetworkService: Networking {
     public func fetchPowerGeneration(deviceSN: String) async throws -> PowerGenerationResponse {
         try await api.openapi_fetchPowerGeneration(deviceSN: deviceSN)
     }
-    
+
     public func fetchBatteryHeatingSchedule(deviceSN: String) async throws -> BatteryHeatingSchedule {
         let response = try await api.openapi_getBatteryHeatingSchedule(deviceSN: deviceSN)
         return try BatteryHeatingSchedule.from(response: response)
+    }
+
+    public func setBatteryHeatingSchedule(
+        deviceSN: String,
+        enabled: Bool,
+        period1Start: Time,
+        period1End: Time,
+        period1Enabled: Bool,
+        period2Start: Time,
+        period2End: Time,
+        period2Enabled: Bool,
+        period3Start: Time,
+        period3End: Time,
+        period3Enabled: Bool,
+        startTemperature: Double,
+        endTemperature: Double
+    ) async throws {
+        let heatingScheduleRequest = BatteryHeatingScheduleRequest(
+            sn: deviceSN,
+            batteryWarmUpEnable: enabled ? "enable" : "disable",
+            startTemperature: startTemperature.roundedToString(decimalPlaces: 0),
+            endTemperature: endTemperature.roundedToString(decimalPlaces: 0),
+            time1Enable: period1Enabled ? "enable" : "disable",
+            time1StartHour: period1Start.hour.stringValue,
+            time1StartMinute: period1Start.minute.stringValue,
+            time1EndHour: period1End.hour.stringValue,
+            time1EndMinute: period1End.minute.stringValue,
+            time2Enable: period2Enabled ? "enable" : "disable",
+            time2StartHour: period2Start.hour.stringValue,
+            time2StartMinute: period2Start.minute.stringValue,
+            time2EndHour: period2End.hour.stringValue,
+            time2EndMinute: period2End.minute.stringValue,
+            time3Enable: period3Enabled ? "enable" : "disable",
+            time3StartHour: period3Start.hour.stringValue,
+            time3StartMinute: period3Start.minute.stringValue,
+            time3EndHour: period3End.hour.stringValue,
+            time3EndMinute: period3End.minute.stringValue,
+        )
+        return try await api.openapi_setBatteryHeatingSchedule(heatingScheduleRequest: heatingScheduleRequest)
     }
 }
 

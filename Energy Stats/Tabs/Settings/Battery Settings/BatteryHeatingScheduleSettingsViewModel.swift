@@ -85,11 +85,11 @@ class BatteryHeatingScheduleSettingsViewModel: ObservableObject, HasLoadState, V
 
             do {
                 let settings = try await networking.fetchBatteryHeatingSchedule(deviceSN: deviceSN)
-                
+
                 let timePeriod1 = ChargeTimePeriod(startTime: settings.period1Start, endTime: settings.period1End, enabled: settings.period1Enabled)
                 let timePeriod2 = ChargeTimePeriod(startTime: settings.period2Start, endTime: settings.period2End, enabled: settings.period2Enabled)
                 let timePeriod3 = ChargeTimePeriod(startTime: settings.period3Start, endTime: settings.period3End, enabled: settings.period3Enabled)
-                
+
                 let viewData = ViewData(
                     available: true,
                     enabled: settings.enabled,
@@ -113,7 +113,7 @@ class BatteryHeatingScheduleSettingsViewModel: ObservableObject, HasLoadState, V
                 )
                 self.originalValue = viewData
                 self.viewData = viewData
-                
+
                 await setState(.inactive)
             } catch NetworkError.foxServerError(41200, _) {
                 self.viewData = viewData.copy { $0.available = false }
@@ -125,27 +125,31 @@ class BatteryHeatingScheduleSettingsViewModel: ObservableObject, HasLoadState, V
     }
 
     func save() {
-//        Task { @MainActor in
-//            guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
-//            await setState(.active(.saving))
-//
-//            do {
-//                let times: [ChargeTime] = [
-//                    viewData.timePeriod1.asChargeTime(),
-//                    viewData.timePeriod2.asChargeTime()
-//                ]
-//
-//                try await networking.setBatteryTimes(deviceSN: deviceSN, times: times)
-//                resetDirtyState()
-//                alertContent = AlertContent(title: "Success", message: "battery_charge_schedule_settings_saved")
-//                await setState(.inactive)
-//            } catch let NetworkError.foxServerError(code, _) where code == 44096 {
-//                alertContent = AlertContent(title: "Failed", message: "cannot_save_due_to_active_schedule")
-//                await setState(.inactive)
-//            } catch {
-//                await setState(.error(error, "Could not save settings"))
-//            }
-//        }
+        Task { @MainActor in
+            guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
+            await setState(.active(.saving))
+
+            do {
+                try await networking.setBatteryHeatingSchedule(deviceSN: deviceSN,
+                                                               enabled: viewData.enabled,
+                                                               period1Start: viewData.timePeriod1.start.toTime(),
+                                                               period1End: viewData.timePeriod1.end.toTime(),
+                                                               period1Enabled: viewData.timePeriod1.enabled,
+                                                               period2Start: viewData.timePeriod2.start.toTime(),
+                                                               period2End: viewData.timePeriod2.end.toTime(),
+                                                               period2Enabled: viewData.timePeriod2.enabled,
+                                                               period3Start: viewData.timePeriod3.start.toTime(),
+                                                               period3End: viewData.timePeriod3.end.toTime(),
+                                                               period3Enabled: viewData.timePeriod3.enabled,
+                                                               startTemperature: viewData.startTemperature,
+                                                               endTemperature: viewData.endTemperature)
+                resetDirtyState()
+                alertContent = AlertContent(title: "Success", message: "battery_heating_schedule_settings_saved")
+                await setState(.inactive)
+            } catch {
+                await setState(.error(error, "Could not save heating schedule"))
+            }
+        }
     }
 
     func reset() {
@@ -186,12 +190,12 @@ class BatteryHeatingScheduleSettingsViewModel: ObservableObject, HasLoadState, V
             period2.enabled ? period2 : nil,
             period3.enabled ? period3 : nil
         ]
-            .compactMap { $0 }
-            .sorted { first, second in
-                first.start < second.start
-            }
-            .map { $0.description }
-        
+        .compactMap { $0 }
+        .sorted { first, second in
+            first.start < second.start
+        }
+        .map { $0.description }
+
         if times.isEmpty {
             return "Your battery heater is enabled, but you do not have any time periods enabled. It won’t run until you enable at least one time period."
         }

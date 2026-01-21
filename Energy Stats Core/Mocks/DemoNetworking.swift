@@ -365,6 +365,9 @@ class DemoAPI: FoxAPIServicing {
 
         return result
     }
+    
+    func openapi_setBatteryHeatingSchedule(heatingScheduleRequest: BatteryHeatingScheduleRequest) async throws {
+    }
 
     private func data(filename: String) throws -> Data {
         guard let url = Bundle(for: type(of: self)).url(forResource: filename, withExtension: "json") else {
