@@ -57,6 +57,12 @@ public struct LocalizedString {
         case scheduleError44098 = "Fox Cloud error 44098. Could not save schedule. This may be because Fox do not support MaxSOC on OpenAPI."
         case solcastPrediction = "Solcast solar prediction"
         case fetchFailure = "Could not load. Check your internet connection"
+        case couldNotSaveHeatingSchedule = "heating_schedule_save_failed"
+        case couldNotLoadHeatingSchedule = "heating_schedule_load_failed"
+        case batteryHeaterNotEnabled = "battery_heater_not_enabled"
+        case batteryHeaterEnabledButNoTimesEnabled = "battery_heater_enabled_but_no_times_enabled"
+        case batteryHeaterEnabledWithTimes = "battery_heater_enabled_with_times"
+        case celsiusRange = "celsius_range"
 
         public enum Accessibility: String, RawRepresentable {
             case inverter = "accessibility.inverter"

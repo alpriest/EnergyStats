@@ -52,9 +52,9 @@ class BatteryHeatingScheduleSettingsViewModel: ObservableObject, HasLoadState, V
     @Published var alertContent: AlertContent?
     @Published var isDirty = false
     @Published var viewData = ViewData(
-        available: false,
+        available: true,
         enabled: false,
-        currentState: "The battery is in a stopped warm up state", // TODO: nil
+        currentState: nil,
         timePeriod1: .init(start: Date(), end: Date(), enabled: false),
         timePeriod2: .init(start: Date(), end: Date(), enabled: false),
         timePeriod3: .init(start: Date(), end: Date(), enabled: false),
@@ -93,6 +93,7 @@ class BatteryHeatingScheduleSettingsViewModel: ObservableObject, HasLoadState, V
                 let viewData = ViewData(
                     available: true,
                     enabled: settings.enabled,
+                    currentState: settings.warmUpState,
                     timePeriod1: timePeriod1,
                     timePeriod2: timePeriod2,
                     timePeriod3: timePeriod3,
@@ -119,7 +120,7 @@ class BatteryHeatingScheduleSettingsViewModel: ObservableObject, HasLoadState, V
                 self.viewData = viewData.copy { $0.available = false }
                 await setState(.inactive)
             } catch {
-                await setState(.error(error, "Could not load settings"))
+                await setState(.error(error, String(key: .couldNotLoadHeatingSchedule)))
             }
         }
     }
@@ -147,7 +148,7 @@ class BatteryHeatingScheduleSettingsViewModel: ObservableObject, HasLoadState, V
                 alertContent = AlertContent(title: "Success", message: "battery_heating_schedule_settings_saved")
                 await setState(.inactive)
             } catch {
-                await setState(.error(error, "Could not save heating schedule"))
+                await setState(.error(error, String(key: .couldNotSaveHeatingSchedule)))
             }
         }
     }
@@ -182,7 +183,7 @@ class BatteryHeatingScheduleSettingsViewModel: ObservableObject, HasLoadState, V
         endTemperature: Double
     ) -> String {
         guard enabled else {
-            return "Your battery heater is not enabled."
+            return String(key: .batteryHeaterNotEnabled)
         }
 
         let times = [
@@ -197,14 +198,14 @@ class BatteryHeatingScheduleSettingsViewModel: ObservableObject, HasLoadState, V
         .map { $0.description }
 
         if times.isEmpty {
-            return "Your battery heater is enabled, but you do not have any time periods enabled. It won’t run until you enable at least one time period."
+            return String(key: .batteryHeaterEnabledButNoTimesEnabled)
         }
 
-        return "When the battery temperature is between \(range(startTemperature, endTemperature)) the battery heater will be active during \(times.commaSeperated())."
+        return String(key: .batteryHeaterEnabledWithTimes, arguments: range(startTemperature, endTemperature), times.commaSeperated())
     }
 
     private func range(_ lower: Double, _ upper: Double) -> String {
-        lower.celsius + " and " + upper.celsius
+        String(key: .celsiusRange, arguments: lower.celsius, upper.celsius)
     }
 }
 
