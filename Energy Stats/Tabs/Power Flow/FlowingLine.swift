@@ -25,54 +25,6 @@ struct Line: Shape {
     }
 }
 
-struct FlowingLine<S: Shape>: View {
-    @State var phase: CGFloat = 0
-    private let totalPhase: CGFloat = 20
-    private let lineWidth: CGFloat = 4
-    let direction: Direction
-    let animationDuration: Double
-    let color: Color
-    let shape: S
-
-    enum Direction {
-        case down
-        case up
-    }
-
-    var body: some View {
-        shape
-            .stroke(
-                style: strokeStyle
-            )
-            .animation(.linear(duration: animationDuration).repeatForever(autoreverses: false), value: phase)
-            .foregroundColor(color)
-            .onAppear {
-                switch direction {
-                case .down:
-                    phase = 0 - totalPhase
-                case .up:
-                    phase = totalPhase
-                }
-            }
-    }
-
-    var strokeStyle: StrokeStyle {
-        StrokeStyle(
-            lineWidth: lineWidth,
-            dash: [totalPhase / 2.0],
-            dashPhase: phase
-        )
-    }
-}
-
-#Preview {
-    HStack {
-        FlowingLine(direction: .up, animationDuration: 1.5, color: .red, shape: MidYHorizontalLine())
-            .frame(width: 100, height: 300)
-            .background(Color.gray)
-    }
-}
-
 struct MovingDashesView: View {
     enum Direction { case up, down, left, right }
 
@@ -85,7 +37,7 @@ struct MovingDashesView: View {
     init(
         color: Color = .blue,
         direction: Direction = .right,
-        speed: CGFloat = 120,
+        speed: CGFloat = 40,
         dashLength: CGFloat = 10,
         dashSpacing: CGFloat = 5
     ) {
@@ -141,5 +93,13 @@ struct MovingDashesView: View {
         }
         .drawingGroup() // smoother on complex scenes
         .clipped()
+    }
+}
+
+#Preview {
+    HStack {
+        MovingDashesView(color: .red, direction: .down)
+            .frame(width: 10, height: 300)
+            .background(Color.gray)
     }
 }
