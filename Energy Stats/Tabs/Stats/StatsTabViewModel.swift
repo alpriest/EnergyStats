@@ -40,7 +40,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
         }
     }
 
-    @Published var touchHeaderTitle: LocalizedStringKey = "Touch the graph to see values at that time"
+    @Published var touchHeaderTitle: LocalizedStringKey = "stats_header_by_time"
     @Published var valuesAtTime: ValuesAtTime<StatsGraphValue>?
     @Published var selectedDate: Date?
 

@@ -44,7 +44,7 @@ struct ParametersGraphTabView: View {
                                 self.selectedDate = nil
                             })
                         } else {
-                            Text("Touch the graph to see values at that time")
+                            Text("stats_header_by_time")
                         }
                     }
                     .font(.caption)
