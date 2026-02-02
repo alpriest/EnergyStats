@@ -64,11 +64,12 @@ struct EnergyBreakdownChart: View {
         self.viewData = viewData
 
         let barData = [
-            BarItem(group: .inputs, variable: .gridConsumption, value: viewData.gridImport),
             BarItem(group: .inputs, variable: .dischargeEnergyToTal, value: viewData.batteryDischarge),
+            BarItem(group: .inputs, variable: .gridConsumption, value: viewData.gridImport),
             BarItem(group: .inputs, variable: .pvEnergyTotal, value: viewData.pvGeneration),
-            BarItem(group: .outputs, variable: .feedIn, value: viewData.gridExport),
+
             BarItem(group: .outputs, variable: .chargeEnergyToTal, value: viewData.batteryCharge),
+            BarItem(group: .outputs, variable: .feedIn, value: viewData.gridExport),
             BarItem(group: .outputs, variable: .loads, value: viewData.homeConsumption)
         ].filter { $0.value > 0 }
         self.barData = barData

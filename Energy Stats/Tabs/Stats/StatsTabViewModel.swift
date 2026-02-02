@@ -108,12 +108,12 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
     private func updateGraphVariables(for device: Device) async {
         await MainActor.run {
             graphVariables = [device.hasPV ? .pvEnergyTotal : nil,
-                              configManager.showOutputEnergyOnStats ? .generation : nil,
-                              ReportVariable.feedIn,
                               .gridConsumption,
-                              configManager.hasBattery ? .chargeEnergyToTal : nil,
                               configManager.hasBattery ? .dischargeEnergyToTal : nil,
                               .loads,
+                              ReportVariable.feedIn,
+                              configManager.hasBattery ? .chargeEnergyToTal : nil,
+                              configManager.showOutputEnergyOnStats ? .generation : nil,
                               (configManager.selfSufficiencyEstimateMode != .off && configManager.showSelfSufficiencyStatsGraphOverlay) ? .selfSufficiency : nil,
                               configManager.showInverterConsumption ? .inverterConsumption : nil,
                               configManager.showBatterySOCOnDailyStats ? .batterySOC : nil]
