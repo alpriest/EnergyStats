@@ -67,6 +67,7 @@ public protocol StoredConfig {
     var showBatterySOCOnDailyStats: Bool { get set }
     var allowNegativeLoad: Bool { get set }
     var workModes: [WorkMode] { get set }
+    var showOutputEnergyOnStats: Bool { get set }
 }
 
 public func DefaultParameterGroups() -> [ParameterGroup] {

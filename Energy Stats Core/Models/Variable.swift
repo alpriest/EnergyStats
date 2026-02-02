@@ -10,13 +10,16 @@ import SwiftUI
 public enum ValueUsage: String {
     case snapshot
     case total
+    case omit
 
     public func title() -> String {
         switch self {
         case .snapshot:
-            return String(localized: "power")
+            String(localized: "power")
         case .total:
-            return String(localized: "energy")
+            String(localized: "energy")
+        case .omit:
+            ""
         }
     }
 }

@@ -47,6 +47,7 @@ struct ParametersGraphTabView: View {
                             Text("Touch the graph to see values at that time")
                         }
                     }
+                    .font(.caption)
                     .padding(.vertical)
                     .frame(maxWidth: .infinity)
 

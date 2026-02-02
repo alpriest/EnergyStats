@@ -18,7 +18,7 @@ class GraphColoursSettingsViewModel: ObservableObject {
         })
 
         stats = Dictionary(uniqueKeysWithValues: ReportVariable.allCases.map {
-            ($0.title, $0.colour)
+            ($0.titleTotal, $0.colour)
         })
     }
 }

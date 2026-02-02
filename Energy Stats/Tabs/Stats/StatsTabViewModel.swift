@@ -35,10 +35,12 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
                 selectedDate = nil
                 valuesAtTime = nil
                 self.performLoad()
+                self.updateHeaderTitle()
             }
         }
     }
 
+    @Published var touchHeaderTitle: LocalizedStringKey = "Touch the graph to see values at that time"
     @Published var valuesAtTime: ValuesAtTime<StatsGraphValue>?
     @Published var selectedDate: Date?
 
@@ -106,7 +108,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
     private func updateGraphVariables(for device: Device) async {
         await MainActor.run {
             graphVariables = [device.hasPV ? .pvEnergyTotal : nil,
-                              .generation,
+                              configManager.showOutputEnergyOnStats ? .generation : nil,
                               ReportVariable.feedIn,
                               .gridConsumption,
                               configManager.hasBattery ? .chargeEnergyToTal : nil,
@@ -137,7 +139,15 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
             await updateGraphVariables(for: currentDevice)
         }
 
-        let reportVariables: [ReportVariable] = [.feedIn, .generation, .chargeEnergyToTal, .dischargeEnergyToTal, .gridConsumption, .loads, .pvEnergyTotal]
+        let reportVariables: [ReportVariable] = [
+            .feedIn,
+            configManager.showOutputEnergyOnStats ? .generation : nil,
+            .chargeEnergyToTal,
+            .dischargeEnergyToTal,
+            .gridConsumption,
+            .loads,
+            .pvEnergyTotal
+        ].compactMap { $0 }
 
         do {
             let updatedData: [StatsGraphValue]
@@ -181,7 +191,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
     }
 
     private func fetchBatterySOC(for device: Device, displayMode: StatsGraphDisplayMode) async throws -> [StatsGraphValue] {
-        guard configManager.showBatterySOCOnDailyStats else { return []}
+        guard configManager.showBatterySOCOnDailyStats else { return [] }
 
         let socData: [StatsGraphValue]
 
@@ -301,6 +311,18 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
         })
         data = refreshedData
         updateYScale()
+        updateHeaderTitle()
+    }
+    
+    private func updateHeaderTitle() {
+        touchHeaderTitle = switch displayMode {
+        case .day:
+            "stats_header_by_time"
+        case .month, .custom:
+            "stats_header_by_day"
+        case .year:
+            "stats_header_by_month"
+        }
     }
 
     private func updateScaledDatasets() -> [StatsGraphValue] {
@@ -424,7 +446,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
             return date.dayMonthString()
         case .year:
             return date.monthYearString()
-        case let .custom(_, _, unit):
+        case .custom(_, _, let unit):
             switch unit {
             case .days:
                 return date.dayMonthString()

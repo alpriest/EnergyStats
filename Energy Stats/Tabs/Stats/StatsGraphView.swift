@@ -12,7 +12,7 @@ import SwiftUI
 struct StatsGraphVariable: Identifiable, Equatable, Hashable {
     let type: ReportVariable
     var enabled: Bool
-    var id: String { type.title }
+    var id: String { type.titleTotal }
 
     init(_ type: ReportVariable, enabled: Bool = true) {
         self.type = type
@@ -78,12 +78,12 @@ struct StatsGraphView: View {
     var body: some View {
         ZStack {
             Chart {
-                ForEach(viewModel.data.filter { $0.isForNormalGraph }, id: \.type.title) {
-                    BarMark(
+                ForEach(viewModel.data.filter { $0.isForNormalGraph }, id: \.type.titleTotal) {
+                    LineMark(
                         x: .value("hour", $0.date, unit: viewModel.unit),
-                        y: .value("Amount", $0.graphValue)
+                        y: .value("Amount", $0.graphValue),
+                        series: .value("Series", $0.type.networkTitle)
                     )
-                    .position(by: .value("parameter", $0.type.networkTitle))
                     .foregroundStyle($0.type.colour)
                 }
 
@@ -201,7 +201,7 @@ struct StatsGraphView: View {
                let elementLocation = chartProxy.position(forX: date)
             {
                 let location = elementLocation - geometryReader[chartProxy.plotAreaFrame].origin.x
-                let filteredData = viewModel.data.filter({ $0.isForNormalGraph })
+                let filteredData = viewModel.data.filter { $0.isForNormalGraph }
 
                 if let firstDate = filteredData.first?.date,
                    let secondDate = filteredData.first(where: { $0.date > firstDate })?.date,

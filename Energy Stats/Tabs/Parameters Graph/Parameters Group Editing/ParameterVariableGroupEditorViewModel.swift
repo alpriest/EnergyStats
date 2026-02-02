@@ -26,6 +26,7 @@ class ParameterVariableGroupEditorViewModel: ObservableObject, ViewDataProviding
             if oldValue.selected != viewData.selected {
                 updateVariables(for: viewData.groups.first { $0.id == viewData.selected })
             }
+            isDirty = originalValue != viewData
         }
     }
     
@@ -35,7 +36,7 @@ class ParameterVariableGroupEditorViewModel: ObservableObject, ViewDataProviding
     
     private let rawVariables: [Variable]
     private var configManager: ConfigManaging
-    @Published var isDirty: Bool = false
+    @Published var isDirty = false
     var originalValue: ParameterVariableGroupEditorViewData?
 
     init(configManager: ConfigManaging) {
@@ -44,12 +45,11 @@ class ParameterVariableGroupEditorViewModel: ObservableObject, ViewDataProviding
         self.rawVariables = configManager.variables
         let viewData = ViewData(
             groups: groups,
-            variables: [],
+            variables: Self.variables(for: groups.first, from: configManager.variables),
             selected: groups.first?.id
         )
         self.originalValue = viewData
         self.viewData = viewData
-        updateVariables(for: groups.first)
     }
 
     func toggle(_ updating: ParameterGraphVariable) {
@@ -125,14 +125,20 @@ class ParameterVariableGroupEditorViewModel: ObservableObject, ViewDataProviding
         }
         configManager.parameterGroups = viewData.groups
     }
+    
+    private static func variables(for group: ParameterGroup?, from rawVariables: [Variable]) -> [ParameterGraphVariable] {
+        guard let group else { return [] }
+        
+        return rawVariables.map { rawVariable in
+            ParameterGraphVariable(rawVariable, isSelected: group.parameterNames.contains(rawVariable.variable))
+        }.sorted(by: { $0.type.name.lowercased() < $1.type.name.lowercased() })
+    }
 
     private func updateVariables(for group: ParameterGroup?) {
         guard let group else { return }
 
         viewData = viewData.copy {
-            $0.variables = rawVariables.map { rawVariable in
-                ParameterGraphVariable(rawVariable, isSelected: group.parameterNames.contains(rawVariable.variable))
-            }.sorted(by: { $0.type.name.lowercased() < $1.type.name.lowercased() })
+            $0.variables = Self.variables(for: group, from: rawVariables)
         }
     }
 }

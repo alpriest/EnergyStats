@@ -733,6 +733,11 @@ public class ConfigManager: ConfigManaging {
         get { config.workModes }
         set { config.workModes = newValue }
     }
+    
+    public var showOutputEnergyOnStats: Bool {
+        get { config.showOutputEnergyOnStats }
+        set { config.showOutputEnergyOnStats = newValue }
+    }
 }
 
 public enum BatteryResponseMapper {

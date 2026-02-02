@@ -24,6 +24,8 @@ extension TipType {
         switch self {
         case .placeholder:
             fatalError("Do not try to display this tip")
+        case .statsPageEnergyBalanceChartAdded:
+            "statsPageEnergyBalanceChartAdded"
         }
     }
 }

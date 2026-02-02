@@ -447,6 +447,7 @@ public class MockConfig: StoredConfig {
     public var showBatterySOCOnDailyStats: Bool = false
     public var allowNegativeLoad: Bool = false
     public var workModes: [WorkMode] = []
+    public var showOutputEnergyOnStats: Bool = false
 }
 
 public extension SolcastSite {

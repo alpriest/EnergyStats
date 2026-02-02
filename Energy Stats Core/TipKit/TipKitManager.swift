@@ -14,7 +14,11 @@ public final class TipKitManager {
     }
 
     public func hasSeen(tip: TipType) -> Bool {
+        #if DEBUG
+        false
+        #else
         config.seenTips.contains { $0 == tip }
+        #endif
     }
 
     public func markAsSeen(tip: TipType) {

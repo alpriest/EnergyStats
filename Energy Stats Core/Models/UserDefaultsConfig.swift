@@ -67,6 +67,7 @@ public class UserDefaultsConfig: StoredConfig {
         UserDefaults.shared.removeObject(forKey: "showBatterySOCOnDailyStats")
         UserDefaults.shared.removeObject(forKey: "allowNegativeLoad")
         UserDefaults.shared.removeObject(forKey: "workModes")
+        UserDefaults.shared.removeObject(forKey: "showOutputEnergyOnStats")
         UserDefaults.shared.synchronize()
     }
 
@@ -324,4 +325,7 @@ public class UserDefaultsConfig: StoredConfig {
     
     @UserDefaultsStoredCodable(key: "workModes", defaultValue: [])
     public var workModes: [WorkMode]
+    
+    @UserDefaultsStoredBool(key: "showOutputEnergyOnStats", defaultValue: false)
+    public var showOutputEnergyOnStats: Bool
 }

@@ -56,19 +56,21 @@ public enum ReportVariable: String, RawRepresentable, CaseIterable {
             return nil
         }
     }
+    
+    public var titleTotal: String {
+        title(usage: .total)
+    }
 
-    public var title: String {
-        let usage = ValueUsage.total
-
+    public func title(usage: ValueUsage) -> String {
         switch self {
         case .generation:
             return String(localized: "Output ") + usage.title()
         case .feedIn:
             return String(localized: "Feed-in ") + usage.title()
         case .chargeEnergyToTal:
-            return String(localized: "Charge ") + usage.title()
+            return String(localized: "Battery Charge ") + usage.title()
         case .dischargeEnergyToTal:
-            return String(localized: "Discharge ") + usage.title()
+            return String(localized: "Battery Discharge ") + usage.title()
         case .gridConsumption:
             return String(localized: "Grid consumption ") + usage.title()
         case .loads:

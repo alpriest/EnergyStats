@@ -81,6 +81,7 @@ public protocol ConfigManaging: FinancialConfigManager, SolcastConfigManager, Ba
     var showInverterConsumption: Bool { get set }
     var showBatterySOCOnDailyStats: Bool { get set }
     var workModes: [WorkMode] { get set }
+    var showOutputEnergyOnStats: Bool { get set }
 }
 
 public enum DeviceCapability {

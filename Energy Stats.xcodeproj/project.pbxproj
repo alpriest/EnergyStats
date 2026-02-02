@@ -149,6 +149,8 @@
 		414A40C02B989D9800321AA2 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414A40BF2B989D9800321AA2 /* NetworkService.swift */; };
 		414ACCA52BEAC2D700617EED /* StubKeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414ACCA42BEAC2D700617EED /* StubKeychainStore.swift */; };
 		414BF82829B4918300E2EB51 /* SettingsTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */; };
+		414C68902F2E08EA003F6074 /* EnergyBreakdownChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414C688F2F2E08E8003F6074 /* EnergyBreakdownChart.swift */; };
+		414C68922F2F4E3C003F6074 /* StatsGraphDisplayMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414C68912F2F4E3C003F6074 /* StatsGraphDisplayMode.swift */; };
 		414D7A312AC8CE9C0083923F /* DisplayUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D7A302AC8CE9C0083923F /* DisplayUnit.swift */; };
 		4155D70D2B28FC920071346A /* Optional+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4155D70C2B28FC920071346A /* Optional+Int.swift */; };
 		4156A22F2CB6770A00099A6A /* SolcastErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156A22E2CB6770700099A6A /* SolcastErrorAlertView.swift */; };
@@ -688,6 +690,8 @@
 		414A40BF2B989D9800321AA2 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		414ACCA42BEAC2D700617EED /* StubKeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubKeychainStore.swift; sourceTree = "<group>"; };
 		414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabViewModel.swift; sourceTree = "<group>"; };
+		414C688F2F2E08E8003F6074 /* EnergyBreakdownChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnergyBreakdownChart.swift; sourceTree = "<group>"; };
+		414C68912F2F4E3C003F6074 /* StatsGraphDisplayMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGraphDisplayMode.swift; sourceTree = "<group>"; };
 		414D7A302AC8CE9C0083923F /* DisplayUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayUnit.swift; sourceTree = "<group>"; };
 		4155D70C2B28FC920071346A /* Optional+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Int.swift"; sourceTree = "<group>"; };
 		4156A22E2CB6770700099A6A /* SolcastErrorAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolcastErrorAlertView.swift; sourceTree = "<group>"; };
@@ -1514,6 +1518,7 @@
 		417AA21B2A1245AE0073CD34 /* Stats */ = {
 			isa = PBXGroup;
 			children = (
+				414C688F2F2E08E8003F6074 /* EnergyBreakdownChart.swift */,
 				418773182EF972220057C5E2 /* Export */,
 				41038F972E6C37C1008A74C6 /* ApproximationsBackgroundView.swift */,
 				418C6E982AFB8A15000DE35F /* ApproximationsCalculator.swift */,
@@ -1526,6 +1531,7 @@
 				41CD1F312A1414C1006B0C00 /* StatsGraphVariableToggles.swift */,
 				418141442A12BABA00FFC6A6 /* StatsGraphView.swift */,
 				417AA2192A12454A0073CD34 /* StatsTabView.swift */,
+				414C68912F2F4E3C003F6074 /* StatsGraphDisplayMode.swift */,
 				417AA21C2A1245C00073CD34 /* StatsTabViewModel.swift */,
 			);
 			path = Stats;
@@ -2432,6 +2438,7 @@
 				41E165B32B0A877100B17590 /* SolcastSettingsViewModel.swift in Sources */,
 				41C249A52A77FC7400D8E9E7 /* WebView.swift in Sources */,
 				41A25D3D28CA5CDF00315714 /* ParametersGraphTabView.swift in Sources */,
+				414C68922F2F4E3C003F6074 /* StatsGraphDisplayMode.swift in Sources */,
 				41EB65FB2E05BD8900F53573 /* StepView.swift in Sources */,
 				41BCC24B2F1EBAAB00FB883E /* RangeSlider.swift in Sources */,
 				4140ECDA292D58D300992DD8 /* ParameterGraphVariable.swift in Sources */,
@@ -2502,6 +2509,7 @@
 				41E165BB2B0BE1BD00B17590 /* ForecastView.swift in Sources */,
 				413BF2892A99F8A500A32B0D /* ApproximationsView.swift in Sources */,
 				4149DE9B2B03C3AC004F5FC6 /* SolcastSettingsView.swift in Sources */,
+				414C68902F2E08EA003F6074 /* EnergyBreakdownChart.swift in Sources */,
 				411542ED2BED447A00BDE56D /* EditTemplateView.swift in Sources */,
 				416AE4382A7D956E003D0122 /* AlertCopy.swift in Sources */,
 				410484C82AD49D95007F68C0 /* CT2-icon.swift in Sources */,
@@ -2891,7 +2899,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 97;
+				CURRENT_PROJECT_VERSION = 98;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2914,7 +2922,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.117;
+				MARKETING_VERSION = 2.118;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2960,7 +2968,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 97;
+				CURRENT_PROJECT_VERSION = 98;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2977,7 +2985,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.117;
+				MARKETING_VERSION = 2.118;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

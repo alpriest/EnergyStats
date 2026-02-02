@@ -10,50 +10,13 @@ import Combine
 import Energy_Stats_Core
 import SwiftUI
 
-enum StatsGraphDisplayMode: Equatable {
-    case day(Date)
-    case month(_ month: Int, _ year: Int)
-    case year(Int)
-    case custom(_ start: Date, _ end: Date, _ unit: CustomDateRangeDisplayUnit)
-
-    func unit() -> Calendar.Component {
-        switch self {
-        case .day:
-            .hour
-        case .month:
-            .day
-        case .year:
-            .month
-        case let .custom(_, _, unit):
-            switch unit {
-            case .days:
-                .day
-            case .months:
-                .month
-            }
-        }
-    }
-
-    static func ==(lhs: StatsGraphDisplayMode, rhs: StatsGraphDisplayMode) -> Bool {
-        switch (lhs, rhs) {
-        case let (.day(lDate), .day(rDate)):
-            return lDate.isSame(as: rDate)
-        case let (.month(lMonth, lYear), .month(rMonth, rYear)):
-            return lYear == rYear && lMonth == rMonth
-        case let (.year(lYear), .year(rYear)):
-            return lYear == rYear
-        default:
-            return false
-        }
-    }
-}
-
 struct StatsTabView: View {
     @StateObject var viewModel: StatsTabViewModel
     @State private var showingExporter = false
     @State private var appSettings: AppSettings
     private var appSettingsPublisher: LatestAppSettingsPublisher
-    @AppStorage("showStatsGraph") private var showingGraph = true
+    @AppStorage("showStatsGraph") private var showingTimeGraph = true
+    @AppStorage("showingEnergyBreakdownGraph") private var showingEnergyBreakdownGraph = true
 
     init(configManager: ConfigManaging, networking: Networking) {
         _viewModel = .init(wrappedValue: StatsTabViewModel(networking: networking, configManager: configManager))
@@ -65,11 +28,12 @@ struct StatsTabView: View {
         Group {
             VStack {
                 StatsDatePickerHeaderView(viewModel: StatsDatePickerHeaderViewModel($viewModel.displayMode),
-                                          showingGraph: $showingGraph)
+                                          showingTimeGraph: $showingTimeGraph,
+                                          showingEnergyBreakdownGraph: $showingEnergyBreakdownGraph)
 
                 ScrollView {
                     VStack {
-                        if showingGraph {
+                        if showingTimeGraph {
                             HStack {
                                 Group {
                                     if viewModel.valuesAtTime != nil, let selectedDate = viewModel.selectedDate {
@@ -81,9 +45,11 @@ struct StatsTabView: View {
                                             self.viewModel.calculateApproximations()
                                         })
                                     } else {
-                                        Text("Touch the graph to see values at that time")
+                                        Text(viewModel.touchHeaderTitle)
                                     }
-                                }.padding(.vertical)
+                                }
+                                .padding(.vertical)
+                                .font(.caption)
                             }.frame(maxWidth: .infinity)
 
                             StatsGraphView(
@@ -92,11 +58,12 @@ struct StatsTabView: View {
                                 valuesAtTime: $viewModel.valuesAtTime,
                                 appSettings: appSettings
                             )
-                            .frame(height: 250)
-                            .padding(.vertical)
+                            .frame(height: graphHeight)
+                        }
 
-                        } else {
-                            Spacer()
+                        if showingEnergyBreakdownGraph {
+                            EnergyBreakdownChart(.init(viewModel: viewModel))
+                                .frame(height: graphHeight)
                         }
                     }.loadable(viewModel.state, options: [.retry], overlay: true, retry: { Task { await viewModel.load() } })
 
@@ -123,6 +90,7 @@ struct StatsTabView: View {
             .padding(.horizontal)
             .analyticsScreen(.statsTab)
         }
+        .tipKit(tip: .statsPageEnergyBalanceChartAdded)
         .task {
             await viewModel.load()
         }
@@ -130,6 +98,17 @@ struct StatsTabView: View {
             self.appSettings = $0
         }
         .trackVisibility(on: viewModel)
+    }
+
+    private var graphHeight: CGFloat {
+        switch (showingTimeGraph, showingEnergyBreakdownGraph) {
+        case (true, true):
+            200
+        case (false, false):
+            0
+        default:
+            300
+        }
     }
 }
 

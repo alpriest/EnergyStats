@@ -62,10 +62,10 @@ struct StatsGraphVariableToggles: View {
                         GraphVariableColourIndicator(color: variable.type.colour)
                             .padding(.top, 3)
 
-                        Text(variable.type.title)
+                        Text(variable.type.title(usage: .total))
                     }
 
-                    if variable.type.title != variable.type.description, appSettings.showGraphValueDescriptions {
+                    if variable.type.title(usage: .total) != variable.type.description, appSettings.showGraphValueDescriptions {
                         Text(variable.type.description)
                             .font(.caption)
                             .foregroundColor(Color("text_dimmed"))

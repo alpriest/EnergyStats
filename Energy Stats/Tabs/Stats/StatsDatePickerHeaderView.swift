@@ -10,7 +10,8 @@ import SwiftUI
 
 struct StatsDatePickerHeaderView: View {
     @ObservedObject var viewModel: StatsDatePickerHeaderViewModel
-    @Binding var showingGraph: Bool
+    @Binding var showingTimeGraph: Bool
+    @Binding var showingEnergyBreakdownGraph: Bool
     @State private var showingCustomRangePicker = false
 
     var body: some View {
@@ -47,9 +48,16 @@ struct StatsDatePickerHeaderView: View {
                 Divider()
 
                 Button {
-                    showingGraph.toggle()
+                    showingTimeGraph.toggle()
                 } label: {
-                    Label(showingGraph ? "Hide graph" : "Show graph", systemImage: "chart.bar.xaxis")
+                    Label(showingTimeGraph ? "Hide time graph" : "Show time graph", systemImage: "chart.bar.xaxis.ascending.badge.clock")
+                }
+                .buttonStyle(.bordered)
+
+                Button {
+                    showingEnergyBreakdownGraph.toggle()
+                } label: {
+                    Label(showingEnergyBreakdownGraph ? "Hide energy breakdown" : "Show energy breakdown", systemImage: "chart.bar.fill")
                 }
                 .buttonStyle(.bordered)
 
@@ -207,6 +215,10 @@ struct StatsDatePickerHeaderView: View {
 }
 
 #Preview {
-    StatsDatePickerHeaderView(viewModel: StatsDatePickerHeaderViewModel(.constant(.custom(.now, .now, .days))), showingGraph: .constant(true))
-        .frame(height: 200)
+    StatsDatePickerHeaderView(
+        viewModel: StatsDatePickerHeaderViewModel(.constant(.custom(.now, .now, .days))),
+        showingTimeGraph: .constant(true),
+        showingEnergyBreakdownGraph: .constant(true)
+    )
+    .frame(height: 200)
 }
