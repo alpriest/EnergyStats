@@ -208,6 +208,12 @@ class SettingsTabViewModel: ObservableObject {
             config.currencySymbol = currencySymbol
         }
     }
+    
+    @Published var showOutputEnergyOnStats: Bool {
+        didSet {
+            config.showOutputEnergyOnStats = showOutputEnergyOnStats
+        }
+    }
 
     private(set) var config: ConfigManaging
     private let userManager: UserManager
@@ -253,6 +259,7 @@ class SettingsTabViewModel: ObservableObject {
         showBatterySOCOnDailyStats = config.showBatterySOCOnDailyStats
         allowNegativeLoad = config.allowNegativeLoad
         currencySymbol = config.currencySymbol
+        showOutputEnergyOnStats = config.showOutputEnergyOnStats
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }

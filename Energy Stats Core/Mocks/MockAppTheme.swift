@@ -61,7 +61,8 @@ public extension AppSettings {
             detectedActiveTemplate: nil,
             showInverterConsumption: false,
             showBatterySOCOnDailyStats: false,
-            allowNegativeLoad: false
+            allowNegativeLoad: false,
+            showOutputEnergyOnStats: false
         )
     }
 }

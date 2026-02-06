@@ -125,7 +125,7 @@ public class ConfigManager: ConfigManaging {
             selectedDeviceSN = nil
         }
     }
-    
+
     public func loginAsDemo() {
         appSettingsStore.update(.mock())
     }
@@ -718,7 +718,7 @@ public class ConfigManager: ConfigManaging {
             ))
         }
     }
-    
+
     public var allowNegativeLoad: Bool {
         get { config.allowNegativeLoad }
         set {
@@ -728,15 +728,19 @@ public class ConfigManager: ConfigManaging {
             ))
         }
     }
-    
+
     public var workModes: [WorkMode] {
         get { config.workModes }
         set { config.workModes = newValue }
     }
-    
+
     public var showOutputEnergyOnStats: Bool {
         get { config.showOutputEnergyOnStats }
-        set { config.showOutputEnergyOnStats = newValue }
+        set { config.showOutputEnergyOnStats = newValue
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
+                showOutputEnergyOnStats: config.showOutputEnergyOnStats
+            ))
+        }
     }
 }
 

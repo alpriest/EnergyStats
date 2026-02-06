@@ -23,11 +23,11 @@ struct InverterSettingsView: View {
     @Binding var shouldCombineCT2WithLoadsPower: Bool
     @Binding var showInverterConsumption: Bool
     @Binding var allowNegativeLoad: Bool
+    @Binding var showOutputEnergyOnStats: Bool
 
     var body: some View {
         Form {
             InverterChoiceView(viewModel: InverterChoiceViewModel(configManager: configManager))
-
 
             Section {
                 NavigationLink("Manage schedules") {
@@ -71,6 +71,10 @@ struct InverterSettingsView: View {
 
                 Toggle(isOn: $allowNegativeLoad) {
                     Text("Allow negative house load")
+                }
+                
+                Toggle(isOn: $showOutputEnergyOnStats) {
+                    Text("Show output energy on stats")
                 }
 
             } header: {
@@ -166,7 +170,8 @@ struct InverterSettingsView_Previews: PreviewProvider {
                 ct2DisplayMode: .constant(.asPowerString),
                 shouldCombineCT2WithLoadsPower: .constant(false),
                 showInverterConsumption: .constant(false),
-                allowNegativeLoad: .constant(false)
+                allowNegativeLoad: .constant(false),
+                showOutputEnergyOnStats: .constant(false)
             )
         }
     }

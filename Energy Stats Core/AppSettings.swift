@@ -60,6 +60,7 @@ public struct AppSettings {
     public var showInverterConsumption: Bool
     public var showBatterySOCOnDailyStats: Bool
     public var allowNegativeLoad: Bool
+    public var showOutputEnergyOnStats: Bool
 
     public init(
         showColouredLines: Bool,
@@ -106,7 +107,8 @@ public struct AppSettings {
         detectedActiveTemplate: String?,
         showInverterConsumption: Bool,
         showBatterySOCOnDailyStats: Bool,
-        allowNegativeLoad: Bool
+        allowNegativeLoad: Bool,
+        showOutputEnergyOnStats: Bool
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -153,6 +155,7 @@ public struct AppSettings {
         self.showInverterConsumption = showInverterConsumption
         self.showBatterySOCOnDailyStats = showBatterySOCOnDailyStats
         self.allowNegativeLoad = allowNegativeLoad
+        self.showOutputEnergyOnStats = showOutputEnergyOnStats
     }
 
     public func copy(
@@ -200,7 +203,8 @@ public struct AppSettings {
         detectedActiveTemplate: String? = nil,
         showInverterConsumption: Bool? = nil,
         showBatterySOCOnDailyStats: Bool? = nil,
-        allowNegativeLoad: Bool? = nil
+        allowNegativeLoad: Bool? = nil,
+        showOutputEnergyOnStats: Bool? = nil
     ) -> AppSettings {
         AppSettings(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -247,7 +251,8 @@ public struct AppSettings {
             detectedActiveTemplate: detectedActiveTemplate ?? self.detectedActiveTemplate,
             showInverterConsumption: showInverterConsumption ?? self.showInverterConsumption,
             showBatterySOCOnDailyStats: showBatterySOCOnDailyStats ?? self.showBatterySOCOnDailyStats,
-            allowNegativeLoad: allowNegativeLoad ?? self.allowNegativeLoad
+            allowNegativeLoad: allowNegativeLoad ?? self.allowNegativeLoad,
+            showOutputEnergyOnStats: showOutputEnergyOnStats ?? self.showOutputEnergyOnStats
         )
     }
 
@@ -297,7 +302,8 @@ public struct AppSettings {
             detectedActiveTemplate: nil,
             showInverterConsumption: config.showInverterConsumption,
             showBatterySOCOnDailyStats: config.showBatterySOCOnDailyStats,
-            allowNegativeLoad: config.allowNegativeLoad
+            allowNegativeLoad: config.allowNegativeLoad,
+            showOutputEnergyOnStats: config.showOutputEnergyOnStats
         )
     }
 }
