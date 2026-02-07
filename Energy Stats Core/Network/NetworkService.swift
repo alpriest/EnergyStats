@@ -67,7 +67,7 @@ public class NetworkService: Networking {
     ) -> Networking {
         let service = FoxAPIService(credentials: keychainStore, urlSession: urlSession, tracer: tracer)
         let api = NetworkValueCleaner(
-            api: NetworkFacade(
+            api: NetworkDemoSwitchingFacade(
                 api: NetworkCache(api: service),
                 isDemoUser: isDemoUser,
                 store: keychainStore
@@ -94,11 +94,11 @@ public class NetworkService: Networking {
     }
 
     public func fetchRealData(deviceSN: String, variables: [String]) async throws -> OpenQueryResponse {
-        try await api.openapi_fetchRealData(deviceSN: deviceSN, variables: variables)
+        try await api.openapi_fetchRealData(deviceSN: deviceSN, variables: variables.sorted())
     }
 
     public func fetchHistory(deviceSN: String, variables: [String], start: Date, end: Date) async throws -> OpenHistoryResponse {
-        try await api.openapi_fetchHistory(deviceSN: deviceSN, variables: variables, start: start, end: end)
+        try await api.openapi_fetchHistory(deviceSN: deviceSN, variables: variables.sorted(), start: start, end: end)
     }
 
     public func fetchVariables() async throws -> [OpenApiVariable] {
@@ -106,7 +106,7 @@ public class NetworkService: Networking {
     }
 
     public func fetchReport(deviceSN: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [OpenReportResponse] {
-        try await api.openapi_fetchReport(deviceSN: deviceSN, variables: variables, queryDate: queryDate, reportType: reportType)
+        try await api.openapi_fetchReport(deviceSN: deviceSN, variables: variables.sorted(), queryDate: queryDate, reportType: reportType)
     }
 
     public func fetchBatterySettings(deviceSN: String) async throws -> BatterySOCResponse {

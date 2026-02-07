@@ -108,7 +108,7 @@ class NetworkCache: FoxAPIServicing {
     }
 
     func openapi_fetchRealData(deviceSN: String, variables: [String]) async throws -> OpenQueryResponse {
-        let key = makeKey(base: #function, arguments: deviceSN, variables.sorted().joined(separator: "_"))
+        let key = makeKey(base: #function, arguments: deviceSN, variables.joined(separator: "_"))
 
         if let item = cache[key], let cached = item.item as? OpenQueryResponse, item.isFresherThan(interval: shortCacheDurationInSeconds) {
             return cached
@@ -120,7 +120,7 @@ class NetworkCache: FoxAPIServicing {
     }
 
     func openapi_fetchHistory(deviceSN: String, variables: [String], start: Date, end: Date) async throws -> OpenHistoryResponse {
-        let key = makeKey(base: #function, arguments: deviceSN, variables.sorted().joined(separator: "_"), String(start.timeIntervalSince1970), String(end.timeIntervalSince1970))
+        let key = makeKey(base: #function, arguments: deviceSN, variables.joined(separator: "_"), String(start.timeIntervalSince1970), String(end.timeIntervalSince1970))
 
         if let item = cache[key], let cached = item.item as? OpenHistoryResponse, item.isFresherThan(interval: shortCacheDurationInSeconds) {
             return cached
@@ -144,7 +144,7 @@ class NetworkCache: FoxAPIServicing {
     }
 
     func openapi_fetchReport(deviceSN: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [OpenReportResponse] {
-        let key = makeKey(base: #function, arguments: deviceSN, variables.map { $0.networkTitle }.sorted().joined(separator: "_"), queryDate.toString(), reportType.rawValue)
+        let key = makeKey(base: #function, arguments: deviceSN, variables.map { $0.networkTitle }.joined(separator: "_"), queryDate.toString(), reportType.rawValue)
 
         if let item = cache[key], let cached = item.item as? [OpenReportResponse], item.isFresherThan(interval: shortCacheDurationInSeconds) {
             return cached

@@ -121,3 +121,9 @@ public enum ReportVariable: String, RawRepresentable, CaseIterable {
         }
     }
 }
+
+extension [ReportVariable] {
+    func sorted() -> [ReportVariable] {
+        self.sorted(by: { $0.networkTitle < $1.networkTitle })
+    }
+}

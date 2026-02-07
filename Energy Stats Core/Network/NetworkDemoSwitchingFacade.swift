@@ -1,5 +1,5 @@
 //
-//  NetworkFacade.swift
+//  NetworkDemoSwitchingFacade.swift
 //  Energy Stats
 //
 //  Created by Alistair Priest on 10/10/2022.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class NetworkFacade: FoxAPIServicing {
+class NetworkDemoSwitchingFacade: FoxAPIServicing {
     private let api: FoxAPIServicing
     private let demoAPI: FoxAPIServicing
     private let isDemoUserProvider: () -> Bool
