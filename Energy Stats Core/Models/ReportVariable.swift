@@ -80,7 +80,7 @@ public enum ReportVariable: String, RawRepresentable, CaseIterable {
         case .pvEnergyTotal:
             return String(localized: "Solar ") + usage.title()
         case .inverterConsumption:
-            return String(localized: "Inverter consumption")
+            return String(localized: "Inverter Consumption")
         case .batterySOC:
             return String(localized: "Battery SOC")
         }

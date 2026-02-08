@@ -6,13 +6,13 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ""
+            "value" : "FoxESS Cloud-Status"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ""
+            "value" : "Estado de FoxESS Cloud"
           }
         },
         "it" : {
@@ -34,13 +34,13 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ""
+            "value" : "FoxESS Cloud-Status"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ""
+            "value" : "Estado de FoxESS Cloud"
           }
         },
         "it" : {
@@ -8505,13 +8505,13 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ""
+            "value" : "FoxESS Cloud-Status"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ""
+            "value" : "Estado de FoxESS Cloud"
           }
         },
         "it" : {
@@ -9273,7 +9273,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hide energy breakdown"
+            "value" : "Energieaufteilung ausblenden"
           }
         },
         "es" : {
