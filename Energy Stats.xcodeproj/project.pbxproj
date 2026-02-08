@@ -1500,17 +1500,17 @@
 		416AE4342A7D2C67003D0122 /* Inverter */ = {
 			isa = PBXGroup;
 			children = (
-				417E1CE32E1E473A009E8374 /* InverterWorkModeViewModel.swift */,
-				417E1CE12E1E472D009E8374 /* InverterWorkModeView.swift */,
-				410F41572DA80D7500DEE2F4 /* Advanced */,
+				410F41282DA5BD3C00DEE2F4 /* ESLabeledContent.swift */,
 				410F412A2DA5BD5D00DEE2F4 /* ESLabeledText.swift */,
-				418C09172B1783F300183603 /* Schedule */,
+				414536D22D3190E700AE4A29 /* FirmwareLoadingView.swift */,
 				4130364A29B8BE7F006B5CE9 /* InverterChoiceView.swift */,
 				41626CCF29D969E9003FEB00 /* InverterFirmwareVersionsView.swift */,
 				416AE4352A7D2C8B003D0122 /* InverterSettingsView.swift */,
-				410F41282DA5BD3C00DEE2F4 /* ESLabeledContent.swift */,
-				414536D22D3190E700AE4A29 /* FirmwareLoadingView.swift */,
+				417E1CE12E1E472D009E8374 /* InverterWorkModeView.swift */,
+				417E1CE32E1E473A009E8374 /* InverterWorkModeViewModel.swift */,
+				410F41572DA80D7500DEE2F4 /* Advanced */,
 				41B5910E2ED1BBFE005B34D5 /* Peak Shaving */,
+				418C09172B1783F300183603 /* Schedule */,
 			);
 			path = Inverter;
 			sourceTree = "<group>";

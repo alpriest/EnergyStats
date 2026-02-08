@@ -110,7 +110,6 @@ public class NetworkService: Networking {
     }
 
     public func fetchBatterySettings(deviceSN: String) async throws -> BatterySOCResponse {
-        try await Task.sleep(for: .seconds(5))
         return try await api.openapi_fetchBatterySoc(deviceSN: deviceSN)
     }
 
@@ -205,20 +204,20 @@ public class NetworkService: Networking {
     ) async throws {
         let heatingScheduleRequest = BatteryHeatingScheduleRequest(
             sn: deviceSN,
-            batteryWarmUpEnable: enabled ? "enable" : "disable",
+            batteryWarmUpEnable: enabled.asEnableDisable,
             startTemperature: startTemperature.roundedToString(decimalPlaces: 0),
             endTemperature: endTemperature.roundedToString(decimalPlaces: 0),
-            time1Enable: period1Enabled ? "enable" : "disable",
+            time1Enable: period1Enabled.asEnableDisable,
             time1StartHour: period1Start.hour.stringValue,
             time1StartMinute: period1Start.minute.stringValue,
             time1EndHour: period1End.hour.stringValue,
             time1EndMinute: period1End.minute.stringValue,
-            time2Enable: period2Enabled ? "enable" : "disable",
+            time2Enable: period2Enabled.asEnableDisable,
             time2StartHour: period2Start.hour.stringValue,
             time2StartMinute: period2Start.minute.stringValue,
             time2EndHour: period2End.hour.stringValue,
             time2EndMinute: period2End.minute.stringValue,
-            time3Enable: period3Enabled ? "enable" : "disable",
+            time3Enable: period3Enabled.asEnableDisable,
             time3StartHour: period3Start.hour.stringValue,
             time3StartMinute: period3Start.minute.stringValue,
             time3EndHour: period3End.hour.stringValue,

@@ -11,6 +11,10 @@ public extension Bool {
     var intValue: Int {
         self ? 1 : 0
     }
+    
+    var asEnableDisable: String {
+        self ? "enable" : "disable"
+    }
 }
 
 public extension Int {

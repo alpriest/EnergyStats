@@ -81,46 +81,8 @@ struct InverterSettingsView: View {
                 Text("Display Options")
             }
 
-//            Section {
-//                Toggle(isOn: $showInverterTemperature) {
-//                    Text("Show BMS temperature")
-//                }
-//
-//                Toggle(isOn: $showInverterTemperature) {
-//                    Text("Show inverter temperature")
-//                }
-//            } header: {
-//                Text("Inverter temperatures")
-//            }
-
-            Section {
-                Toggle(isOn: $shouldInvertCT2) {
-                    Text("Invert CT2 values when detected")
-                }
-
-                Toggle(isOn: $shouldCombineCT2WithPVPower) {
-                    Text("Combine CT2 with PV power")
-                }
-
-                Toggle(isOn: $shouldCombineCT2WithLoadsPower) {
-                    Text("Combine CT2 with Loads power")
-                }
-
-                HStack {
-                    Text("CT2")
-                    Spacer()
-                    Picker("CT2 Display mode", selection: $ct2DisplayMode) {
-                        Text("Hidden").tag(CT2DisplayMode.hidden)
-                        Text("Icon").tag(CT2DisplayMode.separateIcon)
-                        Text("As string").tag(CT2DisplayMode.asPowerString)
-                    }.pickerStyle(.segmented)
-                }
-            } header: {
-                Text("CT2 Settings")
-            } footer: {
-                Text("invert_ct2_footnote")
-            }
-
+            ct2Setttings()
+            
             FirmwareLoadingView(configManager: configManager, networking: networking)
 
             if let currentDevice = configManager.currentDevice.value {
@@ -130,14 +92,44 @@ struct InverterSettingsView: View {
                     ESLabeledText("Station name", value: currentDevice.stationName)
                 }
                 .contentShape(Rectangle())
-                .alertCopy(text(currentDevice))
+                .alertCopy(copyText(for: currentDevice))
             }
 
         }
         .navigationTitle(.inverter)
     }
+    
+    private func ct2Setttings() -> some View {
+        Section {
+            Toggle(isOn: $shouldInvertCT2) {
+                Text("Invert CT2 values when detected")
+            }
 
-    func text(_ currentDevice: Device) -> String {
+            Toggle(isOn: $shouldCombineCT2WithPVPower) {
+                Text("Combine CT2 with PV power")
+            }
+
+            Toggle(isOn: $shouldCombineCT2WithLoadsPower) {
+                Text("Combine CT2 with Loads power")
+            }
+
+            HStack {
+                Text("CT2")
+                Spacer()
+                Picker("CT2 Display mode", selection: $ct2DisplayMode) {
+                    Text("Hidden").tag(CT2DisplayMode.hidden)
+                    Text("Icon").tag(CT2DisplayMode.separateIcon)
+                    Text("As string").tag(CT2DisplayMode.asPowerString)
+                }.pickerStyle(.segmented)
+            }
+        } header: {
+            Text("CT2 Settings")
+        } footer: {
+            Text("invert_ct2_footnote")
+        }
+    }
+
+    private func copyText(for currentDevice: Device) -> String {
         [
             makePair("Station name", value: currentDevice.stationName),
             makePair("Device Serial No.", value: currentDevice.deviceSN),

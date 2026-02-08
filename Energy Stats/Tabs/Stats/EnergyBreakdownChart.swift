@@ -88,11 +88,18 @@ struct EnergyBreakdownChart: View {
     }
 
     private enum Group: String, CaseIterable, Identifiable {
-        case inputs = "Energy Sources"
-        case outputs = "Energy Uses"
+        case inputs
+        case outputs
 
         var id: String { rawValue }
-        var title: String { rawValue }
+        var title: LocalizedStringKey {
+            switch self {
+            case .inputs:
+                "Energy Sources"
+            case .outputs:
+                "Energy Uses"
+            }
+        }
     }
 
     private struct BarItem: Identifiable {
@@ -106,7 +113,7 @@ struct EnergyBreakdownChart: View {
         VStack(alignment: .leading, spacing: 8) {
             Chart(barData) { item in
                 BarMark(
-                    x: .value("Group", item.group.title),
+                    x: .value("Group", item.group.rawValue),
                     y: .value("kWh", item.value)
                 )
                 .foregroundStyle(by: .value("Component", item.variable.title(usage: .omit)))
@@ -125,8 +132,8 @@ struct EnergyBreakdownChart: View {
                     AxisGridLine()
                     AxisTick()
                     AxisValueLabel {
-                        if let title = value.as(String.self) {
-                            Text(title + " " + total(for: title, from: barData))
+                        if let rawTitle = value.as(String.self), let group = Group(rawValue: rawTitle) {
+                            Text(group.title) + Text(" " + total(for: rawTitle, from: barData))
                         }
                     }
                 }
@@ -143,15 +150,15 @@ struct EnergyBreakdownChart: View {
     }
 
     private func total(for groupTitle: String, from barData: [BarItem]) -> String {
-        if let group = Group.allCases.first(where: { $0.title == groupTitle }) {
+        if let group = Group.allCases.first(where: { $0.rawValue == groupTitle }) {
             return total(for: group, from: barData)
         } else {
             return ""
         }
     }
 
-    private func label(for category: ReportVariable, value: Double) -> String {
-        "\(value.kWh(1)) \(category.title(usage: .omit))"
+    private func label(for reportVariable: ReportVariable, value: Double) -> String {
+        "\(value.kWh(1)) \(reportVariable.title(usage: .omit))"
     }
 }
 
