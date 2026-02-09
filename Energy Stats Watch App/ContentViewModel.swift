@@ -48,7 +48,7 @@ class ContentViewModel {
                         Task { await self.loadData() }
                     }
                 } else {
-                    loadState = .error(nil, "No device/API key found. Open Energy Stats on your phone to sync.2")
+                    loadState = .error(nil, "No device/API key found. Open Energy Stats on your phone to sync. (reason: 1)")
                     state = nil
                 }
             }
@@ -56,8 +56,12 @@ class ContentViewModel {
     }
 
     func loadData() async {
-        guard let deviceSN, config.isLoggedIn else {
-            loadState = .error(nil, "No device/API key found. Open Energy Stats on your phone to sync.3")
+        guard let deviceSN else {
+            loadState = .error(nil, "No device/API key found. Open Energy Stats on your phone to sync. (reason: 2)")
+            return
+        }
+        guard config.isLoggedIn else {
+            loadState = .error(nil, "No device/API key found. Open Energy Stats on your phone to sync. (reason: 3)")
             return
         }
         guard state.lastRefreshSeconds > FOUR_MINUTES_IN_SECONDS else {
