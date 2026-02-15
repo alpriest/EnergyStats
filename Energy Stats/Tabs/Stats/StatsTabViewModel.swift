@@ -56,6 +56,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
     private let fetcher: StatsDataFetcher
     @Published var selfSufficiencyAtDateTime: [StatsGraphValue] = []
     @Published var yScale: ClosedRange<Double> = ClosedRange(uncheckedBounds: (lower: 0, upper: 0))
+    @Published var xScale: ClosedRange<Date> = ClosedRange(uncheckedBounds: (lower: Date().startOfDay(), upper: Date().endOfDay()))
     private var themeCancellable: AnyCancellable?
     var visible = false
     var lastLoadState: LastLoadState<StatsGraphDisplayMode>?
@@ -287,6 +288,25 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
         yScale = ClosedRange(uncheckedBounds: (lower: 0, upper: scaleMax))
     }
 
+    func updateXScale() {
+        xScale = switch displayMode {
+        case .day(let date):
+            date.startOfDay()...date.endOfDay()
+        case .month(let month, let year):
+            {
+                let when = Date.from(year: year, month: month + 1)
+                return when.startOfMonth()...when.endOfMonth()
+            }()
+        case .year(let year):
+            {
+                let when = Date.from(year: year, month: 1)
+                return when.startOfYear()...when.endOfYear()
+            }()
+        case .custom(let start, let end, _):
+            start...end
+        }
+    }
+
     private func actualMax(of data: [StatsGraphValue]) -> Double {
         let hiddenVariableTypes = graphVariables.filter { $0.enabled == false }.map { $0.type.networkTitle }
 
@@ -302,6 +322,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
         let regularScaleDatasets = rawData.filter { $0.type != .selfSufficiency && $0.type != .batterySOC }
         let refreshedData = (regularScaleDatasets + updateScaledDatasets())
             .filter { !hiddenVariableTypes.contains($0.type.networkTitle) }
+            .filter { $0.date < Date() }
             .sorted(by: { lhs, rhs in
                 lhs.date < rhs.date
             })
@@ -311,9 +332,10 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
         })
         data = refreshedData
         updateYScale()
+        updateXScale()
         updateHeaderTitle()
     }
-    
+
     private func updateHeaderTitle() {
         touchHeaderTitle = switch displayMode {
         case .day:

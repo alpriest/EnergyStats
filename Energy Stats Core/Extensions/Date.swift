@@ -50,16 +50,6 @@ public extension Date {
         }
     }
 
-    static func from(year: Int, month: Int) -> Date {
-        var components = DateComponents()
-        components.year = year
-        components.month = month
-        components.day = 1
-
-        let calendar = Calendar.current
-        return calendar.date(from: components) ?? Date()
-    }
-
     func hour() -> Int {
         Calendar.current.component(.hour, from: self)
     }

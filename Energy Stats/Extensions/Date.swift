@@ -13,29 +13,63 @@ extension Date {
         formatter.dateFormat = "HH:mm"
         return formatter.string(from: self)
     }
-
+    
     var month: Int {
         Calendar.current.component(.month, from: self)
     }
-
+    
     var year: Int {
         Calendar.current.component(.year, from: self)
     }
-
+    
     static func yesterday() -> Date {
         Calendar.current.date(byAdding: .day, value: -1, to: .now)!
     }
-
+    
+    func startOfDay(using calendar: Calendar = .current) -> Date {
+        calendar.startOfDay(for: self)
+    }
+    
+    func endOfDay(using calendar: Calendar = .current) -> Date {
+        var components = calendar.dateComponents([.year, .month, .day], from: self)
+        components.hour = 23
+        components.minute = 59
+        components.second = 59
+        return calendar.date(from: components) ?? self
+    }
+    
     func startOfMonth(using calendar: Calendar = .current) -> Date {
         let components = calendar.dateComponents([.year, .month], from: self)
         return calendar.date(from: components) ?? self
     }
-
+    
     func endOfMonth(using calendar: Calendar = .current) -> Date {
         let start = startOfMonth(using: calendar)
         // Start of next month minus 1 second.
         let nextMonth = calendar.date(byAdding: .month, value: 1, to: start) ?? start
         return calendar.date(byAdding: .second, value: -1, to: nextMonth) ?? self
+    }
+    
+    func startOfYear(using calendar: Calendar = .current) -> Date {
+        let components = calendar.dateComponents([.year], from: self)
+        return calendar.date(from: components) ?? self
+    }
+    
+    func endOfYear(using calendar: Calendar = .current) -> Date {
+        let start = startOfYear(using: calendar)
+        // Start of next year minus 1 second.
+        let nextMonth = calendar.date(byAdding: .year, value: 1, to: start) ?? start
+        return calendar.date(byAdding: .second, value: -1, to: nextMonth) ?? self
+    }
+    
+    static func from(year: Int, month: Int) -> Date {
+        var components = DateComponents()
+        components.year = year
+        components.month = month
+        components.day = 1
+
+        let calendar = Calendar.current
+        return calendar.date(from: components) ?? Date()
     }
 }
 

@@ -123,6 +123,7 @@ struct StatsGraphView: View {
                     }
                 }
             }
+            .chartXScale(domain: viewModel.xScale)
             .chartYScale(domain: viewModel.yScale)
             .chartPlotStyle { content in
                 content.background(Color.gray.gradient.opacity(0.04))
