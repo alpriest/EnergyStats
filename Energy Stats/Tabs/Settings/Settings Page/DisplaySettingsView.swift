@@ -124,6 +124,12 @@ struct DisplaySettingsView: View {
         } label: {
             Text("Solcast solar prediction")
         }
+        
+        NavigationLink {
+            PVOutputSettingsView(configManager: configManager, pvOutputService: PVOutputService(configManager: configManager))
+        } label: {
+            Text("Share data with PVOutput")
+        }
     }
     
     private func makeCurrencySymbolField() -> some View {
@@ -139,7 +145,7 @@ struct DisplaySettingsView: View {
 #if DEBUG
 struct DisplaySettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationStack {
+        NavigationView {
             Form {
                 DisplaySettingsView(
                     viewModel: SettingsTabViewModel(

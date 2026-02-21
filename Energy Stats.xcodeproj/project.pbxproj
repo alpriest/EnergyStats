@@ -80,6 +80,7 @@
 		412018062EC0E0C6007D6643 /* GraphColoursSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412018052EC0E0C6007D6643 /* GraphColoursSettingsView.swift */; };
 		412087FB2BF5DDBE00E4899E /* SwiftData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 412087F92BF5DDA400E4899E /* SwiftData.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		41229CBD2BE1217600CFA636 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41229CBC2BE1217600CFA636 /* ContentViewModel.swift */; };
+		4127586A2F44FEB6009D090F /* PVOutputService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412758692F44FEAE009D090F /* PVOutputService.swift */; };
 		412790FF28E1FB9200D5F993 /* UserManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412790FE28E1FB9200D5F993 /* UserManagerTests.swift */; };
 		4127910228E1FBD300D5F993 /* MockKeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127910128E1FBD300D5F993 /* MockKeychainStore.swift */; };
 		4127910628E1FC1D00D5F993 /* MockNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127910528E1FC1D00D5F993 /* MockNetworking.swift */; };
@@ -618,6 +619,7 @@
 		412018052EC0E0C6007D6643 /* GraphColoursSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphColoursSettingsView.swift; sourceTree = "<group>"; };
 		412087F92BF5DDA400E4899E /* SwiftData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftData.framework; path = System/Library/Frameworks/SwiftData.framework; sourceTree = SDKROOT; };
 		41229CBC2BE1217600CFA636 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		412758692F44FEAE009D090F /* PVOutputService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PVOutputService.swift; sourceTree = "<group>"; };
 		412790FE28E1FB9200D5F993 /* UserManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManagerTests.swift; sourceTree = "<group>"; };
 		4127910128E1FBD300D5F993 /* MockKeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockKeychainStore.swift; sourceTree = "<group>"; };
 		4127910528E1FC1D00D5F993 /* MockNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworking.swift; sourceTree = "<group>"; };
@@ -957,6 +959,7 @@
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		411F46022E133126005992C8 /* Icons */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Icons; sourceTree = "<group>"; };
+		41ACB1F32F49FACB00EB7BF4 /* PVOutput */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PVOutput; sourceTree = "<group>"; };
 		41FBF4052DAA5B3200EBD4D5 /* Pulse */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Pulse; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -1463,6 +1466,7 @@
 		416009892A8D18540096CCD9 /* Settings Page */ = {
 			isa = PBXGroup;
 			children = (
+				41ACB1F32F49FACB00EB7BF4 /* PVOutput */,
 				418DC9D82DAA47AD005613AB /* DebugSettingsView.swift */,
 				41E1DFDE28D87781001235B9 /* SettingsTabView.swift */,
 				414BF82729B4918300E2EB51 /* SettingsTabViewModel.swift */,
@@ -1790,6 +1794,7 @@
 		41E4B30C28DB670C003F7F47 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				412758692F44FEAE009D090F /* PVOutputService.swift */,
 				4156A2322CB67EF400099A6A /* UserAgent.swift */,
 				4140146328C7146B00EA5BA1 /* NetworkModels */,
 				4140145F28C70D4700EA5BA1 /* FoxAPIServicing.swift */,
@@ -2021,6 +2026,7 @@
 				41F631812BDCD32E00A571C5 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
+				41ACB1F32F49FACB00EB7BF4 /* PVOutput */,
 				41FBF4052DAA5B3200EBD4D5 /* Pulse */,
 			);
 			name = "Energy Stats";
@@ -2537,6 +2543,7 @@
 				4171854229FFCF2500D18CDD /* String+MD5.swift in Sources */,
 				418024E22AD16D00009A2625 /* String+Currency.swift in Sources */,
 				41F5A3642C1B563D00CA1120 /* Shimmering.swift in Sources */,
+				4127586A2F44FEB6009D090F /* PVOutputService.swift in Sources */,
 				41BCC23F2F1E9BE500FB883E /* BatteryHeatingScheduleResponse.swift in Sources */,
 				41BACC0C2D9142B700C9C718 /* TipKitManager.swift in Sources */,
 				41D75A012B5C0238002C43A7 /* Bool+Int.swift in Sources */,

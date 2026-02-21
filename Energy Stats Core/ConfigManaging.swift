@@ -82,6 +82,7 @@ public protocol ConfigManaging: FinancialConfigManager, SolcastConfigManager, Ba
     var showBatterySOCOnDailyStats: Bool { get set }
     var workModes: [WorkMode] { get set }
     var showOutputEnergyOnStats: Bool { get set }
+    var pvOutputConfig: PVOutputConfig? { get set }
 }
 
 public enum DeviceCapability {

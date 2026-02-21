@@ -448,6 +448,7 @@ public class MockConfig: StoredConfig {
     public var allowNegativeLoad: Bool = false
     public var workModes: [WorkMode] = []
     public var showOutputEnergyOnStats: Bool = false
+    public var pvOutputConfig: PVOutputConfig? = nil
 }
 
 public extension SolcastSite {

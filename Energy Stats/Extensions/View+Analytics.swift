@@ -35,6 +35,7 @@ enum ScreenName: String {
     case workSchedule = "Work Schedule"
     case editPhase = "Edit phase"
     case peakShaving = "Peak Shaving"
+    case pvOutput = "PVOutput"
 
     var localized: String {
         NSLocalizedString(rawValue, comment: "")

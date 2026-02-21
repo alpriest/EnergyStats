@@ -742,6 +742,11 @@ public class ConfigManager: ConfigManaging {
             ))
         }
     }
+    
+    public var pvOutputConfig: PVOutputConfig? {
+        get { config.pvOutputConfig }
+        set { config.pvOutputConfig = newValue }
+    }
 }
 
 public enum BatteryResponseMapper {

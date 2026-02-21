@@ -15,7 +15,7 @@ public extension UserDefaults {
 
 public class UserDefaultsConfig: StoredConfig {
     public init() {}
-
+    
     public func clearDisplaySettings() {
         UserDefaults.shared.removeObject(forKey: "showGraphValueDescriptions")
         UserDefaults.shared.removeObject(forKey: "hasRunBefore")
@@ -70,7 +70,7 @@ public class UserDefaultsConfig: StoredConfig {
         UserDefaults.shared.removeObject(forKey: "showOutputEnergyOnStats")
         UserDefaults.shared.synchronize()
     }
-
+    
     public func clearDeviceSettings() {
         UserDefaults.shared.removeObject(forKey: "isDemoUser")
         UserDefaults.shared.removeObject(forKey: "devices")
@@ -78,75 +78,76 @@ public class UserDefaultsConfig: StoredConfig {
         UserDefaults.shared.removeObject(forKey: "powerStationDetail")
         UserDefaults.shared.removeObject(forKey: "deviceBatteryOverrides")
         UserDefaults.shared.removeObject(forKey: "solcastSettings")
+        UserDefaults.shared.removeObject(forKey: "pvOutputConfig")
         UserDefaults.shared.synchronize()
     }
-
+    
     @UserDefaultsStoredBool(key: "showGraphValueDescriptions", defaultValue: true)
     public var showGraphValueDescriptions: Bool
-
+    
     @UserDefaultsStoredBool(key: "hasRunBefore")
     public var hasRunBefore: Bool
-
+    
     @UserDefaultsStoredBool(key: "isDemoUser")
     public var isDemoUser: Bool
-
+    
     @UserDefaultsStoredBool(key: "showColouredLines", defaultValue: true)
     public var showColouredLines: Bool
-
+    
     @UserDefaultsStoredBool(key: "showBatteryTemperature")
     public var showBatteryTemperature: Bool
-
+    
     @UserDefaultsStoredBool(key: "showBatteryEstimate", defaultValue: true)
     public var showBatteryEstimate: Bool
-
+    
     @UserDefaultsStoredInt(key: "refreshFrequency")
     public var refreshFrequency: Int
-
+    
     @UserDefaultsStoredInt(key: "decimalPlaces", defaultValue: 3)
     public var decimalPlaces: Int
-
+    
     @UserDefaultsStoredBool(key: "showSunnyBackground", defaultValue: true)
     public var showSunnyBackground: Bool
-
+    
     @UserDefaultsStoredBool(key: "showUsableBatteryOnly", defaultValue: false)
     public var showUsableBatteryOnly: Bool
-
+    
     @UserDefaultsStoredBool(key: "showTotalYieldOnPowerFlow", defaultValue: false)
     public var showTotalYieldOnPowerFlow: Bool
-
+    
     @UserDefaultsStoredData(key: "devices")
     public var devices: Data?
-
+    
     @UserDefaultsStoredOptionalString(key: "selectedDeviceSN")
     public var selectedDeviceSN: String?
-
+    
     @UserDefaultsStoredInt(key: "displayUnit")
     public var displayUnit: Int
-
+    
     @UserDefaultsStoredBool(key: "showInverterTemperature", defaultValue: false)
     public var showInverterTemperature: Bool
-
+    
     @UserDefaultsStoredBool(key: "showHomeTotalOnPowerFlow", defaultValue: false)
     public var showHomeTotalOnPowerFlow: Bool
-
+    
     @UserDefaultsStoredBool(key: "showInverterIcon", defaultValue: true)
     public var showInverterIcon: Bool
-
+    
     @UserDefaultsStoredBool(key: "shouldInvertCT2", defaultValue: true)
     public var shouldInvertCT2: Bool
-
+    
     @UserDefaultsStoredBool(key: "showInverterStationName", defaultValue: false)
     public var showInverterStationName: Bool
-
+    
     @UserDefaultsStoredBool(key: "showInverterTypeName", defaultValue: false)
     public var showInverterTypeName: Bool
-
+    
     @UserDefaultsStoredBool(key: "showGridTotalsOnPowerFlow", defaultValue: false)
     public var showGridTotalsOnPowerFlow: Bool
-
+    
     @UserDefaultsStoredBool(key: "showLastUpdateTimestamp", defaultValue: false)
     public var showLastUpdateTimestamp: Bool
-
+    
     public var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode {
         get {
             let rawValue = UserDefaults.shared.integer(forKey: "selfSufficiencyEstimateMode")
@@ -156,25 +157,25 @@ public class UserDefaultsConfig: StoredConfig {
             UserDefaults.shared.set(newValue.rawValue, forKey: "selfSufficiencyEstimateMode")
         }
     }
-
+    
     @UserDefaultsStoredBool(key: "showEarnings", defaultValue: false)
     public var showFinancialEarnings: Bool
-
+    
     @UserDefaultsStoredDouble(key: "feedInUnitPrice", defaultValue: 0.05)
     public var feedInUnitPrice: Double
-
+    
     @UserDefaultsStoredDouble(key: "gridImportUnitPrice", defaultValue: 0.15)
     public var gridImportUnitPrice: Double
-
+    
     @UserDefaultsStoredString(key: "currencySymbol", defaultValue: "£")
     public var currencySymbol: String
-
+    
     @UserDefaultsStoredBool(key: "showFinancialSummaryOnFlowPage", defaultValue: true)
     public var showFinancialSummaryOnFlowPage: Bool
-
+    
     @UserDefaultsStoredBool(key: "shouldCombineCT2WithPVPower", defaultValue: true)
     public var shouldCombineCT2WithPVPower: Bool
-
+    
     public var selectedParameterGraphVariables: [String] {
         get {
             UserDefaults.shared.array(forKey: "selectedParameterGraphVariables") as? [String] ?? []
@@ -183,7 +184,7 @@ public class UserDefaultsConfig: StoredConfig {
             UserDefaults.shared.set(newValue, forKey: "selectedParameterGraphVariables")
         }
     }
-
+    
     public var deviceBatteryOverrides: [String: String] {
         get {
             UserDefaults.shared.dictionary(forKey: "deviceBatteryOverrides") as? [String: String] ?? [:]
@@ -192,7 +193,7 @@ public class UserDefaultsConfig: StoredConfig {
             UserDefaults.shared.set(newValue, forKey: "deviceBatteryOverrides")
         }
     }
-
+    
     public var solarDefinitions: SolarRangeDefinitions {
         get {
             guard let solarDefinitions = UserDefaults.shared.data(forKey: "solarDefinitions") else { return .default }
@@ -211,13 +212,13 @@ public class UserDefaultsConfig: StoredConfig {
             }
         }
     }
-
+    
     @UserDefaultsStoredCodable(key: "parameterGroups", defaultValue: DefaultParameterGroups())
     public var parameterGroups: [ParameterGroup]
-
+    
     @UserDefaultsStoredCodable(key: "solcastSettings", defaultValue: SolcastSettings(apiKey: nil, sites: []))
     public var solcastSettings: SolcastSettings
-
+    
     public var dataCeiling: DataCeiling {
         get {
             let rawValue = UserDefaults.shared.integer(forKey: "dataCeiling")
@@ -227,28 +228,28 @@ public class UserDefaultsConfig: StoredConfig {
             UserDefaults.shared.set(newValue.rawValue, forKey: "dataCeiling")
         }
     }
-
+    
     @UserDefaultsStoredBool(key: "separateParameterGraphsByUnit", defaultValue: true)
     public var separateParameterGraphsByUnit: Bool
-
+    
     @UserDefaultsStoredCodable(key: "variables", defaultValue: [])
     public var variables: [Variable]
-
+    
     @UserDefaultsStoredBool(key: "useTraditionalLoadFormula", defaultValue: true)
     public var useTraditionalLoadFormula: Bool
-
+    
     @UserDefaultsStoredCodable(key: "powerFlowStringsSettings", defaultValue: PowerFlowStringsSettings.none)
     public var powerFlowStrings: PowerFlowStringsSettings
-
+    
     @UserDefaultsStoredBool(key: "showBatteryPercentageRemaining", defaultValue: true)
     public var showBatteryPercentageRemaining: Bool
-
+    
     @UserDefaultsStoredCodable(key: "powerStationDetail", defaultValue: nil)
     public var powerStationDetail: PowerStationDetail?
-
+    
     @UserDefaultsStoredBool(key: "showSelfSufficiencyStatsGraphOverlay", defaultValue: true)
     public var showSelfSufficiencyStatsGraphOverlay: Bool
-
+    
     public var scheduleTemplates: [ScheduleTemplate] {
         get {
             guard let data = UserDefaults.shared.data(forKey: "scheduleTemplates") else { return [] }
@@ -260,10 +261,10 @@ public class UserDefaultsConfig: StoredConfig {
             UserDefaults.shared.set(data, forKey: "scheduleTemplates")
         }
     }
-
+    
     @UserDefaultsStoredBool(key: "truncatedYAxisOnParameterGraphs", defaultValue: false)
     public var truncatedYAxisOnParameterGraphs: Bool
-
+    
     public var earningsModel: EarningsModel {
         get {
             let rawValue = UserDefaults.shared.integer(forKey: "earningsModel")
@@ -273,13 +274,13 @@ public class UserDefaultsConfig: StoredConfig {
             UserDefaults.shared.set(newValue.rawValue, forKey: "earningsModel")
         }
     }
-
+    
     @UserDefaultsStoredCodable(key: "summaryDateRange", defaultValue: SummaryDateRange.automatic)
     public var summaryDateRange: SummaryDateRange
-
+    
     @UserDefaultsStoredCodable(key: "colorScheme", defaultValue: ForcedColorScheme.auto)
     public var colorScheme: ForcedColorScheme
-
+    
     public var lastSolcastRefresh: Date? {
         get {
             UserDefaults.shared.object(forKey: "lastSolcastRefresh") as? Date
@@ -288,16 +289,16 @@ public class UserDefaultsConfig: StoredConfig {
             UserDefaults.shared.set(newValue, forKey: "lastSolcastRefresh")
         }
     }
-
+    
     @UserDefaultsStoredCodable(key: "batteryTemperatureDisplayMode", defaultValue: BatteryTemperatureDisplayMode.automatic)
     public var batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode
-
+    
     @UserDefaultsStoredBool(key: "showInverterScheduleQuickLink")
     public var showInverterScheduleQuickLink: Bool
-
+    
     @UserDefaultsStoredBool(key: "fetchSolcastOnAppLaunch")
     public var fetchSolcastOnAppLaunch: Bool
-
+    
     public var ct2DisplayMode: CT2DisplayMode {
         get {
             let rawValue = UserDefaults.shared.integer(forKey: "ct2DisplayMode")
@@ -307,16 +308,16 @@ public class UserDefaultsConfig: StoredConfig {
             UserDefaults.shared.set(newValue.rawValue, forKey: "ct2DisplayMode")
         }
     }
-
+    
     @UserDefaultsStoredCodable(key: "seenTips", defaultValue: [])
     public var seenTips: [TipType]
-
+    
     @UserDefaultsStoredBool(key: "shouldCombineCT2WithLoadsPower", defaultValue: true)
     public var shouldCombineCT2WithLoadsPower: Bool
-
+    
     @UserDefaultsStoredBool(key: "showInverterConsumption", defaultValue: false)
     public var showInverterConsumption: Bool
-
+    
     @UserDefaultsStoredBool(key: "showBatterySOCOnDailyStats", defaultValue: false)
     public var showBatterySOCOnDailyStats: Bool
     
@@ -328,4 +329,7 @@ public class UserDefaultsConfig: StoredConfig {
     
     @UserDefaultsStoredBool(key: "showOutputEnergyOnStats", defaultValue: false)
     public var showOutputEnergyOnStats: Bool
-}
+    
+    @UserDefaultsStoredCodable(key: "pvOutputConfig", defaultValue: nil)
+    public var pvOutputConfig: PVOutputConfig?
+ }
