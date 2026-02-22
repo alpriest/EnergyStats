@@ -51,7 +51,6 @@ class PVOutputSettingsViewModel: ObservableObject, HasLoadState, ViewDataProvidi
 
             if valid {
                 configManager.pvOutputConfig = config
-                alertContent = AlertContent(title: "Success", message: "pvoutput_settings_saved")
             } else {
                 alertContent = AlertContent(title: "Failed", message: "pvoutput_settings_invalid")
             }
@@ -59,7 +58,7 @@ class PVOutputSettingsViewModel: ObservableObject, HasLoadState, ViewDataProvidi
 
         await setState(.inactive)
     }
-    
+
     func clearCredentials() {
         Task { @MainActor in
             configManager.pvOutputConfig = nil
