@@ -69,6 +69,8 @@ public protocol StoredConfig {
     var workModes: [WorkMode] { get set }
     var showOutputEnergyOnStats: Bool { get set }
     var pvOutputConfig: PVOutputConfig? { get set }
+    var isReadOnly: Bool { get set }
+    var readOnlyCode: String { get set }
 }
 
 public func DefaultParameterGroups() -> [ParameterGroup] {

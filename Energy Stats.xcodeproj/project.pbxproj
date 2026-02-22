@@ -263,6 +263,8 @@
 		41A95B9B29DB3F6A00A35169 /* Energy_Stats_Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		41A95BA129DB3F7E00A35169 /* PylonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A95BA029DB3F7E00A35169 /* PylonView.swift */; };
 		41AB53402B9319B900B6C371 /* SolarStringsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AB533F2B9319B900B6C371 /* SolarStringsView.swift */; };
+		41ACB1F52F4B571100EB7BF4 /* ReadOnlySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41ACB1F42F4B571100EB7BF4 /* ReadOnlySettingsView.swift */; };
+		41ACB1F72F4B8EC300EB7BF4 /* ProtectedContentViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41ACB1F62F4B8EC300EB7BF4 /* ProtectedContentViewModifier.swift */; };
 		41ACB2C42A51832E005831B0 /* ParameterGraphHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41ACB2C32A51832E005831B0 /* ParameterGraphHeaderViewModel.swift */; };
 		41ACB2C62A51ADEB005831B0 /* ValueBoundsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41ACB2C52A51ADEB005831B0 /* ValueBoundsView.swift */; };
 		41AF2F412AA4C674008FCA2E /* BatteryPowerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AF2F402AA4C674008FCA2E /* BatteryPowerFooterView.swift */; };
@@ -820,6 +822,8 @@
 		41A95B9629DB3F6A00A35169 /* Energy_Stats_Core.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Energy_Stats_Core.h; sourceTree = "<group>"; };
 		41A95BA029DB3F7E00A35169 /* PylonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PylonView.swift; sourceTree = "<group>"; };
 		41AB533F2B9319B900B6C371 /* SolarStringsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarStringsView.swift; sourceTree = "<group>"; };
+		41ACB1F42F4B571100EB7BF4 /* ReadOnlySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadOnlySettingsView.swift; sourceTree = "<group>"; };
+		41ACB1F62F4B8EC300EB7BF4 /* ProtectedContentViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtectedContentViewModifier.swift; sourceTree = "<group>"; };
 		41ACB2C32A51832E005831B0 /* ParameterGraphHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterGraphHeaderViewModel.swift; sourceTree = "<group>"; };
 		41ACB2C52A51ADEB005831B0 /* ValueBoundsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueBoundsView.swift; sourceTree = "<group>"; };
 		41AF2F402AA4C674008FCA2E /* BatteryPowerFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryPowerFooterView.swift; sourceTree = "<group>"; };
@@ -1466,6 +1470,8 @@
 		416009892A8D18540096CCD9 /* Settings Page */ = {
 			isa = PBXGroup;
 			children = (
+				41ACB1F42F4B571100EB7BF4 /* ReadOnlySettingsView.swift */,
+				41ACB1F62F4B8EC300EB7BF4 /* ProtectedContentViewModifier.swift */,
 				41ACB1F32F49FACB00EB7BF4 /* PVOutput */,
 				418DC9D82DAA47AD005613AB /* DebugSettingsView.swift */,
 				41E1DFDE28D87781001235B9 /* SettingsTabView.swift */,
@@ -2455,6 +2461,7 @@
 				41ACB2C42A51832E005831B0 /* ParameterGraphHeaderViewModel.swift in Sources */,
 				41CA35712AA8C02C00D45734 /* EarningsView.swift in Sources */,
 				4192F9992A8674990035DAB8 /* DataLoggersView.swift in Sources */,
+				41ACB1F72F4B8EC300EB7BF4 /* ProtectedContentViewModifier.swift in Sources */,
 				411542EE2BED447C00BDE56D /* EditTemplateViewModel.swift in Sources */,
 				416163992CDA6F1F0084DCF1 /* OfflineDeviceBannerView.swift in Sources */,
 				419092232B1DC0070017CB65 /* ScheduleSummaryViewModel.swift in Sources */,
@@ -2466,6 +2473,7 @@
 				414536D32D3190E700AE4A29 /* FirmwareLoadingView.swift in Sources */,
 				416163952CDA6D4A0084DCF1 /* String+URL.swift in Sources */,
 				410FC88A2AB9EAD90004CBC2 /* ParameterVariableGroupEditorViewModel.swift in Sources */,
+				41ACB1F52F4B571100EB7BF4 /* ReadOnlySettingsView.swift in Sources */,
 				4171854E2A010B6300D18CDD /* ParameterGraphVariableChooserViewModel.swift in Sources */,
 				418199C72A4034530001B5D4 /* FAQView.swift in Sources */,
 				41DF87272EEB2A7E00F6EDF2 /* CustomDateRangePickerView.swift in Sources */,

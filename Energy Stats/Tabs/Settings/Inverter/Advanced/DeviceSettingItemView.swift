@@ -10,8 +10,10 @@ import SwiftUI
 
 struct DeviceSettingItemView: View {
     @StateObject var viewModel: DeviceSettingItemViewModel
+    private let configManager: ConfigManaging
 
     init(item: DeviceSettingsItem, networking: Networking, configManager: ConfigManaging) {
+        self.configManager = configManager
         _viewModel = StateObject(wrappedValue: DeviceSettingItemViewModel(item: item, networking: networking, configManager: configManager))
     }
 
@@ -47,6 +49,7 @@ struct DeviceSettingItemView: View {
         .navigationBarTitleDisplayMode(.inline)
         .loadable(viewModel.state, retry: { viewModel.load() })
         .alert(alertContent: $viewModel.alertContent)
+        .protectedContent(configManager)
     }
 }
 

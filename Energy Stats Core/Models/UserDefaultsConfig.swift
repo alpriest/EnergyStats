@@ -68,6 +68,8 @@ public class UserDefaultsConfig: StoredConfig {
         UserDefaults.shared.removeObject(forKey: "allowNegativeLoad")
         UserDefaults.shared.removeObject(forKey: "workModes")
         UserDefaults.shared.removeObject(forKey: "showOutputEnergyOnStats")
+        UserDefaults.shared.removeObject(forKey: "isReadOnly")
+        UserDefaults.shared.removeObject(forKey: "readOnlyCode")
         UserDefaults.shared.synchronize()
     }
     
@@ -332,4 +334,10 @@ public class UserDefaultsConfig: StoredConfig {
     
     @UserDefaultsStoredCodable(key: "pvOutputConfig", defaultValue: nil)
     public var pvOutputConfig: PVOutputConfig?
+    
+    @UserDefaultsStoredBool(key: "isReadOnly", defaultValue: false)
+    public var isReadOnly: Bool
+    
+    @UserDefaultsStoredString(key: "readOnlyCode", defaultValue: "")
+    public var readOnlyCode: String
  }

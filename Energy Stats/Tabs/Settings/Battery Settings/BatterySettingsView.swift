@@ -19,20 +19,24 @@ struct BatterySettingsView: View {
                 BatterySOCSettingsView(networking: viewModel.networking,
                                        config: viewModel.config,
                                        onSOCchange: {})
+                    .protectedContent(viewModel.config)
             }.accessibilityIdentifier("minimum charge levels")
 
             NavigationLink {
                 DeviceSettingItemView(item: .maxSoc, networking: viewModel.networking, configManager: viewModel.config)
+                    .protectedContent(viewModel.config)
             } label: {
                 Text("Maximum charge level")
             }
 
             NavigationLink("Charge times") {
                 BatteryChargeScheduleSettingsView(networking: viewModel.networking, config: viewModel.config)
+                    .protectedContent(viewModel.config)
             }.accessibilityIdentifier("charge schedule")
-            
+
             NavigationLink("Heating schedule") {
                 BatteryHeatingScheduleSettingsView(networking: viewModel.networking, config: viewModel.config)
+                    .protectedContent(viewModel.config)
             }
 
             Section(
@@ -83,8 +87,8 @@ struct BatterySettingsView: View {
                         .padding(.bottom, 4)
 
                         Text("Calculated as ") +
-                        Text("capacity = residual / (Min SOC / 100)").italic() +
-                        Text(" where residual is estimated by your installation and may not be accurate. Tap the capacity above to enter a manual value for the size of your battery if the value shown is incorrect.")
+                            Text("capacity = residual / (Min SOC / 100)").italic() +
+                            Text(" where residual is estimated by your installation and may not be accurate. Tap the capacity above to enter a manual value for the size of your battery if the value shown is incorrect.")
                     }
                 }
             ).alert("Invalid Battery Capacity", isPresented: $viewModel.showAlert, actions: {
@@ -121,7 +125,7 @@ struct BatterySettingsView: View {
             } footer: {
                 Text("show_battery_bms_temperature_description")
             }
-            
+
             Section {
                 HStack {
                     Text("Display battery stack").padding(.trailing)
@@ -149,7 +153,6 @@ struct BatterySettingsView: View {
             } label: {
                 Text("Battery versions")
             }
-
         }
         .navigationTitle(.battery)
     }

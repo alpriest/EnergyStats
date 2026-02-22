@@ -357,7 +357,7 @@ class DemoAPI: FoxAPIServicing {
             cumulative: 244.0
         )
     }
-    
+
     func openapi_getBatteryHeatingSchedule(deviceSN: String) async throws -> BatteryHeatingScheduleResponse {
         let data = try self.data(filename: "getBatteryHeatingScheduleResponse")
         let response = try JSONDecoder().decode(NetworkResponse<BatteryHeatingScheduleResponse>.self, from: data)
@@ -365,9 +365,8 @@ class DemoAPI: FoxAPIServicing {
 
         return result
     }
-    
-    func openapi_setBatteryHeatingSchedule(heatingScheduleRequest: BatteryHeatingScheduleRequest) async throws {
-    }
+
+    func openapi_setBatteryHeatingSchedule(heatingScheduleRequest: BatteryHeatingScheduleRequest) async throws {}
 
     private func data(filename: String) throws -> Data {
         guard let url = Bundle(for: type(of: self)).url(forResource: filename, withExtension: "json") else {
@@ -380,6 +379,12 @@ class DemoAPI: FoxAPIServicing {
 
 public class MockConfig: StoredConfig {
     public init() {}
+    public static func make(_ update: (MockConfig) -> ()) -> MockConfig {
+        let config = MockConfig()
+        update(config)
+        return config
+    }
+
     public func clearDisplaySettings() {}
     public func clearDeviceSettings() {}
 
@@ -449,6 +454,8 @@ public class MockConfig: StoredConfig {
     public var workModes: [WorkMode] = []
     public var showOutputEnergyOnStats: Bool = false
     public var pvOutputConfig: PVOutputConfig? = nil
+    public var isReadOnly: Bool = false
+    public var readOnlyCode: String = ""
 }
 
 public extension SolcastSite {

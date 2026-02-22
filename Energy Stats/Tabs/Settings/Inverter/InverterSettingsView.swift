@@ -32,15 +32,19 @@ struct InverterSettingsView: View {
             Section {
                 NavigationLink("Manage schedules") {
                     ScheduleSummaryView(networking: networking, configManager: configManager, templateStore: templateStore)
+                        .protectedContent(configManager)
                 }
                 NavigationLink(DeviceSettingsItem.exportLimit.title) {
                     DeviceSettingItemView(item: .exportLimit, networking: networking, configManager: configManager)
+                        .protectedContent(configManager)
                 }
                 NavigationLink("Peak Shaving") {
                     PeakShavingView(networking: networking, config: configManager)
+                        .protectedContent(configManager)
                 }
                 NavigationLink("Work Mode") {
                     InverterWorkModeView(networking: networking, config: configManager)
+                        .protectedContent(configManager)
                 }
             }
 

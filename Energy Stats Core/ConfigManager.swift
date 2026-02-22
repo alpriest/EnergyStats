@@ -747,6 +747,16 @@ public class ConfigManager: ConfigManaging {
         get { config.pvOutputConfig }
         set { config.pvOutputConfig = newValue }
     }
+    
+    public var isReadOnly: Bool {
+        get { config.isReadOnly }
+        set { config.isReadOnly = newValue }
+    }
+    
+    public var readOnlyCode: String {
+        get { config.readOnlyCode }
+        set { config.readOnlyCode = newValue }
+    }
 }
 
 public enum BatteryResponseMapper {
