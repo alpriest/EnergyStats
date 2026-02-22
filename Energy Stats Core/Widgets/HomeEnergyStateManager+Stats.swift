@@ -61,9 +61,9 @@ extension HomeEnergyStateManager {
         }
 
         try storeTodayStatsModel(reports: mapped,
-                                 totalHome: dailyTotalReports.todayValue(for: .loads) ?? 0.0,
-                                 totalGridImport: dailyTotalReports.todayValue(for: .gridConsumption) ?? 0.0,
-                                 totalGridExport: dailyTotalReports.todayValue(for: .feedIn) ?? 0.0,
+                                 totalHome: dailyTotalReports.todayValue(for: .loads),
+                                 totalGridImport: dailyTotalReports.todayValue(for: .gridConsumption),
+                                 totalGridExport: dailyTotalReports.todayValue(for: .feedIn),
                                  totalBatteryCharge: dailyTotalReports.todayValue(for: .chargeEnergyToTal),
                                  totalBatteryDischarge: dailyTotalReports.todayValue(for: .dischargeEnergyToTal),
                                  totalPVEnergy: dailyTotalReports.todayValue(for: .pvEnergyTotal))
@@ -119,11 +119,5 @@ extension HomeEnergyStateManager {
         let year = Calendar.current.component(.year, from: current)
         let queryDate = QueryDate(year: year, month: month, day: nil)
         return queryDate
-    }
-}
-
-private extension Array where Element == OpenReportResponse {
-    func todayValue(for key: ReportVariable) -> Double? {
-        today(for: key)?.value
     }
 }

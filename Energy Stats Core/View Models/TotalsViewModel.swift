@@ -47,15 +47,19 @@ public struct TotalsViewModel {
     public let ct2: Double
 }
 
-extension Array where Element == OpenReportResponse {
-    func today(for key: ReportVariable) -> OpenReportResponse.ReportData? {
-        guard let currentDateIndex = Calendar.current.dateComponents([.day], from: Date()).day else { return nil }
+public extension Array where Element == OpenReportResponse {
+    func value(for key: ReportVariable, date: Date) -> OpenReportResponse.ReportData? {
+        guard let currentDateIndex = Calendar.current.dateComponents([.day], from: date).day else { return nil }
         return first(where: { $0.variable.lowercased() == key.networkTitle.lowercased() })?.values.first(where: { $0.index == currentDateIndex })
     }
 }
 
-private extension Array where Element == OpenReportResponse {
+public extension Array where Element == OpenReportResponse {
     func todayValue(for key: ReportVariable) -> Double {
-        today(for: key)?.value ?? 0.0
+        dateValue(for: key, date: Date())
+    }
+    
+    func dateValue(for key: ReportVariable, date: Date) -> Double {
+        value(for: key, date: date)?.value ?? 0.0
     }
 }

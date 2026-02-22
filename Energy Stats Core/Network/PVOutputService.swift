@@ -9,10 +9,10 @@ import Foundation
 
 public struct PVOutputRecord: Sendable {
     public let outputDate: Date
-    public let generated: Int
-    public let exported: Int
+    public let generated: Double
+    public let exported: Double
 
-    public init(outputDate: Date, generated: Int, exported: Int) {
+    public init(outputDate: Date, generated: Double, exported: Double) {
         self.outputDate = outputDate
         self.generated = generated
         self.exported = exported

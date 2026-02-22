@@ -36,17 +36,11 @@ struct PVOutputSettingsViewData: Copiable, Equatable {
     }
 }
 
-enum DateMode {
-    case single
-    case range
-}
-
 struct PVOutputSettingsView: View {
     @StateObject var viewModel: PVOutputSettingsViewModel
-    @State private var dateMode: DateMode = .single
 
-    init(configManager: ConfigManaging, pvOutputService: PVOutputServicing) {
-        _viewModel = .init(wrappedValue: PVOutputSettingsViewModel(configManager: configManager, pvOutputService: pvOutputService))
+    init(configManager: ConfigManaging, foxService: Networking, pvOutputService: PVOutputServicing) {
+        _viewModel = .init(wrappedValue: PVOutputSettingsViewModel(configManager: configManager, foxService: foxService, pvOutputService: pvOutputService))
     }
 
     var body: some View {
@@ -79,37 +73,21 @@ struct PVOutputSettingsView: View {
                     Text("Save credentials")
                 }.buttonStyle(.borderedProminent)
 
-                if viewModel.viewData.validCredentials {
-                    Button { viewModel.clearCredentials() } label: {
-                        Text("Delete credentials")
-                    }
+                Button { viewModel.clearCredentials() } label: {
+                    Text("Delete credentials")
                 }
+                .buttonStyle(.bordered)
+                .disabled(!viewModel.viewData.validCredentials)
             }.frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
         }
     }
 
     private func exportChoices() -> some View {
         Section {
-            Picker(selection: $dateMode) {
-                Text("Single").tag(DateMode.single)
-                Text("Range").tag(DateMode.range)
-            } label: {
-                Text("Date mode")
-            }.pickerStyle(.segmented)
-
-            switch dateMode {
-            case .single:
-                DatePicker("Choose single date", selection: $viewModel.viewData.startDate, displayedComponents: .date)
-            case .range:
-                VStack {
-                    DatePicker("Choose start date", selection: $viewModel.viewData.startDate, displayedComponents: .date)
-
-                    DatePicker("Choose end date", selection: $viewModel.viewData.endDate, displayedComponents: .date)
-                }
-            }
+            DatePicker("Choose single date", selection: $viewModel.viewData.startDate, displayedComponents: .date)
 
             HStack {
-                Button(action: {}) {
+                Button(action: { Task { await viewModel.upload() }}) {
                     Text("Upload to PVOutput")
                 }.buttonStyle(.borderedProminent)
             }.frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
@@ -118,5 +96,9 @@ struct PVOutputSettingsView: View {
 }
 
 #Preview {
-    PVOutputSettingsView(configManager: ConfigManager.preview(), pvOutputService: PVOutputService.preview())
+    PVOutputSettingsView(
+        configManager: ConfigManager.preview(),
+        foxService: NetworkService.preview(),
+        pvOutputService: PVOutputService.preview()
+    )
 }

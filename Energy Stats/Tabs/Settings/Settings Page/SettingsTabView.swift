@@ -85,7 +85,7 @@ struct SettingsTabView: View {
                 Text("Datalogger")
             }
 
-            DisplaySettingsView(viewModel: viewModel, configManager: configManager, solarService: solarService)
+            DisplaySettingsView(viewModel: viewModel, configManager: configManager, solarService: solarService, networking: networking)
 
             Section {
                 NavigationLink("FoxESS Cloud Status") { WebView(url: URL(string: "https://monitor.foxesscommunity.com/status/foxess")!) }

@@ -4508,9 +4508,6 @@
         }
       }
     },
-    "Choose end date" : {
-
-    },
     "Choose group to edit" : {
       "localizations" : {
         "de" : {
@@ -4568,9 +4565,6 @@
       }
     },
     "Choose single date" : {
-
-    },
-    "Choose start date" : {
 
     },
     "Choose summary date range" : {
@@ -5976,9 +5970,6 @@
           }
         }
       }
-    },
-    "Date mode" : {
-
     },
     "Day" : {
       "localizations" : {
@@ -12741,9 +12732,6 @@
         }
       }
     },
-    "Range" : {
-
-    },
     "Range of confidence" : {
       "localizations" : {
         "de" : {
@@ -16392,9 +16380,6 @@
           }
         }
       }
-    },
-    "Single" : {
-
     },
     "Slave" : {
       "shouldTranslate" : false

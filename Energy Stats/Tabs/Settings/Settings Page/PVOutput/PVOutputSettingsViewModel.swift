@@ -13,6 +13,7 @@ class PVOutputSettingsViewModel: ObservableObject, HasLoadState, ViewDataProvidi
 
     private var configManager: ConfigManaging
     private let pvOutputService: PVOutputServicing
+    private let foxService: Networking
 
     @Published var viewData: ViewData = .initial { didSet {
         isDirty = viewData != originalValue
@@ -22,8 +23,9 @@ class PVOutputSettingsViewModel: ObservableObject, HasLoadState, ViewDataProvidi
     @Published var state: LoadState = .inactive
     @Published var alertContent: AlertContent?
 
-    init(configManager: ConfigManaging, pvOutputService: PVOutputServicing) {
+    init(configManager: ConfigManaging, foxService: Networking, pvOutputService: PVOutputServicing) {
         self.configManager = configManager
+        self.foxService = foxService
         self.pvOutputService = pvOutputService
         let config = configManager.pvOutputConfig
         let viewData = ViewData(apiKey: config?.apiKey ?? "",
@@ -73,4 +75,27 @@ class PVOutputSettingsViewModel: ObservableObject, HasLoadState, ViewDataProvidi
     func removeKey() {
         configManager.pvOutputConfig = nil
     }
+
+    func upload() async {
+        guard let deviceSN = configManager.selectedDeviceSN else { return }
+
+        do {
+            let queryDate = QueryDate(from: viewData.startDate)
+            let reports = try await foxService.fetchReport(
+                deviceSN: deviceSN,
+                variables: [.pvEnergyTotal, .feedIn],
+                queryDate: queryDate,
+                reportType: .month
+            )
+            let pvEnergyTotal = reports.dateValue(for: .pvEnergyTotal, date: viewData.startDate)
+            let feedIn = reports.dateValue(for: .feedIn, date: viewData.startDate)
+            
+            try await pvOutputService.post(output: PVOutputRecord(outputDate: viewData.startDate, generated: pvEnergyTotal * 1000.0, exported: feedIn * 1000.0))
+            alertContent = AlertContent(title: "Success", message: "Data exported")
+        } catch {}
+    }
+}
+
+extension Array where Element == OpenReportResponse {
+    
 }

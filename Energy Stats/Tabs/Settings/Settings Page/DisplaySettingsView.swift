@@ -12,6 +12,7 @@ struct DisplaySettingsView: View {
     @ObservedObject var viewModel: SettingsTabViewModel
     let configManager: ConfigManaging
     let solarService: SolarForecastProviding
+    let networking: Networking
     @State private var alert: AlertContent?
     
     var body: some View {
@@ -126,7 +127,7 @@ struct DisplaySettingsView: View {
         }
         
         NavigationLink {
-            PVOutputSettingsView(configManager: configManager, pvOutputService: PVOutputService(configManager: configManager))
+            PVOutputSettingsView(configManager: configManager, foxService: networking, pvOutputService: PVOutputService(configManager: configManager))
         } label: {
             Text("Share data with PVOutput")
         }
@@ -153,7 +154,8 @@ struct DisplaySettingsView_Previews: PreviewProvider {
                         config: ConfigManager.preview(),
                         networking: NetworkService.preview()),
                     configManager: ConfigManager.preview(),
-                    solarService: { DemoSolcast() })
+                    solarService: { DemoSolcast() },
+                    networking: NetworkService.preview())
             }
         }
     }
