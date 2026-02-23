@@ -122,17 +122,21 @@ struct ReadOnlySettingsView: View {
             Text("If you forget your passcode, you can log out and in again.")
                 .font(.caption)
         }
+        .padding()
         .alert(alertContent: $viewModel.alertContent)
         .toolbar {
             ToolbarItem(placement: .principal) {
                 HStack(spacing: 0) {
                     Text("Read Only Mode:")
+                        .padding(.trailing, 6)
 
                     if viewModel.isReadOnly {
-                        dot.foregroundStyle(Color.linesPositive)
+                        dot.foregroundStyle(Color.linesNegative)
+                            .accessibilityHidden(true)
                         Text("On")
                     } else {
-                        dot.foregroundStyle(Color.linesNegative)
+                        dot.foregroundStyle(Color.linesPositive)
+                            .accessibilityHidden(true)
                         Text("Off")
                     }
                 }
@@ -145,8 +149,9 @@ struct ReadOnlySettingsView: View {
     }
     
     private var dot: some View {
-        Circle().frame(width: 10)
-            .padding(.trailing, 4)
+        Circle()
+            .frame(width: 10, height: 10)
+            .padding(.trailing, 6)
     }
 }
 
