@@ -46,9 +46,11 @@ struct PVOutputSettingsView: View {
     var body: some View {
         VStack(spacing: 0) {
             Form {
-                Section {
+                Section(content: {
                     Text("PVOutput_description")
-                }
+                }, footer: {
+                    FindOutMoreView(url: URL(string: "https://github.com/TonyM1958/HA-FoxESS-Modbus/wiki/PV-Output")!)
+                })
 
                 Group {
                     if viewModel.viewData.validCredentials {
@@ -67,6 +69,12 @@ struct PVOutputSettingsView: View {
         Section {
             SecureField("API Key", text: $viewModel.viewData.apiKey)
             TextField("System ID", text: $viewModel.viewData.systemId)
+            
+            if viewModel.viewData.validCredentials {
+                ExternalWebNavigationLink(url: "https://pvoutput.org/list.jsp?sid=\(viewModel.viewData.systemId)") {
+                    Text("View your data on https://pvoutput.org")
+                }
+            }
 
             HStack {
                 Button(action: { Task { await viewModel.verifyCredentials() }}) {
