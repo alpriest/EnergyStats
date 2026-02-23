@@ -109,15 +109,15 @@ public enum ReportVariable: String, RawRepresentable, CaseIterable {
         case .gridConsumption:
             return .red.opacity(0.8)
         case .loads:
-            return Color.loadsPower.opacity(0.8)
+            return Color.loadsPower
         case .selfSufficiency:
             return .black
         case .pvEnergyTotal:
-            return .yellow.opacity(0.8)
+            return .yellow.opacity(1.0)
         case .inverterConsumption:
             return .pink.opacity(0.8)
         case .batterySOC:
-            return .cyan
+            return .cyan.opacity(0.7)
         }
     }
 }
@@ -125,5 +125,18 @@ public enum ReportVariable: String, RawRepresentable, CaseIterable {
 extension [ReportVariable] {
     func sorted() -> [ReportVariable] {
         self.sorted(by: { $0.networkTitle < $1.networkTitle })
+    }
+}
+
+#Preview {
+    VStack {
+        ForEach(ReportVariable.allCases, id: \.self) { variable in
+            HStack {
+                Rectangle().foregroundStyle(variable.colour)
+                    .frame(width: 100)
+                Text(variable.networkTitle)
+                Spacer()
+            }
+        }
     }
 }

@@ -61,48 +61,92 @@ struct ReadOnlySettingsView: View {
 
     var body: some View {
         VStack(spacing: 24) {
-            Text("Enter passcode")
-                .font(.title2.weight(.semibold))
-
-            if viewModel.isReadOnly {
-                Text("Enter your 4-digit passcode to **disable** read-only mode.")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.center)
-            } else {
-                Text("Enter a 4-digit passcode to **enable** read-only mode.")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.center)
-            }
-
             ZStack {
-                TextField("", text: $viewModel.passcode)
-                    .keyboardType(.numberPad)
-                    .textContentType(.oneTimeCode)
-                    .focused($isPasscodeFocused)
-                    .opacity(0.01)
-                    .frame(height: 30)
-                    .onChange(of: viewModel.passcode) { newValue in
-                        viewModel.updatePasscode(newValue)
-                    }
+                if viewModel.isReadOnly {
+                    Text("Inverter and battery changes are prevented.")
+                        .transition(.move(edge: .leading).combined(with: .opacity))
+                } else {
+                    Text("Inverter and battery changes are permitted.")
+                        .transition(.move(edge: .trailing).combined(with: .opacity))
+                }
+            }
+            .animation(.easeInOut, value: viewModel.isReadOnly)
+            .frame(minWidth: 0, maxWidth: .infinity)
 
-                HStack(spacing: 12) {
-                    ForEach(0 ..< 4, id: \.self) { index in
-                        PasscodeDigitView(isFilled: index < viewModel.passcode.count)
+            Spacer()
+
+            VStack(spacing: 20) {
+                if viewModel.isReadOnly {
+                    Text("Enter current passcode")
+                        .font(.title2.weight(.semibold))
+
+                    Text("Enter your 4-digit passcode to **turn off** read-only mode.")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.center)
+                } else {
+                    Text("Choose a passcode")
+                        .font(.title2.weight(.semibold))
+
+                    Text("Enter a 4-digit passcode to **turn on** read-only mode.")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.center)
+                }
+
+                ZStack {
+                    TextField("", text: $viewModel.passcode)
+                        .keyboardType(.numberPad)
+                        .textContentType(.oneTimeCode)
+                        .focused($isPasscodeFocused)
+                        .opacity(0.01)
+                        .frame(height: 30)
+                        .onChange(of: viewModel.passcode) { newValue in
+                            viewModel.updatePasscode(newValue)
+                        }
+
+                    HStack(spacing: 12) {
+                        ForEach(0 ..< 4, id: \.self) { index in
+                            PasscodeDigitView(isFilled: index < viewModel.passcode.count)
+                        }
+                    }
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        isPasscodeFocused = true
                     }
                 }
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    isPasscodeFocused = true
+            }
+
+            Spacer()
+
+            Text("If you forget your passcode, you can log out and in again.")
+                .font(.caption)
+        }
+        .alert(alertContent: $viewModel.alertContent)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                HStack(spacing: 0) {
+                    Text("Read Only Mode:")
+
+                    if viewModel.isReadOnly {
+                        dot.foregroundStyle(Color.linesPositive)
+                        Text("On")
+                    } else {
+                        dot.foregroundStyle(Color.linesNegative)
+                        Text("Off")
+                    }
                 }
             }
         }
-        .alert(alertContent: $viewModel.alertContent)
-        .padding()
+        .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             isPasscodeFocused = true
         }
+    }
+    
+    private var dot: some View {
+        Circle().frame(width: 10)
+            .padding(.trailing, 4)
     }
 }
 
@@ -125,5 +169,7 @@ struct PasscodeDigitView: View {
 }
 
 #Preview {
-    ReadOnlySettingsView(configManager: ConfigManager.preview())
+    NavigationView {
+        ReadOnlySettingsView(configManager: ConfigManager.preview())
+    }
 }

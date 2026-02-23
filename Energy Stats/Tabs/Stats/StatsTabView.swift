@@ -90,7 +90,6 @@ struct StatsTabView: View {
             .padding(.horizontal)
             .analyticsScreen(.statsTab)
         }
-        .tipKit(tip: .statsPageEnergyBalanceChartAdded)
         .task {
             await viewModel.load()
         }

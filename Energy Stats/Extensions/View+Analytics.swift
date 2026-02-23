@@ -36,6 +36,7 @@ enum ScreenName: String {
     case editPhase = "Edit phase"
     case peakShaving = "Peak Shaving"
     case pvOutput = "PVOutput"
+    case readOnlyMode = "Read Only Mode"
 
     var localized: String {
         NSLocalizedString(rawValue, comment: "")

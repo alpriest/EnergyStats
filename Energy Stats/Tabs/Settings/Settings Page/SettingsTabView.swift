@@ -93,10 +93,19 @@ struct SettingsTabView: View {
                 }
                 NavigationLink("FoxESS Cloud Status") { WebView(url: URL(string: "https://monitor.foxesscommunity.com/status/foxess")!) }
 
-                NavigationLink("settings.debug") { DebugSettingsView(networking: networking) }
-                NavigationLink("Edit API Key") { ConfigureAPIKeyView() }
+                NavigationLink("settings.debug") {
+                    DebugSettingsView(networking: networking)
+                        .protectedContent(configManager)
+                }
+                NavigationLink("Edit API Key") {
+                    ConfigureAPIKeyView()
+                        .protectedContent(configManager)
+                }
                 ReloadDevicesButton(viewModel: viewModel)
-                NavigationLink("Reset app settings") { FactoryResetAppSettingsView(configManager: configManager) }
+                NavigationLink("Reset app settings") {
+                    FactoryResetAppSettingsView(configManager: configManager)
+                        .protectedContent(configManager)
+                }
                 NavigationLink("Contact") { ContactView(appVersion: viewModel.appVersion) }
             }
 
