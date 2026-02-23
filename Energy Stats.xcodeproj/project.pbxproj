@@ -249,6 +249,7 @@
 		4197A0DC2CC6901A00913823 /* SyncRequiredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4197A0DB2CC6901A00913823 /* SyncRequiredView.swift */; };
 		419AB4802AA36D24002CBC96 /* DisplaySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419AB47F2AA36D24002CBC96 /* DisplaySettingsView.swift */; };
 		419B8DEA2B04D6BA0094402C /* SolcastCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419B8DE92B04D6BA0094402C /* SolcastCacheTests.swift */; };
+		419C42182F4CC4FE00EB8F71 /* ReadOnlySettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419C42172F4CC4FE00EB8F71 /* ReadOnlySettingsViewModel.swift */; };
 		419CCB542933BABF00882649 /* ErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419CCB532933BABF00882649 /* ErrorAlertView.swift */; };
 		419DFA862A12930E0067313A /* StatsDatePickerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419DFA842A1292380067313A /* StatsDatePickerHeaderView.swift */; };
 		419DFA882A12A6DF0067313A /* StatsDatePickerHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419DFA872A12A6DF0067313A /* StatsDatePickerHeaderViewModel.swift */; };
@@ -806,6 +807,7 @@
 		4197A0DB2CC6901A00913823 /* SyncRequiredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncRequiredView.swift; sourceTree = "<group>"; };
 		419AB47F2AA36D24002CBC96 /* DisplaySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaySettingsView.swift; sourceTree = "<group>"; };
 		419B8DE92B04D6BA0094402C /* SolcastCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolcastCacheTests.swift; sourceTree = "<group>"; };
+		419C42172F4CC4FE00EB8F71 /* ReadOnlySettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadOnlySettingsViewModel.swift; sourceTree = "<group>"; };
 		419CCB532933BABF00882649 /* ErrorAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertView.swift; sourceTree = "<group>"; };
 		419DFA842A1292380067313A /* StatsDatePickerHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsDatePickerHeaderView.swift; sourceTree = "<group>"; };
 		419DFA872A12A6DF0067313A /* StatsDatePickerHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsDatePickerHeaderViewModel.swift; sourceTree = "<group>"; };
@@ -1470,7 +1472,6 @@
 		416009892A8D18540096CCD9 /* Settings Page */ = {
 			isa = PBXGroup;
 			children = (
-				41ACB1F42F4B571100EB7BF4 /* ReadOnlySettingsView.swift */,
 				41ACB1F62F4B8EC300EB7BF4 /* ProtectedContentViewModifier.swift */,
 				41ACB1F32F49FACB00EB7BF4 /* PVOutput */,
 				418DC9D82DAA47AD005613AB /* DebugSettingsView.swift */,
@@ -1485,6 +1486,7 @@
 				41EB65F82E05BB7400F53573 /* FactoryResetAppSettingsView.swift */,
 				412018052EC0E0C6007D6643 /* GraphColoursSettingsView.swift */,
 				416B8F192F12552600C73AB0 /* ContactView.swift */,
+				419C42192F4CC50400EB8F71 /* ReadOnlySettings */,
 			);
 			path = "Settings Page";
 			sourceTree = "<group>";
@@ -1613,6 +1615,15 @@
 				4192F9982A8674990035DAB8 /* DataLoggersView.swift */,
 			);
 			path = "Data Logger";
+			sourceTree = "<group>";
+		};
+		419C42192F4CC50400EB8F71 /* ReadOnlySettings */ = {
+			isa = PBXGroup;
+			children = (
+				41ACB1F42F4B571100EB7BF4 /* ReadOnlySettingsView.swift */,
+				419C42172F4CC4FE00EB8F71 /* ReadOnlySettingsViewModel.swift */,
+			);
+			path = ReadOnlySettings;
 			sourceTree = "<group>";
 		};
 		41A25D3A28CA5CB700315714 /* Power Flow */ = {
@@ -2381,6 +2392,7 @@
 				41CD1F342A141F81006B0C00 /* NonFunctionalButton.swift in Sources */,
 				410F412B2DA5BD5D00DEE2F4 /* ESLabeledText.swift in Sources */,
 				41CF044C2A95006E00ADCCAD /* ExternalWebNavigationLink.swift in Sources */,
+				419C42182F4CC4FE00EB8F71 /* ReadOnlySettingsViewModel.swift in Sources */,
 				411029152A71C4F2004018BB /* NumberTextField.swift in Sources */,
 				419CCB542933BABF00882649 /* ErrorAlertView.swift in Sources */,
 				41626CD029D969E9003FEB00 /* InverterFirmwareVersionsView.swift in Sources */,
