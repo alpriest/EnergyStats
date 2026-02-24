@@ -119,7 +119,7 @@ public protocol ScheduleTemplateConfigManager {
     var scheduleTemplates: [ScheduleTemplate] { get set }
 }
 
-public struct PowerFlowStringsSettings: Codable {
+public struct PowerFlowStringsSettings: Codable, Equatable {
     public let enabled: Bool
     public let pv1Name: String
     public let pv1Enabled: Bool

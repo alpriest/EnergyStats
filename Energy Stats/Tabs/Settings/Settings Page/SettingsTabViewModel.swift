@@ -196,24 +196,26 @@ class SettingsTabViewModel: ObservableObject {
             config.showBatterySOCOnDailyStats = showBatterySOCOnDailyStats
         }
     }
-    
+
     @Published var allowNegativeLoad: Bool {
         didSet {
             config.allowNegativeLoad = allowNegativeLoad
         }
     }
-    
+
     @Published var currencySymbol: String {
         didSet {
             config.currencySymbol = currencySymbol
         }
     }
-    
+
     @Published var showOutputEnergyOnStats: Bool {
         didSet {
             config.showOutputEnergyOnStats = showOutputEnergyOnStats
         }
     }
+
+    @Published var readOnlyTitle: String = ""
 
     private(set) var config: ConfigManaging
     private let userManager: UserManager
@@ -270,13 +272,17 @@ class SettingsTabViewModel: ObservableObject {
             }
         }.store(in: &cancellables)
 
-        config.appSettingsPublisher.sink { [weak self] in
-            guard let self else { return }
+        config.appSettingsPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] appSettings in
+                guard let self else { return }
 
-            if $0.showBatteryPercentageRemaining != self.showBatteryPercentageRemaining {
-                self.showBatteryPercentageRemaining = $0.showBatteryPercentageRemaining
-            }
-        }.store(in: &cancellables)
+                if appSettings.showBatteryPercentageRemaining != self.showBatteryPercentageRemaining {
+                    self.showBatteryPercentageRemaining = appSettings.showBatteryPercentageRemaining
+                }
+
+                self.readOnlyTitle = "Read-only mode (\(appSettings.isReadOnly ? "on" : "off"))"
+            }.store(in: &cancellables)
     }
 
     @Published var showAlert = false

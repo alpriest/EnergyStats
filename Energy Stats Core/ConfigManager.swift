@@ -736,23 +736,29 @@ public class ConfigManager: ConfigManaging {
 
     public var showOutputEnergyOnStats: Bool {
         get { config.showOutputEnergyOnStats }
-        set { config.showOutputEnergyOnStats = newValue
+        set {
+            config.showOutputEnergyOnStats = newValue
             appSettingsStore.update(appSettingsStore.currentValue.copy(
                 showOutputEnergyOnStats: config.showOutputEnergyOnStats
             ))
         }
     }
-    
+
     public var pvOutputConfig: PVOutputConfig? {
         get { config.pvOutputConfig }
         set { config.pvOutputConfig = newValue }
     }
-    
+
     public var isReadOnly: Bool {
         get { config.isReadOnly }
-        set { config.isReadOnly = newValue }
+        set {
+            config.isReadOnly = newValue
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
+                isReadOnly: config.isReadOnly,
+            ))
+        }
     }
-    
+
     public var readOnlyCode: String {
         get { config.readOnlyCode }
         set { config.readOnlyCode = newValue }

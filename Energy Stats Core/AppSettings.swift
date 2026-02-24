@@ -14,7 +14,7 @@ public enum SelfSufficiencyEstimateMode: Int, RawRepresentable {
     case absolute = 2
 }
 
-public struct AppSettings {
+public struct AppSettings: Equatable {
     public var showColouredLines: Bool
     public var showBatteryTemperature: Bool
     public var refreshFrequency: RefreshFrequency
@@ -61,6 +61,7 @@ public struct AppSettings {
     public var showBatterySOCOnDailyStats: Bool
     public var allowNegativeLoad: Bool
     public var showOutputEnergyOnStats: Bool
+    public var isReadOnly: Bool
 
     public init(
         showColouredLines: Bool,
@@ -108,7 +109,8 @@ public struct AppSettings {
         showInverterConsumption: Bool,
         showBatterySOCOnDailyStats: Bool,
         allowNegativeLoad: Bool,
-        showOutputEnergyOnStats: Bool
+        showOutputEnergyOnStats: Bool,
+        isReadOnly: Bool
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -156,6 +158,7 @@ public struct AppSettings {
         self.showBatterySOCOnDailyStats = showBatterySOCOnDailyStats
         self.allowNegativeLoad = allowNegativeLoad
         self.showOutputEnergyOnStats = showOutputEnergyOnStats
+        self.isReadOnly = isReadOnly
     }
 
     public func copy(
@@ -204,7 +207,8 @@ public struct AppSettings {
         showInverterConsumption: Bool? = nil,
         showBatterySOCOnDailyStats: Bool? = nil,
         allowNegativeLoad: Bool? = nil,
-        showOutputEnergyOnStats: Bool? = nil
+        showOutputEnergyOnStats: Bool? = nil,
+        isReadOnly: Bool? = nil
     ) -> AppSettings {
         AppSettings(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -252,7 +256,8 @@ public struct AppSettings {
             showInverterConsumption: showInverterConsumption ?? self.showInverterConsumption,
             showBatterySOCOnDailyStats: showBatterySOCOnDailyStats ?? self.showBatterySOCOnDailyStats,
             allowNegativeLoad: allowNegativeLoad ?? self.allowNegativeLoad,
-            showOutputEnergyOnStats: showOutputEnergyOnStats ?? self.showOutputEnergyOnStats
+            showOutputEnergyOnStats: showOutputEnergyOnStats ?? self.showOutputEnergyOnStats,
+            isReadOnly: isReadOnly ?? self.isReadOnly
         )
     }
 
@@ -303,7 +308,8 @@ public struct AppSettings {
             showInverterConsumption: config.showInverterConsumption,
             showBatterySOCOnDailyStats: config.showBatterySOCOnDailyStats,
             allowNegativeLoad: config.allowNegativeLoad,
-            showOutputEnergyOnStats: config.showOutputEnergyOnStats
+            showOutputEnergyOnStats: config.showOutputEnergyOnStats,
+            isReadOnly: config.isReadOnly
         )
     }
 }

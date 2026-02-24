@@ -88,7 +88,7 @@ struct SettingsTabView: View {
             DisplaySettingsView(viewModel: viewModel, configManager: configManager, solarService: solarService, networking: networking)
 
             Section {
-                NavigationLink("Read-only mode") {
+                NavigationLink(viewModel.readOnlyTitle) {
                     ReadOnlySettingsView(configManager: configManager)
                 }
                 NavigationLink("FoxESS Cloud Status") { WebView(url: URL(string: "https://monitor.foxesscommunity.com/status/foxess")!) }
