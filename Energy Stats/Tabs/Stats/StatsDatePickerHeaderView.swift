@@ -83,7 +83,7 @@ struct StatsDatePickerHeaderView: View {
             )
         }
         .sheet(isPresented: $graphSettingsShowing) {
-            GraphSettingsView(
+            StatsGraphSettingsView(
                 statsTimeUsageGraphStyle: $statsTimeUsageGraphStyle,
                 showingEnergyBreakdownGraph: $showingEnergyBreakdownGraph
             )

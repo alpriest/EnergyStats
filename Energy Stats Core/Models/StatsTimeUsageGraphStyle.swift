@@ -8,9 +8,9 @@
 import Foundation
 
 public enum StatsTimeUsageGraphStyle: Int, CaseIterable, RawRepresentable {
-    case off = 0
+    case bar = 0
     case line = 1
-    case bar = 2
+    case off = 2
 
     public var isOn: Bool {
         switch self {
@@ -39,17 +39,7 @@ public enum StatsTimeUsageGraphStyle: Int, CaseIterable, RawRepresentable {
         }
     }
 
-    public var next: StatsTimeUsageGraphStyle {
-        switch self {
-        case .off:
-            return .line
-        case .line:
-            return .bar
-        case .bar:
-            return .off
-        }
-    }
-
+    // TODO: localize
     public var title: String {
         switch self {
         case .off:

@@ -1,5 +1,5 @@
 //
-//  GraphSettingsView.swift
+//  StatsGraphSettingsView.swift
 //  Energy Stats
 //
 //  Created by Alistair Priest on 28/02/2026.
@@ -8,7 +8,7 @@
 import Energy_Stats_Core
 import SwiftUI
 
-struct GraphSettingsView: View {
+struct StatsGraphSettingsView: View {
     @Binding var statsTimeUsageGraphStyle: StatsTimeUsageGraphStyle
     @Binding var showingEnergyBreakdownGraph: Bool
 
@@ -48,7 +48,7 @@ struct GraphSettingsView: View {
 }
 
 #Preview {
-    GraphSettingsView(
+    StatsGraphSettingsView(
         statsTimeUsageGraphStyle: .constant(.line),
         showingEnergyBreakdownGraph: .constant(true)
     )
