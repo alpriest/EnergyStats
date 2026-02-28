@@ -15,7 +15,6 @@ struct StatsTabView: View {
     @State private var showingExporter = false
     @State private var appSettings: AppSettings
     private var appSettingsPublisher: LatestAppSettingsPublisher
-    @AppStorage("showStatsGraph") private var showingTimeGraph = true
     @AppStorage("showingEnergyBreakdownGraph") private var showingEnergyBreakdownGraph = true
 
     init(configManager: ConfigManaging, networking: Networking) {
@@ -28,12 +27,12 @@ struct StatsTabView: View {
         Group {
             VStack {
                 StatsDatePickerHeaderView(viewModel: StatsDatePickerHeaderViewModel($viewModel.displayMode),
-                                          showingTimeGraph: $showingTimeGraph,
+                                          statsTimeUsageGraphStyle: $viewModel.statsTimeUsageGraphStyle,
                                           showingEnergyBreakdownGraph: $showingEnergyBreakdownGraph)
 
                 ScrollView {
                     VStack {
-                        if showingTimeGraph {
+                        if viewModel.statsTimeUsageGraphStyle.isOn {
                             HStack {
                                 Group {
                                     if viewModel.valuesAtTime != nil, let selectedDate = viewModel.selectedDate {
@@ -100,7 +99,7 @@ struct StatsTabView: View {
     }
 
     private var graphHeight: CGFloat {
-        switch (showingTimeGraph, showingEnergyBreakdownGraph) {
+        switch (viewModel.statsTimeUsageGraphStyle.isOn, showingEnergyBreakdownGraph) {
         case (true, true):
             200
         case (false, false):

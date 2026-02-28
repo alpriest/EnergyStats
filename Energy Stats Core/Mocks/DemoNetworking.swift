@@ -389,6 +389,7 @@ public class MockConfig: StoredConfig {
     public func clearDeviceSettings() {}
 
     public var showGraphValueDescriptions: Bool = true
+    public var statsTimeUsageGraphStyle: StatsTimeUsageGraphStyle = .line
     public var showBatteryEstimate: Bool = true
     public var batteryCapacity: String?
     public var minSOC: String?

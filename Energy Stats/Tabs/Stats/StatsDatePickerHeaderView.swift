@@ -10,9 +10,10 @@ import SwiftUI
 
 struct StatsDatePickerHeaderView: View {
     @ObservedObject var viewModel: StatsDatePickerHeaderViewModel
-    @Binding var showingTimeGraph: Bool
+    @Binding var statsTimeUsageGraphStyle: StatsTimeUsageGraphStyle
     @Binding var showingEnergyBreakdownGraph: Bool
     @State private var showingCustomRangePicker = false
+    @State private var graphSettingsShowing = false
 
     var body: some View {
         HStack {
@@ -48,18 +49,10 @@ struct StatsDatePickerHeaderView: View {
                 Divider()
 
                 Button {
-                    showingTimeGraph.toggle()
+                    graphSettingsShowing.toggle()
                 } label: {
-                    Label(showingTimeGraph ? "Hide time graph" : "Show time graph", systemImage: "chart.bar.xaxis.ascending.badge.clock")
+                    Text("Graph settings...")
                 }
-                .buttonStyle(.bordered)
-
-                Button {
-                    showingEnergyBreakdownGraph.toggle()
-                } label: {
-                    Label(showingEnergyBreakdownGraph ? "Hide energy breakdown" : "Show energy breakdown", systemImage: "chart.bar.fill")
-                }
-                .buttonStyle(.bordered)
 
             } label: {
                 Image(systemName: "calendar.badge.clock")
@@ -88,6 +81,13 @@ struct StatsDatePickerHeaderView: View {
                     showingCustomRangePicker.toggle()
                 }
             )
+        }
+        .sheet(isPresented: $graphSettingsShowing) {
+            GraphSettingsView(
+                statsTimeUsageGraphStyle: $statsTimeUsageGraphStyle,
+                showingEnergyBreakdownGraph: $showingEnergyBreakdownGraph
+            )
+            .presentationDetents([.medium])
         }
     }
 
@@ -217,7 +217,7 @@ struct StatsDatePickerHeaderView: View {
 #Preview {
     StatsDatePickerHeaderView(
         viewModel: StatsDatePickerHeaderViewModel(.constant(.custom(.now, .now, .days))),
-        showingTimeGraph: .constant(true),
+        statsTimeUsageGraphStyle: .constant(.bar),
         showingEnergyBreakdownGraph: .constant(true)
     )
     .frame(height: 200)

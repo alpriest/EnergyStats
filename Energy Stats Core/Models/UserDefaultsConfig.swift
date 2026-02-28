@@ -18,6 +18,7 @@ public class UserDefaultsConfig: StoredConfig {
     
     public func clearDisplaySettings() {
         UserDefaults.shared.removeObject(forKey: "showGraphValueDescriptions")
+        UserDefaults.shared.removeObject(forKey: "statsTimeUsageGraphStyle")
         UserDefaults.shared.removeObject(forKey: "hasRunBefore")
         UserDefaults.shared.removeObject(forKey: "showColouredLines")
         UserDefaults.shared.removeObject(forKey: "showBatteryTemperature")
@@ -86,7 +87,7 @@ public class UserDefaultsConfig: StoredConfig {
     
     @UserDefaultsStoredBool(key: "showGraphValueDescriptions", defaultValue: true)
     public var showGraphValueDescriptions: Bool
-    
+
     @UserDefaultsStoredBool(key: "hasRunBefore")
     public var hasRunBefore: Bool
     
@@ -340,4 +341,14 @@ public class UserDefaultsConfig: StoredConfig {
     
     @UserDefaultsStoredString(key: "readOnlyCode", defaultValue: "")
     public var readOnlyCode: String
- }
+    
+    public var statsTimeUsageGraphStyle: StatsTimeUsageGraphStyle {
+        get {
+            let rawValue = UserDefaults.shared.integer(forKey: "statsTimeUsageGraphStyle")
+            return StatsTimeUsageGraphStyle(rawValue: rawValue) ?? .line
+        }
+        set {
+            UserDefaults.shared.set(newValue.rawValue, forKey: "statsTimeUsageGraphStyle")
+        }
+    }
+}

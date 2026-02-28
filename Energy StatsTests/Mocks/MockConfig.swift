@@ -33,6 +33,7 @@ class MockConfig: StoredConfig {
     var showFinancialEarnings: Bool = true
     var showFinancialSummaryOnFlowPage: Bool = false
     var showGraphValueDescriptions: Bool = true
+    var statsTimeUsageGraphStyle: StatsTimeUsageGraphStyle = .line
     var showGridTotalsOnPowerFlow: Bool = false
     var showHomeTotalOnPowerFlow: Bool = false
     var showInW: Bool = false

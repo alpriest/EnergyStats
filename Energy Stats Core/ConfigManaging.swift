@@ -85,6 +85,7 @@ public protocol ConfigManaging: FinancialConfigManager, SolcastConfigManager, Ba
     var pvOutputConfig: PVOutputConfig? { get set }
     var isReadOnly: Bool { get set }
     var readOnlyCode: String { get set }
+    var statsTimeUsageGraphStyle: StatsTimeUsageGraphStyle { get set }
 }
 
 public enum DeviceCapability {

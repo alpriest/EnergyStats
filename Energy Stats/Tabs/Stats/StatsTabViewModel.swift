@@ -24,7 +24,7 @@ struct ApproximationsViewModel {
 
 class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
     private let haptic = UIImpactFeedbackGenerator()
-    private let configManager: ConfigManaging
+    private var configManager: ConfigManaging
     private let networking: Networking
     private let approximationsCalculator: ApproximationsCalculator
 
@@ -43,6 +43,11 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
     @Published var touchHeaderTitle: LocalizedStringKey = "stats_header_by_time"
     @Published var valuesAtTime: ValuesAtTime<StatsGraphValue>?
     @Published var selectedDate: Date?
+    @Published var statsTimeUsageGraphStyle: StatsTimeUsageGraphStyle {
+        didSet {
+            configManager.statsTimeUsageGraphStyle = statsTimeUsageGraphStyle
+        }
+    }
 
     private var rawData: [StatsGraphValue] = []
     @Published var data: [StatsGraphValue] = []
@@ -67,6 +72,7 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
         self.configManager = configManager
         self.approximationsCalculator = ApproximationsCalculator(configManager: configManager, networking: networking)
         self.fetcher = StatsDataFetcher(networking: networking, approximationsCalculator: approximationsCalculator)
+        self.statsTimeUsageGraphStyle = configManager.statsTimeUsageGraphStyle
 
         haptic.prepare()
 

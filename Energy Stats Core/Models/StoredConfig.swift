@@ -41,6 +41,7 @@ public protocol StoredConfig {
     var currencySymbol: String { get set }
     var shouldCombineCT2WithPVPower: Bool { get set }
     var showGraphValueDescriptions: Bool { get set }
+    var statsTimeUsageGraphStyle: StatsTimeUsageGraphStyle { get set }
     var solcastSettings: SolcastSettings { get set }
     var dataCeiling: DataCeiling { get set }
     var showTotalYieldOnPowerFlow: Bool { get set }

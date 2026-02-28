@@ -409,6 +409,11 @@ public class ConfigManager: ConfigManaging {
         }
     }
 
+    public var statsTimeUsageGraphStyle: StatsTimeUsageGraphStyle {
+        get { config.statsTimeUsageGraphStyle }
+        set { config.statsTimeUsageGraphStyle = newValue }
+    }
+
     public var devices: [Device]? {
         get {
             guard let deviceListData = config.devices else { return nil }

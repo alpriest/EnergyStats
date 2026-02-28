@@ -68,23 +68,34 @@ struct StatsGraphValue: Identifiable, Hashable {
 }
 
 struct StatsGraphView: View {
-    let viewModel: StatsTabViewModel
+    @ObservedObject var viewModel: StatsTabViewModel
     @GestureState var isDetectingPress = true
     @Binding var selectedDate: Date?
     @State private var nextDate: Date?
     @Binding var valuesAtTime: ValuesAtTime<StatsGraphValue>?
     let appSettings: AppSettings
-
+    
     var body: some View {
         ZStack {
             Chart {
-                ForEach(viewModel.data.filter { $0.isForNormalGraph }, id: \.type.titleTotal) {
-                    LineMark(
-                        x: .value("hour", $0.date, unit: viewModel.unit),
-                        y: .value("Amount", $0.graphValue),
-                        series: .value("Series", $0.type.networkTitle)
-                    )
-                    .foregroundStyle($0.type.colour)
+                ForEach(viewModel.data.filter { $0.isForNormalGraph }, id: \.type.titleTotal) { dataPoint in
+                    if viewModel.statsTimeUsageGraphStyle.isLine {
+                        LineMark(
+                            x: .value("hour", dataPoint.date, unit: viewModel.unit),
+                            y: .value("Amount", dataPoint.graphValue),
+                            series: .value("Series", dataPoint.type.networkTitle)
+                        )
+                        .foregroundStyle(dataPoint.type.colour)
+                    }
+
+                    if viewModel.statsTimeUsageGraphStyle.isBar {
+                        BarMark(
+                            x: .value("hour", dataPoint.date, unit: viewModel.unit),
+                            y: .value("Amount", dataPoint.graphValue)
+                        )
+                        .position(by: .value("parameter", dataPoint.type.networkTitle))
+                        .foregroundStyle(dataPoint.type.colour)
+                    }
                 }
 
                 if appSettings.showSelfSufficiencyStatsGraphOverlay && appSettings.selfSufficiencyEstimateMode != .off {
