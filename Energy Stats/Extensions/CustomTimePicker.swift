@@ -117,7 +117,6 @@ private struct TimePickerSheet: View {
                 }.pickerStyle(.wheel)
             }
         }
-        .padding()
     }
 
     private let timeSlots: [Time] = {
