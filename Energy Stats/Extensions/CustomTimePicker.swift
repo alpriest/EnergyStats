@@ -13,6 +13,7 @@ struct CustomTimePicker: View {
     @Binding var start: Date
     @Binding var end: Date
     private let includeSeconds: Bool
+    @State private var showing: TimeType?
 
     init(start: Binding<Date>, end: Binding<Date>, includeSeconds: Bool) {
         self._start = start
@@ -21,60 +22,76 @@ struct CustomTimePicker: View {
     }
 
     var body: some View {
-        VStack {
-            SingleTimePickerView(label: "Start", date: $start, timeType: .start, includeAppendage: includeSeconds)
-            SingleTimePickerView(label: "End", date: $end, timeType: .end, includeAppendage: includeSeconds)
-        }
+        SingleTimePickerView(
+            label: "Start",
+            date: $start,
+            timeType: .start,
+            includeAppendage: includeSeconds,
+            showing: $showing
+        )
+
+        SingleTimePickerView(
+            label: "End",
+            date: $end,
+            timeType: .end,
+            includeAppendage: includeSeconds,
+            showing: $showing
+        )
     }
 }
 
 private struct SingleTimePickerView: View {
     let label: LocalizedStringKey
     @Binding var date: Date
-    @State private var showing = false
     private let timeType: TimeType
     private let includeAppendage: Bool
+    @Binding var showing: TimeType?
 
-    init(label: LocalizedStringKey, date: Binding<Date>, timeType: TimeType, includeAppendage: Bool) {
+    init(
+        label: LocalizedStringKey,
+        date: Binding<Date>,
+        timeType: TimeType,
+        includeAppendage: Bool,
+        showing: Binding<TimeType?>
+    ) {
         self.label = label
         self._date = date
         self.timeType = timeType
         self.includeAppendage = includeAppendage
+        self._showing = showing
     }
 
     var body: some View {
-        HStack {
-            Text(label)
-            Spacer()
-            Button(action: {
-                showing = true
-            }) {
+        VStack {
+            HStack {
+                Text(label)
+                Spacer()
                 Text(date, formatter: DateFormatter.fullTime) + Text(includeAppendage ? ":" + timeType.appendage() : "")
-            }.buttonStyle(.bordered)
-        }.onTapGesture {
-            showing = true
-        }.sheet(isPresented: $showing, content: {
-            TimePickerSheet(label: label, date: date) {
-                date = $0
-                showing = false
             }
-        })
+            .contentShape(Rectangle())
+            .onTapGesture {
+                if showing != timeType {
+                    showing = timeType
+                } else {
+                    showing = nil
+                }
+            }
+
+            if showing == timeType {
+                TimePickerSheet(label: label, date: $date)
+            }
+        }
     }
 }
 
 private struct TimePickerSheet: View {
     let label: LocalizedStringKey
-    @State var date: Date
-    let onSelect: (Date) -> Void
+    @Binding var date: Date
     @AppStorage("timeStyleAccurate") private var timeStyleAccurate = true
-    private let originalValue: Date
-    @State private var isDirty = false
 
-    init(label: LocalizedStringKey, date: Date, onSelect: @escaping (Date) -> Void) {
+    init(label: LocalizedStringKey, date: Binding<Date>) {
         self.label = label
-        originalValue = date
-        self._date = State(wrappedValue: date)
-        self.onSelect = onSelect
+        self._date = date
     }
 
     var body: some View {
@@ -99,18 +116,8 @@ private struct TimePickerSheet: View {
                     }
                 }.pickerStyle(.wheel)
             }
-
-            Spacer()
-
-            BottomButtonsView(dirty: isDirty) {
-                onSelect(date)
-            }
-        }
-        .onChange(of: date) { newValue in
-            isDirty = newValue != originalValue
         }
         .padding()
-        .modifier(MediumPresentationDetentsViewModifier())
     }
 
     private let timeSlots: [Time] = {
@@ -133,11 +140,18 @@ struct MediumPresentationDetentsViewModifier: ViewModifier {
 }
 
 #Preview {
-    CustomTimePicker(
-        start: .constant(Date()),
-        end: .constant(
-            Date()
-        ),
-        includeSeconds: true
-    )
+    Preview()
+}
+
+private struct Preview: View {
+    @State var start = Date()
+    @State var end = Date()
+
+    var body: some View {
+        CustomTimePicker(
+            start: $start,
+            end: $end,
+            includeSeconds: true
+        )
+    }
 }
