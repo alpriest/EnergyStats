@@ -110,7 +110,10 @@ class SummaryTabViewModel: ObservableObject, HasLoadState {
                             oldestDataDate = "\(from.monthYearString())"
                         }
                     }
-                    hasFinished = true
+                    
+                    if year == fromYear {
+                        hasFinished = true
+                    }
                 }
 
                 yearlyTotals.forEach { variable, value in
