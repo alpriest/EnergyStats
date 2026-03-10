@@ -127,6 +127,14 @@ struct BatterySettingsView: View {
             }
 
             Section {
+                Toggle(isOn: $viewModel.showBatteryMaxChargeCurrent) {
+                    Text("Show battery max charge current")
+                }
+            } footer: {
+                Text("show_battery_max_charge_current_description")
+            }
+
+            Section {
                 HStack {
                     Text("Display battery stack").padding(.trailing)
                     Spacer()

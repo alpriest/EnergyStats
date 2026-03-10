@@ -61,6 +61,8 @@ class SettingsTabViewModel: ObservableObject {
             config.showBatteryTemperature = showBatteryTemperature
         }
     }
+    
+    @Published var showBatteryMaxChargeCurrent: Bool { didSet { config.showBatteryMaxChargeCurrent = showBatteryMaxChargeCurrent }}
 
     @Published var showBatteryEstimate: Bool {
         didSet {
@@ -262,6 +264,7 @@ class SettingsTabViewModel: ObservableObject {
         allowNegativeLoad = config.allowNegativeLoad
         currencySymbol = config.currencySymbol
         showOutputEnergyOnStats = config.showOutputEnergyOnStats
+        showBatteryMaxChargeCurrent = config.showBatteryMaxChargeCurrent
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }
