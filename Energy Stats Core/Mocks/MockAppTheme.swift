@@ -49,6 +49,7 @@ public extension AppSettings {
             showInverterTypeName: false,
             powerFlowStrings: .none,
             showBatteryPercentageRemaining: true,
+            showBatteryMaxChargeCurrent: true,
             showSelfSufficiencyStatsGraphOverlay: true,
             truncatedYAxisOnParameterGraphs: true,
             earningsModel: .exported,

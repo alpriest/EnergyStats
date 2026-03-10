@@ -52,6 +52,7 @@ public class UserDefaultsConfig: StoredConfig {
         UserDefaults.shared.removeObject(forKey: "showInverterTypeName")
         UserDefaults.shared.removeObject(forKey: "powerFlowStringsSettings")
         UserDefaults.shared.removeObject(forKey: "showBatteryPercentageRemaining")
+        UserDefaults.shared.removeObject(forKey: "showBatteryMaxChargeCurrent")
         UserDefaults.shared.removeObject(forKey: "showSelfSufficiencyStatsGraphOverlay")
         UserDefaults.shared.removeObject(forKey: "truncatedYAxisOnParameterGraphs")
         UserDefaults.shared.removeObject(forKey: "earningsModel")
@@ -246,6 +247,9 @@ public class UserDefaultsConfig: StoredConfig {
     
     @UserDefaultsStoredBool(key: "showBatteryPercentageRemaining", defaultValue: true)
     public var showBatteryPercentageRemaining: Bool
+    
+    @UserDefaultsStoredBool(key: "showBatteryMaxChargeCurrent", defaultValue: true)
+    public var showBatteryMaxChargeCurrent: Bool
     
     @UserDefaultsStoredCodable(key: "powerStationDetail", defaultValue: nil)
     public var powerStationDetail: PowerStationDetail?

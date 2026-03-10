@@ -63,6 +63,7 @@ public struct LocalizedString {
         case batteryHeaterEnabledButNoTimesEnabled = "battery_heater_enabled_but_no_times_enabled"
         case batteryHeaterEnabledWithTimes = "battery_heater_enabled_with_times"
         case celsiusRange = "celsius_range"
+        case batteryMaxChargeCurrent = "battery_max_charge_current"
 
         public enum Accessibility: String, RawRepresentable {
             case inverter = "accessibility.inverter"
@@ -92,6 +93,7 @@ public struct LocalizedString {
             case totalIncomeToday = "accessibility.totalIncomeToday"
             case minutes = "accessibility.minutes"
             case seconds = "accessibility.seconds"
+            case batteryMaxChargeCurrent = "accessibility.batteryMaxChargeCurrent"
         }
     }
 }

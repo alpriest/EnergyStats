@@ -192,6 +192,10 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
     public var batteryError: Error? {
         self.batteryViewModel.error
     }
+    
+    public var maxChargeCurrent: Double {
+        self.batteryViewModel.maxChargeCurrent
+    }
 }
 
 public extension LoadedPowerFlowViewModel {

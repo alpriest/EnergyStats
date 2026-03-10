@@ -14,14 +14,16 @@ public struct BatteryViewModel: Sendable {
     public let temperatures: BatteryTemperatures
     public let residual: Int
     public let error: Error?
+    public let maxChargeCurrent: Double
 
-    public init(power: Double, soc: Int, residual: Double, temperatures: BatteryTemperatures) {
+    public init(power: Double, soc: Int, residual: Double, temperatures: BatteryTemperatures, maxChargeCurrent: Double) {
         chargeLevel = Double(soc) / 100.0
         chargePower = power
         hasBattery = true
         self.temperatures = temperatures
         self.residual = Int(residual)
         error = nil
+        self.maxChargeCurrent = maxChargeCurrent
     }
 
     public init(
@@ -33,15 +35,16 @@ public struct BatteryViewModel: Sendable {
             bmsTemperature_1: nil,
             bmsTemperature_2: nil
         ),
-        residual: Int = 0
-    )
-    {
+        residual: Int = 0,
+        maxChargeCurrent: Double = 0
+    ) {
         self.hasBattery = hasBattery
         self.chargeLevel = chargeLevel
         self.chargePower = chargePower
         self.temperatures = temperatures
         self.residual = residual
         error = nil
+        self.maxChargeCurrent = maxChargeCurrent
     }
 
     public init(error: Error) {
@@ -51,6 +54,7 @@ public struct BatteryViewModel: Sendable {
         chargePower = 0
         temperatures = BatteryTemperatures(bmsTemperature: nil, bmsTemperature_1: nil, bmsTemperature_2: nil)
         residual = 0
+        maxChargeCurrent = 0
     }
 }
 
@@ -65,7 +69,8 @@ public extension BatteryViewModel {
             chargeLevel: 0.99,
             chargePower: 0.1,
             temperatures: BatteryTemperatures(bmsTemperature: TemperatureData(value: 15.6, name: "BMS"), bmsTemperature_1: nil, bmsTemperature_2: nil),
-            residual: 5678
+            residual: 5678,
+            maxChargeCurrent: 14.0
         )
     }
 
@@ -88,12 +93,14 @@ extension OpenQueryResponse {
             bmsTemperature_1: TemperatureData(value: datas.current(for: "batTemperature_1")?.value, name: "BMS1"),
             bmsTemperature_2: TemperatureData(value: datas.current(for: "batTemperature_2")?.value, name: "BMS2")
         )
+        let maxChargeCurrent = datas.currentDouble(for: "maxChargeCurrent")
 
         return BatteryViewModel(
             power: power,
             soc: Int(datas.SoC()),
             residual: datas.currentDouble(for: "ResidualEnergy") * 10.0,
-            temperatures: temps
+            temperatures: temps,
+            maxChargeCurrent: maxChargeCurrent
         )
     }
 }

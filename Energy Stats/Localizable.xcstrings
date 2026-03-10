@@ -1045,6 +1045,17 @@
         }
       }
     },
+    "accessibility.batteryMaxChargeCurrent" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Battery max charge current %1$@"
+          }
+        }
+      }
+    },
     "accessibility.batteryStoringRate" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3706,6 +3717,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Harmonogram ogrzewania baterii został zapisany"
+          }
+        }
+      }
+    },
+    "battery_max_charge_current" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Max charge %1$@A"
           }
         }
       }

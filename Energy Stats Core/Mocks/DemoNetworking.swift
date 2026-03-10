@@ -434,6 +434,7 @@ public class MockConfig: StoredConfig {
     public var variables: [Variable] = []
     public var powerFlowStrings: PowerFlowStringsSettings = .none
     public var showBatteryPercentageRemaining: Bool = true
+    public var showBatteryMaxChargeCurrent: Bool = true
     public var powerStationDetail: PowerStationDetail? = nil
     public var showSelfSufficiencyStatsGraphOverlay: Bool = true
     public var scheduleTemplates: [ScheduleTemplate] = []

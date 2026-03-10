@@ -584,6 +584,16 @@ public class ConfigManager: ConfigManaging {
         }
     }
 
+    public var showBatteryMaxChargeCurrent: Bool {
+        get { config.showBatteryMaxChargeCurrent }
+        set {
+            config.showBatteryMaxChargeCurrent = newValue
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
+                showBatteryMaxChargeCurrent: config.showBatteryMaxChargeCurrent
+            ))
+        }
+    }
+
     public var powerStationDetail: PowerStationDetail? { config.powerStationDetail }
 
     public var showSelfSufficiencyStatsGraphOverlay: Bool {

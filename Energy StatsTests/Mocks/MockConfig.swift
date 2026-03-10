@@ -27,6 +27,7 @@ class MockConfig: StoredConfig {
     var shouldCombineCT2WithPVPower: Bool = true
     var showBatteryEstimate: Bool = false
     var showBatteryPercentageRemaining: Bool = false
+    var showBatteryMaxChargeCurrent: Bool = true
     var showBatteryTemperature: Bool = true
     var showColouredLines: Bool = true
     var showEarnings: Bool = false

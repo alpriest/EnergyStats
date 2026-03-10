@@ -275,7 +275,8 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
             "batTemperature",
             "batTemperature_1",
             "batTemperature_2",
-            "ResidualEnergy"
+            "ResidualEnergy",
+            "maxChargeCurrent"
         ]
 
         if config.powerFlowStrings.enabled {

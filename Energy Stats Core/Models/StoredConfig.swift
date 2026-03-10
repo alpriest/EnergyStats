@@ -50,6 +50,7 @@ public protocol StoredConfig {
     var variables: [Variable] { get set }
     var powerFlowStrings: PowerFlowStringsSettings { get set }
     var showBatteryPercentageRemaining: Bool { get set }
+    var showBatteryMaxChargeCurrent: Bool { get set }
     var powerStationDetail: PowerStationDetail? { get set }
     var showSelfSufficiencyStatsGraphOverlay: Bool { get set }
     var scheduleTemplates: [ScheduleTemplate] { get set }

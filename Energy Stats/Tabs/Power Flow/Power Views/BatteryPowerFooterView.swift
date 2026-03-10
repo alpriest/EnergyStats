@@ -65,6 +65,14 @@ struct BatteryPowerFooterView: View {
                 }
             }
 
+            if appSettings.showBatteryMaxChargeCurrent {
+                Text(String(format: String(key: .batteryMaxChargeCurrent), viewModel.maxChargeCurrent))
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(Color("text_dimmed"))
+                    .font(.caption)
+                    .accessibilityLabel(String(format: String(accessibilityKey: .batteryMaxChargeCurrent), viewModel.maxChargeCurrent))
+            }
+
             if appSettings.showBatteryEstimate {
                 OptionalView(viewModel.batteryExtra) {
                     (Text($0) + Text(viewModel.showUsableBatteryOnly ? "*" : ""))

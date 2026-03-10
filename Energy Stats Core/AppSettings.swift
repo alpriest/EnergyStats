@@ -47,6 +47,7 @@ public struct AppSettings: Equatable {
     public var showInverterTypeName: Bool
     public var powerFlowStrings: PowerFlowStringsSettings
     public var showBatteryPercentageRemaining: Bool
+    public var showBatteryMaxChargeCurrent: Bool
     public var showSelfSufficiencyStatsGraphOverlay: Bool
     public var truncatedYAxisOnParameterGraphs: Bool
     public var earningsModel: EarningsModel
@@ -96,6 +97,7 @@ public struct AppSettings: Equatable {
         showInverterTypeName: Bool,
         powerFlowStrings: PowerFlowStringsSettings,
         showBatteryPercentageRemaining: Bool,
+        showBatteryMaxChargeCurrent: Bool,
         showSelfSufficiencyStatsGraphOverlay: Bool,
         truncatedYAxisOnParameterGraphs: Bool,
         earningsModel: EarningsModel,
@@ -144,6 +146,7 @@ public struct AppSettings: Equatable {
         self.showInverterTypeName = showInverterTypeName
         self.powerFlowStrings = powerFlowStrings
         self.showBatteryPercentageRemaining = showBatteryPercentageRemaining
+        self.showBatteryMaxChargeCurrent = showBatteryMaxChargeCurrent
         self.showSelfSufficiencyStatsGraphOverlay = showSelfSufficiencyStatsGraphOverlay
         self.truncatedYAxisOnParameterGraphs = truncatedYAxisOnParameterGraphs
         self.earningsModel = earningsModel
@@ -194,6 +197,7 @@ public struct AppSettings: Equatable {
         showInverterTypeName: Bool? = nil,
         powerFlowStrings: PowerFlowStringsSettings? = nil,
         showBatteryPercentageRemaining: Bool? = nil,
+        showBatteryMaxChargeCurrent: Bool? = nil,
         showSelfSufficiencyStatsGraphOverlay: Bool? = nil,
         truncatedYAxisOnParameterGraphs: Bool? = nil,
         earningsModel: EarningsModel? = nil,
@@ -243,6 +247,7 @@ public struct AppSettings: Equatable {
             showInverterTypeName: showInverterTypeName ?? self.showInverterTypeName,
             powerFlowStrings: powerFlowStrings ?? self.powerFlowStrings,
             showBatteryPercentageRemaining: showBatteryPercentageRemaining ?? self.showBatteryPercentageRemaining,
+            showBatteryMaxChargeCurrent: showBatteryMaxChargeCurrent ?? self.showBatteryMaxChargeCurrent,
             showSelfSufficiencyStatsGraphOverlay: showSelfSufficiencyStatsGraphOverlay ?? self.showSelfSufficiencyStatsGraphOverlay,
             truncatedYAxisOnParameterGraphs: truncatedYAxisOnParameterGraphs ?? self.truncatedYAxisOnParameterGraphs,
             earningsModel: earningsModel ?? self.earningsModel,
@@ -295,6 +300,7 @@ public struct AppSettings: Equatable {
             showInverterTypeName: config.showInverterTypeName,
             powerFlowStrings: config.powerFlowStrings,
             showBatteryPercentageRemaining: config.showBatteryPercentageRemaining,
+            showBatteryMaxChargeCurrent: config.showBatteryMaxChargeCurrent,
             showSelfSufficiencyStatsGraphOverlay: config.showSelfSufficiencyStatsGraphOverlay,
             truncatedYAxisOnParameterGraphs: config.truncatedYAxisOnParameterGraphs,
             earningsModel: config.earningsModel,

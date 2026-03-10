@@ -65,6 +65,7 @@ public protocol ConfigManaging: FinancialConfigManager, SolcastConfigManager, Ba
     var showFinancialSummaryOnFlowPage: Bool { get set }
     var separateParameterGraphsByUnit: Bool { get set }
     var showBatteryPercentageRemaining: Bool { get set }
+    var showBatteryMaxChargeCurrent: Bool { get set }
     var powerStationDetail: PowerStationDetail? { get }
     var showSelfSufficiencyStatsGraphOverlay: Bool { get set }
     var truncatedYAxisOnParameterGraphs: Bool { get set }
