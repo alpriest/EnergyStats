@@ -114,6 +114,8 @@ struct StatsDataFetcher {
             reports: reports,
             reportVariables: reportVariables
         )
+        var fixedTimeZoneCalendar = Calendar(identifier: .gregorian)
+        fixedTimeZoneCalendar.timeZone = TimeZone(secondsFromGMT: 0)!
 
         let updatedData = reports.flatMap { reportResponse -> [StatsGraphValue] in
             guard let reportVariable = ReportVariable(rawValue: reportResponse.variable) else { return [] }
@@ -128,7 +130,7 @@ struct StatsDataFetcher {
                                                                                 day: Calendar.current.component(.day, from: date),
                                                                                 hour: dataPoint.index - 1, minute: 0))!
                 case .month(let month, let year):
-                    graphPointDate = Calendar.current.date(from: DateComponents(year: year, month: month + 1, day: dataPoint.index, hour: 0))!
+                    graphPointDate = fixedTimeZoneCalendar.date(from: DateComponents(year: year, month: month + 1, day: dataPoint.index, hour: 0, minute: 0))!
                 case .year(let year):
                     graphPointDate = Calendar.current.date(from: DateComponents(year: year, month: dataPoint.index, day: 1, hour: 0))!
                 case .custom:
