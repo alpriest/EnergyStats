@@ -13,19 +13,28 @@ struct SchedulePhaseListItemView: View {
 
     var body: some View {
         HStack {
-            phase.color
+            phase.displayColor
                 .frame(width: 5)
                 .frame(maxHeight: .infinity)
-                .padding(.vertical, 4)
 
             VStack(alignment: .leading) {
-                (Text(phase.start.formatted(type: .start)) + Text(" - ") + Text(phase.end.formatted(type: .end))).bold()
+                HStack {
+                    (Text(phase.start.formatted(type: .start)) + Text(" - ") + Text(phase.end.formatted(type: .end))).bold()
+                }
 
                 (Text(WorkMode.title(for: phase.mode)) + Text(extra(for: phase)))
                     .foregroundStyle(Color.primary.opacity(0.5))
                     .font(.caption)
-            }.frame(maxWidth: .infinity, alignment: .leading)
-        }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.vertical)
+        }.background(
+            Group {
+                if phase.enabled == false {
+                    CrossHatchView()
+                }
+            }
+        )
     }
 
     private func extra(for phase: SchedulePhase) -> String {

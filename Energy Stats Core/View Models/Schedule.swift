@@ -39,6 +39,7 @@ public extension ScheduleTemplate {
     static func preview() -> ScheduleTemplate {
         ScheduleTemplate(id: "1", name: "Force discharge", phases: [
             SchedulePhase(
+                enabled: true,
                 start: Time(
                     hour: 1,
                     minute: 00
@@ -55,6 +56,7 @@ public extension ScheduleTemplate {
                 color: .linesNegative
             )!,
             SchedulePhase(
+                enabled: true,
                 start: Time(
                     hour: 10,
                     minute: 30
@@ -115,17 +117,19 @@ public struct Schedule: Hashable, Equatable {
 
 public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {
     public let id: String
+    public let enabled: Bool
     public let start: Time
     public let end: Time
     public let mode: WorkMode
     public let minSocOnGrid: Int
     public let forceDischargePower: Int
     public let forceDischargeSOC: Int
-    public let color: Color
+    private let color: Color
     public let maxSOC: Int?
 
     public init?(
         id: String? = nil,
+        enabled: Bool,
         start: Time,
         end: Time,
         mode: WorkMode,
@@ -139,6 +143,7 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {
         if mode == "Invalid" { return nil }
 
         self.id = id ?? UUID().uuidString
+        self.enabled = enabled
         self.start = start
         self.end = end
         self.mode = mode
@@ -151,6 +156,7 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {
 
     public init(mode: String, device: Device?, initialiseMaxSOC: Bool) {
         self.id = UUID().uuidString
+        self.enabled = true
         self.start = Date().toTime()
         self.end = Date().toTime().adding(minutes: 1)
         self.mode = mode
@@ -163,6 +169,7 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {
 
     private enum CodingKeys: CodingKey {
         case id
+        case enabled
         case start
         case end
         case mode
@@ -176,6 +183,7 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {
     public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decode(String.self, forKey: .id)
+        self.enabled = try container.decodeIfPresent(Bool.self, forKey: .enabled) ?? true
         self.start = try container.decode(Time.self, forKey: .start)
         self.end = try container.decode(Time.self, forKey: .end)
         // Migrate users from UNUSED_WorkMode to String -- written Nov 2025
@@ -194,6 +202,7 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {
     public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(self.id, forKey: .id)
+        try container.encode(self.enabled, forKey: .enabled)
         try container.encode(self.start, forKey: .start)
         try container.encode(self.end, forKey: .end)
         try container.encode(self.mode, forKey: .mode)
@@ -213,9 +222,14 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {
     public func isValid() -> Bool {
         self.end > self.start
     }
+    
+    public var displayColor: Color {
+        color
+    }
 
     public func isEqualConfiguration(to other: SchedulePhase) -> Bool {
-        self.start == other.start &&
+        self.enabled == other.enabled &&
+            self.start == other.start &&
             self.end == other.end &&
             self.mode == other.mode &&
             self.minSocOnGrid == other.minSocOnGrid &&

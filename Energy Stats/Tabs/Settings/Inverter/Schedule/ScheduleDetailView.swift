@@ -19,8 +19,9 @@ struct ScheduleDetailView: View {
         Section {
             VStack(alignment: .leading) {
                 TimePeriodBarView(phases: schedule.phases)
-                    .padding(.bottom, 22)
             }
+        } footer: {
+            EmptyView().padding(.bottom, 22)
         }
 
         if schedule.phases.count == 0 {

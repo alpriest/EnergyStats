@@ -20,9 +20,9 @@ struct TimePeriodBarView: View {
                 .overlay(
                     GeometryReader { reader in
                         ZStack(alignment: .leading) {
-                            ForEach(phases) { phase in
+                            ForEach(phases.filter { $0.enabled }) { phase in
                                 Rectangle()
-                                    .fill(phase.color)
+                                    .fill(phase.displayColor)
                                     .frame(width: reader.size.width * (phase.endPoint - phase.startPoint))
                                     .offset(x: reader.size.width * phase.startPoint)
                             }
@@ -59,6 +59,7 @@ extension Schedule {
         Schedule(
             phases: [
                 SchedulePhase(
+                    enabled: true,
                     start: Time(
                         hour: 1,
                         minute: 00
@@ -75,6 +76,7 @@ extension Schedule {
                     color: .linesNegative
                 )!,
                 SchedulePhase(
+                    enabled: false,
                     start: Time(
                         hour: 08,
                         minute: 00
@@ -91,6 +93,7 @@ extension Schedule {
                     color: .linesPositive
                 )!,
                 SchedulePhase(
+                    enabled: true,
                     start: Time(
                         hour: 19,
                         minute: 30
@@ -107,6 +110,7 @@ extension Schedule {
                     color: .paleGray
                 )!,
                 SchedulePhase(
+                    enabled: true,
                     start: Time(
                         hour: 1,
                         minute: 00
@@ -123,6 +127,7 @@ extension Schedule {
                     color: .linesNegative
                 )!,
                 SchedulePhase(
+                    enabled: true,
                     start: Time(
                         hour: 08,
                         minute: 00
@@ -139,6 +144,7 @@ extension Schedule {
                     color: .linesPositive
                 )!,
                 SchedulePhase(
+                    enabled: true,
                     start: Time(
                         hour: 19,
                         minute: 30
@@ -155,6 +161,7 @@ extension Schedule {
                     color: .paleGray
                 )!,
                 SchedulePhase(
+                    enabled: true,
                     start: Time(
                         hour: 1,
                         minute: 00

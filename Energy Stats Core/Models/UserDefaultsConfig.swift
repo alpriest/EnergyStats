@@ -248,7 +248,7 @@ public class UserDefaultsConfig: StoredConfig {
     @UserDefaultsStoredBool(key: "showBatteryPercentageRemaining", defaultValue: true)
     public var showBatteryPercentageRemaining: Bool
     
-    @UserDefaultsStoredBool(key: "showBatteryMaxChargeCurrent", defaultValue: true)
+    @UserDefaultsStoredBool(key: "showBatteryMaxChargeCurrent", defaultValue: false)
     public var showBatteryMaxChargeCurrent: Bool
     
     @UserDefaultsStoredCodable(key: "powerStationDetail", defaultValue: nil)

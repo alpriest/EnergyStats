@@ -158,6 +158,7 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState, HasAlertContent 
 extension SchedulePhaseNetworkModel {
     func toSchedulePhase() -> SchedulePhase? {
         SchedulePhase(
+            enabled: enable.boolValue,
             start: Time(hour: startHour, minute: startMinute),
             end: Time(hour: endHour, minute: endMinute),
             mode: workMode,
@@ -177,7 +178,6 @@ extension Schedule {
 
     init(scheduleResponse: ScheduleResponse) {
         self.init(phases: scheduleResponse.groups
-            .filter { $0.enable == 1 }
             .compactMap { $0.toSchedulePhase() })
     }
 }

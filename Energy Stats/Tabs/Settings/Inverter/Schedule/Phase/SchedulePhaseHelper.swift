@@ -90,6 +90,7 @@ enum SchedulePhaseHelper {
 
     private static func makePhase(from start: Time, to end: Time, mode: WorkMode, soc: Int, initialiseMaxSOC: Bool) -> SchedulePhase {
         SchedulePhase(
+            enabled: true,
             start: start,
             end: end,
             mode: mode,

@@ -11,6 +11,7 @@ import SwiftUI
 
 struct SchedulePhaseEditViewData: Copiable {
     var id: String
+    var enabled: Bool
     var startTime: Date
     var endTime: Date
     var workMode: WorkMode
@@ -24,6 +25,7 @@ struct SchedulePhaseEditViewData: Copiable {
     func create(copying previous: SchedulePhaseEditViewData) -> SchedulePhaseEditViewData {
         SchedulePhaseEditViewData(
             id: previous.id,
+            enabled: previous.enabled,
             startTime: previous.startTime,
             endTime: previous.endTime,
             workMode: previous.workMode,

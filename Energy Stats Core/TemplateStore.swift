@@ -69,6 +69,7 @@ class PreviewTemplateStore: TemplateStoring {
         [
             ScheduleTemplate(id: "1", name: "Force discharge", phases: [
                 SchedulePhase(
+                    enabled: true,
                     start: Time(
                         hour: 1,
                         minute: 00
@@ -85,6 +86,7 @@ class PreviewTemplateStore: TemplateStoring {
                     color: .linesNegative
                 )!,
                 SchedulePhase(
+                    enabled: true,
                     start: Time(
                         hour: 10,
                         minute: 30
@@ -103,6 +105,7 @@ class PreviewTemplateStore: TemplateStoring {
             ]),
             ScheduleTemplate(id: "2", name: "Force charge overnight", phases: [
                 SchedulePhase(
+                    enabled: true,
                     start: Time(
                         hour: 1,
                         minute: 00
@@ -119,6 +122,7 @@ class PreviewTemplateStore: TemplateStoring {
                     color: .linesNegative
                 )!,
                 SchedulePhase(
+                    enabled: true,
                     start: Time(
                         hour: 10,
                         minute: 30
