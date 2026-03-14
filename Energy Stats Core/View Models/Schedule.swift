@@ -84,12 +84,14 @@ public struct Schedule: Hashable, Equatable {
     }
 
     public func isValid() -> Bool {
-        for (index, phase) in self.phases.enumerated() {
+        let enabledPhases = phases.filter { $0.enabled }
+
+        for (index, phase) in enabledPhases.enumerated() {
             let phaseStart = phase.start.toMinutes()
             let phaseEnd = phase.end.toMinutes()
 
             // Check for overlap with other phases
-            for otherPhase in self.phases[(index + 1)...] {
+            for otherPhase in enabledPhases[(index + 1)...] {
                 let otherStart = otherPhase.start.toMinutes()
                 let otherEnd = otherPhase.end.toMinutes()
 
