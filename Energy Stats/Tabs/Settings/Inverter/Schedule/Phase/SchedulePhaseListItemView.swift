@@ -28,15 +28,16 @@ struct SchedulePhaseListItemView: View {
             VStack(alignment: .leading) {
                 HStack {
                     (Text(phase.start.formatted(type: .start)) + Text(" - ") + Text(phase.end.formatted(type: .end))).bold()
+                    
+                    if toggleMode.isEnabled {
+                        Toggle(isOn: $toggleState, label: { EmptyView() })
+                            .labelsHidden()
+                    }
                 }
 
                 (Text(WorkMode.title(for: phase.mode)) + Text(extra(for: phase)))
                     .foregroundStyle(Color.primary.opacity(0.5))
                     .font(.caption)
-
-                if toggleMode.isEnabled {
-                    Toggle(isOn: $toggleState, label: { Text("") })
-                }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.vertical)
