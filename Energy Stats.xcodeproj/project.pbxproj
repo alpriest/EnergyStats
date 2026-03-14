@@ -274,6 +274,7 @@
 		41AF2F432AA4C6C1008FCA2E /* HomePowerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AF2F422AA4C6C1008FCA2E /* HomePowerFooterView.swift */; };
 		41AF2F452AA4C74F008FCA2E /* GridPowerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AF2F442AA4C74F008FCA2E /* GridPowerFooterView.swift */; };
 		41B3FFE82AB07FE10020DFC9 /* NetworkCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B3FFE72AB07FE10020DFC9 /* NetworkCache.swift */; };
+		41B57A982F6571A900931677 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B57A972F6571A900931677 /* ToastView.swift */; };
 		41B5910D2ED1BBDF005B34D5 /* PeakShavingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B5910C2ED1BBDF005B34D5 /* PeakShavingViewModel.swift */; };
 		41B591102ED1C107005B34D5 /* ViewDataProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B5910F2ED1C103005B34D5 /* ViewDataProviding.swift */; };
 		41B690F628E03EA70058126E /* NetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B690F528E03EA70058126E /* NetworkTests.swift */; };
@@ -836,6 +837,7 @@
 		41AF2F422AA4C6C1008FCA2E /* HomePowerFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePowerFooterView.swift; sourceTree = "<group>"; };
 		41AF2F442AA4C74F008FCA2E /* GridPowerFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPowerFooterView.swift; sourceTree = "<group>"; };
 		41B3FFE72AB07FE10020DFC9 /* NetworkCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCache.swift; sourceTree = "<group>"; };
+		41B57A972F6571A900931677 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		41B5910C2ED1BBDF005B34D5 /* PeakShavingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeakShavingViewModel.swift; sourceTree = "<group>"; };
 		41B5910F2ED1C103005B34D5 /* ViewDataProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDataProviding.swift; sourceTree = "<group>"; };
 		41B690F328DF5C390058126E /* NetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponse.swift; sourceTree = "<group>"; };
@@ -1563,6 +1565,7 @@
 				417E1CEC2E1E5EA4009E8374 /* PowerAmountView.swift */,
 				417E1CED2E1E5EA4009E8374 /* PowerText.swift */,
 				417E1CEE2E1E5EA4009E8374 /* SunView.swift */,
+				41B57A972F6571A900931677 /* ToastView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2624,6 +2627,7 @@
 				414A40BC2B989CB900321AA2 /* PowerStationDetail.swift in Sources */,
 				411029192A729F02004018BB /* BatteryTimesResponse.swift in Sources */,
 				4103D1E229DB6CD7001B0BC8 /* ConfigManager.swift in Sources */,
+				41B57A982F6571A900931677 /* ToastView.swift in Sources */,
 				4128874C2BE7CE9B007E9532 /* BatteryTimelineProvider.swift in Sources */,
 				41E165B92B0BAD9500B17590 /* UserDefaultsPropertyWrappers.swift in Sources */,
 				413715BD2E20147C00505496 /* HomeEnergyStateManager+GenerationStats.swift in Sources */,

@@ -9,7 +9,7 @@ import Energy_Stats_Core
 import Foundation
 import SwiftUI
 
-class ScheduleSummaryViewModel: ObservableObject, HasLoadState, HasAlertContent {
+class ScheduleSummaryViewModel: ObservableObject, HasLoadState, HasAlertContent, HasToastContent {
     let networking: Networking
     private var configManager: ConfigManaging
     let templateStore: TemplateStoring
@@ -24,6 +24,7 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState, HasAlertContent 
             }
         }
     }
+    @Published var toastContent: ToastContent? = nil
 
     private var hasPreLoaded = false
 
@@ -125,14 +126,25 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState, HasAlertContent 
     }
 
     func activate(_ template: ScheduleTemplate) async {
-        guard let deviceSN = configManager.currentDevice.value?.deviceSN else { return }
         let schedule = template.asSchedule()
         guard schedule.isValid() else {
             await setAlertContent(AlertContent(title: "error_title", message: "overlapping_time_periods"))
             return
         }
+        
+        await setState(.active(.activating))
+        await save(schedule: schedule)
+    }
+
+    func phase(phase: SchedulePhase, of schedule: Schedule, changedTo enabled: Bool) async {
+        let modifiedSchedule = SchedulePhaseHelper.updated(phase: phase.copy(enabled: enabled), on: schedule)
 
         await setState(.active(.activating))
+        await save(schedule: modifiedSchedule)
+    }
+    
+    private func save(schedule: Schedule) async {
+        guard let deviceSN = configManager.currentDevice.value?.deviceSN else { return }
 
         do {
             try await self.networking.saveSchedule(deviceSN: deviceSN, schedule: schedule)

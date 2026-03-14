@@ -166,6 +166,23 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {
         self.color = Color.scheduleColor(named: mode)
         self.maxSOC = initialiseMaxSOC ? 100 : nil
     }
+    
+    public func copy(
+        enabled: Bool,
+    ) -> SchedulePhase {
+        SchedulePhase(
+            id: id ,
+            enabled: enabled,
+            start: start,
+            end: end,
+            mode: mode,
+            minSocOnGrid: minSocOnGrid,
+            forceDischargePower: forceDischargePower,
+            forceDischargeSOC: forceDischargeSOC,
+            maxSOC: maxSOC,
+            color: color
+        )!
+    }
 
     private enum CodingKeys: CodingKey {
         case id

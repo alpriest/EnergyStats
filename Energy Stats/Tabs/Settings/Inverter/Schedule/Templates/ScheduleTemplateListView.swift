@@ -40,7 +40,7 @@ struct ScheduleTemplateListView: View {
                         VStack(alignment: .leading) {
                             Text(template.name)
 
-                            ScheduleView(schedule: template.asSchedule(), includePhaseDetail: true)
+                            ScheduleView(schedule: template.asSchedule(), includePhaseDetail: true, phaseEnabledToggleMode: .disabled)
                                 .padding(.vertical, 4)
                         }
                     })

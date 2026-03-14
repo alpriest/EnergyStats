@@ -10,6 +10,14 @@ import SwiftUI
 
 struct SchedulePhaseListItemView: View {
     let phase: SchedulePhase
+    private let toggleMode: PhaseEnabledToggleMode
+    @State private var toggleState: Bool
+
+    init(phase: SchedulePhase, toggleMode: PhaseEnabledToggleMode) {
+        self.phase = phase
+        self.toggleMode = toggleMode
+        self.toggleState = phase.enabled
+    }
 
     var body: some View {
         HStack {
@@ -25,6 +33,10 @@ struct SchedulePhaseListItemView: View {
                 (Text(WorkMode.title(for: phase.mode)) + Text(extra(for: phase)))
                     .foregroundStyle(Color.primary.opacity(0.5))
                     .font(.caption)
+
+                if toggleMode.isEnabled {
+                    Toggle(isOn: $toggleState, label: { Text("") })
+                }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.vertical)
@@ -34,7 +46,9 @@ struct SchedulePhaseListItemView: View {
                     CrossHatchView()
                 }
             }
-        )
+        ).onChange(of: toggleState) {
+            toggleMode.onChange(phase: phase, value: $0)
+        }
     }
 
     private func extra(for phase: SchedulePhase) -> String {
@@ -69,7 +83,7 @@ struct SchedulePhaseListItemView: View {
 
 #Preview {
     VStack {
-        SchedulePhaseListItemView(phase: Schedule.preview().phases[0])
-        SchedulePhaseListItemView(phase: Schedule.preview().phases[1])
+        SchedulePhaseListItemView(phase: Schedule.preview().phases[0], toggleMode: .disabled)
+        SchedulePhaseListItemView(phase: Schedule.preview().phases[1], toggleMode: .enabled(onPhaseEnabledChange: { _, _ in }))
     }
 }
