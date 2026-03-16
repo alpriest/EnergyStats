@@ -124,15 +124,7 @@ struct SolarLoadingView: View {
 
     @ViewBuilder
     private var backgroundGradient: some View {
-        LinearGradient(
-            gradient: Gradient(colors: [
-                Color(.loadingBackground),
-                Color(.gray).opacity(0.05)
-            ]),
-            startPoint: .top,
-            endPoint: .bottom
-        )
-        .ignoresSafeArea()
+        Color(.loadingBackground).ignoresSafeArea()
     }
 
     @ViewBuilder
@@ -149,7 +141,7 @@ struct SolarLoadingView: View {
     @ViewBuilder
     private var border: some View {
         RoundedRectangle(cornerRadius: 4)
-            .stroke(Color.primary.opacity(0.15), lineWidth: 1)
+            .stroke(Color.primary.opacity(0.65), lineWidth: 1)
     }
 
     private func startSunAnimationLoop() {
@@ -164,16 +156,23 @@ struct SolarLoadingView: View {
 
 #Preview {
     Color.black.overlay(
-        SolarLoadingView(message: "Loading")
-            .frame(width: 200, height: 80)
-            .environment(\.colorScheme, .dark)
-            .environment(\.locale, Locale(identifier: "de"))
+        ZStack {
+            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+                .foregroundStyle(Color.white)
+
+            LoadingView(message: .activating)
+        }
     )
+    .environment(\.colorScheme, .dark)
+    .environment(\.locale, Locale(identifier: "de"))
 
     Color.white.overlay(
-        SolarLoadingView(message: "Loading")
-            .frame(width: 200, height: 80)
-            .environment(\.colorScheme, .light)
-            .environment(\.locale, Locale(identifier: "de"))
+        ZStack {
+            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+
+            LoadingView(message: .loading)
+        }
     )
+    .environment(\.colorScheme, .light)
+    .environment(\.locale, Locale(identifier: "de"))
 }
