@@ -30,8 +30,10 @@ struct SchedulePhaseListItemView: View {
                     (Text(phase.start.formatted(type: .start)) + Text(" - ") + Text(phase.end.formatted(type: .end))).bold()
                     
                     if toggleMode.isEnabled {
+                        Spacer()
                         Toggle(isOn: $toggleState, label: { EmptyView() })
                             .labelsHidden()
+                            .padding(.trailing)
                     }
                 }
 
@@ -41,13 +43,7 @@ struct SchedulePhaseListItemView: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.vertical)
-        }.background(
-            Group {
-                if phase.enabled == false {
-                    CrossHatchView()
-                }
-            }
-        ).onChange(of: toggleState) {
+        }.onChange(of: toggleState) {
             toggleMode.onChange(phase: phase, value: $0)
         }
     }

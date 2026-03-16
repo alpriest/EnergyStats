@@ -127,26 +127,23 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState, HasAlertContent,
 
     func activate(_ template: ScheduleTemplate) async {
         let schedule = template.asSchedule()
-        guard schedule.isValid() else {
-            await setAlertContent(AlertContent(title: "error_title", message: "overlapping_time_periods"))
-            return
-        }
-        
-        await setState(.active(.activating))
         await save(schedule: schedule)
     }
 
     func phase(phase: SchedulePhase, of schedule: Schedule, changedTo enabled: Bool) async {
         let modifiedSchedule = SchedulePhaseHelper.updated(phase: phase.copy(enabled: enabled), on: schedule)
-
-        await setState(.active(.activating))
         await save(schedule: modifiedSchedule)
     }
     
     private func save(schedule: Schedule) async {
         guard let deviceSN = configManager.currentDevice.value?.deviceSN else { return }
+        guard schedule.isValid() else {
+            await setAlertContent(AlertContent(title: "error_title", message: "overlapping_time_periods"))
+            return
+        }
 
         do {
+            await setState(.active(.activating))
             try await self.networking.saveSchedule(deviceSN: deviceSN, schedule: schedule)
 
             Task { @MainActor in
@@ -169,7 +166,7 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState, HasAlertContent,
 
 extension SchedulePhaseNetworkModel {
     func toSchedulePhase() -> SchedulePhase? {
-        SchedulePhase(
+        return SchedulePhase(
             enabled: enable.boolValue,
             start: Time(hour: startHour, minute: startMinute),
             end: Time(hour: endHour, minute: endMinute),

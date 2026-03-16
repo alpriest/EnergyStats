@@ -15,7 +15,6 @@ class SchedulePhaseEditViewModel: ObservableObject, ViewDataProviding {
     private let configManager: ConfigManaging
     @Published var viewData = ViewData(
         id: "",
-        enabled: true,
         startTime: .now,
         endTime: .now,
         workMode: .Feedin,
@@ -62,7 +61,6 @@ class SchedulePhaseEditViewModel: ObservableObject, ViewDataProviding {
 
         let viewData = ViewData(
             id: phase.id,
-            enabled: phase.enabled,
             startTime: Date.fromTime(phase.start),
             endTime: Date.fromTime(phase.end),
             workMode: phase.mode,
@@ -120,7 +118,7 @@ class SchedulePhaseEditViewModel: ObservableObject, ViewDataProviding {
     func save(onSuccess: () -> Void) {
         if let phase = SchedulePhase(
             id: viewData.id,
-            enabled: viewData.enabled,
+            enabled: true,
             start: viewData.startTime.toTime(),
             end: viewData.endTime.toTime(),
             mode: viewData.workMode,

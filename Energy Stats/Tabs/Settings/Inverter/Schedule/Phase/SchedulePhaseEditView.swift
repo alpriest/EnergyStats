@@ -39,10 +39,6 @@ struct SchedulePhaseEditView: View {
                 }
                 
                 Section {
-                    Toggle(isOn: $viewModel.viewData.enabled) {
-                        Text("Enabled")
-                    }
-                    
                     CustomTimePicker(start: $viewModel.viewData.startTime, end: $viewModel.viewData.endTime, includeSeconds: true)
 
                     Picker("Work Mode", selection: $viewModel.viewData.workMode) {
