@@ -87,6 +87,7 @@ struct BatteryPowerView: View, VerticalSizeClassProviding {
     let appSettings: AppSettings
     @State private var alertContent: AlertContent?
     @Environment(\.verticalSizeClass) public var verticalSizeClass
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     var body: some View {
         ZStack {
@@ -96,7 +97,7 @@ struct BatteryPowerView: View, VerticalSizeClassProviding {
                     appSettings: appSettings,
                     showColouredLines: true,
                     type: .batteryFlow,
-                    verticalAlignment: UIWindowScene.isVerticallyConstrained ? .bottom : .center
+                    verticalAlignment: VerticalConstraint.isConstrained(dynamicTypeSize: dynamicTypeSize, appSettings: appSettings) ? .bottom : .center
                 )
                 .opacity(viewModel.hasError ? 0.2 : 1.0)
 

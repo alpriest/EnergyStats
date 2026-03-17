@@ -13,6 +13,7 @@ struct HomePowerView: View, VerticalSizeClassProviding {
     let amount: Double
     let appSettings: AppSettings
     @Environment(\.verticalSizeClass) public var verticalSizeClass
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     var body: some View {
         VStack {
@@ -21,7 +22,7 @@ struct HomePowerView: View, VerticalSizeClassProviding {
                 appSettings: appSettings,
                 showColouredLines: false,
                 type: .homeFlow,
-                verticalAlignment: UIWindowScene.isVerticallyConstrained ? .bottom : .center
+                verticalAlignment: VerticalConstraint.isConstrained(dynamicTypeSize: dynamicTypeSize, appSettings: appSettings) ? .bottom : .center
             )
 
             Image(systemName: "house.fill")

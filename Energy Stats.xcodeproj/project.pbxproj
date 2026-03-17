@@ -298,6 +298,7 @@
 		41BCC2472F1EACBD00FB883E /* BatteryHeatingScheduleSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC2462F1EACBD00FB883E /* BatteryHeatingScheduleSettingsViewModel.swift */; };
 		41BCC2492F1EB00400FB883E /* BatteryHeatingTimePeriodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC2482F1EAFFE00FB883E /* BatteryHeatingTimePeriodView.swift */; };
 		41BCC24B2F1EBAAB00FB883E /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BCC24A2F1EBAAB00FB883E /* RangeSlider.swift */; };
+		41BCCAAB2F69B7B800550E03 /* VerticalConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BCCAAA2F69B7B300550E03 /* VerticalConstraint.swift */; };
 		41BF88AB2E2B993A00AB5E9D /* OHHTTPStubs in Frameworks */ = {isa = PBXBuildFile; productRef = 41BF88AA2E2B993A00AB5E9D /* OHHTTPStubs */; };
 		41BF88AD2E2B993A00AB5E9D /* OHHTTPStubsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 41BF88AC2E2B993A00AB5E9D /* OHHTTPStubsSwift */; };
 		41C0923B2B20FCB0001D1E22 /* SchedulePhaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0923A2B20FCB0001D1E22 /* SchedulePhaseHelper.swift */; };
@@ -862,6 +863,7 @@
 		41BCC2462F1EACBD00FB883E /* BatteryHeatingScheduleSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryHeatingScheduleSettingsViewModel.swift; sourceTree = "<group>"; };
 		41BCC2482F1EAFFE00FB883E /* BatteryHeatingTimePeriodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryHeatingTimePeriodView.swift; sourceTree = "<group>"; };
 		41BCC24A2F1EBAAB00FB883E /* RangeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeSlider.swift; sourceTree = "<group>"; };
+		41BCCAAA2F69B7B300550E03 /* VerticalConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalConstraint.swift; sourceTree = "<group>"; };
 		41C0923A2B20FCB0001D1E22 /* SchedulePhaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePhaseHelper.swift; sourceTree = "<group>"; };
 		41C0923C2B210255001D1E22 /* ScheduleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailView.swift; sourceTree = "<group>"; };
 		41C0B43329F96D3600CA9462 /* LocalizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedString.swift; sourceTree = "<group>"; };
@@ -1839,6 +1841,7 @@
 		41E4B31128DB7799003F7F47 /* Power Views */ = {
 			isa = PBXGroup;
 			children = (
+				41BCCAAA2F69B7B300550E03 /* VerticalConstraint.swift */,
 				41E4B30F28DB7666003F7F47 /* BatteryPowerView.swift */,
 				41E4B31228DB77A3003F7F47 /* HomePowerView.swift */,
 				41E4B31428DB77E8003F7F47 /* GridPowerView.swift */,
@@ -2548,6 +2551,7 @@
 				414C68902F2E08EA003F6074 /* EnergyBreakdownChart.swift in Sources */,
 				411542ED2BED447A00BDE56D /* EditTemplateView.swift in Sources */,
 				416AE4382A7D956E003D0122 /* AlertCopy.swift in Sources */,
+				41BCCAAB2F69B7B800550E03 /* VerticalConstraint.swift in Sources */,
 				410484C82AD49D95007F68C0 /* CT2-icon.swift in Sources */,
 				416318BE29DDD80E00C2C285 /* View+Copy.swift in Sources */,
 				418C6E952AFAC3BF000DE35F /* SummaryTabView.swift in Sources */,
@@ -2938,7 +2942,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 115;
+				CURRENT_PROJECT_VERSION = 116;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2961,7 +2965,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.127;
+				MARKETING_VERSION = 2.128;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -3007,7 +3011,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 115;
+				CURRENT_PROJECT_VERSION = 116;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -3024,7 +3028,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.127;
+				MARKETING_VERSION = 2.128;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

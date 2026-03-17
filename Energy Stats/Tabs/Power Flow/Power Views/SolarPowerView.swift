@@ -16,6 +16,7 @@ struct SolarPowerViewModel {
 struct SolarPowerView: View {
     private let appSettings: AppSettings
     private let viewModel: SolarPowerViewModel
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     init(appSettings: AppSettings, viewModel: SolarPowerViewModel) {
         self.appSettings = appSettings
@@ -34,7 +35,7 @@ struct SolarPowerView: View {
                 appSettings: appSettings,
                 showColouredLines: false,
                 type: .solarFlow,
-                verticalAlignment: UIWindowScene.isVerticallyConstrained ? .top : .center
+                verticalAlignment: VerticalConstraint.isConstrained(dynamicTypeSize: dynamicTypeSize, appSettings: appSettings) ? .top : .center
             )
         }
     }
