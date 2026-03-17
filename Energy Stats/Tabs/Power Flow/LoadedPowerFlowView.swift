@@ -20,6 +20,7 @@ struct LoadedPowerFlowView: View {
     private let networking: Networking
     private let templateStore: TemplateStoring
     @Environment(\.verticalSizeClass) var verticalSizeClass
+    @State private var isReady = false
 
     init(
         configManager: ConfigManaging,
@@ -78,6 +79,19 @@ struct LoadedPowerFlowView: View {
             }
 
             inverterScheduleQuickLink()
+        }
+        .transition(.opacity)
+        .opacity(isReady ? 1 : 0)
+        .allowsHitTesting(isReady)
+        .accessibilityHidden(!isReady)
+        .onChange(of: size) { new in
+            if !isReady, new != .zero {
+                DispatchQueue.main.async { // force the animation to appear on the next layout pass
+                    withAnimation(.easeIn) {
+                        isReady = true
+                    }
+                }
+            }
         }
         .onReceive(appSettingsPublisher) {
             self.appSettings = $0
