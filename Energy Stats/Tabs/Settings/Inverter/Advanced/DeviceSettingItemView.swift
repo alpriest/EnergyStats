@@ -11,7 +11,12 @@ import SwiftUI
 struct DeviceSettingItemView: View {
     @StateObject var viewModel: DeviceSettingItemViewModel
     private let configManager: ConfigManaging
+    @FocusState private var focusedField: Field?
 
+    private enum Field: Hashable {
+        case item
+    }
+    
     init(item: DeviceSettingsItem, networking: Networking, configManager: ConfigManaging) {
         self.configManager = configManager
         _viewModel = StateObject(wrappedValue: DeviceSettingItemViewModel(item: item, networking: networking, configManager: configManager))
@@ -23,7 +28,7 @@ struct DeviceSettingItemView: View {
                 Section {
                     HStack {
                         Text(viewModel.title)
-                        NumberTextField(viewModel.title, text: $viewModel.viewData.value)
+                        NumberTextField(viewModel.title, text: $viewModel.viewData.value, focusedField: $focusedField, equals: .item)
                             .multilineTextAlignment(.trailing)
                         Text(viewModel.viewData.unit)
                     }

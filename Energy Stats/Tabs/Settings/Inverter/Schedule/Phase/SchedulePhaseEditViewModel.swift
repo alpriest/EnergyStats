@@ -23,7 +23,8 @@ class SchedulePhaseEditViewModel: ObservableObject, ViewDataProviding {
         fdPower: "",
         maxSOC: "",
         showMaxSOC: false,
-        modes: []
+        modes: [],
+        pvLimit: ""
     ) { didSet {
         validate()
         isDirty = viewData != originalValue
@@ -58,6 +59,8 @@ class SchedulePhaseEditViewModel: ObservableObject, ViewDataProviding {
             showMaxSOC = false
             maxSOC = ""
         }
+        
+        let pvLimit: String = if let pvLimit = phase.pvLimit { String(pvLimit) } else { "" }
 
         let viewData = ViewData(
             id: phase.id,
@@ -69,7 +72,8 @@ class SchedulePhaseEditViewModel: ObservableObject, ViewDataProviding {
             fdPower: String(phase.forceDischargePower),
             maxSOC: maxSOC,
             showMaxSOC: showMaxSOC,
-            modes: configManager.workModes
+            modes: configManager.workModes.sorted(),
+            pvLimit: pvLimit
         )
         originalValue = viewData
         self.viewData = viewData
@@ -126,7 +130,8 @@ class SchedulePhaseEditViewModel: ObservableObject, ViewDataProviding {
             forceDischargePower: Int(viewData.fdPower) ?? 0,
             forceDischargeSOC: Int(viewData.fdSOC) ?? 0,
             maxSOC: viewData.showMaxSOC ? (Int(viewData.maxSOC) ?? 0) : nil,
-            color: Color.scheduleColor(named: viewData.workMode)
+            color: Color.scheduleColor(named: viewData.workMode),
+            pvLimit: Int(viewData.pvLimit)
         ) {
             onChange(phase)
             resetDirtyState()

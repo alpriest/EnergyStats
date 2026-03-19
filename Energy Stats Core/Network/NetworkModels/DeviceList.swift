@@ -47,6 +47,7 @@ public struct DeviceDetailResponse: Codable, Hashable {
     public let hasBattery: Bool
     public let hasPV: Bool
     public let batteryList: [DeviceBatteryResponse]?
+    public let capacity: Double?
 
     public struct Function: Codable, Hashable {
         public let scheduler: Bool
@@ -73,6 +74,7 @@ public struct Device: Codable, Hashable, Identifiable {
     public let battery: Battery?
     public let moduleSN: String
     public let productType: String?
+    public let capacity: Double?
 
     public struct Battery: Codable, Hashable {
         public let capacity: String?
@@ -112,7 +114,8 @@ public struct Device: Codable, Hashable, Identifiable {
                 deviceType: String,
                 hasPV: Bool,
                 hasBattery: Bool,
-                productType: String?)
+                productType: String?,
+                capacity: Double?)
     {
         self.deviceSN = deviceSN
         self.stationName = stationName
@@ -123,6 +126,7 @@ public struct Device: Codable, Hashable, Identifiable {
         self.hasPV = hasPV
         self.hasBattery = hasBattery
         self.productType = productType
+        self.capacity = capacity
     }
 
     public func copy(deviceSN: String? = nil,
@@ -133,7 +137,8 @@ public struct Device: Codable, Hashable, Identifiable {
                      deviceType: String? = nil,
                      hasPV: Bool? = nil,
                      hasBattery: Bool? = nil,
-                     productType: String? = nil) -> Device
+                     productType: String? = nil,
+                     capacity: Double? = nil) -> Device
     {
         Device(
             deviceSN: deviceSN ?? self.deviceSN,
@@ -144,7 +149,8 @@ public struct Device: Codable, Hashable, Identifiable {
             deviceType: deviceType ?? self.deviceType,
             hasPV: hasPV ?? self.hasPV,
             hasBattery: hasBattery ?? self.hasBattery,
-            productType: productType ?? self.productType
+            productType: productType ?? self.productType,
+            capacity: capacity ?? self.capacity
         )
     }
 }

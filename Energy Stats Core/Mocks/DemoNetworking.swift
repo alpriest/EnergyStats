@@ -122,7 +122,8 @@ class DemoAPI: FoxAPIServicing {
                 .init(batterySN: "ABC1", type: "master", version: "1.020"),
                 .init(batterySN: "ABC2", type: "slave", version: "1.020"),
                 .init(batterySN: "ABC3", type: "slave", version: "1.020")
-            ]
+            ],
+            capacity: 3.68
         )
     }
 
@@ -264,7 +265,9 @@ class DemoAPI: FoxAPIServicing {
                     minSocOnGrid: 20,
                     fdSoc: 100,
                     fdPwr: 0,
-                    maxSoc: 100
+                    maxSoc: 100,
+                    pvLimit: nil,
+                    importLimit: nil
                 ),
                 SchedulePhaseNetworkModel(
                     enable: 1,
@@ -276,7 +279,9 @@ class DemoAPI: FoxAPIServicing {
                     minSocOnGrid: 20,
                     fdSoc: 20,
                     fdPwr: 3500,
-                    maxSoc: 100
+                    maxSoc: 100,
+                    pvLimit: nil,
+                    importLimit: nil
                 )
             ],
             workmodes: [

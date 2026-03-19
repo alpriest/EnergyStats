@@ -10,6 +10,12 @@ import SwiftUI
 
 struct PeakShavingView: View {
     @StateObject var viewModel: PeakShavingViewModel
+    @FocusState private var focusedField: Field?
+
+    private enum Field: Hashable {
+        case importLimit
+        case soc
+    }
 
     init(networking: Networking, config: ConfigManaging) {
         _viewModel = StateObject(wrappedValue: PeakShavingViewModel(networking: networking, config: config))
@@ -24,21 +30,25 @@ struct PeakShavingView: View {
                             HStack {
                                 Text("Import limit")
                                 Spacer()
-                                NumberTextField("Import limit", text: $viewModel.viewData.importLimit)
+                                NumberTextField("Import limit", text: $viewModel.viewData.importLimit, focusedField: $focusedField, equals: .importLimit)
                                     .frame(width: 80)
                                     .multilineTextAlignment(.trailing)
                                 Text("kW")
                                     .frame(width: 30)
+                            }.onTapGesture {
+                                focusedField = .importLimit
                             }
 
                             HStack {
                                 Text("Battery threshold SOC")
                                 Spacer()
-                                NumberTextField("Battery threshold SOC", text: $viewModel.viewData.soc)
+                                NumberTextField("Battery threshold SOC", text: $viewModel.viewData.soc, focusedField: $focusedField, equals: .soc)
                                     .frame(width: 80)
                                     .multilineTextAlignment(.trailing)
                                 Text("%")
                                     .frame(width: 30)
+                            }.onTapGesture {
+                                focusedField = .soc
                             }
                         }
                     } footer: {

@@ -98,7 +98,8 @@ enum SchedulePhaseHelper {
             forceDischargePower: 0,
             forceDischargeSOC: soc,
             maxSOC: initialiseMaxSOC ? 100 : nil,
-            color: Color.scheduleColor(named: mode)
+            color: Color.scheduleColor(named: mode),
+            pvLimit: nil
         )!
     }
 }

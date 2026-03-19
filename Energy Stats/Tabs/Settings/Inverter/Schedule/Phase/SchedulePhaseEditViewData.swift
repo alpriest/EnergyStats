@@ -20,6 +20,7 @@ struct SchedulePhaseEditViewData: Copiable {
     var maxSOC: String
     var showMaxSOC: Bool
     var modes: [String]
+    var pvLimit: String
 
     func create(copying previous: SchedulePhaseEditViewData) -> SchedulePhaseEditViewData {
         SchedulePhaseEditViewData(
@@ -32,7 +33,8 @@ struct SchedulePhaseEditViewData: Copiable {
             fdPower: previous.fdPower,
             maxSOC: previous.maxSOC,
             showMaxSOC: previous.showMaxSOC,
-            modes: previous.modes
+            modes: previous.modes,
+            pvLimit: previous.pvLimit
         )
     }
 }

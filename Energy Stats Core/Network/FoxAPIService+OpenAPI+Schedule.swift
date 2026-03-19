@@ -60,7 +60,10 @@ extension FoxAPIService {
 
 extension SchedulePhase {
     func toPhaseResponse() -> SchedulePhaseNetworkModel {
-        SchedulePhaseNetworkModel(
+        let maxSOC: Int? = (mode == .ForceCharge) ? forceDischargeSOC : 100
+        let importLimit: Int? = (mode == .ForceDischarge) ? 0 : nil
+        
+        return SchedulePhaseNetworkModel(
             enable: enabled.intValue,
             startHour: start.hour,
             startMinute: start.minute,
@@ -70,7 +73,9 @@ extension SchedulePhase {
             minSocOnGrid: minSocOnGrid,
             fdSoc: forceDischargeSOC,
             fdPwr: forceDischargePower,
-            maxSoc: maxSOC
+            maxSoc: maxSOC,
+            pvLimit: pvLimit,
+            importLimit: importLimit
         )
     }
 }

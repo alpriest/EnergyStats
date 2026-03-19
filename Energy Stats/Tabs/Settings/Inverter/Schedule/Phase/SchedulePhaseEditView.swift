@@ -13,7 +13,19 @@ struct SchedulePhaseEditView: View {
     @Environment(\.presentationMode) var presentationMode
     private let onDelete: (String) -> Void
     @StateObject private var viewModel: SchedulePhaseEditViewModel
-
+    @FocusState private var focusedField: Field?
+    @State private var showingAdvanced = false
+    
+    private enum Field: Hashable {
+        case minSoc
+        case maxSoc
+        case forceChargeSoc
+        case forceDischargeSoc
+        case forceChargePower
+        case forceDischargePower
+        case pvLimit
+    }
+    
     init(
         phase: SchedulePhase,
         configManager: ConfigManaging,
@@ -30,7 +42,7 @@ struct SchedulePhaseEditView: View {
             )
         )
     }
-
+    
     var body: some View {
         VStack(spacing: 0) {
             Form {
@@ -40,108 +52,34 @@ struct SchedulePhaseEditView: View {
                 
                 Section {
                     CustomTimePicker(start: $viewModel.viewData.startTime, end: $viewModel.viewData.endTime, includeSeconds: true)
-
-                    Picker("Work Mode", selection: $viewModel.viewData.workMode) {
+                    
+                    Picker(selection: $viewModel.viewData.workMode) {
                         ForEach(viewModel.viewData.modes, id: \.self) { mode in
                             Text(WorkMode.title(for: mode))
+                        }
+                    } label: {
+                        HStack {
+                            Text("Work Mode")
+                            OptionalView(workModeDescription()) {
+                                InfoButtonView(message: $0)
+                            }
                         }
                     }
                     .pickerStyle(.menu)
                 } footer: {
                     VStack {
-                        OptionalView(workModeDescription()) {
-                            Text($0)
-                                .monospacedDigit()
-                        }
-
                         OptionalView(viewModel.timeError) {
                             Text($0)
                                 .foregroundStyle(Color.red)
                         }
                     }
                 }
-
-                Section {
-                    HStack {
-                        Text("Min SoC")
-                        NumberTextField("SoC", text: $viewModel.viewData.minSOC)
-                            .multilineTextAlignment(.trailing)
-                        Text("%")
-                    }
-                } footer: {
-                    VStack(alignment: .leading) {
-                        OptionalView(viewModel.minSOCError) {
-                            Text($0)
-                                .foregroundStyle(Color.red)
-                        }
-                        OptionalView(minSoCDescription()) {
-                            Text($0)
-                        }
-                    }
-                }
-
-                Section {
-                    HStack {
-                        Text("Max SoC")
-                        Spacer()
-                        NumberTextField("Max SoC", text: $viewModel.viewData.maxSOC)
-                            .multilineTextAlignment(.trailing)
-                            .frame(width: 100)
-                        Text("%")
-                    }
-                } footer: {
-                    VStack(alignment: .leading) {
-                        OptionalView(viewModel.maxSOCError) {
-                            Text($0)
-                                .foregroundStyle(Color.red)
-                        }
-                    }
-                }
-
-                Section {
-                    HStack {
-                        Text("Force Discharge SoC")
-                        Spacer()
-                        NumberTextField("SoC", text: $viewModel.viewData.fdSOC)
-                            .multilineTextAlignment(.trailing)
-                            .frame(width: 100)
-                        Text("%")
-                    }
-                } footer: {
-                    VStack(alignment: .leading) {
-                        OptionalView(viewModel.fdSOCError) {
-                            Text($0)
-                                .foregroundStyle(Color.red)
-                        }
-                        OptionalView(forceDischargeSoCDescription()) {
-                            Text($0)
-                        }
-                    }
-                }
-
-                Section {
-                    HStack {
-                        Text("Force Discharge Power")
-                        Spacer()
-                        NumberTextField("Power", text: $viewModel.viewData.fdPower)
-                            .multilineTextAlignment(.trailing)
-                            .frame(width: 100)
-                        Text("W")
-                    }
-                } footer: {
-                    VStack(alignment: .leading) {
-                        OptionalView(viewModel.forceDischargePowerError) {
-                            Text($0)
-                                .foregroundStyle(Color.red)
-                        }
-                        OptionalView(forceDischargePowerDescription()) {
-                            Text($0)
-                        }
-                    }
-                }
-
+                
+                standardViews(for: viewModel.viewData.workMode)
+                advancedViews(for: viewModel.viewData.workMode)
+                
                 Section {}
-                    footer: {
+                footer: {
                         Button(role: .destructive) {
                             onDelete(viewModel.viewData.id)
                             presentationMode.wrappedValue.dismiss()
@@ -150,39 +88,129 @@ struct SchedulePhaseEditView: View {
                         }.buttonStyle(.bordered)
                     }
             }
-
+            
             BottomButtonsView(dirty: viewModel.isDirty) { viewModel.save {
                 presentationMode.wrappedValue.dismiss()
             } }
         }
         .navigationTitle(.editPhase)
         .navigationBarTitleDisplayMode(.inline)
-    }
-
-    private func minSoCDescription() -> LocalizedStringKey? {
-        if case .ForceDischarge = viewModel.viewData.workMode {
-            return "The minimum battery state of charge. This must be at most the Force Discharge SOC value."
+        .onChange(of: viewModel.viewData.workMode) { _ in
+            showingAdvanced = false
         }
-
-        return nil
+    }
+    
+    private var minSocEditable: some View {
+        EditableItemView(
+            title: "Min SoC",
+            field: Field.minSoc,
+            numberTitle: "Min SoC",
+            numberText: $viewModel.viewData.minSOC,
+            unit: "%",
+            error: viewModel.minSOCError,
+            description: minSoCDescription(),
+            focusedField: $focusedField
+        )
+    }
+    
+    private var maxSocEditable: some View {
+        EditableItemView(
+            title: "Max SoC",
+            field: Field.maxSoc,
+            numberTitle: "Max SoC",
+            numberText: $viewModel.viewData.maxSOC,
+            unit: "%",
+            error: viewModel.maxSOCError,
+            description: nil,
+            focusedField: $focusedField
+        )
+    }
+    
+    private var forceChargeSocEditable: some View {
+        EditableItemView(
+            title: "Force Charge SoC",
+            field: Field.forceChargeSoc,
+            numberTitle: "SoC",
+            numberText: $viewModel.viewData.fdSOC,
+            unit: "%",
+            error: nil,
+            description: nil,
+            focusedField: $focusedField
+        )
     }
 
+    private var forceDischargeSocEditable: some View {
+        EditableItemView(
+            title: "Force Discharge SoC",
+            field: Field.forceDischargeSoc,
+            numberTitle: "SoC",
+            numberText: $viewModel.viewData.fdSOC,
+            unit: "%",
+            error: viewModel.fdSOCError,
+            description: forceDischargeSoCDescription(),
+            focusedField: $focusedField
+        )
+    }
+    
+    private var forceChargePowerEditable: some View {
+        EditableItemView(
+            title: "Force Charge Power",
+            field: Field.forceChargePower,
+            numberTitle: "Power",
+            numberText: $viewModel.viewData.fdPower,
+            unit: "W",
+            error: nil,
+            description: nil,
+            focusedField: $focusedField
+        )
+    }
+
+    private var forceDischargePowerEditable: some View {
+        EditableItemView(
+            title: "Force Discharge Power",
+            field: Field.forceDischargePower,
+            numberTitle: "Power",
+            numberText: $viewModel.viewData.fdPower,
+            unit: "W",
+            error: viewModel.forceDischargePowerError,
+            description: forceDischargePowerDescription(),
+            focusedField: $focusedField
+        )
+    }
+    
+    private var pvLimitEditable: some View {
+        EditableItemView(
+            title: "PV Limit",
+            field: Field.pvLimit,
+            numberTitle: "Power",
+            numberText: $viewModel.viewData.pvLimit,
+            unit: "W",
+            error: nil,
+            description: nil,
+            focusedField: $focusedField
+        )
+    }
+    
+    private func minSoCDescription() -> LocalizedStringKey? {
+        return "The minimum battery state of charge."
+    }
+    
     private func forceDischargeSoCDescription() -> LocalizedStringKey? {
         if case .ForceDischarge = viewModel.viewData.workMode {
             return "When the battery reaches this level, discharging will stop. If you wanted to save some battery power for later, perhaps set it to 50%."
         }
-
+        
         return nil
     }
-
+    
     private func forceDischargePowerDescription() -> LocalizedStringKey? {
         if case .ForceDischarge = viewModel.viewData.workMode {
             return "The output power level to be delivered, including your house load and grid export. E.g. If you have 5kW inverter then set this to 5000, then if the house load is 750W the other 4.25kW will be exported."
         }
-
+        
         return nil
     }
-
+    
     private func workModeDescription() -> LocalizedStringKey? {
         switch viewModel.viewData.workMode {
         case WorkMode.SelfUse:
@@ -205,6 +233,61 @@ struct SchedulePhaseEditView: View {
             nil
         }
     }
+    
+    @ViewBuilder
+    func standardViews(for workMode: WorkMode) -> some View {
+        Section {
+            switch workMode {
+            case .SelfUse:
+                minSocEditable
+            case .Feedin:
+                minSocEditable
+            case .Backup:
+                minSocEditable
+            case .ForceCharge:
+                forceChargeSocEditable
+            case .ForceDischarge:
+                forceDischargeSocEditable
+            default:
+                EmptyView()
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func advancedViews(for workMode: WorkMode) -> some View {
+        Section {
+            if showingAdvanced {
+                switch workMode {
+                case .ForceCharge:
+                    forceChargePowerEditable
+                    pvLimitEditable
+                case .ForceDischarge:
+                    forceDischargePowerEditable
+                    minSocEditable
+                default:
+                    EmptyView()
+                }
+            }
+        } footer: {
+            if !showingAdvanced && hasAdvancedViews(for: workMode) {
+                Button(action: { showingAdvanced = true }) {
+                    Text("More...")
+                }
+            }
+        }
+    }
+    
+    private func hasAdvancedViews(for workMode: WorkMode) -> Bool {
+        switch workMode {
+        case .ForceCharge:
+            true
+        case .ForceDischarge:
+            true
+        default:
+            false
+        }
+    }
 }
 
 #Preview {
@@ -224,7 +307,8 @@ struct SchedulePhaseEditView: View {
             forceDischargePower: 3500,
             forceDischargeSOC: 20,
             maxSOC: 100,
-            color: Color.scheduleColor(named: "ForceDischarge")
+            color: Color.scheduleColor(named: "ForceDischarge"),
+            pvLimit: nil
         )!,
         configManager: ConfigManager.preview(),
         onChange: { print($0.id, " changed") },

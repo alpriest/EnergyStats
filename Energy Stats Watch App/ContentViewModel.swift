@@ -95,7 +95,7 @@ class ContentViewModel {
                 ]
             )
 
-            let device = Device(deviceSN: deviceSN, stationName: nil, stationID: "", battery: nil, moduleSN: "", deviceType: "", hasPV: true, hasBattery: true, productType: nil)
+            let device = Device(deviceSN: deviceSN, stationName: nil, stationID: "", battery: nil, moduleSN: "", deviceType: "", hasPV: true, hasBattery: true, productType: nil, capacity: nil)
             let currentStatusCalculator = CurrentStatusCalculator(device: device,
                                                                   response: reals,
                                                                   config: config)

@@ -12,6 +12,12 @@ import SwiftUI
 struct BatterySOCSettingsView: View {
     @StateObject var viewModel: BatterySOCSettingsViewModel
     @Environment(\.requestReview) private var requestReview
+    @FocusState private var focusedField: Field?
+
+    private enum Field: Hashable {
+        case minSoc
+        case minSocOnGrid
+    }
 
     init(networking: Networking, config: ConfigManaging, onSOCchange: @escaping () -> Void) {
         self._viewModel = StateObject(wrappedValue: BatterySOCSettingsViewModel(networking: networking, config: config, onSOCchange: onSOCchange))
@@ -24,9 +30,11 @@ struct BatterySOCSettingsView: View {
                     content: {
                         HStack {
                             Text("Min SoC")
-                            NumberTextField("Min SoC", text: $viewModel.viewData.soc)
+                            NumberTextField("Min SoC", text: $viewModel.viewData.soc, focusedField: $focusedField, equals: .minSoc)
                                 .multilineTextAlignment(.trailing)
                             Text("%")
+                        }.onTapGesture {
+                            focusedField = .minSoc
                         }
                     },
                     footer: {
@@ -38,9 +46,11 @@ struct BatterySOCSettingsView: View {
                     content: {
                         HStack {
                             Text("Min SoC on Grid")
-                            NumberTextField("Min SoC on Grid", text: $viewModel.viewData.socOnGrid)
+                            NumberTextField("Min SoC on Grid", text: $viewModel.viewData.socOnGrid, focusedField: $focusedField, equals: .minSocOnGrid)
                                 .multilineTextAlignment(.trailing)
                             Text("%")
+                        }.onTapGesture {
+                            focusedField = .minSocOnGrid
                         }
                     },
                     footer: {

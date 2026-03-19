@@ -83,17 +83,17 @@ public class ConfigManager: ConfigManaging {
 
     func loadDevice(device: DeviceSummaryResponse) async throws -> Device {
         let deviceBattery: Device.Battery?
+        let deviceDetail = try await networking.fetchDevice(deviceSN: device.deviceSN)
 
         if device.hasBattery {
             do {
                 let batteryVariables = try await networking.fetchRealData(deviceSN: device.deviceSN, variables: ["ResidualEnergy", "SoC", "SoC_1"])
                 let batterySettings = try await networking.fetchBatterySettings(deviceSN: device.deviceSN)
-                let batteryDetail = try await networking.fetchDevice(deviceSN: device.deviceSN)
 
                 deviceBattery = BatteryResponseMapper.map(
                     batteryVariables: batteryVariables,
                     socResponse: batterySettings,
-                    modules: batteryDetail.batteryList
+                    modules: deviceDetail.batteryList
                 )
             } catch {
                 deviceBattery = nil
@@ -111,7 +111,8 @@ public class ConfigManager: ConfigManaging {
             deviceType: device.deviceType,
             hasPV: device.hasPV,
             hasBattery: device.hasBattery,
-            productType: device.productType
+            productType: device.productType,
+            capacity: deviceDetail.capacity
         )
     }
 

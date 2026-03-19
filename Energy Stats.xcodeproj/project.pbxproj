@@ -80,6 +80,7 @@
 		412018062EC0E0C6007D6643 /* GraphColoursSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412018052EC0E0C6007D6643 /* GraphColoursSettingsView.swift */; };
 		412087FB2BF5DDBE00E4899E /* SwiftData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 412087F92BF5DDA400E4899E /* SwiftData.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		41229CBD2BE1217600CFA636 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41229CBC2BE1217600CFA636 /* ContentViewModel.swift */; };
+		41248EE22F6B38AE001BB756 /* EditableItemViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41248EE12F6B38A6001BB756 /* EditableItemViews.swift */; };
 		4127586A2F44FEB6009D090F /* PVOutputService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412758692F44FEAE009D090F /* PVOutputService.swift */; };
 		412790FF28E1FB9200D5F993 /* UserManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412790FE28E1FB9200D5F993 /* UserManagerTests.swift */; };
 		4127910228E1FBD300D5F993 /* MockKeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127910128E1FBD300D5F993 /* MockKeychainStore.swift */; };
@@ -189,7 +190,6 @@
 		416D761B2BA60C3500074370 /* StatsDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416D761A2BA60C3500074370 /* StatsDataFetcher.swift */; };
 		416E032E2DE3764B0059CE42 /* FetchPeakShavingsSettingsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416E032D2DE3764A0059CE42 /* FetchPeakShavingsSettingsResponse.swift */; };
 		416E03302DE3815B0059CE42 /* PeakShavingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416E032F2DE3815B0059CE42 /* PeakShavingView.swift */; };
-		416E03322DE385350059CE42 /* SettingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416E03312DE385350059CE42 /* SettingItemView.swift */; };
 		41702E132D8954C80067A0E4 /* ParameterValueAdjuster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41702E122D8954BB0067A0E4 /* ParameterValueAdjuster.swift */; };
 		417153E429F2BCD700639A7B /* ParameterGraphHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417153E329F2BCD700639A7B /* ParameterGraphHeaderView.swift */; };
 		417153E629F2BD3300639A7B /* LoadState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417153E529F2BD3300639A7B /* LoadState.swift */; };
@@ -626,6 +626,7 @@
 		412018052EC0E0C6007D6643 /* GraphColoursSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphColoursSettingsView.swift; sourceTree = "<group>"; };
 		412087F92BF5DDA400E4899E /* SwiftData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftData.framework; path = System/Library/Frameworks/SwiftData.framework; sourceTree = SDKROOT; };
 		41229CBC2BE1217600CFA636 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		41248EE12F6B38A6001BB756 /* EditableItemViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableItemViews.swift; sourceTree = "<group>"; };
 		412758692F44FEAE009D090F /* PVOutputService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PVOutputService.swift; sourceTree = "<group>"; };
 		412790FE28E1FB9200D5F993 /* UserManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManagerTests.swift; sourceTree = "<group>"; };
 		4127910128E1FBD300D5F993 /* MockKeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockKeychainStore.swift; sourceTree = "<group>"; };
@@ -739,7 +740,6 @@
 		416D761A2BA60C3500074370 /* StatsDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsDataFetcher.swift; sourceTree = "<group>"; };
 		416E032D2DE3764A0059CE42 /* FetchPeakShavingsSettingsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchPeakShavingsSettingsResponse.swift; sourceTree = "<group>"; };
 		416E032F2DE3815B0059CE42 /* PeakShavingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeakShavingView.swift; sourceTree = "<group>"; };
-		416E03312DE385350059CE42 /* SettingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingItemView.swift; sourceTree = "<group>"; };
 		41702E122D8954BB0067A0E4 /* ParameterValueAdjuster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterValueAdjuster.swift; sourceTree = "<group>"; };
 		417153E329F2BCD700639A7B /* ParameterGraphHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterGraphHeaderView.swift; sourceTree = "<group>"; };
 		417153E529F2BD3300639A7B /* LoadState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadState.swift; sourceTree = "<group>"; };
@@ -1805,7 +1805,6 @@
 				416009892A8D18540096CCD9 /* Settings Page */,
 				4156E7B52B9C83970000E807 /* Site */,
 				4149DE992B03C3A0004F5FC6 /* Solcast Settings */,
-				416E03312DE385350059CE42 /* SettingItemView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1857,6 +1856,7 @@
 		41E8016D2ECF5FE900CB5777 /* Phase */ = {
 			isa = PBXGroup;
 			children = (
+				41248EE12F6B38A6001BB756 /* EditableItemViews.swift */,
 				418C09242B18FE9A00183603 /* SchedulePhaseEditView.swift */,
 				41E8016B2ECF5FE200CB5777 /* SchedulePhaseEditViewData.swift */,
 				41C0923A2B20FCB0001D1E22 /* SchedulePhaseHelper.swift */,
@@ -2458,7 +2458,6 @@
 				418EB4852ACC012C0021B87A /* FinancialsSettingsView.swift in Sources */,
 				418773172EF971A60057C5E2 /* StatsTabViewModel+Export.swift in Sources */,
 				414BF82829B4918300E2EB51 /* SettingsTabViewModel.swift in Sources */,
-				416E03322DE385350059CE42 /* SettingItemView.swift in Sources */,
 				41E12E8C2CC66893001F3839 /* CheckCurrentGridLoadIntent.swift in Sources */,
 				416E03302DE3815B0059CE42 /* PeakShavingView.swift in Sources */,
 				41CD1F322A1414C1006B0C00 /* StatsGraphVariableToggles.swift in Sources */,
@@ -2554,6 +2553,7 @@
 				41BCCAAB2F69B7B800550E03 /* VerticalConstraint.swift in Sources */,
 				410484C82AD49D95007F68C0 /* CT2-icon.swift in Sources */,
 				416318BE29DDD80E00C2C285 /* View+Copy.swift in Sources */,
+				41248EE22F6B38AE001BB756 /* EditableItemViews.swift in Sources */,
 				418C6E952AFAC3BF000DE35F /* SummaryTabView.swift in Sources */,
 				41CBDC102C96222D001B4A49 /* WelcomeView.swift in Sources */,
 				411542E92BED30D200BDE56D /* ScheduleTemplateListView.swift in Sources */,

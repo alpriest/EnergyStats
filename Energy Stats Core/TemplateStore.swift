@@ -83,7 +83,8 @@ class PreviewTemplateStore: TemplateStoring {
                     forceDischargePower: 0,
                     forceDischargeSOC: 100,
                     maxSOC: 100,
-                    color: .linesNegative
+                    color: .linesNegative,
+                    pvLimit: nil
                 )!,
                 SchedulePhase(
                     enabled: true,
@@ -100,7 +101,8 @@ class PreviewTemplateStore: TemplateStoring {
                     forceDischargePower: 3500,
                     forceDischargeSOC: 20,
                     maxSOC: 100,
-                    color: .linesPositive
+                    color: .linesPositive,
+                    pvLimit: nil
                 )!,
             ]),
             ScheduleTemplate(id: "2", name: "Force charge overnight", phases: [
@@ -119,7 +121,8 @@ class PreviewTemplateStore: TemplateStoring {
                     forceDischargePower: 0,
                     forceDischargeSOC: 100,
                     maxSOC: 100,
-                    color: .linesNegative
+                    color: .linesNegative,
+                    pvLimit: nil
                 )!,
                 SchedulePhase(
                     enabled: true,
@@ -136,7 +139,8 @@ class PreviewTemplateStore: TemplateStoring {
                     forceDischargePower: 3500,
                     forceDischargeSOC: 20,
                     maxSOC: 100,
-                    color: .linesPositive
+                    color: .linesPositive,
+                    pvLimit: nil
                 )!,
             ]),
         ]

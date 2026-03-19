@@ -53,7 +53,8 @@ public extension ScheduleTemplate {
                 forceDischargePower: 0,
                 forceDischargeSOC: 100,
                 maxSOC: 100,
-                color: .linesNegative
+                color: .linesNegative,
+                pvLimit: nil
             )!,
             SchedulePhase(
                 enabled: true,
@@ -70,7 +71,8 @@ public extension ScheduleTemplate {
                 forceDischargePower: 3500,
                 forceDischargeSOC: 20,
                 maxSOC: 100,
-                color: .linesPositive
+                color: .linesPositive,
+                pvLimit: nil
             )!,
         ])
     }
@@ -84,7 +86,7 @@ public struct Schedule: Hashable, Equatable {
     }
 
     public func isValid() -> Bool {
-        let enabledPhases = phases.filter { $0.enabled }
+        let enabledPhases = phases.filter { $0.enabled && !$0.isAllDaySynthesized() }
 
         for (index, phase) in enabledPhases.enumerated() {
             let phaseStart = phase.start.toMinutes()
@@ -128,6 +130,7 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {
     public let forceDischargeSOC: Int
     private let color: Color
     public let maxSOC: Int?
+    public let pvLimit: Int?
 
     public init?(
         id: String? = nil,
@@ -139,7 +142,8 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {
         forceDischargePower: Int,
         forceDischargeSOC: Int,
         maxSOC: Int?,
-        color: Color
+        color: Color,
+        pvLimit: Int?
     ) {
         guard start < end else { return nil }
         if mode == "Invalid" { return nil }
@@ -154,6 +158,7 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {
         self.forceDischargeSOC = forceDischargeSOC
         self.color = color
         self.maxSOC = maxSOC
+        self.pvLimit = pvLimit
     }
 
     public init(mode: String, device: Device?, initialiseMaxSOC: Bool) {
@@ -162,11 +167,12 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {
         self.start = Date().toTime()
         self.end = Date().toTime().adding(minutes: 1)
         self.mode = mode
-        self.forceDischargePower = 0
+        self.forceDischargePower = Int((device?.capacity ?? 0.0) * 1000.0)
         self.forceDischargeSOC = Int(device?.battery?.minSOC) ?? 10
         self.minSocOnGrid = Int(device?.battery?.minSOC) ?? 10
         self.color = Color.scheduleColor(named: mode)
         self.maxSOC = initialiseMaxSOC ? 100 : nil
+        self.pvLimit = nil
     }
     
     public func copy(
@@ -182,7 +188,8 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {
             forceDischargePower: forceDischargePower,
             forceDischargeSOC: forceDischargeSOC,
             maxSOC: maxSOC,
-            color: color
+            color: color,
+            pvLimit: pvLimit
         )!
     }
 
@@ -197,6 +204,7 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {
         case forceDischargeSOC
         case color
         case maxSOC
+        case pvLimit
     }
 
     public init(from decoder: any Decoder) throws {
@@ -216,6 +224,7 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {
         self.forceDischargeSOC = try container.decode(Int.self, forKey: .forceDischargeSOC)
         self.maxSOC = try? container.decode(Int?.self, forKey: .maxSOC)
         self.color = Color.scheduleColor(named: self.mode)
+        self.pvLimit = try? container.decode(Int?.self, forKey: .pvLimit)
     }
 
     public func encode(to encoder: any Encoder) throws {
@@ -229,6 +238,7 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {
         try container.encode(self.forceDischargePower, forKey: .forceDischargePower)
         try container.encode(self.forceDischargeSOC, forKey: .forceDischargeSOC)
         try container.encode(self.maxSOC, forKey: .maxSOC)
+        try container.encode(self.pvLimit, forKey: .pvLimit)
     }
 
     public var startPoint: CGFloat { CGFloat(self.minutesAfterMidnight(self.start)) / (24 * 60) }
@@ -244,6 +254,10 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {
     
     public var displayColor: Color {
         color
+    }
+    
+    func isAllDaySynthesized() -> Bool {
+        start.hour == 0 && start.minute == 0 && end.hour == 23 && end.minute == 59
     }
 
     public func isEqualConfiguration(to other: SchedulePhase) -> Bool {

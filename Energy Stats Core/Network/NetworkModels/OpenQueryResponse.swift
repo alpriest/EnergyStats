@@ -271,6 +271,8 @@ public struct SchedulePhaseNetworkModel: Codable {
     public let fdSoc: Int
     public let fdPwr: Int?
     public let maxSoc: Int?
+    public let pvLimit: Int?
+    public let importLimit: Int?
 
     public init(
         enable: Int,
@@ -282,7 +284,9 @@ public struct SchedulePhaseNetworkModel: Codable {
         minSocOnGrid: Int,
         fdSoc: Int,
         fdPwr: Int?,
-        maxSoc: Int?
+        maxSoc: Int?,
+        pvLimit: Int?,
+        importLimit: Int?
     ) {
         self.enable = enable
         self.startHour = startHour
@@ -294,6 +298,8 @@ public struct SchedulePhaseNetworkModel: Codable {
         self.fdSoc = fdSoc
         self.fdPwr = fdPwr
         self.maxSoc = maxSoc
+        self.pvLimit = pvLimit
+        self.importLimit = importLimit
     }
 }
 

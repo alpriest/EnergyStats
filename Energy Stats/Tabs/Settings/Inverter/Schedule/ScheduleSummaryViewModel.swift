@@ -175,7 +175,8 @@ extension SchedulePhaseNetworkModel {
             forceDischargePower: fdPwr ?? 0,
             forceDischargeSOC: fdSoc,
             maxSOC: maxSoc,
-            color: Color.scheduleColor(named: workMode)
+            color: Color.scheduleColor(named: workMode),
+            pvLimit: pvLimit
         )
     }
 }

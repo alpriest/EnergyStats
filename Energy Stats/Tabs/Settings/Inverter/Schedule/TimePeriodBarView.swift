@@ -73,7 +73,8 @@ extension Schedule {
                     forceDischargePower: 0,
                     forceDischargeSOC: 100,
                     maxSOC: 100,
-                    color: .linesNegative
+                    color: .linesNegative,
+                    pvLimit: nil
                 )!,
                 SchedulePhase(
                     enabled: false,
@@ -90,7 +91,8 @@ extension Schedule {
                     forceDischargePower: 3500,
                     forceDischargeSOC: 20,
                     maxSOC: 100,
-                    color: .linesPositive
+                    color: .linesPositive,
+                    pvLimit: nil
                 )!,
                 SchedulePhase(
                     enabled: true,
@@ -107,7 +109,8 @@ extension Schedule {
                     forceDischargePower: 0,
                     forceDischargeSOC: 20,
                     maxSOC: 100,
-                    color: .paleGray
+                    color: .paleGray,
+                    pvLimit: nil
                 )!,
                 SchedulePhase(
                     enabled: true,
@@ -124,7 +127,8 @@ extension Schedule {
                     forceDischargePower: 0,
                     forceDischargeSOC: 100,
                     maxSOC: 100,
-                    color: .linesNegative
+                    color: .linesNegative,
+                    pvLimit: nil
                 )!,
                 SchedulePhase(
                     enabled: true,
@@ -141,7 +145,8 @@ extension Schedule {
                     forceDischargePower: 3500,
                     forceDischargeSOC: 20,
                     maxSOC: 100,
-                    color: .linesPositive
+                    color: .linesPositive,
+                    pvLimit: nil
                 )!,
                 SchedulePhase(
                     enabled: true,
@@ -158,7 +163,8 @@ extension Schedule {
                     forceDischargePower: 0,
                     forceDischargeSOC: 20,
                     maxSOC: 100,
-                    color: .paleGray
+                    color: .paleGray,
+                    pvLimit: nil
                 )!,
                 SchedulePhase(
                     enabled: true,
@@ -175,7 +181,8 @@ extension Schedule {
                     forceDischargePower: 0,
                     forceDischargeSOC: 100,
                     maxSOC: 100,
-                    color: .linesNegative
+                    color: .linesNegative,
+                    pvLimit: nil
                 )!
             ]
         )

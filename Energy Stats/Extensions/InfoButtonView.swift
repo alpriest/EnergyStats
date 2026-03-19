@@ -16,7 +16,7 @@ struct InfoButtonView: View {
         Button {
             alert = AlertContent(title: "", message: message)
         } label: {
-            Image(systemName: "info.circle.fill")
+            Image(systemName: "info.circle")
                 .foregroundStyle(Color.blue)
         }
         .buttonStyle(PlainButtonStyle())
