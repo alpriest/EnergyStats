@@ -16,8 +16,6 @@ public class ConfigManager: ConfigManaging {
     private var config: StoredConfig
     public var appSettingsPublisher: AnyPublisher<AppSettings, Never> { appSettingsStore.publisher }
     public var currentDevice = CurrentValueSubject<Device?, Never>(nil)
-    private var deviceSupportsScheduleMaxSOC: [String: Bool] = [:] // In-memory only //TODO: Read from scheduleProperties
-    private var deviceSupportsPeakShaving: [String: Bool] = [:] // In-memory only //TODO: Read from scheduleProperties
     public var scheduleProperties: [String: SchedulePropertyDefinition] = [:] // In-memory only
     public var lastSettingsResetTime = CurrentValueSubject<Date?, Never>(nil)
     private var fetchDeviceLock = OSAllocatedUnfairLock()

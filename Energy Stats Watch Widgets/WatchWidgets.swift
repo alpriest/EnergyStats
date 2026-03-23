@@ -102,11 +102,6 @@ struct RectangularBatteryStatusWidget: Widget {
                         VStack(alignment: .leading) {
                             if let power = entry.chargeStatusDescription {
                                 Text(power)
-                                //                            HStack(alignment: .center) {
-                                //                                Text("\(Image(systemName: power > 0 ? "square.and.arrow.down" : "square.and.arrow.up")) \(power.kW(2))")
-                                //                                    .foregroundStyle(power.tintColor)
-                                //                                    .font(.footnote)
-                                //                            }
                             }
                         }
                     }

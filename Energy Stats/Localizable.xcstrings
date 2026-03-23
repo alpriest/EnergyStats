@@ -3169,6 +3169,35 @@
         }
       }
     },
+    "Bar" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Balken"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Barra"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Balken"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Słupek"
+          }
+        }
+      }
+    },
     "Batteries" : {
       "localizations" : {
         "de" : {
@@ -10779,6 +10808,35 @@
         }
       }
     },
+    "Line" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Linie"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Línea"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Linea"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Linia"
+          }
+        }
+      }
+    },
     "Load firmware versions" : {
       "localizations" : {
         "de" : {
@@ -12474,7 +12532,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Parametri"
+            "value" : "Dati"
           }
         },
         "pl" : {
@@ -12978,7 +13036,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Leistungsfluss"
+            "value" : "Leistung"
           }
         },
         "es" : {
@@ -12990,7 +13048,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Flusso di potenza"
+            "value" : "Flusso"
           }
         },
         "pl" : {
@@ -15785,7 +15843,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Impostazioni"
+            "value" : "Opzioni"
           }
         },
         "pl" : {
@@ -17972,7 +18030,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zusammenfassung"
+            "value" : "Übersicht"
           }
         },
         "es" : {

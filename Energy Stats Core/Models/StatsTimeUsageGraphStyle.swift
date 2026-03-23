@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 public enum StatsTimeUsageGraphStyle: Int, CaseIterable, RawRepresentable {
     case bar = 0
@@ -40,7 +41,7 @@ public enum StatsTimeUsageGraphStyle: Int, CaseIterable, RawRepresentable {
     }
 
     // TODO: localize
-    public var title: String {
+    public var title: LocalizedStringKey {
         switch self {
         case .off:
             return "Hidden"
