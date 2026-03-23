@@ -88,14 +88,7 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState, HasAlertContent,
             self.configManager.scheduleProperties = scheduleResponse.properties
             self.schedulerEnabled = scheduleResponse.enable.boolValue
             self.configManager.workModes = scheduleResponse.workmodes
-
             self.schedule = Schedule(scheduleResponse: scheduleResponse)
-            if let schedule, schedule.supportsMaxSOC() {
-                self.configManager.setDeviceSupports(capability: .scheduleMaxSOC, deviceSN: deviceSN)
-            }
-            if scheduleResponse.supportsPeakShaving() {
-                self.configManager.setDeviceSupports(capability: .peakShaving, deviceSN: deviceSN)
-            }
             await self.setState(.inactive)
         } catch {
             await self.setState(.error(error, error.localizedDescription))
@@ -131,11 +124,6 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState, HasAlertContent,
         await save(schedule: schedule)
     }
 
-    func phase(phase: SchedulePhaseV3, of schedule: Schedule, changedTo enabled: Bool) async {
-        let modifiedSchedule = SchedulePhaseHelper.updated(phase: phase.copy(enabled: enabled), on: schedule)
-        await save(schedule: modifiedSchedule)
-    }
-    
     private func save(schedule: Schedule) async {
         guard let deviceSN = configManager.currentDevice.value?.deviceSN else { return }
         guard schedule.isValid() else {

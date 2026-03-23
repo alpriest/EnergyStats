@@ -14,7 +14,6 @@ enum SchedulePhaseHelper {
         Schedule(
             phases: (
                 schedule.phases + [SchedulePhaseV3(
-                    enabled: true,
                     start: Date().toTime(),
                     end: Date().toTime().adding(minutes: 1),
                     mode: WorkMode.SelfUse,
@@ -105,7 +104,6 @@ enum SchedulePhaseHelper {
         ].compactMapValues { $0 }
 
         return SchedulePhaseV3(
-            enabled: true,
             start: start,
             end: end,
             mode: mode,

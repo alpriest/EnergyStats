@@ -273,7 +273,6 @@ public struct SchedulePropertyDefinition: Hashable, Equatable, Decodable {
 }
 
 public struct SchedulePhaseRequest: Encodable {
-    public let enable: Int
     public let startHour: Int
     public let startMinute: Int
     public let endHour: Int
@@ -283,7 +282,6 @@ public struct SchedulePhaseRequest: Encodable {
 }
 
 public struct SchedulePhaseResponse: Decodable {
-    public let enable: Int?
     public let startHour: Int
     public let startMinute: Int
     public let endHour: Int
@@ -292,7 +290,6 @@ public struct SchedulePhaseResponse: Decodable {
     public let extraParam: [String: Double]?
     
     public init(
-        enable: Int,
         startHour: Int,
         startMinute: Int,
         endHour: Int,
@@ -300,7 +297,6 @@ public struct SchedulePhaseResponse: Decodable {
         workMode: String,
         extraParam: [String: Int]
     ) {
-        self.enable = enable
         self.startHour = startHour
         self.startMinute = startMinute
         self.endHour = endHour
@@ -310,7 +306,6 @@ public struct SchedulePhaseResponse: Decodable {
     }
     
     enum CodingKeys: CodingKey {
-        case enable
         case startHour
         case startMinute
         case endHour
@@ -321,7 +316,6 @@ public struct SchedulePhaseResponse: Decodable {
     
     public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.enable = try container.decodeIfPresent(Int.self, forKey: .enable)
         self.startHour = try container.decode(Int.self, forKey: .startHour)
         self.startMinute = try container.decode(Int.self, forKey: .startMinute)
         self.endHour = try container.decode(Int.self, forKey: .endHour)
@@ -330,22 +324,6 @@ public struct SchedulePhaseResponse: Decodable {
         self.extraParam = try container.decodeIfPresent([String : Double].self, forKey: .extraParam)
     }
     
-//    public var minSocOnGrid: Int {
-//        extraParam(key: "minSocOnGrid", default: 10)
-//    }
-//    
-//    public var fdPwr: Int {
-//        extraParam(key: "fdPwr", default: 0)
-//    }
-//    
-//    public var fdSoc: Int {
-//        extraParam(key: "fdSoc", default: 0)
-//    }
-//
-//    public var maxSoc: Int {
-//        extraParam(key: "maxSoc", default: 0)
-//    }
-
     func extraParamValue(for key: String, default: Int) -> Int {
         if let value = extraParam?[key] {
             Int(value)

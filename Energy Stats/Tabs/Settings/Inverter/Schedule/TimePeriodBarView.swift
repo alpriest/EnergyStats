@@ -20,7 +20,7 @@ struct TimePeriodBarView: View {
                 .overlay(
                     GeometryReader { reader in
                         ZStack(alignment: .leading) {
-                            ForEach(phases.filter { $0.enabled }) { phase in
+                            ForEach(phases) { phase in
                                 Rectangle()
                                     .fill(phase.displayColor)
                                     .frame(width: reader.size.width * (phase.endPoint - phase.startPoint))
@@ -58,7 +58,7 @@ extension Schedule {
     static func preview() -> Schedule {
         Schedule(
             phases: [
-                .preview.copy(enabled: false, mode: WorkMode.ForceCharge, start: Time(hour: 1, minute: 00), end: Time(hour: 2, minute: 00)),
+                .preview.copy(mode: WorkMode.ForceCharge, start: Time(hour: 1, minute: 00), end: Time(hour: 2, minute: 00)),
                 .preview.copy(mode: WorkMode.ForceDischarge, start: Time(hour: 8, minute: 00), end: Time(hour: 14, minute: 00)),
                 .preview.copy(mode: WorkMode.SelfUse, start: Time(hour: 19, minute: 30), end: Time(hour: 23, minute: 30)),
                 .preview.copy(mode: WorkMode.ForceCharge, start: Time(hour: 1, minute: 0), end: Time(hour: 2, minute: 0)),

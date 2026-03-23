@@ -18,7 +18,7 @@ public class ConfigManager: ConfigManaging {
     public var currentDevice = CurrentValueSubject<Device?, Never>(nil)
     private var deviceSupportsScheduleMaxSOC: [String: Bool] = [:] // In-memory only //TODO: Read from scheduleProperties
     private var deviceSupportsPeakShaving: [String: Bool] = [:] // In-memory only //TODO: Read from scheduleProperties
-    public var scheduleProperties: [String : SchedulePropertyDefinition] = [:] // In-memory only
+    public var scheduleProperties: [String: SchedulePropertyDefinition] = [:] // In-memory only
     public var lastSettingsResetTime = CurrentValueSubject<Date?, Never>(nil)
     private var fetchDeviceLock = OSAllocatedUnfairLock()
     private var isFetching = false
@@ -609,12 +609,7 @@ public class ConfigManager: ConfigManaging {
     }
 
     public var scheduleTemplates: [ScheduleTemplate] {
-        get {
-            // Template phases must always be enabled
-            config.scheduleTemplates.map { schedule in
-                schedule.copy(phases: schedule.phases.map { $0.copy(enabled: true) })
-            }
-        }
+        get { config.scheduleTemplates }
         set { config.scheduleTemplates = newValue }
     }
 
@@ -704,21 +699,7 @@ public class ConfigManager: ConfigManaging {
     }
 
     public func getDeviceSupports(capability: DeviceCapability, deviceSN: String) -> Bool {
-        switch capability {
-        case .scheduleMaxSOC:
-            deviceSupportsScheduleMaxSOC[deviceSN] ?? false
-        case .peakShaving:
-            deviceSupportsPeakShaving[deviceSN] ?? false
-        }
-    }
-
-    public func setDeviceSupports(capability: DeviceCapability, deviceSN: String) {
-        switch capability {
-        case .scheduleMaxSOC:
-            deviceSupportsScheduleMaxSOC[deviceSN] = true
-        case .peakShaving:
-            deviceSupportsPeakShaving[deviceSN] = true
-        }
+        scheduleProperties.keys.contains(capability.schedulePropertyKey)
     }
 
     public var showInverterConsumption: Bool {

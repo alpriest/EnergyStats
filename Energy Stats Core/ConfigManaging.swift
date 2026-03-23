@@ -78,7 +78,6 @@ public protocol ConfigManaging: FinancialConfigManager, SolcastConfigManager, Ba
     var ct2DisplayMode: CT2DisplayMode { get set }
     var shouldCombineCT2WithLoadsPower: Bool { get set }
     func getDeviceSupports(capability: DeviceCapability, deviceSN: String) -> Bool
-    func setDeviceSupports(capability: DeviceCapability, deviceSN: String)
     var showInverterConsumption: Bool { get set }
     var showBatterySOCOnDailyStats: Bool { get set }
     var workModes: [WorkMode] { get set }
@@ -93,6 +92,15 @@ public protocol ConfigManaging: FinancialConfigManager, SolcastConfigManager, Ba
 public enum DeviceCapability {
     case scheduleMaxSOC
     case peakShaving
+    
+    var schedulePropertyKey: String {
+        switch self {
+        case .scheduleMaxSOC:
+            "maxsoc"
+        case .peakShaving:
+            "peakshaving"
+        }
+    }
 }
 
 public protocol BatteryConfigManager {

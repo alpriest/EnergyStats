@@ -186,7 +186,6 @@ struct FooterSection<V: View>: View {
 extension SchedulePhaseV3 {
     static var preview: SchedulePhaseV3 {
         SchedulePhaseV3(
-            enabled: true,
             start: Time(
                 hour: 19,
                 minute: 30

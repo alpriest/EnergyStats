@@ -231,13 +231,12 @@ class SchedulePhaseEditViewModel: ObservableObject, ViewDataProviding {
 
         let phase = SchedulePhaseV3(
             id: viewData.id,
-            enabled: true,
             start: viewData.startTime.toTime(),
             end: viewData.endTime.toTime(),
             mode: viewData.workMode,
             extraParam: Dictionary(uniqueKeysWithValues: fieldsWithSensibleDefaults.compactMap {
                 if let value = $0.value {
-                    ($0.key, value)
+                    (keyAsExtraParamKey($0.key), value)
                 } else {
                     nil
                 }
@@ -247,5 +246,10 @@ class SchedulePhaseEditViewModel: ObservableObject, ViewDataProviding {
         onChange(phase)
         resetDirtyState()
         onSuccess()
+    }
+    
+    private func keyAsExtraParamKey(_ key: String) -> String {
+        let fieldNames = Set(["fdSoc", "fdPwr", "maxSoc", "minSocOnGrid"])
+        return fieldNames.first { $0.lowercased() == key } ?? key
     }
 }

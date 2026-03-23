@@ -38,7 +38,7 @@ struct ScheduleDetailView: View {
                                       onChange: onUpdate,
                                       onDelete: onDelete)
             } label: {
-                SchedulePhaseListItemView(phase: phase, toggleMode: .disabled)
+                SchedulePhaseListItemView(phase: phase)
                     .if(index >= Schedule.maxPhasesCount) {
                         $0.overlay(
                             CrossHatchView()

@@ -53,7 +53,6 @@ extension FoxAPIService {
 extension SchedulePhaseV3 {
     func toPhaseNetworkRequest() -> SchedulePhaseRequest {
         SchedulePhaseRequest(
-            enable: enabled.intValue,
             startHour: start.hour,
             startMinute: start.minute,
             endHour: end.hour,

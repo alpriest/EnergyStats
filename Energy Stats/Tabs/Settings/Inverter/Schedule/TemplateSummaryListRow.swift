@@ -29,7 +29,7 @@ struct TemplateSummaryListRow: View {
                 VStack(alignment: .leading) {
                     Text(template.name)
 
-                    ScheduleView(schedule: template.asSchedule(), includePhaseDetail: false, phaseEnabledToggleMode: .disabled)
+                    ScheduleView(schedule: template.asSchedule(), includePhaseDetail: false)
                         .padding(.vertical, 4)
                 }
             }

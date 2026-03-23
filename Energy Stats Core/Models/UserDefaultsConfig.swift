@@ -259,13 +259,48 @@ public class UserDefaultsConfig: StoredConfig {
     
     public var scheduleTemplates: [ScheduleTemplate] {
         get {
-            guard let data = UserDefaults.shared.data(forKey: "scheduleTemplates") else { return [] }
-            let templates = (try? JSONDecoder().decode([ScheduleTemplate].self, from: data)) ?? []
-            return templates
+            if let data = UserDefaults.shared.data(forKey: "scheduleTemplates") {
+                // Fetch old v1
+                let v1Templates = (try? JSONDecoder().decode([ScheduleTemplateV1].self, from: data)) ?? []
+                // Adapt them to v3
+                let v3Templates: [ScheduleTemplate] = v1Templates.map { v1 in
+                    let v3phases = v1.phases.map { v1phase in
+                        var params: [String: Double] = [
+                            "minSocOnGrid": Double(v1phase.minSocOnGrid)
+                        ]
+                        
+                        if [WorkMode.ForceCharge, WorkMode.ForceDischarge].contains(v1phase.mode) {
+                            params["fdPwr"] = Double(v1phase.forceDischargePower)
+                            params["fdSoc"] = Double(v1phase.forceDischargeSOC)
+                        }
+                        
+                        return SchedulePhaseV3(
+                            start: v1phase.start,
+                            end: v1phase.end,
+                            mode: v1phase.mode,
+                            extraParam: params
+                        )
+                    }
+                   
+                    return ScheduleTemplate(id: v1.id, name: v1.name, phases: v3phases)
+                }
+                
+                // Save to v3
+                self.scheduleTemplates = v3Templates
+                
+                // Remove v1
+                UserDefaults.shared.removeObject(forKey: "scheduleTemplates")
+                
+                return v3Templates
+            } else if let data = UserDefaults.shared.data(forKey: "scheduleTemplatesV3") {
+                return (try? JSONDecoder().decode([ScheduleTemplate].self, from: data)) ?? []
+            } else {
+                return []
+            }
         }
         set {
             let data = try? JSONEncoder().encode(newValue)
-            UserDefaults.shared.set(data, forKey: "scheduleTemplates")
+            UserDefaults.shared.set(data, forKey: "scheduleTemplatesV3")
         }
     }
     

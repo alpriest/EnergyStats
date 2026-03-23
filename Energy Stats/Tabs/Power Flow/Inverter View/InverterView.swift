@@ -43,8 +43,8 @@ struct InverterView: View {
 
                 if appSettings.showInverterTemperature, let temperatures = viewModel.temperatures {
                     HStack {
-                        TemperatureView(value: temperatures.ambient, name: "internal", accessibilityName: "accessibility.inverter", showName: true) // TODO: Verify
-                        TemperatureView(value: temperatures.inverter, name: "external", accessibilityName: "accessibility.inverter", showName: true) // TODO: Verify
+                        TemperatureView(value: temperatures.ambient, name: "internal", accessibilityName: "accessibility.inverter", showName: true)
+                        TemperatureView(value: temperatures.inverter, name: "external", accessibilityName: "accessibility.inverter", showName: true)
                     }
                     .background(Color.background)
                 }

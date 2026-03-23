@@ -256,7 +256,6 @@ class DemoAPI: FoxAPIServicing {
             enable: 0,
             groups: [
                 SchedulePhaseResponse(
-                    enable: 1,
                     startHour: 15,
                     startMinute: 0,
                     endHour: 17,
@@ -270,7 +269,6 @@ class DemoAPI: FoxAPIServicing {
                     ]
                 ),
                 SchedulePhaseResponse(
-                    enable: 1,
                     startHour: 17,
                     startMinute: 1,
                     endHour: 18,

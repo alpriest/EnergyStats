@@ -50,11 +50,8 @@ struct ScheduleSummaryView: View {
                                     schedule: schedule
                                 )
                             } label: {
-                                ScheduleView(schedule: schedule, includePhaseDetail: true, phaseEnabledToggleMode: .enabled(onPhaseEnabledChange: {
-                                    phase, flag in
-                                    Task { await viewModel.phase(phase: phase, of: schedule, changedTo: flag) }
-                                }))
-                                .padding(.vertical, 4)
+                                ScheduleView(schedule: schedule, includePhaseDetail: true)
+                                    .padding(.vertical, 4)
                             }
                         } header: {
                             Text(viewModel.schedulerEnabled ? "active_schedule_title" : "inactive_schedule_title")

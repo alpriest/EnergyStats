@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+struct ScheduleTemplateV1: Codable {
+    public let id: String
+    public let name: String
+    public let phases: [SchedulePhaseV1]
+}
+
 // This is directly serialised for schedule v1 API
 public struct SchedulePhaseV1: Identifiable, Hashable, Equatable, Codable {
     public let id: String

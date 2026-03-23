@@ -39,7 +39,6 @@ public extension ScheduleTemplate {
     static func preview() -> ScheduleTemplate {
         ScheduleTemplate(id: "1", name: "Force discharge", phases: [
             SchedulePhaseV3(
-                enabled: true,
                 start: Time(
                     hour: 1,
                     minute: 00
@@ -57,7 +56,6 @@ public extension ScheduleTemplate {
                 ]
             ),
             SchedulePhaseV3(
-                enabled: true,
                 start: Time(
                     hour: 10,
                     minute: 30
@@ -86,14 +84,12 @@ public struct Schedule: Hashable, Equatable {
     }
 
     public func isValid() -> Bool {
-        let enabledPhases = self.phases.filter { $0.enabled && !$0.isAllDaySynthesized() }
-
-        for (index, phase) in enabledPhases.enumerated() {
+        for (index, phase) in self.phases.enumerated() {
             let phaseStart = phase.start.toMinutes()
             let phaseEnd = phase.end.toMinutes()
 
             // Check for overlap with other phases
-            for otherPhase in enabledPhases[(index + 1)...] {
+            for otherPhase in self.phases[(index + 1)...] {
                 let otherStart = otherPhase.start.toMinutes()
                 let otherEnd = otherPhase.end.toMinutes()
 
@@ -158,7 +154,6 @@ public struct SchedulePhaseParameter: Hashable, Equatable, Codable {
 
 public struct SchedulePhaseV3: Identifiable, Hashable, Equatable, Codable {
     public let id: String
-    public let enabled: Bool
     public let start: Time
     public let end: Time
     public let mode: WorkMode
@@ -173,14 +168,12 @@ public struct SchedulePhaseV3: Identifiable, Hashable, Equatable, Codable {
 
     public init(
         id: String? = nil,
-        enabled: Bool,
         start: Time,
         end: Time,
         mode: WorkMode,
         extraParam: [String: Double]
     ) {
         self.id = id ?? UUID().uuidString
-        self.enabled = enabled
         self.start = start
         self.end = end
         self.mode = mode
@@ -196,10 +189,6 @@ public struct SchedulePhaseV3: Identifiable, Hashable, Equatable, Codable {
         self.color
     }
 
-    func isAllDaySynthesized() -> Bool {
-        self.start.hour == 0 && self.start.minute == 0 && self.end.hour == 23 && self.end.minute == 59
-    }
-
     public func hasExtraParam(key: String) -> Bool {
         self.extraParam.keys.contains(key)
     }
@@ -207,7 +196,7 @@ public struct SchedulePhaseV3: Identifiable, Hashable, Equatable, Codable {
     public func valueFor(key: String) -> Double? {
         self.extraParam[key]
     }
-    
+
     public func stringValueFor(key: String) -> String {
         if let value = valueFor(key: key) {
             String(Int(value))
@@ -217,14 +206,12 @@ public struct SchedulePhaseV3: Identifiable, Hashable, Equatable, Codable {
     }
 
     public func copy(
-        enabled: Bool? = nil,
         mode: WorkMode? = nil,
         start: Time? = nil,
         end: Time? = nil,
     ) -> SchedulePhaseV3 {
         SchedulePhaseV3(
             id: self.id,
-            enabled: enabled ?? self.enabled,
             start: start ?? self.start,
             end: end ?? self.end,
             mode: mode ?? self.mode,
@@ -234,7 +221,6 @@ public struct SchedulePhaseV3: Identifiable, Hashable, Equatable, Codable {
 
     private enum CodingKeys: CodingKey {
         case id
-        case enabled
         case start
         case end
         case mode
@@ -244,7 +230,6 @@ public struct SchedulePhaseV3: Identifiable, Hashable, Equatable, Codable {
     public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decode(String.self, forKey: .id)
-        self.enabled = try container.decodeIfPresent(Bool.self, forKey: .enabled) ?? true
         self.start = try container.decode(Time.self, forKey: .start)
         self.end = try container.decode(Time.self, forKey: .end)
         self.mode = try container.decode(String.self, forKey: .mode)
@@ -255,7 +240,6 @@ public struct SchedulePhaseV3: Identifiable, Hashable, Equatable, Codable {
     public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(self.id, forKey: .id)
-        try container.encode(self.enabled, forKey: .enabled)
         try container.encode(self.start, forKey: .start)
         try container.encode(self.end, forKey: .end)
         try container.encode(self.mode, forKey: .mode)
@@ -263,8 +247,7 @@ public struct SchedulePhaseV3: Identifiable, Hashable, Equatable, Codable {
     }
 
     public func isEqualConfiguration(to other: SchedulePhaseV3) -> Bool {
-        self.enabled == other.enabled &&
-            self.start == other.start &&
+        self.start == other.start &&
             self.end == other.end &&
             self.mode == other.mode &&
             self.extraParam == other.extraParam
@@ -300,7 +283,6 @@ public struct SchedulePhaseFieldDefinition: Copiable {
 public extension SchedulePhaseResponse {
     func toSchedulePhase() -> SchedulePhaseV3? {
         return SchedulePhaseV3(
-            enabled: (enable ?? 1).boolValue,
             start: Time(hour: startHour, minute: startMinute),
             end: Time(hour: endHour, minute: endMinute),
             mode: workMode,
