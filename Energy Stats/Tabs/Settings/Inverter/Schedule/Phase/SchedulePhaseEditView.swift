@@ -15,19 +15,7 @@ struct SchedulePhaseEditView: View {
     @StateObject private var viewModel: SchedulePhaseEditViewModel
     @FocusState private var focusedField: String?
     @State private var showingAdvanced = false
-    
-//    private enum Field: Hashable {
-//        case minSoc
-//        case maxSoc
-//        case forceChargeSoc
-//        case forceDischargeSoc
-//        case forceChargePower
-//        case forceDischargePower
-//        case pvLimit
-//        case exportLimit
-//        case importLimit
-//    }
-    
+        
     init(
         schedule: Schedule,
         phase: SchedulePhaseV3,
@@ -270,10 +258,10 @@ struct SchedulePhaseEditView: View {
             EditableItemView(
                 title: $0.title,
                 field: $0.title,
-                numberTitle: "Power",
+                numberTitle: "",
                 numberText: viewModel.binding(for: $0),
-                unit: "W",
-                error: nil,
+                unit: $0.unit ?? "",
+                error: viewModel.fieldErrors[$0.key],
                 description: nil,
                 focusedField: $focusedField
             )
@@ -309,7 +297,7 @@ struct SchedulePhaseEditView: View {
             }
         }
     }
-    
+
     private func hasAdvancedViews(for workMode: WorkMode) -> Bool {
         switch workMode {
         case .ForceCharge:

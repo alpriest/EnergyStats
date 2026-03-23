@@ -260,6 +260,7 @@ public struct SchedulePhaseFieldDefinition: Copiable {
     public let range: SchedulePropertyDefinitionRange?
     public let unit: String?
     public var value: Double?
+    public var error: String?
 
     public func create(copying previous: SchedulePhaseFieldDefinition) -> SchedulePhaseFieldDefinition {
         SchedulePhaseFieldDefinition(
@@ -269,7 +270,8 @@ public struct SchedulePhaseFieldDefinition: Copiable {
             precision: previous.precision,
             range: previous.range,
             unit: previous.unit,
-            value: previous.value
+            value: previous.value,
+            error: previous.error
         )
     }
 }

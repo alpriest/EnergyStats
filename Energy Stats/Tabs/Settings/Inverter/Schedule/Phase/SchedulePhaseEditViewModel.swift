@@ -21,6 +21,9 @@ class SchedulePhaseEditViewModel: ObservableObject, ViewDataProviding {
         modes: [],
         fields: []
     ) { didSet {
+        if oldValue.workMode != viewData.workMode {
+            determineVisibleFields()
+        }
         validate()
         isDirty = viewData != originalValue
     }}
@@ -28,11 +31,14 @@ class SchedulePhaseEditViewModel: ObservableObject, ViewDataProviding {
     private let onDelete: (String) -> Void
     @Published var isDirty = false
     var originalValue: ViewData?
-    @Published var minSOCError: LocalizedStringKey?
-    @Published var fdSOCError: LocalizedStringKey?
+//    @Published var minSOCError: LocalizedStringKey?
+//    @Published var fdSOCError: LocalizedStringKey?
     @Published var timeError: LocalizedStringKey?
-    @Published var forceDischargePowerError: LocalizedStringKey?
-    @Published var maxSOCError: LocalizedStringKey?
+//    @Published var forceDischargePowerError: LocalizedStringKey?
+//    @Published var maxSOCError: LocalizedStringKey?
+    @Published var fieldErrors: [String: LocalizedStringKey] = [:]
+    private let schedule: Schedule
+    private let phase: SchedulePhaseV3
 
     init(
         configManager: ConfigManaging,
@@ -44,39 +50,8 @@ class SchedulePhaseEditViewModel: ObservableObject, ViewDataProviding {
         self.configManager = configManager
         self.onChange = onChange
         self.onDelete = onDelete
-
-        let standardFields: [SchedulePhaseFieldDefinition] = switch phase.mode {
-        case .SelfUse:
-            [
-                schedule.buildFieldDefinition(for: "minSoc", properties: configManager.scheduleProperties, isStandard: true, title: "Min SoC", phase: phase)
-            ]
-        case .Feedin:
-            [
-                schedule.buildFieldDefinition(for: "minSoc", properties: configManager.scheduleProperties, isStandard: true, title: "Min SoC", phase: phase)
-            ]
-        case .Backup:
-            [
-                schedule.buildFieldDefinition(for: "minSoc", properties: configManager.scheduleProperties, isStandard: true, title: "Min SoC", phase: phase)
-            ]
-        case .ForceCharge:
-            [
-                schedule.buildFieldDefinition(for: "fdSoc", properties: configManager.scheduleProperties, isStandard: true, title: "Min SoC", phase: phase)
-            ]
-        case .ForceDischarge:
-            [
-                schedule.buildFieldDefinition(for: "fdSoc", properties: configManager.scheduleProperties, isStandard: true, title: "Min SoC", phase: phase)
-            ]
-        default:
-            []
-        }
-
-        var advancedFields: [SchedulePhaseFieldDefinition] =
-            phase.extraParam
-                .keys
-                .filter { allKey in standardFields.contains(where: { standardKey in standardKey.key == allKey }) == false }
-                .map { key in
-                    schedule.buildFieldDefinition(for: key, properties: configManager.scheduleProperties, isStandard: false, title: key, phase: phase)
-                }
+        self.schedule = schedule
+        self.phase = phase
 
         let viewData = ViewData(
             id: phase.id,
@@ -84,11 +59,13 @@ class SchedulePhaseEditViewModel: ObservableObject, ViewDataProviding {
             endTime: Date.fromTime(phase.end),
             workMode: phase.mode,
             modes: configManager.workModes.sorted(),
-            fields: standardFields + advancedFields
+            fields: []
         )
         originalValue = viewData
         self.viewData = viewData
 
+        // Update available fields based on workmode
+        determineVisibleFields()
         validate()
     }
 
@@ -99,7 +76,7 @@ class SchedulePhaseEditViewModel: ObservableObject, ViewDataProviding {
         Binding(
             get: {
                 if let storedValue = definition.value {
-                    String(storedValue)
+                    String(Int(storedValue))
                 } else {
                     defaultValue
                 }
@@ -115,42 +92,71 @@ class SchedulePhaseEditViewModel: ObservableObject, ViewDataProviding {
     }
 
     private func validate() {
-        // TODO: Errors
+        fieldErrors = [:]
+        
+        for field in viewData.fields {
+            guard let value = field.value, let range = field.range else { continue }
+            
+            if value < range.min || value > range.max {
+                fieldErrors[field.key] = "Please enter a number between \(Int(range.min)) and \(Int(range.max))"
+            }
+        }
 //        var minSOCError: LocalizedStringKey? = nil
 //        var fdSOCError: LocalizedStringKey? = nil
 //        var timeError: LocalizedStringKey? = nil
 //        var forceDischargePowerError: LocalizedStringKey? = nil
 //        var maxSOCError: LocalizedStringKey? = nil
 //
-//        if let minSOC = Int(viewData.minSOC), !(10...100 ~= minSOC) {
-//            minSOCError = "Please enter a number between 10 and 100"
-//        }
-//
-//        if let fdSOC = Int(viewData.fdSOC), !(10...100 ~= fdSOC) {
-//            fdSOCError = "Please enter a number between 10 and 100"
-//        }
-//
 //        if let minSOC = Int(viewData.minSOC), let fdSOC = Int(viewData.fdSOC), minSOC > fdSOC {
 //            minSOCError = "Min SoC must be less than or equal to Force Discharge SoC"
 //        }
 //
-//        if viewData.startTime.toTime() >= viewData.endTime.toTime() {
-//            timeError = "End time must be after start time"
-//        }
+        if viewData.startTime.toTime() >= viewData.endTime.toTime() {
+            timeError = "End time must be after start time"
+        }
 //
 //        if case .ForceDischarge = viewData.workMode, Int(viewData.fdPower) == 0 {
 //            forceDischargePowerError = "Force Discharge power needs to be greater than 0 to discharge"
 //        }
-//
-//        if viewData.showMaxSOC, let maxSOC = Int(viewData.maxSOC), !(10...100 ~= maxSOC) {
-//            maxSOCError = "Please enter a number between 10 and 100"
-//        }
-//
-//        self.minSOCError = minSOCError
-//        self.fdSOCError = fdSOCError
-//        self.timeError = timeError
-//        self.forceDischargePowerError = forceDischargePowerError
-//        self.maxSOCError = maxSOCError
+    }
+
+    private func determineVisibleFields() {
+        let mode = viewData.workMode
+
+        let standardFields: [SchedulePhaseFieldDefinition] = switch mode {
+        case .SelfUse:
+            [
+                schedule.buildFieldDefinition(for: "minsocongrid", properties: configManager.scheduleProperties, isStandard: true, title: "Min SoC", phase: phase)
+            ]
+        case .Feedin:
+            [
+                schedule.buildFieldDefinition(for: "minsocongrid", properties: configManager.scheduleProperties, isStandard: true, title: "Min SoC", phase: phase)
+            ]
+        case .Backup:
+            [
+                schedule.buildFieldDefinition(for: "minsocongrid", properties: configManager.scheduleProperties, isStandard: true, title: "Min SoC", phase: phase)
+            ]
+        case .ForceCharge:
+            [
+                schedule.buildFieldDefinition(for: "fdsoc", properties: configManager.scheduleProperties, isStandard: true, title: "Charge to SoC", phase: phase)
+            ]
+        case .ForceDischarge:
+            [
+                schedule.buildFieldDefinition(for: "fdsoc", properties: configManager.scheduleProperties, isStandard: true, title: "Discharge to SoC", phase: phase)
+            ]
+        default:
+            []
+        }
+
+        let advancedFields: [SchedulePhaseFieldDefinition] =
+            phase.extraParam
+                .keys
+                .filter { allKey in standardFields.contains(where: { standardKey in standardKey.key == allKey }) == false }
+                .map { key in
+                    schedule.buildFieldDefinition(for: key, properties: configManager.scheduleProperties, isStandard: false, title: key, phase: phase)
+                }
+
+        viewData.fields = standardFields + advancedFields
     }
 
     func save(onSuccess: () -> Void) {

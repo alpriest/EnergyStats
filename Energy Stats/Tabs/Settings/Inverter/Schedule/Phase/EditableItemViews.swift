@@ -19,20 +19,49 @@ struct EditableItemView<Field: Hashable>: View {
     let focusedField: FocusState<Field?>.Binding
 
     var body: some View {
-        HStack {
-            Text(title)
-            OptionalView(description) {
-                InfoButtonView(message: $0)
+        VStack {
+            HStack {
+                Text(title)
+                OptionalView(description) {
+                    InfoButtonView(message: $0)
+                }
+                Spacer()
+                NumberTextField(numberTitle, text: numberText, focusedField: focusedField, equals: field)
+                    .multilineTextAlignment(.trailing)
+                    .frame(width: 100)
+                Text(unit)
             }
-            Spacer()
-            NumberTextField(numberTitle, text: numberText, focusedField: focusedField, equals: field)
-                .multilineTextAlignment(.trailing)
-                .frame(width: 100)
-            Text(unit)
-        }
-        .contentShape(Rectangle())
-        .onTapGesture {
-            focusedField.wrappedValue = field
+            .contentShape(Rectangle())
+            .onTapGesture {
+                focusedField.wrappedValue = field
+            }
+            OptionalView(error) {
+                Text($0)
+                    .foregroundColor(Color.linesNegative)
+                    .multilineTextAlignment(.leading)
+                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+            }
         }
     }
+}
+
+#Preview {
+    struct Preview: View {
+        @FocusState var focusedField: String?
+
+        var body: some View {
+            EditableItemView(
+                title: "Something",
+                field: "Something",
+                numberTitle: "Min SoC",
+                numberText: .constant(""),
+                unit: "%",
+                error: "Please enter a number between 0 and 10",
+                description: nil,
+                focusedField: $focusedField
+            )
+        }
+    }
+    
+    return Preview()
 }
