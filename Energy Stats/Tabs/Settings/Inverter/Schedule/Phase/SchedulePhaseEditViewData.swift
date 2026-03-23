@@ -16,6 +16,7 @@ struct SchedulePhaseEditViewData: Copiable {
     var workMode: WorkMode
     var modes: [String]
     var fields: [SchedulePhaseFieldDefinition]
+    var showAdvancedFields: Bool
 
     func create(copying previous: SchedulePhaseEditViewData) -> SchedulePhaseEditViewData {
         SchedulePhaseEditViewData(
@@ -24,7 +25,8 @@ struct SchedulePhaseEditViewData: Copiable {
             endTime: previous.endTime,
             workMode: previous.workMode,
             modes: previous.modes,
-            fields: previous.fields
+            fields: previous.fields,
+            showAdvancedFields: previous.showAdvancedFields
         )
     }
 }

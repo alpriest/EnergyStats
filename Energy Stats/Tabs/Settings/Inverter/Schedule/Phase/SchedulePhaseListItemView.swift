@@ -9,7 +9,7 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct SchedulePhaseListItemView: View {
-    let phase: SchedulePhaseV3
+    private let phase: SchedulePhaseV3
     private let toggleMode: PhaseEnabledToggleMode
     @State private var toggleState: Bool
 
@@ -49,33 +49,18 @@ struct SchedulePhaseListItemView: View {
     }
 
     private func extra(for phase: SchedulePhaseV3) -> String {
-        "TODO"
-//        switch phase.mode {
-//        case "ForceDischarge":
-//            return " at \(phase.forceDischargePower)W down to \(phase.forceDischargeSOC)%"
-//        case "ForceCharge":
-//            if let maxSOC = phase.maxSOC {
-//                return " with \(maxSOC)% max SOC"
-//            } else {
-//                return ""
-//            }
-//        case "SelfUse":
-//            var result = " with \(phase.minSocOnGrid)% min SOC"
-//
-//            if let maxSOC = phase.maxSOC {
-//                result += " and \(maxSOC)% max SOC"
-//            }
-//
-//            return result
-//        case "Backup":
-//            if let maxSOC = phase.maxSOC {
-//                return " with \(maxSOC)% max SOC"
-//            } else {
-//                return ""
-//            }
-//        default:
-//            return ""
-//        }
+        switch phase.mode {
+        case WorkMode.ForceDischarge:
+            return " at \(phase.forceDischargePower)W down to \(phase.forceDischargeSoc)%"
+        case WorkMode.ForceCharge:
+            return " at \(phase.forceDischargePower)W up to \(phase.forceDischargeSoc)%"
+        case WorkMode.SelfUse:
+            return " \(phase.minSocOnGrid)% min SOC"
+        case WorkMode.Backup:
+            return ""
+        default:
+            return ""
+        }
     }
 }
 
@@ -83,5 +68,19 @@ struct SchedulePhaseListItemView: View {
     VStack {
         SchedulePhaseListItemView(phase: Schedule.preview().phases[0], toggleMode: .disabled)
         SchedulePhaseListItemView(phase: Schedule.preview().phases[1], toggleMode: .enabled(onPhaseEnabledChange: { _, _ in }))
+    }
+}
+
+extension SchedulePhaseV3 {
+    var forceDischargePower: String {
+        stringValueFor(key: "fdpwr")
+    }
+    
+    var forceDischargeSoc: String {
+        stringValueFor(key: "fdsoc")
+    }
+    
+    var minSocOnGrid: String {
+        stringValueFor(key: "minsocongrid")
     }
 }

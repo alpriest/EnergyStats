@@ -15,7 +15,7 @@ struct SchedulePhaseEditView: View {
     @StateObject private var viewModel: SchedulePhaseEditViewModel
     @FocusState private var focusedField: String?
     @State private var showingAdvanced = false
-        
+
     init(
         schedule: Schedule,
         phase: SchedulePhaseV3,
@@ -34,17 +34,17 @@ struct SchedulePhaseEditView: View {
             )
         )
     }
-    
+
     var body: some View {
         VStack(spacing: 0) {
             Form {
                 FooterSection {
                     Text("Define your phase here. Press back to view your entire schedule.")
                 }
-                
+
                 Section {
                     CustomTimePicker(start: $viewModel.viewData.startTime, end: $viewModel.viewData.endTime, includeSeconds: true)
-                    
+
                     Picker(selection: $viewModel.viewData.workMode) {
                         ForEach(viewModel.viewData.modes, id: \.self) { mode in
                             Text(WorkMode.title(for: mode))
@@ -66,10 +66,10 @@ struct SchedulePhaseEditView: View {
                         }
                     }
                 }
-                
+
                 standardViews(for: viewModel.viewData.workMode)
                 advancedViews(for: viewModel.viewData.workMode)
-                
+
                 Section {}
                 footer: {
                         Button(role: .destructive) {
@@ -80,7 +80,7 @@ struct SchedulePhaseEditView: View {
                         }.buttonStyle(.bordered)
                     }
             }
-            
+
             BottomButtonsView(dirty: viewModel.isDirty) { viewModel.save {
                 presentationMode.wrappedValue.dismiss()
             } }
@@ -118,14 +118,14 @@ struct SchedulePhaseEditView: View {
             nil
         }
     }
-    
+
     @ViewBuilder
     func standardViews(for workMode: WorkMode) -> some View {
         ForEach(viewModel.viewData.fields.filter(\.isStandard), id: \.key) {
             editableItemView(for: $0)
         }
     }
-    
+
     @ViewBuilder
     func advancedViews(for workMode: WorkMode) -> some View {
         Section {
@@ -135,18 +135,21 @@ struct SchedulePhaseEditView: View {
                 }
             }
         } header: {
-            if showingAdvanced {
-                Text("Advanced")
+            if viewModel.viewData.showAdvancedFields {
+                Button(action: { withAnimation { showingAdvanced.toggle() } }) {
+                    HStack {
+                        Text("Advanced")
+                        Image(systemName: showingAdvanced ? "chevron.up" : "chevron.down")
+                    }
+                }
             }
         } footer: {
-            if !showingAdvanced, hasAdvancedViews(for: workMode) {
-                Button(action: { showingAdvanced = true }) {
-                    Text("Advanced...")
-                }
+            if showingAdvanced {
+                Text("These settings are optional and can usually be left as default.")
             }
         }
     }
-    
+
     private func editableItemView(for field: SchedulePhaseFieldDefinition) -> some View {
         EditableItemView(
             title: field.title,
@@ -158,17 +161,6 @@ struct SchedulePhaseEditView: View {
             description: field.description,
             focusedField: $focusedField
         )
-    }
-
-    private func hasAdvancedViews(for workMode: WorkMode) -> Bool {
-        switch workMode {
-        case .ForceCharge:
-            true
-        case .ForceDischarge:
-            true
-        default:
-            false
-        }
     }
 }
 
@@ -213,122 +205,3 @@ extension SchedulePhaseV3 {
         )
     }
 }
-
-
-//    private var minSocEditable: some View {
-//        EditableItemView(
-//            title: "Minimum battery level",
-//            field: Field.minSoc,
-//            numberTitle: "SoC",
-//            numberText: viewModel.viewData.binding(for: "minSoc"),
-//            unit: "%",
-//            error: viewModel.minSOCError,
-//            description: minSoCDescription(),
-//            focusedField: $focusedField
-//        )
-//    }
-//
-//    private var maxSocEditable: some View {
-//        EditableItemView(
-//            title: "Maximum battery level",
-//            field: Field.maxSoc,
-//            numberTitle: "SoC",
-//            numberText: $viewModel.viewData.maxSOC,
-//            unit: "%",
-//            error: viewModel.maxSOCError,
-//            description: nil,
-//            focusedField: $focusedField
-//        )
-//    }
-//
-//    private var forceChargeSocEditable: some View {
-//        EditableItemView(
-//            title: "Target battery SoC",
-//            field: Field.forceChargeSoc,
-//            numberTitle: "SoC",
-//            numberText: $viewModel.viewData.fdSOC,
-//            unit: "%",
-//            error: nil,
-//            description: nil,
-//            focusedField: $focusedField
-//        )
-//    }
-//
-//    private var forceDischargeSocEditable: some View {
-//        EditableItemView(
-//            title: "Discharge battery level",
-//            field: Field.forceDischargeSoc,
-//            numberTitle: "SoC",
-//            numberText: $viewModel.viewData.fdSOC,
-//            unit: "%",
-//            error: viewModel.fdSOCError,
-//            description: forceDischargeSoCDescription(),
-//            focusedField: $focusedField
-//        )
-//    }
-//
-//    private var forceChargePowerEditable: some View {
-//        EditableItemView(
-//            title: "Force Charge Power",
-//            field: Field.forceChargePower,
-//            numberTitle: "Power",
-//            numberText: $viewModel.viewData.fdPower,
-//            unit: "W",
-//            error: nil,
-//            description: nil,
-//            focusedField: $focusedField
-//        )
-//    }
-//
-//    private var forceDischargePowerEditable: some View {
-//        EditableItemView(
-//            title: "Force Discharge Power",
-//            field: Field.forceDischargePower,
-//            numberTitle: "Power",
-//            numberText: $viewModel.viewData.fdPower,
-//            unit: "W",
-//            error: viewModel.forceDischargePowerError,
-//            description: forceDischargePowerDescription(),
-//            focusedField: $focusedField
-//        )
-//    }
-//
-//    private var pvLimitEditable: some View {
-//        EditableItemView(
-//            title: "PV Limit",
-//            field: Field.pvLimit,
-//            numberTitle: "Power",
-//            numberText: $viewModel.viewData.pvLimit,
-//            unit: "W",
-//            error: nil,
-//            description: nil,
-//            focusedField: $focusedField
-//        )
-//    }
-//
-//    private var exportLimitEditable: some View {
-//        EditableItemView(
-//            title: "Export Limit",
-//            field: Field.exportLimit,
-//            numberTitle: "Power",
-//            numberText: $viewModel.viewData.exportLimit,
-//            unit: "W",
-//            error: nil,
-//            description: nil,
-//            focusedField: $focusedField
-//        )
-//    }
-//
-//    private var importLimitEditable: some View {
-//        EditableItemView(
-//            title: "Import Limit",
-//            field: Field.importLimit,
-//            numberTitle: "Power",
-//            numberText: $viewModel.viewData.importLimit,
-//            unit: "W",
-//            error: nil,
-//            description: nil,
-//            focusedField: $focusedField
-//        )
-//    }
-    

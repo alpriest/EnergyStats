@@ -67,6 +67,7 @@ private struct SingleTimePickerView: View {
                 Text(label)
                 Spacer()
                 Text(date, formatter: DateFormatter.fullTime) + Text(includeAppendage ? ":" + timeType.appendage() : "")
+                    .monospacedDigit()
             }
             .contentShape(Rectangle())
             .onTapGesture {

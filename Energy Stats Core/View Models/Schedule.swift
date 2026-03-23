@@ -207,6 +207,14 @@ public struct SchedulePhaseV3: Identifiable, Hashable, Equatable, Codable {
     public func valueFor(key: String) -> Double? {
         self.extraParam[key]
     }
+    
+    public func stringValueFor(key: String) -> String {
+        if let value = valueFor(key: key) {
+            String(Int(value))
+        } else {
+            "??"
+        }
+    }
 
     public func copy(
         enabled: Bool? = nil,

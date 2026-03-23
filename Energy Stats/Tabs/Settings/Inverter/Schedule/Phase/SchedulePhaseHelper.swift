@@ -10,8 +10,7 @@ import Foundation
 import SwiftUI
 
 enum SchedulePhaseHelper {
-    // TODO: Do we need device any longer?
-    static func addNewTimePeriod(to schedule: Schedule, device: Device?, initialiseMaxSOC: Bool) -> Schedule {
+    static func addNewTimePeriod(to schedule: Schedule, initialiseMaxSOC: Bool) -> Schedule {
         Schedule(
             phases: (
                 schedule.phases + [SchedulePhaseV3(
@@ -21,8 +20,7 @@ enum SchedulePhaseHelper {
                     mode: WorkMode.SelfUse,
                     extraParam: [:]
                 )]
-            ).sorted { $0.start < $1.start
-            }
+            ).sorted { $0.start < $1.start }
         )
     }
 

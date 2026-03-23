@@ -52,15 +52,7 @@ extension FoxAPIService {
 
 extension SchedulePhaseV3 {
     func toPhaseNetworkRequest() -> SchedulePhaseRequest {
-//        let maxSOC: Int = (mode == .ForceCharge) ? forceDischargeSOC : 100
-
-//        let resolvedImportLimit = if let importLimit {
-//            importLimit
-//        } else {
-//            (mode == .ForceDischarge) ? 0 : nil
-//        }
-
-        return SchedulePhaseRequest(
+        SchedulePhaseRequest(
             enable: enabled.intValue,
             startHour: start.hour,
             startMinute: start.minute,

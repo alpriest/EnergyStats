@@ -19,7 +19,8 @@ class SchedulePhaseEditViewModel: ObservableObject, ViewDataProviding {
         endTime: .now,
         workMode: .Feedin,
         modes: [],
-        fields: []
+        fields: [],
+        showAdvancedFields: false
     ) { didSet {
         if oldValue.workMode != viewData.workMode {
             workModeChanged()
@@ -55,7 +56,8 @@ class SchedulePhaseEditViewModel: ObservableObject, ViewDataProviding {
             endTime: Date.fromTime(phase.end),
             workMode: phase.mode,
             modes: configManager.workModes.sorted(),
-            fields: []
+            fields: [],
+            showAdvancedFields: false
         )
         originalValue = viewData
         self.viewData = viewData
@@ -115,15 +117,24 @@ class SchedulePhaseEditViewModel: ObservableObject, ViewDataProviding {
         let mode = viewData.workMode
         let builder = FieldDefinitionBuilder(properties: configManager.scheduleProperties, phase: phase)
 
-        let standardField: SchedulePhaseFieldDefinition? = switch mode {
+        var hiddenFieldKeys: Set<String> = ["maxsoc"]
+        let standardField: SchedulePhaseFieldDefinition?
+
+        switch mode {
         case .SelfUse:
-            builder.make(for: "minsocongrid", isStandard: true, title: "Min SoC", description: nil, defaultValue: 10)
+            hiddenFieldKeys.insert("fdpwr")
+            hiddenFieldKeys.insert("fdsoc")
+            standardField = builder.make(for: "minsocongrid", isStandard: true, title: "Min SoC", description: nil, defaultValue: 10)
         case .Feedin:
-            builder.make(for: "minsocongrid", isStandard: true, title: "Min SoC", description: nil, defaultValue: 10)
+            hiddenFieldKeys.insert("fdpwr")
+            hiddenFieldKeys.insert("fdsoc")
+            standardField = builder.make(for: "minsocongrid", isStandard: true, title: "Min SoC", description: nil, defaultValue: 10)
         case .Backup:
-            builder.make(for: "minsocongrid", isStandard: true, title: "Min SoC", description: nil, defaultValue: 10)
+            hiddenFieldKeys.insert("fdpwr")
+            hiddenFieldKeys.insert("fdsoc")
+            standardField = builder.make(for: "minsocongrid", isStandard: true, title: "Min SoC", description: nil, defaultValue: 10)
         case .ForceCharge:
-            builder.make(
+            standardField = builder.make(
                 for: "fdsoc",
                 isStandard: true,
                 title: "Charge to SoC",
@@ -131,7 +142,7 @@ class SchedulePhaseEditViewModel: ObservableObject, ViewDataProviding {
                 defaultValue: 100
             )
         case .ForceDischarge:
-            builder.make(
+            standardField = builder.make(
                 for: "fdsoc",
                 isStandard: true,
                 title: "Discharge to SoC",
@@ -139,16 +150,14 @@ class SchedulePhaseEditViewModel: ObservableObject, ViewDataProviding {
                 defaultValue: 10
             )
         default:
-            nil
+            standardField = nil
         }
+
         let standardFields = [standardField].compactMap { $0 }
-        let hiddenFieldKeys: Set<String> = Set(standardFields.map { $0.key.lowercased() })
-            .union(
-                configManager.scheduleProperties
-                    .compactMap { key, value in
-                        value.unit.isEmpty ? key.lowercased() : nil
-                    }
-            )
+        hiddenFieldKeys.formUnion(standardFields.map { $0.key.lowercased() })
+        hiddenFieldKeys.formUnion(configManager.scheduleProperties.compactMap { key, value in
+            value.unit.isEmpty ? key.lowercased() : nil
+        })
 
         let advancedFields: [SchedulePhaseFieldDefinition] =
             configManager.scheduleProperties
@@ -162,6 +171,7 @@ class SchedulePhaseEditViewModel: ObservableObject, ViewDataProviding {
                 }
 
         viewData.fields = standardFields + advancedFields
+        viewData.showAdvancedFields = !advancedFields.isEmpty
     }
 
     private func description(mode: WorkMode, key: String) -> LocalizedStringKey? {
@@ -178,36 +188,54 @@ class SchedulePhaseEditViewModel: ObservableObject, ViewDataProviding {
     private func defaultValue(mode: WorkMode, key: String, standardFields: [SchedulePhaseFieldDefinition]) -> Double? {
         switch (mode, key) {
         // Force Charge
-        case (WorkMode.ForceCharge, "fdpwr"):
+        case (_, "fdpwr"):
             if let capacity = configManager.currentDevice.value?.capacity {
                 capacity * 1000.0
             } else {
                 nil
             }
-        case (WorkMode.ForceCharge, "maxsoc"):
-            standardFields.first(where: { $0.key.lowercased() == "fdsoc" })?.value
 
-        // Force Discharge
-        case (WorkMode.ForceDischarge, "fdpwr"):
-            configManager.currentDevice.value?.capacity
         case (WorkMode.ForceDischarge, "importlimit"):
             0
-        case (WorkMode.ForceDischarge, "maxsoc"):
-            standardFields.first(where: { $0.key.lowercased() == "fdsoc" })?.value
 
         default:
             nil
         }
     }
 
+    private func label(mode: WorkMode, key: String) -> String {
+        switch (mode, key) {
+        case (.ForceCharge, "fdpwr"):
+            "Force Charge power"
+        case (.ForceDischarge, "fdpwr"):
+            "Force Discharge power"
+        default:
+            key
+        }
+    }
+
     func save(onSuccess: () -> Void) {
+        let userSpecifiedFields = viewData.fields
+        let fieldsWithSensibleDefaults = userSpecifiedFields.map { field in
+            switch (viewData.workMode, field.key) {
+            case (.ForceCharge, "maxsoc"):
+                field.copy { $0.value = userSpecifiedFields.first { $0.key == "fdsoc" }?.value }
+            case (.ForceDischarge, "importlimit"):
+                field.copy { $0.value = 0 }
+            case (_, "maxsoc"):
+                field.copy { $0.value = 100 }
+            default:
+                field
+            }
+        }
+
         let phase = SchedulePhaseV3(
             id: viewData.id,
             enabled: true,
             start: viewData.startTime.toTime(),
             end: viewData.endTime.toTime(),
             mode: viewData.workMode,
-            extraParam: Dictionary(uniqueKeysWithValues: viewData.fields.compactMap {
+            extraParam: Dictionary(uniqueKeysWithValues: fieldsWithSensibleDefaults.compactMap {
                 if let value = $0.value {
                     ($0.key, value)
                 } else {
