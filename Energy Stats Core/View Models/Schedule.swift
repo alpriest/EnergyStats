@@ -177,7 +177,7 @@ public struct SchedulePhaseV3: Identifiable, Hashable, Equatable, Codable {
         self.start = start
         self.end = end
         self.mode = mode
-        self.extraParam = extraParam
+        self.extraParam = extraParam.mapKeys { $0.lowercased() }
         self.color = Color.scheduleColor(named: mode)
     }
 
@@ -190,11 +190,11 @@ public struct SchedulePhaseV3: Identifiable, Hashable, Equatable, Codable {
     }
 
     public func hasExtraParam(key: String) -> Bool {
-        self.extraParam.keys.contains(key)
+        self.extraParam.keys.contains(key.lowercased())
     }
 
     public func valueFor(key: String) -> Double? {
-        self.extraParam[key]
+        self.extraParam[key.lowercased()]
     }
 
     public func stringValueFor(key: String) -> String {
