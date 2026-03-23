@@ -9,9 +9,9 @@ import Foundation
 
 extension URL {
     static let getOpenSchedulerFlag = URL(string: "https://www.foxesscloud.com/op/v1/device/scheduler/get/flag")!
-    static let getOpenCurrentSchedule = URL(string: "https://www.foxesscloud.com/op/v1/device/scheduler/get")!
+    static let getOpenCurrentSchedule = URL(string: "https://www.foxesscloud.com/op/v3/device/scheduler/get")!
     static let setOpenSchedulerFlag = URL(string: "https://www.foxesscloud.com/op/v1/device/scheduler/set/flag")!
-    static let setOpenCurrentSchedule = URL(string: "https://www.foxesscloud.com/op/v1/device/scheduler/enable")!
+    static let setOpenCurrentSchedule = URL(string: "https://www.foxesscloud.com/op/v3/device/scheduler/enable")!
 }
 
 extension FoxAPIService {
@@ -38,44 +38,36 @@ extension FoxAPIService {
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(SetSchedulerFlagRequest(deviceSN: deviceSN, enable: enable.intValue))
 
-        do {
-            let _: (String, Data) = try await fetch(request)
-        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
-            // Ignore
-        }
+        try await fetchWithoutResponse(request)
     }
 
     func openapi_saveSchedule(deviceSN: String, schedule: Schedule) async throws {
         var request = URLRequest(url: URL.setOpenCurrentSchedule)
         request.httpMethod = "POST"
-        request.httpBody = try! JSONEncoder().encode(SetCurrentScheduleRequest(deviceSN: deviceSN, groups: schedule.phases.map { $0.toPhaseResponse() }))
+        request.httpBody = try! JSONEncoder().encode(SetCurrentScheduleRequest(deviceSN: deviceSN, groups: schedule.phases.map { $0.toPhaseNetworkRequest() }))
 
-        do {
-            let _: (String, Data) = try await fetch(request)
-        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
-            // Ignore
-        }
+        try await fetchWithoutResponse(request)
     }
 }
 
-extension SchedulePhase {
-    func toPhaseResponse() -> SchedulePhaseNetworkModel {
-        let maxSOC: Int? = (mode == .ForceCharge) ? forceDischargeSOC : 100
-        let importLimit: Int? = (mode == .ForceDischarge) ? 0 : nil
-        
-        return SchedulePhaseNetworkModel(
+extension SchedulePhaseV3 {
+    func toPhaseNetworkRequest() -> SchedulePhaseRequest {
+//        let maxSOC: Int = (mode == .ForceCharge) ? forceDischargeSOC : 100
+
+//        let resolvedImportLimit = if let importLimit {
+//            importLimit
+//        } else {
+//            (mode == .ForceDischarge) ? 0 : nil
+//        }
+
+        return SchedulePhaseRequest(
             enable: enabled.intValue,
             startHour: start.hour,
             startMinute: start.minute,
             endHour: end.hour,
             endMinute: end.minute,
             workMode: mode,
-            minSocOnGrid: minSocOnGrid,
-            fdSoc: forceDischargeSOC,
-            fdPwr: forceDischargePower,
-            maxSoc: maxSOC,
-            pvLimit: pvLimit,
-            importLimit: importLimit
+            extraParam: extraParam
         )
     }
 }

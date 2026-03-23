@@ -102,11 +102,7 @@ extension FoxAPIService {
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(SetBatterySOCRequest(minSocOnGrid: minSOCOnGrid, minSoc: minSOC, sn: deviceSN))
 
-        do {
-            let _: (String, Data) = try await fetch(request)
-        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
-            // Ignore
-        }
+        try await fetchWithoutResponse(request)
     }
 
     func openapi_fetchBatteryTimes(deviceSN: String) async throws -> [ChargeTime] {
@@ -135,11 +131,7 @@ extension FoxAPIService {
                                    endTime2: times[1].endTime)
         )
 
-        do {
-            let _: (String, Data) = try await fetch(request)
-        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
-            // Ignore
-        }
+        try await fetchWithoutResponse(request)
     }
 
     func openapi_fetchDeviceList() async throws -> [DeviceSummaryResponse] {
@@ -204,11 +196,7 @@ extension FoxAPIService {
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(SetDeviceSettingsItemRequest(sn: deviceSN, key: item.rawValue, value: value))
 
-        do {
-            let _: (String, Data) = try await fetch(request)
-        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
-            // Ignore
-        }
+        try await fetchWithoutResponse(request)
     }
 
     func openapi_fetchPeakShavingSettings(deviceSN: String) async throws -> FetchPeakShavingSettingsResponse {
@@ -225,11 +213,7 @@ extension FoxAPIService {
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(SetPeakShavingSettingsRequest(sn: deviceSN, importLimit: importLimit, soc: soc))
 
-        do {
-            let _: (String, Data) = try await fetch(request)
-        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
-            // Ignore
-        }
+        try await fetchWithoutResponse(request)
     }
 
     func openapi_fetchPowerGeneration(deviceSN: String) async throws -> PowerGenerationResponse {
@@ -253,10 +237,6 @@ extension FoxAPIService {
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(heatingScheduleRequest)
         
-        do {
-            let _: (String, Data) = try await fetch(request)
-        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
-            // Ignore
-        }
+        try await fetchWithoutResponse(request)
     }
 }

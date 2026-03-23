@@ -12,7 +12,7 @@ import SwiftUI
 struct ScheduleDetailView: View {
     let schedule: Schedule
     let configManager: ConfigManaging
-    let onUpdate: (SchedulePhase) -> Void
+    let onUpdate: (SchedulePhaseV3) -> Void
     let onDelete: (String) -> Void
 
     var body: some View {
@@ -32,7 +32,8 @@ struct ScheduleDetailView: View {
 
         ForEachIndexed(schedule.phases) { index, phase in
             NavigationLink {
-                SchedulePhaseEditView(phase: phase,
+                SchedulePhaseEditView(schedule: schedule,
+                                      phase: phase,
                                       configManager: configManager,
                                       onChange: onUpdate,
                                       onDelete: onDelete)

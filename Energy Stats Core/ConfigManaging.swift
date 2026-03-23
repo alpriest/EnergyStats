@@ -87,6 +87,7 @@ public protocol ConfigManaging: FinancialConfigManager, SolcastConfigManager, Ba
     var isReadOnly: Bool { get set }
     var readOnlyCode: String { get set }
     var statsTimeUsageGraphStyle: StatsTimeUsageGraphStyle { get set }
+    var scheduleProperties: [String: SchedulePropertyDefinition] { get set }
 }
 
 public enum DeviceCapability {

@@ -47,6 +47,16 @@ extension FoxAPIService {
 
         return request
     }
+    
+    func fetchWithoutResponse(_ request: URLRequest) async throws {
+        struct EmptyResult: Decodable {}
+        
+        do {
+            let _: (EmptyResult, Data) = try await fetch(request)
+        } catch let NetworkError.invalidResponse(_, statusCode) where statusCode == 200 {
+            // Ignore
+        }
+    }
 
     func fetch<T: Decodable>(_ request: URLRequest, retry: Bool = true) async throws -> (T, Data) {
         var request = request

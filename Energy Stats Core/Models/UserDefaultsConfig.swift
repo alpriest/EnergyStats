@@ -107,7 +107,7 @@ public class UserDefaultsConfig: StoredConfig {
     @UserDefaultsStoredInt(key: "refreshFrequency")
     public var refreshFrequency: Int
     
-    @UserDefaultsStoredInt(key: "decimalPlaces", defaultValue: 3)
+    @UserDefaultsStoredInt(key: "decimalPlaces", defaultValue: 2)
     public var decimalPlaces: Int
     
     @UserDefaultsStoredBool(key: "showSunnyBackground", defaultValue: true)

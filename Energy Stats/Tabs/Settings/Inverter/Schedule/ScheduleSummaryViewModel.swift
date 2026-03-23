@@ -85,6 +85,7 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState, HasAlertContent,
         do {
             self.templates = self.templateStore.load()
             let scheduleResponse = try await networking.fetchCurrentSchedule(deviceSN: deviceSN)
+            self.configManager.scheduleProperties = scheduleResponse.properties
             self.schedulerEnabled = scheduleResponse.enable.boolValue
             self.configManager.workModes = scheduleResponse.workmodes
 
@@ -130,7 +131,7 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState, HasAlertContent,
         await save(schedule: schedule)
     }
 
-    func phase(phase: SchedulePhase, of schedule: Schedule, changedTo enabled: Bool) async {
+    func phase(phase: SchedulePhaseV3, of schedule: Schedule, changedTo enabled: Bool) async {
         let modifiedSchedule = SchedulePhaseHelper.updated(phase: phase.copy(enabled: enabled), on: schedule)
         await save(schedule: modifiedSchedule)
     }
@@ -164,26 +165,9 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState, HasAlertContent,
     }
 }
 
-extension SchedulePhaseNetworkModel {
-    func toSchedulePhase() -> SchedulePhase? {
-        return SchedulePhase(
-            enabled: enable.boolValue,
-            start: Time(hour: startHour, minute: startMinute),
-            end: Time(hour: endHour, minute: endMinute),
-            mode: workMode,
-            minSocOnGrid: minSocOnGrid,
-            forceDischargePower: fdPwr ?? 0,
-            forceDischargeSOC: fdSoc,
-            maxSOC: maxSoc,
-            color: Color.scheduleColor(named: workMode),
-            pvLimit: pvLimit
-        )
-    }
-}
-
 extension Schedule {
     func supportsMaxSOC() -> Bool {
-        phases.anySatisfy { $0.maxSOC != nil }
+        phases.anySatisfy { $0.hasExtraParam(key: "maxSOC") }
     }
 
     init(scheduleResponse: ScheduleResponse) {

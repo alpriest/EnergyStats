@@ -10,7 +10,7 @@ import SwiftUI
 
 enum PhaseEnabledToggleMode {
     case disabled
-    case enabled(onPhaseEnabledChange: (SchedulePhase, Bool) -> Void)
+    case enabled(onPhaseEnabledChange: (SchedulePhaseV3, Bool) -> Void)
     
     var isEnabled: Bool {
         switch self {
@@ -21,7 +21,7 @@ enum PhaseEnabledToggleMode {
         }
     }
     
-    func onChange(phase: SchedulePhase, value: Bool) {
+    func onChange(phase: SchedulePhaseV3, value: Bool) {
         if case let .enabled(onPhaseEnabledChange) = self {
             onPhaseEnabledChange(phase, value)
         }

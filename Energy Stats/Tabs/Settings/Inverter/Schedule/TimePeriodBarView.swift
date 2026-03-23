@@ -9,7 +9,7 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct TimePeriodBarView: View {
-    let phases: [SchedulePhase]
+    let phases: [SchedulePhaseV3]
     private let height: CGFloat = 20
 
     var body: some View {
@@ -58,132 +58,13 @@ extension Schedule {
     static func preview() -> Schedule {
         Schedule(
             phases: [
-                SchedulePhase(
-                    enabled: true,
-                    start: Time(
-                        hour: 1,
-                        minute: 00
-                    ),
-                    end: Time(
-                        hour: 2,
-                        minute: 00
-                    ),
-                    mode: "ForceCharge",
-                    minSocOnGrid: 100,
-                    forceDischargePower: 0,
-                    forceDischargeSOC: 100,
-                    maxSOC: 100,
-                    color: .linesNegative,
-                    pvLimit: nil
-                )!,
-                SchedulePhase(
-                    enabled: false,
-                    start: Time(
-                        hour: 08,
-                        minute: 00
-                    ),
-                    end: Time(
-                        hour: 14,
-                        minute: 30
-                    ),
-                    mode: "ForceDischarge",
-                    minSocOnGrid: 20,
-                    forceDischargePower: 3500,
-                    forceDischargeSOC: 20,
-                    maxSOC: 100,
-                    color: .linesPositive,
-                    pvLimit: nil
-                )!,
-                SchedulePhase(
-                    enabled: true,
-                    start: Time(
-                        hour: 19,
-                        minute: 30
-                    ),
-                    end: Time(
-                        hour: 23,
-                        minute: 30
-                    ),
-                    mode: "SelfUse",
-                    minSocOnGrid: 20,
-                    forceDischargePower: 0,
-                    forceDischargeSOC: 20,
-                    maxSOC: 100,
-                    color: .paleGray,
-                    pvLimit: nil
-                )!,
-                SchedulePhase(
-                    enabled: true,
-                    start: Time(
-                        hour: 1,
-                        minute: 00
-                    ),
-                    end: Time(
-                        hour: 2,
-                        minute: 00
-                    ),
-                    mode: "ForceCharge",
-                    minSocOnGrid: 100,
-                    forceDischargePower: 0,
-                    forceDischargeSOC: 100,
-                    maxSOC: 100,
-                    color: .linesNegative,
-                    pvLimit: nil
-                )!,
-                SchedulePhase(
-                    enabled: true,
-                    start: Time(
-                        hour: 08,
-                        minute: 00
-                    ),
-                    end: Time(
-                        hour: 14,
-                        minute: 30
-                    ),
-                    mode: "ForceDischarge",
-                    minSocOnGrid: 20,
-                    forceDischargePower: 3500,
-                    forceDischargeSOC: 20,
-                    maxSOC: 100,
-                    color: .linesPositive,
-                    pvLimit: nil
-                )!,
-                SchedulePhase(
-                    enabled: true,
-                    start: Time(
-                        hour: 19,
-                        minute: 30
-                    ),
-                    end: Time(
-                        hour: 23,
-                        minute: 30
-                    ),
-                    mode: "SelfUse",
-                    minSocOnGrid: 20,
-                    forceDischargePower: 0,
-                    forceDischargeSOC: 20,
-                    maxSOC: 100,
-                    color: .paleGray,
-                    pvLimit: nil
-                )!,
-                SchedulePhase(
-                    enabled: true,
-                    start: Time(
-                        hour: 1,
-                        minute: 00
-                    ),
-                    end: Time(
-                        hour: 2,
-                        minute: 00
-                    ),
-                    mode: "ForceCharge",
-                    minSocOnGrid: 100,
-                    forceDischargePower: 0,
-                    forceDischargeSOC: 100,
-                    maxSOC: 100,
-                    color: .linesNegative,
-                    pvLimit: nil
-                )!
+                .preview.copy(enabled: false, mode: WorkMode.ForceCharge, start: Time(hour: 1, minute: 00), end: Time(hour: 2, minute: 00)),
+                .preview.copy(mode: WorkMode.ForceDischarge, start: Time(hour: 8, minute: 00), end: Time(hour: 14, minute: 00)),
+                .preview.copy(mode: WorkMode.SelfUse, start: Time(hour: 19, minute: 30), end: Time(hour: 23, minute: 30)),
+                .preview.copy(mode: WorkMode.ForceCharge, start: Time(hour: 1, minute: 0), end: Time(hour: 2, minute: 0)),
+                .preview.copy(mode: WorkMode.ForceDischarge, start: Time(hour: 8, minute: 0), end: Time(hour: 14, minute: 30)),
+                .preview.copy(mode: WorkMode.SelfUse, start: Time(hour: 19, minute: 30), end: Time(hour: 23, minute: 30)),
+                .preview.copy(mode: WorkMode.ForceCharge, start: Time(hour: 1, minute: 30), end: Time(hour: 2, minute: 0))
             ]
         )
     }

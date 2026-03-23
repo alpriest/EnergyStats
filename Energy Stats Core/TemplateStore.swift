@@ -68,7 +68,7 @@ class PreviewTemplateStore: TemplateStoring {
     public func load() -> [ScheduleTemplate] {
         [
             ScheduleTemplate(id: "1", name: "Force discharge", phases: [
-                SchedulePhase(
+                SchedulePhaseV3(
                     enabled: true,
                     start: Time(
                         hour: 1,
@@ -79,14 +79,14 @@ class PreviewTemplateStore: TemplateStoring {
                         minute: 00
                     ),
                     mode: "ForceCharge",
-                    minSocOnGrid: 100,
-                    forceDischargePower: 0,
-                    forceDischargeSOC: 100,
-                    maxSOC: 100,
-                    color: .linesNegative,
-                    pvLimit: nil
-                )!,
-                SchedulePhase(
+                    extraParam: [
+                        "minSocOnGrid": 100,
+                        "forceDischargePower": 0,
+                        "forceDischargeSOC": 100,
+                        "maxSOC": 100,
+                    ]
+                ),
+                SchedulePhaseV3(
                     enabled: true,
                     start: Time(
                         hour: 10,
@@ -97,16 +97,14 @@ class PreviewTemplateStore: TemplateStoring {
                         minute: 30
                     ),
                     mode: "ForceDischarge",
-                    minSocOnGrid: 20,
-                    forceDischargePower: 3500,
-                    forceDischargeSOC: 20,
-                    maxSOC: 100,
-                    color: .linesPositive,
-                    pvLimit: nil
-                )!,
+                    extraParam: ["minSocOnGrid": 20,
+                                 "forceDischargePower": 3500,
+                                 "forceDischargeSOC": 20,
+                                 "maxSOC": 100]
+                ),
             ]),
             ScheduleTemplate(id: "2", name: "Force charge overnight", phases: [
-                SchedulePhase(
+                SchedulePhaseV3(
                     enabled: true,
                     start: Time(
                         hour: 1,
@@ -117,14 +115,14 @@ class PreviewTemplateStore: TemplateStoring {
                         minute: 00
                     ),
                     mode: "ForceCharge",
-                    minSocOnGrid: 100,
-                    forceDischargePower: 0,
-                    forceDischargeSOC: 100,
-                    maxSOC: 100,
-                    color: .linesNegative,
-                    pvLimit: nil
-                )!,
-                SchedulePhase(
+                    extraParam: [
+                        "minSocOnGrid": 100,
+                        "forceDischargePower": 0,
+                        "forceDischargeSOC": 100,
+                        "maxSOC": 100,
+                    ]
+                ),
+                SchedulePhaseV3(
                     enabled: true,
                     start: Time(
                         hour: 10,
@@ -135,13 +133,11 @@ class PreviewTemplateStore: TemplateStoring {
                         minute: 30
                     ),
                     mode: "ForceDischarge",
-                    minSocOnGrid: 20,
-                    forceDischargePower: 3500,
-                    forceDischargeSOC: 20,
-                    maxSOC: 100,
-                    color: .linesPositive,
-                    pvLimit: nil
-                )!,
+                    extraParam: ["minSocOnGrid": 20,
+                                 "forceDischargePower": 3500,
+                                 "forceDischargeSOC": 20,
+                                 "maxSOC": 100]
+                ),
             ]),
         ]
     }

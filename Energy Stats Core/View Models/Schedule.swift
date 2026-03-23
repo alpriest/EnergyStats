@@ -10,9 +10,9 @@ import SwiftUI
 public struct ScheduleTemplate: Identifiable, Hashable, Codable {
     public let id: String
     public let name: String
-    public let phases: [SchedulePhase]
+    public let phases: [SchedulePhaseV3]
 
-    public init(id: String, name: String, phases: [SchedulePhase]) {
+    public init(id: String, name: String, phases: [SchedulePhaseV3]) {
         self.id = id
         self.name = name
         self.phases = phases
@@ -22,7 +22,7 @@ public struct ScheduleTemplate: Identifiable, Hashable, Codable {
         Schedule(phases: self.phases)
     }
 
-    public func copy(phases: [SchedulePhase]? = nil, name: String? = nil) -> ScheduleTemplate {
+    public func copy(phases: [SchedulePhaseV3]? = nil, name: String? = nil) -> ScheduleTemplate {
         ScheduleTemplate(
             id: self.id,
             name: name ?? self.name,
@@ -38,7 +38,7 @@ public struct ScheduleTemplate: Identifiable, Hashable, Codable {
 public extension ScheduleTemplate {
     static func preview() -> ScheduleTemplate {
         ScheduleTemplate(id: "1", name: "Force discharge", phases: [
-            SchedulePhase(
+            SchedulePhaseV3(
                 enabled: true,
                 start: Time(
                     hour: 1,
@@ -49,14 +49,14 @@ public extension ScheduleTemplate {
                     minute: 00
                 ),
                 mode: "ForceCharge",
-                minSocOnGrid: 100,
-                forceDischargePower: 0,
-                forceDischargeSOC: 100,
-                maxSOC: 100,
-                color: .linesNegative,
-                pvLimit: nil
-            )!,
-            SchedulePhase(
+                extraParam: [
+                    "minSocOnGrid": 100,
+                    "forceDischargePower": 0,
+                    "forceDischargeSOC": 100,
+                    "maxSOC": 100,
+                ]
+            ),
+            SchedulePhaseV3(
                 enabled: true,
                 start: Time(
                     hour: 10,
@@ -67,26 +67,26 @@ public extension ScheduleTemplate {
                     minute: 30
                 ),
                 mode: "ForceDischarge",
-                minSocOnGrid: 20,
-                forceDischargePower: 3500,
-                forceDischargeSOC: 20,
-                maxSOC: 100,
-                color: .linesPositive,
-                pvLimit: nil
-            )!,
+                extraParam: [
+                    "minSocOnGrid": 20,
+                    "forceDischargePower": 3500,
+                    "forceDischargeSOC": 20,
+                    "maxSOC": 100,
+                ]
+            ),
         ])
     }
 }
 
 public struct Schedule: Hashable, Equatable {
-    public let phases: [SchedulePhase]
-
-    public init(phases: [SchedulePhase]) {
+    public let phases: [SchedulePhaseV3]
+    
+    public init(phases: [SchedulePhaseV3]) {
         self.phases = phases
     }
 
     public func isValid() -> Bool {
-        let enabledPhases = phases.filter { $0.enabled && !$0.isAllDaySynthesized() }
+        let enabledPhases = self.phases.filter { $0.enabled && !$0.isAllDaySynthesized() }
 
         for (index, phase) in enabledPhases.enumerated() {
             let phaseStart = phase.start.toMinutes()
@@ -117,80 +117,100 @@ public struct Schedule: Hashable, Equatable {
     public var hasTooManyPhases: Bool {
         self.phases.count > Schedule.maxPhasesCount
     }
+    
+    public func buildFieldDefinition(
+        for key: String,
+        properties: [String: SchedulePropertyDefinition],
+        isStandard: Bool,
+        title: String,
+        phase: SchedulePhaseV3
+    ) -> SchedulePhaseFieldDefinition {
+        let property = properties[key]
+        
+        return SchedulePhaseFieldDefinition(
+            key: key,
+            isStandard: isStandard,
+            title: title,
+            precision: property?.precision ?? 0,
+            range: property?.range,
+            unit: property?.unit,
+            value: phase.valueFor(key: key)
+        )
+    }
 }
 
-public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {
+public struct SchedulePhaseParameter: Hashable, Equatable, Codable {
+    public let precision: Double
+    public let range: SchedulePropertyDefinitionRange?
+    public let unit: String
+}
+
+public struct SchedulePhaseV3: Identifiable, Hashable, Equatable, Codable {
     public let id: String
     public let enabled: Bool
     public let start: Time
     public let end: Time
     public let mode: WorkMode
-    public let minSocOnGrid: Int
-    public let forceDischargePower: Int
-    public let forceDischargeSOC: Int
+    public let extraParam: [String: Double]
+    public var startPoint: CGFloat { CGFloat(self.minutesAfterMidnight(self.start)) / (24 * 60) }
+    public var endPoint: CGFloat { CGFloat(self.minutesAfterMidnight(self.end)) / (24 * 60) }
     private let color: Color
-    public let maxSOC: Int?
-    public let pvLimit: Int?
 
-    public init?(
+    private func minutesAfterMidnight(_ time: Time) -> Int {
+        (time.hour * 60) + time.minute
+    }
+
+    public init(
         id: String? = nil,
         enabled: Bool,
         start: Time,
         end: Time,
         mode: WorkMode,
-        minSocOnGrid: Int,
-        forceDischargePower: Int,
-        forceDischargeSOC: Int,
-        maxSOC: Int?,
-        color: Color,
-        pvLimit: Int?
+        extraParam: [String: Double]
     ) {
-        guard start < end else { return nil }
-        if mode == "Invalid" { return nil }
-
         self.id = id ?? UUID().uuidString
         self.enabled = enabled
         self.start = start
         self.end = end
         self.mode = mode
-        self.minSocOnGrid = minSocOnGrid
-        self.forceDischargePower = forceDischargePower
-        self.forceDischargeSOC = forceDischargeSOC
-        self.color = color
-        self.maxSOC = maxSOC
-        self.pvLimit = pvLimit
+        self.extraParam = extraParam
+        self.color = Color.scheduleColor(named: mode)
     }
 
-    public init(mode: String, device: Device?, initialiseMaxSOC: Bool) {
-        self.id = UUID().uuidString
-        self.enabled = true
-        self.start = Date().toTime()
-        self.end = Date().toTime().adding(minutes: 1)
-        self.mode = mode
-        self.forceDischargePower = Int((device?.capacity ?? 0.0) * 1000.0)
-        self.forceDischargeSOC = Int(device?.battery?.minSOC) ?? 10
-        self.minSocOnGrid = Int(device?.battery?.minSOC) ?? 10
-        self.color = Color.scheduleColor(named: mode)
-        self.maxSOC = initialiseMaxSOC ? 100 : nil
-        self.pvLimit = nil
+    public func isValid() -> Bool {
+        self.end > self.start
+    }
+
+    public var displayColor: Color {
+        self.color
+    }
+
+    func isAllDaySynthesized() -> Bool {
+        self.start.hour == 0 && self.start.minute == 0 && self.end.hour == 23 && self.end.minute == 59
     }
     
+    public func hasExtraParam(key: String) -> Bool {
+        extraParam.keys.contains(key)
+    }
+    
+    public func valueFor(key: String) -> Double? {
+        extraParam[key]
+    }
+
     public func copy(
-        enabled: Bool,
-    ) -> SchedulePhase {
-        SchedulePhase(
-            id: id ,
-            enabled: enabled,
-            start: start,
-            end: end,
-            mode: mode,
-            minSocOnGrid: minSocOnGrid,
-            forceDischargePower: forceDischargePower,
-            forceDischargeSOC: forceDischargeSOC,
-            maxSOC: maxSOC,
-            color: color,
-            pvLimit: pvLimit
-        )!
+        enabled: Bool? = nil,
+        mode: WorkMode? = nil,
+        start: Time? = nil,
+        end: Time? = nil,
+    ) -> SchedulePhaseV3 {
+        SchedulePhaseV3(
+            id: self.id,
+            enabled: enabled ?? self.enabled,
+            start: start ?? self.start,
+            end: end ?? self.end,
+            mode: mode ?? self.mode,
+            extraParam: self.extraParam
+        )
     }
 
     private enum CodingKeys: CodingKey {
@@ -199,12 +219,7 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {
         case start
         case end
         case mode
-        case minSocOnGrid
-        case forceDischargePower
-        case forceDischargeSOC
-        case color
-        case maxSOC
-        case pvLimit
+        case extraParam
     }
 
     public init(from decoder: any Decoder) throws {
@@ -213,18 +228,9 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {
         self.enabled = try container.decodeIfPresent(Bool.self, forKey: .enabled) ?? true
         self.start = try container.decode(Time.self, forKey: .start)
         self.end = try container.decode(Time.self, forKey: .end)
-        // Migrate users from UNUSED_WorkMode to String -- written Nov 2025
-        if let mode = try? container.decode(UNUSED_WorkMode.self, forKey: .mode) {
-            self.mode = mode.networkTitle
-        } else {
-            self.mode = try container.decode(String.self, forKey: .mode)
-        }
-        self.minSocOnGrid = try container.decode(Int.self, forKey: .minSocOnGrid)
-        self.forceDischargePower = try container.decode(Int.self, forKey: .forceDischargePower)
-        self.forceDischargeSOC = try container.decode(Int.self, forKey: .forceDischargeSOC)
-        self.maxSOC = try? container.decode(Int?.self, forKey: .maxSOC)
+        self.mode = try container.decode(String.self, forKey: .mode)
+        self.extraParam = try container.decodeIfPresent([String: Double].self, forKey: .extraParam) ?? [:]
         self.color = Color.scheduleColor(named: self.mode)
-        self.pvLimit = try? container.decode(Int?.self, forKey: .pvLimit)
     }
 
     public func encode(to encoder: any Encoder) throws {
@@ -234,40 +240,48 @@ public struct SchedulePhase: Identifiable, Hashable, Equatable, Codable {
         try container.encode(self.start, forKey: .start)
         try container.encode(self.end, forKey: .end)
         try container.encode(self.mode, forKey: .mode)
-        try container.encode(self.minSocOnGrid, forKey: .minSocOnGrid)
-        try container.encode(self.forceDischargePower, forKey: .forceDischargePower)
-        try container.encode(self.forceDischargeSOC, forKey: .forceDischargeSOC)
-        try container.encode(self.maxSOC, forKey: .maxSOC)
-        try container.encode(self.pvLimit, forKey: .pvLimit)
+        try container.encode(self.extraParam, forKey: .extraParam)
     }
 
-    public var startPoint: CGFloat { CGFloat(self.minutesAfterMidnight(self.start)) / (24 * 60) }
-    public var endPoint: CGFloat { CGFloat(self.minutesAfterMidnight(self.end)) / (24 * 60) }
-
-    private func minutesAfterMidnight(_ time: Time) -> Int {
-        (time.hour * 60) + time.minute
-    }
-
-    public func isValid() -> Bool {
-        self.end > self.start
-    }
-    
-    public var displayColor: Color {
-        color
-    }
-    
-    func isAllDaySynthesized() -> Bool {
-        start.hour == 0 && start.minute == 0 && end.hour == 23 && end.minute == 59
-    }
-
-    public func isEqualConfiguration(to other: SchedulePhase) -> Bool {
+    public func isEqualConfiguration(to other: SchedulePhaseV3) -> Bool {
         self.enabled == other.enabled &&
             self.start == other.start &&
             self.end == other.end &&
             self.mode == other.mode &&
-            self.minSocOnGrid == other.minSocOnGrid &&
-            self.forceDischargePower == other.forceDischargePower &&
-            self.forceDischargeSOC == other.forceDischargeSOC &&
-            self.maxSOC == other.maxSOC
+            self.extraParam == other.extraParam
+    }
+}
+
+public struct SchedulePhaseFieldDefinition: Copiable {
+    public let key: String
+    public let isStandard: Bool
+    public let title: String
+    public let precision: Double
+    public let range: SchedulePropertyDefinitionRange?
+    public let unit: String?
+    public var value: Double?
+
+    public func create(copying previous: SchedulePhaseFieldDefinition) -> SchedulePhaseFieldDefinition {
+        SchedulePhaseFieldDefinition(
+            key: previous.key,
+            isStandard: previous.isStandard,
+            title: previous.title,
+            precision: previous.precision,
+            range: previous.range,
+            unit: previous.unit,
+            value: previous.value
+        )
+    }
+}
+
+public extension SchedulePhaseResponse {
+    func toSchedulePhase() -> SchedulePhaseV3? {
+        return SchedulePhaseV3(
+            enabled: (enable ?? 1).boolValue,
+            start: Time(hour: startHour, minute: startMinute),
+            end: Time(hour: endHour, minute: endMinute),
+            mode: workMode,
+            extraParam: extraParam ?? [:]
+        )
     }
 }

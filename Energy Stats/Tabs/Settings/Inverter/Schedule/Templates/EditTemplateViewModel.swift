@@ -122,7 +122,7 @@ class EditTemplateViewModel: ObservableObject, HasLoadState, HasAlertContent {
         )
     }
 
-    func updatedPhase(_ phase: SchedulePhase) {
+    func updatedPhase(_ phase: SchedulePhaseV3) {
         guard let schedule else { return }
 
         self.schedule = SchedulePhaseHelper.updated(phase: phase, on: schedule)

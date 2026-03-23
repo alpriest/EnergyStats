@@ -398,6 +398,7 @@
 		41F71ABD2A14FBEC00A8C81B /* Array+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127910C28E2442100D5F993 /* Array+Safe.swift */; };
 		41F71ABF2A1504C700A8C81B /* report-year.json in Resources */ = {isa = PBXBuildFile; fileRef = 41F71ABE2A1504C700A8C81B /* report-year.json */; };
 		41F71AC12A1504D900A8C81B /* report-month.json in Resources */ = {isa = PBXBuildFile; fileRef = 41F71AC02A1504D900A8C81B /* report-month.json */; };
+		41F7902A2F70526400D94928 /* SchedulePhaseV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F790292F70526400D94928 /* SchedulePhaseV1.swift */; };
 		41F80BAF2CE2AE3100C6776B /* FirebaseInAppMessaging-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 41F80BAE2CE2AE3100C6776B /* FirebaseInAppMessaging-Beta */; };
 		41F80BB12CE2AEC100C6776B /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 41F80BB02CE2AEC100C6776B /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		41F80BB32CE2AFAC00C6776B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 41F80BB22CE2AFAC00C6776B /* GoogleService-Info.plist */; };
@@ -960,6 +961,7 @@
 		41F6C64F2D935044001EBAA5 /* CT2DisplayMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CT2DisplayMode.swift; sourceTree = "<group>"; };
 		41F71ABE2A1504C700A8C81B /* report-year.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "report-year.json"; sourceTree = "<group>"; };
 		41F71AC02A1504D900A8C81B /* report-month.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "report-month.json"; sourceTree = "<group>"; };
+		41F790292F70526400D94928 /* SchedulePhaseV1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePhaseV1.swift; sourceTree = "<group>"; };
 		41F80BB22CE2AFAC00C6776B /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		41F8D8F6292D7650005E2D18 /* report-day.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "report-day.json"; sourceTree = "<group>"; };
 		41FBE9012D816F6700CEC645 /* StringPower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringPower.swift; sourceTree = "<group>"; };
@@ -1154,6 +1156,7 @@
 				41CA35722AA8C10900D45734 /* EarningsViewModel.swift */,
 				41E6FE742F1570000080CFCF /* FinanceAmount.swift */,
 				4190921C2B1D253D0017CB65 /* Schedule.swift */,
+				41F790292F70526400D94928 /* SchedulePhaseV1.swift */,
 				41FF14EC2B432EEC00FAAF1D /* GenerationViewModel.swift */,
 				41A715922BE0CD4700560628 /* LoadState.swift */,
 			);
@@ -2672,6 +2675,7 @@
 				41CB714A2A3B1B6C00199415 /* StyleGuide.swift in Sources */,
 				413715BB2E20144900505496 /* HomeEnergyStateManager+Stats.swift in Sources */,
 				4190921F2B1D25890017CB65 /* Time.swift in Sources */,
+				41F7902A2F70526400D94928 /* SchedulePhaseV1.swift in Sources */,
 				412A26882AC07FC800F61456 /* BatteryCapacityCalculator.swift in Sources */,
 				41777F5D2CB6D63A00507E4B /* StatsTimelineProvider.swift in Sources */,
 				41EE909C2BDEA98B006412FB /* HomeEnergyStateManager.swift in Sources */,

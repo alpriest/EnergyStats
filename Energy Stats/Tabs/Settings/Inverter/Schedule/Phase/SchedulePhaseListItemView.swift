@@ -9,11 +9,11 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct SchedulePhaseListItemView: View {
-    let phase: SchedulePhase
+    let phase: SchedulePhaseV3
     private let toggleMode: PhaseEnabledToggleMode
     @State private var toggleState: Bool
 
-    init(phase: SchedulePhase, toggleMode: PhaseEnabledToggleMode) {
+    init(phase: SchedulePhaseV3, toggleMode: PhaseEnabledToggleMode) {
         self.phase = phase
         self.toggleMode = toggleMode
         self.toggleState = phase.enabled
@@ -48,33 +48,34 @@ struct SchedulePhaseListItemView: View {
         }
     }
 
-    private func extra(for phase: SchedulePhase) -> String {
-        switch phase.mode {
-        case "ForceDischarge":
-            return " at \(phase.forceDischargePower)W down to \(phase.forceDischargeSOC)%"
-        case "ForceCharge":
-            if let maxSOC = phase.maxSOC {
-                return " with \(maxSOC)% max SOC"
-            } else {
-                return ""
-            }
-        case "SelfUse":
-            var result = " with \(phase.minSocOnGrid)% min SOC"
-
-            if let maxSOC = phase.maxSOC {
-                result += " and \(maxSOC)% max SOC"
-            }
-
-            return result
-        case "Backup":
-            if let maxSOC = phase.maxSOC {
-                return " with \(maxSOC)% max SOC"
-            } else {
-                return ""
-            }
-        default:
-            return ""
-        }
+    private func extra(for phase: SchedulePhaseV3) -> String {
+        "TODO"
+//        switch phase.mode {
+//        case "ForceDischarge":
+//            return " at \(phase.forceDischargePower)W down to \(phase.forceDischargeSOC)%"
+//        case "ForceCharge":
+//            if let maxSOC = phase.maxSOC {
+//                return " with \(maxSOC)% max SOC"
+//            } else {
+//                return ""
+//            }
+//        case "SelfUse":
+//            var result = " with \(phase.minSocOnGrid)% min SOC"
+//
+//            if let maxSOC = phase.maxSOC {
+//                result += " and \(maxSOC)% max SOC"
+//            }
+//
+//            return result
+//        case "Backup":
+//            if let maxSOC = phase.maxSOC {
+//                return " with \(maxSOC)% max SOC"
+//            } else {
+//                return ""
+//            }
+//        default:
+//            return ""
+//        }
     }
 }
 

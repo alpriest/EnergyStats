@@ -16,8 +16,9 @@ public class ConfigManager: ConfigManaging {
     private var config: StoredConfig
     public var appSettingsPublisher: AnyPublisher<AppSettings, Never> { appSettingsStore.publisher }
     public var currentDevice = CurrentValueSubject<Device?, Never>(nil)
-    private var deviceSupportsScheduleMaxSOC: [String: Bool] = [:] // In-memory only
-    private var deviceSupportsPeakShaving: [String: Bool] = [:] // In-memory only
+    private var deviceSupportsScheduleMaxSOC: [String: Bool] = [:] // In-memory only //TODO: Read from scheduleProperties
+    private var deviceSupportsPeakShaving: [String: Bool] = [:] // In-memory only //TODO: Read from scheduleProperties
+    public var scheduleProperties: [String : SchedulePropertyDefinition] = [:] // In-memory only
     public var lastSettingsResetTime = CurrentValueSubject<Date?, Never>(nil)
     private var fetchDeviceLock = OSAllocatedUnfairLock()
     private var isFetching = false
@@ -608,7 +609,12 @@ public class ConfigManager: ConfigManaging {
     }
 
     public var scheduleTemplates: [ScheduleTemplate] {
-        get { config.scheduleTemplates }
+        get {
+            // Template phases must always be enabled
+            config.scheduleTemplates.map { schedule in
+                schedule.copy(phases: schedule.phases.map { $0.copy(enabled: true) })
+            }
+        }
         set { config.scheduleTemplates = newValue }
     }
 

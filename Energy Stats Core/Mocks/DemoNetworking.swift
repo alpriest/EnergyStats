@@ -255,33 +255,33 @@ class DemoAPI: FoxAPIServicing {
         return ScheduleResponse(
             enable: 0,
             groups: [
-                SchedulePhaseNetworkModel(
+                SchedulePhaseResponse(
                     enable: 1,
                     startHour: 15,
                     startMinute: 0,
                     endHour: 17,
                     endMinute: 0,
                     workMode: "ForceCharge",
-                    minSocOnGrid: 20,
-                    fdSoc: 100,
-                    fdPwr: 0,
-                    maxSoc: 100,
-                    pvLimit: nil,
-                    importLimit: nil
+                    extraParam: [
+                        "minSocOnGrid": 20,
+                        "fdSoc": 100,
+                        "fdPwr": 0,
+                        "maxSoc": 100
+                    ]
                 ),
-                SchedulePhaseNetworkModel(
+                SchedulePhaseResponse(
                     enable: 1,
                     startHour: 17,
                     startMinute: 1,
                     endHour: 18,
                     endMinute: 30,
                     workMode: "ForceDischarge",
-                    minSocOnGrid: 20,
-                    fdSoc: 20,
-                    fdPwr: 3500,
-                    maxSoc: 100,
-                    pvLimit: nil,
-                    importLimit: nil
+                    extraParam: [
+                        "minSocOnGrid": 20,
+                        "fdSoc": 20,
+                        "fdPwr": 3500,
+                        "maxSoc": 100
+                    ]
                 )
             ],
             workmodes: [

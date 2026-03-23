@@ -98,7 +98,7 @@ class EditScheduleViewModel: ObservableObject, HasLoadState, HasAlertContent, Vi
         }
     }
 
-    func updatedPhase(_ phase: SchedulePhase) {
+    func updatedPhase(_ phase: SchedulePhaseV3) {
         viewData = viewData.copy {
             $0.schedule = SchedulePhaseHelper.updated(phase: phase, on: $0.schedule)
         }

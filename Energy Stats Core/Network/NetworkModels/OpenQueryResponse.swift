@@ -260,20 +260,37 @@ public struct SetSchedulerFlagRequest: Encodable {
     public let enable: Int
 }
 
-public struct SchedulePhaseNetworkModel: Codable {
+public struct SchedulePropertyDefinitionRange: Hashable, Equatable, Codable {
+    public let max: Double
+    public let min: Double
+}
+
+public struct SchedulePropertyDefinition: Hashable, Equatable, Decodable {
+    public let enumList: [String]?
+    public let precision: Double
+    public let range: SchedulePropertyDefinitionRange?
+    public let unit: String
+}
+
+public struct SchedulePhaseRequest: Encodable {
     public let enable: Int
     public let startHour: Int
     public let startMinute: Int
     public let endHour: Int
     public let endMinute: Int
     public let workMode: String
-    public let minSocOnGrid: Int
-    public let fdSoc: Int
-    public let fdPwr: Int?
-    public let maxSoc: Int?
-    public let pvLimit: Int?
-    public let importLimit: Int?
+    public let extraParam: [String: Double]
+}
 
+public struct SchedulePhaseResponse: Decodable {
+    public let enable: Int?
+    public let startHour: Int
+    public let startMinute: Int
+    public let endHour: Int
+    public let endMinute: Int
+    public let workMode: String
+    public let extraParam: [String: Double]?
+    
     public init(
         enable: Int,
         startHour: Int,
@@ -281,12 +298,7 @@ public struct SchedulePhaseNetworkModel: Codable {
         endHour: Int,
         endMinute: Int,
         workMode: String,
-        minSocOnGrid: Int,
-        fdSoc: Int,
-        fdPwr: Int?,
-        maxSoc: Int?,
-        pvLimit: Int?,
-        importLimit: Int?
+        extraParam: [String: Int]
     ) {
         self.enable = enable
         self.startHour = startHour
@@ -294,54 +306,96 @@ public struct SchedulePhaseNetworkModel: Codable {
         self.endHour = endHour
         self.endMinute = endMinute
         self.workMode = workMode
-        self.minSocOnGrid = minSocOnGrid
-        self.fdSoc = fdSoc
-        self.fdPwr = fdPwr
-        self.maxSoc = maxSoc
-        self.pvLimit = pvLimit
-        self.importLimit = importLimit
+        self.extraParam = extraParam.mapValues { Double($0) }
+    }
+    
+    enum CodingKeys: CodingKey {
+        case enable
+        case startHour
+        case startMinute
+        case endHour
+        case endMinute
+        case workMode
+        case extraParam
+    }
+    
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.enable = try container.decodeIfPresent(Int.self, forKey: .enable)
+        self.startHour = try container.decode(Int.self, forKey: .startHour)
+        self.startMinute = try container.decode(Int.self, forKey: .startMinute)
+        self.endHour = try container.decode(Int.self, forKey: .endHour)
+        self.endMinute = try container.decode(Int.self, forKey: .endMinute)
+        self.workMode = try container.decode(String.self, forKey: .workMode)
+        self.extraParam = try container.decodeIfPresent([String : Double].self, forKey: .extraParam)
+    }
+    
+//    public var minSocOnGrid: Int {
+//        extraParam(key: "minSocOnGrid", default: 10)
+//    }
+//    
+//    public var fdPwr: Int {
+//        extraParam(key: "fdPwr", default: 0)
+//    }
+//    
+//    public var fdSoc: Int {
+//        extraParam(key: "fdSoc", default: 0)
+//    }
+//
+//    public var maxSoc: Int {
+//        extraParam(key: "maxSoc", default: 0)
+//    }
+
+    func extraParamValue(for key: String, default: Int) -> Int {
+        if let value = extraParam?[key] {
+            Int(value)
+        } else {
+            `default`
+        }
+    }
+    
+    private func extraParam(key: String) -> Int? {
+        guard let value = extraParam?[key] else { return nil }
+        return Int(value)
     }
 }
 
 public struct ScheduleResponse: Decodable {
     public let enable: Int
-    public let groups: [SchedulePhaseNetworkModel]
+    public let groups: [SchedulePhaseResponse]
     public let workmodes: [String]
+    public let maxGroupCount: Int
+    public let properties: [String: SchedulePropertyDefinition]
 
     enum CodingKeys: CodingKey {
         case enable
         case groups
+        case maxGroupCount
         case properties
-    }
-
-    private enum PropertiesCodingKeys: CodingKey {
-        case workmode
-    }
-
-    private enum WorkmodeCodingKeys: String, CodingKey {
-        case enumList
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.enable = try container.decode(Int.self, forKey: .enable)
-        self.groups = try container.decode([SchedulePhaseNetworkModel].self, forKey: .groups)
+        self.enable = try container.decodeIfPresent(Int.self, forKey: .enable) ?? true.intValue
+        self.groups = try container.decode([SchedulePhaseResponse].self, forKey: .groups)
 
-        let properties = try container.nestedContainer(keyedBy: PropertiesCodingKeys.self, forKey: .properties)
-        let workmodeContainer = try properties.nestedContainer(keyedBy: WorkmodeCodingKeys.self, forKey: .workmode)
-        self.workmodes = try workmodeContainer.decode([String].self, forKey: .enumList)
+        self.maxGroupCount = try container.decode(Int.self, forKey: .maxGroupCount)
+        self.properties = try container.decode([String : SchedulePropertyDefinition].self, forKey: .properties)
+        self.workmodes = properties.first { $0.key == "workmode" }?.value.enumList ?? []
     }
 
-    public init(enable: Int, groups: [SchedulePhaseNetworkModel], workmodes: [String]) {
+    public init(enable: Int, groups: [SchedulePhaseResponse], workmodes: [String]) {
         self.enable = enable
         self.groups = groups
         self.workmodes = workmodes
+        self.maxGroupCount = 1
+        self.properties = [:]
     }
 }
 
-public struct SetCurrentScheduleRequest: Codable {
+public struct SetCurrentScheduleRequest: Encodable {
     public let deviceSN: String
-    public let groups: [SchedulePhaseNetworkModel]
+    public let groups: [SchedulePhaseRequest]
 }
 
 public struct ApiRequestCountResponse: Decodable {

@@ -10,13 +10,23 @@ import Foundation
 import SwiftUI
 
 enum SchedulePhaseHelper {
+    // TODO: Do we need device any longer?
     static func addNewTimePeriod(to schedule: Schedule, device: Device?, initialiseMaxSOC: Bool) -> Schedule {
         Schedule(
-            phases: (schedule.phases + [SchedulePhase(mode: "SelfUse", device: device, initialiseMaxSOC: initialiseMaxSOC)]).sorted { $0.start < $1.start }
+            phases: (
+                schedule.phases + [SchedulePhaseV3(
+                    enabled: true,
+                    start: Date().toTime(),
+                    end: Date().toTime().adding(minutes: 1),
+                    mode: WorkMode.SelfUse,
+                    extraParam: [:]
+                )]
+            ).sorted { $0.start < $1.start
+            }
         )
     }
 
-    static func updated(phase updatedPhase: SchedulePhase, on schedule: Schedule) -> Schedule {
+    static func updated(phase updatedPhase: SchedulePhaseV3, on schedule: Schedule) -> Schedule {
         return Schedule(
             phases: schedule.phases.map {
                 if $0.id == updatedPhase.id {
@@ -47,13 +57,13 @@ enum SchedulePhaseHelper {
         return Schedule(phases: newPhases.sorted { $0.start < $1.start })
     }
 
-    static func createPhasesInGaps(on schedule: Schedule, mode: WorkMode, soc: Int, initialiseMaxSOC: Bool) -> [SchedulePhase] {
+    static func createPhasesInGaps(on schedule: Schedule, mode: WorkMode, soc: Int, initialiseMaxSOC: Bool) -> [SchedulePhaseV3] {
         // Ensure the phases are sorted by start time
         let sortedPhases = schedule.phases.sorted { $0.start < $1.start }
 
         let scheduleStartTime = Time(hour: 00, minute: 00)
         let scheduleEndTime = Time(hour: 23, minute: 59)
-        var newPhases = [SchedulePhase]()
+        var newPhases = [SchedulePhaseV3]()
         var lastEnd: Time?
 
         for phase in sortedPhases {
@@ -88,18 +98,20 @@ enum SchedulePhaseHelper {
         return newPhases
     }
 
-    private static func makePhase(from start: Time, to end: Time, mode: WorkMode, soc: Int, initialiseMaxSOC: Bool) -> SchedulePhase {
-        SchedulePhase(
+    private static func makePhase(from start: Time, to end: Time, mode: WorkMode, soc: Int, initialiseMaxSOC: Bool) -> SchedulePhaseV3 {
+        let params: [String: Double] = [
+            "minSocOnGrid": Double(soc),
+            "forceDischargePower": Double(0),
+            "forceDischargeSOC": Double(soc),
+            "maxSOC": initialiseMaxSOC ? 100.0 : nil,
+        ].compactMapValues { $0 }
+
+        return SchedulePhaseV3(
             enabled: true,
             start: start,
             end: end,
             mode: mode,
-            minSocOnGrid: soc,
-            forceDischargePower: 0,
-            forceDischargeSOC: soc,
-            maxSOC: initialiseMaxSOC ? 100 : nil,
-            color: Color.scheduleColor(named: mode),
-            pvLimit: nil
-        )!
+            extraParam: params
+        )
     }
 }
