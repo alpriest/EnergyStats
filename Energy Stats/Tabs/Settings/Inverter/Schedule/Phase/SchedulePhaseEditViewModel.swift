@@ -22,7 +22,7 @@ class SchedulePhaseEditViewModel: ObservableObject, ViewDataProviding {
         fields: []
     ) { didSet {
         if oldValue.workMode != viewData.workMode {
-            determineVisibleFields()
+            workModeChanged()
         }
         validate()
         isDirty = viewData != originalValue
@@ -31,11 +31,7 @@ class SchedulePhaseEditViewModel: ObservableObject, ViewDataProviding {
     private let onDelete: (String) -> Void
     @Published var isDirty = false
     var originalValue: ViewData?
-//    @Published var minSOCError: LocalizedStringKey?
-//    @Published var fdSOCError: LocalizedStringKey?
     @Published var timeError: LocalizedStringKey?
-//    @Published var forceDischargePowerError: LocalizedStringKey?
-//    @Published var maxSOCError: LocalizedStringKey?
     @Published var fieldErrors: [String: LocalizedStringKey] = [:]
     private let schedule: Schedule
     private let phase: SchedulePhaseV3
@@ -93,70 +89,115 @@ class SchedulePhaseEditViewModel: ObservableObject, ViewDataProviding {
 
     private func validate() {
         fieldErrors = [:]
-        
+
         for field in viewData.fields {
             guard let value = field.value, let range = field.range else { continue }
-            
+
             if value < range.min || value > range.max {
                 fieldErrors[field.key] = "Please enter a number between \(Int(range.min)) and \(Int(range.max))"
             }
         }
-//        var minSOCError: LocalizedStringKey? = nil
-//        var fdSOCError: LocalizedStringKey? = nil
-//        var timeError: LocalizedStringKey? = nil
-//        var forceDischargePowerError: LocalizedStringKey? = nil
-//        var maxSOCError: LocalizedStringKey? = nil
-//
+
 //        if let minSOC = Int(viewData.minSOC), let fdSOC = Int(viewData.fdSOC), minSOC > fdSOC {
 //            minSOCError = "Min SoC must be less than or equal to Force Discharge SoC"
 //        }
-//
+
         if viewData.startTime.toTime() >= viewData.endTime.toTime() {
             timeError = "End time must be after start time"
         }
-//
-//        if case .ForceDischarge = viewData.workMode, Int(viewData.fdPower) == 0 {
-//            forceDischargePowerError = "Force Discharge power needs to be greater than 0 to discharge"
-//        }
+    }
+
+    private func workModeChanged() {
+        determineVisibleFields()
     }
 
     private func determineVisibleFields() {
         let mode = viewData.workMode
+        let builder = FieldDefinitionBuilder(properties: configManager.scheduleProperties, phase: phase)
 
-        let standardFields: [SchedulePhaseFieldDefinition] = switch mode {
+        let standardField: SchedulePhaseFieldDefinition? = switch mode {
         case .SelfUse:
-            [
-                schedule.buildFieldDefinition(for: "minsocongrid", properties: configManager.scheduleProperties, isStandard: true, title: "Min SoC", phase: phase)
-            ]
+            builder.make(for: "minsocongrid", isStandard: true, title: "Min SoC", description: nil, defaultValue: 10)
         case .Feedin:
-            [
-                schedule.buildFieldDefinition(for: "minsocongrid", properties: configManager.scheduleProperties, isStandard: true, title: "Min SoC", phase: phase)
-            ]
+            builder.make(for: "minsocongrid", isStandard: true, title: "Min SoC", description: nil, defaultValue: 10)
         case .Backup:
-            [
-                schedule.buildFieldDefinition(for: "minsocongrid", properties: configManager.scheduleProperties, isStandard: true, title: "Min SoC", phase: phase)
-            ]
+            builder.make(for: "minsocongrid", isStandard: true, title: "Min SoC", description: nil, defaultValue: 10)
         case .ForceCharge:
-            [
-                schedule.buildFieldDefinition(for: "fdsoc", properties: configManager.scheduleProperties, isStandard: true, title: "Charge to SoC", phase: phase)
-            ]
+            builder.make(
+                for: "fdsoc",
+                isStandard: true,
+                title: "Charge to SoC",
+                description: "When the battery reaches this level, charging will stop.",
+                defaultValue: 100
+            )
         case .ForceDischarge:
-            [
-                schedule.buildFieldDefinition(for: "fdsoc", properties: configManager.scheduleProperties, isStandard: true, title: "Discharge to SoC", phase: phase)
-            ]
+            builder.make(
+                for: "fdsoc",
+                isStandard: true,
+                title: "Discharge to SoC",
+                description: "When the battery reaches this level, discharging will stop. If you wanted to save some battery power for later, perhaps set it to 50%.",
+                defaultValue: 10
+            )
         default:
-            []
+            nil
         }
+        let standardFields = [standardField].compactMap { $0 }
+        let hiddenFieldKeys: Set<String> = Set(standardFields.map { $0.key.lowercased() })
+            .union(
+                configManager.scheduleProperties
+                    .compactMap { key, value in
+                        value.unit.isEmpty ? key.lowercased() : nil
+                    }
+            )
 
         let advancedFields: [SchedulePhaseFieldDefinition] =
-            phase.extraParam
+            configManager.scheduleProperties
                 .keys
-                .filter { allKey in standardFields.contains(where: { standardKey in standardKey.key == allKey }) == false }
+                .filter { allKey in hiddenFieldKeys.contains(where: { standardKey in standardKey == allKey.lowercased() }) == false }
                 .map { key in
-                    schedule.buildFieldDefinition(for: key, properties: configManager.scheduleProperties, isStandard: false, title: key, phase: phase)
+                    let defaultValue = defaultValue(mode: mode, key: key, standardFields: standardFields)
+                    let description = description(mode: mode, key: key)
+
+                    return builder.make(for: key, isStandard: false, title: key, description: description, defaultValue: defaultValue)
                 }
 
         viewData.fields = standardFields + advancedFields
+    }
+
+    private func description(mode: WorkMode, key: String) -> LocalizedStringKey? {
+        switch (mode, key) {
+        case (WorkMode.ForceCharge, "fdpwr"):
+            "The input power to charge your battery."
+        case (WorkMode.ForceDischarge, "fdpwr"):
+            "The output power level to be delivered, including your house load and grid export. E.g. If you have 5kW inverter then set this to 5000, then if the house load is 750W the other 4.25kW will be exported."
+        default:
+            nil
+        }
+    }
+
+    private func defaultValue(mode: WorkMode, key: String, standardFields: [SchedulePhaseFieldDefinition]) -> Double? {
+        switch (mode, key) {
+        // Force Charge
+        case (WorkMode.ForceCharge, "fdpwr"):
+            if let capacity = configManager.currentDevice.value?.capacity {
+                capacity * 1000.0
+            } else {
+                nil
+            }
+        case (WorkMode.ForceCharge, "maxsoc"):
+            standardFields.first(where: { $0.key.lowercased() == "fdsoc" })?.value
+
+        // Force Discharge
+        case (WorkMode.ForceDischarge, "fdpwr"):
+            configManager.currentDevice.value?.capacity
+        case (WorkMode.ForceDischarge, "importlimit"):
+            0
+        case (WorkMode.ForceDischarge, "maxsoc"):
+            standardFields.first(where: { $0.key.lowercased() == "fdsoc" })?.value
+
+        default:
+            nil
+        }
     }
 
     func save(onSuccess: () -> Void) {

@@ -80,7 +80,7 @@ public extension ScheduleTemplate {
 
 public struct Schedule: Hashable, Equatable {
     public let phases: [SchedulePhaseV3]
-    
+
     public init(phases: [SchedulePhaseV3]) {
         self.phases = phases
     }
@@ -117,16 +117,26 @@ public struct Schedule: Hashable, Equatable {
     public var hasTooManyPhases: Bool {
         self.phases.count > Schedule.maxPhasesCount
     }
-    
-    public func buildFieldDefinition(
+}
+
+public class FieldDefinitionBuilder {
+    private let properties: [String: SchedulePropertyDefinition]
+    private let phase: SchedulePhaseV3
+
+    public init(properties: [String: SchedulePropertyDefinition], phase: SchedulePhaseV3) {
+        self.properties = properties
+        self.phase = phase
+    }
+
+    public func make(
         for key: String,
-        properties: [String: SchedulePropertyDefinition],
         isStandard: Bool,
         title: String,
-        phase: SchedulePhaseV3
+        description: LocalizedStringKey?,
+        defaultValue: Double?,
     ) -> SchedulePhaseFieldDefinition {
-        let property = properties[key]
-        
+        let property = self.properties[key]
+
         return SchedulePhaseFieldDefinition(
             key: key,
             isStandard: isStandard,
@@ -134,7 +144,8 @@ public struct Schedule: Hashable, Equatable {
             precision: property?.precision ?? 0,
             range: property?.range,
             unit: property?.unit,
-            value: phase.valueFor(key: key)
+            value: self.phase.valueFor(key: key) ?? defaultValue,
+            description: description
         )
     }
 }
@@ -188,13 +199,13 @@ public struct SchedulePhaseV3: Identifiable, Hashable, Equatable, Codable {
     func isAllDaySynthesized() -> Bool {
         self.start.hour == 0 && self.start.minute == 0 && self.end.hour == 23 && self.end.minute == 59
     }
-    
+
     public func hasExtraParam(key: String) -> Bool {
-        extraParam.keys.contains(key)
+        self.extraParam.keys.contains(key)
     }
-    
+
     public func valueFor(key: String) -> Double? {
-        extraParam[key]
+        self.extraParam[key]
     }
 
     public func copy(
@@ -261,6 +272,7 @@ public struct SchedulePhaseFieldDefinition: Copiable {
     public let unit: String?
     public var value: Double?
     public var error: String?
+    public var description: LocalizedStringKey?
 
     public func create(copying previous: SchedulePhaseFieldDefinition) -> SchedulePhaseFieldDefinition {
         SchedulePhaseFieldDefinition(
@@ -271,7 +283,8 @@ public struct SchedulePhaseFieldDefinition: Copiable {
             range: previous.range,
             unit: previous.unit,
             value: previous.value,
-            error: previous.error
+            error: previous.error,
+            description: previous.description
         )
     }
 }

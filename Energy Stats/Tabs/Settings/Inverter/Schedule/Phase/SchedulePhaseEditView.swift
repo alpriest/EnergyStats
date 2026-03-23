@@ -91,7 +91,130 @@ struct SchedulePhaseEditView: View {
             showingAdvanced = false
         }
     }
+
+    private func workModeDescription() -> LocalizedStringKey? {
+        switch viewModel.viewData.workMode {
+        case WorkMode.SelfUse:
+            "workmode.self_use_mode.description"
+        case WorkMode.Feedin:
+            "workmode.feed_in_first_mode.description"
+        case WorkMode.Backup:
+            "workmode.backup_mode.description"
+        case WorkMode.PeakShaving:
+            "workmode.peak_shaving.description"
+        case WorkMode.ForceCharge:
+            "workmode.force_charge_mode.description"
+        case WorkMode.ForceDischarge:
+            "workmode.force_discharge_mode.description"
+        case "ForceCharge(AC)":
+            "workmode.force_charge_mode_ac.description"
+        case "ForceDischarge(AC)":
+            "workmode.force_discharge_mode_ac.description"
+        case "ForceCharge(BAT)":
+            "workmode.force_charge_mode_bat.description"
+        case "ForceDischarge(BAT)":
+            "workmode.force_discharge_mode_bat.description"
+        default:
+            nil
+        }
+    }
     
+    @ViewBuilder
+    func standardViews(for workMode: WorkMode) -> some View {
+        ForEach(viewModel.viewData.fields.filter(\.isStandard), id: \.key) {
+            editableItemView(for: $0)
+        }
+    }
+    
+    @ViewBuilder
+    func advancedViews(for workMode: WorkMode) -> some View {
+        Section {
+            if showingAdvanced {
+                ForEach(viewModel.viewData.fields.filter { $0.isStandard == false }, id: \.key) {
+                    editableItemView(for: $0)
+                }
+            }
+        } header: {
+            if showingAdvanced {
+                Text("Advanced")
+            }
+        } footer: {
+            if !showingAdvanced, hasAdvancedViews(for: workMode) {
+                Button(action: { showingAdvanced = true }) {
+                    Text("Advanced...")
+                }
+            }
+        }
+    }
+    
+    private func editableItemView(for field: SchedulePhaseFieldDefinition) -> some View {
+        EditableItemView(
+            title: field.title,
+            field: field.title,
+            numberTitle: "",
+            numberText: viewModel.binding(for: field),
+            unit: field.unit ?? "",
+            error: viewModel.fieldErrors[field.key],
+            description: field.description,
+            focusedField: $focusedField
+        )
+    }
+
+    private func hasAdvancedViews(for workMode: WorkMode) -> Bool {
+        switch workMode {
+        case .ForceCharge:
+            true
+        case .ForceDischarge:
+            true
+        default:
+            false
+        }
+    }
+}
+
+#Preview {
+    SchedulePhaseEditView(
+        schedule: .preview(),
+        phase: .preview,
+        configManager: ConfigManager.preview(),
+        onChange: { print($0.id, " changed") },
+        onDelete: { print($0, " deleted") }
+    )
+}
+
+struct FooterSection<V: View>: View {
+    var content: () -> V
+
+    var body: some View {
+        Section {}
+            footer: { content() }
+    }
+}
+
+extension SchedulePhaseV3 {
+    static var preview: SchedulePhaseV3 {
+        SchedulePhaseV3(
+            enabled: true,
+            start: Time(
+                hour: 19,
+                minute: 30
+            ),
+            end: Time(
+                hour: 23,
+                minute: 30
+            ),
+            mode: WorkMode.ForceDischarge,
+            extraParam: [
+                "minSocOnGrid": 10,
+                "forceDischargePower": 3500,
+                "forceDischargeSOC": 20,
+                "maxSOC": 100,
+            ]
+        )
+    }
+}
+
+
 //    private var minSocEditable: some View {
 //        EditableItemView(
 //            title: "Minimum battery level",
@@ -209,145 +332,3 @@ struct SchedulePhaseEditView: View {
 //        )
 //    }
     
-    private func minSoCDescription() -> LocalizedStringKey? {
-        return "The minimum battery state of charge."
-    }
-    
-    private func forceDischargeSoCDescription() -> LocalizedStringKey? {
-        if case .ForceDischarge = viewModel.viewData.workMode {
-            return "When the battery reaches this level, discharging will stop. If you wanted to save some battery power for later, perhaps set it to 50%."
-        }
-        
-        return nil
-    }
-    
-    private func forceDischargePowerDescription() -> LocalizedStringKey? {
-        if case .ForceDischarge = viewModel.viewData.workMode {
-            return "The output power level to be delivered, including your house load and grid export. E.g. If you have 5kW inverter then set this to 5000, then if the house load is 750W the other 4.25kW will be exported."
-        }
-        
-        return nil
-    }
-    
-    private func workModeDescription() -> LocalizedStringKey? {
-        switch viewModel.viewData.workMode {
-        case WorkMode.SelfUse:
-            "workmode.self_use_mode.description"
-        case WorkMode.Feedin:
-            "workmode.feed_in_first_mode.description"
-        case WorkMode.Backup:
-            "workmode.backup_mode.description"
-        case WorkMode.PeakShaving:
-            "workmode.peak_shaving.description"
-        case "ForceCharge(AC)":
-            "workmode.force_charge_mode_ac.description"
-        case "ForceDischarge(AC)":
-            "workmode.force_discharge_mode_ac.description"
-        case "ForceCharge(BAT)":
-            "workmode.force_charge_mode_bat.description"
-        case "ForceDischarge(BAT)":
-            "workmode.force_discharge_mode_bat.description"
-        default:
-            nil
-        }
-    }
-    
-    @ViewBuilder
-    func standardViews(for workMode: WorkMode) -> some View {
-        ForEach(viewModel.viewData.fields.filter(\.isStandard), id: \.key) {
-            EditableItemView(
-                title: $0.title,
-                field: $0.title,
-                numberTitle: "",
-                numberText: viewModel.binding(for: $0),
-                unit: $0.unit ?? "",
-                error: viewModel.fieldErrors[$0.key],
-                description: nil,
-                focusedField: $focusedField
-            )
-        }
-    }
-    
-    @ViewBuilder
-    func advancedViews(for workMode: WorkMode) -> some View {
-        Section {
-            if showingAdvanced {
-                ForEach(viewModel.viewData.fields.filter { $0.isStandard == false }, id: \.key) {
-                    EditableItemView(
-                        title: $0.title,
-                        field: $0.title,
-                        numberTitle: "Power",
-                        numberText: viewModel.binding(for: $0),
-                        unit: "W",
-                        error: nil,
-                        description: nil,
-                        focusedField: $focusedField
-                    )
-                }
-            }
-        } header: {
-            if showingAdvanced {
-                Text("Advanced")
-            }
-        } footer: {
-            if !showingAdvanced, hasAdvancedViews(for: workMode) {
-                Button(action: { showingAdvanced = true }) {
-                    Text("Advanced...")
-                }
-            }
-        }
-    }
-
-    private func hasAdvancedViews(for workMode: WorkMode) -> Bool {
-        switch workMode {
-        case .ForceCharge:
-            true
-        case .ForceDischarge:
-            true
-        default:
-            false
-        }
-    }
-}
-
-#Preview {
-    SchedulePhaseEditView(
-        schedule: .preview(),
-        phase: .preview,
-        configManager: ConfigManager.preview(),
-        onChange: { print($0.id, " changed") },
-        onDelete: { print($0, " deleted") }
-    )
-}
-
-struct FooterSection<V: View>: View {
-    var content: () -> V
-
-    var body: some View {
-        Section {}
-            footer: { content() }
-    }
-}
-
-extension SchedulePhaseV3 {
-    static var preview: SchedulePhaseV3 {
-        SchedulePhaseV3(
-            enabled: true,
-            start: Time(
-                hour: 19,
-                minute: 30
-            ),
-            end: Time(
-                hour: 23,
-                minute: 30
-            ),
-            mode: WorkMode.ForceDischarge,
-            extraParam: [
-                "minSocOnGrid": 10,
-                "forceDischargePower": 3500,
-                "forceDischargeSOC": 20,
-                "maxSOC": 100,
-            ]
-        )
-    }
-}
