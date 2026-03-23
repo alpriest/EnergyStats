@@ -100,9 +100,13 @@ class SchedulePhaseEditViewModel: ObservableObject, ViewDataProviding {
             }
         }
 
-//        if let minSOC = Int(viewData.minSOC), let fdSOC = Int(viewData.fdSOC), minSOC > fdSOC {
-//            minSOCError = "Min SoC must be less than or equal to Force Discharge SoC"
-//        }
+        if viewData.workMode == WorkMode.ForceDischarge,
+           let minSoc = viewData.fields.first(where: { $0.key == "minsocongrid" })?.value,
+           let fdSoc = viewData.fields.first(where: { $0.key == "fdsoc" })?.value,
+           minSoc > fdSoc
+        {
+            fieldErrors["minsocongrid"] = "Min SoC must be less than or equal to Discharge SoC"
+        }
 
         if viewData.startTime.toTime() >= viewData.endTime.toTime() {
             timeError = "End time must be after start time"
@@ -247,7 +251,7 @@ class SchedulePhaseEditViewModel: ObservableObject, ViewDataProviding {
         resetDirtyState()
         onSuccess()
     }
-    
+
     private func keyAsExtraParamKey(_ key: String) -> String {
         let fieldNames = Set(["fdSoc", "fdPwr", "maxSoc", "minSocOnGrid"])
         return fieldNames.first { $0.lowercased() == key } ?? key
