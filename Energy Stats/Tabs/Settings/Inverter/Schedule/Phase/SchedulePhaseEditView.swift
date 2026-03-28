@@ -67,8 +67,8 @@ struct SchedulePhaseEditView: View {
                     }
                 }
 
-                standardViews(for: viewModel.viewData.workMode)
-                advancedViews(for: viewModel.viewData.workMode)
+                standardViews()
+                advancedViews()
 
                 Section {}
                 footer: {
@@ -120,14 +120,14 @@ struct SchedulePhaseEditView: View {
     }
 
     @ViewBuilder
-    func standardViews(for workMode: WorkMode) -> some View {
+    func standardViews() -> some View {
         ForEach(viewModel.viewData.fields.filter(\.isStandard), id: \.key) {
             editableItemView(for: $0)
         }
     }
 
     @ViewBuilder
-    func advancedViews(for workMode: WorkMode) -> some View {
+    func advancedViews() -> some View {
         Section {
             if showingAdvanced {
                 ForEach(viewModel.viewData.fields.filter { $0.isStandard == false }, id: \.key) {

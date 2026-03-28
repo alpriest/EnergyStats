@@ -43,8 +43,6 @@ struct SchedulePhaseListItemView: View {
             return " at \(phase.forceDischargePower)W up to \(phase.forceDischargeSoc)%"
         case WorkMode.SelfUse:
             return " \(phase.minSocOnGrid)% min SOC"
-        case WorkMode.Backup:
-            return ""
         default:
             return ""
         }

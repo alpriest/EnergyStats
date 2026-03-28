@@ -189,10 +189,6 @@ public struct SchedulePhaseV3: Identifiable, Hashable, Equatable, Codable {
         self.color
     }
 
-    public func hasExtraParam(key: String) -> Bool {
-        self.extraParam.keys.map { $0.lowercased() }.contains(key.lowercased())
-    }
-
     public func valueFor(key: String) -> Double? {
         self.extraParam.first { $0.key.lowercased() == key.lowercased() }?.value
     }
@@ -262,7 +258,6 @@ public struct SchedulePhaseFieldDefinition: Copiable {
     public let range: SchedulePropertyDefinitionRange?
     public let unit: String?
     public var value: Double?
-    public var error: String?
     public var description: LocalizedStringKey?
 
     public func create(copying previous: SchedulePhaseFieldDefinition) -> SchedulePhaseFieldDefinition {
@@ -274,7 +269,6 @@ public struct SchedulePhaseFieldDefinition: Copiable {
             range: previous.range,
             unit: previous.unit,
             value: previous.value,
-            error: previous.error,
             description: previous.description
         )
     }

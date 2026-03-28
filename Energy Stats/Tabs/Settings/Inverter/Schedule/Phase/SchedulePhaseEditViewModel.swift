@@ -168,7 +168,7 @@ class SchedulePhaseEditViewModel: ObservableObject, ViewDataProviding {
                 .keys
                 .filter { allKey in hiddenFieldKeys.contains(where: { standardKey in standardKey == allKey.lowercased() }) == false }
                 .map { key in
-                    let defaultValue = defaultValue(mode: mode, key: key, standardFields: standardFields)
+                    let defaultValue = defaultValue(mode: mode, key: key)
                     let description = description(mode: mode, key: key)
 
                     return builder.make(for: key, isStandard: false, title: key, description: description, defaultValue: defaultValue)
@@ -189,9 +189,8 @@ class SchedulePhaseEditViewModel: ObservableObject, ViewDataProviding {
         }
     }
 
-    private func defaultValue(mode: WorkMode, key: String, standardFields: [SchedulePhaseFieldDefinition]) -> Double? {
+    private func defaultValue(mode: WorkMode, key: String) -> Double? {
         switch (mode, key) {
-        // Force Charge
         case (_, "fdpwr"):
             if let capacity = configManager.currentDevice.value?.capacity {
                 capacity * 1000.0

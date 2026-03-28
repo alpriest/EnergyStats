@@ -154,18 +154,8 @@ class ScheduleSummaryViewModel: ObservableObject, HasLoadState, HasAlertContent,
 }
 
 extension Schedule {
-    func supportsMaxSOC() -> Bool {
-        phases.anySatisfy { $0.hasExtraParam(key: "maxSOC") }
-    }
-
     init(scheduleResponse: ScheduleResponse) {
         self.init(phases: scheduleResponse.groups
             .compactMap { $0.toSchedulePhase() })
-    }
-}
-
-private extension ScheduleResponse {
-    func supportsPeakShaving() -> Bool {
-        workmodes.contains(where: { $0 == "PeakShaving" })
     }
 }
