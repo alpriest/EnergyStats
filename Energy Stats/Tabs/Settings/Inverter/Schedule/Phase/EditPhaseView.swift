@@ -1,5 +1,5 @@
 //
-//  SchedulePhaseEditView.swift
+//  EditPhaseView.swift
 //  Energy Stats
 //
 //  Created by Alistair Priest on 30/11/2023.
@@ -9,10 +9,10 @@ import Combine
 import Energy_Stats_Core
 import SwiftUI
 
-struct SchedulePhaseEditView: View {
+struct EditPhaseView: View {
     @Environment(\.presentationMode) var presentationMode
     private let onDelete: (String) -> Void
-    @StateObject private var viewModel: SchedulePhaseEditViewModel
+    @StateObject private var viewModel: EditPhaseViewModel
     @FocusState private var focusedField: String?
     @State private var showingAdvanced = false
 
@@ -25,7 +25,7 @@ struct SchedulePhaseEditView: View {
     ) {
         self.onDelete = onDelete
         self._viewModel = StateObject(
-            wrappedValue: SchedulePhaseEditViewModel(
+            wrappedValue: EditPhaseViewModel(
                 configManager: configManager,
                 schedule: schedule,
                 phase: phase,
@@ -165,7 +165,7 @@ struct SchedulePhaseEditView: View {
 }
 
 #Preview {
-    SchedulePhaseEditView(
+    EditPhaseView(
         schedule: .preview(),
         phase: .preview,
         configManager: ConfigManager.preview(),

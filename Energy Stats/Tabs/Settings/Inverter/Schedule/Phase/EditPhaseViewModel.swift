@@ -1,5 +1,5 @@
 //
-//  SchedulePhaseEditViewModel.swift
+//  EditPhaseViewModel.swift
 //  Energy Stats
 //
 //  Created by Alistair Priest on 20/11/2025.
@@ -9,8 +9,8 @@ import Combine
 import Energy_Stats_Core
 import SwiftUI
 
-class SchedulePhaseEditViewModel: ObservableObject, ViewDataProviding {
-    typealias ViewData = SchedulePhaseEditViewData
+class EditPhaseViewModel: ObservableObject, ViewDataProviding {
+    typealias ViewData = EditPhaseViewData
 
     private let configManager: ConfigManaging
     @Published var viewData = ViewData(

@@ -32,7 +32,7 @@ struct ScheduleDetailView: View {
 
         ForEachIndexed(schedule.phases) { index, phase in
             NavigationLink {
-                SchedulePhaseEditView(schedule: schedule,
+                EditPhaseView(schedule: schedule,
                                       phase: phase,
                                       configManager: configManager,
                                       onChange: onUpdate,

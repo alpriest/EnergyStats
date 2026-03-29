@@ -1,5 +1,5 @@
 //
-//  SchedulePhaseEditViewData.swift
+//  EditPhaseViewData.swift
 //  Energy Stats
 //
 //  Created by Alistair Priest on 20/11/2025.
@@ -9,7 +9,7 @@ import Combine
 import Energy_Stats_Core
 import SwiftUI
 
-struct SchedulePhaseEditViewData: Copiable {
+struct EditPhaseViewData: Copiable {
     var id: String
     var startTime: Date
     var endTime: Date
@@ -18,8 +18,8 @@ struct SchedulePhaseEditViewData: Copiable {
     var fields: [SchedulePhaseFieldDefinition]
     var showAdvancedFields: Bool
 
-    func create(copying previous: SchedulePhaseEditViewData) -> SchedulePhaseEditViewData {
-        SchedulePhaseEditViewData(
+    func create(copying previous: EditPhaseViewData) -> EditPhaseViewData {
+        EditPhaseViewData(
             id: previous.id,
             startTime: previous.startTime,
             endTime: previous.endTime,
