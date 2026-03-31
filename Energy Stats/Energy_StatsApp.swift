@@ -124,8 +124,21 @@ struct Energy_StatsApp: App {
             session.activate()
         }
 
+        fetchDeviceCapacity()
         refreshSolcast(solarForecastProvider: solarForecastProvider)
         fetchCurrentInverterSchedule()
+    }
+    
+    private func fetchDeviceCapacity() {
+        guard configManager.currentDevice.value?.capacity == nil else { return }
+        
+        Task {
+            do {
+                try await configManager.fetchDevices()
+            } catch {
+                // ignore
+            }
+        }
     }
 
     private func refreshSolcast(solarForecastProvider: SolarForecastProviding) {

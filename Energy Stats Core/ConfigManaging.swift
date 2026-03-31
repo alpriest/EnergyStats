@@ -87,6 +87,7 @@ public protocol ConfigManaging: FinancialConfigManager, SolcastConfigManager, Ba
     var readOnlyCode: String { get set }
     var statsTimeUsageGraphStyle: StatsTimeUsageGraphStyle { get set }
     var scheduleProperties: [String: SchedulePropertyDefinition] { get set }
+    var inverterGeneration: InverterGeneration { get set }
 }
 
 public enum DeviceCapability {
@@ -274,4 +275,10 @@ public enum BatteryTemperatureDisplayMode: Int, Codable, Equatable {
     case automatic = 0
     case battery1 = 1
     case battery2 = 2
+}
+
+public enum InverterGeneration: Int, Codable, Equatable {
+    case unknown = 0
+    case generation1 = 1
+    case generation2 = 2
 }

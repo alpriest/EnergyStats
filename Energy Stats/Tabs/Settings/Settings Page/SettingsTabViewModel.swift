@@ -216,6 +216,12 @@ class SettingsTabViewModel: ObservableObject {
             config.showOutputEnergyOnStats = showOutputEnergyOnStats
         }
     }
+    
+    @Published var inverterGeneration: InverterGeneration {
+        didSet {
+            config.inverterGeneration = inverterGeneration
+        }
+    }
 
     @Published var readOnlyTitle: String = ""
 
@@ -265,6 +271,7 @@ class SettingsTabViewModel: ObservableObject {
         currencySymbol = config.currencySymbol
         showOutputEnergyOnStats = config.showOutputEnergyOnStats
         showBatteryMaxChargeCurrent = config.showBatteryMaxChargeCurrent
+        inverterGeneration = config.inverterGeneration
 
         config.currentDevice.sink { [weak self] _ in
             guard let self else { return }

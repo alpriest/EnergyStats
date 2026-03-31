@@ -11,6 +11,7 @@ import SwiftUI
 struct ScheduleView: View {
     let schedule: Schedule
     let includePhaseDetail: Bool
+    let configManager: ConfigManaging
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -19,7 +20,7 @@ struct ScheduleView: View {
 
             if includePhaseDetail {
                 ForEach(schedule.phases) { phase in
-                    SchedulePhaseListItemView(phase: phase)
+                    SchedulePhaseListItemView(phase: phase, config: configManager)
                         .frame(maxWidth: .infinity)
                 }
             }
@@ -30,6 +31,7 @@ struct ScheduleView: View {
 #Preview {
     ScheduleView(
         schedule: Schedule.preview(),
-        includePhaseDetail: true
+        includePhaseDetail: true,
+        configManager: ConfigManager.preview()
     )
 }

@@ -24,6 +24,7 @@ struct InverterSettingsView: View {
     @Binding var showInverterConsumption: Bool
     @Binding var allowNegativeLoad: Bool
     @Binding var showOutputEnergyOnStats: Bool
+    @Binding var generation: InverterGeneration
 
     var body: some View {
         Form {
@@ -84,9 +85,21 @@ struct InverterSettingsView: View {
             } header: {
                 Text("Display Options")
             }
-
+            
             ct2Setttings()
             
+            Section {
+                Picker("Generation", selection: $generation) {
+                    Text("Unknown").tag(InverterGeneration.unknown)
+                    Text("1").tag(InverterGeneration.generation1)
+                    Text("2").tag(InverterGeneration.generation2)
+                }.pickerStyle(.segmented)
+            } header: {
+                Text("Inverter generation")
+            } footer: {
+                Text("inverter_generation_footnote")
+            }
+
             FirmwareLoadingView(configManager: configManager, networking: networking)
 
             if let currentDevice = configManager.currentDevice.value {
@@ -167,7 +180,8 @@ struct InverterSettingsView_Previews: PreviewProvider {
                 shouldCombineCT2WithLoadsPower: .constant(false),
                 showInverterConsumption: .constant(false),
                 allowNegativeLoad: .constant(false),
-                showOutputEnergyOnStats: .constant(false)
+                showOutputEnergyOnStats: .constant(false),
+                generation: .constant(.generation1)
             )
         }
     }

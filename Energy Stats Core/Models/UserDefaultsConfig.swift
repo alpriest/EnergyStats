@@ -88,7 +88,7 @@ public class UserDefaultsConfig: StoredConfig {
     
     @UserDefaultsStoredBool(key: "showGraphValueDescriptions", defaultValue: true)
     public var showGraphValueDescriptions: Bool
-
+    
     @UserDefaultsStoredBool(key: "hasRunBefore")
     public var hasRunBefore: Bool
     
@@ -281,7 +281,7 @@ public class UserDefaultsConfig: StoredConfig {
                             extraParam: params
                         )
                     }
-                   
+                    
                     return ScheduleTemplate(id: v1.id, name: v1.name, phases: v3phases)
                 }
                 
@@ -388,6 +388,16 @@ public class UserDefaultsConfig: StoredConfig {
         }
         set {
             UserDefaults.shared.set(newValue.rawValue, forKey: "statsTimeUsageGraphStyle")
+        }
+    }
+    
+    public var inverterGeneration: InverterGeneration {
+        get {
+            let rawValue = UserDefaults.shared.integer(forKey: "inverterGeneration")
+            return InverterGeneration(rawValue: rawValue) ?? .unknown
+        }
+        set {
+            UserDefaults.shared.set(newValue.rawValue, forKey: "inverterGeneration")
         }
     }
 }

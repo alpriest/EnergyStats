@@ -73,6 +73,7 @@ public protocol StoredConfig {
     var pvOutputConfig: PVOutputConfig? { get set }
     var isReadOnly: Bool { get set }
     var readOnlyCode: String { get set }
+    var inverterGeneration: InverterGeneration { get set }
 }
 
 public func DefaultParameterGroups() -> [ParameterGroup] {

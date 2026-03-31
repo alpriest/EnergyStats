@@ -131,7 +131,7 @@ public class FieldDefinitionBuilder {
         description: LocalizedStringKey?,
         defaultValue: Double?,
     ) -> SchedulePhaseFieldDefinition {
-        let property = self.properties[key]
+        let property = self.properties[key.lowercased()]
 
         return SchedulePhaseFieldDefinition(
             key: key,
@@ -140,7 +140,7 @@ public class FieldDefinitionBuilder {
             precision: property?.precision ?? 0,
             range: property?.range,
             unit: property?.unit,
-            value: self.phase.valueFor(key: key) ?? defaultValue,
+            value: self.phase.valueFor(key: key.lowercased()) ?? defaultValue,
             description: description
         )
     }

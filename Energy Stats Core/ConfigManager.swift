@@ -764,6 +764,11 @@ public class ConfigManager: ConfigManaging {
         get { config.readOnlyCode }
         set { config.readOnlyCode = newValue }
     }
+    
+    public var inverterGeneration: InverterGeneration {
+        get { config.inverterGeneration }
+        set { config.inverterGeneration = newValue }
+    }
 }
 
 public enum BatteryResponseMapper {

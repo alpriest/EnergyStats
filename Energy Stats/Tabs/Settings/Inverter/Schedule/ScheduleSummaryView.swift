@@ -50,7 +50,7 @@ struct ScheduleSummaryView: View {
                                     schedule: schedule
                                 )
                             } label: {
-                                ScheduleView(schedule: schedule, includePhaseDetail: true)
+                                ScheduleView(schedule: schedule, includePhaseDetail: true, configManager: configManager)
                                     .padding(.vertical, 4)
                             }
                         } header: {
@@ -94,10 +94,10 @@ struct ScheduleSummaryView: View {
                 FooterSection {
                     VStack(spacing: 14) {
                         Text("templates_not_synced")
-                            .frame(minWidth: 0, maxWidth: .infinity)
+                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
 
                         Text("about_59_seconds")
-                            .frame(minWidth: 0, maxWidth: .infinity)
+                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                     }.frame(minWidth: 0, maxWidth: .infinity)
                 }
             }

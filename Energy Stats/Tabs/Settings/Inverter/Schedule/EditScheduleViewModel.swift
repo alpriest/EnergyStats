@@ -92,6 +92,7 @@ class EditScheduleViewModel: ObservableObject, HasLoadState, HasAlertContent, Vi
         viewData = viewData.copy {
             $0.schedule = SchedulePhaseHelper.addNewTimePeriod(
                 to: $0.schedule,
+                device: device,
                 initialiseMaxSOC: configManager.getDeviceSupports(capability: .scheduleMaxSOC, deviceSN: device.deviceSN)
             )
         }

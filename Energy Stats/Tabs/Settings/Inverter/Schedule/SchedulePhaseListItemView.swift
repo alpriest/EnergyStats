@@ -10,9 +10,11 @@ import SwiftUI
 
 struct SchedulePhaseListItemView: View {
     private let phase: SchedulePhaseV3
+    private let config: ConfigManaging
 
-    init(phase: SchedulePhaseV3) {
+    init(phase: SchedulePhaseV3, config: ConfigManaging) {
         self.phase = phase
+        self.config = config
     }
 
     var body: some View {
@@ -40,19 +42,28 @@ struct SchedulePhaseListItemView: View {
         case WorkMode.ForceDischarge:
             return " at \(phase.forceDischargePower)W down to \(phase.forceDischargeSoc)%"
         case WorkMode.ForceCharge:
-            return " at \(phase.forceDischargePower)W up to \(phase.forceDischargeSoc)%"
+            return " at \(phase.forceDischargePower)W up to \(forceChargeSoC(phase))%"
         case WorkMode.SelfUse:
             return " \(phase.minSocOnGrid)% min SOC"
         default:
             return ""
         }
     }
+
+    private func forceChargeSoC(_ phase: SchedulePhaseV3) -> String {
+        switch config.inverterGeneration {
+        case .generation1:
+            phase.maxSoc
+        default:
+            phase.forceDischargeSoc
+        }
+    }
 }
 
 #Preview {
     VStack {
-        SchedulePhaseListItemView(phase: Schedule.preview().phases[0])
-        SchedulePhaseListItemView(phase: Schedule.preview().phases[1])
+        SchedulePhaseListItemView(phase: Schedule.preview().phases[0], config: ConfigManager.preview())
+        SchedulePhaseListItemView(phase: Schedule.preview().phases[1], config: ConfigManager.preview())
     }
 }
 
@@ -67,5 +78,10 @@ extension SchedulePhaseV3 {
 
     var minSocOnGrid: String {
         stringValueFor(key: "minSocOnGrid")
+    }
+
+    // Used for generation1 inverters
+    var maxSoc: String {
+        stringValueFor(key: "maxSoc")
     }
 }

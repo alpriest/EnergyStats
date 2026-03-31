@@ -461,6 +461,7 @@ public class MockConfig: StoredConfig {
     public var pvOutputConfig: PVOutputConfig? = nil
     public var isReadOnly: Bool = false
     public var readOnlyCode: String = ""
+    public var inverterGeneration: InverterGeneration = .unknown
 }
 
 public extension SolcastSite {

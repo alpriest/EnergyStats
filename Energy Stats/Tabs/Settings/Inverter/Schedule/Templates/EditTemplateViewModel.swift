@@ -117,6 +117,7 @@ class EditTemplateViewModel: ObservableObject, HasLoadState, HasAlertContent {
 
         self.schedule = SchedulePhaseHelper.addNewTimePeriod(
             to: schedule,
+            device: device,
             initialiseMaxSOC: config.getDeviceSupports(capability: .scheduleMaxSOC, deviceSN: device.deviceSN)
         )
     }

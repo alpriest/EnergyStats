@@ -65,7 +65,8 @@ struct SettingsTabView: View {
                                      shouldCombineCT2WithLoadsPower: $viewModel.shouldCombineCT2WithLoadsPower,
                                      showInverterConsumption: $viewModel.showInverterConsumption,
                                      allowNegativeLoad: $viewModel.allowNegativeLoad,
-                                     showOutputEnergyOnStats: $viewModel.showOutputEnergyOnStats)
+                                     showOutputEnergyOnStats: $viewModel.showOutputEnergyOnStats,
+                                     generation: $viewModel.inverterGeneration)
             } label: {
                 Text("Inverter")
             }
