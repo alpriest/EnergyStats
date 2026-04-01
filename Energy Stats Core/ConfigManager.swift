@@ -764,7 +764,7 @@ public class ConfigManager: ConfigManaging {
         get { config.readOnlyCode }
         set { config.readOnlyCode = newValue }
     }
-    
+
     public var inverterGeneration: InverterGeneration {
         get { config.inverterGeneration }
         set { config.inverterGeneration = newValue }
@@ -773,14 +773,30 @@ public class ConfigManager: ConfigManaging {
 
 public enum BatteryResponseMapper {
     public static func map(batteryVariables: OpenQueryResponse, socResponse: BatterySOCResponse, modules: [DeviceBatteryResponse]?) -> Device.Battery? {
-        guard let residual = batteryVariables.datas.current(for: "ResidualEnergy")?.value else { return nil }
+        guard let residualData = batteryVariables.datas.current(for: "ResidualEnergy") else { return nil }
+        guard let residual = residualData.value else { return nil }
 
         let batteryCapacity: String
         let minSOC: String
-        let soc = batteryVariables.datas.SoC()
 
+        var unitWh = 10.0
+        if let unit = residualData.unit?.trimmingCharacters(in: .whitespacesAndNewlines) {
+            if unit.hasSuffix("kWh") {
+                let value = unit
+                    .replacingOccurrences(of: "kWh", with: "")
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                unitWh = (Double(value) ?? unitWh) * 1000.0
+            } else if unit.hasSuffix("Wh") {
+                let value = unit
+                    .replacingOccurrences(of: "Wh", with: "")
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                unitWh = Double(value) ?? unitWh
+            }
+        }
+
+        let soc = batteryVariables.datas.SoC()
         if soc > 0 {
-            batteryCapacity = String(Int((residual * 10.0) / (soc / 100.0)))
+            batteryCapacity = String(Int((residual * unitWh) / (soc / 100.0)))
         } else {
             batteryCapacity = "0"
         }
@@ -788,7 +804,11 @@ public enum BatteryResponseMapper {
 
         let modules = modules?.map { DeviceBatteryModule(batterySN: $0.batterySN, type: $0.type, version: $0.version) }
 
-        return Device.Battery(capacity: batteryCapacity, minSOC: minSOC, modules: modules)
+        return Device.Battery(
+            capacity: batteryCapacity,
+            minSOC: minSOC,
+            modules: modules
+        )
     }
 }
 
