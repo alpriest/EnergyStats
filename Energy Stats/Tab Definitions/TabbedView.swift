@@ -38,7 +38,7 @@ struct TabbedView: View {
                 PowerFlowTabItem()
             }
 
-            StatsTabView(configManager: configManager, networking: networking, solarForecastProvider: solarForecastProvider)
+            StatsTabView(configManager: configManager, networking: networking)
                 .tabItem {
                     StatsTabItem()
                 }

@@ -53,8 +53,7 @@ struct LeftTabbedView: View {
                     NavigationLink {
                         StatsTabView(
                             configManager: configManager,
-                            networking: networking,
-                            solarForecastProvider: solarForecastProvider
+                            networking: networking
                         )
                     } label: {
                         StatsTabItem()

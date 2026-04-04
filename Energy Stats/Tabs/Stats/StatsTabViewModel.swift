@@ -66,15 +66,13 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
     var visible = false
     var lastLoadState: LastLoadState<StatsGraphDisplayMode>?
     private var loadTask: Task<Void, Never>?
-    private let solarForecastProvider: SolarForecastProviding
 
-    init(networking: Networking, configManager: ConfigManaging, solarForecastProvider: @escaping SolarForecastProviding) {
+    init(networking: Networking, configManager: ConfigManaging) {
         self.networking = networking
         self.configManager = configManager
         self.approximationsCalculator = ApproximationsCalculator(configManager: configManager, networking: networking)
         self.fetcher = StatsDataFetcher(networking: networking, approximationsCalculator: approximationsCalculator)
         self.statsTimeUsageGraphStyle = configManager.statsTimeUsageGraphStyle
-        self.solarForecastProvider = solarForecastProvider
 
         haptic.prepare()
 
