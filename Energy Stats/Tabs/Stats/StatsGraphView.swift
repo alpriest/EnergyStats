@@ -236,7 +236,8 @@ struct StatsGraphView: View {
         Text(verbatim: "Day by hours")
         let viewModel = StatsTabViewModel(
             networking: NetworkService.preview(),
-            configManager: ConfigManager.preview()
+            configManager: ConfigManager.preview(),
+            solarForecastProvider: { DemoSolcast() }
         )
 
         StatsGraphView(

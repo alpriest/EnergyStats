@@ -100,7 +100,8 @@ struct StatsGraphVariableToggles_Previews: PreviewProvider {
         StatsGraphVariableToggles(
             viewModel: StatsTabViewModel(
                 networking: NetworkService.preview(),
-                configManager: ConfigManager.preview()
+                configManager: ConfigManager.preview(),
+                solarForecastProvider: { DemoSolcast() }
             ),
             selectedDate: .constant(nil),
             valuesAtTime: .constant(nil),

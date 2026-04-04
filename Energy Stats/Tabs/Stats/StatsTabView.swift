@@ -17,8 +17,8 @@ struct StatsTabView: View {
     private var appSettingsPublisher: LatestAppSettingsPublisher
     @AppStorage("showingEnergyBreakdownGraph") private var showingEnergyBreakdownGraph = true
 
-    init(configManager: ConfigManaging, networking: Networking) {
-        _viewModel = .init(wrappedValue: StatsTabViewModel(networking: networking, configManager: configManager))
+    init(configManager: ConfigManaging, networking: Networking, solarForecastProvider: @escaping SolarForecastProviding) {
+        _viewModel = .init(wrappedValue: StatsTabViewModel(networking: networking, configManager: configManager, solarForecastProvider: solarForecastProvider))
         self.appSettingsPublisher = configManager.appSettingsPublisher
         self.appSettings = configManager.currentAppSettings
     }
@@ -114,7 +114,8 @@ struct StatsTabView: View {
 #Preview {
     StatsTabView(
         configManager: ConfigManager.preview(),
-        networking: NetworkService.preview()
+        networking: NetworkService.preview(),
+        solarForecastProvider: { DemoSolcast() }
     )
 }
 #endif
