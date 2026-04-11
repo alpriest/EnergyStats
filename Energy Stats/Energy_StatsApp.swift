@@ -130,7 +130,10 @@ struct Energy_StatsApp: App {
     }
     
     private func fetchDeviceCapacity() {
-        guard configManager.currentDevice.value?.capacity == nil else { return }
+        guard
+            configManager.currentDevice.value?.capacity == nil,
+            userManager.isLoggedIn == true
+        else { return }
         
         Task {
             do {

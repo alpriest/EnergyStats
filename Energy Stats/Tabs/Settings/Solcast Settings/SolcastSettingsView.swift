@@ -10,6 +10,7 @@ import SwiftUI
 
 struct SolcastSettingsView: View {
     @StateObject var viewModel: SolcastSettingsViewModel
+    @FocusState private var isFocused: Bool
 
     init(configManager: ConfigManaging, solarService: @escaping SolarForecastProviding) {
         _viewModel = .init(wrappedValue: SolcastSettingsViewModel(configManager: configManager, solarService: solarService))
@@ -21,6 +22,7 @@ struct SolcastSettingsView: View {
                 Section {
                     Text("Solcast_description")
                     SecureField("API Key", text: $viewModel.viewData.apiKey)
+                        .focused($isFocused)
                 }
 
                 Section {
@@ -49,6 +51,7 @@ struct SolcastSettingsView: View {
 
             BottomButtonsView(dirty: viewModel.isDirty) {
                 viewModel.save()
+                isFocused = false
             }
         }
         .navigationTitle(.solarPrediction)
