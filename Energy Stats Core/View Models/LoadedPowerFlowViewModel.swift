@@ -27,26 +27,27 @@ public enum DeviceState: Int {
 }
 
 public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
-    @Published public var solar: Double = 0
-    @Published public var displayStrings: [StringPower] = []
-    @Published public var home: Double = 0
-    @Published public var grid: Double = 0
-    @Published public var todaysGeneration: GenerationViewModel?
-    @Published public var earnings: EnergyStatsFinancialModel?
-    @Published public var inverterTemperatures: InverterTemperatures?
-    @Published public var homeTotal: Double?
-    @Published public var gridImportTotal: Double?
-    @Published public var gridExportTotal: Double?
+    @Published public private(set) var solar: Double = 0
+    @Published public private(set) var displayStrings: [StringPower] = []
+    @Published public private(set) var home: Double = 0
+    @Published public private(set) var grid: Double = 0
+    @Published public private(set) var todaysGeneration: GenerationViewModel?
+    @Published public private(set) var earnings: EnergyStatsFinancialModel?
+    @Published public private(set) var inverterTemperatures: InverterTemperatures?
+    @Published public private(set) var homeTotal: Double?
+    @Published public private(set) var gridImportTotal: Double?
+    @Published public private(set) var gridExportTotal: Double?
     private let batteryViewModel: BatteryViewModel
-    @Published public var ct2: Double = 0
-    @Published public var deviceState: DeviceState = .unknown
-    @Published public var faults: [String] = []
-    @Published public var showCT2: Bool = false
+    @Published public private(set) var ct2: Double = 0
+    @Published public private(set) var deviceState: DeviceState = .unknown
+    @Published public private(set) var faults: [String] = []
+    @Published public private(set) var showCT2: Bool = false
     private let currentDevice: Device
     private let network: Networking
     private let configManager: ConfigManaging
     @Published private var solarStrings: [StringPower] = []
     private var cancellables = Set<AnyCancellable>()
+    @Published public private(set) var todayPercentageSolarForecastAchieved: Double?
 
     public init(currentValuesPublisher: AnyPublisher<CurrentValues, Never>,
                 battery: BatteryViewModel,
@@ -55,7 +56,8 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
                 configManager: ConfigManaging,
                 totals: TotalsViewModel?,
                 financialModel: EnergyStatsFinancialModel?,
-                generation: GenerationViewModel?)
+                generation: GenerationViewModel?,
+                todaySolarForecast: Double?)
     {
         self.batteryViewModel = battery
         self.currentDevice = currentDevice
@@ -76,13 +78,17 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
                 self?.updateDisplayStrings(appSettings)
             }
             .store(in: &self.cancellables)
-        
+
         // Update totals
         self.earnings = financialModel
         self.homeTotal = totals?.home
         self.gridImportTotal = totals?.gridImport
         self.gridExportTotal = totals?.gridExport
         self.todaysGeneration = generation
+        
+        if let todaySolarForecast, let generation, todaySolarForecast > 0 {
+            self.todayPercentageSolarForecastAchieved = (generation.todayGeneration / todaySolarForecast) * 100.0
+        }
 
         Task {
             try await self.loadDeviceStatus()
@@ -192,7 +198,7 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
     public var batteryError: Error? {
         self.batteryViewModel.error
     }
-    
+
     public var maxChargeCurrent: Double {
         self.batteryViewModel.maxChargeCurrent
     }
@@ -216,7 +222,8 @@ public extension LoadedPowerFlowViewModel {
             configManager: ConfigManager.preview(),
             totals: nil,
             financialModel: nil,
-            generation: nil
+            generation: nil,
+            todaySolarForecast: nil
         )
     }
 
@@ -237,7 +244,8 @@ public extension LoadedPowerFlowViewModel {
             configManager: ConfigManager.preview(appSettings: appSettings),
             totals: nil,
             financialModel: nil,
-            generation: nil
+            generation: nil,
+            todaySolarForecast: nil
         )
     }
 }

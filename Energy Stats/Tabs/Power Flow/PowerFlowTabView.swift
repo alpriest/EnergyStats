@@ -21,9 +21,10 @@ struct PowerFlowTabView: View {
         configManager: ConfigManaging,
         networking: Networking,
         userManager: UserManager,
-        templateStore: TemplateStoring
+        templateStore: TemplateStoring,
+        solarForecastProvider: @escaping SolarForecastProviding
     ) {
-        _viewModel = .init(wrappedValue: PowerFlowTabViewModel(networking, configManager: configManager, userManager: userManager))
+        _viewModel = .init(wrappedValue: PowerFlowTabViewModel(networking, configManager: configManager, userManager: userManager, solarForecastProvider: solarForecastProvider))
         self.appSettingsPublisher = configManager.appSettingsPublisher
         self.appSettings = configManager.currentAppSettings
         self.templateStore = templateStore
@@ -128,6 +129,7 @@ struct PowerFlowTabView: View {
     PowerFlowTabView(configManager: ConfigManager.preview(),
                      networking: NetworkService.preview(),
                      userManager: UserManager.preview(),
-                     templateStore: TemplateStore.preview())
+                     templateStore: TemplateStore.preview(),
+                     solarForecastProvider: { DemoSolcast() })
 }
 #endif

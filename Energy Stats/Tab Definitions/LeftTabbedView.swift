@@ -44,7 +44,8 @@ struct LeftTabbedView: View {
                             configManager: configManager,
                             networking: networking,
                             userManager: userManager,
-                            templateStore: templateStore
+                            templateStore: templateStore,
+                            solarForecastProvider: solarForecastProvider
                         )
                     } label: {
                         PowerFlowTabItem()
@@ -83,7 +84,8 @@ struct LeftTabbedView: View {
                     configManager: configManager,
                     networking: networking,
                     userManager: userManager,
-                    templateStore: templateStore
+                    templateStore: templateStore,
+                    solarForecastProvider: solarForecastProvider
                 )
             }
         )

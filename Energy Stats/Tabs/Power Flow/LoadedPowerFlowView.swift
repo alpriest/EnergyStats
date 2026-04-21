@@ -46,6 +46,10 @@ struct LoadedPowerFlowView: View {
 
                             EnergyText(amount: viewModel.todaysGeneration?.todayGeneration ?? 0, appSettings: appSettings, type: .totalYield, decimalPlaceOverride: 1)
                                 .redactedShimmer(when: viewModel.todaysGeneration == nil)
+                            
+                            if let todayPercentageSolarForecastAchieved = viewModel.todayPercentageSolarForecastAchieved {
+                                Text(", \(todayPercentageSolarForecastAchieved, format: .number.precision(.fractionLength(0)))% of forecast")
+                            }
                         }
                     }
 

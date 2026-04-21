@@ -8,8 +8,8 @@
 import Combine
 import Energy_Stats_Core
 import Foundation
-import UIKit
 import os
+import UIKit
 
 struct UpdateState {
     let text: String
@@ -43,6 +43,7 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
     private var currentStatusCalculator: CurrentStatusCalculator?
     private var loadLock = OSAllocatedUnfairLock()
     @Published public var earnings: EnergyStatsFinancialModel?
+    private let solarForecastProvider: SolarForecastProviding
 
     enum State: Equatable {
         case unloaded
@@ -61,7 +62,7 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
                 return false
             }
         }
-        
+
         var isLoaded: Bool {
             if case .loaded = self {
                 return true
@@ -71,11 +72,12 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
         }
     }
 
-    init(_ network: Networking, configManager: ConfigManaging, userManager: UserManager) {
+    init(_ network: Networking, configManager: ConfigManaging, userManager: UserManager, solarForecastProvider: @escaping SolarForecastProviding) {
         self.network = network
         self.configManager = configManager
         self.userManager = userManager
         self.appSettings = configManager.currentAppSettings
+        self.solarForecastProvider = solarForecastProvider
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.willResignActiveNotification), name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
@@ -112,7 +114,7 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
     func timerFired() async {
         self.timer.stop()
         await self.loadData()
-        if state.isLoaded {
+        if self.state.isLoaded {
             await self.startTimer()
         }
     }
@@ -151,7 +153,7 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
 
     @MainActor
     func loadData() async {
-        loadLock.withLock {
+        self.loadLock.withLock {
             guard self.isLoading == false else { return }
             self.isLoading = true
         }
@@ -192,7 +194,8 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
             }
 
             let (totals, financialModel, generation) = try await self.loadTotals(for: currentDevice)
-            
+            let todaySolarForecast = try await loadSolcastTotalForToday()
+
             let summary = LoadedPowerFlowViewModel(
                 currentValuesPublisher: currentStatusCalculator.currentValuesPublisher,
                 battery: battery,
@@ -201,7 +204,8 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
                 configManager: self.configManager,
                 totals: totals,
                 financialModel: financialModel,
-                generation: generation
+                generation: generation,
+                todaySolarForecast: todaySolarForecast
             )
 
             if Task.isCancelled { return }
@@ -214,6 +218,24 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
             await self.stopTimer()
             self.state = .failed(error, error.localizedDescription)
         }
+    }
+
+    private func loadSolcastTotalForToday() async throws -> Double? {
+        let settings = self.configManager.solcastSettings
+        guard let apiKey = settings.apiKey,
+              settings.sites.any else { return nil }
+        let service = self.solarForecastProvider()
+        let now = Date()
+        let today = Calendar.current.startOfDay(for: now)
+
+        let siteTotals = try await settings.sites.asyncMap { site in
+            let data = try await service.fetchForecast(for: site, apiKey: apiKey, ignoreCache: false)
+            return data.forecasts.filter { $0.periodEnd.isSame(as: today) }
+                .filter { $0.periodEnd < now }
+                .map { $0.pvEstimate }
+        }
+
+        return siteTotals.reduce(0) { $0 + $1.reduce(0, +) }
     }
 
     private func loadTotals(for device: Device) async throws -> (TotalsViewModel?, EnergyStatsFinancialModel?, GenerationViewModel?) {
@@ -321,7 +343,7 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
 
     func sleep() async {
         do {
-            try await Task.sleep(nanoseconds: 1000000000)
+            try await Task.sleep(nanoseconds: 1_000_000_000)
         } catch {}
     }
 }
