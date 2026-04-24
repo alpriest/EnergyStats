@@ -88,6 +88,7 @@ public protocol ConfigManaging: FinancialConfigManager, SolcastConfigManager, Ba
     var statsTimeUsageGraphStyle: StatsTimeUsageGraphStyle { get set }
     var scheduleProperties: [String: SchedulePropertyDefinition] { get set }
     var inverterGeneration: InverterGeneration { get set }
+    var showTodayPercentageSolarForecastAchieved: Bool { get set }
 }
 
 public enum DeviceCapability {

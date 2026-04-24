@@ -769,6 +769,11 @@ public class ConfigManager: ConfigManaging {
         get { config.inverterGeneration }
         set { config.inverterGeneration = newValue }
     }
+    
+    public var showTodayPercentageSolarForecastAchieved: Bool {
+        get { config.showTodayPercentageSolarForecastAchieved }
+        set { config.showTodayPercentageSolarForecastAchieved = newValue }
+    }
 }
 
 public enum BatteryResponseMapper {

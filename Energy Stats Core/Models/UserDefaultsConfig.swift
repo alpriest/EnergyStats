@@ -72,6 +72,7 @@ public class UserDefaultsConfig: StoredConfig {
         UserDefaults.shared.removeObject(forKey: "showOutputEnergyOnStats")
         UserDefaults.shared.removeObject(forKey: "isReadOnly")
         UserDefaults.shared.removeObject(forKey: "readOnlyCode")
+        UserDefaults.shared.removeObject(forKey: "showTodayPercentageSolarForecastAchieved")
         UserDefaults.shared.synchronize()
     }
     
@@ -400,4 +401,7 @@ public class UserDefaultsConfig: StoredConfig {
             UserDefaults.shared.set(newValue.rawValue, forKey: "inverterGeneration")
         }
     }
+    
+    @UserDefaultsStoredBool(key: "showTodayPercentageSolarForecastAchieved", defaultValue: true)
+    public var showTodayPercentageSolarForecastAchieved: Bool
 }

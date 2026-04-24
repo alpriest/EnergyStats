@@ -55,6 +55,7 @@ class ContentViewModel {
             .store(in: &cancellables)
     }
 
+    @MainActor
     func loadData() async {
         guard let deviceSN else {
             loadState = .error(nil, "No device/API key found. Open Energy Stats on your phone to sync. (reason: 2)")
@@ -66,12 +67,6 @@ class ContentViewModel {
         }
         guard state.lastRefreshSeconds > FOUR_MINUTES_IN_SECONDS else {
             return
-        }
-
-        defer {
-            Task { @MainActor in
-                loadState = .inactive
-            }
         }
 
         do {
@@ -117,7 +112,7 @@ class ContentViewModel {
                 )
             }
 
-            try? await HomeEnergyStateManager.shared.calculateBatteryState(
+            try? HomeEnergyStateManager.shared.calculateBatteryState(
                 openQueryResponse: reals,
                 batteryCapacityW: config.batteryCapacityW,
                 minSOC: config.minSOC,
@@ -125,6 +120,8 @@ class ContentViewModel {
             )
 
             WidgetCenter.shared.reloadAllTimelines()
+
+            loadState = .inactive
         } catch {
             loadState = .error(error, "Could not load")
         }

@@ -38,6 +38,11 @@ class SolcastSettingsViewModel: ObservableObject, ViewDataProviding {
             configManager.fetchSolcastOnAppLaunch = fetchSolcastOnAppLaunch
         }
     }
+    @Published var showTodayPercentageSolarForecastAchieved: Bool = false {
+        didSet {
+            configManager.showTodayPercentageSolarForecastAchieved = showTodayPercentageSolarForecastAchieved
+        }
+    }
 
     @Published var viewData: ViewData = .init(sites: [], apiKey: "") { didSet {
         isDirty = viewData != originalValue
@@ -56,6 +61,7 @@ class SolcastSettingsViewModel: ObservableObject, ViewDataProviding {
         Task { @MainActor in
             self.viewData = viewData
             fetchSolcastOnAppLaunch = configManager.fetchSolcastOnAppLaunch
+            showTodayPercentageSolarForecastAchieved = configManager.showTodayPercentageSolarForecastAchieved
         }
     }
 

@@ -36,6 +36,12 @@ struct SolcastSettingsView: View {
                         Text("Your Solcast predictions are fetched when you visit the Summary tab (at most once every 8 hours). Note that Solcast only provides future data.")
                     }
                 }
+                
+                Section {
+                    Toggle(isOn: $viewModel.showTodayPercentageSolarForecastAchieved) {
+                        Text("Show percentage of solar forecast achieved")
+                    }
+                }
 
                 ForEach(viewModel.viewData.sites, id: \.resourceId) { site in
                     Section {
