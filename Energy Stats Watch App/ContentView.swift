@@ -35,9 +35,19 @@ struct ContentView: View {
                 tabs
             case .active:
                 ProgressView()
-            case .error(_, let message):
-                Text(message)
-                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
+            case let .error(error, message):
+                VStack {
+                    Text(message)
+                        .multilineTextAlignment(.center)
+                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
+                    
+                    OptionalView(error) {
+                        Text($0.localizedDescription)
+                            .font(.caption2)
+                            .multilineTextAlignment(.center)
+                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
+                    }
+                }.frame(minHeight: 0, maxHeight: .infinity)
             }
         }
         .background(Color.white.opacity(0.05))
