@@ -19,13 +19,11 @@ protocol WatchConfigManaging: CurrentStatusCalculatorConfig, BatteryConfigManage
 
 class WatchConfigManager: WatchConfigManaging {
     var appSettingsPublisher: AnyPublisher<AppSettings, Never> = Just(.mock()).eraseToAnyPublisher()
-    private let keychainStore: KeychainStoring
 
     private let _isLoggedInSubject = CurrentValueSubject<Bool, Never>(false)
     var isLoggedInPublisher: AnyPublisher<Bool, Never> { _isLoggedInSubject.eraseToAnyPublisher() }
 
-    init(keychainStore: KeychainStoring) {
-        self.keychainStore = keychainStore
+    init() {
         _isLoggedInSubject.send(isLoggedIn)
     }
 
@@ -84,7 +82,7 @@ class WatchConfigManager: WatchConfigManaging {
 
     @UserDefaultsStoredBool(key: "allowNegativeLoad", defaultValue: false)
     var allowNegativeLoad: Bool
-    
+
     func applyUpdatesThenNotify(_ apply: (WatchConfigManager) -> Void) {
         apply(self)
         _isLoggedInSubject.send(isLoggedIn)
@@ -107,8 +105,8 @@ class PreviewWatchConfig: WatchConfigManaging {
     var shouldCombineCT2WithLoadsPower: Bool = false
     var allowNegativeLoad: Bool = false
 
-    var deviceSN: String? = "abc123"
-    var apiKey: String? = "api123"
+    var deviceSN: String? = "ABC1234567GB123"
+    var apiKey: String? = "00000000-0000-4000-8000-000000000000"
     var isLoggedIn: Bool = false
     var isLoggedInPublisher: AnyPublisher<Bool, Never> { Just(isLoggedIn).eraseToAnyPublisher() }
 }

@@ -77,7 +77,7 @@ public class SolcastCache: SolcastCaching {
         }
 
         let previous = previous?.forecasts ?? []
-        let earliestDateToRetain = Calendar.current.date(byAdding: .day, value: -5, to: today()) ?? today() // Keep 5 days of history
+        let earliestDateToRetain = Calendar.current.date(byAdding: .day, value: -7, to: today()) ?? today() // Keep 7 days of history
         let earliestDateToRetainStart = Calendar.current.startOfDay(for: earliestDateToRetain)
 
         var merged = previous.map { p in

@@ -143,28 +143,6 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
         return currentFaults.split(separator: ",").map { String($0) }
     }
 
-//    private func loadTotals() async throws {
-//        guard self.configManager.showHomeTotalOnPowerFlow ||
-//            self.configManager.showGridTotalsOnPowerFlow ||
-//            self.configManager.showFinancialEarnings ||
-//            self.configManager.showTotalYieldOnPowerFlow else { return }
-//
-//        let generation = try await self.loadGeneration()
-//        let totals = try TotalsViewModel(reports: await self.loadReportData(self.currentDevice), generationViewModel: generation)
-//
-//        if Task.isCancelled { return }
-//
-//        await MainActor.run {
-//            self.earnings = EnergyStatsFinancialModel(totalsViewModel: totals, config: self.configManager)
-//            self.homeTotal = totals.home
-//            self.gridImportTotal = totals.gridImport
-//            self.gridExportTotal = totals.gridExport
-//            generation?.updatePvTotal(totals.solar)
-//            self.todaysGeneration = generation
-//        }
-//    }
-//
-
     public static func ==(lhs: LoadedPowerFlowViewModel, rhs: LoadedPowerFlowViewModel) -> Bool {
         lhs.solar == rhs.solar &&
             lhs.home == rhs.home &&

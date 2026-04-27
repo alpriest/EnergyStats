@@ -232,10 +232,10 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
             let data = try await service.fetchForecast(for: site, apiKey: apiKey, ignoreCache: false)
             return data.forecasts.filter { $0.periodEnd.isSame(as: today) }
                 .filter { $0.periodEnd < now }
-                .map { $0.pvEstimate }
+                .total()
         }
 
-        return siteTotals.reduce(0) { $0 + $1.reduce(0, +) }
+        return siteTotals.reduce(0) { $0 + $1 }
     }
 
     private func loadTotals(for device: Device) async throws -> (TotalsViewModel?, EnergyStatsFinancialModel?, GenerationViewModel?) {

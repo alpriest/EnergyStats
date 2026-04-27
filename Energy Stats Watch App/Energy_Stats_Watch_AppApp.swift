@@ -13,32 +13,25 @@ import WatchConnectivity
 struct Energy_Stats_Watch_App: App {
     let delegate = WatchToPhoneSessionDelegate()
     let configManager: WatchConfigManager
+    let keychainStore: KeychainStoring
+    let network: Networking
     @Environment(\.scenePhase) private var scenePhase
 
-    var keychainStore: KeychainStoring = {
-        if ProcessInfo().arguments.contains("mockDevice") {
-            StubKeychainStore()
-        } else {
-            KeychainStore()
-        }
-    }()
-
-    var network: Networking = {
-        if ProcessInfo().arguments.contains("mockDevice") {
-            NetworkService.preview()
-        } else {
-            NetworkService.standard(keychainStore: KeychainStore(),
-                                    urlSession: URLSession.shared,
-                                    isDemoUser: { false },
-                                    dataCeiling: { .none })
-        }
-    }()
-    
     init() {
+        let isMockDevice = ProcessInfo().arguments.contains("mockDevice")
+        let keychainStore: KeychainStoring = isMockDevice ? StubKeychainStore() : KeychainStore()
+
+        self.keychainStore = keychainStore
+        self.network = isMockDevice
+            ? NetworkService.preview()
+            : NetworkService.standard(keychainStore: keychainStore,
+                                      urlSession: URLSession.shared,
+                                      isDemoUser: { false },
+                                      dataCeiling: { .none })
+        self.configManager = WatchConfigManager()
+
         WCSession.default.delegate = delegate
         delegate.activateIfNeeded()
-
-        configManager = WatchConfigManager(keychainStore: keychainStore)
         delegate.config = configManager
     }
 

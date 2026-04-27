@@ -201,26 +201,3 @@ func isRunningTests() -> Bool {
 func isRunningScreenshots() -> Bool {
     CommandLine.arguments.contains("screenshots")
 }
-
-struct WatchKeychainSynchroniser {
-    private var keychainLock = OSAllocatedUnfairLock()
-    private let keychainStore: KeychainStoring
-    private let configManager: ConfigManaging
-
-    init(keychainStore: KeychainStoring, configManager: ConfigManaging) {
-        self.keychainStore = keychainStore
-        self.configManager = configManager
-    }
-
-    func updateKeychainSettingsForWatch() {
-        keychainLock.withLock {
-            try? keychainStore.store(key: .deviceSN, value: configManager.selectedDeviceSN)
-            try? keychainStore.store(key: .showGridTotalsOnPowerFlow, value: configManager.showGridTotalsOnPowerFlow)
-            try? keychainStore.store(key: .batteryCapacity, value: configManager.batteryCapacity)
-            try? keychainStore.store(key: .shouldInvertCT2, value: configManager.shouldInvertCT2)
-            try? keychainStore.store(key: .minSOC, value: configManager.minSOC)
-            try? keychainStore.store(key: .shouldCombineCT2WithPVPower, value: configManager.shouldCombineCT2WithPVPower)
-            try? keychainStore.store(key: .showUsableBatteryOnly, value: configManager.showUsableBatteryOnly)
-        }
-    }
-}

@@ -22,10 +22,12 @@ struct ContentView: View {
     @State private var viewModel: ContentViewModel
     let solarDefinitions: SolarRangeDefinitions
     @AppStorage("watchSelectedTabIndex") private var selectedTabIndex = Tab.grid
+    private let config: WatchConfigManaging
 
     init(network: Networking, config: WatchConfigManaging) {
         self._viewModel = State(initialValue: ContentViewModel(network: network, config: config))
         self.solarDefinitions = config.solarDefinitions
+        self.config = config
     }
 
     var body: some View {
@@ -36,18 +38,24 @@ struct ContentView: View {
             case .active:
                 ProgressView()
             case let .error(error, message):
-                VStack {
-                    Text(message)
-                        .multilineTextAlignment(.center)
-                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
-                    
-                    OptionalView(error) {
-                        Text($0.localizedDescription)
-                            .font(.caption2)
-                            .multilineTextAlignment(.center)
-                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
-                    }
-                }.frame(minHeight: 0, maxHeight: .infinity)
+                NavigationStack {
+                    NavigationLink {
+                        WatchDebugDataView(configManager: config)
+                    } label: {
+                        VStack {
+                            Text(message)
+                                .multilineTextAlignment(.center)
+                                .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
+
+                            OptionalView(error) {
+                                Text($0.localizedDescription)
+                                    .font(.caption2)
+                                    .multilineTextAlignment(.center)
+                                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
+                            }
+                        }.frame(minHeight: 0, maxHeight: .infinity)
+                    }.buttonStyle(.plain)
+                }
             }
         }
         .background(Color.white.opacity(0.05))
@@ -56,7 +64,7 @@ struct ContentView: View {
             Task { await viewModel.loadData() }
         }
     }
-    
+
     private var tabs: some View {
         TabView(selection: $selectedTabIndex) {
             allItems
