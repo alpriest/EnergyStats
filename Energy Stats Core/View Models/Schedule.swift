@@ -246,7 +246,25 @@ public struct SchedulePhaseV3: Identifiable, Hashable, Equatable, Codable {
         self.start == other.start &&
             self.end == other.end &&
             self.mode == other.mode &&
-            self.extraParam == other.extraParam
+            self.extraParamsEqual(self.extraParam, other.extraParam)
+    }
+
+    private func extraParamsEqual(_ lhs: [String: Double]?, _ rhs: [String: Double]?) -> Bool {
+        switch (lhs, rhs) {
+        case (nil, nil):
+            return true
+        case let (l?, r?):
+            guard l.count == r.count else { return false }
+            for (key, value) in l {
+                guard let otherValue = r[key] else { return false }
+                if abs(value - otherValue) > 0.0001 {
+                    return false
+                }
+            }
+            return true
+        default:
+            return false
+        }
     }
 }
 

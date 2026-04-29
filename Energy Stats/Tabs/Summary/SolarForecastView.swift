@@ -17,9 +17,6 @@ struct SolarForecastView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Solar Forecasts")
-                .font(.largeTitle)
-
             if viewModel.hasSites {
                 loadedView()
             } else {
@@ -38,7 +35,44 @@ struct SolarForecastView: View {
 
     private func loadedView() -> some View {
         VStack(spacing: 8) {
-            VStack(alignment: .leading, spacing: 22) {
+            VStack(alignment: .leading, spacing: 16) {
+                if let data = viewModel.solarForecastAchievedData {
+                    Text("Solar vs forecast")
+                        .font(.largeTitle)
+                    
+                    VStack(alignment: .leading) {
+                        ESLabeledText("Actual generation", value: data.totalSolarAchieved.kWh(0))
+                        ESLabeledText("Forecast total", value: data.totalSolarForecast.kWh(0))
+                        
+                        ESLabeledContent("Forecast completeness") {
+                            HStack {
+                                Rectangle()
+                                    .strokeBorder(lineWidth: 1)
+                                    .frame(width: 100, height: 14)
+                                    .overlay(
+                                        HStack {
+                                            Rectangle()
+                                                .foregroundStyle(Color.blue)
+                                                .frame(width: data.forecastCompleteness * 100.0)
+                                                .padding(2)
+                                            Spacer()
+                                        }.frame(width: 100)
+                                    )
+                                
+                                Text(data.forecastCompleteness.percent(maximumFractionDigits: 0))
+                            }
+                        }
+                        
+                        Text("Showing last 7 days. \(data.forecastCompleteness.percent(maximumFractionDigits: 0)) of required Solcast data is available. \(data.percentageSolarForecastAchieved.percent(maximumFractionDigits: 0)) of forecast generated.")
+                            .font(.caption)
+                            .foregroundStyle(Color.textDimmed)
+                            .padding(.top)
+                    }
+                }
+                
+                Text("Solar Forecasts")
+                    .font(.largeTitle)
+
                 ForEach(viewModel.data) { site in
                     ForecastView(
                         data: site.today,
@@ -127,7 +161,8 @@ struct SolarForecastView: View {
         appSettings: AppSettings.mock(),
         viewModel: SolarForecastViewModel(
             configManager: ConfigManager.preview(),
-            solarForecastProvider: { PreviewSolcast() }
+            solarForecastProvider: { PreviewSolcast() },
+            networking: NetworkService.preview()
         )
     )
 }

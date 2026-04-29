@@ -30,7 +30,7 @@ public class HomeEnergyStateManager {
 
     init() {
         do {
-            network = NetworkService.standard(keychainStore: keychainStore,
+            network = NetworkService.standard(apiTokenProvider: { [keychainStore] in try? keychainStore.getToken() },
                                               urlSession: URLSession.shared,
                                               isDemoUser: { false },
                                               dataCeiling: { .none })

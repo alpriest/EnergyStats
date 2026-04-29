@@ -10,9 +10,9 @@ import Energy_Stats_Core
 
 enum ServiceFactory {
     static func makeAppIntentInitialisedServices() throws -> AppIntentInitialisedServices {
-        let store = KeychainStore()
+        let keychainStore = KeychainStore()
         let config = UserDefaultsConfig()
-        let network = NetworkService.standard(keychainStore: store,
+        let network = NetworkService.standard(apiTokenProvider: { [keychainStore] in try? keychainStore.getToken() },
                                               urlSession: URLSession.shared,
                                               isDemoUser: { false },
                                               dataCeiling: { .none })
@@ -21,7 +21,7 @@ enum ServiceFactory {
             networking: network,
             config: config,
             appSettingsStore: appSettingsStore,
-            keychainStore: store
+            keychainStore: keychainStore
         )
         AppSettingsStoreFactory.update(from: configManager)
 
@@ -30,7 +30,7 @@ enum ServiceFactory {
         }
 
         return AppIntentInitialisedServices(
-            store: store,
+            store: keychainStore,
             configManager: configManager,
             network: network,
             device: device

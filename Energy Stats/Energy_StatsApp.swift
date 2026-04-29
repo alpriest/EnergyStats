@@ -62,7 +62,7 @@ struct Energy_StatsApp: App {
         // Pulse
         UserSettings.shared.allowedShareStoreOutputs = [.har]
 
-        network = NetworkService.standard(keychainStore: keychainStore,
+        network = NetworkService.standard(apiTokenProvider: { [keychainStore] in try? keychainStore.getToken() },
                                           urlSession: urlSession,
                                           tracer: FirebaseNetworkTracer(),
                                           isDemoUser: { config.isDemoUser },
@@ -166,6 +166,9 @@ struct Energy_StatsApp: App {
 
         Task {
             guard let deviceSN = configManager.selectedDeviceSN else { return }
+            let isEnabled = try await network.fetchSchedulerFlag(deviceSN: deviceSN)
+            guard isEnabled.enable else { return }
+
             let scheduleResponse = try await network.fetchCurrentSchedule(deviceSN: deviceSN)
             let schedule = Schedule(scheduleResponse: scheduleResponse)
 

@@ -11,19 +11,17 @@ class NetworkDemoSwitchingFacade: FoxAPIServicing {
     private let api: FoxAPIServicing
     private let demoAPI: FoxAPIServicing
     private let isDemoUserProvider: () -> Bool
-    private let store: KeychainStoring
     private let throttler = ThrottleManager()
     private let writeAPIkey = "writeable-method" // All inverter write methods must delay 2s between each call, so use a shared key
 
-    init(api: FoxAPIServicing, isDemoUser provider: @escaping () -> Bool, store: KeychainStoring) {
+    init(api: FoxAPIServicing, isDemoUser provider: @escaping () -> Bool) {
         self.api = api
         self.demoAPI = DemoAPI()
         self.isDemoUserProvider = provider
-        self.store = store
     }
 
     private var isDemoUser: Bool {
-        isDemoUserProvider() || store.isDemoUser
+        isDemoUserProvider()
     }
 
     func openapi_fetchSchedulerFlag(deviceSN: String) async throws -> GetSchedulerFlagResponse {

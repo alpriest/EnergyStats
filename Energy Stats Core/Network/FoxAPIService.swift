@@ -7,18 +7,20 @@
 
 import Foundation
 
+public typealias APITokenProviding = () -> String?
+
 class FoxAPIService: FoxAPIServicing {
     private var token: String? {
-        try? credentials.getToken()
+        apiTokenProvider()
     }
 
-    private let credentials: KeychainStoring
     private var errorMessages: [String: String] = [:]
     private let urlSession: URLSessionProtocol
     private let tracer: NetworkTracing?
+    private let apiTokenProvider: APITokenProviding
 
-    public init(credentials: KeychainStoring, urlSession: URLSessionProtocol, tracer: NetworkTracing?) {
-        self.credentials = credentials
+    public init(apiTokenProvider: @escaping APITokenProviding, urlSession: URLSessionProtocol, tracer: NetworkTracing?) {
+        self.apiTokenProvider = apiTokenProvider
         self.urlSession = urlSession
         self.tracer = tracer
     }

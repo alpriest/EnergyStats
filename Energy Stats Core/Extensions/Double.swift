@@ -103,12 +103,12 @@ public extension Double {
         }
     }
     
-    func percent() -> String {
+    func percent(maximumFractionDigits: Int = 2) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .percent
         formatter.minimumIntegerDigits = 1
         formatter.maximumIntegerDigits = 3
-        formatter.maximumFractionDigits = 2
+        formatter.maximumFractionDigits = maximumFractionDigits
         return formatter.string(from: NSNumber(value: self))!
     }
     

@@ -59,18 +59,17 @@ public class NetworkService: Networking {
     let api: FoxAPIServicing
 
     public static func standard(
-        keychainStore: KeychainStoring,
+        apiTokenProvider: @escaping APITokenProviding,
         urlSession: URLSessionProtocol,
         tracer: NetworkTracing? = nil,
         isDemoUser: @escaping () -> Bool,
         dataCeiling: @escaping () -> DataCeiling
     ) -> Networking {
-        let service = FoxAPIService(credentials: keychainStore, urlSession: urlSession, tracer: tracer)
+        let service = FoxAPIService(apiTokenProvider: apiTokenProvider, urlSession: urlSession, tracer: tracer)
         let api = NetworkValueCleaner(
             api: NetworkDemoSwitchingFacade(
                 api: NetworkCache(api: service),
-                isDemoUser: isDemoUser,
-                store: keychainStore
+                isDemoUser: isDemoUser
             ),
             dataCeiling: dataCeiling
         )

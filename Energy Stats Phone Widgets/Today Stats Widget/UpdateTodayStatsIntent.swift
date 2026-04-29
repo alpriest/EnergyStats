@@ -22,7 +22,7 @@ struct UpdateStatsIntent: AppIntent {
             let config = UserDefaultsConfig()
             let keychainStore = KeychainStore()
             let appSettingsStore = AppSettingsStoreFactory.make()
-            let network = NetworkService.standard(keychainStore: keychainStore,
+            let network = NetworkService.standard(apiTokenProvider: { [keychainStore] in try? keychainStore.getToken() },
                                                   urlSession: URLSession.shared,
                                                   isDemoUser: {  false },
                                                   dataCeiling: { .none })

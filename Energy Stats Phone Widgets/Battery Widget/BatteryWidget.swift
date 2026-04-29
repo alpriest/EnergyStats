@@ -18,7 +18,7 @@ struct BatteryWidget: Widget {
     init() {
         let keychainStore = KeychainStore()
         let config = UserDefaultsConfig()
-        let network = NetworkService.standard(keychainStore: keychainStore,
+        let network = NetworkService.standard(apiTokenProvider: { [keychainStore] in try? keychainStore.getToken() },
                                               urlSession: URLSession.shared,
                                               isDemoUser: { false },
                                               dataCeiling: { .none })

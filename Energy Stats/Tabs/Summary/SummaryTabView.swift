@@ -20,7 +20,7 @@ struct SummaryTabView: View {
     init(configManager: ConfigManaging, networking: Networking, solarForecastProvider: @escaping SolarForecastProviding) {
         self.configManager = configManager
         _viewModel = .init(wrappedValue: SummaryTabViewModel(configManager: configManager, networking: networking))
-        _solarForecastViewModel = .init(wrappedValue: SolarForecastViewModel(configManager: configManager, solarForecastProvider: solarForecastProvider))
+        _solarForecastViewModel = .init(wrappedValue: SolarForecastViewModel(configManager: configManager, solarForecastProvider: solarForecastProvider, networking: networking))
         self.appSettingsPublisher = configManager.appSettingsPublisher
         self.appSettings = configManager.currentAppSettings
     }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WatchDebugDataView: View {
     let configManager: WatchConfigManaging
+    let deviceSN: String?
     
     var body: some View {
         ScrollView {
@@ -23,7 +24,7 @@ struct WatchDebugDataView: View {
                 
                 VStack {
                     Text("Device SN")
-                    Text(configManager.deviceSN ?? "none found")
+                    Text(deviceSN ?? "none found")
                 }
             }
         }
@@ -34,6 +35,7 @@ struct WatchDebugDataView: View {
 
 #Preview {
     WatchDebugDataView(
-        configManager: WatchConfigManager()
+        configManager: WatchConfigManager(),
+        deviceSN: "123"
     )
 }

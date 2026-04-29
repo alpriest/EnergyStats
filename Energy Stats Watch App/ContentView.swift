@@ -40,7 +40,7 @@ struct ContentView: View {
             case let .error(error, message):
                 NavigationStack {
                     NavigationLink {
-                        WatchDebugDataView(configManager: config)
+                        WatchDebugDataView(configManager: config, deviceSN: viewModel.deviceSN)
                     } label: {
                         VStack {
                             Text(message)

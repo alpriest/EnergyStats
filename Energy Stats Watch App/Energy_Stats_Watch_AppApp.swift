@@ -22,13 +22,13 @@ struct Energy_Stats_Watch_App: App {
         let keychainStore: KeychainStoring = isMockDevice ? StubKeychainStore() : KeychainStore()
 
         self.keychainStore = keychainStore
+        self.configManager = WatchConfigManager()
         self.network = isMockDevice
             ? NetworkService.preview()
-            : NetworkService.standard(keychainStore: keychainStore,
+            : NetworkService.standard(apiTokenProvider: { [configManager] in configManager.apiKey },
                                       urlSession: URLSession.shared,
                                       isDemoUser: { false },
                                       dataCeiling: { .none })
-        self.configManager = WatchConfigManager()
 
         WCSession.default.delegate = delegate
         delegate.activateIfNeeded()
