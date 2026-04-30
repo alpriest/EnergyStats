@@ -9,10 +9,10 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct ESLabeledContent<Content: View>: View {
-    let title: String
+    let title: LocalizedStringKey
     let content: () -> Content
 
-    init(_ title: String, @ViewBuilder content: @escaping () -> Content) {
+    init(_ title: LocalizedStringKey, @ViewBuilder content: @escaping () -> Content) {
         self.title = title
         self.content = content
     }

@@ -24,6 +24,11 @@ struct SolarForecastViewData: Identifiable {
     let resourceId: String
 }
 
+enum SolarForecastPeriod {
+    case yesterday
+    case lastWeek
+}
+
 struct PercentageSolarForecastAchievedData {
     let totalSolarForecast: Double
     let totalSolarAchieved: Double
@@ -45,6 +50,7 @@ class SolarForecastViewModel: ObservableObject, HasLoadState {
     @Published var tooManyRequests: Bool = false
     @Published var hasSites: Bool = false
     @Published var canRefresh = true
+    @Published var period: SolarForecastPeriod = .yesterday
     private var privateState: LoadState = .inactive {
         didSet {
             Task {
@@ -113,8 +119,8 @@ class SolarForecastViewModel: ObservableObject, HasLoadState {
                         resourceId: site.resourceId
                     )
                 }.filter { $0.today.count > 0 || $0.tomorrow.count > 0 }
-                
-                solarForecastAchievedData = try await calculateSolarForecastAchieved(forecasts: allForecasts)
+
+                solarForecastAchievedData = try await calculateSolarForecastAchieved(forecasts: allForecasts, siteCount: settings.solcastSettings.sites.count)
 
                 privateState = .inactive
             } catch NetworkError.tryLater {
@@ -147,41 +153,64 @@ class SolarForecastViewModel: ObservableObject, HasLoadState {
     func didBecomeActiveNotification() {
         load()
     }
-    
-    private func calculateSolarForecastAchieved(forecasts: [SolcastForecastResponse]) async throws -> PercentageSolarForecastAchievedData? {
-        let calendar = Calendar.current
-        let today = calendar.startOfDay(for: Date())
 
-        guard let firstDay = calendar.date(byAdding: .day, value: -6, to: today) else { return nil }
+    func togglePeriod() {
+        period = period == .lastWeek ? .yesterday : .lastWeek
+        load()
+    }
 
-        let totalSolarAchieved = try await calculateSolarGenerated(from: firstDay, to: today)
+    private func calculateSolarForecastAchieved(forecasts: [SolcastForecastResponse], siteCount: Int) async throws -> PercentageSolarForecastAchievedData? {
+        guard let (startDate, endDate) = dates() else { return nil }
 
-        let solarForecastTotalData = calculateSolarForecastTotal(from: firstDay, to: today, forecasts: forecasts)
+        let totalSolarAchieved = try await calculateSolarGenerated(from: startDate, to: endDate)
+
+        let solarForecastTotalData = calculateSolarForecastTotal(
+            from: startDate,
+            to: endDate,
+            forecasts: forecasts,
+            siteCount: siteCount
+        )
+
         let totalSolarForecast = solarForecastTotalData.total
         let percentageSolarForecastAchieved: Double = totalSolarForecast > 0 ? (totalSolarAchieved / totalSolarForecast) : 0
-
         let coverage = solarForecastTotalData.percentageTimePeriodsAvailable
 
-        let description: String
-        if coverage < 0.9 {
-            description = "Actual generation is higher than the available forecast"
-        } else {
-            if percentageSolarForecastAchieved > 120 {
-                description = "Higher than forecast"
-            } else if percentageSolarForecastAchieved < 80 {
-                description = "Lower than forecast"
-            } else {
-                description = "Close to forecast"
-            }
-        }
+        let description = String(
+            key: .solarVsForecastFooter,
+            bundle: .main,
+            arguments:
+            coverage.percent(maximumFractionDigits: 0),
+            percentageSolarForecastAchieved.percent(maximumFractionDigits: 0)
+        )
 
         return PercentageSolarForecastAchievedData(
             totalSolarForecast: totalSolarForecast,
             totalSolarAchieved: totalSolarAchieved,
             percentageSolarForecastAchieved: percentageSolarForecastAchieved,
             description: description,
-            forecastCompleteness: solarForecastTotalData.percentageTimePeriodsAvailable
+            forecastCompleteness: coverage
         )
+    }
+
+    private func dates() -> (Date, Date)? {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+        let startDate: Date
+        let endDate: Date
+
+        switch period {
+        case .yesterday:
+            guard let yesterday = calendar.date(byAdding: .day, value: -1, to: today) else { return nil }
+            startDate = yesterday
+            endDate = yesterday
+
+        case .lastWeek:
+            guard let firstDay = calendar.date(byAdding: .day, value: -6, to: today) else { return nil }
+            startDate = firstDay
+            endDate = today
+        }
+
+        return (startDate, endDate)
     }
 
     private func calculateSolarGenerated(from startDate: Date, to endDate: Date) async throws -> Double {
@@ -219,7 +248,7 @@ class SolarForecastViewModel: ObservableObject, HasLoadState {
         return totalSolarAchieved
     }
 
-    private func calculateSolarForecastTotal(from startDate: Date, to endDate: Date, forecasts: [SolcastForecastResponse]) -> SolarForecastTotalData {
+    private func calculateSolarForecastTotal(from startDate: Date, to endDate: Date, forecasts: [SolcastForecastResponse], siteCount: Int) -> SolarForecastTotalData {
         let calendar = Calendar.current
         let startDate = calendar.startOfDay(for: startDate)
         let endDate = calendar.startOfDay(for: endDate)
@@ -229,9 +258,10 @@ class SolarForecastViewModel: ObservableObject, HasLoadState {
             return forecastDay >= startDate && forecastDay <= endDate
         }
 
+        let forecastsCount = filtered.count / siteCount
         let total = filtered.total()
         let expectedPeriodCount = expectedThirtyMinutePeriodCount(from: startDate, to: endDate)
-        let percentageTimePeriodsAvailable = expectedPeriodCount > 0 ? (Double(filtered.count) / Double(expectedPeriodCount)) : 0
+        let percentageTimePeriodsAvailable = expectedPeriodCount > 0 ? (Double(forecastsCount) / Double(expectedPeriodCount)) : 0
 
         return SolarForecastTotalData(
             total: total,
@@ -240,20 +270,8 @@ class SolarForecastViewModel: ObservableObject, HasLoadState {
     }
 
     private func expectedThirtyMinutePeriodCount(from startDate: Date, to endDate: Date) -> Int {
-        let calendar = Calendar.current
-        let startDate = calendar.startOfDay(for: startDate)
-        guard let exclusiveEndDate = calendar.date(byAdding: .day, value: 1, to: calendar.startOfDay(for: endDate)) else { return 0 }
-
-        var count = 0
-        var date = startDate
-
-        while date < exclusiveEndDate {
-            count += 1
-            guard let nextDate = calendar.date(byAdding: .minute, value: 30, to: date) else { break }
-            date = nextDate
-        }
-
-        return count
+        let days = Calendar.current.dateComponents([.day], from: startDate, to: endDate).day! + 1
+        return days * 48
     }
 }
 

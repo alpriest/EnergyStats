@@ -21,7 +21,7 @@ struct SolarForecastView: View {
                 loadedView()
             } else {
                 Text("solcast_configuration_motivation")
-                Button(action: {showSolcastConfiguration.toggle()}) {
+                Button(action: { showSolcastConfiguration.toggle() }) {
                     Text("Configure Solcast now")
                 }
             }
@@ -37,39 +37,9 @@ struct SolarForecastView: View {
         VStack(spacing: 8) {
             VStack(alignment: .leading, spacing: 16) {
                 if let data = viewModel.solarForecastAchievedData {
-                    Text("Solar vs forecast")
-                        .font(.largeTitle)
-                    
-                    VStack(alignment: .leading) {
-                        ESLabeledText("Actual generation", value: data.totalSolarAchieved.kWh(0))
-                        ESLabeledText("Forecast total", value: data.totalSolarForecast.kWh(0))
-                        
-                        ESLabeledContent("Forecast completeness") {
-                            HStack {
-                                Rectangle()
-                                    .strokeBorder(lineWidth: 1)
-                                    .frame(width: 100, height: 14)
-                                    .overlay(
-                                        HStack {
-                                            Rectangle()
-                                                .foregroundStyle(Color.blue)
-                                                .frame(width: data.forecastCompleteness * 100.0)
-                                                .padding(2)
-                                            Spacer()
-                                        }.frame(width: 100)
-                                    )
-                                
-                                Text(data.forecastCompleteness.percent(maximumFractionDigits: 0))
-                            }
-                        }
-                        
-                        Text("Showing last 7 days. \(data.forecastCompleteness.percent(maximumFractionDigits: 0)) of required Solcast data is available. \(data.percentageSolarForecastAchieved.percent(maximumFractionDigits: 0)) of forecast generated.")
-                            .font(.caption)
-                            .foregroundStyle(Color.textDimmed)
-                            .padding(.top)
-                    }
+                    solarVsForecastView(data: data)
                 }
-                
+
                 Text("Solar Forecasts")
                     .font(.largeTitle)
 
@@ -127,7 +97,7 @@ struct SolarForecastView: View {
                 refreshSolcastButton()
             }
         }
-        .loadable(viewModel.state, options: [], errorAlertType: .solcast, retry: { viewModel.load() })
+        .transition(.opacity)
         .onAppear {
             self.viewModel.load()
         }
@@ -154,6 +124,56 @@ struct SolarForecastView: View {
         }
         .padding(.vertical, 32)
     }
+
+    @ViewBuilder
+    private func solarVsForecastView(data: PercentageSolarForecastAchievedData) -> some View {
+        HStack {
+            Text("Solar vs forecast")
+                .font(.largeTitle)
+
+            Spacer()
+
+            Button {
+                viewModel.togglePeriod()
+            } label: {
+                Text(viewModel.period == .yesterday ? "Yesterday" : "7 days")
+            }.buttonStyle(.bordered)
+        }
+
+        VStack(alignment: .leading) {
+            ESLabeledText("Actual generation", value: data.totalSolarAchieved.kWh(0))
+            ESLabeledText("Forecast total", value: data.totalSolarForecast.kWh(0))
+
+            ESLabeledContent("Forecast completeness") {
+                HStack {
+                    percentageBar(percentage: data.forecastCompleteness)
+                    Text(data.forecastCompleteness.percent(maximumFractionDigits: 0))
+                }
+            }
+
+            Text(data.description)
+                .font(.caption)
+                .foregroundStyle(Color.textDimmed)
+                .padding(.top)
+        }
+    }
+
+    private func percentageBar(percentage: Double) -> some View {
+        ZStack(alignment: .leading) {
+            RoundedRectangle(cornerRadius: 4)
+                .fill(.gray.opacity(0.2))
+
+            RoundedRectangle(cornerRadius: 2)
+                .fill(.blue)
+                .frame(width: min(1.0, percentage) * (100 - 4))
+                .padding(2)
+        }
+        .frame(width: 100, height: 14)
+        .overlay(
+            RoundedRectangle(cornerRadius: 4)
+                .stroke(Color.gray)
+        )
+    }
 }
 
 #Preview {
@@ -165,4 +185,5 @@ struct SolarForecastView: View {
             networking: NetworkService.preview()
         )
     )
+    .environment(\.locale, .init(identifier: "de"))
 }

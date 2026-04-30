@@ -64,6 +64,7 @@ public struct LocalizedString {
         case batteryHeaterEnabledWithTimes = "battery_heater_enabled_with_times"
         case celsiusRange = "celsius_range"
         case batteryMaxChargeCurrent = "battery_max_charge_current"
+        case solarVsForecastFooter = "solar_vs_forecast_footer"
 
         public enum Accessibility: String, RawRepresentable {
             case inverter = "accessibility.inverter"

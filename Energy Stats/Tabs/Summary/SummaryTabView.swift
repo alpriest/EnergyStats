@@ -104,7 +104,7 @@ struct SummaryTabView: View {
     @ViewBuilder
     private func summaryRow(title: LocalizedStringKey, amount: Double?, text: @escaping (Double) -> String) -> some View {
         if let amount {
-            HStack {
+            HStack(alignment: .top) {
                 Text(title)
                     .font(.title2)
 

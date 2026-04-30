@@ -62,7 +62,7 @@ class SummaryTabViewModel: ObservableObject, HasLoadState {
     private var fromYear: Int {
         switch configManager.summaryDateRange {
         case .automatic:
-            2020
+            2026 // TODO: Revert to 2020
         case .manual(let from, _):
             from.year
         }
