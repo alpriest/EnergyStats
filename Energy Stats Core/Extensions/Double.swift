@@ -7,6 +7,13 @@
 
 import SwiftUI
 
+private let wattsFormatter: NumberFormatter = {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .decimal
+    formatter.maximumFractionDigits = 0
+    return formatter
+}()
+
 public extension Double {
     func approxEqual(_ b: Double, relativeTolerance: Double = 1e-12, absoluteTolerance: Double = Double.ulpOfOne) -> Bool {
         if self == b { return true } // handles infinities and exact equality quickly
@@ -16,63 +23,44 @@ public extension Double {
     }
     
     func kW(_ places: Int) -> String {
-        let divisor = pow(10.0, Double(places))
-        let divided = (self * divisor).rounded() / divisor
-        
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.minimumFractionDigits = places
-        numberFormatter.maximumFractionDigits = places
-        
-        if let formattedString = numberFormatter.string(from: NSNumber(value: divided)) {
-            return "\(formattedString) kW"
-        } else {
-            return "\(divided) kW"
-        }
+        formatKilowatts(places: places, unit: "kW")
     }
     
     func kWh(_ places: Int) -> String {
+        formatKilowatts(places: places, unit: "kWh")
+    }
+    
+    func formatKilowatts(places: Int, unit: String?) -> String {
         let divisor = pow(10.0, Double(places))
         let divided = (self * divisor).rounded() / divisor
-        
+
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.minimumFractionDigits = places
         numberFormatter.maximumFractionDigits = places
-        
-        if let formattedString = numberFormatter.string(from: NSNumber(value: divided)) {
-            return "\(formattedString) kWh"
-        } else {
-            return "\(divided) kWh"
-        }
+
+        let formatted = numberFormatter.string(from: NSNumber(value: divided)) ?? "\(divided)"
+
+        return [formatted, unit]
+            .compactMap { $0 }
+            .joined(separator: " ")
     }
     
     func w() -> String {
-        let divided = (self * 1000.0).rounded()
-        
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 0
-        
-        if let formattedString = numberFormatter.string(from: NSNumber(value: divided)) {
-            return "\(formattedString) W"
-        } else {
-            return "\(divided) W"
-        }
+        formatWatts(unit: "W")
     }
     
     func wh() -> String {
-        let divided = (self * 1000.0).rounded()
-        
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 0
-        
-        if let formattedString = numberFormatter.string(from: NSNumber(value: divided)) {
-            return "\(formattedString) Wh"
-        } else {
-            return "\(divided) Wh"
-        }
+        formatWatts(unit: "Wh")
+    }
+    
+    func formatWatts(unit: String?) -> String {
+        let value = (self * 1000.0).rounded()
+        let formatted = wattsFormatter.string(from: NSNumber(value: value)) ?? "\(value)"
+
+        return [formatted, unit]
+            .compactMap { $0 }
+            .joined(separator: " ")
     }
     
     func isFlowing() -> Bool {
@@ -144,7 +132,7 @@ public extension Double? {
     
     func approxEqual(other: Double?) -> Bool {
         guard let self else { return false }
-        guard let other else { return false}
+        guard let other else { return false }
         
         return self.approxEqual(other)
     }

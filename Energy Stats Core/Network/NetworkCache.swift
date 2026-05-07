@@ -146,7 +146,7 @@ class NetworkCache: FoxAPIServicing {
     func openapi_fetchReport(deviceSN: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [OpenReportResponse] {
         let key = makeKey(base: #function, arguments: deviceSN, variables.map { $0.networkTitle }.joined(separator: "_"), queryDate.toString(), reportType.rawValue)
 
-        if let item = cache[key], let cached = item.item as? [OpenReportResponse], item.isFresherThan(interval: shortCacheDurationInSeconds) {
+        if let item = cache[key], let cached = item.item as? [OpenReportResponse], item.isFresherThan(interval: longCacheDurationInSeconds) {
             return cached
         } else {
             let fresh = try await api.openapi_fetchReport(deviceSN: deviceSN, variables: variables, queryDate: queryDate, reportType: reportType)

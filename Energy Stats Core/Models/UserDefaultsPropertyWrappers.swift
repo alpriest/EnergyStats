@@ -10,7 +10,12 @@ import Foundation
 @propertyWrapper
 public struct UserDefaultsStoredInt {
     var key: String
-    var defaultValue: Int = 0
+    var defaultValue: Int
+    
+    public init(key: String, defaultValue: Int = 0) {
+        self.key = key
+        self.defaultValue = defaultValue
+    }
 
     public var wrappedValue: Int {
         get {
