@@ -222,7 +222,13 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
             let max = variableData.max(by: { lhs, rhs in
                 lhs.value < rhs.value
             })?.value
-            let now = variableData.last?.value
+            
+            let now: Double? = switch variable.type {
+            case .solcastPredictionVariable:
+                variableData.first { $0.date > Date() }?.value
+            default:
+                variableData.last?.value
+            }
 
             return ParameterGraphBounds(type: variable.type, min: min, max: max, now: now)
         }
