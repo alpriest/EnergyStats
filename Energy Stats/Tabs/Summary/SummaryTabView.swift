@@ -29,29 +29,8 @@ struct SummaryTabView: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading) {
-                    if let approximationsViewModel = viewModel.approximationsViewModel {
-                        energySummaryRow(title: "home_usage", amount: approximationsViewModel.homeUsage)
-
-                        if viewModel.hasPV {
-                            energySummaryRow(title: "solar_generated", amount: approximationsViewModel.totalsViewModel?.solar)
-                        } else {
-                            Text("Your inverter doesn't store PV generation data so we can't show historic solar data.")
-                                .font(.caption2)
-                                .foregroundStyle(.secondary)
-                        }
-
-                        Spacer(minLength: 22)
-
-                        if let model = approximationsViewModel.financialModel {
-                            moneySummaryRow(title: "export_income", amount: model.exportIncome.amount)
-                            moneySummaryRow(title: "grid_import_avoided", amount: model.solarSaving.amount)
-                            moneySummaryRow(title: "total_benefit", amount: model.total.amount)
-                        }
-
-                        Text("Includes data from \(viewModel.oldestDataDate) to \(viewModel.latestDataDate). Figures are approximate and assume the buy/sell energy prices remained constant throughout the period of ownership.")
-                            .font(.caption2)
-                            .padding(.vertical)
-                            .foregroundStyle(.secondary)
+                    if let viewData = viewModel.viewData {
+                        SummaryLoadedView(viewData: viewData, appSettings: appSettings, onToggleBestSolar: viewModel.toggleBestSolarGrouping)
                     } else {
                         Text("Could not load approximations")
                     }
@@ -86,39 +65,11 @@ struct SummaryTabView: View {
             self.appSettings = $0
         }
     }
-
-    @ViewBuilder
-    private func energySummaryRow(title: LocalizedStringKey, amount: Double?) -> some View {
-        summaryRow(title: title, amount: amount) {
-            $0.withUnit(appSettings, decimalPlaceOverride: 0)
-        }
-    }
-
-    @ViewBuilder
-    private func moneySummaryRow(title: LocalizedStringKey, amount: Double?) -> some View {
-        summaryRow(title: title, amount: amount) {
-            FinanceAmount(title: .total, accessibilityKey: .totalIncomeToday, amount: $0).formattedAmount(viewModel.currencySymbol)
-        }
-    }
-
-    @ViewBuilder
-    private func summaryRow(title: LocalizedStringKey, amount: Double?, text: @escaping (Double) -> String) -> some View {
-        if let amount {
-            HStack(alignment: .top) {
-                Text(title)
-                    .font(.title2)
-
-                Spacer()
-
-                NumberRollerView(text: text(amount))
-            }
-        }
-    }
+    
 }
 
 #Preview {
     SummaryTabView(configManager: ConfigManager.preview(),
                    networking: NetworkService.preview(),
                    solarForecastProvider: { DemoSolcast() })
-        .environment(\.locale, .init(identifier: "de"))
 }
