@@ -8,6 +8,7 @@
 import Combine
 import Energy_Stats_Core
 import Foundation
+import SwiftUI
 
 struct SolarGenerationPeriodAmount {
     let year: Int
@@ -327,7 +328,7 @@ enum TimeGrouping {
     case month
     case year
     
-    var title: String {
+    var title: LocalizedStringKey {
         switch self {
         case .month:
             "month"
