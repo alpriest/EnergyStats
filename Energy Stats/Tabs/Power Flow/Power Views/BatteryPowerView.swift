@@ -102,9 +102,9 @@ struct BatteryPowerView: View, VerticalSizeClassProviding {
                 .opacity(viewModel.hasError ? 0.2 : 1.0)
 
                 Image(systemName: "minus.plus.batteryblock.fill")
+                    .accessibilityLabel("Battery")
                     .font(.system(size: shouldReduceIconSize ? 36 : 48))
                     .frame(width: 45, height: 45)
-                    .accessibilityHidden(true)
                     .opacity(viewModel.hasError ? 0.2 : 1.0)
             }
 

@@ -35,7 +35,6 @@ struct InverterView: View {
                 .id(viewModel.deviceState)
                 .frame(width: 50, height: 55)
                 .padding(5)
-                .accessibilityHidden(true)
                 .opacity(appSettings.showInverterIcon ? 1 : 0)
 
             AdaptiveStackView {

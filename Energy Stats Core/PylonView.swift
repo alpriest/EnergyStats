@@ -21,6 +21,8 @@ public struct PylonView: View {
                 .padding(2)
                 .clipped()
         }
+        .accessibilityAddTraits(.isImage)
+        .accessibilityLabel("Grid")
     }
 }
 

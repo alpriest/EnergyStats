@@ -91,6 +91,14 @@ struct InverterIconView: View {
         )
         .padding(2)
         .background(Color.background)
+        .accessibilityElement(children: .ignore)
+        .accessibilityHint("Inverter")
+        .if(deviceFaulty) {
+            $0.accessibilityLabel("Your inverter is showing a fault").accessibilityAddTraits(.isButton)
+        }
+        .if(!deviceFaulty) {
+            $0.accessibilityAddTraits(.isImage)
+        }
     }
 }
 

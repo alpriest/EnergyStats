@@ -28,8 +28,8 @@ struct HomePowerView: View, VerticalSizeClassProviding {
             Image(systemName: "house.fill")
                 .resizable()
                 .frame(width: length, height: length)
-                .accessibilityHidden(true)
                 .padding(.bottom, 1)
+                .accessibilityHint("Home")
         }
     }
 

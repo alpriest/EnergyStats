@@ -49,7 +49,7 @@ class InverterViewModel: ObservableObject {
 
     var faultsMessage: String {
         var messages: [String] = []
-        messages.append(String(localized: "Your inverter state is reported as being") + "'\(deviceState)'.")
+        messages.append(String(localized: "Your inverter state is reported as being") + " '\(deviceState)'.")
         if faults.any {
             messages.append(String(localized: "Reasons reported:"))
             messages.append(contentsOf: faults)

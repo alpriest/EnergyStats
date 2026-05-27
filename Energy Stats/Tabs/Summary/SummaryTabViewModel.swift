@@ -299,7 +299,7 @@ class SummaryTabViewModel: ObservableObject, HasLoadState {
                 let formatter = DateFormatter()
                 formatter.dateFormat = "MMMM, yyyy"
                 let date = Date.from(year: period.year, month: period.month)
-                return SummaryViewData.BestSolarData(description: formatter.string(from: date), amount: period.amount, period: TimeGrouping.month)
+                return SummaryViewData.BestSolarData(description: formatter.string(from: date), amount: period.amount, period: grouping)
             }
         case .year:
             let groupedByYear = Dictionary(grouping: filteredPeriods, by: \.year)
@@ -315,7 +315,7 @@ class SummaryTabViewModel: ObservableObject, HasLoadState {
                 return SummaryViewData.BestSolarData(
                     description: String(period.year),
                     amount: period.amount,
-                    period: TimeGrouping.year
+                    period: grouping
                 )
             }
         }
@@ -340,8 +340,6 @@ enum TimeGrouping {
 
 private extension Array where Element == SolarGenerationPeriodAmount {
     func removingExtremeOutliers(by keyPath: KeyPath<Element, Double>) -> [Element] {
-        guard count >= 4 else { return self }
-
         let values: [Double] = map { $0[keyPath: keyPath] }
         let total = values.reduce(0, +)
         let average = total / Double(values.count)
