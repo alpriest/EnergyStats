@@ -81,7 +81,6 @@ class SummaryTabViewModel: ObservableObject, HasLoadState {
     private let reportVariables = [ReportVariable.feedIn, .generation, .chargeEnergyToTal, .dischargeEnergyToTal, .gridConsumption, .loads, .pvEnergyTotal]
     @Published var state: LoadState = .inactive
     private var solarGenerationByMonth: [SolarGenerationPeriodAmount] = []
-    private var oldestDataDate: Date = Date.distantPast
     private var grouping: TimeGrouping = .month
     
     init(configManager: ConfigManaging, networking: Networking) {
