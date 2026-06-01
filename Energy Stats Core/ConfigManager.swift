@@ -774,6 +774,11 @@ public class ConfigManager: ConfigManaging {
         get { config.showTodayPercentageSolarForecastAchieved }
         set { config.showTodayPercentageSolarForecastAchieved = newValue }
     }
+
+    public var installationPurchasePrice: Double {
+        get { config.installationPurchasePrice }
+        set { config.installationPurchasePrice = newValue }
+    }
 }
 
 public enum BatteryResponseMapper {

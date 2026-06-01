@@ -8,6 +8,18 @@
 import Combine
 import Foundation
 
+public struct InstallationPaybackEstimate {
+    public let monthsRemaining: Int
+    
+    public init(installationPurchasePrice: Double, totalSavingsToDate: Double, installationDate: Date) {
+        let monthsSinceInstallation = installationDate.months(between: Date.now)
+        let monthlyBenefit = totalSavingsToDate / Double(monthsSinceInstallation)
+        let installationPurchasePriceRemaining = installationPurchasePrice - totalSavingsToDate
+        
+        self.monthsRemaining = Int(installationPurchasePriceRemaining / monthlyBenefit)
+    }
+}
+
 public class EnergyStatsFinancialModel: ObservableObject {
     private let config: FinancialConfigManager
     private var cancellables = Set<AnyCancellable>()
@@ -41,6 +53,18 @@ public class EnergyStatsFinancialModel: ObservableObject {
         config.appSettingsPublisher
             .sink { [weak self] _ in self?.update() }
             .store(in: &cancellables)
+    }
+    
+    public func payback(installDate: Date) -> InstallationPaybackEstimate? {
+        if config.installationPurchasePrice > 0 {            
+            return InstallationPaybackEstimate(
+                installationPurchasePrice: config.installationPurchasePrice,
+                totalSavingsToDate: total.amount,
+                installationDate: installDate
+            )
+        }
+
+        return nil
     }
 
     private static func computeValues(

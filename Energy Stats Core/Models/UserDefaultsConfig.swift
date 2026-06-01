@@ -73,6 +73,7 @@ public class UserDefaultsConfig: StoredConfig {
         UserDefaults.shared.removeObject(forKey: "isReadOnly")
         UserDefaults.shared.removeObject(forKey: "readOnlyCode")
         UserDefaults.shared.removeObject(forKey: "showTodayPercentageSolarForecastAchieved")
+        UserDefaults.shared.removeObject(forKey: "installationPurchasePrice")
         UserDefaults.shared.synchronize()
     }
     
@@ -404,4 +405,7 @@ public class UserDefaultsConfig: StoredConfig {
     
     @UserDefaultsStoredBool(key: "showTodayPercentageSolarForecastAchieved", defaultValue: true)
     public var showTodayPercentageSolarForecastAchieved: Bool
+    
+    @UserDefaultsStoredDouble(key: "installationPurchasePrice", defaultValue: 0.0)
+    public var installationPurchasePrice: Double
 }

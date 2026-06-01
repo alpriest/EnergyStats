@@ -75,6 +75,7 @@ public protocol StoredConfig {
     var readOnlyCode: String { get set }
     var inverterGeneration: InverterGeneration { get set }
     var showTodayPercentageSolarForecastAchieved: Bool { get set }
+    var installationPurchasePrice: Double { get set }
 }
 
 public func DefaultParameterGroups() -> [ParameterGroup] {

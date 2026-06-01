@@ -21,6 +21,25 @@ struct SummaryViewData: Copiable, Equatable {
         let exportIncome: Double
         let gridImportAvoided: Double
         let totalBenefit: Double
+        let payback: PaybackData?
+        
+        struct PaybackData: Equatable {
+            let paybackMonths: Int
+            let installationPurchasePrice: String
+            let infoText: LocalizedStringKey
+            
+            init?(
+                paybackMonths: Int?,
+                purchasePrice: String?,
+                oldestDataDate: Date
+            ) {
+                guard let paybackMonths, let purchasePrice else { return nil }
+                
+                self.paybackMonths = paybackMonths
+                self.installationPurchasePrice = purchasePrice
+                self.infoText = "Assuming system was purchased around \(oldestDataDate.monthYearString()) for \(installationPurchasePrice)."
+            }
+        }
     }
     
     struct BestSolarData: Equatable {
@@ -62,8 +81,7 @@ class SummaryTabViewModel: ObservableObject, HasLoadState {
     private let reportVariables = [ReportVariable.feedIn, .generation, .chargeEnergyToTal, .dischargeEnergyToTal, .gridConsumption, .loads, .pvEnergyTotal]
     @Published var state: LoadState = .inactive
     private var solarGenerationByMonth: [SolarGenerationPeriodAmount] = []
-    private var oldestDataDate: String = ""
-    private var latestDataDate: String = ""
+    private var oldestDataDate: Date = Date.distantPast
     private var grouping: TimeGrouping = .month
     
     init(configManager: ConfigManaging, networking: Networking) {
@@ -88,13 +106,23 @@ class SummaryTabViewModel: ObservableObject, HasLoadState {
         Task { @MainActor in
             await setState(.active(.loading))
             
-            let totals = try await fetchAllYears(device: currentDevice)
+            let (totals, oldestDataDate) = try await fetchAllYears(device: currentDevice)
             
             if let approximationsViewModel = makeApproximationsViewModel(totals: totals) {
                 let financialData: SummaryViewData.FinancialData? = if let model = approximationsViewModel.financialModel {
-                    SummaryViewData.FinancialData(exportIncome: model.exportIncome.amount,
-                                                  gridImportAvoided: model.solarSaving.amount,
-                                                  totalBenefit: model.total.amount)
+                    SummaryViewData.FinancialData(
+                        exportIncome: model.exportIncome.amount,
+                        gridImportAvoided: model.solarSaving.amount,
+                        totalBenefit: model.total.amount,
+                        payback: SummaryViewData.FinancialData.PaybackData(
+                            paybackMonths: model.payback(installDate: oldestDataDate)?.monthsRemaining,
+                            purchasePrice: configManager.installationPurchasePrice.roundedToString(
+                                decimalPlaces: 0,
+                                currencySymbol: configManager.currencySymbol
+                            ),
+                            oldestDataDate: oldestDataDate
+                        )
+                    )
                 } else { nil }
                 
                 let bestSolarData: SummaryViewData.BestSolarData? = findBest(grouping: grouping, in: solarGenerationByMonth)
@@ -105,8 +133,8 @@ class SummaryTabViewModel: ObservableObject, HasLoadState {
                     financialData: financialData,
                     bestSolar: bestSolarData,
                     hasPV: configManager.currentDevice.value?.hasPV ?? false,
-                    oldestDataDate: oldestDataDate,
-                    latestDataDate: latestDataDate,
+                    oldestDataDate: oldestDataDate.monthYearString(),
+                    latestDataDate: toDateDescription,
                     currencySymbol: configManager.currentAppSettings.currencySymbol
                 )
             }
@@ -164,12 +192,10 @@ class SummaryTabViewModel: ObservableObject, HasLoadState {
         }
     }
     
-    private func fetchAllYears(device: Device) async throws -> [ReportVariable: Double] {
+    private func fetchAllYears(device: Device) async throws -> ([ReportVariable: Double], Date) {
         var totals = [ReportVariable: Double]()
         var hasFinished = false
-        await MainActor.run {
-            latestDataDate = toDateDescription
-        }
+        var oldestDataDate: Date = .distantPast
         
         for year in (fromYear ... toYear).reversed() {
             if hasFinished {
@@ -180,13 +206,11 @@ class SummaryTabViewModel: ObservableObject, HasLoadState {
                 let (yearlyTotals, emptyMonth) = try await fetchYear(year, device: device)
                 
                 if let emptyMonth {
-                    await MainActor.run {
-                        switch configManager.summaryDateRange {
-                        case .automatic:
-                            oldestDataDate = Date.from(year: year, month: emptyMonth).monthYearString()
-                        case .manual(let from, _):
-                            oldestDataDate = "\(from.monthYearString())"
-                        }
+                    switch configManager.summaryDateRange {
+                    case .automatic:
+                        oldestDataDate = Date.from(year: year, month: emptyMonth)
+                    case .manual(let from, _):
+                        oldestDataDate = from
                     }
                     
                     if year < toYear {
@@ -202,7 +226,7 @@ class SummaryTabViewModel: ObservableObject, HasLoadState {
             }
         }
         
-        return totals
+        return (totals, oldestDataDate)
     }
     
     private func fetchYear(_ year: Int, device: Device) async throws -> ([ReportVariable: Double], Int?) {

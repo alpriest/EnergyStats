@@ -463,6 +463,7 @@ public class MockConfig: StoredConfig {
     public var readOnlyCode: String = ""
     public var inverterGeneration: InverterGeneration = .unknown
     public var showTodayPercentageSolarForecastAchieved: Bool = true
+    public var installationPurchasePrice: Double = 0
 }
 
 public extension SolcastSite {

@@ -22,7 +22,8 @@ extension StatsTabViewModel {
             let name = dateName(from: date)
             exportFileName = "energystats_stats_\(name).csv"
         case .month(let month, let year):
-            exportFileName = "energystats_stats_\(year)_\(month + 1).csv"
+            let monthString = String(format: "%02d", month + 1)
+            exportFileName = "energystats_stats_\(year)_\(monthString).csv"
         case .year(let year):
             exportFileName = "energystats_stats_\(year).csv"
         case .custom(let start, let end, _):
@@ -41,7 +42,7 @@ extension StatsTabViewModel {
         if let year = components.year, let month = components.month, let day = components.day {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MMMM"
-            return "\(year)_\(month)_\(day)"
+            return "\(year)_\(String(format: "%02d", month))_\(String(format: "%02d", day))"
         } else {
             return "unknown_date"
         }

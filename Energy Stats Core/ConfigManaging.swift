@@ -124,6 +124,7 @@ public protocol FinancialConfigManager {
     var feedInUnitPrice: Double { get set }
     var gridImportUnitPrice: Double { get set }
     var earningsModel: EarningsModel { get set }
+    var installationPurchasePrice: Double { get set }
     
     var appSettingsPublisher: AnyPublisher<AppSettings, Never> { get }
 }

@@ -42,6 +42,12 @@ class FinancialsSettingsViewModel: ObservableObject {
             configManager.gridImportUnitPrice = energyStatsGridImportUnitPrice.asCurrencyStringToDouble()
         }
     }
+    
+    @Published var installationPurchasePrice: String {
+        didSet {
+            configManager.installationPurchasePrice = installationPurchasePrice.asCurrencyStringToDouble()
+        }
+    }
 
     private(set) var configManager: ConfigManaging
 
@@ -52,5 +58,6 @@ class FinancialsSettingsViewModel: ObservableObject {
         energyStatsFeedInUnitPrice = configManager.feedInUnitPrice.roundedToString(decimalPlaces: 3)
         energyStatsGridImportUnitPrice = configManager.gridImportUnitPrice.roundedToString(decimalPlaces: 3)
         earningsModel = configManager.earningsModel
+        installationPurchasePrice = configManager.installationPurchasePrice.roundedToString(decimalPlaces: 0)
     }
 }

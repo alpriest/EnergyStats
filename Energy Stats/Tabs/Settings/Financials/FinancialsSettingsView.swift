@@ -37,7 +37,8 @@ struct FinancialsSettingsView: View {
                     makeTextField(
                         title: "Unit price",
                         currencySymbol: viewModel.configManager.currencySymbol,
-                        text: $viewModel.energyStatsFeedInUnitPrice
+                        text: $viewModel.energyStatsFeedInUnitPrice,
+                        decimalPlaces: 2
                     )
 
                     HStack {
@@ -64,10 +65,22 @@ struct FinancialsSettingsView: View {
                     makeTextField(
                         title: "Grid Import Unit price",
                         currencySymbol: viewModel.configManager.currencySymbol,
-                        text: $viewModel.energyStatsGridImportUnitPrice
+                        text: $viewModel.energyStatsGridImportUnitPrice,
+                        decimalPlaces: 2,
                     )
                 } footer: {
                     Text("Enter the price you pay per kWh for importing electricity")
+                }
+                
+                Section {
+                    makeTextField(
+                        title: "Installation purchase price",
+                        currencySymbol: viewModel.configManager.currencySymbol,
+                        text: $viewModel.installationPurchasePrice,
+                        decimalPlaces: 0
+                    )
+                } footer: {
+                    Text("Used for estimating when your system will be paid back on the summary page")
                 }
 
                 Section {} footer: {
@@ -81,6 +94,9 @@ struct FinancialsSettingsView: View {
     @ViewBuilder
     func energyStatsFooter() -> some View {
         VStack(alignment: .leading) {
+            Text("Descriptions")
+                .font(.title3)
+            
             VStack(alignment: .leading) {
                 Text("exported_income_short_title").bold()
 
@@ -134,14 +150,15 @@ struct FinancialsSettingsView: View {
     private func makeTextField(
         title: LocalizedStringKey,
         currencySymbol: String,
-        text: Binding<String>
+        text: Binding<String>,
+        decimalPlaces: Int
     ) -> some View {
         HStack {
             Text(title)
                 .multilineTextAlignment(.leading)
             Spacer()
             Text(currencySymbol)
-            TextField(0.roundedToString(decimalPlaces: 2, currencySymbol: currencySymbol), text: text)
+            TextField(0.roundedToString(decimalPlaces: decimalPlaces, currencySymbol: currencySymbol), text: text)
                 .frame(width: 60)
                 .monospacedDigit()
         }

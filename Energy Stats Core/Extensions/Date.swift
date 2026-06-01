@@ -11,14 +11,14 @@ public extension Date {
     func isSame(as other: Date) -> Bool {
         let myDate = Calendar.current.dateComponents([.day, .month, .year], from: self)
         let otherDate = Calendar.current.dateComponents([.day, .month, .year], from: other)
-
+        
         return myDate == otherDate
     }
-
+    
     func isBefore(rhs: Date) -> Bool {
         let myDate = Calendar.current.dateComponents([.day, .month, .year], from: self)
         let otherDate = Calendar.current.dateComponents([.day, .month, .year], from: rhs)
-
+        
         if let lhsDate = Calendar.current.date(from: myDate),
            let rhsDate = Calendar.current.date(from: otherDate)
         {
@@ -27,11 +27,11 @@ public extension Date {
             return false
         }
     }
-
+    
     func isAfter(rhs: Date) -> Bool {
         let myDate = Calendar.current.dateComponents([.day, .month, .year], from: self)
         let otherDate = Calendar.current.dateComponents([.day, .month, .year], from: rhs)
-
+        
         if let lhsDate = Calendar.current.date(from: myDate),
            let rhsDate = Calendar.current.date(from: otherDate)
         {
@@ -40,7 +40,7 @@ public extension Date {
             return false
         }
     }
-
+    
     var date: Date {
         let myDate = Calendar.current.dateComponents([.day, .month, .year], from: self)
         if let lhsDate = Calendar.current.date(from: myDate) {
@@ -49,8 +49,15 @@ public extension Date {
             return self
         }
     }
-
+    
     func hour() -> Int {
         Calendar.current.component(.hour, from: self)
+    }
+    
+    func months(between end: Date) -> Int {
+        let components = Calendar.current.dateComponents([.year, .month], from: self, to: end)
+
+        return (components.year ?? 0) * 12 +
+            (components.month ?? 0)
     }
 }
