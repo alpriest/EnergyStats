@@ -94,7 +94,7 @@ struct FinancialsSettingsView: View {
     @ViewBuilder
     func energyStatsFooter() -> some View {
         VStack(alignment: .leading) {
-            Text("Descriptions")
+            Text("Financial summary descriptions")
                 .font(.title3)
             
             VStack(alignment: .leading) {
