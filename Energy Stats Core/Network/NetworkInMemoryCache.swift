@@ -21,7 +21,7 @@ struct CachedItem {
     }
 }
 
-class NetworkCache: FoxAPIServicing {
+class NetworkInMemoryCache: FoxAPIServicing {
     private let api: FoxAPIServicing
     private var cache: [String: CachedItem] = [:]
     private let shortCacheDurationInSeconds: TimeInterval = 30
@@ -220,7 +220,7 @@ class NetworkCache: FoxAPIServicing {
     }
 }
 
-private extension NetworkCache {
+private extension NetworkInMemoryCache {
     func makeKey(base: String, arguments: String?...) -> String {
         ([base] + arguments.compactMap { $0 }).joined(separator: "_")
     }

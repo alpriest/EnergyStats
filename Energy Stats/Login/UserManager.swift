@@ -13,13 +13,15 @@ import SwiftUI
 class UserManager: ObservableObject, HasLoadState {
     private var configManager: ConfigManaging
     private let store: KeychainStoring
+    private let onLogout: () -> Void
     private var cancellables = Set<AnyCancellable>()
     @MainActor @Published var state = LoadState.inactive
     @MainActor @Published var isLoggedIn: Bool?
 
-    init(store: KeychainStoring, configManager: ConfigManaging) {
+    init(store: KeychainStoring, configManager: ConfigManaging, onLogout: @escaping () -> Void = {}) {
         self.store = store
         self.configManager = configManager
+        self.onLogout = onLogout
 
         self.store.hasApiKey
             .receive(on: RunLoop.main)
@@ -72,6 +74,7 @@ class UserManager: ObservableObject, HasLoadState {
         } else {
             configManager.logout(clearDisplaySettings: clearDisplaySettings, clearDeviceSettings: clearDeviceSettings)
         }
+        onLogout()
         store.logout()
         await setState(.inactive)
 

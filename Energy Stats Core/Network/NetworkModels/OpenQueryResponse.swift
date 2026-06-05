@@ -222,6 +222,25 @@ public struct OpenReportResponse: Codable {
         self.values = values
     }
 
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(variable, forKey: .variable)
+        try container.encode(unit, forKey: .unit)
+        try container.encode(encodedValues(), forKey: .values)
+    }
+
+    private func encodedValues() -> [Double?] {
+        let maxIndex = values.map(\.index).max() ?? 0
+        var result = Array<Double?>(repeating: nil, count: maxIndex)
+
+        values.forEach { item in
+            guard item.index > 0 else { return }
+            result[item.index - 1] = item.value
+        }
+
+        return result
+    }
+
     public struct ReportData: Codable {
         public let index: Int
         public let value: Double

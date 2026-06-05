@@ -62,15 +62,18 @@ struct Energy_StatsApp: App {
         // Pulse
         UserSettings.shared.allowedShareStoreOutputs = [.har]
 
-        network = NetworkService.standard(apiTokenProvider: { [keychainStore] in try? keychainStore.getToken() },
-                                          urlSession: urlSession,
-                                          tracer: FirebaseNetworkTracer(),
-                                          isDemoUser: { config.isDemoUser },
-                                          dataCeiling: { config.dataCeiling })
+        let network = NetworkService.standard(apiTokenProvider: { [keychainStore] in try? keychainStore.getToken() },
+                                              urlSession: urlSession,
+                                              tracer: FirebaseNetworkTracer(),
+                                              isDemoUser: { config.isDemoUser },
+                                              dataCeiling: { config.dataCeiling })
+        self.network = network
         appSettingsStore = AppSettingsStoreFactory.make()
         configManager = ConfigManager(networking: network, config: config, appSettingsStore: appSettingsStore, keychainStore: keychainStore)
         AppSettingsStoreFactory.update(from: configManager)
-        userManager = .init(store: keychainStore, configManager: configManager)
+        userManager = .init(store: keychainStore, configManager: configManager, onLogout: {
+            try? (network as? NetworkService)?.clearHistoricStore()
+        })
         templateStore = TemplateStore(config: configManager)
         userManager.$isLoggedIn
             .combineLatest(appSettingsStore.publisher)

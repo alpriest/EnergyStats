@@ -20,4 +20,18 @@ public class MockFileManager: FileManaging {
     }
 
     public func removeItem(at url: URL) throws {}
+
+    public func fileExists(atPath path: String) -> Bool {
+        false
+    }
+
+    public func contents(atPath path: String) -> Data? {
+        nil
+    }
+
+    public func createFile(atPath path: String, contents data: Data?, attributes attr: [FileAttributeKey: Any]?) -> Bool {
+        true
+    }
+
+    public func createDirectory(at url: URL, withIntermediateDirectories createIntermediates: Bool, attributes: [FileAttributeKey: Any]?) throws {}
 }

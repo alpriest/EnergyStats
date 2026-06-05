@@ -154,6 +154,7 @@
 		414C68902F2E08EA003F6074 /* EnergyBreakdownChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414C688F2F2E08E8003F6074 /* EnergyBreakdownChart.swift */; };
 		414C68922F2F4E3C003F6074 /* StatsGraphDisplayMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414C68912F2F4E3C003F6074 /* StatsGraphDisplayMode.swift */; };
 		414D7A312AC8CE9C0083923F /* DisplayUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D7A302AC8CE9C0083923F /* DisplayUnit.swift */; };
+		415252182FD2ACFE0099C8CA /* NetworkThrottlerFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415252172FD2ACFE0099C8CA /* NetworkThrottlerFacade.swift */; };
 		4155D70D2B28FC920071346A /* Optional+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4155D70C2B28FC920071346A /* Optional+Int.swift */; };
 		4156A22F2CB6770A00099A6A /* SolcastErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156A22E2CB6770700099A6A /* SolcastErrorAlertView.swift */; };
 		4156A2312CB6773300099A6A /* ErrorAlertViewManufacturing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156A2302CB6772D00099A6A /* ErrorAlertViewManufacturing.swift */; };
@@ -274,7 +275,8 @@
 		41AF2F412AA4C674008FCA2E /* BatteryPowerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AF2F402AA4C674008FCA2E /* BatteryPowerFooterView.swift */; };
 		41AF2F432AA4C6C1008FCA2E /* HomePowerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AF2F422AA4C6C1008FCA2E /* HomePowerFooterView.swift */; };
 		41AF2F452AA4C74F008FCA2E /* GridPowerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AF2F442AA4C74F008FCA2E /* GridPowerFooterView.swift */; };
-		41B3FFE82AB07FE10020DFC9 /* NetworkCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B3FFE72AB07FE10020DFC9 /* NetworkCache.swift */; };
+		41B3FFE82AB07FE10020DFC9 /* NetworkInMemoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B3FFE72AB07FE10020DFC9 /* NetworkInMemoryCache.swift */; };
+		41B4F1482FD1D023003EB575 /* NetworkHistoricStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B4F1472FD1D023003EB575 /* NetworkHistoricStore.swift */; };
 		41B57A982F6571A900931677 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B57A972F6571A900931677 /* ToastView.swift */; };
 		41B580482F82BBAA001B93D5 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 41B580472F82BBAA001B93D5 /* FirebaseCrashlytics */; };
 		41B5910D2ED1BBDF005B34D5 /* PeakShavingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B5910C2ED1BBDF005B34D5 /* PeakShavingViewModel.swift */; };
@@ -708,6 +710,7 @@
 		414C688F2F2E08E8003F6074 /* EnergyBreakdownChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnergyBreakdownChart.swift; sourceTree = "<group>"; };
 		414C68912F2F4E3C003F6074 /* StatsGraphDisplayMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGraphDisplayMode.swift; sourceTree = "<group>"; };
 		414D7A302AC8CE9C0083923F /* DisplayUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayUnit.swift; sourceTree = "<group>"; };
+		415252172FD2ACFE0099C8CA /* NetworkThrottlerFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkThrottlerFacade.swift; sourceTree = "<group>"; };
 		4155D70C2B28FC920071346A /* Optional+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Int.swift"; sourceTree = "<group>"; };
 		4156A22E2CB6770700099A6A /* SolcastErrorAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolcastErrorAlertView.swift; sourceTree = "<group>"; };
 		4156A2302CB6772D00099A6A /* ErrorAlertViewManufacturing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertViewManufacturing.swift; sourceTree = "<group>"; };
@@ -843,7 +846,8 @@
 		41AF2F402AA4C674008FCA2E /* BatteryPowerFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryPowerFooterView.swift; sourceTree = "<group>"; };
 		41AF2F422AA4C6C1008FCA2E /* HomePowerFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePowerFooterView.swift; sourceTree = "<group>"; };
 		41AF2F442AA4C74F008FCA2E /* GridPowerFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPowerFooterView.swift; sourceTree = "<group>"; };
-		41B3FFE72AB07FE10020DFC9 /* NetworkCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCache.swift; sourceTree = "<group>"; };
+		41B3FFE72AB07FE10020DFC9 /* NetworkInMemoryCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInMemoryCache.swift; sourceTree = "<group>"; };
+		41B4F1472FD1D023003EB575 /* NetworkHistoricStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHistoricStore.swift; sourceTree = "<group>"; };
 		41B57A972F6571A900931677 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		41B5910C2ED1BBDF005B34D5 /* PeakShavingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeakShavingViewModel.swift; sourceTree = "<group>"; };
 		41B5910F2ED1C103005B34D5 /* ViewDataProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDataProviding.swift; sourceTree = "<group>"; };
@@ -1845,9 +1849,11 @@
 				41D759FC2B5B0E37002C43A7 /* FoxAPIService+OpenAPI+Schedule.swift */,
 				41777F1428F49C61009944FF /* NetworkDemoSwitchingFacade.swift */,
 				41626CCD29D95E9C003FEB00 /* NetworkError.swift */,
-				41B3FFE72AB07FE10020DFC9 /* NetworkCache.swift */,
+				41B3FFE72AB07FE10020DFC9 /* NetworkInMemoryCache.swift */,
 				41DC51592AE2E9DC00FD348B /* NetworkValueCleaner.swift */,
 				414A40BF2B989D9800321AA2 /* NetworkService.swift */,
+				41B4F1472FD1D023003EB575 /* NetworkHistoricStore.swift */,
+				415252172FD2ACFE0099C8CA /* NetworkThrottlerFacade.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -2615,10 +2621,11 @@
 				41757BBC2A90A05E00573FB4 /* AmountType.swift in Sources */,
 				41D759FD2B5B0E37002C43A7 /* FoxAPIService+OpenAPI+Schedule.swift in Sources */,
 				4109140229DB7AE700133CC5 /* BatteryViewModel.swift in Sources */,
-				41B3FFE82AB07FE10020DFC9 /* NetworkCache.swift in Sources */,
+				41B3FFE82AB07FE10020DFC9 /* NetworkInMemoryCache.swift in Sources */,
 				4103D1D729DB6C51001B0BC8 /* FoxAPIServicing.swift in Sources */,
 				4171854229FFCF2500D18CDD /* String+MD5.swift in Sources */,
 				418024E22AD16D00009A2625 /* String+Currency.swift in Sources */,
+				415252182FD2ACFE0099C8CA /* NetworkThrottlerFacade.swift in Sources */,
 				41F5A3642C1B563D00CA1120 /* Shimmering.swift in Sources */,
 				4127586A2F44FEB6009D090F /* PVOutputService.swift in Sources */,
 				41BCC23F2F1E9BE500FB883E /* BatteryHeatingScheduleResponse.swift in Sources */,
@@ -2628,6 +2635,7 @@
 				41E3BEC32B1B5A160051C68B /* AppSettingsStoreFactory.swift in Sources */,
 				4103D1DC29DB6C6D001B0BC8 /* StoredConfig.swift in Sources */,
 				418240782A9A33E300101064 /* TotalsViewModel.swift in Sources */,
+				41B4F1482FD1D023003EB575 /* NetworkHistoricStore.swift in Sources */,
 				414A40C02B989D9800321AA2 /* NetworkService.swift in Sources */,
 				4103D1E329DB6D03001B0BC8 /* AppSettings.swift in Sources */,
 				414160292D85CABE009E0096 /* View+IconSize.swift in Sources */,

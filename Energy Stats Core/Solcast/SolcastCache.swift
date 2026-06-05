@@ -115,4 +115,8 @@ public protocol FileManaging {
     func attributesOfItem(atPath path: String) throws -> [FileAttributeKey: Any]
     func urls(for directory: FileManager.SearchPathDirectory, in domainMask: FileManager.SearchPathDomainMask) -> [URL]
     func removeItem(at url: URL) throws
+    func fileExists(atPath path: String) -> Bool
+    func contents(atPath path: String) -> Data?
+    func createFile(atPath path: String, contents data: Data?, attributes attr: [FileAttributeKey: Any]?) -> Bool
+    func createDirectory(at url: URL, withIntermediateDirectories createIntermediates: Bool, attributes: [FileAttributeKey: Any]?) throws
 }

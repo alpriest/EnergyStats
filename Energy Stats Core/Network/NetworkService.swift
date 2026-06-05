@@ -56,7 +56,8 @@ public protocol NetworkTracing {
 }
 
 public class NetworkService: Networking {
-    let api: FoxAPIServicing
+    private let api: FoxAPIServicing
+    private let historicStore: NetworkHistoricStore?
 
     public static func standard(
         apiTokenProvider: @escaping APITokenProviding,
@@ -66,22 +67,31 @@ public class NetworkService: Networking {
         dataCeiling: @escaping () -> DataCeiling
     ) -> Networking {
         let service = FoxAPIService(apiTokenProvider: apiTokenProvider, urlSession: urlSession, tracer: tracer)
+        let throttler = NetworkThrottlerFacade(api: service)
+        let historicStore = NetworkHistoricStore(api: throttler)
+        let cache = NetworkInMemoryCache(api: historicStore)
         let api = NetworkValueCleaner(
             api: NetworkDemoSwitchingFacade(
-                api: NetworkCache(api: service),
+                api: cache,
                 isDemoUser: isDemoUser
             ),
             dataCeiling: dataCeiling
         )
-        return NetworkService(api: api)
+
+        return NetworkService(api: api, historicStore: historicStore)
     }
 
-    init(api: FoxAPIServicing) {
+    init(api: FoxAPIServicing, historicStore: NetworkHistoricStore? = nil) {
         self.api = api
+        self.historicStore = historicStore
     }
 
     public func fetchErrorMessages() async {
         await api.fetchErrorMessages()
+    }
+
+    public func clearHistoricStore() throws {
+        try historicStore?.clear()
     }
 
     public func fetchDeviceList() async throws -> [DeviceSummaryResponse] {
