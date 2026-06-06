@@ -155,6 +155,8 @@
 		414C68922F2F4E3C003F6074 /* StatsGraphDisplayMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414C68912F2F4E3C003F6074 /* StatsGraphDisplayMode.swift */; };
 		414D7A312AC8CE9C0083923F /* DisplayUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D7A302AC8CE9C0083923F /* DisplayUnit.swift */; };
 		415252182FD2ACFE0099C8CA /* NetworkThrottlerFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415252172FD2ACFE0099C8CA /* NetworkThrottlerFacade.swift */; };
+		4152521A2FD415530099C8CA /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415252192FD415530099C8CA /* LoadingView.swift */; };
+		4152521C2FD4155E0099C8CA /* SolarLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4152521B2FD4155E0099C8CA /* SolarLoadingView.swift */; };
 		4155D70D2B28FC920071346A /* Optional+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4155D70C2B28FC920071346A /* Optional+Int.swift */; };
 		4156A22F2CB6770A00099A6A /* SolcastErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156A22E2CB6770700099A6A /* SolcastErrorAlertView.swift */; };
 		4156A2312CB6773300099A6A /* ErrorAlertViewManufacturing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156A2302CB6772D00099A6A /* ErrorAlertViewManufacturing.swift */; };
@@ -711,6 +713,8 @@
 		414C68912F2F4E3C003F6074 /* StatsGraphDisplayMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGraphDisplayMode.swift; sourceTree = "<group>"; };
 		414D7A302AC8CE9C0083923F /* DisplayUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayUnit.swift; sourceTree = "<group>"; };
 		415252172FD2ACFE0099C8CA /* NetworkThrottlerFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkThrottlerFacade.swift; sourceTree = "<group>"; };
+		415252192FD415530099C8CA /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		4152521B2FD4155E0099C8CA /* SolarLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarLoadingView.swift; sourceTree = "<group>"; };
 		4155D70C2B28FC920071346A /* Optional+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Int.swift"; sourceTree = "<group>"; };
 		4156A22E2CB6770700099A6A /* SolcastErrorAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolcastErrorAlertView.swift; sourceTree = "<group>"; };
 		4156A2302CB6772D00099A6A /* ErrorAlertViewManufacturing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertViewManufacturing.swift; sourceTree = "<group>"; };
@@ -1172,6 +1176,8 @@
 				41F790292F70526400D94928 /* SchedulePhaseV1.swift */,
 				41FF14EC2B432EEC00FAAF1D /* GenerationViewModel.swift */,
 				41A715922BE0CD4700560628 /* LoadState.swift */,
+				4152521B2FD4155E0099C8CA /* SolarLoadingView.swift */,
+				415252192FD415530099C8CA /* LoadingView.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -2621,6 +2627,7 @@
 				41757BBC2A90A05E00573FB4 /* AmountType.swift in Sources */,
 				41D759FD2B5B0E37002C43A7 /* FoxAPIService+OpenAPI+Schedule.swift in Sources */,
 				4109140229DB7AE700133CC5 /* BatteryViewModel.swift in Sources */,
+				4152521C2FD4155E0099C8CA /* SolarLoadingView.swift in Sources */,
 				41B3FFE82AB07FE10020DFC9 /* NetworkInMemoryCache.swift in Sources */,
 				4103D1D729DB6C51001B0BC8 /* FoxAPIServicing.swift in Sources */,
 				4171854229FFCF2500D18CDD /* String+MD5.swift in Sources */,
@@ -2684,6 +2691,7 @@
 				411029192A729F02004018BB /* BatteryTimesResponse.swift in Sources */,
 				4103D1E229DB6CD7001B0BC8 /* ConfigManager.swift in Sources */,
 				41B57A982F6571A900931677 /* ToastView.swift in Sources */,
+				4152521A2FD415530099C8CA /* LoadingView.swift in Sources */,
 				4128874C2BE7CE9B007E9532 /* BatteryTimelineProvider.swift in Sources */,
 				41E165B92B0BAD9500B17590 /* UserDefaultsPropertyWrappers.swift in Sources */,
 				413715BD2E20147C00505496 /* HomeEnergyStateManager+GenerationStats.swift in Sources */,
@@ -2996,7 +3004,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 132;
+				CURRENT_PROJECT_VERSION = 133;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -3019,7 +3027,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.139;
+				MARKETING_VERSION = 2.140;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -3065,7 +3073,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 132;
+				CURRENT_PROJECT_VERSION = 133;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -3082,7 +3090,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.139;
+				MARKETING_VERSION = 2.140;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

@@ -186,13 +186,13 @@ private extension NetworkHistoricStore {
     func isCurrentReportPeriod(queryDate: QueryDate, reportType: ReportType) -> Bool {
         let now = QueryDate.now()
 
-        switch reportType {
+        return switch reportType {
         case .year:
-            return queryDate.year == now.year
+            queryDate.year == now.year
         case .month:
-            return queryDate.year == now.year && queryDate.month == now.month
+            queryDate.year == now.year && queryDate.month == now.month
         case .day:
-            return queryDate.year == now.year && queryDate.month == now.month && queryDate.day == now.day
+            queryDate.year == now.year && queryDate.month == now.month && queryDate.day == now.day
         }
     }
 
@@ -202,4 +202,3 @@ private extension NetworkHistoricStore {
             .joined()
     }
 }
-

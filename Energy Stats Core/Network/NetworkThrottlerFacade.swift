@@ -145,7 +145,9 @@ class NetworkThrottlerFacade: FoxAPIServicing {
     }
 
     func openapi_setBatteryHeatingSchedule(heatingScheduleRequest: BatteryHeatingScheduleRequest) async throws {
-        try await api.openapi_setBatteryHeatingSchedule(heatingScheduleRequest: heatingScheduleRequest)
+        try await throttle(method: writeAPIKey, minimumDuration: 2.0) {
+            try await api.openapi_setBatteryHeatingSchedule(heatingScheduleRequest: heatingScheduleRequest)
+        }
     }
 }
 

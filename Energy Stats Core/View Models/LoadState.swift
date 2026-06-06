@@ -5,6 +5,7 @@
 //  Created by Alistair Priest on 30/04/2024.
 //
 
+import Combine
 import SwiftUI
 
 public enum LoadStateActivity {
@@ -79,100 +80,4 @@ public enum LoadState: Equatable {
             false
         }
     }
-}
-
-public struct LoadingView: View {
-    @State private var message: LocalizedStringKey
-    private let activity: LoadStateActivity
-
-    public init(message: LoadStateActivity) {
-        self.activity = message
-        self.message = message.title
-    }
-
-    public var body: some View {
-        SolarLoadingView(message: message)
-            .frame(width: 200, height: 80)
-            .task {
-                try? await Task.sleep(for: .seconds(10))
-                self.message = activity.longOperationTitle
-            }
-    }
-}
-
-struct SolarLoadingView: View {
-    @State private var sunRotation: Double = 0
-    let message: LocalizedStringKey
-
-    var body: some View {
-        ZStack {
-            backgroundGradient
-            HStack {
-                sunView()
-                    .frame(width: 34)
-                loadingText()
-            }
-        }
-        .clipShape(RoundedRectangle(cornerRadius: 4))
-        .overlay(border)
-        .onAppear {
-            startSunAnimationLoop()
-        }
-    }
-
-    // MARK: - View Components
-
-    @ViewBuilder
-    private var backgroundGradient: some View {
-        Color(.loadingBackground).ignoresSafeArea()
-    }
-
-    @ViewBuilder
-    private func sunView() -> some View {
-        SunView(solar: 1.0, solarDefinitions: .default, sunSize: 15)
-            .rotationEffect(.degrees(sunRotation))
-    }
-
-    @ViewBuilder
-    private func loadingText() -> some View {
-        Text(message)
-    }
-
-    @ViewBuilder
-    private var border: some View {
-        RoundedRectangle(cornerRadius: 4)
-            .stroke(Color.primary.opacity(0.65), lineWidth: 1)
-    }
-
-    private func startSunAnimationLoop() {
-        // Reset to starting position
-        sunRotation = 0
-
-        withAnimation(.linear(duration: 8).repeatForever(autoreverses: false)) {
-            sunRotation = 360
-        }
-    }
-}
-
-#Preview {
-    Color.black.overlay(
-        ZStack {
-            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
-                .foregroundStyle(Color.white)
-
-            LoadingView(message: .activating)
-        }
-    )
-    .environment(\.colorScheme, .dark)
-    .environment(\.locale, Locale(identifier: "de"))
-
-    Color.white.overlay(
-        ZStack {
-            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
-
-            LoadingView(message: .loading)
-        }
-    )
-    .environment(\.colorScheme, .light)
-    .environment(\.locale, Locale(identifier: "de"))
 }
