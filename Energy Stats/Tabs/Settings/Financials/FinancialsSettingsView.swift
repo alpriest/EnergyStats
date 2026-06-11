@@ -38,7 +38,8 @@ struct FinancialsSettingsView: View {
                         title: "Unit price",
                         currencySymbol: viewModel.configManager.currencySymbol,
                         text: $viewModel.energyStatsFeedInUnitPrice,
-                        decimalPlaces: 2
+                        decimalPlaces: 2,
+                        infoText: "Energy Stats cannot track multiple tariffs because the calculation is made across an amount of energy used over a time period. Enter an average of your electricity rate usually obtained from your bill."
                     )
 
                     HStack {
@@ -67,6 +68,7 @@ struct FinancialsSettingsView: View {
                         currencySymbol: viewModel.configManager.currencySymbol,
                         text: $viewModel.energyStatsGridImportUnitPrice,
                         decimalPlaces: 2,
+                        infoText: nil
                     )
                 } footer: {
                     Text("Enter the price you pay per kWh for importing electricity")
@@ -77,7 +79,8 @@ struct FinancialsSettingsView: View {
                         title: "Installation purchase price",
                         currencySymbol: viewModel.configManager.currencySymbol,
                         text: $viewModel.installationPurchasePrice,
-                        decimalPlaces: 0
+                        decimalPlaces: 0,
+                        infoText: nil
                     )
                 } footer: {
                     Text("Used for estimating when your system will be paid back on the summary page")
@@ -151,11 +154,15 @@ struct FinancialsSettingsView: View {
         title: LocalizedStringKey,
         currencySymbol: String,
         text: Binding<String>,
-        decimalPlaces: Int
+        decimalPlaces: Int,
+        infoText: LocalizedStringKey?
     ) -> some View {
         HStack {
             Text(title)
                 .multilineTextAlignment(.leading)
+            OptionalView(infoText) {
+                InfoButtonView(message: $0)
+            }
             Spacer()
             Text(currencySymbol)
             TextField(0.roundedToString(decimalPlaces: decimalPlaces, currencySymbol: currencySymbol), text: text)

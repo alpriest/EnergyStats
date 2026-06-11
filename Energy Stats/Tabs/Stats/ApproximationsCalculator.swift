@@ -32,12 +32,15 @@ struct ApproximationsCalculator {
             loads: loads,
             grid: grid
         )
+        
+        let inverterConsumption = Swift.max((solar + grid + batteryDischarge) - (feedIn + batteryCharge + loads), 0)
 
         let totalsViewModel = TotalsViewModel(grid: grid,
                                               feedIn: feedIn,
                                               loads: loads,
                                               solar: solar,
-                                              ct2: 0) // ApproximationsCalculator is always called from places where we're looking at historical data, and ct2 isn't available
+                                              ct2: 0, // ApproximationsCalculator is always called from places where we're looking at historical data, and ct2 isn't available
+                                              inverterConsumption: inverterConsumption)
 
         let financialModel = EnergyStatsFinancialModel(
             totalsViewModel: totalsViewModel,

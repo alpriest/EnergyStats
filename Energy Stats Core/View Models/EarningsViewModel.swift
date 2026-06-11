@@ -125,7 +125,7 @@ public class EnergyStatsFinancialModel: ObservableObject {
             }
         )
 
-        let solarSavingAmount = max(0, totalsViewModel.solar - totalsViewModel.gridExport) * config.gridImportUnitPrice
+        let solarSavingAmount = max(0, totalsViewModel.solar - totalsViewModel.gridExport - totalsViewModel.inverterConsumption) * config.gridImportUnitPrice
 
         let solarSaving = FinanceAmount(
             title: .gridImportAvoidedShortTitle,
@@ -134,9 +134,9 @@ public class EnergyStatsFinancialModel: ObservableObject {
         )
 
         let solarSavingBreakdown = CalculationBreakdown(
-            formula: "max(0, solar - gridExport) * gridImportUnitPrice",
+            formula: "max(0, solar - gridExport - inverterConsumption) * gridImportUnitPrice",
             calculation: { dp in
-                "max (0, \(totalsViewModel.solar.roundedToString(decimalPlaces: dp)) - \(totalsViewModel.gridExport.roundedToString(decimalPlaces: dp))) * \(config.gridImportUnitPrice.roundedToString(decimalPlaces: dp))"
+                "max(0, \(totalsViewModel.solar.roundedToString(decimalPlaces: dp)) - \(totalsViewModel.gridExport.roundedToString(decimalPlaces: dp)) - \(totalsViewModel.inverterConsumption.roundedToString(decimalPlaces: dp))) * \(config.gridImportUnitPrice.roundedToString(decimalPlaces: dp))"
             }
         )
 

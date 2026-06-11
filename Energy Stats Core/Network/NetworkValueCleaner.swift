@@ -85,21 +85,21 @@ class NetworkValueCleaner: FoxAPIServicing {
     }
 
     func openapi_fetchReport(deviceSN: String, variables: [ReportVariable], queryDate: QueryDate, reportType: ReportType) async throws -> [OpenReportResponse] {
-        let original = try await api.openapi_fetchReport(deviceSN: deviceSN, variables: variables, queryDate: queryDate, reportType: reportType)
+        let returnedDataResponses = try await api.openapi_fetchReport(deviceSN: deviceSN, variables: variables, queryDate: queryDate, reportType: reportType)
 
-        return original.enumerated().map { index, originalData in
-            if originalData.variable != variables[safe: index]?.networkTitle {
+        return returnedDataResponses.enumerated().map { index, returnedResponse in
+            if returnedResponse.variable != variables[safe: index]?.networkTitle {
                 CoreBus.onUnexpectedServerData(
                     api: "fetchReport",
-                    expected: variables[index].networkTitle,
-                    actual: originalData.variable
+                    expected: variables[safe: index]?.networkTitle ?? "unknown",
+                    actual: returnedResponse.variable
                 )
             }
 
             return OpenReportResponse(
                 variable: variables[index].networkTitle,
-                unit: originalData.unit,
-                values: originalData.values.compactMap {
+                unit: returnedResponse.unit,
+                values: returnedResponse.values.compactMap {
                     OpenReportResponse.ReportData(
                         index: $0.index,
                         value: $0.value.capped(dataCeiling())

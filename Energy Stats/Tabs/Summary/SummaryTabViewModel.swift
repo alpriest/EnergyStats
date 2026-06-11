@@ -194,7 +194,7 @@ class SummaryTabViewModel: ObservableObject, HasLoadState {
     private func fetchAllYears(device: Device) async throws -> ([ReportVariable: Double], Date) {
         var totals = [ReportVariable: Double]()
         var hasFinished = false
-        var oldestDataDate: Date = .distantPast
+        var oldestDataDate: Date = Date.now
         
         for year in (fromYear ... toYear).reversed() {
             if hasFinished {
@@ -304,7 +304,7 @@ class SummaryTabViewModel: ObservableObject, HasLoadState {
         else {
             return nil
         }
-        
+                
         return approximationsCalculator.calculateApproximations(grid: grid,
                                                                 feedIn: feedIn,
                                                                 loads: loads,
