@@ -20,7 +20,7 @@ struct FinancialsSettingsView: View {
             Section {
                 Toggle(isOn: $viewModel.showFinancialSummary) {
                     Text("Show estimated earnings")
-                }.accessibilityIdentifier("toggle_financial_summary")
+                }.accessibilityIdentifier("toggle_financial_summaSummary")
 
             } footer: {
                 Text("energy_stats_earnings_calculation_description")
@@ -39,7 +39,7 @@ struct FinancialsSettingsView: View {
                         currencySymbol: viewModel.configManager.currencySymbol,
                         text: $viewModel.energyStatsFeedInUnitPrice,
                         decimalPlaces: 2,
-                        infoText: "Energy Stats cannot track multiple tariffs because the calculation is made across an amount of energy used over a time period. Enter an average of your electricity rate usually obtained from your bill."
+                        infoText: "Energy Stats calculates costs using the total energy consumed over a selected period (such as a day, month, or year), so multiple tariffs cannot be tracked. Please enter your average electricity rate, which can usually be found on your bill."
                     )
 
                     HStack {

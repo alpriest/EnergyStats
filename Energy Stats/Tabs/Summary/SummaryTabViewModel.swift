@@ -195,7 +195,8 @@ class SummaryTabViewModel: ObservableObject, HasLoadState {
         var totals = [ReportVariable: Double]()
         var hasFinished = false
         var oldestDataDate: Date = Date.now
-        
+        let currentYear = Calendar.current.component(.year, from: Date())
+
         for year in (fromYear ... toYear).reversed() {
             if hasFinished {
                 break
@@ -212,7 +213,11 @@ class SummaryTabViewModel: ObservableObject, HasLoadState {
                         oldestDataDate = from
                     }
                     
-                    if year < toYear {
+                    if toYear != currentYear {
+                        if year < toYear {
+                            hasFinished = true
+                        }
+                    } else {
                         hasFinished = true
                     }
                 }
@@ -260,7 +265,7 @@ class SummaryTabViewModel: ObservableObject, HasLoadState {
                 }
             }
             
-            if monthlyTotal == 0 && (month < currentMonth || year < currentYear) {
+            if monthlyTotal == 0 && ((month < currentMonth && year == currentYear) || month < currentMonth || year < currentYear) {
                 emptyMonth = month + 1
                 break
             }
