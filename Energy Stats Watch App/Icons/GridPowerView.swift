@@ -43,9 +43,11 @@ struct GridPowerView: View {
                                 .foregroundStyle(Color.linesNegative)
                             Text("/")
                                 .foregroundStyle(Color.linesNotFlowing)
-                            Text(totalExport.kWh(1))
+                            
+                            Text(iconScale.isLarge ? totalExport.kWh(1) : totalExport.roundedToString(decimalPlaces: 1))
                                 .foregroundStyle(Color.linesPositive)
                         }
+                        .monospacedDigit()
                     } else {
                         Text(" ")
                     }

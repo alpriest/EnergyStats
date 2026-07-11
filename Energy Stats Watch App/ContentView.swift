@@ -72,6 +72,7 @@ struct ContentView: View {
 
             SolarPowerView(
                 value: viewModel.state?.solar,
+                total: viewModel.state?.totalSolar,
                 solarDefinitions: solarDefinitions,
                 iconScale: .large
             )
@@ -79,6 +80,7 @@ struct ContentView: View {
 
             HomePowerView(
                 value: viewModel.state?.house,
+                total: viewModel.state?.totalHome,
                 iconScale: .large
             )
             .tag(Tab.home)
@@ -86,6 +88,8 @@ struct ContentView: View {
             BatteryPowerView(
                 batterySOC: viewModel.state?.batterySOC,
                 battery: viewModel.state?.battery,
+                totalCharge: viewModel.state?.totalBatteryCharge,
+                totalDischarge: viewModel.state?.totalBatteryDischarge,
                 iconScale: .large
             )
             .tag(Tab.battery)
@@ -108,16 +112,31 @@ struct ContentView: View {
     private var allItems: some View {
         Grid {
             GridRow(alignment: .top) {
-                SolarPowerView(value: viewModel.state?.solar, solarDefinitions: solarDefinitions, iconScale: .small)
+                SolarPowerView(
+                    value: viewModel.state?.solar,
+                    total: nil,
+                    solarDefinitions: solarDefinitions,
+                    iconScale: .small,
+                )
                 Spacer()
-                HomePowerView(value: viewModel.state?.house, iconScale: .small)
+                HomePowerView(
+                    value: viewModel.state?.house,
+                    total: nil,
+                    iconScale: .small
+                )
             }
 
             Spacer(minLength: 10)
 
             GridRow(alignment: .top) {
-                BatteryPowerView(batterySOC: viewModel.state?.batterySOC, battery: viewModel.state?.battery, iconScale: .small)
-                Spacer(minLength: 15)
+                BatteryPowerView(
+                    batterySOC: viewModel.state?.batterySOC,
+                    battery: viewModel.state?.battery,
+                    totalCharge: nil,
+                    totalDischarge: nil,
+                    iconScale: .small
+                )
+                Spacer(minLength: 5)
                 GridPowerView(value: viewModel.state?.grid, totalExport: viewModel.state?.totalExport, totalImport: viewModel.state?.totalImport, iconScale: .small)
             }
         }

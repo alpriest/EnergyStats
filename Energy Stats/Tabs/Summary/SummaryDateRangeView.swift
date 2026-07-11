@@ -16,6 +16,7 @@ struct SummaryDateRangeView: View {
     let onApply: (SummaryDateRange) -> Void
 
     init(initial: SummaryDateRange, onApply: @escaping (SummaryDateRange) -> Void) {
+        self.onApply = onApply
         switch initial {
         case .automatic:
             self.automatic = true
@@ -26,7 +27,6 @@ struct SummaryDateRangeView: View {
             self.from = from
             self.to = to
         }
-        self.onApply = onApply
     }
 
     var body: some View {

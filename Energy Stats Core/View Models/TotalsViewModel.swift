@@ -33,7 +33,9 @@ public struct TotalsViewModel {
             loads: loads,
             solar: solar,
             ct2: generationViewModel?.ct2Total ?? 0,
-            inverterConsumption: inverterConsumption
+            inverterConsumption: inverterConsumption,
+            batteryCharge: batteryCharge,
+            batteryDischarge: batteryDischarge
         )
     }
 
@@ -42,7 +44,9 @@ public struct TotalsViewModel {
                 loads: Double,
                 solar: Double,
                 ct2: Double,
-                inverterConsumption: Double)
+                inverterConsumption: Double,
+                batteryCharge: Double,
+                batteryDischarge: Double)
     {
         self.home = loads
         self.gridExport = feedIn
@@ -50,6 +54,8 @@ public struct TotalsViewModel {
         self.solar = solar
         self.ct2 = ct2
         self.inverterConsumption = inverterConsumption
+        self.batteryCharge = batteryCharge
+        self.batteryDischarge = batteryDischarge
     }
 
     public let home: Double
@@ -58,6 +64,8 @@ public struct TotalsViewModel {
     public let solar: Double
     public let ct2: Double
     public let inverterConsumption: Double
+    public let batteryCharge: Double
+    public let batteryDischarge: Double
 }
 
 public extension Array where Element == OpenReportResponse {

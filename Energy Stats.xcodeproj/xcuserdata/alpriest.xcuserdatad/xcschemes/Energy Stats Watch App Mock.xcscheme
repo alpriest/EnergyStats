@@ -46,7 +46,6 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "41F631742BDCD32D00A571C5"
             BuildableName = "Energy Stats.app"
-            BlueprintName = "Energy Stats Watch App"
             ReferencedContainer = "container:Energy Stats.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -69,7 +68,6 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "41F631742BDCD32D00A571C5"
             BuildableName = "Energy Stats.app"
-            BlueprintName = "Energy Stats Watch App"
             ReferencedContainer = "container:Energy Stats.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

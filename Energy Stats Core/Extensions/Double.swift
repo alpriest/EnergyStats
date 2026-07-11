@@ -39,7 +39,8 @@ public extension Double {
         numberFormatter.minimumFractionDigits = places
         numberFormatter.maximumFractionDigits = places
 
-        let formatted = numberFormatter.string(from: NSNumber(value: divided)) ?? "\(divided)"
+        let displayNumber = divided == 0 ? 0.0 : divided
+        let formatted = numberFormatter.string(from: NSNumber(value: displayNumber)) ?? "\(displayNumber)"
 
         return [formatted, unit]
             .compactMap { $0 }
@@ -56,7 +57,8 @@ public extension Double {
     
     func formatWatts(unit: String?) -> String {
         let value = (self * 1000.0).rounded()
-        let formatted = wattsFormatter.string(from: NSNumber(value: value)) ?? "\(value)"
+        let displayNumber = value == 0 ? 0.0 : value
+        let formatted = wattsFormatter.string(from: NSNumber(value: displayNumber)) ?? "\(displayNumber)"
 
         return [formatted, unit]
             .compactMap { $0 }
@@ -74,6 +76,7 @@ public extension Double {
     
     func roundedToString(decimalPlaces: Int, currencySymbol: String? = nil) -> String {
         let roundedNumber = rounded(decimalPlaces: decimalPlaces)
+        let displayNumber = roundedNumber == 0 ? 0.0 : roundedNumber
         
         let numberFormatter = NumberFormatter()
         if let currencySymbol {
@@ -84,10 +87,10 @@ public extension Double {
         numberFormatter.maximumFractionDigits = decimalPlaces
         numberFormatter.locale = Locale.current
         
-        return if let formattedString = numberFormatter.string(from: NSNumber(value: roundedNumber)) {
+        return if let formattedString = numberFormatter.string(from: NSNumber(value: displayNumber)) {
             formattedString
         } else {
-            String(format: "%.\(decimalPlaces)f", roundedNumber)
+            String(format: "%.\(decimalPlaces)f", displayNumber)
         }
     }
     

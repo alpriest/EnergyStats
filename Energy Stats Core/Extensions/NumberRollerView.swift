@@ -26,9 +26,9 @@ public struct NumberRollerView: View {
     }
 
     public init(text: String) {
-        target = text
         rowHeight = ("8" as NSString).size(withAttributes: [.font: uiFont]).height.rounded(.up)
         columnWidth = ("0" as NSString).size(withAttributes: [.font: uiFont]).width.rounded(.up)
+        target = text
     }
 
     public var body: some View {

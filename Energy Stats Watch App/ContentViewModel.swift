@@ -19,6 +19,10 @@ struct ContentData {
     let lastUpdated: Date
     let totalExport: Double?
     let totalImport: Double?
+    let totalSolar: Double?
+    let totalBatteryCharge: Double?
+    let totalBatteryDischarge: Double?
+    let totalHome: Double?
 }
 
 @Observable
@@ -89,7 +93,6 @@ class ContentViewModel {
                     "batTemperature_2",
                 ]
             )
-            
 
             let device = Device(deviceSN: deviceSN, stationName: nil, stationID: "", battery: nil, moduleSN: "", deviceType: "", hasPV: true, hasBattery: true, productType: nil, capacity: nil)
             let currentStatusCalculator = CurrentStatusCalculator(device: device,
@@ -109,7 +112,11 @@ class ContentViewModel {
                     battery: batteryViewModel.chargePower,
                     lastUpdated: Date.now,
                     totalExport: totals?.gridExport,
-                    totalImport: totals?.gridImport
+                    totalImport: totals?.gridImport,
+                    totalSolar: totals?.solar,
+                    totalBatteryCharge: totals?.batteryCharge,
+                    totalBatteryDischarge: totals?.batteryDischarge,
+                    totalHome: totals?.home
                 )
             }
 
@@ -135,7 +142,7 @@ class ContentViewModel {
     }
 
     private func loadReportData(_ currentDevice: Device) async throws -> [OpenReportResponse] {
-        let reportVariables = [ReportVariable.feedIn, ReportVariable.gridConsumption]
+        let reportVariables = [ReportVariable.feedIn, ReportVariable.gridConsumption, ReportVariable.pvEnergyTotal]
 
         return try await network.fetchReport(deviceSN: currentDevice.deviceSN,
                                              variables: reportVariables,

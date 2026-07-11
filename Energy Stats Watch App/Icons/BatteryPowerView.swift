@@ -11,6 +11,8 @@ import SwiftUI
 struct BatteryPowerView: View {
     let batterySOC: Double?
     let battery: Double?
+    let totalCharge: Double?
+    let totalDischarge: Double?
     let iconScale: IconScale
     @State private var batterySize: CGSize = .zero
 
@@ -55,7 +57,7 @@ struct BatteryPowerView: View {
             line1: {
                 Group {
                     if let battery {
-                        Text(battery.kW(2))
+                        line1Text(battery: battery, batterySOC: batterySOC)
                     } else {
                         Text("xxxxx")
                             .redacted(reason: .placeholder)
@@ -65,7 +67,7 @@ struct BatteryPowerView: View {
             line2: {
                 Group {
                     if let batterySOC {
-                        Text(batterySOC, format: .percent)
+                        line2Text(batterySOC: batterySOC)
                     } else {
                         Text(" ")
                     }
@@ -73,20 +75,58 @@ struct BatteryPowerView: View {
             }
         )
     }
+    
+    private func line1Text(battery: Double, batterySOC: Double?) -> some View {
+        Group {
+            switch iconScale {
+            case .small:
+                Text(battery.kW(2))
+            case .large:
+                HStack {
+                    Text(battery.kW(2))
+                    
+                    if let batterySOC {
+                        Text(batterySOC, format: .percent)
+                    }
+                }
+            }
+        }
+    }
+    
+    private func line2Text(batterySOC: Double) -> some View {
+        Group {
+            switch iconScale {
+            case .small:
+                Text(batterySOC, format: .percent)
+            case .large:
+                if let totalCharge, let totalDischarge {
+                    HStack(spacing: 2) {
+                        Text(totalCharge.roundedToString(decimalPlaces: 1))
+                            .foregroundStyle(Color.linesNegative)
+                        Text("/")
+                            .foregroundStyle(Color.linesNotFlowing)
+                        Text(totalDischarge.kWh(1))
+                            .foregroundStyle(Color.linesPositive)
+                    }
+                    .monospacedDigit()
+                }
+            }
+        }
+    }
 }
 
 #Preview {
-    BatteryPowerView(batterySOC: 1.0, battery: 8.4, iconScale: .large)
+    BatteryPowerView(batterySOC: 1.0, battery: -0.001, totalCharge: 1.0, totalDischarge: 2.0, iconScale: .large)
 }
 
 #Preview {
-    BatteryPowerView(batterySOC: 0.22, battery: -0.5, iconScale: .small)
+    BatteryPowerView(batterySOC: 0.22, battery: -0.5, totalCharge: 1.0, totalDischarge: 2.0, iconScale: .small)
 }
 
 #Preview {
-    BatteryPowerView(batterySOC: 0.22, battery: 0.5, iconScale: .small)
+    BatteryPowerView(batterySOC: 0.22, battery: 0.5, totalCharge: 1.0, totalDischarge: 2.0, iconScale: .small)
 }
 
 #Preview {
-    BatteryPowerView(batterySOC: 0.22, battery: nil, iconScale: .small)
+    BatteryPowerView(batterySOC: 0.22, battery: nil, totalCharge: 1.0, totalDischarge: 2.0, iconScale: .small)
 }

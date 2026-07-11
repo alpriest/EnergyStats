@@ -10,6 +10,7 @@ import SwiftUI
 
 struct SolarPowerView: View {
     let value: Double?
+    let total: Double?
     let solarDefinitions: SolarRangeDefinitions
     let iconScale: IconScale
 
@@ -40,7 +41,16 @@ struct SolarPowerView: View {
                 }
             },
             line2: {
-                Text(" ")
+                Group {
+                    if iconScale.isLarge {
+                        if let total {
+                            Text("today \(total.kWh(2))")
+                        } else {
+                            Text("xxxxx")
+                                .redacted(reason: .placeholder)
+                        }
+                    }
+                }
             }
         )
     }
@@ -50,11 +60,16 @@ struct SolarPowerView: View {
         case .small:
             16
         case .large:
-            44
+            40
         }
     }
 }
 
 #Preview {
-    SolarPowerView(value: 0.0, solarDefinitions: AppSettings.mock().solarDefinitions, iconScale: .large)
+    SolarPowerView(
+        value: 0.0,
+        total: 1.0,
+        solarDefinitions: AppSettings.mock().solarDefinitions,
+        iconScale: .large
+    )
 }

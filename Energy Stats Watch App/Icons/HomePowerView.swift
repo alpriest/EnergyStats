@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomePowerView: View {
     let value: Double?
+    let total: Double?
     let iconScale: IconScale
 
     var body: some View {
@@ -30,7 +31,13 @@ struct HomePowerView: View {
                     }
                 }
             },
-            line2: { Text(" ") }
+            line2: {
+                if let total {
+                    Text("today \(total.kWh(2))")
+                } else {
+                    Text(" ")
+                }
+            }
         )
     }
 
@@ -39,11 +46,11 @@ struct HomePowerView: View {
         case .small:
             .system(size: 32)
         case .large:
-            .system(size: 96)
+            .system(size: 82)
         }
     }
 }
 
 #Preview {
-    HomePowerView(value: 0.0, iconScale: .large)
+    HomePowerView(value: 0.0, total: 3.4, iconScale: .large)
 }

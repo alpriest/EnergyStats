@@ -17,7 +17,7 @@ enum IconScale {
         case .small:
             CGSize(width: 32, height: 32)
         case .large:
-            CGSize(width: 128, height: 128)
+            CGSize(width: 100, height: 100)
         }
     }
 
@@ -26,7 +26,7 @@ enum IconScale {
         case .small:
             .system(size: 32)
         case .large:
-            .system(size: 108)
+            .system(size: 96)
         }
     }
 
