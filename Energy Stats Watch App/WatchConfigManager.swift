@@ -107,6 +107,6 @@ class PreviewWatchConfig: WatchConfigManaging {
 
     var deviceSN: String? = "ABC1234567GB123"
     var apiKey: String? = "00000000-0000-4000-8000-000000000000"
-    var isLoggedIn: Bool = false
+    var isLoggedIn: Bool = true
     var isLoggedInPublisher: AnyPublisher<Bool, Never> { Just(isLoggedIn).eraseToAnyPublisher() }
 }

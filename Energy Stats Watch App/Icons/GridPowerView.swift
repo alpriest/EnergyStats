@@ -37,7 +37,7 @@ struct GridPowerView: View {
             },
             line2: {
                 Group {
-                    if let totalExport, let totalImport {
+                    if let totalExport, let totalImport, iconScale.isLarge {
                         HStack(spacing: 2) {
                             Text(totalImport.roundedToString(decimalPlaces: 1))
                                 .foregroundStyle(Color.linesNegative)

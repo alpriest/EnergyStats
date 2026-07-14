@@ -142,7 +142,7 @@ class ContentViewModel {
     }
 
     private func loadReportData(_ currentDevice: Device) async throws -> [OpenReportResponse] {
-        let reportVariables = [ReportVariable.feedIn, ReportVariable.gridConsumption, ReportVariable.pvEnergyTotal]
+        let reportVariables = [ReportVariable.feedIn, ReportVariable.gridConsumption, ReportVariable.pvEnergyTotal, ReportVariable.chargeEnergyToTal, ReportVariable.dischargeEnergyToTal, ReportVariable.loads]
 
         return try await network.fetchReport(deviceSN: currentDevice.deviceSN,
                                              variables: reportVariables,

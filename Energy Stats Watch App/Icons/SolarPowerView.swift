@@ -44,7 +44,7 @@ struct SolarPowerView: View {
                 Group {
                     if iconScale.isLarge {
                         if let total {
-                            Text("today \(total.kWh(2))")
+                            Text("today \(total.kWh(1))")
                         } else {
                             Text("xxxxx")
                                 .redacted(reason: .placeholder)

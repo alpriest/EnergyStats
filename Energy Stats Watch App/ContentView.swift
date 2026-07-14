@@ -137,7 +137,12 @@ struct ContentView: View {
                     iconScale: .small
                 )
                 Spacer(minLength: 5)
-                GridPowerView(value: viewModel.state?.grid, totalExport: viewModel.state?.totalExport, totalImport: viewModel.state?.totalImport, iconScale: .small)
+                GridPowerView(
+                    value: viewModel.state?.grid,
+                    totalExport: viewModel.state?.totalExport,
+                    totalImport: viewModel.state?.totalImport,
+                    iconScale: .small
+                )
             }
         }
         .padding(.horizontal, 14)

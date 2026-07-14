@@ -33,7 +33,7 @@ struct HomePowerView: View {
             },
             line2: {
                 if let total {
-                    Text("today \(total.kWh(2))")
+                    Text("today \(total.kWh(1))")
                 } else {
                     Text(" ")
                 }
