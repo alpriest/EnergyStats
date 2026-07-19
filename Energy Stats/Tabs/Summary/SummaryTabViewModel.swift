@@ -265,7 +265,8 @@ class SummaryTabViewModel: ObservableObject, HasLoadState {
                 }
             }
             
-            if monthlyTotal == 0 && ((month < currentMonth && year == currentYear) || month < currentMonth || year < currentYear) {
+            if monthlyTotal == 0 && (month < currentMonth || year < currentYear) {
+//            if monthlyTotal == 0 && ((month < currentMonth && year == currentYear) || month < currentMonth || year < currentYear) {
                 emptyMonth = month + 1
                 break
             }

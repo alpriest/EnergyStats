@@ -132,6 +132,7 @@ struct SummaryLoadedView: View {
 
                 Spacer()
 
+//                Text(text(amount))
                 NumberRollerView(text: text(amount))
             }
         }

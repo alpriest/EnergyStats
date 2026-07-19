@@ -8,27 +8,23 @@
 import SwiftUI
 
 public struct NumberRollerView: View {
-    @State private var target = ""
+    @State private var target: String
     private let rowHeight: CGFloat
     private let columnWidth: CGFloat
-    private let uiFont = UIFont.monospacedDigitSystemFont(ofSize: UIFont.preferredFont(forTextStyle: .title2).pointSize, weight: .bold)
-    private let formatter: NumberFormatter = {
-        let f = NumberFormatter()
-        f.numberStyle = .decimal
-        f.usesGroupingSeparator = true
-        f.maximumFractionDigits = 2
-        f.minimumFractionDigits = 2
-        return f
-    }()
+
+    private static let uiFont = UIFont.monospacedDigitSystemFont(
+        ofSize: UIFont.preferredFont(forTextStyle: .title2).pointSize,
+        weight: .bold
+    )
 
     private func width(of s: String) -> CGFloat {
-        (s as NSString).size(withAttributes: [.font: uiFont]).width.rounded(.up)
+        (s as NSString).size(withAttributes: [.font: Self.uiFont]).width.rounded(.up)
     }
 
     public init(text: String) {
-        rowHeight = ("8" as NSString).size(withAttributes: [.font: uiFont]).height.rounded(.up)
-        columnWidth = ("0" as NSString).size(withAttributes: [.font: uiFont]).width.rounded(.up)
-        target = text
+        _target = State(initialValue: text)
+        rowHeight = ("8" as NSString).size(withAttributes: [.font: Self.uiFont]).height.rounded(.up)
+        columnWidth = ("0" as NSString).size(withAttributes: [.font: Self.uiFont]).width.rounded(.up)
     }
 
     public var body: some View {
@@ -52,7 +48,7 @@ public struct NumberRollerView: View {
             }
         }
         .frame(height: rowHeight) // show exactly one row
-        .font(Font(uiFont))
+        .font(Font(Self.uiFont))
         .monospacedDigit()
         .mask(
             LinearGradient(stops: [
@@ -64,6 +60,7 @@ public struct NumberRollerView: View {
         )
     }
 }
+
 
 struct DigitRoller: View {
     private let digit: Int
