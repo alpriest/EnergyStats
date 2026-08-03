@@ -35,7 +35,7 @@ struct FinancialsSettingsView: View {
 
                 Section {
                     makeTextField(
-                        title: "Unit price",
+                        title: "Grid export unit price",
                         currencySymbol: viewModel.configManager.currencySymbol,
                         text: $viewModel.energyStatsFeedInUnitPrice,
                         decimalPlaces: 2,
@@ -64,7 +64,7 @@ struct FinancialsSettingsView: View {
 
                 Section {
                     makeTextField(
-                        title: "Grid Import Unit price",
+                        title: "Grid import unit price",
                         currencySymbol: viewModel.configManager.currencySymbol,
                         text: $viewModel.energyStatsGridImportUnitPrice,
                         decimalPlaces: 2,
@@ -85,6 +85,14 @@ struct FinancialsSettingsView: View {
                 } footer: {
                     Text("Used for estimating when your system will be paid back on the summary page")
                 }
+                
+                Section {
+                    Toggle(isOn: $viewModel.deductInverterConsumptionFromGridAvoided) {
+                        Text("Deduct inverter consumption from grid avoided")
+                    }
+                } footer: {
+                    Text("When this option is checked, your inverter\'s energy use will be deducted from your grid avoided amount. This is because the energy wouldn\'t have been imported without the inverter, so it doesn\'t count as a direct saving. However, your inverter might be running on energy stored in your batteries from your solar panels and therefore you don\'t want to deduct it.")
+                }
 
                 Section {} footer: {
                     energyStatsFooter()
@@ -98,6 +106,7 @@ struct FinancialsSettingsView: View {
     func energyStatsFooter() -> some View {
         VStack(alignment: .leading) {
             Text("Financial summary descriptions")
+                .foregroundStyle(Color.black)
                 .font(.title3)
             
             VStack(alignment: .leading) {

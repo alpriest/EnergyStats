@@ -89,6 +89,7 @@ public protocol ConfigManaging: FinancialConfigManager, SolcastConfigManager, Ba
     var scheduleProperties: [String: SchedulePropertyDefinition] { get set }
     var inverterGeneration: InverterGeneration { get set }
     var showTodayPercentageSolarForecastAchieved: Bool { get set }
+    var deductInverterConsumptionFromGridAvoided: Bool { get set }
 }
 
 public enum DeviceCapability {
@@ -125,6 +126,7 @@ public protocol FinancialConfigManager {
     var gridImportUnitPrice: Double { get set }
     var earningsModel: EarningsModel { get set }
     var installationPurchasePrice: Double { get set }
+    var deductInverterConsumptionFromGridAvoided: Bool { get set }
     
     var appSettingsPublisher: AnyPublisher<AppSettings, Never> { get }
 }

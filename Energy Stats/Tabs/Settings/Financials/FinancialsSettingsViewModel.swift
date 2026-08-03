@@ -48,6 +48,12 @@ class FinancialsSettingsViewModel: ObservableObject {
             configManager.installationPurchasePrice = installationPurchasePrice.asCurrencyStringToDouble()
         }
     }
+    
+    @Published var deductInverterConsumptionFromGridAvoided: Bool {
+        didSet {
+            configManager.deductInverterConsumptionFromGridAvoided = deductInverterConsumptionFromGridAvoided
+        }
+    }
 
     private(set) var configManager: ConfigManaging
 
@@ -59,5 +65,6 @@ class FinancialsSettingsViewModel: ObservableObject {
         energyStatsGridImportUnitPrice = configManager.gridImportUnitPrice.roundedToString(decimalPlaces: 3)
         earningsModel = configManager.earningsModel
         installationPurchasePrice = configManager.installationPurchasePrice.roundedToString(decimalPlaces: 0)
+        deductInverterConsumptionFromGridAvoided = configManager.deductInverterConsumptionFromGridAvoided
     }
 }

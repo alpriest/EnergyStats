@@ -464,6 +464,7 @@ public class MockConfig: StoredConfig {
     public var inverterGeneration: InverterGeneration = .unknown
     public var showTodayPercentageSolarForecastAchieved: Bool = true
     public var installationPurchasePrice: Double = 0
+    public var deductInverterConsumptionFromGridAvoided: Bool = true
 }
 
 public extension SolcastSite {

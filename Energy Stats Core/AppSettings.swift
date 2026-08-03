@@ -63,6 +63,7 @@ public struct AppSettings: Equatable {
     public var allowNegativeLoad: Bool
     public var showOutputEnergyOnStats: Bool
     public var isReadOnly: Bool
+    public var deductInverterConsumptionFromGridAvoided: Bool
 
     public init(
         showColouredLines: Bool,
@@ -112,7 +113,8 @@ public struct AppSettings: Equatable {
         showBatterySOCOnDailyStats: Bool,
         allowNegativeLoad: Bool,
         showOutputEnergyOnStats: Bool,
-        isReadOnly: Bool
+        isReadOnly: Bool,
+        deductInverterConsumptionFromGridAvoided: Bool
     ) {
         self.showColouredLines = showColouredLines
         self.showBatteryTemperature = showBatteryTemperature
@@ -162,6 +164,7 @@ public struct AppSettings: Equatable {
         self.allowNegativeLoad = allowNegativeLoad
         self.showOutputEnergyOnStats = showOutputEnergyOnStats
         self.isReadOnly = isReadOnly
+        self.deductInverterConsumptionFromGridAvoided = deductInverterConsumptionFromGridAvoided
     }
 
     public func copy(
@@ -212,7 +215,8 @@ public struct AppSettings: Equatable {
         showBatterySOCOnDailyStats: Bool? = nil,
         allowNegativeLoad: Bool? = nil,
         showOutputEnergyOnStats: Bool? = nil,
-        isReadOnly: Bool? = nil
+        isReadOnly: Bool? = nil,
+        deductInverterConsumptionFromGridAvoided: Bool? = nil
     ) -> AppSettings {
         AppSettings(
             showColouredLines: showColouredLines ?? self.showColouredLines,
@@ -262,7 +266,8 @@ public struct AppSettings: Equatable {
             showBatterySOCOnDailyStats: showBatterySOCOnDailyStats ?? self.showBatterySOCOnDailyStats,
             allowNegativeLoad: allowNegativeLoad ?? self.allowNegativeLoad,
             showOutputEnergyOnStats: showOutputEnergyOnStats ?? self.showOutputEnergyOnStats,
-            isReadOnly: isReadOnly ?? self.isReadOnly
+            isReadOnly: isReadOnly ?? self.isReadOnly,
+            deductInverterConsumptionFromGridAvoided: deductInverterConsumptionFromGridAvoided ?? self.deductInverterConsumptionFromGridAvoided
         )
     }
 
@@ -315,7 +320,8 @@ public struct AppSettings: Equatable {
             showBatterySOCOnDailyStats: config.showBatterySOCOnDailyStats,
             allowNegativeLoad: config.allowNegativeLoad,
             showOutputEnergyOnStats: config.showOutputEnergyOnStats,
-            isReadOnly: config.isReadOnly
+            isReadOnly: config.isReadOnly,
+            deductInverterConsumptionFromGridAvoided: config.deductInverterConsumptionFromGridAvoided
         )
     }
 }

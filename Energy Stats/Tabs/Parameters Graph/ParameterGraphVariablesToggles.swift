@@ -43,7 +43,7 @@ struct ParameterGraphVariablesToggles: View {
                     .listRowSeparator(.hidden)
                 }
             }
-        }.onChange(of: viewModel.graphVariables) { _ in
+        }.onChange(of: viewModel.graphVariables) {
             viewModel.refresh()
         }
     }

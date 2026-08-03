@@ -50,8 +50,8 @@ struct SolarStringsSettingsView: View {
                     InfoButtonView(message: "settings.pvpower.strings.description")
                 }
             }
-            .onChange(of: showStringSelection) { newValue in
-                viewModel.powerFlowStrings = viewModel.powerFlowStrings.copy(enabled: newValue)
+            .onChange(of: showStringSelection) {
+                viewModel.powerFlowStrings = viewModel.powerFlowStrings.copy(enabled: showStringSelection)
             }
 
             if showStringSelection {
@@ -63,29 +63,29 @@ struct SolarStringsSettingsView: View {
                     editableStringToggle(for: "PV5", $pv5, $pv5Name)
                     editableStringToggle(for: "PV6", $pv6, $pv6Name)
                 }.onChange(of: pv1) {
-                    viewModel.powerFlowStrings = viewModel.powerFlowStrings.copy(pv1Enabled: $0)
+                    viewModel.powerFlowStrings = viewModel.powerFlowStrings.copy(pv1Enabled: pv1)
                 }.onChange(of: pv2) {
-                    viewModel.powerFlowStrings = viewModel.powerFlowStrings.copy(pv2Enabled: $0)
+                    viewModel.powerFlowStrings = viewModel.powerFlowStrings.copy(pv2Enabled: pv2)
                 }.onChange(of: pv3) {
-                    viewModel.powerFlowStrings = viewModel.powerFlowStrings.copy(pv3Enabled: $0)
+                    viewModel.powerFlowStrings = viewModel.powerFlowStrings.copy(pv3Enabled: pv3)
                 }.onChange(of: pv4) {
-                    viewModel.powerFlowStrings = viewModel.powerFlowStrings.copy(pv4Enabled: $0)
+                    viewModel.powerFlowStrings = viewModel.powerFlowStrings.copy(pv4Enabled: pv4)
                 }.onChange(of: pv5) {
-                    viewModel.powerFlowStrings = viewModel.powerFlowStrings.copy(pv5Enabled: $0)
+                    viewModel.powerFlowStrings = viewModel.powerFlowStrings.copy(pv5Enabled: pv5)
                 }.onChange(of: pv6) {
-                    viewModel.powerFlowStrings = viewModel.powerFlowStrings.copy(pv6Enabled: $0)
+                    viewModel.powerFlowStrings = viewModel.powerFlowStrings.copy(pv6Enabled: pv6)
                 }.onChange(of: pv1Name) {
-                    viewModel.powerFlowStrings = viewModel.powerFlowStrings.copy(pv1Name: $0)
+                    viewModel.powerFlowStrings = viewModel.powerFlowStrings.copy(pv1Name: pv1Name)
                 }.onChange(of: pv2Name) {
-                    viewModel.powerFlowStrings = viewModel.powerFlowStrings.copy(pv2Name: $0)
+                    viewModel.powerFlowStrings = viewModel.powerFlowStrings.copy(pv2Name: pv2Name)
                 }.onChange(of: pv3Name) {
-                    viewModel.powerFlowStrings = viewModel.powerFlowStrings.copy(pv3Name: $0)
+                    viewModel.powerFlowStrings = viewModel.powerFlowStrings.copy(pv3Name: pv3Name)
                 }.onChange(of: pv4Name) {
-                    viewModel.powerFlowStrings = viewModel.powerFlowStrings.copy(pv4Name: $0)
+                    viewModel.powerFlowStrings = viewModel.powerFlowStrings.copy(pv4Name: pv4Name)
                 }.onChange(of: pv5Name) {
-                    viewModel.powerFlowStrings = viewModel.powerFlowStrings.copy(pv5Name: $0)
+                    viewModel.powerFlowStrings = viewModel.powerFlowStrings.copy(pv5Name: pv5Name)
                 }.onChange(of: pv6Name) {
-                    viewModel.powerFlowStrings = viewModel.powerFlowStrings.copy(pv6Name: $0)
+                    viewModel.powerFlowStrings = viewModel.powerFlowStrings.copy(pv6Name: pv6Name)
                 }
             }
         }

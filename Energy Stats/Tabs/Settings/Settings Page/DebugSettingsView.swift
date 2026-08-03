@@ -29,7 +29,7 @@ struct DebugSettingsView: View {
 
             Section {
                 Button {
-                    Task {
+                    TaskIgnoringErrors {
                         let counts = try await networking.fetchRequestCount()
                         await MainActor.run {
                             alert = AlertContent(title: nil, message: LocalizedStringKey("\(counts.remaining) remaining out of \(counts.total) total"))

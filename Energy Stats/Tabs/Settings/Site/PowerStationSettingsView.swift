@@ -22,7 +22,7 @@ struct PowerStationSettingsView: View {
             .alertCopy(copyText)
         }
         .task {
-            Task {
+            TaskIgnoringErrors {
                 try await configManager.fetchPowerStationDetail()
                 if let station = configManager.powerStationDetail {
                     self.station = station

@@ -137,7 +137,7 @@ struct SolarBandingSettingsView: View {
                     }
                     .buttonStyle(.bordered)
                 }
-            }.onChange(of: breakpoint1) { newValue in
+            }.onChange(of: breakpoint1) {
                 if breakpoint1 >= breakpoint2 {
                     breakpoint1 = breakpoint2 - 0.1
                 }
@@ -145,7 +145,7 @@ struct SolarBandingSettingsView: View {
                 verifyThresholds()
                 modifiedAppTheme = makeAppTheme()
             }
-            .onChange(of: breakpoint2) { newValue in
+            .onChange(of: breakpoint2) {
                 if breakpoint2 >= breakpoint3 {
                     breakpoint2 = breakpoint3 - 0.1
                 }
@@ -153,7 +153,7 @@ struct SolarBandingSettingsView: View {
                 verifyThresholds()
                 modifiedAppTheme = makeAppTheme()
             }
-            .onChange(of: breakpoint3) { newValue in
+            .onChange(of: breakpoint3) {
                 verifyThresholds()
                 modifiedAppTheme = makeAppTheme()
             }

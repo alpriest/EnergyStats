@@ -29,12 +29,12 @@ struct NumberTextField<Field: Hashable>: View {
         TextField(title, text: $text)
             .keyboardType(.numberPad)
             .focused(focusedField, equals: equals)
-            .onChange(of: text, perform: { newValue in
-                let filtered = newValue.filter { "0123456789".contains($0) }
-                if filtered != newValue {
+            .onChange(of: text) {
+                let filtered = text.filter { "0123456789".contains($0) }
+                if filtered != text {
                     text = filtered
                 }
-            })
+            }
     }
 }
 

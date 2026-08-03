@@ -64,7 +64,8 @@ public extension AppSettings {
             showBatterySOCOnDailyStats: false,
             allowNegativeLoad: false,
             showOutputEnergyOnStats: false,
-            isReadOnly: false
+            isReadOnly: false,
+            deductInverterConsumptionFromGridAvoided: false
         )
     }
 }

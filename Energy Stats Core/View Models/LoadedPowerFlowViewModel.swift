@@ -90,9 +90,7 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
             self.todayPercentageSolarForecastAchieved = (generation.todayGeneration / todaySolarForecast) * 100.0
         }
 
-        Task {
-            try await self.loadDeviceStatus()
-        }
+        self.loadDeviceStatus()
     }
 
     private func updateDisplayStrings(_ settings: AppSettings) {
@@ -109,27 +107,33 @@ public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
         self.displayStrings = displayStrings
     }
 
-    private func loadDeviceStatus() async throws {
-        let deviceState = try DeviceState(rawValue: await self.network.fetchDevice(deviceSN: self.currentDevice.deviceSN).status) ?? DeviceState.offline
-        let faults: [String]
-
-        switch deviceState {
-        case .online:
-            faults = []
-        case .fault:
-            faults = try await self.loadCurrentFaults()
-        case .offline:
-            NotificationCenter.default.post(name: .deviceIsOffline, object: nil)
-            faults = try await self.loadCurrentFaults()
-        case .unknown:
-            faults = []
-        }
-
-        if Task.isCancelled { return }
-
-        await MainActor.run {
-            self.faults = faults
-            self.deviceState = deviceState
+    private func loadDeviceStatus() {
+        Task {
+            do {
+                let deviceState = try DeviceState(rawValue: await self.network.fetchDevice(deviceSN: self.currentDevice.deviceSN).status) ?? DeviceState.offline
+                let faults: [String]
+                
+                switch deviceState {
+                case .online:
+                    faults = []
+                case .fault:
+                    faults = try await self.loadCurrentFaults()
+                case .offline:
+                    NotificationCenter.default.post(name: .deviceIsOffline, object: nil)
+                    faults = try await self.loadCurrentFaults()
+                case .unknown:
+                    faults = []
+                }
+                
+                if Task.isCancelled { return }
+                
+                await MainActor.run {
+                    self.faults = faults
+                    self.deviceState = deviceState
+                }
+            } catch {
+                // Ignore
+            }
         }
     }
 

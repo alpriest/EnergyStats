@@ -43,11 +43,11 @@ struct BatteryChargeScheduleSettingsView: View {
         .navigationTitle(.batteryChargeSchedule)
         .navigationBarTitleDisplayMode(.inline)
         .loadable(viewModel.state, retry: { viewModel.load() })
-        .onChange(of: viewModel.viewData.timePeriod1) { newValue in
-            viewModel.updateSummary(period1: newValue, period2: viewModel.viewData.timePeriod2)
+        .onChange(of: viewModel.viewData.timePeriod1) {
+            viewModel.updateSummary(period1: viewModel.viewData.timePeriod1, period2: viewModel.viewData.timePeriod2)
         }
-        .onChange(of: viewModel.viewData.timePeriod2) { newValue in
-            viewModel.updateSummary(period1: viewModel.viewData.timePeriod1, period2: newValue)
+        .onChange(of: viewModel.viewData.timePeriod2) {
+            viewModel.updateSummary(period1: viewModel.viewData.timePeriod1, period2: viewModel.viewData.timePeriod2)
         }
         .alert(alertContent: $viewModel.alertContent)
     }

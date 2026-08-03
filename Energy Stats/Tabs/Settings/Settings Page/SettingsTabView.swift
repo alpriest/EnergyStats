@@ -149,7 +149,7 @@ struct ReloadDevicesButton: View {
 
     var body: some View {
         Button {
-            Task {
+            TaskIgnoringErrors {
                 isLoading = true
                 try await viewModel.reloadDevices()
                 isLoading = false

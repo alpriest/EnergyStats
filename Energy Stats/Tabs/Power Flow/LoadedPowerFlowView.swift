@@ -88,8 +88,8 @@ struct LoadedPowerFlowView: View {
         .opacity(isReady ? 1 : 0)
         .allowsHitTesting(isReady)
         .accessibilityHidden(!isReady)
-        .onChange(of: size) { new in
-            if !isReady, new != .zero {
+        .onChange(of: size) {
+            if !isReady, size != .zero {
                 DispatchQueue.main.async { // force the animation to appear on the next layout pass
                     withAnimation(.easeIn) {
                         isReady = true

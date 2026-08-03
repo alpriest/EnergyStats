@@ -769,7 +769,7 @@ public class ConfigManager: ConfigManaging {
         get { config.inverterGeneration }
         set { config.inverterGeneration = newValue }
     }
-    
+
     public var showTodayPercentageSolarForecastAchieved: Bool {
         get { config.showTodayPercentageSolarForecastAchieved }
         set { config.showTodayPercentageSolarForecastAchieved = newValue }
@@ -778,6 +778,16 @@ public class ConfigManager: ConfigManaging {
     public var installationPurchasePrice: Double {
         get { config.installationPurchasePrice }
         set { config.installationPurchasePrice = newValue }
+    }
+
+    public var deductInverterConsumptionFromGridAvoided: Bool {
+        get { config.deductInverterConsumptionFromGridAvoided }
+        set {
+            config.deductInverterConsumptionFromGridAvoided = newValue
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
+                deductInverterConsumptionFromGridAvoided: config.deductInverterConsumptionFromGridAvoided,
+            ))
+        }
     }
 }
 
@@ -839,7 +849,17 @@ public extension ConfigManager {
                 appSettingsStore: AppSettingsStore(),
                 keychainStore: KeychainStore.preview()
             )
-            Task { try await fetchDevices() }
+            TaskIgnoringErrors { [weak self] in try await self?.fetchDevices() }
+        }
+    }
+}
+
+public func TaskIgnoringErrors(_ task: @escaping () async throws -> Void) {
+    Task {
+        do {
+            try await task()
+        } catch {
+            // Ignore
         }
     }
 }

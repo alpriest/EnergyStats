@@ -76,6 +76,7 @@ public protocol StoredConfig {
     var inverterGeneration: InverterGeneration { get set }
     var showTodayPercentageSolarForecastAchieved: Bool { get set }
     var installationPurchasePrice: Double { get set }
+    var deductInverterConsumptionFromGridAvoided: Bool { get set }
 }
 
 public func DefaultParameterGroups() -> [ParameterGroup] {

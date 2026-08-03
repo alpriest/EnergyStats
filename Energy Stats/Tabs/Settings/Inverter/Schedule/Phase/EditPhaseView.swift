@@ -87,7 +87,7 @@ struct EditPhaseView: View {
         }
         .navigationTitle(.editPhase)
         .navigationBarTitleDisplayMode(.inline)
-        .onChange(of: viewModel.viewData.workMode) { _ in
+        .onChange(of: viewModel.viewData.workMode) {
             showingAdvanced = false
         }
     }

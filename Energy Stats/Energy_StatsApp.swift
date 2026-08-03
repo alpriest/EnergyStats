@@ -106,8 +106,8 @@ struct Energy_StatsApp: App {
                 .environmentObject(KeychainWrapper(keychainStore))
                 .environmentObject(versionChecker)
                 .environmentObject(bannerAlertManager)
-                .onChange(of: scenePhase) { phase in
-                    if case .active = phase {
+                .onChange(of: scenePhase) {
+                    if case .active = scenePhase {
                         performOnActivationTasks(solarForecastProvider: solarForecastProvider)
                     }
                 }
@@ -167,7 +167,7 @@ struct Energy_StatsApp: App {
     private func fetchCurrentInverterSchedule() {
         guard configManager.showInverterScheduleQuickLink else { return }
 
-        Task {
+        TaskIgnoringErrors {
             guard let deviceSN = configManager.selectedDeviceSN else { return }
             let isEnabled = try await network.fetchSchedulerFlag(deviceSN: deviceSN)
             guard isEnabled.enable else { return }

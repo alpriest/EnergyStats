@@ -119,7 +119,7 @@ struct StatsDatePickerHeaderView: View {
                     }
                     .accessibilityLabel("Month picker")
                     .accessibilityValue(Calendar.current.monthSymbols[viewModel.month])
-                    .onChange(of: viewModel.month) { _ in
+                    .onChange(of: viewModel.month) { 
                         viewModel.updateDisplayMode()
                     }
 
@@ -139,7 +139,7 @@ struct StatsDatePickerHeaderView: View {
                     }
                     .accessibilityLabel("Year picker")
                     .accessibilityValue(String(viewModel.year))
-                    .onChange(of: viewModel.year) { _ in
+                    .onChange(of: viewModel.year) {
                         viewModel.updateDisplayMode()
                     }
                 }
@@ -160,7 +160,7 @@ struct StatsDatePickerHeaderView: View {
                 }
                 .accessibilityLabel("Year picker")
                 .accessibilityValue(String(viewModel.year))
-                .onChange(of: viewModel.year) { _ in
+                .onChange(of: viewModel.year) {
                     viewModel.updateDisplayMode()
                 }
             case .custom:

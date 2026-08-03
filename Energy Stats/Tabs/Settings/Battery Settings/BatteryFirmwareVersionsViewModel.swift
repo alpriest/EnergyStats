@@ -25,15 +25,17 @@ class BatteryFirmwareVersionsViewModel: ObservableObject, HasLoadState {
 
         await setState(.active(.loading))
 
-        Task {
+        TaskIgnoringErrors { [weak self] in
+            guard let self else { return }
+
             let device = try await network.fetchDevice(deviceSN: selectedDeviceSN)
 
             await MainActor.run {
                 if let batteryList = device.batteryList {
-                    modules = batteryList.map { DeviceBatteryModule(batterySN: $0.batterySN, type: $0.type, version: $0.version) }
-                    Task { await setState(.inactive) }
+                    self.modules = batteryList.map { DeviceBatteryModule(batterySN: $0.batterySN, type: $0.type, version: $0.version) }
+                    Task { await self.setState(.inactive) }
                 } else {
-                    state = .error(nil, "Failed to fetch battery information")
+                    self.state = .error(nil, "Failed to fetch battery information")
                 }
             }
         }

@@ -6,6 +6,7 @@
 //
 
 import Energy_Stats_Core
+import StoreKit
 import SwiftUI
 
 struct TemplateSummaryListRow: View {

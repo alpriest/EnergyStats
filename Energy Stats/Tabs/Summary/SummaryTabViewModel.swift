@@ -36,8 +36,8 @@ struct SummaryViewData: Copiable, Equatable {
                 guard let paybackMonths, let purchasePrice else { return nil }
                 
                 self.paybackMonths = paybackMonths
-                self.installationPurchasePrice = purchasePrice
-                self.infoText = "Assuming system was purchased around \(oldestDataDate.monthYearString()) for \(installationPurchasePrice)."
+                installationPurchasePrice = purchasePrice
+                infoText = "Assuming system was purchased around \(oldestDataDate.monthYearString()) for \(installationPurchasePrice)."
             }
         }
     }
@@ -76,7 +76,7 @@ class SummaryTabViewModel: ObservableObject, HasLoadState {
     private var configManager: ConfigManaging
     @Published var viewData: SummaryViewData? = nil
     private let approximationsCalculator: ApproximationsCalculator
-    private var themeChangeCancellable: AnyCancellable?
+    private var cancellables = Set<AnyCancellable>()
     @Published var summaryDateRange: SummaryDateRange
     private let reportVariables = [ReportVariable.feedIn, .generation, .chargeEnergyToTal, .dischargeEnergyToTal, .gridConsumption, .loads, .pvEnergyTotal]
     @Published var state: LoadState = .inactive
@@ -88,11 +88,27 @@ class SummaryTabViewModel: ObservableObject, HasLoadState {
         self.configManager = configManager
         summaryDateRange = configManager.summaryDateRange
         approximationsCalculator = ApproximationsCalculator(configManager: configManager, networking: networking)
-        themeChangeCancellable = self.configManager.appSettingsPublisher.sink { theme in
-            Task { @MainActor in
-                self.viewData = self.viewData?.copy { $0.currencySymbol = theme.currencySymbol }
+        self.configManager.appSettingsPublisher
+            .sink { [weak self] theme in
+                guard let self else { return }
+                Task { @MainActor in
+                    self.viewData = self.viewData?.copy { $0.currencySymbol = theme.currencySymbol }
+                }
+            }.store(in: &cancellables)
+        
+        self.configManager.appSettingsPublisher
+            .map { $0.deductInverterConsumptionFromGridAvoided }
+            .removeDuplicates()
+            .dropFirst()
+            .sink { [weak self] _ in
+                guard let self else { return }
+
+                Task { @MainActor in
+                    self.viewData = nil
+                    self.load()
+                }
             }
-        }
+            .store(in: &cancellables)
     }
     
     func load() {
@@ -102,7 +118,9 @@ class SummaryTabViewModel: ObservableObject, HasLoadState {
         
         solarGenerationByMonth = []
         
-        Task { @MainActor in
+        TaskIgnoringErrors { @MainActor [weak self] in
+            guard let self else { return }
+
             await setState(.active(.loading))
             
             let (totals, oldestDataDate) = try await fetchAllYears(device: currentDevice)
@@ -194,7 +212,7 @@ class SummaryTabViewModel: ObservableObject, HasLoadState {
     private func fetchAllYears(device: Device) async throws -> ([ReportVariable: Double], Date) {
         var totals = [ReportVariable: Double]()
         var hasFinished = false
-        var oldestDataDate: Date = Date.now
+        var oldestDataDate = Date.now
         let currentYear = Calendar.current.component(.year, from: Date())
 
         for year in (fromYear ... toYear).reversed() {

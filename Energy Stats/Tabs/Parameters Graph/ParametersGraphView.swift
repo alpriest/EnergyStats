@@ -88,7 +88,8 @@ struct ParametersGraphView: View {
                 Rectangle().fill(.clear).contentShape(Rectangle())
                     .gesture(DragGesture(minimumDistance: 20)
                         .updating($isDetectingPress) { currentState, _, _ in
-                            let xLocation = currentState.location.x - geometryProxy[chartProxy.plotAreaFrame].origin.x
+                            guard let plotFrame = chartProxy.plotFrame else { return }
+                            let xLocation = currentState.location.x - geometryProxy[plotFrame].origin.x
 
                             if let plotElement = chartProxy.value(atX: xLocation, as: Date.self) {
                                 if let graphValue = data.values.first(where: {
@@ -102,7 +103,8 @@ struct ParametersGraphView: View {
                     )
                     .gesture(SpatialTapGesture()
                         .onEnded { value in
-                            let xLocation = value.location.x - geometryProxy[chartProxy.plotAreaFrame].origin.x
+                            guard let plotFrame = chartProxy.plotFrame else { return }
+                            let xLocation = value.location.x - geometryProxy[plotFrame].origin.x
 
                             if let plotElement = chartProxy.value(atX: xLocation, as: Date.self) {
                                 if let graphValue = data.values.first(where: {

@@ -85,22 +85,22 @@ struct BatteryHeatingScheduleSettingsView: View {
                 requestReview()
             }
         }
-        .onChange(of: viewModel.viewData.enabled) { _ in
+        .onChange(of: viewModel.viewData.enabled) {
             viewModel.updateSummary()
         }
-        .onChange(of: viewModel.viewData.timePeriod1) { _ in
+        .onChange(of: viewModel.viewData.timePeriod1) {
             viewModel.updateSummary()
         }
-        .onChange(of: viewModel.viewData.timePeriod2) { _ in
+        .onChange(of: viewModel.viewData.timePeriod2) {
             viewModel.updateSummary()
         }
-        .onChange(of: viewModel.viewData.timePeriod3) { _ in
+        .onChange(of: viewModel.viewData.timePeriod3) {
             viewModel.updateSummary()
         }
-        .onChange(of: viewModel.viewData.startTemperature) { _ in
+        .onChange(of: viewModel.viewData.startTemperature) {
             viewModel.updateSummary()
         }
-        .onChange(of: viewModel.viewData.endTemperature) { _ in
+        .onChange(of: viewModel.viewData.endTemperature) {
             viewModel.updateSummary()
         }
     }

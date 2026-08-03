@@ -58,8 +58,8 @@ struct ReadOnlySettingsView: View {
                         .focused($isPasscodeFocused)
                         .opacity(0.01)
                         .frame(height: 30)
-                        .onChange(of: viewModel.passcode) { newValue in
-                            viewModel.updatePasscode(newValue)
+                        .onChange(of: viewModel.passcode) { 
+                            viewModel.updatePasscode(viewModel.passcode)
                         }
 
                     HStack(spacing: 12) {

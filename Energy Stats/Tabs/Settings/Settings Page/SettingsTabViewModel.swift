@@ -329,7 +329,9 @@ class SettingsTabViewModel: ObservableObject {
         guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
         guard let devices = config.devices else { return }
 
-        Task { @MainActor [networking] in
+        TaskIgnoringErrors { @MainActor [weak self, networking] in
+            guard let self else { return }
+
             let real = try await networking.fetchRealData(deviceSN: deviceSN, variables: ["SoC", "SoC_1", "ResidualEnergy"])
             let socResponse = try await networking.fetchBatterySettings(deviceSN: deviceSN)
             let batteryDetail = try await networking.fetchDevice(deviceSN: deviceSN)

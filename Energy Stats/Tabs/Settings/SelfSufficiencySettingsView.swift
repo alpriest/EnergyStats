@@ -56,8 +56,8 @@ struct SelfSufficiencySettingsView: View {
                 default:
                     Text("no_self_sufficiency")
                 }
-            }.onChange(of: internalMode) { newValue in
-                viewModel.selfSufficiencyEstimateMode = SelfSufficiencyEstimateMode(rawValue: newValue) ?? .off
+            }.onChange(of: internalMode) {
+                viewModel.selfSufficiencyEstimateMode = SelfSufficiencyEstimateMode(rawValue: internalMode) ?? .off
             }
 
             if internalMode != SelfSufficiencyEstimateMode.off.rawValue {

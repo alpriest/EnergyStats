@@ -123,13 +123,13 @@ struct CustomDateRangePickerView: View {
                     }
                 }
 
-            }.onChange(of: start) { _ in
+            }.onChange(of: start) {
                 recompute()
             }
-            .onChange(of: end) { _ in
+            .onChange(of: end) {
                 recompute()
             }
-            .onChange(of: chooseBy) { _ in
+            .onChange(of: chooseBy) { 
                 recompute()
             }
             .onAppear {

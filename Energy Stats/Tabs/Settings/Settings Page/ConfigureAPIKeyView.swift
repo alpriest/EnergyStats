@@ -34,7 +34,7 @@ struct ConfigureAPIKeyView: View {
             self.originalValue = apiKey
             self.apiKey = apiKey
         }.onChange(of: apiKey) {
-            isDirty = $0 != originalValue
+            isDirty = apiKey != originalValue
         }.navigationTitle(.apiKey)
     }
 }

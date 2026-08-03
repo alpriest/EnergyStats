@@ -102,8 +102,8 @@ struct AdjustableView: View {
                     visible.toggle()
                 }
             })
-            .onChange(of: amount) { newValue in
-                if thresholds.contains(newValue) {
+            .onChange(of: amount) {
+                if thresholds.contains(amount) {
                     haptic.selectionChanged()
                 }
             }
