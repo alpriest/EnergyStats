@@ -9,9 +9,9 @@ import Foundation
 
 extension StatsTabViewModel {
     func prepareExport(rawData: [StatsGraphValue]) -> TextFile? {
-        let headers = ["Type", "Date", "Value"].lazy.joined(separator: ",")
+        let headers = ["Type", "UTC Date", "Local Date", "Hour", "Value"].lazy.joined(separator: ",")
         let rows = rawData.map {
-            [$0.type.networkTitle, $0.date.iso8601(), $0.formatted(2)].lazy.joined(separator: ",")
+            [$0.type.networkTitle, $0.date.iso8601(), $0.date.exportDate(), String($0.date.hour()), $0.formatted(2)].lazy.joined(separator: ",")
         }
         
         let text = ([headers] + rows).joined(separator: "\n")

@@ -276,9 +276,9 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
     var axisType: AxisUnit = .consistent("kW")
 
     func prepareExport() {
-        let headers = ["Type", "Date", "Value"].lazy.joined(separator: ",")
+        let headers = ["Type", "UTC Date", "Local Date", "Hour", "Value"].lazy.joined(separator: ",")
         let rows = rawData.map {
-            [$0.type.name, $0.date.iso8601(), String(describing: $0.value)].lazy.joined(separator: ",")
+            [$0.type.name, $0.date.iso8601(), $0.date.exportDate(), String($0.date.hour()), String(describing: $0.value)].lazy.joined(separator: ",")
         }
 
         let text = ([headers] + rows).joined(separator: "\n")

@@ -97,4 +97,13 @@ extension Date {
     func dayHourString() -> String { formatted(Date.FormatStyle.dayHour) }
     func dayMonthString() -> String { formatted(Date.FormatStyle.dayMonth) }
     func monthYearString() -> String { formatted(Date.FormatStyle.monthYear) }
+    
+    func exportDate() -> String {
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .gregorian)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = .autoupdatingCurrent
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: self)
+    }
 }
