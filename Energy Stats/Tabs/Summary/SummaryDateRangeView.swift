@@ -9,9 +9,9 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct SummaryDateRangeView: View {
-    @State private var automatic = false
-    @State private var from: Date = .now
-    @State private var to: Date = .now
+    @State private var automatic: Bool
+    @State private var from: Date
+    @State private var to: Date
     @Environment(\.presentationMode) var presentationMode
     let onApply: (SummaryDateRange) -> Void
 
@@ -19,13 +19,13 @@ struct SummaryDateRangeView: View {
         self.onApply = onApply
         switch initial {
         case .automatic:
-            self.automatic = true
-            self.from = Date.from(year: 2020, month: 1)
-            self.to = .now
+            _automatic = State(initialValue: true)
+            _from = State(initialValue: Date.from(year: 2020, month: 1))
+            _to = State(initialValue: .now)
         case let .manual(from: from, to: to):
-            self.automatic = false
-            self.from = from
-            self.to = to
+            _automatic = State(initialValue: false)
+            _from = State(initialValue: from)
+            _to = State(initialValue: to)
         }
     }
 
@@ -105,7 +105,7 @@ struct YearMonthPickerView: View {
     var body: some View {
         HStack {
             Picker("Month", selection: $selectedMonth) {
-                ForEach(1..<13) { month in
+                ForEach(1 ..< 13) { month in
                     Text(months[month - 1]).tag(month)
                 }
             }
