@@ -214,6 +214,8 @@ class SummaryTabViewModel: ObservableObject, HasLoadState {
         var hasFinished = false
         var oldestDataDate = Date.now
         let currentYear = Calendar.current.component(.year, from: Date())
+        
+        guard fromYear < toYear else { return ([:], Date.now)}
 
         for year in (fromYear ... toYear).reversed() {
             if hasFinished {
@@ -237,6 +239,13 @@ class SummaryTabViewModel: ObservableObject, HasLoadState {
                         }
                     } else {
                         hasFinished = true
+                    }
+                } else {
+                    switch configManager.summaryDateRange {
+                    case .automatic:
+                        oldestDataDate = Date.from(year: year, month: 1)
+                    case .manual(let from, _):
+                        oldestDataDate = from
                     }
                 }
                 

@@ -14,19 +14,30 @@ struct SummaryDateRangeView: View {
     @State private var to: Date
     @Environment(\.presentationMode) var presentationMode
     let onApply: (SummaryDateRange) -> Void
+    @State private var canApply: Bool
 
     init(initial: SummaryDateRange, onApply: @escaping (SummaryDateRange) -> Void) {
         self.onApply = onApply
+
+        let automatic: Bool
+        let from: Date
+        let to: Date
+
         switch initial {
         case .automatic:
-            _automatic = State(initialValue: true)
-            _from = State(initialValue: Date.from(year: 2020, month: 1))
-            _to = State(initialValue: .now)
-        case let .manual(from: from, to: to):
-            _automatic = State(initialValue: false)
-            _from = State(initialValue: from)
-            _to = State(initialValue: to)
+            automatic = true
+            from = Date.from(year: 2020, month: 1)
+            to = .now
+        case let .manual(from: initialFrom, to: initialTo):
+            automatic = false
+            from = initialFrom
+            to = initialTo
         }
+
+        _automatic = State(initialValue: automatic)
+        _from = State(initialValue: from)
+        _to = State(initialValue: to)
+        _canApply = State(initialValue: Self.makeCanApply(from: from, to: to))
     }
 
     var body: some View {
@@ -82,8 +93,17 @@ struct SummaryDateRangeView: View {
                 Text("Apply")
                     .padding(.vertical, 4)
                     .frame(maxWidth: .infinity)
-            }.buttonStyle(.borderedProminent)
-        }.padding()
+            }
+            .buttonStyle(.borderedProminent)
+            .disabled(!canApply)
+        }
+        .padding()
+        .onChange(of: from) {
+            canApply = Self.makeCanApply(from: from, to: to)
+        }
+        .onChange(of: to) {
+            canApply = Self.makeCanApply(from: from, to: to)
+        }
     }
 
     func makeDateRange() -> SummaryDateRange {
@@ -92,6 +112,10 @@ struct SummaryDateRangeView: View {
         } else {
             SummaryDateRange.manual(from: from, to: to)
         }
+    }
+
+    private static func makeCanApply(from: Date, to: Date) -> Bool {
+        from <= to
     }
 }
 
