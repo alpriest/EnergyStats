@@ -68,6 +68,7 @@ struct ParametersGraphTabView: View {
                         ShareLink(item: url) {
                             Label("Export graph data", systemImage: "square.and.arrow.up")
                         }
+                        .padding(.bottom)
                     }
                 }
             }
