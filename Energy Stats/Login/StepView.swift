@@ -14,7 +14,7 @@ enum StepViewStyle {
     var icon: String {
         switch self {
         case .circle:
-            "circle.fill"
+            "circle"
         case .custom(let iconName, _):
             iconName
         }
@@ -32,7 +32,7 @@ enum StepViewStyle {
     var color: Color {
         switch self {
         case .circle:
-            Color.yellow.opacity(0.7)
+            Color.black
         case .custom(_, let color):
             color
         }
