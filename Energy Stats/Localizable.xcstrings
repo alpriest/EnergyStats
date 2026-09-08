@@ -19431,6 +19431,12 @@
             "value" : "Zeit bis zur Amortisation"
           }
         },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Payback time"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
