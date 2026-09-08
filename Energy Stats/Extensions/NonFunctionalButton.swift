@@ -17,7 +17,6 @@ struct NonFunctionalButton<Content: View>: View {
     var body: some View {
         Button(action: {}, label: { label })
             .buttonStyle(.bordered)
-            .hideGlassEffect()
     }
 }
 
