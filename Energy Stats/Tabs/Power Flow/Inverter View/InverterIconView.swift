@@ -55,25 +55,26 @@ struct InverterIconView: View {
         ZStack(alignment: .topLeading) {
             InverterIconPath()
 
-            Group {
-                switch deviceFaulty {
-                case false:
-                    deviceStateColor
-                case true:
-                    deviceStateColor
-                        .onAppear {
-                            switch deviceFaulty {
-                            case false:
-                                opacity = 1.0
-                            case true:
-                                withAnimation(.snappy(duration: 0.4).repeatForever(autoreverses: true)) { opacity = 0.2 }
-                            }
+            deviceStateColor
+                .frame(width: (size.width / 13) * 4.8,
+                       height: (size.height / 20) * 6)
+                .offset(x: (size.width / 13) * 2,
+                        y: (size.height / 20) * 4)
+                .opacity(opacity)
+                .onChange(of: deviceFaulty, initial: true) { _, isFaulty in
+                    if isFaulty {
+                        withAnimation(
+                            .snappy(duration: 0.4)
+                                .repeatForever(autoreverses: true)
+                        ) {
+                            opacity = 0.2
                         }
+                    } else {
+                        withAnimation(nil) {
+                            opacity = 1.0
+                        }
+                    }
                 }
-            }
-            .frame(width: (size.width / 13) * 4.8, height: (size.height / 20) * 6)
-            .offset(x: (size.width / 13) * 2, y: (size.height / 20) * 4)
-            .opacity(opacity)
 
             Image(systemName: "bolt.fill")
                 .resizable()
@@ -104,5 +105,7 @@ struct InverterIconView: View {
 
 #Preview {
     InverterIconView(deviceFaulty: false)
+        .frame(width: 150, height: 180)
+    InverterIconView(deviceFaulty: true)
         .frame(width: 150, height: 180)
 }
