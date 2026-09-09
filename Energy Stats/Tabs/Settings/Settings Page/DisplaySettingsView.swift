@@ -9,7 +9,7 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct DisplaySettingsView: View {
-    @ObservedObject var viewModel: SettingsTabViewModel
+    @Bindable var viewModel: SettingsTabViewModel
     let configManager: ConfigManaging
     let solarService: SolarForecastProviding
     let networking: Networking

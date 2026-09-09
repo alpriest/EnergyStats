@@ -22,7 +22,7 @@ struct LeftTabbedView: View {
     let userManager: UserManager
     let solarForecastProvider: SolarForecastProviding
     let templateStore: TemplateStoring
-    @StateObject var settingsTabViewModel: SettingsTabViewModel
+    @State private var settingsTabViewModel: SettingsTabViewModel
     @StateObject var parametersGraphTabViewModel: ParametersGraphTabViewModel
 
     init(networking: Networking, userManager: UserManager, configManager: ConfigManaging, solarForecastProvider: @escaping SolarForecastProviding, templateStore: TemplateStoring) {
@@ -31,7 +31,7 @@ struct LeftTabbedView: View {
         self.configManager = configManager
         self.solarForecastProvider = solarForecastProvider
         self.templateStore = templateStore
-        _settingsTabViewModel = .init(wrappedValue: SettingsTabViewModel(userManager: userManager, config: configManager, networking: networking))
+        _settingsTabViewModel = State(initialValue: SettingsTabViewModel(userManager: userManager, config: configManager, networking: networking))
         _parametersGraphTabViewModel = .init(wrappedValue: ParametersGraphTabViewModel(networking: networking, configManager: configManager, solarForecastProvider: solarForecastProvider))
     }
 

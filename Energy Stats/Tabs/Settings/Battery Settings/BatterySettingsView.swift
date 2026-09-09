@@ -9,7 +9,7 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct BatterySettingsView: View {
-    @ObservedObject var viewModel: SettingsTabViewModel
+    @Bindable var viewModel: SettingsTabViewModel
     @FocusState private var focused
     @State private var isEditingCapacity = false
 

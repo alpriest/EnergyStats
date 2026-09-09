@@ -43,7 +43,7 @@ struct SettingFooter<Content: View>: View {
 }
 
 struct DataSettingsView: View {
-    @ObservedObject var viewModel: SettingsTabViewModel
+    @Bindable var viewModel: SettingsTabViewModel
 
     var body: some View {
         Form {

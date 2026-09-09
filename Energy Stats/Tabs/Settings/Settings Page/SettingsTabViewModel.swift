@@ -7,223 +7,226 @@
 
 import Combine
 import Energy_Stats_Core
+import Observation
 import SwiftUI
 
-class SettingsTabViewModel: ObservableObject {
-    @Published var powerStation: PowerStationDetail?
+@MainActor
+@Observable
+final class SettingsTabViewModel {
+    var powerStation: PowerStationDetail?
 
-    @Published var showBatteryPercentageRemaining: Bool {
+    var showBatteryPercentageRemaining: Bool {
         didSet {
             config.showBatteryPercentageRemaining = showBatteryPercentageRemaining
         }
     }
 
-    @Published var separateParameterGraphsByUnit: Bool {
+    var separateParameterGraphsByUnit: Bool {
         didSet {
             config.separateParameterGraphsByUnit = separateParameterGraphsByUnit
         }
     }
 
-    @Published var showGraphValueDescriptions: Bool {
+    var showGraphValueDescriptions: Bool {
         didSet {
             config.showGraphValueDescriptions = showGraphValueDescriptions
         }
     }
 
-    @Published var showLastUpdateTimestamp: Bool {
+    var showLastUpdateTimestamp: Bool {
         didSet {
             config.showLastUpdateTimestamp = showLastUpdateTimestamp
         }
     }
 
-    @Published var showInverterStationName: Bool {
+    var showInverterStationName: Bool {
         didSet {
             config.showInverterStationName = showInverterStationName
         }
     }
 
-    @Published var showInverterTypeName: Bool {
+    var showInverterTypeName: Bool {
         didSet {
             config.showInverterTypeName = showInverterTypeName
         }
     }
 
-    @Published var showColouredLines: Bool {
+    var showColouredLines: Bool {
         didSet {
             config.showColouredLines = showColouredLines
         }
     }
 
-    @Published var batteryCapacity: String
+    var batteryCapacity: String
 
-    @Published var showBatteryTemperature: Bool {
+    var showBatteryTemperature: Bool {
         didSet {
             config.showBatteryTemperature = showBatteryTemperature
         }
     }
     
-    @Published var showBatteryMaxChargeCurrent: Bool { didSet { config.showBatteryMaxChargeCurrent = showBatteryMaxChargeCurrent }}
+    var showBatteryMaxChargeCurrent: Bool { didSet { config.showBatteryMaxChargeCurrent = showBatteryMaxChargeCurrent }}
 
-    @Published var showBatteryEstimate: Bool {
+    var showBatteryEstimate: Bool {
         didSet {
             config.showBatteryEstimate = showBatteryEstimate
         }
     }
 
-    @Published var refreshFrequency: RefreshFrequency {
+    var refreshFrequency: RefreshFrequency {
         didSet {
             config.refreshFrequency = refreshFrequency
         }
     }
 
-    @Published var decimalPlaces: Int = 2 {
+    var decimalPlaces: Int = 2 {
         didSet {
             config.decimalPlaces = decimalPlaces
         }
     }
 
-    @Published var showSunnyBackground: Bool {
+    var showSunnyBackground: Bool {
         didSet {
             config.showSunnyBackground = showSunnyBackground
         }
     }
 
-    @Published var showUsableBatteryOnly: Bool {
+    var showUsableBatteryOnly: Bool {
         didSet {
             config.showUsableBatteryOnly = showUsableBatteryOnly
         }
     }
 
-    @Published var displayUnit: DisplayUnit {
+    var displayUnit: DisplayUnit {
         didSet {
             config.displayUnit = displayUnit
         }
     }
 
-    @Published var dataCeiling: DataCeiling {
+    var dataCeiling: DataCeiling {
         didSet {
             config.dataCeiling = dataCeiling
         }
     }
 
-    @Published var showInverterTemperature: Bool {
+    var showInverterTemperature: Bool {
         didSet {
             config.showInverterTemperature = showInverterTemperature
         }
     }
 
-    @Published var hasBattery: Bool
+    var hasBattery: Bool
 
-    @Published var showHomeTotalOnPowerFlow: Bool {
+    var showHomeTotalOnPowerFlow: Bool {
         didSet {
             config.showHomeTotalOnPowerFlow = showHomeTotalOnPowerFlow
         }
     }
 
-    @Published var showInverterIcon: Bool {
+    var showInverterIcon: Bool {
         didSet {
             config.showInverterIcon = showInverterIcon
         }
     }
 
-    @Published var shouldInvertCT2: Bool {
+    var shouldInvertCT2: Bool {
         didSet {
             config.shouldInvertCT2 = shouldInvertCT2
         }
     }
 
-    @Published var showGridTotalsOnPowerFlow: Bool {
+    var showGridTotalsOnPowerFlow: Bool {
         didSet {
             config.showGridTotalsOnPowerFlow = showGridTotalsOnPowerFlow
         }
     }
 
-    @Published var shouldCombineCT2WithPVPower: Bool {
+    var shouldCombineCT2WithPVPower: Bool {
         didSet {
             config.shouldCombineCT2WithPVPower = shouldCombineCT2WithPVPower
         }
     }
 
-    @Published var showTotalYieldOnPowerFlow: Bool {
+    var showTotalYieldOnPowerFlow: Bool {
         didSet {
             config.showTotalYieldOnPowerFlow = showTotalYieldOnPowerFlow
         }
     }
 
-    @Published var powerFlowStrings: PowerFlowStringsSettings {
+    var powerFlowStrings: PowerFlowStringsSettings {
         didSet {
             config.powerFlowStrings = powerFlowStrings
         }
     }
 
-    @Published var colorScheme: ForcedColorScheme {
+    var colorScheme: ForcedColorScheme {
         didSet {
             config.colorScheme = colorScheme
         }
     }
 
-    @Published var batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode {
+    var batteryTemperatureDisplayMode: BatteryTemperatureDisplayMode {
         didSet {
             config.batteryTemperatureDisplayMode = batteryTemperatureDisplayMode
         }
     }
 
-    @Published var showInverterScheduleQuickLink: Bool {
+    var showInverterScheduleQuickLink: Bool {
         didSet {
             config.showInverterScheduleQuickLink = showInverterScheduleQuickLink
         }
     }
 
-    @Published var ct2DisplayMode: CT2DisplayMode {
+    var ct2DisplayMode: CT2DisplayMode {
         didSet {
             config.ct2DisplayMode = ct2DisplayMode
         }
     }
 
-    @Published var shouldCombineCT2WithLoadsPower: Bool {
+    var shouldCombineCT2WithLoadsPower: Bool {
         didSet {
             config.shouldCombineCT2WithLoadsPower = shouldCombineCT2WithLoadsPower
         }
     }
 
-    @Published var isLoggingOut: Bool = false
-    @Published var showInverterConsumption: Bool {
+    var isLoggingOut: Bool = false
+    var showInverterConsumption: Bool {
         didSet {
             config.showInverterConsumption = showInverterConsumption
         }
     }
 
-    @Published var showBatterySOCOnDailyStats: Bool {
+    var showBatterySOCOnDailyStats: Bool {
         didSet {
             config.showBatterySOCOnDailyStats = showBatterySOCOnDailyStats
         }
     }
 
-    @Published var allowNegativeLoad: Bool {
+    var allowNegativeLoad: Bool {
         didSet {
             config.allowNegativeLoad = allowNegativeLoad
         }
     }
 
-    @Published var currencySymbol: String {
+    var currencySymbol: String {
         didSet {
             config.currencySymbol = currencySymbol
         }
     }
 
-    @Published var showOutputEnergyOnStats: Bool {
+    var showOutputEnergyOnStats: Bool {
         didSet {
             config.showOutputEnergyOnStats = showOutputEnergyOnStats
         }
     }
     
-    @Published var inverterGeneration: InverterGeneration {
+    var inverterGeneration: InverterGeneration {
         didSet {
             config.inverterGeneration = inverterGeneration
         }
     }
 
-    @Published var readOnlyTitle: String = ""
+    var readOnlyTitle: String = ""
 
     private(set) var config: ConfigManaging
     private let userManager: UserManager
@@ -295,8 +298,8 @@ class SettingsTabViewModel: ObservableObject {
             }.store(in: &cancellables)
     }
 
-    @Published var showAlert = false
-    @Published var showRecalculationAlert = false
+    var showAlert = false
+    var showRecalculationAlert = false
 
     @MainActor
     func logout() async {

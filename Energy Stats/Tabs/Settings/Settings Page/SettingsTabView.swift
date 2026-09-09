@@ -9,7 +9,7 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct SettingsTabView: View {
-    @ObservedObject var viewModel: SettingsTabViewModel
+    @Bindable var viewModel: SettingsTabViewModel
     let configManager: ConfigManaging
     let networking: Networking
     let solarService: SolarForecastProviding
@@ -17,7 +17,7 @@ struct SettingsTabView: View {
     @EnvironmentObject var versionChecker: VersionChecker
 
     var body: some View {
-        NavigationStack {
+        NavigationStack {            
             if viewModel.isLoggingOut {
                 LoadingView(message: .loggingOut)
             } else {

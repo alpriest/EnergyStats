@@ -9,7 +9,7 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct SolarStringsSettingsView: View {
-    @ObservedObject var viewModel: SettingsTabViewModel
+    @Bindable var viewModel: SettingsTabViewModel
     @State private var showStringSelection: Bool
     @State private var pv1: Bool
     @State private var pv2: Bool
