@@ -9,14 +9,16 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct ReadOnlySettingsView: View {
-    @StateObject private var viewModel: ReadOnlySettingsViewModel
+    @State private var viewModel: ReadOnlySettingsViewModel
     @FocusState private var isPasscodeFocused: Bool
 
     init(configManager: ConfigManaging) {
-        _viewModel = .init(wrappedValue: ReadOnlySettingsViewModel(configManager: configManager))
+        _viewModel = State(initialValue: ReadOnlySettingsViewModel(configManager: configManager))
     }
 
     var body: some View {
+        @Bindable var viewModel = viewModel
+
         VStack(spacing: 24) {
             ZStack {
                 if viewModel.isReadOnly {

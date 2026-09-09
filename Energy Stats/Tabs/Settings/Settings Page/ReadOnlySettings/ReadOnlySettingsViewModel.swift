@@ -6,18 +6,21 @@
 //
 
 import Energy_Stats_Core
+import Observation
 import SwiftUI
 
-class ReadOnlySettingsViewModel: ObservableObject {
+@MainActor
+@Observable
+final class ReadOnlySettingsViewModel {
     private(set) var configManager: ConfigManaging
-    @Published var isReadOnly: Bool = false {
+    var isReadOnly: Bool = false {
         didSet {
             configManager.isReadOnly = isReadOnly
         }
     }
 
-    @Published var passcode: String = ""
-    @Published var alertContent: AlertContent?
+    var passcode: String = ""
+    var alertContent: AlertContent?
 
     init(configManager: ConfigManaging) {
         self.configManager = configManager
