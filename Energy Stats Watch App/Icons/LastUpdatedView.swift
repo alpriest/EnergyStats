@@ -9,6 +9,8 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct LastUpdatedView: View {
+    @Environment(\.locale) private var locale
+
     let lastUpdated: Date?
 
     var body: some View {
@@ -21,8 +23,15 @@ struct LastUpdatedView: View {
                     }
 
                     VStack(alignment: .leading, spacing: 8) {
-                        Text(greenTextDescription)
-                        Text(redTextDescription)
+                        Text("Red text")
+                            .foregroundStyle(Color.linesNegative)
+                            .font(.system(size: 16, weight: .bold)) + Text(" ") +
+                        Text("shows battery discharge and grid import")
+
+                        Text("Green text")
+                            .foregroundStyle(Color.linesPositive)
+                            .font(.system(size: 16, weight: .bold)) + Text(" ") +
+                        Text("shows battery charge and grid export")
                     }
                 } else {
                     Text("Loading...")
@@ -30,28 +39,11 @@ struct LastUpdatedView: View {
             }
         }
     }
-
-    private var greenTextDescription: AttributedString {
-        var text = AttributedString("Green text shows battery charge and grid export")
-        if let range = text.range(of: "Green text") {
-            text[range].foregroundColor = Color.linesPositive
-            text[range].font = UIFont.boldSystemFont(ofSize: 16)
-        }
-        return text
-    }
-
-    private var redTextDescription: AttributedString {
-        var text = AttributedString("Red text shows battery charge and grid import")
-        if let range = text.range(of: "Red text") {
-            text[range].foregroundColor = Color.linesNegative
-            text[range].font = UIFont.boldSystemFont(ofSize: 16)
-        }
-        return text
-    }
 }
 
 #Preview {
     LastUpdatedView(lastUpdated: .now)
+        .environment(\.locale, .init(identifier: "de"))
 }
 
 #Preview {

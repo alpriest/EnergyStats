@@ -322,6 +322,7 @@
 		41C55ABF2D0242750035A002 /* TemperatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C55ABE2D0242750035A002 /* TemperatureView.swift */; };
 		41C67D142F9F5DEA00FC9A04 /* WatchDebugDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C67D132F9F5DEA00FC9A04 /* WatchDebugDataView.swift */; };
 		41C6AF662A360CF600C88F2B /* TextFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C6AF652A360CF600C88F2B /* TextFile.swift */; };
+		41C775473051FD6A00AAE442 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 41C775463051FD6A00AAE442 /* Localizable.xcstrings */; };
 		41C849692A8BBC3800431410 /* Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C849682A8BBC3800431410 /* Shortcuts.swift */; };
 		41C8496B2A8BBF1500431410 /* InverterIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C8496A2A8BBF1500431410 /* InverterIconView.swift */; };
 		41CA35712AA8C02C00D45734 /* EarningsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CA35702AA8C02C00D45734 /* EarningsView.swift */; };
@@ -899,6 +900,7 @@
 		41C55ABE2D0242750035A002 /* TemperatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureView.swift; sourceTree = "<group>"; };
 		41C67D132F9F5DEA00FC9A04 /* WatchDebugDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchDebugDataView.swift; sourceTree = "<group>"; };
 		41C6AF652A360CF600C88F2B /* TextFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFile.swift; sourceTree = "<group>"; };
+		41C775463051FD6A00AAE442 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		41C849682A8BBC3800431410 /* Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shortcuts.swift; sourceTree = "<group>"; };
 		41C8496A2A8BBF1500431410 /* InverterIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InverterIconView.swift; sourceTree = "<group>"; };
 		41CA35702AA8C02C00D45734 /* EarningsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarningsView.swift; sourceTree = "<group>"; };
@@ -2004,6 +2006,7 @@
 				414ACCA42BEAC2D700617EED /* StubKeychainStore.swift */,
 				412887462BE7BCAD007E9532 /* WatchConfigManager.swift */,
 				41C67D132F9F5DEA00FC9A04 /* WatchDebugDataView.swift */,
+				41C775463051FD6A00AAE442 /* Localizable.xcstrings */,
 			);
 			path = "Energy Stats Watch App";
 			sourceTree = "<group>";
@@ -2382,6 +2385,7 @@
 			files = (
 				41F6317F2BDCD32E00A571C5 /* Preview Assets.xcassets in Resources */,
 				41F6317C2BDCD32E00A571C5 /* Assets.xcassets in Resources */,
+				41C775473051FD6A00AAE442 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3054,6 +3058,7 @@
 				SDKROOT = iphoneos;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -3116,6 +3121,7 @@
 				SDKROOT = iphoneos;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
