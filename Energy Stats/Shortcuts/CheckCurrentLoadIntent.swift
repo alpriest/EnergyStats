@@ -12,7 +12,8 @@ struct CheckCurrentHouseLoadIntent: AppIntent {
     static var title: LocalizedStringResource = "Check Current House Load"
     static var description: IntentDescription? = "Returns the current house load in Watts"
     static var authenticationPolicy: IntentAuthenticationPolicy = .requiresAuthentication
-    static var openAppWhenRun: Bool = false
+    @available(iOS 26.0, *)
+    static var supportedModes: IntentModes { .background }
 
     func perform() async throws -> some ProvidesDialog & ReturnsValue<Int> {
         let services = try ServiceFactory.makeAppIntentInitialisedServices()

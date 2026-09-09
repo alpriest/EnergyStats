@@ -59,5 +59,13 @@ struct EnergyStatsShortcuts: AppShortcutsProvider {
             shortTitle: "Change work mode",
             systemImageName: "list.clipboard"
         )
+        if #available(iOS 26.0, *) {
+            AppShortcut(
+                intent: CurrentEnergyStatusIntent(),
+                phrases: ["Show my current energy status on \(.applicationName)"],
+                shortTitle: "Energy Status",
+                systemImageName: "bolt.house.fill"
+            )
+        }
     }
 }

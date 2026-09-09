@@ -7,17 +7,20 @@
 
 import AppIntents
 import Energy_Stats_Core
+import Foundation
+import UniformTypeIdentifiers
 
 struct ExportParameterDataIntent: AppIntent {
     static var title: LocalizedStringResource = "Export parameter data"
     static var description: IntentDescription? = "Exports all parameter data for the specified date using the currently selected parameter group"
     static var authenticationPolicy: IntentAuthenticationPolicy = .requiresAuthentication
-    static var openAppWhenRun: Bool = false
+    @available(iOS 26.0, *)
+    static var supportedModes: IntentModes { .background }
 
     @Parameter(title: "Date")
     var date: Date
 
-    func perform() async throws -> some ProvidesDialog & ReturnsValue<String> {
+    func perform() async throws -> some ProvidesDialog & ReturnsValue<IntentFile> {
         let services = try ServiceFactory.makeAppIntentInitialisedServices()
         let selectedGraphVariables = self.selectedGraphVariables(configManager: services.configManager)
 
@@ -38,7 +41,12 @@ struct ExportParameterDataIntent: AppIntent {
         }
         let text = ([headers] + rows).joined(separator: "\n")
 
-        return .result(value: text, dialog: IntentDialog(stringLiteral: "Exported"))
+        let file = IntentFile(
+            data: Data(text.utf8),
+            filename: "energy-parameters-\(String(date.iso8601().prefix(10))).csv",
+            type: .commaSeparatedText
+        )
+        return .result(value: file, dialog: "Exported parameter data")
     }
 
     private func selectedGraphVariables(configManager: ConfigManaging) -> [String] {

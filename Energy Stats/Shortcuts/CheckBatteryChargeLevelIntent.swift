@@ -12,7 +12,8 @@ struct CheckBatteryChargeLevelIntent: AppIntent {
     static var title: LocalizedStringResource = "Check Storage Battery SOC"
     static var description: IntentDescription? = "Returns the battery state of charge as a percentage"
     static var authenticationPolicy: IntentAuthenticationPolicy = .requiresAuthentication
-    static var openAppWhenRun: Bool = false
+    @available(iOS 26.0, *)
+    static var supportedModes: IntentModes { .background }
 
     func perform() async throws -> some ProvidesDialog & ReturnsValue<Int> {
         let services = try ServiceFactory.makeAppIntentInitialisedServices()

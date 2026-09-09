@@ -12,7 +12,8 @@ struct CheckCurrentSolarGenerationIntent: AppIntent {
     static var title: LocalizedStringResource = "Check Current Solar Generation"
     static var description: IntentDescription? = "Returns the solar being generated in Watts"
     static var authenticationPolicy: IntentAuthenticationPolicy = .requiresAuthentication
-    static var openAppWhenRun: Bool = false
+    @available(iOS 26.0, *)
+    static var supportedModes: IntentModes { .background }
 
     func perform() async throws -> some ProvidesDialog & ReturnsValue<Int> {
         let services = try ServiceFactory.makeAppIntentInitialisedServices()

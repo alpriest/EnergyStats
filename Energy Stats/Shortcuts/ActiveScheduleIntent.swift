@@ -12,7 +12,8 @@ struct ActiveScheduleIntent: AppIntent {
     static var title: LocalizedStringResource = "Activate inverter mode schedule"
     static var description: IntentDescription? = "Activates the named inverter mode schedule"
     static var authenticationPolicy: IntentAuthenticationPolicy = .requiresAuthentication
-    static var openAppWhenRun: Bool = false
+    @available(iOS 26.0, *)
+    static var supportedModes: IntentModes { .background }
 
     @Parameter(title: "Template name")
     var template: String

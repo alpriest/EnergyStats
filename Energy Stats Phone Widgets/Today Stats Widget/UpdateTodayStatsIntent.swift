@@ -15,7 +15,8 @@ import WidgetKit
 struct UpdateStatsIntent: AppIntent {
     static var title: LocalizedStringResource = "Update data for the widget"
     static var authenticationPolicy: IntentAuthenticationPolicy = .alwaysAllowed
-    static var openAppWhenRun: Bool = false
+    @available(iOS 26.0, *)
+    static var supportedModes: IntentModes { .background }
 
     func perform() async throws -> some ReturnsValue<Bool> {
         do {

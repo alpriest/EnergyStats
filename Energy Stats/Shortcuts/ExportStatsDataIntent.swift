@@ -7,17 +7,20 @@
 
 import AppIntents
 import Energy_Stats_Core
+import Foundation
+import UniformTypeIdentifiers
 
 struct ExportStatsDataIntent: AppIntent {
     static var title: LocalizedStringResource = "Export stats day data"
     static var description: IntentDescription? = "Exports stats data for the specified date that you would usually see on the stats page"
     static var authenticationPolicy: IntentAuthenticationPolicy = .requiresAuthentication
-    static var openAppWhenRun: Bool = false
+    @available(iOS 26.0, *)
+    static var supportedModes: IntentModes { .background }
 
     @Parameter(title: "Date")
     var date: Date
 
-    func perform() async throws -> some ProvidesDialog & ReturnsValue<String> {
+    func perform() async throws -> some ProvidesDialog & ReturnsValue<IntentFile> {
         let services = try ServiceFactory.makeAppIntentInitialisedServices()
 
         let rawData = try await services.network.fetchReport(
@@ -39,6 +42,11 @@ struct ExportStatsDataIntent: AppIntent {
         }
         let text = ([headers] + rows).joined(separator: "\n")
 
-        return .result(value: text, dialog: IntentDialog(stringLiteral: "Exported"))
+        let file = IntentFile(
+            data: Data(text.utf8),
+            filename: "energy-stats-\(String(date.iso8601().prefix(10))).csv",
+            type: .commaSeparatedText
+        )
+        return .result(value: file, dialog: "Exported stats data")
     }
 }

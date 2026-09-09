@@ -13,7 +13,8 @@ struct CheckCurrentGridLoadIntent: AppIntent {
     static var title: LocalizedStringResource = "Check Current Grid Load"
     static var description: IntentDescription? = "Returns the current grid load in Watts. Negative is import, positive is export."
     static var authenticationPolicy: IntentAuthenticationPolicy = .requiresAuthentication
-    static var openAppWhenRun: Bool = false
+    @available(iOS 26.0, *)
+    static var supportedModes: IntentModes { .background }
 
     func perform() async throws -> some ProvidesDialog & ReturnsValue<Int> {
         let services = try ServiceFactory.makeAppIntentInitialisedServices()

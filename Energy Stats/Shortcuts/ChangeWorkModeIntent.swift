@@ -12,7 +12,8 @@ struct ChangeWorkModeIntent: AppIntent {
     static var title: LocalizedStringResource = "Change inverter work mode"
     static var description: IntentDescription? = "Changes the work mode of the inverter"
     static var authenticationPolicy: IntentAuthenticationPolicy = .requiresAuthentication
-    static var openAppWhenRun: Bool = false
+    @available(iOS 26.0, *)
+    static var supportedModes: IntentModes { .background }
 
     @Parameter(
         title: "Work Mode",
@@ -22,6 +23,8 @@ struct ChangeWorkModeIntent: AppIntent {
     var workMode: IntentsWorkMode
 
     func perform() async throws -> some ReturnsValue<Bool> {
+        try await requestConfirmation()
+
         let services = try ServiceFactory.makeAppIntentInitialisedServices()
         try await services.network.setDeviceSettingsItem(
             deviceSN: services.device.deviceSN,
