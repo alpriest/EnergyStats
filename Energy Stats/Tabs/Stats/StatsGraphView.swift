@@ -11,9 +11,7 @@ import SwiftUI
 
 struct StatsGraphView: View {
     @ObservedObject var viewModel: StatsTabViewModel
-    @GestureState var isDetectingPress = true
     @Binding var selectedDate: Date?
-    @State private var nextDate: Date?
     @Binding var valuesAtTime: ValuesAtTime<StatsGraphValue>?
     let appSettings: AppSettings
     @State private var normalData: [StatsGraphValue] = []
