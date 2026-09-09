@@ -9,63 +9,7 @@ import Charts
 import Energy_Stats_Core
 import SwiftUI
 
-struct StatsGraphVariable: Identifiable, Equatable, Hashable {
-    let type: ReportVariable
-    var enabled: Bool
-    var id: String { type.titleTotal }
 
-    init(_ type: ReportVariable, enabled: Bool = true) {
-        self.type = type
-        self.enabled = enabled
-    }
-
-    init?(_ type: ReportVariable?, enabled: Bool = true) {
-        guard let type else { return nil }
-
-        self.init(type, enabled: enabled)
-    }
-}
-
-struct StatsGraphValue: Identifiable, Hashable {
-    let date: Date
-    let graphValue: Double
-    let type: ReportVariable
-    let displayValue: Double?
-
-    var id: String { "\(date.iso8601())_\(type.networkTitle)" }
-
-    init(type: ReportVariable, date: Date, graphValue: Double, displayValue: Double?) {
-        self.type = type
-        self.date = date
-        self.graphValue = graphValue
-        self.displayValue = displayValue
-    }
-
-    func formatted(_ decimalPlaces: Int) -> String {
-        switch type {
-        case .selfSufficiency, .batterySOC:
-            (displayValue ?? graphValue).percent()
-        default:
-            (displayValue ?? graphValue).kWh(decimalPlaces)
-        }
-    }
-
-    var isForNormalGraph: Bool {
-        type != .selfSufficiency && type != .inverterConsumption && type != .batterySOC
-    }
-
-    var isForSelfSufficiencyGraph: Bool {
-        type == .selfSufficiency
-    }
-
-    var isForInverterConsumptionGraph: Bool {
-        type == .inverterConsumption
-    }
-
-    var isForBatterySOCGraph: Bool {
-        type == .batterySOC
-    }
-}
 
 struct StatsGraphView: View {
     @ObservedObject var viewModel: StatsTabViewModel
@@ -74,7 +18,7 @@ struct StatsGraphView: View {
     @State private var nextDate: Date?
     @Binding var valuesAtTime: ValuesAtTime<StatsGraphValue>?
     let appSettings: AppSettings
-    
+
     var body: some View {
         ZStack {
             Chart {
@@ -170,37 +114,39 @@ struct StatsGraphView: View {
             }
             .chartOverlay { chartProxy in
                 GeometryReader { geometryProxy in
-                    Rectangle().fill(.clear).contentShape(Rectangle())
-                        .gesture(DragGesture(minimumDistance: 20)
-                            .updating($isDetectingPress) { currentState, _, _ in
-                                let xLocation = currentState.location.x - geometryProxy[chartProxy.plotAreaFrame].origin.x
+                    if let plotFrame = chartProxy.plotFrame {
+                        Rectangle().fill(.clear).contentShape(Rectangle())
+                            .gesture(DragGesture(minimumDistance: 20)
+                                .updating($isDetectingPress) { currentState, _, _ in
+                                    let xLocation = currentState.location.x - geometryProxy[plotFrame].origin.x
 
-                                if let plotElement = chartProxy.value(atX: xLocation, as: Date.self) {
-                                    if let graphValue = viewModel.data.filter({ $0.isForNormalGraph }).reversed().first(where: { plotElement > $0.date }),
-                                       selectedDate != graphValue.date
-                                    {
-                                        Task { @MainActor in
-                                            selectedDate = graphValue.date
-                                            valuesAtTime = viewModel.data(at: graphValue.date)
+                                    if let plotElement = chartProxy.value(atX: xLocation, as: Date.self) {
+                                        if let graphValue = viewModel.data.filter({ $0.isForNormalGraph }).reversed().first(where: { plotElement > $0.date }),
+                                           selectedDate != graphValue.date
+                                        {
+                                            Task { @MainActor in
+                                                selectedDate = graphValue.date
+                                                valuesAtTime = viewModel.data(at: graphValue.date)
+                                            }
                                         }
                                     }
                                 }
-                            }
-                        )
-                        .gesture(SpatialTapGesture()
-                            .onEnded { value in
-                                let xLocation = value.location.x - geometryProxy[chartProxy.plotAreaFrame].origin.x
+                            )
+                            .gesture(SpatialTapGesture()
+                                .onEnded { value in
+                                    let xLocation = value.location.x - geometryProxy[plotFrame].origin.x
 
-                                if let plotElement = chartProxy.value(atX: xLocation, as: Date.self),
-                                   let graphValue = viewModel.data.filter({ $0.isForNormalGraph }).reversed().first(where: { plotElement > $0.date })
-                                {
-                                    Task { @MainActor in
-                                        selectedDate = graphValue.date
-                                        valuesAtTime = viewModel.data(at: selectedDate)
+                                    if let plotElement = chartProxy.value(atX: xLocation, as: Date.self),
+                                       let graphValue = viewModel.data.filter({ $0.isForNormalGraph }).reversed().first(where: { plotElement > $0.date })
+                                    {
+                                        Task { @MainActor in
+                                            selectedDate = graphValue.date
+                                            valuesAtTime = viewModel.data(at: selectedDate)
+                                        }
                                     }
                                 }
-                            }
-                        )
+                            )
+                    }
                 }
             }
             .chartOverlay { makeHighlightBar(chartProxy: $0) }
@@ -209,10 +155,11 @@ struct StatsGraphView: View {
 
     private func makeHighlightBar(chartProxy: ChartProxy) -> some View {
         GeometryReader { geometryReader in
-            if let date = selectedDate,
+            if let plotFrame = chartProxy.plotFrame,
+               let date = selectedDate,
                let elementLocation = chartProxy.position(forX: date)
             {
-                let location = elementLocation - geometryReader[chartProxy.plotAreaFrame].origin.x
+                let location = elementLocation - geometryReader[plotFrame].origin.x
                 let filteredData = viewModel.data.filter { $0.isForNormalGraph }
 
                 if let firstDate = filteredData.first?.date,
