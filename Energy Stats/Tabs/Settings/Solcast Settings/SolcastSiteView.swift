@@ -16,13 +16,17 @@ struct SolcastSiteView: View {
         VStack {
             Text(site.name)
                 .bold()
-            
+
             HStack(alignment: .top) {
-                Map(coordinateRegion: .constant(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: site.lat, longitude: site.lng),
-                                                                   span: MKCoordinateSpan(latitudeDelta: 0.0015, longitudeDelta: 0.0015))))
+                Map(position: .constant(.region(MKCoordinateRegion(
+                    center: CLLocationCoordinate2D(latitude: site.lat, longitude: site.lng),
+                    span: MKCoordinateSpan(latitudeDelta: 0.0015, longitudeDelta: 0.0015)
+                )))) {
+                    EmptyMapContent()
+                }
                 .disabled(true)
                 .frame(width: 120, height: 120)
-                
+
                 VStack(alignment: .leading) {
                     VStack(alignment: .leading) {
                         row(title: "Latitude", value: site.lat)
@@ -70,4 +74,3 @@ struct SolcastSiteView: View {
 #Preview {
     SolcastSiteView(site: SolcastSite.preview())
 }
-
