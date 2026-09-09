@@ -21,63 +21,18 @@ struct StatsGraphView: View {
 
     var body: some View {
         ZStack {
-            Chart {
-                ForEach(normalData, id: \.type.titleTotal) { dataPoint in
-                    if viewModel.statsTimeUsageGraphStyle.isLine {
-                        LineMark(
-                            x: .value("hour", dataPoint.date, unit: viewModel.unit),
-                            y: .value("Amount", dataPoint.graphValue),
-                            series: .value("Series", dataPoint.type.networkTitle)
-                        )
-                        .foregroundStyle(dataPoint.type.colour)
-                    }
-
-                    if viewModel.statsTimeUsageGraphStyle.isBar {
-                        BarMark(
-                            x: .value("hour", dataPoint.date, unit: viewModel.unit),
-                            y: .value("Amount", dataPoint.graphValue)
-                        )
-                        .position(by: .value("parameter", dataPoint.type.networkTitle))
-                        .foregroundStyle(dataPoint.type.colour)
-                    }
-                }
-
-                if appSettings.showSelfSufficiencyStatsGraphOverlay && appSettings.selfSufficiencyEstimateMode != .off {
-                    ForEach(selfSufficiencyGraphData) {
-                        LineMark(
-                            x: .value("hour", $0.date, unit: viewModel.unit),
-                            y: .value("Amount", $0.graphValue),
-                            series: .value("Self Sufficiency", "Self Sufficiency")
-                        )
-                        .lineStyle(StrokeStyle(lineWidth: 2, dash: [2, 4]))
-                        .foregroundStyle(Color("background_inverted"))
-                    }
-                }
-
-                if appSettings.showInverterConsumption {
-                    ForEach(inverterConsumptionGraphData) {
-                        LineMark(
-                            x: .value("hour", $0.date, unit: viewModel.unit),
-                            y: .value("Amount", $0.graphValue),
-                            series: .value("Inverter Consumption", "Inverter Consumption")
-                        )
-                        .lineStyle(StrokeStyle(lineWidth: 3))
-                        .foregroundStyle(Color.pink)
-                    }
-                }
-
-                if appSettings.showBatterySOCOnDailyStats {
-                    ForEach(batterySOCGraphData) {
-                        LineMark(
-                            x: .value("hour", $0.date, unit: .hour),
-                            y: .value("Amount", $0.graphValue),
-                            series: .value("Battery SOC", "Battery SOC")
-                        )
-                        .lineStyle(StrokeStyle(lineWidth: 3))
-                        .foregroundStyle(Color.cyan)
-                    }
-                }
-            }
+            StatsGraphChartView(
+                unit: viewModel.unit,
+                showBatterySOCOnDailyStats: appSettings.showBatterySOCOnDailyStats,
+                showInverterConsumption: appSettings.showInverterConsumption,
+                statsTimeUsageGraphStyle: viewModel.statsTimeUsageGraphStyle,
+                showSelfSufficiencyStatsGraphOverlay: appSettings.showSelfSufficiencyStatsGraphOverlay,
+                selfSufficiencyEstimateMode: appSettings.selfSufficiencyEstimateMode,
+                normalData: normalData,
+                selfSufficiencyGraphData: selfSufficiencyGraphData,
+                inverterConsumptionGraphData: inverterConsumptionGraphData,
+                batterySOCGraphData: batterySOCGraphData
+            )
             .chartXScale(domain: viewModel.xScale)
             .chartYScale(domain: viewModel.yScale)
             .chartPlotStyle { content in

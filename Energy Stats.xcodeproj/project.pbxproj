@@ -130,6 +130,7 @@
 		413A592530514F9F00D0CC9C /* StatsGraphVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413A592430514F9F00D0CC9C /* StatsGraphVariable.swift */; };
 		413A592730515C3600D0CC9C /* CurrentEnergyStatusIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413A592630515C3600D0CC9C /* CurrentEnergyStatusIntent.swift */; };
 		413A59293051757D00D0CC9C /* device-detail-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 413A59283051757300D0CC9C /* device-detail-success.json */; };
+		413A592B3051B92E00D0CC9C /* StatsGraphChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413A592A3051B92E00D0CC9C /* StatsGraphChartView.swift */; };
 		413B7A312A4A390C00562A68 /* SelfSufficiencyCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413B7A302A4A390C00562A68 /* SelfSufficiencyCalculator.swift */; };
 		413B7A3A2A4A397000562A68 /* Energy_Stats_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; platformFilter = ios; };
 		413B7A412A4A399900562A68 /* SelfSufficiencyCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413B7A402A4A399900562A68 /* SelfSufficiencyCalculatorTests.swift */; };
@@ -686,6 +687,7 @@
 		413A592430514F9F00D0CC9C /* StatsGraphVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGraphVariable.swift; sourceTree = "<group>"; };
 		413A592630515C3600D0CC9C /* CurrentEnergyStatusIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentEnergyStatusIntent.swift; sourceTree = "<group>"; };
 		413A59283051757300D0CC9C /* device-detail-success.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "device-detail-success.json"; sourceTree = "<group>"; };
+		413A592A3051B92E00D0CC9C /* StatsGraphChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGraphChartView.swift; sourceTree = "<group>"; };
 		413B7A302A4A390C00562A68 /* SelfSufficiencyCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSufficiencyCalculator.swift; sourceTree = "<group>"; };
 		413B7A362A4A397000562A68 /* Energy Stats Core Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Energy Stats Core Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		413B7A402A4A399900562A68 /* SelfSufficiencyCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSufficiencyCalculatorTests.swift; sourceTree = "<group>"; };
@@ -1583,6 +1585,7 @@
 				41CD1F312A1414C1006B0C00 /* StatsGraphVariableToggles.swift */,
 				413A592230514F9700D0CC9C /* StatsGraphValue.swift */,
 				418141442A12BABA00FFC6A6 /* StatsGraphView.swift */,
+				413A592A3051B92E00D0CC9C /* StatsGraphChartView.swift */,
 				413A592430514F9F00D0CC9C /* StatsGraphVariable.swift */,
 				417AA2192A12454A0073CD34 /* StatsTabView.swift */,
 				414C68912F2F4E3C003F6074 /* StatsGraphDisplayMode.swift */,
@@ -2453,6 +2456,7 @@
 				4190922E2B1E4B250017CB65 /* SchedulePhaseListItemView.swift in Sources */,
 				413A592730515C3600D0CC9C /* CurrentEnergyStatusIntent.swift in Sources */,
 				418C6E972AFAC7E4000DE35F /* SummaryTabViewModel.swift in Sources */,
+				413A592B3051B92E00D0CC9C /* StatsGraphChartView.swift in Sources */,
 				41AB53402B9319B900B6C371 /* SolarStringsView.swift in Sources */,
 				41BCC2492F1EB00400FB883E /* BatteryHeatingTimePeriodView.swift in Sources */,
 				411DF2742AFD404E00CEEB23 /* SolarForecastView.swift in Sources */,
