@@ -11,7 +11,7 @@ import Foundation
 
 class MockNetworking: Networking {
     func fetchRequestCount() async throws -> ApiRequestCountResponse {
-        ApiRequestCountResponse(total: "5", remaining: "0")
+        ApiRequestCountResponse(total: 5, remaining: 0)
     }
     
     private let dateProvider: () -> Date
@@ -53,7 +53,7 @@ class MockNetworking: Networking {
     }
 
     func fetchDevice(deviceSN: String) async throws -> DeviceDetailResponse {
-        DeviceDetailResponse(deviceSN: "", moduleSN: "", stationID: "", stationName: "", managerVersion: "", masterVersion: "", slaveVersion: "", hardwareVersion: "", status: 0, function: DeviceDetailResponse.Function(scheduler: false), productType: "", deviceType: "", hasBattery: false, hasPV: false, batteryList: nil)
+        DeviceDetailResponse(deviceSN: "", moduleSN: "", stationID: "", stationName: "", managerVersion: "", masterVersion: "", slaveVersion: "", hardwareVersion: "", status: 0, function: DeviceDetailResponse.Function(scheduler: false), productType: "", deviceType: "", hasBattery: false, hasPV: false, batteryList: nil, capacity: nil)
     }
 
     func fetchRealData(deviceSN: String, variables: [String]) async throws -> OpenQueryResponse {
@@ -155,6 +155,44 @@ class MockNetworking: Networking {
     func fetchPowerGeneration(deviceSN: String) async throws -> PowerGenerationResponse {
         PowerGenerationResponse(today: 1.0, month: 5.0, cumulative: 50.0)
     }
+
+    func fetchBatteryHeatingSchedule(deviceSN: String) async throws -> BatteryHeatingSchedule {
+        BatteryHeatingSchedule(
+            enabled: false,
+            warmUpState: nil,
+            period1Start: Time(hour: 0, minute: 0),
+            period1End: Time(hour: 0, minute: 0),
+            period1Enabled: false,
+            period2Start: Time(hour: 0, minute: 0),
+            period2End: Time(hour: 0, minute: 0),
+            period2Enabled: false,
+            period3Start: Time(hour: 0, minute: 0),
+            period3End: Time(hour: 0, minute: 0),
+            period3Enabled: false,
+            startTemperature: 1.0,
+            endTemperature: 10.0,
+            minStartTemperature: 1.0,
+            maxStartTemperature: 9.0,
+            minEndTemperature: 10.0,
+            maxEndTemperature: 15.0
+        )
+    }
+
+    func setBatteryHeatingSchedule(
+        deviceSN: String,
+        enabled: Bool,
+        period1Start: Time,
+        period1End: Time,
+        period1Enabled: Bool,
+        period2Start: Time,
+        period2End: Time,
+        period2Enabled: Bool,
+        period3Start: Time,
+        period3End: Time,
+        period3Enabled: Bool,
+        startTemperature: Double,
+        endTemperature: Double
+    ) async throws {}
 
     private func data(filename: String) throws -> Data {
         guard let url = Bundle(for: type(of: self)).url(forResource: filename, withExtension: "json") else {

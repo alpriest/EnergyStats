@@ -8,22 +8,21 @@
 @testable import Energy_Stats
 @testable import Energy_Stats_Core
 import OHHTTPStubs
-import XCTest
+import Testing
 
-final class NetworkTests: XCTestCase {
-    private var sut: FoxAPIServicing!
-    private var keychainStore: MockKeychainStore!
+@Suite(.serialized)
+final class NetworkTests {
+    private let sut: FoxAPIServicing
 
-    override func setUp() {
-        keychainStore = MockKeychainStore()
-        sut = FoxAPIService(credentials: keychainStore, urlSession: URLSession.shared)
+    init() {
+        sut = FoxAPIService(apiTokenProvider: { "" }, urlSession: URLSession.shared, tracer: nil)
     }
 
-    override func tearDown() {
+    deinit {
         HTTPStubs.removeAllStubs()
     }
 
-    func test_fetchReport_returns_data_on_success() async throws {
+    @Test func `Fetch report returns data on success`() async throws {
         stubHTTPResponse(with: .reportSuccess)
 
         let report = try await sut.openapi_fetchReport(
@@ -39,10 +38,10 @@ final class NetworkTests: XCTestCase {
             reportType: .day
         )
 
-        XCTAssertEqual(report.count, 5)
+        #expect(report.count == 5)
     }
 
-    func test_fetchReal_returns_data_on_success() async throws {
+    @Test func `Fetch real data returns data on success`() async throws {
         stubHTTPResponse(with: .realSuccess)
 
         let raw = try await sut.openapi_fetchRealData(deviceSN: "DEVICESN", variables: [
@@ -55,36 +54,30 @@ final class NetworkTests: XCTestCase {
             Variable(name: "batTemperature", variable: "batTemperature", unit: "℃"),
         ].map { $0.variable })
 
-        XCTAssertEqual(raw.datas.count, 7)
+        #expect(raw.datas.count == 7)
     }
 
-    func test_fetchDeviceList_returns_data_on_success() async throws {
+    @Test func `Fetch device list returns data on success`() async throws {
         stubHTTPResponse(with: .deviceListSuccess)
 
         let devices = try await sut.openapi_fetchDeviceList()
 
-        XCTAssertEqual(devices.first?.deviceSN, "DEVICESN")
+        #expect(devices.first?.deviceSN == "DEVICESN")
     }
 
-    func test_fetchReport_throws_when_offline() async {
+    @Test func `Fetch report throws when offline`() async {
         stubOffline()
 
-        do {
+        await #expect(throws: NetworkError.offline) {
             _ = try await sut.openapi_fetchReport(deviceSN: "!", variables: [.feedIn, .gridConsumption, .generation, .chargeEnergyToTal], queryDate: QueryDate.any(), reportType: .day)
-        } catch NetworkError.offline {
-        } catch {
-            XCTFail()
         }
     }
 
-    func test_fetchReport_returns_tryLater() async {
+    @Test func `Fetch report returns try later`() async {
         stubHTTPResponse(with: .tryLaterFailure)
 
-        do {
+        await #expect(throws: NetworkError.tryLater) {
             _ = try await sut.openapi_fetchReport(deviceSN: "1", variables: [.feedIn, .gridConsumption, .generation, .chargeEnergyToTal], queryDate: QueryDate.any(), reportType: .day)
-        } catch NetworkError.tryLater {
-        } catch {
-            XCTFail()
         }
     }
 }

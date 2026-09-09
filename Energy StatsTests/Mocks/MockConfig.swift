@@ -76,4 +76,13 @@ class MockConfig: StoredConfig {
     var showInverterConsumption: Bool = false
     var showBatterySOCOnDailyStats: Bool = false
     var allowNegativeLoad: Bool = false
+    var workModes: [WorkMode] = []
+    var showOutputEnergyOnStats: Bool = false
+    var pvOutputConfig: PVOutputConfig? = nil
+    var isReadOnly: Bool = false
+    var readOnlyCode: String = ""
+    var inverterGeneration: InverterGeneration = .unknown
+    var showTodayPercentageSolarForecastAchieved: Bool = true
+    var installationPurchasePrice: Double = 0.0
+    var deductInverterConsumptionFromGridAvoided: Bool = true
 }

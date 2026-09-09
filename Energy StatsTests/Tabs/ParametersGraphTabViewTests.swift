@@ -10,17 +10,20 @@ import Combine
 import Energy_Stats_Core
 import SnapshotTesting
 import SwiftUI
-import XCTest
+import Testing
 
 // Record these on iPhone 16 Pro
-final class ParametersGraphTabViewTests: XCTestCase {
+struct ParametersGraphTabViewTests {
+    @Test
     @MainActor
-    func test_when_user_arrives() async throws {
+    func `When user arrives`() async throws {
         let networking = MockNetworking(dateProvider: { Date(timeIntervalSince1970: 1664127352) })
+        let appSettingsStore = AppSettingsStoreFactory.make()
+        appSettingsStore.update(.mock())
         let configManager = ConfigManager(
             networking: networking,
             config: MockConfig(),
-            appSettingsPublisher: CurrentValueSubject<AppSettings, Never>(AppSettings.mock()),
+            appSettingsStore: appSettingsStore,
             keychainStore: MockKeychainStore()
         )
         try await configManager.fetchDevices()
@@ -41,16 +44,19 @@ final class ParametersGraphTabViewTests: XCTestCase {
         await sut.viewModel.load()
         await propertyOn(sut.viewModel, keyPath: \.state) { $0 == .inactive }
 
-        assertSnapshot(matching: view, as: .image(on: .iPhone13Pro))
+        assertSnapshot(of: view, as: .image(on: .iPhone13Pro))
     }
 
+    @Test
     @MainActor
-    func test_with_network_failure() async throws {
+    func `With network failure`() async throws {
         let networking = MockNetworking(callsToThrow: [.openapi_fetchHistory])
+        let appSettingsStore = AppSettingsStoreFactory.make()
+        appSettingsStore.update(.mock())
         let configManager = ConfigManager(
             networking: networking,
             config: MockConfig(),
-            appSettingsPublisher: CurrentValueSubject<AppSettings, Never>(AppSettings.mock()),
+            appSettingsStore: appSettingsStore,
             keychainStore: MockKeychainStore()
         )
         try await configManager.fetchDevices()
@@ -71,6 +77,6 @@ final class ParametersGraphTabViewTests: XCTestCase {
         await sut.viewModel.load()
         await propertyOn(sut.viewModel, keyPath: \.state) { $0 == .error(nil, "") }
 
-        assertSnapshot(matching: view, as: .image(on: .iPhone13Pro))
+        assertSnapshot(of: view, as: .image(on: .iPhone13Pro))
     }
 }

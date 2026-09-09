@@ -129,6 +129,7 @@
 		413A592330514F9700D0CC9C /* StatsGraphValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413A592230514F9700D0CC9C /* StatsGraphValue.swift */; };
 		413A592530514F9F00D0CC9C /* StatsGraphVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413A592430514F9F00D0CC9C /* StatsGraphVariable.swift */; };
 		413A592730515C3600D0CC9C /* CurrentEnergyStatusIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413A592630515C3600D0CC9C /* CurrentEnergyStatusIntent.swift */; };
+		413A59293051757D00D0CC9C /* device-detail-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 413A59283051757300D0CC9C /* device-detail-success.json */; };
 		413B7A312A4A390C00562A68 /* SelfSufficiencyCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413B7A302A4A390C00562A68 /* SelfSufficiencyCalculator.swift */; };
 		413B7A3A2A4A397000562A68 /* Energy_Stats_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; platformFilter = ios; };
 		413B7A412A4A399900562A68 /* SelfSufficiencyCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413B7A402A4A399900562A68 /* SelfSufficiencyCalculatorTests.swift */; };
@@ -684,6 +685,7 @@
 		413A592230514F9700D0CC9C /* StatsGraphValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGraphValue.swift; sourceTree = "<group>"; };
 		413A592430514F9F00D0CC9C /* StatsGraphVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGraphVariable.swift; sourceTree = "<group>"; };
 		413A592630515C3600D0CC9C /* CurrentEnergyStatusIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentEnergyStatusIntent.swift; sourceTree = "<group>"; };
+		413A59283051757300D0CC9C /* device-detail-success.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "device-detail-success.json"; sourceTree = "<group>"; };
 		413B7A302A4A390C00562A68 /* SelfSufficiencyCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSufficiencyCalculator.swift; sourceTree = "<group>"; };
 		413B7A362A4A397000562A68 /* Energy Stats Core Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Energy Stats Core Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		413B7A402A4A399900562A68 /* SelfSufficiencyCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSufficiencyCalculatorTests.swift; sourceTree = "<group>"; };
@@ -1751,6 +1753,7 @@
 		41B690FA28E041E00058126E /* Responses */ = {
 			isa = PBXGroup;
 			children = (
+				413A59283051757300D0CC9C /* device-detail-success.json */,
 				411542F82BEF583100BDE56D /* parameters-history-success.json */,
 				411542F52BEF4E6F00BDE56D /* plantdetail-success.json */,
 				411542F42BEF4E6F00BDE56D /* plantlist-success.json */,
@@ -2346,6 +2349,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				413A59293051757D00D0CC9C /* device-detail-success.json in Resources */,
 				41923E3C2916B8A800D1A8C5 /* battery-soc-success.json in Resources */,
 				41B6910728E0B5F30058126E /* trylater.json in Resources */,
 				411542F72BEF4E6F00BDE56D /* plantdetail-success.json in Resources */,
@@ -3309,7 +3313,6 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStatsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -3325,7 +3328,6 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpriest.EnergyStatsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;

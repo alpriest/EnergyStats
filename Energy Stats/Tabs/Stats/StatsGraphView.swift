@@ -9,8 +9,6 @@ import Charts
 import Energy_Stats_Core
 import SwiftUI
 
-
-
 struct StatsGraphView: View {
     @ObservedObject var viewModel: StatsTabViewModel
     @GestureState var isDetectingPress = true

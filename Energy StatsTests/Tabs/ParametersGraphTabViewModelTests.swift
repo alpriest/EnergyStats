@@ -8,20 +8,20 @@
 import Combine
 @testable import Energy_Stats
 import Energy_Stats_Core
-import XCTest
+import Testing
 
-final class ParametersGraphTabViewModelTests: XCTestCase {
-    var sut: ParametersGraphTabViewModel!
-    var networking: Networking!
-    var config: MockConfig!
+struct ParametersGraphTabViewModelTests {
+    let sut: ParametersGraphTabViewModel
 
-    override func setUp() async throws {
-        config = MockConfig()
-        networking = MockNetworking(dateProvider: { Date(timeIntervalSince1970: 1669146973) })
+    init() async throws {
+        let config = MockConfig()
+        let networking = MockNetworking(dateProvider: { Date(timeIntervalSince1970: 1669146973) })
+        let appSettingsStore = AppSettingsStoreFactory.make()
+        appSettingsStore.update(.mock())
         let configManager = ConfigManager(
             networking: networking,
             config: config,
-            appSettingsPublisher: CurrentValueSubject<AppSettings, Never>(AppSettings.mock()),
+            appSettingsStore: appSettingsStore,
             keychainStore: MockKeychainStore()
         )
         sut = ParametersGraphTabViewModel(
@@ -34,36 +34,36 @@ final class ParametersGraphTabViewModelTests: XCTestCase {
         try await configManager.fetchDevices()
     }
 
-    func test_initial_values() {
-        XCTAssertEqual(sut.data.count, 0)
-        XCTAssertEqual(sut.displayMode, ParametersGraphDisplayMode(date: Date(timeIntervalSince1970: 1669146973), hours: 24))
-        XCTAssertEqual(sut.stride, 3)
+    @Test func `Initial values`() {
+        #expect(sut.data.isEmpty)
+        #expect(sut.displayMode == ParametersGraphDisplayMode(date: Date(timeIntervalSince1970: 1669146973), hours: 24))
+        #expect(sut.stride == 3)
     }
 
-    func test_fetches_data_on_load() async throws {
+    @Test func `Fetches data on load`() async throws {
         await sut.load()
 
-        let key = try XCTUnwrap(sut.data.keys.first)
-        let kwhData = sut.data[key]!
+        let key = try #require(sut.data.keys.first)
+        let kwhData = try #require(sut.data[key])
         let types = Set(kwhData.values.map { $0.type.name })
         let feedinPowerData = kwhData.values.filter { $0.type.variable == "feedinPower" }
 
-        XCTAssertEqual(key, "kW")
-        XCTAssertEqual(sut.data.count, 1)
-        XCTAssertEqual(types.count, 5)
-        XCTAssertEqual(feedinPowerData.count, 108)
+        #expect(key == "kW")
+        #expect(sut.data.count == 1)
+        #expect(types.count == 5)
+        #expect(feedinPowerData.count == 108)
     }
 
-    func test_filters_when_display_mode_changed() async throws {
+    @Test func `Filters when display mode changes`() async throws {
         await sut.load()
 
         sut.displayMode = ParametersGraphDisplayMode(date: Date(timeIntervalSince1970: 1669146973), hours: 12)
 
-        let key = try XCTUnwrap(sut.data.keys.first)
-        let kwhData = sut.data[key]!
+        let key = try #require(sut.data.keys.first)
+        let kwhData = try #require(sut.data[key])
         let feedinPowerData = kwhData.values.filter { $0.type.variable == "feedinPower" }
 
-        XCTAssertEqual(sut.stride, 2)
-        XCTAssertEqual(feedinPowerData.count, 13)
+        #expect(sut.stride == 2)
+        #expect(feedinPowerData.count == 13)
     }
 }

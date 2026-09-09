@@ -9,36 +9,35 @@ import Foundation
 import OHHTTPStubs
 import OHHTTPStubsSwift
 import OSLog
-import XCTest
 
-extension XCTestCase {
-    func stubHTTPResponse(with filename: FoxEssHTTPResponse) {
-        stubHTTPResponses(with: [filename])
-    }
+private final class TestBundleToken {}
 
-    func stubHTTPResponses(with filenames: [FoxEssHTTPResponse]) {
-        var callCount = 0
+func stubHTTPResponse(with filename: FoxEssHTTPResponse) {
+    stubHTTPResponses(with: [filename])
+}
 
-        stub(condition: isHost("www.foxesscloud.com")) { request in
-            callCount += 1
+func stubHTTPResponses(with filenames: [FoxEssHTTPResponse]) {
+    var callCount = 0
 
-            let filename: FoxEssHTTPResponse
-            if let result = filenames[safe: callCount - 1] {
-                filename = result
-            } else {
-                filename = filenames.last!
-            }
+    stub(condition: isHost("www.foxesscloud.com")) { request in
+        callCount += 1
 
-            let stubPath = OHPathForFile(filename.rawValue, type(of: self))
-            return fixture(filePath: stubPath!, headers: ["Content-Type": "application/json"])
+        let filename: FoxEssHTTPResponse
+        if let result = filenames[safe: callCount - 1] {
+            filename = result
+        } else {
+            filename = filenames.last!
         }
-    }
 
-    func stubOffline() {
-        stub(condition: isHost("www.foxesscloud.com")) { _ in
-            let notConnectedError = NSError(domain: NSURLErrorDomain, code: URLError.notConnectedToInternet.rawValue)
-            return HTTPStubsResponse(error: notConnectedError)
-        }
+        let stubPath = OHPathForFile(filename.rawValue, TestBundleToken.self)
+        return fixture(filePath: stubPath!, headers: ["Content-Type": "application/json"])
+    }
+}
+
+func stubOffline() {
+    stub(condition: isHost("www.foxesscloud.com")) { _ in
+        let notConnectedError = NSError(domain: NSURLErrorDomain, code: URLError.notConnectedToInternet.rawValue)
+        return HTTPStubsResponse(error: notConnectedError)
     }
 }
 

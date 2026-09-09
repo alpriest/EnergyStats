@@ -8,99 +8,101 @@
 import Combine
 @testable import Energy_Stats
 @testable import Energy_Stats_Core
-import XCTest
+import Testing
 
-final class UserManagerTests: XCTestCase {
-    private var sut: UserManager!
-    private var keychainStore: MockKeychainStore!
-    private var networking: Networking!
-    private var config: MockConfig!
-    private var configManager: ConfigManager!
+@Suite(.serialized)
+struct UserManagerTests {
+    private let sut: UserManager
+    private let keychainStore: MockKeychainStore
+    private let config: MockConfig
 
-    override func setUp() {
+    init() {
         keychainStore = MockKeychainStore()
         config = MockConfig()
-        networking = NetworkService(api: FoxAPIService(credentials: keychainStore, urlSession: URLSession.shared))
-        configManager = ConfigManager(networking: networking, config: config, appSettingsPublisher: CurrentValueSubject<AppSettings, Never>(AppSettings.mock()), keychainStore: MockKeychainStore())
+        let appSettingsStore = AppSettingsStoreFactory.make()
+        appSettingsStore.update(.mock())
+        let networking = NetworkService(api: FoxAPIService(apiTokenProvider: { "" }, urlSession: URLSession.shared, tracer: nil))
+        let configManager = ConfigManager(networking: networking, config: config, appSettingsStore: appSettingsStore, keychainStore: MockKeychainStore())
         sut = UserManager(store: keychainStore, configManager: configManager)
     }
 
+    @Test
     @MainActor
-    func test_isLoggedIn_SetsOnInitialisation() {
-        let expectation = self.expectation(description: #function)
+    func `Is logged in updates from the store`() async {
         keychainStore.updateHasApiKey()
-
-        sut.$isLoggedIn
-            .receive(subscriber: Subscribers.Sink(receiveCompletion: { _ in
-            }, receiveValue: { value in
-                if value == true {
-                    expectation.fulfill()
-                }
-            }))
-
-        wait(for: [expectation], timeout: 1.0)
-        XCTAssertEqual(sut.isLoggedIn, true)
+        await propertyOn(sut, keyPath: \.isLoggedIn) { $0 == true }
     }
 
+    @Test
     @MainActor
-    func test_logout_clears_store() async {
+    func `Logout clears store`() async {
         await sut.logout()
 
-        XCTAssertTrue(keychainStore.logoutCalled)
+        #expect(keychainStore.logoutCalled)
     }
 
+    @Test
     @MainActor
-    func test_logout_clears_config() async {
+    func `Logout clears config`() async {
         config.selectedDeviceSN = "device"
 
         await sut.logout()
 
-        XCTAssertNil(config.selectedDeviceSN)
+        #expect(config.selectedDeviceSN == nil)
     }
 
-    func test_login_success() async {
+    @Test func `Login succeeds`() async {
         let received = ValueReceiver(sut.$state)
-        stubHTTPResponses(with: [.deviceListSuccess, .variablesSuccess, .batterySuccess, .batterySocSuccess, .plantListSuccess, .plantDetailSuccess])
+        stubHTTPResponses(
+            with: [
+                .deviceListSuccess,
+                .variablesSuccess,
+                .batterySuccess,
+                .batterySocSuccess,
+                .plantListSuccess,
+                .plantDetailSuccess
+            ]
+        )
 
         await sut.login(apiKey: "bob")
         await propertyOn(keychainStore, keyPath: \.hasApiKey) { $0.value }
 
         await propertyOn(received, keyPath: \.values) { $0 == [.inactive, .active(.loading)] }
-        XCTAssertEqual(keychainStore.token, "bob")
-        XCTAssertEqual(config.selectedDeviceSN, "DEVICESN")
-        XCTAssertNotNil(config.devices)
+        #expect(keychainStore.token == "bob")
+        #expect(config.selectedDeviceSN == "DEVICESN")
+        #expect(config.devices != nil)
     }
 
-    func test_login_performs_logout_when_devicelist_fails() async {
+    @Test func `Login logs out when device list fails`() async {
         let received = ValueReceiver(sut.$state)
         stubHTTPResponses(with: [.tryLaterFailure])
 
         await sut.login(apiKey: "bob")
 
         await propertyOn(received, keyPath: \.values) { $0 == [.inactive, .active(.loading), .inactive, .error(NetworkError.tryLater, "Could not login. Check your internet connection")] }
-        XCTAssertTrue(keychainStore.logoutCalled)
+        #expect(keychainStore.logoutCalled)
     }
 
-    func test_login_with_bad_credentials_shows_error() async {
+    @Test func `Login with bad credentials shows error`() async {
         let received = ValueReceiver(sut.$state)
         stubHTTPResponses(with: [.loginFailure])
 
         await sut.login(apiKey: "bob")
 
         await propertyOn(received, keyPath: \.values) { $0 == [.inactive, .active(.loading), .inactive, .error(nil, "Wrong credentials, try again")] }
-        XCTAssertNil(keychainStore.token)
-        XCTAssertTrue(keychainStore.logoutCalled)
+        #expect(keychainStore.token == nil)
+        #expect(keychainStore.logoutCalled)
     }
 
-    func test_login_when_offline_shows_error() async {
+    @Test func `Login while offline shows error`() async {
         let received = ValueReceiver(sut.$state)
         stubOffline()
 
         await sut.login(apiKey: "bob")
         await propertyOn(received, keyPath: \.values) { $0 == [.inactive, .active(.loading), .inactive, .error(nil, "Could not login. Check your internet connection")] }
 
-        XCTAssertNil(keychainStore.token)
-        XCTAssertTrue(keychainStore.logoutCalled)
+        #expect(keychainStore.token == nil)
+        #expect(keychainStore.logoutCalled)
     }
 }
 

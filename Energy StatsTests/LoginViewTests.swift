@@ -9,19 +9,21 @@
 import Energy_Stats_Core
 import SnapshotTesting
 import SwiftUI
-import XCTest
+import Testing
 
-final class LoginViewTests: XCTestCase {
+struct LoginViewTests {
+    @Test
     @MainActor
-    func test_when_user_arrives() {
+    func `When user arrives`() {
         let sut = APIKeyLoginView(userManager: UserManager(store: MockKeychainStore(), configManager: ConfigManager.preview()))
         let view = UIHostingController(rootView: sut)
 
-        assertSnapshot(matching: view, as: .image(on: .iPhone13Pro))
+        assertSnapshot(of: view, as: .image(on: .iPhone13Pro))
     }
 
+    @Test
     @MainActor
-    func test_with_wrong_credentials() async {
+    func `With wrong credentials`() async {
         let networking = MockNetworking(callsToThrow: [.openapi_fetchDeviceList])
         let userManager = UserManager(
             store: MockKeychainStore(),
@@ -34,6 +36,6 @@ final class LoginViewTests: XCTestCase {
 
         await propertyOn(userManager, keyPath: \.state) { $0 == .inactive }
 
-        assertSnapshot(matching: view, as: .image(on: .iPhone13Pro))
+        assertSnapshot(of: view, as: .image(on: .iPhone13Pro))
     }
 }
