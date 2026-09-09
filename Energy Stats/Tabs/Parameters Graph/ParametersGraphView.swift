@@ -12,7 +12,6 @@ import SwiftUI
 struct ParametersGraphView: View {
     private let unit: String?
     @ObservedObject var viewModel: ParametersGraphTabViewModel
-    @GestureState var isDetectingPress = true
     @Binding var selectedDate: Date?
     @Binding var valuesAtTime: ValuesAtTime<ParameterGraphValue>?
     private let data: ParametersGraphViewData
@@ -87,7 +86,7 @@ struct ParametersGraphView: View {
             GeometryReader { geometryProxy in
                 Rectangle().fill(.clear).contentShape(Rectangle())
                     .gesture(DragGesture(minimumDistance: 20)
-                        .updating($isDetectingPress) { currentState, _, _ in
+                        .onChanged { currentState in
                             guard let plotFrame = chartProxy.plotFrame else { return }
                             let xLocation = currentState.location.x - geometryProxy[plotFrame].origin.x
 
@@ -125,10 +124,11 @@ struct ParametersGraphView: View {
     private func makeCaptionBox(chartProxy: ChartProxy) -> some View {
         GeometryReader { geometryReader in
             if let date = selectedDate,
+               let plotFrame = chartProxy.plotFrame,
                let elementLocation = chartProxy.position(forX: date)
             {
-                let location = elementLocation - geometryReader[chartProxy.plotAreaFrame].origin.x
-                let furthestRight = geometryReader[chartProxy.plotAreaFrame].width - captionBoxSize.width
+                let location = elementLocation - geometryReader[plotFrame].origin.x
+                let furthestRight = geometryReader[plotFrame].width - captionBoxSize.width
 
                 if let valuesAtTime {
                     let graphValuesAtTime: [ParameterGraphValue] = valuesAtTime.values.filter { $0.type.unit == unit }
@@ -161,13 +161,14 @@ struct ParametersGraphView: View {
     private func makeHighlightBar(chartProxy: ChartProxy) -> some View {
         GeometryReader { geometryReader in
             if let date = selectedDate,
+               let plotFrame = chartProxy.plotFrame,
                let elementLocation = chartProxy.position(forX: date)
             {
-                let location = elementLocation - geometryReader[chartProxy.plotAreaFrame].origin.x
+                let location = elementLocation - geometryReader[plotFrame].origin.x
 
                 Rectangle()
                     .fill(Color("graph_highlight"))
-                    .frame(width: 1, height: chartProxy.plotAreaSize.height)
+                    .frame(width: 1, height: chartProxy.plotSize.height)
                     .offset(x: location)
             }
         }
