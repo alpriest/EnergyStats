@@ -21,12 +21,11 @@ struct CachedItem {
     }
 }
 
-class NetworkInMemoryCache: FoxAPIServicing {
+actor NetworkInMemoryCache: FoxAPIServicing {
     private let api: FoxAPIServicing
     private var cache: [String: CachedItem] = [:]
     private let shortCacheDurationInSeconds: TimeInterval = 30
     private let longCacheDurationInSeconds: TimeInterval = 300
-    private let serialiserQueue = DispatchQueue(label: "networkcache.write.queue")
 
     init(api: FoxAPIServicing) {
         self.api = api
@@ -226,9 +225,7 @@ private extension NetworkInMemoryCache {
     }
 
     private func store(key: String, value: CachedItem) {
-        serialiserQueue.sync {
-            cache[key] = value
-        }
+        cache[key] = value
     }
 }
 
