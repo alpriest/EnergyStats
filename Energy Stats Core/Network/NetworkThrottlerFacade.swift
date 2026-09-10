@@ -153,37 +153,30 @@ class NetworkThrottlerFacade: FoxAPIServicing {
 
 private extension NetworkThrottlerFacade {
     func throttle<T>(method: String, minimumDuration: TimeInterval = 1.0, operation: () async throws -> T) async throws -> T {
-        defer { throttler.didInvoke(method: method) }
-        try await throttler.throttle(method: method, minimumDuration: minimumDuration)
+        try await throttler.waitForNextInvocation(method: method, minimumDuration: minimumDuration)
         return try await operation()
     }
 }
 
-class ThrottleManager {
+actor ThrottleManager {
     private var lastCallTimes: [String: Date] = [:]
-    private let queue = DispatchQueue(label: "throttle-manager-queue", qos: .utility)
 
-    func throttle(method: String, minimumDuration: TimeInterval = 1.0) async throws {
-        guard let lastCallTime = lastCallTime(for: method) else { return }
-
+    func waitForNextInvocation(method: String, minimumDuration: TimeInterval = 1.0) async throws {
         let now = Date()
-        let timeSinceLastCall = now.timeIntervalSince(lastCallTime)
-
-        if timeSinceLastCall < minimumDuration {
-            let waitTime = UInt64((minimumDuration - timeSinceLastCall) * 1_000_000_000)
-            try await Task.sleep(nanoseconds: waitTime)
+        guard let lastCallTime = lastCallTimes[method] else {
+            lastCallTimes[method] = now
+            return
         }
-    }
 
-    func lastCallTime(for method: String) -> Date? {
-        queue.sync {
-            self.lastCallTimes[method]
-        }
-    }
+        let nextCallTime = max(now, lastCallTime.addingTimeInterval(minimumDuration))
 
-    func didInvoke(method: String) {
-        queue.sync {
-            lastCallTimes[method] = Date()
+        // Reserve the next slot before suspending. Because this is an actor,
+        // concurrent callers cannot reserve the same slot.
+        lastCallTimes[method] = nextCallTime
+
+        let waitTime = nextCallTime.timeIntervalSince(now)
+        if waitTime > 0 {
+            try await Task.sleep(nanoseconds: UInt64(waitTime * 1_000_000_000))
         }
     }
 }
