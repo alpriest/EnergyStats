@@ -33,7 +33,8 @@ struct ParametersGraphViewData {
     }
 }
 
-class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
+@Observable
+class ParametersGraphTabViewModel: HasLoadState, VisibilityTracking {
     private let haptic = UIImpactFeedbackGenerator()
     private let networking: Networking
     private var configManager: ConfigManaging
@@ -44,25 +45,25 @@ class ParametersGraphTabViewModel: ObservableObject, HasLoadState, VisibilityTra
     }
 
     private let dateProvider: () -> Date
-    @Published var state = LoadState.inactive
+    var state = LoadState.inactive
     var visible: Bool = false
     var lastLoadState: LastLoadState<ParametersGraphLoadState>?
 
-    @Published private(set) var stride = 3
-    @Published private(set) var data: [String: ParametersGraphViewData] = [:]
-    @Published var graphVariables: [ParameterGraphVariable] = []
-    @Published var graphVariableBounds: [ParameterGraphBounds] = []
+    private(set) var stride = 3
+    private(set) var data: [String: ParametersGraphViewData] = [:]
+    var graphVariables: [ParameterGraphVariable] = []
+    var graphVariableBounds: [ParameterGraphBounds] = []
     private var queryDate = QueryDate.now()
     private var hours: Int = 24
     private var max: ParameterGraphValue?
     var exportFile: TextFile?
-    @Published var xScale: ClosedRange<Date> = Calendar.current.startOfDay(for: Date())...Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))!
-    @Published var hasLoaded: Bool = false
+    var xScale: ClosedRange<Date> = Calendar.current.startOfDay(for: Date())...Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))!
+    var hasLoaded: Bool = false
     private var loadTask: Task<Void, Never>?
     private let solarForecastProvider: SolarForecastProviding
     private let adjuster: ParameterValueAdjuster
 
-    @Published var displayMode: ParametersGraphDisplayMode {
+    var displayMode: ParametersGraphDisplayMode {
         didSet {
             let previousHours = hours
 

@@ -14,53 +14,62 @@ struct TabbedView: View {
     let userManager: UserManager
     let solarForecastProvider: SolarForecastProviding
     let templateStore: TemplateStoring
-    @State private var settingsTabViewModel: SettingsTabViewModel
-    @StateObject var parametersGraphTabViewModel: ParametersGraphTabViewModel
+    @State private var settingsTabViewModel: SettingsTabViewModel?
+    @State private var parametersGraphTabViewModel: ParametersGraphTabViewModel?
 
-    init(networking: Networking, userManager: UserManager, configManager: ConfigManaging, solarForecastProvider: @escaping SolarForecastProviding, templateStore: TemplateStoring) {
+    init(
+        networking: Networking,
+        userManager: UserManager,
+        configManager: ConfigManaging,
+        solarForecastProvider: @escaping SolarForecastProviding,
+        templateStore: TemplateStoring
+    ) {
         self.networking = networking
         self.userManager = userManager
         self.configManager = configManager
         self.solarForecastProvider = solarForecastProvider
         self.templateStore = templateStore
-        _settingsTabViewModel = State(initialValue: SettingsTabViewModel(userManager: userManager, config: configManager, networking: networking))
-        _parametersGraphTabViewModel = .init(wrappedValue: ParametersGraphTabViewModel(networking: networking, configManager: configManager, solarForecastProvider: solarForecastProvider))
     }
 
     var body: some View {
         TabView {
-            PowerFlowTabView(
-                configManager: configManager,
-                networking: networking,
-                userManager: userManager,
-                templateStore: templateStore,
-                solarForecastProvider: solarForecastProvider
-            ).tabItem {
-                PowerFlowTabItem()
+            if let settingsTabViewModel, let parametersGraphTabViewModel {
+                PowerFlowTabView(
+                    configManager: configManager,
+                    networking: networking,
+                    userManager: userManager,
+                    templateStore: templateStore,
+                    solarForecastProvider: solarForecastProvider
+                ).tabItem {
+                    PowerFlowTabItem()
+                }
+                
+                StatsTabView(configManager: configManager, networking: networking)
+                    .tabItem {
+                        StatsTabItem()
+                    }
+                
+                ParametersGraphTabView(configManager: configManager, viewModel: parametersGraphTabViewModel)
+                    .tabItem {
+                        ParametersTabItem()
+                    }
+                
+                SummaryTabView(configManager: configManager, networking: networking, solarForecastProvider: solarForecastProvider)
+                    .tabItem {
+                        SummaryTabItem()
+                    }
+                
+                SettingsTabView(viewModel: settingsTabViewModel, configManager: configManager, networking: networking, solarService: solarForecastProvider, templateStore: templateStore)
+                    .tabItem {
+                        SettingsTabItem()
+                    }
+                    .if(configManager.isDemoUser) {
+                        $0.badge("demo")
+                    }
             }
-
-            StatsTabView(configManager: configManager, networking: networking)
-                .tabItem {
-                    StatsTabItem()
-                }
-
-            ParametersGraphTabView(configManager: configManager, viewModel: parametersGraphTabViewModel)
-                .tabItem {
-                    ParametersTabItem()
-                }
-
-            SummaryTabView(configManager: configManager, networking: networking, solarForecastProvider: solarForecastProvider)
-                .tabItem {
-                    SummaryTabItem()
-                }
-
-            SettingsTabView(viewModel: settingsTabViewModel, configManager: configManager, networking: networking, solarService: solarForecastProvider, templateStore: templateStore)
-                .tabItem {
-                    SettingsTabItem()
-                }
-                .if(configManager.isDemoUser) {
-                    $0.badge("demo")
-                }
+        }.onAppear {
+            settingsTabViewModel = SettingsTabViewModel(userManager: userManager, config: configManager, networking: networking)
+            parametersGraphTabViewModel = ParametersGraphTabViewModel(networking: networking, configManager: configManager, solarForecastProvider: solarForecastProvider)
         }
     }
 }

@@ -18,7 +18,7 @@ struct ParametersGraphTabView: View {
     @State private var appSettings: AppSettings = .mock()
     private let appSettingsPublisher: LatestAppSettingsPublisher
     private let configManager: ConfigManaging
-    @ObservedObject var viewModel: ParametersGraphTabViewModel
+    @State private var viewModel: ParametersGraphTabViewModel
 
     init(configManager: ConfigManaging, viewModel: ParametersGraphTabViewModel) {
         self.viewModel = viewModel
@@ -88,13 +88,17 @@ struct ParametersGraphTabView: View {
     }
 
     private func graphs() -> some View {
-        Group {
+        let _ = Self._printChanges()
+
+        return Group {
             if configManager.separateParameterGraphsByUnit {
                 VStack {
                     ForEach(Array(viewModel.uniqueSelectedUnits()), id: \.self) { key in
                         ZStack {
                             VStack {
                                 ParametersGraphView(unit: key,
+                                                    xScale: viewModel.xScale,
+                                                    stride: viewModel.stride,
                                                     viewModel: viewModel,
                                                     selectedDate: $selectedDate,
                                                     valuesAtTime: $valuesAtTime,
@@ -120,6 +124,8 @@ struct ParametersGraphTabView: View {
                 ZStack {
                     VStack {
                         ParametersGraphView(unit: nil,
+                                            xScale: viewModel.xScale,
+                                            stride: viewModel.stride,
                                             viewModel: viewModel,
                                             selectedDate: $selectedDate,
                                             valuesAtTime: $valuesAtTime,

@@ -282,6 +282,7 @@
 		41AF2F412AA4C674008FCA2E /* BatteryPowerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AF2F402AA4C674008FCA2E /* BatteryPowerFooterView.swift */; };
 		41AF2F432AA4C6C1008FCA2E /* HomePowerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AF2F422AA4C6C1008FCA2E /* HomePowerFooterView.swift */; };
 		41AF2F452AA4C74F008FCA2E /* GridPowerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AF2F442AA4C74F008FCA2E /* GridPowerFooterView.swift */; };
+		41AFB3C8305444300023B888 /* ParametersGraphChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AFB3C7305444300023B888 /* ParametersGraphChartView.swift */; };
 		41B3FFE82AB07FE10020DFC9 /* NetworkInMemoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B3FFE72AB07FE10020DFC9 /* NetworkInMemoryCache.swift */; };
 		41B4F1482FD1D023003EB575 /* NetworkHistoricStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B4F1472FD1D023003EB575 /* NetworkHistoricStore.swift */; };
 		41B57A982F6571A900931677 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B57A972F6571A900931677 /* ToastView.swift */; };
@@ -861,6 +862,7 @@
 		41AF2F402AA4C674008FCA2E /* BatteryPowerFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryPowerFooterView.swift; sourceTree = "<group>"; };
 		41AF2F422AA4C6C1008FCA2E /* HomePowerFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePowerFooterView.swift; sourceTree = "<group>"; };
 		41AF2F442AA4C74F008FCA2E /* GridPowerFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPowerFooterView.swift; sourceTree = "<group>"; };
+		41AFB3C7305444300023B888 /* ParametersGraphChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersGraphChartView.swift; sourceTree = "<group>"; };
 		41B3FFE72AB07FE10020DFC9 /* NetworkInMemoryCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInMemoryCache.swift; sourceTree = "<group>"; };
 		41B4F1472FD1D023003EB575 /* NetworkHistoricStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHistoricStore.swift; sourceTree = "<group>"; };
 		41B57A972F6571A900931677 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
@@ -1701,6 +1703,7 @@
 				41A25D3C28CA5CDF00315714 /* ParametersGraphTabView.swift */,
 				41A25D3E28CA5CFB00315714 /* ParametersGraphTabViewModel.swift */,
 				41923E3D2916BC6F00D1A8C5 /* ParametersGraphView.swift */,
+				41AFB3C7305444300023B888 /* ParametersGraphChartView.swift */,
 				4140ECD9292D58D300992DD8 /* ParameterGraphVariable.swift */,
 				417153E329F2BCD700639A7B /* ParameterGraphHeaderView.swift */,
 				41ACB2C32A51832E005831B0 /* ParameterGraphHeaderViewModel.swift */,
@@ -2636,6 +2639,7 @@
 				418C6E952AFAC3BF000DE35F /* SummaryTabView.swift in Sources */,
 				41CBDC102C96222D001B4A49 /* WelcomeView.swift in Sources */,
 				411542E92BED30D200BDE56D /* ScheduleTemplateListView.swift in Sources */,
+				41AFB3C8305444300023B888 /* ParametersGraphChartView.swift in Sources */,
 				4107446728CA22B3006D5D7D /* InverterViewModel.swift in Sources */,
 				410FC8862AB98F020004CBC2 /* ParameterVariableGroupEditorView.swift in Sources */,
 				411542EA2BED30D600BDE56D /* ScheduleTemplateListViewModel.swift in Sources */,

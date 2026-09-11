@@ -9,7 +9,7 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct ParameterGraphVariablesToggles: View {
-    @ObservedObject private var viewModel: ParametersGraphTabViewModel
+    @State private var viewModel: ParametersGraphTabViewModel
     @Binding private var selectedDate: Date?
     @Binding private var valuesAtTime: ValuesAtTime<ParameterGraphValue>?
     private let appSettings: AppSettings

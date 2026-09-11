@@ -11,15 +11,27 @@ import SwiftUI
 
 struct ParametersGraphView: View {
     private let unit: String?
-    @ObservedObject var viewModel: ParametersGraphTabViewModel
+    @State private var viewModel: ParametersGraphTabViewModel
     @Binding var selectedDate: Date?
     @Binding var valuesAtTime: ValuesAtTime<ParameterGraphValue>?
     private let data: ParametersGraphViewData
     @State private var captionBoxSize: CGSize = .zero
     private let truncateYAxis: Bool
+    private let xScale: ClosedRange<Date>
+    private let stride: Int
 
-    init(unit: String?, viewModel: ParametersGraphTabViewModel, selectedDate: Binding<Date?>, valuesAtTime: Binding<ValuesAtTime<ParameterGraphValue>?>, truncateYAxis: Bool) {
+    init(
+        unit: String?,
+        xScale: ClosedRange<Date>,
+        stride: Int,
+        viewModel: ParametersGraphTabViewModel,
+        selectedDate: Binding<Date?>,
+        valuesAtTime: Binding<ValuesAtTime<ParameterGraphValue>?>,
+        truncateYAxis: Bool
+    ) {
         self.unit = unit
+        self.xScale = xScale
+        self.stride = stride
         self.viewModel = viewModel
         self._selectedDate = selectedDate
         self._valuesAtTime = valuesAtTime
@@ -35,90 +47,73 @@ struct ParametersGraphView: View {
     }
 
     var body: some View {
-        Chart(data.values, id: \.type.variable) {
-            if $0.type.variable == Variable.solcastPredictionVariable.variable {
-                LineMark(
-                    x: .value("hour", $0.date),
-                    y: .value("", $0.value),
-                    series: .value("Title", $0.type.title(as: .snapshot))
-                )
-                .foregroundStyle($0.type.colour)
-                .lineStyle(StrokeStyle(lineWidth: 2, dash: [5, 5], dashPhase: 0))
-            } else {
-                LineMark(
-                    x: .value("hour", $0.date),
-                    y: .value("", $0.value),
-                    series: .value("Title", $0.type.title(as: .snapshot))
-                )
-                .foregroundStyle($0.type.colour)
+        ParametersGraphChartView(values: data.values)
+            .chartPlotStyle { content in
+                content.background(Color.gray.gradient.opacity(0.04))
             }
-        }
-        .chartPlotStyle { content in
-            content.background(Color.gray.gradient.opacity(0.04))
-        }
-        .chartXScale(domain: viewModel.xScale)
-        .chartYScale(domain: .automatic(includesZero: !truncateYAxis))
-        .chartXAxis {
-            AxisMarks(values: .stride(by: .hour, count: viewModel.stride)) { value in
-                if let date = value.as(Date.self) {
-                    AxisTick(centered: false)
-                    AxisValueLabel(centered: false) {
-                        Text(date, format: .dateTime.hour())
-                    }
-                }
-            }
-        }
-        .chartYAxis {
-            AxisMarks { value in
-                if let amount = value.as(Double.self) {
-                    AxisGridLine()
-                    AxisValueLabel(multiLabelAlignment: .trailing) {
-                        if let unit {
-                            Text("\(amount, format: .number) \(unit)")
-                        } else {
-                            Text("\(amount, format: .number)")
+            .chartXScale(domain: xScale)
+            .chartYScale(domain: .automatic(includesZero: !truncateYAxis))
+            .chartXAxis {
+                AxisMarks(values: .stride(by: .hour, count: stride)) { value in
+                    if let date = value.as(Date.self) {
+                        AxisTick(centered: false)
+                        AxisValueLabel(centered: false) {
+                            Text(date, format: .dateTime.hour())
                         }
                     }
                 }
             }
-        }
-        .chartOverlay { chartProxy in
-            GeometryReader { geometryProxy in
-                Rectangle().fill(.clear).contentShape(Rectangle())
-                    .gesture(DragGesture(minimumDistance: 20)
-                        .onChanged { currentState in
-                            guard let plotFrame = chartProxy.plotFrame else { return }
-                            let xLocation = currentState.location.x - geometryProxy[plotFrame].origin.x
-
-                            if let plotElement = chartProxy.value(atX: xLocation, as: Date.self) {
-                                if let graphValue = data.values.first(where: {
-                                    $0.date > plotElement
-                                }), selectedDate != graphValue.date {
-                                    selectedDate = graphValue.date
-                                    valuesAtTime = viewModel.data(at: graphValue.date)
-                                }
+            .chartYAxis {
+                AxisMarks { value in
+                    if let amount = value.as(Double.self) {
+                        AxisGridLine()
+                        AxisValueLabel(multiLabelAlignment: .trailing) {
+                            if let unit {
+                                Text("\(amount, format: .number) \(unit)")
+                            } else {
+                                Text("\(amount, format: .number)")
                             }
                         }
-                    )
-                    .gesture(SpatialTapGesture()
-                        .onEnded { value in
-                            guard let plotFrame = chartProxy.plotFrame else { return }
-                            let xLocation = value.location.x - geometryProxy[plotFrame].origin.x
-
-                            if let plotElement = chartProxy.value(atX: xLocation, as: Date.self) {
-                                if let graphValue = data.values.first(where: {
-                                    $0.date > plotElement
-                                }) {
-                                    selectedDate = graphValue.date
-                                    valuesAtTime = viewModel.data(at: graphValue.date)
-                                }
-                            }
-                        }
-                    )
+                    }
+                }
             }
-        }
-        .chartOverlay { makeHighlightBar(chartProxy: $0) }
-        .chartOverlay { makeCaptionBox(chartProxy: $0) }
+            .chartOverlay { chartProxy in
+                GeometryReader { geometryProxy in
+                    Rectangle().fill(.clear).contentShape(Rectangle())
+                        .gesture(DragGesture(minimumDistance: 20)
+                            .onChanged { currentState in
+                                guard let plotFrame = chartProxy.plotFrame else { return }
+                                let xLocation = currentState.location.x - geometryProxy[plotFrame].origin.x
+
+                                if let plotElement = chartProxy.value(atX: xLocation, as: Date.self) {
+                                    if let graphValue = data.values.first(where: {
+                                        $0.date > plotElement
+                                    }), selectedDate != graphValue.date {
+                                        selectedDate = graphValue.date
+                                        valuesAtTime = viewModel.data(at: graphValue.date)
+                                    }
+                                }
+                            }
+                        )
+                        .gesture(SpatialTapGesture()
+                            .onEnded { value in
+                                guard let plotFrame = chartProxy.plotFrame else { return }
+                                let xLocation = value.location.x - geometryProxy[plotFrame].origin.x
+
+                                if let plotElement = chartProxy.value(atX: xLocation, as: Date.self) {
+                                    if let graphValue = data.values.first(where: {
+                                        $0.date > plotElement
+                                    }) {
+                                        selectedDate = graphValue.date
+                                        valuesAtTime = viewModel.data(at: graphValue.date)
+                                    }
+                                }
+                            }
+                        )
+                }
+            }
+            .chartOverlay { makeHighlightBar(chartProxy: $0) }
+            .chartOverlay { makeCaptionBox(chartProxy: $0) }
     }
 
     private func makeCaptionBox(chartProxy: ChartProxy) -> some View {
@@ -185,6 +180,8 @@ struct UsageGraphView_Previews: PreviewProvider {
         Task { await model.load() }
         return ParametersGraphView(
             unit: "℃",
+            xScale: model.xScale,
+            stride: model.stride,
             viewModel: model,
             selectedDate: .constant(nil),
             valuesAtTime: .constant(nil),
