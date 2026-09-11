@@ -88,7 +88,9 @@ struct ParametersGraphTabView: View {
     }
 
     private func graphs() -> some View {
+        #if DEBUG
         let _ = Self._printChanges()
+        #endif
 
         return Group {
             if configManager.separateParameterGraphsByUnit {
