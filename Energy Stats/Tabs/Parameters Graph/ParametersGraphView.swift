@@ -11,72 +11,29 @@ import SwiftUI
 
 struct ParametersGraphView: View {
     private let unit: String?
-    @State private var viewModel: ParametersGraphTabViewModel
     @Binding var selectedDate: Date?
     @Binding var valuesAtTime: ValuesAtTime<ParameterGraphValue>?
     private let data: ParametersGraphViewData
     @State private var captionBoxSize: CGSize = .zero
     private let truncateYAxis: Bool
-    private let xScale: ClosedRange<Date>
-    private let stride: Int
+    private let haptic = UIImpactFeedbackGenerator()
 
     init(
         unit: String?,
-        xScale: ClosedRange<Date>,
-        stride: Int,
-        viewModel: ParametersGraphTabViewModel,
         selectedDate: Binding<Date?>,
         valuesAtTime: Binding<ValuesAtTime<ParameterGraphValue>?>,
-        truncateYAxis: Bool
+        truncateYAxis: Bool,
+        data: ParametersGraphViewData
     ) {
         self.unit = unit
-        self.xScale = xScale
-        self.stride = stride
-        self.viewModel = viewModel
         self._selectedDate = selectedDate
         self._valuesAtTime = valuesAtTime
         self.truncateYAxis = truncateYAxis
-
-        if let unit {
-            self.data = viewModel.data[unit] ?? .empty()
-        } else if let unit = viewModel.data.keys.first {
-            self.data = viewModel.data[unit] ?? .empty()
-        } else {
-            self.data = .empty()
-        }
+        self.data = data
     }
 
     var body: some View {
-        ParametersGraphChartView(values: data.values)
-            .chartPlotStyle { content in
-                content.background(Color.gray.gradient.opacity(0.04))
-            }
-            .chartXScale(domain: xScale)
-            .chartYScale(domain: .automatic(includesZero: !truncateYAxis))
-            .chartXAxis {
-                AxisMarks(values: .stride(by: .hour, count: stride)) { value in
-                    if let date = value.as(Date.self) {
-                        AxisTick(centered: false)
-                        AxisValueLabel(centered: false) {
-                            Text(date, format: .dateTime.hour())
-                        }
-                    }
-                }
-            }
-            .chartYAxis {
-                AxisMarks { value in
-                    if let amount = value.as(Double.self) {
-                        AxisGridLine()
-                        AxisValueLabel(multiLabelAlignment: .trailing) {
-                            if let unit {
-                                Text("\(amount, format: .number) \(unit)")
-                            } else {
-                                Text("\(amount, format: .number)")
-                            }
-                        }
-                    }
-                }
-            }
+        ParametersGraphChartView(values: self.data.values, xScale: data.xScale, truncateYAxis: truncateYAxis, stride: data.stride, unit: unit)
             .chartOverlay { chartProxy in
                 GeometryReader { geometryProxy in
                     Rectangle().fill(.clear).contentShape(Rectangle())
@@ -90,7 +47,7 @@ struct ParametersGraphView: View {
                                         $0.date > plotElement
                                     }), selectedDate != graphValue.date {
                                         selectedDate = graphValue.date
-                                        valuesAtTime = viewModel.data(at: graphValue.date)
+                                        valuesAtTime = data(at: graphValue.date)
                                     }
                                 }
                             }
@@ -105,7 +62,7 @@ struct ParametersGraphView: View {
                                         $0.date > plotElement
                                     }) {
                                         selectedDate = graphValue.date
-                                        valuesAtTime = viewModel.data(at: graphValue.date)
+                                        valuesAtTime = data(at: graphValue.date)
                                     }
                                 }
                             }
@@ -114,6 +71,17 @@ struct ParametersGraphView: View {
             }
             .chartOverlay { makeHighlightBar(chartProxy: $0) }
             .chartOverlay { makeCaptionBox(chartProxy: $0) }
+            .onAppear { haptic.prepare() }
+    }
+
+    private func data(at date: Date) -> ValuesAtTime<ParameterGraphValue> {
+        let result = ValuesAtTime(values: data.visibleRawData.filter { $0.date == date })
+
+        if let maxDate = data.max?.date, date == maxDate {
+            haptic.impactOccurred()
+        }
+
+        return result
     }
 
     private func makeCaptionBox(chartProxy: ChartProxy) -> some View {
@@ -180,12 +148,17 @@ struct UsageGraphView_Previews: PreviewProvider {
         Task { await model.load() }
         return ParametersGraphView(
             unit: "℃",
-            xScale: model.xScale,
-            stride: model.stride,
-            viewModel: model,
             selectedDate: .constant(nil),
             valuesAtTime: .constant(nil),
-            truncateYAxis: false
+            truncateYAxis: false,
+            data: ParametersGraphViewData(
+                visibleRawData: [],
+                values: [],
+                yScale: 1 ... 10,
+                xScale: model.xScale,
+                stride: model.stride,
+                max: nil
+            )
         )
     }
 }

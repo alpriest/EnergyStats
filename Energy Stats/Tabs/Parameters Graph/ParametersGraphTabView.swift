@@ -88,23 +88,19 @@ struct ParametersGraphTabView: View {
     }
 
     private func graphs() -> some View {
-        #if DEBUG
-        let _ = Self._printChanges()
-        #endif
-
-        return Group {
+        Group {
             if configManager.separateParameterGraphsByUnit {
                 VStack {
-                    ForEach(Array(viewModel.uniqueSelectedUnits()), id: \.self) { key in
+                    ForEach(viewModel.uniqueSelectedUnits, id: \.self) { key in
                         ZStack {
                             VStack {
+                                let data: ParametersGraphViewData = viewModel.data[key] ?? .empty()
+
                                 ParametersGraphView(unit: key,
-                                                    xScale: viewModel.xScale,
-                                                    stride: viewModel.stride,
-                                                    viewModel: viewModel,
                                                     selectedDate: $selectedDate,
                                                     valuesAtTime: $valuesAtTime,
-                                                    truncateYAxis: appSettings.truncatedYAxisOnParameterGraphs)
+                                                    truncateYAxis: appSettings.truncatedYAxisOnParameterGraphs,
+                                                    data: data)
                                     .frame(height: 250)
                                     .padding(.vertical)
 
@@ -125,13 +121,17 @@ struct ParametersGraphTabView: View {
             } else {
                 ZStack {
                     VStack {
+                        let data: ParametersGraphViewData = if let unit = viewModel.data.keys.first {
+                            viewModel.data[unit] ?? .empty()
+                        } else {
+                            .empty()
+                        }
+
                         ParametersGraphView(unit: nil,
-                                            xScale: viewModel.xScale,
-                                            stride: viewModel.stride,
-                                            viewModel: viewModel,
                                             selectedDate: $selectedDate,
                                             valuesAtTime: $valuesAtTime,
-                                            truncateYAxis: appSettings.truncatedYAxisOnParameterGraphs)
+                                            truncateYAxis: appSettings.truncatedYAxisOnParameterGraphs,
+                                            data: data)
                             .frame(height: 250)
                             .padding(.vertical)
 

@@ -25,17 +25,27 @@ struct ParametersGraphDisplayMode: Equatable {
 }
 
 struct ParametersGraphViewData {
+    let visibleRawData: [ParameterGraphValue]
     let values: [ParameterGraphValue]
     let yScale: ClosedRange<Double>
+    let xScale: ClosedRange<Date>
+    let stride: Int
+    let max: ParameterGraphValue?
 
     static func empty() -> ParametersGraphViewData {
-        ParametersGraphViewData(values: [], yScale: 0...0)
+        ParametersGraphViewData(
+            visibleRawData: [],
+            values: [],
+            yScale: 0...0,
+            xScale: .now ... .now,
+            stride: 0,
+            max: nil
+        )
     }
 }
 
 @Observable
 class ParametersGraphTabViewModel: HasLoadState, VisibilityTracking {
-    private let haptic = UIImpactFeedbackGenerator()
     private let networking: Networking
     private var configManager: ConfigManaging
     private var rawData: [ParameterGraphValue] = [] {
@@ -51,7 +61,11 @@ class ParametersGraphTabViewModel: HasLoadState, VisibilityTracking {
 
     private(set) var stride = 3
     private(set) var data: [String: ParametersGraphViewData] = [:]
-    var graphVariables: [ParameterGraphVariable] = []
+    var graphVariables: [ParameterGraphVariable] = [] {
+        didSet {
+            uniqueSelectedUnits = Set(graphVariables.filter { $0.isSelected }.map { $0.type.unit }).sorted { $0 < $1 }
+        }
+    }
     var graphVariableBounds: [ParameterGraphBounds] = []
     private var queryDate = QueryDate.now()
     private var hours: Int = 24
@@ -62,6 +76,7 @@ class ParametersGraphTabViewModel: HasLoadState, VisibilityTracking {
     private var loadTask: Task<Void, Never>?
     private let solarForecastProvider: SolarForecastProviding
     private let adjuster: ParameterValueAdjuster
+    var uniqueSelectedUnits: [String] = []
 
     var displayMode: ParametersGraphDisplayMode {
         didSet {
@@ -103,7 +118,6 @@ class ParametersGraphTabViewModel: HasLoadState, VisibilityTracking {
         self.solarForecastProvider = solarForecastProvider
         self.adjuster = ParameterValueAdjuster(config: configManager)
         displayMode = ParametersGraphDisplayMode(date: dateProvider(), hours: 24)
-        haptic.prepare()
 
         cancellable = configManager.currentDevice
             .map { [weak self] _ in
@@ -246,17 +260,6 @@ class ParametersGraphTabViewModel: HasLoadState, VisibilityTracking {
         storeVariables()
     }
 
-    func data(at date: Date) -> ValuesAtTime<ParameterGraphValue> {
-        let visibleVariableTypes = graphVariables.filter { $0.enabled }.map { $0.type }
-        let result = ValuesAtTime(values: rawData.filter { $0.date == date && visibleVariableTypes.contains($0.type) })
-
-        if let maxDate = max?.date, date == maxDate {
-            haptic.impactOccurred()
-        }
-
-        return result
-    }
-
     func toggle(visibilityOf variable: ParameterGraphVariable) {
         graphVariables = graphVariables.map {
             if $0.type == variable.type {
@@ -307,8 +310,19 @@ class ParametersGraphTabViewModel: HasLoadState, VisibilityTracking {
     private func assignData(from grouped: [ParameterGraphValue]) {
         let rawGrouped = Dictionary(grouping: grouped, by: { $0.type.unit })
         var updated = [String: ParametersGraphViewData]()
+        
+        let visibleVariableTypes = graphVariables.filter { $0.enabled }.map { $0.type }
+        let visibleRawData = rawData.filter { visibleVariableTypes.contains($0.type) }
+
         for item in rawGrouped {
-            updated[item.key] = ParametersGraphViewData(values: item.value, yScale: 1...3)
+            updated[item.key] = ParametersGraphViewData(
+                visibleRawData: visibleRawData,
+                values: item.value,
+                yScale: 1...3,
+                xScale: xScale,
+                stride: stride,
+                max: max
+            )
         }
         data = updated
     }
@@ -367,10 +381,6 @@ extension ParametersGraphTabViewModel {
                     period: entries.first?.period ?? ""
                 )
             }.sorted(by: { $0.periodEnd < $1.periodEnd }) // Ensure chronological order
-    }
-
-    func uniqueSelectedUnits() -> Array<String> {
-        Set(graphVariables.filter { $0.isSelected }.map { $0.type.unit }).sorted { $0 < $1 }
     }
 }
 

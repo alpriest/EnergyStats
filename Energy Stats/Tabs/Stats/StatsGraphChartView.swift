@@ -20,11 +20,13 @@ struct StatsGraphChartView: View {
     let selfSufficiencyGraphData: [StatsGraphValue]
     let inverterConsumptionGraphData: [StatsGraphValue]
     let batterySOCGraphData: [StatsGraphValue]
+    let xScale: ClosedRange<Date>
+    let yScale: ClosedRange<Double>
 
     var body: some View {
         Chart {
-            ForEach(normalData, id: \.type.titleTotal) { dataPoint in
-                if statsTimeUsageGraphStyle.isLine {
+            if statsTimeUsageGraphStyle.isLine {
+                ForEach(normalData) { dataPoint in
                     LineMark(
                         x: .value("hour", dataPoint.date, unit: unit),
                         y: .value("Amount", dataPoint.graphValue),
@@ -32,8 +34,10 @@ struct StatsGraphChartView: View {
                     )
                     .foregroundStyle(dataPoint.type.colour)
                 }
+            }
 
-                if statsTimeUsageGraphStyle.isBar {
+            if statsTimeUsageGraphStyle.isBar {
+                ForEach(normalData) { dataPoint in
                     BarMark(
                         x: .value("hour", dataPoint.date, unit: unit),
                         y: .value("Amount", dataPoint.graphValue)
@@ -76,6 +80,40 @@ struct StatsGraphChartView: View {
                     )
                     .lineStyle(StrokeStyle(lineWidth: 3))
                     .foregroundStyle(Color.cyan)
+                }
+            }
+        }
+        .chartXScale(domain: xScale)
+        .chartYScale(domain: yScale)
+        .chartPlotStyle { content in
+            content.background(Color.gray.gradient.opacity(0.04))
+        }
+        .chartYAxis {
+            AxisMarks { value in
+                if let value = value.as(Double.self) {
+                    AxisGridLine()
+                    AxisValueLabel(anchor: .trailing, multiLabelAlignment: .trailing) {
+                        Text(value, format: .number)
+                    }
+                }
+            }
+        }
+        .chartXAxis {
+            AxisMarks(values: .stride(by: unit, count: 3)) { value in
+                if let date = value.as(Date.self) {
+                    AxisTick(centered: true)
+                    AxisValueLabel(centered: false, anchor: .top) {
+                        switch unit {
+                        case .month:
+                            Text(date, format: .dateTime.month())
+                        case .day:
+                            Text(date, format: .dateTime.day())
+                        case .hour:
+                            Text(date, format: .dateTime.hour())
+                        default:
+                            EmptyView()
+                        }
+                    }
                 }
             }
         }

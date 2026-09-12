@@ -31,42 +31,10 @@ struct StatsGraphView: View {
                 normalData: normalData,
                 selfSufficiencyGraphData: selfSufficiencyGraphData,
                 inverterConsumptionGraphData: inverterConsumptionGraphData,
-                batterySOCGraphData: batterySOCGraphData
+                batterySOCGraphData: batterySOCGraphData,
+                xScale: viewModel.xScale,
+                yScale: viewModel.yScale
             )
-            .chartXScale(domain: viewModel.xScale)
-            .chartYScale(domain: viewModel.yScale)
-            .chartPlotStyle { content in
-                content.background(Color.gray.gradient.opacity(0.04))
-            }
-            .chartYAxis {
-                AxisMarks { value in
-                    if let value = value.as(Int.self) {
-                        AxisGridLine()
-                        AxisValueLabel(multiLabelAlignment: .trailing) {
-                            Text(value, format: .number)
-                        }
-                    }
-                }
-            }
-            .chartXAxis {
-                AxisMarks(values: .stride(by: viewModel.unit, count: 3)) { value in
-                    if let date = value.as(Date.self) {
-                        AxisTick(centered: true)
-                        AxisValueLabel(centered: false) {
-                            switch viewModel.unit {
-                            case .month:
-                                Text(date, format: .dateTime.month())
-                            case .day:
-                                Text(date, format: .dateTime.day())
-                            case .hour:
-                                Text(date, format: .dateTime.hour())
-                            default:
-                                EmptyView()
-                            }
-                        }
-                    }
-                }
-            }
             .chartOverlay { chartProxy in
                 GeometryReader { geometryProxy in
                     if let plotFrame = chartProxy.plotFrame {
