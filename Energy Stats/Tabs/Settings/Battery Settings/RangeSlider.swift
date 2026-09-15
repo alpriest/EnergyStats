@@ -119,8 +119,8 @@ struct RangeSlider: View {
 #if DEBUG
 struct RangeSlider_Previews: PreviewProvider {
     struct PreviewWrapper: View {
-        @State var lower: Double = 2
-        @State var upper: Double = 5
+        @State private var lower: Double = 2
+        @State private var upper: Double = 5
 
         var body: some View {
             RangeSlider(lower: $lower, upper: $upper, lowerBounds: -10 ... 10, upperBounds: -10 ... 10)

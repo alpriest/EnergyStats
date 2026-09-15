@@ -26,28 +26,29 @@ public enum DeviceState: Int {
     case unknown = 99
 }
 
-public class LoadedPowerFlowViewModel: Equatable, ObservableObject {
-    @Published public private(set) var solar: Double = 0
-    @Published public private(set) var displayStrings: [StringPower] = []
-    @Published public private(set) var home: Double = 0
-    @Published public private(set) var grid: Double = 0
-    @Published public private(set) var todaysGeneration: GenerationViewModel?
-    @Published public private(set) var earnings: EnergyStatsFinancialModel?
-    @Published public private(set) var inverterTemperatures: InverterTemperatures?
-    @Published public private(set) var homeTotal: Double?
-    @Published public private(set) var gridImportTotal: Double?
-    @Published public private(set) var gridExportTotal: Double?
+@Observable
+public class LoadedPowerFlowViewModel: Equatable {
+    public private(set) var solar: Double = 0
+    public private(set) var displayStrings: [StringPower] = []
+    public private(set) var home: Double = 0
+    public private(set) var grid: Double = 0
+    public private(set) var todaysGeneration: GenerationViewModel?
+    public private(set) var earnings: EnergyStatsFinancialModel?
+    public private(set) var inverterTemperatures: InverterTemperatures?
+    public private(set) var homeTotal: Double?
+    public private(set) var gridImportTotal: Double?
+    public private(set) var gridExportTotal: Double?
+    public private(set) var ct2: Double = 0
+    public private(set) var deviceState: DeviceState = .unknown
+    public private(set) var faults: [String] = []
+    public private(set) var showCT2: Bool = false
     private let batteryViewModel: BatteryViewModel
-    @Published public private(set) var ct2: Double = 0
-    @Published public private(set) var deviceState: DeviceState = .unknown
-    @Published public private(set) var faults: [String] = []
-    @Published public private(set) var showCT2: Bool = false
     private let currentDevice: Device
     private let network: Networking
     private let configManager: ConfigManaging
-    @Published private var solarStrings: [StringPower] = []
+    private var solarStrings: [StringPower] = []
     private var cancellables = Set<AnyCancellable>()
-    @Published public private(set) var todayPercentageSolarForecastAchieved: Double?
+    public private(set) var todayPercentageSolarForecastAchieved: Double?
 
     public init(currentValuesPublisher: AnyPublisher<CurrentValues, Never>,
                 battery: BatteryViewModel,

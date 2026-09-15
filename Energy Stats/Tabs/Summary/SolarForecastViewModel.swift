@@ -42,15 +42,20 @@ private struct SolarForecastTotalData {
     let percentageTimePeriodsAvailable: Double
 }
 
-class SolarForecastViewModel: ObservableObject, HasLoadState {
-    @Published var lastFetched: Date?
-    @Published var data: [SolarForecastViewData] = []
-    @Published var solarForecastAchievedData: PercentageSolarForecastAchievedData? = nil
-    @Published var state: LoadState = .inactive
-    @Published var tooManyRequests: Bool = false
-    @Published var hasSites: Bool = false
-    @Published var canRefresh = true
-    @Published var period: SolarForecastPeriod = .yesterday
+@Observable
+class SolarForecastViewModel: HasLoadState {
+    var lastFetched: Date?
+    var data: [SolarForecastViewData] = []
+    var solarForecastAchievedData: PercentageSolarForecastAchievedData? = nil
+    var state: LoadState = .inactive
+    var tooManyRequests: Bool = false
+    var hasSites: Bool = false
+    var canRefresh = true
+    var period: SolarForecastPeriod = .yesterday
+
+    private let configManager: ConfigManaging
+    private let solarForecastProvider: () -> SolcastCaching
+    private let networking: Networking
     private var privateState: LoadState = .inactive {
         didSet {
             Task {
@@ -60,9 +65,6 @@ class SolarForecastViewModel: ObservableObject, HasLoadState {
     }
 
     private var cancellable: AnyCancellable?
-    let configManager: ConfigManaging
-    let solarForecastProvider: () -> SolcastCaching
-    let networking: Networking
     private var settings: AppSettings { didSet {
         Task { @MainActor in
             hasSites = !settings.solcastSettings.sites.isEmpty

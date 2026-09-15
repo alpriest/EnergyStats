@@ -10,62 +10,69 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct SummaryTabView: View {
-    @StateObject var viewModel: SummaryTabViewModel
+    @State private var viewModel: SummaryTabViewModel?
     @State private var appSettings: AppSettings
+    @State private var presentSheet = false
     private var appSettingsPublisher: LatestAppSettingsPublisher
     private let configManager: ConfigManaging
-    @StateObject private var solarForecastViewModel: SolarForecastViewModel
-    @State private var presentSheet = false
+    private let networking: Networking
+    private let solarForecastProvider: SolarForecastProviding
 
     init(configManager: ConfigManaging, networking: Networking, solarForecastProvider: @escaping SolarForecastProviding) {
         self.configManager = configManager
-        _viewModel = .init(wrappedValue: SummaryTabViewModel(configManager: configManager, networking: networking))
-        _solarForecastViewModel = .init(wrappedValue: SolarForecastViewModel(configManager: configManager, solarForecastProvider: solarForecastProvider, networking: networking))
+        self.networking = networking
+        self.solarForecastProvider = solarForecastProvider
         self.appSettingsPublisher = configManager.appSettingsPublisher
         self.appSettings = configManager.currentAppSettings
     }
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading) {
-                    if let viewData = viewModel.viewData {
-                        SummaryLoadedView(viewData: viewData, appSettings: appSettings, onToggleBestSolar: viewModel.toggleBestSolarGrouping)
-                    } else {
-                        Text("Could not load approximations")
+            if let viewModel {
+                ScrollView {
+                    VStack(alignment: .leading) {
+                        if let viewData = viewModel.viewData {
+                            SummaryLoadedView(viewData: viewData, appSettings: appSettings, onToggleBestSolar: viewModel.toggleBestSolarGrouping)
+                        } else {
+                            Text("Could not load approximations")
+                        }
+
+                        Divider()
+
+                        SolarForecastView(
+                            appSettings: appSettings,
+                            configManager: configManager,
+                            networking: networking,
+                            solarForecastProvider: solarForecastProvider
+                        )
                     }
-
-                    Divider()
-
-                    SolarForecastView(
-                        appSettings: appSettings,
-                        viewModel: solarForecastViewModel
-                    )
                 }
-            }
-            .padding(.horizontal)
-            .navigationTitle("summary_title")
-            .analyticsScreen(.summary)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: { presentSheet.toggle() },
-                           label: { Text("Edit") }).buttonStyle(.plain)
+                .padding(.horizontal)
+                .navigationTitle("summary_title")
+                .analyticsScreen(.summary)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: { presentSheet.toggle() },
+                               label: { Text("Edit") }).buttonStyle(.plain)
+                    }
                 }
+                .sheet(isPresented: $presentSheet) {
+                    SummaryDateRangeView(initial: viewModel.summaryDateRange, onApply: { dateRange in
+                        viewModel.setDateRange(dateRange: dateRange)
+                    })
+                    .presentationDetents([.medium])
+                }
+                .loadable(viewModel.state, retry: { viewModel.load() })
             }
-            .sheet(isPresented: $presentSheet) {
-                SummaryDateRangeView(initial: viewModel.summaryDateRange, onApply: { dateRange in
-                    viewModel.setDateRange(dateRange: dateRange)
-                })
-                .presentationDetents([.medium])
-            }
-            .loadable(viewModel.state, retry: { viewModel.load() })
         }
-        .onAppear { viewModel.load() }
+        .onAppear {
+            viewModel = SummaryTabViewModel(configManager: configManager, networking: networking)
+            viewModel?.load()
+        }
         .onReceive(appSettingsPublisher) {
             self.appSettings = $0
         }
     }
-    
 }
 
 #Preview {

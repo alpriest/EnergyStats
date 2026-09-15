@@ -68,9 +68,11 @@ struct APIKeyLoginView: View {
                 if let cause = error as? NetworkError {
                     switch cause {
                     case .invalidToken:
-                        errorMessage = "Your API token is invalid."
+                        errorMessage = String(localized: "Your API token is invalid.")
                     case .badCredentials:
                         errorMessage = message
+                    case .foxServerError(40256, _):
+                        errorMessage = String(localized:"Fox rejected your login request. Check the date/time on your device is set to Automatic and try again.")
                     default:
                         errorMessage = cause.errorDescription
                     }

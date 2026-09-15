@@ -71,18 +71,19 @@ struct SummaryViewData: Copiable, Equatable {
     }
 }
 
-class SummaryTabViewModel: ObservableObject, HasLoadState {
+@Observable
+class SummaryTabViewModel: HasLoadState {
     private let networking: Networking
     private var configManager: ConfigManaging
-    @Published var viewData: SummaryViewData? = nil
     private let approximationsCalculator: ApproximationsCalculator
     private var cancellables = Set<AnyCancellable>()
-    @Published var summaryDateRange: SummaryDateRange
     private let reportVariables = [ReportVariable.feedIn, .generation, .chargeEnergyToTal, .dischargeEnergyToTal, .gridConsumption, .loads, .pvEnergyTotal]
-    @Published var state: LoadState = .inactive
     private var solarGenerationByMonth: [SolarGenerationPeriodAmount] = []
     private var grouping: TimeGrouping = .month
-    
+    var viewData: SummaryViewData? = nil
+    var summaryDateRange: SummaryDateRange
+    var state: LoadState = .inactive
+
     init(configManager: ConfigManaging, networking: Networking) {
         self.networking = networking
         self.configManager = configManager

@@ -22,7 +22,7 @@ struct LabelWidthPreferenceKey: PreferenceKey {
 
 struct SolarStringsView: View {
     @State var pvLabelWidth: CGFloat = 100
-    @ObservedObject var viewModel: LoadedPowerFlowViewModel
+    @State var viewModel: LoadedPowerFlowViewModel
     let appSettings: AppSettings
 
     var body: some View {

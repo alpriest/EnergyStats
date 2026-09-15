@@ -14,7 +14,7 @@ struct LoadedPowerFlowView: View {
     @State private var appSettings: AppSettings
     @State private var size: CGSize = .zero
     private let configManager: ConfigManaging
-    @ObservedObject var viewModel: LoadedPowerFlowViewModel
+    @State var viewModel: LoadedPowerFlowViewModel
     private var appSettingsPublisher: LatestAppSettingsPublisher
     @State private var showSchedule = false
     private let networking: Networking

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct TipKitViewModifier: ViewModifier {
     let tip: TipType
-    @State var showingAlert = false
+    @State private var showingAlert = false
 
     init(tip: TipType) {
         self.tip = tip

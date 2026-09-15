@@ -40,7 +40,7 @@ struct NumberTextField<Field: Hashable>: View {
 
 #Preview {
     struct Preview: View {
-        @State var value = "12"
+        @State private var value = "12"
         @FocusState var focusedField: String?
 
         var body: some View {

@@ -144,8 +144,8 @@ struct MediumPresentationDetentsViewModifier: ViewModifier {
 }
 
 private struct Preview: View {
-    @State var start = Date()
-    @State var end = Date()
+    @State private var start = Date()
+    @State private var end = Date()
 
     var body: some View {
         CustomTimePicker(

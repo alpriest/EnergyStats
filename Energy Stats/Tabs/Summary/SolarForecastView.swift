@@ -11,14 +11,24 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct SolarForecastView: View {
-    let appSettings: AppSettings
-    @ObservedObject var viewModel: SolarForecastViewModel
+    @State private var viewModel: SolarForecastViewModel?
     @State private var showSolcastConfiguration = false
+    private let appSettings: AppSettings
+    private let configManager: ConfigManaging
+    private let networking: Networking
+    private let solarForecastProvider: SolarForecastProviding
+
+    init(appSettings: AppSettings, configManager: ConfigManaging, networking: Networking, solarForecastProvider: @escaping SolarForecastProviding) {
+        self.appSettings = appSettings
+        self.configManager = configManager
+        self.networking = networking
+        self.solarForecastProvider = solarForecastProvider
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            if viewModel.hasSites {
-                loadedView()
+            if let viewModel, viewModel.hasSites == true {
+                loadedView(viewModel)
             } else {
                 Text("solcast_configuration_motivation")
                 Button(action: { showSolcastConfiguration.toggle() }) {
@@ -27,17 +37,20 @@ struct SolarForecastView: View {
             }
         }.sheet(isPresented: $showSolcastConfiguration) {
             SolcastSettingsView(
-                configManager: viewModel.configManager,
-                solarService: viewModel.solarForecastProvider
+                configManager: configManager,
+                solarService: solarForecastProvider
             )
+        }
+        .onAppear {
+            viewModel = SolarForecastViewModel(configManager: configManager, solarForecastProvider: solarForecastProvider, networking: networking)
         }
     }
 
-    private func loadedView() -> some View {
+    private func loadedView(_ viewModel: SolarForecastViewModel) -> some View {
         VStack(spacing: 8) {
             VStack(alignment: .leading, spacing: 16) {
                 if let data = viewModel.solarForecastAchievedData {
-                    solarVsForecastView(data: data)
+                    solarVsForecastView(data: data, viewModel: viewModel)
                 }
 
                 Text("Solar Forecasts")
@@ -94,16 +107,16 @@ struct SolarForecastView: View {
                     .frame(minWidth: 0, maxWidth: .infinity)
                     .font(.footnote)
                 }
-                refreshSolcastButton()
+                refreshSolcastButton(viewModel)
             }
         }
         .transition(.opacity)
         .onAppear {
-            self.viewModel.load()
+            viewModel.load()
         }
     }
 
-    private func refreshSolcastButton() -> some View {
+    private func refreshSolcastButton(_ viewModel: SolarForecastViewModel) -> some View {
         VStack(alignment: .leading) {
             if viewModel.tooManyRequests {
                 Text("You have exceeded your free daily limit of requests. Please try tomorrow.")
@@ -126,7 +139,7 @@ struct SolarForecastView: View {
     }
 
     @ViewBuilder
-    private func solarVsForecastView(data: PercentageSolarForecastAchievedData) -> some View {
+    private func solarVsForecastView(data: PercentageSolarForecastAchievedData, viewModel: SolarForecastViewModel) -> some View {
         HStack {
             Text("Solar vs forecast")
                 .font(.largeTitle)
@@ -179,11 +192,9 @@ struct SolarForecastView: View {
 #Preview {
     SolarForecastView(
         appSettings: AppSettings.mock(),
-        viewModel: SolarForecastViewModel(
-            configManager: ConfigManager.preview(),
-            solarForecastProvider: { PreviewSolcast() },
-            networking: NetworkService.preview()
-        )
+        configManager: ConfigManager.preview(),
+        networking: NetworkService.preview(),
+        solarForecastProvider: { PreviewSolcast() }
     )
     .environment(\.locale, .init(identifier: "de"))
 }
