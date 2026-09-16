@@ -78,11 +78,9 @@ class UserManager: ObservableObject, HasLoadState {
         store.logout()
         await setState(.inactive)
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            Task { @MainActor in
-                self.isLoggedIn = false
-            }
-        }
+        try? await Task.sleep(for: .seconds(1))
+
+        self.isLoggedIn = false
     }
 }
 

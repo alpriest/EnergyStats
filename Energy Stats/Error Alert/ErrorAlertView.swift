@@ -55,10 +55,9 @@ struct ErrorAlertView: View {
             if options.contains(.retry) {
                 Button(action: { retry() }) {
                     Text("Retry")
-                        .background(rectReader($buttonWidth))
-                        .frame(minWidth: buttonWidth)
+                        .background(EqualWidthButtonWidthReader())
                 }
-                .buttonStyle(EqualWidthButtonStyle(buttonWidth: $buttonWidth))
+                .buttonStyle(EqualWidthButtonStyle(buttonWidth: buttonWidth))
             }
 
             if options.contains(.checkServerStatus) {
@@ -67,21 +66,23 @@ struct ErrorAlertView: View {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 } label: {
                     Text("Check FoxESS Server status")
-                        .background(rectReader($buttonWidth))
-                        .frame(minWidth: buttonWidth)
+                        .background(EqualWidthButtonWidthReader())
                 }
-                .buttonStyle(EqualWidthButtonStyle(buttonWidth: $buttonWidth))
+                .buttonStyle(EqualWidthButtonStyle(buttonWidth: buttonWidth))
             }
 
             if options.contains(.logoutButton) {
                 Button(action: { Task { await userManager.logout() } }) {
                     Text("Logout")
-                        .background(rectReader($buttonWidth))
-                        .frame(minWidth: buttonWidth)
+                        .background(EqualWidthButtonWidthReader())
                 }
-                .buttonStyle(EqualWidthButtonStyle(buttonWidth: $buttonWidth))
+                .buttonStyle(EqualWidthButtonStyle(buttonWidth: buttonWidth))
             }
-        }.onAppear {
+        }
+        .onPreferenceChange(EqualWidthButtonWidthPreferenceKey.self) { width in
+            buttonWidth = width
+        }
+        .onAppear {
             guard let cause = cause as? NetworkError else { return }
             if case .requestRequiresSignature = cause {
                 showingFatalError = true
@@ -89,15 +90,6 @@ struct ErrorAlertView: View {
         }.sheet(isPresented: $showingFatalError) {
             UnsupportedErrorView()
         }.alert(alertContent: $alertContent)
-    }
-
-    private func rectReader(_ binding: Binding<CGFloat>) -> some View {
-        GeometryReader { gr -> Color in
-            DispatchQueue.main.async {
-                binding.wrappedValue = max(binding.wrappedValue, gr.frame(in: .local).width)
-            }
-            return Color.clear
-        }
     }
 
     var detailedMessage: String {

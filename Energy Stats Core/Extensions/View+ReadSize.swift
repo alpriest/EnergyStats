@@ -13,7 +13,7 @@ extension View {
             Color.clear.onGeometryChange(for: CGSize.self) { proxy in
                 proxy.size
             } action: { size in
-                DispatchQueue.main.async {
+                Task { @MainActor in
                     value.wrappedValue = size
                 }
             }
