@@ -14,7 +14,7 @@ struct ValuesAtTime<T> {
     let values: [T]
 }
 
-struct ParametersGraphDisplayMode: Equatable {
+struct ParametersGraphDisplayMode: Equatable, Hashable {
     let date: Date
     let hours: Int
 
@@ -77,7 +77,6 @@ class ParametersGraphTabViewModel: HasLoadState, VisibilityTracking {
     private let solarForecastProvider: SolarForecastProviding
     private let adjuster: ParameterValueAdjuster
     var uniqueSelectedUnits: [String] = []
-
     var displayMode: ParametersGraphDisplayMode {
         didSet {
             let previousHours = hours

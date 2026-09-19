@@ -34,7 +34,7 @@ struct AStack<T: View>: View {
 }
 
 struct StatsGraphVariableToggles: View {
-    @ObservedObject var viewModel: StatsTabViewModel
+    let viewModel: StatsTabViewModel
     @Binding var selectedDate: Date?
     @Binding var valuesAtTime: ValuesAtTime<StatsGraphValue>?
     let appSettings: AppSettings

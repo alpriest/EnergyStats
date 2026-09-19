@@ -10,7 +10,7 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct StatsGraphView: View {
-    @ObservedObject var viewModel: StatsTabViewModel
+    let viewModel: StatsTabViewModel
     @Binding var selectedDate: Date?
     @Binding var valuesAtTime: ValuesAtTime<StatsGraphValue>?
     let appSettings: AppSettings

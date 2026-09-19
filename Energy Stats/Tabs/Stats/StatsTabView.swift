@@ -11,7 +11,7 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct StatsTabView: View {
-    @StateObject var viewModel: StatsTabViewModel
+    @State private var viewModel: StatsTabViewModel
     @State private var showingExporter = false
     @State private var appSettings: AppSettings
     private var appSettingsPublisher: LatestAppSettingsPublisher

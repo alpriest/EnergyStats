@@ -54,7 +54,7 @@ struct ParametersGraphTabView: View {
                     if viewModel.hasLoaded {
                         graphs()
                     } else {
-                        LoadingView(message: .loading)
+                        LoadingView(message: .loading, id: viewModel.displayMode)
                             .loadable(viewModel.state, options: [.retry], overlay: true, retry: { Task { await viewModel.load() } })
                     }
 

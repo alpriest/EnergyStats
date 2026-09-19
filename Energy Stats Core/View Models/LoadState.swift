@@ -8,7 +8,7 @@
 import Combine
 import SwiftUI
 
-public enum LoadStateActivity {
+public enum LoadStateActivity: Equatable {
     case loading
     case saving
     case activating

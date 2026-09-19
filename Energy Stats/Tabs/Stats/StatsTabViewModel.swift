@@ -8,6 +8,7 @@
 import Combine
 import Energy_Stats_Core
 import Foundation
+import Observation
 import SwiftUI
 
 struct ApproximationsViewModel {
@@ -22,14 +23,15 @@ struct ApproximationsViewModel {
     let totalsViewModel: TotalsViewModel?
 }
 
-class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
+@Observable
+class StatsTabViewModel: HasLoadState, VisibilityTracking {
     private let haptic = UIImpactFeedbackGenerator()
     private var configManager: ConfigManaging
     private let networking: Networking
     private let approximationsCalculator: ApproximationsCalculator
 
-    @Published var state = LoadState.inactive
-    @Published var displayMode: StatsGraphDisplayMode = .day(Date()) {
+    var state = LoadState.inactive
+    var displayMode: StatsGraphDisplayMode = .day(Date()) {
         didSet {
             Task { @MainActor in
                 selectedDate = nil
@@ -40,28 +42,28 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
         }
     }
 
-    @Published var touchHeaderTitle: LocalizedStringKey = "stats_header_by_time"
-    @Published var valuesAtTime: ValuesAtTime<StatsGraphValue>?
-    @Published var selectedDate: Date?
-    @Published var statsTimeUsageGraphStyle: StatsTimeUsageGraphStyle {
+    var touchHeaderTitle: LocalizedStringKey = "stats_header_by_time"
+    var valuesAtTime: ValuesAtTime<StatsGraphValue>?
+    var selectedDate: Date?
+    var statsTimeUsageGraphStyle: StatsTimeUsageGraphStyle {
         didSet {
             configManager.statsTimeUsageGraphStyle = statsTimeUsageGraphStyle
         }
     }
 
     private var rawData: [StatsGraphValue] = []
-    @Published var data: [StatsGraphValue] = []
-    @Published var unit: Calendar.Component = .hour
-    @Published var graphVariables: [StatsGraphVariable] = []
-    @Published var approximationsViewModel: ApproximationsViewModel? = nil
+    var data: [StatsGraphValue] = []
+    var unit: Calendar.Component = .hour
+    var graphVariables: [StatsGraphVariable] = []
+    var approximationsViewModel: ApproximationsViewModel? = nil
     private var totals: [ReportVariable: Double] = [:]
     private var max: StatsGraphValue?
     var exportFile: TextFile?
     private var currentDeviceCancellable: AnyCancellable?
     private let fetcher: StatsDataFetcher
-    @Published var selfSufficiencyAtDateTime: [StatsGraphValue] = []
-    @Published var yScale: ClosedRange<Double> = ClosedRange(uncheckedBounds: (lower: 0, upper: 0))
-    @Published var xScale: ClosedRange<Date> = ClosedRange(uncheckedBounds: (lower: Date().startOfDay(), upper: Date().endOfDay()))
+    var selfSufficiencyAtDateTime: [StatsGraphValue] = []
+    var yScale: ClosedRange<Double> = ClosedRange(uncheckedBounds: (lower: 0, upper: 0))
+    var xScale: ClosedRange<Date> = ClosedRange(uncheckedBounds: (lower: Date().startOfDay(), upper: Date().endOfDay()))
     private var themeCancellable: AnyCancellable?
     var visible = false
     var lastLoadState: LastLoadState<StatsGraphDisplayMode>?
@@ -84,11 +86,13 @@ class StatsTabViewModel: ObservableObject, HasLoadState, VisibilityTracking {
     private func addDeviceChangeObserver() {
         guard currentDeviceCancellable == nil else { return }
 
-        currentDeviceCancellable = configManager.currentDevice.sink { device in
-            guard let device else { return }
+        currentDeviceCancellable = configManager.currentDevice
+            .removeDuplicates()
+            .sink { device in
+                guard let device else { return }
 
-            Task { await self.updateGraphVariables(for: device) }
-        }
+                Task { await self.updateGraphVariables(for: device) }
+            }
     }
 
     private func addThemeChangeObserver() {

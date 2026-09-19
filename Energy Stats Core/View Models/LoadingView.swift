@@ -8,20 +8,46 @@
 import SwiftUI
 
 public struct LoadingView: View {
-    @State private var message: LocalizedStringKey
     private let activity: LoadStateActivity
+    private let id: AnyHashable
 
-    public init(message: LoadStateActivity) {
+    public init(message: LoadStateActivity, id: AnyHashable? = nil) {
         self.activity = message
-        self.message = message.title
+        self.id = activity
     }
 
     public var body: some View {
-        SolarLoadingView(message: message)
+        TimedLoadingView(activity: activity)
+            .id(id)
+    }
+}
+
+private struct TimedLoadingView: View {
+    @State private var isLongOperation = false
+    let activity: LoadStateActivity
+
+    var body: some View {
+        SolarLoadingView(
+            message: isLongOperation ? activity.longOperationTitle : activity.title
+        )
             .frame(width: 200, height: 80)
             .task {
-                try? await Task.sleep(for: .seconds(10))
-                self.message = activity.longOperationTitle
+                isLongOperation = false
+
+                do {
+                    try await Task.sleep(for: .seconds(5))
+                } catch {
+                    return
+                }
+
+                guard !Task.isCancelled else {
+                    return
+                }
+
+                isLongOperation = true
+            }
+            .onDisappear {
+                isLongOperation = false
             }
     }
 }
