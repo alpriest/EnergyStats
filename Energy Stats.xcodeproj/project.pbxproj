@@ -368,6 +368,7 @@
 		41E299CF29B7260D001F017B /* Energy_Stats_UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E299CE29B7260D001F017B /* Energy_Stats_UITestsLaunchTests.swift */; };
 		41E3A742305E8A7500C8DAAF /* StatsTabViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E3A741305E8A7500C8DAAF /* StatsTabViewModelTests.swift */; };
 		41E3A744305E8C4400C8DAAF /* StatsDerivedDataCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E3A743305E8C4400C8DAAF /* StatsDerivedDataCalculator.swift */; };
+		41E3A746305E91A600C8DAAF /* StatsLoadCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E3A745305E91A600C8DAAF /* StatsLoadCoordinator.swift */; };
 		41E3B76C2BBDD345005A9F80 /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E3B76B2BBDD345005A9F80 /* Icon.swift */; };
 		41E3BEC12B1B55A30051C68B /* DataCeiling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E3BEC02B1B55A30051C68B /* DataCeiling.swift */; };
 		41E3BEC32B1B5A160051C68B /* AppSettingsStoreFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E3BEC22B1B5A160051C68B /* AppSettingsStoreFactory.swift */; };
@@ -950,6 +951,7 @@
 		41E299D529B78A41001F017B /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
 		41E3A741305E8A7500C8DAAF /* StatsTabViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTabViewModelTests.swift; sourceTree = "<group>"; };
 		41E3A743305E8C4400C8DAAF /* StatsDerivedDataCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsDerivedDataCalculator.swift; sourceTree = "<group>"; };
+		41E3A745305E91A600C8DAAF /* StatsLoadCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsLoadCoordinator.swift; sourceTree = "<group>"; };
 		41E3B76B2BBDD345005A9F80 /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		41E3BEC02B1B55A30051C68B /* DataCeiling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCeiling.swift; sourceTree = "<group>"; };
 		41E3BEC22B1B5A160051C68B /* AppSettingsStoreFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsStoreFactory.swift; sourceTree = "<group>"; };
@@ -1600,6 +1602,7 @@
 				414C68912F2F4E3C003F6074 /* StatsGraphDisplayMode.swift */,
 				417AA21C2A1245C00073CD34 /* StatsTabViewModel.swift */,
 				41E3A743305E8C4400C8DAAF /* StatsDerivedDataCalculator.swift */,
+				41E3A745305E91A600C8DAAF /* StatsLoadCoordinator.swift */,
 			);
 			path = Stats;
 			sourceTree = "<group>";
@@ -2534,6 +2537,7 @@
 				41EB8A202EF9E4100012CD25 /* AlertIconView.swift in Sources */,
 				418141452A12BABA00FFC6A6 /* StatsGraphView.swift in Sources */,
 				41B591102ED1C107005B34D5 /* ViewDataProviding.swift in Sources */,
+				41E3A746305E91A600C8DAAF /* StatsLoadCoordinator.swift in Sources */,
 				4134ACC42A88A1A800CB4BA8 /* InverterView.swift in Sources */,
 				416B8F1A2F12552600C73AB0 /* ContactView.swift in Sources */,
 				411029112A71B95F004018BB /* BatteryChargeTimePeriodView.swift in Sources */,

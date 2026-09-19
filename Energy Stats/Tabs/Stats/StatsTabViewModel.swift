@@ -27,7 +27,6 @@ struct ApproximationsViewModel {
 class StatsTabViewModel: HasLoadState, VisibilityTracking {
     private let haptic = UIImpactFeedbackGenerator()
     private var configManager: ConfigManaging
-    private let networking: Networking
     private let approximationsCalculator: ApproximationsCalculator
     private let derivedDataCalculator: StatsDerivedDataCalculator
 
@@ -61,7 +60,7 @@ class StatsTabViewModel: HasLoadState, VisibilityTracking {
     private var max: StatsGraphValue?
     var exportFile: TextFile?
     private var currentDeviceCancellable: AnyCancellable?
-    private let fetcher: StatsDataFetcher
+    private let loadCoordinator: StatsLoadCoordinator
     var selfSufficiencyAtDateTime: [StatsGraphValue] = []
     var yScale: ClosedRange<Double> = ClosedRange(uncheckedBounds: (lower: 0, upper: 0))
     var xScale: ClosedRange<Date> = ClosedRange(uncheckedBounds: (lower: Date().startOfDay(), upper: Date().endOfDay()))
@@ -71,12 +70,14 @@ class StatsTabViewModel: HasLoadState, VisibilityTracking {
     private var loadTask: Task<Void, Never>?
 
     init(networking: Networking, configManager: ConfigManaging) {
-        self.networking = networking
         self.configManager = configManager
         let approximationsCalculator = ApproximationsCalculator(configManager: configManager, networking: networking)
         self.approximationsCalculator = approximationsCalculator
         self.derivedDataCalculator = StatsDerivedDataCalculator(approximationsCalculator: approximationsCalculator)
-        self.fetcher = StatsDataFetcher(networking: networking, approximationsCalculator: approximationsCalculator)
+        self.loadCoordinator = StatsLoadCoordinator(
+            networking: networking,
+            approximationsCalculator: approximationsCalculator
+        )
         self.statsTimeUsageGraphStyle = configManager.statsTimeUsageGraphStyle
 
         haptic.prepare()
@@ -164,40 +165,26 @@ class StatsTabViewModel: HasLoadState, VisibilityTracking {
         ].compactMap { $0 }
 
         do {
-            let updatedData: [StatsGraphValue]
-            let totals: [ReportVariable: Double]
-
-            if case .custom(let start, let end, let unit) = displayMode {
-                (updatedData, totals) = try await fetcher.fetchCustomDateRangeData(
-                    device: currentDevice,
-                    start: start,
-                    end: end,
-                    reportVariables: reportVariables,
-                    unit: unit
-                )
-            } else {
-                (updatedData, totals) = try await fetcher.fetchData(
-                    device: currentDevice,
-                    reportVariables: reportVariables,
-                    displayMode: displayMode
-                )
-            }
-
-            let socGraphData = try await fetchBatterySOC(for: currentDevice, displayMode: displayMode)
+            let loadResult = try await loadCoordinator.load(
+                device: currentDevice,
+                displayMode: displayMode,
+                reportVariables: reportVariables,
+                includeBatterySOC: configManager.showBatterySOCOnDailyStats
+            )
 
             if Task.isCancelled { return }
 
             await MainActor.run {
-                self.totals = totals
+                self.totals = loadResult.totals
                 self.unit = displayMode.unit()
                 let selfSufficiencyData = derivedDataCalculator.calculateSelfSufficiencyAcrossTimePeriod(
-                    updatedData,
+                    loadResult.reportData,
                     mode: configManager.selfSufficiencyEstimateMode
                 )
-                let inverterConsumption = derivedDataCalculator.calculateInverterConsumptionAcrossTimePeriod(updatedData)
+                let inverterConsumption = derivedDataCalculator.calculateInverterConsumptionAcrossTimePeriod(loadResult.reportData)
 
                 self.totals[.inverterConsumption] = inverterConsumption.total
-                self.rawData = updatedData + selfSufficiencyData + inverterConsumption.values + socGraphData
+                self.rawData = loadResult.reportData + selfSufficiencyData + inverterConsumption.values + loadResult.batterySOCData
                 calculateApproximations()
                 refresh()
                 exportFile = prepareExport(rawData: rawData)
@@ -209,35 +196,6 @@ class StatsTabViewModel: HasLoadState, VisibilityTracking {
 
             await setState(.error(error, "Could not load from Fox OpenAPI"))
         }
-    }
-
-    private func fetchBatterySOC(for device: Device, displayMode: StatsGraphDisplayMode) async throws -> [StatsGraphValue] {
-        guard configManager.showBatterySOCOnDailyStats else { return [] }
-
-        let socData: [StatsGraphValue]
-
-        switch displayMode {
-        case .day(let date):
-            let startDate = Calendar.current.startOfDay(for: date)
-            let endDate = Calendar.current.date(byAdding: .day, value: 1, to: startDate) ?? startDate
-            let responseData = try await networking.fetchHistory(deviceSN: device.deviceSN, variables: ["SoC"], start: startDate, end: endDate)
-            let rawSOCData = responseData.datas.flatMap { $0.data }
-
-            socData = rawSOCData.map { unitData in
-                StatsGraphValue(
-                    type: .batterySOC,
-                    date: unitData.time,
-                    graphValue: unitData.value,
-                    displayValue: unitData.value / 100.0
-                )
-            }
-            .sorted(by: { $0.date < $1.date })
-            .filter { $0.date <= Date.now }
-        default:
-            socData = []
-        }
-
-        return socData
     }
 
     func calculateApproximations() {
