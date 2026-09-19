@@ -29,6 +29,7 @@ class StatsTabViewModel: HasLoadState, VisibilityTracking {
     private var configManager: ConfigManaging
     private let networking: Networking
     private let approximationsCalculator: ApproximationsCalculator
+    private let derivedDataCalculator: StatsDerivedDataCalculator
 
     var state = LoadState.inactive
     var displayMode: StatsGraphDisplayMode = .day(Date()) {
@@ -72,7 +73,9 @@ class StatsTabViewModel: HasLoadState, VisibilityTracking {
     init(networking: Networking, configManager: ConfigManaging) {
         self.networking = networking
         self.configManager = configManager
-        self.approximationsCalculator = ApproximationsCalculator(configManager: configManager, networking: networking)
+        let approximationsCalculator = ApproximationsCalculator(configManager: configManager, networking: networking)
+        self.approximationsCalculator = approximationsCalculator
+        self.derivedDataCalculator = StatsDerivedDataCalculator(approximationsCalculator: approximationsCalculator)
         self.fetcher = StatsDataFetcher(networking: networking, approximationsCalculator: approximationsCalculator)
         self.statsTimeUsageGraphStyle = configManager.statsTimeUsageGraphStyle
 
@@ -187,7 +190,14 @@ class StatsTabViewModel: HasLoadState, VisibilityTracking {
             await MainActor.run {
                 self.totals = totals
                 self.unit = displayMode.unit()
-                self.rawData = updatedData + calculateSelfSufficiencyAcrossTimePeriod(updatedData) + calculateInverterConsumptionAcrossTimePeriod(updatedData) + socGraphData
+                let selfSufficiencyData = derivedDataCalculator.calculateSelfSufficiencyAcrossTimePeriod(
+                    updatedData,
+                    mode: configManager.selfSufficiencyEstimateMode
+                )
+                let inverterConsumption = derivedDataCalculator.calculateInverterConsumptionAcrossTimePeriod(updatedData)
+
+                self.totals[.inverterConsumption] = inverterConsumption.total
+                self.rawData = updatedData + selfSufficiencyData + inverterConsumption.values + socGraphData
                 calculateApproximations()
                 refresh()
                 exportFile = prepareExport(rawData: rawData)
@@ -245,50 +255,6 @@ class StatsTabViewModel: HasLoadState, VisibilityTracking {
                                                                                    batteryCharge: batteryCharge ?? 0,
                                                                                    batteryDischarge: batteryDischarge ?? 0,
                                                                                    solar: solar)
-    }
-
-    func calculateSelfSufficiencyAcrossTimePeriod(_ rawData: [StatsGraphValue]) -> [StatsGraphValue] {
-        let dates = Set(rawData.map { $0.date })
-        var selfSufficiencyAtDateTime: [Date: Double] = [:]
-
-        for date in dates {
-            let valuesAtTime = ValuesAtTime(values: rawData.filter { $0.date == date })
-
-            if let grid = valuesAtTime.values.first(where: { $0.type == .gridConsumption })?.graphValue,
-               let feedIn = valuesAtTime.values.first(where: { $0.type == .feedIn })?.graphValue,
-               let loads = valuesAtTime.values.first(where: { $0.type == .loads })?.graphValue,
-               let batteryCharge = valuesAtTime.values.first(where: { $0.type == .chargeEnergyToTal })?.graphValue,
-               let batteryDischarge = valuesAtTime.values.first(where: { $0.type == .dischargeEnergyToTal })?.graphValue,
-               let solar = valuesAtTime.values.first(where: { $0.type == .pvEnergyTotal })?.graphValue
-            {
-                let approximations = approximationsCalculator.calculateApproximations(
-                    grid: grid,
-                    feedIn: feedIn,
-                    loads: loads,
-                    batteryCharge: batteryCharge,
-                    batteryDischarge: batteryDischarge,
-                    solar: solar
-                )
-
-                switch configManager.selfSufficiencyEstimateMode {
-                case .absolute:
-                    if let value = approximations.absoluteSelfSufficiencyEstimateValue {
-                        selfSufficiencyAtDateTime[date] = value
-                    }
-                case .net:
-                    if let value = approximations.netSelfSufficiencyEstimateValue {
-                        selfSufficiencyAtDateTime[date] = value
-                    }
-                default:
-                    ()
-                }
-            }
-        }
-
-        return selfSufficiencyAtDateTime
-            .map { StatsGraphValue(type: .selfSufficiency, date: $0.key, graphValue: $0.value, displayValue: $0.value) }
-            .sorted(by: { $1.date > $0.date })
-            .filter { $0.date <= Date.now }
     }
 
     func updateYScale() {
@@ -392,39 +358,6 @@ class StatsTabViewModel: HasLoadState, VisibilityTracking {
             }
         }
         updateYScale()
-    }
-
-    func calculateInverterConsumptionAcrossTimePeriod(_ rawData: [StatsGraphValue]) -> [StatsGraphValue] {
-        let dates = Set(rawData.map { $0.date })
-        var inverterConsumptionAtDateTime: [Date: Double] = [:]
-
-        for date in dates {
-            let valuesAtTime = ValuesAtTime(values: rawData.filter { $0.date == date })
-
-            if let grid = valuesAtTime.values.first(where: { $0.type == .gridConsumption })?.graphValue,
-               let feedIn = valuesAtTime.values.first(where: { $0.type == .feedIn })?.graphValue,
-               let loads = valuesAtTime.values.first(where: { $0.type == .loads })?.graphValue,
-               let batteryCharge = valuesAtTime.values.first(where: { $0.type == .chargeEnergyToTal })?.graphValue,
-               let batteryDischarge = valuesAtTime.values.first(where: { $0.type == .dischargeEnergyToTal })?.graphValue,
-               let solar = valuesAtTime.values.first(where: { $0.type == .pvEnergyTotal })?.graphValue
-            {
-                inverterConsumptionAtDateTime[date] = Swift.max((solar + grid + batteryDischarge) - (feedIn + batteryCharge + loads), 0)
-            }
-        }
-
-        totals[.inverterConsumption] = inverterConsumptionAtDateTime.values.reduce(0, +)
-
-        return inverterConsumptionAtDateTime
-            .map {
-                StatsGraphValue(
-                    type: .inverterConsumption,
-                    date: $0.key,
-                    graphValue: $0.value,
-                    displayValue: $0.value
-                )
-            }
-            .sorted(by: { $1.date > $0.date })
-            .filter { $0.date <= Date.now }
     }
 
     func data(at date: Date?) -> ValuesAtTime<StatsGraphValue> {
