@@ -125,6 +125,10 @@ class StatsTabViewModel: HasLoadState, VisibilityTracking {
 
     private func updateGraphVariables(for device: Device) async {
         await MainActor.run {
+            let enabledStates = Dictionary(
+                uniqueKeysWithValues: graphVariables.map { ($0.type, $0.enabled) }
+            )
+
             graphVariables = [device.hasPV ? .pvEnergyTotal : nil,
                               .gridConsumption,
                               configManager.hasBattery ? .dischargeEnergyToTal : nil,
@@ -136,8 +140,8 @@ class StatsTabViewModel: HasLoadState, VisibilityTracking {
                               configManager.showInverterConsumption ? .inverterConsumption : nil,
                               configManager.showBatterySOCOnDailyStats ? .batterySOC : nil]
                 .compactMap { $0 }
-                .map {
-                    StatsGraphVariable($0)
+                .map { type in
+                    StatsGraphVariable(type, enabled: enabledStates[type] ?? true)
                 }
         }
     }
