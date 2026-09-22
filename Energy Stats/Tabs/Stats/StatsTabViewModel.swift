@@ -51,19 +51,22 @@ class StatsTabViewModel: HasLoadState, VisibilityTracking {
         }
     }
 
-    private var rawData: [StatsGraphValue] = []
-    var data: [StatsGraphValue] = []
+    private var sourceData: [StatsGraphValue] = []
+    var displayedData: [StatsGraphValue] = []
     var unit: Calendar.Component = .hour
+    private var maximum: StatsGraphValue?
+    var yScale: ClosedRange<Double> = ClosedRange(uncheckedBounds: (lower: 0, upper: 0))
+    var xScale: ClosedRange<Date> = ClosedRange(
+        uncheckedBounds: (lower: Date().startOfDay(), upper: Date().endOfDay())
+    )
     var graphVariables: [StatsGraphVariable] = []
     var approximationsViewModel: ApproximationsViewModel? = nil
     private var totals: [ReportVariable: Double] = [:]
-    private var max: StatsGraphValue?
+    private var max: StatsGraphValue? { maximum }
     var exportFile: TextFile?
     private var currentDeviceCancellable: AnyCancellable?
     private let loadCoordinator: StatsLoadCoordinator
     var selfSufficiencyAtDateTime: [StatsGraphValue] = []
-    var yScale: ClosedRange<Double> = ClosedRange(uncheckedBounds: (lower: 0, upper: 0))
-    var xScale: ClosedRange<Date> = ClosedRange(uncheckedBounds: (lower: Date().startOfDay(), upper: Date().endOfDay()))
     private var themeCancellable: AnyCancellable?
     var visible = false
     var lastLoadState: LastLoadState<StatsGraphDisplayMode>?
@@ -184,10 +187,10 @@ class StatsTabViewModel: HasLoadState, VisibilityTracking {
                 let inverterConsumption = derivedDataCalculator.calculateInverterConsumptionAcrossTimePeriod(loadResult.reportData)
 
                 self.totals[.inverterConsumption] = inverterConsumption.total
-                self.rawData = loadResult.reportData + selfSufficiencyData + inverterConsumption.values + loadResult.batterySOCData
+                self.sourceData = loadResult.reportData + selfSufficiencyData + inverterConsumption.values + loadResult.batterySOCData
                 calculateApproximations()
                 refresh()
-                exportFile = prepareExport(rawData: rawData)
+                exportFile = prepareExport(rawData: sourceData)
                 Task { await setState(.inactive) }
                 self.lastLoadState = LastLoadState(lastLoadTime: .now, loadState: displayMode)
             }
@@ -216,7 +219,7 @@ class StatsTabViewModel: HasLoadState, VisibilityTracking {
     }
 
     func updateYScale() {
-        let visibleMax = actualMax(of: data)
+        let visibleMax = actualMax(of: displayedData)
         let scaleMax = (visibleMax + Swift.max(visibleMax * 0.1, 0.5)).roundUpToNearestHalf()
 
         yScale = ClosedRange(uncheckedBounds: (lower: 0, upper: scaleMax))
@@ -253,7 +256,7 @@ class StatsTabViewModel: HasLoadState, VisibilityTracking {
     func refresh() {
         let hiddenVariableTypes = graphVariables.filter { $0.enabled == false }.map { $0.type.networkTitle }
 
-        let regularScaleDatasets = rawData.filter { $0.type != .selfSufficiency && $0.type != .batterySOC }
+        let regularScaleDatasets = sourceData.filter { $0.type != .selfSufficiency && $0.type != .batterySOC }
         let refreshedData = (regularScaleDatasets + updateScaledDatasets())
             .filter { !hiddenVariableTypes.contains($0.type.networkTitle) }
             .filter { $0.date < Date() }
@@ -261,10 +264,10 @@ class StatsTabViewModel: HasLoadState, VisibilityTracking {
                 lhs.date < rhs.date
             })
 
-        max = refreshedData.max(by: { lhs, rhs in
+        maximum = refreshedData.max(by: { lhs, rhs in
             lhs.graphValue < rhs.graphValue
         })
-        data = refreshedData
+        displayedData = refreshedData
         updateYScale()
         updateXScale()
         updateHeaderTitle()
@@ -282,15 +285,15 @@ class StatsTabViewModel: HasLoadState, VisibilityTracking {
     }
 
     private func updateScaledDatasets() -> [StatsGraphValue] {
-        let actualMax = actualMax(of: rawData)
+        let actualMax = actualMax(of: sourceData)
         let scaleMax = (actualMax + Swift.max(actualMax * 0.1, 0.5)).roundUpToNearestHalf()
 
-        var normalisedData: [StatsGraphValue] = rawData
+        var normalisedData: [StatsGraphValue] = sourceData
             .filter { $0.type == .selfSufficiency }
             .map { StatsGraphValue(type: $0.type, date: $0.date, graphValue: scaleMax * $0.graphValue, displayValue: $0.displayValue) }
 
         normalisedData.append(contentsOf:
-            rawData
+            sourceData
                 .filter { $0.type == .batterySOC }
                 .map { StatsGraphValue(type: $0.type, date: $0.date, graphValue: scaleMax * ($0.graphValue / 100.0), displayValue: $0.displayValue) }
         )
@@ -321,7 +324,7 @@ class StatsTabViewModel: HasLoadState, VisibilityTracking {
     func data(at date: Date?) -> ValuesAtTime<StatsGraphValue> {
         guard let date else { return ValuesAtTime(values: []) }
         let variableTypes = graphVariables.map { $0.type }
-        var filteredRawData = rawData.filter {
+        var filteredRawData = sourceData.filter {
             $0.date == date && variableTypes.contains($0.type)
         }
 
@@ -330,7 +333,7 @@ class StatsTabViewModel: HasLoadState, VisibilityTracking {
         }
 
         if !filteredRawData.contains(where: { $0.isForBatterySOCGraph }) {
-            if let nearest = rawData.filter({ $0.isForBatterySOCGraph }).nearestTo(date: date) {
+            if let nearest = sourceData.filter({ $0.isForBatterySOCGraph }).nearestTo(date: date) {
                 filteredRawData += [nearest]
             }
         }

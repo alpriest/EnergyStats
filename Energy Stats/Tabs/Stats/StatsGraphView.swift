@@ -76,11 +76,11 @@ struct StatsGraphView: View {
                 }
             }
             .chartOverlay { makeHighlightBar(chartProxy: $0) }
-            .onChange(of: viewModel.data, initial: true) {
-                normalData = viewModel.data.filter { $0.isForNormalGraph }
-                selfSufficiencyGraphData = viewModel.data.filter { $0.isForSelfSufficiencyGraph }
-                inverterConsumptionGraphData = viewModel.data.filter { $0.isForInverterConsumptionGraph }
-                batterySOCGraphData = viewModel.data.filter { $0.isForBatterySOCGraph }
+            .onChange(of: viewModel.displayedData, initial: true) {
+                normalData = viewModel.displayedData.filter { $0.isForNormalGraph }
+                selfSufficiencyGraphData = viewModel.displayedData.filter { $0.isForSelfSufficiencyGraph }
+                inverterConsumptionGraphData = viewModel.displayedData.filter { $0.isForInverterConsumptionGraph }
+                batterySOCGraphData = viewModel.displayedData.filter { $0.isForBatterySOCGraph }
             }
         }
     }
