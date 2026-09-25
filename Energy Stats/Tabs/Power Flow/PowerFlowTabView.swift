@@ -10,7 +10,7 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct PowerFlowTabView: View {
-    @StateObject private var viewModel: PowerFlowTabViewModel
+    @State private var viewModel: PowerFlowTabViewModel
     @State private var appSettings: AppSettings
     private var appSettingsPublisher: LatestAppSettingsPublisher
     @AppStorage("showLastUpdateTimestamp") private var showLastUpdateTimestamp: Bool = false
@@ -70,7 +70,8 @@ struct PowerFlowTabView: View {
         .analyticsScreen(.powerFlowTab)
     }
 
-    @ViewBuilder func background() -> some View {
+    @ViewBuilder
+    func background() -> some View {
         switch appSettings.showSunnyBackground {
         case true:
             backgroundGradient
@@ -79,7 +80,8 @@ struct PowerFlowTabView: View {
         }
     }
 
-    @ViewBuilder func updateFooterMessage() -> some View {
+    @ViewBuilder
+    func updateFooterMessage() -> some View {
         HStack {
             if appSettings.showLastUpdateTimestamp {
                 lastUpdateMessage()

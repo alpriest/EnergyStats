@@ -25,14 +25,15 @@ struct UpdateState {
     }
 }
 
-class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
+@Observable
+class PowerFlowTabViewModel: VisibilityTracking {
     private let network: Networking
     private(set) var configManager: ConfigManaging
     private let userManager: UserManager
     private let timer = CountdownTimer()
-    @MainActor @Published private(set) var lastUpdated = Date()
-    @MainActor @Published private(set) var updateState: UpdateState = .init("Updating...")
-    @MainActor @Published private(set) var state: State = .unloaded
+    private(set) var lastUpdated = Date()
+    private(set) var updateState: UpdateState = .init("Updating...")
+    private(set) var state: State = .unloaded
     private(set) var isLoading = false
     private var totalTicks = 60
     private var currentDeviceCancellable: AnyCancellable?
@@ -42,7 +43,7 @@ class PowerFlowTabViewModel: ObservableObject, VisibilityTracking {
     var visible: Bool = false
     private var currentStatusCalculator: CurrentStatusCalculator?
     private var loadLock = OSAllocatedUnfairLock()
-    @Published public var earnings: EnergyStatsFinancialModel?
+    public var earnings: EnergyStatsFinancialModel?
     private let solarForecastProvider: SolarForecastProviding
 
     enum State: Equatable {
