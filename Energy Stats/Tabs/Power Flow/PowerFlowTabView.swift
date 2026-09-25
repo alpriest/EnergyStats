@@ -85,13 +85,13 @@ struct PowerFlowTabView: View {
         HStack {
             if appSettings.showLastUpdateTimestamp {
                 lastUpdateMessage()
-                updateState()
+                nextUpdateMessage()
             } else {
                 Group {
                     if showLastUpdateTimestamp {
                         lastUpdateMessage()
                     } else {
-                        updateState()
+                        nextUpdateMessage()
                     }
                 }.onTapGesture {
                     showLastUpdateTimestamp.toggle()
@@ -103,9 +103,16 @@ struct PowerFlowTabView: View {
         .foregroundColor(Color("text_dimmed"))
     }
 
-    func updateState() -> Text {
-        Text(viewModel.updateState.text)
-            .accessibilityLabel(viewModel.updateState.accessibilityText)
+    @ViewBuilder
+    func nextUpdateMessage() -> some View {
+        TimelineView(.periodic(from: .now, by: 1)) { context in
+            let secondsRemaining = max(0, Int(ceil(viewModel.nextUpdate.timeIntervalSince(context.date))))
+            let text = String(key: .nextUpdateIn) + " " + PreciseDateTimeFormatter.localizedString(from: secondsRemaining)
+            let accessibilityText = String(key: .nextUpdateIn) + " " + PreciseDateTimeFormatter.localizedAccessibilityString(from: secondsRemaining)
+
+            Text(text)
+                .accessibilityLabel(accessibilityText)
+        }
     }
 
     @ViewBuilder func lastUpdateMessage() -> some View {
