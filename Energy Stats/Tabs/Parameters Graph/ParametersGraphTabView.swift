@@ -19,19 +19,26 @@ struct ParametersGraphTabView: View {
     private let appSettingsPublisher: LatestAppSettingsPublisher
     private let configManager: ConfigManaging
     @State private var viewModel: ParametersGraphTabViewModel
+    @StateObject private var headerViewModel: ParameterGraphHeaderViewModel
 
     init(configManager: ConfigManaging, viewModel: ParametersGraphTabViewModel) {
-        self.viewModel = viewModel
+        let initialViewModel = viewModel
+        self.viewModel = initialViewModel
         self.configManager = configManager
         self.appSettingsPublisher = configManager.appSettingsPublisher
-        self.appSettings = configManager.currentAppSettings
+        _appSettings = State(initialValue: configManager.currentAppSettings)
+        _headerViewModel = StateObject(wrappedValue: ParameterGraphHeaderViewModel(
+            displayMode: initialViewModel.displayMode,
+            configManager: configManager,
+            onChange: { initialViewModel.displayMode = $0 }
+        ))
     }
 
     var body: some View {
         Group {
             VStack {
                 ParameterGraphHeaderView(
-                    viewModel: ParameterGraphHeaderViewModel(displayMode: viewModel.displayMode, configManager: configManager, onChange: { viewModel.displayMode = $0 }),
+                    viewModel: headerViewModel,
                     showingVariables: $showingVariables
                 )
 
