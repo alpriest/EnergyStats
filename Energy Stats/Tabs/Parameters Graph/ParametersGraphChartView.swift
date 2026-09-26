@@ -16,8 +16,21 @@ struct ParametersGraphChartView: View {
     let stride: Int
     let unit: String?
 
+    private var validValues: [ParameterGraphValue] {
+        values.filter { $0.value.isFinite && $0.date.timeIntervalSinceReferenceDate.isFinite }
+    }
+
+    @ViewBuilder
     var body: some View {
-        Chart(values) {
+        if validValues.isEmpty {
+            Color.clear
+        } else {
+            chart
+        }
+    }
+
+    private var chart: some View {
+        Chart(validValues) {
             if $0.type.variable == Variable.solcastPredictionVariable.variable {
                 LineMark(
                     x: .value("hour", $0.date),
@@ -41,10 +54,10 @@ struct ParametersGraphChartView: View {
         .chartXScale(domain: xScale)
         .chartYScale(domain: .automatic(includesZero: !truncateYAxis))
         .chartXAxis {
-            AxisMarks(values: .stride(by: .hour, count: stride)) { value in
+            AxisMarks(values: .stride(by: .hour, count: Swift.max(stride, 1))) { value in
                 if let date = value.as(Date.self) {
                     AxisTick(centered: false)
-                    AxisValueLabel(centered: false) {
+                    AxisValueLabel(anchor: .leading) {
                         Text(date, format: .dateTime.hour())
                     }
                 }

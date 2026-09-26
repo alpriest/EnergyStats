@@ -126,7 +126,7 @@ struct ForecastView: View {
             AxisMarks(values: .stride(by: .hour, count: 4)) { value in
                 if let date = value.as(Date.self) {
                     AxisTick(centered: false)
-                    AxisValueLabel(centered: false) {
+                    AxisValueLabel(anchor: .leading) {
                         Text(date, format: .dateTime.hour())
                     }
                 }

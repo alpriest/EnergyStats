@@ -38,7 +38,7 @@ struct ParametersGraphViewData {
             values: [],
             yScale: 0...0,
             xScale: .now ... .now,
-            stride: 0,
+            stride: 1,
             max: nil
         )
     }

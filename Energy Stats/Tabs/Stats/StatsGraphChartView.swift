@@ -102,7 +102,7 @@ struct StatsGraphChartView: View {
             AxisMarks(values: .stride(by: unit, count: 3)) { value in
                 if let date = value.as(Date.self) {
                     AxisTick(centered: true)
-                    AxisValueLabel(centered: false, anchor: .top) {
+                    AxisValueLabel(anchor: .top) {
                         switch unit {
                         case .month:
                             Text(date, format: .dateTime.month())

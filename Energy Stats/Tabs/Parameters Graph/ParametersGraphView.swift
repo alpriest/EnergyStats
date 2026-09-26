@@ -32,46 +32,74 @@ struct ParametersGraphView: View {
         self.data = data
     }
 
+    @ViewBuilder
     var body: some View {
-        ParametersGraphChartView(values: self.data.values, xScale: data.xScale, truncateYAxis: truncateYAxis, stride: data.stride, unit: unit)
-            .chartOverlay { chartProxy in
-                GeometryReader { geometryProxy in
-                    Rectangle().fill(.clear).contentShape(Rectangle())
-                        .gesture(DragGesture(minimumDistance: 20)
-                            .onChanged { currentState in
-                                guard let plotFrame = chartProxy.plotFrame else { return }
-                                let xLocation = currentState.location.x - geometryProxy[plotFrame].origin.x
-
-                                if let plotElement = chartProxy.value(atX: xLocation, as: Date.self) {
-                                    if let graphValue = data.values.first(where: {
-                                        $0.date > plotElement
-                                    }), selectedDate != graphValue.date {
-                                        selectedDate = graphValue.date
-                                        valuesAtTime = data(at: graphValue.date)
-                                    }
-                                }
-                            }
-                        )
-                        .gesture(SpatialTapGesture()
-                            .onEnded { value in
-                                guard let plotFrame = chartProxy.plotFrame else { return }
-                                let xLocation = value.location.x - geometryProxy[plotFrame].origin.x
-
-                                if let plotElement = chartProxy.value(atX: xLocation, as: Date.self) {
-                                    if let graphValue = data.values.first(where: {
-                                        $0.date > plotElement
-                                    }) {
-                                        selectedDate = graphValue.date
-                                        valuesAtTime = data(at: graphValue.date)
-                                    }
-                                }
-                            }
-                        )
-                }
-            }
-            .chartOverlay { makeHighlightBar(chartProxy: $0) }
-            .chartOverlay { makeCaptionBox(chartProxy: $0) }
+        if hasRenderableValues {
+            chartWithOverlays
+        } else {
+            ParametersGraphChartView(
+                values: data.values,
+                xScale: data.xScale,
+                truncateYAxis: truncateYAxis,
+                stride: data.stride,
+                unit: unit
+            )
             .onAppear { haptic.prepare() }
+        }
+    }
+
+    private var hasRenderableValues: Bool {
+        data.values.contains {
+            $0.value.isFinite && $0.date.timeIntervalSinceReferenceDate.isFinite
+        }
+    }
+
+    private var chartWithOverlays: some View {
+        ParametersGraphChartView(
+            values: data.values,
+            xScale: data.xScale,
+            truncateYAxis: truncateYAxis,
+            stride: data.stride,
+            unit: unit
+        )
+        .chartOverlay { chartProxy in
+            GeometryReader { geometryProxy in
+                Rectangle().fill(.clear).contentShape(Rectangle())
+                    .gesture(DragGesture(minimumDistance: 20)
+                        .onChanged { currentState in
+                            guard let plotFrame = chartProxy.plotFrame else { return }
+                            let xLocation = currentState.location.x - geometryProxy[plotFrame].origin.x
+
+                            if let plotElement = chartProxy.value(atX: xLocation, as: Date.self) {
+                                if let graphValue = data.values.first(where: {
+                                    $0.date > plotElement
+                                }), selectedDate != graphValue.date {
+                                    selectedDate = graphValue.date
+                                    valuesAtTime = data(at: graphValue.date)
+                                }
+                            }
+                        }
+                    )
+                    .gesture(SpatialTapGesture()
+                        .onEnded { value in
+                            guard let plotFrame = chartProxy.plotFrame else { return }
+                            let xLocation = value.location.x - geometryProxy[plotFrame].origin.x
+
+                            if let plotElement = chartProxy.value(atX: xLocation, as: Date.self) {
+                                if let graphValue = data.values.first(where: {
+                                    $0.date > plotElement
+                                }) {
+                                    selectedDate = graphValue.date
+                                    valuesAtTime = data(at: graphValue.date)
+                                }
+                            }
+                        }
+                    )
+            }
+        }
+        .chartOverlay { makeHighlightBar(chartProxy: $0) }
+        .chartOverlay { makeCaptionBox(chartProxy: $0) }
+        .onAppear { haptic.prepare() }
     }
 
     private func data(at date: Date) -> ValuesAtTime<ParameterGraphValue> {
