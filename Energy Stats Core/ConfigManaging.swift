@@ -90,6 +90,7 @@ public protocol ConfigManaging: FinancialConfigManager, SolcastConfigManager, Ba
     var inverterGeneration: InverterGeneration { get set }
     var showTodayPercentageSolarForecastAchieved: Bool { get set }
     var deductInverterConsumptionFromGridAvoided: Bool { get set }
+    var useRollingSolarForecastTotalForToday: Bool { get set }
 }
 
 public enum DeviceCapability {

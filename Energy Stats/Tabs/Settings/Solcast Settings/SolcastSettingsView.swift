@@ -36,11 +36,19 @@ struct SolcastSettingsView: View {
                         Text("Your Solcast predictions are fetched when you visit the Summary tab (at most once every 8 hours). Note that Solcast only provides future data.")
                     }
                 }
-                
+
                 Section {
                     Toggle(isOn: $viewModel.showTodayPercentageSolarForecastAchieved) {
                         Text("Show percentage of solar forecast achieved")
                     }
+
+                    Toggle(isOn: $viewModel.useRollingSolarForecastTotalForToday) {
+                        Text("Use rolling time period")
+                    }.disabled(viewModel.showTodayPercentageSolarForecastAchieved)
+                } footer: {
+                    Text(viewModel.useRollingSolarForecastTotalForToday ?
+                        "The percentage compares your solar generation so far with Solcast's forecast up to now." :
+                        "The percentage compares your total solar generation with Solcast's forecast for the entire day.")
                 }
 
                 ForEach(viewModel.viewData.sites, id: \.resourceId) { site in
@@ -54,6 +62,7 @@ struct SolcastSettingsView: View {
                         .buttonStyle(.bordered)
                 }
             }
+            .animation(.default, value: viewModel.showTodayPercentageSolarForecastAchieved)
 
             BottomButtonsView(dirty: viewModel.isDirty) {
                 viewModel.save()

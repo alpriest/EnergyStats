@@ -176,7 +176,7 @@ class PowerFlowTabViewModel: @preconcurrency VisibilityTracking {
             }
 
             let (totals, financialModel, generation) = try await self.loadTotals(for: currentDevice)
-            let todaySolarForecast = try await loadSolcastTotalForToday()
+            let todaySolarForecast = try await loadTotalSolarForecastForToday()
 
             let summary = LoadedPowerFlowViewModel(
                 currentValuesPublisher: currentStatusCalculator.currentValuesPublisher,
@@ -201,7 +201,7 @@ class PowerFlowTabViewModel: @preconcurrency VisibilityTracking {
         }
     }
 
-    private func loadSolcastTotalForToday() async throws -> Double? {
+    private func loadTotalSolarForecastForToday() async throws -> Double? {
         let settings = self.configManager.solcastSettings
         guard let apiKey = settings.apiKey,
               settings.sites.any else { return nil }
@@ -212,7 +212,7 @@ class PowerFlowTabViewModel: @preconcurrency VisibilityTracking {
         let siteTotals = try await settings.sites.asyncMap { site in
             let data = try await service.fetchForecast(for: site, apiKey: apiKey, ignoreCache: false)
             return data.forecasts.filter { $0.periodEnd.isSame(as: today) }
-                .filter { $0.periodEnd < now }
+                .filter { configManager.useRollingSolarForecastTotalForToday && $0.periodEnd < now }
                 .total()
         }
 

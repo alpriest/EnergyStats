@@ -412,4 +412,7 @@ public class UserDefaultsConfig: StoredConfig {
     
     @UserDefaultsStoredBool(key: "deductInverterConsumptionFromGridAvoided", defaultValue: true)
     public var deductInverterConsumptionFromGridAvoided: Bool
+    
+    @UserDefaultsStoredBool(key: "useRollingSolarForecastTotalForToday", defaultValue: true)
+    public var useRollingSolarForecastTotalForToday: Bool
 }

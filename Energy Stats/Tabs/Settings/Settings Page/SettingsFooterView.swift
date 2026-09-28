@@ -36,6 +36,8 @@ struct SettingsFooterView: View {
                     .padding(.top, 88)
 
                     Text("Version ") + Text(appVersion)
+                    
+                    Text("Made by Al Priest")
                 }
                 .frame(minWidth: 0, maxWidth: .infinity)
             }

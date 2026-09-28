@@ -48,11 +48,17 @@ class SolcastSettingsViewModel: ObservableObject, ViewDataProviding {
         isDirty = viewData != originalValue
     }}
     @Published var isDirty = false
+    @Published var useRollingSolarForecastTotalForToday: Bool {
+        didSet {
+            configManager.useRollingSolarForecastTotalForToday = useRollingSolarForecastTotalForToday
+        }
+    }
     var originalValue: ViewData? = nil
 
     init(configManager: ConfigManaging, solarService: @escaping SolarForecastProviding) {
         self.configManager = configManager
         self.solarService = solarService
+        _useRollingSolarForecastTotalForToday = .init(initialValue: configManager.useRollingSolarForecastTotalForToday)
 
         let viewData = ViewData(sites: configManager.solcastSettings.sites,
                                                apiKey: configManager.solcastSettings.apiKey ?? "")

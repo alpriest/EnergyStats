@@ -85,4 +85,5 @@ class MockConfig: StoredConfig {
     var showTodayPercentageSolarForecastAchieved: Bool = true
     var installationPurchasePrice: Double = 0.0
     var deductInverterConsumptionFromGridAvoided: Bool = true
+    var useRollingSolarForecastTotalForToday: Bool = true
 }

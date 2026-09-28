@@ -77,6 +77,7 @@ public protocol StoredConfig {
     var showTodayPercentageSolarForecastAchieved: Bool { get set }
     var installationPurchasePrice: Double { get set }
     var deductInverterConsumptionFromGridAvoided: Bool { get set }
+    var useRollingSolarForecastTotalForToday: Bool { get set }
 }
 
 public func DefaultParameterGroups() -> [ParameterGroup] {

@@ -465,6 +465,7 @@ public class MockConfig: StoredConfig {
     public var showTodayPercentageSolarForecastAchieved: Bool = true
     public var installationPurchasePrice: Double = 0
     public var deductInverterConsumptionFromGridAvoided: Bool = true
+    public var useRollingSolarForecastTotalForToday: Bool = true
 }
 
 public extension SolcastSite {

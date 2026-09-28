@@ -789,6 +789,11 @@ public class ConfigManager: ConfigManaging {
             ))
         }
     }
+    
+    public var useRollingSolarForecastTotalForToday: Bool {
+        get { config.useRollingSolarForecastTotalForToday }
+        set { config.useRollingSolarForecastTotalForToday = newValue }
+    }
 }
 
 public enum BatteryResponseMapper {
