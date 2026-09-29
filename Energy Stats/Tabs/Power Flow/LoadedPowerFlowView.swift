@@ -157,7 +157,9 @@ struct LoadedPowerFlowView: View {
                     }
                 }
 
-                SolarStringsView(viewModel: viewModel, appSettings: appSettings)
+                SolarStringsView(displayStrings: viewModel.displayStrings,
+                                 todaysGeneration: viewModel.todaysGeneration,
+                                 appSettings: appSettings)
                     .offset(x: 0, y: -20)
 
                 if appSettings.ct2DisplayMode == .separateIcon {

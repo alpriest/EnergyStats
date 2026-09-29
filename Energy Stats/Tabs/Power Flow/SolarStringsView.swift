@@ -22,13 +22,14 @@ struct LabelWidthPreferenceKey: PreferenceKey {
 
 struct SolarStringsView: View {
     @State var pvLabelWidth: CGFloat = 100
-    @State var viewModel: LoadedPowerFlowViewModel
+    let displayStrings: [StringPower]
+    let todaysGeneration: GenerationViewModel?
     let appSettings: AppSettings
 
     var body: some View {
-        if (appSettings.powerFlowStrings.enabled || appSettings.ct2DisplayMode == .asPowerString) && viewModel.displayStrings.count > 0 {
+        if (appSettings.powerFlowStrings.enabled || appSettings.ct2DisplayMode == .asPowerString) && displayStrings.count > 0 {
             VStack(alignment: .leading) {
-                ForEach(viewModel.displayStrings) { pvString in
+                ForEach(displayStrings) { pvString in
                     HStack {
                         Text(pvString.displayName(settings: appSettings.powerFlowStrings))
                             .background(LabelWidthBackgroundSizeReader())
@@ -43,7 +44,7 @@ struct SolarStringsView: View {
 
                         if appSettings.showTotalYieldOnPowerFlow {
                             EnergyText(
-                                amount: viewModel.todaysGeneration?.estimatedTotal(string: pvString.stringType),
+                                amount: todaysGeneration?.estimatedTotal(string: pvString.stringType),
                                 appSettings: appSettings,
                                 type: .solarStringTotal,
                                 decimalPlaceOverride: 1,
@@ -77,7 +78,8 @@ struct LabelWidthBackgroundSizeReader: View {
 #Preview {
     let appSettings = AppSettings.mock().copy(powerFlowStrings: PowerFlowStringsSettings.none.copy(enabled: true, pv1Name: "Front", pv2Name: "To"))
     SolarStringsView(
-        viewModel: .any(appSettings: appSettings),
+        displayStrings: LoadedPowerFlowViewModel.any(appSettings: appSettings).displayStrings,
+        todaysGeneration: LoadedPowerFlowViewModel.any(appSettings: appSettings).todaysGeneration,
         appSettings: appSettings
     )
 }
