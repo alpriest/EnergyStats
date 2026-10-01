@@ -24,71 +24,69 @@ struct StatsTabView: View {
     }
 
     var body: some View {
-        Group {
-            VStack {
-                StatsDatePickerHeaderView(viewModel: StatsDatePickerHeaderViewModel($viewModel.displayMode),
-                                          statsTimeUsageGraphStyle: $viewModel.statsTimeUsageGraphStyle,
-                                          showingEnergyBreakdownGraph: $showingEnergyBreakdownGraph)
-
-                ScrollView {
-                    VStack {
-                        if viewModel.statsTimeUsageGraphStyle.isOn {
-                            HStack {
-                                Group {
-                                    if viewModel.valuesAtTime != nil, let selectedDate = viewModel.selectedDate {
-                                        Text(viewModel.selectedDateFormatted(selectedDate))
-
-                                        Button("Clear graph values", action: {
-                                            self.viewModel.valuesAtTime = nil
-                                            self.viewModel.selectedDate = nil
-                                            self.viewModel.calculateApproximations()
-                                        })
-                                    } else {
-                                        Text(viewModel.touchHeaderTitle)
-                                    }
+        VStack {
+            StatsDatePickerHeaderView(viewModel: StatsDatePickerHeaderViewModel($viewModel.displayMode),
+                                      statsTimeUsageGraphStyle: $viewModel.statsTimeUsageGraphStyle,
+                                      showingEnergyBreakdownGraph: $showingEnergyBreakdownGraph)
+                    
+            ScrollView {
+                VStack {
+                    if viewModel.statsTimeUsageGraphStyle.isOn {
+                        HStack {
+                            Group {
+                                if viewModel.valuesAtTime != nil, let selectedDate = viewModel.selectedDate {
+                                    Text(viewModel.selectedDateFormatted(selectedDate))
+                                            
+                                    Button("Clear graph values", action: {
+                                        self.viewModel.valuesAtTime = nil
+                                        self.viewModel.selectedDate = nil
+                                        self.viewModel.calculateApproximations()
+                                    })
+                                } else {
+                                    Text(viewModel.touchHeaderTitle)
                                 }
-                                .padding(.vertical)
-                                .font(.caption)
-                            }.frame(maxWidth: .infinity)
-
-                            StatsGraphView(
-                                viewModel: viewModel,
-                                selectedDate: $viewModel.selectedDate,
-                                valuesAtTime: $viewModel.valuesAtTime,
-                                appSettings: appSettings
-                            )
+                            }
+                            .padding(.vertical)
+                            .font(.caption)
+                        }.frame(maxWidth: .infinity)
+                                
+                        StatsGraphView(
+                            viewModel: viewModel,
+                            selectedDate: $viewModel.selectedDate,
+                            valuesAtTime: $viewModel.valuesAtTime,
+                            appSettings: appSettings
+                        )
+                        .frame(height: graphHeight)
+                    }
+                            
+                    if showingEnergyBreakdownGraph {
+                        EnergyBreakdownChart(.init(viewModel: viewModel))
                             .frame(height: graphHeight)
-                        }
-
-                        if showingEnergyBreakdownGraph {
-                            EnergyBreakdownChart(.init(viewModel: viewModel))
-                                .frame(height: graphHeight)
-                        }
-                    }.loadable(viewModel.state, options: [.retry], overlay: true, retry: { Task { await viewModel.load() } })
-
-                    StatsGraphVariableToggles(viewModel: viewModel, selectedDate: $viewModel.selectedDate, valuesAtTime: $viewModel.valuesAtTime, appSettings: appSettings)
-
-                    if let approximationsViewModel = viewModel.approximationsViewModel {
-                        ApproximationsView(viewModel: approximationsViewModel, appSettings: appSettings, decimalPlaceOverride: nil)
                     }
-
-                    Text("Stats are aggregated by FoxESS into 1 hr, 1 day or 1 month totals.")
-                        .font(.footnote)
-                        .foregroundColor(Color("text_dimmed"))
-                        .multilineTextAlignment(.center)
-                        .padding(.vertical, 28)
-
-                    if let url = viewModel.exportFile?.url {
-                        ShareLink(item: url) {
-                            Label("Export graph data", systemImage: "square.and.arrow.up")
-                        }
-                        .padding(.bottom)
+                }.loadable(viewModel.state, options: [.retry], overlay: true, retry: { Task { await viewModel.load() } })
+                        
+                StatsGraphVariableToggles(viewModel: viewModel, selectedDate: $viewModel.selectedDate, valuesAtTime: $viewModel.valuesAtTime, appSettings: appSettings)
+                        
+                if let approximationsViewModel = viewModel.approximationsViewModel {
+                    ApproximationsView(viewModel: approximationsViewModel, appSettings: appSettings, decimalPlaceOverride: nil)
+                }
+                        
+                Text("Stats are aggregated by FoxESS into 1 hr, 1 day or 1 month totals.")
+                    .font(.footnote)
+                    .foregroundColor(Color("text_dimmed"))
+                    .multilineTextAlignment(.center)
+                    .padding(.vertical, 28)
+                        
+                if let url = viewModel.exportFile?.url {
+                    ShareLink(item: url) {
+                        Label("Export graph data", systemImage: "square.and.arrow.up")
                     }
+                    .padding(.bottom)
                 }
             }
-            .padding(.horizontal)
-            .analyticsScreen(.statsTab)
         }
+        .padding(.horizontal)
+        .analyticsScreen(.statsTab)
         .task {
             await viewModel.load()
         }

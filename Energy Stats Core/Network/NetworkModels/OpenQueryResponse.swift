@@ -340,7 +340,23 @@ public struct SchedulePhaseResponse: Decodable {
         self.endHour = try container.decode(Int.self, forKey: .endHour)
         self.endMinute = try container.decode(Int.self, forKey: .endMinute)
         self.workMode = try container.decode(String.self, forKey: .workMode)
-        self.extraParam = try container.decodeIfPresent([String : Double].self, forKey: .extraParam)
+
+        if !container.contains(.extraParam) {
+            self.extraParam = nil
+        } else if try container.decodeNil(forKey: .extraParam) {
+            self.extraParam = nil
+        } else {
+            let extraParamContainer = try container.nestedContainer(keyedBy: DynamicCodingKeys.self, forKey: .extraParam)
+            var extraParam = [String: Double]()
+
+            for key in extraParamContainer.allKeys {
+                if let value = try? extraParamContainer.decode(Double.self, forKey: key) {
+                    extraParam[key.stringValue] = value
+                }
+            }
+
+            self.extraParam = extraParam
+        }
     }
     
     func extraParamValue(for key: String, default: Int) -> Int {

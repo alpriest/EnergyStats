@@ -58,6 +58,7 @@ struct StatsDatePickerHeaderView: View {
                 Image(systemName: "calendar.badge.clock")
                     .foregroundStyle(Color.primary)
             }
+            .buttonStyle(.bordered)
             .accessibilityLabel("accessibility.stats.timeperiodpicker")
             .accessibilityIdentifier("stats_datepicker")
 

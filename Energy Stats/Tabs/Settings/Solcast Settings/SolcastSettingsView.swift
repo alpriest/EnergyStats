@@ -44,7 +44,7 @@ struct SolcastSettingsView: View {
 
                     Toggle(isOn: $viewModel.useRollingSolarForecastTotalForToday) {
                         Text("Use rolling time period")
-                    }.disabled(viewModel.showTodayPercentageSolarForecastAchieved)
+                    }.disabled(!viewModel.showTodayPercentageSolarForecastAchieved)
                 } footer: {
                     Text(viewModel.useRollingSolarForecastTotalForToday ?
                         "The percentage compares your solar generation so far with Solcast's forecast up to now." :

@@ -212,7 +212,7 @@ class PowerFlowTabViewModel: @preconcurrency VisibilityTracking {
         let siteTotals = try await settings.sites.asyncMap { site in
             let data = try await service.fetchForecast(for: site, apiKey: apiKey, ignoreCache: false)
             return data.forecasts.filter { $0.periodEnd.isSame(as: today) }
-                .filter { configManager.useRollingSolarForecastTotalForToday && $0.periodEnd < now }
+                .filter { !configManager.useRollingSolarForecastTotalForToday || (configManager.useRollingSolarForecastTotalForToday && $0.periodEnd < now) }
                 .total()
         }
 
