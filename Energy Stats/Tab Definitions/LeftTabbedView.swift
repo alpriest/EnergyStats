@@ -22,60 +22,81 @@ struct LeftTabbedView: View {
     let userManager: UserManager
     let solarForecastProvider: SolarForecastProviding
     let templateStore: TemplateStoring
-    @State private var settingsTabViewModel: SettingsTabViewModel?
-    @State private var parametersGraphTabViewModel: ParametersGraphTabViewModel?
+    @State private var settingsTabViewModel: SettingsTabViewModel
+    @State private var parametersGraphTabViewModel: ParametersGraphTabViewModel
 
     init(networking: Networking, userManager: UserManager, configManager: ConfigManaging, solarForecastProvider: @escaping SolarForecastProviding, templateStore: TemplateStoring) {
         self.networking = networking
         self.userManager = userManager
         self.configManager = configManager
         self.solarForecastProvider = solarForecastProvider
+        _settingsTabViewModel = State(initialValue: SettingsTabViewModel(
+            userManager: userManager,
+            config: configManager,
+            networking: networking
+        ))
+        _parametersGraphTabViewModel = State(initialValue: ParametersGraphTabViewModel(
+            networking: networking,
+            configManager: configManager,
+            solarForecastProvider: solarForecastProvider
+        ))
         self.templateStore = templateStore
     }
 
     var body: some View {
         NavigationSplitView(
             sidebar: {
-                if let settingsTabViewModel, let parametersGraphTabViewModel {
-                    List {
-                        NavigationLink {
-                            PowerFlowTabView(
-                                configManager: configManager,
-                                networking: networking,
-                                userManager: userManager,
-                                templateStore: templateStore,
-                                solarForecastProvider: solarForecastProvider
-                            )
-                        } label: {
-                            PowerFlowTabItem()
-                        }
-                        
-                        NavigationLink {
-                            StatsTabView(
-                                configManager: configManager,
-                                networking: networking
-                            )
-                        } label: {
-                            StatsTabItem()
-                        }
-                        
-                        NavigationLink {
-                            ParametersGraphTabView(configManager: configManager, viewModel: parametersGraphTabViewModel)
-                        } label: {
-                            ParametersTabItem()
-                        }
-                        
-                        NavigationLink {
-                            SummaryTabView(configManager: configManager, networking: networking, solarForecastProvider: solarForecastProvider)
-                        } label: {
-                            SummaryTabItem()
-                        }
-                        
-                        NavigationLink {
-                            SettingsTabView(viewModel: settingsTabViewModel, configManager: configManager, networking: networking, solarService: solarForecastProvider, templateStore: templateStore)
-                        } label: {
-                            SettingsTabItem()
-                        }
+                List {
+                    NavigationLink {
+                        PowerFlowTabView(
+                            configManager: configManager,
+                            networking: networking,
+                            userManager: userManager,
+                            templateStore: templateStore,
+                            solarForecastProvider: solarForecastProvider
+                        )
+                    } label: {
+                        PowerFlowTabItem()
+                    }
+
+                    NavigationLink {
+                        StatsTabView(
+                            configManager: configManager,
+                            networking: networking
+                        )
+                    } label: {
+                        StatsTabItem()
+                    }
+
+                    NavigationLink {
+                        ParametersGraphTabView(
+                            configManager: configManager,
+                            viewModel: parametersGraphTabViewModel
+                        )
+                    } label: {
+                        ParametersTabItem()
+                    }
+
+                    NavigationLink {
+                        SummaryTabView(
+                            configManager: configManager,
+                            networking: networking,
+                            solarForecastProvider: solarForecastProvider
+                        )
+                    } label: {
+                        SummaryTabItem()
+                    }
+
+                    NavigationLink {
+                        SettingsTabView(
+                            viewModel: settingsTabViewModel,
+                            configManager: configManager,
+                            networking: networking,
+                            solarService: solarForecastProvider,
+                            templateStore: templateStore
+                        )
+                    } label: {
+                        SettingsTabItem()
                     }
                 }
             },
@@ -89,10 +110,6 @@ struct LeftTabbedView: View {
                 )
             }
         )
-        .onAppear {
-            settingsTabViewModel = SettingsTabViewModel(userManager: userManager, config: configManager, networking: networking)
-            parametersGraphTabViewModel = ParametersGraphTabViewModel(networking: networking, configManager: configManager, solarForecastProvider: solarForecastProvider)
-        }
     }
 }
 

@@ -20,16 +20,17 @@ public struct InstallationPaybackEstimate {
     }
 }
 
-public class EnergyStatsFinancialModel: ObservableObject {
+@Observable
+public class EnergyStatsFinancialModel {
     private let config: FinancialConfigManager
     private var cancellables = Set<AnyCancellable>()
 
-    @Published public private(set) var exportIncome: FinanceAmount
-    @Published public private(set) var exportBreakdown: CalculationBreakdown
-    @Published public private(set) var solarSaving: FinanceAmount
-    @Published public private(set) var solarSavingBreakdown: CalculationBreakdown
-    @Published public private(set) var total: FinanceAmount
-    @Published public private(set) var amounts: [FinanceAmount] = []
+    public private(set) var exportIncome: FinanceAmount
+    public private(set) var exportBreakdown: CalculationBreakdown
+    public private(set) var solarSaving: FinanceAmount
+    public private(set) var solarSavingBreakdown: CalculationBreakdown
+    public private(set) var total: FinanceAmount
+    public private(set) var amounts: [FinanceAmount] = []
 
     private let totalsViewModel: TotalsViewModel
 

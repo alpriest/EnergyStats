@@ -14,8 +14,8 @@ struct TabbedView: View {
     let userManager: UserManager
     let solarForecastProvider: SolarForecastProviding
     let templateStore: TemplateStoring
-    @State private var settingsTabViewModel: SettingsTabViewModel?
-    @State private var parametersGraphTabViewModel: ParametersGraphTabViewModel?
+    @State private var settingsTabViewModel: SettingsTabViewModel
+    @State private var parametersGraphTabViewModel: ParametersGraphTabViewModel
 
     init(
         networking: Networking,
@@ -28,13 +28,22 @@ struct TabbedView: View {
         self.userManager = userManager
         self.configManager = configManager
         self.solarForecastProvider = solarForecastProvider
+        _settingsTabViewModel = State(initialValue: SettingsTabViewModel(
+            userManager: userManager,
+            config: configManager,
+            networking: networking
+        ))
+        _parametersGraphTabViewModel = State(initialValue: ParametersGraphTabViewModel(
+            networking: networking,
+            configManager: configManager,
+            solarForecastProvider: solarForecastProvider
+        ))
         self.templateStore = templateStore
     }
 
     var body: some View {
         TabView {
-            if let settingsTabViewModel, let parametersGraphTabViewModel {
-                PowerFlowTabView(
+            PowerFlowTabView(
                     configManager: configManager,
                     networking: networking,
                     userManager: userManager,
@@ -66,10 +75,6 @@ struct TabbedView: View {
                     .if(configManager.isDemoUser) {
                         $0.badge("demo")
                     }
-            }
-        }.onAppear {
-            settingsTabViewModel = SettingsTabViewModel(userManager: userManager, config: configManager, networking: networking)
-            parametersGraphTabViewModel = ParametersGraphTabViewModel(networking: networking, configManager: configManager, solarForecastProvider: solarForecastProvider)
         }
     }
 }
