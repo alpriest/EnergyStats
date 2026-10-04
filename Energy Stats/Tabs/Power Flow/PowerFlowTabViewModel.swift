@@ -204,7 +204,8 @@ class PowerFlowTabViewModel: @preconcurrency VisibilityTracking {
     private func loadTotalSolarForecastForToday() async throws -> Double? {
         let settings = self.configManager.solcastSettings
         guard let apiKey = settings.apiKey,
-              settings.sites.any else { return nil }
+              settings.sites.any,
+              configManager.showTotalYieldOnPowerFlow else { return nil }
         let service = self.solarForecastProvider()
         let now = Date()
         let today = Calendar.current.startOfDay(for: now)
@@ -223,7 +224,8 @@ class PowerFlowTabViewModel: @preconcurrency VisibilityTracking {
         guard self.configManager.showHomeTotalOnPowerFlow ||
             self.configManager.showGridTotalsOnPowerFlow ||
             self.configManager.showFinancialEarnings ||
-            self.configManager.showTotalYieldOnPowerFlow else { return (nil, nil, nil) }
+            self.configManager.showTotalYieldOnPowerFlow ||
+            (self.configManager.showTodayPercentageSolarForecastAchieved && configManager.showTotalYieldOnPowerFlow) else { return (nil, nil, nil) }
 
         let generation = try await self.loadGeneration(for: device)
         let totals = try TotalsViewModel(reports: await self.loadReportData(device), generationViewModel: generation)
@@ -239,7 +241,8 @@ class PowerFlowTabViewModel: @preconcurrency VisibilityTracking {
         guard self.configManager.showTotalYieldOnPowerFlow ||
             self.configManager.powerFlowStrings.enabled ||
             self.configManager.ct2DisplayMode != .hidden ||
-            self.configManager.shouldCombineCT2WithPVPower
+            self.configManager.shouldCombineCT2WithPVPower ||
+            (self.configManager.showTodayPercentageSolarForecastAchieved && configManager.showTotalYieldOnPowerFlow)
         else { return nil }
 
         return try await GenerationViewModelBuilder.build(
