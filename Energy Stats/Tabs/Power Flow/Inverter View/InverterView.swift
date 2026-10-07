@@ -19,7 +19,7 @@ struct InverterPath: Shape {
 }
 
 struct InverterView: View {
-    @ObservedObject var viewModel: InverterViewModel
+    let viewModel: InverterViewModel
     @Environment(\.verticalSizeClass) private var verticalSizeClass
     @EnvironmentObject var alertManager: BannerAlertManager
     @State private var alertContent: AlertContent?

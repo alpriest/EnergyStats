@@ -6,6 +6,7 @@
 //
 
 import Energy_Stats_Core
+import Observation
 import SwiftUI
 
 struct ParameterGraphVariableChooserViewData: Copiable {
@@ -22,17 +23,19 @@ struct ParameterGraphVariableChooserViewData: Copiable {
     }
 }
 
-class ParameterGraphVariableChooserViewModel: ObservableObject, ViewDataProviding {
+@MainActor
+@Observable
+final class ParameterGraphVariableChooserViewModel: ViewDataProviding {
     typealias ViewData = ParameterGraphVariableChooserViewData
     
     private let onApply: ([ParameterGraphVariable]) -> Void
     private let haptic = UIImpactFeedbackGenerator()
     private(set) var configManager: ConfigManaging
-    @Published var viewData: ViewData { didSet {
+    var viewData: ViewData { didSet {
         isDirty = originalValue != viewData
     }}
     var originalValue: ViewData?
-    @Published var isDirty = false
+    var isDirty = false
 
     init(variables: [ParameterGraphVariable], configManager: ConfigManaging, onApply: @escaping ([ParameterGraphVariable]) -> Void) {
         let viewData = ViewData(

@@ -6,6 +6,7 @@
 //
 
 import Energy_Stats_Core
+import Observation
 import SwiftUI
 
 struct SelectableDevice: Identifiable {
@@ -15,9 +16,11 @@ struct SelectableDevice: Identifiable {
     var id: String { device.deviceSN }
 }
 
-class InverterViewModel: ObservableObject {
+@MainActor
+@Observable
+final class InverterViewModel {
     private var configManager: ConfigManaging
-    @Published var devices: [SelectableDevice] = []
+    var devices: [SelectableDevice] = []
     let temperatures: InverterTemperatures?
     let deviceState: DeviceState
     let faults: [String]

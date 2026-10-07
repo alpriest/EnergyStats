@@ -6,16 +6,19 @@
 //
 
 import Energy_Stats_Core
+import Observation
 import SwiftUI
 
-class SelfSufficiencySettingsViewModel: ObservableObject {
-    @Published var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode {
+@MainActor
+@Observable
+final class SelfSufficiencySettingsViewModel {
+    var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode {
         didSet {
             configManager.selfSufficiencyEstimateMode = selfSufficiencyEstimateMode
         }
     }
 
-    @Published var showSelfSufficiencyStatsGraphOverlay: Bool {
+    var showSelfSufficiencyStatsGraphOverlay: Bool {
         didSet {
             configManager.showSelfSufficiencyStatsGraphOverlay = showSelfSufficiencyStatsGraphOverlay
         }
@@ -32,14 +35,16 @@ class SelfSufficiencySettingsViewModel: ObservableObject {
 
 struct SelfSufficiencySettingsView: View {
     @State private var internalMode: Int
-    @StateObject private var viewModel: SelfSufficiencySettingsViewModel
+    @State private var viewModel: SelfSufficiencySettingsViewModel
 
     init(configManager: ConfigManaging) {
-        _viewModel = .init(wrappedValue: SelfSufficiencySettingsViewModel(configManager: configManager))
+        _viewModel = State(initialValue: SelfSufficiencySettingsViewModel(configManager: configManager))
         internalMode = configManager.selfSufficiencyEstimateMode.rawValue
     }
 
     var body: some View {
+        @Bindable var viewModel = viewModel
+
         Form {
             Section {
                 Picker("Self sufficiency estimates", selection: $internalMode) {

@@ -9,13 +9,15 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct ParameterVariableGroupEditorView: View {
-    @ObservedObject var viewModel: ParameterVariableGroupEditorViewModel
+    let viewModel: ParameterVariableGroupEditorViewModel
     @State private var presentAlert = false
     @State private var renameText = ""
     @State private var onAlertSubmission: ((String) -> Void)?
     @State private var presentConfirmation = false
 
     var body: some View {
+        @Bindable var viewModel = viewModel
+
         VStack(spacing: 0) {
             Form {
                 Section {

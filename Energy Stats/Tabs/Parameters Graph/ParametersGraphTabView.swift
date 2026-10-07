@@ -19,7 +19,7 @@ struct ParametersGraphTabView: View {
     private let appSettingsPublisher: LatestAppSettingsPublisher
     private let configManager: ConfigManaging
     @State private var viewModel: ParametersGraphTabViewModel
-    @StateObject private var headerViewModel: ParameterGraphHeaderViewModel
+    @State private var headerViewModel: ParameterGraphHeaderViewModel
 
     init(configManager: ConfigManaging, viewModel: ParametersGraphTabViewModel) {
         let initialViewModel = viewModel
@@ -27,7 +27,7 @@ struct ParametersGraphTabView: View {
         self.configManager = configManager
         self.appSettingsPublisher = configManager.appSettingsPublisher
         _appSettings = State(initialValue: configManager.currentAppSettings)
-        _headerViewModel = StateObject(wrappedValue: ParameterGraphHeaderViewModel(
+        _headerViewModel = State(wrappedValue: ParameterGraphHeaderViewModel(
             displayMode: initialViewModel.displayMode,
             configManager: configManager,
             onChange: { initialViewModel.displayMode = $0 }

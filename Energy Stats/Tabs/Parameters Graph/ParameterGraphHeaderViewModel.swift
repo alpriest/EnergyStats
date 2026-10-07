@@ -6,29 +6,32 @@
 //
 
 import Energy_Stats_Core
+import Observation
 import SwiftUI
 
-class ParameterGraphHeaderViewModel: ObservableObject {
-    @Published var hours: Int = 24 {
+@MainActor
+@Observable
+final class ParameterGraphHeaderViewModel {
+    var hours: Int = 24 {
         didSet {
             updateDisplayMode()
         }
     }
 
-    @Published private var displayMode: ParametersGraphDisplayMode {
+    private var displayMode: ParametersGraphDisplayMode {
         didSet {
             onGraphDisplayModeChange(displayMode)
         }
     }
-    @Published var candidateQueryDate = Date() {
+    var candidateQueryDate = Date() {
         didSet {
             updateDisplayMode()
         }
     }
 
-    @Published var canChangeHours: Bool = true
-    @Published var canIncrease = false
-    @Published var truncatedYAxis: Bool = false {
+    var canChangeHours: Bool = true
+    var canIncrease = false
+    var truncatedYAxis: Bool = false {
         didSet {
             configManager.truncatedYAxisOnParameterGraphs = truncatedYAxis
         }

@@ -7,6 +7,7 @@
 
 import Energy_Stats_Core
 
+@MainActor
 protocol ViewDataProviding: AnyObject {
     associatedtype ViewData: Copiable
 

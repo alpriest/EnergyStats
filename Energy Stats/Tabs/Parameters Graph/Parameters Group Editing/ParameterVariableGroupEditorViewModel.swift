@@ -7,6 +7,7 @@
 
 import Energy_Stats_Core
 import Foundation
+import Observation
 
 struct ParameterVariableGroupEditorViewData: Copiable {
     var groups: [ParameterGroup]
@@ -18,10 +19,12 @@ struct ParameterVariableGroupEditorViewData: Copiable {
     }
 }
 
-class ParameterVariableGroupEditorViewModel: ObservableObject, ViewDataProviding {
+@MainActor
+@Observable
+final class ParameterVariableGroupEditorViewModel: ViewDataProviding {
     typealias ViewData = ParameterVariableGroupEditorViewData
     
-    @Published var viewData: ViewData {
+    var viewData: ViewData {
         didSet {
             if oldValue.selected != viewData.selected {
                 updateVariables(for: viewData.groups.first { $0.id == viewData.selected })
@@ -36,7 +39,7 @@ class ParameterVariableGroupEditorViewModel: ObservableObject, ViewDataProviding
     
     private let rawVariables: [Variable]
     private var configManager: ConfigManaging
-    @Published var isDirty = false
+    var isDirty = false
     var originalValue: ParameterVariableGroupEditorViewData?
 
     init(configManager: ConfigManaging) {

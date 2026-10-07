@@ -9,7 +9,7 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct ParameterGraphVariableChooserView: View {
-    @ObservedObject var viewModel: ParameterGraphVariableChooserViewModel
+    let viewModel: ParameterGraphVariableChooserViewModel
     @Environment(\.dismiss) private var dismiss
     @State private var editMode = EditMode.inactive
     @State private var groupName = ""

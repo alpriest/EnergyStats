@@ -10,14 +10,16 @@ import SwiftUI
 import StoreKit
 
 struct BatteryChargeScheduleSettingsView: View {
-    @StateObject var viewModel: BatteryChargeScheduleSettingsViewModel
+    @State private var viewModel: BatteryChargeScheduleSettingsViewModel
     @Environment(\.requestReview) private var requestReview
 
     init(networking: Networking, config: ConfigManaging) {
-        _viewModel = StateObject(wrappedValue: BatteryChargeScheduleSettingsViewModel(networking: networking, config: config))
+        _viewModel = State(initialValue: BatteryChargeScheduleSettingsViewModel(networking: networking, config: config))
     }
 
     var body: some View {
+        @Bindable var viewModel = viewModel
+
         VStack(spacing: 0) {
             Form {
                 BatteryChargeTimePeriodView(timePeriod: $viewModel.viewData.timePeriod1, title: "Time period 1")

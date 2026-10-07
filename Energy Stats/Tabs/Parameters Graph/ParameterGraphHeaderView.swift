@@ -6,10 +6,11 @@
 //
 
 import Energy_Stats_Core
+import Observation
 import SwiftUI
 
 struct ParameterGraphHeaderView: View {
-    @ObservedObject var viewModel: ParameterGraphHeaderViewModel
+    @Bindable var viewModel: ParameterGraphHeaderViewModel
     @Binding var showingVariables: Bool
 
     var body: some View {

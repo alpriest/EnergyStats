@@ -8,6 +8,7 @@
 import Combine
 import Energy_Stats_Core
 import Foundation
+import Observation
 
 struct BatteryChargeScheduleSettingsViewData: Copiable {
     var timePeriod1: ChargeTimePeriod
@@ -23,16 +24,18 @@ struct BatteryChargeScheduleSettingsViewData: Copiable {
     }
 }
 
-class BatteryChargeScheduleSettingsViewModel: ObservableObject, HasLoadState, ViewDataProviding {
+@MainActor
+@Observable
+final class BatteryChargeScheduleSettingsViewModel: @preconcurrency HasLoadState, ViewDataProviding {
     typealias ViewData = BatteryChargeScheduleSettingsViewData
     
     private let networking: Networking
     private let config: ConfigManaging
     private var cancellable: AnyCancellable?
-    @Published var state: LoadState = .inactive
-    @Published var alertContent: AlertContent?
-    @Published var isDirty = false
-    @Published var viewData = ViewData(
+    var state: LoadState = .inactive
+    var alertContent: AlertContent?
+    var isDirty = false
+    var viewData = ViewData(
         timePeriod1: .init(start: Date(), end: Date(), enabled: false),
         timePeriod2: .init(start: Date(), end: Date(), enabled: false),
         summary: ""
