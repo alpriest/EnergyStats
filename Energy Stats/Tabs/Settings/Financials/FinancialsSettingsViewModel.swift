@@ -8,14 +8,15 @@
 import Energy_Stats_Core
 import Foundation
 
-class FinancialsSettingsViewModel: ObservableObject {
-    @Published var earningsModel: EarningsModel {
+@Observable
+class FinancialsSettingsViewModel {
+    var earningsModel: EarningsModel {
         didSet {
             configManager.earningsModel = earningsModel
         }
     }
 
-    @Published var showFinancialSummary: Bool {
+    var showFinancialSummary: Bool {
         didSet {
             configManager.showFinancialEarnings = showFinancialSummary
 
@@ -25,31 +26,31 @@ class FinancialsSettingsViewModel: ObservableObject {
         }
     }
 
-    @Published var showFinancialSummaryOnFlowPage: Bool {
+    var showFinancialSummaryOnFlowPage: Bool {
         didSet {
             configManager.showFinancialSummaryOnFlowPage = showFinancialSummaryOnFlowPage
         }
     }
 
-    @Published var energyStatsFeedInUnitPrice: String {
+    var energyStatsFeedInUnitPrice: String {
         didSet {
             configManager.feedInUnitPrice = energyStatsFeedInUnitPrice.asCurrencyStringToDouble()
         }
     }
 
-    @Published var energyStatsGridImportUnitPrice: String {
+    var energyStatsGridImportUnitPrice: String {
         didSet {
             configManager.gridImportUnitPrice = energyStatsGridImportUnitPrice.asCurrencyStringToDouble()
         }
     }
     
-    @Published var installationPurchasePrice: String {
+    var installationPurchasePrice: String {
         didSet {
             configManager.installationPurchasePrice = installationPurchasePrice.asCurrencyStringToDouble()
         }
     }
     
-    @Published var deductInverterConsumptionFromGridAvoided: Bool {
+    var deductInverterConsumptionFromGridAvoided: Bool {
         didSet {
             configManager.deductInverterConsumptionFromGridAvoided = deductInverterConsumptionFromGridAvoided
         }

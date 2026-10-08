@@ -51,7 +51,7 @@ struct ExportParameterDataIntent: AppIntent {
 
     private func selectedGraphVariables(configManager: ConfigManaging) -> [String] {
         if configManager.selectedParameterGraphVariables.count == 0 {
-            return ParameterGraphVariableChooserViewModel.DefaultGraphVariables
+            return DefaultParameterGraphVariables
         } else {
             return configManager.selectedParameterGraphVariables
         }

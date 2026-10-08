@@ -14,7 +14,7 @@ struct TemplateSummaryListRow: View {
     let networking: Networking
     let config: ConfigManaging
     let templateStore: TemplateStoring
-    @ObservedObject var viewModel: ScheduleSummaryViewModel
+    let viewModel: ScheduleSummaryViewModel
     @Environment(\.requestReview) private var requestReview
 
     var body: some View {

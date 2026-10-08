@@ -10,11 +10,11 @@ import StoreKit
 import SwiftUI
 
 struct BatteryHeatingScheduleSettingsView: View {
-    @StateObject var viewModel: BatteryHeatingScheduleSettingsViewModel
+    @State var viewModel: BatteryHeatingScheduleSettingsViewModel
     @Environment(\.requestReview) private var requestReview
 
     init(networking: Networking, config: ConfigManaging) {
-        _viewModel = StateObject(wrappedValue: BatteryHeatingScheduleSettingsViewModel(networking: networking, config: config))
+        _viewModel = .init(initialValue: BatteryHeatingScheduleSettingsViewModel(networking: networking, config: config))
     }
 
     var body: some View {

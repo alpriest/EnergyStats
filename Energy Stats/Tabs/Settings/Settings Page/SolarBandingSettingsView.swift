@@ -62,7 +62,7 @@ class SolarBandingSettingsViewModel: ObservableObject, ViewDataProviding {
 }
 
 struct SolarBandingSettingsView: View {
-    @StateObject var viewModel: SolarBandingSettingsViewModel
+    @StateObject private var viewModel: SolarBandingSettingsViewModel
     @State private var breakpoint1: Double
     @State private var breakpoint2: Double
     @State private var breakpoint3: Double

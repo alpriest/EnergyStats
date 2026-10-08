@@ -23,11 +23,17 @@ struct ParameterGraphVariableChooserViewData: Copiable {
     }
 }
 
+let DefaultParameterGraphVariables = ["invBatPower",
+                                      "meterPower",
+                                      "loadsPower",
+                                      "pvPower",
+                                      "SoC"]
+
 @MainActor
 @Observable
 final class ParameterGraphVariableChooserViewModel: ViewDataProviding {
     typealias ViewData = ParameterGraphVariableChooserViewData
-    
+
     private let onApply: ([ParameterGraphVariable]) -> Void
     private let haptic = UIImpactFeedbackGenerator()
     private(set) var configManager: ConfigManaging
@@ -70,14 +76,8 @@ final class ParameterGraphVariableChooserViewModel: ViewDataProviding {
         resetDirtyState()
     }
 
-    static let DefaultGraphVariables = ["invBatPower",
-                                        "meterPower",
-                                        "loadsPower",
-                                        "pvPower",
-                                        "SoC"]
-
     func chooseDefaultVariables() {
-        select(just: Self.DefaultGraphVariables)
+        select(just: DefaultParameterGraphVariables)
     }
 
     func select(_ group: ParameterGroup) {

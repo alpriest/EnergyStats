@@ -9,7 +9,7 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct ScheduleTemplateListView: View {
-    @StateObject var viewModel: ScheduleTemplateListViewModel
+    @StateObject private var viewModel: ScheduleTemplateListViewModel
     @State private var selectedTemplateID: String?
     private let config: ConfigManaging
     private let networking: Networking

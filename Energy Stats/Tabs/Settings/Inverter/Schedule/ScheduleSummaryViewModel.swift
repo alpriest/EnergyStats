@@ -9,22 +9,23 @@ import Energy_Stats_Core
 import Foundation
 import SwiftUI
 
-class ScheduleSummaryViewModel: ObservableObject, HasLoadState, HasAlertContent, HasToastContent {
-    let networking: Networking
+@Observable
+class ScheduleSummaryViewModel: HasLoadState, HasAlertContent, HasToastContent {
+    private let networking: Networking
     private var configManager: ConfigManaging
     let templateStore: TemplateStoring
-    @Published var state: LoadState = .inactive
-    @Published var templates: [ScheduleTemplate] = []
-    @Published var alertContent: AlertContent?
-    @Published var schedule: Schedule?
-    @Published var schedulerEnabled: Bool = false {
+    var state: LoadState = .inactive
+    var templates: [ScheduleTemplate] = []
+    var alertContent: AlertContent?
+    var schedule: Schedule?
+    var schedulerEnabled: Bool = false {
         didSet {
             if case .inactive = self.state {
                 Task { await setSchedulerFlag() }
             }
         }
     }
-    @Published var toastContent: ToastContent? = nil
+    var toastContent: ToastContent? = nil
 
     private var hasPreLoaded = false
 

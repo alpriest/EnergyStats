@@ -17,9 +17,10 @@ struct DataLogger: Identifiable {
     var id: String { moduleSN }
 }
 
-class DataLoggersViewModel: ObservableObject, HasLoadState {
-    @Published var items: [DataLogger] = []
-    @Published var state: LoadState = .inactive
+@Observable
+class DataLoggersViewModel: HasLoadState {
+    var items: [DataLogger] = []
+    var state: LoadState = .inactive
     private let networking: Networking
 
     init(networking: Networking) {
@@ -98,10 +99,10 @@ struct DataLoggerView: View {
 }
 
 struct DataLoggersView: View {
-    @StateObject private var viewModel: DataLoggersViewModel
+    @State private var viewModel: DataLoggersViewModel
 
     init(networking: Networking) {
-        self._viewModel = StateObject(wrappedValue: DataLoggersViewModel(networking: networking))
+        self._viewModel = .init(initialValue: DataLoggersViewModel(networking: networking))
     }
 
     var body: some View {

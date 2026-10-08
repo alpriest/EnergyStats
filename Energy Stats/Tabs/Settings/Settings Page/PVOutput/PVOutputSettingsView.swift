@@ -37,10 +37,10 @@ struct PVOutputSettingsViewData: Copiable, Equatable {
 }
 
 struct PVOutputSettingsView: View {
-    @StateObject var viewModel: PVOutputSettingsViewModel
+    @State private var viewModel: PVOutputSettingsViewModel
 
     init(configManager: ConfigManaging, foxService: Networking, pvOutputService: PVOutputServicing) {
-        _viewModel = .init(wrappedValue: PVOutputSettingsViewModel(configManager: configManager, foxService: foxService, pvOutputService: pvOutputService))
+        _viewModel = .init(initialValue: PVOutputSettingsViewModel(configManager: configManager, foxService: foxService, pvOutputService: pvOutputService))
     }
 
     var body: some View {

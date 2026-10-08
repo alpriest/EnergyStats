@@ -42,16 +42,17 @@ struct BatteryHeatingScheduleSettingsViewData: Copiable {
     }
 }
 
-class BatteryHeatingScheduleSettingsViewModel: ObservableObject, HasLoadState, ViewDataProviding {
+@Observable
+class BatteryHeatingScheduleSettingsViewModel: HasLoadState, ViewDataProviding {
     typealias ViewData = BatteryHeatingScheduleSettingsViewData
 
     private let networking: Networking
     private let config: ConfigManaging
     private var cancellable: AnyCancellable?
-    @Published var state: LoadState = .inactive
-    @Published var alertContent: AlertContent?
-    @Published var isDirty = false
-    @Published var viewData = ViewData(
+    var state: LoadState = .inactive
+    var alertContent: AlertContent?
+    var isDirty = false
+    var viewData = ViewData(
         available: true,
         enabled: false,
         currentState: nil,

@@ -25,18 +25,19 @@ struct BatterySOCSettingsViewData: Copiable, Equatable {
     }
 }
 
-class BatterySOCSettingsViewModel: ObservableObject, HasLoadState, ViewDataProviding {
+@Observable
+class BatterySOCSettingsViewModel: HasLoadState, ViewDataProviding {
     typealias ViewData = BatterySOCSettingsViewData
     
     private let networking: Networking
     private let config: ConfigManaging
     private let onSOCchange: () -> Void
-    @Published var state: LoadState = .inactive
-    @Published var alertContent: AlertContent?
-    @Published var viewData: ViewData = .init(soc: "", socOnGrid: "") { didSet {
+    var state: LoadState = .inactive
+    var alertContent: AlertContent?
+    var viewData: ViewData = .init(soc: "", socOnGrid: "") { didSet {
         isDirty = viewData != originalValue
     }}
-    @Published var isDirty = false
+    var isDirty = false
     var originalValue: ViewData?
 
     init(networking: Networking, config: ConfigManaging, onSOCchange: @escaping () -> Void) {

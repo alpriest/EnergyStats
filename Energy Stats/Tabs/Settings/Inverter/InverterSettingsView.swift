@@ -28,7 +28,7 @@ struct InverterSettingsView: View {
 
     var body: some View {
         Form {
-            InverterChoiceView(viewModel: InverterChoiceViewModel(configManager: configManager))
+            InverterChoiceView(configManager: configManager)
 
             Section {
                 NavigationLink("Manage schedules") {

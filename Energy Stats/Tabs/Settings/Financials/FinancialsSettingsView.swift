@@ -9,10 +9,10 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct FinancialsSettingsView: View {
-    @StateObject private var viewModel: FinancialsSettingsViewModel
+    @State private var viewModel: FinancialsSettingsViewModel
 
     init(configManager: ConfigManaging) {
-        _viewModel = .init(wrappedValue: FinancialsSettingsViewModel(configManager: configManager))
+        _viewModel = .init(initialValue: FinancialsSettingsViewModel(configManager: configManager))
     }
 
     var body: some View {

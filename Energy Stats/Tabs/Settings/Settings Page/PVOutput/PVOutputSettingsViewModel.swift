@@ -8,20 +8,21 @@
 import Energy_Stats_Core
 import SwiftUI
 
-class PVOutputSettingsViewModel: ObservableObject, HasLoadState, ViewDataProviding {
+@Observable
+class PVOutputSettingsViewModel: HasLoadState, ViewDataProviding {
     typealias ViewData = PVOutputSettingsViewData
 
     private var configManager: ConfigManaging
     private let pvOutputService: PVOutputServicing
     private let foxService: Networking
 
-    @Published var viewData: ViewData = .initial { didSet {
+    var viewData: ViewData = .initial { didSet {
         isDirty = viewData != originalValue
     }}
-    @Published var isDirty = false
+    var isDirty = false
     var originalValue: ViewData? = nil
-    @Published var state: LoadState = .inactive
-    @Published var alertContent: AlertContent?
+    var state: LoadState = .inactive
+    var alertContent: AlertContent?
 
     init(configManager: ConfigManaging, foxService: Networking, pvOutputService: PVOutputServicing) {
         self.configManager = configManager

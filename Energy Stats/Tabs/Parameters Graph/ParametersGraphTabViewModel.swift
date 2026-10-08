@@ -156,7 +156,7 @@ class ParametersGraphTabViewModel: HasLoadState, VisibilityTracking {
 
     var selectedGraphVariables: [String] {
         if configManager.selectedParameterGraphVariables.count == 0 {
-            return ParameterGraphVariableChooserViewModel.DefaultGraphVariables
+            return DefaultParameterGraphVariables
         } else {
             return configManager.selectedParameterGraphVariables
         }

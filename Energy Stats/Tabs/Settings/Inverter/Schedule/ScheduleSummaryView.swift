@@ -13,10 +13,10 @@ struct ScheduleSummaryView: View {
     private let networking: Networking
     private let configManager: ConfigManaging
     private let templateStore: TemplateStoring
-    @StateObject var viewModel: ScheduleSummaryViewModel
+    @State private var viewModel: ScheduleSummaryViewModel
 
     init(networking: Networking, configManager: ConfigManaging, templateStore: TemplateStoring) {
-        _viewModel = StateObject(wrappedValue: ScheduleSummaryViewModel(networking: networking, configManager: configManager, templateStore: templateStore))
+        _viewModel = .init(initialValue: ScheduleSummaryViewModel(networking: networking, configManager: configManager, templateStore: templateStore))
         self.networking = networking
         self.configManager = configManager
         self.templateStore = templateStore

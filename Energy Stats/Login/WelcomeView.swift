@@ -9,7 +9,7 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct WelcomeView: View {
-    @ObservedObject var userManager: UserManager
+    let userManager: UserManager
     @State private var size: CGSize = .zero
     @State private var showingAPIKey = false
     @Environment(\.verticalSizeClass) var verticalSizeClass

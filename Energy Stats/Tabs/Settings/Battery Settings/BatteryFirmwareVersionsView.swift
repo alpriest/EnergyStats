@@ -9,10 +9,10 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct BatteryFirmwareVersionsView: View {
-    @StateObject var viewModel: BatteryFirmwareVersionsViewModel
+    @State var viewModel: BatteryFirmwareVersionsViewModel
 
     init(network: Networking, config: ConfigManaging) {
-        self._viewModel = StateObject(wrappedValue: BatteryFirmwareVersionsViewModel(network: network, config: config))
+        _viewModel = .init(initialValue: BatteryFirmwareVersionsViewModel(network: network, config: config))
     }
 
     var body: some View {

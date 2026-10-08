@@ -34,6 +34,38 @@ class DoubleTests: XCTestCase {
         assertSameValueAs(first: 1.200.capped(.mild), second: 1.200)
     }
 
+    func test_payback_returnsNil_when_installationIsInCurrentMonth() {
+        let result = InstallationPaybackEstimate(
+            installationPurchasePrice: 1_000,
+            totalSavingsToDate: 200,
+            installationDate: .now
+        )
+
+        XCTAssertNil(result)
+    }
+
+    func test_payback_returnsNil_when_savingsAreZero() {
+        let installationDate = Calendar.current.date(byAdding: .month, value: -2, to: .now)!
+        let result = InstallationPaybackEstimate(
+            installationPurchasePrice: 1_000,
+            totalSavingsToDate: 0,
+            installationDate: installationDate
+        )
+
+        XCTAssertNil(result)
+    }
+
+    func test_payback_calculatesFiniteEstimate() {
+        let installationDate = Calendar.current.date(byAdding: .month, value: -2, to: .now)!
+        let result = InstallationPaybackEstimate(
+            installationPurchasePrice: 1_000,
+            totalSavingsToDate: 200,
+            installationDate: installationDate
+        )
+
+        XCTAssertEqual(result?.monthsRemaining, 8)
+    }
+
     private func assertSameValueAs(first: Double, second: Double, file: StaticString = #file, line: UInt = #line) {
         if abs(first - second) > 0.0000001 {
             XCTFail("Expected \(first) to equal \(second)", file: file, line: line)

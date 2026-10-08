@@ -9,7 +9,7 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct InverterWorkModeView: View {
-    @StateObject var viewModel: InverterWorkModeViewModel
+    @StateObject private var viewModel: InverterWorkModeViewModel
 
     init(networking: Networking, config: ConfigManaging) {
         _viewModel = StateObject(wrappedValue: InverterWorkModeViewModel(networking: networking, config: config))

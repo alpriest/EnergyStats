@@ -18,17 +18,18 @@ struct PeakShavingViewData: Copiable {
     }
 }
 
-class PeakShavingViewModel: ObservableObject, HasLoadState, ViewDataProviding {
+@Observable
+class PeakShavingViewModel: HasLoadState, ViewDataProviding {
     typealias ViewData = PeakShavingViewData
 
     private let networking: Networking
     private let config: ConfigManaging
-    @Published var state: LoadState = .inactive
-    @Published var alertContent: AlertContent?
-    @Published var viewData: ViewData = ViewData(importLimit: "", soc: "", supported: false) { didSet {
+    var state: LoadState = .inactive
+    var alertContent: AlertContent?
+    var viewData: ViewData = ViewData(importLimit: "", soc: "", supported: false) { didSet {
         isDirty = originalValue != viewData
     }}
-    @Published var isDirty = false
+    var isDirty = false
     var originalValue: ViewData?
 
     init(networking: Networking, config: ConfigManaging) {

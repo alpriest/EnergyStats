@@ -8,11 +8,12 @@
 import Energy_Stats_Core
 import SwiftUI
 
-class BatteryFirmwareVersionsViewModel: ObservableObject, HasLoadState {
-    @Published var state = LoadState.inactive
-    @Published var modules: [DeviceBatteryModule] = []
-    let network: Networking
-    let config: ConfigManaging
+@Observable
+class BatteryFirmwareVersionsViewModel: HasLoadState {
+    var state = LoadState.inactive
+    var modules: [DeviceBatteryModule] = []
+    private let network: Networking
+    private let config: ConfigManaging
 
     init(network: Networking, config: ConfigManaging) {
         self.network = network

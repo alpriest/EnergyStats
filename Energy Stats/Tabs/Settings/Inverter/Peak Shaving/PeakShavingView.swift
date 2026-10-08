@@ -9,7 +9,7 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct PeakShavingView: View {
-    @StateObject var viewModel: PeakShavingViewModel
+    @State private var viewModel: PeakShavingViewModel
     @FocusState private var focusedField: Field?
 
     private enum Field: Hashable {
@@ -18,7 +18,7 @@ struct PeakShavingView: View {
     }
 
     init(networking: Networking, config: ConfigManaging) {
-        _viewModel = StateObject(wrappedValue: PeakShavingViewModel(networking: networking, config: config))
+        _viewModel = .init(initialValue: PeakShavingViewModel(networking: networking, config: config))
     }
 
     var body: some View {

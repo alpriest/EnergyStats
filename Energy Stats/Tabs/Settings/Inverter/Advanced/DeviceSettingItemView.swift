@@ -9,7 +9,7 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct DeviceSettingItemView: View {
-    @StateObject var viewModel: DeviceSettingItemViewModel
+    @StateObject private var viewModel: DeviceSettingItemViewModel
     private let configManager: ConfigManaging
     @FocusState private var focusedField: Field?
 

@@ -10,7 +10,7 @@ import StoreKit
 import SwiftUI
 
 struct BatterySOCSettingsView: View {
-    @StateObject var viewModel: BatterySOCSettingsViewModel
+    @State private var viewModel: BatterySOCSettingsViewModel
     @Environment(\.requestReview) private var requestReview
     @FocusState private var focusedField: Field?
 
@@ -20,7 +20,7 @@ struct BatterySOCSettingsView: View {
     }
 
     init(networking: Networking, config: ConfigManaging, onSOCchange: @escaping () -> Void) {
-        self._viewModel = StateObject(wrappedValue: BatterySOCSettingsViewModel(networking: networking, config: config, onSOCchange: onSOCchange))
+        _viewModel = .init(initialValue: BatterySOCSettingsViewModel(networking: networking, config: config, onSOCchange: onSOCchange))
     }
 
     var body: some View {
