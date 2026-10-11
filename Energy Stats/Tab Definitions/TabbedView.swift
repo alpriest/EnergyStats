@@ -86,6 +86,6 @@ struct TabbedView: View {
                configManager: ConfigManager.preview(),
                solarForecastProvider: { DemoSolcast() },
                templateStore: TemplateStore.preview())
-        .environmentObject(VersionChecker(urlSession: URLSession.shared))
+        .environment(VersionChecker(urlSession: URLSession.shared))
 }
 #endif

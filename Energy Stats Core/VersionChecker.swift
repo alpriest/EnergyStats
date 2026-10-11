@@ -9,9 +9,10 @@ import Combine
 import Foundation
 
 // Added in version 2.10
-public class VersionChecker: ObservableObject {
-    @Published public var latestVersion: String = ""
-    @Published public var upgradeAvailable: Bool = false
+@Observable
+public class VersionChecker {
+    public var latestVersion: String = ""
+    public var upgradeAvailable: Bool = false
     public let appStoreUrl = URL(string: "https://itunes.apple.com/app/id1644492526?mt=8")!
 
     private let urlSession: URLSessionProtocol

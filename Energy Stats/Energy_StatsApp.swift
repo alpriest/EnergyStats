@@ -45,7 +45,6 @@ struct Energy_StatsApp: App {
     let versionChecker: VersionChecker
     let templateStore: TemplateStoring
     let bannerAlertManager = BannerAlertManager()
-    private var cancellables = Set<AnyCancellable>()
 
     @Environment(\.scenePhase) private var scenePhase
 
@@ -75,15 +74,6 @@ struct Energy_StatsApp: App {
             try? (network as? NetworkService)?.clearHistoricStore()
         })
         templateStore = TemplateStore(config: configManager)
-        userManager.$isLoggedIn
-            .combineLatest(appSettingsStore.publisher)
-            .sink { [keychainStore] isLoggedIn, _ in
-                let apiKey = try? keychainStore.getToken()
-                
-                if let isLoggedIn {
-                    Self.watchDelegate.sendCurrentConfig(apiKey: apiKey, isLoggedIn: isLoggedIn)
-                }
-            }.store(in: &cancellables)
         versionChecker = VersionChecker(urlSession: urlSession)
     }
 
@@ -102,10 +92,16 @@ struct Energy_StatsApp: App {
                     solarForecastProvider: solarForecastProvider,
                     templateStore: templateStore
                 )
-                .environmentObject(userManager)
-                .environmentObject(KeychainWrapper(keychainStore))
-                .environmentObject(versionChecker)
-                .environmentObject(bannerAlertManager)
+                .environment(userManager)
+                .environment(KeychainWrapper(keychainStore))
+                .environment(versionChecker)
+                .environment(bannerAlertManager)
+                .onChange(of: userManager.isLoggedIn) { _, _ in
+                    sendCurrentConfig()
+                }
+                .onReceive(appSettingsStore.publisher) { _ in
+                    sendCurrentConfig()
+                }
                 .onChange(of: scenePhase) {
                     if case .active = scenePhase {
                         performOnActivationTasks(solarForecastProvider: solarForecastProvider)
@@ -116,6 +112,12 @@ struct Energy_StatsApp: App {
                 }
             }
         }
+    }
+
+    private func sendCurrentConfig() {
+        guard let isLoggedIn = userManager.isLoggedIn else { return }
+        let apiKey = try? keychainStore.getToken()
+        Self.watchDelegate.sendCurrentConfig(apiKey: apiKey, isLoggedIn: isLoggedIn)
     }
 
     private func performOnActivationTasks(solarForecastProvider: SolarForecastProviding) {
@@ -192,7 +194,8 @@ struct Energy_StatsApp: App {
     }
 }
 
-class KeychainWrapper: ObservableObject {
+@Observable
+class KeychainWrapper {
     var store: KeychainStoring
 
     init(_ store: KeychainStoring) {

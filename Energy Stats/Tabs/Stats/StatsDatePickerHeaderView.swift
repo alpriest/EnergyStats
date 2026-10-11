@@ -9,11 +9,21 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct StatsDatePickerHeaderView: View {
-    @ObservedObject var viewModel: StatsDatePickerHeaderViewModel
+    @State private var viewModel: StatsDatePickerHeaderViewModel
     @Binding var statsTimeUsageGraphStyle: StatsTimeUsageGraphStyle
     @Binding var showingEnergyBreakdownGraph: Bool
     @State private var showingCustomRangePicker = false
     @State private var graphSettingsShowing = false
+    
+    init(displayMode: StatsGraphDisplayMode,
+         statsTimeUsageGraphStyle: Binding<StatsTimeUsageGraphStyle>,
+         showingEnergyBreakdownGraph: Binding<Bool>,
+         onDisplayModeChange: @escaping (StatsGraphDisplayMode) -> ()
+    ) {
+        self._viewModel = .init(initialValue: StatsDatePickerHeaderViewModel(displayMode: displayMode, onDisplayModeChange: onDisplayModeChange))
+        self._statsTimeUsageGraphStyle = statsTimeUsageGraphStyle
+        self._showingEnergyBreakdownGraph = showingEnergyBreakdownGraph
+    }
 
     var body: some View {
         HStack {
@@ -217,9 +227,10 @@ struct StatsDatePickerHeaderView: View {
 
 #Preview {
     StatsDatePickerHeaderView(
-        viewModel: StatsDatePickerHeaderViewModel(.constant(.custom(.now, .now, .days))),
+        displayMode: .custom(.now, .now, .days),
         statsTimeUsageGraphStyle: .constant(.bar),
-        showingEnergyBreakdownGraph: .constant(true)
+        showingEnergyBreakdownGraph: .constant(true),
+        onDisplayModeChange: { _ in }
     )
     .frame(height: 200)
 }

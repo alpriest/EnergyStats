@@ -18,44 +18,47 @@ enum DatePickerRange: Equatable {
     }
 }
 
-class StatsDatePickerHeaderViewModel: ObservableObject {
-    @Published var range: DatePickerRange = .day {
+@Observable
+class StatsDatePickerHeaderViewModel {
+    var range: DatePickerRange = .day {
         didSet { updateDisplayMode() }
     }
 
-    @Published var month = 0
-    @Published var year = 0 {
+    var month = 0
+    var year = 0 {
         didSet { updateDisplayMode() }
     }
 
-    @Published var date = Date.now {
+    var date = Date.now {
         didSet { updateDisplayMode() }
     }
 
-    @Published private(set) var customStartDateString: String = ""
-    @Published private(set) var customEndDateString: String = ""
-    @Published private(set) var customStartDate: Date = .now.addingTimeInterval(-86400 * 31) { didSet {
+    private(set) var customStartDateString: String = ""
+    private(set) var customEndDateString: String = ""
+    private(set) var customStartDate: Date = .now.addingTimeInterval(-86400 * 31) { didSet {
         guard case .custom(_, _, let unit) = range else { return }
         customStartDateString = Self.format(customStartDate, unit: unit)
     }}
-    @Published private(set) var customEndDate: Date = .now { didSet {
+    private(set) var customEndDate: Date = .now { didSet {
         guard case .custom(_, _, let unit) = range else { return }
         customEndDateString = Self.format(customEndDate, unit: unit)
     }}
 
     var yearRange = 2010 ... (Calendar.current.component(.year, from: .now))
-    @Published var canIncrease = false
-    @Published var canDecrease = true
+    var canIncrease = false
+    var canDecrease = true
 
-    @MainActor @Binding var displayMode: StatsGraphDisplayMode
+    private var onDisplayModeChange: (StatsGraphDisplayMode) -> ()
     private var isInitialised = false
+    private let displayMode: StatsGraphDisplayMode
 
-    init(_ displayMode: Binding<StatsGraphDisplayMode>) {
-        _displayMode = displayMode
+    init(displayMode: StatsGraphDisplayMode, onDisplayModeChange: @escaping (StatsGraphDisplayMode) -> ()) {
+        self.onDisplayModeChange = onDisplayModeChange
+        self.displayMode = displayMode
         year = Calendar.current.component(.year, from: .now)
         month = Calendar.current.component(.month, from: .now) - 1
 
-        switch displayMode.wrappedValue {
+        switch displayMode {
         case .day(let date):
             self.date = date
             range = .day
@@ -73,7 +76,7 @@ class StatsDatePickerHeaderViewModel: ObservableObject {
         }
 
         isInitialised = true
-        updateQuickNavigationButtons(displayMode.wrappedValue)
+        updateQuickNavigationButtons(displayMode)
     }
     
     private static func format(_ date: Date, unit: CustomDateRangeDisplayUnit) -> String {
@@ -93,7 +96,7 @@ class StatsDatePickerHeaderViewModel: ObservableObject {
             customStartDate = start
             customEndDate = end
 
-            displayMode = .custom(start, end, unit)
+            onDisplayModeChange(.custom(start, end, unit))
         }
     }
 
@@ -170,7 +173,7 @@ class StatsDatePickerHeaderViewModel: ObservableObject {
             let updatedDisplayMode = makeUpdatedDisplayMode()
 
             if updatedDisplayMode != displayMode {
-                displayMode = updatedDisplayMode
+                onDisplayModeChange(updatedDisplayMode)
                 updateQuickNavigationButtons(displayMode)
             }
         }

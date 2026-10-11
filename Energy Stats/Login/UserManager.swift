@@ -10,13 +10,14 @@ import Energy_Stats_Core
 import Foundation
 import SwiftUI
 
-class UserManager: ObservableObject, HasLoadState {
+@Observable
+class UserManager: HasLoadState {
     private var configManager: ConfigManaging
     private let store: KeychainStoring
     private let onLogout: () -> Void
     private var cancellables = Set<AnyCancellable>()
-    @MainActor @Published var state = LoadState.inactive
-    @MainActor @Published var isLoggedIn: Bool?
+    @MainActor var state = LoadState.inactive
+    @MainActor var isLoggedIn: Bool?
 
     init(store: KeychainStoring, configManager: ConfigManaging, onLogout: @escaping () -> Void = {}) {
         self.store = store

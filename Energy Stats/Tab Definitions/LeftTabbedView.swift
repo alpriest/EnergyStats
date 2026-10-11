@@ -24,6 +24,19 @@ struct LeftTabbedView: View {
     let templateStore: TemplateStoring
     @State private var settingsTabViewModel: SettingsTabViewModel
     @State private var parametersGraphTabViewModel: ParametersGraphTabViewModel
+    @AppStorage("leftTabbedBarVisibility") private var storedVisibility = StoredSplitVisibility.automatic.rawValue
+
+    private var leftBarVisibility: Binding<NavigationSplitViewVisibility> {
+        Binding(
+            get: {
+                StoredSplitVisibility(rawValue: storedVisibility)?
+                    .value ?? .automatic
+            },
+            set: {
+                storedVisibility = StoredSplitVisibility($0).rawValue
+            }
+        )
+    }
 
     init(networking: Networking, userManager: UserManager, configManager: ConfigManaging, solarForecastProvider: @escaping SolarForecastProviding, templateStore: TemplateStoring) {
         self.networking = networking
@@ -45,6 +58,7 @@ struct LeftTabbedView: View {
 
     var body: some View {
         NavigationSplitView(
+            columnVisibility: leftBarVisibility,
             sidebar: {
                 List {
                     NavigationLink {
@@ -119,5 +133,31 @@ struct LeftTabbedView: View {
                    configManager: ConfigManager.preview(),
                    solarForecastProvider: { DemoSolcast() },
                    templateStore: TemplateStore.preview())
-        .environmentObject(VersionChecker(urlSession: URLSession.shared))
+        .environment(VersionChecker(urlSession: URLSession.shared))
 }
+
+private enum StoredSplitVisibility: String {
+    case automatic
+    case all
+    case doubleColumn
+    case detailOnly
+
+    var value: NavigationSplitViewVisibility {
+        switch self {
+        case .automatic: .automatic
+        case .all: .all
+        case .doubleColumn: .doubleColumn
+        case .detailOnly: .detailOnly
+        }
+    }
+
+    init(_ value: NavigationSplitViewVisibility) {
+        switch value {
+        case .all: self = .all
+        case .doubleColumn: self = .doubleColumn
+        case .detailOnly: self = .detailOnly
+        default: self = .automatic
+        }
+    }
+}
+

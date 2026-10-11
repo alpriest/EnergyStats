@@ -26,15 +26,16 @@ struct SolarBandingSettingsViewData: Copiable {
     }
 }
 
-class SolarBandingSettingsViewModel: ObservableObject, ViewDataProviding {
+@Observable
+class SolarBandingSettingsViewModel: ViewDataProviding {
     typealias ViewData = SolarBandingSettingsViewData
     
     private var configManager: ConfigManaging
     let haptic = UIImpactFeedbackGenerator()
-    @Published var viewData: ViewData { didSet {
+    var viewData: ViewData { didSet {
         isDirty = viewData != originalValue
     }}
-    @Published var isDirty = false
+    var isDirty = false
     var originalValue: ViewData?
 
     init(configManager: ConfigManaging) {
@@ -62,7 +63,7 @@ class SolarBandingSettingsViewModel: ObservableObject, ViewDataProviding {
 }
 
 struct SolarBandingSettingsView: View {
-    @StateObject private var viewModel: SolarBandingSettingsViewModel
+    @State private var viewModel: SolarBandingSettingsViewModel
     @State private var breakpoint1: Double
     @State private var breakpoint2: Double
     @State private var breakpoint3: Double
@@ -71,7 +72,7 @@ struct SolarBandingSettingsView: View {
     private let appSettings: AppSettings
 
     init(configManager: ConfigManaging) {
-        _viewModel = .init(wrappedValue: SolarBandingSettingsViewModel(configManager: configManager))
+        _viewModel = .init(initialValue: SolarBandingSettingsViewModel(configManager: configManager))
         self.breakpoint1 = configManager.solarDefinitions.breakPoint1
         self.breakpoint2 = configManager.solarDefinitions.breakPoint2
         self.breakpoint3 = configManager.solarDefinitions.breakPoint3

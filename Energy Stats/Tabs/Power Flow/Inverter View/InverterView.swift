@@ -19,11 +19,17 @@ struct InverterPath: Shape {
 }
 
 struct InverterView: View {
-    let viewModel: InverterViewModel
+    private let viewModel: InverterViewModel
     @Environment(\.verticalSizeClass) private var verticalSizeClass
-    @EnvironmentObject var alertManager: BannerAlertManager
+    @Environment(BannerAlertManager.self) private var alertManager: BannerAlertManager
     @State private var alertContent: AlertContent?
-    let appSettings: AppSettings
+    private let appSettings: AppSettings
+    
+    init(viewModel: InverterViewModel, alertContent: AlertContent? = nil, appSettings: AppSettings) {
+        self.viewModel = viewModel
+        self.alertContent = alertContent
+        self.appSettings = appSettings
+    }
 
     var body: some View {
         ZStack {

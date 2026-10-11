@@ -6,6 +6,7 @@
 //
 
 import Energy_Stats_Core
+import Observation
 import SwiftUI
 
 struct DeviceSettingItemViewData: Copiable {
@@ -34,7 +35,8 @@ struct DeviceSettingItemViewData: Copiable {
     }
 }
 
-class DeviceSettingItemViewModel: ObservableObject, HasLoadState, ViewDataProviding {
+@Observable
+class DeviceSettingItemViewModel: HasLoadState, ViewDataProviding {
     typealias ViewData = DeviceSettingItemViewData
     
     private let item: DeviceSettingsItem
@@ -43,9 +45,9 @@ class DeviceSettingItemViewModel: ObservableObject, HasLoadState, ViewDataProvid
     var title: String { item.title }
     var description: String { item.description }
     var behaviour: String { item.behaviour }
-    @Published var state = LoadState.inactive
-    @Published var alertContent: AlertContent?
-    @Published var viewData: ViewData = .init(
+    var state = LoadState.inactive
+    var alertContent: AlertContent?
+    var viewData: ViewData = .init(
         value: "",
         unit: "",
         title: "",
@@ -54,7 +56,7 @@ class DeviceSettingItemViewModel: ObservableObject, HasLoadState, ViewDataProvid
     ) { didSet {
         isDirty = viewData != originalValue
     }}
-    @Published var isDirty = false
+    var isDirty = false
     var originalValue: ViewData?
 
     init(item: DeviceSettingsItem, networking: Networking, configManager: ConfigManaging) {

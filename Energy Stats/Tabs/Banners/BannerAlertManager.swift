@@ -12,10 +12,11 @@ enum BannerAlertType {
     case offline
 }
 
-class BannerAlertManager: ObservableObject {
-    @Published var bannerAlert: BannerAlertType? = nil
+@Observable
+class BannerAlertManager {
+    var bannerAlert: BannerAlertType? = nil
     private var seenOfflineBanner = false
-
+    
     init(bannerAlert: BannerAlertType? = nil) {
         self.bannerAlert = bannerAlert
 
@@ -31,7 +32,7 @@ class BannerAlertManager: ObservableObject {
 }
 
 struct BannerAlertView: View {
-    @EnvironmentObject var alertManager: BannerAlertManager
+    @Environment(BannerAlertManager.self) private var alertManager: BannerAlertManager
 
     var body: some View {
         VStack {
@@ -51,5 +52,5 @@ struct BannerAlertView: View {
     VStack {
         BannerAlertView()
     }
-    .environmentObject(BannerAlertManager(bannerAlert: .offline))
+    .environment(BannerAlertManager(bannerAlert: .offline))
 }

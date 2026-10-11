@@ -7,6 +7,7 @@
 
 import Energy_Stats_Core
 import Foundation
+import Observation
 
 struct InverterWorkModeViewData: Copiable {
     var items: [SelectableItem]
@@ -16,18 +17,19 @@ struct InverterWorkModeViewData: Copiable {
     }
 }
 
-class InverterWorkModeViewModel: ObservableObject, ViewDataProviding {
+@Observable
+class InverterWorkModeViewModel: ViewDataProviding {
     typealias ViewData = InverterWorkModeViewData
     
     private let networking: Networking
     private var config: ConfigManaging
-    @Published var state: LoadState = .inactive
-    @Published var alertContent: AlertContent?
-    @Published var viewData: ViewData = ViewData(items: []) { didSet {
+    var state: LoadState = .inactive
+    var alertContent: AlertContent?
+    var viewData: ViewData = ViewData(items: []) { didSet {
         isDirty = viewData != originalValue
     }}
     var originalValue: ViewData?
-    @Published var isDirty = false
+    var isDirty = false
 
     init(networking: Networking, config: ConfigManaging) {
         self.networking = networking

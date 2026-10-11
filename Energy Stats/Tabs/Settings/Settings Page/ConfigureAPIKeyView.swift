@@ -9,7 +9,7 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct ConfigureAPIKeyView: View {
-    @EnvironmentObject var wrapper: KeychainWrapper
+    @Environment(KeychainWrapper.self) var wrapper: KeychainWrapper
     @State private var apiKey: String = ""
     @State private var originalValue: String = ""
     @State private var isDirty = false
@@ -43,7 +43,7 @@ struct ConfigureAPIKeyView: View {
 #Preview {
     NavigationView {
         ConfigureAPIKeyView()
-            .environmentObject(KeychainWrapper(KeychainStore.preview()))
+            .environment(KeychainWrapper(KeychainStore.preview()))
     }
 }
 #endif

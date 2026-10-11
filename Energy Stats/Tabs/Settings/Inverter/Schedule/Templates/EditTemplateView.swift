@@ -9,7 +9,7 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct EditTemplateView: View {
-    @StateObject private var viewModel: EditTemplateViewModel
+    @State private var viewModel: EditTemplateViewModel
     @State private var presentConfirmation = false
     @Environment(\.presentationMode) var presentationMode
     @State private var newTemplateName: String = ""
@@ -19,14 +19,12 @@ struct EditTemplateView: View {
     private let configManager: ConfigManaging
 
     init(networking: Networking, templateStore: TemplateStoring, configManager: ConfigManaging, template: ScheduleTemplate) {
-        _viewModel = StateObject(
-            wrappedValue: EditTemplateViewModel(
-                networking: networking,
-                templateStore: templateStore,
-                config: configManager,
-                template: template
-            )
-        )
+        _viewModel = .init(initialValue: EditTemplateViewModel(
+            networking: networking,
+            templateStore: templateStore,
+            config: configManager,
+            template: template
+        ))
         self.configManager = configManager
     }
 

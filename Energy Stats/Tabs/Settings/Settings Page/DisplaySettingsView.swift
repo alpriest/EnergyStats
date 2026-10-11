@@ -89,12 +89,6 @@ struct DisplaySettingsView: View {
             
             makeCurrencySymbolField()
             
-            //            NavigationLink {
-            //                GraphColoursSettingsView(viewModel: GraphColoursSettingsViewModel(configManager: configManager))
-            //            } label: {
-            //                Text("Graph colours")
-            //            }
-            
         } header: {
             Text("Display")
         } footer: {

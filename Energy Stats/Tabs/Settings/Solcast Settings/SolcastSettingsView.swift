@@ -9,11 +9,11 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct SolcastSettingsView: View {
-    @StateObject private var viewModel: SolcastSettingsViewModel
+    @State private var viewModel: SolcastSettingsViewModel
     @FocusState private var isFocused: Bool
 
     init(configManager: ConfigManaging, solarService: @escaping SolarForecastProviding) {
-        _viewModel = .init(wrappedValue: SolcastSettingsViewModel(configManager: configManager, solarService: solarService))
+        _viewModel = .init(initialValue: SolcastSettingsViewModel(configManager: configManager, solarService: solarService))
     }
 
     var body: some View {

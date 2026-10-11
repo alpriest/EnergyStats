@@ -9,7 +9,7 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct OfflineDeviceBannerView: View {
-    @EnvironmentObject var alertManager: BannerAlertManager
+    @Environment(BannerAlertManager.self) private var alertManager: BannerAlertManager
 
     var body: some View {
         Group {
@@ -68,5 +68,5 @@ struct OfflineDeviceBannerView: View {
 
 #Preview {
     OfflineDeviceBannerView()
-        .environmentObject(BannerAlertManager())
+        .environment(BannerAlertManager())
 }

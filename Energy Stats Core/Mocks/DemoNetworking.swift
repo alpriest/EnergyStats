@@ -166,25 +166,48 @@ class DemoAPI: FoxAPIServicing {
             throw NetworkError.missingData
         }
 
-        return OpenQueryResponse(time: Date(),
-                                 deviceSN: deviceSN,
-                                 datas: [
-                                     OpenQueryResponse.Data(unit: "kW", variable: "feedinPower", value: 0.0, stringValue: nil),
-                                     OpenQueryResponse.Data(unit: "kW", variable: "gridConsumptionPower", value: 2.634, stringValue: nil),
-                                     OpenQueryResponse.Data(unit: "kW", variable: "loadsPower", value: 2.708, stringValue: nil),
-                                     OpenQueryResponse.Data(unit: "kW", variable: "SoC", value: 65, stringValue: nil),
-                                     OpenQueryResponse.Data(unit: "kW", variable: "batDischargePower", value: 0, stringValue: nil),
-                                     OpenQueryResponse.Data(unit: "kW", variable: "batChargePower", value: 1.200, stringValue: nil),
-                                     OpenQueryResponse.Data(unit: "kW", variable: "generationPower", value: 0.071, stringValue: nil),
-                                     OpenQueryResponse.Data(unit: "kW", variable: "pvPower", value: 0.222, stringValue: nil),
-                                     OpenQueryResponse.Data(unit: "kW", variable: "meterPower2", value: 0.222, stringValue: nil),
-                                     OpenQueryResponse.Data(unit: "kW", variable: "pv1Power", value: 0.111, stringValue: nil),
-                                     OpenQueryResponse.Data(unit: "kW", variable: "pv2Power", value: 0.111, stringValue: nil),
-                                     OpenQueryResponse.Data(unit: "℃", variable: "ambientTemperation", value: 32.5, stringValue: nil),
-                                     OpenQueryResponse.Data(unit: "℃", variable: "invTemperation", value: 23.2, stringValue: nil),
-                                     OpenQueryResponse.Data(unit: "℃", variable: "batTemperature", value: 26.5, stringValue: nil),
-                                     OpenQueryResponse.Data(unit: "0.01kWh", variable: "ResidualEnergy", value: 1087, stringValue: nil)
-                                 ])
+        let datas: [OpenQueryResponse.Data]
+
+        switch deviceSN {
+        case "1234":
+            datas = [
+                OpenQueryResponse.Data(unit: "kW", variable: "feedinPower", value: 0.0, stringValue: nil),
+                OpenQueryResponse.Data(unit: "kW", variable: "gridConsumptionPower", value: 1.184, stringValue: nil),
+                OpenQueryResponse.Data(unit: "kW", variable: "loadsPower", value: 1.184, stringValue: nil),
+                OpenQueryResponse.Data(unit: "kW", variable: "SoC", value: 42, stringValue: nil),
+                OpenQueryResponse.Data(unit: "kW", variable: "batDischargePower", value: 0.0, stringValue: nil),
+                OpenQueryResponse.Data(unit: "kW", variable: "batChargePower", value: 0.0, stringValue: nil),
+                OpenQueryResponse.Data(unit: "kW", variable: "generationPower", value: 0.0, stringValue: nil),
+                OpenQueryResponse.Data(unit: "kW", variable: "pvPower", value: 0.0, stringValue: nil),
+                OpenQueryResponse.Data(unit: "kW", variable: "meterPower2", value: 0.0, stringValue: nil),
+                OpenQueryResponse.Data(unit: "kW", variable: "pv1Power", value: 0.0, stringValue: nil),
+                OpenQueryResponse.Data(unit: "kW", variable: "pv2Power", value: 0.0, stringValue: nil),
+                OpenQueryResponse.Data(unit: "℃", variable: "ambientTemperation", value: 21.4, stringValue: nil),
+                OpenQueryResponse.Data(unit: "℃", variable: "invTemperation", value: 19.8, stringValue: nil),
+                OpenQueryResponse.Data(unit: "℃", variable: "batTemperature", value: 22.1, stringValue: nil),
+                OpenQueryResponse.Data(unit: "0.01kWh", variable: "ResidualEnergy", value: 712, stringValue: nil)
+            ]
+        default:
+            datas = [
+                OpenQueryResponse.Data(unit: "kW", variable: "feedinPower", value: 0.0, stringValue: nil),
+                OpenQueryResponse.Data(unit: "kW", variable: "gridConsumptionPower", value: 2.634, stringValue: nil),
+                OpenQueryResponse.Data(unit: "kW", variable: "loadsPower", value: 2.708, stringValue: nil),
+                OpenQueryResponse.Data(unit: "kW", variable: "SoC", value: 65, stringValue: nil),
+                OpenQueryResponse.Data(unit: "kW", variable: "batDischargePower", value: 0, stringValue: nil),
+                OpenQueryResponse.Data(unit: "kW", variable: "batChargePower", value: 1.200, stringValue: nil),
+                OpenQueryResponse.Data(unit: "kW", variable: "generationPower", value: 0.071, stringValue: nil),
+                OpenQueryResponse.Data(unit: "kW", variable: "pvPower", value: 0.222, stringValue: nil),
+                OpenQueryResponse.Data(unit: "kW", variable: "meterPower2", value: 0.222, stringValue: nil),
+                OpenQueryResponse.Data(unit: "kW", variable: "pv1Power", value: 0.111, stringValue: nil),
+                OpenQueryResponse.Data(unit: "kW", variable: "pv2Power", value: 0.111, stringValue: nil),
+                OpenQueryResponse.Data(unit: "℃", variable: "ambientTemperation", value: 32.5, stringValue: nil),
+                OpenQueryResponse.Data(unit: "℃", variable: "invTemperation", value: 23.2, stringValue: nil),
+                OpenQueryResponse.Data(unit: "℃", variable: "batTemperature", value: 26.5, stringValue: nil),
+                OpenQueryResponse.Data(unit: "0.01kWh", variable: "ResidualEnergy", value: 1087, stringValue: nil)
+            ]
+        }
+
+        return OpenQueryResponse(time: Date(), deviceSN: deviceSN, datas: datas)
     }
 
     func openapi_fetchHistory(deviceSN: String, variables: [String], start: Date, end: Date) async throws -> OpenHistoryResponse {
@@ -192,11 +215,12 @@ class DemoAPI: FoxAPIServicing {
             throw NetworkError.missingData
         }
 
-        let data = try self.data(filename: "history-temp")
+        let filename = deviceSN == "1234" ? "history" : "history-temp"
+        let data = try self.data(filename: filename)
         let response = try JSONDecoder().decode(NetworkResponse<[OpenHistoryResponse]>.self, from: data)
         guard let result = response.result?.first else { throw NetworkError.invalidToken }
 
-        return OpenHistoryResponse(deviceSN: result.deviceSN,
+        return OpenHistoryResponse(deviceSN: deviceSN,
                                    datas: result.datas.map {
                                        OpenHistoryResponse.Data(
                                            unit: $0.unit,

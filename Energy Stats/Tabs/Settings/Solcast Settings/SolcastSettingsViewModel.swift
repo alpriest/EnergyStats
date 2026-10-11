@@ -27,28 +27,29 @@ struct SolcastSettingsViewData: Copiable, Equatable {
     }
 }
 
-class SolcastSettingsViewModel: ObservableObject, ViewDataProviding {
+@Observable
+class SolcastSettingsViewModel: ViewDataProviding {
     typealias ViewData = SolcastSettingsViewData
     
     private var configManager: ConfigManaging
-    @Published var alertContent: AlertContent?
+    var alertContent: AlertContent?
     private let solarService: SolarForecastProviding
-    @Published var fetchSolcastOnAppLaunch: Bool = false {
+    var fetchSolcastOnAppLaunch: Bool = false {
         didSet {
             configManager.fetchSolcastOnAppLaunch = fetchSolcastOnAppLaunch
         }
     }
-    @Published var showTodayPercentageSolarForecastAchieved: Bool = false {
+    var showTodayPercentageSolarForecastAchieved: Bool = false {
         didSet {
             configManager.showTodayPercentageSolarForecastAchieved = showTodayPercentageSolarForecastAchieved
         }
     }
 
-    @Published var viewData: ViewData = .init(sites: [], apiKey: "") { didSet {
+    var viewData: ViewData = .init(sites: [], apiKey: "") { didSet {
         isDirty = viewData != originalValue
     }}
-    @Published var isDirty = false
-    @Published var useRollingSolarForecastTotalForToday: Bool {
+    var isDirty = false
+    var useRollingSolarForecastTotalForToday: Bool {
         didSet {
             configManager.useRollingSolarForecastTotalForToday = useRollingSolarForecastTotalForToday
         }
@@ -58,7 +59,7 @@ class SolcastSettingsViewModel: ObservableObject, ViewDataProviding {
     init(configManager: ConfigManaging, solarService: @escaping SolarForecastProviding) {
         self.configManager = configManager
         self.solarService = solarService
-        _useRollingSolarForecastTotalForToday = .init(initialValue: configManager.useRollingSolarForecastTotalForToday)
+        useRollingSolarForecastTotalForToday = configManager.useRollingSolarForecastTotalForToday
 
         let viewData = ViewData(sites: configManager.solcastSettings.sites,
                                                apiKey: configManager.solcastSettings.apiKey ?? "")

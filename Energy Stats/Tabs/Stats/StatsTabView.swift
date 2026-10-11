@@ -25,9 +25,10 @@ struct StatsTabView: View {
 
     var body: some View {
         VStack {
-            StatsDatePickerHeaderView(viewModel: StatsDatePickerHeaderViewModel($viewModel.displayMode),
+            StatsDatePickerHeaderView(displayMode: viewModel.displayMode,
                                       statsTimeUsageGraphStyle: $viewModel.statsTimeUsageGraphStyle,
-                                      showingEnergyBreakdownGraph: $showingEnergyBreakdownGraph)
+                                      showingEnergyBreakdownGraph: $showingEnergyBreakdownGraph,
+                                      onDisplayModeChange: { viewModel.displayMode = $0 })
                     
             ScrollView {
                 VStack {

@@ -24,7 +24,7 @@ struct ErrorAlertView: View {
     let message: String
     let options: ErrorAlertViewOptions
     let retry: () -> Void
-    @EnvironmentObject var userManager: UserManager
+    @Environment(UserManager.self) var userManager: UserManager
     @State private var buttonWidth: CGFloat = .zero
     @State private var showingFatalError = false
     @State private var alertContent: AlertContent?
@@ -132,6 +132,6 @@ struct ErrorAlertView: View {
         options: .all,
         retry: {}
     )
-    .environmentObject(UserManager.preview())
+    .environment(UserManager.preview())
 }
 #endif

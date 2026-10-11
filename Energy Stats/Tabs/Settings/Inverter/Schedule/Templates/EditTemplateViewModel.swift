@@ -9,11 +9,12 @@ import Energy_Stats_Core
 import Foundation
 import SwiftUI
 
-class EditTemplateViewModel: ObservableObject, HasLoadState, HasAlertContent {
-    @Published var state: LoadState = .inactive
-    @Published var alertContent: AlertContent?
-    @Published var schedule: Schedule?
-    @Published var name: String?
+@Observable
+class EditTemplateViewModel: HasLoadState, HasAlertContent {
+    var state: LoadState = .inactive
+    var alertContent: AlertContent?
+    var schedule: Schedule?
+    var name: String?
     private let config: ConfigManaging
     private let templateStore: TemplateStoring
     private let networking: Networking

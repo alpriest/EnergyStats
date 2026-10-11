@@ -8,11 +8,12 @@
 import Energy_Stats_Core
 import Foundation
 
-class ScheduleTemplateListViewModel: ObservableObject {
-    let templateStore: TemplateStoring
-    let config: ConfigManaging
-    @Published var templates: [ScheduleTemplate] = []
-    @Published var state: LoadState = .inactive
+@Observable
+class ScheduleTemplateListViewModel {
+    private let templateStore: TemplateStoring
+    private let config: ConfigManaging
+    var templates: [ScheduleTemplate] = []
+    var state: LoadState = .inactive
 
     init(templateStore: TemplateStoring, config: ConfigManaging) {
         self.templateStore = templateStore

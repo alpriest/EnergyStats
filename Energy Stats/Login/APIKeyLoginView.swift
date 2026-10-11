@@ -9,7 +9,7 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct APIKeyLoginView: View {
-    @ObservedObject var userManager: UserManager
+    @Environment(UserManager.self) var userManager: UserManager
     @State private var apiKey = ""
     @State private var errorMessage: String?
 
@@ -63,7 +63,7 @@ struct APIKeyLoginView: View {
             HowToObtainAPIKeyView()
         }
         .padding()
-        .onReceive(userManager.$state) { state in
+        .onChange(of: userManager.state) { _, state in
             if case let .error(error, message) = state {
                 if let cause = error as? NetworkError {
                     switch cause {
@@ -86,6 +86,6 @@ struct APIKeyLoginView: View {
 
 #if DEBUG
 #Preview {
-    APIKeyLoginView(userManager: UserManager.preview())
+    APIKeyLoginView().environment(UserManager.preview())
 }
 #endif

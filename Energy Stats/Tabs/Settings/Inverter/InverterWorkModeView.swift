@@ -9,13 +9,15 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct InverterWorkModeView: View {
-    @StateObject private var viewModel: InverterWorkModeViewModel
+    @State private var viewModel: InverterWorkModeViewModel
 
     init(networking: Networking, config: ConfigManaging) {
-        _viewModel = StateObject(wrappedValue: InverterWorkModeViewModel(networking: networking, config: config))
+        _viewModel = State(initialValue: InverterWorkModeViewModel(networking: networking, config: config))
     }
 
     var body: some View {
+        @Bindable var viewModel = viewModel
+
         VStack(spacing: 0) {
             Form {
                 Section {

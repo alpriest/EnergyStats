@@ -10,11 +10,19 @@ import SwiftUI
 
 struct SettingsTabView: View {
     @Bindable var viewModel: SettingsTabViewModel
-    let configManager: ConfigManaging
-    let networking: Networking
-    let solarService: SolarForecastProviding
-    let templateStore: TemplateStoring
-    @EnvironmentObject var versionChecker: VersionChecker
+    private let configManager: ConfigManaging
+    private let networking: Networking
+    private let solarService: SolarForecastProviding
+    private let templateStore: TemplateStoring
+    @Environment(VersionChecker.self) private var versionChecker
+    
+    init(viewModel: SettingsTabViewModel, configManager: ConfigManaging, networking: Networking, solarService: @escaping SolarForecastProviding, templateStore: TemplateStoring) {
+        self.viewModel = viewModel
+        self.configManager = configManager
+        self.networking = networking
+        self.solarService = solarService
+        self.templateStore = templateStore
+    }
 
     var body: some View {
         NavigationStack {            
@@ -138,7 +146,7 @@ struct SettingsTabView: View {
             solarService: { DemoSolcast() },
             templateStore: TemplateStore.preview()
         )
-        .environmentObject(VersionChecker(urlSession: URLSession.shared))
+        .environment(VersionChecker(urlSession: URLSession.shared))
     }
 }
 #endif

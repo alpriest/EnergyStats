@@ -9,11 +9,11 @@ import Combine
 import Energy_Stats_Core
 import SwiftUI
 
-class EditPhaseViewModel: ObservableObject, ViewDataProviding {
+class EditPhaseViewModel: ViewDataProviding {
     typealias ViewData = EditPhaseViewData
 
     private let configManager: ConfigManaging
-    @Published var viewData = ViewData(
+    var viewData = ViewData(
         id: "",
         startTime: .now,
         endTime: .now,
@@ -28,12 +28,12 @@ class EditPhaseViewModel: ObservableObject, ViewDataProviding {
         validate()
         isDirty = viewData != originalValue
     }}
+    var isDirty = false
+    var originalValue: ViewData?
+    var timeError: LocalizedStringKey?
+    var fieldErrors: [String: LocalizedStringKey] = [:]
     private let onChange: (SchedulePhaseV3) -> Void
     private let onDelete: (String) -> Void
-    @Published var isDirty = false
-    var originalValue: ViewData?
-    @Published var timeError: LocalizedStringKey?
-    @Published var fieldErrors: [String: LocalizedStringKey] = [:]
     private let schedule: Schedule
     private let phase: SchedulePhaseV3
 

@@ -9,7 +9,7 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct EditScheduleView: View {
-    @StateObject private var viewModel: EditScheduleViewModel
+    @State private var viewModel: EditScheduleViewModel
     @State private var presentConfirmation = false
     @Environment(\.presentationMode) var presentationMode
     private let configManager: ConfigManaging
@@ -19,8 +19,7 @@ struct EditScheduleView: View {
         configManager: ConfigManaging,
         schedule: Schedule
     ) {
-        _viewModel = StateObject(
-            wrappedValue: EditScheduleViewModel(
+        _viewModel = .init(initialValue: EditScheduleViewModel(
                 networking: networking,
                 configManager: configManager,
                 schedule: schedule

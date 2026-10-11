@@ -17,15 +17,16 @@ struct EditScheduleViewData: Copiable {
     }
 }
 
-class EditScheduleViewModel: ObservableObject, HasLoadState, HasAlertContent, ViewDataProviding {
+@Observable
+class EditScheduleViewModel: HasLoadState, HasAlertContent, ViewDataProviding {
     typealias ViewData = EditScheduleViewData
     
     private let networking: Networking
     private let configManager: ConfigManaging
-    @Published var state: LoadState = .inactive
-    @Published var alertContent: AlertContent?
-    @Published var viewData: ViewData
-    @Published var isDirty = false
+    var state: LoadState = .inactive
+    var alertContent: AlertContent?
+    var viewData: ViewData
+    var isDirty = false
     var originalValue: ViewData?
     
     init(networking: Networking, configManager: ConfigManaging, schedule: Schedule) {

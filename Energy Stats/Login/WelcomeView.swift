@@ -36,7 +36,7 @@ struct WelcomeView: View {
 
             if showingAPIKey {
                 ScrollView {
-                    APIKeyLoginView(userManager: userManager)
+                    APIKeyLoginView()
                         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 400, maxHeight: .infinity)
                 }
             } else {
@@ -61,7 +61,7 @@ struct WelcomeView: View {
 
             if showingAPIKey {
                 ScrollView {
-                    APIKeyLoginView(userManager: userManager)
+                    APIKeyLoginView()
                         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 400, maxHeight: .infinity)
                 }
             } else {

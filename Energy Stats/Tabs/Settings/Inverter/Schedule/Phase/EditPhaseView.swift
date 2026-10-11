@@ -12,7 +12,7 @@ import SwiftUI
 struct EditPhaseView: View {
     @Environment(\.presentationMode) var presentationMode
     private let onDelete: (String) -> Void
-    @StateObject private var viewModel: EditPhaseViewModel
+    @State private var viewModel: EditPhaseViewModel
     @FocusState private var focusedField: String?
     @State private var showingAdvanced = false
 
@@ -24,15 +24,13 @@ struct EditPhaseView: View {
         onDelete: @escaping (String) -> Void
     ) {
         self.onDelete = onDelete
-        self._viewModel = StateObject(
-            wrappedValue: EditPhaseViewModel(
-                configManager: configManager,
-                schedule: schedule,
-                phase: phase,
-                onChange: onChange,
-                onDelete: onDelete
-            )
-        )
+        self._viewModel = .init(initialValue: EditPhaseViewModel(
+            configManager: configManager,
+            schedule: schedule,
+            phase: phase,
+            onChange: onChange,
+            onDelete: onDelete
+        ))
     }
 
     var body: some View {

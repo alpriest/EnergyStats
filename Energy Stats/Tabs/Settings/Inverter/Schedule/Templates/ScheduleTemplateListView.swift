@@ -9,7 +9,7 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct ScheduleTemplateListView: View {
-    @StateObject private var viewModel: ScheduleTemplateListViewModel
+    @State private var viewModel: ScheduleTemplateListViewModel
     @State private var selectedTemplateID: String?
     private let config: ConfigManaging
     private let networking: Networking
@@ -21,7 +21,7 @@ struct ScheduleTemplateListView: View {
     @State private var replaceExistingTemplates = false
 
     init(networking: Networking, templateStore: TemplateStoring, config: ConfigManaging) {
-        _viewModel = StateObject(wrappedValue: ScheduleTemplateListViewModel(templateStore: templateStore, config: config))
+        _viewModel = .init(initialValue: ScheduleTemplateListViewModel(templateStore: templateStore, config: config))
         self.networking = networking
         self.templateStore = templateStore
         self.config = config

@@ -9,7 +9,7 @@ import Energy_Stats_Core
 import SwiftUI
 
 struct DeviceSettingItemView: View {
-    @StateObject private var viewModel: DeviceSettingItemViewModel
+    @State private var viewModel: DeviceSettingItemViewModel
     private let configManager: ConfigManaging
     @FocusState private var focusedField: Field?
 
@@ -19,10 +19,12 @@ struct DeviceSettingItemView: View {
     
     init(item: DeviceSettingsItem, networking: Networking, configManager: ConfigManaging) {
         self.configManager = configManager
-        _viewModel = StateObject(wrappedValue: DeviceSettingItemViewModel(item: item, networking: networking, configManager: configManager))
+        _viewModel = State(initialValue: DeviceSettingItemViewModel(item: item, networking: networking, configManager: configManager))
     }
 
     var body: some View {
+        @Bindable var viewModel = viewModel
+
         VStack(spacing: 0) {
             Form {
                 Section {
