@@ -32,14 +32,16 @@ struct PowerFlowTabView: View {
     }
 
     var body: some View {
-        VStack {
-            switch viewModel.state {
+        GeometryReader { geometry in
+            VStack {
+                switch viewModel.state {
             case let .loaded(summary):
                 LoadedPowerFlowView(
                     configManager: viewModel.configManager,
                     viewModel: summary,
                     networking: networking,
-                    templateStore: templateStore
+                    templateStore: templateStore,
+                    availableWidth: geometry.size.width
                 )
 
                 Spacer()
@@ -55,6 +57,7 @@ struct PowerFlowTabView: View {
                 Spacer()
                 LoadingView(message: .loading)
                 Spacer()
+            }
             }
         }
         .frame(maxWidth: .infinity)

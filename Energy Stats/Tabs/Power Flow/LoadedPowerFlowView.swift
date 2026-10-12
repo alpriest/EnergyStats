@@ -13,6 +13,7 @@ struct LoadedPowerFlowView: View {
     @State private var iconFooterHeight: Double = 0
     @State private var appSettings: AppSettings
     @State private var size: CGSize = .zero
+    private let availableWidth: CGFloat
     private let configManager: ConfigManaging
     private let viewModel: LoadedPowerFlowViewModel
     private var appSettingsPublisher: LatestAppSettingsPublisher
@@ -26,12 +27,14 @@ struct LoadedPowerFlowView: View {
         configManager: ConfigManaging,
         viewModel: LoadedPowerFlowViewModel,
         networking: Networking,
-        templateStore: TemplateStoring
+        templateStore: TemplateStoring,
+        availableWidth: CGFloat
     ) {
         self.configManager = configManager
         self.viewModel = viewModel
         self.networking = networking
         self.templateStore = templateStore
+        self.availableWidth = availableWidth
         self.appSettingsPublisher = configManager.appSettingsPublisher
         self.appSettings = configManager.currentAppSettings
     }
@@ -84,12 +87,13 @@ struct LoadedPowerFlowView: View {
 
             inverterScheduleQuickLink()
         }
+        .frame(maxWidth: .infinity)
         .transition(.opacity)
         .opacity(isReady ? 1 : 0)
         .allowsHitTesting(isReady)
         .accessibilityHidden(!isReady)
-        .onChange(of: size) {
-            if !isReady, size != .zero {
+        .onChange(of: size) { _, newSize in
+            if !isReady, newSize != .zero {
                 DispatchQueue.main.async { // force the animation to appear on the next layout pass
                     withAnimation(.easeIn) {
                         isReady = true
@@ -266,12 +270,12 @@ struct LoadedPowerFlowView: View {
     private let horizontalPadding: CGFloat = 14
     private var bottomColumnWidth: CGFloat {
         let spacerCount: CGFloat = 3 + (showingBatteryColumn ? 1 : 0)
-        return (UIWindowScene.width - (horizontalPadding * spacerCount)) / (showingBatteryColumn ? 3 : 2)
+        return (availableWidth - (horizontalPadding * spacerCount)) / (showingBatteryColumn ? 3 : 2)
     }
 
     private var topColumnWidth: CGFloat {
         let spacerCount: CGFloat = 4
-        return (UIWindowScene.width - (horizontalPadding * spacerCount)) / (showingCT2Column ? 2.8 : 2)
+        return (availableWidth - (horizontalPadding * spacerCount)) / (showingCT2Column ? 2.8 : 2)
     }
 
     private var columnCount: CGFloat {
@@ -308,7 +312,8 @@ struct PowerSummaryView_Previews: PreviewProvider {
         LoadedPowerFlowView(configManager: ConfigManager.preview(),
                             viewModel: LoadedPowerFlowViewModel.any(battery: .any(), appSettings: appSettings),
                             networking: NetworkService.preview(),
-                            templateStore: TemplateStore.preview())
+                            templateStore: TemplateStore.preview(),
+                            availableWidth: 390)
             .environment(\.locale, .init(identifier: "en"))
     }
 }
@@ -316,16 +321,6 @@ struct PowerSummaryView_Previews: PreviewProvider {
 extension UIWindowScene {
     static var isVerticallyConstrained: Bool {
         height < 740
-    }
-
-    static var width: Double {
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let window = windowScene.windows.first
-        {
-            return window.frame.size.width
-        } else {
-            return UIScreen.main.bounds.width
-        }
     }
 
     private static var height: Double {
