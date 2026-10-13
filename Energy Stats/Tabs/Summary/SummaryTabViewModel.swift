@@ -143,7 +143,7 @@ class SummaryTabViewModel: HasLoadState {
                     )
                 } else { nil }
                 
-                let bestSolarData: SummaryViewData.BestSolarData? = findBest(grouping: grouping, in: solarGenerationByMonth)
+                let bestSolarData: SummaryViewData.BestSolarData? = findBestTimePeriod(grouping: grouping, in: solarGenerationByMonth)
                 
                 self.viewData = SummaryViewData(
                     solar: approximationsViewModel.totalsViewModel?.solar,
@@ -179,7 +179,7 @@ class SummaryTabViewModel: HasLoadState {
         }
 
         self.viewData = viewData.copy {
-            $0.bestSolar = findBest(grouping: grouping, in: solarGenerationByMonth)
+            $0.bestSolar = findBestTimePeriod(grouping: grouping, in: solarGenerationByMonth)
         }
     }
     
@@ -294,7 +294,6 @@ class SummaryTabViewModel: HasLoadState {
             }
             
             if monthlyTotal == 0 && (month < currentMonth || year < currentYear) {
-//            if monthlyTotal == 0 && ((month < currentMonth && year == currentYear) || month < currentMonth || year < currentYear) {
                 emptyMonth = month + 1
                 break
             }
@@ -347,7 +346,7 @@ class SummaryTabViewModel: HasLoadState {
                                                                 solar: solar)
     }
     
-    private func findBest(grouping: TimeGrouping, in periods: [SolarGenerationPeriodAmount]) -> SummaryViewData.BestSolarData? {
+    private func findBestTimePeriod(grouping: TimeGrouping, in periods: [SolarGenerationPeriodAmount]) -> SummaryViewData.BestSolarData? {
         let filteredPeriods = periods.filter { $0.amount > 0 }.removingExtremeOutliers(by: \.amount)
 
         switch grouping {
