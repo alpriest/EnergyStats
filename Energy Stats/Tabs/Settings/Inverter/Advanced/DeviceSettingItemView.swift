@@ -54,9 +54,10 @@ struct DeviceSettingItemView: View {
         }
         .navigationTitle(viewModel.title)
         .navigationBarTitleDisplayMode(.inline)
-        .loadable(viewModel.state, retry: { viewModel.load() })
+        .loadable(viewModel.state, retry: { viewModel.retry() })
         .alert(alertContent: $viewModel.alertContent)
         .protectedContent(configManager)
+        .onAppear { viewModel.load() }
     }
 }
 

@@ -74,11 +74,11 @@ class BatteryHeatingScheduleSettingsViewModel: HasLoadState, ViewDataProviding {
     init(networking: Networking, config: ConfigManaging) {
         self.networking = networking
         self.config = config
-
-        load()
     }
 
     func load() {
+        guard state == .inactive else { return }
+
         Task { @MainActor in
             guard state == .inactive else { return }
             guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
@@ -124,6 +124,12 @@ class BatteryHeatingScheduleSettingsViewModel: HasLoadState, ViewDataProviding {
                 await setState(.error(error, String(key: .couldNotLoadHeatingSchedule)))
             }
         }
+    }
+
+    func retry() {
+        guard state.isError else { return }
+        state = .inactive
+        load()
     }
 
     func save() {

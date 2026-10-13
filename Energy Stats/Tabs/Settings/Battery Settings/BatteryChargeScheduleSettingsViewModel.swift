@@ -47,11 +47,11 @@ final class BatteryChargeScheduleSettingsViewModel: @preconcurrency HasLoadState
     init(networking: Networking, config: ConfigManaging) {
         self.networking = networking
         self.config = config
-
-        load()
     }
 
     func load() {
+        guard state == .inactive else { return }
+
         Task { @MainActor in
             guard state == .inactive else { return }
             guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
@@ -87,6 +87,12 @@ final class BatteryChargeScheduleSettingsViewModel: @preconcurrency HasLoadState
                 await setState(.error(error, "Could not load settings"))
             }
         }
+    }
+
+    func retry() {
+        guard state.isError else { return }
+        state = .inactive
+        load()
     }
 
     func save() {

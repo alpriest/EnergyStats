@@ -44,13 +44,13 @@ class BatterySOCSettingsViewModel: HasLoadState, ViewDataProviding {
         self.networking = networking
         self.config = config
         self.onSOCchange = onSOCchange
-
-        load()
     }
 
     func load() {
+        guard state == .inactive else { return }
+
         Task { @MainActor in
-            guard !state.isActive else { return }
+            guard state == .inactive else { return }
             guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
             await setState(.active(.loading))
 
@@ -68,6 +68,12 @@ class BatterySOCSettingsViewModel: HasLoadState, ViewDataProviding {
                 await setState(.error(error, "Could not load settings"))
             }
         }
+    }
+
+    func retry() {
+        guard state.isError else { return }
+        state = .inactive
+        load()
     }
 
     func save() {

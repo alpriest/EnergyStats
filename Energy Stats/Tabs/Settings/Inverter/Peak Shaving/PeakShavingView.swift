@@ -67,8 +67,9 @@ struct PeakShavingView: View {
         }
         .navigationTitle(.peakShaving)
         .navigationBarTitleDisplayMode(.inline)
-        .loadable(viewModel.state, retry: { viewModel.load() })
+        .loadable(viewModel.state, retry: { viewModel.retry() })
         .alert(alertContent: $viewModel.alertContent)
+        .onAppear { viewModel.load() }
     }
 }
 

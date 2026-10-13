@@ -34,11 +34,11 @@ class InverterWorkModeViewModel: ViewDataProviding {
     init(networking: Networking, config: ConfigManaging) {
         self.networking = networking
         self.config = config
-
-        load()
     }
 
     func load() {
+        guard state == .inactive else { return }
+
         Task { @MainActor in
             guard !state.isActive else { return }
             guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
@@ -59,6 +59,12 @@ class InverterWorkModeViewModel: ViewDataProviding {
                 state = .error(error, "Could not load work mode")
             }
         }
+    }
+
+    func retry() {
+        guard state.isError else { return }
+        state = .inactive
+        load()
     }
 
     private func fetchWorkmodes(deviceSN: String) async throws -> [String] {

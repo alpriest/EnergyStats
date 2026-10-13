@@ -52,12 +52,13 @@ struct InverterWorkModeView: View {
 
             BottomButtonsView(dirty: viewModel.isDirty) { viewModel.save() }
         }
-        .loadable(viewModel.state) {
-            viewModel.load()
-        }
+        .loadable(viewModel.state, retry: {
+            viewModel.retry()
+        })
         .alert(alertContent: $viewModel.alertContent)
         .navigationTitle("Work Mode")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear { viewModel.load() }
     }
 }
 

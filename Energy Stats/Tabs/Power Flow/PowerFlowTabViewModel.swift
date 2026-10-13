@@ -108,11 +108,11 @@ class PowerFlowTabViewModel: @preconcurrency VisibilityTracking {
 
         self.currentDeviceCancellable = self.configManager.currentDevice
             .removeDuplicates()
-            .drop { _ in self.latestDeviceSN == nil }
-            .drop { self.latestDeviceSN == $0?.deviceSN }
-            .sink { _ in
-                Task {
-                    await self.timerFired()
+            .drop { [weak self] _ in self?.latestDeviceSN == nil }
+            .drop { [weak self] in self?.latestDeviceSN == $0?.deviceSN }
+            .sink { [weak self] _ in
+                Task { [weak self] in
+                    await self?.timerFired()
                 }
             }
     }
@@ -120,15 +120,23 @@ class PowerFlowTabViewModel: @preconcurrency VisibilityTracking {
     func addThemeChangeObserver() {
         guard self.themeChangeCancellable == nil else { return }
 
-        self.themeChangeCancellable = self.configManager.appSettingsPublisher.sink { theme in
+        self.themeChangeCancellable = self.configManager.appSettingsPublisher.sink { [weak self] theme in
+            guard let self else { return }
+
             if self.appSettings.showInverterTemperature != theme.showInverterTemperature ||
                 self.appSettings.shouldInvertCT2 != theme.shouldInvertCT2 ||
                 self.appSettings.shouldCombineCT2WithPVPower != theme.shouldCombineCT2WithPVPower
             {
                 self.appSettings = theme
-                Task { await self.loadData() }
+                Task { [weak self] in
+                    await self?.loadData()
+                }
             }
         }
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     @MainActor

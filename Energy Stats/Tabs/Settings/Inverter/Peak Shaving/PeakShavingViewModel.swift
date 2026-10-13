@@ -35,13 +35,13 @@ class PeakShavingViewModel: HasLoadState, ViewDataProviding {
     init(networking: Networking, config: ConfigManaging) {
         self.networking = networking
         self.config = config
-
-        load()
     }
 
     func load() {
+        guard state == .inactive else { return }
+
         Task { @MainActor in
-            guard state == .inactive else { return }
+            guard !state.isActive else { return }
             guard let deviceSN = config.currentDevice.value?.deviceSN else { return }
             await setState(.active(.loading))
 
@@ -58,13 +58,19 @@ class PeakShavingViewModel: HasLoadState, ViewDataProviding {
 
                 await setState(.inactive)
             } catch {
-                if case NetworkError.foxServerError(40257, "") = error {
+                if case NetworkError.foxServerError(40257, _) = error {
                     await setState(.inactive)
                 } else {
                     await setState(.error(error, "Could not load settings"))
                 }
             }
         }
+    }
+
+    func retry() {
+        guard state.isError else { return }
+        state = .inactive
+        load()
     }
 
     func save() {

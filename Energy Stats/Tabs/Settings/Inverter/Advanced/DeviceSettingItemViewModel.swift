@@ -69,17 +69,17 @@ class DeviceSettingItemViewModel: HasLoadState, ViewDataProviding {
             $0.description = item.description
             $0.behaviour = item.behaviour
         }
-
-        load()
     }
 
     func load() {
-        guard !state.isActive else { return }
+        guard state == .inactive else { return }
+
         guard let deviceSN = configManager.currentDevice.value?.deviceSN else { return }
 
-        Task {
+        Task { @MainActor in
+            guard !state.isActive else { return }
             await setState(.active(.loading))
-
+            
             do {
                 let response = try await networking.fetchDeviceSettingsItem(deviceSN: deviceSN, item: item)
 
@@ -100,6 +100,12 @@ class DeviceSettingItemViewModel: HasLoadState, ViewDataProviding {
                 await setState(.error(error, "Could not load settings"))
             }
         }
+    }
+
+    func retry() {
+        guard state.isError else { return }
+        state = .inactive
+        load()
     }
 
     func save() {
