@@ -848,10 +848,13 @@ public extension ConfigManager {
 
     internal class PreviewConfigManager: ConfigManager {
         convenience init(config: StoredConfig, networking: Networking, appSettings: AppSettings = .mock()) {
+            var appSettingsStore = AppSettingsStore()
+            appSettingsStore.update(appSettings)
+
             self.init(
                 networking: networking,
                 config: config,
-                appSettingsStore: AppSettingsStore(),
+                appSettingsStore: appSettingsStore,
                 keychainStore: KeychainStore.preview()
             )
             TaskIgnoringErrors { [weak self] in try await self?.fetchDevices() }

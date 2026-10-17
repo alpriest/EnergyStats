@@ -164,7 +164,6 @@ struct LoadedPowerFlowView: View {
                 SolarStringsView(displayStrings: viewModel.displayStrings,
                                  todaysGeneration: viewModel.todaysGeneration,
                                  appSettings: appSettings)
-                    .offset(x: 0, y: -20)
 
                 if appSettings.ct2DisplayMode == .separateIcon {
                     PowerFlowView(
@@ -305,16 +304,22 @@ struct LoadedPowerFlowView: View {
 }
 
 struct PowerSummaryView_Previews: PreviewProvider {
-    static let strings = PowerFlowStringsSettings.none.copy(enabled: true, pv1Name: "Front", pv2Name: "Rear")
     static var previews: some View {
-        let appSettings = AppSettings.mock().copy(powerFlowStrings: PowerFlowStringsSettings.none.copy(enabled: true, pv1Name: "Front", pv2Name: "To"))
+        let appSettings = AppSettings.mock().copy(
+                powerFlowStrings: PowerFlowStringsSettings.none.copy(enabled: true,
+                                                                     pv1Name: "Front",
+                                                                     pv2Name: "Back",
+                                                                     pv3Name: "Left",
+                                                                     pv4Name: "Right")
+        )
 
-        LoadedPowerFlowView(configManager: ConfigManager.preview(),
+        LoadedPowerFlowView(configManager: ConfigManager.preview(appSettings: appSettings),
                             viewModel: LoadedPowerFlowViewModel.any(battery: .any(), appSettings: appSettings),
                             networking: NetworkService.preview(),
                             templateStore: TemplateStore.preview(),
                             availableWidth: 390)
             .environment(\.locale, .init(identifier: "en"))
+            .environment(BannerAlertManager())
     }
 }
 

@@ -213,7 +213,12 @@ public extension LoadedPowerFlowViewModel {
     static func any(battery: BatteryViewModel = .any(), appSettings: AppSettings = .mock()) -> LoadedPowerFlowViewModel {
         let values = CurrentValues(
             solarPower: 3.0,
-            solarStringsPower: [StringPower(name: "PV1", amount: 2.5), StringPower(name: "PV2", amount: 0.5)],
+            solarStringsPower: [
+                StringPower(name: "PV1", amount: 2.5),
+                StringPower(name: "PV2", amount: 0.5),
+                StringPower(name: "PV3", amount: 3.2),
+                StringPower(name: "PV4", amount: 0.4)
+            ],
             grid: 0.71,
             homeConsumption: 1.5,
             temperatures: InverterTemperatures(ambient: 4.0, inverter: 9.0),
