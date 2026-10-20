@@ -21,7 +21,7 @@ struct ContentView: View {
         Group {
             switch userManager.isLoggedIn {
             case nil:
-                TabView{
+                TabView {
                     LoadingView(message: .loading)
                         .transition(.opacity)
                 }

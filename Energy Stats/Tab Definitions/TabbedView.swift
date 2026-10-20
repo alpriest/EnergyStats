@@ -44,37 +44,37 @@ struct TabbedView: View {
     var body: some View {
         TabView {
             PowerFlowTabView(
-                    configManager: configManager,
-                    networking: networking,
-                    userManager: userManager,
-                    templateStore: templateStore,
-                    solarForecastProvider: solarForecastProvider
-                ).tabItem {
-                    PowerFlowTabItem()
+                configManager: configManager,
+                networking: networking,
+                userManager: userManager,
+                templateStore: templateStore,
+                solarForecastProvider: solarForecastProvider
+            ).tabItem {
+                PowerFlowTabItem()
+            }
+
+            StatsTabView(configManager: configManager, networking: networking)
+                .tabItem {
+                    StatsTabItem()
                 }
-                
-                StatsTabView(configManager: configManager, networking: networking)
-                    .tabItem {
-                        StatsTabItem()
-                    }
-                
-                ParametersGraphTabView(configManager: configManager, viewModel: parametersGraphTabViewModel)
-                    .tabItem {
-                        ParametersTabItem()
-                    }
-                
-                SummaryTabView(configManager: configManager, networking: networking, solarForecastProvider: solarForecastProvider)
-                    .tabItem {
-                        SummaryTabItem()
-                    }
-                
-                SettingsTabView(viewModel: settingsTabViewModel, configManager: configManager, networking: networking, solarService: solarForecastProvider, templateStore: templateStore)
-                    .tabItem {
-                        SettingsTabItem()
-                    }
-                    .if(configManager.isDemoUser) {
-                        $0.badge("demo")
-                    }
+
+            ParametersGraphTabView(configManager: configManager, viewModel: parametersGraphTabViewModel)
+                .tabItem {
+                    ParametersTabItem()
+                }
+
+            SummaryTabView(configManager: configManager, networking: networking, solarForecastProvider: solarForecastProvider)
+                .tabItem {
+                    SummaryTabItem()
+                }
+
+            SettingsTabView(viewModel: settingsTabViewModel, configManager: configManager, networking: networking, solarService: solarForecastProvider, templateStore: templateStore)
+                .tabItem {
+                    SettingsTabItem()
+                }
+                .if(configManager.isDemoUser) {
+                    $0.badge("demo")
+                }
         }
     }
 }

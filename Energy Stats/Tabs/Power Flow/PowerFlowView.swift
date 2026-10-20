@@ -9,7 +9,7 @@ import Combine
 import Energy_Stats_Core
 import SwiftUI
 
-struct PowerFlowView<S: Shape>: View {
+struct PowerFlowView<S: Shape, A: View>: View {
     private let amount: Double
     private let animationDuration: Double
     private let appSettings: AppSettings
@@ -18,6 +18,7 @@ struct PowerFlowView<S: Shape>: View {
     private let shape: S
     private let showAmount: Bool
     private let verticalAlignment: Alignment
+    private let additionalAmountView: () -> A
 
     init(
         amount: Double,
@@ -26,7 +27,8 @@ struct PowerFlowView<S: Shape>: View {
         type: AmountType,
         shape: S = Line(),
         showAmount: Bool = true,
-        verticalAlignment: Alignment = .bottom
+        verticalAlignment: Alignment = .bottom,
+        additionalAmountView: @escaping () -> A = { EmptyView() }
     ) {
         self.amount = amount
         self.appSettings = appSettings
@@ -35,6 +37,7 @@ struct PowerFlowView<S: Shape>: View {
         self.shape = shape
         self.showAmount = showAmount
         self.verticalAlignment = verticalAlignment
+        self.additionalAmountView = additionalAmountView
 
         animationDuration = (0.4 + abs(amount)) * 10.0
     }
@@ -52,8 +55,11 @@ struct PowerFlowView<S: Shape>: View {
                     }
 
                     if showAmount {
-                        PowerAmountView(amount: amount, backgroundColor: lineColor, textColor: textColor, appSettings: appSettings, type: type)
-                            .font(.body.bold())
+                        VStack {
+                            PowerAmountView(amount: amount, backgroundColor: lineColor, textColor: textColor, appSettings: appSettings, type: type)
+                                .font(.body.bold())
+                            additionalAmountView()
+                        }
                     }
                 }
             } else {

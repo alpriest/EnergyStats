@@ -149,7 +149,7 @@ class PowerFlowTabViewModel: @preconcurrency VisibilityTracking {
     func loadData() async {
         guard self.isLoading == false else { return }
         self.isLoading = true
-
+        
         defer { isLoading = false }
 
         do {

@@ -35,29 +35,30 @@ struct PowerFlowTabView: View {
         GeometryReader { geometry in
             VStack {
                 switch viewModel.state {
-            case let .loaded(summary):
-                LoadedPowerFlowView(
-                    configManager: viewModel.configManager,
-                    viewModel: summary,
-                    networking: networking,
-                    templateStore: templateStore,
-                    availableWidth: geometry.size.width
-                )
+                case let .loaded(summary):
+                    LoadedPowerFlowView(
+                        configManager: viewModel.configManager,
+                        viewModel: summary,
+                        networking: networking,
+                        templateStore: templateStore,
+                        availableWidth: geometry.size.width
+                    )
 
-                Spacer()
+                    Spacer()
 
-                updateFooterMessage()
-            case let .failed(error, reason):
-                Spacer()
-                ErrorAlertView(cause: error, message: reason, options: .all) {
-                    Task { await viewModel.timerFired() }
+                    updateFooterMessage()
+                case let .failed(error, reason):
+                    Spacer()
+                    ErrorAlertView(cause: error, message: reason, options: .all) {
+                        Task { await viewModel.timerFired() }
+                    }
+                    Spacer()
+                case .unloaded:
+                    Spacer()
+                    LoadingView(message: .loading)
+                        .frame(maxWidth: .infinity)
+                    Spacer()
                 }
-                Spacer()
-            case .unloaded:
-                Spacer()
-                LoadingView(message: .loading)
-                Spacer()
-            }
             }
         }
         .frame(maxWidth: .infinity)

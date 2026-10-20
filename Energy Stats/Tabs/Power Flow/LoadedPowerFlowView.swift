@@ -133,7 +133,10 @@ struct LoadedPowerFlowView: View {
                         Spacer().frame(width: horizontalPadding)
                     }
 
-                    SolarPowerView(appSettings: appSettings, viewModel: SolarPowerViewModel(solar: viewModel.solar))
+                    SolarPowerView(appSettings: appSettings,
+                                   viewModel: SolarPowerViewModel(solar: viewModel.solar,
+                                                                  displayStrings: viewModel.displayStrings,
+                                                                  todaysGeneration: viewModel.todaysGeneration))
                         .frame(width: topColumnWidth, height: size.height * aboveInverterHeightPercentage)
                         .overlay(
                             Group {
@@ -160,10 +163,6 @@ struct LoadedPowerFlowView: View {
                             .frame(width: topColumnWidth, height: size.height * aboveInverterHeightPercentage)
                     }
                 }
-
-                SolarStringsView(displayStrings: viewModel.displayStrings,
-                                 todaysGeneration: viewModel.todaysGeneration,
-                                 appSettings: appSettings)
 
                 if appSettings.ct2DisplayMode == .separateIcon {
                     PowerFlowView(
