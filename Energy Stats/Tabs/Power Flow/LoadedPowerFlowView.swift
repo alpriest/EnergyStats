@@ -298,7 +298,7 @@ struct LoadedPowerFlowView: View {
     }
 
     private var aboveInverterHeightPercentage: CGFloat {
-        0.35
+        0.37
     }
 }
 

@@ -40,6 +40,8 @@ public class UserDefaultsConfig: StoredConfig {
         UserDefaults.shared.removeObject(forKey: "showFinancialEarnings")
         UserDefaults.shared.removeObject(forKey: "feedInUnitPrice")
         UserDefaults.shared.removeObject(forKey: "gridImportUnitPrice")
+        UserDefaults.shared.removeObject(forKey: "feedInPriceRates")
+        UserDefaults.shared.removeObject(forKey: "gridImportPriceRates")
         UserDefaults.shared.removeObject(forKey: "currencySymbol")
         UserDefaults.shared.removeObject(forKey: "shouldCombineCT2WithPVPower")
         UserDefaults.shared.removeObject(forKey: "selectedParameterGraphVariables")
@@ -415,4 +417,30 @@ public class UserDefaultsConfig: StoredConfig {
     
     @UserDefaultsStoredBool(key: "useRollingSolarForecastTotalForToday", defaultValue: true)
     public var useRollingSolarForecastTotalForToday: Bool
+    
+    public var feedInPriceRates: [EnergyPriceRate] {
+        get { priceRates(forKey: "feedInPriceRates", legacyPrice: feedInUnitPrice) }
+        set { savePriceRates(newValue, forKey: "feedInPriceRates") }
+    }
+
+    public var gridImportPriceRates: [EnergyPriceRate] {
+        get { priceRates(forKey: "gridImportPriceRates", legacyPrice: gridImportUnitPrice) }
+        set { savePriceRates(newValue, forKey: "gridImportPriceRates") }
+    }
+
+    private func priceRates(forKey key: String, legacyPrice: Double) -> [EnergyPriceRate] {
+        guard let data = UserDefaults.shared.data(forKey: key),
+              let rates = try? JSONDecoder().decode([EnergyPriceRate].self, from: data),
+              !rates.isEmpty
+        else {
+            return [EnergyPriceRate(price: legacyPrice)]
+        }
+
+        return rates.sortedForDisplay()
+    }
+
+    private func savePriceRates(_ rates: [EnergyPriceRate], forKey key: String) {
+        guard let data = try? JSONEncoder().encode(rates) else { return }
+        UserDefaults.shared.set(data, forKey: key)
+    }
 }

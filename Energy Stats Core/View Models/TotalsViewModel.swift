@@ -46,7 +46,8 @@ public struct TotalsViewModel {
                 ct2: Double,
                 inverterConsumption: Double,
                 batteryCharge: Double,
-                batteryDischarge: Double)
+                batteryDischarge: Double,
+                dateInterval: DateInterval? = nil)
     {
         self.home = loads
         self.gridExport = feedIn
@@ -56,6 +57,7 @@ public struct TotalsViewModel {
         self.inverterConsumption = inverterConsumption
         self.batteryCharge = batteryCharge
         self.batteryDischarge = batteryDischarge
+        self.dateInterval = dateInterval
     }
 
     public let home: Double
@@ -66,6 +68,7 @@ public struct TotalsViewModel {
     public let inverterConsumption: Double
     public let batteryCharge: Double
     public let batteryDischarge: Double
+    public let dateInterval: DateInterval?
 }
 
 public extension Array where Element == OpenReportResponse {

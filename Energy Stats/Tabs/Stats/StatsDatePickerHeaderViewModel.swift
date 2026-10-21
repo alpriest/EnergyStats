@@ -50,7 +50,7 @@ class StatsDatePickerHeaderViewModel {
 
     private var onDisplayModeChange: (StatsGraphDisplayMode) -> ()
     private var isInitialised = false
-    private let displayMode: StatsGraphDisplayMode
+    private var displayMode: StatsGraphDisplayMode
 
     init(displayMode: StatsGraphDisplayMode, onDisplayModeChange: @escaping (StatsGraphDisplayMode) -> ()) {
         self.onDisplayModeChange = onDisplayModeChange
@@ -173,8 +173,9 @@ class StatsDatePickerHeaderViewModel {
             let updatedDisplayMode = makeUpdatedDisplayMode()
 
             if updatedDisplayMode != displayMode {
+                displayMode = updatedDisplayMode
                 onDisplayModeChange(updatedDisplayMode)
-                updateQuickNavigationButtons(displayMode)
+                updateQuickNavigationButtons(updatedDisplayMode)
             }
         }
     }

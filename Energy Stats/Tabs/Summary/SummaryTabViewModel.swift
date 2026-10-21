@@ -110,6 +110,20 @@ class SummaryTabViewModel: HasLoadState {
                 }
             }
             .store(in: &cancellables)
+
+        self.configManager.appSettingsPublisher
+            .map { [$0.feedInUnitPrice, $0.gridImportUnitPrice] }
+            .removeDuplicates()
+            .dropFirst()
+            .sink { [weak self] _ in
+                guard let self else { return }
+
+                Task { @MainActor in
+                    self.viewData = nil
+                    self.load()
+                }
+            }
+            .store(in: &cancellables)
     }
     
     func load() {
@@ -126,7 +140,10 @@ class SummaryTabViewModel: HasLoadState {
             
             let (totals, oldestDataDate) = try await fetchAllYears(device: currentDevice)
             
-            if let approximationsViewModel = makeApproximationsViewModel(totals: totals) {
+            if let approximationsViewModel = makeApproximationsViewModel(
+                totals: totals,
+                dateInterval: summaryDateInterval(from: oldestDataDate)
+            ) {
                 let financialData: SummaryViewData.FinancialData? = if let model = approximationsViewModel.financialModel {
                     SummaryViewData.FinancialData(
                         exportIncome: model.exportIncome.amount,
@@ -326,7 +343,8 @@ class SummaryTabViewModel: HasLoadState {
     }
     
     private func makeApproximationsViewModel(
-        totals: [ReportVariable: Double]
+        totals: [ReportVariable: Double],
+        dateInterval: DateInterval
     ) -> ApproximationsViewModel? {
         guard let grid = totals[ReportVariable.gridConsumption],
               let feedIn = totals[ReportVariable.feedIn],
@@ -343,7 +361,25 @@ class SummaryTabViewModel: HasLoadState {
                                                                 loads: loads,
                                                                 batteryCharge: batteryCharge,
                                                                 batteryDischarge: batteryDischarge,
-                                                                solar: solar)
+                                                                solar: solar,
+                                                                dateInterval: dateInterval)
+    }
+
+    private func summaryDateInterval(from oldestDataDate: Date) -> DateInterval {
+        let calendar = Calendar.current
+        let start: Date
+        let end: Date
+
+        switch configManager.summaryDateRange {
+        case .automatic:
+            start = oldestDataDate.startOfMonth()
+            end = calendar.date(byAdding: .day, value: 1, to: calendar.startOfDay(for: .now))!
+        case .manual(let from, let to):
+            start = from.startOfMonth()
+            end = calendar.date(byAdding: .month, value: 1, to: to.startOfMonth())!
+        }
+
+        return DateInterval(start: start, end: end)
     }
     
     private func findBestTimePeriod(grouping: TimeGrouping, in periods: [SolarGenerationPeriodAmount]) -> SummaryViewData.BestSolarData? {

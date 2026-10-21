@@ -219,7 +219,8 @@ class StatsTabViewModel: HasLoadState, VisibilityTracking {
                                                                                    loads: loads,
                                                                                    batteryCharge: batteryCharge ?? 0,
                                                                                    batteryDischarge: batteryDischarge ?? 0,
-                                                                                   solar: solar)
+                                                                                   solar: solar,
+                                                                                   dateInterval: displayMode.dateInterval)
     }
 
     func updateYScale() {
@@ -361,7 +362,11 @@ class StatsTabViewModel: HasLoadState, VisibilityTracking {
                 loads: loads,
                 batteryCharge: batteryCharge,
                 batteryDischarge: batteryDischarge,
-                solar: solar
+                solar: solar,
+                dateInterval: DateInterval(
+                    start: date.startOfDay(),
+                    end: Calendar.current.date(byAdding: .day, value: 1, to: date.startOfDay())!
+                )
             )
         }
 

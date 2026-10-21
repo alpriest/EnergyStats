@@ -402,6 +402,12 @@
 		41EE90BC2BDEB702006412FB /* WatchWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE90A02BDEAC00006412FB /* WatchWidgets.swift */; };
 		41EE90BD2BDEB704006412FB /* WidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE909E2BDEAB9A006412FB /* WidgetBundle.swift */; };
 		41EE90BF2BDED138006412FB /* Energy_Stats_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A95B9429DB3F6A00A35169 /* Energy_Stats_Core.framework */; };
+		41F0411B30889B7A003E0F42 /* BatteryResponseMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F0411A30889B7A003E0F42 /* BatteryResponseMapper.swift */; };
+		41F0411E3088EC50003E0F42 /* Array+EnergyPriceRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F0411D3088EC50003E0F42 /* Array+EnergyPriceRate.swift */; };
+		41F041203088ED2C003E0F42 /* EnergyPriceRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F0411F3088ED2C003E0F42 /* EnergyPriceRate.swift */; };
+		41F041223088ED6E003E0F42 /* EnergyPricesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F041213088ED6E003E0F42 /* EnergyPricesView.swift */; };
+		41F041243088ED9B003E0F42 /* PriceRateEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F041233088ED9B003E0F42 /* PriceRateEditor.swift */; };
+		41F041263088EDA8003E0F42 /* PriceRateRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F041253088EDA8003E0F42 /* PriceRateRow.swift */; };
 		41F3596C2CB96858002DC9F4 /* UpdateTodayStatsIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F3596B2CB9684F002DC9F4 /* UpdateTodayStatsIntent.swift */; };
 		41F5A3642C1B563D00CA1120 /* Shimmering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F5A3632C1B563D00CA1120 /* Shimmering.swift */; };
 		41F5A3652C1C630600CA1120 /* View+If.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418EEEB42916843A006A8290 /* View+If.swift */; };
@@ -982,6 +988,12 @@
 		41EE90AA2BDEB6FB006412FB /* Energy Stats Watch WidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Energy Stats Watch WidgetsExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		41EE90B22BDEB6FC006412FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		41EE90B42BDEB6FC006412FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		41F0411A30889B7A003E0F42 /* BatteryResponseMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryResponseMapper.swift; sourceTree = "<group>"; };
+		41F0411D3088EC50003E0F42 /* Array+EnergyPriceRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+EnergyPriceRate.swift"; sourceTree = "<group>"; };
+		41F0411F3088ED2C003E0F42 /* EnergyPriceRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnergyPriceRate.swift; sourceTree = "<group>"; };
+		41F041213088ED6E003E0F42 /* EnergyPricesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnergyPricesView.swift; sourceTree = "<group>"; };
+		41F041233088ED9B003E0F42 /* PriceRateEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceRateEditor.swift; sourceTree = "<group>"; };
+		41F041253088EDA8003E0F42 /* PriceRateRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceRateRow.swift; sourceTree = "<group>"; };
 		41F3596B2CB9684F002DC9F4 /* UpdateTodayStatsIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTodayStatsIntent.swift; sourceTree = "<group>"; };
 		41F5A3632C1B563D00CA1120 /* Shimmering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shimmering.swift; sourceTree = "<group>"; };
 		41F631752BDCD32D00A571C5 /* Energy Stats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Energy Stats.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1110,6 +1122,7 @@
 		4103D1E629DB6D2C001B0BC8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				41F0411D3088EC50003E0F42 /* Array+EnergyPriceRate.swift */,
 				41F7902B2F71BE2800D94928 /* Dictionary+Keys.swift */,
 				4156B3502EACD56600C589BB /* NumberRollerView.swift */,
 				416AE44C2A821E4F003D0122 /* AlertContent.swift */,
@@ -1485,6 +1498,7 @@
 				414A40BB2B989CB900321AA2 /* PowerStationDetail.swift */,
 				418045C52C80D8090006A6E0 /* EarningsModel.swift */,
 				415BDEFA2F52F3B800CFD17C /* StatsTimeUsageGraphStyle.swift */,
+				41F0411F3088ED2C003E0F42 /* EnergyPriceRate.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1663,6 +1677,9 @@
 			isa = PBXGroup;
 			children = (
 				418EB4842ACC012C0021B87A /* FinancialsSettingsView.swift */,
+				41F041213088ED6E003E0F42 /* EnergyPricesView.swift */,
+				41F041253088EDA8003E0F42 /* PriceRateRow.swift */,
+				41F041233088ED9B003E0F42 /* PriceRateEditor.swift */,
 				418EB4862ACC019A0021B87A /* FinancialsSettingsViewModel.swift */,
 			);
 			path = Financials;
@@ -1729,6 +1746,7 @@
 				41E3BEC22B1B5A160051C68B /* AppSettingsStoreFactory.swift */,
 				41CB71472A3B1A2800199415 /* Assets.xcassets */,
 				41E4B30D28DB7511003F7F47 /* BatteryCapacityCalculator.swift */,
+				41F0411A30889B7A003E0F42 /* BatteryResponseMapper.swift */,
 				4103D1E029DB6CB9001B0BC8 /* ConfigManager.swift */,
 				41DB4F2C2B4940A800DAB5BB /* ConfigManaging.swift */,
 				4101839F2E7DB26B001EFE8D /* CoreBus.swift */,
@@ -2488,6 +2506,7 @@
 				413715B02E200B9100505496 /* FindOutMoreView.swift in Sources */,
 				41AF2F412AA4C674008FCA2E /* BatteryPowerFooterView.swift in Sources */,
 				41CD1F342A141F81006B0C00 /* NonFunctionalButton.swift in Sources */,
+				41F041263088EDA8003E0F42 /* PriceRateRow.swift in Sources */,
 				410F412B2DA5BD5D00DEE2F4 /* ESLabeledText.swift in Sources */,
 				41CF044C2A95006E00ADCCAD /* ExternalWebNavigationLink.swift in Sources */,
 				419C42182F4CC4FE00EB8F71 /* ReadOnlySettingsViewModel.swift in Sources */,
@@ -2615,6 +2634,7 @@
 				4107446528CA1D76006D5D7D /* FlowingLine.swift in Sources */,
 				417AA21D2A1245C00073CD34 /* StatsTabViewModel.swift in Sources */,
 				418C6E992AFB8A15000DE35F /* ApproximationsCalculator.swift in Sources */,
+				41F041223088ED6E003E0F42 /* EnergyPricesView.swift in Sources */,
 				41E12E862CC659E4001F3839 /* CheckCurrentSolarGenerationIntent.swift in Sources */,
 				41E1DFDF28D87781001235B9 /* SettingsTabView.swift in Sources */,
 				41E8016F2ECF601600CB5777 /* EditPhaseViewModel.swift in Sources */,
@@ -2626,6 +2646,7 @@
 				41A25D3F28CA5CFB00315714 /* ParametersGraphTabViewModel.swift in Sources */,
 				4107446128C9EF6B006D5D7D /* LoadedPowerFlowView.swift in Sources */,
 				4190922C2B1E49210017CB65 /* ScheduleView.swift in Sources */,
+				41F041243088ED9B003E0F42 /* PriceRateEditor.swift in Sources */,
 				41923E3E2916BC6F00D1A8C5 /* ParametersGraphView.swift in Sources */,
 				4163CA7C2B4DE46D00FDA232 /* APIKeyLoginView.swift in Sources */,
 				415AFA832C597DD800691852 /* BannerAlertManager.swift in Sources */,
@@ -2666,6 +2687,7 @@
 				41B3FFE82AB07FE10020DFC9 /* NetworkInMemoryCache.swift in Sources */,
 				4103D1D729DB6C51001B0BC8 /* FoxAPIServicing.swift in Sources */,
 				4171854229FFCF2500D18CDD /* String+MD5.swift in Sources */,
+				41F0411E3088EC50003E0F42 /* Array+EnergyPriceRate.swift in Sources */,
 				418024E22AD16D00009A2625 /* String+Currency.swift in Sources */,
 				415252182FD2ACFE0099C8CA /* NetworkThrottlerFacade.swift in Sources */,
 				41F5A3642C1B563D00CA1120 /* Shimmering.swift in Sources */,
@@ -2722,6 +2744,7 @@
 				41F7902C2F71BE2C00D94928 /* Dictionary+Keys.swift in Sources */,
 				41DF51D22AA4CF6D007B5102 /* MockAppTheme.swift in Sources */,
 				4109140029DB7AB600133CC5 /* LoadedPowerFlowViewModel.swift in Sources */,
+				41F0411B30889B7A003E0F42 /* BatteryResponseMapper.swift in Sources */,
 				414A40BC2B989CB900321AA2 /* PowerStationDetail.swift in Sources */,
 				411029192A729F02004018BB /* BatteryTimesResponse.swift in Sources */,
 				4103D1E229DB6CD7001B0BC8 /* ConfigManager.swift in Sources */,
@@ -2774,6 +2797,7 @@
 				4156A2332CB67EF500099A6A /* UserAgent.swift in Sources */,
 				41E165B72B0BAD7400B17590 /* UserDefaultsConfig.swift in Sources */,
 				41FF14ED2B432EEC00FAAF1D /* GenerationViewModel.swift in Sources */,
+				41F041203088ED2C003E0F42 /* EnergyPriceRate.swift in Sources */,
 				4103D1D329DB6C51001B0BC8 /* BatterySOCResponse.swift in Sources */,
 				4103D1D229DB6C51001B0BC8 /* NetworkError.swift in Sources */,
 				4103D1D429DB6C51001B0BC8 /* DeviceList.swift in Sources */,

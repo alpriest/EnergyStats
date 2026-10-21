@@ -490,6 +490,8 @@ public class MockConfig: StoredConfig {
     public var installationPurchasePrice: Double = 0
     public var deductInverterConsumptionFromGridAvoided: Bool = true
     public var useRollingSolarForecastTotalForToday: Bool = true
+    public var feedInPriceRates: [EnergyPriceRate] = []
+    public var gridImportPriceRates: [EnergyPriceRate] = []
 }
 
 public extension SolcastSite {

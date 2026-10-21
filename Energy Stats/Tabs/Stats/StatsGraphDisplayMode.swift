@@ -47,3 +47,28 @@ enum StatsGraphDisplayMode: Equatable {
         }
     }
 }
+
+extension StatsGraphDisplayMode {
+    var dateInterval: DateInterval {
+        let calendar = Calendar.current
+        let start: Date
+        let end: Date
+
+        switch self {
+        case .day(let date):
+            start = calendar.startOfDay(for: date)
+            end = calendar.date(byAdding: .day, value: 1, to: start)!
+        case .month(let month, let year):
+            start = Date.from(year: year, month: month).startOfMonth()
+            end = calendar.date(byAdding: .month, value: 1, to: start)!
+        case .year(let year):
+            start = Date.from(year: year, month: 1).startOfYear()
+            end = calendar.date(byAdding: .year, value: 1, to: start)!
+        case .custom(let customStart, let customEnd, _):
+            start = calendar.startOfDay(for: customStart)
+            end = calendar.date(byAdding: .day, value: 1, to: calendar.startOfDay(for: customEnd))!
+        }
+
+        return DateInterval(start: start, end: end)
+    }
+}

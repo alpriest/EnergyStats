@@ -34,13 +34,15 @@ struct FinancialsSettingsView: View {
                 }
 
                 Section {
-                    makeTextField(
-                        title: "Grid export unit price",
-                        currencySymbol: viewModel.configManager.currencySymbol,
-                        text: $viewModel.energyStatsFeedInUnitPrice,
-                        decimalPlaces: 2,
-                        infoText: "Energy Stats calculates costs using the total energy consumed over a selected period (such as a day, month, or year), so multiple tariffs cannot be tracked. Please enter your average electricity rate, which can usually be found on your bill."
-                    )
+                    NavigationLink {
+                        EnergyPricesView(configManager: viewModel.configManager, initialKind: .export)
+                    } label: {
+                        PriceSummaryRow(
+                            title: "Grid export unit price",
+                            rates: viewModel.configManager.feedInPriceRates,
+                            currencySymbol: viewModel.configManager.currencySymbol
+                        )
+                    }
 
                     HStack {
                         Text("I am paid for")
@@ -63,15 +65,17 @@ struct FinancialsSettingsView: View {
                 }
 
                 Section {
-                    makeTextField(
-                        title: "Grid import unit price",
-                        currencySymbol: viewModel.configManager.currencySymbol,
-                        text: $viewModel.energyStatsGridImportUnitPrice,
-                        decimalPlaces: 2,
-                        infoText: nil
-                    )
+                    NavigationLink {
+                        EnergyPricesView(configManager: viewModel.configManager, initialKind: .import)
+                    } label: {
+                        PriceSummaryRow(
+                            title: "Grid import unit price",
+                            rates: viewModel.configManager.gridImportPriceRates,
+                            currencySymbol: viewModel.configManager.currencySymbol
+                        )
+                    }
                 } footer: {
-                    Text("Enter the price you pay per kWh for importing electricity")
+                    Text("Enter the price you pay per kWh for importing electricity. Prices are apportioned automatically when a report spans more than one price period.")
                 }
                 
                 Section {
@@ -179,6 +183,37 @@ struct FinancialsSettingsView: View {
                 .monospacedDigit()
         }
         .multilineTextAlignment(.trailing)
+    }
+}
+
+private enum EnergyPriceKind: String, CaseIterable, Identifiable {
+    case export
+    case `import`
+
+    var id: String { rawValue }
+    var title: String { self == .export ? "Export prices" : "Import prices" }
+}
+
+private struct PriceSummaryRow: View {
+    let title: LocalizedStringKey
+    let rates: [EnergyPriceRate]
+    let currencySymbol: String
+
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading) {
+                Text(title)
+                if let rate = rates.sortedForDisplay().first(where: {
+                    guard let effectiveFrom = $0.effectiveFrom else { return true }
+                    return effectiveFrom <= .now
+                }) {
+                    Text(rate.price.roundedToString(decimalPlaces: 3, currencySymbol: currencySymbol))
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+            }
+            Spacer()
+        }
     }
 }
 

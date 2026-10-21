@@ -78,6 +78,8 @@ public protocol StoredConfig {
     var installationPurchasePrice: Double { get set }
     var deductInverterConsumptionFromGridAvoided: Bool { get set }
     var useRollingSolarForecastTotalForToday: Bool { get set }
+    var feedInPriceRates: [EnergyPriceRate] { get set }
+    var gridImportPriceRates: [EnergyPriceRate] { get set }
 }
 
 public func DefaultParameterGroups() -> [ParameterGroup] {

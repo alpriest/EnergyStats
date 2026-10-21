@@ -18,7 +18,8 @@ struct ApproximationsCalculator {
         loads: Double,
         batteryCharge: Double,
         batteryDischarge: Double,
-        solar: Double
+        solar: Double,
+        dateInterval: DateInterval? = nil
     ) -> ApproximationsViewModel {
         let (netResult, netResultCalculationBreakdown) = NetSelfSufficiencyCalculator.calculate(
             grid: grid,
@@ -42,7 +43,8 @@ struct ApproximationsCalculator {
                                               ct2: 0, // ApproximationsCalculator is always called from places where we're looking at historical data, and ct2 isn't available
                                               inverterConsumption: inverterConsumption,
                                               batteryCharge: batteryCharge,
-                                              batteryDischarge: batteryDischarge)
+                                              batteryDischarge: batteryDischarge,
+                                              dateInterval: dateInterval)
 
         let financialModel = EnergyStatsFinancialModel(
             totalsViewModel: totalsViewModel,

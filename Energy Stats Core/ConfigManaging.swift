@@ -96,7 +96,7 @@ public protocol ConfigManaging: FinancialConfigManager, SolcastConfigManager, Ba
 public enum DeviceCapability {
     case scheduleMaxSOC
     case peakShaving
-    
+
     var schedulePropertyKey: String {
         switch self {
         case .scheduleMaxSOC:
@@ -125,10 +125,12 @@ public protocol FinancialConfigManager {
     var showFinancialEarnings: Bool { get set }
     var feedInUnitPrice: Double { get set }
     var gridImportUnitPrice: Double { get set }
+    var feedInPriceRates: [EnergyPriceRate] { get set }
+    var gridImportPriceRates: [EnergyPriceRate] { get set }
     var earningsModel: EarningsModel { get set }
     var installationPurchasePrice: Double { get set }
     var deductInverterConsumptionFromGridAvoided: Bool { get set }
-    
+
     var appSettingsPublisher: AnyPublisher<AppSettings, Never> { get }
 }
 

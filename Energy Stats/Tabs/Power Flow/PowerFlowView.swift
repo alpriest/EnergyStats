@@ -65,6 +65,7 @@ struct PowerFlowView<S: Shape, A: View>: View {
             } else {
                 shape
                     .stroke(lineColor, lineWidth: 4)
+                additionalAmountView()
             }
         }
         .clipped()

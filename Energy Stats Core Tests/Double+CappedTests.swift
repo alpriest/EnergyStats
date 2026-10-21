@@ -72,3 +72,35 @@ class DoubleTests: XCTestCase {
         }
     }
 }
+
+final class EnergyPriceRateTests: XCTestCase {
+    func test_weightedPrice_usesCalendarDayProportion() {
+        let calendar = Calendar(identifier: .gregorian)
+        let start = calendar.date(from: DateComponents(year: 2026, month: 11, day: 1))!
+        let end = calendar.date(from: DateComponents(year: 2026, month: 12, day: 1))!
+        let change = calendar.date(from: DateComponents(year: 2026, month: 11, day: 5))!
+        let rates = [
+            EnergyPriceRate(price: 0.27, effectiveFrom: change),
+            EnergyPriceRate(price: 0.25)
+        ]
+
+        let result = rates.weightedPrice(for: DateInterval(start: start, end: end))
+
+        XCTAssertEqual(result, (0.25 * 4 + 0.27 * 27) / 31, accuracy: 0.000001)
+    }
+
+    func test_weightedPrice_handlesEqualYearSplit() {
+        let calendar = Calendar(identifier: .gregorian)
+        let start = calendar.date(from: DateComponents(year: 2028, month: 1, day: 1))!
+        let end = calendar.date(from: DateComponents(year: 2029, month: 1, day: 1))!
+        let change = calendar.date(from: DateComponents(year: 2028, month: 7, day: 2))!
+        let rates = [
+            EnergyPriceRate(price: 0.30, effectiveFrom: change),
+            EnergyPriceRate(price: 0.20)
+        ]
+
+        let result = rates.weightedPrice(for: DateInterval(start: start, end: end))
+
+        XCTAssertEqual(result, 0.25, accuracy: 0.000001)
+    }
+}

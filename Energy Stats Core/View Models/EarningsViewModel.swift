@@ -97,6 +97,13 @@ public class EnergyStatsFinancialModel {
         solarSavingBreakdown: CalculationBreakdown,
         total: FinanceAmount
     ) {
+        let exportPrice = totalsViewModel.dateInterval.map {
+            config.feedInPriceRates.weightedPrice(for: $0)
+        } ?? config.feedInPriceRates.price(for: .now)
+        let importPrice = totalsViewModel.dateInterval.map {
+            config.gridImportPriceRates.weightedPrice(for: $0)
+        } ?? config.gridImportPriceRates.price(for: .now)
+
         let amountForIncomeCalculation: Double = {
             switch config.earningsModel {
             case .exported: return totalsViewModel.gridExport
@@ -134,14 +141,14 @@ public class EnergyStatsFinancialModel {
                 shortTitle: shortTitle,
                 longTitle: longTitle,
                 accessibilityKey: accessibilityKey,
-                amount: amountForIncomeCalculation * config.feedInUnitPrice
+                amount: amountForIncomeCalculation * exportPrice
             )
         }()
 
         let exportBreakdown = CalculationBreakdown(
             formula: "\(nameForIncomeCalculationBreakdown) * feedInUnitPrice",
             calculation: { dp in
-                "\(amountForIncomeCalculation.roundedToString(decimalPlaces: dp)) * \(config.feedInUnitPrice.roundedToString(decimalPlaces: dp))"
+                "\(amountForIncomeCalculation.roundedToString(decimalPlaces: dp)) * \(exportPrice.roundedToString(decimalPlaces: dp))"
             }
         )
         
@@ -158,7 +165,7 @@ public class EnergyStatsFinancialModel {
             inverterConsumptionCalcAmount = 0.0
         }
 
-        let solarSavingAmount = max(0, totalsViewModel.solar - totalsViewModel.gridExport - inverterConsumptionCalcAmount) * config.gridImportUnitPrice
+        let solarSavingAmount = max(0, totalsViewModel.solar - totalsViewModel.gridExport - inverterConsumptionCalcAmount) * importPrice
 
         let solarSaving = FinanceAmount(
             title: .gridImportAvoidedShortTitle,
@@ -169,7 +176,7 @@ public class EnergyStatsFinancialModel {
         let solarSavingBreakdown = CalculationBreakdown(
             formula: "max(0, solar - gridExport\(inverterConsumptionCalcFormulaDescriptionText) * gridImportUnitPrice",
             calculation: { dp in
-                "max(0, \(totalsViewModel.solar.roundedToString(decimalPlaces: dp)) - \(totalsViewModel.gridExport.roundedToString(decimalPlaces: dp)) - \(inverterConsumptionCalcFormulaAmountText(dp)) * \(config.gridImportUnitPrice.roundedToString(decimalPlaces: dp))"
+                "max(0, \(totalsViewModel.solar.roundedToString(decimalPlaces: dp)) - \(totalsViewModel.gridExport.roundedToString(decimalPlaces: dp)) - \(inverterConsumptionCalcFormulaAmountText(dp)) * \(importPrice.roundedToString(decimalPlaces: dp))"
             }
         )
 
