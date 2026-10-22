@@ -186,14 +186,6 @@ struct FinancialsSettingsView: View {
     }
 }
 
-private enum EnergyPriceKind: String, CaseIterable, Identifiable {
-    case export
-    case `import`
-
-    var id: String { rawValue }
-    var title: String { self == .export ? "Export prices" : "Import prices" }
-}
-
 private struct PriceSummaryRow: View {
     let title: LocalizedStringKey
     let rates: [EnergyPriceRate]
@@ -207,7 +199,7 @@ private struct PriceSummaryRow: View {
                     guard let effectiveFrom = $0.effectiveFrom else { return true }
                     return effectiveFrom <= .now
                 }) {
-                    Text(rate.price.roundedToString(decimalPlaces: 3, currencySymbol: currencySymbol))
+                    Text(rate.price.roundedToString(decimalPlaces: 2, currencySymbol: currencySymbol))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }
@@ -218,5 +210,7 @@ private struct PriceSummaryRow: View {
 }
 
 #Preview {
-    FinancialsSettingsView(configManager: ConfigManager.preview())
+    NavigationStack {
+        FinancialsSettingsView(configManager: ConfigManager.preview())
+    }.environment(\.locale, .init(identifier: "de"))
 }

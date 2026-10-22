@@ -8,6 +8,19 @@
 import Energy_Stats_Core
 import SwiftUI
 
+enum EnergyPriceKind: String, CaseIterable, Identifiable {
+    case export
+    case `import`
+
+    var id: String { rawValue }
+    var title: LocalizedStringResource {
+        self == .export ? "Export prices" : "Import prices"
+    }
+    var tabTitle: LocalizedStringResource {
+        self == .export ? "Export" : "Import"
+    }
+}
+
 struct EnergyPricesView: View {
     @State private var configManager: ConfigManaging
     @State private var selectedKind: EnergyPriceKind
@@ -30,7 +43,7 @@ struct EnergyPricesView: View {
         Form {
             Picker("Price type", selection: $selectedKind) {
                 ForEach(EnergyPriceKind.allCases) { kind in
-                    Text(kind == .export ? "Export" : "Import").tag(kind)
+                    Text(kind.tabTitle).tag(kind)
                 }
             }
             .pickerStyle(.segmented)
@@ -63,12 +76,26 @@ struct EnergyPricesView: View {
         .navigationTitle("Energy prices")
         .sheet(item: $editingRate) { rate in
             NavigationStack {
-                PriceRateEditor(rate: rate, currencySymbol: configManager.currencySymbol) { updatedRate in
-                    save(updatedRate)
-                    editingRate = nil
-                }
-            }
+                PriceRateEditor(
+                    rate: rate,
+                    currencySymbol: configManager.currencySymbol,
+                    includeDatePicker: needsDatePicker(for: rate),
+                    onSave: { updatedRate in
+                        save(updatedRate)
+                        editingRate = nil
+                    },
+                    onDelete: { deleteRate($0) }
+                )
+            }.presentationDetents([.medium])
         }
+    }
+    
+    private func needsDatePicker(for rate: EnergyPriceRate) -> Bool {
+        guard rates.count > 1 else { return false }
+
+        let ids = rates.map(\.id)
+
+        return ids.last != rate.id
     }
 
     private var currentPrice: Double {
@@ -106,6 +133,15 @@ struct EnergyPricesView: View {
         let displayed = rates.sortedForDisplay()
         let deletedIDs = offsets.map { displayed[$0].id }
         let updated = rates.filter { !deletedIDs.contains($0.id) }
+        saveUpdatedRates(updated)
+    }
+
+    private func deleteRate(_ rate: EnergyPriceRate) {
+        let updated = rates.filter { rate.id != $0.id }
+        saveUpdatedRates(updated)
+    }
+
+    private func saveUpdatedRates(_ updated: [EnergyPriceRate]) {
         let ratesAfterDeletion = updated.isEmpty
             ? [EnergyPriceRate(price: currentPrice)]
             : updated
@@ -117,4 +153,10 @@ struct EnergyPricesView: View {
         }
         displayedRates = ratesAfterDeletion
     }
+}
+
+#Preview {
+    NavigationStack {
+        EnergyPricesView(configManager: ConfigManager.preview(), initialKind: .export)
+    }.environment(\.locale, .init(identifier: "de"))
 }

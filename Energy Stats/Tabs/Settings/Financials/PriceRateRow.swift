@@ -8,14 +8,14 @@
 import Energy_Stats_Core
 import SwiftUI
 
-private struct PriceRateRow: View {
+struct PriceRateRow: View {
     let rate: EnergyPriceRate
     let allRates: [EnergyPriceRate]
     let currencySymbol: String
 
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
-            Text(rate.price.roundedToString(decimalPlaces: 3, currencySymbol: currencySymbol))
+            Text(rate.price.roundedToString(decimalPlaces: 2, currencySymbol: currencySymbol))
                 .foregroundStyle(.primary)
             Text(subtitle)
                 .font(.subheadline)
@@ -27,10 +27,12 @@ private struct PriceRateRow: View {
         guard let effectiveFrom = rate.effectiveFrom else {
             guard allRates.count > 1,
                   let firstDate = allRates.compactMap(\.effectiveFrom).min()
-            else { return "Price" }
-            return "Previous price · Before \(Self.dateFormatter.string(from: firstDate))"
+                    else { return String(localized: "Price") }
+
+            return String(localized: "Before") + " " + Self.dateFormatter.string(from: firstDate)
         }
-        return "Applies from \(Self.dateFormatter.string(from: effectiveFrom))"
+
+        return String(localized: "Applies from") + " " + Self.dateFormatter.string(from: effectiveFrom)
     }
 
     private static let dateFormatter: DateFormatter = {
