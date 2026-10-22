@@ -2578,6 +2578,12 @@
             "state" : "machine_translated",
             "value" : "Preisänderung hinzufügen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Añadir cambio de precio"
+          }
         }
       }
     },
@@ -2846,6 +2852,12 @@
           "stringUnit" : {
             "state" : "machine_translated",
             "value" : "Gültig ab"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Se aplica a partir de"
           }
         }
       }
@@ -4152,6 +4164,12 @@
           "stringUnit" : {
             "state" : "machine_translated",
             "value" : "Vor"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Antes"
           }
         }
       }
@@ -7631,6 +7649,12 @@
             "state" : "machine_translated",
             "value" : "Energiepreise"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Precios de la energía"
+          }
         }
       }
     },
@@ -7737,8 +7761,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Energy Stats calcula los costes utilizando el consumo total de energía durante un período seleccionado (como un día, un mes o un año), por lo que no es posible realizar un seguimiento de varias tarifas. Introduce tu tarifa media de electricidad, que normalmente se encuentra en tu factura."
+            "state" : "machine_translated",
+            "value" : "Energy Stats calcula los costes utilizando la energía total consumida durante un periodo seleccionado (como un día, un mes o un año), por lo que no se pueden hacer seguimientos de varias tarifas. Introduce tu tarifa eléctrica media, que normalmente aparece en la factura."
           }
         },
         "it" : {
@@ -7976,8 +8000,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Introduce el precio que pagas por kWh por importar electricidad"
+            "state" : "machine_translated",
+            "value" : "Introduce el precio que pagas por kWh de electricidad importada"
           }
         },
         "it" : {
@@ -8002,6 +8026,12 @@
           "stringUnit" : {
             "state" : "machine_translated",
             "value" : "Geben Sie den Preis ein, den Sie pro kWh für importierten Strom zahlen. Preise werden automatisch anteilig berechnet, wenn ein Bericht mehr als einen Preiszeitraum umfasst."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Introduce el precio que pagas por kWh de electricidad importada. Los precios se prorratean automáticamente cuando un informe abarca más de un periodo de precios."
           }
         }
       }
@@ -8220,6 +8250,12 @@
             "state" : "machine_translated",
             "value" : "Einspeisung"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Exportación"
+          }
         }
       }
     },
@@ -8315,6 +8351,12 @@
           "stringUnit" : {
             "state" : "machine_translated",
             "value" : "Einspeisepreise"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Precios de exportación"
           }
         }
       }
@@ -10852,6 +10894,12 @@
             "state" : "machine_translated",
             "value" : "Netzbezug"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Importación"
+          }
         }
       }
     },
@@ -10891,6 +10939,12 @@
           "stringUnit" : {
             "state" : "machine_translated",
             "value" : "Netzbezugspreise"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Precios de importación"
           }
         }
       }
@@ -13681,8 +13735,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pega la clave API arriba"
+            "state" : "machine_translated",
+            "value" : "Pega la clave de API anterior"
           }
         },
         "it" : {
@@ -14230,6 +14284,12 @@
             "state" : "machine_translated",
             "value" : "Preis"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Precio"
+          }
         }
       }
     },
@@ -14241,6 +14301,12 @@
           "stringUnit" : {
             "state" : "machine_translated",
             "value" : "Preis pro kWh"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Precio por kWh"
           }
         }
       }
@@ -14254,6 +14320,12 @@
             "state" : "machine_translated",
             "value" : "Preisart"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Tipo de precio"
+          }
         }
       }
     },
@@ -14265,6 +14337,12 @@
           "stringUnit" : {
             "state" : "machine_translated",
             "value" : "Preise werden automatisch nach Kalendertag anteilig berechnet, wenn ein Bericht mehr als einen Preiszeitraum umfasst."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Los precios se prorratean automáticamente por día natural cuando un informe abarca más de un periodo de precios."
           }
         }
       }
@@ -18634,8 +18712,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "El %1$@ de los datos de Solcast necesarios está disponible. Se ha alcanzado el %2$@ de la previsión."
+            "state" : "machine_translated",
+            "value" : "%1$@ de los datos de Solcast necesarios están disponibles. Se ha generado el %2$@ de la previsión."
           }
         },
         "it" : {

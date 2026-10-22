@@ -82,5 +82,5 @@ struct PriceRateEditor: View {
             onSave: { _ in },
             onDelete: { _ in }
         )
-    }
+    }.environment(\.locale, .init(identifier: "de"))
 }
