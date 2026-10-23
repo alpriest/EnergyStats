@@ -8,37 +8,6 @@
 import Combine
 import Foundation
 
-public struct InstallationPaybackEstimate {
-    public let monthsRemaining: Int
-
-    public init?(installationPurchasePrice: Double, totalSavingsToDate: Double, installationDate: Date) {
-        let monthsSinceInstallation = installationDate.months(between: Date.now)
-
-        guard installationPurchasePrice.isFinite,
-              totalSavingsToDate.isFinite,
-              totalSavingsToDate > 0,
-              monthsSinceInstallation > 0
-        else {
-            return nil
-        }
-
-        let monthlyBenefit = totalSavingsToDate / Double(monthsSinceInstallation)
-        let installationPurchasePriceRemaining = installationPurchasePrice - totalSavingsToDate
-        let monthsRemaining = installationPurchasePriceRemaining / monthlyBenefit
-
-        guard monthlyBenefit.isFinite,
-              monthlyBenefit > 0,
-              monthsRemaining.isFinite,
-              monthsRemaining > Double(Int.min),
-              monthsRemaining < Double(Int.max)
-        else {
-            return nil
-        }
-
-        self.monthsRemaining = Int(monthsRemaining)
-    }
-}
-
 @Observable
 public class EnergyStatsFinancialModel {
     private let config: FinancialConfigManager
@@ -146,16 +115,16 @@ public class EnergyStatsFinancialModel {
         }()
 
         let exportBreakdown = CalculationBreakdown(
-            formula: "\(nameForIncomeCalculationBreakdown) * feedInUnitPrice",
+            formula: "\(nameForIncomeCalculationBreakdown) * feedInPrice",
             calculation: { dp in
                 "\(amountForIncomeCalculation.roundedToString(decimalPlaces: dp)) * \(exportPrice.roundedToString(decimalPlaces: dp))"
             }
         )
-        
+
         let inverterConsumptionCalcFormulaDescriptionText: String
         let inverterConsumptionCalcFormulaAmountText: (Int) -> String
         let inverterConsumptionCalcAmount: Double
-        if (config.deductInverterConsumptionFromGridAvoided) {
+        if config.deductInverterConsumptionFromGridAvoided {
             inverterConsumptionCalcFormulaDescriptionText = " - inverterConsumption"
             inverterConsumptionCalcFormulaAmountText = { " - \(totalsViewModel.inverterConsumption.roundedToString(decimalPlaces: $0))" }
             inverterConsumptionCalcAmount = totalsViewModel.inverterConsumption
@@ -174,7 +143,7 @@ public class EnergyStatsFinancialModel {
         )
 
         let solarSavingBreakdown = CalculationBreakdown(
-            formula: "max(0, solar - gridExport\(inverterConsumptionCalcFormulaDescriptionText) * gridImportUnitPrice",
+            formula: "max(0, solar - gridExport\(inverterConsumptionCalcFormulaDescriptionText) * gridImportPrice",
             calculation: { dp in
                 "max(0, \(totalsViewModel.solar.roundedToString(decimalPlaces: dp)) - \(totalsViewModel.gridExport.roundedToString(decimalPlaces: dp)) - \(inverterConsumptionCalcFormulaAmountText(dp)) * \(importPrice.roundedToString(decimalPlaces: dp))"
             }

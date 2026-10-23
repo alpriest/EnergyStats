@@ -31,18 +31,6 @@ class FinancialsSettingsViewModel {
             configManager.showFinancialSummaryOnFlowPage = showFinancialSummaryOnFlowPage
         }
     }
-
-    var energyStatsFeedInUnitPrice: String {
-        didSet {
-            configManager.feedInUnitPrice = energyStatsFeedInUnitPrice.asCurrencyStringToDouble()
-        }
-    }
-
-    var energyStatsGridImportUnitPrice: String {
-        didSet {
-            configManager.gridImportUnitPrice = energyStatsGridImportUnitPrice.asCurrencyStringToDouble()
-        }
-    }
     
     var installationPurchasePrice: String {
         didSet {
@@ -62,8 +50,6 @@ class FinancialsSettingsViewModel {
         self.configManager = configManager
         showFinancialSummary = configManager.showFinancialEarnings
         showFinancialSummaryOnFlowPage = configManager.showFinancialSummaryOnFlowPage
-        energyStatsFeedInUnitPrice = configManager.feedInUnitPrice.roundedToString(decimalPlaces: 3)
-        energyStatsGridImportUnitPrice = configManager.gridImportUnitPrice.roundedToString(decimalPlaces: 3)
         earningsModel = configManager.earningsModel
         installationPurchasePrice = configManager.installationPurchasePrice.roundedToString(decimalPlaces: 0)
         deductInverterConsumptionFromGridAvoided = configManager.deductInverterConsumptionFromGridAvoided

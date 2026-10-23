@@ -170,6 +170,7 @@
 		415AFA832C597DD800691852 /* BannerAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415AFA822C597DD800691852 /* BannerAlertManager.swift */; };
 		415BDEFB2F52F3B800CFD17C /* StatsTimeUsageGraphStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BDEFA2F52F3B800CFD17C /* StatsTimeUsageGraphStyle.swift */; };
 		415BDEFD2F52FCDD00CFD17C /* StatsGraphSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BDEFC2F52FCDD00CFD17C /* StatsGraphSettingsView.swift */; };
+		415C3702308B3BDE004C0C52 /* InstallationPaybackEstimate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415C3701308B3BDE004C0C52 /* InstallationPaybackEstimate.swift */; };
 		415F0BD72D9C5E57003EB760 /* BatteryFirmwareVersionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415F0BD62D9C5E57003EB760 /* BatteryFirmwareVersionsView.swift */; };
 		415F0BD92D9C869F003EB760 /* BatteryFirmwareVersionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415F0BD82D9C869F003EB760 /* BatteryFirmwareVersionsViewModel.swift */; };
 		415F0BDB2D9D5422003EB760 /* String+Localised.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415F0BDA2D9D541F003EB760 /* String+Localised.swift */; };
@@ -743,6 +744,7 @@
 		415AFA822C597DD800691852 /* BannerAlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAlertManager.swift; sourceTree = "<group>"; };
 		415BDEFA2F52F3B800CFD17C /* StatsTimeUsageGraphStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTimeUsageGraphStyle.swift; sourceTree = "<group>"; };
 		415BDEFC2F52FCDD00CFD17C /* StatsGraphSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGraphSettingsView.swift; sourceTree = "<group>"; };
+		415C3701308B3BDE004C0C52 /* InstallationPaybackEstimate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallationPaybackEstimate.swift; sourceTree = "<group>"; };
 		415F0BD62D9C5E57003EB760 /* BatteryFirmwareVersionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryFirmwareVersionsView.swift; sourceTree = "<group>"; };
 		415F0BD82D9C869F003EB760 /* BatteryFirmwareVersionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryFirmwareVersionsViewModel.swift; sourceTree = "<group>"; };
 		415F0BDA2D9D541F003EB760 /* String+Localised.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localised.swift"; sourceTree = "<group>"; };
@@ -1202,6 +1204,7 @@
 				41EDDF6B28CD2A630092C662 /* LoadedPowerFlowViewModel.swift */,
 				418240772A9A33E300101064 /* TotalsViewModel.swift */,
 				41CA35722AA8C10900D45734 /* EarningsViewModel.swift */,
+				415C3701308B3BDE004C0C52 /* InstallationPaybackEstimate.swift */,
 				41E6FE742F1570000080CFCF /* FinanceAmount.swift */,
 				4190921C2B1D253D0017CB65 /* Schedule.swift */,
 				41F790292F70526400D94928 /* SchedulePhaseV1.swift */,
@@ -2763,6 +2766,7 @@
 				418045C62C80D8090006A6E0 /* EarningsModel.swift in Sources */,
 				418685D52AFE700100355B6D /* AnimatedNumber.swift in Sources */,
 				41BACC072D91401E00C9C718 /* TipType.swift in Sources */,
+				415C3702308B3BDE004C0C52 /* InstallationPaybackEstimate.swift in Sources */,
 				4131AF4D2B5288F400836B77 /* OpenQueryResponse.swift in Sources */,
 				413B7A312A4A390C00562A68 /* SelfSufficiencyCalculator.swift in Sources */,
 				410183A02E7DB26B001EFE8D /* CoreBus.swift in Sources */,

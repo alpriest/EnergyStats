@@ -25,8 +25,8 @@ public struct AppSettings: Equatable {
     public var displayUnit: DisplayUnit
     public var selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode
     public var showFinancialEarnings: Bool
-    public var feedInUnitPrice: Double
-    public var gridImportUnitPrice: Double
+    public var feedInPriceRates: [EnergyPriceRate]
+    public var gridImportPriceRates: [EnergyPriceRate]
     public var showInverterTemperature: Bool
     public var showHomeTotalOnPowerFlow: Bool
     public var showInverterIcon: Bool
@@ -76,8 +76,8 @@ public struct AppSettings: Equatable {
         displayUnit: DisplayUnit,
         selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode,
         showFinancialEarnings: Bool,
-        feedInUnitPrice: Double,
-        gridImportUnitPrice: Double,
+        feedInPriceRates: [EnergyPriceRate],
+        gridImportPriceRates: [EnergyPriceRate],
         showInverterTemperature: Bool,
         showHomeTotalOnPowerFlow: Bool,
         showInverterIcon: Bool,
@@ -127,8 +127,8 @@ public struct AppSettings: Equatable {
         self.showTotalYieldOnPowerFlow = showTotalYieldOnPowerFlow
         self.selfSufficiencyEstimateMode = selfSufficiencyEstimateMode
         self.showFinancialEarnings = showFinancialEarnings
-        self.feedInUnitPrice = feedInUnitPrice
-        self.gridImportUnitPrice = gridImportUnitPrice
+        self.feedInPriceRates = feedInPriceRates
+        self.gridImportPriceRates = gridImportPriceRates
         self.showInverterTemperature = showInverterTemperature
         self.showHomeTotalOnPowerFlow = showHomeTotalOnPowerFlow
         self.showInverterIcon = showInverterIcon
@@ -178,8 +178,8 @@ public struct AppSettings: Equatable {
         displayUnit: DisplayUnit? = nil,
         selfSufficiencyEstimateMode: SelfSufficiencyEstimateMode? = nil,
         showFinancialEarnings: Bool? = nil,
-        feedInUnitPrice: Double? = nil,
-        gridImportUnitPrice: Double? = nil,
+        feedInPriceRates: [EnergyPriceRate]? = nil,
+        gridImportPriceRates: [EnergyPriceRate]? = nil,
         showInverterTemperature: Bool? = nil,
         showHomeTotalOnPowerFlow: Bool? = nil,
         showInverterIcon: Bool? = nil,
@@ -229,8 +229,8 @@ public struct AppSettings: Equatable {
             displayUnit: displayUnit ?? self.displayUnit,
             selfSufficiencyEstimateMode: selfSufficiencyEstimateMode ?? self.selfSufficiencyEstimateMode,
             showFinancialEarnings: showFinancialEarnings ?? self.showFinancialEarnings,
-            feedInUnitPrice: feedInUnitPrice ?? self.feedInUnitPrice,
-            gridImportUnitPrice: gridImportUnitPrice ?? self.gridImportUnitPrice,
+            feedInPriceRates: feedInPriceRates ?? self.feedInPriceRates,
+            gridImportPriceRates: gridImportPriceRates ?? self.gridImportPriceRates,
             showInverterTemperature: showInverterTemperature ?? self.showInverterTemperature,
             showHomeTotalOnPowerFlow: showHomeTotalOnPowerFlow ?? self.showHomeTotalOnPowerFlow,
             showInverterIcon: showInverterIcon ?? self.showInverterIcon,
@@ -283,8 +283,8 @@ public struct AppSettings: Equatable {
             displayUnit: config.displayUnit,
             selfSufficiencyEstimateMode: config.selfSufficiencyEstimateMode,
             showFinancialEarnings: config.showFinancialEarnings,
-            feedInUnitPrice: config.feedInUnitPrice,
-            gridImportUnitPrice: config.gridImportUnitPrice,
+            feedInPriceRates: config.feedInPriceRates,
+            gridImportPriceRates: config.gridImportPriceRates,
             showInverterTemperature: config.showInverterTemperature,
             showHomeTotalOnPowerFlow: config.showHomeTotalOnPowerFlow,
             showInverterIcon: config.showInverterIcon,

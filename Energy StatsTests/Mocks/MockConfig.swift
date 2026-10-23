@@ -22,7 +22,6 @@ class MockConfig: StoredConfig {
     var devices: Data? = nil
     var earningsModel: EarningsModel = .exported
     var fetchSolcastOnAppLaunch: Bool = false
-    var feedInUnitPrice: Double = 0.0
     var shouldCombineCT2WithLoadsPower: Bool = false
     var shouldCombineCT2WithPVPower: Bool = true
     var showBatteryEstimate: Bool = false
@@ -72,7 +71,6 @@ class MockConfig: StoredConfig {
     var refreshFrequency: Int = 60
     var displayUnit: Int = 0
     var solarDefinitions: SolarRangeDefinitions = SolarRangeDefinitions.default
-    var gridImportUnitPrice: Double = 0.0
     var showInverterConsumption: Bool = false
     var showBatterySOCOnDailyStats: Bool = false
     var allowNegativeLoad: Bool = false

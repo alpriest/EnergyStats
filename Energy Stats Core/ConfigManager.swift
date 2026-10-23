@@ -349,32 +349,13 @@ public class ConfigManager: ConfigManaging {
         }
     }
 
-    public var feedInUnitPrice: Double {
-        get { config.feedInUnitPrice }
-        set {
-            config.feedInUnitPrice = newValue
-            appSettingsStore.update(appSettingsStore.currentValue.copy(
-                feedInUnitPrice: config.feedInUnitPrice
-            ))
-        }
-    }
-
-    public var gridImportUnitPrice: Double {
-        get { config.gridImportUnitPrice }
-        set {
-            config.gridImportUnitPrice = newValue
-            appSettingsStore.update(appSettingsStore.currentValue.copy(
-                gridImportUnitPrice: config.gridImportUnitPrice
-            ))
-        }
-    }
-
     public var feedInPriceRates: [EnergyPriceRate] {
         get { config.feedInPriceRates }
         set {
             config.feedInPriceRates = newValue
-            config.feedInUnitPrice = newValue.price(for: .now)
-            appSettingsStore.update(appSettingsStore.currentValue.copy(feedInUnitPrice: config.feedInUnitPrice))
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
+                feedInPriceRates: config.feedInPriceRates
+            ))
         }
     }
 
@@ -382,8 +363,9 @@ public class ConfigManager: ConfigManaging {
         get { config.gridImportPriceRates }
         set {
             config.gridImportPriceRates = newValue
-            config.gridImportUnitPrice = newValue.price(for: .now)
-            appSettingsStore.update(appSettingsStore.currentValue.copy(gridImportUnitPrice: config.gridImportUnitPrice))
+            appSettingsStore.update(appSettingsStore.currentValue.copy(
+                gridImportPriceRates: config.gridImportPriceRates
+            ))
         }
     }
 

@@ -112,7 +112,7 @@ class SummaryTabViewModel: HasLoadState {
             .store(in: &cancellables)
 
         self.configManager.appSettingsPublisher
-            .map { [$0.feedInUnitPrice, $0.gridImportUnitPrice] }
+            .map { [$0.feedInPriceRates, $0.gridImportPriceRates] }
             .removeDuplicates()
             .dropFirst()
             .sink { [weak self] _ in
