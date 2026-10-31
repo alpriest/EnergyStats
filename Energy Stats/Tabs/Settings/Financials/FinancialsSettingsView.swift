@@ -39,7 +39,7 @@ struct FinancialsSettingsView: View {
                     } label: {
                         PriceSummaryRow(
                             title: "Grid export unit price",
-                            rates: viewModel.configManager.feedInPriceRates,
+                            rates: viewModel.feedInPriceRates,
                             currencySymbol: viewModel.configManager.currencySymbol
                         )
                     }
@@ -70,7 +70,7 @@ struct FinancialsSettingsView: View {
                     } label: {
                         PriceSummaryRow(
                             title: "Grid import unit price",
-                            rates: viewModel.configManager.gridImportPriceRates,
+                            rates: viewModel.gridImportPriceRates,
                             currencySymbol: viewModel.configManager.currencySymbol
                         )
                     }

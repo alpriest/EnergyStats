@@ -144,6 +144,7 @@
 		414160292D85CABE009E0096 /* View+IconSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414160282D85CABC009E0096 /* View+IconSize.swift */; };
 		4141B20028D86C7200B60157 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141B1FF28D86C7200B60157 /* UserManager.swift */; };
 		4141B20228D871B900B60157 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141B20128D871B900B60157 /* ContentView.swift */; };
+		4142A4A630936D580043F65B /* CheckInverterStatusIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4142A4A530936D580043F65B /* CheckInverterStatusIntent.swift */; };
 		414536D32D3190E700AE4A29 /* FirmwareLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414536D22D3190E700AE4A29 /* FirmwareLoadingView.swift */; };
 		41463D912AC44C7C00B2EB25 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 41463D902AC44C7C00B2EB25 /* Localizable.xcstrings */; };
 		41495F382B211A75004A51C1 /* AlertContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41495F372B211A75004A51C1 /* AlertContentView.swift */; };
@@ -718,6 +719,7 @@
 		414160282D85CABC009E0096 /* View+IconSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+IconSize.swift"; sourceTree = "<group>"; };
 		4141B1FF28D86C7200B60157 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		4141B20128D871B900B60157 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		4142A4A530936D580043F65B /* CheckInverterStatusIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInverterStatusIntent.swift; sourceTree = "<group>"; };
 		414536D22D3190E700AE4A29 /* FirmwareLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirmwareLoadingView.swift; sourceTree = "<group>"; };
 		41463D902AC44C7C00B2EB25 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		41495F372B211A75004A51C1 /* AlertContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertContentView.swift; sourceTree = "<group>"; };
@@ -1860,6 +1862,7 @@
 				41E12E872CC666C9001F3839 /* ServiceFactory.swift */,
 				41C849682A8BBC3800431410 /* Shortcuts.swift */,
 				413A592630515C3600D0CC9C /* CurrentEnergyStatusIntent.swift */,
+				4142A4A530936D580043F65B /* CheckInverterStatusIntent.swift */,
 			);
 			path = Shortcuts;
 			sourceTree = "<group>";
@@ -2609,6 +2612,7 @@
 				416163952CDA6D4A0084DCF1 /* String+URL.swift in Sources */,
 				410FC88A2AB9EAD90004CBC2 /* ParameterVariableGroupEditorViewModel.swift in Sources */,
 				41ACB1F52F4B571100EB7BF4 /* ReadOnlySettingsView.swift in Sources */,
+				4142A4A630936D580043F65B /* CheckInverterStatusIntent.swift in Sources */,
 				4171854E2A010B6300D18CDD /* ParameterGraphVariableChooserViewModel.swift in Sources */,
 				418199C72A4034530001B5D4 /* FAQView.swift in Sources */,
 				41DF87272EEB2A7E00F6EDF2 /* CustomDateRangePickerView.swift in Sources */,
@@ -3068,7 +3072,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 162;
+				CURRENT_PROJECT_VERSION = 163;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -3091,7 +3095,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 15.6;
-				MARKETING_VERSION = 2.166;
+				MARKETING_VERSION = 2.167;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -3138,7 +3142,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 162;
+				CURRENT_PROJECT_VERSION = 163;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 885RLNNNK2;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -3155,7 +3159,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 15.6;
-				MARKETING_VERSION = 2.166;
+				MARKETING_VERSION = 2.167;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

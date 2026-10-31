@@ -59,6 +59,12 @@ struct EnergyStatsShortcuts: AppShortcutsProvider {
             shortTitle: "Change work mode",
             systemImageName: "list.clipboard"
         )
+        AppShortcut(
+            intent: CheckInverterStatusIntent(),
+            phrases: ["Check my inverter status on \(.applicationName)"],
+            shortTitle: "Inverter Status",
+            systemImageName: "power"
+        )
         if #available(iOS 26.0, *) {
             AppShortcut(
                 intent: CurrentEnergyStatusIntent(),

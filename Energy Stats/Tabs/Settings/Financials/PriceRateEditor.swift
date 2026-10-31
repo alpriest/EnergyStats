@@ -30,7 +30,7 @@ struct PriceRateEditor: View {
         self.includeDatePicker = includeDatePicker
         self.onSave = onSave
         self.onDelete = onDelete
-        _price = State(initialValue: rate.price.roundedToString(decimalPlaces: 3))
+        _price = State(initialValue: rate.price.roundedToString(decimalPlaces: 2))
         _effectiveFrom = State(initialValue: rate.effectiveFrom ?? .now)
     }
 

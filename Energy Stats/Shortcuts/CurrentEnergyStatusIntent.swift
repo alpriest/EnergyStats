@@ -8,28 +8,14 @@ import Energy_Stats_Core
 import SwiftUI
 
 @available(iOS 26.0, *)
-struct CurrentEnergyStatusIntent: AppIntent {
+struct CurrentEnergyStatusIntent: SnippetIntent {
     static var title: LocalizedStringResource = "Get Current Energy Status"
     static var description: IntentDescription? = "Shows battery charge, solar generation, house consumption, and grid flow."
+    static var isDiscoverable: Bool = true
     static var authenticationPolicy: IntentAuthenticationPolicy = .requiresAuthentication
     static var supportedModes: IntentModes { .background }
 
-    func perform() async throws -> some IntentResult & ProvidesDialog & ShowsSnippetIntent {
-        .result(
-            dialog: "Here is your current energy status.",
-            snippetIntent: CurrentEnergyStatusSnippetIntent()
-        )
-    }
-}
-
-@available(iOS 26.0, *)
-private struct CurrentEnergyStatusSnippetIntent: SnippetIntent {
-    static var title: LocalizedStringResource = "Current Energy Status"
-    static var isDiscoverable: Bool = false
-    static var authenticationPolicy: IntentAuthenticationPolicy = .requiresAuthentication
-    static var supportedModes: IntentModes { .background }
-
-    func perform() async throws -> some IntentResult & ShowsSnippetView {
+    func perform() async throws -> some IntentResult & ProvidesDialog & ShowsSnippetView {
         let services = try ServiceFactory.makeAppIntentInitialisedServices()
         let real = try await services.network.fetchRealData(
             deviceSN: services.device.deviceSN,
@@ -56,7 +42,10 @@ private struct CurrentEnergyStatusSnippetIntent: SnippetIntent {
             gridFlow: Int(values.grid * 1000.0)
         )
 
-        return .result(view: CurrentEnergyStatusSnippetView(status: status))
+        return .result(
+            dialog: "Here is your current energy status.",
+            view: CurrentEnergyStatusSnippetView(status: status)
+        )
     }
 }
 
@@ -78,13 +67,13 @@ private struct CurrentEnergyStatusSnippetView: View {
                 .font(.headline)
 
             Grid(alignment: .leading, horizontalSpacing: 20, verticalSpacing: 8) {
-                statusRow("Battery", value: "\\(status.batteryStateOfCharge)%", systemImage: "battery.75percent")
+                statusRow("Battery", value: "\(status.batteryStateOfCharge)%", systemImage: "battery.75percent")
                 statusRow("Solar", value: status.solarGeneration.w(), systemImage: "sun.max.fill")
                 statusRow("House", value: status.houseConsumption.w(), systemImage: "house.fill")
                 statusRow("Grid", value: gridDescription, systemImage: "transmission")
             }
 
-            Button("Refresh", systemImage: "arrow.clockwise", intent: CurrentEnergyStatusSnippetIntent())
+            Button("Refresh", systemImage: "arrow.clockwise", intent: CurrentEnergyStatusIntent())
                 .buttonStyle(.borderedProminent)
         }
         .padding()
@@ -92,9 +81,9 @@ private struct CurrentEnergyStatusSnippetView: View {
 
     private var gridDescription: String {
         if status.gridFlow < 0 {
-            return "\\(abs(status.gridFlow).w()) import"
+            return "\(abs(status.gridFlow).w()) import"
         } else {
-            return "\\(status.gridFlow.w()) export"
+            return "\(status.gridFlow.w()) export"
         }
     }
 

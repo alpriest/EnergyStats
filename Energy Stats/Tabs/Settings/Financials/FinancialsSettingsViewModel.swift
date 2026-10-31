@@ -7,9 +7,12 @@
 
 import Energy_Stats_Core
 import Foundation
+import Combine
 
 @Observable
 class FinancialsSettingsViewModel {
+    private var cancellables = Set<AnyCancellable>()
+
     var earningsModel: EarningsModel {
         didSet {
             configManager.earningsModel = earningsModel
@@ -31,18 +34,21 @@ class FinancialsSettingsViewModel {
             configManager.showFinancialSummaryOnFlowPage = showFinancialSummaryOnFlowPage
         }
     }
-    
+
     var installationPurchasePrice: String {
         didSet {
             configManager.installationPurchasePrice = installationPurchasePrice.asCurrencyStringToDouble()
         }
     }
-    
+
     var deductInverterConsumptionFromGridAvoided: Bool {
         didSet {
             configManager.deductInverterConsumptionFromGridAvoided = deductInverterConsumptionFromGridAvoided
         }
     }
+
+    var feedInPriceRates: [EnergyPriceRate]
+    var gridImportPriceRates: [EnergyPriceRate]
 
     private(set) var configManager: ConfigManaging
 
@@ -53,5 +59,15 @@ class FinancialsSettingsViewModel {
         earningsModel = configManager.earningsModel
         installationPurchasePrice = configManager.installationPurchasePrice.roundedToString(decimalPlaces: 0)
         deductInverterConsumptionFromGridAvoided = configManager.deductInverterConsumptionFromGridAvoided
+        feedInPriceRates = configManager.feedInPriceRates
+        gridImportPriceRates = configManager.gridImportPriceRates
+
+        configManager.appSettingsPublisher.sink { [weak self] theme in
+            guard let self else { return }
+            Task { @MainActor in
+                self.feedInPriceRates = configManager.feedInPriceRates
+                self.gridImportPriceRates = configManager.gridImportPriceRates
+            }
+        }.store(in: &cancellables)
     }
 }
